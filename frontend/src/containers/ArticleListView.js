@@ -6,8 +6,6 @@ class ArticleList extends React.Component {
 
 	state={
 		profileInfo:[],
-		
-
 	}
 
 	componentDidMount(){
@@ -15,9 +13,7 @@ class ArticleList extends React.Component {
 		axios.get('http://127.0.0.1:8000/api/profiles')
 		.then(res=> {
 			this.setState({
-
 				profileInfo:res.data,
-
 			});
 			
 		});
