@@ -37,7 +37,7 @@ const Article2 = (props) => {
 		      },
 		      pageSize: 3,
 		    }}
-		    dataSource={listData}
+		    dataSource={props.data}
 		    footer={
 		      <div>
 		        <b>ant design</b> footer part
