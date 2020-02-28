@@ -5,24 +5,29 @@ import axios from 'axios';
 class ArticleList extends React.Component {
 
 	state={
-		articles:[],
+		profileInfo:[],
+		
 
 	}
 
 	componentDidMount(){
-		axios.get('http://127.0.0.1:8000/api/')
+		console.log("MADE IT!!!")
+		axios.get('http://127.0.0.1:8000/api/profiles')
 		.then(res=> {
 			this.setState({
-				articles: res.data,
+
+				profileInfo:res.data,
+
 			});
-			console.log(res.data);	
+			
 		});
 	}
+
 
 	render() { 
 		return (
 
-			<Article2 data={this.state.articles}/>
+			<Article2 data={this.state.profileInfo}/>
 		)
 
 	}
