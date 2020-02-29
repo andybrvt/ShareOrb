@@ -1,29 +1,33 @@
 import React from 'react';
-import Article2 from '../components/Article';
+import Article from '../components/Article';
 import axios from 'axios';
 
 class ArticleList extends React.Component {
 
 	state={
-		profileInfo:[],
+		//the state are the objects specific to a class
+		//this object holds all 
+		profileList:[],
 	}
 
 	componentDidMount(){
 		console.log("MADE IT!!!")
 		axios.get('http://127.0.0.1:8000/api/profiles')
 		.then(res=> {
+			console.log('res')
+			console.log('res.data');
 			this.setState({
-				profileInfo:res.data,
+				profileList:res.data,
 			});
-			
+
 		});
 	}
 
 
-	render() { 
+	render() {
 		return (
 
-			<Article2 data={this.state.profileInfo}/>
+			<Article data={this.state.profileList}/>
 		)
 
 	}
@@ -31,4 +35,4 @@ class ArticleList extends React.Component {
 
 }
 
-export default ArticleList; 
+export default ArticleList;

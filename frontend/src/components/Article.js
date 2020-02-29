@@ -1,22 +1,7 @@
 import React from 'react';
 import { List, Avatar, Icon } from 'antd';
 
-
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'http://ant.design',
-    title: `ant design part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description:
-      'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',  
-  });
-}
-
-console.log('adsfdf');
-
+//This is just to load up the default image, probally delete soon
 const IconText = ({ type, text }) => (
   <span>
     <Icon type={type} style={{ marginRight: 8 }} />
@@ -25,7 +10,7 @@ const IconText = ({ type, text }) => (
 );
 
 
-const Article2 = (props) => {
+const Article = (props) => {
 	console.log("Start of Article2! Here is props below: ")
 	console.log(props);
 	console.log(props.data);
@@ -63,7 +48,7 @@ const Article2 = (props) => {
 		      >
 		        <List.Item.Meta
 		          avatar={<Avatar src={item.first_name} />}
-		          title={<a href={item.href}>{item.last_name}</a>}
+		          title={<a href={'/'+item.id}>{item.last_name}</a>}
 		          description={item.email}
 		        />
 		        {item.content}
@@ -75,4 +60,4 @@ const Article2 = (props) => {
 
 
 
-export default Article2;
+export default Article;
