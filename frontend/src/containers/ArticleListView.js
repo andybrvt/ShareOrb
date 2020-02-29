@@ -1,6 +1,7 @@
 import React from 'react';
 import Article from '../components/Article';
 import axios from 'axios';
+import ProfilePost from '../components/Form';
 
 
 class ArticleList extends React.Component {
@@ -25,10 +26,15 @@ class ArticleList extends React.Component {
 	}
 
 //this will return all the profiles on to one page
+// In article, the data will gives Article a children to be called in ArticleDetailView
+
 	render() {
 		return (
-			<Article data={this.state.profileList}/>
-			//this gives Article a children to be called in ArticleDetailView 
+			  <div>
+					<Article data={this.state.profileList} />
+
+					<ProfilePost />
+				</div>
 		)
 	}
 }

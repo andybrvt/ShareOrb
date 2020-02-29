@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Avatar, Icon } from 'antd';
-
 //This is just to load up the default image, probally delete soon
 const IconText = ({ type, text }) => (
   <span>
@@ -56,8 +55,8 @@ const Article = (props) => {
 		    )}
 		  />
 		)
-}
 
+}
 
 
 export default Article;
