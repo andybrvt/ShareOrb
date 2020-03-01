@@ -34,6 +34,7 @@ const { Option } = Select;
 
 class ProfilePost extends React.Component {
   handleSubmit = (event, requestType, articleID) => {
+      event.preventDefault();
       const title=event.target.elements.titleInput.value;
       const content=event.target.elements.contentInput.value;
 
@@ -48,7 +49,7 @@ class ProfilePost extends React.Component {
           .catch(error=> console.error(error));
         case 'put':
           console.log(articleID);
-          return axios.put(`http://127.0.0.1:8000/api/profiles/${articleID}`, {
+          return axios.put('http://127.0.0.1:8000/api/profiles/'+articleID+'/', {
             first_name: title,
             last_name: content,
           })

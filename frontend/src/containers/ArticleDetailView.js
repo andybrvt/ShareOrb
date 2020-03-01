@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Card,} from 'antd';
 import ProfilePost from '../components/Form'
 class ArticleDetail extends React.Component {
-//this takes each of the value of the indiviudal profiles and
+//this takes each of the value of the individual profiles and
 //returns them
 
 //states are specific objects of a class
@@ -21,7 +21,9 @@ class ArticleDetail extends React.Component {
 //update the state with res.data (this is where all the profile data inspect
 // is stored)
 	componentDidMount(){
-    const articleID = this.props.match.params.articleID;
+		console.log("HIT ARTICLEDETAILVIEW");
+		console.log(this.props)
+    const articleID = this.props.match.params.id;
 		console.log(articleID);
 		axios.get('http://127.0.0.1:8000/api/profiles/'+articleID)
 		.then(res=> {
@@ -40,7 +42,7 @@ class ArticleDetail extends React.Component {
 	        <p> { this.state.profileInfo.last_name } </p>,
 					<ProfilePost
 						requestType = "put"
-						articleID = {this.props.match.params.articleID}
+						articleID = {this.props.match.params.id}
 						btnText = 'Update'
 					/>
 	      </Card>
