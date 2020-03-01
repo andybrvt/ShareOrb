@@ -3,7 +3,6 @@ import Article from '../components/Article';
 import axios from 'axios';
 import ProfilePost from '../components/Form';
 
-
 class ArticleList extends React.Component {
 	state={
 		//the state are the objects specific to a class
@@ -32,8 +31,11 @@ class ArticleList extends React.Component {
 		return (
 			  <div>
 					<Article data={this.state.profileList} />
-
-					<ProfilePost />
+					<ProfilePost
+						requestType = 'post'
+						articleID = {null}
+						btnText = 'Create'
+					/>
 				</div>
 		)
 	}

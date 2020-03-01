@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Card,} from 'antd';
-
+import ProfilePost from '../components/Form'
 class ArticleDetail extends React.Component {
 //this takes each of the value of the indiviudal profiles and
 //returns them
@@ -21,12 +21,10 @@ class ArticleDetail extends React.Component {
 //update the state with res.data (this is where all the profile data inspect
 // is stored)
 	componentDidMount(){
-    const articleID = this.props.match.params.id;
+    const articleID = this.props.match.params.articleID;
 		console.log(articleID);
 		axios.get('http://127.0.0.1:8000/api/profiles/'+articleID)
 		.then(res=> {
-			console.log('res')
-			console.log('res.data');
 			this.setState({
 				profileInfo:res.data,
 		 });
@@ -37,9 +35,16 @@ class ArticleDetail extends React.Component {
 //the paragraph inside will be the last time (these are taken from viewsets)
 	render() {
 		return (
-      <Card title = { this.state.profileInfo.first_name } >
-        <p> { this.state.profileInfo.last_name } </p>
-      </Card>
+			<div>
+	      <Card title = { this.state.profileInfo.first_name } >
+	        <p> { this.state.profileInfo.last_name } </p>,
+					<ProfilePost
+						requestType = "put"
+						articleID = {this.props.match.params.articleID}
+						btnText = 'Update'
+					/>
+	      </Card>
+			</div>
 		)
 	 }
  }

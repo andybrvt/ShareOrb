@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 			'id',
 			'first_name',
     		'last_name',
-    		'email',
+    		 # 'email',
 
 
 		)
