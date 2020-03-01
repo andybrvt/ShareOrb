@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {Card, Button} from 'antd';
-import ProfilePost from '../components/Form'
+import ProfilePost from '../components/Form';
 import { Link, } from 'react-router-dom';
-class ArticleDetail extends React.Component
+class ArticleDetail extends React.Component{
 
 //test
 //this takes each of the value of the individual profiles and
