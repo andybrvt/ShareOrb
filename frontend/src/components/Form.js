@@ -62,7 +62,7 @@ class ProfilePost extends React.Component {
 
     return (
       <div>
-      <Form onSubmit = {(event)=> this.handleSubmit (
+      <Form  onSubmit = {(event)=> this.handleSubmit (
         event,
         this.props.requestType,
         this.props.articleID

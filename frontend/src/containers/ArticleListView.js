@@ -4,6 +4,7 @@ import axios from 'axios';
 import ProfilePost from '../components/Form';
 
 class ArticleList extends React.Component {
+
 	state={
 		//the state are the objects specific to a class
 		//this object holds all the profiles that we put in
@@ -11,9 +12,28 @@ class ArticleList extends React.Component {
 		profileList:[],
 	}
 
+	//
+	// componentWillReceiveProps(nextProps){
+	// 	console.log('TESTETSETSSTESTSTSESTSTESTST');
+	// 	const state2 = this.props.location.state
+	// 	console.log(state2);
+	  // if (nextProps.location.state === 'desiredState') {
+	  //   console.log("ONE TIME ONLY");
+  // }
+
+
 	componentDidMount(){
+	  console.log("test Delete");
 		//this componentDidMount will pull all the profiles from viewsets and
 		// put all of them into profileList
+		// if(this.state.pageRefresh==true){
+		// 	window.location.reload();
+		// 	this.setState({
+		// 		pageRefesh:true,
+		// 	});
+		// }
+
+
 		axios.get('http://127.0.0.1:8000/api/profiles')
 		.then(res=> {
 			console.log('res')
@@ -22,12 +42,23 @@ class ArticleList extends React.Component {
 				profileList:res.data,
 			});
 		});
+
 	}
+
+
+
+		// if (prevState.profileList !== this.state.profileList) {
+
+			// window.location.reload()
+		// }
+
+	// }
 
 //this will return all the profiles on to one page
 // In article, the data will gives Article a children to be called in ArticleDetailView
 
 	render() {
+		console.log(this.props);
 		return (
 			  <div>
 					<Article data={this.state.profileList} />
