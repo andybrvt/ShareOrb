@@ -32,7 +32,7 @@ class ArticleList extends React.Component {
 			  <div>
 					<Article data={this.state.profileList} />
 					<ProfilePost
-						requestType = 'post'
+						requestType ="post"
 						articleID = {null}
 						btnText = 'Create'
 					/>

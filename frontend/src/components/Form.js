@@ -34,7 +34,7 @@ const { Option } = Select;
 
 class ProfilePost extends React.Component {
   handleSubmit = (event, requestType, articleID) => {
-      event.preventDefault();
+
       const title=event.target.elements.titleInput.value;
       const content=event.target.elements.contentInput.value;
 
