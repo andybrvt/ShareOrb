@@ -16,7 +16,7 @@ const CustomLayout = (props) => {
               style={{ lineHeight: '64px' }}
             >
             {
-              this.props.isAuthenticated ?
+              props.isAuthenticated ?
 
               <Menu.Item key="2">
                  Logout

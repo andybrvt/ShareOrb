@@ -15,6 +15,12 @@ import * as actions from './store/actions/auth';
 
 //this will show each individual profile as well
 class App extends Component  {
+
+  compenentDidMount() {
+    this.props.onTryAutoSignup();
+
+  }
+
   render () {
     return (
       <div className="App">
@@ -40,6 +46,7 @@ const mapDispatchToProps = dispatch => {
     onTryAutoSignup: () => dispatch(actions.authCheckState)
   }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
