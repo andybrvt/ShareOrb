@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import CustomLayout from './containers/Layouts';
+import { connect } from 'react-redux'
 import 'antd/dist/antd.css';
 import BaseRouter from './routes';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import * as actions from './store/actions/auth';
 
 // App.js imports all the routes from routes.js then it putts
 //all of them in side the CustomLayout which makes a layout for them
@@ -18,7 +19,7 @@ class App extends Component  {
     return (
       <div className="App">
         <Router>
-          <CustomLayout>
+          <CustomLayout {...this.props}>
             <BaseRouter />
           </CustomLayout>
         </Router>
@@ -27,4 +28,20 @@ class App extends Component  {
    }
 }
 
-export default App;
+// map value in state
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.token!= null,
+  }
+}
+// map method every time app is rendered
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState)
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// export default App;
