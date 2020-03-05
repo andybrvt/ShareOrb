@@ -3,6 +3,10 @@ import './Login.css'
 import { Form, Icon, Input, Button, Spin } from 'antd';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import * as actions from '../store/actions/auth';
+
+
+
 const FormItem = Form.Item;
 
 
@@ -30,8 +34,9 @@ class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if(!err) {
-        console.log("Receive values of form", values);
+      if (!err) {
+        this.props.onAuth(values.userName, values.password);
+        this.props.history.push('/');
       }
   });
 }
@@ -44,39 +49,39 @@ class Login extends React.Component {
         <div className ="example">
 
           {
-            this.props.loading?
-            <Spin />
+            this.props.loading ?
+            <Spin/>
 
             :
 
             <Form onSubmit =  {this.handleSubmit} className = "login-form">
 
 
-            <FormItem>
-            {getFieldDecorator('userName', {
-                rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-            )}
-            </FormItem>
+              <FormItem>
+              {getFieldDecorator('userName', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+              })(
+                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+              )}
+              </FormItem>
 
-            <FormItem>
-            {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-            )}
-            </FormItem>
+              <FormItem>
+              {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your Password!' }],
+              })(
+                  <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+              )}
+              </FormItem>
 
-            <FormItem>
-              <Button type = "primary" htmltype="submit" style={{marginRight: '10px'}}>
-                Login
-              </Button>
-                Or
-              <NavLink style={{marginRight: '10px' }} to ='/signup/'>
-                Signup
-              </NavLink>
-            </FormItem>
+              <FormItem>
+                <Button type = "primary" htmltype="submit" style={{marginRight: '10px'}}>
+                  Login
+                </Button>
+                  Or
+                <NavLink style={{marginRight: '10px' }} to ='/signup/'>
+                  Signup
+                </NavLink>
+              </FormItem>
 
             </Form>
         }
@@ -90,3 +95,16 @@ class Login extends React.Component {
 const WrappedNormalLoginForm = Form.create()(Login);
 
 export default connect()(WrappedNormalLoginForm);
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.loading,
+        error: state.error
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (username, password) => dispatch(actions.authLogin(username, password))
+    }
+}
