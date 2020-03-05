@@ -63,16 +63,10 @@ class Login extends React.Component {
 
     const { getFieldDecorator } = this.props.form;
     return (
-
-
           <div className ="example">
             { this.props.loading ?
            <Spin size="large"/>
-
-
           :
-
-
 
             <Form onSubmit =  {this.handleSubmit} className = "login-form">
 
@@ -100,7 +94,7 @@ class Login extends React.Component {
               Or
               <NavLink
                   style={{marginRight: '10px'}}
-                  to='/signup/'> signup
+                  to='/signup/'> Signup
               </NavLink>
               </FormItem>
 
