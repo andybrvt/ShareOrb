@@ -47,12 +47,16 @@ class Login extends React.Component {
       return (
 
         <div className ="example">
+         <Spin size="large"/>
+         {/*
 
-          {
-            this.props.loading ?
-            <Spin/>
+         // {
+          //   this.props.loading ?
+          //   <Spin/>
+          //
+          //   :
 
-            :
+         */
 
             <Form onSubmit =  {this.handleSubmit} className = "login-form">
 
