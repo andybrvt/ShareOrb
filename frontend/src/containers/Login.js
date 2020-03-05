@@ -42,21 +42,37 @@ class Login extends React.Component {
 }
 
 
+// { /*
+//
+//  // {
+//   //   this.props.loading ?
+//   //   <Spin/>
+//   //
+//   //   :
+//
+//  */ }
+
   render() {
+    let errorMessage = null;
+    if (this.props.error) {
+      errorMessage = (
+        <p>{this.props.error.message}</p>
+      );
+
+    }
+
     const { getFieldDecorator } = this.props.form;
-      return (
+    return (
 
-        <div className ="example">
-         <Spin size="large"/>
-         {/*
 
-         // {
-          //   this.props.loading ?
-          //   <Spin/>
-          //
-          //   :
+          <div className ="example">
+            { this.props.loading ?
+           <Spin size="large"/>
 
-         */
+
+          :
+
+
 
             <Form onSubmit =  {this.handleSubmit} className = "login-form">
 
@@ -78,27 +94,29 @@ class Login extends React.Component {
               </FormItem>
 
               <FormItem>
-                <Button type = "primary" htmltype="submit" style={{marginRight: '10px'}}>
+              <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
                   Login
-                </Button>
-                  Or
-                <NavLink style={{marginRight: '10px' }} to ='/signup/'>
-                  Signup
-                </NavLink>
+              </Button>
+              Or
+              <NavLink
+                  style={{marginRight: '10px'}}
+                  to='/signup/'> signup
+              </NavLink>
               </FormItem>
 
             </Form>
-        }
+          }
         </div>
 
-      );
+      )
      }
+}
 
-  }
+
 
 const WrappedNormalLoginForm = Form.create()(Login);
 
-export default connect()(WrappedNormalLoginForm);
+
 
 const mapStateToProps = (state) => {
     return {
@@ -109,6 +127,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, password) => dispatch(actions.authLogin(username, password))
+        onAuth: (username, password) => dispatch(actions.authLogin(username, password)),
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm);

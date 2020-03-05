@@ -1,3 +1,4 @@
+# serializers will convert the model imputs to JSON
 from rest_framework import serializers
 from . import models
 
