@@ -59,6 +59,7 @@ class ArticleList extends React.Component {
 
 	render() {
 		console.log(this.props);
+		console.log(this.state.profileList);
 		return (
 			  <div>
 					<Article data={this.state.profileList} />
