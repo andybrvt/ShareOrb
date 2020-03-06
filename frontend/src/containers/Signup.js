@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-
+import
 
 
 
@@ -16,6 +16,20 @@ class Signup extends React.Component {
     state = {
       confirmDirty: false,
     };
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      this.props.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          this.props.onAuth(
+            values.userName,
+            values.password
+            values.
+          );
+
+        }
+    });
+  }
 
 
 
@@ -69,17 +83,35 @@ class Signup extends React.Component {
         </FormItem>
 
         <FormItem>
-        <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
-            Signup
-        </Button>
-        Or
-        <NavLink
-            style={{marginRight: '10px'}}
-            to='/login/'> login
-        </NavLink>
+          <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
+              Signup
+          </Button>
+          Or
+          <NavLink
+              style={{marginRight: '10px'}}
+              to='/login/'> login
+          </NavLink>
         </FormItem>
         </Form>
       );
   }
 }
-export default Signup;
+
+const WrappedSignup = Form.create()(Signup);
+
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.loading,
+        error: state.error
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (username, email, password1, password2) => dispatch(actions.authSignup(username, email, password1, password2)),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedSignup);
