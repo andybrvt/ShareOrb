@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import
-
-
 
 const FormItem = Form.Item;
-
-
 
 class Signup extends React.Component {
     state = {
@@ -23,18 +18,19 @@ class Signup extends React.Component {
         if (!err) {
           this.props.onAuth(
             values.userName,
-            values.password
-            values.
+            values.password,
+            values.password,
+            values.confirm,
           );
 
         }
+        this.props.history.push('/');
     });
   }
 
 
 
   render() {
-
     const { getFieldDecorator } = this.props.form;
       return (
         <Form onSubmit={this.handleSubmit}>

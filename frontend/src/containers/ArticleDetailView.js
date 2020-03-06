@@ -29,6 +29,7 @@ class ArticleDetail extends React.Component{
 //update the state with res.data (this is where all the profile data inspect
 // is stored)
 	componentDidMount(){
+		console.log("made it to aricle view");
     const articleID = this.props.match.params.id;
 
 		axios.get('http://127.0.0.1:8000/api/profiles/'+articleID)
