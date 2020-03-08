@@ -7,6 +7,8 @@ const initialState = {
     loading: false
 }
 
+// takes in the objec tfor auth start and then update the
+// auth start
 const authStart = (state, action) => {
     return updateObject(state, {
         error: null,
@@ -14,6 +16,7 @@ const authStart = (state, action) => {
     });
 }
 
+//takes in the object for authSuccess and updates it
 const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.token,
@@ -22,6 +25,7 @@ const authSuccess = (state, action) => {
     });
 }
 
+// takes in the state of the authFail and updates it
 const authFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
@@ -29,6 +33,7 @@ const authFail = (state, action) => {
     });
 }
 
+// takes in the state of the authLogout and updates it
 const authLogout = (state, action) => {
     return updateObject(state, {
         token: null

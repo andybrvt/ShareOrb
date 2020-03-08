@@ -1,12 +1,14 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
+//method to start
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
     }
 }
 
+// method to check if token is successful
 export const authSuccess = token => {
     return {
         type: actionTypes.AUTH_SUCCESS,
@@ -14,6 +16,7 @@ export const authSuccess = token => {
     }
 }
 
+// method to check if there is an error
 export const authFail = error => {
     return {
         type: actionTypes.AUTH_FAIL,
@@ -21,6 +24,7 @@ export const authFail = error => {
     }
 }
 
+// method to logout
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
@@ -29,6 +33,7 @@ export const logout = () => {
     };
 }
 
+// method to time out a user
 export const checkAuthTimeout = expirationTime => {
     return dispatch => {
         setTimeout(() => {
@@ -37,6 +42,7 @@ export const checkAuthTimeout = expirationTime => {
     }
 }
 
+//
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
@@ -81,6 +87,7 @@ export const authSignup = (username, email, password1, password2) => {
     }
 }
 
+//check if token is in local storage and extend the login time
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');

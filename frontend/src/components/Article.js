@@ -10,9 +10,6 @@ const IconText = ({ type, text }) => (
 
 
 const Article = (props) => {
-	console.log("Start of Article2! Here is props below: ")
-	console.log(props);
-	console.log(props.data);
 	return (
 			<List
 		    itemLayout="vertical"
@@ -47,7 +44,7 @@ const Article = (props) => {
 		      >
 		        <List.Item.Meta
 		          avatar={<Avatar src={item.first_name} />}
-		          title={<a href={'/'+item.id}>{item.last_name}</a>}
+		          title={<a href={'/article/'+item.id}>{item.last_name}</a>}
 
 		        />
 		        {item.content}

@@ -36,9 +36,10 @@ class Login extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onAuth(values.userName, values.password);
-        this.props.history.push('/');
+
       }
   });
+  this.props.history.push('/');
 }
 
 
@@ -52,6 +53,8 @@ class Login extends React.Component {
 //
 //  */ }
 
+//get field decorator method is basically the map state to props
+//all the actions below it will update the state
   render() {
     let errorMessage = null;
     if (this.props.error) {

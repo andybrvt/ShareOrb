@@ -2,7 +2,7 @@ import React from 'react';
 import Article from '../components/Article';
 import axios from 'axios';
 import ProfilePost from '../components/Form';
-
+import {connect} from 'react-redux';
 class ArticleList extends React.Component {
 
 	state={
@@ -22,8 +22,7 @@ class ArticleList extends React.Component {
   // }
 
 
-	componentDidMount(){
-	  console.log("test Delete");
+	componentWillReceiveProps(newProps){
 		//this componentDidMount will pull all the profiles from viewsets and
 		// put all of them into profileList
 		// if(this.state.pageRefresh==true){
@@ -32,17 +31,21 @@ class ArticleList extends React.Component {
 		// 		pageRefesh:true,
 		// 	});
 		// }
-
-
-		axios.get('http://127.0.0.1:8000/api/profiles')
-		.then(res=> {
-			console.log('res')
-			console.log('res.data');
-			this.setState({
-				profileList:res.data,
+		console.log(newProps);
+		if(newProps.token){
+			axios.defaults.headers = {
+				"Content-Type": "application/json",
+				Authorization: newProps.token,
+			}
+			// this will get information from the link and then
+			// update the state with the list of post
+			axios.get('http://127.0.0.1:8000/api/profiles/')
+			.then(res=> {
+				this.setState({
+					profileList:res.data,
+				});
 			});
-		});
-
+		}
 	}
 
 
@@ -56,10 +59,11 @@ class ArticleList extends React.Component {
 
 //this will return all the profiles on to one page
 // In article, the data will gives Article a children to be called in ArticleDetailView
-
+//Article takes in the props data then the props will be presented in
+//the Article.js and then renedered here
+//ProfilePost will then be the form and will take in parameters for the
+//handlesubmit and will do a post function
 	render() {
-		console.log(this.props);
-		console.log(this.state.profileList);
 		return (
 			  <div>
 					<Article data={this.state.profileList} />
@@ -73,4 +77,10 @@ class ArticleList extends React.Component {
 	}
 }
 
-export default ArticleList;
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  }
+}
+
+export default connect(mapStateToProps)(ArticleList);

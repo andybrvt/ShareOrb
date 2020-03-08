@@ -3,9 +3,8 @@ import axios from 'axios';
 import {Card, Button} from 'antd';
 import ProfilePost from '../components/Form';
 import { Link, } from 'react-router-dom';
+import { connect } from 'react-redux';
 class ArticleDetail extends React.Component{
-
-//test
 //this takes each of the value of the individual profiles and
 //returns them
 
@@ -13,12 +12,6 @@ class ArticleDetail extends React.Component{
 	state={
 		profileInfo:{},
 	}
-
-	// changeURL=()=> {
-	// 	console.log("reached!");
-	// 	this.props.history.push('/');
-	// }
-
 //componentDidMount will be mounted the first thing as a class get run
 //const articleID will take id values
 
@@ -28,26 +21,39 @@ class ArticleDetail extends React.Component{
 //when getting each profile by the appropriate id, set state will then
 //update the state with res.data (this is where all the profile data inspect
 // is stored)
-	componentDidMount(){
-		console.log("made it to aricle detailncompoennt");
-    const articleID = this.props.match.params.id;
 
-		axios.get('http://127.0.0.1:8000/api/profiles/'+articleID)
-		.then(res=> {
-			this.setState({
-				profileInfo:res.data,
-		 });
-		});
-
+componentWillReceiveProps(newProps){
+	console.log(newProps);
+	if(newProps.token){
+		axios.defaults.headers = {
+			"Content-Type": "application/json",
+			Authorization: newProps.token,
+		}
+			console.log("made it to aricle detailncompoennt");
+	    const articleID = this.props.match.params.id;
+			axios.get('http://127.0.0.1:8000/api/profiles/'+articleID)
+				.then(res=> {
+					this.setState({
+						profileInfo:res.data,
+				 });
+				});
 	}
+}
+
 
 	handleDelete= (event) => {
-		event.preventDefault();
-		const articleID = this.props.match.params.id;
-		console.log("This is deleted article ID: "+ articleID);
+		if(this.props.token !== null){
+			event.preventDefault();
+			const articleID = this.props.match.params.id;
+			axios.defaults.headers = {
+				"Content-Type": "application/json",
+				Authorization: this.props.token,
+			}
+			console.log("This is deleted article ID: "+ articleID);
 
-
-
+		} else {
+				// message
+		}
 	  // ADD AXIOS IN HERE DIRECTLY IN THE COMPONENT DID MOUTN METHOD
 	}
 
@@ -82,9 +88,6 @@ class ArticleDetail extends React.Component{
 						articleID = {this.props.match.params.id}
 						btnText = 'Update'
 					/>
-
-
-
 					<form name="buttonDelete" onSubmit={this.handleDelete}>
 							<Button
 							 type= "danger"
@@ -94,14 +97,16 @@ class ArticleDetail extends React.Component{
 							 Delete
 							 </Button>
 					</form>
-
-
-
 	      </Card>
-
 			</div>
 		)
 	 }
  }
 
-export default ArticleDetail ;
+ const mapStateToProps = state => {
+   return {
+     token: state.token
+   }
+ }
+
+export default connect(mapStateToProps)(ArticleDetail);

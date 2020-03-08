@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 const { Header, Footer, Content } = Layout;
 
-
+// boarder layout that wraps around each of the other containers
+// imported all actions, therefore it allows you to call the functions
+// from the 
 class CustomLayout extends React.Component {
     render() {
         return (
@@ -18,7 +20,6 @@ class CustomLayout extends React.Component {
                     defaultSelectedKeys={['2']}
                     style={{ lineHeight: '64px' }}
                 >
-
                 {
                     this.props.isAuthenticated ?
 
