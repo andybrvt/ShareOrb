@@ -8,8 +8,11 @@ import * as actions from './store/actions/auth';
 import CustomLayout from './containers/Layouts';
 
 class App extends Component {
-
+//the map state to props allows us to get the state and then
+//turn it to props then call those props in Layouts.js
   componentDidMount() {
+  //everythign this is run it will do a try auto signup, it will give
+  //App.js this method from the store
     this.props.onTryAutoSignup();
   }
 
