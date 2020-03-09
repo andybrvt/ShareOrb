@@ -89,17 +89,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
-# test
+# test if commented
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'dbname',
-        # 'USER': 'root',
-        # 'PASSWORD': '',
-        # 'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-        # 'PORT': '',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dbname',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+        'PORT': '',
     },
 }
 
@@ -141,7 +142,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
