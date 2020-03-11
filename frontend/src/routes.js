@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom';
 import ArticleList from './containers/ArticleListView';
 import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/Login';
-import Signup from './containers/Signup'
-
+import Signup from './containers/Signup';
+import UserView from './containers/userView';
 
 
 //these routes will route to App.js
@@ -16,6 +16,7 @@ const BaseRouter = () => (
     <Route exact path = '/article/:id' component = {ArticleDetail} />
     <Route exact path = '/login/' component = {Login} />
     <Route exact path = '/signup/' component= {Signup} />
+    <Route exact path = '/userview/' component= {UserView} />
   </div>
 );
 
