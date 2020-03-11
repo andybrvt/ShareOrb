@@ -30,15 +30,6 @@ class AccountEmailconfirmation(models.Model):
         db_table = 'account_emailconfirmation'
 
 
-class ApiProfile(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-
-    class Meta:
-        managed = False
-        db_table = 'api_profile'
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -166,6 +157,18 @@ class DjangoSite(models.Model):
     class Meta:
         managed = False
         db_table = 'django_site'
+
+
+class Newsfeed(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+
+    def __str__(self):
+    	return self.first_name
+        
+    class Meta:
+        managed = False
+        db_table = 'newsfeed'
 
 
 class SocialaccountSocialaccount(models.Model):

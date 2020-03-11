@@ -31,7 +31,7 @@ componentWillReceiveProps(newProps){
 		}
 			console.log("made it to aricle detailncompoennt");
 	    const articleID = this.props.match.params.id;
-			axios.get('http://127.0.0.1:8000/api/profiles/'+articleID)
+			axios.get('http://127.0.0.1:8000/api/newsfeed/'+articleID)
 				.then(res=> {
 					this.setState({
 						profileInfo:res.data,

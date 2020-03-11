@@ -39,7 +39,7 @@ class ArticleList extends React.Component {
 			}
 			// this will get information from the link and then
 			// update the state with the list of post
-			axios.get('http://127.0.0.1:8000/api/profiles/')
+			axios.get('http://127.0.0.1:8000/api/newsfeed/')
 			.then(res=> {
 				this.setState({
 					profileList:res.data,

@@ -25,9 +25,9 @@ class AccountEmailconfirmationSerializers(serializers.ModelSerializer):
 		model= models.AccountEmailconfirmation
 		fields = "__all__"
 
-class ApiProfileSerializers(serializers.ModelSerializer):
+class NewsFeedSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.ApiProfile
+		model= models.Newsfeed
 		fields = "__all__"
 
 class AuthGroupSerialziers(serializers.ModelSerializer):
@@ -35,79 +35,79 @@ class AuthGroupSerialziers(serializers.ModelSerializer):
 		model= models.AuthGroup
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class AuthGroupPermissionsSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.AuthGroupPermissions
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class AuthPermissionSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.AuthPermission
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class AuthUserSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.AuthUser
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class AuthUserGroupsSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.AuthUserGroups
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class AuthtokenTokenSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.AuthtokenToken
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class DjangoAdminLogSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.DjangoAdminLog
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class DjangoContentTypeSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.DjangoContentType
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class DjangoMigrationsSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.DjangoMigrations
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class DjangoSessionSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.DjangoSession
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class DjangoSiteSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.DjangoSite
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class SocialaccountSocialaccountSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.SocialaccountSocialaccount
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class SocialaccountSocialappSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.SocialaccountSocialapp
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class SocialaccountSocialappSites(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.SocialaccountSocialappSites
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class SocialaccountSocialtokenSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.SocialaccountSocialtoken
 		fields = "__all__"
 
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
+class StudentSerializers(serializers.ModelSerializer):
 	class Meta:
-		model= models.AccountEmailaddress
+		model= models.Student
 		fields = "__all__"
 
 class AccountEmailaddressSerializers(serializers.ModelSerializer):

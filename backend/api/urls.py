@@ -7,8 +7,8 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 # #register all the views into routers. the first paramter
 # # is basically the name of the url function
-# router.register('profiles', views.ProfileViewSet)
-#
+router.register('newsfeed', views.NewsFeedViewSet)
+
 urlpatterns = [
 	path('', include(router.urls))
 ]
