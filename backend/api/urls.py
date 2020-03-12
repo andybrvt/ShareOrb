@@ -7,7 +7,8 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 # #register all the views into routers. the first paramter
 # # is basically the name of the url function
-router.register('newsfeed', views.NewsFeedViewSet)
+# router.register('newsfeed', views.NewsFeedViewSet)
+router.register('infinite-api', views.ReactInfiniteView, basename ='Newsfeed')
 
 urlpatterns = [
 	path('', include(router.urls))

@@ -28,7 +28,7 @@ class AccountEmailconfirmationSerializers(serializers.ModelSerializer):
 class NewsFeedSerializers(serializers.ModelSerializer):
 	class Meta:
 		model= models.Newsfeed
-		fields = "__all__"
+		fields = ("__all__")
 
 class AuthGroupSerialziers(serializers.ModelSerializer):
 	class Meta:

@@ -5,6 +5,7 @@ import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
 
 
+
 class ArticleList extends React.Component {
 
 	state={
@@ -65,6 +66,8 @@ class ArticleList extends React.Component {
 //the Article.js and then renedered here
 //ProfilePost will then be the form and will take in parameters for the
 //handlesubmit and will do a post function
+
+
 	render() {
 		return (
 			  <div>
