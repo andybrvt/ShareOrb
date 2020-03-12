@@ -23,10 +23,8 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-<<<<<<< HEAD
+
     # path('infinite-api/', ReactInfiniteView.as_view(), name='infinite-react' )
     # path('api/', include('userprofile.urls')),
-=======
-    # `path('userprofile/', include('userprofile.urls')),`
->>>>>>> 3341574cbc3bb1518c63fdde14b58df5790dd931
+
 ]
