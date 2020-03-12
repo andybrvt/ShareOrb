@@ -3,6 +3,8 @@ import Article from '../components/Article';
 import axios from 'axios';
 import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
+
+
 class ArticleList extends React.Component {
 
 	state={
@@ -66,12 +68,13 @@ class ArticleList extends React.Component {
 	render() {
 		return (
 			  <div>
-					<Article data={this.state.profileList} />
 					<ProfilePost
 						requestType ="post"
 						articleID = {null}
 						btnText = 'Create'
 					/>
+					<Article data={this.state.profileList} />
+
 				</div>
 		)
 	}

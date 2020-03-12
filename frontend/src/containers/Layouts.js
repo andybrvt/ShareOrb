@@ -3,11 +3,12 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
+import './Containers.css'
 const { Header, Footer, Content } = Layout;
 
 // boarder layout that wraps around each of the other containers
 // imported all actions, therefore it allows you to call the functions
-// from the 
+// from the
 class CustomLayout extends React.Component {
     render() {
         return (
@@ -40,12 +41,12 @@ class CustomLayout extends React.Component {
 
                 </Menu>
                 </Header>
-                <Content style={{ padding: '0 50px' }}>
+                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 900, marginRight: 'auto', marginLeft: 'auto'}}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
                     <Breadcrumb.Item><Link to="/">List</Link></Breadcrumb.Item>
                 </Breadcrumb>
-                    <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+                    <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                         {this.props.children}
                     </div>
                 </Content>

@@ -41,7 +41,7 @@ class ProfilePost extends React.Component {
       switch ( requestType ) {
         case 'post':
         // access the post function in that api url
-          return axios.post('http://127.0.0.1:8000/api/profiles/', {
+          return axios.post('http://127.0.0.1:8000/api/newsfeed/', {
             first_name: title,
             last_name: content,
           })
@@ -49,7 +49,7 @@ class ProfilePost extends React.Component {
           .catch(error=> console.error(error));
         case 'put':
         // access the put function in that api url
-          return axios.put('http://127.0.0.1:8000/api/profiles/'+articleID+'/', {
+          return axios.put('http://127.0.0.1:8000/api/newsfeed/'+articleID+'/', {
             first_name: title,
             last_name: content,
           })
@@ -68,7 +68,8 @@ class ProfilePost extends React.Component {
         event,
         this.props.requestType,
         this.props.articleID
-        )} >
+        )}
+        className = 'login-form'>
         <Form.Item label="Title">
           <Input name = "titleInput"  />
         </Form.Item>
