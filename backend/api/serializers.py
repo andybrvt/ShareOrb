@@ -4,29 +4,9 @@ from . import models
 
 # this converts model data into json and you will connection
 # this to the views
-# class ProfileSerializer(serializers.ModelSerializer):
-# 	class Meta:
-# 		fields = (
-#
-# 			'id',
-# 			'first_name',
-#     		'last_name',
-#     		 # 'email',
-# 		)
-# 		model = models.Profile
-
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.AccountEmailaddress
-		fields = "__all__"
-
-class AccountEmailconfirmationSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.AccountEmailconfirmation
-		fields = "__all__"
-
 class NewsFeedSerializers(serializers.ModelSerializer):
 	class Meta:
+<<<<<<< HEAD
 		model= models.Newsfeed
 		fields = ("__all__")
 
@@ -69,58 +49,13 @@ class DjangoContentTypeSerializers(serializers.ModelSerializer):
 	class Meta:
 		model= models.DjangoContentType
 		fields = "__all__"
+=======
+		fields = (
+>>>>>>> 3341574cbc3bb1518c63fdde14b58df5790dd931
 
-class DjangoMigrationsSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.DjangoMigrations
-		fields = "__all__"
-
-class DjangoSessionSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.DjangoSession
-		fields = "__all__"
-
-class DjangoSiteSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.DjangoSite
-		fields = "__all__"
-
-class SocialaccountSocialaccountSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.SocialaccountSocialaccount
-		fields = "__all__"
-
-class SocialaccountSocialappSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.SocialaccountSocialapp
-		fields = "__all__"
-
-class SocialaccountSocialappSites(serializers.ModelSerializer):
-	class Meta:
-		model= models.SocialaccountSocialappSites
-		fields = "__all__"
-
-class SocialaccountSocialtokenSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.SocialaccountSocialtoken
-		fields = "__all__"
-
-class StudentSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.Student
-		fields = "__all__"
-
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.AccountEmailaddress
-		fields = "__all__"
-
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.AccountEmailaddress
-		fields = "__all__"
-
-class AccountEmailaddressSerializers(serializers.ModelSerializer):
-	class Meta:
-		model= models.AccountEmailaddress
-		fields = "__all__"
+			'id',
+			'first_name',
+    		'last_name',
+    		 # 'email',
+		)
+		model = models.Newsfeed
