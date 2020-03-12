@@ -7,9 +7,9 @@ from . import models
 from . import serializers
 
 
-# class NewsFeedViewSet(viewsets.ModelViewSet):
-# 	serializer_class = serializers.NewsFeedSerializers
-# 	queryset = models.Newsfeed.objects.all()
+class NewsFeedViewSet(viewsets.ModelViewSet):
+	serializer_class = serializers.NewsFeedSerializers
+	queryset = models.Newsfeed.objects.all()
 
 def infinite_filter(request):
 	limit = request.GET.get('limit')
