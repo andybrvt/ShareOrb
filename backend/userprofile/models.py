@@ -2,13 +2,15 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-from django.contrib.auth.models import AbstractUser, AnonymousUser
+# from django.contrib.auth.models import AbstractUser, AnonymousUser
 from typing import Union
 
-class User(AbstractUser):
+class User(models.Model):
     bio = models.CharField(blank=True, null=True, max_length=250)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    email= models.EmailField(blank=True, max_length=254, verbose_name='email address')
+
     def __str__(self):
         return self.username
 
