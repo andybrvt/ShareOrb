@@ -17,8 +17,6 @@ class UserView extends React.Component {
       email: 'pinghsu520@gmail.com',
       favorite_food: 'ice cream',
 
-
-
     },
 	}
 

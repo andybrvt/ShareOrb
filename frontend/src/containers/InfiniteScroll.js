@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Article from '../components/Article';
+import Result from '../components/Listitems';
 
 class InfiniteList extends React.PureComponent {
   constructor(props){
@@ -11,7 +12,7 @@ class InfiniteList extends React.PureComponent {
       post: [],
       hasMore: true,
       offset: 0,
-      limit: 20,
+      limit: 1,
     };
     window.onscroll = () => {
       const {
@@ -29,25 +30,30 @@ class InfiniteList extends React.PureComponent {
 
   componentWillMount() {
     this.loadPost();
-  }
+  };
 
   loadPost = () => {
      this.setState({loading: true}, () => {
        const {offset, limit} = this.state;
+       // console.log(offset)
+       // console.log(limit)
        axios.get(
-         'http://120.0.0.1:8000/api/infinite-api/?limit=${limit}&offset=${offset}'
+         'http://127.0.0.1:8000/api/infinite-api/?limit='+limit+'&offset='+offset
        )
        .then(res => {
          const newPost = res.data.post;
          const hasMore = res.data.has_more;
+         // console.log(this.state.post+": "+newPost);
+         // console.log(res.data.post);
          this.setState({
            hasMore,
            loading: false,
            post:  [...this.state.post, ...newPost],
-           offset: offset + limit
+           offset: offset + limit,
 
          });
        })
+
        .catch(err => {
          this.setState({
            error: err.message,
@@ -58,14 +64,18 @@ class InfiniteList extends React.PureComponent {
   };
 
   render () {
+    console.log('hit');
+    console.log(this.state);
+    console.log(this.state.post);
     const { error, hasMore, loading, post} = this.state
     return (
       <div style={{overflowY: 'scroll', flex: 1}}>
       <h1>Infinite Post </h1>
       <p> Scroll down to load more </p>
       <hr />
-      {post.map(j => {
-        return <Article data = {j} key ={j.id} />
+      {post.map((j,index) => {
+        // console.log(j)
+        return <Result data = {j} key ={index} />
       })}
       {error  && <div>{error}</div>}
       {loading && <div>Loading...</div>}
