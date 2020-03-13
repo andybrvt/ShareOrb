@@ -62,8 +62,11 @@ class Signup extends React.Component {
         console.log(err)
         if (!err && values.password.length > 8) {
           this.props.onAuth(
-            values.userName,
+            values.first_name,
+            values.last_name,
+            values.dob,
             values.email,
+            values.phone_number,
             values.password,
             values.confirm,
           );
@@ -81,14 +84,28 @@ class Signup extends React.Component {
     console.log(getFieldDecorator)
       return (
         <Form onSubmit={this.handleSubmit}>
+
         <FormItem>
-            {getFieldDecorator('userName', {
+            {getFieldDecorator('first_name', {
                 rules: [{ required: true, message: 'Please input your username!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="first_name" />
             )}
         </FormItem>
-
+        <FormItem>
+            {getFieldDecorator('last_name', {
+                rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+            )}
+        </FormItem>
+        <FormItem>
+            {getFieldDecorator('dob', {
+                rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+            )}
+        </FormItem>
         <FormItem>
           {getFieldDecorator('email', {
             rules: [{
@@ -100,7 +117,13 @@ class Signup extends React.Component {
             <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
           )}
         </FormItem>
-
+        <FormItem>
+            {getFieldDecorator('phone_number', {
+                rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+            )}
+        </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
             rules: [{
@@ -158,7 +181,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, email, password1, password2) => dispatch(actions.authSignup(username, email, password1, password2)),
+        onAuth: (first_name, last_name, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, dob, email, phone_number, password1, password2)),
     }
 }
 
