@@ -62,9 +62,9 @@ class RegisterSerializer(serializers.Serializer):
         return {
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', ''),
-            'bio': self.validated_data.get('bio', ''),
-            'dob': self.validated_data.get('dob', ''),
-            'phone_number': self.validated_data.get('phone_number', ''),
+            # 'bio': self.validated_data.get('bio', ''),
+            # 'dob': self.validated_data.get('dob', ''),
+            # 'phone_number': self.validated_data.get('phone_number', ''),
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
 
@@ -75,9 +75,9 @@ class RegisterSerializer(serializers.Serializer):
         user1 = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user1, self)
-        user1.bio = self.cleaned_data.get('bio')
-        user1.dob = self.cleaned_data.get('dob')
-        user1.phone_number = self.cleaned_data.get('phone_number')
+        # user1.bio = self.cleaned_data.get('bio')
+        # user1.dob = self.cleaned_data.get('dob')
+        # user1.phone_number = self.cleaned_data.get('phone_number')
         setup_user_email(request, user1, [])
         user1.save()
         return user1

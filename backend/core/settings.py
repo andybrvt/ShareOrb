@@ -144,6 +144,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = "userprofile.User"
+ACCOUNT_ADAPTER = 'userprofile.adapters.CustomUserAccountAdapter'
 SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 # AUTH_USER_MODEL = 'userprofile.User'
 

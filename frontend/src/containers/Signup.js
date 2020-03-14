@@ -64,8 +64,8 @@ class Signup extends React.Component {
           this.props.onAuth(
             values.first_name,
             values.last_name,
-            values.bio,
             values.dob,
+            values.bio,
             values.email,
             values.phone_number,
             values.password,
@@ -88,35 +88,36 @@ class Signup extends React.Component {
 
         <FormItem>
             {getFieldDecorator('first_name', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: 'Please input your first name!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="first_name" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
             )}
         </FormItem>
         <FormItem>
             {getFieldDecorator('last_name', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: 'Please input your last name!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
-            )}
-        </FormItem>
-
-        <FormItem>
-            {getFieldDecorator('bio', {
-                rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
             )}
         </FormItem>
 
         <FormItem>
             {getFieldDecorator('dob', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: 'Please input your date of birth!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Date of Birth" />
+            )}
+        </FormItem>
+
+        <FormItem>
+            {getFieldDecorator('bio', {
+                rules: [{ required: true, message: 'Please input your bio!' }],
+            })(
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Biography" />
             )}
         </FormItem>
         <FormItem>
+
           {getFieldDecorator('email', {
             rules: [{
               type: 'email', message: 'The input is not valid E-mail!',
@@ -129,9 +130,9 @@ class Signup extends React.Component {
         </FormItem>
         <FormItem>
             {getFieldDecorator('phone_number', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: 'Please input your phone number!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Phone Number" />
             )}
         </FormItem>
         <FormItem>
@@ -191,7 +192,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (first_name, last_name, bio, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, bio, dob, email, phone_number, password1, password2)),
+        onAuth: (first_name, last_name, dob, bio, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, dob, bio, email, phone_number, password1, password2)),
     }
 }
 

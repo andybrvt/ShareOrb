@@ -64,13 +64,14 @@ export const authLogin = (username, password) => {
     }
 }
 
-export const authSignup = (first_name, last_name, dob, email, phone_number, password1, password2) => {
+export const authSignup = (first_name, last_name, dob, bio, email, phone_number, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
         axios.post('http://127.0.0.1:8000/rest-auth/registration/', {
             first_name: first_name,
             last_name: last_name,
             dob: dob,
+            bio:bio,
             email: email,
             phone_number: phone_number,
             password1: password1,
