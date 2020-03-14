@@ -9,6 +9,9 @@ class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
     dob = models.DateField(blank=True, null=True, max_length=12)
     phone_number = models.CharField(blank=True, null=True, max_length=10)
+
+    def get_posts(self):
+        return Post.objects.filter(user=self).values_list('id', flat=True)
     # first_name = models.CharField(max_length=30)
     # last_name = models.CharField(max_length=30)
     # email= models.EmailField(blank=True, max_length=254, verbose_name='email address')
@@ -20,7 +23,7 @@ class User(AbstractUser):
 
 # Create your models here.
 class Post(models.Model):
-    caption = models.CharField(max_length=300)
+    captions = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -28,4 +31,4 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return self.caption
+        return self.captions
