@@ -41,17 +41,17 @@ class ProfilePost extends React.Component {
       switch ( requestType ) {
         case 'post':
         // access the post function in that api url
-          return axios.post('http://127.0.0.1:8000/api/newsfeed/', {
-            first_name: title,
-            last_name: content,
+          return axios.post('http://127.0.0.1:8000/userprofile/list/', {
+            Caption: title,
+            User: content,
           })
           .then(res => console.log(res))
           .catch(error=> console.error(error));
         case 'put':
         // access the put function in that api url
-          return axios.put('http://127.0.0.1:8000/api/newsfeed/'+articleID+'/', {
-            first_name: title,
-            last_name: content,
+          return axios.put('http://127.0.0.1:8000/userprofile/list/'+articleID+'/', {
+            Caption: title,
+            User: content,
           })
           .then(res => console.log(res))
           .catch(error=> console.error(error));

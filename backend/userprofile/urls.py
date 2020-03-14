@@ -8,6 +8,8 @@ router = DefaultRouter()
 # #register all the views into routers. the first paramter
 # # is basically the name of the url function
 router.register('list', views.PostListView)
+router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
+
 
 urlpatterns = [
 	path('', include(router.urls))

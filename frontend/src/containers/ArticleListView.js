@@ -3,7 +3,7 @@ import Article from '../components/Article';
 import axios from 'axios';
 import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
-
+import InfiniteScroll from './InfiniteScroll';
 
 
 class ArticleList extends React.Component {
@@ -76,7 +76,7 @@ class ArticleList extends React.Component {
 						articleID = {null}
 						btnText = 'Create'
 					/>
-					<Article data={this.state.profileList} />
+					<InfiniteScroll blah="blahblah" />
 
 				</div>
 		)

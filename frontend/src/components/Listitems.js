@@ -5,10 +5,10 @@ const Result = (props) => {
     <div>
       <li>
         <span>
-          <b>Title:</b> {props.data.first_name}
+          <b>Title:</b> {props.data.caption}
         </span>
         <span>
-          <b>Author:</b> {props.data.last_name}
+          <b>Author:</b> {props.data.created_at}
         </span>
       </li>
       <hr />

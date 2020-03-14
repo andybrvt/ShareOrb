@@ -3,6 +3,8 @@ import axios from 'axios';
 import Article from '../components/Article';
 import Result from '../components/Listitems';
 
+
+
 class InfiniteList extends React.PureComponent {
   constructor(props){
     super(props);
@@ -29,16 +31,17 @@ class InfiniteList extends React.PureComponent {
   }
 
   componentWillMount() {
+    console.log(this.props.blah)
     this.loadPost();
   };
 
   loadPost = () => {
      this.setState({loading: true}, () => {
        const {offset, limit} = this.state;
-       // console.log(offset)
-       // console.log(limit)
+
        axios.get(
-         'http://127.0.0.1:8000/api/infinite-api/?limit='+limit+'&offset='+offset
+         'http://127.0.0.1:8000/userprofile/infinite-post/?limit='+limit+'&offset='+offset
+
        )
        .then(res => {
          const newPost = res.data.post;
