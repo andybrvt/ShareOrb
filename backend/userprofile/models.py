@@ -8,7 +8,7 @@ from typing import Union
 class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
     dob = models.DateField(blank=True, null=True, max_length=8)
-    number = models.CharField(blank=True, null=True, max_length=10)
+    phone_number = models.CharField(blank=True, null=True, max_length=10)
     # first_name = models.CharField(max_length=30)
     # last_name = models.CharField(max_length=30)
     # email= models.EmailField(blank=True, max_length=254, verbose_name='email address')

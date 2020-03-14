@@ -64,6 +64,7 @@ class Signup extends React.Component {
           this.props.onAuth(
             values.first_name,
             values.last_name,
+            values.bio,
             values.dob,
             values.email,
             values.phone_number,
@@ -99,6 +100,15 @@ class Signup extends React.Component {
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
             )}
         </FormItem>
+
+        <FormItem>
+            {getFieldDecorator('bio', {
+                rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="last_name" />
+            )}
+        </FormItem>
+
         <FormItem>
             {getFieldDecorator('dob', {
                 rules: [{ required: true, message: 'Please input your username!' }],
@@ -181,7 +191,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (first_name, last_name, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, dob, email, phone_number, password1, password2)),
+        onAuth: (first_name, last_name, bio, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, bio, dob, email, phone_number, password1, password2)),
     }
 }
 

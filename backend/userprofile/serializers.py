@@ -31,6 +31,7 @@ class RegisterSerializer(serializers.Serializer):
     first_name = serializers.CharField(required=True, write_only=True)
     last_name = serializers.CharField(required=True, write_only=True)
     dob = serializers.CharField(required=True, write_only=True)
+    bio = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
     phone_number = serializers.CharField(required=True, write_only=True)
     password1 = serializers.CharField(required=True, write_only=True)
@@ -45,7 +46,7 @@ class RegisterSerializer(serializers.Serializer):
         if allauth_settings.UNIQUE_EMAIL:
             if email and email_address_exists(email):
                 raise serializers.ValidationError(
-                    _("A user is already registered with this e-mail address."))
+                    ("A user is already registered with this e-mail address."))
         return email
 
     def validate_password1(self, password):
@@ -61,15 +62,22 @@ class RegisterSerializer(serializers.Serializer):
         return {
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', ''),
+            'bio': self.validated_data.get('bio', ''),
+            'dob': self.validated_data.get('dob', ''),
+            'phone_number': self.validated_data.get('phone_number', ''),
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
+
         }
 
     def save(self, request):
         adapter = get_adapter()
-        user = adapter.new_user(request)
+        user1 = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
-        adapter.save_user(request, user, self)
-        setup_user_email(request, user, [])
-        userprofile.save()
-        return user
+        adapter.save_user(request, user1, self)
+        user1.bio = self.cleaned_data.get('bio')
+        user1.dob = self.cleaned_data.get('dob')
+        user1.phone_number = self.cleaned_data.get('phone_number')
+        setup_user_email(request, user1, [])
+        user1.save()
+        return user1
