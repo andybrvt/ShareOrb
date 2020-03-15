@@ -9,6 +9,7 @@ router = DefaultRouter()
 # # is basically the name of the url function
 router.register('list', views.PostListView)
 router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
+router.register('profile-post', views.PostUpdateView, basename='Profilepost')
 
 
 

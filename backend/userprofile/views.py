@@ -21,9 +21,13 @@ class UserDetailView(generics.RetrieveAPIView):
 
 
 class PostListView(viewsets.ModelViewSet):
-	permission_classes = (IsAuthenticated,)
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 	serializer_class = serializers.PostSerializer
+
+class PostUpdateView(viewsets.ModelViewSet):
+    # permission_classes = (IsAuthenticated,)
+    queryset = models.Post.objects.all()
+    serializer_class = serializers.PostSerializer
 
 def infinite_filter(request):
 	print("This is the dictionary:"+request.GET)

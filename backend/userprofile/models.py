@@ -23,7 +23,7 @@ class User(AbstractUser):
 
 # Create your models here.
 class Post(models.Model):
-    captions = models.CharField(max_length=300)
+    caption = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -31,4 +31,4 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return self.captions
+        return self.caption
