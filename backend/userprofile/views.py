@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework import generics
 from rest_framework import viewsets
@@ -8,7 +9,19 @@ from . import serializers
 
 # Create your views here.
 
+
+
+
+class UserDetailView(generics.RetrieveAPIView):
+	queryset = models.User.objects.all()
+	lookup_field = 'username'
+	serializer_class = serializers.PostUserSerializer
+
+
+
+
 class PostListView(viewsets.ModelViewSet):
+	permission_classes = (IsAuthenticated,)
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 	serializer_class = serializers.PostSerializer
 

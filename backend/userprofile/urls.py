@@ -11,6 +11,9 @@ router.register('list', views.PostListView)
 router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
 
 
+
+
 urlpatterns = [
-	path('', include(router.urls))
+	path('', include(router.urls)),
+	path('blah2/<slug:username>/', views.UserDetailView.as_view()),
 ]

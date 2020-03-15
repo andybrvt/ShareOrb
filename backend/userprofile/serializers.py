@@ -7,9 +7,11 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
 class PostUserSerializer(serializers.ModelSerializer):
+    
     class Meta:
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio')
+
 
 
 
@@ -17,7 +19,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = models.Post
-		fields = ('id', 'caption', 'created_at', 'updated_at','user')
+		fields = ('id', 'captions', 'created_at', 'updated_at','user')
 
 	def to_representation(self, instance):
 		data = super().to_representation(instance)
