@@ -43,9 +43,9 @@ const post_url = 'http://127.0.0.1:8000/userprofile/list/'
  export const uploadPost = (post) =>{
 	const data = new FormData();
 	data.append("caption", post.caption);
-	data.append("user", post.user_id);
-	data.append("image", post.image);
-	data.append("image_filter", post.image_filter);
+	data.append("user_id", post.user_id);
+	// data.append("image", post.image);
+	// data.append("image_filter", post.image_filter);
   console.log(data)
   axios.post('http://127.0.0.1:8000/userprofile/list/', {
     Caption: data,

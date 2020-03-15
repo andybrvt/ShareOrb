@@ -6,28 +6,46 @@ from rest_framework import generics
 from rest_framework import viewsets
 from . import models
 from . import serializers
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+
 
 # Create your views here.
 
 
 
 
-class UserDetailView(generics.RetrieveAPIView):
-	queryset = models.User.objects.all()
-	lookup_field = 'username'
-	serializer_class = serializers.PostUserSerializer
+# class UserDetailView(generics.RetrieveAPIView):
+# 	queryset = models.User.objects.all()
+# 	lookup_field = 'username'
+# 	serializer_class = serializers.PostUserSerializer
 
 
+class UserIDView(APIView):
+    def get(self, request, *args, **kwargs):
+        print(request.COOKIES)
+        print(request)
+        print(request.user)
+        print(request.user.id)
+        # print(user)
+        # print(models.User.objects.all())
+        # temp=(models.User.objects)
+        # print(temp)
+        # print(temp.get(id=2).id)
+
+
+
+        return Response({'userID': request.user.id }, status=HTTP_200_OK)
 
 
 class PostListView(viewsets.ModelViewSet):
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 	serializer_class = serializers.PostSerializer
 
-class PostUpdateView(viewsets.ModelViewSet):
+class PostCreateView(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
-    queryset = models.Post.objects.all()
+    queryset = models.Post.objects.all().order_by('created_at', '-updated_at')
     serializer_class = serializers.PostSerializer
+
 
 def infinite_filter(request):
 	print("This is the dictionary:"+request.GET)
@@ -58,3 +76,12 @@ class ReactInfiniteView(viewsets.ModelViewSet):
 			"post": serializer.data,
 			"has_more": is_there_more_data(request)
 		})
+
+
+def current_user(request):
+    """
+    Determine the current user by their token, and return their data
+    """
+    permission_classes = (IsAuthenticated,)
+    serializer = serializers.UserSerializer(request.user)
+    return Response(serializer.data)

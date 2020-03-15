@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import AbstractUser, AnonymousUser
@@ -26,7 +26,8 @@ class Post(models.Model):
     caption = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     # add imager property later!
 
 

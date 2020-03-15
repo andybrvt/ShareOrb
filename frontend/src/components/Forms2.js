@@ -20,6 +20,7 @@ class PostUpload extends React.Component{
 
 
 	onFormSubmit = (e) =>{
+		e.preventDefault()
     console.log(this.props.user_id)
     console.log(this.state.caption)
 
