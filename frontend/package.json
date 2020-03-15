@@ -17,6 +17,7 @@
     "react-virtualized": "^9.21.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.88.2",
     "thunk": "0.0.1"
   },
   "scripts": {
