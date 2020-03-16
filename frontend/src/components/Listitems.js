@@ -32,7 +32,7 @@ const Result = (props) => {
             // </div>
 
             :
-            <div> </div>
+            <div></div>
 
 
         }

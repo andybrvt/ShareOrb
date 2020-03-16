@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, AnonymousUser
 from typing import Union
 
+
 class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
     profile_picture = models.ImageField(('profile_picture'),
@@ -25,8 +26,15 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+# class Profile(models.Model):
+#     user = models.OneToOneField(settings.AUTH_USER_MODEL)
+#     friends = models.ManyToManyField("Profile", blank=True)
+#
+#     def __str__(self):
+#         return str(self.user.username)
 
-# Create your models here.
+
+
 class Post(models.Model):
     caption = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -37,6 +45,8 @@ class Post(models.Model):
     image = models.ImageField(('post_picture'),
                               upload_to='post_pictures/%Y/%m',
                               blank=True,
+                             
+
                               )
 
     def __str__(self):
