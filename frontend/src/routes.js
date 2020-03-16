@@ -11,6 +11,7 @@ import PostUpload from './components/Forms2'
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
 const BaseRouter = () => (
+  
   <div>
     <Route exact path = '/' component = {ArticleList} />
     <Route exact path = '/article/:id' component = {ArticleDetail} />

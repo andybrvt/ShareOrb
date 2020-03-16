@@ -3,6 +3,7 @@ import  { Redirect } from 'react-router-dom';
 import {Container} from 'reactstrap';
 import {uploadPost} from '../api';
 import axios from 'axios';
+import { authAxios } from './util';
 
 class PostUpload extends React.Component{
  state = {
@@ -12,30 +13,45 @@ class PostUpload extends React.Component{
 	 image_filter:null,
 	 id:null,
 	 username:'',
-
+   testVar:'',
  }
 
+
+ handleFetchUserID = () => {
+    authAxios
+      .get("current_user")
+      .then(res => {
+        this.setState({ testVar: res.data});
+        this.setState({ id: res.data.id });
+        this.setState({username:res.data.username});
+      })
+      .catch(err => {
+        this.setState({ error: err });
+      });
+  };
+
 	componentDidMount () {
-		fetch("http://127.0.0.1:8000/userprofile/current_user/", {
-			headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
-        }
-			})
-		        .then(res => res.json())
-		        .then(json => {
-				 return json;
-			 })
-
-
-	axios.get("http://127.0.0.1:8000/userprofile/user-id")
-			.then(res=> {
-				this.setState({
-					id: res.data.id,
-					username: res.data.currentUser,
-			 });
-			});
-			console.log(this.props.id)
-	    console.log(this.state.caption)
+    this.handleFetchUserID();
+	// 	fetch("http://127.0.0.1:8000/userprofile/current_user/", {
+	// 		headers: {
+  //         Authorization: `Token ${localStorage.getItem('token')}`
+  //       }
+	// 		})
+	// 	        .then(res => res.json())
+	// 	        .then(json => {
+	// 			 return json;
+	// 		 })
+  //
+  //
+	// axios.get("http://127.0.0.1:8000/userprofile/user-id")
+	// 		.then(res=> {
+	// 			this.setState({
+	// 				id: res.data.id,
+	// 				username: res.data.currentUser,
+	// 		 });
+	// 		});
+	// 		console.log(this.props.id)
+	//     console.log(this.state.caption)
 	}
 
 
@@ -51,7 +67,7 @@ class PostUpload extends React.Component{
 	onFormSubmit = (e) =>{
 		e.preventDefault()
 		console.log(this.state)
-		if (this.props.user_id && this.state.caption){
+		if (this.props.id && this.state.caption){
       console.log('it got summited')
 
 			//upload post sync call
