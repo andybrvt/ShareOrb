@@ -43,7 +43,7 @@ class PostListView(viewsets.ModelViewSet):
 
 class PostCreateView(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
-    queryset = models.Post.objects.all().order_by('created_at', '-updated_at')
+    queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
     serializer_class = serializers.PostSerializer
 
 
@@ -70,7 +70,7 @@ class ReactInfiniteView(viewsets.ModelViewSet):
 		return queryset
 
 	def list(self, request):
-		queryset = models.Post.objects.all()
+		queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 		serializer = self.serializer_class(queryset, many=True)
 		return Response({
 			"post": serializer.data,
