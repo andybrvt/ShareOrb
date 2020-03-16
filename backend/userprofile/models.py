@@ -7,6 +7,11 @@ from typing import Union
 
 class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
+    profile_picture = models.ImageField(('profile_picture'),
+                                        upload_to='PostPic/public/profile_pictures/%Y/%m',
+                                        blank=True,
+                                        )
+
     dob = models.DateField(blank=True, null=True, max_length=12)
     phone_number = models.CharField(blank=True, null=True, max_length=10)
 
@@ -29,7 +34,10 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     # add imager property later!
-
+    image = models.ImageField(('post_picture'),
+                              upload_to='post_pictures/%Y/%m',
+                              blank=True,
+                              )
 
     def __str__(self):
         return self.caption

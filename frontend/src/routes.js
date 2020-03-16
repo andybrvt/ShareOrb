@@ -12,9 +12,9 @@ import InfiniteList from './containers/InfiniteScroll'
 const BaseRouter = () => (
 
   <div>
-    <Route exact path = '/' component = {ArticleList} />
+    <Route exact path = '/home' component = {ArticleList} />
     <Route exact path = '/article/:id' component = {ArticleDetail} />
-    <Route exact path = '/login/' component = {LoginForm} />
+    <Route exact path = '/' component = {LoginForm} />
     <Route exact path = '/signup/' component= {Signup} />
     <Route exact path = '/userview/' component= {UserView} />
   </div>

@@ -71,7 +71,7 @@ uploadPost = (post) =>{
  console.log(data)
  data.append("caption", post.caption);
  data.append("user", post.user_id);
- // data.append("image", post.image);
+ data.append("image", post.image);
  // data.append("image_filter", post.image_filter);
  console.log('right here')
  console.log(data)

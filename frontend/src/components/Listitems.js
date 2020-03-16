@@ -1,15 +1,46 @@
 import React from "react";
 
 const Result = (props) => {
+  console.log(props.data.image)
+  let temp="http://127.0.0.1:8000"+props.data.image;
   return (
+
     <div>
       <li>
         <span>
           <b>Title:</b> {props.data.caption}
         </span>
+        <br></br>
         <span>
-          <b>Author:</b> {props.data.created_at}
+          <b>Date:</b> {props.data.created_at}
         </span>
+        <br></br>
+        <span>
+          <b>Username:</b> {props.data.user.username}
+        </span>
+        <br></br>
+
+
+
+        {
+            props.data.image ?
+
+            // <div style="max-width: 100%; max-height: 100%;">
+              <span >
+                <img src= {temp} height="250" width="450"/>
+              </span>
+            // </div>
+
+            :
+            <div> </div>
+
+
+        }
+
+
+
+
+
       </li>
       <hr />
     </div>

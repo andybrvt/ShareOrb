@@ -11,6 +11,28 @@ const { Header, Footer, Content } = Layout;
 // from the
 class CustomLayout extends React.Component {
     render() {
+
+
+
+
+  //   if(this.props.isAuthenticated) {
+    //   <Menu.Item key="2" onClick={this.props.logout}>
+    //       <Link to="/login">Logout</Link>
+    //   </Menu.Item>
+    //
+    //   // <Menu.Item key="1">
+    //   //     <Link to="/">Home</Link>
+    //   // </Menu.Item>
+    // }
+    // else {
+    //
+    //
+    //   <Menu.Item key="2">
+    //       <Link to="/login">Login</Link>
+    //   </Menu.Item>
+    //
+    // }
+
         return (
             <Layout className="layout">
                 <Header>
@@ -21,27 +43,43 @@ class CustomLayout extends React.Component {
                     defaultSelectedKeys={['2']}
                     style={{ lineHeight: '64px' }}
                 >
+
+
+
+
                 {
                     this.props.isAuthenticated ?
 
                     <Menu.Item key="2" onClick={this.props.logout}>
-                        <Link to="/login">Logout</Link>
+                        <Link to="/">Logout</Link>
                     </Menu.Item>
 
                     :
 
                     <Menu.Item key="2">
-                        <Link to="/login">Login</Link>
+                        <Link to="/">Login</Link>
                     </Menu.Item>
                 }
 
+
+
+                {
+                    this.props.isAuthenticated ?
                     <Menu.Item key="1">
-                        <Link to="/">Home</Link>
+                        <Link to="/home">Home</Link>
                     </Menu.Item>
+                    :
+                    <Menu.Item key="1">
+                        <Link></Link>
+                    </Menu.Item>
+                }
+
+
+
 
                 </Menu>
                 </Header>
-                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 900, marginRight: 'auto', marginLeft: 'auto'}}>
+                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1200, marginRight: 'auto', marginLeft: 'auto'}}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
                     <Breadcrumb.Item><Link to="/">List</Link></Breadcrumb.Item>
