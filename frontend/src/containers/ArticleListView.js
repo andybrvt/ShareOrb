@@ -4,7 +4,7 @@ import axios from 'axios';
 import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
 import InfiniteScroll from './InfiniteScroll';
-
+import PostUpload from '../components/Forms2';
 
 class ArticleList extends React.Component {
 
@@ -67,15 +67,16 @@ class ArticleList extends React.Component {
 //ProfilePost will then be the form and will take in parameters for the
 //handlesubmit and will do a post function
 
+// <ProfilePost
+// 	requestType ="post"
+// 	articleID = {null}
+// 	btnText = 'Create'
+// />
 
 	render() {
 		return (
 			  <div>
-					<ProfilePost
-						requestType ="post"
-						articleID = {null}
-						btnText = 'Create'
-					/>
+					<PostUpload />
 					<InfiniteScroll />
 
 				</div>

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { authAxios } from './util';
 
 class PostUpload extends React.Component{
+ formData = new FormData();
  state = {
 	 image:null,
 	 caption:'',
@@ -55,30 +56,54 @@ class PostUpload extends React.Component{
 	}
 
 
-	formData = new FormData();
 
- make_post = async (post) =>{
-	let data = await uploadPost(post);
 
+make_post = (post) =>{
+	let data = this.uploadPost(post);
+	console.log(data)
+	console.log(post)
 	return data;
 }
 
+uploadPost = (post) =>{
+ const data = new FormData();
+ console.log('right here')
+ console.log(data)
+ data.append("caption", post.caption);
+ data.append("user", post.user_id);
+ // data.append("image", post.image);
+ // data.append("image_filter", post.image_filter);
+ console.log('right here')
+ console.log(data)
+ fetch('http://127.0.0.1:8000/userprofile/list/', {
+	method: 'POST',
+    headers: {
+	    Authorization: `Token ${localStorage.getItem('token')}`,
+    },
+    body:data
+})
+ .then (res =>res.json())
+ .then(json =>{
+	 console.log(json)
+	 return json
+ })
+}
 
 	onFormSubmit = (e) =>{
-		e.preventDefault()
+		// e.preventDefault()
 		console.log(this.state)
-		if (this.props.id && this.state.caption){
+		if (this.state.id && this.state.caption){
       console.log('it got summited')
-
-			//upload post sync call
 			const post = {
 				'image': this.state.image,
 				'caption': this.state.caption,
-				'user_id': this.state.user_id,
+				'user_id': this.state.id,
 				'image_filter': this.state.image_filter,
+				'username': this.state.username,
 			};
+			console.log(post)
 			this.make_post(post);
-			this.props.history.push('/')
+			// this.props.history.push('/')
 		}
 		else{
 			return <Redirect to='/'  />
