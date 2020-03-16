@@ -2,28 +2,55 @@ import React from 'react';
 import  { Redirect } from 'react-router-dom';
 import {Container} from 'reactstrap';
 import {uploadPost} from '../api';
-
+import axios from 'axios';
 
 class PostUpload extends React.Component{
+ state = {
+	 image:null,
+	 caption:'',
+	 user_id:'',
+	 image_filter:null,
+	 id:null,
+	 username:'',
+
+ }
+
+	componentDidMount () {
+		fetch("http://127.0.0.1:8000/userprofile/current_user/", {
+			headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`
+        }
+			})
+		        .then(res => res.json())
+		        .then(json => {
+				 return json;
+			 })
+
+
+	axios.get("http://127.0.0.1:8000/userprofile/user-id")
+			.then(res=> {
+				this.setState({
+					id: res.data.id,
+					username: res.data.currentUser,
+			 });
+			});
+			console.log(this.props.id)
+	    console.log(this.state.caption)
+	}
+
+
 	formData = new FormData();
-		state = {
-			image:null,
-			caption: "",
-			image_blob: "",
-			image_filter:"",
-			stage: "empty",
-		};
+
  make_post = async (post) =>{
 	let data = await uploadPost(post);
+
 	return data;
 }
 
 
 	onFormSubmit = (e) =>{
 		e.preventDefault()
-    console.log(this.props.user_id)
-    console.log(this.state.caption)
-
+		console.log(this.state)
 		if (this.props.user_id && this.state.caption){
       console.log('it got summited')
 
@@ -31,7 +58,7 @@ class PostUpload extends React.Component{
 			const post = {
 				'image': this.state.image,
 				'caption': this.state.caption,
-				'user_id': this.props.user_id,
+				'user_id': this.state.user_id,
 				'image_filter': this.state.image_filter,
 			};
 			this.make_post(post);

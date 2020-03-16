@@ -7,7 +7,7 @@ from rest_framework import viewsets
 from . import models
 from . import serializers
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-
+from rest_framework.decorators import api_view
 
 # Create your views here.
 
@@ -34,7 +34,7 @@ class UserIDView(APIView):
 
 
 
-        return Response({'userID': request.user.id }, status=HTTP_200_OK)
+        return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
 
 
 class PostListView(viewsets.ModelViewSet):
@@ -77,11 +77,11 @@ class ReactInfiniteView(viewsets.ModelViewSet):
 			"has_more": is_there_more_data(request)
 		})
 
-
+@api_view(['GET'])
 def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    permission_classes = (IsAuthenticated,)
-    serializer = serializers.UserSerializer(request.user)
+    # permission_classes = (IsAuthenticated,)
+    serializer = serializers.PostUserSerializer(request.user)
     return Response(serializer.data)

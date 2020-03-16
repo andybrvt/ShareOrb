@@ -20,4 +20,5 @@ urlpatterns = [
 	# path('blah2/<slug:username>/', views.UserDetailView.as_view()),
 	path('create/', views.PostCreateView.as_view()),
 	path('user-id/', views.UserIDView.as_view()),
+	path('current_user/', views.current_user),
 ]
