@@ -90,7 +90,7 @@ uploadPost = (post) =>{
 }
 
 	onFormSubmit = (e) =>{
-		// e.preventDefault()
+		e.preventDefault()
 		console.log(this.state)
 		if (this.state.id && this.state.caption){
       console.log('it got summited')
@@ -103,7 +103,7 @@ uploadPost = (post) =>{
 			};
 			console.log(post)
 			this.make_post(post);
-			// this.props.history.push('/')
+			window.location.reload(true)
 		}
 		else{
 			return <Redirect to='/'  />
