@@ -45,8 +45,7 @@ class PostCreateView(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
     queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
     serializer_class = serializers.PostSerializer
-
-
+ 
 def infinite_filter(request):
 	print("This is the dictionary:"+request.GET)
 	limit = request.GET.get('limit')

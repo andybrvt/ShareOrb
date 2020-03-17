@@ -4,6 +4,7 @@ import {Container} from 'reactstrap';
 import {uploadPost} from '../api';
 import axios from 'axios';
 import { authAxios } from './util';
+import { connect } from "react-redux";
 
 class PostUpload extends React.Component{
  formData = new FormData();
@@ -15,11 +16,26 @@ class PostUpload extends React.Component{
 	 id:null,
 	 username:'',
    testVar:'',
+   login: false,
+   loading:false,
  }
 
 
  handleFetchUserID = () => {
-    authAxios
+    // authAxios
+    //   .get("current_user")
+    //   .then(res => {
+    //     this.setState({ testVar: res.data});
+    //     this.setState({ id: res.data.id });
+    //     this.setState({username:res.data.username});
+    //   })
+    //   .catch(err => {
+    //     this.setState({ error: err });
+    //   });
+  };
+
+	async componentDidMount () {
+    await authAxios
       .get("current_user")
       .then(res => {
         this.setState({ testVar: res.data});
@@ -29,21 +45,7 @@ class PostUpload extends React.Component{
       .catch(err => {
         this.setState({ error: err });
       });
-  };
 
-	componentDidMount () {
-    this.handleFetchUserID();
-	// 	fetch("http://127.0.0.1:8000/userprofile/current_user/", {
-	// 		headers: {
-  //         Authorization: `Token ${localStorage.getItem('token')}`
-  //       }
-	// 		})
-	// 	        .then(res => res.json())
-	// 	        .then(json => {
-	// 			 return json;
-	// 		 })
-  //
-  //
 	// axios.get("http://127.0.0.1:8000/userprofile/user-id")
 	// 		.then(res=> {
 	// 			this.setState({
@@ -140,7 +142,6 @@ uploadPost = (post) =>{
 	}
 
 	render(){
-
 	return (
 	<Container style={{paddingTop: '10%',zIndex:'-1'}}>
 	  <form onSubmit={this.onFormSubmit}>
@@ -180,6 +181,15 @@ uploadPost = (post) =>{
 	)
 
 }
-}
+};
 
-export default PostUpload;
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    token: state.token,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+)(PostUpload);

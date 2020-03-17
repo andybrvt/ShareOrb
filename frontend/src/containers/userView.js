@@ -3,8 +3,6 @@ import axios from 'axios';
 import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
 
-import nature1 from '../imgFold/nature1.jpeg';
-
 import { Image } from 'react-bootstrap';
 
 
@@ -47,7 +45,7 @@ class UserView extends React.Component {
 
         <div>
   				<h1>{this.state.profileList.first_name} {this.state.profileList.last_name}</h1>
-          <img class="ui medium circular image" src={nature1} />
+  
   				<p>Description of user </p>
 
 			</div>

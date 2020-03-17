@@ -40,6 +40,7 @@ class ArticleList extends React.Component {
 				"Content-Type": "application/json",
 				Authorization: newProps.token,
 			}
+			
 			// this will get information from the link and then
 			// update the state with the list of post
 			axios.get('http://127.0.0.1:8000/userprofile/list/')

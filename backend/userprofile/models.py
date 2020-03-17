@@ -45,7 +45,7 @@ class Post(models.Model):
     image = models.ImageField(('post_picture'),
                               upload_to='post_pictures/%Y/%m',
                               blank=True,
-                             
+
 
                               )
 

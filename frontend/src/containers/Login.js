@@ -10,11 +10,14 @@ import {
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { authLogin } from "../store/actions/auth";
+import axios from 'axios';
 
 class LoginForm extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    login: false,
+
   };
 
   handleChange = e => {
@@ -22,16 +25,17 @@ class LoginForm extends React.Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     const { username, password } = this.state;
-    this.props.login(username, password);
+    this.props.login(username, password)
+    this.setState({login: true })
   };
 
   render() {
     const { error, loading, token } = this.props;
     const { username, password } = this.state;
     if (token) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/home" />
     }
     return (
       <Grid
