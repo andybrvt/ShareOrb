@@ -21,4 +21,6 @@ urlpatterns = [
 	path('create/', views.PostCreateView.as_view()),
 	path('user-id/', views.UserIDView.as_view()),
 	path('current_user/', views.current_user),
+	path('userlist/',views.UserListView.as_view())
+
 ]

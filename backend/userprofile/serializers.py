@@ -12,8 +12,13 @@ class PostUserSerializer(serializers.ModelSerializer):
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio')
 
+class UserSerializer(serializers.ModelSerializer):
+    # the ReadOnlyField allow that field to only be read only
+    get_post = serializers.ReadOnlyField()
 
-
+    class Meta:
+        model = models.User
+        fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'get_post')
 
 class PostSerializer(serializers.ModelSerializer):
 

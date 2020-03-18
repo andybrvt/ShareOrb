@@ -10,7 +10,8 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.decorators import api_view
 
 # Create your views here.
-
+# Views will take in models and serializers and then displays it
+#  You can also add in functions (def) to modify stuff
 
 
 
@@ -35,7 +36,9 @@ class UserIDView(APIView):
 
 
         return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
-
+class UserListView(generics.ListAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
 
 class PostListView(viewsets.ModelViewSet):
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
@@ -45,7 +48,7 @@ class PostCreateView(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
     queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
     serializer_class = serializers.PostSerializer
- 
+
 def infinite_filter(request):
 	print("This is the dictionary:"+request.GET)
 	limit = request.GET.get('limit')
