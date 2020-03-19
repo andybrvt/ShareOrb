@@ -40,6 +40,11 @@ class UserListView(generics.ListAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
 
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = models.User.objects.all()
+    lookup_field = 'username'
+    serializer_class= serializers.UserSerializer
+
 class PostListView(viewsets.ModelViewSet):
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 	serializer_class = serializers.PostSerializer

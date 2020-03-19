@@ -4,6 +4,8 @@ import {Card, Button} from 'antd';
 import ProfilePost from '../components/Form';
 import { Link, } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+
 class ArticleDetail extends React.Component{
 //this takes each of the value of the individual profiles and
 //returns them
@@ -31,6 +33,7 @@ componentWillReceiveProps(newProps){
 		}
 			console.log("made it to aricle detailncompoennt");
 	    const articleID = this.props.match.params.id;
+
 			axios.get('http://127.0.0.1:8000/api/newsfeed/'+articleID)
 				.then(res=> {
 					this.setState({
@@ -65,6 +68,7 @@ componentWillReceiveProps(newProps){
 //the paragraph inside will be the last time (these are taken from viewsets)
 	render() {
 		console.log("BUTTON!!!	")
+		console.log(this.props)
 		var temp=document.getElementById('buttonPush');
 		if(temp){
 			temp.addEventListener('click', function(){
