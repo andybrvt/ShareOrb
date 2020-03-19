@@ -8,6 +8,10 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Profile, FriendRequest
 
+
+
+
+
 User = get_user_model()
 
 def users_list(request):
@@ -51,7 +55,12 @@ def delete_friend_request(request, id):
 	return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
 
 def profile_view(request, slug):
+	# print(slug)
+	test=Profile.objects.all()
+	# for element in test:
+	# 	print(element)
 	p = Profile.objects.filter(slug=slug).first()
+	print(p)
 	u = p.user
 	sent_friend_requests = FriendRequest.objects.filter(from_user=p.user)
 	rec_friend_requests = FriendRequest.objects.filter(to_user=p.user)
@@ -60,6 +69,10 @@ def profile_view(request, slug):
 
 	# is this user our friend
 	button_status = 'none'
+	print("START OF THIS POINT")
+	print(request)
+	print(request.user)
+	print("GOT TO THIS POINT")
 	if p not in request.user.profile.friends.all():
 		button_status = 'not_friend'
 
@@ -76,4 +89,4 @@ def profile_view(request, slug):
 		'rec_friend_requests': rec_friend_requests
 	}
 
-	return render(request, "accounts/profile.html", context)
+	# SOMETHING like save profile objects?
