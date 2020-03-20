@@ -1,9 +1,9 @@
 from .models import Profile
 from rest_framework import serializers
 
-class ListUserSerializer(serializers.ModelSerializer):
+class UserFriendListSerializer(serializers.ModelSerializer):
 
-    friends = serializers.SerializerMethodField()
+    # friends = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile

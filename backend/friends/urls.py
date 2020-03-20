@@ -1,18 +1,10 @@
 from django.conf.urls import url
 from django.urls import path, include
 
-from .views import (
-	users_list,
-	# profile_view,
-	# send_friend_request,
-	# cancel_friend_request,
-	# accept_friend_request,
-	# delete_friend_request.
-
-	)
+from . import views
 
 urlpatterns = [
-	path('<slug:slug>', users_list.as_view(), name="users_list"),
+	path('', views.UserFriendList.as_view(), name="users_list"),
 
     # url(r'^$', users_list, name='list'),
 
