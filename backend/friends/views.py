@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from .models import Profile, FriendRequest
-
+from django.http import HttpResponse
 
 
 
@@ -19,7 +19,18 @@ def users_list(request):
 	context = {
 		'users': users
 	}
-	return render(request, "accounts/home.html", context)
+	print(users)
+	for element2 in users:
+		print(element2)
+	print(request)
+	print(request.body)
+	print(context)
+
+	# return HttpResponse(request.bodyf
+	# return HttpResponseRedirect('/users')
+	# return render(request, "accounts/home.html", context)
+	return HttpResponse(request.body)
+
 
 def send_friend_request(request, id):
 	if request.user.is_authenticated():
@@ -88,5 +99,5 @@ def profile_view(request, slug):
 		'sent_friend_requests': sent_friend_requests,
 		'rec_friend_requests': rec_friend_requests
 	}
-
-	# SOMETHING like save profile objects?
+	return HttpResponse(request.body)
+	# return render(request, " ", context)

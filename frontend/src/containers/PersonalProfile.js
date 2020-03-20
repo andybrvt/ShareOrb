@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { authAxios } from '../components/util';
+
 class PersonalProfile extends React.Component{
   state = {
     id:'',
@@ -8,13 +10,16 @@ class PersonalProfile extends React.Component{
 		first_name: '',
 		last_name: '',
 		bio: '',
+    friends: [],
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     console.log('here')
     const username = this.props.match.params.username;
     console.log(this.props.match.params)
-    axios.get('http://127.0.0.1:8000/userprofile/'+username)
+
+
+    await authAxios.get('http://127.0.0.1:8000/userprofile/'+username)
       .then(res=> {
         console.log(res.data)
         console.log(res.data.id)
@@ -27,16 +32,28 @@ class PersonalProfile extends React.Component{
 
        });
      });
+
+    await authAxios.get('http://127.0.0.1:8000/friends/')
+       .then(res=> {
+         console.log(res.data)
+         console.log(res.data.id)
+         this.setState({
+           friends: res.data.friends
+
+        });
+      });
    }
+
 
   render(){
     console.log(this.props)
-    console.log(this.state)
+    console.log(this.state.friends)
       return(
         <div>
         {this.state.username}
         {this.state.first_name}
         {this.state.last_name}
+        {this.state.friends}
 
         </div>
       )

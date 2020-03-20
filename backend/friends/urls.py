@@ -10,6 +10,7 @@ from .views import (
 	)
 
 urlpatterns = [
+
     url(r'^$', users_list, name='list'),
     url(r'^(?P<slug>[\w-]+)/$', profile_view),
     url(r'^friend-request/send/(?P<id>[\w-]+)/$', send_friend_request),
