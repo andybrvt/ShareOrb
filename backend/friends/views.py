@@ -5,12 +5,14 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-
+from rest_framework.views import APIView
 from .models import Profile, FriendRequest
 from django.http import HttpResponse
 from rest_framework import generics
 from . import serializers
 from . import models
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 
 
 
@@ -19,11 +21,21 @@ from . import models
 
 User = get_user_model()
 
-class UserFriendList(generics.ListAPIView):
+class UserList(generics.ListAPIView):
 	serializer_class = serializers.UserFriendListSerializer
 	def get_queryset(self):
 		queryset = models.Profile.objects.exclude(user = self.request.user)
 		return queryset
+
+class UserFriendList(generics.RetrieveAPIView):
+    queryset = models.Profile.objects.all()
+    lookup_field = 'user'
+    serializer_class= serializers.UserFriendListSerializer
+
+class FriendRequestList(generics.ListAPIView):
+	serializer_class = serializers.FriendRequestSerialzier
+	queryset = models.FriendRequest.objects.all()
+
 	# def get_queryset(self):
 	# 	queryset = models.Profile.objects.exclude(user = self.request.user)
 	# 	return queryset
@@ -46,72 +58,40 @@ class UserFriendList(generics.ListAPIView):
 # 	return HttpResponse(request.body)
 
 
-def send_friend_request(request, id):
-	if request.user.is_authenticated():
+class SendFriendRequest(APIView):
+    def post(self, request, id, *args, **kwargs):
+        user = get_object_or_404(User, id=id)
+        frequest, created = models.FriendRequest.objects.get_or_create(
+            from_user=request.user,
+            to_user=user)
+        return Response('request sent')
+
+# Cancel from sender's end
+class CancelFriendRequest(APIView):
+	def post(self, request, id, *args, **kwargs):
 		user = get_object_or_404(User, id=id)
-		frequest, created = FriendRequest.objects.get_or_create(
+		print(user)
+		frequest = models.FriendRequest.objects.filter(
 			from_user=request.user,
 			to_user=user)
-		return HttpResponseRedirect('/users')
-
-def cancel_friend_request(request, id):
-	if request.user.is_authenticated():
-		user = get_object_or_404(User, id=id)
-		frequest = FriendRequest.objects.filter(
-			from_user=request.user,
-			to_user=user).first()
 		frequest.delete()
-		return HttpResponseRedirect('/users')
+		return Response('request cancel')
 
-def accept_friend_request(request, id):
-	from_user = get_object_or_404(User, id=id)
-	frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
-	user1 = frequest.to_user
-	user2 = from_user
-	user1.profile.friends.add(user2.profile)
-	user2.profile.friends.add(user1.profile)
-	frequest.delete()
-	return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
+class AcceptFriendRequest(APIView):
+	def post(self, request, id, *args, **kwargs):
+		from_user = get_object_or_404(User, id=id)
+		frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
+		user1 = frequest.to_user
+		user2 = from_user
+		user1.profile.friends.add(user2.profile)
+		user2.profile.friends.add(user1.profile)
+		frequest.delete()
+		return Response('request accept')
 
-def delete_friend_request(request, id):
-	from_user = get_object_or_404(User, id=id)
-	frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
-	frequest.delete()
-	return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
-
-def profile_view(request, slug):
-	# print(slug)
-	test=Profile.objects.all()
-	# for element in test:
-	# 	print(element)
-	p = Profile.objects.filter(slug=slug).first()
-	print(p)
-	u = p.user
-	sent_friend_requests = FriendRequest.objects.filter(from_user=p.user)
-	rec_friend_requests = FriendRequest.objects.filter(to_user=p.user)
-
-	friends = p.friends.all()
-
-	# is this user our friend
-	button_status = 'none'
-	print("START OF THIS POINT")
-	print(request)
-	print(request.user)
-	print("GOT TO THIS POINT")
-	if p not in request.user.profile.friends.all():
-		button_status = 'not_friend'
-
-		# if we have sent him a friend request
-		if len(FriendRequest.objects.filter(
-			from_user=request.user).filter(to_user=p.user)) == 1:
-				button_status = 'friend_request_sent'
-
-	context = {
-		'u': u,
-		'button_status': button_status,
-		'friends_list': friends,
-		'sent_friend_requests': sent_friend_requests,
-		'rec_friend_requests': rec_friend_requests
-	}
-	return HttpResponse(request.body)
-	# return render(request, " ", context)
+# Delete request from receiver's end
+class DeleteFriendRequest(APIView):
+	def post(self, request, id, *args, **kwargs):
+		from_user = get_object_or_404(User, id=id)
+		frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user)
+		frequest.delete()
+		return Response('request delete')

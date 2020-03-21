@@ -18,7 +18,7 @@ const BaseRouter = () => (
     <Route exact path = '/' component = {LoginForm} />
     <Route exact path = '/signup/' component= {Signup} />
     <Route exact path = '/userview/' component= {UserView} />
-    <Route exact path = '/test/:username' component= {PersonalProfile} />
+    <Route exact path = '/test/:username/:id' component= {PersonalProfile} />
 
   </div>
 );

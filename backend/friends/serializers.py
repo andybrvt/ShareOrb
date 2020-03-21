@@ -1,4 +1,4 @@
-from .models import Profile
+from .models import Profile, FriendRequest
 from rest_framework import serializers
 
 class UserFriendListSerializer(serializers.ModelSerializer):
@@ -14,9 +14,7 @@ class UserFriendListSerializer(serializers.ModelSerializer):
 
         )
 
-    def get_following(self, obj):
-        if 'request' in self.context:
-            request = self.context['request']
-            if obj in request.user.friends.all():
-                return True
-        return False
+class FriendRequestSerialzier(serializers.ModelSerializer):
+    class Meta:
+        model = FriendRequest
+        fields = ( 'to_user', 'from_user' )

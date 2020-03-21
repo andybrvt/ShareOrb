@@ -16,6 +16,7 @@ class PersonalProfile extends React.Component{
   async componentDidMount(){
     console.log('here')
     const username = this.props.match.params.username;
+    const userID = this.props.match.params.id;
     console.log(this.props.match.params)
 
 
@@ -33,16 +34,18 @@ class PersonalProfile extends React.Component{
        });
      });
 
-    await authAxios.get('http://127.0.0.1:8000/friends/')
-       .then(res=> {
-         console.log(res.data)
-         console.log(res.data.id)
-         this.setState({
-           friends: res.data.friends
 
+      await authAxios.get('http://127.0.0.1:8000/friends/'+userID)
+         .then(res=> {
+           this.setState({
+             friends: res.data.friends
+
+          });
         });
-      });
+
    }
+
+
 
 
   render(){
@@ -53,7 +56,9 @@ class PersonalProfile extends React.Component{
         {this.state.username}
         {this.state.first_name}
         {this.state.last_name}
+        {this.state.bio}
         {this.state.friends}
+
 
         </div>
       )
