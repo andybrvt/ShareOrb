@@ -69,9 +69,7 @@ class CustomLayout extends React.Component {
                         <Link to="/home">Home</Link>
                     </Menu.Item>
                     :
-                    <Menu.Item key="1">
-                        <Link></Link>
-                    </Menu.Item>
+                    <div> </div>
                 }
 
 

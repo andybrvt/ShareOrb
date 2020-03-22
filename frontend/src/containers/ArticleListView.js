@@ -1,7 +1,5 @@
 import React from 'react';
-import Article from '../components/Article';
 import axios from 'axios';
-import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
 import InfiniteScroll from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
@@ -40,7 +38,7 @@ class ArticleList extends React.Component {
 				"Content-Type": "application/json",
 				Authorization: newProps.token,
 			}
-			
+
 			// this will get information from the link and then
 			// update the state with the list of post
 			axios.get('http://127.0.0.1:8000/userprofile/list/')
@@ -74,13 +72,51 @@ class ArticleList extends React.Component {
 // 	btnText = 'Create'
 // />
 
-	render() {
-		return (
-			  <div>
-					<PostUpload />
-					<InfiniteScroll />
 
-				</div>
+// {
+// 		this.props.isAuthenticated ?
+//	<PostUpload />
+// <InfiniteScroll />
+// 		:
+
+// <div> NOT LOGGED IN </div>
+// 	}
+
+//
+// function showInfo(props) {
+//   const isLoggedIn = props.isLoggedIn;
+//   if (isLoggedIn) {
+//     return <UserGreeting />;
+//   }
+//   return <GuestGreeting />;
+// }
+
+
+	render() {
+		console.log("HIHIHHIIHIh")
+		console.log(this.props)
+		console.log(this.props.isAuthenticated)
+		const isLoggedIn = this.props.isAuthenticated;
+		return (
+
+
+			<div>
+      {isLoggedIn
+        ? <div>
+				 		<PostUpload />
+						<InfiniteScroll />
+				 </div>
+        : <div> Not logged in! </div>
+      }
+    </div>
+
+
+
+
+
+
+
+
 		)
 	}
 }
