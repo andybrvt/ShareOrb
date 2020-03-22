@@ -12,16 +12,17 @@ class PostUserSerializer(serializers.ModelSerializer):
 
     class Meta:
 	    model = models.User
-	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio')
+	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio', 'friends')
 
 # Used in UserListView, UserDetailView in views.py
 # Purpose: UserListView it shows a list and UserDetailView grabbing person info
+
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
     get_post = serializers.ReadOnlyField()
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'get_post', 'friends')
+        fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'get_post', 'friends', 'slug')
 
 class PostSerializer(serializers.ModelSerializer):
 

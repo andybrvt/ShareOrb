@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser, AnonymousUser
 from typing import Union
+from django.db.models.signals import post_save
 
 
 class User(AbstractUser):
@@ -20,14 +21,22 @@ class User(AbstractUser):
 
     def get_posts(self):
         return Post.objects.filter(user=self).values_list('id', flat=True)
-    # first_name = models.CharField(max_length=30)
-    # last_name = models.CharField(max_length=30)
-    # email= models.EmailField(blank=True, max_length=254, verbose_name='email address')
-    # username = models.CharField(max_length=140, default='DEFAULT VALUE')
-    # password = models.CharField(max_length=140, default='DEFAULT VALUE')
+
     def __str__(self):
         return self.username
 
+    def get_absolute_url(self):
+    	return "/users/{}".format(self.slug)
+
+def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        try:
+            User.objects.create(user=instance)
+        except:
+            pass
+
+
+post_save.connect(post_save_user_model_receiver, sender=User)
 # class Profile(models.Model):
 #     user = models.OneToOneField(settings.AUTH_USER_MODEL)
 #     friends = models.ManyToManyField("Profile", blank=True)
