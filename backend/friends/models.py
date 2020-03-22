@@ -28,8 +28,8 @@ def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
 post_save.connect(post_save_user_model_receiver, sender=settings.AUTH_USER_MODEL)
 
 class FriendRequest(models.Model):
-	to_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='to_user')
-	from_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='from_user')
+	to_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='to_user1')
+	from_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='from_user1')
 	timestamp = models.DateTimeField(auto_now_add=True) # set when created
 
 	def __str__(self):

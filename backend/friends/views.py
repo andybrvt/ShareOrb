@@ -33,7 +33,7 @@ class UserFriendList(generics.RetrieveAPIView):
     serializer_class= serializers.UserFriendListSerializer
 
 class FriendRequestList(generics.ListAPIView):
-	serializer_class = serializers.FriendRequestSerialzier
+	serializer_class = serializers.FriendRequestSerializer
 	queryset = models.FriendRequest.objects.all()
 
 	# def get_queryset(self):

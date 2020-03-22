@@ -36,10 +36,13 @@ class UserIDView(APIView):
 
 
         return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
+
+# Grabs ALL of the users
 class UserListView(generics.ListAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
 
+# Grabs individual user in the url with username
 class UserDetailView(generics.RetrieveAPIView):
     queryset = models.User.objects.all()
     lookup_field = 'username'
@@ -49,26 +52,26 @@ class PostListView(viewsets.ModelViewSet):
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 	serializer_class = serializers.PostSerializer
 
+# Create a list of post
 class PostCreateView(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
     queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
     serializer_class = serializers.PostSerializer
 
+# Needed for ReactInfiniteView grabs offset and limit in infinite scroll
 def infinite_filter(request):
-	print("This is the dictionary:"+request.GET)
 	limit = request.GET.get('limit')
 	offset = request.GET.get('offset')
-	print(limit, offset)
 	return models.Post.objects.all()[int(offset): int(offset) + int(limit)]
 
+# Needed for ReactInfiniteView checks if there is more data
 def is_there_more_data(request):
-
 	offset =request.GET.get('offset')
-	print(type(offset))
 	if int(offset) > models.Post.objects.all().count():
 		return False
 	return True
 
+# Infinite Loop
 class ReactInfiniteView(viewsets.ModelViewSet):
 	serializer_class = serializers.PostSerializer
 
@@ -92,3 +95,60 @@ def current_user(request):
     # permission_classes = (IsAuthenticated,)
     serializer = serializers.PostUserSerializer(request.user)
     return Response(serializer.data)
+
+# Views from here and down are for friends
+
+# Grabs everyone but current user
+class UserList(generics.ListAPIView):
+	serializer_class = serializers.UserSerializer
+	def get_queryset(self):
+		queryset = models.User.objects.exclude(username = self.request.username)
+		return queryset
+
+# List of friend request that is sent out
+class FriendRequestList(generics.ListAPIView):
+	serializer_class = serializers.FriendRequestSerializer
+	queryset = models.FriendRequest.objects.all()
+
+
+# This sends out a friend request
+class SendFriendRequest(APIView):
+    def post(self, request, username, *args, **kwargs):
+        user = get_object_or_404(User, username = username )
+        frequest, created = models.FriendRequest.objects.get_or_create(
+            from_user=request.username,
+            to_user=user)
+        return Response('request sent')
+
+# Cancel from sender's end
+class CancelFriendRequest(APIView):
+	def post(self, request, username, *args, **kwargs):
+		user = get_object_or_404(User, username = username)
+		print(user)
+		frequest = models.FriendRequest.objects.filter(
+			from_user=request.username,
+			to_user=user)
+		frequest.delete()
+		return Response('request cancel')
+
+# Receiver accepts friend request'
+# user1.profile.friends.add(user2.profile)
+
+class AcceptFriendRequest(APIView):
+	def post(self, request, username, *args, **kwargs):
+		from_user = get_object_or_404(User, username = username)
+		frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.username).first()
+		user1 = frequest.to_user
+		user2 = from_user
+		user1.User.friends.add(user2.User)
+		user2.User.friends.add(user1.User)
+		frequest.delete()
+		return Response('request accept')
+
+# Delete request from receiver's end
+class DeleteFriendRequest(APIView):
+	def post(self, request, username, *args, **kwargs):
+		from_user = get_object_or_404(User, username = username)
+		frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.username)
+		frequest.delete()
+		return Response('request delete')

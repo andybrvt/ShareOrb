@@ -17,11 +17,18 @@ router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
 
 urlpatterns = [
 	path('', include(router.urls)),
-	# path('blah2/<slug:username>/', views.UserDetailView.as_view()),
 	path('create/', views.PostCreateView.as_view()),
 	path('user-id/', views.UserIDView.as_view()),
 	path('current_user/', views.current_user),
-	path('userlist/',views.UserListView.as_view()),
 	path('<slug:username>/', views.UserDetailView.as_view()),
+	path('userlist', views.UserList.as_view(), name="users_list"),
+	path('friendrequestList', views.FriendRequestList.as_view(), name="friend_request"),
+	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
+	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),
+	path('friend-request/accept/<slug:username>', views.AcceptFriendRequest.as_view(), name='accept_request'),
+	path('friend-request/delete/<slug:username>', views.DeleteFriendRequest.as_view(), name='delete_request'),
+
+	# for our testing
+	# path('userlist/',views.UserListView.as_view()),
 
 ]

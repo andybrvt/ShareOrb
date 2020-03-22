@@ -15,6 +15,8 @@ class User(AbstractUser):
 
     dob = models.DateField(blank=True, null=True, max_length=12)
     phone_number = models.CharField(blank=True, null=True, max_length=10)
+    slug = models.SlugField()
+    friends = models.ManyToManyField("self", blank=True)
 
     def get_posts(self):
         return Post.objects.filter(user=self).values_list('id', flat=True)
@@ -51,3 +53,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.caption
+
+class FriendRequest(models.Model):
+	to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
+	from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
+	timestamp = models.DateTimeField(auto_now_add=True) # set when created
+
+	def __str__(self):
+		return "From {}, to {}".format(self.from_user.username, self.to_user.username)

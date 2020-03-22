@@ -24,8 +24,6 @@ class BaseRouter extends React.Component {
 
       <div>
         <Route exact path = '/home'  render={(props) => <ArticleList {...props} isAuthenticated={this.props.isAuthenticated} />} />
-
-
         <Route exact path = '/article/:id' component = {ArticleDetail}  />
         <Route exact path = '/' component = {LoginForm} />
         <Route exact path = '/signup/' component= {Signup} />

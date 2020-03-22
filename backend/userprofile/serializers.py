@@ -6,19 +6,22 @@ from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
+# Used in React infinite in views.py
+# Purpose: Grabbing fields of both person info and post info
 class PostUserSerializer(serializers.ModelSerializer):
 
     class Meta:
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio')
 
+# Used in UserListView, UserDetailView in views.py
+# Purpose: UserListView it shows a list and UserDetailView grabbing person info
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
     get_post = serializers.ReadOnlyField()
-
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'get_post')
+        fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'get_post', 'friends')
 
 class PostSerializer(serializers.ModelSerializer):
 
@@ -88,3 +91,10 @@ class RegisterSerializer(serializers.Serializer):
         setup_user_email(request, user1, [])
         user1.save()
         return user1
+
+
+
+class FriendRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.FriendRequest
+        fields = ( 'to_user', 'from_user' )
