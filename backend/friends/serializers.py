@@ -4,7 +4,10 @@ from rest_framework import serializers
 class UserFriendListSerializer(serializers.ModelSerializer):
 
     # friends = serializers.SerializerMethodField()
+    user = serializers.SerializerMethodField()
 
+    def get_user(self, obj):
+        return obj.user.username
     class Meta:
         model = Profile
         fields = (
