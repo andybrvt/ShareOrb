@@ -13,7 +13,7 @@ class UserView extends React.Component {
 	}
 
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/userprofile/userlist/')
+    axios.get('http://127.0.0.1:8000/userprofile/exclude-user')
       .then(res=> {
         this.setState({
           profileList:res.data,

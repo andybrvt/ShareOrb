@@ -4,13 +4,32 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 import './Containers.css'
+import { authAxios } from '../components/util';
+
 const { Header, Footer, Content } = Layout;
 
 // boarder layout that wraps around each of the other containers
 // imported all actions, therefore it allows you to call the functions
 // from the
 class CustomLayout extends React.Component {
+  state = {
+    username: ''
+  }
+
+  async componentDidMount(){
+
+    await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
+      .then(res=> {
+        console.log(res.data)
+        console.log(res.data.id)
+        this.setState({
+          username: res.data.username,
+       });
+     });
+   }
+
     render() {
+      const currentUser = this.state.username
 
 
 
@@ -72,6 +91,25 @@ class CustomLayout extends React.Component {
                     <div> </div>
                 }
 
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="3">
+                        <Link to="/userview">Users</Link>
+                    </Menu.Item>
+                    :
+                    <div> </div>
+                }
+
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="4">
+                        <Link to={'/'+this.state.username}>Profile</Link>
+                    </Menu.Item>
+                    :
+                    <div> </div>
+                }
+
+
 
 
 
@@ -79,6 +117,7 @@ class CustomLayout extends React.Component {
                 </Header>
                 <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1200, marginRight: 'auto', marginLeft: 'auto'}}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
+
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
                     <Breadcrumb.Item><Link to="/">List</Link></Breadcrumb.Item>
                 </Breadcrumb>

@@ -17,7 +17,7 @@ const UserProfileCover = (props) => {
 
   }
   >
-    <Meta title={<a href={'/test/'+props.data.username}>{props.data.username}</a>} />
+    <Meta title={<a href={'/'+props.data.username}>{props.data.username}</a>} />
   </Card>
 
   );
