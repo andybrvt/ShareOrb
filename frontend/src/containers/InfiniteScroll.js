@@ -31,7 +31,7 @@ class InfiniteList extends React.PureComponent {
   }
 
   componentWillMount() {
-    console.log(this.props.blah)
+    console.log(this.props)
     this.loadPost();
   };
 

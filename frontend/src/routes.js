@@ -10,25 +10,22 @@ import PersonalProfile from './containers/PersonalProfile'
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
-console.log(this)
-
 
 class BaseRouter extends React.Component {
 
   render() {
 
-		console.log("HIHIHHIIHIh")
-    console.log(this.props)
+    console.log(this.props);
 		return (
 
 
       <div>
         <Route exact path = '/home'  render={(props) => <ArticleList {...props} isAuthenticated={this.props.isAuthenticated} />} />
-        <Route exact path = '/article/:id' component = {ArticleDetail}  />
+        <Route exact path = '/article/:id' render={(props) => <ArticleDetail {...props} isAuthenticated={this.props.isAuthenticated} />}   />
         <Route exact path = '/' component = {LoginForm} />
         <Route exact path = '/signup/' component= {Signup} />
-        <Route exact path = '/userview/' component= {UserView} />
-        <Route exact path = '/:username/' component= {PersonalProfile} />
+        <Route exact path = '/userview/' render={(props) => <UserView {...props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/:username/' crender={(props) => <PersonalProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
       </div>
 

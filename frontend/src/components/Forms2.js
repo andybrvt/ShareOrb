@@ -21,22 +21,22 @@ class PostUpload extends React.Component{
  }
 
 
- handleFetchUserID = () => {
-    // authAxios
-    //   .get("current_user")
-    //   .then(res => {
-    //     this.setState({ testVar: res.data});
-    //     this.setState({ id: res.data.id });
-    //     this.setState({username:res.data.username});
-    //   })
-    //   .catch(err => {
-    //     this.setState({ error: err });
-    //   });
-  };
+ // handleFetchUserID = () => {
+ //    // authAxios
+ //    //   .get("current_user")
+ //    //   .then(res => {
+ //    //     this.setState({ testVar: res.data});
+ //    //     this.setState({ id: res.data.id });
+ //    //     this.setState({username:res.data.username});
+ //    //   })
+ //    //   .catch(err => {
+ //    //     this.setState({ error: err });
+ //    //   });
+ //  };
 
 	async componentDidMount () {
     await authAxios
-      .get("current_user")
+      .get("current-user")
       .then(res => {
         this.setState({ testVar: res.data});
         this.setState({ id: res.data.id });
@@ -45,18 +45,30 @@ class PostUpload extends React.Component{
       .catch(err => {
         this.setState({ error: err });
       });
+// //
+// // 	// axios.get("http://127.0.0.1:8000/userprofile/user-id")
+// // 	// 		.then(res=> {
+// // 	// 			this.setState({
+// // 	// 				id: res.data.id,
+// // 	// 				username: res.data.currentUser,
+// // 	// 		 });
+// // 	// 		});
+//  console.log(this.props)
+};
 
-	// axios.get("http://127.0.0.1:8000/userprofile/user-id")
-	// 		.then(res=> {
-	// 			this.setState({
-	// 				id: res.data.id,
-	// 				username: res.data.currentUser,
-	// 		 });
-	// 		});
-	// 		console.log(this.props.id)
-	//     console.log(this.state.caption)
-	}
 
+   // componentWillReceiveProps(newProps){
+   //     console.log(newProps)
+   //     if (newProps.token !== this.props.token) {
+   //       console.log('component updated')
+   //       authAxios.get("current-user")
+   //       .then(res =>{
+   //         this.setState({id: res.data.id});
+   //         this.setState({username:res.data.username});
+   //       });
+   //     }
+   //     console.log(newProps.token)
+   //   };
 
 
 
@@ -142,8 +154,9 @@ uploadPost = (post) =>{
 	}
 
 	render(){
+    console.log(this.props.data)
 	return (
-	<Container style={{paddingTop: '10%',zIndex:'-1'}}>
+	<Container style={{paddingTop: '10',zIndex:'-1'}}>
 	  <form onSubmit={this.onFormSubmit}>
 	    <div className="upload-container">
 				<h1 className="heading">#New post</h1>
@@ -184,7 +197,7 @@ uploadPost = (post) =>{
 };
 
 const mapStateToProps = state => {
-  console.log(state)
+
   return {
     token: state.token,
   };

@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../store/actions/auth";
 
 
@@ -29,6 +30,7 @@ class LoginForm extends React.Component {
     const { username, password } = this.state;
     this.props.login(username, password)
     this.setState({login: true })
+    // this.props.history.push('/home')
   };
 
   render() {

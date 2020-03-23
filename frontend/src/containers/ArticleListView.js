@@ -11,6 +11,8 @@ class ArticleList extends React.Component {
 		//this object holds all the profiles that we put in
 		// the viewsets
 		profileList:[],
+		username: '',
+		id: '',
 	}
 
 	//
@@ -47,6 +49,8 @@ class ArticleList extends React.Component {
 					profileList:res.data,
 				});
 			});
+
+
 		}
 	}
 
@@ -101,13 +105,12 @@ class ArticleList extends React.Component {
 
 
 			<div>
-      {isLoggedIn
-        ? <div>
-				 		<PostUpload />
+			{isLoggedIn ?
+				<div>
+				 		<PostUpload data = {this.props}/>
 						<InfiniteScroll />
 				 </div>
-        : <div> Not logged in! </div>
-      }
+				 : <div> Not logged in! </div>}
     </div>
 
 
@@ -126,5 +129,8 @@ const mapStateToProps = state => {
     token: state.token
   }
 }
-
+// // {isLoggedIn
+// //   ?
+// : <div> Not logged in! </div>
+// }
 export default connect(mapStateToProps)(ArticleList);
