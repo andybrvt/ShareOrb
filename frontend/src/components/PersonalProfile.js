@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Button} from 'antd';
+import {Button, Form} from 'antd';
 import { authAxios } from '../components/util';
 
 class PersonalProfile extends React.Component{
@@ -11,6 +11,7 @@ class PersonalProfile extends React.Component{
 		last_name: '',
 		bio: '',
     friends: [],
+    currentUserId: '',
   }
 
   async componentDidMount(){
@@ -36,16 +37,13 @@ class PersonalProfile extends React.Component{
        });
      });
 
-
-      // await authAxios.get('http://127.0.0.1:8000/friends/'+userID)
-      //    .then(res=> {
-      //      this.setState({
-      //        friends: res.data.friends
-      //
-      //     });
-      //   });
-
    }
+
+      onClickSend = (e) =>{
+        const username = this.props.match.params.username;
+        authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+        }
+
 
 
 
@@ -55,15 +53,21 @@ class PersonalProfile extends React.Component{
     console.log(this.props)
     console.log(this.state.friends)
       return(
+        <Form>
         <div>
         {this.state.username}
         {this.state.first_name}
         {this.state.last_name}
         {this.state.bio}
         {this.state.friends}
-      
+        <br></br>
+        <div>
+        <Button type="primary" onClick ={this.onClickFriends}>Add friend</Button>
+        <Button type="primary">Friends</Button>
+        </div>
 
         </div>
+        </Form>
 
       )
 

@@ -37,7 +37,7 @@ class LoginForm extends React.Component {
     console.log(this.state)
     const { error, loading, token } = this.props;
     const { username, password } = this.state;
-    if (token) {
+if (token) {
        return <Redirect to="/home" />
 
     }
@@ -76,13 +76,12 @@ class LoginForm extends React.Component {
                   type="password"
                 />
 
-                  <Button
+                <Button
                   color="teal"
                   fluid
                   size="large"
                   loading={loading}
                   disabled={loading}>
-
                   Login
                 </Button>
               </Segment>

@@ -6,7 +6,7 @@ import LoginForm from './containers/Login';
 import Signup from './containers/Signup';
 import UserView from './containers/userView';
 import InfiniteList from './containers/InfiniteScroll';
-import PersonalProfile from './containers/PersonalProfile'
+import PersonalProfile from './components/PersonalProfile'
 import UserProfile from './containers/UserProfile'
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
