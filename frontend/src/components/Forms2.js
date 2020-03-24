@@ -38,6 +38,7 @@ class PostUpload extends React.Component{
     await authAxios
       .get("current-user")
       .then(res => {
+        console.log(res.data)
         this.setState({ testVar: res.data});
         this.setState({ id: res.data.id });
         this.setState({username:res.data.username});

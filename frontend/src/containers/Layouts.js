@@ -30,6 +30,7 @@ class CustomLayout extends React.Component {
 
     render() {
       const currentUser = this.state.username
+      console.log(this.props)
 
 
 
@@ -85,28 +86,32 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="1">
-                        <Link to="/home">Home</Link>
+                        <a href='/home'>Home</a>
                     </Menu.Item>
                     :
-                    <div> </div>
+                    <Menu.Item key="1">
+                    </Menu.Item>
                 }
 
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="3">
-                        <Link to="/userview">Users</Link>
+                        <a href='/userview'>Users</a>
                     </Menu.Item>
                     :
-                    <div> </div>
+                    <Menu.Item key="3">
+                    </Menu.Item>
+
                 }
 
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="4">
-                        <Link to={'/'+this.state.username}>Profile</Link>
+                        <a href='/currentuser'>Profile</a>
                     </Menu.Item>
                     :
-                    <div> </div>
+                    <Menu.Item key="4">
+                    </Menu.Item>
                 }
 
 

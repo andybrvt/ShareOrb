@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import InfiniteScroll from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
+import Form3 from '../components/Forms3';
 
 class ArticleList extends React.Component {
 
@@ -99,7 +100,6 @@ class ArticleList extends React.Component {
 	render() {
 		console.log("HIHIHHIIHIh")
 		console.log(this.props)
-		console.log(this.props.isAuthenticated)
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
 
@@ -107,7 +107,7 @@ class ArticleList extends React.Component {
 			<div>
 			{isLoggedIn ?
 				<div>
-				 		<PostUpload data = {this.props}/>
+				 		<Form3 data = {this.props}/>
 						<InfiniteScroll />
 				 </div>
 				 : <div> Not logged in! </div>}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Button} from 'antd';
 import { authAxios } from '../components/util';
 
-class PersonalProfile extends React.Component{
+class UserProfile extends React.Component{
   state = {
     id:'',
 		username:'',
@@ -21,7 +21,7 @@ class PersonalProfile extends React.Component{
     console.log(username)
 
 
-    await authAxios.get('http://127.0.0.1:8000/userprofile/'+username+'/')
+    await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
         console.log(res.data)
         console.log(res.data.id)
@@ -61,7 +61,8 @@ class PersonalProfile extends React.Component{
         {this.state.last_name}
         {this.state.bio}
         {this.state.friends}
-      
+        <div> hey </div>
+        <Button type="primary">Primary</Button>
 
         </div>
 
@@ -70,4 +71,4 @@ class PersonalProfile extends React.Component{
       }
     };
 
-export default PersonalProfile;
+export default UserProfile;
