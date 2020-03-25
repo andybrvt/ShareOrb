@@ -45,6 +45,12 @@ class PersonalProfile extends React.Component{
         }
 
 
+      onClickCancel = (e) =>{
+        const username = this.props.match.params.username;
+        authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/cancel/'+username)
+        }
+
+
 
 
 
@@ -56,13 +62,16 @@ class PersonalProfile extends React.Component{
         {this.props.username}
         <br></br>
         {this.props.first_name}
+        <br></br>
         {this.props.last_name}
+        <br></br>
         {this.props.bio}
+        <br></br>
         {this.props.friends}
         <br></br>
         <div>
         <Button type="primary" onClick ={this.onClickSend}>Add friend</Button>
-        <Button type="primary">Friends</Button>
+        <Button type="primary" onClick = {this.onClickCancel}>Cancel Friend Request</Button>
         </div>
 
         </div>

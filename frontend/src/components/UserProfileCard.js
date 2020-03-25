@@ -10,7 +10,7 @@ const UserProfileCover = (props) => {
   console.log(props.data.username)
 
   const onClickSend = (e) =>{
-    const username = this.props.match.params.username;
+    const username = this.props.username;
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
     }
   // let temp="http://127.0.0.1:8000"+props.data.image;
@@ -25,7 +25,7 @@ const UserProfileCover = (props) => {
   }
   >
     <a href={'/userview/'+props.data.username}>{props.data.username}</a>
-    <Button> Hi </Button>
+    <Button type="primary" onClick ={onClickSend}>Add friend</Button>
   </Card>
 
   );
