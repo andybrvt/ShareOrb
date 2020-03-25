@@ -6,8 +6,8 @@ import LoginForm from './containers/Login';
 import Signup from './containers/Signup';
 import UserView from './containers/userView';
 import InfiniteList from './containers/InfiniteScroll';
-import PersonalProfile from './components/PersonalProfile'
-import UserProfile from './containers/UserProfile'
+import UserProfile from './containers/UserProfile';
+import UserProfileView from './containers/Profileview';
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -26,7 +26,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/' component = {LoginForm} />
         <Route exact path = '/signup/' component= {Signup} />
         <Route exact path = '/userview/' render={(props) => <UserView {...props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/:username/' render={(props) => <PersonalProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/userview/:username' render={(props) => <UserProfileView {...props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/currentuser/' render={(props) => <UserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
       </div>

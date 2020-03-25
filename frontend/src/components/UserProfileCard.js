@@ -24,7 +24,7 @@ const UserProfileCover = (props) => {
 
   }
   >
-    <a href={'/'+props.data.username}>{props.data.username}</a>
+    <a href={'/userview/'+props.data.username}>{props.data.username}</a>
     <Button> Hi </Button>
   </Card>
 

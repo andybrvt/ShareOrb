@@ -3,6 +3,8 @@ import axios from 'axios';
 import {Button} from 'antd';
 import { authAxios } from '../components/util';
 
+// This one is for the current user
+
 class UserProfile extends React.Component{
   state = {
     id:'',
@@ -35,16 +37,6 @@ class UserProfile extends React.Component{
 
        });
      });
-
-
-      // await authAxios.get('http://127.0.0.1:8000/friends/'+userID)
-      //    .then(res=> {
-      //      this.setState({
-      //        friends: res.data.friends
-      //
-      //     });
-      //   });
-
    }
 
 
@@ -62,6 +54,10 @@ class UserProfile extends React.Component{
         {this.state.bio}
         {this.state.friends}
         <div> hey </div>
+        <Button type="primary">Primary</Button>
+        <Button type="primary">Primary</Button>
+        <Button type="primary">Primary</Button>
+        <Button type="primary">Primary</Button>
         <Button type="primary">Primary</Button>
 
         </div>

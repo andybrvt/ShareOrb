@@ -4,6 +4,7 @@ import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
 import UserProfileCover from '../components/UserProfileCard.js'
 import { Image } from 'react-bootstrap';
+import { authAxios } from '../components/util';
 
 // hods the profile cards in a list
 class UserView extends React.Component {
@@ -12,20 +13,22 @@ class UserView extends React.Component {
 		profileList:[],
 	}
 
-  componentDidMount() {
-    axios.get('http://127.0.0.1:8000/userprofile/exclude-user')
-      .then(res=> {
-        this.setState({
-          profileList:res.data,
-       });
-      });
+  componentWillReceiveProps(newProps) {
+    console.log(newProps)
+    if(newProps.isAuthenticated){
+      authAxios.get('http://127.0.0.1:8000/userprofile/exclude-user')
+        .then(res=> {
+          console.log(res.data)
+          this.setState({
+            profileList:res.data,
+         });
+        });
+    }
   }
 
 // the profileList.map will loop through all the objects
 	render() {
-
-    console.log("THIS IS THE USER VIEW");
-    console.log(this.state.profileList);
+    console.log(this.props)
     const {profileList} = this.state
       // <img class="ui medium circular image" src={nature1}>
       // <div> Initial test </div>

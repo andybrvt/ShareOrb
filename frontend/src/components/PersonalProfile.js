@@ -4,40 +4,40 @@ import {Button, Form} from 'antd';
 import { authAxios } from '../components/util';
 
 class PersonalProfile extends React.Component{
-  state = {
-    id:'',
-		username:'',
-		first_name: '',
-		last_name: '',
-		bio: '',
-    friends: [],
-    currentUserId: '',
-  }
+  // state = {
+  //   id:'',
+	// 	username:'',
+	// 	first_name: '',
+	// 	last_name: '',
+	// 	bio: '',
+  //   friends: [],
+  //   currentUserId: '',
+  // }
+  //
+  // async componentDidMount(){
+  //   console.log('here')
+  //   const username = this.props.match.params.username;
+  //   const userID = this.props.match.params.id;
+  //   console.log(this.props.match.params)
+  //   console.log(username)
 
-  async componentDidMount(){
-    console.log('here')
-    const username = this.props.match.params.username;
-    const userID = this.props.match.params.id;
-    console.log(this.props.match.params)
-    console.log(username)
 
+    // await authAxios.get('http://127.0.0.1:8000/userprofile/'+username+'/')
+    //   .then(res=> {
+    //     console.log(res.data)
+    //     console.log(res.data.id)
+    //     this.setState({
+    //       id:res.data.id,
+    //       username: res.data.username,
+    //       first_name: res.data.first_name,
+    //       last_name: res.data.last_name,
+    //       bio: res.data.bio,
+    //       friends: res.data.friends,
+    //
+    //    });
+    //  });
 
-    await authAxios.get('http://127.0.0.1:8000/userprofile/'+username+'/')
-      .then(res=> {
-        console.log(res.data)
-        console.log(res.data.id)
-        this.setState({
-          id:res.data.id,
-          username: res.data.username,
-          first_name: res.data.first_name,
-          last_name: res.data.last_name,
-          bio: res.data.bio,
-          friends: res.data.friends,
-
-       });
-     });
-
-   }
+   // }
 
       onClickSend = (e) =>{
         const username = this.props.match.params.username;
@@ -50,19 +50,18 @@ class PersonalProfile extends React.Component{
 
   render(){
 
-    console.log(this.props)
-    console.log(this.state.friends)
       return(
         <Form>
         <div>
-        {this.state.username}
-        {this.state.first_name}
-        {this.state.last_name}
-        {this.state.bio}
-        {this.state.friends}
+        {this.props.username}
+        <br></br>
+        {this.props.first_name}
+        {this.props.last_name}
+        {this.props.bio}
+        {this.props.friends}
         <br></br>
         <div>
-        <Button type="primary" onClick ={this.onClickFriends}>Add friend</Button>
+        <Button type="primary" onClick ={this.onClickSend}>Add friend</Button>
         <Button type="primary">Friends</Button>
         </div>
 
