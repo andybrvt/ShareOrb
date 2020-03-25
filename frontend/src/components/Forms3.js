@@ -18,8 +18,8 @@ const Form3 = (props) => {
   const[stage, setStage] = useState('empty');
   const[imageblob, setImageblob] = useState("");
   console.log(token)
-  console.log(id)
-  console.log(username)
+  console.log(props.data.id)
+  console.log(props.data.username)
   console.log(props)
 
 
@@ -69,15 +69,14 @@ const Form3 = (props) => {
 
   const  onFormSubmit = (e) =>{
 		e.preventDefault()
-		if (id && caption){
+		if (props.data.id && caption){
       console.log('it got summited')
 			const post = {
 				'image': image,
 				'caption': caption,
-				'user_id': id,
-				'username': username,
+				'user_id': props.data.id,
+				'username': props.data.username,
 			};
-			console.log(post)
 			make_post(post);
 			window.location.reload(true)
 		}

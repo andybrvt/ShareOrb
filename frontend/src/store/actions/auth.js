@@ -1,5 +1,8 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
+import React, {useState, useEffect } from 'react';
+import  { authAxios } from '../../components/util';
+
 
 export const authStart = () => {
   return {
@@ -7,10 +10,12 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = token => {
+export const authSuccess = (token, username, id) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    token: token
+    token: token,
+    username: username,
+    id: id
   };
 };
 
@@ -38,26 +43,36 @@ export const checkAuthTimeout = expirationTime => {
 };
 
 export const authLogin = (username, password) => {
+  // const[id, setID] = useState(null);
+  // const[username1, setUsername1] = useState('');
   return dispatch => {
     dispatch(authStart());
-    axios
-      .post("http://127.0.0.1:8000/rest-auth/login/", {
-        username: username,
-        password: password
-      })
-      .then(res => {
-        const token = res.data.key;
+      axios.all([
+        axios.post("http://127.0.0.1:8000/rest-auth/login/", {
+          username: username,
+          password: password
+        }),
+        axios.get('http://127.0.0.1:8000/userprofile/admin')
+      ])
+      .then(axios.spread((res1, res2) => {
+        console.log(res1.data)
+        console.log(res2.data)
+        // setUsername1(res2.data.username)
+        // setID(res2.data.id)
+        const token = res1.data.key;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(token,res2.data.username, res2.data.id));
         dispatch(checkAuthTimeout(3600));
-      })
+      }))
       .catch(err => {
         dispatch(authFail(err));
       });
   };
 };
+
+
 
 export const authSignup = (username, email, password1, password2) => {
   return dispatch => {
