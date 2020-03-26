@@ -21,8 +21,6 @@ const authSuccess = (state, action) => {
     token: action.token,
     error: null,
     loading: false,
-    username: action.username,
-    id: action.id
   });
 };
 
@@ -39,6 +37,13 @@ const authLogout = (state, action) => {
   });
 };
 
+const addCredentials = (state, action) => {
+  return updateObject(state, {
+    username: action.username,
+    id: action.id,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -49,6 +54,8 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+    case actionTypes.ADD_CREDENTIALS:
+      return addCredentials(state, action);
     default:
       return state;
   }

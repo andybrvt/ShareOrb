@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import InfiniteScroll from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import Form3 from '../components/Forms3';
+import * as actions from '../store/actions/auth';
 
 class ArticleList extends React.Component {
 
@@ -16,17 +17,13 @@ class ArticleList extends React.Component {
 		id: '',
 	}
 
-	//
-	// componentWillReceiveProps(nextProps){
-	// 	console.log('TESTETSETSSTESTSTSESTSTESTST');
-	// 	const state2 = this.props.location.state
-	// 	console.log(state2);
-	  // if (nextProps.location.state === 'desiredState') {
-	  //   console.log("ONE TIME ONLY");
-  // }
 
+	// componentDidMount() {
+	// 	this.props.grabUserCredentials();
+	// }
 
 	componentWillReceiveProps(newProps){
+		this.props.grabUserCredentials();
 		//this componentDidMount will pull all the profiles from viewsets and
 		// put all of them into profileList
 		// if(this.state.pageRefresh==true){
@@ -55,48 +52,6 @@ class ArticleList extends React.Component {
 		}
 	}
 
-
-
-		// if (prevState.profileList !== this.state.profileList) {
-
-			// window.location.reload()
-		// }
-
-	// }
-
-//this will return all the profiles on to one page
-// In article, the data will gives Article a children to be called in ArticleDetailView
-//Article takes in the props data then the props will be presented in
-//the Article.js and then renedered here
-//ProfilePost will then be the form and will take in parameters for the
-//handlesubmit and will do a post function
-
-// <ProfilePost
-// 	requestType ="post"
-// 	articleID = {null}
-// 	btnText = 'Create'
-// />
-
-
-// {
-// 		this.props.isAuthenticated ?
-//	<PostUpload />
-// <InfiniteScroll />
-// 		:
-
-// <div> NOT LOGGED IN </div>
-// 	}
-
-//
-// function showInfo(props) {
-//   const isLoggedIn = props.isLoggedIn;
-//   if (isLoggedIn) {
-//     return <UserGreeting />;
-//   }
-//   return <GuestGreeting />;
-// }
-
-
 	render() {
 		console.log("HIHIHHIIHIh")
 		console.log(this.props)
@@ -113,13 +68,6 @@ class ArticleList extends React.Component {
 				 : <div> Not logged in! </div>}
     </div>
 
-
-
-
-
-
-
-
 		)
 	}
 }
@@ -127,11 +75,16 @@ class ArticleList extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.token,
-		
+
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    grabUserCredentials: () => dispatch(actions.grabUserCredentials()),
   }
 }
 // // {isLoggedIn
 // //   ?
 // : <div> Not logged in! </div>
 // }
-export default connect(mapStateToProps)(ArticleList);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
