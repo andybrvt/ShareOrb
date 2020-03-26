@@ -32,27 +32,6 @@ class CustomLayout extends React.Component {
       const currentUser = this.state.username
       console.log(this.props)
 
-
-
-
-  //   if(this.props.isAuthenticated) {
-    //   <Menu.Item key="2" onClick={this.props.logout}>
-    //       <Link to="/login">Logout</Link>
-    //   </Menu.Item>
-    //
-    //   // <Menu.Item key="1">
-    //   //     <Link to="/">Home</Link>
-    //   // </Menu.Item>
-    // }
-    // else {
-    //
-    //
-    //   <Menu.Item key="2">
-    //       <Link to="/login">Login</Link>
-    //   </Menu.Item>
-    //
-    // }
-
         return (
             <Layout className="layout">
                 <Header>
@@ -63,9 +42,6 @@ class CustomLayout extends React.Component {
                     defaultSelectedKeys={['2']}
                     style={{ lineHeight: '64px' }}
                 >
-
-
-
 
                 {
                     this.props.isAuthenticated ?
@@ -113,10 +89,6 @@ class CustomLayout extends React.Component {
                     <Menu.Item key="4">
                     </Menu.Item>
                 }
-
-
-
-
 
                 </Menu>
                 </Header>

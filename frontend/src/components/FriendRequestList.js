@@ -8,42 +8,39 @@ class FriendRequestList extends React.Component {
   constructor(props) {
     super(props);
   }
-     state = {
-       friendrequestlist: [],
+  state = {
+    friendrequestlist: [],
   };
 
-
-componentDidMount(){
-  authAxios.get('http://127.0.0.1:8000/userprofile/current-user/friends')
-  .then(res =>{
-    this.setState({
-      friendrequestlist:res.data,
-      })
-    }
-  )
-}
-
-  render(){
-    console.log(this.state.friendrequestlist)
+  componentDidMount(){
+    authAxios.get('http://127.0.0.1:8000/userprofile/current-user/friends')
+    .then(res =>{
+      this.setState({
+        friendrequestlist:res.data,
+        })
+      }
+    )
+  }
+  render() {
     const friendrequestlist = this.state
-    console.log(friendrequestlist)
     return(
-      <div>
-        <h3 style={{ marginBottom: 16 }}>Default Size</h3>
-        <List
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
-          bordered
-          dataSource = {this.state.friendrequestlist}
-          renderItem={item => (
-            <List.Item>
-               <div> hellow</div>
-            </List.Item>
-          )}
+      <List
+        itemLayout="horizontal"
+        dataSource={this.state.friendrequestlist}
+        renderItem={item => (
+      <List.Item>
+        <List.Item.Meta
+          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+          title={<a href="https://ant.design">{item.from_user}</a>}
+          description="Ant Design, a design language for background applications, is refined by Ant UED Team"
         />
-      </div>
-  )
+      </List.Item>
+    )}
+     />,
+    )
+  }
 }
-};
+
+
 
 export default FriendRequestList;
