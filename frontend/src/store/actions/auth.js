@@ -42,36 +42,77 @@ export const checkAuthTimeout = expirationTime => {
   };
 };
 
+
+export const actionAddCredentials = () => {
+  return {
+    type: actionTypes.ADD_CREDENTIALS,
+  };
+};
+
+
+
 export const authLogin = (username, password) => {
   // const[id, setID] = useState(null);
   // const[username1, setUsername1] = useState('');
   return dispatch => {
     dispatch(authStart());
-      axios.all([
+
         axios.post("http://127.0.0.1:8000/rest-auth/login/", {
           username: username,
           password: password
         }),
-        axios.get('http://127.0.0.1:8000/userprofile/admin')
-      ])
-      .then(axios.spread((res1, res2) => {
-        console.log(res1.data)
-        console.log(res2.data)
+
+
+      .then(res => {
+        console.log(res.data)
+
+
         // setUsername1(res2.data.username)
         // setID(res2.data.id)
-        const token = res1.data.key;
+        const token = res.data.key;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        const username1 = res.data.username;
+        const id = res.data.id;
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(authSuccess(token,res2.data.username, res2.data.id));
+        
+        dispatch(authSuccess(token,res.data.username, res.data.id));
         dispatch(checkAuthTimeout(3600));
       }))
       .catch(err => {
         dispatch(authFail(err));
       });
+
+        authAxios.get('http://127.0.0.1:8000/userprofile/admin')
+        .then(res => {
+
+          const username1 = res.data.username;
+          const id = res.data.id;
+          localStorage.setItem("username", username1);
+          localStorage.setItem("id", id)
+          dispatch(authSuccess(token,res.data.username, res.data.id));
+          dispatch(checkAuthTimeout(3600));
+
+        })
+        .catch(err) {
+          // handle error
+          console.log(err);
+        })
+
   };
 };
 
+// export const addCredentials = () => {
+//   return dispatch => {
+//     dispatch(authStart());
+//     authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
+//     .then(res => {
+//       console.log(res.data)
+//
+//
+//     })
+//   }
+// }
 
 
 export const authSignup = (username, email, password1, password2) => {
@@ -101,6 +142,8 @@ export const authSignup = (username, email, password1, password2) => {
 export const authCheckState = () => {
   return dispatch => {
     const token = localStorage.getItem("token");
+    const username = localStorage.getItem('username')
+    const id = localStorage.getItem('id')
     if (token === undefined) {
       dispatch(logout());
     } else {
@@ -108,7 +151,7 @@ export const authCheckState = () => {
       if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(token,username,id));
         dispatch(
           checkAuthTimeout(
             (expirationDate.getTime() - new Date().getTime()) / 1000
