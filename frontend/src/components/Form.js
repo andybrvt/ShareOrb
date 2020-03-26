@@ -26,6 +26,9 @@ const { Option } = Select;
 // Form used to make submissions for new post into the post
 // list
 class ProfilePost extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   // action that takes in 3 parameter event, requestType,
   // articleID. Depending on ArticleDetailView or ArticleListView
   // the handle submit will either post or put

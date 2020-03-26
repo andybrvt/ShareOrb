@@ -29,6 +29,8 @@ urlpatterns = [
 	path('friend-request/accept/<slug:username>', views.AcceptFriendRequest.as_view(), name='accept_request'),
 	path('friend-request/delete/<slug:username>', views.DeleteFriendRequest.as_view(), name='delete_request'),
 
+	path('current-user/friends', views.FriendRequestsToUser.as_view(), name='friend_request_list'),
+
 
 
 ]

@@ -8,6 +8,9 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 const FormItem = Form.Item;
 
 class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+  }
     state = {
       confirmDirty: false,
     };

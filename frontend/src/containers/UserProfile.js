@@ -6,6 +6,9 @@ import { authAxios } from '../components/util';
 // This one is for the current user
 
 class UserProfile extends React.Component{
+  constructor(props) {
+    super(props);
+  }
   state = {
     id:'',
 		username:'',

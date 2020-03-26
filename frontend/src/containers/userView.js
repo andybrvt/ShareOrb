@@ -8,6 +8,9 @@ import { authAxios } from '../components/util';
 
 // hods the profile cards in a list
 class UserView extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 // state as a list to just hold a list of the profiles (probally just show names and profile picture)
   state={
 		profileList:[],

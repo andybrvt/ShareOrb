@@ -157,3 +157,11 @@ class DeleteFriendRequest(APIView):
 		frequest = models.FriendRequest.objects.filter(from_user=from_user, to_user=request.user)
 		frequest.delete()
 		return Response('request delete')
+
+
+
+class FriendRequestsToUser(generics.ListAPIView):
+    serializer_class = serializers.FriendRequestSerializer
+    def get_queryset(self):
+        queryset = models.FriendRequest.objects.filter(to_user = self.request.user)
+        return queryset

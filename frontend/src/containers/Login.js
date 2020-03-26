@@ -14,6 +14,9 @@ import { authLogin } from "../store/actions/auth";
 
 
 class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     username: "",
     password: "",

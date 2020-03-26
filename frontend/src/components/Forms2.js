@@ -7,6 +7,9 @@ import { authAxios } from './util';
 import { connect } from "react-redux";
 
 class PostUpload extends React.Component{
+  constructor(props) {
+    super(props);
+  }
  formData = new FormData();
  state = {
 	 image:null,

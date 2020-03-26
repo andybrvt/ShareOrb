@@ -4,6 +4,9 @@ import {Button, Form} from 'antd';
 import { authAxios } from '../components/util';
 
 class PersonalProfile extends React.Component{
+  constructor(props) {
+    super(props);
+  }
   // state = {
   //   id:'',
 	// 	username:'',
@@ -49,6 +52,8 @@ class PersonalProfile extends React.Component{
         const username = this.props.match.params.username;
         authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/cancel/'+username)
         }
+
+
 
 
 

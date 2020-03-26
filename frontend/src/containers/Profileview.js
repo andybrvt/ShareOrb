@@ -10,6 +10,9 @@ import {Button, Form} from 'antd';
 // This view is to hold all the profiles of others that is not the current
 // user (its just teh container tho)
 class UserProfileView extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   state = {
     id:'',
