@@ -23,38 +23,23 @@ componentDidMount(){
   )
 }
 
-x
   render(){
     console.log(this.state.friendrequestlist)
+    const friendrequestlist = this.state
+    console.log(friendrequestlist)
     return(
-
       <div>
         <h3 style={{ marginBottom: 16 }}>Default Size</h3>
         <List
           header={<div>Header</div>}
           footer={<div>Footer</div>}
           bordered
+          dataSource = {this.state.friendrequestlist}
           renderItem={item => (
             <List.Item>
-              <Typography.Text mark>[ITEM]</Typography.Text> {item}
+               <div> hellow</div>
             </List.Item>
           )}
-        />
-        <h3 style={{ margin: '16px 0' }}>Small Size</h3>
-        <List
-          size="small"
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
-          bordered
-          renderItem={item => <List.Item>{item}</List.Item>}
-        />
-        <h3 style={{ margin: '16px 0' }}>Large Size</h3>
-        <List
-          size="large"
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
-          bordered
-          renderItem={item => <List.Item>{item}</List.Item>}
         />
       </div>
   )
