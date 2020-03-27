@@ -37,10 +37,6 @@ const Result = (props) => {
 
         }
 
-
-
-
-
       </li>
       <hr />
     </div>

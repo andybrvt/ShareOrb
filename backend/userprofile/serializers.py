@@ -96,6 +96,13 @@ class RegisterSerializer(serializers.Serializer):
 
 
 class FriendRequestSerializer(serializers.ModelSerializer):
+    to_user = serializers.SerializerMethodField()
+    from_user = serializers.SerializerMethodField()
+    def get_to_user(self,obj):
+        return obj.to_user.username
+    def get_from_user(self, obj):
+        return obj.from_user.username
+
     class Meta:
         model = models.FriendRequest
         fields = ( 'to_user', 'from_user' )

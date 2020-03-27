@@ -61,7 +61,7 @@ class Signup extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
-        console.log(values.password.length)
+        console.log(this.props)
         console.log(err)
         if (!err && values.password.length > 8) {
           this.props.onAuth(

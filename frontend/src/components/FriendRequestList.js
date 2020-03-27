@@ -1,4 +1,4 @@
-import { List, Typography, Avatar } from 'antd';
+import { List, Typography, Avatar, Button} from 'antd';
 import React from 'react';
 import { authAxios } from '../components/util';
 
@@ -22,8 +22,22 @@ class FriendRequestList extends React.Component {
       }
     )
   }
+
+  onClickAccept = (from_user) => {
+    const userID = from_user
+    console.log(userID)
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+userID)
+    }
+
+  onClickDecline = (from_user) => {
+    const userID = from_user;
+    console.log(userID)
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+userID)
+    }
+
   render() {
     const friendrequestlist = this.state
+    console.log(this.state.friendrequestlist.from_user)
     return(
       <List
         itemLayout="horizontal"
@@ -35,6 +49,8 @@ class FriendRequestList extends React.Component {
           title={<a href="https://ant.design">{item.from_user}</a>}
           description="Ant Design, a design language for background applications, is refined by Ant UED Team"
         />
+        <Button type="primary" onClick ={this.onClickAccept(item.from_user)}>Accept</Button>
+        <Button type="primary" onClick ={this.onClickDecline(item.from_user)}>Decline</Button>
       </List.Item>
     )}
      />
