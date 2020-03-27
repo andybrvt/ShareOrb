@@ -26,10 +26,13 @@ class PostUserSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
-    # friends = serializers.SerializerMethodField()
-    # def get_friends(obj,self):
-    #
-    #     return self.friends.username
+    friends = serializers.SerializerMethodField()
+    def get_friends(self, obj):
+        list = []
+        for i in obj.friends.all():
+            user = i.username
+            list.append(user)
+        return list
     get_post = serializers.ReadOnlyField()
     class Meta:
         model = models.User

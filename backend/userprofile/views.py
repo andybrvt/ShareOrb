@@ -91,8 +91,18 @@ def current_user(request):
 class UserList(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
     def get_queryset(self):
-        queryset = models.User.objects.exclude(username = self.request.user)
+        list = []
+        temp=(self.request.user.friends.all())
+        for i in temp:
+            list.append(i.username)
+        list.append(self.request.user)
+
+        # Your can exclude a list by using keyword __in
+        # This is filtering by username in the list
+        queryset = models.User.objects.exclude(username__in = list)
         return queryset
+
+
 
 # List of friend request that is sent out
 class FriendRequestList(generics.ListAPIView):
@@ -148,7 +158,7 @@ class DeleteFriends(APIView):
         currUser=models.User.objects.get(username=request.user)
         currUser.friends.remove(userSelected)
         return Response('deleted friend')
-    
+
 
 
 
