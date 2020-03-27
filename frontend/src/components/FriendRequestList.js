@@ -10,6 +10,7 @@ class FriendRequestList extends React.Component {
 
     this.state = {
       friendrequestlist: [],
+
     };
 
 
@@ -28,16 +29,16 @@ class FriendRequestList extends React.Component {
     )
   }
 
-  onClickAccept = (from_user) => {
-    const userID = from_user
+  onClickAccept = (userID) => {
+    const user = userID
     console.log(userID)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+userID)
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+user)
     }
 
-  onClickDecline = (from_user) => {
-    const userID = from_user;
+  onClickDecline = (userID) => {
+    const user = userID
     console.log(userID)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+userID)
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+user)
     }
 
   render() {
@@ -54,8 +55,10 @@ class FriendRequestList extends React.Component {
           title={<a href="https://ant.design">{item.from_user}</a>}
           description="Ant Design, a design language for background applications, is refined by Ant UED Team"
         />
-        <Button type="primary" onClick ={this.onClickAccept(item.from_user)}>Accept</Button>
-        <Button type="primary" onClick ={this.onClickDecline(item.from_user)}>Decline</Button>
+
+        <Button type="primary" onClick ={() =>this.onClickAccept(item.from_user)}>Accept</Button>
+        <Button type="primary" onClick ={() =>this.onClickDecline(item.from_user)}>Decline</Button>
+
       </List.Item>
     )}
      />
