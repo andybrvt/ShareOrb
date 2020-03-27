@@ -9,9 +9,14 @@ from allauth.account.utils import setup_user_email
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
 class PostUserSerializer(serializers.ModelSerializer):
-    # friends = serializers.SerializerMethodField()
-    # def get_friends(obj,self):
-    #     return obj.friends.username
+    friends = serializers.SerializerMethodField()
+    def get_friends(self, obj):
+        print(obj.friends.all().first().username)
+        list = []
+        for i in obj.friends.all():
+            user = i.username
+            list.append(user)
+        return list
     class Meta:
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio', 'friends')
@@ -21,6 +26,10 @@ class PostUserSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
+    # friends = serializers.SerializerMethodField()
+    # def get_friends(obj,self):
+    #
+    #     return self.friends.username
     get_post = serializers.ReadOnlyField()
     class Meta:
         model = models.User

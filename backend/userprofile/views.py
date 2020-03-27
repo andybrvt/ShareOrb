@@ -25,18 +25,6 @@ from django.shortcuts import render, get_object_or_404
 
 class UserIDView(APIView):
     def get(self, request, *args, **kwargs):
-        print(request.COOKIES)
-        print(request)
-        print(request.user)
-        print(request.user.id)
-        # print(user)
-        # print(models.User.objects.all())
-        # temp=(models.User.objects)
-        # print(temp)
-        # print(temp.get(id=2).id)
-
-
-
         return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
 
 # Grabs ALL of the users
@@ -46,9 +34,7 @@ class ListAll(generics.ListAPIView):
 
 class UserListView(generics.ListAPIView):
     queryset = models.User.objects.all()
-    print(queryset)
     serializer_class = serializers.UserSerializer
-    print(serializer_class)
 
 # Grabs individual user in the url with username
 class UserDetailView(generics.RetrieveAPIView):
@@ -127,7 +113,6 @@ class SendFriendRequest(APIView):
 class CancelFriendRequest(APIView):
 	def post(self, request, username, *args, **kwargs):
 		user = get_object_or_404(models.User, username = username)
-		print(user)
 		frequest = models.FriendRequest.objects.filter(
 			from_user=request.user,
 			to_user=user)
@@ -140,11 +125,9 @@ class CancelFriendRequest(APIView):
 class AcceptFriendRequest(APIView):
     def post(self, request, username, *args, **kwargs):
         from_user = get_object_or_404(models.User, username = username)
-        print('start')
         frequest = models.FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
         user1 = frequest.to_user
         user2 = from_user
-        print('reached')
         user1.friends.add(user2)
         user2.friends.add(user1)
         frequest.delete()
@@ -165,7 +148,7 @@ class DeleteFriends(APIView):
         currUser=models.User.objects.get(username=request.user)
         currUser.friends.remove(userSelected)
         return Response('deleted friend')
-        # print(models.User.friends)
+    
 
 
 
