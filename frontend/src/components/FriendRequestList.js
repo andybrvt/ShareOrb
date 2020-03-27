@@ -1,4 +1,4 @@
-import { List, Typography } from 'antd';
+import { List, Typography, Avatar } from 'antd';
 import React from 'react';
 import { authAxios } from '../components/util';
 
@@ -15,6 +15,7 @@ class FriendRequestList extends React.Component {
   componentDidMount(){
     authAxios.get('http://127.0.0.1:8000/userprofile/current-user/friends')
     .then(res =>{
+      console.log(res)
       this.setState({
         friendrequestlist:res.data,
         })
@@ -36,7 +37,7 @@ class FriendRequestList extends React.Component {
         />
       </List.Item>
     )}
-     />,
+     />
     )
   }
 }

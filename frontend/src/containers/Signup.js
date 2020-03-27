@@ -74,7 +74,7 @@ class Signup extends React.Component {
             values.password,
             values.confirm,
           );
-          this.props.history.push('/');
+          this.props.history.push('/home');
         }
     });
   }
