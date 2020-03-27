@@ -57,8 +57,7 @@ class FriendRequestList extends React.Component {
         />
 
         <Button type="primary" onClick ={() =>this.onClickAccept(item.from_user)}>Accept</Button>
-        <Button type="primary" onClick ={() =>this.onClickDecline(item.from_user)}>Decline</Button>
-
+        <Button danger style={{ background: "white", color: "red" }} onClick ={() =>this.onClickDecline(item.from_user)}>Decline</Button>
       </List.Item>
     )}
      />
