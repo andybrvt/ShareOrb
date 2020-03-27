@@ -7,10 +7,15 @@ import { authAxios } from '../components/util';
 class FriendRequestList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      friendrequestlist: [],
+    };
+
+
+    // this.onClickAccept = this.onClickAccept.bind(this);
+    // this.onClickDecline = this.onClickDecline.bind(this);
   }
-  state = {
-    friendrequestlist: [],
-  };
 
   componentDidMount(){
     authAxios.get('http://127.0.0.1:8000/userprofile/current-user/friends')
