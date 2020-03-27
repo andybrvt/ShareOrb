@@ -159,6 +159,15 @@ class DeleteFriendRequest(APIView):
 		return Response('request delete')
 
 
+class DeleteFriends(APIView):
+    def post(self, request, username, *args, **kwargs):
+        userSelected = get_object_or_404(models.User, username = username)
+        currUser=models.User.objects.get(username=request.user)
+        currUser.friends.remove(userSelected)
+        return Response('deleted friend')
+        # print(models.User.friends)
+
+
 
 class FriendRequestsToUser(generics.ListAPIView):
     serializer_class = serializers.FriendRequestSerializer
