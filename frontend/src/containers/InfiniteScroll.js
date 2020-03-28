@@ -3,8 +3,7 @@ import axios from 'axios';
 import Article from '../components/Article';
 import Result from '../components/Listitems';
 
-
-
+// Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.PureComponent {
   constructor(props){
     super(props);
@@ -31,14 +30,12 @@ class InfiniteList extends React.PureComponent {
   }
 
   componentWillMount() {
-    console.log(this.props)
     this.loadPost();
   };
 
   loadPost = () => {
      this.setState({loading: true}, () => {
        const {offset, limit} = this.state;
-
        axios.get(
          'http://127.0.0.1:8000/userprofile/infinite-post/?limit='+limit+'&offset='+offset
 
@@ -46,17 +43,13 @@ class InfiniteList extends React.PureComponent {
        .then(res => {
          const newPost = res.data.post;
          const hasMore = res.data.has_more;
-         // console.log(this.state.post+": "+newPost);
-         // console.log(res.data.post);
          this.setState({
            hasMore,
            loading: false,
            post:  [...this.state.post, ...newPost],
            offset: offset + limit,
-
          });
        })
-
        .catch(err => {
          this.setState({
            error: err.message,
@@ -67,9 +60,6 @@ class InfiniteList extends React.PureComponent {
   };
 
   render () {
-    console.log('hit');
-    console.log(this.state);
-    console.log(this.state.post);
     const { error, hasMore, loading, post} = this.state
     return (
       <div style={{overflowY: 'scroll', flex: 1}}>
@@ -77,7 +67,6 @@ class InfiniteList extends React.PureComponent {
       <p> Scroll down to load more </p>
       <hr />
       {post.map((j,index) => {
-        // console.log(j)
         return <Result data = {j} key ={index} />
       })}
       {error  && <div>{error}</div>}

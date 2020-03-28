@@ -82,7 +82,7 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="4">
-                        <a href='/currentuser'>Profile</a>
+                        <a href='/current-user'>Profile</a>
                     </Menu.Item>
                     :
                     <Menu.Item key="4">
@@ -95,6 +95,15 @@ class CustomLayout extends React.Component {
                     </Menu.Item>
                     :
                     <Menu.Item key="5">
+                    </Menu.Item>
+                }
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="6">
+                        <a href='/friends-list'>Friend</a>
+                    </Menu.Item>
+                    :
+                    <Menu.Item key="6">
                     </Menu.Item>
                 }
 

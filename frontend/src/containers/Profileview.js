@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
 import PersonalProfile from '../components/PersonalProfile';
 import {Button, Form} from 'antd';
+import UserFriendsList from './UserFriendsList'
 
 
 
@@ -49,7 +50,7 @@ class UserProfileView extends React.Component {
 		return (
 			<div>
         <PersonalProfile {...this.state} {...this.props}/>
-
+        <UserFriendsList {...this.state} />
       </div>
 
 		)

@@ -6,7 +6,9 @@ import UserProfileCover from '../components/UserProfileCard.js'
 import { Image } from 'react-bootstrap';
 import { authAxios } from '../components/util';
 
-// hods the profile cards in a list
+// Userview holds everyone but our current user and its friends (peopel we want to add)
+
+// holds the profile cards in a list
 class UserView extends React.Component {
   constructor(props) {
     super(props);
