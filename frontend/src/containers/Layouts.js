@@ -8,16 +8,15 @@ import { authAxios } from '../components/util';
 
 const { Header, Footer, Content } = Layout;
 
-// boarder layout that wraps around each of the other containers
-// imported all actions, therefore it allows you to call the functions
-// from the
+// Function: boarder layout that wraps around each of the other containers, and has
+// menu items that go to each page
+
 class CustomLayout extends React.Component {
   state = {
     username: ''
   }
 
   async componentDidMount(){
-
     await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
         console.log(res.data)

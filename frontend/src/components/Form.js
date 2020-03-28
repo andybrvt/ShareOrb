@@ -4,27 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 const { Option } = Select;
 
-
-// constructor(props) {
-//   super(props);
-//   this.state = {
-//       temp1:'',
-//       temp2:'',
-//
-//
-//   };
-//
-//   this.handleSubmit = this.handleSubmit.bind(this);
-// }
-
-// this.setState({
-//    temp1: title,
-//   temp2: content,
-// }, ()=> console.log(this.state.temp1, this.state.temp2));
-
-
-// Form used to make submissions for new post into the post
-// list
+// Function: Version 1 of our forms
 class ProfilePost extends React.Component {
   constructor(props) {
     super(props);
@@ -33,17 +13,14 @@ class ProfilePost extends React.Component {
   // articleID. Depending on ArticleDetailView or ArticleListView
   // the handle submit will either post or put
   handleSubmit = (event, requestType, articleID) => {
-
       const title=event.target.elements.titleInput.value;
       const content=event.target.elements.contentInput.value;
       axios.defaults.headers = {
 				"Content-Type": "application/json",
 				Authorization: this.props.token,
 			}
-
       switch ( requestType ) {
         case 'post':
-        // access the post function in that api url
           return axios.post('http://127.0.0.1:8000/userprofile/list/', {
             Caption: title,
             User: content,
@@ -51,7 +28,6 @@ class ProfilePost extends React.Component {
           .then(res => console.log(res))
           .catch(error=> console.error(error));
         case 'put':
-        // access the put function in that api url
           return axios.put('http://127.0.0.1:8000/userprofile/list/'+articleID+'/', {
             Caption: title,
             User: content,

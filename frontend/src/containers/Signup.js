@@ -15,6 +15,7 @@ class Signup extends React.Component {
       confirmDirty: false,
     };
     //this handle submit is a funciton that handles
+    // the all functions from here down is use to put restrictions on fields of the signup
     compareToFirstPassword = (rule, value, callback) => {
       debugger;
       const form = this.props.form;
@@ -61,8 +62,6 @@ class Signup extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
-        console.log(this.props)
-        console.log(err)
         if (!err && values.password.length > 8) {
           this.props.onAuth(
             values.first_name,
@@ -83,9 +82,6 @@ class Signup extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    console.log('test')
-    console.log(this.props)
-    console.log(getFieldDecorator)
       return (
         <Form onSubmit={this.handleSubmit}>
 
@@ -194,6 +190,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => {
+  // this is where the actual sign up fucntion is called
     return {
         onAuth: (first_name, last_name, dob, bio, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, dob, bio, email, phone_number, password1, password2)),
     }

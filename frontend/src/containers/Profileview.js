@@ -8,7 +8,7 @@ import UserFriendsList from './UserFriendsList'
 
 
 
-// This view is to hold all the profiles of others that is not the current
+// Function: This view is to hold all the profiles of others that is not the current
 // user (its just teh container tho)
 class UserProfileView extends React.Component {
   constructor(props) {
@@ -25,14 +25,11 @@ class UserProfileView extends React.Component {
   }
 
   componentWillReceiveProps(newProps){
-    console.log(this.props)
-    console.log(newProps)
     const username = this.props.match.params.username;
     const userID = this.props.match.params.id;
     if(newProps.isAuthenticated){
        authAxios.get('http://127.0.0.1:8000/userprofile/'+username+'/')
         .then(res=> {
-          console.log(res.data)
           this.setState({
             id:res.data.id,
             username: res.data.username,

@@ -6,6 +6,8 @@ import axios from 'axios';
 import { authAxios } from './util';
 import { connect } from "react-redux";
 
+
+// Function: Version 2 of our forms with states
 class PostUpload extends React.Component{
   constructor(props) {
     super(props);
@@ -23,25 +25,10 @@ class PostUpload extends React.Component{
    loading:false,
  }
 
-
- // handleFetchUserID = () => {
- //    // authAxios
- //    //   .get("current_user")
- //    //   .then(res => {
- //    //     this.setState({ testVar: res.data});
- //    //     this.setState({ id: res.data.id });
- //    //     this.setState({username:res.data.username});
- //    //   })
- //    //   .catch(err => {
- //    //     this.setState({ error: err });
- //    //   });
- //  };
-
 	async componentDidMount () {
     await authAxios
       .get("current-user")
       .then(res => {
-        console.log(res.data)
         this.setState({ testVar: res.data});
         this.setState({ id: res.data.id });
         this.setState({username:res.data.username});
@@ -49,72 +36,38 @@ class PostUpload extends React.Component{
       .catch(err => {
         this.setState({ error: err });
       });
-// //
-// // 	// axios.get("http://127.0.0.1:8000/userprofile/user-id")
-// // 	// 		.then(res=> {
-// // 	// 			this.setState({
-// // 	// 				id: res.data.id,
-// // 	// 				username: res.data.currentUser,
-// // 	// 		 });
-// // 	// 		});
-//  console.log(this.props)
-};
+    };
 
+    make_post = (post) =>{
+    	let data = this.uploadPost(post);
+    	return data;
+    }
 
-   // componentWillReceiveProps(newProps){
-   //     console.log(newProps)
-   //     if (newProps.token !== this.props.token) {
-   //       console.log('component updated')
-   //       authAxios.get("current-user")
-   //       .then(res =>{
-   //         this.setState({id: res.data.id});
-   //         this.setState({username:res.data.username});
-   //       });
-   //     }
-   //     console.log(newProps.token)
-   //   };
-
-
-
-make_post = (post) =>{
-	let data = this.uploadPost(post);
-	console.log(data)
-	console.log(post)
-	return data;
-}
-
-uploadPost = (post) =>{
- const data = new FormData();
- console.log('right here')
- console.log(data)
- data.append("caption", post.caption);
- data.append("user", post.user_id);
- if (post.image !== null){
-   data.append("image", post.image)
- }
- // data.append("image", post.image);
- // data.append("image_filter", post.image_filter);
- console.log('right here')
- console.log(data)
- fetch('http://127.0.0.1:8000/userprofile/list/', {
-	method: 'POST',
-    headers: {
-	    Authorization: `Token ${localStorage.getItem('token')}`,
-    },
-    body:data
-})
- .then (res =>res.json())
- .then(json =>{
-	 console.log(json)
-	 return json
- })
-}
+    uploadPost = (post) =>{
+     const data = new FormData();
+     data.append("caption", post.caption);
+     data.append("user", post.user_id);
+     if (post.image !== null){
+       data.append("image", post.image)
+     }
+     // data.append("image", post.image);
+     // data.append("image_filter", post.image_filter);
+     fetch('http://127.0.0.1:8000/userprofile/list/', {
+    	method: 'POST',
+        headers: {
+    	    Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+        body:data
+    })
+     .then (res =>res.json())
+     .then(json =>{
+    	 return json
+     })
+    }
 
 	onFormSubmit = (e) =>{
 		e.preventDefault()
-		console.log(this.state)
 		if (this.state.id && this.state.caption){
-      console.log('it got summited')
 			const post = {
 				'image': this.state.image,
 				'caption': this.state.caption,
@@ -122,7 +75,6 @@ uploadPost = (post) =>{
 				'image_filter': this.state.image_filter,
 				'username': this.state.username,
 			};
-			console.log(post)
 			this.make_post(post);
 			window.location.reload(true)
 		}
@@ -145,59 +97,55 @@ uploadPost = (post) =>{
 				image:e.target.files[0],
 				stage: "image",
 			});
-			//render the
 		}
 	}
 
 	selectFilter = e =>{
-		console.log(e)
-		this.setState({
+    	this.setState({
 			image_filter: e
 		})
 
 	}
 
 	render(){
-    console.log(this.props.data)
-	return (
-	<Container style={{paddingTop: '10',zIndex:'-1'}}>
-	  <form onSubmit={this.onFormSubmit}>
-	    <div className="upload-container">
-				<h1 className="heading">#New post</h1>
-				{ this.state.stage !== "image" ?
-				<div  className= "uploadImage upload" >
-                <input type="file" name="image" onChange= {this.onChange} />
-				</div> :
-				<div  className= "uploadImage upload " >
-                <img src={this.state.image_blob} className={this.state.image_filter}
-				style={{height:'250px'}}/>
-				</div>}
-				<div className= "message caption-text">
-				<input type="text" name="caption" onChange= {this.onChange}value={this.state.caption}
-				 style={{width: '300px', height:'100px'}}/>
-				 </div>
-				 <div className="filters">
-				{ this.state.stage === "image" ?
-					<div>
-						<img src={this.state.image_blob}  className=" filter" onClick={(e) => this.selectFilter("")}/>
-						<img src={this.state.image_blob}  className=" filter blur-filter"  onClick={(e) => this.selectFilter("blur-filter")}/>
-						<img src={this.state.image_blob}  className=" filter bng-filter" onClick={(e) => this.selectFilter("bng-filter")}/>
-						<img src={this.state.image_blob}  className=" filter bright-filter"  onClick={(e) => this.selectFilter("bright-filter")}/>
-						<img src={this.state.image_blob}  className=" filter saturate-filter"  onClick={(e) => this.selectFilter("saturate-filter")}/>
-						<img src={this.state.image_blob}  className=" filter sepia-filter"  onClick={(e) => this.selectFilter("sepia-filter")}/>
-					</div>
-					:
-					<div></div>}
-				</div>
-				<div className="submit">
-                <button type="submit" onClick={this.onFormSubmit}>Post</button>
-				</div>
-				</div>
-            </form>
-	</Container>
-	)
-
-}
+  	return (
+  	<Container style={{paddingTop: '10',zIndex:'-1'}}>
+  	  <form onSubmit={this.onFormSubmit}>
+  	    <div className="upload-container">
+  				<h1 className="heading">#New post</h1>
+  				{ this.state.stage !== "image" ?
+  				<div  className= "uploadImage upload" >
+                  <input type="file" name="image" onChange= {this.onChange} />
+  				</div> :
+  				<div  className= "uploadImage upload " >
+                  <img src={this.state.image_blob} className={this.state.image_filter}
+  				style={{height:'250px'}}/>
+  				</div>}
+  				<div className= "message caption-text">
+  				<input type="text" name="caption" onChange= {this.onChange}value={this.state.caption}
+  				 style={{width: '300px', height:'100px'}}/>
+  				 </div>
+  				 <div className="filters">
+  				{ this.state.stage === "image" ?
+  					<div>
+  						<img src={this.state.image_blob}  className=" filter" onClick={(e) => this.selectFilter("")}/>
+  						<img src={this.state.image_blob}  className=" filter blur-filter"  onClick={(e) => this.selectFilter("blur-filter")}/>
+  						<img src={this.state.image_blob}  className=" filter bng-filter" onClick={(e) => this.selectFilter("bng-filter")}/>
+  						<img src={this.state.image_blob}  className=" filter bright-filter"  onClick={(e) => this.selectFilter("bright-filter")}/>
+  						<img src={this.state.image_blob}  className=" filter saturate-filter"  onClick={(e) => this.selectFilter("saturate-filter")}/>
+  						<img src={this.state.image_blob}  className=" filter sepia-filter"  onClick={(e) => this.selectFilter("sepia-filter")}/>
+  					</div>
+  					:
+  					<div></div>}
+  				</div>
+  				<div className="submit">
+                  <button type="submit" onClick={this.onFormSubmit}>Post</button>
+  				</div>
+  				</div>
+              </form>
+  	</Container>
+  	)
+  }
 };
 
 const mapStateToProps = state => {

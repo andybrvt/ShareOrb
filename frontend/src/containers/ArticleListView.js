@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
-import {connect} from 'react-redux';
 import InfiniteScroll from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import Form3 from '../components/Forms3';
+import axios from 'axios';
+import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
 
 

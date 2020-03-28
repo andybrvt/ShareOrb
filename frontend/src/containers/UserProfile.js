@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import {Button} from 'antd';
+import axios from 'axios';
 import { authAxios } from '../components/util';
 
-// This one is for the current user
+// Function: Profile of the current user
 
 class UserProfile extends React.Component{
   constructor(props) {
@@ -19,17 +19,10 @@ class UserProfile extends React.Component{
   }
 
   async componentDidMount(){
-    console.log('here')
     const username = this.props.match.params.username;
     const userID = this.props.match.params.id;
-    console.log(this.props.match.params)
-    console.log(username)
-
-
     await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
-        console.log(res.data)
-        console.log(res.data.id)
         this.setState({
           id:res.data.id,
           username: res.data.username,
@@ -37,18 +30,11 @@ class UserProfile extends React.Component{
           last_name: res.data.last_name,
           bio: res.data.bio,
           friends: res.data.friends,
-
        });
      });
    }
 
-
-
-
   render(){
-
-    console.log(this.props)
-    console.log(this.state.friends)
       return(
         <div>
         {this.state.username}
@@ -62,12 +48,9 @@ class UserProfile extends React.Component{
         <Button type="primary">Primary</Button>
         <Button type="primary">Primary</Button>
         <Button type="primary">Primary</Button>
-
         </div>
-
       )
-
-      }
-    };
+    }
+  };
 
 export default UserProfile;

@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import ProfilePost from '../components/Form';
 import {connect} from 'react-redux';
 import FriendProfileCard from '../components/FriendsProfileCard'
+import axios from 'axios';
 import { Image } from 'react-bootstrap';
 import { authAxios } from '../components/util';
 
@@ -11,11 +11,9 @@ class FriendsList extends React.Component {
   constructor(props) {
     super(props);
   }
-
   state={
 		friendList:[],
 	}
-
   componentWillReceiveProps(newProps) {
     console.log(newProps)
     if(newProps.isAuthenticated){

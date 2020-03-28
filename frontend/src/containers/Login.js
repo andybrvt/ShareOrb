@@ -12,7 +12,7 @@ import { NavLink, Redirect, } from "react-router-dom";
 import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../store/actions/auth";
 
-
+// Function: logs user in
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -29,11 +29,9 @@ class LoginForm extends React.Component {
   };
 
   handleSubmit = e => {
-    // e.preventDefault();
     const { username, password } = this.state;
     this.props.login(username, password)
     this.setState({login: true })
-// this.props.history.push('/home')
   };
 
   render() {
@@ -42,7 +40,6 @@ class LoginForm extends React.Component {
     const { username, password } = this.state;
 if (token) {
        return <Redirect to="/home" />
-
     }
     return (
       <Grid
@@ -55,7 +52,6 @@ if (token) {
             Log-in to your account
           </Header>
           {error && <p>{this.props.error.message}</p>}
-
           <React.Fragment>
             <Form size="large" onSubmit={this.handleSubmit}>
               <Segment stacked>
@@ -100,7 +96,7 @@ if (token) {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  // you get the token here
   return {
     loading: state.loading,
     error: state.error,
@@ -109,6 +105,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
+  // the actual login in function is in here and this is from redux (store)
   return {
     login: (username, password) => dispatch(authLogin(username, password))
   };
