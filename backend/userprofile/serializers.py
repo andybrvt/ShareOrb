@@ -11,7 +11,7 @@ from allauth.account.utils import setup_user_email
 class PostUserSerializer(serializers.ModelSerializer):
     friends = serializers.SerializerMethodField()
     def get_friends(self, obj):
-        print(obj.friends.all().first().username)
+        # print(obj.friends.all().first().username)
         list = []
         for i in obj.friends.all():
             user = i.username

@@ -44,6 +44,7 @@ class UserProfileView extends React.Component {
 
 
 	render() {
+    console.log("blah blah blah")
 		return (
 			<div>
         <PersonalProfile {...this.state} {...this.props}/>

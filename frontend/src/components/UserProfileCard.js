@@ -29,6 +29,7 @@ class UserProfileCover extends React.Component {
     >
       <a href={'/userview/'+this.props.data.username}>{this.props.data.username}</a>
       <Button type="primary" onClick ={this.onClickSend} disabled={!this.state.value}>Add friend</Button>
+      
     </Card>
 
 
