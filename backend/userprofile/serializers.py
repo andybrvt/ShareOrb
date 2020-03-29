@@ -6,6 +6,8 @@ from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
+from userprofile.models import CustomNotification
+
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
 class PostUserSerializer(serializers.ModelSerializer):
@@ -120,3 +122,13 @@ class FriendRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FriendRequest
         fields = ( 'to_user', 'from_user' )
+
+
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+    actor = UserSerializer(read_only=True)
+
+    class Meta:
+        model = CustomNotification
+        fields = "__all__"

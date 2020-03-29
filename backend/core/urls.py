@@ -25,7 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('userprofile/', include('userprofile.urls')),
-    path('friends/', include('friends.urls'))
+    path('friends/', include('friends.urls')),
+    path('notification/', include('notification.urls'))
 
     # path('infinite-api/', ReactInfiniteView.as_view(), name='infinite-react' )
     # path('api/', include('userprofile.urls')),
