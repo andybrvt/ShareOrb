@@ -54,7 +54,8 @@ INSTALLED_APPS =[
     'rest_framework.authtoken',
     'userprofile',
     'friends',
-    'notification'
+    'notification',
+    'chat'
 
 ]
 
@@ -184,3 +185,11 @@ CHANNEL_LAYERS = {
         },
     },
 }
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
