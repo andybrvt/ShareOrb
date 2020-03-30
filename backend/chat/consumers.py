@@ -2,18 +2,55 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import Message
+from userprofile.models import User
+
+# so you want to first pull all your data first and then put them in a dictionary
+#then you would return the cotent in a json formation and that function for the json
+#format can be made in another funciton
+
+#for certain actions you will need an event to  occur and its usually in a scope (which has like type
+#and stuff and that type calls the funciton you want to get and the data is all the other shit in that
+#scope)
 
 class ChatConsumer(WebsocketConsumer):
 
     def fetch_mesasges(self, data):
-        pass
+        messages = Message.last_10_messages()
+        content = {
+            'messages': self.messages_to_json(messages)
+        }
+        self.send_message(content)
 
-    def new_messages(self, data):
-        pass
+    def new_message(self, data):
+        author = data['from']
+        author_user = User.objects.file(username= author)[0]
+        message = Message.objects.create(
+            author = author_user,
+            content = data['message'] )
+        content = {
+            'command': 'new_message',
+            'message': self.message_to_json(message)
+        }
+        return self.send_chat_message(content)
 
-    # throw your commands into a dictionary and then you can call them whenever 
+
+    def message_to_json(self, messages):
+        result = []
+        for message in messages:
+            result.append(self.message_to_json(message))
+        return result
+
+    def message_to_json (self, message):
+        return {
+            'author': message.author.username,
+            'content': message.content,
+            'timestamp':str(message.timestamp)
+        }
+
+    # throw your commands into a dictionary and then you can call them whenever
     commands  = {
-
+        'fetch_messages': fetch_mesasges,
+        'new_message': new_message,
     }
 
     def connect(self):
@@ -37,8 +74,11 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from WebSocket
     def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+        data = json.loads(text_data)
+        self.commands[data['command']](self,data)
+
+
+    def send_chat_message(self, message):
 
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
@@ -49,11 +89,13 @@ class ChatConsumer(WebsocketConsumer):
             }
         )
 
+    def send_message(self, message):
+        self.send(text_data = json.dumps(message))
+
+
     # Receive message from room group
     def chat_message(self, event):
         message = event['message']
 
         # Send message to WebSocket
-        async_to_sync(self.send(text_data=json.dumps({
-            'message': message
-        })))
+        self.send(text_data=json.dumps(message))
