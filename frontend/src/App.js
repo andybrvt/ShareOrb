@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import BaseRouter from './routes';
 import 'antd/dist/antd.css';
 import * as actions from './store/actions/auth';
-
+import WebSocketInstance from './websocket';
 import CustomLayout from './containers/Layouts';
 
 class App extends Component {
@@ -14,6 +14,8 @@ class App extends Component {
   //everythign this is run it will do a try auto signup, it will give
   //App.js this method from the store
     this.props.onTryAutoSignup();
+    WebSocketInstance.connect();
+
   }
 
   render() {
