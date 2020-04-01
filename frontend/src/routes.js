@@ -38,7 +38,6 @@ class BaseRouter extends React.Component {
         <Route exact path = '/friends-list/' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/chat/' render={(props) => <Chat {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
-
       </div>
 
       )

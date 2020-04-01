@@ -35,7 +35,7 @@ const Sidepanel = (props) => {
       <div id="contacts">
         <ul>
         {props.friendList.map((j,index) => {
-          return <Contact data = {j} key ={index} />
+          return <Contact data = {j} key ={index} {...props} />
         })}
         </ul>
       </div>

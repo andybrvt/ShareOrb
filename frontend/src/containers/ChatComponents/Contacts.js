@@ -1,8 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 
 const Contact= (props) => {
  console.log(props)
+
+ // const friend =
   return (
+    <NavLink to = {'chat/'+ props.data } style = {{color: '#fff'}}>
     <li className="contact">
       <div className="wrap">
         <span className="contact-status online"></span>
@@ -13,6 +18,7 @@ const Contact= (props) => {
         </div>
       </div>
     </li>
+    </NavLink>
   )
 
 

@@ -98,6 +98,24 @@ class Chat extends React.Component{
     // return a list of list item which will render in the unorder friendList
     // basically run the previous messages
     // this one is linked to the backend websocket and renders the messages
+    renderTimestamp = timestamp =>{
+      let prefix = '';
+      const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+      if (timeDiff <1 ) {
+        prefix = `Just now`;
+      } else if (timeDiff < 60 && timeDiff >1 ) {
+        prefix = `${timeDiff} minutes ago`;
+      }else if (timeDiff < 24*60 && timeDiff > 60) {
+        prefix = `${Math.round(timeDiff/60)} hours ago`;
+      } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
+        prefix = `${Math.round(timeDiff/60*24)} days ago`;
+      } else {
+          prefix = `${new Date(timestamp)}`;
+      }
+
+      return prefix;
+    }
+
     renderMessages = (messages) => {
       const currentUser = 'admin';
       return messages.map(message =>(
@@ -109,13 +127,25 @@ class Chat extends React.Component{
             {message.content}
             <br />
             <small>
-            { parseInt((new Date().getTime() - new Date(message.timestamp).getTime())/60000)} minutes ago
+            { this.renderTimestamp(message.timestamp)}
             </small>
           </p>
 
 
         </li>
       ));
+    }
+
+    scrollToBottom = () => {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    componentDidMount() {
+      this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+      this.scrollToBottom();
     }
 
     render(){
@@ -134,6 +164,9 @@ class Chat extends React.Component{
                     messages &&
                     this.renderMessages(messages)
                 }
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+               </div>
               </ul>
             </div>
             <div className="message-input">
