@@ -3,6 +3,9 @@ import './Containers.css';
 import Sidepanel from './ChatComponents/Sidepanel';
 import TopPanel from './ChatComponents/Toppanel';
 import WebSocketInstance from '../websocket';
+import { authAxios } from '../components/util';
+import axios from 'axios';
+
 
 class Chat extends React.Component{
   // the add callbacks basically calls the commands
@@ -10,7 +13,8 @@ class Chat extends React.Component{
     constructor(props){
       super(props)
       this.state= {
-        messages: []
+        messages: [],
+        friendList:[]
       }
 
       // these will give the commands the function --> this is similar to the command
@@ -55,6 +59,18 @@ class Chat extends React.Component{
       });
     }
 
+    componentWillReceiveProps(newProps) {
+      console.log(newProps)
+      if(newProps.isAuthenticated){
+        authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
+          .then(res=> {
+            console.log(res.data)
+            this.setState({
+              friendList:res.data.friends,
+           });
+          });
+      }
+    }
 
     // Whenever you want to add anything you have to do it in an object format
     // have to name the from
@@ -109,7 +125,7 @@ class Chat extends React.Component{
       const messages = this.state.messages;
       return(
         <div id="frame">
-          <Sidepanel {...this.props} />
+          <Sidepanel {...this.props} {...this.state}/>
          <div className="content">
           <TopPanel />
             <div className="messages">

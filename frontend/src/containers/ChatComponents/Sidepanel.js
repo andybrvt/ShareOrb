@@ -1,4 +1,5 @@
 import React from 'react';
+import Contact from './Contacts';
 
 const Sidepanel = (props) => {
   console.log(props)
@@ -17,14 +18,14 @@ const Sidepanel = (props) => {
               <li id="status-offline"><span className="status-circle"></span> <p>Offline</p></li>
             </ul>
           </div>
-          <div id="expanded">
-            <label htmlFor="twitter"><i className="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-            <input name="twitter" type="text" value="mikeross" />
-            <label htmlFor="twitter"><i className="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-            <input name="twitter" type="text" value="ross81" />
-            <label htmlFor="twitter"><i className="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-            <input name="twitter" type="text" value="mike.ross" />
-          </div>
+          // <div id="expanded">
+          //   <label htmlFor="twitter"><i className="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+          //   <input name="twitter" type="text" value="mikeross" />
+          //   <label htmlFor="twitter"><i className="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+          //   <input name="twitter" type="text" value="ross81" />
+          //   <label htmlFor="twitter"><i className="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+          //   <input name="twitter" type="text" value="mike.ross" />
+          // </div>
         </div>
       </div>
       <div id="search">
@@ -33,26 +34,9 @@ const Sidepanel = (props) => {
       </div>
       <div id="contacts">
         <ul>
-          <li className="contact">
-            <div className="wrap">
-              <span className="contact-status online"></span>
-              <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-              <div className="meta">
-                <p className="name">Louis Litt</p>
-                <p className="preview">You just got LITT up, Mike.</p>
-              </div>
-            </div>
-          </li>
-          <li className="contact active">
-            <div className="wrap">
-              <span className="contact-status busy"></span>
-              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-              <div className="meta">
-                <p className="name">Harvey Specter</p>
-                <p className="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and htmlForty six other things.</p>
-              </div>
-            </div>
-          </li>
+        {props.friendList.map((j,index) => {
+          return <Contact data = {j} key ={index} />
+        })}
         </ul>
       </div>
       <div id="bottom-bar">
