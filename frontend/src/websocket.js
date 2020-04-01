@@ -36,7 +36,9 @@ class WebSocketService {
     this.socketNewMessage(JSON.stringify({
       command: 'fetch_messages'
     }))
+    console.log('fetch message success')
     this.socketRef.onmessage = (e) =>{
+      console.log(e.data)
       this.socketNewMessage(e.data);
     }
 
@@ -52,16 +54,21 @@ class WebSocketService {
   // The .command is the commands that can be like fetch methods or newmessage or whatever
   // The Object.key returns an array of all the keys in the dictionary callback
   socketNewMessage(data) {
+    console.log(data)
     const parsedData = JSON.parse(data);
+    console.log(parsedData.command)
+    console.log(parsedData.messages)
+    console.log(parsedData)
+    console.log(this.callbacks)
     const command = parsedData.command;
     if (Object.keys(this.callbacks).length === 0){
       return;
     }
-    if (command === 'messages') {
-      this.callback[command](parsedData.messages)
+    if (command == 'messages') {
+      this.callbacks['messages'](parsedData.messages)
     }
     if (command === 'new_message') {
-      this.callback[command](parsedData.message)
+      this.callbacks[command](parsedData.message)
     }
   }
 
@@ -92,8 +99,9 @@ class WebSocketService {
   // In order to send your data into the WebSocket your data needs to be in a JSON format
   // When you do ({}) <-- you are calling an object
   sendMessage(data) {
+    console.log(data)
     try{
-      this.socketRef.send(JSON.stringify({ ... data }))
+      this.socketRef.send(JSON.stringify({...data }))
     } catch (err) {
       console.log(err.message);
     }

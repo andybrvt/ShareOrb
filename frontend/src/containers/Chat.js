@@ -8,7 +8,9 @@ class Chat extends React.Component{
 
     constructor(props){
       super(props)
-      this.state= {}
+      this.state= {
+        messages: []
+      }
 
       // these will give the commands the function --> this is similar to the command
       // array in the consumer.py
@@ -16,9 +18,10 @@ class Chat extends React.Component{
         WebSocketInstance.addCallbacks(
           this.setMessages.bind(this),
           this.addMessages.bind(this));
-        WebSocketInstance.fetchMessages(this.props.currentUser)
+        WebSocketInstance.fetchMessages('admin')
       })
     }
+
 // Check the state of the socket, and if it is equal to one shits good
     waitForSocketConnection (callback) {
       const component = this;
@@ -45,14 +48,39 @@ class Chat extends React.Component{
 
 // this to have all the messages you have been typing back and forth
     setMessages(messages) {
+      console.log(messages)
       this.setState({
         messages: messages.reverse()
       });
     }
 
 
+    // Whenever you want to add anything you have to do it in an object format
+    // have to name the from
+    // you would then set the message state back to empty
+    sendMessageHandler = e => {
+      e.preventDefault();
+      const messageObject = {
+        from: 'admin',
+        content: this.state.message
+      }
+      WebSocketInstance.newChatMessage(messageObject);
+      this.setState({
+        message: ''
+      })
+      console.log(this.state)
+    }
+
+    messageChangeHandler = event => {
+      this.setState({
+        message: event.target.value
+      })
+    }
+
+
     // return a list of list item which will render in the unorder friendList
     // basically run the previous messages
+    // this one is linked to the backend websocket and renders the messages
     renderMessages = (messages) => {
       const currentUser = 'admin';
       return messages.map(message =>(
@@ -70,6 +98,8 @@ class Chat extends React.Component{
     }
 
     render(){
+      // console.log(this.props.currentUser)
+      console.log(this.state)
       const messages = this.state.messages;
       return(
         <div id="frame">
@@ -93,13 +123,20 @@ class Chat extends React.Component{
               </ul>
             </div>
             <div className="message-input">
-              <div className="wrap">
-              <input id="chat-message-input" type="text" placeholder="Write your message..." />
-              <i className="fa fa-paperclip attachment" aria-hidden="true"></i>
-              <button id="chat-message-submit" className="submit">
-                <i className="fa fa-paper-plane" aria-hidden="true"></i>
-              </button>
-              </div>
+            <form onSubmit = {this.sendMessageHandler}>
+                <div className="wrap">
+                <input
+                 onChange = {this.messageChangeHandler}
+                 value = {this.state.message}
+                 id="chat-message-input"
+                 type="text"
+                 placeholder="Write your message..." />
+                <i className="fa fa-paperclip attachment" aria-hidden="true"></i>
+                <button id="chat-message-submit" className="submit">
+                  <i className="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+                </div>
+              </form>
             </div>
           </div>
       </div>

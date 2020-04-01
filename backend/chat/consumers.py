@@ -15,15 +15,17 @@ from userprofile.models import User
 class ChatConsumer(WebsocketConsumer):
 
     def fetch_mesasges(self, data):
-        messages = Message.last_10_messages()
+        messages = Message.last_10_messages(self)
+        print(messages)
         content = {
+            'command': 'messages',
             'messages': self.messages_to_json(messages)
         }
         self.send_message(content)
 
     def new_message(self, data):
         author = data['from']
-        author_user = User.objects.file(username= author)[0]
+        author_user = User.objects.filter(username= author).first()
         message = Message.objects.create(
             author = author_user,
             content = data['message'] )
@@ -31,10 +33,11 @@ class ChatConsumer(WebsocketConsumer):
             'command': 'new_message',
             'message': self.message_to_json(message)
         }
+        print(content)
         return self.send_chat_message(content)
 
 
-    def message_to_json(self, messages):
+    def messages_to_json(self, messages):
         result = []
         for message in messages:
             result.append(self.message_to_json(message))
@@ -76,11 +79,12 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data):
         data = json.loads(text_data)
+        print(data)
+        print(self.commands[data['command']])
         self.commands[data['command']](self,data)
 
 
     def send_chat_message(self, message):
-
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
