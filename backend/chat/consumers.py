@@ -14,7 +14,7 @@ from userprofile.models import User
 
 class ChatConsumer(WebsocketConsumer):
 
-    def fetch_mesasges(self, data):
+    def fetch_messages(self, data):
         messages = Message.last_10_messages(self)
         print(messages)
         content = {
@@ -53,7 +53,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # throw your commands into a dictionary and then you can call them whenever
     commands  = {
-        'fetch_messages': fetch_mesasges,
+        'fetch_messages': fetch_messages,
         'new_message': new_message,
     }
 
