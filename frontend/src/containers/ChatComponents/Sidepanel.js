@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Sidepanel = (props) => {
+  console.log(props)
   return (
     <div id="sidepanel">
       <div id="profile">
         <div className="wrap">
           <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" className="online" alt="" />
-          <p>Mike Ross</p>
+          <p>{props.username}</p>
           <i className="fa fa-chevron-down expand-button" aria-hidden="true"></i>
           <div id="status-options">
             <ul>
@@ -16,14 +17,14 @@ const Sidepanel = (props) => {
               <li id="status-offline"><span className="status-circle"></span> <p>Offline</p></li>
             </ul>
           </div>
-          // <div id="expanded">
-          //   <label htmlFor="twitter"><i className="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-          //   <input name="twitter" type="text" value="mikeross" />
-          //   <label htmlFor="twitter"><i className="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-          //   <input name="twitter" type="text" value="ross81" />
-          //   <label htmlFor="twitter"><i className="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-          //   <input name="twitter" type="text" value="mike.ross" />
-          // </div>
+          <div id="expanded">
+            <label htmlFor="twitter"><i className="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+            <input name="twitter" type="text" value="mikeross" />
+            <label htmlFor="twitter"><i className="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+            <input name="twitter" type="text" value="ross81" />
+            <label htmlFor="twitter"><i className="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+            <input name="twitter" type="text" value="mike.ross" />
+          </div>
         </div>
       </div>
       <div id="search">

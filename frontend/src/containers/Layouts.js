@@ -106,6 +106,17 @@ class CustomLayout extends React.Component {
                     </Menu.Item>
                 }
 
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="7">
+                        <a href='/chat'>Messages</a>
+                    </Menu.Item>
+                    :
+                    <Menu.Item key="7">
+                    </Menu.Item>
+                }
+
+
                 </Menu>
                 </Header>
                 <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1200, marginRight: 'auto', marginLeft: 'auto'}}>

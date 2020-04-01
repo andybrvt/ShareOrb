@@ -28,15 +28,15 @@ class BaseRouter extends React.Component {
 
       <div>
         <Route exact path = '/home'  render={(props) => <ArticleList {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
-        <Route exact path = '/article/:id' render={(props) => <ArticleDetail {...props} isAuthenticated={this.props.isAuthenticated} />}   />
+        <Route exact path = '/article/:id' render={(props) => <ArticleDetail {...this.props} isAuthenticated={this.props.isAuthenticated} />}   />
         <Route exact path = '/' component = {LoginForm} />
         <Route exact path = '/signup/' component= {Signup} />
-        <Route exact path = '/userview/' render={(props) => <UserView {...props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/userview/:username' render={(props) => <UserProfileView {...props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/current-user/' render={(props) => <UserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/friends-list/' render={(props) => <FriendsList {...props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/chat/' render={(props) => <Chat {...props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/userview/' render={(props) => <UserView {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/userview/:username' render={(props) => <UserProfileView {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/current-user/' render={(props) => <UserProfile {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/friends-list/' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/chat/' render={(props) => <Chat {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
 
       </div>

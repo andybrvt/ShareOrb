@@ -1,6 +1,7 @@
 import React from 'react';
 import './Containers.css';
-import Sidepanel from './Sidepanel/Sidepanel'
+import Sidepanel from './ChatComponents/Sidepanel';
+import TopPanel from './ChatComponents/Toppanel';
 import WebSocketInstance from '../websocket';
 
 class Chat extends React.Component{
@@ -18,7 +19,7 @@ class Chat extends React.Component{
         WebSocketInstance.addCallbacks(
           this.setMessages.bind(this),
           this.addMessages.bind(this));
-        WebSocketInstance.fetchMessages('admin')
+        WebSocketInstance.fetchMessages(this.props.username)
       })
     }
 
@@ -90,6 +91,10 @@ class Chat extends React.Component{
           <img src = 'http://emilcarlsson.se/assets/mikeross.png' />
           <p>
             {message.content}
+            <br />
+            <small>
+            { parseInt((new Date().getTime() - new Date(message.timestamp).getTime())/60000)} minutes ago
+            </small>
           </p>
 
 
@@ -100,20 +105,13 @@ class Chat extends React.Component{
     render(){
       // console.log(this.props.currentUser)
       console.log(this.state)
+      console.log(this.props)
       const messages = this.state.messages;
       return(
         <div id="frame">
-          <Sidepanel />
-          <div className="content">
-            <div className="contact-profile">
-              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-              <p>username</p>
-              <div className="social-media">
-                <i className="fa fa-facebook" aria-hidden="true"></i>
-                <i className="fa fa-twitter" aria-hidden="true"></i>
-                <i className="fa fa-instagram" aria-hidden="true"></i>
-              </div>
-            </div>
+          <Sidepanel {...this.props} />
+         <div className="content">
+          <TopPanel />
             <div className="messages">
               <ul id="chat-log">
                 {
