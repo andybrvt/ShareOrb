@@ -1,11 +1,10 @@
 import React from 'react';
-import './Containers.css';
+import './Chat.css';
 import Sidepanel from './ChatComponents/Sidepanel';
 import TopPanel from './ChatComponents/Toppanel';
 import WebSocketInstance from '../websocket';
 import { authAxios } from '../components/util';
 import axios from 'axios';
-
 
 class Chat extends React.Component{
   // the add callbacks basically calls the commands
