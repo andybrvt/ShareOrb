@@ -26,16 +26,17 @@ class WebSocketService {
   // Onmessage is run when the websocket recieves information from the server
   // this.socketRef is basically our WebSocket
 
-  connect() {
-    const path ='ws://127.0.0.1:8000/ws/chat/test/';
+  connect(chatUrl) {
+    const path ='ws://127.0.0.1:8000/ws/chat/'+chatUrl;
+    console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {
       console.log('websocket open')
 
     }
-    this.socketNewMessage(JSON.stringify({
-      command: 'fetch_messages'
-    }))
+    // this.socketNewMessage(JSON.stringify({
+    //   command: 'fetch_messages'
+    // }))
     console.log('fetch message success')
     this.socketRef.onmessage = (e) =>{
       console.log(e.data)
@@ -74,8 +75,8 @@ class WebSocketService {
 
   // This will taken in the username and then call the command fetch_messages which will then be called in the consumers
   // Username will just be the senders username
-  fetchMessages(username) {
-    this.sendMessage({ command: 'fetch_messages', username: username })
+  fetchMessages(username, chatID) {
+    this.sendMessage({ command: 'fetch_messages', username: username, chatID: chatID })
   }
 
   // This will call the new_message command

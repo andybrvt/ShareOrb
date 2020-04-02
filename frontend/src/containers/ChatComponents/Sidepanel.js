@@ -1,8 +1,10 @@
-import React from 'react';
+import React ,{useState, useEffect } from 'react';
 import Contact from './Contacts';
+import { authAxios } from '../../components/util';
+
 
 const Sidepanel = (props) => {
-  console.log(props)
+  console.log(props.chatList)
   return (
     <div id="sidepanel">
       <div id="profile">
@@ -28,13 +30,14 @@ const Sidepanel = (props) => {
           // </div>
         </div>
       </div>
-      <div id="search">
+      <div  id="search">
         <label htmlFor=""><i className="fa fa-search" aria-hidden="true"></i></label>
         <input type="text" placeholder="Search contacts..." />
       </div>
       <div id="contacts">
         <ul>
-        {props.friendList.map((j,index) => {
+        {props.chatList.map((j,index) => {
+          console.log(j)
           return <Contact data = {j} key ={index} {...props} />
         })}
         </ul>

@@ -8,22 +8,33 @@ import axios from 'axios';
 
 class Chat extends React.Component{
   // the add callbacks basically calls the commands
+  state= {
+    messages: [],
+    friendList:[],
+    chatList:[]
+  }
 
+  initialiseChat() {
+    this.waitForSocketConnection(()=> {
+      WebSocketInstance.addCallbacks(
+        this.setMessages.bind(this),
+        this.addMessages.bind(this));
+      WebSocketInstance.fetchMessages(
+        this.props.username,
+        this.props.match.params.id
+      )
+    })
+    WebSocketInstance.connect(this.props.match.params.id)
+  }
     constructor(props){
       super(props)
-      this.state= {
-        messages: [],
-        friendList:[]
-      }
-
+      this.initialiseChat()
       // these will give the commands the function --> this is similar to the command
       // array in the consumer.py
-      this.waitForSocketConnection(()=> {
-        WebSocketInstance.addCallbacks(
-          this.setMessages.bind(this),
-          this.addMessages.bind(this));
-        WebSocketInstance.fetchMessages(this.props.username)
-      })
+    }
+
+    componentWillReceiveProps(newProps){
+      console.log(newProps)
     }
 
 // Check the state of the socket, and if it is equal to one shits good
@@ -60,14 +71,21 @@ class Chat extends React.Component{
 
     componentWillReceiveProps(newProps) {
       console.log(newProps)
+      const username = newProps.username
+      console.log(username)
       if(newProps.isAuthenticated){
-        authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
-          .then(res=> {
-            console.log(res.data)
+      axios.all([
+        authAxios.get('http://127.0.0.1:8000/userprofile/current-user'),
+        authAxios.get('http://127.0.0.1:8000/chat/?username='+username)
+      ])
+      .then(axios.spread((get1, get2)=> {
+            console.log(get1.data)
+            console.log(get2.data)
             this.setState({
-              friendList:res.data.friends,
+              friendList:get1.data.friends,
+              chatList:get2.data,
            });
-          });
+         }));
       }
     }
 
@@ -148,7 +166,6 @@ class Chat extends React.Component{
     }
 
     render(){
-      // console.log(this.props.currentUser)
       console.log(this.state)
       console.log(this.props)
       const messages = this.state.messages;

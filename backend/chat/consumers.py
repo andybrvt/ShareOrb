@@ -3,6 +3,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import Message
 from userprofile.models import User
+from . import views
 
 # so you want to first pull all your data first and then put them in a dictionary
 #then you would return the cotent in a json formation and that function for the json
@@ -15,7 +16,8 @@ from userprofile.models import User
 class ChatConsumer(WebsocketConsumer):
 
     def fetch_messages(self, data):
-        messages = Message.last_10_messages(self)
+        print (data)
+        messages = views.get_last_10_messages(data['chatID'])
         print(messages)
         content = {
             'command': 'messages',
@@ -33,7 +35,7 @@ class ChatConsumer(WebsocketConsumer):
             'command': 'new_message',
             'message': self.message_to_json(message)
         }
-        print(content)
+
         return self.send_chat_message(content)
 
 
@@ -46,7 +48,7 @@ class ChatConsumer(WebsocketConsumer):
     def message_to_json (self, message):
         return {
             'id': message.id,
-            'author': message.author.username,
+            'author': message.contact.user.username,
             'content': message.content,
             'timestamp':str(message.timestamp)
         }

@@ -19,7 +19,7 @@ import Chat from './containers/Chat'
 
 class BaseRouter extends React.Component {
 
-
+// props and this.props are two different things on the routes
   render() {
 
     console.log(this.props);
@@ -36,7 +36,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/current-user/' render={(props) => <UserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list/' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/chat/' render={(props) => <Chat {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/chat/:id' render={(props) => <Chat {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
       </div>
 
