@@ -51,6 +51,11 @@ class WebSocketService {
       this.connect();
     }
   }
+
+// this will close the websocket when we move into a new chat
+  disconnect(){
+    this.socketRef.close();
+  }
   // The .command is the commands that can be like fetch methods or newmessage or whatever
   // The Object.key returns an array of all the keys in the dictionary callback
   socketNewMessage(data) {
@@ -70,14 +75,21 @@ class WebSocketService {
   // This will taken in the username and then call the command fetch_messages which will then be called in the consumers
   // Username will just be the senders username
   fetchMessages(username, chatID) {
-    this.sendMessage({ command: 'fetch_messages', username: username, chatID: chatID })
+    this.sendMessage({
+     command: 'fetch_messages',
+     username: username,
+     chatID: chatID })
   }
 
   // This will call the new_message command
   // You are calling the object in the sendMessage here, you convert it to a JSON and then send it into the
   // websocket
   newChatMessage(message) {
-    this.sendMessage({ command: 'new_message', from: message.from, message: message.content })
+    this.sendMessage({
+      command: 'new_message',
+      from: message.from,
+      message: message.content,
+      chatId: message.chatId})
   }
 
   // adding in the commands directly

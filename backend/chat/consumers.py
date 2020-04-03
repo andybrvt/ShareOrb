@@ -22,13 +22,17 @@ class ChatConsumer(WebsocketConsumer):
             'messages': self.messages_to_json(messages)
         }
         self.send_message(content)
-
+ # to get the message you first have go get the message then save it to the right chat
+ # you can either pass it through the parameters or pass it through the data (get the chat id)
     def new_message(self, data):
-        author = data['from']
-        author_user = User.objects.filter(username= author).first()
+        user_contact = views.get_user_contact(data['from'])
         message = Message.objects.create(
-            author = author_user,
+            contact = user_contact,
             content = data['message'] )
+        print(message)
+        current_chat = views.get_current_chat(data['chatId'])
+        current_chat.messages.add(message)
+        current_chat.save()
         content = {
             'command': 'new_message',
             'message': self.message_to_json(message)

@@ -13,7 +13,7 @@ class Chat extends React.Component{
     friendList:[],
     chatList:[]
   }
-
+// the id is taken from the slug made by Contact.js
   initialiseChat() {
     this.waitForSocketConnection(()=> {
       WebSocketInstance.addCallbacks(
@@ -64,10 +64,22 @@ class Chat extends React.Component{
         messages: messages.reverse()
       });
     }
-
+// the reason why two messages show up is because you intialized it once but then the props updated again
+// so the intialized chat gets called mutliple times
+// so basically you send the message and connecting to a new websocket when you change urls and not
+// when the props are updated
     componentWillReceiveProps(newProps) {
       console.log(newProps)
-      this.initialiseChat()
+      if(this.props.match.params.id !== newProps.match.params.id){
+        WebSocketInstance.disconnect();
+        this.waitForSocketConnection(()=> {
+          WebSocketInstance.fetchMessages(
+            this.props.username,
+            newProps.match.params.id
+          )
+        })
+        WebSocketInstance.connect(newProps.match.params.id)
+      }
       const username = newProps.username
       if(newProps.isAuthenticated){
       axios.all([
@@ -90,7 +102,8 @@ class Chat extends React.Component{
       e.preventDefault();
       const messageObject = {
         from: 'admin',
-        content: this.state.message
+        content: this.state.message,
+        chatId: this.props.match.params.id
       }
       WebSocketInstance.newChatMessage(messageObject);
       this.setState({
@@ -160,7 +173,7 @@ class Chat extends React.Component{
     }
 
     render(){
-  
+
       const messages = this.state.messages;
       return(
         <div id="frame">
