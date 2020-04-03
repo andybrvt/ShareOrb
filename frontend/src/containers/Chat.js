@@ -33,9 +33,6 @@ class Chat extends React.Component{
       // array in the consumer.py
     }
 
-    componentWillReceiveProps(newProps){
-      console.log(newProps)
-    }
 
 // Check the state of the socket, and if it is equal to one shits good
     waitForSocketConnection (callback) {
@@ -63,7 +60,6 @@ class Chat extends React.Component{
 
 // this to have all the messages you have been typing back and forth
     setMessages(messages) {
-      console.log(messages)
       this.setState({
         messages: messages.reverse()
       });
@@ -71,16 +67,14 @@ class Chat extends React.Component{
 
     componentWillReceiveProps(newProps) {
       console.log(newProps)
+      this.initialiseChat()
       const username = newProps.username
-      console.log(username)
       if(newProps.isAuthenticated){
       axios.all([
         authAxios.get('http://127.0.0.1:8000/userprofile/current-user'),
         authAxios.get('http://127.0.0.1:8000/chat/?username='+username)
       ])
       .then(axios.spread((get1, get2)=> {
-            console.log(get1.data)
-            console.log(get2.data)
             this.setState({
               friendList:get1.data.friends,
               chatList:get2.data,
@@ -102,7 +96,7 @@ class Chat extends React.Component{
       this.setState({
         message: ''
       })
-      console.log(this.state)
+
     }
 
     messageChangeHandler = event => {
@@ -166,8 +160,7 @@ class Chat extends React.Component{
     }
 
     render(){
-      console.log(this.state)
-      console.log(this.props)
+  
       const messages = this.state.messages;
       return(
         <div id="frame">

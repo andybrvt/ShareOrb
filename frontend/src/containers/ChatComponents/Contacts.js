@@ -3,13 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 
 const Contact= (props) => {
-  console.log(props)
-  console.log(props.chatList)
- console.log(props.chatList.id)
 
  // const friend =
   return (
-    <NavLink to = {'chat/'+ props.data.id } style = {{color: '#fff'}}>
+    <NavLink to = {''+props.data.id } style = {{color: '#fff'}}>
     <li className="contact">
       <div className="wrap">
         <span className="contact-status online"></span>

@@ -4,7 +4,6 @@ import { authAxios } from '../../components/util';
 
 
 const Sidepanel = (props) => {
-  console.log(props.chatList)
   return (
     <div id="sidepanel">
       <div id="profile">

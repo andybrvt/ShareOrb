@@ -16,16 +16,16 @@ class Message (models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add = True)
-
     def __str__(self):
-        return self.contact.username
+        print(self.contact.user)
+        return str(self.contact.user)
 
 
 class Chat(models.Model):
     participants = models.ManyToManyField(Contact, related_name = 'chats')
     messages = models.ManyToManyField(Message, blank  = True)
 
-    
+
 
     def __str__(self):
         return "{}".format(self.pk)

@@ -16,9 +16,7 @@ from . import views
 class ChatConsumer(WebsocketConsumer):
 
     def fetch_messages(self, data):
-        print (data)
         messages = views.get_last_10_messages(data['chatID'])
-        print(messages)
         content = {
             'command': 'messages',
             'messages': self.messages_to_json(messages)
@@ -81,8 +79,6 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data):
         data = json.loads(text_data)
-        print(data)
-        print(self.commands[data['command']])
         self.commands[data['command']](self,data)
 
 
