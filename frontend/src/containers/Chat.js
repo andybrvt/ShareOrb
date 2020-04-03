@@ -101,7 +101,7 @@ class Chat extends React.Component{
     sendMessageHandler = e => {
       e.preventDefault();
       const messageObject = {
-        from: 'admin',
+        from: this.props.username,
         content: this.state.message,
         chatId: this.props.match.params.id
       }
@@ -125,7 +125,7 @@ class Chat extends React.Component{
     renderTimestamp = timestamp =>{
       let prefix = '';
       const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
-      if (timeDiff <1 ) {
+      if (timeDiff < 1 ) {
         prefix = `Just now`;
       } else if (timeDiff < 60 && timeDiff >1 ) {
         prefix = `${timeDiff} minutes ago`;
@@ -173,7 +173,7 @@ class Chat extends React.Component{
     }
 
     render(){
-
+      console.log(this.props)
       const messages = this.state.messages;
       return(
         <div id="frame">
