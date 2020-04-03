@@ -38,7 +38,10 @@ class ArticleList extends React.Component {
 		return (
 			<div>
 			{isLoggedIn ?
+
+
 				<div>
+						<button type="button">Testing notification</button>
 				 		<Form3 data = {this.props}/>
 						<InfiniteScroll />
 				 </div>
