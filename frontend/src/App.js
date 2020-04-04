@@ -3,9 +3,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BaseRouter from './routes';
 import 'antd/dist/antd.css';
-import * as actions from './store/actions/auth';
+import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
 import CustomLayout from './containers/Layouts';
+import AddChatModal from './containers/Popup';
+import * as navActions from './store/actions/nav';
+import * as messageActions from './store/actions/messages';
+
+
 
 class App extends Component {
 //the map state to props allows us to get the state and then
@@ -16,6 +21,13 @@ class App extends Component {
     this.props.onTryAutoSignup();
     // WebSocketInstance.connect();
 
+  }
+  constructor(props) {
+    super(props);
+    WebSocketInstance.addCallbacks(
+      this.props.setMessages.bind(this),
+      this.props.addMessage.bind(this)
+    )
   }
 
   render() {
@@ -34,17 +46,19 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null,
-    username: state.username,
-    id: state.id,
-
+    isAuthenticated: state.auth.token !== null,
+    username: state.auth.username,
+    id: state.auth.id,
 
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState()),
+    onTryAutoSignup: () => dispatch(authActions.authCheckState()),
+    addMessage: message => dispatch(messageActions.addMessage(message)),
+    setMessages: messages => dispatch(messageActions.setMessages(messages)),
+
   }
 }
 

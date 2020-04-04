@@ -55,7 +55,7 @@ class ArticleList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.token,
+    token: state.auth.token,
   }
 }
 const mapDispatchToProps = dispatch => {

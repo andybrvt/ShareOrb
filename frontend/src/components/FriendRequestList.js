@@ -40,7 +40,8 @@ class FriendRequestList extends React.Component {
     console.log(userID)
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+user)
     }
-
+// you do the {() => this.WHATEVER FUNCTION ()} this will allow you to add parameters into your function and
+// allow you to do a onclick as well
   render() {
     const friendrequestlist = this.state
     console.log(this.state.friendrequestlist.from_user)

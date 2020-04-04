@@ -2,15 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import reducer from './store/reducers/auth';
-
+import authReducer from './store/reducers/auth';
+import navReducer from './store/reducers/nav'
+import messageReducer from './store/reducers/messages'
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+
+// you can combine reducers into one reducing function using combineReducer() so you can
+// pass it into create store
+const rootReducer = combineReducers({
+  auth: authReducer,
+  nav: navReducer,
+  message: messageReducer
+})
 //store takes in reducer and an enhancer to handle the middleware
-const store = createStore(reducer, composeEnhances(
-    applyMiddleware(thunk)
+const store = createStore(
+   rootReducer,
+   composeEnhances(applyMiddleware(thunk)
 ));
 
 const app = (

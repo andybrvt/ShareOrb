@@ -5,6 +5,10 @@ import TopPanel from './ChatComponents/Toppanel';
 import WebSocketInstance from '../websocket';
 import { authAxios } from '../components/util';
 import axios from 'axios';
+import AddChatModal from './Popup';
+import * as navActions from '../store/actions/nav'
+import { connect } from 'react-redux';
+
 
 class Chat extends React.Component{
   // the add callbacks basically calls the commands
@@ -16,9 +20,9 @@ class Chat extends React.Component{
 // the id is taken from the slug made by Contact.js
   initialiseChat() {
     this.waitForSocketConnection(()=> {
-      WebSocketInstance.addCallbacks(
-        this.setMessages.bind(this),
-        this.addMessages.bind(this));
+      // WebSocketInstance.addCallbacks(
+      //   this.setMessages.bind(this),
+      //   this.addMessages.bind(this));
       WebSocketInstance.fetchMessages(
         this.props.username,
         this.props.match.params.id
@@ -52,18 +56,18 @@ class Chat extends React.Component{
     }
 
     // the second parameter of that is what you will add in
-    addMessages(message){
-      this.setState({
-        messages: [...this.state.messages, message]
-      })
-    }
-
-// this to have all the messages you have been typing back and forth
-    setMessages(messages) {
-      this.setState({
-        messages: messages.reverse()
-      });
-    }
+//     addMessages(message){
+//       this.setState({
+//         messages: [...this.state.messages, message]
+//       })
+//     }
+//
+// // this to have all the messages you have been typing back and forth
+//     setMessages(messages) {
+//       this.setState({
+//         messages: messages.reverse()
+//       });
+//     }
 // the reason why two messages show up is because you intialized it once but then the props updated again
 // so the intialized chat gets called mutliple times
 // so basically you send the message and connecting to a new websocket when you change urls and not
@@ -173,18 +177,21 @@ class Chat extends React.Component{
     }
 
     render(){
-      console.log(this.props)
+      console.log(this.props.showAddChatPopup)
       const messages = this.state.messages;
       return(
         <div id="frame">
           <Sidepanel {...this.props} {...this.state}/>
+          <AddChatModal
+          isVisible ={this.props.showAddChatPopup}
+          close = {() => this.props.closeAddChatPopup()} />
          <div className="content">
           <TopPanel />
             <div className="messages">
               <ul id="chat-log">
                 {
-                    messages &&
-                    this.renderMessages(messages)
+                    this.props.messages &&
+                    this.renderMessages(this.props.messages)
                 }
                 <div style={{ float:"left", clear: "both" }}
                     ref={(el) => { this.messagesEnd = el; }}>
@@ -213,4 +220,17 @@ class Chat extends React.Component{
     }
 }
 
-export default Chat;
+const mapStateToProps = state => {
+  return {
+    showAddChatPopup: state.nav.showAddChatPopup,
+    messages: state.message.messages
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeAddChatPopup: () => dispatch(navActions.closeAddChatPopup())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Chat);
