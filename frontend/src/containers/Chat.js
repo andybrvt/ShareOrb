@@ -144,12 +144,13 @@ class Chat extends React.Component{
       return prefix;
     }
 
+
     renderMessages = (messages) => {
       const currentUser = 'admin';
       return messages.map(message =>(
         <li
           key = {message.id}
-          className= {message.author === currentUser ? 'sent' : 'replies'}>
+          className= {message.author === this.props.username ? 'sent' : 'replies'}>
           <img src = 'http://emilcarlsson.se/assets/mikeross.png' />
           <p>
             {message.content}

@@ -5,10 +5,12 @@ import BaseRouter from './routes';
 import 'antd/dist/antd.css';
 import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
+import NotificationWebSocketInstance from './notificationWebsocket';
 import CustomLayout from './containers/Layouts';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
+import * as notificationsActions from './store/actions/notifications';
 
 
 
@@ -27,11 +29,15 @@ class App extends Component {
     WebSocketInstance.addCallbacks(
       this.props.setMessages.bind(this),
       this.props.addMessage.bind(this)
+    );
+    NotificationWebSocketInstance.addCallbacks(
+      this.props.setNotifications.bind(this),
+      this.props.newNotification.bind(this)
     )
   }
 
   render() {
-    console.log(this.props)
+    console.log(NotificationWebSocketInstance)
     return (
       <div>
         <Router>
@@ -58,6 +64,8 @@ const mapDispatchToProps = dispatch => {
     onTryAutoSignup: () => dispatch(authActions.authCheckState()),
     addMessage: message => dispatch(messageActions.addMessage(message)),
     setMessages: messages => dispatch(messageActions.setMessages(messages)),
+    setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
+    newNotification: notification => dispatch(notificationsActions.newNotification(notification))
 
   }
 }

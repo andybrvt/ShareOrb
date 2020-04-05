@@ -1,9 +1,9 @@
 class WebSocketNotifications {
-  static instance = null
+  static instance = null;
   callbacks = {}
 
   static getInstance(){
-    if(!WebSocketNotifications){
+    if(!WebSocketNotifications.instance){
       WebSocketNotifications.instance = new WebSocketNotifications();
     }
     return WebSocketNotifications.instance
@@ -15,12 +15,14 @@ class WebSocketNotifications {
 
   connect(){
     const path = 'ws://127.0.0.1:8000/ws/friend-request-notification/'
-    this.socketRef = new WebSocket (path)
+    console.log(path)
+    this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () =>{
       console.log('websocket open')
     }
 // I guess group_send also sends it to onmessage
     this.socketRef.onmessage = (e) => {
+      console.log(e.data)
       this.socketNewNotification(e.data)
     }
 
@@ -46,20 +48,19 @@ class WebSocketNotifications {
     const command = parsedData.command;
     if (command === 'notifications') {
         const notifications = JSON.parse(parsedData.notifications);
-        $('#total-friend-notifications').text(notifications.length);
         for (let i = 0; i < notifications.length; i++) {
             this.callbacks['notifications'](notifications[i])
             // createNotification(notifications[i]);
         }
     } else if (command === 'new_notification') {
-        const notification = $('#total-friend-notifications');
-        notification.text(parseInt(notification.text() + 1));
-        this.callbacks['new_notification'](JSON.parse(parsedData.notification]))
+
+        this.callbacks['new_notification'](JSON.parse(parsedData.notification))
         // createNotification(JSON.parse(data['notification']));
     }
   }
 
   addCallbacks(notificationsCallback, newNotificationCallback){
+
     this.callbacks['notifications'] = notificationsCallback;
     this.callbacks['new_notification'] = newNotificationCallback;
 
@@ -102,6 +103,6 @@ class WebSocketNotifications {
   }
 }
 
-const NotficationWebSocketInstance = WebSocketNotifications.getInstance();
+const NotificationWebSocketInstance = WebSocketNotifications.getInstance();
 
-export default NotficationWebSocketInstance;
+export default NotificationWebSocketInstance;

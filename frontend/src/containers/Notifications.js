@@ -1,7 +1,12 @@
 import React from 'react';
-import NotficationWebSocketInstance from '../notificationWebsocket';
+import NotificationWebSocketInstance from '../notificationWebsocket';
 import { authAxios } from '../components/util';
 import axios from 'axios';
+import { List, Avatar, Button, Skeleton } from 'antd';
+import { connect } from 'react-redux';
+
+
+const count = 3;
 
 
 class Notifications extends React.Component{
@@ -14,17 +19,24 @@ class Notifications extends React.Component{
 // baically the information will be called to the states
   initialiseNotification(){
     this.waitForSocketConnection(() => {
-      NotficationWebSocketInstance.addCallbacks(
-          this.set
-      )
-    })
-  }
+      // when you do the fetchFriendRequests it already called the actions
+      NotificationWebSocketInstance.fetchFriendRequests()
+      })
+      NotificationWebSocketInstance.connect()
+    }
+    
+    constructor(props){
+      super(props)
+      this.initialiseNotification()
+      // these will give the commands the function --> this is similar to the command
+      // array in the consumer.py
+    }
 
   waitForSocketConnection (callback) {
     const component = this;
     setTimeout(
       function(){
-        if (WebSocketNotifications.state() === 1){
+        if (NotificationWebSocketInstance.state() === 1){
           console.log('connection is secure');
           callback();
           return;
@@ -36,32 +48,107 @@ class Notifications extends React.Component{
 
   }
 
-  setNotification(notificaitons) {
-        this.setState({
-          notifications: notifications
-        });
-      }
+  renderTimestamp = (timestamp) => {
+    let prefix = '';
+    const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    if (timeDiff < 1 ) {
+      prefix = `Just now`;
+    } else if (timeDiff < 60 && timeDiff >1 ) {
+      prefix = `${timeDiff} minutes ago`;
+    }else if (timeDiff < 24*60 && timeDiff > 60) {
+      prefix = `${Math.round(timeDiff/60)} hours ago`;
+    } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
+      prefix = `${Math.round(timeDiff/60*24)} days ago`;
+    } else {
+        prefix = `${new Date(timestamp)}`;
+    }
+
+    return prefix;
+  }
+
+  // renderNotifications = (notifications) => {
+  //   return notifications.map(notification => (
+  //     <li class="list">
+  //         <a href="#" title="">
+  //             <img src="images/resources/thumb-1.jpg" alt=""/>
+  //             <div class="mesg-meta">
+  //                 <div> This is the actor (person sending) [{notification.actor.username}] sent recepient (person receiving) [{notification.recipient}] </div>
+  //                 <div>  </div>
+  //                 <div> This is the message: [{notification.description}] </div>
+  //                   <i>The time of this notification: {this.renderTimeStamp(notification.timestamp)}</i>
+  //
+  //
+  //             </div>
+  //         </a>
+  //      </li>;
+  //
+  //    )
+  //   )
+  // }
+
+  onLoadMore = () => {
+    this.setState({
+      loading: true,
+      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
+    });
+    this.getData(res => {
+      const data = this.state.data.concat(res.results);
+      this.setState(
+        {
+          data,
+          list: data,
+          loading: false,
+        },
+        () => {
+          // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+          // In real scene, you can using public method of react-virtualized:
+          // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+          window.dispatchEvent(new Event('resize'));
+        },
+      );
+    });
+  };
 
 
+  render(){
+    console.log(this.props)
 
 
-}
+    return (
 
-// this is to create the notficaiton html
-function createNotification(notification) {
-    let single = `<li class="list">
-                       <a href="#" title="">
-                            <img src="images/resources/thumb-1.jpg" alt="">
-                            <div class="mesg-meta">
-                                <span>${notification.actor.username} ${notification.verb}</span>
-                                <button class="btn btn-primary btn-sm accept-request" onclick="accept(this)" data-friend="${notification.actor.username}">Accept</button>
-                                <button class="btn btn-danger btn-sm">Reject</button>
-                                <br>
-                                <i>2 min ago</i>
-                            </div>
-                       </a>
-                   </li>`;
-    $('#friend-menu').prepend(single);
-}
+            <List
+              className="demo-loadmore-list"
 
-// This is where the data sent from the Websocket is recieved
+              itemLayout="horizontal"
+
+              dataSource={this.props.notifications}
+              renderItem={item => (
+                <List.Item
+                  actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
+                >
+                  <Skeleton avatar title={false} active>
+                    <List.Item.Meta
+                      avatar={
+                        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                      }
+                      title={<a href="https://ant.design">NOTIFICATION</a>}
+
+                      description="This is the actor (person sending)  ${item.actor.username} and ${item.recipient}"
+                    />
+                    <div>content: {this.renderTimeStamp(item.timestamp)}</div>
+                  </Skeleton>
+                </List.Item>
+              )}
+            />
+      )
+
+    }
+  }
+
+  const mapStateToProps = state => {
+    return {
+      notifications: state.notifications.notifications
+    }
+  }
+
+export default connect(mapStateToProps)(Notifications);

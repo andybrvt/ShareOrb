@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth';
 import navReducer from './store/reducers/nav'
 import messageReducer from './store/reducers/messages'
+import notificationsReducer from './store/reducers/notifications'
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
@@ -16,7 +17,8 @@ const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   auth: authReducer,
   nav: navReducer,
-  message: messageReducer
+  message: messageReducer,
+  notifications: notificationsReducer
 })
 //store takes in reducer and an enhancer to handle the middleware
 const store = createStore(

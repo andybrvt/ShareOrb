@@ -14,7 +14,7 @@ from . import models
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from django.http import JsonResponse
-from .serializers import NotificationSerializer
+from . import serializers
 from channels.layers import get_channel_layer
 
 
@@ -88,8 +88,9 @@ class SendFriendRequest(APIView):
         return JsonResponse(data)
 
 class FriendNotification(generics.ListAPIView):
-	queryset = models.CustomNotification.object.all()
-	serializer_class = 
+	serializer_class = serializers.NotificationSerializer
+	queryset = models.CustomNotification.objects.all()
+	
 
 
 # Cancel from sender's end
