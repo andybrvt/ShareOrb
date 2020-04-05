@@ -31,6 +31,35 @@ class ArticleList extends React.Component {
 				});
 			});
 		}
+
+		// // start of notification fetching
+		// if(this.props.match.params.id !== newProps.match.params.id){
+		// 	WebSocketInstance.disconnect();
+		// 	this.waitForSocketConnection(()=> {
+		// 		WebSocketInstance.fetchMessages(
+		// 			this.props.username,
+		// 			newProps.match.params.id
+		// 		)
+		// 	})
+		// 	WebSocketInstance.connect(newProps.match.params.id)
+		// }
+		// const username = newProps.username
+		// if(newProps.isAuthenticated){
+		// axios.all([
+		// 	authAxios.get('http://127.0.0.1:8000/userprofile/current-user'),
+		// 	authAxios.get('http://127.0.0.1:8000/chat/?username='+username)
+		// ])
+		// .then(axios.spread((get1, get2)=> {
+		// 			this.setState({
+		// 				friendList:get1.data.friends,
+		// 				chatList:get2.data,
+		// 		 });
+		// 	 }));
+		// }
+
+
+
+
 	}
 
 	render() {

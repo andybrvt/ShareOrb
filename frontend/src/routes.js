@@ -10,7 +10,8 @@ import UserProfile from './containers/UserProfile';
 import UserProfileView from './containers/Profileview';
 import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
-import Chat from './containers/Chat'
+import Chat from './containers/Chat';
+import Notifications from './containers/Notifications';
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -37,6 +38,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list/' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/chat/:id' render={(props) => <Chat {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/notifications' render={(props) => <Notifications {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
       </div>
 

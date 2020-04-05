@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.timezone import now
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -34,3 +36,32 @@ class FriendRequest(models.Model):
 
 	def __str__(self):
 		return "From {}, to {}".format(self.from_user.username, self.to_user.username)
+
+
+class CustomNotification(models.Model):
+    type = models.CharField(default='friend', max_length=30)
+
+    # this is the login user
+    recipient = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=False,
+        related_name='notifications',
+        on_delete=models.CASCADE
+    )
+    unread = models.BooleanField(default=True, blank=False, db_index=True)
+
+    # this is the person that can do stuff to the notifcations
+    actor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=False,
+        related_name ='friends_actor',
+        on_delete=models.CASCADE
+    )
+
+    verb = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    timestamp = models.DateTimeField(default=now, db_index=True)
+
+    deleted = models.BooleanField(default=False, db_index=True)
+    emailed = models.BooleanField(default=False, db_index=True)

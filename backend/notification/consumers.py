@@ -1,6 +1,5 @@
 import json
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from django.contrib.auth import get_user_model
 from django.core import serializers
 
 from userprofile.models import CustomNotification
@@ -34,6 +33,7 @@ class NotificationConsumer(AsyncJsonWebsocketConsumer):
 
     async def notify(self, event):
         await self.send_json(event)
+
 
     async def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)

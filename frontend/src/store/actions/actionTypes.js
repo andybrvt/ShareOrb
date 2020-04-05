@@ -12,6 +12,8 @@ export const SET_MESSAGES = "SET_MESSAGES";
 
 export const GET_CHATS_SUCCESS = "GET_CHATS_SUCCESS"
 
+
+
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

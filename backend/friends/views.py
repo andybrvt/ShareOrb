@@ -6,13 +6,19 @@ from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
-from .models import Profile, FriendRequest
+from .models import Profile, FriendRequest, CustomNotification;
 from django.http import HttpResponse
 from rest_framework import generics
 from . import serializers
 from . import models
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
+from django.http import JsonResponse
+from .serializers import NotificationSerializer
+from channels.layers import get_channel_layer
+
+
+
 
 
 
@@ -64,7 +70,27 @@ class SendFriendRequest(APIView):
         frequest, created = models.FriendRequest.objects.get_or_create(
             from_user=request.user,
             to_user=user)
-        return Response('request sent')
+		# the notifications makes a new notification object
+        notification = CustomNotification.objects.create(type="friend", recipient=user, actor=request.user, verb="sent you friend request")
+        channel_layer = get_channel_layer()
+        channel = "notifications_{}".format(user.username)
+        async_to_sync(channel_layer.group_send)(
+            channel, {
+                "type": "notify",  # method name
+                "command": "new_notification",
+                "notification": json.dumps(NotificationSerializer(notification).data)
+            }
+        )
+        data = {
+            'status': True,
+            'message': "Request sent.",
+        }
+        return JsonResponse(data)
+
+class FriendNotification(generics.ListAPIView):
+	queryset = models.CustomNotification.object.all()
+	serializer_class = 
+
 
 # Cancel from sender's end
 class CancelFriendRequest(APIView):

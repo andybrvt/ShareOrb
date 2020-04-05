@@ -78,7 +78,7 @@ class CustomNotification(models.Model):
     recipient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         blank=False,
-        related_name='notifications',
+        related_name='user_notifications',
         on_delete=models.CASCADE
     )
     unread = models.BooleanField(default=True, blank=False, db_index=True)
