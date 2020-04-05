@@ -43,6 +43,7 @@ class Chat extends React.Component{
       const component = this;
       setTimeout(
         function(){
+          console.log(WebSocketInstance.state())
           if (WebSocketInstance.state() === 1){
             console.log('connection is secure');
             callback();

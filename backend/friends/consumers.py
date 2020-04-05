@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from django.core import Serializers
+from django.core import serializers
 from django.forms import model_to_dict
 
 from .serializers import NotificationSerializer
@@ -9,7 +9,7 @@ from .models import CustomNotification
 class FriendRequestConsumer(AsyncJsonWebsocketConsumer):
     # After going to def recieve, and if the command is 'fetch_friend_notifications'
     # it will then go to NotificationWebsocket.js which will check the command
-     async def fetch_messages(self):
+    async def fetch_messages(self):
         user = self.scope['user']
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=user,
                                                                                   type="friend")
@@ -23,7 +23,7 @@ class FriendRequestConsumer(AsyncJsonWebsocketConsumer):
 
     # this will then take all the notifications that comes in, turns it to json
     # then put it into a list and the return it
-     def notifications_to_json(self, notifications):
+    def notifications_to_json(self, notifications):
         result = []
         for notification in notifications:
             result.append(self.notification_to_json(notification))
@@ -31,7 +31,7 @@ class FriendRequestConsumer(AsyncJsonWebsocketConsumer):
 
     # this def is just used to structure the notifications and put it into json
     # form
-    @staticmethod
+    # @staticmethod
     def notification_to_json(notification):
         return {
             'actor': serializers.serialize('json', [notification.actor]),
@@ -47,7 +47,7 @@ class FriendRequestConsumer(AsyncJsonWebsocketConsumer):
         grp = 'notifications_{}'.format(user.username)
         await self.accept()
         # so grp will be the group name and it will be set to teh self.channel_name
-        await self.channel_layer.group_add(grp, seluserf.channel_name)
+        await self.channel_layer.group_add(grp, self.channel_name)
 
     # just used to disconnect your websocekt
     async def disconnect(self, close_code):

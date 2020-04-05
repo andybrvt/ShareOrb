@@ -21,6 +21,7 @@ class WebSocketNotifications {
       console.log('websocket open')
     }
 // I guess group_send also sends it to onmessage
+    console.log('here')
     this.socketRef.onmessage = (e) => {
       console.log(e.data)
       this.socketNewNotification(e.data)
@@ -81,7 +82,7 @@ class WebSocketNotifications {
   }
 
   state() {
-    return this.socketRef
+    return this.socketRef.readyState;
   }
 
   waitForSocketConnection(callback) {
