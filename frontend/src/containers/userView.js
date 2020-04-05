@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfilePost from '../components/Form';
-import UserProfileCover from '../components/UserProfileCard.js'
+import UserProfileCover from '../components/UserProfiles/UserProfileCard.js'
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import {connect} from 'react-redux';

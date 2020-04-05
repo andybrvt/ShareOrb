@@ -41,7 +41,7 @@ class UserProfile extends React.Component{
         {this.state.first_name}
         {this.state.last_name}
         {this.state.bio}
-        
+
         <div> hey </div>
         <Button type="primary">Primary</Button>
         <Button type="primary">Primary</Button>
