@@ -20,7 +20,9 @@ class Notifications extends React.Component{
   initialiseNotification(){
     this.waitForSocketConnection(() => {
       // when you do the fetchFriendRequests it already called the actions
-      NotificationWebSocketInstance.fetchFriendRequests()
+      NotificationWebSocketInstance.fetchFriendRequests(
+        this.props.id
+      )
       })
       NotificationWebSocketInstance.connect()
     }

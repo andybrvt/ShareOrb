@@ -1,25 +1,28 @@
 import json
-from channels.generic.websocket import AsyncJsonWebsocketConsumer
+from channels.generic.websocket import JsonWebsocketConsumer
 from django.core import serializers
 from django.forms import model_to_dict
-
+from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
 from .models import CustomNotification
 
-class FriendRequestConsumer(AsyncJsonWebsocketConsumer):
+class FriendRequestConsumer(JsonWebsocketConsumer):
     # After going to def recieve, and if the command is 'fetch_friend_notifications'
     # it will then go to NotificationWebsocket.js which will check the command
-    async def fetch_messages(self):
-        user = self.scope['user']
-        notifications = CustomNotification.objects.select_related('actor').filter(recipient=user,
-                                                                                  type="friend")
+    def fetch_messages(self, data):
+        # user = self.scope['user']
+        print(data)
+        notifications = CustomNotification.objects.select_related('actor').filter(recipient=2,type="friend")
         serializer = NotificationSerializer(notifications, many=True)
+        print(serializer.data)
         content = {
             'command': 'notifications',
             'notifications': json.dumps(serializer.data)
+            # self.notifications_to_json(serializer.data)
+            # json.dumps(serializer.data)
         }
-
-        await self.send_json(content)
+        print(content)
+        self.send_json(content)
 
     # this will then take all the notifications that comes in, turns it to json
     # then put it into a list and the return it
@@ -41,25 +44,27 @@ class FriendRequestConsumer(AsyncJsonWebsocketConsumer):
         }
 
     # this is to connect to the websocket
-    async def connect(self):
+    def connect(self):
         # this is to aunthenticate
         user = self.scope['user']
         grp = 'notifications_{}'.format(user.username)
-        await self.accept()
+        print(grp)
+        self.accept()
         # so grp will be the group name and it will be set to teh self.channel_name
-        await self.channel_layer.group_add(grp, self.channel_name)
+        async_to_sync(self.channel_layer.group_add(grp, self.channel_name))
 
     # just used to disconnect your websocekt
-    async def disconnect(self, close_code):
+    def disconnect(self, close_code):
         user = self.scope['user']
         grp = 'notifications_{}'.format(user.username)
-        await self.channel_layer.group_discard(grp, self.channel_name)
+        async_to_sync (self.channel_layer.group_discard(grp, self.channel_name))
 
-    async def notify(self, event):
-        await self.send_json(event)
+    def notify(self, event):
+        self.send_json(event)
 
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
-    async def receive(self, text_data=None, bytes_data=None, **kwargs):
+    def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_friend_notifications':
-            await self.fetch_messages()
+            self.fetch_messages(data)

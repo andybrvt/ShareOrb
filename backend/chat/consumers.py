@@ -20,6 +20,7 @@ class ChatConsumer(WebsocketConsumer):
         content = {
             'command': 'messages',
             'messages': self.messages_to_json(messages)
+
         }
         self.send_message(content)
  # to get the message you first have go get the message then save it to the right chat
@@ -83,6 +84,7 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data):
         data = json.loads(text_data)
+        print(data)
         self.commands[data['command']](self,data)
 
 

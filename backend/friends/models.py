@@ -65,3 +65,6 @@ class CustomNotification(models.Model):
 
     deleted = models.BooleanField(default=False, db_index=True)
     emailed = models.BooleanField(default=False, db_index=True)
+
+    def __str__(self):
+        return str(self.recipient)

@@ -7,7 +7,6 @@ import friends.routing
 
 # the ProtocolTypeRouter takes in a dictionary of stuff such as
 #websocket and its urls
-print(friends.routing)
 application = ProtocolTypeRouter ({
     'websocket': AuthMiddlewareStack(
         URLRouter(

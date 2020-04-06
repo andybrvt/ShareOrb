@@ -67,8 +67,9 @@ class WebSocketNotifications {
 
   }
   // this will send the messages to the backend
-  fetchFriendRequests(){
+  fetchFriendRequests(userId){
     this.sendNotification({
+      userId: userId,
       command: 'fetch_friend_notifications'
     })
   }

@@ -35,7 +35,9 @@ class NotificationConsumer(AsyncJsonWebsocketConsumer):
         await self.send_json(event)
 
 
-    async def receive(self, text_data=None, bytes_data=None, **kwargs):
+    async def receive(self, text_data, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print(data)
+        print('right here')
         if data['command'] == 'fetch_like_comment_notifications':
             await self.fetch_messages()
