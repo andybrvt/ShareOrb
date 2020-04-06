@@ -21,7 +21,7 @@ class App extends Component {
   //everythign this is run it will do a try auto signup, it will give
   //App.js this method from the store
     this.props.onTryAutoSignup();
-    // WebSocketInstance.connect();
+    NotificationWebSocketInstance.connect();
 
   }
   constructor(props) {

@@ -24,7 +24,7 @@ class Notifications extends React.Component{
         this.props.id
       )
       })
-      NotificationWebSocketInstance.connect()
+      // NotificationWebSocketInstance.connect()
     }
 
     constructor(props){
@@ -113,27 +113,12 @@ class Notifications extends React.Component{
     });
   };
 
+  componentWillReceiveProps(newProps){
+
+  }
 
   render(){
     console.log(this.props)
-
-                const data = [
-      {
-        title: 'Ant Design Title 1',
-      },
-      {
-        title: 'Ant Design Title 2',
-      },
-      {
-        title: 'Ant Design Title 3',
-      },
-      {
-        title: 'Ant Design Title 4',
-      },
-    ];
-
-    let a="This is the test";
-
 
     return (
 

@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import {Button, Form} from 'antd';
 import { authAxios } from '../components/util';
+import NotificationWebSocketInstance from '../../src/notificationWebsocket';
+import { connect } from "react-redux";
+
 
 
 class PersonalProfile extends React.Component{
@@ -9,8 +12,16 @@ class PersonalProfile extends React.Component{
     super(props);
   }
       onClickSend = (e) =>{
+        e.preventDefault()
         const username = this.props.match.params.username;
         authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+        const notificationObject  = {
+          command: 'send_friend_notification',
+          actor: this.props.currentUser,
+          recipient: this.props.username,
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
         }
 
 
@@ -69,4 +80,11 @@ class PersonalProfile extends React.Component{
       }
     };
 
-export default PersonalProfile;
+const mapStateToProps = state => {
+    return {
+      currentUser: state.auth.username,
+
+      };
+    };
+
+export default connect(mapStateToProps)(PersonalProfile);

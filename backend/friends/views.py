@@ -72,22 +72,7 @@ class SendFriendRequest(APIView):
         frequest, created = models.FriendRequest.objects.get_or_create(
             from_user=request.user,
             to_user=user)
-		# the notifications makes a new notification object
-        notification = CustomNotification.objects.create(type="friend", recipient=user, actor=request.user, verb="sent you friend request")
-        channel_layer = get_channel_layer()
-        channel = "notifications_{}".format(user.username)
-        async_to_sync(channel_layer.group_send)(
-            channel, {
-                "type": "notify",  # method name
-                "command": "new_notification",
-                "notification": json.dumps(serializers.NotificationSerializer(notification).data)
-            }
-        )
-        data = {
-            'status': True,
-            'message': "Request sent.",
-        }
-        return JsonResponse(data)
+        return Response('request sent')
 
 class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer

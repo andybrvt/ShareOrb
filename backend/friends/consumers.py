@@ -5,24 +5,60 @@ from django.forms import model_to_dict
 from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
 from .models import CustomNotification
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+from channels.layers import get_channel_layer
+
+
+
+
+
 
 class FriendRequestConsumer(JsonWebsocketConsumer):
     # After going to def recieve, and if the command is 'fetch_friend_notifications'
     # it will then go to NotificationWebsocket.js which will check the command
-    def fetch_messages(self, data):
-        # user = self.scope['user']
-        print(data['userId'])
+    def fetch_notifications(self, data):
+        user = self.scope['user']
+        print('first')
+        print(user)
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId'],type="friend")
         serializer = NotificationSerializer(notifications, many=True)
-        print(serializer.data)
         content = {
             'command': 'notifications',
             'notifications': json.dumps(serializer.data)
             # self.notifications_to_json(serializer.data)
             # json.dumps(serializer.data)
         }
-        print(content)
         self.send_json(content)
+
+
+# type is important, it will run the function in consumers under that type name
+    def send_notification (self, data):
+        user = self.scope['user']
+        print('second')
+        print(user)
+        recipient = get_object_or_404(User, username=data['recipient'])
+        actor = get_object_or_404(User, username=data['actor'])
+        notification = CustomNotification.objects.create(type="friend", recipient=recipient, actor=actor, verb="sent you friend request")
+        serializer = NotificationSerializer(notification)
+        content = {
+            "command": "new_notification",
+            "notification": json.dumps(serializer.data)
+        }
+        return self.send_new_notification(content)
+
+
+    def send_new_notification(self, notification):
+            # Send message to room group
+        channel_layer = get_channel_layer()
+        channel = "notifications_{}".format(recipient.username)
+        async_to_sync(channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_notification',
+                'notification': notification
+            }
+        )
 
     # this will then take all the notifications that comes in, turns it to json
     # then put it into a list and the return it
@@ -47,9 +83,11 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     def connect(self):
         # this is to aunthenticate
         user = self.scope['user']
+        print(user)
         grp = 'notifications_{}'.format(user.username)
         print(grp)
         self.accept()
+
         # so grp will be the group name and it will be set to teh self.channel_name
         async_to_sync(self.channel_layer.group_add(grp, self.channel_name))
 
@@ -65,6 +103,13 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_friend_notifications':
-            self.fetch_messages(data)
+            self.fetch_notifications(data)
+        if data['command'] == 'send_friend_notification':
+            self.send_notification(data)
+
+    def new_notification(self, event):
+        notification = event['notification']
+        print(notification)
+        # Send message to WebSocket
+        self.send_json(text_data=json.dumps(notification))
