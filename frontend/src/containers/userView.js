@@ -32,6 +32,13 @@ class UserView extends React.Component {
 	render() {
     const {profileList} = this.state
 		return (
+
+
+
+
+
+
+
       <div>
         {profileList.map((j,index) => {
           return <UserProfileCover data = {j} key ={index} />
