@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import json
 # Create your views here.
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -16,6 +16,8 @@ from rest_framework.status import HTTP_200_OK
 from django.http import JsonResponse
 from . import serializers
 from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 
 
 
@@ -78,7 +80,7 @@ class SendFriendRequest(APIView):
             channel, {
                 "type": "notify",  # method name
                 "command": "new_notification",
-                "notification": json.dumps(NotificationSerializer(notification).data)
+                "notification": json.dumps(serializers.NotificationSerializer(notification).data)
             }
         )
         data = {
@@ -90,7 +92,7 @@ class SendFriendRequest(APIView):
 class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer
 	queryset = models.CustomNotification.objects.all()
-	
+
 
 
 # Cancel from sender's end

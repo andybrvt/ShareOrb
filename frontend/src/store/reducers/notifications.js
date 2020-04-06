@@ -6,7 +6,9 @@ const initialState = {
 };
 
 const setNotifications = (state, action) => {
+  console.log(action.notifications)
   return updateObject(state, {
+
     notifications: action.notifications
   });
 };

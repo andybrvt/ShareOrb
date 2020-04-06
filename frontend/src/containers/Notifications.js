@@ -117,6 +117,23 @@ class Notifications extends React.Component{
   render(){
     console.log(this.props)
 
+                const data = [
+      {
+        title: 'Ant Design Title 1',
+      },
+      {
+        title: 'Ant Design Title 2',
+      },
+      {
+        title: 'Ant Design Title 3',
+      },
+      {
+        title: 'Ant Design Title 4',
+      },
+    ];
+
+    let a="This is the test";
+
 
     return (
 
@@ -127,23 +144,21 @@ class Notifications extends React.Component{
 
               dataSource={this.props.notifications}
               renderItem={item => (
-                <List.Item
-                  actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
-                >
-                  <Skeleton avatar title={false} active>
-                    <List.Item.Meta
-                      avatar={
-                        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                      }
-                      title={<a href="https://ant.design">NOTIFICATION</a>}
 
-                      description="This is the actor (person sending)  ${item.actor.username} and ${item.recipient}"
-                    />
-                    <div>content: {this.renderTimeStamp(item.timestamp)}</div>
-                  </Skeleton>
+
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    title={<a href="https://ant.design">{item.title}</a>}
+
+                    description={"This is the description     ["+item.description+"    ]  \n"+
+                      "This is the recipientID    "+item.recipient+"    This is the actor "+item.actor.username}
+                  />
                 </List.Item>
               )}
             />
+
+
       )
 
     }

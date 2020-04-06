@@ -23,7 +23,7 @@ class WebSocketNotifications {
 // I guess group_send also sends it to onmessage
     console.log('here')
     this.socketRef.onmessage = (e) => {
-      console.log(e.data)
+      
       this.socketNewNotification(e.data)
     }
 
@@ -47,12 +47,13 @@ class WebSocketNotifications {
   socketNewNotification(data) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
+    console.log(parsedData.notifications)
     if (command === 'notifications') {
         const notifications = JSON.parse(parsedData.notifications);
-        for (let i = 0; i < notifications.length; i++) {
-            this.callbacks['notifications'](notifications[i])
+        console.log(notifications)
+        console.log(this.callbacks)
+        this.callbacks['notifications'](notifications)
             // createNotification(notifications[i]);
-        }
     } else if (command === 'new_notification') {
 
         this.callbacks['new_notification'](JSON.parse(parsedData.notification))

@@ -11,8 +11,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # it will then go to NotificationWebsocket.js which will check the command
     def fetch_messages(self, data):
         # user = self.scope['user']
-        print(data)
-        notifications = CustomNotification.objects.select_related('actor').filter(recipient=2,type="friend")
+        print(data['userId'])
+        notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId'],type="friend")
         serializer = NotificationSerializer(notifications, many=True)
         print(serializer.data)
         content = {

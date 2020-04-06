@@ -33,7 +33,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/' component = {LoginForm} />
         <Route exact path = '/signup/' component= {Signup} />
         <Route exact path = '/userview/' render={(props) => <UserView {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/userview/:username' render={(props) => <UserProfileView {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/userview/:username' render={(props) => <UserProfileView {...props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/current-user/' render={(props) => <UserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list/' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
