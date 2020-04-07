@@ -1,4 +1,12 @@
-
+@font-face {
+    font-family: 'Adobe Clean';
+    src: local('Adobe Clean Light'), local('Adobe-Clean-Light'),
+        url('AdobeClean-Light.woff2') format('woff2'),
+        url('AdobeClean-Light.woff') format('woff'),
+        url('AdobeClean-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
 
 /* https://bootsnipp.com/snippets/E1xV5
 
@@ -38,7 +46,7 @@
             background-color: #fff;
             background-clip: border-box;
             border: none;
-            border-radius: .25rem;
+            border-radius: .25rem;p
         }
 
 .myback-img {
@@ -49,6 +57,14 @@
             object-fit: cover;
             border-radius: .25rem;
         } */
+
+
+
+        .test{
+          font-family: 'Adobe Clean';
+          font-size: 25px;
+
+        }
 
         body {
                font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;

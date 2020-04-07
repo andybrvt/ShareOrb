@@ -3,6 +3,11 @@ import { Card } from 'antd';
 import {Button} from 'antd';
 import { authAxios } from '../../components/util';
 import './UserProfileCard.css';
+
+
+import './AdobeClean-Light.ttf'
+
+
 const { Meta } = Card;
 
 class UserProfileCard extends React.Component {
@@ -59,7 +64,9 @@ class UserProfileCard extends React.Component {
         </div>
 
 
-
+        <div class="test">
+          this is a test
+        </div>
 
 
     </div>
