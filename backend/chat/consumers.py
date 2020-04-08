@@ -30,7 +30,6 @@ class ChatConsumer(WebsocketConsumer):
         message = Message.objects.create(
             contact = user_contact,
             content = data['message'] )
-        print(message)
         current_chat = views.get_current_chat(data['chatId'])
         current_chat.messages.add(message)
         current_chat.save()
@@ -85,7 +84,6 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data):
         data = json.loads(text_data)
-        print(data)
         self.commands[data['command']](self,data)
 
 

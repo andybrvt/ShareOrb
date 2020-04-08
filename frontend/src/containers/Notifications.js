@@ -24,7 +24,7 @@ class Notifications extends React.Component{
         this.props.id
       )
       })
-      // NotificationWebSocketInstance.connect()
+      NotificationWebSocketInstance.connect()
     }
 
     constructor(props){
@@ -151,7 +151,8 @@ class Notifications extends React.Component{
 
   const mapStateToProps = state => {
     return {
-      notifications: state.notifications.notifications
+      notifications: state.notifications.notifications,
+      username: state.auth.username
     }
   }
 

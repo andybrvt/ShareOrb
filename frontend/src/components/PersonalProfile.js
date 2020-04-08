@@ -14,6 +14,10 @@ class PersonalProfile extends React.Component{
       onClickSend = (e) =>{
         e.preventDefault()
         const username = this.props.match.params.username;
+        axios.default.headers = {
+          "Content-type": "application/json",
+          Authorization: `Token ${this.props.token}`
+        }
         authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
         const notificationObject  = {
           command: 'send_friend_notification',
@@ -66,7 +70,6 @@ class PersonalProfile extends React.Component{
         <Button danger style={{ background: "white", color: "red" }} onClick = {this.onClickDeleteFriend}>Remove Friend </Button>
         </div>
 
-        All of USER [{this.props.username}]'s friends: [
         {this.props.friends}
        ]
 
@@ -83,7 +86,7 @@ class PersonalProfile extends React.Component{
 const mapStateToProps = state => {
     return {
       currentUser: state.auth.username,
-
+      token: state.auth.token
       };
     };
 
