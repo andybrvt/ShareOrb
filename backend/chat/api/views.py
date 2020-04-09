@@ -17,9 +17,7 @@ from userprofile import models
 
 def get_user_contact(username):
     user = settings.AUTH_USER_MODEL
-    print(user)
     user = get_object_or_404(models.User, username = username)
-    print(user)
     contact = get_object_or_404(Contact, user = user)
     return contact
 

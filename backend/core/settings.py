@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -158,18 +158,20 @@ MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
-            'rest_framework.permissions.AllowAny',
+            'rest_framework.permissions.IsAuthenticatedOrReadOnly',
             ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.TokenAuthentication',
              'rest_framework.authentication.SessionAuthentication',
+             'rest_framework.authentication.BasicAuthentication',
+
         ),
     }
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False
 
 REST_AUTH_REGISTER_SERIALIZERS = {

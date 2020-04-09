@@ -23,6 +23,7 @@ class WebSocketNotifications {
 // I guess group_send also sends it to onmessage
     console.log('here')
     this.socketRef.onmessage = (e) => {
+      console.log(e.data)
       this.socketNewNotification(e.data)
     }
 

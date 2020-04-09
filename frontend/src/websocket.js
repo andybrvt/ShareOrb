@@ -39,6 +39,7 @@ class WebSocketService {
     // }))
     console.log('fetch message success')
     this.socketRef.onmessage = (e) =>{
+      console.log(e.data)
       this.socketNewMessage(e.data);
     }
 

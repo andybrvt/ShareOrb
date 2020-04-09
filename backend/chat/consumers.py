@@ -4,6 +4,9 @@ from channels.generic.websocket import WebsocketConsumer
 from .models import Message
 from userprofile.models import User
 from . import views
+from channels.auth import get_user
+from channels.auth import login
+
 
 # so you want to first pull all your data first and then put them in a dictionary
 #then you would return the cotent in a json formation and that function for the json
@@ -61,6 +64,7 @@ class ChatConsumer(WebsocketConsumer):
         'new_message': new_message,
     }
 
+    # @channel_session_user_from_http
     def connect(self):
         print(self.scope['user'])
         self.room_name = self.scope['url_route']['kwargs']['room_name']
