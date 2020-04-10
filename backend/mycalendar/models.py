@@ -16,6 +16,9 @@ class Calendar(models.Model):
 	def __unicode__(self):
 		return self.title
 
+	def __str__(self):
+		return self.title
+
 
 
 class Event(models.Model):
@@ -29,4 +32,7 @@ class Event(models.Model):
 	end_time = models.DateTimeField(default =timezone.now)
 	location = models.CharField(max_length = 255)
 	def __unicode__(self):
+		return self.title
+
+	def __str__(self):
 		return self.title

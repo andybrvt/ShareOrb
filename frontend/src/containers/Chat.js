@@ -1,5 +1,5 @@
 import React from 'react';
-import './Chat.css';
+import './Container_CSS/Chat.css';
 import Sidepanel from './ChatComponents/Sidepanel';
 import TopPanel from './ChatComponents/Toppanel';
 import WebSocketInstance from '../websocket';

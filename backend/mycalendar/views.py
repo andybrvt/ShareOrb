@@ -18,4 +18,7 @@ class CalendarView(generics.ListAPIView):
 
 class CalendarEventsView(generics.ListAPIView):
     serializer_class = serializers.EventSerializer
-    queryset = models.Event.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        queryset = models.Event.objects.filter(person = user)
+        return queryset

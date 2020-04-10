@@ -27,3 +27,5 @@ const reducer = (state= initialState, action ) => {
 };
 
 export default reducer;
+
+// once you are done with reducers, add it into index.js

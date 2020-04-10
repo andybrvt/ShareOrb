@@ -15,6 +15,8 @@ export const GET_CHATS_SUCCESS = "GET_CHATS_SUCCESS";
 export const SET_NOTIFICATIONS = 'SET_NOTIFICATIONS';
 export const NEW_NOTIFICATION = 'NEW_NOTIFICATION';
 
+export const ADD_EVENT_CALENDAR = 'ADD_EVENT_CALENDAR';
+export const LOAD_EVENTS_CALENDAR = 'LOAD_EVENTS_CALENDAR';
 
 
 // action type > actions > dispatch > reducers > state
