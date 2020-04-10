@@ -10,7 +10,7 @@ class myCalendar extends React.Component{
   state ={
     events: []
   }
-
+// boy
   componentDidMount(){
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .this(res => {
