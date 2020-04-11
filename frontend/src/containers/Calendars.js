@@ -6,18 +6,18 @@ import './Container_CSS/Calendar.css';
 
 
 
-class myCalendar extends React.Component{
+class MyCalendar extends React.Component{
   state ={
     events: []
   }
-// boy
-  componentDidMount(){
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .this(res => {
-      this.setState({
-        events: res.data
-      })
-    })}
+
+  // componentDidMount(){
+  //   authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+  //   .this(res => {
+  //     this.setState({
+  //       events: res.data
+  //     })
+  //   })}
 
     getListData(value) {
       let listData;
@@ -52,7 +52,7 @@ class myCalendar extends React.Component{
 
 
     dateCellRender(value) {
-        const listData = getListData(value);
+        const listData = this.getListData(value);
         return (
           <ul className="events">
             {listData.map(item => (
@@ -73,7 +73,7 @@ class myCalendar extends React.Component{
 
 
     monthCellRender(value) {
-        const num = getMonthData(value);
+        const num = this.getMonthData(value);
           return num ? (
             <div className="notes-month">
               <section>{num}</section>
@@ -84,9 +84,13 @@ class myCalendar extends React.Component{
 
   render() {
     return (
-      <Calendar this.dateCellRender={this.dateCellRender} this.monthCellRender={this.monthCellRender} />
+      <div>
+      <Calendar  />
+
+
+      </div>
     )
   };
 };
 
-export default myCalendar;
+export default MyCalendar;

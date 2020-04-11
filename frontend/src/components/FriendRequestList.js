@@ -34,6 +34,7 @@ class FriendRequestList extends React.Component {
     console.log(userID)
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+user)
     }
+    
 
   onClickDecline = (userID) => {
     const user = userID
