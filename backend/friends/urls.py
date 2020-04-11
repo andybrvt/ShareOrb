@@ -6,8 +6,8 @@ from . import views
 urlpatterns = [
 	path('', views.UserList.as_view(), name="users_list"),
 	path('<slug:user>', views.UserFriendList.as_view(), name = "friend_page"),
-	path('friendrequestList', views.FriendRequestList.as_view(), name="friend_request"),
-	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
+	path('friendrequestList/', views.FriendRequestList.as_view(), name="friend_request"),
+	path('friend-request/send/<slug:id>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:id>', views.CancelFriendRequest.as_view(), name='cancel_request'),
 	path('friend-request/accept/<slug:id>', views.AcceptFriendRequest.as_view(), name='accept_request'),
 	path('friend-request/delete/<slug:id>', views.DeleteFriendRequest.as_view(), name='delete_request'),

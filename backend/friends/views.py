@@ -61,8 +61,8 @@ class FriendRequestList(generics.ListAPIView):
 
 
 class SendFriendRequest(APIView):
-    def post(self, request, username, *args, **kwargs):
-        user = get_object_or_404(User, username = username)
+    def post(self, request, id, *args, **kwargs):
+        user = get_object_or_404(User, id = id)
         frequest, created = models.FriendRequest.objects.get_or_create(
             from_user=request.user,
             to_user=user)
