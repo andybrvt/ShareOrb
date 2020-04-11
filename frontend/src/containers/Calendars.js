@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { authAxios } from '../components/util';
+// import { authAxios } from '../components/util';
 import { Calendar, Badge } from 'antd';
 import './Container_CSS/Calendar.css';
 
@@ -11,6 +11,8 @@ class MyCalendar extends React.Component{
     events: []
   }
 
+
+
   // componentDidMount(){
   //   authAxios.get('http://127.0.0.1:8000/mycalendar/events')
   //   .this(res => {
@@ -18,6 +20,15 @@ class MyCalendar extends React.Component{
   //       events: res.data
   //     })
   //   })}
+
+  componentWillReceiveProps(newProps){
+    axios.get('http://127.0.0.1:8000/userprofile/list/')
+    .this(res => {
+      this.setState({
+        evnets: res.data
+      })
+    })
+  }
 
     getListData(value) {
       let listData;
