@@ -43,82 +43,42 @@ class MyCalendar extends React.Component{
     getListData(value) {
 
       let listData;
-      console.log(value)
-      for (let i = 0; i < value.length; i++){
-        const event = value[i]
-        const stuff = event.start_time
-        const date_stuff = moment(stuff)
-        // console.log(event.content)
-        // console.log(date_stuff.toArray())
-        // console.log(stuff)
-        switch(date_stuff.date()){
-            case 9:
-              listData = [
-                {tile: event.title, content: event.content}
-              ]
-            default:
-        }
+      console.log(value.date())
+      switch(value.date()){
+          case 15:
+            listData = [
+              {tile: 'sup bro', content: 'going fishing'}
+            ]
+          default:
       }
-      // switch (value) {
-      //   case 9:
-      //     listData = [
-      //       { type: 'warning', content: 'This is warning event.' },
-      //     ];
-      //     break;
-      //   case 10:
-      //     listData = [
-      //       { type: 'warning', content: 'This is warning event.' },
-      //       { type: 'success', content: 'This is usual event.' },
-      //       { type: 'error', content: 'This is error event.' },
-      //     ];
-      //     break;
-      //   case 16:
-      //     listData = [
-      //       { type: 'warning', content: 'This is warning event' },
-      //       { type: 'success', content: 'This is very long usual event。。....' },
-      //       { type: 'error', content: 'This is error event 1.' },
-      //       { type: 'error', content: 'This is error event 2.' },
-      //       { type: 'error', content: 'This is error event 3.' },
-      //       { type: 'error', content: 'This is error event 4.' },
-      //     ];
-      //     break;
-      //   default:
-      // }
       return listData || [];
     }
 
 
-    dateCellRender =(value,events) => {
+    dateCellRender =(value) => {
 
-
-       // const count = Number(value)
-       // console.log(count)
-       // const eventList = {state.events}
-       // const listData = [
-       //   { type: 'warning', content: 'This is warning event' },
-       //   { type: 'success', content: 'This is very long usual event。。....' },
-       //   { type: 'error', content: 'This is error event 1.' },
-       //
-       // ];
-      // console.log(value)
+      console.log(value)
+      const listData = []
       for(let i = 0; i < value.length; i++){
         // console.log(value[i])
-        const stuff = value[i].start_time
-        // console.log(stuff)
+        const stuff = moment(value[i])
+        // const listData = this.getListData(value);
+        listData.push(stuff)
+
+
       }
 
-      const listData = this.getListData(value);
-      console.log(listData)
-        return (
-          <ul className="events">
-            {listData.map(item => (
-              <li key={item.title}>
-                {item.title}
-                {item.content}
-              </li>
-            ))}
-          </ul>
-        );
+      return (
+        <ul className="events">
+          {listData.map(item => (
+            <li key={item.title}>
+              {item.title}
+              {item.content}
+            </li>
+          ))}
+        </ul>
+      );
+
       }
 
 
@@ -144,6 +104,19 @@ class MyCalendar extends React.Component{
   render() {
     console.log(this.state.events)
     const time = this.state.events
+    const value = ['2020-04-15','2020-04-16','2020-04-22','2020-04-28','2020-05-11','2020-07-07','2020-07-09','2020-07-15','2020-08-18','2020-08-20','2020-08-25','2020-09-02','2020-09-07',
+'2020-09-21',
+'2020-09-28',
+'2020-09-29',
+'2020-10-14',
+'2020-10-26',
+'2020-11-04',
+'2020-11-05',
+'2020-12-02',
+'2020-12-08',
+'2020-12-15',
+'2020-12-18',
+'2020-12-31',]
     console.log(time)
     console.log(this.props);
     console.log(this.props.monthCellRender)
@@ -152,7 +125,7 @@ class MyCalendar extends React.Component{
     // if there is something tho then it will put something on
     return (
 
-      <Calendar dateCellRender={() => this.dateCellRender(this.state.events)} monthCellRender={this.monthCellRender}/>
+      <Calendar dateCellRender={() => this.dateCellRender(value)} monthCellRender={this.monthCellRender}/>
 
     )
   };
