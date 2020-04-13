@@ -4,6 +4,7 @@ import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
 
+
 class AndyCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
   state = {
@@ -128,7 +129,13 @@ class AndyCalendar extends React.Component{
             >
             <span className = "number">{formattedDate}</span>
             <span className = "bg"> {formattedDate}</span>
-            <div> It wokred </div>
+            <ul>
+              {toDoStuff.map(item => (
+                <li key={item.content}>
+                  {item.content}
+                </li>
+              ))}
+            </ul>
           </div>
         )} else {days.push(
           <div
