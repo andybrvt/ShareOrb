@@ -1,14 +1,26 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
+import axios from 'axios';
+import { authAxios } from '../components/util';
 
 class AndyCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
   state = {
     currentMonth: new Date(),
-    selectedDate: new Date()
+    selectedDate: new Date(),
+    events: []
   }
 
+
+  componentWillReceiveProps(newProps){
+    axios.get('http://127.0.0.1:8000/userprofile/list/')
+    .then(res => {
+      this.setState({
+        events: res.data
+      })
+    })
+  }
   // When working with dates it is important that you format the
   // the date properly
   renderHeader() {
@@ -53,7 +65,10 @@ class AndyCalendar extends React.Component{
     return <div className = "days row"> {days} </div>
   }
 
-  renderCells() {
+  renderCells(events) {
+    console.log(events)
+    const event = {}
+
     // startOfMonth() will give you the date of the first day of the current month
     // endOfMonth() will give you the date of the last day of the current month
     // the const start date is to fill in the days of the week of the previous month
@@ -77,7 +92,8 @@ class AndyCalendar extends React.Component{
     // for the 42 block of time
     let day = startDate;
     let formattedDate = "";
-
+    const test = new Date('2020-04-11T02:15:45.644498Z')
+    console.log(new Date('2020-04-11T02:15:45.644498Z'))
     // this loop will loop through all the days of the month
     while (day <=endDate){
       // we make it smaller than 7 because we still want to keep the index of the
@@ -91,21 +107,34 @@ class AndyCalendar extends React.Component{
         // the classname in the bottom is to check if its not in the smae month
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
-        days.push(
+        if (dateFns.isSameDay(test, day)){days.push(
+            <div
+              className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
+              : dateFns.isSameDay(day, selectedDate) ?
+            "selected": ""
+              }`}
+              key = {day}
+              onClick = { () =>
+            this.onDateClick(dateFns.parse(cloneDay, 'yyyy-MM-dd', new Date()))}
+            >
+            <span className = "number">{formattedDate}</span>
+            <span className = "bg"> {formattedDate}</span>
+            <div> It wokred </div>
+          </div>
+        )} else {days.push(
           <div
             className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
             : dateFns.isSameDay(day, selectedDate) ?
           "selected": ""
-        }`}
-        key = {day}
-        onClick = { () =>
+            }`}
+            key = {day}
+            onClick = { () =>
           this.onDateClick(dateFns.parse(cloneDay, 'yyyy-MM-dd', new Date()))}
           >
           <span className = "number">{formattedDate}</span>
           <span className = "bg"> {formattedDate}</span>
-
         </div>
-      );
+        )}
       day = dateFns.addDays(day, 1);
       }
       // so this will start at the start of the week and then loop through the 7 days
@@ -155,11 +184,12 @@ class AndyCalendar extends React.Component{
 
   render(){
     // className is to determine the style
+    console.log(this.state)
     return(
       <div className = 'calendar'>
         {this.renderHeader()}
         {this.renderDays()}
-        {this.renderCells()}
+        {this.renderCells(this.state.events)}
       </div>
     )
   }
