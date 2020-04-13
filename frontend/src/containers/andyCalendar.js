@@ -99,7 +99,7 @@ class AndyCalendar extends React.Component{
         }`}
         key = {day}
         onClick = { () =>
-          this.onDateClick(dateFns.parse(cloneDay))}
+          this.onDateClick(dateFns.parse(cloneDay, 'yyyy-MM-dd', new Date()))}
           >
           <span className = "number">{formattedDate}</span>
           <span className = "bg"> {formattedDate}</span>
@@ -111,7 +111,7 @@ class AndyCalendar extends React.Component{
       // once done it will push the list into the rows
       // so there will be a list of list and each list would be a week
       rows.push(
-        <div classname="row" key ={day}>
+        <div className='row' key ={day}>
           {days}
         </div>
       );
@@ -152,8 +152,6 @@ class AndyCalendar extends React.Component{
 
 
   render(){
-    console.log(new Date())
-    console.log('here')
     // className is to determine the style
     return(
       <div className = 'calendar'>
