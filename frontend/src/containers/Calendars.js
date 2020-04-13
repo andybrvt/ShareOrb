@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Calendar, Badge } from 'antd';
+import { Calendar, Badge, Alert } from 'antd';
 import './Container_CSS/Calendar.css';
 import * as moment from 'moment';
 
@@ -14,9 +14,10 @@ class MyCalendar extends React.Component{
 
   }
 
-  state ={
-    events: []
-  }
+  state = {
+    value: moment('2017-04-25'),
+    selectedValue: moment('2017-04-25'),
+  };
 
 
 
@@ -40,8 +41,20 @@ class MyCalendar extends React.Component{
     })
   }
 
-    getListData(value) {
 
+  onPanelChange = value => {
+    this.setState({ value });
+  };
+
+  onSelect = value => {
+    this.setState({
+      value,
+      selectedValue: value,
+    });
+  };
+
+    getListData(value) {
+      console.log(value)
       let listData;
       console.log(value.date())
       switch(value.date()){
@@ -57,10 +70,27 @@ class MyCalendar extends React.Component{
 
     dateCellRender =(value) => {
 
+
+
+
+      const testvalue= moment('2017-04-25');
+      const listData2 = [
+        {tile: 'sup my sister', content: 'going bowling'}
+      ]
+
+      const testData=listData2['content'];
+
+
+
+
+
       console.log(value)
-      const listData = []
+      const listData = [
+        {tile: 'sup bro', content: 'going fishing'}
+      ]
+      // const listData = [] ADD THIS BAKC IN WHEN ITS NOT HARDCORDED
       for(let i = 0; i < value.length; i++){
-        // console.log(value[i])
+
         const stuff = moment(value[i])
         // const listData = this.getListData(value);
         listData.push(stuff)
@@ -76,8 +106,23 @@ class MyCalendar extends React.Component{
               {item.content}
             </li>
           ))}
+
+
+
+
+
+            <li key='blah'>
+              {testData}
+            </li>
+
+
         </ul>
+
+
       );
+
+
+
 
       }
 
@@ -102,30 +147,30 @@ class MyCalendar extends React.Component{
         }
 
   render() {
-    console.log(this.state.events)
-    const time = this.state.events
-    const value = ['2020-04-15','2020-04-16','2020-04-22','2020-04-28','2020-05-11','2020-07-07','2020-07-09','2020-07-15','2020-08-18','2020-08-20','2020-08-25','2020-09-02','2020-09-07',
-'2020-09-21',
-'2020-09-28',
-'2020-09-29',
-'2020-10-14',
-'2020-10-26',
-'2020-11-04',
-'2020-11-05',
-'2020-12-02',
-'2020-12-08',
-'2020-12-15',
-'2020-12-18',
-'2020-12-31',]
-    console.log(time)
-    console.log(this.props);
-    console.log(this.props.monthCellRender)
+
+
+    const { value, selectedValue } = this.state;
+
+
     // <Calendar />
     // the datecellRender will run through each cell that is present in the current month, if the getListData is empty then it will not put anything
     // if there is something tho then it will put something on
+    //
+    //
+    // to SELECT a date: <Calendar value={value} onSelect={(e)=>{console.log(e)}}/>
     return (
 
-      <Calendar dateCellRender={() => this.dateCellRender(value)} monthCellRender={this.monthCellRender}/>
+
+      <div>
+        <Alert
+          message={`You selected date: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`}
+        />
+        <Calendar value={value}  dateCellRender={() => this.dateCellRender(value)} monthCellRender={this.monthCellRender} onSelect={this.onSelect} onPanelChange={this.onPanelChange}/>
+      </div>
+
+
+
+
 
     )
   };
