@@ -35,7 +35,7 @@ class AndyCalendar extends React.Component{
   }
 
   renderDays() {
-    const dateFormat = "dddd"
+    const dateFormat = "iiii"
     const days = []
     // this will get the date of the first week given the date of the current month
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
@@ -103,6 +103,7 @@ class AndyCalendar extends React.Component{
           >
           <span className = "number">{formattedDate}</span>
           <span className = "bg"> {formattedDate}</span>
+
         </div>
       );
       day = dateFns.addDays(day, 1);
@@ -121,6 +122,7 @@ class AndyCalendar extends React.Component{
     }
     // now this will return a list of list and each week representing a week
     // with each item as the day
+    console.log(rows)
     return <div className = "body"> {rows} </div>
   }
 
