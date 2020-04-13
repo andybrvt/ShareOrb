@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 import './Containers.css'
 import { authAxios } from '../components/util';
-
+import { Icon } from 'semantic-ui-react'
 const { Header, Footer, Content } = Layout;
 
 // Function: boarder layout that wraps around each of the other containers, and has
@@ -60,7 +60,11 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="1">
-                        <a href='/home'>Home</a>
+
+                        <a href='/home'>
+                          <Icon name='large home' />
+                          Home
+                        </a>
                     </Menu.Item>
                     :
                     <Menu.Item key="1">
@@ -70,7 +74,11 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="3">
-                        <a href='/userview'>Users</a>
+
+                        <a href='/userview'>
+                          <Icon name='large user plus' />
+                          Users
+                        </a>
                     </Menu.Item>
                     :
                     <Menu.Item key="3">
@@ -81,7 +89,11 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="4">
-                        <a href='/current-user'>Profile</a>
+
+                        <a href='/current-user'>
+                          <Icon name='large user circle' />
+                          Users
+                        </a>
                     </Menu.Item>
                     :
                     <Menu.Item key="4">
@@ -101,13 +113,28 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="6">
-                        <a href='/friends-list'>Friend</a>
+                        <a href='/friends-list'>Friends</a>
                     </Menu.Item>
                     :
                     <Menu.Item key="6">
                     </Menu.Item>
                 }
 
+
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="7">
+
+                        <a href='/andycalendar'>
+                        <div class="column"><i class="calendar outline icon"></i>Calendar Outline</div>
+
+                        </a>
+                    </Menu.Item>
+
+                    :
+                    <Menu.Item key="7">
+                    </Menu.Item>
+                }
 
 
 
@@ -125,12 +152,17 @@ class CustomLayout extends React.Component {
 
 
                 <Menu.Item key="9">
-                     <div class="column"><i class="comments icon"></i></div>
-                       <a href='/chat/1'></a>
+
+
+                       <a href='/chat/1'>
+                         <Icon name='large comments icon' />
+                         Messages
+                       </a>
+
                 </Menu.Item>
 
                 <Menu.Item key="10">
-                     <div class="column"><i class="cloud icon"></i>Notifications</div>
+                     <div class="column"><i class=" large cloud icon"></i>Notifications</div>
                 </Menu.Item>
 
 

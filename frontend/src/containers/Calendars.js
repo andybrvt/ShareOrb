@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Calendar, Badge, Alert } from 'antd';
+import { Calendar, Badge, Alert, DatePicker } from 'antd';
 import './Container_CSS/Calendar.css';
 import * as moment from 'moment';
 
@@ -15,8 +15,8 @@ class MyCalendar extends React.Component{
   }
 
   state = {
-    value: moment('2017-04-25'),
-    selectedValue: moment('2017-04-25'),
+    value: moment('2015-04-01', 'YYYY-MM-DD'),
+    selectedValue: moment('2017-04-26'),
   };
 
 
@@ -54,13 +54,13 @@ class MyCalendar extends React.Component{
   };
 
     getListData(value) {
-      console.log(value)
       let listData;
+      console.log(value)
       console.log(value.date())
       switch(value.date()){
           case 15:
             listData = [
-              {tile: 'sup bro', content: 'going fishing'}
+              {tile: 'sup bro', content: 'going baseball'}
             ]
           default:
       }
@@ -69,7 +69,7 @@ class MyCalendar extends React.Component{
 
 
     dateCellRender =(value) => {
-
+      console.log(value.date)
 
 
 
@@ -82,9 +82,6 @@ class MyCalendar extends React.Component{
 
 
 
-
-
-      console.log(value)
       const listData = [
         {tile: 'sup bro', content: 'going fishing'}
       ]
@@ -92,12 +89,13 @@ class MyCalendar extends React.Component{
       for(let i = 0; i < value.length; i++){
 
         const stuff = moment(value[i])
-        // const listData = this.getListData(value);
+        const listData = this.getListData(value);
         listData.push(stuff)
+        listData.push("nexts")
 
 
       }
-
+      console.log(listData);
       return (
         <ul className="events">
           {listData.map(item => (
@@ -146,6 +144,18 @@ class MyCalendar extends React.Component{
           ) : null;
         }
 
+   onFullRender(date){
+        const day = date.day();
+        let style;
+        if(day === 1) {
+         style = { border: "1px solid #d9d9d9"};
+        }
+        else {
+         style = { border: "1px solid red"};
+        }
+        return <div style={style}>{day}</div>;
+      }
+
   render() {
 
 
@@ -165,7 +175,15 @@ class MyCalendar extends React.Component{
         <Alert
           message={`You selected date: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`}
         />
-        <Calendar value={value}  dateCellRender={() => this.dateCellRender(value)} monthCellRender={this.monthCellRender} onSelect={this.onSelect} onPanelChange={this.onPanelChange}/>
+        <Calendar value={value}  dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.onSelect} onPanelChange={this.onPanelChange} onFullRender={this.onFullRender}/>
+        <DatePicker
+            format="04/22/2017"
+            placeholder="Banana"
+            locale="en_US"
+            onChange={console.log}
+        />
+
+
       </div>
 
 
