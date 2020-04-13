@@ -14,7 +14,7 @@ class AndyCalendar extends React.Component{
 
 
   componentWillReceiveProps(newProps){
-    axios.get('http://127.0.0.1:8000/userprofile/list/')
+    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
         events: res.data
@@ -92,8 +92,7 @@ class AndyCalendar extends React.Component{
     // for the 42 block of time
     let day = startDate;
     let formattedDate = "";
-    const test = new Date('2020-04-11T02:15:45.644498Z')
-    console.log(new Date('2020-04-11T02:15:45.644498Z'))
+    const test = new Date()
     // this loop will loop through all the days of the month
     while (day <=endDate){
       // we make it smaller than 7 because we still want to keep the index of the
