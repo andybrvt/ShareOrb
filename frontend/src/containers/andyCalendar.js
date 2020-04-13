@@ -86,7 +86,7 @@ class AndyCalendar extends React.Component{
 
     const dateFormat = "d";
     const rows = []
-
+    let toDoStuff = []
     let days = [];
     // day is the startday, which starts at the first day of the week
     // for the 42 block of time
@@ -95,9 +95,19 @@ class AndyCalendar extends React.Component{
     const test = new Date()
     // this loop will loop through all the days of the month
     while (day <=endDate){
+
+
       // we make it smaller than 7 because we still want to keep the index of the
       // weekdays the same
       for (let i= 0; i<7; i++){
+        for (let item = 0; item < events.length; item++){
+          console.log(new Date(events[item].start_time))
+          if (dateFns.isSameDay(new Date(events[item].start_time), day)){
+            toDoStuff.push(
+              events[item]
+            )
+          }
+        }
         // this give the date will give the day numnber in 1-365
         formattedDate = dateFns.format(day, dateFormat);
         // used clone day so that it would do the selected day and not the endDay
@@ -106,7 +116,7 @@ class AndyCalendar extends React.Component{
         // the classname in the bottom is to check if its not in the smae month
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
-        if (dateFns.isSameDay(test, day)){days.push(
+        if (toDoStuff.length > 0){days.push(
             <div
               className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
               : dateFns.isSameDay(day, selectedDate) ?
@@ -134,6 +144,7 @@ class AndyCalendar extends React.Component{
           <span className = "bg"> {formattedDate}</span>
         </div>
         )}
+      toDoStuff = []
       day = dateFns.addDays(day, 1);
       }
       // so this will start at the start of the week and then loop through the 7 days
