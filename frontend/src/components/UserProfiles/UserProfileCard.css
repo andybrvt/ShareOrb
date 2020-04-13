@@ -66,8 +66,10 @@
 
         }
 
+
+/* delete body IT IS NOT USED */
         body {
-               font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+               font-family: 'Adobe Clean';
                color: #989898;
                margin: 10px;
                }
