@@ -86,7 +86,6 @@ const CalendarForm = (props) => {
 	<Container style={{paddingTop: '10',zIndex:'-1'}}>
 	  <form onSubmit={onFormSubmit}>
 	    <div className="upload-container">
-				<h1 className="heading">#New post</h1>
 				<div>
         Title
         <input type="text" name="title" onChange= {onChangeTitle} value ={title}/>
@@ -98,7 +97,7 @@ const CalendarForm = (props) => {
         Start Date
 				<DatePicker name = "start" onChange={onChangeStart} value = {start_time} format = {dateFormat}/>
         <br />
-        End Date
+        End Date 
         <DatePicker name = "end" onChange={onChangeEnd} value = {end_time} format ={dateFormat}/>
         <br />
         Location
