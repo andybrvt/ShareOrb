@@ -36,3 +36,11 @@ class EventSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Event
         fields = '__all__'
+
+class CreateEventSerializer (serializers.ModelSerializer):
+    # Event serializer for admins
+    # id = serializers.ReadyOnlyField()
+
+    class Meta:
+        model = models.Event
+        fields = ('title', 'content', 'start_time', 'end_time', 'location', 'person')

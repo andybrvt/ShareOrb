@@ -12,6 +12,8 @@ from . import serializers
 #
 #     return
 
+
+
 class CalendarView(generics.ListAPIView):
     serializer_class = serializers.CalendarOwnedSerializer
     queryset = models.Calendar.objects.all()
@@ -22,3 +24,7 @@ class CalendarEventsView(generics.ListAPIView):
         user = self.request.user
         queryset = models.Event.objects.filter(person = user)
         return queryset
+
+class CalendarEventsCreate(generics.CreateAPIView):
+    serializer_class = serializers.CreateEventSerializer
+    queryset = models.Calendar.objects.all()

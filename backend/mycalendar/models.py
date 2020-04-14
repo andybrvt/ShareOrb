@@ -30,7 +30,7 @@ class Event(models.Model):
 	repeatCondition = models.TextField(blank = True)
 	start_time = models.DateTimeField(default =timezone.now)
 	end_time = models.DateTimeField(default =timezone.now)
-	location = models.CharField(max_length = 255)
+	location = models.CharField(max_length = 255, blank = True)
 	def __unicode__(self):
 		return self.title
 
