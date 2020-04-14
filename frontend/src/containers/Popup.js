@@ -16,6 +16,7 @@ class AddChatModal extends React.Component {
           onCancel={this.props.close}
         >
         <Form />
+        // change the form to whatever form you like
         </Modal>
 
       </div>

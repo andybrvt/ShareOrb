@@ -5,6 +5,8 @@ import axios from 'axios';
 import { authAxios } from '../components/util';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
 import EventDrawer from '../components/EventDrawer.js';
+import * as navActions from '../store/actions/nav'
+import { connect } from 'react-redux';
 
 class AndyCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
@@ -15,11 +17,12 @@ class AndyCalendar extends React.Component{
     drawerVisible: false,
   }
 
-  showDrawer = () => {
-    this.setState({
-      drawerVisible: true,
-    });
-  };
+  // showDrawer = (e) => {
+  //   e.preventDefault()
+  //   this.setState({
+  //     drawerVisible: true,
+  //   });
+  // };
 
   onClose = () => {
     this.setState({
@@ -81,7 +84,6 @@ class AndyCalendar extends React.Component{
   }
 
   renderCells(events) {
-    console.log(events)
     const event = {}
 
     // startOfMonth() will give you the date of the first day of the current month
@@ -116,7 +118,7 @@ class AndyCalendar extends React.Component{
       // weekdays the same
       for (let i= 0; i<7; i++){
         for (let item = 0; item < events.length; item++){
-          console.log(new Date(events[item].start_time))
+
           if (dateFns.isSameDay(new Date(events[item].start_time), day)){
             toDoStuff.push(
               events[item]
@@ -182,7 +184,7 @@ class AndyCalendar extends React.Component{
     }
     // now this will return a list of list and each week representing a week
     // with each item as the day
-    console.log(rows)
+
     return <div className = "body"> {rows} </div>
   }
 
@@ -233,7 +235,7 @@ class AndyCalendar extends React.Component{
             <List.Item
               key={item.id}
               actions={[
-                <a onClick={this.showDrawer} key={`a-${item.id}`}>
+                <a onClick={() => this.props.openDrawer()} key={`a-${item.id}`}>
                   View Profile
                 </a>,
               ]}
@@ -249,7 +251,7 @@ class AndyCalendar extends React.Component{
           )}
         />
 
-      <EventDrawer closable={false} visible={this.state.drawerVisible} onClose={this.onClose} />
+      <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} />
 
       <div className = 'calendar'>
         {this.renderHeader()}
@@ -262,4 +264,18 @@ class AndyCalendar extends React.Component{
   }
 }
 
-export default AndyCalendar;
+
+const mapStateToProps = state => {
+  return{
+    showDrawer: state.nav.showAddChatPopup,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeDrawer: () => dispatch(navActions.closeAddChatPopup()),
+    openDrawer: () => dispatch(navActions.openAddChatPopup())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AndyCalendar);
