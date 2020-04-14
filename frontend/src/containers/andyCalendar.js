@@ -3,15 +3,29 @@ import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-
+import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
+import EventDrawer from '../components/EventDrawer.js';
 
 class AndyCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
   state = {
     currentMonth: new Date(),
     selectedDate: new Date(),
-    events: []
+    events: [],
+    drawerVisible: false,
   }
+
+  showDrawer = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
 
 
   componentWillReceiveProps(newProps){
@@ -201,12 +215,48 @@ class AndyCalendar extends React.Component{
 
   render(){
     // className is to determine the style
+
     console.log(this.state)
     return(
+      <div>
+        <List
+          dataSource={[
+            {
+              name: 'Lily',
+            },
+            {
+              name: 'Lily',
+            },
+          ]}
+          bordered
+          renderItem={item => (
+            <List.Item
+              key={item.id}
+              actions={[
+                <a onClick={this.showDrawer} key={`a-${item.id}`}>
+                  View Profile
+                </a>,
+              ]}
+            >
+              <List.Item.Meta
+                avatar={
+                  <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+                }
+                title={<a href="https://ant.design/index-cn">{item.name}</a>}
+                description="Progresser XTech"
+              />
+            </List.Item>
+          )}
+        />
+
+      <EventDrawer drawerVisible={true}/>
+
       <div className = 'calendar'>
         {this.renderHeader()}
         {this.renderDays()}
         {this.renderCells(this.state.events)}
+      </div>
+
       </div>
     )
   }
