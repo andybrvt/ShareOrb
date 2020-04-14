@@ -4,7 +4,7 @@ import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
-import EventDrawer from '../components/EventDrawer.js';
+import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import { connect } from 'react-redux';
 
@@ -222,11 +222,9 @@ class PersonalCalendar extends React.Component{
         <List
           dataSource={[
             {
-              name: 'Lily',
+              name: 'Box to add event',
             },
-            {
-              name: 'Lily',
-            },
+
           ]}
           bordered
           renderItem={item => (
@@ -234,7 +232,7 @@ class PersonalCalendar extends React.Component{
               key={item.id}
               actions={[
                 <a onClick={() => this.props.openDrawer()} key={`a-${item.id}`}>
-                  View Profile
+                  Add event
                 </a>,
               ]}
             >
@@ -243,7 +241,7 @@ class PersonalCalendar extends React.Component{
                   <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
                 }
                 title={<a href="https://ant.design/index-cn">{item.name}</a>}
-                description="Progresser XTech"
+                description="Click on the [Add event] text! "
               />
             </List.Item>
           )}
