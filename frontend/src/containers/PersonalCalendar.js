@@ -4,11 +4,11 @@ import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
-import EventDrawer from '../components/EventDrawer.js';
+import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import { connect } from 'react-redux';
 
-class AndyCalendar extends React.Component{
+class PersonalCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
   state = {
     currentMonth: new Date(),
@@ -224,11 +224,9 @@ class AndyCalendar extends React.Component{
         <List
           dataSource={[
             {
-              name: 'Lily',
+              name: 'Box to add event',
             },
-            {
-              name: 'Lily',
-            },
+
           ]}
           bordered
           renderItem={item => (
@@ -236,7 +234,7 @@ class AndyCalendar extends React.Component{
               key={item.id}
               actions={[
                 <a onClick={() => this.props.openDrawer()} key={`a-${item.id}`}>
-                  View Profile
+                  Add event
                 </a>,
               ]}
             >
@@ -245,7 +243,7 @@ class AndyCalendar extends React.Component{
                   <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
                 }
                 title={<a href="https://ant.design/index-cn">{item.name}</a>}
-                description="Progresser XTech"
+                description="Click on the [Add event] text! "
               />
             </List.Item>
           )}
@@ -278,4 +276,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AndyCalendar);
+export default connect(mapStateToProps,mapDispatchToProps)(PersonalCalendar);
