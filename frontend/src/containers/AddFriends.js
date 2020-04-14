@@ -48,7 +48,7 @@ class HorizontalAddChatForm extends React.Component {
         })
         .then(res => {
           this.props.history.push(`/chat/${res.data.id}`);
-          this.props.closeAddChatPopup();
+          this.props.closePopup();
           this.props.getUserChats(this.props.username, this.props.token);
         })
         .catch(err => {
@@ -104,7 +104,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    closeAddChatPopup: () => dispatch(navActions.closeAddChatPopup()),
+    closePopup: () => dispatch(navActions.closePopup()),
     getUserChats: (username, token) =>
       dispatch(messageActions.getUserChats(username, token))
   }

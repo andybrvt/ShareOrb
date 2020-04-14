@@ -125,7 +125,7 @@ class CustomLayout extends React.Component {
                     this.props.isAuthenticated ?
                     <Menu.Item key="7">
 
-                        <a href='/andycalendar'>
+                        <a href='/personalcalendar'>
                         <div class="column"><i class="calendar outline icon"></i>Calendar Outline</div>
 
                         </a>

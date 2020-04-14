@@ -8,13 +8,12 @@ import EventDrawer from '../components/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import { connect } from 'react-redux';
 
-class AndyCalendar extends React.Component{
+class PersonalCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
   state = {
     currentMonth: new Date(),
     selectedDate: new Date(),
     events: [],
-    drawerVisible: false,
   }
 
   // showDrawer = (e) => {
@@ -118,7 +117,6 @@ class AndyCalendar extends React.Component{
       // weekdays the same
       for (let i= 0; i<7; i++){
         for (let item = 0; item < events.length; item++){
-
           if (dateFns.isSameDay(new Date(events[item].start_time), day)){
             toDoStuff.push(
               events[item]
@@ -218,7 +216,7 @@ class AndyCalendar extends React.Component{
   render(){
     // className is to determine the style
 
-    console.log(this.state)
+    console.log(this.props)
     return(
       <div>
         <List
@@ -251,7 +249,7 @@ class AndyCalendar extends React.Component{
           )}
         />
 
-      <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} />
+      <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
 
       <div className = 'calendar'>
         {this.renderHeader()}
@@ -267,15 +265,15 @@ class AndyCalendar extends React.Component{
 
 const mapStateToProps = state => {
   return{
-    showDrawer: state.nav.showAddChatPopup,
+    showDrawer: state.nav.showPopup,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    closeDrawer: () => dispatch(navActions.closeAddChatPopup()),
-    openDrawer: () => dispatch(navActions.openAddChatPopup())
+    closeDrawer: () => dispatch(navActions.closePopup()),
+    openDrawer: () => dispatch(navActions.openPopup())
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AndyCalendar);
+export default connect(mapStateToProps,mapDispatchToProps)(PersonalCalendar);

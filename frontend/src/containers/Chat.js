@@ -179,14 +179,13 @@ class Chat extends React.Component{
     }
 
     render(){
-      console.log(this.props.showAddChatPopup)
       const messages = this.state.messages;
       return(
         <div id="frame">
           <Sidepanel {...this.props} {...this.state}/>
           <AddChatModal
-          isVisible ={this.props.showAddChatPopup}
-          close = {() => this.props.closeAddChatPopup()} />
+          isVisible ={this.props.showPopup}
+          close = {() => this.props.closePopup()} />
          <div className="content">
           <TopPanel />
             <div className="messages">
@@ -224,14 +223,14 @@ class Chat extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    showAddChatPopup: state.nav.showAddChatPopup,
+    showPopup: state.nav.showPopup,
     messages: state.message.messages
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    closeAddChatPopup: () => dispatch(navActions.closeAddChatPopup())
+    closePopup: () => dispatch(navActions.closePopup())
   }
 }
 

@@ -17,11 +17,7 @@ const Form3 = (props) => {
   const[username, setUsername] = useState('');
   const[stage, setStage] = useState('empty');
   const[imageblob, setImageblob] = useState("");
-  console.log(token)
-  console.log(props.data.id)
-  console.log(props.data.username)
-  console.log(props)
-
+  console.log(caption)
 
   useEffect(() => {
     console.log('hit')
@@ -86,6 +82,7 @@ const Form3 = (props) => {
   }
 
   const onChange = (e)=> {
+    console.log(e)
 		const type = e.target.name;
 		const value = e.target.value;
 		if (type === "caption"){

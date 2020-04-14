@@ -1,14 +1,14 @@
 import * as actionTypes from './actionTypes';
 
-export const openAddChatPopup = () => {
+export const openPopup = () => {
   return {
-    type: actionTypes.OPEN_ADD_CHAT_POPUP
+    type: actionTypes.OPEN_POPUP
   };
 };
 
 
-export const closeAddChatPopup = () => {
+export const closePopup = () => {
   return {
-    type: actionTypes.CLOSE_ADD_CHAT_POPUP
+    type: actionTypes.CLOSE_POPUP
   };
 };

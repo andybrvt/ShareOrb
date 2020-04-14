@@ -3,23 +3,23 @@ import { updateObject } from '../utility';
 
 
 const initialState = {
-  showAddChatPopup: false
+  showPopup: false
 }
 
-const openAddChatPopup = (state, action) => {
-  return updateObject (state, {showAddChatPopup: true});
+const openPopup = (state, action) => {
+  return updateObject (state, {showPopup: true});
 };
 
-const closeAddChatPopup = (state, action) => {
-  return updateObject (state, {showAddChatPopup: false});
+const closePopup = (state, action) => {
+  return updateObject (state, {showPopup: false});
 };
 
 const reducer = (state= initialState, action ) => {
   switch(action.type) {
-    case actionTypes.OPEN_ADD_CHAT_POPUP:
-      return openAddChatPopup(state, action);
-    case actionTypes.CLOSE_ADD_CHAT_POPUP:
-      return closeAddChatPopup(state,action);
+    case actionTypes.OPEN_POPUP:
+      return openPopup(state, action);
+    case actionTypes.CLOSE_POPUP:
+      return closePopup(state,action);
     default:
       return state;
 

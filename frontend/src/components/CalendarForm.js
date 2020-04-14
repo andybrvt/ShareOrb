@@ -12,6 +12,17 @@ import { DatePicker } from 'antd';
 
 const CalendarForm = (props) => {
   // formData = new FormData();
+  const {token} = props;
+  const[title, setTitle] = useState('');
+  const[content, setContent] = useState('');
+  const[start_time,setStart] = useState(null);
+  const[end_time, setEnd ] = useState(null);
+  const[location, setLocation] = useState('');
+  console.log(title)
+  console.log(content)
+  console.log(start_time)
+  console.log(end_time)
+  console.log(location)
 
   const make_post=(post) =>{
   	let data = uploadPost(post);
@@ -27,8 +38,9 @@ const CalendarForm = (props) => {
    data.append("start_time", post.start_time);
    data.append("end_time", post.end_time);
    data.append("location", post.location);
-   data.append("user", post.user_id);
-   fetch('http://127.0.0.1:8000/mycalendar/events/create',{
+   console.log(data)
+   // data.append("user", post.person);
+   fetch('http://127.0.0.1:8000/mycalendar/events/create/',{
   	method: 'POST',
       headers: {
   	    Authorization: `Token ${localStorage.getItem('token')}`,
@@ -43,58 +55,59 @@ const CalendarForm = (props) => {
 
   const  onFormSubmit = (e) =>{
 		e.preventDefault()
-		if (props.data.id && content){
+		if (title && content){
 			const post = {
 				'title': title,
 				'content': content,
         'start_time': start_time,
         'end_time': end_time,
         'location': location,
-        'user_id': props.data.id,
-				'person': props.data.username,
+        'user_id': props.id,
+				'person': props.username,
 			};
 			make_post(post);
-			window.location.reload(true)
+			// window.location.reload(true)
 		}
 		else{
-			return <Redirect to='/'  />
+			// return <Redirect to='/'  />
 		}
   }
+  // basically all you reall need is an onchange, and value in your input fields
+  // and you have to use e btw
+  const onChangeTitle = e => setTitle(e.target.value)
+  const onChangeContent = e => setContent(e.target.value)
+  const onChangeStart = date => setStart(date)
+  const onChangeEnd = date => setEnd (date)
+  const onChangeLocation = e =>setLocation(e.target.value)
 
-  const onChange = (e)=> {
-		const type = e.target.name;
-		const value = e.target.value;
-		if (type === "caption"){
-			setCaption(value)
-		}
-		 if (type === "image") {
-				setImageblob(URL.createObjectURL(e.target.files[0]))
-				setImage(e.target.files[0])
-				setStage("image")
-      }
-			//render the
-	}
-
+  console.log(props)
+  const dateFormat = 'MM/DD/YYYY'
   return (
 	<Container style={{paddingTop: '10',zIndex:'-1'}}>
 	  <form onSubmit={onFormSubmit}>
 	    <div className="upload-container">
 				<h1 className="heading">#New post</h1>
 				<div>
-        <input type="text" name="title" onChange= {onChange} value ={title}/>
+        Title
+        <input type="text" name="title" onChange= {onChangeTitle} value ={title}/>
         <br />
-				<input type="text" name="content" onChange= {onChange}value={content}
+        Content
+				<input type="text" name="content" onChange= {onChangeContent}value={content}
 				 style={{width: '300px', height:'100px'}}/>
         <br />
-				<DatePicker onChange={onChange} value = {start_time} />
+        Start Date
+				<DatePicker name = "start" onChange={onChangeStart} value = {start_time} format = {dateFormat}/>
         <br />
-        <DatePicker onChange={onChange} value = {end_time}/>
+        End Date
+        <DatePicker name = "end" onChange={onChangeEnd} value = {end_time} format ={dateFormat}/>
         <br />
-        <input type="text" name="location" onChange= {onChange} value ={location}/>
+        Location
+        <input type="text" name="location" onChange= {onChangeLocation} value ={location}/>
 				<div className="submit">
                 <button type="submit" onClick={onFormSubmit}>Post</button>
 				</div>
 				</div>
+        </div>
             </form>
 	</Container>
   );

@@ -7,7 +7,7 @@ import * as navActions from "../../store/actions/nav"
 
 class Sidepanel extends React.Component{
 
-  openAddChatPopup() {
+  openPopup() {
     this.props.addChat()
   }
 
@@ -49,7 +49,7 @@ class Sidepanel extends React.Component{
           })}
           </ul>
         </div>
-        <div id="bottom-bar" onClick = {()=> this.openAddChatPopup()}>
+        <div id="bottom-bar" onClick = {()=> this.openPopup()}>
           <button id="addcontact">
           <i className="fa fa-user-plus fa-fw" aria-hidden="true">
           </i>
@@ -64,7 +64,7 @@ class Sidepanel extends React.Component{
 
 const mapDispatchToProps = dispatch => {
   return {
-    addChat: () => dispatch(navActions.openAddChatPopup())
+    addChat: () => dispatch(navActions.openPopup())
   }
 }
 
