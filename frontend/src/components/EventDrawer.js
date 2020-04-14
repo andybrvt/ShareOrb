@@ -48,35 +48,6 @@ class EventDrawer extends React.Component {
   render() {
     return (
       <div>
-        <List
-          dataSource={[
-            {
-              name: 'Lily',
-            },
-            {
-              name: 'Lily',
-            },
-          ]}
-          bordered
-          renderItem={item => (
-            <List.Item
-              key={item.id}
-              actions={[
-                <a onClick={this.showDrawer} key={`a-${item.id}`}>
-                  View Profile
-                </a>,
-              ]}
-            >
-              <List.Item.Meta
-                avatar={
-                  <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                }
-                title={<a href="https://ant.design/index-cn">{item.name}</a>}
-                description="Progresser XTech"
-              />
-            </List.Item>
-          )}
-        />
         <Drawer
           width={640}
           placement="right"
