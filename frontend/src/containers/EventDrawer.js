@@ -1,6 +1,6 @@
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
 import React, { Component } from 'react';
-import CalendarForm from './CalendarForm'
+import CalendarForm from '../components/CalendarForm'
 
 const pStyle = {
   fontSize: 16,
