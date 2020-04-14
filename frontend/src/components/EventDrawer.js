@@ -51,8 +51,8 @@ class EventDrawer extends React.Component {
         <Drawer
           width={640}
           placement="right"
-          closable={false}
-          onClose={this.onClose}
+          closable={this.props.closable}
+          onClose={this.props.onClose}
           visible={this.props.drawerVisible}
         >
           <p className="site-description-item-profile-p" style={{ ...pStyle, marginBottom: 24 }}>

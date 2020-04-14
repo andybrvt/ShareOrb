@@ -17,13 +17,13 @@ class AndyCalendar extends React.Component{
 
   showDrawer = () => {
     this.setState({
-      visible: true,
+      drawerVisible: true,
     });
   };
 
   onClose = () => {
     this.setState({
-      visible: false,
+      drawerVisible: false,
     });
   };
 
@@ -249,7 +249,7 @@ class AndyCalendar extends React.Component{
           )}
         />
 
-      <EventDrawer drawerVisible={true}/>
+      <EventDrawer closable={false} visible={this.state.drawerVisible} onClose={this.onClose} />
 
       <div className = 'calendar'>
         {this.renderHeader()}
