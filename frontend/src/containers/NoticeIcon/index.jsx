@@ -1,10 +1,10 @@
 import { BellOutlined } from '@ant-design/icons';
-import { Badge, Spin, Tabs } from 'antd';
+import { Badge, Spin, Tabs, Dropdown, Menu } from 'antd';
 import { useState } from 'react'
 import React from 'react';
 import classNames from 'classnames';
 import NoticeList from './NoticeList';
-import HeaderDropdown from '../HeaderDropdown';
+import HeaderDropdown from '../HeaderDropdown/index';
 import styles from './index.less';
 
 const { TabPane } = Tabs;
@@ -92,17 +92,34 @@ const NoticeIcon = props => {
     return trigger;
   }
 
+  const menu = (
+  <Menu>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        1st menu item
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        2nd menu item
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        3rd menu item
+      </a>
+    </Menu.Item>
+  </Menu>
+);
+  console.log(props)
   return (
-    <HeaderDropdown
-      placement="bottomRight"
-      overlay={notificationBox}
-      overlayClassName={styles.popover}
-      trigger={['click']}
-      visible={visible}
-      onVisibleChange={setVisible}
+    <Dropdown
+      overlay={menu}
     >
-      {trigger}
-    </HeaderDropdown>
+      <div>
+      Notifications
+      </div>
+    </Dropdown>
   );
 };
 

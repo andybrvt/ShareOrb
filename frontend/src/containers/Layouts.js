@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -7,9 +7,8 @@ import './Containers.css'
 import { authAxios } from '../components/util';
 import { Icon } from 'semantic-ui-react'
 import { Input } from 'antd';
-
-
-import NoticeIcon from './NoticeIcon';
+import * as navActions from '../store/actions/nav'
+import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
 
 const { Header, Footer, Content } = Layout;
@@ -35,9 +34,29 @@ class CustomLayout extends React.Component {
      });
    }
 
+
     render() {
       const currentUser = this.state.username
       console.log(this.props)
+      const menu = (
+            <Menu>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                  menu item
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                  menu item
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                  menu item
+                </a>
+              </Menu.Item>
+            </Menu>
+          );
 
         return (
             <Layout className="layout">
@@ -194,48 +213,13 @@ class CustomLayout extends React.Component {
                     this.props.isAuthenticated ?
                       <Menu.Item key="11">
 
-                        <NoticeIcon
-                        className={styles.action}
-                        count={currentUser && currentUser.unreadCount}
-                        onItemClick={item => {
-                          this.changeReadState(item);
-                        }}
-                        {  /* temporary take out loading var */ }
-                        clearText="清空"
-                        viewMoreText="查看更多"
-                        onClear={this.handleNoticeClear}
-                        {/* onPopupVisibleChange={onNoticeVisibleChange}
-                          onViewMore={() => message.info('Click on view more')} */}
-
-                        clearClose
+                      <Dropdown
+                        overlay={menu}
                       >
-                        <NoticeIcon.Tab
-                          tabKey="notification"
-                          count={5}
-                          list={{"test": "blah"}}
-                          title="通知"
-                          emptyText="你已查看所有通知"
-                          showViewMore
-                        />
-                        <NoticeIcon.Tab
-                          tabKey="message"
-                          count={5}
-                          list={{"test": "blah"}}
-                          title="消息"
-                          emptyText="您已读完所有消息"
-                          showViewMore
-                        />
-                        <NoticeIcon.Tab
-                          tabKey="event"
-                          title="待办"
-                          emptyText="你已完成所有待办"
-                          count={5}
-                          list={{"test": "blah"}}
-                          showViewMore
-                        />
-                      </NoticeIcon>
-
-                      Testing noti
+                        <div>
+                        Notifications
+                        </div>
+                      </Dropdown>
 
                   </Menu.Item>
 
@@ -269,19 +253,19 @@ class CustomLayout extends React.Component {
 
 const mapStateToProps = state => {
   return{
-    showDrawer: state.nav.showPopup,
+    notificationDrop: state.nav.showPopup,
   }
 }
 
 
 const mapDispatchToProps = dispatch => {
   return {
-        closeDrawer: () => dispatch(navActions.closePopup()),
-        openDrawer: () => dispatch(navActions.openPopup())
+        closeNotification: () => dispatch(navActions.closePopup()),
+        openNotification: () => dispatch(navActions.openPopup()),
         logout: () => dispatch(actions.logout())
     }
 }
 
 
 
-export default withRouter(connect(null, mapDispatchToProps)(CustomLayout));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomLayout));

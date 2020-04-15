@@ -3,8 +3,15 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 
-const HeaderDropdown = ({ overlayClassName: cls, ...restProps }) => (
-  <Dropdown overlayClassName={classNames(styles.container, cls)} {...restProps} />
+
+// const HeaderDropdown = ({ overlayClassName: cls, ...restProps }) => (
+//
+//   <Dropdown overlayClassName={classNames(styles.container, cls)} {...restProps}/>
+// );
+
+const HeaderDropdown = props => (
+
+  <Dropdown visible = {props.visible}/>
 );
 
 export default HeaderDropdown;
