@@ -6,7 +6,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
 
-
+import NoFoundPage from './404.jsx';
 // Function: Holds Forms3 and the Infinite scroll
 class ArticleList extends React.Component {
 
@@ -73,7 +73,13 @@ class ArticleList extends React.Component {
 				 		<Form3 data = {this.props}/>
 						<InfiniteScroll />
 				 </div>
-				 : <div> Not logged in! </div>}
+				 :
+
+
+				 <div>
+				 		< NoFoundPage />
+
+					</div>}
     </div>
 		)
 	}
