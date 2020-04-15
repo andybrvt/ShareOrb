@@ -1,5 +1,5 @@
 import { BellOutlined } from '@ant-design/icons';
-import { Badge, Spin, Tabs, Dropdown, Menu } from 'antd';
+import { Badge, Spin, Tabs, Dropdown } from 'antd';
 import { useState } from 'react'
 import React from 'react';
 import classNames from 'classnames';
@@ -92,29 +92,14 @@ const NoticeIcon = props => {
     return trigger;
   }
 
-  const menu = (
-  <Menu>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-        1st menu item
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-        2nd menu item
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-        3rd menu item
-      </a>
-    </Menu.Item>
-  </Menu>
-);
   console.log(props)
   return (
     <Dropdown
-      overlay={menu}
+      placement="bottomRight"
+      overlay={notificationBox}
+      overlayClassName={styles.popover}
+      trigger={['click']}
+      onVisibleChange={setVisible}
     >
       <div>
       Notifications

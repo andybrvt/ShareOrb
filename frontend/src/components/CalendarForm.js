@@ -7,6 +7,8 @@ import { authAxios } from './util';
 import { connect } from "react-redux";
 import { DatePicker } from 'antd';
 import * as dateFns from 'date-fns';
+import * as navActions from '../store/actions/nav'
+
 
 
 
@@ -28,16 +30,16 @@ const CalendarForm = (props) => {
 
   const make_post=(post) =>{
   	let data = uploadPost(post);
-  	console.log(data)
-  	console.log(post)
+  	setTitle('')
+    setContent('')
+    setStart(null)
+    setEnd(null)
+    setLocation('')
   	return data;
   }
 
   const uploadPost =(post) =>{
    const data = new FormData();
-   console.log(dateFns.format(new Date(post.end_time), 'yyyy-MM-dd hh:mm:ss'))
-   console.log(data['title'])
-   console.log(data['user'])
    // console.log(dateFns.format(new Date(post.end_time), '%Y-%m-%d %H:%M:%S'))
    data.append("title", post.title);
    data.append("content", post.content);
@@ -45,8 +47,6 @@ const CalendarForm = (props) => {
    data.append("end_time", dateFns.format(new Date(post.end_time), 'yyyy-MM-dd hh:mm:ss'));
    data.append("location", post.location);
    data.append("person", post.person);
-   console.log(data['user'])
-   console.log(data['title'])
 
 
    fetch('http://127.0.0.1:8000/mycalendar/events/create/',{
@@ -58,14 +58,15 @@ const CalendarForm = (props) => {
   })
    .then (res =>res.json())
    .then(json =>{
+     props.closePopup()
   	 return json
    })
   }
 
   const  onFormSubmit = (e) =>{
 		e.preventDefault()
+    console.log(e.err)
     const person = [props.id]
-    console.log(person)
 		if (title && content){
 			const post = {
 				'title': title,
@@ -77,10 +78,7 @@ const CalendarForm = (props) => {
 				'person': person,
 			};
 			make_post(post);
-			// window.location.reload(true)
-		}
-		else{
-			// return <Redirect to='/'  />
+
 		}
   }
   // basically all you reall need is an onchange, and value in your input fields
@@ -108,7 +106,7 @@ const CalendarForm = (props) => {
         Start Date
 				<DatePicker name = "start" onChange={onChangeStart} value = {start_time} format = {dateFormat}/>
         <br />
-        End Date 
+        End Date
         <DatePicker name = "end" onChange={onChangeEnd} value = {end_time} format ={dateFormat}/>
         <br />
         Location
@@ -131,4 +129,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CalendarForm);
+const mapDispatchToProps = dispatch => {
+  return {
+    closePopup: () => dispatch(navActions.closePopup())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarForm);
