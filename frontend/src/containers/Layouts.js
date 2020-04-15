@@ -6,11 +6,11 @@ import * as actions from '../store/actions/auth';
 import './Containers.css'
 import { authAxios } from '../components/util';
 import { Icon } from 'semantic-ui-react'
-import { Input } from 'antd';
+import { Tag, Input } from 'antd';
 import * as navActions from '../store/actions/nav'
 import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
-
+import moment from 'moment';
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
 
@@ -23,6 +23,10 @@ class CustomLayout extends React.Component {
     username: ''
   }
 
+
+
+
+
   async componentDidMount(){
     await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
@@ -34,9 +38,53 @@ class CustomLayout extends React.Component {
      });
    }
 
+   getNoticeData = () => {
+       const { notices = [] } = this.props;
+       console.log(this.props)
+
+       if (!notices || notices.length === 0 || !Array.isArray(notices)) {
+         return {};
+       }
+
+       const newNotices = notices.map(notice => {
+         const newNotice = { ...notice };
+
+         if (newNotice.datetime) {
+           newNotice.datetime = moment(notice.datetime).fromNow();
+         }
+
+         if (newNotice.id) {
+           newNotice.key = newNotice.id;
+         }
+
+         if (newNotice.extra && newNotice.status) {
+           const color = {
+             todo: '',
+             processing: 'blue',
+             urgent: 'red',
+             doing: 'gold',
+           }[newNotice.status];
+           newNotice.extra = (
+             <Tag
+               color={color}
+               style={{
+                 marginRight: 0,
+               }}
+             >
+               {newNotice.extra}
+             </Tag>
+           );
+         }
+
+         return newNotice;
+       });
+
+     };
+
 
     render() {
       const currentUser = this.state.username
+      const noticeData = this.getNoticeData();
       console.log(this.props)
       const menu = (
             <Menu>
@@ -58,6 +106,29 @@ class CustomLayout extends React.Component {
             </Menu>
           );
 
+
+
+
+
+        const getNotices = (req, res) => {
+          res.json([
+            {
+              id: '000000001',
+              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+              title: 'HEYYYYY there',
+              datetime: '2017-08-09',
+              type: 'notification',
+            },
+            {
+              id: '000000002',
+              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+              title: 'Ian wants hiking',
+              datetime: '2017-08-08',
+              type: 'notification',
+            },
+
+          ]);
+        };
         return (
             <Layout className="layout">
                 <Header>
@@ -212,14 +283,44 @@ class CustomLayout extends React.Component {
                 {
                     this.props.isAuthenticated ?
                       <Menu.Item key="11">
+                        <NoticeIcon
+                            className={styles.action}
+                            count={currentUser && currentUser.unreadCount}
+                            onItemClick={item => {
+                              this.changeReadState(item);
+                            }}
 
-                      <Dropdown
-                        overlay={menu}
-                      >
-                        <div>
-                        Notifications
-                        </div>
-                      </Dropdown>
+
+                            loading={this.fetchingNotices}
+                            clearText="清空"
+                            viewMoreText="查看更多"
+
+                            // onClear={this.handleNoticeClear}
+                            // onPopupVisibleChange={onNoticeVisibleChange}
+
+                            clearClose
+
+
+                            // <Dropdown
+                            //   overlay={menu}
+                            // >
+                            //   <div>
+                            //   Notifications
+                            //   </div>
+                            // </Dropdown>
+                          >
+                            <NoticeIcon.Tab
+                              tabKey="notification"
+                              count={10}
+                              list={noticeData.notification}
+                              title="first tab"
+                              emptyText="你已查看所有通知"
+                              showViewMore
+                            />
+
+                          </NoticeIcon>
+
+
 
                   </Menu.Item>
 
