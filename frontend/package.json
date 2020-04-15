@@ -22,7 +22,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-icon": "^2.3.3",
     "semantic-ui-react": "^0.88.2",
-    "thunk": "0.0.1"
+    "thunk": "0.0.1",
+    "@ant-design/icons": "4.0.0-rc.0"
   },
   "scripts": {
     "start": "react-scripts start",

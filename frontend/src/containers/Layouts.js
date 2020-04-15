@@ -9,7 +9,8 @@ import { Icon } from 'semantic-ui-react'
 import { Input } from 'antd';
 
 
-
+import NoticeIcon from './NoticeIcon';
+import styles from './notification.less';
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -189,16 +190,61 @@ class CustomLayout extends React.Component {
                 }
 
 
-
                 {
                     this.props.isAuthenticated ?
-                <Menu.Item key="11">
-                     <div class="column"><i class=" large cloud icon"></i>Notifications</div>
-                </Menu.Item>
-                    :
-                    <Menu.Item key="11">
-                    </Menu.Item>
+                      <Menu.Item key="11">
+
+                        <NoticeIcon
+                        className={styles.action}
+                        count={currentUser && currentUser.unreadCount}
+                        onItemClick={item => {
+                          this.changeReadState(item);
+                        }}
+                        {  /* temporary take out loading var */ }
+                        clearText="清空"
+                        viewMoreText="查看更多"
+                        onClear={this.handleNoticeClear}
+                        {/* onPopupVisibleChange={onNoticeVisibleChange}
+                          onViewMore={() => message.info('Click on view more')} */}
+
+                        clearClose
+                      >
+                        <NoticeIcon.Tab
+                          tabKey="notification"
+                          count={5}
+                          list={{"test": "blah"}}
+                          title="通知"
+                          emptyText="你已查看所有通知"
+                          showViewMore
+                        />
+                        <NoticeIcon.Tab
+                          tabKey="message"
+                          count={5}
+                          list={{"test": "blah"}}
+                          title="消息"
+                          emptyText="您已读完所有消息"
+                          showViewMore
+                        />
+                        <NoticeIcon.Tab
+                          tabKey="event"
+                          title="待办"
+                          emptyText="你已完成所有待办"
+                          count={5}
+                          list={{"test": "blah"}}
+                          showViewMore
+                        />
+                      </NoticeIcon>
+
+                      Testing noti
+
+                  </Menu.Item>
+
+                  :
+                  <Menu.Item key="11">
+                  </Menu.Item>
+
                 }
+
 
 
                 </Menu>
@@ -221,10 +267,21 @@ class CustomLayout extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+  return{
+    showDrawer: state.nav.showPopup,
+  }
+}
+
+
 const mapDispatchToProps = dispatch => {
-    return {
+  return {
+        closeDrawer: () => dispatch(navActions.closePopup()),
+        openDrawer: () => dispatch(navActions.openPopup())
         logout: () => dispatch(actions.logout())
     }
 }
+
+
 
 export default withRouter(connect(null, mapDispatchToProps)(CustomLayout));
