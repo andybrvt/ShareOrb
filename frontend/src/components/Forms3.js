@@ -100,7 +100,6 @@ const Form3 = (props) => {
 	<Container style={{paddingTop: '10',zIndex:'-1'}}>
 	  <form onSubmit={onFormSubmit}>
 	    <div className="upload-container">
-				<h1 className="heading">#New post</h1>
 				{ stage !== "image" ?
 				<div  className= "uploadImage upload" >
                 <input type="file" name="image" onChange= {onChange} />

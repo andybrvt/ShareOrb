@@ -6,7 +6,14 @@ import * as actions from '../store/actions/auth';
 import './Containers.css'
 import { authAxios } from '../components/util';
 import { Icon } from 'semantic-ui-react'
+import { Input } from 'antd';
+
+
+
+
 const { Header, Footer, Content } = Layout;
+const { Search } = Input;
+
 
 // Function: boarder layout that wraps around each of the other containers, and has
 // menu items that go to each page
@@ -120,31 +127,38 @@ class CustomLayout extends React.Component {
                     </Menu.Item>
                 }
 
-
+                {/* need to create boolean condition onChange to make the loading = true to get loading animation while typing */}
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="7">
 
+<<<<<<< HEAD
                         <a href='/PersonalCalendar'>
                         <div class="column"><i class="calendar outline icon"></i>Personal Calendar</div>
+=======
 
-                        </a>
+                        <Search placeholder="input search here!" loading={false} enterButton  />
                     </Menu.Item>
 
                     :
-                    <Menu.Item key="7">
-                    </Menu.Item>
-                }
-
+                        <Menu.Item key="7">
+                        </Menu.Item>
+                    }
 
 
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="8">
-                        <a href='/chat/1'></a>
+
+                        <a href='/personalcalendar'>
+                        <div class="column"><i class="calendar outline icon"></i>Calendar Outline</div>
+>>>>>>> b2bee9a0ef74d0e7774cc617e248ad2fcd88e3f3
+
+                        </a>
                     </Menu.Item>
+
                     :
-                    <Menu.Item key="7">
+                    <Menu.Item key="8">
                     </Menu.Item>
                 }
 
@@ -152,6 +166,19 @@ class CustomLayout extends React.Component {
 
                 {
                     this.props.isAuthenticated ?
+                    <Menu.Item key="9">
+                        <a href='/chat/1'></a>
+                    </Menu.Item>
+                    :
+                    <Menu.Item key="9">
+                    </Menu.Item>
+                }
+
+
+
+                {
+                    this.props.isAuthenticated ?
+<<<<<<< HEAD
                   <Menu.Item key="9">
                          <a href='/chat/1'>
                            <Icon name='large comments icon' />
@@ -173,6 +200,34 @@ class CustomLayout extends React.Component {
                 <Menu.Item key="10">
                 </Menu.Item>
               }
+=======
+                    <Menu.Item key="10">
+
+
+                           <a href='/chat/1'>
+                             <Icon name='large comments icon' />
+                             Messages
+                           </a>
+
+                    </Menu.Item>
+
+                    :
+                    <Menu.Item key="10">
+                    </Menu.Item>
+                }
+
+
+
+                {
+                    this.props.isAuthenticated ?
+                <Menu.Item key="11">
+                     <div class="column"><i class=" large cloud icon"></i>Notifications</div>
+                </Menu.Item>
+                    :
+                    <Menu.Item key="11">
+                    </Menu.Item>
+                }
+>>>>>>> b2bee9a0ef74d0e7774cc617e248ad2fcd88e3f3
 
 
                 </Menu>

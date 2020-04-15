@@ -70,7 +70,6 @@ class ArticleList extends React.Component {
 
 
 				<div>
-						<button type="button">Testing notification</button>
 				 		<Form3 data = {this.props}/>
 						<InfiniteScroll />
 				 </div>

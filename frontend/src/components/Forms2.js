@@ -112,7 +112,6 @@ class PostUpload extends React.Component{
   	<Container style={{paddingTop: '10',zIndex:'-1'}}>
   	  <form onSubmit={this.onFormSubmit}>
   	    <div className="upload-container">
-  				<h1 className="heading">#New post</h1>
   				{ this.state.stage !== "image" ?
   				<div  className= "uploadImage upload" >
                   <input type="file" name="image" onChange= {this.onChange} />
