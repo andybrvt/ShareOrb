@@ -18,6 +18,11 @@ class CalendarView(generics.ListAPIView):
     serializer_class = serializers.CalendarOwnedSerializer
     queryset = models.Calendar.objects.all()
 
+class AllEventsView(generics.ListAPIView):
+    serializer_class = serializers.EventSerializer
+    queryset = models.Event.objects.all()
+
+
 class CalendarEventsView(generics.ListAPIView):
     serializer_class = serializers.EventSerializer
     def get_queryset(self):

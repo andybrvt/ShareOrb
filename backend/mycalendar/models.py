@@ -28,8 +28,8 @@ class Event(models.Model):
 	content = models.TextField(blank = True)
 	# repeated weekly/monthly/daily
 	repeatCondition = models.TextField(blank = True)
-	start_time = models.DateTimeField(default =timezone.now)
-	end_time = models.DateTimeField(default =timezone.now)
+	start_time = models.DateTimeField(default =timezone.now, blank= False)
+	end_time = models.DateTimeField(default =timezone.now, blank= False)
 	location = models.CharField(max_length = 255, blank = True)
 	def __unicode__(self):
 		return self.title

@@ -133,7 +133,6 @@ class CustomLayout extends React.Component {
                     this.props.isAuthenticated ?
                     <Menu.Item key="7">
 
-
                         <Search placeholder="input search here!" loading={false} enterButton  />
                     </Menu.Item>
 
@@ -174,6 +173,7 @@ class CustomLayout extends React.Component {
 
                 {
                     this.props.isAuthenticated ?
+
                     <Menu.Item key="10">
 
 

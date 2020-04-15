@@ -6,6 +6,8 @@ import axios from 'axios';
 import { authAxios } from './util';
 import { connect } from "react-redux";
 import { DatePicker } from 'antd';
+import * as dateFns from 'date-fns';
+
 
 
 
@@ -33,13 +35,20 @@ const CalendarForm = (props) => {
 
   const uploadPost =(post) =>{
    const data = new FormData();
+   console.log(dateFns.format(new Date(post.end_time), 'yyyy-MM-dd hh:mm:ss'))
+   console.log(data['title'])
+   console.log(data['user'])
+   // console.log(dateFns.format(new Date(post.end_time), '%Y-%m-%d %H:%M:%S'))
    data.append("title", post.title);
    data.append("content", post.content);
-   data.append("start_time", post.start_time);
-   data.append("end_time", post.end_time);
+   data.append("start_time", dateFns.format(new Date(post.start_time), 'yyyy-MM-dd hh:mm:ss'));
+   data.append("end_time", dateFns.format(new Date(post.end_time), 'yyyy-MM-dd hh:mm:ss'));
    data.append("location", post.location);
-   console.log(data)
-   // data.append("user", post.person);
+   data.append("person", post.person);
+   console.log(data['user'])
+   console.log(data['title'])
+
+
    fetch('http://127.0.0.1:8000/mycalendar/events/create/',{
   	method: 'POST',
       headers: {
@@ -55,6 +64,8 @@ const CalendarForm = (props) => {
 
   const  onFormSubmit = (e) =>{
 		e.preventDefault()
+    const person = [props.id]
+    console.log(person)
 		if (title && content){
 			const post = {
 				'title': title,
@@ -63,7 +74,7 @@ const CalendarForm = (props) => {
         'end_time': end_time,
         'location': location,
         'user_id': props.id,
-				'person': props.username,
+				'person': person,
 			};
 			make_post(post);
 			// window.location.reload(true)
@@ -81,7 +92,7 @@ const CalendarForm = (props) => {
   const onChangeLocation = e =>setLocation(e.target.value)
 
   console.log(props)
-  const dateFormat = 'MM/DD/YYYY'
+  const dateFormat = ''
   return (
 	<Container style={{paddingTop: '10',zIndex:'-1'}}>
 	  <form onSubmit={onFormSubmit}>
