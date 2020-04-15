@@ -132,11 +132,6 @@ class CustomLayout extends React.Component {
                     this.props.isAuthenticated ?
                     <Menu.Item key="7">
 
-<<<<<<< HEAD
-                        <a href='/PersonalCalendar'>
-                        <div class="column"><i class="calendar outline icon"></i>Personal Calendar</div>
-=======
-
                         <Search placeholder="input search here!" loading={false} enterButton  />
                     </Menu.Item>
 
@@ -152,7 +147,6 @@ class CustomLayout extends React.Component {
 
                         <a href='/personalcalendar'>
                         <div class="column"><i class="calendar outline icon"></i>Calendar Outline</div>
->>>>>>> b2bee9a0ef74d0e7774cc617e248ad2fcd88e3f3
 
                         </a>
                     </Menu.Item>
@@ -178,29 +172,7 @@ class CustomLayout extends React.Component {
 
                 {
                     this.props.isAuthenticated ?
-<<<<<<< HEAD
-                  <Menu.Item key="9">
-                         <a href='/chat/1'>
-                           <Icon name='large comments icon' />
-                           Messages
-                         </a>
-                  </Menu.Item>
-                  :
-                  <Menu.Item key="7">
-                  </Menu.Item>
-                }
 
-
-                {
-                    this.props.isAuthenticated ?
-                <Menu.Item key="10">
-                     <div class="column"><i class=" large cloud icon"></i>Notifications</div>
-                </Menu.Item>
-                :
-                <Menu.Item key="10">
-                </Menu.Item>
-              }
-=======
                     <Menu.Item key="10">
 
 
@@ -227,7 +199,6 @@ class CustomLayout extends React.Component {
                     <Menu.Item key="11">
                     </Menu.Item>
                 }
->>>>>>> b2bee9a0ef74d0e7774cc617e248ad2fcd88e3f3
 
 
                 </Menu>
