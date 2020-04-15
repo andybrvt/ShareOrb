@@ -83,7 +83,6 @@ class PersonalCalendar extends React.Component{
   }
 
   renderCells(events) {
-    const event = {}
 
     // startOfMonth() will give you the date of the first day of the current month
     // endOfMonth() will give you the date of the last day of the current month
@@ -93,6 +92,7 @@ class PersonalCalendar extends React.Component{
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
+    console.log(startDate)
     const endDate = dateFns.endOfWeek(monthEnd);
 
     // Once you have your start date and end date you want to loop through
@@ -108,7 +108,6 @@ class PersonalCalendar extends React.Component{
     // for the 42 block of time
     let day = startDate;
     let formattedDate = "";
-     const test = new Date('2020-04-11T02:15:45.644498Z')
     // this loop will loop through all the days of the month
     while (day <=endDate){
 
@@ -117,6 +116,7 @@ class PersonalCalendar extends React.Component{
       // weekdays the same
       for (let i= 0; i<7; i++){
         for (let item = 0; item < events.length; item++){
+          console.log(events[item])
           if (dateFns.isSameDay(new Date(events[item].start_time), day)){
             toDoStuff.push(
               events[item]
@@ -124,6 +124,7 @@ class PersonalCalendar extends React.Component{
           }
         }
         // this give the date will give the day numnber in 1-365
+
         formattedDate = dateFns.format(day, dateFormat);
         // used clone day so that it would do the selected day and not the endDay
         // because the loop will end on end day and it w3il always click that day
@@ -139,7 +140,7 @@ class PersonalCalendar extends React.Component{
               }`}
               key = {day}
               onClick = { () =>
-            this.onDateClick(dateFns.parse(cloneDay, 'yyyy-MM-dd', new Date()))}
+            this.onDateClick(cloneDay)}
             >
             <span className = "number">{formattedDate}</span>
             <span className = "bg"> {formattedDate}</span>
@@ -190,6 +191,7 @@ class PersonalCalendar extends React.Component{
   // so we need function to deal with cell click to change the date
   // Then you need function to show previous and next monthly
   onDateClick = day => {
+    console.log(day)
     this.setState(
       {
         selectedDate:day
