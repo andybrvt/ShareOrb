@@ -20,7 +20,24 @@ const { Search } = Input;
 
 class CustomLayout extends React.Component {
   state = {
-    username: ''
+    username: '',
+    testData:[
+      {
+        id: '000000001',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+        title: 'HEYYYYY there',
+        datetime: '2017-08-09',
+        type: 'notification',
+      },
+      {
+        id: '000000002',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+        title: 'Ian wants hiking',
+        datetime: '2017-08-08',
+        type: 'notification',
+      },
+
+    ],
   }
 
 
@@ -39,9 +56,9 @@ class CustomLayout extends React.Component {
    }
 
    getNoticeData = () => {
-       const { notices = [] } = this.props;
-       console.log(this.props)
+       const notices = this.state.testData;
 
+       console.log(notices)
        if (!notices || notices.length === 0 || !Array.isArray(notices)) {
          return {};
        }
@@ -312,7 +329,7 @@ class CustomLayout extends React.Component {
                             <NoticeIcon.Tab
                               tabKey="notification"
                               count={10}
-                              list={noticeData.notification}
+                              list={this.state.testData}
                               title="first tab"
                               emptyText="你已查看所有通知"
                               showViewMore
