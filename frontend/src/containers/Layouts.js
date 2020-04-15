@@ -11,6 +11,10 @@ import * as navActions from '../store/actions/nav'
 import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
 import moment from 'moment';
+import SearchBar from './HeaderSearch';
+
+
+
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
 
@@ -25,14 +29,30 @@ class CustomLayout extends React.Component {
       {
         id: '000000001',
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-        title: 'HEYYYYY there',
+        title: 'Pings so alpha',
         datetime: '2017-08-09',
         type: 'notification',
       },
       {
         id: '000000002',
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-        title: 'Ian wants hiking',
+        title: 'Pings too strong',
+        datetime: '2017-08-08',
+        type: 'notification',
+      },
+
+      {
+        id: '000000002',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+        title: 'Pings the best',
+        datetime: '2017-08-08',
+        type: 'notification',
+      },
+
+      {
+        id: '000000002',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+        title: 'Andys strong too',
         datetime: '2017-08-08',
         type: 'notification',
       },
@@ -54,7 +74,7 @@ class CustomLayout extends React.Component {
        });
      });
    }
-
+   // css part, DEPENDING on if the comment is "urgent", or different attributes
    getNoticeData = () => {
        const notices = this.state.testData;
 
@@ -240,7 +260,7 @@ class CustomLayout extends React.Component {
                     this.props.isAuthenticated ?
                     <Menu.Item key="7">
 
-                        <Search placeholder="input search here!" loading={false} enterButton  />
+                      <SearchBar />
                     </Menu.Item>
 
                     :
@@ -332,6 +352,16 @@ class CustomLayout extends React.Component {
                               list={this.state.testData}
                               title="first tab"
                               emptyText="你已查看所有通知"
+                              showViewMore
+                            />
+
+
+                            <NoticeIcon.Tab
+                              tabKey="message"
+                              // count={unreadMsg.message}
+                              // list={noticeData.message}
+                              title="second tab"
+                              emptyText="您已读完所有消息"
                               showViewMore
                             />
 
