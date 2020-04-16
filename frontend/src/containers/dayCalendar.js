@@ -9,7 +9,7 @@ class DayCalendar extends React.Component{
   }
 // render the date on top
   renderHeader(){
-    const dateFormat = 'iiii MMMM yyyy'
+    const dateFormat = 'iiii MMMM dd, yyyy'
 
     return (
       <div className = 'header row flex-middle'>
