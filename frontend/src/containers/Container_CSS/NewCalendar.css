@@ -169,7 +169,23 @@ main {
   transition: 0.25s ease-out;
 }
 
+.calendar .body .daycell {
+  position: relative;
+  height: 10em;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--neutral-color);
+  transition: 0.25s ease-out;
+}
+
 .calendar .body .cell:hover {
+  background: var(--bg-color);
+  transition: 0.5s ease-out;
+}
+
+.calendar .body .daycell:hover {
   background: var(--bg-color);
   transition: 0.5s ease-out;
 }
@@ -192,6 +208,10 @@ main {
   border-right: none;
 }
 
+.calendar .body .daycell:last-child {
+  border-right: none;
+}
+
 .calendar .body .cell .number {
   position: absolute;
   font-size: 82.5%;
@@ -200,6 +220,16 @@ main {
   right: .75em;
   font-weight: 700;
 }
+
+.calendar .body .daycell .number {
+  position: absolute;
+  font-size: 82.5%;
+  line-height: 1;
+  top: .75em;
+  right: .75em;
+  font-weight: 700;
+}
+
 
 .calendar .body .disabled {
   color: var(--text-color-light);
@@ -219,7 +249,25 @@ main {
   letter-spacing: -.07em;
 }
 
+.calendar .body .daycell .bg {
+  font-weight: 700;
+  line-height: 1;
+  color: var(--main-color);
+  opacity: 0;
+  font-size: 8em;
+  position: absolute;
+  top: -.2em;
+  right: -.05em;
+  transition: .25s ease-out;
+  letter-spacing: -.07em;
+}
+
 .calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
+  opacity: 0.05;
+  transition: .5s ease-in;
+}
+
+.calendar .body .daycell:hover .bg, .calendar .body .selected .bg  {
   opacity: 0.05;
   transition: .5s ease-in;
 }
@@ -228,4 +276,21 @@ main {
   flex-grow: 0;
   flex-basis: calc(100%/7);
   width: calc(100%/7);
+}
+
+.calendar .sidepanel {
+  float: left;
+  height: 240em;
+  min-width: 10px;
+  max-width: 50px;
+  width: 40%;
+  background: #e6f2ff  ;
+  color: black;
+  overflow: hidden;
+  position: relative;
+}
+
+.calendar .sidepanel .sidecell{
+  border-bottom: 1px solid var(--border-color);
+  height: 10em;
 }
