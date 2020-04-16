@@ -1,12 +1,26 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
+import axios from 'axios';
+import { authAxios } from '../components/util';
+
 
 
 class DayCalendar extends React.Component{
   state ={
       currentDay: new Date(),
-      selectedDate: new Date()
+      selectedDate: new Date(),
+      events: [],
   }
+
+  componentWillReceiveProps(newProps){
+    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+    .then(res => {
+      this.setState({
+        events: res.data
+      })
+    })
+  }
+
 // render the date on top
   renderHeader(){
     const dateFormat = 'iiii MMMM dd, yyyy'
@@ -50,7 +64,7 @@ class DayCalendar extends React.Component{
   }
 
 // render all the hour cell within each day
-  renderCells() {
+  renderCells(events) {
     const {currentDay, selectedDate} = this.state
     const startHourDay = dateFns.startOfDay(currentDay)
     const endHourDay = dateFns.endOfDay(currentDay)
@@ -61,7 +75,7 @@ class DayCalendar extends React.Component{
      // You will want to loop through all the hours of that day starting with
      // startHourDay and ending with endHourDay
 
-
+    let toDoStuff = []
     const hourFormat = "h a"
     // Since there will only be the hours we wont be need a row list
     let hours = [];
@@ -74,18 +88,45 @@ class DayCalendar extends React.Component{
     // need the while statment, just a list
     for (let i = 0; i<24; i++){
       formattedHour = dateFns.format(hour, hourFormat)
+      for(let item = 0; item < events.length; item ++){
+        if (dateFns.isSameHour(new Date(events[item].start_time), hour)){
+          toDoStuff.push(
+            events[item]
+          )
+        }
+      }
 
-      hours.push(
-        <div
-          className = ' daycell'
-          key = {hour}
-          onClick = {
-            () => this.onHourClick()}
-        >
-        <span className = 'number'>{formattedHour}</span>
-        <span className = 'bg'> {formattedHour}</span>
-        </div>
-      )
+      if (toDoStuff.length > 0){
+        hours.push(
+          <div
+            className = ' daycell'
+            key = {hour}
+            onClick = {
+              () => this.onHourClick()}
+          >
+          <span className = 'number'>{formattedHour}</span>
+          <span className = 'bg'> {formattedHour}</span>
+          <ul>
+            {toDoStuff.map(item => (
+              <li key={item.content}>
+                {item.content}
+              </li>
+            ))}
+          </ul>
+          </div>
+        )} else {
+        hours.push(
+          <div
+            className = ' daycell'
+            key = {hour}
+            onClick = {
+              () => this.onHourClick()}
+          >
+          <span className = 'number'>{formattedHour}</span>
+          <span className = 'bg'> {formattedHour}</span>
+          </div>
+        )}
+      toDoStuff = []
       hour = dateFns.addHours(hour, 1);
     }
     return <div className = 'body'>{hours}</div>
@@ -114,7 +155,7 @@ class DayCalendar extends React.Component{
       <div className = 'calendar'>
         {this.renderHeader()}
         {this.renderHours()}
-        {this.renderCells()}
+        {this.renderCells(this.state.events)}
       </div>
     )
   }

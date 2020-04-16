@@ -291,6 +291,6 @@ main {
 }
 
 .calendar .sidepanel .sidecell{
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 3px solid var(--border-color);
   height: 10em;
 }
