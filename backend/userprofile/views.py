@@ -70,8 +70,23 @@ class ReactInfiniteView(viewsets.ModelViewSet):
         return queryset
 
     def list(self, request):
-        print(request.user.id)
-        queryset = models.Post.objects.filter(user=request.user).order_by('-created_at', '-updated_at')
+        user_friends=self.request.user.friends.values('id')
+        print(user_friends)
+        # all users OTHER than current user and current user's friends
+        UsersNewsFeed = models.User.objects.exclude(id__in=user_friends).exclude(id=self.request.user.id)
+        print(UsersNewsFeed)
+        #Query set of all User objects of current user and current user's friends
+        UserPlusUserFriends = models.User.objects.exclude(id__in=UsersNewsFeed.values_list('id', flat=True))
+        print(UserPlusUserFriends)
+        test= models.Post.objects.filter(user=self.request.user)
+        print(test)
+        big_list=[]
+        for element in UserPlusUserFriends:
+            temp=models.Post.objects.filter(user=element)
+            for element2 in temp:
+                big_list.append(element2.pk)
+        print(big_list)
+        queryset = models.Post.objects.filter(pk__in=big_list).order_by('-created_at', '-updated_at')
         serializer = self.serializer_class(queryset, many=True)
         return Response({
             "post": serializer.data,
