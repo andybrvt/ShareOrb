@@ -13,6 +13,7 @@ class WebSocketNotifications {
     this.socketRef = null
   }
 
+// start HERE
   connect(){
     const path = 'ws://127.0.0.1:8000/ws/friend-request-notification/'
     console.log(path)

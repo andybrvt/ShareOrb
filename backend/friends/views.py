@@ -67,11 +67,11 @@ class SendFriendRequest(APIView):
             from_user=request.user,
             to_user=user)
         return Response('request sent')
+		
 
 class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer
 	queryset = models.CustomNotification.objects.all()
-
 
 
 # Cancel from sender's end
