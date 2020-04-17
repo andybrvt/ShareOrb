@@ -31,6 +31,7 @@ urlpatterns = [
 	path('current-user/friends', views.FriendRequestsToUser.as_view(), name='friend_request_list'),
 
 	path('remove-friend/<slug:username>', views.DeleteFriends.as_view(), name='delete_friend'),
+	path('friendnotificationrequest', views.FriendNotification.as_view(), name='userprofile-friend-notifications'),
 
 
 

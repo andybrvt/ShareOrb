@@ -22,7 +22,7 @@ class PersonalProfile extends React.Component{
         const notificationObject  = {
           command: 'send_friend_notification',
           actor: this.props.currentUser,
-          recipient: this.props.username,
+          recipient: this.props.match.params.username,
         }
         NotificationWebSocketInstance.sendNotification(notificationObject)
 
@@ -40,7 +40,7 @@ class PersonalProfile extends React.Component{
           }
 
   render(){
-    console.log(this.props)
+    console.log(this.props.match.params.username)
 
       return(
         <Form>

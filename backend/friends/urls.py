@@ -11,7 +11,7 @@ urlpatterns = [
 	path('friend-request/cancel/<slug:id>', views.CancelFriendRequest.as_view(), name='cancel_request'),
 	path('friend-request/accept/<slug:id>', views.AcceptFriendRequest.as_view(), name='accept_request'),
 	path('friend-request/delete/<slug:id>', views.DeleteFriendRequest.as_view(), name='delete_request'),
-	path('friends-notifications/', views.FriendNotification.as_view(), name='friend_request_notifications'),
+	# path('friends-notifications/', views.FriendNotification.as_view(), name='friend_request_notifications'),
     # url(r'^$', users_list, name='list'),
 
 
