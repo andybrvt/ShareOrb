@@ -12,7 +12,25 @@ class DayCalendar extends React.Component{
       events: [],
   }
 
+  componentDidMount(){
+    const selectedYear = this.props.match.params.year;
+    const selectedMonth = this.props.match.params.month;
+    const selectedDay = this.props.match.params.day;
+    const newDate = [selectedYear, selectedMonth, selectedDay]
+    const newsSelectedDate = new Date(newDate)
+    this.setState({
+      selectedDate: newsSelectedDate
+    })
+  }
   componentWillReceiveProps(newProps){
+    const selectedYear = this.props.match.params.year;
+    const selectedMonth = this.props.match.params.month;
+    const selectedDay = this.props.match.params.day;
+    const newDate = [selectedYear, selectedMonth, selectedDay]
+    const newsSelectedDate = new Date(newDate)
+    this.setState({
+      selectedDate: newsSelectedDate
+    })
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -34,7 +52,7 @@ class DayCalendar extends React.Component{
         </div>
         <div className = "col col-center">
           <span>
-            {dateFns.format(this.state.currentDay, dateFormat)}
+            {dateFns.format(this.state.selectedDate, dateFormat)}
           </span>
         </div>
         <div className = "col col-end" onClick = {this.nextDay}>
@@ -52,7 +70,7 @@ class DayCalendar extends React.Component{
 
     // starttime will be the start of the day where the time is 00:00
     // then you will loop by 0-23 and add hours accordingly
-    let startTime = dateFns.startOfDay(this.state.currentDay);
+    let startTime = dateFns.startOfDay(this.state.selectedDate);
     for(let i = 0; i<24; i++){
       hours.push(
         <div className = 'sidecell' key = {i}>
@@ -66,8 +84,8 @@ class DayCalendar extends React.Component{
 // render all the hour cell within each day
   renderCells(events) {
     const {currentDay, selectedDate} = this.state
-    const startHourDay = dateFns.startOfDay(currentDay)
-    const endHourDay = dateFns.endOfDay(currentDay)
+    const startHourDay = dateFns.startOfDay(selectedDate)
+    const endHourDay = dateFns.endOfDay(selectedDate)
 
     // So you have the current day and the selected day
     // The you get the day, and then you get the first hour of that day
@@ -82,6 +100,11 @@ class DayCalendar extends React.Component{
     // Start of the hour and then loop through all the 24 hours
     let hour = startHourDay;
     let formattedHour = "";
+    console.log(dateFns.isSameHour(new Date("2020-04-16T07:48:40Z"), new Date('Thu Apr 16 2020 00:00:00 GMT-0700')))
+    console.log(new Date("2020-04-16T07:48:40Z"))
+    console.log(new Date('Thu Apr 16 2020 00:00:00 GMT-0700'))
+    // they are the same time because when you do a new date it goes on the GM time
+
     // Hour is in a date format with the day and time and it will go till the
     // Same day(endHourday) but till the last sec of the day
     // Since we are not doing a list of list and there is just days we do not
@@ -89,20 +112,23 @@ class DayCalendar extends React.Component{
     for (let i = 0; i<24; i++){
       formattedHour = dateFns.format(hour, hourFormat)
       for(let item = 0; item < events.length; item ++){
-        if (dateFns.isSameHour(new Date(events[item].start_time), hour)){
+        if (dateFns.isSameHour(new Date(events[item].start_time), hour)
+            && dateFns.isSameDay(new Date(events[item].start_time), hour) ){
           toDoStuff.push(
             events[item]
           )
         }
       }
 
+      const cloneHour = hour
+      const cloneToDoStuff = toDoStuff
       if (toDoStuff.length > 0){
         hours.push(
           <div
             className = ' daycell'
             key = {hour}
             onClick = {
-              () => this.onHourClick()}
+              () => this.onHourClick(cloneHour, cloneToDoStuff)}
           >
           <span className = 'number'>{formattedHour}</span>
           <span className = 'bg'> {formattedHour}</span>
@@ -120,7 +146,7 @@ class DayCalendar extends React.Component{
             className = ' daycell'
             key = {hour}
             onClick = {
-              () => this.onHourClick()}
+              () => this.onHourClick(cloneHour, cloneToDoStuff)}
           >
           <span className = 'number'>{formattedHour}</span>
           <span className = 'bg'> {formattedHour}</span>
@@ -132,25 +158,27 @@ class DayCalendar extends React.Component{
     return <div className = 'body'>{hours}</div>
   }
 
-  onHourClick = day =>{
+  onHourClick = (day,events) =>{
     console.log(day)
+    console.log(events)
   }
 
 // Use addDays function to change the day
 //This will pretty much push all the render cell and stuff on top by 1 day
   nextDay = () => {
     this.setState({
-      currentDay: dateFns.addDays(this.state.currentDay, 1)
+      selectedDate: dateFns.addDays(this.state.selectedDate, 1)
     })
   }
 
   prevDay = () => {
     this.setState({
-      currentDay: dateFns.subDays(this.state.currentDay,1)
+      selectedDate: dateFns.subDays(this.state.selectedDate,1)
     })
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className = 'calendar'>
         {this.renderHeader()}

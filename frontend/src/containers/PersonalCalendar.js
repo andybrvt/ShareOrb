@@ -7,6 +7,8 @@ import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import { connect } from 'react-redux';
+import  { Redirect } from 'react-router-dom';
+
 
 class PersonalCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
@@ -116,7 +118,6 @@ class PersonalCalendar extends React.Component{
       // weekdays the same
       for (let i= 0; i<7; i++){
         for (let item = 0; item < events.length; item++){
-          console.log(events[item])
           if (dateFns.isSameDay(new Date(events[item].start_time), day)){
             toDoStuff.push(
               events[item]
@@ -160,7 +161,7 @@ class PersonalCalendar extends React.Component{
             }`}
             key = {day}
             onClick = { () =>
-          this.onDateClick(dateFns.parse(cloneDay, 'yyyy-MM-dd', new Date()))}
+          this.onDateClick(cloneDay)}
           >
           <span className = "number">{formattedDate}</span>
           <span className = "bg"> {formattedDate}</span>
@@ -192,11 +193,16 @@ class PersonalCalendar extends React.Component{
   // Then you need function to show previous and next monthly
   onDateClick = day => {
     console.log(day)
+    const selectYear = dateFns.getYear(day).toString()
+    const selectMonth = (dateFns.getMonth(day)+1).toString()
+    const selectDay = dateFns.getDate(day).toString()
+    console.log(selectYear, selectMonth,selectDay)
     this.setState(
       {
         selectedDate:day
       }
     )
+  this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
 
@@ -218,7 +224,6 @@ class PersonalCalendar extends React.Component{
   render(){
     // className is to determine the style
 
-    console.log(this.props)
     return(
       <div>
         <List
