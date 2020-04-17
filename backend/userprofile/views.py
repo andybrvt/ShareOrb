@@ -63,17 +63,18 @@ def is_there_more_data(request):
 
 # Infinite Loop
 class ReactInfiniteView(viewsets.ModelViewSet):
-	serializer_class = serializers.PostSerializer
+    serializer_class = serializers.PostSerializer
 
-	def get_queryset(self):
-		queryset = infinite_filter(self.request)
-		return queryset
+    def get_queryset(self):
+        queryset = infinite_filter(self.request)
+        return queryset
 
-	def list(self, request):
-		queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
-		serializer = self.serializer_class(queryset, many=True)
-		return Response({
-			"post": serializer.data,
+    def list(self, request):
+        print(request.user)
+        queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
+        serializer = self.serializer_class(queryset, many=True)
+        return Response({
+            "post": serializer.data,
 			"has_more": is_there_more_data(request)
 		})
 

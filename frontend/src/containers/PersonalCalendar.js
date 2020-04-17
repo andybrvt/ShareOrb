@@ -30,7 +30,14 @@ class PersonalCalendar extends React.Component{
       drawerVisible: false,
     });
   };
-
+  componentDidMount(){
+    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+    .then(res => {
+      this.setState({
+        events: res.data
+      })
+    })
+  }
 
   componentWillReceiveProps(newProps){
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')

@@ -2,6 +2,8 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import axios from 'axios';
 import { authAxios } from '../components/util';
+import { Button, Tooltip } from 'antd';
+
 
 
 
@@ -20,6 +22,12 @@ class DayCalendar extends React.Component{
     const newsSelectedDate = new Date(newDate)
     this.setState({
       selectedDate: newsSelectedDate
+    })
+    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+    .then(res => {
+      this.setState({
+        events: res.data
+      })
     })
   }
   componentWillReceiveProps(newProps){
@@ -177,10 +185,18 @@ class DayCalendar extends React.Component{
     })
   }
 
+  onBackClick = () => {
+    this.props.history.push('/personalcalendar')
+  }
+
   render() {
     console.log(this.state)
     return (
+
       <div className = 'calendar'>
+        <Button type="primary" shape="circle" onClick = {this.onBackClick}>
+        A
+        </Button>
         {this.renderHeader()}
         {this.renderHours()}
         {this.renderCells(this.state.events)}

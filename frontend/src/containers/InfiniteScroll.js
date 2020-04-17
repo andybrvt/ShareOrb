@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Article from '../components/Article';
 import Result from '../components/Listitems';
+import { authAxios } from '../components/util';
+
 
 // Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.PureComponent {
@@ -36,7 +38,7 @@ class InfiniteList extends React.PureComponent {
   loadPost = () => {
      this.setState({loading: true}, () => {
        const {offset, limit} = this.state;
-       axios.get(
+       authAxios.get(
          'http://127.0.0.1:8000/userprofile/infinite-post/?limit='+limit+'&offset='+offset
 
        )
