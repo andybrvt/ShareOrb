@@ -70,8 +70,8 @@ class ReactInfiniteView(viewsets.ModelViewSet):
         return queryset
 
     def list(self, request):
-        print(request.user)
-        queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
+        print(request.user.id)
+        queryset = models.Post.objects.filter(user=request.user).order_by('-created_at', '-updated_at')
         serializer = self.serializer_class(queryset, many=True)
         return Response({
             "post": serializer.data,
