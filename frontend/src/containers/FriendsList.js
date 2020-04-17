@@ -14,6 +14,17 @@ class FriendsList extends React.Component {
   state={
 		friendList:[],
 	}
+
+  componentDidMount(){
+        authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
+        .then(res=> {
+          console.log(res.data)
+          this.setState({
+            friendList:res.data.friends,
+         });
+        });
+  }
+
   componentWillReceiveProps(newProps) {
     console.log(newProps)
     if(newProps.isAuthenticated){
@@ -30,8 +41,10 @@ class FriendsList extends React.Component {
 // the map((j,index) => {}) will loop through all the objects
 	render() {
     const {friendList} = this.state
+    console.log('here')
 		return (
       <div>
+      Hi there
         {friendList.map((j,index) => {
           return <FriendProfileCard data = {j} key ={index} />
         })}
