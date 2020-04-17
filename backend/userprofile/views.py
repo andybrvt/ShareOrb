@@ -135,6 +135,10 @@ class SendFriendRequest(APIView):
             to_user=user)
         return Response('request sent')
 
+class FriendNotification(generics.ListAPIView):
+	serializer_class = serializers.NotificationSerializer
+	queryset = models.CustomNotification.objects.all()
+
 # Cancel from sender's end
 class CancelFriendRequest(APIView):
 	def post(self, request, username, *args, **kwargs):

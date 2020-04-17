@@ -1,7 +1,7 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 import chat.routing
-import friends.routing
+import userprofile.routing
 
 
 from channels.http import AsgiHandler
@@ -19,7 +19,7 @@ from core.token_auth import TokenAuthMiddlewareStack
 application = ProtocolTypeRouter ({
     'websocket': TokenAuthMiddlewareStack(
         URLRouter(
-        friends.routing.websocket_urlpatterns + chat.routing.websocket_urlpatterns
+        userprofile.routing.websocket_urlpatterns + chat.routing.websocket_urlpatterns
         )
     )
 })
