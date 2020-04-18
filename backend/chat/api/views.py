@@ -33,7 +33,6 @@ class ChatListView(ListAPIView):
         if username is not None:
             contact=get_user_contact(username)
             queryset=contact.chats.all()
-        print(username)
         return queryset
 
 class ChatDetailView(RetrieveAPIView):

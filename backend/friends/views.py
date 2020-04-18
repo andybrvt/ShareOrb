@@ -67,7 +67,7 @@ class SendFriendRequest(APIView):
             from_user=request.user,
             to_user=user)
         return Response('request sent')
-		
+
 
 class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer
@@ -78,7 +78,6 @@ class FriendNotification(generics.ListAPIView):
 class CancelFriendRequest(APIView):
 	def post(self, request, id, *args, **kwargs):
 		user = get_object_or_404(User, id=id)
-		print(user)
 		frequest = models.FriendRequest.objects.filter(
 			from_user=request.user,
 			to_user=user)

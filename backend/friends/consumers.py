@@ -50,7 +50,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             # Send message to room group
         channel_layer = get_channel_layer()
         channel = "notifications"
-        print('hit')
         # _{}".format(recipient.username)
         # print(channel)
         async_to_sync(self.channel_layer.group_send)(
@@ -86,7 +85,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     def connect(self):
         # this is to aunthenticate
         user = self.scope['user']
-        print(self.scope['user'])
         grp = 'notifications'
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
 
@@ -108,7 +106,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print (data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -116,6 +113,5 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 
     def new_notification(self, event):
         notification = event['notification']
-        print(notification)
         # Send message to WebSocket
         self.send_json(notification)

@@ -61,10 +61,11 @@ class Notifications extends React.Component{
     console.log(recipient)
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+recipient)
     const deleteNotificationObject = {
-      commandDelete: 'delete_friend_request_notification',
       command: 'send_accepted_notification',
       actor: actor,
+      // the actor is an id of the recipient of the friend request
       recipient: recipient
+      // the recipient is the actor that sent the friend request
     }
     NotificationWebSocketInstance.deleteNotification(deleteNotificationObject)
   }
@@ -135,7 +136,7 @@ class Notifications extends React.Component{
   };
 
   componentWillReceiveProps(newProps){
-
+    this.initialiseNotification()
   }
 
 

@@ -21,7 +21,6 @@ class ChatSerializer(serializers.ModelSerializer):
 # chat =Chat() is creating a new chat from the Chat model
 # when you make a chat you have to save it as well
     def create(self, validated_data):
-        print (validated_data)
         participants = validated_data.pop('participants')
         chat = Chat()
         chat.save()

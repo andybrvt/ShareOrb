@@ -20,7 +20,6 @@ def create_comment(request, post_id=None):
         notification = CustomNotification.objects.create(type="comment", recipient=post.user, actor=request.user, verb="commented on your post")
         channel_layer = get_channel_layer()
         channel = "comment_like_notifications_{}".format(post.user.username)
-        print(json.dumps(NotificationSerializer(notification).data))
         async_to_sync(channel_layer.group_send)(
             channel, {
                 "type": "notify",
