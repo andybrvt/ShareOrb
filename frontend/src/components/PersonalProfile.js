@@ -18,7 +18,7 @@ class PersonalProfile extends React.Component{
         //   "Content-type": "application/json",
         //   Authorization: `Token ${this.props.token}`
         // }
-        authAxios.post('http://127.0.0.1:8000/friends/friend-request/send/'+username)
+        authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
         const notificationObject  = {
           command: 'send_friend_notification',
           actor: this.props.currentUser,

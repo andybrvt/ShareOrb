@@ -136,7 +136,6 @@ class Notifications extends React.Component{
   };
 
   componentWillReceiveProps(newProps){
-    this.initialiseNotification()
   }
 
 
