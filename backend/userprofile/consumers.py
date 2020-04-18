@@ -64,7 +64,7 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         }
         self.fetch_notifications(fetch_content)
         self.send_json(content)
-
+# coment here
 
     def send_new_notification(self, notification, recipient):
             # Send message to room group
