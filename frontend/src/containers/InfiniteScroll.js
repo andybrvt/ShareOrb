@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Article from '../components/Article';
-import Result from '../components/Listitems';
+import Listitems from '../components/NewsFeedListitems';
 import { authAxios } from '../components/util';
 
 
@@ -69,7 +69,7 @@ class InfiniteList extends React.PureComponent {
       <p> Scroll down to load more </p>
       <hr />
       {post.map((j,index) => {
-        return <Result data = {j} key ={index} />
+        return <Listitems data = {j} key ={index} />
       })}
       {error  && <div>{error}</div>}
       {loading && <div>Loading...</div>}
