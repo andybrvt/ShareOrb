@@ -36,7 +36,10 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         user = self.scope['user']
         recipient = get_object_or_404(User, username=data['recipient'])
         actor = get_object_or_404(User, username=data['actor'])
-        notification = CustomNotification.objects.create(type="friend", recipient=recipient, actor=actor, verb="sent you friend request")
+        if data['command'] == 'send_friend_notification':
+            notification = CustomNotification.objects.create(type="friend", recipient=recipient, actor=actor, verb="sent you friend request")
+        if data['command'] == 'send_accepted_notification':
+            notification = CustomNotification.objects.create(type="accepted_friend", recipient=recipient, actor=actor, verb="accepted your friend request")
         # CustomNotification.save(self)
         serializer = NotificationSerializer(notification)
         content = {
@@ -44,6 +47,23 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             "notification": json.dumps(serializer.data)
         }
         return self.send_new_notification(content, recipient)
+
+#So this one is to delete the friend request notificaton, so since recipeint for this person
+# is the person receive the friend request but once recipient accpets it then they are the actor
+# but in the models for that notification the reicipeint should be the actor in this case
+    def delete_notification (self, data):
+        recipient = get_object_or_404(User, id = data['actor'])
+        actor = get_object_or_404(User, username = data['recipient'])
+        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type ='friend')
+        notification.delete()
+        content = {
+            'command': 'deleted_notification',
+        }
+        fetch_content = {
+            'userId': data['actor']
+        }
+        self.fetch_notifications(fetch_content)
+        self.send_json(content)
 
 
     def send_new_notification(self, notification, recipient):
@@ -113,7 +133,10 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
             self.send_notification(data)
-
+        if data['commandDelete'] == 'delete_friend_request_notification':
+            self.delete_notification(data)
+        if data['command'] == 'send_accepted_notification':
+            self.send_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         print(notification)

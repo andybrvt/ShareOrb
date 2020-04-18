@@ -52,6 +52,27 @@ class Notifications extends React.Component{
 
   }
 
+  onAccept = (actor, recipient) => {
+    // this function will delete the notification that you accept and then send a notification
+    // to the other person that they have accepted their frined reuqest
+    // In the accept, the actor would be the person accepting and the recipient will be
+    // the person that sent the request
+    console.log(actor)
+    console.log(recipient)
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+recipient)
+    const deleteNotificationObject = {
+      commandDelete: 'delete_friend_request_notification',
+      command: 'send_accepted_notification',
+      actor: actor,
+      recipient: recipient
+    }
+    NotificationWebSocketInstance.deleteNotification(deleteNotificationObject)
+  }
+
+  onDecline = (data) => {
+    console.log(data)
+  }
+
   renderTimestamp = (timestamp) => {
     let prefix = '';
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
@@ -140,6 +161,8 @@ class Notifications extends React.Component{
                     description={"This is the description     ["+item.description+"    ]  \n"+
                       "This is the recipientID    "+item.recipient+"    This is the actor "+item.actor.username}
                   />
+                  <Button type ="primary" onClick = {()=> this.onAccept(item.recipient,item.actor.username)}> Accept</Button>
+                  <Button type ="priamry" onClick = {()=> this.onDecline(item.actor.username)}> Decline </Button>
                 </List.Item>
               )}
             />

@@ -84,6 +84,14 @@ class WebSocketNotifications {
     }
   }
 
+  deleteNotification(data){
+    try{
+      this.socketRef.send(JSON.stringify({...data}))
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
   state() {
     return this.socketRef.readyState;
   }
