@@ -9,6 +9,9 @@ import {
   ContainerOutlined,
   MailOutlined,
   UsergroupAddOutlined,
+  MessageOutlined,
+  CalendarOutlined,
+  HeartTwoTone,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
@@ -30,7 +33,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div style={{ width: 156 }}>
+      <div style={{ width: 200 }}>
         <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
           {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
         </Button>
@@ -40,6 +43,7 @@ export default class App extends React.Component {
           mode="inline"
           theme="light"
           inlineCollapsed={this.state.collapsed}
+          style={{ minHeight:"100vh" }}
         >
         <Menu.Item key="1">
           <Link to="/home" className="nav-text">
@@ -55,11 +59,31 @@ export default class App extends React.Component {
           </Link>
         </Menu.Item>
 
-  
-          <Menu.Item key="3">
-            <ContainerOutlined />
-            <span>Option 3</span>
-          </Menu.Item>
+
+        <Menu.Item key="3">
+          <Link to="/chat/1" className="nav-text">
+            <MessageOutlined />
+            <span>Messages </span>
+          </Link>
+        </Menu.Item>
+
+
+
+        <Menu.Item key="4">
+          <Link to="/personalcalendar" className="nav-text">
+            <CalendarOutlined />
+            <span>Personal Calendar </span>
+          </Link>
+        </Menu.Item>
+
+
+
+        <Menu.Item key="5">
+          <Link to="/personalcalendar" className="nav-text">
+            <HeartTwoTone twoToneColor="#eb2f96" />
+            <span>Social Calendar </span>
+          </Link>
+        </Menu.Item>
           <SubMenu
             key="sub1"
             title={

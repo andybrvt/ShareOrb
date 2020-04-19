@@ -196,70 +196,7 @@ class CustomLayout extends React.Component {
                 }
 
 
-                {
-                    this.props.isAuthenticated ?
-                    <Menu.Item key="1">
 
-                        <a href='/home'>
-                          <Icon name='large home' />
-                          Home
-                        </a>
-                    </Menu.Item>
-                    :
-                    <Menu.Item key="1">
-                    </Menu.Item>
-                }
-
-                {
-                    this.props.isAuthenticated ?
-                    <Menu.Item key="3">
-
-                        <a href='/userview'>
-                          <Icon name='large user plus' />
-                          Users
-                        </a>
-                    </Menu.Item>
-                    :
-                    <Menu.Item key="3">
-                    </Menu.Item>
-
-                }
-
-                {
-                    this.props.isAuthenticated ?
-                    <Menu.Item key="4">
-
-                        <a href='/current-user'>
-                          <Icon name='large user circle' />
-                          Users
-                        </a>
-                    </Menu.Item>
-                    :
-                    <Menu.Item key="4">
-                    </Menu.Item>
-                }
-
-
-                {
-                    this.props.isAuthenticated ?
-                    <Menu.Item key="5">
-                        <a href='/friend-request-list'>Friend requests</a>
-                    </Menu.Item>
-                    :
-                    <Menu.Item key="5">
-                    </Menu.Item>
-                }
-                {
-                    this.props.isAuthenticated ?
-                    <Menu.Item key="6">
-                        <a href='/friends-list'>Friends</a>
-                    </Menu.Item>
-                    :
-                    <Menu.Item key="6">
-                    </Menu.Item>
-                }
-
-                {/* need to create boolean condition onChange to make the loading = true to get loading animation while typing */}
                 {
                     this.props.isAuthenticated ?
                     <Menu.Item key="7">
@@ -273,20 +210,6 @@ class CustomLayout extends React.Component {
                     }
 
 
-                {
-                    this.props.isAuthenticated ?
-                    <Menu.Item key="8">
-
-                        <a href='/personalcalendar'>
-                        <div class="column"><i class="calendar outline icon"></i>Calendar Outline</div>
-
-                        </a>
-                    </Menu.Item>
-
-                    :
-                    <Menu.Item key="8">
-                    </Menu.Item>
-                }
 
 
 
@@ -377,7 +300,12 @@ class CustomLayout extends React.Component {
 
 
                 </Menu>
-                <BasicLayout />
+                {
+                    this.props.isAuthenticated ?
+                    <BasicLayout />
+                :
+                   <div>  </div>
+                }
                 </Header>
 
                 <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1200, marginRight: 'auto', marginLeft: 'auto'}}>
