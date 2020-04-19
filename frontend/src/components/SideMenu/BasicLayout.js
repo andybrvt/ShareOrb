@@ -4,11 +4,16 @@ import {
   AppstoreOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  PieChartOutlined,
+  HomeTwoTone,
   DesktopOutlined,
   ContainerOutlined,
   MailOutlined,
+  UsergroupAddOutlined,
 } from '@ant-design/icons';
+import {Link} from 'react-router-dom';
+
+
+
 
 const { SubMenu } = Menu;
 
@@ -25,7 +30,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div style={{ width: 256 }}>
+      <div style={{ width: 156 }}>
         <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
           {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
         </Button>
@@ -36,14 +41,21 @@ export default class App extends React.Component {
           theme="light"
           inlineCollapsed={this.state.collapsed}
         >
-          <Menu.Item key="1">
-            <PieChartOutlined />
-            <span>Option 1</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <DesktopOutlined />
-            <span>Option 2</span>
-          </Menu.Item>
+        <Menu.Item key="1">
+          <Link to="/home" className="nav-text">
+            <HomeTwoTone />
+            <span>Home </span>
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="2">
+          <Link to="/userview" className="nav-text">
+            <UsergroupAddOutlined />
+            <span>Users </span>
+          </Link>
+        </Menu.Item>
+
+  
           <Menu.Item key="3">
             <ContainerOutlined />
             <span>Option 3</span>
