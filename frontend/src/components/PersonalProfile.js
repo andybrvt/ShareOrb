@@ -11,6 +11,7 @@ class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
   }
+  // on click add friend starts here
       onClickSend = (e) =>{
         e.preventDefault()
         const username = this.props.match.params.username;
@@ -24,7 +25,10 @@ class PersonalProfile extends React.Component{
           actor: this.props.currentUser,
           recipient: this.props.match.params.username,
         }
+        // NotificationWebSocketInstance.disconnect()
+        // NotificationWebSocketInstance.connect(this.props.match.params.username)
         NotificationWebSocketInstance.sendNotification(notificationObject)
+        // NotificationWebSocketInstance.connect(this.props.currentUser)
 
         }
 

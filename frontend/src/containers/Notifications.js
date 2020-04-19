@@ -24,7 +24,6 @@ class Notifications extends React.Component{
         this.props.id
       )
       })
-      // NotificationWebSocketInstance.connect()
     }
 
     constructor(props){

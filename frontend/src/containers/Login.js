@@ -34,7 +34,6 @@ class LoginForm extends React.Component {
     const { username, password } = this.state;
     this.props.login(username, password)
     this.setState({login: true })
-    // NotificationWebSocketInstance.connect()
   };
 
   render() {

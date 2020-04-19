@@ -46,19 +46,19 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         return self.send_new_notification(content, recipient)
 
 
-    def send_new_notification(self, notification, recipient):
-            # Send message to room group
-        channel_layer = get_channel_layer()
-        channel = "notifications"
-        # _{}".format(recipient.username)
-        # print(channel)
-        async_to_sync(self.channel_layer.group_send)(
-            channel,
-            {
-                'type': 'new_notification',
-                'notification': notification
-            }
-        )
+    # def send_new_notification(self, notification, recipient):
+    #         # Send message to room group
+    #     channel_layer = get_channel_layer()
+    #     channel = "notifications"
+    #     # _{}".format(recipient.username)
+    #     # print(channel)
+    #     async_to_sync(self.channel_layer.group_send)(
+    #         channel,
+    #         {
+    #             'type': 'new_notification',
+    #             'notification': notification
+    #         }
+    #     )
 
 
     # this will then take all the notifications that comes in, turns it to json
@@ -111,7 +111,7 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_friend_notification':
             self.send_notification(data)
 
-    def new_notification(self, event):
-        notification = event['notification']
-        # Send message to WebSocket
-        self.send_json(notification)
+    # def new_notification(self, event):
+    #     notification = event['notification']
+    #     # Send message to WebSocket
+    #     self.send_json(notification)

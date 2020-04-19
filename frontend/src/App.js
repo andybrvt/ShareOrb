@@ -21,10 +21,18 @@ class App extends Component {
   //everythign this is run it will do a try auto signup, it will give
   //App.js this method from the store
     this.props.onTryAutoSignup();
-    NotificationWebSocketInstance.connect()
+    // NotificationWebSocketInstance.connect(this.props.username)
 
 
   }
+
+  componentWillReceiveProps(newProps){
+    console.log(newProps)
+    console.log('right here')
+    NotificationWebSocketInstance.connect(newProps.username)
+  }
+
+
   constructor(props) {
     super(props);
     WebSocketInstance.addCallbacks(
@@ -38,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(NotificationWebSocketInstance)
+    console.log(this.props)
     return (
       <div>
         <Router>

@@ -14,17 +14,16 @@ class WebSocketNotifications {
   }
 
 // start HERE
-  connect(){
-    const path = 'ws://127.0.0.1:8000/ws/friend-request-notification/'
+  connect(username){
+    const path = 'ws://127.0.0.1:8000/ws/friend-request-notification/'+username
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () =>{
       console.log('websocket open')
     }
 // I guess group_send also sends it to onmessage
-    console.log('here')
     this.socketRef.onmessage = (e) => {
-      console.log(e.data)
+      console.log('been here')
       this.socketNewNotification(e.data)
     }
 
@@ -39,6 +38,7 @@ class WebSocketNotifications {
   }
 
   disconnect(){
+    console.log('disconnected')
     this.socketRef.close();
   }
 
@@ -48,11 +48,9 @@ class WebSocketNotifications {
   socketNewNotification(data) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
-    console.log(parsedData.notifications)
+    console.log(parsedData.notificaton)
     if (command === 'notifications') {
         const notifications = JSON.parse(parsedData.notifications);
-        console.log(notifications)
-        console.log(this.callbacks)
         this.callbacks['notifications'](notifications)
             // createNotification(notifications[i]);
     } else if (command === 'new_notification') {
@@ -76,6 +74,9 @@ class WebSocketNotifications {
   }
 
   sendNotification(data) {
+    // this is good, it only sends 1 time
+    // This will recieve information from onClickSend from PersonalProfile.js
+    // and will send it to the userprofile.consumers
     console.log(data)
     try{
       this.socketRef.send(JSON.stringify({...data }))
