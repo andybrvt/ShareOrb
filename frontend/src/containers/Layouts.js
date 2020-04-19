@@ -13,7 +13,7 @@ import styles from './notification.less';
 import moment from 'moment';
 import SearchBar from './HeaderSearch';
 
-
+import BasicLayout from '../components/SideMenu/BasicLayout';
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -167,7 +167,11 @@ class CustomLayout extends React.Component {
           ]);
         };
         return (
+
+
+
             <Layout className="layout">
+
                 <Header>
                 <div className="logo" />
                 <Menu
@@ -338,17 +342,10 @@ class CustomLayout extends React.Component {
                             clearClose
 
 
-                            // <Dropdown
-                            //   overlay={menu}
-                            // >
-                            //   <div>
-                            //   Notifications
-                            //   </div>
-                            // </Dropdown>
                           >
                             <NoticeIcon.Tab
                               tabKey="notification"
-                              count={10}
+                              count={this.state.testData.length}
                               list={this.state.testData}
                               title="first tab"
                               emptyText="你已查看所有通知"
@@ -380,7 +377,9 @@ class CustomLayout extends React.Component {
 
 
                 </Menu>
+                <BasicLayout />
                 </Header>
+
                 <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1200, marginRight: 'auto', marginLeft: 'auto'}}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
 

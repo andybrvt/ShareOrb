@@ -37,8 +37,8 @@ const Result = (props) => {
 
         }
 
-        <div class="ui labeled button" tabindex="0">
-          <div class="ui red button">
+        <div class="small ui labeled button" tabindex="0">
+          <div class="small ui red button">
             <i class="heart icon"></i> Like
           </div>
           <a class="ui basic red left pointing label">
