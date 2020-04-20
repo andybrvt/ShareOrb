@@ -1,5 +1,5 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Menu, Spin } from 'antd';
+import { Avatar, Menu, Spin, Dropdown } from 'antd';
 import React from 'react';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
@@ -59,7 +59,7 @@ import { authAxios } from '../../components/util';
     if (this.props.isAuthenticated){
       return (
         <div>
-          <HeaderDropdown overlay={
+          <Dropdown overlay={
 
             <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
               { (
@@ -85,7 +85,7 @@ import { authAxios } from '../../components/util';
             <Avatar size="small" className={styles.avatar} src={this.state.avatar} alt="avatar" />
             <span className={styles.name}>{this.state.username}</span>
           </span>
-        </HeaderDropdown>
+        </Dropdown>
       </div>
 
     )
@@ -108,7 +108,7 @@ import { authAxios } from '../../components/util';
   }
 
   render() {
-    
+
     const {
 
       menu,

@@ -11,7 +11,8 @@ import styles from './index.less';
 
 const HeaderDropdown = props => (
 
-  <Dropdown visible = {props.visible}/>
+   <Dropdown visible = {props.visible}/>
+
 );
 
 export default HeaderDropdown;
