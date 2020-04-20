@@ -12,6 +12,7 @@ import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
 import moment from 'moment';
 import SearchBar from './HeaderSearch';
+import ProfileDropDown from './GlobalHeader/ProfileDropDown';
 
 import BasicLayout from '../components/SideMenu/BasicLayout';
 
@@ -297,6 +298,8 @@ class CustomLayout extends React.Component {
 
                 }
 
+
+                <ProfileDropDown menu/>
 
 
                 </Menu>

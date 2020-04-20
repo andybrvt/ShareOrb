@@ -1,11 +1,37 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import React from 'react';
-import { history, connect } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
-class AvatarDropdown extends React.Component {
+
+import { authAxios } from '../../components/util';
+
+ class ProfileDropDown extends React.Component {
+
+
+   state={
+
+ 		name: '',
+ 		avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+
+ 	}
+
+  componentWillReceiveProps(newProps){
+
+    console.log(this.props.data)
+    authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
+      .then(res=> {
+        this.setState({
+
+          name: res.data.username,
+       });
+     });
+  }
+
+
   onMenuClick = event => {
     const { key } = event;
 
@@ -21,15 +47,12 @@ class AvatarDropdown extends React.Component {
       return;
     }
 
-    history.push(`/account/${key}`);
   };
 
   render() {
+
     const {
-      currentUser = {
-        avatar: '',
-        name: '',
-      },
+
       menu,
     } = this.props;
     const menuHeaderDropdown = (
@@ -54,11 +77,18 @@ class AvatarDropdown extends React.Component {
         </Menu.Item>
       </Menu>
     );
-    return currentUser && currentUser.name ? (
+
+    const test = true;
+
+    console.log(this.state)
+    console.log(this.state.username)
+    console.log(this.state.avatar && this.state.name)
+    console.log(test)
+    console.log(test&&true)
+    return this.state.avatar && this.state.name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={styles.name}>{currentUser.name}</span>
+        <span className={styles.name}>{this.state.name}</span>
         </span>
       </HeaderDropdown>
     ) : (
@@ -72,9 +102,9 @@ class AvatarDropdown extends React.Component {
         />
       </span>
     );
+
   }
 }
 
-export default connect(({ user }) => ({
-  currentUser: user.currentUser,
-}))(AvatarDropdown);
+
+export default ProfileDropDown;
