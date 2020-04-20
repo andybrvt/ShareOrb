@@ -11,24 +11,27 @@ import { authAxios } from '../../components/util';
 
  class ProfileDropDown extends React.Component {
 
+   constructor(props) {
+    super(props);
+    this.state={
 
-   state={
+  		username: '',
+  		avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
 
- 		name: '',
- 		avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+  	}
+  }
 
- 	}
 
   componentWillReceiveProps(newProps){
 
     console.log(this.props.data)
     authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
-      .then(res=> {
-        this.setState({
-
-          name: res.data.username,
-       });
+    .then(res=> {
+      this.setState({
+        name: res.data.username,
      });
+    });
+
   }
 
 
@@ -82,15 +85,17 @@ import { authAxios } from '../../components/util';
 
     console.log(this.state)
     console.log(this.state.username)
-    console.log(this.state.avatar && this.state.name)
+    console.log(this.state.avatar && this.state.username)
     console.log(test)
     console.log(test&&true)
-    return this.state.avatar && this.state.name ? (
+    return this.state.username ? (
+
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-        <span className={styles.name}>{this.state.name}</span>
+        <p>{this.state.username}</p>
         </span>
       </HeaderDropdown>
+
     ) : (
       <span className={`${styles.action} ${styles.account}`}>
         <Spin

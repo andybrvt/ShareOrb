@@ -12,7 +12,7 @@ import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
 import moment from 'moment';
 import SearchBar from './HeaderSearch';
-import ProfileDropDown from './GlobalHeader/ProfileDropDown';
+import ProfileDropDown from './GlobalHeader/ProfileDropDown.js';
 
 import BasicLayout from '../components/SideMenu/BasicLayout';
 
