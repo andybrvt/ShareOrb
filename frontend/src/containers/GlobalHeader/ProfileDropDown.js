@@ -14,12 +14,16 @@ import { authAxios } from '../../components/util';
      super(props);
    }
 
-   state = {
+   constructor(props) {
+    super(props);
+    this.state={
 
- 		username:'',
- 		avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+  		username: '',
+  		avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
 
- 	}
+  	}
+  }
+
 
   componentWillReceiveProps(newProps){
 
@@ -31,6 +35,8 @@ import { authAxios } from '../../components/util';
           username: res.data.username
        });
      });
+    });
+
   }
 
 
@@ -107,7 +113,7 @@ import { authAxios } from '../../components/util';
 
     console.log(this.state)
     console.log(this.state.username)
-    console.log(this.state.avatar && this.state.name)
+    console.log(this.state.avatar && this.state.username)
     console.log(test)
     console.log(test&&true)
     return (
