@@ -301,7 +301,22 @@ class CustomLayout extends React.Component {
                 }
 
 
-                <ProfileDropDown menu {...this.props}/>
+
+                {
+                    this.props.isAuthenticated ?
+
+                    <Menu.Item key="2">
+                        <ProfileDropDown menu {...this.props}/>
+                    </Menu.Item>
+
+                    :
+
+                    <Menu.Item key="2">
+
+                    </Menu.Item>
+                }
+
+
 
 
                 </Menu>

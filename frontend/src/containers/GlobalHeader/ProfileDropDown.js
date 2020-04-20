@@ -38,22 +38,7 @@ import { authAxios } from '../../components/util';
   }
 
 
-  onMenuClick = event => {
-    const { key } = event;
 
-    if (key === 'logout') {
-      const { dispatch } = this.props;
-
-      if (dispatch) {
-        dispatch({
-          type: 'login/logout',
-        });
-      }
-
-      return;
-    }
-
-  };
 
   renderProfile() {
     if (this.props.isAuthenticated){
@@ -61,7 +46,7 @@ import { authAxios } from '../../components/util';
         <div>
           <Dropdown overlay={
 
-            <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+            <Menu className={styles.menu} selectedKeys={[]} >
               { (
                 <Menu.Item key="center">
                   <UserOutlined />
