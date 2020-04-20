@@ -10,9 +10,7 @@ import axios from 'axios';
 import { authAxios } from '../../components/util';
 
  class ProfileDropDown extends React.Component {
-   constructor(props){
-     super(props);
-   }
+
 
    constructor(props) {
     super(props);
@@ -35,7 +33,7 @@ import { authAxios } from '../../components/util';
           username: res.data.username
        });
      });
-    });
+
 
   }
 

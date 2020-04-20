@@ -12,13 +12,10 @@ import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
 import moment from 'moment';
 import SearchBar from './HeaderSearch';
-<<<<<<< HEAD
-// import ProfileDropDown from './GlobalHeader/ProfileDropDown';
-import ProfileDropDown from '../containers/GlobalHeader/ProfileDropDown'
-=======
+
 import ProfileDropDown from './GlobalHeader/ProfileDropDown.js';
 
->>>>>>> 184843fcea851e3d3925bce7c7bb2853caf93cb4
+
 import BasicLayout from '../components/SideMenu/BasicLayout';
 
 const { Header, Footer, Content } = Layout;
