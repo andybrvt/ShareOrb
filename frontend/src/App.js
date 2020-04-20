@@ -29,7 +29,7 @@ class App extends Component {
   componentWillReceiveProps(newProps){
     console.log(newProps)
     console.log('right here')
-    NotificationWebSocketInstance.connect(newProps.username)
+    // NotificationWebSocketInstance.connect(newProps.username)
   }
 
 

@@ -33,7 +33,7 @@ class WebSocketNotifications {
 
     this.socketRef.onclose = () => {
       console.log('websocket is closed')
-      this.connect();
+      this.connect(username);
     }
   }
 
@@ -85,7 +85,7 @@ class WebSocketNotifications {
     }
   }
 
-  deleteNotification(data){
+  actNotification(data){
     try{
       this.socketRef.send(JSON.stringify({...data}))
     } catch (err) {

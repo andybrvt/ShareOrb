@@ -68,7 +68,7 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 #So this one is to delete the friend request notificaton, so since recipeint for this person
 # is the person receive the friend request but once recipient accpets it then they are the actor
 # but in the models for that notification the reicipeint should be the actor in this case
-    def delete_notification (self, data):
+    def act_notification (self, data):
         recipient = get_object_or_404(User, id = data['actor'])
         actor = get_object_or_404(User, username = data['recipient'])
         notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'friend')
@@ -82,7 +82,7 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             'userId': data['actor'],
             'currentUser': actor.username
         }
-        self.refetch_notifications(fetch_content)
+        # self.refetch_notifications(fetch_content)
         self.send_notification(content)
 
 # coment here
@@ -163,11 +163,11 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
             self.send_notification(data)
-        if data['command'] == 'delete_friend_request_notification':
-            self.delete_notification(data)
+        if data['command'] == 'act_friend_request_notification':
+            self.act_notification(data)
     def new_notification(self, event):
         notification = event['notification']
-        print('hit')
+        print(notification)
         # THE PROBLEM IS HERE
         # Send message to WebSocket
         return self.send_json(notification)

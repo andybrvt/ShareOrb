@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
 import PersonalProfile from '../components/PersonalProfile';
 import {Button, Form} from 'antd';
-import UserFriendsList from './UserFriendsList'
+import UserFriendsList from './UserFriendsList';
+import NotificationWebSocketInstance from '../notificationWebsocket';
 
 
 
@@ -26,7 +27,11 @@ class UserProfileView extends React.Component {
 
   componentWillReceiveProps(newProps){
     const username = this.props.match.params.username;
-    const userID = this.props.match.params.id;
+    if (this.props.match.params.username){
+      console.log('hi there')
+      // NotificationWebSocketInstance.disconnect()
+      NotificationWebSocketInstance.connect(this.props.match.params.username)
+    }
     if(newProps.isAuthenticated){
        authAxios.get('http://127.0.0.1:8000/userprofile/'+username+'/')
         .then(res=> {

@@ -24,6 +24,7 @@ class Notifications extends React.Component{
         this.props.id
       )
       })
+      // NotificationWebSocketInstance.connect(this.props.match.params.username)
     }
 
     constructor(props){
@@ -32,6 +33,11 @@ class Notifications extends React.Component{
       // these will give the commands the function --> this is similar to the command
       // array in the consumer.py
     }
+
+  componentDidMount(){
+    NotificationWebSocketInstance.connect(this.props.match.params.username)
+
+  }
 
   waitForSocketConnection (callback) {
     const component = this;
@@ -61,13 +67,13 @@ class Notifications extends React.Component{
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+recipient)
     const deleteNotificationObject = {
 
-      command: 'delete_friend_request_notification',
+      command: 'act_friend_request_notification',
       actor: actor,
       // the actor is an id of the recipient of the friend request
       recipient: recipient
       // the recipient is the actor that sent the friend request
     }
-    NotificationWebSocketInstance.deleteNotification(deleteNotificationObject)
+    NotificationWebSocketInstance.actNotification(deleteNotificationObject)
   }
 
   onDecline = (data) => {
@@ -136,6 +142,13 @@ class Notifications extends React.Component{
   };
 
   componentWillReceiveProps(newProps){
+    console.log(newProps)
+    // if(this.props.match.params.username){
+    //   NotificationWebSocketInstance.disconnect()
+    //   NotificationWebSocketInstance.connect(this.props.match.params.username)
+    //
+    // }
+
 
   }
 
