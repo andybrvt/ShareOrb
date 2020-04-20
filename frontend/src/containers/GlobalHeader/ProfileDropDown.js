@@ -6,15 +6,17 @@ import styles from './index.less';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/auth';
 
-
+import axios from 'axios';
 import { authAxios } from '../../components/util';
 
  class ProfileDropDown extends React.Component {
+   constructor(props){
+     super(props);
+   }
 
+   state = {
 
-   state={
-
- 		name: '',
+ 		username:'',
  		avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
 
  	}
@@ -24,9 +26,9 @@ import { authAxios } from '../../components/util';
     console.log(this.props.data)
     authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
+        console.log(res.data.username)
         this.setState({
-
-          name: res.data.username,
+          username: res.data.username
        });
      });
   }
@@ -48,6 +50,29 @@ import { authAxios } from '../../components/util';
     }
 
   };
+
+  renderProfile() {
+    if (this.props.isAuthenticated){
+      return (
+      <div> Hi </div>
+    )
+
+    } else {
+      return (
+        <span className={`${styles.action} ${styles.account}`}>
+          <Spin
+            size="small"
+            style={{
+              marginLeft: 8,
+              marginRight: 8,
+            }}
+          />
+        </span>
+      )
+
+    }
+
+  }
 
   render() {
 
@@ -85,24 +110,11 @@ import { authAxios } from '../../components/util';
     console.log(this.state.avatar && this.state.name)
     console.log(test)
     console.log(test&&true)
-    return this.state.avatar && this.state.name ? (
-      <HeaderDropdown overlay={menuHeaderDropdown}>
-        <span className={`${styles.action} ${styles.account}`}>
-        <span className={styles.name}>{this.state.name}</span>
-        </span>
-      </HeaderDropdown>
-    ) : (
-      <span className={`${styles.action} ${styles.account}`}>
-        <Spin
-          size="small"
-          style={{
-            marginLeft: 8,
-            marginRight: 8,
-          }}
-        />
-      </span>
-    );
-
+    return (
+      <div>
+      {this.renderProfile()}
+      </div>
+    )
   }
 }
 

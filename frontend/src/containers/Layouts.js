@@ -12,8 +12,8 @@ import NoticeIcon from './NoticeIcon/index';
 import styles from './notification.less';
 import moment from 'moment';
 import SearchBar from './HeaderSearch';
-import ProfileDropDown from './GlobalHeader/ProfileDropDown';
-
+// import ProfileDropDown from './GlobalHeader/ProfileDropDown';
+import ProfileDropDown from '../containers/GlobalHeader/ProfileDropDown'
 import BasicLayout from '../components/SideMenu/BasicLayout';
 
 const { Header, Footer, Content } = Layout;
@@ -299,7 +299,7 @@ class CustomLayout extends React.Component {
                 }
 
 
-                <ProfileDropDown menu/>
+                <ProfileDropDown menu {...this.props}/>
 
 
                 </Menu>

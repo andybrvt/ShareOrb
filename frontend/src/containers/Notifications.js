@@ -152,9 +152,37 @@ class Notifications extends React.Component{
 
   }
 
+  // NotificationListRender (notifications) {
+  //   const notification_list = []
+  //   for (let i = 0; i< notifications.length; i++) {
+  //     if(notifications[i].type === 'friend'){
+  //       notification_list.push(
+  //         <div>
+  //           {notifications[i].actor.user}+'sent you a friend request.'
+  //         </div>
+  //       )
+  //     }
+  //     if (notifications[i].type === 'accepted_friend') {
+  //       notification_list.push(
+  //         <div>
+  //             {notifications[i].actor.user}+'accepted your friend request.'
+  //         </div>
+  //       )
+  //     }
+  //     if (notificaitons[i].type === 'rejected_friend'){
+  //       notification_list.push(
+  //         <div>
+  //             {notifications[i].actor.user}+'declined your friend request.'
+  //         </div>
+  //       )
+  //     }
+  //   }
+  //   return <div> {notification_list} </div>
+  // }
+
 
   render(){
-    console.log(this.props)
+    console.log(this.props.notifications)
 
     return (
 
@@ -172,7 +200,7 @@ class Notifications extends React.Component{
                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                     title={<a href="https://ant.design">{item.title}</a>}
 
-                    description={"This is the description     ["+item.description+"    ]  \n"+
+                    description={"This is the description ["+item.description+"    ]  \n"+
                       "This is the recipientID    "+item.recipient+"    This is the actor "+item.actor.username}
                   />
                   <Button type ="primary" onClick = {()=> this.onAccept(item.recipient,item.actor.username)}> Accept</Button>
