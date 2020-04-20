@@ -25,7 +25,6 @@ import { authAxios } from '../../components/util';
 
   componentWillReceiveProps(newProps){
 
-    console.log(this.props.data)
     authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
         console.log(res.data.username)
@@ -116,12 +115,6 @@ import { authAxios } from '../../components/util';
 
 
     const test = true;
-
-    console.log(this.state)
-    console.log(this.state.username)
-    console.log(this.state.avatar && this.state.username)
-    console.log(test)
-    console.log(test&&true)
     return (
       <div>
       {this.renderProfile()}

@@ -44,6 +44,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         self.send_new_notification(content)
 
 # type is important, it will run the function in consumers under that type name
+# The differences is in the type of notification that is created, the type will then be
+# run through if statements in the notifications.js and will print out stuff accordingly
     def send_notification (self, data):
         user = self.scope['user']
 
@@ -55,12 +57,18 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, username=data['recipient'])
             actor = get_object_or_404(User, id=data['actor'])
             notification = CustomNotification.objects.create(type="accepted_friend", recipient=recipient, actor=actor, verb="accepted your friend request")
+        if data['command'] == 'send_decline_notification':
+            recipient = get_object_or_404(User, username= data['recipient'])
+            actor = get_object_or_404(User, id = data['actor'])
+            notification = CustomNotification.objects.create(type="declined_friend", recipient = recipient, actor= actor, verb="declined  your friend request")
+
         # CustomNotification.save(self)
+        # The notification will be serilizered and then sent to the group send
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
             "notification": json.dumps(serializer.data),
-            "recipient": recipient.username #different here
+            "recipient": recipient.username #important for group send (group name)
         }
         print('send_notification')
         return self.send_new_notification(content)
@@ -68,7 +76,7 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 #So this one is to delete the friend request notificaton, so since recipeint for this person
 # is the person receive the friend request but once recipient accpets it then they are the actor
 # but in the models for that notification the reicipeint should be the actor in this case
-    def act_notification (self, data):
+    def accept_notification (self, data):
         recipient = get_object_or_404(User, id = data['actor'])
         actor = get_object_or_404(User, username = data['recipient'])
         notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'friend')
@@ -84,6 +92,21 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         }
         # self.refetch_notifications(fetch_content)
         self.send_notification(content)
+
+# This fucntion is to accept the send_decline_notification command by the frontend from
+#notifications to notificationswebsocket to here
+    def decline_notification (self, data):
+        recipient = get_object_or_404(User, id = data['actor'])
+        actor = get_object_or_404(User, username = data['recipient'])
+        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'friend')
+        notification.delete()
+        content = {
+            'command': 'send_decline_notification',
+            'actor': data['actor'],
+            'recipient': data['recipient']
+        }
+        self.send_notification(content)
+
 
 # coment here
 
@@ -163,8 +186,10 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
             self.send_notification(data)
-        if data['command'] == 'act_friend_request_notification':
-            self.act_notification(data)
+        if data['command'] == 'accept_friend_request_notification':
+            self.accept_notification(data)
+        if data['command'] == 'decline_friend_request_notification':
+            self.decline_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         print(notification)

@@ -4,6 +4,7 @@ import { authAxios } from '../components/util';
 import axios from 'axios';
 import { List, Avatar, Button, Skeleton } from 'antd';
 import { connect } from 'react-redux';
+import './Container_CSS/Notifications.css'
 
 
 const count = 3;
@@ -65,19 +66,25 @@ class Notifications extends React.Component{
     console.log(actor)
     console.log(recipient)
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+recipient)
-    const deleteNotificationObject = {
+    const acceptNotificationObject = {
 
-      command: 'act_friend_request_notification',
+      command: 'accept_friend_request_notification',
       actor: actor,
       // the actor is an id of the recipient of the friend request
       recipient: recipient
       // the recipient is the actor that sent the friend request
     }
-    NotificationWebSocketInstance.actNotification(deleteNotificationObject)
+    NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
   }
 
-  onDecline = (data) => {
-    console.log(data)
+  onDecline = (actor, recipient) => {
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+recipient)
+    const declineNotificationObject = {
+      command: 'decline_friend_request_notification',
+      actor: actor,
+      recipient: recipient,
+    }
+    NotificationWebSocketInstance.sendNotification(declineNotificationObject)
   }
 
   renderTimestamp = (timestamp) => {
@@ -152,62 +159,69 @@ class Notifications extends React.Component{
 
   }
 
-  // NotificationListRender (notifications) {
-  //   const notification_list = []
-  //   for (let i = 0; i< notifications.length; i++) {
-  //     if(notifications[i].type === 'friend'){
-  //       notification_list.push(
-  //         <div>
-  //           {notifications[i].actor.user}+'sent you a friend request.'
-  //         </div>
-  //       )
-  //     }
-  //     if (notifications[i].type === 'accepted_friend') {
-  //       notification_list.push(
-  //         <div>
-  //             {notifications[i].actor.user}+'accepted your friend request.'
-  //         </div>
-  //       )
-  //     }
-  //     if (notificaitons[i].type === 'rejected_friend'){
-  //       notification_list.push(
-  //         <div>
-  //             {notifications[i].actor.user}+'declined your friend request.'
-  //         </div>
-  //       )
-  //     }
-  //   }
-  //   return <div> {notification_list} </div>
-  // }
+  NotificationListRender (notifications) {
+    const notification_list = []
+    for (let i = 0; i< notifications.length; i++) {
+      console.log(notifications[i].actor.username)
+      if(notifications[i].type === 'friend'){
+        notification_list.push(
+          <div className = 'listNotification'>
+            {notifications[i].actor.username} sent you a friend request.
+            <br />
+            <Button type ="primary" onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
+            <Button type ="priamry" onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+          </div>
+        )
+      }
+      if (notifications[i].type === 'accepted_friend') {
+        notification_list.push(
+          <div className = 'listNotification'>
+              {notifications[i].actor.username} accepted your friend request.
+          </div>
+        )
+      }
+      if (notifications[i].type === 'declined_friend'){
+        notification_list.push(
+          <div className = 'listNotification'>
+              {notifications[i].actor.username} declined your friend request.
+          </div>
+        )
+      }
+    }
+    return <div> {notification_list} </div>
+  }
 
+  // <List
+  //   className="demo-loadmore-list"
+  //
+  //   itemLayout="horizontal"
+  //
+  //   dataSource={this.props.notifications}
+  //   renderItem={item => (
+  //
+  //
+  //     <List.Item>
+  //       <List.Item.Meta
+  //         avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+  //         title={<a href="https://ant.design">{item.title}</a>}
+  //
+  //         description={"This is the description ["+item.description+"    ]  \n"+
+  //           "This is the recipientID    "+item.recipient+"    This is the actor "+item.actor.username}
+  //       />
+  //       <Button type ="primary" onClick = {()=> this.onAccept(item.recipient,item.actor.username)}> Accept</Button>
+  //       <Button type ="priamry" onClick = {()=> this.onDecline(item.actor.username)}> Decline </Button>
+  //     </List.Item>
+  //   )}
+  // />
 
   render(){
     console.log(this.props.notifications)
 
     return (
+      <div>
+      {this.NotificationListRender(this.props.notifications)}
+      </div>
 
-            <List
-              className="demo-loadmore-list"
-
-              itemLayout="horizontal"
-
-              dataSource={this.props.notifications}
-              renderItem={item => (
-
-
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                    title={<a href="https://ant.design">{item.title}</a>}
-
-                    description={"This is the description ["+item.description+"    ]  \n"+
-                      "This is the recipientID    "+item.recipient+"    This is the actor "+item.actor.username}
-                  />
-                  <Button type ="primary" onClick = {()=> this.onAccept(item.recipient,item.actor.username)}> Accept</Button>
-                  <Button type ="priamry" onClick = {()=> this.onDecline(item.actor.username)}> Decline </Button>
-                </List.Item>
-              )}
-            />
 
 
       )

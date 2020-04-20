@@ -77,7 +77,7 @@ class WebSocketNotifications {
     // this is good, it only sends 1 time
     // This will recieve information from onClickSend from PersonalProfile.js
     // and will send it to the userprofile.consumers
-    console.log(data)
+    console.log('send_notification')
     try{
       this.socketRef.send(JSON.stringify({...data }))
     } catch (err) {
@@ -85,13 +85,6 @@ class WebSocketNotifications {
     }
   }
 
-  actNotification(data){
-    try{
-      this.socketRef.send(JSON.stringify({...data}))
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
 
   state() {
     return this.socketRef.readyState;
