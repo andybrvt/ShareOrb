@@ -58,26 +58,36 @@ import { authAxios } from '../../components/util';
   renderProfile() {
     if (this.props.isAuthenticated){
       return (
-        <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        { (
-          <Menu.Item key="center">
-            <UserOutlined />
-            个人中心
-          </Menu.Item>
-        )}
-        { (
-          <Menu.Item key="settings">
-            <SettingOutlined />
-            个人设置
-          </Menu.Item>
-        )}
-        { <Menu.Divider />}
+        <div>
+          <HeaderDropdown overlay={
 
-        <Menu.Item key="logout">
-          <LogoutOutlined />
-          退出登录
-        </Menu.Item>
-      </Menu>
+            <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+              { (
+                <Menu.Item key="center">
+                  <UserOutlined />
+                  个人中心
+                </Menu.Item>
+              )}
+              { (
+                <Menu.Item key="settings">
+                  <SettingOutlined />
+                  个人设置
+                </Menu.Item>
+              )}
+              { <Menu.Divider />}
+
+              <Menu.Item key="logout">
+                <LogoutOutlined />
+                退出登录
+              </Menu.Item>
+            </Menu>}>
+          <span className={`${styles.action} ${styles.account}`}>
+            <Avatar size="small" className={styles.avatar} src={this.state.avatar} alt="avatar" />
+            <span className={styles.name}>{this.state.username}</span>
+          </span>
+        </HeaderDropdown>
+      </div>
+
     )
 
     } else {
@@ -98,8 +108,9 @@ import { authAxios } from '../../components/util';
   }
 
   render() {
-
+    
     const {
+
       menu,
     } = this.props;
 
