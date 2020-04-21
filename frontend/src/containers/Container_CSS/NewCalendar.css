@@ -91,10 +91,27 @@ main {
   align-items: center;
 }
 
+.weekcol{
+  float: left;
+  flex-grow:1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .col {
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
+}
+
+.weekcol {
+  -moz-column-count: 7;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 7;
+    -webkit-column-gap: 20px;
+    column-count: 7;
+    column-gap: 20px;
+
 }
 
 .col-start {
@@ -169,6 +186,18 @@ main {
   transition: 0.25s ease-out;
 }
 
+.calendar .body .hourcell {
+  position: relative;
+  height: 5em;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--neutral-color);
+  transition: 0.25s ease-out;
+}
+
+
 .calendar .body .daycell {
   position: relative;
   height: 10em;
@@ -181,6 +210,11 @@ main {
 }
 
 .calendar .body .cell:hover {
+  background: var(--bg-color);
+  transition: 0.5s ease-out;
+}
+
+.calendar .body .hourcell:hover {
   background: var(--bg-color);
   transition: 0.5s ease-out;
 }
@@ -200,6 +234,8 @@ main {
   border-bottom: 1px solid var(--border-color);
 }
 
+
+
 .calendar .body .row:last-child {
   border-bottom: none;
 }
@@ -213,6 +249,15 @@ main {
 }
 
 .calendar .body .cell .number {
+  position: absolute;
+  font-size: 82.5%;
+  line-height: 1;
+  top: .75em;
+  right: .75em;
+  font-weight: 700;
+}
+
+.calendar .body .hourcell .number {
   position: absolute;
   font-size: 82.5%;
   line-height: 1;
@@ -249,6 +294,19 @@ main {
   letter-spacing: -.07em;
 }
 
+.calendar .body .hourcell .bg {
+  font-weight: 700;
+  line-height: 1;
+  color: var(--main-color);
+  opacity: 0;
+  font-size: 4em;
+  position: absolute;
+  top: -.2em;
+  right: -.05em;
+  transition: .25s ease-out;
+  letter-spacing: -.07em;
+}
+
 .calendar .body .daycell .bg {
   font-weight: 700;
   line-height: 1;
@@ -267,12 +325,23 @@ main {
   transition: .5s ease-in;
 }
 
+.calendar .body .hourcell:hover .bg, .calendar .body .selected .bg  {
+  opacity: 0.05;
+  transition: .5s ease-in;
+}
+
 .calendar .body .daycell:hover .bg, .calendar .body .selected .bg  {
   opacity: 0.05;
   transition: .5s ease-in;
 }
 
 .calendar .body .col {
+  flex-grow: 0;
+  flex-basis: calc(100%/7);
+  width: calc(100%/7);
+}
+
+.calendar .body .weekcol {
   flex-grow: 0;
   flex-basis: calc(100%/7);
   width: calc(100%/7);

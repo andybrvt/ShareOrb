@@ -13,7 +13,9 @@ import FriendsList from './containers/FriendsList';
 import Chat from './containers/Chat';
 import Notifications from './containers/Notifications';
 import PersonalCalendar from './containers/PersonalCalendar';
-import DayCalendar from './containers/dayCalendar';
+import DayCalendar from './containers/DayCalendar';
+import WeekCalendar from './containers/WeekCalendar';
+
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -43,6 +45,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/notifications/:username' render={(props) => <Notifications {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/' render={(props) => <PersonalCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/weekcalendar' render={(props) => <WeekCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
       </div>
 
