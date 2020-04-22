@@ -1,5 +1,7 @@
 import React from "react";
 
+import Comments from '../containers/comments.js'
+
 const Result = (props) => {
   console.log(props.data.image)
   let temp="http://127.0.0.1:8000"+props.data.image;
@@ -42,10 +44,12 @@ const Result = (props) => {
             <i class="heart icon"></i> Like
           </div>
           <a class="ui basic red left pointing label">
-            1,048
+            0
           </a>
-        </div>
 
+
+        </div>
+        <Comments/>
       </li>
       <hr />
     </div>
