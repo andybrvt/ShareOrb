@@ -16,7 +16,7 @@ class WeekCalendar extends React.Component{
   // This will be rending the header of the view, for weekly view, it will be
   // the start week to the end of the start week and start of the week
   renderHeader() {
-    const dateFormat = 'MMMM dd, yyyy'
+    const dateFormat = 'MMMM yyyy'
     const startWeek = dateFns.startOfWeek(this.state.currentWeek)
     const endWeek = dateFns.endOfWeek(this.state.currentWeek)
     return(
@@ -29,8 +29,6 @@ class WeekCalendar extends React.Component{
         <div className = 'col col-center'>
           <span>
             {dateFns.format(startWeek, dateFormat)}
-            -
-            {dateFns.format(endWeek, dateFormat)}
           </span>
         </div>
         <div className = 'col col-end' onClick = {this.nextWeek}>
@@ -42,10 +40,13 @@ class WeekCalendar extends React.Component{
     )
   }
 
+
+
   // This is to render the days on top (like Mon, tuesday etc)
   renderDays(){
     // so iiii format actually renders the name of the day
     const dateFormat = 'iiii'
+    const dayFormat = 'd'
     const days = []
 
     let startDate = dateFns.startOfWeek(this.state.currentWeek)
@@ -54,81 +55,107 @@ class WeekCalendar extends React.Component{
       days.push(
         <div className = 'col col-center' key = {i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+          <br />
+          {dateFns.format(dateFns.addDays(startDate, i), dayFormat)}
         </div>
       )
-    }
+    };
 
     return <div className = 'days row'>{days}</div>
   }
 
-  // This will render stuff by the hour
-  renderCells(){
-    const {currentWeek, selectedDate} = this.state;
+  // This is to show the time on the side instead of in each box
+  // It is too cluttered
+  renderSide() {
+    const dateFormat = 'h a'
+    const hour = []
+    let startHour = dateFns.startOfDay(this.state.currentWeek)
+    const formattedHour = dateFns.format(startHour, dateFormat)
+    for (let i = 0; i<24; i++){
+      hour.push(
+        <div
+          className = ' col hourcell weekcolcell'
+          key = {hour}
+        >
+        <span className = 'number'>{formattedHour}</span>
+        </div>
+      )
+    }
+    return <div className= 'body'> {hour} </div>
+  }
+
+  // USE THIS
+  renderWeekCell(){
+    // So what you wanted to do for this is that you will make a list of lsit
+    // so the first list is the list of the same hour for multiple day so it
+    // will be a list of 7 items of all the same time, and the big list will have
+    // 24 items
+    const{currentWeek, selectedDate} = this.state;
+    // this will give you the first day of the week
     const weekStart = dateFns.startOfWeek(currentWeek);
     const weekEnd = dateFns.endOfWeek(currentWeek);
 
-
-    const dayFormat = 'd';
-    const hourFormat = 'h a';
-    // So each day will have a bunch of hours so you need to put then in each list
-    // then put each list of hours into a big list that is the week
-    // So you will need a list for week and a list for day
-    // For the week you will need the day of the start of the week
-    // For the day you will need the first hour of that day
-    const week = [];
-    // this list will hold all the hours of a day
-    let day = [];
-
-    // date is the actuall date of that tday
-    let date = weekStart;
+    const hourFormat = 'h a'
+    const dayFormat = 'd MMMM'
+    // So this list will hold 24 items, each list for each hour
+    const hours = []
+    // This will be a list the same hour of all the days
+    let days = []
+    // The things we need is the start day and then we need the start of the
+    // hour so we can loop through it
+    let date = weekStart
     const startHourDay = dateFns.startOfDay(date);
     const endHourDay = dateFns.endOfDay(date);
-    let formattedDay = "";
 
-    let hour =  startHourDay;
-    let formattedHour = "";
+    // Just for the development, we want to show the hourt=
+    let formattedDay = '';
 
+    let hour = startHourDay;
+    let formattedHour = '';
 
-    // The while loop basically represents each day of the week
-    // The for loop is basically each hour of the day
-    while (date <= weekEnd){
+    // The plan for the loop is to have a while loop that loops through all the
+    // hours then with in each hour have a for loop that loops through each day
+    while (hour <= endHourDay){
 
-      for (let i = 0; i<24; i++){
-        // the formatted hour is just to get the hour on top fo the cell
-        formattedHour = dateFns.format(hour, hourFormat)
+      // this for loop will take the hour and date and loop throuhg all the
+      // hours of all the days of the week
+      for(let i = 0; i<7; i++){
+        const cloneDay = date
         const cloneHour = hour
-        day.push(
+        formattedHour = dateFns.format(hour, hourFormat)
+        formattedDay = dateFns.format(date, dayFormat)
+        days.push(
           <div
-            className = ' col hourcell weekcol'
-            key = {hour}
-            onClick = {this.onHourClick}
+            className = 'col hourcell'
+            onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
           >
-          <span className = 'number'>{formattedHour}</span>
-          <span className = 'bg'>{formattedHour}</span>
+          <span className = 'number'>{formattedHour}{formattedDay}</span>
           </div>
         )
-        // After rendering the hour in the day, you will add one to the current
-        // hour
-        hour = dateFns.addHours(hour, 1)
+        date = dateFns.addDays(date, 1)
       }
-      // Pushing the day into the week after rendering its hours
-      // test
-      week.push(
-        <div className = '' key = {day}>
-          {day}
+      // After you loop through the hour, you will then want to put it into the
+      // hours list and then clear out days list to redo it again, then you want
+      // to set your date again to the start of the week but now the hour would be
+      //  1 more added  and you repeat
+      // Also remember that the date must be resetted before adding the hour
+      // because of the while loop condition
+      hours.push(
+        <div className = 'row' >
+          {days}
         </div>
       )
-      // then you add another day
-      day = []
-      date = dateFns.addDays(date, 1)
-    };
-    console.log(week)
-    return <div className = 'body'> {week} </div>
+      days = []
+      date = weekStart
+      hour = dateFns.addHours(hour, 1)
+    }
+
+    return <div className = 'body'> {hours}</div>
   }
 
 
-  onHourClick = () => {
-    console.log('hour')
+  onDayHourClick = (day, hour) => {
+    console.log(day, hour)
   }
 
   // this is a onclick function that goes to the next week
@@ -151,7 +178,8 @@ class WeekCalendar extends React.Component{
       <div className = 'calendar'>
       {this.renderHeader()}
       {this.renderDays()}
-      {this.renderCells()}
+      {this.renderWeekCell()}
+
       </div>
     )
   }

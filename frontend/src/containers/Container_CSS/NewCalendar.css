@@ -91,12 +91,12 @@ main {
   align-items: center;
 }
 
-.weekcol{
-  float: left;
-  flex-grow:1;
-  display: flex;
-  flex-wrap: wrap;
+.weekcolcell{
+  float: center;
+
 }
+
+
 
 .col {
   flex-grow: 1;
@@ -105,12 +105,8 @@ main {
 }
 
 .weekcol {
-  -moz-column-count: 7;
-    -moz-column-gap: 20px;
-    -webkit-column-count: 7;
-    -webkit-column-gap: 20px;
-    column-count: 7;
-    column-gap: 20px;
+  display:flex;
+  align-items: stretch;
 
 }
 
@@ -170,8 +166,8 @@ main {
 .calendar .days {
   text-transform: uppercase;
   font-weight: 400;
-  color: var(--text-color-light);
-  font-size: 70%;
+  color: ;
+  font-size: 100%;
   padding: .75em 0;
   border-bottom: 1px solid var(--border-color);
 }
