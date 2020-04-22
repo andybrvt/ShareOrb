@@ -77,6 +77,9 @@ main {
 
 
 /* GRID */
+.flex-container {
+  display: flex;
+}
 
 .row {
   margin: 0;
@@ -95,7 +98,6 @@ main {
   float: center;
 
 }
-
 
 
 .col {
@@ -126,12 +128,43 @@ main {
 }
 
 
+/* Side hours */
+.flex-container .sidecol{
+  position:relative;
+  top: 137px;
+}
+
+
+.flex-container .sidecol .body .cell:first-child{
+  border-top: 1px solid var(--border-color);
+}
+
+.flex-container .sidecol .body .cell{
+  position: relative;
+  height: 5em;
+  border-bottom: 2px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--neutral-color);
+  transition: 0.25s ease-out;
+}
+
+.flex-container .sidecol .body .cell .number{
+  font-size: 82.5%;
+  line-height: 1;
+  top: .75em;
+  right: .75em;
+  font-weight: 700;
+}
+
+
+
 /* Calendar */
 
 .calendar {
   display: block;
   position: relative;
-  width: 100%;
+  width: 90%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
 }

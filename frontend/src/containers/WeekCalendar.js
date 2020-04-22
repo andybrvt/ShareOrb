@@ -70,16 +70,17 @@ class WeekCalendar extends React.Component{
     const dateFormat = 'h a'
     const hour = []
     let startHour = dateFns.startOfDay(this.state.currentWeek)
-    const formattedHour = dateFns.format(startHour, dateFormat)
     for (let i = 0; i<24; i++){
+      const formattedHour = dateFns.format(startHour, dateFormat)
       hour.push(
         <div
-          className = ' col hourcell weekcolcell'
+          className = 'cell'
           key = {hour}
         >
         <span className = 'number'>{formattedHour}</span>
         </div>
       )
+      startHour = dateFns.addHours(startHour, 1)
     }
     return <div className= 'body'> {hour} </div>
   }
@@ -129,7 +130,7 @@ class WeekCalendar extends React.Component{
             className = 'col hourcell'
             onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
           >
-          <span className = 'number'>{formattedHour}{formattedDay}</span>
+          <span className = 'number'></span>
           </div>
         )
         date = dateFns.addDays(date, 1)
@@ -175,10 +176,15 @@ class WeekCalendar extends React.Component{
 
   render() {
     return (
-      <div className = 'calendar'>
-      {this.renderHeader()}
-      {this.renderDays()}
-      {this.renderWeekCell()}
+      <div className = 'flex-container'>
+        <div className = 'sidecol'>
+          {this.renderSide()}
+        </div>
+        <div className = 'calendar'>
+          {this.renderHeader()}
+          {this.renderDays()}
+          {this.renderWeekCell()}
+        </div>
 
       </div>
     )
