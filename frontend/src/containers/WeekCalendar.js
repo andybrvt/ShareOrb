@@ -112,6 +112,7 @@ class WeekCalendar extends React.Component{
         hour = dateFns.addHours(hour, 1)
       }
       // Pushing the day into the week after rendering its hours
+      // test
       week.push(
         <div className = '' key = {day}>
           {day}
