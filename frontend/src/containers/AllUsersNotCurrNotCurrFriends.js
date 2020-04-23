@@ -8,7 +8,7 @@ import { authAxios } from '../components/util';
 
 
 // Function: Gives a list of all users that are not the current user and current user friends
-class UserView extends React.Component {
+class AllUsersNotCurrNotCurrFriends extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -49,4 +49,4 @@ class UserView extends React.Component {
 }
 
 
-export default UserView;
+export default AllUsersNotCurrNotCurrFriends;

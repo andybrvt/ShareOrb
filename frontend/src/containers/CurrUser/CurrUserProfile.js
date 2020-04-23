@@ -1,11 +1,11 @@
 import React from 'react';
 import {Button} from 'antd';
 import axios from 'axios';
-import { authAxios } from '../components/util';
-
+import { authAxios } from '../../components/util';
+import './CurrUserProfile.css';
 // Function: Profile of the current user
 
-class UserProfile extends React.Component{
+class CurrUserProfile extends React.Component{
   constructor(props) {
     super(props);
   }
@@ -48,9 +48,12 @@ class UserProfile extends React.Component{
         <Button type="primary">Primary</Button>
         <Button type="primary">Primary</Button>
         <Button type="primary">Primary</Button>
+
+
+
         </div>
       )
     }
   };
 
-export default UserProfile;
+export default CurrUserProfile;

@@ -6,7 +6,7 @@ import LoginForm from './containers/Login';
 import Signup from './containers/Signup';
 import AllUsersNotCurrNotCurrFriends from './containers/AllUsersNotCurrNotCurrFriends';
 import InfiniteList from './containers/InfiniteScroll';
-import UserProfile from './containers/UserProfile';
+import CurrUserProfile from './containers/CurrUser/CurrUserProfile';
 import ViewAnyUserProfile from './containers/ViewAnyUserProfile';
 import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
@@ -39,7 +39,7 @@ class BaseRouter extends React.Component {
 
         <Route exact path = '/userview/' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/userview/:username' render={(props) => <ViewAnyUserProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/current-user/' render={(props) => <UserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/current-user/' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
