@@ -47,7 +47,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/notifications/:username' render={(props) => <Notifications {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/' render={(props) => <PersonalCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/weekcalendar' render={(props) => <WeekCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
       </div>
 

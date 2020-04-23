@@ -109,9 +109,6 @@ class DayCalendar extends React.Component{
     // Start of the hour and then loop through all the 24 hours
     let hour = startHourDay;
     let formattedHour = "";
-    console.log(dateFns.isSameHour(new Date("2020-04-16T07:48:40Z"), new Date('Thu Apr 16 2020 00:00:00 GMT-0700')))
-    console.log(new Date("2020-04-16T07:48:40Z"))
-    console.log(new Date('Thu Apr 16 2020 00:00:00 GMT-0700'))
     // they are the same time because when you do a new date it goes on the GM time
 
     // Hour is in a date format with the day and time and it will go till the

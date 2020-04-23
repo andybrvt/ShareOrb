@@ -91,17 +91,57 @@ class PersonalCalendar extends React.Component{
     return <div className = "days row"> {days} </div>
   }
 
+  renderSide() {
+    // So what you want is to get the date of the first day of each week
+    // so that you can pass it into the tab so it can open up the selected week
+    const {currentMonth, selectedDate} = this.state;
+    const startDateMonth = dateFns.startOfMonth(currentMonth);
+    const endDateMonth = dateFns.endOfMonth(currentMonth);
+    // this will give us the first day of the week fo the month
+    const startFirstWeek = dateFns.startOfWeek(startDateMonth);
+    // this will give us the first day of the week of the last week in the chart
+    const startLastWeek = dateFns.startOfWeek(endDateMonth);
+    console.log(startLastWeek);
+    // because the strt of first week changes with the loop we have to save it as
+    // let
+    let date = startFirstWeek;
+    let formattedWeek = '';
+    const weekFormat = 'dd mmmm yyyy'
+    // this is to store all the tabs to click on
+    const week = []
+    while (date <= startLastWeek){
+      formattedWeek = dateFns.format(date, weekFormat)
+      const cloneDate = date
+      week.push(
+        <div className = 'holder'>
+        <div
+        onClick = {() => this.onWeekClick(cloneDate)}
+        className = 'tabs'
+        >
+          <span>{formattedWeek}</span>
+        </div>
+        </div>
+      )
+      date = dateFns.addWeeks(date, 1)
+    }
+    console.log(week)
+    return <div className ='sideBar'> {week} </div>
+  }
+
+
+
+
+
   renderCells(events) {
 
     // startOfMonth() will give you the date of the first day of the current month
     // endOfMonth() will give you the date of the last day of the current month
     // the const start date is to fill in the days of the week of the previous month
     // similarly as the end date
-    const {currentMonth, selectedDate} = this.state
+    const {currentMonth, selectedDate} = this.state;
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
-    console.log(startDate)
     const endDate = dateFns.endOfWeek(monthEnd);
 
     // Once you have your start date and end date you want to loop through
@@ -212,6 +252,22 @@ class PersonalCalendar extends React.Component{
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
+// So what are going to do with this is get the selected month and get the first day of the
+// month and then get the first day of the week and loop through it till you get the first day
+// of the week for the end of the month
+
+  onWeekClick = startDayWeek => {
+    console.log(startDayWeek)
+    const selectedYear = dateFns.getYear(startDayWeek).toString()
+    const selectedMonth = (dateFns.getMonth(startDayWeek)+1).toString()
+    const selectedDay = dateFns.getDate(startDayWeek).toString()
+    console.log(selectedYear, selectedMonth, selectedDay)
+    this.setState({
+      selectedDate: startDayWeek
+    })
+    this.props.history.push('/personalcalendar/w/'+selectedYear+'/'+selectedMonth+'/'+selectedDay)
+  }
+
 
   // You can use the addMonths function to add one month to the
   // current month
@@ -233,42 +289,45 @@ class PersonalCalendar extends React.Component{
 
     return(
       <div>
-        <List
-          dataSource={[
-            {
-              name: 'Box to add event',
-            },
+            <List
+              dataSource={[
+                {
+                  name: 'Box to add event',
+                },
 
-          ]}
-          bordered
-          renderItem={item => (
-            <List.Item
-              key={item.id}
-              actions={[
-                <a onClick={() => this.props.openDrawer()} key={`a-${item.id}`}>
-                  Add event
-                </a>,
               ]}
-            >
-              <List.Item.Meta
-                avatar={
-                  <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                }
-                title={<a href="https://ant.design/index-cn">{item.name}</a>}
-                description="Click on the [Add event] text! "
-              />
-            </List.Item>
-          )}
-        />
+              bordered
+              renderItem={item => (
+                <List.Item
+                  key={item.id}
+                  actions={[
+                    <a onClick={() => this.props.openDrawer()} key={`a-${item.id}`}>
+                      Add event
+                    </a>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+                    }
+                    title={<a href="https://ant.design/index-cn">{item.name}</a>}
+                    description="Click on the [Add event] text! "
+                  />
+                </List.Item>
+              )}
+            />
 
-      <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-
-      <div className = 'calendar'>
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells(this.state.events)}
-      </div>
-
+          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+        <div className = 'flex-container'>
+          <div className = 'sidecol'>
+          {this.renderSide()}
+          </div>
+          <div className = 'calendar'>
+            {this.renderHeader()}
+            {this.renderDays()}
+            {this.renderCells(this.state.events)}
+          </div>
+        </div>
       </div>
     )
   }

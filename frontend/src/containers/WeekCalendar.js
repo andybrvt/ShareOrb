@@ -17,6 +17,18 @@ class WeekCalendar extends React.Component{
   }
 
   componentDidMount(){
+    console.log('hit')
+    //I will be pulling the first day of the week to set the week
+    const selectedYear = this.props.match.params.year;
+    const selectedMonth = this.props.match.params.month;
+    // This will pretty much be the first day of the week
+    const startWeekDay = this.props.match.params.day;
+    // this is just to put things in a format so we can get the date working
+    const newWeek = [selectedYear, selectedMonth, startWeekDay]
+    const newSelectedDate = new Date(newWeek)
+    this.setState ({
+      selectedDate: newSelectedDate
+    })
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -38,8 +50,8 @@ class WeekCalendar extends React.Component{
   // the start week to the end of the start week and start of the week
   renderHeader() {
     const dateFormat = 'MMMM yyyy'
-    const startWeek = dateFns.startOfWeek(this.state.currentWeek)
-    const endWeek = dateFns.endOfWeek(this.state.currentWeek)
+    const startWeek = dateFns.startOfWeek(this.state.selectedDate)
+    const endWeek = dateFns.endOfWeek(this.state.selectedDate)
     return(
       <div className = 'header row flex-middle'>
         <div className = 'col col-start'>
@@ -70,7 +82,7 @@ class WeekCalendar extends React.Component{
     const dayFormat = 'd'
     const days = []
 
-    let startDate = dateFns.startOfWeek(this.state.currentWeek)
+    let startDate = dateFns.startOfWeek(this.state.selectedDate)
 
     for (let i = 0; i<7; i++){
       days.push(
@@ -90,7 +102,7 @@ class WeekCalendar extends React.Component{
   renderSide() {
     const dateFormat = 'h a'
     const hour = []
-    let startHour = dateFns.startOfDay(this.state.currentWeek)
+    let startHour = dateFns.startOfDay(this.state.selectedDate)
     for (let i = 0; i<24; i++){
       const formattedHour = dateFns.format(startHour, dateFormat)
       hour.push(
@@ -108,15 +120,14 @@ class WeekCalendar extends React.Component{
 
   // USE THIS
   renderWeekCell(events){
-    console.log(events)
     // So what you wanted to do for this is that you will make a list of lsit
     // so the first list is the list of the same hour for multiple day so it
     // will be a list of 7 items of all the same time, and the big list will have
     // 24 items
     const{currentWeek, selectedDate} = this.state;
     // this will give you the first day of the week
-    const weekStart = dateFns.startOfWeek(currentWeek);
-    const weekEnd = dateFns.endOfWeek(currentWeek);
+    const weekStart = dateFns.startOfWeek(selectedDate);
+    const weekEnd = dateFns.endOfWeek(selectedDate);
 
     const hourFormat = 'h a'
     const dayFormat = 'd MMMM'
@@ -220,7 +231,7 @@ class WeekCalendar extends React.Component{
   // this is a onclick function that goes to the next week
   nextWeek =() =>{
     this.setState({
-      currentWeek: dateFns.addWeeks(this.state.currentWeek, 1)
+      selectedDate: dateFns.addWeeks(this.state.selectedDate, 1)
     })
   }
 
@@ -228,7 +239,7 @@ class WeekCalendar extends React.Component{
   // onClick function that goes to the prvious week
   prevWeek = () => {
     this.setState({
-      currentWeek: dateFns.subWeeks(this.state.currentWeek, 1)
+      selectedDate: dateFns.subWeeks(this.state.selectedDate, 1)
     })
   }
 

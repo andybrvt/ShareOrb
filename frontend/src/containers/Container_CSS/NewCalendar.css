@@ -134,6 +134,27 @@ main {
   top: 137px;
 }
 
+.flex-container .sidecol .sideBar{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-container .sidecol .sideBar .holder {
+  transform: rotate(-90deg);
+}
+
+
+.flex-container .sidecol .sideBar .holder .tabs{
+   width: 10em;
+   height: 50px;
+   background: lightblue;
+   border-radius: 5px;
+   transform: perspective(5px) rotateX(2deg);
+   transform-origin: bottom;
+
+}
+
 
 .flex-container .sidecol .body .cell:first-child{
   border-top: 1px solid var(--border-color);
