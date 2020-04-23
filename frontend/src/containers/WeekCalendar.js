@@ -1,6 +1,9 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
+import { authAxios } from '../components/util';
+import axios from 'axios';
+
 
 
 class WeekCalendar extends React.Component{
@@ -11,6 +14,24 @@ class WeekCalendar extends React.Component{
     currentWeek: new Date(),
     selectedDate: new Date(),
     events: []
+  }
+
+  componentDidMount(){
+    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+    .then(res => {
+      this.setState({
+        events: res.data
+      })
+    })
+  }
+
+  componentWillReceiveProps(newProps){
+    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+    .then(res => {
+      this.setState({
+        events: res.data
+      })
+    })
   }
 
   // This will be rending the header of the view, for weekly view, it will be
@@ -86,7 +107,8 @@ class WeekCalendar extends React.Component{
   }
 
   // USE THIS
-  renderWeekCell(){
+  renderWeekCell(events){
+    console.log(events)
     // So what you wanted to do for this is that you will make a list of lsit
     // so the first list is the list of the same hour for multiple day so it
     // will be a list of 7 items of all the same time, and the big list will have
@@ -100,6 +122,9 @@ class WeekCalendar extends React.Component{
     const dayFormat = 'd MMMM'
     // So this list will hold 24 items, each list for each hour
     const hours = []
+
+    // this list will hold all the events
+    let toDoStuff = []
     // This will be a list the same hour of all the days
     let days = []
     // The things we need is the start day and then we need the start of the
@@ -117,6 +142,9 @@ class WeekCalendar extends React.Component{
     // The plan for the loop is to have a while loop that loops through all the
     // hours then with in each hour have a for loop that loops through each day
     while (hour <= endHourDay){
+      // When adding things to the calendar you have to match the date and the
+      // hour for this one
+
 
       // this for loop will take the hour and date and loop throuhg all the
       // hours of all the days of the week
@@ -125,14 +153,44 @@ class WeekCalendar extends React.Component{
         const cloneHour = hour
         formattedHour = dateFns.format(hour, hourFormat)
         formattedDay = dateFns.format(date, dayFormat)
-        days.push(
-          <div
-            className = 'col hourcell'
-            onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
-          >
-          <span className = 'number'></span>
-          </div>
-        )
+        // this loop will loop through all the events and if the hour and day matches
+        // it will add it to the toDoStuff which will loop through each cell
+        // then it will be cleared out again
+        for (let item = 0; item<events.length; item++){
+            if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
+            && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+          )
+            toDoStuff.push(
+              events[item]
+            )
+        }
+
+        if(toDoStuff.length > 0){
+          days.push(
+            <div
+              className = 'col hourcell'
+              onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
+            >
+            <ul>
+              {toDoStuff.map(item => (
+                <li key = {item.content}>
+                  {item.content}
+                </li>
+              ))}
+            </ul>
+            </div>
+          )
+        } else {
+          days.push(
+            <div
+              className = 'col hourcell'
+              onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
+            >
+            <span className = 'number'></span>
+            </div>
+          )
+        }
+        toDoStuff = []
         date = dateFns.addDays(date, 1)
       }
       // After you loop through the hour, you will then want to put it into the
@@ -175,6 +233,7 @@ class WeekCalendar extends React.Component{
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className = 'flex-container'>
         <div className = 'sidecol'>
@@ -183,7 +242,7 @@ class WeekCalendar extends React.Component{
         <div className = 'calendar'>
           {this.renderHeader()}
           {this.renderDays()}
-          {this.renderWeekCell()}
+          {this.renderWeekCell(this.state.events)}
         </div>
 
       </div>
