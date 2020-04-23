@@ -20,6 +20,7 @@ class UserProfileCard extends React.Component {
     const username = this.props.data.username;
     console.log(this.props)
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+    
     this.setState({value: e.target.value});
     }
   // let temp="http://127.0.0.1:8000"+props.data.image;

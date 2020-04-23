@@ -5,7 +5,7 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/auth';
-
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 
@@ -48,23 +48,39 @@ import { authAxios } from '../../components/util';
             <Menu className={styles.menu} selectedKeys={[]} >
               { (
                 <Menu.Item key="center">
-                  <UserOutlined />
-                  个人中心
+                  <Link to="/current-user">
+                    <UserOutlined />
+                    Profile
+
+                  </Link>
+
                 </Menu.Item>
               )}
               { (
                 <Menu.Item key="settings">
                   <SettingOutlined />
-                  个人设置
+                  Settings
                 </Menu.Item>
               )}
               { <Menu.Divider />}
 
-              <Menu.Item key="logout">
-                <LogoutOutlined />
-                退出登录
+
+
+
+
+              <Menu.Item key="logout" onClick={this.props.logout}>
+                <Link to="/">
+                  <LogoutOutlined />
+                  Logout
+
+                </Link>
+
               </Menu.Item>
             </Menu>}>
+
+
+
+
           <span className={`${styles.action} ${styles.account}`}>
             <Avatar size="small" className={styles.avatar} src={this.state.avatar} alt="avatar" />
             <span className={styles.name}>{this.state.username}</span>
