@@ -118,7 +118,7 @@ class PersonalCalendar extends React.Component{
         onClick = {() => this.onWeekClick(cloneDate)}
         className = 'tabs'
         >
-          <span>{formattedWeek}</span>
+          <span></span>
         </div>
         </div>
       )

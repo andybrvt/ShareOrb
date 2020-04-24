@@ -130,8 +130,10 @@ main {
 
 /* Side hours */
 .flex-container .sidecol{
-  position:relative;
-  top: 137px;
+  position: relative;
+  width: 10px;
+  left: 46px;
+  top: 180px;
 }
 
 .flex-container .sidecol .sideBar{
@@ -142,13 +144,15 @@ main {
 
 .flex-container .sidecol .sideBar .holder {
   transform: rotate(-90deg);
+  padding-bottom: 8em;
+  padding-left: 0px;
 }
 
 
 .flex-container .sidecol .sideBar .holder .tabs{
    width: 10em;
-   height: 50px;
-   background: lightblue;
+   height: 30px;
+   background: deepskyblue;
    border-radius: 5px;
    transform: perspective(5px) rotateX(2deg);
    transform-origin: bottom;
@@ -181,6 +185,10 @@ main {
 
 
 /* Calendar */
+
+.flex-container .calendar{
+  width: 1000px;
+}
 
 .calendar {
   display: block;
