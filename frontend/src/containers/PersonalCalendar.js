@@ -203,15 +203,17 @@ class PersonalCalendar extends React.Component{
             "selected": ""
               }`}
               key = {day}
-              onClick = { () =>
-            this.onDateClick(cloneDay)}
+
             >
-            <span className = "number">{formattedDate}</span>
+            <div className = 'circle' onClick = { () =>
+              this.onDateClick(cloneDay)}>
+              <span className = "number">{formattedDate}</span>
+            </div>
             <span className = "bg"> {formattedDate}</span>
             <ul>
               {toDoStuff.map(item => (
                 <li key={item.content}>
-                  {item.content}
+                  <span onClick = {this.onClickItem}> {item.content} </span>
                 </li>
               ))}
             </ul>
@@ -223,10 +225,11 @@ class PersonalCalendar extends React.Component{
           "selected": ""
             }`}
             key = {day}
-            onClick = { () =>
-          this.onDateClick(cloneDay)}
           >
+          <div className = 'circle' onClick = { () =>
+            this.onDateClick(cloneDay)}>
           <span className = "number">{formattedDate}</span>
+          </div>
           <span className = "bg"> {formattedDate}</span>
         </div>
         )}
@@ -292,6 +295,10 @@ class PersonalCalendar extends React.Component{
     this.setState({
       selectedDate: dateFns.subMonths(this.state.selectedDate, 1)
     })
+  }
+
+  onClickItem = () =>{
+    console.log('events')
   }
 
 

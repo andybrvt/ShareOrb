@@ -306,14 +306,31 @@ main {
   border-right: none;
 }
 
-.calendar .body .cell .number {
+.calendar .body .cell .circle .number {
   position: absolute;
   font-size: 82.5%;
   line-height: 1;
   top: .75em;
   right: .75em;
   font-weight: 700;
+
+
 }
+
+.calendar .body .cell .circle{
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border-radius: 50%;
+  top: .01em;
+  right: .01em;
+}
+
+.calendar .body .cell .circle:hover {
+  background-color: #bbb;
+}
+
 
 .calendar .body .hourcell .number {
   position: absolute;
@@ -340,6 +357,7 @@ main {
 }
 
 .calendar .body .cell .bg {
+  pointer-events: none;
   font-weight: 700;
   line-height: 1;
   color: var(--main-color);
