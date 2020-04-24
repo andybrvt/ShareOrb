@@ -14,6 +14,8 @@ import {
   HeartTwoTone,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
+import * as dateFns from 'date-fns';
+
 
 
 
@@ -32,6 +34,10 @@ export default class App extends React.Component {
   };
 
   render() {
+    const currentDay = new Date()
+    console.log(currentDay)
+    const selectYear = dateFns.getYear(currentDay).toString()
+    const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     return (
       <div style={{ width: 200 }}>
         <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
@@ -70,7 +76,8 @@ export default class App extends React.Component {
 
 
         <Menu.Item key="4">
-          <Link to="/personalcalendar" className="nav-text">
+          <Link to={"/personalcalendar/"+selectYear+'/'+selectMonth} 
+          className="nav-text">
             <CalendarOutlined />
             <span>Personal Calendar </span>
           </Link>

@@ -184,7 +184,9 @@ class DayCalendar extends React.Component{
   }
 
   onMonthClick = () => {
-    this.props.history.push('/personalcalendar')
+    const selectYear = dateFns.getYear(this.state.selectedDate).toString()
+    const selectMonth = (dateFns.getMonth(this.state.selectedDate)+1).toString()
+    this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
   }
 
   onWeekClick = () => {

@@ -13,6 +13,7 @@ import  { Redirect } from 'react-router-dom';
 
 class PersonalCalendar extends React.Component{
 // new Date is form DateFns and it give you the current date and month
+// SelectedDate will be the first day of the month
   state = {
     currentMonth: new Date(),
     selectedDate: new Date(),
@@ -32,6 +33,13 @@ class PersonalCalendar extends React.Component{
     });
   };
   componentDidMount(){
+    const selectedYear = this.props.match.params.year;
+    const selectedMonth = this.props.match.params.month;
+    const newDate = [selectedYear, selectedMonth]
+    const newsSelectedDate = new Date(newDate)
+    this.setState({
+      selectedDate: newsSelectedDate
+    })
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -41,6 +49,13 @@ class PersonalCalendar extends React.Component{
   }
 
   componentWillReceiveProps(newProps){
+    const selectedYear = this.props.match.params.year;
+    const selectedMonth = this.props.match.params.month;
+    const newDate = [selectedYear, selectedMonth]
+    const newsSelectedDate = new Date(newDate)
+    this.setState({
+      selectedDate: newsSelectedDate
+    })
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -63,7 +78,7 @@ class PersonalCalendar extends React.Component{
         </div>
         <div className = "col col-center">
           <span>
-           {dateFns.format(this.state.currentMonth, dateFormat)}
+           {dateFns.format(this.state.selectedDate, dateFormat)}
           </span>
         </div>
         <div className= "col col-end" onClick = {this.nextMonth}>
@@ -77,7 +92,7 @@ class PersonalCalendar extends React.Component{
     const dateFormat = "iiii"
     const days = []
     // this will get the date of the first week given the date of the current month
-    let startDate = dateFns.startOfWeek(this.state.currentMonth);
+    let startDate = dateFns.startOfWeek(this.state.selectedDate);
     // for loop that loops through from 0-6 and add the days accordingly
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
@@ -96,8 +111,8 @@ class PersonalCalendar extends React.Component{
     // So what you want is to get the date of the first day of each week
     // so that you can pass it into the tab so it can open up the selected week
     const {currentMonth, selectedDate} = this.state;
-    const startDateMonth = dateFns.startOfMonth(currentMonth);
-    const endDateMonth = dateFns.endOfMonth(currentMonth);
+    const startDateMonth = dateFns.startOfMonth(selectedDate);
+    const endDateMonth = dateFns.endOfMonth(selectedDate);
     // this will give us the first day of the week fo the month
     const startFirstWeek = dateFns.startOfWeek(startDateMonth);
     // this will give us the first day of the week of the last week in the chart
@@ -140,7 +155,7 @@ class PersonalCalendar extends React.Component{
     // the const start date is to fill in the days of the week of the previous month
     // similarly as the end date
     const {currentMonth, selectedDate} = this.state;
-    const monthStart = dateFns.startOfMonth(currentMonth);
+    const monthStart = dateFns.startOfMonth(selectedDate);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
     const endDate = dateFns.endOfWeek(monthEnd);
@@ -184,7 +199,7 @@ class PersonalCalendar extends React.Component{
         if (toDoStuff.length > 0){days.push(
             <div
               className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-              : dateFns.isSameDay(day, selectedDate) ?
+              : dateFns.isSameDay(day, currentMonth) ?
             "selected": ""
               }`}
               key = {day}
@@ -204,7 +219,7 @@ class PersonalCalendar extends React.Component{
         )} else {days.push(
           <div
             className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-            : dateFns.isSameDay(day, selectedDate) ?
+            : dateFns.isSameDay(day, currentMonth) ?
           "selected": ""
             }`}
             key = {day}
@@ -245,11 +260,6 @@ class PersonalCalendar extends React.Component{
     const selectMonth = (dateFns.getMonth(day)+1).toString()
     const selectDay = dateFns.getDate(day).toString()
     console.log(selectYear, selectMonth,selectDay)
-    this.setState(
-      {
-        selectedDate:day
-      }
-    )
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
@@ -274,20 +284,20 @@ class PersonalCalendar extends React.Component{
   // current month
   nextMonth = () => {
     this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
+      selectedDate: dateFns.addMonths(this.state.selectedDate, 1)
     });
   }
 
   prevMonth = () => {
     this.setState({
-      currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
+      selectedDate: dateFns.subMonths(this.state.selectedDate, 1)
     })
   }
 
 
   render(){
     // className is to determine the style
-
+    console.log(this.state)
     return(
       <div>
             <List

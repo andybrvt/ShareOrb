@@ -252,7 +252,10 @@ class WeekCalendar extends React.Component{
   }
 
   onBackClick = () => {
-    this.props.history.push('/personalcalendar')
+    console.log(this.state.selectedDate)
+    const selectYear = dateFns.getYear(this.state.selectedDate).toString()
+    const selectMonth = (dateFns.getMonth(this.state.selectedDate)+1).toString()
+    this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
   }
 
   onDateClick = day => {
