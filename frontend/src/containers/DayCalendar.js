@@ -183,8 +183,17 @@ class DayCalendar extends React.Component{
     })
   }
 
-  onBackClick = () => {
+  onMonthClick = () => {
     this.props.history.push('/personalcalendar')
+  }
+
+  onWeekClick = () => {
+    console.log(this.state.selectedDate)
+    const week = dateFns.startOfWeek(this.state.selectedDate)
+    const selectYear = dateFns.getYear(week).toString()
+    const selectMonth = (dateFns.getMonth(week)+1).toString()
+    const selectDay = dateFns.getDate(week).toString()
+    this.props.history.push('/personalcalendar/w/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
   render() {
@@ -192,8 +201,11 @@ class DayCalendar extends React.Component{
     return (
 
       <div className = 'calendar'>
-        <Button type="primary" shape="circle" onClick = {this.onBackClick}>
-        A
+        <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
+        M
+        </Button>
+        <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
+        W
         </Button>
         {this.renderHeader()}
         {this.renderHours()}

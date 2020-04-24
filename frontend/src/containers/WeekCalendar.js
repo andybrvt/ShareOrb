@@ -3,6 +3,8 @@ import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import { authAxios } from '../components/util';
 import axios from 'axios';
+import { Button, Tooltip } from 'antd';
+
 
 
 
@@ -83,15 +85,21 @@ class WeekCalendar extends React.Component{
     const days = []
 
     let startDate = dateFns.startOfWeek(this.state.selectedDate)
-
+    let cloneStartDate = dateFns.startOfWeek(this.state.selectedDate)
     for (let i = 0; i<7; i++){
+      const cloneCloneStartDate = cloneStartDate
       days.push(
-        <div className = 'col col-center' key = {i}>
+        <div
+        className = 'col col-center'
+        key = {i}
+        onClick = {() => this.onDateClick(cloneCloneStartDate)}
+        >
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           <br />
           {dateFns.format(dateFns.addDays(startDate, i), dayFormat)}
         </div>
       )
+      cloneStartDate = dateFns.addDays(cloneStartDate, 1)
     };
 
     return <div className = 'days row'>{days}</div>
@@ -243,6 +251,24 @@ class WeekCalendar extends React.Component{
     })
   }
 
+  onBackClick = () => {
+    this.props.history.push('/personalcalendar')
+  }
+
+  onDateClick = day => {
+    console.log(day)
+    const selectYear = dateFns.getYear(day).toString()
+    const selectMonth = (dateFns.getMonth(day)+1).toString()
+    const selectDay = dateFns.getDate(day).toString()
+    console.log(selectYear, selectMonth,selectDay)
+    this.setState(
+      {
+        selectedDate:day
+      }
+    )
+  this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
+  }
+
   render() {
     console.log(this.state)
     return (
@@ -251,6 +277,9 @@ class WeekCalendar extends React.Component{
           {this.renderSide()}
         </div>
         <div className = 'calendar'>
+        <Button type="primary" shape="circle" onClick = {this.onBackClick}>
+        M
+        </Button>
           {this.renderHeader()}
           {this.renderDays()}
           {this.renderWeekCell(this.state.events)}
