@@ -1,6 +1,6 @@
 import React from "react";
 
-import Comments from '../containers/comments.js'
+import Comments from '../containers/comments/comments.js'
 
 const Result = (props) => {
   console.log(props.data.image)

@@ -328,7 +328,7 @@ class CustomLayout extends React.Component {
                 }
                 </Header>
 
-                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1200, marginRight: 'auto', marginLeft: 'auto'}}>
+                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1000, marginRight: 'auto', marginLeft: 'auto'}}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
 
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
