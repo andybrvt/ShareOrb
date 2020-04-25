@@ -8,7 +8,7 @@ import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
-
+import AddEventPopUp from '../components/AddEventPopUp'
 
 
 class PersonalCalendar extends React.Component{
@@ -203,7 +203,7 @@ class PersonalCalendar extends React.Component{
             "selected": ""
               }`}
               key = {day}
-
+              onClick = {() => this.onDayEventClick(cloneDay)}
             >
             <div className = 'circle' onClick = { () =>
               this.onDateClick(cloneDay)}>
@@ -225,6 +225,7 @@ class PersonalCalendar extends React.Component{
           "selected": ""
             }`}
             key = {day}
+            onClick = {() => this.onDayEventClick(cloneDay)}
           >
           <div className = 'circle' onClick = { () =>
             this.onDateClick(cloneDay)}>
@@ -280,6 +281,10 @@ class PersonalCalendar extends React.Component{
       selectedDate: startDayWeek
     })
     this.props.history.push('/personalcalendar/w/'+selectedYear+'/'+selectedMonth+'/'+selectedDay)
+  }
+
+  onDayEventClick = date =>{
+    console.log(date)
   }
 
 
