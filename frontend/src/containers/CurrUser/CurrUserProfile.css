@@ -1,0 +1,31 @@
+.section {
+  padding: 70px 0;
+  position: relative;
+  background-color: #FFFFFF; }
+
+  .profile-content .tab-content .tab-pane {
+    min-height: 200px; }
+
+
+.title {
+  margin-top: 30px;
+  margin-bottom: 25px;
+  min-height: 32px; }
+
+
+  .img-circle {
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    padding: 4px;
+    border-radius: 50% !important;
+    max-width: 100%; }
+
+
+    .img-no-padding {
+  padding: 0px; }
+
+  .owner .avatar {
+    padding: 15px;
+    max-width: 180px;
+    margin: -85px auto 0;
+    display: inline-block; }
