@@ -16,7 +16,9 @@ import SearchBar from './HeaderSearch';
 import ProfileDropDown from './GlobalHeader/ProfileDropDown.js';
 
 
-import BasicLayout from '../components/SideMenu/BasicLayout';
+import SideMenu from '../components/SideMenu/SideMenu';
+import './Layouts.css';
+
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -320,26 +322,46 @@ class CustomLayout extends React.Component {
 
 
                 </Menu>
-                {
-                    this.props.isAuthenticated ?
-                    <BasicLayout />
-                :
-                   <div>  </div>
-                }
-                </Header>
 
-                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 20, width: 1000, marginRight: 'auto', marginLeft: 'auto'}}>
+
+                </Header>
+                <div className="wrap">
+
+                <div className="">
+
+                  {
+                      this.props.isAuthenticated ?
+                      <SideMenu />
+                  :
+                     <div>  </div>
+                  }
+
+                </div>
+
+
+                <div className="test1">
+
+                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 10, width: 900, marginRight: 'auto', marginLeft: 'auto'}}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
 
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-                    <Breadcrumb.Item><Link to="/">List</Link></Breadcrumb.Item>
+
                 </Breadcrumb>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+
                         {this.props.children}
                     </div>
                 </Content>
+
+
+                </div>
+
+
+
+                </div>
+
                 <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©2016 Created by Ant UED
+                ShareOrb ©2020
                 </Footer>
             </Layout>
         );

@@ -22,7 +22,7 @@ import * as dateFns from 'date-fns';
 
 const { SubMenu } = Menu;
 
-export default class App extends React.Component {
+export default class SideMenu extends React.Component {
   state = {
     collapsed: false,
   };
@@ -49,7 +49,10 @@ export default class App extends React.Component {
           mode="inline"
           theme="light"
           inlineCollapsed={this.state.collapsed}
-          style={{ minHeight:"100vh" }}
+          style={{
+          
+
+          }}
         >
         <Menu.Item key="1">
           <Link to="/home" className="nav-text">
@@ -76,7 +79,7 @@ export default class App extends React.Component {
 
 
         <Menu.Item key="4">
-          <Link to={"/personalcalendar/"+selectYear+'/'+selectMonth} 
+          <Link to={"/personalcalendar/"+selectYear+'/'+selectMonth}
           className="nav-text">
             <CalendarOutlined />
             <span>Personal Calendar </span>

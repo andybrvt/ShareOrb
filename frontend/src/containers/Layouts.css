@@ -1,0 +1,12 @@
+.wrap {
+  display: flex;
+  width:60%;
+}
+
+.test1 {
+      padding-left: 250px;
+      flex: 1 1 auto;
+      overflow-y: auto;
+      min-height: 0px;
+
+}
