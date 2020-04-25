@@ -4,6 +4,11 @@ import axios from 'axios';
 import { authAxios } from '../components/util';
 import { Button, Tooltip } from 'antd';
 import './Container_CSS/NewCalendar.css';
+import { connect } from 'react-redux';
+import AddEventPopUp from '../components/AddEventPopUp';
+import * as navActions from '../store/actions/nav'
+import * as calendarEventActions from '../store/actions/calendarEvent'
+import EventDrawer from '../containers/EventDrawer.js';
 
 
 
@@ -133,15 +138,13 @@ class DayCalendar extends React.Component{
           <div
             className = ' daycell'
             key = {hour}
-            onClick = {
-              () => this.onHourClick(cloneHour, cloneToDoStuff)}
           >
           <span className = 'number'>{formattedHour}</span>
           <span className = 'bg'> {formattedHour}</span>
           <ul>
             {toDoStuff.map(item => (
               <li key={item.content}>
-                {item.content}
+                <span onClick= {this.onClickItem}>{item.content}</span>
               </li>
             ))}
           </ul>
@@ -151,8 +154,6 @@ class DayCalendar extends React.Component{
           <div
             className = ' daycell'
             key = {hour}
-            onClick = {
-              () => this.onHourClick(cloneHour, cloneToDoStuff)}
           >
           <span className = 'number'>{formattedHour}</span>
           <span className = 'bg'> {formattedHour}</span>
@@ -198,17 +199,33 @@ class DayCalendar extends React.Component{
     this.props.history.push('/personalcalendar/w/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
+  onClickItem = () =>{
+    this.props.openModal()
+  }
+
+  onOpenEvent = () => {
+    this.props.openDrawer()
+  }
+
   render() {
-    console.log(this.state)
+    console.log(this.props)
     return (
 
       <div className = 'calendar'>
+      <AddEventPopUp
+      isVisible = {this.props.showModal}
+      close = {() => this.props.closeModal()}
+      />
         <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
         M
         </Button>
         <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
         W
         </Button>
+        <Button type="primary" onClick = {this.onOpenEvent} >
+          Add event
+        </Button>
+        <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
         {this.renderHeader()}
         {this.renderHours()}
         {this.renderCells(this.state.events)}
@@ -217,4 +234,20 @@ class DayCalendar extends React.Component{
   }
 }
 
-export default DayCalendar;
+const mapStateToProps = state => {
+  return{
+    showDrawer: state.nav.showPopup,
+    showModal: state.calendarEvent.showModal
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeDrawer: () => dispatch(navActions.closePopup()),
+    openDrawer: () => dispatch(navActions.openPopup()),
+    openModal: () => dispatch(calendarEventActions.openEventModal()),
+    closeModal: () => dispatch(calendarEventActions.closeEventModal()),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (DayCalendar);

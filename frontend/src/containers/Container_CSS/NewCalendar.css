@@ -371,6 +371,7 @@ main {
 }
 
 .calendar .body .hourcell .bg {
+  pointer-events: none;
   font-weight: 700;
   line-height: 1;
   color: var(--main-color);
@@ -384,6 +385,7 @@ main {
 }
 
 .calendar .body .daycell .bg {
+  pointer-events: none;
   font-weight: 700;
   line-height: 1;
   color: var(--main-color);

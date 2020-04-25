@@ -6,9 +6,10 @@ import { authAxios } from '../components/util';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
+import * as calendarEventActions from '../store/actions/calendarEvent'
 import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
-import AddEventPopUp from '../components/AddEventPopUp'
+import AddEventPopUp from '../components/AddEventPopUp';
 
 
 class PersonalCalendar extends React.Component{
@@ -203,7 +204,6 @@ class PersonalCalendar extends React.Component{
             "selected": ""
               }`}
               key = {day}
-              onClick = {() => this.onDayEventClick(cloneDay)}
             >
             <div className = 'circle' onClick = { () =>
               this.onDateClick(cloneDay)}>
@@ -225,7 +225,6 @@ class PersonalCalendar extends React.Component{
           "selected": ""
             }`}
             key = {day}
-            onClick = {() => this.onDayEventClick(cloneDay)}
           >
           <div className = 'circle' onClick = { () =>
             this.onDateClick(cloneDay)}>
@@ -283,9 +282,6 @@ class PersonalCalendar extends React.Component{
     this.props.history.push('/personalcalendar/w/'+selectedYear+'/'+selectedMonth+'/'+selectedDay)
   }
 
-  onDayEventClick = date =>{
-    console.log(date)
-  }
 
 
   // You can use the addMonths function to add one month to the
@@ -303,7 +299,7 @@ class PersonalCalendar extends React.Component{
   }
 
   onClickItem = () =>{
-    console.log('events')
+    this.props.openModal()
   }
 
 
@@ -312,6 +308,11 @@ class PersonalCalendar extends React.Component{
     console.log(this.state)
     return(
       <div>
+        <AddEventPopUp
+        isVisible = {this.props.showModal}
+        close = {() => this.props.closeModal()}
+
+        />
             <List
               dataSource={[
                 {
@@ -360,13 +361,16 @@ class PersonalCalendar extends React.Component{
 const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
+    showModal: state.calendarEvent.showModal
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     closeDrawer: () => dispatch(navActions.closePopup()),
-    openDrawer: () => dispatch(navActions.openPopup())
+    openDrawer: () => dispatch(navActions.openPopup()),
+    openModal: () => dispatch(calendarEventActions.openEventModal()),
+    closeModal: () => dispatch(calendarEventActions.closeEventModal()),
   }
 }
 
