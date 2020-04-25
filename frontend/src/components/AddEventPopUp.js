@@ -8,7 +8,7 @@ class AddEventPopUp extends React.Component {
         <Modal
           centered
           footer = {null}
-          visible = true
+          visible = 'true'
         >
         </Modal>
       </div>
