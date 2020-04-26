@@ -310,7 +310,7 @@ class PersonalCalendar extends React.Component{
     // className is to determine the style
     console.log(this.state)
     return(
-      <div>
+      <div className = 'calendarContainer'>
         <AddEventPopUp
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}

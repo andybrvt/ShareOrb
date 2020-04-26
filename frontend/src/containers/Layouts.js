@@ -342,11 +342,7 @@ class CustomLayout extends React.Component {
                 <div className="test1">
 
                 <Content className="site-layout" >
-                <Breadcrumb style={{ margin: '16px 0' }}>
 
-                    <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-
-                </Breadcrumb>
                     <div className="site-layout-background" >
 
                         {this.props.children}

@@ -71,8 +71,21 @@ main {
   display: block;
   margin: 0 auto;
   margin-top: 5em;
-  /* max-width: 120em; */
+  /* max-width: 1200px; */
   margin-bottom: 10em;
+}
+
+
+/* this is to hold all the functions */
+.sideCalendarBarContainer{
+
+}
+
+/* Container that holds Calendar */
+.calendarContainer{
+  position: relative;
+  width: 1385px;
+  bottom: 70px;
 }
 
 
@@ -103,7 +116,7 @@ main {
 .col {
   flex-grow: 1;
   flex-basis: 0;
-  max-width: 100%;
+  max-width: 100%
 }
 
 .weekcol {
@@ -185,9 +198,9 @@ main {
 
 
 /* Calendar */
-
+/* this will help control the width of the calendar */
 .flex-container .calendar{
-  width: 1000px;
+  width: 1700px;
 }
 
 .calendar {
@@ -240,7 +253,7 @@ main {
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
-  background: var(--neutral-color);
+  /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
 }
 
@@ -340,7 +353,6 @@ main {
   height: 25px;
   width: 25px;
   background-color: #fff;
-  border-radius: 50%;
   top: .01em;
   right: .01em;
 }
