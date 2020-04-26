@@ -4,6 +4,11 @@ import './Container_CSS/NewCalendar.css';
 import { authAxios } from '../components/util';
 import axios from 'axios';
 import { Button, Tooltip } from 'antd';
+import { connect } from 'react-redux';
+import AddEventPopUp from '../components/AddEventPopUp';
+import * as navActions from '../store/actions/nav'
+import * as calendarEventActions from '../store/actions/calendarEvent'
+import EventDrawer from '../containers/EventDrawer.js';
 
 
 
@@ -193,7 +198,7 @@ class WeekCalendar extends React.Component{
             <ul>
               {toDoStuff.map(item => (
                 <li key = {item.content}>
-                  {item.content}
+                  <span onClick ={this.onClickItem}>{item.content}</span>
                 </li>
               ))}
             </ul>
@@ -272,10 +277,23 @@ class WeekCalendar extends React.Component{
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
+  onClickItem = () => {
+    this.props.openModal()
+  }
+
+  onAddEvent = () => {
+    this.props.openDrawer()
+  }
+
+
   render() {
-    console.log(this.state)
+    console.log(this.props)
     return (
       <div className = 'flex-container'>
+      <AddEventPopUp
+      isVisible = {this.props.showModal}
+      close = {() => this.props.closeModal()}
+      />
         <div className = 'sidecol'>
           {this.renderSide()}
         </div>
@@ -283,6 +301,10 @@ class WeekCalendar extends React.Component{
         <Button type="primary" shape="circle" onClick = {this.onBackClick}>
         M
         </Button>
+        <Button type="primary" onClick = {this.onAddEvent}>
+        Add event
+        </Button>
+        <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
           {this.renderHeader()}
           {this.renderDays()}
           {this.renderWeekCell(this.state.events)}
@@ -294,4 +316,20 @@ class WeekCalendar extends React.Component{
 
 }
 
-export default WeekCalendar;
+const mapStateToProps = state => {
+  return{
+    showDrawer: state.nav.showPopup,
+    showModal: state.calendarEvent.showModal
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeDrawer: () => dispatch(navActions.closePopup()),
+    openDrawer: () => dispatch(navActions.openPopup()),
+    openModal: () => dispatch(calendarEventActions.openEventModal()),
+    closeModal: () => dispatch(calendarEventActions.closeEventModal()),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(WeekCalendar);
