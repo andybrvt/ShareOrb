@@ -1,16 +1,39 @@
-.section {
-  padding: 70px 0;
-  position: relative;
-  background-color: #FFFFFF; }
+@font-face {
+    font-family: 'Adobe Clean';
+    src: local('Adobe Clean Light'), local('Adobe-Clean-Light'),
+        url('AdobeClean-Light.woff2') format('woff2'),
+        url('AdobeClean-Light.woff') format('woff'),
+        url('AdobeClean-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .test{
+    font-family: 'Adobe Clean';
+    font-size: 75px;
+
+  }
+
+
+  .test2{
+    font-family: 'Adobe Clean';
+    font-size: 25px;
+
+  }
+
 
   .profile-content .tab-content .tab-pane {
     min-height: 200px; }
 
 
-.title {
-  margin-top: 30px;
-  margin-bottom: 25px;
-  min-height: 32px; }
+    .title {
+      margin-top: 30px;
+      margin-bottom: 25px;
+      min-height: 32px; }
+
+    .title.text-center {
+      margin-bottom: 50px; }
+
 
 
   .img-circle {
@@ -21,7 +44,7 @@
     max-width: 100%; }
 
 
-    .img-no-padding {
+  .img-no-padding {
   padding: 0px; }
 
   .owner .avatar {
@@ -29,3 +52,6 @@
     max-width: 180px;
     margin: -85px auto 0;
     display: inline-block; }
+
+  .owner .name h4 {
+    margin-top: 10px; }

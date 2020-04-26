@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
-
+import './AdobeClean-Light.ttf';
 
 import {
   Button,
@@ -72,14 +72,14 @@ class CurrUserProfile extends React.Component{
                 />
               </div>
               <div className="name">
-                <h4 className="title">
+                <h4 className="title test">
                   Jane Faker <br />
                 </h4>
                 <h6 className="description">Music Producer</h6>
               </div>
             </div>
             <Row>
-              <Col className="ml-auto mr-auto text-center" md="6">
+              <Col className="ml-auto mr-auto text-center test2" md="6">
                 <p>
                   An artist of considerable range, Jane Faker — the name taken by
                   Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
