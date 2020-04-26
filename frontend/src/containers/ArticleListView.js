@@ -5,6 +5,7 @@ import Form3 from '../components/Forms3';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
+import './Container_CSS/NewsFeed.css';
 
 import NoFoundPage from './404.jsx';
 // Function: Holds Forms3 and the Infinite scroll
@@ -65,7 +66,7 @@ class ArticleList extends React.Component {
 	render() {
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
-			<div>
+			<div className = 'newsfeed'>
 			{isLoggedIn ?
 
 

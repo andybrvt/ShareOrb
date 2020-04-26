@@ -1,0 +1,12 @@
+.newsfeed {
+  background-color: white;
+  padding: 24px;
+  width: 800px;
+  margin-top: 1px;
+  minHeight: 380px;
+}
+
+
+/* style={{ padding: '0 50px', marginTop: 10, width: 900, marginRight: 'auto', marginLeft: 'auto'}} */
+
+/* style={{ padding: 24, minHeight: 380 }} */
