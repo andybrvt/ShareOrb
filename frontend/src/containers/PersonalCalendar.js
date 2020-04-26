@@ -210,10 +210,13 @@ class PersonalCalendar extends React.Component{
               <span className = "number">{formattedDate}</span>
             </div>
             <span className = "bg"> {formattedDate}</span>
-            <ul>
+            <ul className = 'monthList'>
               {toDoStuff.map(item => (
-                <li key={item.content}>
-                  <span onClick = {this.onClickItem}> {item.content} </span>
+                <li key={item.content} className = 'monthListItem'>
+                  <div>
+                  <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+                  <span className = 'eventTime' onClick = {this.onClickItem}> {item.content} </span>
+                  </div>
                 </li>
               ))}
             </ul>

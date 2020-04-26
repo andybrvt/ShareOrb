@@ -244,6 +244,24 @@ main {
   transition: 0.25s ease-out;
 }
 
+.calendar .body .cell .monthList {
+  list-style-type:none;
+  width: 150%;
+  position: relative;
+  right: 50px;
+}
+
+.calendar .body .cell .monthList .monthListItem{
+  background-color: lightblue;
+  text-align: center;
+}
+
+.calendar .body .cell .monthList .monthListItem .eventTime{
+  font-size: 7pt;
+  color: white;
+  left: 10px;
+}
+
 .calendar .body .hourcell {
   position: relative;
   height: 5em;

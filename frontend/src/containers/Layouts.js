@@ -327,11 +327,11 @@ class CustomLayout extends React.Component {
                 </Header>
                 <div className="wrap">
 
-                <div className="">
+                <div className="sidebarLayout">
 
                   {
                       this.props.isAuthenticated ?
-                      <SideMenu />
+                      <SideMenu  className = ''/>
                   :
                      <div>  </div>
                   }
@@ -341,13 +341,13 @@ class CustomLayout extends React.Component {
 
                 <div className="test1">
 
-                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 10, width: 900, marginRight: 'auto', marginLeft: 'auto'}}>
+                <Content className="site-layout" >
                 <Breadcrumb style={{ margin: '16px 0' }}>
 
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
 
                 </Breadcrumb>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+                    <div className="site-layout-background" >
 
                         {this.props.children}
                     </div>
