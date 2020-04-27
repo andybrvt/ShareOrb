@@ -136,15 +136,20 @@ class DayCalendar extends React.Component{
       if (toDoStuff.length > 0){
         hours.push(
           <div
-            className = ' daycell'
+            className = 'daycell'
             key = {hour}
           >
-          <span className = 'number'>{formattedHour}</span>
+          <div className = 'uppertab'>
+            <span className = 'number'>{formattedHour}</span>
+          </div>
           <span className = 'bg'> {formattedHour}</span>
-          <ul>
+          <ul className = 'monthList'>
             {toDoStuff.map(item => (
-              <li key={item.content}>
-                <span onClick= {this.onClickItem}>{item.content}</span>
+              <li key={item.content} className = 'monthListItem'>
+              <div onClick = {this.onClickItem}>
+              <span className = ''> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+              <span className = ' ' > {item.content} </span>
+              </div>
               </li>
             ))}
           </ul>
@@ -152,7 +157,7 @@ class DayCalendar extends React.Component{
         )} else {
         hours.push(
           <div
-            className = ' daycell'
+            className = 'daycell'
             key = {hour}
           >
           <span className = 'number'>{formattedHour}</span>

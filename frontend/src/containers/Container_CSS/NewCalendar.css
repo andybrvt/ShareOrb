@@ -90,6 +90,7 @@ main {
 
 
 /* GRID */
+/* Do not change this because alot of other parts use this */
 .flex-container {
   display: flex;
 }
@@ -150,19 +151,29 @@ main {
   top: 180px;
 }
 
+/* This is for the time side bar for the weekCalendar */
+.flex-container .timecol{
+  width: 50px;
+  float: left;
+  position:relative;
+  top: 152px;
+}
+
+/* This is for the side bars tabs in the PersonalCalendar */
 .flex-container .sidecol .sideBar{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+/* PersonalCalendar weekbar */
 .flex-container .sidecol .sideBar .holder {
   transform: rotate(-90deg);
   padding-bottom: 8em;
   padding-left: 0px;
 }
 
-
+/* PersonalCalendar weekbar */
 .flex-container .sidecol .sideBar .holder .tabs{
    width: 10em;
    height: 30px;
@@ -173,21 +184,22 @@ main {
 
 }
 
-.flex-container .sidecol .body .cell:first-child{
+/* this is for the date time for week calendar */
+.calendarContainer .flex-container .timecol .body .cell:first-child{
   border-top: 1px solid var(--border-color);
 }
 
-.flex-container .sidecol .body .cell{
+/* time side for weekCalendar */
+.calendarContainer .flex-container .timecol .body .cell{
   position: relative;
-  height: 5em;
+  height: 5.1em;
   border-bottom: 2px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
-  background: var(--neutral-color);
   transition: 0.25s ease-out;
 }
 
-.flex-container .sidecol .body .cell .number{
+.calendarContainer .flex-container .timecol .body .cell .number{
   font-size: 82.5%;
   line-height: 1;
   top: .75em;
@@ -202,6 +214,7 @@ main {
 .flex-container .calendar{
   width: 1700px;
 }
+
 
 .calendar {
   display: block;
@@ -275,6 +288,7 @@ main {
   left: 10px;
 }
 
+/* This is for the week view and to control the cell size */
 .calendar .body .hourcell {
   position: relative;
   height: 5em;
@@ -286,7 +300,21 @@ main {
   transition: 0.25s ease-out;
 }
 
+/* this is to hel format the list in each cell in the weekview */
+.calendar .body .hourcell .monthList {
+  list-style-type:none;
+  width: 150%;
+  position: relative;
+  right: 50px;
+}
 
+/* This is to change the color of the items in the list in week view */
+.calendar .body .hourcell .monthList .monthListItem{
+  background-color: lightblue;
+  text-align: center;
+}
+
+/* This is for the day view */
 .calendar .body .daycell {
   position: relative;
   height: 10em;
@@ -296,6 +324,23 @@ main {
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
+}
+
+.calendar .body .daycell .uppertab {
+  position: relative;
+  height: 25px;
+}
+
+.calendar .body .daycell .monthList {
+  list-style-type:none;
+  width: 150%;
+  position: relative;
+  right: 50px;
+}
+
+.calendar .body .daycell .monthList .monthListItem{
+  background-color: lightblue;
+  text-align: center;
 }
 
 .calendar .body .cell:hover {
@@ -385,11 +430,12 @@ main {
   font-weight: 700;
 }
 
-
+/* this one is for the disabled color for the month view */
 .calendar .body .disabled {
   color: var(--text-color-light);
   pointer-events: none;
 }
+
 
 .calendar .body .cell .bg {
   pointer-events: none;

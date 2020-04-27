@@ -195,10 +195,13 @@ class WeekCalendar extends React.Component{
               className = 'col hourcell'
               onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
             >
-            <ul>
+            <ul className = 'monthList'>
               {toDoStuff.map(item => (
-                <li key = {item.content}>
-                  <span onClick ={this.onClickItem}>{item.content}</span>
+                <li key = {item.content} className = 'monthListItem'>
+                  <div onClick = {this.onClickItem}>
+                  <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+                  <span className = 'eventTime' > {item.content} </span>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -295,7 +298,7 @@ class WeekCalendar extends React.Component{
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />
-          <div className = 'sidecol'>
+          <div className = 'timecol'>
             {this.renderSide()}
           </div>
           <div className = 'calendar'>

@@ -216,8 +216,8 @@ class PersonalCalendar extends React.Component{
               {toDoStuff.map(item => (
                 <li key={item.content} className = 'monthListItem'>
                   <div onClick = {this.onClickItem}>
-                  <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
-                  <span className = 'eventTime' > {item.content} </span>
+                  <span className = ''> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+                  <span className = ' ' > {item.content} </span>
                   </div>
                 </li>
               ))}
