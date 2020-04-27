@@ -142,6 +142,7 @@ main {
 
 
 /* Side hours */
+/* This is for the week tabs in the personalcalendar */
 .flex-container .sidecol{
   position: relative;
   width: 10px;
@@ -171,7 +172,6 @@ main {
    transform-origin: bottom;
 
 }
-
 
 .flex-container .sidecol .body .cell:first-child{
   border-top: 1px solid var(--border-color);
@@ -337,7 +337,12 @@ main {
   border-right: none;
 }
 
-.calendar .body .cell .circle .number {
+/* This is for the upper part of the cell in the PersonalCalendar */
+.calendar .body .cell .uppertab{
+  height: 25px;
+}
+
+.calendar .body .cell .uppertab .uppertab .circle .number {
   position: absolute;
   font-size: 82.5%;
   line-height: 1;
@@ -348,7 +353,7 @@ main {
 
 }
 
-.calendar .body .cell .circle{
+.calendar .body .cell .uppertab .circle{
   position: absolute;
   height: 25px;
   width: 25px;

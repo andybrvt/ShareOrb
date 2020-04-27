@@ -205,17 +205,19 @@ class PersonalCalendar extends React.Component{
               }`}
               key = {day}
             >
-            <div className = 'circle' onClick = { () =>
-              this.onDateClick(cloneDay)}>
-              <span className = "number">{formattedDate}</span>
+            <div className = 'uppertab'>
+              <div className = 'circle' onClick = { () =>
+                this.onDateClick(cloneDay)}>
+                <span className = "number">{formattedDate}</span>
+              </div>
             </div>
             <span className = "bg"> {formattedDate}</span>
             <ul className = 'monthList'>
               {toDoStuff.map(item => (
                 <li key={item.content} className = 'monthListItem'>
-                  <div>
+                  <div onClick = {this.onClickItem}>
                   <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
-                  <span className = 'eventTime' onClick = {this.onClickItem}> {item.content} </span>
+                  <span className = 'eventTime' > {item.content} </span>
                   </div>
                 </li>
               ))}

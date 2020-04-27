@@ -210,25 +210,26 @@ class DayCalendar extends React.Component{
   render() {
     console.log(this.props)
     return (
-
-      <div className = 'calendar'>
-      <AddEventPopUp
-      isVisible = {this.props.showModal}
-      close = {() => this.props.closeModal()}
-      />
-        <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
-        M
-        </Button>
-        <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
-        W
-        </Button>
-        <Button type="primary" onClick = {this.onOpenEvent} >
-          Add event
-        </Button>
-        <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-        {this.renderHeader()}
-        {this.renderHours()}
-        {this.renderCells(this.state.events)}
+      <div className = 'calendarContainer'>
+        <div className = 'calendar'>
+        <AddEventPopUp
+        isVisible = {this.props.showModal}
+        close = {() => this.props.closeModal()}
+        />
+          <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
+          M
+          </Button>
+          <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
+          W
+          </Button>
+          <Button type="primary" onClick = {this.onOpenEvent} >
+            Add event
+          </Button>
+          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+          {this.renderHeader()}
+          {this.renderHours()}
+          {this.renderCells(this.state.events)}
+        </div>
       </div>
     )
   }

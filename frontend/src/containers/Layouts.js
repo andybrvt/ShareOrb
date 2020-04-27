@@ -14,8 +14,6 @@ import moment from 'moment';
 import SearchBar from './HeaderSearch';
 
 import ProfileDropDown from './GlobalHeader/ProfileDropDown.js';
-
-
 import SideMenu from '../components/SideMenu/SideMenu';
 import './Layouts.css';
 
