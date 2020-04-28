@@ -63,17 +63,21 @@ class CurrUserProfile extends React.Component{
           <div className="section profile-content">
 
           <Container>
+            <div class="timeline-cover">
+
+            </div>
+
             <div className="owner">
               <div className="avatar">
                 <img
                   alt="..."
-                  className="img-circle img-no-padding img-responsive"
-                  src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
+                  className="img-circle img-no-padding img-responsive test3"
+                  src={"https://images.unsplash.com/photo-1525943837837-af668e09139d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}
                 />
               </div>
               <div className="name">
                 <h4 className="title test">
-                  Jane Faker <br />
+                  Jane Faker-- Andy you like that ass? <br />
                 </h4>
                 <h6 className="description">Music Producer</h6>
               </div>
