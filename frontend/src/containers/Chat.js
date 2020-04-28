@@ -73,8 +73,9 @@ class Chat extends React.Component{
 // so the intialized chat gets called mutliple times
 // so basically you send the message and connecting to a new websocket when you change urls and not
 // when the props are updated
+
+
     componentWillReceiveProps(newProps) {
-      console.log(newProps)
       if(this.props.match.params.id !== newProps.match.params.id){
         WebSocketInstance.disconnect();
         this.waitForSocketConnection(()=> {
@@ -179,6 +180,7 @@ class Chat extends React.Component{
     }
 
     render(){
+      console.log(this.props)
       const messages = this.state.messages;
       return(
         <div id="frame">

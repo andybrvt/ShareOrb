@@ -7,9 +7,12 @@ import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent'
+import * as calendarActions from '../store/actions/calendars'
 import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import AddEventPopUp from '../components/AddEventPopUp';
+import { NavLink } from 'react-router-dom';
+
 
 
 class PersonalCalendar extends React.Component{
@@ -37,9 +40,10 @@ class PersonalCalendar extends React.Component{
     const selectedYear = this.props.match.params.year;
     const selectedMonth = this.props.match.params.month;
     const newDate = [selectedYear, selectedMonth]
-    const newsSelectedDate = new Date(newDate)
+    const newSelectedDate = new Date(newDate)
+    this.props.getSelectedDate(newSelectedDate)
     this.setState({
-      selectedDate: newsSelectedDate
+      selectedDate: newSelectedDate
     })
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
@@ -57,6 +61,13 @@ class PersonalCalendar extends React.Component{
     this.setState({
       selectedDate: newsSelectedDate
     })
+    if (this.props.currentDate !== newProps.currentDate){
+      console.log('RIGHT FUCKING HERE')
+      const year = dateFns.getYear(newProps.currentDate)
+      const month = dateFns.getMonth(newProps.currentDate)
+      this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
+    }
+
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -295,13 +306,17 @@ class PersonalCalendar extends React.Component{
     this.setState({
       selectedDate: dateFns.addMonths(this.state.selectedDate, 1)
     });
+    this.props.nextMonth();
   }
 
   prevMonth = () => {
     this.setState({
       selectedDate: dateFns.subMonths(this.state.selectedDate, 1)
     })
+    this.props.prevMonth()
   }
+
+
 
   onClickItem = () =>{
     this.props.openModal()
@@ -309,8 +324,8 @@ class PersonalCalendar extends React.Component{
 
 
   render(){
+    console.log(this.props)
     // className is to determine the style
-    console.log(this.state)
     return(
       <div className = 'calendarContainer'>
         <AddEventPopUp
@@ -366,16 +381,22 @@ class PersonalCalendar extends React.Component{
 const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
-    showModal: state.calendarEvent.showModal
+    showModal: state.calendarEvent.showModal,
+    currentDate: state.calendar.date
   }
 }
 
+// getSelectedDate will get the date from the url
+// it will help with the lagging of the state so when we put it in
 const mapDispatchToProps = dispatch => {
   return {
     closeDrawer: () => dispatch(navActions.closePopup()),
     openDrawer: () => dispatch(navActions.openPopup()),
     openModal: () => dispatch(calendarEventActions.openEventModal()),
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
+    getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
+    nextMonth: () => dispatch(calendarActions.nextMonth()),
+    prevMonth: () => dispatch(calendarActions.prevMonth())
   }
 }
 

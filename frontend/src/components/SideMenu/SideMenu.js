@@ -50,7 +50,7 @@ export default class SideMenu extends React.Component {
           theme="light"
           inlineCollapsed={this.state.collapsed}
           style={{
-          
+
 
           }}
         >
@@ -62,18 +62,18 @@ export default class SideMenu extends React.Component {
         </Menu.Item>
 
         <Menu.Item key="2">
-          <Link to="/userview" className="nav-text">
+          <a href="/userview" className="nav-text">
             <UsergroupAddOutlined />
             <span>Users </span>
-          </Link>
+          </a>
         </Menu.Item>
 
 
         <Menu.Item key="3">
-          <Link to="/chat/1" className="nav-text">
+          <a href="/chat/1" className="nav-text">
             <MessageOutlined />
             <span>Messages </span>
-          </Link>
+          </a>
         </Menu.Item>
 
 

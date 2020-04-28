@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   nav: navReducer,
   message: messageReducer,
   notifications: notificationsReducer,
-  calender: calendarReducer,
+  calendar: calendarReducer,
   calendarEvent: calendarEventReducer,
 })
 //store takes in reducer and an enhancer to handle the middleware
