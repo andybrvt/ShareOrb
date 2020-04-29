@@ -20,6 +20,8 @@ export const LOAD_EVENTS_CALENDAR = 'LOAD_EVENTS_CALENDAR';
 export const GET_DATE = 'GET_DATE'
 export const NEXT_MONTH = 'NEXT_MONTH';
 export const PREV_MONTH = 'PREV_MONTH';
+export const NEXT_WEEK  = 'NEXT_WEEK';
+export const PREV_WEEK = 'PREV_WEEK';
 
 export const OPEN_EVENT_MODAL = 'OPEN_EVENT_MODAL';
 export const CLOSE_EVENT_MODAL = 'CLOSE_EVENT_MODAL';

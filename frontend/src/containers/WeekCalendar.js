@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import AddEventPopUp from '../components/AddEventPopUp';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent'
+import * as calendarActions from '../store/actions/calendars'
 import EventDrawer from '../containers/EventDrawer.js';
 
 
@@ -33,6 +34,7 @@ class WeekCalendar extends React.Component{
     // this is just to put things in a format so we can get the date working
     const newWeek = [selectedYear, selectedMonth, startWeekDay]
     const newSelectedDate = new Date(newWeek)
+    this.props.getSelectedDate(newSelectedDate)
     this.setState ({
       selectedDate: newSelectedDate
     })
@@ -45,6 +47,17 @@ class WeekCalendar extends React.Component{
   }
 
   componentWillReceiveProps(newProps){
+    console.log(this.props.currentDate, newProps.currentDate)
+    // you bascially want to check if the date in props and the date in
+    // the url is the safe, if they are not --> you gotta change it
+    // We would use new props here is because when you go to the nextWeek
+    // or previous week the props changes
+    if (this.props.currentDate !== newProps.currentDate) {
+      const year = dateFns.getYear(newProps.currentDate)
+      const month = dateFns.getMonth(newProps.currentDate)
+      const day = dateFns.getDate(newProps.currentDate)
+      this.props.history.push('/personalcalendar/w/'+year+'/'+(month+1)+'/'+day)
+    }
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -57,8 +70,8 @@ class WeekCalendar extends React.Component{
   // the start week to the end of the start week and start of the week
   renderHeader() {
     const dateFormat = 'MMMM yyyy'
-    const startWeek = dateFns.startOfWeek(this.state.selectedDate)
-    const endWeek = dateFns.endOfWeek(this.state.selectedDate)
+    const startWeek = dateFns.startOfWeek(this.props.currentDate)
+    const endWeek = dateFns.endOfWeek(this.props.currentDate)
     return(
       <div className = 'header row flex-middle'>
         <div className = 'col col-start'>
@@ -89,8 +102,8 @@ class WeekCalendar extends React.Component{
     const dayFormat = 'd'
     const days = []
 
-    let startDate = dateFns.startOfWeek(this.state.selectedDate)
-    let cloneStartDate = dateFns.startOfWeek(this.state.selectedDate)
+    let startDate = dateFns.startOfWeek(this.props.currentDate)
+    let cloneStartDate = dateFns.startOfWeek(this.props.currentDate)
     for (let i = 0; i<7; i++){
       const cloneCloneStartDate = cloneStartDate
       days.push(
@@ -115,7 +128,7 @@ class WeekCalendar extends React.Component{
   renderSide() {
     const dateFormat = 'h a'
     const hour = []
-    let startHour = dateFns.startOfDay(this.state.selectedDate)
+    let startHour = dateFns.startOfDay(this.props.currentDate)
     for (let i = 0; i<24; i++){
       const formattedHour = dateFns.format(startHour, dateFormat)
       hour.push(
@@ -137,7 +150,8 @@ class WeekCalendar extends React.Component{
     // so the first list is the list of the same hour for multiple day so it
     // will be a list of 7 items of all the same time, and the big list will have
     // 24 items
-    const{currentWeek, selectedDate} = this.state;
+    const currentWeek = this.state.currentWeek;
+    const selectedDate = this.props.currentDate;
     // this will give you the first day of the week
     const weekStart = dateFns.startOfWeek(selectedDate);
     const weekEnd = dateFns.endOfWeek(selectedDate);
@@ -246,37 +260,25 @@ class WeekCalendar extends React.Component{
 
   // this is a onclick function that goes to the next week
   nextWeek =() =>{
-    this.setState({
-      selectedDate: dateFns.addWeeks(this.state.selectedDate, 1)
-    })
+    this.props.nextWeek()
   }
 
 
   // onClick function that goes to the prvious week
   prevWeek = () => {
-    this.setState({
-      selectedDate: dateFns.subWeeks(this.state.selectedDate, 1)
-    })
+    this.props.prevWeek()
   }
 
   onBackClick = () => {
-    console.log(this.state.selectedDate)
-    const selectYear = dateFns.getYear(this.state.selectedDate).toString()
-    const selectMonth = (dateFns.getMonth(this.state.selectedDate)+1).toString()
+    const selectYear = dateFns.getYear(this.props.currentDate).toString()
+    const selectMonth = (dateFns.getMonth(this.props.currentDate)+1).toString()
     this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
   }
 
   onDateClick = day => {
-    console.log(day)
     const selectYear = dateFns.getYear(day).toString()
     const selectMonth = (dateFns.getMonth(day)+1).toString()
     const selectDay = dateFns.getDate(day).toString()
-    console.log(selectYear, selectMonth,selectDay)
-    this.setState(
-      {
-        selectedDate:day
-      }
-    )
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
@@ -290,7 +292,6 @@ class WeekCalendar extends React.Component{
 
 
   render() {
-    console.log(this.props)
     return (
     <div className = 'calendarContainer'>
         <div className = 'flex-container'>
@@ -324,16 +325,21 @@ class WeekCalendar extends React.Component{
 const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
-    showModal: state.calendarEvent.showModal
+    showModal: state.calendarEvent.showModal,
+    currentDate: state.calendar.date
   }
 }
 
+// The get selected date action will get the date based on the url
 const mapDispatchToProps = dispatch => {
   return {
     closeDrawer: () => dispatch(navActions.closePopup()),
     openDrawer: () => dispatch(navActions.openPopup()),
     openModal: () => dispatch(calendarEventActions.openEventModal()),
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
+    getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
+    nextWeek: () => dispatch(calendarActions.nextWeek()),
+    prevWeek: () => dispatch(calendarActions.prevWeek())
   }
 }
 

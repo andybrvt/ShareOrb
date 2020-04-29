@@ -38,3 +38,15 @@ export const prevMonth = () => {
     type: actionTypes.PREV_MONTH
   }
 }
+
+export const nextWeek = () => {
+  return {
+    type: actionTypes.NEXT_WEEK
+  }
+}
+
+export const prevWeek = () => {
+  return {
+    type: actionTypes.PREV_WEEK
+  }
+}

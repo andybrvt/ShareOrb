@@ -51,6 +51,8 @@ class PersonalCalendar extends React.Component{
   }
 
   componentWillReceiveProps(newProps){
+    // you bascially want to check if the date in props and the date in
+    // the url is the safe, if they are not --> you gotta change it
     if (this.props.currentDate !== newProps.currentDate){
       console.log('RIGHT FUCKING HERE')
       const year = dateFns.getYear(newProps.currentDate)
@@ -295,16 +297,10 @@ class PersonalCalendar extends React.Component{
   // You can use the addMonths function to add one month to the
   // current month
   nextMonth = () => {
-    this.setState({
-      selectedDate: dateFns.addMonths(this.state.selectedDate, 1)
-    });
     this.props.nextMonth();
   }
 
   prevMonth = () => {
-    this.setState({
-      selectedDate: dateFns.subMonths(this.state.selectedDate, 1)
-    })
     this.props.prevMonth()
   }
 
