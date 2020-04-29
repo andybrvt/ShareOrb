@@ -22,6 +22,8 @@ export const NEXT_MONTH = 'NEXT_MONTH';
 export const PREV_MONTH = 'PREV_MONTH';
 export const NEXT_WEEK  = 'NEXT_WEEK';
 export const PREV_WEEK = 'PREV_WEEK';
+export const NEXT_DAY = 'NEXT_DAY';
+export const PREV_DAY = 'PREV_DAY';
 
 export const OPEN_EVENT_MODAL = 'OPEN_EVENT_MODAL';
 export const CLOSE_EVENT_MODAL = 'CLOSE_EVENT_MODAL';

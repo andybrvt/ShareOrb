@@ -50,3 +50,15 @@ export const prevWeek = () => {
     type: actionTypes.PREV_WEEK
   }
 }
+
+export const nextDay = () => {
+  return {
+    type: actionTypes.NEXT_DAY
+  }
+}
+
+export const prevDay = () => {
+  return {
+    type: actionTypes.PREV_DAY
+  }
+}

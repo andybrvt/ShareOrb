@@ -54,6 +54,18 @@ const prevWeek = (state, action) => {
   })
 }
 
+const nextDay = (state, action) => {
+  return updateObject(state, {
+    date: dateFns.addDays(state.date, 1)
+  })
+}
+
+const prevDay = (state, action) => {
+  return updateObject(state, {
+    date: dateFns.subDays(state.date, 1)
+  })
+}
+
 // when an action gets called it will go into here and this will check what the
 // the type is
 const reducer = (state = initialState, action) => {
@@ -72,6 +84,10 @@ const reducer = (state = initialState, action) => {
       return nextWeek(state, action);
     case actionTypes.PREV_WEEK:
       return prevWeek(state, action);
+    case actionTypes.NEXT_DAY:
+      return nextDay(state, action);
+    case actionTypes.PREV_DAY:
+      return prevDay(state, action);
     default:
       return state;
   }

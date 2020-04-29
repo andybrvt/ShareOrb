@@ -7,7 +7,8 @@ import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
 import AddEventPopUp from '../components/AddEventPopUp';
 import * as navActions from '../store/actions/nav'
-import * as calendarEventActions from '../store/actions/calendarEvent'
+import * as calendarEventActions from '../store/actions/calendarEvent';
+import * as calendarActions from '../store/actions/calendars';
 import EventDrawer from '../containers/EventDrawer.js';
 
 
@@ -26,6 +27,7 @@ class DayCalendar extends React.Component{
     const selectedDay = this.props.match.params.day;
     const newDate = [selectedYear, selectedMonth, selectedDay]
     const newsSelectedDate = new Date(newDate)
+    this.props.getSelectedDate(newsSelectedDate)
     this.setState({
       selectedDate: newsSelectedDate
     })
@@ -37,14 +39,12 @@ class DayCalendar extends React.Component{
     })
   }
   componentWillReceiveProps(newProps){
-    const selectedYear = this.props.match.params.year;
-    const selectedMonth = this.props.match.params.month;
-    const selectedDay = this.props.match.params.day;
-    const newDate = [selectedYear, selectedMonth, selectedDay]
-    const newsSelectedDate = new Date(newDate)
-    this.setState({
-      selectedDate: newsSelectedDate
-    })
+    if (this.props.currentDate !== newProps.currentDate){
+      const year = dateFns.getYear(newProps.currentDate)
+      const month = dateFns.getMonth(newProps.currentDate)
+      const day = dateFns.getDate(newProps.currentDate)
+      this.props.history.push('/personalcalendar/'+year+'/'+(month+1)+'/'+day)
+    }
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -66,7 +66,7 @@ class DayCalendar extends React.Component{
         </div>
         <div className = "col col-center">
           <span>
-            {dateFns.format(this.state.selectedDate, dateFormat)}
+            {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
         <div className = "col col-end" onClick = {this.nextDay}>
@@ -84,7 +84,7 @@ class DayCalendar extends React.Component{
 
     // starttime will be the start of the day where the time is 00:00
     // then you will loop by 0-23 and add hours accordingly
-    let startTime = dateFns.startOfDay(this.state.selectedDate);
+    let startTime = dateFns.startOfDay(this.props.currentDate);
     for(let i = 0; i<24; i++){
       hours.push(
         <div className = 'sidecell' key = {i}>
@@ -97,7 +97,8 @@ class DayCalendar extends React.Component{
 
 // render all the hour cell within each day
   renderCells(events) {
-    const {currentDay, selectedDate} = this.state
+    const currentDay = this.state.currentDay
+    const selectedDate = this.props.currentDate
     const startHourDay = dateFns.startOfDay(selectedDate)
     const endHourDay = dateFns.endOfDay(selectedDate)
 
@@ -178,26 +179,22 @@ class DayCalendar extends React.Component{
 // Use addDays function to change the day
 //This will pretty much push all the render cell and stuff on top by 1 day
   nextDay = () => {
-    this.setState({
-      selectedDate: dateFns.addDays(this.state.selectedDate, 1)
-    })
+    this.props.nextDay()
   }
 
   prevDay = () => {
-    this.setState({
-      selectedDate: dateFns.subDays(this.state.selectedDate,1)
-    })
+    this.props.prevDay()
   }
 
   onMonthClick = () => {
-    const selectYear = dateFns.getYear(this.state.selectedDate).toString()
-    const selectMonth = (dateFns.getMonth(this.state.selectedDate)+1).toString()
+    const selectYear = dateFns.getYear(this.props.currentDate).toString()
+    const selectMonth = (dateFns.getMonth(this.props.currentDate)+1).toString()
     this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
   }
 
   onWeekClick = () => {
     console.log(this.state.selectedDate)
-    const week = dateFns.startOfWeek(this.state.selectedDate)
+    const week = dateFns.startOfWeek(this.props.currentDate)
     const selectYear = dateFns.getYear(week).toString()
     const selectMonth = (dateFns.getMonth(week)+1).toString()
     const selectDay = dateFns.getDate(week).toString()
@@ -243,7 +240,8 @@ class DayCalendar extends React.Component{
 const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
-    showModal: state.calendarEvent.showModal
+    showModal: state.calendarEvent.showModal,
+    currentDate: state.calendar.date
   }
 }
 
@@ -253,6 +251,9 @@ const mapDispatchToProps = dispatch => {
     openDrawer: () => dispatch(navActions.openPopup()),
     openModal: () => dispatch(calendarEventActions.openEventModal()),
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
+    getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
+    nextDay: () => dispatch(calendarActions.nextDay()),
+    prevDay: () => dispatch(calendarActions.prevDay())
   }
 }
 
