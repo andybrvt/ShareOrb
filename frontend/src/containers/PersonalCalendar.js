@@ -42,9 +42,6 @@ class PersonalCalendar extends React.Component{
     const newDate = [selectedYear, selectedMonth]
     const newSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newSelectedDate)
-    this.setState({
-      selectedDate: newSelectedDate
-    })
     authAxios.get('http://127.0.0.1:8000/mycalendar/events')
     .then(res => {
       this.setState({
@@ -54,13 +51,6 @@ class PersonalCalendar extends React.Component{
   }
 
   componentWillReceiveProps(newProps){
-    const selectedYear = this.props.match.params.year;
-    const selectedMonth = this.props.match.params.month;
-    const newDate = [selectedYear, selectedMonth]
-    const newsSelectedDate = new Date(newDate)
-    this.setState({
-      selectedDate: newsSelectedDate
-    })
     if (this.props.currentDate !== newProps.currentDate){
       console.log('RIGHT FUCKING HERE')
       const year = dateFns.getYear(newProps.currentDate)
@@ -90,7 +80,7 @@ class PersonalCalendar extends React.Component{
         </div>
         <div className = "col col-center">
           <span>
-           {dateFns.format(this.state.selectedDate, dateFormat)}
+           {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
         <div className= "col col-end" onClick = {this.nextMonth}>
@@ -104,7 +94,7 @@ class PersonalCalendar extends React.Component{
     const dateFormat = "iiii"
     const days = []
     // this will get the date of the first week given the date of the current month
-    let startDate = dateFns.startOfWeek(this.state.selectedDate);
+    let startDate = dateFns.startOfWeek(this.props.currentDate);
     // for loop that loops through from 0-6 and add the days accordingly
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
@@ -122,7 +112,8 @@ class PersonalCalendar extends React.Component{
   renderSide() {
     // So what you want is to get the date of the first day of each week
     // so that you can pass it into the tab so it can open up the selected week
-    const {currentMonth, selectedDate} = this.state;
+    const currentMonth = this.state.currentMonth;
+    const selectedDate = this.props.currentDate;
     const startDateMonth = dateFns.startOfMonth(selectedDate);
     const endDateMonth = dateFns.endOfMonth(selectedDate);
     // this will give us the first day of the week fo the month
@@ -166,7 +157,8 @@ class PersonalCalendar extends React.Component{
     // endOfMonth() will give you the date of the last day of the current month
     // the const start date is to fill in the days of the week of the previous month
     // similarly as the end date
-    const {currentMonth, selectedDate} = this.state;
+    const currentMonth = this.state.currentMonth;
+    const selectedDate = this.props.currentDate;
     const monthStart = dateFns.startOfMonth(selectedDate);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
