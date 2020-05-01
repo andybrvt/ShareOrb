@@ -3,10 +3,10 @@ import { Drawer } from 'antd';
 import classNames from 'classnames';
 import Omit from 'omit.js';
 
-
-import SiderMenu, { SiderMenuProps } from './SiderMenu.tsx';
-
-
+import { useDeepCompareEffect } from '../utils/utils';
+import SiderMenu, { SiderMenuProps } from './SiderMenu';
+import { getFlatMenus } from './SiderMenuUtils';
+import MenuCounter from './Counter';
 
 const SiderMenuWrapper: React.FC<SiderMenuProps> = (props) => {
   const {
@@ -19,9 +19,30 @@ const SiderMenuWrapper: React.FC<SiderMenuProps> = (props) => {
     className,
     hide,
   } = props;
+  const { setFlatMenus, setFlatMenuKeys } = MenuCounter.useContainer();
 
+  useDeepCompareEffect(() => {
+    if (!menuData || menuData.length < 1) {
+      return () => null;
+    }
+    // // 当 menu data 改变的时候重新计算这两个参数
+    const newFlatMenus = getFlatMenus(menuData);
+    const animationFrameId = requestAnimationFrame(() => {
+      setFlatMenus(newFlatMenus);
+      setFlatMenuKeys(Object.keys(newFlatMenus));
+    });
+    return () =>
+      window.cancelAnimationFrame &&
+      window.cancelAnimationFrame(animationFrameId);
+  }, [menuData]);
 
-
+  useEffect(() => {
+    if (isMobile === true) {
+      if (onCollapse) {
+        onCollapse(true);
+      }
+    }
+  }, [isMobile]);
 
   const omitProps = Omit(props, ['className', 'style']);
 
