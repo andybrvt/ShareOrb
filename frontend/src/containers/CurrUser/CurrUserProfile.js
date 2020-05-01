@@ -77,7 +77,7 @@ class CurrUserProfile extends React.Component{
               </div>
               <div className="name">
                 <h4 className="title test">
-                  Jane Faker-- Andy you like that ass? <br />
+                  Jane Faker<br />
                 </h4>
                 <h6 className="description">Music Producer</h6>
               </div>
