@@ -16,29 +16,47 @@ import {
 import {Link} from 'react-router-dom';
 import * as dateFns from 'date-fns';
 
+import { Drawer, Layout} from 'antd';
 
 
-
-
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default class SideMenu extends React.Component {
-  state = {
-    collapsed: false,
-  };
+  state = { visible: false,
+   collapsed: false, };
 
-  toggleCollapsed = () => {
+  showDrawer = () => {
     this.setState({
-      collapsed: !this.state.collapsed,
+      visible: true,
     });
   };
 
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+
+  toggleCollapsed = () => {
+      this.setState({
+        collapsed: !this.state.collapsed,
+      });
+    };
   render() {
     const currentDay = new Date()
     console.log(currentDay)
     const selectYear = dateFns.getYear(currentDay).toString()
     const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     return (
+
+      <div>
+
+      { /*
+
+        */
+      }
       <div style={{ width: 200 }}>
         <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
           {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
@@ -126,6 +144,29 @@ export default class SideMenu extends React.Component {
           </SubMenu>
         </Menu>
       </div>
+
+
+      <Button type="primary" onClick={this.showDrawer} style={{ marginBottom: 16 }}>
+           Open
+       </Button>
+      <Drawer
+          title="Basic Drawer"
+          placement="right"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
+
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <Sider>
+
+
+          </Sider>
+      </Drawer>
+
+     </div>
     );
   }
 }

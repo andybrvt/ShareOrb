@@ -17,7 +17,7 @@ import ProfileDropDown from './GlobalHeader/ProfileDropDown.js';
 import SideMenu from '../components/SideMenu/SideMenu';
 import SiderMenuWrapper from '../components/SideMenu/test';
 import './Layouts.css';
-
+import Test from '../components/SideMenu/index.tsx';
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -330,7 +330,7 @@ class CustomLayout extends React.Component {
 
                   {
                       this.props.isAuthenticated ?
-                      <SideMenu  className = ''/>
+                      <SideMenu  className = 'test'/>
                   :
                      <div>  </div>
                   }

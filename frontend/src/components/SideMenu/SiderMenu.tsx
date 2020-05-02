@@ -115,14 +115,14 @@ const SiderMenu: React.FC<SiderMenuProps> = (props) => {
           {headerDom}
         </div>
       )}
-      {flatMenus && (
+      {
         <BaseMenu
           {...props}
           mode="inline"
           handleOpenChange={onOpenChange}
           style={{ padding: '16px 0', width: '100%' }}
         />
-      )}
+      }
       {links && links.length > 0 && (
         <div className="ant-pro-sider-menu-links">
           <Menu

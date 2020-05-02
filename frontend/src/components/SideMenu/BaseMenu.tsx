@@ -260,7 +260,7 @@ const BaseMenu: React.FC<BaseMenuProps> = (props) => {
     menuData,
     menu = { locale: true },
     iconfontUrl,
-    selectedKeys: propsSelectedKeys,
+
     onSelect,
     openKeys: propsOpenKeys,
   } = props;
@@ -271,120 +271,26 @@ const BaseMenu: React.FC<BaseMenuProps> = (props) => {
 
   const [defaultOpenAll, setDefaultOpenAll] = useState(menu.defaultOpenAll);
 
-  const [openKeys, setOpenKeys] = useMergeValue<
-    WithFalse<string[] | undefined>
-  >(
-    () => {
-      if (menu.defaultOpenAll) {
-        return getOpenKeysFromMenuData(menuData) || [];
-      }
-      if (propsOpenKeys === false) {
-        return false;
-      }
-      return [];
-    },
-    {
-      value: propsOpenKeys === false ? undefined : propsOpenKeys,
-      onChange: handleOpenChange as any,
-    },
-  );
 
-  useEffect(() => {
-    if (!flatMenus || flatMenuKeys.length === 0) {
-      return;
-    }
-    if (menu.defaultOpenAll || propsOpenKeys === false) {
-      return;
-    }
-    const keys = getSelectedMenuKeys(
-      location.pathname || '/',
-      flatMenus,
-      flatMenuKeys || [],
-    );
-    setOpenKeys(keys);
-  }, [flatMenus, flatMenuKeys.join('-')]);
 
-  const [selectedKeys, setSelectedKeys] = useMergeValue<string[] | undefined>(
-    [],
-    {
-      value: propsSelectedKeys,
-      onChange: onSelect
-        ? (keys) => {
-            if (onSelect && keys) {
-              onSelect(keys as any);
-            }
-          }
-        : undefined,
-    },
-  );
-
-  useEffect(() => {
-    // reset IconFont
-    if (iconfontUrl) {
-      IconFont = createFromIconfontCN({
-        scriptUrl: iconfontUrl,
-      });
-    }
-  }, [iconfontUrl]);
-
-  useEffect(() => {
-    if (!flatMenus || flatMenuKeys.length === 0) {
-      return () => null;
-    }
-
-    // if pathname can't match, use the nearest parent's key
-    const keys = getSelectedMenuKeys(
-      pathname || '/',
-      flatMenus,
-      flatMenuKeys || [],
-    );
-
-    const animationFrameId = requestAnimationFrame(() => {
-      setSelectedKeys(keys);
-      if (!defaultOpenAll && propsOpenKeys !== false) {
-        setOpenKeys(keys);
-      } else {
-        setDefaultOpenAll(false);
-      }
-    });
-    return () =>
-      window.cancelAnimationFrame &&
-      window.cancelAnimationFrame(animationFrameId);
-  }, [pathname, flatMenuKeys.join('-')]);
-
-  const openKeysProps = getOpenKeysProps(openKeys, props);
-  const cls = classNames(className, {
-    'top-nav-menu': mode === 'horizontal',
-  });
   const menuUtils = new MenuUtil(props);
 
   const postData = props.postMenuData ? props.postMenuData(menuData) : menuData;
 
-  // 这次 openKeys === false 的时候的情况，这种情况下帮用户选中一次
-  // 第二次以后不再关系，所以用了 defaultOpenKeys
-  if (props.openKeys === false && !props.handleOpenChange) {
-    const keys = getSelectedMenuKeys(
-      location.pathname || '/',
-      flatMenus,
-      flatMenuKeys || [],
-    );
-    defaultOpenKeysRef.current = keys;
-    if (keys.length < 1) {
-      return null;
-    }
-  }
+
 
   return (
     <Menu
-      {...openKeysProps}
+
       key="Menu"
       mode={mode}
       defaultOpenKeys={defaultOpenKeysRef.current}
       theme={theme}
-      selectedKeys={selectedKeys}
+
+
       style={style}
-      className={cls}
-      onOpenChange={setOpenKeys}
+
+
       {...props.menuProps}
     >
       {menuUtils.getNavMenuItems(postData)}
