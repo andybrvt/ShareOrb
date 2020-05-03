@@ -9,6 +9,8 @@ import { DatePicker } from 'antd';
 import * as dateFns from 'date-fns';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent'
+import moment from 'moment';
+
 
 
 
@@ -85,30 +87,17 @@ class EditEventForm extends React.Component{
     const type = e.target.name;
     const value = e.target.value;
     this.props.changeEvent(e)
-    console.log(this.props.title)
-    console.log(this.props.content)
-    if(type === 'title'){
-      this.setState({
-        title: value
-      })
-    } else if (type === 'content'){
-      this.setState({
-        content: value
-    })} else if (type === "start_time"){
-      this.setState({
-        start_time: value
-    })} else if (type === "end_time"){
-      this.setState ({
-        end_time: value
-    })} else if (type === "location"){
-      this.setState ({
-        location: value
-    })}
   }
 
     // you cannot use on change with the states anymore because your value is now
     // in redux so you have to do change states in redux
   render (){
+    console.log(this.props.start_time)
+    console.log(this.props.end_time.toString())
+    const dateFormat = 'YYYY-MM-DD'
+    // const date = new Date(this.props.start_time)
+    // const start_date = dateFns.format(date, dateFormat).substr(0,10)
+    // console.log(start_date)
     return (
       <Container style={{paddingTop: '10',zIndex:'-1'}}>
     	  <form onSubmit={this.onFormSubmit}>
@@ -122,10 +111,10 @@ class EditEventForm extends React.Component{
     				 style={{width: '300px', height:'100px'}}/>
             <br />
             Start Date
-    				<DatePicker name = "start" onChange={this.onChange} value = {this.state.start_time}/>
+    				<DatePicker name = "start" onChange={this.onChange} value = {moment(this.props.start_time, dateFormat)} format ={dateFormat}/>
             <br />
             End Date
-            <DatePicker name = "end" onChange={this.onChange} value = {this.state.end_time}/>
+            <DatePicker name = "end" onChange={this.onChange} value = {moment(this.props.end_time, dateFormat)}/>
             <br />
             Location
             <input type="text" name="location" onChange= {this.onChange} value ={this.props.location}/>
