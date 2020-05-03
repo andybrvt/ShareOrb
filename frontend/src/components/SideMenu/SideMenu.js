@@ -24,7 +24,7 @@ const { SubMenu } = Menu;
 
 export default class SideMenu extends React.Component {
   state = { visible: false,
-   collapsed: false, };
+   collapsed: true, };
 
   showDrawer = () => {
     this.setState({
@@ -112,20 +112,7 @@ export default class SideMenu extends React.Component {
             <span>Social Calendar </span>
           </Link>
         </Menu.Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <MailOutlined />
-                <span>Navigation One</span>
-              </span>
-            }
-          >
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
+        
           <SubMenu
             key="sub2"
             title={
@@ -147,15 +134,17 @@ export default class SideMenu extends React.Component {
 
 
       <Button type="primary" onClick={this.showDrawer} style={{ marginBottom: 16 }}>
-           Open
+           Test
        </Button>
       <Drawer
           title="Basic Drawer"
-          placement="right"
+
           closable={false}
+          width={840}
+          placement="left"
           onClose={this.onClose}
           visible={this.state.visible}
-
+          style={{ marginBottom: 16 }}
         >
           <p>Some contents...</p>
           <p>Some contents...</p>

@@ -38,7 +38,7 @@ class EventDrawer extends React.Component {
     return (
       <div>
         <Drawer
-          width={840}
+          width={440}
           placement="left"
           onClose={this.props.onClose}
           visible={this.props.visible}

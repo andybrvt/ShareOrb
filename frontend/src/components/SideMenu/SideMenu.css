@@ -138,3 +138,9 @@
     opacity: 1;
   }
 }
+
+
+testIcon {
+  width: 24px;
+  vertical-align: baseline;
+}
