@@ -220,7 +220,7 @@ class PersonalCalendar extends React.Component{
             <ul className = 'monthList'>
               {toDoStuff.map(item => (
                 <li key={item.content} className = 'monthListItem'>
-                  <div onClick = {this.onClickItem}>
+                  <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(new Date(item.start_time), 'ha')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
@@ -305,9 +305,8 @@ class PersonalCalendar extends React.Component{
   }
 
 
-
-  onClickItem = () =>{
-    this.props.openModal()
+  onClickItem = oneEvent =>{
+    this.props.openModal(oneEvent)
   }
 
 
@@ -319,7 +318,7 @@ class PersonalCalendar extends React.Component{
         <AddEventPopUp
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
-
+        oneEvent = {this.props.oneEvent}
         />
             <List
               dataSource={[
@@ -370,7 +369,8 @@ const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
-    currentDate: state.calendar.date
+    currentDate: state.calendar.date,
+    oneEvent: state.calendarEvent.oneEvent
   }
 }
 
@@ -380,7 +380,7 @@ const mapDispatchToProps = dispatch => {
   return {
     closeDrawer: () => dispatch(navActions.closePopup()),
     openDrawer: () => dispatch(navActions.openPopup()),
-    openModal: () => dispatch(calendarEventActions.openEventModal()),
+    openModal: oneEvent => dispatch(calendarEventActions.openEventModal(oneEvent)),
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(calendarActions.nextMonth()),
