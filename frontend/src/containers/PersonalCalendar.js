@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent'
@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import AddEventPopUp from '../components/AddEventPopUp';
 import { NavLink } from 'react-router-dom';
+
+import { UserOutlined } from '@ant-design/icons';
 
 
 
@@ -54,7 +56,7 @@ class PersonalCalendar extends React.Component{
     // you bascially want to check if the date in props and the date in
     // the url is the safe, if they are not --> you gotta change it
     if (this.props.currentDate !== newProps.currentDate){
-      console.log('RIGHT FUCKING HERE')
+
       const year = dateFns.getYear(newProps.currentDate)
       const month = dateFns.getMonth(newProps.currentDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
@@ -359,7 +361,16 @@ class PersonalCalendar extends React.Component{
             {this.renderCells(this.state.events)}
           </div>
         </div>
-      </div>
+
+
+        <Tag color="geekblue">Invite Friends</Tag>
+          <Avatar icon={<UserOutlined />} />
+          <Avatar>U</Avatar>
+          <Avatar>USER</Avatar>
+          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+          <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        </div>
     )
   }
 }
