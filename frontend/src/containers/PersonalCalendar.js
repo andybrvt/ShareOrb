@@ -370,7 +370,6 @@ const mapStateToProps = state => {
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
-    oneEvent: state.calendarEvent.oneEvent
   }
 }
 

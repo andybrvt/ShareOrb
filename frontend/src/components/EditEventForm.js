@@ -71,23 +71,28 @@ class EditEventForm extends React.Component{
       const post = {
         'title': this.props.title,
         'content': this.props.content,
-        'start_time': this.state.start_time,
-        'end_time': this.state.end_time,
+        'start_time': this.props.start_time,
+        'end_time': this.props.end_time,
         'location': this.props.location,
         'user_id': this.props.id,
         // 'person': person,
       };
       console.log(post)
-      this.make_post(post);
+      // this.make_post(post);
 
     }
   }
 
   onChange = e => {
-    const type = e.target.name;
-    const value = e.target.value;
-    this.props.changeEvent(e)
+    console.log(e._isAMomentObject)
+    if (e._isAMomentObject){
+      console.log('yea')
+    } else{
+      this.props.changeEvent(e)
+    }
+
   }
+
 
     // you cannot use on change with the states anymore because your value is now
     // in redux so you have to do change states in redux
@@ -114,7 +119,7 @@ class EditEventForm extends React.Component{
     				<DatePicker name = "start" onChange={this.onChange} value = {moment(this.props.start_time, dateFormat)} format ={dateFormat}/>
             <br />
             End Date
-            <DatePicker name = "end" onChange={this.onChange} value = {moment(this.props.end_time, dateFormat)}/>
+            <DatePicker name = "end" onChange={this.onChange} value = {moment(this.props.end_time, dateFormat)} format = {dateFormat}/>
             <br />
             Location
             <input type="text" name="location" onChange= {this.onChange} value ={this.props.location}/>

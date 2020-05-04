@@ -39,10 +39,10 @@ const changeCalendarEvent = (state, action) => {
   })} else if (type === 'content'){
     return updateObject (state, {
       content: value
-  })} else if (type === 'start_time'){
+  })} else if (type === 'start'){
     return updateObject (state, {
       start_time: value
-  })} else if (type === 'end_time'){
+  })} else if (type === 'end'){
     return updateObject (state, {
       end_time: value
   })} else if (type === 'location'){

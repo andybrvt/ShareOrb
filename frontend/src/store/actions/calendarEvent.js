@@ -17,6 +17,7 @@ export const closeEventModal = () => {
 }
 
 export const changeCalendarEvent = e =>{
+  console.log(e)
   return {
     type: actionTypes.CHANGE_CALENDAR_EVENT,
     test: e,

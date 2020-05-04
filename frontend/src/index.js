@@ -6,11 +6,12 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth';
-import navReducer from './store/reducers/nav'
-import messageReducer from './store/reducers/messages'
-import notificationsReducer from './store/reducers/notifications'
-import calendarReducer from './store/reducers/calendars'
-import calendarEventReducer from './store/reducers/calendarEvent'
+import navReducer from './store/reducers/nav';
+import messageReducer from './store/reducers/messages';
+import notificationsReducer from './store/reducers/notifications';
+import calendarReducer from './store/reducers/calendars';
+import calendarEventReducer from './store/reducers/calendarEvent';
+import {reducer as formReducer } from 'redux-form';
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   notifications: notificationsReducer,
   calendar: calendarReducer,
   calendarEvent: calendarEventReducer,
+  form: formReducer
 })
 //store takes in reducer and an enhancer to handle the middleware
 
