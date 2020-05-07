@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Article from '../components/Article';
-import Listitems from '../components/NewsFeedListitems';
+
+import Listitems from '../components/NewsfeedItems/NewsFeedPost';
 import { authAxios } from '../components/util';
 
 

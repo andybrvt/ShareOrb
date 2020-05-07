@@ -1,6 +1,7 @@
 import React from "react";
 
-import Comments from '../containers/comments/comments.js'
+import "./NewsfeedPost.css";
+import Comments from '../../containers/comments/comments.js'
 
 const Result = (props) => {
   console.log(props.data.image)
@@ -17,9 +18,9 @@ const Result = (props) => {
           <b>Date:</b> {props.data.created_at}
         </span>
         <br></br>
-        <span>
-          <b>Username:</b> {props.data.user.username}
-        </span>
+        <div className="testFont">
+          {props.data.user.username}
+        </div>
         <br></br>
 
 
