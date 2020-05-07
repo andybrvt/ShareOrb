@@ -5,7 +5,7 @@ import { authAxios } from '../components/util';
 import axios from 'axios';
 import { Button, Tooltip } from 'antd';
 import { connect } from 'react-redux';
-import AddEventPopUp from '../components/AddEventPopUp';
+import EditEventPopUp from '../components/EditEventPopUp';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent'
 import * as calendarActions from '../store/actions/calendars'
@@ -295,7 +295,7 @@ class WeekCalendar extends React.Component{
     return (
     <div className = 'calendarContainer'>
         <div className = 'flex-container'>
-        <AddEventPopUp
+        <EditEventPopUp
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />

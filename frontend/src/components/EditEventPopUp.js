@@ -1,25 +1,38 @@
 import React from 'react';
 import { Modal } from 'antd';
 import CalendarForm from './CalendarForm';
-import EditEventForm from './EditEventForm';
-import ReduxFormTest from './ReduxFormTest';
+import ReduxEditEventForm from './ReduxEditEventForm';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import { connect } from "react-redux";
 import * as dateFns from 'date-fns';
+import axios from 'axios';
+import { authAxios } from './util';
+import moment from 'moment';
 
 
 
-class AddEventPopUp extends React.Component {
+class EditEventPopUp extends React.Component {
   //         <EditEventForm  {...this.props}/>
   submit = (values) => {
-    console.log(values)
+    const calendarId = this.props.calendarId
+    const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
+    const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
+
+    authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
+      title: values.title,
+      content: values.content,
+      start_time: start_time,
+      end_time: start_time,
+      location: values.location,
+      person: [this.props.id]
+    })
+    // this.props.close()
   }
 
   // So you pass the intial values into your form but you will have to pass
   // it as a dictioanry with each one being a key corresponding with each input
   getInitialValue = () => {
-    console.log(dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd'))
     return{
       title: this.props.title,
       content: this.props.content,
@@ -40,7 +53,7 @@ class AddEventPopUp extends React.Component {
           visible = {this.props.isVisible}
           onCancel= {this.props.close}
         >
-        <ReduxFormTest
+        <ReduxEditEventForm
         onSubmit = {this.submit}
         initialValues = {this.getInitialValue()}  />
         </Modal>
@@ -56,6 +69,8 @@ const mapStateToProps = state => {
     start_time: state.calendarEvent.start_time,
     end_time: state.calendarEvent.end_time,
     location: state.calendarEvent.location,
+    calendarId: state.calendarEvent.calendarId,
+    id: state.auth.id,
   }
 }
 
@@ -66,4 +81,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddEventPopUp);
+export default connect(mapStateToProps, mapDispatchToProps)(EditEventPopUp);

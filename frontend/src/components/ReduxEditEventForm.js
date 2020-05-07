@@ -5,13 +5,13 @@ import * as calendarEventActions from '../store/actions/calendarEvent';
 import { connect } from "react-redux";
 
 
+// You can also validate the fields on the forms btw
+
+
 // input component must be place in a Field component inorder to
 // have props such as value, onChange and stuff be passed in
 // Field basically replaces <input>
 
-const onSubmit = value => {
-  console.log(value)
-}
 
 // So in order to have more control over your input types you can make
 // your own components and pass them into the compoents of field
@@ -20,14 +20,13 @@ const onSubmit = value => {
 // passed into the renderField
 // With the props passed in, it makes it pretty 'universal' to all the Fields in the form
 const renderField = (field) => {
-  console.log(field)
   return (
   <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
   )
 }
 
 
-class ReduxFormTest extends React.Component{
+class ReduxEditEventForm extends React.Component{
 
     render(){
       console.log(this.props)
@@ -80,10 +79,10 @@ class ReduxFormTest extends React.Component{
 // the form state and functions to handle submission
 
 // In order to modify this you have to call a constant outside the class
-ReduxFormTest = reduxForm({
-  form: 'contact', //you will give the form a name
-  enableReinitialize: true,
-})(ReduxFormTest);
+ReduxEditEventForm = reduxForm({
+  form: 'edit event', //you will give the form a name
+  enableReinitialize: true, //This will reintialzie the prestine values everytime, the props changes
+})(ReduxEditEventForm);
 
 
 
@@ -92,4 +91,4 @@ ReduxFormTest = reduxForm({
 // you can pass those inputs into an action created by the redux form then those actions will
 // be dispatched in into the reducers then the reduces will change the states and then if there is
 // an onchange or whatever, changes the Fields in the forms
-export default ReduxFormTest;
+export default ReduxEditEventForm;

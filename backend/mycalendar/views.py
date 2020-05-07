@@ -32,4 +32,10 @@ class CalendarEventsView(generics.ListAPIView):
 
 class CalendarEventsCreate(generics.CreateAPIView):
     serializer_class = serializers.CreateEventSerializer
-    queryset = models.Calendar.objects.all()
+    queryset = models.Event.objects.all()
+
+class CalendarEventUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.UpdateEventSerialzier
+    lookup_field = 'id'
+    queryset = models.Event.objects.all()
+    

@@ -8,7 +8,8 @@ const initialState = {
   content: '',
   start_time: null,
   end_time: null,
-  location: ''
+  location: '',
+  calendarId: '',
 }
 
 const openEventModal = (state, action) => {
@@ -18,7 +19,8 @@ const openEventModal = (state, action) => {
     content: action.oneEvent.content,
     start_time: action.oneEvent.start_time,
     end_time: action.oneEvent.end_time,
-    location: action.oneEvent.location
+    location: action.oneEvent.location,
+    calendarId: action.oneEvent.id
   });
 };
 

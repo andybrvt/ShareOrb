@@ -10,7 +10,7 @@ import * as calendarEventActions from '../store/actions/calendarEvent'
 import * as calendarActions from '../store/actions/calendars'
 import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
-import AddEventPopUp from '../components/AddEventPopUp';
+import EditEventPopUp from '../components/EditEventPopUp';
 import { NavLink } from 'react-router-dom';
 
 import { UserOutlined } from '@ant-design/icons';
@@ -317,7 +317,7 @@ class PersonalCalendar extends React.Component{
     // className is to determine the style
     return(
       <div className = 'calendarContainer'>
-        <AddEventPopUp
+        <EditEventPopUp
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />

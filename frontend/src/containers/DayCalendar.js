@@ -5,7 +5,7 @@ import { authAxios } from '../components/util';
 import { Button, Tooltip } from 'antd';
 import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
-import AddEventPopUp from '../components/AddEventPopUp';
+import EditEventPopUp from '../components/EditEventPopUp';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import * as calendarActions from '../store/actions/calendars';
@@ -214,7 +214,7 @@ class DayCalendar extends React.Component{
     return (
       <div className = 'calendarContainer'>
         <div className = 'calendar'>
-        <AddEventPopUp
+        <EditEventPopUp
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />

@@ -4,6 +4,7 @@ import * as actionTypes from './actionTypes';
 // The event added to the openEventModal is to pass the event into
 // the default list
 export const openEventModal = oneEvent => {
+  console.log(oneEvent)
   return {
     type: actionTypes.OPEN_EVENT_MODAL,
     oneEvent: oneEvent
