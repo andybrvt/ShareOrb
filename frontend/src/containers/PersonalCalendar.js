@@ -320,7 +320,6 @@ class PersonalCalendar extends React.Component{
         <AddEventPopUp
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
-        oneEvent = {this.props.oneEvent}
         />
             <List
               dataSource={[
