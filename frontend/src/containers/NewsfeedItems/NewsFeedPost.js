@@ -11,7 +11,7 @@ const Result = (props) => {
     <div>
       <li>
         <span>
-          <b>Title:</b> {props.data.caption}
+          <b>Title:</b>{props.data.user.username}
         </span>
         <br></br>
         <span>
@@ -19,7 +19,7 @@ const Result = (props) => {
         </span>
         <br></br>
         <div className="testFont">
-          {props.data.user.username}
+          {props.data.caption}
         </div>
         <br></br>
 

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Adobe Clean';
+    src: local('Adobe Clean Regular'), local('Adobe-Clean-Regular'),
+        url('AdobeClean-Regular.woff2') format('woff2'),
+        url('AdobeClean-Regular.woff') format('woff'),
+        url('AdobeClean-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
