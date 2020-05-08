@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Popover, Button } from 'antd';
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 
@@ -9,16 +9,27 @@ const Result = (props) => {
   return (
 
     <div>
-      <li>
+
         <span>
-          <b>Title:</b>{props.data.user.username}
+        <Popover content={
+          <div>
+            <p>Content</p>
+            <p>Content</p>
+          </div>
+          }
+          title={props.data.user.username}
+          placement="topLeft"
+          >
+         <Button> {props.data.user.username} </Button>
+        </Popover>
+
         </span>
         <br></br>
         <span>
           <b>Date:</b> {props.data.created_at}
         </span>
         <br></br>
-        <div className="testFont">
+        <div className="testwithAnt">
           {props.data.caption}
         </div>
         <br></br>
@@ -51,7 +62,7 @@ const Result = (props) => {
 
         </div>
         <Comments/>
-      </li>
+
       <hr />
     </div>
   );
