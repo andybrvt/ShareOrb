@@ -2,13 +2,22 @@ import React from "react";
 import { Popover, Button } from 'antd';
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
-
+import { Skeleton, Switch, Card, Avatar } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 const Result = (props) => {
   console.log(props.data.image)
   let temp="http://127.0.0.1:8000"+props.data.image;
   return (
 
     <div>
+    <Card
+       style={{ width: 600, marginTop: 16 }}
+       actions={[
+         <SettingOutlined key="setting" />,
+         <EditOutlined key="edit" />,
+         <EllipsisOutlined key="ellipsis" />,
+       ]}
+     >
 
         <span>
         <Popover content={
@@ -29,9 +38,9 @@ const Result = (props) => {
           <b>Date:</b> {props.data.created_at}
         </span>
         <br></br>
-        <div className="testwithAnt">
+        <h2 className="RobotoFont">
           {props.data.caption}
-        </div>
+        </h2>
         <br></br>
 
 
@@ -61,9 +70,12 @@ const Result = (props) => {
 
 
         </div>
-        <Comments/>
 
-      <hr />
+
+
+
+      </Card>
+      <Comments className="RobotoFont"/>
     </div>
   );
 };
