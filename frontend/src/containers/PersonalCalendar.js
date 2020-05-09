@@ -44,15 +44,16 @@ class PersonalCalendar extends React.Component{
     const newDate = [selectedYear, selectedMonth]
     const newSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newSelectedDate)
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .then(res => {
-      this.setState({
-        events: res.data
-      })
-    })
+    this.props.getEvents()
+    console.log('start here')
   }
 
   componentWillReceiveProps(newProps){
+    console.log(this.props)
+    console.log(newProps)
+    console.log(JSON.stringify(this.props.events))
+    console.log(JSON.stringify(newProps.events))
+    console.log(JSON.stringify(this.props.events) !== JSON.stringify(newProps.events))
     // you bascially want to check if the date in props and the date in
     // the url is the safe, if they are not --> you gotta change it
     if (this.props.currentDate !== newProps.currentDate){
@@ -61,13 +62,11 @@ class PersonalCalendar extends React.Component{
       const month = dateFns.getMonth(newProps.currentDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
     }
+    if (JSON.stringify(this.props.events) !== JSON.stringify(newProps.events)){
+      // this.props.getEvents()
+      console.log('hi')
 
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .then(res => {
-      this.setState({
-        events: res.data
-      })
-    })
+    }
   }
   // When working with dates it is important that you format the
   // the date properly
@@ -113,6 +112,10 @@ class PersonalCalendar extends React.Component{
     return <div className = "days row"> {days} </div>
   }
 
+  checkArrays = (array1, array2) => {
+
+  }
+
   renderSide() {
     // So what you want is to get the date of the first day of each week
     // so that you can pass it into the tab so it can open up the selected week
@@ -124,7 +127,6 @@ class PersonalCalendar extends React.Component{
     const startFirstWeek = dateFns.startOfWeek(startDateMonth);
     // this will give us the first day of the week of the last week in the chart
     const startLastWeek = dateFns.startOfWeek(endDateMonth);
-    console.log(startLastWeek);
     // because the strt of first week changes with the loop we have to save it as
     // let
     let date = startFirstWeek;
@@ -147,7 +149,6 @@ class PersonalCalendar extends React.Component{
       )
       date = dateFns.addWeeks(date, 1)
     }
-    console.log(week)
     return <div className ='sideBar'> {week} </div>
   }
 
@@ -270,11 +271,9 @@ class PersonalCalendar extends React.Component{
   // so we need function to deal with cell click to change the date
   // Then you need function to show previous and next monthly
   onDateClick = day => {
-    console.log(day)
     const selectYear = dateFns.getYear(day).toString()
     const selectMonth = (dateFns.getMonth(day)+1).toString()
     const selectDay = dateFns.getDate(day).toString()
-    console.log(selectYear, selectMonth,selectDay)
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
@@ -283,11 +282,9 @@ class PersonalCalendar extends React.Component{
 // of the week for the end of the month
 
   onWeekClick = startDayWeek => {
-    console.log(startDayWeek)
     const selectedYear = dateFns.getYear(startDayWeek).toString()
     const selectedMonth = (dateFns.getMonth(startDayWeek)+1).toString()
     const selectedDay = dateFns.getDate(startDayWeek).toString()
-    console.log(selectedYear, selectedMonth, selectedDay)
     this.setState({
       selectedDate: startDayWeek
     })
@@ -313,8 +310,8 @@ class PersonalCalendar extends React.Component{
 
 
   render(){
-    console.log(this.props)
     // className is to determine the style
+    console.log(this.props)
     return(
       <div className = 'calendarContainer'>
         <EditEventPopUp
@@ -357,7 +354,7 @@ class PersonalCalendar extends React.Component{
           <div className = 'calendar'>
             {this.renderHeader()}
             {this.renderDays()}
-            {this.renderCells(this.state.events)}
+            {this.renderCells(this.props.events)}
           </div>
         </div>
 
@@ -380,6 +377,7 @@ const mapStateToProps = state => {
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
+    events: state.calendar.events
   }
 }
 
@@ -393,7 +391,8 @@ const mapDispatchToProps = dispatch => {
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(calendarActions.nextMonth()),
-    prevMonth: () => dispatch(calendarActions.prevMonth())
+    prevMonth: () => dispatch(calendarActions.prevMonth()),
+    getEvents: () => dispatch(calendarActions.getUserEvents())
   }
 }
 

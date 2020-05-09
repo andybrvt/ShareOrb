@@ -1,6 +1,7 @@
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
 import React, { Component } from 'react';
-import CalendarForm from './CalendarForm'
+import CalendarForm from './CalendarForm';
+import ReduxAddEventForm from './ReduxAddEventForm';
 
 const pStyle = {
   fontSize: 16,
@@ -43,7 +44,7 @@ class EventDrawer extends React.Component {
           onClose={this.props.onClose}
           visible={this.props.visible}
         >
-        <CalendarForm {...this.props}/>
+        <ReduxAddEventForm {...this.props}/>
         </Drawer>
       </div>
     );

@@ -27,8 +27,6 @@ class App extends Component {
   }
 
   componentWillReceiveProps(newProps){
-    console.log(newProps)
-    console.log('right here')
     // NotificationWebSocketInstance.connect(newProps.username)
   }
 
@@ -46,7 +44,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <Router>

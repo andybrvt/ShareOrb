@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { DatePicker } from 'antd';
 import * as dateFns from 'date-fns';
 import * as navActions from '../store/actions/nav'
+import * as calendarActions from '../store/actions/calendars'
 
 
 
@@ -79,6 +80,7 @@ const CalendarForm = (props) => {
 			};
 			make_post(post);
 
+
 		}
   }
   // basically all you reall need is an onchange, and value in your input fields
@@ -131,6 +133,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addEvents: (events) => dispatch(calendarActions.addEvent(events)),
     closePopup: () => dispatch(navActions.closePopup())
   }
 }

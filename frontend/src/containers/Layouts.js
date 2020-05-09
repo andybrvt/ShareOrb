@@ -71,8 +71,6 @@ class CustomLayout extends React.Component {
   async componentDidMount(){
     await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
       .then(res=> {
-        console.log(res.data)
-        console.log(res.data.id)
         this.setState({
           username: res.data.username,
        });
@@ -82,7 +80,6 @@ class CustomLayout extends React.Component {
    getNoticeData = () => {
        const notices = this.state.testData;
 
-       console.log(notices)
        if (!notices || notices.length === 0 || !Array.isArray(notices)) {
          return {};
        }
@@ -126,7 +123,6 @@ class CustomLayout extends React.Component {
     render() {
       const currentUser = this.state.username
       const noticeData = this.getNoticeData();
-      console.log(this.props)
       const menu = (
             <Menu>
               <Menu.Item>

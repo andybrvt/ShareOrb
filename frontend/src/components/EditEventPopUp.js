@@ -4,6 +4,7 @@ import CalendarForm from './CalendarForm';
 import ReduxEditEventForm from './ReduxEditEventForm';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
+import * as calendarActions from '../store/actions/calendars';
 import { connect } from "react-redux";
 import * as dateFns from 'date-fns';
 import axios from 'axios';
@@ -27,7 +28,18 @@ class EditEventPopUp extends React.Component {
       location: values.location,
       person: [this.props.id]
     })
-    // this.props.close()
+    const instanceEvent = {
+      id: this.props.calendarId,
+      title: values.title,
+      content: values.content,
+      start_time: start_time,
+      end_time: start_time,
+      location: values.location,
+      person: [this.props.id]
+    }
+    console.log(instanceEvent)
+    this.props.editEvent(instanceEvent)
+    this.props.close()
   }
 
   // So you pass the intial values into your form but you will have to pass
@@ -77,7 +89,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     closePopup: () => dispatch(navActions.closePopup()),
-    changeEvent: (e) => dispatch(calendarEventActions.changeCalendarEvent(e))
+    changeEvent: (e) => dispatch(calendarEventActions.changeCalendarEvent(e)),
+    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    editEvent: (instanceEvent) => dispatch(calendarActions.editEvents(instanceEvent))
   }
 }
 

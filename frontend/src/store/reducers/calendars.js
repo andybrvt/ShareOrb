@@ -66,6 +66,23 @@ const prevDay = (state, action) => {
   })
 }
 
+// you will index out the value in the list with the value you are trying to edit
+// you will then change that value
+const editEvent = (state, action) => {
+  return updateObject(state, {
+    events: state.events.map(
+      item => item.id === action.instanceEvent.id ? {
+        ...item,
+        title: action.instanceEvent.title,
+        content: action.instanceEvent.content,
+        start_time: action.instanceEvent.start_time,
+        end_time: action.instanceEvent.end_time,
+        location: action.instanceEvent.location
+      } : item
+    )
+  })
+}
+
 // when an action gets called it will go into here and this will check what the
 // the type is
 const reducer = (state = initialState, action) => {
@@ -88,6 +105,8 @@ const reducer = (state = initialState, action) => {
       return nextDay(state, action);
     case actionTypes.PREV_DAY:
       return prevDay(state, action);
+    case actionTypes.EDIT_EVENT_CALENDAR:
+      return editEvent(state, action);
     default:
       return state;
   }
