@@ -83,9 +83,7 @@ const getIcon = (icon?: string | React.ReactNode): React.ReactNode => {
         />
       );
     }
-    if (icon.startsWith('icon-')) {
-      return <IconFont type={icon} />;
-    }
+
     if (firstConsole) {
       warning(
         false,
