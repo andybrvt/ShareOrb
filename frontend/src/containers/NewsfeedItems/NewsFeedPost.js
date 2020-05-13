@@ -3,7 +3,7 @@ import { Popover, Button } from 'antd';
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { Skeleton, Switch, Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined } from '@ant-design/icons';
 const Result = (props) => {
   console.log(props.data.image)
   let temp="http://127.0.0.1:8000"+props.data.image;
@@ -11,6 +11,7 @@ const Result = (props) => {
 
     <div>
     <Card
+
        style={{ width: 600, marginTop: 16 }}
        actions={[
          <SettingOutlined key="setting" />,
@@ -19,10 +20,15 @@ const Result = (props) => {
        ]}
      >
 
+
         <span>
         <Popover content={
           <div>
-            <p>Content</p>
+
+
+            <a href="/current-user" className="nav-text">
+              {props.data.user.username}
+            </a>
             <p>Content</p>
           </div>
           }
@@ -41,6 +47,17 @@ const Result = (props) => {
         <h2 className="RobotoFont">
           {props.data.caption}
         </h2>
+
+        <ArrowRightOutlined
+        style={{ marginLeft: 550 }}
+        size="32px"
+    
+
+        />
+        <ShareAltOutlined
+        style={{ marginLeft: 550 }}
+
+        />
         <br></br>
 
 
