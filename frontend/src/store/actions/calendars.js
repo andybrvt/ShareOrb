@@ -40,6 +40,15 @@ export const editEvents = events => {
   }
 }
 
+export const deleteEvents = eventId => {
+  console.log(eventId)
+  authAxios.delete('http://127.0.0.1:8000/mycalendar/events/delete/'+eventId)
+  return {
+    type: actionTypes.DELETE_EVENT_CALENDAR,
+    eventId: eventId
+  }
+}
+
 
 // This function will get the current date
 export const getDate = date =>{

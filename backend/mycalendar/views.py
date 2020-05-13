@@ -38,4 +38,8 @@ class CalendarEventUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.UpdateEventSerialzier
     lookup_field = 'id'
     queryset = models.Event.objects.all()
-    
+
+class CalendarEventDelete(generics.RetrieveDestroyAPIView):
+    serializer_class = serializers.DeleteEventSerializer
+    lookup_field = 'id'
+    queryset = models.Event.objects.all()

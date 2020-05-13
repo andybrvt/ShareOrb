@@ -10,12 +10,18 @@ import * as dateFns from 'date-fns';
 import axios from 'axios';
 import { authAxios } from './util';
 import moment from 'moment';
+import { Button, notification, Divider, Space } from 'antd';
+import {
+  RadiusBottomleftOutlined,
+  RadiusBottomrightOutlined,
+} from '@ant-design/icons';
 
 
 
 class EditEventPopUp extends React.Component {
   //         <EditEventForm  {...this.props}/>
   submit = (values) => {
+    console.log(values)
     const calendarId = this.props.calendarId
     const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
@@ -37,9 +43,24 @@ class EditEventPopUp extends React.Component {
       location: values.location,
       person: [this.props.id]
     }
-    console.log(instanceEvent)
     this.props.editEvent(instanceEvent)
     this.props.close()
+  }
+
+  openNotification = placement => {
+  notification.info({
+    message: `Event deleted`,
+    placement,
+    });
+  };
+
+  delete = (e,value) => {
+    e.preventDefault()
+    authAxios.delete('http://127.0.0.1:8000/mycalendar/events/delete/'+value)
+    this.props.deleteEvent(value)
+    this.openNotification('bottom')
+    this.props.close()
+
   }
 
   // So you pass the intial values into your form but you will have to pass
@@ -59,6 +80,7 @@ class EditEventPopUp extends React.Component {
     console.log(this.props)
     return (
       <div>
+      <RadiusBottomleftOutlined />
         <Modal
           centered
           footer = {null}
@@ -66,8 +88,10 @@ class EditEventPopUp extends React.Component {
           onCancel= {this.props.close}
         >
         <ReduxEditEventForm
+        {...this.props}
         onSubmit = {this.submit}
-        initialValues = {this.getInitialValue()}  />
+        initialValues = {this.getInitialValue()}
+        onDelete = {this.delete} />
         </Modal>
       </div>
     );
@@ -91,7 +115,8 @@ const mapDispatchToProps = dispatch => {
     closePopup: () => dispatch(navActions.closePopup()),
     changeEvent: (e) => dispatch(calendarEventActions.changeCalendarEvent(e)),
     getEvents: () => dispatch(calendarActions.getUserEvents()),
-    editEvent: (instanceEvent) => dispatch(calendarActions.editEvents(instanceEvent))
+    editEvent: (instanceEvent) => dispatch(calendarActions.editEvents(instanceEvent)),
+    deleteEvent: (eventId) => dispatch(calendarActions.deleteEvents(eventId))
   }
 }
 

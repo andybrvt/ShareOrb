@@ -18,6 +18,7 @@ export const closeEventModal = () => {
 }
 
 export const changeCalendarEvent = e =>{
+  // this is only for the onchange function for the modal 
   console.log(e)
   return {
     type: actionTypes.CHANGE_CALENDAR_EVENT,

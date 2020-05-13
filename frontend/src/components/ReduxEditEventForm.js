@@ -38,7 +38,7 @@ class ReduxEditEventForm extends React.Component{
       // You can put in initial values when you call the props initialValue
       // you can actually call it and modify it in a higher order component and it will change
       return(
-        <form onSubmit= {handleSubmit}>
+        <form>
           <div>
             <label htmlFor = 'title'> Title</label>
             <Field
@@ -63,7 +63,8 @@ class ReduxEditEventForm extends React.Component{
             <label htmlFor = 'location'>Location</label>
             <Field name = 'location' component= {renderField} type= 'text'/>
           </div>
-          <button type = 'submit'>Submit</button>
+          <button type = 'submit' onClick = {handleSubmit}>Submit</button>
+          <button onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}> Delete </button>
         </form>
       )
     }

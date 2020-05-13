@@ -181,7 +181,6 @@ class DayCalendar extends React.Component{
   }
 
   onWeekClick = () => {
-    console.log(this.state.selectedDate)
     const week = dateFns.startOfWeek(this.props.currentDate)
     const selectYear = dateFns.getYear(week).toString()
     const selectMonth = (dateFns.getMonth(week)+1).toString()
