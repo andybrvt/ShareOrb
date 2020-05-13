@@ -45,15 +45,9 @@ class PersonalCalendar extends React.Component{
     const newSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newSelectedDate)
     this.props.getEvents()
-    console.log('start here')
   }
 
   componentWillReceiveProps(newProps){
-    console.log(this.props)
-    console.log(newProps)
-    console.log(JSON.stringify(this.props.events))
-    console.log(JSON.stringify(newProps.events))
-    console.log(JSON.stringify(this.props.events) !== JSON.stringify(newProps.events))
     // you bascially want to check if the date in props and the date in
     // the url is the safe, if they are not --> you gotta change it
     if (this.props.currentDate !== newProps.currentDate){
@@ -62,11 +56,8 @@ class PersonalCalendar extends React.Component{
       const month = dateFns.getMonth(newProps.currentDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
     }
-    if (JSON.stringify(this.props.events) !== JSON.stringify(newProps.events)){
-      // this.props.getEvents()
-      console.log('hi')
-
-    }
+    // Instead of reloading the data everytime, the editing of the events is done in the
+    // redux
   }
   // When working with dates it is important that you format the
   // the date properly

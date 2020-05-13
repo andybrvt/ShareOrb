@@ -25,7 +25,6 @@ class WeekCalendar extends React.Component{
   }
 
   componentDidMount(){
-    console.log('hit')
     //I will be pulling the first day of the week to set the week
     const selectedYear = this.props.match.params.year;
     const selectedMonth = this.props.match.params.month;
@@ -35,15 +34,9 @@ class WeekCalendar extends React.Component{
     const newWeek = [selectedYear, selectedMonth, startWeekDay]
     const newSelectedDate = new Date(newWeek)
     this.props.getSelectedDate(newSelectedDate)
-    this.setState ({
-      selectedDate: newSelectedDate
-    })
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .then(res => {
-      this.setState({
-        events: res.data
-      })
-    })
+    // you want to call the events from the redux instead of the states
+    this.props.getEvents()
+
   }
 
   componentWillReceiveProps(newProps){
@@ -58,12 +51,6 @@ class WeekCalendar extends React.Component{
       const day = dateFns.getDate(newProps.currentDate)
       this.props.history.push('/personalcalendar/w/'+year+'/'+(month+1)+'/'+day)
     }
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .then(res => {
-      this.setState({
-        events: res.data
-      })
-    })
   }
 
   // This will be rending the header of the view, for weekly view, it will be
@@ -212,7 +199,7 @@ class WeekCalendar extends React.Component{
             <ul className = 'monthList'>
               {toDoStuff.map(item => (
                 <li key = {item.content} className = 'monthListItem'>
-                  <div onClick = {this.onClickItem}>
+                  <div onClick = {() => this.onClickItem(item)}>
                   <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
                   <span className = 'eventTime' > {item.content} </span>
                   </div>
@@ -282,8 +269,11 @@ class WeekCalendar extends React.Component{
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
-  onClickItem = () => {
-    this.props.openModal()
+  onClickItem = oneEvent => {
+    // The one event you put in here will just be data on one event
+    // it will be passed into the redux to calendarEvent openmodal and then
+    // be sent to the intital state where it will then open the Edit event popup
+    this.props.openModal(oneEvent)
   }
 
   onAddEvent = () => {
@@ -312,7 +302,7 @@ class WeekCalendar extends React.Component{
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             {this.renderHeader()}
             {this.renderDays()}
-            {this.renderWeekCell(this.state.events)}
+            {this.renderWeekCell(this.props.events)}
           </div>
 
         </div>
@@ -326,7 +316,8 @@ const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
-    currentDate: state.calendar.date
+    currentDate: state.calendar.date,
+    events: state.calendar.events
   }
 }
 
@@ -335,11 +326,12 @@ const mapDispatchToProps = dispatch => {
   return {
     closeDrawer: () => dispatch(navActions.closePopup()),
     openDrawer: () => dispatch(navActions.openPopup()),
-    openModal: () => dispatch(calendarEventActions.openEventModal()),
+    openModal: oneEvent => dispatch(calendarEventActions.openEventModal(oneEvent)),
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextWeek: () => dispatch(calendarActions.nextWeek()),
-    prevWeek: () => dispatch(calendarActions.prevWeek())
+    prevWeek: () => dispatch(calendarActions.prevWeek()),
+    getEvents: () => dispatch(calendarActions.getUserEvents())
   }
 }
 

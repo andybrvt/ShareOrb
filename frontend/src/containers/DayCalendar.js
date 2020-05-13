@@ -28,16 +28,10 @@ class DayCalendar extends React.Component{
     const newDate = [selectedYear, selectedMonth, selectedDay]
     const newsSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newsSelectedDate)
-    this.setState({
-      selectedDate: newsSelectedDate
-    })
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .then(res => {
-      this.setState({
-        events: res.data
-      })
-    })
+    this.props.getEvents()
   }
+
+
   componentWillReceiveProps(newProps){
     if (this.props.currentDate !== newProps.currentDate){
       const year = dateFns.getYear(newProps.currentDate)
@@ -45,12 +39,6 @@ class DayCalendar extends React.Component{
       const day = dateFns.getDate(newProps.currentDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1)+'/'+day)
     }
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
-    .then(res => {
-      this.setState({
-        events: res.data
-      })
-    })
   }
 
 // render the date on top
@@ -147,7 +135,7 @@ class DayCalendar extends React.Component{
           <ul className = 'monthList'>
             {toDoStuff.map(item => (
               <li key={item.content} className = 'monthListItem'>
-              <div onClick = {this.onClickItem}>
+              <div onClick = {() => this.onClickItem(item)}>
               <span className = ''> {dateFns.format(new Date(item.start_time), 'ha')}</span>
               <span className = ' ' > {item.content} </span>
               </div>
@@ -201,8 +189,8 @@ class DayCalendar extends React.Component{
     this.props.history.push('/personalcalendar/w/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
-  onClickItem = () =>{
-    this.props.openModal()
+  onClickItem = oneEvent =>{
+    this.props.openModal(oneEvent)
   }
 
   onOpenEvent = () => {
@@ -230,7 +218,7 @@ class DayCalendar extends React.Component{
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
           {this.renderHeader()}
           {this.renderHours()}
-          {this.renderCells(this.state.events)}
+          {this.renderCells(this.props.events)}
         </div>
       </div>
     )
@@ -241,7 +229,8 @@ const mapStateToProps = state => {
   return{
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
-    currentDate: state.calendar.date
+    currentDate: state.calendar.date,
+    events: state.calendar.events
   }
 }
 
@@ -249,11 +238,12 @@ const mapDispatchToProps = dispatch => {
   return {
     closeDrawer: () => dispatch(navActions.closePopup()),
     openDrawer: () => dispatch(navActions.openPopup()),
-    openModal: () => dispatch(calendarEventActions.openEventModal()),
+    openModal: oneEvent => dispatch(calendarEventActions.openEventModal(oneEvent)),
     closeModal: () => dispatch(calendarEventActions.closeEventModal()),
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextDay: () => dispatch(calendarActions.nextDay()),
-    prevDay: () => dispatch(calendarActions.prevDay())
+    prevDay: () => dispatch(calendarActions.prevDay()),
+    getEvents: () => dispatch(calendarActions.getUserEvents())
   }
 }
 
