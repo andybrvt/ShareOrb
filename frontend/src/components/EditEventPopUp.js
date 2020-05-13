@@ -56,7 +56,6 @@ class EditEventPopUp extends React.Component {
 
   delete = (e,value) => {
     e.preventDefault()
-    authAxios.delete('http://127.0.0.1:8000/mycalendar/events/delete/'+value)
     this.props.deleteEvent(value)
     this.openNotification('bottom')
     this.props.close()

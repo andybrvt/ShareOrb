@@ -288,6 +288,51 @@ main {
   left: 10px;
 }
 
+
+/* This is to control the year view */
+.calendar .body .yearcol {
+  flex-grow: 0;
+  flex-basis: calc(100%/4);
+  width: calc(100%/4);
+}
+
+.calendar .body .yearcell {
+  position: relative;
+  height: 20em;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  /* background: var(--neutral-color); */
+  transition: 0.25s ease-out;
+}
+
+.calendar .body .yearcell .monthcell .row{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.calendar .body .yearcell .monthcell .row .monthCellCol {
+  flex-grow: 0;
+  flex-basis: calc(100%/7);
+  width: calc(100%/7);
+}
+
+.calendar .body .yearcell .monthcell .row .monthDayCell {
+  position: relative;
+  height: 3em;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  /* background: var(--neutral-color); */
+  transition: 0.25s ease-out;
+}
+
+
+
 /* This is for the week view and to control the cell size */
 .calendar .body .hourcell {
   position: relative;
@@ -505,6 +550,8 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
+
+
 
 .calendar .sidepanel {
   float: left;
