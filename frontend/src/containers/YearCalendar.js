@@ -2,11 +2,30 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
+import * as calendarActions from '../store/actions/calendars'
+
 
 
 class YearCalendar extends React.Component{
   state = {
     currentYear: new Date(),
+  }
+
+  componentDidMount () {
+    const selectedYear = this.props.match.params.year;
+    const newDate = [selectedYear]
+    console.log(newDate)
+    const newSelectedDate = dateFns.addYears(new Date (newDate),1)
+    console.log(newSelectedDate)
+    this.props.getSelectedDate(newSelectedDate)
+  }
+
+  componentWillReceiveProps(newProps){
+    if (this.props.currentDate !== newProps.currentDate){
+
+      const year = dateFns.getYear(newProps.currentDate)
+      this.props.history.push('/personalcalendar/'+year)
+    }
   }
 
   renderYear() {
@@ -67,7 +86,6 @@ class YearCalendar extends React.Component{
   }
 
   renderDayInMonth = (month) =>{
-    console.log(month)
     // you would baiscally make this how you made the month view
     const currentMonth = new Date()
     const monthStart = dateFns.startOfMonth(month)
@@ -109,12 +127,12 @@ class YearCalendar extends React.Component{
     return <div className = 'monthcell'> {rows} </div>
   }
 
-  prevYear(){
-
+  prevYear = () =>{
+    this.props.prevYear()
   }
 
-  prevMonth(){
-
+  nextYear = () => {
+    this.props.nextYear()
   }
 
   render(){
@@ -136,10 +154,12 @@ const mapStateToProps = state =>{
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return (
-//
-//   )
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
+    nextYear: () => dispatch(calendarActions.nextYear()),
+    prevYear: () => dispatch(calendarActions.prevYear())
+  }
+}
 
-export default connect(mapStateToProps)(YearCalendar);
+export default connect(mapStateToProps, mapDispatchToProps)(YearCalendar);

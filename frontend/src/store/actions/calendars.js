@@ -93,3 +93,18 @@ export const prevDay = () => {
     type: actionTypes.PREV_DAY
   }
 }
+
+export const nextYear = () => {
+  console.log('nextYear')
+  console.log('herherherherh')
+  return {
+    type: actionTypes.NEXT_YEAR
+  }
+}
+
+export const prevYear = () => {
+  console.log('prevYear')
+  return {
+    type: actionTypes.PREV_YEAR
+  }
+}

@@ -30,6 +30,20 @@ const getDate = (state, action) => {
 // states into props and we just need the acitons to do so and Since
 // getting the current month is natural so we can just pull it right Away
 // in the states here so we dont have to worry about it being another action
+
+const nextYear = (state, action) => {
+  return updateObject(state, {
+    date: dateFns.addYears(state.date, 1)
+  })
+}
+
+const prevYear = (state, action) => {
+  console.log('states prevYear')
+  return updateObject(state, {
+    date: dateFns.subYears(state.date, 1)
+  })
+}
+
 const nextMonth = (state, action) => {
   return updateObject(state, {
     date: dateFns.addMonths(state.date, 1)
@@ -108,6 +122,10 @@ const reducer = (state = initialState, action) => {
       return loadEvents(state, action);
     case actionTypes.ADD_EVENT_CALENDAR:
       return addEvent(state, action);
+    case actionTypes.NEXT_YEAR:
+      return nextYear(state, action);
+    case actionTypes.PREV_YEAR:
+      return prevYear(state, action);
     case actionTypes.NEXT_MONTH:
       return nextMonth(state, action);
     case actionTypes.PREV_MONTH:
