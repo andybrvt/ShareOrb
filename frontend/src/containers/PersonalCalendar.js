@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag } from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent'
@@ -299,6 +299,11 @@ class PersonalCalendar extends React.Component{
     this.props.openModal(oneEvent)
   }
 
+  onYearClick = () => {
+    const selectedYear = this.props.match.params.year
+    this.props.history.push('/personalcalendar/'+selectedYear)
+  }
+
 
   render(){
     // className is to determine the style
@@ -309,6 +314,9 @@ class PersonalCalendar extends React.Component{
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />
+        <Button type = "primary" shape = "circle" onClick = {this.onYearClick}>
+        Y
+        </Button>
             <List
               dataSource={[
                 {

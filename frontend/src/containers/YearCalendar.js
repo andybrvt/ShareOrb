@@ -103,6 +103,7 @@ class YearCalendar extends React.Component{
      // Basically a 2D loop of the months that hold each week
     while (day <= endWeek){
       for (let i= 0; i<7; i++){
+        const cloneDay = day
         week.push(
           <div
           className ={`monthCellCol monthDayCell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
@@ -110,6 +111,7 @@ class YearCalendar extends React.Component{
         "selected": ""
           }`}
           key = {day}
+          onClick = {() => this.onSelectedDate(cloneDay)}
           >
           {dateFns.format(day, dateFormat)}
           </div>
@@ -133,6 +135,14 @@ class YearCalendar extends React.Component{
 
   nextYear = () => {
     this.props.nextYear()
+  }
+
+  onSelectedDate = date => {
+    const selectYear = dateFns.getYear(date).toString()
+    const selectMonth = (dateFns.getMonth(date)+1).toString()
+    const selectDay = dateFns.getDate(date).toString()
+    console.log(selectYear, selectMonth, selectDay)
+    this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
   render(){

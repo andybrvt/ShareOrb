@@ -196,6 +196,11 @@ class DayCalendar extends React.Component{
     this.props.openDrawer()
   }
 
+  onYearClick = () => {
+    const selectYear = this.props.match.params.year
+    this.props.history.push('/personalcalendar/'+selectYear)
+  }
+
   render() {
     console.log(this.props)
     return (
@@ -205,6 +210,9 @@ class DayCalendar extends React.Component{
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />
+          <Button type="primary" shape="circle" onClick = {this.onYearClick}>
+          Y
+          </Button>
           <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
           M
           </Button>
