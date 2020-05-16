@@ -10,6 +10,7 @@ import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import * as calendarActions from '../store/actions/calendars';
 import EventDrawer from '../containers/EventDrawer.js';
+import MiniCalendar from '../components/MiniCalendar';
 
 
 
@@ -205,28 +206,35 @@ class DayCalendar extends React.Component{
     console.log(this.props)
     return (
       <div className = 'calendarContainer'>
-        <div className = 'calendar'>
-        <EditEventPopUp
-        isVisible = {this.props.showModal}
-        close = {() => this.props.closeModal()}
-        />
-          <Button type="primary" shape="circle" onClick = {this.onYearClick}>
-          Y
-          </Button>
-          <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
-          M
-          </Button>
-          <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
-          W
-          </Button>
-          <Button type="primary" onClick = {this.onOpenEvent} >
-            Add event
-          </Button>
-          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-          {this.renderHeader()}
-          {this.renderHours()}
-          {this.renderCells(this.props.events)}
+        <div className = 'miniCalContainer'>
+          <MiniCalendar />
         </div>
+        <div className ='mainCalContainer'>
+          <div className = 'flex-container'>
+            <div className = 'calendar'>
+            <EditEventPopUp
+            isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
+            />
+              <Button type="primary" shape="circle" onClick = {this.onYearClick}>
+              Y
+              </Button>
+              <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
+              M
+              </Button>
+              <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
+              W
+              </Button>
+              <Button type="primary" onClick = {this.onOpenEvent} >
+                Add event
+              </Button>
+              <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+              {this.renderHeader()}
+              {this.renderHours()}
+              {this.renderCells(this.props.events)}
+              </div>
+            </div>
+          </div>
       </div>
     )
   }

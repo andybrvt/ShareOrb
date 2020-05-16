@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import EditEventPopUp from '../components/EditEventPopUp';
 import { NavLink } from 'react-router-dom';
+import MiniCalendar from '../components/MiniCalendar';
 
 import { UserOutlined } from '@ant-design/icons';
 
@@ -314,6 +315,10 @@ class PersonalCalendar extends React.Component{
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />
+        <div className = 'miniCalContainer'>
+        <MiniCalendar />
+        </div>
+        <div className = 'mainCalContainer'>
         <Button type = "primary" shape = "circle" onClick = {this.onYearClick}>
         Y
         </Button>
@@ -365,6 +370,7 @@ class PersonalCalendar extends React.Component{
           <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
           <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        </div>
         </div>
     )
   }
