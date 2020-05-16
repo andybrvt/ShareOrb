@@ -77,6 +77,7 @@ class ReactInfiniteView(viewsets.ModelViewSet):
         print(UsersNewsFeed)
         #Query set of all User objects of current user and current user's friends
         UserPlusUserFriends = models.User.objects.exclude(id__in=UsersNewsFeed.values_list('id', flat=True))
+        print("made it")
         print(UserPlusUserFriends)
         test= models.Post.objects.filter(user=self.request.user)
         print(test)
@@ -187,3 +188,11 @@ class FriendRequestsToUser(generics.ListAPIView):
     def get_queryset(self):
         queryset = models.FriendRequest.objects.filter(to_user = self.request.user)
         return queryset
+
+
+class grabPost(APIView):
+    def post(self, request, grabID, *args, **kwargs):
+        grabPost= models.Post.objects.filter(id=grabID)
+        print(grabPost)
+        print(grabPost.caption)
+#         return Response('request delete'

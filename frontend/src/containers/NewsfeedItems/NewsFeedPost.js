@@ -1,5 +1,5 @@
 import React from "react";
-import { Popover, Button } from 'antd';
+import { Popover, Button, message, Space} from 'antd';
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { Skeleton, Switch, Card, Avatar } from 'antd';
@@ -7,6 +7,10 @@ import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, Sh
 const Result = (props) => {
   console.log(props.data.image)
   let temp="http://127.0.0.1:8000"+props.data.image;
+  const success = () => {
+  message.success('Clipped to your album!');
+  };
+
   return (
 
     <div>
@@ -51,6 +55,7 @@ const Result = (props) => {
         <ArrowRightOutlined
         style={{ marginLeft: 550 }}
         size="32px"
+        onClick={success}
     
 
         />
@@ -93,7 +98,8 @@ const Result = (props) => {
 
       </Card>
       <Comments className="RobotoFont"/>
-    </div>
+
+         </div>
   );
 };
 

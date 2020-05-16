@@ -59,8 +59,10 @@ class Post(models.Model):
 
 
                               )
+    like_count = models.IntegerField(default=170)
 
     def __str__(self):
+
         return self.caption
 
 class FriendRequest(models.Model):

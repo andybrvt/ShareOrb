@@ -65,9 +65,9 @@ class InfiniteList extends React.PureComponent {
     const { error, hasMore, loading, post} = this.state
     return (
       <div style={{overflowY: 'scroll', flex: 1}}>
-      <h1>Infinite Post </h1>
+      <h1>Welcome! </h1>
     
-      <p> Scroll down to load more </p>
+      <p> Here's what's going on today! </p>
       <hr />
       {post.map((j,index) => {
         return <Listitems data = {j} key ={index} />

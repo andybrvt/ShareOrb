@@ -34,5 +34,8 @@ urlpatterns = [
 	path('friendnotificationrequest', views.FriendNotification.as_view(), name='userprofile-friend-notifications'),
 
 
+	path('grab-post/<slug:id>', views.grabPost.as_view(), name='curr post'),
+
+
 
 ]
