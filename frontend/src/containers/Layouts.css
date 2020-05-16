@@ -12,4 +12,6 @@
 
 .wrap .sidebarLayout {
   float: left;
+  width: 0px;
+  /* background-color: red; */
 }

@@ -315,6 +315,10 @@ class PersonalCalendar extends React.Component{
         isVisible = {this.props.showModal}
         close = {() => this.props.closeModal()}
         />
+        <div className = 'miniCalContainer'>
+        <MiniCalendar />
+        </div>
+        <div className = 'mainCalContainer'>
         <Button type = "primary" shape = "circle" onClick = {this.onYearClick}>
         Y
         </Button>
@@ -348,7 +352,6 @@ class PersonalCalendar extends React.Component{
 
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
         <div className = 'flex-container'>
-          <MiniCalendar />
           <div className = 'sidecol'>
           {this.renderSide()}
           </div>
@@ -367,6 +370,7 @@ class PersonalCalendar extends React.Component{
           <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
           <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        </div>
         </div>
     )
   }
