@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import EditEventPopUp from '../components/EditEventPopUp';
 import { NavLink } from 'react-router-dom';
+import MiniCalendar from '../components/MiniCalendar';
 
 import { UserOutlined } from '@ant-design/icons';
 
@@ -347,6 +348,7 @@ class PersonalCalendar extends React.Component{
 
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
         <div className = 'flex-container'>
+          <MiniCalendar />
           <div className = 'sidecol'>
           {this.renderSide()}
           </div>
