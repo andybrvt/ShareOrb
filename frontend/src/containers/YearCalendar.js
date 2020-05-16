@@ -2,7 +2,9 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
-import * as calendarActions from '../store/actions/calendars'
+import * as calendarActions from '../store/actions/calendars';
+import MiniCalendar from '../components/MiniCalendar';
+
 
 
 
@@ -148,9 +150,16 @@ class YearCalendar extends React.Component{
   render(){
     return(
       <div className = 'calendarContainer'>
-        <div className = 'calendar'>
-        {this.renderYear()}
-        {this.renderMonthCell()}
+        <div className = 'miniCalContainer'>
+          <MiniCalendar />
+        </div>
+        <div className = 'mainCalContainer'>
+          <div className = 'flex-container'>
+            <div className = 'calendar'>
+            {this.renderYear()}
+            {this.renderMonthCell()}
+            </div>
+          </div>
         </div>
       </div>
     )
