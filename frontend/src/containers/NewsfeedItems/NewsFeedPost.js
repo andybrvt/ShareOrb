@@ -4,13 +4,33 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { Skeleton, Switch, Card, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined } from '@ant-design/icons';
-const Result = (props) => {
-  console.log(props.data.image)
-  let temp="http://127.0.0.1:8000"+props.data.image;
+class NewsfeedPost extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+
+    }
+  }
+
+
+    
+  
+
+  AddOneToLike = () => {
+    console.log("hi");
+    console.log(this.props);
+    console.log(this.props.data.id);
+  //   // const username = this.props.data.username;
+  //   // console.log(this.props)
+  //   authAxios.post('http://127.0.0.1:8000/userprofile/grabPost/'+this.props.data.id)
+    
+  //   this.setState({value: e.target.value});
+    }
+    render() {
+  let temp="http://127.0.0.1:8000"+this.props.data.image;
   const success = () => {
   message.success('Clipped to your album!');
   };
-
   return (
 
     <div>
@@ -31,25 +51,25 @@ const Result = (props) => {
 
 
             <a href="/current-user" className="nav-text">
-              {props.data.user.username}
+              {this.props.data.user.username}
             </a>
             <p>Content</p>
           </div>
           }
-          title={props.data.user.username}
+          title={this.props.data.user.username}
           placement="topLeft"
           >
-         <Button> {props.data.user.username} </Button>
+         <Button> {this.props.data.user.username} </Button>
         </Popover>
 
         </span>
         <br></br>
         <span>
-          <b>Date:</b> {props.data.created_at}
+          <b>Date:</b> {this.props.data.created_at}
         </span>
         <br></br>
         <h2 className="RobotoFont">
-          {props.data.caption}
+          {this.props.data.caption}
         </h2>
 
         <ArrowRightOutlined
@@ -68,7 +88,7 @@ const Result = (props) => {
 
 
         {
-            props.data.image ?
+            this.props.data.image ?
 
             // <div style="max-width: 100%; max-height: 100%;">
               <span >
@@ -82,7 +102,10 @@ const Result = (props) => {
 
         }
 
-        <div class="small ui labeled button" tabindex="0">
+        <div class="small ui labeled button" tabindex="0"
+          
+            onClick ={this.AddOneToLike}
+        >
           <div class="small ui red button">
             <i class="heart icon"></i> Like
           </div>
@@ -102,5 +125,6 @@ const Result = (props) => {
          </div>
   );
 };
+}
 
-export default Result;
+export default NewsfeedPost;

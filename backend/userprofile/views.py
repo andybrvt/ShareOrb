@@ -191,8 +191,8 @@ class FriendRequestsToUser(generics.ListAPIView):
 
 
 class grabPost(APIView):
-    def post(self, request, grabID, *args, **kwargs):
-        grabPost= models.Post.objects.filter(id=grabID)
+    def post(self, request, id, *args, **kwargs):
+        grabPost= models.Post.objects.filter(id=id)
         print(grabPost)
-        print(grabPost.caption)
-#         return Response('request delete'
+        
+        return Response('View post in console')

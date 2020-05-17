@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-import Listitems from '../containers/NewsfeedItems/NewsFeedPost';
+import NewsFeedPost from '../containers/NewsfeedItems/NewsFeedPost';
 import { authAxios } from '../components/util';
 
 
 // Fucntion: take in all the post and then put them in an infinite scroll list
-class InfiniteList extends React.PureComponent {
+class InfiniteList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -70,7 +70,7 @@ class InfiniteList extends React.PureComponent {
       <p> Here's what's going on today! </p>
       <hr />
       {post.map((j,index) => {
-        return <Listitems data = {j} key ={index} />
+        return <NewsFeedPost data = {j} key ={index} />
       })}
       {error  && <div>{error}</div>}
       {loading && <div>Loading...</div>}
