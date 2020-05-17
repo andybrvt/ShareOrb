@@ -207,7 +207,7 @@ class DayCalendar extends React.Component{
     return (
       <div className = 'calendarContainer'>
         <div className = 'miniCalContainer'>
-          <MiniCalendar />
+          <MiniCalendar {...this.props}/>
         </div>
         <div className ='mainCalContainer'>
           <div className = 'flex-container'>

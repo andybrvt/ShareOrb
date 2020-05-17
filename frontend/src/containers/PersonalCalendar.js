@@ -316,7 +316,7 @@ class PersonalCalendar extends React.Component{
         close = {() => this.props.closeModal()}
         />
         <div className = 'miniCalContainer'>
-        <MiniCalendar />
+        <MiniCalendar {...this.props}/>
         </div>
         <div className = 'mainCalContainer'>
         <Button type = "primary" shape = "circle" onClick = {this.onYearClick}>

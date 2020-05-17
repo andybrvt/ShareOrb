@@ -1,6 +1,9 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
 import '../containers/Container_CSS/NewCalendar.css';
+import { connect } from 'react-redux';
+import * as calendarActions from '../store/actions/calendars'
+
 
 
 
@@ -22,7 +25,9 @@ class MiniCalendar extends React.Component{
             chevron_left
           </div>
         </div>
-        <div className = "miniCol miniCol-center">
+        <div className = "miniCol miniCol-center" onClick = {() => this.onMonthClick(
+            this.state.currentMonth
+        )}>
           <span>
            {dateFns.format(this.state.currentMonth, dateFormat)}
           </span>
@@ -70,18 +75,18 @@ class MiniCalendar extends React.Component{
       formattedWeek = dateFns.format(date, weekFormat)
       const cloneDate = date
       week.push(
-        <div className = 'holder'>
+        <div className = 'miniholder'>
         <div
         onClick = {() => this.onWeekClick(cloneDate)}
-        className = 'tabs'
+        className = 'minitabs'
         >
-        <span> Here </span>
+        <span></span>
         </div>
         </div>
       )
       date = dateFns.addWeeks(date, 1)
     }
-    return <div className = 'sideBar'> {week} </div>
+    return <div className = 'minisideBar'> {week} </div>
 
 
   }
@@ -133,12 +138,28 @@ class MiniCalendar extends React.Component{
     return <div className = 'body'>{rows}</div>
   }
 
-  onDateClick = () => {
-    console.log('day')
+  onDateClick = date => {
+    const selectYear = dateFns.getYear(date).toString()
+    const selectMonth = (dateFns.getMonth(date)+1).toString()
+    const selectDay = dateFns.getDate(date).toString()
+    console.log(selectYear, selectMonth, selectDay)
+    this.props.getSelectedDate(date)
+    this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
-  onWeekClick = () => {
-    console.log('week')
+  onMonthClick = date => {
+    const selectYear = dateFns.getYear(date).toString()
+    const selectMonth = (dateFns.getMonth(date)+1).toString()
+    console.log(selectYear, selectMonth)
+    this.props.getSelectedDate(date)
+    this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
+  }
+
+  onWeekClick = week => {
+    const selectYear = dateFns.getYear(week).toString()
+    const selectMonth = dateFns.getMonth(week).toString()
+    const selectDay = dateFns.getDate(week).toString()
+    this.props.history.push('/personalcalendar/w/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
   nextMonth = () =>{
@@ -156,14 +177,28 @@ class MiniCalendar extends React.Component{
 
   render() {
     return(
-      <div className = 'miniCalendar'>
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
+      <div className = "miniflex-container">
+        <div className = 'miniSidecol'>
+        {this.renderSide()}
+        </div>
+        <div className = 'miniCalendar'>
+          {this.renderHeader()}
+          {this.renderDays()}
+          {this.renderCells()}
+        </div>
       </div>
     )
   }
 
 }
 
-export default MiniCalendar;
+
+const mapDispatchToProps = dispatch => {
+  return{
+  getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate))
+  }
+}
+
+
+
+export default connect(null, mapDispatchToProps)(MiniCalendar);

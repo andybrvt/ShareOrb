@@ -300,6 +300,41 @@ main {
 
 
 /* This is for the minicalendar */
+.miniflex-container{
+  display: flex;
+}
+
+.miniflex-container .miniSidecol{
+  position: relative;
+  top: 40px;
+}
+
+.miniflex-container .miniSidecol .minisideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.miniflex-container .miniSidecol .minisideBar .miniholder{
+  transform: rotate(-90deg);
+  position: relative;
+  padding-bottom: 0.8em;
+  padding-left: 0px;
+  top: 7px;
+  left: 0px;
+  width: 0px;
+  background-color: red;
+}
+
+.miniflex-container .miniSidecol .minisideBar .miniholder .minitabs{
+  width: 1em;
+  height: 30px;
+  background: deepskyblue;
+  border-radius: 5px;
+  transform: perspective(5px) rotateX(2deg);
+  transform-origin: bottom;
+}
+
 .miniCalContainer .miniCalendar .header{
   text-transform: uppercase;
   font-weight: 700;
