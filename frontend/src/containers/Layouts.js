@@ -18,6 +18,8 @@ import SideMenu from '../components/SideMenu/SideMenu';
 import SiderMenuWrapper from '../components/SideMenu/test';
 import './Layouts.css';
 import Test from '../components/SideMenu/index.tsx';
+import Notifications from './Notifications';
+import NotificationsDropDown from './NotificationsDropDown'
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -286,9 +288,6 @@ class CustomLayout extends React.Component {
                             />
 
                           </NoticeIcon>
-
-
-
                   </Menu.Item>
 
                   :
@@ -312,6 +311,19 @@ class CustomLayout extends React.Component {
 
                     </Menu.Item>
                 }
+
+                {
+                    this.props.isAuthenticated ?
+
+                    <Menu.Item key="12">
+                      <Notifications {...this.props} />
+                    </Menu.Item>
+
+                    :
+                    <Menu.Item key="10">
+                    </Menu.Item>
+                }
+
 
 
 

@@ -4,11 +4,12 @@ import { authAxios } from '../components/util';
 import axios from 'axios';
 import { List, Avatar, Button, Skeleton } from 'antd';
 import { connect } from 'react-redux';
-import './Container_CSS/Notifications.css'
+import './Container_CSS/Notifications.css';
+import NotificationsDropDown from './NotificationsDropDown'
 
 
 const count = 3;
-
+// This one is mostly for just pulling and working with the information
 
 class Notifications extends React.Component{
   state = {
@@ -36,7 +37,8 @@ class Notifications extends React.Component{
     }
 
   componentDidMount(){
-    NotificationWebSocketInstance.connect(this.props.match.params.username)
+    NotificationWebSocketInstance.connect(this.props.username)
+    NotificationWebSocketInstance.disconnect()
 
   }
 
@@ -150,11 +152,10 @@ class Notifications extends React.Component{
 
   componentWillReceiveProps(newProps){
     console.log(newProps)
-    // if(this.props.match.params.username){
-    //   NotificationWebSocketInstance.disconnect()
-    //   NotificationWebSocketInstance.connect(this.props.match.params.username)
-    //
-    // }
+    if(this.props.username !== newProps.username){
+      NotificationWebSocketInstance.disconnect()
+      NotificationWebSocketInstance.connect(newProps.username)
+    }
 
 
   }
@@ -216,14 +217,13 @@ class Notifications extends React.Component{
 
   render(){
     console.log(this.props.notifications)
-
+    console.log(this.props)
+    // <div>
+    // HI HI HI
+    // {this.NotificationListRender(this.props.notifications)}
+    // </div>
     return (
-      <div>
-      {this.NotificationListRender(this.props.notifications)}
-      </div>
-
-
-
+          <NotificationsDropDown {...this.props}/>
       )
 
     }

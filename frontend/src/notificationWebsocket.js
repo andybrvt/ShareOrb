@@ -22,8 +22,8 @@ class WebSocketNotifications {
       console.log('websocket open')
     }
 // I guess group_send also sends it to onmessage
+// All the json.send sends to here
     this.socketRef.onmessage = (e) => {
-      console.log('been here')
       this.socketNewNotification(e.data)
     }
 

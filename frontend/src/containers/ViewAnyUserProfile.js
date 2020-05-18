@@ -30,7 +30,7 @@ class UserProfileView extends React.Component {
     if (this.props.match.params.username){
       console.log('hi there')
       // NotificationWebSocketInstance.disconnect()
-      NotificationWebSocketInstance.connect(this.props.match.params.username)
+      // NotificationWebSocketInstance.connect(this.props.match.params.username)
     }
     if(newProps.isAuthenticated){
        authAxios.get('http://127.0.0.1:8000/userprofile/'+username+'/')
