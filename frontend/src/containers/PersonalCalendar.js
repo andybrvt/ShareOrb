@@ -5,14 +5,16 @@ import axios from 'axios';
 import { authAxios } from '../components/util';
 import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
-import * as navActions from '../store/actions/nav'
-import * as calendarEventActions from '../store/actions/calendarEvent'
-import * as calendarActions from '../store/actions/calendars'
+import * as navActions from '../store/actions/nav';
+import * as calendarEventActions from '../store/actions/calendarEvent';
+import * as calendarActions from '../store/actions/calendars';
+import * as eventSyncActions from '../store/actions/eventSync';
 import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import EditEventPopUp from '../components/EditEventPopUp';
 import { NavLink } from 'react-router-dom';
 import MiniCalendar from '../components/MiniCalendar';
+import EventSyncModal from '../components/EventSyncModal';
 
 import { UserOutlined } from '@ant-design/icons';
 
@@ -305,6 +307,10 @@ class PersonalCalendar extends React.Component{
     this.props.history.push('/personalcalendar/'+selectedYear)
   }
 
+  openEventSyncModal = () => {
+    this.props.openEventSyncModal()
+  }
+
 
   render(){
     // className is to determine the style
@@ -312,9 +318,16 @@ class PersonalCalendar extends React.Component{
     return(
       <div className = 'calendarContainer'>
         <EditEventPopUp
-        isVisible = {this.props.showModal}
-        close = {() => this.props.closeModal()}
+          isVisible = {this.props.showModal}
+          close = {() => this.props.closeModal()}
         />
+        <EventSyncModal
+          isVisble = {this.props.showEventSyncModal}
+          close = {() => this.props.closeEventSyncModal()}
+        />
+        <Button type = 'primary' onClick = {this.openEventSyncModal}>
+          Event Sync
+        </Button>
         <div className = 'miniCalContainer'>
         <MiniCalendar {...this.props}/>
         </div>
@@ -382,7 +395,8 @@ const mapStateToProps = state => {
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
-    events: state.calendar.events
+    events: state.calendar.events,
+    showEventSyncModal: state.eventSync.showEventSyncModal
   }
 }
 
@@ -397,7 +411,9 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(calendarActions.nextMonth()),
     prevMonth: () => dispatch(calendarActions.prevMonth()),
-    getEvents: () => dispatch(calendarActions.getUserEvents())
+    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
   }
 }
 

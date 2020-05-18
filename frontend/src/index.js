@@ -11,12 +11,14 @@ import messageReducer from './store/reducers/messages';
 import notificationsReducer from './store/reducers/notifications';
 import calendarReducer from './store/reducers/calendars';
 import calendarEventReducer from './store/reducers/calendarEvent';
+import eventSyncReducer from './store/reducers/eventSync'
 import {reducer as formReducer } from 'redux-form';
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
 // you can combine reducers into one reducing function using combineReducer() so you can
 // pass it into create store
+// The form reducer only has to be put in once for all the redux forms
 const rootReducer = combineReducers({
   auth: authReducer,
   nav: navReducer,
@@ -24,7 +26,8 @@ const rootReducer = combineReducers({
   notifications: notificationsReducer,
   calendar: calendarReducer,
   calendarEvent: calendarEventReducer,
-  form: formReducer
+  form: formReducer,
+  eventSync: eventSyncReducer
 })
 //store takes in reducer and an enhancer to handle the middleware
 

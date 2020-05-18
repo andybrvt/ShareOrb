@@ -32,6 +32,9 @@ export const PREV_DAY = 'PREV_DAY';
 export const OPEN_EVENT_MODAL = 'OPEN_EVENT_MODAL';
 export const CLOSE_EVENT_MODAL = 'CLOSE_EVENT_MODAL';
 export const CHANGE_CALENDAR_EVENT = 'CHANGE_CALENDAR_EVENT';
+
+export const OPEN_EVENT_SYNC_MODAL = 'OPEN_EVENT_SYNC_MODAL';
+export const CLOSE_EVENT_SYNC_MODAL = 'CLOSE_EVENT_SYNC_MODAL';
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 
