@@ -2,6 +2,7 @@ import React from "react";
 import { Popover, Button, message, Space} from 'antd';
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
+import { authAxios } from '../../components/util';
 import { Skeleton, Switch, Card, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined } from '@ant-design/icons';
 class NewsfeedPost extends React.Component {
@@ -22,7 +23,7 @@ class NewsfeedPost extends React.Component {
     console.log(this.props.data.id);
   //   // const username = this.props.data.username;
   //   // console.log(this.props)
-  //   authAxios.post('http://127.0.0.1:8000/userprofile/grabPost/'+this.props.data.id)
+    authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
     
   //   this.setState({value: e.target.value});
     }
@@ -110,7 +111,7 @@ class NewsfeedPost extends React.Component {
             <i class="heart icon"></i> Like
           </div>
           <a class="ui basic red left pointing label">
-            0
+            {this.props.data.like_count}
           </a>
 
 

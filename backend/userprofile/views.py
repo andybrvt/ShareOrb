@@ -190,9 +190,12 @@ class FriendRequestsToUser(generics.ListAPIView):
         return queryset
 
 
-class grabPost(APIView):
+class AddOneLikeToPost(APIView):
     def post(self, request, id, *args, **kwargs):
-        grabPost= models.Post.objects.filter(id=id)
+        # grabs post based off of id in newsfeed
+        grabPost= models.Post.objects.get(id=id)
         print(grabPost)
-        
+        print(grabPost.like_count)
+        grabPost.like_count+=1
+        print(grabPost.like_count)
         return Response('View post in console')

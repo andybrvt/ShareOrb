@@ -52,14 +52,13 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
+    like_count = models.IntegerField(default=0)
     # add imager property later!
     image = models.ImageField(('post_picture'),
                               upload_to='post_pictures/%Y/%m',
                               blank=True,
-
-
                               )
-    like_count = models.IntegerField(default=170)
+    
 
     def __str__(self):
 
