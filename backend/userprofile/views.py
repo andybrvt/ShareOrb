@@ -198,4 +198,5 @@ class AddOneLikeToPost(APIView):
         print(grabPost.like_count)
         grabPost.like_count+=1
         print(grabPost.like_count)
+        grabPost.save()
         return Response('View post in console')
