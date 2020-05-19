@@ -196,7 +196,13 @@ class AddOneLikeToPost(APIView):
         grabPost= models.Post.objects.get(id=id)
         print(grabPost)
         print(grabPost.like_count)
-        grabPost.like_count+=1
+        if(grabPost.like_condition==False):
+            grabPost.like_count+=1
+            grabPost.like_condition=True
+        else:
+            grabPost.like_count-=1
+            grabPost.like_condition=False
+            
         print(grabPost.like_count)
         grabPost.save()
         return Response('View post in console')

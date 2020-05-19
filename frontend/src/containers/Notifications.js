@@ -38,7 +38,7 @@ class Notifications extends React.Component{
 
   componentDidMount(){
     NotificationWebSocketInstance.connect(this.props.username)
-    NotificationWebSocketInstance.disconnect()
+    
 
   }
 

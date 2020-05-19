@@ -85,7 +85,7 @@ class NewsfeedPost extends React.Component {
 
         />
         <br></br>
-
+ 
 
 
         {
@@ -112,10 +112,88 @@ class NewsfeedPost extends React.Component {
           </div>
           <a class="ui basic red left pointing label">
             {this.props.data.like_count}
+
+            
+
+
           </a>
 
 
         </div>
+
+            {
+
+   
+              (this.props.data.like_condition==false) ?
+
+
+
+
+              <div>
+
+                {
+                  (this.props.data.like_count==0) ?
+
+                  <div>
+                    
+                  </div>
+
+                  :
+
+
+                  <div>
+                    {this.props.data.like_count} people like this
+                  </div>
+              
+                }
+              </div>
+
+
+              :
+
+              <div>
+
+              {
+                
+
+                  (this.props.data.like_count==2) ?
+                 <div>
+                  You and one person like this
+                  </div>
+
+                :
+
+                <div>
+
+                {
+
+
+                  (this.props.data.like_count==1) ?
+
+                  <div>
+                    You like this
+
+                  </div>
+                  :
+
+                  <div>
+
+                    You and {(this.props.data.like_count)-1} people like this
+                  </div>
+
+
+
+                }
+
+                </div>
+
+
+
+              }
+              </div>
+            
+
+            }
 
 
 

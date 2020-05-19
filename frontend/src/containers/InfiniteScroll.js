@@ -70,7 +70,7 @@ class InfiniteList extends React.Component {
       <p> Here's what's going on today! </p>
       <hr />
       {post.map((j,index) => {
-        return <NewsFeedPost data = {j} key ={index} />
+        return <NewsFeedPost data = {j}  />
       })}
       {error  && <div>{error}</div>}
       {loading && <div>Loading...</div>}

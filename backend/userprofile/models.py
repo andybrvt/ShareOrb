@@ -50,20 +50,35 @@ class Post(models.Model):
     caption = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    like_count = models.IntegerField(default=0)
+    like_condition = models.BooleanField(default=False, db_index=True)
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    like_count = models.IntegerField(default=0)
-    # add imager property later!
+    comments = models.ForeignKey('userprofile.Comments',
+                             on_delete=models.CASCADE, default=1)
     image = models.ImageField(('post_picture'),
-                              upload_to='post_pictures/%Y/%m',
-                              blank=True,
-                              )
+            upload_to='post_pictures/%Y/%m',
+            blank=True,
+            )
     
 
     def __str__(self):
 
         return self.caption
 
+
+
+
+class Comments(models.Model):
+    caption = models.CharField(max_length=300)
+    created_time = models.DateTimeField(auto_now_add=True)
+    like_count = models.IntegerField(default=0)
+
+    like_condition = models.BooleanField(default=False, db_index=True)
+    
+
+   
 class FriendRequest(models.Model):
 	to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 	from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
