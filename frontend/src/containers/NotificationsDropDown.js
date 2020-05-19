@@ -1,9 +1,12 @@
 import React from 'react';
-import { Menu, Dropdown, List, Button } from 'antd';
+import { Menu, Dropdown, List, Button, Avatar } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../notificationWebsocket';
 import { authAxios } from '../components/util';
 import axios from 'axios';
+import './Container_CSS/Notifications.css';
+import { UserOutlined, SmileTwoTone, FrownOutlined } from '@ant-design/icons';
+
 
 // This one is for holding the notifications and all its function
 
@@ -44,9 +47,19 @@ class NotificationsDropDown extends React.Component{
     for (let i = 0; i<notifications.length; i++){
       if(notifications[i].type === 'friend'){
         notificationList.push(
-        <li>
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'blue',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
           <div className = 'listNotification'>
+            <span>
             {notifications[i].actor.username} sent you a friend request.
+            </span>
             <br />
             <Button type ="primary" onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
             <Button type ="priamry" onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
@@ -56,7 +69,15 @@ class NotificationsDropDown extends React.Component{
       }
       if (notifications[i].type === 'accepted_friend') {
         notificationList.push(
-        <li>
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+          <Avatar size = {55} style ={{
+            backgroundColor: 'lightskyblue',
+            verticalAlign: 'middle'}}
+            icon = {<UserOutlined />}
+            >
+          </Avatar>
+        </div>
           <div className = 'listNotification'>
               {notifications[i].actor.username} accepted your friend request.
           </div>
@@ -65,7 +86,15 @@ class NotificationsDropDown extends React.Component{
       }
       if (notifications[i].type === 'declined_friend'){
         notificationList.push(
-        <li>
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'orangered',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
           <div className = 'listNotification'>
               {notifications[i].actor.username} declined your friend request.
           </div>
@@ -73,7 +102,14 @@ class NotificationsDropDown extends React.Component{
         )
       }
     }
-    return <List>{notificationList}</List>
+    return (
+      <List>
+      <li className = 'topNotification' >
+        <h2> Notifications </h2>
+      </li>
+      {notificationList}
+      </List>
+    )
   }
 
 

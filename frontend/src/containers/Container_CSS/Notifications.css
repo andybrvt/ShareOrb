@@ -1,4 +1,26 @@
 .listNotification {
-  border: 2px solid;
+  /* border: 2px solid; */
   height: 60px;
+  margin: 20px;
+  margin-top: 15px
+}
+
+.notificaitonListContainer{
+  display: flex;
+  /* background-color: red; */
+}
+
+.notificationIcon {
+  margin: 5px;
+  margin-top: 10px;
+  margin-left: 20px;
+  /* border: 2px solid; */
+  /* background-color: red; */
+}
+
+.topNotification {
+  margin: 20px;
+  margin-left: 10px;
+  margin-top: 5px;
+  /* background-color: red; */
 }
