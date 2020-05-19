@@ -56,14 +56,14 @@ class NotificationsDropDown extends React.Component{
           >
         </Avatar>
         </div>
-          <div className = 'listNotification'>
+          <h4 className = 'listNotification'>
             <span>
             {notifications[i].actor.username} sent you a friend request.
             </span>
             <br />
             <Button type ="primary" onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
             <Button type ="priamry" onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
-          </div>
+          </h4>
         </li>
         )
       }
@@ -78,9 +78,9 @@ class NotificationsDropDown extends React.Component{
             >
           </Avatar>
         </div>
-          <div className = 'listNotification'>
+          <h4 className = 'listNotification'>
               {notifications[i].actor.username} accepted your friend request.
-          </div>
+          </h4>
         </li>
         )
       }
@@ -95,9 +95,9 @@ class NotificationsDropDown extends React.Component{
           >
         </Avatar>
         </div>
-          <div className = 'listNotification'>
+          <h4 className = 'listNotification'>
               {notifications[i].actor.username} declined your friend request.
-          </div>
+          </h4>
         </li>
         )
       }

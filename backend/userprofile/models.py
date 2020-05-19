@@ -38,7 +38,6 @@ def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
 
 post_save.connect(post_save_user_model_receiver, sender=User)
 # class Profile(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL)
 #     friends = models.ManyToManyField("Profile", blank=True)
 #
 #     def __str__(self):
@@ -47,21 +46,18 @@ post_save.connect(post_save_user_model_receiver, sender=User)
 
 
 class Post(models.Model):
-    caption = models.CharField(max_length=300)
+    caption = models.CharField(default = 'caption', max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
     like_condition = models.BooleanField(default=False, db_index=True)
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    comments = models.ForeignKey('userprofile.Comments',
-                             on_delete=models.CASCADE, default=1)
+    postUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', default = 'postUser', on_delete=models.CASCADE)
+    comments = models.ForeignKey("userprofile.Comments", related_name = 'postComments', on_delete=models.CASCADE)
     image = models.ImageField(('post_picture'),
             upload_to='post_pictures/%Y/%m',
             blank=True,
             )
-    
+
 
     def __str__(self):
 
@@ -71,14 +67,13 @@ class Post(models.Model):
 
 
 class Comments(models.Model):
-    caption = models.CharField(max_length=300)
-    created_time = models.DateTimeField(auto_now_add=True)
+    caption = models.CharField(default = 'caption', max_length=300)
+    created_time = models.DateTimeField(auto_now_add=True, blank = True)
     like_count = models.IntegerField(default=0)
-
     like_condition = models.BooleanField(default=False, db_index=True)
-    
 
-   
+
+
 class FriendRequest(models.Model):
 	to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 	from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')

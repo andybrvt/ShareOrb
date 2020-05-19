@@ -12,7 +12,7 @@ class EventSyncModal extends React.Component{
           footer = {null}
           visible = {this.props.isVisble}
           onCancel = {this.props.close}>
-          Hi
+          
         </Modal>
       </div>
     )
