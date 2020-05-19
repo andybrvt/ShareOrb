@@ -46,13 +46,13 @@ post_save.connect(post_save_user_model_receiver, sender=User)
 
 
 class Post(models.Model):
-    caption = models.CharField(default = 'caption', max_length=300)
+    caption = models.CharField(max_length=300, default = 'caption')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
     like_condition = models.BooleanField(default=False, db_index=True)
-    postUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', default = 'postUser', on_delete=models.CASCADE)
-    comments = models.ForeignKey("userprofile.Comments", related_name = 'postComments', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', on_delete=models.CASCADE)
+    comments = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name = 'postComments',)
     image = models.ImageField(('post_picture'),
             upload_to='post_pictures/%Y/%m',
             blank=True,
@@ -65,11 +65,10 @@ class Post(models.Model):
 
 
 
-
 class Comments(models.Model):
     caption = models.CharField(default = 'caption', max_length=300)
     created_time = models.DateTimeField(auto_now_add=True, blank = True)
-    like_count = models.IntegerField(default=0)
+    like_count = models.IntegerField(default = 0)
     like_condition = models.BooleanField(default=False, db_index=True)
 
 

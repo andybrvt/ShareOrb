@@ -7,7 +7,7 @@ from django.utils.timezone import now
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, default = 'user', on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     slug = models.SlugField()
     friends = models.ManyToManyField("self", blank=True)
 
