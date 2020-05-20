@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Tabs } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
@@ -53,6 +53,10 @@ class CurrUserProfile extends React.Component{
    }
 
   render(){
+        const { TabPane } = Tabs;
+        function callback(key) {
+          console.log(key);
+        }
       return(
         <div>
         {this.state.username}
@@ -173,6 +177,18 @@ class CurrUserProfile extends React.Component{
                 </Button>
               </TabPane>
             </TabContent>
+
+            <Tabs onChange={callback} type="card">
+              <TabPane tab="Social Calendar" key="1">
+                Insert social calendar
+              </TabPane>
+              <TabPane tab="Pictures" key="2">
+                Picture album
+              </TabPane>
+              <TabPane tab="Profile" key="3">
+                Profile
+              </TabPane>
+            </Tabs>,
           </Container>
           </div>
         </div>
