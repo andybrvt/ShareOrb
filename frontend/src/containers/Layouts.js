@@ -168,6 +168,7 @@ class CustomLayout extends React.Component {
 
           ]);
         };
+        console.log(this.props)
         return (
 
 
@@ -260,13 +261,7 @@ class CustomLayout extends React.Component {
                             loading={this.fetchingNotices}
                             clearText="清空"
                             viewMoreText="查看更多"
-
-                            // onClear={this.handleNoticeClear}
-                            // onPopupVisibleChange={onNoticeVisibleChange}
-
                             clearClose
-
-
                           >
                             <NoticeIcon.Tab
                               tabKey="notification"
@@ -280,8 +275,6 @@ class CustomLayout extends React.Component {
 
                             <NoticeIcon.Tab
                               tabKey="message"
-                              // count={unreadMsg.message}
-                              // list={noticeData.message}
                               title="second tab"
                               emptyText="您已读完所有消息"
                               showViewMore

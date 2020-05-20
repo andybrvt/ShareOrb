@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   username: null,
   id: null,
+  friends: '',
 };
 
 const authStart = (state, action) => {
@@ -41,6 +42,7 @@ const addCredentials = (state, action) => {
   return updateObject(state, {
     username: action.username,
     id: action.id,
+    friends: action.friends
   });
 };
 

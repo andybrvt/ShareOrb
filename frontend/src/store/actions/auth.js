@@ -19,11 +19,12 @@ export const authSuccess = (token) => {
 };
 
 
-export const addCredentials = (username, id) => {
+export const addCredentials = (username, id, friends) => {
   return {
     type: actionTypes.ADD_CREDENTIALS,
     username: username,
-    id: id
+    id: id,
+    friends: friends
   };
 };
 
@@ -39,6 +40,7 @@ export const logout = () => {
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("username");
   localStorage.removeItem('id')
+  localStorage.removeItem('friends')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -86,9 +88,11 @@ export const authLogin = (username, password) => {
       .then(res => {
             const username1 = res.data.username;
             const id = res.data.id;
+            const friends = res.data.friends;
             localStorage.setItem("username", username1);
             localStorage.setItem("id", id);
-            dispatch(addCredentials(res.data.username, res.data.id));
+            localStorage.setItem('friends', friends)
+            dispatch(addCredentials(res.data.username, res.data.id, res.data.friends));
             dispatch(checkAuthTimeout(3600));
 
         })
@@ -110,9 +114,11 @@ export const grabUserCredentials = () => {
 
         const username1 = res.data.username;
         const id = res.data.id;
+        const friends = res.data.friends;
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
-        dispatch(addCredentials(res.data.username, res.data.id));
+        localStorage.setItem('friends', friends);
+        dispatch(addCredentials(res.data.username, res.data.id, res.data.friends));
         dispatch(checkAuthTimeout(3600));
 
       })

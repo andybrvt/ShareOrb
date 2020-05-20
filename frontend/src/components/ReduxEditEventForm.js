@@ -82,7 +82,7 @@ class ReduxEditEventForm extends React.Component{
 // In order to modify this you have to call a constant outside the class
 ReduxEditEventForm = reduxForm({
   form: 'edit event', //you will give the form a name
-  enableReinitialize: true, //This will reintialzie the prestine values everytime, the props changes
+  enableReinitialize: true, //This will reintialzie the prestine values everytime the props changes
 })(ReduxEditEventForm);
 
 

@@ -16,6 +16,7 @@ const renderField = (field) => {
   )
 }
 
+// this will delete the iunputs after submit
 const afterSubmit = (result, dispatch) =>
   dispatch(reset('add event'));
 

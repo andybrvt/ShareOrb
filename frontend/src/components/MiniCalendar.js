@@ -157,8 +157,9 @@ class MiniCalendar extends React.Component{
 
   onWeekClick = week => {
     const selectYear = dateFns.getYear(week).toString()
-    const selectMonth = dateFns.getMonth(week).toString()
+    const selectMonth = (dateFns.getMonth(week)+1).toString()
     const selectDay = dateFns.getDate(week).toString()
+    this.props.getSelectedDate(week)
     this.props.history.push('/personalcalendar/w/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
