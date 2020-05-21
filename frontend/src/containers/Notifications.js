@@ -38,7 +38,7 @@ class Notifications extends React.Component{
 
   componentDidMount(){
     NotificationWebSocketInstance.connect(this.props.username)
-    
+
 
   }
 
@@ -164,6 +164,7 @@ class Notifications extends React.Component{
     const notification_list = []
     for (let i = 0; i< notifications.length; i++) {
       console.log(notifications[i].actor.username)
+      console.log(notifications[i].type)
       if(notifications[i].type === 'friend'){
         notification_list.push(
           <div className = 'listNotification'>
@@ -185,6 +186,16 @@ class Notifications extends React.Component{
         notification_list.push(
           <div className = 'listNotification'>
               {notifications[i].actor.username} declined your friend request.
+          </div>
+        )
+      }
+      if (notifications[i].type === 'send_friend_event_sync'){
+        notification_list.push(
+          <div className = 'listNotification'>
+            {notifications[i].actor.username} wants to event sync with you.
+            <br />
+            <Button type ="primary" > Accept</Button>
+            <Button type ="priamry" > Decline </Button>
           </div>
         )
       }

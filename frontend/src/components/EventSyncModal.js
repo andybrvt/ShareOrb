@@ -1,12 +1,21 @@
 import React from 'react';
 import { Modal } from 'antd';
 import EventSyncForm from './EventSyncForm'
+import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 
 
 class EventSyncModal extends React.Component{
 
   submit = (values) => {
-    console.log(values)
+    const NotificationOjbect = {
+      command: 'send_friend_event_sync',
+      actor: this.props.username,
+      recipient: values.friend,
+      maxDate: values.maxDate,
+      minDate: values.minDate
+    }
+    // sending the information back into the websocket then to the backend
+    NotificationWebSocketInstance.sendNotification(NotificationOjbect)
   }
 
   render() {
@@ -26,5 +35,11 @@ class EventSyncModal extends React.Component{
     )
   }
 }
+
+// const mapStateToProps = state => {
+//   return {
+//     currentUser: state.auth
+//   }
+// }
 
 export default EventSyncModal;

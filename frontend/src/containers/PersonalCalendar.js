@@ -322,6 +322,7 @@ class PersonalCalendar extends React.Component{
           close = {() => this.props.closeModal()}
         />
         <EventSyncModal
+          {...this.props}
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />

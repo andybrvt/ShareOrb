@@ -101,6 +101,28 @@ class NotificationsDropDown extends React.Component{
         </li>
         )
       }
+      if (notifications[i].type === 'send_friend_event_sync'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'limegreen',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+            <span>
+            {notifications[i].actor.username} wants to event sync with you.
+            </span>
+            <br />
+            <Button type ="primary" > Accept</Button>
+            <Button type ="priamry" > Decline </Button>
+          </h4>
+        </li>
+        )
+      }
     }
     return (
       <List>
