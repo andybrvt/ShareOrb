@@ -52,7 +52,7 @@ class Post(models.Model):
     like_count = models.IntegerField(default=0)
     like_condition = models.BooleanField(default=False, db_index=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', on_delete=models.CASCADE)
-    comments = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name = 'postComments',)
+    # comments = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name = 'postComments', blank=True, null=True)
     image = models.ImageField(('post_picture'),
             upload_to='post_pictures/%Y/%m',
             blank=True,
