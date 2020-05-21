@@ -49,7 +49,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 # This function will be used to make the actual notification object
     def send_notification (self, data):
         user = self.scope['user']
-
         if data['command'] == 'send_friend_notification':
             recipient = get_object_or_404(User, username=data['recipient'])
             actor = get_object_or_404(User, username=data['actor'])
@@ -66,6 +65,10 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, username = data['recipient'])
             actor = get_object_or_404(User, username = data['actor'])
             notification = CustomNotification.objects.create(type="send_friend_event_sync", recipient = recipient, actor= actor, verb="wants to event sync with you")
+        if data['command'] == 'send_decline_event_sync_notification':
+            recipient = get_object_or_404(User, username= data['recipient'])
+            actor = get_object_or_404(User, id = data['actor'])
+            notification = CustomNotification.objects.create(type="declined_event_sync", recipient = recipient, actor= actor, verb="declined  your event sync request")
         # CustomNotification.save(self)
         # The notification will be serilizered and then sent to the group send
         serializer = NotificationSerializer(notification)
@@ -125,6 +128,19 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 
         self.send_notification(content)
 
+
+    def decline_event_sync (self, data):
+        # This is to delete the existing request
+        recipient = get_object_or_404(User, id = data['actor'])
+        actor = get_object_or_404(User, username = data['recipient'])
+        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync')
+        notification.delete()
+        content = {
+            'command': 'send_decline_event_sync_notification',
+            'actor': data['actor'],
+            'recipient': data['recipient']
+        }
+        self.send_notification(content)
 
     def send_new_notification(self, notification):
         # Send message to room group
@@ -198,7 +214,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print (data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -209,6 +224,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             self.decline_notification(data)
         if data['command'] == 'send_friend_event_sync':
             self.send_friend_event_sync(data)
+        if data['command'] == 'decline_event_sync':
+            self.decline_event_sync(data)
     def new_notification(self, event):
         notification = event['notification']
         print(notification)

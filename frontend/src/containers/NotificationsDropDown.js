@@ -41,6 +41,15 @@ class NotificationsDropDown extends React.Component{
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
   }
 
+  onEventSyncDecline = (actor, recipient) => {
+    const declineNotificationObject = {
+      command: 'decline_event_sync',
+      actor: actor,
+      recipient,
+    }
+    NotificationWebSocketInstance.sendNotification(declineNotificationObject)
+  }
+
   renderNotifications = () => {
     const notificationList = []
     const notifications = this.props.notifications
@@ -118,7 +127,24 @@ class NotificationsDropDown extends React.Component{
             </span>
             <br />
             <Button type ="primary" > Accept</Button>
-            <Button type ="priamry" > Decline </Button>
+            <Button type ="priamry" onClick = {()=> this.onEventSyncDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+          </h4>
+        </li>
+        )
+      }
+      if (notifications[i].type === 'declined_event_sync'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'orangered',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+              {notifications[i].actor.username} declined your event sync request.
           </h4>
         </li>
         )
