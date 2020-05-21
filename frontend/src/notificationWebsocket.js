@@ -48,6 +48,7 @@ class WebSocketNotifications {
   socketNewNotification(data) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
+    console.log(data)
     console.log(parsedData.notificaton)
     if (command === 'notifications') {
         const notifications = JSON.parse(parsedData.notifications);

@@ -45,9 +45,18 @@ class NotificationsDropDown extends React.Component{
     const declineNotificationObject = {
       command: 'decline_event_sync',
       actor: actor,
-      recipient,
+      recipient: recipient,
     }
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
+  }
+
+  onEventSyncAccept = (actor, recipient) => {
+    const acceptNotificationObject = {
+      command: 'accept_event_sync',
+      actor: actor,
+      recipient: recipient
+    }
+    NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
   }
 
   renderNotifications = () => {
@@ -126,7 +135,7 @@ class NotificationsDropDown extends React.Component{
             {notifications[i].actor.username} wants to event sync with you.
             </span>
             <br />
-            <Button type ="primary" > Accept</Button>
+            <Button type ="primary" onClick = {()=> this.onEventSyncAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
             <Button type ="priamry" onClick = {()=> this.onEventSyncDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
           </h4>
         </li>
@@ -137,7 +146,7 @@ class NotificationsDropDown extends React.Component{
         <li className = 'notificaitonListContainer'>
         <div className = 'notificationIcon'>
         <Avatar size = {55} style ={{
-          backgroundColor: 'orangered',
+          backgroundColor: 'darkgrey',
           verticalAlign: 'middle'}}
           icon = {<UserOutlined />}
           >
@@ -145,6 +154,23 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
               {notifications[i].actor.username} declined your event sync request.
+          </h4>
+        </li>
+        )
+      }
+      if (notifications[i].type === 'accepted_event_sync'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'fuchsia',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+              {notifications[i].actor.username} accepted your event sync request.
           </h4>
         </li>
         )
