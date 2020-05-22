@@ -9,7 +9,7 @@ from . import serializers
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.decorators import api_view
 from django.shortcuts import render, get_object_or_404
-
+from .forms import CommentForm
 
 # Create your views here.
 # Views will take in models and serializers and then displays it
@@ -212,6 +212,48 @@ class AddOneLikeToPost(APIView):
         grabPost.save()
         return Response('View post in console')
 
+
+# def post_detail(request, slug):
+#     post = get_object_or_404(Post, slug=slug)
+#     comments = post.comments.filter(active=True)
+#     new_comment = None
+#     # Comment posted
+#     if request.method == 'POST':
+#         comment_form = CommentForm(data=request.POST)
+#         if comment_form.is_valid():
+
+#             # Create Comment object but don't save to database yet
+#             new_comment = comment_form.save(commit=False)
+#             # Assign the current post to the comment
+#             new_comment.post = post
+#             # Save the comment to the database
+#             new_comment.save()
+#     else:
+#         comment_form = CommentForm()
+#         return Response('View comment')
+
+
+class post_detail(APIView):
+    def post(self, request, id, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        comments = post.comments.filter(active=True).order_by("-created_on")[0:5]
+        comments[3]='test'
+        # for now fetch the first 5 comments
+        new_comment = None
+        # Comment posted
+        if request.method == 'POST':
+            comment_form = CommentForm(data=request.POST)
+            if comment_form.is_valid():
+
+                # Create Comment object but don't save to database yet
+                new_comment = comment_form.save(commit=False)
+                # Assign the current post to the comment
+                new_comment.post = post
+                # Save the comment to the database
+                new_comment.save()
+        else:
+            comment_form = CommentForm()
+        return Response('View comment')
 
 
 # class ViewComment(APIView):

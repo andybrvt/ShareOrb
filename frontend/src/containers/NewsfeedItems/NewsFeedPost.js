@@ -199,7 +199,7 @@ class NewsfeedPost extends React.Component {
 
 
       </Card>
-      <Comments className="RobotoFont"/>
+      <Comments className="RobotoFont" newsfeed={this.props}/>
 
          </div>
   );

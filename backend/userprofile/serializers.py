@@ -44,7 +44,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = models.Post
-		fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
+		fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user', 'comments')
 
 	def to_representation(self, instance):
 		data = super().to_representation(instance)
