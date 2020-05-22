@@ -36,6 +36,8 @@ urlpatterns = [
 
 	path('add-like/<slug:id>/', views.AddOneLikeToPost.as_view(), name='curr post'),
 
+	path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='grab comment'),
+
 
 
 ]
