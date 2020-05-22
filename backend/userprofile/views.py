@@ -140,6 +140,11 @@ class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer
 	queryset = models.CustomNotification.objects.all()
 
+class onDeleteNotifcation(generics.RetrieveDestroyAPIView):
+    serializer_class = serializers.NotificationSerializer
+    lookup_field = 'id'
+    queryset = models.CustomNotification.objects.all()
+
 # Cancel from sender's end
 class CancelFriendRequest(APIView):
 	def post(self, request, username, *args, **kwargs):
@@ -202,7 +207,7 @@ class AddOneLikeToPost(APIView):
         else:
             grabPost.like_count-=1
             grabPost.like_condition=False
-            
+
         print(grabPost.like_count)
         grabPost.save()
         return Response('View post in console')
