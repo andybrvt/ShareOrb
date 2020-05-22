@@ -214,12 +214,12 @@ class AddOneLikeToPost(APIView):
 
 
 
-class ViewComment(APIView):
-    def post(self, request, postID, commentID, *args, **kwargs):
-        # grabs post based off of id in newsfeed
-        grabPost= models.Post.objects.get(id=postID)
-        print(grabPost)
-        grabComment=grabPost.get(id=commentID)
-        print(grabComment)
-        print(grabComment.caption)
-        return Response('Grabbing the comment')
+# class ViewComment(APIView):
+#     def post(self, request, postID, commentID, *args, **kwargs):
+#         # grabs post based off of id in newsfeed
+#         grabPost= models.Post.objects.get(id=postID)
+#         print(grabPost)
+#         grabComment=grabPost.get(id=commentID)
+#         print(grabComment)
+#         print(grabComment.caption)
+#         return Response('Grabbing the comment')

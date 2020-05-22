@@ -19,7 +19,9 @@ import SiderMenuWrapper from '../components/SideMenu/test';
 import './Layouts.css';
 import Test from '../components/SideMenu/index.tsx';
 import Notifications from './Notifications';
-import NotificationsDropDown from './NotificationsDropDown'
+import NotificationsDropDown from './NotificationsDropDown';
+import PickEventSyncModal from '../components/PickEventSyncModal';
+import * as eventSyncActions from '../store/actions/eventSync';
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -174,7 +176,10 @@ class CustomLayout extends React.Component {
 
 
             <Layout className="layout">
-
+              <PickEventSyncModal
+                isVisble = {this.props.showPickEventSyncModal}
+                close = {() => this.props.closePickEventSyncModal()}
+              />
                 <Header>
                 <div className="logo" />
                 <Menu
@@ -367,6 +372,7 @@ class CustomLayout extends React.Component {
 const mapStateToProps = state => {
   return{
     notificationDrop: state.nav.showPopup,
+    showPickEventSyncModal: state.eventSync.showPickEventSyncModal
   }
 }
 
@@ -375,7 +381,9 @@ const mapDispatchToProps = dispatch => {
   return {
         closeNotification: () => dispatch(navActions.closePopup()),
         openNotification: () => dispatch(navActions.openPopup()),
-        logout: () => dispatch(actions.logout())
+        logout: () => dispatch(actions.logout()),
+        openPickEventSyncModal: () => dispatch(eventSyncActions.openPickEventSyncModal()),
+        closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal())
     }
 }
 

@@ -8,7 +8,8 @@ import './Container_CSS/Notifications.css';
 import { UserOutlined, SmileTwoTone, FrownOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import * as notificationsActions from '../store/actions/notifications';
-
+import * as eventSyncActions from '../store/actions/eventSync';
+import PickEventSyncModal from '../components/PickEventSyncModal';
 
 // This one is for holding the notifications and all its function
 
@@ -184,6 +185,7 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
               {notifications[i].actor.username} accepted your event sync request.
+              <Button type = 'primary' onClick = {() => this.props.openPickEventSyncModal()}> Pick Date </Button>
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
@@ -219,7 +221,8 @@ class NotificationsDropDown extends React.Component{
     return(
       <Dropdown overlay={this.renderNotifications} trigger={['click']}>
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          Notifications <DownOutlined />
+          Notifications
+          <DownOutlined />
         </a>
       </Dropdown>
     )
@@ -228,13 +231,13 @@ class NotificationsDropDown extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    // notifications: state.notifications.notifications,
+
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId))
+    deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId)),
   }
 }
 

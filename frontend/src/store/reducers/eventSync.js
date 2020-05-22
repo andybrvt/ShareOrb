@@ -3,7 +3,8 @@ import { updateObject } from '../utility'
 
 
 const initialState = {
-  showEventSyncModal: false
+  showEventSyncModal: false,
+  showPickEventSyncModal: false
 }
 
 const openEventSyncModal  = (state, action) => {
@@ -18,12 +19,29 @@ const closeEventSyncModal = (state, action) => {
   })
 }
 
+const openPickEventSyncModal = (state, action) => {
+  return updateObject (state, {
+    showPickEventSyncModal: true
+  })
+}
+
+const closePickEventSyncModal = (state, action) => {
+  console.log('close event sync')
+  return updateObject (state, {
+    showPickEventSyncModal: false
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type){
     case actionTypes.OPEN_EVENT_SYNC_MODAL:
       return openEventSyncModal (state, action);
     case actionTypes.CLOSE_EVENT_SYNC_MODAL:
       return closeEventSyncModal (state, action);
+    case actionTypes.OPEN_PICK_EVENT_SYNC_MODAL:
+      return openPickEventSyncModal (state, action)
+    case actionTypes.CLOSE_PICK_EVENT_SYNC_MODAL:
+      return closePickEventSyncModal (state, action)
     default:
       return state;
   }

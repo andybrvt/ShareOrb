@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 import EventSyncForm from './EventSyncForm'
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 
-
+// This class is use to pick a friend to event sync with
 class EventSyncModal extends React.Component{
 
   submit = (values) => {
