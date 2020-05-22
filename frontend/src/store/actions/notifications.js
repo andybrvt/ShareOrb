@@ -15,3 +15,10 @@ export const newNotification = notification => {
     notification: notification
   };
 };
+
+export const deleteNotification = notificationId => {
+  return {
+    type: actionTypes.DELETE_NOTIFICATION,
+    notificationId: notificationId
+  }
+}

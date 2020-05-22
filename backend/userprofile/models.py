@@ -49,7 +49,7 @@ class Post(models.Model):
     caption = models.CharField(max_length=300, default = 'caption')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    like_count = models.IntegerField(default=0)
+    like_count = models.IntegerField(default=0, blank = True)
     like_condition = models.BooleanField(default=False, db_index=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', on_delete=models.CASCADE)
     comments = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name = 'postComments', blank=True, null=True)
@@ -64,12 +64,14 @@ class Post(models.Model):
         return self.caption
 
 
+# comments = models.ForeignKey('userprofile.Comments', on_delete=models.CASCADE, related_name = 'postComments', blank = True)
 
-class Comments(models.Model):
-    caption = models.CharField(default = 'caption', max_length=300)
-    created_time = models.DateTimeField(auto_now_add=True, blank = True)
-    like_count = models.IntegerField(default = 0)
-    like_condition = models.BooleanField(default=False, db_index=True)
+
+# class Comments(models.Model):
+#     caption = models.CharField(default = 'caption', max_length=300, blank = True)
+#     created_time = models.DateTimeField(auto_now_add=True, blank = True)
+#     like_count = models.IntegerField(default = 0)
+#     like_condition = models.BooleanField(default=False, db_index=True)
 
 
 

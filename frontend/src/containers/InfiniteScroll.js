@@ -66,7 +66,7 @@ class InfiniteList extends React.Component {
     return (
       <div style={{overflowY: 'scroll', flex: 1}}>
       <h1>Welcome! </h1>
-    
+
       <p> Here's what's going on today! </p>
       <hr />
       {post.map((j,index) => {

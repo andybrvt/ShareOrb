@@ -6,6 +6,8 @@ import { authAxios } from '../components/util';
 import axios from 'axios';
 import './Container_CSS/Notifications.css';
 import { UserOutlined, SmileTwoTone, FrownOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import * as notificationsActions from '../store/actions/notifications';
 
 
 // This one is for holding the notifications and all its function
@@ -41,6 +43,30 @@ class NotificationsDropDown extends React.Component{
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
   }
 
+  onEventSyncDecline = (actor, recipient) => {
+    const declineNotificationObject = {
+      command: 'decline_event_sync',
+      actor: actor,
+      recipient: recipient,
+    }
+    NotificationWebSocketInstance.sendNotification(declineNotificationObject)
+  }
+
+  onEventSyncAccept = (actor, recipient) => {
+    const acceptNotificationObject = {
+      command: 'accept_event_sync',
+      actor: actor,
+      recipient: recipient
+    }
+    NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
+  }
+
+  onDeleteNotifcation = (notificationId) => {
+    console.log(notificationId)
+    authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+    this.props.deleteNotification(notificationId)
+  }
+
   renderNotifications = () => {
     const notificationList = []
     const notifications = this.props.notifications
@@ -62,7 +88,8 @@ class NotificationsDropDown extends React.Component{
             </span>
             <br />
             <Button type ="primary" onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
-            <Button type ="priamry" onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+            <Button type ="primary" onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+            <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
         )
@@ -80,6 +107,7 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
               {notifications[i].actor.username} accepted your friend request.
+              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
         )
@@ -97,6 +125,66 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
               {notifications[i].actor.username} declined your friend request.
+              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          </h4>
+        </li>
+        )
+      }
+      if (notifications[i].type === 'send_friend_event_sync'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'limegreen',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+            <span>
+            {notifications[i].actor.username} wants to event sync with you.
+            </span>
+            <br />
+            <Button type ="primary" onClick = {()=> this.onEventSyncAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
+            <Button type ="priamry" onClick = {()=> this.onEventSyncDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+            <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          </h4>
+        </li>
+        )
+      }
+      if (notifications[i].type === 'declined_event_sync'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'darkgrey',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+              {notifications[i].actor.username} declined your event sync request.
+              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          </h4>
+        </li>
+        )
+      }
+      if (notifications[i].type === 'accepted_event_sync'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'fuchsia',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+              {notifications[i].actor.username} accepted your event sync request.
+              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
         )
@@ -144,4 +232,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default NotificationsDropDown;
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NotificationsDropDown);

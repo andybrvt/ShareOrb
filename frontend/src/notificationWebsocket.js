@@ -48,7 +48,6 @@ class WebSocketNotifications {
   socketNewNotification(data) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
-    console.log(parsedData.notificaton)
     if (command === 'notifications') {
         const notifications = JSON.parse(parsedData.notifications);
         this.callbacks['notifications'](notifications)
@@ -78,6 +77,7 @@ class WebSocketNotifications {
     // This will recieve information from onClickSend from PersonalProfile.js
     // and will send it to the userprofile.consumers
     console.log('send_notification')
+    console.log(data)
     try{
       this.socketRef.send(JSON.stringify({...data }))
     } catch (err) {

@@ -18,6 +18,7 @@ class EventSyncForm extends React.Component {
     const {handleSubmit} = this.props
     return (
       <form onSubmit = {handleSubmit}>
+      <h2> Event Sync </h2>
       <div>
         <label htmlFor = 'minDate'> Min Date </label>
         <Field
@@ -40,8 +41,8 @@ class EventSyncForm extends React.Component {
         name = 'friend'
         component ='select' >
           <option></option>
-          {this.props.friends.map(friends =>
-            <option value = {friends}> {friends} </option>)}
+          {this.props.friends ? this.props.friends.map(friends =>
+            <option value = {friends}> {friends} </option>) : <option></option>}
         </Field>
       </div>
       <button type = 'submit'> Submit</button>
