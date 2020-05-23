@@ -22,6 +22,27 @@ def is_valid_queryparam(param):
     # will use this for the if statement later for the filter
     return param != '' and param is not None
 
+def filter(request):
+    # Basically this is for filtering out the qs to get the info you want
+    # You have to go back to this laster when you are doing a tiem range but
+    # for now just the start time is ok.
+    # The filter, just pick a field and filter by the value --> the double underscore are for
+    # more shit
+    qs = models.Event.objects.all()
+    date_min = request.GET.get('date_min')
+    date_max = request.GET.get('date_max')
+    friend_query = request.GET.get('friend')
+    person_query = request.GET.get('person')
+    if is_valid_queryparam(date_min):
+        qs = qs.filter(start_time__gte=date_min)
+    if is_valid_queryparam(date_max):
+        qs = qs.filter(start_time__lte= date_max)
+    if is_valid_queryparam(friend_query):
+        qs = qs.filter(person__username = friend_query)
+    if is_valid_queryparam(person_query):
+        qs = qs.filter(person__username = person_query)
+    return qs
+
 class CalendarView(generics.ListAPIView):
     serializer_class = serializers.CalendarOwnedSerializer
     queryset = models.Calendar.objects.all()
@@ -38,9 +59,15 @@ class CalendarEventsView(generics.ListAPIView):
         queryset = models.Event.objects.filter(person = user).order_by('start_time')
         return queryset
 
+# This is to test if the filter works
 class CalendarTestEventsView(generics.ListAPIView):
     serializer_class = serializers.EventSerializer
-    queryset = models.Event.objects.all()
+
+    def get_queryset(self):
+        # The filter will be run through here so it willl
+        # return a list of all the events
+        qs = filter(self.request)
+        return qs
 
 class CalendarEventsCreate(generics.CreateAPIView):
     serializer_class = serializers.CreateEventSerializer

@@ -39,7 +39,6 @@ export const CLOSE_EVENT_SYNC_MODAL = 'CLOSE_EVENT_SYNC_MODAL';
 export const OPEN_PICK_EVENT_SYNC_MODAL = 'OPEN_PICK_EVENT_SYNC_MODAL';
 export const CLOSE_PICK_EVENT_SYNC_MODAL = 'CLOSE_PICK_EVENT_SYNC_MODAL';
 
-
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 
