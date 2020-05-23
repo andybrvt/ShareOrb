@@ -62,18 +62,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, username= data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type="declined_friend", recipient = recipient, actor= actor, verb="declined  your friend request")
-        if data['command'] == 'send_friend_event_sync':
-            recipient = get_object_or_404(User, username = data['recipient'])
-            actor = get_object_or_404(User, username = data['actor'])
-            notification = CustomNotification.objects.create(type="send_friend_event_sync", recipient = recipient, actor= actor, verb="wants to event sync with you")
-        if data['command'] == 'send_decline_event_sync_notification':
-            recipient = get_object_or_404(User, username= data['recipient'])
-            actor = get_object_or_404(User, id = data['actor'])
-            notification = CustomNotification.objects.create(type="declined_event_sync", recipient = recipient, actor= actor, verb="declined your event sync request")
-        if data['command'] == 'send_accepted_event_sync_notification':
-            recipient = get_object_or_404(User, username= data['recipient'])
-            actor = get_object_or_404(User, id = data['actor'])
-            notification = CustomNotification.objects.create(type="accepted_event_sync", recipient = recipient, actor= actor, verb="accepted your event sync request")
         # CustomNotification.save(self)
         # The notification will be serilizered and then sent to the group send
         serializer = NotificationSerializer(notification)
@@ -83,6 +71,36 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             "recipient": recipient.username #important for group send (group name)
         }
         print('send_notification')
+        return self.send_new_notification(content)
+
+    def send_event_sync_notification(self, data):
+        # This is to send custom notification for event sync
+        if data['command'] == 'send_friend_event_sync':
+            recipient = get_object_or_404(User, username = data['recipient'])
+            actor = get_object_or_404(User, username = data['actor'])
+            minDate = data['minDate']
+            maxDate = data['maxDate']
+            notification = CustomNotification.objects.create(type="send_friend_event_sync", recipient = recipient, actor= actor, verb="wants to event sync with you",
+            minDate = minDate, maxDate = maxDate)
+        if data['command'] == 'send_decline_event_sync_notification':
+            # since you decline it the notification will pretty much have a normal decline
+            recipient = get_object_or_404(User, username= data['recipient'])
+            actor = get_object_or_404(User, id = data['actor'])
+            notification = CustomNotification.objects.create(type="declined_event_sync", recipient = recipient, actor= actor, verb="declined your event sync request")
+        if data['command'] == 'send_accepted_event_sync_notification':
+            # since you are sending an accept notificaiton, you want to have the exact minDate and maxDate for the filter
+            recipient = get_object_or_404(User, username= data['recipient'])
+            actor = get_object_or_404(User, id = data['actor'])
+            minDate = data['minDate']
+            maxDate = data['maxDate']
+            notification = CustomNotification.objects.create(type="accepted_event_sync", recipient = recipient, actor= actor, verb="accepted your event sync request",
+            minDate = minDate, maxDate = maxDate)
+        serializer = NotificationSerializer(notification)
+        content = {
+            "command": "new_notification",
+            "notification": json.dumps(serializer.data),
+            "recipient": recipient.username, #important for group send (group name)
+        }
         return self.send_new_notification(content)
 
 #So this one is to delete the friend request notificaton, so since recipeint for this person
@@ -131,34 +149,43 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             'minDate': data['minDate']
         }
 
-        self.send_notification(content)
+        self.send_event_sync_notification(content)
 
 
     def decline_event_sync (self, data):
         # This is to delete the existing request
+        # You want to have the minDate and maxDAte on this too so that you delete the exact notification
         recipient = get_object_or_404(User, id = data['actor'])
         actor = get_object_or_404(User, username = data['recipient'])
-        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync')
+        minDate = data['minDate']
+        maxDate = data['maxDate']
+        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
         notification.delete()
         content = {
             'command': 'send_decline_event_sync_notification',
             'actor': data['actor'],
             'recipient': data['recipient']
         }
-        self.send_notification(content)
+        self.send_event_sync_notification(content)
 
     def accept_event_sync (self, data):
-        # This is to delete teh exisitng request
+        # This is to delete the exisitng request
         recipient = get_object_or_404(User, id = data['actor'])
         actor = get_object_or_404(User, username = data['recipient'])
-        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync')
+        minDate = data['minDate']
+        maxDate = data['maxDate']
+        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
         notification.delete()
+        # You want to include the minDate and maxDate on this one is to have in your Event sync notificaiton
+        # so that you can then use it to filter it out
         content = {
             'command': 'send_accepted_event_sync_notification',
             'actor': data['actor'],
-            'recipient': data['recipient']
+            'recipient': data['recipient'],
+            'minDate': data['minDate'],
+            'maxDate': data['maxDate']
         }
-        self.send_notification(content)
+        self.send_event_sync_notification(content)
 
     def send_new_notification(self, notification):
         # Send message to room group

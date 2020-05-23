@@ -32,6 +32,7 @@ class CalendarOwnedSerializer(serializers.ModelSerializer):
 class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins
     # id = serializers.ReadyOnlyField()
+    person = serializers.StringRelatedField (many = True)
 
     class Meta:
         model = models.Event
@@ -40,6 +41,7 @@ class EventSerializer (serializers.ModelSerializer):
 class CreateEventSerializer (serializers.ModelSerializer):
     # Event serializer for admins
     # id = serializers.ReadyOnlyField()
+
 
     class Meta:
         model = models.Event

@@ -4,7 +4,11 @@ import { updateObject } from '../utility'
 
 const initialState = {
   showEventSyncModal: false,
-  showPickEventSyncModal: false
+  showPickEventSyncModal: false,
+  user: '',
+  userFriend: '',
+  minDate: null,
+  maxDate: null
 }
 
 const openEventSyncModal  = (state, action) => {
@@ -21,7 +25,11 @@ const closeEventSyncModal = (state, action) => {
 
 const openPickEventSyncModal = (state, action) => {
   return updateObject (state, {
-    showPickEventSyncModal: true
+    showPickEventSyncModal: true,
+    user: action.user,
+    userFriend: action.userFriend,
+    minDate: action.minDate,
+    maxDate: action.maxDate
   })
 }
 

@@ -44,20 +44,24 @@ class NotificationsDropDown extends React.Component{
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
   }
 
-  onEventSyncDecline = (actor, recipient) => {
+  onEventSyncDecline = (actor, recipient, minDate, maxDate) => {
     const declineNotificationObject = {
       command: 'decline_event_sync',
       actor: actor,
       recipient: recipient,
+      minDate: minDate,
+      maxDate: maxDate
     }
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
   }
 
-  onEventSyncAccept = (actor, recipient) => {
+  onEventSyncAccept = (actor, recipient, minDate, maxDate) => {
     const acceptNotificationObject = {
       command: 'accept_event_sync',
       actor: actor,
-      recipient: recipient
+      recipient: recipient,
+      minDate: minDate,
+      maxDate: maxDate
     }
     NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
   }
@@ -69,6 +73,8 @@ class NotificationsDropDown extends React.Component{
   }
 
   renderNotifications = () => {
+    // For the accept notificaiton, you want to pass in min and max date and the requested user so you can
+     // filter out later
     const notificationList = []
     const notifications = this.props.notifications
     for (let i = 0; i<notifications.length; i++){
@@ -147,8 +153,23 @@ class NotificationsDropDown extends React.Component{
             {notifications[i].actor.username} wants to event sync with you.
             </span>
             <br />
-            <Button type ="primary" onClick = {()=> this.onEventSyncAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
-            <Button type ="priamry" onClick = {()=> this.onEventSyncDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+            <span>
+            {notifications[i].minDate}
+            <br />
+            {notifications[i].maxDate}
+            </span>
+            <Button type ="primary" onClick = {()=> this.onEventSyncAccept(
+              notifications[i].recipient,
+              notifications[i].actor.username,
+              notifications[i].minDate,
+              notifications[i].maxDate
+            )}> Accept</Button>
+            <Button type ="priamry" onClick = {()=> this.onEventSyncDecline(
+              notifications[i].recipient,
+              notifications[i].actor.username,
+              notifications[i].minDate,
+              notifications[i].maxDate
+            )}> Decline </Button>
             <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
@@ -184,8 +205,21 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
+              <span>
               {notifications[i].actor.username} accepted your event sync request.
-              <Button type = 'primary' onClick = {() => this.props.openPickEventSyncModal()}> Pick Date </Button>
+              </span>
+              <br />
+              <span>
+              {notifications[i].minDate}
+              <br />
+              {notifications[i].maxDate}
+              </span>
+              <Button type = 'primary' onClick = {() => this.props.openPickEventSyncModal(
+                notifications[i].recipient,
+                notifications[i].actor.username,
+                notifications[i].minDate,
+                notifications[i].maxDate
+              )}> Pick Date </Button>
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
@@ -236,6 +270,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
+  // most of the other props are in the Layouts
   return {
     deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId)),
   }

@@ -382,7 +382,12 @@ const mapDispatchToProps = dispatch => {
         closeNotification: () => dispatch(navActions.closePopup()),
         openNotification: () => dispatch(navActions.openPopup()),
         logout: () => dispatch(actions.logout()),
-        openPickEventSyncModal: () => dispatch(eventSyncActions.openPickEventSyncModal()),
+        openPickEventSyncModal: (user, userFriend, minDate, maxDate) => dispatch(eventSyncActions.openPickEventSyncModal(
+          user,
+          userFriend,
+          minDate,
+          maxDate
+        )),
         closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal())
     }
 }
