@@ -241,27 +241,34 @@ class post_detail(APIView):
         # for now fetch the first 5 comments
         new_comment = None
         # Comment posted
-        if request.method == 'POST':
-            comment_form = CommentForm(data=request.POST)
-            if comment_form.is_valid():
+        # if request.method == 'POST':
+        #     comment_form = CommentForm(data=request.POST)
+        #     if comment_form.is_valid():
 
-                # Create Comment object but don't save to database yet
-                new_comment = comment_form.save(commit=False)
-                # Assign the current post to the comment
-                new_comment.post = post
-                # Save the comment to the database
-                new_comment.save()
-        else:
-            comment_form = CommentForm()
+        #         # Create Comment object but don't save to database yet
+        #         new_comment = comment_form.save(commit=False)
+        #         # Assign the current post to the comment
+        #         new_comment.post = post
+        #         # Save the comment to the database
+        #         new_comment.save()
+        # else:
+        #     comment_form = CommentForm()
         return Response('View comment')
 
 
-# class ViewComment(APIView):
-#     def post(self, request, postID, commentID, *args, **kwargs):
+class ViewComment(APIView):
+    def post(self, request, postID, commentID, *args, **kwargs):
 #         # grabs post based off of id in newsfeed
-#         grabPost= models.Post.objects.get(id=postID)
-#         print(grabPost)
-#         grabComment=grabPost.get(id=commentID)
-#         print(grabComment)
+        grabPost= models.Post.objects.get(id=postID)
+        print(grabPost)
+        print(grabPost.like_condition)
+        grabComment= models.Comment.objects.get(id=commentID)
+        print(grabComment)
+        print(grabComment.id)
+        # check if comment id is in list of grabpost.comemnts
+
+
+        # grabComment=grabPost.get(id=commentID)
+        # print(grabComment)
 #         print(grabComment.caption)
-#         return Response('Grabbing the comment')
+        return Response('Grabbing the comment')
