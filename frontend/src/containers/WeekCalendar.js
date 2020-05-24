@@ -133,6 +133,7 @@ class WeekCalendar extends React.Component{
 
   // USE THIS
   renderWeekCell(events){
+    console.log(events)
     // So what you wanted to do for this is that you will make a list of lsit
     // so the first list is the list of the same hour for multiple day so it
     // will be a list of 7 items of all the same time, and the big list will have
@@ -184,10 +185,10 @@ class WeekCalendar extends React.Component{
         for (let item = 0; item<events.length; item++){
             if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
             && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
-          )
+          ) {
             toDoStuff.push(
               events[item]
-            )
+            )}
         }
 
         if(toDoStuff.length > 0){

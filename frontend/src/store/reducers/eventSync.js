@@ -8,7 +8,8 @@ const initialState = {
   user: '',
   userFriend: '',
   minDate: null,
-  maxDate: null
+  maxDate: null,
+  filterEvent: []
 }
 
 const openEventSyncModal  = (state, action) => {
@@ -40,6 +41,13 @@ const closePickEventSyncModal = (state, action) => {
   })
 }
 
+const eventEventSyncModal = (state, action) => {
+  console.log(action.filterEvent)
+  return updateObject (state, {
+    filterEvent: action.filterEvent
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type){
     case actionTypes.OPEN_EVENT_SYNC_MODAL:
@@ -50,6 +58,8 @@ const reducer = (state = initialState, action) => {
       return openPickEventSyncModal (state, action)
     case actionTypes.CLOSE_PICK_EVENT_SYNC_MODAL:
       return closePickEventSyncModal (state, action)
+    case actionTypes.EVENT_EVENT_SYNC_MODAL:
+      return eventEventSyncModal (state, action)
     default:
       return state;
   }

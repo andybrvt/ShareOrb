@@ -2,6 +2,7 @@ from django.shortcuts import render
 from . import models
 from rest_framework import generics
 from . import serializers
+from django.db.models import Q
 
 # Create your views here.
 # def get_calendar(request):
@@ -37,10 +38,8 @@ def filter(request):
         qs = qs.filter(start_time__gte=date_min)
     if is_valid_queryparam(date_max):
         qs = qs.filter(start_time__lte= date_max)
-    if is_valid_queryparam(friend_query):
-        qs = qs.filter(person__username = friend_query)
-    if is_valid_queryparam(person_query):
-        qs = qs.filter(person__username = person_query)
+    if is_valid_queryparam(friend_query) or is_valid_queryparam(person_query):
+        qs = qs.filter(Q(person__username = friend_query) | Q(person__username = person_query))
     return qs
 
 class CalendarView(generics.ListAPIView):

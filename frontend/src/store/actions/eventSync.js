@@ -35,3 +35,11 @@ export const closePickEventSyncModal = () => {
     type: actionTypes.CLOSE_PICK_EVENT_SYNC_MODAL
   }
 }
+
+
+export const eventEventSyncModal = (filterEvent) => {
+  return {
+    type: actionTypes.EVENT_EVENT_SYNC_MODAL,
+    filterEvent: filterEvent
+  }
+}
