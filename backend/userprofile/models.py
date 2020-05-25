@@ -20,6 +20,8 @@ class User(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
 
     def get_posts(self):
+        print(Post.objects.filter(user=self).values_list())
+        print(Post.objects.filter(user=self).values_list('caption', flat=True))
         return Post.objects.filter(user=self).values_list('id', flat=True)
 
     def __str__(self):
@@ -58,9 +60,12 @@ class Post(models.Model):
             blank=True,
             )
 
+    def grabComment(self):
+        print(Post.objects.filter(user=self).values_list())
+        print(Post.objects.filter(user=self).values_list('caption', flat=True))
+        return Post.objects.filter(user=self).values_list('id', flat=True)
 
     def __str__(self):
-
         return self.caption
 
 
@@ -78,15 +83,6 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
 
-
-    def grabComments(self):
-        print("grabbin comemnts")
-        print(Post.objects.filter(id=self.post.id))
-        # return Post.objects.filter(id=self.post.id).values_list('id', flat=True)
-
-    @property
-    def comment_body(self):
-        return self.post.body
 
 class FriendRequest(models.Model):
 	to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
