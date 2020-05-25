@@ -78,6 +78,16 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
 
+
+    def grabComments(self):
+        print("grabbin comemnts")
+        print(Post.objects.filter(id=self.post.id))
+        # return Post.objects.filter(id=self.post.id).values_list('id', flat=True)
+
+    @property
+    def comment_body(self):
+        return self.post.body
+
 class FriendRequest(models.Model):
 	to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 	from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')

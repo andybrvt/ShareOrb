@@ -265,6 +265,7 @@ class ViewComment(APIView):
         grabComment= models.Comment.objects.get(id=commentID)
         print(grabComment)
         print(grabComment.id)
+        # if(grabComment.id in grabPost.comments):
         # check if comment id is in list of grabpost.comemnts
 
 
