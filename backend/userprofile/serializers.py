@@ -38,7 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
     get_posts = serializers.ReadOnlyField()
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'get_posts+' 'friends', 'slug')
+        fields = ('id', 'username', 'first_name', 'last_name', 'bio', "get_post+" 'friends', 'slug')
 
 
 # https://stackoverflow.com/questions/17280007/retrieving-a-foreign-key-value-with-django-rest-framework-serializers

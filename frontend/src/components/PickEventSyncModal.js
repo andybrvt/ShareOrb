@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { authAxios } from './util';
 import PickEventSyncWeek from './PickEventSyncWeek';
+import PickEventSyncForm from './PickEventSyncForm';
 
 
 // Unlike the event sync modal, this is where you would pick the
@@ -77,7 +78,6 @@ class PickEventSyncModal extends React.Component{
 
   // Now that you can pull the data from both users, now you will make a mincalendar
   // where you can pick a date (remeber to use websocket so it sends over properly)
-
 
 
   render () {

@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
-import '../containers/Container_CSS/EventSync.css'
+import '../containers/Container_CSS/EventSync.css';
+import { Button } from 'antd';
+import PickEventSyncForm from './PickEventSyncForm';
 
 
 
 class PickEventSyncWeek extends React.Component{
 
   state = {
-    active: null
+    active: null,
+    selectedDate: null,
   }
 
   renderHeader(){
@@ -34,11 +37,8 @@ class PickEventSyncWeek extends React.Component{
 
     let minDate = dateFns.addDays(new Date(this.props.minDate),1)
     let maxDate = dateFns.addDays(new Date(this.props.maxDate),1)
-    console.log(minDate, maxDate)
-    console.log(this.props.minDate, this.props.maxDate)
 
     const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
-    console.log(difference)
     let cloneMinDate = this.props.minDate
 
     for(let i = 0; i<difference; i++){
@@ -78,8 +78,6 @@ class PickEventSyncWeek extends React.Component{
   }
 
   renderWeekCell(events){
-    console.log(events)
-    console.log(events.length)
     // Render the week cell, so what you want to do is pick the first to be the minDate and
     // the last day will be the maxDate
     // You will loop through each hour of each day and then redner through each day of the week
@@ -99,7 +97,6 @@ class PickEventSyncWeek extends React.Component{
      // You will need the start day and the start hour
      // The start day will be the minDate
      let date = minDate
-     console.log(new Date(date))
      const startHourDay = dateFns.startOfDay(date);
      const endHourDay = dateFns.endOfDay(date);
 
@@ -141,7 +138,6 @@ class PickEventSyncWeek extends React.Component{
           // You can always have access to the events, you just got to loop through
           // toDoStruff in the if below if you want to check
           if (toDoStuff.length > 0){
-            console.log(toDoStuff)
             days.push(
               <div
                 className = 'syncCol nonhourcell disabled'
@@ -187,7 +183,15 @@ class PickEventSyncWeek extends React.Component{
     } else {
       this.setState({active: position})
     }
-    console.log(day, hour)
+    const selectedHour = dateFns.getHours(hour)
+    const selectedYear = dateFns.getYear(day)
+    const selectedMonth = dateFns.getMonth(day)
+    const selectedDate = dateFns.getDate(day)
+    const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour)
+    console.log(finalSelectedDate)
+    this.setState({
+      selectedDate: finalSelectedDate
+    })
   }
 
   color = (position) => {
@@ -197,8 +201,20 @@ class PickEventSyncWeek extends React.Component{
     return '';
   }
 
+  submit = (value) => {
+    // On this onSubmit, you want to first get both the date, the
+    // event information, and both the user and then you will pass into the the websocket
+    // stuff and then pass it into the backend into the consumer then create the new notificaiton
+    // then group send it, then pass into redux in the front end (make sure to crate the callbacks)
+    console.log(this.state.selectedDate)
+    console.log(this.props.currentUser)
+    console.log(this.props.userFriend)
+    console.log(value)
+  }
+
 
   render() {
+    console.log(this.props)
     return (
       <div className = 'eventSyncCalendarContainer'>
         <div className = 'timecol'>
@@ -209,6 +225,7 @@ class PickEventSyncWeek extends React.Component{
           {this.renderDays()}
           {this.renderWeekCell(this.props.filterEvent)}
         </div>
+        <PickEventSyncForm onSubmit = {this.submit} />
       </div>
     )
   }
@@ -219,7 +236,9 @@ const mapStateToProps = state => {
   return {
     minDate: state.eventSync.minDate,
     maxDate: state.eventSync.maxDate,
-    filterEvent: state.eventSync.filterEvent
+    filterEvent: state.eventSync.filterEvent,
+    currentUser: state.auth.username,
+    userFriend: state.eventSync.userFriend
   }
 }
 
