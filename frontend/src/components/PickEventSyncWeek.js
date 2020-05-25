@@ -7,7 +7,9 @@ import '../containers/Container_CSS/EventSync.css'
 
 class PickEventSyncWeek extends React.Component{
 
-
+  state = {
+    active: null
+  }
 
   renderHeader(){
     // This is to render the mini Calendar month givien the date range
@@ -45,7 +47,6 @@ class PickEventSyncWeek extends React.Component{
           <div
           className = 'syncCol col-center'
           key = {i}
-          onClick = {() => this.onDateClick(cloneMinDate)}
           >
             {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
             <br />
@@ -107,6 +108,9 @@ class PickEventSyncWeek extends React.Component{
      let hour = startHourDay;
      let formattedHour = '';
 
+     // The counter is to give each box a seperate id so that it will highlight when you click on it
+     let counter = 0
+
      const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
 
      // The plan for the loop is ot have a while loop that loops thorugh each hour of the same day
@@ -115,7 +119,7 @@ class PickEventSyncWeek extends React.Component{
      while (hour <= endHourDay){
        // When adding things to the calendar you have to match the date and the hour
 
-       for (let i = 0; i< difference; i++){
+       for (let i = counter; i< (counter+difference); i++){
           const cloneDay = date
           const cloneHour = hour
           formattedHour = dateFns.format(hour, hourFormat)
@@ -141,15 +145,15 @@ class PickEventSyncWeek extends React.Component{
             days.push(
               <div
                 className = 'syncCol nonhourcell disabled'
-                onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
               >
               </div>
             )
           } else {
             days.push(
               <div
+                style = {{background: this.color(i)}}
                 className = 'col hourcell'
-                onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
+                onClick = {(e) => this.onDayHourClick(e, i, cloneDay, cloneHour)}
               >
               <span className = 'number'></span>
               </div>
@@ -168,6 +172,7 @@ class PickEventSyncWeek extends React.Component{
           {days}
          </div>
        )
+       counter = counter + 7
        days = []
        date = minDate
        hour = dateFns.addHours(hour, 1)
@@ -176,37 +181,22 @@ class PickEventSyncWeek extends React.Component{
      return <div className = 'body'>{hours}</div>
   }
 
-  onDayHourClick = (day, hour) => {
+  onDayHourClick = (e,position, day, hour) => {
+    if (this.state.active === position){
+      this.setState({active: null})
+    } else {
+      this.setState({active: position})
+    }
     console.log(day, hour)
   }
 
-  // this is a onclick function that goes to the next week
-  nextWeek =() =>{
-    console.log('nextWeek')
+  color = (position) => {
+    if (this.state.active === position){
+      return 'blue';
+    }
+    return '';
   }
 
-
-  // onClick function that goes to the prvious week
-  prevWeek = () => {
-    console.log('prevWeek')
-  }
-
-  onBackClick = () => {
-    console.log('onBackClick')
-
-  }
-
-  onDateClick = day => {
-    console.log('onDateClick')
-  }
-
-  onClickItem = oneEvent => {
-    console.log('onClickItem')
-  }
-
-  onAddEvent = () => {
-    console.log('onAddEvent')
-  }
 
   render() {
     return (
