@@ -90,7 +90,7 @@ class PickEventSyncModal extends React.Component{
           footer = {null}
           visible = {this.props.isVisble}
           onCancel = {this.props.close}
-          width = {1000}>
+          width = {1500}>
           <PickEventSyncWeek />
         </Modal>
       </div>

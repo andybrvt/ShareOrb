@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
+import '../containers/Container_CSS/EventSync.css'
 
 
 
@@ -13,8 +14,8 @@ class PickEventSyncWeek extends React.Component{
     const dateFormat = 'MMMM yyyy'
     const minDate = this.props.minDate
     return(
-      <div className = 'header row flex-middle'>
-        <div className = 'col col-center'>
+      <div className = 'header'>
+        <div className = 'col-center'>
           <span>
             {dateFns.format(new Date(minDate) , dateFormat)}
           </span>
@@ -42,7 +43,7 @@ class PickEventSyncWeek extends React.Component{
         const cloneCloneMinDate = cloneMinDate
         days.push(
           <div
-          className = 'col col-center'
+          className = 'syncCol col-center'
           key = {i}
           onClick = {() => this.onDateClick(cloneMinDate)}
           >
@@ -123,7 +124,9 @@ class PickEventSyncWeek extends React.Component{
           // add it to the toDoStuff which will loopp thorugh each each cell then it will be
           // cleared out again
           for (let item = 0; item<events.length; item++){
-            console.log(events[item])
+            // console.log(new Date(events[item].start_time))
+            // console.log(new Date(hour))
+            // console.log(events[item].start_time)
             if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
               && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
             ) {toDoStuff.push(
@@ -131,23 +134,15 @@ class PickEventSyncWeek extends React.Component{
             )}
           }
 
+          // You can always have access to the events, you just got to loop through
+          // toDoStruff in the if below if you want to check
           if (toDoStuff.length > 0){
+            console.log(toDoStuff)
             days.push(
               <div
-                className = 'col hourcell'
+                className = 'syncCol nonhourcell disabled'
                 onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
               >
-              <ul className = 'monthList'>
-                {toDoStuff.map(item => (
-                  <li key = {item.content} className = 'monthListItem'>
-                    <div onClick = {() => this.onClickItem(item)}>
-                    <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
-                    <span className = 'eventTime' > {item.content} </span>
-                    <span> {item.person} </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
               </div>
             )
           } else {
@@ -215,11 +210,16 @@ class PickEventSyncWeek extends React.Component{
 
   render() {
     return (
+      <div className = 'eventSyncCalendarContainer'>
+        <div className = 'timecol'>
+          {this.renderSide()}
+        </div>
         <div className = 'calendar'>
           {this.renderHeader()}
           {this.renderDays()}
           {this.renderWeekCell(this.props.filterEvent)}
         </div>
+      </div>
     )
   }
 
