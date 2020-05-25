@@ -4,6 +4,7 @@ import * as eventSyncActions from '../store/actions/eventSync';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { authAxios } from './util';
+import PickEventSyncWeek from './PickEventSyncWeek';
 
 
 // Unlike the event sync modal, this is where you would pick the
@@ -48,34 +49,36 @@ class PickEventSyncModal extends React.Component{
     let combineEvents = []
     authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
       params:{
+        friend,
         person,
         date_min,
         date_max
       }
     }) .then(res =>{
-      for(let i = 0; i<res.data.length; i++){
-        combineEvents.push(res.data[i])
-      }
+      console.log(res.data)
+      this.props.eventEventSyncModal(res.data)
+
     })
-    authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
-      params:{
-        friend,
-        date_min,
-        date_max
-      }
-    }) .then(res =>{
-      for(let i = 0; i<res.data.length; i++){
-        combineEvents.push(res.data[i])
-      }
-    })
-    console.log(combineEvents)
-    this.setState({
-      syncEvents: combineEvents
-    })
+    // authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
+    //   params:{
+    //     friend,
+    //     date_min,
+    //     date_max
+    //   }
+    // }) .then(res =>{
+    //   for(let i = 0; i<res.data.length; i++){
+    //     combineEvents.push(res.data[i])
+    //   }
+    // })
+
+    console.log(Object.keys(combineEvents).length)
+    this.props.eventEventSyncModal(combineEvents)
   }
 
   // Now that you can pull the data from both users, now you will make a mincalendar
   // where you can pick a date (remeber to use websocket so it sends over properly)
+
+
 
   render () {
     console.log(this.props)
@@ -86,14 +89,9 @@ class PickEventSyncModal extends React.Component{
           centered
           footer = {null}
           visible = {this.props.isVisble}
-          onCancel = {this.props.close}>
-          {this.props.currentUser}
-          <br />
-          {this.props.userFriend}
-          <br />
-          {this.props.minDate}
-          <br />
-          {this.props.maxDate}
+          onCancel = {this.props.close}
+          width = {1500}>
+          <PickEventSyncWeek />
         </Modal>
       </div>
     )
@@ -109,4 +107,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(PickEventSyncModal);
+const mapDispatchToProps = dispatch => {
+  return {
+    eventEventSyncModal: filterEvent => dispatch(eventSyncActions.eventEventSyncModal(filterEvent))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PickEventSyncModal);

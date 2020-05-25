@@ -1,0 +1,124 @@
+.eventSyncCalendarContainer {
+  position: relative;
+  left: 15px;
+  width: 1385px;
+  bottom: 0px;
+  display: flex;
+  /* background-color: red; */
+}
+
+
+.eventSyncCalendarContainer .timecol {
+  width: 50px;
+  float: left;
+  position:relative;
+  top: 127px;
+  height: 1000px;
+}
+
+.eventSyncCalendarContainer .timecol .body .cell{
+  position: relative;
+  height: 5.1em;
+  /* border-bottom: 2px solid var(--border-color); */
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.25s ease-out;
+}
+
+.eventSyncCalendarContainer .timecol .body .cell:first-child{
+  border-top: 1px solid var(--border-color);
+}
+
+.eventSyncCalendarContainer .timecol .body .cell .number {
+  font-size: 82.5%;
+  line-height: 1;
+  top: .75em;
+  right: .75em;
+  font-weight: 700;
+}
+
+.eventSyncCalendarContainer .calendar {
+  display: block;
+  position: relative;
+  width: 90%;
+  background: var(--neutral-color);
+  border: 1px solid var(--border-color);
+}
+
+.eventSyncCalendarContainer .calendar .header {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 115%;
+  padding: 1.5em 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.eventSyncCalendarContainer .col-center {
+  justify-content: center;
+  text-align: center;
+}
+
+/* Use the one below to control the widht of the day row on top */
+.eventSyncCalendarContainer .calendar .days {
+  text-transform: uppercase;
+  font-weight: 400;
+  color: ;
+  font-size: 100%;
+  padding: .75em 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.eventSyncCalendarContainer .calendar .body .disabled{
+  color: var(--text-color-light);
+  color: black;
+  pointer-events: none;
+  /* background-color: blue; */
+}
+
+.syncCol {
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%
+}
+
+.eventSyncCalendarContainer .calendar .body .hourcell{
+  position: relative;
+  height: 5em;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--neutral-color);
+  transition: 0.25s ease-out;
+  /* background-color: lightskyblue; */
+}
+
+.eventSyncCalendarContainer .calendar .body .nonhourcell{
+  position: relative;
+  height: 5em;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--neutral-color);
+  transition: 0.25s ease-out;
+  background-color: lightskyblue;
+}
+
+.eventSyncCalendarContainer .calendar .body .hourcell .monthlist{
+  list-style-type:none;
+  width: 150%;
+  position: relative;
+  right: 50px;
+}
+
+.eventSyncCalendarContainer .calendar .body .hourcell .monthlist .monthListItem {
+  background-color: lightblue;
+  text-align: center;
+}
+
+.eventSyncCalendarContainer .calendar .body .hourcell .monthlist .monthListItem .eventSyncItem{
+  font-size: 7pt;
+  color: white;
+  left: 10px;
+}
