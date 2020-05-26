@@ -27,6 +27,15 @@ class UserIDView(APIView):
     def get(self, request, *args, **kwargs):
         return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
 
+
+class PostTest(generics.ListAPIView):
+    serializer_class = serializers.PostSerializer
+    def get_queryset(self):
+        queryset = models.Post.objects.all()
+        return queryset
+
+
+
 # Grabs ALL of the users
 class ListAll(generics.ListAPIView):
     queryset = models.User.objects.all()

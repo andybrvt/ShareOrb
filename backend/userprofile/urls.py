@@ -35,7 +35,10 @@ urlpatterns = [
 	path('add-like/<slug:id>/', views.AddOneLikeToPost.as_view(), name='curr post'),
 	path('notifications/delete/<slug:id>', views.onDeleteNotifcation.as_view(), name='delete notification'),
 	path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='post comment'),
-	
+
+
+	path('userpost', views.PostTest.as_view(), name='test comment'),
+
 	# path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='grab comment'),
 
 

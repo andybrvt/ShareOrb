@@ -35,10 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
             user = i.username
             list.append(user)
         return list
-    get_posts = serializers.ReadOnlyField()
+    get_posts = serializers.StringRelatedField(many = True)
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'bio', "get_post+" 'friends', 'slug')
+        fields = ('id', 'username', 'first_name', 'last_name', 'bio', "get_posts", 'friends', 'slug')
 
 
 # https://stackoverflow.com/questions/17280007/retrieving-a-foreign-key-value-with-django-rest-framework-serializers
@@ -46,17 +46,17 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
 
     # grabComment = serializers.ReadOnlyField()
+    grabComment = serializers.StringRelatedField(many= True)
+    class Meta:
+        model = models.Post
+        # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
+        fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user', 'grabComment')
 
-	class Meta:
-		model = models.Post
-		fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
-        # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user', 'grabComment')
 
-
-	def to_representation(self, instance):
-		data = super().to_representation(instance)
-		data['user'] = PostUserSerializer(models.User.objects.get(pk=data['user'])).data
-		return data
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['user'] = PostUserSerializer(models.User.objects.get(pk=data['user'])).data
+        return data
 
 class CommentSerializer(serializers.ModelSerializer):
 

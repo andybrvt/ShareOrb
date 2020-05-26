@@ -61,9 +61,10 @@ class Post(models.Model):
             )
 
     def grabComment(self):
-        print(Post.objects.filter(user=self).values_list())
-        print(Post.objects.filter(user=self).values_list('caption', flat=True))
-        return Post.objects.filter(user=self).values_list('id', flat=True)
+        # print(Post.objects.filter(user=self).values_list())
+        # print(Post.objects.filter(user=self).values_list('caption', flat=True))
+        return Comment.objects.filter(post=self.id)
+        # return Comment.objects.all()
 
     def __str__(self):
         return self.caption
@@ -77,11 +78,12 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
 
-    class Meta:
-        ordering = ['created_on']
+    # class Meta:
+    #     ordering = ['created_on']
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+        # return self.body
 
 
 class FriendRequest(models.Model):
