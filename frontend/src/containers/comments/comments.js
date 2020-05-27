@@ -15,6 +15,7 @@ class Comments extends React.Component {
     console.log(this.props)
     console.log(this.props.newsfeed)
     console.log(this.props.newsfeed.data)
+    console.log(this.props.newsfeed.data.post_comments)
 
     const data = [
       {
@@ -74,7 +75,7 @@ class Comments extends React.Component {
       <div>
         <List
           className="comment-list"
-          header={`${data.length} replies`}
+          header={`${this.props.newsfeed.data.post_comments.length} replies`}
           itemLayout="horizontal"
           dataSource={data}
           renderItem={item => (

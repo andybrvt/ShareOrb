@@ -14,8 +14,8 @@ class NewsfeedPost extends React.Component {
   }
 
 
-    
-  
+
+
 
   AddOneToLike = () => {
     console.log("hi");
@@ -24,7 +24,7 @@ class NewsfeedPost extends React.Component {
   //   // const username = this.props.data.username;
   //   // console.log(this.props)
     authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
-    
+
   //   this.setState({value: e.target.value});
     }
     render() {
@@ -36,8 +36,8 @@ class NewsfeedPost extends React.Component {
 
     <div>
     <Card
-
-       style={{ width: 600, marginTop: 16 }}
+       class="cardborder"
+       style={{ width: 600, marginTop: 16,  }}
        actions={[
          <SettingOutlined key="setting" />,
          <EditOutlined key="edit" />,
@@ -77,7 +77,7 @@ class NewsfeedPost extends React.Component {
         style={{ marginLeft: 550 }}
         size="32px"
         onClick={success}
-    
+
 
         />
         <ShareAltOutlined
@@ -85,7 +85,7 @@ class NewsfeedPost extends React.Component {
 
         />
         <br></br>
- 
+
 
 
         {
@@ -104,7 +104,7 @@ class NewsfeedPost extends React.Component {
         }
 
         <div class="small ui labeled button" tabindex="0"
-          
+
             onClick ={this.AddOneToLike}
         >
           <div class="small ui red button">
@@ -113,7 +113,7 @@ class NewsfeedPost extends React.Component {
           <a class="ui basic red left pointing label">
             {this.props.data.like_count}
 
-            
+
 
 
           </a>
@@ -123,7 +123,7 @@ class NewsfeedPost extends React.Component {
 
             {
 
-   
+
               (this.props.data.like_condition==false) ?
 
 
@@ -135,7 +135,7 @@ class NewsfeedPost extends React.Component {
                   (this.props.data.like_count==0) ?
 
                   <div>
-                    
+
                   </div>
 
                   :
@@ -144,7 +144,7 @@ class NewsfeedPost extends React.Component {
                   <div>
                     {this.props.data.like_count} people like this
                   </div>
-              
+
                 }
               </div>
 
@@ -154,7 +154,7 @@ class NewsfeedPost extends React.Component {
               <div>
 
               {
-                
+
 
                   (this.props.data.like_count==2) ?
                  <div>
@@ -191,7 +191,7 @@ class NewsfeedPost extends React.Component {
 
               }
               </div>
-            
+
 
             }
 
@@ -199,6 +199,7 @@ class NewsfeedPost extends React.Component {
 
 
       </Card>
+      // if(this.props.newsfeed.data.post_comments.length==0){}
       <Comments className="RobotoFont" newsfeed={this.props}/>
 
          </div>

@@ -45,6 +45,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
 
+<<<<<<< HEAD
+=======
+    # grabComment = serializers.ReadOnlyField()
+>>>>>>> 938498d16d6cb380fa4b86699c6802fe467e5e18
     post_comments = serializers.StringRelatedField(many= True)
     class Meta:
         model = models.Post
