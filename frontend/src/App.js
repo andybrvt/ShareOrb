@@ -6,12 +6,13 @@ import 'antd/dist/antd.css';
 import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
+import CalendarEventWebSocketInstance from './calendarEventWebsocket';
 import CustomLayout from './containers/Layouts';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
 import * as notificationsActions from './store/actions/notifications';
-
+import * as calendarActions from './store/actions/calendars';
 
 
 class App extends Component {
@@ -41,6 +42,14 @@ class App extends Component {
       this.props.setNotifications.bind(this),
       this.props.newNotification.bind(this)
     )
+    // For the calendarEventWebosocket you just need to have one
+    // action (the addEvent) because the data for the each person is
+    // different so you just want to add it thats all
+    CalendarEventWebSocketInstance.addCallbacks(
+      this.props.addEvent.bind(this)
+    )
+
+
   }
 
   render() {
@@ -72,8 +81,8 @@ const mapDispatchToProps = dispatch => {
     addMessage: message => dispatch(messageActions.addMessage(message)),
     setMessages: messages => dispatch(messageActions.setMessages(messages)),
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
-    newNotification: notification => dispatch(notificationsActions.newNotification(notification))
-
+    newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
+    addEvent: events => dispatch(calendarActions.addEvent(events))
   }
 }
 

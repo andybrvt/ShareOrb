@@ -6,6 +6,7 @@ import axios from 'axios';
 import { authAxios } from './util';
 import PickEventSyncWeek from './PickEventSyncWeek';
 import PickEventSyncForm from './PickEventSyncForm';
+import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
 
 
 // Unlike the event sync modal, this is where you would pick the
@@ -16,19 +17,44 @@ import PickEventSyncForm from './PickEventSyncForm';
 class PickEventSyncModal extends React.Component{
   constructor(props){
     super(props);
+    this.initialiseCalendarEvent()
   }
 
   state = {
     syncEvents: []
   }
 
+  initialiseCalendarEvent(){
+    // You can add a function in to the waitForSocketConnection
+    this.waitForSocketConnection()
+  }
+
+  waitForSocketConnection (callback){
+    const component = this;
+    setTimeout(
+      function(){
+        console.log(CalendarEventWebSocketInstance.state())
+        if (CalendarEventWebSocketInstance.state() === 1){
+          console.log('connection is secure');
+          console.log(CalendarEventWebSocketInstance.state())
+          // callback();
+          return;
+        } else {
+            console.log('waiting for connection...')
+            component.waitForSocketConnection();
+        }
+      }, 100)
+  }
+
   componentDidMount () {
-    const person = this.props.userFriend
+    CalendarEventWebSocketInstance.connect(this.props.currentUser)
+    const friend = this.props.userFriend
     const date_min = this.props.minDate
     const date_max = this.props.maxDate
-    console.log(person, date_min, date_max)
+    const person = this.props.currentUser
     authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
       params:{
+        friend,
         person,
         date_min,
         date_max
@@ -39,6 +65,13 @@ class PickEventSyncModal extends React.Component{
   }
 
   componentWillReceiveProps (newProps){
+    console.log(newProps)
+    if(this.props.currentUser !== newProps.currentUser){
+      CalendarEventWebSocketInstance.disconnect()
+      CalendarEventWebSocketInstance.connect(newProps.currentUser)
+      console.log('newWebsocket')
+    }
+
     // friend is the person you are sending the request to
     // Person is the person sending the request
     // You want to get both events from both people and then add it to the
@@ -47,7 +80,6 @@ class PickEventSyncModal extends React.Component{
     const date_min = newProps.minDate
     const date_max = newProps.maxDate
     const person = newProps.currentUser
-    let combineEvents = []
     authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
       params:{
         friend,
@@ -60,20 +92,6 @@ class PickEventSyncModal extends React.Component{
       this.props.eventEventSyncModal(res.data)
 
     })
-    // authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
-    //   params:{
-    //     friend,
-    //     date_min,
-    //     date_max
-    //   }
-    // }) .then(res =>{
-    //   for(let i = 0; i<res.data.length; i++){
-    //     combineEvents.push(res.data[i])
-    //   }
-    // })
-
-    console.log(Object.keys(combineEvents).length)
-    this.props.eventEventSyncModal(combineEvents)
   }
 
   // Now that you can pull the data from both users, now you will make a mincalendar

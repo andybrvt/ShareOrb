@@ -107,6 +107,7 @@ class WebSocketNotifications {
         }
       }, 1)
   }
+
 }
 
 const NotificationWebSocketInstance = WebSocketNotifications.getInstance();
