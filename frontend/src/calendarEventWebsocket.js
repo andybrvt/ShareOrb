@@ -25,6 +25,7 @@ class WebSocketCalendarEvent {
     }
 
     this.socketRef.onmessage = (e) => {
+      console.log(e.data)
       this.socketNewEvent(e.data)
     }
 
@@ -47,8 +48,9 @@ class WebSocketCalendarEvent {
     // This is where the new event from the back end get sent to redux
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
+    console.log(parsedData)
     if (command === 'new_event'){
-      this.callbacks['new_event'](JSON.parse(parsedData.calEvent))
+      this.callbacks['new_event'](parsedData.newEvent)
     }
   }
 

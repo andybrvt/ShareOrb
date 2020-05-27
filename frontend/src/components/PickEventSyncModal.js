@@ -69,6 +69,7 @@ class PickEventSyncModal extends React.Component{
     if(this.props.currentUser !== newProps.currentUser){
       CalendarEventWebSocketInstance.disconnect()
       CalendarEventWebSocketInstance.connect(newProps.currentUser)
+      console.log('newWebsocket')
     }
 
     // friend is the person you are sending the request to
