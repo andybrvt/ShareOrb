@@ -45,8 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
 
-    # grabComment = serializers.ReadOnlyField()
-    post_comments = serializers.StringRelatedField(many= True)
+    # post_comments = serializers.ReadOnlyField()
+    post_comments = serializers.StringRelatedField(many= True, read_only=True,)
     class Meta:
         model = models.Post
         # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')

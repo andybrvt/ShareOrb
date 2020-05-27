@@ -32,6 +32,7 @@ class NewsfeedPost extends React.Component {
   const success = () => {
   message.success('Clipped to your album!');
   };
+  console.log(this.props);
   return (
 
     <div>
@@ -199,8 +200,28 @@ class NewsfeedPost extends React.Component {
 
 
       </Card>
-      // if(this.props.newsfeed.data.post_comments.length==0){}
-      <Comments className="RobotoFont" newsfeed={this.props}/>
+      {
+
+
+        (this.props.data.post_comments.length==0) ?
+
+        <div>
+          No comments
+
+        </div>
+        :
+
+        <div>
+
+        <Comments className="RobotoFont" newsfeed={this.props}/>
+        </div>
+
+
+
+      }
+
+    
+
 
          </div>
   );
