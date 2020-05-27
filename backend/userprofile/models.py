@@ -60,7 +60,7 @@ class Post(models.Model):
             blank=True,
             )
 
-    def grabComment(self):
+    def post_comments(self):
         # print(Post.objects.filter(user=self).values_list())
         # print(Post.objects.filter(user=self).values_list('caption', flat=True))
         return Comment.objects.filter(post=self.id)

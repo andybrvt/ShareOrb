@@ -46,11 +46,11 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
 
     # grabComment = serializers.ReadOnlyField()
-    grabComment = serializers.StringRelatedField(many= True)
+    post_comments = serializers.StringRelatedField(many= True)
     class Meta:
         model = models.Post
         # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
-        fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user', 'grabComment')
+        fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user', 'post_comments')
 
 
     def to_representation(self, instance):
