@@ -4,6 +4,7 @@ import * as dateFns from 'date-fns';
 import '../containers/Container_CSS/EventSync.css';
 import { Button } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
+import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
 
 
 
@@ -188,7 +189,6 @@ class PickEventSyncWeek extends React.Component{
     const selectedMonth = dateFns.getMonth(day)
     const selectedDate = dateFns.getDate(day)
     const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour)
-    console.log(finalSelectedDate)
     this.setState({
       selectedDate: finalSelectedDate
     })
@@ -209,12 +209,23 @@ class PickEventSyncWeek extends React.Component{
     console.log(this.state.selectedDate)
     console.log(this.props.currentUser)
     console.log(this.props.userFriend)
+    // The value includes
     console.log(value)
+    const submitEvent = {
+      command: 'add_sync_event',
+      title: value.title,
+      content: value.content,
+      location: value.location,
+      date: this.state.selectedDate,
+      currentUser: this.props.currentUser,
+      userFriend: this.props.userFriend
+    }
+    CalendarEventWebSocketInstance.sendEvent(submitEvent);
+
   }
 
 
   render() {
-    console.log(this.props)
     return (
       <div className = 'eventSyncCalendarContainer'>
         <div className = 'timecol'>

@@ -60,7 +60,7 @@ class Post(models.Model):
             blank=True,
             )
 
-    def grabComment(self):
+    def post_comments(self):
         # print(Post.objects.filter(user=self).values_list())
         # print(Post.objects.filter(user=self).values_list('caption', flat=True))
         return Comment.objects.filter(post=self.id)
@@ -71,12 +71,12 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments', blank = True)
+    name = models.CharField(max_length=80, blank = True)
+    email = models.EmailField(blank = True)
+    body = models.TextField(blank = True)
+    created_on = models.DateTimeField(auto_now_add=True, blank = True)
+    active = models.BooleanField(default=False, blank = True)
 
     # class Meta:
     #     ordering = ['created_on']
