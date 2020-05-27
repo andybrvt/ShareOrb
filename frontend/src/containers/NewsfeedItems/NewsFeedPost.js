@@ -1,9 +1,8 @@
 import React from "react";
-import { Popover, Button, message, Space} from 'antd';
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { authAxios } from '../../components/util';
-import { Skeleton, Switch, Card, Avatar } from 'antd';
+import { Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined } from '@ant-design/icons';
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -33,12 +32,13 @@ class NewsfeedPost extends React.Component {
   message.success('Clipped to your album!');
   };
   console.log(this.props);
+  const { TextArea } = Input;
   return (
 
     <div>
     <Card
        class="cardborder"
-       style={{ width: 600, marginTop: 16,  }}
+       style={{ width: 700, marginTop: 16,  }}
        actions={[
          <SettingOutlined key="setting" />,
          <EditOutlined key="edit" />,
@@ -206,7 +206,31 @@ class NewsfeedPost extends React.Component {
         (this.props.data.post_comments.length==0) ?
 
         <div>
-          No comments
+
+          <Comment
+          style={{ width: 600 }}
+           avatar={
+             <Avatar
+               src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+               alt="Han Solo"
+               />
+           }
+           content={
+            <div>
+             <Form.Item>
+               <TextArea
+                rows={4}
+
+               />
+               <Button type="primary">
+                 Add Comment
+               </Button>
+             </Form.Item>
+
+            </div>
+          }
+
+         />
 
         </div>
         :
@@ -220,7 +244,7 @@ class NewsfeedPost extends React.Component {
 
       }
 
-    
+
 
 
          </div>
