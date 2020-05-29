@@ -48,7 +48,7 @@ class NewsfeedPost extends React.Component {
               </div>
 
             </div>
-
+            <div class="usertext"><p>This is a test to see how it looks like right now</p></div>
     </div>
 
 
