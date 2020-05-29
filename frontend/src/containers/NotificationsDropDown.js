@@ -224,7 +224,8 @@ class NotificationsDropDown extends React.Component{
                 notifications[i].recipient,
                 notifications[i].actor.username,
                 notifications[i].minDate,
-                notifications[i].maxDate
+                notifications[i].maxDate,
+                notifications[i].id,
               )}> Pick Date </Button>
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>

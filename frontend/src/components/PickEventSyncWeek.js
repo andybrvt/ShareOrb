@@ -6,7 +6,10 @@ import { Button } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../notificationWebsocket';
-import { SubmissionError } from 'redux-form'
+import { SubmissionError } from 'redux-form';
+import * as eventSyncActions from '../store/actions/eventSync';
+import * as notificationsActions from '../store/actions/notifications';
+import { authAxios } from './util';
 
 
 class PickEventSyncWeek extends React.Component{
@@ -221,6 +224,7 @@ class PickEventSyncWeek extends React.Component{
         _error: '*Please pick a date'
       })
     } else {
+      const notificationId = this.props.notificationId
       const submitEvent = {
         command: 'add_sync_event',
         title: value.title,
@@ -238,11 +242,15 @@ class PickEventSyncWeek extends React.Component{
       }
       CalendarEventWebSocketInstance.sendEvent(submitEvent);
       NotificationWebSocketInstance.sendNotification(submitNotification)
+      this.props.closePickEventSyncModal()
+      authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+      this.props.deleteNotification(notificationId)
     }
   }
 
 
   render() {
+    console.log(this.props)
     return (
       <div className = 'eventSyncCalendarContainer'>
         <div className = 'timecol'>
@@ -266,12 +274,16 @@ const mapStateToProps = state => {
     maxDate: state.eventSync.maxDate,
     filterEvent: state.eventSync.filterEvent,
     currentUser: state.auth.username,
-    userFriend: state.eventSync.userFriend
+    userFriend: state.eventSync.userFriend,
+    notificationId: state.eventSync.notificationId
   }
 }
 
 const mapDispatchToProps = dispatch => {
-
+  return {
+    closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal()),
+    deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId))
+  }
 }
 
 

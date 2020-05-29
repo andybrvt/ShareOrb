@@ -9,6 +9,7 @@ const initialState = {
   userFriend: '',
   minDate: null,
   maxDate: null,
+  notificationId:'',
   filterEvent: []
 }
 
@@ -30,7 +31,8 @@ const openPickEventSyncModal = (state, action) => {
     user: action.user,
     userFriend: action.userFriend,
     minDate: action.minDate,
-    maxDate: action.maxDate
+    maxDate: action.maxDate,
+    notificationId: action.notificationId
   })
 }
 
