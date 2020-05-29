@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../containers/Container_CSS/EventSync.css';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../notificationWebsocket';
@@ -203,6 +203,7 @@ class PickEventSyncWeek extends React.Component{
   }
 
   color = (position) => {
+    // Just the color of the selected time on the pick event sync calendar
     if (this.state.active === position){
       return 'blue';
     }
@@ -240,12 +241,29 @@ class PickEventSyncWeek extends React.Component{
         recipient: this.props.userFriend,
         date: this.state.selectedDate
       }
+      // So the webSocket is to send the info into the backend in tho the channles to make the
+      // event for both parties
       CalendarEventWebSocketInstance.sendEvent(submitEvent);
+      // This is to send a notification to the other person that an event was choosen
       NotificationWebSocketInstance.sendNotification(submitNotification)
       this.props.closePickEventSyncModal()
+      // This is just to delete the notificaiton
       authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
       this.props.deleteNotification(notificationId)
+      this.openNotification('bottomLeft', this.state.selectedDate)
     }
+  }
+
+  openNotification = (placement,date)  => {
+    // this is to show a small notification on the side to show that the user
+    // added an event into his calendar
+    console.log(date)
+    const day = dateFns.format(new Date(date), 'MMM d, yyyy')
+    const time = dateFns.format(new Date(date), 'h a')
+    notification.info({
+      message: 'You set an event on '+ day + ' at ' + time + '.',
+      placement,
+    })
   }
 
 
