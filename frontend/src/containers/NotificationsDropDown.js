@@ -16,6 +16,10 @@ import * as dateFns from 'date-fns';
 
 class NotificationsDropDown extends React.Component{
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   onAccept = (actor, recipient) => {
     // this function will delete the notification that you accept and then send a notification
     // to the other person that they have accepted their frined reuqest
@@ -93,7 +97,7 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
             <span>
-            {notifications[i].actor.username} sent you a friend request.
+            {this.capitalize(notifications[i].actor.username)} sent you a friend request.
             </span>
             <br />
             <Button type ="primary" onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
@@ -115,7 +119,7 @@ class NotificationsDropDown extends React.Component{
           </Avatar>
         </div>
           <h4 className = 'listNotification'>
-              {notifications[i].actor.username} accepted your friend request.
+              {this.capitalize(notifications[i].actor.username)} accepted your friend request.
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
@@ -133,7 +137,7 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
-              {notifications[i].actor.username} declined your friend request.
+              {this.capitalize(notifications[i].actor.username)} declined your friend request.
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
@@ -152,7 +156,7 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
             <span>
-            {notifications[i].actor.username} wants to event sync with you.
+            {this.capitalize(notifications[i].actor.username)} wants to event sync with you.
             </span>
             <br />
             <span>
@@ -189,7 +193,7 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
-              {notifications[i].actor.username} declined your event sync request.
+              {this.capitalize(notifications[i].actor.username)} declined your event sync request.
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
@@ -208,7 +212,7 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotification'>
               <span>
-              {notifications[i].actor.username} accepted your event sync request.
+              {this.capitalize(notifications[i].actor.username)} accepted your event sync request.
               </span>
               <br />
               <span>
@@ -220,7 +224,8 @@ class NotificationsDropDown extends React.Component{
                 notifications[i].recipient,
                 notifications[i].actor.username,
                 notifications[i].minDate,
-                notifications[i].maxDate
+                notifications[i].maxDate,
+                notifications[i].id,
               )}> Pick Date </Button>
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
@@ -239,7 +244,7 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
-              {notifications[i].actor.username} set an event on {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
+              {this.capitalize(notifications[i].actor.username)} set an event on {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
               <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>

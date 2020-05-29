@@ -18,13 +18,15 @@ export const closeEventSyncModal = () => {
   }
 }
 
-export const openPickEventSyncModal = (user, userFriend, minDate, maxDate) => {
+export const openPickEventSyncModal = (user, userFriend, minDate, maxDate, notificationId) => {
   return {
     type: actionTypes.OPEN_PICK_EVENT_SYNC_MODAL,
     user: user,
     userFriend: userFriend,
     minDate: minDate,
-    maxDate: maxDate
+    maxDate: maxDate,
+    notificationId: notificationId 
+
 
   }
 }
