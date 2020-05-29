@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../notificationWebsocket';
-
+import { SubmissionError } from 'redux-form'
 
 
 class PickEventSyncWeek extends React.Component{
@@ -180,19 +180,23 @@ class PickEventSyncWeek extends React.Component{
   }
 
   onDayHourClick = (e,position, day, hour) => {
-    if (this.state.active === position){
-      this.setState({active: null})
-    } else {
-      this.setState({active: position})
-    }
     const selectedHour = dateFns.getHours(hour)
     const selectedYear = dateFns.getYear(day)
     const selectedMonth = dateFns.getMonth(day)
     const selectedDate = dateFns.getDate(day)
     const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour)
-    this.setState({
-      selectedDate: finalSelectedDate
-    })
+    if (this.state.active === position){
+      this.setState({
+        active: null,
+        selectedDate: null
+      })
+    } else {
+      this.setState({
+        active: position,
+        selectedDate: finalSelectedDate
+      })
+    }
+    console.log(finalSelectedDate)
   }
 
   color = (position) => {
@@ -212,25 +216,29 @@ class PickEventSyncWeek extends React.Component{
     console.log(this.props.userFriend)
     // The value includes
     console.log(value)
-    const submitEvent = {
-      command: 'add_sync_event',
-      title: value.title,
-      content: value.content,
-      location: value.location,
-      date: this.state.selectedDate,
-      currentUser: this.props.currentUser,
-      userFriend: this.props.userFriend
+    if (this.state.selectedDate === null){
+      throw new SubmissionError({
+        _error: '*Please pick a date'
+      })
+    } else {
+      const submitEvent = {
+        command: 'add_sync_event',
+        title: value.title,
+        content: value.content,
+        location: value.location,
+        date: this.state.selectedDate,
+        currentUser: this.props.currentUser,
+        userFriend: this.props.userFriend
+      }
+      const submitNotification = {
+        command: 'send_new_event_sync_notification',
+        actor: this.props.currentUser,
+        recipient: this.props.userFriend,
+        date: this.state.selectedDate
+      }
+      CalendarEventWebSocketInstance.sendEvent(submitEvent);
+      NotificationWebSocketInstance.sendNotification(submitNotification)
     }
-
-    const submitNotification = {
-      command: 'send_new_event_sync_notification',
-      actor: this.props.currentUser,
-      recipient: this.props.userFriend,
-      date: this.state.selectedDate
-    }
-    console.log(submitNotification)
-    CalendarEventWebSocketInstance.sendEvent(submitEvent);
-    NotificationWebSocketInstance.sendNotification(submitNotification)
   }
 
 
