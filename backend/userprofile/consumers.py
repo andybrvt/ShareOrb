@@ -95,6 +95,13 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             maxDate = data['maxDate']
             notification = CustomNotification.objects.create(type="accepted_event_sync", recipient = recipient, actor= actor, verb="accepted your event sync request",
             minDate = minDate, maxDate = maxDate)
+        if data['command'] == 'send_new_event_sync_notification':
+            recipient = get_object_or_404(User, username = data['recipient'])
+            actor = get_object_or_404(User, username = data['actor'])
+            minDate = data['minDate']
+            maxDate = data['minDate']
+            notification = CustomNotification.objects.create(type='new_event', recipient = recipient, actor = actor, verb = 'picked a time',
+            minDate = minDate, maxDate = maxDate)
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
@@ -187,6 +194,16 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         }
         self.send_event_sync_notification(content)
 
+    def send_new_event_sync_notification (self, data):
+        content = {
+            'command': 'send_new_event_sync_notification',
+            'actor': data['actor'],
+            'recipient': data['recipient'],
+            'minDate': data['date'],
+        }
+        # basically change the name of the function and try to pass it to the front end
+        self.send_event_sync_notification(content)
+
     def send_new_notification(self, notification):
         # Send message to room group
         # You want to send it to the right group channel layer so because of that
@@ -270,8 +287,11 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             self.decline_event_sync(data)
         if data['command'] == 'accept_event_sync':
             self.accept_event_sync(data)
+        if data['command'] == 'send_new_event_sync_notification':
+            self.send_new_event_sync_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
         # Send message to WebSocket
+        print (notification)
         return self.send_json(notification)

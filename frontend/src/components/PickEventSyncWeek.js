@@ -5,6 +5,7 @@ import '../containers/Container_CSS/EventSync.css';
 import { Button } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
+import NotificationWebSocketInstance from '../notificationWebsocket';
 
 
 
@@ -220,8 +221,16 @@ class PickEventSyncWeek extends React.Component{
       currentUser: this.props.currentUser,
       userFriend: this.props.userFriend
     }
-    CalendarEventWebSocketInstance.sendEvent(submitEvent);
 
+    const submitNotification = {
+      command: 'send_new_event_sync_notification',
+      actor: this.props.currentUser,
+      recipient: this.props.userFriend,
+      date: this.state.selectedDate
+    }
+    console.log(submitNotification)
+    CalendarEventWebSocketInstance.sendEvent(submitEvent);
+    NotificationWebSocketInstance.sendNotification(submitNotification)
   }
 
 

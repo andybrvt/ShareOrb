@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import * as notificationsActions from '../store/actions/notifications';
 import * as eventSyncActions from '../store/actions/eventSync';
 import PickEventSyncModal from '../components/PickEventSyncModal';
+import * as dateFns from 'date-fns';
 
 // This one is for holding the notifications and all its function
 
@@ -77,6 +78,7 @@ class NotificationsDropDown extends React.Component{
      // filter out later
     const notificationList = []
     const notifications = this.props.notifications
+    console.log(notifications)
     for (let i = 0; i<notifications.length; i++){
       if(notifications[i].type === 'friend'){
         notificationList.push(
@@ -225,6 +227,26 @@ class NotificationsDropDown extends React.Component{
         </li>
         )
       }
+      if (notifications[i].type === 'new_event'){
+        notificationList.push(
+        <li className = 'notificaitonListContainer'>
+        <div className = 'notificationIcon'>
+        <Avatar size = {55} style ={{
+          backgroundColor: 'orangered',
+          verticalAlign: 'middle'}}
+          icon = {<UserOutlined />}
+          >
+        </Avatar>
+        </div>
+          <h4 className = 'listNotification'>
+              {notifications[i].actor.username} set an event on {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
+              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          </h4>
+        </li>
+        )
+      }
+
+
     }
     return (
       <List>
