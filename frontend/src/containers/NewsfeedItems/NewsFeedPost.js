@@ -34,10 +34,26 @@ class NewsfeedPost extends React.Component {
   console.log(this.props);
   const { TextArea } = Input;
   return (
-
     <div>
+
+    <div class="mock-outer">
+      Hi
+
+      <div class="fb-group-picrow">
+            <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+      <div class="fb-group-text">
+        <h5 class="fbh5">Username</h5>
+        <span class="fb-group-date">Right Now</span>
+
+              </div>
+
+            </div>
+
+    </div>
+
+
     <Card
-       class="cardborder"
+       className="cardborder"
        style={{ width: 700, marginTop: 16,  }}
        actions={[
          <SettingOutlined key="setting" />,
@@ -200,6 +216,9 @@ class NewsfeedPost extends React.Component {
 
 
       </Card>
+
+
+
       {
 
 
@@ -219,6 +238,7 @@ class NewsfeedPost extends React.Component {
             <div>
              <Form.Item>
                <TextArea
+               placeholder="Write a comment"
                 rows={4}
 
                />
@@ -245,9 +265,12 @@ class NewsfeedPost extends React.Component {
       }
 
 
+      </div>
 
 
-         </div>
+
+
+
   );
 };
 }

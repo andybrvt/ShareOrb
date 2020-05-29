@@ -1,4 +1,4 @@
-
+/* http://jsfiddle.net/zbt5L1wp/4/ */
 
   .RobotoFont{
 
@@ -7,7 +7,8 @@
 
   }
 .cardborder {
-  border-radius: 35px 35px 35px 15px;
+  border-radius: 25px;
+  background: #73AD21;
   box-shadow: 5px 10px 18px #888888;
 
   }
@@ -30,4 +31,491 @@
     width: 100%;
     height: 100%;
 }
-    
+
+
+
+.mock-outer {
+  background-color: rgb(255, 255, 255);
+
+
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+
+
+  /* makes the border grey instead of black */
+
+  border-top-color: rgb(229, 230, 233);
+  border-bottom-color: rgb(208, 209, 213);
+  border-right-color: rgb(223, 224, 228);
+  border-left-color: rgb(223, 224, 228);
+
+  /* these style:solid are all what makes the border outlined */
+  border-top-style: solid;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  border-right-style: solid;
+
+  /* stops shadow effect grey edges on sides */
+  border-image-width: 1;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-top-width: 1px;
+
+
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
+  font-size: 12px;
+  height: 250px;
+
+  /* how everything is formatted in the post */
+  margin-bottom: 10px;
+  padding-bottom: 12px;
+  padding-left: 32px;
+  padding-right: 12px;
+  padding-top: 12px;
+  text-align: left;
+  width: 700px;
+  word-wrap: break-word;
+  border-radius: 25px;
+
+}
+
+
+.fbh5 {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  height: 19px;
+  line-height: 19.3199996948242px;
+  margin-bottom: 2px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 22px;
+  padding-top: 0px;
+  text-align: left;
+  width: 86px;
+}
+.fb-group-date {
+  color: rgb(145, 151, 163);
+  direction: ltr;
+  display: inline;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  height: auto;
+  line-height: 16.0799999237061px;
+  text-align: left;
+  width: auto;
+}
+
+
+.usertext {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: inline;
+  font-size: 14px;
+  font-weight: normal;
+  height: auto;
+  line-height: 19.3199996948242px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  text-align: left;
+  width: auto;
+  word-wrap: break-word;
+
+}
+
+.fb-group-picrow img {
+  border-bottom-color: rgb(59, 89, 152);
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(59, 89, 152);
+  border-left-style: none;
+  border-left-width: 0px;
+  border-right-color: rgb(59, 89, 152);
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(59, 89, 152);
+  border-top-style: none;
+  border-top-width: 0px;
+  color: rgb(59, 89, 152);
+  cursor: pointer;
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 40px;
+  line-height: 16.0799999237061px;
+  text-align: left;
+  width: 40px;
+  float: left;
+  padding-right: 8px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+What I'm testing right now paste in this link:
+
+
+
+.mock-outer {
+  background-color: rgb(255, 255, 255);
+
+
+
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+
+
+
+  //makes the border grey instead of black
+
+  border-top-color: rgb(229, 230, 233);
+  border-bottom-color: rgb(208, 209, 213);
+  border-right-color: rgb(223, 224, 228);
+  border-left-color: rgb(223, 224, 228);
+
+  //these style:solid are all what makes the border outlined
+  border-top-style: solid;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  border-right-style: solid;
+
+  // stops shadow effect grey edges on sides
+  border-image-width: 1;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-top-width: 1px;
+
+
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
+  font-size: 12px;
+  height: 469px;
+
+
+  margin-bottom: 10px;
+  padding-bottom: 12px;
+  padding-left: 32px;
+  padding-right: 12px;
+  padding-top: 12px;
+  text-align: left;
+  width: 700px;
+  word-wrap: break-word;
+  border-radius: 25px;
+
+}
+
+.mock-inner {
+  direction: ltr;
+  display: block;
+  height: 473px;
+}
+
+.usertext {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: inline;
+  font-size: 14px;
+  font-weight: normal;
+  height: auto;
+  line-height: 19.3199996948242px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  text-align: left;
+  width: auto;
+  word-wrap: break-word;
+
+}
+
+.mock-img-all {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 0px 1.5px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 1px 0px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 0px 1.5px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 1px 0px;
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 366px;
+  line-height: 16.0799999237061px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  text-align: left;
+  width: 470px;
+  word-wrap: break-word;
+  z-index: 0;
+
+}
+
+.mock-img {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 246px;
+  line-height: 0px;
+  position: relative;
+  text-align: left;
+  width: 470px;
+  word-wrap: break-word;
+  background: grey;
+
+}
+
+.mock-title {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+
+  height: 100px;
+
+  word-wrap: break-word;
+
+}
+
+
+
+.mock-title-top {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: Georgia, 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  height: 44px;
+  line-height: 22px;
+  margin-bottom: 5px;
+  max-height: 110px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: left;
+  text-decoration: none;
+  width: 446px;
+  word-wrap: break-word;
+
+}
+
+.mock-title-mid {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-size: 12px;
+  height: 32px;
+  line-height: 16px;
+  max-height: 80px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: left;
+  width: 446px;
+  word-wrap: break-word;
+
+}
+
+.mock-title-cap {
+  direction: ltr;
+  display: block;
+  height: 11px;
+  padding-top: 9px;
+  position: relative;
+  width: 446px;
+
+
+}
+
+.mock-title-cap-text {
+  color: rgb(145, 151, 163);
+  direction: ltr;
+  display: block;
+  font-size: 11px;
+  height: 11px;
+  line-height: 11px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 446px;
+  word-wrap: break-word;
+}
+
+.fb-group-picrow {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 40px;
+  line-height: 16.0799999237061px;
+  margin-bottom: 11px;
+  text-align: left;
+}
+
+.fbh5 {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  height: 19px;
+  line-height: 19.3199996948242px;
+  margin-bottom: 2px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 22px;
+  padding-top: 0px;
+  text-align: left;
+  width: 86px;
+}
+
+.fb-group-text {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 40px;
+  line-height: 16.0799999237061px;
+  text-align: left;
+  width: 422px;
+  word-wrap: break-word;
+}
+
+.fb-group-date {
+  color: rgb(145, 151, 163);
+  direction: ltr;
+  display: inline;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  height: auto;
+  line-height: 16.0799999237061px;
+  text-align: left;
+  width: auto;
+}
+
+.fb-group-text-top {
+  color: rgb(20, 24, 35);
+  direction: ltr;
+  display: table-cell;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 40px;
+  line-height: 16.0799999237061px;
+  text-align: left;
+  vertical-align: top;
+  width: 422px;
+}
+
+.fb-group-picrow img {
+  border-bottom-color: rgb(59, 89, 152);
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(59, 89, 152);
+  border-left-style: none;
+  border-left-width: 0px;
+  border-right-color: rgb(59, 89, 152);
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(59, 89, 152);
+  border-top-style: none;
+  border-top-width: 0px;
+  color: rgb(59, 89, 152);
+  cursor: pointer;
+  direction: ltr;
+  display: block;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+  font-size: 12px;
+  height: 40px;
+  line-height: 16.0799999237061px;
+  text-align: left;
+  width: 40px;
+  float: left;
+  padding-right: 8px
+}
+
+
+*/
