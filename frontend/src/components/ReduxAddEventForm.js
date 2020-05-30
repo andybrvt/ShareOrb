@@ -1,5 +1,6 @@
 import React from 'react';
 import { reset, Field, reduxForm } from 'redux-form';
+import { TimePicker } from 'antd';
 
 
 // The reason you want to get the props to change is because even though you are
@@ -16,15 +17,23 @@ const renderField = (field) => {
   )
 }
 
+const renderTimeField = (field) => {
+  return (
+    <div>
+    <TimePicker use12Hours format= 'h a'/>
+    </div>
+  )
+}
+
 // this will delete the iunputs after submit
 const afterSubmit = (result, dispatch) =>
   dispatch(reset('add event'));
 
+
 class ReduxAddEventForm extends React.Component {
 
-
   render () {
-    const {handleSubmit} = this.props
+    const {handleSubmit, pristine, submitting, reset} = this.props
     return (
       <form onSubmit= {handleSubmit}>
         <div>
@@ -40,18 +49,27 @@ class ReduxAddEventForm extends React.Component {
           <Field name = 'content' component= {renderField} type= 'text'/>
         </div>
         <div>
-          <label htmlFor = 'start_time'>Start Time</label>
-          <Field name = 'start_time' component= {renderField} type= 'date'/>
+          <label htmlFor = 'start_date'>Start Time</label>
+          <Field name = 'start_date' component= {renderField} type= 'date'/>
         </div>
         <div>
-          <label htmlFor = 'end_time'>End Time</label>
-          <Field name = 'end_time' component={renderField} type= 'date'/>
+          <label htmlFor = 'end_date'>End Time</label>
+          <Field name = 'end_date' component={renderField} type= 'date'/>
         </div>
         <div>
           <label htmlFor = 'location'>Location</label>
           <Field name = 'location' component= {renderField} type= 'text'/>
         </div>
+        <div>
+        <Field
+        name = 'time'
+        type = 'text'
+        component = {renderTimeField} />
+        </div>
         <button type = 'submit'>Submit</button>
+        <button type = 'button' disabled = {pristine || submitting} onClick = {reset}>
+        Clear Values
+        </button>
       </form>
     )
   }
