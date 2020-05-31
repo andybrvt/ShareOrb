@@ -62,12 +62,12 @@ class Post(models.Model):
 
     def post_comments(self):
         # print(Post.objects.filter(user=self).values_list())
-        # print(Post.objects.filter(user=self).values_list('caption', flat=True))
-        return Comment.objects.filter(post=self.id)
-        # return Comment.objects.all()
+        return (Comment.objects.filter(post=self.id).values())
+        # return Comment.objects.filter(post=self.id)
 
-    def __str__(self):
-        return self.caption
+    # 
+    # def __str__(self):
+    #     return self.caption
 
 
 class Comment(models.Model):

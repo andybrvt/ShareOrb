@@ -46,14 +46,13 @@ class Notifications extends React.Component{
     const component = this;
     setTimeout(
       function(){
-        console.log(NotificationWebSocketInstance.state())
+
         if (NotificationWebSocketInstance.state() === 1){
-          console.log('connection is secure');
-          console.log(NotificationWebSocketInstance.state())
+
           callback();
           return;
         } else{
-            console.log('waiting for connection...')
+            
             component.waitForSocketConnection(callback);
         }
       }, 100)

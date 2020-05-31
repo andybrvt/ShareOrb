@@ -77,14 +77,14 @@ class Comments extends React.Component {
           className="comment-list"
           header={`${this.props.newsfeed.data.post_comments.length} replies`}
           itemLayout="horizontal"
-          dataSource={data}
+          dataSource={this.props.newsfeed.data.post_comments}
           renderItem={item => (
             <li>
               <Comment
                 actions={item.actions}
-                author={item.author}
-                avatar={item.avatar}
-                content={item.content}
+                author={item.name}
+                avatar={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
+                content={item.body}
                 datetime={item.datetime}
               />
             </li>

@@ -43,10 +43,19 @@ class UserSerializer(serializers.ModelSerializer):
 
 # https://stackoverflow.com/questions/17280007/retrieving-a-foreign-key-value-with-django-rest-framework-serializers
 
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Comment
+        fields = "__all__"
+
+
 class PostSerializer(serializers.ModelSerializer):
 
     # post_comments = serializers.ReadOnlyField()
-    post_comments = serializers.StringRelatedField(many= True, read_only=True,)
+    post_comments = CommentSerializer(many= True)
     class Meta:
         model = models.Post
         # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
@@ -57,12 +66,6 @@ class PostSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['user'] = PostUserSerializer(models.User.objects.get(pk=data['user'])).data
         return data
-
-class CommentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.Comment
-        fields = "__all__"
 
 
 

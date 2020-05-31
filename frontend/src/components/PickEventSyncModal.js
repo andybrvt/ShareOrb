@@ -33,14 +33,13 @@ class PickEventSyncModal extends React.Component{
     const component = this;
     setTimeout(
       function(){
-        console.log(CalendarEventWebSocketInstance.state())
+
         if (CalendarEventWebSocketInstance.state() === 1){
-          console.log('connection is secure');
-          console.log(CalendarEventWebSocketInstance.state())
+
           // callback();
           return;
         } else {
-            console.log('waiting for connection...')
+          
             component.waitForSocketConnection();
         }
       }, 100)
