@@ -3,7 +3,7 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { authAxios } from '../../components/util';
 import { Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
@@ -37,107 +37,38 @@ class NewsfeedPost extends React.Component {
     <div>
 
     <div class="mock-outer">
-      Hi
+
 
       <div class="fb-group-picrow">
             <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
       <div class="fb-group-text">
-        <h5 class="fbh5">Username</h5>
-        <span class="fb-group-date">Right Now</span>
+        <h5 class="fbh5">
+
+        <span>
+          {this.props.data.user.username}
+
+
+        </span>
+
+
+        </h5>
+        <span class="fb-group-date"> {this.props.data.created_at}</span>
 
               </div>
 
             </div>
-            <div class="usertext"><p>This is a test to see how it looks like right now</p></div>
-    </div>
+            <div class="usertext">
+              <p>
+                {this.props.data.caption}
+              </p
+            ></div>
 
 
-    <Card
-       className="cardborder"
-       style={{ width: 700, marginTop: 16,  }}
-       actions={[
-         <SettingOutlined key="setting" />,
-         <EditOutlined key="edit" />,
-         <EllipsisOutlined key="ellipsis" />,
-       ]}
-     >
+            <HeartTwoTone  twoToneColor="#f5222d" style={{ fontSize: '25px', marginTop:'40px', marginRight: '10px', marginLeft:'10px', }} />
 
+            <EditTwoTone  style={{ fontSize: '25px'}}/>
 
-        <span>
-        <Popover content={
-          <div>
-
-
-            <a href="/current-user" className="nav-text">
-              {this.props.data.user.username}
-            </a>
-            <p>Content</p>
-          </div>
-          }
-          title={this.props.data.user.username}
-          placement="topLeft"
-          >
-         <Button> {this.props.data.user.username} </Button>
-        </Popover>
-
-        </span>
-        <br></br>
-        <span>
-          <b>Date:</b> {this.props.data.created_at}
-        </span>
-        <br></br>
-        <h2 className="RobotoFont">
-          {this.props.data.caption}
-        </h2>
-
-        <ArrowRightOutlined
-        style={{ marginLeft: 550 }}
-        size="32px"
-        onClick={success}
-
-
-        />
-        <ShareAltOutlined
-        style={{ marginLeft: 550 }}
-
-        />
-        <br></br>
-
-
-
-        {
-            this.props.data.image ?
-
-            // <div style="max-width: 100%; max-height: 100%;">
-              <span >
-                <img src= {temp} height="250" width="450"/>
-              </span>
-            // </div>
-
-            :
-            <div></div>
-
-
-        }
-
-        <div class="small ui labeled button" tabindex="0"
-
-            onClick ={this.AddOneToLike}
-        >
-          <div class="small ui red button">
-            <i class="heart icon"></i> Like
-          </div>
-          <a class="ui basic red left pointing label">
-            {this.props.data.like_count}
-
-
-
-
-          </a>
-
-
-        </div>
-
+            <div>
             {
 
 
@@ -214,8 +145,10 @@ class NewsfeedPost extends React.Component {
 
 
 
+            </div>
+    </div>
 
-      </Card>
+
 
 
 
@@ -276,3 +209,108 @@ class NewsfeedPost extends React.Component {
 }
 
 export default NewsfeedPost;
+
+
+
+
+
+
+
+
+
+
+
+
+// 
+//
+// <Card
+//    className="cardborder"
+//    style={{ width: 700, marginTop: 16,  }}
+//    actions={[
+//      <SettingOutlined key="setting" />,
+//      <EditOutlined key="edit" />,
+//      <EllipsisOutlined key="ellipsis" />,
+//    ]}
+//  >
+//
+//
+//     <span>
+//     <Popover content={
+//       <div>
+//
+//
+//         <a href="/current-user" className="nav-text">
+//           {this.props.data.user.username}
+//         </a>
+//         <p>Content</p>
+//       </div>
+//       }
+//       title={this.props.data.user.username}
+//       placement="topLeft"
+//       >
+//      <Button> {this.props.data.user.username} </Button>
+//     </Popover>
+//
+//     </span>
+//     <br></br>
+//     <span>
+//       <b>Date:</b> {this.props.data.created_at}
+//     </span>
+//     <br></br>
+//     <h2 className="RobotoFont">
+//       {this.props.data.caption}
+//     </h2>
+//
+//     <ArrowRightOutlined
+//     style={{ marginLeft: 550 }}
+//     size="32px"
+//     onClick={success}
+//
+//
+//     />
+//     <ShareAltOutlined
+//     style={{ marginLeft: 550 }}
+//
+//     />
+//     <br></br>
+//
+//
+//
+//     {
+//         this.props.data.image ?
+//
+//         // <div style="max-width: 100%; max-height: 100%;">
+//           <span >
+//             <img src= {temp} height="250" width="450"/>
+//           </span>
+//         // </div>
+//
+//         :
+//         <div></div>
+//
+//
+//     }
+//
+//     <div class="small ui labeled button" tabindex="0"
+//
+//         onClick ={this.AddOneToLike}
+//     >
+//       <div class="small ui red button">
+//         <i class="heart icon"></i> Like
+//       </div>
+//       <a class="ui basic red left pointing label">
+//         {this.props.data.like_count}
+//
+//
+//
+//
+//       </a>
+//
+//
+//     </div>
+//
+//
+//
+//
+//
+//   </Card>

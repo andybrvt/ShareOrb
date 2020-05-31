@@ -70,7 +70,7 @@
 
 
   font-size: 12px;
-  height: 250px;
+  height: 350px;
 
   /* how everything is formatted in the post */
   margin-bottom: 10px;
@@ -125,7 +125,7 @@
 .usertext {
   color: rgb(20, 24, 35);
 
-  font-size: 25px;
+  font-size: 20px;
   font-weight: normal;
   height: auto;
   line-height: 19.3199996948242px;
@@ -171,7 +171,9 @@
   padding-right: 8px
 }
 
-
+.name-date-space{
+  margin-bottom: 65px;
+}
 
 
 
