@@ -3,7 +3,7 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { authAxios } from '../../components/util';
 import { Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
@@ -63,7 +63,10 @@ class NewsfeedPost extends React.Component {
               </p
             ></div>
 
-
+            <Button type="primary" shape="circle">
+              <HeartTwoTone/>
+            </Button>
+            <Button type="primary" shape="circle" icon={<SearchOutlined />} />
             <HeartTwoTone  twoToneColor="#f5222d" style={{ fontSize: '25px', marginTop:'40px', marginRight: '10px', marginLeft:'10px', }} />
 
             <EditTwoTone  style={{ fontSize: '25px'}}/>
@@ -221,7 +224,7 @@ export default NewsfeedPost;
 
 
 
-// 
+//
 //
 // <Card
 //    className="cardborder"
