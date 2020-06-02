@@ -2,7 +2,7 @@ import React from "react";
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { authAxios } from '../../components/util';
-import { Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
+import {Icon, Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -63,9 +63,16 @@ class NewsfeedPost extends React.Component {
               </p
             ></div>
 
+            <Button shape="round">
+              <Icon type="heart" style={{ fontSize: '16px', color: 'hotpink' }} />
+            </Button>
+            <Button type="primary" shape="round" icon={<Icon type="heart" style={{ fontSize: '16px', color: 'hotpink' }} />} size="large">
+              Download
+            </Button>
 
-
-            <HeartTwoTone  twoToneColor="#f5222d" style={{ fontSize: '25px', marginTop:'40px', marginRight: '10px', marginLeft:'10px', }} />
+            <Button type="primary" shape="round" size="large">
+            <HeartTwoTone  twoToneColor="#f5222d" style={{ fontSize: '25px', marginTop:'40px', marginRight: '40px', marginLeft:'10px', }} />
+            </Button>
 
             <EditTwoTone  style={{ fontSize: '25px'}}/>
 
