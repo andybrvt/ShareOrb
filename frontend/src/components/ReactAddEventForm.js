@@ -83,7 +83,6 @@ class ReactAddEventForm extends React.Component {
       errors['dateRange'] = 'Cannot be empty'
     }
 
-    console.log(errors)
     this.setState ({
       error: errors
     })
@@ -99,12 +98,17 @@ class ReactAddEventForm extends React.Component {
   handleSubmit =(event) => {
     event.preventDefault();
     if(this.handleValidation()){
-      alert('Form submitted.')
+      const submitContent = {
+        title: this.state.title,
+        content: this.state.content,
+        location: this.state.location,
+        start_time: this.state.dateRange[0].toDate(),
+        end_time: this.state.dateRange[1].toDate(),
+      }
+      this.props.onSubmit(submitContent)
     } else {
-      alert('Form has errors')
+      console.log('Form has an error')
     }
-    // this.props.onSubmit()
-    // console.log(this.state.dateRange[0].toDate(), this.state.dateRange[1].toDate())
   }
 
   onFinish = values => {
