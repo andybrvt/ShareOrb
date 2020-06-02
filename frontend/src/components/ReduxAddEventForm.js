@@ -1,7 +1,8 @@
 import React from 'react';
 import { reset, Field, reduxForm } from 'redux-form';
-import { TimePicker } from 'antd';
+import { DatePicker } from 'antd';
 
+const { MonthPicker, RangePicker } = DatePicker
 
 // The reason you want to get the props to change is because even though you are
 // adding stuff in and changing the values of the different events, the props does
@@ -20,7 +21,7 @@ const renderField = (field) => {
 const renderTimeField = (field) => {
   return (
     <div>
-    <TimePicker use12Hours format= 'h a'/>
+    <RangePicker showTime format="YYYY-MM-DD HH:mm:ss"/>
     </div>
   )
 }

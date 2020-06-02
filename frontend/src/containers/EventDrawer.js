@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { authAxios } from '../components/util';
-import * as navActions from '../store/actions/nav'
+import * as navActions from '../store/actions/nav';
 
 
 
@@ -47,29 +47,29 @@ class EventDrawer extends React.Component {
 
 
   submit = (values) => {
-    console.log(values)
-    const start_date = dateFns.format(new Date(moment(values.start_date)), 'yyyy-MM-dd hh:mm:ss')
-    const end_date = dateFns.format(new Date(moment(values.end_date)), 'yyyy-MM-dd hh:mm:ss')
+    const start_date = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
+    const end_date = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
+    console.log(start_date, end_date)
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
-    // authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
-    //   title: values.title,
-    //   content: values.content,
-    //   start_time: start_date,
-    //   end_time: end_date,
-    //   location: values.location,
-    //   person: [this.props.id]
-    // })
-    // const instanceEvent = {
-    //   title: values.title,
-    //   content: values.content,
-    //   start_time: start_date,
-    //   end_time: end_date,
-    //   location: values.location,
-    //   person: [this.props.id]
-    // }
-    // this.props.addEvents(instanceEvent)
-    // this.props.closeDrawer()
+    authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+      title: values.title,
+      content: values.content,
+      start_time: start_date,
+      end_time: end_date,
+      location: values.location,
+      person: [this.props.id]
+    })
+    const instanceEvent = {
+      title: values.title,
+      content: values.content,
+      start_time: start_date,
+      end_time: end_date,
+      location: values.location,
+      person: [this.props.id]
+    }
+    this.props.addEvents(instanceEvent)
+    this.props.closeDrawer()
   }
 
 
@@ -85,11 +85,7 @@ class EventDrawer extends React.Component {
           onClose={this.props.onClose}
           visible={this.props.visible}
         >
-        <ReduxAddEventForm
-        {...this.props}
-        onSubmit = {this.submit}
-        />
-        <ReactAddEventForm />
+        <ReactAddEventForm onSubmit = {this.submit} />
         </Drawer>
       </div>
     );
