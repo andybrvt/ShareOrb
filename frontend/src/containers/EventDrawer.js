@@ -85,10 +85,6 @@ class EventDrawer extends React.Component {
           onClose={this.props.onClose}
           visible={this.props.visible}
         >
-        <ReduxAddEventForm
-        {...this.props}
-        onSubmit = {this.submit}
-        />
         <ReactAddEventForm onSubmit = {this.submit} />
         </Drawer>
       </div>

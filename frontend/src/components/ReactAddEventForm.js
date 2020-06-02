@@ -92,7 +92,13 @@ class ReactAddEventForm extends React.Component {
   }
 
   onClear = () => {
-
+    this.setState({
+      dateRange: null,
+      title: '',
+      content: '',
+      location: '',
+      error: {}
+    })
   }
 
   handleSubmit =(event) => {
@@ -105,6 +111,7 @@ class ReactAddEventForm extends React.Component {
         start_time: this.state.dateRange[0].toDate(),
         end_time: this.state.dateRange[1].toDate(),
       }
+      this.onClear()
       this.props.onSubmit(submitContent)
     } else {
       console.log('Form has an error')
@@ -185,7 +192,7 @@ class ReactAddEventForm extends React.Component {
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
-          <Button type="primary">
+          <Button type="primary" onClick = {this.onClear}>
             Clear Values
           </Button>
         </Form.Item>
