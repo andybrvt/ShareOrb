@@ -2,7 +2,7 @@ import React from "react";
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js'
 import { authAxios } from '../../components/util';
-import { Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
+import { Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -63,10 +63,8 @@ class NewsfeedPost extends React.Component {
               </p
             ></div>
 
-            <Button type="primary" shape="circle">
-              <HeartTwoTone/>
-            </Button>
-            <Button type="primary" shape="circle" icon={<SearchOutlined />} />
+
+
             <HeartTwoTone  twoToneColor="#f5222d" style={{ fontSize: '25px', marginTop:'40px', marginRight: '10px', marginLeft:'10px', }} />
 
             <EditTwoTone  style={{ fontSize: '25px'}}/>
@@ -191,9 +189,19 @@ class NewsfeedPost extends React.Component {
         </div>
         :
 
-        <div>
+        <div class="mock-outer" style={{ width: 650, marginLeft:30, marginBottom:50, marginTop:25, height:370, }}>
 
         <Comments className="RobotoFont" newsfeed={this.props}/>
+        <Form.Item>
+          <TextArea
+          placeholder="Write a comment"
+           rows={4}
+
+          />
+          <Button type="primary">
+            Add Comment
+          </Button>
+        </Form.Item>
         </div>
 
 
