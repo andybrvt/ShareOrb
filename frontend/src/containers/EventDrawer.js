@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { authAxios } from '../components/util';
-import * as navActions from '../store/actions/nav'
+import * as navActions from '../store/actions/nav';
 
 
 
@@ -47,9 +47,9 @@ class EventDrawer extends React.Component {
 
 
   submit = (values) => {
-    console.log(values)
-    const start_date = dateFns.format(new Date(moment(values.start_date)), 'yyyy-MM-dd hh:mm:ss')
-    const end_date = dateFns.format(new Date(moment(values.end_date)), 'yyyy-MM-dd hh:mm:ss')
+    console.log('values')
+    // const start_date = dateFns.format(new Date(moment(values.start_date)), 'yyyy-MM-dd hh:mm:ss')
+    // const end_date = dateFns.format(new Date(moment(values.end_date)), 'yyyy-MM-dd hh:mm:ss')
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
     // authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
@@ -89,7 +89,7 @@ class EventDrawer extends React.Component {
         {...this.props}
         onSubmit = {this.submit}
         />
-        <ReactAddEventForm />
+        <ReactAddEventForm onSubmit = {this.submit} />
         </Drawer>
       </div>
     );

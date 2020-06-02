@@ -6,6 +6,7 @@ import {
    Button,
    Input
   } from 'antd';
+import { connect } from "react-redux";
 
 const { MonthPicker, RangePicker } = DatePicker;
 
@@ -28,7 +29,8 @@ const rangeConfig = {
   rules: [{ type: 'array', required: true, message: 'Please select time!' }],
 };
 
-
+// The reason for switching back to the antd form is because the redux form doenst
+// support time picker that well
 
 class ReactAddEventForm extends React.Component {
   constructor (props) {
@@ -38,6 +40,7 @@ class ReactAddEventForm extends React.Component {
       title: '',
       content: '',
       location: '',
+      error: {}
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,6 +55,42 @@ class ReactAddEventForm extends React.Component {
       dateRange: time
     })
   }
+  handleValidation(){
+    let title = this.state.title
+    let content = this.state.content
+    let location = this.state.location
+    let dateRange = this.state.dateRange
+    let errors = {}
+    let formIsValid = true
+
+    if (title === ''){
+      formIsValid = false
+      errors['title'] = 'Cannot be empty'
+    }
+
+    if (content === ''){
+      formIsValid = false
+      errors['content'] = 'Cannot be empty'
+    }
+
+    if (location === ''){
+      formIsValid = false
+      errors['location'] = 'Cannot be empty'
+    }
+
+    if (dateRange === null){
+      formIsValid = false
+      errors['dateRange'] = 'Cannot be empty'
+    }
+
+    console.log(errors)
+    this.setState ({
+      error: errors
+    })
+
+    return formIsValid
+
+  }
 
   onClear = () => {
 
@@ -59,6 +98,12 @@ class ReactAddEventForm extends React.Component {
 
   handleSubmit =(event) => {
     event.preventDefault();
+    if(this.handleValidation()){
+      alert('Form submitted.')
+    } else {
+      alert('Form has errors')
+    }
+    // this.props.onSubmit()
     // console.log(this.state.dateRange[0].toDate(), this.state.dateRange[1].toDate())
   }
 
@@ -90,7 +135,8 @@ class ReactAddEventForm extends React.Component {
            },
          ]}
        >
-         <Input name= 'title' placeholder = 'Please put title here'/>
+         <Input name= 'title' placeholder = 'Please put title here' value = {this.state.title}/>
+         <span style = {{color: 'red'}}>{this.state.error["title"]}</span>
        </Form.Item>
        <label> Content </label>
        <br />
@@ -103,7 +149,8 @@ class ReactAddEventForm extends React.Component {
           },
         ]}
       >
-        <Input name = 'content' placeholder= 'Please put content here'/>
+        <Input name = 'content' placeholder= 'Please put content here' value = {this.state.content}/>
+        <span style = {{color: 'red'}}>{this.state.error['content']}</span>
       </Form.Item>
       <label> Location </label>
       <br />
@@ -116,12 +163,14 @@ class ReactAddEventForm extends React.Component {
          },
        ]}
      >
-       <Input name = 'location' placeholder = 'Please enter location here'/>
+       <Input name = 'location' placeholder = 'Please enter location here' value = {this.state.location}/>
+       <span style = {{color: 'red'}}>{this.state.error['location']}</span>
      </Form.Item>
         <label> RangePicker </label>
         <br />
         <Form.Item name="range-time-picker" {...rangeConfig}>
-          <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" onChange = {this.onTimeChange}/>
+          <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" onChange = {this.onTimeChange} value = {this.state.dateRange} />
+          <span style = {{color: 'red'}}>{this.state.error['dateRange']}</span>
         </Form.Item>
         <Form.Item
           wrapperCol={{
