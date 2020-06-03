@@ -63,19 +63,15 @@ class NewsfeedPost extends React.Component {
               </p
             ></div>
 
-            <Button shape="round">
-              <Icon type="heart" style={{ fontSize: '16px', color: 'hotpink' }} />
-            </Button>
-            <Button type="primary" shape="round" icon={<Icon type="heart" style={{ fontSize: '16px', color: 'hotpink' }} />} size="large">
-              Download
+            <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginTop:'40px', marginRight: '15px',}}>
+              <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
+              {this.props.data.like_count}
             </Button>
 
-            <Button type="primary" shape="round" size="large">
-            <HeartTwoTone  twoToneColor="#f5222d" style={{ fontSize: '25px', marginTop:'40px', marginRight: '40px', marginLeft:'10px', }} />
+
+            <Button shape="round" size="middle">
+              <EditTwoTone  style={{ fontSize: '20px'}}/>
             </Button>
-
-            <EditTwoTone  style={{ fontSize: '25px'}}/>
-
             <div>
             {
 
