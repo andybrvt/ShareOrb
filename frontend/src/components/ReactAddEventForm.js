@@ -51,6 +51,7 @@ class ReactAddEventForm extends React.Component {
   }
 
   onTimeChange = (time) => {
+    console.log(time)
     this.setState({
       dateRange: time
     })
