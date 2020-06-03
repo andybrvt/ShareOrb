@@ -70,6 +70,7 @@ class EditEventPopUp extends React.Component {
       content: this.props.content,
       start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd'),
       end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd'),
+      dateRange: [dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd'), dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd')],
       location: this.props.location
     }
   }

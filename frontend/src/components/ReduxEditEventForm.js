@@ -3,6 +3,14 @@ import { Field, reduxForm } from 'redux-form';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import { connect } from "react-redux";
+import {
+   Form,
+   DatePicker,
+   TimePicker,
+   Button,
+   Input
+  } from 'antd';
+import moment from 'moment';
 
 
 // You can also validate the fields on the forms btw
@@ -20,10 +28,44 @@ import { connect } from "react-redux";
 // passed into the renderField
 // With the props passed in, it makes it pretty 'universal' to all the Fields in the form
 const renderField = (field) => {
+  console.log(field)
   return (
-  <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
+    <Input {...field.input} type = {field.type} placeholder= {field.placeholder}/>
   )
 }
+
+// <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
+
+const renderTimeField = (field) => {
+  console.log(field.input.value[0])
+
+  return (
+    <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" value = {[moment(field.input.value[0], 'YYYY-MM-DD HH:mm:ss'), moment(field.input.value[1], 'YYYY-MM-DD HH:mm:ss')]}/>
+  )
+}
+
+
+const { MonthPicker, RangePicker } = DatePicker;
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+
+const config = {
+  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+};
+
+const rangeConfig = {
+  rules: [{ type: 'array', required: true, message: 'Please select time!' }],
+};
+
 
 
 class ReduxEditEventForm extends React.Component{
@@ -62,6 +104,9 @@ class ReduxEditEventForm extends React.Component{
           <div>
             <label htmlFor = 'location'>Location</label>
             <Field name = 'location' component= {renderField} type= 'text'/>
+          </div>
+          <div>
+            <Field name = 'dateRange' component = {renderTimeField} type ='date' />
           </div>
           <button type = 'submit' onClick = {handleSubmit}>Submit</button>
           <button onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}> Delete </button>
