@@ -48,7 +48,7 @@ post_save.connect(post_save_user_model_receiver, sender=User)
 
 
 class Post(models.Model):
-    caption = models.CharField(max_length=300, default = 'caption')
+    caption = models.CharField(max_length=1000, default = 'caption')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0, blank = True)
@@ -65,7 +65,7 @@ class Post(models.Model):
         return (Comment.objects.filter(post=self.id).values())
         # return Comment.objects.filter(post=self.id)
 
-    # 
+    #
     # def __str__(self):
     #     return self.caption
 

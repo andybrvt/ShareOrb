@@ -59,7 +59,19 @@ class NewsfeedPost extends React.Component {
             </div>
             <div class="usertext">
               <p>
-                {this.props.data.caption}
+
+                {
+                  ((this.props.data.caption).length>600)?
+                  <div>
+                  {this.props.data.caption.substring(0,600)}  ... see more
+                  </div>
+                  :
+                  <div>
+                  {this.props.data.caption}
+                  </div>
+                }
+
+
               </p
             ></div>
 

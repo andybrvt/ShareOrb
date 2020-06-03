@@ -70,7 +70,12 @@
 
 
   font-size: 12px;
-  height: 350px;
+
+
+  /* resize based off of auto height */
+  height: auto;
+  max-height: 630px;
+
 
   /* how everything is formatted in the post */
   margin-bottom: 10px;
