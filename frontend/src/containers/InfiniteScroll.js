@@ -64,7 +64,9 @@ class InfiniteList extends React.Component {
   render () {
     const { error, hasMore, loading, post} = this.state
     return (
-      <div style={{overflowY: 'scroll', flex: 1}}>
+
+      <div style={{ flex: 1}}>
+        <div className="testFont" style={{color:'black', fontSize:30}}> Let's test the font</div>
       <h1>Welcome! </h1>
 
       <p> Here's what's going on today! </p>

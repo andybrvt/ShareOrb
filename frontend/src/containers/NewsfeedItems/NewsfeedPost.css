@@ -176,48 +176,10 @@
 }
 
 .fontTest{
-  font-family: "segoeTest", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px;
+  font-family: Segoe UI;
+  font-size: 18px;  font-weight: 400; line-height: 20px;
   color:black;
  }
-
-
-
-
-
- @font-face {
- font-family: 'segoeTest';
-
- src: local('segoeTest'), url('Segoe UI.woff') format('woff');
- }
-
-
-
-
-
-
-
-
-/* h1 { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 23px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; }
-h3 { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; }
-p { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; }
-blockquote { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; }
- pre { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 11px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -268,7 +230,6 @@ What I'm testing right now paste in this link:
 
 
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
 
   font-size: 12px;
   height: 469px;
@@ -317,7 +278,7 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   height: 366px;
   line-height: 16.0799999237061px;
@@ -335,7 +296,7 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   height: 246px;
   line-height: 0px;
@@ -364,7 +325,7 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: Georgia, 'lucida grande', tahoma, verdana, arial, sans-serif;
+
   font-size: 18px;
   font-weight: 500;
   height: 44px;
@@ -428,7 +389,7 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   height: 40px;
   line-height: 16.0799999237061px;
@@ -440,7 +401,7 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 14px;
   font-weight: normal;
   height: 19px;
@@ -463,7 +424,7 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   height: 40px;
   line-height: 16.0799999237061px;
@@ -476,7 +437,7 @@ What I'm testing right now paste in this link:
   color: rgb(145, 151, 163);
   direction: ltr;
   display: inline;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   font-weight: normal;
   height: auto;
@@ -489,7 +450,6 @@ What I'm testing right now paste in this link:
   color: rgb(20, 24, 35);
   direction: ltr;
   display: table-cell;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
   font-size: 12px;
   height: 40px;
   line-height: 16.0799999237061px;
@@ -520,7 +480,7 @@ What I'm testing right now paste in this link:
   cursor: pointer;
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   height: 40px;
   line-height: 16.0799999237061px;
