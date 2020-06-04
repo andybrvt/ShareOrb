@@ -183,8 +183,10 @@ class WeekCalendar extends React.Component{
         // it will add it to the toDoStuff which will loop through each cell
         // then it will be cleared out again
         for (let item = 0; item<events.length; item++){
-            if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-            && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+          const date = new Date(events[item].start_time)
+          const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
+            if(dateFns.getHours(utc) === dateFns.getHours(new Date(hour))
+            && dateFns.isSameDay(utc, cloneDay)
           ) {
             toDoStuff.push(
               events[item]
@@ -201,7 +203,8 @@ class WeekCalendar extends React.Component{
               {toDoStuff.map(item => (
                 <li key = {item.content} className = 'monthListItem'>
                   <div onClick = {() => this.onClickItem(item)}>
-                  <span className = 'eventTime'> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+                  <span className = 'eventTime'> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
+                     'ha')}</span>
                   <span className = 'eventTime' > {item.content} </span>
                   </div>
                 </li>

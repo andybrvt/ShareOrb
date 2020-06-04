@@ -65,19 +65,24 @@ class EditEventPopUp extends React.Component {
   // So you pass the intial values into your form but you will have to pass
   // it as a dictioanry with each one being a key corresponding with each input
   getInitialValue = () => {
+    const date_start = new Date(this.props.start_time)
+    const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
+    const date_end = new Date(this.props.end_time)
+    const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
+    console.log(utc_start, utc_end)
     return{
       title: this.props.title,
       content: this.props.content,
-      start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd'),
-      end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd'),
-      dateRange: [dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd'), dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd')],
+      start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
+      end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
+      dateRange: [dateFns.format(utc_start, 'yyyy-MM-dd HH:mm a'), dateFns.format(utc_end, 'yyyy-MM-dd HH:mm a')],
       location: this.props.location
     }
   }
 
 
   render () {
-    console.log(this.props)
+    console.log(new Date(this.props.start_time))
     return (
       <div>
       <RadiusBottomleftOutlined />

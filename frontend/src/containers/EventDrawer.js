@@ -47,8 +47,8 @@ class EventDrawer extends React.Component {
 
 
   submit = (values) => {
-    const start_date = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
-    const end_date = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
+    const start_date = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd HH:mm')
+    const end_date = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd HH:mm')
     console.log(start_date, end_date)
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up

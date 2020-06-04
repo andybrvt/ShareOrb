@@ -15,9 +15,8 @@ import EditEventPopUp from '../components/EditEventPopUp';
 import { NavLink } from 'react-router-dom';
 import MiniCalendar from '../components/MiniCalendar';
 import EventSyncModal from '../components/EventSyncModal';
-
+import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
-
 
 
 class PersonalCalendar extends React.Component{
@@ -151,7 +150,7 @@ class PersonalCalendar extends React.Component{
 
 
   renderCells(events) {
-
+    console.log(events)
     // startOfMonth() will give you the date of the first day of the current month
     // endOfMonth() will give you the date of the last day of the current month
     // the const start date is to fill in the days of the week of the previous month
@@ -184,7 +183,12 @@ class PersonalCalendar extends React.Component{
       // weekdays the same
       for (let i= 0; i<7; i++){
         for (let item = 0; item < events.length; item++){
-          if (dateFns.isSameDay(new Date(events[item].start_time), day)){
+          // So the time we put in is the UTC time (universal time ) but when you
+          // put moment or new Date it gives you your time zome date so that is why you
+          // have to convert it
+          const date = new Date(events[item].start_time)
+          const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
+          if (dateFns.isSameDay(utc, day)){
             toDoStuff.push(
               events[item]
             )
@@ -199,7 +203,8 @@ class PersonalCalendar extends React.Component{
         // the classname in the bottom is to check if its not in the smae month
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
-        if (toDoStuff.length > 0){days.push(
+        if (toDoStuff.length > 0){
+          days.push(
             <div
               className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
               : dateFns.isSameDay(day, currentMonth) ?
@@ -218,7 +223,8 @@ class PersonalCalendar extends React.Component{
               {toDoStuff.map(item => (
                 <li key={item.content} className = 'monthListItem'>
                   <div onClick = {() => this.onClickItem(item)}>
-                  <span className = ''> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+                  <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
+                     'HH:mm a')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </li>
@@ -299,6 +305,7 @@ class PersonalCalendar extends React.Component{
 
 
   onClickItem = oneEvent =>{
+    console.log(oneEvent)
     this.props.openModal(oneEvent)
   }
 

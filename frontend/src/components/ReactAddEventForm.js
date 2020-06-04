@@ -181,7 +181,11 @@ class ReactAddEventForm extends React.Component {
         <label> RangePicker </label>
         <br />
         <Form.Item name="range-time-picker" {...rangeConfig}>
-          <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" onChange = {this.onTimeChange} value = {this.state.dateRange} />
+          <RangePicker showTime={{
+            format: 'HH:mm a',
+            minuteStep : 30,
+            user12Hours: true
+          }} format="YYYY-MM-DD HH:mm a" onChange = {this.onTimeChange} value = {this.state.dateRange} />
           <span style = {{color: 'red'}}>{this.state.error['dateRange']}</span>
         </Form.Item>
         <Form.Item

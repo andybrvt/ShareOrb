@@ -113,8 +113,10 @@ class DayCalendar extends React.Component{
     for (let i = 0; i<24; i++){
       formattedHour = dateFns.format(hour, hourFormat)
       for(let item = 0; item < events.length; item ++){
-        if (dateFns.isSameHour(new Date(events[item].start_time), hour)
-            && dateFns.isSameDay(new Date(events[item].start_time), hour) ){
+        const date = new Date(events[item].start_time)
+        const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
+        if (dateFns.isSameHour(utc, hour)
+            && dateFns.isSameDay(utc, hour) ){
           toDoStuff.push(
             events[item]
           )
@@ -137,7 +139,8 @@ class DayCalendar extends React.Component{
             {toDoStuff.map(item => (
               <li key={item.content} className = 'monthListItem'>
               <div onClick = {() => this.onClickItem(item)}>
-              <span className = ''> {dateFns.format(new Date(item.start_time), 'ha')}</span>
+              <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
+                 'ha')}</span>
               <span className = ' ' > {item.content} </span>
               </div>
               </li>
