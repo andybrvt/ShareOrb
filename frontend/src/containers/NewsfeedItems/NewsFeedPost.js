@@ -57,7 +57,7 @@ class NewsfeedPost extends React.Component {
               </div>
 
             </div>
-            <div class="usertext">
+            <div class="fontTest">
               <p>
 
                 {
@@ -93,7 +93,7 @@ class NewsfeedPost extends React.Component {
 
 
 
-              <div>
+              <div className>
 
                 {
                   (this.props.data.like_count==0) ?
@@ -206,7 +206,7 @@ class NewsfeedPost extends React.Component {
 
         <div class="mock-outer" style={{ width: 650, marginLeft:30, marginBottom:50, marginTop:25, height:370, }}>
 
-        <Comments className="RobotoFont" newsfeed={this.props}/>
+        <Comments className="fontTest" newsfeed={this.props}/>
         <Form.Item>
           <TextArea
           placeholder="Write a comment"

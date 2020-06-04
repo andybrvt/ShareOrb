@@ -1,11 +1,6 @@
 /* http://jsfiddle.net/zbt5L1wp/4/ */
 
-  .RobotoFont{
 
-    font-size: 22px;
-    font-family: 'Roboto', sans-serif;
-
-  }
 .cardborder {
   border-radius: 25px;
   background: #73AD21;
@@ -95,7 +90,7 @@
   color: rgb(20, 24, 35);
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 14px;
   font-weight: normal;
   height: 19px;
@@ -117,7 +112,7 @@
   color: rgb(145, 151, 163);
   direction: ltr;
   display: inline;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   font-weight: normal;
   height: auto;
@@ -130,7 +125,7 @@
 .usertext {
   color: rgb(20, 24, 35);
 
-  font-size: 20px;
+  font-size: 15px;
   font-weight: normal;
   height: auto;
   line-height: 19.3199996948242px;
@@ -141,7 +136,7 @@
   text-align: left;
   width: auto;
   word-wrap: break-word;
-   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 }
 
 .fb-group-picrow img {
@@ -166,7 +161,7 @@
   cursor: pointer;
   direction: ltr;
   display: block;
-  font-family: helvetica, arial, 'lucida grande', sans-serif;
+
   font-size: 12px;
   height: 40px;
   line-height: 16.0799999237061px;
@@ -180,6 +175,21 @@
   margin-bottom: 65px;
 }
 
+.fontTest{
+  font-family: "segoeTest", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px;
+  color:black;
+ }
+
+
+
+
+
+ @font-face {
+ font-family: 'segoeTest';
+
+ src: local('segoeTest'), url('Segoe UI.woff') format('woff');
+ }
 
 
 
@@ -188,15 +198,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
+/* h1 { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 23px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; }
+h3 { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; }
+p { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; }
+blockquote { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; }
+ pre { font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; font-size: 11px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; } */
 
 
 
