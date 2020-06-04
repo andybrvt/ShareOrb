@@ -72,7 +72,7 @@ class Comments extends React.Component {
 
 
     return (
-      <div>
+      <div class="fontTest">
         <List
           className="comment-list"
           header={`${this.props.newsfeed.data.post_comments.length} replies`}

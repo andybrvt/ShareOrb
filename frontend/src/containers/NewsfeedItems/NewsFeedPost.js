@@ -181,6 +181,7 @@ class NewsfeedPost extends React.Component {
              <Avatar
                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                alt="Han Solo"
+               class="fontTest"
                />
            }
            content={
@@ -211,6 +212,7 @@ class NewsfeedPost extends React.Component {
           <TextArea
           placeholder="Write a comment"
            rows={4}
+           class="fontTest"
 
           />
           <Button type="primary">

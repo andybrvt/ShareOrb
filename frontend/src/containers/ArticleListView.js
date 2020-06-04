@@ -72,7 +72,7 @@ class ArticleList extends React.Component {
 
 				<div>
 				 		<Form3 data = {this.props}/>
-						<InfiniteScroll />
+						<InfiniteScroll data={this.props} />
 				 </div>
 				 :
 

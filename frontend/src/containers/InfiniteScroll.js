@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import NewsFeedPost from '../containers/NewsfeedItems/NewsFeedPost';
 import { authAxios } from '../components/util';
-
+import './InfiniteScroll.css';
 
 // Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.Component {
@@ -62,14 +62,13 @@ class InfiniteList extends React.Component {
   };
 
   render () {
+    console.log(this.props)
     const { error, hasMore, loading, post} = this.state
     return (
 
       <div style={{ flex: 1}}>
-        <div className="testFont" style={{color:'black', fontSize:30}}> Let's test the font</div>
-      <h1>Welcome! </h1>
+        <div className="testFont" style={{color:'black', fontSize:25}}> Welcome {this.props.data.username}. Here's what's going on today! </div>
 
-      <p> Here's what's going on today! </p>
       <hr />
       {post.map((j,index) => {
         return <NewsFeedPost data = {j}  />

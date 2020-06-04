@@ -176,18 +176,20 @@
 }
 
 .fontTest{
-  font-family: Segoe UI;
-  font-size: 18px;  font-weight: 400; line-height: 20px;
+  font-family: 'Segoe UI Regular';
+  font-size: 18px;
+font-style: normal; font-variant: normal; font-weight: 400; line-height: 29px;
   color:black;
  }
 
 
 
-
-
-
-
-
+ @font-face {
+ font-family: 'Segoe UI Regular';
+ font-style: normal;
+ fornt-weight:400;
+ src: local('Segoe UI Regular'), url('Segoe UI.woff') format('woff');
+ }
 
 
 
