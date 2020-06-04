@@ -150,7 +150,7 @@ class PersonalCalendar extends React.Component{
 
 
   renderCells(events) {
-
+    console.log(events)
     // startOfMonth() will give you the date of the first day of the current month
     // endOfMonth() will give you the date of the last day of the current month
     // the const start date is to fill in the days of the week of the previous month
@@ -188,7 +188,6 @@ class PersonalCalendar extends React.Component{
           // have to convert it
           const date = new Date(events[item].start_time)
           const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
-          console.log(utc)
           if (dateFns.isSameDay(utc, day)){
             toDoStuff.push(
               events[item]
@@ -225,7 +224,7 @@ class PersonalCalendar extends React.Component{
                 <li key={item.content} className = 'monthListItem'>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                     'ha')}</span>
+                     'HH:mm a')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </li>
