@@ -3,7 +3,6 @@ import { Tabs } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
-import './AdobeClean-Light.ttf';
 
 import {
   Button,

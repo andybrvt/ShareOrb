@@ -54,19 +54,6 @@
 
 
 
-/* delete body IT IS NOT USED */
-        body {
-               /* font-family: 'Adobe Clean';F */
-               color: #989898;
-               margin: 10px;
-               }
-               .navfar {
-           background-color: white;
-           border-bottom: 1px solid #e6e6e6;
-           -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
-           box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
-       }
-
        .navbar {
            z-index: 16;
            position: fixed;
