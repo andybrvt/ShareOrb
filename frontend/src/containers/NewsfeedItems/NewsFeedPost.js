@@ -1,15 +1,48 @@
 import React from "react";
 import "./NewsfeedPost.css";
-import Comments from '../../containers/comments/comments.js'
+import Comments from '../../containers/comments/comments.js';
 import { authAxios } from '../../components/util';
-import {Icon, Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form} from 'antd';
+import {Icon, Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import NewsFeedPostModal from './NewsFeedPostModal.js';
 class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-
+      visible: false,
     }
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  OnClickPost=()=> {
+    console.log("pressed on post")
+    // return <NewsFeedPostModal />
+    console.log(this.state.visible);
+    this.showModal();
+    console.log(this.state.visible);
+
+
+
+
   }
 
 
@@ -36,7 +69,21 @@ class NewsfeedPost extends React.Component {
   return (
     <div>
 
-    <div class="mock-outer fontTest">
+
+      <Modal
+        title="Basic Modal"
+        visible={this.state.visible}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>{this.props.data.caption}</p>
+      </Modal>
+
+
+
+    <div class="mock-outer fontTest" onClick={this.OnClickPost}>
 
 
       <div class="fb-group-picrow">
