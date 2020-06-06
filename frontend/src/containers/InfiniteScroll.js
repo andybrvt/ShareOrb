@@ -66,10 +66,13 @@ class InfiniteList extends React.Component {
     const { error, hasMore, loading, post} = this.state
     return (
 
+
       <div style={{ flex: 1}}>
+
         <div className="testFont" style={{color:'black', fontSize:25}}> Welcome {this.props.data.username}. Here's what's going on today! </div>
 
       <hr />
+      
       {post.map((j,index) => {
         return <NewsFeedPost data = {j}  />
       })}

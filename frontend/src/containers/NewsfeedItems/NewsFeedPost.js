@@ -36,7 +36,7 @@ class NewsfeedPost extends React.Component {
   return (
     <div>
 
-    <div class="mock-outer">
+    <div class="mock-outer fontTest">
 
 
       <div class="fb-group-picrow">
@@ -57,7 +57,7 @@ class NewsfeedPost extends React.Component {
               </div>
 
             </div>
-            <div class="fontTest">
+            <div style={{marginTop:30}}>
               <p>
 
                 {
