@@ -94,18 +94,12 @@ class ReduxEditEventForm extends React.Component{
             <Field name = 'content' component= {renderField} type= 'text'/>
           </div>
           <div>
-            <label htmlFor = 'start_time'>Start Time</label>
-            <Field name = 'start_time' component= {renderField} type= 'date'/>
-          </div>
-          <div>
-            <label htmlFor = 'end_time'>End Time</label>
-            <Field name = 'end_time' component={renderField} type= 'date'/>
-          </div>
-          <div>
             <label htmlFor = 'location'>Location</label>
             <Field name = 'location' component= {renderField} type= 'text'/>
           </div>
           <div>
+            <label htmlFor = 'dateRange'>Date Range</label>
+            <br />
             <Field name = 'dateRange' component = {renderTimeField} type ='date' />
           </div>
           <button type = 'submit' onClick = {handleSubmit}>Submit</button>

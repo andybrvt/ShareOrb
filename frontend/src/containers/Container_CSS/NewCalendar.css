@@ -1,20 +1,36 @@
 
 .icon {
-
   font-style: normal;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+   display: inline-block;
+   vertical-align: middle;
+   line-height: 1;
+   text-transform: none;
+   letter-spacing: normal;
+   word-wrap: normal;
+   white-space: nowrap;
+   direction: ltr;
 
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'liga';
+   -webkit-font-smoothing: antialiased;
+   text-rendering: optimizeLegibility;
+   -moz-osx-font-smoothing: grayscale;
+   font-feature-settings: 'liga';
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrow-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.arrow-left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }
 
 
@@ -224,6 +240,7 @@ main {
   width: 90%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+
 }
 
 .calendar .header {
@@ -262,7 +279,7 @@ main {
   border-bottom: 1px solid var(--border-color);
 }
 
-.calendar .body .cell {
+.calendar .body .row .cell {
   position: relative;
   height: 10em;
   border-right: 1px solid var(--border-color);
@@ -272,17 +289,28 @@ main {
   transition: 0.25s ease-out;
 }
 
-.calendar .body .cell .monthList {
+.calendar .body .row .testItem {
+  background-color: red;
+  grid-row-start:1;
+}
+
+.calendar .body .row .cell .monthList {
   list-style-type:none;
   width: 150%;
   position: relative;
   right: 50px;
 }
 
+.calendar .body .row .monthEvent {
+  background-color: lightblue;
+  /* grid-column: 1/7; */
+}
+
+
 .calendar .body .cell .monthList .monthListItem{
   background-color: lightblue;
   text-align: center;
-}
+  }
 
 .calendar .body .cell .monthList .monthListItem .eventTime{
   font-size: 7pt;
@@ -349,6 +377,7 @@ main {
   padding: .75em 0;
   border-bottom: 1px solid var(--border-color);
   display: flex;
+
 }
 
 .miniCalContainer .miniCalendar .miniCol{
@@ -517,8 +546,16 @@ main {
   border-image-slice: 1;
 }
 
+/* For the sizing of the calendar, you have to fix again sometime soon
+to make it adjustable */
 .calendar .body .row {
+  display: grid;
+  grid-template-columns: 242px 242px 242px 242px 242px 242px 242px;
+  grid-template-rows: 23.5px 23.5px 23.5px 23.5px 23.5px 23.5px;
+  grid-auto-flow: dense;
+  grid-row-gap: 2px;
   border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
 }
 
 
@@ -527,7 +564,7 @@ main {
   border-bottom: none;
 }
 
-.calendar .body .cell:last-child {
+.calendar .body .row .cell:last-child {
   border-right: none;
 }
 
@@ -536,18 +573,19 @@ main {
 }
 
 /* This is for the upper part of the cell in the PersonalCalendar */
-.calendar .body .cell .uppertab{
+.calendar .body .row .cell .uppertab{
+  grid-row-start: 1;
+  grid-row-end: 4;
   height: 25px;
 }
 
-.calendar .body .cell .uppertab .uppertab .circle .number {
+.calendar .body .row .cell .uppertab .uppertab .circle .number {
   position: absolute;
   font-size: 82.5%;
   line-height: 1;
   top: .75em;
   right: .75em;
   font-weight: 700;
-
 
 }
 
@@ -562,6 +600,13 @@ main {
 
 .calendar .body .cell .circle:hover {
   background-color: #bbb;
+}
+
+/* This is to test for day number on each column */
+.calendar .body .row .calendarNum {
+  grid-row-start: 1;
+  text-align: right;
+  /* background-color: red; */
 }
 
 
@@ -649,8 +694,8 @@ main {
 
 .calendar .body .col {
   flex-grow: 0;
-  flex-basis: calc(100%/7);
-  width: calc(100%/7);
+  /* flex-basis: calc(100%/7); */
+  /* width: calc(100%/7); */
 }
 
 .calendar .body .weekcol {
