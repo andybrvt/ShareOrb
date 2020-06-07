@@ -35,7 +35,7 @@ class NewsfeedPost extends React.Component {
 
   OnClickPost=()=> {
     console.log("pressed on post")
-    // return <NewsFeedPostModal />
+    // return <NewsFeedPostModal /
     console.log(this.state.visible);
     this.showModal();
     console.log(this.state.visible);
@@ -158,19 +158,10 @@ class NewsfeedPost extends React.Component {
 
                     You and {(this.props.data.like_count)-1} people like this
                   </div>
-
-
-
                 }
-
                 </div>
-
-
-
               }
               </div>
-
-
             }
 
 
@@ -184,7 +175,8 @@ class NewsfeedPost extends React.Component {
 
 
 
-  AddOneToLike = () => {
+  AddOneToLike = (e) => {
+     e.stopPropagation();
     console.log("hi");
     console.log(this.props);
     console.log(this.props.data.id);
@@ -210,8 +202,8 @@ class NewsfeedPost extends React.Component {
         visible={this.state.visible}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
+        width="800px"
       >
-        <p>Some contents...</p>
         <p>Some contents...</p>
         <p>{this.ContentOfPost()}</p>
           <p>Some contents...</p>
