@@ -202,7 +202,6 @@ class PersonalCalendar extends React.Component{
       // we make it smaller than 7 because we still want to keep the index of the
       // weekdays the same
       for (let i= 0; i<7; i++){
-        console.log(i)
         for (let item = 0; item < events.length; item++){
           // So the time we put in is the UTC time (universal time ) but when you
           // put moment or new Date it gives you your time zome date so that is why you
@@ -211,11 +210,15 @@ class PersonalCalendar extends React.Component{
           const endDate = new Date(events[item].end_time)
           const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
           const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-          if (dateFns.isSameDay(utcStart, day) || dateFns.isSameDay(utcEnd, day)){
+          if (dateFns.isSameDay(utcStart, day)){
             toDoStuff.push(
               events[item]
             )
-          }
+          }  if (dateFns.isAfter(day, utcStart) && dateFns.isBefore(day, utcEnd)){
+              toDoStuff.push(
+                events[item]
+              )
+            }
         }
         // this give the date will give the day numnber in 1-365
 
@@ -227,19 +230,29 @@ class PersonalCalendar extends React.Component{
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
         if (toDoStuff.length > 0){
+          console.log(i)
           days.push(
             <div className = 'calendarNum' onClick = { () =>
               this.onDateClick(cloneDay)}>
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
-                <div key={item.content} className = 'monthEvent' style = {{gridColumn:this.renderNumber()}}>
+                  dateFns.isSameDay(new Date(item.start_time), day) ?
+
+                  <div key={item.content} className = 'monthEvent' style = {{gridColumn: i+1}}>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
                      'HH:mm a')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </div>
+              :
+                <div key={item.content} className = 'monthEvent' style = {{gridColumn: i+1}}>
+                <div onClick = {() => this.onClickItem(item)}>
+                
+                </div>
+              </div>
+
               ))
         )} else {days.push(
           <div className = 'calendarNum' onClick = { () =>
