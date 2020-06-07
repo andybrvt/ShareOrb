@@ -4,7 +4,7 @@ import Comments from '../../containers/comments/comments.js';
 import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
-import NewsFeedPostModal from './NewsFeedPostModal.js';
+
 class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
@@ -46,60 +46,27 @@ class NewsfeedPost extends React.Component {
   }
 
 
+  // this renders the posts on the newsfeed
 
-
-
-  AddOneToLike = () => {
-    console.log("hi");
-    console.log(this.props);
-    console.log(this.props.data.id);
-  //   // const username = this.props.data.username;
-  //   // console.log(this.props)
-    authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
-
-  //   this.setState({value: e.target.value});
-    }
-    render() {
-  let temp="http://127.0.0.1:8000"+this.props.data.image;
-  const success = () => {
-  message.success('Clipped to your album!');
-  };
-  console.log(this.props);
-  const { TextArea } = Input;
-  return (
-    <div>
-
-
-      <Modal
-        title="Basic Modal"
-        visible={this.state.visible}
-        onOk={this.handleOk}
-        onCancel={this.handleCancel}
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>{this.props.data.caption}</p>
-      </Modal>
-
-
-
+  ContentOfPost(){
+    return(
     <div class="mock-outer fontTest" onClick={this.OnClickPost}>
 
 
-      <div class="fb-group-picrow">
+          <div class="fb-group-picrow">
             <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <div class="fb-group-text">
-        <h5 class="fbh5">
+            <div class="fb-group-text">
+                <h5 class="fbh5">
 
-        <span>
-          {this.props.data.user.username}
-
-
-        </span>
+                <span>
+                  {this.props.data.user.username}
 
 
-        </h5>
-        <span class="fb-group-date"> {this.props.data.created_at}</span>
+                </span>
+
+
+                </h5>
+                <span class="fb-group-date"> {this.props.data.created_at}</span>
 
               </div>
 
@@ -119,8 +86,8 @@ class NewsfeedPost extends React.Component {
                 }
 
 
-              </p
-            ></div>
+              </p>
+            </div>
 
             <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginTop:'40px', marginRight: '15px',}}>
               <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
@@ -210,7 +177,60 @@ class NewsfeedPost extends React.Component {
 
             </div>
     </div>
+  )
+  }
 
+
+
+
+
+  AddOneToLike = () => {
+    console.log("hi");
+    console.log(this.props);
+    console.log(this.props.data.id);
+  //   // const username = this.props.data.username;
+  //   // console.log(this.props)
+    authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
+
+  //   this.setState({value: e.target.value});
+    }
+    render() {
+  let temp="http://127.0.0.1:8000"+this.props.data.image;
+  const success = () => {
+  message.success('Clipped to your album!');
+  };
+  console.log(this.props);
+  const { TextArea } = Input;
+  return (
+    <div>
+
+
+      <Modal
+        title="Basic Modal"
+        visible={this.state.visible}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>{this.ContentOfPost()}</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p><p>Some contents...</p>
+          <p>Some contents...</p>
+      </Modal>
+
+
+
+
+      {this.ContentOfPost()}
 
 
 
