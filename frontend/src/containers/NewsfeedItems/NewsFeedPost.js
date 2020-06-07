@@ -9,36 +9,36 @@ class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      visible: false,
+      visibleModal: false,
     }
   }
 
   showModal = () => {
     this.setState({
-      visible: true,
+      visibleModal: true,
     });
   };
 
   handleOk = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visibleModal: false,
     });
   };
 
   handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visibleModal: false,
     });
   };
 
   OnClickPost=()=> {
     console.log("pressed on post")
     // return <NewsFeedPostModal /
-    console.log(this.state.visible);
+    console.log(this.state.visibleModal);
     this.showModal();
-    console.log(this.state.visible);
+    console.log(this.state.visibleModal);
 
 
 
@@ -96,7 +96,8 @@ class NewsfeedPost extends React.Component {
 
 
             <Button shape="round" size="middle">
-              <EditTwoTone  style={{ fontSize: '20px'}}/>
+              <EditTwoTone  style={{ marginRight:'12px', fontSize: '20px'}}/>
+              {this.props.data.post_comments.length}
             </Button>
             <div>
             {
@@ -172,6 +173,75 @@ class NewsfeedPost extends React.Component {
   }
 
 
+  ContentofComments(){
+
+    return(
+
+    <div>
+      {
+
+
+        (this.props.data.post_comments.length==0) ?
+
+        <div>
+
+          <Comment
+          style={{ width: 600 }}
+           avatar={
+             <Avatar
+               src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+               alt="Han Solo"
+               class="fontTest"
+               />
+           }
+           content={
+            <div>
+             <Form.Item>
+               <Input
+               placeholder="Write a comment"
+                rows={4}
+
+               />
+               <Button type="primary">
+                 Add Comment
+               </Button>
+             </Form.Item>
+
+            </div>
+          }
+
+         />
+
+        </div>
+        :
+
+        <div class="mock-outer" style={{ width: 650, marginLeft:30, marginBottom:50, marginTop:25, height:370, }}>
+
+        <Comments className="fontTest" newsfeed={this.props}/>
+        <Form.Item>
+          <Input
+          placeholder="Write a comment"
+           rows={4}
+           class="fontTest"
+
+          />
+          <Button type="primary">
+            Add Comment
+          </Button>
+        </Form.Item>
+        </div>
+
+
+
+      }
+
+    </div>
+
+    )
+
+  }
+
+
 
 
 
@@ -198,25 +268,15 @@ class NewsfeedPost extends React.Component {
 
 
       <Modal
-        title="Basic Modal"
-        visible={this.state.visible}
+        title="Post by {this.props.username}"
+        visible={this.state.visibleModal}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
         width="800px"
       >
-        <p>Some contents...</p>
-        <p>{this.ContentOfPost()}</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p><p>Some contents...</p>
-          <p>Some contents...</p>
+      <p>{this.ContentOfPost()}</p>
+      <p>{this.ContentofComments()}</p>
+
       </Modal>
 
 
@@ -227,62 +287,8 @@ class NewsfeedPost extends React.Component {
 
 
 
-      {
 
 
-        (this.props.data.post_comments.length==0) ?
-
-        <div>
-
-          <Comment
-          style={{ width: 600 }}
-           avatar={
-             <Avatar
-               src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-               alt="Han Solo"
-               class="fontTest"
-               />
-           }
-           content={
-            <div>
-             <Form.Item>
-               <TextArea
-               placeholder="Write a comment"
-                rows={4}
-
-               />
-               <Button type="primary">
-                 Add Comment
-               </Button>
-             </Form.Item>
-
-            </div>
-          }
-
-         />
-
-        </div>
-        :
-
-        <div class="mock-outer" style={{ width: 650, marginLeft:30, marginBottom:50, marginTop:25, height:370, }}>
-
-        <Comments className="fontTest" newsfeed={this.props}/>
-        <Form.Item>
-          <TextArea
-          placeholder="Write a comment"
-           rows={4}
-           class="fontTest"
-
-          />
-          <Button type="primary">
-            Add Comment
-          </Button>
-        </Form.Item>
-        </div>
-
-
-
-      }
 
 
       </div>
