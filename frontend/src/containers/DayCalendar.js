@@ -50,7 +50,7 @@ class DayCalendar extends React.Component{
       <div className = 'header row flex-middle'>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
-            chevron_left
+          <i className= 'arrow arrow-left'></i>
           </div>
         </div>
         <div className = "col col-center">
@@ -59,7 +59,9 @@ class DayCalendar extends React.Component{
           </span>
         </div>
         <div className = "col col-end" onClick = {this.nextDay}>
-          <div className = "icon"> chevron_right </div>
+          <div className = "icon">
+          <i className = 'arrow arrow-right'></i>
+          </div>
         </div>
       </div>
     );
