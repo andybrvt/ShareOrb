@@ -107,40 +107,18 @@ class NewsfeedPost extends React.Component {
 
           {
               this.props.data.image ?
-
+              // <img src= {temp} height="250" width="450"/> AND YOU HAVE
+               // TO COPY IMAGE ADDRESS REPLACE WITH TEMP IN PRODUCTION
               // <div style="max-width: 100%; max-height: 100%;">
-                <span >
-                  <img src= {temp} height="250" width="450"/>
-                </span>
+                <div>
+                  <img src= {"https://images.unsplash.com/photo-1590118432058-f2744d6897db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1203&q=80"} height="250" width="450"/>
+                </div>
               // </div>
 
               :
               <div></div>
 
-
           }
-
-          <div class="small ui labeled button" tabindex="0"
-
-              onClick ={this.AddOneToLike}
-          >
-            <div class="small ui red button">
-              <i class="heart icon"></i> Like
-            </div>
-            <a class="ui basic red left pointing label">
-              {this.props.data.like_count}
-
-
-
-
-            </a>
-
-
-          </div>
-
-
-
-
 
         </Card>
 
