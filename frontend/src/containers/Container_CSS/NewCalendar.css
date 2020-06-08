@@ -308,6 +308,7 @@ main {
 .calendar .body .row .monthEvent {
   background-color: lightblue;
   /* grid-column: 1/7; */
+  z-index: 1;
 }
 
 

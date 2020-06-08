@@ -214,7 +214,8 @@ class PersonalCalendar extends React.Component{
             toDoStuff.push(
               events[item]
             )
-          }  if (dateFns.isAfter(day, utcStart) && dateFns.isBefore(day, utcEnd)){
+          }
+          if (dateFns.isAfter(day, utcStart) && dateFns.isBefore(day, utcEnd) && dateFns.isSameDay(day, dateFns.startOfWeek(day))){
               toDoStuff.push(
                 events[item]
               )
@@ -237,22 +238,13 @@ class PersonalCalendar extends React.Component{
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
-                  dateFns.isSameDay(new Date(item.start_time), day) ?
-
-                  <div key={item.content} className = 'monthEvent' style = {{gridColumn: i+1}}>
+                  <div key={item.content} className = 'monthEvent' style = {{gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1)}}>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
                      'HH:mm a')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </div>
-              :
-                <div key={item.content} className = 'monthEvent' style = {{gridColumn: i+1}}>
-                <div onClick = {() => this.onClickItem(item)}>
-                
-                </div>
-              </div>
-
               ))
         )} else {days.push(
           <div className = 'calendarNum' onClick = { () =>
@@ -447,6 +439,42 @@ class PersonalCalendar extends React.Component{
 
   openEventSyncModal = () => {
     this.props.openEventSyncModal()
+  }
+
+  eventIndex = (start_time, end_time, day, start_index) => {
+    // so the days are basically the days that the events land on and they are either on the day
+    // you have the event on or the start of the week
+    const start = new Date(start_time)
+    const end = new Date (end_time)
+    const eventDay = new Date (day)
+
+    if (dateFns.isSameWeek(start, end)){
+     const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
+     const ratio = start_index + '/' + (sameWeekDifference+start_index)
+     console.log(start_index)
+     console.log(ratio)
+     return ratio
+    } else {
+        if (dateFns.isSameWeek(eventDay, end)){
+          // This one is for the last slot where the week that contains the end date
+          // The plus 2 is for the 1 starting index and 1 for the extra index that make it fall
+          // in the correct position
+          const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+2
+          console.log(Math.abs(differentWeekDifference))
+          return '1/'+differentWeekDifference
+      } if (dateFns.isSameWeek(start, eventDay)){
+        // This is for the event that only spans the start date but the end date is not in the same week
+        const ratio = start_index+'/'+8
+        return ratio
+      } else {
+        // These are for the weeks that doenst have the start or end date
+        const ratio = 1/8
+        return '1/8'
+      }
+    }
+    console.log(start_time)
+    console.log(end_time)
+    console.log(day)
   }
 
 
