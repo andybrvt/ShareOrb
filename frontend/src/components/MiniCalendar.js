@@ -22,7 +22,7 @@ class MiniCalendar extends React.Component{
       <div className= "header miniRow flex-middle">
         <div className = "miniCol miniCol-start">
           <div className = "icon" onClick ={this.prevMonth}>
-            chevron_left
+          <i className= 'arrow arrow-left'></i>
           </div>
         </div>
         <div className = "miniCol miniCol-center" onClick = {() => this.onMonthClick(
@@ -33,7 +33,9 @@ class MiniCalendar extends React.Component{
           </span>
         </div>
         <div className= "miniCol miniCol-end" onClick = {this.nextMonth}>
-          <div className = "icon"> chevron_right</div>
+          <div className = "icon">
+          <i className = 'arrow arrow-right'></i>
+          </div>
         </div>
       </div>
     );

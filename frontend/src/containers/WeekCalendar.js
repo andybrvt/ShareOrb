@@ -63,7 +63,7 @@ class WeekCalendar extends React.Component{
       <div className = 'header row flex-middle'>
         <div className = 'col col-start'>
           <div className = 'icon' onClick = {this.prevWeek}>
-            chevron_left
+            <i className= 'arrow arrow-left'></i>
           </div>
         </div>
         <div className = 'col col-center'>
@@ -73,7 +73,7 @@ class WeekCalendar extends React.Component{
         </div>
         <div className = 'col col-end' onClick = {this.nextWeek}>
           <div className = 'icon'>
-            chevron_right
+            <i className = 'arrow arrow-right'></i>
           </div>
         </div>
       </div>
