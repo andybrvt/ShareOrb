@@ -3,7 +3,7 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -56,8 +56,8 @@ class NewsfeedPost extends React.Component {
          className="cardborder"
          style={{ width: 700, marginTop: 50, marginBottom:50  }}
          actions={[
-           <SettingOutlined key="setting" />,
-           <EditOutlined key="edit" />,
+          <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />,
+           <EditTwoTone  style={{ marginRight:'12px', fontSize: '20px'}}/>,
            <EllipsisOutlined key="ellipsis" />,
          ]}
        >
@@ -90,15 +90,15 @@ class NewsfeedPost extends React.Component {
             {this.props.data.caption}
           </h2>
 
-          <ArrowRightOutlined
-          style={{ marginLeft: 550 }}
+          <FolderAddTwoTone
+          style={{ marginLeft: 550, fontSize:'30px' }}
           size="32px"
           onClick={success}
 
 
           />
           <ShareAltOutlined
-          style={{ marginLeft: 550 }}
+          style={{ marginLeft: 550, fontSize:'30px' }}
 
           />
           <br></br>
@@ -175,8 +175,14 @@ class NewsfeedPost extends React.Component {
 
 
             <Button shape="round" size="middle">
-              <EditTwoTone  style={{ marginRight:'12px', fontSize: '20px'}}/>
+              <EditTwoTone  style={{ marginRight:'8px', fontSize: '20px'}}/>
               {this.props.data.post_comments.length}
+            </Button>
+
+
+            <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
+              <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
+
             </Button>
             <div>
             {
