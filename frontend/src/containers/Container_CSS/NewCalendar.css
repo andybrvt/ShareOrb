@@ -578,7 +578,7 @@ to make it adjustable */
   /* grid-auto-flow: dense; */
   grid-template-columns: 242px 242px 242px 242px 242px 242px 242px;
   grid-template-rows: repeat(48, 40px);
-  background-color: red;
+  /* background-color: red; */
   grid-column-gap: 2px;
   grid-row-gap: 2px
 
