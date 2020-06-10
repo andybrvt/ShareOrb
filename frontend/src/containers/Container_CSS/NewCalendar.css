@@ -175,6 +175,7 @@ main {
   float: left;
   position:relative;
   top: 152px;
+
 }
 
 /* This is for the side bars tabs in the PersonalCalendar */
@@ -214,11 +215,13 @@ main {
 /* time side for weekCalendar */
 .calendarContainer .flex-container .timecol .body .cell{
   position: relative;
-  height: 5.1em;
+  height: 84.5px;
   border-bottom: 2px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
   transition: 0.25s ease-out;
+  width: 70px;
+  /* background-color: blue; */
 }
 
 .calendarContainer .flex-container .timecol .body .cell .number{
@@ -309,6 +312,11 @@ main {
   background-color: lightblue;
   /* grid-column: 1/7; */
   z-index: 1;
+}
+
+
+.calendar .weekBody .weekEvent{
+  background-color: lightblue;
 }
 
 
@@ -564,6 +572,18 @@ to make it adjustable */
   border-right: 1px solid var(--border-color);
 }
 
+.calendar .weekBody{
+  display: grid;
+  border-bottom: 1px solid var(--border-color);
+  /* grid-auto-flow: dense; */
+  grid-template-columns: 242px 242px 242px 242px 242px 242px 242px;
+  grid-template-rows: repeat(48, 40px);
+  background-color: red;
+  grid-column-gap: 2px;
+  grid-row-gap: 2px
+
+}
+
 
 
 .calendar .body .row:last-child {
@@ -618,13 +638,8 @@ to make it adjustable */
 }
 
 
-.calendar .body .hourcell .number {
-  position: absolute;
-  font-size: 82.5%;
-  line-height: 1;
-  top: .75em;
-  right: .75em;
-  font-weight: 700;
+.calendar .weekBody .weekRow .testNumber {
+
 }
 
 .calendar .body .daycell .number {

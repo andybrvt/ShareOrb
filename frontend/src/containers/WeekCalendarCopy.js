@@ -131,24 +131,9 @@ class WeekCalendar extends React.Component{
     return <div className= 'body'> {hour} </div>
   }
 
-
-  renderColor = () => {
-    // Used for testing the rows
-    const color = ["green","yellow","red","blue","orange","pink","cyan"]
-    const len = color.length
-    const randomNum = Math.floor(Math.random()*len)
-    const pickcolor = color[randomNum]
-    return pickcolor
-
-  }
-
-
   // USE THIS
   renderWeekCell(events){
     console.log(events)
-    // To explain the grid --> there is a big container that holds many rows and each
-    // row is split into 7 columns and 2 rows and there is 24 rows and you will place the
-    // information
     // So what you wanted to do for this is that you will make a list of lsit
     // so the first list is the list of the same hour for multiple day so it
     // will be a list of 7 items of all the same time, and the big list will have
@@ -166,8 +151,7 @@ class WeekCalendar extends React.Component{
 
     // this list will hold all the events
     let toDoStuff = []
-    // This will be the list of events that will render in the weekBody
-    // And then you can sort it out in the weekBody using the index
+    // This will be a list the same hour of all the days
     let days = []
     // The things we need is the start day and then we need the start of the
     // hour so we can loop through it
@@ -180,117 +164,84 @@ class WeekCalendar extends React.Component{
 
     let hour = startHourDay;
     let formattedHour = '';
-    // Day difference is to see how long the week days are
-    const dayDifference = dateFns.differenceInDays(weekEnd, weekStart)+1
-  // So the plan for the week is to make one big container that is 7x24
-  // and to loop through each day by doing a while loop that runs through each day
-  // and in each day it will run through each hour, basically what we do is that if the events fit in
-  // to the range of time then we put the events into that one container and then use index to just figure out
-  // where to place them
-  // The way I will track the event is by having a time "index" running as the loop is running
 
-  for (let dayIndex = 0; dayIndex < 7; dayIndex++){
-
-    console.log(date)
-    for (let hourIndex = 0; hourIndex< 24; hourIndex++){
+    // The plan for the loop is to have a while loop that loops through all the
+    // hours then with in each hour have a for loop that loops through each day
+    while (hour <= endHourDay){
+      // When adding things to the calendar you have to match the date and the
+      // hour for this one
 
 
-      for(let item = 0; item < events.length;item ++){
+      // this for loop will take the hour and date and loop throuhg all the
+      // hours of all the days of the week
+      for(let i = 0; i<7; i++){
         const cloneDay = date
         const cloneHour = hour
+        formattedHour = dateFns.format(hour, hourFormat)
+        formattedDay = dateFns.format(date, dayFormat)
+        // this loop will loop through all the events and if the hour and day matches
+        // it will add it to the toDoStuff which will loop through each cell
+        // then it will be cleared out again
+        for (let item = 0; item<events.length; item++){
+          const date = new Date(events[item].start_time)
+          const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
+            if(dateFns.getHours(utc) === dateFns.getHours(new Date(hour))
+            && dateFns.isSameDay(utc, cloneDay)
+          ) {
+            toDoStuff.push(
+              events[item]
+            )}
+        }
 
-        // Each event will be added in if it falls within the certain time or hour that
-        // is looped through, and when you loop through, there will be an index that will be
-        // associated with that area so then you would use that index to place where the item is
-        const startDate = new Date(events[item].start_time)
-        const endDate = new Date(events[item].end_time)
-        const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
-        const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-        console.log(dateFns.isSameDay(utcStart,cloneDay) && dateFns.isSameHour(utcStart,cloneHour))
-        if (dateFns.isSameDay(utcStart,cloneDay) && dateFns.isSameHour(utcStart,cloneHour)){
-          // So unlike the previous week calendar, we do not need to have a box on every grid
-          // we just need to have all the events that fall into that week on that week and then with the
-          // index we can start rearragning the events in that week calendar
-          console.log(dayIndex, hourIndex)
-          toDoStuff.push(
-            events[item]
-          )
-        }}
-
-        if (toDoStuff.length > 0){
-          // This one is to render each of the events (like the event boxes)
-          // So since this is a "list" for a grid--> so you would sort the events
-          // out in the weekBody
-
-          // The day index represents the start column and the hour index represent the start row
-          console.log(dayIndex, hourIndex)
+        if(toDoStuff.length > 0){
           days.push(
-            toDoStuff.map(item => (
-              <div key= {item.content}  onClick = {() => this.onClickItem(item)} className ="weekEvent" style = {{
-                gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                gridRow: this.hourEventIndex(item.start_time, item.end_time, hourIndex) }}>
-                <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                   'HH:mm a')}</span>
-                <span className = ' ' > {item.content} </span>
-
-              </div>
-            ))
-
+            <div
+              className = 'col hourcell'
+              onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
+            >
+            <ul className = 'monthList'>
+              {toDoStuff.map(item => (
+                <li key = {item.content} className = 'monthListItem'>
+                  <div onClick = {() => this.onClickItem(item)}>
+                  <span className = 'eventTime'> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
+                     'ha')}</span>
+                  <span className = 'eventTime' > {item.content} </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            </div>
+          )
+        } else {
+          days.push(
+            <div
+              className = 'col hourcell'
+              onClick = {() => this.onDayHourClick(cloneDay, cloneHour)}
+            >
+            <span className = 'number'></span>
+            </div>
           )
         }
-        toDoStuff =[]
-        hour = dateFns.addHours(hour, 1)
-
+        toDoStuff = []
+        date = dateFns.addDays(date, 1)
       }
-
-      date = dateFns.addDays(date, 1)
-
+      // After you loop through the hour, you will then want to put it into the
+      // hours list and then clear out days list to redo it again, then you want
+      // to set your date again to the start of the week but now the hour would be
+      //  1 more added  and you repeat
+      // Also remember that the date must be resetted before adding the hour
+      // because of the while loop condition
+      hours.push(
+        <div className = 'row' >
+          {days}
+        </div>
+      )
+      days = []
+      date = weekStart
+      hour = dateFns.addHours(hour, 1)
     }
 
-    console.log(days)
-    return <div className= 'weekBody'>{days}</div>
-
-  }
-
-
-  dayEventIndex = (start_time, end_time, day, start_index) => {
-    // day index you will get the start and end days and also the start_index by getting the
-    // index of the loops
-    // You will need the day here so that you can extend the event to multiple weeks
-    // The day index --> 3 senarios
-    // *** The event range falls on the same day
-    // *** The event range falls on different day but the same week
-    // *** The event range falls on different weeks (This senarios has other senarios too)
-        // The start day is in the week but not the end day
-        // The start nor end day is in the week (gotta make preperations for this up on the place where the events gets filtered out)
-        // The end day is in the week but not the start day
-    const start = new Date(start_time)
-    const end = new Date(end_time)
-    const eventDay = new Date(day)
-    const index = start_index + 1
-
-
-    if (dateFns.isSameWeek(start, end)){
-      const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
-      const ratio = index + '/' + (index+sameWeekDifference)
-      return ratio
-    }
-
-  }
-
-  hourEventIndex = (start_time, end_time, start_index ) => {
-    // This is to set the event in the right rows
-    const start = new Date(start_time)
-    const end = new Date(end_time)
-    const actualStartIndex = (start_index*2)+1
-    const startHour = dateFns.getHours(start)
-    const endHour = dateFns.getHours(end)
-    const startMin = dateFns.getMinutes(start)
-    const endMin = dateFns.getMinutes(end)
-    const topIndex = (actualStartIndex)+(startMin/30)
-    const bottomIndex = topIndex + (((endHour - startHour)*2)+(Math.abs(endMin-startMin)/30))
-    const ratio = topIndex + '/' + bottomIndex
-    return ratio
+    return <div className = 'body'> {hours}</div>
   }
 
 
