@@ -163,7 +163,7 @@ class WeekCalendar extends React.Component{
     const dayFormat = 'd MMMM'
     // So this list will hold 24 items, each list for each hour
     const hours = []
-
+    let border = []
     // this list will hold all the events
     let toDoStuff = []
     // This will be the list of events that will render in the weekBody
@@ -238,6 +238,10 @@ class WeekCalendar extends React.Component{
 
           )
         }
+        border.push(
+            <div className = 'col hourcell' >
+            </div>
+        )
         toDoStuff =[]
         hour = dateFns.addHours(hour, 1)
 
@@ -248,7 +252,17 @@ class WeekCalendar extends React.Component{
     }
 
     console.log(days)
-    return <div className= 'weekBody'>{days}</div>
+    return(
+      <div>
+      <div className = 'backWeekBody'>
+    {border}
+      </div>
+      <div className= 'weekBody'>
+          {days}
+      </div>
+      </div>
+    )
+
 
   }
 

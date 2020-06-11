@@ -99,7 +99,7 @@ main {
 .calendarContainer{
   position: relative;
   right: 150px;
-  width: 1385px;
+  width: 1395px;
   bottom: 70px;
   /* background-color: red; */
   display: flex;
@@ -333,7 +333,7 @@ main {
 
 
 .calendarContainer .mainCalContainer{
-  width: 1445px;
+  width: 1800px;
   padding-left: 25px;
 }
 
@@ -484,15 +484,16 @@ main {
 
 
 /* This is for the week view and to control the cell size */
-.calendar .body .hourcell {
+.calendar .backWeekBody .hourcell {
   position: relative;
-  height: 5em;
+  height: 84px;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
+  /* background-color: black; */
 }
 
 /* this is to hel format the list in each cell in the weekview */
@@ -579,11 +580,21 @@ to make it adjustable */
   grid-template-columns: 242px 242px 242px 242px 242px 242px 242px;
   grid-template-rows: repeat(48, 40px);
   /* background-color: red; */
-  grid-column-gap: 2px;
-  grid-row-gap: 2px
+  grid-column-gap: 1px;
+  grid-row-gap: 2px;
+  position:relative;
+  top: -2016px;
 
 }
 
+.calendar .weekBorder {
+  background-color: white;
+  /* position: absolute; */
+  top: 100;
+  left: 1000px;
+  height: 80px;
+  border-bottom: 1px solid var(--border-color);
+}
 
 
 .calendar .body .row:last-child {
@@ -715,9 +726,18 @@ to make it adjustable */
   transition: .5s ease-in;
 }
 
-.calendar .body .col {
+.calendar .backWeekBody {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.calendar .backWeekBody .col {
   flex-grow: 0;
-  /* flex-basis: calc(100%/7); */
+  flex-basis: calc(100%/7);
   /* width: calc(100%/7); */
 }
 
