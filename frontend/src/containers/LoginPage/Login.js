@@ -12,7 +12,7 @@ import { NavLink, Redirect, } from "react-router-dom";
 import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../../store/actions/auth";
 import NotificationWebSocketInstance from '../../notificationWebsocket';
-import pic1 from './loginHelloPic1.svg';
+import pic1 from './LoginCalendar.svg';
 import pic2 from './loginHelloPic2.svg';
 import { Form, Input, Button, Checkbox } from 'antd';
 // Function: logs user in
