@@ -215,7 +215,14 @@ class WeekCalendar extends React.Component{
           toDoStuff.push(
             events[item]
           )
-        }}
+        }if(dateFns.isAfter(cloneDay, utcStart) && dateFns.isBefore(cloneDay, utcEnd)
+        && dateFns.isSameDay(cloneDay, dateFns.startOfWeek(cloneDay)) && dateFns.getHours(utcStart) === dateFns.getHours(cloneHour)){
+          toDoStuff.push(
+            events[item]
+          )
+        }
+
+      }
 
         if (toDoStuff.length > 0){
           // This one is to render each of the events (like the event boxes)
@@ -282,12 +289,23 @@ class WeekCalendar extends React.Component{
     const end = new Date(end_time)
     const eventDay = new Date(day)
     const index = start_index + 1
-
+    console.log(eventDay)
 
     if (dateFns.isSameWeek(start, end)){
       const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
       const ratio = index + '/' + (index+sameWeekDifference)
       return ratio
+    } else {
+       if(dateFns.isSameWeek(start, eventDay)){
+         const ratio = index+ '/'+8
+         return ratio
+       } else if (dateFns.isSameWeek(end, eventDay)){
+         const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+3
+         console.log(differentWeekDifference)
+         return '1/'+differentWeekDifference
+       } else {
+         return '1/8'
+       }
     }
 
   }
