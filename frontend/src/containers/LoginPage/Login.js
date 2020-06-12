@@ -12,7 +12,8 @@ import { NavLink, Redirect, } from "react-router-dom";
 import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../../store/actions/auth";
 import NotificationWebSocketInstance from '../../notificationWebsocket';
-import city from './city.png';
+import pic1 from './loginHelloPic1.svg';
+import pic2 from './loginHelloPic2.svg';
 import { Form, Input, Button, Checkbox } from 'antd';
 // Function: logs user in
 class LoginForm extends React.Component {
@@ -59,58 +60,69 @@ if (token) {
     }
 
     const layout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 8 },
+
+      // controls how far left/right the login is on the page
+      labelCol: {
+        span: 6,
+      },
+      // how long the size of user/pass input box is
+      wrapperCol: {
+        span: 4,
+      },
     };
     const tailLayout = {
-      wrapperCol: { offset: 8, span: 4 },
+      wrapperCol: {
+        offset: 6,
+
+      },
     };
 
     return (
       <div>
 
-      <div>
+        <div>
 
-      <Form
-      {...layout}
-      name="basic"
-      initialValues={{ remember: true }}
-    >
-      <Form.Item
-      onChange={this.handleUserName}
-      test="username"
-      label="Username"
+          <Form
+          {...layout}
+          name="basic"
+          initialValues={{ remember: true }}
+          >
+            <Form.Item
+            onChange={this.handleUserName}
+            test="username"
+            label="Username"
 
-      >
-        <Input />
-      </Form.Item>
+            >
+              <Input />
+            </Form.Item>
 
-      <Form.Item
-        onChange={this.handlePasword}
-        value={password}
-        test="password"
-        label="Password"
-      >
-        <Input.Password />
-      </Form.Item>
+            <Form.Item
+              onChange={this.handlePasword}
+              value={password}
+              test="password"
+              label="Password"
+            >
+              <Input.Password />
+            </Form.Item>
 
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
 
-      <Form.Item {...tailLayout}>
-        <Button type="primary"
-         onClick={this.handleSubmit}
-         loading={loading}
-         >
-          Submit
+            <Form.Item {...tailLayout}>
+              <Button type="primary"
+               onClick={this.handleSubmit}
+               loading={loading}
+               >
+                Submit
 
-        </Button>
-      </Form.Item>
-    </Form>
-    </div>
+              </Button>
+            </Form.Item>
+        </Form>
+      </div>
 
-        <img src={city} />
+      <img src={pic1} width="30%" style={{marginRight:"250px"}}/>
+      <img src={pic2} width="30%"/>
       </div>
     );
   }
@@ -136,56 +148,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(LoginForm);
-
-
-
-      // <Grid
-      //   textAlign="center"
-      //   style={{ height: "100vh" }}
-      //   verticalAlign="top"
-      // >
-      //   <Grid.Column style={{ maxWidth: 450 }}>
-      //     <Header as="h2" color="teal" textAlign="center">
-      //       Log-in to your account
-      //     </Header>
-      //     {error && <p>{this.props.error.message}</p>}
-      //     <React.Fragment>
-      //       <Form size="large" onSubmit={this.handleSubmit}>
-      //         <Segment stacked>
-      //           <Form.Input
-      //             onChange={this.handleChange}
-      //             value={username}
-      //             name="username"
-      //             fluid
-      //             icon="user"
-      //             iconPosition="left"
-      //             placeholder="Username"
-      //           />
-      //           <Form.Input
-      //             onChange={this.handleChange}
-
-      //             fluid
-      //             value={password}
-      //             name="password"
-      //             icon="lock"
-      //             iconPosition="left"
-      //             placeholder="Password"
-      //             type="password"
-      //           />
-      //
-      //           <Button
-      //             color="teal"
-      //             fluid
-      //             size="large"
-      //             loading={loading}
-      //             disabled={loading}>
-      //             Login
-      //           </Button>
-      //         </Segment>
-      //       </Form>
-      //       <Message>
-      //         New to us? <NavLink to="/signup">Sign Up</NavLink>
-      //       </Message>
-      //     </React.Fragment>
-      //   </Grid.Column>
-      // </Grid>
