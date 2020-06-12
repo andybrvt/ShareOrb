@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import ArticleList from './containers/ArticleListView';
 import ArticleDetail from './containers/ArticleDetailView';
-import LoginForm from './containers/Login';
+import Login from './containers/LoginPage/Login';
 import Signup from './containers/Signup';
 import AllUsersNotCurrNotCurrFriends from './containers/AllUsersNotCurrNotCurrFriends';
 import InfiniteList from './containers/InfiniteScroll';
@@ -35,7 +35,7 @@ class BaseRouter extends React.Component {
       <div>
         <Route exact path = '/home'  render={(props) => <ArticleList {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
         <Route exact path = '/article/:id' render={(props) => <ArticleDetail {...this.props} isAuthenticated={this.props.isAuthenticated} />}   />
-        <Route exact path = '/' component = {LoginForm} />
+        <Route exact path = '/' component = {Login} />
         <Route exact path = '/signup/' component= {Signup} />
 
         <Route exact path = '/userview/' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
