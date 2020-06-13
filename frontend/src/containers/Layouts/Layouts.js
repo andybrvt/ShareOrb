@@ -32,42 +32,7 @@ const { Search } = Input;
 class CustomLayout extends React.Component {
   state = {
     username: '',
-    testData:[
-      {
-        id: '000000001',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-        title: 'Pings so alpha',
-        datetime: '2017-08-09',
-        type: 'notification',
-      },
-      {
-        id: '000000002',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-        title: 'Pings too strong',
-        datetime: '2017-08-08',
-        type: 'notification',
-      },
-
-      {
-        id: '000000002',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-        title: 'Pings the best',
-        datetime: '2017-08-08',
-        type: 'notification',
-      },
-
-      {
-        id: '000000002',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-        title: 'Andys strong too',
-        datetime: '2017-08-08',
-        type: 'notification',
-      },
-
-    ],
   }
-
-
 
 
 
@@ -85,15 +50,23 @@ class CustomLayout extends React.Component {
 
         console.log(this.props)
         return (
+        <div>
 
-          <div>
+            <div style={{margin:60}}>
 
-               {this.props.children}
+                 {this.props.children}
 
-                <Footer style={{ textAlign: 'center' }}>
-                ShareOrb ©2020
-                </Footer>
-            </div>
+                  <Footer style={{ textAlign: 'center' }}>
+                  ShareOrb ©2020
+                  </Footer>
+              </div>
+
+              :
+
+              <div> </div>
+          }
+
+          </div>
         );
     }
 }

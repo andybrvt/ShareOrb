@@ -1,5 +1,5 @@
 #components-layout-demo-custom-trigger .trigger {
-  font-size: 18px;
+  font-size: 58px;
   line-height: 64px;
   padding: 0 24px;
   cursor: pointer;
@@ -18,4 +18,5 @@
 
 .site-layout .site-layout-background {
   background: #fff;
+
 }

@@ -15,6 +15,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
+
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 import * as dateFns from 'date-fns';
@@ -42,18 +43,27 @@ class SideMenu extends React.Component {
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
+
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
+            <Menu.Item key="2" icon={<UserOutlined />}>
+              <a href='//'>
+
+                  Person
+            </a>
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
+              <a href='/chat/1'>
+                  <Icon name='large comments icon' />
+                  Messages
+            </a>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
+
+          {/* length of banner from the very top*/}
+
+          <Header className="site-layout-background" style={{ marginTop: 20, fontSize:30 }}>
             {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
               onClick: this.toggle,
@@ -62,7 +72,7 @@ class SideMenu extends React.Component {
           <Content
             className="site-layout-background"
             style={{
-              margin: '24px 16px',
+              margin: '50px, 200px',
               padding: 24,
               minHeight: 280,
             }}
