@@ -86,6 +86,15 @@ class DayCalendar extends React.Component{
     return <div className = 'sidepanel'>{hours}</div>
   }
 
+  renderColor = () => {
+    const color = ["green","yellow","red","blue","orange","pink","cyan"]
+    const len = color.length
+    const randomNum = Math.floor(Math.random()*len)
+    const pickcolor = color[randomNum]
+    return pickcolor
+
+  }
+
 // render all the hour cell within each day
   renderCells(events) {
     const currentDay = this.state.currentDay
@@ -129,40 +138,18 @@ class DayCalendar extends React.Component{
       const cloneToDoStuff = toDoStuff
       if (toDoStuff.length > 0){
         hours.push(
-          <div
-            className = 'daycell'
-            key = {hour}
-          >
-          <div className = 'uppertab'>
-            <span className = 'number'>{formattedHour}</span>
-          </div>
-          <span className = 'bg'> {formattedHour}</span>
-          <ul className = 'monthList'>
-            {toDoStuff.map(item => (
-              <li key={item.content} className = 'monthListItem'>
-              <div onClick = {() => this.onClickItem(item)}>
-              <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                 'ha')}</span>
+            toDoStuff.map(item => (
+              <div className = "dayEvent" style = {{gridRow: 1/24}}>
+              <span > {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
+                 'HH:mm a')}</span>
               <span className = ' ' > {item.content} </span>
               </div>
-              </li>
-            ))}
-          </ul>
-          </div>
-        )} else {
-        hours.push(
-          <div
-            className = 'daycell'
-            key = {hour}
-          >
-          <span className = 'number'>{formattedHour}</span>
-          <span className = 'bg'> {formattedHour}</span>
-          </div>
+            ))
         )}
       toDoStuff = []
       hour = dateFns.addHours(hour, 1);
     }
-    return <div className = 'body'>{hours}</div>
+    return <div className = 'dayBody'>{hours}</div>
   }
 
   onHourClick = (day,events) =>{

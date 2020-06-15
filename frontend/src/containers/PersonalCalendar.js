@@ -479,7 +479,6 @@ class PersonalCalendar extends React.Component{
 
 
   render(){
-    // className is to determine the style
     console.log(this.props)
     return(
       <div className = 'calendarContainer'>
@@ -492,10 +491,10 @@ class PersonalCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
+        <div className = 'miniCalContainer'>
         <Button type = 'primary' onClick = {this.openEventSyncModal}>
           Event Sync
         </Button>
-        <div className = 'miniCalContainer'>
         <MiniCalendar {...this.props}/>
         </div>
         <div className = 'mainCalContainer'>

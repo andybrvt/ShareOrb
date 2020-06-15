@@ -70,7 +70,7 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     username: state.auth.username,
     id: state.auth.id,
-    // friends: state.auth.friends,
+    
 
   }
 }

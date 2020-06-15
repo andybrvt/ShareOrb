@@ -101,7 +101,7 @@ main {
   right: 150px;
   width: 1395px;
   bottom: 70px;
-  /* background-color: red; */
+  /* background-color: yellow; */
   display: flex;
 }
 
@@ -206,6 +206,19 @@ main {
 .calendar .body {
   background-color: var(--border-color);
 }
+
+.calendar .dayBody {
+  display: grid;
+  grid-template-rows: repeat(48, 50px);
+  grid-row-gap: 2px;
+  /* background-color: black; */
+}
+
+.calendar .daybody .dayEvent{
+  background-color: lightblue;
+}
+
+
 
 /* this is for the date time for week calendar */
 .calendarContainer .flex-container .timecol .body .cell:first-child{
@@ -335,6 +348,7 @@ main {
 .calendarContainer .mainCalContainer{
   width: 1800px;
   padding-left: 25px;
+  /* background-color: red; */
 }
 
 
@@ -436,6 +450,7 @@ main {
   flex-basis: 20%;
   position: relative;
   top: 110px;
+  /* background-color: blue; */
 }
 
 
