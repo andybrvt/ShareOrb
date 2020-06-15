@@ -52,7 +52,7 @@ class CustomLayout extends React.Component {
         return (
         <div>
 
-            <div style={{margin:60}}>
+            <div style={{}}>
 
                  {this.props.children}
 
