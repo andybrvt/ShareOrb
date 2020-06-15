@@ -1,0 +1,398 @@
+import React from 'react';
+import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth';
+import './Containers.css'
+import { authAxios } from '../components/util';
+import { Icon } from 'semantic-ui-react'
+import { Tag, Input } from 'antd';
+import * as navActions from '../store/actions/nav'
+import NoticeIcon from './NoticeIcon/index';
+import styles from './notification.less';
+import moment from 'moment';
+import SearchBar from './HeaderSearch';
+
+import ProfileDropDown from './GlobalHeader/ProfileDropDown.js';
+import SideMenu from '../components/SideMenu/SideMenu';
+import SiderMenuWrapper from '../components/SideMenu/test';
+import './Layouts.css';
+import Test from '../components/SideMenu/index.tsx';
+import Notifications from './Notifications';
+import NotificationsDropDown from './NotificationsDropDown';
+import PickEventSyncModal from '../components/PickEventSyncModal';
+import * as eventSyncActions from '../store/actions/eventSync';
+
+const { Header, Footer, Content } = Layout;
+const { Search } = Input;
+
+
+// Function: boarder layout that wraps around each of the other containers, and has
+// menu items that go to each page
+
+class CustomLayout extends React.Component {
+  state = {
+    username: '',
+    testData:[
+      {
+        id: '000000001',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+        title: 'Pings so alpha',
+        datetime: '2017-08-09',
+        type: 'notification',
+      },
+      {
+        id: '000000002',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+        title: 'Pings too strong',
+        datetime: '2017-08-08',
+        type: 'notification',
+      },
+
+      {
+        id: '000000002',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+        title: 'Pings the best',
+        datetime: '2017-08-08',
+        type: 'notification',
+      },
+
+      {
+        id: '000000002',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+        title: 'Andys strong too',
+        datetime: '2017-08-08',
+        type: 'notification',
+      },
+
+    ],
+  }
+
+
+
+
+
+  async componentDidMount(){
+    await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
+      .then(res=> {
+        this.setState({
+          username: res.data.username,
+       });
+     });
+   }
+   // css part, DEPENDING on if the comment is "urgent", or different attributes
+   getNoticeData = () => {
+       const notices = this.state.testData;
+
+       if (!notices || notices.length === 0 || !Array.isArray(notices)) {
+         return {};
+       }
+
+       const newNotices = notices.map(notice => {
+         const newNotice = { ...notice };
+
+         if (newNotice.datetime) {
+           newNotice.datetime = moment(notice.datetime).fromNow();
+         }
+
+         if (newNotice.id) {
+           newNotice.key = newNotice.id;
+         }
+
+         if (newNotice.extra && newNotice.status) {
+           const color = {
+             todo: '',
+             processing: 'blue',
+             urgent: 'red',
+             doing: 'gold',
+           }[newNotice.status];
+           newNotice.extra = (
+             <Tag
+               color={color}
+               style={{
+                 marginRight: 0,
+               }}
+             >
+               {newNotice.extra}
+             </Tag>
+           );
+         }
+
+         return newNotice;
+       });
+
+     };
+
+
+    render() {
+      const currentUser = this.state.username
+      const noticeData = this.getNoticeData();
+      const menu = (
+            <Menu>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                  menu item
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                  menu item
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                  menu item
+                </a>
+              </Menu.Item>
+            </Menu>
+          );
+
+
+
+
+
+        const getNotices = (req, res) => {
+          res.json([
+            {
+              id: '000000001',
+              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+              title: 'HEYYYYY there',
+              datetime: '2017-08-09',
+              type: 'notification',
+            },
+            {
+              id: '000000002',
+              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+              title: 'Ian wants hiking',
+              datetime: '2017-08-08',
+              type: 'notification',
+            },
+
+          ]);
+        };
+        console.log(this.props)
+        return (
+
+
+
+            <Layout className="layout">
+              <PickEventSyncModal
+                isVisble = {this.props.showPickEventSyncModal}
+                close = {() => this.props.closePickEventSyncModal()}
+              />
+                <Header>
+                <div className="logo" />
+                <Menu
+                    theme="dark"
+                    mode="horizontal"
+                    defaultSelectedKeys={['2']}
+                    style={{ lineHeight: '64px' }}
+                >
+
+                {
+                    this.props.isAuthenticated ?
+
+                    <Menu.Item key="2" onClick={this.props.logout}>
+                        <Link to="/">Logout</Link>
+                    </Menu.Item>
+
+                    :
+
+                    <Menu.Item key="2">
+                        <Link to="/">Login</Link>
+                    </Menu.Item>
+                }
+
+
+
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="7">
+
+                      <SearchBar />
+                    </Menu.Item>
+
+                    :
+                        <Menu.Item key="7">
+                        </Menu.Item>
+                    }
+
+
+
+
+
+                {
+                    this.props.isAuthenticated ?
+                    <Menu.Item key="9">
+                        <a href='/chat/1'></a>
+                    </Menu.Item>
+                    :
+                    <Menu.Item key="9">
+                    </Menu.Item>
+                }
+
+
+
+                {
+                    this.props.isAuthenticated ?
+
+                    <Menu.Item key="10">
+
+
+                           <a href='/chat/1'>
+                             <Icon name='large comments icon' />
+                             Messages
+                           </a>
+
+                    </Menu.Item>
+
+                    :
+                    <Menu.Item key="10">
+                    </Menu.Item>
+                }
+
+
+                {
+                    this.props.isAuthenticated ?
+                      <Menu.Item key="11">
+                        <NoticeIcon
+                            className={styles.action}
+                            count={currentUser && currentUser.unreadCount}
+                            onItemClick={item => {
+                              this.changeReadState(item);
+                            }}
+
+
+                            loading={this.fetchingNotices}
+                            clearText="清空"
+                            viewMoreText="查看更多"
+                            clearClose
+                          >
+                            <NoticeIcon.Tab
+                              tabKey="notification"
+                              count={this.state.testData.length}
+                              list={this.state.testData}
+                              title="first tab"
+                              emptyText="你已查看所有通知"
+                              showViewMore
+                            />
+
+
+                            <NoticeIcon.Tab
+                              tabKey="message"
+                              title="second tab"
+                              emptyText="您已读完所有消息"
+                              showViewMore
+                            />
+
+                          </NoticeIcon>
+                  </Menu.Item>
+
+                  :
+                  <Menu.Item key="11">
+                  </Menu.Item>
+
+                }
+
+
+
+                {
+                    this.props.isAuthenticated ?
+
+                    <Menu.Item key="2">
+                        <ProfileDropDown menu {...this.props}/>
+                    </Menu.Item>
+
+                    :
+
+                    <Menu.Item key="2">
+
+                    </Menu.Item>
+                }
+
+                {
+                    this.props.isAuthenticated ?
+
+                    <Menu.Item key="12">
+                      <Notifications {...this.props} />
+                    </Menu.Item>
+
+                    :
+                    <Menu.Item key="10">
+                    </Menu.Item>
+                }
+
+
+
+
+
+                </Menu>
+
+
+                </Header>
+                <div className="wrap">
+
+                <div className="sidebarLayout">
+
+                  {
+                      this.props.isAuthenticated ?
+                      <SideMenu  className = 'test'/>
+                  :
+                     <div>  </div>
+                  }
+
+                </div>
+
+
+                <div className="test1">
+
+                <Content className="site-layout" >
+
+                    <div className="site-layout-background" >
+
+                        {this.props.children}
+                    </div>
+                </Content>
+
+
+                </div>
+
+
+
+                </div>
+
+                <Footer style={{ textAlign: 'center' }}>
+                ShareOrb ©2020
+                </Footer>
+            </Layout>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+  return{
+    notificationDrop: state.nav.showPopup,
+    showPickEventSyncModal: state.eventSync.showPickEventSyncModal
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+        closeNotification: () => dispatch(navActions.closePopup()),
+        openNotification: () => dispatch(navActions.openPopup()),
+        logout: () => dispatch(actions.logout()),
+        openPickEventSyncModal: (user, userFriend, minDate, maxDate, notificationId) => dispatch(eventSyncActions.openPickEventSyncModal(
+          user,
+          userFriend,
+          minDate,
+          maxDate,
+          notificationId
+        )),
+        closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal())
+    }
+}
+
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomLayout));

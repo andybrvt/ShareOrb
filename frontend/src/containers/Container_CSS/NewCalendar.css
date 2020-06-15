@@ -214,7 +214,7 @@ main {
   /* background-color: black; */
 }
 
-.calendar .daybody .dayEvent{
+.calendar .dayBody .eventsDay{
   background-color: lightblue;
 }
 
@@ -778,5 +778,5 @@ to make it adjustable */
 
 .calendar .sidepanel .sidecell{
   border-bottom: 3px solid var(--border-color);
-  height: 10em;
+  height: 104px;
 }

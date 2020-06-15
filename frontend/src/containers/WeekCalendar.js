@@ -320,7 +320,12 @@ class WeekCalendar extends React.Component{
     const startMin = dateFns.getMinutes(start)
     const endMin = dateFns.getMinutes(end)
     const topIndex = (actualStartIndex)+(startMin/30)
+    // for the numberator of the index you want to go from the starting index
+    // and then decide if you add 1 or not depending if there is a 30 mins
     const bottomIndex = topIndex + (((endHour - startHour)*2)+(Math.abs(endMin-startMin)/30))
+    // For the denominator you have to start from the starting index and then add
+    // the number of indexes depending on the hour and then add one if there is a
+    // 30 min mark
     const ratio = topIndex + '/' + bottomIndex
     return ratio
   }

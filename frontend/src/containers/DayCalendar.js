@@ -76,11 +76,15 @@ class DayCalendar extends React.Component{
     // starttime will be the start of the day where the time is 00:00
     // then you will loop by 0-23 and add hours accordingly
     let startTime = dateFns.startOfDay(this.props.currentDate);
+    console.log(startTime)
     for(let i = 0; i<24; i++){
+      const formattedHour = dateFns.format(startTime, dateFormat)
       hours.push(
         <div className = 'sidecell' key = {i}>
+          <span> {formattedHour}</span>
         </div>
       )
+      startTime = dateFns.addHours(startTime, 1)
     }
     // render it our but you have to fix the css
     return <div className = 'sidepanel'>{hours}</div>
@@ -124,10 +128,20 @@ class DayCalendar extends React.Component{
     for (let i = 0; i<24; i++){
       formattedHour = dateFns.format(hour, hourFormat)
       for(let item = 0; item < events.length; item ++){
-        const date = new Date(events[item].start_time)
-        const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
-        if (dateFns.isSameHour(utc, hour)
-            && dateFns.isSameDay(utc, hour) ){
+        // For the if statements and what you put into the calendar depends on
+        // if the day is on the day or if the day and time falls between the two days and
+        // times
+        const startDate = new Date(events[item].start_time)
+        const endDate = new Date(events[item].end_time)
+        const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
+        const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
+        if (dateFns.isSameHour(utcStart, hour)
+            && dateFns.isSameDay(utcStart, hour) ){
+          toDoStuff.push(
+            events[item]
+          )
+        } if (dateFns.isAfter(hour, utcStart) && dateFns.isBefore(hour, utcEnd)
+      && dateFns.getHours(utcStart) === dateFns.getHours(hour)){
           toDoStuff.push(
             events[item]
           )
@@ -137,9 +151,12 @@ class DayCalendar extends React.Component{
       const cloneHour = hour
       const cloneToDoStuff = toDoStuff
       if (toDoStuff.length > 0){
+        console.log(i)
         hours.push(
             toDoStuff.map(item => (
-              <div className = "dayEvent" style = {{gridRow: 1/24}}>
+              <div className = "eventsDay"
+              style = {{gridRow: this.dayEventIndex(item.start_time, item.end_time, i)}}
+              onClick = {() => this.onClickItem(item)}>
               <span > {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
                  'HH:mm a')}</span>
               <span className = ' ' > {item.content} </span>
@@ -151,6 +168,31 @@ class DayCalendar extends React.Component{
     }
     return <div className = 'dayBody'>{hours}</div>
   }
+
+  dayEventIndex = (start_time, end_time, start_index) =>{
+    // This function is used to get the index for the grid values for each of the events
+    // you will basically get the differnece between the start and end time and add it to the
+    // starting index and then you will then add one for any extra 30 mins (there is more math involved
+    // but that is the gist of it)
+    console.log(start_time, end_time, start_index)
+    const start = new Date(start_time)
+    const end = new Date(end_time)
+    const actualStartIndex = (start_index*2)+1
+    const startHour = dateFns.getHours(start)
+    const endHour = dateFns.getHours(end)
+    const startMin = dateFns.getMinutes(start)
+    const endMin = dateFns.getMinutes(end)
+    // for the numberator of the index you want to go from the starting index
+    // and then decide if you add 1 or not depending if there is a 30 mins
+    const topIndex = (actualStartIndex)+(startMin/30)
+    // For the denominator you have to start from the starting index and then add
+    // the number of indexes depending on the hour and then add one if there is a
+    // 30 min mark
+    const bottomIndex = topIndex + (((endHour - startHour)*2)+(Math.abs(endMin - startMin)/30))
+    const ratio = topIndex + '/' + bottomIndex
+    return ratio
+  }
+
 
   onHourClick = (day,events) =>{
     console.log(day)
