@@ -7,13 +7,13 @@ import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
-import CustomLayout from './containers/Layouts';
+import CustomLayout from './containers/Layouts/Layouts.js';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
 import * as notificationsActions from './store/actions/notifications';
 import * as calendarActions from './store/actions/calendars';
-
+import SideMenu from './components/SideMenu/SideMenu.js';
 
 class App extends Component {
 //the map state to props allows us to get the state and then
@@ -56,9 +56,17 @@ class App extends Component {
     return (
       <div>
         <Router>
-          <CustomLayout {...this.props}>
-              <BaseRouter   {...this.props}/>
-          </CustomLayout>
+
+          <SideMenu>
+            <CustomLayout {...this.props}>
+                <BaseRouter   {...this.props}/>
+            </CustomLayout>
+
+
+          </SideMenu>
+
+
+
         </Router>
       </div>
     );
