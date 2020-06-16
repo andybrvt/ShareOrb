@@ -56,17 +56,11 @@ class App extends Component {
     return (
       <div>
         <Router>
-
           <SideMenu>
             <CustomLayout {...this.props}>
                 <BaseRouter   {...this.props}/>
             </CustomLayout>
-
-
           </SideMenu>
-
-
-
         </Router>
       </div>
     );

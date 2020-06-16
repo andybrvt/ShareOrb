@@ -61,11 +61,10 @@ class SideMenu extends React.Component {
             })}
           </Header>
           <Content
-            className="site-layout-background"
+            className=""
             style={{
-
-              padding: 24,
-              minHeight: 280,
+              height: "710px",
+              backgroundColor: 'red'
             }}
           >
           <HeartTwoTone twoToneColor="#eb2f96" />

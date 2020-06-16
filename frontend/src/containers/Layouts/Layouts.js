@@ -47,29 +47,35 @@ class CustomLayout extends React.Component {
 
 
     render() {
+      console.log(this.props)
 
-        console.log(this.props)
-        return (
-        <div>
+      return (
+      <div>
 
-            <div style={{}}>
+          <div>
 
-                 {this.props.children}
+               {this.props.children}
 
-                  <Footer style={{ textAlign: 'center' }}>
-                  ShareOrb ©2020
-                  </Footer>
-              </div>
+                <div style={{
+                  position: 'relative',
+                  top: "-190px",
+                  textAlign: 'center',
+                  left: "650px",
+                  width: "250px",
+                  height: "10px"
+                 }}>
+                ShareOrb ©2020
+                </div>
+            </div>
 
-              :
 
-              <div> </div>
-          }
-
-          </div>
-        );
+        </div>
+      );
     }
-}
+
+
+    }
+
 
 const mapStateToProps = state => {
   return{
