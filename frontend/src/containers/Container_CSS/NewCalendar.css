@@ -100,7 +100,7 @@ main {
   position: relative;
   right: 180px;
   width: 1395px;
-  /* height: 1000px; */
+  height: 920px;
   bottom: 100px;
   /* background-color: yellow; */
   display: flex;
@@ -121,7 +121,6 @@ main {
 /* Do not change this because alot of other parts use this */
 .flex-container {
   display: flex;
-  /* background-color: red; */
 }
 
 .row {
@@ -146,7 +145,7 @@ main {
 .col {
   flex-grow: 1;
   flex-basis: 0;
-  max-width: 100%
+  max-width: 100%;
 }
 
 .weekcol {
@@ -178,6 +177,8 @@ main {
   width: 10px;
   left: 50px;
   top: 225px;
+  height: 10px;
+  /* background-color: orange; */
 }
 
 /* This is for the time side bar for the weekCalendar */
@@ -194,6 +195,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 10px;
+
 }
 
 /* PersonalCalendar weekbar */
@@ -365,10 +368,10 @@ main {
 .calendarContainer .mainCalContainer{
   width: 1600px;
   position: relative;
-  right: 45px;
+  right: 55px;
   top: -100px;
   /* padding-left: 25px; */
-  /* background-color: red; */
+  /* background-color: orange; */
 }
 
 

@@ -58,7 +58,7 @@ class CustomLayout extends React.Component {
 
                 <div style={{
                   position: 'relative',
-                  top: "-190px",
+                  top: "-130px",
                   textAlign: 'center',
                   left: "650px",
                   width: "250px",

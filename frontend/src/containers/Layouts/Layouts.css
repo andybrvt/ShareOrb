@@ -16,6 +16,13 @@
   margin: 16px;
 }
 
+.site-layout{
+  position: relative;
+  top: 0px;
+  background-color: red;
+  height: 1300px;
+}
+
 .site-layout .site-layout-background {
   background: #fff;
   /* background-color: black; */
