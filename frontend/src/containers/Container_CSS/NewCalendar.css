@@ -106,6 +106,16 @@ main {
   display: flex;
 }
 
+.weekCalContainer {
+  position: relative;
+  right: 180px;
+  width: 1395px;
+  /* height: 1000px; */
+  bottom: 100px;
+  /* background-color: yellow; */
+  display: flex;
+}
+
 
 /* GRID */
 /* Do not change this because alot of other parts use this */
@@ -195,8 +205,8 @@ main {
 
 /* PersonalCalendar weekbar */
 .flex-container .sidecol .sideBar .holder .tabs{
-   width: 180px;
-   height: 50px;
+   width: 165px;
+   height: 35px;
    background: deepskyblue;
    border-radius: 5px;
    transform: perspective(5px) rotateX(2deg);
@@ -596,7 +606,7 @@ to make it adjustable */
 .calendar .body .row {
   display: grid;
   grid-template-columns: repeat(7, 215px);
-  grid-template-rows: repeat(6, 27px);
+  grid-template-rows: repeat(6, 25px);
   grid-auto-flow: dense;
   grid-row-gap: 2px;
   grid-column-gap: 1px;
@@ -676,7 +686,7 @@ to make it adjustable */
   text-align: right;
   background-color: white;
   border-right: 1px solid var(--border-color);
-  height: 172px;
+  height: 160px;
 }
 
 

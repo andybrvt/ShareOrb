@@ -375,7 +375,13 @@ class WeekCalendar extends React.Component{
     return (
     <div className = 'calendarContainer'>
         <div className = 'miniCalContainer'>
+        <Button type="primary" onClick = {this.onAddEvent}>
+        Add event
+        </Button>
           <MiniCalendar {...this.props}/>
+          <Button type="primary" shape="circle" onClick = {this.onBackClick}>
+          M
+          </Button>
         </div>
         <div className = 'mainCalContainer'>
           <div className = 'flex-container'>
@@ -387,12 +393,6 @@ class WeekCalendar extends React.Component{
               {this.renderSide()}
             </div>
             <div className = 'calendar'>
-            <Button type="primary" shape="circle" onClick = {this.onBackClick}>
-            M
-            </Button>
-            <Button type="primary" onClick = {this.onAddEvent}>
-            Add event
-            </Button>
             <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
               {this.renderHeader()}
               {this.renderDays()}
