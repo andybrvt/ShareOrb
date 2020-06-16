@@ -7,7 +7,7 @@ import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
-import CustomLayout from './containers/Layouts/Layouts.js';
+import CustomLayout from './containers/Layouts/Layouts';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -78,7 +78,7 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     username: state.auth.username,
     id: state.auth.id,
-    
+
 
   }
 }
