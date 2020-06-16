@@ -482,54 +482,29 @@ class PersonalCalendar extends React.Component{
     console.log(this.props)
     return(
       <div className = 'calendarContainer'>
-        <EditEventPopUp
-          isVisible = {this.props.showModal}
-          close = {() => this.props.closeModal()}
-        />
         <EventSyncModal
           {...this.props}
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
         <div className = 'miniCalContainer'>
-        <Button type = 'primary' onClick = {this.openEventSyncModal}>
-          Event Sync
+        <Button type = "primary" onClick={() => this.props.openDrawer()}>
+          Add Event
         </Button>
         <MiniCalendar {...this.props}/>
-        </div>
-        <div className = 'mainCalContainer'>
         <Button type = "primary" shape = "circle" onClick = {this.onYearClick}>
         Y
         </Button>
-            <List
-              dataSource={[
-                {
-                  name: 'Box to add event',
-                },
-
-              ]}
-              bordered
-              renderItem={item => (
-                <List.Item
-                  key={item.id}
-                  actions={[
-                    <a onClick={() => this.props.openDrawer()} key={`a-${item.id}`}>
-                      Add event
-                    </a>,
-                  ]}
-                >
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                    }
-                    title={<a href="https://ant.design/index-cn">{item.name}</a>}
-                    description="Click on the [Add event] text! "
-                  />
-                </List.Item>
-              )}
-            />
-
+        <Button type = 'primary' onClick = {this.openEventSyncModal}>
+          Event Sync
+        </Button>
+        </div>
+        <div className = 'mainCalContainer'>
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+          <EditEventPopUp
+            isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
+          />
         <div className = 'flex-container'>
           <div className = 'sidecol'>
           {this.renderSide()}

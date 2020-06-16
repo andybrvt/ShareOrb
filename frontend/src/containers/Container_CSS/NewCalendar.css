@@ -98,10 +98,11 @@ main {
 /* Container that holds Calendar */
 .calendarContainer{
   position: relative;
-  right: 150px;
+  right: 180px;
   width: 1395px;
-  bottom: 70px;
-  /* background-color: yellow; */
+  /* height: 1000px; */
+  bottom: 160px;
+  /* background-color: yellow */
   display: flex;
 }
 
@@ -165,8 +166,8 @@ main {
 .flex-container .sidecol{
   position: relative;
   width: 10px;
-  left: 46px;
-  top: 180px;
+  left: 50px;
+  top: 225px;
 }
 
 /* This is for the time side bar for the weekCalendar */
@@ -188,14 +189,14 @@ main {
 /* PersonalCalendar weekbar */
 .flex-container .sidecol .sideBar .holder {
   transform: rotate(-90deg);
-  padding-bottom: 8em;
-  padding-left: 0px;
+  padding-bottom: 125px;
+  padding-left: 30px;
 }
 
 /* PersonalCalendar weekbar */
 .flex-container .sidecol .sideBar .holder .tabs{
-   width: 10em;
-   height: 30px;
+   width: 180px;
+   height: 50px;
    background: deepskyblue;
    border-radius: 5px;
    transform: perspective(5px) rotateX(2deg);
@@ -250,7 +251,8 @@ main {
 /* Calendar */
 /* this will help control the width of the calendar */
 .flex-container .calendar{
-  width: 1700px;
+  width: 1520px;
+  /* background-color: blue; */
 }
 
 
@@ -265,10 +267,12 @@ main {
 
 .calendar .header {
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 115%;
+  font-weight: 100;
+  font-size: 125%;
   padding: 1.5em 0;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
+  /* background-color: blue; */
+  width: 600px;
 }
 
 .calendar .header .icon {
@@ -296,7 +300,10 @@ main {
   color: ;
   font-size: 100%;
   padding: .75em 0;
+  border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  /* background-color: red; */
+  /* width: 700px; */
 }
 
 .calendar .body .row .cell {
@@ -346,8 +353,11 @@ main {
 
 
 .calendarContainer .mainCalContainer{
-  width: 1800px;
-  padding-left: 25px;
+  width: 1600px;
+  position: relative;
+  right: 45px;
+  top: -100px;
+  /* padding-left: 25px; */
   /* background-color: red; */
 }
 
@@ -387,13 +397,18 @@ main {
   transform: perspective(5px) rotateX(2deg);
   transform-origin: bottom;
 }
+.miniCalContainer .miniCalendar {
+  /* background-color: red; */
+  /* height: 100px; */
+}
 
 .miniCalContainer .miniCalendar .header{
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 110%;
-  padding: 1.5em 0;
-  border-bottom: 1px solid var(--border-color);
+  font-size: 100%;
+  /* padding: 10em 10px; */
+  border-bottom: 3px solid var(--border-color);
+  /* background-color: red; */
 }
 
 .miniCalContainer .miniCalendar .days{
@@ -410,7 +425,7 @@ main {
 .miniCalContainer .miniCalendar .miniCol{
   flex-grow: 1;
   flex-basis: 0;
-  max-width: 100%;
+  /* max-width: 80%; */
   text-align:center;
 }
 
@@ -420,7 +435,7 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  width: 80%;
 }
 
 .miniCalContainer .miniCalendar .miniBody .miniRow{
@@ -435,13 +450,14 @@ main {
 
 .miniCalContainer .miniCalendar .body .miniCell{
   position: relative;
-  height: 3em;
+  height: 30px;
   width: 5em;
   /* border-right: 1px solid var(--border-color); */
   overflow: hidden;
   cursor: pointer;
   /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
+  font-size: 10px;
 }
 
 .calendarContainer .miniCalContainer{
@@ -449,7 +465,7 @@ main {
   flex-shrink: 0;
   flex-basis: 20%;
   position: relative;
-  top: 110px;
+  /* top: 110px; */
   /* background-color: blue; */
 }
 
@@ -579,8 +595,8 @@ main {
 to make it adjustable */
 .calendar .body .row {
   display: grid;
-  grid-template-columns: 242px 242px 242px 242px 242px 242px 242px;
-  grid-template-rows: 23.5px 23.5px 23.5px 23.5px 23.5px 23.5px;
+  grid-template-columns: repeat(7, 215px);
+  grid-template-rows: repeat(6, 27px);
   grid-auto-flow: dense;
   grid-row-gap: 2px;
   grid-column-gap: 1px;
@@ -660,7 +676,7 @@ to make it adjustable */
   text-align: right;
   background-color: white;
   border-right: 1px solid var(--border-color);
-  height: 151px;
+  height: 172px;
 }
 
 
