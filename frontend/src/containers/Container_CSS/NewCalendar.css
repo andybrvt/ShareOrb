@@ -101,8 +101,8 @@ main {
   right: 180px;
   width: 1395px;
   /* height: 1000px; */
-  bottom: 160px;
-  /* background-color: yellow */
+  bottom: 100px;
+  /* background-color: yellow; */
   display: flex;
 }
 
