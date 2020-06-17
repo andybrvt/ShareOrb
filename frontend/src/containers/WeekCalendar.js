@@ -11,6 +11,8 @@ import * as calendarEventActions from '../store/actions/calendarEvent'
 import * as calendarActions from '../store/actions/calendars'
 import EventDrawer from '../containers/EventDrawer.js';
 import MiniCalendar from '../components/MiniCalendar';
+import EventSyncModal from '../components/EventSyncModal';
+import * as eventSyncActions from '../store/actions/eventSync';
 
 
 
@@ -376,15 +378,24 @@ class WeekCalendar extends React.Component{
 
 
   render() {
+    console.log(this.props)
     return (
     <div className = 'calendarContainer'>
+        <EventSyncModal
+          {...this.props}
+          isVisble = {this.props.showEventSyncModal}
+          close = {() => this.props.closeEventSyncModal()}
+        />
         <div className = 'miniCalContainer'>
         <Button type="primary" onClick = {this.onAddEvent}>
-        Add event
+        Add Event
         </Button>
           <MiniCalendar {...this.props}/>
           <Button type="primary" shape="circle" onClick = {this.onBackClick}>
           M
+          </Button>
+          <Button type = 'primary' onClick = {this.openEventSyncModal}>
+            Event Sync
           </Button>
         </div>
         <div className = 'mainCalContainer'>
@@ -418,7 +429,9 @@ const mapStateToProps = state => {
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
-    events: state.calendar.events
+    events: state.calendar.events,
+    showEventSyncModal: state.eventSync.showEventSyncModal
+
   }
 }
 
@@ -432,7 +445,10 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextWeek: () => dispatch(calendarActions.nextWeek()),
     prevWeek: () => dispatch(calendarActions.prevWeek()),
-    getEvents: () => dispatch(calendarActions.getUserEvents())
+    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
+
   }
 }
 

@@ -4,8 +4,13 @@
   width: 800px;
   margin-top: 1px;
   minHeight: 380px;
+  /* overflow:auto; */
+  /* background-color: red; */
 }
 
+.newsfeed .infinite-scrollList {
+  overflow: auto;
+}
 
 /* style={{ padding: '0 50px', marginTop: 10, width: 900, marginRight: 'auto', marginLeft: 'auto'}} */
 

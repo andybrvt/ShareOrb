@@ -15,7 +15,7 @@ class InfiniteList extends React.Component {
       post: [],
       hasMore: true,
       offset: 0,
-      limit: 1,
+      limit: 3,
     };
     window.onscroll = () => {
       const {
@@ -72,7 +72,7 @@ class InfiniteList extends React.Component {
         <div className="testFont" style={{color:'black', fontSize:25}}> Welcome {this.props.data.username}. Here's what's going on today! </div>
 
       <hr />
-      
+
       {post.map((j,index) => {
         return <NewsFeedPost data = {j}  />
       })}

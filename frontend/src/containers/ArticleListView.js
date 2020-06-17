@@ -1,5 +1,5 @@
 import React from 'react';
-import InfiniteScroll from './InfiniteScroll';
+import InfiniteList from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import Form3 from '../components/Forms3';
 import axios from 'axios';
@@ -72,8 +72,11 @@ class ArticleList extends React.Component {
 
 				<div>
 				 		<Form3 data = {this.props}/>
-						<InfiniteScroll data={this.props} />
+					<div className = 'infinite-scrollList'>
+						<InfiniteList data={this.props} />
+					</div>
 				 </div>
+
 				 :
 
 

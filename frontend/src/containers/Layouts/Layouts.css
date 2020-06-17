@@ -17,11 +17,11 @@
 }
 
 .site-layout{
-  position: relative;
-  top: 0px;
+  /* position: relative; */
+  /* top: 0px; */
   /* background-color: red; */
-  overflow: hidden; 
-  height: 980px;
+  /* overflow: hidden; */
+  /* height: 980px; */
 }
 
 .site-layout .site-layout-background {
