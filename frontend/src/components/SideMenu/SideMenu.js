@@ -9,11 +9,10 @@ import {
   HeartTwoTone,
 } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
-import * as dateFns from 'date-fns';
 import testPic from './antd.png';
 import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space} from 'antd';
 import "./SideMenu.css"
-
+import * as dateFns from 'date-fns';
 const { Header, Sider, Content } = Layout;
 
 class SideMenu extends React.Component {
@@ -28,6 +27,13 @@ class SideMenu extends React.Component {
   };
 
   render() {
+    const currentDay = new Date()
+    console.log(currentDay)
+    const selectYear = dateFns.getYear(currentDay).toString()
+    const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
+    const selectDay = dateFns.getDate(currentDay).toString()
+    console.log(this.props)
+
     return (
       <Layout>
 
@@ -44,31 +50,41 @@ class SideMenu extends React.Component {
 
 
           <Menu.Item key="1">
-            <a href='/home'>
-                <Icon type="home" />
-                Home
-            </a>
+            <Icon type="home" />
+            <span> Home </span>
+            <Link to={"/home"} />
           </Menu.Item>
 
 
-            <Menu.Item key="2">
-            <Icon type="user" />
-                  Find Friends
+            <Menu.Item key="2"  icon={<VideoCameraOutlined />}>
+              <Icon type="user" />
+              <span> Find friends </span>
+              <Link to={"/userview"} />
             </Menu.Item>
-            <Menu.Item key="3">
 
-              <a href='/chat/1'>
-                  <Icon type="inbox" />
-                  Messages
-              </a>
+            <Menu.Item key="3">
+              <Icon type="inbox" />
+              <span>Messages</span>
+              <Link to={"chat/1"} />
             </Menu.Item>
+
+
             <Menu.Item key="4">
-              <a href='/personalcalendar/2020/6'>
-                  <Icon type="calendar" />
-                  Personal calendar
-              </a>
+              <Icon type="calendar" />
+              <span>Personal Calendar </span>
+              <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} />
+            </Menu.Item>
+
+
+
+            <Menu.Item key="5">
+              <Icon type="smile" />
+              <span>Social Calendar</span>
+              <Link to={"/current-user/"} />
             </Menu.Item>
           </Menu>
+
+
         </Sider>
         <Layout className="site-layout">
 
@@ -87,6 +103,7 @@ class SideMenu extends React.Component {
               // backgroundColor: 'red'
             }}
           >
+
               {this.props.children}
           </Content>
         </Layout>
