@@ -19,8 +19,8 @@
 .site-layout{
   position: relative;
   top: 0px;
-  /* background-color: red; */
-  overflow: hidden; 
+
+  overflow: hidden;
   height: 980px;
 }
 
