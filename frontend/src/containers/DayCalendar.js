@@ -66,6 +66,35 @@ class DayCalendar extends React.Component{
       </div>
     );
   }
+
+  renderDays() {
+    const dateFormat = 'iiii'
+    const dayFormat = 'd'
+    const days = []
+
+    let startDate = dateFns.startOfWeek(this.props.currentDate)
+    let cloneStartDate = dateFns.startOfWeek(this.props.currentDate)
+    for (let i = 0; i<7; i++){
+      const cloneCloneStartDate = cloneStartDate
+      days.push(
+        <div
+        className = 'weekcol col-center'
+        key = {i}
+        onClick = {() => this.onDateClick(cloneCloneStartDate)}
+        >
+          
+        </div>
+      )
+      cloneStartDate = dateFns.addDays(cloneStartDate, 1)
+    };
+
+    return (
+      <div className = 'dayDays row'>
+      {days}
+      </div>
+      )
+  }
+
 // render the time on the side
   renderHours() {
     // this format is to render it by hour and am pm
@@ -74,21 +103,22 @@ class DayCalendar extends React.Component{
     const hours = []
 
     // starttime will be the start of the day where the time is 00:00
-    // then you will loop by 0-23 and add hours accordingly
-    let startTime = dateFns.startOfDay(this.props.currentDate);
-    console.log(startTime)
-    for(let i = 0; i<24; i++){
+    // then you will loop loop from 1 am to 11 pm
+    let startTime = dateFns.addHours(dateFns.startOfDay(this.props.currentDate),1);
+    for(let i = 0; i<23; i++){
       const formattedHour = dateFns.format(startTime, dateFormat)
       hours.push(
-        <div className = 'sidecell' key = {i}>
-          <span> {formattedHour}</span>
+        <div className = 'cell' key = {i}>
+          <span className = 'number'> {formattedHour}</span>
         </div>
       )
       startTime = dateFns.addHours(startTime, 1)
     }
     // render it our but you have to fix the css
-    return <div className = 'sidepanel'>{hours}</div>
+    return <div className = 'body'>{hours}</div>
   }
+
+
 
   renderColor = () => {
     const color = ["green","yellow","red","blue","orange","pink","cyan"]
@@ -111,7 +141,8 @@ class DayCalendar extends React.Component{
      // You will do the same with the endHourDay
      // You will want to loop through all the hours of that day starting with
      // startHourDay and ending with endHourDay
-
+    let border = []
+    // The border is to draw the lines for the calendars
     let toDoStuff = []
     const hourFormat = "h a"
     // Since there will only be the hours we wont be need a row list
@@ -163,10 +194,23 @@ class DayCalendar extends React.Component{
               </div>
             ))
         )}
+      border.push(
+        <div className = 'daycell'>
+        </div>
+      )
       toDoStuff = []
       hour = dateFns.addHours(hour, 1);
     }
-    return <div className = 'dayBody'>{hours}</div>
+    return(
+      <div className = 'scrollBody'>
+      <div className = 'backDayBody'>
+      {border}
+      </div>
+      <div className = 'dayBody'>
+      {hours}
+      </div>
+      </div>
+    )
   }
 
   dayEventIndex = (start_time, end_time, start_index) =>{
@@ -241,30 +285,35 @@ class DayCalendar extends React.Component{
     return (
       <div className = 'calendarContainer'>
         <div className = 'miniCalContainer'>
+        <Button type="primary" onClick = {this.onOpenEvent} >
+          Add event
+        </Button>
           <MiniCalendar {...this.props}/>
+          <Button type="primary" shape="circle" onClick = {this.onYearClick}>
+          Y
+          </Button>
+          <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
+          M
+          </Button>
+          <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
+          W
+          </Button>
         </div>
         <div className ='mainCalContainer'>
-          <div className = 'flex-container'>
-            <div className = 'calendar'>
-            <EditEventPopUp
-            isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
-            />
-              <Button type="primary" shape="circle" onClick = {this.onYearClick}>
-              Y
-              </Button>
-              <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
-              M
-              </Button>
-              <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
-              W
-              </Button>
-              <Button type="primary" onClick = {this.onOpenEvent} >
-                Add event
-              </Button>
-              <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-              {this.renderHeader()}
+          <EditEventPopUp
+          isVisible = {this.props.showModal}
+          close = {() => this.props.closeModal()}
+          />
+          <div className = "weekCalendar">
+          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+          {this.renderHeader()}
+          {this.renderDays()}
+          </div>
+          <div className = 'dayFlex-Container'>
+            <div className = 'timecol'>
               {this.renderHours()}
+            </div>
+            <div className = 'calendar'>
               {this.renderCells(this.props.events)}
               </div>
             </div>
