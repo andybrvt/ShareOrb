@@ -75,7 +75,7 @@ class CurrUserProfile extends React.Component{
                 <img
                   alt="..."
                   className="img-circle img-no-padding img-responsive test3"
-                  src={"https://images.unsplash.com/photo-1525943837837-af668e09139d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}
+                  src={"https://images.unsplash.com/photo-1544294932-57834439d0ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}
                 />
               </div>
               <div className="name">

@@ -7,17 +7,26 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
   HeartTwoTone,
+  LogoutOutlined, SettingOutlined,
 } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
 import testPic from './antd.png';
-import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space} from 'antd';
+import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
+import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
+
+
+
+
 const { Header, Sider, Content } = Layout;
+const { Search } = Input;
+
+
 
 class SideMenu extends React.Component {
   state = {
-    collapsed: false,
+    collapsed: true,
   };
 
   toggle = () => {
@@ -95,7 +104,75 @@ class SideMenu extends React.Component {
               className: 'trigger',
               onClick: this.toggle,
             })}
+
+
+
+
+            <Search
+               placeholder="Search"
+               onSearch={value => console.log(value)}
+               style={{ marginLeft:200, width: 400 }}
+             />
+
+
+             {
+
+              /*
+
+
+             <Dropdown overlay={
+
+               <Menu selectedKeys={[]} >
+                 { (
+                   <Menu.Item key="center">
+                     <Link to="/current-user">
+                       <UserOutlined />
+                       Profile
+
+                     </Link>
+
+                   </Menu.Item>
+                 )}
+                 { (
+                   <Menu.Item key="settings">
+                     <SettingOutlined />
+                     Settings
+                   </Menu.Item>
+                 )}
+                 { <Menu.Divider />}
+
+
+
+
+
+                 <Menu.Item key="logout" onClick={this.props.logout}>
+                   <Link to="/">
+                     <LogoutOutlined />
+                     Logout
+
+                   </Link>
+
+                 </Menu.Item>
+               </Menu>}>
+
+
+
+
+             <span >
+               <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+               <span>{"admin"}</span>
+             </span>
+           </Dropdown>
+           */
+
+         }
+
           </Header>
+
+
+
+
+
           <Content
             className=""
             style={{
