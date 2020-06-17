@@ -95,7 +95,7 @@ class WeekCalendar extends React.Component{
       const cloneCloneStartDate = cloneStartDate
       days.push(
         <div
-        className = 'col col-center'
+        className = 'weekcol col-center'
         key = {i}
         onClick = {() => this.onDateClick(cloneCloneStartDate)}
         >
@@ -107,7 +107,11 @@ class WeekCalendar extends React.Component{
       cloneStartDate = dateFns.addDays(cloneStartDate, 1)
     };
 
-    return <div className = 'days row'>{days}</div>
+    return (
+      <div className = 'weekDays row'>
+      {days}
+      </div>
+      )
   }
 
   // This is to show the time on the side instead of in each box
@@ -389,7 +393,7 @@ class WeekCalendar extends React.Component{
           isVisible = {this.props.showModal}
           close = {() => this.props.closeModal()}
           />
-          <div className = 'calendar'>
+          <div className = 'weekCalendar'>
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             {this.renderHeader()}
             {this.renderDays()}

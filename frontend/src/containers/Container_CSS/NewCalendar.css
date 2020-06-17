@@ -127,6 +127,8 @@ main {
   display: flex;
   overflow: auto;
   height: 780px;
+  border-top: 2px solid;
+  border-color: darkgrey;
 }
 
 
@@ -153,12 +155,22 @@ main {
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
+  /* background-color: red; */
 }
 
 .weekcol {
-  display:flex;
-  align-items: stretch;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+  /* border-right: 1px solid ; */
+  /* background-color: red; */
+  /* border-left: 2px solid; */
+  /* border-color: darkgrey; */
+}
 
+.weekcol:first-child{
+  border-left: 2px solid;
+  border-color: darkgrey;
 }
 
 .col-start {
@@ -268,7 +280,6 @@ main {
 }
 
 
-
 /* Calendar */
 /* this will help control the width of the calendar */
 .flex-container .calendar{
@@ -283,10 +294,29 @@ main {
   width: 90%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+}
 
+.weekCalendar {
+  display: block;
+  position: relative;
+  left: 50px;
+  width: 100%;
+  background: var(--neutral-color);
+  border: 1px solid var(--border-color);
+  /* background-color: black; */
 }
 
 .calendar .header {
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 125%;
+  padding: 1.5em 0;
+  /* border-bottom: 1px solid var(--border-color); */
+  /* background-color: blue; */
+  width: 600px;
+}
+
+.weekCalendar .header {
   text-transform: uppercase;
   font-weight: 100;
   font-size: 125%;
@@ -301,7 +331,18 @@ main {
   transition: .15s ease-out;
 }
 
+.weekCalendar .header .icon{
+  cursor: pointer;
+  transition: .15s ease-out;
+}
+
 .calendar .header .icon:hover {
+  transform: scale(1.75);
+  transition: .25s ease-out;
+  color: var(--main-color);
+}
+
+.weekCalendar .header .icon:hover {
   transform: scale(1.75);
   transition: .25s ease-out;
   color: var(--main-color);
@@ -316,7 +357,7 @@ main {
 }
 
 .calendar .days {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 400;
   color: ;
   font-size: 100%;
@@ -325,6 +366,29 @@ main {
   border-bottom: 1px solid var(--border-color);
   /* background-color: red; */
   /* width: 700px; */
+}
+
+.calendar .weekDays {
+  /* text-transform: uppercase; */
+  font-weight: 400;
+  color: ;
+  font-size: 100%;
+  padding: .75em 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  /* background-color: red; */
+  /* width: 700px; */
+}
+
+.weekCalendar .weekDays {
+  font-weight: 100;
+  color: ;
+  font-size: 100%;
+  /* padding: .75em 0; */
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  width: 1470px;
 }
 
 .calendar .body .row .cell {
@@ -381,6 +445,16 @@ main {
 
   /* padding-left: 25px; */
   /* background-color: orange; */
+}
+
+.calendarContainer .mainWeekCalContainer{
+  width: 1600px;
+  position: relative;
+  right: 55px;
+  top: -100px;
+
+  /* padding-left: 25px; */
+  background-color: orange;
 }
 
 .calendar .scrollBody {

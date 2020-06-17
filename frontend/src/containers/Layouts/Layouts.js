@@ -59,7 +59,6 @@ class CustomLayout extends React.Component {
                 <Footer style={{
                   position: 'relative',
                   top: "-120px",
-                
                   textAlign: 'center',
                  }}>
                 ShareOrb ©2020
