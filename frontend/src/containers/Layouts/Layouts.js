@@ -56,16 +56,14 @@ class CustomLayout extends React.Component {
 
                {this.props.children}
 
-                <div style={{
+                <Footer style={{
                   position: 'relative',
-                  top: "-130px",
+                  top: "-120px",
+                
                   textAlign: 'center',
-                  left: "650px",
-                  width: "250px",
-                  height: "10px"
                  }}>
                 ShareOrb ©2020
-                </div>
+                </Footer>
             </div>
 
 

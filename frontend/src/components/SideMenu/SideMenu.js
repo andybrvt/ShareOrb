@@ -84,10 +84,9 @@ class SideMenu extends React.Component {
             className=""
             style={{
               height: "710px",
-              backgroundColor: 'red'
+              // backgroundColor: 'red'
             }}
           >
-          <HeartTwoTone twoToneColor="#eb2f96" />
               {this.props.children}
           </Content>
         </Layout>

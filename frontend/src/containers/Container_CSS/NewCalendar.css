@@ -101,7 +101,7 @@ main {
   right: 180px;
   width: 1395px;
   height: 920px;
-  bottom: 100px;
+  bottom: 70px;
   /* background-color: yellow; */
   display: flex;
 }
@@ -122,6 +122,13 @@ main {
 .flex-container {
   display: flex;
 }
+
+.weekDayFlex-Container{
+  display: flex;
+  overflow: auto;
+  height: 780px;
+}
+
 
 .row {
   margin: 0;
@@ -182,11 +189,12 @@ main {
 }
 
 /* This is for the time side bar for the weekCalendar */
-.flex-container .timecol{
+.weekDayFlex-Container .timecol{
   width: 50px;
   float: left;
   position:relative;
-  top: 152px;
+  top: 40px;
+  /* background-color: red; */
 
 }
 
@@ -235,15 +243,15 @@ main {
 
 
 /* this is for the date time for week calendar */
-.calendarContainer .flex-container .timecol .body .cell:first-child{
-  border-top: 1px solid var(--border-color);
+.calendarContainer .weekDayFlex-Container.timecol .body .cell:first-child{
+  /* border-top: 1px solid var(--border-color); */
 }
 
 /* time side for weekCalendar */
-.calendarContainer .flex-container .timecol .body .cell{
+.calendarContainer .weekDayFlex-Container .timecol .body .cell{
   position: relative;
-  height: 84.5px;
-  border-bottom: 2px solid var(--border-color);
+  height: 50px;
+  border-top: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
   transition: 0.25s ease-out;
@@ -251,7 +259,7 @@ main {
   /* background-color: blue; */
 }
 
-.calendarContainer .flex-container .timecol .body .cell .number{
+.calendarContainer .weekDayFlex-Container .timecol .body .cell .number{
   font-size: 82.5%;
   line-height: 1;
   top: .75em;
@@ -348,7 +356,7 @@ main {
 }
 
 
-.calendar .weekBody .weekEvent{
+.weekDayFlex-Container .calendar .weekBody .weekEvent{
   background-color: lightblue;
 }
 
@@ -370,10 +378,20 @@ main {
   position: relative;
   right: 55px;
   top: -100px;
+
   /* padding-left: 25px; */
   /* background-color: orange; */
 }
 
+.calendar .scrollBody {
+  height: 1000px;
+  margin-bottom: 0px;
+  /* vertical-align: top; */
+}
+
+.scrollBody .testContainer {
+  height: 0px;
+}
 
 /* This is for the minicalendar */
 .miniflex-container{
@@ -530,14 +548,13 @@ main {
 /* This is for the week view and to control the cell size */
 .calendar .backWeekBody .hourcell {
   position: relative;
-  height: 84px;
-  border-right: 1px solid var(--border-color);
+  height: 50px;
+  border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
-  /* background-color: black; */
 }
 
 /* this is to hel format the list in each cell in the weekview */
@@ -617,17 +634,17 @@ to make it adjustable */
   border-right: 1px solid var(--border-color);
 }
 
-.calendar .weekBody{
+.weekDayFlex-Container .calendar .weekBody{
   display: grid;
   border-bottom: 1px solid var(--border-color);
   /* grid-auto-flow: dense; */
-  grid-template-columns: 242px 242px 242px 242px 242px 242px 242px;
-  grid-template-rows: repeat(48, 40px);
+  grid-template-columns: repeat(7, 209px);
+  grid-template-rows: repeat(48, 24.2px);
   /* background-color: red; */
   grid-column-gap: 1px;
-  grid-row-gap: 2px;
+  grid-row-gap: 1px;
   position:relative;
-  top: -2016px;
+  top: -1202px;
 
 }
 
@@ -776,7 +793,8 @@ to make it adjustable */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  width: 1470px;
+  background-color: blue;
 }
 
 .calendar .backWeekBody .col {

@@ -115,8 +115,8 @@ class WeekCalendar extends React.Component{
   renderSide() {
     const dateFormat = 'h a'
     const hour = []
-    let startHour = dateFns.startOfDay(this.props.currentDate)
-    for (let i = 0; i<24; i++){
+    let startHour = dateFns.addHours(dateFns.startOfDay(this.props.currentDate),1)
+    for (let i = 0; i<23; i++){
       const formattedHour = dateFns.format(startHour, dateFormat)
       hour.push(
         <div
@@ -260,7 +260,7 @@ class WeekCalendar extends React.Component{
 
     console.log(days)
     return(
-      <div>
+      <div className = 'scrollBody'>
       <div className = 'backWeekBody'>
     {border}
       </div>
@@ -384,22 +384,24 @@ class WeekCalendar extends React.Component{
           </Button>
         </div>
         <div className = 'mainCalContainer'>
-          <div className = 'flex-container'>
+
           <EditEventPopUp
           isVisible = {this.props.showModal}
           close = {() => this.props.closeModal()}
           />
+          <div className = 'calendar'>
+          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+            {this.renderHeader()}
+            {this.renderDays()}
+          </div>
+          <div className = 'weekDayFlex-Container'>
             <div className = 'timecol'>
               {this.renderSide()}
             </div>
             <div className = 'calendar'>
-            <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-              {this.renderHeader()}
-              {this.renderDays()}
-              {this.renderWeekCell(this.props.events)}
+            {this.renderWeekCell(this.props.events)}
             </div>
-
-            </div>
+          </div>
           </div>
       </div>
     )

@@ -19,8 +19,8 @@
 .site-layout{
   position: relative;
   top: 0px;
-  background-color: red;
-  height: 1300px;
+  /* background-color: red; */
+  height: 980px;
 }
 
 .site-layout .site-layout-background {
