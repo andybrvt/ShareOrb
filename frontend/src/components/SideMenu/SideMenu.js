@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
 import testPic from './antd.png';
-import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button} from 'antd';
+import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
@@ -99,14 +99,14 @@ class SideMenu extends React.Component {
 
           {/* length of banner from the very top*/}
 
-          <Header className="site-layout-background" style={{  fontSize:20 }}>
+          <Header className="site-layout-background HeaderPosition" style={{  fontSize:20 }}>
             {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
               onClick: this.toggle,
             })}
 
 
-
+            <Divider type="vertical" />
 
             <Search
                placeholder="Search"
@@ -114,6 +114,9 @@ class SideMenu extends React.Component {
                style={{ marginLeft:150, marginRight:800, width: 400 }}
              />
 
+
+
+             <Divider type="vertical" />
 
 
 
@@ -155,12 +158,13 @@ class SideMenu extends React.Component {
                </Menu>}>
 
 
+              <Button>
 
-
-             <span >
-               <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-               <span>{"admin"}</span>
-             </span>
+               <span >
+                 <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+                 <span>{"admin"}</span>
+               </span>
+             </Button>
            </Dropdown>
 
 
