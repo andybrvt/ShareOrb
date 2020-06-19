@@ -5,7 +5,7 @@ import {uploadPost} from '../api';
 import axios from 'axios';
 import { authAxios } from './util';
 import { connect } from "react-redux";
-
+import { Input } from 'antd';
 
 
 const Form3 = (props) => {
@@ -17,6 +17,8 @@ const Form3 = (props) => {
   const[username, setUsername] = useState('');
   const[stage, setStage] = useState('empty');
   const[imageblob, setImageblob] = useState("");
+
+  const { TextArea } = Input;
   console.log(caption)
 
   useEffect(() => {
@@ -107,6 +109,7 @@ const Form3 = (props) => {
 				<div  className= "uploadImage upload " >
 
 				</div>}
+        <TextArea rows={4} />
 				<div className= "message caption-text">
 				<input type="text" name="caption" onChange= {onChange}value={caption}
 				 style={{width: '300px', height:'100px'}}/>

@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
 import testPic from './antd.png';
-import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar } from 'antd';
+import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
@@ -111,13 +111,12 @@ class SideMenu extends React.Component {
             <Search
                placeholder="Search"
                onSearch={value => console.log(value)}
-               style={{ marginLeft:200, width: 400 }}
+               style={{ marginLeft:150, marginRight:800, width: 400 }}
              />
 
 
-             {
 
-              /*
+
 
 
              <Dropdown overlay={
@@ -163,9 +162,11 @@ class SideMenu extends React.Component {
                <span>{"admin"}</span>
              </span>
            </Dropdown>
-           */
 
-         }
+
+
+
+
 
           </Header>
 
