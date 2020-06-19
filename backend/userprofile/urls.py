@@ -39,6 +39,8 @@ urlpatterns = [
 
 	path('userpost', views.PostTest.as_view(), name='test comment'),
 
+	path('testComment/<slug:id>/', views.postCommentTest.as_view(), name='test comment'),
+
 	# path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='grab comment'),
 
 

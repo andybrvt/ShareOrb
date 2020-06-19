@@ -31,6 +31,7 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
 // the map((j,index) => {}) will loop through all the objects
 	render() {
     const {profileList} = this.state
+    console.log(this.state.profileList)
 		return (
 
 
