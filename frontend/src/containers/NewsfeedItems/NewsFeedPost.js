@@ -10,6 +10,7 @@ class NewsfeedPost extends React.Component {
     super(props);
     this.state = {
       visibleModal: false,
+      commentPost:'',
     }
   }
 
@@ -39,12 +40,23 @@ class NewsfeedPost extends React.Component {
     console.log(this.state.visibleModal);
     this.showModal();
     console.log(this.state.visibleModal);
-
-
-
-
   }
 
+
+  handleCommentChange = e => {
+        console.log(e);
+    this.setState({
+      value: e.target.value,
+    });
+  };
+
+
+  handleSubmit = () => {
+      if (!this.state.value) {
+        return;
+      }
+      authAxios.post('http://127.0.0.1:8000/userprofile/testComment')
+    }
 
   ContentOfPic() {
     let temp="http://127.0.0.1:8000"+this.props.data.image;
@@ -309,6 +321,7 @@ class NewsfeedPost extends React.Component {
            rows={4}
            class="fontTest"
 
+           onChange={this.handleCommentChange}
           />
           <Button type="primary">
             Add Comment

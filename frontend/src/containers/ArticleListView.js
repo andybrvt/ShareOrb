@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
 import './Container_CSS/NewsFeed.css';
 
-import NoFoundPage from './404.jsx';
+import NoFoundPage from './403.jsx';
 // Function: Holds Forms3 and the Infinite scroll
 class ArticleList extends React.Component {
 
