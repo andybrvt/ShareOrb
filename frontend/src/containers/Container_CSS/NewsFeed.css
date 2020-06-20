@@ -9,7 +9,8 @@
 }
 
 .newsfeed .infinite-scrollList {
-  overflow: auto;
+  /* overflow: auto; */
+  /* height: 1000px; */
 }
 
 /* style={{ padding: '0 50px', marginTop: 10, width: 900, marginRight: 'auto', marginLeft: 'auto'}} */

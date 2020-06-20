@@ -11,6 +11,8 @@ import * as calendarEventActions from '../store/actions/calendarEvent';
 import * as calendarActions from '../store/actions/calendars';
 import EventDrawer from '../containers/EventDrawer.js';
 import MiniCalendar from '../components/MiniCalendar';
+import EventSyncModal from '../components/EventSyncModal';
+import * as eventSyncActions from '../store/actions/eventSync';
 
 
 
@@ -82,7 +84,7 @@ class DayCalendar extends React.Component{
         key = {i}
         onClick = {() => this.onDateClick(cloneCloneStartDate)}
         >
-          
+
         </div>
       )
       cloneStartDate = dateFns.addDays(cloneStartDate, 1)
@@ -280,13 +282,22 @@ class DayCalendar extends React.Component{
     this.props.history.push('/personalcalendar/'+selectYear)
   }
 
+  openEventSyncModal = () => {
+    this.props.openEventSyncModal()
+  }
+
   render() {
     console.log(this.props)
     return (
       <div className = 'calendarContainer'>
+        <EventSyncModal
+          {...this.props}
+          isVisble = {this.props.showEventSyncModal}
+          close = {() => this.props.closeEventSyncModal()}
+        />
         <div className = 'miniCalContainer'>
         <Button type="primary" onClick = {this.onOpenEvent} >
-          Add event
+          Add Event
         </Button>
           <MiniCalendar {...this.props}/>
           <Button type="primary" shape="circle" onClick = {this.onYearClick}>
@@ -297,6 +308,9 @@ class DayCalendar extends React.Component{
           </Button>
           <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
           W
+          </Button>
+          <Button type = 'primary' onClick = {this.openEventSyncModal}>
+            Event Sync
           </Button>
         </div>
         <div className ='mainCalContainer'>
@@ -328,7 +342,9 @@ const mapStateToProps = state => {
     showDrawer: state.nav.showPopup,
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
-    events: state.calendar.events
+    events: state.calendar.events,
+    showEventSyncModal: state.eventSync.showEventSyncModal
+
   }
 }
 
@@ -341,7 +357,9 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextDay: () => dispatch(calendarActions.nextDay()),
     prevDay: () => dispatch(calendarActions.prevDay()),
-    getEvents: () => dispatch(calendarActions.getUserEvents())
+    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
   }
 }
 

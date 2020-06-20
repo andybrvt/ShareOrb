@@ -1,18 +1,22 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
-import { authAxios } from '../components/util';
 import axios from 'axios';
-import { Button, Tooltip } from 'antd';
-import { connect } from 'react-redux';
-import EditEventPopUp from '../components/EditEventPopUp';
-import * as navActions from '../store/actions/nav'
-import * as calendarEventActions from '../store/actions/calendarEvent'
-import * as calendarActions from '../store/actions/calendars'
+import { authAxios } from '../components/util';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
 import EventDrawer from '../containers/EventDrawer.js';
+import * as navActions from '../store/actions/nav';
+import * as calendarEventActions from '../store/actions/calendarEvent';
+import * as calendarActions from '../store/actions/calendars';
+import * as eventSyncActions from '../store/actions/eventSync';
+import { connect } from 'react-redux';
+import  { Redirect } from 'react-router-dom';
+import EditEventPopUp from '../components/EditEventPopUp';
+import { NavLink } from 'react-router-dom';
 import MiniCalendar from '../components/MiniCalendar';
 import EventSyncModal from '../components/EventSyncModal';
-import * as eventSyncActions from '../store/actions/eventSync';
+import moment from 'moment';
+import { UserOutlined } from '@ant-design/icons';
 
 
 
@@ -374,6 +378,10 @@ class WeekCalendar extends React.Component{
 
   onAddEvent = () => {
     this.props.openDrawer()
+  }
+  
+  openEventSyncModal = () => {
+    this.props.openEventSyncModal()
   }
 
 

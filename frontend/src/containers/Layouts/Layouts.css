@@ -17,11 +17,12 @@
 }
 
 .site-layout{
-  /* position: relative; */
-  /* top: 0px; */
+  position: relative;
+  top: 0px;
   /* background-color: red; */
   /* overflow: hidden; */
-  /* height: 980px; */
+  height: 1300px;
+  /* magic numbre is 982 for height  */
 }
 
 .site-layout .site-layout-background {
