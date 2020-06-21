@@ -55,7 +55,7 @@ class NewsfeedPost extends React.Component {
       if (!this.state.value) {
         return;
       }
-      authAxios.post('http://127.0.0.1:8000/userprofile/testComment')
+      authAxios.post('http://127.0.0.1:8000/userprofile/testComment'+this.props.data.id+'/')
     }
 
   ContentOfPic() {
