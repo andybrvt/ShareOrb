@@ -501,10 +501,7 @@ class PersonalCalendar extends React.Component{
         </div>
         <div className = 'mainCalContainer'>
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-          <EditEventPopUp
-            isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
-          />
+
         <div className = 'flex-container'>
           <div className = 'sidecol'>
           {this.renderSide()}
@@ -515,7 +512,10 @@ class PersonalCalendar extends React.Component{
             {this.renderCells(this.props.events)}
           </div>
         </div>
-
+        <EditEventPopUp
+          isVisible = {this.props.showModal}
+          close = {() => this.props.closeModal()}
+        />
 
         <Tag color="geekblue">Invite Friends</Tag>
           <Avatar icon={<UserOutlined />} />

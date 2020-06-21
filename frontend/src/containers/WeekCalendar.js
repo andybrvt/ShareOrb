@@ -379,7 +379,7 @@ class WeekCalendar extends React.Component{
   onAddEvent = () => {
     this.props.openDrawer()
   }
-  
+
   openEventSyncModal = () => {
     this.props.openEventSyncModal()
   }
@@ -407,11 +407,6 @@ class WeekCalendar extends React.Component{
           </Button>
         </div>
         <div className = 'mainCalContainer'>
-
-          <EditEventPopUp
-          isVisible = {this.props.showModal}
-          close = {() => this.props.closeModal()}
-          />
           <div className = 'weekCalendar'>
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             {this.renderHeader()}
@@ -425,6 +420,10 @@ class WeekCalendar extends React.Component{
             {this.renderWeekCell(this.props.events)}
             </div>
           </div>
+          <EditEventPopUp
+          isVisible = {this.props.showModal}
+          close = {() => this.props.closeModal()}
+          />
           </div>
       </div>
     )
