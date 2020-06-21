@@ -48,6 +48,7 @@ class SideMenu extends React.Component {
     console.log(this.props)
 
     return (
+      <div>
       <Layout>
 
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
@@ -194,6 +195,8 @@ class SideMenu extends React.Component {
           </Content>
         </Layout>
       </Layout>
+
+     </div>
     );
   }
 }

@@ -16,6 +16,7 @@ import PersonalCalendar from './containers/PersonalCalendar';
 import DayCalendar from './containers/DayCalendar';
 import WeekCalendar from './containers/WeekCalendar';
 import YearCalendar from './containers/YearCalendar';
+import SideMenu from './components/SideMenu/SideMenu.js';
 
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
@@ -33,8 +34,8 @@ class BaseRouter extends React.Component {
 
 
       <div>
+        <SideMenu>
         <Route exact path = '/home'  render={(props) => <ArticleList {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
-        <Route exact path = '/article/:id' render={(props) => <ArticleDetail {...this.props} isAuthenticated={this.props.isAuthenticated} />}   />
         <Route exact path = '/' component = {Login} />
         <Route exact path = '/signup/' component= {Signup} />
 
@@ -49,8 +50,10 @@ class BaseRouter extends React.Component {
         <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year' render={(props) => <YearCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-
+        </SideMenu>
       </div>
+
+
 
       )
 
