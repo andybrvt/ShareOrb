@@ -495,8 +495,8 @@ main {
   width: 1600px;
   position: relative;
   right: 55px;
-  top: -100px;
-
+  top: 0px;
+  padding: 0;
   /* padding-left: 25px; */
   /* background-color: orange; */
 }

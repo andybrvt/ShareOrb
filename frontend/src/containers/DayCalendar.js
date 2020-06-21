@@ -314,10 +314,7 @@ class DayCalendar extends React.Component{
           </Button>
         </div>
         <div className ='mainCalContainer'>
-          <EditEventPopUp
-          isVisible = {this.props.showModal}
-          close = {() => this.props.closeModal()}
-          />
+
           <div className = "weekCalendar">
           <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
           {this.renderHeader()}
@@ -331,7 +328,12 @@ class DayCalendar extends React.Component{
               {this.renderCells(this.props.events)}
               </div>
             </div>
+            <EditEventPopUp
+            isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
+            />
           </div>
+
       </div>
     )
   }
