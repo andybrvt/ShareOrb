@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BaseRouter from './routes';
+import LoginRouter from './LoginRoutes.js'
 import 'antd/dist/antd.css';
 import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
-import CustomLayout from './containers/Layouts/Layouts';
+
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
 import * as notificationsActions from './store/actions/notifications';
 import * as calendarActions from './store/actions/calendars';
-import SideMenu from './components/SideMenu/SideMenu.js';
+
 
 class App extends Component {
 //the map state to props allows us to get the state and then
@@ -56,11 +57,10 @@ class App extends Component {
     return (
       <div>
         <Router>
-          <SideMenu>
-            <CustomLayout {...this.props}>
+
                 <BaseRouter   {...this.props}/>
-            </CustomLayout>
-          </SideMenu>
+
+  
         </Router>
       </div>
     );

@@ -9,15 +9,19 @@ import {
   HeartTwoTone,
   LogoutOutlined, SettingOutlined,
 } from '@ant-design/icons'
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import testPic from './antd.png';
 import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
 
+import * as navActions from '../../store/actions/nav'
+import * as actions from '../../store/actions/auth';
+import PickEventSyncModal from '../../components/PickEventSyncModal';
+import * as eventSyncActions from '../../store/actions/eventSync';
 
-
+import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
@@ -44,6 +48,7 @@ class SideMenu extends React.Component {
     console.log(this.props)
 
     return (
+      <div>
       <Layout>
 
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
@@ -190,8 +195,36 @@ class SideMenu extends React.Component {
           </Content>
         </Layout>
       </Layout>
+
+     </div>
     );
   }
 }
 
-export default SideMenu;
+const mapStateToProps = state => {
+  return{
+    notificationDrop: state.nav.showPopup,
+    showPickEventSyncModal: state.eventSync.showPickEventSyncModal
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+        closeNotification: () => dispatch(navActions.closePopup()),
+        openNotification: () => dispatch(navActions.openPopup()),
+        logout: () => dispatch(actions.logout()),
+        openPickEventSyncModal: (user, userFriend, minDate, maxDate, notificationId) => dispatch(eventSyncActions.openPickEventSyncModal(
+          user,
+          userFriend,
+          minDate,
+          maxDate,
+          notificationId
+        )),
+        closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal())
+    }
+}
+
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideMenu));

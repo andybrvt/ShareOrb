@@ -55,7 +55,7 @@ if (token) {
           </Header>
           {error && <p>{this.props.error.message}</p>}
           <React.Fragment>
-            <Form size="large" onSubmit={this.handleSubmit}>
+            <Form size="large" submit onSubmit={this.handleSubmit}>
               <Segment stacked>
                 <Form.Input
                   onChange={this.handleChange}
@@ -78,9 +78,11 @@ if (token) {
                 />
 
                 <Button
+
                   color="teal"
                   fluid
                   size="large"
+                  type="submit"
                   loading={loading}
                   disabled={loading}>
                   Login
