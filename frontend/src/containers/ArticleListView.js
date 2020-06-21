@@ -5,7 +5,11 @@ import Form3 from '../components/Forms3';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
+import Layouts from './Layouts/Layouts.js';
+
 import './Container_CSS/NewsFeed.css';
+
+
 
 import NoFoundPage from './403.jsx';
 // Function: Holds Forms3 and the Infinite scroll
@@ -70,12 +74,20 @@ class ArticleList extends React.Component {
 			{isLoggedIn ?
 
 
-				<div>
+				 <div>
 				 		<Form3 data = {this.props}/>
-					<div className = 'infinite-scrollList'>
-						<InfiniteList data={this.props} />
-					</div>
+						<div className = 'infinite-scrollList'>
+							<InfiniteList data={this.props} />
+						</div>
+						{/*
+						<div class="rightBox">
+	 					 <Layouts/>
+	 				 </div>
+					 */
+				 	}
 				 </div>
+
+
 
 				 :
 

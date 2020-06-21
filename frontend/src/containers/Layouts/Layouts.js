@@ -21,6 +21,7 @@ import Notifications from '../Notifications';
 import NotificationsDropDown from '../NotificationsDropDown';
 import PickEventSyncModal from '../../components/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
+import SuggestedFriends from './SuggestedFriends.js'
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -52,9 +53,26 @@ class CustomLayout extends React.Component {
       return (
       <div>
 
-          <div>
 
-               {this.props.children}
+                <Layout>
+
+                   <Content
+                     className=""
+                     style={{
+                       height: "710px",
+                       
+                     }}
+                   >
+
+                       <SuggestedFriends/>
+                   </Content>
+                  </Layout>
+
+
+
+              >
+              }
+
 
                 <Footer style={{
                   // position: 'relative',
@@ -63,7 +81,7 @@ class CustomLayout extends React.Component {
                  }}>
                 ShareOrb ©2020
                 </Footer>
-            </div>
+
 
 
         </div>
