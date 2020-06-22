@@ -669,6 +669,12 @@ main {
   transition: 0.25s ease-out;
 }
 
+.calendar .body .yearcell .monthText:hover {
+  font-size: 20px;
+  /* transform: scale(1.75); */
+  transition: .2s ease-out;
+}
+
 .calendar .body .yearcell .yearDays {
   font-weight: 400;
   color: ;
@@ -705,8 +711,22 @@ main {
   overflow: hidden;
   cursor: pointer;
   /* background: var(--neutral-color); */
-  transition: 0.25s ease-out;
 }
+
+.calendar .body .yearcell .monthcell .yearRow .monthDayCell:hover{
+  font-size: 25px;
+  max-height: 2em;
+  line-height: 20px;
+  margin-top: 5px;
+  /* margin-left: 1px; */
+  /* margin-right: 1px; */
+  margin-bottom: -20px;
+}
+
+/* .calendar .body .yearcell .monthcell .yearRow .monthDayCell .dayText:hover{
+  font-size: 25px;
+  transition: .2s ease-out;
+} */
 
 
 

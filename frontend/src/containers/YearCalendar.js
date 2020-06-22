@@ -4,6 +4,14 @@ import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
 import * as calendarActions from '../store/actions/calendars';
 import MiniCalendar from '../components/MiniCalendar';
+import * as navActions from '../store/actions/nav';
+import * as calendarEventActions from '../store/actions/calendarEvent';
+import * as eventSyncActions from '../store/actions/eventSync';
+import EventSyncModal from '../components/EventSyncModal';
+import moment from 'moment';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
+import EventDrawer from '../containers/EventDrawer.js';
+
 
 
 
@@ -85,9 +93,13 @@ class YearCalendar extends React.Component{
     // You will loop through each month until you hit the last month, and after each
     // loop you will add one month in until you hit the last yearEnd
     while (month <= yearEnd){
+      const monthCopy = month
         year.push(
         <div className = 'yearcol yearcell'>
-          {dateFns.format(month, dateFormat)}
+          <span
+          className = 'monthText'
+          onClick = {() => this.onMonthClick(monthCopy)}
+          > {dateFns.format(month, dateFormat)}</span>
           {this.renderDayName()}
           {this.renderDayInMonth(month)}
         </div>
@@ -141,7 +153,11 @@ class YearCalendar extends React.Component{
           key = {day}
           onClick = {() => this.onSelectedDate(cloneDay)}
           >
+          <span
+          className = 'dayText'
+          >
           {dateFns.format(day, dateFormat)}
+          </span>
           </div>
         )
         day = dateFns.addDays(day, 1)
@@ -165,6 +181,16 @@ class YearCalendar extends React.Component{
     this.props.nextYear()
   }
 
+  openEventSyncModal = () => {
+    this.props.openEventSyncModal()
+  }
+
+  onMonthClick = (month) => {
+    const selectedMonth = dateFns.getMonth(month)+1
+    const selectedYear = this.props.match.params.year
+    this.props.history.push('/personalcalendar/'+selectedYear+'/'+selectedMonth)
+  }
+
   onSelectedDate = date => {
     const selectYear = dateFns.getYear(date).toString()
     const selectMonth = (dateFns.getMonth(date)+1).toString()
@@ -176,10 +202,23 @@ class YearCalendar extends React.Component{
   render(){
     return(
       <div className = 'calendarContainer'>
+      <EventSyncModal
+        {...this.props}
+        isVisble = {this.props.showEventSyncModal}
+        close = {() => this.props.closeEventSyncModal()}
+      />
         <div className = 'miniCalContainer'>
+        <Button type = "primary" onClick={() => this.props.openDrawer()}>
+          Add Event
+        </Button>
           <MiniCalendar {...this.props}/>
+          <Button type = 'primary' onClick = {this.openEventSyncModal}>
+            Event Sync
+          </Button>
         </div>
         <div className = 'mainCalContainer'>
+        <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+
           <div className = 'flex-container'>
             <div className = 'calendar'>
             {this.renderYear()}
@@ -195,15 +234,26 @@ class YearCalendar extends React.Component{
 
 const mapStateToProps = state =>{
   return {
-    currentDate: state.calendar.date
+    showDrawer: state.nav.showPopup,
+    showModal: state.calendarEvent.showModal,
+    currentDate: state.calendar.date,
+    events: state.calendar.events,
+    showEventSyncModal: state.eventSync.showEventSyncModal
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    closeDrawer: () => dispatch(navActions.closePopup()),
+    closeDrawer: () => dispatch(navActions.closePopup()),
+    openDrawer: () => dispatch(navActions.openPopup()),
+    openModal: oneEvent => dispatch(calendarEventActions.openEventModal(oneEvent)),
+    closeModal: () => dispatch(calendarEventActions.closeEventModal()),
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextYear: () => dispatch(calendarActions.nextYear()),
-    prevYear: () => dispatch(calendarActions.prevYear())
+    prevYear: () => dispatch(calendarActions.prevYear()),
+    openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
   }
 }
 
