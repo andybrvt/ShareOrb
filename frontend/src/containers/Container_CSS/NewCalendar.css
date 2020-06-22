@@ -149,6 +149,15 @@ main {
   width: 100%;
 }
 
+.yearRow {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .row-middle {
   align-items: center;
 }
@@ -259,6 +268,8 @@ main {
 .calendar .body {
   background-color: var(--border-color);
 }
+
+
 
 .calendar .dayBody {
   position: relative;
@@ -406,6 +417,16 @@ main {
   border-bottom: 1px solid var(--border-color);
   /* background-color: red; */
   /* width: 700px; */
+}
+
+.calendar .yearDays {
+  font-weight: 400;
+  color: ;
+  font-size: 100%;
+  padding: .75em 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  /* background-color: red; */
 }
 
 .calendar .weekDays {
@@ -634,37 +655,53 @@ main {
   flex-grow: 0;
   flex-basis: calc(100%/4);
   width: calc(100%/4);
+  padding: 10px;
+  /* background-color: red; */
 }
 
 .calendar .body .yearcell {
   position: relative;
   height: 20em;
-  border-right: 1px solid var(--border-color);
+  /* border-right: 1px solid var(--border-color); */
   overflow: hidden;
   cursor: pointer;
-  /* background: var(--neutral-color); */
+  background: var(--neutral-color);
   transition: 0.25s ease-out;
 }
 
-.calendar .body .yearcell .monthcell .row{
+.calendar .body .yearcell .yearDays {
+  font-weight: 400;
+  color: ;
+  font-size: 100%;
+  padding: .75em 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  /* background-color: red; */
+}
+
+.calendar .body .yearcell .monthcell .yearRow{
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  /* background-color: red; */
+
 }
 
-.calendar .body .yearcell .monthcell .row .monthCellCol {
+.calendar .body .yearcell .monthcell .yearRow .monthCellCol {
   flex-grow: 0;
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
 
-.calendar .body .yearcell .monthcell .row .monthDayCell {
+.calendar .body .yearcell .monthcell .yearRow .monthDayCell {
   position: relative;
   height: 3em;
-  border-right: 1px solid var(--border-color);
+  /* border-right: 1px solid var(--border-color); */
+  line-height: 40px;
+  text-align:center;
   overflow: hidden;
   cursor: pointer;
   /* background: var(--neutral-color); */
@@ -761,6 +798,32 @@ to make it adjustable */
   border-bottom: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
 }
+
+.calendar .body .yearRow {
+  display: grid;
+  grid-template-columns: repeat(7, 215px);
+  grid-template-rows: repeat(6, 25px);
+  grid-auto-flow: dense;
+  grid-row-gap: 2px;
+  grid-column-gap: 1px;
+  /* height: 10px; */
+  /* border-bottom: 1px solid var(--border-color); */
+  /* border-right: 1px solid var(--border-color); */
+  /* background-color: red; */
+}
+
+.calendar .body .dayYearRow{
+  display: grid;
+  grid-template-columns: repeat(7, 51px);
+  text-align: center;
+  /* grid-template-rows: repeat(6, 25px); */
+  grid-auto-flow: dense;
+  border-bottom: 3px solid var(--border-color)
+  /* grid-column-gap: 1px; */
+  /* background-color: red; */
+}
+
+
 
 .weekDayFlex-Container .calendar .weekBody{
   display: grid;

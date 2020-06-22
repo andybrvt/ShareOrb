@@ -30,6 +30,15 @@ class YearCalendar extends React.Component{
     }
   }
 
+  renderColor = () => {
+    const color = ["green","yellow","red","blue","orange","pink","cyan"]
+    const len = color.length
+    const randomNum = Math.floor(Math.random()*len)
+    const pickcolor = color[randomNum]
+    return pickcolor
+
+  }
+
   renderYear() {
     // This is used to render the year
     const dateFormat = 'yyyy'
@@ -38,7 +47,7 @@ class YearCalendar extends React.Component{
       <div className = "header row flex-middle">
         <div className = "col col-start">
           <div className = "icon" onClick = {this.prevYear} >
-            chevron_left
+          <i className= 'arrow arrow-left'></i>
           </div>
         </div>
         <div className = "col col-center">
@@ -48,7 +57,7 @@ class YearCalendar extends React.Component{
         </div>
         <div className = 'col col-end' onClick = {this.nextYear}>
           <div className = 'icon'>
-            chevron_right
+          <i className = 'arrow arrow-right'></i>
           </div>
         </div>
       </div>
@@ -79,12 +88,32 @@ class YearCalendar extends React.Component{
         year.push(
         <div className = 'yearcol yearcell'>
           {dateFns.format(month, dateFormat)}
+          {this.renderDayName()}
           {this.renderDayInMonth(month)}
         </div>
       )
       month = dateFns.addMonths(month, 1)
     }
-    return <div className = 'body row'>{year}</div>
+    return <div className = 'body yearRow'>{year}</div>
+  }
+
+  renderDayName() {
+    const dateFormat = "iiiii"
+    const days = []
+    // this will get the date of the first week given the date of the current month
+    let startDate = dateFns.startOfWeek(this.props.currentDate);
+    // for loop that loops through from 0-6 and add the days accordingly
+    // to the start date which is the start of the day in the current date
+    for (let i= 0; i<7; i++){
+      days.push(
+        <div className ="monthCellCol monthDayCell" key = {i}>
+          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+          </div>
+      )
+    }
+    // the days will be a list of dates that are put in by the for loops
+     // and then the return will return all those days out
+    return <div className = "dayYearRow"> {days} </div>
   }
 
   renderDayInMonth = (month) =>{
@@ -108,10 +137,7 @@ class YearCalendar extends React.Component{
         const cloneDay = day
         week.push(
           <div
-          className ={`monthCellCol monthDayCell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-          : dateFns.isSameDay(day, currentMonth) ?
-        "selected": ""
-          }`}
+          className ='monthCellCol monthDayCell'
           key = {day}
           onClick = {() => this.onSelectedDate(cloneDay)}
           >
@@ -121,7 +147,7 @@ class YearCalendar extends React.Component{
         day = dateFns.addDays(day, 1)
       }
       rows.push(
-        <div className = 'row'>
+        <div className = 'yearRow' style = {{}}>
           {week}
         </div>
       )
