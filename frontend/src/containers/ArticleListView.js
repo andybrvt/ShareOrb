@@ -1,7 +1,7 @@
 import React from 'react';
 import InfiniteList from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
-import Form3 from '../components/Forms3';
+import NewsFeedFormPost from '../components/NewsFeedFormPost';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -75,7 +75,7 @@ class ArticleList extends React.Component {
 
 
 				 <div>
-				 		<Form3 data = {this.props}/>
+				 		<NewsFeedFormPost data = {this.props}/>
 						<div className = 'infinite-scrollList'>
 							<InfiniteList data={this.props} />
 						</div>

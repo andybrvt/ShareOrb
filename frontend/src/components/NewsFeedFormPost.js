@@ -6,7 +6,7 @@ import axios from 'axios';
 import { authAxios } from './util';
 import { connect } from "react-redux";
 import { Input } from 'antd';
-
+import {Button} from 'antd';
 
 const Form3 = (props) => {
   // formData = new FormData();
@@ -19,7 +19,7 @@ const Form3 = (props) => {
   const[imageblob, setImageblob] = useState("");
 
   const { TextArea } = Input;
-  console.log(caption)
+
 
   useEffect(() => {
     console.log('hit')
@@ -32,9 +32,10 @@ const Form3 = (props) => {
   }, [token])
 
   const make_post=(post) =>{
-  	let data = uploadPost(post);
+    console.log(post)
+    let data = uploadPost(post);
   	console.log(data)
-  	console.log(post)
+
   	return data;
   }
 
@@ -42,15 +43,17 @@ const Form3 = (props) => {
    const data = new FormData();
    console.log('right here')
    console.log(data)
+   console.log(post)
    data.append("caption", post.caption);
    data.append("user", post.user_id);
+   console.log('hellooo')
+   console.log(data)
    if (post.image !== null){
      data.append("image", post.image)
    }
    // data.append("image", post.image);
    // data.append("image_filter", post.image_filter);
-   console.log('right here')
-   console.log(data)
+
    fetch('http://127.0.0.1:8000/userprofile/list/',{
   	method: 'POST',
       headers: {
@@ -66,7 +69,7 @@ const Form3 = (props) => {
   }
 
   const  onFormSubmit = (e) =>{
-		e.preventDefault()
+    e.preventDefault()
 		if (props.data.id && caption){
       console.log('it got summited')
 			const post = {
@@ -76,7 +79,7 @@ const Form3 = (props) => {
 				'username': props.data.username,
 			};
 			make_post(post);
-			window.location.reload(true)
+			// window.location.reload(true)
 		}
 		else{
 			return <Redirect to='/'  />
@@ -84,9 +87,12 @@ const Form3 = (props) => {
   }
 
   const onChange = (e)=> {
-    console.log(e)
+
 		const type = e.target.name;
 		const value = e.target.value;
+    console.log(e)
+    console.log(type)
+    console.log(value)
 		if (type === "caption"){
 			setCaption(value)
 		}
@@ -100,7 +106,7 @@ const Form3 = (props) => {
 
   return (
 	<Container style={{paddingTop: '10',zIndex:'-1'}}>
-	  <form onSubmit={onFormSubmit}>
+	  <form>
 	    <div className="upload-container">
 				{ stage !== "image" ?
 				<div  className= "uploadImage upload" >
@@ -109,14 +115,12 @@ const Form3 = (props) => {
 				<div  className= "uploadImage upload " >
 
 				</div>}
-        <TextArea rows={4} />
-				<div className= "message caption-text">
-				<input type="text" name="caption" onChange= {onChange}value={caption}
-				 style={{width: '300px', height:'100px'}}/>
-				 </div>
+        <TextArea rows={4} type="text" name="caption" onChange= {onChange}value={caption}
+        style={{width: '600px'}}/>
+
 
 				<div className="submit">
-                <button type="submit" onClick={onFormSubmit}>Post</button>
+                <Button onClick={onFormSubmit}>Post</Button>
 				</div>
 				</div>
             </form>

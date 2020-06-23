@@ -55,17 +55,20 @@ class CustomLayout extends React.Component {
 
 
                 <Layout>
-
+                  {/*
                    <Content
                      className=""
                      style={{
                        height: "710px",
-                       
+
                      }}
                    >
 
                        <SuggestedFriends/>
+
                    </Content>
+
+                   */}
                   </Layout>
 
 
