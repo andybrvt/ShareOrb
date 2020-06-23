@@ -1,0 +1,68 @@
+.reactForm .reactTitle {
+  /* outline: none; */
+  border: none;
+  border-bottom: 2px solid deepskyblue;
+  font-size: 30px;
+  height: 40px;
+}
+
+.reactForm .reactTitle:focus{
+  box-shadow: none;
+  border-bottom: 2px solid deepskyblue;
+}
+
+.reactForm .reactContent{
+  font-size: 20px;
+  margin: 0;
+}
+
+.reactForm .reactColor {
+  position: absolute;
+  left: 310px;
+  top: 53px;
+  width: 50px;
+}
+
+.reactForm .reactLocation{
+  font-size: 20px;
+
+}
+
+.reactForm .aim {
+  position: absolute;
+  text-align: center;
+  top: -9px;
+  left: 275px;
+  /* background-color: red; */
+  font-size: 25px;
+}
+
+.reactForm .aim:hover {
+  /* line-height: 10px; */
+  font-size: 30px;
+}
+
+.reactForm .timepicker {
+  /* height: 10px; */
+  /* background-color: red; */
+  padding-top: 20px;
+}
+
+.reactForm .timepicker .reactTimePicker{
+
+}
+
+.reactForm .clearButtonCon {
+  /* background-color: red; */
+  width: 100px;
+  position: absolute;
+  left: 80px;
+}
+
+.reactForm .submitButtonCon{
+  /* background-color: red; */
+  width: 100px;
+  position: absolute;
+  left: 200px;
+  top: 0px;
+}

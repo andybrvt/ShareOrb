@@ -10,7 +10,7 @@ import * as eventSyncActions from '../store/actions/eventSync';
 import EventSyncModal from '../components/EventSyncModal';
 import moment from 'moment';
 import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
-import EventDrawer from '../containers/EventDrawer.js';
+import EventModal from '../containers/EventModal';
 
 
 
@@ -217,7 +217,7 @@ class YearCalendar extends React.Component{
           </Button>
         </div>
         <div className = 'mainCalContainer'>
-        <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+        <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
 
           <div className = 'flex-container'>
             <div className = 'calendar'>

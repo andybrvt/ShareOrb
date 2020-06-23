@@ -4,7 +4,7 @@ import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
 import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
-import EventDrawer from '../containers/EventDrawer.js';
+import EventModal from '../containers/EventModal';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import * as calendarActions from '../store/actions/calendars';
@@ -408,7 +408,7 @@ class WeekCalendar extends React.Component{
         </div>
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
-          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             {this.renderHeader()}
             {this.renderDays()}
           </div>

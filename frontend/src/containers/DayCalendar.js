@@ -9,7 +9,7 @@ import EditEventPopUp from '../components/EditEventPopUp';
 import * as navActions from '../store/actions/nav'
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import * as calendarActions from '../store/actions/calendars';
-import EventDrawer from '../containers/EventDrawer.js';
+import EventModal from '../containers/EventModal';
 import MiniCalendar from '../components/MiniCalendar';
 import EventSyncModal from '../components/EventSyncModal';
 import * as eventSyncActions from '../store/actions/eventSync';
@@ -316,7 +316,7 @@ class DayCalendar extends React.Component{
         <div className ='mainCalContainer'>
 
           <div className = "weekCalendar">
-          <EventDrawer visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
           {this.renderHeader()}
           {this.renderDays()}
           </div>
