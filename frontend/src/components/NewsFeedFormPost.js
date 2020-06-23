@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { Input } from 'antd';
 import {Button} from 'antd';
 
-const Form3 = (props) => {
+const NewsFeedFormPost = (props) => {
   // formData = new FormData();
   const {token} = props;
   const[image, setImage] = useState(null);
@@ -32,25 +32,31 @@ const Form3 = (props) => {
   }, [token])
 
   const make_post=(post) =>{
-    console.log(post)
+
     let data = uploadPost(post);
-  	console.log(data)
 
   	return data;
   }
 
   const uploadPost =(post) =>{
-   const data = new FormData();
+    console.log(props.token)
+   var data = new FormData();
    console.log('right here')
    console.log(data)
    console.log(post)
    data.append("caption", post.caption);
    data.append("user", post.user_id);
+   console.log(post.caption)
+   console.log(post.user_id)
    console.log('hellooo')
    console.log(data)
    if (post.image !== null){
      data.append("image", post.image)
    }
+   for (var pair of data.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]);
+}
+  console.log(localStorage.getItem('token'))
    // data.append("image", post.image);
    // data.append("image_filter", post.image_filter);
 
@@ -136,4 +142,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Form3);
+export default connect(mapStateToProps)(NewsFeedFormPost);
