@@ -1,4 +1,4 @@
-import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row, Modal, Button } from 'antd';
 import React, { Component } from 'react';
 import CalendarForm from '../components/CalendarForm'
 import ReduxAddEventForm from '../components/ReduxAddEventForm';
@@ -43,7 +43,7 @@ const DescriptionItem = ({ title, content }) => (
 
 
 
-class EventDrawer extends React.Component {
+class EventModal extends React.Component {
 
 
   submit = (values) => {
@@ -69,7 +69,7 @@ class EventDrawer extends React.Component {
       person: [this.props.id]
     }
     this.props.addEvents(instanceEvent)
-    this.props.closeDrawer()
+    this.props.closePopup()
   }
 
 
@@ -79,14 +79,14 @@ class EventDrawer extends React.Component {
     console.log(this.props)
     return (
       <div>
-        <Drawer
-          width={440}
-          placement="left"
-          onClose={this.props.onClose}
+        <Modal
+          onCancel={this.props.onClose}
           visible={this.props.visible}
+          footer = {false}
+          width  = {450}
         >
         <ReactAddEventForm onSubmit = {this.submit} />
-        </Drawer>
+        </Modal>
       </div>
     );
   }
@@ -96,8 +96,8 @@ class EventDrawer extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     addEvents: (events) => dispatch(calendarActions.addEvent(events)),
-    closeDrawer: () => dispatch(navActions.closePopup())
+    closePopup: () => dispatch(navActions.closePopup())
   }
 }
 
-export default connect(null, mapDispatchToProps)(EventDrawer);
+export default connect(null, mapDispatchToProps)(EventModal);

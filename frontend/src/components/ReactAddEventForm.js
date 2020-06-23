@@ -4,9 +4,15 @@ import {
    DatePicker,
    TimePicker,
    Button,
-   Input
+   Input,
   } from 'antd';
+import { AimOutlined } from '@ant-design/icons';
+
+
 import { connect } from "react-redux";
+import './labelCSS/ReactForm.css';
+
+const { TextArea } = Input
 
 const { MonthPicker, RangePicker } = DatePicker;
 
@@ -129,63 +135,62 @@ class ReactAddEventForm extends React.Component {
 
 
   render (){
+    // The name of the inputt values are important
+    // it allows for us to be able to input stuff into the form item
+    // because it is what connents to the onChange for the states
     console.log(this.state)
     return (
       <Form
-      name="time_related_controls"
+      className ="reactForm"
       {...formItemLayout}
       onSubmit = {this.handleSubmit}
       onChange = {this.handleChange}
        >
-       <label> Title </label>
-       <br />
-        <Form.Item
-         rules={[
-           {
-             required: true,
-             message: 'Please input a title',
-           },
-         ]}
-       >
-         <Input name= 'title' placeholder = 'Please put title here' value = {this.state.title}/>
+        <Form.Item>
+         <Input
+         name = 'title'
+         className= 'reactTitle'
+         placeholder = 'Title'
+         value = {this.state.title}
+         />
          <span style = {{color: 'red'}}>{this.state.error["title"]}</span>
        </Form.Item>
-       <label> Content </label>
-       <br />
-       <Form.Item
-        name="Content"
-        rules={[
-          {
-            required: true,
-            message: 'Please input some content',
-          },
-        ]}
-      >
-        <Input name = 'content' placeholder= 'Please put content here' value = {this.state.content}/>
+       <Form.Item name="Content">
+        <TextArea
+        name = 'content'
+        className = 'reactContent'
+        placeholder= 'Event Description'
+        value = {this.state.content}
+        rows ={4}
+        style = {{width: '500px'}}/>
+        <Input type = 'color' className = 'reactColor'/>
+
         <span style = {{color: 'red'}}>{this.state.error['content']}</span>
       </Form.Item>
-      <label> Location </label>
-      <br />
-      <Form.Item
-       name="Location"
-       rules={[
-         {
-           required: true,
-           message: 'Please input a location',
-         },
-       ]}
-     >
-       <Input name = 'location' placeholder = 'Please enter location here' value = {this.state.location}/>
+
+      <Form.Item name="Location" style = {{height: '10px'}}>
+       <Input
+        name = 'location'
+        className = 'reactLocation'
+        placeholder = 'Location'
+        value = {this.state.location}
+        />
+        <AimOutlined className = 'aim'/>
        <span style = {{color: 'red'}}>{this.state.error['location']}</span>
      </Form.Item>
-        <label> RangePicker </label>
-        <br />
-        <Form.Item name="range-time-picker" {...rangeConfig}>
+        <Form.Item
+          name="range-time-picker"
+         {...rangeConfig}
+          className = 'timepicker'>
+
           <RangePicker showTime={{
             format: 'HH:mm a',
             minuteStep : 30,
             user12Hours: true
-          }} format="YYYY-MM-DD HH:mm a" onChange = {this.onTimeChange} value = {this.state.dateRange} />
+          }} format="YYYY-MM-DD HH:mm a"
+          onChange = {this.onTimeChange}
+          value = {this.state.dateRange}
+          />
           <span style = {{color: 'red'}}>{this.state.error['dateRange']}</span>
         </Form.Item>
         <Form.Item
@@ -193,13 +198,18 @@ class ReactAddEventForm extends React.Component {
             xs: { span: 24, offset: 0 },
             sm: { span: 16, offset: 8 },
           }}
+          className = 'buttomHolder'
         >
+        <div className = 'clearButtonCon'>
+          <Button onClick = {this.onClear}>
+            Clear Values
+          </Button>
+        </div>
+        <div className = 'submitButtonCon'>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
-          <Button type="primary" onClick = {this.onClear}>
-            Clear Values
-          </Button>
+        </div>
         </Form.Item>
       </Form>
     );

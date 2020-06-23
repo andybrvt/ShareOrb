@@ -28,7 +28,7 @@ class MiniCalendar extends React.Component{
         <div className = "miniCol miniCol-center" onClick = {() => this.onMonthClick(
             this.state.currentMonth
         )}>
-          <span>
+          <span className = 'miniMonth'>
            {dateFns.format(this.state.currentMonth, dateFormat)}
           </span>
         </div>
@@ -115,15 +115,12 @@ class MiniCalendar extends React.Component{
         const cloneDay = day;
         days.push(
           <div
-            className = {`miniCol miniCell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-            : dateFns.isSameDay(day, currentMonth) ?
-          "selected": ""
-            }`}
+            className = 'miniCol miniCell'
             key = {day}
           >
-            <div className = 'circle' onClick = {() =>
+            <div className = 'miniDay' onClick = {() =>
             this.onDateClick(cloneDay)}>
-              <span className = 'number'>{formattedDate}</span>
+              <span className = ''>{formattedDate}</span>
             </div>
           </div>
         )
@@ -189,6 +186,7 @@ class MiniCalendar extends React.Component{
           {this.renderHeader()}
           {this.renderDays()}
           {this.renderCells()}
+      
         </div>
       </div>
     )

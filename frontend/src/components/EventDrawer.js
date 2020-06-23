@@ -1,4 +1,4 @@
-import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row, Modal } from 'antd';
 import React, { Component } from 'react';
 import CalendarForm from './CalendarForm';
 import ReduxAddEventForm from './ReduxAddEventForm';

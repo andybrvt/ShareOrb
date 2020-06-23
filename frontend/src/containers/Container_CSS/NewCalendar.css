@@ -609,6 +609,17 @@ main {
   text-align:center;
 }
 
+.miniCalContainer .miniCalendar .miniCol .miniMonth:hover{
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+.miniCalContainer .miniCalendar .miniCol .icon:hover {
+  transform: scale(1.5);
+}
+
+
+
 .miniCalContainer .miniCalendar .miniRow{
   margin: 0;
   padding: 0;
@@ -626,6 +637,7 @@ main {
   flex-grow: 0;
   flex-basis: calc(100%/7);
   width: calc(100%/7);
+  /* background-color: red; */
 }
 
 .miniCalContainer .miniCalendar .body .miniCell{
@@ -638,6 +650,11 @@ main {
   /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
   font-size: 10px;
+}
+
+.miniCalContainer .miniCalendar .body .miniRow .miniCell .miniDay:hover{
+  font-size: 15px;
+  line-height: 15px;
 }
 
 .calendarContainer .miniCalContainer{
