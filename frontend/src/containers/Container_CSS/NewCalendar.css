@@ -282,6 +282,18 @@ main {
 
 .calendar .dayBody .eventsDay{
   background-color: lightblue;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  padding-left: 10px;
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  /* grid-column: 1/7; */
+  z-index: 1;
+}
+
+.calendar .dayBody .eventsDay:hover{
+  background-color: lightgrey;
+  transition: .25 ease-out;
 }
 
 
@@ -490,13 +502,35 @@ main {
 
 .calendar .body .row .monthEvent {
   background-color: lightblue;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  padding-left: 10px;
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   /* grid-column: 1/7; */
   z-index: 1;
+}
+
+.calendar .body .row .monthEvent:hover {
+  background-color: lightgrey;
+  transition: .25 ease-out;
 }
 
 
 .weekDayFlex-Container .calendar .weekBody .weekEvent{
   background-color: lightblue;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  padding-left: 10px;
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  /* grid-column: 1/7; */
+  z-index: 1;
+}
+
+.weekDayFlex-Container .calendar .weekBody .weekEvent:hover{
+  background-color: lightgrey;
+  transition: .25 ease-out;
 }
 
 
