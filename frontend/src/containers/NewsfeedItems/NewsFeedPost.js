@@ -44,7 +44,7 @@ class NewsfeedPost extends React.Component {
 
 
   handleCommentChange = e => {
-        console.log(e);
+        console.log(e.target.value);
     this.setState({
       value: e.target.value,
     });
@@ -297,9 +297,9 @@ class NewsfeedPost extends React.Component {
                <Input
                placeholder="Write a comment"
                 rows={4}
-
+                onChange={this.handleCommentChange}
                />
-               <Button type="primary">
+               <Button type="primary"  onClick={this.handleSubmit}>
                  Add Comment
                </Button>
              </Form.Item>
@@ -323,7 +323,7 @@ class NewsfeedPost extends React.Component {
 
            onChange={this.handleCommentChange}
           />
-          <Button type="primary">
+          <Button type="primary" onClick={this.handleSubmit}>
             Add Comment
           </Button>
         </Form.Item>

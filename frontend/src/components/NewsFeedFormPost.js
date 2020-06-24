@@ -85,7 +85,7 @@ const NewsFeedFormPost = (props) => {
 				'username': props.data.username,
 			};
 			make_post(post);
-			// window.location.reload(true)
+			window.location.reload(true)
 		}
 		else{
 			return <Redirect to='/'  />
@@ -96,8 +96,7 @@ const NewsFeedFormPost = (props) => {
 
 		const type = e.target.name;
 		const value = e.target.value;
-    console.log(e)
-    console.log(type)
+  
     console.log(value)
 		if (type === "caption"){
 			setCaption(value)
