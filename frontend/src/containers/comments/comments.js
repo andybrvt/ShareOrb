@@ -89,7 +89,7 @@ class Comments extends React.Component {
               />
             </li>
           )}
-        />,
+        />
       </div>
     );
   }

@@ -20,7 +20,7 @@ import * as navActions from '../../store/actions/nav'
 import * as actions from '../../store/actions/auth';
 import PickEventSyncModal from '../../components/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
-
+import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
@@ -116,15 +116,16 @@ class SideMenu extends React.Component {
             <Search
                placeholder="Search"
                onSearch={value => console.log(value)}
-               style={{ marginLeft:150, marginRight:800, width: 400 }}
+               style={{ marginLeft:150, marginRight:600, width: 400 }}
              />
 
 
 
              <Divider type="vertical" />
 
-
-
+             <Button style={{marginRight:200}}>
+              <NotificationsDropDown/>
+              </Button>
 
 
              <Dropdown overlay={
