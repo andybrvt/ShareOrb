@@ -265,6 +265,12 @@ main {
 
 }
 
+.flex-container .sidecol .sideBar .holder .tabs:hover{
+  background: lightgrey;
+  transition: 0.2 ease-in;
+}
+
+
 .calendar .body {
   background-color: var(--border-color);
 }
