@@ -96,7 +96,7 @@ const NewsFeedFormPost = (props) => {
 
 		const type = e.target.name;
 		const value = e.target.value;
-  
+
     console.log(value)
 		if (type === "caption"){
 			setCaption(value)

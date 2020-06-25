@@ -46,17 +46,39 @@ class NewsfeedPost extends React.Component {
   handleCommentChange = e => {
         console.log(e.target.value);
     this.setState({
-      value: e.target.value,
+      commentPost: e.target.value,
     });
   };
 
 
   handleSubmit = () => {
-      if (!this.state.value) {
-        return;
-      }
-      authAxios.post('http://127.0.0.1:8000/userprofile/testComment'+this.props.data.id+'/')
+    console.log("SUBMIT BUTTON1!!!!!!")
+    console.log(this.props)
+    console.log(this.props.data)
+    console.log(this.props.data.id)
+    var data = new FormData();
+    // change this later to curr user
+    data.append("name", this.props.data.user.username);
+    data.append("body", this.state.commentPost);
+    for (var pair of data.entries()) {
+     console.log(pair[0]+ ', ' + pair[1]);
     }
+    console.log(localStorage.getItem('token'))
+
+    fetch('http://127.0.0.1:8000/userprofile/testComment/'+this.props.data.id+'/',{
+     method: 'POST',
+       headers: {
+         Authorization: `Token ${localStorage.getItem('token')}`,
+       },
+       body:data
+    })
+      .then (res =>res.json())
+      .then(json =>{
+     	 console.log(json)
+     	 return json
+      })
+     }
+
 
   ContentOfPic() {
     let temp="http://127.0.0.1:8000"+this.props.data.image;

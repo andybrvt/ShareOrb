@@ -223,24 +223,31 @@ class AddOneLikeToPost(APIView):
 
 
 class postCommentTest(APIView):
-    def post(self, request, id, *args, **kwargs):
-        post = get_object_or_404(Post, slug=id)
-        comments = post.comments.filter(active=True)
+    def post(self, request, postID, *args, **kwargs):
+        post= get_object_or_404(models.Post, id=postID)
+        print(post)
+        # filter retrieves all the active comments for the post
+        # comments = post.comments.filter(active=True)
+        # print(comments)
         new_comment = None
+        print(request.POST)
+        print(dict(request.POST.lists()))
         # Comment posted
         if request.method == 'POST':
+            print("made it")
             comment_form = CommentForm(data=request.POST)
             if comment_form.is_valid():
-
+                print("valid")
                 # Create Comment object but don't save to database yet
                 new_comment = comment_form.save(commit=False)
                 # Assign the current post to the comment
                 new_comment.post = post
+                print(new_comment)
                 # Save the comment to the database
                 new_comment.save()
         else:
             comment_form = CommentForm()
-            return Response('View comment')
+        return Response('View comment')
 
 
 class post_detail(APIView):
