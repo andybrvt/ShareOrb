@@ -59,12 +59,10 @@ class ReactAddEventForm extends React.Component {
   }
 
   handleChange = (values) => {
-    console.log(values)
     this.setState({ [values.target.name]: values.target.value})
   }
 
   onDateChange = (time) => {
-    console.log(time)
     this.setState({
       dateRange: time
     })
@@ -72,10 +70,103 @@ class ReactAddEventForm extends React.Component {
 
   onStartTimeChange = (time) => {
     console.log(time)
-    this.setState({
-      timeStart: time
-    })
-  }
+    // You basically want the end time to be 30 mins ahead of the starttime
+    // so you want to check if it is and then change the state accordingly
+    let startHour = parseInt(time.substring(0,2))
+    let startMin = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+    let endHour = parseInt(this.state.timeEnd.substring(0,2))
+    let endMin = parseInt(this.state.timeEnd.substring(0,2))
+    let endTime = ''
+    console.log(startHour, endHour)
+    // These if statement here is to change the start time values from 1-12 todo
+    // 1-24 for the start time
+    if (time.includes('PM')){
+      if (startHour !==  12){
+        startHour = startHour + 12
+      }
+    } else if (time.includes('AM')){
+      if(startHour === 12){
+        startHour = 0
+      }
+    }
+    // These if statements here is to change the end time values from 1-2 to
+    // 1-24 for the end time
+    if (this.state.timeEnd.includes('PM')){
+      if (endHour !==  12){
+        endHour = endHour + 12
+      }
+    } else if (this.state.timeEnd.includes('AM')){
+      if(endHour === 12){
+        endHour = 0
+      }
+    }
+
+
+
+    if (startHour < endHour){
+      this.setState({
+        timeStart: time,
+      })
+    } else if ( startHour === endHour ){
+      if (startMin < endMin){
+        this.setState({
+          timeStart: time,
+        })
+      } else if (startMin > endMin){
+        // Still gotta impliment the AM PM change
+        endMin = "00"
+        endHour = startHour + 1
+        console.log(startHour)
+        console.log(endHour)
+        if (endHour < 10){
+          endHour = '0'+endHour
+        } else {
+          endHour = endHour-12
+        }
+        if (startHour === 11 && ampm === ' AM'){
+          endTime =   '12:' + endMin + ' PM'
+        } else if ((startHour-12) === 11 && ampm === ' PM'){
+          endTime =  '12:' + endMin + ' AM'
+        } else {
+          endTime = endHour + ':'+endMin+ampm
+        }
+        console.log(time, endTime)
+        this.setState({
+          timeStart:time,
+          timeEnd: endTime
+        })
+      }} else if ( startHour > endHour ){
+        // let startHour = parseInt(time.substring(0,2))
+        // let startMin = parseInt(time.substring(3,5))
+        if (startMin === 30){
+          startMin = "00"
+          startHour = startHour + 1
+        } else if (startMin !== 30){
+          startMin = '30'
+        }
+        console.log(startHour)
+        if (startHour < 10){
+          startHour = '0'+startHour
+        } else {
+          startHour = startHour-12
+        }
+        console.log(startHour)
+        if ((startHour+11) === 11 && ampm === ' AM'){
+          endTime =   '12:' + startMin + ' PM'
+        } else if ((startHour-1) === 11 && ampm === ' PM'){
+          endTime =  '12:' + startMin + ' AM'
+        } else {
+          endTime = startHour + ':'+startMin+ampm
+        }
+
+        this.setState({
+          timeStart: time,
+          timeEnd: endTime
+        })
+      }
+    }
+
 
   onEndTimeChange = (time) => {
     console.log(time)
@@ -192,16 +283,13 @@ class ReactAddEventForm extends React.Component {
       setMin = parseInt(this.state.timeStart.substring(3,5))
       if (setHour !== 12){
         setHour = setHour + 12
-    } console.log(setHour)
-  } else if (this.state.timeStart.includes("AM")){
+    }} else if (this.state.timeStart.includes("AM")){
       setHour = parseInt(this.state.timeStart.substring(0,2))
       setMin = parseInt(this.state.timeStart.substring(3,5))
       if (setHour === 12){
         setHour = 0
       }
     }
-    console.log(setHour)
-    console.log(setMin)
 
     for(let i = 0; i< baseTime.length; i++){
       if (baseTime[i].key.includes('PM')){
@@ -214,7 +302,7 @@ class ReactAddEventForm extends React.Component {
           endTime.push(
             <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
           )} else if (setHour === hour){
-            if(setMin <= min){
+            if(setMin < min){
               endTime.push(
                 <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
               )
@@ -230,7 +318,7 @@ class ReactAddEventForm extends React.Component {
           endTime.push(
             <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
           )} else if (setHour === hour){
-            if(setMin <= min){
+            if(setMin < min){
               endTime.push(
                 <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
               )
@@ -238,7 +326,6 @@ class ReactAddEventForm extends React.Component {
           }
         }
       }
-      console.log(endTime)
       return (endTime)
     }
 
