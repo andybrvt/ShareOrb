@@ -334,7 +334,7 @@ class NewsfeedPost extends React.Component {
         </div>
         :
 
-        <div class="mock-outer" >
+        <div>
 
         <Comments className="fontTest" newsfeed={this.props}/>
         <Form.Item>
@@ -348,7 +348,10 @@ class NewsfeedPost extends React.Component {
           <Button type="primary" onClick={this.handleSubmit}>
             Add Comment
           </Button>
+
         </Form.Item>
+
+
         </div>
 
 

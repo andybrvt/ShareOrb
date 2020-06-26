@@ -69,7 +69,7 @@
 
   /* resize based off of auto height */
   height: auto;
-  max-height: 630px;
+
 
 
   /* how everything is formatted in the post */
@@ -90,6 +90,9 @@
 
 }
 
+.maxHeightPost{
+  max-height: 630px;
+}
 
 .fbh5 {
   color: rgb(20, 24, 35);
