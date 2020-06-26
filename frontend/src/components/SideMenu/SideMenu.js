@@ -123,7 +123,7 @@ class SideMenu extends React.Component {
 
              <Divider type="vertical" />
 
-             <Button style={{marginRight:200}}>
+             <Button style={{marginRight:100}}>
               <NotificationsDropDown/>
               </Button>
 

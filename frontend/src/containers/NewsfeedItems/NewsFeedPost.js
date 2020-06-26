@@ -58,7 +58,7 @@ class NewsfeedPost extends React.Component {
     console.log(this.props.data.id)
     var data = new FormData();
     // change this later to curr user
-    data.append("name", this.props.data.user.username);
+    data.append("name", localStorage.getItem('username'));
     data.append("body", this.state.commentPost);
     for (var pair of data.entries()) {
      console.log(pair[0]+ ', ' + pair[1]);
@@ -334,7 +334,7 @@ class NewsfeedPost extends React.Component {
         </div>
         :
 
-        <div class="mock-outer" style={{ width: 650, marginLeft:30, marginBottom:50, marginTop:25, height:370, }}>
+        <div class="mock-outer" >
 
         <Comments className="fontTest" newsfeed={this.props}/>
         <Form.Item>
@@ -388,7 +388,8 @@ class NewsfeedPost extends React.Component {
 
 
       <Modal
-        title="Post by {this.props.username}"
+
+        title={`Post by ${this.props.data.user.username}`}
         visible={this.state.visibleModal}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
