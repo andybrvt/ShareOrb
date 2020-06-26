@@ -126,6 +126,9 @@ class ReactAddEventForm extends React.Component {
             endHour = endHour
           } else if (ampm === ' PM'){
             endHour = endHour-12
+            if (endHour < 10){
+              endHour = '0'+endHour
+            }
           }
         }
         if (startHour === 11 && ampm === ' AM'){
@@ -215,11 +218,13 @@ class ReactAddEventForm extends React.Component {
         if (startHour < 10){
           startHour = '0'+startHour
         } else{
-          if(ampm === 'AM'){
-            endHour = endHour
-          } else if (ampm === 'PM'){
-            endHour = endHour-12
-          }
+          if(ampm === ' AM'){
+            startHour = startHour
+          } else if (ampm === ' PM'){
+            startHour = startHour-12
+            if (startHour < 10){
+              startHour = '0'+startHour
+            }          }
         }
         if ((startHour+11) === 11 && ampm === ' AM'){
           endTime =   '12:' + startMin + ' PM'

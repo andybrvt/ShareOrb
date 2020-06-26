@@ -87,6 +87,7 @@ class EventModal extends React.Component {
     // you have to call firstHour for hour and firstMin for minutes
 
     start_date = dateFns.addHours(start_date, start_time.firstHour)
+    start_date = dateFns.addMinutes(start_date, start_time.firstMin)
     console.log(start_date)
 
     console.log(values)
