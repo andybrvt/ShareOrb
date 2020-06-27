@@ -169,8 +169,8 @@ const uploadImageRainbowProgress = {
         style={{width: '600px'}}/>
 
 
-				<div className="submit">
-                <Button onClick={onFormSubmit}>Post</Button>
+				<div>
+                <Button  type="primary" style={{ background: "#0069FF" }} onClick={onFormSubmit}>Post</Button>
 				</div>
 			</div>
     </form>

@@ -9,7 +9,7 @@ import Layouts from './Layouts/Layouts.js';
 
 import './Container_CSS/NewsFeed.css';
 
-
+import { Row, Col } from 'antd';
 
 import NoFoundPage from './403.jsx';
 // Function: Holds Forms3 and the Infinite scroll
@@ -70,22 +70,38 @@ class ArticleList extends React.Component {
 	render() {
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
-			<div className = 'newsfeed'>
+			<div>
 			{isLoggedIn ?
 
 
+
 				 <div>
+
+
+				 <div className = 'newsfeed' style={{marginBottom:50}}>
+					 <Row>
+						<Col span={8}>Write a post</Col>
+						<Col span={8}>Upload a photo</Col>
+						<Col span={8}>Share a post</Col>
+
+					</Row>
+					</div>
+
+				 <div className = 'newsfeed'>
+
 				 		<NewsFeedFormPost data = {this.props}/>
 						<div className = 'infinite-scrollList'>
 							<InfiniteList data={this.props} />
 						</div>
-						{/*
-						<div class="rightBox">
-	 					 <Layouts/>
-	 				 </div>
-					 */
-				 	}
+							{/*
+							<div class="rightBox">
+		 					 <Layouts/>
+		 				 </div>
+						 */
+					 	}
 				 </div>
+				 </div>
+
 
 
 
