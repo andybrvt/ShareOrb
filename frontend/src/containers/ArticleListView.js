@@ -9,7 +9,8 @@ import Layouts from './Layouts/Layouts.js';
 
 import './Container_CSS/NewsFeed.css';
 
-import { Row, Col } from 'antd';
+import { Row, Col, Card, Upload} from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
 // Function: Holds Forms3 and the Infinite scroll
@@ -37,37 +38,10 @@ class ArticleList extends React.Component {
 			});
 		}
 
-		// // start of notification fetching
-		// if(this.props.match.params.id !== newProps.match.params.id){
-		// 	WebSocketInstance.disconnect();
-		// 	this.waitForSocketConnection(()=> {
-		// 		WebSocketInstance.fetchMessages(
-		// 			this.props.username,
-		// 			newProps.match.params.id
-		// 		)
-		// 	})
-		// 	WebSocketInstance.connect(newProps.match.params.id)
-		// }
-		// const username = newProps.username
-		// if(newProps.isAuthenticated){
-		// axios.all([
-		// 	authAxios.get('http://127.0.0.1:8000/userprofile/current-user'),
-		// 	authAxios.get('http://127.0.0.1:8000/chat/?username='+username)
-		// ])
-		// .then(axios.spread((get1, get2)=> {
-		// 			this.setState({
-		// 				friendList:get1.data.friends,
-		// 				chatList:get2.data,
-		// 		 });
-		// 	 }));
-		// }
-
-
-
-
 	}
 
 	render() {
+		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
 			<div>
@@ -75,22 +49,42 @@ class ArticleList extends React.Component {
 
 
 
-				 <div>
+				<div>
 
 
-				 <div className = 'newsfeed' style={{marginBottom:50}}>
-					 <Row>
-						<Col span={8}>Write a post</Col>
-						<Col span={8}>Upload a photo</Col>
-						<Col span={8}>Share a post</Col>
-
-					</Row>
+					<div className = 'newsfeed' style={{marginBottom:30}}>
+						<Row gutter={20}>
+							<Col span={8}>
+								<Card title="Write a Post" bordered={false}>
+									Write a Post
+								</Card>
+							</Col>
+							<Col span={8}>
+								<Card title="Upload a picture" bordered={false}>
+									<	Dragger >
+										<p className="ant-upload-drag-icon">
+											<InboxOutlined />
+										</p>
+										<p className="ant-upload-text">Click or drag file to this area to upload</p>
+										<p className="ant-upload-hint">
+											Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+											band files
+										</p>
+									</Dragger>,
+								</Card>
+							</Col>
+							<Col span={8}>
+								<Card title="Share a post" bordered={false}>
+									Share a post
+								</Card>
+							</Col>
+						</Row>
 					</div>
 
 				 <div className = 'newsfeed'>
 
 				 		<NewsFeedFormPost data = {this.props}/>
-						<div className = 'infinite-scrollList'>
+						<div className = 'infinite-scrollList'>d
 							<InfiniteList data={this.props} />
 						</div>
 							{/*

@@ -1,4 +1,21 @@
+.newsfeedTop {
+  background-color: white;
 
+  width: 1000px;
+  margin-top: 1px;
+
+  /* overflow:auto; */
+  /* background-color: red; */
+}
+.newsfeed {
+  background-color: white;
+  padding: 24px;
+  width: 800px;
+  margin-top: 1px;
+  minHeight: 380px;
+  /* overflow:auto; */
+  /* background-color: red; */
+}
 
 .rightBox{
   margin-right: 400
