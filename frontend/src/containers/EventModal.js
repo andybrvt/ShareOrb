@@ -88,7 +88,10 @@ class EventModal extends React.Component {
 
     start_date = dateFns.addHours(start_date, start_time.firstHour)
     start_date = dateFns.addMinutes(start_date, start_time.firstMin)
-    console.log(start_date)
+
+    end_date = dateFns.addHours(end_date, end_time.firstHour)
+    end_date = dateFns.addMinutes(end_date, end_time.firstMin)
+    console.log(start_date, end_date)
 
     console.log(values)
 
@@ -96,25 +99,27 @@ class EventModal extends React.Component {
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
 
-
-    // authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
-    //   title: values.title,
-    //   content: values.content,
-    //   start_time: start_date,
-    //   end_time: end_date,
-    //   location: values.location,
-    //   person: [this.props.id]
-    // })
-    // const instanceEvent = {
-    //   title: values.title,
-    //   content: values.content,
-    //   start_time: start_date,
-    //   end_time: end_date,
-    //   location: values.location,
-    //   person: [this.props.id]
-    // }
-    // this.props.addEvents(instanceEvent)
-    // this.props.closePopup()
+    authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+      title: values.title,
+      content: values.content,
+      start_time: start_date,
+      end_time: end_date,
+      location: values.location,
+      color: values.event_color,
+      person: [this.props.id],
+    })
+    const instanceEvent = {
+      title: values.title,
+      content: values.content,
+      start_time: start_date,
+      end_time: end_date,
+      location: values.location,
+      color: values.event_color,
+      person: [this.props.id]
+    }
+    // add color to addEvents in redux
+    this.props.addEvents(instanceEvent)
+    this.props.closePopup()
   }
 
 

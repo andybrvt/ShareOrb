@@ -287,7 +287,7 @@ main {
 }
 
 .calendar .dayBody .eventsDay{
-  background-color: lightblue;
+  /* background-color: lightblue; */
   color: white;
   font-size: 15px;
   border-radius: 10px;
@@ -507,7 +507,7 @@ main {
 }
 
 .calendar .body .row .monthEvent {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   color: white;
   font-size: 15px;
   border-radius: 10px;
@@ -524,7 +524,7 @@ main {
 
 
 .weekDayFlex-Container .calendar .weekBody .weekEvent{
-  background-color: lightblue;
+  /* background-color: lightblue; */
   color: white;
   font-size: 15px;
   border-radius: 10px;

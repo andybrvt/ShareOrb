@@ -238,7 +238,12 @@ class PersonalCalendar extends React.Component{
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
-                  <div key={item.content} className = 'monthEvent' style = {{gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1)}}>
+                  <div key={item.content}
+                  className = 'monthEvent'
+                  style = {{
+                    gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1),
+                    backgroundColor: item.color
+                  }}>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
                      'HH:mm a')}</span>

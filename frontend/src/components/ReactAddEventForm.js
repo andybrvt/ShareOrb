@@ -52,6 +52,7 @@ class ReactAddEventForm extends React.Component {
       title: '',
       content: '',
       location: '',
+      eventColor: '',
       error: {}
     }
     this.handleChange = this.handleChange.bind(this);
@@ -305,7 +306,8 @@ class ReactAddEventForm extends React.Component {
         start_date: this.state.dateRange[0].toDate(),
         end_date: this.state.dateRange[1].toDate(),
         start_time: this.state.timeStart,
-        end_time: this.state.timeEnd
+        end_time: this.state.timeEnd,
+        event_color: this.state.eventColor
       }
       this.onClear()
       this.props.onSubmit(submitContent)
@@ -411,8 +413,7 @@ class ReactAddEventForm extends React.Component {
     // The name of the inputt values are important
     // it allows for us to be able to input stuff into the form item
     // because it is what connents to the onChange for the states
-    console.log(this.state)
-    console.log(this.renderEndTime())
+    console.log(this.state.eventColor)
     const startChildren = this.renderStartTime();
     const endChildren = this.renderEndTime()
     // for (let i = 10; i < 36; i++) {
@@ -443,7 +444,7 @@ class ReactAddEventForm extends React.Component {
         value = {this.state.content}
         rows ={4}
         style = {{width: '500px'}}/>
-        <Input type = 'color' className = 'reactColor'/>
+        <Input type = 'color' className = 'reactColor' name = 'eventColor'/>
 
         <span style = {{color: 'red'}}>{this.state.error['content']}</span>
       </Form.Item>

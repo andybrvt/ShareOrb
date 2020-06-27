@@ -188,7 +188,10 @@ class DayCalendar extends React.Component{
         hours.push(
             toDoStuff.map(item => (
               <div className = "eventsDay"
-              style = {{gridRow: this.dayEventIndex(item.start_time, item.end_time, i)}}
+              style = {{
+                gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
+                backgroundColor: item.color
+              }}
               onClick = {() => this.onClickItem(item)}>
               <span > {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
                  'HH:mm a')}</span>

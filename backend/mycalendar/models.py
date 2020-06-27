@@ -31,6 +31,7 @@ class Event(models.Model):
 	start_time = models.DateTimeField(default =timezone.now, blank= False)
 	end_time = models.DateTimeField(default =timezone.now, blank= False)
 	location = models.CharField(max_length = 255, blank = True)
+	color = models.CharField(max_length = 255, blank = True)
 	def __unicode__(self):
 		return self.title
 
