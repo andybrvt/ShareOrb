@@ -30,7 +30,7 @@ const { Search } = Input;
 
 class SideMenu extends React.Component {
   state = {
-    collapsed: true,
+    collapsed: false,
   };
 
   toggle = () => {
@@ -48,16 +48,91 @@ class SideMenu extends React.Component {
     console.log(this.props)
 
     return (
-      <div>
-      <Row>
-        <Col span={18} push={6}>
-          col-18 col-push-6
-        </Col>
-        <Col span={6} pull={18}>
-          col-6 col-pull-18
-        </Col>
-      </Row>
-      <Row>
+      <div style={{marginBottom:30}}>
+      <Row  style={{marginBottom:30}} span={8}>
+
+
+
+
+
+
+      <Col span={24}>
+
+
+        {/* length of banner from the very top*/}
+
+
+
+
+
+
+          <Search
+             placeholder="Search"
+             onSearch={value => console.log(value)}
+             style={{ marginLeft:150, marginLeft:200, marginRight:600, width: 350 }}
+           />
+
+
+
+           <Divider type="vertical" />
+
+           <Button style={{marginRight:100}}>
+            <NotificationsDropDown/>
+            </Button>
+
+
+           <Dropdown overlay={
+
+             <Menu selectedKeys={[]} >
+               { (
+                 <Menu.Item key="center">
+                   <Link to="/current-user">
+                     <UserOutlined />
+                     Profile
+
+                   </Link>
+
+                 </Menu.Item>
+               )}
+               { (
+                 <Menu.Item key="settings">
+                   <SettingOutlined />
+                   Settings
+                 </Menu.Item>
+               )}
+               { <Menu.Divider />}
+
+
+
+
+
+               <Menu.Item key="logout" onClick={this.props.logout}>
+                 <Link to="/">
+                   <LogoutOutlined />
+                   Logout
+
+                 </Link>
+
+               </Menu.Item>
+             </Menu>}>
+
+
+            <Button>
+
+             <span >
+               <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+               <span>{"admin"}</span>
+             </span>
+           </Button>
+         </Dropdown>
+
+
+
+
+</Col>
+    </Row>
+
+       <Row>
 
       <Col span={1}>
       <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
@@ -127,67 +202,6 @@ class SideMenu extends React.Component {
             })}
 
 
-            <Divider type="vertical" />
-
-            <Search
-               placeholder="Search"
-               onSearch={value => console.log(value)}
-               style={{ marginLeft:150, marginRight:600, width: 400 }}
-             />
-
-
-
-             <Divider type="vertical" />
-
-             <Button style={{marginRight:100}}>
-              <NotificationsDropDown/>
-              </Button>
-
-
-             <Dropdown overlay={
-
-               <Menu selectedKeys={[]} >
-                 { (
-                   <Menu.Item key="center">
-                     <Link to="/current-user">
-                       <UserOutlined />
-                       Profile
-
-                     </Link>
-
-                   </Menu.Item>
-                 )}
-                 { (
-                   <Menu.Item key="settings">
-                     <SettingOutlined />
-                     Settings
-                   </Menu.Item>
-                 )}
-                 { <Menu.Divider />}
-
-
-
-
-
-                 <Menu.Item key="logout" onClick={this.props.logout}>
-                   <Link to="/">
-                     <LogoutOutlined />
-                     Logout
-
-                   </Link>
-
-                 </Menu.Item>
-               </Menu>}>
-
-
-              <Button>
-
-               <span >
-                 <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-                 <span>{"admin"}</span>
-               </span>
-             </Button>
-           </Dropdown>
 
 
 
