@@ -49,21 +49,27 @@ class SideMenu extends React.Component {
 
     return (
       <div>
-      <Col span={2}>col-2</Col>
-      <Col span={2}>col-2</Col>
-      <Col span={16}>col-16
-      <Layout>
+      <Row>
+        <Col span={18} push={6}>
+          col-18 col-push-6
+        </Col>
+        <Col span={6} pull={18}>
+          col-6 col-pull-18
+        </Col>
+      </Row>
+      <Row>
 
+      <Col span={1}>
       <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
 
               <img  class="logo" src={testPic}  style={{width:100, height:100}} />
 
 
-          <Menu theme="dark"
+          <Menu style={{height:1000}}
            defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           mode="inline"
-          theme="dark">
+          theme="light">
 
 
           <Menu.Item key="1">
@@ -103,6 +109,13 @@ class SideMenu extends React.Component {
 
 
         </Sider>
+        col-2
+      </Col>
+      <Col span={2}>col-2</Col>
+      <Col span={16}>col-16
+      <Layout>
+
+
         <Layout className="site-layout">
 
           {/* length of banner from the very top*/}
@@ -201,7 +214,7 @@ class SideMenu extends React.Component {
       </Layout>
       </Col>
       <Col span={4}>col-8</Col>
-
+      </Row>
       <div class="newsfeed">
 
       </div>
