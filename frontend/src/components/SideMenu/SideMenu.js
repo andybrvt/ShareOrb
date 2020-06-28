@@ -49,9 +49,11 @@ class SideMenu extends React.Component {
 
     return (
       <div>
+      <Col span={4}>col-8</Col>
+      <Col span={16}>col-8
       <Layout>
 
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+      <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
 
               <img  class="logo" src={testPic}  style={{width:100, height:100}} />
 
@@ -196,6 +198,12 @@ class SideMenu extends React.Component {
           </Content>
         </Layout>
       </Layout>
+      </Col>
+      <Col span={4}>col-8</Col>
+
+      <div class="newsfeed">
+
+      </div>
 
      </div>
     );
