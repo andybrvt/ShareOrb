@@ -52,7 +52,7 @@ class ArticleList extends React.Component {
 				<div>
 
 
-					<div className = 'newsfeed' style={{marginBottom:30}}>
+					<div className = 'newsfeedTop' style={{marginBottom:30}}>
 						<Row gutter={20}>
 							<Col span={8}>
 								<Card title="Write a Post" bordered={false}>
@@ -62,20 +62,19 @@ class ArticleList extends React.Component {
 							<Col span={8}>
 								<Card title="Upload a picture" bordered={false}>
 									<	Dragger >
-										<p className="ant-upload-drag-icon">
+										<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
 											<InboxOutlined />
 										</p>
-										<p className="ant-upload-text">Click or drag file to this area to upload</p>
-										<p className="ant-upload-hint">
-											Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-											band files
-										</p>
+
+								      Browse or drag file
+
+
 									</Dragger>,
 								</Card>
 							</Col>
 							<Col span={8}>
 								<Card title="Share a post" bordered={false}>
-									Share a post
+									View daily album
 								</Card>
 							</Col>
 						</Row>
