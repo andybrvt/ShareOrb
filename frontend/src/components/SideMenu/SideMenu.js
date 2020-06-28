@@ -49,8 +49,9 @@ class SideMenu extends React.Component {
 
     return (
       <div>
-      <Col span={4}>col-8</Col>
-      <Col span={16}>col-8
+      <Col span={2}>col-2</Col>
+      <Col span={2}>col-2</Col>
+      <Col span={16}>col-16
       <Layout>
 
       <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
