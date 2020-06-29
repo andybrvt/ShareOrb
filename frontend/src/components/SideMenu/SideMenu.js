@@ -55,7 +55,10 @@ class SideMenu extends React.Component {
 
       <Col span={1}>
       <Sider trigger={null} collapsible collapsed={this.state.collapsed}style={{
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        height: '100vh',
+        position: 'fixed',
+
       }}>
 
               <img  class="logo" src={testPic}  style={{width:100, height:100}} />
@@ -65,7 +68,8 @@ class SideMenu extends React.Component {
            defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           mode="inline"
-          theme="light">
+          theme="light"
+          >
 
 
           <Menu.Item key="1">
@@ -108,7 +112,7 @@ class SideMenu extends React.Component {
         col-2
       </Col>
       <Col span={2}>col-2</Col>
-      <Col span={16}>col-14
+      <Col span={16}>
       <Layout>
 
 
@@ -118,7 +122,7 @@ class SideMenu extends React.Component {
 
           {/* length of banner from the very top*/}
 
-          <Header className="site-layout-background HeaderPosition" style={{  fontSize:20 }}>
+          <Header className="site-layout-background HeaderPosition appearBefore" style={{  fontSize:20,   position: 'fixed'  }}>
             {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
               onClick: this.toggle,
@@ -130,7 +134,7 @@ class SideMenu extends React.Component {
             <Search
                placeholder="Search"
                onSearch={value => console.log(value)}
-               style={{ marginLeft:150, marginLeft:100, marginRight:300, width: 350 }}
+               style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350 }}
              />
 
 
@@ -196,6 +200,7 @@ class SideMenu extends React.Component {
 
 
           <Content
+
 
             style={{
               height: "710px",
