@@ -49,88 +49,6 @@ class SideMenu extends React.Component {
 
     return (
       <div style={{marginBottom:30}}>
-      <Row  style={{marginBottom:30}} span={8}>
-
-
-
-
-
-
-      <Col span={24}>
-
-
-        {/* length of banner from the very top*/}
-
-
-
-
-
-
-          <Search
-             placeholder="Search"
-             onSearch={value => console.log(value)}
-             style={{ marginLeft:150, marginLeft:200, marginRight:600, width: 350 }}
-           />
-
-
-
-           <Divider type="vertical" />
-
-           <Button style={{marginRight:100}}>
-            <NotificationsDropDown/>
-            </Button>
-
-
-           <Dropdown overlay={
-
-             <Menu selectedKeys={[]} >
-               { (
-                 <Menu.Item key="center">
-                   <Link to="/current-user">
-                     <UserOutlined />
-                     Profile
-
-                   </Link>
-
-                 </Menu.Item>
-               )}
-               { (
-                 <Menu.Item key="settings">
-                   <SettingOutlined />
-                   Settings
-                 </Menu.Item>
-               )}
-               { <Menu.Divider />}
-
-
-
-
-
-               <Menu.Item key="logout" onClick={this.props.logout}>
-                 <Link to="/">
-                   <LogoutOutlined />
-                   Logout
-
-                 </Link>
-
-               </Menu.Item>
-             </Menu>}>
-
-
-            <Button>
-
-             <span >
-               <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-               <span>{"admin"}</span>
-             </span>
-           </Button>
-         </Dropdown>
-
-
-
-
-</Col>
-    </Row>
 
        <Row>
 
@@ -187,7 +105,7 @@ class SideMenu extends React.Component {
         col-2
       </Col>
       <Col span={2}>col-2</Col>
-      <Col span={16}>col-16
+      <Col span={20}>col-16
       <Layout>
 
 
@@ -204,7 +122,65 @@ class SideMenu extends React.Component {
 
 
 
+            <Search
+               placeholder="Search"
+               onSearch={value => console.log(value)}
+               style={{ marginLeft:150, marginLeft:200, marginRight:400, width: 350 }}
+             />
 
+
+
+             <Divider type="vertical" />
+
+             <Button style={{marginRight:100}}>
+              <NotificationsDropDown/>
+              </Button>
+
+
+             <Dropdown overlay={
+
+               <Menu selectedKeys={[]} >
+                 { (
+                   <Menu.Item key="center">
+                     <Link to="/current-user">
+                       <UserOutlined />
+                       Profile
+
+                     </Link>
+
+                   </Menu.Item>
+                 )}
+                 { (
+                   <Menu.Item key="settings">
+                     <SettingOutlined />
+                     Settings
+                   </Menu.Item>
+                 )}
+                 { <Menu.Divider />}
+
+
+
+
+
+                 <Menu.Item key="logout" onClick={this.props.logout}>
+                   <Link to="/">
+                     <LogoutOutlined />
+                     Logout
+
+                   </Link>
+
+                 </Menu.Item>
+               </Menu>}>
+
+
+              <Button>
+
+               <span >
+                 <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+                 <span>{"admin"}</span>
+               </span>
+             </Button>
+           </Dropdown>
 
 
 
@@ -227,7 +203,7 @@ class SideMenu extends React.Component {
         </Layout>
       </Layout>
       </Col>
-      <Col span={4}>col-8</Col>
+
       </Row>
       <div class="newsfeed">
 
