@@ -91,10 +91,10 @@ class EventModal extends React.Component {
 
     end_date = dateFns.addHours(end_date, end_time.firstHour)
     end_date = dateFns.addMinutes(end_date, end_time.firstMin)
-    console.log(start_date, end_date)
 
-    console.log(values)
 
+    const temp_start_date = dateFns.format(start_date, 'yyyy-MM-dd hh:mm:ss')
+    const temp_end_date = dateFns.format(end_date, 'yyyy-MM-dd hh:mm:ss')
 
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
@@ -108,11 +108,17 @@ class EventModal extends React.Component {
       color: values.event_color,
       person: [this.props.id],
     })
+
+    // The event instance is pretty much used when you just recently added an
+    // event, so because of that you want to add the date in just as how the
+    // date and event will be added according to the loaded event
+
+
     const instanceEvent = {
       title: values.title,
       content: values.content,
-      start_time: start_date,
-      end_time: end_date,
+      start_time: temp_start_date,
+      end_time: temp_end_date,
       location: values.location,
       color: values.event_color,
       person: [this.props.id]

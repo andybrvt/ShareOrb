@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import { connect } from "react-redux";
@@ -8,9 +8,15 @@ import {
    DatePicker,
    TimePicker,
    Button,
-   Input
+   Input,
+   Select
   } from 'antd';
 import moment from 'moment';
+import './labelCSS/ReactForm.css';
+import * as dateFns from 'date-fns';
+
+const { Option } = Select;
+
 
 
 // You can also validate the fields on the forms btw
@@ -36,16 +42,65 @@ const renderField = (field) => {
 
 // <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
 
-const renderTimeField = (field) => {
-  console.log(field.input.value[0])
+const renderDateField = (field) => {
+  console.log(field.input)
 
   return (
-    <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" value = {[moment(field.input.value[0], 'YYYY-MM-DD HH:mm:ss'), moment(field.input.value[1], 'YYYY-MM-DD HH:mm:ss')]}/>
+    <RangePicker
+     format="YYYY-MM-DD"
+     value = {[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
+     // value = {[field.input.value[0], field.input.value[1]]}
+     />
+  )
+}
+
+const renderStartDateSelect = (field) => {
+  console.log(field.input.value)
+  // This const will render the start time of the event
+  // So before you choose any value you want to have the field
+  // input as a value in your select... because the input value will be the value
+  // that will be return to the field when you input a value
+  // Bascially everything goes through the value first, and what ever is here inspect
+  // is just for show
+  return (
+    <Select {...field.input}>
+    {field.children}
+    </Select>
   )
 }
 
 
-const { MonthPicker, RangePicker } = DatePicker;
+const renderStartTime = () => {
+    const timeFormat = "hh:mm a"
+    const time = []
+    let start = dateFns.startOfDay(new Date())
+    let startHour = dateFns.getHours(new Date())
+    let startMins = dateFns.getMinutes(new Date())
+    for (let i = 0; i< 48; i++){
+      const cloneTime = startHour + ':' + startMins
+      time.push(
+        <Option
+        key = {dateFns.format(start, timeFormat)}
+        value= {dateFns.format(start, timeFormat)} >
+        {dateFns.format(start, timeFormat)}
+        </Option>
+      )
+      start = dateFns.addMinutes(start, 30)
+    }
+    console.log(time)
+    return time
+  }
+
+// const renderEndTimeSelect = (field) => {
+//   return (
+//     console.log(field)
+//   )
+// }
+
+
+
+
+const { RangePicker } = DatePicker;
 
 const formItemLayout = {
   labelCol: {
@@ -69,6 +124,37 @@ const rangeConfig = {
 
 
 class ReduxEditEventForm extends React.Component{
+
+  handleTimeChange = (event) => {
+    return (
+      console.log(event)
+
+    )
+  }
+
+  renderEndTimeSelect = () => {
+    console.log(this.props.startTime)
+    const timeFormat = "hh:mm a"
+    const time = []
+    let start = dateFns.startOfDay(new Date())
+    let startHour = dateFns.getHours(new Date())
+    let startMins = dateFns.getMinutes(new Date())
+    for (let i = 0; i< 48; i++){
+      const cloneTime = startHour + ':' + startMins
+      time.push(
+        <Option
+        key = {dateFns.format(start, timeFormat)}
+        value= {dateFns.format(start, timeFormat)} >
+        {dateFns.format(start, timeFormat)}
+        </Option>
+      )
+      start = dateFns.addMinutes(start, 30)
+    }
+    console.log(time)
+    return time
+  }
+
+
 
     render(){
       console.log(this.props)
@@ -100,8 +186,24 @@ class ReduxEditEventForm extends React.Component{
           <div>
             <label htmlFor = 'dateRange'>Date Range</label>
             <br />
-            <Field name = 'dateRange' component = {renderTimeField} type ='date' />
+            <Field name = 'dateRange' component = {renderDateField} type ='date' />
           </div>
+          <div>
+            <Field
+            name = 'startTime'
+            component = {renderStartDateSelect}
+            onChange = {this.handleTimeChange}>
+              {renderStartTime()}
+            </Field>
+            <Field
+            name = 'endTime'
+            component = {renderStartDateSelect}>
+              {this.renderEndTimeSelect()}
+            </Field>
+
+          </div>
+
+
           <button type = 'submit' onClick = {handleSubmit}>Submit</button>
           <button onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}> Delete </button>
         </form>
@@ -126,9 +228,19 @@ ReduxEditEventForm = reduxForm({
 
 
 
+const selector = formValueSelector('edit event')
+// The formValueSelector basically lets you select the values from a selected list that you have
+// put in the paraethesis
+// When you get the selector you can then choose which filed you want to take from the form through
+// connecting with the file --> similar to mapStateToProps but you are just doing it directly now
+// and the states in this case is the form fields
+// You can basically treat it as a state but in props
+
 
 // The gist of redux form is bascially the redux form can be modified and such and then
 // you can pass those inputs into an action created by the redux form then those actions will
 // be dispatched in into the reducers then the reduces will change the states and then if there is
 // an onchange or whatever, changes the Fields in the forms
-export default ReduxEditEventForm;
+export default connect(state =>({
+  startTime: selector(state, 'startTime')
+}))(ReduxEditEventForm);
