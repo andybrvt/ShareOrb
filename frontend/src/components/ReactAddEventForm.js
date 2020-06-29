@@ -468,7 +468,6 @@ class ReactAddEventForm extends React.Component {
           value = {this.state.dateRange}
           />
           <Select
-          defaultValue="a1"
           name = 'timeStart'
           style={{ width: 100 }}
           showArrow  = {false}
@@ -477,7 +476,6 @@ class ReactAddEventForm extends React.Component {
             {startChildren}
           </Select>
           <Select
-          defaultValue="a1"
           name = 'timeEnd'
           style={{ width: 100 }}
           showArrow  = {false}
