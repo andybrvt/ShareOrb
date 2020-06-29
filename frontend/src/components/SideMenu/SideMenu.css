@@ -1,7 +1,7 @@
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
-  padding: 0 24;
+  padding: 0 40px;
   cursor: pointer;
   transition: color 0.3s;
 }
@@ -11,18 +11,21 @@
 }
 
 #components-layout-demo-custom-trigger .logo {
-  height: 632px;
-
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
 
-backgroundColorHeader {
-
+.site-layout{
+  position: relative;
+  top: 0px;
+  /* background-color: red; */
+  /* overflow: hidden; */
+  height: 1300px;
+  /* magic numbre is 982 for height  */
 }
 
-
-
-.HeaderPosition{
-  position: "sticky";
-  top: 0;
+.site-layout .site-layout-background {
+  background: #fff;
+  /* background-color: black; */
 }

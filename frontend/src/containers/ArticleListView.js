@@ -6,8 +6,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
 import Layouts from './Layouts/Layouts.js';
+import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
-import './Container_CSS/NewsFeed.css';
 
 import { Row, Col, Card, Upload} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
@@ -49,62 +49,64 @@ class ArticleList extends React.Component {
 
 
 
-				<div>
+					<div>
 
 
-					<div className = 'newsfeedTop' style={{marginBottom:30}}>
-						<Row gutter={20}>
-							<Col span={8}>
-								<Card title="Write a Post" bordered={false}>
-									Write a Post
-								</Card>
-							</Col>
-							<Col span={8}>
-								<Card title="Upload a picture" bordered={false}>
-									<	Dragger >
-										<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
-											<InboxOutlined />
-										</p>
+						<div className = 'newsfeedTop' style={{marginBottom:30}}>
+							<Row gutter={20}>
+								<Col span={8}>
+									<Card title="Write a Post" bordered={false}>
+										Write a Post
+									</Card>
+								</Col>
+								<Col span={8}>
+									<Card title="Upload a picture" bordered={false}>
+										<	Dragger >
+											<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
+												<InboxOutlined />
+											</p>
 
-								      Browse or drag file
+									      Browse or drag file
 
 
-									</Dragger>,
-								</Card>
-							</Col>
-							<Col span={8}>
-								<Card title="Share a post" bordered={false}>
-									View daily album
-								</Card>
-							</Col>
-						</Row>
-					</div>
-
-				 <div className = 'newsfeed'>
-
-				 		<NewsFeedFormPost data = {this.props}/>
-						<div className = 'infinite-scrollList'>d
-							<InfiniteList data={this.props} />
+										</Dragger>,
+									</Card>
+								</Col>
+								<Col span={8}>
+									<Card title="Share a post" bordered={false}>
+										View daily album
+									</Card>
+								</Col>
+							</Row>
 						</div>
-							{/*
-							<div class="rightBox">
-		 					 <Layouts/>
-		 				 </div>
-						 */
-					 	}
-				 </div>
-				 </div>
+
+					 <div className = 'newsfeed'>
+
+					 		<NewsFeedFormPost data = {this.props}/>
+							<div className = 'infinite-scrollList'>d
+								<InfiniteList data={this.props} />
+							</div>
+								{/*
+								<div class="rightBox">
+			 					 <Layouts/>
+			 				 </div>
+							 */
+						 	}
+					 </div>
+					 </div>
 
 
 
 
-				 :
+					 :
 
 
-				 <div>
-				 		< NoFoundPage />
+					 <div>
+					 		< NoFoundPage />
 
-					</div>}
+						</div>}
+
+
     </div>
 		)
 	}

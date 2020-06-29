@@ -60,7 +60,7 @@ class App extends Component {
 
                 <BaseRouter   {...this.props}/>
 
-  
+
         </Router>
       </div>
     );

@@ -15,6 +15,7 @@ import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcr
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
+import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 
 import * as navActions from '../../store/actions/nav'
 import * as actions from '../../store/actions/auth';
@@ -53,7 +54,9 @@ class SideMenu extends React.Component {
        <Row>
 
       <Col span={1}>
-      <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+      <Sider trigger={null} collapsible collapsed={this.state.collapsed}style={{
+        backgroundColor: 'white'
+      }}>
 
               <img  class="logo" src={testPic}  style={{width:100, height:100}} />
 
@@ -105,11 +108,13 @@ class SideMenu extends React.Component {
         col-2
       </Col>
       <Col span={2}>col-2</Col>
-      <Col span={20}>col-16
+      <Col span={16}>col-14
       <Layout>
 
 
-        <Layout className="site-layout">
+        <Layout className="site-layout" style={{
+          backgroundColor: 'white'
+        }}>
 
           {/* length of banner from the very top*/}
 
@@ -125,14 +130,14 @@ class SideMenu extends React.Component {
             <Search
                placeholder="Search"
                onSearch={value => console.log(value)}
-               style={{ marginLeft:150, marginLeft:200, marginRight:400, width: 350 }}
+               style={{ marginLeft:150, marginLeft:100, marginRight:300, width: 350 }}
              />
 
 
 
              <Divider type="vertical" />
 
-             <Button style={{marginRight:100}}>
+             <Button style={{marginRight:50}}>
               <NotificationsDropDown/>
               </Button>
 
@@ -191,7 +196,7 @@ class SideMenu extends React.Component {
 
 
           <Content
-            className=""
+
             style={{
               height: "710px",
               // backgroundColor: 'red'
@@ -202,6 +207,15 @@ class SideMenu extends React.Component {
           </Content>
         </Layout>
       </Layout>
+      </Col>
+
+
+      <Col span={4}>col-4
+      {/*
+      <SuggestedFriends/>
+      */}
+
+
       </Col>
 
       </Row>
