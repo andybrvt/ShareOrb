@@ -134,24 +134,73 @@ class ReduxEditEventForm extends React.Component{
 
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
-    const timeFormat = "hh:mm a"
-    const time = []
-    let start = dateFns.startOfDay(new Date())
-    let startHour = dateFns.getHours(new Date())
-    let startMins = dateFns.getMinutes(new Date())
-    for (let i = 0; i< 48; i++){
-      const cloneTime = startHour + ':' + startMins
-      time.push(
-        <Option
-        key = {dateFns.format(start, timeFormat)}
-        value= {dateFns.format(start, timeFormat)} >
-        {dateFns.format(start, timeFormat)}
-        </Option>
-      )
-      start = dateFns.addMinutes(start, 30)
+
+    if (this.props.startTime !== undefined ){
+      // So basically the way I am making this will be the same way I made the
+      // date pick in the addeventform. But instead of using state, we will use
+      // redux state
+      const baseTime = renderStartTime()
+      let endTime = []
+
+      let setHour = ''
+      let setMin = ''
+      // You will be using setHour and setMin in order to compare to the
+      // times in the baseTime so you will know which time to put inin the endTime
+
+      // In order to compare, you have to convert all the tiems into the 1-24 hour time
+      if (this.props.startTime.includes("PM")){
+        setHour = parseInt(this.props.startTime.substring(0,2))
+        setMin = parseInt(this.props.startTime.substring(3,5))
+        if (setHour !== 12 ){
+          setHour = setHour + 12
+        }} else if (this.props.startTime.includes("AM")){
+          setHour = parseInt(this.props.startTime.substring(0,2))
+          setMin = parseInt(this.props.startTime.substring(3,5))
+          if (setHour === 12){
+            setHour = 0
+          }
+        }
+
+        // Now we will run through the basetimes and then convert them to
+        // the 1-24 hour format the from there compare what needs date is put into the
+        // end date and what date does not get put in there
+      for( let i = 0; i< baseTime.length; i++){
+       if(baseTime[i].key.includes('PM')){
+         let hour = parseInt(baseTime[i].key.substring(0,2))
+         if (hour !== 12){
+           hour = hour+12
+         }
+         const min = baseTime[i].key.substring(3,5)
+         if (setHour < hour){
+           endTime.push(
+            <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+          )} else if (setHour === hour){
+            if(setMin < min){
+              endTime.push(
+                <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+              )
+            }
+          }
+       } else if (baseTime[i].key.includes("AM")) {
+         let hour = parseInt(baseTime[i].key.substring(0,2))
+         if (hour === 12){
+           hour = 0
+         }
+         const min = baseTime[i].key.substring(3,5)
+         if( setHour < hour ) {
+           endTime.push(
+             <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+          )} else if (setHour === hour){
+            if (setMin < min){
+              endTime.push(
+                <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+              )
+            }
+          }
+        }
+      }
+      return (endTime)
     }
-    console.log(time)
-    return time
   }
 
 
