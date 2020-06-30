@@ -55,7 +55,6 @@ const renderDateField = (field) => {
 }
 
 const renderStartDateSelect = (field) => {
-  console.log(field.input.value)
   // This const will render the start time of the event
   // So before you choose any value you want to have the field
   // input as a value in your select... because the input value will be the value
@@ -125,33 +124,242 @@ const rangeConfig = {
 
 class ReduxEditEventForm extends React.Component{
 
-  handleTimeChange = (event) => {
-    return (
-      console.log(event)
+  handleStartTimeChange = (event, value) => {
+    const { change } = this.props
+    // So this handleStartTimechange pretty much is used to automatically
+    // change the values of the endTime, the only difference between this
+    // and that of the ReactAddEventForm is that we dont need to change the
+    // startTime value just the endTime value will be affected
 
+
+    // Like every other time related events we have to converted all
+    let startHour = parseInt(value.substring(0,2))
+    let startMin = parseInt(value.substring(3,5))
+    let ampm = value.substring(5,8)
+    let endHour = parseInt(this.props.endTime.substring(0,2))
+    let endMin = parseInt(this.props.endTime.substring(3,5))
+    let endTime = ''
+
+    console.log(startHour)
+
+    // These if statement is used to change the startTime values to the 1-24 hour format
+    if(value.includes('PM')){
+      if(startHour !== 12 ){
+        startHour = startHour + 12
+      }
+    } else if (value.includes('AM')){
+      if(startHour === 12){
+        startHour = 0
+      }
+    }
+
+    // These if statements here is to change the end time values from 1-2 to
+    // 1-24 for the end time
+    if (this.props.endTime.includes('PM')){
+      if (endHour !==  12){
+        endHour = endHour + 12
+      }
+    } else if (this.props.endTime.includes('AM')){
+      if(endHour === 12){
+        endHour = 0
+      }
+    }
+
+    // Now this is where the comparison of the times comes in an all the senarios
+    if(startHour === endHour ){
+      if (startMin > endMin){
+        endMin = "00"
+        endHour = startHour + 1
+        console.log(startHour)
+        console.log(endHour)
+        if (endHour < 10){
+          endHour = '0'+endHour
+        } else {
+          if(ampm === ' AM'){
+            endHour = endHour
+          } else if (ampm === ' PM'){
+            endHour = endHour-12
+            if (endHour < 10){
+              endHour = '0'+endHour
+            }
+          }
+        }
+        if (startHour === 11 && ampm === ' AM'){
+          endTime =   '12:' + endMin + ' PM'
+        } else if ((startHour-12) === 11 && ampm === ' PM'){
+          endTime =  '12:' + endMin + ' AM'
+        } else {
+          endTime = endHour + ':'+endMin+ampm
+        }
+        change('endTime', endTime )
+      } else if (startMin === endMin ){
+        // This is the case where the times are identical to each other
+        // REMEMBER THAT ENDHOUR AND STARTHOUR ARE USING THE 1-24 TIME
+        console.log(startHour, endHour)
+
+
+        if (startMin === 30){
+          endMin = '00'
+          if (startHour === 12){
+            endHour = '01'
+            endTime = endHour + ':'+endMin+' PM'
+          } else if (startHour === 11 && ampm === ' AM'){
+              endTime =   '12:' + endMin + ' PM'
+            } else if ((startHour-12) === 11 && ampm === ' PM'){
+              endTime =  '12:' + endMin + ' AM'
+            }
+          else {
+            console.log(endHour)
+            endHour = startHour +1
+              if (endHour<10){
+                  endHour = '0'+endHour
+              } else {
+                if(ampm === ' AM'){
+                  endHour = endHour
+                } else if (ampm === ' PM'){
+                  endHour = endHour-12
+                  if (endHour < 10){
+                    endHour = '0'+endHour
+                  }
+                }
+              }
+            endTime = endHour + ':' +endMin+ampm
+          }
+        } else if (startMin === 0){
+          endMin = '30'
+          console.log(ampm)
+          if (endHour<10){
+              endHour = '0'+endHour
+          } else {
+            if(ampm === ' AM'){
+              console.log('am')
+              endHour = endHour
+            } else if (ampm === ' PM'){
+              console.log('pm')
+              if (endHour === 12){
+                endHour = 12
+              }else {
+                endHour = endHour-12
+                if (endHour < 10){
+                  endHour = '0'+endHour
+                }
+              }
+            }
+          }
+          endTime = endHour + ':'+endMin +ampm
+        }
+        change('endTime', endTime)
+      }
+    } else if (startHour > endHour) {
+      // let startHour = parseInt(time.substring(0,2))
+      // let startMin = parseInt(time.substring(3,5))
+      if (startMin === 30){
+        startMin = "00"
+        startHour = startHour + 1
+      } else if (startMin !== 30){
+        startMin = '30'
+      }
+      if (startHour < 10){
+        startHour = '0'+startHour
+      } else{
+        if(ampm === ' AM'){
+          startHour = startHour
+        } else if (ampm === ' PM'){
+          startHour = startHour-12
+          if (startHour < 10){
+            startHour = '0'+startHour
+          }          }
+      }
+      if ((startHour+11) === 11 && ampm === ' AM'){
+        endTime =   '12:' + startMin + ' PM'
+      } else if ((startHour-1) === 11 && ampm === ' PM'){
+        endTime =  '12:' + startMin + ' AM'
+      } else {
+        endTime = startHour + ':'+startMin+ampm
+      }
+      change('endTime', endTime)
+    }
+
+  }
+
+  handleEndTimeChange = (event) => {
+    console.log(event)
+    return (
+      console.log('end')
     )
   }
 
+
+
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
-    const timeFormat = "hh:mm a"
-    const time = []
-    let start = dateFns.startOfDay(new Date())
-    let startHour = dateFns.getHours(new Date())
-    let startMins = dateFns.getMinutes(new Date())
-    for (let i = 0; i< 48; i++){
-      const cloneTime = startHour + ':' + startMins
-      time.push(
-        <Option
-        key = {dateFns.format(start, timeFormat)}
-        value= {dateFns.format(start, timeFormat)} >
-        {dateFns.format(start, timeFormat)}
-        </Option>
-      )
-      start = dateFns.addMinutes(start, 30)
+
+    if (this.props.startTime !== undefined ){
+      // So basically the way I am making this will be the same way I made the
+      // date pick in the addeventform. But instead of using state, we will use
+      // redux state
+      const baseTime = renderStartTime()
+      let endTime = []
+
+      let setHour = ''
+      let setMin = ''
+      // You will be using setHour and setMin in order to compare to the
+      // times in the baseTime so you will know which time to put inin the endTime
+
+      // In order to compare, you have to convert all the tiems into the 1-24 hour time
+      if (this.props.startTime.includes("PM")){
+        setHour = parseInt(this.props.startTime.substring(0,2))
+        setMin = parseInt(this.props.startTime.substring(3,5))
+        if (setHour !== 12 ){
+          setHour = setHour + 12
+        }} else if (this.props.startTime.includes("AM")){
+          setHour = parseInt(this.props.startTime.substring(0,2))
+          setMin = parseInt(this.props.startTime.substring(3,5))
+          if (setHour === 12){
+            setHour = 0
+          }
+        }
+
+        // Now we will run through the basetimes and then convert them to
+        // the 1-24 hour format the from there compare what needs date is put into the
+        // end date and what date does not get put in there
+      for( let i = 0; i< baseTime.length; i++){
+       if(baseTime[i].key.includes('PM')){
+         let hour = parseInt(baseTime[i].key.substring(0,2))
+         if (hour !== 12){
+           hour = hour+12
+         }
+         const min = baseTime[i].key.substring(3,5)
+         if (setHour < hour){
+           endTime.push(
+            <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+          )} else if (setHour === hour){
+            if(setMin < min){
+              endTime.push(
+                <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+              )
+            }
+          }
+       } else if (baseTime[i].key.includes("AM")) {
+         let hour = parseInt(baseTime[i].key.substring(0,2))
+         if (hour === 12){
+           hour = 0
+         }
+         const min = baseTime[i].key.substring(3,5)
+         if( setHour < hour ) {
+           endTime.push(
+             <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+          )} else if (setHour === hour){
+            if (setMin < min){
+              endTime.push(
+                <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+              )
+            }
+          }
+        }
+      }
+      return (endTime)
     }
-    console.log(time)
-    return time
   }
 
 
@@ -192,11 +400,12 @@ class ReduxEditEventForm extends React.Component{
             <Field
             name = 'startTime'
             component = {renderStartDateSelect}
-            onChange = {this.handleTimeChange}>
+            onChange = {this.handleStartTimeChange}>
               {renderStartTime()}
             </Field>
             <Field
             name = 'endTime'
+            onChange = {this.handleEndTimeChange}
             component = {renderStartDateSelect}>
               {this.renderEndTimeSelect()}
             </Field>
@@ -242,5 +451,6 @@ const selector = formValueSelector('edit event')
 // be dispatched in into the reducers then the reduces will change the states and then if there is
 // an onchange or whatever, changes the Fields in the forms
 export default connect(state =>({
-  startTime: selector(state, 'startTime')
+  startTime: selector(state, 'startTime'),
+  endTime: selector(state, 'endTime')
 }))(ReduxEditEventForm);
