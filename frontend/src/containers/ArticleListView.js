@@ -73,14 +73,14 @@ class ArticleList extends React.Component {
 									</Card>
 								</Col>
 								<Col span={8}>
-									<Card title="Share a post" bordered={false}>
+									<Card title="View daily album" bordered={false}>
 										View daily album
 									</Card>
 								</Col>
 							</Row>
 						</div>
 
-					 <div className = 'newsfeed'>
+					 <div>
 
 					 		<NewsFeedFormPost data = {this.props}/>
 							<div className = 'infinite-scrollList'>d

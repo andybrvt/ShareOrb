@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
 
 
+import { Row, Col, Divider } from 'antd';
 // Function: Gives a list of all users that are not the current user and current user friends
 class AllUsersNotCurrNotCurrFriends extends React.Component {
   constructor(props) {
@@ -41,6 +42,32 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
 
 
       <div>
+
+      tesssssssssssssssssssstttt
+      <Row gutter={[40, 48]}>
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+      </Row>
+      <Row gutter={[40, 48]}>
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+        <Col span={3} />
+      </Row>
+
+
+
+
         {profileList.map((j,index) => {
           return <UserProfileCover data = {j} key ={index} />
         })}

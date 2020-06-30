@@ -59,7 +59,8 @@ class SideMenu extends React.Component {
         height: '100vh',
         position: 'fixed',
 
-      }}>
+      }}
+      className="appearBefore">
 
               <img  class="logo" src={testPic}  style={{width:100, height:100}} />
 
@@ -203,7 +204,7 @@ class SideMenu extends React.Component {
 
 
             style={{
-              height: "710px",
+
               // backgroundColor: 'red'
             }}
           >

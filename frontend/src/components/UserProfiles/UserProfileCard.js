@@ -44,32 +44,15 @@ class UserProfileCard extends React.Component {
 
 
       <div>
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="myback-img ">
-              <img src="https://images.pexels.com/photos/761963/pexels-photo-761963.jpeg?auto=compress&cs=tinysrgb&h=350" class=""/>
-            </div>
 
-            <div class="myoverlay"></div>
-              <div class="profile-img">
-                 <div class="borders avatar-profile">
-                    <img src="https://images.pexels.com/photos/1036628/pexels-photo-1036628.jpeg?auto=compress&cs=tinysrgb&h=350"/>
-                 </div>
-              </div>
-              <div class="profile-title">
               <a href={'/userview/'+this.props.data.username}>{this.props.data.username}</a>
                  <Button type="primary" onClick ={this.onClickSend} disabled={!this.state.value}>Add friend</Button>
-              </div>
-           </div>
+
         </div>
 
 
-        <div class="test">
-          this is a test
-        </div>
 
 
-    </div>
 
     );
 
