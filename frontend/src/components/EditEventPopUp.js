@@ -20,17 +20,65 @@ import {
 
 class EditEventPopUp extends React.Component {
   //         <EditEventForm  {...this.props}/>
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
+      }
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
+      }
+    }
+
+    const timeBundle = {
+      firstHour: hour,
+      firstMin: minutes
+    }
+
+    return timeBundle
+
+  }
+
+
   submit = (values) => {
     console.log(values)
+
+    // Similar to the submitting to addforms you still have to convert all the
+    // days and times correctly in order to add them correctly into the backend
+
     const calendarId = this.props.calendarId
-    const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
-    const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
+
+    let start_date = values.dateRange[0].toDate()
+    let end_date = values.dateRange[1].toDate()
+    const start_time = this.timeConvert(values.startTime)
+    const end_time = this.timeConvert(values.endTime)
+
+
+    start_date = dateFns.addHours(start_date, start_time.firstHour)
+    start_date = dateFns.addMinutes(start_date, start_time.firstMin)
+
+    end_date = dateFns.addHours(end_date, end_time.firstHour)
+    end_date = dateFns.addMinutes(end_date, end_time.firstMin)
+
+    console.log(start_date, end_date)
+    // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
+    // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
 
     authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
       title: values.title,
       content: values.content,
-      start_time: start_time,
-      end_time: start_time,
+      start_time: start_date,
+      end_time: end_date,
       location: values.location,
       person: [this.props.id]
     })
@@ -38,8 +86,8 @@ class EditEventPopUp extends React.Component {
       id: this.props.calendarId,
       title: values.title,
       content: values.content,
-      start_time: start_time,
-      end_time: start_time,
+      start_time: start_date,
+      end_time: end_date,
       location: values.location,
       person: [this.props.id]
     }
@@ -109,8 +157,8 @@ class EditEventPopUp extends React.Component {
       content: this.props.content,
       // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
       // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
-      // dateRange: [dateFns.format(utc_start, 'yyyy-MM-dd HH:mm a'), dateFns.format(utc_end, 'yyyy-MM-dd HH:mm a')],
-      dateRange: [this.props.start_date, this.props.end_date],
+      // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
+      dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
       startTime: start_time,
       endTime: end_time,
       location: this.props.location,

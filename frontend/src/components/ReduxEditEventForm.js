@@ -45,10 +45,19 @@ const renderField = (field) => {
 const renderDateField = (field) => {
   console.log(field.input)
 
+  // BUGG!! WHEN YOU CLICK ON THE DATE IN THE DATE RANGE, IT GETS MESSED UP
+  // FOR SOME REASON BUT IF  YOU CLICK ANY WHERE BESIDES THAT THEN IT WILL
+  // BE OK
+
   return (
     <RangePicker
-     format="YYYY-MM-DD"
-     value = {[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
+     // format="YYYY-MM-DD"
+     onChange = {field.input.onChange}
+     value = {field.input.value}  
+
+
+     // {...[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
+     // value = {[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
      // value = {[field.input.value[0], field.input.value[1]]}
      />
   )
@@ -123,6 +132,7 @@ const rangeConfig = {
 
 
 class ReduxEditEventForm extends React.Component{
+
 
   handleStartTimeChange = (event, value) => {
     const { change } = this.props
@@ -394,7 +404,11 @@ class ReduxEditEventForm extends React.Component{
           <div>
             <label htmlFor = 'dateRange'>Date Range</label>
             <br />
-            <Field name = 'dateRange' component = {renderDateField} type ='date' />
+            <Field
+            name = 'dateRange'
+            component = {renderDateField}
+            type = 'date'
+             />
           </div>
           <div>
             <Field
@@ -452,5 +466,5 @@ const selector = formValueSelector('edit event')
 // an onchange or whatever, changes the Fields in the forms
 export default connect(state =>({
   startTime: selector(state, 'startTime'),
-  endTime: selector(state, 'endTime')
+  endTime: selector(state, 'endTime'),
 }))(ReduxEditEventForm);
