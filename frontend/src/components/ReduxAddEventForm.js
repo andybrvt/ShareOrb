@@ -47,7 +47,7 @@ class ReduxAddEventForm extends React.Component {
         </div>
         <div>
           <label htmlFor = 'content'> Content</label>
-          <Field name = 'content' component= {renderField} type= 'text'/>
+          <Field name = 'content' component= {renderField} type= 'text' />
         </div>
         <div>
           <label htmlFor = 'start_date'>Start Time</label>

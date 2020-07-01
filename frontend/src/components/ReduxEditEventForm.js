@@ -12,11 +12,14 @@ import {
    Select
   } from 'antd';
 import moment from 'moment';
-import './labelCSS/ReactForm.css';
+import './labelCSS/ReduxForm.css';
 import * as dateFns from 'date-fns';
+import { AimOutlined } from '@ant-design/icons';
+
 
 const { Option } = Select;
 
+const { TextArea } = Input
 
 
 // You can also validate the fields on the forms btw
@@ -36,7 +39,23 @@ const { Option } = Select;
 const renderField = (field) => {
   console.log(field)
   return (
-    <Input {...field.input} type = {field.type} placeholder= {field.placeholder}/>
+    <Input
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    className = 'box'/>
+  )
+}
+
+const renderTextArea = (field) => {
+  return (
+    <TextArea
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    rows = {4}
+    className = 'box'
+    />
   )
 }
 
@@ -53,8 +72,8 @@ const renderDateField = (field) => {
     <RangePicker
      // format="YYYY-MM-DD"
      onChange = {field.input.onChange}
-     value = {field.input.value}  
-
+     value = {field.input.value}
+     className = 'datePicker'
 
      // {...[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
      // value = {[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
@@ -71,9 +90,16 @@ const renderStartDateSelect = (field) => {
   // Bascially everything goes through the value first, and what ever is here inspect
   // is just for show
   return (
-    <Select {...field.input}>
+    <Select {...field.input} className = 'timebox'>
     {field.children}
     </Select>
+  )
+}
+
+const renderEventColor = (field) => {
+  // This is just used to render the color of the event
+  return (
+    <Input type = 'color' className = 'reduxColor' name = 'eventColor' defaultValue = '#01D4F4'/>
   )
 }
 
@@ -385,24 +411,30 @@ class ReduxEditEventForm extends React.Component{
       // you can actually call it and modify it in a higher order component and it will change
       return(
         <form>
-          <div>
-            <label htmlFor = 'title'> Title</label>
+          <div className = 'reduxTitle'>
             <Field
             name = 'title'
             component= {renderField}
             type= 'text'
+            placeholder = 'Title'
             />
           </div>
-          <div>
-            <label htmlFor = 'content'> Content</label>
-            <Field name = 'content' component= {renderField} type= 'text'/>
+          <div className  = 'reduxContent'>
+            <Field
+            name = 'content'
+            component= {renderTextArea}
+            type= 'text'
+            placeholder = 'Description'/>
           </div>
-          <div>
-            <label htmlFor = 'location'>Location</label>
+          <div className = 'reduxLocation'>
             <Field name = 'location' component= {renderField} type= 'text'/>
+            <AimOutlined className = 'aim'/>
+            <Field
+              name = 'eventColor'
+              component = {renderEventColor}
+              type = 'text'/>
           </div>
-          <div>
-            <label htmlFor = 'dateRange'>Date Range</label>
+          <div className = 'reduxDateRange'>
             <br />
             <Field
             name = 'dateRange'
@@ -410,7 +442,7 @@ class ReduxEditEventForm extends React.Component{
             type = 'date'
              />
           </div>
-          <div>
+          <div className = 'reduxTimePicker'>
             <Field
             name = 'startTime'
             component = {renderStartDateSelect}
@@ -425,10 +457,18 @@ class ReduxEditEventForm extends React.Component{
             </Field>
 
           </div>
-
-
-          <button type = 'submit' onClick = {handleSubmit}>Submit</button>
-          <button onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}> Delete </button>
+          <div className = 'reduxButton'>
+          <Button
+          onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
+          >
+          Delete
+          </Button>
+          <Button
+          type = 'primary'
+          onClick = {handleSubmit}
+          style = {{left: '10px', fontSize: '15px'}}
+          >Save</Button>
+          </div>
         </form>
       )
     }

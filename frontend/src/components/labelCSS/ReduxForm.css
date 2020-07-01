@@ -1,3 +1,88 @@
 .label {
   font-size: 30px;
 }
+
+.reduxTitle {
+  /* background-color: red; */
+  width: 300px;
+  padding-bottom: 30px;
+}
+
+.reduxTitle .box {
+  /* background-color: red; */
+  border: none;
+  border-bottom: 2px solid deepskyblue;
+  font-size: 30px;
+  height: 40px;
+  width: 300px;
+  /* padding-bottom: 100px; */
+}
+
+.reduxTitle .box:focus {
+  box-shadow: none;
+  border-bottom: 2px solid deepskyblue;
+}
+
+.reduxContent{
+  /* background-color: red; */
+  width: 300px;
+  padding-bottom: 25px;
+}
+
+.reduxContent .box{
+  font-size: 20px;
+  margin: 0;
+  width: 300px;
+}
+
+.reduxLocation {
+  /* background-color: red; */
+  width: 400px;
+}
+
+
+.reduxLocation .box{
+  font-size: 20px;
+  width: 300px;
+}
+
+.reduxLocation .aim {
+  font-size: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.reduxLocation .aim:hover {
+  font-size: 30px;
+}
+
+.reduxLocation .reduxColor {
+  width: 50px;
+}
+
+.reduxDateRange {
+  /* background-color: red; */
+  width: 300px;
+  padding-bottom: 10px;
+}
+
+.reduxDateRange .datePicker{
+  /* padding-top: 20px; */
+  width: 300px;
+}
+.reduxTimePicker {
+  /* background-color: red; */
+  width: 300px;
+}
+
+.reduxTimePicker .timebox{
+  width: 100px;
+}
+
+.reduxButton {
+  /* background-color:red; */
+  width: 160px;
+  position: relative;
+  left: 252px;
+  top: 10px;
+}

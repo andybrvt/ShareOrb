@@ -178,6 +178,7 @@ class EditEventPopUp extends React.Component {
           footer = {null}
           visible = {this.props.isVisible}
           onCancel= {this.props.close}
+          width = {450}
         >
         <ReduxEditEventForm
         {...this.props}

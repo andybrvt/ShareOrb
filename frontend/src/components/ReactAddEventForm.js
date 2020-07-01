@@ -444,7 +444,7 @@ class ReactAddEventForm extends React.Component {
         value = {this.state.content}
         rows ={4}
         style = {{width: '500px'}}/>
-        <Input type = 'color' className = 'reactColor' name = 'eventColor'/>
+        <Input type = 'color' className = 'reactColor' name = 'eventColor' defaultValue = '#01D4F4'/>
 
         <span style = {{color: 'red'}}>{this.state.error['content']}</span>
       </Form.Item>
