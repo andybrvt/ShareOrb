@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import ArticleList from './containers/NewsFeedView.js';
+import NewsFeedView from './containers/NewsFeedView.js';
 import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/LoginPage/Login';
 import Signup from './containers/Signup';
@@ -34,13 +34,13 @@ class BaseRouter extends React.Component {
 		return (
 
 
-      <div class="backgroundofEverything"  style={{background:'red',minHeight:'100%',}}>
+      <div class="backgroundofEverything"  style={{background:'#f5f5f5',minHeight:'100%',}}>
         { this.props.isAuthenticated?
         <SideMenu>
 
 
 
-        <Route exact path = '/home'  render={(props) => <ArticleList {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
+        <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
         <Route exact path = '/signup/' component= {Signup} />
 

@@ -85,7 +85,7 @@ class NewsFeedView extends React.Component {
 					 <div>
 
 					 		<NewsFeedFormPost data = {this.props}/>
-							<div className = 'infinite-scrollList'>
+							<div className = 'newsfeed' >
 								<InfiniteList data={this.props} />
 							</div>
 								{/*

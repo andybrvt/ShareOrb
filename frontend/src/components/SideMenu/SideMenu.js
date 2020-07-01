@@ -120,7 +120,7 @@ class SideMenu extends React.Component {
 
       // this is where how big the color behind the news feed posts are
         <Layout className="site-layout" style={{
-          background:'#fafafa',
+          background:'#f5f5f5',
           display:'flex',
 
         }}>
