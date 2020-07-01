@@ -98,10 +98,10 @@ main {
 /* Container that holds Calendar */
 .calendarContainer{
   position: relative;
-  right: 180px;
+  right: 150px;
   width: 1395px;
   height: 920px;
-  bottom: 70px;
+  bottom: 7px;
   /* background-color: yellow; */
   display: flex;
 }
@@ -874,6 +874,7 @@ to make it adjustable */
   grid-column-gap: 1px;
   border-bottom: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
+  /* background-color: red; */
 }
 
 .calendar .body .yearRow {
