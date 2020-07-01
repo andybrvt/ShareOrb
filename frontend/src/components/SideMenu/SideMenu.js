@@ -113,12 +113,16 @@ class SideMenu extends React.Component {
         col-2
       </Col>
       <Col span={2}>col-2</Col>
-      <Col span={16}>
-      <Layout>
+      <Col span={16} >
+      <Layout
+        >
 
 
+      // this is where how big the color behind the news feed posts are
         <Layout className="site-layout" style={{
-          backgroundColor: 'white'
+          background:'#fafafa',
+          display:'flex',
+
         }}>
 
           {/* length of banner from the very top*/}

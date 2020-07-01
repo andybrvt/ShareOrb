@@ -44,7 +44,7 @@ class NewsFeedView extends React.Component {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
-			<div>
+			<div style={{background:'white', padding:100}}>
 			{isLoggedIn ?
 
 
@@ -85,7 +85,7 @@ class NewsFeedView extends React.Component {
 					 <div>
 
 					 		<NewsFeedFormPost data = {this.props}/>
-							<div className = 'infinite-scrollList'>d
+							<div className = 'infinite-scrollList'>
 								<InfiniteList data={this.props} />
 							</div>
 								{/*

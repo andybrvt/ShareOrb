@@ -34,9 +34,12 @@ class BaseRouter extends React.Component {
 		return (
 
 
-      <div>
+      <div class="backgroundofEverything"  style={{background:'red',minHeight:'100%',}}>
         { this.props.isAuthenticated?
         <SideMenu>
+
+
+
         <Route exact path = '/home'  render={(props) => <ArticleList {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
         <Route exact path = '/signup/' component= {Signup} />

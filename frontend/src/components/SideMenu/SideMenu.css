@@ -16,14 +16,7 @@
   margin: 16px;
 }
 
-.site-layout{
-  position: relative;
-  top: 0px;
-  /* background-color: red; */
-  /* overflow: hidden; */
-  height: 1300px;
-  /* magic numbre is 982 for height  */
-}
+
 
 .site-layout .site-layout-background {
   background: #fff;
