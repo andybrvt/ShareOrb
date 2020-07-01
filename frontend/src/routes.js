@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import ArticleList from './containers/ArticleListView';
+import ArticleList from './containers/NewsFeedView.js';
 import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/LoginPage/Login';
 import Signup from './containers/Signup';

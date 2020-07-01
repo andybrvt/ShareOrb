@@ -14,7 +14,7 @@ import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
 // Function: Holds Forms3 and the Infinite scroll
-class ArticleList extends React.Component {
+class NewsFeedView extends React.Component {
 
 	state={
 		profileList:[],
@@ -53,7 +53,7 @@ class ArticleList extends React.Component {
 
 
 						<div className = 'newsfeedTop' style={{marginBottom:30}}>
-							<Row gutter={20}>
+							<Row gutter={32}>
 								<Col span={8}>
 									<Card title="Write a Post" bordered={false}>
 										Write a Post
@@ -78,6 +78,8 @@ class ArticleList extends React.Component {
 									</Card>
 								</Col>
 							</Row>
+
+
 						</div>
 
 					 <div>
@@ -125,4 +127,4 @@ const mapDispatchToProps = dispatch => {
     grabUserCredentials: () => dispatch(actions.grabUserCredentials()),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsFeedView);
