@@ -80,6 +80,7 @@ class EditEventPopUp extends React.Component {
       start_time: start_date,
       end_time: end_date,
       location: values.location,
+      color: values.eventColor,
       person: [this.props.id]
     })
     const instanceEvent = {
@@ -89,6 +90,7 @@ class EditEventPopUp extends React.Component {
       start_time: instance_start_date,
       end_time: instance_end_date,
       location: values.location,
+      color: values.eventColor,
       person: [this.props.id]
     }
     console.log(instanceEvent)
@@ -163,13 +165,14 @@ class EditEventPopUp extends React.Component {
       startTime: start_time,
       endTime: end_time,
       location: this.props.location,
+      eventColor: this.props.eventColor
 
     }
   }
 
 
   render () {
-    console.log(new Date(this.props.start_date))
+    console.log(this.props)
     return (
       <div>
       <RadiusBottomleftOutlined />
@@ -200,6 +203,7 @@ const mapStateToProps = state => {
     start_time: state.calendarEvent.start_time,
     end_time: state.calendarEvent.end_time,
     location: state.calendarEvent.location,
+    eventColor: state.calendarEvent.eventColor,
     calendarId: state.calendarEvent.calendarId,
     id: state.auth.id,
   }

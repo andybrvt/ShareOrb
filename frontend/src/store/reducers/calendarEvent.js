@@ -11,6 +11,7 @@ const initialState = {
   start_time: null,
   end_time: null,
   location: '',
+  eventColor: '',
   calendarId: '',
 }
 
@@ -34,6 +35,7 @@ const openEventModal = (state, action) => {
     start_time: start_time,
     end_time: end_time,
     location: action.oneEvent.location,
+    eventColor: action.oneEvent.color,
     calendarId: action.oneEvent.id
   });
 };

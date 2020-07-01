@@ -99,7 +99,12 @@ const renderStartDateSelect = (field) => {
 const renderEventColor = (field) => {
   // This is just used to render the color of the event
   return (
-    <Input type = 'color' className = 'reduxColor' name = 'eventColor' defaultValue = '#01D4F4'/>
+    <Input
+    type = 'color'
+    className = 'reduxColor'
+    name = 'eventColor'
+    defaultValue = '#01D4F4'
+    {...field.input}/>
   )
 }
 
