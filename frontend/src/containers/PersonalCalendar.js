@@ -231,13 +231,14 @@ class PersonalCalendar extends React.Component{
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
         if (toDoStuff.length > 0){
-          console.log(i)
+
           days.push(
             <div className = 'calendarNum' onClick = { () =>
               this.onDateClick(cloneDay)}>
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
+                console.log(item),
                   <div key={item.content}
                   className = 'monthEvent'
                   style = {{

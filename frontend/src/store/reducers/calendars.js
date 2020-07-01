@@ -83,6 +83,7 @@ const prevDay = (state, action) => {
 // you will index out the value in the list with the value you are trying to edit
 // you will then change that value
 const editEvent = (state, action) => {
+  
   return updateObject(state, {
     events: state.events.map(
       item => item.id === action.instanceEvent.id ? {

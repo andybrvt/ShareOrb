@@ -51,7 +51,6 @@ class EditEventPopUp extends React.Component {
 
 
   submit = (values) => {
-    console.log(values)
 
     // Similar to the submitting to addforms you still have to convert all the
     // days and times correctly in order to add them correctly into the backend
@@ -66,11 +65,12 @@ class EditEventPopUp extends React.Component {
 
     start_date = dateFns.addHours(start_date, start_time.firstHour)
     start_date = dateFns.addMinutes(start_date, start_time.firstMin)
+    const instance_start_date = dateFns.format(start_date, 'yyyy-MM-dd hh:mm:ss')
 
     end_date = dateFns.addHours(end_date, end_time.firstHour)
     end_date = dateFns.addMinutes(end_date, end_time.firstMin)
+    const instance_end_date = dateFns.format(end_date, 'yyyy-MM-dd hh:mm:ss')
 
-    console.log(start_date, end_date)
     // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
 
@@ -86,11 +86,12 @@ class EditEventPopUp extends React.Component {
       id: this.props.calendarId,
       title: values.title,
       content: values.content,
-      start_time: start_date,
-      end_time: end_date,
+      start_time: instance_start_date,
+      end_time: instance_end_date,
       location: values.location,
       person: [this.props.id]
     }
+    console.log(instanceEvent)
     this.props.editEvent(instanceEvent)
     this.props.close()
   }
