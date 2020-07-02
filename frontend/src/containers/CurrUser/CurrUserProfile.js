@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import { Tabs, Statistic } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
@@ -83,6 +83,9 @@ class CurrUserProfile extends React.Component{
                   Jane Faker<br />
                 </h4>
                 <h6 className="description">Music Producer</h6>
+                  <Statistic title="Connections" value={332} />
+                  <Statistic title="Following" value={23} />
+                  <Statistic title="Followers" value={112893} />
               </div>
             </div>
             <Row>

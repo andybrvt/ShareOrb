@@ -142,6 +142,11 @@ class SideMenu extends React.Component {
                onSearch={value => console.log(value)}
                style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350 }}
              />
+             <div>
+
+              heiiiiiiiiiiiii
+              `{localStorage.getItem('friends')}`
+             </div>
 
 
 
