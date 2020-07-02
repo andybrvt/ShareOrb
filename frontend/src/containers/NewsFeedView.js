@@ -44,7 +44,7 @@ class NewsFeedView extends React.Component {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
-			<div style={{background:'white', padding:100}}>
+			<div style={{background:'white', padding:60}}>
 			{isLoggedIn ?
 
 
@@ -73,8 +73,8 @@ class NewsFeedView extends React.Component {
 									</Card>
 								</Col>
 								<Col span={8}>
-									<Card title="View daily album" bordered={false}>
-										View daily album
+									<Card title="Create Event" bordered={false}>
+										Invite a friend
 									</Card>
 								</Col>
 							</Row>

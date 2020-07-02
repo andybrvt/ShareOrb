@@ -82,7 +82,7 @@ class SideMenu extends React.Component {
 
             <Menu.Item key="2"  icon={<VideoCameraOutlined />}>
               <Icon type="user" />
-              <span> Find friends </span>
+              <span> Explore </span>
               <Link to={"/userview"} />
             </Menu.Item>
 
