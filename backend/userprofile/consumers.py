@@ -17,6 +17,7 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # After going to def recieve, and if the command is 'fetch_friend_notifications'
     # it will then go to NotificationWebsocket.js which will check the command
     def fetch_notifications(self, data):
+
         user = self.scope['user']
         # print('first')
         # print(user)
@@ -32,7 +33,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 
     def refetch_notifications(self,data):
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId'])
-        print(notifications)
         serializer = NotificationSerializer(notifications, many=True)
         content = {
             'command': 'notifications',
@@ -49,7 +49,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
 # This function will be used to make the actual notification object
     def send_notification (self, data):
         user = self.scope['user']
-        print('data')
         if data['command'] == 'send_friend_notification':
             recipient = get_object_or_404(User, username=data['recipient'])
             actor = get_object_or_404(User, username=data['actor'])
@@ -273,6 +272,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print('hereadfa')
+        print(data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -293,5 +294,4 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         notification = event['notification']
         # THE PROBLEM IS HERE
         # Send message to WebSocket
-        print (notification)
         return self.send_json(notification)
