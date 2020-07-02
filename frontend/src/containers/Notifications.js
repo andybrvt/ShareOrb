@@ -52,7 +52,7 @@ class Notifications extends React.Component{
           callback();
           return;
         } else{
-            
+
             component.waitForSocketConnection(callback);
         }
       }, 100)

@@ -93,9 +93,10 @@ class EventModal extends React.Component {
     end_date = dateFns.addMinutes(end_date, end_time.firstMin)
 
 
-    const temp_start_date = dateFns.format(start_date, 'yyyy-MM-dd hh:mm:ss')
-    const temp_end_date = dateFns.format(end_date, 'yyyy-MM-dd hh:mm:ss')
-
+    const temp_start_date = dateFns.format(start_date, 'yyyy-MM-dd HH:mm:ss')
+    const temp_end_date = dateFns.format(end_date, 'yyyy-MM-dd HH:mm:ss')
+    console.log(start_date, end_date)
+    console.log(temp_start_date, temp_end_date)
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
 

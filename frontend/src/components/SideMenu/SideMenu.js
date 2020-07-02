@@ -22,6 +22,7 @@ import * as actions from '../../store/actions/auth';
 import PickEventSyncModal from '../../components/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
+import Notifications from '../../containers/Notifications';
 import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
@@ -147,7 +148,7 @@ class SideMenu extends React.Component {
              <Divider type="vertical" />
 
              <Button style={{marginRight:50}}>
-              <NotificationsDropDown/>
+              <Notifications {...this.props}/>
               </Button>
 
 
@@ -241,7 +242,8 @@ class SideMenu extends React.Component {
 const mapStateToProps = state => {
   return{
     notificationDrop: state.nav.showPopup,
-    showPickEventSyncModal: state.eventSync.showPickEventSyncModal
+    showPickEventSyncModal: state.eventSync.showPickEventSyncModal,
+    id: state.auth.id
   }
 }
 

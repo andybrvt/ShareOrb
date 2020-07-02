@@ -7,10 +7,11 @@ import {
    Input,
    Select
   } from 'antd';
-import { AimOutlined } from '@ant-design/icons';
+import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
 import './labelCSS/ReactForm.css';
 import * as dateFns from 'date-fns';
+import moment from 'moment';
 
 
 const { TextArea } = Input
@@ -47,13 +48,15 @@ class ReactAddEventForm extends React.Component {
     super(props);
     this.state = {
       dateRange: null,
+      startDate: moment(new Date()),
+      endDate: moment(new Date()),
       timeStart: "12:00 AM",
       timeEnd: "12:30 AM",
       title: '',
       content: '',
       location: '',
-      eventColor: '',
-      error: {}
+      eventColor: '#01D4F4',
+      error: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,6 +69,35 @@ class ReactAddEventForm extends React.Component {
   onDateChange = (time) => {
     this.setState({
       dateRange: time
+    })
+  }
+
+  onStartDateChange = (time) => {
+    // This is to handle the onChange
+    let startDate = time
+    let endDate = this.state.endDate
+
+    console.log(dateFns.isAfter(new Date(startDate),new Date(endDate)))
+
+    if (dateFns.isAfter(new Date(startDate),new Date(endDate))){
+      console.log('test1')
+      this.setState({
+        startDate: time,
+        endDate: time,
+      })
+    } else {
+      console.log('test2')
+      this.setState({
+        startDate: time
+      })
+    }
+
+  }
+
+  onEndDateChange = (time) => {
+    console.log(time)
+    this.setState({
+      endDate: time
     })
   }
 
@@ -251,69 +283,85 @@ class ReactAddEventForm extends React.Component {
   }
 
   handleValidation(){
+    // You will use this to disable or non disable the button, so because of that
+    // the true and false will be flipped
     let title = this.state.title
     let content = this.state.content
     let location = this.state.location
-    let dateRange = this.state.dateRange
+    let startDate = this.state.startDate
+    let endDate = this.state.endDate
     let errors = {}
-    let formIsValid = true
+    let buttonDisabled = false
 
     if (title === ''){
-      formIsValid = false
-      errors['title'] = 'Cannot be empty'
+      buttonDisabled = true
+      // errors['title'] = 'Cannot be empty'
     }
 
     if (content === ''){
-      formIsValid = false
-      errors['content'] = 'Cannot be empty'
+      buttonDisabled = true
+      // errors['content'] = 'Cannot be empty'
     }
 
     if (location === ''){
-      formIsValid = false
-      errors['location'] = 'Cannot be empty'
+      buttonDisabled = true
+      // errors['location'] = 'Cannot be empty'
     }
 
-    if (dateRange === null){
-      formIsValid = false
-      errors['dateRange'] = 'Cannot be empty'
+    if (startDate === null){
+      buttonDisabled = true
+
     }
 
-    this.setState ({
-      error: errors
-    })
+    if (endDate === null){
+      buttonDisabled = true
+    }
 
-    return formIsValid
+    if (dateFns.isAfter(new Date(startDate), new Date(endDate))){
+      buttonDisabled = true
+    }
 
+    console.log(buttonDisabled)
+    return buttonDisabled
+
+  }
+
+  onRed = () => {
+    let startDate = this.state.startDate
+    let endDate = this.state.endDate
+    let boxcolor = false
+
+    if (dateFns.isAfter(new Date(startDate),new Date(endDate))){
+      boxcolor = true
+    }
+
+    return boxcolor
   }
 
   onClear = () => {
     this.setState({
-      dateRange: null,
       title: '',
       content: '',
       location: '',
-      error: {}
+      error: false
     })
   }
 
   handleSubmit =(event) => {
     event.preventDefault();
-    if(this.handleValidation()){
       const submitContent = {
         title: this.state.title,
         content: this.state.content,
         location: this.state.location,
-        start_date: this.state.dateRange[0].toDate(),
-        end_date: this.state.dateRange[1].toDate(),
+        start_date: this.state.startDate.toDate(),
+        end_date: this.state.endDate.toDate(),
         start_time: this.state.timeStart,
         end_time: this.state.timeEnd,
         event_color: this.state.eventColor
       }
       this.onClear()
       this.props.onSubmit(submitContent)
-    } else {
-      console.log('Form has an error')
-    }
+
   }
 
   onFinish = values => {
@@ -413,9 +461,10 @@ class ReactAddEventForm extends React.Component {
     // The name of the inputt values are important
     // it allows for us to be able to input stuff into the form item
     // because it is what connents to the onChange for the states
-    console.log(this.state.eventColor)
+    console.log(this.state)
     const startChildren = this.renderStartTime();
     const endChildren = this.renderEndTime()
+    console.log(this.handleValidation())
     // for (let i = 10; i < 36; i++) {
     //   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
     // }
@@ -434,7 +483,6 @@ class ReactAddEventForm extends React.Component {
          placeholder = 'Title'
          value = {this.state.title}
          />
-         <span style = {{color: 'red'}}>{this.state.error["title"]}</span>
        </Form.Item>
        <Form.Item name="Content">
         <TextArea
@@ -446,7 +494,6 @@ class ReactAddEventForm extends React.Component {
         style = {{width: '500px'}}/>
         <Input type = 'color' className = 'reactColor' name = 'eventColor' defaultValue = '#01D4F4'/>
 
-        <span style = {{color: 'red'}}>{this.state.error['content']}</span>
       </Form.Item>
 
       <Form.Item name="Location" style = {{height: '10px'}}>
@@ -457,25 +504,42 @@ class ReactAddEventForm extends React.Component {
         value = {this.state.location}
         />
         <AimOutlined className = 'aim'/>
-       <span style = {{color: 'red'}}>{this.state.error['location']}</span>
      </Form.Item>
         <Form.Item
           name="range-time-picker"
          {...rangeConfig}
           className = 'timepicker'>
-          <RangePicker
-          onChange = {this.onDateChange}
-          value = {this.state.dateRange}
+          <DatePicker
+          className = ''
+          placeholder = 'startTime'
+          onChange = {this.onStartDateChange}
+          value = {this.state.startDate}
+          suffixIcon={<div></div>}
+          allowClear = {false}
+          bordered = {false}
+          style = {{width: '110px'}}/>
+          <ArrowRightOutlined />
+          <DatePicker
+          className = {` ${this.onRed() ? 'datePicker' : ''}`}
+          placeholder = 'endTime'
+          onChange = {this.onEndDateChange}
+          value = {this.state.endDate}
+          style = {{width: '110px '}}
+          allowClear = {false}
+          suffixIcon={<div></div>}
           />
           <Select
           name = 'timeStart'
+          className = ''
           style={{ width: 100 }}
           showArrow  = {false}
           onChange = {this.onStartTimeChange}
           value = {this.state.timeStart}>
             {startChildren}
           </Select>
+          <ArrowRightOutlined />
           <Select
+          className = ''
           name = 'timeEnd'
           style={{ width: 100 }}
           showArrow  = {false}
@@ -483,7 +547,6 @@ class ReactAddEventForm extends React.Component {
           value = {this.state.timeEnd}>
             {endChildren}
           </Select>
-          <span style = {{color: 'red'}}>{this.state.error['dateRange']}</span>
         </Form.Item>
         <Form.Item
           wrapperCol={{
@@ -493,12 +556,12 @@ class ReactAddEventForm extends React.Component {
           className = 'buttomHolder'
         >
         <div className = 'clearButtonCon'>
-          <Button onClick = {this.onClear}>
+          <Button onClick = {this.onClear}  >
             Clear Values
           </Button>
         </div>
         <div className = 'submitButtonCon'>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled = {this.handleValidation()}>
             Submit
           </Button>
         </div>
