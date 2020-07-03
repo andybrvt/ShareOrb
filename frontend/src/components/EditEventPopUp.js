@@ -57,8 +57,8 @@ class EditEventPopUp extends React.Component {
 
     const calendarId = this.props.calendarId
 
-    let start_date = values.dateRange[0].toDate()
-    let end_date = values.dateRange[1].toDate()
+    let start_date = values.startDate.toDate()
+    let end_date = values.endDate.toDate()
     const start_time = this.timeConvert(values.startTime)
     const end_time = this.timeConvert(values.endTime)
 
@@ -162,6 +162,8 @@ class EditEventPopUp extends React.Component {
       // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
       // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
       dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
+      startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
+      endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
       startTime: start_time,
       endTime: end_time,
       location: this.props.location,

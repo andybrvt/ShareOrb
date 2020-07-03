@@ -14,7 +14,7 @@ import {
 import moment from 'moment';
 import './labelCSS/ReduxForm.css';
 import * as dateFns from 'date-fns';
-import { AimOutlined } from '@ant-design/icons';
+import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 
 const { Option } = Select;
@@ -61,26 +61,19 @@ const renderTextArea = (field) => {
 
 // <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
 
-const renderDateField = (field) => {
-  console.log(field.input)
-
-  // BUGG!! WHEN YOU CLICK ON THE DATE IN THE DATE RANGE, IT GETS MESSED UP
-  // FOR SOME REASON BUT IF  YOU CLICK ANY WHERE BESIDES THAT THEN IT WILL
-  // BE OK
-
+const renderStartDate = (field) => {
   return (
-    <RangePicker
-     // format="YYYY-MM-DD"
-     onChange = {field.input.onChange}
-     value = {field.input.value}
-     className = 'datePicker'
-
-     // {...[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
-     // value = {[moment(field.input.value[0], 'YYYY-MM-DD'), moment(field.input.value[1], 'YYYY-MM-DD')]}
-     // value = {[field.input.value[0], field.input.value[1]]}
+    <DatePicker
+    onChange = {field.input.onChange}
+    value = {field.input.value}
+    style = {{width: '110px'}}
+    suffixIcon={<div></div>}
+    allowClear = {false}
      />
   )
 }
+
+
 
 const renderStartDateSelect = (field) => {
   // This const will render the start time of the event
@@ -160,10 +153,12 @@ const rangeConfig = {
   rules: [{ type: 'array', required: true, message: 'Please select time!' }],
 };
 
+const required = value => value ? undefined : 'Required'
+
+
 
 
 class ReduxEditEventForm extends React.Component{
-
 
   handleStartTimeChange = (event, value) => {
     const { change } = this.props
@@ -330,7 +325,41 @@ class ReduxEditEventForm extends React.Component{
     )
   }
 
+  onRed = () => {
+    let startDate = this.props.startDate
+    let endDate = this.props.endDate
+    let boxcolor = false
 
+    if (dateFns.isAfter(new Date(startDate),new Date(endDate))){
+      boxcolor = true
+    }
+
+    return boxcolor
+  }
+
+
+  renderEndDate = (field) => {
+    return (
+      <DatePicker
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+      style = {{width: '110px'}}
+      suffixIcon={<div></div>}
+      allowClear = {false}
+      className = {` ${this.onRed() ? 'datePicker' : ''}`}/>
+    )
+  }
+
+  onStartDateChange = (event, value) => {
+    const { change } = this.props
+
+    // So this is where the end Date will be changed if the startDate or endDate
+    // seems to be ahead of the endDate
+    console.log(value)
+    if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
+      change('endDate', value)
+    }
+  }
 
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
@@ -408,7 +437,7 @@ class ReduxEditEventForm extends React.Component{
     render(){
       console.log(this.props)
       // handleSubmit will actually run this.prop.onSubmit
-      const {handleSubmit} = this.props;
+      const {handleSubmit, pristine, invalid} = this.props;
       // For the component of the fields you can create your own stateles function
       // to be put in there but it has to be outisde of your render
       // You can call an <input/> into the field component
@@ -422,6 +451,8 @@ class ReduxEditEventForm extends React.Component{
             component= {renderField}
             type= 'text'
             placeholder = 'Title'
+            onChange = {this.onFieldChange}
+            validate = {required}
             />
           </div>
           <div className  = 'reduxContent'>
@@ -429,10 +460,17 @@ class ReduxEditEventForm extends React.Component{
             name = 'content'
             component= {renderTextArea}
             type= 'text'
-            placeholder = 'Description'/>
+            placeholder = 'Description'
+            validate = {required}
+            />
           </div>
           <div className = 'reduxLocation'>
-            <Field name = 'location' component= {renderField} type= 'text'/>
+            <Field
+            name = 'location'
+            component= {renderField}
+            type= 'text'
+            validate = {required}
+            />
             <AimOutlined className = 'aim'/>
             <Field
               name = 'eventColor'
@@ -441,10 +479,17 @@ class ReduxEditEventForm extends React.Component{
           </div>
           <div className = 'reduxDateRange'>
             <br />
-            <Field
-            name = 'dateRange'
-            component = {renderDateField}
-            type = 'date'
+             <Field
+             name = 'startDate'
+             component = {renderStartDate}
+             onChange = {this.onStartDateChange}
+             type = 'date'
+             />
+             <ArrowRightOutlined />
+             <Field
+             name = 'endDate'
+             component = {this.renderEndDate}
+             type = 'date'
              />
           </div>
           <div className = 'reduxTimePicker'>
@@ -454,6 +499,7 @@ class ReduxEditEventForm extends React.Component{
             onChange = {this.handleStartTimeChange}>
               {renderStartTime()}
             </Field>
+            <ArrowRightOutlined />
             <Field
             name = 'endTime'
             onChange = {this.handleEndTimeChange}
@@ -472,6 +518,7 @@ class ReduxEditEventForm extends React.Component{
           type = 'primary'
           onClick = {handleSubmit}
           style = {{left: '10px', fontSize: '15px'}}
+          disabled = {pristine || invalid || this.onRed()}
           >Save</Button>
           </div>
         </form>
@@ -510,6 +557,11 @@ const selector = formValueSelector('edit event')
 // be dispatched in into the reducers then the reduces will change the states and then if there is
 // an onchange or whatever, changes the Fields in the forms
 export default connect(state =>({
+  title: selector(state, 'title'),
+  content: selector (state, 'content'),
+  location: selector (state, 'content'),
   startTime: selector(state, 'startTime'),
   endTime: selector(state, 'endTime'),
+  startDate: selector(state, 'startDate'),
+  endDate: selector(state, 'endDate')
 }))(ReduxEditEventForm);

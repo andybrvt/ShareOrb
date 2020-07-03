@@ -66,10 +66,18 @@
   padding-bottom: 10px;
 }
 
-.reduxDateRange .datePicker{
+.reduxDateRange .endDate{
   /* padding-top: 20px; */
   width: 300px;
 }
+
+.reduxDateRange .datePicker {
+  border: 1px solid red;
+  border-radius: 5px;
+  
+}
+
+
 .reduxTimePicker {
   /* background-color: red; */
   width: 300px;
