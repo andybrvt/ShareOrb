@@ -7,11 +7,12 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
   HeartTwoTone,
+  SearchOutlined,
   LogoutOutlined, SettingOutlined,
 } from '@ant-design/icons'
 import {Link, withRouter} from 'react-router-dom';
 import testPic from './antd.png';
-import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider} from 'antd';
+import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider, AutoComplete} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
@@ -33,6 +34,7 @@ const { Search } = Input;
 class SideMenu extends React.Component {
   state = {
     collapsed: false,
+    dataSource: ['Burns Bay Road', 'Downing Street', 'Wall Street'],
   };
 
   toggle = () => {
@@ -48,6 +50,12 @@ class SideMenu extends React.Component {
     const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.props)
+
+
+
+    const { dataSource } = this.state;
+
+
 
     return (
       <div style={{marginBottom:30}}>
@@ -140,8 +148,25 @@ class SideMenu extends React.Component {
             <Search
                placeholder="Search"
                onSearch={value => console.log(value)}
-               style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350 }}
-             />
+               style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350 }}>
+
+             </Search>
+
+
+
+             <AutoComplete
+               dataSource={dataSource}
+               filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+             />;
+              <SearchOutlined
+                key="Icon"
+                style={{
+                  cursor: 'pointer',
+                }}
+              />
+
+
+
              <div>
 
               heiiiiiiiiiiiii
