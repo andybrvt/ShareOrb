@@ -32,16 +32,24 @@ const { Search } = Input;
 
 
 class SideMenu extends React.Component {
-  state = {
-    collapsed: false,
-    dataSource: ['Burns Bay Road', 'Downing Street', 'Wall Street'],
-  };
-
+  constructor() {
+    super();
+    this.state = {
+      dataSource: [],
+    };
+  }
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   };
+
+
+  handleSearch = (value) => {
+    this.setState({
+      dataSource: localStorage.getItem('friends').split(',')
+    });
+  }
 
   render() {
     const currentDay = new Date()
@@ -50,7 +58,8 @@ class SideMenu extends React.Component {
     const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.props)
-
+    console.log(localStorage)
+    console.log(localStorage.getItem('friends').split(','))
 
 
     const { dataSource } = this.state;
@@ -145,33 +154,16 @@ class SideMenu extends React.Component {
 
 
 
-            <Search
-               placeholder="Search"
-               onSearch={value => console.log(value)}
-               style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350 }}>
-
-             </Search>
-
-
-
              <AutoComplete
                dataSource={dataSource}
                filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-             />;
-              <SearchOutlined
-                key="Icon"
-                style={{
-                  cursor: 'pointer',
-                }}
-              />
-
-
-
-             <div>
-
-              heiiiiiiiiiiiii
-              `{localStorage.getItem('friends')}`
-             </div>
+               onSearch={this.handleSearch}
+               dropdownClassName="certain-category-search-dropdown"
+               dropdownMatchSelectWidth={500}
+               style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350  }}
+             >
+            <Input.Search size="large" placeholder="Search" />
+          </AutoComplete>
 
 
 
