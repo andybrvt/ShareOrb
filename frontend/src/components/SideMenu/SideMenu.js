@@ -58,8 +58,7 @@ class SideMenu extends React.Component {
     const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.props)
-    console.log(localStorage)
-    console.log(localStorage.getItem('friends').split(','))
+
 
 
     const { dataSource } = this.state;
@@ -69,9 +68,7 @@ class SideMenu extends React.Component {
     return (
       <div style={{marginBottom:30}}>
 
-       <Row>
 
-      <Col span={1}>
       <Sider trigger={null} collapsible collapsed={this.state.collapsed}style={{
         backgroundColor: 'white',
         height: '100vh',
@@ -87,7 +84,7 @@ class SideMenu extends React.Component {
            defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           mode="inline"
-          theme="light"
+          theme="dark"
           >
 
 
@@ -128,15 +125,13 @@ class SideMenu extends React.Component {
 
 
         </Sider>
-        col-2
-      </Col>
-      <Col span={2}>col-2</Col>
-      <Col span={16} >
-      <Layout
-        >
 
 
-      // this is where how big the color behind the news feed posts are
+
+      <Layout>
+
+
+      // outer boundary
         <Layout className="site-layout" style={{
           background:'#f5f5f5',
           display:'flex',
@@ -240,18 +235,11 @@ class SideMenu extends React.Component {
           </Content>
         </Layout>
       </Layout>
-      </Col>
 
 
-      <Col span={4}>col-4
-      {/*
-      <SuggestedFriends/>
-      */}
 
 
-      </Col>
 
-      </Row>
       <div class="newsfeed">
 
       </div>
