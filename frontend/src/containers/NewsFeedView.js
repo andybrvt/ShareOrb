@@ -44,61 +44,114 @@ class NewsFeedView extends React.Component {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		return (
-			<div style={{background:'white', padding:60}}>
+			<div>
+			{/*
+			<Row>
+			<Col span={4}>col-4</Col>
+
+
+      <Col span={32}>col-8</Col>
+
+
+			<div  style={{marginBottom:30}}>
+				<Row gutter={32}>
+					<Col span={8}>
+						<Card title="Write a Post" bordered={false}>
+							Write a Post
+						</Card>
+					</Col>
+					<Col span={8}>
+						<Card title="Upload a picture" bordered={false}>
+							<	Dragger >
+								<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
+									<InboxOutlined />
+								</p>
+
+									Browse or drag file
+
+
+							</Dragger>,
+						</Card>
+					</Col>
+					<Col span={8}>
+						<Card title="Create Event" bordered={false}>
+							Invite a friend
+						</Card>
+					</Col>
+				</Row>
+
+
+
+
+			</div>
+
+			</Row>
+			*/}
+
+
 			{isLoggedIn ?
 
 
 
+
+				<Row>
+
+
+
+		<Col span={30}>
+
+
+
+				<div>
+
 					<div>
 
 
-						<div className = 'newsfeedTop' style={{marginBottom:30}}>
-							<Row gutter={32}>
-								<Col span={8}>
-									<Card title="Write a Post" bordered={false}>
-										Write a Post
-									</Card>
-								</Col>
-								<Col span={8}>
-									<Card title="Upload a picture" bordered={false}>
-										<	Dragger >
-											<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
-												<InboxOutlined />
-											</p>
 
-									      Browse or drag file
+						<div style={{background:'white', padding:60}}>
+						<Row>
+							<Col span={8}>col-8</Col>
+
+							<Col span={8}>col-8</Col>
+							<Col span={8}>col-8</Col>
+
+							<div>
 
 
-										</Dragger>,
-									</Card>
-								</Col>
-								<Col span={8}>
-									<Card title="Create Event" bordered={false}>
-										Invite a friend
-									</Card>
-								</Col>
-							</Row>
 
 
-						</div>
 
-					 <div>
 
-					 		<NewsFeedFormPost data = {this.props}/>
-							<div className = 'newsfeed' >
-								<InfiniteList data={this.props} />
-							</div>
-								{/*
-								<div class="rightBox">
-			 					 <Layouts/>
-			 				 </div>
-							 */
-						 	}
-					 </div>
+							 <div>
+
+									<NewsFeedFormPost data = {this.props}/>
+									<div className = 'newsfeed' >
+										<InfiniteList data={this.props} />
+									</div>
+										{/*
+										<div class="rightBox">
+										 <Layouts/>
+									 </div>
+									 */
+									}
+							 </div>
+							 </div>
+
+
+							 </Row>
+							 </div>
 					 </div>
 
 
 
+				</div>
+
+				col-8
+			</Col>
+
+
+
+				</Row>
 
 					 :
 
