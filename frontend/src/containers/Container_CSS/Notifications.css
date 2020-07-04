@@ -8,6 +8,11 @@
 .notificaitonListContainer{
   display: flex;
   /* background-color: red; */
+  height: 100px;
+}
+
+.notificaitonListContainer:hover{
+  background-color: gainsboro	;
 }
 
 .notificationIcon {

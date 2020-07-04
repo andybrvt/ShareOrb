@@ -77,8 +77,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_friend_event_sync':
             recipient = get_object_or_404(User, username = data['recipient'])
             actor = get_object_or_404(User, username = data['actor'])
-            minDate = data['minDate']
-            maxDate = data['maxDate']
+            minDate = data['startDate']
+            maxDate = data['endDate']
             notification = CustomNotification.objects.create(type="send_friend_event_sync", recipient = recipient, actor= actor, verb="wants to event sync with you",
             minDate = minDate, maxDate = maxDate)
         if data['command'] == 'send_decline_event_sync_notification':
@@ -151,8 +151,9 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             'command': 'send_friend_event_sync',
             'actor': data['actor'],
             'recipient': data['recipient'],
-            'maxDate': data['maxDate'],
-            'minDate': data['minDate']
+            'range': data['range'],
+            'startDate': data['startDate'],
+            'endDate': data['endDate']
         }
 
         self.send_event_sync_notification(content)
@@ -166,6 +167,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         minDate = data['minDate']
         maxDate = data['maxDate']
         notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
+        # You are deleting the current notification that you click accept or declien to
+        # and once you are done with that you then send the new notificaiton to the other person
         notification.delete()
         content = {
             'command': 'send_decline_event_sync_notification',

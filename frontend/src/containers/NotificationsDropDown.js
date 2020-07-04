@@ -11,6 +11,8 @@ import * as notificationsActions from '../store/actions/notifications';
 import * as eventSyncActions from '../store/actions/eventSync';
 import PickEventSyncModal from '../components/PickEventSyncModal';
 import * as dateFns from 'date-fns';
+import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
+
 
 // This one is for holding the notifications and all its function
 
@@ -57,6 +59,7 @@ class NotificationsDropDown extends React.Component{
       minDate: minDate,
       maxDate: maxDate
     }
+    // console.log(declineNotificationObject)
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
   }
 
@@ -160,10 +163,13 @@ class NotificationsDropDown extends React.Component{
             </span>
             <br />
             <span>
-            {notifications[i].minDate}
-            <br />
-            {notifications[i].maxDate}
+            {notifications[i].minDate.substring(0,10)}
+            <ArrowRightOutlined
+            style = {{position: 'relative',
+            bottom: '4px'}} />
+            {notifications[i].maxDate.substring(0,10)}
             </span>
+            <br />
             <Button type ="primary" onClick = {()=> this.onEventSyncAccept(
               notifications[i].recipient,
               notifications[i].actor.username,

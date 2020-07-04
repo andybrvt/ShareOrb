@@ -59,7 +59,7 @@ class SideMenu extends React.Component {
     const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.props)
     console.log(localStorage)
-    console.log(localStorage.getItem('friends').split(','))
+    // console.log(localStorage.getItem('friends').split(','))
 
 
     const { dataSource } = this.state;
