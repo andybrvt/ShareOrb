@@ -94,8 +94,12 @@ class NewsFeedView extends React.Component {
 
 
 
-				<Row>
-
+				<Row style = {{
+					display: 'flex',
+					// backgroundColor: 'blue',
+					position: 'relative',
+					left: '150px'
+				}}>
 
 
 		<Col span={30}>
@@ -107,7 +111,6 @@ class NewsFeedView extends React.Component {
 					<div>
 
 
-
 						<div style={{background:'white', padding:60}}>
 						<Row>
 							<Col span={8}>col-8</Col>
@@ -115,7 +118,7 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>col-8</Col>
 							<Col span={8}>col-8</Col>
 
-							<div>
+							<div >
 
 
 
@@ -123,7 +126,6 @@ class NewsFeedView extends React.Component {
 
 
 							 <div>
-
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />
@@ -149,7 +151,16 @@ class NewsFeedView extends React.Component {
 				col-8
 			</Col>
 
-
+			<div style = {{
+				backgroundColor: 'red',
+				height: '300px',
+				width: '300px',
+				// postion: 'fixed',
+				position: 'relative',
+				left:'20px'
+			}}>
+			hellow
+			</div>
 
 				</Row>
 

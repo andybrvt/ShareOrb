@@ -39,7 +39,7 @@ class PickEventSyncModal extends React.Component{
           // callback();
           return;
         } else {
-          
+
             component.waitForSocketConnection();
         }
       }, 100)
@@ -105,10 +105,12 @@ class PickEventSyncModal extends React.Component{
         <Modal
           centered
           footer = {null}
-          visible = {this.props.isVisble}
+          visible = {this.props.isVisible}
+          // visible = {true}
           onCancel = {this.props.close}
           width = {1500}>
           <PickEventSyncWeek />
+
         </Modal>
       </div>
     )

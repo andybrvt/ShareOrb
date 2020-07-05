@@ -246,7 +246,7 @@ class WeekCalendar extends React.Component{
               <div key= {item.content}  onClick = {() => this.onClickItem(item)} className ="weekEvent" style = {{
                 gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
                 gridRow: this.hourEventIndex(item.start_time, item.end_time, hourIndex),
-                backgroundColor: item.color 
+                backgroundColor: item.color
               }}>
                 <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
                    'HH:mm a')}</span>

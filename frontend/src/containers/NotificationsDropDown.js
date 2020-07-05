@@ -287,7 +287,8 @@ class NotificationsDropDown extends React.Component{
 
     return(
       <Dropdown
-      overlay={this.renderNotifications} trigger={['click']}>
+      overlay={this.renderNotifications}
+      trigger={['click']}>
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
           Notifications
           <DownOutlined style = {{

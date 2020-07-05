@@ -20,7 +20,7 @@ import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 
 import * as navActions from '../../store/actions/nav'
 import * as actions from '../../store/actions/auth';
-import PickEventSyncModal from '../../components/PickEventSyncModal';
+import PickEventSyncModal from '../PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';
@@ -244,6 +244,12 @@ class SideMenu extends React.Component {
 
       </div>
 
+      <div>
+        <PickEventSyncModal
+        // {... this.props}
+        isVisible = {this.props.showPickEventSyncModal}
+        close = {this.props.closePickEventSyncModal} />
+      </div>
      </div>
     );
   }

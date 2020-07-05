@@ -36,7 +36,7 @@ class PickEventSyncWeek extends React.Component{
 
   renderDays() {
     // This is just to render out the days in the date range
-    const dateFormat = 'iiii'
+    const dateFormat = 'iii'
     const dayFormat = 'd'
     const days = []
 
@@ -50,7 +50,7 @@ class PickEventSyncWeek extends React.Component{
         const cloneCloneMinDate = cloneMinDate
         days.push(
           <div
-          className = 'syncCol col-center'
+          className = 'syncCol col-center '
           key = {i}
           >
             {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
@@ -153,7 +153,7 @@ class PickEventSyncWeek extends React.Component{
             days.push(
               <div
                 style = {{background: this.color(i)}}
-                className = 'col hourcell'
+                className = 'syncCol hourcell'
                 onClick = {(e) => this.onDayHourClick(e, i, cloneDay, cloneHour)}
               >
               <span className = 'number'></span>
@@ -271,13 +271,19 @@ class PickEventSyncWeek extends React.Component{
     console.log(this.props)
     return (
       <div className = 'eventSyncCalendarContainer'>
-        <div className = 'timecol'>
-          {this.renderSide()}
-        </div>
-        <div className = 'calendar'>
-          {this.renderHeader()}
-          {this.renderDays()}
-          {this.renderWeekCell(this.props.filterEvent)}
+        <div className = 'syncCalendar'>
+          <div className = 'syncHeader'>
+            {this.renderHeader()}
+            {this.renderDays()}
+          </div>
+          <div className = 'syncBody'>
+            <div className = 'timecol'>
+              {this.renderSide()}
+            </div>
+            <div className = 'syncGrid'>
+            {this.renderWeekCell(this.props.filterEvent)}
+            </div>
+          </div>
         </div>
         <PickEventSyncForm onSubmit = {this.submit} />
       </div>
