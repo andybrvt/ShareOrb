@@ -131,36 +131,14 @@ class PickEventSyncWeek extends React.Component{
           // add it to the toDoStuff which will loopp thorugh each each cell then it will be
           // cleared out again
           for (let item = 0; item<events.length; item++){
-            // console.log(cloneDay)
             // console.log(new Date(events[item].start_time))
             // console.log(new Date(hour))
             // console.log(events[item].start_time)
             if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
               && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
-              // This if statement will get the event on the start day
             ) {toDoStuff.push(
               events[item]
             )}
-            if(dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
-              // This one is to get the box for the end date
-            ) {toDoStuff.push(
-              events[item]
-            )}
-            if(dateFns.isBefore(new Date(events[item].start_time), cloneDay)
-              && (dateFns.isAfter(new Date(events[item].end_time), cloneDay) || dateFns.isSameDay(new Date(events[item].end_time), cloneDay))
-              && dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              // This is for the days that goes from all the times in the start day to the end date bu
-            ) {toDoStuff.push(
-            events[item]
-          )}
-           if ((dateFns.isBefore(new Date(events[item].start_time), cloneDay) || dateFns.isSameDay(new Date(events[item].start_time), cloneDay))
-            && dateFns.isAfter(new Date(events[item].end_time), cloneDay)
-            && dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-            // This is for the reverse of the previous if statement
-          ) {toDoStuff.push(
-          events[item]
-        )}
           }
 
           // You can always have access to the events, you just got to loop through

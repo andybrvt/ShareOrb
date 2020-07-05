@@ -231,7 +231,7 @@ main {
   width: 50px;
   float: left;
   position:relative;
-  top: 40px;
+  top: 50px;
   /* background-color: red; */
 
 }
@@ -306,14 +306,16 @@ main {
 
 /* this is for the date time for week calendar */
 .calendarContainer .weekDayFlex-Container.timecol .body .cell:first-child{
-  /* border-top: 1px solid var(--border-color); */
+  /* border-top: 1px solid grey; */
+  /* background-color: red; */
 }
 
 /* time side for weekCalendar */
 .calendarContainer .weekDayFlex-Container .timecol .body .cell{
   position: relative;
+  top: 10px;
   height: 50px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid grey;
   overflow: hidden;
   cursor: pointer;
   transition: 0.25s ease-out;
@@ -324,7 +326,7 @@ main {
 .calendarContainer .dayFlex-Container .timecol .body .cell{
   position: relative;
   height: 50px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid grey;
   overflow: hidden;
   cursor: pointer;
   transition: 0.25s ease-out;

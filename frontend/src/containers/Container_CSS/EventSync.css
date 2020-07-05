@@ -12,22 +12,22 @@
   width: 50px;
   float: left;
   position:relative;
-  top: 127px;
+  top: 60px;
   height: 1000px;
   /* background-color: red; */
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .timecol .body .cell{
   position: relative;
-  height: 5.1em;
-  /* border-bottom: 2px solid var(--border-color); */
+  height: 60px;
+  border-bottom: 1px solid grey;
   overflow: hidden;
   cursor: pointer;
   transition: 0.25s ease-out;
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .timecol .body .cell:first-child{
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid grey;
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .timecol .body .cell .number {
@@ -48,7 +48,7 @@
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncHeader{
-  background-color: red;
+  /* background-color: red; */
   width: 1000px;
   position: relative;
   left: 50px;
@@ -79,6 +79,7 @@
   /* padding: .75em 0; */
   height: 40px;
   border-bottom: 1px solid var(--border-color);
+  border-left: 2px solid darkgrey;
   /* border: 1px solid; */
   width: 1000px;
   /* background-color: blue; */
@@ -99,13 +100,13 @@
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody {
-  background-color: red;
+  /* background-color: red; */
   display: flex;
   overflow: auto;
   height: 780px;
   border-top: 2px solid;
   border-color: darkgrey;
-  width: 1070px;
+  width: 1060px;
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body{
@@ -122,7 +123,7 @@
   /* overflow: hidden; */
   cursor: pointer;
   background: var(--neutral-color);
-  background-color: lightskyblue;
+  /* background-color: lightskyblue; */
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .nonhourcell{
