@@ -101,7 +101,16 @@ class NewsFeedView extends React.Component {
 					left: '150px'
 				}}>
 
-
+				<div style = {{
+					backgroundColor: 'white',
+					height: '500px',
+					width: '300px',
+					// postion: 'fixed',
+					position: 'relative',
+					right:'100px'
+				}}>
+				test
+				</div>
 		<Col span={30}>
 
 
@@ -153,13 +162,13 @@ class NewsFeedView extends React.Component {
 
 			<div style = {{
 				backgroundColor: 'red',
-				height: '300px',
+				height: '500px',
 				width: '300px',
 				// postion: 'fixed',
 				position: 'relative',
 				left:'20px'
 			}}>
-			hellow
+			<SuggestedFriends/>
 			</div>
 
 				</Row>

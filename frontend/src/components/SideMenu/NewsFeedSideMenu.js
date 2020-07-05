@@ -20,7 +20,7 @@ import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 
 import * as navActions from '../../store/actions/nav'
 import * as actions from '../../store/actions/auth';
-import PickEventSyncModal from '../PickEventSyncModal';
+import PickEventSyncModal from '../../components/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';
@@ -77,7 +77,7 @@ class SideMenu extends React.Component {
       }}
       className="appearBefore">
 
-              <img  class="logo" src={testPic}  style={{width:80, height:80}} />
+              <img  class="logo" src={testPic}  style={{width:100, height:100}} />
 
 
           <Menu style={{height:1000}}
@@ -88,27 +88,27 @@ class SideMenu extends React.Component {
           >
 
 
-          <Menu.Item key="1" style={{height:50}}>
+          <Menu.Item key="1">
             <Icon type="home" />
             <span> Home </span>
             <Link to={"/home"} />
           </Menu.Item>
 
 
-            <Menu.Item key="2"  icon={<VideoCameraOutlined />}  style={{height:50}}>
+            <Menu.Item key="2"  icon={<VideoCameraOutlined />}>
               <Icon type="user" />
               <span> Explore </span>
               <Link to={"/userview"} />
             </Menu.Item>
 
-            <Menu.Item key="3"  style={{height:50}}>
+            <Menu.Item key="3">
               <Icon type="inbox" />
               <span>Messages</span>
               <Link to={"chat/1"} />
             </Menu.Item>
 
 
-            <Menu.Item key="4"  style={{height:50}}>
+            <Menu.Item key="4">
               <Icon type="calendar" />
               <span>Personal Calendar </span>
               <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} />
@@ -130,83 +130,6 @@ class SideMenu extends React.Component {
 
       <Layout>
 
-      <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', marginLeft:300, background:'white' }}>
-        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-          className: 'trigger',
-          onClick: this.toggle,
-        })}
-
-
-
-
-         <AutoComplete
-           dataSource={dataSource}
-           filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-           onSearch={this.handleSearch}
-           dropdownClassName="certain-category-search-dropdown"
-           dropdownMatchSelectWidth={500}
-           style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350  }}
-         >
-        <Input.Search size="large" placeholder="Search" />
-      </AutoComplete>
-
-
-
-         <Divider type="vertical" />
-
-         <Button style={{marginRight:50}}>
-          <Notifications {...this.props}/>
-          </Button>
-
-
-         <Dropdown overlay={
-
-           <Menu selectedKeys={[]} >
-             { (
-               <Menu.Item key="center">
-                 <Link to="/current-user">
-                   <UserOutlined />
-                   Profile
-
-                 </Link>
-
-               </Menu.Item>
-             )}
-             { (
-               <Menu.Item key="settings">
-                 <SettingOutlined />
-                 Settings
-               </Menu.Item>
-             )}
-             { <Menu.Divider />}
-
-
-
-
-
-             <Menu.Item key="logout" onClick={this.props.logout}>
-               <Link to="/">
-                 <LogoutOutlined />
-                 Logout
-
-               </Link>
-
-             </Menu.Item>
-           </Menu>}>
-
-
-          <Button>
-
-           <span >
-             <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-             <span>{"admin"}</span>
-           </span>
-         </Button>
-       </Dropdown>
-
-
-
-      </Header>
 
       // outer boundary
         <Layout className="site-layout" style={{
@@ -217,22 +140,101 @@ class SideMenu extends React.Component {
 
           {/* length of banner from the very top*/}
 
+          <Header className="site-layout-background HeaderPosition appearBefore" style={{  fontSize:20,   position: 'fixed'  }}>
+            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              className: 'trigger',
+              onClick: this.toggle,
+            })}
+
+
+
+
+             <AutoComplete
+               dataSource={dataSource}
+               filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+               onSearch={this.handleSearch}
+               dropdownClassName="certain-category-search-dropdown"
+               dropdownMatchSelectWidth={500}
+               style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350  }}
+             >
+            <Input.Search size="large" placeholder="Search" />
+          </AutoComplete>
+
+
+
+             <Divider type="vertical" />
+
+             <Button style={{marginRight:50}}>
+              <Notifications {...this.props}/>
+              </Button>
+
+
+             <Dropdown overlay={
+
+               <Menu selectedKeys={[]} >
+                 { (
+                   <Menu.Item key="center">
+                     <Link to="/current-user">
+                       <UserOutlined />
+                       Profile
+
+                     </Link>
+
+                   </Menu.Item>
+                 )}
+                 { (
+                   <Menu.Item key="settings">
+                     <SettingOutlined />
+                     Settings
+                   </Menu.Item>
+                 )}
+                 { <Menu.Divider />}
 
 
 
 
 
-          <Content
+                 <Menu.Item key="logout" onClick={this.props.logout}>
+                   <Link to="/">
+                     <LogoutOutlined />
+                     Logout
+
+                   </Link>
+
+                 </Menu.Item>
+               </Menu>}>
 
 
-            style={{
+              <Button>
 
-              // backgroundColor: 'red'
-            }}
-          >
+               <span >
+                 <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+                 <span>{"admin"}</span>
+               </span>
+             </Button>
+           </Dropdown>
 
-              {this.props.children}
-          </Content>
+
+
+          </Header>
+
+
+
+          <Row>
+         <Col span={3} offset={3}>
+
+
+
+              <SuggestedFriends/>
+
+
+          </Col>
+
+
+           <Col span={10} offset={2}>{this.props.children}</Col>
+           <Col span={4}> <SuggestedFriends/> </Col>
+
+           </Row>
         </Layout>
       </Layout>
 
@@ -244,12 +246,6 @@ class SideMenu extends React.Component {
 
       </div>
 
-      <div>
-        <PickEventSyncModal
-        // {... this.props}
-        isVisible = {this.props.showPickEventSyncModal}
-        close = {this.props.closePickEventSyncModal} />
-      </div>
      </div>
     );
   }
