@@ -73,7 +73,7 @@ class SideMenu extends React.Component {
         backgroundColor: 'white',
         height: '100vh',
         position: 'fixed',
-
+      
       }}
       className="appearBefore">
 

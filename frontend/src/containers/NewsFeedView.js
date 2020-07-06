@@ -9,7 +9,7 @@ import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
 
-import { Row, Col, Card, Upload, Divider} from 'antd';
+import { Row, Col, Card, Upload, Divider, Checkbox} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
@@ -99,18 +99,23 @@ class NewsFeedView extends React.Component {
 					display: 'flex',
 					// backgroundColor: 'blue',
 					position: 'relative',
-					left: '150px'
+					marginLeft: '125px'
 				}}>
 
-				<div style = {{
+				<div class="createEventCSS" style = {{
 					backgroundColor: 'white',
-					height: '500px',
+					height: '400px',
 					width: '300px',
 					// postion: 'fixed',
 					position: 'relative',
-					right:'100px'
+					marginRight:40,
 				}}>
-				test
+
+
+				Create an Event
+
+
+				<Checkbox>Share with Public </Checkbox>
 				</div>
 		<Col span={30}>
 
