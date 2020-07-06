@@ -9,10 +9,11 @@ import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
 
-import { Row, Col, Card, Upload} from 'antd';
+import { Row, Col, Card, Upload, Divider} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
+import './NewsFeedView.css'
 // Function: Holds Forms3 and the Infinite scroll
 class NewsFeedView extends React.Component {
 
@@ -161,13 +162,20 @@ class NewsFeedView extends React.Component {
 			</Col>
 
 			<div style = {{
-				backgroundColor: 'red',
+				backgroundColor: 'white',
+
 				height: '500px',
-				width: '300px',
+				width: '350px',
 				// postion: 'fixed',
 				position: 'relative',
 				left:'20px'
-			}}>
+			}}
+
+			class="suggestFriendsCSS"
+
+			>
+			Suggested Friends
+			<Divider plain></Divider>
 			<SuggestedFriends/>
 			</div>
 

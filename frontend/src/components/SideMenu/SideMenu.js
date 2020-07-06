@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons'
 import {Link, withRouter} from 'react-router-dom';
 import testPic from './antd.png';
-import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider, AutoComplete} from 'antd';
+import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider, AutoComplete, Badge} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
@@ -145,7 +145,7 @@ class SideMenu extends React.Component {
            onSearch={this.handleSearch}
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={500}
-           style={{ marginLeft:150, marginLeft:100, marginRight:600, width: 350  }}
+           style={{ marginLeft:150, marginLeft:100, marginRight:400, width: 350  }}
          >
         <Input.Search size="large" placeholder="Search" />
       </AutoComplete>
@@ -153,6 +153,13 @@ class SideMenu extends React.Component {
 
 
          <Divider type="vertical" />
+
+
+         <span className="avatar-item" style={{marginRight:40}}>
+      <Badge count={8}>
+        <Avatar shape="square" icon={<UserOutlined />} />
+      </Badge>
+    </span>
 
          <Button style={{marginRight:50}}>
           <Notifications {...this.props}/>

@@ -34,7 +34,7 @@ class FriendRequestList extends React.Component {
     console.log(userID)
     authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+user)
     }
-    
+
 
   onClickDecline = (userID) => {
     const user = userID
@@ -55,7 +55,7 @@ class FriendRequestList extends React.Component {
         <List.Item.Meta
           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
           title={<a href="https://ant.design">{item.from_user}</a>}
-          description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          description="Suggested for you"
         />
 
         <Button type="primary" onClick ={() =>this.onClickAccept(item.from_user)}>Accept</Button>
