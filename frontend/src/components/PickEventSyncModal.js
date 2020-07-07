@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { authAxios } from './util';
 import PickEventSyncWeek from './PickEventSyncWeek';
+import PickEventSyncDay from './PickEventSyncDay';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
+import * as dateFns from 'date-fns';
 
 
 // Unlike the event sync modal, this is where you would pick the
@@ -109,7 +111,15 @@ class PickEventSyncModal extends React.Component{
           // visible = {true}
           onCancel = {this.props.close}
           width = {1550}>
+
+          { dateFns.differenceInCalendarDays(
+            new Date (this.props.maxDate),
+            new Date (this.props.minDate)
+          ) === 1 ?
+          <PickEventSyncDay />
+            :
           <PickEventSyncWeek />
+          }
 
         </Modal>
       </div>

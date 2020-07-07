@@ -40,9 +40,12 @@ class PickEventSyncWeek extends React.Component{
     const dayFormat = 'd'
     const days = []
 
+    console.log (new Date(this.props.minDate))
     let minDate = dateFns.addDays(new Date(this.props.minDate),1)
     let maxDate = dateFns.addDays(new Date(this.props.maxDate),1)
-
+    // Added one day so that you can compare them to make sure things are more accurate
+    // Plus when you do new date it think it goes back 7 hours, and since the max and min
+    // dates are at 00
     const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
     let cloneMinDate = this.props.minDate
 
@@ -102,6 +105,7 @@ class PickEventSyncWeek extends React.Component{
      let days = []
      // You will need the start day and the start hour
      // The start day will be the minDate
+
      let date = minDate
      const startHourDay = dateFns.startOfDay(date);
      const endHourDay = dateFns.endOfDay(date);
@@ -125,6 +129,7 @@ class PickEventSyncWeek extends React.Component{
        for (let i = counter; i< (counter+difference); i++){
           const cloneDay = date
           const cloneHour = hour
+          console.log(cloneDay, cloneHour)
           formattedHour = dateFns.format(hour, hourFormat)
           formattedDay = dateFns.format(date, dayFormat)
           // This loop will loop thorugh all the events and if the hour and day matches and it will
