@@ -113,8 +113,8 @@ def current_user(request):
 
 # Views from here and down are for friends
 
-# Grabs everyone but current user
-class UserList(generics.ListAPIView):
+# Grabs everyone but current user and friends
+class ExploreView(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
     def get_queryset(self):
         list = []
@@ -127,6 +127,26 @@ class UserList(generics.ListAPIView):
         # This is filtering by username in the list
         queryset = models.User.objects.exclude(username__in = list)
         return queryset
+
+
+# Grabs everyone but current user and friends
+class NewsFeedSuggestedFriends(generics.ListAPIView):
+    serializer_class = serializers.UserSerializer
+    def get_queryset(self):
+        list = []
+        temp=(self.request.user.friends.all())
+        print("all friends")
+        print(temp)
+        for i in temp:
+            list.append(i.username)
+        list.append(self.request.user)
+
+        # Your can exclude a list by using keyword __in
+        # This is filtering by username in the list
+        queryset = models.User.objects.exclude(username__in = list)[0:2]
+        return queryset
+
+
 
 
 
@@ -149,7 +169,7 @@ class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer
 	queryset = models.CustomNotification.objects.all()
 
-class onDeleteNotifcation(generics.RetrieveDestroyAPIView):
+class onDeleteNotification(generics.RetrieveDestroyAPIView):
     serializer_class = serializers.NotificationSerializer
     lookup_field = 'id'
     queryset = models.CustomNotification.objects.all()

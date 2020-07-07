@@ -103,7 +103,7 @@ class NewsFeedView extends React.Component {
 				}}>
 
 				<div class="createEventCSS" style = {{
-					backgroundColor: 'white',
+					backgroundColor: '#678fcc',
 					height: '400px',
 					width: '300px',
 					// postion: 'fixed',
@@ -111,11 +111,17 @@ class NewsFeedView extends React.Component {
 					marginRight:40,
 				}}>
 
+				<div style={{backgroundColor:'white', height: '300px',
+				width: '200px', marginTop:20, marginRight:30}}>
 
 				Create an Event
 
 
 				<Checkbox>Share with Public </Checkbox>
+
+				</div>
+
+
 				</div>
 		<Col span={30}>
 
@@ -181,6 +187,7 @@ class NewsFeedView extends React.Component {
 			>
 
 			<div style={{color:'black', fontSize:15
+
   }}>
 			People you may know
 			</div>

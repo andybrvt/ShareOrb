@@ -23,7 +23,10 @@ urlpatterns = [
 	path('<slug:username>/', views.UserDetailView.as_view()),
 	path('all-users', views.ListAll.as_view()),
 	path('friend-request-list', views.FriendRequestList.as_view(), name="friend_request"),
-	path('exclude-user', views.UserList.as_view()),
+
+	path('explore', views.ExploreView.as_view()),
+	path('suggestedFriends', views.NewsFeedSuggestedFriends.as_view()),
+	
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),
 	path('friend-request/accept/<slug:username>', views.AcceptFriendRequest.as_view(), name='accept_request'),
@@ -33,7 +36,7 @@ urlpatterns = [
 	path('remove-friend/<slug:username>', views.DeleteFriends.as_view(), name='delete_friend'),
 	path('friendnotificationrequest', views.FriendNotification.as_view(), name='userprofile-friend-notifications'),
 	path('add-like/<slug:id>/', views.AddOneLikeToPost.as_view(), name='curr post'),
-	path('notifications/delete/<slug:id>', views.onDeleteNotifcation.as_view(), name='delete notification'),
+	path('notifications/delete/<slug:id>', views.onDeleteNotification.as_view(), name='delete notification'),
 	path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='post comment'),
 
 
