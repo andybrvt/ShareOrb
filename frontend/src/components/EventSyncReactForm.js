@@ -1,7 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Form,  Select, Radio, Button} from 'antd';
+import {
+    Form,
+    Select,
+    Radio,
+    Button,
+    Input,
+    List,
+    Avatar
+  } from 'antd';
 import * as dateFns from 'date-fns';
+import './labelCSS/EventSync.css';
+
 
 
 const { Option } = Select
@@ -14,8 +24,19 @@ class EventSyncReactForm extends React.Component {
     this.state = {
       endDate: '',
       friend: '',
+      search: '',
       startDate: new Date(),
     }
+  }
+
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  onHandleChange = (e) => {
+    this.setState ({
+      search: e.target.value
+    })
   }
 
   onChange = e => {
@@ -30,6 +51,10 @@ class EventSyncReactForm extends React.Component {
     this.setState({
       friend: friend
     })
+  }
+
+  onFriendClick = (friend) => {
+    console.log(friend)
   }
 
   renderFriends = () => {
@@ -91,6 +116,12 @@ class EventSyncReactForm extends React.Component {
 
   render() {
     console.log(this.props)
+    console.log(this.state)
+    let friends = this.props.friends
+    let friend = this.state.search.trim().toLowerCase()
+    if (friend.length > 0){
+      friends = friends.filter(val => val.toLowerCase().match(friend))
+    }
     const radioStyle = {
       display: 'block',
       height: '30px',
@@ -103,20 +134,18 @@ class EventSyncReactForm extends React.Component {
     return (
       <Form
       onSubmit = {this.handleSubmit}
+      className = 'eventSyncForm'
       >
 
-      <Form.Item>
+      <Form.Item className = 'radioCon'>
         <Radio.Group onChange={this.onChange} value={this.state.endDate}>
           <Radio.Button
-          style = {{
-          height: '60px',
-          border: 'none',
-          borderLeft: '1px solid lightgrey'}}
+
           className = 'dayEsync'
           value={this.renderEndDay('day')}>
-            Day Event Sync
+            <span className = 'syncTitle'>Day Event Sync </span>
             <br />
-            <span>{
+            <span>({
               dateFns.format(new Date(), 'yyyy-MM-dd')
             } </span>
             -
@@ -126,21 +155,18 @@ class EventSyncReactForm extends React.Component {
                 dateFns.addDays(new Date(),1),
                 'yyyy-MM-dd'
               )
-            }
+            })
             </span>
           </Radio.Button>
           <br />
           <Radio.Button
-          style = {{
-          height: '60px',
-          border: 'none'}}
           className = 'weekEsync'
           value={this.renderEndDay('week')}
           >
-            Week Event Sync
+            <span className = 'syncTitle'> Week Event Sync </span>
             <br />
             <span>
-            {dateFns.format(new Date(), 'yyyy-MM-dd')}
+            ({dateFns.format(new Date(), 'yyyy-MM-dd')}
             </span>
             -
             <span>
@@ -149,24 +175,50 @@ class EventSyncReactForm extends React.Component {
                 dateFns.addWeeks(new Date(),1),
                 'yyyy-MM-dd'
               )
-            }
+            })
             </span>
           </Radio.Button>
         </Radio.Group>
       </Form.Item>
-      <Form.Item>
-      <Select
-      size='large'
-      style={{ width: 200 }}
-      onChange = {this.onFriendChange}
-      value = {this.state.friend}
-      >
-          {friendListChild}
-        </Select>
+      <Form.Item className = 'friendListCon'>
+      <Input
+        value = {this.state.search}
+        onChange = {this.onHandleChange}
+        type = 'text'
+        placeholder = 'Search Friends'
+       />
+       <List
+            className = 'friendList'
+            dataSource={friends}
+            renderItem={item => (
+              <List.Item
+              key={item.username}
+              className = {` friendItemHover  ${this.state.friend === item ? 'friendItem' : '' }`}
+              onClick = {() => this.onFriendChange(item)}>
+                <List.Item.Meta
+                  avatar={
+                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                  }
+                  title={<a href="https://ant.design">{this.capitalize(item)}</a>}
+                  // description={item.email}
+                />
+                <div>Content</div>
+              </List.Item>
+            )}
+          >
+      </List>
+
       </Form.Item>
 
-      <Form.Item>
-      <Button htmlType = 'submit'> Sync </Button>
+      <Form.Item className ='syncButtonCon'>
+      <Button
+      style = {{
+        backgroundColor:'dodgerblue',
+        color: 'white'
+      }}
+      className = 'syncButton'
+      htmlType = 'submit'
+      block> Sync </Button>
       </Form.Item>
       </Form>
     )

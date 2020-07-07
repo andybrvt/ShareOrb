@@ -1,0 +1,82 @@
+.eventSyncForm {
+  /* background-color: red; */
+}
+
+.eventSyncForm .radioCon{
+  /* background-color: red; */
+  position: relative;
+  top: 20px;
+}
+
+.eventSyncForm .friendListCon {
+  /* background-color: red; */
+}
+
+.eventSyncForm .radioCon .dayEsync {
+  /* background-color:  red; */
+  height: 60px;
+  width: 460px;
+  /* border: none; */
+  text-align: center;
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  /* border-left: 1px solid lightgrey */
+}
+
+.eventSyncForm .radioCon .dayEsync:hover{
+  background-color: gainsboro;
+  color: white;
+}
+
+
+.eventSyncForm .radioCon .dayEsync .syncTitle{
+  font-size: 25px;
+}
+
+.eventSyncForm .radioCon .weekEsync {
+  /* background-color: red; */
+  height: 60px;
+  width: 460px;
+  text-align: center;
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+  /* border: none; */
+}
+
+.eventSyncForm .radioCon .weekEsync:hover{
+  background-color: gainsboro;
+  color: white;
+}
+
+.eventSyncForm .radioCon .weekEsync:hover{
+  background-color: gainsboro;
+  color: white;
+}
+
+.eventSyncForm .radioCon .weekEsync .syncTitle {
+  font-size: 25px;
+}
+
+.eventSyncForm .friendListCon .friendList{
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 300px;
+}
+
+.eventSyncForm .friendListCon .friendList .friendItem {
+  background-color: gainsboro;
+}
+
+.eventSyncForm .friendListCon .friendList .friendItemHover{
+  /* background-color: red; */
+}
+
+.eventSyncForm .friendListCon .friendList .friendItemHover:hover {
+  background-color: gainsboro;
+}
+
+.eventSyncForm .syncButtonCon .syncButton{
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}

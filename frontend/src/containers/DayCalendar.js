@@ -2,7 +2,7 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Button, Tooltip } from 'antd';
+import { Button, Tooltip, List, message, Avatar } from 'antd';
 import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
 import EditEventPopUp from '../components/EditEventPopUp';
@@ -43,6 +43,8 @@ class DayCalendar extends React.Component{
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1)+'/'+day)
     }
   }
+
+
 
 // render the date on top
   renderHeader(){
@@ -129,6 +131,10 @@ class DayCalendar extends React.Component{
     const pickcolor = color[randomNum]
     return pickcolor
 
+  }
+
+  onDateClick = (date) => {
+    console.log(date)
   }
 
 // render all the hour cell within each day
