@@ -1,10 +1,10 @@
 .eventSyncCalendarContainer {
   position: relative;
   left: 15px;
-  width: 1385px;
+  width: 1285px;
   bottom: 0px;
   display: flex;
-  /* background-color: red; */
+  /* background-color: blue; */
 }
 
 
@@ -42,7 +42,7 @@
   display: block;
   position: relative;
   width: 90%;
-  background: var(--neutral-color);
+  /* background: var(--neutral-color); */
   /* background-color: blue; */
   /* border: 1px solid var(--border-color); */
 }

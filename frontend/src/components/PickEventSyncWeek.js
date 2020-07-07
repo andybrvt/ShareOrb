@@ -238,9 +238,6 @@ class PickEventSyncWeek extends React.Component{
     // event information, and both the user and then you will pass into the the websocket
     // stuff and then pass it into the backend into the consumer then create the new notificaiton
     // then group send it, then pass into redux in the front end (make sure to crate the callbacks)
-    console.log(this.state.selectedDate)
-    console.log(this.props.currentUser)
-    console.log(this.props.userFriend)
     // The value includes
     console.log(value)
     if (this.state.selectedDate === null){
@@ -254,6 +251,7 @@ class PickEventSyncWeek extends React.Component{
         title: value.title,
         content: value.content,
         location: value.location,
+        eventColor: value.eventColor,
         date: this.state.selectedDate,
         currentUser: this.props.currentUser,
         userFriend: this.props.userFriend
@@ -289,8 +287,15 @@ class PickEventSyncWeek extends React.Component{
     })
   }
 
+  getInitialValue = () => {
+    return {
+      eventColor:'#01D4F4'
+    }
+  }
+
 
   render() {
+    console.log(this.state)
     console.log(this.props)
     return (
       <div className = 'eventSyncCalendarContainer'>
@@ -308,7 +313,10 @@ class PickEventSyncWeek extends React.Component{
             </div>
           </div>
         </div>
-        <PickEventSyncForm onSubmit = {this.submit} />
+        <PickEventSyncForm
+        onSubmit = {this.submit}
+        initialValues = {this.getInitialValue()}
+        active = {this.state.active} />
       </div>
     )
   }

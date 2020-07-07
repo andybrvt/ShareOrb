@@ -451,7 +451,6 @@ class ReduxEditEventForm extends React.Component{
             component= {renderField}
             type= 'text'
             placeholder = 'Title'
-            onChange = {this.onFieldChange}
             validate = {required}
             />
           </div>

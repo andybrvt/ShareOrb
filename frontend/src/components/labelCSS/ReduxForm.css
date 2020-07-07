@@ -8,6 +8,14 @@
   padding-bottom: 30px;
 }
 
+.eventSyncPickerForm{
+  /* background-color: red; */
+  position: relative;
+  left: 20px;
+  top: 60px;
+  height: 350px;
+}
+
 .reduxTitle .box {
   /* background-color: red; */
   border: none;
@@ -74,7 +82,7 @@
 .reduxDateRange .datePicker {
   border: 1px solid red;
   border-radius: 5px;
-  
+
 }
 
 
@@ -93,4 +101,25 @@
   position: relative;
   left: 252px;
   top: 10px;
+}
+
+.eventSyncButton {
+  position: relative;
+  width: 350px;
+  left: 50px;
+  top: 30px;
+  /* background-color: red; */
+}
+
+.eventSyncButton .clearButton {
+  width: 100px;
+  position: absolute;
+  left: 80px;
+}
+
+.eventSyncButton .eventSyncButton {
+  width: 100px;
+  position: absolute;
+  left: 200px;
+  top: 0px;
 }

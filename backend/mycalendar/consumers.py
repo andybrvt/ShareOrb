@@ -22,13 +22,15 @@ class CalendarConsumer(JsonWebsocketConsumer):
         title = data['title'];
         content = data['content'];
         location = data['location'];
-        person = [currentUser, userFriend]
+        person = [currentUser, userFriend];
+        color = data['eventColor']
         newEvent = Event.objects.create(
             title = title,
             content = content,
             start_time = start_time,
             end_time = start_time,
-            location = location
+            location = location,
+            color = color
         )
         newEvent.person.set(person)
         serializer = EventSerializer(newEvent)
