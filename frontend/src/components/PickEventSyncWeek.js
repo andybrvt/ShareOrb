@@ -246,13 +246,16 @@ class PickEventSyncWeek extends React.Component{
       })
     } else {
       const notificationId = this.props.notificationId
+      const startTime = this.state.selectedDate
+      const endTime = dateFns.addHours(startTime, 1)
       const submitEvent = {
         command: 'add_sync_event',
         title: value.title,
         content: value.content,
         location: value.location,
         eventColor: value.eventColor,
-        date: this.state.selectedDate,
+        startDate: startTime,
+        endDate: endTime,
         currentUser: this.props.currentUser,
         userFriend: this.props.userFriend
       }
@@ -262,6 +265,7 @@ class PickEventSyncWeek extends React.Component{
         recipient: this.props.userFriend,
         date: this.state.selectedDate
       }
+      console.log(submitEvent)
       // So the webSocket is to send the info into the backend in tho the channles to make the
       // event for both parties
       CalendarEventWebSocketInstance.sendEvent(submitEvent);

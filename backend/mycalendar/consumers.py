@@ -18,7 +18,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
         # information
         currentUser = get_object_or_404(User, username = data['currentUser']);
         userFriend = get_object_or_404(User, username = data['userFriend']);
-        start_time = data['date'];
+        start_time = data['startDate'];
+        end_time = data['endDate']
         title = data['title'];
         content = data['content'];
         location = data['location'];
@@ -28,7 +29,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
             title = title,
             content = content,
             start_time = start_time,
-            end_time = start_time,
+            end_time = end_time,
             location = location,
             color = color
         )
