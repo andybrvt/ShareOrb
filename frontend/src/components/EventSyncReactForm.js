@@ -218,6 +218,8 @@ class EventSyncReactForm extends React.Component {
       }}
       className = 'syncButton'
       htmlType = 'submit'
+      disabled = {this.state.endDate === ''
+      || this.state.friend === '' }
       block> Sync </Button>
       </Form.Item>
       </Form>
