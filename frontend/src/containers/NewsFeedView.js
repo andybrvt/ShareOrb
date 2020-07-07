@@ -170,7 +170,7 @@ class NewsFeedView extends React.Component {
 				backgroundColor: 'white',
 
 				height: '500px',
-				width: '350px',
+				width: '380px',
 				// postion: 'fixed',
 				position: 'relative',
 				left:'20px'
@@ -179,7 +179,12 @@ class NewsFeedView extends React.Component {
 			class="suggestFriendsCSS"
 
 			>
-			Suggested Friends
+
+			<div style={{color:'black', fontSize:15
+  }}>
+			People you may know
+			</div>
+
 			<Divider plain></Divider>
 			<SuggestedFriends/>
 			</div>

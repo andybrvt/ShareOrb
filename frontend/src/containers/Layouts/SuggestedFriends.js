@@ -1,8 +1,13 @@
 import { List, Avatar, Button, Skeleton } from 'antd';
-
+import './SuggestedFriends.css';
+import Icon from '@ant-design/icons';
+import {
+DownloadOutlined,
+SearchOutlined
+} from '@ant-design/icons';
 import reqwest from 'reqwest';
 import React from 'react';
-const count = 3;
+const count = 4;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
 
 class SuggestedFriends extends React.Component {
@@ -70,7 +75,7 @@ class SuggestedFriends extends React.Component {
             lineHeight: '32px',
           }}
         >
-          <Button onClick={this.onLoadMore}>loading more</Button>
+          <Button onClick={this.onLoadMore}>Explore</Button>
         </div>
       ) : null;
 
@@ -83,7 +88,7 @@ class SuggestedFriends extends React.Component {
         dataSource={list}
         renderItem={item => (
           <List.Item
-            actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
+            actions={[<a key="list-loadmore-edit">edit</a>, ]}
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
@@ -91,9 +96,11 @@ class SuggestedFriends extends React.Component {
                   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 }
                 title={<a href="https://ant.design">{item.name.last}</a>}
-                description="Suggestion for you"
+                description="10 Followers"
               />
-              <div>content</div>
+
+                <Button id="follow-button"> + Follow </Button>
+
             </Skeleton>
           </List.Item>
         )}
