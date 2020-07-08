@@ -358,7 +358,12 @@ class WeekCalendar extends React.Component{
     this.props.prevWeek()
   }
 
-  onBackClick = () => {
+  onYearClick = () => {
+    const selectYear = dateFns.getYear(this.props.currentDate).toString()
+    this.props.history.push('/personalcalendar/'+selectYear)
+  }
+
+  onMonthClick = () => {
     const selectYear = dateFns.getYear(this.props.currentDate).toString()
     const selectMonth = (dateFns.getMonth(this.props.currentDate)+1).toString()
     this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
@@ -397,16 +402,35 @@ class WeekCalendar extends React.Component{
           close = {() => this.props.closeEventSyncModal()}
         />
         <div className = 'miniCalContainer'>
-        <Button type="primary" onClick = {this.onAddEvent}>
-        Add Event
-        </Button>
-          <MiniCalendar {...this.props}/>
-          <Button type="primary" shape="circle" onClick = {this.onBackClick}>
-          M
+          <Button
+          // type="primary"
+          className = 'addEventButton'
+          onClick = {this.onAddEvent}>
+          Add Event
           </Button>
-          <Button type = 'primary' onClick = {this.openEventSyncModal}>
+          <MiniCalendar {...this.props}/>
+          <Button
+          type = 'primary'
+          className = 'miniEventSyncButton'
+          onClick = {this.openEventSyncModal}>
             Event Sync
           </Button>
+          <div className = 'timeLayerCon'>
+            <Button
+             type="primary"
+             shape="round"
+             className = 'yearButton'
+             onClick = {this.onYearClick}>
+            Year
+            </Button>
+            <Button
+            type="primary"
+            shape="round"
+            className = 'monthButton'
+            onClick = {this.onMonthClick}>
+            Month
+            </Button>
+          </div>
         </div>
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>

@@ -305,22 +305,42 @@ class DayCalendar extends React.Component{
           close = {() => this.props.closeEventSyncModal()}
         />
         <div className = 'miniCalContainer'>
-        <Button type="primary" onClick = {this.onOpenEvent} >
+        <Button
+         // type="primary"
+         className = 'addEventButton'
+         onClick = {this.onOpenEvent} >
           Add Event
         </Button>
           <MiniCalendar {...this.props}/>
-          <Button type="primary" shape="circle" onClick = {this.onYearClick}>
-          Y
-          </Button>
-          <Button type="primary" shape="circle" onClick = {this.onMonthClick}>
-          M
-          </Button>
-          <Button type="primary" shape="circle" onClick = {this.onWeekClick}>
-          W
-          </Button>
-          <Button type = 'primary' onClick = {this.openEventSyncModal}>
+          <Button
+           type = 'primary'
+           className = 'miniEventSyncButton'
+          onClick = {this.openEventSyncModal}>
             Event Sync
           </Button>
+          <div className = 'timeLayerCon'>
+          <Button
+          type="primary"
+          shape="round"
+          className = 'yearButton'
+          onClick = {this.onYearClick}>
+          Year
+          </Button>
+          <Button
+          type="primary"
+          shape="round"
+          className = 'monthButton'
+          onClick = {this.onMonthClick}>
+          Month
+          </Button>
+          <Button
+          type="primary"
+          shape="round"
+          className = 'weekButton'
+          onClick = {this.onWeekClick}>
+          Week
+          </Button>
+          </div>
         </div>
         <div className ='mainCalContainer'>
 

@@ -208,11 +208,17 @@ class YearCalendar extends React.Component{
         close = {() => this.props.closeEventSyncModal()}
       />
         <div className = 'miniCalContainer'>
-        <Button type = "primary" onClick={() => this.props.openDrawer()}>
+        <Button
+        // type = "primary"
+        className = 'addEventButton'
+        onClick={() => this.props.openDrawer()}>
           Add Event
         </Button>
           <MiniCalendar {...this.props}/>
-          <Button type = 'primary' onClick = {this.openEventSyncModal}>
+          <Button
+          type = 'primary'
+          className = 'miniEventSyncButton' 
+          onClick = {this.openEventSyncModal}>
             Event Sync
           </Button>
         </div>

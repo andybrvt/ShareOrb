@@ -494,16 +494,28 @@ class PersonalCalendar extends React.Component{
           close = {() => this.props.closeEventSyncModal()}
         />
         <div className = 'miniCalContainer'>
-        <Button type = "primary" onClick={() => this.props.openDrawer()}>
-          Add Event
-        </Button>
+          <Button
+          // type = "primary"
+          className = 'addEventButton'
+          onClick={() => this.props.openDrawer()}>
+            Add Event
+          </Button>
         <MiniCalendar {...this.props}/>
-        <Button type = "primary" shape = "circle" onClick = {this.onYearClick}>
-        Y
-        </Button>
-        <Button type = 'primary' onClick = {this.openEventSyncModal}>
+        <Button
+        type = 'primary'
+        className = 'miniEventSyncButton'
+        onClick = {this.openEventSyncModal}>
           Event Sync
         </Button>
+        <div className = 'timeLayerCon'>
+          <Button
+          type = "primary"
+          shape = "round"
+          className = 'yearButton'
+          onClick = {this.onYearClick}>
+          Year
+          </Button>
+        </div>
         </div>
         <div className = 'mainCalContainer'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
