@@ -137,7 +137,7 @@ main {
   height: 780px;
   border-top: 2px solid;
   border-color: darkgrey;
-  width: 1500px;
+  width: 1465px;
 }
 
 .row {
@@ -372,7 +372,7 @@ main {
   display: block;
   position: relative;
   left: 50px;
-  width: 100%;
+  width: 1415px;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
   /* background-color: black; */
@@ -471,7 +471,7 @@ main {
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
-  width: 1470px;
+  width: 1415px;
   /* background-color: red; */
 }
 
@@ -988,7 +988,7 @@ to make it adjustable */
   display: grid;
   border-bottom: 1px solid var(--border-color);
   /* grid-auto-flow: dense; */
-  grid-template-columns: repeat(7, 209px);
+  grid-template-columns: repeat(7, 200px);
   grid-template-rows: repeat(48, 24.2px);
   /* background-color: red; */
   grid-column-gap: 1px;
@@ -1143,8 +1143,8 @@ to make it adjustable */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 1470px;
-  background-color: blue;
+  width: 1405px;
+  /* background-color: blue; */
 }
 
 .calendar .backWeekBody .col {
