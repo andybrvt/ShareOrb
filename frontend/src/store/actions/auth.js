@@ -41,6 +41,7 @@ export const logout = () => {
   localStorage.removeItem("username");
   localStorage.removeItem('id')
   localStorage.removeItem('friends')
+  localStorage.removeItem('suggestedFriends')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -61,6 +62,19 @@ export const authLogin = (username, password) => {
   // const[username1, setUsername1] = useState('');
   return dispatch => {
     dispatch(authStart());
+
+
+
+
+
+
+
+        authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+          .then(res=> {
+            localStorage.setItem("suggestedFriends", (res.data.username));
+
+         });
+
 
         axios.post("http://127.0.0.1:8000/rest-auth/login/", {
           username: username,

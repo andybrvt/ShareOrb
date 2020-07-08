@@ -7,6 +7,10 @@ SearchOutlined
 } from '@ant-design/icons';
 import reqwest from 'reqwest';
 import React from 'react';
+import { authAxios } from '../../components/util';
+
+
+
 const count = 4;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
 
@@ -18,19 +22,35 @@ class SuggestedFriends extends React.Component {
     list: [],
   };
 
+
+  async componentDidMount(){
+
+    await authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+      .then(res=> {
+        console.log(res)
+        console.log(res.data)
+        this.setState({
+          list:res.data,
+       });
+     });
+   }
+
+    /*
+
   componentDidMount() {
     this.getData(res => {
+      console.log(res)
       this.setState({
         initLoading: false,
         data: res.results,
-        list: res.results,
+        list: res,
       });
     });
   }
 
   getData = callback => {
     reqwest({
-      url: fakeDataUrl,
+      url: 'http://127.0.0.1:8000/userprofile/suggestedFriends',
       type: 'json',
       method: 'get',
       contentType: 'application/json',
@@ -39,6 +59,10 @@ class SuggestedFriends extends React.Component {
       },
     });
   };
+
+  */
+
+
 
   onLoadMore = () => {
     this.setState({
@@ -66,45 +90,52 @@ class SuggestedFriends extends React.Component {
   render() {
     const { initLoading, loading, list } = this.state;
     const loadMore =
-      !initLoading && !loading ? (
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: 12,
-            height: 32,
-            lineHeight: '32px',
-          }}
-        >
-          <Button onClick={this.onLoadMore}>Explore</Button>
+       !initLoading && !loading ? (
+         <div
+           style={{
+             textAlign: 'center',
+             marginTop: 12,
+             height: 32,
+             lineHeight: '32px',
+           }}
+         >
+
+
         </div>
       ) : null;
 
     return (
-      <List
-        className="demo-loadmore-list"
-        loading={initLoading}
-        itemLayout="horizontal"
-        loadMore={loadMore}
-        dataSource={list}
-        renderItem={item => (
-          <List.Item
-            actions={[<a key="list-loadmore-edit">edit</a>, ]}
-          >
-            <Skeleton avatar title={false} loading={item.loading} active>
-              <List.Item.Meta
-                avatar={
-                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                }
-                title={<a href="https://ant.design">{item.name.last}</a>}
-                description="10 Followers"
-              />
 
-                <Button id="follow-button"> + Follow </Button>
 
-            </Skeleton>
-          </List.Item>
-        )}
-      />
+      <div>
+        <List
+          className="demo-loadmore-list"
+
+          itemLayout="horizontal"
+          loadMore={loadMore}
+          dataSource={list}
+          renderItem={item => (
+
+            <List.Item
+              actions={[<a key="list-loadmore-edit">edit</a>, ]}
+            >
+              <Skeleton avatar title={false} loading={item.loading} active>
+                <List.Item.Meta
+                  avatar={
+                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                  }
+                  title={<a href="https://ant.design"> {item.username}</a>}
+                  description="10 Followers"
+                />
+
+                  <Button id="follow-button"> + Follow </Button>
+
+              </Skeleton>
+            </List.Item>
+          )}
+        />
+        <Button onClick={this.onLoadMore}>Explore</Button>
+      </div>
     );
   }
 }
