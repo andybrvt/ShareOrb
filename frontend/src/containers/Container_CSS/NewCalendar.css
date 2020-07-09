@@ -147,6 +147,7 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  /* background-color: blue; */
 }
 
 .yearRow {
@@ -183,6 +184,10 @@ main {
   /* background-color: red; */
   /* border-left: 2px solid; */
   /* border-color: darkgrey; */
+}
+
+.weekCalendar .weekDays .weekcol:hover {
+ background-color: gainsboro;
 }
 
 .weekcol:first-child{
@@ -522,8 +527,10 @@ main {
 }
 
 .calendar .body .row .monthEvent:hover {
-  background-color: lightgrey;
-  transition: .25 ease-out;
+  /* background-color: lightgrey; */
+  /* transition: .25 ease-out; */
+  filter: brightness(1.2);
+
 }
 
 
@@ -707,6 +714,7 @@ main {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 100%;
+  /* width: 100px; */
   /* padding: 10em 10px; */
   border-bottom: 3px solid var(--border-color);
   /* background-color: red; */
@@ -728,6 +736,11 @@ main {
   flex-basis: 0;
   /* max-width: 80%; */
   text-align:center;
+  /* background-color: red; */
+}
+
+.miniCalContainer .miniCalendar .miniCol-center{
+
 }
 
 .miniCalContainer .miniCalendar .miniCol .miniMonth:hover{
@@ -869,7 +882,7 @@ main {
 
 
 /* This is for the week view and to control the cell size */
-.calendar .backWeekBody .hourcell {
+.calendar .scrollBody .backWeekBody .hourcell {
   position: relative;
   height: 50px;
   border-left: 1px solid var(--border-color);
@@ -877,7 +890,19 @@ main {
   overflow: hidden;
   cursor: pointer;
   background: var(--neutral-color);
+  /* background: red; */
   transition: 0.25s ease-out;
+  z-index: 1;
+}
+
+.calendar .scrollBody .backWeekBody .weekFlexRow{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  width: 100%;
+  /* background-color: blue; */
 }
 
 /* this is to hel format the list in each cell in the weekview */
@@ -904,6 +929,7 @@ main {
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
+  z-index: 1;
 }
 
 .calendar .body .daycell .uppertab {
@@ -989,7 +1015,7 @@ to make it adjustable */
   border-bottom: 1px solid var(--border-color);
   /* grid-auto-flow: dense; */
   grid-template-columns: repeat(7, 200px);
-  grid-template-rows: repeat(48, 24.2px);
+  grid-template-rows: repeat(48, 24.1px);
   /* background-color: red; */
   grid-column-gap: 1px;
   grid-row-gap: 1px;
@@ -1057,6 +1083,7 @@ to make it adjustable */
   background-color: white;
   border-right: 1px solid var(--border-color);
   height: 160px;
+  /* cursor: pointer; */
 }
 
 
@@ -1137,19 +1164,25 @@ to make it adjustable */
   transition: .5s ease-in;
 }
 
-.calendar .backWeekBody {
+.calendar .scrollBody .backWeekBody {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  column-count: 7;
+  column-gap: 0px;
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: wrap; */
   width: 1405px;
   /* background-color: blue; */
+
 }
 
-.calendar .backWeekBody .col {
+.calendar .scrollBody .backWeekBody .col {
   flex-grow: 0;
   flex-basis: calc(100%/7);
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+  /* flex-direction: column; */
   /* width: calc(100%/7); */
 }
 

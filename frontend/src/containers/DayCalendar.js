@@ -206,7 +206,9 @@ class DayCalendar extends React.Component{
             ))
         )}
       border.push(
-        <div className = 'daycell'>
+        <div
+        className = 'daycell'
+        onClick = {() => this.onHourClick(hour)}>
         </div>
       )
       toDoStuff = []
@@ -249,9 +251,10 @@ class DayCalendar extends React.Component{
   }
 
 
-  onHourClick = (day,events) =>{
-    console.log(day)
-    console.log(events)
+  onHourClick = () =>{
+    // console.log(day)
+    // console.log(events)
+    console.log('hello there')
   }
 
 // Use addDays function to change the day

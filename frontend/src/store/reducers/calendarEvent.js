@@ -4,6 +4,7 @@ import { updateObject } from '../utility'
 
 const initialState = {
   showModal: false,
+  addEvent: false,
   title: '',
   content: '',
   start_date: null,
@@ -18,16 +19,25 @@ const initialState = {
 const openEventModal = (state, action) => {
   // Remeber that when you first make the event the values that come in
   // are not a string
-  console.log(action.oneEvent.start_time)
-  const start_date = String(action.oneEvent.start_time).substring(0,10)
-  const end_date = String(action.oneEvent.end_time).substring(0,10)
-  const start_time = String(action.oneEvent.start_time).substring(11, 16)
-  const end_time = String(action.oneEvent.end_time).substring(11,16)
-  console.log(start_date)
+  console.log(action.oneEvent)
+  let start_date = null
+  let end_date = null
+  let start_time = null
+  let end_time = null
+
+
+  if(action.oneEvent.start_time !== '' && action.oneEvent.end_time !== ''){
+    start_date = String(action.oneEvent.start_time).substring(0,10)
+    end_date = String(action.oneEvent.end_time).substring(0,10)
+    start_time = String(action.oneEvent.start_time).substring(11, 16)
+    end_time = String(action.oneEvent.end_time).substring(11,16)
+  }
+
 
 
   return updateObject (state, {
     showModal: true,
+    addEvent: action.oneEvent.addEvent,
     title: action.oneEvent.title,
     content: action.oneEvent.content,
     start_date: start_date,

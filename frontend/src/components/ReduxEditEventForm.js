@@ -437,7 +437,7 @@ class ReduxEditEventForm extends React.Component{
     render(){
       console.log(this.props)
       // handleSubmit will actually run this.prop.onSubmit
-      const {handleSubmit, pristine, invalid} = this.props;
+      const {handleSubmit, pristine, invalid, reset} = this.props;
       // For the component of the fields you can create your own stateles function
       // to be put in there but it has to be outisde of your render
       // You can call an <input/> into the field component
@@ -507,19 +507,37 @@ class ReduxEditEventForm extends React.Component{
             </Field>
 
           </div>
-          <div className = 'reduxButton'>
-          <Button
-          onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
-          >
-          Delete
-          </Button>
-          <Button
-          type = 'primary'
-          onClick = {handleSubmit}
-          style = {{left: '10px', fontSize: '15px'}}
-          disabled = {pristine || invalid || this.onRed()}
-          >Save</Button>
-          </div>
+          { this.props.addEvent ?
+            <div className = 'reduxButton'>
+            <Button
+            onClick = {reset}
+            >
+            Clear
+            </Button>
+            <Button
+            type = 'primary'
+            onClick = {handleSubmit}
+            style = {{left: '10px', fontSize: '15px'}}
+            disabled = {pristine || invalid || this.onRed()}
+            >Add</Button>
+            </div>
+
+            :
+
+            <div className = 'reduxButton'>
+            <Button
+            onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
+            >
+            Delete
+            </Button>
+            <Button
+            type = 'primary'
+            onClick = {handleSubmit}
+            style = {{left: '10px', fontSize: '15px'}}
+            disabled = {pristine || invalid || this.onRed()}
+            >Save</Button>
+            </div>
+           }
         </form>
       )
     }

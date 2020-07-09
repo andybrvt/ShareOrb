@@ -73,28 +73,58 @@ class EditEventPopUp extends React.Component {
 
     // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
+    if (this.props.addEvent === false ){
+      authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
+        title: values.title,
+        content: values.content,
+        start_time: start_date,
+        end_time: end_date,
+        location: values.location,
+        color: values.eventColor,
+        person: [this.props.id]
+      })
+      const instanceEvent = {
+        id: this.props.calendarId,
+        title: values.title,
+        content: values.content,
+        start_time: instance_start_date,
+        end_time: instance_end_date,
+        location: values.location,
+        color: values.eventColor,
+        person: [this.props.id]
+      }
+      console.log(instanceEvent)
+      this.props.editEvent(instanceEvent)
+    } else if (this.props.addEvent === true){
+      authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+        title: values.title,
+        content: values.content,
+        start_time: start_date,
+        end_time: end_date,
+        location: values.location,
+        color: values.eventColor,
+        person: [this.props.id],
+      })
 
-    authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
-      title: values.title,
-      content: values.content,
-      start_time: start_date,
-      end_time: end_date,
-      location: values.location,
-      color: values.eventColor,
-      person: [this.props.id]
-    })
-    const instanceEvent = {
-      id: this.props.calendarId,
-      title: values.title,
-      content: values.content,
-      start_time: instance_start_date,
-      end_time: instance_end_date,
-      location: values.location,
-      color: values.eventColor,
-      person: [this.props.id]
+      // The event instance is pretty much used when you just recently added an
+      // event, so because of that you want to add the date in just as how the
+      // date and event will be added according to the loaded event
+
+
+      const instanceEvent = {
+        title: values.title,
+        content: values.content,
+        start_time: instance_start_date,
+        end_time: instance_end_date,
+        location: values.location,
+        color: values.eventColor,
+        person: [this.props.id]
+      }
+      // add color to addEvents in redux
+      this.props.addEvents(instanceEvent)
     }
-    console.log(instanceEvent)
-    this.props.editEvent(instanceEvent)
+
+
     this.props.close()
   }
 
@@ -198,6 +228,7 @@ class EditEventPopUp extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    addEvent: state.calendarEvent.addEvent,
     title: state.calendarEvent.title,
     content: state.calendarEvent.content,
     start_date: state.calendarEvent.start_date,
@@ -213,6 +244,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addEvents: (events) => dispatch(calendarActions.addEvent(events)),
     closePopup: () => dispatch(navActions.closePopup()),
     changeEvent: (e) => dispatch(calendarEventActions.changeCalendarEvent(e)),
     getEvents: () => dispatch(calendarActions.getUserEvents()),

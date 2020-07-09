@@ -155,7 +155,6 @@ class WeekCalendar extends React.Component{
 
   // USE THIS
   renderWeekCell(events){
-    console.log(events)
     // To explain the grid --> there is a big container that holds many rows and each
     // row is split into 7 columns and 2 rows and there is 24 rows and you will place the
     // information
@@ -173,6 +172,7 @@ class WeekCalendar extends React.Component{
     const dayFormat = 'd MMMM'
     // So this list will hold 24 items, each list for each hour
     const hours = []
+    const borderHolder = []
     let border = []
     // this list will hold all the events
     let toDoStuff = []
@@ -201,10 +201,11 @@ class WeekCalendar extends React.Component{
 
   for (let dayIndex = 0; dayIndex < 7; dayIndex++){
 
-    console.log(date)
     for (let hourIndex = 0; hourIndex< 24; hourIndex++){
-
-
+        const dayDay = date
+        const hourHour = hour
+        const clonedayIndex = dayIndex
+        const clonehourIndex = hourIndex
       for(let item = 0; item < events.length;item ++){
         const cloneDay = date
         const cloneHour = hour
@@ -216,12 +217,10 @@ class WeekCalendar extends React.Component{
         const endDate = new Date(events[item].end_time)
         const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-        console.log(dateFns.isSameDay(utcStart,cloneDay) && dateFns.isSameHour(utcStart,cloneHour))
         if (dateFns.isSameDay(utcStart,cloneDay) && dateFns.isSameHour(utcStart,cloneHour)){
           // So unlike the previous week calendar, we do not need to have a box on every grid
           // we just need to have all the events that fall into that week on that week and then with the
           // index we can start rearragning the events in that week calendar
-          console.log(dayIndex, hourIndex)
           toDoStuff.push(
             events[item]
           )
@@ -240,7 +239,6 @@ class WeekCalendar extends React.Component{
           // out in the weekBody
 
           // The day index represents the start column and the hour index represent the start row
-          console.log(dayIndex, hourIndex)
           days.push(
             toDoStuff.map(item => (
               <div key= {item.content}  onClick = {() => this.onClickItem(item)} className ="weekEvent" style = {{
@@ -258,23 +256,29 @@ class WeekCalendar extends React.Component{
           )
         }
         border.push(
-            <div className = 'col hourcell' >
+            <div
+            className = 'col hourcell'
+            onClick = {() => this.addEventClick(dayDay, hourHour)} >
             </div>
         )
         toDoStuff =[]
         hour = dateFns.addHours(hour, 1)
 
       }
-
+      // borderHolder.push(
+      //   <div className = ''>
+      //   {border}
+      //   </div>
+      // )
+      // border = []
       date = dateFns.addDays(date, 1)
 
     }
 
-    console.log(days)
     return(
       <div className = 'scrollBody'>
       <div className = 'backWeekBody'>
-    {border}
+      {border}
       </div>
       <div className= 'weekBody'>
           {days}
@@ -282,6 +286,35 @@ class WeekCalendar extends React.Component{
       </div>
     )
 
+
+  }
+
+  addEventClick = (day, hour) => {
+    console.log(day, hour)
+    // So we will be using the edit modal to add a new event in
+    // but because it requres certain objects we need to have a
+    // dicitonary that holds those specitic attribute so that we can
+    //  meet those requirements
+    // We only need the start and end time tho so all the other fields can
+    // be empty
+    const specificHour = dateFns.getHours(hour)
+    const startDate = dateFns.addHours (day, specificHour)
+    const endDate = dateFns.addHours(startDate , 1)
+    const finalStart = dateFns.format(startDate, 'yyyy-MM-dd HH:mm:ss')
+    const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
+
+    const subInEvent = {
+      addEvent: true,
+      title: '',
+      content: '',
+      start_time: finalStart,
+      end_time: finalEnd,
+      location: '',
+      color: '#01D4F4',
+      calendarId: ''
+    }
+    console.log(subInEvent)
+    this.props.openModal(subInEvent)
 
   }
 
@@ -301,7 +334,6 @@ class WeekCalendar extends React.Component{
     const end = new Date(end_time)
     const eventDay = new Date(day)
     const index = start_index + 1
-    console.log(eventDay)
 
     if (dateFns.isSameWeek(start, end)){
       const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
@@ -313,7 +345,6 @@ class WeekCalendar extends React.Component{
          return ratio
        } else if (dateFns.isSameWeek(end, eventDay)){
          const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+3
-         console.log(differentWeekDifference)
          return '1/'+differentWeekDifference
        } else {
          return '1/8'
@@ -377,10 +408,21 @@ class WeekCalendar extends React.Component{
   }
 
   onClickItem = oneEvent => {
+    console.log(oneEvent)
     // The one event you put in here will just be data on one event
     // it will be passed into the redux to calendarEvent openmodal and then
     // be sent to the intital state where it will then open the Edit event popup
-    this.props.openModal(oneEvent)
+    const eventObject = {
+      addEvent: false,
+      title: oneEvent.title,
+      content: oneEvent.content,
+      start_time: oneEvent.start_time,
+      end_time: oneEvent.end_time,
+      location: oneEvent.location,
+      color: oneEvent.color,
+      id: oneEvent.id
+    }
+    this.props.openModal(eventObject)
   }
 
   onAddEvent = () => {
