@@ -208,7 +208,7 @@ class DayCalendar extends React.Component{
       border.push(
         <div
         className = 'daycell'
-        onClick = {() => this.onHourClick(hour)}>
+        onClick = {() => this.onHourClick(cloneHour)}>
         </div>
       )
       toDoStuff = []
@@ -251,10 +251,28 @@ class DayCalendar extends React.Component{
   }
 
 
-  onHourClick = () =>{
+  onHourClick = (hour) =>{
     // console.log(day)
     // console.log(events)
-    console.log('hello there')
+    const finalStart = dateFns.format(hour, 'yyyy-MM-dd HH:mm:ss')
+    const endDate = dateFns.addHours(hour, 1)
+    const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
+    console.log(finalStart, finalEnd)
+
+    const subInEvent = {
+      addEvent: true,
+      title: '',
+      content: '',
+      start_time: finalStart,
+      end_time: finalEnd,
+      location: '',
+      color: '#01D4F4',
+      calendarId: ''
+    }
+    
+    this.props.openModal(subInEvent)
+
+
   }
 
 // Use addDays function to change the day
