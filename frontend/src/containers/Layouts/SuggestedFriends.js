@@ -31,6 +31,7 @@ class SuggestedFriends extends React.Component {
         console.log(res.data)
         this.setState({
           list:res.data,
+          data:res.data,
        });
      });
    }

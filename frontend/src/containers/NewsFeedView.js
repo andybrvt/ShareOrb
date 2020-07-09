@@ -103,7 +103,7 @@ class NewsFeedView extends React.Component {
 				}}>
 
 				<div class="createEventCSS" style = {{
-					backgroundColor: '#678fcc',
+					backgroundColor: 'white',
 					height: '400px',
 					width: '300px',
 					// postion: 'fixed',
@@ -111,8 +111,8 @@ class NewsFeedView extends React.Component {
 					marginRight:40,
 				}}>
 
-				<div style={{backgroundColor:'white', height: '300px',
-				width: '200px', marginTop:20, marginRight:30}}>
+				<div style={{backgroundColor:'#678fcc', height: '300px',
+				width: '200px', marginTop:30, marginLeft:60}}>
 
 				Create an Event
 
@@ -123,7 +123,7 @@ class NewsFeedView extends React.Component {
 
 
 				</div>
-		<Col span={30}>
+				<Col span={12}>
 
 
 
@@ -133,11 +133,22 @@ class NewsFeedView extends React.Component {
 
 
 						<div style={{background:'white', padding:60}}>
-						<Row>
-							<Col span={8}>col-8</Col>
-
-							<Col span={8}>col-8</Col>
-							<Col span={8}>col-8</Col>
+						<Row gutter={16}>
+							<Col span={8}>
+				        <Card title="Card title" bordered={false}>
+				          Card content
+				        </Card>
+				      </Col>
+				      <Col span={8}>
+				        <Card title="Card title" bordered={false}>
+				          Card content
+				        </Card>
+				      </Col>
+				      <Col span={8}>
+				        <Card title="Card title" bordered={false}>
+				          Card content
+				        </Card>
+				      </Col>
 
 							<div >
 
@@ -147,6 +158,32 @@ class NewsFeedView extends React.Component {
 
 
 							 <div>
+							 		<div class="card">
+
+										<div class="container">
+
+
+										<div class="fb-group-picrow">
+					            <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+					            <div class="fb-group-text">
+					                <h5 class="fbh5">
+
+					                <span>
+					                  test
+
+
+					                </span>
+
+
+					                </h5>
+					                <span class="fb-group-date"> 050520</span>
+
+					              </div>
+
+					            </div>
+										</div>
+										<Divider />
+									</div>
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />

@@ -184,7 +184,7 @@ class NewsfeedPost extends React.Component {
               </div>
 
             </div>
-            <div style={{marginTop:30}}>
+            <div style={{marginTop:30, marginRight:10,}}>
               <p>
 
                 {
