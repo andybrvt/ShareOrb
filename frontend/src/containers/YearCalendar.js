@@ -96,10 +96,14 @@ class YearCalendar extends React.Component{
       const monthCopy = month
         year.push(
         <div className = 'yearcol yearcell'>
+          <div
+          className = 'monthBox'
+          style = {{backgroundImage: this.getMonthColor(monthCopy)}} >
           <span
           className = 'monthText'
           onClick = {() => this.onMonthClick(monthCopy)}
           > {dateFns.format(month, dateFormat)}</span>
+          </div>
           {this.renderDayName()}
           {this.renderDayInMonth(month)}
         </div>
@@ -173,6 +177,35 @@ class YearCalendar extends React.Component{
     return <div className = 'monthcell'> {rows} </div>
   }
 
+  getMonthColor = (month) => {
+    console.log(month)
+    let monthNum = ''
+    if (month){
+      monthNum = dateFns.getMonth(month)
+      console.log(monthNum)
+    }
+    console.log(monthNum)
+    const listColor = [
+      'linear-gradient(to bottom right, #00008B , #8B0000)',
+      'linear-gradient(to bottom right, #ADD8E6 , #FFFF00)',
+      'linear-gradient(to bottom right, #ADD8E6 , #FFFFFF)',
+      'linear-gradient(to bottom right, #FFFF00 , #FF0000)',
+      'linear-gradient(to bottom right, #FFFF00 , #32CD32)',
+      'linear-gradient(to bottom right, #fffdd0 , #0000FF)',
+      'linear-gradient(to bottom right, #80461b , #FF0000)',
+      'linear-gradient(to bottom right, #FF0000 , #90EE90)',
+      'linear-gradient(to bottom right, #A0522D , #00008B)',
+      'linear-gradient(to bottom right, #FFA500 , #FFFF00)',
+      'linear-gradient(to bottom right, #FFD700 , #A52A2A)',
+      'linear-gradient(to bottom right, #4B0082 , #185a9d)',
+    ]
+
+    if (monthNum !== ''){
+      return listColor[monthNum]
+    }
+
+  }
+
   prevYear = () =>{
     this.props.prevYear()
   }
@@ -200,6 +233,7 @@ class YearCalendar extends React.Component{
   }
 
   render(){
+    console.log(this.getMonthColor())
     return(
       <div className = 'calendarContainer'>
       <EventSyncModal
@@ -217,7 +251,7 @@ class YearCalendar extends React.Component{
           <MiniCalendar {...this.props}/>
           <Button
           type = 'primary'
-          className = 'miniEventSyncButton' 
+          className = 'miniEventSyncButton'
           onClick = {this.openEventSyncModal}>
             Event Sync
           </Button>

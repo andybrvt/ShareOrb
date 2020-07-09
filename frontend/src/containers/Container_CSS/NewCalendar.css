@@ -820,8 +820,15 @@ main {
   transition: 0.25s ease-out;
 }
 
-.calendar .body .yearcell .monthText:hover {
+.calendar .body .yearcell .monthBox {
+  background-image: linear-gradient(to bottom right, #43cea2 , #185a9d);
   font-size: 20px;
+  text-align: center;
+  color: white;
+}
+
+.calendar .body .yearcell .monthBox:hover {
+  /* font-size: 20px; */
   /* transform: scale(1.75); */
   transition: .2s ease-out;
 }
@@ -855,7 +862,7 @@ main {
 
 .calendar .body .yearcell .monthcell .yearRow .monthDayCell {
   position: relative;
-  height: 3em;
+  height: 38px;
   /* border-right: 1px solid var(--border-color); */
   line-height: 40px;
   text-align:center;
@@ -1003,7 +1010,7 @@ to make it adjustable */
   text-align: center;
   /* grid-template-rows: repeat(6, 25px); */
   grid-auto-flow: dense;
-  border-bottom: 3px solid var(--border-color)
+  border-bottom: 3px solid var(--border-color);
   /* grid-column-gap: 1px; */
   /* background-color: red; */
 }
