@@ -158,32 +158,35 @@ class NewsFeedView extends React.Component {
 
 
 							 <div>
-							 		<div class="card">
 
-										<div class="container">
+ <div class="card">
+ <div class="fb-group-picrow">
+	 <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+	 <div class="fb-group-text">
+			 <h5 class="fbh5">
 
-
-										<div class="fb-group-picrow">
-					            <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-					            <div class="fb-group-text">
-					                <h5 class="fbh5">
-
-					                <span>
-					                  test
+			 <span>
+				 Jon Chen
 
 
-					                </span>
+			 </span>
 
 
-					                </h5>
-					                <span class="fb-group-date"> 050520</span>
+			 </h5>
+			 <span class="fb-group-date"> 110 followers</span>
+ <Divider />
+ <p style={{padding:30}}>
+	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
+	 probare, quae sunt a te dicta? Refert tamen, quo modo.
+ </p>
 
-					              </div>
 
-					            </div>
-										</div>
-										<Divider />
-									</div>
+
+ 	</div>
+ 	</div>
+
+ </div>
+							 	
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />
