@@ -17,6 +17,14 @@ import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 // This one is for holding the notifications and all its function
 
 class NotificationsDropDown extends React.Component{
+  state = {
+    dropView: false,
+  }
+
+  handleVisibleChange = (flag) => {
+    console.log({ flag });
+    this.setState({ visible: flag });
+  }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -261,10 +269,19 @@ class NotificationsDropDown extends React.Component{
     }
     return (
       <List>
-      <li className = 'topNotification' >
-        <h2> Notifications </h2>
-      </li>
-      {notificationList}
+      <div
+      className = 'notificationIcon'
+      >
+        <h2 className = 'notificationWord'> Notifications </h2>
+      </div>
+      { notificationList.length === 0 ?
+        <li
+        style = {{
+          textAlign: 'center'
+        }}
+        > You have no notifications </li>
+        :
+        notificationList}
       </List>
     )
   }
@@ -288,7 +305,14 @@ class NotificationsDropDown extends React.Component{
     return(
       <Dropdown
       overlay={this.renderNotifications}
-      trigger={['click']}>
+      placement = 'bottomCenter'
+      visible = {this.props.showNotification}
+      overlayStyle ={{
+        position: 'fixed',
+        // left: '100px'
+        width: '350px'
+      }}
+      >
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
           Notifications
           <DownOutlined style = {{
@@ -303,7 +327,7 @@ class NotificationsDropDown extends React.Component{
 
 const mapStateToProps = state => {
   return {
-
+    showNotification: state.notifications.showNotification
   }
 }
 
@@ -311,6 +335,7 @@ const mapDispatchToProps = dispatch => {
   // most of the other props are in the Layouts
   return {
     deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId)),
+    openNotification: () => dispatch(notificationsActions.openNotification())
   }
 }
 

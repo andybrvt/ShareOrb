@@ -18,7 +18,8 @@ import * as dateFns from 'date-fns';
 import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
 import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 
-import * as navActions from '../../store/actions/nav'
+import * as navActions from '../../store/actions/nav';
+import * as notificationsActions from '../../store/actions/notifications';
 import * as actions from '../../store/actions/auth';
 import PickEventSyncModal from '../PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
@@ -51,6 +52,15 @@ class SideMenu extends React.Component {
     });
   }
 
+  onShowNotification = () => {
+    if (this.props.showNotification === true){
+      this.props.closeNotification()
+    }
+    else if (this.props.showNotification === false){
+      this.props.openNotification()
+    }
+  }
+
   render() {
     const currentDay = new Date()
     console.log(currentDay)
@@ -73,7 +83,7 @@ class SideMenu extends React.Component {
         backgroundColor: 'white',
         height: '100vh',
         position: 'fixed',
-      
+
       }}
       className="appearBefore">
 
@@ -161,7 +171,10 @@ class SideMenu extends React.Component {
       </Badge>
     </span>
 
-         <Button style={{marginRight:50}}>
+         <Button
+         style={{marginRight:50}}
+         onClick = {() => this.onShowNotification()}
+         >
           <Notifications {...this.props}/>
           </Button>
 
@@ -266,7 +279,9 @@ const mapStateToProps = state => {
   return{
     notificationDrop: state.nav.showPopup,
     showPickEventSyncModal: state.eventSync.showPickEventSyncModal,
-    id: state.auth.id
+    id: state.auth.id,
+    showNotification: state.notifications.showNotification
+
   }
 }
 
@@ -283,7 +298,9 @@ const mapDispatchToProps = dispatch => {
           maxDate,
           notificationId
         )),
-        closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal())
+        closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal()),
+        openNotification: () =>dispatch(notificationsActions.openNotification()),
+        closeNotification: () => dispatch (notificationsActions.closeNotification())
     }
 }
 

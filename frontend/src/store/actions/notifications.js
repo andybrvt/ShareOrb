@@ -22,3 +22,17 @@ export const deleteNotification = notificationId => {
     notificationId: notificationId
   }
 }
+
+
+export const openNotification = () => {
+  return {
+    type: actionTypes.OPEN_NOTIFICATION,
+  }
+}
+
+
+export const closeNotification = () => {
+  return {
+    type: actionTypes.CLOSE_NOTIFICATION
+  }
+}
