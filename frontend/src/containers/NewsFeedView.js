@@ -160,28 +160,68 @@ class NewsFeedView extends React.Component {
 							 <div>
 
  <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
- <div  style={{marginTop:20, marginLeft:20, marginRight:10}}>
+ <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
+ 	<div>
 	 <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-	 <div class="fb-group-text">
-			 <h5 class="fbh5">
 
-				 <span>
+				 <span class="personName">
 					 Jon Chen
 				 </span>
-			 </h5>
+
+				</div>
+
+
 			 <span class="fb-group-date"> 110 followers</span>
-			 <span style={{marginRight:10}}>
-			 <span class="fb-group-date" style={{marginLeft:450}}> Yesterday 5:20pm</span>
+			 <span style={{marginRight:10, marginTop:80}}>
+			 <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
 			 </span>
  <Divider />
- <p style={{padding:30, color:'black'}}>
+ <p style={{padding:20, color:'black'}}>
 	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
 	 probare, quae sunt a te dicta? Refert tamen, quo modo.
  </p>
 
+ <Divider />
 
+ Coments blah blah blah
 
  	</div>
+
+ </div>
+
+
+
+ <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
+ <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
+ 	<div>
+	 <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+
+				 <span class="personName">
+					 Jon Chen
+				 </span>
+
+				</div>
+
+
+			 <span class="fb-group-date"> 110 followers</span>
+			 <span style={{marginRight:10, marginTop:80}}>
+			 <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
+			 </span>
+ <Divider />
+ <p style={{padding:20, color:'black'}}>
+	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
+	 probare, quae sunt a te dicta? Refert tamen, quo modo.
+	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
+	 probare, quae sunt a te dicta? Refert tamen, quo modo.
+	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
+	 probare, quae sunt a te dicta? Refert tamen, quo modo.
+	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
+	 probare, quae sunt a te dicta? Refert tamen, quo modo.
+
+ </p>
+
+
+
  	</div>
 
  </div>

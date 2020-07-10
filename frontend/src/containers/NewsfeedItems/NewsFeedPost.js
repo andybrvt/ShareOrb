@@ -2,7 +2,7 @@ import React from "react";
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import { authAxios } from '../../components/util';
-import {Icon, Tooltip, Skeleton, Switch, Card, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
+import {Icon, Tooltip, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 
 class NewsfeedPost extends React.Component {
@@ -166,58 +166,64 @@ class NewsfeedPost extends React.Component {
     <div class="mock-outer fontTest" onClick={this.OnClickPost}>
 
 
-          <div class="fb-group-picrow">
-            <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-            <div class="fb-group-text">
-                <h5 class="fbh5">
+    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
+    <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
+      <div>
+     <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
-                <span>
-                  {this.props.data.user.username}
+           <span class="personName">
+             {this.props.data.user.username}
+           </span>
 
-
-                </span>
-
-
-                </h5>
-                <span class="fb-group-date"> {this.props.data.created_at}</span>
-
-              </div>
-
-            </div>
-            <div style={{marginTop:30, marginRight:10,}}>
-              <p>
-
-                {
-                  ((this.props.data.caption).length>600)?
-                  <div>
-                  {this.props.data.caption.substring(0,600)}  ... see more
-                  </div>
-                  :
-                  <div>
-                  {this.props.data.caption}
-                  </div>
-                }
+          </div>
 
 
-              </p>
-            </div>
+         <span class="fb-group-date"> 110 followers</span>
+         <span style={{marginRight:10, marginTop:80}}>
+         <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
+         </span>
+    <Divider />
+    <p style={{padding:20, color:'black'}}>
+              {
+                 ((this.props.data.caption).length>600)?
+                 <div>
+                 {this.props.data.caption.substring(0,600)}
+                <span style={{color:'blue'}}> ... see more </span>
+                 </div>
+                 :
+                 <div>
+                 {this.props.data.caption}
+                 </div>
+               }
 
-            <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginTop:'40px', marginRight: '15px',}}>
-              <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
-              {this.props.data.like_count}
-            </Button>
+    </p>
+
+    <Divider />
+
+    <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginTop:'40px', marginRight: '15px',}}>
+      <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
+      {this.props.data.like_count}
+    </Button>
 
 
-            <Button shape="round" size="middle">
-              <EditTwoTone  style={{ marginRight:'8px', fontSize: '20px'}}/>
-              {this.props.data.post_comments.length}
-            </Button>
+    <Button shape="round" size="middle">
+      <EditTwoTone  style={{ marginRight:'8px', fontSize: '20px'}}/>
+      {this.props.data.post_comments.length}
+    </Button>
 
 
-            <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
-              <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
+    <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
+      <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
 
-            </Button>
+    </Button>
+
+    Coments blah blah blah
+
+      </div>
+
+    </div>
+
+
             <div>
             {
 
