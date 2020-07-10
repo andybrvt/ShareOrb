@@ -59,7 +59,9 @@ class YearCalendar extends React.Component{
           </div>
         </div>
         <div className = "col col-center">
-          <span>
+          <span
+          style = {{fontSize: '30px'}}
+          >
             {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
@@ -98,10 +100,10 @@ class YearCalendar extends React.Component{
         <div className = 'yearcol yearcell'>
           <div
           className = 'monthBox'
+          onClick = {() => this.onMonthClick(monthCopy)}
           style = {{backgroundImage: this.getMonthColor(monthCopy)}} >
           <span
           className = 'monthText'
-          onClick = {() => this.onMonthClick(monthCopy)}
           > {dateFns.format(month, dateFormat)}</span>
           </div>
           {this.renderDayName()}

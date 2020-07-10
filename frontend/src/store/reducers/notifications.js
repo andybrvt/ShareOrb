@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  notifications: []
+  notifications: [],
+  showNotification: false
 };
 
 const setNotifications = (state, action) => {
@@ -29,6 +30,19 @@ const deleteNotification = (state, action) => {
   })
 }
 
+const openNotification = (state, action) => {
+  return updateObject(state, {
+    showNotification: true
+  })
+}
+
+const closeNotification = (state, action) => {
+  return updateObject(state, {
+    showNotification: false
+  })
+}
+
+
 const reducer = (state= initialState, action ) => {
   switch(action.type) {
     case actionTypes.NEW_NOTIFICATION:
@@ -37,6 +51,10 @@ const reducer = (state= initialState, action ) => {
       return setNotifications(state,action);
     case actionTypes.DELETE_NOTIFICATION:
       return deleteNotification(state, action);
+    case actionTypes.OPEN_NOTIFICATION:
+      return openNotification(state,action);
+    case actionTypes.CLOSE_NOTIFICATION:
+      return closeNotification(state, action)
     default:
       return state;
   }

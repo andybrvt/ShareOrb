@@ -16,16 +16,35 @@
 }
 
 .notificationIcon {
-  margin: 5px;
-  margin-top: 10px;
-  margin-left: 20px;
+  /* margin: 5px; */
+  position: relative;
+  width: 350px;
+  top: -5px;
+  height: 60px;
+  border-bottom: 3px solid lightgrey;
+  text-align: center;
+  background-image: linear-gradient(to bottom right, #2193b0 , #1E90FF);
+
+  /* border-radius: 5px 5px 0px 0px; */
+
+  /* right: 5px; */
+  /* top: */
+  /* height: 10px; */
+  /* margin-top: 10px; */
+  /* margin-left: 20px; */
   /* border: 2px solid; */
-  /* background-color: red; */
+  background-color: red;
+}
+
+.notificationWord {
+  color: white;
+  position: relative;
+  top: 10px;
 }
 
 .topNotification {
   margin: 20px;
-  margin-left: 10px;
-  margin-top: 5px;
-  /* background-color: red; */
+  margin-left: 20px;
+  margin-top: 10px;
+  background-color: red;
 }

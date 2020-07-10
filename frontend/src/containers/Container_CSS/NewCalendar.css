@@ -821,7 +821,7 @@ main {
 }
 
 .calendar .body .yearcell .monthBox {
-  background-image: linear-gradient(to bottom right, #43cea2 , #185a9d);
+  /* background-image: linear-gradient(to bottom right, #43cea2 , #185a9d); */
   font-size: 20px;
   text-align: center;
   color: white;
