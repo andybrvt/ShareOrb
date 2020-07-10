@@ -9,7 +9,7 @@ import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
 
-import { Row, Col, Card, Upload, Divider, Checkbox} from 'antd';
+import { Row, Col, Card, Upload, Divider, Checkbox, Avatar} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
@@ -99,7 +99,7 @@ class NewsFeedView extends React.Component {
 					display: 'flex',
 					// backgroundColor: 'blue',
 					position: 'relative',
-					marginLeft: '125px'
+					marginLeft: '250px'
 				}}>
 
 				<div class="createEventCSS" style = {{
@@ -159,23 +159,22 @@ class NewsFeedView extends React.Component {
 
 							 <div>
 
- <div class="card">
- <div class="fb-group-picrow">
-	 <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+ <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
+ <div  style={{marginTop:20, marginLeft:20, marginRight:10}}>
+	 <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 	 <div class="fb-group-text">
 			 <h5 class="fbh5">
 
-			 <span>
-				 Jon Chen
-
-
-			 </span>
-
-
+				 <span>
+					 Jon Chen
+				 </span>
 			 </h5>
 			 <span class="fb-group-date"> 110 followers</span>
+			 <span style={{marginRight:10}}>
+			 <span class="fb-group-date" style={{marginLeft:450}}> Yesterday 5:20pm</span>
+			 </span>
  <Divider />
- <p style={{padding:30}}>
+ <p style={{padding:30, color:'black'}}>
 	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
 	 probare, quae sunt a te dicta? Refert tamen, quo modo.
  </p>
@@ -186,7 +185,7 @@ class NewsFeedView extends React.Component {
  	</div>
 
  </div>
-							 	
+
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />
