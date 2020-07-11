@@ -123,8 +123,6 @@ class EditEventPopUp extends React.Component {
       // add color to addEvents in redux
       this.props.addEvents(instanceEvent)
     }
-
-
     this.props.close()
   }
 

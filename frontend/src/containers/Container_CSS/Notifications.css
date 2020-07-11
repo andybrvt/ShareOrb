@@ -1,24 +1,145 @@
-.listNotification {
+.notificationListContainer .listNotification {
   /* border: 2px solid; */
-  height: 60px;
-  margin: 20px;
-  margin-top: 15px
+  position: relative;
+  top: 10px;
+  left: 25px;
+  height: 70px;
+  /* margin: 20px; */
+  width: 290px;
+  /* margin-top: 15px; */
+  /* background-color: red; */
 }
 
-.notificaitonListContainer{
+.notificationListContainer .listNotificationSingle {
+  /* This is for the notifications that do not have a button */
+  position: relative;
+  top: 30px;
+  left: 25px;
+  height: 70px;
+  /* margin: 20px; */
+  width: 290px;
+  /* margin-top: 15px; */
+  /* background-color: red; */
+
+}
+
+.notificationListContainer .listNotificationFriend{
+  /* background-color: red; */
+  position: relative;
+  top: 15px;
+  left: 25px;
+  height: 70px;
+  /* margin: 20px; */
+  width: 290px;
+  /* margin-top: 15px; */
+
+}
+
+.notificationListContainer .listNotificationFriend .deleteButton{
+  width: 10px;
+  /* height: 100px; */
+  text-align: left;
+  position: relative;
+  left: 287px;
+  bottom: 55px;
+  opacity: 0.5;
+  text-align: center;
+  border: none;
+}
+
+.notificationListContainer .listNotificationFriend .notificationWords{
+  font-size: 16px;
+
+}
+
+.notificationListContainer .listNotificationFriend .pickEventSyncButton {
+  position: relative;
+  top: 5px;
+}
+
+.notificationListContainer .listNotificationFriend .pickEventSyncButton .acceptButton{
+  height: 25px;
+
+}
+
+.notificationListContainer .listNotificationFriend .pickEventSyncButton .declineButton{
+  height : 25px;
+  position: relative;
+  left: 5px;
+}
+
+.notificationListContainer .listNotificationSingle .deleteButton{
+  /* background-color: red; */
+  width: 10px;
+  /* height: 100px; */
+  text-align: left;
+  position: relative;
+  left: 287px;
+  bottom: 50px;
+  opacity: 0.5;
+  text-align: center;
+  border: none;
+}
+
+.notificationListContainer .listNotification .pickEventSyncButton{
+  /* background-color: red; */
+  position: relative;
+  top: 5px;
+}
+
+.notificationListContainer .listNotification .pickEventSyncButton .acceptButton {
+  height: 25px;
+}
+
+.notificationListContainer .listNotification .pickEventSyncButton .declineButton{
+  height : 25px;
+  position: relative;
+  left: 5px;
+}
+
+.notificationListContainer .listNotification .deleteButton {
+  /* background-color: red; */
+  width: 10px;
+  /* height: 100px; */
+  text-align: left;
+  position: relative;
+  left: 287px;
+  bottom: 82px;
+  opacity: 0.5;
+  text-align: center;
+  border: none;
+}
+
+.notificationListContainer .listNotification .notificationWords {
+  /* color: blue; */
+  font-size: 16px;
+  /* background-color: red; */
+}
+
+.notificationListContainer{
   display: flex;
   /* background-color: red; */
   height: 100px;
+  width: 400px;
 }
 
-.notificaitonListContainer:hover{
-  background-color: gainsboro	;
+.notificationListContainer:hover{
+
+  background-color: #F5F5F5	;
 }
 
-.notificationIcon {
+.notificationListContainer .notificationIcon {
+  /* background-color: red; */
+  height: 55px;
+  position: relative;
+  left: 15px;
+  top: 20px
+}
+
+.notificationHeader {
   /* margin: 5px; */
   position: relative;
-  width: 350px;
+  width: 400px;
   top: -5px;
   height: 60px;
   border-bottom: 3px solid lightgrey;
@@ -33,7 +154,8 @@
   /* margin-top: 10px; */
   /* margin-left: 20px; */
   /* border: 2px solid; */
-  background-color: red;
+  /* background-color: red; */
+
 }
 
 .notificationWord {
@@ -41,6 +163,8 @@
   position: relative;
   top: 10px;
 }
+
+
 
 .topNotification {
   margin: 20px;

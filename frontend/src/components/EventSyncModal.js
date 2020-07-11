@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import EventSyncForm from './EventSyncForm'
 import EventSyncReactForm from './EventSyncReactForm'
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
@@ -8,6 +8,9 @@ import * as dateFns from 'date-fns';
 
 // This class is use to pick a friend to event sync with
 class EventSyncModal extends React.Component{
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
 
   submit = (values) => {
     console.log(values)
@@ -32,9 +35,27 @@ class EventSyncModal extends React.Component{
       endDate: values.endDate,
     }
     console.log(NotificationOjbect)
+    this.openNotification(NotificationOjbect, 'bottomRight')
     // sending the information back into the websocket then to the backend
     NotificationWebSocketInstance.sendNotification(NotificationOjbect)
+    this.props.close()
   }
+
+  openNotification = (info, placement) => {
+    const startDate = dateFns.format(
+      dateFns.addHours(new Date(info.startDate),7), 'MM/dd/yyyy')
+    const endDate = dateFns.format(
+      dateFns.addHours(new Date(info.endDate),7), 'MM/dd/yyyy')
+    const recipient = this.capitalize(info.recipient)
+  notification.info({
+    message: `Event Sync Request Sent to `+ recipient ,
+    description:
+    'Request for event sync from: '+ startDate + ' to ' + endDate,
+    placement,
+    });
+  };
+
+
 
   render() {
     console.log(this.props)

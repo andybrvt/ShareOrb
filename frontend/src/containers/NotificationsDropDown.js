@@ -18,13 +18,19 @@ import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 class NotificationsDropDown extends React.Component{
   state = {
-    dropView: false,
+    visible: false,
+  };
+
+  handleMenuClick = (e) => {
+    if (e.key === '3') {
+      this.setState({ visible: false });
+    }
   }
 
+
   handleVisibleChange = (flag) => {
-    console.log({ flag });
-    this.setState({ visible: flag });
-  }
+      this.setState({ visible: flag });
+    }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -97,7 +103,7 @@ class NotificationsDropDown extends React.Component{
     for (let i = 0; i<notifications.length; i++){
       if(notifications[i].type === 'friend'){
         notificationList.push(
-        <li className = 'notificaitonListContainer'>
+        <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
         <Avatar size = {55} style ={{
           backgroundColor: 'blue',
@@ -106,21 +112,34 @@ class NotificationsDropDown extends React.Component{
           >
         </Avatar>
         </div>
-          <h4 className = 'listNotification'>
-            <span>
-            {this.capitalize(notifications[i].actor.username)} sent you a friend request.
+          <h4 className = 'listNotificationFriend'>
+            <span className = 'notificationWords'>
+            <b>{this.capitalize(notifications[i].actor.username)} </b>
+             sent you a friend request.
             </span>
-            <br />
-            <Button type ="primary" onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
-            <Button type ="primary" onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
-            <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+            <div className ='pickEventSyncButton'>
+            <Button
+             type ="primary"
+             className = 'acceptButton'
+             onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
+            <Button
+             className = 'declineButton'
+             onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
+            </div>
+
+            <Button
+
+              type ='text'
+              shape = 'circle'
+              className = 'deleteButton'
+              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
         )
       }
       if (notifications[i].type === 'accepted_friend') {
         notificationList.push(
-        <li className = 'notificaitonListContainer'>
+        <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
           <Avatar size = {55} style ={{
             backgroundColor: 'lightskyblue',
@@ -129,16 +148,23 @@ class NotificationsDropDown extends React.Component{
             >
           </Avatar>
         </div>
-          <h4 className = 'listNotification'>
-              {this.capitalize(notifications[i].actor.username)} accepted your friend request.
-              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          <h4 className = 'listNotificationSingle'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+              accepted your friend request.
+              <div>
+              <Button
+              type ='text'
+              shape = 'circle'
+              className = 'deleteButton'
+              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              </div>
           </h4>
         </li>
         )
       }
       if (notifications[i].type === 'declined_friend'){
         notificationList.push(
-        <li className = 'notificaitonListContainer'>
+        <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
         <Avatar size = {55} style ={{
           backgroundColor: 'orangered',
@@ -147,16 +173,23 @@ class NotificationsDropDown extends React.Component{
           >
         </Avatar>
         </div>
-          <h4 className = 'listNotification'>
-              {this.capitalize(notifications[i].actor.username)} declined your friend request.
-              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          <h4 className = 'listNotificationSingle'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+               declined your friend request.
+              <div>
+              <Button
+              type ='text'
+              shape = 'circle'
+              className = 'deleteButton'
+              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              </div>
           </h4>
         </li>
         )
       }
       if (notifications[i].type === 'send_friend_event_sync'){
         notificationList.push(
-        <li className = 'notificaitonListContainer'>
+        <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
         <Avatar size = {55} style ={{
           backgroundColor: 'limegreen',
@@ -165,57 +198,76 @@ class NotificationsDropDown extends React.Component{
           >
         </Avatar>
         </div>
-          <h4 className = 'listNotification'>
-            <span>
-            {this.capitalize(notifications[i].actor.username)} wants to event sync with you.
+          <h4 className = 'listNotificationFriend'>
+            <span className ='notificationWords'>
+            <b>{this.capitalize(notifications[i].actor.username)} </b>
+            wants to event sync with you from:
+            <b>
+            {dateFns.format(
+              dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+              -
+              {dateFns.format(
+                dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
+            </b>
             </span>
-            <br />
-            <span>
-            {notifications[i].minDate.substring(0,10)}
-            <ArrowRightOutlined
-            style = {{position: 'relative',
-            bottom: '4px'}} />
-            {notifications[i].maxDate.substring(0,10)}
-            </span>
-            <br />
-            <Button type ="primary" onClick = {()=> this.onEventSyncAccept(
+            <div className = 'pickEventSyncButton'>
+            <Button
+            className = 'acceptButton'
+            type ="primary"
+            onClick = {()=> this.onEventSyncAccept(
               notifications[i].recipient,
               notifications[i].actor.username,
               notifications[i].minDate,
               notifications[i].maxDate
             )}> Accept</Button>
-            <Button type ="priamry" onClick = {()=> this.onEventSyncDecline(
+            <Button
+            type ="priamry"
+            className = 'declineButton'
+            onClick = {()=> this.onEventSyncDecline(
               notifications[i].recipient,
               notifications[i].actor.username,
               notifications[i].minDate,
               notifications[i].maxDate
             )}> Decline </Button>
-            <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+            </div>
+            <Button type ='text'
+             shape = 'circle'
+             className = 'deleteButton'
+             onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }>
+             X </Button>
           </h4>
         </li>
         )
       }
       if (notifications[i].type === 'declined_event_sync'){
         notificationList.push(
-        <li className = 'notificaitonListContainer'>
+        <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-        <Avatar size = {55} style ={{
+        <Avatar
+        size = {55}
+        style ={{
           backgroundColor: 'darkgrey',
           verticalAlign: 'middle'}}
           icon = {<UserOutlined />}
           >
         </Avatar>
         </div>
-          <h4 className = 'listNotification'>
-              {this.capitalize(notifications[i].actor.username)} declined your event sync request.
-              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+          <h4 className = 'listNotificationSingle'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+               declined your event sync request.
+              <Button
+              type ='text'
+              shape = 'circle'
+              className = 'deleteButton'
+              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
           </h4>
         </li>
         )
       }
       if (notifications[i].type === 'accepted_event_sync'){
+        // DONE
         notificationList.push(
-        <li className = 'notificaitonListContainer'>
+        <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
         <Avatar size = {55} style ={{
           backgroundColor: 'fuchsia',
@@ -225,24 +277,40 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
-              <span>
-              {this.capitalize(notifications[i].actor.username)} accepted your event sync request.
+              <span className = 'notificationWords'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+               accepted your event sync request from:
+               <b>
+              {dateFns.format(
+                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+                -
+              {dateFns.format(
+                dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
+              </b>
               </span>
-              <br />
-              <span>
-              {notifications[i].minDate}
-              <br />
-              {notifications[i].maxDate}
-              </span>
-              <Button type = 'primary' onClick = {() => this.props.openPickEventSyncModal(
+              <div className = 'pickEventSyncButton'>
+              <Button
+              type = 'primary'
+              style = {{
+                width: '200px'
+              }}
+              onClick = {() => this.props.openPickEventSyncModal(
                 notifications[i].recipient,
                 notifications[i].actor.username,
                 notifications[i].minDate,
                 notifications[i].maxDate,
                 notifications[i].id,
               )}> Pick Date </Button>
-              <Button type ='primary' shape = 'circle' onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              </div>
+              <Button
+              type ='text'
+              shape = 'circle'
+              className = 'deleteButton'
+              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }>
+               X </Button>
+
           </h4>
+
         </li>
         )
       }
@@ -268,9 +336,9 @@ class NotificationsDropDown extends React.Component{
 
     }
     return (
-      <List>
+      <List onClick = {this.handleMenuClick}>
       <div
-      className = 'notificationIcon'
+      className = 'notificationHeader'
       >
         <h2 className = 'notificationWord'> Notifications </h2>
       </div>
@@ -291,34 +359,25 @@ class NotificationsDropDown extends React.Component{
   render() {
     console.log(this.props)
     const menu = (
-    <Menu>
-      <Menu.Item key="0">
-        <a href="http://www.alipay.com/">1st menu item</a>
-      </Menu.Item>
-      <Menu.Item key="1">
-        <a href="http://www.taobao.com/">2nd menu item</a>
-      </Menu.Item>
-      <Menu.Item key="3">3rd menu item</Menu.Item>
-    </Menu>
-  );
+      <Menu onClick={this.handleMenuClick}>
+        <Menu.Item key="1">Clicking me will not close the menu.</Menu.Item>
+        <Menu.Item key="2">Clicking me will not close the menu also.</Menu.Item>
+        <Menu.Item key="3">Clicking me will close the menu</Menu.Item>
+      </Menu>
+    );
 
     return(
-      <Dropdown
-      overlay={this.renderNotifications}
-      placement = 'bottomCenter'
-      visible = {this.props.showNotification}
-      overlayStyle ={{
-        position: 'fixed',
-        // left: '100px'
-        width: '350px'
-      }}
+      <Dropdown overlay={this.renderNotifications()}
+        onVisibleChange={this.handleVisibleChange}
+        visible={this.state.visible}
+        trigger = {['click']}
       >
-        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+        <a className="ant-dropdown-link" href="#">
           Notifications
           <DownOutlined style = {{
-            position: 'relative',
-            top: '-3px'
-          }}/>
+                      position: 'relative',
+                      top: '-3px'
+                    }}/>
         </a>
       </Dropdown>
     )
