@@ -9,7 +9,7 @@ import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
 
-import { Row, Col, Card, Upload, Divider, Checkbox, Avatar} from 'antd';
+import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
@@ -102,27 +102,60 @@ class NewsFeedView extends React.Component {
 					marginLeft: '250px'
 				}}>
 
-				<div class="createEventCSS" style = {{
-					backgroundColor: 'white',
-					height: '400px',
-					width: '300px',
-					// postion: 'fixed',
-					position: 'relative',
-					marginRight:40,
-				}}>
 
-				<div style={{backgroundColor:'#F7F9FB', height: '300px',
-				width: '200px', marginTop:30, marginLeft:60}}>
+				<div>
 
-				Create an Event
+					<div class="createEventCSS" style = {{
+						backgroundColor: 'white',
+						height: '300px',
+						width: '300px',
+						// postion: 'fixed',
+						position: 'relative',
+						marginRight:40,
+					}}>
 
 
-				<Checkbox>Share with Public </Checkbox>
+
+					<div style={{background:'#bae7ff'}}>
+						<img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Avatar" class="avatar"/>
+						</div>
+							<div  style={{textAlign:'center', fontSize:'25px', color:'#181818'}}>
+						{this.props.username}
+
+						</div>
+						<span style={{textAlign:'center'}}>
+
+						<Statistic title="Followers" value={102} precision={0} style={{marginTop:'10px'}} />
+
+						</span>
+					</div>
+
+
+					<div class="createEventCSS" style = {{
+						backgroundColor: 'white',
+						height: '400px',
+						width: '300px',
+						// postion: 'fixed',
+						position: 'relative',
+						marginRight:40,
+					}}>
+
+						<div style={{backgroundColor:'#F7F9FB', height: '300px',
+						width: '200px', marginTop:30, marginLeft:60}}>
+
+						Create an Event
+
+
+						<Checkbox>Share with Public </Checkbox>
+
+						</div>
+
+
+					</div>
+
 
 				</div>
 
-
-				</div>
 				<Col span={12}>
 
 
@@ -132,7 +165,7 @@ class NewsFeedView extends React.Component {
 					<div>
 
 
-						<div style={{background:'white', padding:60}}>
+						<div style={{ padding:60}}>
 						<Row gutter={16}>
 							<Col span={8}>
 				        <Card title="Card title" bordered={false}>
