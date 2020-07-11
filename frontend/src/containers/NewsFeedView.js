@@ -111,7 +111,7 @@ class NewsFeedView extends React.Component {
 					marginRight:40,
 				}}>
 
-				<div style={{backgroundColor:'#678fcc', height: '300px',
+				<div style={{backgroundColor:'#F7F9FB', height: '300px',
 				width: '200px', marginTop:30, marginLeft:60}}>
 
 				Create an Event

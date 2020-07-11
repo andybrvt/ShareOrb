@@ -230,7 +230,7 @@ class SideMenu extends React.Component {
 
       // outer boundary
         <Layout className="site-layout" style={{
-          background:'#f5f5f5',
+          background:'#F7F9FB',
           display:'flex',
 
         }}>

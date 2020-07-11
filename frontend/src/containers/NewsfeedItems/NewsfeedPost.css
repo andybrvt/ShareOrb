@@ -1,11 +1,29 @@
 /* http://jsfiddle.net/zbt5L1wp/4/ */
 
-circle,
-rect {
-  stroke-width: 2;
-  stroke: rgba(0, 0, 0, 0.1);
-  fill: none;
+
+
+
+.postPic{
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: calc(50% - 52px/2 - 534px);
+  top: 395px;
+
+  background: url("https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png");
+  border-radius: 26px;
 }
+
+.testAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    border: solid 3px #fff;
+    box-shadow: 0 0 3px 2px #ccc;
+}
+
+
+
 
 header {
   background: #395590;
