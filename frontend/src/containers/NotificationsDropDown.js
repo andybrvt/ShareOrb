@@ -384,12 +384,19 @@ class NotificationsDropDown extends React.Component{
 
     }
     return (
-      <List onClick = {this.handleMenuClick}>
+      <List
+      // getPopupContainer={() => document.getElementById("position")}
+      style = {{
+        position: 'fixed',
+        bottom : '63px'
+      }}
+      onClick = {this.handleMenuClick}>
       <div
       className = 'notificationHeader'
       >
         <h2 className = 'notificationWord'> Notifications </h2>
       </div>
+      <div>
       { notificationList.length === 0 ?
         <li
         style = {{
@@ -398,6 +405,7 @@ class NotificationsDropDown extends React.Component{
         > You have no notifications </li>
         :
         notificationList}
+      </div>
       </List>
     )
   }
