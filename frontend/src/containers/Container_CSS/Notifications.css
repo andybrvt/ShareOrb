@@ -1,3 +1,7 @@
+.timeStamp {
+  font-size: 12px;
+}
+
 .notificationListContainer .listNotification {
   /* border: 2px solid; */
   position: relative;
@@ -26,7 +30,7 @@
 .notificationListContainer .listNotificationFriend{
   /* background-color: red; */
   position: relative;
-  top: 15px;
+  top: 12px;
   left: 25px;
   height: 70px;
   /* margin: 20px; */
