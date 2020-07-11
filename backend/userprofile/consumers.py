@@ -21,7 +21,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         user = self.scope['user']
         # print('first')
         # print(user)
-        notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId'])
+        # This is where all the notifications get pulled
+        notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId']).order_by('-timestamp')
         serializer = NotificationSerializer(notifications, many=True)
         content = {
             'command': 'notifications',
