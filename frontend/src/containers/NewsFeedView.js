@@ -158,7 +158,7 @@ class NewsFeedView extends React.Component {
 
 
 							 <div>
-
+	{/*
  <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
  <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
  	<div>
@@ -191,6 +191,8 @@ class NewsFeedView extends React.Component {
 
 
 
+
+
  <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
  <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
  	<div>
@@ -225,6 +227,7 @@ class NewsFeedView extends React.Component {
  	</div>
 
  </div>
+ */}
 
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >

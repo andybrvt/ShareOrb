@@ -173,15 +173,16 @@ class NewsfeedPost extends React.Component {
 
            <span class="personName">
              {this.props.data.user.username}
+             <span class="fb-group-date" style={{marginLeft:350}}> 110 followersssssssssssssssssssssssssssssssssssssssssssssssssss</span>
+
+             <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
+
            </span>
 
           </div>
 
 
-         <span class="fb-group-date"> 110 followers</span>
-         <span style={{marginRight:10, marginTop:80}}>
-         <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
-         </span>
+
     <Divider />
     <p style={{padding:20, color:'black'}}>
               {
@@ -217,7 +218,15 @@ class NewsfeedPost extends React.Component {
 
     </Button>
 
+    <Avatar shape="square" size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+    <svg role="none" style={{height: "36px", width: "36px",}}>
+  <mask id="avatar">
+    <rect cy="18" fill="white" height="36" rx="8" ry="8" width="36" x="0" y="0"></rect>
+  </mask>
+    <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" style={{height: "36px", width: "36px",}}></img>
     Coments blah blah blah
+    </svg>
+
 
       </div>
 
