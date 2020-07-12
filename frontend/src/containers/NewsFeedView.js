@@ -304,9 +304,7 @@ class NewsFeedView extends React.Component {
 
 			>
 
-			<div style={{color:'black', fontSize:15
-
-  }}>
+			<div class="sectionTitles">
 			People you may know
 			</div>
 

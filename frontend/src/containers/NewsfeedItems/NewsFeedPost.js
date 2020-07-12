@@ -186,7 +186,7 @@ class NewsfeedPost extends React.Component {
 
     <Divider />
 
-    <p style={{padding:10, color:'black'}} class="whiteSpacePost">
+    <p style={{padding:10, color:'#203758'}} class="whiteSpacePost">
               {
 
                  ((this.props.data.caption).length>600)?
@@ -206,6 +206,8 @@ class NewsfeedPost extends React.Component {
 
     <Divider />
 
+  <div style={{padding:20}}>
+
     <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
       <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
       {this.props.data.like_count}
@@ -223,15 +225,6 @@ class NewsfeedPost extends React.Component {
 
     </Button>
 
-    <div>
-    <div class="testAvatar" style={{display:'flex'}}>
-        <img style={{marginRight:10}} src="http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png" alt="profile" />
-        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=562&q=80" alt="profile" />
-        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="profile" />
-        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1572631382901-cf1a0a6087cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="profile" />
-        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1521038199265-bc482db0f923?ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="profile" />
-    </div>
-    + 5 others like this
     </div>
 
 

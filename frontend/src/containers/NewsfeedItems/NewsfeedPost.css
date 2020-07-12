@@ -92,13 +92,6 @@ header {
     grid-gap: 20px;
 }
 
-.card {
-    display: grid;
-    grid-template-rows: max-content 200px 1fr;
-    margin: 0 auto;
-    padding: 0 30px 10px;
-    width: initial;
-}
 
 .card img {
     object-fit: cover;

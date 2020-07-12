@@ -41,6 +41,23 @@ img {
 }
 
 
+.sectionTitles{
+  /* Section Title */
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 17px;
+line-height: 21px;
+/* identical to box height */
+
+
+/* Catalina Blue */
+
+color: #203758;
+}
+
+
 .avatarPic {
 
     font-size: 12;
