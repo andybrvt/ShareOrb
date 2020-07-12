@@ -88,7 +88,7 @@ class NewsfeedPost extends React.Component {
     return(
       <Card
          className="cardborder"
-         style={{ width: 700, marginTop: 50, marginBottom:50  }}
+         style={{ width: 700, marginTop: 50, marginBottom:20  }}
          actions={[
           <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />,
            <EditTwoTone  style={{ marginRight:'12px', fontSize: '20px'}}/>,
@@ -120,7 +120,7 @@ class NewsfeedPost extends React.Component {
             <b>Date:</b> {this.props.data.created_at}
           </span>
           <br></br>
-          <h2 className="RobotoFont">
+          <h2>
             {this.props.data.caption}
           </h2>
 
@@ -166,7 +166,7 @@ class NewsfeedPost extends React.Component {
     <div onClick={this.OnClickPost}>
 
 
-    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
+    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:20}}>
     <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
       <div>
      <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
@@ -185,15 +185,19 @@ class NewsfeedPost extends React.Component {
 
 
     <Divider />
-    <p style={{padding:20, color:'black'}}>
+
+    <p style={{padding:10, color:'black'}} class="whiteSpacePost">
               {
+
                  ((this.props.data.caption).length>600)?
-                 <div>
-                 {this.props.data.caption.substring(0,600)}
-                <span style={{color:'blue'}}> ... see more </span>
-                 </div>
+                 <span>
+                 {this.props.data.caption.substring(0,550)}
+
+                 <span class="grayout"> {this.props.data.caption.substring(550,600)}</span>
+                <div class="seeMore"> ... see more </div>
+                 </span>
                  :
-                 <div>
+                 <div class="whiteSpacePost">
                  {this.props.data.caption}
                  </div>
                }
@@ -202,7 +206,7 @@ class NewsfeedPost extends React.Component {
 
     <Divider />
 
-    <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginTop:'40px', marginRight: '15px',}}>
+    <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
       <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
       {this.props.data.like_count}
     </Button>

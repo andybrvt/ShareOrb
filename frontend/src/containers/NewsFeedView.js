@@ -9,7 +9,7 @@ import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
 
-import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic} from 'antd';
+import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic, Button} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
@@ -123,11 +123,14 @@ class NewsFeedView extends React.Component {
 						{this.props.username}
 
 						</div>
-						<span style={{textAlign:'center'}}>
+						<div style={{textAlign:'center'}}>
 
 						<Statistic title="Followers" value={102} precision={0} style={{marginTop:'10px'}} />
+						<br>
+						</br>
 
-						</span>
+						<Button style={{backgroundColor:'#2f54eb'}} type="primary">My Profile </Button>
+						</div>
 					</div>
 
 
@@ -156,7 +159,7 @@ class NewsFeedView extends React.Component {
 
 				</div>
 
-				<Col span={12}>
+				<Col span={11}>
 
 
 
@@ -165,7 +168,7 @@ class NewsFeedView extends React.Component {
 					<div>
 
 
-						<div style={{ padding:60}}>
+						<div style={{ padding:20}}>
 						<Row gutter={16}>
 							<Col span={8}>
 				        <Card title="Card title" bordered={false}>
