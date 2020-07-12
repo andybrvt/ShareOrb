@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menu, Dropdown, List, Button, Avatar } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, List, Button, Avatar, Badge } from 'antd';
+import { DownOutlined, NotificationOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../notificationWebsocket';
 import { authAxios } from '../components/util';
 import axios from 'axios';
@@ -99,7 +99,7 @@ class NotificationsDropDown extends React.Component{
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
     if (timeDiff < 1 ) {
       prefix = `Just now`;
-    } else if (timeDiff < 60 && timeDiff >1 ) {
+    } else if (timeDiff < 60 && timeDiff >= 1 ) {
       prefix = `${timeDiff} minutes ago`;
     }else if (timeDiff < 24*60 && timeDiff > 60) {
       prefix = `${Math.round(timeDiff/60)} hours ago`;
@@ -396,7 +396,7 @@ class NotificationsDropDown extends React.Component{
       >
         <h2 className = 'notificationWord'> Notifications </h2>
       </div>
-      <div>
+      <div className = 'notificationScroll'>
       { notificationList.length === 0 ?
         <li
         style = {{
@@ -423,26 +423,27 @@ class NotificationsDropDown extends React.Component{
     );
 
     return(
-      <Dropdown overlay={this.renderNotifications()}
+      <Dropdown
+        overlay={this.renderNotifications()}
         onVisibleChange={this.handleVisibleChange}
         visible={this.state.visible}
         trigger = {['click']}
       >
+
         <a className="ant-dropdown-link" href="#">
-          Notifications
-          <DownOutlined style = {{
-                      position: 'relative',
-                      top: '-3px'
-                    }}/>
+
+        <NotificationOutlined style = {{fontSize: '20px'}} />
         </a>
       </Dropdown>
+
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    showNotification: state.notifications.showNotification
+    showNotification: state.notifications.showNotification,
+
   }
 }
 

@@ -98,11 +98,11 @@ main {
 /* Container that holds Calendar */
 .calendarContainer{
   position: relative;
-  right: 135px;
-  width: 1395px;
+  left: 63px;
+  width: 1830px;
   height: 920px;
-  bottom: 10px;
-  /* background-color: yellow; */
+  bottom: 30px;
+  background-color: white;
   display: flex;
 }
 
@@ -123,9 +123,17 @@ main {
   display: flex;
 }
 
+.testBox{
+  overflow:hidden;
+  width: 1360px;
+  /* background-color: red; */
+}
+
 .weekDayFlex-Container{
   display: flex;
   overflow: auto;
+  /* overflow-y: hidden; */
+  width: 1370px;
   height: 780px;
   border-top: 2px solid;
   border-color: darkgrey;
@@ -191,8 +199,8 @@ main {
 }
 
 .weekcol:first-child{
-  border-left: 2px solid;
-  border-color: darkgrey;
+  /* border-left: 2px solid; */
+  /* border-color: darkgrey; */
 }
 
 .col-start {
@@ -370,16 +378,16 @@ main {
   width: 100%;
   /* background-color: red; */
   background: var(--neutral-color);
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color); */
 }
 
 .weekCalendar {
   display: block;
   position: relative;
   left: 50px;
-  width: 1415px;
+  width: 1310px;
   background: var(--neutral-color);
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color); */
   /* background-color: black; */
 }
 
@@ -395,13 +403,13 @@ main {
 
 
 .weekCalendar .header {
-  text-transform: uppercase;
-  font-weight: 100;
-  font-size: 100%;
-  padding: 1.5em 0;
+  /* text-transform: uppercase; */
+  font-weight: 400;
+  font-size: 21px;
+  padding: 1em 0;
   /* border-bottom: 1px solid var(--border-color); */
   /* background-color: blue; */
-  width: 700px;
+  width: 400px;
 }
 
 .calendar .header .icon {
@@ -473,10 +481,10 @@ main {
   color: ;
   font-size: 100%;
   /* padding: .75em 0; */
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
-  width: 1415px;
+  /* border-top: 1px solid var(--border-color); */
+  /* border-bottom: 1px solid var(--border-color); */
+  /* border-right: 1px solid var(--border-color); */
+  width: 1310px;
   /* background-color: red; */
 }
 
@@ -566,8 +574,8 @@ main {
 .calendarContainer .mainCalContainer{
   width: 1600px;
   position: relative;
-  right: 5px;
-  top: -20px;
+  left: 15px;
+  top: 0px;
   padding: 0;
   /* padding-left: 25px; */
   /* background-color: orange; */
@@ -580,13 +588,15 @@ main {
   top: -100px;
 
   /* padding-left: 25px; */
-  background-color: orange;
+  /* background-color: orange; */
 }
 
 .calendar .scrollBody {
   height: 1000px;
   margin-bottom: 0px;
+  /* width: 1306px; */
   /* vertical-align: top; */
+  /* background-color: red; */
 }
 
 .scrollBody .testContainer {
@@ -630,15 +640,23 @@ main {
 }
 .miniCalContainer {
   position:relative;
-  left: 22px;
+  left: 0px;
+  top: 20px;
+  width: 1000px;
+  /* height: 10px; */
   /* background-color: red; */
 }
 
 .miniCalContainer .miniCalendar {
   /* background-color: red; */
+  /* width: 1000px; */
   /* height: 100px; */
   position: relative;
-  top: 60px;
+  top: 80px;
+  /* height: 300px; */
+  left: 25px;
+  width: 450px;
+  /* color: white; */
 }
 
 .miniCalContainer .addEventButton {
@@ -647,7 +665,7 @@ main {
   /* background-image: linear-gradient(to bottom right, #43cea2 , #185a9d); */
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   position: relative;
-  left: 35px;
+  left: 110px;
   width: 150px;
   top: 40px;
   height: 50px;
@@ -656,24 +674,28 @@ main {
 
 .miniCalContainer .timeLayerCon{
   /* background-color: red; */
-  width: 250px;
+  width: 300px;
   position: relative;
-  top: 90px;
-  right: 0px;
+  top: 200px;
+  left: 40px;
 }
 
 .miniCalContainer .timeLayerCon .yearButton {
   background-color: #89ABE3FF;
   border: none;
-  width: 75px;
+  width: 150px;
+  height: 40px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
 
 .miniCalContainer .timeLayerCon .monthButton {
   background-color: #FFD662FF;
+  position: relative;
+  left: 15px;
   border: none;
-  width: 75px;
+  width: 150px;
+  height: 40px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
@@ -689,8 +711,9 @@ main {
 .miniCalContainer .miniEventSyncButton {
   /* background-color: red; */
   position: relative;
-  top: 70px;
-  width: 220px;
+  top: 80px;
+  left: 40px;
+  width: 300px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
@@ -701,7 +724,7 @@ main {
   background-image: linear-gradient(to bottom right, #43cea2 , #185a9d);
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   position: relative;
-  left: 35px;
+  left: 110px;
   width: 150px;
   top: 40px;
   height: 50px;
@@ -743,9 +766,15 @@ main {
 
 }
 
+
+.miniCalContainer .miniCalendar .miniCol .miniMonth{
+  /* color: white; */
+}
+
 .miniCalContainer .miniCalendar .miniCol .miniMonth:hover{
   background-color: lightgrey;
   cursor: pointer;
+  /* color: white; */
 }
 
 .miniCalContainer .miniCalendar .miniCol .icon:hover {
@@ -776,14 +805,14 @@ main {
 
 .miniCalContainer .miniCalendar .body .miniCell{
   position: relative;
-  height: 30px;
+  height: 50px;
   width: 5em;
   /* border-right: 1px solid var(--border-color); */
   overflow: hidden;
   cursor: pointer;
   /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
-  font-size: 10px;
+  font-size: 15px;
 }
 
 .miniCalContainer .miniCalendar .body .miniRow .miniCell .miniDay:hover{
@@ -794,10 +823,16 @@ main {
 .calendarContainer .miniCalContainer{
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 20%;
+  /* flex-basis: 100%; */
   position: relative;
+  left: -30px;
+  /* right: 200px; */
+  width: 400px;
   /* top: 110px; */
-  /* background-color: blue; */
+  /* background-color:#696969; */
+  /* background-color:#000080; */
+
+  opacity: 0.8;
 }
 
 
@@ -1021,7 +1056,7 @@ to make it adjustable */
   display: grid;
   border-bottom: 1px solid var(--border-color);
   /* grid-auto-flow: dense; */
-  grid-template-columns: repeat(7, 200px);
+  grid-template-columns: repeat(7, 186px);
   grid-template-rows: repeat(48, 24.1px);
   /* background-color: red; */
   grid-column-gap: 1px;
@@ -1179,7 +1214,7 @@ to make it adjustable */
   /* display: flex;
   flex-direction: column;
   flex-wrap: wrap; */
-  width: 1405px;
+  width: 1305px;
   /* background-color: blue; */
 
 }

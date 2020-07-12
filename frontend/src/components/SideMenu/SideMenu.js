@@ -141,10 +141,14 @@ class SideMenu extends React.Component {
       <Layout>
 
       <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', marginLeft:300, background:'white' }}>
+      <span style = {{
+        color: 'black'
+      }}>
         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
           className: 'trigger',
           onClick: this.toggle,
         })}
+      </span>
 
 
 
@@ -171,17 +175,32 @@ class SideMenu extends React.Component {
       </Badge>
     </span>
 
+    <span >
+    <Badge
+    style = {{ paddingBottom: '25px', paddingTop: '0px'}}
+    count = {this.props.notifications.length}>
          <Button
-         style={{marginRight:50}}
+
          onClick = {() => this.onShowNotification()}
+
          >
           <Notifications {...this.props}/>
           </Button>
+    </Badge>
+    </span>
 
-
+    <span
+    style = {{
+      position: 'relative',
+        left: '20px'
+    }}
+    >
          <Dropdown overlay={
 
-           <Menu selectedKeys={[]} >
+
+           <Menu style = {{
+         }}
+         selectedKeys={[]} >
              { (
                <Menu.Item key="center">
                  <Link to="/current-user">
@@ -223,8 +242,7 @@ class SideMenu extends React.Component {
            </span>
          </Button>
        </Dropdown>
-
-
+       </span>
 
       </Header>
 
@@ -280,7 +298,8 @@ const mapStateToProps = state => {
     notificationDrop: state.nav.showPopup,
     showPickEventSyncModal: state.eventSync.showPickEventSyncModal,
     id: state.auth.id,
-    showNotification: state.notifications.showNotification
+    showNotification: state.notifications.showNotification,
+    notifications: state.notifications.notifications,
 
   }
 }

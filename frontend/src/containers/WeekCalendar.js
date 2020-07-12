@@ -62,7 +62,7 @@ class WeekCalendar extends React.Component{
   // This will be rending the header of the view, for weekly view, it will be
   // the start week to the end of the start week and start of the week
   renderHeader() {
-    const dateFormat = 'MMMM yyyy'
+    const dateFormat = 'MMMM, yyyy'
     const startWeek = dateFns.startOfWeek(this.props.currentDate)
     const endWeek = dateFns.endOfWeek(this.props.currentDate)
     return(
@@ -443,43 +443,15 @@ class WeekCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
-        <div className = 'miniCalContainer'>
-          <Button
-          // type="primary"
-          className = 'addEventButton'
-          onClick = {this.onAddEvent}>
-          Add Event
-          </Button>
-          <MiniCalendar {...this.props}/>
-          <Button
-          type = 'primary'
-          className = 'miniEventSyncButton'
-          onClick = {this.openEventSyncModal}>
-            Event Sync
-          </Button>
-          <div className = 'timeLayerCon'>
-            <Button
-             type="primary"
-             shape="round"
-             className = 'yearButton'
-             onClick = {this.onYearClick}>
-            Year
-            </Button>
-            <Button
-            type="primary"
-            shape="round"
-            className = 'monthButton'
-            onClick = {this.onMonthClick}>
-            Month
-            </Button>
-          </div>
-        </div>
+
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             {this.renderHeader()}
             {this.renderDays()}
           </div>
+
+          <div className = 'testBox'>
           <div className = 'weekDayFlex-Container'>
             <div className = 'timecol'>
               {this.renderSide()}
@@ -488,10 +460,43 @@ class WeekCalendar extends React.Component{
             {this.renderWeekCell(this.props.events)}
             </div>
           </div>
+          </div>
+
           <EditEventPopUp
           isVisible = {this.props.showModal}
           close = {() => this.props.closeModal()}
           />
+          </div>
+          <div className = 'miniCalContainer'>
+            <Button
+            // type="primary"
+            className = 'addEventButton'
+            onClick = {this.onAddEvent}>
+            Add Event
+            </Button>
+            <MiniCalendar {...this.props}/>
+            <Button
+            type = 'primary'
+            className = 'miniEventSyncButton'
+            onClick = {this.openEventSyncModal}>
+              Event Sync
+            </Button>
+            <div className = 'timeLayerCon'>
+              <Button
+               type="primary"
+               // shape="round"
+               className = 'yearButton'
+               onClick = {this.onYearClick}>
+              Year
+              </Button>
+              <Button
+              type="primary"
+              // shape="round"
+              className = 'monthButton'
+              onClick = {this.onMonthClick}>
+              Month
+              </Button>
+            </div>
           </div>
       </div>
     )

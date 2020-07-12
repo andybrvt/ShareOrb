@@ -168,6 +168,10 @@
   top: 10px;
 }
 
+.notificationScroll {
+  overflow: auto;
+  height: 800px;
+}
 
 
 .topNotification {
