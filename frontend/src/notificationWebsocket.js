@@ -1,6 +1,5 @@
 import { notification } from 'antd';
 
-
 class WebSocketNotifications {
   static instance = null;
   callbacks = {}
@@ -52,11 +51,15 @@ class WebSocketNotifications {
   showNotification = (info, placement) => {
     // This will show a small notification on the side when that
     // person recieves a new notification
-    const actor = this.capitalize(info.actor.username)
-    const verb = info.verb
+    const notificationObject = JSON.parse(info.notification)
+
+    console.log(notificationObject.actor.username)
+    const actor = this.capitalize(notificationObject.actor.username)
+    const verb = notificationObject.verb
     console.log('here')
     notification.info({
-      message: actor + verb
+      message: actor +' ' + verb,
+      placement
     })
   }
 
@@ -73,7 +76,7 @@ class WebSocketNotifications {
         this.callbacks['notifications'](notifications)
             // createNotification(notifications[i]);
     } else if (command === 'new_notification') {
-        console.log(parsedData)
+        console.log(data)
         this.showNotification(parsedData, 'bottomRight')
         this.callbacks['new_notification'](JSON.parse(parsedData.notification))
         // createNotification(JSON.parse(data['notification']));

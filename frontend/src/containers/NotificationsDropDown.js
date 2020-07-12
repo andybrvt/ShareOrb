@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Dropdown, List, Button, Avatar, Badge } from 'antd';
+import { Menu, Dropdown, List, Button, Avatar, Badge, notification } from 'antd';
 import { DownOutlined, NotificationOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../notificationWebsocket';
 import { authAxios } from '../components/util';
@@ -88,8 +88,16 @@ class NotificationsDropDown extends React.Component{
     NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
   }
 
+  deleteSideNotification = ( placement ) => {
+    notification.info({
+      message: 'Notification Deleted',
+      placement
+    })
+  }
+
   onDeleteNotifcation = (notificationId) => {
     console.log(notificationId)
+    this.deleteSideNotification('bottomLeft')
     authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
     this.props.deleteNotification(notificationId)
   }
