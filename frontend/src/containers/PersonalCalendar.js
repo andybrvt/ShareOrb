@@ -493,30 +493,7 @@ class PersonalCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
-        <div className = 'miniCalContainer'>
-          <Button
-          // type = "primary"
-          className = 'addEventButton'
-          onClick={() => this.props.openDrawer()}>
-            Add Event
-          </Button>
-        <MiniCalendar {...this.props}/>
-        <Button
-        type = 'primary'
-        className = 'miniEventSyncButton'
-        onClick = {this.openEventSyncModal}>
-          Event Sync
-        </Button>
-        <div className = 'timeLayerCon'>
-          <Button
-          type = "primary"
-          shape = "round"
-          className = 'yearButton'
-          onClick = {this.onYearClick}>
-          Year
-          </Button>
-        </div>
-        </div>
+
         <div className = 'mainCalContainer'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
 
@@ -542,6 +519,35 @@ class PersonalCalendar extends React.Component{
           <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
           <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        </div>
+        <div
+        style = {{
+          position: 'relative',
+          left: '-65px'
+      }}
+        className = 'miniCalContainer'>
+          <Button
+          // type = "primary"
+          className = 'addEventButton'
+          onClick={() => this.props.openDrawer()}>
+            Add Event
+          </Button>
+        <MiniCalendar {...this.props}/>
+        <Button
+        type = 'primary'
+        className = 'miniEventSyncButton'
+        onClick = {this.openEventSyncModal}>
+          Event Sync
+        </Button>
+        <div className = 'timeLayerCon'>
+          <Button
+          type = "primary"
+          // shape = "round"
+          className = 'yearButton'
+          onClick = {this.onYearClick}>
+          Year
+          </Button>
+        </div>
         </div>
         </div>
     )
