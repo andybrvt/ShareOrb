@@ -1,11 +1,40 @@
 /* http://jsfiddle.net/zbt5L1wp/4/ */
 
-circle,
-rect {
-  stroke-width: 2;
-  stroke: rgba(0, 0, 0, 0.1);
-  fill: none;
+/* temporary for test to see card look */
+.card {
+
+
+  background: #FFFFFF;
+  border-radius: 4px;
+  min-height: 50px;
+
+
 }
+
+
+
+.postPic{
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: calc(50% - 52px/2 - 534px);
+  top: 395px;
+
+  background: url("https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png");
+  border-radius: 26px;
+}
+
+.testAvatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+
+    box-shadow: 0 0 3px 2px #ccc;
+    margin-left: 10px;
+}
+
+
+
 
 header {
   background: #395590;

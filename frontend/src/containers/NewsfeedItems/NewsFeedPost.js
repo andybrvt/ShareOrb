@@ -2,7 +2,7 @@ import React from "react";
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import { authAxios } from '../../components/util';
-import {Icon, Tooltip, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
+import {Icon, Tooltip, Row, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 
 class NewsfeedPost extends React.Component {
@@ -163,7 +163,7 @@ class NewsfeedPost extends React.Component {
 
   ContentOfPost(){
     return(
-    <div class="mock-outer fontTest" onClick={this.OnClickPost}>
+    <div onClick={this.OnClickPost}>
 
 
     <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
@@ -173,10 +173,11 @@ class NewsfeedPost extends React.Component {
 
            <span class="personName">
              {this.props.data.user.username}
-             <span class="fb-group-date" style={{marginLeft:350}}> 110 followersssssssssssssssssssssssssssssssssssssssssssssssssss</span>
+             <div>
+             <span class="fb-group-date" style={{marginLeft:50}}> 110 followers</span>
 
-             <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
-
+             <span class="fb-group-date" style={{marginLeft:300}}> Yesterday 5:20pm</span>
+             </div>
            </span>
 
           </div>
@@ -218,14 +219,16 @@ class NewsfeedPost extends React.Component {
 
     </Button>
 
-    <Avatar shape="square" size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-    <svg role="none" style={{height: "36px", width: "36px",}}>
-  <mask id="avatar">
-    <rect cy="18" fill="white" height="36" rx="8" ry="8" width="36" x="0" y="0"></rect>
-  </mask>
-    <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" style={{height: "36px", width: "36px",}}></img>
-    Coments blah blah blah
-    </svg>
+    <div>
+    <div class="testAvatar" style={{display:'flex'}}>
+        <img style={{marginRight:10}} src="http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png" alt="profile" />
+        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=562&q=80" alt="profile" />
+        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="profile" />
+        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1572631382901-cf1a0a6087cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="profile" />
+        <img style={{marginRight:10}} src="https://images.unsplash.com/photo-1521038199265-bc482db0f923?ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="profile" />
+    </div>
+    + 5 others like this
+    </div>
 
 
       </div>
