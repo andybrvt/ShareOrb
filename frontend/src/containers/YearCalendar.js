@@ -104,7 +104,9 @@ class YearCalendar extends React.Component{
           style = {{backgroundImage: this.getMonthColor(monthCopy)}} >
           <span
           className = 'monthText'
-          > {dateFns.format(month, dateFormat)}</span>
+          >
+          {dateFns.format(month, dateFormat)}
+          </span>
           </div>
           {this.renderDayName()}
           {this.renderDayInMonth(month)}
@@ -243,7 +245,23 @@ class YearCalendar extends React.Component{
         isVisble = {this.props.showEventSyncModal}
         close = {() => this.props.closeEventSyncModal()}
       />
-        <div className = 'miniCalContainer'>
+
+        <div className = 'mainCalContainer'>
+        <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+
+          <div className = 'flex-container'>
+            <div className = 'calendar'>
+            {this.renderYear()}
+            {this.renderMonthCell()}
+            </div>
+          </div>
+        </div>
+        <div
+        style = {{
+          position: 'relative',
+          left: '-55px'
+        }}
+         className = 'miniCalContainer'>
         <Button
         // type = "primary"
         className = 'addEventButton'
@@ -257,16 +275,6 @@ class YearCalendar extends React.Component{
           onClick = {this.openEventSyncModal}>
             Event Sync
           </Button>
-        </div>
-        <div className = 'mainCalContainer'>
-        <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-
-          <div className = 'flex-container'>
-            <div className = 'calendar'>
-            {this.renderYear()}
-            {this.renderMonthCell()}
-            </div>
-          </div>
         </div>
       </div>
     )

@@ -121,6 +121,10 @@ main {
 /* Do not change this because alot of other parts use this */
 .flex-container {
   display: flex;
+  position: relative;
+  left: 10px;
+  /* background-color: red; */
+  /* width: 10px; */
 }
 
 .testBox{
@@ -291,7 +295,8 @@ main {
 
 
 .calendar .body {
-  background-color: var(--border-color);
+  background-color: white;
+  width: 1315px;
 }
 
 
@@ -461,11 +466,12 @@ main {
 
 .calendar .days {
   /* text-transform: uppercase; */
+  width: 1310px;
   font-weight: 400;
   color: ;
   font-size: 100%;
   padding: .75em 0;
-  border-top: 1px solid var(--border-color);
+  /* border-top: 1px solid var(--border-color); */
   border-bottom: 1px solid var(--border-color);
   /* background-color: red; */
   /* width: 700px; */
@@ -589,7 +595,7 @@ main {
 
 
 .calendarContainer .mainCalContainer{
-  width: 1600px;
+  width: 1500px;
   position: relative;
   left: 15px;
   top: 0px;
@@ -655,6 +661,7 @@ main {
   transform: perspective(5px) rotateX(2deg);
   transform-origin: bottom;
 }
+
 .miniCalContainer {
   position:relative;
   left: 0px;
@@ -663,6 +670,7 @@ main {
   /* height: 10px; */
   /* background-color: red; */
 }
+
 
 .miniCalContainer .miniCalendar {
   /* background-color: red; */
@@ -868,6 +876,7 @@ main {
 .calendar .body .yearcell {
   position: relative;
   height: 20em;
+  /* background-color: red; */
   /* border-right: 1px solid var(--border-color); */
   overflow: hidden;
   cursor: pointer;
@@ -879,7 +888,9 @@ main {
   /* background-image: linear-gradient(to bottom right, #43cea2 , #185a9d); */
   font-size: 20px;
   text-align: center;
+
   color: white;
+
 }
 
 .calendar .body .yearcell .monthBox:hover {
@@ -1036,7 +1047,7 @@ main {
 to make it adjustable */
 .calendar .body .row {
   display: grid;
-  grid-template-columns: repeat(7, 207px);
+  grid-template-columns: repeat(7, 187px);
   grid-template-rows: repeat(6, 25px);
   grid-auto-flow: dense;
   grid-row-gap: 2px;
@@ -1048,7 +1059,7 @@ to make it adjustable */
 
 .calendar .body .yearRow {
   display: grid;
-  grid-template-columns: repeat(7, 215px);
+  grid-template-columns: repeat(7, 216px);
   grid-template-rows: repeat(6, 25px);
   grid-auto-flow: dense;
   grid-row-gap: 2px;
@@ -1061,7 +1072,7 @@ to make it adjustable */
 
 .calendar .body .dayYearRow{
   display: grid;
-  grid-template-columns: repeat(7, 51px);
+  grid-template-columns: repeat(7, 46.5px);
   text-align: center;
   /* grid-template-rows: repeat(6, 25px); */
   grid-auto-flow: dense;
