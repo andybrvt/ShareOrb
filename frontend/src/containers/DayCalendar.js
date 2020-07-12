@@ -51,7 +51,7 @@ class DayCalendar extends React.Component{
     const dateFormat = 'iiii MMMM dd, yyyy'
 
     return (
-      <div className = 'header row flex-middle'>
+      <div className = 'dayHeader row flex-middle'>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
           <i className= 'arrow arrow-left'></i>
@@ -269,7 +269,7 @@ class DayCalendar extends React.Component{
       color: '#01D4F4',
       calendarId: ''
     }
-    
+
     this.props.openModal(subInEvent)
 
 
@@ -325,44 +325,7 @@ class DayCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
-        <div className = 'miniCalContainer'>
-        <Button
-         // type="primary"
-         className = 'addEventButton'
-         onClick = {this.onOpenEvent} >
-          Add Event
-        </Button>
-          <MiniCalendar {...this.props}/>
-          <Button
-           type = 'primary'
-           className = 'miniEventSyncButton'
-          onClick = {this.openEventSyncModal}>
-            Event Sync
-          </Button>
-          <div className = 'timeLayerCon'>
-          <Button
-          type="primary"
-          shape="round"
-          className = 'yearButton'
-          onClick = {this.onYearClick}>
-          Year
-          </Button>
-          <Button
-          type="primary"
-          shape="round"
-          className = 'monthButton'
-          onClick = {this.onMonthClick}>
-          Month
-          </Button>
-          <Button
-          type="primary"
-          shape="round"
-          className = 'weekButton'
-          onClick = {this.onWeekClick}>
-          Week
-          </Button>
-          </div>
-        </div>
+
         <div className ='mainCalContainer'>
 
           <div className = "weekCalendar">
@@ -370,6 +333,7 @@ class DayCalendar extends React.Component{
           {this.renderHeader()}
           {this.renderDays()}
           </div>
+          <div className = 'testBox'>
           <div className = 'dayFlex-Container'>
             <div className = 'timecol'>
               {this.renderHours()}
@@ -383,7 +347,47 @@ class DayCalendar extends React.Component{
             close = {() => this.props.closeModal()}
             />
           </div>
+          </div>
 
+
+          <div className = 'miniCalContainer'>
+          <Button
+           // type="primary"
+           className = 'addEventButton'
+           onClick = {this.onOpenEvent} >
+            Add Event
+          </Button>
+            <MiniCalendar {...this.props}/>
+            <Button
+             type = 'primary'
+             className = 'miniEventSyncButton'
+            onClick = {this.openEventSyncModal}>
+              Event Sync
+            </Button>
+            <div className = 'timeLayerCon'>
+            <Button
+            type="primary"
+            // shape="round"
+            className = 'yearButton'
+            onClick = {this.onYearClick}>
+            Year
+            </Button>
+            <Button
+            type="primary"
+            // shape="round"
+            className = 'monthButton'
+            onClick = {this.onMonthClick}>
+            Month
+            </Button>
+            <Button
+            type="primary"
+            // shape="round"
+            className = 'weekButton'
+            onClick = {this.onWeekClick}>
+            Week
+            </Button>
+            </div>
+          </div>
       </div>
     )
   }
