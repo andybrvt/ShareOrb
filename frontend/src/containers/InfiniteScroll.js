@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
 import NewsFeedPost from '../containers/NewsfeedItems/NewsFeedPost';
 import { authAxios } from '../components/util';
 import './InfiniteScroll.css';
@@ -74,7 +74,8 @@ class InfiniteList extends React.Component {
       <hr />
 
       {post.map((j,index) => {
-        return <NewsFeedPost data = {j}  />
+        console.log(j)
+        return <NewsFeedPost data = {j} data_more = {this.props} />
       })}
       {error  && <div>{error}</div>}
       {loading && <div>Loading...</div>}
@@ -84,4 +85,10 @@ class InfiniteList extends React.Component {
   }
 }
 
-export default InfiniteList;
+const mapStateToProps = state => {
+  return {
+    likes: state.newsfeed.postLikes
+  }
+}
+
+export default connect(mapStateToProps)(InfiniteList);

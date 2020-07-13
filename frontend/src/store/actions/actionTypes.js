@@ -45,6 +45,11 @@ export const CLOSE_PICK_EVENT_SYNC_MODAL = 'CLOSE_PICK_EVENT_SYNC_MODAL';
 export const EVENT_EVENT_SYNC_MODAL = 'EVENT_EVENT_SYNC_MODAL';
 
 
+export const LOAD_POST_LIKE = 'LOAD_POST_LIKE';
+export const ADD_POST_LIKE = 'ADD_POST_LIKE';
+export const LOAD_POST_COMMENT = 'LOAD_POST_COMMENT';
+export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
+
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

@@ -4,14 +4,45 @@ import Comments from '../../containers/comments/comments.js';
 import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Row, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import WebSocketPostsInstance from  '../../postWebsocket';
+import { connect } from 'react-redux';
+
 
 class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
+    this.initialisePost()
+
     this.state = {
       visibleModal: false,
       commentPost:'',
     }
+  }
+
+
+  initialisePost(){
+    this.waitForSocketConnection(() =>{
+      WebSocketPostsInstance.fetchLikes(this.props.data.id)
+      WebSocketPostsInstance.fetchComments(this.props.data.id)
+    })
+  }
+
+
+  componentDidMount() {
+    WebSocketPostsInstance.connect(this.props.data.id)
+  }
+
+  waitForSocketConnection(callback){
+    const component = this
+    setTimeout(
+      function(){
+        if(WebSocketPostsInstance.state() ===1){
+          callback();
+          return;
+        } else {
+          component.waitForSocketConnection(callback);
+        }
+      }, 100)
   }
 
   showModal = () => {
@@ -162,6 +193,10 @@ class NewsfeedPost extends React.Component {
   // this renders the posts on the newsfeed
 
   ContentOfPost(){
+    const postId = this.props.data.id
+    let likeNum = this.props.data_more.likes
+    console.log(likeNum)
+    console.log(likeNum.length)
     return(
     <div onClick={this.OnClickPost}>
 
@@ -394,13 +429,15 @@ class NewsfeedPost extends React.Component {
 
   //   this.setState({value: e.target.value});
     }
+
     render() {
-  let temp="http://127.0.0.1:8000"+this.props.data.image;
-  const success = () => {
-  message.success('Clipped to your album!');
-  };
-  console.log(this.props);
-  const { TextArea } = Input;
+      console.log(this.props)
+      let temp="http://127.0.0.1:8000"+this.props.data.image;
+      const success = () => {
+      message.success('Clipped to your album!');
+      };
+      console.log(this.props);
+      const { TextArea } = Input;
   return (
     <div>
 
@@ -431,24 +468,17 @@ class NewsfeedPost extends React.Component {
       //
       //ContentOfPic
       <p> {this.ContentOfPost()} </p>
-
-
       }
-
-
-
-
-
-
-
       </div>
-
-
-
-
-
   );
 };
 }
 
-export default NewsfeedPost;
+const mapStateToProps = state => {
+  // return {
+  //   likes: state.newsfeed.postLikes
+  // }
+}
+
+
+export default connect(mapStateToProps)(NewsfeedPost);
