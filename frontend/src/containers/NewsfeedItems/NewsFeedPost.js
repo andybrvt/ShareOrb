@@ -166,8 +166,9 @@ class NewsfeedPost extends React.Component {
     <div onClick={this.OnClickPost}>
 
 
-    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:20}}>
-    <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
+    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
+
+    <div  style={{marginTop:20, marginLeft:30, marginRight:10, marginBottom:50}}>
       <div>
      <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
@@ -206,7 +207,7 @@ class NewsfeedPost extends React.Component {
 
     <Divider />
 
-  <div style={{padding:20}}>
+  <div style={{padding:40}}>
 
     <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
       <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
@@ -224,6 +225,24 @@ class NewsfeedPost extends React.Component {
       <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
 
     </Button>
+
+    {/*
+    <div class="custom-shape-divider-bottom-1594589938">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z" class="shape-fill"></path>
+    </svg>
+    </div>
+
+    */}
+
+    <div class="ellipse">
+
+
+    </div>
+    <div class="bottomRightCircle">
+
+
+    </div>
 
     </div>
 
