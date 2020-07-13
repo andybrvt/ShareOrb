@@ -91,7 +91,7 @@ class NotificationsDropDown extends React.Component{
   deleteSideNotification = ( placement ) => {
     notification.info({
       message: 'Notification Deleted',
-      placement
+      placement,
     })
   }
 

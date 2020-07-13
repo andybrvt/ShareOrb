@@ -4,16 +4,23 @@ from django.core import serializers
 from django.forms import model_to_dict
 from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
+from .serializers import PostSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from channels.layers import get_channel_layer
 from userprofile.models import User
+from .models import Post
 
 
 
 
 class FriendRequestConsumer(JsonWebsocketConsumer):
+    ### THIS CONSUMER ALSO INCLUDES CHANNELS FOR EVENTS SYNC AND
+    ### FRIEND REQUESTING NOTIFICATIONS
+
+
+
     # After going to def recieve, and if the command is 'fetch_friend_notifications'
     # it will then go to NotificationWebsocket.js which will check the command
     def fetch_notifications(self, data):
@@ -276,8 +283,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print('hereadfa')
-        print(data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -299,3 +304,42 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
         # THE PROBLEM IS HERE
         # Send message to WebSocket
         return self.send_json(notification)
+
+
+class LikeCommentConsumer(JsonWebsocketConsumer):
+    ### This class will cover all the channels that has to do with commenting
+    ### and liking a post, and each instance (channel) will pretty much be a post
+    ### in in of it self
+    def fetch_post_likes(self, data):
+
+        num_likes = Post.objects.filter(id = data['postId']).values('like_count')
+        # num_likes = Post.objects.filter(id = data['postId'])
+        # serializer = PostSerializer(num_likes, many= True)
+        likes = num_likes[0]['like_count']
+        # serializer =
+        contentLike = {
+            'command': 'likes',
+            'likes_num': likes,
+            'postId': data['postId']
+        }
+        print(contentLike)
+        self.send_json(contentLike)
+        # self.send_json(content)
+
+
+    def connect(self):
+        self.current_post = self.scope['url_route']['kwargs']['postId']
+        # The group name will pretty much be the name for each post
+        grp = 'post_'+self.current_post
+        async_to_sync (self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        self.current_post = self.scope['url_route']['kwargs']['postId']
+        grp = 'post_'+self.current_post
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+    def receive(self, text_data=None, bytes_data =None, **kwargs):
+        data = json.loads(text_data)
+        if data['command'] == 'fetch_post_likes':
+            self.fetch_post_likes(data)

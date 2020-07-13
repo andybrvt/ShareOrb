@@ -11,7 +11,8 @@ import messageReducer from './store/reducers/messages';
 import notificationsReducer from './store/reducers/notifications';
 import calendarReducer from './store/reducers/calendars';
 import calendarEventReducer from './store/reducers/calendarEvent';
-import eventSyncReducer from './store/reducers/eventSync'
+import eventSyncReducer from './store/reducers/eventSync';
+import newsfeedReducer from './store/reducers/newsfeed';
 import {reducer as formReducer } from 'redux-form';
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   calendar: calendarReducer,
   calendarEvent: calendarEventReducer,
   form: formReducer,
-  eventSync: eventSyncReducer
+  eventSync: eventSyncReducer,
+  newsfeed: newsfeedReducer
 })
 //store takes in reducer and an enhancer to handle the middleware
 

@@ -8,12 +8,14 @@ import * as authActions from './store/actions/auth';
 import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
+import WebSocketPostsInstance from './postWebsocket';
 
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
 import * as notificationsActions from './store/actions/notifications';
 import * as calendarActions from './store/actions/calendars';
+import * as newsfeedActions from './store/actions/newsfeed';
 
 
 class App extends Component {
@@ -50,6 +52,14 @@ class App extends Component {
       this.props.addEvent.bind(this)
     )
 
+    WebSocketPostsInstance.addCallbacks(
+      this.props.setLikes.bind(this),
+      this.props.addLike.bind(this),
+      this.props.setComments.bind(this),
+      this.props.addComment.bind(this),
+    )
+
+
 
   }
 
@@ -84,7 +94,12 @@ const mapDispatchToProps = dispatch => {
     setMessages: messages => dispatch(messageActions.setMessages(messages)),
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
-    addEvent: events => dispatch(calendarActions.addEvent(events))
+    addEvent: events => dispatch(calendarActions.addEvent(events)),
+    setLikes: likes => dispatch(newsfeedActions.loadPostLike(likes)),
+    addLike: like => dispatch(newsfeedActions.addPostLike(like)),
+    setComments: comments => dispatch(newsfeedActions.loadPostComment(comments)),
+    addComment: comment => dispatch(newsfeedActions.addPostComment(comment))
+
   }
 }
 
