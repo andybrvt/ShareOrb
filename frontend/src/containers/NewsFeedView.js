@@ -10,7 +10,7 @@ import SuggestedFriends from './Layouts/SuggestedFriends.js';
 
 
 import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic, Button} from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
+import { InboxOutlined, UserOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
@@ -135,18 +135,27 @@ class NewsFeedView extends React.Component {
 
 
 					<div class="createEventCSS" style = {{
-						backgroundColor: 'white',
+						background: '#bae7ff',
 						height: '400px',
 						width: '300px',
+
 						// postion: 'fixed',
 						position: 'relative',
 						marginRight:40,
+						marginTop:40,
 					}}>
+
+
+					<div  style={{textAlign:'center', fontSize:'20px', color:'black'}}>
+				Today's Events
+
+				</div>
+
+
 
 						<div style={{backgroundColor:'#F7F9FB', height: '300px',
 						width: '200px', marginTop:30, marginLeft:60}}>
 
-						Create an Event
 
 
 						<Checkbox>Share with Public </Checkbox>
@@ -225,7 +234,7 @@ class NewsFeedView extends React.Component {
 
  </div>
 
-
+ */}
 
 
 
@@ -247,23 +256,24 @@ class NewsFeedView extends React.Component {
 			 </span>
  <Divider />
  <p style={{padding:20, color:'black'}}>
-	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-	 probare, quae sunt a te dicta? Refert tamen, quo modo.
-	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-	 probare, quae sunt a te dicta? Refert tamen, quo modo.
-	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-	 probare, quae sunt a te dicta? Refert tamen, quo modo.
-	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-	 probare, quae sunt a te dicta? Refert tamen, quo modo.
+	 Wednesday -> Thursday
+	 <br/>
+	 3:00PM to 4:00PM
+	 <br/>
+	 <Avatar icon={<UserOutlined />} />
+		 <Avatar>U</Avatar>
+		 <Avatar size={40}>USER</Avatar>
+		 <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+		 <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+		 <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
 
  </p>
-
 
 
  	</div>
 
  </div>
- */}
+
 
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
@@ -290,8 +300,17 @@ class NewsFeedView extends React.Component {
 				col-8
 			</Col>
 
+
+			<div class="circle" >
+	<svg class="circle-icon" viewBox="0 0 24 24" width="10" height="10">
+
+		<line x1="2" x2="22" y1="12" y2="12" stroke-width="3" stroke-linecap="round"/>
+		<line x1="12" x2="12" y1="1" y2="39" stroke-width="3" stroke-linecap="round"/>
+	</svg>
+</div>
+
 			<div style = {{
-				backgroundColor: 'white',
+				backgroundColor: '#bae7ff',
 
 				height: '500px',
 				width: '380px',
@@ -304,12 +323,20 @@ class NewsFeedView extends React.Component {
 
 			>
 
-			<div class="sectionTitles">
-			People you may know
-			</div>
+
+
+
+
+			<div  style={{textAlign:'center', fontSize:'20px', color:'#181818'}}>
+			More People
+
+		</div>
+
 
 			<Divider plain></Divider>
-			<SuggestedFriends/>
+				<div class="appearBefore" style={{background:'white'}}>
+				<SuggestedFriends/>
+				</div>
 			</div>
 
 				</Row>

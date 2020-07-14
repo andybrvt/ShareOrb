@@ -4,6 +4,31 @@ img {
   border-radius: 5px 5px 0 0;
 }
 
+
+.circle {
+  background: #456BD9;
+  border-radius: 50%;
+  color: #fff;
+  height: 5em;
+  position: relative;
+  width: 5em;
+}
+
+.circle-icon {
+  fill: currentColor;
+  height: 50%;
+  left: 50%;
+  position: absolute;
+  stroke: currentColor;
+  stroke-width: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+
+
+
 .avatar {
   vertical-align: middle;
   width: 100px;
@@ -139,7 +164,7 @@ color: #203758;
 
 .createEventCSS{
   border-radius: 25px;
-  backgroundColor: 'white';
+
   height: '500px';
   width: '300px';
   position: 'relative';
