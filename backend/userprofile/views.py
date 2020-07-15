@@ -271,12 +271,26 @@ class postCommentTest(APIView):
 
 
 class post_detail(APIView):
-    def post(self, request, id, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
-        comments = post.comments.filter(active=True).order_by("-created_on")[0:5]
-        comments[3]='test'
-        # for now fetch the first 5 comments
-        new_comment = None
+    def post(self, request, postID, *args, **kwargs):
+        grabPost= models.Post.objects.get(id=postID)
+        print("loololololol")
+        print(grabPost)
+        print(grabPost.post_comments)
+        print(grabPost.post_comments())
+        comments_list=[]
+        for element in grabPost.post_comments():
+            print(element)
+
+            comments_list.append(element['id'])
+
+
+        print(comments_list)
+        # comments = grabPost.post_comments.filter(active=True).order_by("-created_on")[0:3]
+        queryset = models.Comment.objects.filter(pk__in=comments_list).order_by('-created_on').reverse()[0:3]
+
+        print(queryset)
+
+
         # Comment posted
         # if request.method == 'POST':
         #     comment_form = CommentForm(data=request.POST)

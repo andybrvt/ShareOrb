@@ -270,15 +270,7 @@ class NewsfeedPost extends React.Component {
 
     */}
 
-    <div class="ellipse">
-
-
-    </div>
-    <div class="bottomRightCircle">
-
-
-    </div>
-
+  
     </div>
 
 

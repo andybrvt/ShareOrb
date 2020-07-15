@@ -26,7 +26,7 @@ urlpatterns = [
 
 	path('explore', views.ExploreView.as_view()),
 	path('suggestedFriends', views.NewsFeedSuggestedFriends.as_view()),
-	
+
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),
 	path('friend-request/accept/<slug:username>', views.AcceptFriendRequest.as_view(), name='accept_request'),
@@ -41,6 +41,8 @@ urlpatterns = [
 
 
 	path('userpost', views.PostTest.as_view(), name='test comment'),
+	path('commentsOnPost/<slug:postID>/', views.post_detail.as_view(), name='comment on the posts'),
+
 
 	path('testComment/<slug:postID>/', views.postCommentTest.as_view(), name='test comment'),
 

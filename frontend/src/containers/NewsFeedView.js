@@ -310,8 +310,7 @@ class NewsFeedView extends React.Component {
 </div>
 
 			<div style = {{
-				backgroundColor: '#bae7ff',
-
+				background:'white',
 				height: '500px',
 				width: '380px',
 				// postion: 'fixed',
@@ -327,7 +326,7 @@ class NewsFeedView extends React.Component {
 
 
 
-			<div  style={{textAlign:'center', fontSize:'20px', color:'#181818'}}>
+			<div  style={{textAlign:'center', fontSize:'20px'}}>
 			More People
 
 		</div>
