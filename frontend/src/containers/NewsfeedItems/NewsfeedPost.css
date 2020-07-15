@@ -6,16 +6,66 @@
 
   background: #FFFFFF;
   border-radius: 4px;
-  min-height: 50px;
+  min-height: 70px;
 
 
-  border-radius: 0px; /* 5px rounded corners */
 
 }
 
 
+.ellipse {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-top: 50;
+  width: 100px;
+  height: 100px;
+       background-color: #0069FF;
+       border-radius: 0 100px 0 0;
+            -moz-border-radius: 0 100px 0 0;
+            -webkit-border-radius: 0 100px 0 0;
+ }
 
 
+
+
+ .bottomRightCircle {
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   margin-top: 50;
+   width: 100px;
+   height: 100px;
+   background-color: #0069FF;
+
+        border-radius: 100px 0 0 0;
+-moz-border-radius: 100px 0 0 0;
+-webkit-border-radius: 100px 0 0 0;
+
+  }
+
+
+.custom-shape-divider-bottom-1594589938 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1594589938 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 71px;
+}
+
+.custom-shape-divider-bottom-1594589938 .shape-fill {
+  background: #2193b0; /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #2193b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .seeMore{
   marginTop:10px;
