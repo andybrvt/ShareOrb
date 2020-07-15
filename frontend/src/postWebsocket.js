@@ -13,8 +13,30 @@ class WebSocketPosts {
     this.socketRef = null
   }
 
-  connect(postId){
-    const path = 'ws://127.0.0.1:8000/ws/like-commenting-post/'+postId
+  // connect(postId){
+  //   const path = 'ws://127.0.0.1:8000/ws/like-commenting-post/'+postId
+  //   console.log(path)
+  //   this.socketRef = new WebSocket(path)
+  //   this.socketRef.onopen = () => {
+  //     console.log('websocket open')
+  //   }
+  //   this.socketRef.onmessage = (e) => {
+  //     console.log(e.data)
+  //     this.socketNewPost(e.data)
+  //   }
+  //
+  //   this.socketRef.onerror = (e) => {
+  //     console.log(e.message);
+  //   }
+  //
+  //   this.socketRef.onclose = () => {
+  //     console.log('WebSocket is closed')
+  //     this.connect(postId)
+  //   }
+  // }
+
+  connect(){
+    const path = 'ws://127.0.0.1:8000/ws/newsfeed'
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {
@@ -31,7 +53,7 @@ class WebSocketPosts {
 
     this.socketRef.onclose = () => {
       console.log('WebSocket is closed')
-      this.connect(postId)
+      this.connect()
     }
   }
 
@@ -43,17 +65,19 @@ class WebSocketPosts {
   socketNewPost(data){
     console.log(data)
     const parsedData = JSON.parse(data);
+    // console.log(parsedData)
     const command = parsedData.command;
 
     if (command === 'likes'){
       const likes_num = JSON.parse(parsedData.likes_num)
-      const postId = JSON.parse(parsedData.postId)
+      console.log(likes_num)
+      // const postId = JSON.parse(parsedData.postId)
       const likeObject = {
-        postId: postId,
+
         likes: likes_num
       }
       console.log(likeObject)
-      this.callbacks['likes'](likeObject)
+      // this.callbacks['likes'](likeObject)
       console.log(likes_num)
     } else if (command === 'new_like'){
       console.log('new_like')

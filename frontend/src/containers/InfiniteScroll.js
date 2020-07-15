@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import NewsFeedPost from '../containers/NewsfeedItems/NewsFeedPost';
 import { authAxios } from '../components/util';
 import './InfiniteScroll.css';
+import WebSocketPostsInstance from  '../postWebsocket';
+
 
 // Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.Component {
   constructor(props){
     super(props);
+    this.initialisePost()
     this.state = {
       error: false,
       loading: false,
@@ -31,8 +34,36 @@ class InfiniteList extends React.Component {
     };
   }
 
+  initialisePost(){
+    this.waitForSocketConnection(() =>{
+      // WebSocketPostsInstance.fetchLikes(this.props.data.id)
+      // WebSocketPostsInstance.fetchComments(this.props.data.id)
+    })
+  }
+
+  waitForSocketConnection(callback){
+    const component = this
+    setTimeout(
+      function(){
+        if(WebSocketPostsInstance.state() ===1){
+          callback();
+          return;
+        } else {
+          component.waitForSocketConnection(callback);
+        }
+      }, 100)
+  }
+
+
+  componentDidMount() {
+    WebSocketPostsInstance.connect()
+
+  }
+
   componentWillMount() {
     this.loadPost();
+    // WebSocketPostsInstance.connect()
+
   };
 
   loadPost = () => {

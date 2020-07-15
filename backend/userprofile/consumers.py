@@ -312,15 +312,14 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
     ### in in of it self
     def fetch_post_likes(self, data):
 
-        num_likes = Post.objects.filter(id = data['postId']).values('like_count')
+        num_likes = Post.objects.all()
         # num_likes = Post.objects.filter(id = data['postId'])
-        # serializer = PostSerializer(num_likes, many= True)
-        likes = num_likes[0]['like_count']
+        serializer = PostSerializer(num_likes, many= True)
+        # likes = num_likes[0]['like_count']
         # serializer =
         contentLike = {
             'command': 'likes',
-            'likes_num': likes,
-            'postId': data['postId']
+            'likes_num': json.dumps(serializer.data),
         }
         print(contentLike)
         self.send_json(contentLike)
@@ -328,15 +327,17 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
 
 
     def connect(self):
-        self.current_post = self.scope['url_route']['kwargs']['postId']
+        # self.current_post = self.scope['url_route']['kwargs']['postId']
         # The group name will pretty much be the name for each post
-        grp = 'post_'+self.current_post
+        # grp = 'post_'+self.current_post
+        grp = 'newsfeed'
         async_to_sync (self.channel_layer.group_add)(grp, self.channel_name)
         self.accept()
 
     def disconnect(self, close_code):
-        self.current_post = self.scope['url_route']['kwargs']['postId']
-        grp = 'post_'+self.current_post
+        # self.current_post = self.scope['url_route']['kwargs']['postId']
+        # grp = 'post_'+self.current_post
+        grp = 'newsfeed'
         async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
 
     def receive(self, text_data=None, bytes_data =None, **kwargs):

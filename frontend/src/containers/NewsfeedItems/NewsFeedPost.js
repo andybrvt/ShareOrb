@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 class NewsfeedPost extends React.Component {
   constructor(props){
     super(props);
-    this.initialisePost()
+    // this.initialisePost()
 
     this.state = {
       visibleModal: false,
@@ -20,30 +20,30 @@ class NewsfeedPost extends React.Component {
   }
 
 
-  initialisePost(){
-    this.waitForSocketConnection(() =>{
-      WebSocketPostsInstance.fetchLikes(this.props.data.id)
-      WebSocketPostsInstance.fetchComments(this.props.data.id)
-    })
-  }
+  // initialisePost(){
+  //   this.waitForSocketConnection(() =>{
+  //     WebSocketPostsInstance.fetchLikes(this.props.data.id)
+  //     WebSocketPostsInstance.fetchComments(this.props.data.id)
+  //   })
+  // }
 
 
   componentDidMount() {
-    WebSocketPostsInstance.connect(this.props.data.id)
+    // WebSocketPostsInstance.connect()
   }
 
-  waitForSocketConnection(callback){
-    const component = this
-    setTimeout(
-      function(){
-        if(WebSocketPostsInstance.state() ===1){
-          callback();
-          return;
-        } else {
-          component.waitForSocketConnection(callback);
-        }
-      }, 100)
-  }
+  // waitForSocketConnection(callback){
+  //   const component = this
+  //   setTimeout(
+  //     function(){
+  //       if(WebSocketPostsInstance.state() ===1){
+  //         callback();
+  //         return;
+  //       } else {
+  //         component.waitForSocketConnection(callback);
+  //       }
+  //     }, 100)
+  // }
 
   showModal = () => {
     this.setState({
