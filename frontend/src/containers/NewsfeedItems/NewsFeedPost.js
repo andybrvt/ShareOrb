@@ -194,7 +194,7 @@ class NewsfeedPost extends React.Component {
   // this renders the posts on the newsfeed
 
   ContentOfPost(){
-
+    let like_people = this.props.data.people_like
     let num_like = this.props.data.people_like.length
     console.log(num_like)
     return(
@@ -245,7 +245,7 @@ class NewsfeedPost extends React.Component {
   <div style={{padding:40}}>
 
     <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
-      <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
+      <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px' }} />
       {num_like}
     </Button>
 
@@ -274,69 +274,51 @@ class NewsfeedPost extends React.Component {
 
 
             <div>
+
             {
+              (like_people.includes(this.props.userId)) ?
 
-
-              (this.props.data.like_condition==false) ?
-
-
-
-
-              <div className>
-
+              <div>
                 {
-                  (this.props.data.like_count==0) ?
-
+                  (num_like == 2) ?
                   <div>
-
+                    You and one person like this.
                   </div>
 
                   :
 
-
                   <div>
-                    {this.props.data.like_count} people like this
+                    {
+                      (num_like == 1)?
+                      <div>
+                        You like this.
+                      </div>
+                      :
+                      <div>
+                        You and {num_like - 1} people like this.
+                      </div>
+                    }
                   </div>
-
                 }
               </div>
-
 
               :
 
               <div>
-
-              {
-
-
-                  (this.props.data.like_count==2) ?
-                 <div>
-                  You and one person like this
-                  </div>
-
-                :
-
-                <div>
-
                 {
-
-
-                  (this.props.data.like_count==1) ?
-
+                  (num_like === 0) ?
                   <div>
-                    You like this
-
                   </div>
+
                   :
 
                   <div>
-
-                    You and {(this.props.data.like_count)-1} people like this
+                    {num_like} people like this.
                   </div>
+
                 }
-                </div>
-              }
               </div>
+
             }
 
 
@@ -425,7 +407,7 @@ class NewsfeedPost extends React.Component {
 
   AddOneToLike = (e) => {
     e.stopPropagation();
-    
+
     if ( this.props.data.people_like.includes(this.props.userId)){
       console.log('unlike')
       WebSocketPostsInstance.unSendOneLike(this.props.userId, this.props.data.id)
