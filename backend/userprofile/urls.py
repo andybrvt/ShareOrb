@@ -37,13 +37,19 @@ urlpatterns = [
 	path('friendnotificationrequest', views.FriendNotification.as_view(), name='userprofile-friend-notifications'),
 	path('add-like/<slug:id>/', views.AddOneLikeToPost.as_view(), name='curr post'),
 	path('notifications/delete/<slug:id>', views.onDeleteNotification.as_view(), name='delete notification'),
+
+
+	# Purpose: view comment not being used right now
 	path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='post comment'),
 
-
+	# show all posts not being used right now
 	path('userpost', views.PostTest.as_view(), name='test comment'),
-	path('commentsOnPost/<slug:postID>/', views.post_detail.as_view(), name='comment on the posts'),
 
 
+	# show 3 comments per post IS being used right now
+	path('commentsOnPost/<slug:postID>/', views.First3CommentsInPost.as_view(), name='comment on the posts'),
+
+	# posting comment  IS being used right now
 	path('testComment/<slug:postID>/', views.postCommentTest.as_view(), name='test comment'),
 
 	# path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='grab comment'),

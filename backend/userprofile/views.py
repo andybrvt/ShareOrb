@@ -10,7 +10,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.decorators import api_view
 from django.shortcuts import render, get_object_or_404
 from .forms import CommentForm
-
+from django.http import JsonResponse
 # Create your views here.
 # Views will take in models and serializers and then displays it
 #  You can also add in functions (def) to modify stuff
@@ -28,11 +28,6 @@ class UserIDView(APIView):
         return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
 
 
-class PostTest(generics.ListAPIView):
-    serializer_class = serializers.PostSerializer
-    def get_queryset(self):
-        queryset = models.Post.objects.all()
-        return queryset
 
 
 
@@ -129,22 +124,7 @@ class ExploreView(generics.ListAPIView):
         return queryset
 
 
-# Grabs everyone but current user and friends
-class NewsFeedSuggestedFriends(generics.ListAPIView):
-    serializer_class = serializers.UserSerializer
-    def get_queryset(self):
-        list = []
-        temp=(self.request.user.friends.all())
-        print("all friends")
-        print(temp)
-        for i in temp:
-            list.append(i.username)
-        list.append(self.request.user)
 
-        # Your can exclude a list by using keyword __in
-        # This is filtering by username in the list
-        queryset = models.User.objects.exclude(username__in = list)[0:2]
-        return queryset
 
 
 
@@ -243,6 +223,7 @@ class AddOneLikeToPost(APIView):
 
 
 class postCommentTest(APIView):
+
     def post(self, request, postID, *args, **kwargs):
         post= get_object_or_404(models.Post, id=postID)
         print(post)
@@ -270,7 +251,48 @@ class postCommentTest(APIView):
         return Response('View comment')
 
 
+
+
+
+
+class PostTest(generics.ListAPIView):
+    serializer_class = serializers.PostSerializer
+    def get_queryset(self):
+        queryset = models.Post.objects.all()
+        return queryset
+
+class First3CommentsInPost(generics.ListAPIView):
+    serializer_class = serializers.CommentSerializer
+    lookup_url_kwarg = "postID"
+    def get_queryset(self):
+        id = self.kwargs.get(self.lookup_url_kwarg)
+        print(id)
+        queryset = models.Comment.objects.filter(post=id)[0:3]
+        print(queryset)
+        return queryset
+
+
+# Grabs everyone but current user and friends
+class NewsFeedSuggestedFriends(generics.ListAPIView):
+    serializer_class = serializers.UserSerializer
+    def get_queryset(self):
+        list = []
+        temp=(self.request.user.friends.all())
+        print("all friends")
+        print(temp)
+        for i in temp:
+            list.append(i.username)
+        list.append(self.request.user)
+
+        # Your can exclude a list by using keyword __in
+        # This is filtering by username in the list
+        queryset = models.User.objects.exclude(username__in = list)[0:2]
+        return queryset
+
+
+
 class post_detail(APIView):
+
     def post(self, request, postID, *args, **kwargs):
         grabPost= models.Post.objects.get(id=postID)
         print("loololololol")
@@ -287,9 +309,7 @@ class post_detail(APIView):
         print(comments_list)
         # comments = grabPost.post_comments.filter(active=True).order_by("-created_on")[0:3]
         queryset = models.Comment.objects.filter(pk__in=comments_list).order_by('-created_on').reverse()[0:3]
-
-        print(queryset)
-
+        return JsonResponse(queryset.serializeCustom())
 
         # Comment posted
         # if request.method == 'POST':
@@ -304,7 +324,13 @@ class post_detail(APIView):
         #         new_comment.save()
         # else:
         #     comment_form = CommentForm()
-        return Response('View comment')
+
+
+
+
+
+
+
 
 
 class ViewComment(APIView):
