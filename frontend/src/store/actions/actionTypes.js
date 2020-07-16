@@ -48,7 +48,6 @@ export const EVENT_EVENT_SYNC_MODAL = 'EVENT_EVENT_SYNC_MODAL';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 export const UNADD_POST_LIKE = 'UNADD_POST_LIKE';
-export const LOAD_POST_COMMENT = 'LOAD_POST_COMMENT';
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 
 // action type > actions > dispatch > reducers > state

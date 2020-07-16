@@ -111,7 +111,6 @@ class InfiniteList extends React.Component {
       <hr />
 
       {post.map((j,index) => {
-        console.log(j)
         return <NewsFeedPost data = {j}  />
       })}
 

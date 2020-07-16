@@ -56,7 +56,6 @@ class App extends Component {
       this.props.setPosts.bind(this),
       this.props.addLike.bind(this),
       this.props.unaddLike.bind(this),
-      this.props.setComments.bind(this),
       this.props.addComment.bind(this),
     )
 
@@ -99,7 +98,6 @@ const mapDispatchToProps = dispatch => {
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
-    setComments: comments => dispatch(newsfeedActions.loadPostComment(comments)),
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment))
 
   }

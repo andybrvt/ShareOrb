@@ -12,9 +12,6 @@ class Comments extends React.Component {
 
 
   render() {
-    console.log(this.props)
-    console.log(this.props.newsfeed)
-    console.log(this.props.newsfeed.data)
     console.log(this.props.newsfeed.data.post_comments)
 
     const data = [

@@ -6,12 +6,14 @@ from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
 from .serializers import PostSerializer
 from .serializers import NewPostSerializer
+from .serializers import CommentSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from channels.layers import get_channel_layer
 from userprofile.models import User
 from .models import Post
+from .models import Comment
 
 
 
@@ -356,6 +358,20 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         }
         self.send_new_action(content)
 
+    def send_comment(self, data):
+        print('send_comment hit')
+        postObj = get_object_or_404(Post, id = data['postId'])
+        person = User.objects.get(id = data['userId']).username
+        comment = Comment.objects.create(post = postObj,
+        name = person, body = data['comment']  )
+        # Post.save()
+        serializer = CommentSerializer(comment)
+        content = {
+            'command': 'new_comment',
+            'comment': json.dumps(serializer.data)
+        }
+        return self.send_new_action(content)
+
 
 
     def send_new_action(self, postAction):
@@ -396,6 +412,8 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
             self.send_one_like(data)
         if data['command'] == 'unsend_one_like':
             self.unsend_one_like(data)
+        if data['command'] == 'send_comment':
+            self.send_comment(data)
 
     def send_post_action(self, postActions):
         postAction = postActions['action']

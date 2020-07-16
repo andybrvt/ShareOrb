@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  posts: []
+  posts: [],
 }
 
 export const loadPosts = (state, action) => {
@@ -16,7 +16,6 @@ export const loadPosts = (state, action) => {
 }
 
 export const addPostLike = (state, action) => {
-  console.log(action)
   return updateObject(state, {
     posts: state.posts.map(
       post => post.id === action.like.postId ? {
@@ -37,14 +36,10 @@ export const unaddPostLike = (state, action) => {
     if(person_post[i].id === action.unlike.postId){
       person_index = person_post[i]['people_like'].indexOf(action.unlike.userId)
       like_list = person_post[i]['people_like']
-      console.log(person_index)
-      console.log(like_list)
       like_list.splice(person_index,1)
-      console.log(like_list)
     }
   }
 
-  console.log(like_list)
 
   return updateObject(state, {
     posts: state.posts.map(
@@ -56,14 +51,19 @@ export const unaddPostLike = (state, action) => {
   })
 }
 
-export const loadPostComment = (state, action) => {
-  console.log('stuff')
-}
 
 export const addPostComment = (state, action ) => {
-  console.log('stuff')
-}
+  console.log(action.comment.comment.post)
+  return updateObject(state, {
+    posts: state.posts.map(
+      post => post.id === action.comment.comment.post ? {
+        ...post,
+        post_comments: [...post.post_comments, action.comment.comment]
+      } : post
+    )
+  })
 
+}
 
 
 const reducer = (state = initialState, action) => {
@@ -74,8 +74,6 @@ const reducer = (state = initialState, action) => {
       return addPostLike(state, action);
     case actionTypes.UNADD_POST_LIKE:
       return unaddPostLike(state,action);
-    case actionTypes.LOAD_POST_COMMENT:
-      return loadPostComment(state, action);
     case actionTypes.ADD_POST_COMMENT:
       return addPostComment(state, action);
     default:

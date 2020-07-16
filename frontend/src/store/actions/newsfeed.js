@@ -27,16 +27,6 @@ export const unaddPostLike = unlike => {
   }
 }
 
-export const loadPostComment = comments => {
-  // The format for the comments are probally gonna be the
-  // same, where the comments will have the id associated with
-  // the comments and the just get added into a list or what not
-  return {
-    type: actionTypes.LOAD_POST_COMMENT,
-    comments: comments
-  }
-}
-
 export const addPostComment = comment => {
   return {
     type: actionTypes.ADD_POST_COMMENT,

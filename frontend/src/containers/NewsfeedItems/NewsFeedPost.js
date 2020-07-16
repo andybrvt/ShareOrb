@@ -84,31 +84,33 @@ class NewsfeedPost extends React.Component {
 
 
   handleSubmit = () => {
-    console.log("SUBMIT BUTTON1!!!!!!")
-    console.log(this.props)
-    console.log(this.props.data)
-    console.log(this.props.data.id)
-    var data = new FormData();
-    // change this later to curr user
-    data.append("name", localStorage.getItem('username'));
-    data.append("body", this.state.commentPost);
-    for (var pair of data.entries()) {
-     console.log(pair[0]+ ', ' + pair[1]);
-    }
-    console.log(localStorage.getItem('token'))
+    WebSocketPostsInstance.sendComment(
+      this.props.userId,
+      this.props.data.id,
+      this.state.commentPost
+    )
 
-    fetch('http://127.0.0.1:8000/userprofile/testComment/'+this.props.data.id+'/',{
-     method: 'POST',
-       headers: {
-         Authorization: `Token ${localStorage.getItem('token')}`,
-       },
-       body:data
-    })
-      .then (res =>res.json())
-      .then(json =>{
-     	 console.log(json)
-     	 return json
-      })
+    // var data = new FormData();
+    // // change this later to curr user
+    // data.append("name", localStorage.getItem('username'));
+    // data.append("body", this.state.commentPost);
+    // for (var pair of data.entries()) {
+    //  console.log(pair[0]+ ', ' + pair[1]);
+    // }
+    // console.log(localStorage.getItem('token'))
+    //
+    // fetch('http://127.0.0.1:8000/userprofile/testComment/'+this.props.data.id+'/',{
+    //  method: 'POST',
+    //    headers: {
+    //      Authorization: `Token ${localStorage.getItem('token')}`,
+    //    },
+    //    body:data
+    // })
+    //   .then (res =>res.json())
+    //   .then(json =>{
+    //  	 console.log(json)
+    //  	 return json
+    //   })
      }
 
 
