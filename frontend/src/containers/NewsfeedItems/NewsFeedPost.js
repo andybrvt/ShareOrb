@@ -1,6 +1,7 @@
 import React from "react";
 import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
+import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Row, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
@@ -260,15 +261,9 @@ class NewsfeedPost extends React.Component {
 
     </Button>
 
-    {/*
-    <div class="custom-shape-divider-bottom-1594589938">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z" class="shape-fill"></path>
-    </svg>
+    <div>
+       <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
     </div>
-
-    */}
-
 
     </div>
 
@@ -377,7 +372,7 @@ class NewsfeedPost extends React.Component {
             <div>
              <Form.Item>
                <Input
-               placeholder="Write a comment"
+               placeholder="Write a "
                 rows={4}
                 onChange={this.handleCommentChange}
                />
