@@ -243,11 +243,24 @@ class NewsfeedPost extends React.Component {
     <Divider />
 
   <div style={{padding:40}}>
+    {
+      (like_people.includes(this.props.userId))?
+      <Button type = 'primary' shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
+        <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px' }} />
+        {num_like}
+      </Button>
 
-    <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
-      <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px' }} />
-      {num_like}
-    </Button>
+      :
+
+      <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
+        <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px' }} />
+        {num_like}
+      </Button>
+
+
+    }
+
+
 
 
     <Button shape="round" size="middle">
