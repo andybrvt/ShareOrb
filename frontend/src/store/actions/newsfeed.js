@@ -1,16 +1,15 @@
 import * as actionTypes from './actionTypes';
 
 
-export const loadPostLike = post => {
+export const loadPosts = post => {
   console.log(post)
   // The arguments that will be coming it in will be a
   // dictionary that contains both postId and the number
   // of likes so you pretty much just add them to the
   // prop dict with the post id associated with the likes
   return {
-    type: actionTypes.LOAD_POST_LIKE,
-    likes: post.likes,
-    postId: post.postId
+    type: actionTypes.LOAD_POSTS,
+    post: post.posts
   }
 }
 
@@ -18,6 +17,13 @@ export const addPostLike = like => {
   return {
     type: actionTypes.ADD_POST_LIKE,
     like: like
+  }
+}
+
+export const unaddPostLike = unlike => {
+  return{
+    type: actionTypes.UNADD_POST_LIKE,
+    unlike: unlike
   }
 }
 

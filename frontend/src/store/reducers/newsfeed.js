@@ -2,26 +2,57 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  postLikes:{}
+  posts: []
 }
 
-export const loadPostLike = (state, action) => {
-  const postId = String(action.postId)
-  const clonePostLikes = state.postLikes
-  console.log(typeof postId)
-  clonePostLikes[postId] = action.likes
-  console.log(clonePostLikes)
+export const loadPosts = (state, action) => {
   // state.postLikes[postId] = action.likes
   // const newPostLikes = { ...state.postLikes, }
   // So in the dictionary, the key will be the postId and the values
   // will be the number ofl likes
   return updateObject(state, {
-    postLikes: clonePostLikes
+    posts: action.post
   })
 }
 
 export const addPostLike = (state, action) => {
-  console.log('stuff')
+  console.log(action)
+  return updateObject(state, {
+    posts: state.posts.map(
+      post => post.id === action.like.postId ? {
+        ...post,
+        like_count : post.like_count + 1,
+        people_like: [...post.people_like, action.like.userId]
+      } : post
+    )
+  })
+
+}
+
+export const unaddPostLike = (state, action) => {
+  let person_post = state.posts
+  let person_index = ''
+  let person_like = []
+  for (let i = 0; i< person_post.length; i++){
+    if(person_post[i].id === action.unlike.postId){
+      person_index = person_post[i]['people_like'].indexOf(action.unlike.userId)
+      var like_list = person_post[i]['people_like']
+      console.log(like_list)
+      person_like = like_list.splice(person_index, 1)
+      console.log(person_like)
+    }
+  }
+
+  console.log(person_like)
+
+  return updateObject(state, {
+    posts: state.posts.map(
+      post => post.id === action.unlike.postId ? {
+        ...post,
+        people_like: person_like
+      } : post
+    )
+  })
 }
 
 export const loadPostComment = (state, action) => {
@@ -36,10 +67,12 @@ export const addPostComment = (state, action ) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
-    case actionTypes.LOAD_POST_LIKE:
-      return loadPostLike(state, action );
+    case actionTypes.LOAD_POSTS:
+      return loadPosts(state, action );
     case actionTypes.ADD_POST_LIKE:
       return addPostLike(state, action);
+    case actionTypes.UNADD_POST_LIKE:
+      return unaddPostLike(state,action);
     case actionTypes.LOAD_POST_COMMENT:
       return loadPostComment(state, action);
     case actionTypes.ADD_POST_COMMENT:

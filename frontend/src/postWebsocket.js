@@ -43,7 +43,6 @@ class WebSocketPosts {
       console.log('websocket open')
     }
     this.socketRef.onmessage = (e) => {
-      console.log(e.data)
       this.socketNewPost(e.data)
     }
 
@@ -65,22 +64,38 @@ class WebSocketPosts {
   socketNewPost(data){
     console.log(data)
     const parsedData = JSON.parse(data);
-    // console.log(parsedData)
     const command = parsedData.command;
 
-    if (command === 'likes'){
+    console.log(parsedData)
+    if (command === 'fetch_posts'){
       const likes_num = JSON.parse(parsedData.likes_num)
-      console.log(likes_num)
       // const postId = JSON.parse(parsedData.postId)
-      const likeObject = {
-
-        likes: likes_num
+      const postObject = {
+        posts: likes_num
       }
-      console.log(likeObject)
-      // this.callbacks['likes'](likeObject)
-      console.log(likes_num)
+      this.callbacks['fetch_posts'](postObject)
     } else if (command === 'new_like'){
+      // This is to send a like to the post through redux
       console.log('new_like')
+      const postIdNum = parsedData.postId
+      const userIdNum = parsedData.user
+      // The user in this case is the user who liked the post, pretty much
+      // the current user but to others it will be someone else
+      const likeObject = {
+        postId: postIdNum,
+        userId: userIdNum
+      }
+      this.callbacks['new_like'](likeObject)
+    } else if (command == 'un_like'){
+      const postIdNum = parsedData.postId
+      const userIdNum = parsedData.user
+      // This will just for the unlike porition
+      const unlikeObject = {
+        postId: postIdNum,
+        userId: userIdNum
+      }
+
+      this.callbacks['un_like'](unlikeObject)
     } else if (command === 'comments'){
       console.log('comments')
     } else if (command === 'new_comments'){
@@ -88,19 +103,43 @@ class WebSocketPosts {
     }
   }
 
-  addCallbacks(likesCallback, newLikeCallback, commentsCallback, newCommentsCallback){
-    this.callbacks['likes'] = likesCallback;
+  addCallbacks(
+      postsCallback,
+      newLikeCallback,
+      unLikeCallback,
+      commentsCallback,
+      newCommentsCallback){
+    this.callbacks['fetch_posts'] = postsCallback;
     this.callbacks['new_like'] = newLikeCallback;
+    this.callbacks['un_like'] = unLikeCallback;
     this.callbacks['comments'] = commentsCallback;
     this.callbacks['new_comments'] = newCommentsCallback;
   }
 
-  fetchLikes(postId){
+  fetchPosts(userId){
     // This function will fetch the likes in the post at the intial
     // load out
     this.sendPostsInfo({
+      userId: userId,
+      command: 'fetch_posts'
+    })
+  }
+
+  sendOneLike (userId, postId) {
+    console.log(userId)
+    this.sendPostsInfo({
+      userId: userId,
       postId: postId,
-      command: 'fetch_post_likes'
+      command: 'send_one_like'
+    })
+  }
+
+  unSendOneLike(userId, postId){
+    console.log(userId)
+    this.sendPostsInfo({
+      userId: userId,
+      postId: postId,
+      command: 'unsend_one_like'
     })
   }
 

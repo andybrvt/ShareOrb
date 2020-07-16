@@ -53,8 +53,9 @@ class App extends Component {
     )
 
     WebSocketPostsInstance.addCallbacks(
-      this.props.setLikes.bind(this),
+      this.props.setPosts.bind(this),
       this.props.addLike.bind(this),
+      this.props.unaddLike.bind(this),
       this.props.setComments.bind(this),
       this.props.addComment.bind(this),
     )
@@ -95,8 +96,9 @@ const mapDispatchToProps = dispatch => {
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
     addEvent: events => dispatch(calendarActions.addEvent(events)),
-    setLikes: likes => dispatch(newsfeedActions.loadPostLike(likes)),
+    setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
+    unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
     setComments: comments => dispatch(newsfeedActions.loadPostComment(comments)),
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment))
 

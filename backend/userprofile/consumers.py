@@ -5,6 +5,7 @@ from django.forms import model_to_dict
 from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
 from .serializers import PostSerializer
+from .serializers import NewPostSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -310,7 +311,7 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
     ### This class will cover all the channels that has to do with commenting
     ### and liking a post, and each instance (channel) will pretty much be a post
     ### in in of it self
-    def fetch_post_likes(self, data):
+    def fetch_posts(self, data):
 
         num_likes = Post.objects.all()
         # num_likes = Post.objects.filter(id = data['postId'])
@@ -318,12 +319,59 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         # likes = num_likes[0]['like_count']
         # serializer =
         contentLike = {
-            'command': 'likes',
+            'command': 'fetch_posts',
             'likes_num': json.dumps(serializer.data),
         }
-        print(contentLike)
         self.send_json(contentLike)
         # self.send_json(content)
+
+    def send_one_like(self, data):
+        new_person_like = get_object_or_404(User, id = data['userId'])
+        print(new_person_like)
+        postObj = Post.objects.get(id = data['postId'])
+        postObj.people_like.add(new_person_like)
+        postObj.save()
+        # postObj.people_like.add(new_person_like)
+        # postObj.save()
+        content = {
+            'command': 'new_like',
+            'postId': data['postId'],
+            'user': data['userId']
+        }
+
+        self.send_new_action(content)
+
+    def unsend_one_like(self, data):
+        # This function will be used remove one like from the post
+        person_like = get_object_or_404(User,id = data['userId'])
+        postObj = Post.objects.get(id = data['postId'])
+        postObj.people_like.remove(person_like)
+        postObj.save()
+
+        content = {
+            'command': 'un_like',
+            'postId': data['postId'],
+            'user': data['userId']
+
+        }
+        self.send_new_action(content)
+
+
+
+    def send_new_action(self, postAction):
+        # Send a message or whatever to the who channel group
+        # Since pretty much everyone is on the same channel layer
+        # you will send it and the sort it afterwards
+        channel_layer = get_channel_layer()
+        channel = 'newsfeed'
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'send_post_action',
+                'action': postAction
+            }
+        )
+
 
 
     def connect(self):
@@ -342,5 +390,15 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data =None, **kwargs):
         data = json.loads(text_data)
-        if data['command'] == 'fetch_post_likes':
-            self.fetch_post_likes(data)
+        if data['command'] == 'fetch_posts':
+            self.fetch_posts(data)
+        if data['command'] == 'send_one_like':
+            self.send_one_like(data)
+        if data['command'] == 'unsend_one_like':
+            self.unsend_one_like(data)
+
+    def send_post_action(self, postActions):
+        postAction = postActions['action']
+        # This will just send the information into the front end, you would
+        # still need to send it through the group too
+        return self.send_json(postAction)

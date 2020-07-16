@@ -59,7 +59,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Post
         # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
-        fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user', 'post_comments')
+        fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition', 'people_like', 'user', 'post_comments')
 
 
     def to_representation(self, instance):
@@ -68,6 +68,20 @@ class PostSerializer(serializers.ModelSerializer):
         return data
 
 
+class NewPostSerializer(serializers.ModelSerializer):
+
+    # post_comments = serializers.ReadOnlyField()
+    post_comments = CommentSerializer(many= True, read_only=True)
+    class Meta:
+        model = models.Post
+        # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
+        fields = ('id', 'like_count','like_condition', 'user', 'post_comments')
+
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['user'] = PostUserSerializer(models.User.objects.get(pk=data['user'])).data
+        return data
 
 
 

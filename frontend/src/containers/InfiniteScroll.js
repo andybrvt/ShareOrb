@@ -36,7 +36,7 @@ class InfiniteList extends React.Component {
 
   initialisePost(){
     this.waitForSocketConnection(() =>{
-      // WebSocketPostsInstance.fetchLikes(this.props.data.id)
+      WebSocketPostsInstance.fetchPosts(this.props.id)
       // WebSocketPostsInstance.fetchComments(this.props.data.id)
     })
   }
@@ -94,7 +94,13 @@ class InfiniteList extends React.Component {
 
   render () {
     console.log(this.props)
-    const { error, hasMore, loading, post} = this.state
+    // const { error, hasMore, loading, post} = this.state
+    let post = this.props.posts
+
+    // {error  && <div>{error}</div>}
+    // {loading && <div>Loading...</div>}
+    // {!hasMore && <div>No more results</div>}
+
     return (
 
 
@@ -106,11 +112,9 @@ class InfiniteList extends React.Component {
 
       {post.map((j,index) => {
         console.log(j)
-        return <NewsFeedPost data = {j} data_more = {this.props} />
+        return <NewsFeedPost data = {j}  />
       })}
-      {error  && <div>{error}</div>}
-      {loading && <div>Loading...</div>}
-      {!hasMore && <div>No more results</div>}
+
      </div>
    );
   }
@@ -118,7 +122,9 @@ class InfiniteList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    likes: state.newsfeed.postLikes
+    id: state.auth.id,
+    friends: state.auth.friends,
+    posts: state.newsfeed.posts
   }
 }
 

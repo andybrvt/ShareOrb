@@ -193,10 +193,9 @@ class NewsfeedPost extends React.Component {
   // this renders the posts on the newsfeed
 
   ContentOfPost(){
-    const postId = this.props.data.id
-    let likeNum = this.props.data_more.likes
-    console.log(likeNum)
-    console.log(likeNum.length)
+
+    let num_like = this.props.data.people_like.length
+    console.log(num_like)
     return(
     <div onClick={this.OnClickPost}>
 
@@ -246,7 +245,7 @@ class NewsfeedPost extends React.Component {
 
     <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
       <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />
-      {this.props.data.like_count}
+      {num_like}
     </Button>
 
 
@@ -270,7 +269,7 @@ class NewsfeedPost extends React.Component {
 
     */}
 
-  
+
     </div>
 
 
@@ -430,15 +429,22 @@ class NewsfeedPost extends React.Component {
 
 
   AddOneToLike = (e) => {
-     e.stopPropagation();
-    console.log("hi");
-    console.log(this.props);
-    console.log(this.props.data.id);
-  //   // const username = this.props.data.username;
-  //   // console.log(this.props)
-    authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
+    e.stopPropagation();
+    
+    if ( this.props.data.people_like.includes(this.props.userId)){
+      console.log('unlike')
+      WebSocketPostsInstance.unSendOneLike(this.props.userId, this.props.data.id)
+    } else {
+      // This websocket call will add one like to the post, but since only one user from
+      // one end can like that post so we only need the current user
+      WebSocketPostsInstance.sendOneLike(this.props.userId, this.props.data.id)
 
-  //   this.setState({value: e.target.value});
+    }
+
+
+    // authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
+
+
     }
 
     render() {
@@ -485,10 +491,11 @@ class NewsfeedPost extends React.Component {
 };
 }
 
+
 const mapStateToProps = state => {
-  // return {
-  //   likes: state.newsfeed.postLikes
-  // }
+  return {
+    userId: state.auth.id
+  }
 }
 
 
