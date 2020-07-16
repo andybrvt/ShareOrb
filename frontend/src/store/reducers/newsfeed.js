@@ -32,24 +32,25 @@ export const addPostLike = (state, action) => {
 export const unaddPostLike = (state, action) => {
   let person_post = state.posts
   let person_index = ''
-  let person_like = []
+  let like_list = []
   for (let i = 0; i< person_post.length; i++){
     if(person_post[i].id === action.unlike.postId){
       person_index = person_post[i]['people_like'].indexOf(action.unlike.userId)
-      var like_list = person_post[i]['people_like']
+      like_list = person_post[i]['people_like']
+      console.log(person_index)
       console.log(like_list)
-      person_like = like_list.splice(person_index, 1)
-      console.log(person_like)
+      like_list.splice(person_index,1)
+      console.log(like_list)
     }
   }
 
-  console.log(person_like)
+  console.log(like_list)
 
   return updateObject(state, {
     posts: state.posts.map(
       post => post.id === action.unlike.postId ? {
         ...post,
-        people_like: person_like
+        people_like: like_list
       } : post
     )
   })
