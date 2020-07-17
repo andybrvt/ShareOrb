@@ -105,6 +105,7 @@ class NotificationsDropDown extends React.Component{
   renderTimestamp = timestamp =>{
     let prefix = '';
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    console.log(timeDiff)
     if (timeDiff < 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
@@ -112,7 +113,7 @@ class NotificationsDropDown extends React.Component{
     }else if (timeDiff < 24*60 && timeDiff > 60) {
       prefix = `${Math.round(timeDiff/60)} hours ago`;
     } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
-      prefix = `${Math.round(timeDiff/60*24)} days ago`;
+      prefix = `${Math.round(timeDiff/(60*24))} days ago`;
     } else {
         prefix = `${new Date(timestamp)}`;
     }
@@ -386,6 +387,59 @@ class NotificationsDropDown extends React.Component{
               </div>
           </h4>
         </li>
+        )
+      }
+      if(notifications[i].type === 'like_notification'){
+        notificationList.push(
+          <li className = 'notificationListContainer'>
+            <div className = 'notificationIcon'>
+            <Avatar size = {55} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              icon = {<UserOutlined />}
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 liked your post.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+          </li>
+        )
+      } if (notifications[i].type === 'comment_notification'){
+        notificationList.push(
+          <li className = 'notificationListContainer'>
+            <div className = 'notificationIcon'>
+            <Avatar size = {55} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              icon = {<UserOutlined />}
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 commented on your post.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+          </li>
         )
       }
 

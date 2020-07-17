@@ -6,6 +6,7 @@ import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Row, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
+import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
 
 
@@ -90,6 +91,17 @@ class NewsfeedPost extends React.Component {
       this.state.commentPost
     )
 
+    if(this.props.userId !== this.props.data.id){
+      const notificationObject = {
+        command: 'comment_notification',
+        actor: this.props.userId,
+        recipient: this.props.data.user.id,
+        postId: this.props.data.id
+      }
+
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+    }
+
     // var data = new FormData();
     // // change this later to curr user
     // data.append("name", localStorage.getItem('username'));
@@ -100,7 +112,7 @@ class NewsfeedPost extends React.Component {
     // console.log(localStorage.getItem('token'))
     //
     // fetch('http://127.0.0.1:8000/userprofile/testComment/'+this.props.data.id+'/',{
-    //  method: 'POST',
+    //  method: 'POST',NotificationWebNotificationWebSocketInstanceSocketInstance
     //    headers: {
     //      Authorization: `Token ${localStorage.getItem('token')}`,
     //    },
@@ -370,7 +382,7 @@ class NewsfeedPost extends React.Component {
             <div>
              <Form.Item>
                <Input
-               placeholder="Write a "
+               placeholder="Write a comment"
                 rows={4}
                 onChange={this.handleCommentChange}
                />
@@ -430,8 +442,20 @@ class NewsfeedPost extends React.Component {
     } else {
       // This websocket call will add one like to the post, but since only one user from
       // one end can like that post so we only need the current user
-      WebSocketPostsInstance.sendOneLike(this.props.userId, this.props.data.id)
+      const notificationObject = {
+        command: 'like_notification',
+        actor: this.props.userId,
+        recipient: this.props.data.user.id,
+        postId: this.props.data.id
+      }
 
+
+      WebSocketPostsInstance.sendOneLike(this.props.userId, this.props.data.id)
+      if (this.props.userId !== this.props.data.user.id){
+        console.log('like notification')
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+      }
+      // NotificationWebSocketInstance.sendNotification()
     }
 
 
