@@ -225,7 +225,8 @@ class NewsfeedPost extends React.Component {
 
     <Divider />
 
-    <p style={{padding:10, color:'#203758'}} class="whiteSpacePost">
+
+    <p style={{padding:10, color:'black'}} class="whiteSpacePost">
               {
 
                  ((this.props.data.caption).length>600)?

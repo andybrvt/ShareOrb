@@ -135,7 +135,7 @@ class NewsFeedView extends React.Component {
 
 
 					<div class="createEventCSS" style = {{
-						background: '#bae7ff',
+						background: 'white',
 						height: '400px',
 						width: '300px',
 
@@ -153,7 +153,7 @@ class NewsFeedView extends React.Component {
 
 
 
-						<div style={{backgroundColor:'#F7F9FB', height: '300px',
+						<div style={{backgroundColor:'#bae7ff', height: '300px',
 						width: '200px', marginTop:30, marginLeft:60}}>
 
 

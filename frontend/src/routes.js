@@ -34,7 +34,7 @@ class BaseRouter extends React.Component {
 		return (
 
 
-      <div class="backgroundofEverything"  style={{background:'#F7F9FB',minHeight:'100%',}}>
+      <div class="backgroundofEverything"  style={{background:'red',minHeight:'100%',}}>
         { this.props.isAuthenticated?
         <SideMenu>
 
