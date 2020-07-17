@@ -414,6 +414,32 @@ class NotificationsDropDown extends React.Component{
             </h4>
           </li>
         )
+      } if (notifications[i].type === 'comment_notification'){
+        notificationList.push(
+          <li className = 'notificationListContainer'>
+            <div className = 'notificationIcon'>
+            <Avatar size = {55} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              icon = {<UserOutlined />}
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 commented on your post.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+          </li>
+        )
       }
 
 

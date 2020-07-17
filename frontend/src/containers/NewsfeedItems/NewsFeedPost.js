@@ -91,6 +91,17 @@ class NewsfeedPost extends React.Component {
       this.state.commentPost
     )
 
+    if(this.props.userId !== this.props.data.id){
+      const notificationObject = {
+        command: 'comment_notification',
+        actor: this.props.userId,
+        recipient: this.props.data.user.id,
+        postId: this.props.data.id
+      }
+
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+    }
+
     // var data = new FormData();
     // // change this later to curr user
     // data.append("name", localStorage.getItem('username'));
@@ -101,7 +112,7 @@ class NewsfeedPost extends React.Component {
     // console.log(localStorage.getItem('token'))
     //
     // fetch('http://127.0.0.1:8000/userprofile/testComment/'+this.props.data.id+'/',{
-    //  method: 'POST',
+    //  method: 'POST',NotificationWebNotificationWebSocketInstanceSocketInstance
     //    headers: {
     //      Authorization: `Token ${localStorage.getItem('token')}`,
     //    },
@@ -371,7 +382,7 @@ class NewsfeedPost extends React.Component {
             <div>
              <Form.Item>
                <Input
-               placeholder="Write a "
+               placeholder="Write a comment"
                 rows={4}
                 onChange={this.handleCommentChange}
                />
@@ -434,7 +445,7 @@ class NewsfeedPost extends React.Component {
       const notificationObject = {
         command: 'like_notification',
         actor: this.props.userId,
-        recipeint: this.props.data.user.id,
+        recipient: this.props.data.user.id,
         postId: this.props.data.id
       }
 
