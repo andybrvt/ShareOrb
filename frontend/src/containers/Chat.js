@@ -138,7 +138,7 @@ class Chat extends React.Component{
       }else if (timeDiff < 24*60 && timeDiff > 60) {
         prefix = `${Math.round(timeDiff/60)} hours ago`;
       } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
-        prefix = `${Math.round(timeDiff/60*24)} days ago`;
+        prefix = `${Math.round(timeDiff/(60*24))} days ago`;
       } else {
           prefix = `${new Date(timestamp)}`;
       }
