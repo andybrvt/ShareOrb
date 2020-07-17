@@ -76,7 +76,7 @@ class Comments extends React.Component {
     return (
       <div class="fontTest maxHeightPost">
         <List
-          className="comment-list"
+          // className="comment-list"
 
           itemLayout="horizontal"
           dataSource={this.props.newsfeed.data.post_comments.slice(0, 2)}
