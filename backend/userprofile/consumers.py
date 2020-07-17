@@ -72,6 +72,10 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, username= data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type="declined_friend", recipient = recipient, actor= actor, verb="declined  your friend request")
+        if data['command'] == 'like_notification':
+            recipient = get_object_or_404(User, id = data['recipeint'])
+            actor = get_object_or_404(User, id = data['actor'])
+            notification = CustomNotification.objects.create(type ='like_notification', recipient = recipient, actor = actor, verb = 'liked your posted') 
         # CustomNotification.save(self)
         # The notification will be serilizered and then sent to the group send
         serializer = NotificationSerializer(notification)
@@ -302,6 +306,8 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             self.accept_event_sync(data)
         if data['command'] == 'send_new_event_sync_notification':
             self.send_new_event_sync_notification(data)
+        if data['command'] == 'like_notification':
+            self.send_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
