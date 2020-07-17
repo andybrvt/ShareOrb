@@ -1,4 +1,4 @@
-import { Comment, Tooltip, List } from 'antd';
+import { Comment, Tooltip, List, Divider } from 'antd';
 import moment from 'moment';
 import React from "react";
 
@@ -79,7 +79,7 @@ class Comments extends React.Component {
           className="comment-list"
 
           itemLayout="horizontal"
-          dataSource={this.props.newsfeed.data.post_comments.slice(0, 3)}
+          dataSource={this.props.newsfeed.data.post_comments.slice(0, 2)}
           renderItem={item => (
             <li>
               <Comment
@@ -91,6 +91,7 @@ class Comments extends React.Component {
                 content={item.body}
                 datetime={item.datetime}
               />
+              <Divider/>
             </li>
           )}
         />
