@@ -81,7 +81,7 @@ class Comments extends React.Component {
           itemLayout="horizontal"
           dataSource={this.props.newsfeed.data.post_comments.slice(0, 2)}
           renderItem={item => (
-            <li>
+            <li style={{background:'red', }}>
               <Comment
 
                 locale={locale}
@@ -91,7 +91,7 @@ class Comments extends React.Component {
                 content={item.body}
                 datetime={item.datetime}
               />
-              <Divider/>
+
             </li>
           )}
         />
