@@ -179,19 +179,31 @@ class NewsFeedView extends React.Component {
 
 						<div style={{ padding:20}}>
 						<Row gutter={16}>
+
+
 							<Col span={8}>
-				        <Card title="Card title" bordered={false}>
-				          Card content
+
+
+
+
+				        <Card title="Write a Post" bordered={false}>
+								<div style={{background:'#99ff99'}} class="share">
+								<i class="fa fa-pencil"></i>
+								</div>
+				        </Card>
+				      </Col>
+				      <Col span={8}>
+				        <Card title="Share a Picture" bordered={false}>
+								<div style={{background:'#5cdbd3'}} class="share">
+								<i class="fa fa-picture-o"></i>
+								</div>
 				        </Card>
 				      </Col>
 				      <Col span={8}>
 				        <Card title="Card title" bordered={false}>
-				          Card content
-				        </Card>
-				      </Col>
-				      <Col span={8}>
-				        <Card title="Card title" bordered={false}>
-				          Card content
+								<div style={{background:'#722ed1'}} class="share">
+								<i  class="fa fa-archive" ></i>
+								</div>
 				        </Card>
 				      </Col>
 
@@ -237,6 +249,7 @@ class NewsFeedView extends React.Component {
  */}
 
 
+	{/*
 
  <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
  <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
@@ -274,6 +287,8 @@ class NewsFeedView extends React.Component {
 
  </div>
 
+	*/}
+
 
 									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
@@ -301,13 +316,6 @@ class NewsFeedView extends React.Component {
 			</Col>
 
 
-			<div class="circle" >
-	<svg class="circle-icon" viewBox="0 0 24 24" width="10" height="10">
-
-		<line x1="2" x2="22" y1="12" y2="12" stroke-width="3" stroke-linecap="round"/>
-		<line x1="12" x2="12" y1="1" y2="39" stroke-width="3" stroke-linecap="round"/>
-	</svg>
-</div>
 
 			<div style = {{
 				background:'white',
@@ -322,6 +330,9 @@ class NewsFeedView extends React.Component {
 
 			>
 
+			<div class="share">
+			<i class="fa fa-plus"></i>
+			</div>
 
 
 

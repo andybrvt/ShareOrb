@@ -8,6 +8,11 @@ import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowR
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
+import heart  from './heart.svg';
+import { commentPic } from './comment.svg';
+
+
+
 
 
 class NewsfeedPost extends React.Component {
@@ -257,18 +262,22 @@ class NewsfeedPost extends React.Component {
 
     <Divider />
 
+
+
+
+    <heart />
   <div style={{padding:40}}>
     {
       (like_people.includes(this.props.userId))?
-      <Button type = 'primary' shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
-        <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px' }} />
+      <Button type = 'primary' size="large"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
+          <img style={{padding:10}} src={heart} alt="React Logo" />
         {num_like}
       </Button>
 
       :
 
-      <Button shape="round" size="middle"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
-        <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px' }} />
+      <Button onClick ={this.AddOneToLike}  size="large" style={{marginRight: '15px',}}>
+        <img  style={{padding:'5'}} src={heart} alt="React Logo" />
         {num_like}
       </Button>
 
@@ -295,63 +304,63 @@ class NewsfeedPost extends React.Component {
 
     </div>
 
+    <div>
 
+    {
+      (like_people.includes(this.props.userId)) ?
+
+      <div>
+        {
+          (num_like == 2) ?
+          <div>
+            You and one person like this.
+          </div>
+
+          :
+
+          <div>
+            {
+              (num_like == 1)?
+              <div>
+                You like this.
+              </div>
+              :
+              <div>
+                You and {num_like - 1} people like this.
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      :
+
+      <div>
+        {
+          (num_like === 0) ?
+          <div>
+          </div>
+
+          :
+
+          <div>
+            {num_like} people like this.
+          </div>
+
+        }
+      </div>
+
+    }
+
+
+
+    </div>
       </div>
 
     </div>
 
 
-            <div>
 
-            {
-              (like_people.includes(this.props.userId)) ?
-
-              <div>
-                {
-                  (num_like == 2) ?
-                  <div>
-                    You and one person like this.
-                  </div>
-
-                  :
-
-                  <div>
-                    {
-                      (num_like == 1)?
-                      <div>
-                        You like this.
-                      </div>
-                      :
-                      <div>
-                        You and {num_like - 1} people like this.
-                      </div>
-                    }
-                  </div>
-                }
-              </div>
-
-              :
-
-              <div>
-                {
-                  (num_like === 0) ?
-                  <div>
-                  </div>
-
-                  :
-
-                  <div>
-                    {num_like} people like this.
-                  </div>
-
-                }
-              </div>
-
-            }
-
-
-
-            </div>
     </div>
   )
   }

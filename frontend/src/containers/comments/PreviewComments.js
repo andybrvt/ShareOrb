@@ -1,7 +1,7 @@
 import { Comment, Tooltip, List, Divider } from 'antd';
 import moment from 'moment';
 import React from "react";
-
+import './PreviewComments.css'
 
 class Comments extends React.Component {
 
@@ -81,7 +81,7 @@ class Comments extends React.Component {
           itemLayout="horizontal"
           dataSource={this.props.newsfeed.data.post_comments.slice(0, 2)}
           renderItem={item => (
-            <li style={{background:'red', }}>
+            <li class="commentLook">
               <Comment
 
                 locale={locale}
@@ -91,8 +91,9 @@ class Comments extends React.Component {
                 content={item.body}
                 datetime={item.datetime}
               />
-
+  
             </li>
+
           )}
         />
       </div>
