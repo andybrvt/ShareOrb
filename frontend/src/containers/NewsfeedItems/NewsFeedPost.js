@@ -269,28 +269,32 @@ class NewsfeedPost extends React.Component {
   <div style={{padding:40}}>
     {
       (like_people.includes(this.props.userId))?
-      <Button type = 'primary' size="large"  onClick ={this.AddOneToLike} style={{marginRight: '15px',}}>
-          <img style={{padding:10}} src={heart} alt="React Logo" />
-        {num_like}
+      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+          <i class="fa fa-heart-o" ></i>
+          <i style={{marginLeft:'10px'}}> Likes </i>
+          <i style={{marginLeft:'10px'}}> {num_like}</i>
+
       </Button>
 
       :
+      <Button onClick ={this.AddOneToLike} size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+          <i class="fa fa-heart-o" ></i>
+          <i style={{marginLeft:'10px'}}> Like </i>
+          <i style={{marginLeft:'10px'}}> {num_like}</i>
 
-      <Button onClick ={this.AddOneToLike}  size="large" style={{marginRight: '15px',}}>
-        <img  style={{padding:'5'}} src={heart} alt="React Logo" />
-        {num_like}
       </Button>
 
 
     }
 
 
+    <Button onClick ={this.AddOneToLike} size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+        <i class="fa fa-pencil" ></i>
+        <i style={{marginLeft:'10px'}}> Comments </i>
+        <i style={{marginLeft:'10px'}}>   {this.props.data.post_comments.length}</i>
 
-
-    <Button shape="round" size="middle">
-      <EditTwoTone  style={{ marginRight:'8px', fontSize: '20px'}}/>
-      {this.props.data.post_comments.length}
     </Button>
+
 
 
     <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>

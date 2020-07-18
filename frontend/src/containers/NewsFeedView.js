@@ -146,7 +146,7 @@ class NewsFeedView extends React.Component {
 					}}>
 
 
-					<div  style={{textAlign:'center', fontSize:'20px', color:'black'}}>
+					<div style={{textAlign:'center', fontSize:'20px', color:'black'}}>
 				Today's Events
 
 				</div>
@@ -184,9 +184,11 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>
 
 
+								<div class="topCard">
 
+								</div>
 
-				        <Card title="Write a Post" bordered={false}>
+				        <Card title="Write a Post" bordered={true}>
 								<div style={{background:'#99ff99'}} class="share">
 								<i class="fa fa-pencil"></i>
 								</div>
@@ -200,7 +202,7 @@ class NewsFeedView extends React.Component {
 				        </Card>
 				      </Col>
 				      <Col span={8}>
-				        <Card title="Card title" bordered={false}>
+				        <Card title="View today's story" bordered={false}>
 								<div style={{background:'#722ed1'}} class="share">
 								<i  class="fa fa-archive" ></i>
 								</div>

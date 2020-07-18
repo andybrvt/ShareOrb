@@ -4,6 +4,19 @@ img {
   border-radius: 5px 5px 0 0;
 }
 
+.topCard {
+
+
+  background: #FFFFFF;
+
+  width:200px;
+  height:50px;
+  border-style: ridge;
+
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+}
+
 
 .circle {
   background: #456BD9;
