@@ -15,7 +15,7 @@ import testPic from './antd.png';
 import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider, AutoComplete} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
-import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
+
 import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 
 import * as navActions from '../../store/actions/nav'

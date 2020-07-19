@@ -325,7 +325,7 @@ class NewsFeedView extends React.Component {
 				width: '380px',
 				// postion: 'fixed',
 				position: 'relative',
-				left:'20px'
+				left:'80px'
 			}}
 
 			class="suggestFriendsCSS"

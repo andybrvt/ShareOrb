@@ -12,7 +12,7 @@ import * as navActions from '../../store/actions/nav'
 import moment from 'moment';
 // import SearchBar from '../HeaderSearch';
 
-import ProfileDropDown from '../../containers/GlobalHeader/ProfileDropDown.js';
+
 import SideMenu from '../../components/SideMenu/SideMenu';
 
 import './Layouts.css';

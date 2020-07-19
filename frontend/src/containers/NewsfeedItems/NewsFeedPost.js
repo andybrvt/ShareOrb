@@ -56,7 +56,7 @@ class NewsfeedPost extends React.Component {
     this.setState({
       visibleModal: true,
     });
-  };
+  };RF
 
   handleOk = e => {
     console.log(e);
@@ -246,12 +246,16 @@ class NewsfeedPost extends React.Component {
               {
 
                  ((this.props.data.caption).length>600)?
-                 <span>
-                 {this.props.data.caption.substring(0,550)}
 
-                 <span class="grayout"> {this.props.data.caption.substring(550,600)}</span>
-                <div class="seeMore"> ... see more </div>
-                 </span>
+                 <div class="outerSeeMore">
+                   <span class="innerSeeMore">
+                   {this.props.data.caption.substring(0,550)}
+
+
+                   </span>
+                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
+                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
+                 </div>
                  :
                  <div class="whiteSpacePost">
                  {this.props.data.caption}
@@ -277,7 +281,7 @@ class NewsfeedPost extends React.Component {
       </Button>
 
       :
-      <Button onClick ={this.AddOneToLike} size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
           <i class="fa fa-heart-o" ></i>
           <i style={{marginLeft:'10px'}}> Like </i>
           <i style={{marginLeft:'10px'}}> {num_like}</i>
@@ -288,7 +292,7 @@ class NewsfeedPost extends React.Component {
     }
 
 
-    <Button onClick ={this.AddOneToLike} size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+    <Button size="medium" style={{fontSize:'14px', marginRight: '15px',}}>
         <i class="fa fa-pencil" ></i>
         <i style={{marginLeft:'10px'}}> Comments </i>
         <i style={{marginLeft:'10px'}}>   {this.props.data.post_comments.length}</i>

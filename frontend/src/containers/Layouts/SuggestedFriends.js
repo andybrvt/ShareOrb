@@ -118,7 +118,7 @@ class SuggestedFriends extends React.Component {
           renderItem={item => (
 
             <List.Item
-              actions={[<a key="list-loadmore-edit">edit</a>, ]}
+
             >
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
@@ -135,7 +135,7 @@ class SuggestedFriends extends React.Component {
             </List.Item>
           )}
         />
-        <Button onClick={this.onLoadMore}>Explore</Button>
+        <Button  id="follow-button" onClick={this.onLoadMore}>Explore More</Button>
       </div>
     );
   }

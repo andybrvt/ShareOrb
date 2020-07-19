@@ -81,10 +81,6 @@ import { authAxios } from '../../components/util';
 
 
 
-          <span className={`${styles.action} ${styles.account}`}>
-            <Avatar size="small" className={styles.avatar} src={this.state.avatar} alt="avatar" />
-            <span className={styles.name}>{this.state.username}</span>
-          </span>
         </Dropdown>
       </div>
 
