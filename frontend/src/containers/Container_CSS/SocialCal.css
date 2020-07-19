@@ -1,0 +1,82 @@
+.socialCalContainer {
+  position: relative;
+
+  width: 1750px;
+  /* height: 920px; */
+
+  background-color: blue;
+  display: flex;
+}
+
+
+.socialCalendar {
+  display: block;
+  position: relative;
+  width: 100%;
+  /* background-color: red; */
+  background: var(--neutral-color);
+  /* border: 1px solid var(--border-color); */
+}
+.socialCalendar .header {
+  font-weight: 400;
+  font-size: 15px;
+  padding: 1.5em 0;
+  /* border-bottom: 1px solid var(--border-color); */
+  /* background-color: blue; */
+  width: 100%;
+}
+.socialCalendar .header .icon {
+  cursor: pointer;
+  transition: .15s ease-out;
+}
+.socialCalendar .header .icon:hover {
+  transform: scale(1.75);
+  transition: .25s ease-out;
+  color: var(--main-color);
+}
+.socialCalendar .header .icon:first-of-type{
+  margin-left: 1em;
+}
+.socialCalendar .header .icon:last-of-type{
+  margin-right: 1em;
+}
+
+.socialCalendar .days{
+  width: 1750px;
+  font-weight: 400;
+  color: ;
+  font-size: 100%;
+  padding: .75em 0;
+  /* border-top: 1px solid var(--border-color); */
+  border-bottom: 1px solid var(--border-color);
+  /* background-color: red; */
+  /* width: 700px; */
+}
+
+.socialCalendar .body {
+  background-color: white;
+  width: 1750px;
+}
+.socialCalendar .body .row {
+  border-bottom: 1px solid var(--border-color);
+}
+.socialCalendar .body .row .cell{
+  /* background-image: url("https://images.unsplash.com/photo-1594643566940-893b456ae452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"); */
+  position: relative;
+  height: 150px;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  /* background: var(--neutral-color); */
+  transition: 0.25s ease-out;
+}
+
+.socialCalendar .body .row .cell-img {
+  /* width: 10px; */
+  /* height: 150px; */
+}
+
+.img {
+  /* width: 10px; */
+  /* height: 20px; */
+}

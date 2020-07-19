@@ -1,89 +1,109 @@
+.test2{
+  font-size: 20px;
+}
 
-  .test2{
-
-    font-size: 20px;
-
-  }
-
-
-  .profile-content .tab-content .tab-pane {
-    min-height: 200px; }
-
-
-    .title {
-      margin-top: 30px;
-      margin-bottom: 25px;
-      min-height: 32px; }
-
-    .title.text-center {
-      margin-bottom: 50px; }
+.profile-content {
+  /* background-color: red; */
+  width: 1750px;
+  position: relative;
+  left: 40px;
+}
+.profile-content .tab-content .tab-pane {
+  min-height: 200px;
+}
 
 
+.title {
+  margin-top: 30px;
+  margin-bottom: 25px;
+  min-height: 32px;
+}
 
-  .img-circle {
-    background-color: #FFFFFF;
-    margin-bottom: 10px;
-    padding: 4px;
-    border-radius: 50% !important;
-    max-width: 100%; }
-
-
-  .img-no-padding {
-  padding: 0px; }
-
-  .owner .avatar {
-    padding: 15px;
-    max-width: 180px;
-    margin: -85px auto 0;
-    display: inline-block;
-    position: relative; z-index: 100;
-   }
-
-  .owner .name h4 {
-    margin-top: 10px; }
+.title.text-center {
+  margin-bottom: 50px;
+}
 
 
-    .test3{
-      border-radius: 4px 4px 0 0;
-    }
+
+.img-circle {
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+  padding: 4px;
+  border-radius: 50% !important;
+  max-width: 100%;
+}
 
 
-    .timeline-cover{
-      background: url("https://images.unsplash.com/photo-1499380848949-2960e980ed02?ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80") no-repeat;
-      background-position: center;
-      background-size: cover;
-      min-height: 360px;
-      border-radius: 0 0 4px 4px;
-      position: relative;
-    }
+.img-no-padding {
+  padding: 0px;
+}
+
+.owner .avatar {
+  padding: 15px;
+  max-width: 180px;
+  margin: -85px auto 0;
+  display: inline-block;
+  position: relative; z-index: 100;
+}
+
+.owner .name h4 {
+  margin-top: 10px;
+}
 
 
-    .popover-primary {
+.test3{
+  border-radius: 4px 4px 0 0;
+}
+
+
+.timeline-cover{
+  background: url("https://images.unsplash.com/photo-1499380848949-2960e980ed02?ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80") no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 360px;
+  border-radius: 0 0 4px 4px;
+  position: relative;
+}
+
+
+.popover-primary {
   background-color: #6dd3d6;
-  color: #FFFFFF; }
-  .popover-primary .popover-title {
-    background-color: #6dd3d6;
-    color: rgba(0, 0, 0, 0.56); }
-  .popover-primary.bottom .arrow:after {
-    border-bottom-color: #6dd3d6; }
-  .popover-primary.left > .arrow::after {
-    border-left-color: #6dd3d6; }
-  .popover-primary.top > .arrow::after {
-    border-top-color: #6dd3d6; }
-  .popover-primary.right > .arrow::after {
-    border-right-color: #6dd3d6; }
+  color: #FFFFFF;
+}
+.popover-primary .popover-title {
+  background-color: #6dd3d6;
+  color: rgba(0, 0, 0, 0.56);
+}
+.popover-primary.bottom .arrow:after {
+  border-bottom-color: #6dd3d6;
+}
+.popover-primary.left > .arrow::after {
+  border-left-color: #6dd3d6;
+}
+.popover-primary.top > .arrow::after {
+  border-top-color: #6dd3d6;
+}
+.popover-primary.right > .arrow::after {
+  border-right-color: #6dd3d6;
+}
 
-    .popover-warning {
-      background-color: #fcd27b;
-      color: #FFFFFF; }
-      .popover-warning .popover-title {
-        background-color: #fcd27b;
-        color: rgba(0, 0, 0, 0.56); }
-      .popover-warning.bottom .arrow:after {
-        border-bottom-color: #fcd27b; }
-      .popover-warning.left > .arrow::after {
-        border-left-color: #fcd27b; }
-      .popover-warning.top > .arrow::after {
-        border-top-color: #fcd27b; }
-      .popover-warning.right > .arrow::after {
-        border-right-color: #fcd27b; }
+.popover-warning {
+  background-color: #fcd27b;
+  color: #FFFFFF;
+}
+.popover-warning .popover-title {
+  background-color: #fcd27b;
+  color: rgba(0, 0, 0, 0.56);
+}
+.popover-warning.bottom .arrow:after {
+  border-bottom-color: #fcd27b;
+}
+.popover-warning.left > .arrow::after {
+  border-left-color: #fcd27b;
+}
+.popover-warning.top > .arrow::after {
+  border-top-color: #fcd27b;
+}
+.popover-warning.right > .arrow::after {
+  border-right-color: #fcd27b;
+}

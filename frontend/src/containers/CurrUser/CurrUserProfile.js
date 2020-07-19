@@ -3,6 +3,7 @@ import { Tabs, Statistic } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
+import SocialCalendar from '../SocialCalendar'
 
 import {
   Button,
@@ -65,7 +66,7 @@ class CurrUserProfile extends React.Component{
 
           <div className="section profile-content">
 
-          <Container>
+          <Container >
             <div class="timeline-cover">
 
             </div>
@@ -180,18 +181,33 @@ class CurrUserProfile extends React.Component{
               </TabPane>
             </TabContent>
 
-            <Tabs onChange={callback} type="card">
-              <TabPane tab="Social Calendar" key="1">
-                Insert social calendar
-              </TabPane>
-              <TabPane tab="Pictures" key="2">
-                Picture album
-              </TabPane>
-              <TabPane tab="Profile" key="3">
-                Profile
-              </TabPane>
-            </Tabs>,
+
           </Container>
+          <Tabs
+          style = {{
+            // backgroundColor:'blue',
+            textAlign: 'center'
+            // position: 'relative',
+            // left: '200px'
+          }}
+           onChange={callback}
+           type="card"
+           centered = {true}>
+            <TabPane
+            style = {{
+              // backgroundColor: 'red',
+              width: '1760px'
+            }}
+            tab="Social Calendar" key="1">
+              <SocialCalendar />
+            </TabPane>
+            <TabPane tab="Pictures" key="2">
+              Picture album
+            </TabPane>
+            <TabPane tab="Profile" key="3">
+              Profile
+            </TabPane>
+          </Tabs>
           </div>
         </div>
       )
