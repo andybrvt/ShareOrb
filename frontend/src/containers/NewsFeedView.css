@@ -4,14 +4,34 @@ img {
   border-radius: 5px 5px 0 0;
 }
 
-.topCard {
 
+.parentBox{
+width: 100%;
+}
+
+
+.childBox{
+  width: 33%; height: 400px; float: left; background: green;
+}
+
+
+.cardAlign{
+  position: absolute;
+  top: 50%;
+  left:45%;
+  font-size: 20px;
+  transform: translateY(-50%);
+}
+
+.topCard {
+  position: relative;
 
   background: #FFFFFF;
+  padding: 20px;
+  width:230px;
+  height:50%;
+  border-radius: 8px;
 
-  width:200px;
-  height:50px;
-  
 
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
@@ -41,12 +61,12 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 
 .share{
-  display:block;
+
   width:60px;
   height:60px;
   background:#ff9100;
   top:300px;
-  left:50%;
+
   z-index:999;
   text-align:center;
   overflow:hidden;

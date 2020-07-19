@@ -177,8 +177,8 @@ class NewsFeedView extends React.Component {
 					<div>
 
 
-						<div style={{ padding:20}}>
-						<Row gutter={16}>
+						<div >
+						<Row gutter={24}>
 
 
 							<Col span={8}>
@@ -186,27 +186,42 @@ class NewsFeedView extends React.Component {
 
 								<div class="topCard">
 
+
+									<i class="fa fa-picture-o share"></i>
+									 <p  class="cardAlign"> Write a post </p>
+
 								</div>
 
-				        <Card title="Write a Post" bordered={true}>
-								<div style={{background:'#99ff99'}} class="share">
-								<i class="fa fa-pencil"></i>
-								</div>
-				        </Card>
+
 				      </Col>
-				      <Col span={8}>
-				        <Card title="Share a Picture" bordered={false}>
-								<div style={{background:'#5cdbd3'}} class="share">
-								<i class="fa fa-picture-o"></i>
+
+							<Col span={8}>
+
+
+								<div class="topCard">
+
+
+									<i style={{background:'#5cdbd3'}} class="fa fa-pencil share"></i>
+									 <p  class="cardAlign"> Share a Picture </p>
+
 								</div>
-				        </Card>
+
+
 				      </Col>
-				      <Col span={8}>
-				        <Card title="View today's story" bordered={false}>
-								<div style={{background:'#722ed1'}} class="share">
-								<i  class="fa fa-archive" ></i>
+
+
+							<Col span={8}>
+
+
+								<div class="topCard">
+
+
+									<i style={{background:'#722ed1'}} class="fa fa-archive share"></i>
+									 <p  class="cardAlign"> View today's story </p>
+
 								</div>
-				        </Card>
+
+
 				      </Col>
 
 							<div >
@@ -217,39 +232,6 @@ class NewsFeedView extends React.Component {
 
 
 							 <div>
-	{/*
- <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
- <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
- 	<div>
-	 <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-
-				 <span class="personName">
-					 Jon Chen
-				 </span>
-
-				</div>
-
-
-			 <span class="fb-group-date"> 110 followers</span>
-			 <span style={{marginRight:10, marginTop:80}}>
-			 <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
-			 </span>
- <Divider />
- <p style={{padding:20, color:'black'}}>
-	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-	 probare, quae sunt a te dicta? Refert tamen, quo modo.
- </p>
-
- <Divider />
-
- Coments blah blah blah
-
- 	</div>
-
- </div>
-
- */}
-
 
 	{/*
 
@@ -291,8 +273,10 @@ class NewsFeedView extends React.Component {
 
 	*/}
 
-
+									{/*
 									<NewsFeedFormPost data = {this.props}/>
+
+									*/}
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />
 									</div>

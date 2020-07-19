@@ -15,7 +15,9 @@ class PostUserSerializer(serializers.ModelSerializer):
     def get_friends(self, obj):
         # print(obj.friends.all().first().username)
         list = []
+
         for i in obj.friends.all():
+
             user = i.username
             list.append(user)
         return list
