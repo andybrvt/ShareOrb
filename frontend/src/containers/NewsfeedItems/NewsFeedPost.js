@@ -95,8 +95,10 @@ class NewsfeedPost extends React.Component {
       this.props.data.id,
       this.state.commentPost
     )
+    console.log(this.props.userId)
+    console.log(this.props.data.user.id)
 
-    if(this.props.userId !== this.props.data.id){
+    if(this.props.userId !== this.props.data.user.id){
       const notificationObject = {
         command: 'comment_notification',
         actor: this.props.userId,
