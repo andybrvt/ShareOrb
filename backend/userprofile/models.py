@@ -17,7 +17,8 @@ class User(AbstractUser):
     dob = models.DateField(blank=True, null=True, max_length=12)
     phone_number = models.CharField(blank=True, null=True, max_length=10)
     slug = models.SlugField()
-    friends = models.ManyToManyField("self", blank=True)
+    friends = models.ManyToManyField("self", blank=True, related_name = 'friends')
+
 
     def get_posts(self):
         print(Post.objects.filter(user=self).values_list())
@@ -45,7 +46,15 @@ post_save.connect(post_save_user_model_receiver, sender=User)
 #     def __str__(self):
 #         return str(self.user.username)
 
+class UserFollowing(models.Model):
+    # Since these are foreign key, they can pretty much be access by the user model, so I just made them seperate
+    person_following = models.ForeignKey(User, related_name = 'following', on_delete=models.CASCADE)
+    person_getting_followers = models.ForeignKey(User, related_name = 'followers', on_delete=models.CASCADE)
+    #This is to give the date that the user if following or followed
+    created = models.DateTimeField(auto_now_add = True)
 
+    # So basically how this works is that if you want to follow someone, you will be the person_following and
+    # the person gettting the following will be the person_getting_followers
 
 class Post(models.Model):
     caption = models.CharField(max_length=1000, default = 'caption')
