@@ -106,7 +106,7 @@ class InfiniteList extends React.Component {
 
       <div style={{ flex: 1}}>
 
-        <div className="testFont" style={{color:'black', fontSize:25}}> Welcome {this.props.data.username}. Here's what's going on today! </div>
+        <div className="testFont" style={{color:'black', fontSize:25, marginTop:'40px'}}> Welcome, {this.props.data.username}. Here's what's going on today! </div>
 
       <hr />
 
