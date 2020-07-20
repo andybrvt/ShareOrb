@@ -21,7 +21,15 @@ class NewsFeedView extends React.Component {
 		profileList:[],
 		username: '',
 		id: '',
+		postShow:false,
 	}
+
+
+	postCondition = () => {
+    this.setState({
+      postShow: true,
+    });
+  };
 
 	componentWillReceiveProps(newProps){
 		this.props.grabUserCredentials();
@@ -44,50 +52,9 @@ class NewsFeedView extends React.Component {
 	render() {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
+		console.log(this.state.postShow)
 		return (
 			<div>
-			{/*
-			<Row>
-			<Col span={4}>col-4</Col>
-
-
-      <Col span={32}>col-8</Col>
-
-
-			<div  style={{marginBottom:30}}>
-				<Row gutter={32}>
-					<Col span={8}>
-						<Card title="Write a Post" bordered={false}>
-							Write a Post
-						</Card>
-					</Col>
-					<Col span={8}>
-						<Card title="Upload a picture" bordered={false}>
-							<	Dragger >
-								<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
-									<InboxOutlined />
-								</p>
-
-									Browse or drag file
-
-
-							</Dragger>,
-						</Card>
-					</Col>
-					<Col span={8}>
-						<Card title="Create Event" bordered={false}>
-							Invite a friend
-						</Card>
-					</Col>
-				</Row>
-
-
-
-
-			</div>
-
-			</Row>
-			*/}
 
 
 			{isLoggedIn ?
@@ -177,8 +144,37 @@ class NewsFeedView extends React.Component {
 					<div>
 
 
-						<div style={{ padding:20}}>
-						<Row gutter={16}>
+						<div >
+						<Row gutter={24}>
+
+
+							<Col span={8}>
+
+
+								<div onClick ={this.postCondition} class="topCard">
+
+
+									<i  class="fa fa-pencil share"></i>
+									 <p  class="cardAlign"> Write a post </p>
+
+								</div>
+
+
+				      </Col>
+
+							<Col span={8}>
+
+
+								<div class="topCard">
+
+
+									<i style={{background:'#5cdbd3'}} class="fa fa-picture-o share"></i>
+									 <p  class="cardAlign"> Share a Picture </p>
+
+								</div>
+
+
+				      </Col>
 
 
 							<Col span={8}>
@@ -186,70 +182,45 @@ class NewsFeedView extends React.Component {
 
 								<div class="topCard">
 
+
+									<i style={{background:'#722ed1'}} class="fa fa-archive share"></i>
+									 <p  class="cardAlign"> View today's story </p>
+
 								</div>
 
-				        <Card title="Write a Post" bordered={true}>
-								<div style={{background:'#99ff99'}} class="share">
-								<i class="fa fa-pencil"></i>
-								</div>
-				        </Card>
-				      </Col>
-				      <Col span={8}>
-				        <Card title="Share a Picture" bordered={false}>
-								<div style={{background:'#5cdbd3'}} class="share">
-								<i class="fa fa-picture-o"></i>
-								</div>
-				        </Card>
-				      </Col>
-				      <Col span={8}>
-				        <Card title="View today's story" bordered={false}>
-								<div style={{background:'#722ed1'}} class="share">
-								<i  class="fa fa-archive" ></i>
-								</div>
-				        </Card>
+
 				      </Col>
 
 							<div >
 
 
 
+{
+	!this.state.postShow?
+	<div>
+
+
+
+	</div>
+
+
+:
+
+<div style={{marginTop:'150px', marginBottom:'50px'}}>
+
+
+<NewsFeedFormPost data = {this.props}/>
+
+
+</div>
+
+
+}
+
 
 
 
 							 <div>
-	{/*
- <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
- <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
- 	<div>
-	 <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-
-				 <span class="personName">
-					 Jon Chen
-				 </span>
-
-				</div>
-
-
-			 <span class="fb-group-date"> 110 followers</span>
-			 <span style={{marginRight:10, marginTop:80}}>
-			 <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
-			 </span>
- <Divider />
- <p style={{padding:20, color:'black'}}>
-	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-	 probare, quae sunt a te dicta? Refert tamen, quo modo.
- </p>
-
- <Divider />
-
- Coments blah blah blah
-
- 	</div>
-
- </div>
-
- */}
-
 
 	{/*
 
@@ -292,7 +263,6 @@ class NewsFeedView extends React.Component {
 	*/}
 
 
-									<NewsFeedFormPost data = {this.props}/>
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />
 									</div>
