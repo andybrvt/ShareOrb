@@ -184,7 +184,7 @@ class NewsFeedView extends React.Component {
 
 
 									<i style={{background:'#722ed1'}} class="fa fa-archive share"></i>
-									 <p  class="cardAlign"> View today's story </p>
+									 <p  class="cardAlign"> View today's album </p>
 
 								</div>
 
@@ -206,7 +206,7 @@ class NewsFeedView extends React.Component {
 
 :
 
-<div style={{marginTop:'150px', marginBottom:'50px'}}>
+<div style={{marginTop:'150px'}}>
 
 
 <NewsFeedFormPost data = {this.props}/>
