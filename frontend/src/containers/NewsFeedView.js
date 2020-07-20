@@ -21,7 +21,15 @@ class NewsFeedView extends React.Component {
 		profileList:[],
 		username: '',
 		id: '',
+		postShow:false,
 	}
+
+
+	postCondition = () => {
+    this.setState({
+      postShow: true,
+    });
+  };
 
 	componentWillReceiveProps(newProps){
 		this.props.grabUserCredentials();
@@ -44,50 +52,9 @@ class NewsFeedView extends React.Component {
 	render() {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
+		console.log(this.state.postShow)
 		return (
 			<div>
-			{/*
-			<Row>
-			<Col span={4}>col-4</Col>
-
-
-      <Col span={32}>col-8</Col>
-
-
-			<div  style={{marginBottom:30}}>
-				<Row gutter={32}>
-					<Col span={8}>
-						<Card title="Write a Post" bordered={false}>
-							Write a Post
-						</Card>
-					</Col>
-					<Col span={8}>
-						<Card title="Upload a picture" bordered={false}>
-							<	Dragger >
-								<p className="ant-upload-drag-icon" style={{ height: "20px" }}>
-									<InboxOutlined />
-								</p>
-
-									Browse or drag file
-
-
-							</Dragger>,
-						</Card>
-					</Col>
-					<Col span={8}>
-						<Card title="Create Event" bordered={false}>
-							Invite a friend
-						</Card>
-					</Col>
-				</Row>
-
-
-
-
-			</div>
-
-			</Row>
-			*/}
 
 
 			{isLoggedIn ?
@@ -184,10 +151,10 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>
 
 
-								<div class="topCard">
+								<div onClick ={this.postCondition} class="topCard">
 
 
-									<i class="fa fa-picture-o share"></i>
+									<i  class="fa fa-pencil share"></i>
 									 <p  class="cardAlign"> Write a post </p>
 
 								</div>
@@ -201,7 +168,7 @@ class NewsFeedView extends React.Component {
 								<div class="topCard">
 
 
-									<i style={{background:'#5cdbd3'}} class="fa fa-pencil share"></i>
+									<i style={{background:'#5cdbd3'}} class="fa fa-picture-o share"></i>
 									 <p  class="cardAlign"> Share a Picture </p>
 
 								</div>
@@ -227,6 +194,28 @@ class NewsFeedView extends React.Component {
 							<div >
 
 
+
+{
+	!this.state.postShow?
+	<div>
+
+
+
+	</div>
+
+
+:
+
+<div>
+
+
+<NewsFeedFormPost data = {this.props}/>
+
+
+</div>
+
+
+}
 
 
 
@@ -273,10 +262,7 @@ class NewsFeedView extends React.Component {
 
 	*/}
 
-									{/*
-									<NewsFeedFormPost data = {this.props}/>
 
-									*/}
 									<div className = 'newsfeed' >
 										<InfiniteList data={this.props} />
 									</div>

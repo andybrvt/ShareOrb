@@ -56,7 +56,7 @@ class NewsfeedPost extends React.Component {
     this.setState({
       visibleModal: true,
     });
-  };RF
+  };
 
   handleOk = e => {
     console.log(e);
@@ -87,6 +87,8 @@ class NewsfeedPost extends React.Component {
       commentPost: e.target.value,
     });
   };
+
+  
 
 
   handleSubmit = () => {
