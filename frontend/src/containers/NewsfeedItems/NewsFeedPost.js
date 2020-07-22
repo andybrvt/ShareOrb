@@ -23,6 +23,7 @@ class NewsfeedPost extends React.Component {
     this.state = {
       visibleModal: false,
       commentPost:'',
+      commentsCondition:false,
     }
   }
 
@@ -55,6 +56,13 @@ class NewsfeedPost extends React.Component {
   showModal = () => {
     this.setState({
       visibleModal: true,
+    });
+  };
+
+
+  triggerComments = () => {
+    this.setState({
+      commentsCondition: true,
     });
   };
 
@@ -232,6 +240,10 @@ class NewsfeedPost extends React.Component {
 
            <span class="personName">
              {this.props.data.user.username}
+             <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
+               <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
+
+             </Button>
              <div>
              <span class="fb-group-date" style={{marginLeft:50}}> 110 followers</span>
 
@@ -322,7 +334,7 @@ class NewsfeedPost extends React.Component {
     {
       (like_people.includes(this.props.userId))?
       <span>
-      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+      <Button size="medium" shape="round" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
           <i class="fa fa-heart-o" ></i>
           <i style={{marginLeft:'10px'}}> {num_like}</i>
 
@@ -333,7 +345,7 @@ class NewsfeedPost extends React.Component {
 
       :
       <span>
-      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+      <Button size="medium" shape="round" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
           <i class="fa fa-heart-o" ></i>
           <i style={{marginLeft:'10px'}}> {num_like}</i>
 
@@ -346,7 +358,7 @@ class NewsfeedPost extends React.Component {
     }
 
 
-    <Button size="medium" style={{fontSize:'14px', marginRight: '15px',}}>
+    <Button size="medium" shape="round" onClick ={this.triggerComments} style={{fontSize:'14px', marginRight: '15px',}}>
         <i class="fa fa-pencil" ></i>
 
         <i style={{marginLeft:'10px'}}>   {this.props.data.post_comments.length}</i>
@@ -354,15 +366,25 @@ class NewsfeedPost extends React.Component {
     </Button>
 
 
+    {
+      (this.state.commentsCondition) ?
 
-    <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
-      <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
 
-    </Button>
+      <div style={{marginTop:'50px'}}>
+         <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
+      </div>
 
-    <div>
-       <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
-    </div>
+
+
+      :
+
+      <div>
+
+      </div>
+
+    }
+
+
 
     </div>
 
@@ -462,7 +484,7 @@ class NewsfeedPost extends React.Component {
 
   AddOneToLike = (e) => {
     e.stopPropagation();
-
+    this.triggerComments();
     if ( this.props.data.people_like.includes(this.props.userId)){
       console.log('unlike')
       WebSocketPostsInstance.unSendOneLike(this.props.userId, this.props.data.id)
