@@ -327,9 +327,9 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
     ### in in of it self
     def fetch_posts(self, data):
 
-        num_likes = Post.objects.all()
+        post_list = Post.objects.all().order_by('-created_at', '-updated_at')
         # num_likes = Post.objects.filter(id = data['postId'])
-        serializer = PostSerializer(num_likes, many= True)
+        serializer = PostSerializer(post_list, many= True)
         # likes = num_likes[0]['like_count']
         # serializer =
         contentLike = {

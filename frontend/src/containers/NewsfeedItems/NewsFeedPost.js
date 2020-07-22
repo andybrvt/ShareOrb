@@ -88,7 +88,7 @@ class NewsfeedPost extends React.Component {
     });
   };
 
-  
+
 
 
   handleSubmit = () => {
@@ -143,7 +143,7 @@ class NewsfeedPost extends React.Component {
     return(
       <Card
          className="cardborder"
-         style={{ width: 700, marginTop: 50, marginBottom:20  }}
+         style={{ width: 300, marginTop: 50, marginBottom:20  }}
          actions={[
           <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />,
            <EditTwoTone  style={{ marginRight:'12px', fontSize: '20px'}}/>,
@@ -271,53 +271,6 @@ class NewsfeedPost extends React.Component {
     <Divider />
 
 
-
-
-    <heart />
-  <div style={{padding:40}}>
-    {
-      (like_people.includes(this.props.userId))?
-      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
-          <i class="fa fa-heart-o" ></i>
-          <i style={{marginLeft:'10px'}}> Likes </i>
-          <i style={{marginLeft:'10px'}}> {num_like}</i>
-
-      </Button>
-
-      :
-      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
-          <i class="fa fa-heart-o" ></i>
-          <i style={{marginLeft:'10px'}}> Like </i>
-          <i style={{marginLeft:'10px'}}> {num_like}</i>
-
-      </Button>
-
-
-    }
-
-
-    <Button size="medium" style={{fontSize:'14px', marginRight: '15px',}}>
-        <i class="fa fa-pencil" ></i>
-        <i style={{marginLeft:'10px'}}> Comments </i>
-        <i style={{marginLeft:'10px'}}>   {this.props.data.post_comments.length}</i>
-
-    </Button>
-
-
-
-    <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
-      <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
-
-    </Button>
-
-    <div>
-       <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
-    </div>
-
-    </div>
-
-    <div>
-
     {
       (like_people.includes(this.props.userId)) ?
 
@@ -363,6 +316,59 @@ class NewsfeedPost extends React.Component {
       </div>
 
     }
+
+    <heart />
+  <div style={{padding:10}}>
+    {
+      (like_people.includes(this.props.userId))?
+      <span>
+      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+          <i class="fa fa-heart-o" ></i>
+          <i style={{marginLeft:'10px'}}> {num_like}</i>
+
+      </Button>
+
+
+      </span>
+
+      :
+      <span>
+      <Button size="medium" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
+          <i class="fa fa-heart-o" ></i>
+          <i style={{marginLeft:'10px'}}> {num_like}</i>
+
+      </Button>
+
+
+      </span>
+
+
+    }
+
+
+    <Button size="medium" style={{fontSize:'14px', marginRight: '15px',}}>
+        <i class="fa fa-pencil" ></i>
+
+        <i style={{marginLeft:'10px'}}>   {this.props.data.post_comments.length}</i>
+
+    </Button>
+
+
+
+    <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
+      <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
+
+    </Button>
+
+    <div>
+       <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
+    </div>
+
+    </div>
+
+    <div>
+
+
 
 
 
