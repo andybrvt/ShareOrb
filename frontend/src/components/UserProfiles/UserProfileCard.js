@@ -15,6 +15,11 @@ import { EnvironmentOutlined, MoreOutlined } from '@ant-design/icons';
 const { Meta } = Card;
 
 class UserProfileCard extends React.Component {
+
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -78,7 +83,7 @@ class UserProfileCard extends React.Component {
         <MoreOutlined />
         </div>
         <div className = 'bottom'>
-          <div className = 'name'> Todd Smith </div>
+          <div className = 'name'> {this.capitalize(this.props.data.username)} </div>
           <div className = 'designation'> Web Developer </div>
           <div className = 'location'> <EnvironmentOutlined /> Tucson, AZ </div>
         </div>

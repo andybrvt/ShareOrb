@@ -5,6 +5,7 @@ import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
+import './Container_CSS/Explore.css';
 
 
 import { Row, Col, Divider } from 'antd';
@@ -40,47 +41,24 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
     }
   }
 
+  renderFriendList () {
+    const {profileList} = this.state
+    let peopleList = []
+    {profileList.map((j,index) => {
+      peopleList.push(
+        <UserProfileCard data = {j} key ={index} />
+      )
+    })}
+    return peopleList
+  }
+
 // the map((j,index) => {}) will loop through all the objects
 	render() {
     const {profileList} = this.state
     console.log(this.state.profileList)
 		return (
-
-
-
-
-
-
-
-      <div>
-
-      <Row gutter={[40, 48]}>
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-      </Row>
-      <Row gutter={[40, 48]}>
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-        <Col span={3} />
-      </Row>
-
-
-
-
-        {profileList.map((j,index) => {
-          return <UserProfileCard data = {j} key ={index} />
-        })}
+      <div className = 'explore-grid'>
+        {this.renderFriendList()}
 			</div>
 		)
 	}
