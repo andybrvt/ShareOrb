@@ -189,34 +189,6 @@
   transition: 0.5s;
 }
 
-.profileCard.active .name, .profileCard.active .designation{
-  transform: translateY(-310px);
-  color: #fff;
-}
-
-.profileCard.active .btn {
-  transform: translate(-50%, 30px);
-}
-
-.profileCard.active .email{
-  width: 200px;
-  background-color: #ffffff40;
-}
-
-.profileCard.active .profile-image{
-  height: 470px;
-}
-
-.profileCard.active .btn-text {
-  transform: translateY(-30px);
-}
-
-.profileCard.active .social {
-  top: 0;
-  background-color: #000000cc;
-}
-
-
 
 
 
