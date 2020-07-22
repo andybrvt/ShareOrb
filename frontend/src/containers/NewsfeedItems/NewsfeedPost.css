@@ -17,7 +17,53 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 
+.box{
 
+  border-bottom: 1px solid #F4F4F4;
+  border-top: 1px solid #F4F4F4;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.box-buttons > .row {
+  margin-left: -30px;
+  
+  border-bottom: 1px solid #F4F4F4;
+  border-top: 1px solid #F4F4F4;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.box-buttons > .row > button {
+  background: #FFF;
+  border: 0;
+  border-right: 1px solid #F4F4F4;
+  color: #9197A3;
+  font-size: 20px;
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  margin: 0;
+  *outline: 1px #08F;
+  padding: 0;
+  width: 33.33333333333%;
+}
+
+.box-buttons > .row > button:hover {
+  background: #F5F5F5;
+  color: #7D8696;
+}
+
+.box-buttons > .box-click {
+  color: #1890ff;
+  font-size: 13px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 10px 30px;
+  position: relative;
+}
 
 
 .card {
@@ -27,7 +73,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
   min-height: 70px;
 
-  width:600px;
+  width:650px;
 box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
 background-color: #ffffff;
 }

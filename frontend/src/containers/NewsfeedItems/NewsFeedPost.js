@@ -240,12 +240,12 @@ class NewsfeedPost extends React.Component {
 
            <span class="personName">
              {this.props.data.user.username}
-             <Button shape="round" size="middle" style={{ marginLeft:'350px',}}>
+             <Button shape="round" size="middle" style={{ marginLeft:'400px', marginBottom:'15px'}}>
                <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
 
              </Button>
              <div>
-             <span class="fb-group-date" style={{marginLeft:50}}> 110 followers</span>
+             <span class="fb-group-date" style={{marginLeft:55}}> 110 followers</span>
 
              <span class="fb-group-date" style={{marginLeft:300}}> Yesterday 5:20pm</span>
              </div>
@@ -329,11 +329,27 @@ class NewsfeedPost extends React.Component {
 
     }
 
+    2 people like This        33 comments
+
+    <div class="box-buttons">
+      <div class="row">
+        <button><span class="fa fa-heart"></span></button>
+        <button><span class="fa fa-comment-o"></span></button>
+        <button><span class="fa fa-archive"></span></button>
+      </div>
+    </div>
+
     <heart />
   <div style={{padding:10}}>
     {
+
+
+
       (like_people.includes(this.props.userId))?
+
+
       <span>
+
       <Button size="medium" shape="round" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
           <i class="fa fa-heart-o" ></i>
           <i style={{marginLeft:'10px'}}> {num_like}</i>
