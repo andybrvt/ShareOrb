@@ -8,6 +8,7 @@ import ava2 from '../images/avatar2.jpg';
 import facebook from '../images/facebook.png';
 import instagram from '../images/instagram.png';
 import twitter from '../images/twitter.png';
+import { EnvironmentOutlined, MoreOutlined } from '@ant-design/icons';
 
 
 
@@ -69,40 +70,25 @@ class UserProfileCard extends React.Component {
     console.log(this.props)
     return (
 
-
       <div className = "profileCard">
         <div className = 'image-box'>
         <img className = 'profile-image' src = {ava2} alt = 'Avatar'/>
         </div>
+        <div className = 'top'>
+        <MoreOutlined />
+        </div>
         <div className = 'bottom'>
-          <div className = 'btn'>
-            <div
-            onClick = {() => this.onClickToggle()}
-            className = 'btn-text'><span>More</span><span>Close</
-            span>
-            </div>
-          </div>
-          <div className = 'name'>{this.props.data.username}</div>
-          <div className = 'designation'>Web developer </div>
+          <div className = 'name'> Todd Smith </div>
+          <div className = 'designation'> Web Developer </div>
+          <div className = 'location'> <EnvironmentOutlined /> Tucson, AZ </div>
         </div>
         <div className = 'social'>
-          <p>Follow me</p>
-          <div className = 'social-links'>
-            <a href = 'https://facebook.com/username'>
-              <img src = {facebook} alt = 'Facebook' />
-            </a>
-            <a href = 'https://twitter.com/username'>
-              <img src = {twitter} alt = 'Facebook' />
-            </a>
-            <a href = 'https://instagram.com/username'>
-              <img src = {instagram} alt = 'Facebook' />
-            </a>
-          </div>
-          <a className = 'email' href = 'email'>Email</a>
+        <div className = 'social-links'>
+          <div className = 'btn'> Profile </div>
+          <div className = 'btn'> Follow </div>
+        </div>
         </div>
       </div>
-
-
 
 
 
