@@ -62,7 +62,7 @@ class NewsfeedPost extends React.Component {
 
   triggerComments = () => {
     this.setState({
-      commentsCondition: true,
+      commentsCondition: !this.state.commentsCondition,
     });
   };
 
@@ -229,7 +229,8 @@ class NewsfeedPost extends React.Component {
     let num_like = this.props.data.people_like.length
     console.log(num_like)
     return(
-    <div onClick={this.OnClickPost}>
+      // if you want anywhere in the post to click on and open modal put OnClickPost in this div
+    <div>
 
 
     <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
@@ -240,10 +241,7 @@ class NewsfeedPost extends React.Component {
 
            <span class="personName">
              {this.props.data.user.username}
-             <Button shape="round" size="middle" style={{ marginLeft:'400px', marginBottom:'15px'}}>
-               <FolderAddTwoTone  style={{ marginRight:'2px', fontSize: '20px', textAlign:'center'}}/>
 
-             </Button>
              <div>
              <span class="fb-group-date" style={{marginLeft:55}}> 110 followers</span>
 
@@ -258,7 +256,7 @@ class NewsfeedPost extends React.Component {
     <Divider />
 
 
-    <p style={{padding:10, color:'black'}} class="whiteSpacePost">
+    <p style={{color:'black'}} class="whiteSpacePost">
               {
 
                  ((this.props.data.caption).length>600)?
@@ -273,117 +271,89 @@ class NewsfeedPost extends React.Component {
                    <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                  </div>
                  :
-                 <div class="whiteSpacePost">
+                 <div class="whiteSpacePost"  style={{padding:'50px'}} >
                  {this.props.data.caption}
                  </div>
                }
 
     </p>
 
-    <Divider />
+
 
 
     {
       (like_people.includes(this.props.userId)) ?
 
-      <div>
+      <span>
         {
           (num_like == 2) ?
-          <div>
+          <span>
             You and one person like this.
-          </div>
+          </span>
 
           :
 
-          <div>
+          <span>
             {
               (num_like == 1)?
-              <div>
+              <span>
                 You like this.
-              </div>
+              </span>
               :
-              <div>
+              <span>
                 You and {num_like - 1} people like this.
-              </div>
+              </span>
             }
-          </div>
+          </span>
         }
-      </div>
+      </span>
 
       :
 
-      <div>
+      <span>
         {
           (num_like === 0) ?
-          <div>
-          </div>
+          <span>
+          </span>
 
           :
 
-          <div>
+          <span>
             {num_like} people like this.
-          </div>
+          </span>
 
         }
-      </div>
+      </span>
 
     }
 
-    2 people like This        33 comments
+    {/*
+    <div>
+    <span class="fb-group-date" style={{marginLeft:55}}> 33 hearts </span>
+
+    <span class="fb-group-date" style={{marginLeft:50}}>2 comments</span>
+    </div>
+    */}
 
     <div class="box-buttons">
       <div class="row">
-        <button><span class="fa fa-heart"></span></button>
-        <button><span class="fa fa-comment-o"></span></button>
+        {
+          (like_people.includes(this.props.userId))?
+            <button  onClick ={this.AddOneToLike}><span style={{color:'red'}} class="fa fa-heart-o"></span> {num_like}</button>
+          :
+            <button onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {num_like}</button>
+        }
+        <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
         <button><span class="fa fa-archive"></span></button>
       </div>
     </div>
 
     <heart />
   <div style={{padding:10}}>
-    {
-
-
-
-      (like_people.includes(this.props.userId))?
-
-
-      <span>
-
-      <Button size="medium" shape="round" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
-          <i class="fa fa-heart-o" ></i>
-          <i style={{marginLeft:'10px'}}> {num_like}</i>
-
-      </Button>
-
-
-      </span>
-
-      :
-      <span>
-      <Button size="medium" shape="round" onClick ={this.AddOneToLike} style={{fontSize:'14px', marginRight: '15px',}}>
-          <i class="fa fa-heart-o" ></i>
-          <i style={{marginLeft:'10px'}}> {num_like}</i>
-
-      </Button>
-
-
-      </span>
-
-
-    }
-
-
-    <Button size="medium" shape="round" onClick ={this.triggerComments} style={{fontSize:'14px', marginRight: '15px',}}>
-        <i class="fa fa-pencil" ></i>
-
-        <i style={{marginLeft:'10px'}}>   {this.props.data.post_comments.length}</i>
-
-    </Button>
 
 
     {
-      (this.state.commentsCondition && (like_people.includes(this.props.userId))) ?
+      (this.state.commentsCondition==true) ?
 
 
       <div style={{marginTop:'50px'}}>

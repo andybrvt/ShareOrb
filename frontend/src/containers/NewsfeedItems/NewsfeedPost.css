@@ -17,23 +17,28 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 
-.box{
+.box-buttons > .row {
 
+  margin-top: 20px;
   border-bottom: 1px solid #F4F4F4;
   border-top: 1px solid #F4F4F4;
+
   overflow: hidden;
   padding: 0;
   position: relative;
+
+
+
+
+
+    position: relative;
+    width: 100%;
+
+
 }
 
-.box-buttons > .row {
-  margin-left: -30px;
-  
-  border-bottom: 1px solid #F4F4F4;
-  border-top: 1px solid #F4F4F4;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
+.box-buttons > .row > button:last-child {
+  border: 0;
 }
 
 .box-buttons > .row > button {
@@ -41,14 +46,15 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   border: 0;
   border-right: 1px solid #F4F4F4;
   color: #9197A3;
-  font-size: 20px;
-  float: left;
+  font-size: 15px;
+
   height: 60px;
   line-height: 60px;
   margin: 0;
   *outline: 1px #08F;
   padding: 0;
   width: 33.33333333333%;
+
 }
 
 .box-buttons > .row > button:hover {
