@@ -77,7 +77,7 @@ class UserProfileCard extends React.Component {
 
       <div className = "profileCard">
         <div className = 'image-box'>
-        <img className = 'profile-image' src = {ava2} alt = 'Avatar'/>
+        <img className = 'profile-image' src = {this.props.img} alt = 'Avatar'/>
         </div>
         <div className = 'top'>
         <MoreOutlined />

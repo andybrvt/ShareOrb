@@ -6,6 +6,16 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
 import './Container_CSS/Explore.css';
+import ava1 from '../components/images/avatar.jpg';
+import ava2 from '../components/images/avatar2.jpg';
+import ava3 from '../components/images/avatar3.jpg';
+import ava4 from '../components/images/avatar4.jpg';
+import ava5 from '../components/images/avatar5.jpg';
+import ava6 from '../components/images/avatar6.jpg';
+import ava7 from '../components/images/avatar7.jpg';
+import ava8 from '../components/images/avatar8.jpg';
+
+
 
 
 import { Row, Col, Divider } from 'antd';
@@ -44,9 +54,11 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
   renderFriendList () {
     const {profileList} = this.state
     let peopleList = []
+    const images = [ava1, ava2, ava3, ava4, ava5, ava6, ava7, ava8]
     {profileList.map((j,index) => {
+      console.log(index)
       peopleList.push(
-        <UserProfileCard data = {j} key ={index} />
+        <UserProfileCard data = {j} key ={index} img = {images[index]} />
       )
     })}
     return peopleList
