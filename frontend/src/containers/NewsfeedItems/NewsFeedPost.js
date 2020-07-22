@@ -367,7 +367,7 @@ class NewsfeedPost extends React.Component {
 
 
     {
-      (this.state.commentsCondition) ?
+      (this.state.commentsCondition && (like_people.includes(this.props.userId))) ?
 
 
       <div style={{marginTop:'50px'}}>
@@ -420,6 +420,7 @@ class NewsfeedPost extends React.Component {
 
           <Comment
           style={{ width: 600 }}
+          required={true}
            avatar={
              <Avatar
                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -429,7 +430,8 @@ class NewsfeedPost extends React.Component {
            }
            content={
             <div>
-             <Form.Item>
+            <Form>
+             <Form.Item name="note"  rules={[{ required: true }]}  >
                <Input
                placeholder="Write a comment"
                 rows={4}
@@ -439,6 +441,8 @@ class NewsfeedPost extends React.Component {
                  Add Comment
                </Button>
              </Form.Item>
+
+             </Form>
 
             </div>
           }
