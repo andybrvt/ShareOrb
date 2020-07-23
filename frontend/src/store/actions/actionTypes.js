@@ -50,6 +50,9 @@ export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 export const UNADD_POST_LIKE = 'UNADD_POST_LIKE';
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 
+export const LOAD_FOLLOWER_FOLLOWING = 'LOAD_FOLLOWER_FOLLOWING'
+export const ADD_FOLLOWER_FOLLOWING = 'ADD_FOLLOWER_FOLLOWING';
+
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

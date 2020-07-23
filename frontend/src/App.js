@@ -9,6 +9,7 @@ import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
 import WebSocketPostsInstance from './postWebsocket';
+import ExploreWebSocketInstance from './exploreWebsocket';
 
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
@@ -16,6 +17,7 @@ import * as messageActions from './store/actions/messages';
 import * as notificationsActions from './store/actions/notifications';
 import * as calendarActions from './store/actions/calendars';
 import * as newsfeedActions from './store/actions/newsfeed';
+import * as exploreActions from './store/actions/explore';
 
 
 class App extends Component {
@@ -59,6 +61,12 @@ class App extends Component {
       this.props.addComment.bind(this),
     )
 
+    ExploreWebSocketInstance.addCallbacks(
+      this.props.loadFollowerFollowing.bind(this),
+      this.props.addFollowerFollowing.bind(this)
+    )
+
+
 
 
   }
@@ -98,7 +106,10 @@ const mapDispatchToProps = dispatch => {
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
-    addComment: comment => dispatch(newsfeedActions.addPostComment(comment))
+    addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
+    loadFollowerFollowing: followFollowing => dispatch(exploreActions.loadFollowerFollowing(followFollowing)),
+    addFollowerFollowing: followObject => dispatch(exploreActions.addFollowerFollowing(followObject))
+
 
   }
 }

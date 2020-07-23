@@ -53,22 +53,19 @@ class UserProfileCard extends React.Component {
     let profileCard = document.querySelector('.profileCard');
     profileCard.classList.toggle('active');
   }
-  // let temp="http://127.0.0.1:8000"+props.data.image;
-  // this is a card that displays the profile picture and user name
+
+  onProfileClick = () => {
+    const user = this.props.data.username
+    // this.prop.history.push('userview/'+user)
+    window.location.href = 'userview/'+user;
+
+  }
 
 
 
 
-// card Demo
-  // <Card
-  //   hoverable
-  //   style={{ width: 240 }}
-  //   cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-  //   >
-  //     <a href={'/userview/'+this.props.data.username}>{this.props.data.username}</a>
-  //     <Button type="primary" onClick ={this.onClickSend} disabled={!this.state.value}>Add friend</Button>
-  //
-  // </Card>
+
+
 
   render() {
 
@@ -89,7 +86,9 @@ class UserProfileCard extends React.Component {
         </div>
         <div className = 'social'>
         <div className = 'social-links'>
-          <div className = 'btn'> Profile </div>
+          <div
+          onClick = {this.onProfileClick}
+          className = 'btn'> Profile </div>
           <div className = 'btn'> Follow </div>
         </div>
         </div>

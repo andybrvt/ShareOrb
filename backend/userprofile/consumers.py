@@ -18,9 +18,10 @@ from .models import Comment
 
 
 
-class FriendRequestConsumer(JsonWebsocketConsumer):
+class NotificationConsumer(JsonWebsocketConsumer):
     ### THIS CONSUMER ALSO INCLUDES CHANNELS FOR EVENTS SYNC AND
-    ### FRIEND REQUESTING NOTIFICATIONS
+    ### FRIEND REQUESTING NOTIFICATIONS and just for Notification in
+    ### general
 
 
 
@@ -432,3 +433,28 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         # This will just send the information into the front end, you would
         # still need to send it through the group too
         return self.send_json(postAction)
+
+class ExploreConsumer(JsonWebsocketConsumer):
+    ### This class will cover most of the things in the explore tab in the
+    ### front end. This also includes the add friend function as well. This
+    ### will include the event exploring function (maybe --> depends )and also
+    ### the add to event function (this is also a maybe because I am not sure yet)
+
+    ### Probally gonna be the websocket for profiles too as well
+
+    def connect(self):
+        # This will pretty much connect to the profils of each of the users
+        # so when you login, it pretty much connects right away
+        self.current_user = self.scope['url_route']['kwargs']['username']
+        grp = 'explore_'+self.current_user
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        user = self.scope['user']
+        self.current_user = self.scope['url_route']['kwarg']['username']
+        grp = 'explore_'+self.current_user
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+    def recieve(self, text_data = None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)

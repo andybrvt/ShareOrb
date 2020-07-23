@@ -5,6 +5,7 @@ import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/LoginPage/Login';
 import Signup from './containers/Signup';
 import AllUsersNotCurrNotCurrFriends from './containers/AllUsersNotCurrNotCurrFriends';
+import Explore from './containers/Explore';
 import InfiniteList from './containers/InfiniteScroll';
 import CurrUserProfile from './containers/CurrUser/CurrUserProfile';
 import ViewAnyUserProfile from './containers/ViewAnyUserProfile';
@@ -45,6 +46,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/signup/' component= {Signup} />
 
         <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/userview/:username' render={(props) => <ViewAnyUserProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/current-user/' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
