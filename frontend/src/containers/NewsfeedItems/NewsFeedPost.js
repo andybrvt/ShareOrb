@@ -227,8 +227,7 @@ class NewsfeedPost extends React.Component {
   ContentOfPost(){
     console.log(this.props.data)
     let like_people = this.props.data.people_like
-    let num_like = this.props.data.like_count
-    console.log(num_like)
+
     return(
       // if you want anywhere in the post to click on and open modal put OnClickPost in this div
     <div>
@@ -287,7 +286,7 @@ class NewsfeedPost extends React.Component {
 
       <span>
         {
-          (num_like == 2) ?
+          (like_people.length == 2) ?
           <span>
             You and one person like this.
           </span>
@@ -296,13 +295,13 @@ class NewsfeedPost extends React.Component {
 
           <span>
             {
-              (num_like == 1)?
+              (like_people.length == 1)?
               <span>
                 You like this.
               </span>
               :
               <span>
-                You and {num_like - 1} people like this.
+                You and {like_people.length - 1} people like this.
               </span>
             }
           </span>
@@ -313,14 +312,14 @@ class NewsfeedPost extends React.Component {
 
       <span>
         {
-          (num_like === 0) ?
+          (like_people.length === 0) ?
           <span>
           </span>
 
           :
 
           <span>
-            {num_like} people like this.
+            {like_people.length} people like this.
           </span>
 
         }
@@ -341,9 +340,9 @@ class NewsfeedPost extends React.Component {
         {
           (like_people.includes(this.props.userId))?
 
-            <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> {num_like}</button>
+            <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> {like_people.length}</button>
           :
-            <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {num_like}</button>
+            <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {like_people.length}</button>
         }
         <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
         <button><span class="fa fa-archive"></span></button>
@@ -489,7 +488,7 @@ class NewsfeedPost extends React.Component {
         postId: this.props.data.id
       }
 
-
+      console.log('like')
       WebSocketPostsInstance.sendOneLike(this.props.userId, this.props.data.id)
       if (this.props.userId !== this.props.data.user.id){
         console.log('like notification')
