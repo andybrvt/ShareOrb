@@ -339,9 +339,10 @@ class NewsfeedPost extends React.Component {
       <div class="row">
         {
           (like_people.includes(this.props.userId))?
-            <button  onClick ={this.AddOneToLike}><span style={{color:'red'}} class="fa fa-heart-o"></span> {num_like}</button>
+
+            <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> {num_like}</button>
           :
-            <button onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {num_like}</button>
+            <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {num_like}</button>
         }
         <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
         <button><span class="fa fa-archive"></span></button>
