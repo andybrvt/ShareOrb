@@ -144,23 +144,185 @@ class NewsfeedPost extends React.Component {
 
 
   ContentOfPic() {
+    let like_people = this.props.data.people_like
+    console.log(this.props.data)
     let temp="http://127.0.0.1:8000"+this.props.data.image;
     const success = () => {
     message.success('Clipped to your album!');
     };
     return(
-      <Card
-         className="cardborder"
-         style={{ width: 300, marginTop: 50, marginBottom:20  }}
-         actions={[
-          <Icon type="heart" style={{ fontSize: '20px', color: 'red', marginRight:'12px', }} />,
-           <EditTwoTone  style={{ marginRight:'12px', fontSize: '20px'}}/>,
-           <EllipsisOutlined key="ellipsis" />,
-         ]}
-       >
+      <div>
+
+      <div>
 
 
-          <span>
+      <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
+
+      <div  style={{marginTop:20, marginLeft:30, marginRight:10, }}>
+        <div>
+       <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+
+             <span class="personName">
+               {this.props.data.user.username}
+
+               <div>
+               <span class="fb-group-date" style={{marginLeft:55}}> 110 followers</span>
+
+               <span class="fb-group-date" style={{marginLeft:300}}> Yesterday 5:20pm</span>
+               </div>
+             </span>
+
+            </div>
+
+
+
+      <Divider />
+
+
+      <p style={{color:'black'}} class="whiteSpacePost">
+                {
+
+                   ((this.props.data.caption).length>600)?
+
+                   <div class="outerSeeMore">
+                     <span class="innerSeeMore">
+                     {this.props.data.caption.substring(0,550)}
+
+
+                     </span>
+                     <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
+                     <div style={{marginTop:10}} class="seeMore"> ... see more </div>
+                   </div>
+                   :
+                   <div class="whiteSpacePost"  style={{padding:'20px'}} >
+                   {this.props.data.caption}
+                  
+                   </div>
+                 }
+
+      </p>
+      <div class="test1">
+  <div class="test2">
+    <h3><a href=""><img src={temp} alt="" />Roswell Parian</a>
+    </h3>
+    <span><i class="ion-more"></i></span>
+    <div class="window"><span></span></div>
+  </div>
+  </div>
+
+
+      {
+        (like_people.includes(this.props.userId)) ?
+
+        <span>
+          {
+            (like_people.length == 2) ?
+            <span>
+              You and one person like this.
+            </span>
+
+            :
+
+            <span>
+              {
+                (like_people.length == 1)?
+                <span>
+                  You like this.
+                </span>
+                :
+                <span>
+                  You and {like_people.length - 1} people like this.
+                </span>
+              }
+            </span>
+          }
+        </span>
+
+        :
+
+        <span>
+          {
+            (like_people.length === 0) ?
+            <span>
+            </span>
+
+            :
+
+            <span>
+              {like_people.length} people like this.
+            </span>
+
+          }
+        </span>
+
+      }
+
+      {/*
+      <div>
+      <span class="fb-group-date" style={{marginLeft:55}}> 33 hearts </span>
+
+      <span class="fb-group-date" style={{marginLeft:50}}>2 comments</span>
+      </div>
+      */}
+
+      <div class="box-buttons">
+        <div class="row">
+          {
+            (like_people.includes(this.props.userId))?
+
+              <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> {like_people.length}</button>
+            :
+              <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {like_people.length}</button>
+          }
+          <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
+          <button><span class="fa fa-archive"></span></button>
+        </div>
+      </div>
+
+    <div>
+
+
+      {
+        (this.state.commentsCondition==true) ?
+
+
+        <div>
+           <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
+        </div>
+
+
+
+        :
+
+        <div>
+
+        </div>
+
+      }
+
+
+
+      </div>
+
+      <div>
+
+
+
+
+
+      </div>
+        </div>
+
+      </div>
+
+
+
+      </div>
+
+
+
+
+      {/*
           <Popover content={
             <div>
 
@@ -177,39 +339,17 @@ class NewsfeedPost extends React.Component {
            <Button> {this.props.data.user.username} </Button>
           </Popover>
 
-          </span>
-          <br></br>
-          <span>
-            <b>Date:</b> {this.props.data.created_at}
-          </span>
-          <br></br>
-          <h2>
-            {this.props.data.caption}
-          </h2>
-
-          <FolderAddTwoTone
-          style={{ marginLeft: 550, fontSize:'30px' }}
-          size="32px"
-          onClick={success}
-
-
-          />
-          <ShareAltOutlined
-          style={{ marginLeft: 550, fontSize:'30px' }}
-
-          />
-          <br></br>
-
 
 
           {
               this.props.data.image ?
-              // <img src= {temp} height="250" width="450"/> AND YOU HAVE
+              <img src= {temp} height="250" width="450"/>
+              // AND YOU HAVE
                // TO COPY IMAGE ADDRESS REPLACE WITH TEMP IN PRODUCTION
               // <div style="max-width: 100%; max-height: 100%;">
-                <div class="mock-img">
-                  <img src= {"https://images.unsplash.com/photo-1590118432058-f2744d6897db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1203&q=80"} height="250" width="450"/>
-                </div>
+                // <div class="mock-img">
+                //   <img src= {"https://images.unsplash.com/photo-1590118432058-f2744d6897db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1203&q=80"} height="250" width="450"/>
+                // </div>
               // </div>
 
               :
@@ -219,6 +359,8 @@ class NewsfeedPost extends React.Component {
 
         </Card>
 
+        */}
+        </div>
     )
   }
 
@@ -235,7 +377,7 @@ class NewsfeedPost extends React.Component {
 
     <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
-    <div  style={{marginTop:20, marginLeft:30, marginRight:10, marginBottom:50}}>
+    <div  style={{marginTop:20, marginLeft:30, marginRight:10, }}>
       <div>
      <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
@@ -506,6 +648,7 @@ class NewsfeedPost extends React.Component {
     render() {
       console.log(this.props)
       let temp="http://127.0.0.1:8000"+this.props.data.image;
+      console.log(temp);
       const success = () => {
       message.success('Clipped to your album!');
       };

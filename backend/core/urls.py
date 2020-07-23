@@ -34,4 +34,6 @@ urlpatterns = [
     # path('api/', include('userprofile.urls')),
 #
 ]
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# adjust right here
+urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
