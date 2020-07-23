@@ -225,8 +225,9 @@ class NewsfeedPost extends React.Component {
   // this renders the posts on the newsfeed
 
   ContentOfPost(){
+    console.log(this.props.data)
     let like_people = this.props.data.people_like
-    let num_like = this.props.data.people_like.length
+    let num_like = this.props.data.like_count
     console.log(num_like)
     return(
       // if you want anywhere in the post to click on and open modal put OnClickPost in this div
@@ -349,15 +350,14 @@ class NewsfeedPost extends React.Component {
       </div>
     </div>
 
-    <heart />
-  <div style={{padding:10}}>
+  <div>
 
 
     {
       (this.state.commentsCondition==true) ?
 
 
-      <div style={{marginTop:'50px'}}>
+      <div>
          <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
       </div>
 
