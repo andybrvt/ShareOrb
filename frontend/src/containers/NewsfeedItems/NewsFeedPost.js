@@ -158,8 +158,8 @@ class NewsfeedPost extends React.Component {
 
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
-      <div  style={{marginTop:20, marginLeft:30, marginRight:10, }}>
-        <div>
+      <div>
+        <div style={{padding:20,}}>
        <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
              <span class="personName">
@@ -179,7 +179,7 @@ class NewsfeedPost extends React.Component {
       <Divider />
 
 
-      <p style={{color:'black'}} class="whiteSpacePost">
+      <p style={{color:'black'}}>
                 {
 
                    ((this.props.data.caption).length>600)?
@@ -196,20 +196,17 @@ class NewsfeedPost extends React.Component {
                    :
                    <div class="whiteSpacePost"  style={{padding:'20px'}} >
                    {this.props.data.caption}
-                  
+
                    </div>
                  }
 
       </p>
-      <div class="test1">
-  <div class="test2">
+      <div class="row test4">
     <h3><a href=""><img src={temp} alt="" />Roswell Parian</a>
     </h3>
-    <span><i class="ion-more"></i></span>
-    <div class="window"><span></span></div>
-  </div>
-  </div>
 
+  </div>
+  
 
       {
         (like_people.includes(this.props.userId)) ?
@@ -375,9 +372,9 @@ class NewsfeedPost extends React.Component {
     <div>
 
 
-    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
+    <div class="card" style={{marginBottom:40}}>
 
-    <div  style={{marginTop:20, marginLeft:30, marginRight:10, }}>
+    <div  style={{marginTop:20, marginLeft:20, marginRight:20, }}>
       <div>
      <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
