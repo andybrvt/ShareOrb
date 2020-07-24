@@ -2,6 +2,7 @@ import React from 'react';
 import './Container_CSS/Explore.css';
 import ExploreWebSocketInstance from '../exploreWebsocket';
 import { connect } from 'react-redux';
+import AllUsersNotCurrNotCurrFriends from './AllUsersNotCurrNotCurrFriends'
 
 
 
@@ -93,7 +94,9 @@ class Explore extends React.Component {
           <div className = 'description_tab Tab' onClick = {() => this.showPanel(2, 'transparent')}> Events </div>
           <div className = 'slider'></div>
         </div>
-        <div className = 'tabPanel'> Tab 1: Content </div>
+        <div className = 'tabPanel'>
+          <AllUsersNotCurrNotCurrFriends />
+         </div>
         <div className = 'tabPanel'> Tab 2: Content </div>
         <div className = 'tabPanel'> Tab 3: Content </div>
       </div>
