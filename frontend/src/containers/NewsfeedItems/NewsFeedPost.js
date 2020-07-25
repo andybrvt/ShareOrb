@@ -160,7 +160,7 @@ class NewsfeedPost extends React.Component {
 
       <div>
         <div style={{padding:20,}}>
-       <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+            <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
              <span class="personName">
                {this.props.data.user.username}
@@ -174,39 +174,45 @@ class NewsfeedPost extends React.Component {
 
             </div>
 
+        </div>
 
 
-      <Divider />
 
 
-      <p style={{color:'black'}}>
-                {
+      <div class="test4">
+    <h3><a href=""><img src={temp} alt="" /></a>
 
-                   ((this.props.data.caption).length>600)?
+    <p style={{marginLeft:'20px',fontSize: '16px', color:'black'}}>
+              {
 
-                   <div class="outerSeeMore">
-                     <span class="innerSeeMore">
-                     {this.props.data.caption.substring(0,550)}
+                 ((this.props.data.caption).length>600)?
+
+                 <div class="outerSeeMore">
+
+                   <span class="innerSeeMorTe">
+                   {this.props.data.caption.substring(0,550)}
 
 
-                     </span>
-                     <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
-                     <div style={{marginTop:10}} class="seeMore"> ... see more </div>
-                   </div>
-                   :
-                   <div class="whiteSpacePost"  style={{padding:'20px'}} >
+                   </span>
+                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
+                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
+                 </div>
+                 :
+                 <div style={{padding:'10px'}}>
+                   <p class="innerSeeMore boldedText" style={{fontSize:'14px', marginRight:'5px'}}>
+                    {this.props.data.user.username}
+                    </p>
+                   <p class="innerSeeMore " style={{fontSize:'14px',}}>
                    {this.props.data.caption}
+                   </p>
+                  </div>
+               }
 
-                   </div>
-                 }
-
-      </p>
-      <div class="row test4">
-    <h3><a href=""><img src={temp} alt="" />Roswell Parian</a>
+    </p>
     </h3>
 
-  </div>
-  
+
+
 
       {
         (like_people.includes(this.props.userId)) ?

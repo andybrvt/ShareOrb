@@ -1,5 +1,5 @@
 /* http://jsfiddle.net/zbt5L1wp/4/ */
-https://bootsnipp.com/snippets/rlxj6
+/* https://bootsnipp.com/snippets/rlxj6 */
 /* temporary for test to see card look */
 
 
@@ -23,20 +23,20 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
   min-height: 70px;
   margin: 0 auto;
-  width:650px;
+  width:625px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
 
 }
 
 
 
-.row-full{
-      width: 100vw;
-      position: relative;
-      margin-left: -50vw;
-      height: 100px;
-      margin-top: 100px;
-      left: 50%;
+.test4{
+
+  object-fit: scale-down;
+
+
+
+
 }
 
 .box-buttons > .row {
@@ -183,9 +183,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 }
 
 
-.whiteSpacePost{
-  white-space: pre-wrap
-}
+
 
 
 .outerSeeMore {
@@ -194,6 +192,10 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
   justify-content: center;
 }
 
+
+.boldedText{
+  font-weight: bold;
+}
 
 
 .innerSeeMore {
