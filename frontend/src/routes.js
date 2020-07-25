@@ -20,6 +20,7 @@ import WeekCalendar from './containers/WeekCalendar';
 import YearCalendar from './containers/YearCalendar';
 import SideMenu from './components/SideMenu/SideMenu.js';
 import NoFoundPage from './containers/403.jsx';
+import ProfileCardNewsFeed from './components/ProfileCardNewsFeed'
 
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
@@ -43,6 +44,7 @@ class BaseRouter extends React.Component {
 
 
         <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
+        <Route exact path = '/test'  render={(props) => <ProfileCardNewsFeed {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
         <Route exact path = '/signup/' component= {Signup} />
 

@@ -8,7 +8,7 @@ import * as actions from '../store/actions/auth';
 import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 import ExploreWebSocketInstance from '../exploreWebsocket';
-
+import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 
 
 import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic, Button} from 'antd';
@@ -106,7 +106,7 @@ class NewsFeedView extends React.Component {
 				<div>
 
 					<div class="createEventCSS" style = {{
-						backgroundColor: 'white',
+						// backgroundColor: 'white',
 						height: '300px',
 						width: '300px',
 						// postion: 'fixed',
@@ -116,21 +116,7 @@ class NewsFeedView extends React.Component {
 
 
 
-					<div style={{background:'#bae7ff'}}>
-						<img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Avatar" class="avatar"/>
-						</div>
-							<div  style={{textAlign:'center', fontSize:'25px', color:'#181818'}}>
-						{this.props.username}
-
-						</div>
-						<div style={{textAlign:'center'}}>
-
-						<Statistic title="Followers" value={102} precision={0} style={{marginTop:'10px'}} />
-						<br>
-						</br>
-
-						<Button style={{backgroundColor:'#2f54eb'}} type="primary">My Profile </Button>
-						</div>
+				<ProfileCardNewsFeed />
 					</div>
 
 
