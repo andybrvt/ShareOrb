@@ -18,6 +18,7 @@ class WebSocketExplore {
 
   connect(username){
     const path = 'ws://127.0.0.1:8000/ws/explore/' + username
+    // I place the connection path in the app.js
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {
@@ -26,6 +27,7 @@ class WebSocketExplore {
 
     this.socketRef.onmessage = (e) => {
       console.log('new message')
+      this.socketNewExplore(e.data)
     }
 
     this.socketRef.onerror = (e) => {
@@ -44,6 +46,7 @@ class WebSocketExplore {
   }
 
   socketNewExplore(data){
+    console.log('socketNewExplore')
     // This is pretty much just used to send thinggs to redux
     // and pretty much anything that needs to update temporarly
 
@@ -54,20 +57,22 @@ class WebSocketExplore {
     // whenever somone follows someone else there will be on follower
     // for one person and one following for another so event if someone
     // follows you back the trend will still be the same
-    if (command === 'new_follower'){
-      console.log('new follower')
+    if (command === 'user_profiles'){
+      const profiles = JSON.parse(parsedData.user_profiles)
+      console.log(profiles)
+      this.callbacks['fetch_profiles'](profiles)
     }
   }
 
-  addCallbacks(loadFollowerFollowingCallBack, addFollowerFollowingCallBack){
-    this.callbacks['new_follower'] = loadFollowerFollowingCallBack
+  addCallbacks(loadProfiles, addFollowerFollowingCallBack){
+    this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_following'] = addFollowerFollowingCallBack
   }
 
 
-  fetchFollowerFollowing(userId){
+  fetchFollowerFollowing(){
+    // This gets called in teh newsfeedview.js
     this.sendFollowerFollowing({
-      userId: userId,
       command: 'fetch_follower_following'
     })
   }

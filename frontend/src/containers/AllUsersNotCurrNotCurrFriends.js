@@ -62,7 +62,7 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
     let peopleList = []
     const images = [ava1, ava2, ava3, ava4, ava5, ava6, ava7, ava8, ava9, ava10 ,ava11 ,ava12, ava13, ava14]
     {profileList.map((j,index) => {
-      console.log(index)
+      console.log(j)
       peopleList.push(
         <UserProfileCard data = {j} key ={index} img = {images[index]} />
       )

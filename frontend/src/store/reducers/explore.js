@@ -2,14 +2,15 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
+  profiles: [],
   followers: [],
   following: []
 }
 
-export const loadFollowerFollowing = (state, action) =>{
+export const loadProfiles = (state, action) =>{
+  console.log(action)
   return updateObject(state, {
-    followers: action.followFollowing.followers,
-    following: action.followFollowing.following
+    profiles: action.profiles
   })
 }
 
@@ -22,8 +23,8 @@ export const addFollowerFollowing = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
-    case actionTypes.LOAD_FOLLOWER_FOLLOWING:
-      return loadFollowerFollowing(state, action);
+    case actionTypes.LOAD_PROFILES:
+      return loadProfiles(state, action);
     case actionTypes.ADD_FOLLOWER_FOLLOWING:
       return addFollowerFollowing(state, action);
     default:
@@ -31,3 +32,5 @@ const reducer = (state = initialState, action) => {
   };
 
 }
+
+export default reducer;

@@ -6,6 +6,7 @@ import PersonalProfile from '../components/PersonalProfile';
 import {Button, Form} from 'antd';
 import UserFriendsList from './UserFriendsList';
 import NotificationWebSocketInstance from '../notificationWebsocket';
+import ExploreWebSocketInstance from '../exploreWebsocket';
 
 
 
@@ -14,6 +15,7 @@ import NotificationWebSocketInstance from '../notificationWebsocket';
 class UserProfileView extends React.Component {
   constructor(props) {
     super(props);
+    this.initialiseExplore()
   }
 
   state = {
@@ -23,6 +25,32 @@ class UserProfileView extends React.Component {
 		last_name: '',
 		bio: '',
     friends: [],
+  }
+
+  initialiseExplore(){
+    // This will pretty much be for loading up the users following status, because
+    // later we are gonna have a search function, so you want to throw this in one
+    // of the very first things
+    this.waitForSocketConnection(()=> {
+      ExploreWebSocketInstance.fetchFollowerFollowing()
+    })
+  }
+
+  waitForSocketConnection (callback) {
+    const component = this;
+    setTimeout(
+      function(){
+
+        if (ExploreWebSocketInstance.state() === 1){
+
+          callback();
+          return;
+        } else{
+
+            component.waitForSocketConnection(callback);
+        }
+      }, 100)
+
   }
 
   componentWillReceiveProps(newProps){
@@ -63,7 +91,8 @@ class UserProfileView extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    profiles: state.explore.profiles
   }
 }
 export default connect(mapStateToProps)(UserProfileView);

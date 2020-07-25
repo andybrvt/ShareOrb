@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
 import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
+import ExploreWebSocketInstance from '../exploreWebsocket';
+
 
 
 import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic, Button} from 'antd';
@@ -23,6 +25,37 @@ class NewsFeedView extends React.Component {
 		id: '',
 		postShow:false,
 	}
+
+	constructor(props){
+		super(props)
+		this.initialiseExplore()
+	}
+
+	initialiseExplore(){
+    // This will pretty much be for loading up the users following status, because
+    // later we are gonna have a search function, so you want to throw this in one
+    // of the very first things
+    this.waitForSocketConnection(()=> {
+      ExploreWebSocketInstance.fetchFollowerFollowing()
+    })
+  }
+
+	waitForSocketConnection (callback) {
+    const component = this;
+    setTimeout(
+      function(){
+
+        if (ExploreWebSocketInstance.state() === 1){
+
+          callback();
+          return;
+        } else{
+
+            component.waitForSocketConnection(callback);
+        }
+      }, 100)
+
+  }
 
 
 	postCondition = () => {
@@ -52,7 +85,7 @@ class NewsFeedView extends React.Component {
 	render() {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
-		console.log(this.state.postShow)
+		console.log(this.props)
 		return (
 			<div>
 
@@ -342,6 +375,7 @@ class NewsFeedView extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
+		profile: state.explore.profiles
   }
 }
 const mapDispatchToProps = dispatch => {

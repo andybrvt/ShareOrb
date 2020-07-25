@@ -8,9 +8,10 @@ export const addFollowerFollowing = followObject => {
 }
 
 
-export const loadFollowerFollowing = followFollowing => {
+export const loadProfiles = profiles => {
+  console.log(profiles)
   return {
-    type: actionTypes.LOAD_FOLLOWER_FOLLOWING,
-    followFollowing: followFollowing
+    type: actionTypes.LOAD_PROFILES,
+    profiles: profiles
   }
 }
