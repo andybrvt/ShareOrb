@@ -14,6 +14,12 @@ import ava5 from '../components/images/avatar5.jpg';
 import ava6 from '../components/images/avatar6.jpg';
 import ava7 from '../components/images/avatar7.jpg';
 import ava8 from '../components/images/avatar8.jpg';
+import ava9 from '../components/images/avatar9.jpg';
+import ava10 from '../components/images/avatar10.jpg';
+import ava11 from '../components/images/avatar11.jpg';
+import ava12 from '../components/images/avatar12.jpg';
+import ava13 from '../components/images/avatar13.jpg';
+import ava14 from '../components/images/avatar14.jpg';
 
 
 
@@ -54,7 +60,7 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
   renderFriendList () {
     const {profileList} = this.state
     let peopleList = []
-    const images = [ava1, ava2, ava3, ava4, ava5, ava6, ava7, ava8]
+    const images = [ava1, ava2, ava3, ava4, ava5, ava6, ava7, ava8, ava9, ava10 ,ava11 ,ava12, ava13, ava14]
     {profileList.map((j,index) => {
       console.log(index)
       peopleList.push(
