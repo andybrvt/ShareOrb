@@ -179,9 +179,13 @@ class NewsfeedPost extends React.Component {
 
 
 
-      <div class="test4">
-    <h3><a href=""><img src={temp} alt="" /></a>
+      <div>
 
+      <div class="imageContainer">
+
+          <a href=""><img src={temp} alt="" /></a>
+        
+      </div>
     <p style={{marginLeft:'20px',fontSize: '16px', color:'black'}}>
               {
 
@@ -189,7 +193,7 @@ class NewsfeedPost extends React.Component {
 
                  <div class="outerSeeMore">
 
-                   <span class="innerSeeMorTe">
+                   <span class="innerSeeMore">
                    {this.props.data.caption.substring(0,550)}
 
 
@@ -209,7 +213,7 @@ class NewsfeedPost extends React.Component {
                }
 
     </p>
-    </h3>
+
 
 
 
