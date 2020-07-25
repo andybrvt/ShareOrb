@@ -21,9 +21,16 @@ class User(AbstractUser):
 
 
     def get_posts(self):
-        print(Post.objects.filter(user=self).values_list())
-        print(Post.objects.filter(user=self).values_list('caption', flat=True))
+
         return Post.objects.filter(user=self).values_list('id', flat=True)
+
+    def get_following(self):
+        print(UserFollowing.objects.filter(person_following = self).values_list('person_getting_followers', flat= True))
+        return UserFollowing.objects.filter(person_following = self).values_list('person_getting_followers', flat= True)
+
+    def get_followers(self):
+        return UserFollowing.objects.filter(person_getting_followers = self).values_list('person_following', flat= True)
+
 
     def __str__(self):
         return self.username

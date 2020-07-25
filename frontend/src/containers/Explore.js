@@ -15,13 +15,13 @@ class Explore extends React.Component {
 
   }
 
-  initialiseExplore(){
-    this.waitForSocketConnection(()=> {
-      ExploreWebSocketInstance.fetchFollowerFollowing(
-        this.props.id
-      )
-    })
-  }
+  // initialiseExplore(){
+  //   this.waitForSocketConnection(()=> {
+  //     ExploreWebSocketInstance.fetchFollowerFollowing(
+  //       this.props.id
+  //     )
+  //   })
+  // }
 
   componentDidMount(){
     ExploreWebSocketInstance.connect(this.props.username)
@@ -41,22 +41,22 @@ class Explore extends React.Component {
 
   }
 
-  waitForSocketConnection (callback) {
-    const component = this;
-    setTimeout(
-      function(){
-
-        if (ExploreWebSocketInstance.state() === 1){
-
-          callback();
-          return;
-        } else{
-
-            component.waitForSocketConnection(callback);
-        }
-      }, 100)
-
-  }
+  // waitForSocketConnection (callback) {
+  //   const component = this;
+  //   setTimeout(
+  //     function(){
+  //
+  //       if (ExploreWebSocketInstance.state() === 1){
+  //
+  //         callback();
+  //         return;
+  //       } else{
+  //
+  //           component.waitForSocketConnection(callback);
+  //       }
+  //     }, 100)
+  //
+  // }
 
   showPanel = (panelIndex, colorCode) =>{
     var tabButtons= document.querySelectorAll('.tabContainer .buttonContainer .Tab')

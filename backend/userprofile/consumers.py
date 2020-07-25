@@ -7,6 +7,7 @@ from .serializers import NotificationSerializer
 from .serializers import PostSerializer
 from .serializers import NewPostSerializer
 from .serializers import CommentSerializer
+from .serializers import UserSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -442,6 +443,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     ### Probally gonna be the websocket for profiles too as well
 
+    def fetch_follower_following(self, data):
+        print(data)
+        users = User.objects.all()
+        serializer = UserSerializer(users, many = True)
+        content = {
+            'command': 'user_profiles',
+            'user_profiles': json.dumps(serializer.data)
+        }
+        self.send_json(content)
+
     def connect(self):
         # This will pretty much connect to the profils of each of the users
         # so when you login, it pretty much connects right away
@@ -452,9 +463,11 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     def disconnect(self, close_code):
         user = self.scope['user']
-        self.current_user = self.scope['url_route']['kwarg']['username']
+        self.current_user = self.scope['url_route']['kwargs']['username']
         grp = 'explore_'+self.current_user
         async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
 
-    def recieve(self, text_data = None, bytes_data = None, **kwargs):
+    def receive(self, text_data = None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        if data['command'] == 'fetch_follower_following':
+            self.fetch_follower_following(data)

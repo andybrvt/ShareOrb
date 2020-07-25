@@ -21,24 +21,10 @@ import * as exploreActions from './store/actions/explore';
 
 
 class App extends Component {
-//the map state to props allows us to get the state and then
-//turn it to props then call those props in Layouts.js
-  componentDidMount() {
-  //everythign this is run it will do a try auto signup, it will give
-  //App.js this method from the store
-    this.props.onTryAutoSignup();
-    // NotificationWebSocketInstance.connect(this.props.username)
-
-
-  }
-
-  componentWillReceiveProps(newProps){
-    // NotificationWebSocketInstance.connect(newProps.username)
-  }
-
 
   constructor(props) {
     super(props);
+    // this.initialiseExplore()
     WebSocketInstance.addCallbacks(
       this.props.setMessages.bind(this),
       this.props.addMessage.bind(this)
@@ -62,14 +48,27 @@ class App extends Component {
     )
 
     ExploreWebSocketInstance.addCallbacks(
-      this.props.loadFollowerFollowing.bind(this),
+      this.props.loadProfiles.bind(this),
       this.props.addFollowerFollowing.bind(this)
     )
+  }
 
-
+//the map state to props allows us to get the state and then
+//turn it to props then call those props in Layouts.js
+  componentDidMount() {
+  //everythign this is run it will do a try auto signup, it will give
+  //App.js this method from the store
+    this.props.onTryAutoSignup();
+    // NotificationWebSocketInstance.connect(this.props.username)
 
 
   }
+
+  componentWillReceiveProps(newProps){
+    // NotificationWebSocketInstance.connect(newProps.username)
+    ExploreWebSocketInstance.connect(newProps.username)
+  }
+
 
   render() {
     return (
@@ -107,7 +106,7 @@ const mapDispatchToProps = dispatch => {
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
-    loadFollowerFollowing: followFollowing => dispatch(exploreActions.loadFollowerFollowing(followFollowing)),
+    loadProfiles: profiles => dispatch(exploreActions.loadProfiles(profiles)),
     addFollowerFollowing: followObject => dispatch(exploreActions.addFollowerFollowing(followObject))
 
 
