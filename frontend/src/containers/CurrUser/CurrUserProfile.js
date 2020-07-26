@@ -59,10 +59,6 @@ class CurrUserProfile extends React.Component{
         }
       return(
         <div>
-        {this.state.username}
-        {this.state.first_name}
-        {this.state.last_name}
-        {this.state.bio}
 
           <div className="section profile-content">
 

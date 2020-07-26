@@ -34,57 +34,92 @@ class PersonalProfile extends React.Component{
 
 
       onClickCancel = (e) =>{
-        const username = this.props.match.params.username;
-        authAxios.post('http://127.0.0.1:8000/friends/friend-request/cancel/'+username)
+        // const username = this.props.match.params.username;
+        // authAxios.post('http://127.0.0.1:8000/friends/friend-request/cancel/'+username)
         }
 
-        onClickDeleteFriend = (e) =>{
-          const username = this.props.match.params.username;
-          authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
-          }
+      onClickDeleteFriend = (e) =>{
+          // const username = this.props.match.params.username;
+          // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
+        }
 
-  render(){
-    console.log(this.props.match.params.username)
+      onRenderProfile(){
+        // For the following and the follwers, the get_followers will be the people
+        // that you are following(so you are the follower) and the people that are in
+        // get following are the people taht are following you, so they would be your
+        // followers
+        let username = ''
+        let firstName = ''
+        let lastName = ''
+        let bio = ''
+        let followers = ''
+        let following = ''
 
-      return(
-        <Form>
-        <div>
-        Username:
-        {this.props.username}
-        <br />
-        First name:
-        {this.props.first_name}
-        <br />
-        Last name:
-        {this.props.last_name}
-        <br />
-        Bio :
-        {this.props.bio}
-        <br />
-        <br />
+        if (this.props.data){
+          username = this.props.data.username
+          firstName = this.props.data.first_name
+          lastName = this.props.data.last_name
+          bio = this.props.data.bio
+          followers = this.props.data.get_following
+          following = this.props.data.get_followers
+        }
+        console.log(firstName)
+        console.log(following)
 
-        <div>
-        <Button type="primary" onClick ={this.onClickSend}>Add friend</Button>
-        <Button type="primary" onClick = {this.onClickCancel}>Cancel Friend Request</Button>
+        return (
+          <div>
+          <div>
+          Username:
+          {username}
+          <br />
+          First name:
+          {firstName}
+          <br />
+          Last name:
+          {lastName}
+          <br />
+          Bio :
+          {bio}
+          <br />
+          Followers:
+          {followers.length}
+          <br />
+          Following:
+          {following.length}
+          <div>
+          <Button type="primary" onClick ={this.onClickSend}>Add friend</Button>
+          <Button type="primary" onClick = {this.onClickCancel}>Cancel Friend Request</Button>
 
 
-        <br />
-        This will remove USER [{this.props.username}] as your friend
-        <br />
-        <Button danger style={{ background: "white", color: "red" }} onClick = {this.onClickDeleteFriend}>Remove Friend </Button>
-        </div>
+          <br />
+          This will remove USER [{this.props.username}] as your friend
+          <br />
+          <Button danger style={{ background: "white", color: "red" }} onClick = {this.onClickDeleteFriend}>Remove Friend </Button>
+          </div>
 
-        {this.props.friends}
-       ]
+          {this.props.friends}
 
-        </div>
-        <br />
-        <br />
-        </Form>
 
-      )
+          </div>
+          <br />
+          <br />
+          </div>
+
+        )
 
       }
+
+  render(){
+
+      console.log(this.props)
+
+      return(
+        <div>
+        {this.onRenderProfile()}
+        </div>
+      )
+
+    }
     };
 
 const mapStateToProps = state => {

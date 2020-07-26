@@ -81,7 +81,7 @@ class UserProfileView extends React.Component {
       console.log(profileList)
       if (profileList[(profileList.length/2)-1]){
         const profile = this.binarysearch(userId, profileList)
-        
+        return profile
       }
     }
   }
@@ -104,14 +104,13 @@ class UserProfileView extends React.Component {
 	render() {
     if (this.state.id){
       var userData = this.getProfileInfo(this.state.id)
-
-
     }
 
+    console.log(userData)
 
 		return (
 			<div>
-        <PersonalProfile {...this.state} {...this.props}/>
+        <PersonalProfile data = {userData} />
         <UserFriendsList {...this.state} />
       </div>
 
