@@ -178,24 +178,13 @@ class NewsfeedPost extends React.Component {
 
 
 
-
-<<<<<<< HEAD
       <div>
 
       <div class="imageContainer">
-=======
-      <div class="test4">
-      <div class ='image-box'>
-      <a href="">
-      <img  class = 'post-image' src={temp} alt="" />
-      </a>
-      </div>
 
-    <h3>
->>>>>>> 97f1eca73f1e59409f6260a6b0e3d658a8b4b516
 
           <a href=""><img src={temp} alt="" /></a>
-        
+
       </div>
     <p style={{marginLeft:'20px',fontSize: '16px', color:'black'}}>
               {
