@@ -3,6 +3,13 @@
 /* temporary for test to see card look */
 
 
+.modalContainer{
+  display: flex;
+}
+
+
+
+
 .likeCSS{
   font-size:14px;
   color:gray;

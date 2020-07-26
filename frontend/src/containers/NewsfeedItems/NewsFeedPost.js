@@ -187,7 +187,7 @@ class NewsfeedPost extends React.Component {
           <a href=""><img src={temp} alt="" /></a>
 
       </div>
-    <p style={{marginLeft:'20px',fontSize: '16px', color:'black'}}>
+    <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
               {
 
                  ((this.props.data.caption).length>600)?
@@ -218,60 +218,87 @@ class NewsfeedPost extends React.Component {
 
 
 
+    <div class="likeCSS">
 
+    {
+      (like_people.includes(this.props.userId)) ?
+
+      <span>
+        {
+          (like_people.length == 2) ?
+          <span>
+            You and one person like this.
+          </span>
+
+          :
+
+          <span>
+            {
+              (like_people.length == 1)?
+              <span>
+
+                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />You like this
+              </span>
+              :
+              <span>
+                You and {like_people.length - 1} person like this.
+              </span>
+            }
+          </span>
+        }
+      </span>
+
+      :
+
+      <span>
       {
-        (like_people.includes(this.props.userId)) ?
-
+        (like_people.length>3)?
         <span>
-          {
-            (like_people.length == 2) ?
-            <span>
-              You and one person like this.
-            </span>
-
-            :
-
-            <span>
-              {
-                (like_people.length == 1)?
-                <span>
-                  You like this.
-                </span>
-                :
-                <span>
-                  You and {like_people.length - 1} people like this.
-                </span>
-              }
-            </span>
-          }
+        <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
+        <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+        <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+          +{like_people.length-3} people like this.
         </span>
 
         :
 
-        <span>
-          {
-            (like_people.length === 0) ?
-            <span>
-            </span>
+          <span>
+            {
+              (like_people.length === 0) ?
+              <span>
+              </span>
 
-            :
+              :
 
-            <span>
-              {like_people.length} people like this.
-            </span>
 
-          }
-        </span>
 
-      }
+              <div>
+                {
+                  (like_people.length==1)?
+                  <span>
+                  <Avatar src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar> likes this
+                  </span>
 
-      {/*
-      <div>
-      <span class="fb-group-date" style={{marginLeft:55}}> 33 hearts </span>
 
-      <span class="fb-group-date" style={{marginLeft:50}}>2 comments</span>
-      </div>
-      */}
+                  :
+                  <span>
+                  2  people like this
+                  </span>
+
+                }
+                </div>
+
+
+
+            }
+          </span>
+    }
+    </span>
+
+    }
+
+
+    </div>
 
       <div class="box-buttons">
         <div class="row">
@@ -432,8 +459,6 @@ class NewsfeedPost extends React.Component {
 
     </p>
 
-    <Divider/>
-
     <div class="likeCSS">
 
     {
@@ -470,9 +495,9 @@ class NewsfeedPost extends React.Component {
       {
         (like_people.length>3)?
         <span>
-        <Avatar size="small" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
         <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
-        <Avatar size="small" style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
           +{like_people.length-3} people like this.
         </span>
 
@@ -553,7 +578,7 @@ class NewsfeedPost extends React.Component {
       (this.state.commentsCondition==true) ?
 
 
-      <div>
+      <div style={{marginLeft:'20px'}}>
          <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
       </div>
 
@@ -712,21 +737,26 @@ class NewsfeedPost extends React.Component {
   return (
     <div>
 
+      <div>
 
-      <Modal
+        <Modal
 
-        title={`Post by ${this.props.data.user.username}`}
-        visible={this.state.visibleModal}
-        onOk={this.handleOk}
-        onCancel={this.handleCancel}
-        width="800px"
-      >
-        <p>{this.ContentOfPost()}</p>
-        <p>{this.ContentofComments()}</p>
+          title={`Post by ${this.props.data.user.username}`}
+          visible={this.state.visibleModal}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          width="1200px"
+          height="800px"
+          >
 
-      </Modal>
+          <div class="modalContainer">
 
+            <p style={{marginRight:'200px'}}>{this.ContentOfPost()}</p>
+            <p>{this.ContentofComments()}</p>
+          </div>
+        </Modal>
 
+      </div>
 
       {
               this.props.data.image ?
