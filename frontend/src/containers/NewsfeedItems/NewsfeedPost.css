@@ -23,15 +23,16 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
   min-height: 70px;
   margin: 0 auto;
-  width:625px;
+  width:620px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
 
 }
 
 
 .imageContainer{
-  width:650px;
-  height:300px;
+  width:620px;
+  height:625px;
+
 }
 
 .imageContainer img {
@@ -103,7 +104,7 @@ color: red;
   width: 100px;
   height: 100px;
        background-color: #bfbfbf;
-       border-radius: 0 100px 0 0;
+
             -moz-border-radius: 0 100px 0 0;
             -webkit-border-radius: 0 100px 0 0;
  }
@@ -159,16 +160,6 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 }
 
 
-.postPic{
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  left: calc(50% - 52px/2 - 534px);
-  top: 395px;
-
-  background: url("https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png");
-  border-radius: 26px;
-}
 
 .testAvatar {
     width: 30px;
