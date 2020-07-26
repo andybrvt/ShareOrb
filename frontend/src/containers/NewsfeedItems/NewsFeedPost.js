@@ -382,11 +382,11 @@ class NewsfeedPost extends React.Component {
     <div>
 
 
-    <div class="card" style={{marginBottom:40}}>
+    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
-    <div  style={{marginTop:20, marginLeft:20, marginRight:20, }}>
-      <div>
-     <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+    <div>
+      <div style={{padding:20,}}>
+          <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
            <span class="personName">
              {this.props.data.user.username}
@@ -398,7 +398,8 @@ class NewsfeedPost extends React.Component {
              </div>
            </span>
 
-          </div>
+      </div>
+
 
 
 
@@ -420,7 +421,9 @@ class NewsfeedPost extends React.Component {
                    <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                  </div>
                  :
-                 <div class="whiteSpacePost"  style={{padding:'50px'}} >
+                 <div class="whiteSpacePost innerSeeMore"  style={{padding:'50px', fontSize:'14px',}} >
+
+
                  {this.props.data.caption}
                  </div>
                }
