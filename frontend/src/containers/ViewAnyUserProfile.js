@@ -75,10 +75,40 @@ class UserProfileView extends React.Component {
      }
    }
 
+  getProfileInfo = (userId) => {
+    if(this.props.profiles){
+      const profileList = this.props.profiles
+      console.log(profileList)
+      if (profileList[(profileList.length/2)-1]){
+        const profile = this.binarysearch(userId, profileList)
+        
+      }
+    }
+  }
+
+  binarysearch = (userId, profileList) => {
+    if(userId == profileList[(profileList.length/2)-1].id){
+      return profileList[(profileList.length/2)-1]
+    } else if (userId  > profileList[(profileList.length/2)-1].id ){
+      const mid = profileList.length/2
+      const profileListEnd = profileList.slice(mid)
+      return this.binarysearch(userId, profileListEnd)
+    } else if (userId < profileList[(profileList.length/2)-1].id){
+      const mid = profileList.length/2
+      const profileListStart = profileList.slice(0, mid)
+      return this.binarysearch(userId, profileListStart)
+    }
+  }
+
 
 	render() {
-    console.log(this.props)
-    console.log("blah blah blah")
+    if (this.state.id){
+      var userData = this.getProfileInfo(this.state.id)
+
+
+    }
+
+
 		return (
 			<div>
         <PersonalProfile {...this.state} {...this.props}/>

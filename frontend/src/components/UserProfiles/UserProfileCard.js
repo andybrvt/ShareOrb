@@ -57,7 +57,7 @@ class UserProfileCard extends React.Component {
   onProfileClick = () => {
     const user = this.props.data.username
     // this.prop.history.push('userview/'+user)
-    window.location.href = 'userview/'+user;
+    window.location.href = 'explore/'+user;
 
   }
 
