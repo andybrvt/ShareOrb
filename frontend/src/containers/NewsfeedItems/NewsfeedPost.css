@@ -3,7 +3,11 @@
 /* temporary for test to see card look */
 
 
-
+.likeCSS{
+  font-size:14px;
+  color:gray;
+  margin-left: 20px;
+}
 
 body{
   background:#311b92;

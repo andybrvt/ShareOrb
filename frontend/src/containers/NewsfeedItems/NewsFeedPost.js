@@ -4,7 +4,7 @@ import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Row, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
@@ -401,10 +401,10 @@ class NewsfeedPost extends React.Component {
 
       </div>
 
+      <Divider/>
 
 
 
-    <Divider />
 
 
     <p style={{color:'black'}} class="whiteSpacePost">
@@ -426,13 +426,15 @@ class NewsfeedPost extends React.Component {
 
 
                  {this.props.data.caption}
+
                  </div>
                }
 
     </p>
 
+    <Divider/>
 
-
+    <div class="likeCSS">
 
     {
       (like_people.includes(this.props.userId)) ?
@@ -450,11 +452,12 @@ class NewsfeedPost extends React.Component {
             {
               (like_people.length == 1)?
               <span>
-                You like this.
+
+                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />You like this
               </span>
               :
               <span>
-                You and {like_people.length - 1} people like this.
+                You and {like_people.length - 1} person like this.
               </span>
             }
           </span>
@@ -464,21 +467,62 @@ class NewsfeedPost extends React.Component {
       :
 
       <span>
-        {
-          (like_people.length === 0) ?
+      {
+        (like_people.length>3)?
+        <span>
+        <Avatar size="small" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+        <Avatar size="small" style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+          +{like_people.length-3} people like this.
+        </span>
+
+        :
+
           <span>
+            {
+              (like_people.length === 0) ?
+              <span>
+              </span>
+
+              :
+
+
+
+              <div>
+                {
+                  (like_people.length==1)?
+                  <span>
+                  <Avatar src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar> likes this
+                  </span>
+
+
+                  :
+                  <span>
+                  2  people like this
+                  </span>
+
+                }
+                </div>
+
+
+
+            }
           </span>
-
-          :
-
-          <span>
-            {like_people.length} people like this.
-          </span>
-
-        }
-      </span>
+    }
+    </span>
 
     }
+
+
+    </div>
+
+
+    {/* show the first 3 people
+      like_people[0]'s avatar'
+      like_people[1]'s avatar
+      like_people[2]'s avatar
+      and + like_people.length-3 like this
+      */}
 
     {/*
     <div>
