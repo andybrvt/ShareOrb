@@ -147,6 +147,8 @@ class NewsfeedPost extends React.Component {
     let like_people = this.props.data.people_like
     console.log(this.props.data)
     let temp="http://127.0.0.1:8000"+this.props.data.image;
+    let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
+
     const success = () => {
     message.success('Clipped to your album!');
     };
@@ -160,15 +162,28 @@ class NewsfeedPost extends React.Component {
 
       <div>
         <div style={{padding:20,}}>
-            <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
 
-             <span class="personName">
-               {this.props.data.user.username}
+          <Popover
+             style={{width:'200px'}}
+             content={<div>
+               <Avatar shape="square" size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+               <div> 110 followers </div>
+             </div>}
+
+            >
+                <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+            </Popover>
+
+            <span class="personName">
+
+
+                  {this.props.data.user.username}
+
 
                <div>
-               <span class="fb-group-date" style={{marginLeft:55}}> 110 followers</span>
+               <span class="fb-group-date" style={{marginLeft:50}}> Yosemite National Park</span>
 
-               <span class="fb-group-date" style={{marginLeft:300}}> Yesterday 5:20pm</span>
+               <span class="fb-group-date" style={{marginLeft:240}}> Yesterday 5:20pm</span>
                </div>
              </span>
 
@@ -414,13 +429,21 @@ class NewsfeedPost extends React.Component {
 
     <div>
       <div style={{padding:20,}}>
-          <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+      <Popover
+         style={{width:'200px'}}
+         content={<div>
+           <Avatar shape="square" size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+           <div> 110 followers </div>
+         </div>}
 
+        >
+            <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+        </Popover>
            <span class="personName">
              {this.props.data.user.username}
 
              <div>
-             <span class="fb-group-date" style={{marginLeft:55}}> 110 followers</span>
+             <span class="fb-group-date" style={{marginLeft:55}}> Tucson, Arizona</span>
 
              <span class="fb-group-date" style={{marginLeft:300}}> Yesterday 5:20pm</span>
              </div>
