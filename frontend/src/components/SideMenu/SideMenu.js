@@ -11,6 +11,7 @@ import {
   LogoutOutlined, SettingOutlined,
 } from '@ant-design/icons'
 import {Link, withRouter} from 'react-router-dom';
+import {browserHistory} from 'react-router';
 import testPic from './antd.png';
 import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider, AutoComplete, Badge} from 'antd';
 import "./SideMenu.css"
@@ -50,6 +51,14 @@ class SideMenu extends React.Component {
     this.setState({
       dataSource: localStorage.getItem('friends').split(',')
     });
+  }
+
+  handleSelect = (value) => {
+  console.log(value);
+  let temp="http://localhost:3000/explore/"+value
+  console.log(temp)
+
+
   }
 
   onShowNotification = () => {
@@ -157,6 +166,7 @@ class SideMenu extends React.Component {
            dataSource={dataSource}
            filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
            onSearch={this.handleSearch}
+           onSelect={this.handleSelect}
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={500}
            style={{ marginLeft:150, marginLeft:100, marginRight:400, width: 350  }}
@@ -170,9 +180,6 @@ class SideMenu extends React.Component {
 
 
          <span className="avatar-item" style={{marginRight:40}}>
-      <Badge count={8}>
-        <Avatar shape="square" icon={<UserOutlined />} />
-      </Badge>
     </span>
 
     <span >

@@ -24,6 +24,7 @@ class NewsFeedView extends React.Component {
 		username: '',
 		id: '',
 		postShow:false,
+		picShow:false,
 	}
 
 	constructor(props){
@@ -60,9 +61,16 @@ class NewsFeedView extends React.Component {
 
 	postCondition = () => {
     this.setState({
-      postShow: true,
+      postShow: !(this.state.postShow),
     });
   };
+
+	uploadPicCondition = () => {
+    this.setState({
+      picShow: !(this.state.picShow),
+    });
+  };
+
 
 	componentWillReceiveProps(newProps){
 		this.props.grabUserCredentials();
@@ -187,7 +195,7 @@ class NewsFeedView extends React.Component {
 								<div class="topCard">
 
 
-									<i style={{background:'#5cdbd3'}} class="fa fa-picture-o share"></i>
+									<i style={{background:'#5cdbd3'}} nClick ={this.uploadPicCondition} class="fa fa-picture-o share"></i>
 									 <p  class="cardAlign"> Share a Picture </p>
 
 								</div>
@@ -241,45 +249,6 @@ class NewsFeedView extends React.Component {
 
 							 <div>
 
-	{/*
-
- <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10}}>
- <div  style={{marginTop:20, marginLeft:30, marginRight:10}}>
- 	<div>
-	 <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-
-				 <span class="personName">
-					 Jon Chen
-				 </span>
-
-				</div>
-
-
-			 <span class="fb-group-date"> 110 followers</span>
-			 <span style={{marginRight:10, marginTop:80}}>
-			 <span class="fb-group-date" style={{marginLeft:350}}> Yesterday 5:20pm</span>
-			 </span>
- <Divider />
- <p style={{padding:20, color:'black'}}>
-	 Wednesday -> Thursday
-	 <br/>
-	 3:00PM to 4:00PM
-	 <br/>
-	 <Avatar icon={<UserOutlined />} />
-		 <Avatar>U</Avatar>
-		 <Avatar size={40}>USER</Avatar>
-		 <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-		 <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
-		 <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-
- </p>
-
-
- 	</div>
-
- </div>
-
-	*/}
 
 
 									<div className = 'newsfeed' >
@@ -303,7 +272,7 @@ class NewsFeedView extends React.Component {
 
 				</div>
 
-				col-8
+				Loading...
 			</Col>
 
 
