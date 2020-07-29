@@ -14,6 +14,16 @@ class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
   }
+
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  componentDidMount(){
+    this.showPanel(0, 'transparent')
+
+  }
+
   // on click add friend starts here
       onClickSend = (e) =>{
         e.preventDefault()
@@ -68,7 +78,7 @@ class PersonalProfile extends React.Component{
       renderCalPostPic = () => {
         return(
           <div className = 'cal-post-pic'>
-            Hi
+            {this.onRenderTabs()}
           </div>
 
         )
@@ -85,6 +95,7 @@ class PersonalProfile extends React.Component{
         let bio = ''
         let followers = ''
         let following = ''
+        let posts = ''
 
         if (this.props.data){
           username = this.props.data.username
@@ -93,6 +104,7 @@ class PersonalProfile extends React.Component{
           bio = this.props.data.bio
           followers = this.props.data.get_following
           following = this.props.data.get_followers
+          posts = this.props.data.get_posts
         }
         console.log(firstName)
         console.log(following)
@@ -101,28 +113,62 @@ class PersonalProfile extends React.Component{
           <div className = 'profileInfo'>
 
             <div>
-            Username: {username}
-            <br />
-            First name: {firstName}
-            <br />
-            Last name: {lastName}
-            <br />
-            Bio: {bio}
-            <br />
-            Followers:{followers.length}
-            <br />
-            Following:{following.length}
-          <div>
+              <div className = 'profileName'>
+                {this.capitalize(firstName)} {this.capitalize(lastName)}
+              </div>
 
 
-            <div>
-              Follow
+            <div className = 'profilePostFollow'>
+              <div className = 'followItem'>
+                <span
+                className = 'postFollowWords'
+                >Post</span>
+                <br />
+                <span>{posts.length}</span>
+              </div>
+              <div className = 'followItem'>
+                <span
+                className = 'postFollowWords'
+                >Followers</span>
+                <br />
+                <span>{followers.length}</span>
+              </div>
+              <div className = 'followItem'>
+                <span
+                className = 'postFollowWords'
+                >Following</span>
+                <br />
+                <span>{following.length}</span>
+              </div>
             </div>
 
-            <div>
+            <div className = 'profileBio'>
+            {bio}
+            </div>
+          <div>
+
+          <div className = 'profileButtons'>
+
+          {followers.includes(this.props.currentId) ?
+            <div className = 'unFollowButton'>
               Unfollow
             </div>
 
+            :
+
+            <div className = 'followButton'>
+              Follow
+            </div>  
+          }
+
+
+
+
+            <div className = 'messageButton'>
+              Message
+            </div>
+
+          </div>
 
 
           </div>
@@ -135,6 +181,57 @@ class PersonalProfile extends React.Component{
 
       }
 
+      showPanel = (panelIndex, colorCode) =>{
+        var tabButtons= document.querySelectorAll('.profile-tabContainer .profile-buttonContainer .profile-Tab')
+        var tabPanels= document.querySelectorAll('.profile-tabContainer .profile-tabPanel')
+        if (tabButtons.length > 0 && tabPanels.length > 0){
+          tabButtons.forEach(function(node){
+            node.style.backgroundColor = "";
+            node.style.color = "";
+          })
+          tabButtons[panelIndex].style.backgroundColor = colorCode;
+          tabButtons[panelIndex].style.color = '#363636';
+          tabPanels.forEach(function(node){
+            node.style.display = 'none'
+          })
+          tabPanels[panelIndex].style.display = 'block';
+          tabPanels[panelIndex].style.backgroundColor = colorCode;
+
+        }
+
+      }
+
+    onRenderTabs= () => {
+      var tabs = document.getElementsByClassName('profile-Tab');
+      Array.prototype.forEach.call(tabs, function(tab) {
+  	       tab.addEventListener('click', setActiveClass);
+      });
+
+      function setActiveClass(evt) {
+  	       Array.prototype.forEach.call(tabs, function(tab) {
+  		          tab.classList.remove('profile-active');
+  	           });
+
+  	            evt.currentTarget.classList.add('profile-active');
+              }
+
+      return (
+        <div className = 'profile-tabContainer'>
+          <div className = 'profile-buttonContainer'>
+            <div className = 'profile-description_tab profile-active profile-Tab' onClick = {() => this.showPanel(0, 'transparent')} > People</div>
+            <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(1, 'transparent')}> Posts </div>
+            <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(2, 'transparent')}> Events </div>
+            <div className = 'profile-slider'></div>
+          </div>
+          <div className = 'profile-tabPanel'>
+            Tab 1: Content
+           </div>
+          <div className = 'profile-tabPanel'> Tab 2: Content </div>
+          <div className = 'profile-tabPanel'> Tab 3: Content </div>
+        </div>
+      )
+    }
+
   render(){
 
       console.log(this.props)
@@ -143,7 +240,7 @@ class PersonalProfile extends React.Component{
         <div className = 'profilePage'>
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
-        {this.renderCalPostPic()}
+        {this.onRenderTabs()}
         </div>
       )
 
@@ -152,6 +249,7 @@ class PersonalProfile extends React.Component{
 
 const mapStateToProps = state => {
     return {
+      currentId: state.auth.id,
       currentUser: state.auth.username,
       token: state.auth.token
       };
