@@ -61,12 +61,15 @@ class NewsFeedView extends React.Component {
 
 	postCondition = () => {
     this.setState({
+			picShow:false,
       postShow: !(this.state.postShow),
     });
   };
 
-	uploadPicCondition = () => {
+
+	picCondition = () => {
     this.setState({
+			postShow:false,
       picShow: !(this.state.picShow),
     });
   };
@@ -107,7 +110,7 @@ class NewsFeedView extends React.Component {
 					display: 'flex',
 					// backgroundColor: 'blue',
 					position: 'relative',
-					marginLeft: '250px'
+					marginLeft: '200px'
 				}}>
 
 
@@ -119,7 +122,7 @@ class NewsFeedView extends React.Component {
 						width: '300px',
 						// postion: 'fixed',
 						position: 'relative',
-						marginRight:40,
+						marginRight:100,
 					}}>
 
 
@@ -128,7 +131,7 @@ class NewsFeedView extends React.Component {
 					</div>
 
 
-					<div class="createEventCSS" style = {{
+					<div class="suggestFriendsCSS" style = {{
 						background: 'white',
 						height: '400px',
 						width: '300px',
@@ -140,21 +143,8 @@ class NewsFeedView extends React.Component {
 					}}>
 
 
-					<div style={{textAlign:'center', fontSize:'20px', color:'black'}}>
-				Today's Events
 
-				</div>
-
-
-
-						<div style={{backgroundColor:'#bae7ff', height: '300px',
-						width: '200px', marginTop:30, marginLeft:60}}>
-
-
-
-						<Checkbox>Share with Public </Checkbox>
-
-						</div>
+					Today's events
 
 
 					</div>
@@ -192,11 +182,11 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>
 
 
-								<div class="topCard">
+								<div class="topCard" onClick ={this.picCondition}>
 
 
-									<i style={{background:'#5cdbd3'}} nClick ={this.uploadPicCondition} class="fa fa-picture-o share"></i>
-									 <p  class="cardAlign"> Share a Picture </p>
+									<i style={{background:'#5cdbd3'}}  class="fa fa-plus share"></i>
+									 <p  class="cardAlign"> Create event  </p>
 
 								</div>
 
@@ -210,8 +200,8 @@ class NewsFeedView extends React.Component {
 								<div class="topCard">
 
 
-									<i style={{background:'#722ed1'}} class="fa fa-archive share"></i>
-									 <p  class="cardAlign"> View today's album </p>
+									<i style={{background:'#722ed1'}} class="fa fa-picture-o share"></i>
+									 <p  class="cardAlign"> View album </p>
 
 								</div>
 
@@ -223,26 +213,51 @@ class NewsFeedView extends React.Component {
 
 
 {
-	!this.state.postShow?
-	<div>
+	this.state.postShow?
 
+	<div style={{marginTop:'100px'}}>
+
+
+	<NewsFeedFormPost data = {this.props}/>
 
 
 	</div>
 
 
-:
 
-<div style={{marginTop:'150px'}}>
+	:
+
+				<div>
+
+				{
+					!this.state.picShow?
+					<div>
 
 
-<NewsFeedFormPost data = {this.props}/>
+
+					</div>
 
 
-</div>
+				:
+
+				<div style={{marginTop:'100px'}}>
+
+
+				dsafsdfasfd
+
+
+				</div>
+
+
+				}
+
+				 </div>
 
 
 }
+
+
+
 
 
 
@@ -289,10 +304,6 @@ class NewsFeedView extends React.Component {
 			class="suggestFriendsCSS"
 
 			>
-
-			<div class="share">
-			<i class="fa fa-plus"></i>
-			</div>
 
 
 
