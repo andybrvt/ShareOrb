@@ -768,13 +768,24 @@ class NewsfeedPost extends React.Component {
           visible={this.state.visibleModal}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-          width="1200px"
-          height="800px"
+          width="1600px"
+          style={{marginTop:'-50px'}}
           >
 
-          <div class="modalContainer">
+          <div class="modalInnerContainer">
 
-            <p style={{marginRight:'200px'}}>{this.ContentOfPost()}</p>
+          {
+                  this.props.data.image ?
+               <p>{this.ContentOfPic()}</p>
+
+          //
+                  :
+          //         <div></div>
+          //
+          //
+          //ContentOfPic
+          <p class="modalCardBorder"> {this.ContentOfPost()} </p>
+          }
             <p>{this.ContentofComments()}</p>
           </div>
         </Modal>

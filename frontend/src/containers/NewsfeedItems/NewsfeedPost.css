@@ -3,9 +3,15 @@
 /* temporary for test to see card look */
 
 
-.modalContainer{
+.modalInnerContainer{
   display: flex;
 }
+
+
+  .modalOuterContainer{
+
+  }
+
 
 
 
