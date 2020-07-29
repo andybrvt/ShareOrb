@@ -147,15 +147,28 @@ class PersonalProfile extends React.Component{
             </div>
           <div>
 
+          <div className = 'profileButtons'>
 
-            <div className = 'followButton'>
-              Follow
-            </div>
-
-            <div className = 'followButton'>
+          {followers.includes(this.props.currentId) ?
+            <div className = 'unFollowButton'>
               Unfollow
             </div>
 
+            :
+
+            <div className = 'followButton'>
+              Follow
+            </div>  
+          }
+
+
+
+
+            <div className = 'messageButton'>
+              Message
+            </div>
+
+          </div>
 
 
           </div>
@@ -236,6 +249,7 @@ class PersonalProfile extends React.Component{
 
 const mapStateToProps = state => {
     return {
+      currentId: state.auth.id,
       currentUser: state.auth.username,
       token: state.auth.token
       };
