@@ -38,11 +38,17 @@ class UserSerializer(serializers.ModelSerializer):
     get_posts = serializers.StringRelatedField(many = True)
     get_following = serializers.StringRelatedField(many = True)
     get_followers = serializers.StringRelatedField(many = True)
+    
     class Meta:
         model = models.User
         fields = ('id', 'username', 'first_name', 'last_name', 'bio', "get_posts", 'get_following','get_followers', 'friends', 'slug')
 
 
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserFollowing
+        fields = ('person_following',  'person_getting_followers', 'created')
 # https://stackoverflow.com/questions/17280007/retrieving-a-foreign-key-value-with-django-rest-framework-serializers
 
 

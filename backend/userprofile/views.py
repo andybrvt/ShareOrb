@@ -75,22 +75,16 @@ class ReactInfiniteView(viewsets.ModelViewSet):
 
     def list(self, request):
         user_friends=self.request.user.friends.values('id')
-        print(user_friends)
         # all users OTHER than current user and current user's friends
         UsersNewsFeed = models.User.objects.exclude(id__in=user_friends).exclude(id=self.request.user.id)
-        print(UsersNewsFeed)
         #Query set of all User objects of current user and current user's friends
         UserPlusUserFriends = models.User.objects.exclude(id__in=UsersNewsFeed.values_list('id', flat=True))
-        print("made it")
-        print(UserPlusUserFriends)
         test= models.Post.objects.filter(user=self.request.user)
-        print(test)
         big_list=[]
         for element in UserPlusUserFriends:
             temp=models.Post.objects.filter(user=element)
             for element2 in temp:
                 big_list.append(element2.pk)
-        print(big_list)
         queryset = models.Post.objects.filter(pk__in=big_list).order_by('-created_at', '-updated_at')
         serializer = self.serializer_class(queryset, many=True)
         return Response({
@@ -208,8 +202,6 @@ class AddOneLikeToPost(APIView):
     def post(self, request, id, *args, **kwargs):
         # grabs post based off of id in newsfeed
         grabPost= models.Post.objects.get(id=id)
-        print(grabPost)
-        print(grabPost.like_count)
         if(grabPost.like_condition==False):
             grabPost.like_count+=1
             grabPost.like_condition=True
@@ -217,7 +209,6 @@ class AddOneLikeToPost(APIView):
             grabPost.like_count-=1
             grabPost.like_condition=False
 
-        print(grabPost.like_count)
         grabPost.save()
         return Response('View post in console')
 
@@ -226,24 +217,23 @@ class postCommentTest(APIView):
 
     def post(self, request, postID, *args, **kwargs):
         post= get_object_or_404(models.Post, id=postID)
-        print(post)
         # filter retrieves all the active comments for the post
         # comments = post.comments.filter(active=True)
         # print(comments)
         new_comment = None
-        print(request.POST)
-        print(dict(request.POST.lists()))
+
+
         # Comment posted
         if request.method == 'POST':
-            print("made it")
+
             comment_form = CommentForm(data=request.POST)
             if comment_form.is_valid():
-                print("valid")
+
                 # Create Comment object but don't save to database yet
                 new_comment = comment_form.save(commit=False)
                 # Assign the current post to the comment
                 new_comment.post = post
-                print(new_comment)
+
                 # Save the comment to the database
                 new_comment.save()
         else:
@@ -266,9 +256,9 @@ class First3CommentsInPost(generics.ListAPIView):
     lookup_url_kwarg = "postID"
     def get_queryset(self):
         id = self.kwargs.get(self.lookup_url_kwarg)
-        print(id)
+
         queryset = models.Comment.objects.filter(post=id)[0:3]
-        print(queryset)
+
         return queryset
 
 
@@ -278,8 +268,6 @@ class NewsFeedSuggestedFriends(generics.ListAPIView):
     def get_queryset(self):
         list = []
         temp=(self.request.user.friends.all())
-        print("all friends")
-        print(temp)
         for i in temp:
             list.append(i.username)
         list.append(self.request.user)
@@ -295,18 +283,14 @@ class post_detail(APIView):
 
     def post(self, request, postID, *args, **kwargs):
         grabPost= models.Post.objects.get(id=postID)
-        print("loololololol")
-        print(grabPost)
-        print(grabPost.post_comments)
-        print(grabPost.post_comments())
+
         comments_list=[]
         for element in grabPost.post_comments():
-            print(element)
 
             comments_list.append(element['id'])
 
 
-        print(comments_list)
+
         # comments = grabPost.post_comments.filter(active=True).order_by("-created_on")[0:3]
         queryset = models.Comment.objects.filter(pk__in=comments_list).order_by('-created_on').reverse()[0:3]
         return JsonResponse(queryset.serializeCustom())
@@ -337,11 +321,7 @@ class ViewComment(APIView):
     def post(self, request, postID, commentID, *args, **kwargs):
 #         # grabs post based off of id in newsfeed
         grabPost= models.Post.objects.get(id=postID)
-        print(grabPost)
-        print(grabPost.like_condition)
         grabComment= models.Comment.objects.get(id=commentID)
-        print(grabComment)
-        print(grabComment.id)
         # if(grabComment.id in grabPost.comments):
         # check if comment id is in list of grabpost.comemnts
 

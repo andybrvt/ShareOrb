@@ -61,12 +61,16 @@ class WebSocketExplore {
       const profiles = JSON.parse(parsedData.user_profiles)
       console.log(profiles)
       this.callbacks['fetch_profiles'](profiles)
+    } else if (command === 'send_following'){
+      // const following = JSON.parse(parsedData)
+      // this.callbacks['new_following'](profiles)
     }
   }
 
-  addCallbacks(loadProfiles, addFollowerFollowingCallBack){
+  addCallbacks(loadProfiles, addFollowerCallBack, addFollowingCallBack){
     this.callbacks['fetch_profiles'] = loadProfiles
-    this.callbacks['new_following'] = addFollowerFollowingCallBack
+    this.callbacks['new_follower'] = addFollowerCallBack
+    this.callbacks['new_following'] = addFollowingCallBack
   }
 
 
@@ -77,7 +81,24 @@ class WebSocketExplore {
     })
   }
 
+  sendFollowing = (follower, following) => {
+    // This function will set up the object and command to send
+    // to the backend. The follower is the person sending the following
+    // request and the following the person gettting the following
+
+
+    this.sendFollowerFollowing({
+      follower: follower,
+      following: following,
+      command: 'send_following'
+    })
+  }
+
+
+
   sendFollowerFollowing(data){
+    // So this is just used as a way to send info into the backend
+    console.log(data)
     console.log('send_folower_following')
     try{
       this.socketRef.send(JSON.stringify({...data }))
