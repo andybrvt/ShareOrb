@@ -3,6 +3,7 @@ import { updateObject } from '../utility';
 
 const initialState = {
   profiles: [],
+  curProfile: []
 
 }
 
@@ -10,6 +11,12 @@ export const loadProfiles = (state, action) =>{
   console.log(action)
   return updateObject(state, {
     profiles: action.profiles
+  })
+}
+
+export const loadCurProfile = (state,action) =>{
+  return updateObject(state, {
+    profile: action.curProfile
   })
 }
 
@@ -56,6 +63,8 @@ const reducer = (state = initialState, action) => {
       return addFollower(state, action);
     case actionTypes.ADD_FOLLOWING:
       return addFollowing(state, action)
+    case actionTypes.LOAD_CUR_PROFILE:
+      return loadCurProfile(state, action)
     default:
       return state;
   };

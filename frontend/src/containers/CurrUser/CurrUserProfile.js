@@ -7,6 +7,7 @@ import SocialCalendar from '../SocialCalendar';
 import background1 from '../../components/images/background1.jpg';
 import ava1 from '../../components/images/avatar.jpg'
 import ExploreWebSocketInstance from '../../exploreWebsocket';
+import { connect } from "react-redux";
 
 
 import {
@@ -30,6 +31,7 @@ import {
 class CurrUserProfile extends React.Component{
   constructor(props) {
     super(props);
+    this.initialiseExplore()
   }
   state = {
     id:'',
@@ -44,10 +46,36 @@ class CurrUserProfile extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  initialiseExplore(){
+    // This will pretty much be for loading up the users following status, because
+    // later we are gonna have a search function, so you want to throw this in one
+    // of the very first things
+    this.waitForSocketConnection(()=> {
+      ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
+    })
+  }
+
+  waitForSocketConnection (callback) {
+    const component = this;
+    setTimeout(
+      function(){
+
+        if (ExploreWebSocketInstance.state() === 1){
+
+          callback();
+          return;
+        } else{
+
+            component.waitForSocketConnection(callback);
+        }
+      }, 100)
+
+  }
+
   componentDidMount(){
     this.showPanel(0, 'transparent')
-    
-
+    console.log(this.props)
+    // ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
    }
 
    renderProfilePic = () => {
@@ -229,4 +257,13 @@ class CurrUserProfile extends React.Component{
 
   };
 
-export default CurrUserProfile;
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth.username,
+    curProfile: state.explore.profile
+  }
+}
+
+
+export default connect(mapStateToProps)(CurrUserProfile);

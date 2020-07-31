@@ -83,13 +83,18 @@ class WebSocketExplore {
       }
 
       this.callbacks['new_follower'](followObj)
+    } else if (command === 'currUser_profile') {
+      // This is to send the profile info of the current user
+      const profile = JSON.parse(parsedData.user_profile)[0]
+      this.callbacks['current_user'](profile)
     }
   }
 
-  addCallbacks(loadProfiles, addFollowerCallBack, addFollowingCallBack){
+  addCallbacks(loadProfiles, addFollowerCallBack, addFollowingCallBack, loadCurrProfile){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
     this.callbacks['new_following'] = addFollowingCallBack
+    this.callbacks['current_user'] = loadCurrProfile
   }
 
 
@@ -101,6 +106,9 @@ class WebSocketExplore {
   }
 
   fetchCurrentUserProfile(currUser){
+    // Fetch the cur user seperate by the back end so we can avoid looping through
+    // all the profiles in the front end
+    console.log('fetch profile')
     this.sendFollowerFollowing({
       command: 'fetch_curUser_profile',
       currUser: currUser

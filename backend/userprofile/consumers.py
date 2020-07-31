@@ -452,6 +452,15 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
+    def fetch_curUser_profile(self, data):
+        currentUser = User.objects.filter(username = data['currUser'])
+        serializer = UserSerializer(currentUser, many = True)
+        content = {
+            'command': 'currUser_profile',
+            'user_profile': json.dumps(serializer.data)
+        }
+        self.send_json(content)
+
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer
         # just a reminder that the follower is the person sending the request
@@ -523,13 +532,14 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data = None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_follower_following':
             self.fetch_follower_following(data)
         if data['command'] == 'send_following':
             self.send_following(data)
+        if data['command'] == 'fetch_curUser_profile':
+            self.fetch_curUser_profile(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']
-        print(followObj)
-        print('right here')
         return self.send_json(followObj)

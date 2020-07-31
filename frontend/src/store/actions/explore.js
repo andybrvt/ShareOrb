@@ -24,3 +24,10 @@ export const loadProfiles = profiles => {
     profiles: profiles
   }
 }
+
+export const loadCurProfile = curProfile => {
+  return {
+    type: actionTypes.LOAD_CUR_PROFILE,
+    curProfile: curProfile
+  }
+}

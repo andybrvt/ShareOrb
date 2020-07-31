@@ -50,7 +50,8 @@ class App extends Component {
     ExploreWebSocketInstance.addCallbacks(
       this.props.loadProfiles.bind(this),
       this.props.addFollower.bind(this),
-      this.props.addFollowing.bind(this)
+      this.props.addFollowing.bind(this),
+      this.props.loadCurProfile.bind(this)
     )
   }
 
@@ -115,6 +116,7 @@ const mapDispatchToProps = dispatch => {
     loadProfiles: profiles => dispatch(exploreActions.loadProfiles(profiles)),
     addFollower: followObject => dispatch(exploreActions.addFollower(followObject)),
     addFollowing: followObject => dispatch(exploreActions.addFollowing(followObject)),
+    loadCurProfile: curProfile => dispatch(exploreActions.loadCurProfile(curProfile))
 
 
   }
