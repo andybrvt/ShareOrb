@@ -89,6 +89,14 @@ class PersonalProfile extends React.Component{
         // This is to send a follow into the back end
         // It will use the id of the user to get the user and add the following
         ExploreWebSocketInstance.sendFollowing(follower, following)
+        // The follower is you who is sending the reqwuest and the following is the other person
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: this.props.currentUser,
+          recipient: this.props.data.username
+        }
+
+        NotificationWebSocketInstance.sendNotification(notificationObject)
       }
 
       onRenderProfileInfo(){
@@ -167,7 +175,7 @@ class PersonalProfile extends React.Component{
 
             :
 
-            <div onClick = {() => this.onFollow(this.props.currentId, profileId)}className = 'followButton'>
+            <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
               Follow
             </div>
           }

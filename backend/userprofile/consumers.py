@@ -84,6 +84,10 @@ class NotificationConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, id = data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = 'comment_notification', recipient = recipient, actor = actor, verb = 'commented on your post')
+        if data['command'] == 'send_follow_notification':
+            recipient = get_object_or_404(User, username = data['recipient'])
+            actor = get_object_or_404(User, username = data['actor'])
+            notification = CustomNotification.objects.create(type = 'follow_notification', recipient = recipient, actor = actor, verb = 'followed you')
         # CustomNotification.save(self)
         # The notification will be serilizered and then sent to the group send
         serializer = NotificationSerializer(notification)
@@ -298,6 +302,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print (data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -317,6 +322,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'like_notification':
             self.send_notification(data)
         if data['command'] == 'comment_notification':
+            self.send_notification(data)
+        if data['command'] == 'send_follow_notification':
             self.send_notification(data)
     def new_notification(self, event):
         notification = event['notification']
