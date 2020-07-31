@@ -463,20 +463,28 @@ class ExploreConsumer(JsonWebsocketConsumer):
         followerObj = UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
         serializer = FollowSerializer(followerObj, many = False)
 
+        print(following.id, followingUsername)
+
+        # Since you will need to add the other persons name into your following and the other
+        # person needs to add you to their follower
         # content follower will be the info that the person doing the following will get
         content_follower = {
             'command': 'send_following',
-            'targetId': follower.id,
-            'targetUsername': followerUsername,
+            'targetId': following.id,
+            'targetUsername': followingUsername,
+            'actorUsername': followerUsername
         }
 
         # content_following will be the person getting the follower (the perosn that the user if following)
         content_following = {
             'command': 'send_follower',
-            'targetId': following.id,
-            'targetUsername': followingUsername
+            'targetId': follower.id,
+            'targetUsername': followerUsername,
+            'actorUsername': followingUsername
 
         }
+
+
         self.send_new_following(content_follower)
         self.send_new_following(content_following)
 
@@ -485,7 +493,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This function is used to send follow objs into the websocket and to everyone
         # in the channel layer
         channel_layer = get_channel_layer()
-        channel_recipient = followObj['targetUsername']
+        channel_recipient = followObj['actorUsername']
         channel = 'explore_'+channel_recipient
 
 
@@ -522,5 +530,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     def new_follower_following(self, event):
         followObj = event['followObj']
-
+        print(followObj)
+        print('right here')
         return self.send_json(followObj)

@@ -1,109 +1,245 @@
-.test2{
+.profilePage{
+  background-color: white;
+  position: relative;
+  left:2%;
+  width: 1760px;
+  bottom: 30px;
+  padding-top: 40px;
+  /* align-items: center; */
+}
+
+.profilePage .profileInfo{
+  /* position: absolute; */
+  position: relative;
+  height: 100%;
+  width: 1200px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  font-size: 20px;
+  /* background-color: blue; */
+}
+
+.profileName {
+  /* background-color: red; */
+  font-size: 45px;
+  font-weight: 100px;
+  color: black;
+}
+
+.profileBio{
+  /* background-color: red; */
+  padding: 40px 0px;
+  width:550px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+}
+
+.selfProfileButtons{
+  /* background-color: red; */
+  width: 400px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  /* display: flex; */
+  /* justify-content: space-between; */
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+
+
+
+.editProfileButton{
+  /* background-color: red; */
+  padding-top: 4px;
+  /* position: absolute; */
+  width: 400px;
+  height: 38px;
+  border: 1px solid;
+  /* background: transparent; */
+  border-radius: 5px;
+  /* color: #fff; */
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  z-index: 2;
+  /* box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
+}
+
+.following{
+  /* background-color: red; */
+  position: relative;
+  padding-top: 60px;
+}
+
+
+.profilePostFollow{
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  padding: 0px 10px;
+  width: 650px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.followItem{
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.postFollowWords{
+  color: lightgrey;
   font-size: 20px;
 }
 
-.profile-content {
+.background{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: blue;
+  height: 250px;
+  width: 1760px;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  height: ;
+  width: 100%;
+  position: absolute;
+  bottom: -100%;
+}
+
+.profilePic{
+  /* background-color: yellow; */
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  left: 50%;
+  /* bottom:45%; */
+  transform: translateX(-50%);
+  overflow: hidden;
+  /* margin: 2px; */
+  /* padding: 2px; */
+  /* border: 3px solid white; */
+  z-index: 1;
+}
+
+.profile-pic{
+  height: 125%;
+}
+
+.cal-post-pic{
+  background-color: red;
+  border-top: 2px gainsboro solid;
+  width: 1000px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 700px;
+}
+
+
+/* This is for the tab changes */
+.profile-tabContainer {
+  position: relative;
+  top: 50px;
+  /* left: 40px; */
+  bottom: 28px;
+  width: 1760px;
+  height: 100%;
+  background-color: #ffffff;
   /* background-color: red; */
-  width: 1750px;
+}
+
+.profile-tabContainer .profile-buttonContainer{
+
+  height: 60px;
+  width: 33.33%;
   position: relative;
-  left: 40px;
-}
-.profile-content .tab-content .tab-pane {
-  min-height: 200px;
-}
-
-
-.title {
-  margin-top: 30px;
-  margin-bottom: 25px;
-  min-height: 32px;
-}
-
-.title.text-center {
-  margin-bottom: 50px;
-}
-
-
-
-.img-circle {
-  background-color: #FFFFFF;
+  left: 33.33%;
+  top: 2%;
+  display: flex;
+  text-align: center;
+  /* margin-top: 10px; */
+  /* background-color: red; */
+  padding-top: 30px;
   margin-bottom: 10px;
-  padding: 4px;
-  border-radius: 50% !important;
-  max-width: 100%;
-}
+  /* padding-bottom: 5px; */
+  }
 
 
-.img-no-padding {
-  padding: 0px;
-}
 
-.owner .avatar {
-  padding: 15px;
-  max-width: 180px;
-  margin: -85px auto 0;
-  display: inline-block;
-  position: relative; z-index: 100;
-}
-
-.owner .name h4 {
-  margin-top: 10px;
-}
-
-
-.test3{
-  border-radius: 4px 4px 0 0;
-}
-
-
-.timeline-cover{
-  background: url("https://images.unsplash.com/photo-1499380848949-2960e980ed02?ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
+.profile-tabContainer .profile-buttonContainer .profile-Tab{
+  width: 33.3333%;
+  height: 100%;
   position: relative;
+  /* float:none; */
+  border-bottom: 1px grey solid;
+  /* background: transparent; */
+  /* border-radius: 25px; */
+  outline: none;
+  cursor: pointer;
+  /* padding: 10px; */
+  font-family: sans-serif;
+  font-size: 15px;
+  /* background-color: #ffffff; */
+  /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
+}
+
+.profile-description_tab{
+  float: left;
+	width: 33.333%;
+	text-align: center;
+}
+
+.profile-description_tab:first-child.profile-active ~ .profile-slider {
+			left: 0;
+}
+
+.profile-description_tab:nth-child(2).profile-active ~ .profile-slider {
+			left: 33.333%;
+}
+
+.profile-description_tab:nth-child(3).profile-active ~ .profile-slider {
+			left: 66.666%;
 }
 
 
-.popover-primary {
-  background-color: #6dd3d6;
-  color: #FFFFFF;
-}
-.popover-primary .popover-title {
-  background-color: #6dd3d6;
-  color: rgba(0, 0, 0, 0.56);
-}
-.popover-primary.bottom .arrow:after {
-  border-bottom-color: #6dd3d6;
-}
-.popover-primary.left > .arrow::after {
-  border-left-color: #6dd3d6;
-}
-.popover-primary.top > .arrow::after {
-  border-top-color: #6dd3d6;
-}
-.popover-primary.right > .arrow::after {
-  border-right-color: #6dd3d6;
+.profile-tabContainer .profile-buttonContainer button:hover {
+  background-color: #DCDCDC;
 }
 
-.popover-warning {
-  background-color: #fcd27b;
-  color: #FFFFFF;
+.profile-slider {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 33.333%;
+		height: 2px;
+		background-color: grey;
+		transition: .5s;
 }
-.popover-warning .popover-title {
-  background-color: #fcd27b;
-  color: rgba(0, 0, 0, 0.56);
-}
-.popover-warning.bottom .arrow:after {
-  border-bottom-color: #fcd27b;
-}
-.popover-warning.left > .arrow::after {
-  border-left-color: #fcd27b;
-}
-.popover-warning.top > .arrow::after {
-  border-top-color: #fcd27b;
-}
-.popover-warning.right > .arrow::after {
-  border-right-color: #fcd27b;
+
+.profile-tabContainer .profile-tabPanel{
+  height: 85%;
+  background-color: gray;
+  color: #363636;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  padding-top: 2%;
+  font-family: sans-serif;
+  font-size: 22px;
+  display: none;
+  overflow: auto;
+  height: 850px;
 }

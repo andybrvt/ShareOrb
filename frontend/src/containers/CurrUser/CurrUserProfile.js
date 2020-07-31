@@ -3,7 +3,11 @@ import { Tabs, Statistic } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
-import SocialCalendar from '../SocialCalendar'
+import SocialCalendar from '../SocialCalendar';
+import background1 from '../../components/images/background1.jpg';
+import ava1 from '../../components/images/avatar.jpg'
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+
 
 import {
   Button,
@@ -36,178 +40,193 @@ class CurrUserProfile extends React.Component{
     friends: [],
   }
 
-  async componentDidMount(){
-    const username = this.props.match.params.username;
-    const userID = this.props.match.params.id;
-    await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
-      .then(res=> {
-        this.setState({
-          id:res.data.id,
-          username: res.data.username,
-          first_name: res.data.first_name,
-          last_name: res.data.last_name,
-          bio: res.data.bio,
-          friends: res.data.friends,
-       });
-     });
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  componentDidMount(){
+    this.showPanel(0, 'transparent')
+    
+
    }
 
-  render(){
-        const { TabPane } = Tabs;
-        function callback(key) {
-          console.log(key);
-        }
-      return(
-        <div>
+   renderProfilePic = () => {
+     return (
+       <div className = 'profilePic'>
+         <img  className = 'profile-pic' src = {ava1} alt = 'profilePic' />
+       </div>
+     )
+   }
 
-          <div className="section profile-content">
+   renderCalPostPic = () => {
+     return(
+       <div className = 'cal-post-pic'>
+         {this.onRenderTabs()}
+       </div>
 
-          <Container >
-            <div class="timeline-cover">
+     )
+   }
 
-            </div>
+   onFollow = (follower, following) =>{
+     // This is to send a follow into the back end
+     // It will use the id of the user to get the user and add the following
+     ExploreWebSocketInstance.sendFollowing(follower, following)
+   }
 
-            <div className="owner">
-              <div className="avatar">
-                <img
-                  alt="..."
-                  className="img-circle img-no-padding img-responsive test3"
-                  src={"https://images.unsplash.com/photo-1544294932-57834439d0ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}
-                />
-              </div>
-              <div className="name">
-                <h4 className="title test">
-                  Jane Faker<br />
-                </h4>
-                <h6 className="description">Music Producer</h6>
-                  <Statistic title="Connections" value={332} />
-                  <Statistic title="Following" value={23} />
-                  <Statistic title="Followers" value={112893} />
-              </div>
-            </div>
-            <Row>
-              <Col className="ml-auto mr-auto text-center test2" md="6">
-                <p>
-                  An artist of considerable range, Jane Faker — the name taken by
-                  Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                  and records all of his own music, giving it a warm, intimate
-                  feel with a solid groove structure.
-                </p>
-                <br />
-                <Button className="btn-round" color="default" outline>
-                  <i className="fa fa-cog" /> Settings
-                </Button>
-              </Col>
-            </Row>
-            <br />
-            <div className="nav-tabs-navigation">
-              <div className="nav-tabs-wrapper">
-                <Nav role="tablist" tabs>
-                  <NavItem>
+   onRenderProfileInfo(){
+     // For the following and the follwers, the get_followers will be the people taht
+     // are your followers and the people that are in
+     // get following are the people taht are you are following, so they would be your
+     // followers
+     let username = ''
+     let firstName = ''
+     let lastName = ''
+     let bio = ''
+     let followers = ''
+     let following = ''
+     let posts = ''
+     let profileId = ''
 
-                  </NavItem>
-                  <NavItem>
+     // if (this.props.data){
+     //   username = this.props.data.username
+     //   firstName = this.props.data.first_name
+     //   lastName = this.props.data.last_name
+     //   bio = this.props.data.bio
+     //   followers = this.props.data.get_followers
+     //   following = this.props.data.get_following
+     //   posts = this.props.data.get_posts
+     //   profileId = this.props.data.id
+     // }
+     // console.log(firstName)
+     // console.log(following)
+     // console.log(this.props.currentId)
+     // console.log(following.includes(this.props.currentId.toString()))
 
-                  </NavItem>
-                </Nav>
-              </div>
-            </div>
-            {/* Tab panes */}
-            <TabContent className="following">
-              <TabPane tabId="1" id="follows">
-                <Row>
-                  <Col className="ml-auto mr-auto" md="6">
-                    <ul className="list-unstyled follows">
-                      <li>
-                        <Row>
-                          <Col className="ml-auto mr-auto" lg="2" md="4" xs="4">
+     return (
+       <div className = 'profileInfo'>
 
-                          </Col>
-                          <Col className="ml-auto mr-auto" lg="7" md="4" xs="4">
-                            <h6>
-                              Flume <br />
-                              <small>Musical Producer</small>
-                            </h6>
-                          </Col>
-                          <Col className="ml-auto mr-auto" lg="3" md="4" xs="4">
-                            <FormGroup check>
-                              <Label check>
-                                <Input
-                                  defaultChecked
-                                  defaultValue=""
-                                  type="checkbox"
-                                />
-                                <span className="form-check-sign" />
-                              </Label>
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </li>
-                      <hr />
-                      <li>
-                        <Row>
-                          <Col className="mx-auto" lg="2" md="4" xs="4">
-
-                          </Col>
-                          <Col lg="7" md="4" xs="4">
-                            <h6>
-                              Banks <br />
-                              <small>Singer</small>
-                            </h6>
-                          </Col>
-                          <Col lg="3" md="4" xs="4">
-                            <FormGroup check>
-                              <Label check>
-                                <Input defaultValue="" type="checkbox" />
-                                <span className="form-check-sign" />
-                              </Label>
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </li>
-                    </ul>
-                  </Col>
-                </Row>
-              </TabPane>
-              <TabPane className="text-center" tabId="2" id="following">
-                <h3 className="text-muted">Not following anyone yet :(</h3>
-                <Button className="btn-round" color="warning">
-                  Find artists
-                </Button>
-              </TabPane>
-            </TabContent>
+         <div>
+           <div className = 'profileName'>
+            ADMIN
+           </div>
 
 
-          </Container>
-          <Tabs
-          style = {{
-            // backgroundColor:'blue',
-            textAlign: 'center'
-            // position: 'relative',
-            // left: '200px'
-          }}
-           onChange={callback}
-           type="card"
-           centered = {true}>
-            <TabPane
-            style = {{
-              // backgroundColor: 'red',
-              width: '1760px'
-            }}
-            tab="Social Calendar" key="1">
-              <SocialCalendar />
-            </TabPane>
-            <TabPane tab="Pictures" key="2">
-              Picture album
-            </TabPane>
-            <TabPane tab="Profile" key="3">
-              Profile
-            </TabPane>
-          </Tabs>
+         <div className = 'profilePostFollow'>
+           <div className = 'followItem'>
+             <span
+             className = 'postFollowWords'
+             >Post</span>
+             <br />
+             <span></span>
+           </div>
+           <div className = 'followItem'>
+             <span
+             className = 'postFollowWords'
+             >Followers</span>
+             <br />
+             <span></span>
+           </div>
+           <div className = 'followItem'>
+             <span
+             className = 'postFollowWords'
+             >Following</span>
+             <br />
+             <span></span>
+           </div>
+         </div>
+
+         <div className = 'profileBio'>
+         {bio}
+         </div>
+       <div>
+
+       <div className = 'selfProfileButtons'>
+
+
+         <div className = 'editProfileButton'>
+           Edit Profile
+         </div>
+
+       </div>
+
+
+       </div>
+
+       </div>
+
+       </div>
+
+     )
+
+   }
+
+   showPanel = (panelIndex, colorCode) =>{
+     var tabButtons= document.querySelectorAll('.profile-tabContainer .profile-buttonContainer .profile-Tab')
+     var tabPanels= document.querySelectorAll('.profile-tabContainer .profile-tabPanel')
+     if (tabButtons.length > 0 && tabPanels.length > 0){
+       tabButtons.forEach(function(node){
+         node.style.backgroundColor = "";
+         node.style.color = "";
+       })
+       tabButtons[panelIndex].style.backgroundColor = colorCode;
+       tabButtons[panelIndex].style.color = '#363636';
+       tabPanels.forEach(function(node){
+         node.style.display = 'none'
+       })
+       tabPanels[panelIndex].style.display = 'block';
+       tabPanels[panelIndex].style.backgroundColor = colorCode;
+
+     }
+
+   }
+
+   onRenderTabs= () => {
+     var tabs = document.getElementsByClassName('profile-Tab');
+     Array.prototype.forEach.call(tabs, function(tab) {
+          tab.addEventListener('click', setActiveClass);
+     });
+
+     function setActiveClass(evt) {
+          Array.prototype.forEach.call(tabs, function(tab) {
+               tab.classList.remove('profile-active');
+              });
+
+               evt.currentTarget.classList.add('profile-active');
+             }
+
+     return (
+       <div className = 'profile-tabContainer'>
+         <div className = 'profile-buttonContainer'>
+           <div className = 'profile-description_tab profile-active profile-Tab' onClick = {() => this.showPanel(0, 'transparent')} > People</div>
+           <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(1, 'transparent')}> Posts </div>
+           <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(2, 'transparent')}> Events </div>
+           <div className = 'profile-slider'></div>
+         </div>
+         <div className = 'profile-tabPanel'>
+           Tab 1: Content
           </div>
-        </div>
-      )
-    }
+         <div className = 'profile-tabPanel'> Tab 2: Content </div>
+         <div className = 'profile-tabPanel'> Tab 3: Content </div>
+       </div>
+     )
+   }
+
+   render(){
+
+       console.log(this.props)
+
+       return(
+         <div className = 'profilePage'>
+         {this.renderProfilePic()}
+         {this.onRenderProfileInfo()}
+         {this.onRenderTabs()}
+         </div>
+       )
+
+     }
+
+
+
   };
 
 export default CurrUserProfile;

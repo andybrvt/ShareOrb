@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 export const addFollower = followObject => {
+  // This will be for the receiving persopn
   return{
     type: actionTypes.ADD_FOLLOWER,
     followObject: followObject
@@ -8,6 +9,7 @@ export const addFollower = followObject => {
 }
 
 export const addFollowing = followObject =>{
+  // this will be for the person doing the following
   return {
     type: actionTypes.ADD_FOLLOWING,
     followObject: followObject

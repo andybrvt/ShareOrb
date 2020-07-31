@@ -62,8 +62,27 @@ class WebSocketExplore {
       console.log(profiles)
       this.callbacks['fetch_profiles'](profiles)
     } else if (command === 'send_following'){
-      // const following = JSON.parse(parsedData)
+      // This is to add the person to your following
+      const user = parsedData.actorUsername
+      const person_following = parsedData.targetUsername
+      // the user will be the person that will be the user will be the person
+      // that will be getting the following
+      const followObj = {
+        user: user,
+        person_following: person_following
+      }
+      this.callbacks['new_following'](followObj)
       // this.callbacks['new_following'](profiles)
+    } else if (command === 'send_follower'){
+      // This is to add to the other person's followers
+      const user = parsedData.actorUsername
+      const person_follower = parsedData.targetUsername
+      const followObj = {
+        user: user,
+        person_follower: person_follower
+      }
+
+      this.callbacks['new_follower'](followObj)
     }
   }
 
@@ -78,6 +97,13 @@ class WebSocketExplore {
     // This gets called in teh newsfeedview.js
     this.sendFollowerFollowing({
       command: 'fetch_follower_following'
+    })
+  }
+
+  fetchCurrentUserProfile(currUser){
+    this.sendFollowerFollowing({
+      command: 'fetch_curUser_profile',
+      currUser: currUser
     })
   }
 
