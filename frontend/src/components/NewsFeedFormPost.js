@@ -122,7 +122,6 @@ const uploadImageRainbowProgress = {
 
 		const type = e.target.name;
 		const value = e.target.value;
-
     console.log(value)
 		if (type === "caption"){
 			setCaption(value)
@@ -142,13 +141,15 @@ const uploadImageRainbowProgress = {
 				{ stage !== "image" ?
 				<div  className= "uploadImage upload" >
 
-                {/* <input type="file" name="image" onChange= {onChange} /> */}
-                <Upload {...props} style={{marginBottom:100}}>
+                <input type="file" name="image" onChange= {onChange} />
+
+                {/*
+                <Upload {...props} style={{marginBottom:100}} name="image" onChange= {onChange}>
                    <Button >
                      <UploadOutlined {...uploadImageRainbowProgress} /> Click to Upload
                    </Button>
                  </Upload>
-
+                */}
 
 
 
