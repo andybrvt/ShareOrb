@@ -61,12 +61,40 @@ class WebSocketExplore {
       const profiles = JSON.parse(parsedData.user_profiles)
       console.log(profiles)
       this.callbacks['fetch_profiles'](profiles)
+    } else if (command === 'send_following'){
+      // This is to add the person to your following
+      const user = parsedData.actorUsername
+      const person_following = parsedData.targetUsername
+      // the user will be the person that will be the user will be the person
+      // that will be getting the following
+      const followObj = {
+        user: user,
+        person_following: person_following
+      }
+      this.callbacks['new_following'](followObj)
+      // this.callbacks['new_following'](profiles)
+    } else if (command === 'send_follower'){
+      // This is to add to the other person's followers
+      const user = parsedData.actorUsername
+      const person_follower = parsedData.targetUsername
+      const followObj = {
+        user: user,
+        person_follower: person_follower
+      }
+
+      this.callbacks['new_follower'](followObj)
+    } else if (command === 'currUser_profile') {
+      // This is to send the profile info of the current user
+      const profile = JSON.parse(parsedData.user_profile)[0]
+      this.callbacks['current_user'](profile)
     }
   }
 
-  addCallbacks(loadProfiles, addFollowerFollowingCallBack){
+  addCallbacks(loadProfiles, addFollowerCallBack, addFollowingCallBack, loadCurrProfile){
     this.callbacks['fetch_profiles'] = loadProfiles
-    this.callbacks['new_following'] = addFollowerFollowingCallBack
+    this.callbacks['new_follower'] = addFollowerCallBack
+    this.callbacks['new_following'] = addFollowingCallBack
+    this.callbacks['current_user'] = loadCurrProfile
   }
 
 
@@ -77,7 +105,34 @@ class WebSocketExplore {
     })
   }
 
+  fetchCurrentUserProfile(currUser){
+    // Fetch the cur user seperate by the back end so we can avoid looping through
+    // all the profiles in the front end
+    console.log('fetch profile')
+    this.sendFollowerFollowing({
+      command: 'fetch_curUser_profile',
+      currUser: currUser
+    })
+  }
+
+  sendFollowing = (follower, following) => {
+    // This function will set up the object and command to send
+    // to the backend. The follower is the person sending the following
+    // request and the following the person gettting the following
+
+
+    this.sendFollowerFollowing({
+      follower: follower,
+      following: following,
+      command: 'send_following'
+    })
+  }
+
+
+
   sendFollowerFollowing(data){
+    // So this is just used as a way to send info into the backend
+    console.log(data)
     console.log('send_folower_following')
     try{
       this.socketRef.send(JSON.stringify({...data }))

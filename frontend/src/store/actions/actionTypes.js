@@ -51,7 +51,12 @@ export const UNADD_POST_LIKE = 'UNADD_POST_LIKE';
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 
 export const LOAD_PROFILES = 'LOAD_PROFILES';
-export const ADD_FOLLOWER_FOLLOWING = 'ADD_FOLLOWER_FOLLOWING';
+// so adding to follower you will add it to the person getting the following
+// add following would be to the person that is doing the following
+
+export const ADD_FOLLOWER = 'ADD_FOLLOWER';
+export const ADD_FOLLOWING = 'ADD_FOLLOWING';
+export const LOAD_CUR_PROFILE = 'LOAD_CUR_PROFILE';
 
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable

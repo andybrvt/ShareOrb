@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Button, Form} from 'antd';
 import { authAxios } from '../components/util';
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
+import ExploreWebSocketInstance from '../../src/exploreWebsocket';
 import { connect } from "react-redux";
 import './ProfileComponents/ProfilePage.css';
 import background1 from './images/background1.jpg';
@@ -84,10 +85,24 @@ class PersonalProfile extends React.Component{
         )
       }
 
+      onFollow = (follower, following) =>{
+        // This is to send a follow into the back end
+        // It will use the id of the user to get the user and add the following
+        ExploreWebSocketInstance.sendFollowing(follower, following)
+        // The follower is you who is sending the reqwuest and the following is the other person
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: this.props.currentUser,
+          recipient: this.props.data.username
+        }
+
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+      }
+
       onRenderProfileInfo(){
-        // For the following and the follwers, the get_followers will be the people
-        // that you are following(so you are the follower) and the people that are in
-        // get following are the people taht are following you, so they would be your
+        // For the following and the follwers, the get_followers will be the people taht
+        // are your followers and the people that are in
+        // get following are the people taht are you are following, so they would be your
         // followers
         let username = ''
         let firstName = ''
@@ -96,18 +111,22 @@ class PersonalProfile extends React.Component{
         let followers = ''
         let following = ''
         let posts = ''
+        let profileId = ''
 
         if (this.props.data){
           username = this.props.data.username
           firstName = this.props.data.first_name
           lastName = this.props.data.last_name
           bio = this.props.data.bio
-          followers = this.props.data.get_following
-          following = this.props.data.get_followers
+          followers = this.props.data.get_followers
+          following = this.props.data.get_following
           posts = this.props.data.get_posts
+          profileId = this.props.data.id
         }
         console.log(firstName)
         console.log(following)
+        console.log(this.props.currentId)
+        console.log(following.includes(this.props.currentId.toString()))
 
         return (
           <div className = 'profileInfo'>
@@ -149,16 +168,16 @@ class PersonalProfile extends React.Component{
 
           <div className = 'profileButtons'>
 
-          {followers.includes(this.props.currentId) ?
+          {followers.includes(this.props.currentUser.toString()) ?
             <div className = 'unFollowButton'>
               Unfollow
             </div>
 
             :
 
-            <div className = 'followButton'>
+            <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
               Follow
-            </div>  
+            </div>
           }
 
 

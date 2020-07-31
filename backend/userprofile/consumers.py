@@ -8,6 +8,7 @@ from .serializers import PostSerializer
 from .serializers import NewPostSerializer
 from .serializers import CommentSerializer
 from .serializers import UserSerializer
+from .serializers import FollowSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -15,6 +16,7 @@ from channels.layers import get_channel_layer
 from userprofile.models import User
 from .models import Post
 from .models import Comment
+from .models import UserFollowing
 
 
 
@@ -82,6 +84,10 @@ class NotificationConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, id = data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = 'comment_notification', recipient = recipient, actor = actor, verb = 'commented on your post')
+        if data['command'] == 'send_follow_notification':
+            recipient = get_object_or_404(User, username = data['recipient'])
+            actor = get_object_or_404(User, username = data['actor'])
+            notification = CustomNotification.objects.create(type = 'follow_notification', recipient = recipient, actor = actor, verb = 'followed you')
         # CustomNotification.save(self)
         # The notification will be serilizered and then sent to the group send
         serializer = NotificationSerializer(notification)
@@ -296,6 +302,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print (data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -315,6 +322,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'like_notification':
             self.send_notification(data)
         if data['command'] == 'comment_notification':
+            self.send_notification(data)
+        if data['command'] == 'send_follow_notification':
             self.send_notification(data)
     def new_notification(self, event):
         notification = event['notification']
@@ -343,7 +352,6 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
 
     def send_one_like(self, data):
         new_person_like = get_object_or_404(User, id = data['userId'])
-        print(new_person_like)
         postObj = Post.objects.get(id = data['postId'])
         postObj.people_like.add(new_person_like)
         postObj.save()
@@ -373,7 +381,6 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         self.send_new_action(content)
 
     def send_comment(self, data):
-        print('send_comment hit')
         postObj = get_object_or_404(Post, id = data['postId'])
         person = User.objects.get(id = data['userId']).username
         comment = Comment.objects.create(post = postObj,
@@ -444,7 +451,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
     ### Probally gonna be the websocket for profiles too as well
 
     def fetch_follower_following(self, data):
-        print(data)
         users = User.objects.all()
         serializer = UserSerializer(users, many = True)
         content = {
@@ -452,6 +458,70 @@ class ExploreConsumer(JsonWebsocketConsumer):
             'user_profiles': json.dumps(serializer.data)
         }
         self.send_json(content)
+
+    def fetch_curUser_profile(self, data):
+        currentUser = User.objects.filter(username = data['currUser'])
+        serializer = UserSerializer(currentUser, many = True)
+        content = {
+            'command': 'currUser_profile',
+            'user_profile': json.dumps(serializer.data)
+        }
+        self.send_json(content)
+
+    def send_following(self, data):
+        # This function is to set up the follow object inorder to be sent into the channel layer
+        # just a reminder that the follower is the person sending the request
+        #the following is the perosn that getting the follower
+        follower = get_object_or_404(User,id = data['follower'])
+        following = get_object_or_404(User, id = data['following'])
+        followerUsername = follower.username
+        followingUsername = following.username
+        followerObj = UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
+        serializer = FollowSerializer(followerObj, many = False)
+
+        print(following.id, followingUsername)
+
+        # Since you will need to add the other persons name into your following and the other
+        # person needs to add you to their follower
+        # content follower will be the info that the person doing the following will get
+        content_follower = {
+            'command': 'send_following',
+            'targetId': following.id,
+            'targetUsername': followingUsername,
+            'actorUsername': followerUsername
+        }
+
+        # content_following will be the person getting the follower (the perosn that the user if following)
+        content_following = {
+            'command': 'send_follower',
+            'targetId': follower.id,
+            'targetUsername': followerUsername,
+            'actorUsername': followingUsername
+
+        }
+
+
+        self.send_new_following(content_follower)
+        self.send_new_following(content_following)
+
+
+    def send_new_following(self, followObj):
+        # This function is used to send follow objs into the websocket and to everyone
+        # in the channel layer
+        channel_layer = get_channel_layer()
+        channel_recipient = followObj['actorUsername']
+        channel = 'explore_'+channel_recipient
+
+
+        # Thsi group send will be sent to your self (or the person doing the action)
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_follower_following',
+                'followObj': followObj
+            }
+        )
+
 
     def connect(self):
         # This will pretty much connect to the profils of each of the users
@@ -469,5 +539,14 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data = None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_follower_following':
             self.fetch_follower_following(data)
+        if data['command'] == 'send_following':
+            self.send_following(data)
+        if data['command'] == 'fetch_curUser_profile':
+            self.fetch_curUser_profile(data)
+
+    def new_follower_following(self, event):
+        followObj = event['followObj']
+        return self.send_json(followObj)

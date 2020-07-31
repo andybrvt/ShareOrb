@@ -24,7 +24,7 @@ class Explore extends React.Component {
   // }
 
   componentDidMount(){
-    ExploreWebSocketInstance.connect(this.props.username)
+    // ExploreWebSocketInstance.connect(this.props.username)
     this.showPanel(0, 'transparent')
     var tabs = document.getElementsByClassName('Tab');
     Array.prototype.forEach.call(tabs, function(tab) {
