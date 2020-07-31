@@ -115,16 +115,17 @@ class CurrUserProfile extends React.Component{
      let posts = ''
      let profileId = ''
 
-     // if (this.props.data){
-     //   username = this.props.data.username
-     //   firstName = this.props.data.first_name
-     //   lastName = this.props.data.last_name
-     //   bio = this.props.data.bio
-     //   followers = this.props.data.get_followers
-     //   following = this.props.data.get_following
-     //   posts = this.props.data.get_posts
-     //   profileId = this.props.data.id
-     // }
+     if (this.props.curProfile){
+       username = this.props.curProfile.username
+       firstName = this.props.curProfile.first_name
+       lastName = this.props.curProfile.last_name
+       bio = this.props.curProfile.bio
+       followers = this.props.curProfile.get_followers
+       following = this.props.curProfile.get_following
+       posts = this.props.curProfile.get_posts
+       profileId = this.props.curProfile.id
+
+     }
      // console.log(firstName)
      // console.log(following)
      // console.log(this.props.currentId)
@@ -135,7 +136,7 @@ class CurrUserProfile extends React.Component{
 
          <div>
            <div className = 'profileName'>
-            ADMIN
+           {this.capitalize(firstName)} {this.capitalize(lastName)}
            </div>
 
 
@@ -145,21 +146,21 @@ class CurrUserProfile extends React.Component{
              className = 'postFollowWords'
              >Post</span>
              <br />
-             <span></span>
+             <span> {posts.length}</span>
            </div>
            <div className = 'followItem'>
              <span
              className = 'postFollowWords'
              >Followers</span>
              <br />
-             <span></span>
+             <span>{followers.length}</span>
            </div>
            <div className = 'followItem'>
              <span
              className = 'postFollowWords'
              >Following</span>
              <br />
-             <span></span>
+             <span>{following.length}</span>
            </div>
          </div>
 
