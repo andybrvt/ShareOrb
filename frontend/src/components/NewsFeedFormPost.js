@@ -6,17 +6,20 @@ import axios from 'axios';
 import { authAxios } from './util';
 import { connect } from "react-redux";
 import { Input } from 'antd';
-import {Button, Upload, message} from 'antd';
+import {Button, Upload, message, Modal} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 const NewsFeedFormPost = (props) => {
   // formData = new FormData();
   const {token} = props;
   const[image, setImage] = useState(null);
+  const[fileList, setFileList] = useState([]);
   const[caption, setCaption] = useState('');
   const[id, setID] = useState(null);
   const[username, setUsername] = useState('');
   const[stage, setStage] = useState('empty');
-  const[imageblob, setImageblob] = useState("");
+  // const[imageblob, setImageblob] = useState("");
+  const[previewImage, setPreviewImage] = useState("");
+  const[previewVisible, setPreviewVisible] = useState(false)
 
   const { TextArea } = Input;
 
@@ -105,7 +108,7 @@ const uploadImageRainbowProgress = {
 		if (props.data.id && caption){
       console.log('it got summited')
 			const post = {
-				'image': image,
+				'image': fileList[0].originFileObj,
 				'caption': caption,
 				'user_id': props.data.id,
 				'username': props.data.username,
@@ -118,20 +121,34 @@ const uploadImageRainbowProgress = {
 		}
   }
 
-  const onChange = (e)=> {
+  const onCaptionChange = (e) => {
+    const value = e.target.value
+    setCaption(value)
+  }
 
-		const type = e.target.name;
-		const value = e.target.value;
-    console.log(value)
-		if (type === "caption"){
-			setCaption(value)
-		}
-		 if (type === "image") {
-				setImageblob(URL.createObjectURL(e.target.files[0]))
-				setImage(e.target.files[0])
-				setStage("image")
-      }
-			//render the
+  const handleCancel = () => setPreviewVisible(false)
+
+  const handlePreview = file =>{
+    setPreviewImage(file.thumbUrl)
+    setPreviewVisible(true)
+  }
+
+  const onChange = ({ fileList })=> {
+
+    console.log(fileList)
+    // const type = e.target.name;
+		// const value = e.target.value;
+    // console.log(value)
+		// if (type === "caption"){
+		// 	setCaption(value)
+		// }
+		//  if (type === "image") {
+				// setImageblob(URL.createObjectURL(e.target.files[0]))
+				// setImage(e.target.files[0])
+				// setStage("image")
+    //   }
+    setFileList(fileList)
+
 	}
 
   return (
@@ -141,23 +158,28 @@ const uploadImageRainbowProgress = {
 				{ stage !== "image" ?
 				<div  className= "uploadImage upload" >
 
-                <input type="file" name="image" onChange= {onChange} />
+                
 
-                {/*
-                <Upload {...props} style={{marginBottom:100}} name="image" onChange= {onChange}>
+
+                <Upload
+                {...props}
+                listType = 'picture-card'
+                fileList = {fileList}
+                onPreview = {handlePreview}
+                style={{marginBottom:100}}
+                name="image"
+                beforeUpload  = {() => false} // prevents it from uploading right away
+                onChange= {onChange}>
                    <Button >
                      <UploadOutlined {...uploadImageRainbowProgress} /> Click to Upload
                    </Button>
                  </Upload>
-                */}
+
 
 
 
 
 				</div>
-
-
-
 
         :
 
@@ -166,7 +188,7 @@ const uploadImageRainbowProgress = {
 
 				</div>}
 
-        <TextArea rows={4} type="text" name="caption" onChange= {onChange}value={caption}
+        <TextArea rows={4} type="text" name="caption" onChange= {onCaptionChange}value={caption}
         style={{width: '600px'}}/>
 
 
@@ -175,6 +197,14 @@ const uploadImageRainbowProgress = {
 				</div>
 			</div>
     </form>
+
+    <Modal
+          visible={previewVisible}
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <img alt="example" style={{ width: "100%" }} src={previewImage} />
+    </Modal>
 	</Container>
   );
 };
