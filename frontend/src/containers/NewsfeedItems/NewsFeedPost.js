@@ -786,12 +786,13 @@ class NewsfeedPost extends React.Component {
       <div>
 
         <Modal
-
+          class="modalOuterContainer"
           title={`Post by ${this.props.data.user.username}`}
           visible={this.state.visibleModal}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           width="1600px"
+          height="800px"
           style={{marginTop:'-50px'}}
           >
 
@@ -799,7 +800,7 @@ class NewsfeedPost extends React.Component {
 
           {
                   this.props.data.image ?
-               <p>{this.ContentOfPic()}</p>
+               <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
 
           //
                   :
@@ -807,9 +808,9 @@ class NewsfeedPost extends React.Component {
           //
           //
           //ContentOfPic
-          <p class="modalCardBorder"> {this.ContentOfPost()} </p>
+          <p  class="modalCardBorder modalInnerPicture"> {this.ContentOfPost()} </p>
           }
-            <p>{this.ContentofComments()}</p>
+            <p  class="modalCardBorder">{this.ContentofComments()}</p>
           </div>
         </Modal>
 
