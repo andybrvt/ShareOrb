@@ -109,6 +109,7 @@ class NotificationsDropDown extends React.Component{
   }
 
   renderTimestamp = timestamp =>{
+    console.log(timestamp)
     let prefix = '';
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
     console.log(timeDiff)
