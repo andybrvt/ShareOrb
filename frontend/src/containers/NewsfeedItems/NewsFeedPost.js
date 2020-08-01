@@ -102,7 +102,11 @@ class NewsfeedPost extends React.Component {
 
   onProfileClick = (username) => {
     console.log(username)
-    window.location.href = 'explore/'+username
+    if (username === this.props.currentUser){
+      window.location.href = 'current-user/'
+    } else {
+      window.location.href = 'explore/'+username
+    }
   }
 
 
@@ -836,7 +840,8 @@ class NewsfeedPost extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.auth.id
+    userId: state.auth.id,
+    currentUser: state.auth.username
   }
 }
 
