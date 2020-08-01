@@ -27,6 +27,10 @@ class NewsfeedPost extends React.Component {
     }
   }
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
 
   // initialisePost(){
   //   this.waitForSocketConnection(() =>{
@@ -95,6 +99,11 @@ class NewsfeedPost extends React.Component {
       commentPost: e.target.value,
     });
   };
+
+  onProfileClick = (username) => {
+    console.log(username)
+    window.location.href = 'explore/'+username
+  }
 
 
 
@@ -171,13 +180,19 @@ class NewsfeedPost extends React.Component {
              </div>}
 
             >
-                <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+                <Avatar
+                onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                size="large"
+                style = {{
+                  cursor: 'pointer',
+                }}
+                src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
             </Popover>
 
-            <span class="personName">
+            <span class="personName" onClick = {() => this.onProfileClick(this.props.data.user.username)}>
 
 
-                  {this.props.data.user.username}
+                  {this.capitalize(this.props.data.user.username)}
 
 
                <div>
@@ -432,15 +447,23 @@ class NewsfeedPost extends React.Component {
       <Popover
          style={{width:'200px'}}
          content={<div>
-           <Avatar shape="square" size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+           <Avatar
+            shape="square"
+            size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
            <div> 110 followers </div>
          </div>}
 
         >
-            <Avatar size="large" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+            <Avatar
+            size="large"
+            style = {{
+              cursor: 'pointer',
+            }}
+            onClick = {() => this.onProfileClick(this.props.data.user.username)}
+            src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
         </Popover>
-           <span class="personName">
-             {this.props.data.user.username}
+           <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
+             {this.capitalize(this.props.data.user.username)}
 
              <div>
              <span class="fb-group-date" style={{marginLeft:55}}> Tucson, Arizona</span>
