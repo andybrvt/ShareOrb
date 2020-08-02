@@ -148,7 +148,6 @@ const uploadImageRainbowProgress = {
 				// setStage("image")
     //   }
     setFileList(fileList)
-
 	}
 
   return (
@@ -158,7 +157,7 @@ const uploadImageRainbowProgress = {
 				{ stage !== "image" ?
 				<div  className= "uploadImage upload" >
 
-                
+
 
 
                 <Upload

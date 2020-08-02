@@ -136,6 +136,18 @@
 
 .profile-pic{
   height: 125%;
+
+}
+
+.defaultProfile-pic{
+  height: 125%;
+  position: relative;
+  right: 50%;
+  transform: translateX(30%);
+}
+
+.defaultProfile-pic:hover{
+  filter: brightness(90%);
 }
 
 .cal-post-pic{

@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
+  showProfileEdit: false,
   profiles: [],
   curProfile: []
 
@@ -37,6 +38,18 @@ export const addFollower = (state, action) => {
   })
 }
 
+export const openProfileEdit = (state, action) =>{
+  return updateObject (state, {
+    showProfileEdit: true
+  })
+}
+
+export const closeProfileEdit = (state, action) => {
+  return updateObject (state, {
+    showProfileEdit: false
+  })
+}
+
 export const addFollowing = (state, action) => {
   // probally gonna have to think of a way to do the binary search here
   console.log(state.profiles)
@@ -65,6 +78,10 @@ const reducer = (state = initialState, action) => {
       return addFollowing(state, action)
     case actionTypes.LOAD_CUR_PROFILE:
       return loadCurProfile(state, action)
+    case actionTypes.OPEN_PROFILE_EDIT:
+      return openProfileEdit(state, action)
+    case actionTypes.CLOSE_PROFILE_EDIT:
+      return closeProfileEdit(state, action)
     default:
       return state;
   };

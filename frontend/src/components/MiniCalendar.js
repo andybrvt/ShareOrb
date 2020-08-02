@@ -186,7 +186,7 @@ class MiniCalendar extends React.Component{
           {this.renderHeader()}
           {this.renderDays()}
           {this.renderCells()}
-      
+
         </div>
       </div>
     )

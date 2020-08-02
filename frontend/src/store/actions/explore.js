@@ -8,6 +8,18 @@ export const addFollower = followObject => {
   }
 }
 
+export const openProfileEdit = () =>{
+  return {
+    type: actionTypes.OPEN_PROFILE_EDIT
+  }
+}
+
+export const closeProfileEdit = () => {
+  return {
+    type: actionTypes.CLOSE_PROFILE_EDIT
+  }
+}
+
 export const addFollowing = followObject =>{
   // this will be for the person doing the following
   return {

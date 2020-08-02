@@ -1,13 +1,15 @@
 import React from 'react';
-import { Tabs, Statistic } from 'antd';
+import { Tabs, Statistic, Badge, Modal } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
 import SocialCalendar from '../SocialCalendar';
 import background1 from '../../components/images/background1.jpg';
 import ava1 from '../../components/images/avatar.jpg'
+import defaultPicture from '../../components/images/default.png'
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import { connect } from "react-redux";
+import * as exploreActions from '../../store/actions/explore';
 
 
 import {
@@ -78,10 +80,30 @@ class CurrUserProfile extends React.Component{
     // ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
    }
 
+   closeProfileEdit = () => {
+     this.props.closeProfileEdit()
+   }
+
+   openProfileEdit = () =>{
+     this.props.openProfileEdit()
+   }
+
    renderProfilePic = () => {
+     // console.log(this.props.curProfile)
+     let profileImage = null
+
+     if (this.props.curProfile){
+       profileImage = this.props.curProfile.profile_picture
+     }
      return (
        <div className = 'profilePic'>
+        {profileImage === null ?
+         <img  className = 'defaultProfile-pic' src = {defaultPicture} alt = 'profilePic' />
+         :
+
          <img  className = 'profile-pic' src = {ava1} alt = 'profilePic' />
+
+         }
        </div>
      )
    }
@@ -172,7 +194,9 @@ class CurrUserProfile extends React.Component{
        <div className = 'selfProfileButtons'>
 
 
-         <div className = 'editProfileButton'>
+         <div
+         onClick = {() => this.openProfileEdit()}
+         className = 'editProfileButton'>
            Edit Profile
          </div>
 
@@ -232,7 +256,7 @@ class CurrUserProfile extends React.Component{
            <div className = 'profile-slider'></div>
          </div>
          <div className = 'profile-tabPanel'>
-           Tab 1: Content
+           <SocialCalendar />
           </div>
          <div className = 'profile-tabPanel'> Tab 2: Content </div>
          <div className = 'profile-tabPanel'> Tab 3: Content </div>
@@ -246,9 +270,17 @@ class CurrUserProfile extends React.Component{
 
        return(
          <div className = 'profilePage'>
+
          {this.renderProfilePic()}
+
          {this.onRenderProfileInfo()}
          {this.onRenderTabs()}
+         <Modal
+         visible = {this.props.showProfileEditModal}
+         onCancel = {() => this.closeProfileEdit()}
+         >
+         Hi
+         </Modal>
          </div>
        )
 
@@ -262,9 +294,17 @@ class CurrUserProfile extends React.Component{
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.username,
-    curProfile: state.explore.profile
+    curProfile: state.explore.profile,
+    showProfileEditModal: state.explore.showProfileEdit
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return {
+    closeProfileEdit: () => dispatch(exploreActions.closeProfileEdit()),
+    openProfileEdit: () => dispatch(exploreActions.openProfileEdit())
   }
 }
 
 
-export default connect(mapStateToProps)(CurrUserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrUserProfile);

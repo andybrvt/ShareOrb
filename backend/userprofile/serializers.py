@@ -38,10 +38,20 @@ class UserSerializer(serializers.ModelSerializer):
     get_posts = serializers.StringRelatedField(many = True)
     get_following = serializers.StringRelatedField(many = True)
     get_followers = serializers.StringRelatedField(many = True)
-    
+
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'bio', "get_posts", 'get_following','get_followers', 'friends', 'slug')
+        fields = ('id',
+         'username',
+         'first_name',
+         'last_name',
+         'bio',
+         'profile_picture',
+         "get_posts",
+         'get_following',
+         'get_followers',
+         'friends',
+         'slug')
 
 
 
