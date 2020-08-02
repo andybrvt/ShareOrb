@@ -3,6 +3,7 @@ import { updateObject } from '../utility';
 
 const initialState = {
   showProfileEdit: false,
+  changeProfilePic: false,
   profiles: [],
   curProfile: []
 
@@ -50,6 +51,19 @@ export const closeProfileEdit = (state, action) => {
   })
 }
 
+
+export const openChangeProfilePic = (state, action) => {
+  return updateObject (state, {
+    changeProfilePic: true
+  })
+}
+
+export const closeChangeProfilePic = (state, action) => {
+  return updateObject (state, {
+    changeProfilePic: false
+  })
+}
+
 export const addFollowing = (state, action) => {
   // probally gonna have to think of a way to do the binary search here
   console.log(state.profiles)
@@ -82,6 +96,10 @@ const reducer = (state = initialState, action) => {
       return openProfileEdit(state, action)
     case actionTypes.CLOSE_PROFILE_EDIT:
       return closeProfileEdit(state, action)
+    case actionTypes.OPEN_CHANGE_PROFILE_PIC:
+      return openChangeProfilePic(state, action)
+    case actionTypes.CLOSE_CHANGE_PROFILE_PIC:
+      return closeChangeProfilePic(state, action)
     default:
       return state;
   };

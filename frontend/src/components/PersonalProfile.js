@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import './ProfileComponents/ProfilePage.css';
 import background1 from './images/background1.jpg';
 import ava1 from './images/avatar.jpg'
+import SocialCalendar from '../containers/SocialCalendar'
 
 
 
@@ -237,13 +238,13 @@ class PersonalProfile extends React.Component{
       return (
         <div className = 'profile-tabContainer'>
           <div className = 'profile-buttonContainer'>
-            <div className = 'profile-description_tab profile-active profile-Tab' onClick = {() => this.showPanel(0, 'transparent')} > People</div>
+            <div className = 'profile-description_tab profile-active profile-Tab' onClick = {() => this.showPanel(0, 'transparent')} > Calendar</div>
             <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(1, 'transparent')}> Posts </div>
             <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(2, 'transparent')}> Events </div>
             <div className = 'profile-slider'></div>
           </div>
           <div className = 'profile-tabPanel'>
-            Tab 1: Content
+            <SocialCalendar />
            </div>
           <div className = 'profile-tabPanel'> Tab 2: Content </div>
           <div className = 'profile-tabPanel'> Tab 3: Content </div>

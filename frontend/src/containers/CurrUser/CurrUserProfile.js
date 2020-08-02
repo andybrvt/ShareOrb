@@ -10,7 +10,7 @@ import defaultPicture from '../../components/images/default.png'
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import { connect } from "react-redux";
 import * as exploreActions from '../../store/actions/explore';
-
+import { RetweetOutlined } from '@ant-design/icons';
 
 import {
   Button,
@@ -88,6 +88,23 @@ class CurrUserProfile extends React.Component{
      this.props.openProfileEdit()
    }
 
+   openChangeProfilePic = () =>{
+     this.props.openChangeProfilePic()
+   }
+
+   closeChangeProfilePic = () => {
+     this.props.closeChangeProfilePic()
+   }
+
+   renderEditButton = () => {
+     return (
+       <div className = 'editButton' onClick = {() => this.openChangeProfilePic()}>
+        <RetweetOutlined />
+
+       </div>
+     )
+   }
+
    renderProfilePic = () => {
      // console.log(this.props.curProfile)
      let profileImage = null
@@ -104,7 +121,11 @@ class CurrUserProfile extends React.Component{
          <img  className = 'profile-pic' src = {ava1} alt = 'profilePic' />
 
          }
+
+
+
        </div>
+
      )
    }
 
@@ -250,7 +271,7 @@ class CurrUserProfile extends React.Component{
      return (
        <div className = 'profile-tabContainer'>
          <div className = 'profile-buttonContainer'>
-           <div className = 'profile-description_tab profile-active profile-Tab' onClick = {() => this.showPanel(0, 'transparent')} > People</div>
+           <div className = 'profile-description_tab profile-active profile-Tab' onClick = {() => this.showPanel(0, 'transparent')} > Calendar</div>
            <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(1, 'transparent')}> Posts </div>
            <div className = 'profile-description_tab profile-Tab' onClick = {() => this.showPanel(2, 'transparent')}> Events </div>
            <div className = 'profile-slider'></div>
@@ -272,14 +293,21 @@ class CurrUserProfile extends React.Component{
          <div className = 'profilePage'>
 
          {this.renderProfilePic()}
-
+         {this.renderEditButton()}
          {this.onRenderProfileInfo()}
          {this.onRenderTabs()}
          <Modal
          visible = {this.props.showProfileEditModal}
          onCancel = {() => this.closeProfileEdit()}
          >
-         Hi
+         This is for editing the profile information
+         </Modal>
+
+         <Modal
+         visible = {this.props.changeProfilePic}
+         onCancel = {() => this.closeChangeProfilePic()}
+         >
+         This is for changing the profile picture
          </Modal>
          </div>
        )
@@ -295,14 +323,17 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth.username,
     curProfile: state.explore.profile,
-    showProfileEditModal: state.explore.showProfileEdit
+    showProfileEditModal: state.explore.showProfileEdit,
+    changeProfilePic: state.explore.changeProfilePic
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return {
     closeProfileEdit: () => dispatch(exploreActions.closeProfileEdit()),
-    openProfileEdit: () => dispatch(exploreActions.openProfileEdit())
+    openProfileEdit: () => dispatch(exploreActions.openProfileEdit()),
+    closeChangeProfilePic: () => dispatch(exploreActions.closeChangeProfilePic()),
+    openChangeProfilePic: () => dispatch(exploreActions.openChangeProfilePic())
   }
 }
 

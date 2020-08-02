@@ -43,3 +43,15 @@ export const loadCurProfile = curProfile => {
     curProfile: curProfile
   }
 }
+
+export const openChangeProfilePic = () => {
+  return {
+    type: actionTypes.OPEN_CHANGE_PROFILE_PIC
+  }
+}
+
+export const closeChangeProfilePic = () => {
+  return {
+    type: actionTypes.CLOSE_CHANGE_PROFILE_PIC
+  }
+}
