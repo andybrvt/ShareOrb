@@ -12,7 +12,7 @@ import heart  from './heart.svg';
 import { commentPic } from './comment.svg';
 
 
-
+import QueueAnim from 'rc-queue-anim';
 
 
 class NewsfeedPost extends React.Component {
@@ -24,6 +24,7 @@ class NewsfeedPost extends React.Component {
       visibleModal: false,
       commentPost:'',
       commentsCondition:false,
+      show:false,
     }
   }
 
@@ -63,6 +64,11 @@ class NewsfeedPost extends React.Component {
     });
   };
 
+  onClick = () => {
+    this.setState({
+      show: !this.state.show
+    });
+  }
 
   triggerComments = () => {
     this.setState({
@@ -177,6 +183,80 @@ class NewsfeedPost extends React.Component {
      }
 
 
+
+  ContentOfEvent() {
+
+    return(
+
+      <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
+
+      <div style={{padding:20,}}>
+      <Popover
+         style={{width:'200px'}}
+         content={<div>
+           <Avatar
+            shape="square"
+            size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+           <div> 110 followers </div>
+         </div>}
+
+        >
+            <Avatar
+            size="large"
+            style = {{
+              cursor: 'pointer',
+            }}
+            onClick = {() => this.onProfileClick(this.props.data.user.username)}
+            src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+        </Popover>
+           <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
+             {this.capitalize(this.props.data.user.username)}
+
+             <div>
+             <span class="fb-group-date" style={{marginLeft:55}}> Tucson, Arizona</span>
+
+              <span class="fb-group-date" style={{marginLeft:240}}> {this.renderTimestamp(this.props.data.created_at)}</span>
+             </div>
+           </span>
+
+      </div>
+      <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
+      teastastaeeta
+
+      </p>
+
+
+      <div className="queue-demo">
+        <p className="buttons">
+          <Button type="primary" onClick={this.onClick}>Switch</Button>
+        </p>
+        <QueueAnim className="demo-content">
+          {this.state.show ? [
+            <div className="demo-thead" key="a">
+              <ul>
+                <li />
+aaaaaaaaaaaaaaaaa
+                <li />
+                <li />
+              </ul>
+            </div>,
+            <div className="demo-tbody" key="b">
+              <ul>
+                <li></li>
+                bbbbbbbbbbb
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          ] : null}
+        </QueueAnim>
+      </div>
+
+      </div>
+    )
+
+  }
+
   ContentOfPic() {
     let like_people = this.props.data.people_like
     console.log(this.props.data)
@@ -218,13 +298,12 @@ class NewsfeedPost extends React.Component {
 
 
                   {this.capitalize(this.props.data.user.username)}
-                  <br />
-                  {this.renderTimestamp(this.props.data.created_at)}
+
 
                <div>
                <span class="fb-group-date" style={{marginLeft:50}}> Yosemite National Park</span>
 
-               <span class="fb-group-date" style={{marginLeft:240}}> Yesterday 5:20pm</span>
+               <span class="fb-group-date" style={{marginLeft:240}}> {this.renderTimestamp(this.props.data.created_at)}</span>
                </div>
              </span>
 
@@ -494,7 +573,7 @@ class NewsfeedPost extends React.Component {
              <div>
              <span class="fb-group-date" style={{marginLeft:55}}> Tucson, Arizona</span>
 
-             <span class="fb-group-date" style={{marginLeft:300}}> Yesterday 5:20pm</span>
+              <span class="fb-group-date" style={{marginLeft:240}}> {this.renderTimestamp(this.props.data.created_at)}</span>
              </div>
            </span>
 
@@ -808,6 +887,7 @@ class NewsfeedPost extends React.Component {
       const { TextArea } = Input;
   return (
     <div>
+    {this.ContentOfEvent()}
 
       <div>
 
@@ -852,6 +932,7 @@ class NewsfeedPost extends React.Component {
       //
       //
       //ContentOfPic
+
       <p> {this.ContentOfPost()} </p>
       }
       </div>
