@@ -5,6 +5,7 @@ import { authAxios } from '../../components/util';
 import './UserProfileCard.css';
 import ava1 from '../images/avatar.jpg';
 import ava2 from '../images/avatar2.jpg';
+import defaultPicture from '../images/default.png';
 import facebook from '../images/facebook.png';
 import instagram from '../images/instagram.png';
 import twitter from '../images/twitter.png';
@@ -68,13 +69,34 @@ class UserProfileCard extends React.Component {
 
 
   render() {
+    let profileImage = null
 
-    console.log(this.props)
+    if(this.props.data){
+      if(this.props.data.profile_picture){
+        profileImage = this.props.data.profile_picture
+      }
+    }
+
+    console.log(profileImage)
     return (
 
       <div className = "profileCard">
         <div className = 'image-box'>
-        <img className = 'profile-image' src = {this.props.img} alt = 'Avatar'/>
+
+        {profileImage === null ?
+
+
+          <img className = 'profile-image' src = {defaultPicture} alt = 'Avatar'/>
+
+          :
+
+          <img className = 'profile-image' src = {profileImage} alt = 'Avatar'/>
+
+
+        }
+
+
+
         </div>
         <div className = 'top'>
         <MoreOutlined />

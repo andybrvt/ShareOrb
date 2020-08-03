@@ -330,3 +330,9 @@ class ViewComment(APIView):
         # print(grabComment)
 #         print(grabComment.caption)
         return Response('Grabbing the comment')
+
+
+class ProfileUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.ProfilePicSerializer
+    lookup_field = 'id'
+    queryset = models.User.objects.all()

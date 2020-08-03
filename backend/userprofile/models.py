@@ -16,7 +16,7 @@ class User(AbstractUser):
 
     dob = models.DateField(blank=True, null=True, max_length=12)
     phone_number = models.CharField(blank=True, null=True, max_length=10)
-    slug = models.SlugField()
+    slug = models.SlugField(blank = True)
     friends = models.ManyToManyField("self", blank=True, related_name = 'friends')
 
 

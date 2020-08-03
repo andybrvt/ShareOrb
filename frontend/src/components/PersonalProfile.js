@@ -6,7 +6,7 @@ import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';
 import { connect } from "react-redux";
 import './ProfileComponents/ProfilePage.css';
-import background1 from './images/background1.jpg';
+import defaultPicture from './images/default.png';
 import ava1 from './images/avatar.jpg'
 import SocialCalendar from '../containers/SocialCalendar'
 
@@ -59,20 +59,32 @@ class PersonalProfile extends React.Component{
           // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
         }
 
-      renderImage = () => {
 
-        return(
-          <div className = 'background'>
-            <img className = 'backgroundImage' src = {background1}  alt = 'background'/>
-          </div>
-        )
-
-      }
 
       renderProfilePic = () => {
+
+        let profileImage = null
+
+        console.log(this.props.data)
+        if(this.props.data){
+          console.log(this.props.data.profile_picture)
+          if(this.props.data.profile_picture){
+            profileImage = 'http://127.0.0.1:8000'+this.props.data.profile_picture
+          }
+        }
+
+        console.log(profileImage)
         return (
           <div className = 'profilePic'>
-            <img  className = 'profile-pic' src = {ava1} alt = 'profilePic' />
+
+            {profileImage === null ?
+              <img  className = 'defaultProfile-pic' src = {defaultPicture} alt = 'profilePic' />
+
+              :
+
+              <img  className = 'profile-pic' src = {profileImage} alt = 'profilePic' />
+
+            }
           </div>
         )
       }

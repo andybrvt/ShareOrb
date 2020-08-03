@@ -11,6 +11,8 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 import { connect } from "react-redux";
 import * as exploreActions from '../../store/actions/explore';
 import { RetweetOutlined } from '@ant-design/icons';
+import ChangeProfilePic from '../../components/ChangeProfilePic';
+
 
 import {
   Button,
@@ -105,20 +107,38 @@ class CurrUserProfile extends React.Component{
      )
    }
 
+
+   handleProfilePicChange = (values) => {
+     // This is used to changing the profile pic, for submiting.
+     console.log(values)
+     const userId = this.props.curProfile.id
+     var data  = new FormData()
+     data.append('profile_picture', values)
+     // To edit information, you usually do put instead of post
+     authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+       data
+     )
+
+   }
+
    renderProfilePic = () => {
      // console.log(this.props.curProfile)
      let profileImage = null
 
      if (this.props.curProfile){
-       profileImage = this.props.curProfile.profile_picture
+       if(this.props.curProfile.profile_picture){
+         profileImage = 'http://127.0.0.1:8000'+this.props.curProfile.profile_picture
+       }
      }
+
+     console.log(profileImage)
      return (
-       <div className = 'profilePic'>
+       <div className = 'curProfilePic'>
         {profileImage === null ?
          <img  className = 'defaultProfile-pic' src = {defaultPicture} alt = 'profilePic' />
          :
 
-         <img  className = 'profile-pic' src = {ava1} alt = 'profilePic' />
+         <img  className = 'cur-profile-pic' src = {profileImage} alt = 'profilePic' />
 
          }
 
@@ -303,12 +323,13 @@ class CurrUserProfile extends React.Component{
          This is for editing the profile information
          </Modal>
 
-         <Modal
-         visible = {this.props.changeProfilePic}
-         onCancel = {() => this.closeChangeProfilePic()}
-         >
-         This is for changing the profile picture
-         </Modal>
+
+         <ChangeProfilePic
+            visible = {this.props.changeProfilePic}
+            onCancel = {this.closeChangeProfilePic}
+            onSubmit = {this.handleProfilePicChange}
+          />
+
          </div>
        )
 

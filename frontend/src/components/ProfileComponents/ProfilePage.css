@@ -166,7 +166,18 @@
 }
 
 .profile-pic{
+  height: 152%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
+.defaultProfile-pic{
   height: 125%;
+  position: relative;
+  right: 50%;
+  transform: translateX(30%);
 }
 
 .cal-post-pic{

@@ -1,0 +1,21 @@
+.uploadBox{
+  /* margin-top: 100px; */
+  text-align: center;
+  width: 400px;
+  height:400px
+}
+
+.ant-upload-text{
+  position:relative;
+  /* background-color: red; */
+  font-size: 30px;
+  top: 50%;
+}
+
+.uploadBox .plusOutlined{
+  /* background-color: red; */
+  font-size: 30px;
+  position: absolute;
+  top: 38%;
+  right: 48%;
+}

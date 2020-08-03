@@ -107,6 +107,7 @@ const uploadImageRainbowProgress = {
     e.preventDefault()
 		if (props.data.id && caption){
       console.log('it got summited')
+      console.log(fileList[0].originFileObj)
 			const post = {
 				'image': fileList[0].originFileObj,
 				'caption': caption,

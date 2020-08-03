@@ -54,6 +54,11 @@ class UserSerializer(serializers.ModelSerializer):
          'slug')
 
 
+class ProfilePicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ('profile_picture',)
+
 
 class FollowSerializer(serializers.ModelSerializer):
     class Meta:
