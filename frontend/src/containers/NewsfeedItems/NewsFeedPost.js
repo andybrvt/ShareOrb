@@ -10,7 +10,7 @@ import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
 import heart  from './heart.svg';
 import { commentPic } from './comment.svg';
-
+import DetailSwitch from '../DetailSwitch.js';
 
 import QueueAnim from 'rc-queue-anim';
 
@@ -25,6 +25,7 @@ class NewsfeedPost extends React.Component {
       commentPost:'',
       commentsCondition:false,
       show:false,
+      stepCount:0,
     }
   }
 
@@ -57,6 +58,19 @@ class NewsfeedPost extends React.Component {
   //       }
   //     }, 100)
   // }
+   ShowNextSteps = () => {
+    if(this.state.stepCount==1){
+      return <h1>show step 1</h1>;
+    }
+    else if(this.state.stepCount==2){
+      return <h1>show step 2</h1>;
+    }
+    else{
+      return <h1> show last step </h1>
+    }
+
+  }
+
 
   showModal = () => {
     this.setState({
@@ -66,7 +80,8 @@ class NewsfeedPost extends React.Component {
 
   onClick = () => {
     this.setState({
-      show: !this.state.show
+      show: !this.state.show,
+      stepCount:this.state.stepCount+1,
     });
   }
 
@@ -231,24 +246,17 @@ class NewsfeedPost extends React.Component {
           <Button type="primary" onClick={this.onClick}>Switch</Button>
         </p>
         <QueueAnim className="demo-content">
-          {this.state.show ? [
+          {this.state.stepCount==0 ? [
             <div className="demo-thead" key="a">
-              <ul>
-                <li />
-aaaaaaaaaaaaaaaaa
-                <li />
-                <li />
-              </ul>
+              <Button> Day View</Button>
             </div>,
             <div className="demo-tbody" key="b">
-              <ul>
-                <li></li>
-                bbbbbbbbbbb
-                <li></li>
-                <li></li>
-              </ul>
+              <Button> Week View</Button>
             </div>
-          ] : null}
+          ] :
+          <div className="demo-thead" key="a">
+            adsdfasdfadfsdf
+          </div>}
         </QueueAnim>
       </div>
 
@@ -887,6 +895,8 @@ aaaaaaaaaaaaaaaaa
       const { TextArea } = Input;
   return (
     <div>
+
+    <DetailSwitch/>
     {this.ContentOfEvent()}
 
       <div>
