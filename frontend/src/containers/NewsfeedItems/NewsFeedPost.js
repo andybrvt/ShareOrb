@@ -228,37 +228,27 @@ class NewsfeedPost extends React.Component {
              {this.capitalize(this.props.data.user.username)}
 
              <div>
-             <span class="fb-group-date" style={{marginLeft:55}}> Tucson, Arizona</span>
+             <span class="fb-group-date alignleft" > Tucson, Arizona</span>
 
-              <span class="fb-group-date" style={{marginLeft:240}}> {this.renderTimestamp(this.props.data.created_at)}</span>
+              <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
              </div>
+
+
+
            </span>
 
+
+
+
       </div>
-      <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
-      teastastaeeta
+<div class="customDivider"/>
 
-      </p>
-
-
-      <div className="queue-demo">
-        <p className="buttons">
-          <Button type="primary" onClick={this.onClick}>Switch</Button>
-        </p>
-        <QueueAnim className="demo-content">
-          {this.state.stepCount==0 ? [
-            <div className="demo-thead" key="a">
-              <Button> Day View</Button>
-            </div>,
-            <div className="demo-tbody" key="b">
-              <Button> Week View</Button>
-            </div>
-          ] :
-          <div className="demo-thead" key="a">
-            adsdfasdfadfsdf
-          </div>}
-        </QueueAnim>
+      <div style={{marginLeft:'20px',fontSize: '30px', color:'black'}}>
+      8/17 Thursday 3PM
       </div>
+      <i  style={{marginLeft:'20px',fontSize: '20px', color:'#13c2c2'}} class="fa fa-users" aria-hidden="true"></i>
+
+
 
       </div>
     )
@@ -895,8 +885,9 @@ class NewsfeedPost extends React.Component {
       const { TextArea } = Input;
   return (
     <div>
+    {/*    <DetailSwitch/>
+    */}
 
-    <DetailSwitch/>
     {this.ContentOfEvent()}
 
       <div>
