@@ -64,6 +64,25 @@ export const closeChangeProfilePic = (state, action) => {
   })
 }
 
+// export const addUnFollowing = (state, action) => {
+//   let profiles  = state.profiles
+//   let person_index = ''
+//   let person_profile = []
+//   for (let i = 0; i <profiles.length; i++){
+//       if (profiles[i].username === action.followObject.actorUsername )
+//   }
+//
+//   return updateObject (state, {
+//
+//   })
+// }
+//
+// export const addUnFollower = (state, action) => {
+//   return updateObject (state, {
+//
+//   })
+// }
+
 export const addFollowing = (state, action) => {
   // probally gonna have to think of a way to do the binary search here
   console.log(state.profiles)
@@ -100,7 +119,10 @@ const reducer = (state = initialState, action) => {
       return openChangeProfilePic(state, action)
     case actionTypes.CLOSE_CHANGE_PROFILE_PIC:
       return closeChangeProfilePic(state, action)
-    // Start here later
+    // case actionTypes.ADD_UNFOLLOWING:
+    //   return addUnFollowing(state, action)
+    // case actionTypes.ADD_UNFOLLOWER:
+    //   return addUnFollower(state, action)
     default:
       return state;
   };

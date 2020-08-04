@@ -67,10 +67,9 @@ export const addUnFollower = (followObject) => {
 }
 
 export const addUnFollowing = (followObject) =>{
-  // This one will be used for you as the person doing the unfollowing 
+  // This one will be used for you as the person doing the unfollowing
   return {
     type: actionTypes.ADD_UNFOLLOWING,
     followObject: followObject
-
   }
 }

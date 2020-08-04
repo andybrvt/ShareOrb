@@ -87,7 +87,7 @@ class PostSerializer(serializers.ModelSerializer):
     # post_comments = serializers.ReadOnlyField()
     post_comments = CommentSerializer(many= True, read_only=True)
     # post_images = ImageSerializer(many= True, read_only=True)
-    post_images = serializers.StringRelatedField(many = True)
+    # post_images = serializers.StringRelatedField(many = True)
 
     class Meta:
         model = models.Post
@@ -98,6 +98,8 @@ class PostSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['user'] = PostUserSerializer(models.User.objects.get(pk=data['user'])).data
+        if (len(data['post_images']) > 0):
+            data['post_images'] = ImageSerializer(models.ImageModel.objects.get(pk= 1)).data
         return data
 
 
