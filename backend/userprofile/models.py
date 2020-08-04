@@ -76,19 +76,32 @@ class Post(models.Model):
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'likeUser', blank = True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', on_delete=models.CASCADE)
     # comments = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name = 'postComments', blank=True, null=True)
-    image = models.ImageField(('post_picture'),
-            upload_to='post_pictures/%Y/%m',
-            blank=True,
-            )
+    # image = models.ImageField(('post_picture'),
+    #         upload_to='post_pictures/%Y/%m',
+    #         blank=True,
+    #         )
 
     def post_comments(self):
         # print(Post.objects.filter(user=self).values_list())
         return (Comment.objects.filter(post=self.id).values())
+
+    def post_images(self):
+        # print(Post.objects.filter(user=self).values_list())
+        return (ImageModel.objects.filter(imageList=self.id).values())
         # return Comment.objects.filter(post=self.id)
 
     #
     # def __str__(self):
     #     return self.caption
+
+class ImageModel(models.Model):
+    imageList = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='images', blank = True)
+
+    mainimage = models.ImageField(('post_picture'),
+            upload_to='post_pictures/%Y/%m',
+            blank=True,
+            )
+
 
 
 class Comment(models.Model):

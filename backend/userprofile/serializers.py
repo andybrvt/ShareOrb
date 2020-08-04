@@ -75,14 +75,22 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.ImageModel
+        fields = "__all__"
+
+
 class PostSerializer(serializers.ModelSerializer):
 
     # post_comments = serializers.ReadOnlyField()
     post_comments = CommentSerializer(many= True, read_only=True)
+    post_images = ImageSerializer(many= True, read_only=True)
     class Meta:
         model = models.Post
         # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
-        fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition', 'people_like', 'user', 'post_comments')
+        fields = ('id', 'caption', 'created_at', 'updated_at', 'like_count','like_condition', 'people_like', 'user', 'post_comments', 'post_images',)
 
 
     def to_representation(self, instance):
