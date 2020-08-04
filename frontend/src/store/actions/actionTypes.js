@@ -61,7 +61,8 @@ export const OPEN_PROFILE_EDIT = 'OPEN_PROFILE_EDIT';
 export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT';
 export const OPEN_CHANGE_PROFILE_PIC = 'OPEN_CHANGE_PROFILE_PIC';
 export const CLOSE_CHANGE_PROFILE_PIC = 'CLOSE_CHANGE_PROFILE_PIC';
-
+export const ADD_UNFOLLOWER = 'ADD_UNFOLLOWER';
+export const ADD_UNFOLLOWING = 'ADD_UNFOLLOWING';
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

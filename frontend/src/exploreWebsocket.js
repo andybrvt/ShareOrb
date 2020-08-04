@@ -87,14 +87,48 @@ class WebSocketExplore {
       // This is to send the profile info of the current user
       const profile = JSON.parse(parsedData.user_profile)[0]
       this.callbacks['current_user'](profile)
+    } else if (command === 'send_unfollowing'){
+      // used to send to the backend in order to
+      // This is to do it on the actor side, (the person doing the
+      // following side)
+      // Unadd to the following side
+      const user = parsedData.actorUsername
+      const person_unfollowing = parsedData.targetUsername
+
+      const followObj = {
+        user: user,
+        person_unfollowing: person_unfollowing
+      }
+
+      this.callbacks['new_unFollowing'](followObj)
+    } else if (command === 'send_unfollower'){
+      // This is to un add the other person follower
+      const user = parsedData.actorUsername
+      const person_follower = parsedData.targetUsername
+
+      const followObj = {
+        user: user,
+        person_follower: person_follower
+      }
+      this.callbacks['new_unFollower'](followObj)
     }
+
+
   }
 
-  addCallbacks(loadProfiles, addFollowerCallBack, addFollowingCallBack, loadCurrProfile){
+  addCallbacks(loadProfiles,
+     addFollowerCallBack,
+     addFollowingCallBack,
+     loadCurrProfile,
+     unFollowingCallback,
+     unFollowerCallback
+   ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
     this.callbacks['new_following'] = addFollowingCallBack
     this.callbacks['current_user'] = loadCurrProfile
+    this.callbacks['new_unFollowing'] = unFollowingCallback
+    this.callbacks['new_unFollower'] = unFollowerCallback
   }
 
 
@@ -126,6 +160,19 @@ class WebSocketExplore {
       following: following,
       command: 'send_following'
     })
+  }
+
+  sendUnFollowing = (follower, following) => {
+    // This function will be used to set up for unfollowing the user
+    // the follower again is the person doing the action and the following will
+    // be the person receving the follow
+    this.sendFollowerFollowing({
+      follower: follower,
+      following: following,
+      command: 'send_unfollowing'
+    })
+
+
   }
 
 

@@ -504,6 +504,40 @@ class ExploreConsumer(JsonWebsocketConsumer):
         self.send_new_following(content_follower)
         self.send_new_following(content_following)
 
+    def send_unfollowing(self, data):
+        print(data)
+        # This function is used to get the user objects and then will filter out the following
+        # object and then delete the following
+        # So the follower is the person doing the action and the following
+        # is the person receiving the action
+        follower = get_object_or_404(User, id = data['follower'])
+        following = get_object_or_404(User, id = data['following'])
+        followerUsername = follower.username
+        followingUsername = following.username
+        followerObj = UserFollowing.objects.filter(person_following = follower, person_getting_followers = following)
+        followerObj.delete()
+
+        # The content_follower is for the person doing the following so its you prietty much
+        content_follower = {
+
+
+            'command': 'send_unfollowing',
+            'targetId': following.id,
+            'targetUsername': followingUsername,
+            'actorUsername': followerUsername
+        }
+
+        # This is for the other person
+        content_following ={
+            'command': 'send_unfollower',
+            'targetId': follower.id,
+            'targetUsername': followerUsername,
+            'actorUsername': followingUsername
+        }
+
+        self.send_new_following(content_follower)
+        self.send_new_following(content_following)
+
 
     def send_new_following(self, followObj):
         # This function is used to send follow objs into the websocket and to everyone
@@ -546,6 +580,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_following(data)
         if data['command'] == 'fetch_curUser_profile':
             self.fetch_curUser_profile(data)
+        if data['command'] == 'send_unfollowing':
+            self.send_unfollowing(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']

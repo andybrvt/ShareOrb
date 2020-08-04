@@ -100,6 +100,7 @@ const reducer = (state = initialState, action) => {
       return openChangeProfilePic(state, action)
     case actionTypes.CLOSE_CHANGE_PROFILE_PIC:
       return closeChangeProfilePic(state, action)
+    // Start here later
     default:
       return state;
   };

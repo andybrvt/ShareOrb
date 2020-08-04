@@ -54,7 +54,7 @@ urlpatterns = [
 
 	# path('view-comment/<slug:postID>/<slug:commentID>/', views.ViewComment.as_view(), name='grab comment'),
 
-	path('profile/update/<slug:id>', views.ProfileUpdate.as_view(), name = 'update profile')
+	path('profile/update/<slug:id>', views.ProfileUpdate.as_view(), name = 'update profile'),
 
-
+	path('test/test', views.ImageView.as_view(), name = 'images test')
 ]

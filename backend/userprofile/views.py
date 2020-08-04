@@ -29,7 +29,9 @@ class UserIDView(APIView):
 
 
 
-
+class ImageView(generics.ListAPIView):
+    queryset = models.ImageModel.objects.all()
+    serializer_class = serializers.ImageSerializer
 
 # Grabs ALL of the users
 class ListAll(generics.ListAPIView):

@@ -164,6 +164,12 @@ class CurrUserProfile extends React.Component{
      ExploreWebSocketInstance.sendFollowing(follower, following)
    }
 
+   onUnfollow = (follower, following) => {
+     // This will send an unfollow into the back end
+     // It will pretty muchh just delete the follower and following
+     ExploreWebSocketInstance.sendUnFollowing(follower, following)
+   }
+
    onRenderProfileInfo(){
      // For the following and the follwers, the get_followers will be the people taht
      // are your followers and the people that are in
