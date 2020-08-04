@@ -87,7 +87,7 @@ class Post(models.Model):
 
     def post_images(self):
         # print(Post.objects.filter(user=self).values_list())
-        return (ImageModel.objects.filter(imageList=self.id).values())
+        return (ImageModel.objects.filter(imageList=self.id).values_list('mainimage', flat= True ))
         # return Comment.objects.filter(post=self.id)
 
     #
