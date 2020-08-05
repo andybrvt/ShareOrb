@@ -104,11 +104,11 @@ class WebSocketExplore {
     } else if (command === 'send_unfollower'){
       // This is to un add the other person follower
       const user = parsedData.actorUsername
-      const person_follower = parsedData.targetUsername
+      const person_unfollower = parsedData.targetUsername
 
       const followObj = {
         user: user,
-        person_follower: person_follower
+        person_unfollower: person_unfollower
       }
       this.callbacks['new_unFollower'](followObj)
     }
