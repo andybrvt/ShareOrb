@@ -9,6 +9,7 @@ import './ProfileComponents/ProfilePage.css';
 import defaultPicture from './images/default.png';
 import ava1 from './images/avatar.jpg'
 import SocialCalendar from '../containers/SocialCalendar'
+import FollowList from './FollowList';
 
 
 
@@ -312,7 +313,17 @@ class PersonalProfile extends React.Component{
 
   render(){
 
+      let followers = []
+      let following = []
       console.log(this.props)
+      if (this.props.data){
+        if(this.props.data.get_followers){
+          followers = this.props.data.get_followers
+        }
+        if(this.props.data.get_following){
+          following = this.props.data.get_following
+        }
+      }
 
       return(
         <div className = 'profilePage'>
@@ -323,7 +334,9 @@ class PersonalProfile extends React.Component{
         <Modal
         visible ={this.state.followerShow}
         onCancel = {this.onFollowerCancel}
+        footer = {null}
         >
+        <FollowList follow = {followers} />
         </Modal>
 
 
@@ -331,7 +344,9 @@ class PersonalProfile extends React.Component{
         <Modal
         visible = {this.state.followingShow}
         onCancel = {this.onFollowingCancel}
+        footer = {null}
         >
+        <FollowList follow = {following}/>
         </Modal>
 
         </div>
