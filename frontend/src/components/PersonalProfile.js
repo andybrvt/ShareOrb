@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Button, Form} from 'antd';
+import {Button, Form, Modal} from 'antd';
 import { authAxios } from '../components/util';
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';
@@ -15,6 +15,11 @@ import SocialCalendar from '../containers/SocialCalendar'
 class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
+  }
+
+  state = {
+    followerShow: false,
+    followingShow: false
   }
 
   capitalize (str) {
@@ -165,14 +170,18 @@ class PersonalProfile extends React.Component{
                 <br />
                 <span>{posts.length}</span>
               </div>
-              <div className = 'followItem'>
+              <div
+              onClick = {() => this.onFollowerOpen()}
+              className = 'followItem'>
                 <span
                 className = 'postFollowWords'
                 >Followers</span>
                 <br />
                 <span>{followers.length}</span>
               </div>
-              <div className = 'followItem'>
+              <div
+              onClick = {() => this.onFollowingOpen()}
+              className = 'followItem'>
                 <span
                 className = 'postFollowWords'
                 >Following</span>
@@ -242,6 +251,34 @@ class PersonalProfile extends React.Component{
 
       }
 
+    onFollowerOpen = () => {
+      // This is used to open up the follower list
+      this.setState({
+        followerShow: true
+      })
+    }
+
+    onFollowerCancel = () => {
+      // This is used to close the follower list
+      this.setState({
+        followerShow: false
+      })
+    }
+
+    onFollowingOpen = () => {
+      // This is used to open up the following list
+      this.setState({
+        followingShow: true
+      })
+    }
+
+    onFollowingCancel = () => {
+      // This is to close the following list
+      this.setState({
+        followingShow: false
+      })
+    }
+
     onRenderTabs= () => {
       var tabs = document.getElementsByClassName('profile-Tab');
       Array.prototype.forEach.call(tabs, function(tab) {
@@ -282,6 +319,21 @@ class PersonalProfile extends React.Component{
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
+
+        <Modal
+        visible ={this.state.followerShow}
+        onCancel = {this.onFollowerCancel}
+        >
+        </Modal>
+
+
+
+        <Modal
+        visible = {this.state.followingShow}
+        onCancel = {this.onFollowingCancel}
+        >
+        </Modal>
+
         </div>
       )
 
