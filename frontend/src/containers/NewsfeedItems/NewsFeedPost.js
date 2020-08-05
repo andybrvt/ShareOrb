@@ -151,9 +151,6 @@ class NewsfeedPost extends React.Component {
   }
 
 
-
-
-
   handleSubmit = () => {
     WebSocketPostsInstance.sendComment(
       this.props.userId,
@@ -257,13 +254,15 @@ class NewsfeedPost extends React.Component {
 
   ContentOfPic() {
     let like_people = this.props.data.people_like
-    console.log(this.props.data)
-    let temp="http://127.0.0.1:8000"+this.props.data.image;
+
+    let temp="http://127.0.0.1:8000"+this.props.data.post_images;
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
 
     const success = () => {
     message.success('Clipped to your album!');
     };
+    console.log(temp)
+
     return(
       <div>
 
@@ -314,10 +313,32 @@ class NewsfeedPost extends React.Component {
 
 
       <div>
-
+      {/*
+      <div>
+      {
+        ((this.props.data.post_images).length==1)?
       <div class="imageContainer">
 
-          <a href=""><img src={temp} alt="" /></a>
+          <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
+
+      </div>
+      :
+      <div> </div>
+    }
+    </div>
+
+    */}
+
+  <div>
+  {
+    ((this.props.data.post_images).length==1)?
+      <div class="imageContainer">
+
+      <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
+
+      </div>
+      :
+      <div></div>}
 
       </div>
     <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
@@ -875,8 +896,8 @@ class NewsfeedPost extends React.Component {
     }
 
     render() {
-      console.log(this.props)
-      let temp="http://127.0.0.1:8000"+this.props.data.image;
+      console.log(this.props.data)
+      let temp="http://127.0.0.1:8000"+this.props.data.post_images;
       console.log(temp);
       const success = () => {
       message.success('Clipped to your album!');
@@ -906,7 +927,8 @@ class NewsfeedPost extends React.Component {
           <div class="modalInnerContainer">
 
           {
-                  this.props.data.image ?
+                  this.props.data.post_images ?
+
                <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
 
           //
@@ -924,7 +946,7 @@ class NewsfeedPost extends React.Component {
       </div>
 
       {
-              this.props.data.image ?
+              this.props.data.post_images ?
            <p>{this.ContentOfPic()}</p>
 
       //
