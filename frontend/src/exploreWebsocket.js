@@ -75,14 +75,14 @@ class WebSocketExplore {
       this.callbacks['new_following'](followObj)
     } else if (command === 'send_follower'){
       // This is to add to the other person's followers
-      // const user = parsedData.actorUsername
-      // const person_follower = parsedData.targetUsername
-      // const followObj = {
-      //   user: user,
-      //   person_follower: person_follower
-      // }
-      //
-      // this.callbacks['new_follower'](followObj)
+      const user = parsedData.actorObjSerial
+      const person_follower = parsedData.targetObjSerial
+      const followObj = {
+        user: user,
+        person_follower: person_follower
+      }
+
+      this.callbacks['new_follower'](followObj)
     } else if (command === 'currUser_profile') {
       // This is to send the profile info of the current user
       const profile = JSON.parse(parsedData.user_profile)[0]
@@ -92,8 +92,8 @@ class WebSocketExplore {
       // This is to do it on the actor side, (the person doing the
       // following side)
       // Unadd to the following side
-      const user = parsedData.actorUsername
-      const person_unfollowing = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_unfollowing = parsedData.targetObjSerial
 
       const followObj = {
         user: user,
@@ -103,8 +103,8 @@ class WebSocketExplore {
       this.callbacks['new_unFollowing'](followObj)
     } else if (command === 'send_unfollower'){
       // This is to un add the other person follower
-      const user = parsedData.actorUsername
-      const person_unfollower = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_unfollower = parsedData.targetObjSerial
 
       const followObj = {
         user: user,

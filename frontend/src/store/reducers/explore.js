@@ -74,13 +74,13 @@ export const addUnFollowing = (state, action) => {
   // The target_profile will be that of the other person
   // The perosn_profile will be that of the current user profile
   for (let i = 0; i <profiles.length; i++){
-      if (profiles[i].username === action.followObject.user ){
+      if (profiles[i].username === action.followObject.user.username ){
         // This will remove the target from the user's following
         person_index = profiles[i]['get_following'].indexOf(action.followObject.person_unfollowing)
         person_profile = profiles[i]['get_following']
         person_profile.splice(person_index, 1)
       }
-      if (profiles[i].username === action.followObject.person_unfollowing){
+      if (profiles[i].username === action.followObject.person_unfollowing.username){
         // This is to remove the actor from the targets following
         person_index = profiles[i]['get_followers'].indexOf(action.followObject.user )
         target_profile = profiles[i]['get_followers']
@@ -90,10 +90,10 @@ export const addUnFollowing = (state, action) => {
 
   return updateObject (state, {
     profiles: state.profiles.map(
-      profile => profile.username === action.followObject.user ? {
+      profile => profile.username === action.followObject.user.username ? {
         ...profile,
         get_following: person_profile
-      } : profile.username === action.followObject.person_unfollowing ? {
+      } : profile.username === action.followObject.person_unfollowing.username ? {
         ...profile,
         get_followers: target_profile
       } : profile
@@ -116,12 +116,12 @@ export const addUnFollower = (state, action) => {
   // The target_profile will be the follower and then this function will will then remove
   // the following from that person
   for (let i = 0; i < profiles.length; i++ ){
-    if(profiles[i].username === action.followObject.user){
+    if(profiles[i].username === action.followObject.user.username){
       person_index = profiles[i]['get_followers'].indexOf(action.followObject.person_unfollower)
       person_profile = profiles [i]['get_followers']
       person_profile.splice(person_index, 1)
     }
-    if(profiles[i].username === action.followObject.person_unfollower){
+    if(profiles[i].username === action.followObject.person_unfollower.username){
       person_index = profiles[i]['get_following'].indexOf(action.followObject.user)
       target_profile = profiles[i]['get_following']
       target_profile.splice(person_index, 1)
@@ -131,10 +131,10 @@ export const addUnFollower = (state, action) => {
 
   return updateObject (state, {
     profiles: state.profiles.map(
-      profile => profile.username === action.followObject.user ? {
+      profile => profile.username === action.followObject.user.username ? {
         ...profile,
         get_followers: person_profile
-      } : profile.username === action.followObject.person_unfollower ? {
+      } : profile.username === action.followObject.person_unfollower.username ? {
         ...profile,
         get_following: target_profile
       } : profile

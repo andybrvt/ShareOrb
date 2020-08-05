@@ -513,8 +513,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # is the person receiving the action
         follower = get_object_or_404(User, id = data['follower'])
         following = get_object_or_404(User, id = data['following'])
-        followerUsername = follower.username
-        followingUsername = following.username
+        followerObjSerial = FollowUserSerializer(follower, many = False).data
+        followingObjSerial = FollowUserSerializer(following, many = False).data
         followerObj = UserFollowing.objects.filter(person_following = follower, person_getting_followers = following)
         followerObj.delete()
 
@@ -524,16 +524,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
             'command': 'send_unfollowing',
             'targetId': following.id,
-            'targetUsername': followingUsername,
-            'actorUsername': followerUsername
+            'targetObjSerial': followingObjSerial,
+            'actorObjSerial': followerObjSerial
         }
 
         # This is for the other person
         content_following ={
             'command': 'send_unfollower',
             'targetId': follower.id,
-            'targetUsername': followerUsername,
-            'actorUsername': followingUsername
+            'targetObjSerial': followerObjSerial,
+            'actorObjSerial': followingObjSerial
         }
 
         self.send_new_following(content_follower)
