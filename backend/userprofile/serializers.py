@@ -26,6 +26,12 @@ class PostUserSerializer(serializers.ModelSerializer):
 # Used in UserListView, UserDetailView in views.py
 # Purpose: UserListView it shows a list and UserDetailView grabbing person info
 
+class FollowUserSerializer(serializers.ModelSerializer):
+    # This is for the follower and followering list
+    class Meta:
+        model = models.User
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
+
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
     friends = serializers.SerializerMethodField()
@@ -52,6 +58,21 @@ class UserSerializer(serializers.ModelSerializer):
          'get_followers',
          'friends',
          'slug')
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        followerList = []
+        followingList = []
+        for user in data['get_following']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followingList.append(userPerson)
+
+        for user in data['get_followers']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followerList.append(userPerson)
+        data['get_following'] = followingList
+        data['get_followers'] = followerList
+        return data
+
 
 
 class ProfilePicSerializer(serializers.ModelSerializer):

@@ -63,8 +63,9 @@ class WebSocketExplore {
       this.callbacks['fetch_profiles'](profiles)
     } else if (command === 'send_following'){
       // This is to add the person to your following
-      const user = parsedData.actorUsername
-      const person_following = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_following = parsedData.targetObjSerial
+      console.log(user, person_following)
       // the user will be the person that will be the user will be the person
       // that will be getting the following
       const followObj = {
@@ -72,17 +73,16 @@ class WebSocketExplore {
         person_following: person_following
       }
       this.callbacks['new_following'](followObj)
-      // this.callbacks['new_following'](profiles)
     } else if (command === 'send_follower'){
       // This is to add to the other person's followers
-      const user = parsedData.actorUsername
-      const person_follower = parsedData.targetUsername
-      const followObj = {
-        user: user,
-        person_follower: person_follower
-      }
-
-      this.callbacks['new_follower'](followObj)
+      // const user = parsedData.actorUsername
+      // const person_follower = parsedData.targetUsername
+      // const followObj = {
+      //   user: user,
+      //   person_follower: person_follower
+      // }
+      //
+      // this.callbacks['new_follower'](followObj)
     } else if (command === 'currUser_profile') {
       // This is to send the profile info of the current user
       const profile = JSON.parse(parsedData.user_profile)[0]

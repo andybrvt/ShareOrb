@@ -20,7 +20,8 @@ class PersonalProfile extends React.Component{
 
   state = {
     followerShow: false,
-    followingShow: false
+    followingShow: false,
+    // following: false,
   }
 
   capitalize (str) {
@@ -125,6 +126,28 @@ class PersonalProfile extends React.Component{
         ExploreWebSocketInstance.sendUnFollowing(follower, following)
       }
 
+      // onFollowingOrNot = (username) => {
+      //   // This function will check if the use is following the targeted user
+      //   // or not. If they are it will show a unfollow button if they are not then they
+      //   // will show a follow button
+      //   if (this.props.data){
+      //     if (this.props.followers){
+      //       const followers = this.props.data.get_followers
+      //       console.log(followers)
+      //       for (let i = 0; i < followers.length; i++){
+      //         if(followers[i].username === this.props.currentUser.toString()){
+      //           this.setState({
+      //             following: true
+      //           })
+      //         }
+      //       }
+      //     }
+      //   }
+      //
+      //
+      //
+      // }
+
       onRenderProfileInfo(){
         // For the following and the follwers, the get_followers will be the people taht
         // are your followers and the people that are in
@@ -134,8 +157,8 @@ class PersonalProfile extends React.Component{
         let firstName = ''
         let lastName = ''
         let bio = ''
-        let followers = ''
-        let following = ''
+        let followers = []
+        let following = []
         let posts = ''
         let profileId = ''
 
@@ -144,15 +167,19 @@ class PersonalProfile extends React.Component{
           firstName = this.props.data.first_name
           lastName = this.props.data.last_name
           bio = this.props.data.bio
-          followers = this.props.data.get_followers
           following = this.props.data.get_following
           posts = this.props.data.get_posts
           profileId = this.props.data.id
+
+          if(this.props.data.get_followers){
+            for(let i =0; i<this.props.data.get_followers.length; i++){
+              followers.push(
+                this.props.data.get_followers[i].username
+              )
+            }
+          }
         }
-        console.log(firstName)
-        console.log(following)
-        console.log(this.props.currentId)
-        console.log(following.includes(this.props.currentId.toString()))
+      console.log(followers)
 
         return (
           <div className = 'profileInfo'>
@@ -210,6 +237,7 @@ class PersonalProfile extends React.Component{
             <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
               Follow
             </div>
+
           }
 
 
