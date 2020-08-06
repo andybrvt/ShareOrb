@@ -9,6 +9,7 @@ from .serializers import NewPostSerializer
 from .serializers import CommentSerializer
 from .serializers import UserSerializer
 from .serializers import FollowSerializer
+from .serializers import FollowUserSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -474,12 +475,10 @@ class ExploreConsumer(JsonWebsocketConsumer):
         #the following is the perosn that getting the follower
         follower = get_object_or_404(User,id = data['follower'])
         following = get_object_or_404(User, id = data['following'])
-        followerUsername = follower.username
-        followingUsername = following.username
+        followerObjSerial = FollowUserSerializer(follower, many = False).data
+        followingObjSerial = FollowUserSerializer(following, many = False).data
         followerObj = UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
         serializer = FollowSerializer(followerObj, many = False)
-
-        print(following.id, followingUsername)
 
         # Since you will need to add the other persons name into your following and the other
         # person needs to add you to their follower
@@ -487,18 +486,20 @@ class ExploreConsumer(JsonWebsocketConsumer):
         content_follower = {
             'command': 'send_following',
             'targetId': following.id,
-            'targetUsername': followingUsername,
-            'actorUsername': followerUsername
+            'targetObjSerial': followingObjSerial,
+            'actorObjSerial': followerObjSerial
         }
 
         # content_following will be the person getting the follower (the perosn that the user if following)
         content_following = {
             'command': 'send_follower',
             'targetId': follower.id,
-            'targetUsername': followerUsername,
-            'actorUsername': followingUsername
+            'targetObjSerial': followerObjSerial,
+            'actorObjSerial': followingObjSerial
 
         }
+
+        print(content_follower['actorObjSerial']['username'])
 
 
         self.send_new_following(content_follower)
@@ -512,8 +513,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # is the person receiving the action
         follower = get_object_or_404(User, id = data['follower'])
         following = get_object_or_404(User, id = data['following'])
-        followerUsername = follower.username
-        followingUsername = following.username
+        followerObjSerial = FollowUserSerializer(follower, many = False).data
+        followingObjSerial = FollowUserSerializer(following, many = False).data
         followerObj = UserFollowing.objects.filter(person_following = follower, person_getting_followers = following)
         followerObj.delete()
 
@@ -523,16 +524,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
             'command': 'send_unfollowing',
             'targetId': following.id,
-            'targetUsername': followingUsername,
-            'actorUsername': followerUsername
+            'targetObjSerial': followingObjSerial,
+            'actorObjSerial': followerObjSerial
         }
 
         # This is for the other person
         content_following ={
             'command': 'send_unfollower',
             'targetId': follower.id,
-            'targetUsername': followerUsername,
-            'actorUsername': followingUsername
+            'targetObjSerial': followerObjSerial,
+            'actorObjSerial': followingObjSerial
         }
 
         self.send_new_following(content_follower)
@@ -543,9 +544,10 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This function is used to send follow objs into the websocket and to everyone
         # in the channel layer
         channel_layer = get_channel_layer()
-        channel_recipient = followObj['actorUsername']
+        channel_recipient = followObj['actorObjSerial']['username']
         channel = 'explore_'+channel_recipient
 
+        print(channel)
 
         # Thsi group send will be sent to your self (or the person doing the action)
         async_to_sync(self.channel_layer.group_send)(

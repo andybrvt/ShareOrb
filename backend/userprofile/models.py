@@ -36,6 +36,7 @@ class User(AbstractUser):
         return UserFollowing.objects.filter(person_getting_followers = self).values_list('person_following__username', flat= True)
 
 
+
     def __str__(self):
         return self.username
 

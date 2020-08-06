@@ -63,8 +63,9 @@ class WebSocketExplore {
       this.callbacks['fetch_profiles'](profiles)
     } else if (command === 'send_following'){
       // This is to add the person to your following
-      const user = parsedData.actorUsername
-      const person_following = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_following = parsedData.targetObjSerial
+      console.log(user, person_following)
       // the user will be the person that will be the user will be the person
       // that will be getting the following
       const followObj = {
@@ -72,11 +73,10 @@ class WebSocketExplore {
         person_following: person_following
       }
       this.callbacks['new_following'](followObj)
-      // this.callbacks['new_following'](profiles)
     } else if (command === 'send_follower'){
       // This is to add to the other person's followers
-      const user = parsedData.actorUsername
-      const person_follower = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_follower = parsedData.targetObjSerial
       const followObj = {
         user: user,
         person_follower: person_follower
@@ -92,8 +92,8 @@ class WebSocketExplore {
       // This is to do it on the actor side, (the person doing the
       // following side)
       // Unadd to the following side
-      const user = parsedData.actorUsername
-      const person_unfollowing = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_unfollowing = parsedData.targetObjSerial
 
       const followObj = {
         user: user,
@@ -103,8 +103,8 @@ class WebSocketExplore {
       this.callbacks['new_unFollowing'](followObj)
     } else if (command === 'send_unfollower'){
       // This is to un add the other person follower
-      const user = parsedData.actorUsername
-      const person_unfollower = parsedData.targetUsername
+      const user = parsedData.actorObjSerial
+      const person_unfollower = parsedData.targetObjSerial
 
       const followObj = {
         user: user,

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Button, Form} from 'antd';
+import {Button, Form, Modal} from 'antd';
 import { authAxios } from '../components/util';
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';
@@ -9,12 +9,19 @@ import './ProfileComponents/ProfilePage.css';
 import defaultPicture from './images/default.png';
 import ava1 from './images/avatar.jpg'
 import SocialCalendar from '../containers/SocialCalendar'
+import FollowList from './FollowList';
 
 
 
 class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
+  }
+
+  state = {
+    followerShow: false,
+    followingShow: false,
+    // following: false,
   }
 
   capitalize (str) {
@@ -119,6 +126,28 @@ class PersonalProfile extends React.Component{
         ExploreWebSocketInstance.sendUnFollowing(follower, following)
       }
 
+      // onFollowingOrNot = (username) => {
+      //   // This function will check if the use is following the targeted user
+      //   // or not. If they are it will show a unfollow button if they are not then they
+      //   // will show a follow button
+      //   if (this.props.data){
+      //     if (this.props.followers){
+      //       const followers = this.props.data.get_followers
+      //       console.log(followers)
+      //       for (let i = 0; i < followers.length; i++){
+      //         if(followers[i].username === this.props.currentUser.toString()){
+      //           this.setState({
+      //             following: true
+      //           })
+      //         }
+      //       }
+      //     }
+      //   }
+      //
+      //
+      //
+      // }
+
       onRenderProfileInfo(){
         // For the following and the follwers, the get_followers will be the people taht
         // are your followers and the people that are in
@@ -128,8 +157,8 @@ class PersonalProfile extends React.Component{
         let firstName = ''
         let lastName = ''
         let bio = ''
-        let followers = ''
-        let following = ''
+        let followers = []
+        let following = []
         let posts = ''
         let profileId = ''
 
@@ -138,15 +167,19 @@ class PersonalProfile extends React.Component{
           firstName = this.props.data.first_name
           lastName = this.props.data.last_name
           bio = this.props.data.bio
-          followers = this.props.data.get_followers
           following = this.props.data.get_following
           posts = this.props.data.get_posts
           profileId = this.props.data.id
+
+          if(this.props.data.get_followers){
+            for(let i =0; i<this.props.data.get_followers.length; i++){
+              followers.push(
+                this.props.data.get_followers[i].username
+              )
+            }
+          }
         }
-        console.log(firstName)
-        console.log(following)
-        console.log(this.props.currentId)
-        console.log(following.includes(this.props.currentId.toString()))
+      console.log(followers)
 
         return (
           <div className = 'profileInfo'>
@@ -165,14 +198,18 @@ class PersonalProfile extends React.Component{
                 <br />
                 <span>{posts.length}</span>
               </div>
-              <div className = 'followItem'>
+              <div
+              onClick = {() => this.onFollowerOpen()}
+              className = 'followItem'>
                 <span
                 className = 'postFollowWords'
                 >Followers</span>
                 <br />
                 <span>{followers.length}</span>
               </div>
-              <div className = 'followItem'>
+              <div
+              onClick = {() => this.onFollowingOpen()}
+              className = 'followItem'>
                 <span
                 className = 'postFollowWords'
                 >Following</span>
@@ -200,6 +237,7 @@ class PersonalProfile extends React.Component{
             <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
               Follow
             </div>
+
           }
 
 
@@ -242,6 +280,34 @@ class PersonalProfile extends React.Component{
 
       }
 
+    onFollowerOpen = () => {
+      // This is used to open up the follower list
+      this.setState({
+        followerShow: true
+      })
+    }
+
+    onFollowerCancel = () => {
+      // This is used to close the follower list
+      this.setState({
+        followerShow: false
+      })
+    }
+
+    onFollowingOpen = () => {
+      // This is used to open up the following list
+      this.setState({
+        followingShow: true
+      })
+    }
+
+    onFollowingCancel = () => {
+      // This is to close the following list
+      this.setState({
+        followingShow: false
+      })
+    }
+
     onRenderTabs= () => {
       var tabs = document.getElementsByClassName('profile-Tab');
       Array.prototype.forEach.call(tabs, function(tab) {
@@ -275,13 +341,42 @@ class PersonalProfile extends React.Component{
 
   render(){
 
+      let followers = []
+      let following = []
       console.log(this.props)
+      if (this.props.data){
+        if(this.props.data.get_followers){
+          followers = this.props.data.get_followers
+        }
+        if(this.props.data.get_following){
+          following = this.props.data.get_following
+        }
+      }
 
       return(
         <div className = 'profilePage'>
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
+
+        <Modal
+        visible ={this.state.followerShow}
+        onCancel = {this.onFollowerCancel}
+        footer = {null}
+        >
+        <FollowList follow = {followers} />
+        </Modal>
+
+
+
+        <Modal
+        visible = {this.state.followingShow}
+        onCancel = {this.onFollowingCancel}
+        footer = {null}
+        >
+        <FollowList follow = {following}/>
+        </Modal>
+
         </div>
       )
 
