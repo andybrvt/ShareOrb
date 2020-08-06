@@ -72,6 +72,27 @@ class NewsfeedPost extends React.Component {
   }
 
 
+  revealPhoto = () => {
+
+      if((this.props.data.post_images).length==1){
+        return(
+        <div class="imageContainer">
+
+        <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
+
+        </div>)
+      }
+        else if((this.props.data.post_images).length==2){
+          return <div> MORE IMAGES</div>
+        }
+        else{
+
+        }
+
+ }
+
+
+
   showModal = () => {
     this.setState({
       visibleModal: true,
@@ -330,15 +351,7 @@ class NewsfeedPost extends React.Component {
     */}
 
   <div>
-  {
-    ((this.props.data.post_images).length==1)?
-      <div class="imageContainer">
-
-      <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
-
-      </div>
-      :
-      <div></div>}
+  {this.revealPhoto()}
 
       </div>
     <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
@@ -906,8 +919,9 @@ class NewsfeedPost extends React.Component {
       const { TextArea } = Input;
   return (
     <div>
-    {/*    <DetailSwitch/>
-    */}
+    {/*
+    <DetailSwitch/>
+    */}` `
 
     {this.ContentOfEvent()}
 
