@@ -1,5 +1,7 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
+import defaultPicture from './images/default.png';
+
 
 
 class FollowList extends React.Component{
@@ -21,9 +23,17 @@ class FollowList extends React.Component{
       renderItem = {item => (
         <List.Item>
         <List.Item.Meta
-          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-          title={<a href="https://ant.design">{this.capitalize(item)}</a>}
-          description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          avatar={
+            item.profile_picture ?
+              <Avatar src= {'http://127.0.0.1:8000'+item.profile_picture} />
+
+              :
+
+              <Avatar src={defaultPicture} />
+
+            }
+          title={<a href="https://ant.design">{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</a>}
+          description= {<b>@{this.capitalize(item.username)}</b>}
         />
         </List.Item>
       )}
