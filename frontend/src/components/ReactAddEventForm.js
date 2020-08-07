@@ -1,5 +1,7 @@
 import React from 'react';
-import { DatePicker, TimePicker, Button, Form, Input, Select } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
 import './labelCSS/ReactForm.css';

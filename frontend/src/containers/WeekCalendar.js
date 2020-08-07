@@ -3,7 +3,8 @@ import * as dateFns from 'date-fns';
 import './Container_CSS/NewCalendar.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
+import 'antd/dist/antd.css';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup } from 'antd';
 import EventModal from '../containers/EventModal';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
@@ -16,9 +17,9 @@ import { NavLink } from 'react-router-dom';
 import MiniCalendar from '../components/MiniCalendar';
 import EventSyncModal from '../components/EventSyncModal';
 import moment from 'moment';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 
-
+const { Group } = Avatar
 
 class WeekCalendar extends React.Component{
   // So when ever you do calendars, for states  you always want
@@ -436,6 +437,7 @@ class WeekCalendar extends React.Component{
 
   render() {
     console.log(this.props)
+    console.log(Avatar)
     return (
     <div className = 'calendarContainer'>
         <EventSyncModal
@@ -496,8 +498,13 @@ class WeekCalendar extends React.Component{
               onClick = {this.onMonthClick}>
               Month
               </Button>
+            
+
             </div>
           </div>
+
+
+
       </div>
     )
   }

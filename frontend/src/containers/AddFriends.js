@@ -1,5 +1,7 @@
 import 'antd/dist/antd.css';
-import { Input, Button, Select, Radio, Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, Select, Radio } from 'antd';
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';

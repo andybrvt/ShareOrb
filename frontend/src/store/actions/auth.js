@@ -19,12 +19,28 @@ export const authSuccess = (token) => {
 };
 
 
-export const addCredentials = (username, id, friends) => {
+export const addCredentials = (
+   username,
+   id,
+   friends,
+   posts,
+   firstName,
+   lastName,
+   profilePic,
+   following,
+   followers
+ ) => {
   return {
     type: actionTypes.ADD_CREDENTIALS,
     username: username,
     id: id,
-    friends: friends
+    friends: friends,
+    posts: posts,
+    firstName: firstName,
+    lastName: lastName,
+    profilePic: profilePic,
+    following: following,
+    followers: followers
   };
 };
 
@@ -41,6 +57,12 @@ export const logout = () => {
   localStorage.removeItem("username");
   localStorage.removeItem('id')
   localStorage.removeItem('friends')
+  localStorage.removeItem('posts')
+  localStorage.removeItem('firstName')
+  localStorage.removeItem('lastName')
+  localStorage.removeItem('profilePic')
+  localStorage.removeItem('following')
+  localStorage.removeItem('followers')
   localStorage.removeItem('suggestedFriends')
   return {
     type: actionTypes.AUTH_LOGOUT
@@ -100,13 +122,26 @@ export const authLogin = (username, password) => {
         return axios.get('http://127.0.0.1:8000/userprofile/current-user')
       })
       .then(res => {
+            console.log(res.data)
             const username1 = res.data.username;
             const id = res.data.id;
             const friends = res.data.friends;
+
             localStorage.setItem("username", username1);
             localStorage.setItem("id", id);
-            localStorage.setItem('friends', friends)
-            dispatch(addCredentials(res.data.username, res.data.id, res.data.friends));
+            localStorage.setItem('friends', friends);
+
+            dispatch(addCredentials(
+               res.data.username,
+               res.data.id,
+               res.data.friends,
+               res.data.get_posts,
+               res.data.first_name,
+               res.data.last_name,
+               res.data.profile_picture,
+               res.data.get_following,
+               res.data.get_followers
+             ));
             dispatch(checkAuthTimeout(3600));
 
         })
@@ -118,6 +153,7 @@ export const authLogin = (username, password) => {
 
 
 export const grabUserCredentials = () => {
+  // THIS IS THE ONE THAT GRABS THE CURRENT USER INFO
   // const[id, setID] = useState(null);
   // const[username1, setUsername1] = useState('');
   return dispatch => {
@@ -125,14 +161,36 @@ export const grabUserCredentials = () => {
 
     authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
       .then(res => {
-
+        console.log(res)
         const username1 = res.data.username;
         const id = res.data.id;
         const friends = res.data.friends;
+        const posts = res.data.get_posts;
+        const firstName = res.data.first_name;
+        const lastName = res.data.last_name;
+        const profilePic = res.data.profile_picture;
+        const following = res.data.get_following;
+        const followers = res.data.get_followers;
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
         localStorage.setItem('friends', friends);
-        dispatch(addCredentials(res.data.username, res.data.id, res.data.friends));
+        localStorage.setItem('posts', posts);
+        localStorage.setItem('firstName', firstName);
+        localStorage.setItem('lastName', lastName);
+        localStorage.setItem('profilePic', profilePic);
+        localStorage.setItem('following', following);
+        localStorage.setItem('followers', followers);
+        dispatch(addCredentials(
+           res.data.username,
+           res.data.id,
+           res.data.friends,
+           res.data.get_posts,
+           res.data.first_name,
+           res.data.last_name,
+           res.data.profile_picture,
+           res.data.get_following,
+           res.data.get_followers
+         ));
         dispatch(checkAuthTimeout(3600));
 
       })

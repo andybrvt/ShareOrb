@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Button, Modal, Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { Button, Modal } from 'antd';
 import { authAxios } from '../components/util';
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';

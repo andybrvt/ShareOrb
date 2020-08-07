@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { Input, Button, Select, Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { Input, Button, Select } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 const { Option } = Select;
