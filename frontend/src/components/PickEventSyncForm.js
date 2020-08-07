@@ -1,7 +1,7 @@
 import React from 'react';
 import { reset, Field, reduxForm } from 'redux-form';
 import './labelCSS/ReduxForm.css';
-import { Form, Button, Input } from 'antd';
+import { Button, Input, Form, } from 'antd';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 
@@ -10,7 +10,7 @@ const { TextArea } = Input
 const required = value => value ? undefined : '*Required'
 
 const renderField = (field) => {
-  return (
+return (
     <Input
     {...field.input}
     type = {field.type}

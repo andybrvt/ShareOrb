@@ -14,7 +14,8 @@ import { authLogin } from "../../store/actions/auth";
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import pic1 from './LoginCalendar.svg';
 import pic2 from './loginHelloPic2.svg';
-import { Form, Input, Button, Checkbox } from 'antd';
+import 'antd/dist/antd.css';
+import { Input, Button, Checkbox, Form } from 'antd';
 // Function: logs user in
 class LoginForm extends React.Component {
   constructor(props) {

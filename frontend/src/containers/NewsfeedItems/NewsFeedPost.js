@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import heart  from './heart.svg';
 import { commentPic } from './comment.svg';
 import DetailSwitch from '../DetailSwitch.js';
-
+import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
 
 
@@ -436,11 +436,7 @@ class NewsfeedPost extends React.Component {
         <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
           +{like_people.length-3} people like this.
           <div>
-        <Avatar.Group>
-        <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
-        <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
-        <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
-        </Avatar.Group>
+
         </div>
         </span>
 

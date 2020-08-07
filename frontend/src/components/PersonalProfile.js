@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {Button, Form, Modal} from 'antd';
+
+import { Button, Modal, Form } from 'antd';
 import { authAxios } from '../components/util';
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';
@@ -381,7 +382,7 @@ class PersonalProfile extends React.Component{
       )
 
     }
-    };
+    }
 
 const mapStateToProps = state => {
     return {

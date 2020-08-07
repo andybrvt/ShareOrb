@@ -3,14 +3,8 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import * as navActions from '../store/actions/nav';
 import * as calendarEventActions from '../store/actions/calendarEvent';
 import { connect } from "react-redux";
-import {
-   Form,
-   DatePicker,
-   TimePicker,
-   Button,
-   Input,
-   Select
-  } from 'antd';
+import 'antd/dist/antd.css';
+import { DatePicker, TimePicker, Button, Input, Form, Select } from 'antd';
 import moment from 'moment';
 import './labelCSS/ReduxForm.css';
 import * as dateFns from 'date-fns';

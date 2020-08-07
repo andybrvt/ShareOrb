@@ -1,19 +1,39 @@
 
 import React from 'react';
 import {
-  MenuUnfoldOutlined,
+  CalendarOutlined,
+  HeartTwoTone,
+  HomeOutlined,
+  InboxOutlined,
+  LogoutOutlined,
   MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  SearchOutlined,
+  SettingOutlined,
+  SmileOutlined,
+  UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
-  HeartTwoTone,
-  SearchOutlined,
-  LogoutOutlined, SettingOutlined,
-} from '@ant-design/icons'
+} from '@ant-design/icons';
 import {Link, withRouter} from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import testPic from './antd.png';
-import { Drawer, Layout, LocaleProvider, Icon,Row, Col, Dropdown,  Menu, Breadcrumb, Space, Input, Avatar, Button, Divider, AutoComplete, Badge} from 'antd';
+import {
+  Drawer,
+  Layout,
+  Row,
+  Col,
+  Dropdown,
+  Menu,
+  Breadcrumb,
+  Space,
+  Input,
+  Avatar,
+  Button,
+  Divider,
+  AutoComplete,
+  Badge,
+} from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
 
@@ -108,27 +128,27 @@ class SideMenu extends React.Component {
 
 
           <Menu.Item key="1" style={{height:50}}>
-            <Icon type="home" />
+            <HomeOutlined />
             <span> Home </span>
             <Link to={"/home"} />
           </Menu.Item>
 
 
             <Menu.Item key="2"  icon={<VideoCameraOutlined />}  style={{height:50}}>
-              <Icon type="user" />
+              <UserOutlined />
               <span> Explore </span>
               <Link to={"/explore"} />
             </Menu.Item>
 
             <Menu.Item key="3"  style={{height:50}}>
-              <Icon type="inbox" />
+              <InboxOutlined />
               <span>Messages</span>
               <Link to={"chat/1"} />
             </Menu.Item>
 
 
             <Menu.Item key="4"  style={{height:50}}>
-              <Icon type="calendar" />
+              <CalendarOutlined />
               <span>Personal Calendar </span>
               <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} />
             </Menu.Item>
@@ -136,7 +156,7 @@ class SideMenu extends React.Component {
 
 
             <Menu.Item key="5">
-              <Icon type="smile" />
+              <SmileOutlined />
               <span>Social Calendar</span>
               <Link to={"/current-user/"} />
             </Menu.Item>

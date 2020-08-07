@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Input, Icon, Button } from 'antd';
+import 'antd/dist/antd.css';
+import { Input, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined, QuestionCircleOutlined, UserOutlined } from '@ant-design/icons';
 
 const FormItem = Form.Item;
 
@@ -89,14 +90,14 @@ class Signup extends React.Component {
             {getFieldDecorator('first_name', {
                 rules: [{ required: true, message: 'Please input your first name!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
+                <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
             )}
         </FormItem>
         <FormItem>
             {getFieldDecorator('last_name', {
                 rules: [{ required: true, message: 'Please input your last name!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
+                <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
             )}
         </FormItem>
 
@@ -104,7 +105,7 @@ class Signup extends React.Component {
             {getFieldDecorator('dob', {
                 rules: [{ required: true, message: 'Please input your date of birth!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Date of Birth" />
+                <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Date of Birth" />
             )}
         </FormItem>
 
@@ -112,7 +113,7 @@ class Signup extends React.Component {
             {getFieldDecorator('bio', {
                 rules: [{ required: true, message: 'Please input your bio!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Biography" />
+                <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Biography" />
             )}
         </FormItem>
         <FormItem>
@@ -124,14 +125,14 @@ class Signup extends React.Component {
               required: true, message: 'Please input your E-mail!',
             }],
           })(
-            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
+            <Input prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
           )}
         </FormItem>
         <FormItem>
             {getFieldDecorator('phone_number', {
                 rules: [{ required: true, message: 'Please input your phone number!' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Phone Number" />
+                <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Phone Number" />
             )}
         </FormItem>
         <FormItem>
@@ -148,7 +149,7 @@ class Signup extends React.Component {
               validator: this.validateNumeric,
             }],
           })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"/>
+            <Input prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"/>
           )}
         </FormItem>
 
@@ -160,7 +161,7 @@ class Signup extends React.Component {
               validator: this.compareToFirstPassword,
             }],
           })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
+            <Input prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
           )}
         </FormItem>
 
