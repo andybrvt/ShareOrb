@@ -437,6 +437,7 @@ class NewsfeedPost extends React.Component {
           +{like_people.length-3} people like this.
           <div>
           <Avatar.Group>
+          Hi
           <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
 
         </Avatar.Group>

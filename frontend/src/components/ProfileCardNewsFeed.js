@@ -14,6 +14,14 @@ class ProfileCardNewsFeed extends React.Component{
 
 
   render(){
+    console.log(this.props)
+    let firstName = ''
+    let lastName = ''
+    if(this.props.profile){
+      firstName = this.props.profile.first_name
+      lastName = this.props.profile.last_name
+    }
+
 
     return (
       <div className = "profileCard-NF">
@@ -24,7 +32,7 @@ class ProfileCardNewsFeed extends React.Component{
         <MoreOutlined />
         </div>
         <div className = 'bottom-NF'>
-          <div className = 'name-NF'> Ping Hsu</div>
+          <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
         </div>
         <div className = 'social-NF'>

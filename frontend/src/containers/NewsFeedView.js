@@ -38,6 +38,7 @@ class NewsFeedView extends React.Component {
     // of the very first things
     this.waitForSocketConnection(()=> {
       ExploreWebSocketInstance.fetchFollowerFollowing()
+			ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
     })
   }
 
@@ -127,7 +128,7 @@ class NewsFeedView extends React.Component {
 
 
 
-				<ProfileCardNewsFeed />
+				<ProfileCardNewsFeed profile = {this.props.currentProfile} />
 					</div>
 
 
@@ -144,7 +145,7 @@ class NewsFeedView extends React.Component {
 
 
 
-					Today's events
+					Today s events
 
 
 					</div>
@@ -341,7 +342,9 @@ class NewsFeedView extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-		profile: state.explore.profiles
+		profile: state.explore.profiles,
+		currentUser: state.auth.username,
+		currentProfile: state.explore.profile
   }
 }
 const mapDispatchToProps = dispatch => {
