@@ -4,7 +4,7 @@ import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
 import {Icon, Tooltip, Row, Skeleton, Switch, Card, Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, AntDesignOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
@@ -394,8 +394,18 @@ class NewsfeedPost extends React.Component {
         {
           (like_people.length == 2) ?
           <span>
-            You and one person like this.
+
+            <Avatar
+              size="small"
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              style={{marginLeft:'5px', marginRight:'5px'}}
+              />
+
+            <Avatar
+            src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginLeft:'5px', marginRight:'5px'}}>U</Avatar>
+            You and 1 other like this.
           </span>
+
 
           :
 
@@ -425,6 +435,13 @@ class NewsfeedPost extends React.Component {
         <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
         <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
           +{like_people.length-3} people like this.
+          <div>
+        <Avatar.Group>
+        <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
+        <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+        <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+        </Avatar.Group>
+        </div>
         </span>
 
         :
@@ -651,7 +668,13 @@ class NewsfeedPost extends React.Component {
         {
           (like_people.length == 2) ?
           <span>
-            You and one person like this.
+            You
+            <Avatar
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              />
+            and
+            <Avatar src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+            like this.
           </span>
 
           :

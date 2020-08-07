@@ -2,6 +2,10 @@
 /* https://bootsnipp.com/snippets/rlxj6 */
 /* temporary for test to see card look */
 
+.avatarBorder{
+  border: 2px solid #f04134;
+}
+
 .header {
     display: flex;
     flex-direction: row;
