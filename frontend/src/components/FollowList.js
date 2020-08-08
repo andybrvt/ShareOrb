@@ -10,6 +10,10 @@ class FollowList extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  onFollowItemClick = (user) => {
+    window.location.href = 'explore/'+user
+  }
+
 
   render () {
     console.log(this.props)
@@ -21,7 +25,10 @@ class FollowList extends React.Component{
       itemLayout = 'horizontal'
       dataSource = {followList}
       renderItem = {item => (
-        <List.Item>
+        <List.Item
+        className = 'followListItem'
+        onClick = {() => this.onFollowItemClick(item.username)}
+        >
         <List.Item.Meta
           avatar={
             item.profile_picture ?

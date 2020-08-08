@@ -286,3 +286,23 @@
   overflow: auto;
   height: 850px;
 }
+
+.followList{
+  /* This is for the css for the follower and following list */
+  /* background-color: red; */
+  padding: 5px;
+  overflow: auto;
+  height: 400px;
+}
+
+.followWord{
+  /* background-color: red; */
+  font-size: 25px;
+}
+
+.followListItem{
+  cursor: pointer;
+}
+.followListItem:hover{
+  background-color: gainsboro;
+}

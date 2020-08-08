@@ -368,6 +368,7 @@ class PersonalProfile extends React.Component{
         onCancel = {this.onFollowerCancel}
         footer = {null}
         >
+        <span className ='followWord'> Followers</span>
         <FollowList follow = {followers} />
         </Modal>
 
@@ -378,6 +379,7 @@ class PersonalProfile extends React.Component{
         onCancel = {this.onFollowingCancel}
         footer = {null}
         >
+        <span className = 'followWord'>Following</span>
         <FollowList follow = {following}/>
         </Modal>
 

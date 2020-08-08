@@ -46,6 +46,7 @@ import PickEventSyncModal from '../PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';
+import defaultPicture from '../images/default.png';
 import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
@@ -90,14 +91,26 @@ class SideMenu extends React.Component {
     }
   }
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   render() {
     const currentDay = new Date()
-    console.log(currentDay)
     const selectYear = dateFns.getYear(currentDay).toString()
     const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     const selectDay = dateFns.getDate(currentDay).toString()
-    console.log(this.props)
+    let profilePic = ''
+    let firstName = ''
+    let lastName = ''
 
+    if (this.props.profilePic){
+      profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+    } if (this.props.firstName){
+      firstName = this.props.firstName
+    } if (this.props.lastName){
+      lastName = this.props.lastName
+    }
 
 
     const { dataSource } = this.state;
@@ -264,8 +277,27 @@ class SideMenu extends React.Component {
           <Button>
 
            <span >
-             <Avatar size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
-             <span>{localStorage.getItem('username')}</span>
+
+           {
+             profilePic != '' ?
+               <Avatar
+               size="small"
+               src={profilePic}
+               alt="avatar"
+               className = 'miniProfilePic'
+                />
+
+               :
+
+               <Avatar
+               size="small"
+               className = 'miniProfilePic'
+               src={defaultPicture} alt="avatar" />
+
+
+
+           }
+             <span>{this.capitalize(firstName)} {this.capitalize(lastName)}</span>
            </span>
          </Button>
        </Dropdown>
@@ -322,11 +354,14 @@ class SideMenu extends React.Component {
 
 const mapStateToProps = state => {
   return{
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName,
     notificationDrop: state.nav.showPopup,
     showPickEventSyncModal: state.eventSync.showPickEventSyncModal,
     id: state.auth.id,
     showNotification: state.notifications.showNotification,
     notifications: state.notifications.notifications,
+    profilePic: state.auth.profilePic
 
   }
 }

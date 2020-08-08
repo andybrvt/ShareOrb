@@ -4,6 +4,9 @@ import './ProfileCardNewsFeed.css';
 import ava1 from './images/avatar.jpg';
 import defaultPic from './images/default.png';
 import { connect } from "react-redux";
+import FollowList from './FollowList';
+import { Modal } from 'antd';
+
 
 
 
@@ -11,6 +14,39 @@ import { connect } from "react-redux";
 class ProfileCardNewsFeed extends React.Component{
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  state = {
+    followerShow: false,
+    followingShow: false,
+  }
+
+  onFollowerOpen = () => {
+    // This is used to open up the follower list
+    this.setState({
+      followerShow: true
+    })
+  }
+
+  onFollowerCancel = () => {
+    // This is used to close the follower list
+    this.setState({
+      followerShow: false
+    })
+  }
+
+  onFollowingOpen = () => {
+    // This is used to open up the following list
+    this.setState({
+      followingShow: true
+    })
+  }
+
+  onFollowingCancel = () => {
+    // This is to close the following list
+    this.setState({
+      followingShow: false
+    })
   }
 
 
@@ -62,15 +98,40 @@ class ProfileCardNewsFeed extends React.Component{
         <div className = 'social-NF'>
         <div className = 'social-links-NF'>
           <div
-          // onClick = {this.onProfileClick}
+          onClick = {() => this.onFollowerOpen()}
           className = 'btn-NF'> Followers </div>
-          <div className = 'btn-NF'> Following </div>
+          <div className = 'btn-NF'
+          onClick = {() => this.onFollowingOpen()}
+          > Following </div>
         </div>
         <div className = 'social-links-NF'>
-        <div className = 'num-NF'> {followers.length} </div>
-        <div className = 'num-NF'> {following.length} </div>
+        <div
+        onClick = {() => this.onFollowerOpen()}
+        className = 'num-NF'> {followers.length} </div>
+        <div
+        onClick = {() => this.onFollowingOpen()}
+        className = 'num-NF'> {following.length} </div>
         </div>
         </div>
+        <Modal
+        visible ={this.state.followerShow}
+        onCancel = {this.onFollowerCancel}
+        footer = {null}
+        >
+        <span className ='followWord'> Followers</span>
+        <FollowList follow = {followers} />
+        </Modal>
+
+
+
+        <Modal
+        visible = {this.state.followingShow}
+        onCancel = {this.onFollowingCancel}
+        footer = {null}
+        >
+        <span className = 'followWord'>Following</span>
+        <FollowList follow = {following}/>
+        </Modal>
       </div>
     )
   }

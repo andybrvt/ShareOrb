@@ -29,3 +29,8 @@
 .appearBefore{
    z-index: 999;
 }
+
+.miniProfilePic {
+  background-color: red;
+  margin-right: 10px;
+}
