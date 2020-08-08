@@ -2,7 +2,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import 'antd/dist/antd.css';
-import { Select, Radio, Button, Input, Form, List, Avatar } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Select, Radio, Button, Input, List, Avatar } from 'antd';
 import * as dateFns from 'date-fns';
 import './labelCSS/EventSync.css';
 

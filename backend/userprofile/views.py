@@ -99,7 +99,7 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    serializer = serializers.PostUserSerializer(request.user)
+    serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
 
 # Views from here and down are for friends

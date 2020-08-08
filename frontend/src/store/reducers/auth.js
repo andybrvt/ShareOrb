@@ -8,6 +8,12 @@ const initialState = {
   username: null,
   id: null,
   friends: '',
+  posts: [],
+  firstName: '',
+  lastName: '',
+  profilePic: '',
+  following: [],
+  followers: [],
 };
 
 const authStart = (state, action) => {
@@ -39,10 +45,18 @@ const authLogout = (state, action) => {
 };
 
 const addCredentials = (state, action) => {
+  console.log(action)
   return updateObject(state, {
     username: action.username,
     id: action.id,
-    friends: action.friends
+    friends: action.friends,
+    posts: action.posts,
+    firstName: action.firstName,
+    lastName: action.lastName,
+    profilePic: action.profilePic,
+    following: action.following,
+    followers: action.followers
+
   });
 };
 

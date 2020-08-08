@@ -22,10 +22,18 @@
 .profile-image-NF {
   position: absolute;
   /* width: 320px; */
+  height: 146%;
+  left: 50%;
+  bottom: 0%;
+  transform: translateX(-50%);
+}
+
+.default-profile-image-NF{
+  position: absolute;
+  /* width: 320px; */
   height: 100%;
   left: 50%;
   transform: translateX(-50%);
-  transition: 0.5s;
 }
 
 .name-NF {

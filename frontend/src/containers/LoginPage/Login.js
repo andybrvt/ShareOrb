@@ -15,7 +15,9 @@ import NotificationWebSocketInstance from '../../notificationWebsocket';
 import pic1 from './LoginCalendar.svg';
 import pic2 from './loginHelloPic2.svg';
 import 'antd/dist/antd.css';
-import { Input, Button, Checkbox, Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, Checkbox } from 'antd';
 // Function: logs user in
 class LoginForm extends React.Component {
   constructor(props) {
