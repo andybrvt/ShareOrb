@@ -456,12 +456,6 @@ class NewsfeedPost extends React.Component {
         <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
           +{like_people.length-3} people like this.
           <div>
-<<<<<<< HEAD
-=======
-        <Avatar.Group>
-          Hi
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
->>>>>>> 7dde0e241646030fe084e80d5e766c87ae7d8c16
 
         </div>
         </span>
