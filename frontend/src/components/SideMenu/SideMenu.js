@@ -217,7 +217,7 @@ class SideMenu extends React.Component {
 
     <span >
     <Badge
-    style = {{ paddingBottom: '25px', paddingTop: '0px'}}
+
     count = {this.props.notifications.length}>
          <Button
 
@@ -231,8 +231,7 @@ class SideMenu extends React.Component {
 
     <span
     style = {{
-      position: 'relative',
-        left: '20px'
+        marginLeft:'40px',
     }}
     >
          <Dropdown overlay={
@@ -274,7 +273,7 @@ class SideMenu extends React.Component {
            </Menu>}>
 
 
-          <Button>
+
 
            <span >
 
@@ -299,7 +298,7 @@ class SideMenu extends React.Component {
            }
              <span>{this.capitalize(firstName)} {this.capitalize(lastName)}</span>
            </span>
-         </Button>
+
        </Dropdown>
        </span>
 

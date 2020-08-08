@@ -100,6 +100,14 @@ class NewsfeedPost extends React.Component {
 
           </div>)
         }
+        else if((this.props.data.post_images).length==3){
+          return(
+            <div>
+          3 images
+          </div>
+        )
+
+        }
         else{
 
         }
@@ -262,7 +270,7 @@ class NewsfeedPost extends React.Component {
           profilePic != '' ?
           <Avatar
           onClick = {() => this.onProfileClick(this.props.data.user.username)}
-          size="large"
+    
           style = {{
             cursor: 'pointer',
           }}
@@ -352,7 +360,7 @@ class NewsfeedPost extends React.Component {
               profilePic != '' ?
               <Avatar
               onClick = {() => this.onProfileClick(this.props.data.user.username)}
-              size="large"
+
               style = {{
                 cursor: 'pointer',
               }}
@@ -673,7 +681,7 @@ class NewsfeedPost extends React.Component {
          content={<div>
            <Avatar
             shape="square"
-            size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
            <div> 110 followers </div>
          </div>}
 
