@@ -87,12 +87,12 @@ class NewsfeedPost extends React.Component {
           return(
           <div class="TwoImageContainer">
 
-          <div class="imageContainer">
+          <div class="TwoHalfImageContainer">
 
           <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
 
           </div>
-          <div class="imageContainer">
+          <div class="TwoHalfImageContainer">
 
           <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
 
