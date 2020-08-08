@@ -13,6 +13,7 @@ import { commentPic } from './comment.svg';
 import DetailSwitch from '../DetailSwitch.js';
 import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
+import defaultPic from '../../components/images/default.png'
 
 
 class NewsfeedPost extends React.Component {
@@ -233,6 +234,13 @@ class NewsfeedPost extends React.Component {
 
   ContentOfEvent() {
 
+    let profilePic = ''
+
+
+    if (this.props.data.user.profile_picture){
+      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+    }
+
     return(
 
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
@@ -243,18 +251,34 @@ class NewsfeedPost extends React.Component {
          content={<div>
            <Avatar
             shape="square"
-            size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+            size="large"
+            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
+            />
            <div> 110 followers </div>
          </div>}
 
         >
-            <Avatar
-            size="large"
-            style = {{
-              cursor: 'pointer',
-            }}
-            onClick = {() => this.onProfileClick(this.props.data.user.username)}
-            src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+        {
+          profilePic != '' ?
+          <Avatar
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+          size="large"
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={profilePic} alt="avatar" />
+
+          :
+
+          <Avatar
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+          size="large"
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={defaultPic} alt="avatar" />
+
+        }
         </Popover>
            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
              {this.capitalize(this.props.data.user.username)}
@@ -289,6 +313,13 @@ class NewsfeedPost extends React.Component {
 
   ContentOfPic() {
     let like_people = this.props.data.people_like
+    let profilePic = ''
+
+    if (this.props.data.user.profile_picture){
+      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+    }
+
+    console.log(profilePic)
 
     let temp="http://127.0.0.1:8000"+this.props.data.post_images;
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
@@ -317,13 +348,29 @@ class NewsfeedPost extends React.Component {
              </div>}
 
             >
-                <Avatar
-                onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                size="large"
-                style = {{
-                  cursor: 'pointer',
-                }}
-                src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+            {
+              profilePic != '' ?
+              <Avatar
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              size="large"
+              style = {{
+                cursor: 'pointer',
+              }}
+              src={profilePic} alt="avatar" />
+
+              :
+
+              <Avatar
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              size="large"
+              style = {{
+                cursor: 'pointer',
+              }}
+              src={defaultPic} alt="avatar" />
+
+            }
+
+
             </Popover>
 
             <span class="personName" onClick = {() => this.onProfileClick(this.props.data.user.username)}>
@@ -604,6 +651,13 @@ class NewsfeedPost extends React.Component {
   ContentOfPost(){
     console.log(this.props.data)
     let like_people = this.props.data.people_like
+    let profilePic = ''
+
+    if (this.props.data.user.profile_picture){
+      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+    }
+
+
 
     return(
       // if you want anywhere in the post to click on and open modal put OnClickPost in this div
@@ -624,13 +678,27 @@ class NewsfeedPost extends React.Component {
          </div>}
 
         >
-            <Avatar
-            size="large"
-            style = {{
-              cursor: 'pointer',
-            }}
-            onClick = {() => this.onProfileClick(this.props.data.user.username)}
-            src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
+        {
+          profilePic != '' ?
+          <Avatar
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+          size="large"
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={profilePic} alt="avatar" />
+
+          :
+
+          <Avatar
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+          size="large"
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={defaultPic} alt="avatar" />
+
+        }
         </Popover>
            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
              {this.capitalize(this.props.data.user.username)}
@@ -838,6 +906,12 @@ class NewsfeedPost extends React.Component {
 
   ContentofComments(){
 
+    let profilePic = ''
+
+    if (this.props.currentProfilePic){
+      profilePic = 'http://127.0.0.1:8000'+this.props.currentProfilePic
+    }
+
     return(
 
     <div>
@@ -852,11 +926,24 @@ class NewsfeedPost extends React.Component {
           style={{ width: 600 }}
           required={true}
            avatar={
+             profilePic != '' ?
              <Avatar
-               src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-               alt="Han Solo"
-               class="fontTest"
-               />
+             onClick = {() => this.onProfileClick(this.props.currentUser)}
+             size="large"
+             style = {{
+               cursor: 'pointer',
+             }}
+             src={profilePic} alt="avatar" />
+
+             :
+
+             <Avatar
+             onClick = {() => this.onProfileClick(this.props.data.user.username)}
+             size="large"
+             style = {{
+               cursor: 'pointer',
+             }}
+             src={defaultPic} alt="avatar" />
            }
            content={
             <div>
@@ -1020,7 +1107,8 @@ class NewsfeedPost extends React.Component {
 const mapStateToProps = state => {
   return {
     userId: state.auth.id,
-    currentUser: state.auth.username
+    currentUser: state.auth.username,
+    currentProfilePic: state.auth.profilePic
   }
 }
 

@@ -118,7 +118,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['user'] = PostUserSerializer(models.User.objects.get(pk=data['user'])).data
+        data['user'] = UserSerializer(models.User.objects.get(pk=data['user'])).data
         # if (len(data['post_images']) > 0):
         #     print(list(models.ImageModel.objects.filter(imageList = data['id'])))
         #     list = []

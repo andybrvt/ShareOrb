@@ -12,7 +12,7 @@ class Comments extends React.Component {
 
 
   render() {
-    console.log(this.props.newsfeed.data.post_comments)
+    console.log(this.props)
 
     const data = [
       {
@@ -66,6 +66,7 @@ class Comments extends React.Component {
         ),
       },
     ];
+
 
 
     return (
