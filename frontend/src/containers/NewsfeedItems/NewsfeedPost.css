@@ -96,7 +96,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 .TwoHalfImageContainer{
   width:320px;
-  height:325px;
+  height:425px;
 
 
 }
@@ -116,9 +116,14 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 .FirstThirdImageContainer{
   width:320px;
-  height:325px;
+  height:525px;
 
 
+}
+
+.TopandBottomThirdContainer{
+  display: flex;
+  flex-direction: column;
 }
 
 .FirstThirdImageContainer img {
@@ -131,7 +136,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 .SecondThirdImageContainer{
   width:320px;
-  height:162px;
+  height:262px;
 }
 
 .SecondThirdImageContainer img {
@@ -142,7 +147,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 .ThreeThirdImageContainer{
   width:320px;
-  height:325px;
+  height:262px;
 }
 
 .ThreeThirdImageContainer img {

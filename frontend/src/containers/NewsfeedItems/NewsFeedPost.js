@@ -110,16 +110,19 @@ class NewsfeedPost extends React.Component {
               <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
 
               </div>
-              <div class="SecondThirdImageContainer" style={{marginLeft:'3px'}}>
 
-              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
+              <div class="TopandBottomThirdContainer">
+                <div class="SecondThirdImageContainer" style={{marginLeft:'3px'}}>
 
-              </div>
+                <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
 
-              <div class="ThreeThirdImageContainer" style={{marginLeft:'3px'}}>
+                </div>
 
-              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[2]} alt="" /></a>
+                <div class="ThreeThirdImageContainer" style={{marginLeft:'3px'}}>
 
+                <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[2]} alt="" /></a>
+
+                </div>
               </div>
 
             </div>
@@ -1079,8 +1082,9 @@ class NewsfeedPost extends React.Component {
     <DetailSwitch/>
     */}` `
 
+    {/*
     {this.ContentOfEvent()}
-
+    */}
       <div>
 
         <Modal
