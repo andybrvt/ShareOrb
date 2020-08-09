@@ -87,23 +87,42 @@ class NewsfeedPost extends React.Component {
           return(
           <div class="TwoImageContainer">
 
-          <div class="TwoHalfImageContainer">
+            <div class="TwoHalfImageContainer">
 
-          <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
+              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
 
-          </div>
-          <div class="TwoHalfImageContainer">
+              </div>
+                <div class="TwoHalfImageContainer" style={{marginLeft:'3px'}}>
 
-          <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
+              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
 
-          </div>
+            </div>
 
           </div>)
         }
         else if((this.props.data.post_images).length==3){
           return(
             <div>
-          3 images
+            <div class="ThreeImageContainer">
+
+              <div class="FirstThirdImageContainer">
+
+              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
+
+              </div>
+              <div class="SecondThirdImageContainer" style={{marginLeft:'3px'}}>
+
+              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
+
+              </div>
+
+              <div class="ThreeThirdImageContainer" style={{marginLeft:'3px'}}>
+
+              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[2]} alt="" /></a>
+
+              </div>
+
+            </div>
           </div>
         )
 
@@ -270,7 +289,7 @@ class NewsfeedPost extends React.Component {
           profilePic != '' ?
           <Avatar
           onClick = {() => this.onProfileClick(this.props.data.user.username)}
-    
+
           style = {{
             cursor: 'pointer',
           }}
@@ -346,16 +365,19 @@ class NewsfeedPost extends React.Component {
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
       <div>
-        <div style={{padding:20,}}>
+      <div style={{padding:20,}}>
+      <Popover
+         style={{width:'200px'}}
+         content={<div>
+           <Avatar
+            shape="square"
+            size="large"
+            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
+            />
+           <div> 110 followers </div>
+         </div>}
 
-          <Popover
-             style={{width:'200px'}}
-             content={<div>
-               <Avatar shape="square" size="large" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
-               <div> 110 followers </div>
-             </div>}
-
-            >
+        >
             {
               profilePic != '' ?
               <Avatar
@@ -381,18 +403,18 @@ class NewsfeedPost extends React.Component {
 
             </Popover>
 
-            <span class="personName" onClick = {() => this.onProfileClick(this.props.data.user.username)}>
+            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
+              {this.capitalize(this.props.data.user.username)}
+
+              <div>
+              <span class="fb-group-date alignleft" > Tucson, Arizona</span>
+
+               <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
+              </div>
 
 
-                  {this.capitalize(this.props.data.user.username)}
 
-
-               <div>
-               <span class="fb-group-date" style={{marginLeft:50}}> Yosemite National Park</span>
-
-               <span class="fb-group-date" style={{marginLeft:240}}> {this.renderTimestamp(this.props.data.created_at)}</span>
-               </div>
-             </span>
+            </span>
 
             </div>
 
@@ -419,11 +441,11 @@ class NewsfeedPost extends React.Component {
 
     */}
 
-  <div>
+  <div style={{marginTop:'20px'}}>
   {this.revealPhoto()}
 
       </div>
-    <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
+    <p style={{marginLeft:'10px',fontSize: '16px', color:'black', marginTop:'20px'}}>
               {
 
                  ((this.props.data.caption).length>600)?
