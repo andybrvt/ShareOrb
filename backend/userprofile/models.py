@@ -84,7 +84,7 @@ class Post(models.Model):
 
     def post_comments(self):
         # print(Post.objects.filter(user=self).values_list())
-        return (Comment.objects.filter(post=self.id).values())
+        return (Comment.objects.filter(post=self.id).values_list('id', flat = True))
 
     def post_images(self):
         # print(Post.objects.filter(user=self).values_list())
@@ -112,6 +112,7 @@ class Comment(models.Model):
     body = models.TextField(blank = True)
     created_on = models.DateTimeField(auto_now_add=True, blank = True)
     active = models.BooleanField(default=False, blank = True)
+    commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= 'userComment', on_delete = models.CASCADE, null = True)
 
     # class Meta:
     #     ordering = ['created_on']

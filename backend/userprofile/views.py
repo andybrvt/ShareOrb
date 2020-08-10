@@ -338,3 +338,8 @@ class ProfileUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.ProfilePicSerializer
     lookup_field = 'id'
     queryset = models.User.objects.all()
+
+
+class CommentView(generics.ListAPIView):
+    serializer_class = serializers.CommentSerializer
+    queryset = models.Comment.objects.all()
