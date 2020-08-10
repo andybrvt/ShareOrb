@@ -2,7 +2,7 @@ node_modules/
 *.pyc
 
 dump.rdb
-
+*.rdb
 
 **/migrations/
 env/
