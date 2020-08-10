@@ -5,7 +5,7 @@ import {
 DownloadOutlined,
 SearchOutlined
 } from '@ant-design/icons';
-import reqwest from 'reqwest';
+// import reqwest from 'reqwest';
 import React from 'react';
 import { authAxios } from '../../components/util';
 

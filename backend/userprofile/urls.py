@@ -56,5 +56,5 @@ urlpatterns = [
 
 	path('profile/update/<slug:id>', views.ProfileUpdate.as_view(), name = 'update profile'),
 
-	path('test/test', views.ImageView.as_view(), name = 'images test')
+	path('test/test', views.CommentView.as_view(), name = 'images test')
 ]

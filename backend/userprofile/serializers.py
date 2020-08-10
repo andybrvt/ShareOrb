@@ -89,12 +89,17 @@ class FollowSerializer(serializers.ModelSerializer):
 
 
 
+
 class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Comment
         fields = "__all__"
 
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     data['commentUser'] = UserSerializer(models.User.objects.get(id = data['commentUser'])).data
+    #     return data
 
 class ImageSerializer(serializers.ModelSerializer):
 
@@ -106,9 +111,10 @@ class ImageSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
 
     # post_comments = serializers.ReadOnlyField()
-    post_comments = CommentSerializer(many= True, read_only=True)
+    post_comments = serializers.StringRelatedField(many = True)
     # post_images = ImageSerializer(many= True, read_only=True)
     post_images = serializers.StringRelatedField(many = True)
+
 
     class Meta:
         model = models.Post
@@ -119,6 +125,12 @@ class PostSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['user'] = UserSerializer(models.User.objects.get(pk=data['user'])).data
+        print(data['post_comments'])
+        comment_list = []
+        for comments in data['post_comments']:
+            comment = CommentSerializer(models.Comment.objects.get(id = comments)).data
+            comment_list.append(comment)
+        data['post_comments'] = comment_list
         # if (len(data['post_images']) > 0):
         #     print(list(models.ImageModel.objects.filter(imageList = data['id'])))
         #     list = []
