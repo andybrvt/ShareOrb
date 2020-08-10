@@ -96,10 +96,10 @@ class CommentSerializer(serializers.ModelSerializer):
         model = models.Comment
         fields = "__all__"
 
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     data['commentUser'] = UserSerializer(models.User.objects.get(id = data['commentUser'])).data
-    #     return data
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['commentUser'] = FollowUserSerializer(models.User.objects.get(id = data['commentUser'])).data
+        return data
 
 class ImageSerializer(serializers.ModelSerializer):
 
@@ -234,6 +234,7 @@ class FollowerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserFollowing
         fields = ('person_following', 'person_getting_followers', 'created')
+
 
 
 class NotificationSerializer(serializers.ModelSerializer):
