@@ -17,6 +17,7 @@ import MiniCalendar from '../components/MiniCalendar';
 import EventSyncModal from '../components/EventSyncModal';
 import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
+import UserAvatar from './testfile'
 
 
 class PersonalCalendar extends React.Component{
@@ -513,6 +514,7 @@ class PersonalCalendar extends React.Component{
         />
 
         <Tag color="geekblue">Invite Friends</Tag>
+          <UserAvatar />
           <Avatar icon={<UserOutlined />} />
           <Avatar>U</Avatar>
           <Avatar>USER</Avatar>
