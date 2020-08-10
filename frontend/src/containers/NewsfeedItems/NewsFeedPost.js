@@ -3,7 +3,7 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
-import {Icon, Tooltip, Row, Skeleton, Switch, Card,Divider, Avatar, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
+import {Avatar, Icon, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, AntDesignOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
@@ -14,7 +14,7 @@ import DetailSwitch from '../DetailSwitch.js';
 import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
 import defaultPic from '../../components/images/default.png'
-
+import UserAvatar from "./UserAvatar";
 
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -97,6 +97,8 @@ class NewsfeedPost extends React.Component {
               <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
 
             </div>
+
+            <UserAvatar />
 
           </div>)
         }
@@ -525,12 +527,9 @@ class NewsfeedPost extends React.Component {
       {
         (like_people.length>3)?
         <span>
-        {/*
-        <Avatar.Group>
-        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
 
-      </Avatar.Group>
-      */}
+
+
         <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
         <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
         <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
