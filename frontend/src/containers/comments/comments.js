@@ -1,4 +1,4 @@
-import { Comment, Tooltip, List } from 'antd';
+import { Comment, Tooltip, List, Avatar } from 'antd';
 import moment from 'moment';
 import React from "react";
 
@@ -81,7 +81,13 @@ class Comments extends React.Component {
               <Comment
                 actions={item.actions}
                 author={item.name}
-                avatar={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
+                avatar={
+
+                  <Avatar
+                  src={"http://127.0.0.1:8000"+item.commentUser.profile_picture}
+                  alt="Han Solo"
+                  />
+                }
                 content={item.body}
                 datetime={item.datetime}
               />
