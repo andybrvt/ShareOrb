@@ -12,6 +12,7 @@ class User(AbstractUser):
     profile_picture = models.ImageField(('profile_picture'),
                                         upload_to='PostPic/public/profile_pictures/%Y/%m',
                                         blank=True,
+                                        default = '/media/PostPic/public/profile_pictures/default.png'
                                         )
 
     dob = models.DateField(blank=True, null=True, max_length=12)

@@ -343,3 +343,7 @@ class ProfileUpdate(generics.RetrieveUpdateAPIView):
 class CommentView(generics.ListAPIView):
     serializer_class = serializers.CommentSerializer
     queryset = models.Comment.objects.all()
+
+class NotificationView(generics.ListAPIView):
+    serializer_class = serializers.NotificationSerializer
+    queryset = models.CustomNotification.objects.all()
