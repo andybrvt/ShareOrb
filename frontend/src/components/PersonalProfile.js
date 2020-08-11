@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 
-import { Button, Modal } from 'antd';
+import { Button, Modal, Avatar } from 'antd';
 import { authAxios } from '../components/util';
 import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';
@@ -88,14 +88,7 @@ class PersonalProfile extends React.Component{
         return (
           <div className = 'profilePic'>
 
-            {profileImage === null ?
-              <img  className = 'defaultProfile-pic' src = {defaultPicture} alt = 'profilePic' />
-
-              :
-
-              <img  className = 'profile-pic' src = {profileImage} alt = 'profilePic' />
-
-            }
+            <Avatar size = {180} src = {profileImage} />
           </div>
         )
       }

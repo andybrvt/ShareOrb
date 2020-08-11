@@ -89,6 +89,7 @@ class SuggestedFriends extends React.Component {
   };
 
   render() {
+    console.log(this.state)
     const { initLoading, loading, list } = this.state;
     const loadMore =
        !initLoading && !loading ? (
@@ -123,7 +124,7 @@ class SuggestedFriends extends React.Component {
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
                   avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    <Avatar src={item.profile_picture} />
                   }
                   title={<a href="https://ant.design"> {item.username}</a>}
                   description="10 Followers"

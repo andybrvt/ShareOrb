@@ -82,22 +82,29 @@ class UserProfileView extends React.Component {
     if(this.props.profiles){
       const profileList = this.props.profiles
       console.log(profileList)
-      if (profileList[(profileList.length/2)-1]){
+      console.log(profileList.length)
+      console.log(Math.floor(1/2)-1)
+      if (profileList[Math.floor(profileList.length/2)-1]){
         const profile = this.binarysearch(userId, profileList)
+        console.log(profile)
         return profile
       }
     }
   }
 
   binarysearch = (userId, profileList) => {
-    if(userId == profileList[(profileList.length/2)-1].id){
-      return profileList[(profileList.length/2)-1]
-    } else if (userId  > profileList[(profileList.length/2)-1].id ){
-      const mid = profileList.length/2
+    console.log(profileList)
+    if (profileList.length === 1){
+      return profileList[0]
+    }
+    else if(userId == profileList[Math.floor(profileList.length/2)-1].id){
+      return profileList[Math.floor(profileList.length/2)-1]
+    } else if (userId  > profileList[Math.floor(profileList.length/2)-1].id ){
+      const mid = Math.floor(profileList.length/2)
       const profileListEnd = profileList.slice(mid)
       return this.binarysearch(userId, profileListEnd)
     } else if (userId < profileList[(profileList.length/2)-1].id){
-      const mid = profileList.length/2
+      const mid = Math.floor(profileList.length/2)
       const profileListStart = profileList.slice(0, mid)
       return this.binarysearch(userId, profileListStart)
     }
