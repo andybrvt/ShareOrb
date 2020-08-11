@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Statistic, Badge, Modal } from 'antd';
+import { Tabs, Statistic, Badge, Modal, Avatar } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
 import './CurrUserProfile.css';
@@ -134,18 +134,11 @@ class CurrUserProfile extends React.Component{
      console.log(profileImage)
      return (
        <div className = 'curProfilePic'>
-        {profileImage === null ?
-         <img  className = 'defaultProfile-pic' src = {defaultPicture} alt = 'profilePic' />
-         :
 
-         <img  className = 'cur-profile-pic' src = {profileImage} alt = 'profilePic' />
-
-         }
-
+       <Avatar size = {180} src = {profileImage} />
 
 
        </div>
-
      )
    }
 

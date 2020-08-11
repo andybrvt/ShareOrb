@@ -104,6 +104,7 @@ class SideMenu extends React.Component {
     let firstName = ''
     let lastName = ''
 
+    console.log(this.props)
     if (this.props.profilePic){
       profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
     } if (this.props.firstName){
