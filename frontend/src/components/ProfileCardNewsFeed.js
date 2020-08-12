@@ -5,7 +5,7 @@ import ava1 from './images/avatar.jpg';
 import defaultPic from './images/default.png';
 import { connect } from "react-redux";
 import FollowList from './FollowList';
-import { Modal } from 'antd';
+import { Modal, Avatar } from 'antd';
 
 
 
@@ -76,16 +76,7 @@ class ProfileCardNewsFeed extends React.Component{
     return (
       <div className = "profileCard-NF">
         <div className = 'image-box-NF'>
-        {
-          profilePic != '' ?
-          <img className = 'profile-image-NF' src = {profilePic}  alt = 'Avatar'/>
-
-          :
-
-          <img className = 'default-profile-image-NF' src = {defaultPic}  alt = 'Avatar'/>
-
-
-        }
+        <Avatar size = {310} shape = 'square' src = {profilePic} />
 
         </div>
         <div className = 'top-NF'>

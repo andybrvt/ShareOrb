@@ -145,7 +145,8 @@ class NotificationsDropDown extends React.Component{
         <Avatar size = {55} style ={{
           backgroundColor: 'blue',
           verticalAlign: 'middle'}}
-          icon = {<UserOutlined />}
+          // icon = {<UserOutlined />}
+          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -183,7 +184,8 @@ class NotificationsDropDown extends React.Component{
           <Avatar size = {55} style ={{
             backgroundColor: 'lightskyblue',
             verticalAlign: 'middle'}}
-            icon = {<UserOutlined />}
+            // icon = {<UserOutlined />}
+            src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
             >
           </Avatar>
         </div>
@@ -210,7 +212,8 @@ class NotificationsDropDown extends React.Component{
         <Avatar size = {55} style ={{
           backgroundColor: 'orangered',
           verticalAlign: 'middle'}}
-          icon = {<UserOutlined />}
+          // icon = {<UserOutlined />}
+          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -237,7 +240,8 @@ class NotificationsDropDown extends React.Component{
         <Avatar size = {55} style ={{
           backgroundColor: 'limegreen',
           verticalAlign: 'middle'}}
-          icon = {<UserOutlined />}
+          // icon = {<UserOutlined />}
+          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -294,7 +298,8 @@ class NotificationsDropDown extends React.Component{
         style ={{
           backgroundColor: 'darkgrey',
           verticalAlign: 'middle'}}
-          icon = {<UserOutlined />}
+          // icon = {<UserOutlined />}
+          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -322,7 +327,9 @@ class NotificationsDropDown extends React.Component{
         <Avatar size = {55} style ={{
           backgroundColor: 'fuchsia',
           verticalAlign: 'middle'}}
-          icon = {<UserOutlined />}
+          // icon = {<UserOutlined />}
+          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
           >
         </Avatar>
         </div>
@@ -375,7 +382,9 @@ class NotificationsDropDown extends React.Component{
         <Avatar size = {55} style ={{
           backgroundColor: 'orangered',
           verticalAlign: 'middle'}}
-          icon = {<UserOutlined />}
+          // icon = {<UserOutlined />}
+          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
           >
         </Avatar>
         </div>
@@ -403,7 +412,8 @@ class NotificationsDropDown extends React.Component{
             <Avatar size = {55} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
-              icon = {<UserOutlined />}
+              // icon = {<UserOutlined />}
+              src = {"http://127.0.0.1:8000"+notification[i].actor.profile_picture}
               >
             </Avatar>
             </div>
@@ -429,7 +439,9 @@ class NotificationsDropDown extends React.Component{
             <Avatar size = {55} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
-              icon = {<UserOutlined />}
+              // icon = {<UserOutlined />}
+              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
               >
             </Avatar>
             </div>
@@ -455,7 +467,9 @@ class NotificationsDropDown extends React.Component{
             <Avatar size = {55} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
-              icon = {<UserOutlined />}
+              // icon = {<UserOutlined />}
+              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
               >
             </Avatar>
             </div>
