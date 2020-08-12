@@ -413,7 +413,7 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {"http://127.0.0.1:8000"+notification[i].actor.profile_picture}
+              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
               >
             </Avatar>
             </div>

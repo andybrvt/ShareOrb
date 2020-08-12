@@ -63,6 +63,14 @@ export const OPEN_CHANGE_PROFILE_PIC = 'OPEN_CHANGE_PROFILE_PIC';
 export const CLOSE_CHANGE_PROFILE_PIC = 'CLOSE_CHANGE_PROFILE_PIC';
 export const ADD_UNFOLLOWER = 'ADD_UNFOLLOWER';
 export const ADD_UNFOLLOWING = 'ADD_UNFOLLOWING';
+
+
+// This is to set the action social
+export const NEXT_MONTH_SOCIAL = 'NEXT_MONTH_SOCIAL';
+export const PREV_MONTH_SOCIAL = 'PREV_MONTH_SOCIAL';
+
+
+
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

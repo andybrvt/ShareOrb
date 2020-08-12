@@ -15,34 +15,14 @@ import { UserOutlined } from '@ant-design/icons';
 
 
 class SocialCalendar extends React.Component{
-// new Date is form DateFns and it give you the current date and month
-// SelectedDate will be the first day of the month
+
   state = {
     currentMonth: new Date(),
     selectedDate: new Date(),
     events: [],
   }
 
-  // showDrawer = (e) => {
-  //   e.preventDefault()
-  //   this.setState({
-  //     drawerVisible: true,
-  //   });
-  // };
 
-  onClose = () => {
-    this.setState({
-      drawerVisible: false,
-    });
-  };
-  componentDidMount(){
-    // const selectedYear = this.props.match.params.year;
-    // const selectedMonth = this.props.match.params.month;
-    // const newDate = [selectedYear, selectedMonth]
-    // const newSelectedDate = new Date(newDate)
-    // this.props.getSelectedDate(newSelectedDate)
-    // this.props.getEvents()
-  }
 
   componentWillReceiveProps(newProps){
     // you bascially want to check if the date in props and the date in
@@ -56,12 +36,14 @@ class SocialCalendar extends React.Component{
     // Instead of reloading the data everytime, the editing of the events is done in the
     // redux
   }
-  // When working with dates it is important that you format the
-  // the date properly
+
+
+
   renderHeader() {
+    // This will be used to render the header (the month and year in the calendar)
+    
     const dateFormat = "MMMM yyyy"
-    // for formatting using moment or whatever you do
-    // .format('give a date here', what kind of formatting here)
+
     return (
       <div className= "header row flex-middle">
         <div className = "col col-start">
@@ -212,19 +194,7 @@ class SocialCalendar extends React.Component{
   this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
-// So what are going to do with this is get the selected month and get the first day of the
-// month and then get the first day of the week and loop through it till you get the first day
-// of the week for the end of the month
 
-  onWeekClick = startDayWeek => {
-    const selectedYear = dateFns.getYear(startDayWeek).toString()
-    const selectedMonth = (dateFns.getMonth(startDayWeek)+1).toString()
-    const selectedDay = dateFns.getDate(startDayWeek).toString()
-    this.setState({
-      selectedDate: startDayWeek
-    })
-    this.props.history.push('/personalcalendar/w/'+selectedYear+'/'+selectedMonth+'/'+selectedDay)
-  }
 
 
 

@@ -296,7 +296,7 @@ class CurrUserProfile extends React.Component{
            <div className = 'profile-slider'></div>
          </div>
          <div className = 'profile-tabPanel'>
-           <SocialCalendar />
+           <SocialCalendar {...this.props}/>
           </div>
          <div className = 'profile-tabPanel'> Tab 2: Content </div>
          <div className = 'profile-tabPanel'> Tab 3: Content </div>
