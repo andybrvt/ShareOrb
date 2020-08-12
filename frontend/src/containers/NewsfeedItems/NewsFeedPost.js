@@ -14,7 +14,8 @@ import DetailSwitch from '../DetailSwitch.js';
 import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
 import defaultPic from '../../components/images/default.png'
-import UserAvatar from "./UserAvatar";
+import UserAvatar from './UserAvatar'
+
 
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -98,7 +99,7 @@ class NewsfeedPost extends React.Component {
 
             </div>
 
-            <UserAvatar />
+
 
           </div>)
         }
@@ -472,7 +473,13 @@ class NewsfeedPost extends React.Component {
                     </p>
                    <p class="innerSeeMore " style={{fontSize:'14px',}}>
                    {this.props.data.caption}
+
                    </p>
+
+                   <div>
+                    <UserAvatar />
+
+                   </div>
                   </div>
                }
 
@@ -491,15 +498,24 @@ class NewsfeedPost extends React.Component {
           (like_people.length == 2) ?
           <span>
 
+          <Tooltip title="Andy Le" placement="top">
             <Avatar
-              size="small"
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              style={{marginLeft:'5px', marginRight:'5px'}}
-              />
+              style={{
+                backgroundColor: '#f56a00',
+              }}
+            >
+            K
+          </Avatar>
+          </Tooltip>
 
             <Avatar
-            src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginLeft:'5px', marginRight:'5px'}}>U</Avatar>
-            You and 1 other like this.
+              src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80"
+              style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginLeft:'5px', marginRight:'5px'}}>U
+
+            </Avatar>
+
+
+
           </span>
 
 
@@ -749,14 +765,16 @@ class NewsfeedPost extends React.Component {
 
 
 
-
     <p style={{color:'black'}} class="whiteSpacePost">
               {
+
 
                  ((this.props.data.caption).length>600)?
 
                  <div class="outerSeeMore">
                    <span class="innerSeeMore">
+
+
                    {this.props.data.caption.substring(0,550)}
 
 
@@ -769,6 +787,7 @@ class NewsfeedPost extends React.Component {
 
 
                  {this.props.data.caption}
+
 
                  </div>
                }
