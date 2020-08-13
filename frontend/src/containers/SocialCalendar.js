@@ -7,11 +7,13 @@ import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
 
 import * as navActions from '../store/actions/nav';
 import * as calendarActions from '../store/actions/calendars';
+import * as socialCalActions  from '../store/actions/socialCalendar';
 import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
+import ava1 from '../components/images/avatar.jpg'
 
 
 class SocialCalendar extends React.Component{
@@ -27,12 +29,12 @@ class SocialCalendar extends React.Component{
   componentWillReceiveProps(newProps){
     // you bascially want to check if the date in props and the date in
     // the url is the safe, if they are not --> you gotta change it
-    if (this.props.currentDate !== newProps.currentDate){
-
-      const year = dateFns.getYear(newProps.currentDate)
-      const month = dateFns.getMonth(newProps.currentDate)
-      this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
-    }
+    // if (this.props.currentDate !== newProps.currentDate){
+    //
+    //   const year = dateFns.getYear(newProps.currentDate)
+    //   const month = dateFns.getMonth(newProps.currentDate)
+    //   this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
+    // }
     // Instead of reloading the data everytime, the editing of the events is done in the
     // redux
   }
@@ -41,7 +43,7 @@ class SocialCalendar extends React.Component{
 
   renderHeader() {
     // This will be used to render the header (the month and year in the calendar)
-    
+
     const dateFormat = "MMMM yyyy"
 
     return (
@@ -160,7 +162,13 @@ class SocialCalendar extends React.Component{
             }`}
             key = {day}
           >
+          <Avatar
+          className = 'imgCover'
+          size = {250}
+          shape= 'square'
+          src = {ava1} />
           <span className = "bg"> {formattedDate}</span>
+
         </div>
         )}
       toDoStuff = []
@@ -236,8 +244,8 @@ class SocialCalendar extends React.Component{
 
 const mapStateToProps = state => {
   return{
-    currentDate: state.calendar.date,
-    events: state.calendar.events,
+    currentDate: state.socialCal.socialDate,
+    events: state.socialCal.socialEvents,
   }
 }
 
@@ -246,8 +254,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
-    nextMonth: () => dispatch(calendarActions.nextMonth()),
-    prevMonth: () => dispatch(calendarActions.prevMonth()),
+    nextMonth: () => dispatch(socialCalActions.nextMonthSocial()),
+    prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
 
   }
 }

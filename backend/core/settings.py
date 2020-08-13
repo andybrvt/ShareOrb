@@ -56,7 +56,8 @@ INSTALLED_APPS =[
     'friends',
     'notification',
     'chat',
-    'mycalendar'
+    'mycalendar',
+    'mySocialCal'
 
 ]
 

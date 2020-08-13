@@ -1,0 +1,76 @@
+from django.db import models
+from django.conf import settings
+# Create your models here.
+from django.db import models
+from django.utils import timezone
+
+
+#These models are used to work with the social cal and all its backend
+#functions
+class SocialCalCell(models.Model):
+    # This will be for each of the days. It will be created everytime the person clips
+    # post, or upload pictures up to the picture. When this is created then you would
+    # have to like the foreign key to the social cal items and events
+
+    #There will be a foriegn key that calls all the events and post, comments, and likes
+    # that are related to the socialCalCell
+
+    # We would probally use a get_or_create for this model later
+    # This would just be the owner of the social calendar
+    socialCalUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'social_cal_user', on_delete= models.CASCADE)
+    # We will use this to know where to put the
+    socialCaldate = models.DateField(auto_now_add = True)
+    # This will cover the like of the day
+    people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
+
+
+
+
+
+
+class SocialCalItems(models.Model):
+    # The social calendar items will include all the pictures, post, and social
+    # events that will be included
+
+    # So since there will be different items for the social cal, I want to h ave differnt
+    # types
+    # The types will be:
+        # post_pic
+        # post_no_pic
+        # picture
+    socailItemType = models.CharField(max_length = 30, default = 'post_pic')
+    socialItemCaption = models.CharField(max_length = 1000, blank = True)
+    # So we would need a created_at to determine where to put the social cal item
+    # the only time this created_at will not be used and instead use the start date and
+    # end date will be when we are creating a social event
+    created_at = models.DateTimeField(auto_now_add = True)
+
+    # The creator will be the person that actully created the picture
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'item_creator', on_delete = models.CASCADE)
+    # The itemUser will be the person that has the item in their social calendar
+    itemUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'item_user', on_delete = models.CASCADE )
+    # Images can be uploaded when the day has a picture or a post
+    itemImage = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
+
+    # Everything from here down would be for the events
+
+class SocialCalEvent(models.Model):
+    # This modelis for the social events taht you are gonna post for the public
+
+    #This field will be for all the people who are gonna attend the event
+    persons = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    #this will be the host of the event
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= 'social_host', on_delete = models.CASCADE)
+    # This will be the title of the event
+    title = models.CharField(max_length = 222)
+    content = models.TextField(blank = True)
+    start_time = models.DateTimeField(default = timezone.now, blank = False)
+    end_time = models.DateTimeField(default = timezone.now, blank = False)
+    location = models.CharField(max_length = 255, blank = True)
+
+class SocialCalComment(models.Model):
+    # The calCell will be the foregin key that connects the comments to the correct day
+    calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialComments')
+    body = models.TextField(blank = True)
+    created_on = models.DateField(auto_now_add = True)
+    commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'socialUserComment', on_delete = models.CASCADE, null = True )

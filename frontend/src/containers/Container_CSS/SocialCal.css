@@ -43,9 +43,9 @@
 
 .socialCalendar .days{
   width: 1750px;
-  font-weight: 400;
+  font-weight: 100;
   color: ;
-  font-size: 100%;
+  font-size: 20px;
   padding: .75em 0;
   /* border-top: 1px solid var(--border-color); */
   border-bottom: 1px solid var(--border-color);
@@ -54,6 +54,7 @@
 }
 
 .socialCalendar .body {
+  /* This is to control the width of the calendar body */
   background-color: white;
   width: 1750px;
 }
@@ -61,19 +62,37 @@
   border-bottom: 1px solid var(--border-color);
 }
 .socialCalendar .body .row .cell{
+  /* This is to control the height of each cell */
   /* background-image: url("https://images.unsplash.com/photo-1594643566940-893b456ae452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"); */
   position: relative;
-  height: 150px;
+  height: 250px;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
+  text-align: left;
+  align-items: center;
   /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
+}
+
+.socialCalendar .body .row .cell .bg{
+  color: white;
+  font-weight: 100;
+  font-size: 15px;
+  position: absolute;
+  left: 50%;
+  z-index: 3;
 }
 
 .socialCalendar .body .row .cell-img {
   /* width: 10px; */
   /* height: 150px; */
+}
+
+.socialCalendar .body .row .cell .imgCover {
+  position: absolute;
+  /* left: 20px; */
+  left: 0%
 }
 
 .img {
