@@ -59,6 +59,7 @@ class SideMenu extends React.Component {
     super();
     this.state = {
       dataSource: [],
+      collapsed:true,
     };
   }
   toggle = () => {
@@ -128,16 +129,17 @@ class SideMenu extends React.Component {
         position: 'fixed',
 
       }}
-      className="appearBefore">
+      className="SideMenuAppearBefore">
 
-              <img  class="logo" src={testPic}  style={{width:80, height:80}} />
+              <img  class="logo" src={testPic}  style={{width:100, height:100}} />
 
 
           <Menu style={{height:1000}}
            defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           mode="inline"
-          theme="blue"
+          theme="dark"
+          class="ant-menu"
           >
 
 
@@ -148,7 +150,7 @@ class SideMenu extends React.Component {
           </Menu.Item>
 
 
-            <Menu.Item key="2"  icon={<VideoCameraOutlined />}  style={{height:50}}>
+            <Menu.Item key="2" style={{height:50}}>
               <UserOutlined />
               <span> Explore </span>
               <Link to={"/explore"} />
@@ -183,9 +185,10 @@ class SideMenu extends React.Component {
 
       <Layout>
 
-      <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', marginLeft:300, background:'white' }}>
+      <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', background:'white' }}>
       <span style = {{
-        color: 'black'
+        color: 'black',
+        marginLeft:'10%',
       }}>
         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
           className: 'trigger',
@@ -203,7 +206,7 @@ class SideMenu extends React.Component {
            onSelect={this.handleSelect}
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={500}
-           style={{ marginLeft:150, marginLeft:100, marginRight:400, width: 350  }}
+           style={{ marginLeft:150, marginLeft:'25%', marginRight:'25%', width: 450  }}
          >
         <Input.Search size="large" placeholder="Search" />
       </AutoComplete>

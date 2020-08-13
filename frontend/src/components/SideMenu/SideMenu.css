@@ -20,6 +20,9 @@
 }
 
 
+.ant-menu{
+background: #f5222d;
+}
 
 .site-layout .site-layout-background {
   background: #fff;
@@ -27,7 +30,11 @@
 }
 
 .appearBefore{
-   z-index: 999;
+   z-index: 3;
+}
+
+.SideMenuAppearBefore{
+   z-index: 5;
 }
 
 .miniProfilePic {

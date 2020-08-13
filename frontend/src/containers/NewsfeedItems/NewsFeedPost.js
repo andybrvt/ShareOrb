@@ -526,11 +526,25 @@ class NewsfeedPost extends React.Component {
               (like_people.length == 1)?
               <span>
 
-                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />You like this
+                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
               </span>
               :
               <span>
-                You and {like_people.length - 1} person like this.
+              <Avatar.Group
+              >
+                 <Avatar src="https://images.unsplash.com/photo-1542909192-2f2241a99c9d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" />
+                 <Tooltip title="Andy Le" placement="top">
+                   <Avatar
+                     style={{
+                       backgroundColor: '#f56a00',
+                     }}
+                   >
+                   K
+
+
+                   </Avatar>
+                   </Tooltip>
+                 </Avatar.Group>
               </span>
             }
           </span>
@@ -819,7 +833,7 @@ class NewsfeedPost extends React.Component {
               (like_people.length == 1)?
               <span>
 
-                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />You like this
+                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />'You like this'
               </span>
               :
               <span>

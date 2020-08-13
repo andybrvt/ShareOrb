@@ -114,7 +114,7 @@ class SideMenu extends React.Component {
           </Menu.Item>
 
 
-            <Menu.Item key="2"  icon={<VideoCameraOutlined />}>
+            <Menu.Item key="2">
               <UserOutlined />
               <span> Explore </span>
               <Link to={"/userview"} />
