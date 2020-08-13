@@ -38,7 +38,9 @@ class SocialCalItems(models.Model):
         # post_pic
         # post_no_pic
         # picture
-    socailItemType = models.CharField(max_length = 30, default = 'post_pic')
+
+    # MAKE SURE TO FIX THE NAME WHEN YOU HAVE THE TIME
+    socialItemType = models.CharField(max_length = 30, default = 'post_pic')
     socialItemCaption = models.CharField(max_length = 1000, blank = True)
     # So we would need a created_at to determine where to put the social cal item
     # the only time this created_at will not be used and instead use the start date and
@@ -51,6 +53,10 @@ class SocialCalItems(models.Model):
     itemUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'item_user', on_delete = models.CASCADE )
     # Images can be uploaded when the day has a picture or a post
     itemImage = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
+
+    #    #This will be the foreign key that connects the pictures and post with the correct calCell
+
+    calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialPost', null = True)
 
     # Everything from here down would be for the events
 
@@ -67,6 +73,10 @@ class SocialCalEvent(models.Model):
     start_time = models.DateTimeField(default = timezone.now, blank = False)
     end_time = models.DateTimeField(default = timezone.now, blank = False)
     location = models.CharField(max_length = 255, blank = True)
+
+    #This will be the foreign key that connects the events with the correct calCell
+    calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialEvents', null = True)
+
 
 class SocialCalComment(models.Model):
     # The calCell will be the foregin key that connects the comments to the correct day
