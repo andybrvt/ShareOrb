@@ -28,6 +28,7 @@ class NewsfeedPost extends React.Component {
       commentsCondition:false,
       show:false,
       stepCount:0,
+      avatarColor:'',
     }
   }
 
@@ -72,7 +73,6 @@ class NewsfeedPost extends React.Component {
     }
 
   }
-
 
   revealPhoto = () => {
 
@@ -139,7 +139,12 @@ class NewsfeedPost extends React.Component {
 
  }
 
+ randomAvatarColor = () => {
 
+   this.setState({
+     avatarColor:'#ff0000',
+   });
+ };
 
   showModal = () => {
     this.setState({
@@ -477,7 +482,7 @@ class NewsfeedPost extends React.Component {
                    </p>
 
                    <div>
-                    <UserAvatar />
+
 
                    </div>
                   </div>
@@ -553,20 +558,14 @@ class NewsfeedPost extends React.Component {
 
       :
 
+
       <span>
+      { /* If the user is not included in the likes */}
       {
         (like_people.length>3)?
         <span>
 
-
-
-        <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
-        <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
-        <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
-          +{like_people.length-3} people like this.
-          <div>
-
-        </div>
+          <UserAvatar/>
         </span>
 
         :
@@ -585,13 +584,37 @@ class NewsfeedPost extends React.Component {
                 {
                   (like_people.length==1)?
                   <span>
-                  <Avatar src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar> likes this
+                  <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
                   </span>
 
 
                   :
                   <span>
-                  2  people like this
+
+                  {
+                    (like_people.length==2)?
+
+                      <Avatar.Group>
+
+                      <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                      <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+
+
+                      </Avatar.Group>
+
+                      :
+                      <Avatar.Group>
+
+                      <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                      <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                      <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+
+
+                      </Avatar.Group>
+
+
+
+                    }
                   </span>
 
                 }
