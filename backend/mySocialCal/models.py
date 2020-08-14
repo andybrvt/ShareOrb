@@ -23,7 +23,18 @@ class SocialCalCell(models.Model):
     # This will cover the like of the day
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
 
+    def get_socialCalItems(self):
+        #This will call all the social cal events like pictures and post and such and will return a list of all the ids
+        # which then I will go into the serializers and do to representation to return all the needed values
+        return SocialCalItems.objects.filter(calCell = self).values_list('id', flat = True)
 
+    def get_socialCalEvent(self):
+        # The processs for the Cal event will be the same as that of the socialCalItems
+        return SocialCalEvent.objects.filter(calCell = self).values_list('id', flat = True)
+
+    def get_socialCalComment(self):
+
+        return SocialCalComment.objects.filter(calCell = self).values_list('id', flat = True)
 
 
 
