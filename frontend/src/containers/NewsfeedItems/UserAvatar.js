@@ -11,22 +11,20 @@ class UserAvatar extends React.Component{
     }
   }
 
-
-  randomAvatarColor = (e) => {
-    var randomColor = require('randomcolor'); // import the script
-    var color = randomColor();
+  componentDidMount(){
     this.setState({
-      avatarColor:'#ff0000',
+      avatarColor:'red',
     });
-  };
+  }
+
 
 
   render(){
     return (
       <div>
-        {this.randomAvatarColor}
-        <Avatar.Group
 
+        <Avatar.Group
+        maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
         maxCount={3}
         >
 
@@ -34,7 +32,6 @@ class UserAvatar extends React.Component{
           <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
           <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
           <Avatar
-          style={{backgroundColor: this.state.avatarColor}}
           src="https://images.unsplash.com/photo-1597019558926-3eef445fdf60?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
 
 
