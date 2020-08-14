@@ -7,7 +7,8 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
 from userprofile.models import CustomNotification
-
+from mySocialCal.serializers import SocialCalCellSerializer
+from mySocialCal.models import SocialCalCell
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
 class PostUserSerializer(serializers.ModelSerializer):
@@ -44,6 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
     get_posts = serializers.StringRelatedField(many = True)
     get_following = serializers.StringRelatedField(many = True)
     get_followers = serializers.StringRelatedField(many = True)
+    get_socialCal = serializers.StringRelatedField(many = True)
+
 
     class Meta:
         model = models.User
@@ -56,12 +59,14 @@ class UserSerializer(serializers.ModelSerializer):
          "get_posts",
          'get_following',
          'get_followers',
+         'get_socialCal',
          'friends',
          'slug')
     def to_representation(self, instance):
         data = super().to_representation(instance)
         followerList = []
         followingList = []
+        socialCalList = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followingList.append(userPerson)
@@ -69,8 +74,14 @@ class UserSerializer(serializers.ModelSerializer):
         for user in data['get_followers']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followerList.append(userPerson)
+
+        for socialCells in data['get_socialCal']:
+            socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
+            socialCalList.append(socialCell)
+
         data['get_following'] = followingList
         data['get_followers'] = followerList
+        data['get_socialCal'] = socialCalList
         return data
 
 

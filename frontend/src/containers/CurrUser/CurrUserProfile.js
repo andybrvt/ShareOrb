@@ -136,6 +136,7 @@ class CurrUserProfile extends React.Component{
        <div className = 'curProfilePic'>
 
        <Avatar size = {180} src = {profileImage} />
+       {this.renderEditButton()}
 
 
        </div>
@@ -312,7 +313,6 @@ class CurrUserProfile extends React.Component{
          <div className = 'profilePage'>
 
          {this.renderProfilePic()}
-         {this.renderEditButton()}
          {this.onRenderProfileInfo()}
          {this.onRenderTabs()}
          <Modal
