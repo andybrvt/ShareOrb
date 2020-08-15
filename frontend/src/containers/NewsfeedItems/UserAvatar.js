@@ -20,11 +20,14 @@ class UserAvatar extends React.Component{
 
 
   render(){
+    var num=Math.floor(Math.random() * 5);
+    const avatarColor=['#fde3cf', '#1890ff', '#13c2c2','#722ed1']
+    const textColor=['#f56a00', '#ffffff', '#ffffff', '#ffffff']
     return (
       <div>
 
         <Avatar.Group
-        maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+        maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
         maxCount={3}
         >
 

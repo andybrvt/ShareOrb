@@ -476,7 +476,7 @@ class NewsfeedPost extends React.Component {
                    <p class="innerSeeMore boldedText" style={{fontSize:'14px', marginRight:'5px'}}>
                     {this.props.data.user.username}
                     </p>
-                   <p class="innerSeeMore " style={{fontSize:'14px',}}>
+                   <p class="innerSeeMore " style={{fontSize:'16px',}}>
                    {this.props.data.caption}
 
                    </p>
@@ -503,21 +503,18 @@ class NewsfeedPost extends React.Component {
           (like_people.length == 2) ?
           <span>
 
-          <Tooltip title="Andy Le" placement="top">
-            <Avatar
-              style={{
-                backgroundColor: '#f56a00',
-              }}
-            >
-            K
-          </Avatar>
-          </Tooltip>
+          <Avatar.Group>
 
-            <Avatar
-              src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80"
-              style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginLeft:'5px', marginRight:'5px'}}>U
+          <Avatar
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={profilePic} alt="avatar" />
+          <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
 
-            </Avatar>
+
+          </Avatar.Group>
 
 
 
@@ -530,8 +527,13 @@ class NewsfeedPost extends React.Component {
             {
               (like_people.length == 1)?
               <span>
+              <Avatar
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              style = {{
+                cursor: 'pointer',
+              }}
+              src={profilePic} alt="avatar" />
 
-                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />
               </span>
               :
               <span>
@@ -797,7 +799,6 @@ class NewsfeedPost extends React.Component {
 
       </div>
 
-      <Divider/>
 
 
 
@@ -820,7 +821,7 @@ class NewsfeedPost extends React.Component {
                    <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                  </div>
                  :
-                 <div class="whiteSpacePost innerSeeMore"  style={{padding:'50px', fontSize:'14px',}} >
+                 <div class="whiteSpacePost innerSeeMore"  style={{padding:'50px', fontSize:'20px',}} >
 
 
                  {this.props.data.caption}
@@ -1156,16 +1157,13 @@ class NewsfeedPost extends React.Component {
           <div class="modalInnerContainer">
 
           {
-                  this.props.data.post_images ?
+                  this.props.data.post_images.length>0 ?
 
                <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
 
           //
                   :
-          //         <div></div>
-          //
-          //
-          //ContentOfPic
+
           <p  class="modalCardBorder modalInnerPicture"> {this.ContentOfPost()} </p>
           }
             <p  class="modalCardBorder">{this.ContentofComments()}</p>
@@ -1175,7 +1173,7 @@ class NewsfeedPost extends React.Component {
       </div>
 
       {
-              this.props.data.post_images ?
+            this.props.data.post_images.length>0 ?
            <p>{this.ContentOfPic()}</p>
 
       //
