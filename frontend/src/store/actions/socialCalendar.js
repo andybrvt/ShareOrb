@@ -12,3 +12,16 @@ export const prevMonthSocial = () => {
     type: actionTypes.PREV_MONTH_SOCIAL
   }
 }
+
+export const openSocialModal = socialObject => {
+  return {
+    type: actionTypes.OPEN_SOCIAL_MODAL,
+    socialObject: socialObject
+  }
+}
+
+export const closeSocialModal = () => {
+  return {
+    type: actionTypes.CLOSE_SOCIAL_MODAL
+  }
+}

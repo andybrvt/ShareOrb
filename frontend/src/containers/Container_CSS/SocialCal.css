@@ -76,6 +76,10 @@
   transition: 0.25s ease-out;
 }
 
+.socialCalendar .body .row .selected {
+  border: 2px solid blue;
+}
+
 .socialCalendar .body .row .cell:first-child{
   border-left: 1px solid var(--border-color)
 }
@@ -90,6 +94,13 @@
   z-index: 3;
 }
 
+.socialCalendar .body .row .cell .plusButton{
+  position:absolute;
+  left: 45%;
+  top: 45%;
+  color: white;
+}
+
 .socialCalendar .body .row .cell .bgD{
   color: white;
   font-weight: 100;
@@ -99,10 +110,15 @@
   z-index: 3;
 }
 
-.socialCalendar .body .row .cell-img {
+.socialCalendar .body .row .hoverCell:hover{
   /* width: 10px; */
   /* height: 150px; */
+  background-color: #D3D3D3cc;
+  /* background-color: #000000cc; */
+  /* filter: brightness(60%); */
 }
+
+
 
 .socialCalendar .body .row .cell .imgCover {
   position: absolute;

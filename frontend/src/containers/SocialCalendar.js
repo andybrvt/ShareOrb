@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import './Container_CSS/SocialCal.css';
 import axios from 'axios';
 import { authAxios } from '../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Modal } from 'antd';
 
 import * as navActions from '../store/actions/nav';
 import * as calendarActions from '../store/actions/calendars';
@@ -12,8 +12,9 @@ import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined } from '@ant-design/icons';
 import ava1 from '../components/images/avatar.jpg'
+import SocialCalCellInfo from '../components/SocialCalCellInfo';
 
 
 class SocialCalendar extends React.Component{
@@ -143,31 +144,47 @@ class SocialCalendar extends React.Component{
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
         if (toDoStuff.length > 0){
-          console.log(toDoStuff[0].get_socialCalItems[0].itemImage)
+          // The socialEvents should only have 1 item because it holds just the single
+          // social cell
+          const socialEvents = toDoStuff
           days.push(
             <div
-              className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-              : dateFns.isSameDay(day, currentMonth) ?
+              className ={`col cell ${dateFns.isSameDay(day, currentMonth) ?
             "selected": ""
               }`}
               key = {day}
             >
-            <Avatar
-            className = 'imgCover'
-            size = {250}
-            shape= 'square'
-            src = {'http://127.0.0.1:8000'+toDoStuff[0].get_socialCalItems[0].itemImage} />
-            <span className = "bgD"> {formattedDate}</span>
+            {
+              toDoStuff[0].coverPic ?
+              <div
+              onClick = {() => this.props.openSocialModal(socialEvents)}>
+              <Avatar
+              className = 'imgCover'
+              size = {250}
+              shape= 'square'
+              src = {'http://127.0.0.1:8000'+toDoStuff[0].coverPic} />
+              <span className = "bgD"> {formattedDate}</span>
+              </div>
+
+              :
+
+              <span className = "bg"> {formattedDate}</span>
+            }
+
 
           </div>
-        )} else {days.push(
+        )} else {
+          const socialEvent = []
+          days.push(
           <div
-            className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-            : dateFns.isSameDay(day, currentMonth) ?
+            className ={`col cell hoverCell${ dateFns.isSameDay(day, currentMonth) ?
           "selected": ""
             }`}
             key = {day}
+            onClick = {() => this.props.openSocialModal(socialEvent)}
+
           >
+          <PlusOutlined className = 'plusButton'/>
           <span className = "bg"> {formattedDate}</span>
 
         </div>
@@ -245,6 +262,10 @@ class SocialCalendar extends React.Component{
             {this.renderDays()}
             {this.renderCells(socialCalCell)}
           </div>
+
+
+            <SocialCalCellInfo />
+        
         </div>
     )
   }
@@ -255,6 +276,7 @@ const mapStateToProps = state => {
   return{
     currentDate: state.socialCal.socialDate,
     events: state.socialCal.socialEvents,
+    showSocialModal: state.socialCal.showSocialModal
   }
 }
 
@@ -265,6 +287,8 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(socialCalActions.nextMonthSocial()),
     prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
+    openSocialModal: socialObject => dispatch(socialCalActions.openSocialModal(socialObject)),
+    closeSocialModal: () => dispatch(socialCalActions.closeSocialModal())
 
   }
 }

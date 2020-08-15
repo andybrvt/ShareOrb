@@ -68,6 +68,8 @@ export const ADD_UNFOLLOWING = 'ADD_UNFOLLOWING';
 // This is to set the action social
 export const NEXT_MONTH_SOCIAL = 'NEXT_MONTH_SOCIAL';
 export const PREV_MONTH_SOCIAL = 'PREV_MONTH_SOCIAL';
+export const OPEN_SOCIAL_MODAL = 'OPEN_SOCIAL_MODAL';
+export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
 
 
 

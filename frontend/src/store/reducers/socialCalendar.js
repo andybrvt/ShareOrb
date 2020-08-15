@@ -4,8 +4,11 @@ import * as dateFns from 'date-fns';
 
 
 const initialState = {
-  socialEvents: [],
-  socialDate: new Date()
+  // The socialEvents will be the information inside the modal
+  // for each day cell
+  socialObject: [],
+  socialDate: new Date(),
+  showSocialModal: false
 }
 
 const nextMonthSocial = (state, action) => {
@@ -20,12 +23,29 @@ const prevMonthSocial = (state, action) => {
   })
 }
 
+const openSocialModal = (state, action) => {
+  return updateObject ( state, {
+    showSocialModal: true,
+    socialObject: action.socialObject
+  })
+}
+
+const closeSocialModal = (state, action) => {
+  return updateObject (state, {
+    showSocialModal: false
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
       return nextMonthSocial(state, action)
     case actionTypes.PREV_MONTH_SOCIAL:
       return prevMonthSocial(state, action)
+    case actionTypes.OPEN_SOCIAL_MODAL:
+      return openSocialModal(state, action)
+    case actionTypes.CLOSE_SOCIAL_MODAL:
+      return closeSocialModal(state, action)
     default:
       return state;
   }
