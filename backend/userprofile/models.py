@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractUser, AnonymousUser
 from typing import Union
 from django.db.models.signals import post_save
 from django.utils.timezone import now
+from mySocialCal.models import SocialCalCell
+
 
 class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
@@ -36,7 +38,9 @@ class User(AbstractUser):
     def get_followers(self):
         return UserFollowing.objects.filter(person_getting_followers = self).values_list('person_following__username', flat= True)
 
-
+    def get_socialCal(self):
+        # This will pull all the socialCallcell for each use and will be used to put in the social calendar
+        return SocialCalCell.objects.filter(socialCalUser = self).values_list('id', flat = True)
 
     def __str__(self):
         return self.username

@@ -497,6 +497,7 @@ class NotificationsDropDown extends React.Component{
       // getPopupContainer={() => document.getElementById("position")}
       style = {{
         position: 'fixed',
+        right: '20px',
         bottom : '63px'
       }}
       onClick = {this.handleMenuClick}>
@@ -536,6 +537,7 @@ class NotificationsDropDown extends React.Component{
         overlay={this.renderNotifications()}
         onVisibleChange={this.handleVisibleChange}
         visible={this.state.visible}
+        placement = 'bottomRight'
         trigger = {['click']}
       >
 

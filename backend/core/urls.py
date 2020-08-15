@@ -28,7 +28,8 @@ urlpatterns = [
     path('friends/', include('friends.urls')),
     path('notification/', include('notification.urls')),
     path('chat/', include('chat.api.urls')),
-    path('mycalendar/', include('mycalendar.urls'))
+    path('mycalendar/', include('mycalendar.urls')),
+    path('mySocialCal/', include('mySocialCal.urls'))
 
     # path('infinite-api/', ReactInfiniteView.as_view(), name='infinite-react' )
     # path('api/', include('userprofile.urls')),
