@@ -49,6 +49,7 @@
   font-size:14px;
   color:gray;
   margin-left: 20px;
+  margin-top:10px;
 }
 
 body{
@@ -169,12 +170,11 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 .box-buttons > .row {
 
-  margin-top: 20px;
+  margin-top: 10px;
   border-bottom: 1px solid #F4F4F4;
   border-top: 1px solid #F4F4F4;
 
   overflow: hidden;
-  padding: 0;
   position: relative;
 
 

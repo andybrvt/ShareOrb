@@ -457,39 +457,7 @@ class NewsfeedPost extends React.Component {
   {this.revealPhoto()}
 
       </div>
-    <p style={{marginLeft:'10px',fontSize: '16px', color:'black', marginTop:'20px'}}>
-              {
 
-                 ((this.props.data.caption).length>600)?
-
-                 <div class="outerSeeMore">
-
-                   <span class="innerSeeMore">
-                   {this.props.data.caption.substring(0,550)}
-
-
-                   </span>
-                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
-                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
-                 </div>
-                 :
-                 <div style={{padding:'10px'}}>
-                   <p class="innerSeeMore boldedText" style={{fontSize:'14px', marginRight:'5px'}}>
-                    {this.props.data.user.username}
-                    </p>
-                   <p class="innerSeeMore " style={{fontSize:'16px',}}>
-                   {this.props.data.caption}
-
-                   </p>
-
-                   <div>
-
-
-                   </div>
-                  </div>
-               }
-
-    </p>
 
 
 
@@ -666,6 +634,43 @@ class NewsfeedPost extends React.Component {
 
     </div>
 
+
+
+
+    <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
+              {
+
+                 ((this.props.data.caption).length>600)?
+
+                 <div class="outerSeeMore">
+
+                   <span class="innerSeeMore">
+                   {this.props.data.caption.substring(0,550)}
+
+
+                   </span>
+                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
+                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
+                 </div>
+                 :
+                 <div style={{padding:'10px'}}>
+                   <p class="innerSeeMore boldedText" style={{fontSize:'14px', marginRight:'5px'}}>
+                    {this.props.data.user.username}
+                    </p>
+                   <p class="innerSeeMore " style={{fontSize:'16px',}}>
+                   {this.props.data.caption}
+
+                   </p>
+
+                   <div>
+
+
+                   </div>
+                  </div>
+               }
+
+    </p>
+
       <div class="box-buttons">
         <div class="row">
           {
@@ -721,46 +726,6 @@ class NewsfeedPost extends React.Component {
       </div>
 
 
-
-
-      {/*
-          <Popover content={
-            <div>
-
-
-              <a href="/current-user" className="nav-text">
-                {this.props.data.user.username}
-              </a>
-              <p>Content</p>
-            </div>
-            }
-            title={this.props.data.user.username}
-            placement="topLeft"
-            >
-           <Button> {this.props.data.user.username} </Button>
-          </Popover>
-
-
-
-          {
-              this.props.data.image ?
-              <img src= {temp} height="250" width="450"/>
-              // AND YOU HAVE
-               // TO COPY IMAGE ADDRESS REPLACE WITH TEMP IN PRODUCTION
-              // <div style="max-width: 100%; max-height: 100%;">
-                // <div class="mock-img">
-                //   <img src= {"https://images.unsplash.com/photo-1590118432058-f2744d6897db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1203&q=80"} height="250" width="450"/>
-                // </div>
-              // </div>
-
-              :
-              <div></div>
-
-          }
-
-        </Card>
-
-        */}
         </div>
     )
   }
