@@ -536,23 +536,56 @@ class NewsfeedPost extends React.Component {
 
               </span>
               :
+
+
+              <div>
+                {
+                (like_people.length == 3)?
+
+                <div> <Avatar.Group>
+
+                <Avatar
+                onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                style = {{
+                  cursor: 'pointer',
+                }}
+                src={profilePic} alt="avatar" />
+                <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+
+
+                </Avatar.Group> </div>
+
+
+              :
               <span>
-              <Avatar.Group
-              >
-                 <Avatar src="https://images.unsplash.com/photo-1542909192-2f2241a99c9d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" />
-                 <Tooltip title="Andy Le" placement="top">
-                   <Avatar
-                     style={{
-                       backgroundColor: '#f56a00',
-                     }}
-                   >
-                   K
 
 
-                   </Avatar>
-                   </Tooltip>
-                 </Avatar.Group>
+              {
+
+                (like_people.length > 3)?
+
+
+
+                  <span>
+
+                    <UserAvatar/>
+                  </span>
+
+
+
+                :
+
+                <div>
+                  {/* No people */}
+
+                </div>
+               }
               </span>
+
+            }
+
+            </div>
             }
           </span>
         }
@@ -741,6 +774,7 @@ class NewsfeedPost extends React.Component {
     let profilePic = ''
 
     if (this.props.data.user.profile_picture){
+      console.log(this.props.data.user.profile_picture)
       profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
     }
 
