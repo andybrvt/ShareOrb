@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import * as exploreActions from '../../store/actions/explore';
 import { RetweetOutlined } from '@ant-design/icons';
 import ChangeProfilePic from '../../components/ChangeProfilePic';
+import FollowList from '../../components/FollowList';
 
 
 import {
@@ -44,6 +45,8 @@ class CurrUserProfile extends React.Component{
 		last_name: '',
 		bio: '',
     friends: [],
+    followerShow: false,
+    followingShow: false,
   }
 
   capitalize (str) {
@@ -164,6 +167,34 @@ class CurrUserProfile extends React.Component{
      ExploreWebSocketInstance.sendUnFollowing(follower, following)
    }
 
+   onFollowerOpen = () => {
+     // This is used to open up the follower list
+     this.setState({
+       followerShow: true
+     })
+   }
+
+   onFollowerCancel = () => {
+     // This is used to close the follower list
+     this.setState({
+       followerShow: false
+     })
+   }
+
+   onFollowingOpen = () => {
+     // This is used to open up the following list
+     this.setState({
+       followingShow: true
+     })
+   }
+
+   onFollowingCancel = () => {
+     // This is to close the following list
+     this.setState({
+       followingShow: false
+     })
+   }
+
    onRenderProfileInfo(){
      // For the following and the follwers, the get_followers will be the people taht
      // are your followers and the people that are in
@@ -211,14 +242,18 @@ class CurrUserProfile extends React.Component{
              <br />
              <span> {posts.length}</span>
            </div>
-           <div className = 'followItem'>
+           <div
+           onClick = {() => this.onFollowerOpen()}
+           className = 'followItem'>
              <span
              className = 'postFollowWords'
              >Followers</span>
              <br />
              <span>{followers.length}</span>
            </div>
-           <div className = 'followItem'>
+           <div
+           onClick = {() => this.onFollowingOpen()}
+           className = 'followItem'>
              <span
              className = 'postFollowWords'
              >Following</span>
@@ -306,8 +341,17 @@ class CurrUserProfile extends React.Component{
    }
 
    render(){
-
+       let followers = []
+       let following = []
        console.log(this.props)
+       if (this.props.curProfile){
+         if(this.props.curProfile.get_followers){
+           followers = this.props.curProfile.get_followers
+         }
+         if(this.props.curProfile.get_following){
+           following = this.props.curProfile.get_following
+         }
+       }
 
        return(
          <div className = 'profilePage'>
@@ -328,6 +372,26 @@ class CurrUserProfile extends React.Component{
             onCancel = {this.closeChangeProfilePic}
             onSubmit = {this.handleProfilePicChange}
           />
+
+          <Modal
+          visible ={this.state.followerShow}
+          onCancel = {this.onFollowerCancel}
+          footer = {null}
+          >
+          <span className ='followWord'> Followers</span>
+          <FollowList follow = {followers} />
+          </Modal>
+
+
+
+          <Modal
+          visible = {this.state.followingShow}
+          onCancel = {this.onFollowingCancel}
+          footer = {null}
+          >
+          <span className = 'followWord'>Following</span>
+          <FollowList follow = {following}/>
+          </Modal>
 
          </div>
        )
