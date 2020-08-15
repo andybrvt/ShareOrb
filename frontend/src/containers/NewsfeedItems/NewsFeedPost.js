@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
 import defaultPic from '../../components/images/default.png'
 import UserAvatar from './UserAvatar'
+import UserLikePlusUserAvatar from './UserLikePlusUserAvatar';
 
 
 class NewsfeedPost extends React.Component {
@@ -511,7 +512,7 @@ class NewsfeedPost extends React.Component {
             cursor: 'pointer',
           }}
           src={profilePic} alt="avatar" />
-          <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+          <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
 
 
           </Avatar.Group>
@@ -550,10 +551,8 @@ class NewsfeedPost extends React.Component {
                   cursor: 'pointer',
                 }}
                 src={profilePic} alt="avatar" />
+                <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
                 <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
-                <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
-
-
                 </Avatar.Group> </div>
 
 
@@ -569,7 +568,7 @@ class NewsfeedPost extends React.Component {
 
                   <span>
 
-                    <UserAvatar/>
+                    <UserLikePlusUserAvatar/>
                   </span>
 
 
