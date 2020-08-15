@@ -14,6 +14,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         model = models.SocialCalCell
         fields = ('socialCalUser',
          'socialCaldate',
+         'testDate',
          'people_like',
          'get_socialCalItems',
          'get_socialCalEvent',

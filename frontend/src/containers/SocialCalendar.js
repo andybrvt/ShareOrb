@@ -124,7 +124,8 @@ class SocialCalendar extends React.Component{
           // So the time we put in is the UTC time (universal time ) but when you
           // put moment or new Date it gives you your time zome date so that is why you
           // have to convert it
-          const date = new Date(events[item].start_time)
+          const date = new Date(events[item].testDate)
+          console.log(events[item])
           const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
           if (dateFns.isSameDay(utc, day)){
             toDoStuff.push(
@@ -142,6 +143,7 @@ class SocialCalendar extends React.Component{
         // the cell will be disabled
         // It is also to check if the day is the smae as the current day
         if (toDoStuff.length > 0){
+          console.log(toDoStuff[0].get_socialCalItems[0].itemImage)
           days.push(
             <div
               className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
@@ -150,8 +152,12 @@ class SocialCalendar extends React.Component{
               }`}
               key = {day}
             >
-
-            <span className = "bg"> {formattedDate}</span>
+            <Avatar
+            className = 'imgCover'
+            size = {250}
+            shape= 'square'
+            src = {'http://127.0.0.1:8000'+toDoStuff[0].get_socialCalItems[0].itemImage} />
+            <span className = "bgD"> {formattedDate}</span>
 
           </div>
         )} else {days.push(
@@ -162,11 +168,6 @@ class SocialCalendar extends React.Component{
             }`}
             key = {day}
           >
-          <Avatar
-          className = 'imgCover'
-          size = {250}
-          shape= 'square'
-          src = {ava1} />
           <span className = "bg"> {formattedDate}</span>
 
         </div>
@@ -228,13 +229,21 @@ class SocialCalendar extends React.Component{
   render(){
     // className is to determine the style
     console.log(this.props)
+    let socialCalCell = []
+    if (this.props.curProfile){
+      if (this.props.curProfile.get_socialCal){
+        socialCalCell = this.props.curProfile.get_socialCal
+      }
+    }
+
+
     return(
       <div className = 'socialCalContainer'>
 
           <div className = 'socialCalendar'>
             {this.renderHeader()}
             {this.renderDays()}
-            {this.renderCells(this.props.events)}
+            {this.renderCells(socialCalCell)}
           </div>
         </div>
     )

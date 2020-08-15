@@ -20,6 +20,9 @@ class SocialCalCell(models.Model):
     socialCalUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'social_cal_user', on_delete= models.CASCADE)
     # We will use this to know where to put the
     socialCaldate = models.DateField(auto_now_add = True)
+
+    #This is just used to test for the visuality 
+    testDate = models.DateField(default = timezone.now, blank = True)
     # This will cover the like of the day
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
 

@@ -310,6 +310,7 @@ class CurrUserProfile extends React.Component{
    }
 
    onRenderTabs= () => {
+     console.log(this.props)
      var tabs = document.getElementsByClassName('profile-Tab');
      Array.prototype.forEach.call(tabs, function(tab) {
           tab.addEventListener('click', setActiveClass);

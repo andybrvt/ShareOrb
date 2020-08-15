@@ -1,9 +1,10 @@
 .socialCalContainer {
   position: relative;
 
-  width: 1750px;
+  width: 1700px;
   /* height: 920px; */
-
+  left: 50%;
+  transform: translateX(-50%);
   background-color: blue;
   display: flex;
 }
@@ -42,7 +43,7 @@
 }
 
 .socialCalendar .days{
-  width: 1750px;
+  width: 1700px;
   font-weight: 100;
   color: ;
   font-size: 20px;
@@ -56,7 +57,7 @@
 .socialCalendar .body {
   /* This is to control the width of the calendar body */
   background-color: white;
-  width: 1750px;
+  width: 1700px;
 }
 .socialCalendar .body .row {
   border-bottom: 1px solid var(--border-color);
@@ -75,7 +76,21 @@
   transition: 0.25s ease-out;
 }
 
+.socialCalendar .body .row .cell:first-child{
+  border-left: 1px solid var(--border-color)
+}
+
+
 .socialCalendar .body .row .cell .bg{
+  color: black;
+  font-weight: 100;
+  font-size: 15px;
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+}
+
+.socialCalendar .body .row .cell .bgD{
   color: white;
   font-weight: 100;
   font-size: 15px;
@@ -93,6 +108,10 @@
   position: absolute;
   /* left: 20px; */
   left: 0%
+}
+
+.socialCalendar .body .row .cell .imgCover:hover{
+  filter: brightness(80%);
 }
 
 .img {
