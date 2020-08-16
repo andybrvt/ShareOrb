@@ -265,7 +265,7 @@ class SocialCalendar extends React.Component{
 
 
             <SocialCalCellInfo />
-        
+
         </div>
     )
   }

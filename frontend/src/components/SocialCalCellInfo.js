@@ -2,22 +2,45 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {  Modal } from 'antd';
 import * as socialCalActions  from '../store/actions/socialCalendar';
+import PictureCarousel from './PictureCarousel';
+import SocialComments from './SocialComments';
+import SocialEventList from './SocialEventList';
+import './labelCSS/SocialModal.css';
 
 
 class SocialCalCellInfo extends React.Component{
 
 
   render(){
+    let socialCalItems = []
+    let socialCalEvents = []
+    let socialCalComments = []
 
-    console.log(this.props)
+    if(this.props.socialObject[0]){
+      socialCalItems = this.props.socialObject[0].get_socialCalItems
+      socialCalEvents = this.props.socialObject[0].get_socialCalEvent
+      socialCalComments = this.props.socialObject[0].get_socialCalComment
+    }
+    console.log(this.props.socialObject[0])
+
+
     return (
       <Modal
       visible = {this.props.showSocialModal}
       onCancel = {() => this.props.closeSocialModal()}
+      width = {1600}
+      footer = {null}
       >
-        <div>
-        Hi
+      <div className = 'socialHolder'>
+        <div className = 'socialCarousel'>
+          <PictureCarousel items = {socialCalItems} />
         </div>
+
+        <div>
+          <SocialEventList items = {socialCalEvents}/>
+          <SocialComments items = {socialCalComments}/>
+        </div>
+      </div>
       </Modal>
     )
   }
