@@ -30,16 +30,20 @@ class UserAvatar extends React.Component{
         maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
         maxCount={3}
         >
-        <Avatar
-        onClick = {() => this.onProfileClick(this.props.data.user.username)}
-        style = {{
-          cursor: 'pointer',
-        }}
-        src={"https://ibalz.com/wp-content/uploads/2019/10/default-profile.png"} alt="avatar" />
+
+        <Tooltip placement="topLeft" title={this.props.data.user.username}>
+          <Avatar
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={"https://ibalz.com/wp-content/uploads/2019/10/default-profile.png"} alt="avatar" />
+        </Tooltip>
+        
           <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
           <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
           <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
-        
+
         </Avatar.Group>
       </div>
     )

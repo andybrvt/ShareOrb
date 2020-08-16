@@ -473,14 +473,16 @@ class NewsfeedPost extends React.Component {
           <span>
 
           <Avatar.Group>
+            <Tooltip placement="topLeft" title={this.props.data.user.username}>
+              <Avatar
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              style = {{
+                cursor: 'pointer',
+              }}
+              src={profilePic} alt="avatar" />
+            </Tooltip>
 
-          <Avatar
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={profilePic} alt="avatar" />
-          <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+            <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
 
 
           </Avatar.Group>
@@ -496,12 +498,14 @@ class NewsfeedPost extends React.Component {
             {
               (like_people.length == 1)?
               <span>
-              <Avatar
-              onClick = {() => this.onProfileClick(this.props.data.user.username)}
-              style = {{
-                cursor: 'pointer',
-              }}
-              src={profilePic} alt="avatar" />
+                <Tooltip placement="topLeft" title={this.props.data.user.username}>
+                  <Avatar
+                  onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                  style = {{
+                    cursor: 'pointer',
+                  }}
+                  src={profilePic} alt="avatar" />
+                </Tooltip>
 
               </span>
               :
@@ -513,12 +517,14 @@ class NewsfeedPost extends React.Component {
 
                 <div> <Avatar.Group>
 
-                <Avatar
-                onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                style = {{
-                  cursor: 'pointer',
-                }}
-                src={profilePic} alt="avatar" />
+                <Tooltip placement="topLeft" title={this.props.data.user.username}>
+                  <Avatar
+                  onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                  style = {{
+                    cursor: 'pointer',
+                  }}
+                  src={profilePic} alt="avatar" />
+                </Tooltip>
                 <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
                 <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
                 </Avatar.Group> </div>
@@ -586,7 +592,11 @@ class NewsfeedPost extends React.Component {
                 {
                   (like_people.length==1)?
                   <span>
-                  <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+
+                  <Tooltip placement="topLeft" title="Jason Derulo">
+                     <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                 </Tooltip>
+
                   </span>
 
 
@@ -598,8 +608,14 @@ class NewsfeedPost extends React.Component {
 
                       <Avatar.Group>
 
-                      <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+
+                      <Tooltip placement="topLeft" title="William Smith">
+                           <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                     </Tooltip>
+
+                     <Tooltip placement="topLeft" title="Emily Lee">
                       <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                    </Tooltip>
 
 
                       </Avatar.Group>
@@ -607,10 +623,16 @@ class NewsfeedPost extends React.Component {
                       :
                       <Avatar.Group>
 
-                      <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
-                      <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
-                      <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
 
+                      <Tooltip placement="topLeft" title="William Chen">
+                           <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                     </Tooltip>
+                     <Tooltip placement="topLeft" title="Cameron Allen">
+                        <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                    </Tooltip>
+                    <Tooltip placement="topLeft" title="Lebron James">
+                        <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+                   </Tooltip>
 
                       </Avatar.Group>
 
