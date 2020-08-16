@@ -482,7 +482,11 @@ class NewsfeedPost extends React.Component {
               src={profilePic} alt="avatar" />
             </Tooltip>
 
-            <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+
+            <Tooltip placement="topLeft" title="Ayla Smith">
+              <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+
+            </Tooltip>
 
 
           </Avatar.Group>
@@ -525,8 +529,15 @@ class NewsfeedPost extends React.Component {
                   }}
                   src={profilePic} alt="avatar" />
                 </Tooltip>
+
+                <Tooltip placement="topLeft" title="Allen Johnson">
                 <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
-                <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                </Tooltip>
+
+                <Tooltip placement="topLeft" title="Sarah Lee">
+                  <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                </Tooltip>
+
                 </Avatar.Group> </div>
 
 
@@ -542,7 +553,7 @@ class NewsfeedPost extends React.Component {
 
                   <span>
 
-                    <UserLikePlusUserAvatar/>
+                    <UserLikePlusUserAvatar {...this.props}/>
                   </span>
 
 
@@ -861,14 +872,30 @@ class NewsfeedPost extends React.Component {
         {
           (like_people.length == 2) ?
           <span>
-            You
-            <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              />
-            and
-            <Avatar src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
-            like this.
+
+          <Avatar.Group>
+            <Tooltip placement="topLeft" title={this.props.data.user.username}>
+              <Avatar
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              style = {{
+                cursor: 'pointer',
+              }}
+              src={profilePic} alt="avatar" />
+            </Tooltip>
+
+
+            <Tooltip placement="topLeft" title="Ayla Smith">
+              <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+
+            </Tooltip>
+
+
+          </Avatar.Group>
+
+
+
           </span>
+
 
           :
 
@@ -876,13 +903,74 @@ class NewsfeedPost extends React.Component {
             {
               (like_people.length == 1)?
               <span>
+                <Tooltip placement="topLeft" title={this.props.data.user.username}>
+                  <Avatar
+                  onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                  style = {{
+                    cursor: 'pointer',
+                  }}
+                  src={profilePic} alt="avatar" />
+                </Tooltip>
 
-                <Avatar style={{marginRight:'10px'}} size="small" src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"} alt="avatar" />'You like this'
               </span>
               :
+
+
+              <div>
+                {
+                (like_people.length == 3)?
+
+                <div> <Avatar.Group>
+
+                <Tooltip placement="topLeft" title={this.props.data.user.username}>
+                  <Avatar
+                  onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                  style = {{
+                    cursor: 'pointer',
+                  }}
+                  src={profilePic} alt="avatar" />
+                </Tooltip>
+
+                <Tooltip placement="topLeft" title="Allen Johnson">
+                <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                </Tooltip>
+
+                <Tooltip placement="topLeft" title="Sarah Lee">
+                  <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                </Tooltip>
+
+                </Avatar.Group> </div>
+
+
+              :
               <span>
-                You and {like_people.length - 1} person like this.
+
+
+              {
+
+                (like_people.length > 3)?
+
+
+
+                  <span>
+
+                    <UserLikePlusUserAvatar {...this.props}/>
+                  </span>
+
+
+
+                :
+
+                <div>
+                  {/* No people */}
+
+                </div>
+               }
               </span>
+
+            }
+
+            </div>
             }
           </span>
         }
@@ -890,14 +978,14 @@ class NewsfeedPost extends React.Component {
 
       :
 
+
       <span>
+      { /* If the user is not included in the likes */}
       {
         (like_people.length>3)?
         <span>
-        <Avatar size="small" src="https://images.unsplash.com/photo-1507114845806-0347f6150324?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
-        <Avatar size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
-        <Avatar size="small" src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
-          +{like_people.length-3} people like this.
+
+          <UserAvatar/>
         </span>
 
         :
@@ -916,13 +1004,53 @@ class NewsfeedPost extends React.Component {
                 {
                   (like_people.length==1)?
                   <span>
-                  <Avatar src="https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80" size="small" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar> likes this
+
+                  <Tooltip placement="topLeft" title="Jason Derulo">
+                     <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                 </Tooltip>
+
                   </span>
 
 
                   :
                   <span>
-                  2  people like this
+
+                  {
+                    (like_people.length==2)?
+
+                      <Avatar.Group>
+
+
+                      <Tooltip placement="topLeft" title="William Smith">
+                           <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                     </Tooltip>
+
+                     <Tooltip placement="topLeft" title="Emily Lee">
+                      <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                    </Tooltip>
+
+
+                      </Avatar.Group>
+
+                      :
+                      <Avatar.Group>
+
+
+                      <Tooltip placement="topLeft" title="William Chen">
+                           <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+                     </Tooltip>
+                     <Tooltip placement="topLeft" title="Cameron Allen">
+                        <Avatar src="https://images.unsplash.com/photo-1570697755619-fa7874c6c062?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+                    </Tooltip>
+                    <Tooltip placement="topLeft" title="Lebron James">
+                        <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+                   </Tooltip>
+
+                      </Avatar.Group>
+
+
+
+                    }
                   </span>
 
                 }
@@ -939,7 +1067,6 @@ class NewsfeedPost extends React.Component {
 
 
     </div>
-
 
     {/* show the first 3 people
       like_people[0]'s avatar'
