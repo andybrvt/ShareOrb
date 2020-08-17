@@ -6,6 +6,9 @@ import PictureCarousel from './PictureCarousel';
 import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
 import './labelCSS/SocialModal.css';
+import {
+PictureOutlined
+} from '@ant-design/icons';
 
 
 class SocialCalCellInfo extends React.Component{
@@ -40,6 +43,16 @@ class SocialCalCellInfo extends React.Component{
           <img
           className = 'singlePic'
           src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
+        </div>
+
+        : socialCalItems.length === 0 ?
+
+        <div className = 'socialCarouselZero'>
+        <div className = 'pictureFrame'>
+          <PictureOutlined  />
+          <br />
+          <span> No posts </span>
+        </div>
         </div>
 
         :

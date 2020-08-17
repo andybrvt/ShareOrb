@@ -43,6 +43,21 @@
   height: 100%;
 }
 
+.socialHolder .socialCarouselZero {
+  width: 215%;
+  /* background-color: red; */
+  border: 10px dashed gainsboro;
+  text-align: center;
+}
+
+.socialHolder .socialCarouselZero .pictureFrame{
+  /* background-color: red; */
+  position: relative;
+  top: 40%;
+  font-size: 55px;
+  color: gainsboro;
+}
+
 .socialHolder .socialCarouselSingle{
   width: 215%;
   height: 920px;
