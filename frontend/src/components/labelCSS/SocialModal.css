@@ -1,0 +1,9 @@
+.socialHolder{
+  /* background-color: red; */
+  display: flex;
+}
+
+.socialHolder .socialCarousel{
+  width: 50%;
+  height: 100%;
+}

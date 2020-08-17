@@ -118,8 +118,6 @@
   /* filter: brightness(60%); */
 }
 
-
-
 .socialCalendar .body .row .cell .imgCover {
   position: absolute;
   /* left: 20px; */
@@ -129,6 +127,10 @@
 .socialCalendar .body .row .cell .imgCover:hover{
   filter: brightness(80%);
 }
+
+
+
+
 
 .img {
   /* width: 10px; */
