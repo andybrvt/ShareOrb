@@ -30,11 +30,25 @@ class SocialCalCellInfo extends React.Component{
       onCancel = {() => this.props.closeSocialModal()}
       width = {1600}
       footer = {null}
+      className = 'socialModal'
       >
       <div className = 'socialHolder'>
+      {
+        socialCalItems.length === 1 ?
+
+        <div className = 'socialCarouselSingle'>
+          <img
+          className = 'singlePic'
+          src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
+        </div>
+
+        :
+
         <div className = 'socialCarousel'>
           <PictureCarousel items = {socialCalItems} />
         </div>
+      }
+
 
         <div>
           <SocialEventList items = {socialCalEvents}/>

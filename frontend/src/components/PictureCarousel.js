@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
-
+import './labelCSS/SocialModal.css'
 
 
 class PictureCarousel extends React.Component{
@@ -8,6 +8,28 @@ class PictureCarousel extends React.Component{
 
   renderPictures = pictureList => {
     console.log(pictureList)
+    let socialItems = []
+
+    // if(pictureList.length === 0){
+    //   return
+    // } else if (pictureList.length === 1){
+    //
+    // }
+    {
+      pictureList.map(
+        item => {
+          socialItems.push(
+            <div className = 'picturesRoll'>
+              <img
+              className = 'socialImages'
+              src ={'http://127.0.0.1:8000'+item.itemImage} />
+            </div>
+          )
+        }
+      )
+    }
+
+    return socialItems
   }
 
   render(){
@@ -17,7 +39,6 @@ class PictureCarousel extends React.Component{
       itemList = this.props.items
     }
 
-    console.log(itemList)
     function onChange(a, b, c) {
       console.log(a, b, c);
     }
@@ -31,8 +52,8 @@ class PictureCarousel extends React.Component{
     };
 
     return (
-      <Carousel afterChange={onChange}>
-      
+      <Carousel effect = 'null' afterChange={onChange}>
+        {this.renderPictures(itemList)}
       </Carousel>
     )
   }
