@@ -10,6 +10,32 @@
   height: 920px;
 }
 
+.socialLeftRight{
+  /* display: flex; */
+
+}
+
+.socialLeftRight .socialArrowLeft {
+  position: absolute;
+  /* background-color: red; */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 2%;
+  font-size: 45px;
+}
+
+.socialLeftRight .socialArrowRight {
+  position: absolute;
+  /* background-color: red; */
+  bottom: 50%;
+  transform: translateY(50%);
+  left: 67%;
+  /* right: 100%; */
+  z-index: 3;
+  font-size: 45px;
+}
+
 
 
 .socialHolder .socialCarousel{
