@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Tooltip } from "antd";
 import { UserOutlined, AntDesignOutlined } from "@ant-design/icons";
-
+import doggy from '../../components/images/doggy.jpeg'
 class UserAvatar extends React.Component{
 
   constructor(props) {
@@ -33,12 +33,13 @@ class UserAvatar extends React.Component{
         >
 
         <Tooltip placement="topLeft" title={this.props.data.user.username}>
-          <Avatar
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={"https://ibalz.com/wp-content/uploads/2019/10/default-profile.png"} alt="avatar" />
+        <Avatar
+        onClick = {() => this.onProfileClick(this.props.data.user.username)}
+
+        style = {{
+          cursor: 'pointer',
+        }}
+        src={doggy} alt="avatar" />
         </Tooltip>
 
         <Tooltip placement="topLeft" title="Allen Johnson">
