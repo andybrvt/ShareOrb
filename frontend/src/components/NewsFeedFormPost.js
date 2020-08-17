@@ -10,6 +10,7 @@ import {Button, Upload, message, Modal} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 const NewsFeedFormPost = (props) => {
   // formData = new FormData();
+  const[temp, setTemp] = useState(null);
   const {token} = props;
   const[image, setImage] = useState(null);
   const[fileList, setFileList] = useState([]);
@@ -105,10 +106,18 @@ const uploadImageRainbowProgress = {
 
   const  onFormSubmit = (e) =>{
     e.preventDefault()
+    if(fileList.length==0){
+      console.log("ZERO")
+      var temp=image;
+    }
+    else{
+      var temp=fileList[0].originFileObj;
+    }
 		if (props.data.id && caption){
+      console.log(fileList)
       console.log('it got summited')
 			const post = {
-				'image': fileList[0].originFileObj,
+				'image': temp,
 				'caption': caption,
 				'user_id': props.data.id,
 				'username': props.data.username,
@@ -123,6 +132,7 @@ const uploadImageRainbowProgress = {
 
   const onCaptionChange = (e) => {
     const value = e.target.value
+    console.log(value)
     setCaption(value)
   }
 
@@ -148,6 +158,7 @@ const uploadImageRainbowProgress = {
 				// setStage("image")
     //   }
     setFileList(fileList)
+    // fileList.forEach(element => setFileList(fileList[element]));
 	}
 
   return (
@@ -187,7 +198,7 @@ const uploadImageRainbowProgress = {
 
 				</div>}
 
-        <TextArea rows={4} type="text" name="caption" onChange= {onCaptionChange}value={caption}
+        <TextArea rows={4} type="text" name="caption" onChange= {onCaptionChange} value={caption}
         style={{width: '600px'}}/>
 
 
