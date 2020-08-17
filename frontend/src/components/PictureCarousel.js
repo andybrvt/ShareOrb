@@ -1,9 +1,30 @@
 import React from 'react';
-import { Carousel } from 'antd';
-import './labelCSS/SocialModal.css'
+import { Carousel} from 'antd';
+import './labelCSS/SocialModal.css';
+import {
+  RightCircleOutlined,
+  LeftCircleOutlined
+} from '@ant-design/icons';
 
 
 class PictureCarousel extends React.Component{
+  constructor(props){
+    super(props);
+    this.next = this.next.bind(this)
+    this.previous = this.previous.bind(this);
+    // createRef is used to refer to the DOM element in the render with the
+    // ref in the tab
+    this.carousel = React.createRef()
+  }
+
+  next() {
+    this.carousel.next()
+  }
+
+  previous() {
+    this.carousel.prev()
+  }
+
 
 
   renderPictures = pictureList => {
@@ -52,9 +73,17 @@ class PictureCarousel extends React.Component{
     };
 
     return (
-      <Carousel effect = 'null' afterChange={onChange}>
+      <div>
+      <LeftCircleOutlined onClick = {this.previous} />
+      <Carousel
+      arrows = {true}
+      effect = 'null'
+      ref = {node => {this.carousel = node}}
+      afterChange={onChange}>
         {this.renderPictures(itemList)}
       </Carousel>
+      <RightCircleOutlined onClick = {this.next} />
+      </div>
     )
   }
 
