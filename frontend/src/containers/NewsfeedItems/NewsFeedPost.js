@@ -628,7 +628,7 @@ class NewsfeedPost extends React.Component {
 
 
 
-
+      <Divider/>
 
     <p style={{color:'black'}} class="whiteSpacePost">
               {
@@ -659,7 +659,18 @@ class NewsfeedPost extends React.Component {
 
     </p>
 
-    <Liking {...this.props}/>
+    <Divider/>
+    <div style={{display:'flex'}}>
+
+
+      <p class="innerSeeMore " style={{marginLeft:'20px', fontSize:'16px',  color:'black'}}>
+        {like_people.length} likes
+
+      </p>
+      <p style={{marginLeft:'400px'}}>
+      <Liking {...this.props} />
+      </p>
+    </div>
 
     {/* show the first 3 people
       like_people[0]'s avatar'
@@ -673,9 +684,9 @@ class NewsfeedPost extends React.Component {
         {
           (like_people.includes(this.props.userId))?
 
-            <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> {like_people.length}</button>
+            <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> </button>
           :
-            <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {like_people.length}</button>
+            <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> </button>
         }
         <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
         <button><span class="fa fa-archive"></span></button>
