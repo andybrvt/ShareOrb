@@ -53,12 +53,26 @@
 .socialListBox .socialListItem{
   /* background-color: red; */
   margin: 3px;
-  padding: 15px;
-  height: 120px;
+  padding-left: 15px;
+  /* padding-top: 10px; */
+  height: 140px;
   border: 1px solid gainsboro;
   border-radius: 5px;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
+}
+
+.socialListItemText{
+  /* background-color: red; */
+  position: relative;
+  bottom: 0px;
+}
+
+.socialEventTitleContainer {
+  /* position: absolute; */
+  /* background-color: red; */
+  display: flex;
+  /* margin-top: 10px; */
 }
 
 .socialEventClock{
@@ -80,6 +94,11 @@
   font-size: 13px;
 }
 
+.socialEventCapcity{
+  /* background-color: red; */
+  /* display: flex; */
+}
+
  .socialEventTitle{
   /* background-color: red; */
   font-size:  25px;
@@ -91,6 +110,83 @@
 }
 
 
+.joinEventButton {
+  background-color: limegreen;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 10%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+
+.joinEventButton .joinText{
+  /* background-color: red; */
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  /* transform: translateY(-50%); */
+
+}
+
+.viewEventButton{
+  /* background-color: red; */
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 50%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+
+.viewEventButton .viewText{
+  /* background-color: red; */
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+
+}
+
+.socialPublicTag{
+  position: relative;
+  background-color: #F5F5F5;
+  color: limegreen;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 12px;
+  /* top:10%;
+  left: 95%; */
+  top: 10px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.socialPrivateTag{
+  position: relative;
+  /* background-color: red; */
+  background-color: #F5F5F5;
+  color: red;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 12px;
+  /* top:10%;
+  left: 95%; */
+  top: 10px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+
+}
 
 .socialHolder .socialCarousel{
   width: 1100px;

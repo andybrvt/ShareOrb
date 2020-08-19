@@ -4,7 +4,8 @@ import './labelCSS/SocialModal.css';
 import {ClockCircleOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import clock from './images/clock.png';
-import location from './images/pin.png'
+import location from './images/pin.png';
+import AvatarGroups from './AvatarGroups'
 
 
 class SocialEventList extends React.Component{
@@ -55,18 +56,50 @@ class SocialEventList extends React.Component{
        dataSource={itemList}
        renderItem={item => (
          <List.Item className = 'socialListItem'>
-          <div className = ''>
-          <span className = 'socialEventTitle'>{this.capitalize(item.title)} </span>
-          <br />
-          <span className = 'socialEventTime'>
-          <img src = {clock} className = 'socialEventClock' />
-          {this.timeFormater(item.start_time)}-
-          {this.timeFormater(item.end_time)}
-          </span>
-          <span className = 'socialEventLocation'>
-          <img src = {location} className = 'socialEventPin' />
-          {this.capitalize(item.location)}
-          </span>
+          <div className = 'socialListItemText'>
+
+            <div className = 'socialEventTitleContainer'>
+            <span className = 'socialEventTitle'>{this.capitalize(item.title)} </span>
+            {
+              true ?
+
+              <div className = 'socialPublicTag'> Public </div>
+
+              :
+
+              <div className = 'socialPrivateTag'> Private </div>
+            }
+            </div>
+
+            <span className = 'socialEventTime'>
+            <img src = {clock} className = 'socialEventClock' />
+            {this.timeFormater(item.start_time)}-
+            {this.timeFormater(item.end_time)}
+            </span>
+
+            <span className = 'socialEventLocation'>
+            <img src = {location} className = 'socialEventPin' />
+            {this.capitalize(item.location)}
+            </span>
+
+            <br />
+
+            <span className = 'socialEventCapcity'>
+
+            Capcity: 1/3
+            <AvatarGroups />
+            </span>
+
+            <div className = 'joinEventButton'>
+              <span className = 'joinText'> Join </span>
+            </div>
+            <div className = 'viewEventButton'>
+              <span className = 'viewText'> View </span>
+            </div>
+
+
+
+
           </div>
          </List.Item>
        )}
