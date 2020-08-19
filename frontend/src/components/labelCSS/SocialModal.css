@@ -99,6 +99,11 @@
   /* display: flex; */
 }
 
+.socialUserIcon{
+  height: 12px;
+  margin-right: 3px;
+}
+
  .socialEventTitle{
   /* background-color: red; */
   font-size:  25px;

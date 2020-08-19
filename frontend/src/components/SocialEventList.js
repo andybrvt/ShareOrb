@@ -5,7 +5,8 @@ import {ClockCircleOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import clock from './images/clock.png';
 import location from './images/pin.png';
-import AvatarGroups from './AvatarGroups'
+import AvatarGroups from './AvatarGroups';
+import userIcon from './images/user.png';
 
 
 class SocialEventList extends React.Component{
@@ -85,8 +86,8 @@ class SocialEventList extends React.Component{
             <br />
 
             <span className = 'socialEventCapcity'>
-
-            Capcity: 1/3
+            <img src ={userIcon} className = 'socialUserIcon' />
+            10 people
             <AvatarGroups />
             </span>
 
