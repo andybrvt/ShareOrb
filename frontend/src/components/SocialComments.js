@@ -1,6 +1,8 @@
 import React from 'react';
 import { Comment, Tooltip, List } from 'antd';
 import moment from 'moment';
+import './labelCSS/SocialModal.css';
+
 
 class SocialComments extends React.Component{
 
@@ -60,6 +62,7 @@ class SocialComments extends React.Component{
     ];
 
     return (
+      <div className = 'socialCommentBox'>
       <List
         className="comment-list"
         header={`${data.length} replies`}
@@ -77,6 +80,7 @@ class SocialComments extends React.Component{
           </li>
         )}
       />
+      </div>
     )
   }
 }

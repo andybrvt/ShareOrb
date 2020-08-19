@@ -36,6 +36,60 @@
   font-size: 45px;
 }
 
+.socialModalRight {
+  /* background-color: red; */
+  /* padding: 20px; */
+}
+
+.socialListBox{
+  /* background-color: red; */
+  padding: 15px;
+  border: 1px solid gainsboro;
+  height: 275px;
+  overflow: auto;
+
+}
+
+.socialListBox .socialListItem{
+  /* background-color: red; */
+  margin: 3px;
+  padding: 15px;
+  height: 120px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}
+
+.socialEventClock{
+  height: 12px;
+  margin-right: 5px;
+}
+
+.socialEventPin{
+  height: 12px;
+  margin-right: 3px;
+}
+
+.socialEventLocation{
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.socialEventTime{
+  font-size: 13px;
+}
+
+ .socialEventTitle{
+  /* background-color: red; */
+  font-size:  25px;
+}
+
+.socialCommentBox {
+  /* background-color: blue; */
+  height: 70%;
+}
+
 
 
 .socialHolder .socialCarousel{

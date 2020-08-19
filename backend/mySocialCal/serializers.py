@@ -1,6 +1,6 @@
 from . import models
 from rest_framework import serializers
-
+from userprofile.models import User
 
 class SocialCalCellSerializer(serializers.ModelSerializer):
 
@@ -40,6 +40,12 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         data['get_socialCalEvent'] = cal_events
         return data
 
+class SocialCalUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
+
 class SocialCalItemsSerializer(serializers.ModelSerializer):
 
 
@@ -55,6 +61,15 @@ class SocialCalEventSerializer(serializers.ModelSerializer):
         fields = ('persons', 'host', 'title', 'content', 'start_time', 'end_time', 'location' )
 
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['host'] = SocialCalUserSerializer(User.objects.get(id = data['host'])).data
+        personList = []
+        for people in data['persons']:
+            person = SocialCalUserSerializer(User.objects.get(id = people)).data
+            personList.append(person)
+        data['persons'] = personList
+        return data
 class SocialCalComment (serializers.ModelSerializer):
 
 

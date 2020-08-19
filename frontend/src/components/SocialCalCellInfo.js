@@ -63,9 +63,11 @@ class SocialCalCellInfo extends React.Component{
       }
 
 
-        <div>
-          <SocialEventList items = {socialCalEvents}/>
+        <div className = 'socialModalRight'>
+
           <SocialComments items = {socialCalComments}/>
+          <SocialEventList items = {socialCalEvents}/>
+
         </div>
       </div>
       </Modal>
