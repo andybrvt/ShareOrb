@@ -6,6 +6,15 @@
   border: 2px solid #f04134;
 }
 
+.likeInPost{
+  display:inline-block;
+}
+
+.commentInPost{
+  margin-left: 300px;
+  display:inline-block;
+}
+
 .header {
     display: flex;
     flex-direction: row;

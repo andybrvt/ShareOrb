@@ -26,7 +26,7 @@ class NewsfeedPost extends React.Component {
     this.state = {
       visibleModal: false,
       commentPost:'',
-      commentsCondition:false,
+      commentsCondition:true,
       show:false,
       stepCount:0,
       avatarColor:'',
@@ -458,12 +458,16 @@ class NewsfeedPost extends React.Component {
 
       </div>
 
+<div>
+<div class='likeInPost'>
+ {like_people.length} likes
+{this.props.data.post_comments.length} comments
 
-
-
+</div>
+<div class='commentInPost'>
       <Liking {...this.props}/>
-
-    
+</div>
+</div>
     <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
               {
 
@@ -503,12 +507,12 @@ class NewsfeedPost extends React.Component {
           {
             (like_people.includes(this.props.userId))?
 
-              <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o redHeart"></i> {like_people.length}</button>
+              <button class="box-click" onClick ={this.AddOneToLike}><i  style={{ marginRight:'10px', color:'red'}} class="fa fa-heart"></i> Like </button>
             :
-              <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"></span> {like_people.length}</button>
+              <button class="box-click" onClick ={this.AddOneToLike} ><span style={{ marginRight:'10px'}} class="fa fa-heart-o"></span>Like</button>
           }
-          <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
-          <button><span class="fa fa-archive"></span></button>
+          <button onClick ={this.OnClickPost} ><span style={{ marginRight:'10px'}}  class="fa fa-comment-o"></span> Comment</button>
+          <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
         </div>
       </div>
 
