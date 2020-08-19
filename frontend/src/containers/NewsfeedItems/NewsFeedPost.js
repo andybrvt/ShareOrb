@@ -461,9 +461,13 @@ class NewsfeedPost extends React.Component {
 <div>
 <div class='likeInPost'>
  {like_people.length} likes
+
 {this.props.data.post_comments.length} comments
 
 </div>
+<i class="fa fa-circle" aria-hidden="true"></i>
+<i class="fas fa-circle"></i>
+<i class="fal fa-album-collection"></i>
 <div class='commentInPost'>
       <Liking {...this.props}/>
 </div>
