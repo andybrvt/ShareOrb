@@ -67,6 +67,8 @@ class Comments extends React.Component {
             </span>
           </Tooltip>
         ),
+
+
       },
     ];
 

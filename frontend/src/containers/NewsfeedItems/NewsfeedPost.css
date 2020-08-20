@@ -1,6 +1,10 @@
 /* http://jsfiddle.net/zbt5L1wp/4/ */
 /* https://bootsnipp.com/snippets/rlxj6 */
 /* temporary for test to see card look */
+.dividerTest{
+  border-top: 3px solid #bbb;
+
+}
 
 .avatarBorder{
   border: 2px solid #f04134;
@@ -11,8 +15,12 @@
 }
 
 .commentInPost{
-  margin-left: 300px;
+  margin-left: 325px;
   display:inline-block;
+}
+
+.dotInLike{
+  vertical-align:middle;
 }
 
 .header {
@@ -86,8 +94,8 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 
 .imageContainer{
-  width:620px;
-  height:625px;
+  width:615px;
+  height:620px;
 
 }
 
@@ -223,11 +231,6 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   outline-color: #F4F4F4;
 }
 
-.redHeart {
-color: red;
-}
-
-
 
 .ellipse {
   position: absolute;
@@ -321,6 +324,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 
 .boldedText{
+  margin-left: 10px;
   font-weight: bold;
 }
 
