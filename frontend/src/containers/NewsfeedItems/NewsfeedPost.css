@@ -6,6 +6,10 @@
 
 }
 
+.textHighlight{
+  color: #3399FF;
+}
+
 .avatarBorder{
   border: 2px solid #f04134;
 }
@@ -19,8 +23,12 @@
   display:inline-block;
 }
 
-.dotInLike{
+.linewrapper{
   vertical-align:middle;
+}
+
+.dotInLike{
+  line-height: 1.6;
 }
 
 .header {
@@ -31,7 +39,8 @@
 
 .alignleft {
 	float: left;
-  text-indent: 47px;
+  text-indent: 55px;
+
 }
 .alignright {
 	float: right;

@@ -542,7 +542,7 @@ class NotificationsDropDown extends React.Component{
       >
 
         <a className="ant-dropdown-link" href="#">
-        <i class="fa fa-bell-o" aria-hidden="true"></i>
+        <i class="far fa-bell" aria-hidden="true"></i>
 
         </a>
       </Dropdown>

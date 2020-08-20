@@ -220,6 +220,8 @@ class SideMenu extends React.Component {
     </span>
 
     <span >
+
+
     <Badge
 
     count = {this.props.notifications.length}>

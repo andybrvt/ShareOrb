@@ -326,11 +326,11 @@ class NewsfeedPost extends React.Component {
              <span class="fb-group-date alignleft" > Tucson, Arizona</span>
 
               <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
-             </div>
+            </div>
 
 
 
-           </span>
+        </span>
 
 
 
@@ -394,6 +394,7 @@ class NewsfeedPost extends React.Component {
             {
               profilePic != '' ?
               <Avatar
+              size="large"
               onClick = {() => this.onProfileClick(this.props.data.user.username)}
 
               style = {{
@@ -461,17 +462,16 @@ class NewsfeedPost extends React.Component {
 
 
 <div style={{marginLeft:'15px', fontSize:'14px'}}>
-
 {
   (like_people.includes(this.props.userId))?
-  <i class="fa fa-heart" style={{marginRight:'5px', color:'red'}}></i>
+  <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
   :
-  <i class="far fa-heart" style={{marginRight:'5px'}}></i>
+  <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
 }
  {like_people.length}
  <div class='likeInPost'>
-   <div class="dotInLike" >
-    <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs"></i>
+   <div class="linewrapper" >
+    <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
 
   {this.props.data.post_comments.length} Comments
 
@@ -529,9 +529,29 @@ class NewsfeedPost extends React.Component {
           {
             (like_people.includes(this.props.userId))?
 
-              <button class="box-click" onClick ={this.AddOneToLike}><i  style={{ marginRight:'10px', color:'red'}} class="fa fa-heart"></i> Like </button>
+              <button
+                class="box-click"
+                onClick ={this.AddOneToLike}>
+                <i
+                  style={{ marginRight:'10px', color:'red'}}
+                  class="fa fa-heart">
+                </i>
+                <span class="textHighlight">
+                  Like
+                </span>
+              </button>
             :
-              <button class="box-click" onClick ={this.AddOneToLike} ><i style={{ marginRight:'10px'}} class="far fa-heart"></i>Like</button>
+              <button
+                class="box-click"
+                onClick ={this.AddOneToLike} >
+                <i
+                  style={{ marginRight:'10px'}}
+                  class="far fa-heart">
+                </i>
+                <span>
+                  Like
+                </span>
+              </button>
           }
           <button onClick ={this.OnClickPost} >
 
@@ -608,54 +628,55 @@ class NewsfeedPost extends React.Component {
     <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
     <div>
-      <div style={{padding:20,}}>
-      <Popover
-         style={{width:'200px'}}
-         content={<div>
-           <Avatar
-            shape="square"
-            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
-           <div> 110 followers </div>
-         </div>}
-
-        >
-        {
-          profilePic != '' ?
-          <Avatar
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
+    <div style={{marginLeft:10, marginRight:10, minHeight:10, marginTop:20,}}>
+    <Popover
+       style={{width:'200px', padding:20,}}
+       content={<div>
+         <Avatar
           size="large"
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={profilePic} alt="avatar" />
+          shape="square"
+          src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
+         <div> 110 followers </div>
+       </div>}
 
-          :
+      >
+      {
+        profilePic != '' ?
+        <Avatar
+        onClick = {() => this.onProfileClick(this.props.data.user.username)}
+        size="large"
+        style = {{
+          cursor: 'pointer',
+        }}
+        src={profilePic} alt="avatar" />
 
-          <Avatar
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
-          size="large"
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={defaultPic} alt="avatar" />
+        :
 
-        }
-        </Popover>
-           <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
-             {this.capitalize(this.props.data.user.username)}
+        <Avatar
+        onClick = {() => this.onProfileClick(this.props.data.user.username)}
+        size="large"
+        style = {{
+          cursor: 'pointer',
+        }}
+        src={defaultPic} alt="avatar" />
 
-             <div>
-             <span class="fb-group-date" style={{marginLeft:55}}> Tucson, Arizona</span>
+      }
+      </Popover>
+         <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
+           {this.capitalize(this.props.data.user.username)}
 
-              <span class="fb-group-date" style={{marginLeft:240}}> {this.renderTimestamp(this.props.data.created_at)}</span>
-             </div>
-           </span>
+           <div>
+           <span class="fb-group-date alignleft" > Tucson, Arizona</span>
 
-      </div>
+            <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
+          </div>
+         </span>
+
+    </div>
 
 
 
-      <Divider/>
+      <Divider style={{marginTop:'40px'}}/>
 
     <p style={{color:'black'}} class="whiteSpacePost">
               {
@@ -687,11 +708,32 @@ class NewsfeedPost extends React.Component {
     </p>
 
     <Divider/>
-    <div style={{display:'flex'}}>
+    <div style={{marginLeft:'15px', fontSize:'14px'}}>
+
+
+    {
+      (like_people.includes(this.props.userId))?
+      <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+      :
+      <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+    }
+     {like_people.length} likes
+     <div class='likeInPost'>
+       <div class="linewrapper" >
+        <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
+
+      {this.props.data.post_comments.length} Comments
+
+
+      <div class='commentInPost'>
+            <Liking {...this.props}/>
+      </div>
 
 
 
-      <Liking {...this.props} />
+      </div>
+
+    </div>
 
     </div>
 
@@ -702,19 +744,22 @@ class NewsfeedPost extends React.Component {
       and + like_people.length-3 like this
       */}
 
-    <div class="box-buttons">
-      <div class="row">
-        {
-          (like_people.includes(this.props.userId))?
+      <div class="box-buttons">
+        <div class="row">
+          {
+            (like_people.includes(this.props.userId))?
 
-            <button class="box-click" onClick ={this.AddOneToLike}><i class="fa fa-heart-o"></i> {like_people.length} </button>
-          :
-            <button class="box-click" onClick ={this.AddOneToLike} ><span class="fa fa-heart-o"> </span> {like_people.length} </button>
-        }
-        <button onClick ={this.OnClickPost} ><span class="fa fa-comment-o"></span> {this.props.data.post_comments.length}</button>
-        <button><span class="fa fa-archive"></span></button>
+              <button class="box-click" onClick ={this.AddOneToLike}><i  style={{ marginRight:'10px', color:'red'}} class="fa fa-heart"></i> Like </button>
+            :
+              <button class="box-click" onClick ={this.AddOneToLike} ><i style={{ marginRight:'10px'}} class="far fa-heart"></i>Like</button>
+          }
+          <button onClick ={this.OnClickPost} >
+
+            <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
+          </button>
+          <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
+        </div>
       </div>
-    </div>
 
   <div>
 
