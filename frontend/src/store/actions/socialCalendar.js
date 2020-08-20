@@ -13,10 +13,11 @@ export const prevMonthSocial = () => {
   }
 }
 
-export const openSocialModal = socialObject => {
+export const openSocialModal = (socialObject, day) => {
   return {
     type: actionTypes.OPEN_SOCIAL_MODAL,
-    socialObject: socialObject
+    socialObject: socialObject,
+    socialDay: day
   }
 }
 

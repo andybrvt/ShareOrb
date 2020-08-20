@@ -157,7 +157,7 @@ class SocialCalendar extends React.Component{
             {
               toDoStuff[0].coverPic ?
               <div
-              onClick = {() => this.props.openSocialModal(socialEvents)}>
+              onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}>
               <Avatar
               className = 'imgCover'
               size = {250}
@@ -240,6 +240,11 @@ class SocialCalendar extends React.Component{
     this.props.openModal(oneEvent)
   }
 
+  onOpenSocialCalModal = (day, socialCalInfo) => {
+    // this will open up the modal with all the information and date
+    this.props.openSocialModal(socialCalInfo, day)
+  }
+
 
 
 
@@ -287,7 +292,7 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(socialCalActions.nextMonthSocial()),
     prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
-    openSocialModal: socialObject => dispatch(socialCalActions.openSocialModal(socialObject)),
+    openSocialModal: (socialObject, day) => dispatch(socialCalActions.openSocialModal(socialObject, day)),
     closeSocialModal: () => dispatch(socialCalActions.closeSocialModal())
 
   }

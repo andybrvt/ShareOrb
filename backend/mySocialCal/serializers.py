@@ -78,3 +78,8 @@ class SocialCalComment (serializers.ModelSerializer):
     class Meta:
         model = models.SocialCalComment
         fields = ('body', 'created_on', 'commentUser' )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['commentUser'] = SocialCalUserSerializer(User.objects.get(id = data['commentUser'])).data
+        return data

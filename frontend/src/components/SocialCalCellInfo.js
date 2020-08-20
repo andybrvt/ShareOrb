@@ -42,6 +42,7 @@ class SocialCalCellInfo extends React.Component{
 
 
   render(){
+    console.log(this.props)
     let socialCalItems = []
     let socialCalEvents = []
     let socialCalComments = []
@@ -106,7 +107,7 @@ class SocialCalCellInfo extends React.Component{
           <div className = 'socialName'> {this.capitalize(socialCalUsername)}</div>
           <div className = 'socialNameUsername'><b> @{this.capitalize(socialCalUsername)}</b></div>
         </div>
-        {this.dateView(socialCalDate)}
+        {this.dateView(this.props.curSocialDate)}
         </div>
 
 
@@ -125,8 +126,8 @@ class SocialCalCellInfo extends React.Component{
 const mapStateToProps = state => {
   return {
     socialObject: state.socialCal.socialObject,
-    showSocialModal: state.socialCal.showSocialModal
-
+    showSocialModal: state.socialCal.showSocialModal,
+    curSocialDate: state.socialCal.curSocialDate
   }
 }
 
