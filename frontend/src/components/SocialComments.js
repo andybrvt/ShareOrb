@@ -68,7 +68,7 @@ class SocialComments extends React.Component{
         className="comment-list"
         header={`${data.length} replies`}
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={this.props.items}
         renderItem={item => (
           <li>
             <Comment

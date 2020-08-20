@@ -8,7 +8,8 @@ const initialState = {
   // for each day cell
   socialObject: [],
   socialDate: new Date(),
-  showSocialModal: false
+  showSocialModal: false,
+  curSocialDate: new Date()
 }
 
 const nextMonthSocial = (state, action) => {
@@ -26,7 +27,8 @@ const prevMonthSocial = (state, action) => {
 const openSocialModal = (state, action) => {
   return updateObject ( state, {
     showSocialModal: true,
-    socialObject: action.socialObject
+    socialObject: action.socialObject,
+    curSocialDate: action.socialDay
   })
 }
 
