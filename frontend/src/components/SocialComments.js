@@ -8,6 +8,7 @@ class SocialComments extends React.Component{
 
 
   render() {
+    console.log(this.props)
     const data = [
       {
         actions: [<span key="comment-list-reply-to-0">Reply to</span>],

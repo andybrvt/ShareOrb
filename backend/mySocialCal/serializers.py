@@ -12,7 +12,8 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.SocialCalCell
-        fields = ('socialCalUser',
+        fields = (
+         'socialCalUser',
          'socialCaldate',
          'testDate',
          'people_like',
@@ -38,6 +39,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         data['get_socialCalComment'] = cal_comments
         data['get_socialCalItems'] = cal_items
         data['get_socialCalEvent'] = cal_events
+        data['socialCalUser'] = SocialCalUserSerializer(User.objects.get(id = data['socialCalUser'])).data
         return data
 
 class SocialCalUserSerializer(serializers.ModelSerializer):
