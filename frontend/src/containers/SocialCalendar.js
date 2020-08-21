@@ -174,14 +174,18 @@ class SocialCalendar extends React.Component{
 
           </div>
         )} else {
-          const socialEvent = []
+          const socialEvents = [
+            {
+              socialCalUser: this.props.curProfile
+            }
+          ]
           days.push(
           <div
             className ={`col cell hoverCell${ dateFns.isSameDay(day, currentMonth) ?
           "selected": ""
             }`}
             key = {day}
-            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvent)}
+            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
           >
           <PlusOutlined className = 'plusButton'/>
           <span className = "bg"> {formattedDate}</span>

@@ -120,7 +120,7 @@ class UserProfileView extends React.Component {
 
 		return (
 			<div>
-        <PersonalProfile data = {userData} />
+        <PersonalProfile curProfile = {userData} />
         <UserFriendsList {...this.state} />
       </div>
 

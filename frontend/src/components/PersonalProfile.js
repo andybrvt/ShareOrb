@@ -76,11 +76,11 @@ class PersonalProfile extends React.Component{
 
         let profileImage = null
 
-        console.log(this.props.data)
-        if(this.props.data){
-          console.log(this.props.data.profile_picture)
-          if(this.props.data.profile_picture){
-            profileImage = 'http://127.0.0.1:8000'+this.props.data.profile_picture
+        console.log(this.props.curProfile)
+        if(this.props.curProfile){
+          console.log(this.props.curProfile.profile_picture)
+          if(this.props.curProfile.profile_picture){
+            profileImage = 'http://127.0.0.1:8000'+this.props.curProfile.profile_picture
           }
         }
 
@@ -110,7 +110,7 @@ class PersonalProfile extends React.Component{
         const notificationObject = {
           command: 'send_follow_notification',
           actor: this.props.currentUser,
-          recipient: this.props.data.username
+          recipient: this.props.curProfile.username
         }
 
         NotificationWebSocketInstance.sendNotification(notificationObject)
@@ -159,19 +159,19 @@ class PersonalProfile extends React.Component{
         let posts = ''
         let profileId = ''
 
-        if (this.props.data){
-          username = this.props.data.username
-          firstName = this.props.data.first_name
-          lastName = this.props.data.last_name
-          bio = this.props.data.bio
-          following = this.props.data.get_following
-          posts = this.props.data.get_posts
-          profileId = this.props.data.id
+        if (this.props.curProfile){
+          username = this.props.curProfile.username
+          firstName = this.props.curProfile.first_name
+          lastName = this.props.curProfile.last_name
+          bio = this.props.curProfile.bio
+          following = this.props.curProfile.get_following
+          posts = this.props.curProfile.get_posts
+          profileId = this.props.curProfile.id
 
-          if(this.props.data.get_followers){
-            for(let i =0; i<this.props.data.get_followers.length; i++){
+          if(this.props.curProfile.get_followers){
+            for(let i =0; i<this.props.curProfile.get_followers.length; i++){
               followers.push(
-                this.props.data.get_followers[i].username
+                this.props.curProfile.get_followers[i].username
               )
             }
           }
@@ -328,7 +328,7 @@ class PersonalProfile extends React.Component{
             <div className = 'profile-slider'></div>
           </div>
           <div className = 'profile-tabPanel'>
-            <SocialCalendar />
+            <SocialCalendar {...this.props}/>
            </div>
           <div className = 'profile-tabPanel'> Tab 2: Content </div>
           <div className = 'profile-tabPanel'> Tab 3: Content </div>
@@ -341,12 +341,12 @@ class PersonalProfile extends React.Component{
       let followers = []
       let following = []
       console.log(this.props)
-      if (this.props.data){
-        if(this.props.data.get_followers){
-          followers = this.props.data.get_followers
+      if (this.props.dacurProfileta){
+        if(this.props.curProfile.get_followers){
+          followers = this.props.curProfile.get_followers
         }
-        if(this.props.data.get_following){
-          following = this.props.data.get_following
+        if(this.props.curProfile.get_following){
+          following = this.props.curProfile.get_following
         }
       }
 

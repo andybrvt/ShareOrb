@@ -50,12 +50,20 @@ class SocialCalCellInfo extends React.Component{
 
 
     if(this.props.socialObject[0]){
-      socialCalItems = this.props.socialObject[0].get_socialCalItems
-      socialCalEvents = this.props.socialObject[0].get_socialCalEvent
-      socialCalComments = this.props.socialObject[0].get_socialCalComment
+      if(this.props.socialObject[0].get_socialCalItems){
+        socialCalItems = this.props.socialObject[0].get_socialCalItems
+      }
+      if(this.props.socialObject[0].get_socialCalEvent){
+        socialCalEvents = this.props.socialObject[0].get_socialCalEvent
+      }
+      if(this.props.socialObject[0].get_socialCalComment){
+        socialCalComments = this.props.socialObject[0].get_socialCalComment
+      }
       socialCalUsername = this.props.socialObject[0].socialCalUser.username
       socialCalProfilePic = 'http://127.0.0.1:8000'+this.props.socialObject[0].socialCalUser.profile_picture
-      socialCalDate = this.props.socialObject[0].socialCaldate
+      if(this.props.socialObject[0].socialCaldate){
+        socialCalDate = this.props.socialObject[0].socialCaldate
+      }
     }
     console.log(this.props.socialObject[0])
 
