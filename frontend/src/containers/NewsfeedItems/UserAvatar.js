@@ -12,10 +12,9 @@ class UserAvatar extends React.Component{
   }
 
   render(){
-    var num=Math.floor(Math.random() * 4);
-
-    const avatarColor=[]
-    const textColor=[]
+    var num=0;
+    const avatarColor=['#bfbfbf']
+    const textColor=['#FFFFFF']
     return (
       <span>
 

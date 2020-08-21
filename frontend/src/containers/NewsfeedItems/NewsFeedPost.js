@@ -723,13 +723,19 @@ class NewsfeedPost extends React.Component {
       :
       <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
     }
+
+    <span class="LikeCommentHover" onClick ={this.OnClickPost}>
      {like_people.length} likes
+    </span>
      <div class='likeInPost'>
        <div class="linewrapper" >
         <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
 
-      {this.props.data.post_comments.length} Comments
+      <span class="LikeCommentHover">
 
+          {this.props.data.post_comments.length} Comments
+
+      </span>
 
       <div class='commentInPost'>
             <Liking {...this.props}/>
@@ -994,14 +1000,7 @@ class NewsfeedPost extends React.Component {
       {
             this.props.data.post_images.length>0 ?
            <p>{this.ContentOfPic()}</p>
-
-      //
               :
-      //         <div></div>
-      //
-      //
-      //ContentOfPic
-
       <p> {this.ContentOfPost()} </p>
       }
       </div>
