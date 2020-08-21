@@ -19,6 +19,7 @@
 }
 
 .commentInPost{
+  /* position:absolute; */
   margin-left: 315px;
   display:inline-block;
 }
