@@ -110,7 +110,10 @@ class SocialCalCellInfo extends React.Component{
         {this.dateView(this.props.curSocialDate)}
         </div>
 
-
+        <div className = 'socialLikeComment'>
+          <div className ='socialLike'> Like </div>
+          <div className  = 'socialComment'> Comment </div>
+        </div>
           <SocialComments items = {socialCalComments}/>
           <SocialEventList items = {socialCalEvents}/>
 
