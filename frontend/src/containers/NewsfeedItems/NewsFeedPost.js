@@ -456,40 +456,45 @@ class NewsfeedPost extends React.Component {
     */}
 
   <div style={{marginTop:'20px'}}>
-  {this.revealPhoto()}
+    {this.revealPhoto()}
 
+  </div>
+
+
+<span class="dotInLike" style={{marginLeft:'15px', fontSize:'14px'}}>
+  {
+    (like_people.includes(this.props.userId))?
+    <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+    :
+    <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+  }
+ {like_people.length}
+  <div class='likeInPost'>
+
+      <i
+        style={{ fontSize: '5px', marginLeft:'5px',
+         marginRight:'5px'}} class="fas fa-circle fa-xs">
+      </i>
+
+      {this.props.data.post_comments.length} Comments
+
+
+      <div class='commentInPost'>
+            <Liking {...this.props}/>
       </div>
 
 
-<div style={{marginLeft:'15px', fontSize:'14px'}}>
-{
-  (like_people.includes(this.props.userId))?
-  <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
-  :
-  <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-}
- {like_people.length}
- <div class='likeInPost'>
-   <div class="linewrapper" >
-    <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
-
-  {this.props.data.post_comments.length} Comments
 
 
-  <div class='commentInPost'>
-        <Liking {...this.props}/>
-  </div>
-
-  <Divider/>
-
-  </div>
-
-</div>
+    </div>
 
 
 
 
-</div>
+</span>
+
+  <Divider style={{ marginTop: 5 }}/>
+
     <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
               {
 
@@ -678,7 +683,7 @@ class NewsfeedPost extends React.Component {
 
       <Divider style={{marginTop:'40px'}}/>
 
-    <p style={{color:'black'}} class="whiteSpacePost">
+    <p style={{color:'black'}}>
               {
 
 
@@ -706,8 +711,9 @@ class NewsfeedPost extends React.Component {
                }
 
     </p>
+    <Divider style={{ marginBottom: 1 }}/>
 
-    <Divider/>
+
     <div style={{marginLeft:'15px', fontSize:'14px'}}>
 
 
@@ -749,7 +755,15 @@ class NewsfeedPost extends React.Component {
           {
             (like_people.includes(this.props.userId))?
 
-              <button class="box-click" onClick ={this.AddOneToLike}><i  style={{ marginRight:'10px', color:'red'}} class="fa fa-heart"></i> Like </button>
+              <button class="box-click" onClick ={this.AddOneToLike}>
+                <i  style={{ marginRight:'10px', color:'red'}}
+                class="fa fa-heart">
+                </i>
+                <span class="textHighlight">
+                  Like
+                </span>
+
+               </button>
             :
               <button class="box-click" onClick ={this.AddOneToLike} ><i style={{ marginRight:'10px'}} class="far fa-heart"></i>Like</button>
           }

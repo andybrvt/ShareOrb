@@ -17,7 +17,7 @@ class UserAvatar extends React.Component{
     const avatarColor=['#fde3cf', '#b5f5ec', '#d3f261', '#b37feb', '#1890ff']
     const textColor=['#f56a00', '#13c2c2', '#7cb305', '	#FFFFFF', '#FFFFFF']
     return (
-      <div>
+      <span>
 
         <Avatar.Group
         maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
@@ -46,7 +46,7 @@ class UserAvatar extends React.Component{
 
 
         </Avatar.Group>
-      </div>
+      </span>
     )
   }
 }

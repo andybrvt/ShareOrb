@@ -19,16 +19,14 @@
 }
 
 .commentInPost{
-  margin-left: 325px;
+  margin-left: 315px;
   display:inline-block;
 }
 
-.linewrapper{
-  vertical-align:middle;
-}
 
 .dotInLike{
-  line-height: 1.6;
+
+  overflow: auto;
 }
 
 .header {
