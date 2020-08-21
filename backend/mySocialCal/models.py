@@ -98,5 +98,5 @@ class SocialCalComment(models.Model):
     # The calCell will be the foregin key that connects the comments to the correct day
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialComments')
     body = models.TextField(blank = True)
-    created_on = models.DateField(auto_now_add = True)
+    created_on = models.DateTimeField(auto_now_add = True)
     commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'socialUserComment', on_delete = models.CASCADE, null = True )

@@ -3,7 +3,6 @@
   /* background-color: red; */
   top: 0px;
 }
-
 .socialModal .socialModalDate{
   /* background-color: red; */
   text-align: center;
@@ -19,11 +18,10 @@
   height: 920px;
 }
 
+
+
 .socialLeftRight{
-  /* display: flex; */
-
-}
-
+  /* display: flex; */}
 .socialLeftRight .socialArrowLeft {
   position: absolute;
   /* background-color: red; */
@@ -31,9 +29,7 @@
   transform: translateY(-50%);
   z-index: 3;
   left: 2%;
-  font-size: 45px;
-}
-
+  font-size: 45px;}
 .socialLeftRight .socialArrowRight {
   position: absolute;
   /* background-color: red; */
@@ -42,8 +38,7 @@
   left: 67%;
   /* right: 100%; */
   z-index: 3;
-  font-size: 45px;
-}
+  font-size: 45px;}
 
 .socialModalRight {
   /* background-color: red; */
@@ -54,8 +49,7 @@
   /* background-color: red; */
   height: 80px;
   display: flex;
-  padding: 20px;
-}
+  padding: 20px;}
 
 
 .socialModalRight .socialNameTag .socialNameUsername{
@@ -64,7 +58,6 @@
     left: 5px;
     bottom: 5px;
     font-weight: 500;
-
 }
 
 .socialModalRight .socialNameTag .socialProfileImage {
@@ -85,7 +78,7 @@
   /* background-color: red; */
   padding: 15px;
   border: 1px solid gainsboro;
-  height: 275px;
+  height: 230px;
   width: 450px;
   overflow: auto;
 
@@ -102,6 +95,23 @@
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
+
+.socialLikeComment{
+  /* background-color: red; */
+  display: flex;
+}
+.socialLikeComment .socialLike{
+  background-color: blue;
+  height: 40px;
+  width: 50%;
+}
+.socialLikeComment .socialComment{
+  background-color: red;
+  height: 40px;
+  width: 50%;
+}
+
+
 
 .socialListItemText{
   /* background-color: red; */
@@ -150,11 +160,59 @@
   font-size:  25px;
 }
 
-.socialCommentBox {
-  background-color: blue;
+.socialCommentBoxBox{
   height: 62%;
+  width: 450px;
+  overflow:hidden;
+
+}
+.socialCommentBox {
+  /* background-color: blue  ; */
+  height: 100%;
+  width: 460px;
+  padding-left: 20px;
+  overflow:auto;
   /* width: 50%; */
 }
+.socialCommentBox .socialCommentItem {
+  /* background-color: red; */
+
+  margin-top: 10px;
+  padding: 5px;
+}
+.socialCommentBox .socialCommentItem .socialCommentNameTag{
+  /* background-color: red; */
+  display: flex;
+}
+.socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
+  display: flex;
+  margin-left: 10px;
+}
+
+.socialCommentUsername{
+  font-weight: 400;
+}
+
+.socialCommentDate{
+  /* background-color: red; */
+  position: absolute;
+  left: 80%;
+  /* top: 10%; */
+  height: 20px;
+  font-size: 10px;
+  padding-top: 5px;
+  margin-left: 4px;
+}
+
+.socialCommentText{
+  /* background-color: red; */
+  position: relative;
+  width: 300px;
+  /* top: 50%; */
+  left: 12%;
+  top: -20px;
+}
+
 
 
 .joinEventButton {
