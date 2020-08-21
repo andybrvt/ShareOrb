@@ -181,8 +181,7 @@ class SocialCalendar extends React.Component{
           "selected": ""
             }`}
             key = {day}
-            onClick = {() => this.props.openSocialModal(socialEvent)}
-
+            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvent)}
           >
           <PlusOutlined className = 'plusButton'/>
           <span className = "bg"> {formattedDate}</span>

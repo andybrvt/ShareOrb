@@ -7,10 +7,8 @@ import PictureCarousel from './PictureCarousel';
 import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
 import './labelCSS/SocialModal.css';
-import {
-PictureOutlined
-} from '@ant-design/icons';
-
+import {PictureOutlined} from '@ant-design/icons';
+// import heart from '../containers/Newsfeeditems/heart.svg'
 
 class SocialCalCellInfo extends React.Component{
 
@@ -111,8 +109,16 @@ class SocialCalCellInfo extends React.Component{
         </div>
 
         <div className = 'socialLikeComment'>
-          <div className ='socialLike'> Like </div>
-          <div className  = 'socialComment'> Comment </div>
+
+          <div className ='socialLike'>
+          <i
+            style={{ marginRight:'10px', color:'red'}}
+            class="fa fa-heart">
+          </i>
+          Like </div>
+          <div className  = 'socialComment'>
+          <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
+           Comment </div>
         </div>
           <SocialComments items = {socialCalComments}/>
           <SocialEventList items = {socialCalEvents}/>

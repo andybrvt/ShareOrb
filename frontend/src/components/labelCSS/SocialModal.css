@@ -101,14 +101,31 @@
   display: flex;
 }
 .socialLikeComment .socialLike{
-  background-color: blue;
+  /* background-color: blue; */
   height: 40px;
   width: 50%;
+  border: 1px solid gainsboro;
+  border-left: none;
+  text-align: center;
+  margin-left: 2px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.socialLikeComment .socialLike:hover{
+  background-color: gainsboro;
 }
 .socialLikeComment .socialComment{
-  background-color: red;
+  /* background-color: red; */
   height: 40px;
   width: 50%;
+  border: 1px solid gainsboro;
+  border-right: none;
+  text-align: center;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.socialLikeComment .socialComment:hover{
+  background-color: gainsboro;
 }
 
 
