@@ -94,11 +94,35 @@
   z-index: 3;
 }
 
-.socialCalendar .body .row .cell .plusButton{
+.socialCalendar .body .row .hoverCell .plusButton{
   position:absolute;
-  left: 45%;
+  left: 30%;
   top: 45%;
-  color: white;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+
+}
+
+.socialCalendar .body .row .hoverCell .eyeButton{
+  position:absolute;
+  left: 55%;
+  top: 45%;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+
+  /* transition: 0.5s; */
+}
+
+.socialCalendar .body .row .hoverCell .eyeButtonPass{
+  position:absolute;
+  left: 43%;
+  top: 45%;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+  /* transition: 0.5s; */
 }
 
 .socialCalendar .body .row .cell .bgD{
@@ -114,18 +138,30 @@
   /* width: 10px; */
   /* height: 150px; */
   background-color: #D3D3D3cc;
+  /* z-index: 2; */
+
   /* background-color: #000000cc; */
   /* filter: brightness(60%); */
 }
 
-.socialCalendar .body .row .cell .imgCover {
+.socialCalendar .body .row .hoverCell:hover .plusButton{
+  color: white;
+}
+.socialCalendar .body .row .hoverCell:hover .eyeButton{
+  color: white;
+}
+.socialCalendar .body .row .hoverCell:hover .eyeButtonPass{
+  color: white;
+}
+
+.socialCalendar .body .row .hoverCell .imgCover {
   position: absolute;
   /* left: 20px; */
   left: 0%
 }
 
-.socialCalendar .body .row .cell .imgCover:hover{
-  filter: brightness(80%);
+.socialCalendar .body .row .hoverCell:hover .imgCover{
+  filter: brightness(60%);
 }
 
 

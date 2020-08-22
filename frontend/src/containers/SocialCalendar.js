@@ -12,9 +12,10 @@ import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
-import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, EyeOutlined } from '@ant-design/icons';
 import ava1 from '../components/images/avatar.jpg'
 import SocialCalCellInfo from '../components/SocialCalCellInfo';
+
 
 
 class SocialCalendar extends React.Component{
@@ -149,11 +150,29 @@ class SocialCalendar extends React.Component{
           const socialEvents = toDoStuff
           days.push(
             <div
-              className ={`col cell ${dateFns.isSameDay(day, currentMonth) ?
+              className ={`col cell hoverCell ${dateFns.isSameDay(day, currentMonth) ?
             "selected": ""
               }`}
               key = {day}
             >
+            {
+              dateFns.isSameDay(day, currentMonth) ?
+              <div>
+              <PlusOutlined
+              onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+              className = 'plusButton'/>
+              <EyeOutlined
+              onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+              className = 'eyeButton'/>
+              </div>
+
+              :
+
+              <EyeOutlined
+              onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+              className = 'eyeButtonPass'/>
+
+            }
             {
               toDoStuff[0].coverPic ?
               <div
@@ -187,7 +206,20 @@ class SocialCalendar extends React.Component{
             key = {day}
             onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
           >
-          <PlusOutlined className = 'plusButton'/>
+
+          {
+            dateFns.isSameDay(day, currentMonth) ?
+            <div>
+            <PlusOutlined className = 'plusButton'/>
+            <EyeOutlined  className = 'eyeButton'/>
+            </div>
+
+            :
+
+            <EyeOutlined  className = 'eyeButtonPass'/>
+
+          }
+
           <span className = "bg"> {formattedDate}</span>
 
         </div>

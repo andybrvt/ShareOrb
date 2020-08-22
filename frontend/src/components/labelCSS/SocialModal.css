@@ -42,6 +42,8 @@
 
 .socialModalRight {
   /* background-color: red; */
+  position: relative;
+  bottom: 25px;
   /* padding: 20px; */
 }
 
@@ -78,7 +80,7 @@
   /* background-color: red; */
   padding: 15px;
   border: 1px solid gainsboro;
-  height: 230px;
+  height: 235px;
   width: 450px;
   overflow: auto;
 
@@ -96,6 +98,31 @@
 
 }
 
+.socialLikeCommentNum{
+    /* background-color: red; */
+    display: flex;
+    height: 40px;
+}
+.socialLikeCircle{
+  /* background-color: red; */
+  /* margin-left: 30px; */
+  position: relative;
+  left: 25px;
+  top: 8px;
+  height: 20px;
+}
+.socialLikeCommentNum .socialLikeCommentText{
+  /* background-color: red; */
+  margin-left: 30px;
+  position: relative;
+  top: 8px;
+  height: 20px;
+}
+.socialLikeCommentNum .socialLikeAvatar{
+  /* background-color: blue; */
+  position: relative;
+  left: 35%;
+}
 .socialLikeComment{
   /* background-color: red; */
   display: flex;

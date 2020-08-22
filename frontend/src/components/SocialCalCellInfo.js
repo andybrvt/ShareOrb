@@ -8,7 +8,7 @@ import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
 import './labelCSS/SocialModal.css';
 import {PictureOutlined} from '@ant-design/icons';
-// import heart from '../containers/Newsfeeditems/heart.svg'
+import AvatarGroups from './AvatarGroups';
 
 class SocialCalCellInfo extends React.Component{
 
@@ -114,6 +114,15 @@ class SocialCalCellInfo extends React.Component{
           <div className = 'socialNameUsername'><b> @{this.capitalize(socialCalUsername)}</b></div>
         </div>
         {this.dateView(this.props.curSocialDate)}
+        </div>
+        <div className = 'socialLikeCommentNum'>
+        <div className = 'socialLikeCircle'>
+        <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+        </div>
+        <span className = 'socialLikeCommentText'> 5 Likes . 10 comments </span>
+        <div className = 'socialLikeAvatar'>
+          <AvatarGroups />
+        </div>
         </div>
 
         <div className = 'socialLikeComment'>
