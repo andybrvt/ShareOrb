@@ -200,7 +200,7 @@ class SocialCalendar extends React.Component{
           ]
           days.push(
           <div
-            className ={`col cell hoverCell${ dateFns.isSameDay(day, currentMonth) ?
+            className ={`col cell hoverCell ${ dateFns.isSameDay(day, currentMonth) ?
           "selected": ""
             }`}
             key = {day}
