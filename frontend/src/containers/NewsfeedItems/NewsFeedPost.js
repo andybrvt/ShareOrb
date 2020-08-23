@@ -385,10 +385,10 @@ class NewsfeedPost extends React.Component {
 
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
-      <div class="profilePicHeader">
-        <div style={{padding:30,}} class="headerContainer" >
+      <span class="profilePicHeader">
+        <div class="headerContainer" >
 
-            <div class="g grid-13">
+            <span class="g grid-13">
               <Popover
                  style={{width:'200px'}}
                  content={<div>
@@ -406,7 +406,7 @@ class NewsfeedPost extends React.Component {
                     <Avatar
                     size="large"
                     onClick = {() => this.onProfileClick(this.props.data.user.username)}
-
+                    size="large"
                     style = {{
                       cursor: 'pointer',
                     }}
@@ -427,33 +427,35 @@ class NewsfeedPost extends React.Component {
 
                 </Popover>
 
-            </div>
-              <div class="g grid-33">
+            </span>
+              <span class="g grid-33">
 
-              <span class="headerPost">
+                <span class="headerPost">
 
-              <span class="fb-group-date alignleft boldedText" >
-                Ping Hsu <br/>
-              @{this.props.data.user.username}
-              </span>
+                  <span style={{color:'black', fontSize:'18px'}} class="fb-group-date alignleft boldedText" >
+                  Ping Hsu <br/>
+                  <span class="boldedText" style={{color:'black',fontSize:'14px'}}>
+                    @{this.props.data.user.username}
+                </span>
+                    </span>
 
 
-                <span class="fb-group-date alignright" >
-                  Tucson, Arizona <br/>
-                  {this.renderTimestamp(this.props.data.created_at)}
+                      <span class="fb-group-date alignright" >
+                        Tucson, Arizona <br/>
+                        {this.renderTimestamp(this.props.data.created_at)}
+
+                  </span>
 
                 </span>
 
               </span>
 
-                </div>
-
 
 
         </div>
 
-      </div>
-      <Divider style={{ marginTop: 10, }}/>
+      </span>
+      <Divider style={{marginTop:0}} />
 
 
 

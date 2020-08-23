@@ -6,7 +6,11 @@
 .headerContainer{
   display: flex;
   flex-wrap: wrap;
-  
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right:30px;
+  padding-bottom: 15px;
+  /* background: red; */
 }
 
 .LikeCommentHover:hover {
@@ -75,14 +79,6 @@
 }
 .alignright {
 	float: right;
-  display:inline-block;
-  color: rgb(145, 151, 163);
-  direction: ltr;
-  display: inline;
-
-  font-size: 12px;
-  font-weight: normal;
-
 }
 
 
@@ -102,7 +98,7 @@
 
 .headerPost{
   display: inline;
-  line-height: 400%;
+
 }
 .customDivider {
   border-top: 1px solid #f0f0f0;
@@ -391,7 +387,6 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 
 .boldedText{
-  margin-left: 10px;
   font-weight: bold;
 }
 
@@ -460,7 +455,7 @@ header {
   font-size: 15px;
   font-weight: normal;
   height: auto;
-  line-height: 19.3199996948242px;
+  line-height: 29.3199996948242px;
   margin-bottom: 0px;
   margin-left: 10px;
   margin-right: 0px;
@@ -479,7 +474,7 @@ header {
 .fontTest{
   font-family: 'Segoe UI Regular';
   font-size: 18px;
-font-style: normal; font-variant: normal; font-weight: 400; line-height: 29px;
+font-style: normal; font-variant: normal; font-weight: 400; line-height: 39px;
   color:black;
   margin-bottom: 30px;
  }
