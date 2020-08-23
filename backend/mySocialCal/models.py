@@ -19,7 +19,7 @@ class SocialCalCell(models.Model):
     # This would just be the owner of the social calendar
     socialCalUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'social_cal_user', on_delete= models.CASCADE)
     # We will use this to know where to put the
-    socialCaldate = models.DateField(auto_now_add = True)
+    socialCaldate = models.DateField(default = timezone.now , blank = False)
     #This is to set the cover picture of the cell
     coverPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
@@ -51,8 +51,8 @@ class SocialCalItems(models.Model):
     # So since there will be different items for the social cal, I want to h ave differnt
     # types
     # The types will be:
-        # post_pic
-        # post_no_pic
+        # clip_w_pic
+        # clip_pic
         # picture
 
     # MAKE SURE TO FIX THE NAME WHEN YOU HAVE THE TIME

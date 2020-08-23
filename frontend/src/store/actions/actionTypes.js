@@ -70,6 +70,9 @@ export const NEXT_MONTH_SOCIAL = 'NEXT_MONTH_SOCIAL';
 export const PREV_MONTH_SOCIAL = 'PREV_MONTH_SOCIAL';
 export const OPEN_SOCIAL_MODAL = 'OPEN_SOCIAL_MODAL';
 export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
+// The picture modal is what you would use to upload pictures
+export const OPEN_SOCIAL_PICTURE_MODAL = 'OPEN_SOCIAL_PICTURE_MODAL';
+export const CLOSE_SOCIAL_PICTURE_MODAL = 'CLOSE_SOCIAL_PICTURE_MODAL';
 
 
 

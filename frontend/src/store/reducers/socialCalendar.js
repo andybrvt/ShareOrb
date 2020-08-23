@@ -9,7 +9,8 @@ const initialState = {
   socialObject: [],
   socialDate: new Date(),
   showSocialModal: false,
-  curSocialDate: new Date()
+  curSocialDate: new Date(),
+  showSocialPicModal: false
 }
 
 const nextMonthSocial = (state, action) => {
@@ -38,6 +39,18 @@ const closeSocialModal = (state, action) => {
   })
 }
 
+const openSocialPictureModal = (state, action) => {
+  return updateObject (state, {
+    showSocialPicModal: true
+  })
+}
+
+const closeSocialPictureModal = (state, action) => {
+  return updateObject (state, {
+    showSocialPicModal: false
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -48,6 +61,10 @@ const reducer = (state = initialState, action) => {
       return openSocialModal(state, action)
     case actionTypes.CLOSE_SOCIAL_MODAL:
       return closeSocialModal(state, action)
+    case actionTypes.OPEN_SOCIAL_PICTURE_MODAL:
+      return openSocialPictureModal(state, action)
+    case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
+      return closeSocialPictureModal(state, action)
     default:
       return state;
   }
