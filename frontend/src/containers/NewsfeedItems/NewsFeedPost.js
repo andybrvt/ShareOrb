@@ -432,18 +432,31 @@ class NewsfeedPost extends React.Component {
 
                 <span class="headerPost">
 
-                  <span style={{color:'black', fontSize:'18px'}} class="fb-group-date alignleft boldedText" >
-                  Ping Hsu <br/>
-                  <span class="boldedText" style={{color:'black',fontSize:'14px'}}>
+                  <span
+                    style={{color:'black', fontSize:'15px'}}
+                    class="headerPostText alignleft" >
+                    Ping Hsu <br/>
+                  <span>
+                  <span
+                    style={{fontSize:'13px'}}
+                    class="headerPostText">
                     @{this.props.data.user.username}
+                  </span>
                 </span>
                     </span>
 
 
-                      <span class="fb-group-date alignright" >
+                      <span class="headerPostText alignright" >
+                        {
+                        /*
+                        <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
                         Tucson, Arizona <br/>
+                        */}
+                        <span style={{float:'right'}}>
+                        ...
+                        <br/>
                         {this.renderTimestamp(this.props.data.created_at)}
-
+                        </span>
                   </span>
 
                 </span>
@@ -455,7 +468,7 @@ class NewsfeedPost extends React.Component {
         </div>
 
       </span>
-      <Divider style={{marginTop:0}} />
+
 
 
 
@@ -519,7 +532,11 @@ class NewsfeedPost extends React.Component {
                  </div>
                  :
                  <div>
-
+                 <span
+                   style={{fontSize:'14px', marginLeft:'10px', marginRight:'5px'}}
+                   class="boldedText">
+                   {this.props.data.user.username}
+                 </span>
                    <p class="innerSeeMore " style={{fontSize:'16px',}}>
                    {this.props.data.caption}
 

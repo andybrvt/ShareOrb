@@ -1,7 +1,18 @@
 /* http://jsfiddle.net/zbt5L1wp/4/ */
 /* https://bootsnipp.com/snippets/rlxj6 */
 /* temporary for test to see card look */
+.headerPostText {
+  color: rgb(145, 151, 163);
+  direction: ltr;
+  display: inline;
 
+  font-size: 13px;
+  font-weight: normal;
+  height: auto;
+  line-height: 25.0799999237061px;
+  text-align: left;
+  width: auto;
+}
 
 .headerContainer{
   display: flex;
