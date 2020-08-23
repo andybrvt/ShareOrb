@@ -17,6 +17,7 @@ import defaultPic from '../../components/images/default.png'
 import UserAvatar from './UserAvatar'
 import UserLikePlusUserAvatar from './UserLikePlusUserAvatar';
 import Liking from './Liking';
+import LikeList from './LikeList';
 
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -30,6 +31,7 @@ class NewsfeedPost extends React.Component {
       show:false,
       stepCount:0,
       avatarColor:'',
+      likeListCondition:false,
     }
   }
 
@@ -150,6 +152,12 @@ class NewsfeedPost extends React.Component {
   showModal = () => {
     this.setState({
       visibleModal: true,
+    });
+  };
+
+  triggerLikeModal = () => {
+    this.setState({
+      likeListCondition: true,
     });
   };
 
@@ -377,8 +385,11 @@ class NewsfeedPost extends React.Component {
 
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
-      <div>
-      <div style={{padding:20,}}>
+      <div class="profilePicHeader">
+      <div style={{padding:30,}} class="headerContainer" >
+
+
+      {/*
       <Popover
          style={{width:'200px'}}
          content={<div>
@@ -415,20 +426,41 @@ class NewsfeedPost extends React.Component {
             }
 
 
-            </Popover>
+          </Popover>
 
-            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
-              {this.capitalize(this.props.data.user.username)}
+          */}
 
-              <div>
-              <span class="fb-group-date alignleft" > Tucson, Arizona</span>
+          <div class="g grid-13">
+          <Avatar
+          size="large"
+          onClick = {() => this.onProfileClick(this.props.data.user.username)}
 
-               <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
+          style = {{
+            cursor: 'pointer',
+          }}
+          src={profilePic} alt="avatar"
+          class="profilePicHeader"/>
+          </div>
+            <div class="g grid-33">
+
+            <span class="headerPost">
+
+            <span class="fb-group-date alignleft" >
+              Ping Hsu <br/>
+            @{this.props.data.user.username}
+            </span>
+
+
+              <span class="fb-group-date alignright" >
+                Tucson, Arizona <br/>
+                {this.renderTimestamp(this.props.data.created_at)}
+              </span>
+
+            </span>
+
               </div>
 
 
-
-            </span>
 
             </div>
 
@@ -512,9 +544,7 @@ class NewsfeedPost extends React.Component {
                  </div>
                  :
                  <div>
-                   <p class="innerSeeMore boldedText" style={{fontSize:'14px', marginRight:'5px'}}>
-                    {this.props.data.user.username}
-                    </p>
+
                    <p class="innerSeeMore " style={{fontSize:'16px',}}>
                    {this.props.data.caption}
 
@@ -724,7 +754,7 @@ class NewsfeedPost extends React.Component {
       <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
     }
 
-    <span class="LikeCommentHover" onClick ={this.OnClickPost}>
+    <span class="LikeCommentHover" onClick ={this.triggerLikeModal}>
      {like_people.length} likes
     </span>
      <div class='likeInPost'>
@@ -748,6 +778,7 @@ class NewsfeedPost extends React.Component {
     </div>
 
     </div>
+    <LikeList {...this.props} condition={false}/>
 
     {/* show the first 3 people
       like_people[0]'s avatar'
@@ -771,9 +802,15 @@ class NewsfeedPost extends React.Component {
 
                </button>
             :
-              <button class="box-click" onClick ={this.AddOneToLike} ><i style={{ marginRight:'10px'}} class="far fa-heart"></i>Like</button>
+              <button class="box-click" o
+              nClick ={this.AddOneToLike} >
+              <i style={{ marginRight:'10px'}}
+              class="far fa-heart"></i>Like
+
+              </button>
           }
-          <button onClick ={this.OnClickPost} >
+
+          <button onClick={this.OnClickPost}>
 
             <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
           </button>

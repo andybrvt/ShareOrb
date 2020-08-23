@@ -3,13 +3,25 @@
 /* temporary for test to see card look */
 
 
+.headerContainer{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px 15px 0 0;
+  background: #CDD6D0;
+}
+
 .LikeCommentHover:hover {
   color: #3399FF;
   text-decoration: underline;
   cursor: pointer;
 }
 
-
+.grid-33 {
+  width: calc(87.3333% - 5px);
+}
+.grid-13 {
+  width: calc(13.3333% - 15px);
+}
 
 .dividerTest{
   border-top: 3px solid #bbb;
@@ -47,14 +59,52 @@
 }
 
 .alignleft {
-	float: left;
-  text-indent: 55px;
+  float: left;
 
+  color: rgb(145, 151, 163);
+  direction: ltr;
+  display: inline;
+
+  font-size: 12px;
+  font-weight: normal;
+
+}
+
+
+.profilePicHeader{
+  float: left;
 }
 .alignright {
 	float: right;
+  display:inline-block;
+  color: rgb(145, 151, 163);
+  direction: ltr;
+  display: inline;
+
+  font-size: 12px;
+  font-weight: normal;
+
 }
 
+
+.personName {
+  color: rgb(20, 24, 35);
+  font-size: 14px;
+  font-weight: normal;
+  margin-left: 50px;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display:inline-block;
+  cursor: pointer;
+  text-align: left;
+
+}
+
+.headerPost{
+  display: inline;
+  line-height: 40%;
+}
 .customDivider {
   border-top: 1px solid #f0f0f0;
 
@@ -393,19 +443,7 @@ header {
 
 
 
-.personName {
-  color: rgb(20, 24, 35);
-  font-size: 14px;
-  font-weight: normal;
 
-  margin-left: 15px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-
-  cursor: pointer;
-  text-align: left;
-
-}
 
 
 
