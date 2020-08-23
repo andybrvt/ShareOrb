@@ -386,108 +386,81 @@ class NewsfeedPost extends React.Component {
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
       <div class="profilePicHeader">
-      <div style={{padding:30,}} class="headerContainer" >
+        <div style={{padding:30,}} class="headerContainer" >
+
+            <div class="g grid-13">
+              <Popover
+                 style={{width:'200px'}}
+                 content={<div>
+                   <Avatar
+                    shape="square"
+                    size="large"
+                    src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
+                    />
+                   <div> 110 followers </div>
+                 </div>}
+
+                >
+                  {
+                    profilePic != '' ?
+                    <Avatar
+                    size="large"
+                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
+
+                    style = {{
+                      cursor: 'pointer',
+                    }}
+                    src={profilePic} alt="avatar" />
+
+                    :
+
+                    <Avatar
+                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                    size="large"
+                    style = {{
+                      cursor: 'pointer',
+                    }}
+                    src={defaultPic} alt="avatar" />
+
+                  }
 
 
-      {/*
-      <Popover
-         style={{width:'200px'}}
-         content={<div>
-           <Avatar
-            shape="square"
-            size="large"
-            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
-            />
-           <div> 110 followers </div>
-         </div>}
-
-        >
-            {
-              profilePic != '' ?
-              <Avatar
-              size="large"
-              onClick = {() => this.onProfileClick(this.props.data.user.username)}
-
-              style = {{
-                cursor: 'pointer',
-              }}
-              src={profilePic} alt="avatar" />
-
-              :
-
-              <Avatar
-              onClick = {() => this.onProfileClick(this.props.data.user.username)}
-              size="large"
-              style = {{
-                cursor: 'pointer',
-              }}
-              src={defaultPic} alt="avatar" />
-
-            }
-
-
-          </Popover>
-
-          */}
-
-          <div class="g grid-13">
-          <Avatar
-          size="large"
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
-
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={profilePic} alt="avatar"
-          class="profilePicHeader"/>
-          </div>
-            <div class="g grid-33">
-
-            <span class="headerPost">
-
-            <span class="fb-group-date alignleft" >
-              Ping Hsu <br/>
-            @{this.props.data.user.username}
-            </span>
-
-
-              <span class="fb-group-date alignright" >
-                Tucson, Arizona <br/>
-                {this.renderTimestamp(this.props.data.created_at)}
-              </span>
-
-            </span>
-
-              </div>
-
-
+                </Popover>
 
             </div>
+              <div class="g grid-33">
+
+              <span class="headerPost">
+
+              <span class="fb-group-date alignleft boldedText" >
+                Ping Hsu <br/>
+              @{this.props.data.user.username}
+              </span>
+
+
+                <span class="fb-group-date alignright" >
+                  Tucson, Arizona <br/>
+                  {this.renderTimestamp(this.props.data.created_at)}
+
+                </span>
+
+              </span>
+
+                </div>
+
+
 
         </div>
 
-
-
-
-
-      <div>
-      {/*
-      <div>
-      {
-        ((this.props.data.post_images).length==1)?
-      <div class="imageContainer">
-
-          <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
-
       </div>
-      :
-      <div> </div>
-    }
-    </div>
+      <Divider style={{ marginTop: 10, }}/>
 
-    */}
 
-  <div style={{marginTop:'20px'}}>
+
+
+
+      <div>
+  <div>
     {this.revealPhoto()}
 
   </div>

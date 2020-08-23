@@ -6,8 +6,7 @@
 .headerContainer{
   display: flex;
   flex-wrap: wrap;
-  padding: 15px 15px 0 0;
-  background: #CDD6D0;
+  
 }
 
 .LikeCommentHover:hover {
@@ -17,7 +16,7 @@
 }
 
 .grid-33 {
-  width: calc(87.3333% - 5px);
+  width: calc(89.3333% - 5px);
 }
 .grid-13 {
   width: calc(13.3333% - 15px);
@@ -103,7 +102,7 @@
 
 .headerPost{
   display: inline;
-  line-height: 40%;
+  line-height: 400%;
 }
 .customDivider {
   border-top: 1px solid #f0f0f0;
