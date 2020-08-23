@@ -15,7 +15,7 @@ import moment from 'moment';
 import { UserOutlined, PlusOutlined, EyeOutlined } from '@ant-design/icons';
 import ava1 from '../components/images/avatar.jpg'
 import SocialCalCellInfo from '../components/SocialCalCellInfo';
-
+import SocialUploadPicModal from '../components/SocialUploadPicModal';
 
 
 class SocialCalendar extends React.Component{
@@ -159,7 +159,7 @@ class SocialCalendar extends React.Component{
               dateFns.isSameDay(day, currentMonth) ?
               <div>
               <PlusOutlined
-              onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+              onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
               className = 'plusButton'/>
               <EyeOutlined
               onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
@@ -280,6 +280,28 @@ class SocialCalendar extends React.Component{
     this.props.openSocialModal(socialCalInfo, day)
   }
 
+  onOpenSocialCalPicModal = () => {
+    this.props.openSocialPictureModal()
+  }
+
+  handlePictureUpload = (values) => {
+    // This is used to upload pictures into the calendar cell
+
+    let fileList = []
+    if(values.length !== 0){
+      for(let i = 0; i < values.length; i++) {
+        fileList.push(values[i].originFileObj)
+      }
+    }
+
+    const curId = this.props.curProfile.id
+
+    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId, {
+      fileList
+    })
+    console.log(fileList)
+  }
+
 
 
 
@@ -305,7 +327,11 @@ class SocialCalendar extends React.Component{
 
 
             <SocialCalCellInfo />
-
+            <SocialUploadPicModal
+            close = {this.props.closeSocialPictureModal}
+            view = {this.props.showSocialPicModal}
+            onSubmit = {this.handlePictureUpload}
+             />
         </div>
     )
   }
@@ -316,7 +342,8 @@ const mapStateToProps = state => {
   return{
     currentDate: state.socialCal.socialDate,
     events: state.socialCal.socialEvents,
-    showSocialModal: state.socialCal.showSocialModal
+    showSocialModal: state.socialCal.showSocialModal,
+    showSocialPicModal: state.socialCal.showSocialPicModal
   }
 }
 
@@ -328,8 +355,9 @@ const mapDispatchToProps = dispatch => {
     nextMonth: () => dispatch(socialCalActions.nextMonthSocial()),
     prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
     openSocialModal: (socialObject, day) => dispatch(socialCalActions.openSocialModal(socialObject, day)),
-    closeSocialModal: () => dispatch(socialCalActions.closeSocialModal())
-
+    closeSocialModal: () => dispatch(socialCalActions.closeSocialModal()),
+    openSocialPictureModal: () => dispatch(socialCalActions.openSocialPictureModal()),
+    closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal())
   }
 }
 

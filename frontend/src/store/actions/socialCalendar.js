@@ -26,3 +26,16 @@ export const closeSocialModal = () => {
     type: actionTypes.CLOSE_SOCIAL_MODAL
   }
 }
+
+
+export const openSocialPictureModal = () => {
+  return {
+    type: actionTypes.OPEN_SOCIAL_PICTURE_MODAL
+  }
+}
+
+export const closeSocialPictureModal = () => {
+  return {
+    type: actionTypes.CLOSE_SOCIAL_PICTURE_MODAL
+  }
+}

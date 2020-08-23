@@ -4,5 +4,6 @@ from rest_framework.routers import DefaultRouter
 
 
 urlpatterns = [
-    path('cells', views.SocialCalCellView.as_view(), name = 'socialCalendar_cells')
+    path('cells', views.SocialCalCellView.as_view(), name = 'socialCalendar_cells'),
+    path('uploadPic/<slug:id>', views.SocialCalUploadPic.as_view(), name = 'socialCalendar_uploadpic')
 ]
