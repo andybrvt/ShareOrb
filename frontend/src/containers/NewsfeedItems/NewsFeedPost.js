@@ -749,7 +749,7 @@ class NewsfeedPost extends React.Component {
       <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
     }
 
-    <span class="LikeCommentHover" onClick ={this.changeLikeListCondition}>
+    <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
      {like_people.length} likes
     </span>
      <div class='likeInPost'>
@@ -773,7 +773,7 @@ class NewsfeedPost extends React.Component {
     </div>
 
     </div>
-    <LikeList {...this.props} condition={false}/>
+    <LikeList {...this.props} condition={this.state.testLike}/>
 
     {/* show the first 3 people
       like_people[0]'s avatar'
