@@ -165,7 +165,8 @@ const uploadImageRainbowProgress = {
 	<Container style={{paddingTop: '10',zIndex:'-1'}}>
 	  <form>
 	    <div className="upload-container">
-				{ stage !== "image" ?
+
+          { stage !== "image" ?
 				<div  className= "uploadImage upload" >
 
 

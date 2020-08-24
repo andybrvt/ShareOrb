@@ -13,6 +13,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SocialCalCell
         fields = (
+         'id',
          'socialCalUser',
          'socialCaldate',
          'testDate',

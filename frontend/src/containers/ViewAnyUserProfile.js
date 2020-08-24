@@ -121,7 +121,6 @@ class UserProfileView extends React.Component {
 		return (
 			<div>
         <PersonalProfile curProfile = {userData} />
-        <UserFriendsList {...this.state} />
       </div>
 
 		)

@@ -749,7 +749,7 @@ class NewsfeedPost extends React.Component {
       <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
     }
 
-    <span class="LikeCommentHover" onClick ={this.changeLikeListCondition}>
+    <span class="LikeCommentHover" onClick ={() => this.changeLikeListCondition()}>
      {like_people.length} likes
     </span>
      <div class='likeInPost'>

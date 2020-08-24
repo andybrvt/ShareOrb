@@ -2,6 +2,7 @@ import React from 'react';
 import InfiniteList from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import NewsFeedFormPost from '../components/NewsFeedFormPost';
+import NewNewsfeedFormPost from '../components/NewNewsfeedFormPost';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -220,7 +221,7 @@ class NewsFeedView extends React.Component {
 
 
 	<NewsFeedFormPost data = {this.props}/>
-
+	<NewNewsfeedFormPost />
 
 	</div>
 

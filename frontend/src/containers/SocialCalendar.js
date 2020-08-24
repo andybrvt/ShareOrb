@@ -177,7 +177,8 @@ class SocialCalendar extends React.Component{
             {
               toDoStuff[0].coverPic ?
               <div
-              onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}>
+              // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+              >
               <Avatar
               className = 'imgCover'
               size = {250}
@@ -299,22 +300,29 @@ class SocialCalendar extends React.Component{
     // add it into a form data in order for the file to be actually sent as a file
     // if not it will send as a json or not send at all. On top of that you have to add
     //  a header with a content-type of a multipart/form-data
-    const formData = new FormData()
+
+    console.log(values)
     if(values.length !== 0){
-      for(let i = 0; i < values.length; i++) {
-        formData.append('image['+ i + ']', values[i].originFileObj)
+      const formData = new FormData()
+      if(values.length !== 0){
+        for(let i = 0; i < values.length; i++) {
+          formData.append('image['+ i + ']', values[i].originFileObj)
+        }
       }
+
+      const curId = this.props.curProfile.id
+      // formData.append('imgList',fileList)
+
+      authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
+        formData,
+        {headers: {"content-type": "multipart/form-data"}}
+
+      )
+      .then((response)=> {console.log(response)})
+      // maybe change this when we have channels working
+      window.location.reload(true)
     }
 
-    const curId = this.props.curProfile.id
-    // formData.append('imgList',fileList)
-
-    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
-      formData,
-      {headers: {"content-type": "multipart/form-data"}}
-
-    )
-    .then((response)=> {console.log(response)})
 
   }
 
