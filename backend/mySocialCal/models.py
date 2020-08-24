@@ -76,6 +76,7 @@ class SocialCalItems(models.Model):
 
     # Everything from here down would be for the events
 
+    
 class SocialCalEvent(models.Model):
     # This modelis for the social events taht you are gonna post for the public
 

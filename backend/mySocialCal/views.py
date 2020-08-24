@@ -11,6 +11,9 @@ from datetime import datetime
 from django.utils import timezone
 from userprofile.models import User
 import pytz
+from rest_framework.parsers import FormParser
+from rest_framework.parsers import MultiPartParser
+
 
 
 # Create your views here.
@@ -22,8 +25,8 @@ class SocialCalCellView(generics.ListAPIView):
 
 
 class SocialCalUploadPic(APIView):
+    # parser_classes = (FormParser, MultiPartParser)
     def post(self, request, id, *args, **kwargs):
-
         # This is to adjust the time to the correct timezone
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
@@ -38,10 +41,17 @@ class SocialCalUploadPic(APIView):
             testDate = time
         )
 
+        # print(request.data.get('image[0]'))
+        # print(request.body)
+
+        for i in range(len(request.data)):
+            print(request.data['image['+str(i)+']'])
+
         # Now we will loop through all the photos and make an isntance for eahc one and
         # add a foregin key to it so that it can connect to the right socialcalCell
-        for images in request.data['fileList']:
-            print(images)
+        # for images in request.data['fileList']:
+        #     print(images)
+        #
             # Gotta remember that the socialCalItem has to be the right type (jsut for future refernce)
             # clip_w_pic
             # clip_pic
@@ -50,11 +60,17 @@ class SocialCalUploadPic(APIView):
                 socialItemType = 'picture',
                 creator = user,
                 itemUser = user,
-                # itemImage = images,
+                itemImage = request.data['image['+str(i)+']'],
                 calCell = socialCalCell
             )
-
-
-        print(request.data)
-        print(socialCalCell)
+        if socialCalCell.coverPic == '':
+            if (len(request.data) != 0):
+                obj, create = models.SocialCalCell.objects.update_or_create(
+                    socialCalUser = user,
+                    socialCaldate = time,
+                    testDate = time,
+                    defaults = {'coverPic': request.data['image[0]']}
+                )
+        # print(request.data)
+        # print(socialCalCell)
         return Response('Uploaded Pictures')

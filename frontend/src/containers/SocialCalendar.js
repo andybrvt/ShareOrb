@@ -148,6 +148,7 @@ class SocialCalendar extends React.Component{
           // The socialEvents should only have 1 item because it holds just the single
           // social cell
           const socialEvents = toDoStuff
+          console.log(toDoStuff[0])
           days.push(
             <div
               className ={`col cell hoverCell ${dateFns.isSameDay(day, currentMonth) ?
@@ -204,19 +205,26 @@ class SocialCalendar extends React.Component{
           "selected": ""
             }`}
             key = {day}
-            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+            // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
           >
 
           {
             dateFns.isSameDay(day, currentMonth) ?
             <div>
-            <PlusOutlined className = 'plusButton'/>
-            <EyeOutlined  className = 'eyeButton'/>
+            <PlusOutlined
+            onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+             className = 'plusButton'/>
+            <EyeOutlined
+            onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+             className = 'eyeButton'/>
             </div>
 
             :
 
-            <EyeOutlined  className = 'eyeButtonPass'/>
+            <EyeOutlined
+            onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+
+            className = 'eyeButtonPass'/>
 
           }
 
@@ -287,19 +295,27 @@ class SocialCalendar extends React.Component{
   handlePictureUpload = (values) => {
     // This is used to upload pictures into the calendar cell
 
-    let fileList = []
+    // So when you want to upload a file into the backend you need to
+    // add it into a form data in order for the file to be actually sent as a file
+    // if not it will send as a json or not send at all. On top of that you have to add
+    //  a header with a content-type of a multipart/form-data
+    const formData = new FormData()
     if(values.length !== 0){
       for(let i = 0; i < values.length; i++) {
-        fileList.push(values[i].originFileObj)
+        formData.append('image['+ i + ']', values[i].originFileObj)
       }
     }
 
     const curId = this.props.curProfile.id
+    // formData.append('imgList',fileList)
 
-    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId, {
-      fileList
-    })
-    console.log(fileList)
+    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
+      formData,
+      {headers: {"content-type": "multipart/form-data"}}
+
+    )
+    .then((response)=> {console.log(response)})
+
   }
 
 
