@@ -775,10 +775,6 @@ class NewsfeedPost extends React.Component {
     </div>
 
     </div>
-<<<<<<< HEAD
-    
-    <LikeList {...this.props} condition={this.state.testLike}/>
-=======
     <Modal
       class="modalOuterContainer"
       title={`Post by ${this.props.data.user.username}`}
@@ -794,7 +790,6 @@ class NewsfeedPost extends React.Component {
       testsetestses
 
       </Modal>
->>>>>>> 1bf6d72757f0b92802fd6e08c487295467e7cd24
 
     {/* show the first 3 people
       like_people[0]'s avatar'

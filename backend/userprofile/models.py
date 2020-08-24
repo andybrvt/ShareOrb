@@ -7,6 +7,7 @@ from typing import Union
 from django.db.models.signals import post_save
 from django.utils.timezone import now
 from mySocialCal.models import SocialCalCell
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -75,7 +76,7 @@ class UserFollowing(models.Model):
 
 class Post(models.Model):
     caption = models.CharField(max_length=1000, default = 'caption')
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default = timezone.now, blank = False)
     updated_at = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0, blank = True)
     like_condition = models.BooleanField(default=False, db_index=True)
