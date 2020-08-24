@@ -148,6 +148,7 @@ class SocialCalendar extends React.Component{
           // The socialEvents should only have 1 item because it holds just the single
           // social cell
           const socialEvents = toDoStuff
+          console.log(toDoStuff[0])
           days.push(
             <div
               className ={`col cell hoverCell ${dateFns.isSameDay(day, currentMonth) ?
@@ -204,7 +205,7 @@ class SocialCalendar extends React.Component{
           "selected": ""
             }`}
             key = {day}
-            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+            // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
           >
 
           {
@@ -307,7 +308,7 @@ class SocialCalendar extends React.Component{
 
     const curId = this.props.curProfile.id
     // formData.append('imgList',fileList)
-    
+
     authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
       formData,
       {headers: {"content-type": "multipart/form-data"}}

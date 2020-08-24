@@ -43,7 +43,6 @@ class SocialCalUploadPic(APIView):
 
         # print(request.data.get('image[0]'))
         # print(request.body)
-        print(len(request.data))
 
         for i in range(len(request.data)):
             print(request.data['image['+str(i)+']'])
@@ -64,8 +63,14 @@ class SocialCalUploadPic(APIView):
                 itemImage = request.data['image['+str(i)+']'],
                 calCell = socialCalCell
             )
-
-
+        if socialCalCell.coverPic == '':
+            if (len(request.data) != 0):
+                obj, create = models.SocialCalCell.objects.update_or_create(
+                    socialCalUser = user,
+                    socialCaldate = time,
+                    testDate = time,
+                    defaults = {'coverPic': request.data['image[0]']}
+                )
         # print(request.data)
         # print(socialCalCell)
         return Response('Uploaded Pictures')
