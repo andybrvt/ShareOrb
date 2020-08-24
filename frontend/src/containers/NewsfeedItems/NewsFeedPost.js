@@ -31,7 +31,7 @@ class NewsfeedPost extends React.Component {
       show:false,
       stepCount:0,
       avatarColor:'',
-      likeListCondition:false,
+      testLike: false,
     }
   }
 
@@ -155,11 +155,14 @@ class NewsfeedPost extends React.Component {
     });
   };
 
-  triggerLikeModal = () => {
+  changeLikeListCondition = () => {
+    console.log("hello")
+    console.log(this.state.testLike)
     this.setState({
-      likeListCondition: true,
+      testLike: true,
     });
-  };
+    console.log(this.state.testLike)
+  }
 
   onClick = () => {
     this.setState({
@@ -746,7 +749,7 @@ class NewsfeedPost extends React.Component {
       <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
     }
 
-    <span class="LikeCommentHover" onClick ={this.triggerLikeModal}>
+    <span class="LikeCommentHover" onClick ={this.changeLikeListCondition}>
      {like_people.length} likes
     </span>
      <div class='likeInPost'>
