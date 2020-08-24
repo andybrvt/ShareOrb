@@ -773,6 +773,7 @@ class NewsfeedPost extends React.Component {
     </div>
 
     </div>
+    
     <LikeList {...this.props} condition={this.state.testLike}/>
 
     {/* show the first 3 people
