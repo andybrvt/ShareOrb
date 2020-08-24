@@ -11,6 +11,9 @@ from rest_framework.decorators import api_view
 from django.shortcuts import render, get_object_or_404
 from .forms import CommentForm
 from django.http import JsonResponse
+from django.utils import timezone
+import pytz
+
 # Create your views here.
 # Views will take in models and serializers and then displays it
 #  You can also add in functions (def) to modify stuff
@@ -53,6 +56,36 @@ class PostListView(viewsets.ModelViewSet):
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')
 	serializer_class = serializers.PostSerializer
 
+class NewPostingView(APIView):
+    # This is the new API view which will be used to post the new post
+    def post(self, request, *args, **kwargs):
+        # So first you must create the post then like the foreign key to the
+        # images
+        print(request.data)
+        timezone.activate(pytz.timezone('MST'))
+        time = timezone.localtime(timezone.now())
+        # The first thing you wanna get is the user
+        user = get_object_or_404(models.User, id = request.data['user'])
+
+        # Now you will either get or create a modal like this
+        postObj, created = models.Post.objects.get_or_create(
+            user = user,
+            caption = request.data['caption'],
+            created_at = time
+        )
+
+        # Now you will loop through all the photos but since there is the name and
+        # caption you will minus 2
+        for i in range(len(request.data) -2):
+            print(request.data['image['+str(i)+']'])
+
+            imageObj = models.ImageModel.objects.create(
+                imageList = postObj,
+                mainimage = request.data['image['+str(i)+']']
+            )
+
+
+        return Response('Post the post')
 
 # Needed for ReactInfiniteView grabs offset and limit in infinite scroll
 def infinite_filter(request):

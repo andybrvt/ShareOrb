@@ -219,8 +219,6 @@ class NewsFeedView extends React.Component {
 
 	<div style={{marginTop:'100px'}}>
 
-
-	<NewsFeedFormPost data = {this.props}/>
 	<NewNewsfeedFormPost />
 
 	</div>

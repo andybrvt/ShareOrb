@@ -58,5 +58,6 @@ urlpatterns = [
 
 	path('test/test', views.CommentView.as_view(), name = 'images test'),
 
-	path('notification', views.NotificationView.as_view(), name = 'notification')
+	path('notification', views.NotificationView.as_view(), name = 'notification'),
+	path('post', views.NewPostingView.as_view(), name = 'new_posting')
 ]
