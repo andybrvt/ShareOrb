@@ -210,13 +210,20 @@ class SocialCalendar extends React.Component{
           {
             dateFns.isSameDay(day, currentMonth) ?
             <div>
-            <PlusOutlined className = 'plusButton'/>
-            <EyeOutlined  className = 'eyeButton'/>
+            <PlusOutlined
+            onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+             className = 'plusButton'/>
+            <EyeOutlined
+            onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+             className = 'eyeButton'/>
             </div>
 
             :
 
-            <EyeOutlined  className = 'eyeButtonPass'/>
+            <EyeOutlined
+            onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+
+            className = 'eyeButtonPass'/>
 
           }
 
@@ -286,20 +293,29 @@ class SocialCalendar extends React.Component{
 
   handlePictureUpload = (values) => {
     // This is used to upload pictures into the calendar cell
-
+    var self = this
     let fileList = []
+    const formData = new FormData()
     if(values.length !== 0){
       for(let i = 0; i < values.length; i++) {
-        fileList.push(values[i].originFileObj)
+        // fileList.push(values[i].originFileObj)
+        formData.append('image['+ i + ']', values[i].originFileObj)
       }
     }
 
     const curId = this.props.curProfile.id
-
-    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId, {
-      fileList
-    })
+    // formData.append('imgList',fileList)
+    for (var fd of formData) {
+      console.log(fd);
+    }
     console.log(fileList)
+    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
+      formData,
+      {headers: {"content-type": "multipart/form-data"}}
+
+    )
+    .then((response)=> {console.log(response)})
+
   }
 
 
