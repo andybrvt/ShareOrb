@@ -293,22 +293,21 @@ class SocialCalendar extends React.Component{
 
   handlePictureUpload = (values) => {
     // This is used to upload pictures into the calendar cell
-    var self = this
-    let fileList = []
+
+    // So when you want to upload a file into the backend you need to
+    // add it into a form data in order for the file to be actually sent as a file
+    // if not it will send as a json or not send at all. On top of that you have to add
+    //  a header with a content-type of a multipart/form-data
     const formData = new FormData()
     if(values.length !== 0){
       for(let i = 0; i < values.length; i++) {
-        // fileList.push(values[i].originFileObj)
         formData.append('image['+ i + ']', values[i].originFileObj)
       }
     }
 
     const curId = this.props.curProfile.id
     // formData.append('imgList',fileList)
-    for (var fd of formData) {
-      console.log(fd);
-    }
-    console.log(fileList)
+    
     authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
       formData,
       {headers: {"content-type": "multipart/form-data"}}
