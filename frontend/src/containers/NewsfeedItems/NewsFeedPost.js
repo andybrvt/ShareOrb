@@ -181,6 +181,7 @@ class NewsfeedPost extends React.Component {
     console.log(e);
     this.setState({
       visibleModal: false,
+      testLike:false,
     });
   };
 
@@ -188,6 +189,7 @@ class NewsfeedPost extends React.Component {
     console.log(e);
     this.setState({
       visibleModal: false,
+      testLike:false,
     });
   };
 
@@ -773,7 +775,21 @@ class NewsfeedPost extends React.Component {
     </div>
 
     </div>
-    <LikeList {...this.props} condition={this.state.testLike}/>
+    <Modal
+      class="modalOuterContainer"
+      title={`Post by ${this.props.data.user.username}`}
+      visible={this.state.testLike}
+      onOk={this.handleOk}
+      onCancel={this.handleCancel}
+      width="1600px"
+      height="800px"
+      style={{marginTop:'-50px'}}
+      >
+
+
+      testsetestses
+
+      </Modal>
 
     {/* show the first 3 people
       like_people[0]'s avatar'
