@@ -14,21 +14,6 @@ class LikeList extends React.Component{
     }
   }
 
-  handleOk = e => {
-    console.log(e);
-    console.log(this.state.like)
-    this.setState({
-      like: !this.state.like,
-    });
-    console.log(this.state.like)
-  };
-
-  handleCancel = e => {
-    console.log(e);
-    this.setState({
-      like: !this.state.like,
-    });
-  };
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
@@ -41,32 +26,24 @@ class LikeList extends React.Component{
   render () {
     console.log(this.props)
     const followList = this.props.follow
-    console.log(this.props)
+    console.log(this.props.data.people_like)
     console.log(this.state.like)
+    let profilePic = ''
+
+    if (this.props.data.user.profile_picture){
+      console.log(this.props.data.user.profile_picture)
+      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+    }
     return (
 
       <div>
-        <Modal
-          class="modalOuterContainer"
-          title={`Post by ${this.props.data.user.username}`}
-          visible={this.state.like}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          width="1600px"
-          height="800px"
-          style={{marginTop:'-50px'}}
-          >
 
 
-          testsetestses
 
-          </Modal>
-
-      {/*
       <List
       className = 'followList'
       itemLayout = 'horizontal'
-      dataSource = {followList}
+      dataSource = {this.props.data.people_like}
       renderItem = {item => (
         <List.Item
         className = 'followListItem'
@@ -79,18 +56,24 @@ class LikeList extends React.Component{
 
               :
 
-              <Avatar src={defaultPicture} />
+              <Avatar src={profilePic} />
 
             }
-          title={<a href="https://ant.design">{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</a>}
-          description= {<b>@{this.capitalize(item.username)}</b>}
+          title={<a href="https://ant.design">{item.actor.username} {item.last_name}</a>}
+          description= {<b>{item.actor.username}</b>}
         />
+
+        {/*
+
+          title={<a href="https://ant.design">{this.capitalize(item.username)} {this.capitalize(item.last_name)}</a>}
+          description= {<b>@{this.capitalize(item.username)}</b>}
+        */}
         </List.Item>
       )}
       >
 
       </List>
-      */}
+
       </div>
     )
   }

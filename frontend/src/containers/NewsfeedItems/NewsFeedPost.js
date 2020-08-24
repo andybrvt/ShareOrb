@@ -787,7 +787,7 @@ class NewsfeedPost extends React.Component {
       >
 
 
-      testsetestses
+      <LikeList {...this.props}/>
 
       </Modal>
 

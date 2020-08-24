@@ -87,6 +87,8 @@ class Post(models.Model):
     #         blank=True,
     #         )
 
+
+
     def post_comments(self):
         # print(Post.objects.filter(user=self).values_list())
         return (Comment.objects.filter(post=self.id).values_list('id', flat = True))
