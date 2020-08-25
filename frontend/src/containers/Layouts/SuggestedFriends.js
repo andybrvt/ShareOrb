@@ -89,7 +89,6 @@ class SuggestedFriends extends React.Component {
   };
 
   render() {
-    console.log(this.state)
     const { initLoading, loading, list } = this.state;
     const loadMore =
        !initLoading && !loading ? (
@@ -127,7 +126,7 @@ class SuggestedFriends extends React.Component {
                     <Avatar src={item.profile_picture} />
                   }
                   title={<a href="https://ant.design"> {item.username}</a>}
-                  description="10 Followers"
+                  description={item.get_followers.length +" followers"}
                 />
 
                   <Button id="follow-button"> + Follow </Button>

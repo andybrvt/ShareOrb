@@ -444,7 +444,7 @@ class NewsfeedPost extends React.Component {
                   <span>
                   <span
                     style={{fontSize:'13px'}}
-                    class="headerPostText">
+                    class="headerPostText LikeCommentHover">
                     @{this.props.data.user.username}
                   </span>
                 </span>
@@ -481,80 +481,98 @@ class NewsfeedPost extends React.Component {
 
       <div>
   <div>
+
+  <Divider/>
+
+  <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
+            {
+
+               ((this.props.data.caption).length>600)?
+
+               <div class="outerSeeMore">
+
+                 <span class="innerSeeMore">
+                 {this.props.data.caption.substring(0,550)}
+
+
+                 </span>
+                 <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
+                 <div style={{marginTop:10}} class="seeMore"> ... see more </div>
+               </div>
+               :
+               <div>
+               <span
+                 style={{fontSize:'14px', marginLeft:'10px', marginRight:'5px'}}
+                 class="boldedText">
+                 {this.props.data.user.username}
+               </span>
+                 <p class="innerSeeMore " style={{fontSize:'16px',}}>
+                 {this.props.data.caption}
+
+                 </p>
+
+                 <div>
+
+
+                 </div>
+                </div>
+             }
+
+  </p>
+
+
+  <Divider/>
+
     {this.revealPhoto()}
 
   </div>
 
 
-<span class="dotInLike" style={{marginLeft:'15px', fontSize:'14px'}}>
+
+
+  <div style={{marginLeft:'15px', fontSize:'14px'}}>
+
+
   {
     (like_people.includes(this.props.userId))?
     <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
     :
     <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
   }
- {like_people.length}
+
+  <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+   {like_people.length} likes
+  </span>
   <div class='likeInPost'>
 
-      <i
-        style={{ fontSize: '5px', marginLeft:'5px',
-         marginRight:'5px'}} class="fas fa-circle fa-xs">
-      </i>
+      <div class="linewrapper" >
+       <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
 
-      {this.props.data.post_comments.length} Comments
+     <span class="LikeCommentHover" onClick={this.OnClickPost}>
+
+         {this.props.data.post_comments.length} Comments
+
+     </span>
+
+     <div class='commentInPost'>
+           <Liking {...this.props}/>
+     </div>
 
 
-      <div class='commentInPost'>
-            <Liking {...this.props}/>
-      </div>
+
+     </div>
 
 
 
+    </div>
 
     </div>
 
 
 
 
-</span>
-
-  <Divider style={{ marginTop: 5 }}/>
-
-    <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
-              {
-
-                 ((this.props.data.caption).length>600)?
-
-                 <div class="outerSeeMore">
-
-                   <span class="innerSeeMore">
-                   {this.props.data.caption.substring(0,550)}
 
 
-                   </span>
-                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
-                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
-                 </div>
-                 :
-                 <div>
-                 <span
-                   style={{fontSize:'14px', marginLeft:'10px', marginRight:'5px'}}
-                   class="boldedText">
-                   {this.props.data.user.username}
-                 </span>
-                   <p class="innerSeeMore " style={{fontSize:'16px',}}>
-                   {this.props.data.caption}
-
-                   </p>
-
-                   <div>
-
-
-                   </div>
-                  </div>
-               }
-
-    </p>
 
       <div class="box-buttons">
         <div class="row">
@@ -758,7 +776,7 @@ class NewsfeedPost extends React.Component {
        <div class="linewrapper" >
         <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
 
-      <span class="LikeCommentHover">
+      <span class="LikeCommentHover" onClick={this.OnClickPost}>
 
           {this.props.data.post_comments.length} Comments
 
@@ -775,21 +793,7 @@ class NewsfeedPost extends React.Component {
     </div>
 
     </div>
-    <Modal
-      class="modalOuterContainer"
-      title={`Post by ${this.props.data.user.username}`}
-      visible={this.state.testLike}
-      onOk={this.handleOk}
-      onCancel={this.handleCancel}
-      width="600px"
-      height="1000px"
-      style={{marginTop:'-50px'}}
-      >
 
-
-      <LikeList {...this.props}/>
-
-      </Modal>
 
     {/* show the first 3 people
       like_people[0]'s avatar'
@@ -1015,6 +1019,23 @@ class NewsfeedPost extends React.Component {
     {this.ContentOfEvent()}
     */}
       <div>
+
+
+      <Modal
+        class="modalOuterContainer"
+        title={`Likes on Post`}
+        visible={this.state.testLike}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
+        width="600px"
+        height="1000px"
+        style={{marginTop:'-50px'}}
+        >
+
+
+        <LikeList {...this.props}/>
+
+        </Modal>
 
         <Modal
           class="modalOuterContainer"

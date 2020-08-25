@@ -316,7 +316,7 @@ class NewsFeedView extends React.Component {
 
 			<Divider plain></Divider>
 				<div class="appearBefore" style={{background:'white'}}>
-				<SuggestedFriends/>
+				<SuggestedFriends {...this.props}/>
 				</div>
 			</div>
 
