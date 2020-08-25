@@ -440,7 +440,7 @@ class NewsfeedPost extends React.Component {
                   <span
                     style={{color:'black', fontSize:'15px'}}
                     class="headerPostText alignleft" >
-                    Ping Hsu <br/>
+                    {this.props.data.user.username} <br/>
                   <span>
                   <span
                     style={{fontSize:'13px'}}
@@ -482,7 +482,7 @@ class NewsfeedPost extends React.Component {
       <div>
   <div>
 
-  <Divider/>
+  <Divider style={{'marginTop':-2}}/>
 
   <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
             {
@@ -521,7 +521,6 @@ class NewsfeedPost extends React.Component {
   </p>
 
 
-  <Divider/>
 
     {this.revealPhoto()}
 
@@ -772,6 +771,7 @@ class NewsfeedPost extends React.Component {
     <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
      {like_people.length} likes
     </span>
+
      <div class='likeInPost'>
        <div class="linewrapper" >
         <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
