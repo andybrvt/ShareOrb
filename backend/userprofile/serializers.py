@@ -138,10 +138,19 @@ class PostSerializer(serializers.ModelSerializer):
         data['user'] = UserSerializer(models.User.objects.get(pk=data['user'])).data
         print(data['post_comments'])
         comment_list = []
+        userLike_list=[]
+
+
         for comments in data['post_comments']:
             comment = CommentSerializer(models.Comment.objects.get(id = comments)).data
             comment_list.append(comment)
         data['post_comments'] = comment_list
+
+        for user in data['people_like']:
+            likePerson = FollowUserSerializer(models.User.objects.get(id = user)).data
+            userLike_list.append(likePerson)
+
+        data['people_like'] = userLike_list
         # if (len(data['post_images']) > 0):
         #     print(list(models.ImageModel.objects.filter(imageList = data['id'])))
         #     list = []

@@ -59,8 +59,8 @@ class LikeList extends React.Component{
               <Avatar src={profilePic} />
 
             }
-          title={<a href="https://ant.design">{item.actor.username} {item.last_name}</a>}
-          description= {<b>{item.actor.username}</b>}
+          title={<a href="https://ant.design">{item.username} {item.last_name}</a>}
+          description= {<b>{item.actor}</b>}
         />
 
         {/*
