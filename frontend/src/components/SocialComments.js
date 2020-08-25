@@ -1,8 +1,10 @@
 import React from 'react';
-import { Comment, Tooltip, List, Avatar } from 'antd';
+import { Comment, Tooltip, List, Avatar, Input } from 'antd';
 import moment from 'moment';
 import './labelCSS/SocialModal.css';
 
+
+const { TextArea } = Input;
 
 class SocialComments extends React.Component{
 
@@ -31,58 +33,7 @@ class SocialComments extends React.Component{
 
   render() {
     console.log(this.props)
-    const data = [
-      {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: (
-          <p>
-            We supply a series of design principles, practical patterns and high quality design
-            resources (Sketch and Axure), to help people create their product prototypes beautifully and
-            efficiently.
-          </p>
-        ),
-        datetime: (
-          <Tooltip
-            title={moment()
-              .subtract(1, 'days')
-              .format('YYYY-MM-DD HH:mm:ss')}
-          >
-            <span>
-              {moment()
-                .subtract(1, 'days')
-                .fromNow()}
-            </span>
-          </Tooltip>
-        ),
-      },
-      {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: (
-          <p>
-            We supply a series of design principles, practical patterns and high quality design
-            resources (Sketch and Axure), to help people create their product prototypes beautifully and
-            efficiently.
-          </p>
-        ),
-        datetime: (
-          <Tooltip
-            title={moment()
-              .subtract(2, 'days')
-              .format('YYYY-MM-DD HH:mm:ss')}
-          >
-            <span>
-              {moment()
-                .subtract(2, 'days')
-                .fromNow()}
-            </span>
-          </Tooltip>
-        ),
-      },
-    ];
+
 
     return (
       <div className = 'socialCommentBoxBox'>
@@ -116,7 +67,19 @@ class SocialComments extends React.Component{
             </div>
         )}
       />
+      <div className = 'socialCommentInput'>
+        <Avatar
+        size = {40}
+        className ='socialPicInput'
+        src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
+        <TextArea
+        className= 'socialBoxInput'
+        // bordered = {false}
+        placeholder = 'Write a comment'
+        rows = {1} />
       </div>
+      </div>
+
     </div>
     )
   }

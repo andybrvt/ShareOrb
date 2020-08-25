@@ -65,6 +65,7 @@ class SocialCalCellInfo extends React.Component{
         socialCalDate = this.props.socialObject[0].socialCaldate
       }
     }
+
     console.log(this.props.socialObject[0])
 
 
@@ -137,7 +138,7 @@ class SocialCalCellInfo extends React.Component{
           <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
            Comment </div>
         </div>
-          <SocialComments items = {socialCalComments}/>
+          <SocialComments items = {socialCalComments} profilePic = {this.props.curProfilePic}/>
           <SocialEventList items = {socialCalEvents}/>
 
         </div>
@@ -153,7 +154,8 @@ const mapStateToProps = state => {
   return {
     socialObject: state.socialCal.socialObject,
     showSocialModal: state.socialCal.showSocialModal,
-    curSocialDate: state.socialCal.curSocialDate
+    curSocialDate: state.socialCal.curSocialDate,
+    curProfilePic: state.auth.profilePic
   }
 }
 
