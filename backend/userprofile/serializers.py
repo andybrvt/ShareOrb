@@ -147,7 +147,7 @@ class PostSerializer(serializers.ModelSerializer):
         data['post_comments'] = comment_list
 
         for user in data['people_like']:
-            likePerson = FollowUserSerializer(models.User.objects.get(id = user)).data
+            likePerson = UserSerializer(models.User.objects.get(id = user)).data
             userLike_list.append(likePerson)
 
         data['people_like'] = userLike_list

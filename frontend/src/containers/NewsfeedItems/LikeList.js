@@ -60,7 +60,7 @@ class LikeList extends React.Component{
 
             }
           title={<a href="https://ant.design">{item.username} {item.last_name}</a>}
-          description= {<b>{item.actor}</b>}
+          description= {<b>{item.get_followers.length} followers</b>}
         />
 
         {/*

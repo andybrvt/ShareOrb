@@ -781,8 +781,8 @@ class NewsfeedPost extends React.Component {
       visible={this.state.testLike}
       onOk={this.handleOk}
       onCancel={this.handleCancel}
-      width="800px"
-      height="1200px"
+      width="600px"
+      height="1000px"
       style={{marginTop:'-50px'}}
       >
 
