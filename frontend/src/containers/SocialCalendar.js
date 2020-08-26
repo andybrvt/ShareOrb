@@ -367,7 +367,8 @@ const mapStateToProps = state => {
     currentDate: state.socialCal.socialDate,
     events: state.socialCal.socialEvents,
     showSocialModal: state.socialCal.showSocialModal,
-    showSocialPicModal: state.socialCal.showSocialPicModal
+    showSocialPicModal: state.socialCal.showSocialPicModal,
+    curId: state.auth.id
   }
 }
 

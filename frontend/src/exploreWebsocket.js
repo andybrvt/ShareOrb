@@ -1,6 +1,6 @@
 // THIS WEBSOCKET WILL PRETTY MUCH BE USED FOR ALL THE FUNCTIONS THAT ARE
 // RELATED TO THE PROFILE PAGES, ALL THE PROFILE PAGES, THIS INCLUDES
-// YOU OWN PROFILE PAGE 
+// YOU OWN PROFILE PAGE
 
 class WebSocketExplore {
   static instance = null;
@@ -112,17 +112,44 @@ class WebSocketExplore {
         person_unfollower: person_unfollower
       }
       this.callbacks['new_unFollower'](followObj)
+    } else if (command === 'send_social_like_new'){
+      // This is used for whne someone sends a like ot a new cal cell
+      const socialCalCellObj = parsedData.socialCalCellObj
+      const exploreObj = {
+        socialCalCellObj: socialCalCellObj
+      }
+
+      console.log(exploreObj)
+      // NOW PUT THE CALL BACK FOR THE REDUX HERE
+      this.callbacks['social_like_new'](exploreObj)
+    } else if (command === 'send_social_like_old'){
+      // This is used for when someone sends a like to a old cal cell
+      const socialCalCellId = parsedData.socialCalCellObjId
+      // Remember that the userObj is the one that we would use to add in to the
+      // likes
+      const userObj = parsedData.userObj
+      const exploreObj = {
+        socialCalCellId: socialCalCellId,
+        userObj: userObj
+      }
+      console.log(exploreObj)
+      // NOW PUT THE CALL BACK FOR THE REDUX HERE
+      this.callbacks['social_like_old'](exploreObj)
     }
 
 
   }
 
+
+// call backs will pretty much be holding all the redux functions
   addCallbacks(loadProfiles,
      addFollowerCallBack,
      addFollowingCallBack,
      loadCurrProfile,
      unFollowingCallback,
-     unFollowerCallback
+     unFollowerCallback,
+     addSocialLikeNew,
+     addSocialLikeOld
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -130,12 +157,14 @@ class WebSocketExplore {
     this.callbacks['current_user'] = loadCurrProfile
     this.callbacks['new_unFollowing'] = unFollowingCallback
     this.callbacks['new_unFollower'] = unFollowerCallback
+    this.callbacks['social_like_new'] = addSocialLikeNew
+    this.callbacks['social_like_old'] = addSocialLikeOld
   }
 
 
   fetchFollowerFollowing(){
     // This gets called in teh newsfeedview.js
-    this.sendFollowerFollowing({
+    this.sendExplore({
       command: 'fetch_follower_following'
     })
   }
@@ -144,7 +173,7 @@ class WebSocketExplore {
     // Fetch the cur user seperate by the back end so we can avoid looping through
     // all the profiles in the front end
     console.log('fetch profile')
-    this.sendFollowerFollowing({
+    this.sendExplore({
       command: 'fetch_curUser_profile',
       currUser: currUser
     })
@@ -156,7 +185,7 @@ class WebSocketExplore {
     // request and the following the person gettting the following
 
 
-    this.sendFollowerFollowing({
+    this.sendExplore({
       follower: follower,
       following: following,
       command: 'send_following'
@@ -167,7 +196,7 @@ class WebSocketExplore {
     // This function will be used to set up for unfollowing the user
     // the follower again is the person doing the action and the following will
     // be the person receving the follow
-    this.sendFollowerFollowing({
+    this.sendExplore({
       follower: follower,
       following: following,
       command: 'send_unfollowing'
@@ -176,9 +205,27 @@ class WebSocketExplore {
 
   }
 
+  sendSocialLike = (curDate, personLike, owner) =>{
+    // This function will be sending out a like to someone's profile and then
+    // pick out the right social calendar cell and then add a like to it. This is
+    // where it will start
+
+    // The two things you are gonna be sending is something tha tyou cna use to identify
+    // the day cell and the user who is gonna like it so you cna grab the user
+
+    console.log(curDate, personLike)
+    this.sendExplore({
+      socialCalDate: curDate,
+      userId: personLike,
+      owenerId: owner,
+      command: 'send_social_like'
+    })
+
+  }
 
 
-  sendFollowerFollowing(data){
+
+  sendExplore(data){
     // So this is just used as a way to send info into the backend
     console.log(data)
     console.log('send_folower_following')

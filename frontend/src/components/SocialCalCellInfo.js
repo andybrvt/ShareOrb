@@ -9,6 +9,8 @@ import SocialEventList from './SocialEventList';
 import './labelCSS/SocialModal.css';
 import {PictureOutlined} from '@ant-design/icons';
 import AvatarGroups from './AvatarGroups';
+import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+
 
 class SocialCalCellInfo extends React.Component{
 
@@ -38,6 +40,14 @@ class SocialCalCellInfo extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  onSocialLike = (curDate, personLike, owner) => {
+    // send out a like to the websocket, the curDate will be the current date and
+    // The person like will be the perosn who like the post
+    console.log(personLike, owner)
+    ExploreWebSocketInstance.sendSocialLike(curDate, personLike, owner)
+
+  }
+
 
   render(){
     console.log(this.props)
@@ -45,8 +55,11 @@ class SocialCalCellInfo extends React.Component{
     let socialCalEvents = []
     let socialCalComments = []
     let socialCalUsername = ''
+    let socialCalUserId = ''
     let socialCalProfilePic = ''
     let socialCalDate = ''
+    let peopleLike = []
+    let curDate = ''
 
 
     if(this.props.socialObject[0]){
@@ -60,10 +73,18 @@ class SocialCalCellInfo extends React.Component{
         socialCalComments = this.props.socialObject[0].get_socialCalComment
       }
       socialCalUsername = this.props.socialObject[0].socialCalUser.username
+      socialCalUserId = this.props.socialObject[0].socialCalUser.id
       socialCalProfilePic = 'http://127.0.0.1:8000'+this.props.socialObject[0].socialCalUser.profile_picture
       if(this.props.socialObject[0].socialCaldate){
         socialCalDate = this.props.socialObject[0].socialCaldate
       }
+      if(this.props.socialObject[0].people_like){
+        peopleLike = this.props.socialObject[0].people_like
+      }
+      if(this.props.curSocialDate){
+        curDate = dateFns.format(this.props.curSocialDate, 'yyyy-MM-dd')
+      }
+
     }
 
     console.log(this.props.socialObject[0])
@@ -120,7 +141,7 @@ class SocialCalCellInfo extends React.Component{
         <div className = 'socialLikeCircle'>
         <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
         </div>
-        <span className = 'socialLikeCommentText'> 5 Likes . 10 comments </span>
+        <span className = 'socialLikeCommentText'> {peopleLike.length} Likes . {socialCalComments.length} comments </span>
         <div className = 'socialLikeAvatar'>
           <AvatarGroups />
         </div>
@@ -128,7 +149,9 @@ class SocialCalCellInfo extends React.Component{
 
         <div className = 'socialLikeComment'>
 
-          <div className ='socialLike'>
+          <div
+          onClick = {() => this.onSocialLike(curDate, this.props.curId, socialCalUserId)}
+          className ='socialLike'>
           <i
             style={{ marginRight:'10px', color:'red'}}
             class="fa fa-heart">
@@ -155,7 +178,8 @@ const mapStateToProps = state => {
     socialObject: state.socialCal.socialObject,
     showSocialModal: state.socialCal.showSocialModal,
     curSocialDate: state.socialCal.curSocialDate,
-    curProfilePic: state.auth.profilePic
+    curProfilePic: state.auth.profilePic,
+    curId: state.auth.id
   }
 }
 

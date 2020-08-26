@@ -53,7 +53,9 @@ class App extends Component {
       this.props.addFollowing.bind(this),
       this.props.loadCurProfile.bind(this),
       this.props.addUnFollowing.bind(this),
-      this.props.addUnFollower.bind(this)
+      this.props.addUnFollower.bind(this),
+      this.props.addSocialLikeNew.bind(this),
+      this.props.addSocialLikeOld.bind(this)
     )
   }
 
@@ -120,8 +122,9 @@ const mapDispatchToProps = dispatch => {
     addFollowing: followObject => dispatch(exploreActions.addFollowing(followObject)),
     loadCurProfile: curProfile => dispatch(exploreActions.loadCurProfile(curProfile)),
     addUnFollower: followObject => dispatch(exploreActions.addUnFollower(followObject)),
-    addUnFollowing: followObject => dispatch(exploreActions.addUnFollowing(followObject))
-
+    addUnFollowing: followObject => dispatch(exploreActions.addUnFollowing(followObject)),
+    addSocialLikeNew: exploreObj => dispatch(exploreActions.addSocialLikeNew(exploreObj)),
+    addSocialLikeOld: exploreObj => dispatch(exploreActions.addSocialLikeOld(exploreObj))
   }
 }
 

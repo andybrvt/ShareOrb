@@ -18,7 +18,8 @@ from userprofile.models import User
 from .models import Post
 from .models import Comment
 from .models import UserFollowing
-
+from mySocialCal.models import SocialCalCell
+from mySocialCal.serializers import SocialCalCellSerializer
 
 
 
@@ -469,6 +470,68 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
+    def send_social_like(self, data):
+        print(data)
+        # user is the person that like the social cell and the owner is the owner of the
+        # social calendar
+
+        # Since this is gonna be added to the redux, you have to serialize the soical cell
+        # pass it on to the and then pass the like on to, if it already exist that you just have to pass the like
+        # if it doenst then you have to make it, add like, and add it into the redux
+
+        # So to cover all cases you would have to send the socialcal cell, serialzied and the userinformation just incase
+        # the socialcal cell is already made
+        user = get_object_or_404(User, id = data['userId'])
+        owner = get_object_or_404(User, id = data['owenerId'] )
+        socialCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = owner,
+            socialCaldate = data['socialCalDate'],
+            testDate = data['socialCalDate']
+        )
+
+        socialCell.people_like.add(user)
+        socialCell.save()
+
+        # serialize it so that you can actually send it and use it in the front end
+        socialCalCellObj = SocialCalCellSerializer(socialCell, many = False).data
+        # The userobj will be the person that liked the post
+        userObj = FollowUserSerializer(user, many = False).data
+        #The ownerobj wil be the perosn that owns the post
+        ownerObj = FollowUserSerializer(owner, many = False).data
+
+
+
+        # you probally gotta make 2 redux functions though lol
+        if created == True:
+            contentOwner = {
+                'command': 'send_social_like_new',
+                'socialCalCellObj':socialCalCellObj,
+                'reciever': ownerObj
+            }
+            contentLiker = {
+                'command': 'send_social_like_new',
+                'socialCalCellObj':socialCalCellObj,
+                'reciever': userObj
+            }
+            self.send_new_explore(contentOwner)
+            self.send_new_explore(contentLiker)
+        if created == False:
+            contentOwner = {
+                'command': 'send_social_like_old',
+                'userObj': userObj,
+                'socialCalCellObjId': socialCalCellObj,
+                'reciever': ownerObj
+            }
+            contentLike = {
+                'command': 'send_social_like_old',
+                'userObj': userObj,
+                'socialCalCellObjId': socialCalCellObj,
+                'reciever': userObj
+            }
+            self.send_new_explore(contentOwner)
+            self.send_new_explore(contentLike)
+
+
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer
         # just a reminder that the follower is the person sending the request
@@ -502,8 +565,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
         print(content_follower['actorObjSerial']['username'])
 
 
-        self.send_new_following(content_follower)
-        self.send_new_following(content_following)
+        self.send_new_follow(content_follower)
+        self.send_new_follow(content_following)
 
     def send_unfollowing(self, data):
         print(data)
@@ -536,13 +599,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
             'actorObjSerial': followingObjSerial
         }
 
-        self.send_new_following(content_follower)
-        self.send_new_following(content_following)
+        self.send_new_follow(content_follower)
+        self.send_new_follow(content_following)
 
 
-    def send_new_following(self, followObj):
+    def send_new_follow(self, followObj):
         # This function is used to send follow objs into the websocket and to everyone
         # in the channel layer
+
+        # THIS FORM NOW ON IS GONAN BE USED TO SEND ALL OBJECTS TO THE WEBSOCKET --> WHEN FINISHED
+        # ILL CHANGE ALL THE NAMES
         channel_layer = get_channel_layer()
         channel_recipient = followObj['actorObjSerial']['username']
         channel = 'explore_'+channel_recipient
@@ -557,6 +623,28 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 'followObj': followObj
             }
         )
+
+
+    def send_new_explore(self, exploreObj):
+        # This send will be used for the social cal and that in order for
+        # this send to send we need to have a recive object in the content
+        channel_layer = get_channel_layer()
+        channel_recipient = exploreObj['reciever']['username']
+        channel = 'explore_'+channel_recipient
+
+        print(channel)
+
+        # So we are reusing the new_follower_following to avoid giving more code
+        # but all in all it still sends the same stuff in the front end
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_follower_following',
+                'followObj': exploreObj
+            }
+        )
+
+
 
 
     def connect(self):
@@ -584,6 +672,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.fetch_curUser_profile(data)
         if data['command'] == 'send_unfollowing':
             self.send_unfollowing(data)
+        if data['command'] == 'send_social_like':
+            self.send_social_like(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']

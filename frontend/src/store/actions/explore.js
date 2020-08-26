@@ -73,3 +73,20 @@ export const addUnFollowing = (followObject) =>{
     followObject: followObject
   }
 }
+
+export const addSocialLikeNew = (exploreObj) => {
+  // This will be used for the social calendar liking when there is a new cal cell
+  return{
+    type: actionTypes.ADD_SOCIAL_LIKE_NEW,
+    exploreObj: exploreObj
+  }
+}
+
+export const addSocialLikeOld = (exploreObj) => {
+  // This will be used for the social calendar liking when there is an exisiting
+  // cal cell
+  return {
+    type: actionTypes.ADD_SOCIAL_LIKE_OLD,
+    exploreObj: exploreObj
+  }
+}

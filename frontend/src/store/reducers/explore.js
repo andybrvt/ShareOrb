@@ -5,7 +5,8 @@ const initialState = {
   showProfileEdit: false,
   changeProfilePic: false,
   profiles: [],
-  curProfile: []
+  curProfile: [],
+  test: ''
 
 }
 
@@ -159,6 +160,24 @@ export const addFollowing = (state, action) => {
   })
 }
 
+export const addSocialLikeNew = (state, action) =>{
+  // So the task here is you have to first fine the user, then find the
+  //  correct cell data and then add in the like
+  console.log(action)
+  return updateObject(state, {
+    test: action
+  })
+}
+
+export const addSocialLikeOld = (state, action) => {
+  // so the task here is to find the user, then find the correct cell
+  // data then add in the like
+  console.log(action)
+  return updateObject(state, {
+    test:action
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.LOAD_PROFILES:
@@ -181,6 +200,10 @@ const reducer = (state = initialState, action) => {
       return addUnFollowing(state, action)
     case actionTypes.ADD_UNFOLLOWER:
       return addUnFollower(state, action)
+    case actionTypes.ADD_SOCIAL_LIKE_NEW:
+      return addSocialLikeNew(state, action)
+    case actionTypes.ADD_SOCIAL_LIKE_OLD:
+      return addSocialLikeOld(state, action)
     default:
       return state;
   };

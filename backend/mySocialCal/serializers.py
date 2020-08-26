@@ -28,6 +28,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         cal_comments = []
         cal_items = []
         cal_events = []
+        cal_likes = []
         for comments in data['get_socialCalComment']:
             comment = SocialCalComment(models.SocialCalComment.objects.get(id = comments)).data
             cal_comments.append(comment)
@@ -37,9 +38,13 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         for events in data['get_socialCalEvent']:
             event = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = events)).data
             cal_events.append(event)
+        for likes in data['people_like']:
+            like = SocialCalUserSerializer(User.objects.get(id =likes)).data
+            cal_likes.append(like)
         data['get_socialCalComment'] = cal_comments
         data['get_socialCalItems'] = cal_items
         data['get_socialCalEvent'] = cal_events
+        data['people_like'] = cal_likes
         data['socialCalUser'] = SocialCalUserSerializer(User.objects.get(id = data['socialCalUser'])).data
         return data
 

@@ -74,7 +74,10 @@ export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
 export const OPEN_SOCIAL_PICTURE_MODAL = 'OPEN_SOCIAL_PICTURE_MODAL';
 export const CLOSE_SOCIAL_PICTURE_MODAL = 'CLOSE_SOCIAL_PICTURE_MODAL';
 
-
+// Even though these actions are for the social calendar but because the social calendar
+// is part of the profile page
+export const ADD_SOCIAL_LIKE_NEW = 'ADD_SOCIAL_LIKE_NEW';
+export const ADD_SOCIAL_LIKE_OLD = 'ADD_SOCIAL_LIKE_OLD';
 
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
