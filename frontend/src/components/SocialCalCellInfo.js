@@ -87,7 +87,7 @@ class SocialCalCellInfo extends React.Component{
 
     }
 
-    console.log(this.props.socialObject[0])
+    console.log(this.props)
 
 
     return (

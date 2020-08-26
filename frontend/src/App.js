@@ -10,7 +10,6 @@ import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
 import WebSocketPostsInstance from './postWebsocket';
 import ExploreWebSocketInstance from './exploreWebsocket';
-
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -18,7 +17,7 @@ import * as notificationsActions from './store/actions/notifications';
 import * as calendarActions from './store/actions/calendars';
 import * as newsfeedActions from './store/actions/newsfeed';
 import * as exploreActions from './store/actions/explore';
-
+import * as socialActions from './store/actions/socialCalendar';
 
 class App extends Component {
 
@@ -55,7 +54,9 @@ class App extends Component {
       this.props.addUnFollowing.bind(this),
       this.props.addUnFollower.bind(this),
       this.props.addSocialLikeNew.bind(this),
-      this.props.addSocialLikeOld.bind(this)
+      this.props.addSocialLikeOld.bind(this),
+      this.props.addSocialLikeNewM.bind(this),
+      this.props.addSocialLikeOldM.bind(this)
     )
   }
 
@@ -124,7 +125,9 @@ const mapDispatchToProps = dispatch => {
     addUnFollower: followObject => dispatch(exploreActions.addUnFollower(followObject)),
     addUnFollowing: followObject => dispatch(exploreActions.addUnFollowing(followObject)),
     addSocialLikeNew: exploreObj => dispatch(exploreActions.addSocialLikeNew(exploreObj)),
-    addSocialLikeOld: exploreObj => dispatch(exploreActions.addSocialLikeOld(exploreObj))
+    addSocialLikeOld: exploreObj => dispatch(exploreActions.addSocialLikeOld(exploreObj)),
+    addSocialLikeNewM: socialObj => dispatch(socialActions.addSocialLikeNewM(socialObj)),
+    addSocialLikeOldM: socialObj => dispatch(socialActions.addSocialLikeOldM(socialObj))
   }
 }
 
