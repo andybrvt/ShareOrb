@@ -6,7 +6,7 @@
   direction: ltr;
   display: inline;
 
-  font-size: 1px;
+  font-size: 13px;
   font-weight: normal;
   height: auto;
   line-height: 25.0799999237061px;
@@ -17,7 +17,7 @@
 .headerContainer{
   display: flex;
   flex-wrap: wrap;
-  padding-top: 30px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right:30px;
   padding-bottom: 15px;
@@ -405,6 +405,13 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 .innerSeeMore {
   display: inline-block;
+  /* align the text to one line. */
+  white-space: nowrap;
+}
+
+.photoText{
+    line-height: 160%;
+
 }
 
 

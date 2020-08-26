@@ -388,7 +388,7 @@ class NewsfeedPost extends React.Component {
       <div>
 
 
-      <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
+      <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
 
       <span class="profilePicHeader">
         <div class="headerContainer" >
@@ -450,16 +450,14 @@ class NewsfeedPost extends React.Component {
                 </span>
                     </span>
 
-
                       <span class="headerPostText alignright" >
-                        {
-                        /*
+
+
+
                         <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
                         Tucson, Arizona <br/>
-                        */}
+
                         <span style={{float:'right'}}>
-                        ...
-                        <br/>
                         {this.renderTimestamp(this.props.data.created_at)}
                         </span>
                   </span>
@@ -500,26 +498,17 @@ class NewsfeedPost extends React.Component {
                  <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                </div>
                :
-               <div>
-               <span
-                 style={{fontSize:'14px', marginLeft:'10px', marginRight:'5px'}}
-                 class="boldedText">
-                 {this.props.data.user.username}
-               </span>
-                 <p class="innerSeeMore " style={{fontSize:'16px',}}>
+               <div style={{display:'flex'}}>
+                 <p  class="photoText" style={{fontSize:'14px', padding:'20px'}}>
                  {this.props.data.caption}
 
                  </p>
 
-                 <div>
 
-
-                 </div>
                 </div>
              }
 
   </p>
-
 
 
     {this.revealPhoto()}
@@ -714,16 +703,17 @@ class NewsfeedPost extends React.Component {
          <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
            {this.capitalize(this.props.data.user.username)}
 
-           <div>
+           <div>asasd
            <span class="fb-group-date alignleft" > Tucson, Arizona</span>
 
             <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
           </div>
+          asdasdf
          </span>
-
+asdfasdf
     </div>
 
-
+fsdafsdaf
 
       <Divider style={{marginTop:'40px'}}/>
 
