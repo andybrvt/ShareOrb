@@ -27,7 +27,7 @@ class NewsfeedPost extends React.Component {
     this.state = {
       visibleModal: false,
       commentPost:'',
-      commentsCondition:true,
+      commentsCondition:false,
       show:false,
       stepCount:0,
       avatarColor:'',
@@ -282,7 +282,132 @@ class NewsfeedPost extends React.Component {
     //   })
      }
 
+  BottomLikeCommentPost(){
+    let like_people = this.props.data.people_like
+    let profilePic = ''
 
+    if (this.props.data.user.profile_picture){
+      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+    }
+
+    console.log(profilePic)
+
+    let temp="http://127.0.0.1:8000"+this.props.data.post_images;
+    let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
+
+    const success = () => {
+    message.success('Clipped to your album!');
+    };
+    console.log(temp)
+    return (
+
+      <div style={{marginLeft:'15px', fontSize:'14px'}}>
+
+
+        {
+          (like_people.includes(this.props.userId))?
+          <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+          :
+          <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+        }
+
+        <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+         {like_people.length} likes
+        </span>
+        <div class='likeInPost'>
+
+          <div class="linewrapper" >
+             <Divider type="vertical" style={{background:'#d9d9d9'}}/>
+
+           <span class="LikeCommentHover" onClick={this.OnClickPost}>
+
+               {this.props.data.post_comments.length} Comments
+
+           </span>
+
+           <div class='commentInPost'>
+                 <Liking {...this.props}/>
+           </div>
+
+
+
+           </div>
+
+
+
+        </div>
+
+        <div class="box-buttons">
+          <div class="row">
+            {
+              (like_people.includes(this.props.userId))?
+
+                <button
+                  class="box-click"
+                  onClick ={this.AddOneToLike}>
+                  <i
+                    style={{ marginRight:'10px', color:'red'}}
+                    class="fa fa-heart">
+                  </i>
+                  <span class="textHighlight">
+                    Like
+                  </span>
+                </button>
+              :
+                <button
+                  class="box-click"
+                  onClick ={this.AddOneToLike} >
+                  <i
+                    style={{ marginRight:'10px'}}
+                    class="far fa-heart">
+                  </i>
+                  <span>
+                    Like
+                  </span>
+                </button>
+            }
+            <button onClick ={this.OnClickPost} >
+
+              <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
+            </button>
+            <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
+          </div>
+        </div>
+
+        <div>
+
+
+          {
+            (this.state.commentsCondition==true) ?
+
+
+            <div>
+               <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
+            </div>
+
+
+
+            :
+
+            <div>
+
+            </div>
+
+          }
+
+
+
+          </div>
+
+
+
+
+
+
+      </div>
+
+    )
+  }
 
   ContentOfEvent() {
 
@@ -383,7 +508,7 @@ class NewsfeedPost extends React.Component {
     console.log(temp)
 
     return(
-      <div>
+    <div>
 
       <div>
 
@@ -450,7 +575,7 @@ class NewsfeedPost extends React.Component {
                 </span>
                     </span>
 
-                      <span class="headerPostText alignright" >
+                      <span class="headerPostText alignright" style={{fontSize:'13px'}} >
 
 
 
@@ -468,179 +593,71 @@ class NewsfeedPost extends React.Component {
 
 
 
-        </div>
+            </div>
 
-      </span>
-
-
-
-
-
-
-      <div>
-  <div>
-
-  <Divider style={{'marginTop':-2}}/>
-
-  <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
-            {
-
-               ((this.props.data.caption).length>600)?
-
-               <div class="outerSeeMore">
-
-                 <span class="innerSeeMore">
-                 {this.props.data.caption.substring(0,550)}
-
-
-                 </span>
-                 <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
-                 <div style={{marginTop:10}} class="seeMore"> ... see more </div>
-               </div>
-               :
-               <div style={{display:'flex'}}>
-                 <p  class="photoText" style={{fontSize:'14px', padding:'20px'}}>
-                 {this.props.data.caption}
-
-                 </p>
-
-
-                </div>
-             }
-
-  </p>
-
-
-    {this.revealPhoto()}
-
-  </div>
-
-
-
-
-  <div style={{marginLeft:'15px', fontSize:'14px'}}>
-
-
-  {
-    (like_people.includes(this.props.userId))?
-    <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
-    :
-    <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-  }
-
-  <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
-   {like_people.length} likes
-  </span>
-  <div class='likeInPost'>
-
-      <div class="linewrapper" >
-       <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
-
-     <span class="LikeCommentHover" onClick={this.OnClickPost}>
-
-         {this.props.data.post_comments.length} Comments
-
-     </span>
-
-     <div class='commentInPost'>
-           <Liking {...this.props}/>
-     </div>
-
-
-
-     </div>
-
-
-
-    </div>
-
-    </div>
+          </span>
 
 
 
 
 
 
-
-      <div class="box-buttons">
-        <div class="row">
-          {
-            (like_people.includes(this.props.userId))?
-
-              <button
-                class="box-click"
-                onClick ={this.AddOneToLike}>
-                <i
-                  style={{ marginRight:'10px', color:'red'}}
-                  class="fa fa-heart">
-                </i>
-                <span class="textHighlight">
-                  Like
-                </span>
-              </button>
-            :
-              <button
-                class="box-click"
-                onClick ={this.AddOneToLike} >
-                <i
-                  style={{ marginRight:'10px'}}
-                  class="far fa-heart">
-                </i>
-                <span>
-                  Like
-                </span>
-              </button>
-          }
-          <button onClick ={this.OnClickPost} >
-
-            <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
-          </button>
-          <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
-        </div>
-      </div>
-
+        <div>
     <div>
 
+    <Divider style={{'marginTop':-2}}/>
 
-      {
-        (this.state.commentsCondition==true) ?
+    <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
+              {
 
+                 ((this.props.data.caption).length>600)?
 
-        <div>
-           <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
-        </div>
+                 <div class="outerSeeMore">
 
-
-
-        :
-
-        <div>
-
-        </div>
-
-      }
+                   <span class="innerSeeMore">
+                   {this.props.data.caption.substring(0,550)}
 
 
+                   </span>
+                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
+                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
+                 </div>
+                 :
+                 <div style={{display:'flex'}}>
+                   <p  class="photoText" style={{fontSize:'14px', padding:'20px'}}>
+                   {this.props.data.caption}
 
-      </div>
-
-      <div>
-
-
-
-
-
-      </div>
-        </div>
-
-      </div>
+                   </p>
 
 
+                  </div>
+               }
+
+      </p>
+
+
+      {this.revealPhoto()}
 
       </div>
 
 
+
+
+      {this.BottomLikeCommentPost()}
+
+
+
+
         </div>
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>
     )
   }
 
@@ -700,20 +717,44 @@ class NewsfeedPost extends React.Component {
 
       }
       </Popover>
-         <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
-           {this.capitalize(this.props.data.user.username)}
 
-           <div>asasd
-           <span class="fb-group-date alignleft" > Tucson, Arizona</span>
+        <span class="g grid-33">
 
-            <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
-          </div>
-          asdasdf
-         </span>
-asdfasdf
+          <span class="headerPost">
+
+            <span
+              style={{color:'black', fontSize:'15px'}}
+              class="headerPostText alignleft" >
+              {this.props.data.user.username} <br/>
+            <span>
+            <span
+              style={{fontSize:'13px'}}
+              class="headerPostText LikeCommentHover">
+              @{this.props.data.user.username}
+            </span>
+          </span>
+              </span>
+
+                <span class="headerPostText alignright" style={{fontSize:'13px'}} >
+
+
+
+                  <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
+                  Tucson, Arizona <br/>
+
+                  <span style={{float:'right'}}>
+                  {this.renderTimestamp(this.props.data.created_at)}
+                  </span>
+            </span>
+
+          </span>
+
+        </span>
+
+
+
     </div>
 
-fsdafsdaf
 
       <Divider style={{marginTop:'40px'}}/>
 
@@ -748,42 +789,6 @@ fsdafsdaf
     <Divider style={{ marginBottom: 1 }}/>
 
 
-    <div style={{marginLeft:'15px', fontSize:'14px'}}>
-
-
-    {
-      (like_people.includes(this.props.userId))?
-      <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
-      :
-      <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-    }
-
-    <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
-     {like_people.length} likes
-    </span>
-
-     <div class='likeInPost'>
-       <div class="linewrapper" >
-        <i style={{ fontSize: '5px', marginLeft:'5px', marginRight:'5px'}} class="fas fa-circle fa-xs dotInLike"></i>
-
-      <span class="LikeCommentHover" onClick={this.OnClickPost}>
-
-          {this.props.data.post_comments.length} Comments
-
-      </span>
-
-      <div class='commentInPost'>
-            <Liking {...this.props}/>
-      </div>
-
-
-
-      </div>
-
-    </div>
-
-    </div>
-
 
     {/* show the first 3 people
       like_people[0]'s avatar'
@@ -792,36 +797,7 @@ fsdafsdaf
       and + like_people.length-3 like this
       */}
 
-      <div class="box-buttons">
-        <div class="row">
-          {
-            (like_people.includes(this.props.userId))?
-
-              <button class="box-click" onClick ={this.AddOneToLike}>
-                <i  style={{ marginRight:'10px', color:'red'}}
-                class="fa fa-heart">
-                </i>
-                <span class="textHighlight">
-                  Like
-                </span>
-
-               </button>
-            :
-              <button class="box-click" o
-              nClick ={this.AddOneToLike} >
-              <i style={{ marginRight:'10px'}}
-              class="far fa-heart"></i>Like
-
-              </button>
-          }
-
-          <button onClick={this.OnClickPost}>
-
-            <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
-          </button>
-          <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
-        </div>
-      </div>
+      {this.BottomLikeCommentPost()}
 
   <div>
 
