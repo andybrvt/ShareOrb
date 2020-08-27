@@ -61,6 +61,9 @@ class SocialCalCellInfo extends React.Component{
     let peopleLike = []
     let curDate = ''
 
+    // peopleLikeId is just used for the like and unlike button
+    let peopleLikeId =[]
+
 
     if(this.props.socialObject[0]){
       if(this.props.socialObject[0].get_socialCalItems){
@@ -87,8 +90,13 @@ class SocialCalCellInfo extends React.Component{
 
     }
 
-    console.log(this.props.socialObject[0])
+    if (peopleLike.length > 0){
+      for (let i = 0; i < peopleLike.length; i++){
+        peopleLikeId.push(peopleLike[i].id)
+      }
+    }
 
+    console.log(peopleLikeId)
 
     return (
       <Modal
@@ -138,9 +146,21 @@ class SocialCalCellInfo extends React.Component{
         {this.dateView(this.props.curSocialDate)}
         </div>
         <div className = 'socialLikeCommentNum'>
-        <div className = 'socialLikeCircle'>
-        <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
-        </div>
+        {
+          peopleLikeId.includes(this.props.curId) ?
+
+          <div className = 'socialLikeCircle'>
+          <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+          </div>
+
+          :
+
+          <div className = 'socialLikeCircle'>
+          <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+          </div>
+        }
+
+
         <span className = 'socialLikeCommentText'> {peopleLike.length} Likes . {socialCalComments.length} comments </span>
         <div className = 'socialLikeAvatar'>
           <AvatarGroups />
@@ -149,6 +169,9 @@ class SocialCalCellInfo extends React.Component{
 
         <div className = 'socialLikeComment'>
 
+        {
+          peopleLikeId.includes(this.props.curId) ?
+
           <div
           onClick = {() => this.onSocialLike(curDate, this.props.curId, socialCalUserId)}
           className ='socialLike'>
@@ -156,7 +179,25 @@ class SocialCalCellInfo extends React.Component{
             style={{ marginRight:'10px', color:'red'}}
             class="fa fa-heart">
           </i>
-          Like </div>
+          Like
+          </div>
+
+          :
+
+          <div
+          onClick = {() => this.onSocialLike(curDate, this.props.curId, socialCalUserId)}
+          className ='socialLike'>
+          <i
+            style={{ marginRight:'10px'}}
+            class="fa fa-heart">
+          </i>
+          Like
+          </div>
+
+
+
+        }
+
           <div className  = 'socialComment'>
           <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
            Comment </div>
@@ -179,7 +220,11 @@ const mapStateToProps = state => {
     showSocialModal: state.socialCal.showSocialModal,
     curSocialDate: state.socialCal.curSocialDate,
     curProfilePic: state.auth.profilePic,
-    curId: state.auth.id
+    curId: state.auth.id,
+    curFirst: state.auth.firstName,
+    curLast: state.auth.lastName,
+    curUsername: state.auth.username,
+    curProfilePic: state.auth.profilePic
   }
 }
 

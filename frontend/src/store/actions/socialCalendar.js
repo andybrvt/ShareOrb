@@ -39,3 +39,19 @@ export const closeSocialPictureModal = () => {
     type: actionTypes.CLOSE_SOCIAL_PICTURE_MODAL
   }
 }
+
+export const addSocialLikeNewM = (socialObj) => {
+  // This will be used to the redux information into the modal itself
+  return{
+    type: actionTypes.ADD_SOCIAL_LIKE_NEW_M,
+    socialObj: socialObj
+  }
+}
+
+export const addSocialLikeOldM = (socialObj) => {
+  // This will be used to the redux information into the modal itself
+  return {
+    type: actionTypes.ADD_SOCIAL_LIKE_OLD_M,
+    socialObj: socialObj
+  }
+}

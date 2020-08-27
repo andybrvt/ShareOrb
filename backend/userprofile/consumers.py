@@ -513,8 +513,11 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 'socialCalCellObj':socialCalCellObj,
                 'reciever': userObj
             }
-            self.send_new_explore(contentOwner)
-            self.send_new_explore(contentLiker)
+            if userObj == ownerObj:
+                self.send_new_explore(contentOwner)
+            else:
+                self.send_new_explore(contentOwner)
+                self.send_new_explore(contentLiker)
         if created == False:
             contentOwner = {
                 'command': 'send_social_like_old',
@@ -522,15 +525,18 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 'socialCalCellObjId': socialCalCellObj,
                 'reciever': ownerObj
             }
-            contentLike = {
+            contentLiker = {
                 'command': 'send_social_like_old',
                 'userObj': userObj,
                 'socialCalCellObjId': socialCalCellObj,
                 'reciever': userObj
             }
-            self.send_new_explore(contentOwner)
-            self.send_new_explore(contentLike)
 
+            if userObj == ownerObj:
+                self.send_new_explore(contentOwner)
+            else:
+                self.send_new_explore(contentOwner)
+                self.send_new_explore(contentLiker)
 
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer

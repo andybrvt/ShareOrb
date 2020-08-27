@@ -4,13 +4,16 @@ import * as dateFns from 'date-fns';
 
 
 const initialState = {
-  // The socialEvents will be the information inside the modal
-  // for each day cell
+  // The socialObj will be the information inside the modal
+  // for each day cell, it will pretty mcuh be like the single cell
+  // so then you will have to change the profile object in the explore
+  // and add a like to this as well
   socialObject: [],
   socialDate: new Date(),
   showSocialModal: false,
   curSocialDate: new Date(),
-  showSocialPicModal: false
+  showSocialPicModal: false,
+  test: ''
 }
 
 const nextMonthSocial = (state, action) => {
@@ -51,6 +54,26 @@ const closeSocialPictureModal = (state, action) => {
   })
 }
 
+const addSocialLikeNewM = (state, action) => {
+  return updateObject (state, {
+    socialObject : [
+      action.socialObj.socialCalCellObj
+
+    ]
+  })
+}
+
+const addSocialLikeOldM = (state, action) => {
+  return updateObject (state, {
+    socialObject: [{
+        ...state.socialObject[0],
+        people_like: [... state.socialObject[0].people_like, action.socialObj.userObj]
+
+      }
+    ]
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -65,6 +88,10 @@ const reducer = (state = initialState, action) => {
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
       return closeSocialPictureModal(state, action)
+    case actionTypes.ADD_SOCIAL_LIKE_NEW_M:
+      return addSocialLikeNewM(state, action)
+    case actionTypes.ADD_SOCIAL_LIKE_OLD_M:
+      return addSocialLikeOldM(state, action)
     default:
       return state;
   }

@@ -164,19 +164,45 @@ export const addSocialLikeNew = (state, action) =>{
   // So the task here is you have to first fine the user, then find the
   //  correct cell data and then add in the like
   console.log(action)
+  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
+
+
   return updateObject(state, {
-    test: action
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal: [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
+      } : profile
+    )
   })
 }
 
 export const addSocialLikeOld = (state, action) => {
   // so the task here is to find the user, then find the correct cell
   // data then add in the like
-  console.log(action)
+
+  // For now I will do a double loop --> probally gonna be shit but if things seem to be better
+  // and sorted I will switch to binary search
+  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCell.id
+  const userLike = action.exploreObj.userObj
   return updateObject(state, {
-    test:action
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal: profile.get_socialCal.map(
+          socialCell => socialCell.id === calendarCalCellId ? {
+            ...socialCell,
+            people_like: [...socialCell.people_like, userLike]
+          } : socialCell
+        )
+      } : profile
+    )
   })
 }
+
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
