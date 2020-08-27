@@ -226,6 +226,8 @@ class WebSocketExplore {
     // The two things you are gonna be sending is something tha tyou cna use to identify
     // the day cell and the user who is gonna like it so you cna grab the user
 
+
+    // The personLike and owner will be the ids of the persons
     console.log(curDate, personLike)
     this.sendExplore({
       socialCalDate: curDate,
@@ -234,6 +236,15 @@ class WebSocketExplore {
       command: 'send_social_like'
     })
 
+  }
+
+  sendSocialUnLike = (curDate, personUnlike, owner) => {
+    // So you want the curDate so that you can pick the right curcell, along with the
+    // the ids of the person taht is gonna unlike and the owner of the calendar
+    // personUnlike would be the id of the person liking or unliking
+    // owner will be the id of the social cal owner
+
+    console.log(personUnlike)
   }
 
 

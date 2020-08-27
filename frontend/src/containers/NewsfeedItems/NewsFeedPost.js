@@ -368,6 +368,7 @@ class NewsfeedPost extends React.Component {
     let like_people = this.props.data.people_like
     let profilePic = ''
 
+    console.log(like_people)
     if (this.props.data.user.profile_picture){
       profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
     }
