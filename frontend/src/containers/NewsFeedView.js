@@ -133,7 +133,7 @@ class NewsFeedView extends React.Component {
 					</div>
 
 
-					<div class="suggestFriendsCSS" style = {{
+					<div class="shadowBox suggestFriendsCSS" style = {{
 						background: 'white',
 						height: '400px',
 						width: '300px',
@@ -154,7 +154,7 @@ class NewsFeedView extends React.Component {
 
 				</div>
 
-				<Col span={11}>
+				<Col span={10}>
 
 
 
@@ -163,7 +163,7 @@ class NewsFeedView extends React.Component {
 					<div>
 
 
-						<div >
+						<div>
 						<Row gutter={24}>
 
 
@@ -173,7 +173,7 @@ class NewsFeedView extends React.Component {
 								<div onClick ={this.postCondition} class="topCard">
 
 
-									<i  class="fa fa-pencil share"></i>
+									<i class="far fa-edit share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 									 <p  class="cardAlign"> Write a post </p>
 
 								</div>
@@ -186,8 +186,8 @@ class NewsFeedView extends React.Component {
 
 								<div class="topCard" onClick ={this.picCondition}>
 
+									<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 
-									<i style={{background:'#5cdbd3'}}  class="fa fa-plus share"></i>
 									 <p  class="cardAlign"> Create event  </p>
 
 								</div>
@@ -201,8 +201,8 @@ class NewsFeedView extends React.Component {
 
 								<div class="topCard">
 
+									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 
-									<i style={{background:'#722ed1'}} class="fa fa-picture-o share"></i>
 									 <p  class="cardAlign"> View album </p>
 
 								</div>
@@ -217,7 +217,7 @@ class NewsFeedView extends React.Component {
 {
 	this.state.postShow?
 
-	<div style={{marginTop:'100px'}}>
+	<div style={{marginTop:'50px'}}>
 
 	<NewNewsfeedFormPost />
 
@@ -295,13 +295,13 @@ class NewsFeedView extends React.Component {
 			<div style = {{
 				background:'white',
 				height: '500px',
-				width: '380px',
+				width: '400px',
 				// postion: 'fixed',
 				position: 'relative',
 				left:'80px'
 			}}
 
-			class="suggestFriendsCSS"
+			class="shadowBox suggestFriendsCSS"
 
 			>
 
