@@ -69,6 +69,7 @@ class UserProfileCard extends React.Component {
 
 
   render() {
+    console.log(this.props.data)
     let profileImage = null
 
     if(this.props.data){
@@ -103,7 +104,7 @@ class UserProfileCard extends React.Component {
         </div>
         <div className = 'bottom'>
           <div className = 'name'> {this.capitalize(this.props.data.username)} </div>
-          <div className = 'designation'> Web Developer </div>
+          <div className = 'designation'> {this.props.data.get_followers.length} followers </div>
           <div className = 'location'> <EnvironmentOutlined /> Tucson, AZ </div>
         </div>
         <div className = 'social'>

@@ -22,6 +22,13 @@ class LikeList extends React.Component{
     window.location.href = 'explore/'+user
   }
 
+  onProfileClick = () => {
+    const user = this.props.data.username
+    // this.prop.history.push('userview/'+user)
+    window.location.href = 'explore/'+user;
+
+  }
+
 
   render () {
     console.log(this.props)
@@ -47,7 +54,7 @@ class LikeList extends React.Component{
       renderItem = {item => (
         <List.Item
         className = 'followListItem'
-        onClick = {() => this.onFollowItemClick(item.username)}
+        onClick = {this.onProfileClick}
         >
         <List.Item.Meta
           avatar={

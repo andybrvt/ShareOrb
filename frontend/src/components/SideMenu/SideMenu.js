@@ -33,10 +33,11 @@ import {
   Divider,
   AutoComplete,
   Badge,
+  Select,
 } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
-
+import { authAxios } from '../../components/util';
 import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 
 import * as navActions from '../../store/actions/nav';
@@ -60,6 +61,8 @@ class SideMenu extends React.Component {
     this.state = {
       dataSource: [],
       collapsed:true,
+      profileList:[],
+      name:'',
     };
   }
   toggle = () => {
@@ -69,10 +72,18 @@ class SideMenu extends React.Component {
   };
 
 
+  componentDidMount(){
+    authAxios.get('http://127.0.0.1:8000/userprofile/explore')
+      .then(res=> {
+        console.log(res)
+        this.setState({
+          profileList:res.data,
+       });
+      });
+  }
+
   handleSearch = (value) => {
-    this.setState({
-      dataSource: localStorage.getItem('friends').split(',')
-    });
+
   }
 
   handleSelect = (value) => {
@@ -115,9 +126,18 @@ class SideMenu extends React.Component {
     }
 
 
+
+
+
     const { dataSource } = this.state;
+    const { Option } = Select;
+    const options = this.state.profileList.map(d => <Option key={d.value}>{d.text}</Option>);
 
 
+
+
+
+    console.log(this.state.profileList)
 
     return (
       <div style={{marginBottom:30}}>
@@ -200,13 +220,14 @@ class SideMenu extends React.Component {
 
 
          <AutoComplete
-           dataSource={dataSource}
-           filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+           dataSource={options}
+
            onSearch={this.handleSearch}
-           onSelect={this.handleSelect}
+
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={500}
            style={{ marginLeft:150, marginLeft:'25%', marginRight:'25%', width: 450  }}
+
          >
         <Input.Search size="large" placeholder="Search" />
       </AutoComplete>
