@@ -74,6 +74,22 @@ const addSocialLikeOldM = (state, action) => {
   })
 }
 
+
+const addSocialUnLikeM = (state, action) => {
+
+  function removeUnliker(unliker){
+    return unliker.id !== action.socialObj.userObj.id
+  }
+
+  return updateObject(state, {
+    socialObject: [{
+      ...state.socialObject[0],
+      people_like: state.socialObject[0].people_like.filter(removeUnliker)
+    }]
+  })
+}
+
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -92,6 +108,8 @@ const reducer = (state = initialState, action) => {
       return addSocialLikeNewM(state, action)
     case actionTypes.ADD_SOCIAL_LIKE_OLD_M:
       return addSocialLikeOldM(state, action)
+    case actionTypes.ADD_SOCIAL_UNLIKE_M:
+      return addSocialUnLikeM(state, action)
     default:
       return state;
   }

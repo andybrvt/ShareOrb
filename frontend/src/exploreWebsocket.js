@@ -144,6 +144,21 @@ class WebSocketExplore {
       // NOW PUT THE CALL BACK FOR THE REDUX HERE
       this.callbacks['social_like_old'](exploreObj)
       this.callbacks['social_like_old_m'](exploreObj)
+    } else if (command === 'send_social_unlike'){
+      // This will be used for indicating the user and then removing the unlike
+      // user from the  social cal cell people like
+      const socialCalCellId = parsedData.socialCalCellObjId
+      // Pretty much the object used is the same as the like action
+      const userObj = parsedData.userObj
+      const exploreObj = {
+        socialCalCell: socialCalCellId,
+        userObj: userObj
+      }
+
+      // Now you would put the call backs here
+      console.log('stuff stuff stuff')
+      this.callbacks['social_unlike'](exploreObj)
+      this.callbacks['social_unlike_m'](exploreObj)
     }
 
 
@@ -160,7 +175,9 @@ class WebSocketExplore {
      addSocialLikeNew,
      addSocialLikeOld,
      addSocialLikeNewM,
-     addSoicalLikeOldM
+     addSocialLikeOldM,
+     addSocialUnLike,
+     addSocialUnLikeM,
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -171,7 +188,9 @@ class WebSocketExplore {
     this.callbacks['social_like_new'] = addSocialLikeNew
     this.callbacks['social_like_old'] = addSocialLikeOld
     this.callbacks['social_like_new_m'] = addSocialLikeNewM
-    this.callbacks['social_like_old_m'] = addSoicalLikeOldM
+    this.callbacks['social_like_old_m'] = addSocialLikeOldM
+    this.callbacks['social_unlike'] = addSocialUnLike
+    this.callbacks['social_unlike_m'] = addSocialUnLikeM
   }
 
 
@@ -232,19 +251,26 @@ class WebSocketExplore {
     this.sendExplore({
       socialCalDate: curDate,
       userId: personLike,
-      owenerId: owner,
+      ownerId: owner,
       command: 'send_social_like'
     })
 
   }
 
-  sendSocialUnLike = (curDate, personUnlike, owner) => {
+  sendSocialUnLike = (curDate, personUnLike, owner) => {
     // So you want the curDate so that you can pick the right curcell, along with the
     // the ids of the person taht is gonna unlike and the owner of the calendar
     // personUnlike would be the id of the person liking or unliking
     // owner will be the id of the social cal owner
 
-    console.log(personUnlike)
+    console.log(curDate, personUnLike, owner)
+    this.sendExplore({
+      socialCalDate: curDate,
+      userId: personUnLike,
+      ownerId: owner,
+      command: 'send_social_unlike'
+
+    })
   }
 
 

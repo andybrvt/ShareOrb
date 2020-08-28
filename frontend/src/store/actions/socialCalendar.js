@@ -55,3 +55,11 @@ export const addSocialLikeOldM = (socialObj) => {
     socialObj: socialObj
   }
 }
+
+
+export const addSocialUnLikeM = (socialObj) => {
+  return {
+    type: actionTypes.ADD_SOCIAL_UNLIKE_M,
+    socialObj: socialObj
+  }
+}
