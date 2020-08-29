@@ -187,6 +187,8 @@ export const addSocialLikeOld = (state, action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
   const userLike = action.exploreObj.userObj
+
+  console.log('like old reducer')
   return updateObject(state, {
     profiles: state.profiles.map(
       profile => profile.id === calendarOwnerId ? {
@@ -200,6 +202,37 @@ export const addSocialLikeOld = (state, action) => {
       } : profile
     )
   })
+}
+
+export const addSocialUnLike = (state, action) => {
+  // This will go to the profiles, find the right person using the calendarOwnerId
+  // and then find the right calenadrObj then take out the user
+  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCell.id
+  const userLike = action.exploreObj.userObj
+
+  function removeUnliker(unliker) {
+    return unliker.id !== userLike.id
+  }
+
+  // I might have to do a triple forloop but I  might change it later
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal: profile.get_socialCal.map(
+
+          // this will get the right cal cell
+          socialCell => socialCell.id === calendarCalCellId ? {
+            ... socialCell,
+            people_like: socialCell.people_like.filter(removeUnliker)
+          } : socialCell
+        )
+      } : profile
+    )
+  })
+
+
 }
 
 
@@ -230,6 +263,8 @@ const reducer = (state = initialState, action) => {
       return addSocialLikeNew(state, action)
     case actionTypes.ADD_SOCIAL_LIKE_OLD:
       return addSocialLikeOld(state, action)
+    case actionTypes.ADD_SOCIAL_UNLIKE:
+      return addSocialUnLike(state,action)
     default:
       return state;
   };

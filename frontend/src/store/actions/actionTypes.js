@@ -80,8 +80,8 @@ export const ADD_SOCIAL_LIKE_NEW = 'ADD_SOCIAL_LIKE_NEW';
 export const ADD_SOCIAL_LIKE_OLD = 'ADD_SOCIAL_LIKE_OLD';
 export const ADD_SOCIAL_LIKE_NEW_M = 'ADD_SOCIAL_LIKE_NEW_M';
 export const ADD_SOCIAL_LIKE_OLD_M = 'ADD_SOCIAL_LIKE_OLD_M';
-
-
+export const ADD_SOCIAL_UNLIKE = 'ADD_SOCIAL_UNLIKE';
+export const ADD_SOCIAL_UNLIKE_M = 'ADD_SOCIAL_UNLIKE_M';
 
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable

@@ -90,3 +90,11 @@ export const addSocialLikeOld = (exploreObj) => {
     exploreObj: exploreObj
   }
 }
+
+export const addSocialUnLike = (exploreObj) => {
+  // This will be used for unliking the socialcals
+  return{
+    type: actionTypes.ADD_SOCIAL_UNLIKE,
+    exploreObj: exploreObj
+  }
+}

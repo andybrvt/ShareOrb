@@ -56,7 +56,9 @@ class App extends Component {
       this.props.addSocialLikeNew.bind(this),
       this.props.addSocialLikeOld.bind(this),
       this.props.addSocialLikeNewM.bind(this),
-      this.props.addSocialLikeOldM.bind(this)
+      this.props.addSocialLikeOldM.bind(this),
+      this.props.addSocialUnLike.bind(this),
+      this.props.addSocialUnLikeM.bind(this)
     )
   }
 
@@ -127,7 +129,9 @@ const mapDispatchToProps = dispatch => {
     addSocialLikeNew: exploreObj => dispatch(exploreActions.addSocialLikeNew(exploreObj)),
     addSocialLikeOld: exploreObj => dispatch(exploreActions.addSocialLikeOld(exploreObj)),
     addSocialLikeNewM: socialObj => dispatch(socialActions.addSocialLikeNewM(socialObj)),
-    addSocialLikeOldM: socialObj => dispatch(socialActions.addSocialLikeOldM(socialObj))
+    addSocialLikeOldM: socialObj => dispatch(socialActions.addSocialLikeOldM(socialObj)),
+    addSocialUnLike: exploreObj => dispatch(exploreActions.addSocialUnLike(exploreObj)),
+    addSocialUnLikeM: socialObj => dispatch(socialActions.addSocialUnLikeM(socialObj))
   }
 }
 

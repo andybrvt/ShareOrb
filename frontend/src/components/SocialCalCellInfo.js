@@ -48,6 +48,14 @@ class SocialCalCellInfo extends React.Component{
 
   }
 
+  onSocialUnLike = (curDate, personUnLike, owner) => {
+    // This will send out a unlike to the websocket, teh curDate will be the current date
+    // and be used to find the cell, the person will be the person that unlikes it and the
+     // owener will be the owner of the calendar
+     console.log(personUnLike, owner)
+     ExploreWebSocketInstance.sendSocialUnLike(curDate, personUnLike, owner)
+  }
+
 
   render(){
     console.log(this.props)
@@ -173,13 +181,13 @@ class SocialCalCellInfo extends React.Component{
           peopleLikeId.includes(this.props.curId) ?
 
           <div
-          onClick = {() => this.onSocialLike(curDate, this.props.curId, socialCalUserId)}
+          onClick = {() => this.onSocialUnLike(curDate, this.props.curId, socialCalUserId)}
           className ='socialLike'>
           <i
             style={{ marginRight:'10px', color:'red'}}
             class="fa fa-heart">
           </i>
-          Like
+          Unlike
           </div>
 
           :

@@ -482,7 +482,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # So to cover all cases you would have to send the socialcal cell, serialzied and the userinformation just incase
         # the socialcal cell is already made
         user = get_object_or_404(User, id = data['userId'])
-        owner = get_object_or_404(User, id = data['owenerId'] )
+        owner = get_object_or_404(User, id = data['ownerId'])
         socialCell, created = SocialCalCell.objects.get_or_create(
             socialCalUser = owner,
             socialCaldate = data['socialCalDate'],
@@ -537,6 +537,59 @@ class ExploreConsumer(JsonWebsocketConsumer):
             else:
                 self.send_new_explore(contentOwner)
                 self.send_new_explore(contentLiker)
+
+
+    def send_social_unlike(self, data):
+        # This will pretty much do the opposite of the send social
+        # like
+
+        # remember that user is the perosn that like the post
+
+
+        # pretty much refer to the send_social_like function for details
+        print (data)
+        user = get_object_or_404(User, id = data['userId'])
+        owner = get_object_or_404(User, id = data['ownerId'])
+        socialCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = owner,
+            socialCaldate = data['socialCalDate'],
+            testDate = data['socialCalDate']
+        )
+
+        socialCell.people_like.remove(user)
+        socialCell.save()
+
+
+        # Now we will serialzie all the data and it to the front end so we can
+        # put some redux into it
+
+        socialCalCellObj = SocialCalCellSerializer(socialCell, many = False).data
+        # The userObj will be the person that unlikes the post
+        userObj = FollowUserSerializer(user, many = False).data
+        # The ownerObj will be th eperosn taht owns the post
+        ownerObj = FollowUserSerializer(owner, many = False).data
+
+        # Since we do not need to make a seperate case for the when you have to create
+        #  a new
+        contentOwner = {
+            'command' : 'send_social_unlike',
+            'userObj': userObj,
+            'socialCalCellObjId': socialCalCellObj,
+            'reciever': ownerObj
+        }
+        contentLiker = {
+            'command': 'send_social_unlike',
+            'userObj': userObj,
+            'socialCalCellObjId': socialCalCellObj,
+            'reciever': userObj
+        }
+
+        if userObj == ownerObj:
+            self.send_new_explore(contentOwner)
+        else:
+            self.send_new_explore(contentOwner)
+            self.send_new_explore(contentLiker)
+
 
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer
@@ -680,6 +733,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_unfollowing(data)
         if data['command'] == 'send_social_like':
             self.send_social_like(data)
+        if data['command'] == 'send_social_unlike':
+            self.send_social_unlike(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']
