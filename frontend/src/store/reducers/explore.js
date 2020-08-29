@@ -5,8 +5,9 @@ const initialState = {
   showProfileEdit: false,
   changeProfilePic: false,
   profiles: [],
-  curProfile: [],
-  test: ''
+  // curProfile: [],
+  test: '',
+  // profile: []
 
 }
 
@@ -18,6 +19,9 @@ export const loadProfiles = (state, action) =>{
 }
 
 export const loadCurProfile = (state,action) =>{
+  // The profile will get added in when the getcurprofile is added
+  // when ever the curprofile is loaded up
+  console.log(action.curProfile)
   return updateObject(state, {
     profile: action.curProfile
   })
@@ -167,6 +171,15 @@ export const addSocialLikeNew = (state, action) =>{
   const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCellObj.id
 
+  console.log(state.profile)
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
+  // Event though the profile is not in state, it is declared when the curProfile is loaded
+  // in so it is there
 
   return updateObject(state, {
     profiles: state.profiles.map(
@@ -174,7 +187,11 @@ export const addSocialLikeNew = (state, action) =>{
         ... profile,
         get_socialCal: [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
       } : profile
-    )
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: [...state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
+    } : state.profile
   })
 }
 
@@ -187,6 +204,11 @@ export const addSocialLikeOld = (state, action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
   const userLike = action.exploreObj.userObj
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
 
   console.log('like old reducer')
   return updateObject(state, {
@@ -200,7 +222,16 @@ export const addSocialLikeOld = (state, action) => {
           } : socialCell
         )
       } : profile
-    )
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        socialCell => socialCell.id === calendarCalCellId ? {
+          ... socialCell,
+          people_like: [...socialCell.people_like, userLike]
+        } : socialCell
+      )
+    } : state.profile
   })
 }
 
@@ -210,6 +241,11 @@ export const addSocialUnLike = (state, action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
   const userLike = action.exploreObj.userObj
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
 
   function removeUnliker(unliker) {
     return unliker.id !== userLike.id
@@ -229,7 +265,16 @@ export const addSocialUnLike = (state, action) => {
           } : socialCell
         )
       } : profile
-    )
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        socialCell => socialCell.id === calendarCalCellId ? {
+          ... socialCell,
+          people_like: socialCell.people_like.filter(removeUnliker)
+        } :socialCell
+      )
+    } : state.profile
   })
 
 

@@ -2,6 +2,9 @@
 // RELATED TO THE PROFILE PAGES, ALL THE PROFILE PAGES, THIS INCLUDES
 // YOU OWN PROFILE PAGE
 
+import { connect } from 'react-redux';
+
+
 class WebSocketExplore {
   static instance = null;
   callbacks = {}
@@ -311,6 +314,10 @@ class WebSocketExplore {
 
 }
 
+
+
 const ExploreWebSocketInstance = WebSocketExplore.getInstance();
+
+
 
 export default ExploreWebSocketInstance;
