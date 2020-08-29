@@ -136,7 +136,7 @@ class SideMenu extends React.Component {
 
 
 
-
+    console.log(options)
     console.log(this.state.profileList)
 
     return (
@@ -232,9 +232,6 @@ class SideMenu extends React.Component {
         <Input.Search size="large" placeholder="Search" />
       </AutoComplete>
 
-
-
-         <Divider type="vertical" />
 
 
          <span className="avatar-item" style={{marginRight:40}}>

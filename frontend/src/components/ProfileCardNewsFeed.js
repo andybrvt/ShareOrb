@@ -76,7 +76,7 @@ class ProfileCardNewsFeed extends React.Component{
     return (
       <div className = "profileCard-NF">
         <div className = 'image-box-NF'>
-        <Avatar size = {310} shape = 'square' src = {profilePic} />
+        <Avatar size = {250} shape = 'square' src = {profilePic} />
 
         </div>
         <div className = 'top-NF'>
