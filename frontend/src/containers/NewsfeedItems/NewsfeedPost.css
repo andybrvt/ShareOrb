@@ -366,7 +366,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
   font-size: 12px;
   line-height: 11px;
   text-transform: uppercase;
-
+  cursor: pointer;
   color: #0275B1;
 }
 

@@ -619,7 +619,13 @@ class NewsfeedPost extends React.Component {
                      </span>
 
                      <span class="grayout outerSeeMore"> {this.props.data.caption.substring(150,185)}</span>
-                     <div style={{marginLeft: '10px', marginTop:'10px'}} class="seeMore outerSeeMore"> ... see more </div>
+                     <div
+                       style={{marginLeft: '10px', marginTop:'10px'}}
+                       class="seeMore outerSeeMore"
+                       onClick={this.OnClickPost}
+                       >
+                        ... see more 
+                     </div>
 
                   </div>
                  :
