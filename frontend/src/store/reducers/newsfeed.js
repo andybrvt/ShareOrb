@@ -21,7 +21,7 @@ export const addPostLike = (state, action) => {
       post => post.id === action.like.postId ? {
         ...post,
         like_count : post.like_count + 1,
-        people_like: [...post.people_like, action.like.userId]
+        people_like: [...post.people_like, action.like.userObj]
       } : post
     )
   })

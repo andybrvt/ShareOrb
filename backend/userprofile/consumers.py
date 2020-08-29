@@ -359,10 +359,15 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         postObj.save()
         # postObj.people_like.add(new_person_like)
         # postObj.save()
+
+        # So I am serialziing the like object because we want the list of user
+        # in the peole_like to be list so we can open up a list of them
+        newLikeObj = UserSerializer(new_person_like, many = False).data
+
         content = {
             'command': 'new_like',
             'postId': data['postId'],
-            'user': data['userId']
+            'user': newLikeObj
         }
 
         self.send_new_action(content)

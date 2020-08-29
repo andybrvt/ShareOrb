@@ -493,7 +493,7 @@ class NewsfeedPost extends React.Component {
     let like_people = this.props.data.people_like
     let profilePic = ''
 
-    console.log(like_people)
+    console.log(this.props.data)
     if (this.props.data.user.profile_picture){
       profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
     }
@@ -624,7 +624,7 @@ class NewsfeedPost extends React.Component {
                        class="seeMore outerSeeMore"
                        onClick={this.OnClickPost}
                        >
-                        ... see more 
+                        ... see more
                      </div>
 
                   </div>

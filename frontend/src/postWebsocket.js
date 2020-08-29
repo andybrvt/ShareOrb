@@ -75,15 +75,17 @@ class WebSocketPosts {
       this.callbacks['fetch_posts'](postObject)
     } else if (command === 'new_like'){
       // This is to send a like to the post through redux
+      // So remeber that the parsedData.user is sent as an object now not an id
       console.log('new_like')
       const postIdNum = parsedData.postId
-      const userIdNum = parsedData.user
+      const userObj = parsedData.user
       // The user in this case is the user who liked the post, pretty much
       // the current user but to others it will be someone else
       const likeObject = {
         postId: postIdNum,
-        userId: userIdNum
+        userObj: userObj
       }
+      console.log(likeObject)
       this.callbacks['new_like'](likeObject)
     } else if (command == 'un_like'){
       const postIdNum = parsedData.postId
