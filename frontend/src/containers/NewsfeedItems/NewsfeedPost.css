@@ -163,12 +163,12 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   margin: 0 auto;
   width:630px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
-
+  margin-bottom: 50px;
 }
 
 
 .imageContainer{
-  width:615px;
+  width:628px;
   height:620px;
 
 }
@@ -382,7 +382,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 }
 
 .grayout {
-    opacity: 0.6; /* Real browsers */
+    opacity: 0.3; /* Real browsers */
     filter: alpha(opacity = 60); /* MSIE */
 }
 
@@ -392,8 +392,8 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 .outerSeeMore {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+
+
 }
 
 
@@ -404,13 +404,13 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 
 .innerSeeMore {
-  display: inline-block;
+
   /* align the text to one line. */
   white-space: nowrap;
 }
 
 .photoText{
-    line-height: 160%;
+    line-height: 80%;
 
 }
 

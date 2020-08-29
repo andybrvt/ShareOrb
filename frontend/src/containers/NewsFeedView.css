@@ -34,7 +34,7 @@ width: 100%;
 
   background: #FFFFFF;
 
-  width:230px;
+  width:215px;
   padding:30px;
   height:70px;
 
@@ -222,7 +222,7 @@ color: #203758;
 
 
 .newsfeed {
-margin-left: 100px;
+margin-left: 25px;
 
   minHeight: 0px;
   /* overflow:auto; */

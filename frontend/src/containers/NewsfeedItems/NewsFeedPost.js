@@ -608,24 +608,23 @@ class NewsfeedPost extends React.Component {
 
     <Divider style={{'marginTop':-2}}/>
 
-    <p style={{marginLeft:'10px',fontSize: '16px', color:'black'}}>
+    <p style={{marginLeft:'10px', marginBottom:'20px',fontSize: '14px', color:'black'}}>
               {
 
-                 ((this.props.data.caption).length>600)?
+                 ((this.props.data.caption).length>150)?
+                 <div class="photoText">
 
-                 <div class="outerSeeMore">
+                     <span>
+                      {this.props.data.caption.substring(0,150)}
+                     </span>
 
-                   <span class="innerSeeMore">
-                   {this.props.data.caption.substring(0,550)}
+                     <span class="grayout outerSeeMore"> {this.props.data.caption.substring(150,185)}</span>
+                     <div style={{marginLeft: '10px', marginTop:'10px'}} class="seeMore outerSeeMore"> ... see more </div>
 
-
-                   </span>
-                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
-                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
-                 </div>
+                  </div>
                  :
                  <div style={{display:'flex'}}>
-                   <p  class="photoText" style={{fontSize:'14px', padding:'20px'}}>
+                   <p  class="photoText" style={{fontSize:'14px'}}>
                    {this.props.data.caption}
 
                    </p>

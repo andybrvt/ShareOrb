@@ -154,7 +154,7 @@ class NewsFeedView extends React.Component {
 
 				</div>
 
-				<Col span={10}>
+				<Col span={11}>
 
 
 
@@ -164,7 +164,7 @@ class NewsFeedView extends React.Component {
 
 
 						<div>
-						<Row gutter={24}>
+						<Row gutter={20}>
 
 
 							<Col span={8}>
@@ -298,7 +298,7 @@ class NewsFeedView extends React.Component {
 				width: '400px',
 				// postion: 'fixed',
 				position: 'relative',
-				left:'80px'
+				left:'50px'
 			}}
 
 			class="shadowBox suggestFriendsCSS"
@@ -316,6 +316,7 @@ class NewsFeedView extends React.Component {
 
 			<Divider plain></Divider>
 				<div class="appearBefore" style={{background:'white'}}>
+
 				<SuggestedFriends {...this.props}/>
 				</div>
 			</div>
