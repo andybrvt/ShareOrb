@@ -8,6 +8,9 @@ const { TextArea } = Input;
 
 class SocialComments extends React.Component{
 
+  state = {
+    comment: ''
+  }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -76,6 +79,7 @@ class SocialComments extends React.Component{
         className= 'socialBoxInput'
         // bordered = {false}
         placeholder = 'Write a comment'
+        type = 'submit'
         rows = {1} />
       </div>
       </div>

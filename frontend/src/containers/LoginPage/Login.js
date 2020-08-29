@@ -89,6 +89,7 @@ if (token) {
           {...layout}
           name="basic"
           initialValues={{ remember: true }}
+          // onSubmit = {this.handleSubmit}
           >
             <Form.Item
             onChange={this.handleUserName}
@@ -113,7 +114,9 @@ if (token) {
             </Form.Item>
 
             <Form.Item {...tailLayout}>
-              <Button type="primary"
+              <Button
+               htmlType = 'submit'
+               type="primary"
                onClick={this.handleSubmit}
                loading={loading}
                >
@@ -121,6 +124,7 @@ if (token) {
 
               </Button>
             </Form.Item>
+
         </Form>
       </div>
 
