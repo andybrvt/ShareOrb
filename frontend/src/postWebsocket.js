@@ -89,11 +89,11 @@ class WebSocketPosts {
       this.callbacks['new_like'](likeObject)
     } else if (command == 'un_like'){
       const postIdNum = parsedData.postId
-      const userIdNum = parsedData.user
+      const userObj = parsedData.user
       // This will just for the unlike porition
       const unlikeObject = {
         postId: postIdNum,
-        userId: userIdNum
+        userObj: userObj
       }
 
       this.callbacks['un_like'](unlikeObject)

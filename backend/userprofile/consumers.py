@@ -379,10 +379,12 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         postObj.people_like.remove(person_like)
         postObj.save()
 
+        unLikeObj = UserSerializer(person_like, many = False).data
+
         content = {
             'command': 'un_like',
             'postId': data['postId'],
-            'user': data['userId']
+            'user': unLikeObj
 
         }
         self.send_new_action(content)

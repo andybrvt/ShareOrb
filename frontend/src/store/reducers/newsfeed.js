@@ -40,12 +40,19 @@ export const unaddPostLike = (state, action) => {
     }
   }
 
+  // This will be the user object that unlike the post
+  const likeUser = action.unlike.userObj
+
+  function removeUnliker(unliker) {
+    // use this for the filter function
+    return unliker.id !== likeUser.id
+  }
 
   return updateObject(state, {
     posts: state.posts.map(
       post => post.id === action.unlike.postId ? {
         ...post,
-        people_like: like_list
+        people_like: post.people_like.filter(removeUnliker)
       } : post
     )
   })

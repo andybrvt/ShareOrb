@@ -950,7 +950,16 @@ class NewsfeedPost extends React.Component {
   AddOneToLike = (e) => {
     e.stopPropagation();
     this.triggerComments();
-    if ( this.props.data.people_like.includes(this.props.userId)){
+    let peopleLikeId = []
+
+    const like_people = this.props.data.people_like
+
+    if(like_people.length > 0){
+      for(let i = 0; i< like_people.length; i++){
+        peopleLikeId.push(like_people[i].id)
+      }
+    }
+    if ( peopleLikeId.includes(this.props.userId)){
       console.log('unlike')
       WebSocketPostsInstance.unSendOneLike(this.props.userId, this.props.data.id)
     } else {
