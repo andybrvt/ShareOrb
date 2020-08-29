@@ -124,7 +124,8 @@ class NewsFeedView extends React.Component {
 						width: '300px',
 						// postion: 'fixed',
 						position: 'relative',
-						marginRight:100,
+						marginRight:30,
+						
 					}}>
 
 
@@ -136,7 +137,7 @@ class NewsFeedView extends React.Component {
 					<div class="shadowBox suggestFriendsCSS" style = {{
 						background: 'white',
 						height: '400px',
-						width: '300px',
+						width: '240px',
 
 						// postion: 'fixed',
 						position: 'relative',
@@ -146,7 +147,7 @@ class NewsFeedView extends React.Component {
 
 
 
-					Today s events
+					Today's events
 
 
 					</div>

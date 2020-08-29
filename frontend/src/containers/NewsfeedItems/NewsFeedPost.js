@@ -614,7 +614,7 @@ class NewsfeedPost extends React.Component {
 
     <Divider style={{'marginTop':-2}}/>
 
-    <p style={{marginLeft:'10px', marginBottom:'20px',fontSize: '14px', color:'black'}}>
+    <p style={{marginLeft:'20px', marginBottom:'20px',fontSize: '14px', color:'black'}}>
               {
 
                  ((this.props.data.caption).length>150)?
