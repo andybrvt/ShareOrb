@@ -1,7 +1,8 @@
 import React from 'react';
-import { Comment, Tooltip, List, Avatar, Input } from 'antd';
+import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import moment from 'moment';
 import './labelCSS/SocialModal.css';
+import { SendOutlined  } from '@ant-design/icons';
 
 
 const { TextArea } = Input;
@@ -14,6 +15,22 @@ class SocialComments extends React.Component{
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  handleSubmit = e => {
+    console.log('comment submit')
+    console.log(this.state.comment)
+    this.setState({comment: ''})
+  }
+
+  handleChange = e =>{
+    console.log(e.target.value)
+    this.setState({comment: e.target.value})
+
+  }
+
+  componentWillReceiveProps = (newProps) => {
+    console.log(newProps)
   }
 
   renderTimestamp = timestamp =>{
@@ -75,12 +92,24 @@ class SocialComments extends React.Component{
         size = {40}
         className ='socialPicInput'
         src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
-        <TextArea
-        className= 'socialBoxInput'
-        // bordered = {false}
-        placeholder = 'Write a comment'
-        type = 'submit'
-        rows = {1} />
+        <Form>
+          <TextArea
+          className= 'socialBoxInput'
+          onChange ={this.handleChange}
+          value = {this.state.comment}
+          // bordered = {false}
+          placeholder = 'Write a comment'
+          name = 'socialComment'
+          onPressEnter = {this.handleSubmit}
+          rows = {1}
+           />
+
+          <button
+          // type = 'submit'
+          // onClick = {this.handleSubmit}
+          style = {{display: 'none'}}
+          />
+        </Form>
       </div>
       </div>
 

@@ -233,9 +233,16 @@
   margin-left: 20px;
 }
 .socialBoxInput{
-  width: 350px;
+  width: 360px;
   margin-left: 10px;
   font-size: 15px;
+}
+.sendOutline{
+  /* background-color: red; */
+  font-size: 30px;
+  color: deepskyblue;
+  padding-left: 10px;
+  padding-bottom: 5px;
 }
 .socialCommentBox .socialCommentItem .socialCommentNameTag{
   /* background-color: red; */

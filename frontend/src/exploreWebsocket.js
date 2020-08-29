@@ -276,6 +276,15 @@ class WebSocketExplore {
     })
   }
 
+  sendSocialComment = (curDate, personComment, comment, owner) =>{
+    // The curdate will be used to get the cell calendar
+    // the personComment will be used for the perosn commenting, probally gonna
+    // just be the id
+    // Comment will be the comment itself
+    // Owner will be the id of the calendar owner
+    console.log(comment)
+  }
+
 
 
   sendExplore(data){

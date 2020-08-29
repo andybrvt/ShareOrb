@@ -258,7 +258,7 @@ class SideMenu extends React.Component {
 
     <span
     style = {{
-        marginLeft:'40px',
+        marginLeft:'20px',
     }}
     >
          <Dropdown overlay={

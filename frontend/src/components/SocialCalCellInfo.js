@@ -14,6 +14,21 @@ import ExploreWebSocketInstance from '../../src/exploreWebsocket';
 
 class SocialCalCellInfo extends React.Component{
 
+  // state = {
+  //   comment: ''
+  // }
+  //
+  // handleSubmit = e => {
+  //   console.log('comment submit')
+  //   console.log(this.state.comment)
+  //   this.setState({comment: ''})
+  // }
+  //
+  // handleChange = e =>{
+  //   console.log(e.target.value)
+  //   this.setState({comment: e.target.value})
+  //
+  // }
 
   dateView(date) {
     // This will be presenting the calendar day on the modal
@@ -210,7 +225,15 @@ class SocialCalCellInfo extends React.Component{
           <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
            Comment </div>
         </div>
-          <SocialComments items = {socialCalComments} profilePic = {this.props.curProfilePic}/>
+          <SocialComments
+          // commentChange = {this.handleChange}
+          // commentSubmit = {this.handleSubmit}
+          // commentValue = {this.state.comment}
+          currentDate = {curDate}
+          curUser = {this.props.curId}
+          owner = {socialCalUserId}
+          items = {socialCalComments}
+          profilePic = {this.props.curProfilePic}/>
           <SocialEventList items = {socialCalEvents}/>
 
         </div>
