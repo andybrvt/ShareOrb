@@ -285,6 +285,7 @@ class NewsfeedPost extends React.Component {
   BottomLikeCommentPost(){
     let like_people = this.props.data.people_like
     let profilePic = ''
+    let peopleLikeId = []
 
     if (this.props.data.user.profile_picture){
       profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
@@ -299,13 +300,21 @@ class NewsfeedPost extends React.Component {
     message.success('Clipped to your album!');
     };
     console.log(temp)
+
+    if(like_people.length > 0){
+      for(let i = 0; i< like_people.length; i++){
+        peopleLikeId.push(like_people[i].id)
+      }
+    }
+    console.log(peopleLikeId)
+
     return (
 
       <div style={{marginLeft:'15px', fontSize:'14px'}}>
 
 
         {
-          (like_people.includes(this.props.userId))?
+          (peopleLikeId.includes(this.props.userId))?
           <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
           :
           <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
@@ -340,7 +349,7 @@ class NewsfeedPost extends React.Component {
         <div class="box-buttons">
           <div class="row">
             {
-              (like_people.includes(this.props.userId))?
+              (peopleLikeId.includes(this.props.userId))?
 
                 <button
                   class="box-click"
@@ -493,12 +502,10 @@ class NewsfeedPost extends React.Component {
     let like_people = this.props.data.people_like
     let profilePic = ''
 
-    console.log(this.props.data)
     if (this.props.data.user.profile_picture){
       profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
     }
 
-    console.log(profilePic)
 
     let temp="http://127.0.0.1:8000"+this.props.data.post_images;
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
@@ -506,7 +513,6 @@ class NewsfeedPost extends React.Component {
     const success = () => {
     message.success('Clipped to your album!');
     };
-    console.log(temp)
 
     return(
     <div>
