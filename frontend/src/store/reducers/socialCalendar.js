@@ -99,6 +99,16 @@ const addSocialCommentNewM = (state, action) => {
   })
 }
 
+const addSocialCommentOldM = (state, action) => {
+  // This is for when the social cell has been made already
+  return updateObject (state, {
+    socialObject: [{
+      ...state.socialObject[0],
+      get_socialCalComment: [... state.socialObject[0].get_socialCalComment, action.socialObj.socialComment]
+    }]
+  })
+}
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -122,6 +132,8 @@ const reducer = (state = initialState, action) => {
       return addSocialUnLikeM(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_NEW_M:
       return addSocialCommentNewM(state, action)
+    case actionTypes.ADD_SOCIAL_COMMENT_OLD_M:
+      return addSocialCommentOldM(state, action)
     default:
       return state;
   }

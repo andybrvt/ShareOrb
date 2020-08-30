@@ -70,3 +70,10 @@ export const addSocialCommentNewM = (socialObj) => {
     socialObj: socialObj
   }
 }
+
+export const addSocialCommentOldM = (socialObj) => {
+  return {
+    type: actionTypes.ADD_SOCIAL_COMMENT_OLD_M,
+    socialObj: socialObj 
+  }
+}

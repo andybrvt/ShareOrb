@@ -185,6 +185,7 @@ class WebSocketExplore {
       }
 
       this.callbacks['social_comment_old'](exploreObj)
+      this.callbacks['social_comment_old_m'](exploreObj)
     }
 
 
@@ -206,7 +207,8 @@ class WebSocketExplore {
      addSocialUnLikeM,
      addSocialCommentNew,
      addSocialCommentOld,
-     addSocialCommentNewM
+     addSocialCommentNewM,
+     addSocialCommentOldM
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -223,6 +225,7 @@ class WebSocketExplore {
     this.callbacks['social_comment_new'] = addSocialCommentNew
     this.callbacks['social_comment_old'] = addSocialCommentOld
     this.callbacks['social_comment_new_m'] = addSocialCommentNewM
+    this.callbacks['social_comment_old_m'] = addSocialCommentOldM
   }
 
 
