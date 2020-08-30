@@ -107,3 +107,12 @@ export const addSocialCommentNew = (exploreObj) =>{
     exploreObj: exploreObj
   }
 }
+
+export const addSocialCommentOld = (exploreObj) => {
+  // This will be used for the adding the comments when the social cell
+  // is already created
+  return{
+    type: actionTypes.ADD_SOCIAL_COMMENT_OLD,
+    exploreObj: exploreObj
+  }
+}

@@ -89,6 +89,16 @@ const addSocialUnLikeM = (state, action) => {
   })
 }
 
+const addSocialCommentNewM = (state, action) => {
+  // Since you have the socialcell already and that the socialcell is not already
+  // made, you pretty jsut add it in
+  return updateObject (state, {
+    socialObject: [
+      action.socialObj.socialCalCellObj
+    ]
+  })
+}
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -110,6 +120,8 @@ const reducer = (state = initialState, action) => {
       return addSocialLikeOldM(state, action)
     case actionTypes.ADD_SOCIAL_UNLIKE_M:
       return addSocialUnLikeM(state, action)
+    case actionTypes.ADD_SOCIAL_COMMENT_NEW_M:
+      return addSocialCommentNewM(state, action)
     default:
       return state;
   }
