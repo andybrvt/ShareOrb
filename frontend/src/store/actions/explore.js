@@ -98,3 +98,12 @@ export const addSocialUnLike = (exploreObj) => {
     exploreObj: exploreObj
   }
 }
+
+export const addSocialCommentNew = (exploreObj) =>{
+  // This will be used for adding the comments when you create
+  // a new socialcalcell
+  return {
+    type: actionTypes.ADD_SOCIAL_COMMENT_NEW,
+    exploreObj: exploreObj
+  }
+}

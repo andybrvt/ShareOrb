@@ -23,7 +23,8 @@ class SocialCalCell(models.Model):
     #This is to set the cover picture of the cell
     coverPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
-    #This is just used to test for the visuality
+    #This is just used to test for the visuality (Make sure to delete this sometime soon) DELETE THIS AND
+    # MAKE SURE TO REMOVE IT IN THE CONSUMERS IN THE THE SOCIAL CAL 
     testDate = models.DateField(default = timezone.now, blank = True)
     # This will cover the like of the day
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
@@ -76,7 +77,7 @@ class SocialCalItems(models.Model):
 
     # Everything from here down would be for the events
 
-    
+
 class SocialCalEvent(models.Model):
     # This modelis for the social events taht you are gonna post for the public
 

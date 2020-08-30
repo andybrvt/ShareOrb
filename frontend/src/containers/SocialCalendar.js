@@ -126,7 +126,7 @@ class SocialCalendar extends React.Component{
           // So the time we put in is the UTC time (universal time ) but when you
           // put moment or new Date it gives you your time zome date so that is why you
           // have to convert it
-          const date = new Date(events[item].testDate)
+          const date = new Date(events[item].socialCaldate)
           console.log(events[item])
           const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
           if (dateFns.isSameDay(utc, day)){

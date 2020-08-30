@@ -30,7 +30,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         cal_events = []
         cal_likes = []
         for comments in data['get_socialCalComment']:
-            comment = SocialCalComment(models.SocialCalComment.objects.get(id = comments)).data
+            comment = SocialCalCommentSerializer(models.SocialCalComment.objects.get(id = comments)).data
             cal_comments.append(comment)
         for items in data['get_socialCalItems']:
             item = SocialCalItemsSerializer(models.SocialCalItems.objects.get(id = items)).data
@@ -78,7 +78,7 @@ class SocialCalEventSerializer(serializers.ModelSerializer):
             personList.append(person)
         data['persons'] = personList
         return data
-class SocialCalComment (serializers.ModelSerializer):
+class SocialCalCommentSerializer (serializers.ModelSerializer):
 
 
     class Meta:
