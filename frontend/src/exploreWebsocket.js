@@ -162,6 +162,16 @@ class WebSocketExplore {
       console.log('stuff stuff stuff')
       this.callbacks['social_unlike'](exploreObj)
       this.callbacks['social_unlike_m'](exploreObj)
+    } else if (command === 'send_social_comment_new'){
+      // This will used for adding in the comment when the calcell that has not
+      // been created yet
+      const socialCalCellObj = parsedData.socialCalCellObj
+      const exploreObj = {
+        socialCalCellObj: socialCalCellObj
+      }
+
+      // NOW YOU WILL PUT THE REDUX CALL BACKS HERE
+      this.callbacks['social_commnent_new'](exploreObj)
     }
 
 
@@ -181,6 +191,7 @@ class WebSocketExplore {
      addSocialLikeOldM,
      addSocialUnLike,
      addSocialUnLikeM,
+     addSocialCommentNew,
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -194,6 +205,7 @@ class WebSocketExplore {
     this.callbacks['social_like_old_m'] = addSocialLikeOldM
     this.callbacks['social_unlike'] = addSocialUnLike
     this.callbacks['social_unlike_m'] = addSocialUnLikeM
+    this.callbacks['social_commnent_new'] = addSocialCommentNew
   }
 
 
@@ -282,7 +294,16 @@ class WebSocketExplore {
     // just be the id
     // Comment will be the comment itself
     // Owner will be the id of the calendar owner
+
+    // The userId will be person commenting
     console.log(comment)
+    this.sendExplore({
+      socialCalDate: curDate,
+      userId: personComment,
+      comment: comment,
+      ownerId: owner,
+      command: 'send_social_comment'
+    })
   }
 
 

@@ -280,6 +280,24 @@ export const addSocialUnLike = (state, action) => {
 
 }
 
+export const addSocialCommentNew = (state, action) => {
+  // This will be used to add into the comments. So what you would do since this
+  // is making a new calendar you would just find the right person that owns the
+  // calendar then add the calendar cell to the social calendar list
+  console.log(action)
+  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
+
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal : [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
+      } : profile
+    )
+  })
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -310,6 +328,8 @@ const reducer = (state = initialState, action) => {
       return addSocialLikeOld(state, action)
     case actionTypes.ADD_SOCIAL_UNLIKE:
       return addSocialUnLike(state,action)
+    case actionTypes.ADD_SOCIAL_COMMENT_NEW:
+      return addSocialCommentNew(state, action)
     default:
       return state;
   };

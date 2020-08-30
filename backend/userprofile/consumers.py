@@ -19,7 +19,9 @@ from .models import Post
 from .models import Comment
 from .models import UserFollowing
 from mySocialCal.models import SocialCalCell
+from mySocialCal.models import SocialCalComment
 from mySocialCal.serializers import SocialCalCellSerializer
+from mySocialCal.serializers import SocialCalCommentSerializer
 
 
 
@@ -521,6 +523,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 'reciever': userObj
             }
             if userObj == ownerObj:
+                # The if statement is so that if you comment or like on your own
+                # post you dont get it sent twice to you
                 self.send_new_explore(contentOwner)
             else:
                 self.send_new_explore(contentOwner)
@@ -596,6 +600,92 @@ class ExploreConsumer(JsonWebsocketConsumer):
         else:
             self.send_new_explore(contentOwner)
             self.send_new_explore(contentLiker)
+
+
+    def send_social_comment(self, data):
+        print(data)
+        # The process will first be grabing the userObj that made the comment
+        # so you can use it for the foriengkey on the socialCalComment
+        # Then you get the user for the calendar and then the date, you would use
+        # these two to make the socailCallCell (either get it if it already exist
+        #  or create on if one is not made yet)
+        # Then once you are done then you would sne dthe comment object with the
+        # socialCalcellobj to add the comment in
+
+        # The user will be the person who wrote the comment
+        user = get_object_or_404(User, id = data['userId'])
+        owner = get_object_or_404(User, id = data['ownerId'])
+        socialCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = owner,
+            socialCaldate = data['socialCalDate'],
+            testDate = data['socialCalDate']
+        )
+        # Unlike the send_social_like you do not need to add in stuff, you will
+        # just need to create another comment object with the soicalCell object
+        # as the foreign key
+        socialComment = SocialCalComment.objects.create(
+            calCell = socialCell,
+            body = data['comment'],
+            commentUser = user
+        )
+
+        # Need to serialize this so you know which calcell and owner of the cal
+        # to send to
+        socialCalCellObj = SocialCalCellSerializer(socialCell, many = False).data
+
+        # Unlike the social_send_like, instead of sending the user obj, we would be
+        # sending the socialcomment object
+        socialCommentObj = SocialCalCommentSerializer(socialComment, many = False).data
+        # Now you will be sending the comment into the front end
+
+        # userobj will be the person making the comment and ownerobj will be the
+        # ownwer of the calendar
+        userObj = FollowUserSerializer(user, many = False).data
+        ownerObj = FollowUserSerializer(owner, many = False).data
+
+        # Two redux functions, this will be similar to like in this way
+        # if you did make a new social call cell and called the social comment
+        # im assuming it will like it up already
+        if created == True:
+            contentOwner = {
+                'command': 'send_social_comment_new',
+                'socialCalCellObj': socialCalCellObj,
+                'reciever': ownerObj
+            }
+            contentCommenter = {
+                'command': 'send_social_comment_new',
+                'socialCalCellObj': socialCalCellObj,
+                'reciever': userObj
+            }
+            if userObj == ownerObj:
+                # The if statement is so that if you comment or like on your own
+                # post you dont get it sent twice to you
+                self.send_new_explore(contentOwner)
+            else:
+                self.send_new_explore(contentOwner)
+                self.send_new_explore(contentCommenter)
+
+        if created == False:
+            # This is different than the social_like_obj in that you will be
+            # sending the comments instead of the user them selves
+            contentOwner = {
+                'command': 'send_social_comment_old',
+                'socialCommentObj': socialCommentObj,
+                'socialCalCellObj': socialCalCellObj,
+                'reciever': ownerObj
+            }
+            contentCommenter = {
+                'command': 'send_social_comment_old',
+                'socialCommentObj': socialCommentObj,
+                'socialCalCellObj': socialCalCellObj,
+                'reciever': userObj
+            }
+            if userObj == ownerObj:
+                self.send_new_explore(contentOwner)
+            else:
+                self.send_new_explore(contentOwner)
+                self.send_new_explore(contentCommenter)
+
 
 
     def send_following(self, data):
@@ -742,6 +832,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_social_like(data)
         if data['command'] == 'send_social_unlike':
             self.send_social_unlike(data)
+        if data['command'] == 'send_social_comment':
+            self.send_social_comment(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']

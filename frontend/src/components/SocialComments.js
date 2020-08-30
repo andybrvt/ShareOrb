@@ -3,6 +3,7 @@ import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import moment from 'moment';
 import './labelCSS/SocialModal.css';
 import { SendOutlined  } from '@ant-design/icons';
+import ExploreWebSocketInstance from '../../src/exploreWebsocket';
 
 
 const { TextArea } = Input;
@@ -20,7 +21,16 @@ class SocialComments extends React.Component{
   handleSubmit = e => {
     console.log('comment submit')
     console.log(this.state.comment)
-    this.setState({comment: ''})
+    if (this.state.comment !== ''){
+      ExploreWebSocketInstance.sendSocialComment(
+        this.props.currentDate,
+        this.props.curUser,
+        this.state.comment,
+        this.props.owner
+      )
+      this.setState({comment: ''})
+    }
+
   }
 
   handleChange = e =>{
@@ -36,7 +46,8 @@ class SocialComments extends React.Component{
   renderTimestamp = timestamp =>{
     let prefix = '';
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
-    if (timeDiff < 1 ) {
+    console.log(timeDiff)
+    if (timeDiff <= 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >1 ) {
       prefix = `${timeDiff} minutes ago`;
@@ -93,7 +104,7 @@ class SocialComments extends React.Component{
         className ='socialPicInput'
         src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
         <Form>
-          <TextArea
+          <Input
           className= 'socialBoxInput'
           onChange ={this.handleChange}
           value = {this.state.comment}
@@ -101,7 +112,7 @@ class SocialComments extends React.Component{
           placeholder = 'Write a comment'
           name = 'socialComment'
           onPressEnter = {this.handleSubmit}
-          rows = {1}
+          // rows = {1}
            />
 
           <button
