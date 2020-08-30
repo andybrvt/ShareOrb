@@ -62,6 +62,7 @@ class SideMenu extends React.Component {
       dataSource: [],
       collapsed:true,
       profileList:[],
+      options:[],
       name:'',
     };
   }
@@ -73,26 +74,26 @@ class SideMenu extends React.Component {
 
 
   componentDidMount(){
-    authAxios.get('http://127.0.0.1:8000/userprofile/explore')
+    authAxios.get('http://127.0.0.1:8000/userprofile/all-users')
       .then(res=> {
         console.log(res)
         this.setState({
           profileList:res.data,
        });
       });
+
   }
 
   handleSearch = (value) => {
 
   }
 
-  handleSelect = (value) => {
-  console.log(value);
-  let temp="http://localhost:3000/explore/"+value
-  console.log(temp)
+  handleSearch = (value) => {
+   this.setState({
+     dataSource: ['test1', 'test2', 'test3']
+   });
+ }
 
-
-  }
 
   onShowNotification = () => {
     if (this.props.showNotification === true){
@@ -131,13 +132,17 @@ class SideMenu extends React.Component {
 
     const { dataSource } = this.state;
     const { Option } = Select;
-    const options = this.state.profileList.map(d => <Option key={d.value}>{d.text}</Option>);
 
 
+    const temp=[]
+    this.state.profileList.forEach(item => {
+      temp.push("@"+item.username);
+    })
+    console.log(temp)
 
 
-    console.log(options)
-    console.log(this.state.profileList)
+    console.log(this.state.options)
+
 
     return (
       <div style={{marginBottom:30}}>
@@ -218,10 +223,9 @@ class SideMenu extends React.Component {
 
 
 
-
          <AutoComplete
-           dataSource={options}
-
+           dataSource={temp}
+           filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
            onSearch={this.handleSearch}
 
            dropdownClassName="certain-category-search-dropdown"
