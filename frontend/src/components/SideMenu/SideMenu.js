@@ -62,7 +62,6 @@ class SideMenu extends React.Component {
       dataSource: [],
       collapsed:true,
       profileList:[],
-      options:[],
       name:'',
     };
   }
@@ -71,6 +70,8 @@ class SideMenu extends React.Component {
       collapsed: !this.state.collapsed,
     });
   };
+
+
 
 
   componentDidMount(){
@@ -84,8 +85,9 @@ class SideMenu extends React.Component {
 
   }
 
-  handleSearch = (value) => {
-
+  onSelect = (value) => {
+    console.log('onSelect', value);
+    window.location.href = 'http://localhost:3000/explore/'+value
   }
 
   handleSearch = (value) => {
@@ -136,12 +138,10 @@ class SideMenu extends React.Component {
 
     const temp=[]
     this.state.profileList.forEach(item => {
-      temp.push("@"+item.username);
+      temp.push(item.username);
     })
     console.log(temp)
 
-
-    console.log(this.state.options)
 
 
     return (
@@ -225,9 +225,10 @@ class SideMenu extends React.Component {
 
          <AutoComplete
            dataSource={temp}
+
            filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
            onSearch={this.handleSearch}
-
+           onSelect={this.onSelect}
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={500}
            style={{ marginLeft:150, marginLeft:'25%', marginRight:'25%', width: 450  }}
