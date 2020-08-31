@@ -288,13 +288,23 @@ export const addSocialCommentNew = (state, action) => {
   const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCellObj.id
 
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
   return updateObject(state, {
     profiles: state.profiles.map(
       profile => profile.id === calendarOwnerId ? {
         ... profile,
         get_socialCal : [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
       } : profile
-    )
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: [... state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
+    } : state.profile
   })
 }
 
@@ -306,7 +316,11 @@ export const addSocialCommentOld = (state, action) =>{
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
   const commentObj = action.exploreObj.socialComment
+  let curProfileId = ''
 
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
 
   return updateObject(state, {
     profiles: state.profiles.map(
@@ -319,7 +333,16 @@ export const addSocialCommentOld = (state, action) =>{
           } :socialCell
         )
       } : profile
-    )
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        socialCell => socialCell.id === calendarCalCellId ? {
+          ... socialCell,
+          get_socialCalComment: [... socialCell.get_socialCalComment, commentObj]
+        } : socialCell
+      )
+    } : state.profile
 
   })
 }
