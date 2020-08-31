@@ -298,6 +298,32 @@ export const addSocialCommentNew = (state, action) => {
   })
 }
 
+export const addSocialCommentOld = (state, action) =>{
+  // This since the socialcell already exist so what will happen is that you will find
+  // the person then find the cell, then go into the comments, and add the comment
+  // obj in
+
+  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCell.id
+  const commentObj = action.exploreObj.socialComment
+
+
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ...profile,
+        get_socialCal: profile.get_socialCal.map(
+          socialCell => socialCell.id === calendarCalCellId ? {
+            ...socialCell,
+            get_socialCalComment: [...socialCell.get_socialCalComment, commentObj]
+          } :socialCell
+        )
+      } : profile
+    )
+
+  })
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -330,6 +356,8 @@ const reducer = (state = initialState, action) => {
       return addSocialUnLike(state,action)
     case actionTypes.ADD_SOCIAL_COMMENT_NEW:
       return addSocialCommentNew(state, action)
+    case actionTypes.ADD_SOCIAL_COMMENT_OLD:
+      return addSocialCommentOld (state, action)
     default:
       return state;
   };

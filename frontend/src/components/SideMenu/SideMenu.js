@@ -214,6 +214,7 @@ class SideMenu extends React.Component {
       <span style = {{
         color: 'black',
         marginLeft:'10%',
+
       }}>
         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
           className: 'trigger',
@@ -231,7 +232,12 @@ class SideMenu extends React.Component {
            onSelect={this.onSelect}
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={500}
-           style={{ marginLeft:150, marginLeft:'25%', marginRight:'25%', width: 450  }}
+           style={{
+            // marginLeft:150,
+            marginLeft:'25%',
+            marginRight:'20%', width: 400,
+           // backgroundColor: 'red'
+         }}
 
          >
         <Input.Search size="large" placeholder="Search" />
@@ -242,7 +248,11 @@ class SideMenu extends React.Component {
          <span className="avatar-item" style={{marginRight:40}}>
     </span>
 
-    <span >
+    <span
+    style = {{
+
+    }}
+     >
 
 
     <Badge
@@ -257,6 +267,7 @@ class SideMenu extends React.Component {
           </Button>
     </Badge>
     </span>
+
 
     <span
     style = {{

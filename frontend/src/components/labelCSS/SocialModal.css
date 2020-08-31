@@ -79,6 +79,7 @@
 .socialListBox{
   /* background-color: red; */
   padding: 15px;
+  margin-top: 50px;
   border: 1px solid gainsboro;
   height: 235px;
   width: 450px;
@@ -205,10 +206,10 @@
 }
 
 .socialCommentBoxBox{
-  height: 62%;
+  height: 54%;
   width: 450px;
   overflow:hidden;
-
+  /* background-color: red; */
 }
 .socialCommentBox {
   /* background-color: blue  ; */
@@ -229,7 +230,7 @@
   display: flex;
   position: absolute;
   left: 0%;
-  bottom: 200px;
+  bottom: 220px;
   margin-left: 20px;
 }
 .socialBoxInput{

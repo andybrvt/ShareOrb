@@ -63,3 +63,17 @@ export const addSocialUnLikeM = (socialObj) => {
     socialObj: socialObj
   }
 }
+
+export const addSocialCommentNewM = (socialObj) => {
+  return {
+    type: actionTypes.ADD_SOCIAL_COMMENT_NEW_M,
+    socialObj: socialObj
+  }
+}
+
+export const addSocialCommentOldM = (socialObj) => {
+  return {
+    type: actionTypes.ADD_SOCIAL_COMMENT_OLD_M,
+    socialObj: socialObj 
+  }
+}

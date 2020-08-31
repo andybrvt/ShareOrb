@@ -171,7 +171,21 @@ class WebSocketExplore {
       }
 
       // NOW YOU WILL PUT THE REDUX CALL BACKS HERE
-      this.callbacks['social_commnent_new'](exploreObj)
+      this.callbacks['social_comment_new'](exploreObj)
+      this.callbacks['social_comment_new_m'](exploreObj)
+    } else if (command === 'send_social_comment_old'){
+      // So you would pass the socialCalcell obj in first and then the comment
+      // The socialCalCell is used to find the ower and the cell
+      const socialCalCellObj = parsedData.socialCalCellObj
+      const socialCommentObj = parsedData.socialCommentObj
+
+      const exploreObj = {
+        socialCalCell: socialCalCellObj,
+        socialComment: socialCommentObj
+      }
+
+      this.callbacks['social_comment_old'](exploreObj)
+      this.callbacks['social_comment_old_m'](exploreObj)
     }
 
 
@@ -192,6 +206,9 @@ class WebSocketExplore {
      addSocialUnLike,
      addSocialUnLikeM,
      addSocialCommentNew,
+     addSocialCommentOld,
+     addSocialCommentNewM,
+     addSocialCommentOldM
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -205,7 +222,10 @@ class WebSocketExplore {
     this.callbacks['social_like_old_m'] = addSocialLikeOldM
     this.callbacks['social_unlike'] = addSocialUnLike
     this.callbacks['social_unlike_m'] = addSocialUnLikeM
-    this.callbacks['social_commnent_new'] = addSocialCommentNew
+    this.callbacks['social_comment_new'] = addSocialCommentNew
+    this.callbacks['social_comment_old'] = addSocialCommentOld
+    this.callbacks['social_comment_new_m'] = addSocialCommentNewM
+    this.callbacks['social_comment_old_m'] = addSocialCommentOldM
   }
 
 
