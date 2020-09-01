@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import  { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
-import { UserOutlined, PlusOutlined, EyeOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, EyeOutlined, CalendarOutlined  } from '@ant-design/icons';
 import ava1 from '../components/images/avatar.jpg'
 import SocialCalCellInfo from '../components/SocialCalCellInfo';
 import SocialUploadPicModal from '../components/SocialUploadPicModal';
@@ -162,12 +162,26 @@ class SocialCalendar extends React.Component{
               <PlusOutlined
               onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
               className = 'plusButton'/>
+              <CalendarOutlined
+              className = 'eventButton'
+               />
               <EyeOutlined
               onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
               className = 'eyeButton'/>
               </div>
 
-              :
+              : dateFns.isAfter( day, currentMonth) ?
+              <div>
+              <CalendarOutlined
+              className = 'eventButtonAfter'
+               />
+
+               <EyeOutlined
+               onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+               className = 'eyeButtonAfter'/>
+               </div>
+
+               :
 
               <EyeOutlined
               onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
@@ -215,12 +229,25 @@ class SocialCalendar extends React.Component{
             <PlusOutlined
             onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
              className = 'plusButton'/>
+            <CalendarOutlined
+             className = 'eventButton'
+             />
             <EyeOutlined
             onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
              className = 'eyeButton'/>
             </div>
 
-            :
+            : dateFns.isAfter(day, currentMonth ) ?
+            <div>
+            <CalendarOutlined
+            className = 'eventButtonAfter'
+             />
+
+             <EyeOutlined
+             onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+             className = 'eyeButtonAfter'/>
+             </div>
+              :
 
             <EyeOutlined
             onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}

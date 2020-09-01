@@ -96,20 +96,21 @@
 
 .socialCalendar .body .row .hoverCell .plusButton{
   position:absolute;
-  left: 30%;
+  left: 20%;
   top: 45%;
   color: transparent;
   font-size: 40px;
   z-index: 1;
-
 }
+
+
 .socialCalendar .body .row .hoverCell .plusButton:hover{
   transform: scale(1.2);
 }
 
 .socialCalendar .body .row .hoverCell .eyeButton{
   position:absolute;
-  left: 55%;
+  left: 65%;
   top: 45%;
   color: transparent;
   font-size: 40px;
@@ -119,6 +120,43 @@
 }
 .socialCalendar .body .row .hoverCell .eyeButton:hover{
   transform: scale(1.2)
+}
+
+.socialCalendar .body .row .hoverCell .eventButton{
+  position:absolute;
+  left: 42%;
+  top: 45%;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+}
+
+.socialCalendar .body .row .hoverCell .eventButton:hover{
+  transform: scale(1.2)
+}
+
+.socialCalendar .body .row .hoverCell .eventButtonAfter {
+  position:absolute;
+  left: 30%;
+  top: 45%;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+}
+.socialCalendar .body .row .hoverCell .eventButtonAfter:hover{
+  transform: scale(1.2)
+}
+.socialCalendar .body .row .hoverCell .eyeButtonAfter{
+  position:absolute;
+  left: 55%;
+  top: 45%;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+}
+.socialCalendar .body .row .hoverCell .eyeButtonAfter:hover{
+  transform: scale(1.2)
+
 }
 
 
@@ -164,9 +202,21 @@
 .socialCalendar .body .row .hoverCell:hover .eyeButton{
   color: white;
 }
+.socialCalendar .body .row .hoverCell:hover .eventButton{
+  color:white;
+}
+
 .socialCalendar .body .row .hoverCell:hover .eyeButtonPass{
   color: white;
 }
+
+.socialCalendar .body .row .hoverCell:hover .eventButtonAfter{
+  color: white;
+}
+.socialCalendar .body .row .hoverCell:hover .eyeButtonAfter{
+  color:white;
+}
+
 
 .socialCalendar .body .row .hoverCell .imgCover {
   position: absolute;
