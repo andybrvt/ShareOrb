@@ -523,7 +523,7 @@ class NewsfeedPost extends React.Component {
       <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
 
       <span class="profilePicHeader">
-        <div class="headerContainer" >
+        <span class="headerContainer" >
 
             <span class="g grid-13">
               <Popover
@@ -600,9 +600,13 @@ class NewsfeedPost extends React.Component {
 
 
 
-            </div>
-
           </span>
+          <span class="optionPostHeader">
+            <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
+            </span>
+
+
+        </span>
 
 
 

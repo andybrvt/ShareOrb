@@ -14,14 +14,28 @@
   width: auto;
 }
 
+
+.fullWrap{
+   text-align:center;
+}
+
 .headerContainer{
   display: flex;
-  flex-wrap: wrap;
+
   padding-top: 20px;
   padding-left: 20px;
   padding-right:30px;
   padding-bottom: 15px;
   /* background: red; */
+  width:95%;
+  float:left;
+}
+.optionPostHeader{
+  float: right;
+  /* background-color:blue; */
+  width:5%;
+  margin-top: 25px;
+  display:inline;
 }
 
 .LikeCommentHover:hover {
