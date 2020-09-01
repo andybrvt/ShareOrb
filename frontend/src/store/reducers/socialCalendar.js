@@ -13,6 +13,7 @@ const initialState = {
   showSocialModal: false,
   curSocialDate: new Date(),
   showSocialPicModal: false,
+  showSocialEventModal: false,
   test: ''
 }
 
@@ -109,6 +110,17 @@ const addSocialCommentOldM = (state, action) => {
   })
 }
 
+const openSocialEventModal = (state, action) => {
+  return updateObject (state, {
+    showSocialEventModal: true
+  })
+}
+
+const closeSocialEventModal = (state,action) => {
+  return updateObject (state, {
+    showSocialEventModal: false
+  })
+}
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -134,6 +146,10 @@ const reducer = (state = initialState, action) => {
       return addSocialCommentNewM(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD_M:
       return addSocialCommentOldM(state, action)
+    case actionTypes.OPEN_SOCIAL_EVENT_MODAL:
+      return openSocialEventModal(state, action)
+    case actionTypes.CLOSE_SOCIAL_EVENT_MODAL:
+      return closeSocialEventModal(state, action)
     default:
       return state;
   }

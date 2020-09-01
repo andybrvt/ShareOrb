@@ -74,6 +74,18 @@ export const addSocialCommentNewM = (socialObj) => {
 export const addSocialCommentOldM = (socialObj) => {
   return {
     type: actionTypes.ADD_SOCIAL_COMMENT_OLD_M,
-    socialObj: socialObj 
+    socialObj: socialObj
+  }
+}
+
+export const openSocialEventModal = () => {
+  return {
+    type: actionTypes.OPEN_SOCIAL_EVENT_MODAL
+  }
+}
+
+export const closeSocialEventModal = () => {
+  return {
+    type: actionTypes.CLOSE_SOCIAL_EVENT_MODAL
   }
 }
