@@ -73,7 +73,9 @@ export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
 // The picture modal is what you would use to upload pictures
 export const OPEN_SOCIAL_PICTURE_MODAL = 'OPEN_SOCIAL_PICTURE_MODAL';
 export const CLOSE_SOCIAL_PICTURE_MODAL = 'CLOSE_SOCIAL_PICTURE_MODAL';
-
+// This social event modal will allow you post social events
+export const OPEN_SOCIAL_EVENT_MODAL = "OPEN_SOCIAL_EVENT_MODAL";
+export const CLOSE_SOCIAL_EVENT_MODAL = 'CLOSE_SOCIAL_EVENT_MODAL';
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
 export const ADD_SOCIAL_LIKE_NEW = 'ADD_SOCIAL_LIKE_NEW';

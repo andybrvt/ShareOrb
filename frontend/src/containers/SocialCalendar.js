@@ -16,6 +16,7 @@ import { UserOutlined, PlusOutlined, EyeOutlined, CalendarOutlined  } from '@ant
 import ava1 from '../components/images/avatar.jpg'
 import SocialCalCellInfo from '../components/SocialCalCellInfo';
 import SocialUploadPicModal from '../components/SocialUploadPicModal';
+import SocialEventPostModal from '../components/SocialEventPostModal';
 
 
 class SocialCalendar extends React.Component{
@@ -163,6 +164,7 @@ class SocialCalendar extends React.Component{
               onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
               className = 'plusButton'/>
               <CalendarOutlined
+              onClick ={() => this.onOpenSocialCalEventModal()}
               className = 'eventButton'
                />
               <EyeOutlined
@@ -173,6 +175,7 @@ class SocialCalendar extends React.Component{
               : dateFns.isAfter( day, currentMonth) ?
               <div>
               <CalendarOutlined
+              onClick ={() => this.onOpenSocialCalEventModal()}
               className = 'eventButtonAfter'
                />
 
@@ -230,6 +233,7 @@ class SocialCalendar extends React.Component{
             onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
              className = 'plusButton'/>
             <CalendarOutlined
+            onClick ={() => this.onOpenSocialCalEventModal()}
              className = 'eventButton'
              />
             <EyeOutlined
@@ -240,6 +244,7 @@ class SocialCalendar extends React.Component{
             : dateFns.isAfter(day, currentMonth ) ?
             <div>
             <CalendarOutlined
+            onClick ={() => this.onOpenSocialCalEventModal()}
             className = 'eventButtonAfter'
              />
 
@@ -320,6 +325,10 @@ class SocialCalendar extends React.Component{
     this.props.openSocialPictureModal()
   }
 
+  onOpenSocialCalEventModal = () => {
+    this.props.openSocialEventModal()
+  }
+
   handlePictureUpload = (values) => {
     // This is used to upload pictures into the calendar cell
 
@@ -383,6 +392,12 @@ class SocialCalendar extends React.Component{
             view = {this.props.showSocialPicModal}
             onSubmit = {this.handlePictureUpload}
              />
+            <SocialEventPostModal
+            close = {this.props.closeSocialEventModal}
+            view = {this.props.showSocialEventModal}
+
+            />
+
         </div>
     )
   }
@@ -395,6 +410,7 @@ const mapStateToProps = state => {
     events: state.socialCal.socialEvents,
     showSocialModal: state.socialCal.showSocialModal,
     showSocialPicModal: state.socialCal.showSocialPicModal,
+    showSocialEventModal: state.socialCal.showSocialEventModal,
     curId: state.auth.id
   }
 }
@@ -409,7 +425,9 @@ const mapDispatchToProps = dispatch => {
     openSocialModal: (socialObject, day) => dispatch(socialCalActions.openSocialModal(socialObject, day)),
     closeSocialModal: () => dispatch(socialCalActions.closeSocialModal()),
     openSocialPictureModal: () => dispatch(socialCalActions.openSocialPictureModal()),
-    closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal())
+    closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal()),
+    openSocialEventModal: () => dispatch(socialCalActions.openSocialEventModal()),
+    closeSocialEventModal: () => dispatch(socialCalActions.closeSocialEventModal())
   }
 }
 
