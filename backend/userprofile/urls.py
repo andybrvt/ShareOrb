@@ -23,7 +23,7 @@ urlpatterns = [
 	path('<slug:username>/', views.UserDetailView.as_view()),
 	path('all-users', views.ListAll.as_view()),
 	path('friend-request-list', views.FriendRequestList.as_view(), name="friend_request"),
-
+	path('post/delete/<slug:id>', views.deletePostCall.as_view(), name='delete notification'),
 	path('explore', views.ExploreView.as_view()),
 	path('suggestedFriends', views.NewsFeedSuggestedFriends.as_view()),
 

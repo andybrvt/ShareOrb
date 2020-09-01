@@ -183,6 +183,13 @@ class onDeleteNotification(generics.RetrieveDestroyAPIView):
     lookup_field = 'id'
     queryset = models.CustomNotification.objects.all()
 
+
+class deletePostCall(generics.RetrieveDestroyAPIView):
+    serializer_class = serializers.PostSerializer
+    lookup_field = 'id'
+    queryset = models.Post.objects.all()
+
+
 # Cancel from sender's end
 class CancelFriendRequest(APIView):
 	def post(self, request, username, *args, **kwargs):

@@ -3,7 +3,7 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
-import {Avatar, Icon, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
+import {Avatar, Icon, Menu, Dropdown, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, AntDesignOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
@@ -18,6 +18,8 @@ import UserAvatar from './UserAvatar'
 import UserLikePlusUserAvatar from './UserLikePlusUserAvatar';
 import Liking from './Liking';
 import LikeList from './LikeList';
+
+
 
 class NewsfeedPost extends React.Component {
   constructor(props){
@@ -64,6 +66,17 @@ class NewsfeedPost extends React.Component {
   //       }
   //     }, 100)
   // }
+
+  deletePost= (event) => {
+
+    console.log(this.props.data.id)
+    authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
+	  // need to delete post channels right here
+    // document.location.href = '/';
+	}
+
+
+
    ShowNextSteps = () => {
     if(this.state.stepCount==1){
       return <h1>show step 1</h1>;
@@ -601,10 +614,35 @@ class NewsfeedPost extends React.Component {
 
 
           </span>
-          <span class="optionPostHeader">
-            <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
-            </span>
 
+          <span class="optionPostHeader">
+            <Dropdown overlay={
+              <Menu>
+                <Menu.Item>
+                  <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                    <i style={{marginRight:'0px' }} class="far fa-bookmark"></i>
+                    Save this post
+                  </a>
+                </Menu.Item>
+                <Menu.Item>
+                  <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                    <i style={{marginRight:'0px'}} class="far fa-eye-slash"></i>
+                    Hide this post
+                  </a>
+                </Menu.Item>
+                <Menu.Item danger onClick={this.deletePost}>
+                  <i style={{marginRight:'25px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+                  Delete post
+                </Menu.Item>
+              </Menu>
+            }>
+              <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+              <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
+              </a>
+            </Dropdown>
+
+
+            </span>
 
         </span>
 
