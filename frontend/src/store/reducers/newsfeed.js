@@ -5,7 +5,7 @@ const initialState = {
   posts: [],
 }
 
-export const loadPosts = (state, action) => {
+const loadPosts = (state, action) => {
   // state.postLikes[postId] = action.likes
   // const newPostLikes = { ...state.postLikes, }
   // So in the dictionary, the key will be the postId and the values
@@ -15,7 +15,7 @@ export const loadPosts = (state, action) => {
   })
 }
 
-export const addPostLike = (state, action) => {
+const addPostLike = (state, action) => {
   return updateObject(state, {
     posts: state.posts.map(
       post => post.id === action.like.postId ? {
@@ -28,7 +28,7 @@ export const addPostLike = (state, action) => {
 
 }
 
-export const unaddPostLike = (state, action) => {
+const unaddPostLike = (state, action) => {
   let person_post = state.posts
   let person_index = ''
   let like_list = []
@@ -59,7 +59,7 @@ export const unaddPostLike = (state, action) => {
 }
 
 
-export const addPostComment = (state, action ) => {
+const addPostComment = (state, action ) => {
   console.log(action.comment.comment.post)
   return updateObject(state, {
     posts: state.posts.map(
@@ -70,6 +70,19 @@ export const addPostComment = (state, action ) => {
     )
   })
 
+}
+
+const deletePost = (state, action) => {
+
+    const postId = action.postId
+
+    function removePost(post) {
+      return post.id !== postId
+    }
+
+    return updateObject(state, {
+      posts: state.posts.filter(removePost)
+    })
 }
 
 
@@ -83,6 +96,8 @@ const reducer = (state = initialState, action) => {
       return unaddPostLike(state,action);
     case actionTypes.ADD_POST_COMMENT:
       return addPostComment(state, action);
+    case actionTypes.DELETE_POST:
+      return deletePost(state, action);
     default:
       return state;
   }

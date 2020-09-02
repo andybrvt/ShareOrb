@@ -33,3 +33,10 @@ export const addPostComment = comment => {
     comment: comment
   }
 }
+
+export const deletePost = post => {
+  return {
+    type: actionTypes.DELETE_POST,
+    postId: post.postId
+  }
+}

@@ -404,6 +404,17 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         }
         return self.send_new_action(content)
 
+    def delete_post(self, data):
+        # This will delete the post
+        print('you delete the post object')
+        Post.objects.get(id = data['postId']).delete()
+        print(data['postId'])
+        content = {
+            'command':'delete_post',
+            'postId': data['postId']
+        }
+        return self.send_new_action(content)
+
 
 
     def send_new_action(self, postAction):
@@ -446,6 +457,8 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
             self.unsend_one_like(data)
         if data['command'] == 'send_comment':
             self.send_comment(data)
+        if data['command'] == 'delete_post':
+            self.delete_post(data)
 
     def send_post_action(self, postActions):
         postAction = postActions['action']

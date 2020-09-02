@@ -49,6 +49,7 @@ export const LOAD_POSTS = 'LOAD_POSTS';
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 export const UNADD_POST_LIKE = 'UNADD_POST_LIKE';
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
+export const DELETE_POST = 'DELETE_POST';
 
 export const LOAD_PROFILES = 'LOAD_PROFILES';
 // so adding to follower you will add it to the person getting the following

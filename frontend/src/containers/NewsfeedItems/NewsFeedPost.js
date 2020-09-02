@@ -69,9 +69,11 @@ class NewsfeedPost extends React.Component {
 
   deletePost= (event) => {
 
-    console.log(this.props.data.id)
-    authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
-    message.success('Post deleted successfully!');
+    // console.log(this.props.data.id)
+    // authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
+    // message.success('Post deleted successfully!');
+
+    WebSocketPostsInstance.deletePost(this.props.data.id)
 	  // need to delete post
     // document.location.href = '/';
 	}

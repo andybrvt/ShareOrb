@@ -107,6 +107,15 @@ class WebSocketPosts {
       }
 
       this.callbacks['new_comments'](commentObject)
+    } else if (command === 'delete_post'){
+      console.log('we hit delete post')
+
+      const postId = parsedData.postId
+      const postObject ={
+        postId: postId
+      }
+      this.callbacks['delete_post'](postObject)
+
     }
   }
 
@@ -114,11 +123,14 @@ class WebSocketPosts {
       postsCallback,
       newLikeCallback,
       unLikeCallback,
-      newCommentsCallback){
+      newCommentsCallback,
+      deletePostCallback
+    ){
     this.callbacks['fetch_posts'] = postsCallback;
     this.callbacks['new_like'] = newLikeCallback;
     this.callbacks['un_like'] = unLikeCallback;
     this.callbacks['new_comments'] = newCommentsCallback;
+    this.callbacks['delete_post'] = deletePostCallback;
   }
 
   fetchPosts(userId){
@@ -157,6 +169,13 @@ class WebSocketPosts {
     })
   }
 
+  deletePost(postId){
+    this.sendPostsInfo({
+      postId: postId,
+      command: 'delete_post'
+    })
+  }
+
 
   sendPostsInfo(data){
     // This is pretty much what connects the back end
@@ -168,6 +187,8 @@ class WebSocketPosts {
       console.log(err.message);
     }
   }
+
+
 
   state() {
     return this.socketRef.readyState;
