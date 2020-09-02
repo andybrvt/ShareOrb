@@ -3,7 +3,7 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
-import {Avatar, Icon, Menu, Dropdown, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
+import {Avatar, Icon, Message, Menu, Dropdown, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
 import { EditOutlined, EllipsisOutlined, AntDesignOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
@@ -71,7 +71,8 @@ class NewsfeedPost extends React.Component {
 
     console.log(this.props.data.id)
     authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
-	  // need to delete post channels right here
+    message.success('Post deleted successfully!');
+	  // need to delete post
     // document.location.href = '/';
 	}
 
@@ -734,83 +735,123 @@ class NewsfeedPost extends React.Component {
     <div>
 
 
-    <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
+    <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
 
-    <div>
-    <div style={{marginLeft:10, marginRight:10, minHeight:10, marginTop:20,}}>
-    <Popover
-       style={{width:'200px', padding:20,}}
-       content={<div>
-         <Avatar
-          size="large"
-          shape="square"
-          src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80" />
-         <div> 110 followers </div>
-       </div>}
+      <span class="profilePicHeader">
+        <span class="headerContainer" >
 
-      >
-      {
-        profilePic != '' ?
-        <Avatar
-        onClick = {() => this.onProfileClick(this.props.data.user.username)}
-        size="large"
-        style = {{
-          cursor: 'pointer',
-        }}
-        src={profilePic} alt="avatar" />
+            <span class="g grid-13">
+              <Popover
+                 style={{width:'200px'}}
+                 content={<div>
+                   <Avatar
+                    shape="square"
+                    size="large"
+                    src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
+                    />
+                   <div> 110 followers </div>
+                 </div>}
 
-        :
+                >
+                  {
+                    profilePic != '' ?
+                    <Avatar
+                    size="large"
+                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                    size="large"
+                    style = {{
+                      cursor: 'pointer',
+                    }}
+                    src={profilePic} alt="avatar" />
 
-        <Avatar
-        onClick = {() => this.onProfileClick(this.props.data.user.username)}
-        size="large"
-        style = {{
-          cursor: 'pointer',
-        }}
-        src={defaultPic} alt="avatar" />
+                    :
 
-      }
-      </Popover>
+                    <Avatar
+                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
+                    size="large"
+                    style = {{
+                      cursor: 'pointer',
+                    }}
+                    src={defaultPic} alt="avatar" />
 
-        <span class="g grid-33">
+                  }
 
-          <span class="headerPost">
 
-            <span
-              style={{color:'black', fontSize:'15px'}}
-              class="headerPostText alignleft" >
-              {this.props.data.user.username} <br/>
-            <span>
-            <span
-              style={{fontSize:'13px'}}
-              class="headerPostText LikeCommentHover">
-              @{this.props.data.user.username}
+                </Popover>
+
             </span>
-          </span>
+              <span class="g grid-33">
+
+                <span class="headerPost">
+
+                  <span
+                    style={{color:'black', fontSize:'15px'}}
+                    class="headerPostText alignleft" >
+                    {this.props.data.user.username} <br/>
+                  <span>
+                  <span
+                    style={{fontSize:'13px'}}
+                    class="headerPostText LikeCommentHover">
+                    @{this.props.data.user.username}
+                  </span>
+                </span>
+                    </span>
+
+                      <span class="headerPostText alignright" style={{fontSize:'13px'}} >
+
+
+
+                        <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
+                        Tucson, Arizona <br/>
+
+                        <span style={{float:'right'}}>
+                        {this.renderTimestamp(this.props.data.created_at)}
+                        </span>
+                  </span>
+
+                </span>
+
               </span>
 
-                <span class="headerPostText alignright" style={{fontSize:'13px'}} >
 
 
+        </span>
+          <span class="optionPostHeader">
+            <Dropdown overlay={
+              <Menu>
+                <Menu.Item>
+                  <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                    <i style={{marginRight:'0px' }} class="far fa-bookmark"></i>
+                    Save this post
+                  </a>
+                </Menu.Item>
+                <Menu.Item>
+                  <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                    <i style={{marginRight:'0px'}} class="far fa-eye-slash"></i>
+                    Hide this post
+                  </a>
+                </Menu.Item>
+                <Menu.Item danger onClick={this.deletePost}>
+                  <i style={{marginRight:'25px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+                  Delete post
+                </Menu.Item>
+              </Menu>
+            }>
+              <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+              <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
+              </a>
+            </Dropdown>
 
-                  <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
-                  Tucson, Arizona <br/>
-
-                  <span style={{float:'right'}}>
-                  {this.renderTimestamp(this.props.data.created_at)}
-                  </span>
-            </span>
 
           </span>
 
-        </span>
+      </span>
 
 
 
-    </div>
 
 
-      <Divider style={{marginTop:'40px'}}/>
+      <Divider style={{'marginTop':-2}}/>
 
     <p style={{color:'black'}}>
               {
@@ -875,8 +916,6 @@ class NewsfeedPost extends React.Component {
     }
 
 
-
-    </div>
 
 
       </div>

@@ -70,6 +70,9 @@ class SuggestedFriends extends React.Component {
       loading: true,
       list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
     });
+    console.log("Hi")
+    console.log(this.state.list)
+    console.log(this.state.data)
     this.getData(res => {
       const data = this.state.data.concat(res.results);
       this.setState(
