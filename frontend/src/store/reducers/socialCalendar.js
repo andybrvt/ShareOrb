@@ -14,6 +14,7 @@ const initialState = {
   curSocialDate: new Date(),
   showSocialPicModal: false,
   showSocialEventModal: false,
+  curSocialEventDate: new Date(),
   test: ''
 }
 
@@ -112,7 +113,8 @@ const addSocialCommentOldM = (state, action) => {
 
 const openSocialEventModal = (state, action) => {
   return updateObject (state, {
-    showSocialEventModal: true
+    showSocialEventModal: true,
+    curSocialEventDate: action.date
   })
 }
 

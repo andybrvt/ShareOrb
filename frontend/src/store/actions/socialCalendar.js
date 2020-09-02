@@ -78,9 +78,10 @@ export const addSocialCommentOldM = (socialObj) => {
   }
 }
 
-export const openSocialEventModal = () => {
+export const openSocialEventModal = (date) => {
   return {
-    type: actionTypes.OPEN_SOCIAL_EVENT_MODAL
+    type: actionTypes.OPEN_SOCIAL_EVENT_MODAL,
+    date: date
   }
 }
 

@@ -164,7 +164,7 @@ class SocialCalendar extends React.Component{
               onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
               className = 'plusButton'/>
               <CalendarOutlined
-              onClick ={() => this.onOpenSocialCalEventModal()}
+              onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
               className = 'eventButton'
                />
               <EyeOutlined
@@ -175,7 +175,7 @@ class SocialCalendar extends React.Component{
               : dateFns.isAfter( day, currentMonth) ?
               <div>
               <CalendarOutlined
-              onClick ={() => this.onOpenSocialCalEventModal()}
+              onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
               className = 'eventButtonAfter'
                />
 
@@ -233,7 +233,7 @@ class SocialCalendar extends React.Component{
             onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
              className = 'plusButton'/>
             <CalendarOutlined
-            onClick ={() => this.onOpenSocialCalEventModal()}
+            onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
              className = 'eventButton'
              />
             <EyeOutlined
@@ -244,7 +244,7 @@ class SocialCalendar extends React.Component{
             : dateFns.isAfter(day, currentMonth ) ?
             <div>
             <CalendarOutlined
-            onClick ={() => this.onOpenSocialCalEventModal()}
+            onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
             className = 'eventButtonAfter'
              />
 
@@ -325,8 +325,8 @@ class SocialCalendar extends React.Component{
     this.props.openSocialPictureModal()
   }
 
-  onOpenSocialCalEventModal = () => {
-    this.props.openSocialEventModal()
+  onOpenSocialCalEventModal = (date) => {
+    this.props.openSocialEventModal(date)
   }
 
   handlePictureUpload = (values) => {
@@ -395,7 +395,7 @@ class SocialCalendar extends React.Component{
             <SocialEventPostModal
             close = {this.props.closeSocialEventModal}
             view = {this.props.showSocialEventModal}
-
+            curDate = {this.props.curSocialEventDate}
             />
 
         </div>
@@ -411,6 +411,7 @@ const mapStateToProps = state => {
     showSocialModal: state.socialCal.showSocialModal,
     showSocialPicModal: state.socialCal.showSocialPicModal,
     showSocialEventModal: state.socialCal.showSocialEventModal,
+    curSocialEventDate: state.socialCal.curSocialEventDate,
     curId: state.auth.id
   }
 }
@@ -426,7 +427,7 @@ const mapDispatchToProps = dispatch => {
     closeSocialModal: () => dispatch(socialCalActions.closeSocialModal()),
     openSocialPictureModal: () => dispatch(socialCalActions.openSocialPictureModal()),
     closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal()),
-    openSocialEventModal: () => dispatch(socialCalActions.openSocialEventModal()),
+    openSocialEventModal: (date) => dispatch(socialCalActions.openSocialEventModal(date)),
     closeSocialEventModal: () => dispatch(socialCalActions.closeSocialEventModal())
   }
 }
