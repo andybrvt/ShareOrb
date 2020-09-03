@@ -320,6 +320,21 @@ class NewsFeedSuggestedFriends(generics.ListAPIView):
         queryset = models.User.objects.exclude(username__in = list)[0:3]
         return queryset
 
+class AllSuggested(generics.ListAPIView):
+    serializer_class = serializers.UserSerializer
+    def get_queryset(self):
+        list = []
+        temp=(self.request.user.friends.all())
+        for i in temp:
+            list.append(i.username)
+        list.append(self.request.user)
+
+        # Your can exclude a list by using keyword __in
+        # This is filtering by username in the list
+
+        queryset = models.User.objects.exclude(username__in = list)
+        return queryset
+
 
 
 class post_detail(APIView):

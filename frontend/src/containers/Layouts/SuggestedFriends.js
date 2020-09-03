@@ -11,15 +11,13 @@ import { authAxios } from '../../components/util';
 
 
 
-const count = 4;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
-
 class SuggestedFriends extends React.Component {
   state = {
     initLoading: true,
     loading: false,
     data: [],
     list: [],
+    counter:2,
   };
 
 
@@ -44,24 +42,33 @@ class SuggestedFriends extends React.Component {
 
       this.setState({
         initLoading: false,
-        data: res.data,
         list: res.data,
       });
     });
+
+
+    authAxios.get('http://127.0.0.1:8000/userprofile/everyoneSuggested')
+        .then(res=> {
+          console.log(res)
+
+          console.log(res.data)
+          this.setState({
+            data:res.data,
+         });
+       });
+       console.log(this.state.data)
   }
 
   getData = callback => {
     authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
         .then(res=> {
-          console.log(res)
-          console.log(res.data)
+
           this.setState({
             list:res.data,
-            data:res.data,
          });
        });
        console.log(this.state.list)
-       console.log(this.state.data)
+
   };
 
 
@@ -69,18 +76,18 @@ class SuggestedFriends extends React.Component {
 
 
   onLoadMore = () => {
+    console.log(this.state.counter)
+    console.log(this.state.data)
+    console.log(this.state.list)
     this.setState({
       loading: true,
-      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, get_followers:[]}))),
+      list: this.state.data.concat([...new Array(2)].map(() => ({ loading: true, get_followers:[]}))),
+      counter:this.state.counter+2,
     });
-    console.log(this.state.list)
 
 
-    authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
-        .then(res=> {
-          console.log(res)
-          console.log(res.data)
-          const data = this.state.data.concat(res.data);
+
+          const data = this.state.data.concat(this.state.data.slice(this.state.counter, this.state.counter+2));
           this.setState({
             data,
             list: data,
@@ -94,12 +101,8 @@ class SuggestedFriends extends React.Component {
 
              },
        )
-       });
+       }
 
-
-
-    console.log(this.state.list)
-  };
 
   render() {
     const { initLoading, loading, list } = this.state;
@@ -117,10 +120,7 @@ class SuggestedFriends extends React.Component {
 
         </div>
       ) : null;
-      const ConsoleLog = ({ children }) => {
-        console.log(children);
-        return false;
-      };
+
     return (
 
 
@@ -130,7 +130,7 @@ class SuggestedFriends extends React.Component {
 
           itemLayout="horizontal"
           loadMore={loadMore}
-          dataSource={list.slice(0,2)}
+          dataSource={list}
           renderItem={item => (
 
             <List.Item
@@ -149,13 +149,22 @@ class SuggestedFriends extends React.Component {
 
 
 
-                  <Button id="follow-button"> + Follow </Button>
+                  <Button id="follow-button"> Follow </Button>
 
               </Skeleton>
             </List.Item>
           )}
         />
-        <Button  id="follow-button" onClick={this.onLoadMore}>Explore More</Button>
+        <div style={{marginTop:'25px'}}>
+        {((this.state.counter)>=this.state.data.length-3)?
+          <Button  disabled>Explore More</Button>
+
+          :
+
+            <Button id="follow-button" onClick={this.onLoadMore}>Explore More</Button>
+        }
+        </div>
+
       </div>
     );
   }
