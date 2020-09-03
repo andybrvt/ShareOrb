@@ -130,7 +130,7 @@ class SuggestedFriends extends React.Component {
 
           itemLayout="horizontal"
           loadMore={loadMore}
-          dataSource={list}
+          dataSource={list.slice(0,2)}
           renderItem={item => (
 
             <List.Item
@@ -138,12 +138,12 @@ class SuggestedFriends extends React.Component {
             >
 
               <Skeleton avatar title={false} loading={item.loading} active>
-    
+
               <List.Item.Meta
                 avatar={
                   <Avatar src={item.profile_picture} />
                 }
-                title={<a href="https://ant.design"> {item.username}</a>}
+                title={<a href={"http://localhost:3000/explore/"+item.username}> {item.username}</a>}
                 description={item.get_followers.length +" followers"}
               />
 

@@ -299,7 +299,7 @@ class First3CommentsInPost(generics.ListAPIView):
     def get_queryset(self):
         id = self.kwargs.get(self.lookup_url_kwarg)
 
-        queryset = models.Comment.objects.filter(post=id)[0:3]
+        queryset = models.Comment.objects.filter(post=id)
 
         return queryset
 
