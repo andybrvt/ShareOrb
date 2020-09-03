@@ -316,6 +316,7 @@ class NewsFeedSuggestedFriends(generics.ListAPIView):
 
         # Your can exclude a list by using keyword __in
         # This is filtering by username in the list
+
         queryset = models.User.objects.exclude(username__in = list)[0:3]
         return queryset
 

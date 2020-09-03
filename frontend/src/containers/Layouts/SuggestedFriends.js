@@ -60,6 +60,8 @@ class SuggestedFriends extends React.Component {
             data:res.data,
          });
        });
+       console.log(this.state.list)
+       console.log(this.state.data)
   };
 
 
@@ -69,27 +71,34 @@ class SuggestedFriends extends React.Component {
   onLoadMore = () => {
     this.setState({
       loading: true,
-      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
+      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, get_followers:[]}))),
     });
-    console.log("Hi")
     console.log(this.state.list)
-    console.log(this.state.data)
-    // this.getData(res => {
-    //   const data = this.state.data.concat(res.results);
-    //   this.setState(
-    //     {
-    //       data,
-    //       list: data,
-    //       loading: false,
-    //     },
-    //     () => {
-    //       // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-    //       // In real scene, you can using public method of react-virtualized:
-    //       // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-    //       window.dispatchEvent(new Event('resize'));
-    //     },
-    //   );
-    // });
+
+
+    authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+        .then(res=> {
+          console.log(res)
+          console.log(res.data)
+          const data = this.state.data.concat(res.data);
+          this.setState({
+            data,
+            list: data,
+            loading: false,
+         },
+           () => {
+             // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+             // In real scene, you can using public method of react-virtualized:
+             // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+             window.dispatchEvent(new Event('resize'));
+
+             },
+       )
+       });
+
+
+
+    console.log(this.state.list)
   };
 
   render() {
@@ -108,13 +117,16 @@ class SuggestedFriends extends React.Component {
 
         </div>
       ) : null;
-
+      const ConsoleLog = ({ children }) => {
+        console.log(children);
+        return false;
+      };
     return (
 
 
       <div>
         <List
-          className="demo-loadmore-list"
+          className="demo-loadmore-list scrollableFeature"
 
           itemLayout="horizontal"
           loadMore={loadMore}
@@ -124,14 +136,18 @@ class SuggestedFriends extends React.Component {
             <List.Item
 
             >
+
               <Skeleton avatar title={false} loading={item.loading} active>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar src={item.profile_picture} />
-                  }
-                  title={<a href="https://ant.design"> {item.username}</a>}
-                  description={item.get_followers.length +" followers"}
-                />
+    
+              <List.Item.Meta
+                avatar={
+                  <Avatar src={item.profile_picture} />
+                }
+                title={<a href="https://ant.design"> {item.username}</a>}
+                description={item.get_followers.length +" followers"}
+              />
+
+
 
                   <Button id="follow-button"> + Follow </Button>
 
