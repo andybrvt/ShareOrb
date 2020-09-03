@@ -48,21 +48,18 @@ class SuggestedFriends extends React.Component {
         list: res.data,
       });
     });
-    console.log(this.state.list)
-    console.log(this.state.data)
   }
 
   getData = callback => {
-    authAxios({
-      url: 'http://127.0.0.1:8000/userprofile/suggestedFriends',
-      type: 'json',
-      method: 'GET',
-      contentType: 'application/json',
-      success: res => {
-        callback(res);
-
-      },
-    });
+    authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+        .then(res=> {
+          console.log(res)
+          console.log(res.data)
+          this.setState({
+            list:res.data,
+            data:res.data,
+         });
+       });
   };
 
 
