@@ -23,45 +23,49 @@ class SuggestedFriends extends React.Component {
   };
 
 
-  async componentDidMount(){
+  // async componentDidMount(){
+  //
+  //   await authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+  //     .then(res=> {
+  //       console.log(res)
+  //       console.log(res.data)
+  //       this.setState({
+  //         list:res.data,
+  //         data:res.data,
+  //      });
+  //    });
+  //  }
 
-    await authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
-      .then(res=> {
-        console.log(res)
-        console.log(res.data)
-        this.setState({
-          list:res.data,
-          data:res.data,
-       });
-     });
-   }
 
-    /*
 
   componentDidMount() {
+    console.log("made it")
     this.getData(res => {
-      console.log(res)
+
       this.setState({
         initLoading: false,
-        data: res.results,
-        list: res,
+        data: res.data,
+        list: res.data,
       });
     });
+    console.log(this.state.list)
+    console.log(this.state.data)
   }
 
   getData = callback => {
-    reqwest({
+    authAxios({
       url: 'http://127.0.0.1:8000/userprofile/suggestedFriends',
       type: 'json',
-      method: 'get',
+      method: 'GET',
       contentType: 'application/json',
       success: res => {
         callback(res);
+
       },
     });
   };
 
-  */
+
 
 
 
@@ -73,22 +77,22 @@ class SuggestedFriends extends React.Component {
     console.log("Hi")
     console.log(this.state.list)
     console.log(this.state.data)
-    this.getData(res => {
-      const data = this.state.data.concat(res.results);
-      this.setState(
-        {
-          data,
-          list: data,
-          loading: false,
-        },
-        () => {
-          // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-          // In real scene, you can using public method of react-virtualized:
-          // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-          window.dispatchEvent(new Event('resize'));
-        },
-      );
-    });
+    // this.getData(res => {
+    //   const data = this.state.data.concat(res.results);
+    //   this.setState(
+    //     {
+    //       data,
+    //       list: data,
+    //       loading: false,
+    //     },
+    //     () => {
+    //       // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+    //       // In real scene, you can using public method of react-virtualized:
+    //       // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+    //       window.dispatchEvent(new Event('resize'));
+    //     },
+    //   );
+    // });
   };
 
   render() {

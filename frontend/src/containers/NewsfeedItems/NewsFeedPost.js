@@ -4,7 +4,7 @@ import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
 import {Avatar, Icon, Message, Menu, Dropdown, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
-import { EditOutlined, EllipsisOutlined, AntDesignOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, AntDesignOutlined, ExclamationCircleOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
@@ -67,17 +67,29 @@ class NewsfeedPost extends React.Component {
   //     }, 100)
   // }
 
-  deletePost= (event) => {
+  deletePost = () => {
 
     // console.log(this.props.data.id)
     // authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
     // message.success('Post deleted successfully!');
-
-    WebSocketPostsInstance.deletePost(this.props.data.id)
+    Modal.confirm({
+    title: 'Confirm',
+    icon: <ExclamationCircleOutlined />,
+    content: 'Are you sure you want to delete this post?',
+    okText: 'OK',
+    cancelText: 'Cancel',
+    okButtonProps: { type: 'danger', onClick:this.DestroyPost},
+  });
+    // WebSocketPostsInstance.deletePost(this.props.data.id)
 	  // need to delete post
     // document.location.href = '/';
 	}
 
+  DestroyPost= () => {
+    WebSocketPostsInstance.deletePost(this.props.data.id)
+    Modal.destroyAll();
+    window.location.reload();
+  }
 
 
    ShowNextSteps = () => {
