@@ -5,7 +5,9 @@ import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
 // import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
-
+import axios from 'axios';
+import { authAxios } from '../components/util';
+import { connect } from 'react-redux';
 
 const { TextArea } = Input
 
@@ -38,6 +40,52 @@ class SocialEventPostModal extends React.Component{
 
   handleChange = (values) => {
     this.setState({[values.target.name]: values.target.value})
+  }
+
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
+      }
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
+      }
+    }
+
+    const timeBundle = hour.toString()+':'+minutes.toString()+':00'
+
+    return timeBundle
+
+  }
+
+  onHandleEventSubmit = () => {
+    console.log(this.state)
+    console.log(this.props.curDate)
+    const date = dateFns.format(new Date(this.props.curDate), 'yyyy-MM-dd')
+
+    const startTime = this.timeConvert(this.state.timeStart)
+    const endTime = this.timeConvert(this.state.timeEnd)
+    const formData = new FormData()
+    formData.append('title', this.state.title)
+    formData.append('content', this.state.content)
+    formData.append('startTime', startTime)
+    formData.append('endTime', endTime)
+    formData.append('location', this.state.location)
+    formData.append('curId', this.props.curId)
+    formData.append('date', date)
+    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent',
+    formData
+  )
   }
 
   onStartTimeChange = (time) => {
@@ -307,9 +355,17 @@ class SocialEventPostModal extends React.Component{
 
 
   render() {
+    // For events I don't think we will be needing channels because, when we move
+    // between profiles and newsfeed, it kinda refershs each time so the events
+    // just shows up, so for the evnets you can just make it and sent it to the redux
+    // ... maybe notificaitons are
+    // sent when you make an event --> when the user clicks on the notificaiton
+    // this will direct the user to the event page. The page will be its own channel
+    // its like it own big chat
 
     // This
     console.log(this.props)
+    console.log(this.state)
     let curDate = ''
     if (this.props.curDate){
       curDate = dateFns.format(new Date(this.props.curDate), 'MMMM d, yyyy')
@@ -322,7 +378,9 @@ class SocialEventPostModal extends React.Component{
       <Modal
       onCancel = {this.props.close}
       visible = {this.props.view}
+      onOk = {this.onHandleEventSubmit}
       >
+      Add Social Event {curDate}
         <Form
         onChange = {this.handleChange}
         >
@@ -378,5 +436,10 @@ class SocialEventPostModal extends React.Component{
 
 }
 
+const mapStateToProps = state => {
+  return {
+    curId: state.auth.id
+  }
+}
 
-export default SocialEventPostModal;
+export default connect(mapStateToProps)(SocialEventPostModal);

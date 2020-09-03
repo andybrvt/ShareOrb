@@ -74,3 +74,36 @@ class SocialCalUploadPic(APIView):
         # print(request.data)
         # print(socialCalCell)
         return Response('Uploaded Pictures')
+
+class SocialEventCreateView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        # For this psot function, what you wanna do is, first get the user object
+        # which is the person who made the event then you would then get_or_create
+        # the socialCalcell with the date that you got passed in
+        # Once you have gotten all that, you would then start making the event,
+        # you would add all the information an
+        user = get_object_or_404(User, id = request.data['curId'])
+        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+            socialCalUser = user,
+            socialCaldate = request.data['date'],
+            testDate = request.data['date']
+        )
+
+        eventPerson = set()
+        eventPerson.add(user)
+
+        socialCalEvent = models.SocialCalEvent.objects.create(
+            host = user,
+            title = request.data['title'],
+            content = request.data['content'],
+            start_time = request.data['startTime'],
+            end_time = request.data['endTime'],
+            location = request.data['location'],
+            event_day = request.data['date'],
+            calCell = socialCalCell
+        )
+
+        socialCalEvent.persons.add(user)
+        return Response('Uploaded Pictures')

@@ -23,8 +23,15 @@ class SocialEventList extends React.Component{
 
   }
 
+
   render(){
 
+
+    // For events I don't think we will be needing channels because, when we move
+    // between profiles and newsfeed, it kinda refershs each time so the events
+    // just shows up, so for the evnets you can just make it and sent it to the redux
+    // and maybe you don't need channels for when you post events... maybe notificaitons are
+    // sent when you make an event --> this will direct the user to the event page
     console.log(this.props)
 
     let itemList = []
@@ -74,8 +81,8 @@ class SocialEventList extends React.Component{
 
             <span className = 'socialEventTime'>
             <img src = {clock} className = 'socialEventClock' />
-            {this.timeFormater(item.start_time)}-
-            {this.timeFormater(item.end_time)}
+            {item.start_time}-
+            {item.end_time}
             </span>
 
             <span className = 'socialEventLocation'>

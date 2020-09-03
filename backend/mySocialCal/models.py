@@ -24,7 +24,7 @@ class SocialCalCell(models.Model):
     coverPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
     #This is just used to test for the visuality (Make sure to delete this sometime soon) DELETE THIS AND
-    # MAKE SURE TO REMOVE IT IN THE CONSUMERS IN THE THE SOCIAL CAL 
+    # MAKE SURE TO REMOVE IT IN THE CONSUMERS IN THE THE SOCIAL CAL
     testDate = models.DateField(default = timezone.now, blank = True)
     # This will cover the like of the day
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
@@ -88,10 +88,10 @@ class SocialCalEvent(models.Model):
     # This will be the title of the event
     title = models.CharField(max_length = 222)
     content = models.TextField(blank = True)
-    start_time = models.DateTimeField(default = timezone.now, blank = False)
-    end_time = models.DateTimeField(default = timezone.now, blank = False)
+    start_time = models.TimeField(default = timezone.now, blank = False)
+    end_time = models.TimeField(default = timezone.now, blank = False)
     location = models.CharField(max_length = 255, blank = True)
-
+    event_day = models.DateField(default = timezone.now, blank = True)
     #This will be the foreign key that connects the events with the correct calCell
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialEvents', null = True)
 
