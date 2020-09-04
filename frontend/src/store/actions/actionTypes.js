@@ -79,7 +79,6 @@ export const OPEN_SOCIAL_EVENT_MODAL = "OPEN_SOCIAL_EVENT_MODAL";
 export const CLOSE_SOCIAL_EVENT_MODAL = 'CLOSE_SOCIAL_EVENT_MODAL';
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
-export const ADD_SOCIAL_LIKE_NEW = 'ADD_SOCIAL_LIKE_NEW';
 export const ADD_SOCIAL_LIKE_OLD = 'ADD_SOCIAL_LIKE_OLD';
 export const ADD_SOCIAL_LIKE_NEW_M = 'ADD_SOCIAL_LIKE_NEW_M';
 export const ADD_SOCIAL_LIKE_OLD_M = 'ADD_SOCIAL_LIKE_OLD_M';
@@ -93,6 +92,9 @@ export const ADD_SOCIAL_COMMENT_NEW_M = 'ADD_SOCIAL_COMMENT_NEW_M';
 export const ADD_SOCIAL_COMMENT_OLD_M = 'ADD_SOCIAL_COMMENT_OLD_M';
 export const ADD_SOCIAL_EVENT_NEW = 'ADD_SOCIAL_EVENT_NEW';
 export const ADD_SOCIAL_EVENT_OLD = 'ADD_SOCIAL_EVENT_OLD';
+// This will pretty much be used for any add_social commands with new next to it
+export const ADD_SOCIAL_CELL_NEW = 'ADD_SOCIAL_CELL_NEW';
+export const ADD_SOCIAL_CELL_NEW_M = 'ADD_SOCIAL_CELL_NEW_M'
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

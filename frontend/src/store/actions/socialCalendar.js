@@ -90,3 +90,10 @@ export const closeSocialEventModal = () => {
     type: actionTypes.CLOSE_SOCIAL_EVENT_MODAL
   }
 }
+
+export const addSocialCalCellNew = (socialObj) => {
+  return {
+    type: actionTypes.ADD_SOCIAL_CELL_NEW_M,
+    socialObj: socialObj
+  }
+}

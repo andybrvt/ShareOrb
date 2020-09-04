@@ -528,12 +528,12 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # you probally gotta make 2 redux functions though lol
         if created == True:
             contentOwner = {
-                'command': 'send_social_like_new',
+                'command': 'send_cal_cell_new',
                 'socialCalCellObj':socialCalCellObj,
                 'reciever': ownerObj
             }
             contentLiker = {
-                'command': 'send_social_like_new',
+                'command': 'send_cal_cell_new',
                 'socialCalCellObj':socialCalCellObj,
                 'reciever': userObj
             }

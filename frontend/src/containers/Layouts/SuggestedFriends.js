@@ -80,19 +80,20 @@ class SuggestedFriends extends React.Component {
     console.log(this.state.counter)
     console.log(this.state.data)
     console.log(this.state.list)
-    this.setState({
-      loading: true,
-      // list: this.state.data.concat([...new Array(2)].map(() => ({ loading: true, get_followers:[]}))),
-      counter:this.state.counter+2,
-    });
+    // this.setState({
+    //   loading: true,
+    //   // list: this.state.data.concat([...new Array(2)].map(() => ({ loading: true, get_followers:[]}))),
+    //   counter:this.state.counter+1,
+    // });
 
 
-
-          const data = this.state.data.concat(this.state.data.slice(this.state.counter, this.state.counter+2));
+    console.log(this.state.counter)
+          const data = this.state.list.concat(this.state.data.slice(this.state.counter+1, this.state.counter+3));
+          console.log(this.state.data)
           this.setState({
-            data,
             list: data,
             loading: false,
+            counter: this.state.counter+2
          },
            () => {
              // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
@@ -106,6 +107,7 @@ class SuggestedFriends extends React.Component {
 
 
   render() {
+    console.log(this.state.data)
     const { initLoading, loading, list } = this.state;
     const loadMore =
        !initLoading && !loading ? (

@@ -167,36 +167,6 @@ export const addFollowing = (state, action) => {
 
 // FOR ALL THE NEW CAL CELL BEING CREATED, YOU CAN PROBALLY JUST USE ONE
 // ADD NEW SOCIALCALCELL
-export const addSocialLikeNew = (state, action) =>{
-  // So the task here is you have to first fine the user, then find the
-  //  correct cell data and then add in the like
-  console.log(action)
-  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
-
-  console.log(state.profile)
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  // Event though the profile is not in state, it is declared when the curProfile is loaded
-  // in so it is there
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ... profile,
-        get_socialCal: [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: [...state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
-    } : state.profile
-  })
-}
 
 export const addSocialLikeOld = (state, action) => {
   // so the task here is to find the user, then find the correct cell
@@ -417,9 +387,36 @@ export const addSocialEventOld = (state,action) => {
     } : state.profile
 
   })
+}
 
+export const addSocailCalCell = (state, action) => {
+  // This is gonna be used for all the 'new' cal cells
+  console.log(action)
+  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
+
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal : [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
+      } : profile
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: [... state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
+    } : state.profile
+  })
 
 }
+
+
 
 
 
@@ -445,8 +442,6 @@ const reducer = (state = initialState, action) => {
       return addUnFollowing(state, action)
     case actionTypes.ADD_UNFOLLOWER:
       return addUnFollower(state, action)
-    case actionTypes.ADD_SOCIAL_LIKE_NEW:
-      return addSocialLikeNew(state, action)
     case actionTypes.ADD_SOCIAL_LIKE_OLD:
       return addSocialLikeOld(state, action)
     case actionTypes.ADD_SOCIAL_UNLIKE:
@@ -459,6 +454,8 @@ const reducer = (state = initialState, action) => {
       return addSocialEventNew(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_OLD:
       return addSocialEventOld(state,action)
+    case actionTypes.ADD_SOCIAL_CELL_NEW:
+      return addSocailCalCell(state, action)
     default:
       return state;
   };

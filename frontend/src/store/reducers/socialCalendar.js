@@ -101,6 +101,14 @@ const addSocialCommentNewM = (state, action) => {
   })
 }
 
+const addSocialCellNewM = (state, action) => {
+  return updateObject (state, {
+    socialObject: [
+      action.socialObj.socialCalCellObj
+    ]
+  })
+}
+
 const addSocialCommentOldM = (state, action) => {
   // This is for when the social cell has been made already
   return updateObject (state, {
@@ -152,6 +160,8 @@ const reducer = (state = initialState, action) => {
       return openSocialEventModal(state, action)
     case actionTypes.CLOSE_SOCIAL_EVENT_MODAL:
       return closeSocialEventModal(state, action)
+    case actionTypes.ADD_SOCIAL_CELL_NEW_M:
+      return addSocialCellNewM(state, action)
     default:
       return state;
   }

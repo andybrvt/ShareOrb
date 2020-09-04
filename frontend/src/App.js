@@ -54,7 +54,6 @@ class App extends Component {
       this.props.loadCurProfile.bind(this),
       this.props.addUnFollowing.bind(this),
       this.props.addUnFollower.bind(this),
-      this.props.addSocialLikeNew.bind(this),
       this.props.addSocialLikeOld.bind(this),
       this.props.addSocialLikeNewM.bind(this),
       this.props.addSocialLikeOldM.bind(this),
@@ -65,7 +64,9 @@ class App extends Component {
       this.props.addSocialCommentNewM.bind(this),
       this.props.addSocialCommentOldM.bind(this),
       this.props.addSocialEventNew.bind(this),
-      this.props.addSocialEventOld.bind(this)
+      this.props.addSocialEventOld.bind(this),
+      this.props.addSocialCalCellNew.bind(this),
+      this.props.addSocialCalCellNewM.bind(this)
     )
   }
 
@@ -134,7 +135,6 @@ const mapDispatchToProps = dispatch => {
     loadCurProfile: curProfile => dispatch(exploreActions.loadCurProfile(curProfile)),
     addUnFollower: followObject => dispatch(exploreActions.addUnFollower(followObject)),
     addUnFollowing: followObject => dispatch(exploreActions.addUnFollowing(followObject)),
-    addSocialLikeNew: exploreObj => dispatch(exploreActions.addSocialLikeNew(exploreObj)),
     addSocialLikeOld: exploreObj => dispatch(exploreActions.addSocialLikeOld(exploreObj)),
     addSocialLikeNewM: socialObj => dispatch(socialActions.addSocialLikeNewM(socialObj)),
     addSocialLikeOldM: socialObj => dispatch(socialActions.addSocialLikeOldM(socialObj)),
@@ -145,7 +145,9 @@ const mapDispatchToProps = dispatch => {
     addSocialCommentNewM: socialObj =>dispatch(socialActions.addSocialCommentNewM(socialObj)),
     addSocialCommentOldM: socialObj => dispatch(socialActions.addSocialCommentOldM(socialObj)),
     addSocialEventNew: exploreObj => dispatch(exploreActions.addSocialEventNew(exploreObj)),
-    addSocialEventOld: exploreObj => dispatch(exploreActions.addSocialEventOld(exploreObj))
+    addSocialEventOld: exploreObj => dispatch(exploreActions.addSocialEventOld(exploreObj)),
+    addSocialCalCellNew: exploreObj => dispatch(exploreActions.addSocialCalCellNew(exploreObj)),
+    addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj))
   }
 }
 
