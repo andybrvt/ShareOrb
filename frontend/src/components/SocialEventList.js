@@ -94,7 +94,7 @@ class SocialEventList extends React.Component{
 
             <span className = 'socialEventCapcity'>
             <img src ={userIcon} className = 'socialUserIcon' />
-            10 people
+            {item.persons.length}
             <AvatarGroups />
             </span>
 

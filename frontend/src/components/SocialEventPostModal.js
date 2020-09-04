@@ -8,6 +8,8 @@ import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { authAxios } from '../components/util';
 import { connect } from 'react-redux';
+import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+
 
 const { TextArea } = Input
 
@@ -75,17 +77,38 @@ class SocialEventPostModal extends React.Component{
 
     const startTime = this.timeConvert(this.state.timeStart)
     const endTime = this.timeConvert(this.state.timeEnd)
-    const formData = new FormData()
-    formData.append('title', this.state.title)
-    formData.append('content', this.state.content)
-    formData.append('startTime', startTime)
-    formData.append('endTime', endTime)
-    formData.append('location', this.state.location)
-    formData.append('curId', this.props.curId)
-    formData.append('date', date)
-    authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent',
-    formData
-  )
+  //   const formData = new FormData()
+  //   formData.append('title', this.state.title)
+  //   formData.append('content', this.state.content)
+  //   formData.append('startTime', startTime)
+  //   formData.append('endTime', endTime)
+  //   formData.append('location', this.state.location)
+  //   formData.append('curId', this.props.curId)
+  //   formData.append('date', date)
+  //   authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent',
+  //   formData
+  // )
+
+  // So the authAxios is not gonna work that well so we gonna have to use channels,
+  // so we are gonna use the eventobj as a way to send it to the newsfeed, socialcal
+  // and personal cal
+  const eventObj = {
+    title: this.state.title,
+    content: this.state.content,
+    startTime: startTime,
+    endTime: endTime,
+    location: this.state.location,
+    curId: this.props.curId,
+    date: date
+  }
+
+  // This will be used to send objects to the user channel (you can technically do
+//  it with just axius but it is a bit easier )
+  ExploreWebSocketInstance.sendSocialEvent(eventObj)
+
+  // now you gotta add a redux
+
+
   }
 
   onStartTimeChange = (time) => {

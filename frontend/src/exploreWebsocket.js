@@ -186,6 +186,31 @@ class WebSocketExplore {
 
       this.callbacks['social_comment_old'](exploreObj)
       this.callbacks['social_comment_old_m'](exploreObj)
+    } else if( command === 'send_social_event_new'){
+      // This will be sending information to redux when the social cal cell is not
+       // already made
+       const socialCalCellObj = parsedData.socialCalCellObj
+       const exploreObj = {
+         socialCalCellObj: socialCalCellObj
+       }
+       // Now you will put the redux here where you just throw in the new social
+       // calcell obj
+
+       // We might not need one for the modal when it opens
+       this.callbacks['social_event_new'](exploreObj)
+
+    } else if (command === 'send_social_event_old'){
+      // This will be sending information to redux when the social cal cell is
+      // made already
+      const socialCalCellObj = parsedData.socialCalCellObj
+      const socialEventObj = parsedData.socialEventObj
+
+      const exploreObj = {
+        socialCalCell: socialCalCellObj,
+        socialEvent: socialEventObj
+      }
+      this.callbacks['social_event_old'](exploreObj)
+
     }
 
 
@@ -208,7 +233,9 @@ class WebSocketExplore {
      addSocialCommentNew,
      addSocialCommentOld,
      addSocialCommentNewM,
-     addSocialCommentOldM
+     addSocialCommentOldM,
+     addSocialEventNew,
+     addSocialEventOld,
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -226,6 +253,8 @@ class WebSocketExplore {
     this.callbacks['social_comment_old'] = addSocialCommentOld
     this.callbacks['social_comment_new_m'] = addSocialCommentNewM
     this.callbacks['social_comment_old_m'] = addSocialCommentOldM
+    this.callbacks['social_event_new'] = addSocialEventNew
+    this.callbacks['social_event_old'] = addSocialEventOld
   }
 
 
@@ -323,6 +352,16 @@ class WebSocketExplore {
       comment: comment,
       ownerId: owner,
       command: 'send_social_comment'
+    })
+  }
+
+  sendSocialEvent = (eventObj) => {
+    // The event object will be a dict of all the information on the event and
+    // it will be sent into the consumers, There will be a same one that will be going
+    // to the news feed
+    this.sendExplore({
+      eventObj: eventObj,
+      command: 'create_social_event'
     })
   }
 

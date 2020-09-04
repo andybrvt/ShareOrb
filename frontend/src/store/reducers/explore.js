@@ -164,6 +164,9 @@ export const addFollowing = (state, action) => {
   })
 }
 
+
+// FOR ALL THE NEW CAL CELL BEING CREATED, YOU CAN PROBALLY JUST USE ONE
+// ADD NEW SOCIALCALCELL
 export const addSocialLikeNew = (state, action) =>{
   // So the task here is you have to first fine the user, then find the
   //  correct cell data and then add in the like
@@ -347,6 +350,77 @@ export const addSocialCommentOld = (state, action) =>{
   })
 }
 
+export const addSocialEventNew = (state, action) => {
+  // This process will be simialr to all the other news
+  console.log(action)
+  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
+
+  console.log(state.profile)
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
+  // Event though the profile is not in state, it is declared when the curProfile is loaded
+  // in so it is there
+
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal: [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
+      } : profile
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: [... state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
+    } : state.profile
+  })
+}
+
+export const addSocialEventOld = (state,action) => {
+  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
+  const calendarCalCellId = action.exploreObj.socialCalCell.id
+  const eventObj = action.exploreObj.socialEvent
+
+  console.log(action.exploreObj.socialCalCell)
+  console.log('hit here ')
+  console.log(eventObj)
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ...profile,
+        get_socialCal: profile.get_socialCal.map(
+          socialCell => socialCell.id === calendarCalCellId ? {
+            ...socialCell,
+            get_socialCalEvent: [...socialCell.get_socialCalEvent, eventObj]
+          } :socialCell
+        )
+      } : profile
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        socialCell => socialCell.id === calendarCalCellId ? {
+          ... socialCell,
+          get_socialCalEvent: [... socialCell.get_socialCalEvent, eventObj]
+        } : socialCell
+      )
+    } : state.profile
+
+  })
+
+
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -381,6 +455,10 @@ const reducer = (state = initialState, action) => {
       return addSocialCommentNew(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD:
       return addSocialCommentOld (state, action)
+    case actionTypes.ADD_SOCIAL_EVENT_NEW:
+      return addSocialEventNew(state, action)
+    case actionTypes.ADD_SOCIAL_EVENT_OLD:
+      return addSocialEventOld(state,action)
     default:
       return state;
   };
