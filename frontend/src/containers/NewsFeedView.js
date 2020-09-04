@@ -125,7 +125,7 @@ class NewsFeedView extends React.Component {
 						// postion: 'fixed',
 						position: 'relative',
 						marginRight:30,
-						
+
 					}}>
 
 
@@ -309,14 +309,13 @@ class NewsFeedView extends React.Component {
 
 
 
-			<div  style={{textAlign:'center', fontSize:'20px'}}>
+			<div  style={{textAlign:'center', fontSize:'18px',marginTop:'20px'}}>
 			More People
 
 		</div>
 
 
-			<Divider plain></Divider>
-				<div class="appearBefore" style={{background:'white'}}>
+				<div style={{ marginTop:'25px',background:'white'}}>
 
 				<SuggestedFriends {...this.props}/>
 				</div>

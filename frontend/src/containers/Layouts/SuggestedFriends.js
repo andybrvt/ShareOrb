@@ -18,6 +18,7 @@ class SuggestedFriends extends React.Component {
     data: [],
     list: [],
     counter:2,
+
   };
 
 
@@ -81,7 +82,7 @@ class SuggestedFriends extends React.Component {
     console.log(this.state.list)
     this.setState({
       loading: true,
-      list: this.state.data.concat([...new Array(2)].map(() => ({ loading: true, get_followers:[]}))),
+      // list: this.state.data.concat([...new Array(2)].map(() => ({ loading: true, get_followers:[]}))),
       counter:this.state.counter+2,
     });
 
@@ -156,12 +157,13 @@ class SuggestedFriends extends React.Component {
           )}
         />
         <div style={{marginTop:'25px'}}>
-        {((this.state.counter)>=this.state.data.length-3)?
-          <Button  disabled>Explore More</Button>
+        {((this.state.counter)>=8)?
+
+          <Button href="http://localhost:3000/explore" type="primary">Explore Page</Button>
 
           :
 
-            <Button id="follow-button" onClick={this.onLoadMore}>Explore More</Button>
+            <Button onClick={this.onLoadMore}>Explore More</Button>
         }
         </div>
 
