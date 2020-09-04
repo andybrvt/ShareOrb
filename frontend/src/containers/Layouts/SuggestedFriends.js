@@ -161,11 +161,11 @@ class SuggestedFriends extends React.Component {
         <div style={{marginTop:'25px'}}>
         {((this.state.counter)>=8)?
 
-          <Button href="http://localhost:3000/explore" type="primary">Explore Page</Button>
+          <Button style={{left:'35%', marginBottom:'20px'}} href="http://localhost:3000/explore" type="primary">Go To Explore</Button>
 
           :
 
-            <Button onClick={this.onLoadMore}>Explore More</Button>
+            <Button style={{left:'35%', marginBottom:'20px'}} onClick={this.onLoadMore}>Load More</Button>
         }
         </div>
 
