@@ -91,15 +91,6 @@ export const addSocialUnLike = (exploreObj) => {
   }
 }
 
-export const addSocialCommentNew = (exploreObj) =>{
-  // This will be used for adding the comments when you create
-  // a new socialcalcell
-  return {
-    type: actionTypes.ADD_SOCIAL_COMMENT_NEW,
-    exploreObj: exploreObj
-  }
-}
-
 export const addSocialCommentOld = (exploreObj) => {
   // This will be used for the adding the comments when the social cell
   // is already created
@@ -110,14 +101,6 @@ export const addSocialCommentOld = (exploreObj) => {
 }
 
 
-export const addSocialEventNew = (exploreObj) => {
-  // This will be used to add the events in whe nyou are creating  a
-  // new soicalcell
-  return {
-    type:actionTypes.ADD_SOCIAL_EVENT_NEW,
-    exploreObj: exploreObj
-  }
-}
 
 export const addSocialEventOld = (exploreObj) => {
   // This will be used to add the events in when you are creating an event

@@ -148,18 +148,7 @@ class WebSocketExplore {
       console.log('stuff stuff stuff')
       this.callbacks['social_unlike'](exploreObj)
       this.callbacks['social_unlike_m'](exploreObj)
-    } else if (command === 'send_social_comment_new'){
-      // This will used for adding in the comment when the calcell that has not
-      // been created yet
-      const socialCalCellObj = parsedData.socialCalCellObj
-      const exploreObj = {
-        socialCalCellObj: socialCalCellObj
-      }
-
-      // NOW YOU WILL PUT THE REDUX CALL BACKS HERE
-      this.callbacks['social_comment_new'](exploreObj)
-      this.callbacks['social_comment_new_m'](exploreObj)
-    } else if (command === 'send_social_comment_old'){
+    }  else if (command === 'send_social_comment_old'){
       // So you would pass the socialCalcell obj in first and then the comment
       // The socialCalCell is used to find the ower and the cell
       const socialCalCellObj = parsedData.socialCalCellObj
@@ -172,20 +161,7 @@ class WebSocketExplore {
 
       this.callbacks['social_comment_old'](exploreObj)
       this.callbacks['social_comment_old_m'](exploreObj)
-    } else if( command === 'send_social_event_new'){
-      // This will be sending information to redux when the social cal cell is not
-       // already made
-       const socialCalCellObj = parsedData.socialCalCellObj
-       const exploreObj = {
-         socialCalCellObj: socialCalCellObj
-       }
-       // Now you will put the redux here where you just throw in the new social
-       // calcell obj
-
-       // We might not need one for the modal when it opens
-       this.callbacks['social_event_new'](exploreObj)
-
-    } else if (command === 'send_social_event_old'){
+    }  else if (command === 'send_social_event_old'){
       // This will be sending information to redux when the social cal cell is
       // made already
       const socialCalCellObj = parsedData.socialCalCellObj
@@ -223,15 +199,11 @@ class WebSocketExplore {
      unFollowingCallback,
      unFollowerCallback,
      addSocialLikeOld,
-     addSocialLikeNewM,
      addSocialLikeOldM,
      addSocialUnLike,
      addSocialUnLikeM,
-     addSocialCommentNew,
      addSocialCommentOld,
-     addSocialCommentNewM,
      addSocialCommentOldM,
-     addSocialEventNew,
      addSocialEventOld,
      addSocialCalCellNew,
      addSocialCalCellNewM
@@ -242,17 +214,12 @@ class WebSocketExplore {
     this.callbacks['current_user'] = loadCurrProfile
     this.callbacks['new_unFollowing'] = unFollowingCallback
     this.callbacks['new_unFollower'] = unFollowerCallback
-    // delete the callbacks
     this.callbacks['social_like_old'] = addSocialLikeOld
-    this.callbacks['social_like_new_m'] = addSocialLikeNewM
     this.callbacks['social_like_old_m'] = addSocialLikeOldM
     this.callbacks['social_unlike'] = addSocialUnLike
     this.callbacks['social_unlike_m'] = addSocialUnLikeM
-    this.callbacks['social_comment_new'] = addSocialCommentNew
     this.callbacks['social_comment_old'] = addSocialCommentOld
-    this.callbacks['social_comment_new_m'] = addSocialCommentNewM
     this.callbacks['social_comment_old_m'] = addSocialCommentOldM
-    this.callbacks['social_event_new'] = addSocialEventNew
     this.callbacks['social_event_old'] = addSocialEventOld
     this.callbacks['social_cal_cell_new'] = addSocialCalCellNew
     this.callbacks['social_cal_cell_new_m'] = addSocialCalCellNewM

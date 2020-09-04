@@ -663,12 +663,12 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # im assuming it will like it up already
         if created == True:
             contentOwner = {
-                'command': 'send_social_comment_new',
+                'command': 'send_cal_cell_new',
                 'socialCalCellObj': socialCalCellObj,
                 'reciever': ownerObj
             }
             contentCommenter = {
-                'command': 'send_social_comment_new',
+                'command': 'send_cal_cell_new',
                 'socialCalCellObj': socialCalCellObj,
                 'reciever': userObj
             }
@@ -739,7 +739,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         if created == True:
             content = {
-                'command': 'send_social_event_new',
+                'command': 'send_cal_cell_new',
                 'socialCalCellObj': socialCalCellObj,
                 'reciever': userObj
             }

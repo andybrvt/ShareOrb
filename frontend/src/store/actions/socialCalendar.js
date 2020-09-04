@@ -40,14 +40,6 @@ export const closeSocialPictureModal = () => {
   }
 }
 
-export const addSocialLikeNewM = (socialObj) => {
-  // This will be used to the redux information into the modal itself
-  return{
-    type: actionTypes.ADD_SOCIAL_LIKE_NEW_M,
-    socialObj: socialObj
-  }
-}
-
 export const addSocialLikeOldM = (socialObj) => {
   // This will be used to the redux information into the modal itself
   return {
@@ -64,12 +56,6 @@ export const addSocialUnLikeM = (socialObj) => {
   }
 }
 
-export const addSocialCommentNewM = (socialObj) => {
-  return {
-    type: actionTypes.ADD_SOCIAL_COMMENT_NEW_M,
-    socialObj: socialObj
-  }
-}
 
 export const addSocialCommentOldM = (socialObj) => {
   return {

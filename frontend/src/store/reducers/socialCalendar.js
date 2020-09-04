@@ -56,14 +56,6 @@ const closeSocialPictureModal = (state, action) => {
   })
 }
 
-const addSocialLikeNewM = (state, action) => {
-  return updateObject (state, {
-    socialObject : [
-      action.socialObj.socialCalCellObj
-
-    ]
-  })
-}
 
 const addSocialLikeOldM = (state, action) => {
   return updateObject (state, {
@@ -91,15 +83,6 @@ const addSocialUnLikeM = (state, action) => {
   })
 }
 
-const addSocialCommentNewM = (state, action) => {
-  // Since you have the socialcell already and that the socialcell is not already
-  // made, you pretty jsut add it in
-  return updateObject (state, {
-    socialObject: [
-      action.socialObj.socialCalCellObj
-    ]
-  })
-}
 
 const addSocialCellNewM = (state, action) => {
   return updateObject (state, {
@@ -146,14 +129,10 @@ const reducer = (state = initialState, action) => {
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
       return closeSocialPictureModal(state, action)
-    case actionTypes.ADD_SOCIAL_LIKE_NEW_M:
-      return addSocialLikeNewM(state, action)
     case actionTypes.ADD_SOCIAL_LIKE_OLD_M:
       return addSocialLikeOldM(state, action)
     case actionTypes.ADD_SOCIAL_UNLIKE_M:
       return addSocialUnLikeM(state, action)
-    case actionTypes.ADD_SOCIAL_COMMENT_NEW_M:
-      return addSocialCommentNewM(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD_M:
       return addSocialCommentOldM(state, action)
     case actionTypes.OPEN_SOCIAL_EVENT_MODAL:

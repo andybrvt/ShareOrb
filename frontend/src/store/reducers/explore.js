@@ -253,33 +253,6 @@ export const addSocialUnLike = (state, action) => {
 
 }
 
-export const addSocialCommentNew = (state, action) => {
-  // This will be used to add into the comments. So what you would do since this
-  // is making a new calendar you would just find the right person that owns the
-  // calendar then add the calendar cell to the social calendar list
-  console.log(action)
-  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
-
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ... profile,
-        get_socialCal : [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: [... state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
-    } : state.profile
-  })
-}
 
 export const addSocialCommentOld = (state, action) =>{
   // This since the socialcell already exist so what will happen is that you will find
@@ -317,36 +290,6 @@ export const addSocialCommentOld = (state, action) =>{
       )
     } : state.profile
 
-  })
-}
-
-export const addSocialEventNew = (state, action) => {
-  // This process will be simialr to all the other news
-  console.log(action)
-  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
-
-  console.log(state.profile)
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  // Event though the profile is not in state, it is declared when the curProfile is loaded
-  // in so it is there
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ... profile,
-        get_socialCal: [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: [... state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
-    } : state.profile
   })
 }
 
@@ -446,12 +389,8 @@ const reducer = (state = initialState, action) => {
       return addSocialLikeOld(state, action)
     case actionTypes.ADD_SOCIAL_UNLIKE:
       return addSocialUnLike(state,action)
-    case actionTypes.ADD_SOCIAL_COMMENT_NEW:
-      return addSocialCommentNew(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD:
       return addSocialCommentOld (state, action)
-    case actionTypes.ADD_SOCIAL_EVENT_NEW:
-      return addSocialEventNew(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_OLD:
       return addSocialEventOld(state,action)
     case actionTypes.ADD_SOCIAL_CELL_NEW:
