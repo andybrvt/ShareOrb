@@ -112,7 +112,7 @@ class NewsFeedView extends React.Component {
 					display: 'flex',
 					// backgroundColor: 'blue',
 					position: 'relative',
-					marginLeft: '200px'
+					marginLeft: '350px'
 				}}>
 
 
@@ -124,7 +124,7 @@ class NewsFeedView extends React.Component {
 						width: '300px',
 						// postion: 'fixed',
 						position: 'relative',
-						marginRight:30,
+
 
 					}}>
 
@@ -141,7 +141,7 @@ class NewsFeedView extends React.Component {
 
 						// postion: 'fixed',
 						position: 'relative',
-						marginRight:40,
+
 						marginTop:40,
 					}}>
 
@@ -155,7 +155,7 @@ class NewsFeedView extends React.Component {
 
 				</div>
 
-				<Col span={11}>
+				<Col style={{}} span={11}>
 
 
 
@@ -317,7 +317,7 @@ class NewsFeedView extends React.Component {
 
 				<div style={{ marginTop:'25px',background:'white'}}>
 
-				<SuggestedFriends {...this.props}/>
+				<SuggestedFriends  style={{position:'fixed'}}{...this.props}/>
 				</div>
 			</div>
 
