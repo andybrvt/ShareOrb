@@ -20,8 +20,10 @@ from .models import Comment
 from .models import UserFollowing
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalComment
+from mySocialCal.models import SocialCalEvent
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
+from mySocialCal.serializers import SocialCalEventSerializer
 
 
 
@@ -700,7 +702,59 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 self.send_new_explore(contentCommenter)
 
 
+    def create_social_event(self, data):
+        # This will pretty much be like the create event view in teh mySocialCal
+        # app
 
+        # EventObj is a dictionary that contains all the event information
+        eventObj = data['eventObj']
+        print(eventObj['curId'])
+        user = get_object_or_404(User, id = eventObj['curId'])
+        socialCalCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = user,
+            socialCaldate = eventObj['date'],
+            testDate = eventObj['date']
+        )
+
+        socialCalEvent = SocialCalEvent.objects.create(
+            host = user,
+            title = eventObj['title'],
+            content = eventObj['content'],
+            start_time = eventObj['startTime'],
+            end_time = eventObj['endTime'],
+            location = eventObj['location'],
+            event_day = eventObj['date'],
+            calCell = socialCalCell
+        )
+        socialCalEvent.persons.add(user)
+        # This one you are just sending it to your self so its fine, I will have
+        # to do one where we send it to the newsfeed, and one for persnal cal
+        # probally gonna have to make a function where it creates a channel for when
+        # an event is open
+
+        socialCalCellObj = SocialCalCellSerializer(socialCalCell, many = False).data
+
+        socialEventObj = SocialCalEventSerializer(socialCalEvent, many = False).data
+        userObj = FollowUserSerializer(user, many = False).data
+
+        if created == True:
+            content = {
+                'command': 'send_social_event_new',
+                'socialCalCellObj': socialCalCellObj,
+                'reciever': userObj
+            }
+            self.send_new_explore(content)
+
+        if created == False:
+            content = {
+                'command': 'send_social_event_old',
+                'socialCalCellObj': socialCalCellObj,
+                'socialEventObj': socialEventObj,
+                'reciever': userObj
+            }
+            self.send_new_explore(content)
+
+        # CONTINUE HERE, IT SHOULD BE SIMILAR TO THE VIEWS IN MYSOCIALCAL
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer
         # just a reminder that the follower is the person sending the request
@@ -847,6 +901,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_social_unlike(data)
         if data['command'] == 'send_social_comment':
             self.send_social_comment(data)
+        if data['command'] == 'create_social_event':
+            self.create_social_event(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']

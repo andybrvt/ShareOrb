@@ -91,7 +91,8 @@ export const ADD_SOCIAL_COMMENT_NEW = 'ADD_SOCIAL_COMMENT_NEW';
 export const ADD_SOCIAL_COMMENT_OLD = 'ADD_SOCIAL_COMMENT_OLD';
 export const ADD_SOCIAL_COMMENT_NEW_M = 'ADD_SOCIAL_COMMENT_NEW_M';
 export const ADD_SOCIAL_COMMENT_OLD_M = 'ADD_SOCIAL_COMMENT_OLD_M';
-
+export const ADD_SOCIAL_EVENT_NEW = 'ADD_SOCIAL_EVENT_NEW';
+export const ADD_SOCIAL_EVENT_OLD = 'ADD_SOCIAL_EVENT_OLD';
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

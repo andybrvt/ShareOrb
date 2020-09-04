@@ -116,3 +116,22 @@ export const addSocialCommentOld = (exploreObj) => {
     exploreObj: exploreObj
   }
 }
+
+
+export const addSocialEventNew = (exploreObj) => {
+  // This will be used to add the events in whe nyou are creating  a
+  // new soicalcell
+  return {
+    type:actionTypes.ADD_SOCIAL_EVENT_NEW,
+    exploreObj: exploreObj
+  }
+}
+
+export const addSocialEventOld = (exploreObj) => {
+  // This will be used to add the events in when you are creating an event
+  // old socialCal
+  return{
+    type: actionTypes.ADD_SOCIAL_EVENT_OLD,
+    exploreObj: exploreObj
+  }
+}
