@@ -126,8 +126,17 @@ class Liking extends React.Component{
                   :
 
                   <div>
-                    {/* No people */}
+                    {/* No people
+                    <Avatar.Group
+                    maxStyle={{ color: 'white', backgroundColor: 'white' }}
+                    maxCount={3}
+                    >
 
+
+                    </Avatar.Group>
+                    */}
+
+                    testetsestsetset
                   </div>
                  }
                 </span>
@@ -158,6 +167,10 @@ class Liking extends React.Component{
               {
                 (like_people.length === 0) ?
                 <span>
+
+                  <Avatar.Group>
+                    <Avatar style={{background:'white'}}/>
+                  </Avatar.Group>
                 </span>
 
                 :
@@ -169,10 +182,9 @@ class Liking extends React.Component{
                     (like_people.length==1)?
                     <span>
 
-                    <Tooltip placement="topLeft" title="Jason Derulo">
+                    <Avatar.Group>
                        <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
-                   </Tooltip>
-
+                      </Avatar.Group>
                     </span>
 
 

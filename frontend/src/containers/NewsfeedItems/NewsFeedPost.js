@@ -14,8 +14,6 @@ import DetailSwitch from '../DetailSwitch.js';
 import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
 import defaultPic from '../../components/images/default.png'
-import UserAvatar from './UserAvatar'
-import UserLikePlusUserAvatar from './UserLikePlusUserAvatar';
 import Liking from './Liking';
 import LikeList from './LikeList';
 
