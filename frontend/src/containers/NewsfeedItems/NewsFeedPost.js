@@ -885,7 +885,7 @@ class NewsfeedPost extends React.Component {
                    <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                  </div>
                  :
-                 <div class="whiteSpacePost innerSeeMore"  style={{padding:'50px', fontSize:'20px',}} >
+                 <div style={{padding:'70px', fontSize:'18px',}} >
 
 
                  {this.props.data.caption}
@@ -911,23 +911,6 @@ class NewsfeedPost extends React.Component {
   <div>
 
 
-    {
-      (this.state.commentsCondition==true) ?
-
-
-      <div style={{marginLeft:'20px'}}>
-         <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
-      </div>
-
-
-
-      :
-
-      <div>
-
-      </div>
-
-    }
 
 
 

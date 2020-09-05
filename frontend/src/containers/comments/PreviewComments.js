@@ -32,17 +32,16 @@ class Comments extends React.Component {
 
      const actions=[
 
-         <Tooltip key="comment-basic-like" title="Like">
-           <span>
+       <Tooltip key="comment-basic-like" title="Like">
 
-              <LikeFilled/>
 
-             <span className="comment-action">{2}</span>
-           </span>
-         </Tooltip>,
+         <LikeFilled/>
 
-         <span key="comment-basic-reply-to">Reply to</span>
+        <span className="comment-action">{2}</span>
 
+    </Tooltip>,
+
+    <span key="comment-basic-reply-to">Reply to</span>
 
 
      ];
@@ -64,13 +63,13 @@ class Comments extends React.Component {
       <div>
       <List
   className="comment-list"
-  header={`${data.length} replies`}
+  header={`${this.props.newsfeed.data.post_comments.length} replies`}
   itemLayout="horizontal"
   dataSource={this.props.newsfeed.data.post_comments.slice(0, 2)}
   renderItem={(item) => (
     <li>
       <Comment
-      class="commentLook"
+
       actions={actions}
       author={item.name}
       avatar={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
