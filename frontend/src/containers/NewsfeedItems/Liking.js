@@ -66,8 +66,9 @@ class Liking extends React.Component{
 
                       <Avatar.Group>
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
-                             <Avatar src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
-                       </Tooltip>
+                             <Avatar
+                              src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
+                        </Tooltip>
                       </Avatar.Group>
                     </span>
 
@@ -78,16 +79,18 @@ class Liking extends React.Component{
                     {
                       (like_people.length==2)?
 
-                        <Avatar.Group>
-
-
+                      <Avatar.Group>
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
-                             <Avatar src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
-                       </Tooltip>
+                             <Avatar
+                              src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
+                        </Tooltip>
 
-                       <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
-                        <Avatar src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
-                      </Tooltip>
+
+
+                        <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
+                             <Avatar
+                              src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
+                        </Tooltip>
 
 
                         </Avatar.Group>

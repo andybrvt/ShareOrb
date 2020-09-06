@@ -66,7 +66,8 @@ class LikeList extends React.Component{
               <Avatar src={profilePic} />
 
             }
-          title={<a href="https://ant.design">{item.username} {item.last_name}</a>}
+
+          title={<a href={"http://localhost:3000/explore/"+item.username}>{item.first_name} {item.last_name}</a>}
           description= {<b>{item.get_followers.length} followers</b>}
         />
 

@@ -134,23 +134,7 @@ class NewsFeedView extends React.Component {
 					</div>
 
 
-					<div class="shadowBox suggestFriendsCSS" style = {{
-						background: 'white',
-						height: '400px',
-						width: '240px',
 
-						// postion: 'fixed',
-						position: 'relative',
-
-						marginTop:40,
-					}}>
-
-
-
-					Today's events
-
-
-					</div>
 
 
 				</div>
@@ -294,8 +278,8 @@ class NewsFeedView extends React.Component {
 
 
 			<div style = {{
-				background:'white',
-				height: '500px',
+
+				height: '450px',
 				width: '400px',
 				// postion: 'fixed',
 				position: 'relative',
@@ -310,14 +294,33 @@ class NewsFeedView extends React.Component {
 
 
 			<div  style={{textAlign:'center', fontSize:'18px',marginTop:'20px'}}>
-			More People
+				More People
 
-		</div>
+			</div>
 
 
-				<div style={{ marginTop:'25px',background:'white'}}>
+				<div style={{ marginTop:'25px'}}>
 
 				<SuggestedFriends  style={{position:'fixed'}}{...this.props}/>
+				<div class="shadowBox suggestFriendsCSS" style = {{
+
+					height: '250px',
+					width: '400px',
+
+					// postion: 'fixed',
+					position: 'relative',
+
+					marginTop:120,
+				}}>
+
+
+
+					<div  style={{textAlign:'center', fontSize:'18px'}}>
+						Today's events
+					</div>
+
+					<Divider/>
+					</div>
 				</div>
 			</div>
 

@@ -883,7 +883,7 @@ class NewsfeedPost extends React.Component {
                    <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                  </div>
                  :
-                 <div style={{padding:'70px', fontSize:'18px',}} >
+                 <div style={{padding:'70px', fontSize:'18px', marginTop:'50px', marginBottom:'50px', }} >
 
 
                  {this.props.data.caption}

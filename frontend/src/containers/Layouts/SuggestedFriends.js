@@ -146,7 +146,7 @@ class SuggestedFriends extends React.Component {
                 avatar={
                   <Avatar src={item.profile_picture} />
                 }
-                title={<a href={"http://localhost:3000/explore/"+item.username}> {item.username}</a>}
+                title={<a href={"http://localhost:3000/explore/"+item.username}> {item.first_name} {item.last_name}</a>}
                 description={item.get_followers.length +" followers"}
               />
 
