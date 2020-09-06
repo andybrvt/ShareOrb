@@ -248,7 +248,7 @@ class WeekCalendar extends React.Component{
                 backgroundColor: item.color
               }}>
                 <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                   'HH:mm a')}</span>
+                   'hh:mm a')}</span>
                 <span className = ' ' > {item.content} </span>
 
               </div>
@@ -498,7 +498,7 @@ class WeekCalendar extends React.Component{
               onClick = {this.onMonthClick}>
               Month
               </Button>
-            
+
 
             </div>
           </div>

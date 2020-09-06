@@ -200,7 +200,7 @@ class DayCalendar extends React.Component{
               }}
               onClick = {() => this.onClickItem(item)}>
               <span > {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                 'HH:mm a')}</span>
+                 'hh:mm a')}</span>
               <span className = ' ' > {item.content} </span>
               </div>
             ))

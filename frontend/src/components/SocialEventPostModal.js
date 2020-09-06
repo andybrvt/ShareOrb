@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Modal, Avatar } from 'antd';
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, notification } from 'antd';
 // import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
@@ -40,6 +40,10 @@ class SocialEventPostModal extends React.Component{
     }
   }
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   handleChange = (values) => {
     this.setState({[values.target.name]: values.target.value})
   }
@@ -49,7 +53,7 @@ class SocialEventPostModal extends React.Component{
     // a 1-24 hour hour so that it cna be used to add into the
     // date and be submited
     let hour = parseInt(time.substring(0,2))
-    let minutes = parseInt(time.substring(3,5))
+    let minutes = time.substring(3,5)
     let ampm = time.substring(5,8)
 
     let convertedTime = ''
@@ -102,14 +106,48 @@ class SocialEventPostModal extends React.Component{
     date: date
   }
 
+  const displayObj = {
+    // This is used to display to the public
+    title: this.state.title,
+    content: this.state.content,
+    startTime: this.state.timeStart,
+    endTime: this.state.timeEnd,
+    location: this.state.location,
+    curId: this.props.curId,
+    date: date
+  }
+
   // This will be used to send objects to the user channel (you can technically do
 //  it with just axius but it is a bit easier )
   ExploreWebSocketInstance.sendSocialEvent(eventObj)
-
-  // now you gotta add a redux
+  this.openNotification('bottomLeft', displayObj)
+  this.setState({
+    title: '',
+    content: '',
+    timeStart: "12:00 AM",
+    timeEnd: "12:30 AM",
+    location: '',
+  })
+  this.props.close()
+  
 
 
   }
+
+
+
+  openNotification = (placement, info) => {
+    // The info parameter will be used to add stuff into the descrption
+
+    const title = this.capitalize(info.title)
+
+  notification.info({
+    message: `New Social Event Posted`,
+    description:
+      'You added an public event '+title+' on '+info.startTime+' to '+info.endTime,
+    placement,
+  });
+};
 
   onStartTimeChange = (time) => {
     console.log(time)
@@ -403,7 +441,9 @@ class SocialEventPostModal extends React.Component{
       visible = {this.props.view}
       onOk = {this.onHandleEventSubmit}
       >
-      Add Social Event {curDate}
+      Add Social Event
+      <br />
+      {curDate}
         <Form
         onChange = {this.handleChange}
         >

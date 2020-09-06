@@ -248,7 +248,7 @@ class PersonalCalendar extends React.Component{
                   }}>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                     'HH:mm a')}</span>
+                     'hh:mm a')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </div>

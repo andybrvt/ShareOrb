@@ -14,12 +14,16 @@ class SocialEventList extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  timeFormater(date){
-    // This will format the dates by the time only because the events will
-    // pretty much follow the day
+  timeFormater(time){
+    // This will change the format of the time properly to the 1-12 hour
+    console.log(time)
+    let hour = parseInt(time.substring(0,2))
+    let minutes = time.substring(3,5)
+    var suffix  = hour >= 12 ? "PM":"AM"
 
-    const newDate = dateFns.format(new Date(date), 'hh:mmaaaaa')
-    return newDate
+    console.log(11%12)
+    hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
+    return hour
 
   }
 
@@ -81,8 +85,8 @@ class SocialEventList extends React.Component{
 
             <span className = 'socialEventTime'>
             <img src = {clock} className = 'socialEventClock' />
-            {item.start_time}-
-            {item.end_time}
+            {this.timeFormater(item.start_time)}-
+            {this.timeFormater(item.end_time)}
             </span>
 
             <span className = 'socialEventLocation'>
