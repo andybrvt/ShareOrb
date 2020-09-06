@@ -23,6 +23,7 @@ class UserAvatar extends React.Component{
     var num=0;
     const avatarColor=['#bfbfbf']
     const textColor=['#FFFFFF']
+    console.log(this.props)
     return (
       <div>
 

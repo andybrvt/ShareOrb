@@ -27,7 +27,7 @@ class NewsfeedPost extends React.Component {
     this.state = {
       visibleModal: false,
       commentPost:'',
-      commentsCondition:false,
+      commentsCondition:true,
       show:false,
       stepCount:0,
       avatarColor:'',

@@ -12,9 +12,11 @@ class UserAvatar extends React.Component{
   }
 
   render(){
+    let like_people = this.props.data.people_like
     var num=0;
     const avatarColor=['#bfbfbf']
     const textColor=['#FFFFFF']
+    console.log(this.props.data)
     return (
       <span>
 
@@ -24,23 +26,23 @@ class UserAvatar extends React.Component{
         >
 
 
-          <Tooltip placement="topLeft" title="Micahel Taylor">
-                <Avatar src="https://images.unsplash.com/photo-1597244359536-862d0fcab3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"/>
+          <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
+                <Avatar src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
           </Tooltip>
 
-          <Tooltip placement="topLeft" title="Larry Donahue">
-                <Avatar src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"/>
+          <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
+                <Avatar src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
           </Tooltip>
 
 
-          <Tooltip placement="topLeft" title="Vince Curella">
+          <Tooltip placement="topLeft" title={`${like_people[2].first_name} ${like_people[2].last_name} `}>
           <Avatar
-          src="https://images.unsplash.com/photo-1597019558926-3eef445fdf60?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+          src={'http://127.0.0.1:8000'+like_people[2].profile_picture}/>
          </Tooltip>
 
-         <Tooltip placement="topLeft" title="Sarah Arfsten">
+         <Tooltip placement="topLeft" title={`${like_people[3].first_name} ${like_people[3].last_name} `}>
          <Avatar
-         src="https://images.unsplash.com/photo-1597346906996-ab57d9b27dda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
+         src={'http://127.0.0.1:8000'+like_people[3].profile_picture}/>
         </Tooltip>
 
 
