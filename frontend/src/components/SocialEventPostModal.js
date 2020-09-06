@@ -129,7 +129,7 @@ class SocialEventPostModal extends React.Component{
     location: '',
   })
   this.props.close()
-  
+
 
 
   }
@@ -190,6 +190,7 @@ class SocialEventPostModal extends React.Component{
         timeStart: time,
       })
     } else if ( startHour === endHour ){
+      console.log('I was high')
       if (startMin < endMin){
         this.setState({
           timeStart: time,
@@ -200,25 +201,29 @@ class SocialEventPostModal extends React.Component{
         endHour = startHour + 1
         console.log(startHour)
         console.log(endHour)
-        if (endHour < 10){
-          endHour = '0'+endHour
-        } else {
-          if(ampm === ' AM'){
-            endHour = endHour
-          } else if (ampm === ' PM'){
-            endHour = endHour-12
-            if (endHour < 10){
-              endHour = '0'+endHour
-            }
-          }
-        }
         if (startHour === 11 && ampm === ' AM'){
           endTime =   '12:' + endMin + ' PM'
-        } else if ((startHour-12) === 11 && ampm === ' PM'){
+        } else if (startHour === 23 && ampm === ' PM'){
           endTime =  '12:' + endMin + ' AM'
         } else {
+          if (endHour < 10){
+            endHour = '0'+endHour
+          } else {
+            if(ampm === ' AM'){
+              endHour = endHour
+            } else if (ampm === ' PM'){
+              endHour = endHour-12
+              if (endHour < 10){
+                endHour = '0'+endHour
+              }
+            }
+          }
           endTime = endHour + ':'+endMin+ampm
+
         }
+
+
+
         console.log(time, endTime)
         this.setState({
           timeStart:time,
@@ -228,92 +233,108 @@ class SocialEventPostModal extends React.Component{
         // This is the case where the times are identical to each other
         // REMEMBER THAT ENDHOUR AND STARTHOUR ARE USING THE 1-24 TIME
         console.log(startHour, endHour)
-
-
-        if (startMin === 30){
-          endMin = '00'
-          if (startHour === 12){
-            endHour = '01'
-            endTime = endHour + ':'+endMin+' PM'
-          } else if (startHour === 11 && ampm === ' AM'){
-              endTime =   '12:' + endMin + ' PM'
-            } else if ((startHour-12) === 11 && ampm === ' PM'){
-              endTime =  '12:' + endMin + ' AM'
+        if (startHour === 0 && ampm === ' AM' && startMin === 0 ){
+          endTime = '12:30 AM'
+        } else if (startHour === 12 && ampm === ' PM' && startMin === 0){
+          endTime = '12:30 PM'
+        } else {
+          if (startMin === 30){
+            endMin = '00'
+            if (startHour === 12){
+              endHour = '01'
+              endTime = endHour + ':'+endMin+' PM'
+            } else if (startHour === 11 && ampm === ' AM'){
+                endTime =   '12:' + endMin + ' PM'
+              } else if ((startHour-12) === 11 && ampm === ' PM'){
+                endTime =  '12:' + endMin + ' AM'
+              }
+            else {
+              console.log(endHour)
+              endHour = startHour +1
+                if (endHour<10){
+                    endHour = '0'+endHour
+                } else {
+                  if(ampm === ' AM'){
+                    endHour = endHour
+                  } else if (ampm === ' PM'){
+                    endHour = endHour-12
+                    if (endHour < 10){
+                      endHour = '0'+endHour
+                    }
+                  }
+                }
+              endTime = endHour + ':' +endMin+ampm
             }
-          else {
-            console.log(endHour)
-            endHour = startHour +1
-              if (endHour<10){
-                  endHour = '0'+endHour
-              } else {
-                if(ampm === ' AM'){
-                  endHour = endHour
-                } else if (ampm === ' PM'){
+          } else if (startMin === 0){
+            endMin = '30'
+            console.log(ampm)
+            if (endHour<10){
+                endHour = '0'+endHour
+            } else {
+              if(ampm === ' AM'){
+                console.log('am')
+                endHour = endHour
+              } else if (ampm === ' PM'){
+                console.log('pm')
+                if (endHour === 12){
+                  endHour = 12
+                }else {
                   endHour = endHour-12
                   if (endHour < 10){
                     endHour = '0'+endHour
                   }
                 }
               }
-            endTime = endHour + ':' +endMin+ampm
-          }
-        } else if (startMin === 0){
-          endMin = '30'
-          console.log(ampm)
-          if (endHour<10){
-              endHour = '0'+endHour
-          } else {
-            if(ampm === ' AM'){
-              console.log('am')
-              endHour = endHour
-            } else if (ampm === ' PM'){
-              console.log('pm')
-              if (endHour === 12){
-                endHour = 12
-              }else {
-                endHour = endHour-12
-                if (endHour < 10){
-                  endHour = '0'+endHour
-                }
-              }
             }
+            endTime = endHour + ':'+endMin +ampm
           }
-          endTime = endHour + ':'+endMin +ampm
         }
+
+
+
         this.setState({
           timeStart:time,
           timeEnd: endTime
         })
+
       }
 
 
       } else if ( startHour > endHour ){
         // let startHour = parseInt(time.substring(0,2))
         // let startMin = parseInt(time.substring(3,5))
-        if (startMin === 30){
-          startMin = "00"
-          startHour = startHour + 1
-        } else if (startMin !== 30){
-          startMin = '30'
-        }
-        if (startHour < 10){
-          startHour = '0'+startHour
-        } else{
-          if(ampm === ' AM'){
-            startHour = startHour
-          } else if (ampm === ' PM'){
-            startHour = startHour-12
-            if (startHour < 10){
-              startHour = '0'+startHour
-            }          }
-        }
-        if ((startHour+11) === 11 && ampm === ' AM'){
-          endTime =   '12:' + startMin + ' PM'
-        } else if ((startHour-1) === 11 && ampm === ' PM'){
-          endTime =  '12:' + startMin + ' AM'
+
+
+        console.log(startHour, startMin, ampm)
+        if (startHour === 11 && ampm === ' AM' && startMin === 30){
+          endTime =   '12:00 PM'
+        } else if (startHour === 23 && ampm === ' PM' && startMin === 30){
+          endTime =  '12:00 AM'
         } else {
+          if (startMin === 30){
+            startMin = "00"
+            startHour = startHour + 1
+          } else if (startMin !== 30){
+            startMin = '30'
+          }
+          if (startHour < 10){
+            startHour = '0'+startHour
+          } else{
+            if(ampm === ' AM'){
+              startHour = startHour
+            } else if (ampm === ' PM'){
+              startHour = startHour-12
+              if (startHour < 10){
+                startHour = '0'+startHour
+              }
+            }
+          }
+
           endTime = startHour + ':'+startMin+ampm
         }
+
+
+
 
         this.setState({
           timeStart: time,
