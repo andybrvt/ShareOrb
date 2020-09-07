@@ -254,6 +254,22 @@ class AddOneLikeToPost(APIView):
         grabPost.save()
         return Response('View post in console')
 
+class AddOneLikeToComment(APIView):
+    def post(self, request, id, *args, **kwargs):
+        # grabs post based off of id in newsfeed
+        grabComment= models.Comment.objects.get(id=id)
+        if(grabComment.comment_like_condition==False):
+            grabComment.comment_like_count+=1
+            grabComment.comment_like_condition=True
+        else:
+            grabComment.comment_like_count-=1
+            grabComment.comment_like_condition=False
+
+        grabComment.save()
+        return Response('View post in console')
+
+
+
 
 class postCommentTest(APIView):
 
