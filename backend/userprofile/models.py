@@ -121,7 +121,7 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, blank = True)
     active = models.BooleanField(default=False, blank = True)
     commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= 'userComment', on_delete = models.CASCADE, null = True)
-
+    
     # class Meta:
     #     ordering = ['created_on']
 

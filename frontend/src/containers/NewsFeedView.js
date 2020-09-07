@@ -308,16 +308,16 @@ class NewsFeedView extends React.Component {
 					width: '400px',
 
 					// postion: 'fixed',
-					position: 'relative',
+					overflow: 'hidden',
 
 					marginTop:120,
 				}}>
 
 
 
-					<div  style={{textAlign:'center', fontSize:'18px'}}>
+					<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
 						Today's events
-					</div>
+					</span>
 
 					<Divider/>
 					</div>

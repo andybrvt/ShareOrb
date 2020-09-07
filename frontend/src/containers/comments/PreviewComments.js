@@ -29,7 +29,7 @@ class Comments extends React.Component {
 
 
    render(){
-
+     console.log(this.props.newsfeed.data.post_comments)
      const actions=[
 
        <Tooltip key="comment-basic-like" title="Like">
@@ -63,7 +63,6 @@ class Comments extends React.Component {
       <div>
       <List
   className="comment-list"
-  header={`${this.props.newsfeed.data.post_comments.length} replies`}
   itemLayout="horizontal"
   dataSource={this.props.newsfeed.data.post_comments.slice(0, 2)}
   renderItem={(item) => (
@@ -72,7 +71,7 @@ class Comments extends React.Component {
 
       actions={actions}
       author={item.name}
-      avatar={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
+      avatar={'http://127.0.0.1:8000'+item.commentUser.profile_picture}
       content={item.body}
       datetime={"few seconds ago"}
       />
