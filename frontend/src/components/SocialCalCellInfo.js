@@ -123,7 +123,7 @@ class SocialCalCellInfo extends React.Component{
       }
     }
 
-    console.log(peopleLikeId)
+    console.log(peopleLike)
 
     return (
       <Modal

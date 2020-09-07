@@ -152,50 +152,52 @@ class SocialCalendar extends React.Component{
           console.log(toDoStuff[0].get_socialCalEvent)
           days.push(
             <div
-              className ={`col cell hoverCell ${dateFns.isSameDay(day, currentMonth) ?
+              className ={`col cell ${dateFns.isSameDay(day, currentMonth) ?
             "selected": ""
               }`}
               key = {day}
             >
-            {
-              dateFns.isSameDay(day, currentMonth) ?
-              <div>
-              <PlusOutlined
-              onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
-              className = 'plusButton'/>
-              <CalendarOutlined
-              onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-              className = 'eventButton'
-               />
-              <EyeOutlined
-              onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-              className = 'eyeButton'/>
-              </div>
 
-              : dateFns.isAfter( day, currentMonth) ?
-              <div>
-              <CalendarOutlined
-              onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-              className = 'eventButtonAfter'
-               />
-
-               <EyeOutlined
-               onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-               className = 'eyeButtonAfter'/>
-               </div>
-
-               :
-
-              <EyeOutlined
-              onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-              className = 'eyeButtonPass'/>
-
-            }
             {
               toDoStuff[0].coverPic ?
               <div
               // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+              className = 'hoverCell'
               >
+              {
+                dateFns.isSameDay(day, currentMonth) ?
+                <div>
+                <PlusOutlined
+                onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+                className = 'plusButton'/>
+                <CalendarOutlined
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                className = 'eventButton'
+                 />
+                <EyeOutlined
+                onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                className = 'eyeButton'/>
+                </div>
+
+                : dateFns.isAfter( day, currentMonth) ?
+                <div>
+                <CalendarOutlined
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                className = 'eventButtonAfter'
+                 />
+
+                 <EyeOutlined
+                 onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                 className = 'eyeButtonAfter'/>
+                 </div>
+
+                 :
+
+                <EyeOutlined
+                onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                className = 'eyeButtonPass'/>
+
+              }
               <Avatar
               className = 'imgCover'
               size = {250}
@@ -207,14 +209,100 @@ class SocialCalendar extends React.Component{
               : toDoStuff[0].get_socialCalEvent.length !== 0 ?
 
               <div>
-              <span className = "bg"> {formattedDate}</span>
+
+                <div
+                className = 'eventBoxListHeader'
+                >
+                <span className = "bg"> {formattedDate}</span>
+                {
+                  dateFns.isSameDay(day, currentMonth) ?
+                  <div
+                  className = 'buttonHolder'
+                  >
+                  <PlusOutlined
+                  onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+                  className = 'plusButton'/>
+                  <CalendarOutlined
+                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                  className = 'eventButton'
+                   />
+                  <EyeOutlined
+                  onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                  className = 'eyeButton'/>
+                  </div>
+
+                  : dateFns.isAfter( day, currentMonth) ?
+                  <div
+                  className = 'buttonHolder'
+
+                  >
+                  <CalendarOutlined
+                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                  className = 'eventButtonAfter'
+                   />
+
+                   <EyeOutlined
+                   onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                   className = 'eyeButtonAfter'/>
+                   </div>
+
+                   :
+                  <div
+                  className = 'buttonHolder'
+                  >
+                  <EyeOutlined
+                  onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                  className = 'eyeButtonPass'/>
+                  </div>
+                }
+                </div>
 
               <SocialCellCoverEvents
               events = {toDoStuff[0].get_socialCalEvent}/>
               </div>
 
               :
+
+              <div
+              className = 'hoverCell'
+              >
+              {
+                dateFns.isSameDay(day, currentMonth) ?
+                <div >
+                <PlusOutlined
+                onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+                className = 'plusButton'/>
+                <CalendarOutlined
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                className = 'eventButton'
+                 />
+                <EyeOutlined
+                onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                className = 'eyeButton'/>
+                </div>
+
+                : dateFns.isAfter( day, currentMonth) ?
+                <div>
+                <CalendarOutlined
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                className = 'eventButtonAfter'
+                 />
+
+                 <EyeOutlined
+                 onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                 className = 'eyeButtonAfter'/>
+                 </div>
+
+                 :
+
+                <EyeOutlined
+                onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                className = 'eyeButtonPass'/>
+
+              }
+
               <span className = "bg"> {formattedDate}</span>
+              </div>
             }
 
 
@@ -227,13 +315,15 @@ class SocialCalendar extends React.Component{
           ]
           days.push(
           <div
-            className ={`col cell hoverCell ${ dateFns.isSameDay(day, currentMonth) ?
+            className ={`col cell  ${ dateFns.isSameDay(day, currentMonth) ?
           "selected": ""
             }`}
             key = {day}
             // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
           >
-
+          <div
+          className = 'hoverCell'
+          >
           {
             dateFns.isSameDay(day, currentMonth) ?
             <div>
@@ -270,7 +360,7 @@ class SocialCalendar extends React.Component{
           }
 
           <span className = "bg"> {formattedDate}</span>
-
+          </div>
         </div>
         )}
       toDoStuff = []

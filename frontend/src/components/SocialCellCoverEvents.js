@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
-import './labelCSS/SocialModal.css';
+import '../containers/Container_CSS/SocialCal.css';
 import {ClockCircleOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import clock from './images/clock.png';
@@ -20,8 +20,9 @@ class SocialCellCoverEvents extends React.Component{
   timeFormater(time){
     // This will change the format of the time properly to the 1-12 hour
     console.log(time)
-    let hour = parseInt(time.substring(0,2))
-    let minutes = time.substring(3,5)
+    const timeList = time.split(':')
+    let hour = parseInt(timeList[0])
+    let minutes = timeList[1]
     var suffix  = hour >= 12 ? "PM":"AM"
 
     console.log(11%12)
@@ -48,31 +49,34 @@ class SocialCellCoverEvents extends React.Component{
       },
         ];
     return (
-      <div>
-      <List
-        itemLayout="horizontal"
-        dataSource={this.props.events}
-        renderItem={item => (
-          <List.Item>
-            <div>
-              <span> {this.capitalize(item.title)} </span>
-              <span className = 'socialEventTime'>
-              <br />
-              <img src = {clock} className = 'socialEventClock' />
-              {this.timeFormater(item.start_time)}-
-              {this.timeFormater(item.end_time)}
-              </span>
-              <br />
-              <span className = 'socialEventCapcity'>
-              <img src ={userIcon} className = 'socialUserIcon' />
-              {item.persons.length}
-              <AvatarGroups />
-              </span>
-            </div>
-          </List.Item>
-        )}
-      />
-      </div>
+
+        <div className = 'coverCellBox'>
+        <List
+          itemLayout="horizontal"
+          dataSource={this.props.events}
+          className = 'coverCellBoxList'
+          renderItem={item => (
+            <List.Item>
+              <div>
+                <span> {this.capitalize(item.title)} </span>
+                <span className = 'socialEventTime'>
+                <br />
+                <img src = {clock} className = 'socialEventClock' />
+                {this.timeFormater(item.start_time)}-
+                {this.timeFormater(item.end_time)}
+                </span>
+                <br />
+                <span className = 'socialEventCapcity'>
+                <img src ={userIcon} className = 'socialUserIcon' />
+                {item.persons.length}
+                <AvatarGroups />
+                </span>
+              </div>
+            </List.Item>
+          )}
+        />
+        </div>
+
     )
   }
 }

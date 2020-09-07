@@ -19,8 +19,9 @@ class SocialEventList extends React.Component{
   timeFormater(time){
     // This will change the format of the time properly to the 1-12 hour
     console.log(time)
-    let hour = parseInt(time.substring(0,2))
-    let minutes = time.substring(3,5)
+    const timeList = time.split(':')
+    let hour = parseInt(timeList[0])
+    let minutes = timeList[1]
     var suffix  = hour >= 12 ? "PM":"AM"
 
     console.log(11%12)
