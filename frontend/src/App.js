@@ -62,7 +62,9 @@ class App extends Component {
       this.props.addSocialCommentOldM.bind(this),
       this.props.addSocialEventOld.bind(this),
       this.props.addSocialCalCellNew.bind(this),
-      this.props.addSocialCalCellNewM.bind(this)
+      this.props.addSocialCalCellNewM.bind(this),
+      this.props.addUserSocialEvent.bind(this),
+      this.props.addUserSocialEventM.bind(this)
     )
   }
 
@@ -139,7 +141,9 @@ const mapDispatchToProps = dispatch => {
     addSocialCommentOldM: socialObj => dispatch(socialActions.addSocialCommentOldM(socialObj)),
     addSocialEventOld: exploreObj => dispatch(exploreActions.addSocialEventOld(exploreObj)),
     addSocialCalCellNew: exploreObj => dispatch(exploreActions.addSocialCalCellNew(exploreObj)),
-    addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj))
+    addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj)),
+    addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
+    addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj))
   }
 }
 

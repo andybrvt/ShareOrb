@@ -754,6 +754,51 @@ class ExploreConsumer(JsonWebsocketConsumer):
             }
             self.send_new_explore(content)
 
+    def add_user_social_event(self, data):
+        # This is pretty much gonna be where you will use the eventId to get the
+        # eventId and then you will use userId to get the user to add to the
+        # event
+        user = get_object_or_404(User, id = data['userId'])
+        curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+        curSocialEvent.persons.add(user)
+
+        # socialCalCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+
+
+        socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
+        userObj = FollowUserSerializer(user, many = False).data
+        # socialCalCellObj = SocialCalCellSerializer(socialCalCell, many = False).data
+        hostObj = socialEventObj['host']
+
+
+        print(socialEventObj)
+        print(userObj)
+        print(hostObj)
+        print(data)
+
+        hostContent = {
+        # The host obj will be sent to the channel of the host
+            'command': 'add_user_social_event',
+            'socialEventObj': socialEventObj,
+            'userObj': userObj,
+            'socialCellId':  data['socialCalCellId'],
+            'reciever': hostObj
+        }
+
+        userContent = {
+        # The userObj will be sent to the channel of the user
+            'command': 'add_user_social_event',
+            'socialEventObj': socialEventObj,
+            'userObj': userObj,
+            'socialCellId':  data['socialCalCellId'],
+            'reciever': userObj
+        }
+
+        self.send_new_explore(hostContent)
+        self.send_new_explore(userContent)
+
+
+
         # CONTINUE HERE, IT SHOULD BE SIMILAR TO THE VIEWS IN MYSOCIALCAL
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer
@@ -903,6 +948,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_social_comment(data)
         if data['command'] == 'create_social_event':
             self.create_social_event(data)
+        if data['command'] == 'add_user_social_event':
+            self.add_user_social_event(data)
 
     def new_follower_following(self, event):
         followObj = event['followObj']

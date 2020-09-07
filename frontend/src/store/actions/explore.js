@@ -111,6 +111,14 @@ export const addSocialEventOld = (exploreObj) => {
   }
 }
 
+export const addUserSocialEvent = (exploreObj) => {
+  // This will be used to add the user to the correct event
+  return {
+    type: actionTypes.ADD_USER_SOCIAL_EVENT,
+    exploreObj: exploreObj
+  }
+}
+
 
 export const addSocialCalCellNew = (exploreObj) => {
 

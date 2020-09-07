@@ -185,6 +185,28 @@ class WebSocketExplore {
       this.callbacks['social_cal_cell_new_m'](exploreObj)
 
 
+    } else if (command == 'add_user_social_event'){
+      // This will add the user into the evnets of the calendar ... so this is gonna
+      // take a lot of searching SO WE GOTTA FIX THIS LATER ON
+
+      // The socialCalCellId will be used to find the the correct cell
+      // The socialEventId will be used to find the correct event in that cal cell
+      // The usreboejct is just that person that is being added to the event
+      //  We will take the host form teh socialEventObj
+
+
+      // You gotta do one for the modal event and then one for the over all calendar
+      const socialCalCellId = parsedData.socialCellId
+      const socialEventObj = parsedData.socialEventObj
+      const userObj = parsedData.userObj
+      const exploreObj = {
+        socialCalCellId: socialCalCellId,
+        socialEventObj: socialEventObj,
+        userObj: userObj
+      }
+
+      this.callbacks['add_user_social_event'](exploreObj)
+      this.callbacks['add_user_social_event_m'](exploreObj)
     }
 
 
@@ -206,7 +228,9 @@ class WebSocketExplore {
      addSocialCommentOldM,
      addSocialEventOld,
      addSocialCalCellNew,
-     addSocialCalCellNewM
+     addSocialCalCellNewM,
+     addUserSocialEvent,
+     addUserSocialEventM,
    ){
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
@@ -223,6 +247,8 @@ class WebSocketExplore {
     this.callbacks['social_event_old'] = addSocialEventOld
     this.callbacks['social_cal_cell_new'] = addSocialCalCellNew
     this.callbacks['social_cal_cell_new_m'] = addSocialCalCellNewM
+    this.callbacks['add_user_social_event'] = addUserSocialEvent
+    this.callbacks['add_user_social_event_m'] = addUserSocialEventM
   }
 
 
@@ -330,6 +356,21 @@ class WebSocketExplore {
     this.sendExplore({
       eventObj: eventObj,
       command: 'create_social_event'
+    })
+  }
+
+  sendSocialEventParticipate = (userId, eventId, socialCalCellId) => {
+    // This event obj will just be that of the event list as well as the user
+    // who wants to join, so you will send it into the backend
+    // We will be getting the id of the user and the id of the event
+
+
+    console.log(userId, eventId)
+    this.sendExplore({
+      userId: userId,
+      eventId: eventId,
+      socialCalCellId: socialCalCellId,
+      command: 'add_user_social_event'
     })
   }
 

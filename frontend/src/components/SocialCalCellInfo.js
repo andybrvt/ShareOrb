@@ -83,6 +83,7 @@ class SocialCalCellInfo extends React.Component{
     let socialCalDate = ''
     let peopleLike = []
     let curDate = ''
+    let socialCalCellId = ''
 
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
@@ -110,6 +111,9 @@ class SocialCalCellInfo extends React.Component{
       if(this.props.curSocialDate){
         curDate = dateFns.format(this.props.curSocialDate, 'yyyy-MM-dd')
       }
+      if(this.props.socialObject[0].id){
+        socialCalCellId = this.props.socialObject[0].id
+      }
 
     }
 
@@ -125,7 +129,8 @@ class SocialCalCellInfo extends React.Component{
       <Modal
       visible = {this.props.showSocialModal}
       onCancel = {() => this.props.closeSocialModal()}
-      width = {1600}
+      width = {1450}
+      height = {1100}
       footer = {null}
       className = 'socialModal'
       >
@@ -234,7 +239,10 @@ class SocialCalCellInfo extends React.Component{
           owner = {socialCalUserId}
           items = {socialCalComments}
           profilePic = {this.props.curProfilePic}/>
-          <SocialEventList items = {socialCalEvents}/>
+          <SocialEventList
+          curId = {this.props.curId}
+          socialCalCellId = {socialCalCellId}
+          items = {socialCalEvents}/>
 
         </div>
       </div>

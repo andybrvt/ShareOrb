@@ -115,6 +115,23 @@ const closeSocialEventModal = (state,action) => {
   })
 }
 
+const addUserSocialEventM = (state, action) => {
+
+  const userObj = action.socialObj.userObj
+  const socialEventId = action.socialObj.socialEventObj.id
+  return updateObject (state, {
+    socialObject: [{
+      ...state.socialObject[0],
+      get_socialCalEvent: state.socialObject[0].get_socialCalEvent.map(
+        events => events.id === socialEventId ? {
+          ...events,
+          persons: [... events.persons, userObj ]
+        } : events
+      )
+    }]
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -141,6 +158,8 @@ const reducer = (state = initialState, action) => {
       return closeSocialEventModal(state, action)
     case actionTypes.ADD_SOCIAL_CELL_NEW_M:
       return addSocialCellNewM(state, action)
+    case actionTypes.ADD_USER_SOCIAL_EVENT_M:
+      return addUserSocialEventM (state, action);
     default:
       return state;
   }

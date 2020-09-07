@@ -293,7 +293,6 @@
   width: 100px;
   height: 40px;
 }
-
 .joinEventButton .joinText{
   /* background-color: red; */
   position: absolute;
@@ -303,6 +302,27 @@
   /* transform: translateY(-50%); */
 
 }
+
+.alreadyJoinButton {
+  background-color: gainsboro;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 10%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+.alreadyJoinButton .joinText{
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+}
+
 
 .viewEventButton{
   /* background-color: red; */

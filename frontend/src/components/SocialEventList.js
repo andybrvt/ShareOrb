@@ -7,6 +7,8 @@ import clock from './images/clock.png';
 import location from './images/pin.png';
 import AvatarGroups from './AvatarGroups';
 import userIcon from './images/user.png';
+import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+
 
 
 class SocialEventList extends React.Component{
@@ -25,6 +27,25 @@ class SocialEventList extends React.Component{
     hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
     return hour
 
+  }
+
+  checkUser = (personList) => {
+    // This will check if a users exist in a list and will return true or false
+    // The personList is a list of dictionary of users
+    let personListId = []
+    for (let i = 0; i<personList.length; i++){
+      const userId = personList[i].id
+      personListId.push(userId)
+    }
+
+    return personListId.includes(this.props.curId)
+  }
+
+  sendJoinUserEvent = (userId, eventId, socialCalCellId )=> {
+    // This will be used to send the userId and the event Id to the websocket
+    console.log(userId, eventId)
+
+    ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
 
@@ -102,9 +123,35 @@ class SocialEventList extends React.Component{
             <AvatarGroups />
             </span>
 
-            <div className = 'joinEventButton'>
-              <span className = 'joinText'> Join </span>
+
+            {
+              this.checkUser(item.persons) ?
+                item.host.id === this.props.curId ?
+                <div className = 'alreadyJoinButton'>
+                <span className = 'joinText'> Host </span>
+              </div>
+
+              :
+
+              <div className = 'alreadyJoinButton'>
+              <span className = 'joinText'> Leave </span>
             </div>
+
+
+
+                 :
+
+                 <div
+                 onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
+                 className = 'joinEventButton'>
+                   <span className = 'joinText'> Join </span>
+                 </div>
+
+            }
+
+
+
+
             <div className = 'viewEventButton'>
               <span className = 'viewText'> View </span>
             </div>

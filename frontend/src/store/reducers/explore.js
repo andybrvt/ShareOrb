@@ -359,6 +359,59 @@ export const addSocailCalCell = (state, action) => {
 
 }
 
+export const addUserSocialEvent = (state, action) => {
+  // This will be used to add specific people to an event that exist on your soicla calendar
+  // Remember that the userObj is the person that is being added to the event
+
+
+  const calendarOwnerId = action.exploreObj.socialEventObj.host.id
+  const calendarCalCellId = action.exploreObj.socialCalCellId
+  const socialEventId = action.exploreObj.socialEventObj.id
+  const userObj = action.exploreObj.userObj
+
+  let curProfileId = ''
+  // This will be used when you are the host and that the socialcalendar owner is you
+  // so this makes sure it gets added to your calendar (the cur calendar)
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
+  return updateObject( state, {
+    profiles: state.profiles.map(
+      profile => profile.id === calendarOwnerId ? {
+        ... profile,
+        get_socialCal: profile.get_socialCal.map(
+          socialCell => socialCell.id === calendarCalCellId ? {
+            ... socialCell,
+            get_socialCalEvent: socialCell.get_socialCalEvent.map(
+              events => events.id === socialEventId ? {
+                ...events,
+                persons: [...events.persons, userObj]
+              }: events
+            )
+          } : socialCell
+        )
+      } : profile
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        socialCell => socialCell.id === calendarCalCellId ? {
+          ... socialCell,
+          get_socialCalEvent: socialCell.get_socialCalEvent.map(
+            events => events.id === socialEventId ? {
+              ... events,
+              persons: [... events.persons, userObj]
+            } : events
+          )
+        } : socialCell
+      )
+    } : state.profile
+
+  })
+
+}
+
 
 
 
@@ -395,6 +448,8 @@ const reducer = (state = initialState, action) => {
       return addSocialEventOld(state,action)
     case actionTypes.ADD_SOCIAL_CELL_NEW:
       return addSocailCalCell(state, action)
+    case actionTypes.ADD_USER_SOCIAL_EVENT:
+      return addUserSocialEvent(state, action)
     default:
       return state;
   };

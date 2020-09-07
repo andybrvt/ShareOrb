@@ -83,3 +83,11 @@ export const addSocialCalCellNew = (socialObj) => {
     socialObj: socialObj
   }
 }
+
+export const addUserSocialEventM = (socialObj) => {
+  // This will add users to the social events in the calendar cell modal
+  return {
+    type: actionTypes.ADD_USER_SOCIAL_EVENT_M,
+    socialObj: socialObj
+  }
+}

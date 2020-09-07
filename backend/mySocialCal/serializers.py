@@ -59,14 +59,14 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.SocialCalItems
-        fields = ('socialItemType', 'socialItemCaption', 'created_at', 'creator',  'itemUser', 'itemImage' )
+        fields = ('id','socialItemType', 'socialItemCaption', 'created_at', 'creator',  'itemUser', 'itemImage' )
 
 class SocialCalEventSerializer(serializers.ModelSerializer):
 
 
     class Meta:
         model = models.SocialCalEvent
-        fields = ('persons', 'host', 'title', 'content', 'start_time', 'end_time', 'location' )
+        fields = ('id','persons', 'host', 'title', 'content', 'start_time', 'end_time', 'location' )
 
 
     def to_representation(self, instance):
@@ -83,7 +83,7 @@ class SocialCalCommentSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.SocialCalComment
-        fields = ('body', 'created_on', 'commentUser' )
+        fields = ('id','body', 'created_on', 'commentUser' )
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
