@@ -12,11 +12,13 @@ class UserAvatar extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     let like_people = this.props.data.people_like
     var num=0;
     const avatarColor=['#bfbfbf']
     const textColor=['#FFFFFF']
     console.log(this.props.data)
+    console.log(like_people)
     return (
       <span>
 

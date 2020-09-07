@@ -3,7 +3,6 @@ import { Avatar, Tooltip } from "antd";
 import { UserOutlined, AntDesignOutlined } from "@ant-design/icons";
 import "./NewsfeedPost.css";
 import UserAvatar from './UserAvatar'
-import UserLikePlusUserAvatar from './UserLikePlusUserAvatar';
 
 class Liking extends React.Component{
 
@@ -15,17 +14,17 @@ class Liking extends React.Component{
   }
 
   render(){
-    let like_people = this.props.data.people_like
-    let profilePic = ''
-
-    if (this.props.data.user.profile_picture){
-      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
-    }
-
-    console.log(profilePic)
+    let like_people = this.props.like_people
+    // let profilePic = ''
+    //
+    // if (this.props.data.user.profile_picture){
+    //   profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+    // }
+    //
+    // console.log(profilePic)
     console.log(like_people)
-    let temp="http://127.0.0.1:8000"+this.props.data.post_images;
-    let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
+    // let temp="http://127.0.0.1:8000"+this.props.data.post_images;
+    // let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
     return (
       <div class="likeCSS">
 

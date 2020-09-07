@@ -10,8 +10,8 @@ import './labelCSS/SocialModal.css';
 import {PictureOutlined} from '@ant-design/icons';
 import AvatarGroups from './AvatarGroups';
 import ExploreWebSocketInstance from '../../src/exploreWebsocket';
-
-
+import UserAvatar from'../containers/NewsfeedItems/UserAvatar.js';
+import Liking from'../containers/NewsfeedItems/Liking.js';
 class SocialCalCellInfo extends React.Component{
 
   // state = {
@@ -74,6 +74,7 @@ class SocialCalCellInfo extends React.Component{
 
   render(){
     console.log(this.props)
+
     let socialCalItems = []
     let socialCalEvents = []
     let socialCalComments = []
@@ -81,7 +82,7 @@ class SocialCalCellInfo extends React.Component{
     let socialCalUserId = ''
     let socialCalProfilePic = ''
     let socialCalDate = ''
-    let peopleLike = []
+    let people_like = []
     let curDate = ''
     let socialCalCellId = ''
 
@@ -106,7 +107,7 @@ class SocialCalCellInfo extends React.Component{
         socialCalDate = this.props.socialObject[0].socialCaldate
       }
       if(this.props.socialObject[0].people_like){
-        peopleLike = this.props.socialObject[0].people_like
+        people_like = this.props.socialObject[0].people_like
       }
       if(this.props.curSocialDate){
         curDate = dateFns.format(this.props.curSocialDate, 'yyyy-MM-dd')
@@ -117,20 +118,20 @@ class SocialCalCellInfo extends React.Component{
 
     }
 
-    if (peopleLike.length > 0){
-      for (let i = 0; i < peopleLike.length; i++){
-        peopleLikeId.push(peopleLike[i].id)
+    if (people_like.length > 0){
+      for (let i = 0; i < people_like.length; i++){
+        peopleLikeId.push(people_like[i].id)
       }
     }
 
-    console.log(peopleLikeId)
+    console.log(people_like)
 
     return (
       <Modal
       visible = {this.props.showSocialModal}
       onCancel = {() => this.props.closeSocialModal()}
-      width = {1450}
-      height = {1100}
+      width = {1600}
+      
       footer = {null}
       className = 'socialModal'
       >
@@ -189,9 +190,9 @@ class SocialCalCellInfo extends React.Component{
         }
 
 
-        <span className = 'socialLikeCommentText'> {peopleLike.length} Likes . {socialCalComments.length} comments </span>
+        <span className = 'socialLikeCommentText'> {people_like.length} Likes . {socialCalComments.length} comments </span>
         <div className = 'socialLikeAvatar'>
-          <AvatarGroups />
+          <Liking {...this.props} like_people={people_like}/>
         </div>
         </div>
 
