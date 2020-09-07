@@ -17,7 +17,7 @@ import ava1 from '../components/images/avatar.jpg'
 import SocialCalCellInfo from '../components/SocialCalCellInfo';
 import SocialUploadPicModal from '../components/SocialUploadPicModal';
 import SocialEventPostModal from '../components/SocialEventPostModal';
-
+import SocialCellCoverEvents from '../components/SocialCellCoverEvents';
 
 class SocialCalendar extends React.Component{
 
@@ -149,7 +149,7 @@ class SocialCalendar extends React.Component{
           // The socialEvents should only have 1 item because it holds just the single
           // social cell
           const socialEvents = toDoStuff
-          console.log(toDoStuff[0])
+          console.log(toDoStuff[0].get_socialCalEvent)
           days.push(
             <div
               className ={`col cell hoverCell ${dateFns.isSameDay(day, currentMonth) ?
@@ -204,8 +204,16 @@ class SocialCalendar extends React.Component{
               <span className = "bgD"> {formattedDate}</span>
               </div>
 
-              :
+              : toDoStuff[0].get_socialCalEvent.length !== 0 ?
 
+              <div>
+              <span className = "bg"> {formattedDate}</span>
+
+              <SocialCellCoverEvents
+              events = {toDoStuff[0].get_socialCalEvent}/>
+              </div>
+
+              :
               <span className = "bg"> {formattedDate}</span>
             }
 
