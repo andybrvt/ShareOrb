@@ -242,17 +242,27 @@
 }
 
 .coverCellBox{
-  /* background-color: red; */
+    /* background-color: red; */
   width: 250px;
   /* width: 100px;`` */
   /* padding: -100px; */
   margin-left: -13px;
   overflow: auto;
-  height: 247px;
+  height: 210px;
 }
 
 .coverCellBoxList {
   /* background-color: blue; */
+
+}
+.coverCellBoxList .coverCellBoxItem {
+  /* background-color: red; */
+  margin: 2px;
+  width: 232px;
+  padding-left: 3px;
+  border-radius: 5px;
+  border: 1px solid gainsboro;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
 
@@ -266,9 +276,12 @@
 
 .eventBoxListHeader .buttonHolder {
   /* margin-top: 5px; */
+  position: relative;
+  left: 3px;
   padding-top:10px;
   /* background-color: red; */
 }
+
 .eventBoxListHeader .plusButton {
   /* color: red; */
   /* position:absolute; */
@@ -278,6 +291,11 @@
   /* font-size: 40px; */
   z-index: 1;
   font-size: 24px;
+
+}
+
+.eventBoxListHeader .plusButton:hover{
+  transform: scale(1.2)
 
 }
 .eventBoxListHeader .eventButton {
@@ -311,7 +329,53 @@
 
 }
 
+.coverEventCapacity{
+  /* background-color: red; */
+  display: flex;
+}
+.coverEventCapacity .coverEventNumber{
+  /* background-color: red; */
+  padding-top: 5px;
+}
 
+.coverEventCapacity .avatarContainer{
+  /* background-color: blue; */
+  margin-left: 5px;
+}
+
+.alreadyJoinButtonCover{
+  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  width: 60px;
+  height: 30px;
+}
+.alreadyJoinButtonCover .joinText{
+  position: relative;
+  left: 20%;
+  top: 2px;
+  transform: translateX(-50%);
+}
+.viewEventButtonCover{
+  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  width: 60px;
+  height: 30px;
+}
+.viewEventButtonCover .viewText{
+  position: relative;
+  left: 20%;
+  top: 2px;
+  transform: translateX(-50%);
+
+}
 
 
 

@@ -31,6 +31,17 @@ class SocialCellCoverEvents extends React.Component{
 
   }
 
+  checkUser = (personList) => {
+    // This will check if a users exist in a list and will return true or false
+    // The personList is a list of dictionary of users
+    let personListId = []
+    for (let i = 0; i<personList.length; i++){
+      const userId = personList[i].id
+      personListId.push(userId)
+    }
+
+    return personListId.includes(this.props.curId)
+  }
 
   render() {
     console.log(this.props)
@@ -56,7 +67,9 @@ class SocialCellCoverEvents extends React.Component{
           dataSource={this.props.events}
           className = 'coverCellBoxList'
           renderItem={item => (
-            <List.Item>
+            <List.Item
+            className = 'coverCellBoxItem'
+            >
               <div>
                 <span> {this.capitalize(item.title)} </span>
                 <span className = 'socialEventTime'>
@@ -66,12 +79,51 @@ class SocialCellCoverEvents extends React.Component{
                 {this.timeFormater(item.end_time)}
                 </span>
                 <br />
-                <span className = 'socialEventCapcity'>
+                <div className = 'coverEventCapacity'>
+                <div className = 'coverEventNumber'>
                 <img src ={userIcon} className = 'socialUserIcon' />
                 {item.persons.length}
-                <AvatarGroups />
-                </span>
+                </div>
+                  <div className = 'avatarContainer'>
+                  <AvatarGroups />
+                  </div>
+                </div>
+
+                {
+                  this.checkUser(item.persons) ?
+                    item.host.id === this.props.curId ?
+                  <div className = 'alreadyJoinButtonCover'>
+                    <span className = 'joinText'> Host </span>
+                  </div>
+
+                  :
+
+                  <div className = ''>
+                  <span className = 'joinText'> Leave </span>
+                </div>
+
+
+
+                     :
+
+                     <div
+                     onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
+                     className = ''>
+                       <span className = 'joinText'> Join </span>
+                     </div>
+
+                }
+
+
+
+
+                <div className = 'viewEventButtonCover'>
+                  <span className = 'viewText'> View </span>
+                </div>
+
+
               </div>
+
             </List.Item>
           )}
         />
