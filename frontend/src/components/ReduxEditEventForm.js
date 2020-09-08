@@ -442,6 +442,7 @@ class ReduxEditEventForm extends React.Component{
       return(
         <form>
           <div className = 'reduxTitle'>
+          
             <Field
             name = 'title'
             component= {renderField}
@@ -455,7 +456,7 @@ class ReduxEditEventForm extends React.Component{
             name = 'content'
             component= {renderTextArea}
             type= 'text'
-            placeholder = 'Description'
+            placeholder = 'Description!'
             validate = {required}
             />
           </div>
@@ -464,7 +465,7 @@ class ReduxEditEventForm extends React.Component{
             name = 'location'
             component= {renderField}
             type= 'text'
-            validate = {required}
+
             />
             <AimOutlined className = 'aim'/>
             <Field

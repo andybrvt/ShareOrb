@@ -598,7 +598,7 @@ class NewsfeedPost extends React.Component {
                   <span
                     style={{color:'black', fontSize:'15px'}}
                     class="headerPostText alignleft" >
-                    {this.props.data.user.username} <br/>
+                      {this.props.data.user.first_name}{' '}{this.props.data.user.last_name} <br/>
                   <span>
                   <span
                     style={{fontSize:'13px'}}
@@ -799,7 +799,7 @@ class NewsfeedPost extends React.Component {
                   <span
                     style={{color:'black', fontSize:'15px'}}
                     class="headerPostText alignleft" >
-                    {this.props.data.user.username} <br/>
+                    {this.props.data.user.first_name}{' '}{this.props.data.user.last_name} <br/>
                   <span>
                   <span
                     style={{fontSize:'13px'}}

@@ -512,7 +512,7 @@ class ReactAddEventForm extends React.Component {
 
       </Form.Item>
 
-      <Form.Item name="Location" style = {{height: '10px'}}>
+      <Form.Item name="Location" style = {{height: '10px'}} >
        <Input
         name = 'location'
         className = 'reactLocation'
