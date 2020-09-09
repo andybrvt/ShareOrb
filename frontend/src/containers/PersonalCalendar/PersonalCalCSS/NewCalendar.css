@@ -312,6 +312,7 @@ main {
 
 .calendar .dayBody .eventsDay{
   /* background-color: lightblue; */
+  width:80%;
   color: white;
   font-size: 15px;
   border-radius: 10px;

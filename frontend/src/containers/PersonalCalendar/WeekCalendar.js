@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup } from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup, Popover } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -259,10 +259,20 @@ class WeekCalendar extends React.Component{
           )
         }
         border.push(
+          <Popover content={<div>
+            <EditEventPopUp
+            isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
+            />
+            </div>}>
             <div
             className = 'col hourcell'
             onClick = {() => this.addEventClick(dayDay, hourHour)} >
+
+
             </div>
+              </Popover>
+
         )
         toDoStuff =[]
         hour = dateFns.addHours(hour, 1)
@@ -466,10 +476,8 @@ class WeekCalendar extends React.Component{
           </div>
           </div>
 
-          <EditEventPopUp
-          isVisible = {this.props.showModal}
-          close = {() => this.props.closeModal()}
-          />
+
+
           </div>
           <div className = 'miniCalContainer'>
             <Button

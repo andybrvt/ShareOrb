@@ -2,7 +2,7 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
-import { Button, notification, Divider, Space, Modal } from 'antd';
+import { Button, notification, Divider, Space, Modal, Popover } from 'antd';
 import {
   RadiusBottomleftOutlined,
   RadiusBottomrightOutlined,
@@ -208,19 +208,15 @@ class EditEventPopUp extends React.Component {
     return (
       <div>
       <RadiusBottomleftOutlined />
-        <Modal
-          centered
-          footer = {null}
-          visible = {this.props.isVisible}
-          onCancel= {this.props.close}
-          width = {450}
-        >
+
+
         <ReduxEditEventForm
         {...this.props}
         onSubmit = {this.submit}
         initialValues = {this.getInitialValue()}
         onDelete = {this.delete} />
-        </Modal>
+
+
       </div>
     );
   }

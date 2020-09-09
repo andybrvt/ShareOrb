@@ -339,6 +339,7 @@ class DayCalendar extends React.Component{
               {this.renderHours()}
             </div>
             <div className = 'calendar'>
+            
               {this.renderCells(this.props.events)}
               </div>
             </div>
