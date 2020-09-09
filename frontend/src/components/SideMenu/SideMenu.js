@@ -43,7 +43,7 @@ import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
 import * as navActions from '../../store/actions/nav';
 import * as notificationsActions from '../../store/actions/notifications';
 import * as actions from '../../store/actions/auth';
-import PickEventSyncModal from '../PickEventSyncModal';
+import PickEventSyncModal from '../../containers/PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';

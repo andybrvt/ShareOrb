@@ -9,7 +9,7 @@ import { UserOutlined, SmileTwoTone, FrownOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import * as notificationsActions from '../store/actions/notifications';
 import * as eventSyncActions from '../store/actions/eventSync';
-import PickEventSyncModal from '../components/PickEventSyncModal';
+import PickEventSyncModal from './PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as dateFns from 'date-fns';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 

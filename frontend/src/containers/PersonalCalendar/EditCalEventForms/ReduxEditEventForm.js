@@ -1,16 +1,16 @@
 import React from 'react';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
-import * as navActions from '../store/actions/nav';
-import * as calendarEventActions from '../store/actions/calendarEvent';
-import { connect } from "react-redux";
-import 'antd/dist/antd.css';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
-import moment from 'moment';
-import './labelCSS/ReduxForm.css';
 import * as dateFns from 'date-fns';
+import moment from 'moment';
+import { connect } from "react-redux";
+import { Form } from '@ant-design/compatible';
+import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import * as navActions from '../../../store/actions/nav';
+import * as calendarEventActions from '../../../store/actions/calendarEvent';
+import '../PersonalCalCSS/ReduxForm.css';
+import 'antd/dist/antd.css';
+import '@ant-design/compatible/assets/index.css';
 
 
 const { Option } = Select;

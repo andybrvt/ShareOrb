@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
-import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { connect } from "react-redux";
-import './labelCSS/ReactForm.css';
 import * as dateFns from 'date-fns';
 import moment from 'moment';
+import { connect } from "react-redux";
+import { Form } from '@ant-design/compatible';
+import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
+import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import '../PersonalCalCSS/ReactForm.css';
+import '@ant-design/compatible/assets/index.css';
 
 
 const { TextArea } = Input

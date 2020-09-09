@@ -1,16 +1,16 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
-import './Container_CSS/NewCalendar.css';
-import { connect } from 'react-redux';
-import * as calendarActions from '../store/actions/calendars';
-import MiniCalendar from '../components/MiniCalendar';
-import * as navActions from '../store/actions/nav';
-import * as calendarEventActions from '../store/actions/calendarEvent';
-import * as eventSyncActions from '../store/actions/eventSync';
-import EventSyncModal from '../components/EventSyncModal';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
-import EventModal from '../containers/EventModal';
+import * as calendarActions from '../../store/actions/calendars';
+import * as navActions from '../../store/actions/nav';
+import * as calendarEventActions from '../../store/actions/calendarEvent';
+import * as eventSyncActions from '../../store/actions/eventSync';
+import EventSyncModal from './EventSyncForms/EventSyncModal';
+import EventModal from './AddCalEventForms/EventModal';
+import MiniCalendar from './MiniCalendar';
+import './PersonalCalCSS/NewCalendar.css';
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { reset, Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
+import { reset, Field, reduxForm } from 'redux-form';
 
 
 const renderField = (field) => {

@@ -1,9 +1,11 @@
 import React from 'react';
-import { Modal, notification } from 'antd';
-import EventSyncForm from './EventSyncForm'
-import EventSyncReactForm from './EventSyncReactForm'
-import NotificationWebSocketInstance from '../../src/notificationWebsocket';
 import * as dateFns from 'date-fns';
+import { Modal, notification } from 'antd';
+
+// import EventSyncForm from './EventSyncForm';
+
+import EventSyncReactForm from './EventSyncReactForm';
+import NotificationWebSocketInstance from '../../../notificationWebsocket';
 
 
 // This class is use to pick a friend to event sync with

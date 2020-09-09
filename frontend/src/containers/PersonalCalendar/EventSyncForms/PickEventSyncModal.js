@@ -1,13 +1,13 @@
 import React from 'react';
 import { Modal } from 'antd';
-import * as eventSyncActions from '../store/actions/eventSync';
+import * as eventSyncActions from '../../../store/actions/eventSync';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { authAxios } from './util';
+import { authAxios } from '../../../components/util';
 import PickEventSyncWeek from './PickEventSyncWeek';
 import PickEventSyncDay from './PickEventSyncDay';
 import PickEventSyncForm from './PickEventSyncForm';
-import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
+import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import * as dateFns from 'date-fns';
 
 

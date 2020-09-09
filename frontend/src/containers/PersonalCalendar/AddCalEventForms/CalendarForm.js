@@ -1,14 +1,14 @@
 import React, {useState, useEffect } from 'react';
 import  { Redirect } from 'react-router-dom';
 import {Container} from 'reactstrap';
-import {uploadPost} from '../api';
+import {uploadPost} from '../../../api';
 import axios from 'axios';
-import { authAxios } from './util';
+import { authAxios } from '../../../components/util';
 import { connect } from "react-redux";
 import { DatePicker } from 'antd';
 import * as dateFns from 'date-fns';
-import * as navActions from '../store/actions/nav'
-import * as calendarActions from '../store/actions/calendars'
+import * as navActions from '../../../store/actions/nav'
+import * as calendarActions from '../../../store/actions/calendars'
 
 
 

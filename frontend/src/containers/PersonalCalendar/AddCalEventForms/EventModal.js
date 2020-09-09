@@ -1,14 +1,14 @@
-import { Drawer, List, Avatar, Divider, Col, Row, Modal, Button } from 'antd';
 import React, { Component } from 'react';
-import CalendarForm from '../components/CalendarForm'
-import ReduxAddEventForm from '../components/ReduxAddEventForm';
-import ReactAddEventForm from '../components/ReactAddEventForm';
-import * as calendarActions from '../store/actions/calendars'
-import { connect } from "react-redux";
 import * as dateFns from 'date-fns';
 import moment from 'moment';
-import { authAxios } from '../components/util';
-import * as navActions from '../store/actions/nav';
+import { connect } from "react-redux";
+import { authAxios } from '../../../components/util';
+import { Drawer, List, Avatar, Divider, Col, Row, Modal, Button } from 'antd';
+import * as calendarActions from '../../../store/actions/calendars'
+import * as navActions from '../../../store/actions/nav';
+import ReduxAddEventForm from './ReduxAddEventForm';
+import ReactAddEventForm from './ReactAddEventForm';
+import CalendarForm from './CalendarForm'
 
 
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
-import '../containers/Container_CSS/EventSync.css';
+import '../PersonalCalCSS/EventSync.css';
 import { Button, notification } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
-import CalendarEventWebSocketInstance from '../calendarEventWebsocket';
-import NotificationWebSocketInstance from '../notificationWebsocket';
+import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
+import NotificationWebSocketInstance from '../../../notificationWebsocket';
 import { SubmissionError } from 'redux-form';
-import * as eventSyncActions from '../store/actions/eventSync';
-import * as notificationsActions from '../store/actions/notifications';
-import { authAxios } from './util';
+import * as eventSyncActions from '../../../store/actions/eventSync';
+import * as notificationsActions from '../../../store/actions/notifications';
+import { authAxios } from '../../../components/util';
 
 class PickEventSyncDay extends React.Component{
   state = {

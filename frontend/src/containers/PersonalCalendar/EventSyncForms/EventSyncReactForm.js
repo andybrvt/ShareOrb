@@ -1,12 +1,11 @@
-
 import React from 'react';
+import * as dateFns from 'date-fns';
 import {connect} from 'react-redux';
-import 'antd/dist/antd.css';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Select, Radio, Button, Input, List, Avatar } from 'antd';
-import * as dateFns from 'date-fns';
-import './labelCSS/EventSync.css';
+import 'antd/dist/antd.css';
+import '../PersonalCalCSS/EventSync.css';
 
 
 

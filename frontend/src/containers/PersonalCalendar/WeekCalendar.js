@@ -1,23 +1,25 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
-import './Container_CSS/NewCalendar.css';
-import axios from 'axios';
-import { authAxios } from '../components/util';
-import 'antd/dist/antd.css';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup } from 'antd';
-import EventModal from '../containers/EventModal';
-import * as navActions from '../store/actions/nav';
-import * as calendarEventActions from '../store/actions/calendarEvent';
-import * as calendarActions from '../store/actions/calendars';
-import * as eventSyncActions from '../store/actions/eventSync';
-import { connect } from 'react-redux';
-import  { Redirect } from 'react-router-dom';
-import EditEventPopUp from '../components/EditEventPopUp';
-import { NavLink } from 'react-router-dom';
-import MiniCalendar from '../components/MiniCalendar';
-import EventSyncModal from '../components/EventSyncModal';
 import moment from 'moment';
+import axios from 'axios';
+import { authAxios } from '../../components/util';
+import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import * as navActions from '../../store/actions/nav';
+import * as calendarEventActions from '../../store/actions/calendarEvent';
+import * as calendarActions from '../../store/actions/calendars';
+import * as eventSyncActions from '../../store/actions/eventSync';
+import EditEventPopUp from './EditCalEventForms/EditEventPopUp';
+import MiniCalendar from './MiniCalendar';
+import EventSyncModal from './EventSyncForms/EventSyncModal';
+import EventModal from './AddCalEventForms/EventModal';
+import './PersonalCalCSS/NewCalendar.css';
+import 'antd/dist/antd.css';
+
+
 
 const { Group } = Avatar
 

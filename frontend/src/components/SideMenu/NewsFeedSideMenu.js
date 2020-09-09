@@ -34,12 +34,10 @@ import {
 } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
-
 import SuggestedFriends from '../../containers/Layouts/SuggestedFriends.js';
-
 import * as navActions from '../../store/actions/nav'
 import * as actions from '../../store/actions/auth';
-import PickEventSyncModal from '../../components/PickEventSyncModal';
+import PickEventSyncModal from '../../containers/PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';

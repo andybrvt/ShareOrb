@@ -1,20 +1,22 @@
 import React from 'react';
-import { Modal } from 'antd';
-import CalendarForm from './CalendarForm';
-import ReduxEditEventForm from './ReduxEditEventForm';
-import * as navActions from '../store/actions/nav';
-import * as calendarEventActions from '../store/actions/calendarEvent';
-import * as calendarActions from '../store/actions/calendars';
-import { connect } from "react-redux";
 import * as dateFns from 'date-fns';
-import axios from 'axios';
-import { authAxios } from './util';
 import moment from 'moment';
-import { Button, notification, Divider, Space } from 'antd';
+import { connect } from "react-redux";
+import { Button, notification, Divider, Space, Modal } from 'antd';
 import {
   RadiusBottomleftOutlined,
   RadiusBottomrightOutlined,
 } from '@ant-design/icons';
+import axios from 'axios';
+import { authAxios } from '../../../components/util';
+import * as navActions from '../../../store/actions/nav';
+import * as calendarEventActions from '../../../store/actions/calendarEvent';
+import * as calendarActions from '../../../store/actions/calendars';
+
+// import CalendarForm from './CalendarForm';
+
+import ReduxEditEventForm from './ReduxEditEventForm';
+
 
 
 

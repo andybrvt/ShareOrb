@@ -1,18 +1,18 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
 import axios from 'axios';
-import { authAxios } from '../components/util';
+import { authAxios } from '../../components/util';
 import { Button, Tooltip, List, message, Avatar } from 'antd';
-import './Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
-import EditEventPopUp from '../components/EditEventPopUp';
-import * as navActions from '../store/actions/nav'
-import * as calendarEventActions from '../store/actions/calendarEvent';
-import * as calendarActions from '../store/actions/calendars';
-import EventModal from '../containers/EventModal';
-import MiniCalendar from '../components/MiniCalendar';
-import EventSyncModal from '../components/EventSyncModal';
-import * as eventSyncActions from '../store/actions/eventSync';
+import * as navActions from '../../store/actions/nav'
+import * as calendarEventActions from '../../store/actions/calendarEvent';
+import * as calendarActions from '../../store/actions/calendars';
+import * as eventSyncActions from '../../store/actions/eventSync';
+import EventModal from './AddCalEventForms/EventModal';
+import MiniCalendar from './MiniCalendar';
+import EventSyncModal from './EventSyncForms/EventSyncModal';
+import EditEventPopUp from './EditCalEventForms/EditEventPopUp';
+import './PersonalCalCSS/NewCalendar.css';
 
 
 

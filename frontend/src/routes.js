@@ -14,10 +14,10 @@ import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
 import Chat from './containers/Chat';
 import Notifications from './containers/Notifications';
-import PersonalCalendar from './containers/PersonalCalendar';
-import DayCalendar from './containers/DayCalendar';
-import WeekCalendar from './containers/WeekCalendar';
-import YearCalendar from './containers/YearCalendar';
+import PersonalCalendar from './containers/PersonalCalendar/PersonalCalendar';
+import DayCalendar from './containers/PersonalCalendar/DayCalendar';
+import WeekCalendar from './containers/PersonalCalendar/WeekCalendar';
+import YearCalendar from './containers/PersonalCalendar/YearCalendar';
 import SideMenu from './components/SideMenu/SideMenu.js';
 import NoFoundPage from './containers/403.jsx';
 import ProfileCardNewsFeed from './components/ProfileCardNewsFeed'

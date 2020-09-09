@@ -1,8 +1,8 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
-import '../containers/Container_CSS/NewCalendar.css';
 import { connect } from 'react-redux';
-import * as calendarActions from '../store/actions/calendars'
+import * as calendarActions from '../../store/actions/calendars'
+import './PersonalCalCSS/NewCalendar.css';
 
 
 

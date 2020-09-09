@@ -1,6 +1,6 @@
 import React from 'react';
 import { reset, Field, reduxForm } from 'redux-form';
-import './labelCSS/ReduxForm.css';
+import '../PersonalCalCSS/ReduxForm.css';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Button, Input } from 'antd';
