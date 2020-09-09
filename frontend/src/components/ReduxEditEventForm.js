@@ -10,7 +10,7 @@ import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
 import moment from 'moment';
 import './labelCSS/ReduxForm.css';
 import * as dateFns from 'date-fns';
-import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
 
 const { Option } = Select;
@@ -35,7 +35,7 @@ const { TextArea } = Input
 const renderField = (field) => {
   console.log(field)
   return (
-    <Input
+    <Input style={{width:'200px', height:'30px', fontSize:'14px'}}
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
@@ -49,8 +49,9 @@ const renderTextArea = (field) => {
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
-    rows = {4}
+    rows = {2}
     className = 'box'
+    style={{fontSize:'14px'}}
     />
   )
 }
@@ -442,7 +443,7 @@ class ReduxEditEventForm extends React.Component{
       return(
         <form>
           <div className = 'reduxTitle'>
-          
+          <i style={{marginRight:'15px'}} class="fas fa-calendar-plus"></i>
             <Field
             name = 'title'
             component= {renderField}
@@ -451,30 +452,40 @@ class ReduxEditEventForm extends React.Component{
             validate = {required}
             />
           </div>
+
+          {/* need to implement redux form to people */}
+          <div>
+            <i style={{marginRight:'15px'}} class="fas fa-user-friends"></i>
+            <Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} />
+          </div>
+          {/* Description of event */}
           <div className  = 'reduxContent'>
+            {/*<i class="fas fa-align-left"></i>*/}
             <Field
             name = 'content'
             component= {renderTextArea}
             type= 'text'
-            placeholder = 'Description!'
+            placeholder = 'Description'
             validate = {required}
             />
           </div>
+          {/* location */}
           <div className = 'reduxLocation'>
+            <i class="fas fa-globe-americas"  style={{marginRight:'15px'}}></i>
             <Field
             name = 'location'
             component= {renderField}
             type= 'text'
 
             />
-            <AimOutlined className = 'aim'/>
+            <AimOutlined style={{fontSize:'15px'}} className = 'aim'/>
             <Field
               name = 'eventColor'
               component = {renderEventColor}
               type = 'text'/>
           </div>
           <div className = 'reduxDateRange'>
-            <br />
+            <i style={{marginRight:'15px'}} class="fas fa-clock"></i>
              <Field
              name = 'startDate'
              component = {renderStartDate}
