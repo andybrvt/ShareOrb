@@ -273,6 +273,7 @@ class SocialCalendar extends React.Component{
 
               <SocialCellCoverEvents
               curId = {this.props.curId}
+              cellId = {toDoStuff[0].id}
               events = {toDoStuff[0].get_socialCalEvent}/>
               </div>
 

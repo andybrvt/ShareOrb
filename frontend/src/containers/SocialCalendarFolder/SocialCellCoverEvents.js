@@ -45,6 +45,14 @@ class SocialCellCoverEvents extends React.Component{
     return personListId.includes(this.props.curId)
   }
 
+  sendJoinUserEvent = (userId, eventId, socialCalCellId )=> {
+    // This will be used to send the userId and the event Id to the websocket
+    console.log(userId, eventId)
+
+    ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
+  }
+
+
   render() {
     console.log(this.props)
     const data = [
@@ -101,7 +109,7 @@ class SocialCellCoverEvents extends React.Component{
                   :
 
                   <div className = 'alreadyJoinButtonCover'>
-                  <span className = 'joinText'> Leave </span>
+                  <span className = 'leaveText'> Leave </span>
                 </div>
 
 
@@ -109,8 +117,8 @@ class SocialCellCoverEvents extends React.Component{
                      :
 
                      <div
-                     onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
-                     className = ''>
+                     onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.cellId)}
+                     className = 'joinEventButtonCover'>
                        <span className = 'joinText'> Join </span>
                      </div>
 

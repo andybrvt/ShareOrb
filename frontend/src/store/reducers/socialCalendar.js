@@ -120,7 +120,7 @@ const addUserSocialEventM = (state, action) => {
   const userObj = action.socialObj.userObj
   const socialEventId = action.socialObj.socialEventObj.id
   return updateObject (state, {
-    socialObject: [{
+    socialObject: state.socialObject[0] ? [{
       ...state.socialObject[0],
       get_socialCalEvent: state.socialObject[0].get_socialCalEvent.map(
         events => events.id === socialEventId ? {
@@ -128,7 +128,7 @@ const addUserSocialEventM = (state, action) => {
           persons: [... events.persons, userObj ]
         } : events
       )
-    }]
+    }] : []
   })
 }
 

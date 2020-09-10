@@ -343,6 +343,26 @@
   margin-left: 5px;
 }
 
+.joinEventButtonCover{
+  background-color: limegreen;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 10%;
+  left: 150px;
+  width: 60px;
+  height: 30px;
+}
+.joinEventButtonCover .joinText{
+  position: relative;
+  left: 22%;
+  top: 2px;
+  transform: translateX(-50%);
+}
+
 .alreadyJoinButtonCover{
   background-color: gainsboro;
   border: 1px solid gainsboro;
@@ -360,6 +380,12 @@
 .alreadyJoinButtonCover .joinText{
   position: relative;
   left: 20%;
+  top: 2px;
+  transform: translateX(-50%);
+}
+.alreadyJoinButtonCover .leaveText{
+  position: relative;
+  left: 14%;
   top: 2px;
   transform: translateX(-50%);
 }
