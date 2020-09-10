@@ -259,7 +259,7 @@ class WeekCalendar extends React.Component{
           )
         }
         border.push(
-          <Popover content={<div>
+          <Popover trigger="click"  placement="rightTop" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
             <EditEventPopUp
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
@@ -267,7 +267,7 @@ class WeekCalendar extends React.Component{
             </div>}>
             <div
             className = 'col hourcell'
-            onClick = {() => this.addEventClick(dayDay, hourHour)} >
+            >
 
 
             </div>
