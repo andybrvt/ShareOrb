@@ -1,14 +1,21 @@
 import React from 'react';
-import {  Modal, Avatar } from 'antd';
-import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select, notification } from 'antd';
-// import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
-import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import { authAxios } from '../components/util';
 import { connect } from 'react-redux';
-import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+import axios from 'axios';
+import { authAxios } from '../../components/util';
+import { Form } from '@ant-design/compatible';
+import {
+  DatePicker,
+  TimePicker,
+  Button,
+  Input,
+  Select,
+  notification,
+  Modal,
+  Avatar } from 'antd';
+// import { connect } from 'react-redux';
+import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
 
 
 const { TextArea } = Input

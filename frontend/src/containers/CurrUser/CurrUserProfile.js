@@ -1,18 +1,18 @@
 import React from 'react';
-import { Tabs, Statistic, Badge, Modal, Avatar } from 'antd';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import './CurrUserProfile.css';
-import SocialCalendar from '../SocialCalendar';
+import { connect } from "react-redux";
+import { Tabs, Statistic, Badge, Modal, Avatar } from 'antd';
+import { RetweetOutlined } from '@ant-design/icons';
+import * as exploreActions from '../../store/actions/explore';
+import SocialCalendar from '../SocialCalendarFolder/SocialCalendar';
 import background1 from '../../components/images/background1.jpg';
 import ava1 from '../../components/images/avatar.jpg'
 import defaultPicture from '../../components/images/default.png'
 import ExploreWebSocketInstance from '../../exploreWebsocket';
-import { connect } from "react-redux";
-import * as exploreActions from '../../store/actions/explore';
-import { RetweetOutlined } from '@ant-design/icons';
-import ChangeProfilePic from '../../components/ChangeProfilePic';
-import FollowList from '../../components/FollowList';
+import ChangeProfilePic from './ChangeProfilePic';
+import FollowList from '../../components/UserProfiles/FollowList';
+import './CurrUserProfile.css';
 
 
 import {

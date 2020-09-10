@@ -4,7 +4,7 @@ import './ProfileCardNewsFeed.css';
 import ava1 from './images/avatar.jpg';
 import defaultPic from './images/default.png';
 import { connect } from "react-redux";
-import FollowList from './FollowList';
+import FollowList from './UserProfiles/FollowList';
 import { Modal, Avatar } from 'antd';
 
 

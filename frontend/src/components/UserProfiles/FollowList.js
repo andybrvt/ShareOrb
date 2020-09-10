@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
-import defaultPicture from './images/default.png';
+import defaultPicture from '../images/default.png';
 
 
 

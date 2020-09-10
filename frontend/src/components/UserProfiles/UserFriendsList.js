@@ -1,10 +1,10 @@
 import React from 'react';
-import ProfilePost from '../components/Form';
-import FriendProfileCard from '../components/FriendsProfileCard'
+// import ProfilePost from '../components/Form';
+// import FriendProfileCard from '../components/FriendsProfileCard'
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { authAxios } from '../components/util';
+// import { authAxios } from '../components/util';
 
 //Function: Holds the all the friends of the curretn user
 class UserFriendsList extends React.Component {

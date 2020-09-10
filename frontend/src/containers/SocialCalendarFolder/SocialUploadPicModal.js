@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {  Modal, Avatar } from 'antd';
 // import ImgCrop from 'antd-img-crop';
 import { PlusOutlined } from '@ant-design/icons';
-import './labelCSS/SocialModal.css'
+import './SocialCalCSS/SocialModal.css'
 
 
 function getBase64(file) {

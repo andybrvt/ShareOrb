@@ -1,9 +1,9 @@
 import React from 'react';
-import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import moment from 'moment';
-import './labelCSS/SocialModal.css';
+import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
-import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+import './SocialCalCSS/SocialModal.css';
 
 
 const { TextArea } = Input;

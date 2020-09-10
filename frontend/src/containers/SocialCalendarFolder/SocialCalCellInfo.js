@@ -1,17 +1,19 @@
 import React from 'react';
+import * as dateFns from 'date-fns';
 import { connect } from 'react-redux';
 import {  Modal, Avatar } from 'antd';
-import * as dateFns from 'date-fns';
-import * as socialCalActions  from '../store/actions/socialCalendar';
+import {PictureOutlined} from '@ant-design/icons';
+import * as socialCalActions  from '../../store/actions/socialCalendar';
 import PictureCarousel from './PictureCarousel';
 import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
-import './labelCSS/SocialModal.css';
-import {PictureOutlined} from '@ant-design/icons';
-import AvatarGroups from './AvatarGroups';
-import ExploreWebSocketInstance from '../../src/exploreWebsocket';
-import UserAvatar from'../containers/NewsfeedItems/UserAvatar.js';
-import Liking from'../containers/NewsfeedItems/Liking.js';
+import AvatarGroups from '../../components/AvatarGroups';
+import UserAvatar from'../NewsfeedItems/UserAvatar.js';
+import Liking from'../NewsfeedItems/Liking.js';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+import './SocialCalCSS/SocialModal.css';
+
+
 class SocialCalCellInfo extends React.Component{
 
   // state = {

@@ -5,11 +5,10 @@ import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/LoginPage/Login';
 import Signup from './containers/Signup';
 import AllUsersNotCurrNotCurrFriends from './containers/AllUsersNotCurrNotCurrFriends';
-
 import Explore from './containers/Explore';
 import InfiniteList from './containers/InfiniteScroll';
 import CurrUserProfile from './containers/CurrUser/CurrUserProfile';
-import ViewAnyUserProfile from './containers/ViewAnyUserProfile';
+import ViewAnyUserProfile from './components/UserProfiles/ViewAnyUserProfile';
 import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
 import Chat from './containers/Chat';

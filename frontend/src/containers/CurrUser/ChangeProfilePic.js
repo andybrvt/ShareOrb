@@ -1,7 +1,10 @@
 import React from 'react';
 import { Upload, message, Modal } from 'antd';
 import { LoadingOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons';
-import './labelCSS/EditProfile.css'
+import './EditProfile.css'
+
+
+
 const { Dragger } = Upload;
 
 

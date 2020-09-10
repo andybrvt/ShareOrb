@@ -1,15 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import {connect} from 'react-redux';
-import { authAxios } from '../components/util';
-import PersonalProfile from '../components/PersonalProfile';
-import 'antd/dist/antd.css';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
+import { authAxios } from '../util';
+import { connect } from 'react-redux';
 import { Button } from 'antd';
-import UserFriendsList from './UserFriendsList';
-import NotificationWebSocketInstance from '../notificationWebsocket';
-import ExploreWebSocketInstance from '../exploreWebsocket';
+import { Form } from '@ant-design/compatible';
+
+// import UserFriendsList from './UserFriendsList';
+
+import NotificationWebSocketInstance from '../../notificationWebsocket';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+import PersonalProfile from './PersonalProfile';
+import 'antd/dist/antd.css';
+import '@ant-design/compatible/assets/index.css';
 
 
 

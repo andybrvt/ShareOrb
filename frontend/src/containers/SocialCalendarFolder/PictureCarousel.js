@@ -1,10 +1,10 @@
 import React from 'react';
-import { Carousel} from 'antd';
-import './labelCSS/SocialModal.css';
+import { Carousel } from 'antd';
 import {
   RightCircleOutlined,
   LeftCircleOutlined
 } from '@ant-design/icons';
+import './SocialCalCSS/SocialModal.css';
 
 
 class PictureCarousel extends React.Component{

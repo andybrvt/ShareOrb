@@ -1,23 +1,37 @@
 import React from 'react';
 import * as dateFns from 'date-fns';
-import './Container_CSS/SocialCal.css';
-import axios from 'axios';
-import { authAxios } from '../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Modal } from 'antd';
-
-import * as navActions from '../store/actions/nav';
-import * as calendarActions from '../store/actions/calendars';
-import * as socialCalActions  from '../store/actions/socialCalendar';
-import { connect } from 'react-redux';
-import  { Redirect } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import moment from 'moment';
-import { UserOutlined, PlusOutlined, EyeOutlined, CalendarOutlined  } from '@ant-design/icons';
-import ava1 from '../components/images/avatar.jpg'
-import SocialCalCellInfo from '../components/SocialCalCellInfo';
-import SocialUploadPicModal from '../components/SocialUploadPicModal';
-import SocialEventPostModal from '../components/SocialEventPostModal';
-import SocialCellCoverEvents from '../components/SocialCellCoverEvents';
+import axios from 'axios';
+import { authAxios } from '../../components/util';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import {
+  Drawer,
+  List,
+  Avatar,
+  Divider,
+  Col,
+  Row,
+  Tag,
+  Button,
+  Modal } from 'antd';
+import {
+  UserOutlined,
+  PlusOutlined,
+  EyeOutlined,
+  CalendarOutlined } from '@ant-design/icons';
+import * as navActions from '../../store/actions/nav';
+import * as calendarActions from '../../store/actions/calendars';
+import * as socialCalActions  from '../../store/actions/socialCalendar';
+import ava1 from '../../components/images/avatar.jpg'
+import SocialCalCellInfo from './SocialCalCellInfo';
+import SocialUploadPicModal from './SocialUploadPicModal';
+import SocialEventPostModal from './SocialEventPostModal';
+import SocialCellCoverEvents from './SocialCellCoverEvents';
+import './SocialCalCSS/SocialCal.css';
+
+
 
 class SocialCalendar extends React.Component{
 

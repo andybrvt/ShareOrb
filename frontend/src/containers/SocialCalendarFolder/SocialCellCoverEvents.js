@@ -1,13 +1,15 @@
 import React from 'react';
-import { List, Avatar } from 'antd';
-import '../containers/Container_CSS/SocialCal.css';
-import {ClockCircleOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
-import clock from './images/clock.png';
-import location from './images/pin.png';
-import AvatarGroups from './AvatarGroups';
-import userIcon from './images/user.png';
-import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+import { List, Avatar } from 'antd';
+import {ClockCircleOutlined } from '@ant-design/icons';
+import clock from '../../components/images/clock.png';
+import location from '../../components/images/pin.png';
+import AvatarGroups from '../../components/AvatarGroups';
+import userIcon from '../../components/images/user.png';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+import './SocialCalCSS/SocialCal.css';
+
+
 
 class SocialCellCoverEvents extends React.Component{
   // This will be the smaller events that are shown social cal if there are only

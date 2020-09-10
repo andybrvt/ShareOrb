@@ -1,19 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-
-import { Button, Modal, Avatar } from 'antd';
-import { authAxios } from '../components/util';
-import NotificationWebSocketInstance from '../../src/notificationWebsocket';
-import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+import { authAxios } from '../util';
 import { connect } from "react-redux";
-import './ProfileComponents/ProfilePage.css';
-import defaultPicture from './images/default.png';
-import ava1 from './images/avatar.jpg'
-import SocialCalendar from '../containers/SocialCalendar'
+import { Form } from '@ant-design/compatible';
+import { Button, Modal, Avatar } from 'antd';
+import NotificationWebSocketInstance from '../../notificationWebsocket';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+import defaultPicture from '../images/default.png';
+import ava1 from '../images/avatar.jpg'
+import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
 import FollowList from './FollowList';
+import '@ant-design/compatible/assets/index.css';
+import './ProfilePage.css';
 
 
 

@@ -1,13 +1,13 @@
 import React from 'react';
-import { List, Avatar } from 'antd';
-import './labelCSS/SocialModal.css';
-import {ClockCircleOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
-import clock from './images/clock.png';
-import location from './images/pin.png';
-import AvatarGroups from './AvatarGroups';
-import userIcon from './images/user.png';
-import ExploreWebSocketInstance from '../../src/exploreWebsocket';
+import { List, Avatar } from 'antd';
+import { ClockCircleOutlined } from '@ant-design/icons';
+import clock from '../../components/images/clock.png';
+import location from '../../components/images/pin.png';
+import AvatarGroups from '../../components/AvatarGroups';
+import userIcon from '../../components/images/user.png';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
+import './SocialCalCSS/SocialModal.css';
 
 
 
