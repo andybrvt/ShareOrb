@@ -352,6 +352,10 @@
   font-size: 15px;
   width: 60px;
   height: 30px;
+  position: absolute;
+  left: 150px;
+  top: 10%;
+
 }
 .alreadyJoinButtonCover .joinText{
   position: relative;
@@ -368,6 +372,9 @@
   font-size: 15px;
   width: 60px;
   height: 30px;
+  position: absolute;
+  left: 150px;
+  top: 50%;
 }
 .viewEventButtonCover .viewText{
   position: relative;
@@ -375,6 +382,12 @@
   top: 2px;
   transform: translateX(-50%);
 
+}
+
+.coverCellEventText{
+  /* background-color: red; */
+  position: relative;
+  margin-left: 7px;
 }
 
 

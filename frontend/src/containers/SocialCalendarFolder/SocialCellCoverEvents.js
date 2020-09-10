@@ -72,7 +72,7 @@ class SocialCellCoverEvents extends React.Component{
             <List.Item
             className = 'coverCellBoxItem'
             >
-              <div>
+              <div className = 'coverCellEventText'>
                 <span> {this.capitalize(item.title)} </span>
                 <span className = 'socialEventTime'>
                 <br />
@@ -100,7 +100,7 @@ class SocialCellCoverEvents extends React.Component{
 
                   :
 
-                  <div className = ''>
+                  <div className = 'alreadyJoinButtonCover'>
                   <span className = 'joinText'> Leave </span>
                 </div>
 
