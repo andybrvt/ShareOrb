@@ -58,7 +58,7 @@ class SocialEventList extends React.Component{
     // just shows up, so for the evnets you can just make it and sent it to the redux
     // and maybe you don't need channels for when you post events... maybe notificaitons are
     // sent when you make an event --> this will direct the user to the event page
-    console.log(this.props)
+    console.log(dateFns.addHours(new Date(this.props.cellDate), 7))
 
     let itemList = []
     if(this.props.items !== []){
@@ -124,38 +124,52 @@ class SocialEventList extends React.Component{
             <AvatarGroups />
             </span>
 
+            {dateFns.isAfter(dateFns.endOfDay(dateFns.addHours(new Date(this.props.cellDate), 7)), new Date()) ?
+              <div>
+              {
+                this.checkUser(item.persons) ?
+                  item.host.id === this.props.curId ?
+                  <div className = 'alreadyJoinButton'>
+                  <span className = 'joinText'> Host </span>
+                </div>
 
-            {
-              this.checkUser(item.persons) ?
-                item.host.id === this.props.curId ?
+                :
+
                 <div className = 'alreadyJoinButton'>
-                <span className = 'joinText'> Host </span>
+                <span className = 'joinText'> Leave </span>
               </div>
+
+
+
+                   :
+
+                   <div
+                   onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
+                   className = 'joinEventButton'>
+                     <span className = 'joinText'> Join </span>
+                   </div>
+
+              }
+
+
+
+
+              <div className = 'viewEventButton'>
+                <span className = 'viewText'> View </span>
+              </div>
+
+              </div>
+
 
               :
 
-              <div className = 'alreadyJoinButton'>
-              <span className = 'joinText'> Leave </span>
-            </div>
+              <div className = 'viewEventButtonPass'>
 
+              <span className = 'viewText'>View </span>
+              </div>
 
+             }
 
-                 :
-
-                 <div
-                 onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
-                 className = 'joinEventButton'>
-                   <span className = 'joinText'> Join </span>
-                 </div>
-
-            }
-
-
-
-
-            <div className = 'viewEventButton'>
-              <span className = 'viewText'> View </span>
-            </div>
 
 
 

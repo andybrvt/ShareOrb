@@ -346,6 +346,25 @@
 
 }
 
+.viewEventButtonPass{
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 30%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+.viewEventButtonPass .viewText{
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+
+}
+
 .socialPublicTag{
   position: relative;
   background-color: #F5F5F5;

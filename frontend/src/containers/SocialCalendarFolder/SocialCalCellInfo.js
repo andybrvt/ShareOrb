@@ -245,6 +245,7 @@ class SocialCalCellInfo extends React.Component{
           <SocialEventList
           curId = {this.props.curId}
           socialCalCellId = {socialCalCellId}
+          cellDate = {socialCalDate}
           items = {socialCalEvents}/>
 
         </div>
