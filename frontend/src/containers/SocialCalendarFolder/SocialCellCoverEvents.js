@@ -99,37 +99,51 @@ class SocialCellCoverEvents extends React.Component{
                   </div>
                 </div>
 
-                {
-                  this.checkUser(item.persons) ?
-                    item.host.id === this.props.curId ?
-                  <div className = 'alreadyJoinButtonCover'>
-                    <span className = 'joinText'> Host </span>
+                {dateFns.isAfter(dateFns.endOfDay(dateFns.addHours(new Date(this.props.cellDate), 7)), new Date())?
+                  <div>
+                  {
+                    this.checkUser(item.persons) ?
+                      item.host.id === this.props.curId ?
+                    <div className = 'alreadyJoinButtonCover'>
+                      <span className = 'joinText'> Host </span>
+                    </div>
+
+                    :
+
+                    <div className = 'alreadyJoinButtonCover'>
+                    <span className = 'leaveText'> Leave </span>
                   </div>
 
-                  :
 
-                  <div className = 'alreadyJoinButtonCover'>
-                  <span className = 'leaveText'> Leave </span>
+
+                       :
+
+                       <div
+                       onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.cellId)}
+                       className = 'joinEventButtonCover'>
+                         <span className = 'joinText'> Join </span>
+                       </div>
+
+                  }
+
+
+
+
+                  <div className = 'viewEventButtonCover'>
+                    <span className = 'viewText'> View </span>
+                  </div>
                 </div>
 
+                :
 
+                <div className = 'alreadyViewButtonCoverPass'>
+                  <span className = 'viewText'> View </span>
+                </div>
 
-                     :
-
-                     <div
-                     onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.cellId)}
-                     className = 'joinEventButtonCover'>
-                       <span className = 'joinText'> Join </span>
-                     </div>
 
                 }
 
 
-
-
-                <div className = 'viewEventButtonCover'>
-                  <span className = 'viewText'> View </span>
-                </div>
 
 
               </div>
