@@ -137,7 +137,6 @@ class ReactAddEventForm extends React.Component {
         timeStart: time,
       })
     } else if ( startHour === endHour ){
-      console.log('I was high')
       if (startMin < endMin){
         this.setState({
           timeStart: time,
@@ -251,7 +250,6 @@ class ReactAddEventForm extends React.Component {
         // let startHour = parseInt(time.substring(0,2))
         // let startMin = parseInt(time.substring(3,5))
 
-
         console.log(startHour, startMin, ampm)
         if (startHour === 11 && ampm === ' AM' && startMin === 30){
           endTime =   '12:00 PM'
@@ -272,7 +270,12 @@ class ReactAddEventForm extends React.Component {
             } else if (ampm === ' PM'){
               startHour = startHour-12
               if (startHour < 10){
-                startHour = '0'+startHour
+                if (startHour === 0){
+                  startHour = '12'
+                } else{
+                  startHour = '0'+startHour
+                }
+
               }
             }
           }
@@ -289,6 +292,7 @@ class ReactAddEventForm extends React.Component {
         })
       }
     }
+
 
 
   onEndTimeChange = (time) => {
