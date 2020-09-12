@@ -79,8 +79,15 @@ const renderStartDateSelect = (field) => {
   // that will be return to the field when you input a value
   // Bascially everything goes through the value first, and what ever is here inspect
   // is just for show
+
+
+  console.log(field)
   return (
-    <Select {...field.input} className = 'timebox'>
+    <Select
+      // {...field.input}
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+     className = 'timebox'>
     {field.children}
     </Select>
   )
@@ -317,8 +324,11 @@ class ReduxEditEventForm extends React.Component{
 
   handleEndTimeChange = (event) => {
     console.log(event)
+
+    const {change} = this.props
     return (
-      console.log('end')
+      console.log('endTime')
+      // change('endTime', event)
     )
   }
 
@@ -440,6 +450,19 @@ class ReduxEditEventForm extends React.Component{
       // You can call an <input/> into the field component
       // You can put in initial values when you call the props initialValue
       // you can actually call it and modify it in a higher order component and it will change
+
+
+      // EXPLAINATION OF HOW THINGS WORK IN THIS REDUX FORM
+      // So basically what going on is that this is a redux form, and then there is
+      // the selectors I mension at the bottom. So the selection is not what is
+      // being submitted(it is pretty much just used for the end tiem and end date so that
+      // when you change the start date and start time so that it can accomate
+      // for the time change.
+      // However, the actual submitting in a sense it is connected to the props but most
+      // it is all the values from input itself, and when you input those value
+      // since they are connected to the props itself, it will be passed into
+      // the submit function in the eventeditpopup. so all the values that are in
+      // that form even though it might not seem like it from just this file
       return(
         <form>
           <div className = 'reduxTitle'>
