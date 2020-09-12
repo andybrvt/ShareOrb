@@ -98,7 +98,9 @@
   font-size: 15px;
   position: absolute;
   left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
+  /* background-color: red; */
 }
 
 .socialCalendar .body .row .cell .hoverCell .plusButton{
@@ -277,7 +279,9 @@
 .eventBoxListHeader .buttonHolder {
   /* margin-top: 5px; */
   position: relative;
-  left: 3px;
+  /* left: 3px; */
+  left: 50%;
+  transform: translateX(-50%);
   padding-top:10px;
   /* background-color: red; */
 }
@@ -325,6 +329,10 @@
 }
 .eventBoxListHeader .eyeButtonPass {
   /* color: red; */
+  position: relative;
+  left: 0px;
+  /* transform: translateX(-100%); */
+  padding-top: 17px;
   font-size: 24px;
 
 }

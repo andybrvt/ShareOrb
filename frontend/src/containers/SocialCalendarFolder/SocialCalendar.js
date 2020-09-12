@@ -110,11 +110,16 @@ class SocialCalendar extends React.Component{
     // This will provide the id so that you cna check whether or not they friends
     // so they can edit or not
     let friendListId = []
+    let calendarOwnerId = ''
     if(this.props.curProfile){
       if(this.props.curProfile.friends){
         for (let i = 0; i< this.props.curProfile.friends.length; i++){
           friendListId.push(this.props.curProfile.friends[i].id)
         }
+      }
+
+      if (this.props.curProfile.id){
+        calendarOwnerId = this.props.curProfile.id
       }
     }
 
@@ -194,6 +199,13 @@ class SocialCalendar extends React.Component{
               // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
               className = 'hoverCell'
               >
+
+
+              {
+                friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+
+                <div>
+
               {
                 dateFns.isSameDay(day, currentMonth) ?
                 <div>
@@ -222,6 +234,14 @@ class SocialCalendar extends React.Component{
                  </div>
 
                  :
+
+                <EyeOutlined
+                onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                className = 'eyeButtonPass'/>
+              }
+                </div>
+
+                :
 
                 <EyeOutlined
                 onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
@@ -245,6 +265,11 @@ class SocialCalendar extends React.Component{
                 >
                 <span className = "bg"> {formattedDate}</span>
                 {
+                  friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+
+                  <div>
+
+                {
                   dateFns.isSameDay(day, currentMonth) ?
                   <div
                   className = 'buttonHolder'
@@ -262,10 +287,7 @@ class SocialCalendar extends React.Component{
                   </div>
 
                   : dateFns.isAfter( day, currentMonth) ?
-                  <div
-                  className = 'buttonHolder'
-
-                  >
+                  <div>
                   <CalendarOutlined
                   onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                   className = 'eventButtonAfter'
@@ -277,13 +299,19 @@ class SocialCalendar extends React.Component{
                    </div>
 
                    :
-                  <div
-                  className = 'buttonHolder'
-                  >
+
                   <EyeOutlined
                   onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
                   className = 'eyeButtonPass'/>
+                }
                   </div>
+
+                  :
+
+                  <EyeOutlined
+                  onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                  className = 'eyeButtonPass'/>
+
                 }
                 </div>
 
@@ -300,8 +328,13 @@ class SocialCalendar extends React.Component{
               className = 'hoverCell'
               >
               {
+                friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+
+                <div>
+
+              {
                 dateFns.isSameDay(day, currentMonth) ?
-                <div >
+                <div>
                 <PlusOutlined
                 onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
                 className = 'plusButton'/>
@@ -331,9 +364,16 @@ class SocialCalendar extends React.Component{
                 <EyeOutlined
                 onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
                 className = 'eyeButtonPass'/>
+              }
+                </div>
+
+                :
+
+                <EyeOutlined
+                onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                className = 'eyeButtonPass'/>
 
               }
-
               <span className = "bg"> {formattedDate}</span>
               </div>
             }
@@ -357,22 +397,29 @@ class SocialCalendar extends React.Component{
           <div
           className = 'hoverCell'
           >
+
+
+          {
+            friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+
+            <div>
+
           {
             dateFns.isSameDay(day, currentMonth) ?
             <div>
             <PlusOutlined
             onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
-             className = 'plusButton'/>
+            className = 'plusButton'/>
             <CalendarOutlined
             onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-             className = 'eventButton'
+            className = 'eventButton'
              />
             <EyeOutlined
             onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-             className = 'eyeButton'/>
+            className = 'eyeButton'/>
             </div>
 
-            : dateFns.isAfter(day, currentMonth ) ?
+            : dateFns.isAfter( day, currentMonth) ?
             <div>
             <CalendarOutlined
             onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
@@ -383,15 +430,22 @@ class SocialCalendar extends React.Component{
              onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
              className = 'eyeButtonAfter'/>
              </div>
-              :
+
+             :
 
             <EyeOutlined
-            onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+            className = 'eyeButtonPass'/>
+          }
+            </div>
 
+            :
+
+            <EyeOutlined
+            onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
             className = 'eyeButtonPass'/>
 
           }
-
           <span className = "bg"> {formattedDate}</span>
           </div>
         </div>
