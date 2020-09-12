@@ -106,6 +106,22 @@ class SocialCalendar extends React.Component{
 
   renderCells(events) {
     console.log(events)
+
+    // This will provide the id so that you cna check whether or not they friends
+    // so they can edit or not
+    let friendListId = []
+    if(this.props.curProfile){
+      if(this.props.curProfile.friends){
+        for (let i = 0; i< this.props.curProfile.friends.length; i++){
+          friendListId.push(this.props.curProfile.friends[i].id)
+        }
+      }
+    }
+
+    console.log(friendListId)
+
+
+
     // startOfMonth() will give you the date of the first day of the current month
     // endOfMonth() will give you the date of the last day of the current month
     // the const start date is to fill in the days of the week of the previous month

@@ -67,6 +67,7 @@ class UserSerializer(serializers.ModelSerializer):
         followerList = []
         followingList = []
         socialCalList = []
+        friendList = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followingList.append(userPerson)
@@ -79,9 +80,13 @@ class UserSerializer(serializers.ModelSerializer):
             socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
             socialCalList.append(socialCell)
 
+        for friends in data['friends']:
+            friend = FollowUserSerializer(models.User.objects.get(username = user)).data
+            friendList.append(friend)
         data['get_following'] = followingList
         data['get_followers'] = followerList
         data['get_socialCal'] = socialCalList
+        data['friends']  = friendList
         return data
 
 

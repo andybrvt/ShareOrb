@@ -338,14 +338,15 @@ class PersonalProfile extends React.Component{
 
       let followers = []
       let following = []
-      console.log(this.props)
-      if (this.props.dacurProfileta){
+
+      if (this.props.curProfile){
         if(this.props.curProfile.get_followers){
           followers = this.props.curProfile.get_followers
         }
         if(this.props.curProfile.get_following){
           following = this.props.curProfile.get_following
         }
+        
       }
 
       return(
