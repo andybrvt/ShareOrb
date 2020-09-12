@@ -310,7 +310,6 @@ class SocialEventPostModal extends React.Component{
         // let startHour = parseInt(time.substring(0,2))
         // let startMin = parseInt(time.substring(3,5))
 
-        console.log('this shit get hits here  ')
         console.log(startHour, startMin, ampm)
         if (startHour === 11 && ampm === ' AM' && startMin === 30){
           endTime =   '12:00 PM'
