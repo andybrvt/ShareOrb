@@ -206,6 +206,9 @@ class ReduxEditEventForm extends React.Component{
     }
 
     // Now this is where the comparison of the times comes in an all the senarios
+    // For this one,for times that the start hour is smaller than that of the
+    // end time you don't need to change the value because due to the redux from
+    // the value of the start time will chagne it self
     if(startHour === endHour ){
       if (startMin > endMin){
         endMin = "00"
