@@ -672,14 +672,14 @@ class NewsfeedPost extends React.Component {
     <p style={{marginLeft:'20px', marginBottom:'20px',fontSize: '14px', color:'black'}}>
               {
 
-                 ((this.props.data.caption).length>150)?
+                 ((this.props.data.caption).length>140)?
                  <div class="photoText">
 
                      <span>
-                      {this.props.data.caption.substring(0,150)}
+                      {this.props.data.caption.substring(0,140)}
                      </span>
 
-                     <span class="grayout outerSeeMore"> {this.props.data.caption.substring(150,185)}</span>
+                     <span class="grayout outerSeeMore"> {this.props.data.caption.substring(140,175)}</span>
                      <div
                        style={{marginLeft: '10px', marginTop:'10px'}}
                        class="seeMore outerSeeMore"
@@ -691,7 +691,7 @@ class NewsfeedPost extends React.Component {
                   </div>
                  :
                  <div style={{display:'flex'}}>
-                   <p  class="photoText" style={{fontSize:'14px'}}>
+                   <p  class="photoText" style={{fontSize:'16px'}}>
                    {this.props.data.caption}
 
                    </p>
@@ -883,7 +883,7 @@ class NewsfeedPost extends React.Component {
                    <div style={{marginTop:10}} class="seeMore"> ... see more </div>
                  </div>
                  :
-                 <div style={{padding:'70px', fontSize:'18px', marginTop:'50px', marginBottom:'50px', }} >
+                 <div style={{padding:'60px', fontSize:'18px', marginTop:'50px', marginBottom:'50px', }} >
 
 
                  {this.props.data.caption}

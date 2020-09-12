@@ -10,7 +10,7 @@ import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 import ExploreWebSocketInstance from '../exploreWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
-
+import TodayEvents from './todayEvents';
 
 import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic, Button} from 'antd';
 import { InboxOutlined, UserOutlined } from '@ant-design/icons';
@@ -317,9 +317,11 @@ class NewsFeedView extends React.Component {
 
 					<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
 						Today's events
+
 					</span>
 
 					<Divider/>
+					<TodayEvents/>
 					</div>
 				</div>
 			</div>

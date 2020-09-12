@@ -190,7 +190,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 
 .imageContainer{
-  width:628px;
+  width:640px;
   height:620px;
 
 }
@@ -432,7 +432,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 }
 
 .photoText{
-    line-height: 80%;
+    line-height: 130%;
 
 }
 
