@@ -57,6 +57,7 @@ class EditEventPopUp extends React.Component {
     // Similar to the submitting to addforms you still have to convert all the
     // days and times correctly in order to add them correctly into the backend
 
+
     const calendarId = this.props.calendarId
 
     let start_date = values.startDate.toDate()
@@ -64,15 +65,18 @@ class EditEventPopUp extends React.Component {
     const start_time = this.timeConvert(values.startTime)
     const end_time = this.timeConvert(values.endTime)
 
+    console.log(start_time, end_time)
+
 
     start_date = dateFns.addHours(start_date, start_time.firstHour)
     start_date = dateFns.addMinutes(start_date, start_time.firstMin)
-    const instance_start_date = dateFns.format(start_date, 'yyyy-MM-dd hh:mm:ss')
+    console.log(start_date)
+    const instance_start_date = dateFns.format(start_date, 'yyyy-MM-dd HH:mm:ss')
 
     end_date = dateFns.addHours(end_date, end_time.firstHour)
     end_date = dateFns.addMinutes(end_date, end_time.firstMin)
-    const instance_end_date = dateFns.format(end_date, 'yyyy-MM-dd hh:mm:ss')
-
+    const instance_end_date = dateFns.format(end_date, 'yyyy-MM-dd HH:mm:ss')
+    console.log(instance_start_date, instance_end_date)
     // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
     if (this.props.addEvent === false ){
@@ -123,6 +127,7 @@ class EditEventPopUp extends React.Component {
         person: [this.props.id]
       }
       // add color to addEvents in redux
+      console.log(instanceEvent)
       this.props.addEvents(instanceEvent)
     }
     this.props.close()

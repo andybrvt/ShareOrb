@@ -958,7 +958,7 @@ main {
 /* This is for the week view and to control the cell size */
 .calendar .scrollBody .backWeekBody .hourcell {
   position: relative;
-  height: 50px;
+  height: 25px;
   border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   overflow: hidden;

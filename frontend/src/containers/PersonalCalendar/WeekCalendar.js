@@ -204,7 +204,7 @@ class WeekCalendar extends React.Component{
 
   for (let dayIndex = 0; dayIndex < 7; dayIndex++){
 
-    for (let hourIndex = 0; hourIndex< 24; hourIndex++){
+    for (let hourIndex = 0; hourIndex< 48; hourIndex++){
         const dayDay = date
         const hourHour = hour
         const clonedayIndex = dayIndex
@@ -212,15 +212,18 @@ class WeekCalendar extends React.Component{
       for(let item = 0; item < events.length;item ++){
         const cloneDay = date
         const cloneHour = hour
-
         // Each event will be added in if it falls within the certain time or hour that
         // is looped through, and when you loop through, there will be an index that will be
         // associated with that area so then you would use that index to place where the item is
         const startDate = new Date(events[item].start_time)
         const endDate = new Date(events[item].end_time)
+
         const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-        if (dateFns.isSameDay(utcStart,cloneDay) && dateFns.isSameHour(utcStart,cloneHour)){
+
+        if (dateFns.isSameDay(startDate,cloneDay) && dateFns.isSameHour(startDate,cloneHour)
+        && dateFns.isSameMinute(startDate, cloneHour)
+      ){
           // So unlike the previous week calendar, we do not need to have a box on every grid
           // we just need to have all the events that fall into that week on that week and then with the
           // index we can start rearragning the events in that week calendar
@@ -246,11 +249,11 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
               <div key= {item.content}  onClick = {() => this.onClickItem(item)} className ="weekEvent" style = {{
                 gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                gridRow: this.hourEventIndex(item.start_time, item.end_time, hourIndex),
+                // gridRow: 15/17,
+                gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
                 backgroundColor: item.color
               }}>
-                <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                   'hh:mm a')}</span>
+                <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
                 <span className = ' ' > {item.content} </span>
 
               </div>
@@ -275,7 +278,7 @@ class WeekCalendar extends React.Component{
 
         )
         toDoStuff =[]
-        hour = dateFns.addHours(hour, 1)
+        hour = dateFns.addMinutes(hour, 30)
 
       }
       // borderHolder.push(
@@ -368,22 +371,44 @@ class WeekCalendar extends React.Component{
 
   hourEventIndex = (start_time, end_time, start_index ) => {
     // This is to set the event in the right rows
+    console.log(start_time, end_time, start_index)
+    let bottomIndex = ''
     const start = new Date(start_time)
     const end = new Date(end_time)
-    const actualStartIndex = (start_index*2)+1
+    const actualStartIndex = (start_index)+1
     const startHour = dateFns.getHours(start)
     const endHour = dateFns.getHours(end)
     const startMin = dateFns.getMinutes(start)
     const endMin = dateFns.getMinutes(end)
-    const topIndex = (actualStartIndex)+(startMin/30)
+    const topIndex = (actualStartIndex)
+    // +(startMin/30)
+    console.log(startMin)
+    console.log(endHour, startHour, endMin, startMin)
     // for the numberator of the index you want to go from the starting index
     // and then decide if you add 1 or not depending if there is a 30 mins
-    const bottomIndex = topIndex + (((endHour - startHour)*2)+(Math.abs(endMin-startMin)/30))
+    console.log(Math.abs(endMin-startMin)/30)
+    if (startMin === 30 && endMin === 0){
+         if (endHour === startHour+1){
+           bottomIndex = topIndex +(Math.abs(endMin-startMin)/30)
+
+         }
+         else {
+           bottomIndex = topIndex + ((endHour - startHour))+(Math.abs(endMin-startMin)/30)
+         }
+    } else {
+         bottomIndex = topIndex + ((endHour - startHour)*2)+(Math.abs(endMin-startMin)/30)
+    }
+
+
+
     // For the denominator you have to start from the starting index and then add
     // the number of indexes depending on the hour and then add one if there is a
     // 30 min mark
     const ratio = topIndex + '/' + bottomIndex
+    console.log(ratio)
+
     return ratio
+    // return '1/3'
   }
 
 
