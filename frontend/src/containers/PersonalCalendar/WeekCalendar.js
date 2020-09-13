@@ -31,9 +31,35 @@ class WeekCalendar extends React.Component{
     currentWeek: new Date(),
     selectedDate: new Date(),
     events: [],
-    selectCondition:false,
+    activeX: null,
+    activeY: null,
   }
 
+  onDayHourClick = (positionX, positionY) => {
+
+    if (this.state.activeX==positionX && this.state.activeY === positionY){
+      this.setState({
+        activeX: null,
+        activeY: null,
+        selectedDate: null
+      })
+    } else {
+      this.setState({
+        activeX: positionX,
+        activeY: positionY,
+
+      })
+    }
+
+  }
+
+  color = (positionX, positionY) => {
+    // Just the color of the selected time on the pick event sync calendar
+    if (this.state.activeX==positionX &&this.state.activeY === positionY){
+      return 'blue';
+    }
+    return '';
+  }
   componentDidMount(){
     //I will be pulling the first day of the week to set the week
     const selectedYear = this.props.match.params.year;
@@ -126,6 +152,7 @@ class WeekCalendar extends React.Component{
 
   // This is to show the time on the side instead of in each box
   // It is too cluttered
+
   renderSide() {
     const dateFormat = 'h a'
     const hour = []
@@ -136,6 +163,8 @@ class WeekCalendar extends React.Component{
         <div
           className = 'cell'
           key = {hour}
+          style = {{background: this.color(i)}}
+          onClick = {(e) => this.onDayHourClick(e, i)}
         >
         <span className = 'number'>{formattedHour}</span>
         </div>
@@ -248,12 +277,17 @@ class WeekCalendar extends React.Component{
           // The day index represents the start column and the hour index represent the start row
           days.push(
             toDoStuff.map(item => (
-              <div key= {item.content}  onClick = {() => this.onClickItem(item)} className ="weekEvent" style = {{
-                gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                // gridRow: 15/17,
-                gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
-                backgroundColor: item.color
-              }}>
+              <div
+                 key= {item.content}
+                  onClick = {() => this.onClickItem(item)}
+                   className ="weekEvent"
+                   style = {{
+                    gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
+                    // gridRow: 15/17,
+                    gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
+
+
+                  }}>
                 <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
                 <span className = ' ' > {item.content} </span>
 
@@ -270,16 +304,17 @@ class WeekCalendar extends React.Component{
             />
             </div>}>
 
-            <div>
 
             <div
+              style={{background: this.color(dayIndex, hourIndex)}}
+              onClick = {(e) => this.onDayHourClick(dayIndex, hourIndex)}
             className = 'col hourcell'
             >
 
 
             </div>
 
-            </div>
+
               </Popover>
 
         )
@@ -328,16 +363,12 @@ class WeekCalendar extends React.Component{
     const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
     console.log(specificHour, specificMinute)
     if(specificMinute==0){
-      return(
-      <div style={{background:'red'}}
-      className = 'col hourcell'
-      >
-
-
-      </div>
-    )
+      console.log("made it")
+      this.setState({
+        selectCondition:true,
+      });
     }
-
+    console.log(this.state.selectCondition)
     const subInEvent = {
       addEvent: true,
       title: '',
@@ -431,9 +462,6 @@ class WeekCalendar extends React.Component{
   }
 
 
-  onDayHourClick = (day, hour) => {
-    console.log(day, hour)
-  }
 
   // this is a onclick function that goes to the next week
   nextWeek =() =>{
