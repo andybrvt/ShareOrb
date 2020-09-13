@@ -56,7 +56,7 @@ class WeekCalendar extends React.Component{
   color = (positionX, positionY) => {
     // Just the color of the selected time on the pick event sync calendar
     if (this.state.activeX==positionX &&this.state.activeY === positionY){
-      return 'blue';
+      return '#91d5ff';
     }
     return '';
   }
@@ -163,8 +163,6 @@ class WeekCalendar extends React.Component{
         <div
           className = 'cell'
           key = {hour}
-          style = {{background: this.color(i)}}
-          onClick = {(e) => this.onDayHourClick(e, i)}
         >
         <span className = 'number'>{formattedHour}</span>
         </div>
@@ -286,7 +284,7 @@ class WeekCalendar extends React.Component{
                     // gridRow: 15/17,
                     gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
 
-
+                    backgroundColor: item.color
                   }}>
                 <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
                 <span className = ' ' > {item.content} </span>
