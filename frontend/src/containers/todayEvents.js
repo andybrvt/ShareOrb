@@ -17,7 +17,8 @@ class TodayEvents extends React.Component {
 
   componentDidMount(){
 
-
+    this.props.getEvents()
+    console.log(this.props)
   }
 
 
@@ -52,6 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+
     getEvents: () => dispatch(calendarActions.getUserEvents()),
   }
 }

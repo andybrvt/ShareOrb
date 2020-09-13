@@ -321,7 +321,7 @@ class NewsFeedView extends React.Component {
 					</span>
 
 					<Divider/>
-					<TodayEvents/>
+					<TodayEvents {...this.props}/>
 					</div>
 				</div>
 			</div>

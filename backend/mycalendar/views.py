@@ -58,6 +58,14 @@ class CalendarEventsView(generics.ListAPIView):
         queryset = models.Event.objects.filter(person = user).order_by('start_time')
         return queryset
 
+
+class GrabDayEvents(generics.ListAPIView):
+    serializer_class = serializers.EventSerializer
+    def get_queryset(self):
+        user = self.request.user
+        queryset = models.Event.objects.filter(person = user).order_by('start_time')
+        return queryset
+
 # This is to test if the filter works
 class CalendarTestEventsView(generics.ListAPIView):
     serializer_class = serializers.EventSerializer

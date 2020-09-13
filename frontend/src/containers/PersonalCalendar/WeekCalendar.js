@@ -30,7 +30,8 @@ class WeekCalendar extends React.Component{
   state = {
     currentWeek: new Date(),
     selectedDate: new Date(),
-    events: []
+    events: [],
+    selectCondition:false,
   }
 
   componentDidMount(){
@@ -268,10 +269,15 @@ class WeekCalendar extends React.Component{
             close = {() => this.props.closeModal()}
             />
             </div>}>
+
+            <div>
+
             <div
             className = 'col hourcell'
             >
 
+
+            </div>
 
             </div>
               </Popover>
@@ -320,6 +326,17 @@ class WeekCalendar extends React.Component{
     const endDate = dateFns.addMinutes(newStartDate , 30)
     const finalStart = dateFns.format(newStartDate, 'yyyy-MM-dd HH:mm:ss')
     const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
+    console.log(specificHour, specificMinute)
+    if(specificMinute==0){
+      return(
+      <div style={{background:'red'}}
+      className = 'col hourcell'
+      >
+
+
+      </div>
+    )
+    }
 
     const subInEvent = {
       addEvent: true,
