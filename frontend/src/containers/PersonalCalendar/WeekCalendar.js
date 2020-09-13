@@ -314,9 +314,11 @@ class WeekCalendar extends React.Component{
     // We only need the start and end time tho so all the other fields can
     // be empty
     const specificHour = dateFns.getHours(hour)
+    const specificMinute = dateFns.getMinutes(hour)
     const startDate = dateFns.addHours (day, specificHour)
-    const endDate = dateFns.addHours(startDate , 1)
-    const finalStart = dateFns.format(startDate, 'yyyy-MM-dd HH:mm:ss')
+    const newStartDate = dateFns.addMinutes(startDate, specificMinute)
+    const endDate = dateFns.addMinutes(newStartDate , 30)
+    const finalStart = dateFns.format(newStartDate, 'yyyy-MM-dd HH:mm:ss')
     const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
 
     const subInEvent = {
