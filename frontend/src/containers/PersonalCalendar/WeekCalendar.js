@@ -262,6 +262,7 @@ class WeekCalendar extends React.Component{
 
           )
         }
+        console.log(dayIndex, hourIndex)
         border.push(
           <Popover trigger="click"  placement="rightTop" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
             <EditEventPopUp
