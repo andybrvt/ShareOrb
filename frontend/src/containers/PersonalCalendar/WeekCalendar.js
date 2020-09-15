@@ -246,9 +246,12 @@ class WeekCalendar extends React.Component{
         const startDate = new Date(events[item].start_time)
         const endDate = new Date(events[item].end_time)
 
-        const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
+
+        // DONT NEED TO USE THIS
+        // const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
 
+        console.log(utcEnd)
         if (dateFns.isSameDay(startDate,cloneDay) && dateFns.isSameHour(startDate,cloneHour)
         && dateFns.isSameMinute(startDate, cloneHour)
       ){
@@ -258,8 +261,8 @@ class WeekCalendar extends React.Component{
           toDoStuff.push(
             events[item]
           )
-        }if(dateFns.isAfter(cloneDay, utcStart) && dateFns.isBefore(cloneDay, utcEnd)
-        && dateFns.isSameDay(cloneDay, dateFns.startOfWeek(cloneDay)) && dateFns.getHours(utcStart) === dateFns.getHours(cloneHour)){
+        }if(dateFns.isAfter(cloneDay, startDate) && dateFns.isBefore(cloneDay, utcEnd)
+        && dateFns.isSameDay(cloneDay, dateFns.startOfWeek(cloneDay)) && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)){
           toDoStuff.push(
             events[item]
           )

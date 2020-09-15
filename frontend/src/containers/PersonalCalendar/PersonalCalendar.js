@@ -211,12 +211,12 @@ class PersonalCalendar extends React.Component{
           const endDate = new Date(events[item].end_time)
           const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
           const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-          if (dateFns.isSameDay(utcStart, day)){
+          if (dateFns.isSameDay(startDate, day)){
             toDoStuff.push(
               events[item]
             )
           }
-          if (dateFns.isAfter(day, utcStart) && dateFns.isBefore(day, utcEnd) && dateFns.isSameDay(day, dateFns.startOfWeek(day))){
+          if (dateFns.isAfter(day, startDate) && dateFns.isBefore(day, endDate) && dateFns.isSameDay(day, dateFns.startOfWeek(day))){
               toDoStuff.push(
                 events[item]
               )
@@ -247,8 +247,7 @@ class PersonalCalendar extends React.Component{
                     backgroundColor: item.color
                   }}>
                   <div onClick = {() => this.onClickItem(item)}>
-                  <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                     'hh:mm a')}</span>
+                  <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </div>

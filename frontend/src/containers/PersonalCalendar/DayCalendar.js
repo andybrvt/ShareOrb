@@ -164,7 +164,7 @@ class DayCalendar extends React.Component{
     // Same day(endHourday) but till the last sec of the day
     // Since we are not doing a list of list and there is just days we do not
     // need the while statment, just a list
-    for (let i = 0; i<24; i++){
+    for (let i = 0; i<48; i++){
       formattedHour = dateFns.format(hour, hourFormat)
       for(let item = 0; item < events.length; item ++){
         // For the if statements and what you put into the calendar depends on
@@ -172,15 +172,19 @@ class DayCalendar extends React.Component{
         // times
         const startDate = new Date(events[item].start_time)
         const endDate = new Date(events[item].end_time)
+        const cloneHour = hour
+        console.log(hour)
         const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-        if (dateFns.isSameHour(utcStart, hour)
-            && dateFns.isSameDay(utcStart, hour) ){
+        if (dateFns.isSameHour(startDate, cloneHour)
+            && dateFns.isSameDay(startDate, cloneHour)
+            && dateFns.isSameMinute(startDate, cloneHour)
+           ){
           toDoStuff.push(
             events[item]
           )
-        } if (dateFns.isAfter(hour, utcStart) && dateFns.isBefore(hour, utcEnd)
-      && dateFns.getHours(utcStart) === dateFns.getHours(hour)){
+        } if (dateFns.isAfter(cloneHour, startDate) && dateFns.isBefore(cloneHour, endDate)
+      && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)){
           toDoStuff.push(
             events[item]
           )
@@ -199,8 +203,7 @@ class DayCalendar extends React.Component{
                 backgroundColor: item.color
               }}
               onClick = {() => this.onClickItem(item)}>
-              <span > {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-                 'hh:mm a')}</span>
+              <span > {dateFns.format(new Date(item.start_time),'hh:mm a')} - {dateFns.format(new Date(item.end_time),'hh:mm a')}</span>
               <span className = ' ' > {item.content} </span>
               </div>
             ))
@@ -212,7 +215,7 @@ class DayCalendar extends React.Component{
         </div>
       )
       toDoStuff = []
-      hour = dateFns.addHours(hour, 1);
+      hour = dateFns.addMinutes(hour, 30);
     }
     return(
       <div className = 'scrollBody'>
@@ -232,20 +235,32 @@ class DayCalendar extends React.Component{
     // starting index and then you will then add one for any extra 30 mins (there is more math involved
     // but that is the gist of it)
     console.log(start_time, end_time, start_index)
+    let bottomIndex = ''
     const start = new Date(start_time)
     const end = new Date(end_time)
-    const actualStartIndex = (start_index*2)+1
+    const actualStartIndex = (start_index)+1
     const startHour = dateFns.getHours(start)
     const endHour = dateFns.getHours(end)
     const startMin = dateFns.getMinutes(start)
     const endMin = dateFns.getMinutes(end)
     // for the numberator of the index you want to go from the starting index
     // and then decide if you add 1 or not depending if there is a 30 mins
-    const topIndex = (actualStartIndex)+(startMin/30)
+    const topIndex = (actualStartIndex)
     // For the denominator you have to start from the starting index and then add
     // the number of indexes depending on the hour and then add one if there is a
     // 30 min mark
-    const bottomIndex = topIndex + (((endHour - startHour)*2)+(Math.abs(endMin - startMin)/30))
+
+    if (startMin === 30 && endMin === 0){
+      if (endHour === startHour +1){
+        bottomIndex = topIndex+(Math.abs(endMin-startMin)/30)
+      }
+      else {
+        bottomIndex = topIndex + ((endHour - startHour))+(Math.abs(endMin-startMin)/30)
+      }
+    } else {
+        bottomIndex = topIndex + ((endHour - startHour)*2)+(Math.abs(endMin - startMin)/30)
+    }
+
     const ratio = topIndex + '/' + bottomIndex
     return ratio
   }
@@ -339,7 +354,7 @@ class DayCalendar extends React.Component{
               {this.renderHours()}
             </div>
             <div className = 'calendar'>
-            
+
               {this.renderCells(this.props.events)}
               </div>
             </div>
