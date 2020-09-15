@@ -22,6 +22,27 @@ class DayCalendar extends React.Component{
       currentDay: new Date(),
       selectedDate: new Date(),
       events: [],
+      activeX: null,
+  }
+
+  onDayHourClick = (positionX) => {
+    console.log(positionX)
+    if(this.state.activeX == positionX){
+      this.setState({
+        activeX: null,
+      })
+    } else {
+      this.setState({
+        activeX: positionX
+      })
+    }
+  }
+
+  color = (positionX) => {
+    if(this.state.activeX === positionX){
+      return '#91d5ff'
+    }
+    return '';
   }
 
   componentDidMount(){
@@ -173,7 +194,6 @@ class DayCalendar extends React.Component{
         const startDate = new Date(events[item].start_time)
         const endDate = new Date(events[item].end_time)
         const cloneHour = hour
-        console.log(hour)
         const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
         if (dateFns.isSameHour(startDate, cloneHour)
@@ -194,7 +214,6 @@ class DayCalendar extends React.Component{
       const cloneHour = hour
       const cloneToDoStuff = toDoStuff
       if (toDoStuff.length > 0){
-        console.log(i)
         hours.push(
             toDoStuff.map(item => (
               <div className = "eventsDay"
@@ -208,10 +227,14 @@ class DayCalendar extends React.Component{
               </div>
             ))
         )}
+      const hourIndex = i;
       border.push(
         <div
-        className = 'daycell'
-        onClick = {() => this.onHourClick(cloneHour)}>
+        style = {{background: this.color(hourIndex)}}
+        onClick = {(e)=> this.onDayHourClick(hourIndex)}
+        className = {`${i%2 === 0 ? 'dayCellT' : 'dayCellB'}`}
+        // onClick = {() => this.onHourClick(cloneHour)}
+        >
         </div>
       )
       toDoStuff = []
