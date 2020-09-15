@@ -307,7 +307,7 @@ class WeekCalendar extends React.Component{
             <div
               style={{background: this.color(dayIndex, hourIndex)}}
               onClick = {(e) => this.onDayHourClick(dayIndex, hourIndex)}
-            className = 'col hourcell'
+            className = {`col ${hourIndex % 2 === 0 ? 'hourcellT' : 'hourcellB' }` }
             >
 
 
