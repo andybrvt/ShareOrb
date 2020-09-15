@@ -570,7 +570,8 @@ main {
   /* background-color: lightblue; */
   color: white;
   font-size: 15px;
-  border-radius: 10px;
+  /* this makes events rounded but gonna take it out for now */
+  /* border-radius: 10px; */
   padding-left: 10px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   /* grid-column: 1/7; */
