@@ -337,8 +337,6 @@ class NewsfeedPost extends React.Component {
     return (
 
       <div style={{marginLeft:'15px', fontSize:'14px'}}>
-
-
         {
           (peopleLikeId.includes(this.props.userId))?
           <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
@@ -354,7 +352,7 @@ class NewsfeedPost extends React.Component {
           <div class="linewrapper" >
              <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
-           <span class="LikeCommentHover" onClick={this.OnClickPost}>
+           <span class="LikeCommentHover" onClick={this.OnClickPost} style={{marginTop:'-20px'}}>
 
                {this.props.data.post_comments.length} Comments
 
@@ -596,7 +594,7 @@ class NewsfeedPost extends React.Component {
                 <span class="headerPost">
 
                   <span
-                    style={{color:'black', fontSize:'15px'}}
+                    style={{color:'black', fontSize:'15px', marginLeft:'-5px'}}
                     class="headerPostText alignleft" >
                       {this.props.data.user.first_name}{' '}{this.props.data.user.last_name} <br/>
                   <span>
@@ -747,7 +745,7 @@ class NewsfeedPost extends React.Component {
     <div>
 
 
-    <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
+    <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10, marginLeft:'-5px'}}>
 
       <span class="profilePicHeader">
         <span class="headerContainer" >

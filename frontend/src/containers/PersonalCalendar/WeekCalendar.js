@@ -278,6 +278,10 @@ class WeekCalendar extends React.Component{
           // The day index represents the start column and the hour index represent the start row
           days.push(
             toDoStuff.map(item => (
+              <Popover placement="topRight"  content={<div>
+                <p>Content</p>
+                <p>Content</p>
+                </div>} trigger="click">
               <div
                  key= {item.content}
                   onClick = {() => this.onClickItem(item)}
@@ -289,10 +293,16 @@ class WeekCalendar extends React.Component{
 
                     backgroundColor: item.color
                   }}>
-                <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
-                <span className = ' ' > {item.content} </span>
+
+
+                      <span className="pointerEvent">
+                        <span className = 'pointerEvent' > {item.content} </span>
+                        <span style={{float:'right'}} className = 'pointerEvent'> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
+                      </span>
+
 
               </div>
+              </Popover>
             ))
 
           )
@@ -509,7 +519,10 @@ class WeekCalendar extends React.Component{
       color: oneEvent.color,
       id: oneEvent.id
     }
-    this.props.openModal(eventObject)
+
+
+    // this.props.openModal(eventObject)
+
   }
 
   onAddEvent = () => {
