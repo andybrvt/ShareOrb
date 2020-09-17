@@ -472,7 +472,7 @@ class PersonalCalendar extends React.Component{
           // This one is for the last slot where the week that contains the end date
           // The plus 2 is for the 1 starting index and 1 for the extra index that make it fall
           // in the correct position
-          const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+3
+          const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+2
           console.log(Math.abs(differentWeekDifference))
           return '1/'+differentWeekDifference
       } if (dateFns.isSameWeek(start, eventDay)){
