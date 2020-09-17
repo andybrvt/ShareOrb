@@ -216,7 +216,13 @@ class PersonalCalendar extends React.Component{
               events[item]
             )
           }
-          if (dateFns.isAfter(day, startDate) && dateFns.isBefore(day, endDate) && dateFns.isSameDay(day, dateFns.startOfWeek(day))){
+          if (dateFns.isAfter(day, startDate)
+          && dateFns.isBefore(day, endDate)
+          // && dateFns.isSameDay(day, endDate)
+          && dateFns.isSameDay(day, dateFns.startOfWeek(day))
+        ){
+            console.log(day)
+
               toDoStuff.push(
                 events[item]
               )
@@ -454,6 +460,7 @@ class PersonalCalendar extends React.Component{
     const end = new Date (end_time)
     const eventDay = new Date (day)
 
+    console.log(day)
     if (dateFns.isSameWeek(start, end)){
      const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
      const ratio = start_index + '/' + (sameWeekDifference+start_index)

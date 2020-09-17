@@ -255,6 +255,8 @@ class WeekCalendar extends React.Component{
         if (dateFns.isSameDay(startDate,cloneDay) && dateFns.isSameHour(startDate,cloneHour)
         && dateFns.isSameMinute(startDate, cloneHour)
       ){
+        // This if statement has to do more with events that span ususally one day
+
           // So unlike the previous week calendar, we do not need to have a box on every grid
           // we just need to have all the events that fall into that week on that week and then with the
           // index we can start rearragning the events in that week calendar
@@ -262,7 +264,13 @@ class WeekCalendar extends React.Component{
             events[item]
           )
         }if(dateFns.isAfter(cloneDay, startDate) && dateFns.isBefore(cloneDay, utcEnd)
-        && dateFns.isSameDay(cloneDay, dateFns.startOfWeek(cloneDay)) && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)){
+        && dateFns.isSameDay(cloneDay, dateFns.startOfWeek(cloneDay))
+        && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)
+        && dateFns.getMinutes(startDate) === dateFns.getMinutes(cloneHour)
+      ){
+        console.log(cloneHour, endDate)
+
+        // This if statement has more to do with the events that span multiple days
           toDoStuff.push(
             events[item]
           )

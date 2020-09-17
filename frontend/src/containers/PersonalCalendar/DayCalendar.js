@@ -160,6 +160,8 @@ class DayCalendar extends React.Component{
 
 // render all the hour cell within each day
   renderCells(events) {
+
+    console.log(events)
     const currentDay = this.state.currentDay
     const selectedDate = this.props.currentDate
     const startHourDay = dateFns.startOfDay(selectedDate)
@@ -203,8 +205,12 @@ class DayCalendar extends React.Component{
           toDoStuff.push(
             events[item]
           )
-        } if (dateFns.isAfter(cloneHour, startDate) && dateFns.isBefore(cloneHour, endDate)
-      && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)){
+        } if (dateFns.isAfter(cloneHour, startDate)
+        && dateFns.isBefore(cloneHour, endDate)
+        && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)
+        && dateFns.getMinutes(startDate) === dateFns.getMinutes(cloneHour)
+      ){
+        console.log(cloneHour, endDate)
           toDoStuff.push(
             events[item]
           )
@@ -355,7 +361,7 @@ class DayCalendar extends React.Component{
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props.events)
     return (
       <div className = 'calendarContainer'>
         <EventSyncModal
