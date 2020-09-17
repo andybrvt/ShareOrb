@@ -430,7 +430,7 @@ class WeekCalendar extends React.Component{
          const ratio = index+ '/'+8
          return ratio
        } else if (dateFns.isSameWeek(end, eventDay)){
-         const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+3
+         const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+2
          return '1/'+differentWeekDifference
        } else {
          return '1/8'
