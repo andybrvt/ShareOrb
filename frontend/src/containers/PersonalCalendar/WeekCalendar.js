@@ -273,11 +273,12 @@ class WeekCalendar extends React.Component{
           // out in the weekBody
 
           // The day index represents the start column and the hour index represent the start row
+          let startDate = dateFns.startOfWeek(this.props.currentDate)
           days.push(
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div>
+                <div style={{padding:'20px'}}>
                   <p style={{display:'inline-block', marginRight:'20px'}}>
 
                     <Input style={{marginRight:'20px'}}
@@ -286,13 +287,35 @@ class WeekCalendar extends React.Component{
                   name = 'eventColor'
                   defaultValue = '#01D4F4'
                   {...item.color}/>
-                {item}
+
 
                   </p>
-                  <p style={{display:'inline-block'}}>
-                    {item.title}
-                  </p>
-                  <p>{item.content}</p>
+
+                  <span style={{fontSize:'18px', color:'black'}}>
+
+                    {dateFns.format(new Date(item.start_time), 'M')}/
+
+                    {dateFns.format(new Date(item.start_time), 'd')}
+                    <span style={{marginLeft:'5px'}}>
+                      {dateFns.format(dateFns.addDays(startDate, 3), 'iiii')}
+                    </span>
+                    <span style={{marginLeft:'5px'}}>
+                      @
+                    </span>
+                    <span style={{marginLeft:'5px'}}>
+                      {dateFns.format(new Date(item.start_time),'h:mm a')}
+                    </span>
+
+                  </span>
+
+
+
+
+
+
+                    <p>{item.content}</p>
+
+                  <p>{item.title}</p>
                 </div>
 
               } trigger="click">
@@ -311,7 +334,7 @@ class WeekCalendar extends React.Component{
 
                       <span className="pointerEvent">
                         <span className = 'pointerEvent' > {item.content} </span>
-                        <span style={{float:'right'}} className = 'pointerEvent'> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
+                        <span style={{float:'right'}} className = 'pointerEvent'> {dateFns.format(new Date(item.start_time),'h:mm a')}</span>
                       </span>
 
 
