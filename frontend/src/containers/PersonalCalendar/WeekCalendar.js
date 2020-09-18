@@ -350,7 +350,7 @@ class WeekCalendar extends React.Component{
 
                     {dateFns.format(new Date(item.start_time), 'd')}
                     <span style={{marginLeft:'5px'}}>
-                      {cloneDay}
+                      {dateFns.format(cloneDay, 'iiii')}
                       {dateFns.format(dateFns.addDays(startDate, 3), 'iiii')}
                     </span>
                     <span style={{marginLeft:'5px'}}>
