@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import * as navActions from '../../../store/actions/nav';
@@ -32,6 +32,23 @@ const { TextArea } = Input
 // Basically the field or parameter is basically all the props in the field is getting
 // passed into the renderField
 // With the props passed in, it makes it pretty 'universal' to all the Fields in the form
+const renderRadioSelect = (field) => {
+  // render the radio to pick normal date, weekly, or daily
+  const options = [
+  { label: 'Apple', value: 'Apple' },
+  { label: 'Pear', value: 'Pear' },
+  { label: 'Orange', value: 'Orange' },
+];
+
+  return (
+    <Radio.Group
+          options={options}
+          // value={}
+          optionType="button"
+        />
+  )
+}
+
 const renderField = (field) => {
   console.log(field)
   return (
@@ -42,6 +59,8 @@ const renderField = (field) => {
     className = 'box'/>
   )
 }
+
+
 
 const renderTextArea = (field) => {
   return (
@@ -557,6 +576,13 @@ class ReduxEditEventForm extends React.Component{
             component = {renderStartDateSelect}>
               {this.renderEndTimeSelect()}
             </Field>
+
+            <div>
+            <Field
+            name = 'reoccuring'
+            component = {renderRadioSelect}
+            />
+            </div>
 
           </div>
           { this.props.addEvent ?

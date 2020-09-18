@@ -50,6 +50,7 @@ class ReactAddEventForm extends React.Component {
       title: '',
       content: '',
       location: '',
+      repeatCondition: 'none',
       eventColor: '#01D4F4',
       error: false,
     }
@@ -377,7 +378,8 @@ class ReactAddEventForm extends React.Component {
         end_date: this.state.endDate.toDate(),
         start_time: this.state.timeStart,
         end_time: this.state.timeEnd,
-        event_color: this.state.eventColor
+        event_color: this.state.eventColor,
+        repeatCondition:this.state.repeatCondition
       }
       this.onClear()
       this.props.onSubmit(submitContent)

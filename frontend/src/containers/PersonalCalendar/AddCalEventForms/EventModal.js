@@ -108,6 +108,7 @@ class EventModal extends React.Component {
       location: values.location,
       color: values.event_color,
       person: [this.props.id],
+      repeatCondition: values.repeatCondition
     })
 
     // The event instance is pretty much used when you just recently added an
@@ -122,7 +123,8 @@ class EventModal extends React.Component {
       end_time: temp_end_date,
       location: values.location,
       color: values.event_color,
-      person: [this.props.id]
+      person: [this.props.id],
+      repeatCondition: values.repeatCondition
     }
     // add color to addEvents in redux
     this.props.addEvents(instanceEvent)

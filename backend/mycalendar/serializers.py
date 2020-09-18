@@ -45,7 +45,8 @@ class CreateEventSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Event
-        fields = ('title', 'content', 'start_time', 'end_time', 'location', 'color', 'person')
+        fields = '__all__'
+        # fields = ('title', 'content', 'start_time', 'end_time', 'location', 'color', 'person', 'repeatCondition')
 
 # So when youa are working with an updateapiview you need to have a update function
 # in your serilaizer to update your data

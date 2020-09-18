@@ -57,6 +57,7 @@ class EditEventPopUp extends React.Component {
     // Similar to the submitting to addforms you still have to convert all the
     // days and times correctly in order to add them correctly into the backend
 
+    console.log(values);
 
     const calendarId = this.props.calendarId
 
@@ -79,58 +80,58 @@ class EditEventPopUp extends React.Component {
     console.log(instance_start_date, instance_end_date)
     // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
-    if (this.props.addEvent === false ){
-      authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
-        title: values.title,
-        content: values.content,
-        start_time: start_date,
-        end_time: end_date,
-        location: values.location,
-        color: values.eventColor,
-        person: [this.props.id]
-      })
-      const instanceEvent = {
-        id: this.props.calendarId,
-        title: values.title,
-        content: values.content,
-        start_time: instance_start_date,
-        end_time: instance_end_date,
-        location: values.location,
-        color: values.eventColor,
-        person: [this.props.id]
-      }
-      console.log(instanceEvent)
-      this.props.editEvent(instanceEvent)
-    } else if (this.props.addEvent === true){
-      authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
-        title: values.title,
-        content: values.content,
-        start_time: start_date,
-        end_time: end_date,
-        location: values.location,
-        color: values.eventColor,
-        person: [this.props.id],
-      })
-
-      // The event instance is pretty much used when you just recently added an
-      // event, so because of that you want to add the date in just as how the
-      // date and event will be added according to the loaded event
-
-
-      const instanceEvent = {
-        title: values.title,
-        content: values.content,
-        start_time: instance_start_date,
-        end_time: instance_end_date,
-        location: values.location,
-        color: values.eventColor,
-        person: [this.props.id]
-      }
-      // add color to addEvents in redux
-      console.log(instanceEvent)
-      this.props.addEvents(instanceEvent)
-    }
-    this.props.close()
+    // if (this.props.addEvent === false ){
+    //   authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
+    //     title: values.title,
+    //     content: values.content,
+    //     start_time: start_date,
+    //     end_time: end_date,
+    //     location: values.location,
+    //     color: values.eventColor,
+    //     person: [this.props.id]
+    //   })
+    //   const instanceEvent = {
+    //     id: this.props.calendarId,
+    //     title: values.title,
+    //     content: values.content,
+    //     start_time: instance_start_date,
+    //     end_time: instance_end_date,
+    //     location: values.location,
+    //     color: values.eventColor,
+    //     person: [this.props.id]
+    //   }
+    //   console.log(instanceEvent)
+    //   this.props.editEvent(instanceEvent)
+    // } else if (this.props.addEvent === true){
+    //   authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+    //     title: values.title,
+    //     content: values.content,
+    //     start_time: start_date,
+    //     end_time: end_date,
+    //     location: values.location,
+    //     color: values.eventColor,
+    //     person: [this.props.id],
+    //   })
+    //
+    //   // The event instance is pretty much used when you just recently added an
+    //   // event, so because of that you want to add the date in just as how the
+    //   // date and event will be added according to the loaded event
+    //
+    //
+    //   const instanceEvent = {
+    //     title: values.title,
+    //     content: values.content,
+    //     start_time: instance_start_date,
+    //     end_time: instance_end_date,
+    //     location: values.location,
+    //     color: values.eventColor,
+    //     person: [this.props.id]
+    //   }
+    //   // add color to addEvents in redux
+    //   console.log(instanceEvent)
+    //   this.props.addEvents(instanceEvent)
+    // }
+    // this.props.close()
   }
 
   openNotification = placement => {
