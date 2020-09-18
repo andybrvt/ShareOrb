@@ -34,10 +34,11 @@ const { TextArea } = Input
 // With the props passed in, it makes it pretty 'universal' to all the Fields in the form
 const renderRadioSelect = (field) => {
   // render the radio to pick normal date, weekly, or daily
+  console.log(field)
   const options = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Pear', value: 'Pear' },
-  { label: 'Orange', value: 'Orange' },
+  { label: 'Normal', value: 'none' },
+  { label: 'Weekly', value: 'weekly' },
+  { label: 'Daily', value: 'daily' },
 ];
 
   return (

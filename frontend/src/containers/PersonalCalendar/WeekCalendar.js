@@ -226,9 +226,10 @@ class WeekCalendar extends React.Component{
         const hourHour = hour
         const clonedayIndex = dayIndex
         const clonehourIndex = hourIndex
-      for(let item = 0; item < events.length;item ++){
         const cloneDay = date
         const cloneHour = hour
+      for(let item = 0; item < events.length;item ++){
+
         // Each event will be added in if it falls within the certain time or hour that
         // is looped through, and when you loop through, there will be an index that will be
         // associated with that area so then you would use that index to place where the item is
@@ -349,6 +350,7 @@ class WeekCalendar extends React.Component{
 
                     {dateFns.format(new Date(item.start_time), 'd')}
                     <span style={{marginLeft:'5px'}}>
+                      {cloneDay}
                       {dateFns.format(dateFns.addDays(startDate, 3), 'iiii')}
                     </span>
                     <span style={{marginLeft:'5px'}}>
