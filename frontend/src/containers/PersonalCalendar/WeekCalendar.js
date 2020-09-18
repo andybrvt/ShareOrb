@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup, Popover } from 'antd';
+import { Input, Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup, Popover } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -173,17 +173,6 @@ class WeekCalendar extends React.Component{
   }
 
 
-  renderColor = () => {
-    // Used for testing the rows
-    const color = ["green","yellow","red","blue","orange","pink","cyan"]
-    const len = color.length
-    const randomNum = Math.floor(Math.random()*len)
-    const pickcolor = color[randomNum]
-    return pickcolor
-
-  }
-
-
   // USE THIS
   renderWeekCell(events){
     // To explain the grid --> there is a big container that holds many rows and each
@@ -338,12 +327,29 @@ class WeekCalendar extends React.Component{
           // The day index represents the start column and the hour index represent the start row
           days.push(
             toDoStuff.map(item => (
-              <Popover placement="topRight"  content={<div>
-                <p>Content</p>
-                <p>Content</p>
-                </div>} trigger="click">
+
+              <Popover placement="right"  content={
+                <div>
+                  <p style={{display:'inline-block', marginRight:'20px'}}>
+
+                    <Input style={{marginRight:'20px'}}
+                  type = 'color'
+                  className = 'reduxColor'
+                  name = 'eventColor'
+                  defaultValue = '#01D4F4'
+                  {...item.color}/>
+                {item}
+
+                  </p>
+                  <p style={{display:'inline-block'}}>
+                    {item.title}
+                  </p>
+                  <p>{item.content}</p>
+                </div>
+
+              } trigger="click">
               <div
-                 key= {item.content}
+                 key= {item.title}
                   onClick = {() => this.onClickItem(item)}
                    className ="weekEvent"
                    style = {{
