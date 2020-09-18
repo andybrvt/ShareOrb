@@ -331,7 +331,7 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{padding:'20px'}}>
+                <div style={{padding:'25px'}}>
                   <p style={{display:'inline-block', marginRight:'20px'}}>
 
                     <Input style={{marginRight:'20px'}}
@@ -344,21 +344,9 @@ class WeekCalendar extends React.Component{
 
                   </p>
 
-                  <span style={{fontSize:'18px', color:'black'}}>
+                  <span style={{fontSize:'20px', color:'black'}}>
 
-                    {dateFns.format(new Date(item.start_time), 'M')}/
-
-                    {dateFns.format(new Date(item.start_time), 'd')}
-                    <span style={{marginLeft:'5px'}}>
-                      {dateFns.format(cloneDay, 'iiii')}
-                      {dateFns.format(dateFns.addDays(startDate, 3), 'iiii')}
-                    </span>
-                    <span style={{marginLeft:'5px'}}>
-                      @
-                    </span>
-                    <span style={{marginLeft:'5px'}}>
-                      {dateFns.format(new Date(item.start_time),'h:mm a')}
-                    </span>
+                  {item.title}
 
                   </span>
 
@@ -367,9 +355,24 @@ class WeekCalendar extends React.Component{
 
 
 
-                    <p>{item.content}</p>
 
-                  <p>{item.title}</p>
+
+                  <p style={{color:'black', fontSize:'16px'}}>
+                    {dateFns.format(new Date(item.start_time), 'M')}/
+
+                    {dateFns.format(new Date(item.start_time), 'd')}
+                    <span style={{marginLeft:'5px'}}>
+                      {dateFns.format(cloneDay, 'iiii')}
+                    </span>
+                    <span style={{marginLeft:'5px'}}>
+                      @
+                    </span>
+                    <span style={{marginLeft:'5px'}}>
+                      {dateFns.format(new Date(item.start_time),'h:mm a')}
+                    </span>
+                  </p>
+
+                  <p>{item.content}</p>
                 </div>
 
               } trigger="click">
@@ -660,13 +663,14 @@ class WeekCalendar extends React.Component{
           </div>
           <div className = 'miniCalContainer'>
             <Button
-            // type="primary"
-            className = 'addEventButton'
+            type="primary"
+            className = 'miniEventSyncButton'
             onClick = {this.onAddEvent}>
             Add Event
             </Button>
             <MiniCalendar {...this.props}/>
             <Button
+            style={{marginTop:'40px'}}
             type = 'primary'
             className = 'miniEventSyncButton'
             onClick = {this.openEventSyncModal}>
