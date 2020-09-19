@@ -211,22 +211,39 @@ class PersonalCalendar extends React.Component{
           const endDate = new Date(events[item].end_time)
           const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
           const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-          if (dateFns.isSameDay(startDate, day)){
-            toDoStuff.push(
-              events[item]
-            )
-          }
-          if (dateFns.isAfter(day, startDate)
-          && dateFns.isBefore(day, endDate)
-          // && dateFns.isSameDay(day, endDate)
-          && dateFns.isSameDay(day, dateFns.startOfWeek(day))
-        ){
-            console.log(day)
-
+          if (events[item].repeatCondition === 'weekly'){
+            // This will be on the every day of the week
+            const eventDay = dateFns.getDay(startDate);
+            const cloneDay = dateFns.getDay(day);
+            if (eventDay === cloneDay){
               toDoStuff.push(
                 events[item]
               )
             }
+
+
+
+          } else if (events[item].repeatCondition === 'none'){
+            if (dateFns.isSameDay(startDate, day)){
+              toDoStuff.push(
+                events[item]
+              )
+            }
+            if (dateFns.isAfter(day, startDate)
+            && dateFns.isBefore(day, endDate)
+            // && dateFns.isSameDay(day, endDate)
+            && dateFns.isSameDay(day, dateFns.startOfWeek(day))
+          ){
+              console.log(day)
+
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+          }
+
+
+
         }
         // this give the date will give the day numnber in 1-365
 
