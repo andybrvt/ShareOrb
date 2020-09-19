@@ -43,6 +43,7 @@ const renderRadioSelect = (field) => {
 
   return (
     <Radio.Group
+          {...field.input}
           options={options}
           // value={}
           optionType="button"
@@ -373,6 +374,8 @@ class ReduxEditEventForm extends React.Component{
     )
   }
 
+
+
   onRed = () => {
     let startDate = this.props.startDate
     let endDate = this.props.endDate
@@ -582,6 +585,7 @@ class ReduxEditEventForm extends React.Component{
             <Field
             name = 'reoccuring'
             component = {renderRadioSelect}
+            // onChange ={this.handleReoccuringChange}
             />
             </div>
 
@@ -659,5 +663,6 @@ export default connect(state =>({
   startTime: selector(state, 'startTime'),
   endTime: selector(state, 'endTime'),
   startDate: selector(state, 'startDate'),
-  endDate: selector(state, 'endDate')
+  endDate: selector(state, 'endDate'),
+  reoccuring: selector(state, 'reoccuring')
 }))(ReduxEditEventForm);
