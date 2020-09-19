@@ -198,23 +198,52 @@ class DayCalendar extends React.Component{
         const cloneHour = hour
         const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
-        if (dateFns.isSameHour(startDate, cloneHour)
-            && dateFns.isSameDay(startDate, cloneHour)
-            && dateFns.isSameMinute(startDate, cloneHour)
-           ){
-          toDoStuff.push(
-            events[item]
-          )
-        } if (dateFns.isAfter(cloneHour, startDate)
-        && dateFns.isBefore(cloneHour, endDate)
-        && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)
-        && dateFns.getMinutes(startDate) === dateFns.getMinutes(cloneHour)
-      ){
-        console.log(cloneHour, endDate)
-          toDoStuff.push(
-            events[item]
-          )
+
+        if (events[item].repeatCondition === 'weekly'){
+          // This will be the day of the week (0-6)
+          const startEventDayWeek = dateFns.getDay(startDate)
+          const endEventDayWeek = dateFns.getDay(endDate)
+          const cloneDayWeek = dateFns.getDay(cloneHour)
+          const eventDayHour = dateFns.getHours(startDate)
+          const cloneDayHour = dateFns.getHours(cloneHour)
+          const eventDayMinute = dateFns.getMinutes(startDate)
+          const cloneDayMinute = dateFns.getMinutes(cloneHour)
+          console.log('hit here')
+          console.log(startEventDayWeek, cloneDayWeek )
+          if (
+            // startEventDayWeek === cloneDayWeek
+            eventDayHour === cloneDayHour
+            && eventDayMinute === cloneDayMinute
+            && startEventDayWeek <= cloneDayWeek
+            && endEventDayWeek >= cloneDayWeek
+          ){
+
+            toDoStuff.push(
+              events[item]
+            )
+          }
+
+
+        } else if (events[item].repeatCondition === 'none'){
+          if (dateFns.isSameHour(startDate, cloneHour)
+              && dateFns.isSameDay(startDate, cloneHour)
+              && dateFns.isSameMinute(startDate, cloneHour)
+             ){
+            toDoStuff.push(
+              events[item]
+            )
+          } if (dateFns.isAfter(cloneHour, startDate)
+          && dateFns.isBefore(cloneHour, endDate)
+          && dateFns.getHours(startDate) === dateFns.getHours(cloneHour)
+          && dateFns.getMinutes(startDate) === dateFns.getMinutes(cloneHour)
+        ){
+          console.log(cloneHour, endDate)
+            toDoStuff.push(
+              events[item]
+            )
+          }
         }
+
       }
 
       const cloneHour = hour
