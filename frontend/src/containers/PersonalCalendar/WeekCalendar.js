@@ -343,7 +343,9 @@ class WeekCalendar extends React.Component{
 
           // The day index represents the start column and the hour index represent the start row
           let startDate = dateFns.startOfWeek(this.props.currentDate)
+          console.log(toDoStuff)
           days.push(
+
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
@@ -392,6 +394,10 @@ class WeekCalendar extends React.Component{
                   </p>
 
                   <p>{item.content}</p>
+
+                   <Avatar shape="circle" size="small" icon={<UserOutlined />} /> Organizer: Ping Hsu
+
+                  Attending:
                 </div>
 
               } trigger="click">

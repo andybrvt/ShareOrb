@@ -34,6 +34,7 @@ def filter(request):
     date_max = request.GET.get('date_max')
     friend_query = request.GET.get('friend')
     person_query = request.GET.get('person')
+
     if is_valid_queryparam(date_min):
         qs = qs.filter(start_time__gte=date_min)
     if is_valid_queryparam(date_max):
