@@ -357,7 +357,8 @@ class WeekCalendar extends React.Component{
 
 
 
-                  <p style={{color:'black', fontSize:'16px'}}>
+                  <p style={{color:'black', fontSize:'14px'}}>
+                    <i style={{marginRight:'10px'}} class="far fa-calendar-alt"></i>
                     {dateFns.format(new Date(item.start_time), 'M')}/
 
                     {dateFns.format(new Date(item.start_time), 'd')}
@@ -369,6 +370,8 @@ class WeekCalendar extends React.Component{
                     </span>
                     <span style={{marginLeft:'5px'}}>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
+                      -
+                      {dateFns.format(new Date(item.end_time),'h:mm a')}
                     </span>
                   </p>
 
@@ -390,8 +393,14 @@ class WeekCalendar extends React.Component{
 
 
                       <span className="pointerEvent">
-                        <span className = 'pointerEvent' > {item.content} </span>
-                        <span style={{float:'right'}} className = 'pointerEvent'> {dateFns.format(new Date(item.start_time),'h:mm a')}</span>
+                        <span className = 'pointerEvent' > {item.title} </span>
+                        <br/>
+                        <span style={{float:'left'}} className = 'pointerEvent'>
+                          {dateFns.format(new Date(item.start_time),'h:mm a')}
+                          -
+                          {dateFns.format(new Date(item.end_time),'h:mm a')}
+
+                        </span>
 
                       </span>
 
@@ -666,7 +675,7 @@ class WeekCalendar extends React.Component{
             type="primary"
             className = 'miniEventSyncButton'
             onClick = {this.onAddEvent}>
-            Add Event
+            Create Event
             </Button>
             <MiniCalendar {...this.props}/>
             <Button
