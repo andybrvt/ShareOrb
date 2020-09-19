@@ -583,7 +583,7 @@ class ReduxEditEventForm extends React.Component{
 
             <div>
             <Field
-            name = 'reoccuring'
+            name = 'repeatCondition'
             component = {renderRadioSelect}
             // onChange ={this.handleReoccuringChange}
             />
@@ -664,5 +664,5 @@ export default connect(state =>({
   endTime: selector(state, 'endTime'),
   startDate: selector(state, 'startDate'),
   endDate: selector(state, 'endDate'),
-  reoccuring: selector(state, 'reoccuring')
+  repeatCondition: selector(state, 'repeatCondition')
 }))(ReduxEditEventForm);

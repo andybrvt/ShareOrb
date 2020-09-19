@@ -89,7 +89,7 @@ class EditEventPopUp extends React.Component {
         location: values.location,
         color: values.eventColor,
         person: [this.props.id],
-        repeatCondition: values.reoccuring
+        repeatCondition: values.repeatCondition
       })
       const instanceEvent = {
         id: this.props.calendarId,
@@ -100,7 +100,7 @@ class EditEventPopUp extends React.Component {
         location: values.location,
         color: values.eventColor,
         person: [this.props.id],
-        repeatCondition: values.reoccuring
+        repeatCondition: values.repeatCondition
 
       }
       console.log(instanceEvent)
@@ -114,7 +114,7 @@ class EditEventPopUp extends React.Component {
         location: values.location,
         color: values.eventColor,
         person: [this.props.id],
-        repeatCondition: values.reoccuring
+        repeatCondition: values.repeatCondition
       })
 
       // The event instance is pretty much used when you just recently added an
@@ -130,7 +130,7 @@ class EditEventPopUp extends React.Component {
         location: values.location,
         color: values.eventColor,
         person: [this.props.id],
-        repeatCondition: values.reoccuring
+        repeatCondition: values.repeatCondition
       }
       // add color to addEvents in redux
       console.log(instanceEvent)
@@ -209,7 +209,7 @@ class EditEventPopUp extends React.Component {
       endTime: end_time,
       location: this.props.location,
       eventColor: this.props.eventColor,
-      reoccuring: 'none'
+      repeatCondition: 'none'
 
     }
   }

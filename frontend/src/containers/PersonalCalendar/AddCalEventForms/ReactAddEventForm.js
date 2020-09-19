@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import '../PersonalCalCSS/ReactForm.css';
 import '@ant-design/compatible/assets/index.css';
@@ -487,6 +487,12 @@ class ReactAddEventForm extends React.Component {
     const startChildren = this.renderStartTime();
     const endChildren = this.renderEndTime()
     console.log(this.handleValidation())
+
+    const options = [
+    { label: 'Normal', value: 'none' },
+    { label: 'Weekly', value: 'weekly' },
+    { label: 'Daily', value: 'daily' },
+  ];
     // for (let i = 10; i < 36; i++) {
     //   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
     // }
@@ -570,6 +576,17 @@ class ReactAddEventForm extends React.Component {
             {endChildren}
           </Select>
         </Form.Item>
+
+        <Form.Item>
+        <Radio.Group
+         options={options}
+         name = 'repeatCondition'
+         onChange={this.handleChange}
+         value={this.state.repeatCondition}
+         optionType="button"
+       />
+        </Form.Item>
+
         <Form.Item
           wrapperCol={{
             xs: { span: 24, offset: 0 },
