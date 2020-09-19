@@ -288,7 +288,23 @@ class WeekCalendar extends React.Component{
         //   }
 
 
-        } else if(events[item].repeatCondition === 'none'){
+      } else if (events[item].repeatCondition === 'daily'){
+        const eventDayHour = dateFns.getHours(startDate);
+        const cloneDayHour = dateFns.getHours(cloneHour);
+        const eventDayMinute = dateFns.getMinutes(startDate);
+        const cloneDayMinute = dateFns.getMinutes(cloneHour);
+
+      if (eventDayHour === cloneDayHour
+        && eventDayMinute === cloneDayMinute
+      ) {
+        toDoStuff.push(
+          events[item]
+        )
+      }
+
+
+
+      } else if(events[item].repeatCondition === 'none'){
               if (dateFns.isSameDay(startDate,cloneDay) && dateFns.isSameHour(startDate,cloneHour)
               && dateFns.isSameMinute(startDate, cloneHour)
             ){
