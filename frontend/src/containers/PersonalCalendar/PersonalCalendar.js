@@ -220,10 +220,13 @@ class PersonalCalendar extends React.Component{
                 events[item]
               )
             }
+          } else if (events[item].repeatCondition === 'daily'){
+            toDoStuff.push(
+              events[item]
+            )
+          }
 
-
-
-          } else if (events[item].repeatCondition === 'none'){
+          else if (events[item].repeatCondition === 'none'){
             if (dateFns.isSameDay(startDate, day)){
               toDoStuff.push(
                 events[item]
