@@ -52,19 +52,23 @@ const renderRadioSelect = (field) => {
 }
 
 const renderField = (field) => {
-  console.log(field)
+  console.log(field.meta)
   return (
+    <span>
     <Input style={{width:'200px', height:'30px', fontSize:'14px'}}
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
     className = 'box'/>
+
+    </span>
   )
 }
 
 
 
 const renderTextArea = (field) => {
+  console.log(field.meta)
   return (
     <TextArea
     {...field.input}
@@ -80,6 +84,7 @@ const renderTextArea = (field) => {
 // <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
 
 const renderStartDate = (field) => {
+  console.log(field.meta)
   return (
     <DatePicker
     onChange = {field.input.onChange}
@@ -88,6 +93,20 @@ const renderStartDate = (field) => {
     suffixIcon={<div></div>}
     allowClear = {false}
      />
+  )
+}
+
+const renderEndDate = (field) => {
+  console.log(field.meta)
+  return (
+    <DatePicker
+    onChange = {field.input.onChange}
+    value = {field.input.value}
+    style = {{width: '110px'}}
+    suffixIcon={<div></div>}
+    allowClear = {false}
+    className = {` ${field.meta.error === 'endDate error' ? 'datePicker' : ''}`}
+    />
   )
 }
 
@@ -113,6 +132,7 @@ const renderStartDateSelect = (field) => {
     </Select>
   )
 }
+
 
 const renderEventColor = (field) => {
   // This is just used to render the color of the event
@@ -148,6 +168,7 @@ const renderStartTime = () => {
     return time
   }
 
+
 // const renderEndTimeSelect = (field) => {
 //   return (
 //     console.log(field)
@@ -180,7 +201,30 @@ const rangeConfig = {
 
 const required = value => value ? undefined : 'Required'
 
+const validate = values => {
+  const errors = {}
 
+  console.log(values)
+  if (!values.title){
+    errors.title = "Required"
+  }
+  if(!values.content){
+    errors.content = 'Required'
+  }
+  if(dateFns.isAfter(new Date(values.startDate), new Date(values.endDate))){
+    errors.endDate = 'endDate error'
+  } else if (values.repeatCondition === 'weekly' &&
+    !dateFns.isSameWeek(new Date(values.startDate), new Date(values.endDate))
+  ) {
+    errors.endDate = "endDate error"
+  } else if (values.repeatCondition === 'daily' &&
+    !dateFns.isSameDay(new Date(values.startDate), new Date(values.endDate))
+  ) {
+    errors.endDate = "endDate error"
+  }
+
+  return errors
+}
 
 
 class ReduxEditEventForm extends React.Component{
@@ -374,12 +418,35 @@ class ReduxEditEventForm extends React.Component{
     )
   }
 
+  handleReoccuringChange = (event) => {
+     const { change } = this.props
+
+     change('repeatCondition', event.target.value)
+     console.log(this.props)
+
+  }
+
 
 
   onRed = () => {
     let startDate = this.props.startDate
     let endDate = this.props.endDate
+    let repeatCondition = ''
+    if (this.props.repeatCondition){
+        repeatCondition = this.props.repeatCondition
+    }
+
     let boxcolor = false
+
+    console.log(repeatCondition)
+
+
+    if (repeatCondition === 'weekly'){
+      if(dateFns.differenceInDays(startDate, endDate) > 7){
+        boxcolor = true
+      }
+    }
+
 
     if (dateFns.isAfter(new Date(startDate),new Date(endDate))){
       boxcolor = true
@@ -389,17 +456,19 @@ class ReduxEditEventForm extends React.Component{
   }
 
 
-  renderEndDate = (field) => {
-    return (
-      <DatePicker
-      onChange = {field.input.onChange}
-      value = {field.input.value}
-      style = {{width: '110px'}}
-      suffixIcon={<div></div>}
-      allowClear = {false}
-      className = {` ${this.onRed() ? 'datePicker' : ''}`}/>
-    )
-  }
+  // renderEndDate = (field) => {
+  //   console.log(field.meta)
+  //   return (
+  //     <DatePicker
+  //     onChange = {field.input.onChange}
+  //     value = {field.input.value}
+  //     style = {{width: '110px'}}
+  //     suffixIcon={<div></div>}
+  //     allowClear = {false}
+  //     // className = {` ${this.onRed() ? 'datePicker' : ''}`}
+  //     />
+  //   )
+  // }
 
   onStartDateChange = (event, value) => {
     const { change } = this.props
@@ -486,7 +555,7 @@ class ReduxEditEventForm extends React.Component{
 
 
     render(){
-      console.log(this.props)
+      console.log(this.props.repeatCondition)
       // handleSubmit will actually run this.prop.onSubmit
       const {handleSubmit, pristine, invalid, reset} = this.props;
       // For the component of the fields you can create your own stateles function
@@ -516,7 +585,7 @@ class ReduxEditEventForm extends React.Component{
             component= {renderField}
             type= 'text'
             placeholder = 'Title'
-            validate = {required}
+
             />
           </div>
 
@@ -533,7 +602,6 @@ class ReduxEditEventForm extends React.Component{
             component= {renderTextArea}
             type= 'text'
             placeholder = 'Description'
-            validate = {required}
             />
           </div>
           {/* location */}
@@ -562,7 +630,7 @@ class ReduxEditEventForm extends React.Component{
              <ArrowRightOutlined />
              <Field
              name = 'endDate'
-             component = {this.renderEndDate}
+             component = {renderEndDate}
              type = 'date'
              />
           </div>
@@ -585,7 +653,7 @@ class ReduxEditEventForm extends React.Component{
             <Field
             name = 'repeatCondition'
             component = {renderRadioSelect}
-            // onChange ={this.handleReoccuringChange}
+            onChange ={this.handleReoccuringChange}
             />
             </div>
 
@@ -638,7 +706,8 @@ class ReduxEditEventForm extends React.Component{
 // In order to modify this you have to call a constant outside the class
 ReduxEditEventForm = reduxForm({
   form: 'edit event', //you will give the form a name
-  enableReinitialize: true, //This will reintialzie the prestine values everytime the props changes
+  enableReinitialize: true,
+  validate //This will reintialzie the prestine values everytime the props changes
 })(ReduxEditEventForm);
 
 
