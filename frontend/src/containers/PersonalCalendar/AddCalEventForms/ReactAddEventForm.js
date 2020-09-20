@@ -311,6 +311,7 @@ class ReactAddEventForm extends React.Component {
     let location = this.state.location
     let startDate = this.state.startDate
     let endDate = this.state.endDate
+    let repeatCondition = this.state.repeatCondition
     let errors = {}
     let buttonDisabled = false
 
@@ -340,6 +341,14 @@ class ReactAddEventForm extends React.Component {
 
     if (dateFns.isAfter(new Date(startDate), new Date(endDate))){
       buttonDisabled = true
+    } else if (repeatCondition === "weekly" &&
+      !dateFns.isSameWeek(new Date(startDate), new Date(endDate))
+    ) {
+      buttonDisabled = true
+    } else if (repeatCondition === "daily" &&
+      !dateFns.isSameDay(new Date (startDate), new Date(endDate))
+    ) {
+      buttonDisabled = true
     }
 
     console.log(buttonDisabled)
@@ -350,12 +359,21 @@ class ReactAddEventForm extends React.Component {
   onRed = () => {
     let startDate = this.state.startDate
     let endDate = this.state.endDate
+    let repeatCondition = this.state.repeatCondition
+
     let boxcolor = false
 
-    if (dateFns.isAfter(new Date(startDate),new Date(endDate))){
+    if (dateFns.isAfter(new Date(startDate), new Date(endDate))){
+      boxcolor = true
+    } else if (repeatCondition === "weekly" &&
+      !dateFns.isSameWeek(new Date(startDate), new Date(endDate))
+    ) {
+      boxcolor = true
+    } else if (repeatCondition === "daily" &&
+      !dateFns.isSameDay(new Date (startDate), new Date(endDate))
+    ) {
       boxcolor = true
     }
-
     return boxcolor
   }
 
