@@ -4,6 +4,7 @@ import pytz
 
 
 from mycalendar import models
+from userprofile.models import User
 # from core.utils import DEFAULT_TIMEZONE, normalize_to_utc
 
 # from core.utils import
@@ -32,11 +33,28 @@ class CalendarOwnedSerializer(serializers.ModelSerializer):
 class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins
     # id = serializers.ReadyOnlyField()
-    person = serializers.StringRelatedField (many = True)
+    getPeople = serializers.StringRelatedField (many = True)
 
     class Meta:
         model = models.Event
-        fields = '__all__'
+        fields = ('__all__')
+        peopleList=[]
+
+
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        for personID in data['getPeople']:
+            personInfo = PersonSerializer(models.User.objects.get(id = personID)).data
+            peopleList.append(personInfo)
+        return data
+
+
+class PersonSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
 
 class CreateEventSerializer (serializers.ModelSerializer):
     # Event serializer for admins

@@ -2,7 +2,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
-
+from userprofile.models import User
 
 # from core.utils import get_timezones, DEFAULT_TIMEZONE
 
@@ -36,8 +36,11 @@ class Event(models.Model):
 	location = models.CharField(max_length = 255, blank = True)
 	color = models.CharField(max_length = 255, blank = True)
 
+
 	def __unicode__(self):
 		return self.title
 
 	def __str__(self):
 		return self.title
+	def getPeople(self):
+		return User.objects.filter(user=self.id).values_list('id')
