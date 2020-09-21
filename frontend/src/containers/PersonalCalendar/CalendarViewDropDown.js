@@ -82,6 +82,27 @@ class CalendarViewDropDown extends React.Component{
       } else if(calType === 'year'){
         this.props.history.push('/personalcalendar/'+selectYear)
       }
+    } else if(this.props.calType === 'year'){
+      // This will be the drop down selection for the year
+      const curDate = new Date();
+      const selectDayYear = dateFns.getYear(curDate).toString();
+      const selectYear = this.props.match.params.year;
+      const selectMonth = (dateFns.getMonth(curDate)+1).toString();
+      const selectFirstWeekMonth = (dateFns.getMonth(dateFns.startOfWeek(curDate))+1).toString()
+      const selectFirstDay = dateFns.getDate(dateFns.startOfWeek(curDate)).toString();
+      const selectDay = dateFns.getDate(curDate).toString()
+      if (calType === 'week'){
+        this.props.history.push('/personalcalendar/w/'+
+      selectDayYear + '/'+selectFirstWeekMonth +'/'+selectFirstDay)
+      } else if(calType === 'day'){
+        this.props.history.push('/personalcalendar/'+selectDayYear+
+      '/'+selectMonth+'/'+selectDay)
+      } else if(calType === 'month'){
+        this.props.history.push('/personalcalendar/'+selectDayYear
+        +'/'+selectMonth)
+      } else if(calType === 'year'){
+        this.props.history.push('/personalcalendar/'+selectYear)
+      }
     }
   }
 

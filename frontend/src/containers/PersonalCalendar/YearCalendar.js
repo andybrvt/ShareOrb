@@ -10,6 +10,7 @@ import * as eventSyncActions from '../../store/actions/eventSync';
 import EventSyncModal from './EventSyncForms/EventSyncModal';
 import EventModal from './AddCalEventForms/EventModal';
 import MiniCalendar from './MiniCalendar';
+import CalendarViewDropDown from './CalendarViewDropDown';
 import './PersonalCalCSS/NewCalendar.css';
 
 
@@ -275,6 +276,12 @@ class YearCalendar extends React.Component{
           onClick = {this.openEventSyncModal}>
             Event Sync
           </Button>
+
+          <CalendarViewDropDown
+          calType = "year"
+          history = {this.props.history}
+          match = {this.props.match}
+          />
         </div>
       </div>
     )
