@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import { Input, Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, DatePicker, AvatarGroup, Popover } from 'antd';
+import { Input, Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, Progress, DatePicker, AvatarGroup, Popover } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -349,16 +349,24 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{marginRight:'30px', marginTop:'20px',marginBottom:'20px'}}>
+                <div style={{padding:20}}>
                   <p style={{display:'inline-block'}}>
 
                   </p>
 
-                   <Tag style={{fontSize:'15px'}} color={item.color}> event</Tag>
+                   <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> event</Tag>
 
                   <span style={{fontSize:'20px', color:'black'}}>
+                  {
+                    (item.title.length>25)?
+                    <p style={{display:'inline-block'}}>{item.title.substring(0,25)}...</p>
 
-                  {item.title}
+                    :
+                    <p style={{display:'inline-block'}}>
+                      {item.title.substring(0,25)}
+                    </p>
+                  }
+
 
                   </span>
 
@@ -369,7 +377,7 @@ class WeekCalendar extends React.Component{
 
 
 
-                  <p style={{color:'black', fontSize:'14px'}}>
+                  <p style={{color:'black', marginTop:'5px', fontSize:'14px'}}>
                     <i style={{marginRight:'10px'}} class="far fa-calendar-alt"></i>
                     {dateFns.format(new Date(item.start_time), 'M')}/
 
@@ -387,10 +395,58 @@ class WeekCalendar extends React.Component{
                     </span>
                   </p>
 
-                   <Avatar shape="circle" size="small" icon={<UserOutlined />} /> Organizer: Ping Hsu
 
-                  Attending:
+                  <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
+                   <Avatar
+                     shape="square"
+                     size="large"
+                     icon={<UserOutlined/>}
+                     style={{display:'inline-block'}}
+                    />
+                  <p style={{color:'black', marginLeft:'10px', fontSize:'14px', display:'inline-block'}}>
+                  Ping Hsu
+                  </p>
+                    <Tooltip title="3 done / 3 in progress / 4 to do">
+                      <Progress  style={{marginLeft:'100px', marginTop:'15px'}}
+                        width={50}
+                        type="circle"
+                        strokeColor={{
+                          '0%': '#108ee9',
+                          '100%': '#87d068',
+                        }}
+                        percent={66}
+                      />
+                     </Tooltip>
+                    <br/>
+                    <br/>
+
+                  <Avatar.Group>
+
+                      <Button type="primary">
+                         <i class="fas fa-eye"></i>
+                      </Button>
+                    <Button type="primary" style={{marginLeft:'10px'}}>
+                       <i class="fas fa-check-square"></i>
+                    </Button>
+                    <Button type="primary" style={{marginLeft:'10px', marginRight:'25px'}}>
+                       <i class="fas fa-user-times"></i>
+                    </Button>
+
+
+
+                      <Avatar size="medium" style={{ backgroundColor: '#f56a00' }}>K</Avatar>
+                      <Tooltip size="medium" title="Ant User" placement="top">
+                        <Avatar size="medium" style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                      </Tooltip>
+                      <Avatar size="medium" style={{ backgroundColor: '#1890ff' }} icon={<AntDesignOutlined />} />
+                    </Avatar.Group>
+                  <span>
+
+
+                    </span>
                 </div>
+
+
 
               } trigger="click">
               <div
