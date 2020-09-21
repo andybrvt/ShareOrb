@@ -349,18 +349,12 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{padding:'25px'}}>
-                  <p style={{display:'inline-block', marginRight:'20px'}}>
-
-                    <Input style={{marginRight:'20px'}}
-                  type = 'color'
-                  className = 'reduxColor'
-                  name = 'eventColor'
-                  defaultValue = '#01D4F4'
-                  {...item.color}/>
-
+                <div style={{marginRight:'30px', marginTop:'20px',marginBottom:'20px'}}>
+                  <p style={{display:'inline-block'}}>
 
                   </p>
+
+                   <Tag style={{fontSize:'15px'}} color={item.color}> event</Tag>
 
                   <span style={{fontSize:'20px', color:'black'}}>
 
@@ -392,8 +386,6 @@ class WeekCalendar extends React.Component{
                       {dateFns.format(new Date(item.end_time),'h:mm a')}
                     </span>
                   </p>
-
-                  <p>{item.content}</p>
 
                    <Avatar shape="circle" size="small" icon={<UserOutlined />} /> Organizer: Ping Hsu
 
