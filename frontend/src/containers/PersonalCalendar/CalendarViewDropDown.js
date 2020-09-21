@@ -24,19 +24,38 @@ class CalendarViewDropDown extends React.Component{
     if(this.props.calType === 'week'){
       // This is for when the week cal that is when it shows up for the week
       // calendar
-      const selectYear  = this.props.match.params.year
-      const selectMonth  = this.props.match.params.month
-      const selectDay  = this.props.match.params.day
+      const selectYear  = this.props.match.params.year;
+      const selectMonth  = this.props.match.params.month;
+      const selectDay  = this.props.match.params.day;
       if(calType === 'week'){
         this.props.history.push('/personalcalendar/w/'
         +selectYear+'/'+selectMonth+'/'+selectDay)
-      } if (calType === 'day'){
+      } else if (calType === 'day'){
         this.props.history.push('/personalcalendar/'+selectYear
-        +'/'+selectMonth+'/'+selectDay)
-      } if (calType === 'month'){
+        +'/'+selectMonth+'/'+selectDay);
+      } else if (calType === 'month'){
         this.props.history.push('/personalcalendar/'+selectYear
-      +'/'+selectMonth)
-      } if (calType === 'year' ){
+      +'/'+selectMonth);
+    } else if (calType === 'year' ){
+        this.props.history.push('/personalcalendar/'+selectYear);
+      }
+    } else if(this.props.calType === 'month'){
+      const curDate = new Date();
+      const selectYear  = this.props.match.params.year;
+      const selectMonth = this.props.match.params.month;
+      // The selectedFirstday will get the first day of the
+      const selectFirstDay = dateFns.getDate(dateFns.startOfWeek(curDate)).toString();
+      const selectDay = dateFns.getDate(curDate).toString()
+      if(calType === 'week'){
+        this.props.history.push('/personalcalendar/w/'+
+      selectYear + '/'+selectMonth +'/'+selectFirstDay)
+      } else if (calType === 'day'){
+        this.props.history.push('/personalcalendar/'+selectYear+
+      '/'+selectMonth+'/'+selectDay)
+      } else if (calType === 'month'){
+        this.props.history.push('/personalcalendar/'+selectYear
+        +'/'+selectMonth)
+      } else if (calType === 'year'){
         this.props.history.push('/personalcalendar/'+selectYear)
       }
     }

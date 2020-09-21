@@ -16,6 +16,7 @@ import EventModal from './AddCalEventForms/EventModal';
 import EventSyncModal from './EventSyncForms/EventSyncModal';
 import MiniCalendar from './MiniCalendar';
 import EditEventPopUp from './EditCalEventForms/EditEventPopUp';
+import CalendarViewDropDown from './CalendarViewDropDown';
 import './PersonalCalCSS/NewCalendar.css';
 
 
@@ -576,7 +577,15 @@ class PersonalCalendar extends React.Component{
           onClick = {this.onYearClick}>
           Year
           </Button>
+
+          <CalendarViewDropDown
+          calType = "month"
+          history = {this.props.history}
+          match = {this.props.match}
+          />
         </div>
+
+
         </div>
         </div>
     )
