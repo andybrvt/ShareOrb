@@ -13,7 +13,6 @@ class CalendarViewDropDown extends React.Component{
   render() {
     console.log(this.props)
 
-    const calTypeChildren = this.renderDifferentCals()
 
     return(
       <div>
