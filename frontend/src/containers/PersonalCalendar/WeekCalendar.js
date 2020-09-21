@@ -349,7 +349,7 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{padding:20}}>
+                <div style={{padding:15}}>
                   <p style={{display:'inline-block'}}>
 
                   </p>
@@ -383,10 +383,13 @@ class WeekCalendar extends React.Component{
 
                     {dateFns.format(new Date(item.start_time), 'd')}
                     <span>
+                      &nbsp;
                       {dateFns.format(cloneDay, 'iiii')}
+                      &nbsp;
                     </span>
                     <span >
                       @
+                      &nbsp;
                     </span>
                     <span>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
@@ -407,20 +410,22 @@ class WeekCalendar extends React.Component{
                   Ping Hsu
                   </p>
                     <Tooltip title="3 done / 3 in progress / 4 to do">
-                      <Progress  style={{marginLeft:'100px', marginTop:'15px'}}
+                      <Progress  style={{marginLeft:'50px', marginTop:'15px', marginRight:'10px'}}
                         width={50}
                         type="circle"
                         strokeColor={{
                           '0%': '#108ee9',
                           '100%': '#87d068',
                         }}
+
                         percent={66}
                       />
+                    going
                      </Tooltip>
                     <br/>
                     <br/>
 
-                  <Avatar.Group>
+                  <Avatar.Group style={{marginTop:'-10px'}}>
 
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
