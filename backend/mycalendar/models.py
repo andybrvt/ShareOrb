@@ -42,5 +42,3 @@ class Event(models.Model):
 
 	def __str__(self):
 		return self.title
-	def getPeople(self):
-		return User.objects.filter(user=self.id).values_list('id')

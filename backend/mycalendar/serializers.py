@@ -33,22 +33,21 @@ class CalendarOwnedSerializer(serializers.ModelSerializer):
 class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins
     # id = serializers.ReadyOnlyField()
-    getPeople = serializers.StringRelatedField (many = True)
 
     class Meta:
         model = models.Event
         fields = ('__all__')
-        peopleList=[]
 
 
 
     def to_representation(self, instance):
+        personList=[]
         data = super().to_representation(instance)
-        for personID in data['getPeople']:
-            personInfo = PersonSerializer(models.User.objects.get(id = personID)).data
-            peopleList.append(personInfo)
+        for peopleID in data['person']:
+            person = PersonSerializer(models.User.objects.get(id=peopleID)).data
+            personList.append(person)
+        data['person']  = personList
         return data
-
 
 class PersonSerializer(serializers.ModelSerializer):
 
