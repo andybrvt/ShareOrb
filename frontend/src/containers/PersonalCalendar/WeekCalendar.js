@@ -16,6 +16,7 @@ import EditEventPopUp from './EditCalEventForms/EditEventPopUp';
 import MiniCalendar from './MiniCalendar';
 import EventSyncModal from './EventSyncForms/EventSyncModal';
 import EventModal from './AddCalEventForms/EventModal';
+import CalendarViewDropDown from './CalendarViewDropDown';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
 
@@ -723,6 +724,9 @@ class WeekCalendar extends React.Component{
               Month
               </Button>
 
+              <CalendarViewDropDown
+              calType = "week"
+              />
 
             </div>
           </div>
