@@ -247,7 +247,6 @@ class WeekCalendar extends React.Component{
         // the day of the week of the current day and of the event and then try to just match it but
         // this time, any days that have similar day of the week, you will just add that day in,
         // it is like you are repeating it
-        console.log(events[item].repeatCondition)
 
         if (events[item].repeatCondition === 'weekly'){
           // This will be the day of the week (0-6)
@@ -434,7 +433,6 @@ class WeekCalendar extends React.Component{
 
           )
         }
-        console.log(dayIndex, hourIndex)
         border.push(
           <Popover trigger="click"  placement="rightTop" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
             <EditEventPopUp
@@ -726,6 +724,8 @@ class WeekCalendar extends React.Component{
 
               <CalendarViewDropDown
               calType = "week"
+              history = {this.props.history}
+              match = {this.props.match}
               />
 
             </div>
