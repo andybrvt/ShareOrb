@@ -382,13 +382,13 @@ class WeekCalendar extends React.Component{
                     {dateFns.format(new Date(item.start_time), 'M')}/
 
                     {dateFns.format(new Date(item.start_time), 'd')}
-                    <span style={{marginLeft:'5px'}}>
+                    <span>
                       {dateFns.format(cloneDay, 'iiii')}
                     </span>
-                    <span style={{marginLeft:'5px'}}>
+                    <span >
                       @
                     </span>
-                    <span style={{marginLeft:'5px'}}>
+                    <span>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
                       -
                       {dateFns.format(new Date(item.end_time),'h:mm a')}
@@ -422,13 +422,13 @@ class WeekCalendar extends React.Component{
 
                   <Avatar.Group>
 
-                      <Button type="primary">
+                      <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
                       </Button>
-                    <Button type="primary" style={{marginLeft:'10px'}}>
+                    <Button shape="circle" type="primary" style={{marginLeft:'10px'}}>
                        <i class="fas fa-check-square"></i>
                     </Button>
-                    <Button type="primary" style={{marginLeft:'10px', marginRight:'25px'}}>
+                    <Button  shape="circle" type="primary" style={{marginLeft:'10px', marginRight:'75px'}}>
                        <i class="fas fa-user-times"></i>
                     </Button>
 
