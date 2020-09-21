@@ -12,6 +12,7 @@ import EventModal from './AddCalEventForms/EventModal';
 import MiniCalendar from './MiniCalendar';
 import EventSyncModal from './EventSyncForms/EventSyncModal';
 import EditEventPopUp from './EditCalEventForms/EditEventPopUp';
+import CalendarViewDropDown from './CalendarViewDropDown';
 import './PersonalCalCSS/NewCalendar.css';
 
 
@@ -404,7 +405,7 @@ class DayCalendar extends React.Component{
   }
 
   render() {
-    console.log(this.props.events)
+    console.log(this.props)
     return (
       <div className = 'calendarContainer'>
         <EventSyncModal
@@ -474,6 +475,12 @@ class DayCalendar extends React.Component{
             onClick = {this.onWeekClick}>
             Week
             </Button>
+            <CalendarViewDropDown
+            calType = "day"
+            history = {this.props.history}
+            match = {this.props.match}
+            curDate = {this.props.currentDate}
+            />
             </div>
           </div>
       </div>
