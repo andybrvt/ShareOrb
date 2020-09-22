@@ -501,7 +501,7 @@ class WeekCalendar extends React.Component{
           )
         }
         border.push(
-          <Popover trigger="click"  placement="rightTop" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
+          <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
             <EditEventPopUp
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
@@ -776,20 +776,6 @@ class WeekCalendar extends React.Component{
               Event Sync
             </Button>
             <div className = 'timeLayerCon'>
-              <Button
-               type="primary"
-               // shape="round"
-               className = 'yearButton'
-               onClick = {this.onYearClick}>
-              Year
-              </Button>
-              <Button
-              type="primary"
-              // shape="round"
-              className = 'monthButton'
-              onClick = {this.onMonthClick}>
-              Month
-              </Button>
 
               <CalendarViewDropDown
               calType = "week"

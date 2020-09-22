@@ -619,6 +619,8 @@ class ReduxEditEventForm extends React.Component{
               component = {renderEventColor}
               type = 'text'/>
           </div>
+
+
           <div className = 'reduxDateRange'>
             <i style={{marginRight:'15px'}} class="fas fa-clock"></i>
              <Field
@@ -658,6 +660,7 @@ class ReduxEditEventForm extends React.Component{
             </div>
 
           </div>
+
           { this.props.addEvent ?
             <div className = 'reduxButton'>
             <Button

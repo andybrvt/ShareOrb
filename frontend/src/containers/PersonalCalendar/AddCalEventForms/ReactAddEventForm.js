@@ -27,9 +27,7 @@ const formItemLayout = {
   },
 };
 
-const config = {
-  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-};
+
 
 const rangeConfig = {
   rules: [{ type: 'array', required: true, message: 'Please select time!' }],
@@ -529,6 +527,46 @@ class ReactAddEventForm extends React.Component {
          placeholder = 'Title'
          value = {this.state.title}
          />
+
+
+         <Form.Item
+           name="range-time-picker"
+          {...rangeConfig}
+           className = 'timepicker'>
+           <DatePicker
+           className = ''
+           placeholder = 'startTime'
+           onChange = {this.onStartDateChange}
+           value = {this.state.startDate}
+           suffixIcon={<div></div>}
+           allowClear = {false}
+           bordered = {false}
+           style = {{width: '110px'}}/>
+
+
+           <Select
+           name = 'timeStart'
+           className = ''
+           style={{ width: 100 }}
+           showArrow  = {false}
+           onChange = {this.onStartTimeChange}
+           value = {this.state.timeStart}>
+             {startChildren}
+           </Select>
+           <ArrowRightOutlined />
+           <Select
+           className = ''
+           name = 'timeEnd'
+           style={{ width: 100 }}
+           showArrow  = {false}
+           onChange = {this.onEndTimeChange}
+           value = {this.state.timeEnd}>
+             {endChildren}
+           </Select>
+         </Form.Item>
+
+
+
        </Form.Item>
        <Form.Item name="Content">
         <TextArea
@@ -542,6 +580,9 @@ class ReactAddEventForm extends React.Component {
 
       </Form.Item>
 
+
+
+
       <Form.Item name="Location" style = {{height: '10px'}} >
        <Input
         name = 'location'
@@ -551,49 +592,7 @@ class ReactAddEventForm extends React.Component {
         />
         <AimOutlined className = 'aim'/>
      </Form.Item>
-        <Form.Item
-          name="range-time-picker"
-         {...rangeConfig}
-          className = 'timepicker'>
-          <DatePicker
-          className = ''
-          placeholder = 'startTime'
-          onChange = {this.onStartDateChange}
-          value = {this.state.startDate}
-          suffixIcon={<div></div>}
-          allowClear = {false}
-          bordered = {false}
-          style = {{width: '110px'}}/>
-          <ArrowRightOutlined />
-          <DatePicker
-          className = {` ${this.onRed() ? 'datePicker' : ''}`}
-          placeholder = 'endTime'
-          onChange = {this.onEndDateChange}
-          value = {this.state.endDate}
-          style = {{width: '110px '}}
-          allowClear = {false}
-          suffixIcon={<div></div>}
-          />
-          <Select
-          name = 'timeStart'
-          className = ''
-          style={{ width: 100 }}
-          showArrow  = {false}
-          onChange = {this.onStartTimeChange}
-          value = {this.state.timeStart}>
-            {startChildren}
-          </Select>
-          <ArrowRightOutlined />
-          <Select
-          className = ''
-          name = 'timeEnd'
-          style={{ width: 100 }}
-          showArrow  = {false}
-          onChange = {this.onEndTimeChange}
-          value = {this.state.timeEnd}>
-            {endChildren}
-          </Select>
-        </Form.Item>
+
 
         <Form.Item>
         <Radio.Group
