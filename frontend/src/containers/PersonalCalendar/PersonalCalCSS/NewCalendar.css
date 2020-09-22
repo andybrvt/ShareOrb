@@ -200,6 +200,19 @@ main {
   /* border-color: darkgrey; */
 }
 
+.cellBorder {
+  /* background-color: red; */
+  border: 1px solid blue;
+  border-bottom: none;
+  color: blue;
+}
+.cellBorderHeader{
+  color: blue;
+}
+.cellBorderMonth{
+  border: 1px solid red;
+}
+
 .weekCalendar .weekDays .weekcol:hover {
  background-color: gainsboro;
 }
@@ -1196,6 +1209,15 @@ to make it adjustable */
   border-right: 1px solid var(--border-color);
   height: 160px;
   /* cursor: pointer; */
+}
+
+.calendar .body .row .calendarNumCur{
+  grid-row-start: 1;
+  text-align: right;
+  background-color: white;
+  border-right: 1px solid var(--border-color);
+  height: 160px;
+  border: 1px solid blue;
 }
 
 

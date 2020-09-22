@@ -261,8 +261,8 @@ class PersonalCalendar extends React.Component{
         if (toDoStuff.length > 0){
 
           days.push(
-            <div className = 'calendarNum' onClick = { () =>
-              this.onDateClick(cloneDay)}>
+            <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`} 
+            onClick = { () => this.onDateClick(cloneDay)}>
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
@@ -280,8 +280,8 @@ class PersonalCalendar extends React.Component{
                 </div>
               ))
         )} else {days.push(
-          <div className = 'calendarNum' onClick = { () =>
-            this.onDateClick(cloneDay)}>
+          <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`}
+          onClick = { () =>this.onDateClick(cloneDay)}>
           <span className = "number">{formattedDate}</span>
           </div>
         )}

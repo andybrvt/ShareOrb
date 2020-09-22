@@ -132,7 +132,8 @@ class WeekCalendar extends React.Component{
       const cloneCloneStartDate = cloneStartDate
       days.push(
         <div
-        className = 'weekcol col-center'
+        className = {`weekcol col-center
+          ${dateFns.isSameDay(cloneCloneStartDate, new Date()) ? 'cellBorder' : ''} `}
         key = {i}
         onClick = {() => this.onDateClick(cloneCloneStartDate)}
         >
@@ -498,7 +499,9 @@ class WeekCalendar extends React.Component{
             <div
               style={{background: this.color(dayIndex, hourIndex)}}
               onClick = {(e) => this.onDayHourClick(dayIndex, hourIndex)}
-            className = {`col ${hourIndex % 2 === 0 ? 'hourcellT' : 'hourcellB' }` }
+            className = {`col ${hourIndex % 2 === 0 ? 'hourcellT' : 'hourcellB' }
+
+            ` }
             >
 
 

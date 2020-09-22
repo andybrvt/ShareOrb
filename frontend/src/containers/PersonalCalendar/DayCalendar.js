@@ -73,7 +73,9 @@ class DayCalendar extends React.Component{
     const dateFormat = 'iiii MMMM dd, yyyy'
 
     return (
-      <div className = 'dayHeader row flex-middle'>
+      <div className = {`dayHeader row flex-middle
+        ${dateFns.isSameDay(this.props.currentDate, new Date()) ? 'cellBorderHeader' : ''}
+        `}>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
           <i className= 'arrow arrow-left'></i>
@@ -102,9 +104,10 @@ class DayCalendar extends React.Component{
     let cloneStartDate = dateFns.startOfWeek(this.props.currentDate)
     for (let i = 0; i<7; i++){
       const cloneCloneStartDate = cloneStartDate
+
       days.push(
         <div
-        className = 'weekcol col-center'
+        className = {`weekcol col-center`}
         key = {i}
         onClick = {() => this.onDateClick(cloneCloneStartDate)}
         >
