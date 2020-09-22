@@ -226,7 +226,9 @@ class EditEventPopUp extends React.Component {
         {...this.props}
         onSubmit = {this.submit}
         initialValues = {this.getInitialValue()}
-        onDelete = {this.delete} />
+        onDelete = {this.delete}
+        friendList = {this.props.friendList}
+        />
 
 
       </div>
@@ -247,6 +249,7 @@ const mapStateToProps = state => {
     eventColor: state.calendarEvent.eventColor,
     calendarId: state.calendarEvent.calendarId,
     id: state.auth.id,
+    friendList: state.auth.friends
   }
 }
 
