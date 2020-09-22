@@ -1,4 +1,11 @@
 
+.highlightWord:hover {
+  color: #3399FF;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
 .icon {
   font-style: normal;
    display: inline-block;

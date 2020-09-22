@@ -36,6 +36,15 @@ class WeekCalendar extends React.Component{
     activeY: null,
   }
 
+  onProfileClick = (username) => {
+    console.log(username)
+    if (username === this.props.currentUser){
+      window.location.href = 'current-user/'
+    } else {
+      window.location.href = 'explore/'+username
+    }
+  }
+
   onDayHourClick = (positionX, positionY) => {
 
     if (this.state.activeX==positionX && this.state.activeY === positionY){
@@ -345,6 +354,7 @@ class WeekCalendar extends React.Component{
           // The day index represents the start column and the hour index represent the start row
           let startDate = dateFns.startOfWeek(this.props.currentDate)
           console.log(toDoStuff)
+
           days.push(
 
             toDoStuff.map(item => (
@@ -378,7 +388,7 @@ class WeekCalendar extends React.Component{
 
 
 
-                  <p style={{color:'black', marginTop:'5px', fontSize:'14px'}}>
+                  <p style={{marginTop:'5px', fontSize:'14px'}}>
                     <i style={{marginRight:'10px'}} class="far fa-calendar-alt"></i>
                     {dateFns.format(new Date(item.start_time), 'M')}/
 
@@ -403,14 +413,17 @@ class WeekCalendar extends React.Component{
                   <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
                    <Avatar
                      shape="square"
-                     size="large"
-                     icon={<UserOutlined/>}
+                     size={45}
+                     src={'http://127.0.0.1:8000'+item.person[0].profile_picture}
                      style={{display:'inline-block'}}
                     />
-                  <p style={{color:'black', marginLeft:'10px', fontSize:'14px', display:'inline-block'}}>
-                  Ping Hsu
+
+                  <p class="highlightWord" style={{marginLeft:'15px', fontSize:'14px', display:'inline-block'}}
+                    onClick = {() => this.onProfileClick(item.person[0].username)}
+                  >
+                    {item.person[0].first_name} {item.person[0].last_name}
                   </p>
-                    <Tooltip title="3 done / 3 in progress / 4 to do">
+                    <Tooltip title="People going">
                       <Progress  style={{marginLeft:'50px', marginTop:'15px', marginRight:'10px'}}
                         width={50}
                         type="circle"
@@ -431,11 +444,11 @@ class WeekCalendar extends React.Component{
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
                       </Button>
-                    <Button shape="circle" type="primary" style={{marginLeft:'10px'}}>
-                       <i class="fas fa-check-square"></i>
+                    <Button type="primary" shape="circle" style={{marginLeft:'10px'}}>
+                       <i class="fas fa-check"></i>
                     </Button>
-                    <Button  shape="circle" type="primary" style={{marginLeft:'10px', marginRight:'75px'}}>
-                       <i class="fas fa-user-times"></i>
+                    <Button  shape="circle" type="primary" danger style={{marginLeft:'10px', marginRight:'75px'}}>
+                       <i class="fas fa-times"></i>
                     </Button>
 
 
