@@ -51,6 +51,23 @@ const renderRadioSelect = (field) => {
   )
 }
 
+const renderFriendSelect = (field) => {
+
+  return (
+    <Select
+    mode="multiple"
+    style={{ width: '60%' }}
+    optionLabelProp="label"
+
+      // onChange = {field.input.onChange}
+      // value = {field.input.value}
+        >
+    {field.children}
+    </Select>
+  )
+
+}
+
 const renderField = (field) => {
   console.log(field.meta)
   return (
@@ -167,6 +184,7 @@ const renderStartTime = () => {
     console.log(time)
     return time
   }
+
 
 
 // const renderEndTimeSelect = (field) => {
@@ -481,6 +499,24 @@ class ReduxEditEventForm extends React.Component{
     }
   }
 
+  renderShareListSelect = () => {
+    if(this.props.friendList !== undefined){
+      const friendList = this.props.friendList
+
+      let shareOptions = []
+
+      for (let friend = 0; friend< friendList.length; friend++ ){
+        shareOptions.push(
+          <Option>
+            {friendList[friend].username}
+          </Option>
+        )
+      }
+
+      return shareOptions
+    }
+  }
+
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
 
@@ -555,7 +591,7 @@ class ReduxEditEventForm extends React.Component{
 
 
     render(){
-      console.log(this.props.repeatCondition)
+      console.log(this.props)
       // handleSubmit will actually run this.prop.onSubmit
       const {handleSubmit, pristine, invalid, reset} = this.props;
       // For the component of the fields you can create your own stateles function
@@ -592,7 +628,12 @@ class ReduxEditEventForm extends React.Component{
           {/* need to implement redux form to people */}
           <div>
             <i style={{marginRight:'15px'}} class="fas fa-user-friends"></i>
-            <Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} />
+            <Field
+            name = ''
+            component = {renderFriendSelect}>
+              {this.renderShareListSelect()}
+            </Field>
+            {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
           </div>
           {/* Description of event */}
           <div className  = 'reduxContent'>

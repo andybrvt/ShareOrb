@@ -13,6 +13,7 @@ from django.db.models import Q
 #
 #     return
 
+# This is for event sync btw
 
 # So baiscally when filtering out data, in the url you can do a param (Example:
 #  url/?q=something) and then from there you can do a request.GET.get that param
