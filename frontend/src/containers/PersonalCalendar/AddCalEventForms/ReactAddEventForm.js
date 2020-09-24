@@ -16,16 +16,6 @@ const { MonthPicker, RangePicker } = DatePicker;
 
 const { Option } = Select;
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
 
 
 
@@ -499,7 +489,7 @@ class ReactAddEventForm extends React.Component {
     // The name of the inputt values are important
     // it allows for us to be able to input stuff into the form item
     // because it is what connents to the onChange for the states
-    console.log(this.state)
+    console.log(this.props)
     const startChildren = this.renderStartTime();
     const endChildren = this.renderEndTime()
     console.log(this.handleValidation())
@@ -516,7 +506,7 @@ class ReactAddEventForm extends React.Component {
     return (
       <Form
       className ="reactForm"
-      {...formItemLayout}
+
       onSubmit = {this.handleSubmit}
       onChange = {this.handleChange}
        >
@@ -528,7 +518,7 @@ class ReactAddEventForm extends React.Component {
          value = {this.state.title}
          />
 
-
+       sdfasdfad
          <Form.Item
            name="range-time-picker"
           {...rangeConfig}
@@ -553,6 +543,8 @@ class ReactAddEventForm extends React.Component {
            value = {this.state.timeStart}>
              {startChildren}
            </Select>
+
+
            <ArrowRightOutlined />
            <Select
            className = ''

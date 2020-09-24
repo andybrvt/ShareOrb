@@ -774,6 +774,18 @@ main {
 
 }
 
+.miniCalContainer .selectView {
+  /* background-color: red; */
+
+  position: relative;
+  top: 80px;
+  left:80px;
+  width: 250px;
+  margin-bottom: 50px;
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}
+
 .miniCalContainer .addEventButton:hover {
   border: none;
   color: white;

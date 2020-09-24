@@ -627,6 +627,7 @@ class ReduxEditEventForm extends React.Component{
 
           {/* need to implement redux form to people */}
           <div>
+            
             <i style={{marginRight:'15px'}} class="fas fa-user-friends"></i>
             <Field
             name = ''

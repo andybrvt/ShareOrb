@@ -742,7 +742,19 @@ class WeekCalendar extends React.Component{
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-            {this.renderHeader()}
+            <div style={{display: 'inline-block'}}>
+
+              {this.renderHeader()}
+            </div>
+
+            <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+
+              <CalendarViewDropDown
+              calType = "week"
+              history = {this.props.history}
+              match = {this.props.match} />
+
+            </div>
             {this.renderDays()}
           </div>
 
@@ -760,7 +772,14 @@ class WeekCalendar extends React.Component{
 
 
           </div>
+
+
+
           <div className = 'miniCalContainer'>
+
+
+
+
             <Button
             type="primary"
             className = 'miniEventSyncButton'
@@ -777,11 +796,7 @@ class WeekCalendar extends React.Component{
             </Button>
             <div className = 'timeLayerCon'>
 
-              <CalendarViewDropDown
-              calType = "week"
-              history = {this.props.history}
-              match = {this.props.match}
-              />
+
 
             </div>
           </div>

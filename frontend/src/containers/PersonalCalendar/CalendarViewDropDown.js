@@ -113,13 +113,14 @@ class CalendarViewDropDown extends React.Component{
     return(
       <div>
       <Select
-      onChange = {this.onCalTypeChange}
-      value = {this.props.calType}
-      style={{ width: 120 }}>
-      <Option value = 'week'> Week </Option>
-      <Option value = "day"> Day </Option>
-      <Option value = 'month'> Month </Option>
-      <Option value = "year"> Year </Option>
+        onChange = {this.onCalTypeChange}
+        value = {this.props.calType}
+        style={{ width: 175, fontSize:'16px',color:'black', }}
+      >
+        <Option value = 'week'> <b>Week</b> </Option>
+        <Option value = "day"> <b>Day</b> </Option>
+        <Option value = 'month'> <b>Month</b> </Option>
+        <Option value = "year"> <b>Year</b> </Option>
       </Select>
 
       </div>
