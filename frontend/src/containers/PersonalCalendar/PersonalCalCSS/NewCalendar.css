@@ -137,7 +137,7 @@ main {
 .testBox{
   overflow:hidden;
   width: 1360px;
-  /* background-color: red; */
+  background-color: red;
 }
 
 .weekDayFlex-Container{
@@ -194,6 +194,7 @@ main {
   flex-basis: 0;
   /* width: 40px; */
   max-width: 100%;
+  /* color:black; */
   /* background-color: red; */
 }
 
@@ -207,11 +208,11 @@ main {
   /* border-color: darkgrey; */
 }
 
+/* current day color */
 .cellBorder {
   /* background-color: red; */
-  border: 1px solid blue;
-  border-bottom: none;
-  color: blue;
+  border-top: 4px solid #69c0ff;
+  /* color: blue; */
 }
 .cellBorderHeader{
   color: blue;
@@ -331,7 +332,7 @@ main {
 }
 
 .calendar .dayBody .eventsDay{
-  /* background-color: lightblue; */
+  /* background-color: red; */
   width:80%;
   color: white;
   font-size: 15px;
@@ -585,15 +586,16 @@ main {
 
 }
 
-
+/* cell of the week */
 .weekDayFlex-Container .calendar .weekBody .weekEvent{
-  /* background-color: lightblue; */
+  /* background-color: red; */
   color: white;
   font-size: 15px;
   /* this makes events rounded but gonna take it out for now */
   /* border-radius: 10px; */
   padding-left: 10px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  width:95%;
   /* grid-column: 1/7; */
   z-index: 1;
 }
@@ -601,10 +603,11 @@ main {
 .weekDayFlex-Container .calendar .weekBody .weekEvent:hover{
   background-color: lightgrey;
   transition: .25 ease-out;
+  /* background-color: red; */
 }
 
 
-.calendar .body .cell .monthList .monthListItem{
+.calendar .  .cell .monthList .monthListItem{
   background-color: lightblue;
   text-align: center;
   }
@@ -994,7 +997,7 @@ main {
   transition: .2s ease-out;
 } */
 
-
+w
 
 /* This is for the week view and to control the cell size */
 .calendar .scrollBody .backWeekBody .hourcellT {

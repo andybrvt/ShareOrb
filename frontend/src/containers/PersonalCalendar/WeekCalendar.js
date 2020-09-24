@@ -360,7 +360,7 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{padding:15}}>
+                <div style={{padding:40}}>
                   <p style={{display:'inline-block'}}>
 
                   </p>
@@ -369,12 +369,12 @@ class WeekCalendar extends React.Component{
 
                   <span style={{fontSize:'20px', color:'black'}}>
                   {
-                    (item.title.length>25)?
-                    <p style={{display:'inline-block'}}>{item.title.substring(0,25)}...</p>
+                    (item.title.length>20)?
+                    <p style={{display:'inline-block'}}>{item.title.substring(0,20)}...</p>
 
                     :
                     <p style={{display:'inline-block'}}>
-                      {item.title.substring(0,25)}
+                      {item.title.substring(0,20)}
                     </p>
                   }
 
@@ -467,7 +467,7 @@ class WeekCalendar extends React.Component{
 
 
 
-              } trigger="click">
+              } >
               <div
                  key= {item.title}
                   onClick = {() => this.onClickItem(item)}
@@ -758,7 +758,7 @@ class WeekCalendar extends React.Component{
             {this.renderDays()}
           </div>
 
-          <div className = 'testBox'>
+          <div className = 'testBox' onLoad="window.scroll(0, 150)">
           <div className = 'weekDayFlex-Container'>
             <div className = 'timecol'>
               {this.renderSide()}
