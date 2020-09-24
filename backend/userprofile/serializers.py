@@ -35,7 +35,7 @@ class FollowUserSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
-    friends = serializers.SerializerMethodField()
+    # friends = serializers.SerializerMethodField()
     def get_friends(self, obj):
         list = []
         for i in obj.friends.all():
@@ -81,7 +81,7 @@ class UserSerializer(serializers.ModelSerializer):
             socialCalList.append(socialCell)
 
         for friends in data['friends']:
-            friend = FollowUserSerializer(models.User.objects.get(username = user)).data
+            friend = FollowUserSerializer(models.User.objects.get(id = friends)).data
             friendList.append(friend)
         data['get_following'] = followingList
         data['get_followers'] = followerList
