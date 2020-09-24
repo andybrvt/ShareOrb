@@ -52,15 +52,14 @@ const renderRadioSelect = (field) => {
 }
 
 const renderFriendSelect = (field) => {
-
+  console.log(field)
   return (
     <Select
     mode="multiple"
     style={{ width: '60%' }}
     optionLabelProp="label"
-
-      // onChange = {field.input.onChange}
-      // value = {field.input.value}
+    onChange = {field.input.onChange}
+    value = {field.input.value}
         >
     {field.children}
     </Select>
@@ -507,7 +506,8 @@ class ReduxEditEventForm extends React.Component{
 
       for (let friend = 0; friend< friendList.length; friend++ ){
         shareOptions.push(
-          <Option>
+          <Option value = {friendList[friend].id}
+          label = {friendList[friend].username}>
             {friendList[friend].username}
           </Option>
         )
@@ -515,6 +515,10 @@ class ReduxEditEventForm extends React.Component{
 
       return shareOptions
     }
+  }
+
+  handleFriendChange = (value) => {
+    console.log(value)
   }
 
   renderEndTimeSelect = () => {
@@ -627,10 +631,11 @@ class ReduxEditEventForm extends React.Component{
 
           {/* need to implement redux form to people */}
           <div>
-            
+
             <i style={{marginRight:'15px'}} class="fas fa-user-friends"></i>
             <Field
-            name = ''
+            name = 'friends'
+            onChange = {this.handleFriendChange}
             component = {renderFriendSelect}>
               {this.renderShareListSelect()}
             </Field>
@@ -772,6 +777,7 @@ const selector = formValueSelector('edit event')
 // an onchange or whatever, changes the Fields in the forms
 export default connect(state =>({
   title: selector(state, 'title'),
+  friends: selector(state, 'friends'),
   content: selector (state, 'content'),
   location: selector (state, 'content'),
   startTime: selector(state, 'startTime'),
