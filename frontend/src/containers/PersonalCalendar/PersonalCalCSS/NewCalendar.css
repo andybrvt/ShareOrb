@@ -137,7 +137,7 @@ main {
 .testBox{
   overflow:hidden;
   width: 1360px;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .weekDayFlex-Container{

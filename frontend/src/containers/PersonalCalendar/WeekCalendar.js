@@ -369,20 +369,20 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{padding:40}}>
+                <div style={{padding:30, width:475}}>
                   <p style={{display:'inline-block'}}>
 
                   </p>
 
-                   <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> event</Tag>
+                   <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
 
-                  <span style={{fontSize:'20px', color:'black'}}>
+                  <span style={{color:'black', marginBottom:'10px'}}>
                   {
                     (item.title.length>20)?
-                    <p style={{display:'inline-block'}}>{item.title.substring(0,20)}...</p>
+                    <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,20)}...</p>
 
                     :
-                    <p style={{display:'inline-block'}}>
+                    <p style={{fontSize:'24px', display:'inline-block'}}>
                       {item.title.substring(0,20)}
                     </p>
                   }
@@ -432,8 +432,10 @@ class WeekCalendar extends React.Component{
                   >
                     {item.person[0].first_name} {item.person[0].last_name}
                   </p>
+                    <Progress type="circle" style={{marginLeft:'40px', marginRight:'5px', }} percent={30} width={50} />
+                    responded
                     <Tooltip title="People going">
-                      <Progress  style={{marginLeft:'50px', marginTop:'15px', marginRight:'10px'}}
+                      <Progress  style={{marginLeft:'20px', marginTop:'15px', marginRight:'10px'}}
                         width={50}
                         type="circle"
                         strokeColor={{
@@ -443,30 +445,33 @@ class WeekCalendar extends React.Component{
 
                         percent={66}
                       />
+
                     going
                      </Tooltip>
                     <br/>
                     <br/>
 
                   <Avatar.Group style={{marginTop:'-10px'}}>
-
+                    <div style={{float:'left', marginRight:'100px'}}>
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
                       </Button>
-                    <Button type="primary" shape="circle" style={{marginLeft:'10px'}}>
-                       <i class="fas fa-check"></i>
-                    </Button>
-                    <Button  shape="circle" type="primary" danger style={{marginLeft:'10px', marginRight:'75px'}}>
-                       <i class="fas fa-times"></i>
-                    </Button>
+                      <Button type="primary" shape="circle" style={{marginLeft:'10px'}}>
+                         <i class="fas fa-check"></i>
+                      </Button>
+                      <Button  shape="circle" type="primary" danger style={{marginLeft:'10px', marginRight:'75px'}}>
+                         <i class="fas fa-times"></i>
+                      </Button>
+                    </div>
 
-
-
+                    <div>
                       <Avatar size="medium" style={{ backgroundColor: '#f56a00' }}>K</Avatar>
                       <Tooltip size="medium" title="Ant User" placement="top">
                         <Avatar size="medium" style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                       </Tooltip>
                       <Avatar size="medium" style={{ backgroundColor: '#1890ff' }} icon={<AntDesignOutlined />} />
+                    </div>
+
                     </Avatar.Group>
                   <span>
 
@@ -770,11 +775,11 @@ class WeekCalendar extends React.Component{
 
           <div className = "testBox">
             {/*window.scrollTo(0, 800)*/}
-          <div className = 'weekDayFlex-Container' ref={this.scrollToMyRef} >
+          <div className = 'weekDayFlex-Container'>
             <div className = 'timecol'>
               {this.renderSide()}
             </div>
-            <div className = 'calendar'>
+            <div className = 'calendar'  ref={this.scrollToMyRef} >
             {this.renderWeekCell(this.props.events)}
             </div>
           </div>
