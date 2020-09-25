@@ -28,6 +28,10 @@ class WeekCalendar extends React.Component{
   // So when ever you do calendars, for states  you always want
   // to set the currentWeek as the current day because, you can use
   // get current week to get the firstday
+  constructor(props) {
+        super(props)
+        this.myRef = React.createRef()
+    }
   state = {
     currentWeek: new Date(),
     selectedDate: new Date(),
@@ -35,7 +39,11 @@ class WeekCalendar extends React.Component{
     activeX: null,
     activeY: null,
   }
-
+  scrollToMyRef = (ref) => {
+    if(ref){
+    ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
   onProfileClick = (username) => {
     console.log(username)
     if (username === this.props.currentUser){
@@ -731,6 +739,7 @@ class WeekCalendar extends React.Component{
   render() {
     console.log(this.props)
     console.log(Avatar)
+
     return (
     <div className = 'calendarContainer'>
         <EventSyncModal
@@ -758,8 +767,9 @@ class WeekCalendar extends React.Component{
             {this.renderDays()}
           </div>
 
-          <div className = 'testBox' onLoad="window.scroll(0, 150)">
-          <div className = 'weekDayFlex-Container'>
+          <div className = "testBox">
+            {/*window.scrollTo(0, 800)*/}
+          <div className = 'weekDayFlex-Container' ref={this.scrollToMyRef} >
             <div className = 'timecol'>
               {this.renderSide()}
             </div>
