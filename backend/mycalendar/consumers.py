@@ -10,28 +10,46 @@ from .serializers import EventSerializer
 
 class CalendarConsumer(JsonWebsocketConsumer):
 
-    def add_sync_event(self, data):
+    def add_share_sync_event(self, data):
         # this is there one where you make the event and then add it to the database
         # Then create a dictionary that you will then send to the frontend through an
         # event send fucntion
         # Then once you make it, you want to make a seperate function that will send out the
         # information
-        currentUser = get_object_or_404(User, username = data['currentUser']);
-        userFriend = get_object_or_404(User, username = data['userFriend']);
+
+        # Since creating a shared event is pretty much the same process whether or not you
+        # are sharing to one person or to many poeple it will still be the sameself.
+        # So the way you are gonna go about this is that you are gonna get the person
+        # list of ids and then you are gonna loop through those ids and then append them
+        # to a list and then add that to the event object. You are gonna do the same for
+        # when you are adding an event sync (MAKE SURE TO TAKE CARE OF THAT WHEN YOU ARE
+        # ADDING AN EVENT SYNC, JUST ADD BOTH THE FRIEND AND YOU TO THE PERSON LIST SHOULD
+        # BE OK) also make sure its in ID as well because maybe people have similar
+        # username
+        person = [];
+
+        for people in data['person']:
+            curPerson = get_object_or_404(User, id = people);
+            person.append(curPerson)
+
+        # currentUser = get_object_or_404(User, username = data['currentUser']);
+        # userFriend = get_object_or_404(User, username = data['userFriend']);
         start_time = data['startDate'];
         end_time = data['endDate']
         title = data['title'];
         content = data['content'];
         location = data['location'];
-        person = [currentUser, userFriend];
-        color = data['eventColor']
+        # person = [currentUser, userFriend];
+        color = data['eventColor'];
+        repeatCondition = data['repeatCondition'];
         newEvent = Event.objects.create(
             title = title,
             content = content,
             start_time = start_time,
             end_time = end_time,
             location = location,
-            color = color
+            color = color,
+            repeatCondition = repeatCondition,
         )
         newEvent.person.set(person)
         serializer = EventSerializer(newEvent)
@@ -40,6 +58,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'newEvent': serializer.data,
             # 'users': person,
         }
+        print(content)
         return self.send_new_event(content)
 
 
@@ -47,6 +66,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
 # it through the channel to both users
 
     def send_new_event(self,newEvent):
+        # Also gotta change the for loop here because now its pulling the whole object
         channel_layer = get_channel_layer()
         content = {
             'type': 'new_event',
@@ -54,7 +74,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
         }
         people = newEvent['newEvent']['person']
         for person in newEvent['newEvent']['person']:
-            channel = 'calendar_'+person
+            # Maybe gotta change this if it poses any problems
+            channel = 'calendar_'+person['username']
             async_to_sync(self.channel_layer.group_send)(
                 channel,
                 content
@@ -78,7 +99,9 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
         if data['command'] == 'add_sync_event':
-            self.add_sync_event(data)
+            self.add_share_sync_event(data)
+        if data['command'] == 'add_shared_event':
+            self.add_share_sync_event(data)
 
     def new_event(self, event):
         newEvent = event['newEvent']

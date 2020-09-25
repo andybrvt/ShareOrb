@@ -63,6 +63,8 @@ class WebSocketCalendarEvent {
     // This is used to send the notification into the backend
     console.log('send_event')
     console.log(data)
+
+// START RIGHT HERE
     try {
       this.socketRef.send(JSON.stringify({...data}))
     } catch (err) {

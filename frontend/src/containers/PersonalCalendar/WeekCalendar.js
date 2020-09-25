@@ -194,6 +194,7 @@ class WeekCalendar extends React.Component{
 
   // USE THIS
   renderWeekCell(events){
+    console.log(events)
     // To explain the grid --> there is a big container that holds many rows and each
     // row is split into 7 columns and 2 rows and there is 24 rows and you will place the
     // information

@@ -9,10 +9,10 @@ import {
 } from '@ant-design/icons';
 import axios from 'axios';
 import { authAxios } from '../../../components/util';
+import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import * as navActions from '../../../store/actions/nav';
 import * as calendarEventActions from '../../../store/actions/calendarEvent';
 import * as calendarActions from '../../../store/actions/calendars';
-
 // import CalendarForm from './CalendarForm';
 
 import ReduxEditEventForm from './ReduxEditEventForm';
@@ -82,63 +82,91 @@ class EditEventPopUp extends React.Component {
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
 
 
-    // if (this.props.addEvent === false ){
-    //   authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
-    //     title: values.title,
-    //     content: values.content,
-    //     start_time: start_date,
-    //     end_time: end_date,
-    //     location: values.location,
-    //     color: values.eventColor,
-    //     person: [this.props.id],
-    //     repeatCondition: values.repeatCondition
-    //   })
-    //   const instanceEvent = {
-    //     id: this.props.calendarId,
-    //     title: values.title,
-    //     content: values.content,
-    //     start_time: instance_start_date,
-    //     end_time: instance_end_date,
-    //     location: values.location,
-    //     color: values.eventColor,
-    //     person: [this.props.id],
-    //     repeatCondition: values.repeatCondition
-    //
-    //   }
-    //   console.log(instanceEvent)
-    //   this.props.editEvent(instanceEvent)
-    // } else if (this.props.addEvent === true){
-    //   authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
-    //     title: values.title,
-    //     content: values.content,
-    //     start_time: start_date,
-    //     end_time: end_date,
-    //     location: values.location,
-    //     color: values.eventColor,
-    //     person: [this.props.id],
-    //     repeatCondition: values.repeatCondition
-    //   })
-    //
-    //   // The event instance is pretty much used when you just recently added an
-    //   // event, so because of that you want to add the date in just as how the
-    //   // date and event will be added according to the loaded event
-    //
-    //
-    //   const instanceEvent = {
-    //     title: values.title,
-    //     content: values.content,
-    //     start_time: instance_start_date,
-    //     end_time: instance_end_date,
-    //     location: values.location,
-    //     color: values.eventColor,
-    //     person: [this.props.id],
-    //     repeatCondition: values.repeatCondition
-    //   }
-    //   // add color to addEvents in redux
-    //   console.log(instanceEvent)
-    //   this.props.addEvents(instanceEvent)
-    // }
-    // this.props.close()
+    if (this.props.addEvent === false ){
+      authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
+        title: values.title,
+        content: values.content,
+        start_time: start_date,
+        end_time: end_date,
+        location: values.location,
+        color: values.eventColor,
+        person: [this.props.id],
+        repeatCondition: values.repeatCondition
+      })
+      const instanceEvent = {
+        id: this.props.calendarId,
+        title: values.title,
+        content: values.content,
+        start_time: instance_start_date,
+        end_time: instance_end_date,
+        location: values.location,
+        color: values.eventColor,
+        person: [this.props.id],
+        repeatCondition: values.repeatCondition
+
+      }
+      console.log(instanceEvent)
+      this.props.editEvent(instanceEvent)
+    } else if (this.props.addEvent === true){
+      // So two routes will go if this happens, if the share has noone then you
+      // will just run the axios then run the redux but however if there is people
+      // you want share with then you will run the channels
+
+      if(values.friends.length === 0 ){
+        authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+          title: values.title,
+          content: values.content,
+          start_time: start_date,
+          end_time: end_date,
+          location: values.location,
+          color: values.eventColor,
+          person: [this.props.id],
+          repeatCondition: values.repeatCondition
+        })
+
+        // The event instance is pretty much used when you just recently added an
+        // event, so because of that you want to add the date in just as how the
+        // date and event will be added according to the loaded event
+
+
+        const instanceEvent = {
+          title: values.title,
+          content: values.content,
+          start_time: instance_start_date,
+          end_time: instance_end_date,
+          location: values.location,
+          color: values.eventColor,
+          person: [this.props.id],
+          repeatCondition: values.repeatCondition
+        }
+        // add color to addEvents in redux
+        this.props.addEvents(instanceEvent)
+      } else {
+        // This will be sent when you have poeple to share. Unlike the previous one
+        // where it just the current person, this one you add everyone you are shareing
+        // with along with your self into the person field
+
+        console.log('hit here baby')
+
+        let shareList = values.friends
+        shareList.push(this.props.id)
+        const createSharedEventObject = {
+          command: 'add_shared_event',
+          title: values.title,
+          person: shareList,
+          content: values.content,
+          location: values.location,
+          eventColor: values.eventColor,
+          startDate: start_date,
+          endDate: end_date,
+          repeatCondition: values.repeatCondition
+
+        }
+
+        CalendarEventWebSocketInstance.sendEvent(createSharedEventObject);
+      }
+    }
+    this.props.close()
   }
 
   openNotification = placement => {
