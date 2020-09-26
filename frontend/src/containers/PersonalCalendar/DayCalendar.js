@@ -269,6 +269,7 @@ class DayCalendar extends React.Component{
       if (toDoStuff.length > 0){
         hours.push(
             toDoStuff.map(item => (
+              item.accepted.includes(this.props.id) ?
               <div className = "eventsDay"
               style = {{
                 gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
@@ -278,6 +279,20 @@ class DayCalendar extends React.Component{
               <span > {dateFns.format(new Date(item.start_time),'hh:mm a')} - {dateFns.format(new Date(item.end_time),'hh:mm a')}</span>
               <span className = ' ' > {item.content} </span>
               </div>
+
+              :
+
+              <div className = "eventsDayAccept"
+              style = {{
+                gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
+                backgroundColor: "gainsboro"
+              }}
+              onClick = {() => this.onClickItem(item)}>
+              <span > {dateFns.format(new Date(item.start_time),'hh:mm a')} - {dateFns.format(new Date(item.end_time),'hh:mm a')}</span>
+              <span className = ' ' > {item.content} </span>
+              </div>
+
+
             ))
         )}
       const hourIndex = i;
@@ -497,7 +512,9 @@ const mapStateToProps = state => {
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
     events: state.calendar.events,
-    showEventSyncModal: state.eventSync.showEventSyncModal
+    showEventSyncModal: state.eventSync.showEventSyncModal,
+    id: state.auth.id
+
 
   }
 }
