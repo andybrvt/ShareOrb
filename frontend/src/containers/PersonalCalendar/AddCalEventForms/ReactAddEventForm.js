@@ -41,6 +41,7 @@ class ReactAddEventForm extends React.Component {
       repeatCondition: 'none',
       eventColor: '#01D4F4',
       error: false,
+      person: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -298,6 +299,9 @@ class ReactAddEventForm extends React.Component {
 
   handleFriendChange = (value) => {
     console.log(value)
+    this.setState({
+      person: value
+    })
   }
 
   handleValidation(){
@@ -379,7 +383,8 @@ class ReactAddEventForm extends React.Component {
       title: '',
       content: '',
       location: '',
-      error: false
+      error: false,
+      person: []
     })
   }
 
@@ -394,7 +399,8 @@ class ReactAddEventForm extends React.Component {
         start_time: this.state.timeStart,
         end_time: this.state.timeEnd,
         event_color: this.state.eventColor,
-        repeatCondition:this.state.repeatCondition
+        repeatCondition:this.state.repeatCondition,
+        person: this.state.person,
       }
       this.onClear()
       this.props.onSubmit(submitContent)
@@ -518,7 +524,7 @@ class ReactAddEventForm extends React.Component {
     // The name of the inputt values are important
     // it allows for us to be able to input stuff into the form item
     // because it is what connents to the onChange for the states
-    console.log(this.props)
+    console.log(this.state)
     const startChildren = this.renderStartTime();
     const endChildren = this.renderEndTime()
     console.log(this.handleValidation())
@@ -555,6 +561,7 @@ class ReactAddEventForm extends React.Component {
        mode="multiple"
        style={{ width: '100%' }}
       onChange={this.handleFriendChange}
+      value = {this.state.person}
       optionLabelProp="label"
       >
       {this.renderShareListSelect()}

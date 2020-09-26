@@ -8,6 +8,7 @@ import * as calendarActions from '../../../store/actions/calendars'
 import * as navActions from '../../../store/actions/nav';
 import ReduxAddEventForm from './ReduxAddEventForm';
 import ReactAddEventForm from './ReactAddEventForm';
+import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import CalendarForm from './CalendarForm'
 
 
@@ -100,36 +101,62 @@ class EventModal extends React.Component {
     console.log(temp_start_date, temp_end_date)
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
+    if (values.person.length === 0){
+      authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+        title: values.title,
+        content: values.content,
+        start_time: start_date,
+        end_time: end_date,
+        location: values.location,
+        color: values.event_color,
+        person: [this.props.id],
+        repeatCondition: values.repeatCondition,
+        host: this.props.id,
+        accepted: [this.props.id]
+      })
 
-    // authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
-    //   title: values.title,
-    //   content: values.content,
-    //   start_time: start_date,
-    //   end_time: end_date,
-    //   location: values.location,
-    //   color: values.event_color,
-    //   person: [this.props.id],
-    //   repeatCondition: values.repeatCondition
-    // })
-    //
-    // // The event instance is pretty much used when you just recently added an
-    // // event, so because of that you want to add the date in just as how the
-    // // date and event will be added according to the loaded event
-    //
-    //
-    // const instanceEvent = {
-    //   title: values.title,
-    //   content: values.content,
-    //   start_time: temp_start_date,
-    //   end_time: temp_end_date,
-    //   location: values.location,
-    //   color: values.event_color,
-    //   person: [this.props.id],
-    //   repeatCondition: values.repeatCondition
-    // }
-    // // add color to addEvents in redux
-    // this.props.addEvents(instanceEvent)
-    // this.props.closePopup()
+      // The event instance is pretty much used when you just recently added an
+      // event, so because of that you want to add the date in just as how the
+      // date and event will be added according to the loaded event
+
+
+      const instanceEvent = {
+        title: values.title,
+        content: values.content,
+        start_time: temp_start_date,
+        end_time: temp_end_date,
+        location: values.location,
+        color: values.event_color,
+        person: [this.props.id],
+        repeatCondition: values.repeatCondition,
+        host: this.props.id,
+        accepted: [this.props.id]
+      }
+      // add color to addEvents in redux
+      this.props.addEvents(instanceEvent)
+    } else {
+      let shareList = values.person
+      shareList.push(this.props.username)
+      const createSharedEventObject = {
+        command: 'add_shared_event',
+        title: values.title,
+        content: values.content,
+        startDate: start_date,
+        endDate: end_date,
+        location: values.location,
+        eventColor: values.event_color,
+        person: shareList,
+        repeatCondition: values.repeatCondition,
+        host: this.props.id,
+      }
+      CalendarEventWebSocketInstance.sendEvent(createSharedEventObject);
+
+
+    }
+
+
+
+    this.props.closePopup()
   }
 
 
@@ -156,7 +183,10 @@ class EventModal extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    friendList: state.auth.friends
+    friendList: state.auth.friends,
+    username: state.auth.username,
+    id: state.auth.id,
+
   }
 }
 
