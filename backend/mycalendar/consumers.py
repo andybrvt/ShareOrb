@@ -39,7 +39,9 @@ class CalendarConsumer(JsonWebsocketConsumer):
         title = data['title'];
         content = data['content'];
         location = data['location'];
+        host = get_object_or_404(User, id = data['host']);
         # person = [currentUser, userFriend];
+        accepted = [host];
         color = data['eventColor'];
         repeatCondition = data['repeatCondition'];
         newEvent = Event.objects.create(
@@ -50,8 +52,11 @@ class CalendarConsumer(JsonWebsocketConsumer):
             location = location,
             color = color,
             repeatCondition = repeatCondition,
+            host = host,
         )
         newEvent.person.set(person)
+        newEvent.accepted.set(accepted)
+
         serializer = EventSerializer(newEvent)
         content = {
             'command': 'new_event',

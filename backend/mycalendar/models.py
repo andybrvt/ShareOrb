@@ -24,6 +24,9 @@ class Calendar(models.Model):
 
 class Event(models.Model):
 	person = models.ManyToManyField(settings.AUTH_USER_MODEL)
+	# For host, it is mostly just used to give editing rights and accepting rights when
+	# making and editing events
+	host = models.ForeignKey(settings.AUTH_USER_MODEL, related_name ='personal_host', on_delete= models.CASCADE, null = True)
 	# GONNA DELETE THIS CALENDAR FIELD TOO AS WELL
 	calendar = models.ManyToManyField(Calendar, blank = True)
 	title = models.CharField(max_length = 255)
@@ -35,7 +38,9 @@ class Event(models.Model):
 	end_time = models.DateTimeField(default =timezone.now, blank= False)
 	location = models.CharField(max_length = 255, blank = True)
 	color = models.CharField(max_length = 255, blank = True)
-
+	# The accepted field will probally be a list because if we did it a true or false field
+	# if one person accepts then everyone's gets accepted
+	accepted = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_accepted')
 
 	def __unicode__(self):
 		return self.title

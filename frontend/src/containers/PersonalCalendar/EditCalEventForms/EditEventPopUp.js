@@ -91,7 +91,9 @@ class EditEventPopUp extends React.Component {
         location: values.location,
         color: values.eventColor,
         person: [this.props.id],
-        repeatCondition: values.repeatCondition
+        repeatCondition: values.repeatCondition,
+        host: this.props.id,
+        accepted: [this.props.id]
       })
       const instanceEvent = {
         id: this.props.calendarId,
@@ -102,7 +104,9 @@ class EditEventPopUp extends React.Component {
         location: values.location,
         color: values.eventColor,
         person: [this.props.id],
-        repeatCondition: values.repeatCondition
+        repeatCondition: values.repeatCondition,
+        host: this.props.id,
+        accepted: [this.props.id]
 
       }
       console.log(instanceEvent)
@@ -121,7 +125,9 @@ class EditEventPopUp extends React.Component {
           location: values.location,
           color: values.eventColor,
           person: [this.props.id],
-          repeatCondition: values.repeatCondition
+          repeatCondition: values.repeatCondition,
+          host: this.props.id,
+          accepted: [this.props.id]
         })
 
         // The event instance is pretty much used when you just recently added an
@@ -137,7 +143,9 @@ class EditEventPopUp extends React.Component {
           location: values.location,
           color: values.eventColor,
           person: [this.props.id],
-          repeatCondition: values.repeatCondition
+          repeatCondition: values.repeatCondition,
+          host: this.props.id,
+          accepted: [this.props.id]
         }
         // add color to addEvents in redux
         this.props.addEvents(instanceEvent)
@@ -159,7 +167,9 @@ class EditEventPopUp extends React.Component {
           eventColor: values.eventColor,
           startDate: start_date,
           endDate: end_date,
-          repeatCondition: values.repeatCondition
+          repeatCondition: values.repeatCondition,
+          host: this.props.id,
+          // accepted: [this.props.id]
 
         }
 
