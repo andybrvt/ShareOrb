@@ -398,7 +398,7 @@ class WeekCalendar extends React.Component{
 
 
                   <p style={{marginTop:'5px', fontSize:'14px'}}>
-                    <i style={{marginRight:'10px'}} class="far fa-calendar-alt"></i>
+                    <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
                     {dateFns.format(new Date(item.start_time), 'M')}/
 
                     {dateFns.format(new Date(item.start_time), 'd')}
@@ -416,42 +416,49 @@ class WeekCalendar extends React.Component{
                       -
                       {dateFns.format(new Date(item.end_time),'h:mm a')}
                     </span>
+                    <div>
+                      <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
+                      2 people invited
+
+                    </div>
                   </p>
 
 
                   <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
-                   <Avatar
-                     shape="square"
-                     size={45}
-                     src={'http://127.0.0.1:8000'+item.person[0].profile_picture}
-                     style={{display:'inline-block'}}
-                    />
 
-                  <p class="highlightWord" style={{marginLeft:'15px', fontSize:'14px', display:'inline-block'}}
-                    onClick = {() => this.onProfileClick(item.person[0].username)}
-                  >
-                    {item.person[0].first_name} {item.person[0].last_name}
-                  </p>
-                    <Progress type="circle" style={{marginLeft:'40px', marginRight:'5px', }} percent={30} width={50} />
-                    responded
-                    <Tooltip title="People going">
-                      <Progress  style={{marginLeft:'20px', marginTop:'15px', marginRight:'10px'}}
-                        width={50}
-                        type="circle"
-                        strokeColor={{
-                          '0%': '#108ee9',
-                          '100%': '#87d068',
-                        }}
+                  <div class="outerContainerPeople">
 
-                        percent={66}
-                      />
+                    <div class="innerContainerPeople" style={{display:'inline-block'}}>
 
-                    going
-                     </Tooltip>
+                      <Avatar
+                        shape="square"
+                        size={50}
+                        src={'http://127.0.0.1:8000'+item.person[0].profile_picture}
+                        style={{display:'inline-block'}}
+                       />
+
+                     <p class="highlightWord" style={{marginLeft:'15px', fontSize:'14px', display:'inline-block'}}
+                       onClick = {() => this.onProfileClick(item.person[0].username)}
+                     >
+                       {item.person[0].first_name} {item.person[0].last_name}
+                     </p>
+
+                    </div>
+
+                     <span class="innerContainerPeople" style={{ width: 150, display:'inline-block', float:'right', marginRight:'10px'}}>
+                       {/* going to need a if condition checking if not 100 then you can make status active:
+                          status="exception"
+                          <Progress percent={50} size="small" status="active" />
+                         */}
+                       <Progress percent={50} size="small" status="active" gap/>
+                       <Progress percent={100} size="small" />
+                       <Progress percent={70} size="small" status="exception" />
+
+                     </span>
                     <br/>
                     <br/>
-
-                  <Avatar.Group style={{marginTop:'-10px'}}>
+                  </div>
+                  <Avatar.Group style={{marginTop:'-5px'}}>
                     <div style={{float:'left', marginRight:'75px'}}>
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>

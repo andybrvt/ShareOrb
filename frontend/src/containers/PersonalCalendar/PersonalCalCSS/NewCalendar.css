@@ -1,4 +1,16 @@
+.outerContainerPeople{
+  height:100px;
+  margin-bottom: 15px;
+  /* background-color: red; */
+}
 
+.innerContainerPeople{
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 .highlightWord:hover {
   color: #3399FF;
   text-decoration: underline;
