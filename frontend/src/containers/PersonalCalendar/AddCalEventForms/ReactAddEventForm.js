@@ -46,6 +46,11 @@ class ReactAddEventForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+
   handleChange = (values) => {
     this.setState({ [values.target.name]: values.target.value})
   }
@@ -291,6 +296,10 @@ class ReactAddEventForm extends React.Component {
     })
   }
 
+  handleFriendChange = (value) => {
+    console.log(value)
+  }
+
   handleValidation(){
     // You will use this to disable or non disable the button, so because of that
     // the true and false will be flipped
@@ -399,6 +408,26 @@ class ReactAddEventForm extends React.Component {
   onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
+
+  renderShareListSelect = () => {
+    if(this.props.friendList !== undefined){
+      const friendList = this.props.friendList
+
+      let shareOptions = []
+
+      for (let friend = 0; friend< friendList.length; friend++ ){
+        shareOptions.push(
+          <Option value = {friendList[friend].username}
+          label = {this.capitalize(friendList[friend].username)}>
+            {this.capitalize(friendList[friend].username)}
+          </Option>
+        )
+      }
+
+      return shareOptions
+    }
+  }
+
 
   renderStartTime = () => {
     const timeFormat = "hh:mm a"
@@ -517,49 +546,21 @@ class ReactAddEventForm extends React.Component {
          placeholder = 'Title'
          value = {this.state.title}
          />
-
-       sdfasdfad
-         <Form.Item
-           name="range-time-picker"
-          {...rangeConfig}
-           className = 'timepicker'>
-           <DatePicker
-           className = ''
-           placeholder = 'startTime'
-           onChange = {this.onStartDateChange}
-           value = {this.state.startDate}
-           suffixIcon={<div></div>}
-           allowClear = {false}
-           bordered = {false}
-           style = {{width: '110px'}}/>
-
-
-           <Select
-           name = 'timeStart'
-           className = ''
-           style={{ width: 100 }}
-           showArrow  = {false}
-           onChange = {this.onStartTimeChange}
-           value = {this.state.timeStart}>
-             {startChildren}
-           </Select>
-
-
-           <ArrowRightOutlined />
-           <Select
-           className = ''
-           name = 'timeEnd'
-           style={{ width: 100 }}
-           showArrow  = {false}
-           onChange = {this.onEndTimeChange}
-           value = {this.state.timeEnd}>
-             {endChildren}
-           </Select>
-         </Form.Item>
-
-
-
        </Form.Item>
+
+
+       <Form.Item>
+
+       <Select
+       mode="multiple"
+       style={{ width: '100%' }}
+      onChange={this.handleFriendChange}
+      optionLabelProp="label"
+      >
+      {this.renderShareListSelect()}
+      </Select>
+       </Form.Item>
+
        <Form.Item name="Content">
         <TextArea
         name = 'content'
@@ -585,6 +586,53 @@ class ReactAddEventForm extends React.Component {
         <AimOutlined className = 'aim'/>
      </Form.Item>
 
+     <Form.Item
+       name="range-time-picker"
+      {...rangeConfig}
+       className = 'timepicker'>
+       <DatePicker
+       className = ''
+       placeholder = 'startTime'
+       onChange = {this.onStartDateChange}
+       value = {this.state.startDate}
+       suffixIcon={<div></div>}
+       allowClear = {false}
+       bordered = {false}
+       style = {{width: '110px'}}/>
+       <ArrowRightOutlined />
+       <DatePicker
+       className = {` ${this.onRed() ? 'datePicker' : ''}`}
+       placeholder = 'endTime'
+       onChange = {this.onEndDateChange}
+       value = {this.state.endDate}
+       style = {{width: '110px '}}
+       allowClear = {false}
+       suffixIcon={<div></div>}
+       />
+
+       <br/>
+       <Select
+       name = 'timeStart'
+       className = ''
+       style={{ width: 100 }}
+       showArrow  = {false}
+       onChange = {this.onStartTimeChange}
+       value = {this.state.timeStart}>
+         {startChildren}
+       </Select>
+
+
+       <ArrowRightOutlined />
+       <Select
+       className = ''
+       name = 'timeEnd'
+       style={{ width: 100 }}
+       showArrow  = {false}
+       onChange = {this.onEndTimeChange}
+       value = {this.state.timeEnd}>
+         {endChildren}
+       </Select>
+     </Form.Item>
 
         <Form.Item>
         <Radio.Group

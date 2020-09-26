@@ -75,6 +75,7 @@ class EventModal extends React.Component {
   }
 
   submit = (values) => {
+    console.log(values)
     // const start_date = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd HH:mm')
     // const end_date = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd HH:mm')
     let start_date = dateFns.startOfDay(new Date(values.start_date))
@@ -100,35 +101,35 @@ class EventModal extends React.Component {
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
 
-    authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
-      title: values.title,
-      content: values.content,
-      start_time: start_date,
-      end_time: end_date,
-      location: values.location,
-      color: values.event_color,
-      person: [this.props.id],
-      repeatCondition: values.repeatCondition
-    })
-
-    // The event instance is pretty much used when you just recently added an
-    // event, so because of that you want to add the date in just as how the
-    // date and event will be added according to the loaded event
-
-
-    const instanceEvent = {
-      title: values.title,
-      content: values.content,
-      start_time: temp_start_date,
-      end_time: temp_end_date,
-      location: values.location,
-      color: values.event_color,
-      person: [this.props.id],
-      repeatCondition: values.repeatCondition
-    }
-    // add color to addEvents in redux
-    this.props.addEvents(instanceEvent)
-    this.props.closePopup()
+    // authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+    //   title: values.title,
+    //   content: values.content,
+    //   start_time: start_date,
+    //   end_time: end_date,
+    //   location: values.location,
+    //   color: values.event_color,
+    //   person: [this.props.id],
+    //   repeatCondition: values.repeatCondition
+    // })
+    //
+    // // The event instance is pretty much used when you just recently added an
+    // // event, so because of that you want to add the date in just as how the
+    // // date and event will be added according to the loaded event
+    //
+    //
+    // const instanceEvent = {
+    //   title: values.title,
+    //   content: values.content,
+    //   start_time: temp_start_date,
+    //   end_time: temp_end_date,
+    //   location: values.location,
+    //   color: values.event_color,
+    //   person: [this.props.id],
+    //   repeatCondition: values.repeatCondition
+    // }
+    // // add color to addEvents in redux
+    // this.props.addEvents(instanceEvent)
+    // this.props.closePopup()
   }
 
 
@@ -144,13 +145,20 @@ class EventModal extends React.Component {
           footer = {false}
           width  = {450}
         >
-        <ReactAddEventForm onSubmit = {this.submit} />
+        <ReactAddEventForm
+        friendList = {this.props.friendList}
+        onSubmit = {this.submit} />
         </Modal>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    friendList: state.auth.friends
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -159,4 +167,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(EventModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EventModal);
