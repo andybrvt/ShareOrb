@@ -261,17 +261,31 @@ class PersonalCalendar extends React.Component{
         if (toDoStuff.length > 0){
 
           days.push(
-            <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`} 
+            <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`}
             onClick = { () => this.onDateClick(cloneDay)}>
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
-                console.log(item),
-                  <div key={item.content}
+                item.accepted.includes(this.props.id) ?
+                <div key={item.content}
                   className = 'monthEvent'
                   style = {{
                     gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1),
                     backgroundColor: item.color
+                  }}>
+                  <div onClick = {() => this.onClickItem(item)}>
+                  <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
+                  <span className = ' ' > {item.content} </span>
+                  </div>
+                </div>
+
+                :
+
+                <div key={item.content}
+                  className = 'monthEventAccept'
+                  style = {{
+                    gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1),
+                    backgroundColor: "#E8E8E8"
                   }}>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
@@ -599,7 +613,8 @@ const mapStateToProps = state => {
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
     events: state.calendar.events,
-    showEventSyncModal: state.eventSync.showEventSyncModal
+    showEventSyncModal: state.eventSync.showEventSyncModal,
+    id: state.auth.id
   }
 }
 

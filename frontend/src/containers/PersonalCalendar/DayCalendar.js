@@ -285,7 +285,7 @@ class DayCalendar extends React.Component{
               <div className = "eventsDayAccept"
               style = {{
                 gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
-                backgroundColor: "gainsboro"
+                backgroundColor: "#E8E8E8"
               }}
               onClick = {() => this.onClickItem(item)}>
               <span > {dateFns.format(new Date(item.start_time),'hh:mm a')} - {dateFns.format(new Date(item.end_time),'hh:mm a')}</span>
