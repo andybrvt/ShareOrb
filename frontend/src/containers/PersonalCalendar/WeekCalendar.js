@@ -369,7 +369,7 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <Popover placement="right"  content={
-                <div style={{padding:30, width:475}}>
+                <div style={{padding:30, width:450}}>
                   <p style={{display:'inline-block'}}>
 
                   </p>
@@ -452,7 +452,7 @@ class WeekCalendar extends React.Component{
                     <br/>
 
                   <Avatar.Group style={{marginTop:'-10px'}}>
-                    <div style={{float:'left', marginRight:'100px'}}>
+                    <div style={{float:'left', marginRight:'75px'}}>
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
                       </Button>

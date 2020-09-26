@@ -20,7 +20,7 @@ import YearCalendar from './containers/PersonalCalendar/YearCalendar';
 import SideMenu from './components/SideMenu/SideMenu.js';
 import NoFoundPage from './containers/403.jsx';
 import ProfileCardNewsFeed from './components/ProfileCardNewsFeed'
-
+import EventSamplePage from './EventSamplePage.js'
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -59,6 +59,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year' render={(props) => <YearCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/personalcal/sample' render={(props) => <EventSamplePage {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         </SideMenu>
         :
         <div></div>
