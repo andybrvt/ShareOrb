@@ -606,7 +606,20 @@ main {
   /* this makes events rounded but gonna take it out for now */
   /* border-radius: 10px; */
   padding-left: 10px;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.12), 2px 3px 4px rgba(0, 0, 0, 0.24);
+  width:95%;
+  /* grid-column: 1/7; */
+  z-index: 1;
+}
+
+.weekDayFlex-Container .calendar .weekBody .weekEventAccept{
+  /* background-color: red; */
+  color: white;
+  font-size: 15px;
+  /* this makes events rounded but gonna take it out for now */
+  /* border-radius: 10px; */
+  padding-left: 10px;
+  /* box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
   width:95%;
   /* grid-column: 1/7; */
   z-index: 1;

@@ -76,6 +76,9 @@ class EventModal extends React.Component {
   }
 
   submit = (values) => {
+    // REMEMBER THAT WHEN EVER YOU ARE MAKING AN EVENT, THE HOST ALWAYS AND I MEAN
+    //  ALWAYS HAS TO BE ADDED TO THE ACCEPTED LIST
+
     console.log(values)
     // const start_date = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd HH:mm')
     // const end_date = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd HH:mm')

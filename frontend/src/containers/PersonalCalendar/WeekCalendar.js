@@ -363,7 +363,6 @@ class WeekCalendar extends React.Component{
           // The day index represents the start column and the hour index represent the start row
           let startDate = dateFns.startOfWeek(this.props.currentDate)
           console.log(toDoStuff)
-
           days.push(
 
             toDoStuff.map(item => (
@@ -489,33 +488,69 @@ class WeekCalendar extends React.Component{
 
 
               } >
-              <div
-                 key= {item.title}
-                  onClick = {() => this.onClickItem(item)}
-                   className ="weekEvent"
-                   style = {{
-                    gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                    // gridRow: 15/17,
-                    gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
-
-                    backgroundColor: item.color
-                  }}>
 
 
-                      <span className="pointerEvent">
-                        <span className = 'pointerEvent' > {item.title} </span>
-                        <br/>
-                        <span style={{float:'left'}} className = 'pointerEvent'>
-                          {dateFns.format(new Date(item.start_time),'h:mm a')}
-                          -
-                          {dateFns.format(new Date(item.end_time),'h:mm a')}
+              {  item.accepted.includes(this.props.id) ?
+                <div
+                   key= {item.title}
+                    onClick = {() => this.onClickItem(item)}
+                     className = "weekEvent"
+                     style = {{
+                      gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
+                      // gridRow: 15/17,
+                      gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
+
+                      backgroundColor: item.color
+                    }}>
+
+
+                        <span className="pointerEvent">
+                          <span className = 'pointerEvent' > {item.title} </span>
+                          <br/>
+                          <span style={{float:'left'}} className = 'pointerEvent'>
+                            {dateFns.format(new Date(item.start_time),'h:mm a')}
+                            -
+                            {dateFns.format(new Date(item.end_time),'h:mm a')}
+
+                          </span>
 
                         </span>
 
-                      </span>
+
+                </div>
+
+                :
+
+                <div
+                   key= {item.title}
+                    onClick = {() => this.onClickItem(item)}
+                     className = "weekEventAccept"
+                     style = {{
+                      gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
+                      // gridRow: 15/17,
+                      gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
+
+                      backgroundColor: "gainsboro"
+                    }}>
 
 
-              </div>
+                        <span className="pointerEvent">
+                          <span className = 'pointerEvent' > {item.title} </span>
+                          <br/>
+                          <span style={{float:'left'}} className = 'pointerEvent'>
+                            {dateFns.format(new Date(item.start_time),'h:mm a')}
+                            -
+                            {dateFns.format(new Date(item.end_time),'h:mm a')}
+
+                          </span>
+
+                        </span>
+
+
+                </div>
+              }
+
+
               </Popover>
             ))
 
@@ -838,7 +873,8 @@ const mapStateToProps = state => {
     showModal: state.calendarEvent.showModal,
     currentDate: state.calendar.date,
     events: state.calendar.events,
-    showEventSyncModal: state.eventSync.showEventSyncModal
+    showEventSyncModal: state.eventSync.showEventSyncModal,
+    id: state.auth.id
 
   }
 }
