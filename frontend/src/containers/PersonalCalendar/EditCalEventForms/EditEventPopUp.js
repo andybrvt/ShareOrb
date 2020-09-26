@@ -149,7 +149,7 @@ class EditEventPopUp extends React.Component {
         console.log('hit here baby')
 
         let shareList = values.friends
-        shareList.push(this.props.id)
+        shareList.push(this.props.username)
         const createSharedEventObject = {
           command: 'add_shared_event',
           title: values.title,
@@ -280,6 +280,7 @@ const mapStateToProps = state => {
     eventColor: state.calendarEvent.eventColor,
     calendarId: state.calendarEvent.calendarId,
     id: state.auth.id,
+    username: state.auth.username,
     friendList: state.auth.friends
   }
 }

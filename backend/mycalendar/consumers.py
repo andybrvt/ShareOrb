@@ -29,7 +29,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         person = [];
 
         for people in data['person']:
-            curPerson = get_object_or_404(User, id = people);
+            curPerson = get_object_or_404(User, username = people);
             person.append(curPerson)
 
         # currentUser = get_object_or_404(User, username = data['currentUser']);

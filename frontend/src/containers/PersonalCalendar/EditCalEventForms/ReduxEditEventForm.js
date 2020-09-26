@@ -246,6 +246,10 @@ const validate = values => {
 
 class ReduxEditEventForm extends React.Component{
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   handleStartTimeChange = (event, value) => {
     const { change } = this.props
     // So this handleStartTimechange pretty much is used to automatically
@@ -506,9 +510,9 @@ class ReduxEditEventForm extends React.Component{
 
       for (let friend = 0; friend< friendList.length; friend++ ){
         shareOptions.push(
-          <Option value = {friendList[friend].id}
-          label = {friendList[friend].username}>
-            {friendList[friend].username}
+          <Option value = {friendList[friend].username}
+          label = {this.capitalize(friendList[friend].username)}>
+            {this.capitalize(friendList[friend].username)}
           </Option>
         )
       }
