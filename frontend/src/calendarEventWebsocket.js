@@ -59,6 +59,17 @@ class WebSocketCalendarEvent {
     this.callbacks['new_event'] = newEventCallback;
   }
 
+  acceptSharedEvent = (eventId, acceptorId) => {
+    // Pretty much the gate way to sending to the channels for accepting the
+    // event share... pretty much you just wanna add your name to the accepted list
+    // and let everyone that is part of the event shared know
+    this.sendEvent({
+      eventId: eventId,
+      acceptorId: acceptorId,
+      command: 'send_accept_shared_event'
+    })
+  }
+
   sendEvent (data){
     // This is used to send the notification into the backend
     console.log('send_event')

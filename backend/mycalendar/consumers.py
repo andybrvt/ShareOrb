@@ -66,6 +66,31 @@ class CalendarConsumer(JsonWebsocketConsumer):
         print(content)
         return self.send_new_event(content)
 
+    def accept_shared_event(self, data):
+        # This function is pretty much used to just add in the accepted user into
+        # the accepted list, so you just gonna add the person in then send it out to
+        # everyone so then it can be added into everyone's redux
+        sharedEvent = get_object_or_404(Event, id = data['eventId'])
+        acceptedUser = get_object_or_404(User, id = data['acceptorId'] )
+
+        sharedEvent.accepted.add(acceptedUser)
+
+        serializer = EventSerializer(sharedEvent)
+
+        person = serializer.data['person']
+
+        content = {
+            'command': 'add_accepted',
+            'person': person,
+            'eventId': data['eventId'],
+            'acceptedUser': data['acceptorId']
+        }
+
+        print(content)
+        return self.send_accept_shared(content)
+
+
+        print(sharedEvent)
 
 # So you got done by making an object in the model, now you need to send
 # it through the channel to both users
@@ -80,6 +105,24 @@ class CalendarConsumer(JsonWebsocketConsumer):
         people = newEvent['newEvent']['person']
         for person in newEvent['newEvent']['person']:
             # Maybe gotta change this if it poses any problems
+            channel = 'calendar_'+person['username']
+            async_to_sync(self.channel_layer.group_send)(
+                channel,
+                content
+            )
+
+
+    def send_accept_shared(self, acceptedUser):
+        # This send is pretty much the same as the send_new_evnet but it is used
+        # in conjuntion with the accept_shared_event so that it can send it to everyone
+        # and know who has accepted the event
+        channel_layer = get_channel_layer()
+        content = {
+            'type': 'accepted_share',
+            'acceptedUser': acceptedUser
+        }
+        people = acceptedUser['person']
+        for person in people:
             channel = 'calendar_'+person['username']
             async_to_sync(self.channel_layer.group_send)(
                 channel,
@@ -103,12 +146,19 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'add_sync_event':
             self.add_share_sync_event(data)
         if data['command'] == 'add_shared_event':
             self.add_share_sync_event(data)
+        if data['command'] == 'send_accept_shared_event':
+            self.accept_shared_event(data)
 
     def new_event(self, event):
         newEvent = event['newEvent']
         print ('new_event')
         return self.send_json(newEvent)
+
+    def accepted_share(self, event):
+        acceptedUser = event['acceptedUser']
+        return self.send_json(acceptedUser)

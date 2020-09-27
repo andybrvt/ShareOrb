@@ -17,6 +17,7 @@ import MiniCalendar from './MiniCalendar';
 import EventSyncModal from './EventSyncForms/EventSyncModal';
 import EventModal from './AddCalEventForms/EventModal';
 import CalendarViewDropDown from './CalendarViewDropDown';
+import CalendarEventWebSocketInstance from '../../calendarEventWebsocket';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
 
@@ -389,13 +390,6 @@ class WeekCalendar extends React.Component{
 
                   </span>
 
-
-
-
-
-
-
-
                   <p style={{marginTop:'5px', fontSize:'14px'}}>
                     <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
                     {dateFns.format(new Date(item.start_time), 'M')}/
@@ -462,7 +456,12 @@ class WeekCalendar extends React.Component{
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
                       </Button>
-                      <Button type="primary" shape="circle" style={{marginLeft:'10px'}}>
+                      <Button
+                      type="primary"
+                      shape="circle"
+                      style={{marginLeft:'10px'}}
+                      onClick = {() => this.onAcceptShare(item.id)}
+                      >
                          <i class="fas fa-check"></i>
                       </Button>
                       <Button  shape="circle" type="primary" danger style={{marginLeft:'10px', marginRight:'75px'}}>
@@ -781,6 +780,14 @@ class WeekCalendar extends React.Component{
 
   openEventSyncModal = () => {
     this.props.openEventSyncModal()
+  }
+
+  onAcceptShare = (eventId) => {
+    // This will be used for accepting event shared between you and another
+    // person. When accepted this will add you to the accepted list and then
+    // send it to the host to as well
+    console.log(eventId, this.props.id)
+    CalendarEventWebSocketInstance.acceptSharedEvent(eventId, this.props.id);
   }
 
 
