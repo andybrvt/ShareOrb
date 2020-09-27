@@ -37,7 +37,9 @@ class App extends Component {
     // different so you just want to add it thats all
     CalendarEventWebSocketInstance.addCallbacks(
       this.props.addEvent.bind(this),
-      this.props.acceptEventShare.bind(this)
+      this.props.acceptEventShare.bind(this),
+      this.props.declineElseEventShare.bind(this),
+      this.props.declineEventShare.bind(this)
     )
 
     WebSocketPostsInstance.addCallbacks(
@@ -124,6 +126,8 @@ const mapDispatchToProps = dispatch => {
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
     addEvent: events => dispatch(calendarActions.addEvent(events)),
     acceptEventShare: acceptShareObj => dispatch(calendarActions.acceptEventShare(acceptShareObj)),
+    declineElseEventShare: declineShareObj => dispatch(calendarActions.declineElseEventShare(declineShareObj)),
+    declineEventShare: declineShareObj => dispatch(calendarActions.declineEventShare(declineShareObj)),
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),

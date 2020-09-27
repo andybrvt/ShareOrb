@@ -125,6 +125,33 @@ const acceptEventShare = (state, action) => {
   })
 }
 
+const declineElseEventShare = (state, action) => {
+
+  function removeDeclineEvent(declineUser){
+    return declineUser.id !== action.declineShareObj.declineId
+  }
+
+  return updateObject(state, {
+    events: state.events.map(
+      item => item.id === action.declineShareObj.eventId ? {
+        ...item,
+        person: item.person.filter(removeDeclineEvent)
+      } : item
+    )
+  })
+}
+
+const declineEventShare = (state, action) => {
+
+  function removeDeclineEvent(declineEvent){
+    return declineEvent.id !== action.declineShareObj.eventId
+  }
+
+  return updateObject(state, {
+    events: state.events.filter(removeDeclineEvent)
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -159,6 +186,10 @@ const reducer = (state = initialState, action) => {
       return deleteEvent(state, action);
     case actionTypes.ACCEPT_EVENT_SHARE:
       return acceptEventShare(state, action);
+    case actionTypes.DECLINE_ELSE_EVENT_SHARE:
+      return declineElseEventShare(state, action);
+    case actionTypes.DECLINE_EVENT_SHARE:
+      return declineEventShare(state, action);
     default:
       return state;
   }

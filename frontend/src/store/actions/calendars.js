@@ -115,3 +115,17 @@ export const acceptEventShare = (acceptShareObj) => {
     acceptShareObj: acceptShareObj
   }
 }
+
+export const declineElseEventShare = (declineShareObj) => {
+  return{
+    type: actionTypes.DECLINE_ELSE_EVENT_SHARE,
+    declineShareObj: declineShareObj
+  }
+}
+
+export const declineEventShare = (declineShareObj) => {
+  return {
+    type: actionTypes.DECLINE_EVENT_SHARE,
+    declineShareObj: declineShareObj
+  }
+}

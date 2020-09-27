@@ -52,7 +52,7 @@ class WebSocketCalendarEvent {
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
     }
-    if (command === 'add_accepted'){
+    else if (command === 'add_accepted'){
       const acceptorId = parsedData.acceptedUser;
       const eventId = parsedData.eventId
 
@@ -62,13 +62,41 @@ class WebSocketCalendarEvent {
       }
 
       this.callbacks['accept_share'](acceptShareObj)
+    } else if(command === 'add_decline_else'){
+      // This path is for everyone else that is not the person declining the event
+      const declineId = parsedData.declineId;
+      const eventId = parsedData.eventId
+
+      const declineShareObj = {
+        declineId: declineId,
+        eventId: eventId
+      }
+
+      this.callbacks['decline_share_else'](declineShareObj)
+    } else if(command === 'add_decline'){
+      // This path is for the user that is doing the declining of the event
+      console.log('user side decline works')
+      const eventId = parsedData.eventId
+
+      const declineShareObj = {
+        eventId: eventId
+      }
+
+      this.callbacks['decline_share'](declineShareObj)
     }
   }
 
-  addCallbacks(newEventCallback, acceptEventShareCallback){
+  addCallbacks(
+    newEventCallback,
+    acceptEventShareCallback,
+    declineElseEventShareCallback,
+    declineEventShareCallback
+  ){
     // you just need to add the event so just one call back
     this.callbacks['new_event'] = newEventCallback;
     this.callbacks['accept_share'] = acceptEventShareCallback;
+    this.callbacks['decline_share_else'] = declineElseEventShareCallback;
+    this.callbacks['decline_share'] = declineEventShareCallback
   }
 
   acceptSharedEvent = (eventId, acceptorId) => {

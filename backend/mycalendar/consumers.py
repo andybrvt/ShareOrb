@@ -107,15 +107,29 @@ class CalendarConsumer(JsonWebsocketConsumer):
         # userSerializer = PersonSerializer(declineUser).data
         person = serializer.data['person']
 
+        # Two content, one for everyone else and one for the person that decline,
+        # The reason I am making this difference is because for the person taht decline
+        # we hvae to delete the event entirely from the redux and for everyone else
+        # you just have to remvoe the decline person from the person list
 
-        content = {
-            'command': 'add_decline',
+
+        # This one is going out to everyone else
+        contentElse = {
+            'command': 'add_decline_else',
             'person': person,
             'eventId': data['eventId'],
             'declineUser': declineUser.username,
+            'declineId': data['declineId']
         }
 
-        return self.send_decline_shared(content)
+        content = {
+            'command': 'add_decline',
+            'eventId': data['eventId'],
+            'declineUser': declineUser.username
+        }
+
+        self.send_decline_shared(content)
+        self.send_decline_shared(contentElse)
 
 # So you got done by making an object in the model, now you need to send
 # it through the channel to both users
@@ -162,18 +176,20 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'type': 'declined_share',
             'declinedUser': declinedUser
         }
-        people = declinedUser['person']
-        for person in people:
-            channel = 'calendar_'+person['username']
+        if (declinedUser['command'] == 'add_decline_else'):
+            people = declinedUser['person']
+            for person in people:
+                channel = 'calendar_'+person['username']
+                async_to_sync(self.channel_layer.group_send)(
+                    channel,
+                    content
+                )
+        elif(declinedUser['command'] == 'add_decline'):
+            declineChannel = 'calendar_'+declinedUser['declineUser']
             async_to_sync(self.channel_layer.group_send)(
-                channel,
+                declineChannel,
                 content
             )
-        declineChannel = 'calendar_'+declinedUser['declineUser']
-        async_to_sync(self.channel_layer.group_send)(
-            declineChannel,
-            content
-        )
 
 # When making a websocket you always start with connect
     def connect(self):
