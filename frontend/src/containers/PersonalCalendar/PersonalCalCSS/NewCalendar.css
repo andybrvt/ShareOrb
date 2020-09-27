@@ -623,14 +623,15 @@ main {
 
 /* cell of the week */
 .weekDayFlex-Container .calendar .weekBody .weekEvent{
-  /* background-color: red; */
+  background-color: red;
   color: white;
   font-size: 15px;
   /* this makes events rounded but gonna take it out for now */
   /* border-radius: 10px; */
-  padding-left: 10px;
+
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.12), 2px 3px 4px rgba(0, 0, 0, 0.24);
-  width:100%;
+  width:95%;
+  height:95%;
   /* grid-column: 1/7; */
   z-index: 1;
 }

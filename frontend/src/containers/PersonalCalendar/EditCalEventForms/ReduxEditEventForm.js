@@ -225,9 +225,6 @@ const validate = values => {
   if (!values.title){
     errors.title = "Required"
   }
-  if(!values.content){
-    errors.content = 'Required'
-  }
   if(dateFns.isAfter(new Date(values.startDate), new Date(values.endDate))){
     errors.endDate = 'endDate error'
   } else if (values.repeatCondition === 'weekly' &&
@@ -633,21 +630,31 @@ class ReduxEditEventForm extends React.Component{
             />
           </div>
 
+          <div style={{marginLeft:'30px', marginBottom:'15px'}}>
+            <Field
+            name = 'repeatCondition'
+            component = {renderRadioSelect}
+            onChange ={this.handleReoccuringChange}
+            />
+          </div>
+
           {/* need to implement redux form to people */}
           <div>
 
             <i style={{marginRight:'15px'}} class="fas fa-user-friends"></i>
             <Field
             name = 'friends'
+            type='text'
             onChange = {this.handleFriendChange}
-            component = {renderFriendSelect}>
+            component = {renderFriendSelect}
+            placeholder = 'Title'
+            >
               {this.renderShareListSelect()}
             </Field>
             {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
           </div>
-          {/* Description of event */}
+          {/* Description of event
           <div className  = 'reduxContent'>
-            {/*<i class="fas fa-align-left"></i>*/}
             <Field
             name = 'content'
             component= {renderTextArea}
@@ -655,9 +662,11 @@ class ReduxEditEventForm extends React.Component{
             placeholder = 'Description'
             />
           </div>
+
+          */}
           {/* location */}
           <div className = 'reduxLocation'>
-            <i class="fas fa-globe-americas"  style={{marginRight:'15px'}}></i>
+            <i class="fas fa-globe-americas"  style={{marginRight:'20px'}}></i>
             <Field
             name = 'location'
             component= {renderField}
@@ -673,7 +682,7 @@ class ReduxEditEventForm extends React.Component{
 
 
           <div className = 'reduxDateRange'>
-            <i style={{marginRight:'15px'}} class="fas fa-clock"></i>
+            <i style={{marginRight:'120px'}} class="fas fa-clock"></i>
              <Field
              name = 'startDate'
              component = {renderStartDate}
@@ -702,13 +711,7 @@ class ReduxEditEventForm extends React.Component{
               {this.renderEndTimeSelect()}
             </Field>
 
-            <div>
-              <Field
-              name = 'repeatCondition'
-              component = {renderRadioSelect}
-              onChange ={this.handleReoccuringChange}
-              />
-            </div>
+
 
           </div>
 

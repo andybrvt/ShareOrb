@@ -535,7 +535,7 @@ class WeekCalendar extends React.Component{
                       // gridRow: 15/17,
                       gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
 
-                      backgroundColor: "#E8E8E8"
+                      backgroundColor: "red"
                     }}>
 
 
