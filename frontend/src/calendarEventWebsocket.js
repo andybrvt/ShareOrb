@@ -52,11 +52,23 @@ class WebSocketCalendarEvent {
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
     }
+    if (command === 'add_accepted'){
+      const acceptorId = parsedData.acceptedUser;
+      const eventId = parsedData.eventId
+
+      const acceptShareObj = {
+        acceptorId: acceptorId,
+        eventId: eventId
+      }
+
+      this.callbacks['accept_share'](acceptShareObj)
+    }
   }
 
-  addCallbacks(newEventCallback){
+  addCallbacks(newEventCallback, acceptEventShareCallback){
     // you just need to add the event so just one call back
     this.callbacks['new_event'] = newEventCallback;
+    this.callbacks['accept_share'] = acceptEventShareCallback;
   }
 
   acceptSharedEvent = (eventId, acceptorId) => {
@@ -67,6 +79,16 @@ class WebSocketCalendarEvent {
       eventId: eventId,
       acceptorId: acceptorId,
       command: 'send_accept_shared_event'
+    })
+  }
+
+  declineSharedEvent = (eventId, declineId) => {
+    // The gate way to declining an event. Pretty much the same process as the accepting
+    // but instead of adding events in
+    this.sendEvent({
+      eventId: eventId,
+      declineId: declineId,
+      command: 'send_decline_shared_event'
     })
   }
 

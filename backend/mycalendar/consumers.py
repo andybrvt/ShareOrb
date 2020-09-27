@@ -6,6 +6,7 @@ from channels.layers import get_channel_layer
 from userprofile.models import User
 from .models import Event
 from .serializers import EventSerializer
+# from userprofile.serilaizers import FollowUserSerializer
 
 
 class CalendarConsumer(JsonWebsocketConsumer):
@@ -85,12 +86,36 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'eventId': data['eventId'],
             'acceptedUser': data['acceptorId']
         }
-
         print(content)
         return self.send_accept_shared(content)
 
 
         print(sharedEvent)
+
+    def decline_shared_event(self, data):
+        # This function is used to decline events, so what is gonna happen is that the
+        # user will be removed from the list of persons
+        sharedEvent = get_object_or_404(Event, id  = data['eventId'])
+        declineUser = get_object_or_404(User, id = data['declineId'])
+
+
+        sharedEvent.person.remove(declineUser)
+        sharedEvent.save()
+
+        print(declineUser.username)
+        serializer = EventSerializer(sharedEvent)
+        # userSerializer = PersonSerializer(declineUser).data
+        person = serializer.data['person']
+
+
+        content = {
+            'command': 'add_decline',
+            'person': person,
+            'eventId': data['eventId'],
+            'declineUser': declineUser.username,
+        }
+
+        return self.send_decline_shared(content)
 
 # So you got done by making an object in the model, now you need to send
 # it through the channel to both users
@@ -129,6 +154,27 @@ class CalendarConsumer(JsonWebsocketConsumer):
                 content
             )
 
+    def send_decline_shared(self, declinedUser):
+        # similar to the send_accept_share but with an extra channel send because
+        # the person list does not include the person declining the event
+        channel_layer = get_channel_layer()
+        content = {
+            'type': 'declined_share',
+            'declinedUser': declinedUser
+        }
+        people = declinedUser['person']
+        for person in people:
+            channel = 'calendar_'+person['username']
+            async_to_sync(self.channel_layer.group_send)(
+                channel,
+                content
+            )
+        declineChannel = 'calendar_'+declinedUser['declineUser']
+        async_to_sync(self.channel_layer.group_send)(
+            declineChannel,
+            content
+        )
+
 # When making a websocket you always start with connect
     def connect(self):
         self.current_user = self.scope['url_route']['kwargs']['username']
@@ -153,6 +199,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
             self.add_share_sync_event(data)
         if data['command'] == 'send_accept_shared_event':
             self.accept_shared_event(data)
+        if data['command'] == 'send_decline_shared_event':
+            self.decline_shared_event(data)
 
     def new_event(self, event):
         newEvent = event['newEvent']
@@ -162,3 +210,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def accepted_share(self, event):
         acceptedUser = event['acceptedUser']
         return self.send_json(acceptedUser)
+
+    def declined_share(self, event):
+        declinedUser = event['declinedUser']
+        return self.send_json(declinedUser)

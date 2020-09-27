@@ -108,3 +108,10 @@ export const prevYear = () => {
     type: actionTypes.PREV_YEAR
   }
 }
+
+export const acceptEventShare = (acceptShareObj) => {
+  return {
+    type: actionTypes.ACCEPT_EVENT_SHARE,
+    acceptShareObj: acceptShareObj
+  }
+}

@@ -464,7 +464,13 @@ class WeekCalendar extends React.Component{
                       >
                          <i class="fas fa-check"></i>
                       </Button>
-                      <Button  shape="circle" type="primary" danger style={{marginLeft:'10px', marginRight:'75px'}}>
+                      <Button
+                      shape="circle"
+                      type="primary"
+                      danger
+                      style={{marginLeft:'10px', marginRight:'75px'}}
+                      onClick = {() => this.onDeclineShare(item.id)}
+                      >
                          <i class="fas fa-times"></i>
                       </Button>
                     </div>
@@ -790,9 +796,13 @@ class WeekCalendar extends React.Component{
     CalendarEventWebSocketInstance.acceptSharedEvent(eventId, this.props.id);
   }
 
+  onDeclineShare = (eventId) => {
+    CalendarEventWebSocketInstance.declineSharedEvent(eventId, this.props.id);
+  }
+
 
   render() {
-    console.log(this.props)
+    console.log(this.props.events)
     console.log(Avatar)
 
     return (

@@ -43,7 +43,8 @@ export const OPEN_PICK_EVENT_SYNC_MODAL = 'OPEN_PICK_EVENT_SYNC_MODAL';
 export const CLOSE_PICK_EVENT_SYNC_MODAL = 'CLOSE_PICK_EVENT_SYNC_MODAL';
 // The event event is for the events that you have fitlered out in the range
 export const EVENT_EVENT_SYNC_MODAL = 'EVENT_EVENT_SYNC_MODAL';
-
+// This will be for accepting shared event
+export const ACCEPT_EVENT_SHARE = 'ACCEPT_EVENT_SHARE';
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
