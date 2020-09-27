@@ -82,6 +82,16 @@ class WebSocketCalendarEvent {
     })
   }
 
+  declineSharedEvent = (eventId, declineId) => {
+    // The gate way to declining an event. Pretty much the same process as the accepting
+    // but instead of adding events in
+    this.sendEvent({
+      eventId: eventId,
+      declineId: declineId,
+      command: 'send_decline_shared_event'
+    })
+  }
+
   sendEvent (data){
     // This is used to send the notification into the backend
     console.log('send_event')
