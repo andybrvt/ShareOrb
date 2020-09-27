@@ -52,11 +52,23 @@ class WebSocketCalendarEvent {
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
     }
+    if (command === 'add_accepted'){
+      const acceptorId = parsedData.acceptedUser;
+      const eventId = parsedData.eventId
+
+      const acceptShareObj = {
+        acceptorId: acceptorId,
+        eventId: eventId
+      }
+
+      this.callbacks['accept_share'](acceptShareObj)
+    }
   }
 
-  addCallbacks(newEventCallback){
+  addCallbacks(newEventCallback, acceptEventShareCallback){
     // you just need to add the event so just one call back
     this.callbacks['new_event'] = newEventCallback;
+    this.callbacks['accept_share'] = acceptEventShareCallback;
   }
 
   acceptSharedEvent = (eventId, acceptorId) => {

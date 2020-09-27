@@ -85,7 +85,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'eventId': data['eventId'],
             'acceptedUser': data['acceptorId']
         }
-
         print(content)
         return self.send_accept_shared(content)
 

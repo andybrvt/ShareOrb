@@ -114,6 +114,17 @@ const deleteEvent = (state, action) => {
   })
 }
 
+const acceptEventShare = (state, action) => {
+  return updateObject(state, {
+    events: state.events.map(
+      item => item.id === action.acceptShareObj.eventId ? {
+        ...item,
+        accepted: [...item.accepted, action.acceptShareObj.acceptorId]
+      } : item
+    )
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -146,6 +157,8 @@ const reducer = (state = initialState, action) => {
       return editEvent(state, action);
     case actionTypes.DELETE_EVENT_CALENDAR:
       return deleteEvent(state, action);
+    case actionTypes.ACCEPT_EVENT_SHARE:
+      return acceptEventShare(state, action);
     default:
       return state;
   }
