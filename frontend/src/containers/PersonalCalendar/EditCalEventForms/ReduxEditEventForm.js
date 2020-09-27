@@ -703,11 +703,11 @@ class ReduxEditEventForm extends React.Component{
             </Field>
 
             <div>
-            <Field
-            name = 'repeatCondition'
-            component = {renderRadioSelect}
-            onChange ={this.handleReoccuringChange}
-            />
+              <Field
+              name = 'repeatCondition'
+              component = {renderRadioSelect}
+              onChange ={this.handleReoccuringChange}
+              />
             </div>
 
           </div>

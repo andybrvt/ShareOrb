@@ -452,7 +452,7 @@ class WeekCalendar extends React.Component{
                     <br/>
                   </div>
                   <Avatar.Group style={{marginTop:'-5px'}}>
-                    <div style={{float:'left', marginRight:'75px'}}>
+                    <div style={{float:'left', marginRight:'100px'}}>
                       <Button shape="circle" type="primary">
                          <i class="fas fa-eye"></i>
                       </Button>

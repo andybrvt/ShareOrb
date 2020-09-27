@@ -531,7 +531,7 @@ class ReactAddEventForm extends React.Component {
 
     const options = [
     { label: 'Normal', value: 'none' },
-    { label: 'Weekly', value: 'weekly' },
+    { label: 'Weekly!', value: 'weekly' },
     { label: 'Daily', value: 'daily' },
   ];
     // for (let i = 10; i < 36; i++) {
