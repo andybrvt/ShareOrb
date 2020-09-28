@@ -74,7 +74,10 @@ class WeekCalendar extends React.Component{
 
   color = (positionX, positionY) => {
     // Just the color of the selected time on the pick event sync calendar
-    if (this.state.activeX==positionX &&this.state.activeY === positionY){
+    if (this.state.activeX === positionX &&this.state.activeY === positionY){
+      return '#91d5ff';
+    }
+    if(this.state.activeX === positionX && this.state.activeY === positionY-1){
       return '#91d5ff';
     }
     return '';
@@ -564,8 +567,8 @@ class WeekCalendar extends React.Component{
         border.push(
           <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
             <EditEventPopUp
-            isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
+            // isVisible = {this.props.showModal}
+            // close = {() => this.props.closeModal()}
             />
             </div>}>
 
