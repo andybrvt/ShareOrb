@@ -567,8 +567,8 @@ class WeekCalendar extends React.Component{
         border.push(
           <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
             <EditEventPopUp
-            // isVisible = {this.props.showModal}
-            // close = {() => this.props.closeModal()}
+            isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
             />
             </div>}>
 
@@ -624,11 +624,18 @@ class WeekCalendar extends React.Component{
     //  meet those requirements
     // We only need the start and end time tho so all the other fields can
     // be empty
+    let endDate = ''
     const specificHour = dateFns.getHours(hour)
     const specificMinute = dateFns.getMinutes(hour)
     const startDate = dateFns.addHours (day, specificHour)
     const newStartDate = dateFns.addMinutes(startDate, specificMinute)
-    const endDate = dateFns.addMinutes(newStartDate , 30)
+    console.log(dateFns.getHours(newStartDate));
+    if (dateFns.getHours(newStartDate) === 23 && dateFns.getMinutes(newStartDate) === 30){
+      endDate = dateFns.addMinutes(newStartDate, 30);
+    } else {
+      endDate = dateFns.addHours(newStartDate, 1);
+    }
+
     const finalStart = dateFns.format(newStartDate, 'yyyy-MM-dd HH:mm:ss')
     const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
     console.log(specificHour, specificMinute)
