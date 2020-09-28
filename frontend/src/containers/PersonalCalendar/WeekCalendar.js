@@ -20,7 +20,7 @@ import CalendarViewDropDown from './CalendarViewDropDown';
 import CalendarEventWebSocketInstance from '../../calendarEventWebsocket';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
-
+import Liking from '../NewsfeedItems/Liking'
 
 
 const { Group } = Avatar
@@ -369,7 +369,7 @@ class WeekCalendar extends React.Component{
           console.log(toDoStuff)
           days.push(
 
-            toDoStuff.map(item => (
+            toDoStuff.map(item =>  (
 
               <Popover placement="right"  content={
                 <div style={{padding:30, width:450}}>
@@ -412,6 +412,26 @@ class WeekCalendar extends React.Component{
                       -
                       {dateFns.format(new Date(item.end_time),'h:mm a')}
                     </span>
+                  <br/>
+                    {
+                      (item.repeatCondition=="weekly")?
+                      <span>
+                        <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                        Occurs every
+
+                        <span>
+                          &nbsp;
+                          {dateFns.format(cloneDay, 'iiii')}
+                          &nbsp;
+                        </span>
+
+                      </span>
+
+                      :
+                      <div></div>
+
+                    }
+
                     <div>
                       <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
                       2 people invited
@@ -471,22 +491,17 @@ class WeekCalendar extends React.Component{
                       shape="circle"
                       type="primary"
                       danger
-                      style={{marginLeft:'10px', marginRight:'75px'}}
+                      style={{marginLeft:'10px', marginRight:'40px'}}
                       onClick = {() => this.onDeclineShare(item.id)}
                       >
                          <i class="fas fa-times"></i>
                       </Button>
                     </div>
+                  </Avatar.Group>
 
-                    <div>
-                      <Avatar size="medium" style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-                      <Tooltip size="medium" title="Ant User" placement="top">
-                        <Avatar size="medium" style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-                      </Tooltip>
-                      <Avatar size="medium" style={{ backgroundColor: '#1890ff' }} icon={<AntDesignOutlined />} />
-                    </div>
+                  <Liking style={{float:'right'}} like_people={item.person}/>
 
-                    </Avatar.Group>
+
                   <span>
 
 
@@ -512,10 +527,10 @@ class WeekCalendar extends React.Component{
                     }}>
 
 
-                        <span className="pointerEvent">
-                          <span className = 'pointerEvent' > {item.title} </span>
+                        <span style={{marginLeft:'10px'}}  className="pointerEvent">
+                          <span sclassName = 'pointerEvent' > {item.title} </span>
                           <br/>
-                          <span style={{float:'left'}} className = 'pointerEvent'>
+                          <span style={{marginLeft:'10px'}}  className = 'pointerEvent'>
                             {dateFns.format(new Date(item.start_time),'h:mm a')}
                             -
                             {dateFns.format(new Date(item.end_time),'h:mm a')}
@@ -542,10 +557,10 @@ class WeekCalendar extends React.Component{
                     }}>
 
 
-                        <span className="pointerEvent">
+                        <span style={{marginLeft:'10px'}} className="pointerEvent">
                           <span className = 'pointerEvent' > {item.title} </span>
                           <br/>
-                          <span style={{float:'left'}} className = 'pointerEvent'>
+                          <span style={{marginLeft:'10px'}}  className = 'pointerEvent'>
                             {dateFns.format(new Date(item.start_time),'h:mm a')}
                             -
                             {dateFns.format(new Date(item.end_time),'h:mm a')}
