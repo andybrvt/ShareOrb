@@ -17,6 +17,10 @@
   cursor: pointer;
 }
 
+.testLook{
+  opacity: 0.45;
+}
+
 
 .icon {
   font-style: normal;

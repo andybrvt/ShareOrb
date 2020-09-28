@@ -434,7 +434,7 @@ class WeekCalendar extends React.Component{
 
                     <div>
                       <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
-                      2 people invited
+                      {item.person.length} people invited
 
                     </div>
                   </p>
@@ -447,8 +447,8 @@ class WeekCalendar extends React.Component{
                     <div class="innerContainerPeople" style={{display:'inline-block'}}>
 
                       <Avatar
-                        shape="square"
-                        size={50}
+                        shape="circle"
+                        size={60}
                         src={'http://127.0.0.1:8000'+item.person[0].profile_picture}
                         style={{display:'inline-block'}}
                        />
@@ -474,32 +474,43 @@ class WeekCalendar extends React.Component{
                     <br/>
                     <br/>
                   </div>
-                  <Avatar.Group style={{marginTop:'-5px'}}>
-                    <div style={{float:'left', marginRight:'100px'}}>
-                      <Button shape="circle" type="primary">
-                         <i class="fas fa-eye"></i>
-                      </Button>
-                      <Button
-                      type="primary"
-                      shape="circle"
-                      style={{marginLeft:'10px'}}
-                      onClick = {() => this.onAcceptShare(item.id)}
-                      >
-                         <i class="fas fa-check"></i>
-                      </Button>
-                      <Button
-                      shape="circle"
-                      type="primary"
-                      danger
-                      style={{marginLeft:'10px', marginRight:'40px'}}
-                      onClick = {() => this.onDeclineShare(item.id)}
-                      >
-                         <i class="fas fa-times"></i>
-                      </Button>
-                    </div>
-                  </Avatar.Group>
+                  <div>
 
-                  <Liking style={{float:'right'}} like_people={item.person}/>
+
+                    <Avatar.Group>
+                      <div style={{float:'left', marginRight:'75px'}}>
+                        <Button shape="circle" size="large" type="primary">
+                           <i class="fas fa-eye"></i>
+                        </Button>
+                        <Button
+                        type="primary"
+                        shape="circle"
+                        size="large"
+                        style={{marginLeft:'10px'}}
+                        onClick = {() => this.onAcceptShare(item.id)}
+                        >
+                           <i class="fas fa-check"></i>
+                        </Button>
+                        <Button
+                        shape="circle"
+                        type="primary"
+                        size="large"
+                        danger
+                        style={{marginLeft:'10px'}}
+                        onClick = {() => this.onDeclineShare(item.id)}
+                        >
+                           <i class="fas fa-times"></i>
+                        </Button>
+                      </div>
+                      {/*
+                      <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
+                      */}
+                      <Liking style={{marginTop:'-20px'}} like_people={item.person}/>
+                    </Avatar.Group>
+
+
+                  </div>
+
 
 
                   <span>
@@ -547,20 +558,20 @@ class WeekCalendar extends React.Component{
                 <div
                    key= {item.title}
                     onClick = {() => this.onClickItem(item)}
-                     className = "weekEventAccept"
+                     className = "weekEventAccept testLook"
                      style = {{
                       gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
                       // gridRow: 15/17,
                       gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
-
-                      backgroundColor: "red"
+                      color:'black',
+                      backgroundColor: item.color,
                     }}>
 
 
-                        <span style={{marginLeft:'10px'}} className="pointerEvent">
+                        <span className="pointerEvent">
                           <span className = 'pointerEvent' > {item.title} </span>
                           <br/>
-                          <span style={{marginLeft:'10px'}}  className = 'pointerEvent'>
+                          <span className = 'pointerEvent'>
                             {dateFns.format(new Date(item.start_time),'h:mm a')}
                             -
                             {dateFns.format(new Date(item.end_time),'h:mm a')}
