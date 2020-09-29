@@ -26,9 +26,14 @@ class EditEventPopUp extends React.Component {
     // This function will take in a time and then covert the time to
     // a 1-24 hour hour so that it cna be used to add into the
     // date and be submited
+
+    console.log(time)
     let hour = parseInt(time.substring(0,2))
     let minutes = parseInt(time.substring(3,5))
     let ampm = time.substring(5,8)
+
+    console.log(minutes)
+    console.log(hour)
 
     let convertedTime = ''
 
@@ -68,19 +73,17 @@ class EditEventPopUp extends React.Component {
 
     console.log(start_time, end_time)
 
-
     start_date = dateFns.addHours(start_date, start_time.firstHour)
     start_date = dateFns.addMinutes(start_date, start_time.firstMin)
-    console.log(start_date)
     const instance_start_date = dateFns.format(start_date, 'yyyy-MM-dd HH:mm:ss')
 
     end_date = dateFns.addHours(end_date, end_time.firstHour)
     end_date = dateFns.addMinutes(end_date, end_time.firstMin)
     const instance_end_date = dateFns.format(end_date, 'yyyy-MM-dd HH:mm:ss')
-    console.log(instance_start_date, instance_end_date)
     // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')
 
+    console.log(start_date, end_date)
 
     if (this.props.addEvent === false ){
       authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
@@ -206,13 +209,19 @@ class EditEventPopUp extends React.Component {
     // and then returna  1-12 am/pm time
     // This fucntion will take in the time as a string in the 1-24 hour
     // time format
+
+    console.log(time)
     if (time !== null){
       let hour = time.substring(0, 2)
       let min = time.substring(3, 5)
       let final_time = ''
       if (hour > 12 ){
         hour = hour - 12
-        final_time = hour + ':'+min+' PM'
+        if (hour < 10){
+            final_time = "0"+hour + ':'+min+' PM'
+        } else {
+            final_time = hour + ':'+min+' PM'
+        }
       } else if(hour <= 12 ){
         if (hour == 0){
           final_time = '12:' + min + ' AM'
@@ -222,7 +231,7 @@ class EditEventPopUp extends React.Component {
           final_time = hour +':'+ min+' AM'
         }
       }
-
+      console.log(final_time)
       // MIGHT HAVE TO TAKE INTO CONSIDERATION THE 12AM AND 12 PM
       return final_time
     }
