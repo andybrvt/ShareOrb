@@ -134,6 +134,13 @@ class EditEventPopUp extends React.Component {
         // event, so because of that you want to add the date in just as how the
         // date and event will be added according to the loaded event
 
+        const curUserObj = {
+          first_name: this.props.firstName,
+          id: this.props.id,
+          last_name: this.props.lastName,
+          profile_picture: this.props.profilePic,
+          username:this.props.username,
+        }
 
         const instanceEvent = {
           title: values.title,
@@ -142,7 +149,7 @@ class EditEventPopUp extends React.Component {
           end_time: instance_end_date,
           location: values.location,
           color: values.eventColor,
-          person: [this.props.id],
+          person: [curUserObj],
           repeatCondition: values.repeatCondition,
           host: this.props.id,
           accepted: [this.props.id]
@@ -291,7 +298,10 @@ const mapStateToProps = state => {
     calendarId: state.calendarEvent.calendarId,
     id: state.auth.id,
     username: state.auth.username,
-    friendList: state.auth.friends
+    friendList: state.auth.friends,
+    profilePic: state.auth.profilePic,
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName
   }
 }
 
