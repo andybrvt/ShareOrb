@@ -38,7 +38,7 @@ class ReduxAddEventForm extends React.Component {
     return (
       <form onSubmit= {handleSubmit}>
         <div>
-          <label htmlFor = 'title'> Title</label>
+          <label htmlFor = 'title'> Titles</label>
           <Field
           name = 'title'
           component= {renderField}

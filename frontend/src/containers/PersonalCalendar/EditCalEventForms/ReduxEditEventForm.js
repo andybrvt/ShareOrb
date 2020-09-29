@@ -36,7 +36,7 @@ const renderRadioSelect = (field) => {
   // render the radio to pick normal date, weekly, or daily
   console.log(field)
   const options = [
-  { label: 'Normal', value: 'none' },
+  { label: 'Non-repeating', value: 'none' },
   { label: 'Weekly', value: 'weekly' },
   { label: 'Daily', value: 'daily' },
 ];
@@ -618,7 +618,7 @@ class ReduxEditEventForm extends React.Component{
       // the submit function in the eventeditpopup. so all the values that are in
       // that form even though it might not seem like it from just this file
       return(
-        <form>
+        <form style={{padding:'25px'}}>
           <div className = 'reduxTitle'>
           <i style={{marginRight:'15px'}} class="fas fa-calendar-plus"></i>
             <Field
@@ -628,6 +628,10 @@ class ReduxEditEventForm extends React.Component{
             placeholder = 'Title'
 
             />
+
+          <Button style={{float:'right', marginleft:'50px'}} type="primary" shape="circle" size={'large'}>
+            30
+          </Button>
           </div>
 
           <div style={{marginLeft:'30px', marginBottom:'15px'}}>
@@ -681,37 +685,34 @@ class ReduxEditEventForm extends React.Component{
           </div>
 
 
-          <div className = 'reduxDateRange'>
-            <i style={{marginRight:'120px'}} class="fas fa-clock"></i>
+          <div className = 'reduxDateRange pointerEvent'>
+            <i style={{marginRight:'20px'}} class="fas fa-clock"></i>
              <Field
              name = 'startDate'
              component = {renderStartDate}
              onChange = {this.onStartDateChange}
              type = 'date'
+             style={{display: 'inline-block'}}
              />
-             <ArrowRightOutlined />
-             <Field
-             name = 'endDate'
-             component = {renderEndDate}
-             type = 'date'
-             />
-          </div>
-          <div className = 'reduxTimePicker'>
-            <Field
-            name = 'startTime'
-            component = {renderStartDateSelect}
-            onChange = {this.handleStartTimeChange}>
-              {renderStartTime()}
-            </Field>
-            <ArrowRightOutlined />
-            <Field
-            name = 'endTime'
-            onChange = {this.handleEndTimeChange}
-            component = {renderStartDateSelect}>
-              {this.renderEndTimeSelect()}
-            </Field>
+
+             <div className = 'reduxTimePicker'>
+               <Field
+               name = 'startTime'
+               component = {renderStartDateSelect}
+               onChange = {this.handleStartTimeChange}>
+                 {renderStartTime()}
+               </Field>
+               <ArrowRightOutlined />
+               <Field
+               name = 'endTime'
+               onChange = {this.handleEndTimeChange}
+               component = {renderStartDateSelect}>
+                 {this.renderEndTimeSelect()}
+               </Field>
 
 
+
+             </div>
 
           </div>
 

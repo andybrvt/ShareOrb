@@ -479,28 +479,34 @@ class WeekCalendar extends React.Component{
 
                     <Avatar.Group>
                       <div style={{float:'left', marginRight:'75px'}}>
-                        <Button shape="circle" size="large" type="primary">
-                           <i class="fas fa-eye"></i>
-                        </Button>
-                        <Button
-                        type="primary"
-                        shape="circle"
-                        size="large"
-                        style={{marginLeft:'10px'}}
-                        onClick = {() => this.onAcceptShare(item.id)}
-                        >
-                           <i class="fas fa-check"></i>
-                        </Button>
-                        <Button
-                        shape="circle"
-                        type="primary"
-                        size="large"
-                        danger
-                        style={{marginLeft:'10px'}}
-                        onClick = {() => this.onDeclineShare(item.id)}
-                        >
-                           <i class="fas fa-times"></i>
-                        </Button>
+                        <Tooltip placement="bottomLeft" title="View event">
+                          <Button shape="circle" size="large" type="primary">
+                             <i class="fas fa-eye"></i>
+                          </Button>
+                        </Tooltip>
+                        <Tooltip placement="bottomLeft" title="Accept Invite">
+                          <Button
+                          type="primary"
+                          shape="circle"
+                          size="large"
+                          style={{marginLeft:'10px'}}
+                          onClick = {() => this.onAcceptShare(item.id)}
+                          >
+                             <i class="fas fa-check"></i>
+                          </Button>
+                        </Tooltip>
+                        <Tooltip placement="bottomLeft" title="Decline Invite">
+                          <Button
+                          shape="circle"
+                          type="primary"
+                          size="large"
+                          danger
+                          style={{marginLeft:'10px'}}
+                          onClick = {() => this.onDeclineShare(item.id)}
+                          >
+                             <i class="fas fa-times"></i>
+                          </Button>
+                        </Tooltip>
                       </div>
                       {/*
                       <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
@@ -539,7 +545,7 @@ class WeekCalendar extends React.Component{
 
 
                         <span style={{marginLeft:'10px'}}  className="pointerEvent">
-                          <span sclassName = 'pointerEvent' > {item.title} </span>
+                          <span sclassName = 'pointerEvent' > {item.title.substring(0,25)} </span>
                           <br/>
                           <span style={{marginLeft:'10px'}}  className = 'pointerEvent'>
                             {dateFns.format(new Date(item.start_time),'h:mm a')}
@@ -569,7 +575,7 @@ class WeekCalendar extends React.Component{
 
 
                         <span className="pointerEvent">
-                          <span className = 'pointerEvent' > {item.title} </span>
+                          <span className = 'pointerEvent' > {item.title.substring(0,25) } </span>
                           <br/>
                           <span className = 'pointerEvent'>
                             {dateFns.format(new Date(item.start_time),'h:mm a')}

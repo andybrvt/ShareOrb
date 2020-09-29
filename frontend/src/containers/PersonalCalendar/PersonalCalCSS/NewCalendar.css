@@ -627,7 +627,6 @@ main {
 
 /* cell of the week */
 .weekDayFlex-Container .calendar .weekBody .weekEvent{
-  background-color: red;
   color: white;
   font-size: 15px;
   /* this makes events rounded but gonna take it out for now */
