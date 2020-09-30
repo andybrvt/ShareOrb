@@ -439,7 +439,9 @@ class WeekCalendar extends React.Component{
                     </div>
                   </p>
 
-
+                  {/* if person is host*
+                    item.host
+                    */}
                   <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
 
                   <div class="outerContainerPeople">
@@ -449,14 +451,14 @@ class WeekCalendar extends React.Component{
                       <Avatar
                         shape="circle"
                         size={60}
-                        src={'http://127.0.0.1:8000'+item.person[0].profile_picture}
+                        src={'http://127.0.0.1:8000'+item.host.profile_picture}
                         style={{display:'inline-block'}}
                        />
-
-                     <p class="highlightWord" style={{marginLeft:'15px', fontSize:'14px', display:'inline-block'}}
-                       onClick = {() => this.onProfileClick(item.person[0].username)}
+                     <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                       onClick = {() => this.onProfileClick(item.host.username)}
                      >
-                       {item.person[0].first_name} {item.person[0].last_name}
+
+                       {item.host.first_name} {item.host.last_name}
                      </p>
 
                     </div>
@@ -467,8 +469,8 @@ class WeekCalendar extends React.Component{
                           <Progress percent={50} size="small" status="active" />
                          */}
                        <Progress percent={50} size="small" status="active" gap/>
-                       <Progress percent={100} size="small" />
-                       <Progress percent={70} size="small" status="exception" />
+                       <Progress percent={100*(item.accepted/item.person.length)} size="small" />
+                       <Progress percent={(item.person.length-item.accepted/item.person.length)} size="small" status="exception" />
 
                      </span>
                     <br/>

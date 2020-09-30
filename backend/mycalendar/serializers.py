@@ -47,6 +47,7 @@ class EventSerializer (serializers.ModelSerializer):
             person = PersonSerializer(models.User.objects.get(id=peopleID)).data
             personList.append(person)
         data['person']  = personList
+        data['host'] = PersonSerializer(models.User.objects.get(id = data['host'])).data
         return data
 
 class PersonSerializer(serializers.ModelSerializer):
