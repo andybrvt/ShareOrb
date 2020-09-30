@@ -629,7 +629,7 @@ class ReduxEditEventForm extends React.Component{
 
             />
 
-          <Button style={{float:'right', marginleft:'50px'}} type="primary" shape="circle" size={'large'}>
+          <Button style={{float:'right', marginleft:'50px'}} type="primary" shape="circle" size={80}>
             30
           </Button>
           </div>

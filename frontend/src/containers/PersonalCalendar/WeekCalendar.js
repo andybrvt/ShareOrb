@@ -434,7 +434,7 @@ class WeekCalendar extends React.Component{
 
                     <div>
                       <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
-                      {item.person.length} people invited
+                      {item.person.length} people
 
                     </div>
                   </p>
@@ -469,18 +469,16 @@ class WeekCalendar extends React.Component{
                           <Progress percent={50} size="small" status="active" />
                          */}
                        <Progress percent={50} size="small" status="active" gap/>
-                       <Progress percent={100*(item.accepted/item.person.length)} size="small" />
-                       <Progress percent={(item.person.length-item.accepted/item.person.length)} size="small" status="exception" />
+                       <Progress percent={100*(item.accepted.length/item.person.length)} size="small" />
+                       <Progress percent={(item.person.length-item.accepted.length/item.person.length)} size="small" status="exception" />
 
                      </span>
-                    <br/>
-                    <br/>
                   </div>
                   <div>
 
 
                     <Avatar.Group>
-                      <div style={{float:'left', marginRight:'75px'}}>
+                      <div style={{float:'right', marginRight:'100px'}}>
                         <Tooltip placement="bottomLeft" title="View event">
                           <Button shape="circle" size="large" type="primary">
                              <i class="fas fa-eye"></i>
@@ -513,7 +511,7 @@ class WeekCalendar extends React.Component{
                       {/*
                       <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
                       */}
-                      <Liking style={{marginTop:'-20px'}} like_people={item.person}/>
+                      <Liking style={{marginTop:'-200px'}} like_people={item.person}/>
                     </Avatar.Group>
 
 
