@@ -154,7 +154,7 @@ class EditEventPopUp extends React.Component {
           color: values.eventColor,
           person: [curUserObj],
           repeatCondition: values.repeatCondition,
-          host: this.props.id,
+          host: curUserObj,
           accepted: [this.props.id]
         }
         // add color to addEvents in redux

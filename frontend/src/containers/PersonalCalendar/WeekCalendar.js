@@ -730,16 +730,18 @@ class WeekCalendar extends React.Component{
 
   hourEventIndex = (start_time, end_time, start_index ) => {
     // This is to set the event in the right rows
+    // The grid index start from 1-48
     console.log(start_time, end_time, start_index)
     let bottomIndex = ''
     const start = new Date(start_time)
     const end = new Date(end_time)
-    const actualStartIndex = (start_index)+1
+    console.log(start, end)
+    const actualStartIndex = start_index+1
     const startHour = dateFns.getHours(start)
     const endHour = dateFns.getHours(end)
     const startMin = dateFns.getMinutes(start)
     const endMin = dateFns.getMinutes(end)
-    const topIndex = (actualStartIndex)
+    const topIndex = actualStartIndex
     // +(startMin/30)
     console.log(startMin)
     console.log(endHour, startHour, endMin, startMin)
@@ -767,7 +769,7 @@ class WeekCalendar extends React.Component{
     console.log(ratio)
 
     return ratio
-    // return '1/3'
+    // return '20/49'
   }
 
 
