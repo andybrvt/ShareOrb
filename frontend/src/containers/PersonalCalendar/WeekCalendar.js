@@ -730,36 +730,45 @@ class WeekCalendar extends React.Component{
 
   hourEventIndex = (start_time, end_time, start_index ) => {
     // This is to set the event in the right rows
-    // The grid index start from 1-48
+    // The grid index start from 1-48 and when you do a grid ratio
+    // it will start from the first interval and the denominator is not included
     console.log(start_time, end_time, start_index)
     let bottomIndex = ''
     const start = new Date(start_time)
     const end = new Date(end_time)
     console.log(start, end)
-    const actualStartIndex = start_index+1
+    // When you convert to the time, the time becomes a 0-23 hour time
+    const topIndex = start_index+1 //Good up to here
     const startHour = dateFns.getHours(start)
     const endHour = dateFns.getHours(end)
+    // So there is obvious gonna be issue with this when we do 11:30 pm to 12:00 AM
+
     const startMin = dateFns.getMinutes(start)
     const endMin = dateFns.getMinutes(end)
-    const topIndex = actualStartIndex
-    // +(startMin/30)
-    console.log(startMin)
+
+
+
     console.log(endHour, startHour, endMin, startMin)
     // for the numberator of the index you want to go from the starting index
     // and then decide if you add 1 or not depending if there is a 30 mins
     console.log(Math.abs(endMin-startMin)/30)
-    if (startMin === 30 && endMin === 0){
-         if (endHour === startHour+1){
-           bottomIndex = topIndex +(Math.abs(endMin-startMin)/30)
-
-         }
-         else {
-           bottomIndex = topIndex + ((endHour - startHour))+(Math.abs(endMin-startMin)/30)
-         }
+    // if (startMin === 30 && endMin === 0){
+    //      if (endHour === startHour+1){
+    //        bottomIndex = topIndex +(Math.abs(endMin-startMin)/30)
+    //
+    //      }
+    //      else {
+    //        bottomIndex = topIndex + ((endHour - startHour))+(Math.abs(endMin-startMin)/30)
+    //      }
+    // } else {
+    //      bottomIndex = topIndex + ((endHour - startHour)*2)+(Math.abs(endMin-startMin)/30)
+    // }
+    if (startHour === 23 && startMin === 30){
+      bottomIndex = 49;
     } else {
-         bottomIndex = topIndex + ((endHour - startHour)*2)+(Math.abs(endMin-startMin)/30)
-    }
+      bottomIndex = (2*(endHour)+1)+(endMin/30)
 
+    }
 
 
     // For the denominator you have to start from the starting index and then add

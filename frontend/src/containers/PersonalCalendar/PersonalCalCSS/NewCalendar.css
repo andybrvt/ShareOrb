@@ -629,6 +629,8 @@ main {
 .weekDayFlex-Container .calendar .weekBody .weekEvent{
   color: white;
   font-size: 15px;
+  /* padding-top: 2px; */
+  /* margin-bottom: 100px; */
   /* this makes events rounded but gonna take it out for now */
   /* border-radius: 10px; */
 
@@ -1215,10 +1217,10 @@ to make it adjustable */
   border-bottom: 1px solid var(--border-color);
   /* grid-auto-flow: dense; */
   grid-template-columns: repeat(7, 186px);
-  grid-template-rows: repeat(48, 24.1px);
+  grid-template-rows: repeat(48, 22.1px);
   /* background-color: red; */
   grid-column-gap: 1px;
-  grid-row-gap: 1px;
+  grid-row-gap: 3px;
   position:relative;
   top: -1202px;
 
