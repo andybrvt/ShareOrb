@@ -441,93 +441,110 @@ class WeekCalendar extends React.Component{
 
                   {/* if person is host*
                     item.host
-                    */}
-                  <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
+                    {item.person.length==1 && item.host.username==this.props.username}
 
-                  <div class="outerContainerPeople">
 
-                    <div class="innerContainerPeople" style={{display:'inline-block'}}>
-
-                      <Avatar
-                        shape="circle"
-                        size={60}
-                        src={'http://127.0.0.1:8000'+item.host.profile_picture}
-                        style={{display:'inline-block'}}
-                       />
-                     <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
-                       onClick = {() => this.onProfileClick(item.host.username)}
-                     >
-
-                       {item.host.first_name} {item.host.last_name}
-                     </p>
-
-                    </div>
-
-                     <span class="innerContainerPeople" style={{ width: 150, display:'inline-block', float:'right', marginRight:'10px'}}>
-                       {/* going to need a if condition checking if not 100 then you can make status active:
-                          status="exception"
-                          <Progress percent={50} size="small" status="active" />
-                         */}
-                       <Progress percent={50} size="small" status="active" gap/>
-                       <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.person.length-1)))} size="small" />
-                       <Progress percent={(item.person.length-item.accepted.length/item.person.length)} size="small" status="exception" />
-
-                     </span>
-                  </div>
+                  */}
                   <div>
+                    {
 
 
-                    <Avatar.Group>
-                      <div style={{float:'right', marginRight:'100px'}}>
-                        <Tooltip placement="bottomLeft" title="View event">
-                          <Button shape="circle" size="large" type="primary">
-                             <i class="fas fa-eye"></i>
-                          </Button>
-                        </Tooltip>
-                        <Tooltip placement="bottomLeft" title="Accept Invite">
-                          <Button
-                          type="primary"
-                          shape="circle"
-                          size="large"
-                          style={{marginLeft:'10px'}}
-                          onClick = {() => this.onAcceptShare(item.id)}
-                          >
-                             <i class="fas fa-check"></i>
-                          </Button>
-                        </Tooltip>
-                        <Tooltip placement="bottomLeft" title="Decline Invite">
-                          <Button
-                          shape="circle"
-                          type="primary"
-                          size="large"
-                          danger
-                          style={{marginLeft:'10px'}}
-                          onClick = {() => this.onDeclineShare(item.id)}
-                          >
-                             <i class="fas fa-times"></i>
-                          </Button>
-                        </Tooltip>
+
+                      (item.person.length==1 && item.host.username==this.props.username)?
+
+                      <div></div>
+
+                      :
+
+                      <div>
+                        <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
+
+                        <div class="outerContainerPeople">
+
+                          <div class="innerContainerPeople" style={{display:'inline-block'}}>
+
+                            <Avatar
+                              shape="circle"
+                              size={60}
+                              src={'http://127.0.0.1:8000'+item.host.profile_picture}
+                              style={{display:'inline-block'}}
+                             />
+                           <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                             onClick = {() => this.onProfileClick(item.host.username)}
+                           >
+
+                             {item.host.first_name} {item.host.last_name}
+                           </p>
+
+                          </div>
+
+                           <span class="innerContainerPeople" style={{ width: 150, display:'inline-block', float:'right', marginRight:'10px'}}>
+                             {/* going to need a if condition checking if not 100 then you can make status active:
+                                status="exception"
+                                <Progress percent={50} size="small" status="active" />
+                               */}
+                             <Progress percent={50} size="small" status="active" gap/>
+                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.person.length-1)))} size="small" />
+                             <Progress percent={(item.person.length-item.accepted.length/item.person.length)} size="small" status="exception" />
+
+                           </span>
+                        </div>
+                        <div>
+
+
+                          <Avatar.Group>
+                            <div style={{float:'right', marginRight:'100px'}}>
+                              <Tooltip placement="bottomLeft" title="View event">
+                                <Button shape="circle" size="large" type="primary">
+                                   <i class="fas fa-eye"></i>
+                                </Button>
+                              </Tooltip>
+                              <Tooltip placement="bottomLeft" title="Accept Invite">
+                                <Button
+                                type="primary"
+                                shape="circle"
+                                size="large"
+                                style={{marginLeft:'10px'}}
+                                onClick = {() => this.onAcceptShare(item.id)}
+                                >
+                                   <i class="fas fa-check"></i>
+                                </Button>
+                              </Tooltip>
+                              <Tooltip placement="bottomLeft" title="Decline Invite">
+                                <Button
+                                shape="circle"
+                                type="primary"
+                                size="large"
+                                danger
+                                style={{marginLeft:'10px'}}
+                                onClick = {() => this.onDeclineShare(item.id)}
+                                >
+                                   <i class="fas fa-times"></i>
+                                </Button>
+                              </Tooltip>
+                            </div>
+                            {/*
+                            <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
+                            */}
+                            <Liking style={{marginTop:'-200px'}} like_people={item.person}/>
+                          </Avatar.Group>
+
+
+                        </div>
                       </div>
-                      {/*
-                      <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
-                      */}
-                      <Liking style={{marginTop:'-200px'}} like_people={item.person}/>
-                    </Avatar.Group>
 
-
+                    }
                   </div>
 
 
 
-                  <span>
+            </div>
 
-
-                    </span>
-                </div>
+            }
 
 
 
-              } >
+        >  
 
 
               {  item.accepted.includes(this.props.id) ?
@@ -589,6 +606,9 @@ class WeekCalendar extends React.Component{
 
                 </div>
               }
+
+
+
 
 
               </Popover>
@@ -855,7 +875,7 @@ class WeekCalendar extends React.Component{
 
 
   render() {
-    console.log(this.props.events)
+    console.log(this.props)
     console.log(Avatar)
 
     return (
