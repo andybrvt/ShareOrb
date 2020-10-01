@@ -469,7 +469,7 @@ class WeekCalendar extends React.Component{
                           <Progress percent={50} size="small" status="active" />
                          */}
                        <Progress percent={50} size="small" status="active" gap/>
-                       <Progress percent={100*(item.accepted.length/item.person.length)} size="small" />
+                       <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.person.length-1)))} size="small" />
                        <Progress percent={(item.person.length-item.accepted.length/item.person.length)} size="small" status="exception" />
 
                      </span>
