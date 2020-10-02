@@ -483,9 +483,9 @@ class WeekCalendar extends React.Component{
                                 status="exception"
                                 <Progress percent={50} size="small" status="active" />
                                */}
-                             <Progress percent={50} size="small" status="active" gap/>
-                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.person.length-1)))} size="small" />
-                             <Progress percent={(item.person.length-item.accepted.length/item.person.length)} size="small" status="exception" />
+                             <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
+                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
+                             <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
 
                            </span>
                         </div>
@@ -544,7 +544,7 @@ class WeekCalendar extends React.Component{
 
 
 
-        >  
+        >
 
 
               {  item.accepted.includes(this.props.id) ?

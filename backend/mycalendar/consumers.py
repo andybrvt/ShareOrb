@@ -105,7 +105,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         sharedEvent = get_object_or_404(Event, id  = data['eventId'])
         declineUser = get_object_or_404(User, id = data['declineId'])
 
-
+        sharedEvent.decline.add(declineUser)
         sharedEvent.person.remove(declineUser)
         sharedEvent.save()
 

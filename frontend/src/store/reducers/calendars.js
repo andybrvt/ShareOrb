@@ -135,7 +135,8 @@ const declineElseEventShare = (state, action) => {
     events: state.events.map(
       item => item.id === action.declineShareObj.eventId ? {
         ...item,
-        person: item.person.filter(removeDeclineEvent)
+        person: item.person.filter(removeDeclineEvent),
+        decline: [...item.decline, action.declineShareObj.declineId]
       } : item
     )
   })
