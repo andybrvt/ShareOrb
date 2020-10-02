@@ -38,6 +38,9 @@ class EventSyncModal extends React.Component{
     }
     console.log(NotificationOjbect)
     this.openNotification(NotificationOjbect, 'bottomRight')
+
+    // THINGS ARE GOOD TILL HERE
+
     // sending the information back into the websocket then to the backend
     NotificationWebSocketInstance.sendNotification(NotificationOjbect)
     this.props.close()
@@ -48,7 +51,7 @@ class EventSyncModal extends React.Component{
       dateFns.addHours(new Date(info.startDate),7), 'MM/dd/yyyy')
     const endDate = dateFns.format(
       dateFns.addHours(new Date(info.endDate),7), 'MM/dd/yyyy')
-    const recipient = this.capitalize(info.recipient)
+    const recipient = this.capitalize(info.recipient.username)
   notification.info({
     message: `Event Sync Request Sent to `+ recipient ,
     description:

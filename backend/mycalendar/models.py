@@ -40,8 +40,13 @@ class Event(models.Model):
 	color = models.CharField(max_length = 255, blank = True)
 	# The accepted field will probally be a list because if we did it a true or false field
 	# if one person accepts then everyone's gets accepted
-	accepted = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_accepted')
 
+	# Inivted field will not change, it will pretty much remain static to show the orginal list
+	# of people that are invited
+	invited = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_invited', null = True)
+	accepted = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_accepted', null = True)
+	# This will hold all the people that declined
+	decline = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_declined', null = True)
 	def __unicode__(self):
 		return self.title
 

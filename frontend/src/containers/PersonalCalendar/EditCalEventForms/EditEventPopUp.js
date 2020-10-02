@@ -86,6 +86,8 @@ class EditEventPopUp extends React.Component {
     console.log(start_date, end_date)
 
     if (this.props.addEvent === false ){
+
+      // This if statement is for editing events
       authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
         title: values.title,
         content: values.content,
@@ -119,6 +121,8 @@ class EditEventPopUp extends React.Component {
       // will just run the axios then run the redux but however if there is people
       // you want share with then you will run the channels
 
+      // This is for when you make an event
+
       if(values.friends.length === 0 ){
         authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
           title: values.title,
@@ -130,7 +134,7 @@ class EditEventPopUp extends React.Component {
           person: [this.props.id],
           repeatCondition: values.repeatCondition,
           host: this.props.id,
-          accepted: [this.props.id]
+          accepted: [this.props.id],
         })
 
         // The event instance is pretty much used when you just recently added an
@@ -153,9 +157,11 @@ class EditEventPopUp extends React.Component {
           location: values.location,
           color: values.eventColor,
           person: [curUserObj],
+          invited: [],
           repeatCondition: values.repeatCondition,
           host: curUserObj,
-          accepted: [this.props.id]
+          accepted: [this.props.id],
+          decline: []
         }
         // add color to addEvents in redux
         this.props.addEvents(instanceEvent)
@@ -164,14 +170,18 @@ class EditEventPopUp extends React.Component {
         // where it just the current person, this one you add everyone you are shareing
         // with along with your self into the person field
 
-        console.log('hit here baby')
 
+        const inviteList = values.friends.slice()
+        console.log(inviteList)
         let shareList = values.friends
         shareList.push(this.props.username)
+        console.log(shareList)
+        console.log(inviteList)
         const createSharedEventObject = {
           command: 'add_shared_event',
           title: values.title,
           person: shareList,
+          invited: inviteList,
           content: values.content,
           location: values.location,
           eventColor: values.eventColor,

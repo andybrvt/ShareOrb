@@ -30,8 +30,14 @@ class CalendarConsumer(JsonWebsocketConsumer):
         person = [];
 
         for people in data['person']:
-            curPerson = get_object_or_404(User, username = people);
+            curPerson = get_object_or_404(User, username = people)
             person.append(curPerson)
+
+        invited = []
+        for invites in data['invited']:
+            invite = get_object_or_404(User, username = invites)
+            invited.append(invite)
+
 
         # currentUser = get_object_or_404(User, username = data['currentUser']);
         # userFriend = get_object_or_404(User, username = data['userFriend']);
@@ -57,6 +63,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         )
         newEvent.person.set(person)
         newEvent.accepted.set(accepted)
+        newEvent.invited.set(invited)
 
         serializer = EventSerializer(newEvent)
         content = {

@@ -42,11 +42,16 @@ class EventSerializer (serializers.ModelSerializer):
 
     def to_representation(self, instance):
         personList=[]
+        inviteList = []
         data = super().to_representation(instance)
         for peopleID in data['person']:
             person = PersonSerializer(models.User.objects.get(id=peopleID)).data
             personList.append(person)
+        for invites in data['invited']:
+            invite = PersonSerializer(models.User.objects.get(id=invites)).data
+            inviteList.append(invite)
         data['person']  = personList
+        data['invited'] = inviteList
         data['host'] = PersonSerializer(models.User.objects.get(id = data['host'])).data
         return data
 

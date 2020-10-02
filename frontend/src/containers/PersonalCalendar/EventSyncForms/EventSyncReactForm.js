@@ -115,7 +115,7 @@ class EventSyncReactForm extends React.Component {
     let friends = this.props.friends
     let friend = this.state.search.trim().toLowerCase()
     if (friend.length > 0){
-      friends = friends.filter(val => val.toLowerCase().match(friend))
+      friends = friends.filter(val => val.username.toLowerCase().match(friend))
     }
     const radioStyle = {
       display: 'block',
@@ -194,7 +194,7 @@ class EventSyncReactForm extends React.Component {
                   avatar={
                     <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                   }
-                  title={<a href="https://ant.design">{this.capitalize(item)}</a>}
+                  title={<a href="https://ant.design">{this.capitalize(item.username)}</a>}
                   // description={item.email}
                 />
                 <div>Content</div>

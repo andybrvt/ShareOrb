@@ -122,6 +122,13 @@ class EventModal extends React.Component {
       // event, so because of that you want to add the date in just as how the
       // date and event will be added according to the loaded event
 
+      const curUserObj = {
+        first_name: this.props.firstName,
+        id: this.props.id,
+        last_name: this.props.lastName,
+        profile_picture: this.props.profilePic,
+        username: this.props.username
+      }
 
       const instanceEvent = {
         title: values.title,
@@ -130,14 +137,19 @@ class EventModal extends React.Component {
         end_time: temp_end_date,
         location: values.location,
         color: values.event_color,
-        person: [this.props.id],
+        person: [curUserObj],
+        invited: [],
         repeatCondition: values.repeatCondition,
-        host: this.props.id,
-        accepted: [this.props.id]
+        host: curUserObj,
+        accepted: [this.props.id],
+        decline: []
+
+
       }
       // add color to addEvents in redux
       this.props.addEvents(instanceEvent)
     } else {
+      const inviteList = values.person.slice()
       let shareList = values.person
       shareList.push(this.props.username)
       const createSharedEventObject = {
@@ -149,6 +161,7 @@ class EventModal extends React.Component {
         location: values.location,
         eventColor: values.event_color,
         person: shareList,
+        invited: inviteList,
         repeatCondition: values.repeatCondition,
         host: this.props.id,
       }
