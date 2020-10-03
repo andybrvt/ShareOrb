@@ -87,6 +87,7 @@ class PickEventSyncWeek extends React.Component{
   }
 
   renderWeekCell(events){
+    console.log(events)
     // Render the week cell, so what you want to do is pick the first to be the minDate and
     // the last day will be the maxDate
     // You will loop through each hour of each day and then redner through each day of the week
@@ -120,6 +121,8 @@ class PickEventSyncWeek extends React.Component{
 
      const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
 
+
+
      // The plan for the loop is ot have a while loop that loops thorugh each hour of the same day
      // then go down to the next hour then go through all the days
 
@@ -136,36 +139,101 @@ class PickEventSyncWeek extends React.Component{
           // add it to the toDoStuff which will loopp thorugh each each cell then it will be
           // cleared out again
           for (let item = 0; item<events.length; item++){
-            // console.log(cloneDay)
-            // console.log(new Date(events[item].start_time))
-            // console.log(new Date(hour))
-            // console.log(events[item].start_time)
-            if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
-              // This if statement will get the event on the start day
-            ) {toDoStuff.push(
+            // You gotta make the end time minus one because if you dont it will fill
+            //  up the cells of that time after it so thats not good
+            const startHour = dateFns.getHours(new Date(events[item].start_time))
+            const startMin = dateFns.getMinutes(new Date(events[item].start_time))
+            const endHour = dateFns.getHours(new Date(events[item].end_time))
+            const endMin = dateFns.getMinutes(new Date(events[item].end_time))
+            const curHour = dateFns.getHours(new Date(hour))
+            const curMin = dateFns.getMinutes(new Date(hour))
+
+            const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+            const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
+          // First is to get the start time to be there. Gotta make sure you get
+          // minutes correct
+
+          // RENDER THE VERY FIRST CELL OF THE START TIME
+          if (
+            startHour === curHour
+            &&
+            startMin === curMin
+            &&
+            (sameDayStart || sameDayEnd)
+
+          ){
+            toDoStuff.push(
               events[item]
-            )}
-            if(dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
-              // This one is to get the box for the end date
-            ) {toDoStuff.push(
+            )
+          }
+          if(
+            endHour === curHour
+            &&
+            endMin === 30
+            &&
+            endMin-30 === curMin
+            &&
+            (sameDayStart || sameDayEnd)
+          ){
+            toDoStuff.push(
               events[item]
-            )}
-            if(dateFns.isBefore(new Date(events[item].start_time), cloneDay)
-              && (dateFns.isAfter(new Date(events[item].end_time), cloneDay) || dateFns.isSameDay(new Date(events[item].end_time), cloneDay))
-              && dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              // This is for the days that goes from all the times in the start day to the end date bu
-            ) {toDoStuff.push(
-            events[item]
-          )}
-           if ((dateFns.isBefore(new Date(events[item].start_time), cloneDay) || dateFns.isSameDay(new Date(events[item].start_time), cloneDay))
-            && dateFns.isAfter(new Date(events[item].end_time), cloneDay)
-            && dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-            // This is for the reverse of the previous if statement
-          ) {toDoStuff.push(
-          events[item]
-        )}
+            )
+          } else if (
+            endMin === 0
+            &&
+            endHour -1 === curHour
+            &&
+            endMin+30 === curMin
+            &&
+            (sameDayStart || sameDayEnd)
+          ){
+            toDoStuff.push(
+              events[item]
+            )
+          }
+
+          if(
+            startMin === 30
+
+          ){
+            if(
+              startHour < curHour
+              &&
+              endHour > curHour
+              &&
+              (0 === curMin
+              ||
+              30 === curMin)
+              &&
+              (sameDayStart || sameDayEnd)
+            ){
+              toDoStuff.push(
+                events[item]
+              )
+            }
+
+          } else if (
+            startMin === 0
+
+          ){
+            if (
+              startHour <= curHour
+              &&
+              endHour> curHour
+              &&
+              (sameDayStart || sameDayEnd)
+            ){
+              toDoStuff.push(
+                events[item]
+              )
+            }
+
+          }
+
+
+
+
+
           }
 
           // You can always have access to the events, you just got to loop through
@@ -204,7 +272,7 @@ class PickEventSyncWeek extends React.Component{
        counter = counter + 7
        days = []
        date = minDate
-       hour = dateFns.addHours(hour, 1)
+       hour = dateFns.addMinutes(hour, 30)
      }
 
      return <div className = 'body'>{hours}</div>

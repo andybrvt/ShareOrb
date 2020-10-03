@@ -201,7 +201,7 @@
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .hourcell{
   position: relative;
-  height: 60px;
+  height: 30px;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   /* overflow: hidden; */
@@ -212,7 +212,7 @@
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .nonhourcell{
   position: relative;
-  height: 60px;
+  height: 30px;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   /* overflow: hidden; */
