@@ -78,6 +78,10 @@ class NotificationsDropDown extends React.Component{
   }
 
   onEventSyncAccept = (actor, recipient, minDate, maxDate) => {
+    // This will send it back to the notification to the orignal actor
+    // os that use can pick an event sync date. This funciton actually deletes
+    // the notification in the backend so no need to do it in the front end
+    // ADD ANIMATION FOR WHEN ACCEPTING
     const acceptNotificationObject = {
       command: 'accept_event_sync',
       actor: actor,
@@ -234,6 +238,16 @@ class NotificationsDropDown extends React.Component{
         )
       }
       if (notifications[i].type === 'send_friend_event_sync'){
+        // ACCEPTS: works
+          // Bascially when you accept, it will send a notification to to the
+          // orignal sender saying that you accept the event sync and then it wll
+          // let the orginal sender pick a time
+          // This will also delete the event in the backend
+        // DECLINE: works
+          // When you decline, it will send a notificaiton to the orignal send
+          // saying that you declined the event sync
+          // This will also delete the event in the backend 
+
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>

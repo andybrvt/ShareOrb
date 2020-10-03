@@ -107,13 +107,18 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
     def send_event_sync_notification(self, data):
         # This is to send custom notification for event sync
+        print('start here nigga')
+        print(data)
         if data['command'] == 'send_friend_event_sync':
-            recipient = get_object_or_404(User, username = data['recipient'])
+            recipient = get_object_or_404(User, username = data['recipient']['username'])
             actor = get_object_or_404(User, username = data['actor'])
             minDate = data['startDate']
             maxDate = data['endDate']
-            notification = CustomNotification.objects.create(type="send_friend_event_sync", recipient = recipient, actor= actor, verb="wants to event sync with you",
-            minDate = minDate, maxDate = maxDate)
+            notification = CustomNotification.objects.create(type="send_friend_event_sync",
+             recipient = recipient,
+             actor= actor,
+             verb="wants to event sync with you",
+             minDate = minDate, maxDate = maxDate)
         if data['command'] == 'send_decline_event_sync_notification':
             # since you decline it the notification will pretty much have a normal decline
             recipient = get_object_or_404(User, username= data['recipient'])
@@ -180,6 +185,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
 # This function is usually used to delete or do anything that doesnt have to do with
 # sending the notificaiton itself
     def send_friend_event_sync (self, data):
+
         content = {
             'command': 'send_friend_event_sync',
             'actor': data['actor'],
