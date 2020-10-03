@@ -244,7 +244,11 @@ class PickEventSyncWeek extends React.Component{
     // stuff and then pass it into the backend into the consumer then create the new notificaiton
     // then group send it, then pass into redux in the front end (make sure to crate the callbacks)
     // The value includes
+
+    // IN PROGRESS OF CHECKING
     console.log(value)
+    console.log(this.props.currentUser)
+    console.log(this.props.userFriend)
     if (this.state.selectedDate === null){
       throw new SubmissionError({
         _error: '*Please pick a date'
@@ -253,16 +257,24 @@ class PickEventSyncWeek extends React.Component{
       const notificationId = this.props.notificationId
       const startTime = this.state.selectedDate
       const endTime = dateFns.addHours(startTime, 1)
+
+      // For submitEvent object:
+      // title, value, location, event color will just be strings
+      // person, and invited will be a list of usernames
+      // repeatCondition will be none
+      // the host will the id of the actor
       const submitEvent = {
         command: 'add_sync_event',
         title: value.title,
+        person: [this.props.currentUser, this.props.userFriend],
+        invited: [this.props.userFriend],
         content: value.content,
         location: value.location,
         eventColor: value.eventColor,
         startDate: startTime,
         endDate: endTime,
-        currentUser: this.props.currentUser,
-        userFriend: this.props.userFriend
+        repeatCondition: "none",
+        host: this.props.id,
       }
       const submitNotification = {
         command: 'send_new_event_sync_notification',
@@ -275,12 +287,12 @@ class PickEventSyncWeek extends React.Component{
       // event for both parties
       CalendarEventWebSocketInstance.sendEvent(submitEvent);
       // This is to send a notification to the other person that an event was choosen
-      NotificationWebSocketInstance.sendNotification(submitNotification)
-      this.props.closePickEventSyncModal()
-      // This is just to delete the notificaiton
-      authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
-      this.props.deleteNotification(notificationId)
-      this.openNotification('bottomLeft', this.state.selectedDate)
+      // NotificationWebSocketInstance.sendNotification(submitNotification)
+      // this.props.closePickEventSyncModal()
+      // // This is just to delete the notificaiton
+      // authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+      // this.props.deleteNotification(notificationId)
+      // this.openNotification('bottomLeft', this.state.selectedDate)
     }
   }
 
@@ -339,7 +351,8 @@ const mapStateToProps = state => {
     filterEvent: state.eventSync.filterEvent,
     currentUser: state.auth.username,
     userFriend: state.eventSync.userFriend,
-    notificationId: state.eventSync.notificationId
+    notificationId: state.eventSync.notificationId,
+    id: state.auth.id,
   }
 }
 

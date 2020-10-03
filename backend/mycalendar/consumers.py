@@ -12,6 +12,12 @@ from .serializers import EventSerializer
 class CalendarConsumer(JsonWebsocketConsumer):
 
     def add_share_sync_event(self, data):
+        print('event sync event add here')
+        print (data)
+
+        # THIS IS GONNA BE SIMILAR TO THE SHARED EVENT SO YOU GOTTA STRUCTURE YOUR
+        # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT 
+
         # this is there one where you make the event and then add it to the database
         # Then create a dictionary that you will then send to the frontend through an
         # event send fucntion

@@ -43,10 +43,10 @@ class Event(models.Model):
 
 	# Inivted field will not change, it will pretty much remain static to show the orginal list
 	# of people that are invited
-	invited = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_invited')
-	accepted = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_accepted')
+	invited = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_invited', blank = True)
+	accepted = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_accepted', blank = True)
 	# This will hold all the people that declined
-	decline = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_declined')
+	decline = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_declined', blank = True)
 	def __unicode__(self):
 		return self.title
 

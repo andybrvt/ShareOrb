@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { reset, Field, reduxForm } from 'redux-form';
 
-
+// wE DONT USE THIS 
 const renderField = (field) => {
   return (
       <input {...field.input} type = {field.type} placeholder = {field.placeholder}/>

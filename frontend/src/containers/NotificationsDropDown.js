@@ -246,7 +246,7 @@ class NotificationsDropDown extends React.Component{
         // DECLINE: works
           // When you decline, it will send a notificaiton to the orignal send
           // saying that you declined the event sync
-          // This will also delete the event in the backend 
+          // This will also delete the event in the backend
 
         notificationList.push(
         <li className = 'notificationListContainer'>
@@ -304,6 +304,9 @@ class NotificationsDropDown extends React.Component{
         )
       }
       if (notifications[i].type === 'declined_event_sync'){
+        // This event pretty much shows the original user that the recipient
+        // that you have decline the event
+        // WORKS
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
@@ -334,7 +337,10 @@ class NotificationsDropDown extends React.Component{
         )
       }
       if (notifications[i].type === 'accepted_event_sync'){
-        // DONE
+        // This will be sent to the orignal sender when the recipient when they choose
+        // to accept the event sync. This notification will open up the
+        // pick event sync so that you can pick the date for the event
+        // WORKS
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>

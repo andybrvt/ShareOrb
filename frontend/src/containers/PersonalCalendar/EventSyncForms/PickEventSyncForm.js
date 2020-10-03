@@ -95,7 +95,7 @@ class ReduxAddEventForm extends React.Component {
         label = 'Content'
         component= {renderTextArea}
         type= 'text'
-        validate = {required}
+        // validate = {required}
         placeholder = 'Description'
         />
       </div>
@@ -105,7 +105,7 @@ class ReduxAddEventForm extends React.Component {
         label = 'Location'
         component= {renderField}
         type= 'text'
-        validate = {required}
+        // validate = {required}
         placeholder = 'Location'
         />
         <AimOutlined className = 'aim'/>
