@@ -156,7 +156,22 @@ class PickEventSyncWeek extends React.Component{
           if (
             startHour === 23
           ){
+
             if(
+             startMin === 30
+             &&
+             startHour === curHour
+             &&
+             startMin === curMin
+             &&
+             (sameDayStart || sameDayEnd)
+           ){
+             console.log('right here')
+             toDoStuff.push(
+               events[item]
+             )
+           }
+            else if(
               startMin === 0
               &&
               startMin === curMin
@@ -165,33 +180,38 @@ class PickEventSyncWeek extends React.Component{
               &&
               (sameDayStart || sameDayEnd)
             ) {
-              toDoStuff.push(
-                events[item]
-              )
-            }else if(
-              startMin === 30
-              &&
-              startHour === curHour
-              &&
-              startMin === curMin
-              &&
-              (sameDayStart || sameDayEnd)
-            ){
-              console.log('right here')
+
               toDoStuff.push(
                 events[item]
               )
             }
 
-            if (endHour === 0
-              &&
-              startHour === curHour
-              &&
-              (sameDayStart || sameDayEnd)
-            ){
-              toDoStuff.push(
-                events[item]
-              )
+
+            if (endHour === 0){
+              if (
+                startMin === 0
+                &&
+                startHour === curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              } else if(
+                startMin === 30
+                &&
+                startMin === curMin
+                &&
+                startHour === curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
             }
 
 
@@ -205,6 +225,7 @@ class PickEventSyncWeek extends React.Component{
               (sameDayStart || sameDayEnd)
 
             ){
+              console.log('test1')
               toDoStuff.push(
                 events[item]
               )
@@ -218,6 +239,7 @@ class PickEventSyncWeek extends React.Component{
               &&
               (sameDayStart || sameDayEnd)
             ){
+              console.log('test1')
               toDoStuff.push(
                 events[item]
               )
@@ -230,6 +252,7 @@ class PickEventSyncWeek extends React.Component{
               &&
               (sameDayStart || sameDayEnd)
             ){
+              console.log('test1')
               toDoStuff.push(
                 events[item]
               )
@@ -250,6 +273,7 @@ class PickEventSyncWeek extends React.Component{
                 &&
                 (sameDayStart || sameDayEnd)
               ){
+                console.log('test1')
                 toDoStuff.push(
                   events[item]
                 )
