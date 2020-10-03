@@ -67,7 +67,7 @@ class EditEventPopUp extends React.Component {
     const calendarId = this.props.calendarId
 
     let start_date = values.startDate.toDate()
-    let end_date = values.endDate.toDate()
+    let end_date = values.startDate.toDate()
     const start_time = this.timeConvert(values.startTime)
     const end_time = this.timeConvert(values.endTime)
 

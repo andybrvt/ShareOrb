@@ -153,73 +153,80 @@ class PickEventSyncWeek extends React.Component{
           // First is to get the start time to be there. Gotta make sure you get
           // minutes correct
 
-          // RENDER THE VERY FIRST CELL OF THE START TIME
           if (
-            startHour === curHour
-            &&
-            startMin === curMin
-            &&
-            (sameDayStart || sameDayEnd)
-
-          ){
-            toDoStuff.push(
-              events[item]
-            )
-          }
-          if(
-            endHour === curHour
-            &&
-            endMin === 30
-            &&
-            endMin-30 === curMin
-            &&
-            (sameDayStart || sameDayEnd)
-          ){
-            toDoStuff.push(
-              events[item]
-            )
-          } else if (
-            endMin === 0
-            &&
-            endHour -1 === curHour
-            &&
-            endMin+30 === curMin
-            &&
-            (sameDayStart || sameDayEnd)
-          ){
-            toDoStuff.push(
-              events[item]
-            )
-          }
-
-          if(
-            startMin === 30
-
+            startHour === 23
           ){
             if(
-              startHour < curHour
+              startMin === 0
               &&
-              endHour > curHour
+              startMin === curMin
               &&
-              (0 === curMin
-              ||
-              30 === curMin)
+              startHour === curHour
               &&
-              (sameDayStart || sameDayEnd)
+              sameDayStart
+            ) {
+              toDoStuff.push(
+                events[item]
+              )
+            }else if(
+              startMin === 30
+              &&
+              startMin === curMin
+              &&
+              // startHour === curHour
+              // &&
+              sameDayStart
+            ){
+              console.log('right here')
+              toDoStuff.push(
+                events[item]
+              )
+            }
+
+            if (endHour === 0
+              &&
+              startHour === curHour
+              &&
+              sameDayStart
             ){
               toDoStuff.push(
                 events[item]
               )
             }
 
-          } else if (
-            startMin === 0
 
-          ){
+          }
+          else {
             if (
-              startHour <= curHour
+              startHour === curHour
               &&
-              endHour> curHour
+              startMin === curMin
+              &&
+              (sameDayStart || sameDayEnd)
+
+            ){
+              toDoStuff.push(
+                events[item]
+              )
+            }
+            if(
+              endHour === curHour
+              &&
+              endMin === 30
+              &&
+              endMin-30 === curMin
+              &&
+              (sameDayStart || sameDayEnd)
+            ){
+              toDoStuff.push(
+                events[item]
+              )
+            } else if (
+              endMin === 0
+              &&
+              endHour -1 === curHour
+              &&
+              endMin+30 === curMin
               &&
               (sameDayStart || sameDayEnd)
             ){
@@ -228,7 +235,48 @@ class PickEventSyncWeek extends React.Component{
               )
             }
 
-          } 
+            if(
+              startMin === 30
+
+            ){
+              if(
+                startHour < curHour
+                &&
+                endHour > curHour
+                &&
+                (0 === curMin
+                ||
+                30 === curMin)
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+            } else if (
+              startMin === 0
+
+            ){
+              if (
+                startHour <= curHour
+                &&
+                endHour> curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+            }
+
+
+          }
+
+          // RENDER THE VERY FIRST CELL OF THE START TIME
 
 
 
