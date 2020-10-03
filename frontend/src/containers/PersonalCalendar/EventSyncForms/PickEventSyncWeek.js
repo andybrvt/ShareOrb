@@ -228,7 +228,7 @@ class PickEventSyncWeek extends React.Component{
               )
             }
 
-          }
+          } 
 
 
 
