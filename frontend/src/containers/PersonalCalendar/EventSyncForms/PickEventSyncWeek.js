@@ -128,7 +128,7 @@ class PickEventSyncWeek extends React.Component{
 
      while (hour <= endHourDay){
        // When adding things to the calendar you have to match the date and the hour
-
+       console.log(hour)
        for (let i = counter; i< (counter+difference); i++){
           const cloneDay = date
           const cloneHour = hour
@@ -354,11 +354,14 @@ class PickEventSyncWeek extends React.Component{
   }
 
   onDayHourClick = (e,position, day, hour) => {
+
     const selectedHour = dateFns.getHours(hour)
     const selectedYear = dateFns.getYear(day)
     const selectedMonth = dateFns.getMonth(day)
     const selectedDate = dateFns.getDate(day)
-    const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour)
+    const selectedMin = dateFns.getMinutes(hour)
+
+    const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour, selectedMin)
     if (this.state.active === position){
       this.setState({
         active: null,
@@ -377,10 +380,10 @@ class PickEventSyncWeek extends React.Component{
     console.log(position)
     // Just the color of the selected time on the pick event sync calendar
     if (this.state.active === position-7){
-      return 'blue'
+      return '#91d5ff'
     }
     if (this.state.active === position){
-      return 'blue';
+      return '#91d5ff';
     }
 
     return '';
@@ -406,6 +409,14 @@ class PickEventSyncWeek extends React.Component{
       const startTime = this.state.selectedDate
       const endTime = dateFns.addHours(startTime, 1)
 
+      let content = ''
+      let location = ''
+      if (value.content){
+        content = value.content
+      }
+      if (value.location){
+        location = value.location
+      }
       // For submitEvent object:
       // title, value, location, event color will just be strings
       // person, and invited will be a list of usernames
@@ -416,8 +427,8 @@ class PickEventSyncWeek extends React.Component{
         title: value.title,
         person: [this.props.currentUser, this.props.userFriend],
         invited: [this.props.userFriend],
-        content: value.content,
-        location: value.location,
+        content: content,
+        location: location,
         eventColor: value.eventColor,
         startDate: startTime,
         endDate: endTime,
@@ -435,12 +446,12 @@ class PickEventSyncWeek extends React.Component{
       // event for both parties
       CalendarEventWebSocketInstance.sendEvent(submitEvent);
       // This is to send a notification to the other person that an event was choosen
-      // NotificationWebSocketInstance.sendNotification(submitNotification)
-      // this.props.closePickEventSyncModal()
+      NotificationWebSocketInstance.sendNotification(submitNotification)
+      this.props.closePickEventSyncModal()
       // // This is just to delete the notificaiton
-      // authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
-      // this.props.deleteNotification(notificationId)
-      // this.openNotification('bottomLeft', this.state.selectedDate)
+      authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+      this.props.deleteNotification(notificationId)
+      this.openNotification('bottomLeft', this.state.selectedDate)
     }
   }
 
