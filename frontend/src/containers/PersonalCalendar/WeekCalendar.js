@@ -806,6 +806,13 @@ class WeekCalendar extends React.Component{
     // }
     if (startHour === 23 && startMin === 30){
       bottomIndex = 49;
+    } else if (startHour === 23 && startMin === 0) {
+      if (endMin === 30){
+        bottomIndex = 48
+      } else {
+        bottomIndex = 49
+      }
+
     } else {
       bottomIndex = (2*(endHour)+1)+(endMin/30)
 
