@@ -132,6 +132,7 @@ class PickEventSyncWeek extends React.Component{
        for (let i = counter; i< (counter+difference); i++){
           const cloneDay = date
           const cloneHour = hour
+          const checkMin = dateFns.getMinutes(new Date(hour))
           console.log(cloneDay, cloneHour)
           formattedHour = dateFns.format(hour, hourFormat)
           formattedDay = dateFns.format(date, dayFormat)
@@ -313,7 +314,8 @@ class PickEventSyncWeek extends React.Component{
           if (toDoStuff.length > 0){
             days.push(
               <div
-                className = 'syncCol nonhourcell disabled'
+              className = {`syncCol disabled ${checkMin === 0 ? "nonhourcellT" : "nonhourcellB" }`}
+                // className = 'syncCol nonhourcell disabled'
               >
               </div>
             )
@@ -321,7 +323,8 @@ class PickEventSyncWeek extends React.Component{
             days.push(
               <div
                 style = {{background: this.color(i)}}
-                className = 'syncCol hourcell'
+                className = {`syncCol ${checkMin === 0 ? "hourcellT" : "hourcellB"}`}
+                // className = 'syncCol hourcell'
                 onClick = {(e) => this.onDayHourClick(e, i, cloneDay, cloneHour)}
               >
               <span className = 'number'></span>

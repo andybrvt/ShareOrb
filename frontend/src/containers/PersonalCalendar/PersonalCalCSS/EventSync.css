@@ -210,6 +210,28 @@
   /* background-color: lightskyblue; */
 }
 
+.eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .hourcellT{
+  position: relative;
+  height: 30px;
+  border-right: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
+  /* overflow: hidden; */
+  cursor: pointer;
+  background: var(--neutral-color);
+  /* background-color: lightskyblue; */
+}
+
+.eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .hourcellB{
+  position: relative;
+  height: 30px;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  /* overflow: hidden; */
+  cursor: pointer;
+  background: var(--neutral-color);
+  /* background-color: lightskyblue; */
+}
+
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .nonhourcell{
   position: relative;
   height: 30px;
@@ -220,6 +242,31 @@
   background: var(--neutral-color);
   background-color: lightskyblue;
 }
+
+.eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .nonhourcellT{
+  position: relative;
+  height: 30px;
+  border-right: 1px solid var(--border-color);
+
+  /* border-bottom: 1px solid var(--border-color); */
+  /* overflow: hidden; */
+  cursor: pointer;
+  background: var(--neutral-color);
+  background-color: lightskyblue;
+}
+
+.eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .nonhourcellB{
+  position: relative;
+  height: 30px;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
+  /* overflow: hidden; */
+  cursor: pointer;
+  background: var(--neutral-color);
+  background-color: lightskyblue;
+}
+
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrd .body .hourcell .monthlist{
   list-style-type:none;
