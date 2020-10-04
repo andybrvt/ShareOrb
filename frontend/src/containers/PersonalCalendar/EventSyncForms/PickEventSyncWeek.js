@@ -374,10 +374,15 @@ class PickEventSyncWeek extends React.Component{
   }
 
   color = (position) => {
+    console.log(position)
     // Just the color of the selected time on the pick event sync calendar
+    if (this.state.active === position-7){
+      return 'blue'
+    }
     if (this.state.active === position){
       return 'blue';
     }
+
     return '';
   }
 
