@@ -400,7 +400,7 @@ class WeekCalendar extends React.Component{
                     {dateFns.format(new Date(item.start_time), 'd')}
                     <span>
                       &nbsp;
-                      {dateFns.format(cloneDay, 'iiii')}
+                      ed
                       &nbsp;
                     </span>
                     <span >
@@ -439,6 +439,8 @@ class WeekCalendar extends React.Component{
                     </div>
                   </p>
 
+
+
                   {/* if person is host*
                     item.host
                     {item.person.length==1 && item.host.username==this.props.username}
@@ -450,9 +452,27 @@ class WeekCalendar extends React.Component{
 
 
 
-                      (item.person.length==1 && item.host.username==this.props.username)?
+                      ((item.invited.length==0) && item.host.username==this.props.username)?
 
-                      <div></div>
+                      <div style={{float:'left', marginBottom:'40px'}}>
+                        <Tooltip placement="bottomLeft" title="View event">
+                          <Button shape="circle" size="large" type="primary">
+                             <i class="fas fa-eye"></i>
+                          </Button>
+                        </Tooltip>
+                        <Tooltip placement="bottomLeft" title="Decline Invite">
+                          <Button
+                          shape="circle"
+                          type="primary"
+                          size="large"
+                          danger
+                          style={{marginLeft:'10px'}}
+                          onClick = {() => this.onDeclineShare(item.id)}
+                          >
+                             <i class="fas fa-times"></i>
+                          </Button>
+                        </Tooltip>
+                      </div>
 
                       :
 
@@ -483,9 +503,9 @@ class WeekCalendar extends React.Component{
                                 status="exception"
                                 <Progress percent={50} size="small" status="active" />
                                */}
-                             <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
-                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
-                             <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
+
+                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="medium" />
+                             <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="medium" status="exception" />
 
                            </span>
                         </div>
@@ -621,6 +641,7 @@ class WeekCalendar extends React.Component{
             <EditEventPopUp
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
+            dayNum={dateFns.format(cloneDay, 'd')}
             />
             </div>}>
 

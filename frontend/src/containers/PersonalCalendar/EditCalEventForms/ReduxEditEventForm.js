@@ -71,7 +71,7 @@ const renderField = (field) => {
   console.log(field.meta)
   return (
     <span>
-    <Input style={{width:'200px', height:'30px', fontSize:'14px'}}
+    <Input style={{width:'200px', height:'30px', fontSize:'16px'}}
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
@@ -618,135 +618,138 @@ class ReduxEditEventForm extends React.Component{
       // the submit function in the eventeditpopup. so all the values that are in
       // that form even though it might not seem like it from just this file
       return(
-        <form style={{padding:'25px'}}>
-          <div className = 'reduxTitle'>
-          <i style={{marginRight:'15px'}} class="fas fa-calendar-plus"></i>
-            <Field
-            name = 'title'
-            component= {renderField}
-            type= 'text'
-            placeholder = 'Title'
+        <form style={{padding:'20px',width:'500px'}}>
+            <div class="bottomRightCircle"></div>
+            <div className = 'reduxTitle'>
+              <Button style={{float:'left', marginRight:'15px'}} type="primary" shape="circle" size={'large'}>
+                {this.props.dayNum}
+              </Button>
+              <Field
+              name = 'title'
+              component= {renderField}
+              type= 'text'
+              placeholder = 'Title'
 
-            />
-
-          <Button style={{float:'right', marginleft:'50px'}} type="primary" shape="circle" size={80}>
-            30
-          </Button>
-          </div>
-
-          <div style={{marginLeft:'30px', marginBottom:'15px'}}>
-            <Field
-            name = 'repeatCondition'
-            component = {renderRadioSelect}
-            onChange ={this.handleReoccuringChange}
-            />
-          </div>
-
-          {/* need to implement redux form to people */}
-          <div>
-
-            <i style={{marginRight:'15px'}} class="fas fa-user-friends"></i>
-            <Field
-            name = 'friends'
-            type='text'
-            onChange = {this.handleFriendChange}
-            component = {renderFriendSelect}
-            placeholder = 'Title'
-            >
-              {this.renderShareListSelect()}
-            </Field>
-            {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
-          </div>
-          {/* Description of event
-          <div className  = 'reduxContent'>
-            <Field
-            name = 'content'
-            component= {renderTextArea}
-            type= 'text'
-            placeholder = 'Description'
-            />
-          </div>
-
-          */}
-          {/* location */}
-          <div className = 'reduxLocation'>
-            <i class="fas fa-globe-americas"  style={{marginRight:'20px'}}></i>
-            <Field
-            name = 'location'
-            component= {renderField}
-            type= 'text'
-
-            />
-            <AimOutlined style={{fontSize:'15px'}} className = 'aim'/>
-            <Field
-              name = 'eventColor'
-              component = {renderEventColor}
-              type = 'text'/>
-          </div>
+              />
 
 
-          <div className = 'reduxDateRange pointerEvent'>
-            <i style={{marginRight:'20px'}} class="fas fa-clock"></i>
-             <Field
-             name = 'startDate'
-             component = {renderStartDate}
-             onChange = {this.onStartDateChange}
-             type = 'date'
-             style={{display: 'inline-block'}}
-             />
-
-             <div className = 'reduxTimePicker'>
-               <Field
-               name = 'startTime'
-               component = {renderStartDateSelect}
-               onChange = {this.handleStartTimeChange}>
-                 {renderStartTime()}
-               </Field>
-               <ArrowRightOutlined />
-               <Field
-               name = 'endTime'
-               onChange = {this.handleEndTimeChange}
-               component = {renderStartDateSelect}>
-                 {this.renderEndTimeSelect()}
-               </Field>
-
-
-
-             </div>
-
-          </div>
-
-          { this.props.addEvent ?
-            <div className = 'reduxButton'>
-            <Button
-            onClick = {reset}
-            >
-            Clear
-            </Button>
-            <Button
-            type = 'primary'
-            onClick = {handleSubmit}
-            style = {{left: '10px', fontSize: '15px'}}
-            disabled = {pristine || invalid || this.onRed()}
-            >Add</Button>
             </div>
 
-            :
-
-            <div className = 'reduxButton'>
-            <Button
-            onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
-            >
-            Delete
-            </Button>
-            <Button
-            type = 'primary'
-            onClick = {handleSubmit}
-            style = {{left: '10px', fontSize: '15px'}}
-            disabled = {pristine || invalid || this.onRed()}
-            >Save</Button>
+            <div style={{marginLeft:'50px', marginBottom:'15px'}}>
+              <Field
+              name = 'repeatCondition'
+              component = {renderRadioSelect}
+              onChange ={this.handleReoccuringChange}
+              />
             </div>
-           }
+
+            {/* need to implement redux form to people */}
+            <div style={{marginBottom:'10px'}}>
+
+              <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
+              <Field
+              name = 'friends'
+              type='text'
+              onChange = {this.handleFriendChange}
+              component = {renderFriendSelect}
+              placeholder = 'Title'
+              >
+                {this.renderShareListSelect()}
+              </Field>
+              {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
+            </div>
+
+
+            {/* Description of event
+            <div className  = 'reduxContent'>
+              <Field
+              name = 'content'
+              component= {renderTextArea}
+              type= 'text'
+              placeholder = 'Description'
+              />
+            </div>
+
+            */}
+            {/* location */}
+            <div style={{marginBottom:'10px'}} className = 'reduxLocation'>
+              <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px', marginBottom:'15px'}} ></i>
+              <Field
+              name = 'location'
+              component= {renderField}
+              type= 'text'
+
+              />
+              <AimOutlined style={{fontSize:'15px'}} className = 'aim'/>
+              <Field
+                name = 'eventColor'
+                component = {renderEventColor}
+                type = 'text'/>
+            </div>
+
+
+            <div style={{display:'flex'}} className = 'reduxDateRange pointerEvent'>
+              <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
+               <Field
+               name = 'startDate'
+               component = {renderStartDate}
+               onChange = {this.onStartDateChange}
+               type = 'date'
+               style={{display: 'inline-block'}}
+               />
+
+               <div className = 'reduxTimePicker'>
+                   <Field
+                     style={{display: 'inline-block',float: 'left'}}
+                     name = 'startTime'
+                     component = {renderStartDateSelect}
+                     onChange = {this.handleStartTimeChange}>
+                     {renderStartTime()}
+                   </Field>
+
+                   <Field
+                     style={{display: 'inline-block'}}
+                     name = 'endTime'
+                     onChange = {this.handleEndTimeChange}
+                     component = {renderStartDateSelect}>
+                     {this.renderEndTimeSelect()}
+                   </Field>
+               </div>
+
+            </div>
+
+            { this.props.addEvent ?
+              <div className = 'reduxButton'>
+              <Button
+              onClick = {reset}
+              >
+              Clear
+              </Button>
+              <Button
+              type = 'primary'
+              onClick = {handleSubmit}
+              style = {{left: '10px', fontSize: '15px'}}
+              disabled = {pristine || invalid || this.onRed()}
+              >Add</Button>
+              </div>
+
+              :
+
+              <div className = 'reduxButton'>
+              <Button
+              onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
+              >
+              Delete
+              </Button>
+              <Button
+              type = 'primary'
+              onClick = {handleSubmit}
+              style = {{left: '10px', fontSize: '15px'}}
+              disabled = {pristine || invalid || this.onRed()}
+              >Save</Button>
+              </div>
+             }
+
         </form>
       )
     }
