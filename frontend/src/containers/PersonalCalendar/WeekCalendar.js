@@ -454,7 +454,7 @@ class WeekCalendar extends React.Component{
 
                       ((item.invited.length==0) && item.host.username==this.props.username)?
 
-                      <div style={{float:'left', marginBottom:'40px'}}>
+                      <div style={{float:'left', marginBottom:'20px'}}>
                         <Tooltip placement="bottomLeft" title="View event">
                           <Button shape="circle" size="large" type="primary">
                              <i class="fas fa-eye"></i>
@@ -750,6 +750,7 @@ class WeekCalendar extends React.Component{
     const end = new Date(end_time)
     const eventDay = new Date(day)
     const index = start_index + 1
+
     if (dateFns.isSameWeek(start, end)){
       const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
       const ratio = index + '/' + (index+sameWeekDifference)
@@ -805,14 +806,7 @@ class WeekCalendar extends React.Component{
     // }
     if (startHour === 23 && startMin === 30){
       bottomIndex = 49;
-    } else if (startHour === 23 && startMin === 0) {
-      if (endMin === 30){
-        bottomIndex = 48
-      } else {
-        bottomIndex = 49
-      }
-
-    }else {
+    } else {
       bottomIndex = (2*(endHour)+1)+(endMin/30)
 
     }

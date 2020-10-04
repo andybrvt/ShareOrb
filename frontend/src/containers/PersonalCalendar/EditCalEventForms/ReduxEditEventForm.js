@@ -56,10 +56,11 @@ const renderFriendSelect = (field) => {
   return (
     <Select
     mode="multiple"
-    style={{ width: '60%' }}
+    style={{ width: '50%', marginTop:'15px'}}
     optionLabelProp="label"
     onChange = {field.input.onChange}
     value = {field.input.value}
+    placeholder="Add friends"
         >
     {field.children}
     </Select>
@@ -71,7 +72,22 @@ const renderField = (field) => {
   console.log(field.meta)
   return (
     <span>
-    <Input style={{width:'200px', height:'30px', fontSize:'16px'}}
+    <Input style={{width:'50%', height:'30px', fontSize:'15px'}}
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    style={{display:'inline-block'}}
+    className = 'box'/>
+
+    </span>
+  )
+}
+
+const renderLocationField = (field) => {
+  console.log(field.meta)
+  return (
+    <span>
+    <Input style={{width:'50%',fontSize:'14px'}}
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
@@ -105,7 +121,7 @@ const renderStartDate = (field) => {
     <DatePicker
     onChange = {field.input.onChange}
     value = {field.input.value}
-    style = {{width: '110px'}}
+    style = {{width: '110px', marginRight:'15px'}}
     suffixIcon={<div></div>}
     allowClear = {false}
      />
@@ -140,10 +156,12 @@ const renderStartDateSelect = (field) => {
   console.log(field)
   return (
     <Select
-      // {...field.input}
+      {...field.input}
+      style = {{width: '115px', marginRight:'15px'}}
       onChange = {field.input.onChange}
       value = {field.input.value}
-     className = 'timebox'>
+      className = 'timebox'>
+
     {field.children}
     </Select>
   )
@@ -618,10 +636,10 @@ class ReduxEditEventForm extends React.Component{
       // the submit function in the eventeditpopup. so all the values that are in
       // that form even though it might not seem like it from just this file
       return(
-        <form style={{padding:'20px',width:'500px'}}>
+        <form style={{padding:'25px'}}>
             <div class="bottomRightCircle"></div>
             <div className = 'reduxTitle'>
-              <Button style={{float:'left', marginRight:'15px'}} type="primary" shape="circle" size={'large'}>
+              <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
                 {this.props.dayNum}
               </Button>
               <Field
@@ -643,8 +661,40 @@ class ReduxEditEventForm extends React.Component{
               />
             </div>
 
+            <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
+              <div class="innerContainerPeople">
+                <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
+
+                     <Field
+                       name = 'startDate'
+                       component = {renderStartDate}
+                       onChange = {this.onStartDateChange}
+                       type = 'date'
+                     />
+
+
+                   <Field
+                     style={{display: 'inline-block',float: 'left'}}
+                     name = 'startTime'
+                     component = {renderStartDateSelect}
+                     onChange = {this.handleStartTimeChange}>
+                     {renderStartTime()}
+                   </Field>
+
+                   <Field
+                     style={{display: 'inline-block', marginRight:'15px'}}
+                     name = 'endTime'
+                     onChange = {this.handleEndTimeChange}
+                     component = {renderStartDateSelect}>
+                     {this.renderEndTimeSelect()}
+                   </Field>
+              </div>
+            </div>
+
+
+
             {/* need to implement redux form to people */}
-            <div style={{marginBottom:'10px'}}>
+            <div>
 
               <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
               <Field
@@ -672,54 +722,33 @@ class ReduxEditEventForm extends React.Component{
 
             */}
             {/* location */}
-            <div style={{marginBottom:'10px'}} className = 'reduxLocation'>
-              <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px', marginBottom:'15px'}} ></i>
-              <Field
-              name = 'location'
-              component= {renderField}
-              type= 'text'
+            <div style={{height:'70px'}} className = 'outerContainerPeople'>
+              <div class="innerContainerPeople">
+                <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+                <Field
+                  name = 'location'
+                  placeholder="Location"
+                  component= {renderLocationField}
+                  type= 'text'
 
-              />
-              <AimOutlined style={{fontSize:'15px'}} className = 'aim'/>
+
+                />
+                <AimOutlined style={{marginLeft:'25px', fontSize:'15px'}} className = 'aim'/>
+              </div>
+
+
+              {
+                /* default color picker
               <Field
                 name = 'eventColor'
                 component = {renderEventColor}
                 type = 'text'/>
-            </div>
-
-
-            <div style={{display:'flex'}} className = 'reduxDateRange pointerEvent'>
-              <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
-               <Field
-               name = 'startDate'
-               component = {renderStartDate}
-               onChange = {this.onStartDateChange}
-               type = 'date'
-               style={{display: 'inline-block'}}
-               />
-
-               <div className = 'reduxTimePicker'>
-                   <Field
-                     style={{display: 'inline-block',float: 'left'}}
-                     name = 'startTime'
-                     component = {renderStartDateSelect}
-                     onChange = {this.handleStartTimeChange}>
-                     {renderStartTime()}
-                   </Field>
-
-                   <Field
-                     style={{display: 'inline-block'}}
-                     name = 'endTime'
-                     onChange = {this.handleEndTimeChange}
-                     component = {renderStartDateSelect}>
-                     {this.renderEndTimeSelect()}
-                   </Field>
-               </div>
-
+                */
+            }
             </div>
 
             { this.props.addEvent ?
-              <div className = 'reduxButton'>
+              <div className = 'reduxButton' style={{padding:'10px'}}>
               <Button
               onClick = {reset}
               >
@@ -748,6 +777,7 @@ class ReduxEditEventForm extends React.Component{
               disabled = {pristine || invalid || this.onRed()}
               >Save</Button>
               </div>
+
              }
 
         </form>
