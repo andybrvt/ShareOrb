@@ -87,6 +87,7 @@ class PickEventSyncWeek extends React.Component{
   }
 
   renderWeekCell(events){
+    console.log(events)
     // Render the week cell, so what you want to do is pick the first to be the minDate and
     // the last day will be the maxDate
     // You will loop through each hour of each day and then redner through each day of the week
@@ -120,6 +121,8 @@ class PickEventSyncWeek extends React.Component{
 
      const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
 
+
+
      // The plan for the loop is ot have a while loop that loops thorugh each hour of the same day
      // then go down to the next hour then go through all the days
 
@@ -136,36 +139,173 @@ class PickEventSyncWeek extends React.Component{
           // add it to the toDoStuff which will loopp thorugh each each cell then it will be
           // cleared out again
           for (let item = 0; item<events.length; item++){
-            // console.log(cloneDay)
-            // console.log(new Date(events[item].start_time))
-            // console.log(new Date(hour))
-            // console.log(events[item].start_time)
-            if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
-              // This if statement will get the event on the start day
-            ) {toDoStuff.push(
-              events[item]
-            )}
-            if(dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
-              // This one is to get the box for the end date
-            ) {toDoStuff.push(
-              events[item]
-            )}
-            if(dateFns.isBefore(new Date(events[item].start_time), cloneDay)
-              && (dateFns.isAfter(new Date(events[item].end_time), cloneDay) || dateFns.isSameDay(new Date(events[item].end_time), cloneDay))
-              && dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              // This is for the days that goes from all the times in the start day to the end date bu
-            ) {toDoStuff.push(
-            events[item]
-          )}
-           if ((dateFns.isBefore(new Date(events[item].start_time), cloneDay) || dateFns.isSameDay(new Date(events[item].start_time), cloneDay))
-            && dateFns.isAfter(new Date(events[item].end_time), cloneDay)
-            && dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-            // This is for the reverse of the previous if statement
-          ) {toDoStuff.push(
-          events[item]
-        )}
+            // You gotta make the end time minus one because if you dont it will fill
+            //  up the cells of that time after it so thats not good
+            const startHour = dateFns.getHours(new Date(events[item].start_time))
+            const startMin = dateFns.getMinutes(new Date(events[item].start_time))
+            const endHour = dateFns.getHours(new Date(events[item].end_time))
+            const endMin = dateFns.getMinutes(new Date(events[item].end_time))
+            const curHour = dateFns.getHours(new Date(hour))
+            const curMin = dateFns.getMinutes(new Date(hour))
+
+            const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+            const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
+          // First is to get the start time to be there. Gotta make sure you get
+          // minutes correct
+
+          if (
+            startHour === 23
+          ){
+
+            if(
+             startMin === 30
+             &&
+             startHour === curHour
+             &&
+             startMin === curMin
+             &&
+             (sameDayStart || sameDayEnd)
+           ){
+             console.log('right here')
+             toDoStuff.push(
+               events[item]
+             )
+           }
+            else if(
+              startMin === 0
+              &&
+              startMin === curMin
+              &&
+              startHour === curHour
+              &&
+              (sameDayStart || sameDayEnd)
+            ) {
+
+              toDoStuff.push(
+                events[item]
+              )
+            }
+
+
+            if (endHour === 0){
+              if (
+                startMin === 0
+                &&
+                startHour === curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              } else if(
+                startMin === 30
+                &&
+                startMin === curMin
+                &&
+                startHour === curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+            }
+
+
+          }
+          else {
+            if (
+              startHour === curHour
+              &&
+              startMin === curMin
+              &&
+              (sameDayStart || sameDayEnd)
+
+            ){
+              console.log('test1')
+              toDoStuff.push(
+                events[item]
+              )
+            }
+            if(
+              endHour === curHour
+              &&
+              endMin === 30
+              &&
+              endMin-30 === curMin
+              &&
+              (sameDayStart || sameDayEnd)
+            ){
+              console.log('test1')
+              toDoStuff.push(
+                events[item]
+              )
+            } else if (
+              endMin === 0
+              &&
+              endHour -1 === curHour
+              &&
+              endMin+30 === curMin
+              &&
+              (sameDayStart || sameDayEnd)
+            ){
+              console.log('test1')
+              toDoStuff.push(
+                events[item]
+              )
+            }
+
+            if(
+              startMin === 30
+
+            ){
+              if(
+                startHour < curHour
+                &&
+                endHour > curHour
+                &&
+                (0 === curMin
+                ||
+                30 === curMin)
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                console.log('test1')
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+            } else if (
+              startMin === 0
+
+            ){
+              if (
+                startHour <= curHour
+                &&
+                endHour> curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+            }
+
+
+          }
+
+          // RENDER THE VERY FIRST CELL OF THE START TIME
+
+
+
+
+
           }
 
           // You can always have access to the events, you just got to loop through
@@ -204,7 +344,7 @@ class PickEventSyncWeek extends React.Component{
        counter = counter + 7
        days = []
        date = minDate
-       hour = dateFns.addHours(hour, 1)
+       hour = dateFns.addMinutes(hour, 30)
      }
 
      return <div className = 'body'>{hours}</div>
@@ -244,7 +384,11 @@ class PickEventSyncWeek extends React.Component{
     // stuff and then pass it into the backend into the consumer then create the new notificaiton
     // then group send it, then pass into redux in the front end (make sure to crate the callbacks)
     // The value includes
+
+    // IN PROGRESS OF CHECKING
     console.log(value)
+    console.log(this.props.currentUser)
+    console.log(this.props.userFriend)
     if (this.state.selectedDate === null){
       throw new SubmissionError({
         _error: '*Please pick a date'
@@ -253,16 +397,24 @@ class PickEventSyncWeek extends React.Component{
       const notificationId = this.props.notificationId
       const startTime = this.state.selectedDate
       const endTime = dateFns.addHours(startTime, 1)
+
+      // For submitEvent object:
+      // title, value, location, event color will just be strings
+      // person, and invited will be a list of usernames
+      // repeatCondition will be none
+      // the host will the id of the actor
       const submitEvent = {
         command: 'add_sync_event',
         title: value.title,
+        person: [this.props.currentUser, this.props.userFriend],
+        invited: [this.props.userFriend],
         content: value.content,
         location: value.location,
         eventColor: value.eventColor,
         startDate: startTime,
         endDate: endTime,
-        currentUser: this.props.currentUser,
-        userFriend: this.props.userFriend
+        repeatCondition: "none",
+        host: this.props.id,
       }
       const submitNotification = {
         command: 'send_new_event_sync_notification',
@@ -275,12 +427,12 @@ class PickEventSyncWeek extends React.Component{
       // event for both parties
       CalendarEventWebSocketInstance.sendEvent(submitEvent);
       // This is to send a notification to the other person that an event was choosen
-      NotificationWebSocketInstance.sendNotification(submitNotification)
-      this.props.closePickEventSyncModal()
-      // This is just to delete the notificaiton
-      authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
-      this.props.deleteNotification(notificationId)
-      this.openNotification('bottomLeft', this.state.selectedDate)
+      // NotificationWebSocketInstance.sendNotification(submitNotification)
+      // this.props.closePickEventSyncModal()
+      // // This is just to delete the notificaiton
+      // authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+      // this.props.deleteNotification(notificationId)
+      // this.openNotification('bottomLeft', this.state.selectedDate)
     }
   }
 
@@ -339,7 +491,8 @@ const mapStateToProps = state => {
     filterEvent: state.eventSync.filterEvent,
     currentUser: state.auth.username,
     userFriend: state.eventSync.userFriend,
-    notificationId: state.eventSync.notificationId
+    notificationId: state.eventSync.notificationId,
+    id: state.auth.id,
   }
 }
 

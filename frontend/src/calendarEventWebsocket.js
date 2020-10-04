@@ -121,7 +121,8 @@ class WebSocketCalendarEvent {
   }
 
   sendEvent (data){
-    // This is used to send the notification into the backend
+    // This is used to send the notification into the backend and add in an
+    // event sync event
     console.log('send_event')
     console.log(data)
 
