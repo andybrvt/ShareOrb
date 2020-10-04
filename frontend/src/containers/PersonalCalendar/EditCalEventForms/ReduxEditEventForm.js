@@ -56,13 +56,14 @@ const renderFriendSelect = (field) => {
   return (
     <Select
     mode="multiple"
-    style={{ width: '50%', marginTop:'15px'}}
+    style={{ width: '50%', marginTop:'20px'}}
     optionLabelProp="label"
     onChange = {field.input.onChange}
     value = {field.input.value}
     placeholder="Add friends"
         >
-    {field.children}
+    {field.children} sadfsdaf
+
     </Select>
   )
 
@@ -172,10 +173,11 @@ const renderEventColor = (field) => {
   // This is just used to render the color of the event
   return (
     <Input
+    style = {{width: '45px', marginRight:'15px'}}
     type = 'color'
     className = 'reduxColor'
     name = 'eventColor'
-    defaultValue = '#01D4F4'
+    defaultValue = '#eb2f96'
     {...field.input}/>
   )
 }
@@ -637,7 +639,6 @@ class ReduxEditEventForm extends React.Component{
       // that form even though it might not seem like it from just this file
       return(
         <form style={{padding:'25px'}}>
-            <div class="bottomRightCircle"></div>
             <div className = 'reduxTitle'>
               <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
                 {this.props.dayNum}
@@ -706,6 +707,8 @@ class ReduxEditEventForm extends React.Component{
               >
                 {this.renderShareListSelect()}
               </Field>
+
+
               {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
             </div>
 
@@ -733,18 +736,16 @@ class ReduxEditEventForm extends React.Component{
 
 
                 />
-                <AimOutlined style={{marginLeft:'25px', fontSize:'15px'}} className = 'aim'/>
-              </div>
+              <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
+                <Field
+                    name = 'eventColor'
+                    component = {renderEventColor}
+                    type = 'text'
+                />
+            </div>
 
 
-              {
-                /* default color picker
-              <Field
-                name = 'eventColor'
-                component = {renderEventColor}
-                type = 'text'/>
-                */
-            }
+
             </div>
 
             { this.props.addEvent ?
