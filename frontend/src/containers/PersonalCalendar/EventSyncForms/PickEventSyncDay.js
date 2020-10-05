@@ -89,11 +89,13 @@ class PickEventSyncDay extends React.Component{
     // Render the week cell, so what you want to do is pick the first to be the minDate and
     // the last day will be the maxDate
     // You will loop through each hour of each day and then redner through each day of the week
-    const minDate = new Date(this.props.minDate);
-    const maxDate = new Date(this.props.maxDate);
+
+    // Probally have to fix this later when we readjust the timezone issue.
+    const minDate = dateFns.addHours(new Date(this.props.minDate),7);
+    const maxDate = dateFns.addHours(new Date(this.props.maxDate),7);
     // This will be different from the calendar week calendar in that it doesn't start from the beginning
     // of the week but rather it will start from beginning of the date range
-
+    console.log(this.props.minDate, this.props.maxDate)
     console.log(minDate, maxDate)
     const hourFormat = 'h a'
     const dayFormat = 'd MMMM'
@@ -106,9 +108,11 @@ class PickEventSyncDay extends React.Component{
      let days = []
      // You will need the start day and the start hour
      // The start day will be the minDate
-     let date = maxDate
+     let date = minDate
      const startHourDay = dateFns.startOfDay(date);
      const endHourDay = dateFns.endOfDay(date);
+
+     console.log(startHourDay)
 
      let formattedDay = '';
 
@@ -141,10 +145,13 @@ class PickEventSyncDay extends React.Component{
             const curHour = dateFns.getHours(new Date(hour))
             const curMin = dateFns.getMinutes(new Date(hour))
 
+
             const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
             const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
 
             console.log(startHour, startMin)
+            console.log(sameDayStart, sameDayEnd, startHour, startMin,new Date(events[item].start_time), cloneDay )
+
             if (
               startHour === 23
             ){
@@ -328,9 +335,9 @@ class PickEventSyncDay extends React.Component{
           {days}
          </div>
        )
-       counter = counter + 7
+       counter = counter + 1
        days = []
-       date = maxDate
+       date = minDate
        hour = dateFns.addMinutes(hour, 30)
      }
 
@@ -359,8 +366,12 @@ class PickEventSyncDay extends React.Component{
 
   color = (position) => {
     // Just the color of the selected time on the pick event sync calendar
+    console.log(position)
+    if(this.state.active === position-1){
+      return "#91d5ff"
+    }
     if (this.state.active === position){
-      return 'blue';
+      return '#91d5ff';
     }
     return '';
   }
@@ -380,16 +391,28 @@ class PickEventSyncDay extends React.Component{
       const notificationId = this.props.notificationId
       const startTime = this.state.selectedDate
       const endTime = dateFns.addHours(startTime, 1)
+      let content = ""
+      let location = ""
+
+      if(value.content){
+        content = value.content
+      }
+      if(value.location){
+        location = value.location
+      }
+
       const submitEvent = {
         command: 'add_sync_event',
         title: value.title,
-        content: value.content,
-        location: value.location,
+        person: [this.props.currentUser, this.props.userFriend],
+        invited: [this.props.userFriend],
+        content: content,
+        location: location,
         eventColor: value.eventColor,
         startDate: startTime,
         endDate: endTime,
-        currentUser: this.props.currentUser,
-        userFriend: this.props.userFriend
+        repeatCondition: "none",
+        host: this.props.id,
       }
       const submitNotification = {
         command: 'send_new_event_sync_notification',
@@ -465,6 +488,7 @@ const mapStateToProps = state => {
     maxDate: state.eventSync.maxDate,
     filterEvent: state.eventSync.filterEvent,
     currentUser: state.auth.username,
+    id: state.auth.id,
     userFriend: state.eventSync.userFriend,
     notificationId: state.eventSync.notificationId
   }
