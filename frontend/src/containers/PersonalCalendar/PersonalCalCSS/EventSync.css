@@ -14,20 +14,35 @@
 
 .eventSyncForm .radioCon .dayEsync {
   /* background-color:  red; */
-  height: 60px;
-  width: 460px;
-  border-radius: 25px;
-  /* border: none; */
+  height: 70px;
+
+  width: 400px;
   text-align: center;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+  /* border-radius: 25px; */
   /* border-left: 1px solid lightgrey */
 
 }
 
-.eventSyncForm .radioCon .dayEsync:hover{
-  background-color: gainsboro;
-  color: white;
+
+
+.buttonGrow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
 }
+.buttonGrow:hover, .buttonGrow:focus, .buttonGrow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 
 
 .eventSyncForm .radioCon .dayEsync .syncTitle{
@@ -36,22 +51,21 @@
 
 .eventSyncForm .radioCon .weekEsync {
   /* background-color: red; */
-  height: 60px;
-  width: 460px;
+  height: 70px;
+
+  width: 400px;
   text-align: center;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-  border-radius: 25px;
+
+  /* border-radius: 25px; */
   /* border: none; */
 }
 
-.eventSyncForm .radioCon .weekEsync:hover{
-  background-color: gainsboro;
-  color: white;
-}
+
 
 .eventSyncForm .radioCon .weekEsync:hover{
-  background-color: gainsboro;
-  color: white;
+  box-shadow:
+    0 0 0 0 var(--hover),
+    inset 6em 3.5em 0 0 var(--hover);
 }
 
 .eventSyncForm .radioCon .weekEsync .syncTitle {
@@ -59,7 +73,7 @@
 }
 
 .eventSyncForm .friendListCon .friendList{
-  margin-top: 25px;
+  margin-top: 10px;
   margin-bottom: 25px;
   border: 1px solid #e8e8e8;
   border-radius: 4px;

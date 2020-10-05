@@ -479,7 +479,7 @@ class WeekCalendar extends React.Component{
                       <div>
                         <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
 
-                        <div class="outerContainerPeople">
+                        <div style={{marginTop:'45px'}} class="outerContainerPeople">
 
                           <div class="innerContainerPeople" style={{display:'inline-block'}}>
 

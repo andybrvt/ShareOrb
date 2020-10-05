@@ -45,7 +45,7 @@
   border-radius: 25px;
 
 }
-
+/* highlight like */
 .LikeCommentHover:hover {
   color: #3399FF;
   text-decoration: underline;

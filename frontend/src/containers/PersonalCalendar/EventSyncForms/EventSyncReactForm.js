@@ -132,13 +132,15 @@ class EventSyncReactForm extends React.Component {
       <Form
       onSubmit = {this.handleSubmit}
       className = 'eventSyncForm'
+      style={{padding:'20px'}}
       >
 
       <Form.Item className = 'radioCon'>
         <Radio.Group onChange={this.onChange} value={this.state.endDate}>
           <Radio.Button
 
-          className = 'dayEsync'
+          className = 'dayEsync buttonGrow'
+          style={{marginBottom:'20px'}}
           value={this.renderEndDay('day')}>
             <span className = 'syncTitle'>Day Event Sync </span>
             <br />
@@ -155,9 +157,10 @@ class EventSyncReactForm extends React.Component {
             })
             </span>
           </Radio.Button>
-          <br />
+
           <Radio.Button
-          className = 'weekEsync'
+          className = 'weekEsync buttonGrow'
+          style={{marginBottom:'20px'}}
           value={this.renderEndDay('week')}
           >
             <span className = 'syncTitle'> Week Event Sync </span>
@@ -179,11 +182,14 @@ class EventSyncReactForm extends React.Component {
       </Form.Item>
       <Form.Item className = 'friendListCon'>
       <Input
+        style={{left:'5%', width:'400px'}}
         value = {this.state.search}
         onChange = {this.onHandleChange}
         type = 'text'
         placeholder = 'Search Friends'
        />
+
+
        <List
             className = 'friendList'
             dataSource={friends}
