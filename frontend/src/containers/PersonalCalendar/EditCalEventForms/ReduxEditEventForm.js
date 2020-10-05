@@ -62,7 +62,7 @@ const renderFriendSelect = (field) => {
     value = {field.input.value}
     placeholder="Add friends"
         >
-    {field.children} sadfsdaf
+    {field.children}
 
     </Select>
   )
@@ -117,7 +117,7 @@ const renderTextArea = (field) => {
 // <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
 
 const renderStartDate = (field) => {
-  console.log(field.meta)
+  console.log(field)
   return (
     <DatePicker
     onChange = {field.input.onChange}
@@ -130,7 +130,7 @@ const renderStartDate = (field) => {
 }
 
 const renderEndDate = (field) => {
-  console.log(field.meta)
+  console.log(field)
   return (
     <DatePicker
     onChange = {field.input.onChange}
@@ -157,7 +157,7 @@ const renderStartDateSelect = (field) => {
   console.log(field)
   return (
     <Select
-      {...field.input}
+      
       style = {{width: '115px', marginRight:'15px'}}
       onChange = {field.input.onChange}
       value = {field.input.value}
@@ -275,6 +275,9 @@ class ReduxEditEventForm extends React.Component{
     // startTime value just the endTime value will be affected
 
 
+    console.log(value)
+    change('startTime', value)
+
     // Like every other time related events we have to converted all
     let startHour = parseInt(value.substring(0,2))
     let startMin = parseInt(value.substring(3,5))
@@ -284,6 +287,8 @@ class ReduxEditEventForm extends React.Component{
     let endTime = ''
 
     console.log(startHour)
+
+
 
     // These if statement is used to change the startTime values to the 1-24 hour format
     if(value.includes('PM')){
@@ -678,7 +683,8 @@ class ReduxEditEventForm extends React.Component{
                      style={{display: 'inline-block',float: 'left'}}
                      name = 'startTime'
                      component = {renderStartDateSelect}
-                     onChange = {this.handleStartTimeChange}>
+                     onChange = {this.handleStartTimeChange}
+                     >
                      {renderStartTime()}
                    </Field>
 
@@ -686,7 +692,8 @@ class ReduxEditEventForm extends React.Component{
                      style={{display: 'inline-block', marginRight:'15px'}}
                      name = 'endTime'
                      onChange = {this.handleEndTimeChange}
-                     component = {renderStartDateSelect}>
+                     component = {renderStartDateSelect}
+                     >
                      {this.renderEndTimeSelect()}
                    </Field>
               </div>

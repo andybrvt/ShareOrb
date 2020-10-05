@@ -71,7 +71,7 @@ class EditEventPopUp extends React.Component {
     const start_time = this.timeConvert(values.startTime)
     const end_time = this.timeConvert(values.endTime)
 
-    console.log(start_time, end_time)
+    console.log(values.startTime, values.endTime)
 
     start_date = dateFns.addHours(start_date, start_time.firstHour)
     start_date = dateFns.addMinutes(start_date, start_time.firstMin)
@@ -79,6 +79,8 @@ class EditEventPopUp extends React.Component {
 
     end_date = dateFns.addHours(end_date, end_time.firstHour)
     end_date = dateFns.addMinutes(end_date, end_time.firstMin)
+
+    console.log(end_date)
     const instance_end_date = dateFns.format(end_date, 'yyyy-MM-dd HH:mm:ss')
     // const start_time = dateFns.format(new Date(moment(values.start_time)), 'yyyy-MM-dd hh:mm:ss')
     // const end_time = dateFns.format(new Date(moment(values.end_time)), 'yyyy-MM-dd hh:mm:ss')

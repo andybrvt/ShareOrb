@@ -54,9 +54,9 @@ class PickEventSyncDay extends React.Component{
           className = 'syncCol col-center '
           key = {i}
           >
-            {dateFns.format(dateFns.addDays(maxDate, i), dateFormat)}
+            {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
             <br />
-            {dateFns.format(dateFns.addDays(maxDate, i), dayFormat)}
+            {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
           </div>
         )
         cloneMaxDate = dateFns.addDays(cloneCloneMaxDate, 1)
@@ -89,10 +89,12 @@ class PickEventSyncDay extends React.Component{
     // Render the week cell, so what you want to do is pick the first to be the minDate and
     // the last day will be the maxDate
     // You will loop through each hour of each day and then redner through each day of the week
-    const minDate = dateFns.addDays(new Date(this.props.minDate),1);
-    const maxDate = dateFns.addDays(new Date(this.props.maxDate),1);
+    const minDate = new Date(this.props.minDate);
+    const maxDate = new Date(this.props.maxDate);
     // This will be different from the calendar week calendar in that it doesn't start from the beginning
     // of the week but rather it will start from beginning of the date range
+
+    console.log(minDate, maxDate)
     const hourFormat = 'h a'
     const dayFormat = 'd MMMM'
     // This hour list will hold 24 items, each list will be for each hour of each day 5x24
@@ -132,36 +134,165 @@ class PickEventSyncDay extends React.Component{
           // add it to the toDoStuff which will loopp thorugh each each cell then it will be
           // cleared out again
           for (let item = 0; item<events.length; item++){
-            // console.log(cloneDay)
-            // console.log(new Date(events[item].start_time))
-            // console.log(new Date(hour))
-            // console.log(events[item].start_time)
-            if(dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
-              // This if statement will get the event on the start day
-            ) {toDoStuff.push(
-              events[item]
-            )}
-            if(dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-              && dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
-              // This one is to get the box for the end date
-            ) {toDoStuff.push(
-              events[item]
-            )}
-            if(dateFns.isBefore(new Date(events[item].start_time), cloneDay)
-              && (dateFns.isAfter(new Date(events[item].end_time), cloneDay) || dateFns.isSameDay(new Date(events[item].end_time), cloneDay))
-              && dateFns.getHours(new Date(events[item].start_time)) === dateFns.getHours(new Date(hour))
-              // This is for the days that goes from all the times in the start day to the end date bu
-            ) {toDoStuff.push(
-            events[item]
-          )}
-           if ((dateFns.isBefore(new Date(events[item].start_time), cloneDay) || dateFns.isSameDay(new Date(events[item].start_time), cloneDay))
-            && dateFns.isAfter(new Date(events[item].end_time), cloneDay)
-            && dateFns.getHours(new Date(events[item].end_time)) === dateFns.getHours(new Date(hour))
-            // This is for the reverse of the previous if statement
-          ) {toDoStuff.push(
-          events[item]
-        )}
+            const startHour = dateFns.getHours(new Date(events[item].start_time))
+            const startMin = dateFns.getMinutes(new Date(events[item].start_time))
+            const endHour = dateFns.getHours(new Date(events[item].end_time))
+            const endMin = dateFns.getMinutes(new Date(events[item].end_time))
+            const curHour = dateFns.getHours(new Date(hour))
+            const curMin = dateFns.getMinutes(new Date(hour))
+
+            const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+            const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
+
+            console.log(startHour, startMin)
+            if (
+              startHour === 23
+            ){
+
+              if(
+               startMin === 30
+               &&
+               startHour === curHour
+               &&
+               startMin === curMin
+               &&
+               (sameDayStart || sameDayEnd)
+             ){
+               console.log('right here')
+               toDoStuff.push(
+                 events[item]
+               )
+             }
+              else if(
+                startMin === 0
+                &&
+                startMin === curMin
+                &&
+                startHour === curHour
+                &&
+                (sameDayStart || sameDayEnd)
+              ) {
+
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+
+              if (endHour === 0){
+                if (
+                  startMin === 0
+                  &&
+                  startHour === curHour
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ){
+                  toDoStuff.push(
+                    events[item]
+                  )
+                } else if(
+                  startMin === 30
+                  &&
+                  startMin === curMin
+                  &&
+                  startHour === curHour
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ){
+                  toDoStuff.push(
+                    events[item]
+                  )
+                }
+
+              }
+
+
+            }
+            else {
+              if (
+                startHour === curHour
+                &&
+                startMin === curMin
+                &&
+                (sameDayStart || sameDayEnd)
+
+              ){
+                console.log('test1')
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+              if(
+                endHour === curHour
+                &&
+                endMin === 30
+                &&
+                endMin-30 === curMin
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                console.log('test1')
+                toDoStuff.push(
+                  events[item]
+                )
+              } else if (
+                endMin === 0
+                &&
+                endHour -1 === curHour
+                &&
+                endMin+30 === curMin
+                &&
+                (sameDayStart || sameDayEnd)
+              ){
+                console.log('test1')
+                toDoStuff.push(
+                  events[item]
+                )
+              }
+
+              if(
+                startMin === 30
+
+              ){
+                if(
+                  startHour < curHour
+                  &&
+                  endHour > curHour
+                  &&
+                  (0 === curMin
+                  ||
+                  30 === curMin)
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ){
+                  console.log('test1')
+                  toDoStuff.push(
+                    events[item]
+                  )
+                }
+
+              } else if (
+                startMin === 0
+
+              ){
+                if (
+                  startHour <= curHour
+                  &&
+                  endHour> curHour
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ){
+                  toDoStuff.push(
+                    events[item]
+                  )
+                }
+
+              }
+
+
+            }
+
+
           }
 
           // You can always have access to the events, you just got to loop through
