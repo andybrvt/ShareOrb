@@ -157,7 +157,7 @@ const renderStartDateSelect = (field) => {
   console.log(field)
   return (
     <Select
-      
+      // {...field.input}
       style = {{width: '115px', marginRight:'15px'}}
       onChange = {field.input.onChange}
       value = {field.input.value}
