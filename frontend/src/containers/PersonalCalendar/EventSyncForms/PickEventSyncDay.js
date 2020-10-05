@@ -85,6 +85,7 @@ class PickEventSyncDay extends React.Component{
   }
 
   renderWeekCell(events){
+    console.log(events)
     // Render the week cell, so what you want to do is pick the first to be the minDate and
     // the last day will be the maxDate
     // You will loop through each hour of each day and then redner through each day of the week
@@ -199,7 +200,7 @@ class PickEventSyncDay extends React.Component{
        counter = counter + 7
        days = []
        date = maxDate
-       hour = dateFns.addHours(hour, 1)
+       hour = dateFns.addMinutes(hour, 30)
      }
 
      return <div className = 'body'>{hours}</div>

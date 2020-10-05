@@ -375,6 +375,7 @@ class NotificationsDropDown extends React.Component{
                 width: '200px',
                 height: '20px'
               }}
+              // Start here tomorrow
               onClick = {() => this.props.openPickEventSyncModal(
                 notifications[i].recipient,
                 notifications[i].actor.username,

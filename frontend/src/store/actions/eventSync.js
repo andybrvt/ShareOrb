@@ -19,13 +19,14 @@ export const closeEventSyncModal = () => {
 }
 
 export const openPickEventSyncModal = (user, userFriend, minDate, maxDate, notificationId) => {
+  // FIX THIS SHIT HERE, THE DATE AND TIME IS NOT WORKING PROPERLY
   return {
     type: actionTypes.OPEN_PICK_EVENT_SYNC_MODAL,
     user: user,
     userFriend: userFriend,
     minDate: minDate,
     maxDate: maxDate,
-    notificationId: notificationId 
+    notificationId: notificationId
 
 
   }

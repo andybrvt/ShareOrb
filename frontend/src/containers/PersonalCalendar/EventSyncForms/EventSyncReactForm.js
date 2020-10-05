@@ -17,6 +17,7 @@ class EventSyncReactForm extends React.Component {
     // The time value will be whichever time range decide, 1 for week range
     // 2 for the next day
     this.state = {
+      rangeChoice: '',
       endDate: '',
       friend: '',
       search: '',
@@ -36,8 +37,13 @@ class EventSyncReactForm extends React.Component {
 
   onChange = e => {
     console.log(e.target)
+    const startDate = dateFns.startOfDay(this.state.startDate)
+    // console.log(startDate)
+    // console.log(new Date(e.target.value))
+
     this.setState({
-      endDate: e.target.value,
+      rangeChoice: e.target.value.rangeChoice,
+      endDate: e.target.value.endDate,
     });
   };
 
@@ -76,14 +82,25 @@ class EventSyncReactForm extends React.Component {
     const startDate = dateFns.startOfDay(this.state.startDate)
 
     let endDate = ''
+    let dayStartDate = ''
+    let statePack = {}
     if (range === 'week' ) {
       endDate = dateFns.addWeeks(startDate,1)
       endDate = dateFns.format(endDate, 'yyyy-MM-dd')
-      return endDate
+      statePack = {
+        rangeChoice: 'week',
+        endDate: endDate
+      }
+      return statePack
     } else if (range === 'day'){
-      endDate = dateFns.addDays(startDate, 1)
+      endDate = dateFns.addDays(startDate, 2)
       endDate = dateFns.format(endDate, 'yyyy-MM-dd')
-      return endDate
+      statePack = {
+        rangeChoice: 'day',
+        endDate: endDate
+      }
+      return statePack
+
     }
   }
 
@@ -97,11 +114,22 @@ class EventSyncReactForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const submitContent = {
-      friend: this.state.friend,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate
+    let submitContent = {}
+    if (this.state.rangeChoice === 'day'){
+      const newStartDate = dateFns.addDays(this.state.startDate, 1)
+      submitContent = {
+        friend: this.state.friend,
+        startDate: newStartDate,
+        endDate: this.state.endDate
+      }
+    } else if (this.state.rangeChoice === 'week'){
+      submitContent = {
+        friend: this.state.friend,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
+      }
     }
+    console.log(submitContent)
     this.onClear()
     this.props.onSubmit(submitContent)
 
@@ -144,12 +172,8 @@ class EventSyncReactForm extends React.Component {
           value={this.renderEndDay('day')}>
             <span className = 'syncTitle'>Day Event Sync </span>
             <br />
-            <span>({
-              dateFns.format(new Date(), 'MM/dd')
-            } </span>
-            -
             <span>
-            {
+            ({
               dateFns.format(
                 dateFns.addDays(new Date(),1),
                 'MM/dd'

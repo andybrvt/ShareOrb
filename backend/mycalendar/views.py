@@ -15,6 +15,8 @@ from django.db.models import Q
 
 # This is for event sync btw
 
+# Example http://127.0.0.1:8000/mycalendar/testEvents/?date_min=2020-10-4&date_max=2020-10-5
+
 # So baiscally when filtering out data, in the url you can do a param (Example:
 #  url/?q=something) and then from there you can do a request.GET.get that param
 # that param cna be passed in from the axios.GET, by adding it in like the post but instead
