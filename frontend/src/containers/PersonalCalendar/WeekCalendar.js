@@ -377,7 +377,16 @@ class WeekCalendar extends React.Component{
 
                   </p>
 
-                   <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
+                    {
+                      (item.person.length-1>0)?
+
+                      <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> public</Tag>
+                      :
+                      <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
+                    }
+
+
+
 
                   <span style={{color:'black', marginBottom:'10px'}}>
                   {
@@ -398,14 +407,14 @@ class WeekCalendar extends React.Component{
                     {dateFns.format(new Date(item.start_time), 'M')}/
 
                     {dateFns.format(new Date(item.start_time), 'd')}
+                    &nbsp;
                     <span>
+                      {dateFns.format(cloneDay, 'iiii')}
                       &nbsp;
-                      ed
-                      &nbsp;
+
                     </span>
                     <span >
-                      @
-                      &nbsp;
+
                     </span>
                     <span>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
@@ -428,18 +437,51 @@ class WeekCalendar extends React.Component{
                       </span>
 
                       :
-                      <div></div>
+                      <div>
+
+                        {
+                          (item.repeatCondition=="daily")?
+                          <span>
+                            <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                            Occurs every day
+
+                          </span>
+                          :
+                          <div>
+
+
+                            {
+                              (item.repeatCondition=="monthly")?
+                              <span>
+                                <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                                Occurs every month
+
+                              </span>
+                              :
+                              <div></div>
+                            }
+
+
+
+
+                          </div>
+                        }
+                     </div>
 
                     }
 
                     <div>
                       <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
-                      {item.person.length} people
+                      {
+                        (item.person.length==1)?
+                          <span> Just You</span>
 
+                        :
+                            <span>   {item.person.length} people</span>
+
+                      }
                     </div>
                   </p>
-
-
 
                   {/* if person is host*
                     item.host
@@ -452,34 +494,16 @@ class WeekCalendar extends React.Component{
 
 
 
-                      ((item.invited.length==0) && item.host.username==this.props.username)?
+                      (item.person.length==1 && item.host.username==this.props.username)?
 
-                      <div style={{float:'left', marginBottom:'20px'}}>
-                        <Tooltip placement="bottomLeft" title="View event">
-                          <Button shape="circle" size="large" type="primary">
-                             <i class="fas fa-eye"></i>
-                          </Button>
-                        </Tooltip>
-                        <Tooltip placement="bottomLeft" title="Decline Invite">
-                          <Button
-                          shape="circle"
-                          type="primary"
-                          size="large"
-                          danger
-                          style={{marginLeft:'10px'}}
-                          onClick = {() => this.onDeclineShare(item.id)}
-                          >
-                             <i class="fas fa-times"></i>
-                          </Button>
-                        </Tooltip>
-                      </div>
+                      <div></div>
 
                       :
 
                       <div>
                         <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
 
-                        <div style={{marginTop:'45px'}} class="outerContainerPeople">
+                        <div style={{marginTop:'50px'}} class="outerContainerPeople">
 
                           <div class="innerContainerPeople" style={{display:'inline-block'}}>
 
@@ -503,9 +527,9 @@ class WeekCalendar extends React.Component{
                                 status="exception"
                                 <Progress percent={50} size="small" status="active" />
                                */}
-
-                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="medium" />
-                             <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="medium" status="exception" />
+                             <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
+                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
+                             <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
 
                            </span>
                         </div>
@@ -527,7 +551,7 @@ class WeekCalendar extends React.Component{
                                 style={{marginLeft:'10px'}}
                                 onClick = {() => this.onAcceptShare(item.id)}
                                 >
-                                   <i class="fas fa-check"></i>
+                                   <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
                                 </Button>
                               </Tooltip>
                               <Tooltip placement="bottomLeft" title="Decline Invite">
@@ -539,7 +563,7 @@ class WeekCalendar extends React.Component{
                                 style={{marginLeft:'10px'}}
                                 onClick = {() => this.onDeclineShare(item.id)}
                                 >
-                                   <i class="fas fa-times"></i>
+                                   <i class="fas fa-user-times"></i>
                                 </Button>
                               </Tooltip>
                             </div>
@@ -641,7 +665,6 @@ class WeekCalendar extends React.Component{
             <EditEventPopUp
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
-            dayNum={dateFns.format(cloneDay, 'd')}
             />
             </div>}>
 
@@ -750,7 +773,6 @@ class WeekCalendar extends React.Component{
     const end = new Date(end_time)
     const eventDay = new Date(day)
     const index = start_index + 1
-
     if (dateFns.isSameWeek(start, end)){
       const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
       const ratio = index + '/' + (index+sameWeekDifference)
@@ -813,7 +835,7 @@ class WeekCalendar extends React.Component{
         bottomIndex = 49
       }
 
-    } else {
+    }else {
       bottomIndex = (2*(endHour)+1)+(endMin/30)
 
     }
