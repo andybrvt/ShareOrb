@@ -52,12 +52,26 @@ class EventSyncModal extends React.Component{
     const endDate = dateFns.format(
       dateFns.addHours(new Date(info.endDate),7), 'MM/dd/yyyy')
     const recipient = this.capitalize(info.recipient.username)
-  notification.info({
-    message: `Event Sync Request Sent to `+ recipient ,
-    description:
-    'Request for event sync from: '+ startDate + ' to ' + endDate,
-    placement,
-    });
+
+    console.log(startDate, endDate)
+    const dateDiff = dateFns.differenceInCalendarDays(new Date(endDate), new Date(startDate))
+
+    if (dateDiff === 1){
+      notification.info({
+      message: `Event Sync Request Sent to `+ recipient ,
+      description:
+      'Request for event sync for: '+ startDate,
+      placement,
+      });
+    } else if(dateDiff === 7){
+      notification.info({
+      message: `Event Sync Request Sent to `+ recipient ,
+      description:
+      'Request for event sync from: '+ startDate + ' to ' + endDate,
+      placement,
+      });
+    }
+
   };
 
 
