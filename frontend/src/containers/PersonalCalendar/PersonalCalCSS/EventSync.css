@@ -16,6 +16,7 @@
   /* background-color:  red; */
   height: 60px;
   width: 460px;
+  border-radius: 25px;
   /* border: none; */
   text-align: center;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
@@ -39,7 +40,7 @@
   width: 460px;
   text-align: center;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
+  border-radius: 25px;
   /* border: none; */
 }
 
@@ -58,11 +59,14 @@
 }
 
 .eventSyncForm .friendListCon .friendList{
+  margin-top: 25px;
+  margin-bottom: 25px;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   overflow: auto;
   padding: 8px 24px;
   height: 300px;
+  left:6%;
 }
 
 .eventSyncForm .friendListCon .friendList .friendItem {

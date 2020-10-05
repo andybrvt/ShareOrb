@@ -1382,6 +1382,8 @@ to make it adjustable */
   transition: .5s ease-in;
 }
 
+
+/* // width of each cell */
 .calendar .scrollBody .backWeekBody {
   margin: 0;
   padding: 0;

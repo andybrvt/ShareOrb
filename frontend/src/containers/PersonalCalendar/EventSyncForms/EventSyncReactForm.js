@@ -65,8 +65,8 @@ class EventSyncReactForm extends React.Component {
         )
       }
     }
+    console.log(friends)
 
-    return friends
   }
 
 
@@ -113,10 +113,12 @@ class EventSyncReactForm extends React.Component {
     console.log(this.props)
     console.log(this.state)
     let friends = this.props.friends
+    console.log(friends)
     let friend = this.state.search.trim().toLowerCase()
     if (friend.length > 0){
       friends = friends.filter(val => val.username.toLowerCase().match(friend))
     }
+
     const radioStyle = {
       display: 'block',
       height: '30px',
@@ -141,14 +143,14 @@ class EventSyncReactForm extends React.Component {
             <span className = 'syncTitle'>Day Event Sync </span>
             <br />
             <span>({
-              dateFns.format(new Date(), 'yyyy-MM-dd')
+              dateFns.format(new Date(), 'MM/dd')
             } </span>
             -
             <span>
             {
               dateFns.format(
                 dateFns.addDays(new Date(),1),
-                'yyyy-MM-dd'
+                'MM/dd'
               )
             })
             </span>
@@ -161,14 +163,14 @@ class EventSyncReactForm extends React.Component {
             <span className = 'syncTitle'> Week Event Sync </span>
             <br />
             <span>
-            ({dateFns.format(new Date(), 'yyyy-MM-dd')}
+            ({dateFns.format(new Date(), 'MM/dd')}
             </span>
             -
             <span>
             {
               dateFns.format(
                 dateFns.addWeeks(new Date(),1),
-                'yyyy-MM-dd'
+                'MM/dd'
               )
             })
             </span>
@@ -185,19 +187,22 @@ class EventSyncReactForm extends React.Component {
        <List
             className = 'friendList'
             dataSource={friends}
+            style={{width:'400px'}}
             renderItem={item => (
               <List.Item
               key={item.username}
               className = {` friendItemHover  ${this.state.friend === item ? 'friendItem' : '' }`}
-              onClick = {() => this.onFriendChange(item)}>
+              onClick = {() => this.onFriendChange(item)}
+
+              >
                 <List.Item.Meta
                   avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    <Avatar src={'http://127.0.0.1:8000'+item.profile_picture} />
                   }
-                  title={<a href="https://ant.design">{this.capitalize(item.username)}</a>}
+                  title={<a href="https://ant.design">{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
+                  description={"@"+item.username}
                   // description={item.email}
                 />
-                <div>Content</div>
               </List.Item>
             )}
           >
@@ -215,7 +220,7 @@ class EventSyncReactForm extends React.Component {
       htmlType = 'submit'
       disabled = {this.state.endDate === ''
       || this.state.friend === '' }
-      block> Sync </Button>
+      block> Check Availabilites </Button>
       </Form.Item>
       </Form>
     )
