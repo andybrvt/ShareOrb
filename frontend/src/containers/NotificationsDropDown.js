@@ -368,10 +368,24 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
+
+              {dateFns.differenceInCalendarDays(
+                new Date(notifications[i].maxDate), new Date(notifications[i].minDate)) === 1
+               ?
+
               <span className = 'notificationWords'>
               <b>{this.capitalize(notifications[i].actor.username)} </b>
-               accepted your event sync request from:
-               <b>
+               accepted your event sync request for: <b>
+              {dateFns.format(
+                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+              </b>
+              </span>
+
+              :
+
+              <span className = 'notificationWords'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+               accepted your event sync request from: <b>
               {dateFns.format(
                 dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
                 -
@@ -379,6 +393,11 @@ class NotificationsDropDown extends React.Component{
                 dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
               </b>
               </span>
+
+            }
+
+
+
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
 
