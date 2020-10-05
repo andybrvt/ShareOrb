@@ -260,17 +260,31 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotification'>
-            <span className ='notificationWords'>
-            <b>{this.capitalize(notifications[i].actor.username)} </b>
-            wants to event sync with you from:
-            <b>
-            {dateFns.format(
-              dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
-              -
+
+            {dateFns.differenceInCalendarDays(
+              new Date(notifications[i].maxDate),new Date(notifications[i].minDate)) === 1
+              ? <span className ='notificationWords'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+              wants to event sync with you for: <b>
               {dateFns.format(
-                dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
-            </b>
-            </span>
+                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+              </b>
+              </span>
+
+              :
+
+              <span className ='notificationWords'>
+              <b>{this.capitalize(notifications[i].actor.username)} </b>
+              wants to event sync with you from: <b>
+              {dateFns.format(
+                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+                -
+                {dateFns.format(
+                  dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
+              </b>
+              </span>
+            }
+
             <br />
             <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
 
