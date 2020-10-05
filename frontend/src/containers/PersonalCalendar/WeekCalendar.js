@@ -496,7 +496,19 @@ class WeekCalendar extends React.Component{
 
                       (item.person.length==1 && item.host.username==this.props.username)?
 
-                      <div></div>
+                      <span style={{float:'right', padding:'10px', marginTop:'-20px'}}>
+
+                        <Tooltip placement="bottomLeft" title="View event">
+                          <Button shape="circle" size="large" type="primary">
+                             <i class="fas fa-eye"></i>
+                          </Button>
+                        </Tooltip>
+                        <Tooltip placement="bottomLeft" title="Remove event">
+                          <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                             <i class="fas fa-times"></i>
+                          </Button>
+                        </Tooltip>
+                      </span>
 
                       :
 
@@ -529,7 +541,14 @@ class WeekCalendar extends React.Component{
                                */}
                              <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
                              <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
-                             <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
+                             {
+                               (Math.floor(100*(item.decline.length/item.invited.length))<100)?
+
+                                <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small"/>
+                               :
+                               <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
+                             }
+
 
                            </span>
                         </div>
@@ -537,10 +556,15 @@ class WeekCalendar extends React.Component{
 
 
                           <Avatar.Group>
-                            <div style={{float:'right', marginRight:'100px'}}>
+                            <div style={{float:'right', marginRight:'50px'}}>
                               <Tooltip placement="bottomLeft" title="View event">
                                 <Button shape="circle" size="large" type="primary">
                                    <i class="fas fa-eye"></i>
+                                </Button>
+                              </Tooltip>
+                              <Tooltip placement="bottomLeft" title="Remove event">
+                                <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                                   <i class="fas fa-times"></i>
                                 </Button>
                               </Tooltip>
                               <Tooltip placement="bottomLeft" title="Accept Invite">
