@@ -141,7 +141,7 @@ main {
 .weekCalContainer {
   position: relative;
   right: 180px;
-  width: 1395px;
+  width: 1595px;
   /* height: 1000px; */
   bottom: 100px;
   /* background-color: yellow; */
@@ -161,16 +161,17 @@ main {
 
 .testBox{
   overflow:hidden;
-  width: 1360px;
+  width: 1460px;
+
   /* background-color: red; */
 }
 
 .weekDayFlex-Container{
   display: flex;
   overflow: auto;
-  /* background-color: red; */
+  background-color: red;
   /* overflow-y: hidden; */
-  width: 1370px;
+  width: 1570px;
   height: 780px;
   border-top: 2px solid;
   border-color: darkgrey;
@@ -569,7 +570,7 @@ main {
   /* border-top: 1px solid var(--border-color); */
   /* border-bottom: 1px solid var(--border-color); */
   /* border-right: 1px solid var(--border-color); */
-  width: 1310px;
+  width: 1510px;
   /* background-color: red; */
 }
 
@@ -645,7 +646,6 @@ main {
   /* margin-bottom: 100px; */
   /* this makes events rounded but gonna take it out for now */
   border-radius: 5px;
-
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.12), 2px 3px 4px rgba(0, 0, 0, 0.24);
   width:95%;
   height: 100%;
@@ -1082,6 +1082,7 @@ main {
 
 .calendar .scrollBody .backWeekBody .hourcellB {
   position: relative;
+
   height: 25px;
   border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -1388,16 +1389,16 @@ to make it adjustable */
 }
 
 
-/* // width of each cell */
+/* width per cell */
 .calendar .scrollBody .backWeekBody {
   margin: 0;
   padding: 0;
   column-count: 7;
-  column-gap: 0px;
+  /* column-gap: 50px; */
   /* display: flex;
   flex-direction: column;
   flex-wrap: wrap; */
-  width: 1305px;
+  width: 1505px;
   /* background-color: blue; */
 
 }
