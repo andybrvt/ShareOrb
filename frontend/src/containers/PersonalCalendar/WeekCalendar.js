@@ -20,8 +20,7 @@ import CalendarViewDropDown from './CalendarViewDropDown';
 import CalendarEventWebSocketInstance from '../../calendarEventWebsocket';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
-import Liking from '../NewsfeedItems/Liking';
-import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
+import Liking from '../NewsfeedItems/Liking'
 
 
 const { Group } = Avatar
@@ -499,6 +498,8 @@ class WeekCalendar extends React.Component{
 
 
                   */}
+
+                    {/* for private events and person is host*/}
                   <div>
                     {
 
@@ -506,7 +507,7 @@ class WeekCalendar extends React.Component{
 
                       (item.invited.length==0 && item.host.username==this.props.username)?
 
-                      <span style={{float:'right', padding:'10px', marginTop:'-20px'}}>
+                      <span style={{float:'right', padding:'10px', marginTop:'-25px'}}>
 
                         <Tooltip placement="bottomLeft" title="View event">
                           <Button shape="circle" size="large" type="primary">
@@ -542,7 +543,7 @@ class WeekCalendar extends React.Component{
                                    onClick = {() => this.onProfileClick(item.host.username)}
                                  >
 
-                                   You are the host
+                                   You're the host
                                  </p>
                                :
 
@@ -582,59 +583,64 @@ class WeekCalendar extends React.Component{
 
                           <Avatar.Group>
                             <div style={{float:'right', marginRight:'50px'}}>
-                              <Tooltip placement="bottomLeft" title="View event">
-                                <Button shape="circle" size="large" type="primary">
-                                   <i class="fas fa-eye"></i>
-                                </Button>
-                              </Tooltip>
-                              <Tooltip placement="bottomLeft" title="Remove event">
-                                <Button
-                                onClick ={() => this.onDeleteEvent(item.id)}
-                                shape="circle"
-                                size="large"
-                                type="primary"
-                                style={{marginLeft:'10px'}}>
-                                   <i class="fas fa-times"></i>
-                                </Button>
-                              </Tooltip>
+
 
                               {
                                 (item.host.username==this.props.username|| item.accepted.includes(this.props.id) )?
-
-                                <div style={{marginRight:'50px'}}></div>
+                                <div style={{marginRight:'100px'}}>
+                                  <Tooltip placement="bottomLeft" title="View event">
+                                    <Button shape="circle" size="large" type="primary">
+                                       <i class="fas fa-eye"></i>
+                                    </Button>
+                                  </Tooltip>
+                                  <Tooltip placement="bottomLeft" title="Remove event">
+                                    <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                                       <i class="fas fa-times"></i>
+                                    </Button>
+                                  </Tooltip>
+                                </div>
                                 :
-                                <span>
-                                  <Tooltip placement="bottomLeft" title="Accept Invite">
-                                    <Button
-                                    type="primary"
-                                    shape="circle"
-                                    size="large"
-                                    style={{marginLeft:'10px'}}
-                                    onClick = {() => this.onAcceptShare(item.id)}
-                                    >
-                                       <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
+                                <div style={{marginRight:'50px'}}>
+                                  <Tooltip placement="bottomLeft" title="View event">
+                                    <Button shape="circle" size="large" type="primary">
+                                       <i class="fas fa-eye"></i>
                                     </Button>
                                   </Tooltip>
-                                  <Tooltip placement="bottomLeft" title="Decline Invite">
-                                    <Button
-                                    shape="circle"
-                                    type="primary"
-                                    size="large"
-                                    danger
-                                    style={{marginLeft:'10px'}}
-                                    onClick = {() => this.onDeclineShare(item.id)}
-                                    >
-                                       <i class="fas fa-user-times"></i>
+                                  <Tooltip placement="bottomLeft" title="Remove event">
+                                    <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                                       <i class="fas fa-times"></i>
                                     </Button>
                                   </Tooltip>
-                                </span>
+                                  <span>
+                                    <Tooltip placement="bottomLeft" title="Accept Invite">
+                                      <Button
+                                      type="primary"
+                                      shape="circle"
+                                      size="large"
+                                      style={{marginLeft:'10px'}}
+                                      onClick = {() => this.onAcceptShare(item.id)}
+                                      >
+                                         <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
+                                      </Button>
+                                    </Tooltip>
+                                    <Tooltip placement="bottomLeft" title="Decline Invite">
+                                      <Button
+                                      shape="circle"
+                                      type="primary"
+                                      size="large"
+                                      danger
+                                      style={{marginLeft:'10px'}}
+                                      onClick = {() => this.onDeclineShare(item.id)}
+                                      >
+                                         <i class="fas fa-user-times"></i>
+                                      </Button>
+                                      </Tooltip>
+                                    </span>
+                                  </div>
 
                                 }
                             </div>
-                            {/*
-                            <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
-                            */}
-                            <Liking style={{marginTop:'-200px'}} like_people={item.person}/>
+                            <Liking style={{marginTop:'-200px'}} like_people={item.invited}/>
                           </Avatar.Group>
 
 
@@ -989,11 +995,6 @@ class WeekCalendar extends React.Component{
   }
 
 
-  onDeleteEvent = (eventId) => {
-    console.log(eventId)
-    this.props.openEventDeleteModal(eventId);
-  }
-
   render() {
     console.log(this.props)
     console.log(Avatar)
@@ -1005,12 +1006,6 @@ class WeekCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
-        <RemoveEventModal
-        visible = {this.props.showDeleteModal}
-        close = {this.props.closeEventDeleteModal}
-        item = {this.props.deleteEventId}
-        user = {this.props.id}
-         />
 
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
@@ -1090,9 +1085,7 @@ const mapStateToProps = state => {
     currentDate: state.calendar.date,
     events: state.calendar.events,
     showEventSyncModal: state.eventSync.showEventSyncModal,
-    id: state.auth.id,
-    showDeleteModal: state.calendarEvent.showDeleteModal,
-    deleteEventId: state.calendarEvent.deleteEventId,
+    id: state.auth.id
 
   }
 }
@@ -1109,9 +1102,7 @@ const mapDispatchToProps = dispatch => {
     prevWeek: () => dispatch(calendarActions.prevWeek()),
     getEvents: () => dispatch(calendarActions.getUserEvents()),
     openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
-    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal()),
-    openEventDeleteModal: (eventId) => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
-    closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal()),
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
 
   }
 }
