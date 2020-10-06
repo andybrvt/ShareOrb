@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import { Input, Drawer, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, Progress, DatePicker, AvatarGroup, Popover } from 'antd';
+import { Input, Drawer, message, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, Progress, DatePicker, AvatarGroup, Popover } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -54,6 +54,15 @@ class WeekCalendar extends React.Component{
       window.location.href = 'explore/'+username
     }
   }
+
+  declineEventMessage = () => {
+    message.success('You have declined the event' , 2);
+  };
+
+  acceptEventMessage = () => {
+    message.success('You have accepted the event' , 2);
+  };
+
 
   onDayHourClick = (positionX, positionY) => {
 
@@ -379,11 +388,11 @@ class WeekCalendar extends React.Component{
                   </p>
 
                     {
-                      (item.person.length-1>0)?
-
-                      <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> public</Tag>
-                      :
+                      (item.invited.length==0)?
                       <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
+
+                      :
+                      <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> public</Tag>
                     }
 
 
@@ -474,11 +483,11 @@ class WeekCalendar extends React.Component{
                     <div>
                       <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
                       {
-                        (item.person.length==1)?
+                        (item.invited.length==0)?
                           <span> Just You</span>
 
                         :
-                            <span>   {item.person.length} people</span>
+                            <span>   {item.invited.length+1} people</span>
 
                       }
                     </div>
@@ -495,7 +504,7 @@ class WeekCalendar extends React.Component{
 
 
 
-                      (item.person.length==1 && item.host.username==this.props.username)?
+                      (item.invited.length==0 && item.host.username==this.props.username)?
 
                       <span style={{float:'right', padding:'10px', marginTop:'-20px'}}>
 
@@ -526,12 +535,27 @@ class WeekCalendar extends React.Component{
                               src={'http://127.0.0.1:8000'+item.host.profile_picture}
                               style={{display:'inline-block'}}
                              />
-                           <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
-                             onClick = {() => this.onProfileClick(item.host.username)}
-                           >
+                           {
 
-                             {item.host.first_name} {item.host.last_name}
-                           </p>
+                               (item.host.username==this.props.username)?
+                                 <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                   onClick = {() => this.onProfileClick(item.host.username)}
+                                 >
+
+                                   You're the host
+                                 </p>
+                               :
+
+
+                                 <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                   onClick = {() => this.onProfileClick(item.host.username)}
+                                 >
+
+                                   {item.host.first_name} {item.host.last_name}
+                                 </p>
+
+                           }
+
 
                           </div>
 
@@ -573,29 +597,39 @@ class WeekCalendar extends React.Component{
                                    <i class="fas fa-times"></i>
                                 </Button>
                               </Tooltip>
-                              <Tooltip placement="bottomLeft" title="Accept Invite">
-                                <Button
-                                type="primary"
-                                shape="circle"
-                                size="large"
-                                style={{marginLeft:'10px'}}
-                                onClick = {() => this.onAcceptShare(item.id)}
-                                >
-                                   <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
-                                </Button>
-                              </Tooltip>
-                              <Tooltip placement="bottomLeft" title="Decline Invite">
-                                <Button
-                                shape="circle"
-                                type="primary"
-                                size="large"
-                                danger
-                                style={{marginLeft:'10px'}}
-                                onClick = {() => this.onDeclineShare(item.id)}
-                                >
-                                   <i class="fas fa-user-times"></i>
-                                </Button>
-                              </Tooltip>
+
+                              {
+                                (item.host.username==this.props.username|| item.accepted.includes(this.props.id) )?
+
+                                <div style={{marginRight:'50px'}}></div>
+                                :
+                                <span>
+                                  <Tooltip placement="bottomLeft" title="Accept Invite">
+                                    <Button
+                                    type="primary"
+                                    shape="circle"
+                                    size="large"
+                                    style={{marginLeft:'10px'}}
+                                    onClick = {() => this.onAcceptShare(item.id)}
+                                    >
+                                       <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
+                                    </Button>
+                                  </Tooltip>
+                                  <Tooltip placement="bottomLeft" title="Decline Invite">
+                                    <Button
+                                    shape="circle"
+                                    type="primary"
+                                    size="large"
+                                    danger
+                                    style={{marginLeft:'10px'}}
+                                    onClick = {() => this.onDeclineShare(item.id)}
+                                    >
+                                       <i class="fas fa-user-times"></i>
+                                    </Button>
+                                  </Tooltip>
+                                </span>
+
+                                }
                             </div>
                             {/*
                             <span style={{ display:'inline-block', fontSize:'10px'}}>Guests  </span>
@@ -945,11 +979,12 @@ class WeekCalendar extends React.Component{
     // This will be used for accepting event shared between you and another
     // person. When accepted this will add you to the accepted list and then
     // send it to the host to as well
-    console.log(eventId, this.props.id)
+    this.acceptEventMessage();
     CalendarEventWebSocketInstance.acceptSharedEvent(eventId, this.props.id);
   }
 
   onDeclineShare = (eventId) => {
+    this.declineEventMessage();
     CalendarEventWebSocketInstance.declineSharedEvent(eventId, this.props.id);
   }
 
