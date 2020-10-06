@@ -120,10 +120,19 @@ class WebSocketCalendarEvent {
     })
   }
 
+  deleteEvent = (eventId, actor) => {
+    // eventId will be the id of the event
+    // actor id will be the id of the actor 
+    this.sendEvent({
+      eventId: eventId,
+      actor: actor,
+      command: 'delete_event'
+    })
+  }
+
   sendEvent (data){
     // This is used to send the notification into the backend and add in an
     // event sync event
-    console.log('send_event')
     console.log(data)
 
 // START RIGHT HERE

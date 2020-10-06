@@ -4,6 +4,8 @@ import { updateObject } from '../utility';
 
 const initialState = {
   showModal: false,
+  showDeleteModal: false,
+  deleteEventId: "",
   addEvent: false,
   title: '',
   content: '',
@@ -79,6 +81,19 @@ const changeCalendarEvent = (state, action) => {
   })}
 }
 
+const openEventDeleteModal = (state, action) => {
+  return updateObject(state, {
+    deleteEventId: action.eventId,
+    showDeleteModal: true
+  })
+}
+
+const closeEventDeleteModal = (state, action) => {
+  return updateObject(state, {
+    showDeleteModal: false
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.OPEN_EVENT_MODAL:
@@ -87,6 +102,10 @@ const reducer = (state = initialState, action) => {
       return closeEventModal(state, action);
     case actionTypes.CHANGE_CALENDAR_EVENT:
       return changeCalendarEvent(state, action);
+    case actionTypes.OPEN_EVENT_DELETE_MODAL:
+      return openEventDeleteModal(state, action);
+    case actionTypes.CLOSE_EVENT_DELETE_MODAL:
+      return closeEventDeleteModal(state, action);
     default:
       return state;
   }

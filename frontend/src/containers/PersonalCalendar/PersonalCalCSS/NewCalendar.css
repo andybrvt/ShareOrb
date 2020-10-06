@@ -8,6 +8,11 @@
   font-size:80px;
 }
 
+.deleteModal{
+  /* background-color: red; */
+  /* z-index: 100; */
+}
+
 .innerContainerPeople{
   position: relative;
   top: 50%;

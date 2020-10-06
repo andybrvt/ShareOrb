@@ -17,8 +17,25 @@ export const closeEventModal = () => {
   };
 }
 
+export const openEventDeleteModal = (eventId) => {
+  // This is to open the modal that asks you if you are sure you wanna
+  // delete this event
+  return {
+    eventId: eventId,
+    type: actionTypes.OPEN_EVENT_DELETE_MODAL
+  }
+}
+
+export const closeEventDeleteModal = () => {
+  // This is use to close the modal that ask if you are sure you wanna
+  // delete this event
+  return {
+    type: actionTypes.CLOSE_EVENT_DELETE_MODAL
+  }
+}
+
 export const changeCalendarEvent = e =>{
-  // this is only for the onchange function for the modal 
+  // this is only for the onchange function for the modal
   console.log(e)
   return {
     type: actionTypes.CHANGE_CALENDAR_EVENT,

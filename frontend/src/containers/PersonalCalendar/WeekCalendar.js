@@ -542,7 +542,7 @@ class WeekCalendar extends React.Component{
                                    onClick = {() => this.onProfileClick(item.host.username)}
                                  >
 
-                                   You're the host
+                                   You are the host
                                  </p>
                                :
 
@@ -991,6 +991,7 @@ class WeekCalendar extends React.Component{
 
   onDeleteEvent = (eventId) => {
     console.log(eventId)
+    this.props.openEventDeleteModal(eventId);
   }
 
   render() {
@@ -1004,6 +1005,12 @@ class WeekCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
+        <RemoveEventModal
+        visible = {this.props.showDeleteModal}
+        close = {this.props.closeEventDeleteModal}
+        item = {this.props.deleteEventId}
+        user = {this.props.id}
+         />
 
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
@@ -1083,7 +1090,9 @@ const mapStateToProps = state => {
     currentDate: state.calendar.date,
     events: state.calendar.events,
     showEventSyncModal: state.eventSync.showEventSyncModal,
-    id: state.auth.id
+    id: state.auth.id,
+    showDeleteModal: state.calendarEvent.showDeleteModal,
+    deleteEventId: state.calendarEvent.deleteEventId,
 
   }
 }
@@ -1100,7 +1109,9 @@ const mapDispatchToProps = dispatch => {
     prevWeek: () => dispatch(calendarActions.prevWeek()),
     getEvents: () => dispatch(calendarActions.getUserEvents()),
     openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
-    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal()),
+    openEventDeleteModal: (eventId) => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
+    closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal()),
 
   }
 }

@@ -16,7 +16,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         print (data)
 
         # THIS IS GONNA BE SIMILAR TO THE SHARED EVENT SO YOU GOTTA STRUCTURE YOUR
-        # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT 
+        # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT
 
         # this is there one where you make the event and then add it to the database
         # Then create a dictionary that you will then send to the frontend through an
@@ -144,8 +144,57 @@ class CalendarConsumer(JsonWebsocketConsumer):
         self.send_decline_shared(content)
         self.send_decline_shared(contentElse)
 
+    def delete_event(self, data):
+        event = get_object_or_404(Event, id = data['eventId'])
+        user = get_object_or_404(User, id = data['actor'])
+
+        serializeEvent = EventSerializer(event)
+        eventPerson = serializeEvent.data['person'].copy()
+        print(eventPerson)
+
+        if event.host == user:
+
+            content = {
+                'command': 'delete_all',
+                'eventId': data['eventId'],
+                'person': eventPerson
+            }
+            self.send_accept_shared(content)
+            event.delete()
+        else:
+            # This one, instead of deleting the whole event, you are just removing
+            # the person that removed the event that was not host
+            event.person.remove(user)
+            event.save()
+            content = {
+                'command': 'delete_single',
+                'eventId': data['eventId'],
+                'person': user.username,
+                'personId': user.id
+
+            }
+            self.delete_single_event(content)
+            print('living here')
+
+
+
 # So you got done by making an object in the model, now you need to send
 # it through the channel to both users
+    def delete_single_event(self, deletedEvent):
+        # This is used to send out a dictionary with instructions to delete
+        # the event for a users that are not the host
+        channel_layer = get_channel_layer()
+        content = {
+            'type': 'new_event',
+            'newEvent': deletedEvent
+        }
+
+        person = deletedEvent['person']
+        channel = 'calendar_'+person
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            content
+        )
 
     def send_new_event(self,newEvent):
         # Also gotta change the for loop here because now its pulling the whole object
@@ -204,6 +253,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
                 content
             )
 
+
+
 # When making a websocket you always start with connect
     def connect(self):
         self.current_user = self.scope['url_route']['kwargs']['username']
@@ -230,6 +281,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
             self.accept_shared_event(data)
         if data['command'] == 'send_decline_shared_event':
             self.decline_shared_event(data)
+        if data['command'] == 'delete_event':
+            self.delete_event(data)
 
     def new_event(self, event):
         newEvent = event['newEvent']
