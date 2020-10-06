@@ -20,7 +20,8 @@ import CalendarViewDropDown from './CalendarViewDropDown';
 import CalendarEventWebSocketInstance from '../../calendarEventWebsocket';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
-import Liking from '../NewsfeedItems/Liking'
+import Liking from '../NewsfeedItems/Liking';
+import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
 
 
 const { Group } = Avatar
@@ -563,7 +564,12 @@ class WeekCalendar extends React.Component{
                                 </Button>
                               </Tooltip>
                               <Tooltip placement="bottomLeft" title="Remove event">
-                                <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                                <Button
+                                onClick ={() => this.onDeleteEvent(item.id)}
+                                shape="circle"
+                                size="large"
+                                type="primary"
+                                style={{marginLeft:'10px'}}>
                                    <i class="fas fa-times"></i>
                                 </Button>
                               </Tooltip>
@@ -947,6 +953,10 @@ class WeekCalendar extends React.Component{
     CalendarEventWebSocketInstance.declineSharedEvent(eventId, this.props.id);
   }
 
+
+  onDeleteEvent = (eventId) => {
+    console.log(eventId)
+  }
 
   render() {
     console.log(this.props)
