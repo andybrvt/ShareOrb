@@ -20,7 +20,9 @@ import CalendarViewDropDown from './CalendarViewDropDown';
 import CalendarEventWebSocketInstance from '../../calendarEventWebsocket';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
-import Liking from '../NewsfeedItems/Liking'
+import Liking from '../NewsfeedItems/Liking';
+import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
+
 
 
 const { Group } = Avatar
@@ -595,7 +597,12 @@ class WeekCalendar extends React.Component{
                                     </Button>
                                   </Tooltip>
                                   <Tooltip placement="bottomLeft" title="Remove event">
-                                    <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                                    <Button
+                                    onClick ={() => this.onDeleteEvent(item.id)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary"
+                                    style={{marginLeft:'10px'}}>
                                        <i class="fas fa-times"></i>
                                     </Button>
                                   </Tooltip>
@@ -995,6 +1002,11 @@ class WeekCalendar extends React.Component{
     CalendarEventWebSocketInstance.declineSharedEvent(eventId, this.props.id);
   }
 
+  onDeleteEvent = (eventId) => {
+    console.log(eventId)
+    this.props.openEventDeleteModal(eventId);
+  }
+
 
   render() {
     console.log(this.props)
@@ -1007,6 +1019,13 @@ class WeekCalendar extends React.Component{
           isVisble = {this.props.showEventSyncModal}
           close = {() => this.props.closeEventSyncModal()}
         />
+
+        <RemoveEventModal
+        visible = {this.props.showDeleteModal}
+        close = {this.props.closeEventDeleteModal}
+        item = {this.props.deleteEventId}
+        user = {this.props.id}
+         />
 
         <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
@@ -1086,7 +1105,9 @@ const mapStateToProps = state => {
     currentDate: state.calendar.date,
     events: state.calendar.events,
     showEventSyncModal: state.eventSync.showEventSyncModal,
-    id: state.auth.id
+    id: state.auth.id,
+    showDeleteModal: state.calendarEvent.showDeleteModal,
+    deleteEventId: state.calendarEvent.deleteEventId,
 
   }
 }
@@ -1103,7 +1124,9 @@ const mapDispatchToProps = dispatch => {
     prevWeek: () => dispatch(calendarActions.prevWeek()),
     getEvents: () => dispatch(calendarActions.getUserEvents()),
     openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
-    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
+    closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal()),
+    openEventDeleteModal: (eventId) => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
+    closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal()),
 
   }
 }
