@@ -1064,7 +1064,7 @@ class WeekCalendar extends React.Component{
               Event Sync
             </Button>
             <div className = 'timeLayerCon'>
-
+              list of people to be added!
 
 
             </div>

@@ -565,7 +565,7 @@ main {
   /* width: 700px; */
 }
 
-/* monday - sunday  */
+/* mon - sun  */
 .weekCalendar .weekDays {
   font-weight: 100;
   color: ;
@@ -574,7 +574,7 @@ main {
   /* border-top: 1px solid var(--border-color); */
   /* border-bottom: 1px solid var(--border-color); */
   /* border-right: 1px solid var(--border-color); */
-  width: 1400px;
+  width: 1365px;
 
   /* background-color: red; */
 }
@@ -778,9 +778,9 @@ main {
   /* height: 100px; */
   color:black;
   position: relative;
-  top: 80px;
+  top: 50px;
   /* height: 300px; */
-  left: 80px;
+  left: 20px;
   width: 300px;
   /* color: white; */
 }
@@ -792,69 +792,41 @@ main {
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   position: relative;
 
-  width: 250px;
   top: 40px;
   height: 50px;
   font-size: 20px;
 }
 
 .miniCalContainer .timeLayerCon{
-  /* background-color: red; */
-  width: 300px;
+  background-color: gainsboro;
+  width: 200px;
+  height:350px;
   position: relative;
-  top: 200px;
+  top: 75px;
   left: 40px;
 }
 
-.miniCalContainer .timeLayerCon .yearButton {
-  background-color: #89ABE3FF;
-  border: none;
-  left:20px;
-  width: 120px;
-  height: 40px;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
-}
 
-.miniCalContainer .timeLayerCon .monthButton {
-  background-color: #FFD662FF;
-  position: relative;
-  left: 35px;
-  border: none;
-  width: 120px;
-  height: 40px;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
-}
-
-.miniCalContainer .timeLayerCon .weekButton {
-  background-color: #4B878BFF;
-  border: none;
-  position: relative;
-  top: 20px;
-  width: 150px;
-  height: 40px;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
-}
 
 .miniCalContainer .miniEventSyncButton {
   /* background-color: red; */
   position: relative;
-  top: 80px;
-  left:80px;
-  width: 250px;
+  top: 50px;
+  left:30px;
+  width: 225px;
   margin-bottom: 50px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
+
 
 .miniCalContainer .selectView {
   /* background-color: red; */
 
   position: relative;
   top: 80px;
-  left:80px;
+  left:70px;
   width: 250px;
   margin-bottom: 50px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
@@ -894,6 +866,7 @@ main {
   padding: .75em 0;
   border-bottom: 1px solid var(--border-color);
   display: flex;
+  /* background-color: red; */
 
 }
 
@@ -912,10 +885,11 @@ main {
 
 .miniCalContainer .miniCalendar .miniCol .miniMonth{
   /* color: white; */
+  /* background-color: red; */
 }
 
 .miniCalContainer .miniCalendar .miniCol .miniMonth:hover{
-  background-color: lightgrey;
+
   cursor: pointer;
   /* color: white; */
 }
@@ -967,10 +941,10 @@ main {
 .calendarContainer .miniCalContainer{
   flex-grow: 0;
   flex-shrink: 0;
-  background-color:#e6f7ff;
+  /* background-color:#e6f7ff; */
   /* flex-basis: 100%; */
   position: relative;
-  left:-35px;
+  left:-15px;
   /* right: 200px; */
   width: 350px;
   /* top: 110px; */
@@ -980,7 +954,9 @@ main {
   opacity: 0.8;
 }
 
-
+.rightMini{
+  margin-left: -200px;
+}
 /* This is to control the year view */
 .calendar .body .yearcol {
   flex-grow: 0;
