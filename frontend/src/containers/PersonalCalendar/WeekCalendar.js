@@ -376,6 +376,7 @@ class WeekCalendar extends React.Component{
           // The day index represents the start column and the hour index represent the start row
           let startDate = dateFns.startOfWeek(this.props.currentDate)
           console.log(toDoStuff)
+          const text = "You're host"
           days.push(
 
             toDoStuff.map(item =>  (
@@ -543,7 +544,7 @@ class WeekCalendar extends React.Component{
                                    onClick = {() => this.onProfileClick(item.host.username)}
                                  >
 
-                                   You're the host
+                                   {text}
                                  </p>
                                :
 
