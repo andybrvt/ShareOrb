@@ -425,8 +425,8 @@ class PickEventSyncWeek extends React.Component{
       const submitEvent = {
         command: 'add_sync_event',
         title: value.title,
-        person: [this.props.currentUser, this.props.userFriend],
-        invited: [this.props.userFriend],
+        person: [this.props.currentUser, this.props.userFriend.username],
+        invited: [this.props.userFriend.username],
         content: content,
         location: location,
         eventColor: value.eventColor,
@@ -438,7 +438,7 @@ class PickEventSyncWeek extends React.Component{
       const submitNotification = {
         command: 'send_new_event_sync_notification',
         actor: this.props.currentUser,
-        recipient: this.props.userFriend,
+        recipient: this.props.userFriend.username,
         date: this.state.selectedDate
       }
       console.log(submitEvent)

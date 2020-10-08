@@ -234,12 +234,12 @@ class PickEventSyncWeek extends React.Component{
         location: value.location,
         date: this.state.selectedDate,
         currentUser: this.props.currentUser,
-        userFriend: this.props.userFriend
+        userFriend: this.props.userFriend.username
       }
       const submitNotification = {
         command: 'send_new_event_sync_notification',
         actor: this.props.currentUser,
-        recipient: this.props.userFriend,
+        recipient: this.props.userFriend.username,
         date: this.state.selectedDate
       }
       // So the webSocket is to send the info into the backend in tho the channles to make the
