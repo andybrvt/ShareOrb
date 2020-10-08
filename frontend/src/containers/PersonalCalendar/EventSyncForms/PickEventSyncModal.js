@@ -49,7 +49,7 @@ class PickEventSyncModal extends React.Component{
 
   componentDidMount () {
     CalendarEventWebSocketInstance.connect(this.props.currentUser)
-    const friend = this.props.userFriend
+    const friend = this.props.userFriend.username
     const date_min = this.props.minDate
     const date_max = this.props.maxDate
     const person = this.props.currentUser
@@ -77,7 +77,7 @@ class PickEventSyncModal extends React.Component{
     // Person is the person sending the request
     // You want to get both events from both people and then add it to the
     // same list so then you can render then on a min week check box
-    const friend = newProps.userFriend
+    const friend = newProps.userFriend.username
     const date_min = newProps.minDate
     const date_max = newProps.maxDate
     const person = newProps.currentUser

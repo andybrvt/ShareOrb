@@ -509,6 +509,7 @@ const mapStateToProps = state => {
     maxDate: state.eventSync.maxDate,
     filterEvent: state.eventSync.filterEvent,
     currentUser: state.auth.username,
+    currentProfile: state.auth.profilePic,
     userFriend: state.eventSync.userFriend,
     notificationId: state.eventSync.notificationId,
     id: state.auth.id,
