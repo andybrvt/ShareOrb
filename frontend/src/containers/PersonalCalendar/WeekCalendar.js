@@ -528,7 +528,11 @@ class WeekCalendar extends React.Component{
                       <span style={{float:'right', padding:'10px', marginTop:'-25px'}}>
 
                         <Tooltip placement="bottomLeft" title="View event">
-                          <Button shape="circle" size="large" type="primary">
+                          <Button
+                          onClick = {() => this.onEventPage(item.id)}
+                          shape="circle"
+                          size="large"
+                          type="primary">
                              <i class="fas fa-eye"></i>
                           </Button>
                         </Tooltip>
@@ -612,7 +616,11 @@ class WeekCalendar extends React.Component{
                                 (item.host.username==this.props.username|| item.accepted.includes(this.props.id) )?
                                 <div style={{marginRight:'100px'}}>
                                   <Tooltip placement="bottomLeft" title="View event">
-                                    <Button shape="circle" size="large" type="primary">
+                                    <Button
+                                    onClick = {() => this.onEventPage(item.id)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary">
                                        <i class="fas fa-eye"></i>
                                     </Button>
                                   </Tooltip>
@@ -630,7 +638,11 @@ class WeekCalendar extends React.Component{
                                 :
                                 <div style={{marginRight:'50px'}}>
                                   <Tooltip placement="bottomLeft" title="View event">
-                                    <Button shape="circle" size="large" type="primary">
+                                    <Button
+                                    onClick = {() => this.onEventPage(item.id)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary">
                                        <i class="fas fa-eye"></i>
                                     </Button>
                                   </Tooltip>
@@ -1049,6 +1061,10 @@ class WeekCalendar extends React.Component{
     placement,
     });
   };
+
+  onEventPage = (eventId) => {
+    this.props.history.push('/personalcal/event/'+eventId)
+  }
 
 
   render() {

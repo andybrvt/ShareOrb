@@ -3,9 +3,10 @@ import axios from 'axios';
 import {Card, Button, Row, Col, Input} from 'antd';
 import { Link, } from 'react-router-dom';
 import { connect } from 'react-redux';
+import EventGroupChat from './EventGroupChat';
+import EventInfo from './EventInfo';
 
-
-class EventSamplePage extends React.Component{
+class EventPage extends React.Component{
 //this takes each of the value of the individual profiles and
 //returns them
 
@@ -18,17 +19,13 @@ class EventSamplePage extends React.Component{
 
 
 		return (
-      <div>
+      <div className = 'eventPageContainer'>
 
-      <Row>
-        <Col span={8}>
-          col-8asdfffffffffffffffffffffffffffffffffff
-          <Input placeholder="Basic usage" />
-        </Col>
-        <Col span={8} offset={8}>
-          col-8
-        </Col>
-      </Row>
+				<EventInfo />
+
+
+				<EventGroupChat />
+
 
     </div>
 
@@ -42,4 +39,4 @@ class EventSamplePage extends React.Component{
    }
  }
 
-export default EventSamplePage;
+export default EventPage;
