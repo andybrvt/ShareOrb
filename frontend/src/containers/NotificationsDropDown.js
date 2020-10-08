@@ -411,7 +411,7 @@ class NotificationsDropDown extends React.Component{
               // Start here tomorrow
               onClick = {() => this.props.openPickEventSyncModal(
                 notifications[i].recipient,
-                notifications[i].actor.username,
+                notifications[i].actor,
                 notifications[i].minDate,
                 notifications[i].maxDate,
                 notifications[i].id,
