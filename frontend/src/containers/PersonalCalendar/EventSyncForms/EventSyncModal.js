@@ -80,10 +80,13 @@ class EventSyncModal extends React.Component{
     console.log(this.props)
     return(
       <div>
+        {/*visible = {this.props.isVisble}*/}
         <Modal
+          width={500}
           centered
           footer = {null}
-          visible = {this.props.isVisble}
+
+          visible={this.props.isVisble}
           onCancel = {this.props.close}>
           <EventSyncReactForm
            onSubmit = {this.submit}/>

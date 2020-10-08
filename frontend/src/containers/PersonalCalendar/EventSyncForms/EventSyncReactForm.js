@@ -6,7 +6,7 @@ import '@ant-design/compatible/assets/index.css';
 import { Select, Radio, Button, Input, List, Avatar } from 'antd';
 import 'antd/dist/antd.css';
 import '../PersonalCalCSS/EventSync.css';
-
+import { FireTwoTone } from '@ant-design/icons';
 
 
 const { Option } = Select
@@ -52,6 +52,7 @@ class EventSyncReactForm extends React.Component {
     this.setState({
       friend: friend
     })
+
   }
 
   onFriendClick = (friend) => {
@@ -206,11 +207,11 @@ class EventSyncReactForm extends React.Component {
       </Form.Item>
       <Form.Item className = 'friendListCon'>
       <Input
-        style={{left:'5%', width:'400px'}}
+        style={{width:'400px'}}
         value = {this.state.search}
         onChange = {this.onHandleChange}
         type = 'text'
-        placeholder = 'Search Friends'
+        placeholder = 'Find a Friend'
        />
 
 
@@ -233,7 +234,11 @@ class EventSyncReactForm extends React.Component {
                   description={"@"+item.username}
                   // description={item.email}
                 />
-              </List.Item>
+
+              <div><FireTwoTone /></div>
+
+            </List.Item>
+
             )}
           >
       </List>

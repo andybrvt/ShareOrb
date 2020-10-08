@@ -73,18 +73,20 @@
 }
 
 .eventSyncForm .friendListCon .friendList{
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 25px;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   overflow: auto;
   padding: 8px 24px;
   height: 300px;
-  left:6%;
+
 }
 
 .eventSyncForm .friendListCon .friendList .friendItem {
-  background-color: gainsboro;
+
+
+  background-color:#e6f7ff;
 }
 
 .eventSyncForm .friendListCon .friendList .friendItemHover{
@@ -92,7 +94,7 @@
 }
 
 .eventSyncForm .friendListCon .friendList .friendItemHover:hover {
-  background-color: gainsboro;
+  background-color:#e6f7ff;
 }
 
 .eventSyncForm .syncButtonCon .syncButton{

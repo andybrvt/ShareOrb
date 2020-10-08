@@ -482,6 +482,9 @@ class PickEventSyncWeek extends React.Component{
         <div className = 'syncCalendar'>
           <div className = 'syncHeader'>
             {this.renderHeader()}
+            <div style={{marginLeft:'200px'}} class="header">{this.props.userFriend} calendar</div>
+
+
             {this.renderDays()}
           </div>
           <div className = 'syncBody'>
