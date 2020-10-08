@@ -129,3 +129,20 @@ export const declineEventShare = (declineShareObj) => {
     declineShareObj: declineShareObj
   }
 }
+
+// export const deleteEvent = (deleteObj) => {
+// // This function will delete the events for the user for a shared event
+//   return {
+//     type: actionTypes.DELETE_EVENT_ALL,
+//     deleteObj: deleteObj
+//   }
+// }
+//
+// export const deleteEventSingle = (deleteObj) => {
+//   // This function will only delete the event for a single person that is in a shared
+//   // event
+//   return {
+//     type: actionTypes.DELETE_EVENT_SINGLE,
+//     deleteObj: deleteObj
+//   }
+// }

@@ -3,7 +3,22 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import { Input, Drawer, message, List, Avatar, Divider, Col, Row, Tag, Button, Tooltip, Progress, DatePicker, AvatarGroup, Popover } from 'antd';
+import { Input,
+   Drawer,
+    message,
+    List,
+    Avatar,
+    Divider,
+    Col,
+    Row,
+    Tag,
+    Button,
+    Tooltip,
+    Progress,
+    DatePicker,
+    AvatarGroup,
+    notification,
+    Popover } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -518,7 +533,12 @@ class WeekCalendar extends React.Component{
                           </Button>
                         </Tooltip>
                         <Tooltip placement="bottomLeft" title="Remove event">
-                          <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                          <Button
+                          onClick ={() => this.onDeleteEvent(item.id, 'single')}
+                          shape="circle"
+                          size="large"
+                          type="primary"
+                          style={{marginLeft:'10px'}}>
                              <i class="fas fa-times"></i>
                           </Button>
                         </Tooltip>
@@ -598,7 +618,7 @@ class WeekCalendar extends React.Component{
                                   </Tooltip>
                                   <Tooltip placement="bottomLeft" title="Remove event">
                                     <Button
-                                    onClick ={() => this.onDeleteEvent(item.id)}
+                                    onClick ={() => this.onDeleteEvent(item.id, 'shared', item.host)}
                                     shape="circle"
                                     size="large"
                                     type="primary"
@@ -615,7 +635,12 @@ class WeekCalendar extends React.Component{
                                     </Button>
                                   </Tooltip>
                                   <Tooltip placement="bottomLeft" title="Remove event">
-                                    <Button shape="circle" size="large" type="primary" style={{marginLeft:'10px'}}>
+                                    <Button
+                                    onClick ={() => this.onDeleteEvent(item.id, 'shared', item.host)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary"
+                                    style={{marginLeft:'10px'}}>
                                        <i class="fas fa-times"></i>
                                     </Button>
                                   </Tooltip>
@@ -1002,10 +1027,28 @@ class WeekCalendar extends React.Component{
     CalendarEventWebSocketInstance.declineSharedEvent(eventId, this.props.id);
   }
 
-  onDeleteEvent = (eventId) => {
+  onDeleteEvent = (eventId, eventType, host) => {
     console.log(eventId)
-    this.props.openEventDeleteModal(eventId);
+
+    if (eventType === 'shared'){
+      if (host.id === this.props.id){
+        this.props.openEventDeleteModal(eventId);
+      } else{
+        CalendarEventWebSocketInstance.deleteEvent(eventId, this.props.id)
+      }
+    }
+    if (eventType === 'single'){
+      this.props.deleteEvent(eventId)
+      this.openNotification('bottom')
+    }
   }
+
+  openNotification = placement => {
+  notification.info({
+    message: `Event deleted`,
+    placement,
+    });
+  };
 
 
   render() {
@@ -1025,6 +1068,7 @@ class WeekCalendar extends React.Component{
         close = {this.props.closeEventDeleteModal}
         item = {this.props.deleteEventId}
         user = {this.props.id}
+
          />
 
         <div className = 'mainCalContainer'>
@@ -1127,7 +1171,7 @@ const mapDispatchToProps = dispatch => {
     closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal()),
     openEventDeleteModal: (eventId) => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
     closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal()),
-
+    deleteEvent: (eventId) => dispatch(calendarActions.deleteEvents(eventId))
   }
 }
 

@@ -83,23 +83,14 @@ class WebSocketCalendarEvent {
       }
 
       this.callbacks['decline_share'](declineShareObj)
-    } else if (command === 'delete_all'){
+    } else if (command === 'delete_event'){
       // This will be run when the host deletes the event, this will
       // delete all the event for everyone who is involed with the event
       const eventId = parsedData.eventId
       const deleteObj = {
         eventId: eventId
       }
-    } else if (command === 'delete_single'){
-      // This will run when someone else that is not the host deletes the event,
-      // it will just remove them from the person field
-
-      const eventId = parsedData.eventId
-      const userId = parsedData.personId
-      const deleteObj = {
-        eventId: eventId,
-        userId: userId
-      }
+      this.callbacks['decline_share'](deleteObj)
     }
 
 
@@ -110,16 +101,14 @@ class WebSocketCalendarEvent {
     acceptEventShareCallback,
     declineElseEventShareCallback,
     declineEventShareCallback,
-    deleteEventAll,
-    deleteEventSingle
+
   ){
     // you just need to add the event so just one call back
     this.callbacks['new_event'] = newEventCallback;
     this.callbacks['accept_share'] = acceptEventShareCallback;
     this.callbacks['decline_share_else'] = declineElseEventShareCallback;
     this.callbacks['decline_share'] = declineEventShareCallback;
-    this.callbacks['delete_all'] = deleteEventAll;
-    this.callbacks['delete_single'] = deleteEventSingle
+
   }
 
   acceptSharedEvent = (eventId, acceptorId) => {

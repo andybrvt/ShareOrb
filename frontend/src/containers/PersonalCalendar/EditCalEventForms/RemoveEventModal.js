@@ -11,6 +11,7 @@ class RemoveEventModal extends React.Component{
     // this will remove all the events for everyone
     console.log(eventId, user)
     CalendarEventWebSocketInstance.deleteEvent(eventId, user)
+    this.props.close()
   }
 
   render(){

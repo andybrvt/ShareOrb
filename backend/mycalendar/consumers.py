@@ -155,7 +155,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         if event.host == user:
 
             content = {
-                'command': 'delete_all',
+                'command': 'delete_event',
                 'eventId': data['eventId'],
                 'person': eventPerson
             }
@@ -167,7 +167,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
             event.person.remove(user)
             event.save()
             content = {
-                'command': 'delete_single',
+                'command': 'delete_event',
                 'eventId': data['eventId'],
                 'person': user.username,
                 'personId': user.id

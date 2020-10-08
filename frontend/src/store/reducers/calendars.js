@@ -103,15 +103,23 @@ const editEvent = (state, action) => {
 // list.splice(index, number) the first value is the index you want to take out
 // the second values is how many values you want to take out afterwards
 const deleteEvent = (state, action) => {
-  let newEvents = state.events
-  for (let i = 0; i< newEvents.length; i++){
-    if(newEvents[i].id === action.eventId){
-      newEvents.splice(i, 1)
-    }
+  // let newEvents = state.events
+  // for (let i = 0; i< newEvents.length; i++){
+  //   if(newEvents[i].id === action.eventId){
+  //     newEvents.splice(i, 1)
+  //   }
+  // }
+  // return updateObject (state, {
+  //   events: newEvents
+  // })
+  function removeEvent(removedEvent){
+    return removedEvent.id !== action.eventId
   }
-  return updateObject (state, {
-    events: newEvents
+
+  return updateObject(state, {
+    events: state.events.filter(removeEvent)
   })
+
 }
 
 const acceptEventShare = (state, action) => {
