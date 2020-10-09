@@ -130,19 +130,11 @@ export const declineEventShare = (declineShareObj) => {
   }
 }
 
-// export const deleteEvent = (deleteObj) => {
-// // This function will delete the events for the user for a shared event
-//   return {
-//     type: actionTypes.DELETE_EVENT_ALL,
-//     deleteObj: deleteObj
-//   }
-// }
-//
-// export const deleteEventSingle = (deleteObj) => {
-//   // This function will only delete the event for a single person that is in a shared
-//   // event
-//   return {
-//     type: actionTypes.DELETE_EVENT_SINGLE,
-//     deleteObj: deleteObj
-//   }
-// }
+export const loadEventInfo = (eventInfoObj) => {
+  // This will load the events into the event page, pretty much just holding all
+  // the information, and messages for that one event on the event page 
+  return {
+    type: actionTypes.LOAD_EVENT_INFO,
+    eventInfoObj: eventInfoObj
+  }
+}

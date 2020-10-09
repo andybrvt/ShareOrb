@@ -296,3 +296,41 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def declined_share(self, event):
         declinedUser = event['declinedUser']
         return self.send_json(declinedUser)
+
+class EventPageConsumer (JsonWebsocketConsumer):
+    def send_fetch_event_messages(self, data):
+        print (data)
+        viewEvent = get_object_or_404(Event, id = data['eventId'])
+        serializer = EventSerializer(viewEvent).data
+        content = {
+            'command': 'fetch_event_info',
+            'eventInfo': serializer
+        }
+        self.send_json(content)
+
+
+    def connect (self):
+        print ('connect')
+        # self.scope will pull stuff from channel instance, the url_route kwargs will
+        # pull the eventId
+        self.selected_event = self.scope['url_route']['kwargs']['eventId']
+        # After getting the eventId, now you will then make the name of the group
+        grp = 'event_'+self.selected_event
+        # Once you get the name of group then you will will create the channel group
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        print ('diconnect')
+        # Pretty much the same as the connect function but instaed of group add
+        # it is group discard
+        self.selected_event = self.scope['url_route']['kwargs']['eventId']
+        grp = 'event_'+self.selected_event
+        async_to_sync(self.channel_layer.group_discard)(grp, self.selected_event)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
+        if data['command'] == 'fetch_event_messages':
+            self.send_fetch_event_messages(data)
+        print(data)

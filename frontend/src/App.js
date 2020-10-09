@@ -10,6 +10,7 @@ import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
 import WebSocketPostsInstance from './postWebsocket';
 import ExploreWebSocketInstance from './exploreWebsocket';
+import EventPageWebSocketInstance from './eventPageWebsocket';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -68,6 +69,10 @@ class App extends Component {
       this.props.addSocialCalCellNewM.bind(this),
       this.props.addUserSocialEvent.bind(this),
       this.props.addUserSocialEventM.bind(this)
+    )
+
+    EventPageWebSocketInstance.addCallbacks(
+      this.props.loadEventInfo.bind(this)
     )
   }
 
@@ -128,6 +133,7 @@ const mapDispatchToProps = dispatch => {
     acceptEventShare: acceptShareObj => dispatch(calendarActions.acceptEventShare(acceptShareObj)),
     declineElseEventShare: declineShareObj => dispatch(calendarActions.declineElseEventShare(declineShareObj)),
     declineEventShare: declineShareObj => dispatch(calendarActions.declineEventShare(declineShareObj)),
+    loadEventInfo: eventInfoObj => dispatch(calendarActions.loadEventInfo(eventInfoObj)),
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
@@ -150,6 +156,7 @@ const mapDispatchToProps = dispatch => {
     addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj)),
     addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
     addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj))
+
   }
 }
 

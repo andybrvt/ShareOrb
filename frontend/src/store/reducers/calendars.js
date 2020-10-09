@@ -5,7 +5,9 @@ import * as dateFns from 'date-fns';
 
 const initialState = {
   events: [],
-  date: new Date()
+  date: new Date(),
+  selectedEvent: {},
+  eventMessages: []
 }
 
 const addEvent = (state, action)=> {
@@ -161,6 +163,17 @@ const declineEventShare = (state, action) => {
   })
 }
 
+const loadEventInfo = (state, action) => {
+  // This is to load in event information the event page... pretty much whenever
+  // you open up an event page it will change the selected event and the mesages
+  // is also jsut saved there tempary, it will change
+
+  return updateObject(state, {
+    selectedEvent: action.eventInfoObj.eventInfo,
+    eventMessages: action.eventInfoObj.messages
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -199,6 +212,8 @@ const reducer = (state = initialState, action) => {
       return declineElseEventShare(state, action);
     case actionTypes.DECLINE_EVENT_SHARE:
       return declineEventShare(state, action);
+    case actionTypes.LOAD_EVENT_INFO:
+      return loadEventInfo(state, action);
     default:
       return state;
   }
