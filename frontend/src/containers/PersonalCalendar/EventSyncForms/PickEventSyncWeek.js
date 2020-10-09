@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../PersonalCalCSS/EventSync.css';
-import { Button, notification } from 'antd';
+import { Button, Card, notification, Row, Col } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
@@ -21,15 +21,20 @@ class PickEventSyncWeek extends React.Component{
 
   renderHeader(){
     // This is to render the mini Calendar month givien the date range
+    var eventSyncWeekText="'s calenda'"
     const dateFormat = 'MMMM yyyy'
     const minDate = this.props.minDate
     return(
       <div className = 'header'>
         <div className = 'col-center'>
-          <span>
+          <span style={{display: 'inline-block'}}>
             {dateFns.format(new Date(minDate) , dateFormat)}
           </span>
+
         </div>
+        <span className = 'col-center' style={{marginLeft:'400px', display: 'inline-block'}}>
+          {this.props.userFriend.first_name}{eventSyncWeekText}
+        </span>
       </div>
     )
   }
@@ -475,6 +480,8 @@ class PickEventSyncWeek extends React.Component{
 
 
   render() {
+    const { Meta } = Card
+
     console.log(this.state)
     console.log(this.props)
     return (
@@ -482,7 +489,7 @@ class PickEventSyncWeek extends React.Component{
         <div className = 'syncCalendar'>
           <div className = 'syncHeader'>
             {this.renderHeader()}
-            <div style={{marginLeft:'200px'}} class="header">{this.props.userFriend.username} calendar</div>
+
 
 
             {this.renderDays()}
@@ -496,10 +503,31 @@ class PickEventSyncWeek extends React.Component{
             </div>
           </div>
         </div>
+        {/*
         <PickEventSyncForm
         onSubmit = {this.submit}
         initialValues = {this.getInitialValue()}
         active = {this.state.active} />
+        */}
+        <Row style={{marginLeft:'50px'}}>
+          <Col span={8}>col-8</Col>
+
+
+
+            <PickEventSyncForm
+            onSubmit = {this.submit}
+            initialValues = {this.getInitialValue()}
+            active = {this.state.active} />
+        <Card
+          hoverable
+          style={{ width: 240 }}
+          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+        >
+          <Meta title="Europe Street beat" description="www.instagram.com" />
+        </Card>
+
+
+        </Row>
       </div>
     )
   }
