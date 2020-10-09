@@ -34,6 +34,10 @@ class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins
     # id = serializers.ReadyOnlyField()
 
+    # When you do a function inside the model, you need to declear
+    # serilizers.StringRelatedField to at least get the field ot show up
+
+    get_eventMessages = serializers.StringRelatedField(many = True)
     class Meta:
         model = models.Event
         fields = ('__all__')
@@ -43,6 +47,7 @@ class EventSerializer (serializers.ModelSerializer):
     def to_representation(self, instance):
         personList=[]
         inviteList = []
+        messageList = []
         data = super().to_representation(instance)
         for peopleID in data['person']:
             person = PersonSerializer(models.User.objects.get(id=peopleID)).data
@@ -50,10 +55,20 @@ class EventSerializer (serializers.ModelSerializer):
         for invites in data['invited']:
             invite = PersonSerializer(models.User.objects.get(id=invites)).data
             inviteList.append(invite)
+        for messages in data['get_eventMessages']:
+            message = EventMessagesSerializer(models.EventMessages.objects.get(id = messages)).data
+            messageList.append(message)
         data['person']  = personList
         data['invited'] = inviteList
+        data['get_eventMessages'] = messageList
         data['host'] = PersonSerializer(models.User.objects.get(id = data['host'])).data
         return data
+
+class EventMessagesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.EventMessages
+        fields = '__all__'
 
 class PersonSerializer(serializers.ModelSerializer):
 

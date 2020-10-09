@@ -21,7 +21,6 @@ class Calendar(models.Model):
 		return self.title
 
 
-
 class Event(models.Model):
 	person = models.ManyToManyField(settings.AUTH_USER_MODEL)
 	# For host, it is mostly just used to give editing rights and accepting rights when
@@ -52,3 +51,25 @@ class Event(models.Model):
 
 	def __str__(self):
 		return self.title
+
+
+	def get_eventMessages(self):
+		# This function will call all the EventMessages objects that are connected to the
+		# instance of the event
+		# This function will filter out all the messages base on the foreignkey on the
+		# eventMessage object
+		# When using values_list, it will display the evnetMessage id
+		return EventMessages.objects.filter(eventObj =self).values_list('id', flat = True)
+
+class EventMessages(models.Model):
+	# This model is for all the group chat events that are in each event that are
+	# shared among everyone. These will be each of the individual messages and then
+	# will link to the event through foreign keys. Then I have to do some stuff in
+	# the serializers to get it to work.
+
+	# This eventObj field will be linking the events to the right event
+	eventObj = models.ForeignKey(Event, on_delete = models.CASCADE, related_name = 'eventGroupMessage')
+	body = models.TextField(blank = True)
+	created_on = models.DateTimeField(auto_now_add = True)
+	# This will connect to the right user
+	messageUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'eventMessageUser', on_delete = models.CASCADE, null = True)
