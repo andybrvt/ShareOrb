@@ -1,21 +1,16 @@
 import React from "react";
 import { Button, Card } from 'antd';
-import { authAxios } from '../../components/util';
+import { authAxios } from '../.././../components/util';
 import { EnvironmentOutlined, MoreOutlined } from '@ant-design/icons';
-import ava1 from '../images/avatar.jpg';
-import ava2 from '../images/avatar2.jpg';
-import defaultPicture from '../images/default.png';
-import facebook from '../images/facebook.png';
-import instagram from '../images/instagram.png';
-import twitter from '../images/twitter.png';
-import './UserProfileCard.css';
+import defaultPicture from '../../../components/images/default.png';
+
+import './PickEventSyncUserProfileCard.css';
 
 
 
 const { Meta } = Card;
 
-class UserProfileCard extends React.Component {
-
+class PickEventSyncUserProfileCard extends React.Component {
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
@@ -73,14 +68,14 @@ class UserProfileCard extends React.Component {
 
     if(this.props.data){
       if(this.props.data.profile_picture){
-        profileImage = this.props.data.profile_picture
+        profileImage = 'http://127.0.0.1:8000'+this.props.data.profile_picture
       }
     }
 
     console.log(profileImage)
     return (
 
-      <div className = "profileCard">
+      <div className = "EsyncProfileCard">
         <div className = 'image-box'>
 
         {profileImage === null ?
@@ -98,7 +93,7 @@ class UserProfileCard extends React.Component {
 
 
         </div>
-        <div className = 'top'>
+        <div className = 'EsyncTop'>
         <MoreOutlined />
         </div>
         <div className = 'bottom'>
@@ -123,4 +118,4 @@ class UserProfileCard extends React.Component {
   }
 }
 
-export default UserProfileCard;
+export default PickEventSyncUserProfileCard;

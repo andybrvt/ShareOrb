@@ -10,7 +10,7 @@ import { SubmissionError } from 'redux-form';
 import * as eventSyncActions from '../../../store/actions/eventSync';
 import * as notificationsActions from '../../../store/actions/notifications';
 import { authAxios } from '../../../components/util';
-
+import PickEventSyncUserProfileCard from './PickEventSyncUserProfileCard.js';
 
 class PickEventSyncWeek extends React.Component{
 
@@ -21,7 +21,7 @@ class PickEventSyncWeek extends React.Component{
 
   renderHeader(){
     // This is to render the mini Calendar month givien the date range
-    var eventSyncWeekText="'s calenda'"
+    var eventSyncWeekText="'s calendar"
     const dateFormat = 'MMMM yyyy'
     const minDate = this.props.minDate
     return(
@@ -509,22 +509,26 @@ class PickEventSyncWeek extends React.Component{
         initialValues = {this.getInitialValue()}
         active = {this.state.active} />
         */}
-        <Row style={{marginLeft:'50px'}}>
-          <Col span={8}>col-8</Col>
+        <Row style={{}}>
 
+            <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
 
+          <Col span={8}></Col>
+
+            {/*
+            <Card
+              hoverable
+              style={{ width: 350, height:300 }}
+              cover={<img alt="example" src={'http://127.0.0.1:8000'+this.props.userFriend.profile_picture} />}
+            >
+              <Meta title={this.props.userFriend.first_name+" "+this.props.userFriend.last_name} description={"@"+this.props.userFriend.username} />
+            </Card>
+            */}
 
             <PickEventSyncForm
             onSubmit = {this.submit}
             initialValues = {this.getInitialValue()}
             active = {this.state.active} />
-        <Card
-          hoverable
-          style={{ width: 240 }}
-          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-          <Meta title="Europe Street beat" description="www.instagram.com" />
-        </Card>
 
 
         </Row>
