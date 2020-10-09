@@ -132,6 +132,7 @@ class PickEventSyncDay extends React.Component{
        for (let i = counter; i< (counter+difference); i++){
           const cloneDay = date
           const cloneHour = hour
+          const checkMin = dateFns.getMinutes(new Date(hour))
           formattedHour = dateFns.format(hour, hourFormat)
           formattedDay = dateFns.format(date, dayFormat)
           // This loop will loop thorugh all the events and if the hour and day matches and it will
@@ -307,7 +308,7 @@ class PickEventSyncDay extends React.Component{
           if (toDoStuff.length > 0){
             days.push(
               <div
-                className = 'syncCol nonhourcell disabled'
+                className = {`syncCol disabled ${checkMin === 0 ? "nonhourcellT":"nonhourcellB"} `}
               >
               </div>
             )
@@ -315,7 +316,7 @@ class PickEventSyncDay extends React.Component{
             days.push(
               <div
                 style = {{background: this.color(i)}}
-                className = 'syncCol hourcell'
+                className = {`syncCol ${checkMin === 0 ? "hourcellT" : "hourcellB"}`}
                 onClick = {(e) => this.onDayHourClick(e, i, cloneDay, cloneHour)}
               >
               <span className = 'number'></span>
@@ -345,11 +346,13 @@ class PickEventSyncDay extends React.Component{
   }
 
   onDayHourClick = (e,position, day, hour) => {
+    console.log(hour)
     const selectedHour = dateFns.getHours(hour)
+    const selectedMin = dateFns.getMinutes(hour)
     const selectedYear = dateFns.getYear(day)
     const selectedMonth = dateFns.getMonth(day)
     const selectedDate = dateFns.getDate(day)
-    const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour)
+    const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour, selectedMin)
     if (this.state.active === position){
       this.setState({
         active: null,
