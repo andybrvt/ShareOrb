@@ -73,12 +73,12 @@ const afterSubmit = (result, dispatch) =>
 
 
 // So this form is when you pick a date and you want to schedule a time
-class ReduxAddEventForm extends React.Component {
+class PickEventSyncForm extends React.Component {
   render () {
     console.log(this.props)
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
-      <form className = 'eventSyncPickerForm'>
+      <form>
       <div className = 'reduxTitle'>
         <Field
         name = 'title'
@@ -89,6 +89,7 @@ class ReduxAddEventForm extends React.Component {
         placeholder = 'Title'
         />
       </div>
+      {/*
       <div className = 'reduxContent'>
         <Field
         name = 'content'
@@ -99,6 +100,23 @@ class ReduxAddEventForm extends React.Component {
         placeholder = 'Description'
         />
       </div>
+      */}
+
+      {/*
+      <div style={{height:'70px'}} className = 'outerContainerPeople'>
+        <div class="innerContainerPeople">
+          <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+          <Field
+            name = 'location'
+            placeholder="Location"
+            component= {renderLocationField}
+            type= 'text'
+
+
+          />
+      </div>
+    </div>
+    */}
       <div className = 'reduxLocation'>
         <Field name = 'location'
         name = 'location'
@@ -139,9 +157,9 @@ class ReduxAddEventForm extends React.Component {
 
 }
 
-ReduxAddEventForm = reduxForm ({
+PickEventSyncForm = reduxForm ({
   form: 'event sync add event',
   onSubmitSuccess: afterSubmit
-}) (ReduxAddEventForm)
+}) (PickEventSyncForm)
 
-export default ReduxAddEventForm;
+export default PickEventSyncForm;
