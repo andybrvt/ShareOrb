@@ -69,6 +69,10 @@ class EventMessagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.EventMessages
         fields = '__all__'
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['messageUser'] = PersonSerializer(models.User.objects.get(id = data['messageUser'])).data
+        return data
 
 class PersonSerializer(serializers.ModelSerializer):
 

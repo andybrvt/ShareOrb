@@ -29,6 +29,70 @@
   background-color: white;
 }
 
+
+
+.eventGroupChatContainer .messageList .eventMessageItemUser{
+  /* background-color: red; */
+  clear:both;
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 15px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 350px;
+  /* line-height: 130%; */
+  background: #00BFFF;
+  color: #f5f5f5;
+  float: right;
+  font-size: 15px;
+}
+.eventGroupChatContainer .messageList .eventMessageItemUser .messageP .eventTimeStamp{
+  display:inline-block;
+  float:right;
+  font-size: 9px;
+}
+.eventGroupChatContainer .messageList  .eventMessageItemUser .eventMessageAvatar{
+  position: relative;
+  float:right;
+}
+
+.eventGroupChatContainer .messageList .eventMessageItemNotUser{
+  /* background-color: red; */
+  clear:both;
+  /* display: inline-block; */
+  display:flex;
+  padding: 10px 15px;
+  margin: 15px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 350px;
+  /* line-height: 130%; */
+  background: #f5f5f5;
+  float: left;
+  font-size: 15px;
+
+}
+.eventGroupChatContainer .messageList .eventMessageItemNotUser .messageP .userName{
+  /* background-color: red; */
+  /* position: absolute; */
+  /* margin-top: -25px; */
+  color: grey;
+  font-size: 13px;
+
+}
+.eventGroupChatContainer .messageList .eventMessageItemNotUser .messageP .eventTimeStamp{
+  font-size: 9px;
+}
+
+.eventGroupChatContainer .messageList .eventMessageItemNotUser .messageP{
+  /* background-color: red; */
+  margin-left: 10px;
+  /* padding-top: -5px; */
+}
+
+.eventGroupChatContainer .messageList .eventMessageItemNotUser .eventMessageAvatar{
+  /* margin-left: 5px; */
+}
+
+
 .eventGroupChatContainer .inputForm{
 
 }
