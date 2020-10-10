@@ -269,6 +269,7 @@ class WebSocketExplore {
     })
   }
 
+
   sendFollowing = (follower, following) => {
     // This function will set up the object and command to send
     // to the backend. The follower is the person sending the following

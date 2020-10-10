@@ -5,7 +5,9 @@ from django.shortcuts import get_object_or_404
 from channels.layers import get_channel_layer
 from userprofile.models import User
 from .models import Event
+from .models import EventMessages
 from .serializers import EventSerializer
+from .serializers import EventMessagesSerializer
 # from userprofile.serilaizers import FollowUserSerializer
 
 
@@ -299,6 +301,9 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
 class EventPageConsumer (JsonWebsocketConsumer):
     def send_fetch_event_messages(self, data):
+        # This will be run at the start of every time you go into the event page
+        # so that you have the information already set up
+
         print (data)
         viewEvent = get_object_or_404(Event, id = data['eventId'])
         serializer = EventSerializer(viewEvent).data
@@ -308,6 +313,42 @@ class EventPageConsumer (JsonWebsocketConsumer):
         }
         self.send_json(content)
 
+
+    def send_event_message(self, data):
+        print(data)
+        viewEvent = get_object_or_404(Event, id = data['eventId'])
+        user = get_object_or_404(User, id = data['userId'])
+        eventMessage, created = EventMessages.objects.get_or_create(
+            eventObj = viewEvent,
+            body = data['message'],
+            messageUser = user
+        )
+
+        eventMessageObj = EventMessagesSerializer(eventMessage, many = False).data
+        content = {
+            'command': 'send_event_message',
+            'eventMessageObj': eventMessageObj,
+            'eventObjId': data['eventId']
+        }
+        # print (content)
+        self.send_message(content)
+
+    def send_message(self, eventMessage):
+        # This will be the go between for sending events... so when you send an event
+        # this will locate the right group and then sent it to that group channel
+        channel_layer = get_channel_layer()
+        channel_recipient = eventMessage['eventObjId']
+        channel = 'event_'+str(channel_recipient)
+
+        print (channel)
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_message',
+                'eventMessage': eventMessage
+            }
+        )
 
     def connect (self):
         print ('connect')
@@ -333,4 +374,10 @@ class EventPageConsumer (JsonWebsocketConsumer):
         data = json.loads(text_data)
         if data['command'] == 'fetch_event_messages':
             self.send_fetch_event_messages(data)
+        if data['command'] == 'send_event_message':
+            self.send_event_message(data)
         print(data)
+
+    def new_message(self, message):
+        messageObj = message['eventMessage']
+        return self.send_json(messageObj)

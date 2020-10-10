@@ -87,6 +87,7 @@ class EventPage extends React.Component{
 
 				<EventGroupChat
 				messages = {this.props.eventMessages}
+				eventId = {this.props.eventInfo.id}
 				 />
 
 

@@ -4,16 +4,20 @@ import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import './EventPage.css';
+import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 
 class EventGroupChat extends React.Component{
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  state = {
+    message: ''
+  }
+
   renderTimestamp = timestamp =>{
     let prefix = '';
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
-    console.log(timeDiff)
     if (timeDiff <= 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >1 ) {
@@ -27,6 +31,40 @@ class EventGroupChat extends React.Component{
     }
 
     return prefix;
+  }
+
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({
+      message: e.target.value
+    })
+  }
+
+  handleSubmit = e => {
+    // This will handle sending information into the backend end then through
+    // channels
+    if(this.state.message !== ''){
+      EventPageWebSocketInstance.sendEventMessage(
+        this.state.message,
+        this.props.id,
+        this.props.eventId
+
+      )
+
+      this.setState({message: ''})
+    }
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
 
@@ -91,12 +129,22 @@ class EventGroupChat extends React.Component{
             </div>
 
           )}
-        />
+        >
+        <div style={{ float:"left", clear: "both" }}
+            ref={(el) => { this.messagesEnd = el; }}>
+       </div>
+        </List>
         </div>
       <div className = 'inputForm'>
 
       <Form>
-        <Input />
+        <Input
+        className = 'eventChatInput'
+        onChange = {this.handleChange}
+        value = {this.state.message}
+        onPressEnter = {this.handleSubmit}
+        placeholder = "Write a message..."
+        />
 
       </Form>
       </div>

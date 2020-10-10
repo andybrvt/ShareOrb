@@ -63,6 +63,21 @@ class WebSocketEventPage{
     })
   }
 
+  sendEventMessage = (message, userId, eventId) => {
+    // This will send the information about a message into the backend for then
+    // usually for events group chat. The user will ususally be the current user that
+    // that is current logged in
+    // UserId will just be the id fo the user
+    // Event id will just be the id of the event page
+    console.log(message, userId, eventId)
+    this.sendMessage({
+      command: 'send_event_message',
+      message: message,
+      userId: userId,
+      eventId: eventId,
+    })
+  }
+
   socketNewMessage(data){
     // This is where things go after you sned info from the back end to the front
     // end. This will get the commands and then do stuff with the information
@@ -81,16 +96,28 @@ class WebSocketEventPage{
       }
       console.log(eventInfoObj)
       this.callbacks['fetch_event_info'](eventInfoObj)
+    } else if (command === 'send_event_message'){
+      // This will be sending information into the redux to fill in teh messages
+      // field in the calendar file in redux and this will fill the messages
+      // list
+
+      const messageObj = parsedData.eventMessageObj
+      const eventId = parsedData.eventObjId
+
+      console.log(messageObj, eventId)
+      this.callbacks['send_event_message'](messageObj)
     }
 
   }
 
 
   addCallbacks (
-    fetchEventInfo
+    fetchEventInfo,
+    sendEventMessage,
   ){
     // Add all the call backs here
     this.callbacks['fetch_event_info'] = fetchEventInfo
+    this.callbacks['send_event_message'] = sendEventMessage
   }
 
 

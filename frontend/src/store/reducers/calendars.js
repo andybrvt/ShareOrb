@@ -174,6 +174,14 @@ const loadEventInfo = (state, action) => {
   })
 }
 
+const sendEventMessage = (state, action) =>{
+  // This will add messages into the message field of the group chats, and since
+  // each time you pull up an event page, it will change the message field.
+  return updateObject(state, {
+    eventMessages: [...state.eventMessages, action.message]
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -214,6 +222,8 @@ const reducer = (state = initialState, action) => {
       return declineEventShare(state, action);
     case actionTypes.LOAD_EVENT_INFO:
       return loadEventInfo(state, action);
+    case actionTypes.SEND_EVENT_MESSAGE:
+      return sendEventMessage(state, action)
     default:
       return state;
   }

@@ -132,9 +132,18 @@ export const declineEventShare = (declineShareObj) => {
 
 export const loadEventInfo = (eventInfoObj) => {
   // This will load the events into the event page, pretty much just holding all
-  // the information, and messages for that one event on the event page 
+  // the information, and messages for that one event on the event page
   return {
     type: actionTypes.LOAD_EVENT_INFO,
     eventInfoObj: eventInfoObj
+  }
+}
+
+export const sendEventMessage = (eventMessageObj) => {
+  // This will be used to send the message into the message field so that it
+  // can show up in the group chats in side the event page
+  return {
+    type: actionTypes.SEND_EVENT_MESSAGE,
+    message: eventMessageObj
   }
 }
