@@ -1,6 +1,6 @@
 .EsyncProfileCard{
   background-color: white;
-  margin-left: 75px;
+  margin-left: 60px;
   margin-top: 50px;
   width: 325px;
   height: 376px;
@@ -411,3 +411,32 @@
                        visibility: visible;
                    }
                }
+
+
+
+/* start of pick event form css */
+.eSyncForm .eSyncTitle {
+  width: 500px;
+
+}
+
+.eSyncForm .eSyncTitle .box {
+  /* background-color: red; */
+  border: none;
+  border-bottom: 2px solid deepskyblue;
+  font-size: 14px;
+  height: 40px;
+  width: 325px;
+
+  margin-bottom: 5px;
+}
+
+.eSyncForm .eSyncTitle:focus {
+  box-shadow: none;
+  border-bottom: 2px solid deepskyblue;
+}
+
+.eSyncForm .eSyncTitle:focus {
+  box-shadow: none;
+  border-bottom: 2px solid deepskyblue;
+}

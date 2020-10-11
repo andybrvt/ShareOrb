@@ -4,7 +4,7 @@ import { authAxios } from '../.././../components/util';
 import { EnvironmentOutlined, MoreOutlined } from '@ant-design/icons';
 import defaultPicture from '../../../components/images/default.png';
 
-import './PickEventSyncUserProfileCard.css';
+import './PickEventSync.css';
 
 
 

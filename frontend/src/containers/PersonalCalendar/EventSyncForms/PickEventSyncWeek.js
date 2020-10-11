@@ -12,6 +12,10 @@ import * as notificationsActions from '../../../store/actions/notifications';
 import { authAxios } from '../../../components/util';
 import PickEventSyncUserProfileCard from './PickEventSyncUserProfileCard.js';
 
+
+const { Option } = Select;
+
+const { TextArea } = Input
 const required = value => value ? undefined : '*Required'
 const renderField = (field) => {
 return (
@@ -37,6 +41,50 @@ const renderLocationField = (field) => {
   )
 }
 
+const renderStartDateSelect = (field) => {
+  // This const will render the start time of the event
+  // So before you choose any value you want to have the field
+  // input as a value in your select... because the input value will be the value
+  // that will be return to the field when you input a value
+  // Bascially everything goes through the value first, and what ever is here inspect
+  // is just for show
+
+
+  console.log(field)
+  return (
+    <Select
+      // {...field.input}
+      style = {{width: '115px', marginRight:'15px'}}
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+      className = 'timebox'>
+
+    {field.children}
+    </Select>
+  )
+}
+
+
+const renderStartTime = () => {
+    const timeFormat = "hh:mm a"
+    const time = []
+    let start = dateFns.startOfDay(new Date())
+    let startHour = dateFns.getHours(new Date())
+    let startMins = dateFns.getMinutes(new Date())
+    for (let i = 0; i< 48; i++){
+      const cloneTime = startHour + ':' + startMins
+      time.push(
+        <Option
+        key = {dateFns.format(start, timeFormat)}
+        value= {dateFns.format(start, timeFormat)} >
+        {dateFns.format(start, timeFormat)}
+        </Option>
+      )
+      start = dateFns.addMinutes(start, 30)
+    }
+    console.log(time)
+    return time
+  }
 
 const afterSubmit = (result, dispatch) =>
   dispatch(reset('event sync add event'))
@@ -54,6 +102,77 @@ const renderStartDate = (field) => {
   )
 }
 class PickEventSyncWeek extends React.Component{
+
+  renderEndTimeSelect = () => {
+    console.log(this.props.startTime)
+
+    if (this.props.startTime !== undefined ){
+      // So basically the way I am making this will be the same way I made the
+      // date pick in the addeventform. But instead of using state, we will use
+      // redux state
+      const baseTime = renderStartTime()
+      let endTime = []
+
+      let setHour = ''
+      let setMin = ''
+      // You will be using setHour and setMin in order to compare to the
+      // times in the baseTime so you will know which time to put inin the endTime
+
+      // In order to compare, you have to convert all the tiems into the 1-24 hour time
+      if (this.props.startTime.includes("PM")){
+        setHour = parseInt(this.props.startTime.substring(0,2))
+        setMin = parseInt(this.props.startTime.substring(3,5))
+        if (setHour !== 12 ){
+          setHour = setHour + 12
+        }} else if (this.props.startTime.includes("AM")){
+          setHour = parseInt(this.props.startTime.substring(0,2))
+          setMin = parseInt(this.props.startTime.substring(3,5))
+          if (setHour === 12){
+            setHour = 0
+          }
+        }
+
+        // Now we will run through the basetimes and then convert them to
+        // the 1-24 hour format the from there compare what needs date is put into the
+        // end date and what date does not get put in there
+      for( let i = 0; i< baseTime.length; i++){
+       if(baseTime[i].key.includes('PM')){
+         let hour = parseInt(baseTime[i].key.substring(0,2))
+         if (hour !== 12){
+           hour = hour+12
+         }
+         const min = baseTime[i].key.substring(3,5)
+         if (setHour < hour){
+           endTime.push(
+            <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+          )} else if (setHour === hour){
+            if(setMin < min){
+              endTime.push(
+                <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+              )
+            }
+          }
+       } else if (baseTime[i].key.includes("AM")) {
+         let hour = parseInt(baseTime[i].key.substring(0,2))
+         if (hour === 12){
+           hour = 0
+         }
+         const min = baseTime[i].key.substring(3,5)
+         if( setHour < hour ) {
+           endTime.push(
+             <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+          )} else if (setHour === hour){
+            if (setMin < min){
+              endTime.push(
+                <Option key = {baseTime[i].key}>{baseTime[i].key}</Option>
+              )
+            }
+          }
+        }
+      }
+      return (endTime)
+    }
+  }
 
   state = {
     active: null,
@@ -555,31 +674,84 @@ class PickEventSyncWeek extends React.Component{
 
 
           <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
-            <form>
-
-            <div className = 'reduxTitle'>
-              <Field
-              name = 'title'
-              label = 'Title'
-              component= {renderField}
-              type= 'text'
-              validate = {required }
-              placeholder = 'Title'
-              />
-            </div>
-            <div style={{height:'70px'}} className = 'outerContainerPeople'>
-              <div class="innerContainerPeople">
-                <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+          <form class="eSyncForm">
+            <Card
+              title="Create event" extra={<a href="#">30 date</a>}
+               style={{ width: 400, marginLeft:'25px', marginTop:'25px' }}>
+              <div className = 'eSyncTitle'>
                 <Field
-                  name = 'location'
-                  placeholder="Location"
-                  component= {renderLocationField}
-                  type= 'text'
-
-
+                name = 'title'
+                label = 'Title'
+                component= {renderField}
+                type= 'text'
+                validate = {required }
+                placeholder = 'Title'
                 />
               </div>
-            </div>
+              <div style={{height:'70px'}} className = 'outerContainerPeople'>
+                <div class="innerContainerPeople">
+                  <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+                  <Field
+                    name = 'location'
+                    placeholder="Location"
+                    component= {renderLocationField}
+                    type= 'text'
+
+
+                  />
+                </div>
+
+              </div>
+
+              <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
+                <div class="innerContainerPeople">
+                  <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
+
+                       <Field
+                         name = 'startDate'
+                         component = {renderStartDate}
+                         onChange = {this.onStartDateChange}
+                         type = 'date'
+                       />
+
+
+                     <Field
+                       style={{display: 'inline-block',float: 'left'}}
+                       name = 'startTime'
+                       component = {renderStartDateSelect}
+                       onChange = {this.handleStartTimeChange}
+                       >
+                       {renderStartTime()}
+                     </Field>
+
+                     <Field
+                       style={{display: 'inline-block', marginRight:'15px'}}
+                       name = 'endTime'
+                       onChange = {this.handleEndTimeChange}
+                       component = {renderStartDateSelect}
+                       >
+                       {this.renderEndTimeSelect()}
+                     </Field>
+                </div>
+              </div>
+
+              <div className = 'eventSyncButton'>
+                <div className = 'clearButton' >
+                  <Button
+                  diabled = {pristine}
+                  onClick= {reset}>Clear Values</Button>
+                </div>
+                <div className = 'eventSyncButton'>
+                  <Button
+                    type = 'primary'
+                    onClick = {handleSubmit}
+                    disabled = {invalid || this.props.active === null}>
+                    Send Event
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
 
             </form>
 
@@ -587,20 +759,12 @@ class PickEventSyncWeek extends React.Component{
           <Col span={8}></Col>
 
             {/*
-            <Card
-              hoverable
-              style={{ width: 350, height:300 }}
-              cover={<img alt="example" src={'http://127.0.0.1:8000'+this.props.userFriend.profile_picture} />}
-            >
-              <Meta title={this.props.userFriend.first_name+" "+this.props.userFriend.last_name} description={"@"+this.props.userFriend.username} />
-            </Card>
-            */}
 
             <PickEventSyncForm
             onSubmit = {this.submit}
             initialValues = {this.getInitialValue()}
             active = {this.state.active} />
-
+            */}
 
         </Row>
       </div>
