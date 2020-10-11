@@ -2,16 +2,57 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../PersonalCalCSS/EventSync.css';
-import { Button, Card, notification, Row, Col } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio, Card, Row, Col, notification } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
-import { SubmissionError } from 'redux-form';
+import { Field, reduxForm, reset, formValueSelector, SubmissionError } from 'redux-form';
 import * as eventSyncActions from '../../../store/actions/eventSync';
 import * as notificationsActions from '../../../store/actions/notifications';
 import { authAxios } from '../../../components/util';
 import PickEventSyncUserProfileCard from './PickEventSyncUserProfileCard.js';
 
+const required = value => value ? undefined : '*Required'
+const renderField = (field) => {
+return (
+    <Input
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    className = 'box'/>
+  )
+}
+
+const renderLocationField = (field) => {
+  console.log(field.meta)
+  return (
+    <span>
+    <Input style={{width:'50%',fontSize:'14px'}}
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    className = 'box'/>
+
+    </span>
+  )
+}
+
+
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset('event sync add event'))
+
+const renderStartDate = (field) => {
+  console.log(field)
+  return (
+    <DatePicker
+    onChange = {field.input.onChange}
+    value = {field.input.value}
+    style = {{width: '110px', marginRight:'15px'}}
+    suffixIcon={<div></div>}
+    allowClear = {false}
+     />
+  )
+}
 class PickEventSyncWeek extends React.Component{
 
   state = {
@@ -484,6 +525,7 @@ class PickEventSyncWeek extends React.Component{
 
     console.log(this.state)
     console.log(this.props)
+    const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
       <div className = 'eventSyncCalendarContainer'>
         <div className = 'syncCalendar'>
@@ -511,7 +553,36 @@ class PickEventSyncWeek extends React.Component{
         */}
         <Row style={{}}>
 
-            <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
+
+          <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
+            <form>
+
+            <div className = 'reduxTitle'>
+              <Field
+              name = 'title'
+              label = 'Title'
+              component= {renderField}
+              type= 'text'
+              validate = {required }
+              placeholder = 'Title'
+              />
+            </div>
+            <div style={{height:'70px'}} className = 'outerContainerPeople'>
+              <div class="innerContainerPeople">
+                <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+                <Field
+                  name = 'location'
+                  placeholder="Location"
+                  component= {renderLocationField}
+                  type= 'text'
+
+
+                />
+              </div>
+            </div>
+
+            </form>
+
 
           <Col span={8}></Col>
 
@@ -557,6 +628,10 @@ const mapDispatchToProps = dispatch => {
     deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId))
   }
 }
+PickEventSyncWeek = reduxForm ({
+  form: 'event sync add event',
+  onSubmitSuccess: afterSubmit
+}) (PickEventSyncWeek)
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(PickEventSyncWeek);
