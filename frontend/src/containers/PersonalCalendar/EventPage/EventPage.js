@@ -22,14 +22,21 @@ class EventPage extends React.Component{
 				this.props.match.params.eventId
 			)
 		})
+		if(this.props.match.params.eventId){
+			EventPageWebSocketInstance.connect(this.props.match.params.eventId)
 
-		EventPageWebSocketInstance.connect(this.props.match.params.eventId)
+		}
 
 	}
 
 	constructor(props){
 		// Initialise the event page
 		super(props)
+
+		console.log('hit here too')
+	}
+
+	componentDidMount (){
 		this.initialiseChat()
 	}
 
@@ -53,23 +60,21 @@ class EventPage extends React.Component{
 
 
 	componentWillReceiveProps(newProps){
-		// New props will be the props after any of the props change
+		// console.log(newProps)
+		// if(this.props.eventInfo.id !== parseInt(newProps.match.params.eventId)){
+		// 	this.waitForSocketConnection(()=>{
+		// 		EventPageWebSocketInstance.fetchMessages(
+		// 			newProps.match.params.eventId
+		// 		)
+		// 	})
+		// 	EventPageWebSocketInstance.connect(newProps.match.params.eventId)
+		//
+		// }
 
-		// This will be re run everytime you access a different event page is loadup
-		// so what you have to do is check if the old event id is the same as the new newprops
-		// eventId.
-		if(this.props.match.params.eventId !== newProps.match.params.eventId){
-			// So before you can connect to other channels, you have to make sure that you
-			// disconnect the previous channel or else things are gonna get sent in
-			// duplicates
-			EventPageWebSocketInstance.disconnect()
-			this.waitForSocketConnection(()=> {
-				EventPageWebSocketInstance.fetchMessages(
-					newProps.match.params.eventId
-				)
-			})
-			EventPageWebSocketInstance.connect(newProps.match.params.id)
-		}
+	}
+
+	componentWillUnmount(){
+		EventPageWebSocketInstance.disconnect();
 
 	}
 

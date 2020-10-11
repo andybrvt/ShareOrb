@@ -33,7 +33,6 @@ class WebSocketEventPage{
     this.socketRef.onmessage = (e) => {
       // This will be the funciton runned after you sent something into the
       // the backend and then it goes to receive thne gets sent back
-      console.log(e.data)
       this.socketNewMessage(e.data)
     }
     this.socketRef.onerror = (e) => {
@@ -43,7 +42,7 @@ class WebSocketEventPage{
 
     this.socketRef.onclose = () => {
       console.log('websocket is closed')
-      this.connect(eventId)
+      // this.connect(eventId)
     }
   }
 
@@ -57,6 +56,8 @@ class WebSocketEventPage{
   // First thing before you do anything is that you have to fetch the information
   // so first method is gonna take the
   fetchMessages(eventId){
+
+    console.log('hit here')
     this.sendMessage({
       command: 'fetch_event_messages',
       eventId: eventId
