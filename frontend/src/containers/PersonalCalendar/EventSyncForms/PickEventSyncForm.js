@@ -6,7 +6,7 @@ import '@ant-design/compatible/assets/index.css';
 import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
-
+import './PickEventSync.css';
 
 const { Option } = Select;
 
@@ -245,8 +245,8 @@ class PickEventSyncForm extends React.Component {
     console.log(this.props)
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
-      <form>
-      <div className = 'reduxTitle'>
+      <form class="eSyncForm">
+      <div className = 'eSyncTitle'>
         <Field
         name = 'title'
         label = 'Title'
@@ -271,7 +271,7 @@ class PickEventSyncForm extends React.Component {
 
       <div style={{height:'70px'}} className = 'outerContainerPeople'>
         <div class="innerContainerPeople">
-          <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+          <i class="fas fa-globe-americas"  style={{marginRight:'25px'}} ></i>
           <Field
             name = 'location'
             placeholder="Location"
@@ -285,14 +285,20 @@ class PickEventSyncForm extends React.Component {
 
     <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
       <div class="innerContainerPeople">
-        <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
+        <i style={{marginRight:'25px'}}  class="fas fa-clock"></i>
 
-             <Field
-               name = 'startDate'
-               component = {renderStartDate}
-               onChange = {this.onStartDateChange}
-               type = 'date'
-             />
+
+            {/*
+
+
+              <Field
+                name = 'startDate'
+                component = {renderStartDate}
+                onChange = {this.onStartDateChange}
+                type = 'date'
+              />
+            */}
+
 
 
            <Field
@@ -316,20 +322,20 @@ class PickEventSyncForm extends React.Component {
     </div>
 
       {error && <strong style = {{color: 'red'}}>{error}</strong>}
-      <div className = 'eventSyncButton'>
-      <div className = 'clearButton' >
-        <Button
-        diabled = {pristine}
-        onClick= {reset}>Clear Values</Button>
-      </div>
-      <div className = 'eventSyncButton'>
-        <Button
-          type = 'primary'
-          onClick = {handleSubmit}
-          disabled = {invalid || this.props.active === null}>
-          Send Event
-        </Button>
-      </div>
+      <div className = 'eventSyncSurroundings'>
+        <div className = 'clearEventSyncFormButton' >
+          <Button
+          diabled = {pristine}
+          onClick= {reset}>Clear Values</Button>
+        </div>
+        <div className = 'eventSyncSubmitButton'>
+          <Button
+            type = 'primary'
+            onClick = {handleSubmit}
+            disabled = {invalid || this.props.active === null}>
+            Send Event
+          </Button>
+        </div>
       </div>
       </form>
 

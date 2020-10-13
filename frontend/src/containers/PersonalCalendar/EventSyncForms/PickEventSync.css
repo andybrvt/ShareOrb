@@ -440,3 +440,26 @@
   box-shadow: none;
   border-bottom: 2px solid deepskyblue;
 }
+
+
+
+.eventSyncSurroundings {
+  position: relative;
+  width: 350px;
+  left: 40px;
+  top: 45px;
+  /* background-color: red; */
+}
+
+.eventSyncSurroundings .clearEventSyncFormButton {
+  width: 100px;
+  position: absolute;
+  left: 80px;
+}
+
+.eventSyncSurroundings .eventSyncSubmitButton {
+  width: 100px;
+  position: absolute;
+  left: 200px;
+  top: 0px;
+}
