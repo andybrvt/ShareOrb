@@ -87,6 +87,7 @@ class EventPage extends React.Component{
 
 				<EventInfo
 				info = {this.props.eventInfo}
+				userId = {this.props.id}
 				 />
 
 
@@ -106,7 +107,8 @@ class EventPage extends React.Component{
    return {
      token: state.auth.token,
 		 eventInfo: state.calendar.selectedEvent,
-		 eventMessages: state.calendar.eventMessages
+		 eventMessages: state.calendar.eventMessages,
+		 id: state.auth.id
    }
  }
 

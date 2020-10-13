@@ -1,18 +1,64 @@
 /* CSS for the whole container */
 .eventPageContainer{
-  /* background-color: red; */
+  background-color: white;
   display: flex;
-  width: 1700px;
-  height: 90%;
+  width: 1765px;
+  /* padding: 30px; */
+  height: 93%;
   position: absolute;
   left: 50%;
+  bottom: 5px;
   transform: translateX(-48%);
 }
+
+
 
 /* CSS for the eventInfo side of the event page */
 .eventInfoContainer{
   /* background-color: blue; */
-  width: 60%;
+  width: 70%;
+  /* align-items: center; */
+}
+
+
+.eventInfoContainer .eventInfoView{
+  /* background-color: red; */
+  /* width: 70%; */
+  height: 100%;
+  /* position: relative;
+  left: 50%;
+  transform: translateX(-50%); */
+}
+
+.eventInfoContainer .eventInfoView .topSectContainier{
+  /* background-color: red; */
+  display: flex;
+}
+
+.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
+  width: 25%;
+  height: 400px;
+  /* background-color: red; */
+}
+
+.eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
+  /* background-color: red; */
+  width: 75%;
+  height: 400px;
+}
+
+.eventInfoContainer .eventInfoView .eventInfo{
+  background-color: 	#F5F5F5;
+  text-align: left;
+  height: 40%;
+}
+.eventInfoContainer .eventInfoView .eventInfo .title{
+  font-size: 30px;
+}
+
+.editEventButtonContainer{
+  /* background-color: red; */
+  position:absolute;
 }
 
 
@@ -20,7 +66,7 @@
 /* CSS for the eventChat side of the event page */
 .eventGroupChatContainer{
   /* background-color: red; */
-  width: 40%;
+  width: 30%;
   overflow: hidden;
 
 }
