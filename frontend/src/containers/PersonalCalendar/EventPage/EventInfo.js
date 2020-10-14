@@ -1,6 +1,7 @@
 import React from 'react';
 import './EventPage.css';
 import {Button, Progress} from 'antd';
+import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import * as dateFns from 'date-fns';
 
@@ -99,6 +100,7 @@ class EventInfo extends React.Component{
     let accepted = []
     let decline = []
     let invited = []
+    let eventBackgroundPic = ""
     if(this.props.info){
       if(this.props.info.host){
         username = this.props.info.host.username
@@ -157,14 +159,30 @@ class EventInfo extends React.Component{
         <div className = 'eventInfoView' >
           <div className = 'topSectContainier'>
 
+            {
+              eventBackgroundPic !== "" ?
+              <div
+              className = 'eventBackgroundPic'>
+              <div className = "pictureFrame">
+                <PictureOutlined />
+                <br />
+                <span> No background </span>
+              </div>
+              </div>
 
-            <div
-            style = {{
-              backgroundColor: color
-            }}
-            className = 'eventBackgroundPic'>
-            stuff here
-            </div>
+              :
+
+              <div
+              className = 'eventBackgroundPic'>
+              <div className ="pictureFrame">
+                <PictureOutlined />
+                <br />
+                <span> No background </span>
+              </div>
+              </div>
+
+            }
+
 
             <div className = 'eventTopSide'>
             Some container here
