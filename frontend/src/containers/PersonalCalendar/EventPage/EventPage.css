@@ -11,6 +11,27 @@
   transform: translateX(-48%);
 }
 
+.dateCircle{
+  /* border: 1px solid; */
+  width: 60px;
+  height: 60px;
+  /* border-radius: 30px; */
+  padding: 3px;
+  text-align: center;
+  position: relative;
+
+  /* right: 10px; */
+  bottom: 10px;
+}
+.dateCircle .month{
+  color: white;
+  font-size: 20px;
+}
+.dateCircle .day{
+  color: white;
+  font-size: 15px;
+}
+
 
 
 /* CSS for the eventInfo side of the event page */
@@ -40,8 +61,39 @@
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
   width: 25%;
   height: 400px;
+  padding: 25px;
   background-color: #F5F5F5;
 }
+
+.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTitle{
+  color: black;
+  font-size: 35px;
+  margin-top: 10px;
+  /* background-color: red; */
+}
+.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTime{
+  color: black;
+  font-size: 20px;
+  /* margin-top: 10px; */
+  /* background-color: red; */
+}
+.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventDate{
+  color: black;
+  font-size: 20px;
+  margin-top: 15px;
+  /* background-color: red; */
+}
+.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventHost{
+  /* color: black; */
+  margin-top: 20px;
+}
+
+.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .invitedNum{
+  /* color: black; */
+  margin-top: 90px;
+  font-size: 18px;
+}
+
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
   /* background-color: red; */
@@ -112,6 +164,7 @@
   /* background-color: red; */
   position:absolute;
   top: 10px;
+  left: 100px;
 }
 
 

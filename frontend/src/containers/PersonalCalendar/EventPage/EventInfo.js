@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress} from 'antd';
+import {Button, Progress, Avatar} from 'antd';
 import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import * as dateFns from 'date-fns';
@@ -19,7 +19,10 @@ class EventInfo extends React.Component{
   }
 
   capitalize (str) {
-    return str.charAt(0).toUpperCase() + str.slice(1)
+    if(str){
+        return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
   }
 
   onEditClick = () => {
@@ -101,6 +104,9 @@ class EventInfo extends React.Component{
     let decline = []
     let invited = []
     let eventBackgroundPic = ""
+    let month = "";
+    let day = "";
+    let host = "";
     if(this.props.info){
       if(this.props.info.host){
         username = this.props.info.host.username
@@ -116,6 +122,8 @@ class EventInfo extends React.Component{
         start_time = dateFns.format(new Date(this.props.info.start_time),'HH:mm aaaa')
         date = dateFns.format(new Date(this.props.info.start_time), 'iii, MMMM dd, yyyy ')
         console.log(dateFns.format(new Date(this.props.info.start_time), 'HH:mm'))
+        month = dateFns.format(new Date(this.props.info.start_time), 'MMM')
+        day = dateFns.format(new Date(this.props.info.start_time), 'dd')
 
       }
       if(this.props.info.end_time){
@@ -135,6 +143,9 @@ class EventInfo extends React.Component{
       }
       if(this.props.info.invited){
         invited = this.props.info.invited
+      }
+      if(this.props.info.host){
+        host = this.props.info.host
       }
 
     }
@@ -158,6 +169,38 @@ class EventInfo extends React.Component{
 
         <div className = 'eventInfoView' >
           <div className = 'topSectContainier'>
+          <div className = 'eventTopSide'>
+          <div
+          className = "dateCircle"
+          style = {{
+            backgroundColor: color
+          }}
+          >
+            <div
+            style = {{
+              color: "white",
+              fontSize: "20px"
+            }}
+            clasName = "month" > {month}</div>
+            <div className = "day"> {day} </div>
+          </div>
+
+
+          <div className = 'eventTitle'> {this.capitalize(title)} </div>
+          <div className = "eventDate"> {date} </div>
+          <div className = "eventTime">{start_time}-{end_time}</div>
+
+          <div className = "eventHost">
+            <Avatar
+            src = {"http://127.0.0.1:8000"+host.profile_picture}
+            />
+            <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+          </div>
+
+
+          <div className = "invitedNum"> {invited.length} Invited </div> 
+          </div>
+
 
             {
               eventBackgroundPic !== "" ?
@@ -184,12 +227,7 @@ class EventInfo extends React.Component{
             }
 
 
-            <div className = 'eventTopSide'>
-            Some container here
-            <div className = ''> {this.capitalize(title)} </div>
-            <div> {date} </div>
-            <div>{start_time}-{end_time}</div>
-            </div>
+
 
           </div>
 
