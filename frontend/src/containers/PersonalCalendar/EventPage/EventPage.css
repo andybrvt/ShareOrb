@@ -15,8 +15,10 @@
 
 /* CSS for the eventInfo side of the event page */
 .eventInfoContainer{
-  /* background-color: blue; */
+
   width: 70%;
+  height: 100%;
+  overflow: auto;
   /* align-items: center; */
 }
 
@@ -38,7 +40,7 @@
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
   width: 25%;
   height: 400px;
-  /* background-color: red; */
+  background-color: #F5F5F5;
 }
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
@@ -48,17 +50,58 @@
 }
 
 .eventInfoContainer .eventInfoView .eventInfo{
-  background-color: 	#F5F5F5;
+  /* background-color: #F5F5F5; */
   text-align: left;
-  height: 40%;
+  height: 100%;
+  padding: 50px 220px;
 }
 .eventInfoContainer .eventInfoView .eventInfo .title{
   font-size: 30px;
+}
+.eventInfoContainer .eventInfoView .eventInfo .aboutEvent{
+  font-size: 30px;
+  color: black;
+  margin-bottom: 30px;
+}
+.eventInfoContainer .eventInfoView .eventInfo .contentEvent{
+  margin-bottom: 30px;
+}
+.eventInfoContainer .eventInfoView .eventInfo .locationEventWord{
+  font-size: 20px;
+  color: black;
+  margin-bottom: 10px;
+
+}
+.eventInfoContainer .eventInfoView .eventInfo .eventPeopleWord {
+  font-size: 20px;
+  color: black;
+  margin-top: 40px;
+}
+.eventInfoContainer .eventInfoView .eventInfo .percentagesBars {
+  /* background-color: red; */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* top: 300px; */
+}
+
+.eventInfoContainer .eventInfoView .eventInfo .percentagesBars .percentage{
+  /* background-color: red; */
+  padding: 30px;
+  /* align-items: center; */
+  text-align: center;
+}
+.eventInfoContainer .eventInfoView .eventInfo .percentagesBars .percentage .percentageTerm{
+  /* background-color: red; */
+  /* padding: 30px; */
+  margin-top: 10px;
 }
 
 .editEventButtonContainer{
   /* background-color: red; */
   position:absolute;
+  top: 10px;
 }
 
 
