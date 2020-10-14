@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button} from 'antd';
+import {Button, Progress} from 'antd';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import * as dateFns from 'date-fns';
 
@@ -96,6 +96,9 @@ class EventInfo extends React.Component{
     let color = ''
     let date = ''
     let location = ''
+    let accepted = []
+    let decline = []
+    let invited = []
     if(this.props.info){
       if(this.props.info.host){
         username = this.props.info.host.username
@@ -121,6 +124,15 @@ class EventInfo extends React.Component{
       }
       if(this.props.info.location){
         location = this.props.info.location
+      }
+      if(this.props.info.accepted){
+        accepted = this.props.info.accepted
+      }
+      if(this.props.info.decline){
+        decline = this.props.info.decline
+      }
+      if(this.props.info.invited){
+        invited = this.props.info.invited
       }
 
     }
@@ -156,21 +168,64 @@ class EventInfo extends React.Component{
 
             <div className = 'eventTopSide'>
             Some container here
+            <div className = ''> {this.capitalize(title)} </div>
+            <div> {date} </div>
+            <div>{start_time}-{end_time}</div>
             </div>
 
           </div>
 
 
           <div className = 'eventInfo'>
-            <div className = 'title'> {this.capitalize(title)} </div>
 
-            <div> About the Event </div>
-            <div> {content} </div>
-            <div> {date} </div>
-            <div>{start_time}-{end_time}</div>
-            <div>Location</div>
+            <div className = "aboutEvent"> About the Event </div>
+            <div className = "contentEvent"> {content} </div>
+
+            <div className = "locationEventWord">Location</div>
             <div> {this.capitalize(location)} </div>
-            <div> People </div>
+            <div className = "eventPeopleWord"> People </div>
+
+
+          <div className =  "percentagesBars">
+
+          <div className = "percentage">
+
+          <Progress type = "circle" percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))} size="small" status="active" gap/>
+          <div className = "percentageTerm"> Responded </div>
+          </div>
+
+          <div className = 'percentage'>
+          <Progress
+          type = "circle"
+          status = "success"
+          percent={Math.floor(100*((accepted.length-1)/(invited.length)))} size="small" />
+
+          <div className = "percentageTerm"> Accepted </div>
+          </div>
+
+          <div className = "percentage">
+          {
+            (Math.floor(100*(decline.length/invited.length))<100)?
+
+             <Progress
+             status="exception"
+             type = "circle" percent={Math.floor(100*(decline.length/invited.length))} size="small"/>
+            :
+            <Progress
+            status="exception"
+            type ="circle" percent={Math.floor(100*(decline.length/invited.length))} size="small" status="exception" />
+          }
+
+          <div className = "percentageTerm" > Declined </div>
+          </div>
+
+
+
+          </div>
+
+
+
+
 
           </div>
           <div className = 'editEventButtonContainer'>
