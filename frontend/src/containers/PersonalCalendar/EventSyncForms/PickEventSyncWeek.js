@@ -11,7 +11,7 @@ import * as eventSyncActions from '../../../store/actions/eventSync';
 import * as notificationsActions from '../../../store/actions/notifications';
 import { authAxios } from '../../../components/util';
 import PickEventSyncUserProfileCard from './PickEventSyncUserProfileCard.js';
-
+import moment from 'moment';
 
 const { Option } = Select;
 
@@ -841,9 +841,72 @@ class PickEventSyncWeek extends React.Component{
     })
   }
 
+
+  timeConvertFunction = (time) => {
+    // This fucntion will take in a 1-24 hour time
+    // and then returna  1-12 am/pm time
+    // This fucntion will take in the time as a string in the 1-24 hour
+    // time format
+
+    console.log(time)
+    if (time !== null){
+      let hour = time.substring(0, 2)
+      let min = time.substring(3, 5)
+      let final_time = ''
+      if (hour > 12 ){
+        hour = hour - 12
+        if (hour < 10){
+            final_time = "0"+hour + ':'+min+' PM'
+        } else {
+            final_time = hour + ':'+min+' PM'
+        }
+      } else if(hour <= 12 ){
+        if (hour == 0){
+          final_time = '12:' + min + ' AM'
+        } else if (hour == 12) {
+          final_time = '12:' + min + ' PM'
+        } else {
+          final_time = hour +':'+ min+' AM'
+        }
+      }
+      console.log(final_time)
+      // MIGHT HAVE TO TAKE INTO CONSIDERATION THE 12AM AND 12 PM
+      return final_time
+    }
+
+
+  }
+
   getInitialValue = () => {
-    return {
-      eventColor:'#01D4F4'
+    // This will pass an initial value through the Field
+
+    // There is an issue with the utc_start and utc_end and start_time and end time
+    const date_start = new Date(this.state.selectedDate)
+    const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
+    const date_end = new Date(this.state.end_date)
+    const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
+    // const start_time = this.timeConvertFunction(this.state.start_time)
+    // const end_time  = this.timeConvertFunction(this.state.end_time)
+    console.log(this.state)
+    console.log(date_start)
+    // console.log(start_time)
+    return{
+      title: this.state.title,
+      content: this.state.content,
+      // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
+      // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
+      // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
+      dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
+      startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
+      endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
+      // startTime: start_time,
+      // endTime: end_time,
+      location: this.props.location,
+      eventColor: this.props.eventColor,
+      repeatCondition: 'none',
+      friends: [],
+      eventColor:'#01D4F4',
+
     }
   }
 
