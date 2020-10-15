@@ -198,7 +198,7 @@ class EventInfo extends React.Component{
           </div>
 
 
-          <div className = "invitedNum"> {invited.length} Invited </div> 
+          <div className = "invitedNum"> {invited.length} Invited </div>
           </div>
 
 
@@ -235,10 +235,26 @@ class EventInfo extends React.Component{
           <div className = 'eventInfo'>
 
             <div className = "aboutEvent"> About the Event </div>
-            <div className = "contentEvent"> {content} </div>
+
+            {
+              content === "" ?
+
+              <div className = "contentEventEmpty"> No info... </div>
+              :
+              <div className = "contentEvent"> {content} </div>
+
+
+            }
 
             <div className = "locationEventWord">Location</div>
-            <div> {this.capitalize(location)} </div>
+            {
+              location === "" ?
+              <div className = "contentEventEmpty"> No info... </div>
+              :
+              <div> {this.capitalize(location)} </div>
+            }
+
+
             <div className = "eventPeopleWord"> People </div>
 
 
