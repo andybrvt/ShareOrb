@@ -885,14 +885,17 @@ class PickEventSyncWeek extends React.Component{
     const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
     const date_end = new Date(this.state.end_date)
     const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
+    const start_time = dateFns.getHours(date_start)
+    const end_time = dateFns.getMinutes(date_end)
     // const start_time = this.timeConvertFunction(this.state.start_time)
     // const end_time  = this.timeConvertFunction(this.state.end_time)
+    console.log(this.props)
     console.log(this.state)
     console.log(date_start)
+    console.log(start_time)
+    console.log(end_time)
     // console.log(start_time)
     return{
-      title: this.state.title,
-      content: this.state.content,
       // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
       // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
       // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],

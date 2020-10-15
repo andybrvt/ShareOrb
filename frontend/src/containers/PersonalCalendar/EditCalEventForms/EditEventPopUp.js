@@ -255,7 +255,7 @@ class EditEventPopUp extends React.Component {
   // it as a dictioanry with each one being a key corresponding with each input
   getInitialValue = () => {
     // This will pass an initial value through the Field
-
+    console.log(this.props)
     // There is an issue with the utc_start and utc_end and start_time and end time
     const date_start = new Date(this.props.start_date)
     const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
