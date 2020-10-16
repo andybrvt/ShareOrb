@@ -177,7 +177,6 @@ const renderEventColor = (field) => {
     type = 'color'
     className = 'reduxColor'
     name = 'eventColor'
-    defaultValue = '#eb2f96'
     {...field.input}/>
   )
 }

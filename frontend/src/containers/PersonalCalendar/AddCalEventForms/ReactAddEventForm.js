@@ -39,7 +39,7 @@ class ReactAddEventForm extends React.Component {
       content: '',
       location: '',
       repeatCondition: 'none',
-      eventColor: '#01D4F4',
+      eventColor: '#91d5ff',
       error: false,
       person: []
     }

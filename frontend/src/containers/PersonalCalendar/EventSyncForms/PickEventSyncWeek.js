@@ -886,7 +886,7 @@ class PickEventSyncWeek extends React.Component{
     const date_end = new Date(this.state.end_date)
     const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
     const start_time = dateFns.getHours(date_start)
-    const end_time = dateFns.getMinutes(date_end)
+    const end_time = dateFns.getMinutes(date_start)
     // const start_time = this.timeConvertFunction(this.state.start_time)
     // const end_time  = this.timeConvertFunction(this.state.end_time)
     console.log(this.props)
@@ -902,8 +902,8 @@ class PickEventSyncWeek extends React.Component{
       dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
       startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
       endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
-      // startTime: start_time,
-      // endTime: end_time,
+      startTime: start_time,
+      endTime: end_time,
       location: this.props.location,
       eventColor: this.props.eventColor,
       repeatCondition: 'none',
