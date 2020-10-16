@@ -177,6 +177,7 @@ const renderEventColor = (field) => {
     type = 'color'
     className = 'reduxColor'
     name = 'eventColor'
+    defaultValue = '#fadb14'
     {...field.input}/>
   )
 }
@@ -747,6 +748,7 @@ class ReduxEditEventForm extends React.Component{
                     name = 'eventColor'
                     component = {renderEventColor}
                     type = 'text'
+
                 />
             </div>
 

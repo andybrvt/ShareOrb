@@ -576,7 +576,7 @@ class ReactAddEventForm extends React.Component {
         value = {this.state.content}
         rows ={4}
         style = {{width: '500px'}}/>
-        <Input type = 'color' className = 'reactColor' name = 'eventColor' defaultValue = '#01D4F4'/>
+        <Input type = 'color' className = 'reactColor' name = 'eventColor' defaultValue = '#fadb14'/>
 
       </Form.Item>
 

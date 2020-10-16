@@ -908,7 +908,7 @@ class PickEventSyncWeek extends React.Component{
       eventColor: this.props.eventColor,
       repeatCondition: 'none',
       friends: [],
-      eventColor:'#01D4F4',
+      eventColor:'#91d5ff',
 
     }
   }
