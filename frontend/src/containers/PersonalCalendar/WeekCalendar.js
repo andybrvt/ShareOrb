@@ -780,6 +780,8 @@ class WeekCalendar extends React.Component{
             <EditEventPopUp
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
+            dayNum={dateFns.format(cloneDay, 'd')}
+
             />
             </div>}>
 

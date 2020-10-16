@@ -3,6 +3,7 @@ import './EventPage.css';
 import {Button, Progress, Avatar} from 'antd';
 import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
+import DetailEditEventForm from './DetailEditEventForm';
 import * as dateFns from 'date-fns';
 
 
@@ -77,13 +78,14 @@ class EventInfo extends React.Component{
   getInitialValue = () => {
     // This will pull the information form the event info so that it can be
     // displayed on the event when you wanna edit it
+    // This will be presented somewhat similar to the getInitialValue in the
+    // EditEventPopUp
+    console.log(this.props.info)
     if(this.props.info){
       const date_start = new Date(this.props.info.start_time)
-
       const date_end = new Date(this.props.info.end_time)
-
-
-
+      const start_time = this.timeConvertFunction(this.props.info.start_time)
+      const end_time = this.timeConvertFunction(this.props.info.end_time)
 
 
     }
@@ -155,7 +157,10 @@ class EventInfo extends React.Component{
       {
         this.state.edit ?
         <div>
-        <ReduxEditEventForm />
+        <DetailEditEventForm
+        {...this.props}
+        initialValue = {this.getInitialValue()}
+         />
 
           <div>
           <Button
@@ -169,37 +174,6 @@ class EventInfo extends React.Component{
 
         <div className = 'eventInfoView' >
           <div className = 'topSectContainier'>
-          <div className = 'eventTopSide'>
-          <div
-          className = "dateCircle"
-          style = {{
-            backgroundColor: color
-          }}
-          >
-            <div
-            style = {{
-              color: "white",
-              fontSize: "20px"
-            }}
-            clasName = "month" > {month}</div>
-            <div className = "day"> {day} </div>
-          </div>
-
-
-          <div className = 'eventTitle'> {this.capitalize(title)} </div>
-          <div className = "eventDate"> {date} </div>
-          <div className = "eventTime">{start_time}-{end_time}</div>
-
-          <div className = "eventHost">
-            <Avatar
-            src = {"http://127.0.0.1:8000"+host.profile_picture}
-            />
-            <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
-          </div>
-
-
-          <div className = "invitedNum"> {invited.length} Invited </div>
-          </div>
 
 
             {
@@ -225,6 +199,39 @@ class EventInfo extends React.Component{
               </div>
 
             }
+
+            <div className = 'eventTopSide'>
+            <div
+            className = "dateCircle"
+            style = {{
+              backgroundColor: color
+            }}
+            >
+              <div
+              style = {{
+                color: "white",
+                fontSize: "20px"
+              }}
+              clasName = "month" > {month}</div>
+              <div className = "day"> {day} </div>
+            </div>
+
+
+            <div className = 'eventTitle'> {this.capitalize(title)} </div>
+            <div className = "eventDate"> {date} </div>
+            <div className = "eventTime">{start_time}-{end_time}</div>
+
+            <div className = "eventHost">
+              <Avatar
+              src = {"http://127.0.0.1:8000"+host.profile_picture}
+              />
+              <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+            </div>
+
+
+            <div className = "invitedNum"> {invited.length} Invited </div>
+            </div>
+
 
 
 
