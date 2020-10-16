@@ -278,9 +278,11 @@ class EditEventPopUp extends React.Component {
       location: this.props.location,
       eventColor: this.props.eventColor,
       repeatCondition: 'none',
-      friends: []
+      friends: [],
+
 
     }
+
   }
 
 
