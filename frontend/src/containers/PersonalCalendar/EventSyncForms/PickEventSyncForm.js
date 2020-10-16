@@ -3,7 +3,7 @@ import { reset, Field, reduxForm } from 'redux-form';
 import '../PersonalCalCSS/ReduxForm.css';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio, Card} from 'antd';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import './PickEventSync.css';
@@ -240,104 +240,125 @@ class PickEventSyncForm extends React.Component {
       return (endTime)
     }
   }
+
+  // his.props.initialValues.start_date.format("D")
   render () {
     console.log(this.state)
     console.log(this.props)
+    console.log(this.props.initialValues)
+    console.log(this.props.initialValues.startDate)
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
-      <form class="eSyncForm">
-      <div className = 'eSyncTitle'>
-        <Field
-        name = 'title'
-        label = 'Title'
-        component= {renderField}
-        type= 'text'
-        validate = {required }
-        placeholder = 'Title'
-        />
-      </div>
-      {/*
-      <div className = 'reduxContent'>
-        <Field
-        name = 'content'
-        label = 'Content'
-        component= {renderTextArea}
-        type= 'text'
-        // validate = {required}
-        placeholder = 'Description'
-        />
-      </div>
-      */}
-
-      <div style={{height:'70px'}} className = 'outerContainerPeople'>
-        <div class="innerContainerPeople">
-          <i class="fas fa-globe-americas"  style={{marginRight:'25px'}} ></i>
-          <Field
-            name = 'location'
-            placeholder="Location"
-            component= {renderLocationField}
-            type= 'text'
-
-
-          />
-      </div>
-    </div>
-
-    <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
-      <div class="innerContainerPeople">
-        <i style={{marginRight:'25px'}}  class="fas fa-clock"></i>
-
-
-            {/*
-
-
-              <Field
-                name = 'startDate'
-                component = {renderStartDate}
-                onChange = {this.onStartDateChange}
-                type = 'date'
-              />
-            */}
 
 
 
-           <Field
-             style={{display: 'inline-block',float: 'left'}}
-             name = 'startTime'
-             component = {renderStartDateSelect}
-             onChange = {this.handleStartTimeChange}
-             >
-             {renderStartTime()}
-           </Field>
 
-           <Field
-             style={{display: 'inline-block', marginRight:'15px'}}
-             name = 'endTime'
-             onChange = {this.handleEndTimeChange}
-             component = {renderStartDateSelect}
-             >
-             {this.renderEndTimeSelect()}
-           </Field>
-      </div>
-    </div>
 
-      {error && <strong style = {{color: 'red'}}>{error}</strong>}
-      <div className = 'eventSyncSurroundings'>
-        <div className = 'clearEventSyncFormButton' >
-          <Button
-          diabled = {pristine}
-          onClick= {reset}>Clear Values</Button>
-        </div>
-        <div className = 'eventSyncSubmitButton'>
-          <Button
-            type = 'primary'
-            onClick = {handleSubmit}
-            disabled = {invalid || this.props.active === null}>
-            Send Event
-          </Button>
-        </div>
-      </div>
-      </form>
+      <Card
+        title="Schedule event"
+         extra={
+           <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
+           tet
+         </Button>}
+        style={{ width: 400,
+          marginLeft:'25px',
+          marginTop:'15px',
+           padding:'10px' }}>
+
+          <form class="eSyncForm">
+              <div className = 'eSyncTitle'>
+                <Field
+                name = 'title'
+                label = 'Title'
+                component= {renderField}
+                type= 'text'
+                validate = {required }
+                placeholder = 'Title'
+                />
+              </div>
+              {/*
+              <div className = 'reduxContent'>
+                <Field
+                name = 'content'
+                label = 'Content'
+                component= {renderTextArea}
+                type= 'text'
+                // validate = {required}
+                placeholder = 'Description'
+                />
+              </div>
+              */}
+
+              <div style={{height:'70px'}} className = 'outerContainerPeople'>
+                <div class="innerContainerPeople">
+                  <i class="fas fa-globe-americas"  style={{marginRight:'25px'}} ></i>
+                  <Field
+                    name = 'location'
+                    placeholder="Location"
+                    component= {renderLocationField}
+                    type= 'text'
+
+
+                  />
+              </div>
+            </div>
+
+            <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
+              <div class="innerContainerPeople">
+                <i style={{marginRight:'25px'}}  class="fas fa-clock"></i>
+
+
+                    {/*
+
+
+                      <Field
+                        name = 'startDate'
+                        component = {renderStartDate}
+                        onChange = {this.onStartDateChange}
+                        type = 'date'
+                      />
+                    */}
+
+
+
+                   <Field
+                     style={{display: 'inline-block',float: 'left'}}
+                     name = 'startTime'
+                     component = {renderStartDateSelect}
+                     onChange = {this.handleStartTimeChange}
+                     >
+                     {renderStartTime()}
+                   </Field>
+
+                   <Field
+                     style={{display: 'inline-block', marginRight:'15px'}}
+                     name = 'endTime'
+                     onChange = {this.handleEndTimeChange}
+                     component = {renderStartDateSelect}
+                     >
+                     {this.renderEndTimeSelect()}
+                   </Field>
+              </div>
+            </div>
+
+              {error && <strong style = {{color: 'red'}}>{error}</strong>}
+              <div className = 'eventSyncSurroundings'>
+            <div className = 'clearEventSyncFormButton' >
+              <Button
+              diabled = {pristine}
+              onClick= {reset}>Clear Values</Button>
+            </div>
+            <div className = 'eventSyncSubmitButton'>
+              <Button
+                type = 'primary'
+                onClick = {handleSubmit}
+                disabled = {invalid || this.props.active === null}>
+                Send Event
+              </Button>
+            </div>
+          </div>
+          </form>
+        </Card>
 
     )
   }

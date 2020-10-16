@@ -950,17 +950,12 @@ class PickEventSyncWeek extends React.Component{
 
           <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
 
-            <Card
-              title="Schedule event" extra={<a href="#">30 date</a>}
-              style={{ width: 400,
-                marginLeft:'25px',
-                marginTop:'15px',
-                 padding:'10px' }}>
+
               <PickEventSyncForm
               onSubmit = {this.submit}
               initialValues = {this.getInitialValue()}
               active = {this.state.active} />
-            </Card>
+      
 
 
           <Col span={8}></Col>
