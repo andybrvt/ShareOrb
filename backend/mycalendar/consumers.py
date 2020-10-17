@@ -333,6 +333,36 @@ class EventPageConsumer (JsonWebsocketConsumer):
         # print (content)
         self.send_message(content)
 
+    def send_edit_event_info(self, data):
+        print(data)
+        eventEdit = get_object_or_404(Event, id = data['editEventObj']['eventId'])
+        print(eventEdit)
+
+        personList = []
+        for people in data['editEventObj']['person']:
+            person = get_object_or_404(User, username = people)
+            personList.append(person)
+
+        inviteList = []
+        for invites in data['editEventObj']['invited']:
+            invite = get_object_or_404(User, username = invites)
+            inviteList.append(invite)
+
+
+        # You cannot update many to many field objects in the update, you have to
+        # do it manually out side of it
+        Event.objects.filter(id = data['editEventObj']['eventId']).update(
+            title= data['editEventObj']['title'],
+            content= data['editEventObj']['content'],
+            start_time= data['editEventObj']['startDate'],
+            end_time= data['editEventObj']['endDate'],
+            location= data['editEventObj']['location'],
+            color= data['editEventObj']['eventColor'],
+            repeatCondition= data['editEventObj']['repeatCondition'],
+        )
+        eventEdit.person.set(personList)
+        eventEdit.invited.set(inviteList)
+
     def send_message(self, eventMessage):
         # This will be the go between for sending events... so when you send an event
         # this will locate the right group and then sent it to that group channel
@@ -376,6 +406,8 @@ class EventPageConsumer (JsonWebsocketConsumer):
             self.send_fetch_event_messages(data)
         if data['command'] == 'send_event_message':
             self.send_event_message(data)
+        if data['command'] == "send_edit_event_info":
+            self.send_edit_event_info(data);
         print(data)
 
     def new_message(self, message):

@@ -4,9 +4,11 @@ import {Button, Progress, Avatar} from 'antd';
 import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
+import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 import * as dateFns from 'date-fns';
 import { connect } from "react-redux";
 import moment from 'moment';
+
 
 
 
@@ -28,6 +30,41 @@ class EventInfo extends React.Component{
     }
 
   }
+
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+
+    console.log(time)
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    console.log(minutes)
+    console.log(hour)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
+      }
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
+      }
+    }
+
+    const timeBundle = {
+      firstHour: hour,
+      firstMin: minutes
+    }
+
+    return timeBundle
+
+  }
+
 
   onEditClick = () => {
     // This will activate the edit so that you can start editing events
@@ -97,7 +134,7 @@ class EventInfo extends React.Component{
         title = this.props.info.title
       }
       if(this.props.info.content){
-        content = this.props.info.title
+        content = this.props.info.content
       }
       if(this.props.info.invited){
         for(let i= 0; i < this.props.info.invited.length; i++){
@@ -123,6 +160,97 @@ class EventInfo extends React.Component{
       }
     }
 
+
+  }
+
+  onSaveEdit = (values) => {
+    // This function will be called when you want to save the new inofmriaton
+    // about the event in the detailEventEditForm
+    // The way this is gonna go, if the function is a single function (not shared
+  // with anyone) then it will probally just run a normal axios and then change all
+  // the redux. For events that has many people, then you prpbally have to do editing
+  // through channels and then notifiy everyone
+
+  // To get this working you gotta  manipulate your data that is passed in and
+  // bundle them up and send it to the right place
+
+  // Also include notifications (mini one and big ones as well)
+
+  let sharedList  = values.friends
+  // remember that when doing this you still gotta include yourself in stuff
+
+
+  let start_date = values.startDate.toDate()
+  let end_date = values.endDate.toDate()
+
+  // The start and end time are dicts that hold the hour and mins into two
+  // seperate keys
+  const start_time = this.timeConvert(values.startTime)
+  const end_time = this.timeConvert(values.endTime)
+
+  console.log(start_time, end_time)
+
+  start_date = dateFns.addHours(start_date, start_time.firstHour)
+  start_date = dateFns.addMinutes(start_date, start_time.firstMin)
+  // Now you have to convert the date into the right format to be sent into the back
+  // end... the format is this "yyyy-MM-dd HH:mm:ss"
+  const instance_start_date = dateFns.format(start_date, 'yyyy-MM-dd HH:mm:ss')
+
+  end_date = dateFns.addHours(end_date, end_time.firstHour)
+  end_date = dateFns.addMinutes(end_date, end_time.firstMin)
+  const instance_end_date = dateFns.format(end_date, 'yyyy-MM-dd HH:mm:ss')
+
+
+  const inviteList = values.friends.slice()
+
+  let personList = values.friends
+  personList.push(this.props.username)
+  console.log(instance_start_date, instance_end_date)
+  console.log(start_date, end_date)
+  console.log(values)
+
+
+  console.log(inviteList, personList)
+
+  let content = ""
+  let location = ""
+  if(values.content){
+    content = values.content
+  }
+  if(values.location){
+    location = values.location
+  }
+
+  // SENARIO 1: If the event is not getting shared with more people
+  if(sharedList.length === 0){
+      // this will be the one that you will run with axios then redux
+
+  }
+  // SENARIO 2: If the event is getting shaed with more people
+  else if(sharedList.length !== 0){
+
+    // DO A CONDTION WHERE IF YOU ARE UNSHARING WITH PEOPLE, YOU ASK IF
+    // THEY ARE SURE THEY WANNA UNSURE WITH ALL THESE PEOPLE
+
+     // This will be the one you will run with channels
+     const editEventObj = {
+       eventId: this.props.info.id,
+       title: values.title,
+       person: personList,  //Remember that person is the people that the event will show up to
+       invited: inviteList, //everyone but you
+       content: content,
+       location: location,
+       eventColor: values.eventColor,
+       startDate: start_date,
+       endDate: end_date,
+       repeatCondition: values.repeatCondition,
+       host: this.props.id
+     }
+
+     EventPageWebSocketInstance.sendEditEvent(editEventObj);
+
+
+   }
 
   }
 
@@ -195,6 +323,7 @@ class EventInfo extends React.Component{
         <DetailEditEventForm
         {...this.props}
         initialValues = {this.getInitialValue()}
+        onSubmit = {this.onSaveEdit}
          />
 
           <div>
@@ -375,5 +504,11 @@ class EventInfo extends React.Component{
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    username: state.auth.username
+  }
+}
 
-export default (EventInfo);
+
+export default connect(mapStateToProps)(EventInfo);

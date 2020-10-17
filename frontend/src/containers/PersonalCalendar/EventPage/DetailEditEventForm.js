@@ -14,6 +14,29 @@ const { Option } = Select;
 const { TextArea } = Input
 
 
+const validate = values => {
+  const errors = {}
+  // This is used to check if certain fields are properly checked and so it deosn't
+  // mess with the editing of events
+  console.log(values)
+  if (!values.title){
+    errors.title = "Required"
+  }
+  if(dateFns.isAfter(new Date(values.startDate), new Date(values.endDate))){
+    errors.endDate = 'endDate error'
+  } else if (values.repeatCondition === 'weekly' &&
+    !dateFns.isSameWeek(new Date(values.startDate), new Date(values.endDate))
+  ) {
+    errors.endDate = "endDate error"
+  } else if (values.repeatCondition === 'daily' &&
+    !dateFns.isSameDay(new Date(values.startDate), new Date(values.endDate))
+  ) {
+    errors.endDate = "endDate error"
+  }
+
+  return errors
+}
+
 const renderField = (field) => {
   console.log(field.meta)
   return (
@@ -693,6 +716,7 @@ class DetailEditEventForm extends React.Component{
 DetailEditEventForm = reduxForm({
   form: "detailEventEdit",
   enableReinitialize: true,
+  validate //validate the fields to make sure they are correct
 }) (DetailEditEventForm);
 
 const selector = formValueSelector("detailEventEdit");

@@ -79,6 +79,19 @@ class WebSocketEventPage{
     })
   }
 
+  sendEditEvent = (editEventObj) =>{
+    // This will send to the backend and change the information about the event
+    // then will be sent back to the front end
+    // The editeventobj will hold all the info of an event
+
+    console.log(editEventObj)
+
+    this.sendMessage({
+      command: "send_edit_event_info",
+      editEventObj: editEventObj
+    })
+  }
+
   socketNewMessage(data){
     // This is where things go after you sned info from the back end to the front
     // end. This will get the commands and then do stuff with the information
