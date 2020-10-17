@@ -98,7 +98,6 @@ class PickEventSyncUserProfileCard extends React.Component {
         </div>
         <div className = 'bottom'>
           <div className = 'name'> {this.capitalize(this.props.data.first_name)+" "+this.capitalize(this.props.data.last_name)} </div>
-          <div className = 'designation'> {this.props.data.get_followers.length} followers </div>
           <div className = 'location'> <EnvironmentOutlined /> Tucson, AZ </div>
         </div>
         <div className = 'social'>

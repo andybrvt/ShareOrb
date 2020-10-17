@@ -84,28 +84,7 @@ const renderEndDate = (field) => {
 
 
 
-const renderStartDateSelect = (field) => {
-  // This const will render the start time of the event
-  // So before you choose any value you want to have the field
-  // input as a value in your select... because the input value will be the value
-  // that will be return to the field when you input a value
-  // Bascially everything goes through the value first, and what ever is here inspect
-  // is just for show
 
-
-  console.log(field)
-  return (
-    <Select
-      // {...field.input}
-      style = {{width: '115px', marginRight:'15px'}}
-      onChange = {field.input.onChange}
-      value = {field.input.value}
-      className = 'timebox'>
-
-    {field.children}
-    </Select>
-  )
-}
 
 const renderStartTime = () => {
     const timeFormat = "hh:mm a"
@@ -172,6 +151,52 @@ class PickEventSyncForm extends React.Component {
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  renderStartDateSelect = (field) => {
+    // This const will render the start time of the event
+    // So before you choose any value you want to have the field
+    // input as a value in your select... because the input value will be the value
+    // that will be return to the field when you input a value
+    // Bascially everything goes through the value first, and what ever is here inspect
+    // is just for show
+    console.log(this.props)
+    console.log(this.props.startTime)
+
+    return (
+      <Select
+        // {...field.input}
+        style = {{width: '115px', marginRight:'15px'}}
+        onChange = {field.input.onChange}
+        value = {this.props.startTime}
+        className = 'timebox'>
+
+      {field.children}
+      </Select>
+    )
+  }
+
+  renderEndDateSelect = (field) => {
+    // This const will render the start time of the event
+    // So before you choose any value you want to have the field
+    // input as a value in your select... because the input value will be the value
+    // that will be return to the field when you input a value
+    // Bascially everything goes through the value first, and what ever is here inspect
+    // is just for show
+    console.log(this.props)
+    console.log(this.props.endTime)
+
+    return (
+      <Select
+        // {...field.input}
+        style = {{width: '115px', marginRight:'15px'}}
+        onChange = {field.input.onChange}
+        value = {this.props.endTime}
+        className = 'timebox'>
+
+      {field.children}
+      </Select>
+    )
   }
 
   handleStartTimeChange = (event, value) => {
@@ -456,8 +481,7 @@ class PickEventSyncForm extends React.Component {
   render () {
     console.log(this.state)
     console.log(this.props)
-    console.log(this.props.initialValues)
-    console.log(this.props.initialValues.startDate)
+
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
 
@@ -468,9 +492,12 @@ class PickEventSyncForm extends React.Component {
       <Card
         title="Schedule event"
          extra={
-           <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
-           tet
-         </Button>}
+           <Button style={{float:'left', marginRight:'15px',
+             display:'inline-block'}} type="primary"
+            shape="circle" size={'large'}>
+             {this.props.whichDay}
+           </Button>
+         }
         style={{ width: 400,
           marginLeft:'25px',
           marginTop:'15px',
@@ -535,7 +562,7 @@ class PickEventSyncForm extends React.Component {
                    <Field
                      style={{display: 'inline-block',float: 'left'}}
                      name = 'startTime'
-                     component = {renderStartDateSelect}
+                     component = {this.renderStartDateSelect}
                      onChange = {this.handleStartTimeChange}
                      >
                      {renderStartTime()}
@@ -545,7 +572,7 @@ class PickEventSyncForm extends React.Component {
                      style={{display: 'inline-block', marginRight:'15px'}}
                      name = 'endTime'
                      onChange = {this.handleEndTimeChange}
-                     component = {renderStartDateSelect}
+                     component = {this.renderEndDateSelect}
                      >
                      {this.renderEndTimeSelect()}
                    </Field>

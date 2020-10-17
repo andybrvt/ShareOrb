@@ -101,9 +101,368 @@ const renderStartDate = (field) => {
      />
   )
 }
+
+
 class PickEventSyncWeek extends React.Component{
 
-  renderEndTimeSelect = () => {
+    state = {
+      active: null,
+      selectedDate: null,
+    }
+
+
+
+    renderHeader(){
+      // The difference between the week and the day is that
+      // the day cal is just for the next day so  you want to
+      // switch all the minDates with maxdates
+      const dateFormat = 'MMMM yyyy'
+      const minDate = this.props.maxDate
+      return(
+        <div className = 'header'>
+          <div className = 'col-center'>
+            <span>
+              {dateFns.format(new Date(minDate) , dateFormat)}
+            </span>
+          </div>
+        </div>
+      )
+    }
+
+    renderDays() {
+      // This is just to render out the days in the date range
+      const dateFormat = 'iii'
+      const dayFormat = 'd'
+      const days = []
+
+      let minDate = dateFns.addDays(new Date(this.props.minDate),1)
+      let maxDate = dateFns.addDays(new Date(this.props.maxDate),1)
+
+      const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
+      let cloneMaxDate = this.props.maxDate
+
+      // This is only for one day but the css and everything is already set up
+      for(let i = 0; i<difference; i++){
+          const cloneCloneMaxDate = cloneMaxDate
+          days.push(
+            <div
+            className = 'syncCol col-center '
+            key = {i}
+            >
+              {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
+              <br />
+              {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
+            </div>
+          )
+          cloneMaxDate = dateFns.addDays(cloneCloneMaxDate, 1)
+      }
+      return <div className = 'days row'>{days}</div>
+    }
+
+    renderSide() {
+      // Render side, you would want to start off at 11:30 am and end at 11:30 pm
+      const dateFormat = 'h a'
+      const hour = []
+      let startHour = dateFns.addHours(dateFns.startOfDay(new Date(this.props.maxDate)), 1)
+      for (let i = 0; i<23; i++){
+        const formattedHour = dateFns.format(startHour, dateFormat)
+        hour.push(
+          <div
+            className = 'cell'
+            key = {hour}
+          >
+          <span className = 'number'>{formattedHour}</span>
+          </div>
+        )
+        startHour = dateFns.addHours(startHour, 1)
+      }
+      return <div className= 'body'> {hour} </div>
+    }
+
+    renderWeekCell(events){
+      console.log(events)
+      // Render the week cell, so what you want to do is pick the first to be the minDate and
+      // the last day will be the maxDate
+      // You will loop through each hour of each day and then redner through each day of the week
+
+      // Probally have to fix this later when we readjust the timezone issue.
+      const minDate = dateFns.addHours(new Date(this.props.minDate),7);
+      const maxDate = dateFns.addHours(new Date(this.props.maxDate),7);
+      // This will be different from the calendar week calendar in that it doesn't start from the beginning
+      // of the week but rather it will start from beginning of the date range
+      console.log(this.props.minDate, this.props.maxDate)
+      console.log(minDate, maxDate)
+      const hourFormat = 'h a'
+      const dayFormat = 'd MMMM'
+      // This hour list will hold 24 items, each list will be for each hour of each day 5x24
+      const hours = []
+
+       // This list will hold all the events
+       let toDoStuff = []
+       // This will be a list with teh same hour of all the days
+       let days = []
+       // You will need the start day and the start hour
+       // The start day will be the minDate
+       let date = minDate
+       const startHourDay = dateFns.startOfDay(date);
+       const endHourDay = dateFns.endOfDay(date);
+
+       console.log(startHourDay)
+
+       let formattedDay = '';
+
+       let hour = startHourDay;
+       let formattedHour = '';
+
+       // The counter is to give each box a seperate id so that it will highlight when you click on it
+       let counter = 0
+
+       const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
+
+       // The plan for the loop is ot have a while loop that loops thorugh each hour of the same day
+       // then go down to the next hour then go through all the days
+
+       while (hour <= endHourDay){
+         // When adding things to the calendar you have to match the date and the hour
+         for (let i = counter; i< (counter+difference); i++){
+            const cloneDay = date
+            const cloneHour = hour
+            const checkMin = dateFns.getMinutes(new Date(hour))
+            formattedHour = dateFns.format(hour, hourFormat)
+            formattedDay = dateFns.format(date, dayFormat)
+            // This loop will loop thorugh all the events and if the hour and day matches and it will
+            // add it to the toDoStuff which will loopp thorugh each each cell then it will be
+            // cleared out again
+            for (let item = 0; item<events.length; item++){
+              const startHour = dateFns.getHours(new Date(events[item].start_time))
+              const startMin = dateFns.getMinutes(new Date(events[item].start_time))
+              const endHour = dateFns.getHours(new Date(events[item].end_time))
+              const endMin = dateFns.getMinutes(new Date(events[item].end_time))
+              const curHour = dateFns.getHours(new Date(hour))
+              const curMin = dateFns.getMinutes(new Date(hour))
+
+
+              const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+              const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
+
+              console.log(startHour, startMin)
+              console.log(sameDayStart, sameDayEnd, startHour, startMin,new Date(events[item].start_time), cloneDay )
+
+              if (
+                startHour === 23
+              ){
+
+                if(
+                 startMin === 30
+                 &&
+                 startHour === curHour
+                 &&
+                 startMin === curMin
+                 &&
+                 (sameDayStart || sameDayEnd)
+               ){
+                 console.log('right here')
+                 toDoStuff.push(
+                   events[item]
+                 )
+               }
+                else if(
+                  startMin === 0
+                  &&
+                  startMin === curMin
+                  &&
+                  startHour === curHour
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ) {
+
+                  toDoStuff.push(
+                    events[item]
+                  )
+                }
+
+
+                if (endHour === 0){
+                  if (
+                    startMin === 0
+                    &&
+                    startHour === curHour
+                    &&
+                    (sameDayStart || sameDayEnd)
+                  ){
+                    toDoStuff.push(
+                      events[item]
+                    )
+                  } else if(
+                    startMin === 30
+                    &&
+                    startMin === curMin
+                    &&
+                    startHour === curHour
+                    &&
+                    (sameDayStart || sameDayEnd)
+                  ){
+                    toDoStuff.push(
+                      events[item]
+                    )
+                  }
+
+                }
+
+
+              }
+              else {
+                if (
+                  startHour === curHour
+                  &&
+                  startMin === curMin
+                  &&
+                  (sameDayStart || sameDayEnd)
+
+                ){
+                  console.log('test1')
+                  toDoStuff.push(
+                    events[item]
+                  )
+                }
+                if(
+                  endHour === curHour
+                  &&
+                  endMin === 30
+                  &&
+                  endMin-30 === curMin
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ){
+                  console.log('test1')
+                  toDoStuff.push(
+                    events[item]
+                  )
+                } else if (
+                  endMin === 0
+                  &&
+                  endHour -1 === curHour
+                  &&
+                  endMin+30 === curMin
+                  &&
+                  (sameDayStart || sameDayEnd)
+                ){
+                  console.log('test1')
+                  toDoStuff.push(
+                    events[item]
+                  )
+                }
+
+                if(
+                  startMin === 30
+
+                ){
+                  if(
+                    startHour < curHour
+                    &&
+                    endHour > curHour
+                    &&
+                    (0 === curMin
+                    ||
+                    30 === curMin)
+                    &&
+                    (sameDayStart || sameDayEnd)
+                  ){
+                    console.log('test1')
+                    toDoStuff.push(
+                      events[item]
+                    )
+                  }
+
+                } else if (
+                  startMin === 0
+
+                ){
+                  if (
+                    startHour <= curHour
+                    &&
+                    endHour> curHour
+                    &&
+                    (sameDayStart || sameDayEnd)
+                  ){
+                    toDoStuff.push(
+                      events[item]
+                    )
+                  }
+
+                }
+
+
+              }
+
+
+            }
+
+            // You can always have access to the events, you just got to loop through
+            // toDoStruff in the if below if you want to check
+            if (toDoStuff.length > 0){
+              days.push(
+                <div
+                  className = {`syncCol disabled ${checkMin === 0 ? "nonhourcellT":"nonhourcellB"} `}
+                >
+                </div>
+              )
+            } else {
+              days.push(
+                <div
+                  style = {{background: this.color(i)}}
+                  className = {`syncCol ${checkMin === 0 ? "hourcellT" : "hourcellB"}`}
+                  onClick = {(e) => this.onDayHourClick(e, i, cloneDay, cloneHour)}
+                >
+                <span className = 'number'></span>
+                </div>
+              )
+            }
+            toDoStuff = []
+            date = dateFns.addDays(date, 1)
+         }
+         // After you loop thorugh the hour, you will want to put that hur into the hour
+         // list and then clear out days list ot redo it again then you add in the next hour, then
+         // set the start day again to the start of the week then run it throuhg again
+         // Remember teh date must be resetted before adding the hour because
+         // of the while condition
+         hours.push(
+           <div className = 'row'>
+            {days}
+           </div>
+         )
+         counter = counter + 1
+         days = []
+         date = minDate
+         hour = dateFns.addMinutes(hour, 30)
+       }
+
+       return <div className = 'body'>{hours}</div>
+    }
+
+    onDayHourClick = (e,position, day, hour) => {
+      console.log(hour)
+      const selectedHour = dateFns.getHours(hour)
+      const selectedMin = dateFns.getMinutes(hour)
+      const selectedYear = dateFns.getYear(day)
+      const selectedMonth = dateFns.getMonth(day)
+      const selectedDate = dateFns.getDate(day)
+      const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour, selectedMin)
+      if (this.state.active === position){
+        this.setState({
+          active: null,
+          selectedDate: null
+        })
+      } else {
+        this.setState({
+          active: position,
+          selectedDate: finalSelectedDate
+        })
+      }
+      console.log(finalSelectedDate)
+    }
+
+    renderEndTimeSelect = () => {
     console.log(this.props.startTime)
 
     if (this.props.startTime !== undefined ){
@@ -174,10 +533,6 @@ class PickEventSyncWeek extends React.Component{
     }
   }
 
-  state = {
-    active: null,
-    selectedDate: null,
-  }
 
 
   onStartDateChange = (event, value) => {
@@ -901,9 +1256,9 @@ class PickEventSyncWeek extends React.Component{
       repeatCondition: 'none',
       friends: [],
       eventColor:'#91d5ff',
-      startTime:"1200 AM",
-      endTime:"1200 AM",
-
+      startTime:"12:00 AM",
+      endTime:"01:00 AM",
+      whichDay:3,
     }
   }
 
@@ -919,9 +1274,6 @@ class PickEventSyncWeek extends React.Component{
         <div className = 'syncCalendar'>
           <div className = 'syncHeader'>
             {this.renderHeader()}
-
-
-
             {this.renderDays()}
           </div>
           <div className = 'syncBody'>
@@ -948,7 +1300,13 @@ class PickEventSyncWeek extends React.Component{
               <PickEventSyncForm
               onSubmit = {this.submit}
               initialValues = {this.getInitialValue()}
-              active = {this.state.active} />
+              active = {this.state.active}
+              startTime={dateFns.format(new Date(this.state.selectedDate), "hh:mm a" )}
+              endTime={dateFns.format(dateFns.addHours(new Date(this.state.selectedDate),1), "hh:mm a" )}
+              whichDay={dateFns.format(new Date(this.state.selectedDate), "d" )}
+
+
+               />
 
 
 
