@@ -545,10 +545,31 @@ class DetailEditEventForm extends React.Component{
     }
   }
 
+  renderShareListSelect = () => {
+    if(this.props.friendList !== undefined){
+      const friendList = this.props.friendList
+
+      let shareOptions = []
+
+      for (let friend = 0; friend< friendList.length; friend++ ){
+        shareOptions.push(
+          <Option value = {friendList[friend].username}
+          label = {this.capitalize(friendList[friend].username)}>
+            {this.capitalize(friendList[friend].username)}
+          </Option>
+        )
+      }
+
+      return shareOptions
+    }
+  }
+
 
 
   render(){
     const {handleSubmit, pristine, invalid, reset} = this.props;
+
+
 
     console.log(this.props)
 

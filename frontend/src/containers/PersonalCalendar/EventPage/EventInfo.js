@@ -138,6 +138,7 @@ class EventInfo extends React.Component{
       }
       if(this.props.info.invited){
         for(let i= 0; i < this.props.info.invited.length; i++){
+          if(this.props.info.invited[i].username !== this.props.username)
           friends.push(this.props.info.invited[i].username)
         }
       }
@@ -324,6 +325,7 @@ class EventInfo extends React.Component{
         {...this.props}
         initialValues = {this.getInitialValue()}
         onSubmit = {this.onSaveEdit}
+        friendList = {this.props.friendList}
          />
 
           <div>
@@ -506,7 +508,8 @@ class EventInfo extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    username: state.auth.username
+    username: state.auth.username,
+    friendList: state.auth.friends
   }
 }
 

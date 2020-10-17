@@ -363,6 +363,10 @@ class EventPageConsumer (JsonWebsocketConsumer):
         eventEdit.person.set(personList)
         eventEdit.invited.set(inviteList)
 
+        # CONTINUE HERE FOR THE CHANNELS, JUST CHANGING THE EVENT PAGE
+        # BECAUSE YOU ARE JUST GOING BACK TO THE EVENT PAGE
+
+
     def send_message(self, eventMessage):
         # This will be the go between for sending events... so when you send an event
         # this will locate the right group and then sent it to that group channel
