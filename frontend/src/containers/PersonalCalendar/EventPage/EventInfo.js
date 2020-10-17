@@ -5,6 +5,9 @@ import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
 import * as dateFns from 'date-fns';
+import { connect } from "react-redux";
+import moment from 'moment';
+
 
 
 class EventInfo extends React.Component{
@@ -82,13 +85,45 @@ class EventInfo extends React.Component{
     // EditEventPopUp
     console.log(this.props.info)
     if(this.props.info){
-      const date_start = new Date(this.props.info.start_time)
+      let title = "";
+      let content = "";
+      let friends = [];
+      const date_start = dateFns.format(new Date(this.props.info.start_time), "yyyy-MM-dd")
       const date_end = new Date(this.props.info.end_time)
-      const start_time = this.timeConvertFunction(this.props.info.start_time)
-      const end_time = this.timeConvertFunction(this.props.info.end_time)
+      const start_time = dateFns.format(new Date(this.props.info.start_time), "hh:mm a")
+      const end_time = dateFns.format(new Date(this.props.info.end_time), "hh:mm a")
+      console.log(date_start, end_time)
+      if(this.props.info.title){
+        title = this.props.info.title
+      }
+      if(this.props.info.content){
+        content = this.props.info.title
+      }
+      if(this.props.info.invited){
+        for(let i= 0; i < this.props.info.invited.length; i++){
+          friends.push(this.props.info.invited[i].username)
+        }
+      }
 
+      console.log(friends)
 
+// Remember that for start date you have to use a momment object, only that will work
+
+      return{
+        title: this.capitalize(title),
+        content: this.capitalize(content),
+        startTime: start_time,
+        endTime: end_time,
+        eventColor: this.props.info.color,
+        location: this.props.info.location,
+        startDate: moment(this.props.info.start_time, "YYYY-MM-DD"),
+        endDate: moment(this.props.info.end_time, "YYYY-MM-DD"),
+        friends: friends,
+        repeatCondition: this.props.info.repeatCondition
+      }
     }
+
+
   }
 
   render(){
@@ -159,7 +194,7 @@ class EventInfo extends React.Component{
         <div>
         <DetailEditEventForm
         {...this.props}
-        initialValue = {this.getInitialValue()}
+        initialValues = {this.getInitialValue()}
          />
 
           <div>
@@ -340,4 +375,5 @@ class EventInfo extends React.Component{
   }
 }
 
-export default EventInfo;
+
+export default (EventInfo);

@@ -264,6 +264,7 @@ class EditEventPopUp extends React.Component {
     const start_time = this.timeConvertFunction(this.props.start_time)
     const end_time  = this.timeConvertFunction(this.props.end_time)
     console.log(this.props)
+    console.log(start_time, end_time)
     return{
       title: this.props.title,
       content: this.props.content,

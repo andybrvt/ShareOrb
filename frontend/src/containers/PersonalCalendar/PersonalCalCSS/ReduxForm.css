@@ -34,9 +34,10 @@
 
 .reduxContent{
   /* background-color: red; */
-  width: 300px;
+  display: flex;
+  width: 400px;
   padding-bottom: 10px;
-  margin-left: 30px
+  /* margin-left: 30px; */
 }
 
 .reduxContent .box{

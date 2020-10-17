@@ -885,8 +885,8 @@ class PickEventSyncWeek extends React.Component{
     const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
     const date_end = new Date(this.state.end_date)
     const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
-    const start_time = dateFns.getHours(date_start)
-    const end_time = dateFns.getMinutes(date_start)
+    const start_time = dateFns.format(new Date(this.state.selectedDate), "HH:mm a" )
+    const end_time = dateFns.format(new Date(this.state.selectedDate), "HH:mm a" )
     // const start_time = this.timeConvertFunction(this.state.start_time)
     // const end_time  = this.timeConvertFunction(this.state.end_time)
     console.log(this.props)
@@ -955,7 +955,7 @@ class PickEventSyncWeek extends React.Component{
               onSubmit = {this.submit}
               initialValues = {this.getInitialValue()}
               active = {this.state.active} />
-      
+
 
 
           <Col span={8}></Col>

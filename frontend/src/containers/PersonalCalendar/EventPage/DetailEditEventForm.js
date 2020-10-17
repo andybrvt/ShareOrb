@@ -29,6 +29,17 @@ const renderField = (field) => {
   )
 }
 
+const renderTextArea = (field) => {
+  return (
+    <TextArea
+    {...field.input}
+    type = {field.type}
+    placeholder = {field.placeholder}
+    />
+  )
+
+}
+
 const renderRadioSelect = (field) => {
   // render the radio to pick normal date, weekly, or daily
   console.log(field)
@@ -392,19 +403,19 @@ class DetailEditEventForm extends React.Component{
   }
 
 
-  // renderEndDate = (field) => {
-  //   console.log(field.meta)
-  //   return (
-  //     <DatePicker
-  //     onChange = {field.input.onChange}
-  //     value = {field.input.value}
-  //     style = {{width: '110px'}}
-  //     suffixIcon={<div></div>}
-  //     allowClear = {false}
-  //     // className = {` ${this.onRed() ? 'datePicker' : ''}`}
-  //     />
-  //   )
-  // }
+  renderEndDate = (field) => {
+    console.log(field.meta)
+    return (
+      <DatePicker
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+      style = {{width: '110px'}}
+      suffixIcon={<div></div>}
+      allowClear = {false}
+      // className = {` ${this.onRed() ? 'datePicker' : ''}`}
+      />
+    )
+  }
 
   onStartDateChange = (event, value) => {
     const { change } = this.props
@@ -543,7 +554,7 @@ class DetailEditEventForm extends React.Component{
             />
           </div>
 
-          <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
+          <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
             <div class="innerContainerPeople">
               <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
@@ -553,6 +564,13 @@ class DetailEditEventForm extends React.Component{
                      onChange = {this.onStartDateChange}
                      type = 'date'
                    />
+
+                   <Field
+                    name = 'endDate'
+                    component = {this.renderEndDate}
+                    onChange = {this.handleEndTimeChange}
+                    type = 'date'
+                  />
 
 
                  <Field
@@ -596,8 +614,10 @@ class DetailEditEventForm extends React.Component{
           </div>
 
 
-          {/* Description of event
+          <br />
           <div className  = 'reduxContent'>
+          <i class="fas fa-align-justify" style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
+
             <Field
             name = 'content'
             component= {renderTextArea}
@@ -606,7 +626,7 @@ class DetailEditEventForm extends React.Component{
             />
           </div>
 
-          */}
+
           {/* location */}
           <div style={{height:'70px'}} className = 'outerContainerPeople'>
             <div class="innerContainerPeople">
@@ -672,7 +692,7 @@ class DetailEditEventForm extends React.Component{
 
 DetailEditEventForm = reduxForm({
   form: "detailEventEdit",
-  enableReinitialize: true
+  enableReinitialize: true,
 }) (DetailEditEventForm);
 
 const selector = formValueSelector("detailEventEdit");
