@@ -170,6 +170,217 @@ const afterSubmit = (result, dispatch) =>
 // So this form is when you pick a date and you want to schedule a time
 class PickEventSyncForm extends React.Component {
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  handleStartTimeChange = (event, value) => {
+    const { change } = this.props
+    // So this handleStartTimechange pretty much is used to automatically
+    // change the values of the endTime, the only difference between this
+    // and that of the ReactAddEventForm is that we dont need to change the
+    // startTime value just the endTime value will be affected
+
+
+    console.log(value)
+    change('startTime', value)
+
+    // Like every other time related events we have to converted all
+    let startHour = parseInt(value.substring(0,2))
+    let startMin = parseInt(value.substring(3,5))
+    let ampm = value.substring(5,8)
+
+    let endHour = parseInt(this.props.endTime.substring(0,2))
+    let endMin = parseInt(this.props.endTime.substring(3,5))
+    let endTime = ''
+
+    console.log(startHour)
+
+
+
+    // These if statement is used to change the startTime values to the 1-24 hour format
+    if(value.includes('PM')){
+      if(startHour !== 12 ){
+        startHour = startHour + 12
+      }
+    } else if (value.includes('AM')){
+      if(startHour === 12){
+        startHour = 0
+      }
+    }
+
+    // These if statements here is to change the end time values from 1-2 to
+    // 1-24 for the end time
+    if (this.props.endTime.includes('PM')){
+      if (endHour !==  12){
+        endHour = endHour + 12
+      }
+    } else if (this.props.endTime.includes('AM')){
+      if(endHour === 12){
+        endHour = 0
+      }
+    }
+
+    // Now this is where the comparison of the times comes in an all the senarios
+    // For this one,for times that the start hour is smaller than that of the
+    // end time you don't need to change the value because due to the redux from
+    // the value of the start time will chagne it self
+    if(startHour === endHour ){
+      if (startMin > endMin){
+        endMin = "00"
+        endHour = startHour + 1
+        console.log(startHour)
+        console.log(endHour)
+        if (startHour === 11 && ampm === 'AM'){
+          endTime = '12:'+endMin + ' PM'
+        } else if (startHour === 23 && ampm === " PM"){
+          endTime = '12:'+endMin + ' AM'
+        } else {
+          if (endHour < 10){
+            endHour = '0'+endHour
+          } else {
+             if(ampm === ' AM'){
+               endHour = endHour
+             } else if (ampm === ' PM'){
+               endHour = endHour-12
+               if (endHour < 10){
+                 endHour = '0'+endHour
+               }
+             }
+           }
+           endTime = endHour + ':'+endMin+ampm
+
+        }
+
+
+        change('endTime', endTime )
+      } else if (startMin === endMin ){
+        // This is the case where the times are identical to each other
+        // REMEMBER THAT ENDHOUR AND STARTHOUR ARE USING THE 1-24 TIME
+        console.log(startHour, endHour)
+        if (startHour === 0 && ampm === ' AM' && startMin === 0){
+          endTime = '12:30 AM'
+        } else if (startHour === 12 && ampm === ' PM' && startMin === 0){
+          endTime = '12:30 PM'
+        } else {
+          if (startMin === 30){
+            endMin = '00'
+            if (startHour === 12){
+              endHour = '01'
+              endTime = endHour + ':'+endMin+' PM'
+            } else if (startHour === 11 && ampm === ' AM'){
+                endTime =   '12:' + endMin + ' PM'
+              } else if ((startHour-12) === 11 && ampm === ' PM'){
+                endTime =  '12:' + endMin + ' AM'
+              }
+            else {
+              console.log(endHour)
+              endHour = startHour +1
+                if (endHour<10){
+                    endHour = '0'+endHour
+                } else {
+                  if(ampm === ' AM'){
+                    endHour = endHour
+                  } else if (ampm === ' PM'){
+                    endHour = endHour-12
+                    if (endHour < 10){
+                      endHour = '0'+endHour
+                    }
+                  }
+                }
+              endTime = endHour + ':' +endMin+ampm
+            }
+          } else if (startMin === 0){
+            endMin = '30'
+            console.log(ampm)
+            if (endHour<10){
+                endHour = '0'+endHour
+            } else {
+              if(ampm === ' AM'){
+                console.log('am')
+                endHour = endHour
+              } else if (ampm === ' PM'){
+                console.log('pm')
+                if (endHour === 12){
+                  endHour = 12
+                }else {
+                  endHour = endHour-12
+                  if (endHour < 10){
+                    endHour = '0'+endHour
+                  }
+                }
+              }
+            }
+            endTime = endHour + ':'+endMin +ampm
+          }
+        }
+
+        change('endTime', endTime)
+      }
+    } else if (startHour > endHour) {
+      // let startHour = parseInt(time.substring(0,2))
+      // let startMin = parseInt(time.substring(3,5))
+      if (startHour === 11 && ampm === ' AM' && startMin === 30){
+        endTime = '12:00 PM'
+      } else if (startHour === 23 && ampm === ' PM' && startMin === 30){
+        endTime = '12:00 AM'
+      } else {
+        if (startMin === 30){
+          startMin = "00"
+          startHour = startHour + 1
+        } else if (startMin !== 30){
+          startMin = '30'
+        }
+        if (startHour < 10){
+          startHour = '0'+startHour
+        } else{
+          if(ampm === ' AM'){
+            startHour = startHour
+          } else if (ampm === ' PM'){
+            startHour = startHour-12
+            if (startHour < 10){
+              if (startHour === 0){
+                startHour = '12'
+              } else {
+                startHour = '0'+startHour
+              }
+            }
+          }
+        }
+
+
+          endTime = startHour + ':'+startMin+ampm
+      }
+
+
+
+      change('endTime', endTime)
+    }
+
+  }
+
+
+  handleEndTimeChange = (event) => {
+    console.log(event)
+
+    const {change} = this.props
+    return (
+      console.log('endTime')
+      // change('endTime', event)
+    )
+  }
+
+  onStartDateChange = (event, value) => {
+    const { change } = this.props
+
+    // So this is where the end Date will be changed if the startDate or endDate
+    // seems to be ahead of the endDate
+    console.log(value)
+    if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
+      change('endDate', value)
+    }
+  }
+
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
 
