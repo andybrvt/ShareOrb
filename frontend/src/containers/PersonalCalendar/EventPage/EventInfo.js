@@ -252,6 +252,9 @@ class EventInfo extends React.Component{
 
 
    }
+   this.setState({
+     edit: false,
+   })
 
   }
 
@@ -328,12 +331,12 @@ class EventInfo extends React.Component{
         friendList = {this.props.friendList}
          />
 
-          <div>
-          <Button
-          onClick = {() => this.onCancelEventClick()}
-          >
-            Cancel
-          </Button>
+          <div
+          className = "editEventBackButtonContainer "
+          onClick = {() => this.onCancelEventClick()}>
+
+          <i class="fas fa-arrow-left"></i>
+          
           </div>
         </div>
         :
@@ -477,12 +480,18 @@ class EventInfo extends React.Component{
           {
             eventHostId === this.props.userId ?
 
-            <Button
+            <div
             className = 'editEventButton'
             onClick= {() => this.onEditClick()}
             >
-            Edit
-            </Button>
+            <i class="fas fa-pen" ></i>
+            <div style = {{fontSize: "15px"}}>
+            Edit Event
+            </div>
+            <div>
+            <i class="fas fa-chevron-down"></i>
+            </div>
+            </div>
 
             :
 
