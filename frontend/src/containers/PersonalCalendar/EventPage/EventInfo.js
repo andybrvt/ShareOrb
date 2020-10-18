@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Avatar} from 'antd';
+import {Button, Progress, Avatar, Modal} from 'antd';
 import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
@@ -8,7 +8,8 @@ import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 import * as dateFns from 'date-fns';
 import { connect } from "react-redux";
 import moment from 'moment';
-
+import AcceptShareModal from './AcceptShareModal';
+import * as calendarActions from '../../../store/actions/calendars';
 
 
 
@@ -21,7 +22,7 @@ class EventInfo extends React.Component{
   }
 
   state = {
-    edit: false
+    edit: false,
   }
 
   capitalize (str) {
@@ -164,6 +165,16 @@ class EventInfo extends React.Component{
 
   }
 
+
+
+  onAcceptUnShareEdit = () => {
+    EventPageWebSocketInstance.sendEditEvent(this.props.tempEventForModal)
+    this.props.closeAcceptUnshareModal()
+    this.setState({
+      edit: false
+    })
+  }
+
   onSaveEdit = (values) => {
     // This function will be called when you want to save the new inofmriaton
     // about the event in the detailEventEditForm
@@ -176,11 +187,21 @@ class EventInfo extends React.Component{
   // bundle them up and send it to the right place
 
   // Also include notifications (mini one and big ones as well)
+  let oldInvitedList = [];
+
+  for (let i = 0; i<this.props.info.invited.length; i++ ){
+    oldInvitedList.push(this.props.info.invited[i].username)
+  }
+
+
 
   let sharedList  = values.friends
   // remember that when doing this you still gotta include yourself in stuff
 
+  var difference = oldInvitedList.filter(x => !sharedList.includes(x));
 
+
+  console.log(sharedList, oldInvitedList, difference)
   let start_date = values.startDate.toDate()
   let end_date = values.endDate.toDate()
 
@@ -230,36 +251,70 @@ class EventInfo extends React.Component{
   // SENARIO 2: If the event is getting shaed with more people
   else if(sharedList.length !== 0){
 
+    if(difference.length === 0){
+      const editEventObj = {
+        eventId: this.props.info.id,
+        title: values.title,
+        person: personList,  //Remember that person is the people that the event will show up to
+        invited: inviteList, //everyone but you
+        content: content,
+        location: location,
+        eventColor: values.eventColor,
+        startDate: start_date,
+        endDate: end_date,
+        repeatCondition: values.repeatCondition,
+        host: this.props.id
+      }
+
+      EventPageWebSocketInstance.sendEditEvent(editEventObj);
+      this.setState({
+        edit: false,
+      })
+
+    } else {
+      const editEventObj = {
+        eventId: this.props.info.id,
+        title: values.title,
+        person: personList,  //Remember that person is the people that the event will show up to
+        invited: inviteList, //everyone but you
+        content: content,
+        location: location,
+        eventColor: values.eventColor,
+        startDate: start_date,
+        endDate: end_date,
+        repeatCondition: values.repeatCondition,
+        host: this.props.id
+      }
+
+      var unSharedList = "";
+      for (let i = 0; i<difference.length; i++){
+        unSharedList = unSharedList + this.capitalize(difference[i]) + ", "
+      };
+
+      console.log(unSharedList)
+      this.props.openAcceptUnshareModal(editEventObj, unSharedList);
+    }
+
+
     // DO A CONDTION WHERE IF YOU ARE UNSHARING WITH PEOPLE, YOU ASK IF
     // THEY ARE SURE THEY WANNA UNSURE WITH ALL THESE PEOPLE
 
-     // This will be the one you will run with channels
-     const editEventObj = {
-       eventId: this.props.info.id,
-       title: values.title,
-       person: personList,  //Remember that person is the people that the event will show up to
-       invited: inviteList, //everyone but you
-       content: content,
-       location: location,
-       eventColor: values.eventColor,
-       startDate: start_date,
-       endDate: end_date,
-       repeatCondition: values.repeatCondition,
-       host: this.props.id
-     }
-
-     EventPageWebSocketInstance.sendEditEvent(editEventObj);
-
-
    }
-   this.setState({
-     edit: false,
-   })
-
   }
 
+  onCloseSureModal = () => {
+    this.setState({
+      showSureModal: false
+    })
+  }
+
+
+
   render(){
-    console.log(this.props.info)
+    console.log(this.state)
+    console.log(this.props)
+    let show = this.state.showSureModal
+
     let username = ''
     let eventHostId = ''
     let title = ''
@@ -336,7 +391,7 @@ class EventInfo extends React.Component{
           onClick = {() => this.onCancelEventClick()}>
 
           <i class="fas fa-arrow-left"></i>
-          
+
           </div>
         </div>
         :
@@ -500,13 +555,20 @@ class EventInfo extends React.Component{
           }
 
           </div>
+
         </div>
 
 
       }
 
 
-
+      <AcceptShareModal
+      info = {this.props.tempEventForModal}
+      tempDifference ={this.props.tempDifference}
+      onCancel = {this.props.closeAcceptUnshareModal}
+      visible = {this.props.showAcceptUnshareModal}
+      onSubmit = {this.onAcceptUnShareEdit}
+       />
 
 
       </div>
@@ -518,9 +580,19 @@ class EventInfo extends React.Component{
 const mapStateToProps = state => {
   return {
     username: state.auth.username,
-    friendList: state.auth.friends
+    friendList: state.auth.friends,
+    showAcceptUnshareModal: state.calendar.showAcceptUnshareModal,
+    tempEventForModal: state.calendar.tempEventForModal,
+    tempDifference: state.calendar.tempDifference
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openAcceptUnshareModal: (eventObj, tempDifference) => dispatch(calendarActions.openAcceptUnshareModal(eventObj, tempDifference)),
+    closeAcceptUnshareModal: () => dispatch(calendarActions.closeAcceptUnshareModal()),
   }
 }
 
 
-export default connect(mapStateToProps)(EventInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(EventInfo);

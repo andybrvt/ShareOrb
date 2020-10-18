@@ -147,3 +147,19 @@ export const sendEventMessage = (eventMessageObj) => {
     message: eventMessageObj
   }
 }
+
+
+export const openAcceptUnshareModal = (eventObj, tempDifference) => {
+  console.log(tempDifference)
+  return {
+    type: actionTypes.OPEN_ACCEPT_UNSHARE_MODAL,
+    eventObj: eventObj,
+    tempDifference: tempDifference
+  }
+}
+
+export const closeAcceptUnshareModal = () => {
+  return{
+    type: actionTypes.CLOSE_ACCEPT_UNSHARE_MODAL,
+  }
+}

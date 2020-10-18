@@ -7,7 +7,10 @@ const initialState = {
   events: [],
   date: new Date(),
   selectedEvent: {},
-  eventMessages: []
+  eventMessages: [],
+  showAcceptUnshareModal: false,
+  tempEventForModal: {},
+  tempDifference : ""
 }
 
 const addEvent = (state, action)=> {
@@ -182,6 +185,23 @@ const sendEventMessage = (state, action) =>{
   })
 }
 
+const openAcceptUnshareModal = (state, action) => {
+  console.log(action)
+  return updateObject(state, {
+    showAcceptUnshareModal: true,
+    tempEventForModal: action.eventObj,
+    tempDifference: action.tempDifference,
+  })
+}
+
+const closeAcceptUnshareModal = (state, action) => {
+  return updateObject(state, {
+    showAcceptUnshareModal: false,
+    tempEventForModal: {},
+    tempDifference: ""
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -224,6 +244,10 @@ const reducer = (state = initialState, action) => {
       return loadEventInfo(state, action);
     case actionTypes.SEND_EVENT_MESSAGE:
       return sendEventMessage(state, action)
+    case actionTypes.OPEN_ACCEPT_UNSHARE_MODAL:
+      return openAcceptUnshareModal(state, action)
+    case actionTypes.CLOSE_ACCEPT_UNSHARE_MODAL:
+      return closeAcceptUnshareModal(state, action)
     default:
       return state;
   }

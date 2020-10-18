@@ -54,6 +54,8 @@ export const DECLINE_EVENT_SHARE = 'DECLINE_EVENT_SHARE';
 // the fetch_event_info command that is in the eventPageWebsocket
 export const LOAD_EVENT_INFO = 'LOAD_EVENT_INFO';
 export const SEND_EVENT_MESSAGE = 'SEND_EVENT_MESSAGE';
+export const OPEN_ACCEPT_UNSHARE_MODAL = 'OPEN_ACCEPT_UNSHARE_MODAL';
+export const CLOSE_ACCEPT_UNSHARE_MODAL = 'CLOSE_ACCEPT_UNSHARE_MODAL';
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
