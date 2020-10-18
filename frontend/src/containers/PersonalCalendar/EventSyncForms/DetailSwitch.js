@@ -5,26 +5,21 @@ import Icon from 'antd/lib/icon';
 import PropTypes from 'prop-types';
 import React from "react";
 import './DetailSwitch.css';
-
-
+import dayPic from './dayPic.svg';
+import weekPic from './weekPic.svg';
 
 const Element = BannerAnim.Element;
 
 const textData = {
-  content: 'Taiwan called motorcycle, motor bike [1] or a motorcycle,' +
-  ' the motorcycle referred to in the mainland, ' +
-  'Hong Kong and Southeast Asia known as motorcycles [2], ' +
-  'is a driven by the engine, ' +
-  'operated by a hand or two directions three-wheeled vehicles, is a means of transport. ' +
-  'In some military or police applications, will add a side compartment and a secondary wheel, ' +
-  'become a special three-wheeled motorcycle, mobility Zheyi common plug-in auxiliary wheels.',
-  title: 'Motorcycle',
+  content: 'Send a request to your friend to compare availibilities',
+  title: 'Day View',
 };
-
+let count=0;
+let picArray=[dayPic, weekPic]
 let dataArray = [
   {
     pic: 'https://zos.alipayobjects.com/rmsportal/ogXcvssYXpECqKG.png',
-    map: 'https://zos.alipayobjects.com/rmsportal/HfBaRfhTkeXFwHJ.png',
+    map: 'dayPic',
     color: '#FFF43D',
     background: '#F6B429',
   },
@@ -44,9 +39,7 @@ let dataArray = [
 dataArray = dataArray.map(item => ({ ...item, ...textData }));
 
 class DetailSwitch extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-  };
+
 
   static defaultProps = {
     className: 'details-switch-demo',
@@ -109,6 +102,7 @@ class DetailSwitch extends React.Component {
     return 1000;
   };
 
+
   render() {
     const imgChildren = dataArray.map((item, i) => (
       <Element
@@ -127,11 +121,9 @@ class DetailSwitch extends React.Component {
           key="img-wrapper"
         >
           <div className={`${this.props.className}-map map${i}`} key="map">
-            <img src={item.map} width="100%" />
+            <img src={picArray[count]} width="100%" />
           </div>
-          <div className={`${this.props.className}-pic pic${i}`} key="pic">
-            <img src={item.pic} width="100%" />
-          </div>
+
         </QueueAnim>
       </Element>));
     const textChildren = dataArray.map((item, i) => {

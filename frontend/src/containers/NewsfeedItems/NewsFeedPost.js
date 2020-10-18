@@ -10,7 +10,6 @@ import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
 import heart  from './heart.svg';
 import { commentPic } from './comment.svg';
-import DetailSwitch from '../DetailSwitch.js';
 import 'antd/dist/antd.css';
 import QueueAnim from 'rc-queue-anim';
 import defaultPic from '../../components/images/default.png'
@@ -1072,9 +1071,6 @@ class NewsfeedPost extends React.Component {
       const { TextArea } = Input;
   return (
     <div>
-    {/*
-    <DetailSwitch/>
-    */}` `
 
     {/*
     {this.ContentOfEvent()}

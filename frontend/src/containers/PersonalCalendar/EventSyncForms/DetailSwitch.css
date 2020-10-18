@@ -1,14 +1,14 @@
 .details-switch-demo-wrapper {
   position: relative;
   overflow: hidden;
-  height: 450px;
+  height: 650px;
   transition: background 1s;
 }
 
 .details-switch-demo {
   margin: 40px auto;
-  width: 600px;
-  height: 370px;
+  width: 700px;
+  height: 570px;
   background: #fff;
   border-radius: 6px;
   overflow: hidden;

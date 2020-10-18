@@ -82,7 +82,8 @@ class EventSyncModal extends React.Component{
       <div>
         {/*visible = {this.props.isVisble}*/}
         <Modal
-          width={500}
+          width={1000}
+          bodyStyle={{height:'700px'}}
           centered
           footer = {null}
 
