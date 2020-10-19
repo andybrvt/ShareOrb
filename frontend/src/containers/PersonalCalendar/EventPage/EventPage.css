@@ -67,9 +67,12 @@
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTitle{
   color: black;
-  font-size: 35px;
-  margin-top: 10px;
+  font-size: 30px;
+  /* font-size: calc(1.2vw); */
+  margin-top: 0px;
   /* background-color: red; */
+  height: 70px;
+  word-break: normal  ;
 }
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTime{
   color: black;

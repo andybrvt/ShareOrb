@@ -46,7 +46,9 @@ const renderField = (field) => {
     type = {field.type}
     placeholder= {field.placeholder}
     style={{display:'inline-block'}}
-    className = 'box'/>
+    className = 'box'
+    maxLength = "35"
+    />
 
     </span>
   )
