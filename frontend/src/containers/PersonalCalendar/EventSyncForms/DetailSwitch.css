@@ -1,13 +1,18 @@
+
+.test {
+    padding: 0;
+}
+
 .details-switch-demo-wrapper {
   position: relative;
   overflow: hidden;
-  height: 650px;
+  height: 700px;
   transition: background 1s;
 }
 
 .details-switch-demo {
-  margin: 40px auto;
-  width: 700px;
+  margin: 70px auto;
+  width: 800px;
   height: 570px;
   background: #fff;
   border-radius: 6px;

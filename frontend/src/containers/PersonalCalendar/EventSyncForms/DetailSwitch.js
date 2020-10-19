@@ -5,11 +5,16 @@ import Icon from 'antd/lib/icon';
 import PropTypes from 'prop-types';
 import React from "react";
 import './DetailSwitch.css';
+import { Select, Radio, Button, Input, List, Avatar } from 'antd';
 import dayPic from './dayPic.svg';
 import weekPic from './weekPic.svg';
-
+import * as dateFns from 'date-fns';
 const Element = BannerAnim.Element;
 
+const textData2 = {
+  content: 'Send a request to your friend to compare availibilities',
+  title: 'Week View',
+};
 const textData = {
   content: 'Send a request to your friend to compare availibilities',
   title: 'Day View',
@@ -48,6 +53,9 @@ class DetailSwitch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      rangeChoice: '',
+      endDate: '',
+      startDate: new Date(),
       showInt: 0,
       delay: 0,
       imgAnim: [
@@ -56,6 +64,34 @@ class DetailSwitch extends React.Component {
       ],
     };
     this.oneEnter = false;
+  }
+
+  renderEndDay = (range) => {
+    // This function will pretty much get the endDay depending on
+    // which week or day is selected
+    const startDate = dateFns.startOfDay(this.state.startDate)
+
+    let endDate = ''
+    let dayStartDate = ''
+    let statePack = {}
+    if (range === 'week' ) {
+      endDate = dateFns.addWeeks(startDate,1)
+      endDate = dateFns.format(endDate, 'yyyy-MM-dd')
+      statePack = {
+        rangeChoice: 'week',
+        endDate: endDate
+      }
+      return statePack
+    } else if (range === 'day'){
+      endDate = dateFns.addDays(startDate, 2)
+      endDate = dateFns.format(endDate, 'yyyy-MM-dd')
+      statePack = {
+        rangeChoice: 'day',
+        endDate: endDate
+      }
+      return statePack
+
+    }
   }
 
   onChange = () => {
@@ -134,7 +170,12 @@ class DetailSwitch extends React.Component {
           <em key="em" style={{ background }} />
           <p key="p">{content}</p>
         </QueueAnim>
-      </Element>);
+      </Element>
+
+
+
+
+    );
     });
     return (<div
       className={`${this.props.className}-wrapper`}
@@ -167,6 +208,38 @@ class DetailSwitch extends React.Component {
           dragPlay={false}
         >
           {textChildren}
+        </BannerAnim>
+
+        <BannerAnim
+          prefixCls={`${this.props.className}-text-wrapper`}
+          sync
+          type="across"
+          duration={1000}
+          arrow={false}
+          thumb={false}
+          ease="easeInOutExpo"
+          ref={(c) => { this.bannerText = c; }}
+          dragPlay={false}
+        >
+
+          <Radio.Group onChange={this.onChange} value={this.state.endDate}>
+            <Radio.Button
+
+              className = 'dayEsync buttonGrow'
+              style={{marginBottom:'20px'}}
+              value={this.renderEndDay('day')}>
+                <span className = 'syncTitle'>Day Event Sync </span>
+                <br />
+                <span>
+                ({
+                  dateFns.format(
+                    dateFns.addDays(new Date(),1),
+                    'MM/dd'
+                  )
+                })
+                </span>
+            </Radio.Button>
+          </Radio.Group>
         </BannerAnim>
         <TweenOneGroup enter={{ opacity: 0, type: 'from' }} leave={{ opacity: 0 }}>
           {this.state.showInt && <Icon type="left" key="left" onClick={this.onLeft} />}

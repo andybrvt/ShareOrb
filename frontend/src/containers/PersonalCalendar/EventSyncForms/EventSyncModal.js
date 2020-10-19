@@ -6,7 +6,7 @@ import { Modal, notification } from 'antd';
 
 import EventSyncReactForm from './EventSyncReactForm';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
-
+import './DetailSwitch.css';
 
 // This class is use to pick a friend to event sync with
 class EventSyncModal extends React.Component{
@@ -83,7 +83,7 @@ class EventSyncModal extends React.Component{
         {/*visible = {this.props.isVisble}*/}
         <Modal
           width={1000}
-          bodyStyle={{height:'700px'}}
+          bodyStyle={{height:'700px', padding:'0px'}}
           centered
           footer = {null}
 

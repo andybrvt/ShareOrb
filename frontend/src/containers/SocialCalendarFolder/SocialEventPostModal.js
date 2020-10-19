@@ -470,6 +470,7 @@ class SocialEventPostModal extends React.Component{
       <Modal
       onCancel = {this.props.close}
       visible = {this.props.view}
+      bodyStyle={{padding:'0px'}}
       onOk = {this.onHandleEventSubmit}
       >
       Add Social Event
