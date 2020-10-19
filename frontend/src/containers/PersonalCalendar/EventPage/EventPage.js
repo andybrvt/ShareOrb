@@ -88,6 +88,7 @@ class EventPage extends React.Component{
 				<EventInfo
 				info = {this.props.eventInfo}
 				userId = {this.props.id}
+				history = {this.props.history}
 				 />
 
 

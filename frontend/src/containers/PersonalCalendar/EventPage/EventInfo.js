@@ -1,15 +1,18 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Avatar, Modal} from 'antd';
+import {Button, Progress, Avatar, Modal, message, notification} from 'antd';
 import {PictureOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
+import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import * as dateFns from 'date-fns';
 import { connect } from "react-redux";
 import moment from 'moment';
 import AcceptShareModal from './AcceptShareModal';
 import * as calendarActions from '../../../store/actions/calendars';
+import * as calendarEventActions from '../../../store/actions/calendarEvent';
+import RemoveEventModal from '../EditCalEventForms/RemoveEventModal';
 
 
 
@@ -272,6 +275,7 @@ class EventInfo extends React.Component{
       this.setState({
         edit: false,
       })
+      this.eventEditNotification("bottomLeft");
 
     } else {
       const editEventObj = {
@@ -311,6 +315,40 @@ class EventInfo extends React.Component{
   }
 
 
+  eventEditMessage = () => {
+    message.success("Event edit successful", 2);
+  }
+
+  eventEditNotification = placement => {
+    notification.info({
+      message: `Event edit successful`,
+      placement
+    });
+  };
+
+
+// THIS IS THE SHIT HERE
+  onDeleteEvent = (eventId, eventType) => {
+    console.log(eventId)
+
+    if (eventType === 'shared'){
+      this.props.openEventDeleteModal(eventId);
+
+    }
+    if (eventType === 'single'){
+
+      // THIS STILL NEEDS WORK XXX
+      this.props.deleteEvent(eventId)
+      this.openNotification('bottomLeft')
+    }
+  }
+
+  openNotification = placement => {
+  notification.info({
+    message: `Event deleted`,
+    placement,
+    });
+  };
 
   render(){
     console.log(this.state)
@@ -386,6 +424,7 @@ class EventInfo extends React.Component{
         initialValues = {this.getInitialValue()}
         onSubmit = {this.onSaveEdit}
         friendList = {this.props.friendList}
+        onDelete = {this.onDeleteEvent}
          />
 
           <div
@@ -572,7 +611,13 @@ class EventInfo extends React.Component{
       onSubmit = {this.onAcceptUnShareEdit}
        />
 
-
+      <RemoveEventModal
+      visible = {this.props.showDeleteModal}
+      close = {this.props.closeEventDeleteModal}
+      history = {this.props.history}
+      item = {this.props.deleteEventId}
+      user = {this.props.id}
+      />
       </div>
 
     )
@@ -582,10 +627,14 @@ class EventInfo extends React.Component{
 const mapStateToProps = state => {
   return {
     username: state.auth.username,
+    id: state.auth.id,
     friendList: state.auth.friends,
     showAcceptUnshareModal: state.calendar.showAcceptUnshareModal,
     tempEventForModal: state.calendar.tempEventForModal,
-    tempDifference: state.calendar.tempDifference
+    tempDifference: state.calendar.tempDifference,
+    deleteEventId: state.calendarEvent.deleteEventId,
+    showDeleteModal: state.calendarEvent.showDeleteModal
+
   }
 }
 
@@ -593,6 +642,8 @@ const mapDispatchToProps = dispatch => {
   return {
     openAcceptUnshareModal: (eventObj, tempDifference) => dispatch(calendarActions.openAcceptUnshareModal(eventObj, tempDifference)),
     closeAcceptUnshareModal: () => dispatch(calendarActions.closeAcceptUnshareModal()),
+    openEventDeleteModal: eventId => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
+    closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal())
   }
 }
 

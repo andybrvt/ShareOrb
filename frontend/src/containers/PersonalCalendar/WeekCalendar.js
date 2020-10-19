@@ -1053,7 +1053,7 @@ class WeekCalendar extends React.Component{
     }
     if (eventType === 'single'){
       this.props.deleteEvent(eventId)
-      this.openNotification('bottom')
+      this.openNotification('bottomLeft')
     }
   }
 

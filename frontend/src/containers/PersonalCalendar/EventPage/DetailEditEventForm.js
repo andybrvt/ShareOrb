@@ -571,9 +571,22 @@ class DetailEditEventForm extends React.Component{
   render(){
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
+    let eventType = ""
+    let eventId = ""
+    if(this.props.friends){
+      if(this.props.friends.length > 0){
+        eventType = "shared"
+      } else {
+        eventType = "single"
+      }
+
+    }
+    if(this.props.info.id){
+      eventId = this.props.info.id
+    }
 
 
-    console.log(this.props)
+    console.log(eventId)
 
     return(
       <form style={{padding:'25px'}}>
@@ -716,7 +729,7 @@ class DetailEditEventForm extends React.Component{
 
             <div className = 'reduxButton'>
             <Button
-            onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
+            onClick = {() => this.props.onDelete(eventId, eventType)}
             >
             Delete
             </Button>

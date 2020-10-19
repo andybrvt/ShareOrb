@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import '../PersonalCalCSS/NewCalendar.css';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
+import * as dateFns from 'date-fns';
 
 
 class RemoveEventModal extends React.Component{
@@ -10,9 +11,24 @@ class RemoveEventModal extends React.Component{
     // This function will be send if the host decides to delete all the events
     // this will remove all the events for everyone
     console.log(eventId, user)
+    const week = dateFns.startOfWeek(new Date())
+    const year = dateFns.getYear(week)
+    const month = dateFns.getMonth(week)+1
+    const day = dateFns.getDate(week)
     CalendarEventWebSocketInstance.deleteEvent(eventId, user)
+    if(this.props.history){
+      this.props.history.push('/personalcalendar/w/'+year+'/'+month+'/'+day)
+    }
     this.props.close()
+    this.eventEditNotification("bottomLeft");
   }
+
+  eventEditNotification = placement => {
+    notification.info({
+      message: `Event deleted.`,
+      placement
+    });
+  };
 
   render(){
 
