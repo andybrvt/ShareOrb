@@ -120,6 +120,15 @@ class WebSocketEventPage{
 
       console.log(messageObj, eventId)
       this.callbacks['send_event_message'](messageObj)
+    } else if (command === 'edited_event'){
+      // This will be edit information in the page when you are done editing the
+      // page you will not have to change the redux for the eventweek because
+      // the weekview will rerender it self
+
+      const eventObj = parsedData.editedEvent
+
+      this.callbacks['update_event_page'](eventObj)
+
     }
 
   }
@@ -128,10 +137,12 @@ class WebSocketEventPage{
   addCallbacks (
     fetchEventInfo,
     sendEventMessage,
+    updateEventCallBack
   ){
     // Add all the call backs here
     this.callbacks['fetch_event_info'] = fetchEventInfo
     this.callbacks['send_event_message'] = sendEventMessage
+    this.callbacks['update_event_page'] = updateEventCallBack
   }
 
 

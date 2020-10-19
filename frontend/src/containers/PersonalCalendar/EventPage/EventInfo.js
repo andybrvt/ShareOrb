@@ -168,6 +168,8 @@ class EventInfo extends React.Component{
 
 
   onAcceptUnShareEdit = () => {
+    // This is mostly for submitting events for when you are unsharing events for
+    // other people
     EventPageWebSocketInstance.sendEditEvent(this.props.tempEventForModal)
     this.props.closeAcceptUnshareModal()
     this.setState({

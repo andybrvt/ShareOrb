@@ -334,9 +334,7 @@ class EventPageConsumer (JsonWebsocketConsumer):
         self.send_message(content)
 
     def send_edit_event_info(self, data):
-        print(data)
         eventEdit = get_object_or_404(Event, id = data['editEventObj']['eventId'])
-        print(eventEdit)
 
         personList = []
         for people in data['editEventObj']['person']:
@@ -351,21 +349,40 @@ class EventPageConsumer (JsonWebsocketConsumer):
 
         # You cannot update many to many field objects in the update, you have to
         # do it manually out side of it
-        Event.objects.filter(id = data['editEventObj']['eventId']).update(
-            title= data['editEventObj']['title'],
-            content= data['editEventObj']['content'],
-            start_time= data['editEventObj']['startDate'],
-            end_time= data['editEventObj']['endDate'],
-            location= data['editEventObj']['location'],
-            color= data['editEventObj']['eventColor'],
-            repeatCondition= data['editEventObj']['repeatCondition'],
-        )
+        # Event.objects.filter(id = data['editEventObj']['eventId']).update(
+        #     title= data['editEventObj']['title'],
+        #     content= data['editEventObj']['content'],
+        #     start_time= data['editEventObj']['startDate'],
+        #     end_time= data['editEventObj']['endDate'],
+        #     location= data['editEventObj']['location'],
+        #     color= data['editEventObj']['eventColor'],
+        #     repeatCondition= data['editEventObj']['repeatCondition'],
+        # )
+
+
+        eventEdit.title = data['editEventObj']['title']
+        eventEdit.content = data['editEventObj']['content']
+        eventEdit.start_time = data['editEventObj']['startDate']
+        eventEdit.end_time = data['editEventObj']['endDate']
+        eventEdit.location = data['editEventObj']['location']
+        eventEdit.color = data['editEventObj']['eventColor']
+        eventEdit.repeatCondition = data['editEventObj']['repeatCondition']
+
+
         eventEdit.person.set(personList)
         eventEdit.invited.set(inviteList)
-
+        eventEdit.save()
         # CONTINUE HERE FOR THE CHANNELS, JUST CHANGING THE EVENT PAGE
         # BECAUSE YOU ARE JUST GOING BACK TO THE EVENT PAGE
-
+        updatedEvent = get_object_or_404(Event, id = data['editEventObj']['eventId'])
+        serializer = EventSerializer(updatedEvent)
+        print(serializer.data)
+        content  = {
+            "command": "edited_event",
+            "editedEvent": serializer.data,
+            "eventObjId": data['editEventObj']['eventId']
+        }
+        self.send_message(content)
 
     def send_message(self, eventMessage):
         # This will be the go between for sending events... so when you send an event

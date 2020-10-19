@@ -73,7 +73,8 @@ class App extends Component {
 
     EventPageWebSocketInstance.addCallbacks(
       this.props.loadEventInfo.bind(this),
-      this.props.sendEventMessage.bind(this)
+      this.props.sendEventMessage.bind(this),
+      this.props.updateEventPage.bind(this)
     )
   }
 
@@ -136,6 +137,7 @@ const mapDispatchToProps = dispatch => {
     declineEventShare: declineShareObj => dispatch(calendarActions.declineEventShare(declineShareObj)),
     loadEventInfo: eventInfoObj => dispatch(calendarActions.loadEventInfo(eventInfoObj)),
     sendEventMessage: eventMessageObj => dispatch(calendarActions.sendEventMessage(eventMessageObj)),
+    updateEventPage: updatedEventObj => dispatch(calendarActions.updateEventPage(updatedEventObj)),
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),

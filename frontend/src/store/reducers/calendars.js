@@ -202,6 +202,12 @@ const closeAcceptUnshareModal = (state, action) => {
   })
 }
 
+const updateEventPage = (state, action) => {
+  return updateObject(state, {
+    selectedEvent: action.updatedEventObj
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -248,6 +254,8 @@ const reducer = (state = initialState, action) => {
       return openAcceptUnshareModal(state, action)
     case actionTypes.CLOSE_ACCEPT_UNSHARE_MODAL:
       return closeAcceptUnshareModal(state, action)
+    case actionTypes.UPDATE_EVENT_PAGE:
+      return updateEventPage(state, action)
     default:
       return state;
   }

@@ -163,3 +163,12 @@ export const closeAcceptUnshareModal = () => {
     type: actionTypes.CLOSE_ACCEPT_UNSHARE_MODAL,
   }
 }
+
+export const updateEventPage = (updatedEventObj) => {
+  // This will be used to update the event page when you make an edit, not sure if
+  // it will change it for everyon who is on the page
+  return{
+    type: actionTypes.UPDATE_EVENT_PAGE,
+    updatedEventObj: updatedEventObj
+  }
+}
