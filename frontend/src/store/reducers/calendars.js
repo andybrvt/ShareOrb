@@ -117,6 +117,8 @@ const deleteEvent = (state, action) => {
   // return updateObject (state, {
   //   events: newEvents
   // })
+
+  console.log('we hit here')
   function removeEvent(removedEvent){
     return removedEvent.id !== action.eventId
   }

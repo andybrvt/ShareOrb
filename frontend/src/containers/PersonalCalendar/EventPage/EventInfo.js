@@ -324,6 +324,7 @@ class EventInfo extends React.Component{
 // THIS IS THE SHIT HERE
   onDeleteEvent = (eventId, eventType) => {
     console.log(eventId)
+    // Maybe try to disconnect after you delete event
 
     if (eventType === 'shared'){
       this.props.openEventDeleteModal(eventId);
@@ -331,9 +332,21 @@ class EventInfo extends React.Component{
     }
     if (eventType === 'single'){
 
+      const week = dateFns.startOfWeek(new Date())
+      const year = dateFns.getYear(week)
+      const month = dateFns.getMonth(week)+1
+      const day = dateFns.getDate(week)
       // THIS STILL NEEDS WORK XXX
-      this.props.deleteEvent(eventId)
+      CalendarEventWebSocketInstance.deleteEvent(eventId, this.props.id)
+      // Might just keep this for now (unless i can think of something else)
+
+      // this.props.deleteEvent(eventId)
       this.openNotification('bottomLeft')
+      if(this.props.history){
+        this.props.history.push('/personalcalendar/w/'+year+'/'+month+'/'+day)
+
+      }
+
     }
   }
 
@@ -637,7 +650,8 @@ const mapDispatchToProps = dispatch => {
     openAcceptUnshareModal: (eventObj, tempDifference) => dispatch(calendarActions.openAcceptUnshareModal(eventObj, tempDifference)),
     closeAcceptUnshareModal: () => dispatch(calendarActions.closeAcceptUnshareModal()),
     openEventDeleteModal: eventId => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
-    closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal())
+    closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal()),
+    deleteEvent: (eventId) => dispatch(calendarActions.deleteEvents(eventId))
   }
 }
 
