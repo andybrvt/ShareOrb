@@ -59,7 +59,7 @@
 }
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
-  width: 40%;
+  width: 35%;
   height: 400px;
   padding: 25px;
   background-color: #F5F5F5;
@@ -109,7 +109,7 @@
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic{
   /* background-color: red; */
-  width: 60%;
+  width: 65%;
   height: 400px;
   overflow: hidden;
   /* border: 10px dashed gainsboro; */
