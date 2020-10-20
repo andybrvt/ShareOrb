@@ -13,6 +13,7 @@ import AcceptShareModal from './AcceptShareModal';
 import * as calendarActions from '../../../store/actions/calendars';
 import * as calendarEventActions from '../../../store/actions/calendarEvent';
 import RemoveEventModal from '../EditCalEventForms/RemoveEventModal';
+import background from '../../../components/images/background1.jpg';
 
 
 
@@ -453,21 +454,31 @@ class EventInfo extends React.Component{
               <div
               className = 'eventBackgroundPic'>
               <div className = "pictureFrame">
-                <PictureOutlined />
-                <br />
-                <span> No background </span>
+                {/*
+                  <PictureOutlined />
+                  <br />
+                  <span> No background </span>
+                  */}
+
               </div>
               </div>
 
               :
 
               <div
-              className = 'eventBackgroundPic'>
-              <div className ="pictureFrame">
+              className = 'eventBackgroundWPic'>
+              {/*
+                <div className ="pictureFrame">
+
                 <PictureOutlined />
                 <br />
                 <span> No background </span>
-              </div>
+                  </div>
+                */}
+                <img
+                src = {background}
+                className = 'eventBackgroundImg'
+                 />
               </div>
 
             }
