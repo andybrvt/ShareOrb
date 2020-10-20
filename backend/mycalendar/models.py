@@ -46,6 +46,9 @@ class Event(models.Model):
 	accepted = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_accepted', blank = True)
 	# This will hold all the people that declined
 	decline = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'people_declined', blank = True)
+
+	# This is for the background picture on personal cal events
+	backgroundImg = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 	def __unicode__(self):
 		return self.title
 

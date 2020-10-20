@@ -419,6 +419,10 @@ class EventInfo extends React.Component{
       if(this.props.info.host){
         host = this.props.info.host
       }
+      if(this.props.info.backgroundImg){
+        eventBackgroundPic = this.props.info.backgroundImg
+
+      }
 
     }
 
@@ -450,16 +454,13 @@ class EventInfo extends React.Component{
 
 
             {
-              eventBackgroundPic !== "" ?
+              eventBackgroundPic === "" ?
               <div
               className = 'eventBackgroundPic'>
               <div className = "pictureFrame">
-                {/*
                   <PictureOutlined />
                   <br />
                   <span> No background </span>
-                  */}
-
               </div>
               </div>
 
@@ -476,7 +477,7 @@ class EventInfo extends React.Component{
                   </div>
                 */}
                 <img
-                src = {background}
+                src = {'http://127.0.0.1:8000'+eventBackgroundPic}
                 className = 'eventBackgroundImg'
                  />
               </div>
@@ -598,6 +599,11 @@ class EventInfo extends React.Component{
             className = 'editEventButton'
             onClick= {() => this.onEditClick()}
             >
+            <i class="far fa-image"></i>
+            <div style = {{fontSize: "8px", marginBottom: "20px"}}>
+            Change Background
+            </div>
+
             <i class="fas fa-pen" ></i>
             <div style = {{fontSize: "15px"}}>
             Edit Event
