@@ -206,7 +206,6 @@ class EventInfo extends React.Component{
   var difference = oldInvitedList.filter(x => !sharedList.includes(x));
 
 
-  console.log(sharedList, oldInvitedList, difference)
   let start_date = values.startDate.toDate()
   let end_date = values.endDate.toDate()
 
@@ -248,13 +247,8 @@ class EventInfo extends React.Component{
     location = values.location
   }
 
-  // SENARIO 1: If the event is not getting shared with more people
-  if(sharedList.length === 0){
-      // this will be the one that you will run with axios then redux
+  console.log(sharedList)
 
-  }
-  // SENARIO 2: If the event is getting shaed with more people
-  else if(sharedList.length !== 0){
 
     if(difference.length === 0){
       const editEventObj = {
@@ -305,7 +299,7 @@ class EventInfo extends React.Component{
     // DO A CONDTION WHERE IF YOU ARE UNSHARING WITH PEOPLE, YOU ASK IF
     // THEY ARE SURE THEY WANNA UNSURE WITH ALL THESE PEOPLE
 
-   }
+
   }
 
   onCloseSureModal = () => {

@@ -56,7 +56,10 @@ class EventGroupChat extends React.Component{
   }
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    if(this.messagesEnd){
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+
+    }
   }
 
   componentDidMount() {
@@ -90,8 +93,17 @@ class EventGroupChat extends React.Component{
     },
   ];
 
+  let inviteList = [];
+  if(this.props.inviteList){
+    inviteList = this.props.inviteList
+  }
+
     return(
+      <div className = "eventGroupChat">
+      { inviteList.length > 0 ?
+
       <div className = 'eventGroupChatContainer'>
+
       <div className = 'messageList'>
       <List
           itemLayout="horizontal"
@@ -150,6 +162,22 @@ class EventGroupChat extends React.Component{
       </div>
 
       </div>
+
+      :
+
+      <div
+      className = "chatDisabledPage"
+      >
+      <i
+      style = {{
+        fontSize: "25px"
+      }}
+      class="fas fa-exclamation-circle"></i>
+      <div> Chats disabled because event is not shared </div>
+      </div>
+
+    }
+    </div>
 
     )
   }

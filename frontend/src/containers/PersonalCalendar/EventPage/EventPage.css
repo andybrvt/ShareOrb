@@ -206,13 +206,27 @@
 }
 
 
+.eventGroupChat{
+  width: 30%;
+  /* height: 100%; */
+  /* background-color: red; */
+}
 
 /* CSS for the eventChat side of the event page */
 .eventGroupChatContainer{
   /* background-color: red; */
-  width: 30%;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 
+}
+
+.eventGroupChat .chatDisabledPage{
+  background-color: whitesmoke;
+  padding-top: 50%;
+  font-size: 15px;
+  text-align: center;
+  height: 100%;
 }
 
 .eventGroupChatContainer .messageList{
