@@ -523,7 +523,7 @@ class WeekCalendar extends React.Component{
 
 
 
-                      (item.invited.length==0 && item.host.username==this.props.username)?
+                      (item.invited.length==0 && item.host.id==this.props.id)?
 
                       <span style={{float:'right', padding:'10px', marginTop:'-25px'}}>
 

@@ -125,6 +125,8 @@ class EditEventPopUp extends React.Component {
 
       // This is for when you make an event
 
+      let eventId = ""
+
       if(values.friends.length === 0 ){
         authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
           title: values.title,
@@ -138,6 +140,12 @@ class EditEventPopUp extends React.Component {
           host: this.props.id,
           accepted: [this.props.id],
         })
+        .then(res => {
+
+          this.props.addEvents(res.data)
+
+        })
+
 
         // The event instance is pretty much used when you just recently added an
         // event, so because of that you want to add the date in just as how the
@@ -165,8 +173,9 @@ class EditEventPopUp extends React.Component {
           accepted: [this.props.id],
           decline: []
         }
+
+        console.log(eventId)
         // add color to addEvents in redux
-        this.props.addEvents(instanceEvent)
       } else {
         // This will be sent when you have poeple to share. Unlike the previous one
         // where it just the current person, this one you add everyone you are shareing

@@ -89,7 +89,10 @@ class CreateEventSerializer (serializers.ModelSerializer):
         model = models.Event
         fields = '__all__'
         # fields = ('title', 'content', 'start_time', 'end_time', 'location', 'color', 'person', 'repeatCondition')
-
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['host'] = PersonSerializer(models.User.objects.get(id = data['host'])).data
+        return data
 # So when youa are working with an updateapiview you need to have a update function
 # in your serilaizer to update your data
 class UpdateEventSerialzier (serializers.ModelSerializer):
