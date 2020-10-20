@@ -12,7 +12,7 @@ import * as dateFns from 'date-fns';
 const Element = BannerAnim.Element;
 
 const textData2 = {
-  content: 'Send a request to your friend to compare availibilities',
+  content: 'WEEK VEIW',
   title: 'Week View',
 };
 const textData = {
@@ -41,7 +41,17 @@ let dataArray = [
     background: '#64D487',
   },
 ];
+let dataArray2= [
+  {
+    pic: 'https://zos.alipayobjects.com/rmsportal/ogXcvssYXpECqKG.png',
+    map: 'weekPic',
+    color: '#FFF43D',
+    background: '#F6B429',
+  },
+
+];
 dataArray = dataArray.map(item => ({ ...item, ...textData }));
+dataArray2 = dataArray2.map(item => ({ ...item, ...textData2 }));
 
 class DetailSwitch extends React.Component {
 
@@ -140,6 +150,7 @@ class DetailSwitch extends React.Component {
 
 
   render() {
+    console.log(this.bannerImg)
     const imgChildren = dataArray.map((item, i) => (
       <Element
         key={i}
@@ -162,7 +173,9 @@ class DetailSwitch extends React.Component {
 
         </QueueAnim>
       </Element>));
+
     const textChildren = dataArray.map((item, i) => {
+      console.log(dataArray);
       const { title, content, background } = item;
       return (<Element key={i}>
         <QueueAnim type="bottom" duration={1000} delay={[!i ? this.state.delay + 500 : 800, 0]}>
@@ -171,17 +184,38 @@ class DetailSwitch extends React.Component {
           <p key="p">{content}</p>
         </QueueAnim>
       </Element>
-
-
-
-
     );
     });
+
+    const textChildren2 = dataArray2.map((item, i) => {
+      console.log(dataArray2);
+      const { title, content, background } = item;
+      return (<Element key={i}>
+        <QueueAnim type="bottom" duration={1000} delay={[!i ? this.state.delay + 500 : 800, 0]}>
+          <h1 key="h1">{title}</h1>
+          <em key="em" style={{ background }} />
+          <p key="p">{content}</p>
+        </QueueAnim>
+      </Element>
+    );
+    });
+
+
     return (<div
       className={`${this.props.className}-wrapper`}
       style={{ background: dataArray[this.state.showInt].background }}
     >
       <div className={this.props.className}>
+
+        {
+          (this.bannerImg==0)?
+
+          <div>Hello</div>
+          :
+
+          <div> Hi</div>
+
+        }
         <BannerAnim
           prefixCls={`${this.props.className}-img-wrapper`}
           sync
@@ -208,6 +242,7 @@ class DetailSwitch extends React.Component {
           dragPlay={false}
         >
           {textChildren}
+
         </BannerAnim>
 
         <BannerAnim
@@ -220,26 +255,10 @@ class DetailSwitch extends React.Component {
           ease="easeInOutExpo"
           ref={(c) => { this.bannerText = c; }}
           dragPlay={false}
+          style={{marginTop:'200px'}}
         >
 
-          <Radio.Group onChange={this.onChange} value={this.state.endDate}>
-            <Radio.Button
-
-              className = 'dayEsync buttonGrow'
-              style={{marginBottom:'20px'}}
-              value={this.renderEndDay('day')}>
-                <span className = 'syncTitle'>Day Event Sync </span>
-                <br />
-                <span>
-                ({
-                  dateFns.format(
-                    dateFns.addDays(new Date(),1),
-                    'MM/dd'
-                  )
-                })
-                </span>
-            </Radio.Button>
-          </Radio.Group>
+          {textChildren2}
         </BannerAnim>
         <TweenOneGroup enter={{ opacity: 0, type: 'from' }} leave={{ opacity: 0 }}>
           {this.state.showInt && <Icon type="left" key="left" onClick={this.onLeft} />}
