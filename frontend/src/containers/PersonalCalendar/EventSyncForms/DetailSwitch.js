@@ -168,7 +168,11 @@ class DetailSwitch extends React.Component {
           key="img-wrapper"
         >
           <div className={`${this.props.className}-map map${i}`} key="map">
-            <img src={picArray[count]} width="100%" />
+            <img src={picArray[0]} width="100%" />
+          </div>
+
+          <div style={{marginTop:'200px' }} className={`${this.props.className}-map map${i}`} key="map">
+            <img src={picArray[1]} width="100%" />
           </div>
 
         </QueueAnim>
@@ -179,9 +183,14 @@ class DetailSwitch extends React.Component {
       const { title, content, background } = item;
       return (<Element key={i}>
         <QueueAnim type="bottom" duration={1000} delay={[!i ? this.state.delay + 500 : 800, 0]}>
-          <h1 key="h1">{title}</h1>
+          <h1 key="h1">{'Day View'}</h1>
           <em key="em" style={{ background }} />
-          <p key="p">{content}</p>
+          <p key="p">{'Check day availibilities'}</p>
+        </QueueAnim>
+        <QueueAnim type="bottom" duration={1500} delay={[!i ? this.state.delay + 500 : 800, 0]}>
+          <h1 style={{ marginTop:'200px'}} key="h1">{'Week View'}</h1>
+          <em key="em" style={{ background }} />
+          <p key="p">{'Check week availibilities'}</p>
         </QueueAnim>
       </Element>
     );
@@ -207,15 +216,6 @@ class DetailSwitch extends React.Component {
     >
       <div className={this.props.className}>
 
-        {
-          (this.bannerImg==0)?
-
-          <div>Hello</div>
-          :
-
-          <div> Hi</div>
-
-        }
         <BannerAnim
           prefixCls={`${this.props.className}-img-wrapper`}
           sync
