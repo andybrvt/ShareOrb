@@ -359,7 +359,7 @@ class EventInfo extends React.Component{
       // Might just keep this for now (unless i can think of something else)
 
       // this.props.deleteEvent(eventId)
-      this.openNotification('bottomLeft')
+      this.openNotification('bottomLeft', "Event deleted")
       if(this.props.history){
         this.props.history.push('/personalcalendar/w/'+year+'/'+month+'/'+day)
 
@@ -368,9 +368,9 @@ class EventInfo extends React.Component{
     }
   }
 
-  openNotification = placement => {
+  openNotification = (placement, message) => {
   notification.info({
-    message: `Event deleted`,
+    message: message,
     placement,
     });
   };
@@ -388,10 +388,18 @@ class EventInfo extends React.Component{
     authAxios.put('http://127.0.0.1:8000/mycalendar/events/updatebackground/'+eventId,
     data
   ).then (res => {
-    console.log(res.data.backgroundImg)
+    // Now you will run the redux to replace the pic, you just have to change the one
+    // in the page
+    console.log(res.data.backgroundImg.substring(21,))
+    this.props.updateEventBackground(res.data.backgroundImg.substring(21,))
   })
 
 
+  this.setState({
+    changeBackgroundView: false,
+  })
+
+  this.openNotification("bottomLeft", "Event picture changed.")
 
   }
 
@@ -723,7 +731,8 @@ const mapDispatchToProps = dispatch => {
     closeAcceptUnshareModal: () => dispatch(calendarActions.closeAcceptUnshareModal()),
     openEventDeleteModal: eventId => dispatch(calendarEventActions.openEventDeleteModal(eventId)),
     closeEventDeleteModal: () => dispatch(calendarEventActions.closeEventDeleteModal()),
-    deleteEvent: (eventId) => dispatch(calendarActions.deleteEvents(eventId))
+    deleteEvent: (eventId) => dispatch(calendarActions.deleteEvents(eventId)),
+    updateEventBackground: (backgroundPic) => dispatch(calendarActions.updateEventBackground(backgroundPic))
   }
 }
 

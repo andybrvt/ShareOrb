@@ -6,6 +6,7 @@ import * as dateFns from 'date-fns';
 const initialState = {
   events: [],
   date: new Date(),
+  //selectedEvent is for the event page
   selectedEvent: {},
   eventMessages: [],
   showAcceptUnshareModal: false,
@@ -210,6 +211,18 @@ const updateEventPage = (state, action) => {
   })
 }
 
+const updateEventBackground = (state, action) => {
+  console.log(action.backgroundPic)
+
+  console.log('hi there brother')
+  return updateObject(state, {
+    selectedEvent: {
+      ...state.selectedEvent,
+      backgroundImg: action.backgroundPic
+    }
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -258,6 +271,8 @@ const reducer = (state = initialState, action) => {
       return closeAcceptUnshareModal(state, action)
     case actionTypes.UPDATE_EVENT_PAGE:
       return updateEventPage(state, action)
+    case actionTypes.UPDATE_EVENT_BACKGROUND:
+      return updateEventBackground(state, action)
     default:
       return state;
   }

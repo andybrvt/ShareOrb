@@ -172,3 +172,13 @@ export const updateEventPage = (updatedEventObj) => {
     updatedEventObj: updatedEventObj
   }
 }
+
+export const updateEventBackground = (backgroundPic) => {
+  // This will be used to update the background pic on the event, it will pretty much
+  // take in a string of the location of the image
+  console.log(backgroundPic)
+  return {
+    type: actionTypes.UPDATE_EVENT_BACKGROUND,
+    backgroundPic: backgroundPic
+  }
+}

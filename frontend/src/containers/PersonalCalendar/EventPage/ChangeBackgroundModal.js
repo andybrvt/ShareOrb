@@ -78,6 +78,31 @@ class ChangeBackgroundModal extends React.Component{
 
   }
 
+  handleSubmit = value => {
+    // This will handle the submitting of changing the background picture of the
+    // event. It will do this by changing all the states back to normal and then
+    // call the submit funciton taht was pass in the props
+
+    this.setState({
+      loading: false,
+      imageFile: "",
+      imageUrl: null,
+    })
+
+    this.props.onSubmit(value)
+  }
+
+  handleCancel = () => {
+    //This will just handle the canceling of modal. It will clear out the
+    // state
+    this.setState({
+      loading: false,
+      imageFile: "",
+      imageUrl: null,
+    })
+    this.props.close();
+  }
+
 
   render(){
 
@@ -97,8 +122,8 @@ class ChangeBackgroundModal extends React.Component{
       visible = {this.props.visible}
       width = {700}
       okText = {'Save'}
-      onCancel = {this.props.close}
-      onOk = {() => this.props.onSubmit(this.state.imageFile)}
+      onCancel = {() => this.handleCancel()}
+      onOk = {() => this.handleSubmit(this.state.imageFile)}
       >
       <span className = 'uploadProfileText'> Change background Picture </span>
         <Upload
