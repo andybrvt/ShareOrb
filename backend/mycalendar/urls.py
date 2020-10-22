@@ -10,5 +10,6 @@ urlpatterns = [
     path('testEvents/', views.CalendarTestEventsView.as_view()),
     path('events/create/', views.CalendarEventsCreate.as_view()),
     path('events/update/<slug:id>', views.CalendarEventUpdate.as_view()),
-    path('events/delete/<slug:id>', views.CalendarEventDelete.as_view())
+    path('events/delete/<slug:id>', views.CalendarEventDelete.as_view()),
+    path('events/updatebackground/<slug:id>', views.EventBackgroundUpdate.as_view())
 ]

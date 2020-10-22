@@ -105,3 +105,9 @@ class DeleteEventSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Event
         fields = ('title', 'content', 'start_time', 'end_time', 'location', 'color', 'person')
+
+
+class EventBackgroundSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Event
+        fields = ("backgroundImg",)

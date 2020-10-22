@@ -93,3 +93,8 @@ class CalendarEventDelete(generics.RetrieveDestroyAPIView):
     serializer_class = serializers.DeleteEventSerializer
     lookup_field = 'id'
     queryset = models.Event.objects.all()
+
+class EventBackgroundUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.EventBackgroundSerializer
+    lookup_field = "id"
+    queryset = models.Event.objects.all()

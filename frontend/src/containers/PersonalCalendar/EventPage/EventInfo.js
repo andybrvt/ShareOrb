@@ -14,7 +14,8 @@ import * as calendarActions from '../../../store/actions/calendars';
 import * as calendarEventActions from '../../../store/actions/calendarEvent';
 import RemoveEventModal from '../EditCalEventForms/RemoveEventModal';
 import background from '../../../components/images/background1.jpg';
-
+import ChangeBackgroundModal from "./ChangeBackgroundModal";
+import { authAxios } from '../../../components/util';
 
 
 class EventInfo extends React.Component{
@@ -27,6 +28,7 @@ class EventInfo extends React.Component{
 
   state = {
     edit: false,
+    changeBackgroundView: false,
   }
 
   capitalize (str) {
@@ -309,6 +311,21 @@ class EventInfo extends React.Component{
     })
   }
 
+  onChangeBackgroundOpen = () => {
+    this.setState({
+      changeBackgroundView: true,
+    })
+  }
+
+
+  onChangeBackgroundClose = () => {
+    this.setState({
+      changeBackgroundView: false,
+    })
+  }
+
+
+
 
   eventEditMessage = () => {
     message.success("Event edit successful", 2);
@@ -357,6 +374,26 @@ class EventInfo extends React.Component{
     placement,
     });
   };
+
+  handleBackgroundPictureChange = value => {
+    console.log(value)
+
+    const eventId = this.props.info.id
+    var data = new FormData();
+    data.append('backgroundImg', value)
+    //This will handle the changing the information in the backend of the event
+    // I guess you will have to do a put method to change it. But I mean a post
+    // should be alright too
+
+    authAxios.put('http://127.0.0.1:8000/mycalendar/events/updatebackground/'+eventId,
+    data
+  ).then (res => {
+    console.log(res.data.backgroundImg)
+  })
+
+
+
+  }
 
   render(){
     console.log(this.state)
@@ -597,17 +634,27 @@ class EventInfo extends React.Component{
 
             <div
             className = 'editEventButton'
-            onClick= {() => this.onEditClick()}
+            // onClick= {() => this.onEditClick()} /
+            >
+            <div
+            onClick = {() => this.onChangeBackgroundOpen()}
             >
             <i class="far fa-image"></i>
             <div style = {{fontSize: "8px", marginBottom: "20px"}}>
             Change Background
             </div>
+            </div>
 
+
+            <div
+            onClick={() => this.onEditClick()}
+            >
             <i class="fas fa-pen" ></i>
             <div style = {{fontSize: "15px"}}>
             Edit Event
             </div>
+            </div>
+
             <div>
             <i class="fas fa-chevron-down"></i>
             </div>
@@ -642,6 +689,14 @@ class EventInfo extends React.Component{
       item = {this.props.deleteEventId}
       user = {this.props.id}
       />
+
+      <ChangeBackgroundModal
+      visible = {this.state.changeBackgroundView}
+      close = {this.onChangeBackgroundClose}
+      onSubmit = {this.handleBackgroundPictureChange}
+      />
+
+
       </div>
 
     )
