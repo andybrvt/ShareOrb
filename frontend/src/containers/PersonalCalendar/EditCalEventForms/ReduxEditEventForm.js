@@ -52,6 +52,8 @@ const renderRadioSelect = (field) => {
 }
 
 const renderFriendSelect = (field) => {
+  //This will render the list of friends so you can pick which friends you want
+  // to share this event with
   console.log(field)
   return (
     <Select
@@ -70,6 +72,7 @@ const renderFriendSelect = (field) => {
 }
 
 const renderField = (field) => {
+  // Typical input field, most use for the title
   console.log(field.meta)
   return (
     <span>
@@ -86,6 +89,7 @@ const renderField = (field) => {
 }
 
 const renderLocationField = (field) => {
+  //Typical input field, used for the location
   console.log(field.meta)
   return (
     <span>
@@ -102,6 +106,7 @@ const renderLocationField = (field) => {
 
 
 const renderTextArea = (field) => {
+  // Text field used for the content
   console.log(field.meta)
   return (
     <TextArea
@@ -118,6 +123,8 @@ const renderTextArea = (field) => {
 // <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
 
 const renderStartDate = (field) => {
+
+  // This is used for the date selection (to pick the right day)
   console.log(field)
   return (
     <DatePicker
@@ -146,7 +153,7 @@ const renderEndDate = (field) => {
 
 
 
-const renderStartDateSelect = (field) => {
+const renderStartDateTime = (field) => {
   // This const will render the start time of the event
   // So before you choose any value you want to have the field
   // input as a value in your select... because the input value will be the value
@@ -154,7 +161,7 @@ const renderStartDateSelect = (field) => {
   // Bascially everything goes through the value first, and what ever is here inspect
   // is just for show
 
-
+  // Used to pick the right start time.
   console.log(field)
   return (
     <Select
@@ -185,6 +192,9 @@ const renderEventColor = (field) => {
 
 
 const renderStartTime = () => {
+  // This funciton is to fill in the child of the time select
+  // example 12:00 am, 12:30 am etc
+
     const timeFormat = "hh:mm a"
     const time = []
     let start = dateFns.startOfDay(new Date())
@@ -206,16 +216,6 @@ const renderStartTime = () => {
   }
 
 
-
-// const renderEndTimeSelect = (field) => {
-//   return (
-//     console.log(field)
-//   )
-// }
-
-
-
-
 const { RangePicker } = DatePicker;
 
 const formItemLayout = {
@@ -229,17 +229,11 @@ const formItemLayout = {
   },
 };
 
-const config = {
-  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-};
-
-const rangeConfig = {
-  rules: [{ type: 'array', required: true, message: 'Please select time!' }],
-};
 
 const required = value => value ? undefined : 'Required'
 
 const validate = values => {
+  // As the name implies , it will validate the values of the form.
   const errors = {}
 
   console.log(values)
@@ -473,6 +467,8 @@ class ReduxEditEventForm extends React.Component{
 
 
   onRed = () => {
+    // This will give an error if you were to pick a weekly, event and then you
+    // make an event that exceeds the weekly mark
     let startDate = this.props.startDate
     let endDate = this.props.endDate
     let repeatCondition = ''
@@ -683,7 +679,7 @@ class ReduxEditEventForm extends React.Component{
                    <Field
                      style={{display: 'inline-block',float: 'left'}}
                      name = 'startTime'
-                     component = {renderStartDateSelect}
+                     component = {renderStartDateTime}
                      onChange = {this.handleStartTimeChange}
                      >
                      {renderStartTime()}
@@ -693,7 +689,7 @@ class ReduxEditEventForm extends React.Component{
                      style={{display: 'inline-block', marginRight:'15px'}}
                      name = 'endTime'
                      onChange = {this.handleEndTimeChange}
-                     component = {renderStartDateSelect}
+                     component = {renderStartDateTime}
                      >
                      {this.renderEndTimeSelect()}
                    </Field>

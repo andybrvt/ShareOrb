@@ -866,7 +866,7 @@ class WeekCalendar extends React.Component{
       start_time: finalStart,
       end_time: finalEnd,
       location: '',
-      color: '#01D4F4',
+      color: '#1890ff',
       calendarId: ''
     }
     console.log(subInEvent)

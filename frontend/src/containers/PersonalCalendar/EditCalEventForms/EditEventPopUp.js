@@ -87,38 +87,6 @@ class EditEventPopUp extends React.Component {
 
     console.log(start_date, end_date)
 
-    if (this.props.addEvent === false ){
-
-      // This if statement is for editing events
-      authAxios.put('http://127.0.0.1:8000/mycalendar/events/update/'+calendarId, {
-        title: values.title,
-        content: values.content,
-        start_time: start_date,
-        end_time: end_date,
-        location: values.location,
-        color: values.eventColor,
-        person: [this.props.id],
-        repeatCondition: values.repeatCondition,
-        host: this.props.id,
-        accepted: [this.props.id]
-      })
-      const instanceEvent = {
-        id: this.props.calendarId,
-        title: values.title,
-        content: values.content,
-        start_time: instance_start_date,
-        end_time: instance_end_date,
-        location: values.location,
-        color: values.eventColor,
-        person: [this.props.id],
-        repeatCondition: values.repeatCondition,
-        host: this.props.id,
-        accepted: [this.props.id]
-
-      }
-      console.log(instanceEvent)
-      this.props.editEvent(instanceEvent)
-    } else if (this.props.addEvent === true){
       // So two routes will go if this happens, if the share has noone then you
       // will just run the axios then run the redux but however if there is people
       // you want share with then you will run the channels
@@ -145,7 +113,6 @@ class EditEventPopUp extends React.Component {
           this.props.addEvents(res.data)
 
         })
-
 
         // The event instance is pretty much used when you just recently added an
         // event, so because of that you want to add the date in just as how the
@@ -206,7 +173,7 @@ class EditEventPopUp extends React.Component {
 
         CalendarEventWebSocketInstance.sendEvent(createSharedEventObject);
       }
-    }
+
     this.props.close()
   }
 
@@ -264,6 +231,9 @@ class EditEventPopUp extends React.Component {
   // it as a dictioanry with each one being a key corresponding with each input
   getInitialValue = () => {
     // This will pass an initial value through the Field
+    // Since we are not doing editing event anymore, there is only a couple fields
+    // that will need filling up, just the time, and date. So no need for the other
+    // fields to be filled out
     console.log(this.props)
     // There is an issue with the utc_start and utc_end and start_time and end time
     const date_start = new Date(this.props.start_date)
@@ -272,20 +242,14 @@ class EditEventPopUp extends React.Component {
     const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
     const start_time = this.timeConvertFunction(this.props.start_time)
     const end_time  = this.timeConvertFunction(this.props.end_time)
-    console.log(this.props)
-    console.log(start_time, end_time)
+
     return{
-      title: this.props.title,
-      content: this.props.content,
-      // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
-      // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
-      // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
+
       dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
       startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
       endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
       startTime: start_time,
       endTime: end_time,
-      location: this.props.location,
       eventColor: this.props.eventColor,
       repeatCondition: 'none',
       friends: [],
@@ -319,7 +283,6 @@ class EditEventPopUp extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    addEvent: state.calendarEvent.addEvent,
     title: state.calendarEvent.title,
     content: state.calendarEvent.content,
     start_date: state.calendarEvent.start_date,
