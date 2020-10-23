@@ -33,6 +33,7 @@ import EventSyncModal from './EventSyncForms/EventSyncModal';
 import EventModal from './AddCalEventForms/EventModal';
 import CalendarViewDropDown from './CalendarViewDropDown';
 import CalendarEventWebSocketInstance from '../../calendarEventWebsocket';
+import NotificationWebSocketInstance from '../../notificationWebsocket';
 import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
 import Liking from '../NewsfeedItems/Liking';
@@ -663,7 +664,7 @@ class WeekCalendar extends React.Component{
                                       shape="circle"
                                       size="large"
                                       style={{marginLeft:'10px'}}
-                                      onClick = {() => this.onAcceptShare(item.id)}
+                                      onClick = {() => this.onAcceptShare(item.id, item.host, item.start_time)}
                                       >
                                          <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
                                       </Button>
@@ -1028,12 +1029,20 @@ class WeekCalendar extends React.Component{
     this.props.openEventSyncModal()
   }
 
-  onAcceptShare = (eventId) => {
+  onAcceptShare = (eventId, host, startTime) => {
     // This will be used for accepting event shared between you and another
     // person. When accepted this will add you to the accepted list and then
     // send it to the host to as well
     this.acceptEventMessage();
     CalendarEventWebSocketInstance.acceptSharedEvent(eventId, this.props.id);
+    const notificationObject = {
+      command: "send_accepted_shared_event",
+      actor: this.props.id,
+      recipient: host.id,
+      eventDate: startTime
+    }
+    NotificationWebSocketInstance.sendNotification(notificationObject)
+
   }
 
   onDeclineShare = (eventId) => {

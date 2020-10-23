@@ -169,6 +169,21 @@ class NotificationConsumer(JsonWebsocketConsumer):
                     "recipient": recipient.username,
                 }
                 self.send_new_notification(content)
+        if data['command'] == 'send_accepted_shared_event':
+            actor = get_object_or_404(User, id = data['actor'])
+            recipient = get_object_or_404(User, id = data['recipient'])
+            notification = CustomNotification.objects.create(type = "accepted_shared_event",
+            actor = actor,
+            recipient = recipient,
+            verb = "accepted sharede event",
+            minDate = data['eventDate'])
+            serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_notification",
+                "notification": json.dumps(serializer.data),
+                "recipient": recipient.username
+            }
+            self.send_new_notification(content)
 
 
 #So this one is to delete the friend request notificaton, so since recipeint for this person
@@ -362,6 +377,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_follow_notification':
             self.send_notification(data)
         if data['command'] == 'send_shared_event_notification':
+            self.send_personalCal_event_notification(data)
+        if data['command'] == 'send_accepted_shared_event':
             self.send_personalCal_event_notification(data)
     def new_notification(self, event):
         notification = event['notification']
