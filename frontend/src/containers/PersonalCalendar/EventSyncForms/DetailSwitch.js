@@ -76,6 +76,15 @@ class DetailSwitch extends React.Component {
     this.oneEnter = false;
   }
 
+
+  onChange = e => {
+    console.log(e.target)
+    this.setState({
+      rangeChoice: e.target.value.rangeChoice,
+
+    });
+  };
+
   renderEndDay = (range) => {
     // This function will pretty much get the endDay depending on
     // which week or day is selected
@@ -171,7 +180,7 @@ class DetailSwitch extends React.Component {
             <img src={picArray[0]} width="100%" />
           </div>
 
-          <div style={{marginTop:'250px' }} className={`${this.props.className}-map map${i}`} key="map">
+          <div style={{marginTop:'225px' }} className={`${this.props.className}-map map${i}`} key="map">
             <img src={picArray[1]} width="100%" />
           </div>
 
@@ -186,11 +195,56 @@ class DetailSwitch extends React.Component {
           <h1 key="h1">{'Day View'}</h1>
           <em key="em" style={{ background }} />
           <p key="p">{'Check day availibilities'}</p>
+          <div class="radioCon">
+
+            <Radio.Button
+
+              className = 'dayEsync buttonGrow'
+              style={{marginBottom:'20px'}}
+              value={this.renderEndDay('day')}>
+                <span className = 'syncTitle'>Day Event Sync </span>
+                <br />
+                <span>
+                ({
+                  dateFns.format(
+                    dateFns.addDays(new Date(),1),
+                    'MM/dd'
+                  )
+                })
+                </span>
+              </Radio.Button>
+          </div>
         </QueueAnim>
         <QueueAnim type="bottom" duration={1500} delay={[!i ? this.state.delay + 500 : 800, 0]}>
           <h1 style={{ marginTop:'200px'}} key="h1">{'Week View'}</h1>
           <em key="em" style={{ background }} />
           <p key="p">{'Check week availibilities'}</p>
+            <Radio.Button
+            className = 'weekEsync buttonGrow'
+            style={{marginBottom:'20px'}}
+            value={this.renderEndDay('week')}
+            >
+              <span className = 'syncTitle'> Week Event Sync </span>
+              <br />
+              <span>
+              ({dateFns.format(new Date(), 'MM/dd')}
+              </span>
+              -
+              <span>
+              {
+                dateFns.format(
+                  dateFns.addWeeks(new Date(),1),
+                  'MM/dd'
+                )
+              })
+              </span>
+            </Radio.Button>
+        <div>
+
+
+
+
+        </div>
         </QueueAnim>
       </Element>
     );
