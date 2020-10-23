@@ -407,7 +407,7 @@ class EventInfo extends React.Component{
   ).then (res => {
     // Now you will run the redux to replace the pic, you just have to change the one
     // in the page
-    console.log(res.data.backgroundImg.substring(21,))
+    console.log(res.data)
     this.props.updateEventBackground(res.data.backgroundImg.substring(21,))
   })
 
@@ -417,6 +417,24 @@ class EventInfo extends React.Component{
   })
 
   this.openNotification("bottomLeft", "Event picture changed.")
+
+  var invitedList = []
+  for (let i = 0; i<this.props.info.invited.length; i++){
+    invitedList.push(
+      this.props.info.invited[i].username
+    )
+  }
+
+  const notificationObject = {
+    command: 'send_edited_event_notification',
+    actor: this.props.id,
+    recipient: invitedList,
+    eventId: this.props.info.id,
+    eventDate: this.props.info.start_time
+  }
+
+  NotificationWebSocketInstance.sendNotification(notificationObject)
+
 
   }
 

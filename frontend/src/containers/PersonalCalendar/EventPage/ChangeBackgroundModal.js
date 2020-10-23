@@ -122,6 +122,7 @@ class ChangeBackgroundModal extends React.Component{
       visible = {this.props.visible}
       width = {700}
       okText = {'Save'}
+      okButtonProps={{ disabled: this.state.imageFile == "" ? true : false }}
       onCancel = {() => this.handleCancel()}
       onOk = {() => this.handleSubmit(this.state.imageFile)}
       >
