@@ -6,6 +6,7 @@ import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
+import NotificationWebSocketInstance from '../../../notificationWebsocket'
 import * as dateFns from 'date-fns';
 import { connect } from "react-redux";
 import moment from 'moment';
@@ -254,11 +255,13 @@ class EventInfo extends React.Component{
 
 
     if(difference.length === 0){
+      // This if statment is for when you change events and you are not unsharing
+      // with anyone
       const editEventObj = {
         eventId: this.props.info.id,
         title: values.title,
         person: personList,  //Remember that person is the people that the event will show up to
-        invited: inviteList, //everyone but you
+        invited: inviteList, //Invited is everyone but the host
         content: content,
         location: location,
         eventColor: values.eventColor,
@@ -274,7 +277,21 @@ class EventInfo extends React.Component{
       })
       this.eventEditNotification("bottomLeft");
 
+      // This will be sneding a notification to indicate to the other users that
+      // the host edited some stuff
+      const notificationObject = {
+        command: 'send_edited_event_notification',
+        actor: this.props.id,
+        recipient: inviteList,
+        eventId: this.props.info.id,
+        eventDate: start_date
+      }
+
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
     } else {
+      // This if statment is whne you are unsharing with someone, it will open up
+      // a modal asking if you are sure you want to unshare with everyone
       const editEventObj = {
         eventId: this.props.info.id,
         title: values.title,

@@ -165,8 +165,15 @@ class CustomNotification(models.Model):
     deleted = models.BooleanField(default=False, db_index=True)
     emailed = models.BooleanField(default=False, db_index=True)
 
+    # mindate and maxdate is used more for notificaitons on events, if it is not a
+    # notification that has to do with events then there no need to worry about
+    # minDate and maxDate
     minDate = models.DateTimeField(default = now, blank = True)
     maxDate = models.DateTimeField(default = now, blank = True)
+
+    # eventId field is used for calendar event related objects
+    # so that we can go into the eventid page directly
+    eventId = models.BigIntegerField(blank = True, null = True)
 
     def __str__(self):
         return str(self.recipient)

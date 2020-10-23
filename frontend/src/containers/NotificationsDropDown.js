@@ -112,11 +112,18 @@ class NotificationsDropDown extends React.Component{
 
   }
 
+  onEventPageClick = (eventId) =>{
+    console.log(eventId)
+    if(eventId){
+      this.props.history.push("/personalcal/event/"+eventId)
+
+    }
+
+  }
+
   renderTimestamp = timestamp =>{
-    console.log(timestamp)
     let prefix = '';
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
-    console.log(timeDiff)
     if (timeDiff < 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
@@ -137,7 +144,6 @@ class NotificationsDropDown extends React.Component{
      // filter out later
     const notificationList = []
     const notifications = this.props.notifications
-    console.log(notifications)
     for (let i = 0; i<notifications.length; i++){
       if(notifications[i].type === 'friend'){
         console.log( new Date() )
@@ -618,6 +624,38 @@ class NotificationsDropDown extends React.Component{
             <h4 className = 'listNotificationSingle'>
                 <b>{this.capitalize(notifications[i].actor.username)} </b>
                  declined shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+                 <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+
+          </li>
+        )
+      } if(notifications[i].type === "edited_share_event"){
+        notificationList.push(
+          <li
+          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+          className = "notificationListContainer">
+            <div className = 'notificationIcon'>
+              <Avatar size = {55} style = {{
+                backgroundColor: 'purple',
+                verticalAlign: 'middle'}}
+                // icon = {<UserOutlined />}
+                src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
+                >
+              </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 edited a shared event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
