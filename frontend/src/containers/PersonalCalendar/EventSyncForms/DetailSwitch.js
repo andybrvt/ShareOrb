@@ -25,8 +25,8 @@ let dataArray = [
   {
     pic: 'https://zos.alipayobjects.com/rmsportal/ogXcvssYXpECqKG.png',
     map: 'dayPic',
-    color: '#FFF43D',
-    background: '#F6B429',
+    color: '#b7eb8f',
+    background: '#95de64',
   },
   {
     pic: 'https://zos.alipayobjects.com/rmsportal/iCVhrDRFOAJnJgy.png',
@@ -171,7 +171,7 @@ class DetailSwitch extends React.Component {
             <img src={picArray[0]} width="100%" />
           </div>
 
-          <div style={{marginTop:'200px' }} className={`${this.props.className}-map map${i}`} key="map">
+          <div style={{marginTop:'250px' }} className={`${this.props.className}-map map${i}`} key="map">
             <img src={picArray[1]} width="100%" />
           </div>
 
