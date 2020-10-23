@@ -60,16 +60,18 @@ class EventPage extends React.Component{
 
 
 	componentWillReceiveProps(newProps){
-		// console.log(newProps)
-		// if(this.props.eventInfo.id !== parseInt(newProps.match.params.eventId)){
-		// 	this.waitForSocketConnection(()=>{
-		// 		EventPageWebSocketInstance.fetchMessages(
-		// 			newProps.match.params.eventId
-		// 		)
-		// 	})
-		// 	EventPageWebSocketInstance.connect(newProps.match.params.eventId)
-		//
-		// }
+		console.log(newProps)
+
+		if(this.props.match.params.eventId !== newProps.match.params.eventId){
+			EventPageWebSocketInstance.disconnect();
+			this.waitForSocketConnection(()=>{
+				EventPageWebSocketInstance.fetchMessages(
+					newProps.match.params.eventId
+				)
+			})
+			EventPageWebSocketInstance.connect(newProps.match.params.eventId)
+
+		}
 
 	}
 
