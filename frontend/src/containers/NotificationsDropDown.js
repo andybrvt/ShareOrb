@@ -602,6 +602,36 @@ class NotificationsDropDown extends React.Component{
 
           </li>
         )
+      } if(notifications[i].type === "declined_shared_event"){
+        notificationList.push(
+          <li className = "notificationListContainer">
+            <div className = 'notificationIcon'>
+              <Avatar size = {55} style = {{
+                backgroundColor: 'purple',
+                verticalAlign: 'middle'}}
+                // icon = {<UserOutlined />}
+                src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
+                >
+              </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 declined shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+                 <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+
+          </li>
+        )
       }
 
 

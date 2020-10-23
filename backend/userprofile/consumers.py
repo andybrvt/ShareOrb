@@ -175,7 +175,22 @@ class NotificationConsumer(JsonWebsocketConsumer):
             notification = CustomNotification.objects.create(type = "accepted_shared_event",
             actor = actor,
             recipient = recipient,
-            verb = "accepted sharede event",
+            verb = "accepted shared event",
+            minDate = data['eventDate'])
+            serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_notification",
+                "notification": json.dumps(serializer.data),
+                "recipient": recipient.username
+            }
+            self.send_new_notification(content)
+        if data['command'] == 'send_declined_shared_event':
+            actor = get_object_or_404(User, id = data['actor'])
+            recipient = get_object_or_404(User, id = data['recipient'])
+            notification = CustomNotification.objects.create(type = "declined_shared_event",
+            actor = actor,
+            recipient = recipient,
+            verb = "declined shared event",
             minDate = data['eventDate'])
             serializer = NotificationSerializer(notification)
             content = {
@@ -379,6 +394,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_shared_event_notification':
             self.send_personalCal_event_notification(data)
         if data['command'] == 'send_accepted_shared_event':
+            self.send_personalCal_event_notification(data)
+        if data['command'] == 'send_declined_shared_event':
             self.send_personalCal_event_notification(data)
     def new_notification(self, event):
         notification = event['notification']

@@ -676,7 +676,7 @@ class WeekCalendar extends React.Component{
                                       size="large"
                                       danger
                                       style={{marginLeft:'10px'}}
-                                      onClick = {() => this.onDeclineShare(item.id)}
+                                      onClick = {() => this.onDeclineShare(item.id, item.host, item.start_time)}
                                       >
                                          <i class="fas fa-user-times"></i>
                                       </Button>
@@ -1045,9 +1045,18 @@ class WeekCalendar extends React.Component{
 
   }
 
-  onDeclineShare = (eventId) => {
+  onDeclineShare = (eventId, host, startTime) => {
     this.declineEventMessage();
     CalendarEventWebSocketInstance.declineSharedEvent(eventId, this.props.id);
+    const notificationObject = {
+      command: "send_declined_shared_event",
+      actor:  this.props.id,
+      recipient: host.id,
+      eventDate: startTime
+    }
+
+    NotificationWebSocketInstance.sendNotification(notificationObject)
+
   }
 
   onDeleteEvent = (eventId, eventType, host) => {
