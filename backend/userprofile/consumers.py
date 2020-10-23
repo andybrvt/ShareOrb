@@ -69,28 +69,30 @@ class NotificationConsumer(JsonWebsocketConsumer):
 # run through if statements in the notifications.js and will print out stuff accordingly
 # This function will be used to make the actual notification object
     def send_notification (self, data):
+
+        # Used for newsfeed notifcations + friends + follow
         user = self.scope['user']
         if data['command'] == 'send_friend_notification':
             recipient = get_object_or_404(User, username=data['recipient'])
             actor = get_object_or_404(User, username=data['actor'])
             notification = CustomNotification.objects.create(type="friend", recipient=recipient, actor=actor, verb="sent you friend request")
-        if data['command'] == 'send_accepted_notification':
+        if data['command'] == 'send_accepted_notification': ## For friends
             recipient = get_object_or_404(User, username=data['recipient'])
             actor = get_object_or_404(User, id=data['actor'])
             notification = CustomNotification.objects.create(type="accepted_friend", recipient=recipient, actor=actor, verb="accepted your friend request")
-        if data['command'] == 'send_decline_notification':
+        if data['command'] == 'send_decline_notification': ## For friends
             recipient = get_object_or_404(User, username= data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type="declined_friend", recipient = recipient, actor= actor, verb="declined  your friend request")
-        if data['command'] == 'like_notification':
+        if data['command'] == 'like_notification': ## Used for notifcation on newsfeed
             recipient = get_object_or_404(User, id = data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type ='like_notification', recipient = recipient, actor = actor, verb = 'liked your post')
-        if data['command'] == 'comment_notification':
+        if data['command'] == 'comment_notification': # for newsfeed
             recipient = get_object_or_404(User, id = data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = 'comment_notification', recipient = recipient, actor = actor, verb = 'commented on your post')
-        if data['command'] == 'send_follow_notification':
+        if data['command'] == 'send_follow_notification': #this is just for following
             recipient = get_object_or_404(User, username = data['recipient'])
             actor = get_object_or_404(User, username = data['actor'])
             notification = CustomNotification.objects.create(type = 'follow_notification', recipient = recipient, actor = actor, verb = 'followed you')
@@ -146,6 +148,28 @@ class NotificationConsumer(JsonWebsocketConsumer):
             "recipient": recipient.username, #important for group send (group name)
         }
         return self.send_new_notification(content)
+
+    def send_personalCal_event_notification(self, data):
+        #This method is to use for all the notificaiton for personal calendar
+        print(data)
+        print('right here')
+        if data['command'] == "send_shared_event_notification":
+            actor = get_object_or_404(User, id = data["actor"])
+            for recipients in data['recipient']:
+                recipient = get_object_or_404(User, username = recipients)
+                notification = CustomNotification.objects.create(type = "shared_event",
+                actor = actor,
+                recipient = recipient,
+                verb = "shared an event at "+data['eventDate'],
+                minDate = data['eventDate'])
+                serializer = NotificationSerializer(notification)
+                content = {
+                    "command": "new_notification",
+                    "notification":json.dumps(serializer.data),
+                    "recipient": recipient.username,
+                }
+                self.send_new_notification(content)
+
 
 #So this one is to delete the friend request notificaton, so since recipeint for this person
 # is the person receive the friend request but once recipient accpets it then they are the actor
@@ -337,6 +361,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_notification(data)
         if data['command'] == 'send_follow_notification':
             self.send_notification(data)
+        if data['command'] == 'send_shared_event_notification':
+            self.send_personalCal_event_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
@@ -501,7 +527,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         self.send_json(content)
 
     def send_social_like(self, data):
-        print(data)
         # user is the person that like the social cell and the owner is the owner of the
         # social calendar
 
@@ -579,7 +604,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
 
         # pretty much refer to the send_social_like function for details
-        print (data)
         user = get_object_or_404(User, id = data['userId'])
         owner = get_object_or_404(User, id = data['ownerId'])
         socialCell, created = SocialCalCell.objects.get_or_create(
@@ -624,7 +648,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
 
     def send_social_comment(self, data):
-        print(data)
         # The process will first be grabing the userObj that made the comment
         # so you can use it for the foriengkey on the socialCalComment
         # Then you get the user for the calendar and then the date, you would use
@@ -777,10 +800,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         hostObj = socialEventObj['host']
 
 
-        print(socialEventObj)
-        print(userObj)
-        print(hostObj)
-        print(data)
+
 
         hostContent = {
         # The host obj will be sent to the channel of the host
@@ -836,14 +856,12 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         }
 
-        print(content_follower['actorObjSerial']['username'])
 
 
         self.send_new_follow(content_follower)
         self.send_new_follow(content_following)
 
     def send_unfollowing(self, data):
-        print(data)
         # This function is used to get the user objects and then will filter out the following
         # object and then delete the following
         # So the follower is the person doing the action and the following
@@ -887,7 +905,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         channel_recipient = followObj['actorObjSerial']['username']
         channel = 'explore_'+channel_recipient
 
-        print(channel)
 
         # Thsi group send will be sent to your self (or the person doing the action)
         async_to_sync(self.channel_layer.group_send)(
@@ -906,7 +923,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         channel_recipient = exploreObj['reciever']['username']
         channel = 'explore_'+channel_recipient
 
-        print(channel)
 
         # So we are reusing the new_follower_following to avoid giving more code
         # but all in all it still sends the same stuff in the front end

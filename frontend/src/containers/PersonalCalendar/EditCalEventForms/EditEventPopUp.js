@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import { authAxios } from '../../../components/util';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
+import NotificationWebSocketInstance from '../../../notificationWebsocket'
 import * as navActions from '../../../store/actions/nav';
 import * as calendarEventActions from '../../../store/actions/calendarEvent';
 import * as calendarActions from '../../../store/actions/calendars';
@@ -171,7 +172,23 @@ class EditEventPopUp extends React.Component {
 
         }
 
+        console.log(createSharedEventObject)
+
         CalendarEventWebSocketInstance.sendEvent(createSharedEventObject);
+
+        // This is to send a notification to notify the other user that a person
+        // shared an event with them
+        const notificationObject = {
+          command: 'send_shared_event_notification',
+          actor: this.props.id,
+          recipient: inviteList,
+          eventDate: instance_start_date,
+          eventHour: start_time.firstHour,
+          eventMin: start_time.firstMin
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
       }
 
     this.props.close()
@@ -250,6 +267,8 @@ class EditEventPopUp extends React.Component {
       endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
       startTime: start_time,
       endTime: end_time,
+      content: this.props.content,
+      location: this.props.location,
       eventColor: this.props.eventColor,
       repeatCondition: 'none',
       friends: [],

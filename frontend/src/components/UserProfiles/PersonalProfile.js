@@ -346,7 +346,7 @@ class PersonalProfile extends React.Component{
         if(this.props.curProfile.get_following){
           following = this.props.curProfile.get_following
         }
-        
+
       }
 
       return(

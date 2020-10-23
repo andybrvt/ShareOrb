@@ -14,8 +14,6 @@ from .serializers import EventMessagesSerializer
 class CalendarConsumer(JsonWebsocketConsumer):
 
     def add_share_sync_event(self, data):
-        print('event sync event add here')
-        print (data)
 
         # THIS IS GONNA BE SIMILAR TO THE SHARED EVENT SO YOU GOTTA STRUCTURE YOUR
         # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT
@@ -101,11 +99,9 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'eventId': data['eventId'],
             'acceptedUser': data['acceptorId']
         }
-        print(content)
         return self.send_accept_shared(content)
 
 
-        print(sharedEvent)
 
     def decline_shared_event(self, data):
         # This function is used to decline events, so what is gonna happen is that the
@@ -117,7 +113,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
         sharedEvent.person.remove(declineUser)
         sharedEvent.save()
 
-        print(declineUser.username)
         serializer = EventSerializer(sharedEvent)
         # userSerializer = PersonSerializer(declineUser).data
         person = serializer.data['person']
@@ -152,7 +147,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
         serializeEvent = EventSerializer(event)
         eventPerson = serializeEvent.data['person'].copy()
-        print(eventPerson)
 
         if event.host == user:
 
@@ -176,7 +170,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
             }
             self.delete_single_event(content)
-            print('living here')
 
 
 
@@ -304,7 +297,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
         # This will be run at the start of every time you go into the event page
         # so that you have the information already set up
 
-        print (data)
         viewEvent = get_object_or_404(Event, id = data['eventId'])
         serializer = EventSerializer(viewEvent).data
         content = {
@@ -315,7 +307,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
 
 
     def send_event_message(self, data):
-        print(data)
         viewEvent = get_object_or_404(Event, id = data['eventId'])
         user = get_object_or_404(User, id = data['userId'])
         eventMessage, created = EventMessages.objects.get_or_create(
@@ -376,7 +367,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
         # BECAUSE YOU ARE JUST GOING BACK TO THE EVENT PAGE
         updatedEvent = get_object_or_404(Event, id = data['editEventObj']['eventId'])
         serializer = EventSerializer(updatedEvent)
-        print(serializer.data)
         content  = {
             "command": "edited_event",
             "editedEvent": serializer.data,
@@ -391,7 +381,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
         channel_recipient = eventMessage['eventObjId']
         channel = 'event_'+str(channel_recipient)
 
-        print (channel)
 
         async_to_sync(self.channel_layer.group_send)(
             channel,
