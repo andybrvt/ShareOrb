@@ -263,8 +263,12 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 
 class NotificationSerializer(serializers.ModelSerializer):
-    actor = UserSerializer(read_only=True)
 
     class Meta:
         model = CustomNotification
         fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
+        return data

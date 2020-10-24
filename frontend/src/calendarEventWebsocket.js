@@ -1,6 +1,10 @@
 // This websocket is used for EventSync and any other information
 // exchange between the calendars so you can use this for the personal
 // calendar and the Social calendar
+import NotificationWebSocketInstance from './notificationWebsocket'
+import {authAxios} from "./components/util";
+
+
 class WebSocketCalendarEvent {
   static instance = null;
   callbacks = {}
@@ -16,8 +20,8 @@ class WebSocketCalendarEvent {
     this.socketRef = null
   }
 
-  connect(username){
-    const path = 'ws://127.0.0.1:8000/ws/calendar/'+username
+  connect(userId){
+    const path = 'ws://127.0.0.1:8000/ws/calendar/'+userId
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {
@@ -26,7 +30,7 @@ class WebSocketCalendarEvent {
 
     this.socketRef.onmessage = (e) => {
       console.log(e.data)
-      this.socketNewEvent(e.data)
+      this.socketNewEvent(e.data, userId)
     }
 
     this.socketRef.onerror = (e) => {
@@ -35,7 +39,7 @@ class WebSocketCalendarEvent {
 
     this.socketRef.onclose = () => {
       console.log('websocket is closed')
-      this.connect(username);
+      this.connect(userId);
     }
   }
 
@@ -44,13 +48,37 @@ class WebSocketCalendarEvent {
     this.socketRef.close();
   }
 
-  socketNewEvent(data){
+  socketNewEvent(data, userId){
     // This is where the new event from the back end get sent to redux
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
     console.log(parsedData)
+
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
+      if(parsedData.newEvent.invited.length > 0
+        && parsedData.newEvent.host.username !== userId ){
+        console.log('hit here')
+        const notificationObject = {
+          command: "send_shared_event_notification",
+          actor: parsedData.newEvent.host.id,
+          recipient: 2,
+          eventDate: parsedData.newEvent.start_time
+        }
+
+
+
+        authAxios.post("http://127.0.0.1:8000/userprofile/notification/create", {
+          type: "shared_event",
+          actor:parsedData.newEvent.host.id,
+          recipient: 2,
+          verb: "shared an event at",
+          minDate: parsedData.newEvent.start_time
+        })
+
+      }
+
+
     }
     else if (command === 'add_accepted'){
       const acceptorId = parsedData.acceptedUser;
@@ -125,6 +153,8 @@ class WebSocketCalendarEvent {
   declineSharedEvent = (eventId, declineId) => {
     // The gate way to declining an event. Pretty much the same process as the accepting
     // but instead of adding events in
+
+    
     this.sendEvent({
       eventId: eventId,
       declineId: declineId,

@@ -178,15 +178,15 @@ class EditEventPopUp extends React.Component {
 
         // This is to send a notification to notify the other user that a person
         // shared an event with them
-        const notificationObject = {
-          command: 'send_shared_event_notification',
-          actor: this.props.id,
-          recipient: inviteList,
-          eventDate: instance_start_date,
-          eventHour: start_time.firstHour,
-          eventMin: start_time.firstMin
-        }
-        NotificationWebSocketInstance.sendNotification(notificationObject)
+        // const notificationObject = {
+        //   command: 'send_shared_event_notification',
+        //   actor: this.props.id,
+        //   recipient: inviteList,
+        //   eventDate: instance_start_date,
+        //   eventHour: start_time.firstHour,
+        //   eventMin: start_time.firstMin
+        // }
+        // NotificationWebSocketInstance.sendNotification(notificationObject)
 
 
       }
