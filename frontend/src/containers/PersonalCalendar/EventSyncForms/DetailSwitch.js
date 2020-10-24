@@ -9,6 +9,10 @@ import { Select, Radio, Button, Input, List, Avatar } from 'antd';
 import dayPic from './dayPic.svg';
 import weekPic from './weekPic.svg';
 import * as dateFns from 'date-fns';
+import { Form } from '@ant-design/compatible';
+
+
+
 const Element = BannerAnim.Element;
 
 const textData2 = {
@@ -194,8 +198,11 @@ class DetailSwitch extends React.Component {
         <QueueAnim type="bottom" duration={1000} delay={[!i ? this.state.delay + 500 : 800, 0]}>
           <h1 key="h1">{'Day View'}</h1>
           <em key="em" style={{ background }} />
-          <p key="p">{'Check day availibilities'}</p>
-          <div class="radioCon">
+          <p key="p">{
+
+
+          <div class="eventSyncForm">
+            <div className = 'radioCon'>
 
             <Radio.Button
 
@@ -213,12 +220,16 @@ class DetailSwitch extends React.Component {
                 })
                 </span>
               </Radio.Button>
-          </div>
+            </div>
+          </div>}</p>
+
         </QueueAnim>
         <QueueAnim type="bottom" duration={1500} delay={[!i ? this.state.delay + 500 : 800, 0]}>
-          <h1 style={{ marginTop:'200px'}} key="h1">{'Week View'}</h1>
+          <h1 style={{ marginTop:'100px'}} key="h1">{'Week View'}</h1>
           <em key="em" style={{ background }} />
-          <p key="p">{'Check week availibilities'}</p>
+          <p key="p">{
+            <div class="eventSyncForm">
+              <div className = 'radioCon'>
             <Radio.Button
             className = 'weekEsync buttonGrow'
             style={{marginBottom:'20px'}}
@@ -239,6 +250,15 @@ class DetailSwitch extends React.Component {
               })
               </span>
             </Radio.Button>
+          </div>
+        </div>
+
+
+
+
+
+                }</p>
+
         <div>
 
 
