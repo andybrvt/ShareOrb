@@ -5,8 +5,9 @@ import Icon from 'antd/lib/icon';
 import PropTypes from 'prop-types';
 import React from "react";
 import './DetailSwitch.css';
-import { Select, Radio, Button, Input, List, Avatar } from 'antd';
+import { Select, Radio, Button, Input, List, Divider, Avatar } from 'antd';
 import dayPic from './dayPic.svg';
+import friendsPic from './friends.svg';
 import weekPic from './weekPic.svg';
 import * as dateFns from 'date-fns';
 import { Form } from '@ant-design/compatible';
@@ -27,27 +28,26 @@ let count=0;
 let picArray=[dayPic, weekPic]
 let dataArray = [
   {
-    pic: 'https://zos.alipayobjects.com/rmsportal/ogXcvssYXpECqKG.png',
     map: 'dayPic',
+    color: '#ffe7ba',
+    background: '#ffc069',
+  },
+  {
+    map: 'friendsPic',
     color: '#b7eb8f',
     background: '#95de64',
   },
+
   {
-    pic: 'https://zos.alipayobjects.com/rmsportal/iCVhrDRFOAJnJgy.png',
-    map: 'https://zos.alipayobjects.com/rmsportal/XRfQxYENhzbfZXt.png',
-    color: '#FF4058',
-    background: '#FC1E4F',
+    map: 'friendsPic',
+    color: '#efdbff',
+    background: '#b37feb',
   },
-  {
-    pic: 'https://zos.alipayobjects.com/rmsportal/zMswSbPBiQKvARY.png',
-    map: 'https://zos.alipayobjects.com/rmsportal/syuaaBOvttVcNks.png',
-    color: '#9FDA7F',
-    background: '#64D487',
-  },
+
+
 ];
 let dataArray2= [
   {
-    pic: 'https://zos.alipayobjects.com/rmsportal/ogXcvssYXpECqKG.png',
     map: 'weekPic',
     color: '#FFF43D',
     background: '#F6B429',
@@ -205,7 +205,7 @@ class DetailSwitch extends React.Component {
             <div className = 'radioCon'>
 
             <Radio.Button
-
+              onClick={this.onRight}
               className = 'dayEsync buttonGrow'
               style={{marginBottom:'20px'}}
               value={this.renderEndDay('day')}>
@@ -221,6 +221,8 @@ class DetailSwitch extends React.Component {
                 </span>
               </Radio.Button>
             </div>
+
+
           </div>}</p>
 
         </QueueAnim>
@@ -231,9 +233,10 @@ class DetailSwitch extends React.Component {
             <div class="eventSyncForm">
               <div className = 'radioCon'>
             <Radio.Button
-            className = 'weekEsync buttonGrow'
-            style={{marginBottom:'20px'}}
-            value={this.renderEndDay('week')}
+              onClick={this.onLeft}
+              className = 'weekEsync buttonGrow'
+              style={{marginBottom:'20px'}}
+              value={this.renderEndDay('week')}
             >
               <span className = 'syncTitle'> Week Event Sync </span>
               <br />
@@ -250,6 +253,10 @@ class DetailSwitch extends React.Component {
               })
               </span>
             </Radio.Button>
+            <div style={{float:'right', marginTop:'75px'}}>
+              arrow button
+
+            </div>
           </div>
         </div>
 
@@ -334,10 +341,23 @@ class DetailSwitch extends React.Component {
 
           {textChildren2}
         </BannerAnim>
-        <TweenOneGroup enter={{ opacity: 0, type: 'from' }} leave={{ opacity: 0 }}>
-          {this.state.showInt && <Icon type="left" key="left" onClick={this.onLeft} />}
-          {this.state.showInt < dataArray.length - 1 && <Icon type="right" key="right" onClick={this.onRight} />}
-        </TweenOneGroup>
+
+        <BannerAnim
+          prefixCls={`${this.props.className}-text-wrapper`}
+          sync
+          type="across"
+          duration={1000}
+          arrow={false}
+          thumb={false}
+          ease="easeInOutExpo"
+          ref={(c) => { this.bannerText = c; }}
+          dragPlay={false}
+          style={{marginTop:'200px'}}
+        >
+          {<div>hello</div>}
+          <div>dfsadfasdf</div>
+        </BannerAnim>
+        <div>hellooooo</div>
       </div>
     </div>);
   }
