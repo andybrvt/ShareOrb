@@ -16,30 +16,19 @@ import { Form } from '@ant-design/compatible';
 
 const Element = BannerAnim.Element;
 
-const textData2 = {
-  content: 'WEEK VEIW',
-  title: 'Week View',
-};
-const textData = {
-  content: 'Send a request to your friend to compare availibilities',
-  title: 'Day View',
-};
 let count=0;
-let picArray=[dayPic, weekPic]
+let picArray=[dayPic, weekPic, friendsPic]
 let dataArray = [
   {
-    map: 'dayPic',
     color: '#ffe7ba',
     background: '#ffc069',
   },
   {
-    map: 'friendsPic',
-    color: '#b7eb8f',
-    background: '#95de64',
+    color: '#f4ffb8',
+    background: '#d3f261',
   },
 
   {
-    map: 'friendsPic',
     color: '#efdbff',
     background: '#b37feb',
   },
@@ -48,14 +37,11 @@ let dataArray = [
 ];
 let dataArray2= [
   {
-    map: 'weekPic',
     color: '#FFF43D',
     background: '#F6B429',
   },
 
 ];
-dataArray = dataArray.map(item => ({ ...item, ...textData }));
-dataArray2 = dataArray2.map(item => ({ ...item, ...textData2 }));
 
 class DetailSwitch extends React.Component {
 
@@ -126,7 +112,8 @@ class DetailSwitch extends React.Component {
 
   onLeft = () => {
     let showInt = this.state.showInt;
-    showInt -= 1;
+    showInt=showInt-1;
+    console.log(showInt+" :this is before")
     const imgAnim = [
       { translateX: [0, -300], opacity: [1, 0] },
       { translateX: [0, 300], opacity: [1, 0] },
@@ -135,8 +122,10 @@ class DetailSwitch extends React.Component {
       showInt = 0;
     }
     this.setState({ showInt, imgAnim });
+    console.log(showInt+" :this is after")
     this.bannerImg.prev();
     this.bannerText.prev();
+
   };
 
   onRight = () => {
@@ -233,7 +222,7 @@ class DetailSwitch extends React.Component {
             <div class="eventSyncForm">
               <div className = 'radioCon'>
             <Radio.Button
-              onClick={this.onLeft}
+              onClick={this.onRight}
               className = 'weekEsync buttonGrow'
               style={{marginBottom:'20px'}}
               value={this.renderEndDay('week')}
@@ -253,8 +242,8 @@ class DetailSwitch extends React.Component {
               })
               </span>
             </Radio.Button>
-            <div style={{float:'right', marginTop:'75px'}}>
-              arrow button
+            <div style={{float:'right', marginTop:'150px', fontSize:'50px'}}>
+              <i onClick={this.onLeft} class="fas fa-arrow-circle-left"></i>
 
             </div>
           </div>
