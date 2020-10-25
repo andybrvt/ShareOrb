@@ -1039,7 +1039,8 @@ class WeekCalendar extends React.Component{
       command: "send_accepted_shared_event",
       actor: this.props.id,
       recipient: host.id,
-      eventDate: startTime
+      eventDate: startTime,
+      eventId: eventId
     }
     NotificationWebSocketInstance.sendNotification(notificationObject)
 
@@ -1053,7 +1054,8 @@ class WeekCalendar extends React.Component{
       command: "send_declined_shared_event",
       actor:  this.props.id,
       recipient: host.id,
-      eventDate: startTime
+      eventDate: startTime,
+      eventId: eventId
     }
 
     NotificationWebSocketInstance.sendNotification(notificationObject)

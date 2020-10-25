@@ -582,7 +582,9 @@ class NotificationsDropDown extends React.Component{
         )
       } if(notifications[i].type === "accepted_shared_event"){
         notificationList.push(
-          <li className = "notificationListContainer">
+          <li
+          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+          className = "notificationListContainer">
             <div className = 'notificationIcon'>
               <Avatar size = {55} style = {{
                 backgroundColor: 'purple',
@@ -612,7 +614,9 @@ class NotificationsDropDown extends React.Component{
         )
       } if(notifications[i].type === "declined_shared_event"){
         notificationList.push(
-          <li className = "notificationListContainer">
+          <li
+          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+          className = "notificationListContainer">
             <div className = 'notificationIcon'>
               <Avatar size = {55} style = {{
                 backgroundColor: 'purple',
