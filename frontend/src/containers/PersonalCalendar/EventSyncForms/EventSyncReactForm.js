@@ -263,7 +263,7 @@ class EventSyncReactForm extends React.Component {
     */}
     return (
 
-      <DetailSwitch/>
+      <DetailSwitch {...this.props}/>
 
     )
   }

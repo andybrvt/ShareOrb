@@ -90,6 +90,7 @@ class EventSyncModal extends React.Component{
           visible={this.props.isVisble}
           onCancel = {this.props.close}>
           <EventSyncReactForm
+           {...this.props}
            onSubmit = {this.submit}/>
         </Modal>
       </div>

@@ -12,6 +12,7 @@ import weekPic from './weekPic.svg';
 import * as dateFns from 'date-fns';
 import { Form } from '@ant-design/compatible';
 import { FireTwoTone } from '@ant-design/icons';
+import {connect} from 'react-redux';
 
 const { Option } = Select
 const Element = BannerAnim.Element;
@@ -182,7 +183,7 @@ class DetailSwitch extends React.Component {
   }
 
   render() {
-
+    console.log(this.props)
     let friends = this.props.friends
     console.log(friends)
     let friend = this.state.search.trim().toLowerCase()
@@ -198,55 +199,55 @@ class DetailSwitch extends React.Component {
         style={{
           background: item.color,
           height: '100%',
-          left:'50%',
+          left:'15%',
         }}
         leaveChildHide
        >
 
-       {
+         {
 
 
-         (this.state.pageNum==0)?
+           (this.state.pageNum==0)?
 
-        <QueueAnim
-          animConfig={this.state.imgAnim}
-          duration={this.getDuration}
-          delay={[!i ? this.state.delay : 300, 0]}
-          ease={['easeOutCubic', 'easeInQuad']}
-          key="img-wrapper"
-        >
+          <QueueAnim
+            animConfig={this.state.imgAnim}
+            duration={this.getDuration}
+            delay={[!i ? this.state.delay : 300, 0]}
+            ease={['easeOutCubic', 'easeInQuad']}
+            key="img-wrapper"
+          >
 
-        {/*if the page count is 1*/}
-          <div className={`${this.props.className}-map map${i}`} key="map">
-            <img src={picArray[0]} width="100%" />
-          </div>
+          {/*if the page count is 1*/}
+            <div className={`${this.props.className}-map map${i}`} key="map">
+              <img style={{marginLeft:'50px'}} src={picArray[0]} width="100%" />
+            </div>
 
-          <div style={{marginTop:'225px' }} className={`${this.props.className}-map map${i}`} key="map">
-            <img src={picArray[1]} width="100%" />
-          </div>
-            {/*if the page count is 2*/}
+            <div style={{marginTop:'225px' }} className={`${this.props.className}-map map${i}`} key="map">
+              <img style={{marginLeft:'50px'}} src={picArray[1]} width="100%" />
+            </div>
+              {/*if the page count is 2*/}
 
-        </QueueAnim>
+          </QueueAnim>
 
-        :
+          :
 
-        <QueueAnim
-          animConfig={this.state.imgAnim}
-          duration={this.getDuration}
-          delay={[!i ? this.state.delay : 300, 0]}
-          ease={['easeOutCubic', 'easeInQuad']}
-          key="img-wrapper"
-        >
+          <QueueAnim
+            animConfig={this.state.imgAnim}
+            duration={this.getDuration}
+            delay={[!i ? this.state.delay : 300, 0]}
+            ease={['easeOutCubic', 'easeInQuad']}
+            key="img-wrapper"
+          >
 
-        {/*if the page count is 1*/}
-          <div className={`${this.props.className}-map map${i}`} key="map">
-            <img src={picArray[2]} width="100%" />
-          </div>
-            {/*if the page count is 2*/}
+          {/*if the page count is 1*/}
+            <div className={`${this.props.className}-map map${i}`} key="map">
+              <img src={picArray[2]} width="50%" />
+            </div>
+              {/*if the page count is 2*/}
 
-        </QueueAnim>
+          </QueueAnim>
 
-        }
+          }
 
 
       </Element>));
@@ -404,7 +405,13 @@ class DetailSwitch extends React.Component {
     const textChildren2 = dataArray.map((item, i) => {
       console.log(dataArray);
       const { title, content, background } = item;
-      return (<Element key={i}>
+      return (<Element
+        style={{
+          background: item.color,
+          height: '100%',
+          width:'50%',
+        }}
+         key={i}>
 
 
         <div>
@@ -465,7 +472,6 @@ class DetailSwitch extends React.Component {
 
         </BannerAnim>
         */}
-
         <BannerAnim
           prefixCls={`${this.props.className}-img-wrapper`}
           sync
@@ -498,22 +504,16 @@ class DetailSwitch extends React.Component {
 
 
 
-        <BannerAnim
-          prefixCls={`${this.props.className}-text-wrapper`}
-          sync
-          type="across"
-          duration={1000}
-          arrow={false}
-          thumb={false}
-          ease="easeInOutExpo"
-          ref={(c) => { this.bannerText = c; }}
-          dragPlay={false}
-          style={{marginTop:'200px'}}
-        >
-        </BannerAnim>
+
       </div>
     </div>);
   }
 }
+const mapStateToProps = state => {
+  return {
+    friends: state.auth.friends
+  }
+}
 
-export default DetailSwitch;
+
+export default connect(mapStateToProps) (DetailSwitch);
