@@ -40,7 +40,9 @@ class App extends Component {
       this.props.addEvent.bind(this),
       this.props.acceptEventShare.bind(this),
       this.props.declineElseEventShare.bind(this),
-      this.props.declineEventShare.bind(this)
+      this.props.declineEventShare.bind(this),
+      this.props.newNotification.bind(this)
+
     )
 
     WebSocketPostsInstance.addCallbacks(

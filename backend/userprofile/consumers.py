@@ -332,6 +332,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         # basically change the name of the function and try to pass it to the front end
         self.send_event_sync_notification(content)
 
+    
+
     def send_new_notification(self, notification):
         # Send message to room group
         # You want to send it to the right group channel layer so because of that

@@ -8,6 +8,9 @@ from .models import Event
 from .models import EventMessages
 from .serializers import EventSerializer
 from .serializers import EventMessagesSerializer
+from userprofile.models import CustomNotification
+from userprofile.serializers import NotificationSerializer
+from userprofile import consumers
 # from userprofile.serilaizers import FollowUserSerializer
 
 
@@ -73,6 +76,31 @@ class CalendarConsumer(JsonWebsocketConsumer):
         newEvent.invited.set(invited)
 
         serializer = EventSerializer(newEvent)
+
+        # For the notification you gonna need, the actor, reicipeint,
+        # eventdate, eventHour, eventMin, and the event id
+
+        # This for loop over here is used to over come the challenge of not being
+        # able to pull the id for the notifcation. So for the initial share events
+        # we will be using the calendereventweboscket to create the events notifcation
+        for recipient in serializer.data['invited']:
+            notification = CustomNotification.objects.create(
+                type = "shared_event",
+                actor = host,
+                recipient = get_object_or_404(User, id = recipient['id']),
+                verb = "shared an event at",
+                minDate = start_time,
+                eventId = newEvent.id
+            )
+            noti_serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_shared_event_notification",
+                "notification": noti_serializer.data,
+                "recipient": noti_serializer.data['recipient']
+            }
+            self.send_shared_event_notification(content)
+
+
         content = {
             'command': 'new_event',
             'newEvent': serializer.data,
@@ -219,6 +247,19 @@ class CalendarConsumer(JsonWebsocketConsumer):
                 content
             )
 
+    def send_shared_event_notification(self, newNoti):
+        # This is used to send the new shared notificaiton to the frontend
+        channel_layer = get_channel_layer()
+        content = {
+            "type": "new_noti",
+            "newNoti": newNoti
+        }
+        channel = 'calendar_'+str(newNoti['recipient'])
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            content
+        )
+
 
     def send_accept_shared(self, acceptedUser):
         # CHECKED
@@ -312,6 +353,11 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def declined_share(self, event):
         declinedUser = event['declinedUser']
         return self.send_json(declinedUser)
+
+    def new_noti(self, noti):
+        newNoti = noti['newNoti']
+        return self.send_json(newNoti)
+
 
 class EventPageConsumer (JsonWebsocketConsumer):
     def send_fetch_event_messages(self, data):

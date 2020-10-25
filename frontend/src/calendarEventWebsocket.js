@@ -56,27 +56,22 @@ class WebSocketCalendarEvent {
 
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
-      if(parsedData.newEvent.invited.length > 0
-        && parsedData.newEvent.host.username !== userId ){
-        console.log('hit here')
-        const notificationObject = {
-          command: "send_shared_event_notification",
-          actor: parsedData.newEvent.host.id,
-          recipient: 2,
-          eventDate: parsedData.newEvent.start_time
-        }
 
+      // NOTIFICATION THIS WAY IS NOT GONNA WORK
+      // if(parsedData.newEvent.invited.length > 0
+      //   && parsedData.newEvent.host.username !== userId ){
+      //   console.log('hit here')
+      //
 
+        // authAxios.post("http://127.0.0.1:8000/userprofile/notification/create", {
+        //   type: "shared_event",
+        //   actor:parsedData.newEvent.host.id,
+        //   recipient: userId,
+        //   verb: "shared an event at",
+        //   minDate: parsedData.newEvent.start_time
+        // })
 
-        authAxios.post("http://127.0.0.1:8000/userprofile/notification/create", {
-          type: "shared_event",
-          actor:parsedData.newEvent.host.id,
-          recipient: 2,
-          verb: "shared an event at",
-          minDate: parsedData.newEvent.start_time
-        })
-
-      }
+      // }
 
 
     }
@@ -119,6 +114,13 @@ class WebSocketCalendarEvent {
         eventId: eventId
       }
       this.callbacks['decline_share'](deleteObj)
+    } else if (command === "new_shared_event_notification"){
+      // This will be sending an event notification when you first make an event
+      // this will allow you to press on the notifcaiton and then go to the event
+      // page
+      const notification = parsedData.notification
+      // add call back here
+      this.callbacks['new_shared_event_notification'](notification)
     }
 
 
@@ -129,6 +131,7 @@ class WebSocketCalendarEvent {
     acceptEventShareCallback,
     declineElseEventShareCallback,
     declineEventShareCallback,
+    newShareEventNotificationCallback
 
   ){
     // you just need to add the event so just one call back
@@ -136,6 +139,7 @@ class WebSocketCalendarEvent {
     this.callbacks['accept_share'] = acceptEventShareCallback;
     this.callbacks['decline_share_else'] = declineElseEventShareCallback;
     this.callbacks['decline_share'] = declineEventShareCallback;
+    this.callbacks['new_shared_event_notification'] = newShareEventNotificationCallback;
 
   }
 
@@ -154,7 +158,7 @@ class WebSocketCalendarEvent {
     // The gate way to declining an event. Pretty much the same process as the accepting
     // but instead of adding events in
 
-    
+
     this.sendEvent({
       eventId: eventId,
       declineId: declineId,
