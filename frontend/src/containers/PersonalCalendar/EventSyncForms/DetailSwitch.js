@@ -191,11 +191,14 @@ class DetailSwitch extends React.Component {
     }
     console.log(this.bannerImg)
     const imgChildren = dataArray.map((item, i) => (
+
+
       <Element
         key={i}
         style={{
           background: item.color,
           height: '100%',
+          left:'50%',
         }}
         leaveChildHide
        >
@@ -257,18 +260,13 @@ class DetailSwitch extends React.Component {
         (this.state.pageNum==0)?
 
         <div>
-        <QueueAnim type="bottom"
-           duration={1000}
-            delay={[!i ? this.state.delay + 500 : 800, 0]}>
+          <QueueAnim type="bottom"
+            duration={1500}
+             delay={[!i ? this.state.delay + 500 : 800, 0]}>
 
-
-
-          <div>
-              <h1 key="h1">{'Day View'}</h1>
-              <em key="em" style={{ background }} />
-              <p key="p">{
-
-
+            <h1 key="h1">{'Day View'}</h1>
+            <em key="em" style={{ background }} />
+            <p key="p">{
               <div class="eventSyncForm">
                 <div className = 'radioCon'>
 
@@ -291,20 +289,18 @@ class DetailSwitch extends React.Component {
                 </div>
 
 
-              </div>}</p>
-
-          </div>
-
+              </div>
+          }</p>
 
 
-        </QueueAnim>
+          </QueueAnim>
 
 
         <QueueAnim type="bottom"
           duration={1500}
            delay={[!i ? this.state.delay + 500 : 800, 0]}>
 
-          <h1 style={{ marginTop:'100px'}} key="h1">{'Week View'}</h1>
+          <h1 style={{ marginTop:'125px'}} key="h1">{'Week View'}</h1>
           <em key="em" style={{ background }} />
           <p key="p">{
             <div class="eventSyncForm">
@@ -405,14 +401,70 @@ class DetailSwitch extends React.Component {
     );
     });
 
+    const textChildren2 = dataArray.map((item, i) => {
+      console.log(dataArray);
+      const { title, content, background } = item;
+      return (<Element key={i}>
 
 
+        <div>
+          <QueueAnim type="bottom"
+            duration={1500}
+             delay={[!i ? this.state.delay + 500 : 800, 0]}>
 
-    return (<div
+            <h1 key="h1">{'Day View'}</h1>
+            <em key="em" style={{ background }} />
+            <p key="p">{
+                <div>test</div>
+
+          }</p>
+
+
+          </QueueAnim>
+
+
+        <QueueAnim type="bottom"
+          duration={1500}
+           delay={[!i ? this.state.delay + 500 : 800, 0]}>
+
+          <h1 style={{ marginTop:'125px'}} key="h1">{'Week View'}</h1>
+          <em key="em" style={{ background }} />
+          <p key="p">{
+            <div>test2</div>
+        }</p>
+
+
+        </QueueAnim>
+      </div>
+
+      </Element>
+    );
+    });
+
+
+    return (
+
+      <div
       className={`${this.props.className}-wrapper`}
       style={{ background: dataArray[this.state.showInt].background }}
-    >
+      >
       <div className={this.props.className}>
+        {/*
+        <BannerAnim
+          prefixCls={`${this.props.className}-text-wrapper`}
+          sync
+          type="across"
+          duration={1000}
+          arrow={false}
+          thumb={false}
+          ease="easeInOutExpo"
+          ref={(c) => { this.bannerText = c; }}
+          dragPlay={false}
+        >
+          {textChildren2}
+
+        </BannerAnim>
+        */}
 
         <BannerAnim
           prefixCls={`${this.props.className}-img-wrapper`}
@@ -427,6 +479,7 @@ class DetailSwitch extends React.Component {
           dragPlay={false}
         >
           {imgChildren}
+
         </BannerAnim>
         <BannerAnim
           prefixCls={`${this.props.className}-text-wrapper`}
@@ -457,10 +510,7 @@ class DetailSwitch extends React.Component {
           dragPlay={false}
           style={{marginTop:'200px'}}
         >
-          {<div>hello</div>}
-          <div>dfsadfasdf</div>
         </BannerAnim>
-        <div>hellooooo</div>
       </div>
     </div>);
   }
