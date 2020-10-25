@@ -419,3 +419,7 @@ class CommentView(generics.ListAPIView):
 class NotificationView(generics.ListAPIView):
     serializer_class = serializers.NotificationSerializer
     queryset = models.CustomNotification.objects.all()
+
+class NotificationCreateView(generics.ListCreateAPIView):
+    serializer_class = serializers.NotificationSerializer
+    queryset = models.CustomNotification.objects.all()

@@ -153,22 +153,37 @@ class NotificationConsumer(JsonWebsocketConsumer):
         #This method is to use for all the notificaiton for personal calendar
         print(data)
         print('right here')
-        if data['command'] == "send_shared_event_notification":
-            actor = get_object_or_404(User, id = data["actor"])
-            for recipients in data['recipient']:
-                recipient = get_object_or_404(User, username = recipients)
-                notification = CustomNotification.objects.create(type = "shared_event",
-                actor = actor,
-                recipient = recipient,
-                verb = "shared an event at "+data['eventDate'],
-                minDate = data['eventDate'])
-                serializer = NotificationSerializer(notification)
-                content = {
-                    "command": "new_notification",
-                    "notification":json.dumps(serializer.data),
-                    "recipient": recipient.username,
-                }
-                self.send_new_notification(content)
+        # if data['command'] == "send_shared_event_notification":
+        #     actor = get_object_or_404(User, id = data["actor"])
+        #     # for recipients in data['recipient']:
+        #     #     recipient = get_object_or_404(User, id = recipients['id'])
+        #     #     notification = CustomNotification.objects.create(type = "shared_event",
+        #     #     actor = actor,
+        #     #     recipient = recipient,
+        #     #     verb = "shared an event at "+data['eventDate'],
+        #     #     minDate = data['eventDate'])
+        #     #     serializer = NotificationSerializer(notification)
+        #     #     content = {
+        #     #         "command": "new_notification",
+        #     #         "notification":json.dumps(serializer.data),
+        #     #         "recipient": recipient.username,
+        #     #     }
+        #     #     self.send_new_notification(content)
+        #     recipient = get_object_or_404(User, id = data['recipient'])
+        #     notification = CustomNotification.objects.create(
+        #     type = "shared_event",
+        #     actor = actor,
+        #     recipient = recipient,
+        #     verb = "shared an event at "+data['eventDate'],
+        #     minDate = data['eventDate'])
+        #     serializer = NotificationSerializer(notification)
+        #     content = {
+        #         "command": "new_notification",
+        #         "notification":json.dumps(serializer.data),
+        #         "recipient": recipient.username,
+        #     }
+        #     self.send_new_notification(content)
+
         if data['command'] == 'send_accepted_shared_event':
             actor = get_object_or_404(User, id = data['actor'])
             recipient = get_object_or_404(User, id = data['recipient'])
@@ -176,7 +191,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
             actor = actor,
             recipient = recipient,
             verb = "accepted shared event",
-            minDate = data['eventDate'])
+            minDate = data['eventDate'],
+            eventId = data['eventId']
+            )
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -191,7 +208,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             actor = actor,
             recipient = recipient,
             verb = "declined shared event",
-            minDate = data['eventDate'])
+            minDate = data['eventDate'],
+            eventId = data['eventId'])
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -317,6 +335,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         # basically change the name of the function and try to pass it to the front end
         self.send_event_sync_notification(content)
 
+
+
     def send_new_notification(self, notification):
         # Send message to room group
         # You want to send it to the right group channel layer so because of that
@@ -387,6 +407,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
         print (data)
+        print ("test test")
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':

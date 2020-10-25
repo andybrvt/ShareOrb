@@ -8,12 +8,16 @@ from .models import Event
 from .models import EventMessages
 from .serializers import EventSerializer
 from .serializers import EventMessagesSerializer
+from userprofile.models import CustomNotification
+from userprofile.serializers import NotificationSerializer
+from userprofile import consumers
 # from userprofile.serilaizers import FollowUserSerializer
 
 
 class CalendarConsumer(JsonWebsocketConsumer):
 
     def add_share_sync_event(self, data):
+        # CHECKED
 
         # THIS IS GONNA BE SIMILAR TO THE SHARED EVENT SO YOU GOTTA STRUCTURE YOUR
         # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT
@@ -72,6 +76,31 @@ class CalendarConsumer(JsonWebsocketConsumer):
         newEvent.invited.set(invited)
 
         serializer = EventSerializer(newEvent)
+
+        # For the notification you gonna need, the actor, reicipeint,
+        # eventdate, eventHour, eventMin, and the event id
+
+        # This for loop over here is used to over come the challenge of not being
+        # able to pull the id for the notifcation. So for the initial share events
+        # we will be using the calendereventweboscket to create the events notifcation
+        for recipient in serializer.data['invited']:
+            notification = CustomNotification.objects.create(
+                type = "shared_event",
+                actor = host,
+                recipient = get_object_or_404(User, id = recipient['id']),
+                verb = "shared an event at",
+                minDate = start_time,
+                eventId = newEvent.id
+            )
+            noti_serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_shared_event_notification",
+                "notification": noti_serializer.data,
+                "recipient": noti_serializer.data['recipient']
+            }
+            self.send_shared_event_notification(content)
+
+
         content = {
             'command': 'new_event',
             'newEvent': serializer.data,
@@ -81,6 +110,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
         return self.send_new_event(content)
 
     def accept_shared_event(self, data):
+        #CHECKED
+
         # This function is pretty much used to just add in the accepted user into
         # the accepted list, so you just gonna add the person in then send it out to
         # everyone so then it can be added into everyone's redux
@@ -104,6 +135,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
 
     def decline_shared_event(self, data):
+        #CHECKED
+
         # This function is used to decline events, so what is gonna happen is that the
         # user will be removed from the list of persons
         sharedEvent = get_object_or_404(Event, id  = data['eventId'])
@@ -128,14 +161,14 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'command': 'add_decline_else',
             'person': person,
             'eventId': data['eventId'],
-            'declineUser': declineUser.username,
+            'declineUser': declineUser.id,
             'declineId': data['declineId']
         }
 
         content = {
             'command': 'add_decline',
             'eventId': data['eventId'],
-            'declineUser': declineUser.username
+            'declineUser': declineUser.id
         }
 
         self.send_decline_shared(content)
@@ -149,6 +182,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         eventPerson = serializeEvent.data['person'].copy()
 
         if event.host == user:
+            #CHECKED
 
             content = {
                 'command': 'delete_event',
@@ -158,6 +192,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
             self.send_accept_shared(content)
             event.delete()
         else:
+            # CHECKED
+
             # This one, instead of deleting the whole event, you are just removing
             # the person that removed the event that was not host
             event.person.remove(user)
@@ -165,7 +201,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
             content = {
                 'command': 'delete_event',
                 'eventId': data['eventId'],
-                'person': user.username,
+                'person': user.id,
                 'personId': user.id
 
             }
@@ -176,6 +212,8 @@ class CalendarConsumer(JsonWebsocketConsumer):
 # So you got done by making an object in the model, now you need to send
 # it through the channel to both users
     def delete_single_event(self, deletedEvent):
+        # CHECKED
+
         # This is used to send out a dictionary with instructions to delete
         # the event for a users that are not the host
         channel_layer = get_channel_layer()
@@ -185,13 +223,15 @@ class CalendarConsumer(JsonWebsocketConsumer):
         }
 
         person = deletedEvent['person']
-        channel = 'calendar_'+person
+        channel = 'calendar_'+str(person)
         async_to_sync(self.channel_layer.group_send)(
             channel,
             content
         )
 
     def send_new_event(self,newEvent):
+        # CHECKED
+
         # Also gotta change the for loop here because now its pulling the whole object
         channel_layer = get_channel_layer()
         content = {
@@ -201,14 +241,29 @@ class CalendarConsumer(JsonWebsocketConsumer):
         people = newEvent['newEvent']['person']
         for person in newEvent['newEvent']['person']:
             # Maybe gotta change this if it poses any problems
-            channel = 'calendar_'+person['username']
+            channel = 'calendar_'+str(person['id'])
             async_to_sync(self.channel_layer.group_send)(
                 channel,
                 content
             )
 
+    def send_shared_event_notification(self, newNoti):
+        # This is used to send the new shared notificaiton to the frontend
+        channel_layer = get_channel_layer()
+        content = {
+            "type": "new_noti",
+            "newNoti": newNoti
+        }
+        channel = 'calendar_'+str(newNoti['recipient'])
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            content
+        )
+
 
     def send_accept_shared(self, acceptedUser):
+        # CHECKED
+
         # This send is pretty much the same as the send_new_evnet but it is used
         # in conjuntion with the accept_shared_event so that it can send it to everyone
         # and know who has accepted the event
@@ -217,15 +272,17 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'type': 'accepted_share',
             'acceptedUser': acceptedUser
         }
-        people = acceptedUser['person']
+        people = acceptedUser['person'] #This is a list of objects
         for person in people:
-            channel = 'calendar_'+person['username']
+            channel = 'calendar_'+str(person['id'])
             async_to_sync(self.channel_layer.group_send)(
                 channel,
                 content
             )
 
     def send_decline_shared(self, declinedUser):
+        # CHECKED
+
         # similar to the send_accept_share but with an extra channel send because
         # the person list does not include the person declining the event
         channel_layer = get_channel_layer()
@@ -236,13 +293,13 @@ class CalendarConsumer(JsonWebsocketConsumer):
         if (declinedUser['command'] == 'add_decline_else'):
             people = declinedUser['person']
             for person in people:
-                channel = 'calendar_'+person['username']
+                channel = 'calendar_'+str(person['id'])
                 async_to_sync(self.channel_layer.group_send)(
                     channel,
                     content
                 )
         elif(declinedUser['command'] == 'add_decline'):
-            declineChannel = 'calendar_'+declinedUser['declineUser']
+            declineChannel = 'calendar_'+str(declinedUser['declineUser'])
             async_to_sync(self.channel_layer.group_send)(
                 declineChannel,
                 content
@@ -252,14 +309,14 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
 # When making a websocket you always start with connect
     def connect(self):
-        self.current_user = self.scope['url_route']['kwargs']['username']
+        self.current_user = self.scope['url_route']['kwargs']['userId']
         grp = 'calendar_'+self.current_user
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
         self.accept()
 
     def disconnect(self, close_code):
         user = self.scope['user']
-        self.current_user = self.scope['url_route']['kwargs']['username']
+        self.current_user = self.scope['url_route']['kwargs']['userId']
         grp = 'calendar_'+self.current_user
         async_to_sync (self.channel_layer.group_discard)(grp, self.channel_name)
 
@@ -269,19 +326,24 @@ class CalendarConsumer(JsonWebsocketConsumer):
         data = json.loads(text_data)
         print(data)
         if data['command'] == 'add_sync_event':
+            # XXX NOT CHECKED
             self.add_share_sync_event(data)
         if data['command'] == 'add_shared_event':
+            #CHECK
             self.add_share_sync_event(data)
         if data['command'] == 'send_accept_shared_event':
+            #CHECK
             self.accept_shared_event(data)
         if data['command'] == 'send_decline_shared_event':
+            #CHECKED
             self.decline_shared_event(data)
         if data['command'] == 'delete_event':
+            #CHECKED
             self.delete_event(data)
 
     def new_event(self, event):
         newEvent = event['newEvent']
-        print ('new_event')
+        print ('new_event_test_test')
         return self.send_json(newEvent)
 
     def accepted_share(self, event):
@@ -291,6 +353,11 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def declined_share(self, event):
         declinedUser = event['declinedUser']
         return self.send_json(declinedUser)
+
+    def new_noti(self, noti):
+        newNoti = noti['newNoti']
+        return self.send_json(newNoti)
+
 
 class EventPageConsumer (JsonWebsocketConsumer):
     def send_fetch_event_messages(self, data):

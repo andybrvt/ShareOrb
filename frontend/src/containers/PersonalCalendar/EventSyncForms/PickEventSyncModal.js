@@ -48,7 +48,7 @@ class PickEventSyncModal extends React.Component{
   }
 
   componentDidMount () {
-    CalendarEventWebSocketInstance.connect(this.props.currentUser)
+    CalendarEventWebSocketInstance.connect(this.props.curId)
     const friend = this.props.userFriend.username
     const date_min = this.props.minDate
     const date_max = this.props.maxDate
@@ -66,10 +66,14 @@ class PickEventSyncModal extends React.Component{
   }
 
   componentWillReceiveProps (newProps){
+    console.log(this.props)
     console.log(newProps)
-    if(this.props.currentUser !== newProps.currentUser){
+    // Gotta make sure that both the curId are the same type, it seems like it should
+    // not be a problem but sometiems it comes a string so you gotta convert both to ints
+    console.log(parseInt(this.props.curId) !== parseInt(newProps.curId))
+    if(parseInt(this.props.curId) !== parseInt(newProps.curId)){
       CalendarEventWebSocketInstance.disconnect()
-      CalendarEventWebSocketInstance.connect(newProps.currentUser)
+      CalendarEventWebSocketInstance.connect(newProps.curId)
       console.log('newWebsocket')
     }
 
@@ -132,6 +136,7 @@ class PickEventSyncModal extends React.Component{
 const mapStateToProps = state => {
   return{
     currentUser: state.auth.username,
+    curId: state.auth.id,
     userFriend: state.eventSync.userFriend,
     minDate: state.eventSync.minDate,
     maxDate: state.eventSync.maxDate

@@ -155,6 +155,8 @@ class CustomNotification(models.Model):
     actor = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         blank=False,
+        null = True,
+        related_name = "actor_notification",
         on_delete=models.CASCADE
     )
 
