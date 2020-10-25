@@ -330,10 +330,7 @@ class DetailSwitch extends React.Component {
               })
               </span>
             </Radio.Button>
-            <div style={{float:'right', marginTop:'150px', fontSize:'50px'}}>
-              <i onClick={this.onLeft} class="fas fa-arrow-circle-left"></i>
 
-            </div>
           </div>
         </div>
         }</p>
@@ -395,7 +392,7 @@ class DetailSwitch extends React.Component {
           htmlType = 'submit'
           disabled = {this.state.endDate === ''
           || this.state.friend === '' }
-          block> Check Availabilites </Button>
+          block> Send Invite</Button>
           </Form.Item>
 
           <div style={{float:'right', marginTop:'100px', fontSize:'50px'}}>
