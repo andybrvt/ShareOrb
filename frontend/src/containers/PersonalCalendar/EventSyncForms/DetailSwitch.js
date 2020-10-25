@@ -11,9 +11,9 @@ import friendsPic from './friends.svg';
 import weekPic from './weekPic.svg';
 import * as dateFns from 'date-fns';
 import { Form } from '@ant-design/compatible';
+import { FireTwoTone } from '@ant-design/icons';
 
-
-
+const { Option } = Select
 const Element = BannerAnim.Element;
 
 let count=0;
@@ -28,20 +28,11 @@ let dataArray = [
     background: '#d3f261',
   },
 
-  {
-    color: '#efdbff',
-    background: '#b37feb',
-  },
 
 
 ];
-let dataArray2= [
-  {
-    color: '#FFF43D',
-    background: '#F6B429',
-  },
 
-];
+
 
 class DetailSwitch extends React.Component {
 
@@ -53,11 +44,13 @@ class DetailSwitch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      pageNum:0,
       rangeChoice: '',
       endDate: '',
       startDate: new Date(),
       showInt: 0,
       delay: 0,
+      search: '',
       imgAnim: [
         { translateX: [0, 300], opacity: [1, 0] },
         { translateX: [0, -300], opacity: [1, 0] },
@@ -110,6 +103,13 @@ class DetailSwitch extends React.Component {
     }
   }
 
+
+  onHandleChange = (e) => {
+    this.setState ({
+      search: e.target.value
+    })
+  }
+
   onLeft = () => {
     let showInt = this.state.showInt;
     showInt=showInt-1;
@@ -138,7 +138,8 @@ class DetailSwitch extends React.Component {
     if (showInt > dataArray.length - 1) {
       showInt = dataArray.length - 1;
     }
-    this.setState({ showInt, imgAnim });
+    this.setState({ pageNum:this.state.pageNum+1, showInt, imgAnim });
+    console.log(this.state.pageNum)
     this.bannerImg.next();
     this.bannerText.next();
   };
@@ -151,7 +152,43 @@ class DetailSwitch extends React.Component {
   };
 
 
+  onFriendChange = (friend) => {
+    console.log(friend)
+    this.setState({
+      friend: friend
+    })
+
+  }
+
+  onFriendClick = (friend) => {
+    console.log(friend)
+  }
+
+  renderFriends = () => {
+    let friends = []
+    if(this.props.friends){
+      for (let i = 0; i < this.props.friends.length; i++ ){
+        friends.push(
+          <Option
+          key = {this.props.friends[i]}
+          value = {this.props.friends[i]}>
+            {this.props.friends[i]}
+          </Option>
+        )
+      }
+    }
+    console.log(friends)
+
+  }
+
   render() {
+
+    let friends = this.props.friends
+    console.log(friends)
+    let friend = this.state.search.trim().toLowerCase()
+    if (friend.length > 0){
+      friends = friends.filter(val => val.username.toLowerCase().match(friend))
+    }
     console.log(this.bannerImg)
     const imgChildren = dataArray.map((item, i) => (
       <Element
@@ -162,6 +199,12 @@ class DetailSwitch extends React.Component {
         }}
         leaveChildHide
        >
+
+       {
+
+
+         (this.state.pageNum==0)?
+
         <QueueAnim
           animConfig={this.state.imgAnim}
           duration={this.getDuration}
@@ -169,6 +212,8 @@ class DetailSwitch extends React.Component {
           ease={['easeOutCubic', 'easeInQuad']}
           key="img-wrapper"
         >
+
+        {/*if the page count is 1*/}
           <div className={`${this.props.className}-map map${i}`} key="map">
             <img src={picArray[0]} width="100%" />
           </div>
@@ -176,46 +221,89 @@ class DetailSwitch extends React.Component {
           <div style={{marginTop:'225px' }} className={`${this.props.className}-map map${i}`} key="map">
             <img src={picArray[1]} width="100%" />
           </div>
+            {/*if the page count is 2*/}
 
         </QueueAnim>
+
+        :
+
+        <QueueAnim
+          animConfig={this.state.imgAnim}
+          duration={this.getDuration}
+          delay={[!i ? this.state.delay : 300, 0]}
+          ease={['easeOutCubic', 'easeInQuad']}
+          key="img-wrapper"
+        >
+
+        {/*if the page count is 1*/}
+          <div className={`${this.props.className}-map map${i}`} key="map">
+            <img src={picArray[2]} width="100%" />
+          </div>
+            {/*if the page count is 2*/}
+
+        </QueueAnim>
+
+        }
+
+
       </Element>));
 
     const textChildren = dataArray.map((item, i) => {
       console.log(dataArray);
       const { title, content, background } = item;
       return (<Element key={i}>
-        <QueueAnim type="bottom" duration={1000} delay={[!i ? this.state.delay + 500 : 800, 0]}>
-          <h1 key="h1">{'Day View'}</h1>
-          <em key="em" style={{ background }} />
-          <p key="p">{
+
+        {
+        (this.state.pageNum==0)?
+
+        <div>
+        <QueueAnim type="bottom"
+           duration={1000}
+            delay={[!i ? this.state.delay + 500 : 800, 0]}>
 
 
-          <div class="eventSyncForm">
-            <div className = 'radioCon'>
 
-            <Radio.Button
-              onClick={this.onRight}
-              className = 'dayEsync buttonGrow'
-              style={{marginBottom:'20px'}}
-              value={this.renderEndDay('day')}>
-                <span className = 'syncTitle'>Day Event Sync </span>
-                <br />
-                <span>
-                ({
-                  dateFns.format(
-                    dateFns.addDays(new Date(),1),
-                    'MM/dd'
-                  )
-                })
-                </span>
-              </Radio.Button>
-            </div>
+          <div>
+              <h1 key="h1">{'Day View'}</h1>
+              <em key="em" style={{ background }} />
+              <p key="p">{
 
 
-          </div>}</p>
+              <div class="eventSyncForm">
+                <div className = 'radioCon'>
+
+                <Radio.Button
+                  onClick={this.onRight}
+                  className = 'dayEsync buttonGrow'
+                  style={{marginBottom:'20px'}}
+                  value={this.renderEndDay('day')}>
+                    <span className = 'syncTitle'>Day Event Sync </span>
+                    <br />
+                    <span>
+                    ({
+                      dateFns.format(
+                        dateFns.addDays(new Date(),1),
+                        'MM/dd'
+                      )
+                    })
+                    </span>
+                  </Radio.Button>
+                </div>
+
+
+              </div>}</p>
+
+          </div>
+
+
 
         </QueueAnim>
-        <QueueAnim type="bottom" duration={1500} delay={[!i ? this.state.delay + 500 : 800, 0]}>
+
+
+        <QueueAnim type="bottom"
+          duration={1500}
+           delay={[!i ? this.state.delay + 500 : 800, 0]}>
+
           <h1 style={{ marginTop:'100px'}} key="h1">{'Week View'}</h1>
           <em key="em" style={{ background }} />
           <p key="p">{
@@ -248,36 +336,79 @@ class DetailSwitch extends React.Component {
             </div>
           </div>
         </div>
+        }</p>
 
 
-
-
-
-                }</p>
+        </QueueAnim>
+      </div>
+        :
 
         <div>
 
+          <Form.Item className = 'friendListCon'>
+          <Input
+            style={{width:'400px'}}
+            value = {this.state.search}
+            onChange = {this.onHandleChange}
+            type = 'text'
+            placeholder = 'Find a Friend'
+           />
 
 
+           <List
+                className = 'friendList'
+                dataSource={friends}
+                style={{width:'400px'}}
+                renderItem={item => (
+                  <List.Item
+                  key={item.username}
+                  className = {` friendItemHover  ${this.state.friend === item ? 'friendItem' : '' }`}
+                  onClick = {() => this.onFriendChange(item)}
+
+                  >
+                    <List.Item.Meta
+                      avatar={
+                        <Avatar src={'http://127.0.0.1:8000'+item.profile_picture} />
+                      }
+                      title={<a href="https://ant.design">{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
+                      description={"@"+item.username}
+                      // description={item.email}
+                    />
+
+                  <div><FireTwoTone /></div>
+
+                </List.Item>
+
+                )}
+              >
+          </List>
+
+          </Form.Item>
+
+          <Form.Item className ='syncButtonCon'>
+          <Button
+          style = {{
+            backgroundColor:'dodgerblue',
+            color: 'white'
+          }}
+          className = 'syncButton'
+          htmlType = 'submit'
+          disabled = {this.state.endDate === ''
+          || this.state.friend === '' }
+          block> Check Availabilites </Button>
+          </Form.Item>
+
+          <div style={{float:'right', marginTop:'100px', fontSize:'50px'}}>
+            <i onClick={this.onLeft} class="fas fa-arrow-circle-left"></i>
+          </div>
 
         </div>
-        </QueueAnim>
+      }
       </Element>
     );
     });
 
-    const textChildren2 = dataArray2.map((item, i) => {
-      console.log(dataArray2);
-      const { title, content, background } = item;
-      return (<Element key={i}>
-        <QueueAnim type="bottom" duration={1000} delay={[!i ? this.state.delay + 500 : 800, 0]}>
-          <h1 key="h1">{title}</h1>
-          <em key="em" style={{ background }} />
-          <p key="p">{content}</p>
-        </QueueAnim>
-      </Element>
-    );
-    });
+
 
 
     return (<div
@@ -315,21 +446,7 @@ class DetailSwitch extends React.Component {
 
         </BannerAnim>
 
-        <BannerAnim
-          prefixCls={`${this.props.className}-text-wrapper`}
-          sync
-          type="across"
-          duration={1000}
-          arrow={false}
-          thumb={false}
-          ease="easeInOutExpo"
-          ref={(c) => { this.bannerText = c; }}
-          dragPlay={false}
-          style={{marginTop:'200px'}}
-        >
 
-          {textChildren2}
-        </BannerAnim>
 
         <BannerAnim
           prefixCls={`${this.props.className}-text-wrapper`}
