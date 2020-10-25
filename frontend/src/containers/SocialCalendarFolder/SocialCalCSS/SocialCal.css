@@ -348,7 +348,8 @@
 
 .coverEventCapacity .avatarContainer{
   /* background-color: blue; */
-  margin-left: 5px;
+  /* position: relative; */
+  /* margin-left: 5px; */
 }
 
 .joinEventButtonCover{

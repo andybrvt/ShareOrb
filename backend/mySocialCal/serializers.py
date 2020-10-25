@@ -63,21 +63,37 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
 
 class SocialCalEventSerializer(serializers.ModelSerializer):
 
-
+    get_socialEventMessage = serializers.StringRelatedField(many = True)
     class Meta:
         model = models.SocialCalEvent
-        fields = ('id','persons', 'host', 'title', 'content', 'start_time', 'end_time', 'location' )
-
+        fields = ('__all__')
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['host'] = SocialCalUserSerializer(User.objects.get(id = data['host'])).data
         personList = []
+        messageList = []
         for people in data['persons']:
             person = SocialCalUserSerializer(User.objects.get(id = people)).data
             personList.append(person)
+        for messages in data['get_socialEventMessage']:
+            message = SocialEventMessagesSerializer(models.SocialEventMessages.objects.get(id = messages)).data
+            messageList.append(message)
         data['persons'] = personList
+        data['get_socialEventMessage'] = messageList
         return data
+
+class SocialEventMessagesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SocialEventMessages
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['messageUser'] = SocialCalUserSerializer(models.User.objects.get(id = data['messageUser'])).data
+        return data
+
 class SocialCalCommentSerializer (serializers.ModelSerializer):
 
 

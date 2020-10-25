@@ -8,6 +8,7 @@ import AvatarGroups from '../../components/AvatarGroups';
 import userIcon from '../../components/images/user.png';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import './SocialCalCSS/SocialModal.css';
+import Liking from "../NewsfeedItems/Liking";
 
 
 
@@ -121,7 +122,9 @@ class SocialEventList extends React.Component{
             <span className = 'socialEventCapcity'>
             <img src ={userIcon} className = 'socialUserIcon' />
             {item.persons.length}
-            <AvatarGroups />
+            <div>
+            <Liking like_people = {item.persons} />
+            </div>
             </span>
 
             {dateFns.isAfter(dateFns.endOfDay(dateFns.addHours(new Date(this.props.cellDate), 7)), new Date()) ?

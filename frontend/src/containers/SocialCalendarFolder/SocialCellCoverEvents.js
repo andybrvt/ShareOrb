@@ -8,7 +8,7 @@ import AvatarGroups from '../../components/AvatarGroups';
 import userIcon from '../../components/images/user.png';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import './SocialCalCSS/SocialCal.css';
-
+import Liking from "../NewsfeedItems/Liking";
 
 
 class SocialCellCoverEvents extends React.Component{
@@ -95,7 +95,7 @@ class SocialCellCoverEvents extends React.Component{
                 {item.persons.length}
                 </div>
                   <div className = 'avatarContainer'>
-                  <AvatarGroups />
+                  <Liking like_people ={item.persons} />
                   </div>
                 </div>
 

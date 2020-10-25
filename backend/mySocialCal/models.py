@@ -95,6 +95,27 @@ class SocialCalEvent(models.Model):
     #This will be the foreign key that connects the events with the correct calCell
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialEvents', null = True)
 
+    #Unlike the personalcal events, there wouldn't be an accept, decline, or anything like that
+    # it will pretty much be a room where people can join to be ready to go to an event
+    backgroundImg = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True, )
+
+    def get_socialEventMessage(self):
+        # This will attach the messeges to the socialCalEvent by the foreginkey
+        # all you have to do is filter out the right messages for each soical event
+        return SocialEventMessages.objects.filter(eventObj = self).values_list('id', flat = True)
+
+
+class SocialEventMessages(models.Model):
+    # this modal is for the group chat events that are associated with each social events
+    # It will be coonnected by foreignkeys. This should be similar to the EventMessages
+    # in mycalendar models
+    eventObj = models.ForeignKey(SocialCalEvent, on_delete= models.CASCADE, related_name = "socialEventGroupMessage")
+    body = models.TextField(blank = True)
+    created_on = models.DateTimeField(auto_now_add = True)
+    messageUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= 'socialEventMessageUser', on_delete = models.CASCADE, null = True)
+
+
+
 
 class SocialCalComment(models.Model):
     # The calCell will be the foregin key that connects the comments to the correct day

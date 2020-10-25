@@ -107,3 +107,7 @@ class SocialEventCreateView(APIView):
 
         socialCalEvent.persons.add(user)
         return Response('Uploaded Pictures')
+
+class ShowSocialEvents(generics.ListAPIView):
+    serializer_class = serializers.SocialCalEventSerializer
+    queryset = models.SocialCalEvent.objects.all()
