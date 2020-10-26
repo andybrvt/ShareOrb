@@ -9,6 +9,7 @@
 }
 
 .eventSyncForm .friendListCon {
+  margin-top: -10px;
   /* background-color: red; */
 }
 
@@ -72,36 +73,7 @@
   font-size: 20px;
 }
 
-.eventSyncForm .friendListCon .friendList{
-  margin-top: 20px;
-  margin-bottom: 25px;
-  border: 1px solid #e8e8e8;
-  border-radius: 4px;
-  overflow: auto;
-  padding: 8px 24px;
-  height: 350px;
 
-
-}
-
-.eventSyncForm .friendListCon .friendList .friendItem {
-
-
-  background-color:#e6f7ff;
-}
-
-.eventSyncForm .friendListCon .friendList .friendItemHover{
-  /* background-color: red; */
-}
-
-.eventSyncForm .friendListCon .friendList .friendItemHover:hover {
-  background-color:#e6f7ff;
-}
-
-.eventSyncForm .syncButtonCon .syncButton{
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
-}
 
 .eventSyncCalendarContainer {
   position: relative;
