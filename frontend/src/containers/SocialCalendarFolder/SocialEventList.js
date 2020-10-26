@@ -50,10 +50,15 @@ class SocialEventList extends React.Component{
     ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
+  viewSocialEventPage = (eventId) => {
+    console.log(eventId)
+    this.props.history.push("/socialcal/event/"+eventId)
+  }
+
 
   render(){
 
-
+    console.log(this.props)
     // For events I don't think we will be needing channels because, when we move
     // between profiles and newsfeed, it kinda refershs each time so the events
     // just shows up, so for the evnets you can just make it and sent it to the redux
@@ -157,7 +162,9 @@ class SocialEventList extends React.Component{
 
 
 
-              <div className = 'viewEventButton'>
+              <div
+              onClick = {() => this.viewSocialEventPage(item.id)}
+              className = 'viewEventButton'>
                 <span className = 'viewText'> View </span>
               </div>
 
@@ -168,7 +175,9 @@ class SocialEventList extends React.Component{
 
               <div className = 'viewEventButtonPass'>
 
-              <span className = 'viewText'>View </span>
+              <span
+              onClick = {() => this.viewSocialEventPage(item.id)}
+              className = 'viewText'>View </span>
               </div>
 
              }

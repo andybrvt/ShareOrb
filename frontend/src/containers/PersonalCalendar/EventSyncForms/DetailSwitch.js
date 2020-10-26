@@ -60,6 +60,9 @@ class DetailSwitch extends React.Component {
     this.oneEnter = false;
   }
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
 
   onChange = e => {
     console.log(e.target)

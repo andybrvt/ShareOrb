@@ -571,7 +571,9 @@ class SocialCalendar extends React.Component{
           </div>
 
 
-            <SocialCalCellInfo />
+            <SocialCalCellInfo
+            history = {this.props.history}
+            />
             <SocialUploadPicModal
             close = {this.props.closeSocialPictureModal}
             view = {this.props.showSocialPicModal}
