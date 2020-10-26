@@ -91,7 +91,7 @@ class SocialEventMessagesSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['messageUser'] = SocialCalUserSerializer(models.User.objects.get(id = data['messageUser'])).data
+        data['messageUser'] = SocialCalUserSerializer(User.objects.get(id = data['messageUser'])).data
         return data
 
 class SocialCalCommentSerializer (serializers.ModelSerializer):

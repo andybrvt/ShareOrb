@@ -243,6 +243,7 @@ class SocialCalCellInfo extends React.Component{
           items = {socialCalComments}
           profilePic = {this.props.curProfilePic}/>
           <SocialEventList
+          history = {this.props.history}
           curId = {this.props.curId}
           socialCalCellId = {socialCalCellId}
           cellDate = {socialCalDate}
