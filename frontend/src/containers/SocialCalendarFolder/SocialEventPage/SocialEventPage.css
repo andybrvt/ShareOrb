@@ -21,11 +21,140 @@
   width: 70%;
   height: 100%;
   overflow:auto;
-  background-color: red;
+  /* background-color: red; */
 }
+
+.socialEventInfoContainer .eventInfoView{
+  height: 100%;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier{
+  display: flex;
+
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
+  width: 35%;
+  height: 400px;
+  padding: 25px;
+  background-color: #F5F5F5;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTitle{
+  color: black;
+  font-size: 30px;
+  /* font-size: calc(1.2vw); */
+  margin-top: 0px;
+  /* background-color: red; */
+  height: 70px;
+  word-break: normal  ;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTime{
+  color: black;
+  font-size: 20px;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventHost{
+  margin-top: 20px;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventTopSide .invitedNum{
+  margin-top: 90px;
+  font-size: 18px;
+}
+
+
+
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
+  width: 65%;
+  height: 400px;
+  border: 10px dashed gainsboro;
+  text-align: center;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic{
+  width: 65%;
+  height: 400px;
+  overflow: hidden;
+  /* border: 10px dashed gainsboro; */
+  text-align: center;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic .eventBackgroundImg{
+  width: 100%;
+}
+
+.socialEventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic .pictureFrame{
+  position: relative;
+  top: 28%;
+  font-size: 55px;
+  color: gainsboro;
+}
+
+.socialEventInfoContainer .eventInfoView .eventInfo{
+  text-align: left;
+  height: 100%;
+  padding: 50px 220px;
+}
+
+.socialEventInfoContainer .eventInfoView .eventInfo .title{
+  font-size: 30px;
+}
+
+.socialEventInfoContainer .eventInfoView .eventInfo .aboutEvent{
+  font-size: 30px;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.socialEventInfoContainer .eventInfoView .eventInfo .contentEvent{
+  margin-bottom: 30px;
+}
+.socialEventInfoContainer .eventInfoView .eventInfo .contentEventEmpty{
+  margin-bottom: 30px;
+  height: 100px;
+  text-align: center;
+  font-size: 20px;
+  /* border: 5px dashed gainsboro; */
+
+  /* background-color: red; */
+}
+.socialEventInfoContainer .eventInfoView .eventInfo .locationEventWord{
+  font-size: 20px;
+  color: black;
+  margin-bottom: 10px;
+
+}
+
+.socialEventInfoContainer .eventInfoView .eventInfo .eventPeopleWord {
+  font-size: 20px;
+  color: black;
+  margin-top: 40px;
+}
+
+
+
 
 /* This is for the socialevent group chat size fo the event page */
 .socialEventGroupChat{
   width: 30%;
-  background-color: blue;
+  /* background-color: blue; */
+}
+
+.socialEventGroupChat .socialMessageList{
+  width: 102%;
+  height: 90%;
+  background-color: white;
+  overflow: auto;
+}
+
+.socialEventChatInput{
+
+}
+
+
+.socialEventGroupChat .inputForm{
+
 }

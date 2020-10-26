@@ -147,6 +147,8 @@ class EventGroupChat extends React.Component{
        </div>
         </List>
         </div>
+
+        
       <div className = 'inputForm'>
 
       <Form>

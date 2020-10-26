@@ -7,6 +7,8 @@ class WebSocketSocialEventPage{
   callbacks = {};
 
   static getInstance() {
+    // This will check if the instance for the websocket exist if it does not
+    // then it will make one
     if(!WebSocketSocialEventPage.instance){
       WebSocketSocialEventPage.instance = new WebSocketSocialEventPage();
     }
@@ -14,5 +16,102 @@ class WebSocketSocialEventPage{
     return WebSocketSocialEventPage.instance
   }
 
+  constructor(){
+    this.sockeRef = null
+  }
+
+  connect(socialEventId){
+    // This will connect individually whne you opne up the soical events. Each social
+    // event will be its own channel, like a big gropu chat
+
+    const path = 'ws://127.0.0.1:8000/ws/socialCalendarEvent/'+socialEventId
+    console.log(path)
+    // This will make a new WebSocket with teh path name
+    this.socketRef = new WebSocket(path)
+    this.socketRef.onopen = () => {
+      // This will pretty much open the websocket. if you want to run anything
+      // during the connect this is where you would do it
+      console.log('websocket open')
+    }
+    this.socketRef.onmessage = (e) => {
+      // This will be where the information will be sent to after the backend consumers
+      // gets sent to the frontend
+      this.socketNewSocialMessage(e.data)
+    }
+    this.socketRef.onerror = (e) => {
+      // this will be run if there is an error running or connecting
+      console.log('websocket is closed')
+    }
+
+    this.socketRef.onclose = () => {
+      console.log('websocket is closed')
+      // unlike the other websockets that are made, this one will not be  recursion
+      // because you dont want it to connect after you disconnect for this one
+    }
+  }
+
+  disconnect() {
+    // This function will be used to disconnect with the channel whneever you are
+    // trying to switch between event pages
+    console.log('disconnected')
+    this.socketRef.close()
+  }
+
+  fetchSocialMessages(socialEventId){
+    // This will fetch all the messages of that specific event
+    console.log('fetchMessages')
+  }
+
+  sendSocialEventMessage = () => {
+    // This will send the social event message from the group chats
+    console.log('send social event messages')
+  }
+
+  sendEditSocialEvent = () => {
+    // This is for editing the social event
+  }
+
+  socketNewSocialMessage(data){
+    // This will be the function that will be calling the callbacks
+    console.log('call backs')
+  }
+
+  addCallbacks(){
+    console.log('callbacks go here')
+  }
+
+  sendSocialMesage (data){
+    // This is for the function that actually sends stuff to the backedn
+  }
+
+  state(){
+    // Return how the websocket is doing. 0 is not good and 1 is working
+    return this.socketRef.readyState
+  }
+
+  waitForSocketConnection(callback){
+    // This is a reucrsion that keeps trying to reconnect to the channel whenever
+    // it gets disconnected
+    const socket = this.socketRef;
+    const recursion = this.waitForSocketConnection;
+    setTimeout(
+      function(){
+        if(socket.readyState === 1){
+          console.log('connection is secure');
+          if(callback != null){
+            callback()
+          }
+          return;
+        } else {
+          console.log('waiting for connection...')
+          recursion(callback)
+        }
+      }, 1)
+  }
 
 }
+
+
+const SocialEventPageWebSocketInstance = WebSocketSocialEventPage.getInstance();
+
+export default SocialEventPageWebSocketInstance;

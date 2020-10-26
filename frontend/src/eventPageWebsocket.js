@@ -25,7 +25,7 @@ class WebSocketEventPage{
     const path = 'ws://127.0.0.1:8000/ws/calendarEvent/'+eventId
     console.log(path)
     this.socketRef = new WebSocket(path)
-    this.socketRef.onpen = () => {
+    this.socketRef.onopen = () => {
       // This will pretty much open the websocket, so if you wanted to run
       // anythinig here you can
       console.log('websocket open')
