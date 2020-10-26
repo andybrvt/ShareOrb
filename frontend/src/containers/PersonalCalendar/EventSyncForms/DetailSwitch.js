@@ -68,11 +68,21 @@ class DetailSwitch extends React.Component {
 
   onChange = e => {
     console.log(e.target)
+    const startDate = dateFns.startOfDay(this.state.startDate)
     this.setState({
       rangeChoice: e.target.value.rangeChoice,
       endDate: e.target.value.endDate,
     });
   };
+
+  onFriendChange = (friend) => {
+    console.log(friend)
+    this.setState({
+      friend: friend
+    })
+
+  }
+
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -125,7 +135,7 @@ class DetailSwitch extends React.Component {
     }
   }
 
-  onChange = () => {
+  onChangeAnimation = () => {
     if (!this.oneEnter) {
       this.setState({ delay: 300 });
       this.oneEnter = true;
@@ -181,13 +191,6 @@ class DetailSwitch extends React.Component {
   };
 
 
-  onFriendChange = (friend) => {
-    console.log(friend)
-    this.setState({
-      friend: friend
-    })
-
-  }
 
   onFriendClick = (friend) => {
     console.log(friend)
@@ -301,6 +304,7 @@ class DetailSwitch extends React.Component {
                 <Radio.Button
                   onClick={this.onRight}
                   className = 'dayEsync buttonGrow'
+                  onChange={this.onChange}
                   style={{marginBottom:'20px'}}
                   value={this.renderEndDay('day')}>
                     <span className = 'syncTitle'>Day Event Sync </span>
@@ -335,6 +339,7 @@ class DetailSwitch extends React.Component {
               <div className = 'radioCon'>
             <Radio.Button
               onClick={this.onRight}
+              onChange={this.onChange}
               className = 'weekEsync buttonGrow'
               style={{marginBottom:'20px'}}
               value={this.renderEndDay('week')}
@@ -495,7 +500,7 @@ class DetailSwitch extends React.Component {
           arrow={false}
           thumb={false}
           ref={(c) => { this.bannerImg = c; }}
-          onChange={this.onChange}
+          onChange={this.onChangeAnimation}
           dragPlay={false}
         >
           {imgChildren}
