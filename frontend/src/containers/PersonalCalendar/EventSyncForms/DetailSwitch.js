@@ -70,9 +70,32 @@ class DetailSwitch extends React.Component {
     console.log(e.target)
     this.setState({
       rangeChoice: e.target.value.rangeChoice,
-
+      endDate: e.target.value.endDate,
     });
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    let submitContent = {}
+    if (this.state.rangeChoice === 'day'){
+      const newStartDate = dateFns.addDays(this.state.startDate, 1)
+      submitContent = {
+        friend: this.state.friend,
+        startDate: newStartDate,
+        endDate: this.state.endDate
+      }
+    } else if (this.state.rangeChoice === 'week'){
+      submitContent = {
+        friend: this.state.friend,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
+      }
+    }
+    console.log(submitContent)
+    this.props.onSubmit(submitContent)
+
+  }
 
   renderEndDay = (range) => {
     // This function will pretty much get the endDay depending on
@@ -342,59 +365,63 @@ class DetailSwitch extends React.Component {
         :
 
         <div>
+          <Form
+          onSubmit = {this.handleSubmit}
+          className = 'eventSyncForm'
+          >
+            <Form.Item className = 'friendListCon'>
+            <Input
+              style={{width:'400px'}}
+              value = {this.state.search}
+              onChange = {this.onHandleChange}
+              type = 'text'
+              placeholder = 'Find a Friend'
+             />
 
-          <Form.Item className = 'friendListCon'>
-          <Input
-            style={{width:'400px'}}
-            value = {this.state.search}
-            onChange = {this.onHandleChange}
-            type = 'text'
-            placeholder = 'Find a Friend'
-           />
+
+             <List
+                  className = 'friendList'
+                  dataSource={friends}
+                  style={{width:'400px'}}
+                  renderItem={item => (
+                    <List.Item
+                    key={item.username}
+                    className = {` friendItemHover  ${this.state.friend === item ? 'friendItem' : '' }`}
+                    onClick = {() => this.onFriendChange(item)}
+
+                    >
+                      <List.Item.Meta
+                        avatar={
+                          <Avatar src={'http://127.0.0.1:8000'+item.profile_picture} />
+                        }
+                        title={<a href="https://ant.design">{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
+                        description={"@"+item.username}
+                        // description={item.email}
+                      />
 
 
-           <List
-                className = 'friendList'
-                dataSource={friends}
-                style={{width:'400px'}}
-                renderItem={item => (
-                  <List.Item
-                  key={item.username}
-                  className = {` friendItemHover  ${this.state.friend === item ? 'friendItem' : '' }`}
-                  onClick = {() => this.onFriendChange(item)}
+                  </List.Item>
 
-                  >
-                    <List.Item.Meta
-                      avatar={
-                        <Avatar src={'http://127.0.0.1:8000'+item.profile_picture} />
-                      }
-                      title={<a href="https://ant.design">{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
-                      description={"@"+item.username}
-                      // description={item.email}
-                    />
+                  )}
+                >
+            </List>
 
-                  <div><FireTwoTone /></div>
+            </Form.Item>
 
-                </List.Item>
+            <Form.Item className ='syncButtonCon'>
+            <Button
+            style = {{
+              backgroundColor:'dodgerblue',
+              color: 'white'
+            }}
+            className = 'syncButton'
+            htmlType = 'submit'
+            disabled = {this.state.endDate === ''
+            || this.state.friend === '' }
+            block> Send Invite</Button>
+            </Form.Item>
 
-                )}
-              >
-          </List>
-
-          </Form.Item>
-
-          <Form.Item className ='syncButtonCon'>
-          <Button
-          style = {{
-            backgroundColor:'dodgerblue',
-            color: 'white'
-          }}
-          className = 'syncButton'
-          htmlType = 'submit'
-          disabled = {this.state.endDate === ''
-          || this.state.friend === '' }
-          block> Send Invite</Button>
-          </Form.Item>
+          </Form>
 
           <div style={{float:'right', marginTop:'100px', fontSize:'50px'}}>
             <i onClick={this.onLeft} class="fas fa-arrow-circle-left"></i>
@@ -459,22 +486,6 @@ class DetailSwitch extends React.Component {
       style={{ background: dataArray[this.state.showInt].background }}
       >
       <div className={this.props.className}>
-        {/*
-        <BannerAnim
-          prefixCls={`${this.props.className}-text-wrapper`}
-          sync
-          type="across"
-          duration={1000}
-          arrow={false}
-          thumb={false}
-          ease="easeInOutExpo"
-          ref={(c) => { this.bannerText = c; }}
-          dragPlay={false}
-        >
-          {textChildren2}
-
-        </BannerAnim>
-        */}
         <BannerAnim
           prefixCls={`${this.props.className}-img-wrapper`}
           sync
