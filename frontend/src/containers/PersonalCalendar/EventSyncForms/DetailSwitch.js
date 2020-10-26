@@ -9,6 +9,8 @@ import { Select, Radio, Button, Input, List, Divider, Avatar } from 'antd';
 import dayPic from './dayPic.svg';
 import friendsPic from './friends.svg';
 import weekPic from './weekPic.svg';
+import bicylePic from './bicycle.svg';
+import gamingPic from './gaming.svg';
 import * as dateFns from 'date-fns';
 import { Form } from '@ant-design/compatible';
 import { FireTwoTone } from '@ant-design/icons';
@@ -18,7 +20,7 @@ const { Option } = Select
 const Element = BannerAnim.Element;
 
 let count=0;
-let picArray=[dayPic, weekPic, friendsPic]
+let picArray=[bicylePic, gamingPic, friendsPic]
 let dataArray = [
   {
     color: '#ffe7ba',
@@ -199,7 +201,6 @@ class DetailSwitch extends React.Component {
         style={{
           background: item.color,
           height: '100%',
-          left:'15%',
         }}
         leaveChildHide
        >
@@ -219,11 +220,11 @@ class DetailSwitch extends React.Component {
 
           {/*if the page count is 1*/}
             <div className={`${this.props.className}-map map${i}`} key="map">
-              <img style={{marginLeft:'50px'}} src={picArray[0]} width="100%" />
+              <img style={{marginLeft:'100px'}} src={picArray[0]} width="100%" />
             </div>
 
             <div style={{marginTop:'225px' }} className={`${this.props.className}-map map${i}`} key="map">
-              <img style={{marginLeft:'50px'}} src={picArray[1]} width="100%" />
+              <img style={{marginLeft:'100px'}} src={picArray[1]} width="100%" />
             </div>
               {/*if the page count is 2*/}
 
@@ -409,7 +410,6 @@ class DetailSwitch extends React.Component {
         style={{
           background: item.color,
           height: '100%',
-          width:'50%',
         }}
          key={i}>
 
