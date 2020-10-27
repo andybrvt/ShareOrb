@@ -66,9 +66,19 @@ class WebSocketSocialEventPage{
     })
   }
 
-  sendSocialEventMessage = () => {
+  sendSocialEventMessage = (message, userId, eventId) => {
     // This will send the social event message from the group chats
+
+    // So you need the message to make the message, the userId to know who sent
+    // the message and then the eventId will be used to know which event to connect
+    // it will
     console.log('send social event messages')
+    this.sendSocialMesage({
+      command: 'send_social_event_message',
+      message: message,
+      userId: userId,
+      socialEventId: eventId
+    })
   }
 
   sendEditSocialEvent = () => {
@@ -95,12 +105,20 @@ class WebSocketSocialEventPage{
       this.callbacks['fetch_social_event_info'](socialEventInfoObj)
 
     }
+    if(command === 'send_social_event_message'){
+      console.log('sup sup sup')
+      const socialMessageObj = parsedData.socialEventMessgaeObj
+      const socialEventId = parsedData.socialEventId
+      this.callbacks['send_social_event_message'](socialMessageObj)
+    }
   }
 
   addCallbacks(
-    fetchSocialEventInfo
+    fetchSocialEventInfo,
+    sendSocialMessageCallbacks
   ){
     this.callbacks['fetch_social_event_info'] = fetchSocialEventInfo
+    this.callbacks['send_social_event_message'] = sendSocialMessageCallbacks
   }
 
   sendSocialMesage (data){

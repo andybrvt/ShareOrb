@@ -5,7 +5,9 @@ from channels.layers import get_channel_layer
 from userprofile.models import User
 from django.shortcuts import get_object_or_404
 from .models import SocialCalEvent
+from .models import SocialEventMessages
 from .serializers import SocialCalEventSerializer
+from .serializers import SocialEventMessagesSerializer
 
 # This consumer is mostly used for managing the social events ie
 # soical event page. Where as the other cosnumer that is in the
@@ -24,6 +26,43 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
             "eventInfo": serializer
         }
         self.send_json(content)
+
+    def send_social_event_message(self, data):
+        # This will create the message object and then make a foreign key to the
+        # correct event
+        viewSocialEvent = get_object_or_404(SocialCalEvent, id = data['socialEventId'])
+        user = get_object_or_404(User, id = data['userId'])
+
+        # This will create the message
+        socialEventMessage, created = SocialEventMessages.objects.get_or_create(
+            eventObj = viewSocialEvent,
+            body = data['message'],
+            messageUser = user
+        )
+
+        # Now you will have to serialize the data
+
+        serializer = SocialEventMessagesSerializer(socialEventMessage).data
+        content = {
+            "command": "send_social_event_message",
+            "socialEventMessgaeObj": serializer,
+            "socialEventId": data['socialEventId']
+        }
+        self.self_social_message(content)
+
+    def self_social_message(self, socialEventMessage):
+        # This will be for sending inforamtion inot the channel layer to the groups
+        channel_layer = get_channel_layer()
+        channel_recipient = socialEventMessage['socialEventId']
+        channel = 'socialEvent_'+str(channel_recipient)
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_social_message',
+                'eventMessage': socialEventMessage
+            }
+        )
 
     def connect(self):
         # self.scope will pull stuff from the channel instance, the url kwargs is
@@ -46,3 +85,9 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         data = json.loads(text_data)
         if data["command"] == "fetch_social_event_messages":
             self.send_fetch_social_event_messages(data);
+        if data["command"] == "send_social_event_message":
+            self.send_social_event_message(data)
+
+    def new_social_message(self, message):
+        messageObj = message['eventMessage']
+        return self.send_json(messageObj)

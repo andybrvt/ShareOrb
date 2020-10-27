@@ -86,6 +86,7 @@ class SocialEventPage extends React.Component{
       <SocialEventGroupChat
       messages = {this.props.socialEventMessages}
       id = {this.props.id}
+      eventId = {this.props.socialEventInfo.id}
        />
       </div>
     )

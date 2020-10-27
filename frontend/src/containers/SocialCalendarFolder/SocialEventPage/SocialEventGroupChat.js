@@ -2,6 +2,7 @@ import React from 'react';
 import "./SocialEventPage.css";
 import moment from 'moment';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
+import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
 
 
 class SocialEventGroupChat extends React.Component{
@@ -41,6 +42,37 @@ class SocialEventGroupChat extends React.Component{
     this.setState({
       message: e.target.value
     })
+  }
+
+  handleSubmit = e => {
+    // handle sending information into the backend then to channels
+    if(this.state.message !== ''){
+      SocialEventPageWebSocketInstance.sendSocialEventMessage(
+        this.state.message,
+        this.props.id,
+        this.props.eventId
+      )
+
+      this.setState({message: ''})
+
+    }
+  }
+
+  scrollToBottom = () => {
+    //This function along with the componentDidMount and componentDidUpdate will
+    // let the chat keep scrolling down as you type more text
+    if(this.messagesEnd){
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+
+    }
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   render(){
@@ -101,7 +133,11 @@ class SocialEventGroupChat extends React.Component{
                </div>
                </div>
              )}
-           />
+           >
+           <div style={{ float:"left", clear: "both" }}
+               ref={(el) => { this.messagesEnd = el; }}>
+          </div>
+           </List>
         </div>
 
 
@@ -109,6 +145,9 @@ class SocialEventGroupChat extends React.Component{
           <Form>
             <Input
             className = "socialEventChatInput"
+            onChange = {this.handleChange}
+            value = {this.state.message}
+            onPressEnter = {this.handleSubmit}
             placeholder = "Write a message..."
             />
           </Form>

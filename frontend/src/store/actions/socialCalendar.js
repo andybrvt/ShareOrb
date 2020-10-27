@@ -100,3 +100,13 @@ export const loadSocialEventInfo = (socialEvent) => {
     socialEvent: socialEvent
   }
 }
+
+export const sendSocialEventMessage = (socialMessageObj) =>{
+  // send soial message object to the social event group chat
+
+  console.log(socialMessageObj)
+  return {
+    type: actionTypes.SEND_SOCIAL_EVENT_MESSAGE,
+    socialMessageObj: socialMessageObj
+  }
+}

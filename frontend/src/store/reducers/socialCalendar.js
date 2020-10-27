@@ -146,6 +146,13 @@ const loadSocialEventInfo = (state, action) => {
   })
 }
 
+const sendSocialEventMessage = (state, action) => {
+
+  return updateObject(state, {
+    socialEventMessages: [...state.socialEventMessages, action.socialMessageObj]
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -176,6 +183,8 @@ const reducer = (state = initialState, action) => {
       return addUserSocialEventM (state, action);
     case actionTypes.LOAD_SOCIAL_EVENT_INFO:
       return loadSocialEventInfo(state, action);
+    case actionTypes.SEND_SOCIAL_EVENT_MESSAGE:
+      return sendSocialEventMessage(state, action);
     default:
       return state;
   }
