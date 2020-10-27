@@ -19,8 +19,9 @@ import {connect} from 'react-redux';
 const { Option } = Select
 const Element = BannerAnim.Element;
 
+
 let count=0;
-let picArray=[gamingPic, notesPic, friendsPic]
+
 let dataArray = [
   {
     color: '#ffe7ba',
@@ -215,7 +216,10 @@ class DetailSwitch extends React.Component {
 
   render() {
     console.log(this.props)
+    console.log(this.props.currentProfile)
     let friends = this.props.friends
+    let personPic1='http://127.0.0.1:8000'+this.props.currentProfile
+    let picArray=[gamingPic, notesPic, personPic1]
     console.log(friends)
     let friend = this.state.search.trim().toLowerCase()
     if (friend.length > 0){
@@ -260,22 +264,47 @@ class DetailSwitch extends React.Component {
           </QueueAnim>
 
           :
+          <span>
+            <QueueAnim
+              animConfig={this.state.imgAnim}
+              duration={this.getDuration}
+              delay={[!i ? this.state.delay : 300, 0]}
+              ease={['easeOutCubic', 'easeInQuad']}
+              key="img-wrapper"
+            >
 
-          <QueueAnim
-            animConfig={this.state.imgAnim}
-            duration={this.getDuration}
-            delay={[!i ? this.state.delay : 300, 0]}
-            ease={['easeOutCubic', 'easeInQuad']}
-            key="img-wrapper"
-          >
+            {/*if the page count is 1*/}
+              <div className={`${this.props.className}-map map${i}`} key="map">
+                <Avatar
+                  size={125}
+                  src={picArray[2]} />
+              </div>
+                {/*if the page count is 2*/}
 
-          {/*if the page count is 1*/}
-            <div className={`${this.props.className}-map map${i}`} key="map">
-              <img src={picArray[2]} width="50%" />
-            </div>
-              {/*if the page count is 2*/}
+            </QueueAnim>
 
+
+            <QueueAnim
+              animConfig={this.state.imgAnim}
+              duration={this.getDuration}
+              delay={[!i ? this.state.delay : 300, 0]}
+              ease={['easeOutCubic', 'easeInQuad']}
+              key="img-wrapper"
+            >
+
+            {
+              (this.state.friends!=null)?
+              <div> other person</div>
+
+              :
+
+              <div>no person</div>
+
+
+
+            }
           </QueueAnim>
+        </span>
 
           }
 

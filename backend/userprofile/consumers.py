@@ -109,7 +109,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
     def send_event_sync_notification(self, data):
         # This is to send custom notification for event sync
-        print('start here nigga')
         print(data)
         if data['command'] == 'send_friend_event_sync':
             recipient = get_object_or_404(User, username = data['recipient']['username'])

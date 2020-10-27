@@ -157,7 +157,7 @@ class EventSyncReactForm extends React.Component {
 
     const friendListChild = this.renderFriends()
 
-  
+
     return (
 
       <DetailSwitch {...this.props}/>
@@ -169,7 +169,8 @@ class EventSyncReactForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    friends: state.auth.friends
+    friends: state.auth.friends,
+    currentProfile: state.auth.profilePic,
   }
 }
 
