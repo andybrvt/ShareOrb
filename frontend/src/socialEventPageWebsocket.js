@@ -59,7 +59,11 @@ class WebSocketSocialEventPage{
 
   fetchSocialMessages(socialEventId){
     // This will fetch all the messages of that specific event
-    console.log('fetchMessages')
+    console.log('fetch social messages')
+    this.sendSocialMesage({
+      command: "fetch_social_event_messages",
+      socialEventId: socialEventId
+    })
   }
 
   sendSocialEventMessage = () => {
@@ -74,14 +78,38 @@ class WebSocketSocialEventPage{
   socketNewSocialMessage(data){
     // This will be the function that will be calling the callbacks
     console.log('call backs')
+
+    const parsedData= JSON.parse(data);
+    const command = parsedData.command;
+
+    console.log(parsedData)
+    if(command === 'fetch_social_event_info'){
+      console.log('here here here')
+      const eventInfo = parsedData.eventInfo
+      const messages = parsedData.eventInfo.get_socialEventMessage
+
+      const socialEventInfoObj = {
+        eventInfo: eventInfo,
+        messages: messages
+      }
+      this.callbacks['fetch_social_event_info'](socialEventInfoObj)
+
+    }
   }
 
-  addCallbacks(){
-    console.log('callbacks go here')
+  addCallbacks(
+    fetchSocialEventInfo
+  ){
+    this.callbacks['fetch_social_event_info'] = fetchSocialEventInfo
   }
 
   sendSocialMesage (data){
     // This is for the function that actually sends stuff to the backedn
+    try{
+      this.socketRef.send(JSON.stringify({...data}))
+    } catch (err){
+      console.log(err.message);
+    }
   }
 
   state(){

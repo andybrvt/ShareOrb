@@ -61,7 +61,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year' render={(props) => <YearCalendar {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcal/event/:eventId' render={(props) => <EventPage {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/socialcal/event/:eventId' render={(props) => <SocialEventPage {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/socialcal/event/:socialEventId' render={(props) => <SocialEventPage {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
         </SideMenu>
         :

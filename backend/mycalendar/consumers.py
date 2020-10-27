@@ -474,7 +474,7 @@ class EventPageConsumer (JsonWebsocketConsumer):
         # it is group discard
         self.selected_event = self.scope['url_route']['kwargs']['eventId']
         grp = 'event_'+self.selected_event
-        async_to_sync(self.channel_layer.group_discard)(grp, self.selected_event)
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
 
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):

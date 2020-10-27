@@ -107,6 +107,11 @@ export const ADD_USER_SOCIAL_EVENT_M = 'ADD_USER_SOCIAL_EVENT_M'
 // This will pretty much be used for any add_social commands with new next to it
 export const ADD_SOCIAL_CELL_NEW = 'ADD_SOCIAL_CELL_NEW';
 export const ADD_SOCIAL_CELL_NEW_M = 'ADD_SOCIAL_CELL_NEW_M'
+
+// This would be used for the socialEvents
+export const LOAD_SOCIAL_EVENT_INFO = "LOAD_SOCIAL_EVENT_INFO"; 
+
+
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

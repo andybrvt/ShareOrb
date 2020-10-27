@@ -329,6 +329,7 @@ class EventInfo extends React.Component{
   }
 
   onChangeBackgroundOpen = () => {
+    // This is to open the modal for changing the background picture
     this.setState({
       changeBackgroundView: true,
     })
@@ -336,6 +337,7 @@ class EventInfo extends React.Component{
 
 
   onChangeBackgroundClose = () => {
+    // This is to close the modal for changing the background picture
     this.setState({
       changeBackgroundView: false,
     })

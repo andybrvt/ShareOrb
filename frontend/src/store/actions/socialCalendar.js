@@ -91,3 +91,12 @@ export const addUserSocialEventM = (socialObj) => {
     socialObj: socialObj
   }
 }
+
+export const loadSocialEventInfo = (socialEvent) => {
+  // This will load the information about soical event, like the initial
+  // connect
+  return {
+    type: actionTypes.LOAD_SOCIAL_EVENT_INFO,
+    socialEvent: socialEvent
+  }
+}

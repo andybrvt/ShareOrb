@@ -8,7 +8,7 @@ import EventInfo from './EventInfo';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 
 class EventPage extends React.Component{
-//this takes each of the value of the individual profiles and
+//this takes each of the value of the individual evnets and
 //returns them
 
 //states are specific objects of a class

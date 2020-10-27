@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Progress, Avatar, Modal, message, notification} from 'antd';
+import * as dateFns from 'date-fns';
 
 import {PictureOutlined} from '@ant-design/icons';
 
@@ -22,8 +23,37 @@ class SocialEventInfo extends React.Component{
 
   }
 
-  render() {
+  onChangeBackgroundOpen = () => {
+    // This is to open the modal for changing the background picture
+    console.log('open')
+  }
 
+  onChangeBackgroundClose = () => {
+    // This is to close the modal for changing the background picture
+    console.log('close')
+  }
+
+
+  timeFormater(time){
+    // This will change the format of the time properly to the 1-12 hour
+    console.log(time)
+    const timeList = time.split(':')
+    let hour = parseInt(timeList[0])
+    let minutes = timeList[1]
+    var suffix  = hour >= 12 ? "PM":"AM"
+
+    console.log(11%12)
+    hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
+    return hour
+
+  }
+
+
+  render() {
+    console.log(this.props)
+
+    let username = ''
+    let eventHostId = ''
 
     let title = '';
     let content = '';
@@ -34,7 +64,48 @@ class SocialEventInfo extends React.Component{
     let location = '';
     let month = "";
     let day = "";
-    let invited = [];
+    let persons = [];
+    let host = "";
+
+    if(this.props.info){
+      if(this.props.info.host){
+        username = this.props.info.host.username
+        eventHostId = this.props.info.host.id
+      }
+      if(this.props.info.title){
+        title = this.props.info.title
+      }
+      if(this.props.info.content){
+        content = this.props.info.content
+      }
+      if(this.props.info.start_time){
+        console.log(dateFns.addHours(new Date(this.props.info.event_day), 7))
+        start_time = this.timeFormater(this.props.info.start_time)
+        date = dateFns.format(dateFns.addHours(new Date(this.props.info.event_day), 7), 'iii, MMMM dd, yyyy ')
+        // console.log(dateFns.format(new Date(this.props.info.start_time), 'HH:mm'))
+        month = dateFns.format(dateFns.addHours(new Date(this.props.info.event_day), 7), 'MMM')
+        day = dateFns.format(dateFns.addHours(new Date(this.props.info.event_day),7), 'dd')
+      }
+
+      if(this.props.info.end_time){
+        end_time = this.timeFormater(this.props.info.end_time)
+      }
+
+      if(this.props.info.location){
+        location = this.props.info.location
+      }
+      if(this.props.info.host){
+        host = this.props.info.host
+      }
+      if(this.props.info.backgroundImg){
+        eventBackgroundPic = this.props.info.backgroundImg
+
+      }
+      if(this.props.info.persons){
+        persons = this.props.info.persons
+      }
+
+    }
 
     return (
       <div className = "socialEventInfoContainer">
@@ -96,12 +167,12 @@ class SocialEventInfo extends React.Component{
 
             <div className = "eventHost">
               <Avatar
-              // src = {"http://127.0.0.1:8000"+host.profile_picture}
+              src = {"http://127.0.0.1:8000"+host.profile_picture}
               />
-              <span> Andy Le </span>
+              <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)}</span>
             </div>
 
-            <div className = "invitedNum"> {invited.length} Invited </div>
+            <div className = "invitedNum"> {persons.length} Going </div>
 
           </div>
 
@@ -133,6 +204,47 @@ class SocialEventInfo extends React.Component{
           </div>
 
         </div>
+
+        <div className = 'editEventButtonContainer'>
+        {
+          eventHostId === this.props.userId ?
+
+          <div
+          className = 'editEventButton'
+          // onClick= {() => this.onEditClick()} /
+          >
+          <div
+          onClick = {() => this.onChangeBackgroundOpen()}
+          >
+          <i class="far fa-image"></i>
+          <div style = {{fontSize: "8px", marginBottom: "20px"}}>
+          Change Background
+          </div>
+          </div>
+
+
+          <div
+          onClick={() => this.onEditClick()}
+          >
+          <i class="fas fa-pen" ></i>
+          <div style = {{fontSize: "15px"}}>
+          Edit Event
+          </div>
+          </div>
+
+          <div>
+          <i class="fas fa-chevron-down"></i>
+          </div>
+          </div>
+
+          :
+
+          <div></div>
+
+        }
+
+        </div>
+
       </div>
 
     )

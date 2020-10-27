@@ -15,7 +15,11 @@ const initialState = {
   showSocialPicModal: false,
   showSocialEventModal: false,
   curSocialEventDate: new Date(),
-  test: ''
+  test: '',
+  // selectedSocialEvent is for the event page
+  selectedSocialEvent: {},
+  socialEventMessages: []
+
 }
 
 const nextMonthSocial = (state, action) => {
@@ -132,6 +136,16 @@ const addUserSocialEventM = (state, action) => {
   })
 }
 
+const loadSocialEventInfo = (state, action) => {
+  // Load out the social event with all the information
+
+  console.log(action)
+  return updateObject(state, {
+    selectedSocialEvent: action.socialEvent.eventInfo,
+    socialEventMessages: action.socialEvent.messages
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -160,6 +174,8 @@ const reducer = (state = initialState, action) => {
       return addSocialCellNewM(state, action)
     case actionTypes.ADD_USER_SOCIAL_EVENT_M:
       return addUserSocialEventM (state, action);
+    case actionTypes.LOAD_SOCIAL_EVENT_INFO:
+      return loadSocialEventInfo(state, action);
     default:
       return state;
   }

@@ -11,6 +11,7 @@ import CalendarEventWebSocketInstance from './calendarEventWebsocket';
 import WebSocketPostsInstance from './postWebsocket';
 import ExploreWebSocketInstance from './exploreWebsocket';
 import EventPageWebSocketInstance from './eventPageWebsocket';
+import SocialEventPageWebSocketInstance from './socialEventPageWebsocket';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -77,6 +78,10 @@ class App extends Component {
       this.props.loadEventInfo.bind(this),
       this.props.sendEventMessage.bind(this),
       this.props.updateEventPage.bind(this)
+    )
+
+    SocialEventPageWebSocketInstance.addCallbacks(
+      this.props.loadSocialEventInfo.bind(this)
     )
   }
 
@@ -161,8 +166,8 @@ const mapDispatchToProps = dispatch => {
     addSocialCalCellNew: exploreObj => dispatch(exploreActions.addSocialCalCellNew(exploreObj)),
     addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj)),
     addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
-    addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj))
-
+    addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj)),
+    loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj))
   }
 }
 
