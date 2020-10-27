@@ -8,9 +8,9 @@ import './DetailSwitch.css';
 import { Select, Radio, Button, Input, List, Divider, Avatar } from 'antd';
 import dayPic from './dayPic.svg';
 import friendsPic from './friends.svg';
-import weekPic from './weekPic.svg';
 import bicylePic from './bicycle.svg';
 import gamingPic from './gaming.svg';
+import notesPic from './notes.svg';
 import * as dateFns from 'date-fns';
 import { Form } from '@ant-design/compatible';
 import { FireTwoTone } from '@ant-design/icons';
@@ -20,15 +20,15 @@ const { Option } = Select
 const Element = BannerAnim.Element;
 
 let count=0;
-let picArray=[bicylePic, gamingPic, friendsPic]
+let picArray=[gamingPic, notesPic, friendsPic]
 let dataArray = [
   {
     color: '#ffe7ba',
     background: '#ffc069',
   },
   {
-    color: '#f4ffb8',
-    background: '#d3f261',
+    color: '#e6f7ff',
+    background: '#bae7ff',
   },
 
 
@@ -68,11 +68,21 @@ class DetailSwitch extends React.Component {
 
   onChange = e => {
     console.log(e.target)
+    const startDate = dateFns.startOfDay(this.state.startDate)
     this.setState({
       rangeChoice: e.target.value.rangeChoice,
       endDate: e.target.value.endDate,
     });
   };
+
+  onFriendChange = (friend) => {
+    console.log(friend)
+    this.setState({
+      friend: friend
+    })
+
+  }
+
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -125,7 +135,7 @@ class DetailSwitch extends React.Component {
     }
   }
 
-  onChange = () => {
+  onChangeAnimation = () => {
     if (!this.oneEnter) {
       this.setState({ delay: 300 });
       this.oneEnter = true;
@@ -181,13 +191,6 @@ class DetailSwitch extends React.Component {
   };
 
 
-  onFriendChange = (friend) => {
-    console.log(friend)
-    this.setState({
-      friend: friend
-    })
-
-  }
 
   onFriendClick = (friend) => {
     console.log(friend)
@@ -292,7 +295,7 @@ class DetailSwitch extends React.Component {
             duration={1500}
              delay={[!i ? this.state.delay + 500 : 800, 0]}>
 
-            <h1 key="h1">{'Day View'}</h1>
+            <h1 style={{marginTop:'30px'}} key="h1">{'Day View'}</h1>
             <em key="em" style={{ background }} />
             <p key="p">{
               <div class="eventSyncForm">
@@ -301,6 +304,7 @@ class DetailSwitch extends React.Component {
                 <Radio.Button
                   onClick={this.onRight}
                   className = 'dayEsync buttonGrow'
+                  onChange={this.onChange}
                   style={{marginBottom:'20px'}}
                   value={this.renderEndDay('day')}>
                     <span className = 'syncTitle'>Day Event Sync </span>
@@ -335,6 +339,7 @@ class DetailSwitch extends React.Component {
               <div className = 'radioCon'>
             <Radio.Button
               onClick={this.onRight}
+              onChange={this.onChange}
               className = 'weekEsync buttonGrow'
               style={{marginBottom:'20px'}}
               value={this.renderEndDay('week')}
@@ -364,6 +369,10 @@ class DetailSwitch extends React.Component {
       </div>
         :
 
+        <QueueAnim type="bottom"
+          duration={1200}
+          delay={[!i ? this.state.delay : 300, 0]}>
+
         <div>
           <Form
           onSubmit = {this.handleSubmit}
@@ -371,7 +380,7 @@ class DetailSwitch extends React.Component {
           >
             <Form.Item className = 'friendListCon'>
             <Input
-              style={{width:'400px'}}
+              style={{width:'475px'}}
               value = {this.state.search}
               onChange = {this.onHandleChange}
               type = 'text'
@@ -382,21 +391,20 @@ class DetailSwitch extends React.Component {
              <List
                   className = 'friendList'
                   dataSource={friends}
-                  style={{width:'400px'}}
+                  style={{padding:'1px'}}
                   renderItem={item => (
                     <List.Item
                     key={item.username}
                     className = {` friendItemHover  ${this.state.friend === item ? 'friendItem' : '' }`}
                     onClick = {() => this.onFriendChange(item)}
-
+                    style={{padding:'15px'}}
                     >
                       <List.Item.Meta
                         avatar={
                           <Avatar src={'http://127.0.0.1:8000'+item.profile_picture} />
                         }
-                        title={<a href="https://ant.design">{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
+                        title={<a>{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
                         description={"@"+item.username}
-                        // description={item.email}
                       />
 
 
@@ -408,13 +416,14 @@ class DetailSwitch extends React.Component {
 
             </Form.Item>
 
-            <Form.Item className ='syncButtonCon'>
+            <Form.Item>
             <Button
             style = {{
               backgroundColor:'dodgerblue',
-              color: 'white'
+              color: 'white',
+              width:'475px',
             }}
-            className = 'syncButton'
+
             htmlType = 'submit'
             disabled = {this.state.endDate === ''
             || this.state.friend === '' }
@@ -428,6 +437,8 @@ class DetailSwitch extends React.Component {
           </div>
 
         </div>
+
+      </QueueAnim>
       }
       </Element>
     );
@@ -495,7 +506,7 @@ class DetailSwitch extends React.Component {
           arrow={false}
           thumb={false}
           ref={(c) => { this.bannerImg = c; }}
-          onChange={this.onChange}
+          onChange={this.onChangeAnimation}
           dragPlay={false}
         >
           {imgChildren}
