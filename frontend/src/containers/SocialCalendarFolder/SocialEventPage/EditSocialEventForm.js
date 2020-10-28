@@ -1,18 +1,21 @@
 import React from 'react';
+// This will be used to make the form to edit events in the social events
 import * as dateFns from 'date-fns';
 import moment from 'moment';
-import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
+
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { authAxios } from '../../../components/util';
 import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+
+// import { connect } from 'react-redux';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
-
-
-
-const { Option } = Select;
 
 const { TextArea } = Input
 
+const { Option } = Select;
 
 const validate = values => {
   const errors = {}
@@ -69,38 +72,6 @@ const renderTextArea = (field) => {
 
 }
 
-const renderRadioSelect = (field) => {
-  // render the radio to pick normal date, weekly, or daily
-  console.log(field)
-  const options = [
-  { label: 'Non-repeating', value: 'none' },
-  { label: 'Weekly', value: 'weekly' },
-  { label: 'Daily', value: 'daily' },
-];
-
-  return (
-    <Radio.Group
-          {...field.input}
-          options={options}
-          // value={}
-          optionType="button"
-        />
-  )
-}
-
-const renderStartDate = (field) => {
-  console.log(field)
-  return (
-    <DatePicker
-    onChange = {field.input.onChange}
-    value = {field.input.value}
-    style = {{width: '110px', marginRight:'15px'}}
-    suffixIcon={<div></div>}
-    allowClear = {false}
-     />
-  )
-}
-
 const renderStartTimeSelect = (field) => {
   // This const will render the start time of the event
   // So before you choose any value you want to have the field
@@ -125,7 +96,8 @@ const renderStartTimeSelect = (field) => {
 }
 
 const renderStartTime = () => {
-    // This will render the specific date selections for the tiem select
+
+  // This will render the specific date selections for the tiem select
     const timeFormat = "hh:mm a"
     const time = []
     let start = dateFns.startOfDay(new Date())
@@ -147,6 +119,8 @@ const renderStartTime = () => {
   }
 
   const renderFriendSelect = (field) => {
+
+    //THIS WILL BE CHANGED TO BE INVITE LIST THAT INCLUDES ALL YOUR FOLLOWERS AND FOLLWOING
     console.log(field)
     return (
       <Select
@@ -164,6 +138,7 @@ const renderStartTime = () => {
 
   }
 
+
   const renderLocationField = (field) => {
     console.log(field.meta)
     return (
@@ -178,24 +153,15 @@ const renderStartTime = () => {
     )
   }
 
-  const renderEventColor = (field) => {
-    // This is just used to render the color of the event
-    return (
-      <Input
-      style = {{width: '45px', marginRight:'15px'}}
-      type = 'color'
-      className = 'reduxColor'
-      name = 'eventColor'
-      {...field.input}/>
-    )
-  }
+  // Not sure if we are gonna need event color
 
 
 
+// We do not need the radio because the social events are gonna be during one day
+// We probally don't even need a start date because it will be one day
 
-class DetailEditEventForm extends React.Component{
-// This class will be similar to the redux edit event but will be more detailed
-  // For detail comments on how redux forms work, check ReduxEditEventForm
+
+class EditSocialEventForm extends React.Component{
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -385,6 +351,21 @@ class DetailEditEventForm extends React.Component{
 
   }
 
+
+  renderEndDate = (field) => {
+    console.log(field.meta)
+    return (
+      <DatePicker
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+      style = {{width: '110px'}}
+      suffixIcon={<div></div>}
+      allowClear = {false}
+      // className = {` ${this.onRed() ? 'datePicker' : ''}`}
+      />
+    )
+  }
+
   handleEndTimeChange = (event) => {
     console.log(event)
 
@@ -395,17 +376,25 @@ class DetailEditEventForm extends React.Component{
     )
   }
 
-  handleReoccuringChange = (event) => {
+  renderShareListSelect = () => {
+    // Gonna use this for follow and follower list
+    if(this.props.friendList !== undefined){
+      const friendList = this.props.friendList
 
-    // This is to handle the change between how much the event is gonna repeated
-     const { change } = this.props
+      let shareOptions = []
 
-     change('repeatCondition', event.target.value)
-     console.log(this.props)
+      for (let friend = 0; friend< friendList.length; friend++ ){
+        shareOptions.push(
+          <Option value = {friendList[friend].username}
+          label = {this.capitalize(friendList[friend].username)}>
+            {this.capitalize(friendList[friend].username)}
+          </Option>
+        )
+      }
 
+      return shareOptions
+    }
   }
-
-
 
   onRed = () => {
     let startDate = this.props.startDate
@@ -432,55 +421,6 @@ class DetailEditEventForm extends React.Component{
     }
 
     return boxcolor
-  }
-
-
-  renderEndDate = (field) => {
-    console.log(field.meta)
-    return (
-      <DatePicker
-      onChange = {field.input.onChange}
-      value = {field.input.value}
-      style = {{width: '110px'}}
-      suffixIcon={<div></div>}
-      allowClear = {false}
-      // className = {` ${this.onRed() ? 'datePicker' : ''}`}
-      />
-    )
-  }
-
-  onStartDateChange = (event, value) => {
-    const { change } = this.props
-
-    // So this is where the end Date will be changed if the startDate or endDate
-    // seems to be ahead of the endDate
-    console.log(value)
-    if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
-      change('endDate', value)
-    }
-  }
-
-  renderShareListSelect = () => {
-    if(this.props.friendList !== undefined){
-      const friendList = this.props.friendList
-
-      let shareOptions = []
-
-      for (let friend = 0; friend< friendList.length; friend++ ){
-        shareOptions.push(
-          <Option value = {friendList[friend].username}
-          label = {this.capitalize(friendList[friend].username)}>
-            {this.capitalize(friendList[friend].username)}
-          </Option>
-        )
-      }
-
-      return shareOptions
-    }
-  }
-
-  handleFriendChange = (value) => {
-    console.log(value)
   }
 
   renderEndTimeSelect = () => {
@@ -556,35 +496,20 @@ class DetailEditEventForm extends React.Component{
 
 
 
-
-
-  render(){
+  render() {
 
     console.log(this.props)
+    // Gonna have to pass in values and props fromt eh parent event soon tho
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
-    let eventType = ""
     let eventId = ""
-    if(this.props.friends){
-      if(this.props.friends.length > 0){
-        eventType = "shared"
-      } else {
-        eventType = "single"
-      }
-
-    }
-    if(this.props.info.id){
-      eventId = this.props.info.id
-    }
 
 
-    console.log(eventId)
-
-    return(
+    return (
       <form style={{padding:'25px'}}>
           <div className = 'reduxTitle'>
             <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
-              {this.props.dayNum}
+            30
             </Button>
             <Field
             name = 'title'
@@ -597,31 +522,11 @@ class DetailEditEventForm extends React.Component{
 
           </div>
 
-          <div style={{marginLeft:'50px', marginBottom:'15px'}}>
-            <Field
-            name = 'repeatCondition'
-            component = {renderRadioSelect}
-            onChange ={this.handleReoccuringChange}
-            />
-          </div>
 
           <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
             <div class="innerContainerPeople">
               <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
-                   <Field
-                     name = 'startDate'
-                     component = {renderStartDate}
-                     onChange = {this.onStartDateChange}
-                     type = 'date'
-                   />
-
-                   <Field
-                    name = 'endDate'
-                    component = {this.renderEndDate}
-                    onChange = {this.handleEndTimeChange}
-                    type = 'date'
-                  />
 
 
                  <Field
@@ -647,7 +552,8 @@ class DetailEditEventForm extends React.Component{
 
 
           {/* need to implement redux form to people */}
-          <div>
+      {/*
+        <div>
 
             <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
             <Field
@@ -661,8 +567,9 @@ class DetailEditEventForm extends React.Component{
             </Field>
 
 
-            {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
           </div>
+
+        */}
 
 
           <br />
@@ -691,37 +598,18 @@ class DetailEditEventForm extends React.Component{
 
               />
             <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
-              <Field
-                  name = 'eventColor'
-                  component = {renderEventColor}
-                  type = 'text'
-              />
+
           </div>
 
 
 
           </div>
 
-          { this.props.addEvent ?
-            <div className = 'reduxButton' style={{padding:'10px'}}>
-            <Button
-            onClick = {reset}
-            >
-            Clear
-            </Button>
-            <Button
-            type = 'primary'
-            onClick = {handleSubmit}
-            style = {{left: '10px', fontSize: '15px'}}
-            disabled = {pristine || invalid || this.onRed()}
-            >Add</Button>
-            </div>
 
-            :
 
             <div className = 'reduxButton'>
             <Button
-            onClick = {() => this.props.onDelete(eventId, eventType)}
+            // onClick = {() => this.props.onDelete(eventId)}
             >
             Delete
             </Button>
@@ -733,30 +621,19 @@ class DetailEditEventForm extends React.Component{
             >Save</Button>
             </div>
 
-           }
+
 
       </form>
-
     )
   }
+
 }
 
-DetailEditEventForm = reduxForm({
-  form: "detailEventEdit",
+
+EditSocialEventForm = reduxForm({
+  form: "socialEventEdit",
   enableReinitialize: true,
-  validate //validate the fields to make sure they are correct
-}) (DetailEditEventForm);
+  validate
+}) (EditSocialEventForm)
 
-const selector = formValueSelector("detailEventEdit");
-
-export default connect(state => ({
-  title: selector(state, 'title'),
-  friends: selector(state, 'friends'),
-  content: selector (state, 'content'),
-  location: selector (state, 'content'),
-  startTime: selector(state, 'startTime'),
-  endTime: selector(state, 'endTime'),
-  startDate: selector(state, 'startDate'),
-  endDate: selector(state, 'endDate'),
-  repeatCondition: selector(state, 'repeatCondition')
-}))(DetailEditEventForm);
+export default EditSocialEventForm;

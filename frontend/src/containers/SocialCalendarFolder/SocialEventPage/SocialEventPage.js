@@ -8,6 +8,7 @@ import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket'
 
 import "./SocialEventPage.css"
 
+
 class SocialEventPage extends React.Component{
   // This will retrive the values of the invidual evnets and reutrns them
   constructor(props){

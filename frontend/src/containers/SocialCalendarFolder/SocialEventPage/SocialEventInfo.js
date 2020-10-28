@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Progress, Avatar, Modal, message, notification} from 'antd';
 import * as dateFns from 'date-fns';
-
+import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
 
 
@@ -33,6 +33,19 @@ class SocialEventInfo extends React.Component{
     console.log('close')
   }
 
+  onEditClick = () => {
+    // This will show the function to edit events
+    this.setState({
+      edit: true
+    })
+  }
+
+  onCancelEventClick = () => {
+    this.setState({
+      edit: false
+    })
+  }
+
 
   timeFormater(time){
     // This will change the format of the time properly to the 1-12 hour
@@ -45,6 +58,35 @@ class SocialEventInfo extends React.Component{
     console.log(11%12)
     hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
     return hour
+
+  }
+
+  getInitialValue = () => {
+    //This will be passed into
+    if(this.props.info){
+      let title = "";
+      let content = "";
+      const start_time = this.timeFormater(this.props.info.start_time)
+      const end_time = this.timeFormater(this.props.info.end_time)
+      if(this.props.info.title){
+        title = this.props.info.title
+      }
+
+      if(this.props.info.content){
+        content = this.props.info.content
+      }
+
+
+      return {
+        title: this.capitalize(title),
+        content: this.capitalize(content),
+        startTime: start_time,
+        endTime: end_time,
+        location: this.props.info.location,
+      }
+
+    }
+
 
   }
 
@@ -109,6 +151,28 @@ class SocialEventInfo extends React.Component{
 
     return (
       <div className = "socialEventInfoContainer">
+
+      {
+        this.state.edit ?
+
+        <div>
+        <EditSocialEventForm
+        {...this.props}
+        initialValues = {this.getInitialValue()}
+         />
+
+
+        <div
+        className = "editEventBackButtonContainer "
+        onClick = {() => this.onCancelEventClick()}>
+
+        <i class="fas fa-arrow-left"></i>
+
+        </div>
+        </div>
+
+        :
+
         <div className = "eventInfoView">
 
         <div className = "topSectContainier">
@@ -201,49 +265,56 @@ class SocialEventInfo extends React.Component{
             <div className = "eventPeopleWord"> People </div>
 
 
+            <div className = 'editEventButtonContainer'>
+            {
+              eventHostId === this.props.userId ?
+
+              <div
+              className = 'editEventButton'
+              // onClick= {() => this.onEditClick()} /
+              >
+              <div
+              onClick = {() => this.onChangeBackgroundOpen()}
+              >
+              <i class="far fa-image"></i>
+              <div style = {{fontSize: "8px", marginBottom: "20px"}}>
+              Change Background
+              </div>
+              </div>
+
+
+              <div
+              onClick={() => this.onEditClick()}
+              >
+              <i class="fas fa-pen" ></i>
+              <div style = {{fontSize: "15px"}}>
+              Edit Event
+              </div>
+              </div>
+
+              <div>
+              <i class="fas fa-chevron-down"></i>
+              </div>
+              </div>
+
+              :
+
+              <div></div>
+
+            }
+
+            </div>
+
           </div>
 
         </div>
 
-        <div className = 'editEventButtonContainer'>
-        {
-          eventHostId === this.props.userId ?
-
-          <div
-          className = 'editEventButton'
-          // onClick= {() => this.onEditClick()} /
-          >
-          <div
-          onClick = {() => this.onChangeBackgroundOpen()}
-          >
-          <i class="far fa-image"></i>
-          <div style = {{fontSize: "8px", marginBottom: "20px"}}>
-          Change Background
-          </div>
-          </div>
+      }
 
 
-          <div
-          onClick={() => this.onEditClick()}
-          >
-          <i class="fas fa-pen" ></i>
-          <div style = {{fontSize: "15px"}}>
-          Edit Event
-          </div>
-          </div>
 
-          <div>
-          <i class="fas fa-chevron-down"></i>
-          </div>
-          </div>
 
-          :
 
-          <div></div>
-
-        }
-
-        </div>
 
       </div>
 
