@@ -5,7 +5,7 @@ import Icon from 'antd/lib/icon';
 import PropTypes from 'prop-types';
 import React from "react";
 import './DetailSwitch.css';
-import { Select, Radio, Button, Input, List, Divider, Avatar } from 'antd';
+import { Select, Radio, Button, Input, List, Divider, Avatar, Card } from 'antd';
 import dayPic from './dayPic.svg';
 import friendsPic from './friends.svg';
 import bicylePic from './bicycle.svg';
@@ -15,10 +15,11 @@ import * as dateFns from 'date-fns';
 import { Form } from '@ant-design/compatible';
 import { FireTwoTone } from '@ant-design/icons';
 import {connect} from 'react-redux';
+import Animate from 'rc-animate';
 
 const { Option } = Select
 const Element = BannerAnim.Element;
-
+const { Meta } = Card;
 
 let count=0;
 
@@ -49,6 +50,7 @@ class DetailSwitch extends React.Component {
     super(props);
     this.state = {
       pageNum:0,
+      isPageTween: false,
       rangeChoice: '',
       endDate: '',
       startDate: new Date(),
@@ -77,11 +79,14 @@ class DetailSwitch extends React.Component {
   };
 
   onFriendChange = (friend) => {
-    console.log(friend)
+    console.log(friend+" : friend before")
+    console.log(this.state.isPageTween+" : isPageTween before")
     this.setState({
-      friend: friend
+      friend: friend,
+      isPageTween: true,
     })
-
+    console.log(friend+" : friend after")
+    console.log(this.state.isPageTween+" : isPageTween after")
   }
 
 
@@ -193,9 +198,6 @@ class DetailSwitch extends React.Component {
 
 
 
-  onFriendClick = (friend) => {
-    console.log(friend)
-  }
 
   renderFriends = () => {
     let friends = []
@@ -216,6 +218,7 @@ class DetailSwitch extends React.Component {
 
   render() {
     console.log(this.props)
+    console.log(this.state)
     console.log(this.props.currentProfile)
     let friends = this.props.friends
     let personPic1='http://127.0.0.1:8000'+this.props.currentProfile
@@ -275,36 +278,48 @@ class DetailSwitch extends React.Component {
 
             {/*if the page count is 1*/}
               <div className={`${this.props.className}-map map${i}`} key="map">
-                <Avatar
-                  size={125}
-                  src={picArray[2]} />
+
+                <Card
+                  hoverable
+                  style={{ width: 250, height:260, left:'50%'}}
+                  cover={<img alt="example" src={picArray[2]} />}
+                >
+                  <Meta title="Ping Hsu" description="@admin" />
+                </Card>
+
               </div>
                 {/*if the page count is 2*/}
 
             </QueueAnim>
 
 
-            <QueueAnim
-              animConfig={this.state.imgAnim}
-              duration={this.getDuration}
-              delay={[!i ? this.state.delay : 300, 0]}
-              ease={['easeOutCubic', 'easeInQuad']}
-              key="img-wrapper"
-            >
-
-            {
-              (this.state.friends!=null)?
-              <div> other person</div>
-
-              :
-
-              <div>no person</div>
+            <div>
+              {
+                (this.state.friend!=null)?
 
 
 
-            }
-          </QueueAnim>
-        </span>
+                <div className="code-box-demo-wrapper">
+
+                  <Animate
+                    transitionName="fade"
+                    transitionAppear
+                  >
+
+                      <div key="1" className="code-box-shape" />
+                  </Animate>
+                </div>
+
+
+                :
+
+                <div>no person</div>
+
+
+
+              }
+            </div>
+          </span>
 
           }
 
