@@ -636,4 +636,13 @@ EditSocialEventForm = reduxForm({
   validate
 }) (EditSocialEventForm)
 
-export default EditSocialEventForm;
+const selector = formValueSelector("socialEventEdit")
+
+
+export default connect(state => ({
+  title: selector(state, 'title'),
+  content: selector(state, 'content'),
+  location: selector(state, 'location'),
+  startTime: selector(state, 'startTime'),
+  endTime: selector(state, 'endTime'),
+}))(EditSocialEventForm);

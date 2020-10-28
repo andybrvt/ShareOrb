@@ -753,7 +753,7 @@ export default connect(state => ({
   title: selector(state, 'title'),
   friends: selector(state, 'friends'),
   content: selector (state, 'content'),
-  location: selector (state, 'content'),
+  location: selector (state, 'location'),
   startTime: selector(state, 'startTime'),
   endTime: selector(state, 'endTime'),
   startDate: selector(state, 'startDate'),
