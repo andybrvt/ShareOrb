@@ -82,7 +82,8 @@ class App extends Component {
 
     SocialEventPageWebSocketInstance.addCallbacks(
       this.props.loadSocialEventInfo.bind(this),
-      this.props.sendSocialEventMessage.bind(this)
+      this.props.sendSocialEventMessage.bind(this),
+      this.props.updateSocialEventPage.bind(this)
     )
   }
 
@@ -169,7 +170,8 @@ const mapDispatchToProps = dispatch => {
     addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
     addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj)),
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
-    sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj))
+    sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),
+    updateSocialEventPage: updatedSocialEvent => dispatch(socialActions.updateSocialEventPage(updatedSocialEvent))
   }
 }
 

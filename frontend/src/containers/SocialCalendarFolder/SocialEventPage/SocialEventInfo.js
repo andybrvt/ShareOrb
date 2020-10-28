@@ -3,7 +3,7 @@ import {Button, Progress, Avatar, Modal, message, notification} from 'antd';
 import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
-
+import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
 
 class SocialEventInfo extends React.Component{
 
@@ -85,8 +85,51 @@ class SocialEventInfo extends React.Component{
         location: this.props.info.location,
       }
 
+
+
     }
 
+
+  }
+
+  onSaveEdit = (values) => {
+    // Social event is never gonna be a unshare event becuaes it social so its
+    // doesn't have to deal with the single or shared event-
+
+    // This function will be called when you want to save the newly edited event
+    // within the EditSocialEventForm
+    // The form is gonna take input information and then that information is gonna
+    // get passed into this funciton. AFterwards it will be sent thorugh the soicaleventWebsocket
+    // then it will go into the back end and change the exisitng event object then
+    // sent through the channels
+    console.log(values)
+    const start_time = values.startTime
+    const end_time = values.endTime
+    const event_day = this.props.info.event_day
+
+    let content = ""
+    let location = ""
+    // Reason for having these lets is because title and content are not required and
+    // could be empty at times
+    if(values.content){
+      content = values.content
+    }
+    if(values.location){
+      location = values.location
+    }
+
+    const editSocialEventObj = {
+      eventId: this.props.info.id,
+      title: values.title,
+      content: content,
+      location: location,
+      start_time: start_time,
+      end_time: end_time,
+      event_day:event_day
+
+    }
+
+    SocialEventPageWebSocketInstance.sendEditSocialEvent(editSocialEventObj)
 
   }
 
@@ -159,6 +202,7 @@ class SocialEventInfo extends React.Component{
         <EditSocialEventForm
         {...this.props}
         initialValues = {this.getInitialValue()}
+        onSubmit = {this.onSaveEdit}
          />
 
 

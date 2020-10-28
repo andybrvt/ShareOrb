@@ -110,3 +110,12 @@ export const sendSocialEventMessage = (socialMessageObj) =>{
     socialMessageObj: socialMessageObj
   }
 }
+
+export const updateSocialEventPage = (updatedSocialEvent) => {
+  // update the information in the socialevent page as well as the event
+  // information
+  return{
+    type: actionTypes.UPDATE_SOCIAL_EVENT_PAGE,
+    updatedSocialEvent: updatedSocialEvent
+  }
+}

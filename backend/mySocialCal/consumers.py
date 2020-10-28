@@ -48,9 +48,33 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
             "socialEventMessgaeObj": serializer,
             "socialEventId": data['socialEventId']
         }
-        self.self_social_message(content)
+        self.send_social_message(content)
 
-    def self_social_message(self, socialEventMessage):
+
+    def send_social_edit_event_info(self, data):
+        print(data)
+        eventEdit = get_object_or_404(SocialCalEvent, id = data['editSocialEventObj']['eventId'])
+        print(eventEdit)
+        eventEdit.title = data['editSocialEventObj']['title']
+        eventEdit.content = data['editSocialEventObj']['content']
+        eventEdit.start_time = data['editSocialEventObj']['start_time']
+        eventEdit.end_time = data['editSocialEventObj']['end_time']
+        eventEdit.location = data['editSocialEventObj']['location']
+        eventEdit.event_day = data['editSocialEventObj']['event_day']
+
+        eventEdit.save()
+
+        updatedEvent = get_object_or_404(SocialCalEvent, id = data['editSocialEventObj']['eventId'])
+        serializer = SocialCalEventSerializer(updatedEvent)
+
+        content = {
+            "command": "edited_social_event",
+            "editedSocialEvent": serializer.data,
+            "socialEventId": data['editSocialEventObj']['eventId']
+        }
+        self.send_social_message(content)
+
+    def send_social_message(self, socialEventMessage):
         # This will be for sending inforamtion inot the channel layer to the groups
         channel_layer = get_channel_layer()
         channel_recipient = socialEventMessage['socialEventId']
@@ -81,12 +105,15 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
-        print("receive")
+
         data = json.loads(text_data)
+        print(data)
         if data["command"] == "fetch_social_event_messages":
             self.send_fetch_social_event_messages(data);
         if data["command"] == "send_social_event_message":
             self.send_social_event_message(data)
+        if data["command"] == "send_social_edit_event_info":
+            self.send_social_edit_event_info(data)
 
     def new_social_message(self, message):
         messageObj = message['eventMessage']
