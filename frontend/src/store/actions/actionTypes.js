@@ -111,7 +111,7 @@ export const ADD_SOCIAL_CELL_NEW_M = 'ADD_SOCIAL_CELL_NEW_M'
 // This would be used for the socialEvents
 export const LOAD_SOCIAL_EVENT_INFO = "LOAD_SOCIAL_EVENT_INFO";
 export const SEND_SOCIAL_EVENT_MESSAGE = "SEND_SOCIAL_EVENT_MESSAGE"
-
+export const UPDATE_SOCIAL_EVENT_PAGE = "UPDATE_SOCIAL_EVENT_PAGE"
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

@@ -60,7 +60,7 @@ class WebSocketSocialEventPage{
   fetchSocialMessages(socialEventId){
     // This will fetch all the messages of that specific event
     console.log('fetch social messages')
-    this.sendSocialMesage({
+    this.sendSocialMessage({
       command: "fetch_social_event_messages",
       socialEventId: socialEventId
     })
@@ -73,7 +73,7 @@ class WebSocketSocialEventPage{
     // the message and then the eventId will be used to know which event to connect
     // it will
     console.log('send social event messages')
-    this.sendSocialMesage({
+    this.sendSocialMessage({
       command: 'send_social_event_message',
       message: message,
       userId: userId,
@@ -81,8 +81,15 @@ class WebSocketSocialEventPage{
     })
   }
 
-  sendEditSocialEvent = () => {
+  sendEditSocialEvent = (editSocialEventObj) => {
     // This is for editing the social event
+    console.log(editSocialEventObj)
+
+    this.sendSocialMessage({
+      command: 'send_social_edit_event_info',
+      editSocialEventObj: editSocialEventObj
+    })
+
   }
 
   socketNewSocialMessage(data){
@@ -111,17 +118,26 @@ class WebSocketSocialEventPage{
       const socialEventId = parsedData.socialEventId
       this.callbacks['send_social_event_message'](socialMessageObj)
     }
+
+    if(command === "edited_social_event"){
+      const eventObj = parsedData.editedSocialEvent
+
+      // ADD CALL BACKS HERE
+      this.callbacks['update_social_event_page'](eventObj)
+    }
   }
 
   addCallbacks(
     fetchSocialEventInfo,
-    sendSocialMessageCallbacks
+    sendSocialMessageCallbacks,
+    updateSocialEventCallbacks
   ){
     this.callbacks['fetch_social_event_info'] = fetchSocialEventInfo
     this.callbacks['send_social_event_message'] = sendSocialMessageCallbacks
+    this.callbacks['update_social_event_page'] = updateSocialEventCallbacks
   }
 
-  sendSocialMesage (data){
+  sendSocialMessage (data){
     // This is for the function that actually sends stuff to the backedn
     try{
       this.socketRef.send(JSON.stringify({...data}))

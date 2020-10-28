@@ -509,7 +509,7 @@ class EditSocialEventForm extends React.Component{
       <form style={{padding:'25px'}}>
           <div className = 'reduxTitle'>
             <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
-            30
+            
             </Button>
             <Field
             name = 'title'
