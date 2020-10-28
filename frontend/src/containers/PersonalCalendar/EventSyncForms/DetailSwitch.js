@@ -51,6 +51,7 @@ class DetailSwitch extends React.Component {
     this.state = {
       pageNum:0,
       isPageTween: false,
+      show: true,
       rangeChoice: '',
       endDate: '',
       startDate: new Date(),
@@ -84,6 +85,7 @@ class DetailSwitch extends React.Component {
     this.setState({
       friend: friend,
       isPageTween: true,
+      show: !this.state.show,
     })
     console.log(friend+" : friend after")
     console.log(this.state.isPageTween+" : isPageTween after")
@@ -281,7 +283,7 @@ class DetailSwitch extends React.Component {
 
                 <Card
                   hoverable
-                  style={{ width: 250, height:260, left:'50%'}}
+                  style={{ width: 250, height:260, left:'50%', marginTop:'-50px'}}
                   cover={<img alt="example" src={picArray[2]} />}
                 >
                   <Meta title="Ping Hsu" description="@admin" />
@@ -293,22 +295,22 @@ class DetailSwitch extends React.Component {
             </QueueAnim>
 
 
-            <div>
+            <div style={{marginLeft:'158px', marginTop:'300px'}}>
               {
-                (this.state.friend!=null)?
+                (this.state.show==true)?
 
 
 
-                <div className="code-box-demo-wrapper">
-
-                  <Animate
-                    transitionName="fade"
-                    transitionAppear
+                <div class="fade-in">
+                  <Card
+                    hoverable
+                    style={{ width: 250, height:260}}
+                    cover={<img alt="example" src={picArray[2]} />}
                   >
-
-                      <div key="1" className="code-box-shape" />
-                  </Animate>
+                    <Meta title="Ping Hsu" description="@admin" />
+                  </Card>
                 </div>
+
 
 
                 :
