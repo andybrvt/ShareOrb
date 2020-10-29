@@ -4,6 +4,9 @@ import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
 import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
+import ChangeBackgroundModal from '../../PersonalCalendar/EventPage/ChangeBackgroundModal';
+import { authAxios } from '../../../components/util';
+
 
 class SocialEventInfo extends React.Component{
 
@@ -26,11 +29,16 @@ class SocialEventInfo extends React.Component{
   onChangeBackgroundOpen = () => {
     // This is to open the modal for changing the background picture
     console.log('open')
+    this.setState({
+      changeBackgroundView: true
+    })
   }
 
   onChangeBackgroundClose = () => {
     // This is to close the modal for changing the background picture
-    console.log('close')
+    this.setState({
+      changeBackgroundView: false
+    })
   }
 
   onEditClick = () => {
@@ -130,6 +138,28 @@ class SocialEventInfo extends React.Component{
     }
 
     SocialEventPageWebSocketInstance.sendEditSocialEvent(editSocialEventObj)
+
+  }
+
+  handleBackgroundPictureChange = value => {
+    // This is responsible for changing the background picture fo the events
+    // Unlike the eventPage, this one will alwasy be shared among all the members but since
+    // the picture change will happen when people log back in it will be change
+    // so no need to put channels on it
+
+    console.log(value)
+    const eventId = this.props.info.id
+    var data = new FormData();
+
+    data.append("backgroundImg", value)
+    authAxios.put('http://127.0.0.1:8000/mySocialCal/socialEvent/updatebackground/'+eventId,
+    data
+  ).then(res => {
+    // Now you will run the redux to replace the picture
+    console.log(res.data)
+
+
+  })
 
   }
 
@@ -358,6 +388,11 @@ class SocialEventInfo extends React.Component{
 
 
 
+      <ChangeBackgroundModal
+      visible = {this.state.changeBackgroundView}
+      close = {this.onChangeBackgroundClose}
+      onSubmit = {this.handleBackgroundPictureChange}
+      />
 
 
       </div>

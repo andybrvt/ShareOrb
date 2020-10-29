@@ -111,3 +111,8 @@ class SocialEventCreateView(APIView):
 class ShowSocialEvents(generics.ListAPIView):
     serializer_class = serializers.SocialCalEventSerializer
     queryset = models.SocialCalEvent.objects.all()
+
+class SocialEventBackgroundUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.SocialEventBackgroundSerializer
+    lookup_field = "id"
+    queryset = models.SocialCalEvent.objects.all()
