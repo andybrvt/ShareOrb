@@ -5,7 +5,7 @@ import Icon from 'antd/lib/icon';
 import PropTypes from 'prop-types';
 import React from "react";
 import './DetailSwitch.css';
-import { Select, Radio, Button, Input, List, Divider, Avatar, Card } from 'antd';
+import { Select, Radio, Button, Input, List, Divider, Avatar, Card, message} from 'antd';
 import dayPic from './dayPic.svg';
 import friendsPic from './friends.svg';
 import bicylePic from './bicycle.svg';
@@ -37,7 +37,9 @@ let dataArray = [
 
 ];
 
-
+const success = () => {
+  message.success('Sent out Event Sync Invite');
+};
 
 class DetailSwitch extends React.Component {
 
@@ -100,13 +102,13 @@ class DetailSwitch extends React.Component {
     if (this.state.rangeChoice === 'day'){
       const newStartDate = dateFns.addDays(this.state.startDate, 1)
       submitContent = {
-        friend: this.state.friend,
+        friend: this.state.friendPerson,
         startDate: newStartDate,
         endDate: this.state.endDate
       }
     } else if (this.state.rangeChoice === 'week'){
       submitContent = {
-        friend: this.state.friend,
+        friend: this.state.friendPerson,
         startDate: this.state.startDate,
         endDate: this.state.endDate
       }
@@ -432,7 +434,7 @@ class DetailSwitch extends React.Component {
           >
             <Form.Item className = 'friendListCon'>
             <Input
-              style={{width:'475px'}}
+              style={{width:'425px'}}
               value = {this.state.search}
               onChange = {this.onHandleChange}
               type = 'text'
@@ -443,7 +445,7 @@ class DetailSwitch extends React.Component {
              <List
                   className = 'friendList'
                   dataSource={friends}
-                  style={{padding:'1px'}}
+                  style={{padding:'1px',width:'425px'}}
                   renderItem={item => (
                     <List.Item
                     key={item.username}
@@ -473,9 +475,10 @@ class DetailSwitch extends React.Component {
             style = {{
               backgroundColor:'dodgerblue',
               color: 'white',
-              width:'475px',
+              width:'425px',
             }}
-
+            shape="round"
+            onClick={success}
             htmlType = 'submit'
             disabled = {this.state.endDate === ''
             || this.state.friend === '' }

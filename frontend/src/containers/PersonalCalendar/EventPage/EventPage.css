@@ -107,18 +107,27 @@
 
 }
 
+
+
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic{
   /* background-color: red; */
-  width: 65%;
-  height: 400px;
+
+
   overflow: hidden;
   /* border: 10px dashed gainsboro; */
   text-align: center;
+  margin-left: 200px;
+}
+
+.eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic img{
+  /* background-color: red; */
+
+  object-fit: cover;
+  width: 500px;
+  height: 400px;
 
 }
-.eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic .eventBackgroundImg{
-  width: 100%;
-}
+
 
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic .pictureFrame{
