@@ -35,6 +35,18 @@
 
 }
 
+.cardBorder{
+border-radius: 25px;
+}
+
+.containImage img {
+    object-fit: cover;
+    width: 225px;
+    height: 170px;
+    margin-top: -1px;
+
+}
+
 .eventSyncForm .friendListCon .friendList .friendItem {
 
 

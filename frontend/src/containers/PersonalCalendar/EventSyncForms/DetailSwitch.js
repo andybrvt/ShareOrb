@@ -25,11 +25,11 @@ let count=0;
 
 let dataArray = [
   {
-    color: '#ffe7ba',
-    background: '#ffc069',
+    color: '#faad14',
+    background: '#fadb14',
   },
   {
-    color: '#e6f7ff',
+    color: '#1890ff',
     background: '#bae7ff',
   },
 
@@ -52,7 +52,7 @@ class DetailSwitch extends React.Component {
       pageNum:0,
       isPageTween: false,
       show: true,
-      friendPerson:'',
+      friendPerson:null,
       rangeChoice: '',
       endDate: '',
       startDate: new Date(),
@@ -87,9 +87,7 @@ class DetailSwitch extends React.Component {
       isPageTween: true,
       show: !this.state.show,
     })
-    console.log(this.state)
-    console.log(this.state.friendPerson)
-    console.log(this.state.friendPerson.username)
+
 
 
   }
@@ -286,8 +284,14 @@ class DetailSwitch extends React.Component {
 
                 <Card
                   hoverable
-                  style={{ width: 250, height:260, left:'50%', marginTop:'-25px'}}
-                  cover={<img alt="example" src={picArray[2]} />}
+
+                  style={{ width: 225, height:260, left:'50%', marginTop:'-25px'}}
+                  cover={
+
+                    <span class="containImage">
+                      <img alt="example" src={picArray[2]} />
+                    </span>
+                  }
                 >
                   <Meta title="Ping Hsu" description="@admin" />
                 </Card>
@@ -297,25 +301,31 @@ class DetailSwitch extends React.Component {
 
             </QueueAnim>
 
+            {
+              (this.state.friendPerson!=null)?
+                <div style={{marginLeft:'157px', marginTop:'325px'}}>
+                    <div class="fade-in">
+                      <Card
+                        hoverable
+                        style={{ width: 225, height:260}}
+                        cover={
+                            <span class="containImage">
+                              <img
 
-            <div style={{marginLeft:'158px', marginTop:'300px'}}>
-
-
-
-                <div class="fade-in">
-                  <Card
-                    hoverable
-                    style={{ width: 250, height:260}}
-                    cover={<img alt="example" src={'http://127.0.0.1:8000'+this.state.friendPerson.profile_picture} />}
-                  >
-                    <Meta title="Ping Hsu" description={"@"+this.state.friendPerson.username} />
-                  </Card>
+                                alt="example" src={'http://127.0.0.1:8000'+this.state.friendPerson.profile_picture} />
+                            </span>
+                        }
+                      >
+                        <Meta title="Ping Hsu" description={"@"+this.state.friendPerson.username} />
+                      </Card>
+                    </div>
                 </div>
+                :
+                <div></div>
+              }
 
-
-
-
-            </div>
+            :
+            <div></div>
 
           </span>
 
