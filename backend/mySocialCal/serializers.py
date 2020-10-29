@@ -105,3 +105,8 @@ class SocialCalCommentSerializer (serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['commentUser'] = SocialCalUserSerializer(User.objects.get(id = data['commentUser'])).data
         return data
+
+class SocialEventBackgroundSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SocialCalEvent
+        fields = ("backgroundImg",)

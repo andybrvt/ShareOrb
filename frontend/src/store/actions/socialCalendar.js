@@ -119,3 +119,11 @@ export const updateSocialEventPage = (updatedSocialEvent) => {
     updatedSocialEvent: updatedSocialEvent
   }
 }
+
+export const updateSocialEventBackground = (backgroundPic) => {
+  // This will update the background picture of the soical event
+  return{
+    type: actionTypes.UPDATE_SOCIAL_EVENT_BACKGROUND,
+    backgroundPic: backgroundPic
+  }
+}
