@@ -6,6 +6,9 @@ import {PictureOutlined} from '@ant-design/icons';
 import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
 import ChangeBackgroundModal from '../../PersonalCalendar/EventPage/ChangeBackgroundModal';
 import { authAxios } from '../../../components/util';
+import * as socialActions from '../../../store/actions/socialCalendar';
+import { connect } from "react-redux";
+
 
 
 class SocialEventInfo extends React.Component{
@@ -157,7 +160,7 @@ class SocialEventInfo extends React.Component{
   ).then(res => {
     // Now you will run the redux to replace the picture
     console.log(res.data)
-
+    this.props.updateSocialEventBackground(res.data.backgroundImg.substring(21,))
 
   })
 
@@ -402,4 +405,11 @@ class SocialEventInfo extends React.Component{
 
 }
 
-export default SocialEventInfo;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateSocialEventBackground: backgroundPic => dispatch(socialActions.updateSocialEventBackground(backgroundPic))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SocialEventInfo);

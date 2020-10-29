@@ -159,6 +159,15 @@ const updateSocialEventPage = (state, action) => {
   })
 }
 
+const updateSocialEventBackground = (state, action) => {
+  return updateObject(state, {
+    selectedSocialEvent: {
+      ...state.selectedSocialEvent,
+      backgroundImg: action.backgroundPic
+    }
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -193,6 +202,8 @@ const reducer = (state = initialState, action) => {
       return sendSocialEventMessage(state, action);
     case actionTypes.UPDATE_SOCIAL_EVENT_PAGE:
       return updateSocialEventPage(state, action);
+    case actionTypes.UPDATE_SOCIAL_EVENT_BACKGROUND:
+      return updateSocialEventBackground(state, action);
     default:
       return state;
   }
