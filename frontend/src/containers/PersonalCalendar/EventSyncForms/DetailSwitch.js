@@ -52,6 +52,7 @@ class DetailSwitch extends React.Component {
       pageNum:0,
       isPageTween: false,
       show: true,
+      friendPerson:'',
       rangeChoice: '',
       endDate: '',
       startDate: new Date(),
@@ -80,15 +81,17 @@ class DetailSwitch extends React.Component {
   };
 
   onFriendChange = (friend) => {
-    console.log(friend+" : friend before")
-    console.log(this.state.isPageTween+" : isPageTween before")
+
     this.setState({
-      friend: friend,
+      friendPerson: friend,
       isPageTween: true,
       show: !this.state.show,
     })
-    console.log(friend+" : friend after")
-    console.log(this.state.isPageTween+" : isPageTween after")
+    console.log(this.state)
+    console.log(this.state.friendPerson)
+    console.log(this.state.friendPerson.username)
+
+
   }
 
 
@@ -283,7 +286,7 @@ class DetailSwitch extends React.Component {
 
                 <Card
                   hoverable
-                  style={{ width: 250, height:260, left:'50%', marginTop:'-50px'}}
+                  style={{ width: 250, height:260, left:'50%', marginTop:'-25px'}}
                   cover={<img alt="example" src={picArray[2]} />}
                 >
                   <Meta title="Ping Hsu" description="@admin" />
@@ -296,8 +299,6 @@ class DetailSwitch extends React.Component {
 
 
             <div style={{marginLeft:'158px', marginTop:'300px'}}>
-              {
-                (this.state.show==true)?
 
 
 
@@ -305,22 +306,17 @@ class DetailSwitch extends React.Component {
                   <Card
                     hoverable
                     style={{ width: 250, height:260}}
-                    cover={<img alt="example" src={picArray[2]} />}
+                    cover={<img alt="example" src={'http://127.0.0.1:8000'+this.state.friendPerson.profile_picture} />}
                   >
-                    <Meta title="Ping Hsu" description="@admin" />
+                    <Meta title="Ping Hsu" description={"@"+this.state.friendPerson.username} />
                   </Card>
                 </div>
 
 
 
-                :
 
-                <div>no person</div>
-
-
-
-              }
             </div>
+
           </span>
 
           }
