@@ -26,11 +26,11 @@ let count=0;
 let dataArray = [
   {
     color: '#faad14',
-    background: '#fadb14',
+    background: '#fa8c16',
   },
   {
     color: '#1890ff',
-    background: '#bae7ff',
+    background: '#2f54eb',
   },
 
 
@@ -252,7 +252,7 @@ class DetailSwitch extends React.Component {
           <QueueAnim
             animConfig={this.state.imgAnim}
             duration={this.getDuration}
-            delay={[!i ? this.state.delay : 300, 0]}
+            delay={[!i ? this.state.delay : 7000, 0]}
             ease={['easeOutCubic', 'easeInQuad']}
             key="img-wrapper"
           >
