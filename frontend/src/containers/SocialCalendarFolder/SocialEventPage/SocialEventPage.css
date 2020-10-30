@@ -32,7 +32,7 @@
 
 .socialEventPageContainer .showChatSwitch{
   position: absolute;
-  left: 65.5%;
+  left: 64.5%;
   top: 96%;
   z-index: 9999;
   transition: 0.5s;
@@ -41,12 +41,12 @@
 }
 
 .socialEventPageContainer.active .showChatSwitch{
-  left: 75%;
+  left: 74%;
 }
 
 .socialEventPageContainer .showChatWords{
   position: absolute;
-  left: 64%;
+  left: 63%;
   top: 92%;
   z-index: 9999;
   transition: 0.5s;
@@ -54,7 +54,7 @@
 }
 
 .socialEventPageContainer.active .showChatWords{
-  left: 73.5%;
+  left: 72.5%;
 }
 
 /* This is for hte socialeventinfo side of the event page */
