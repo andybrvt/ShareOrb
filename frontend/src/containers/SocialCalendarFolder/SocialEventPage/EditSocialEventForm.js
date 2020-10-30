@@ -504,12 +504,17 @@ class EditSocialEventForm extends React.Component{
 
     let eventId = ""
 
+    if(this.props.info){
+      if(this.props.info.id){
+        eventId = this.props.info.id
+      }
+    }
 
     return (
       <form style={{padding:'25px'}}>
           <div className = 'reduxTitle'>
             <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
-            
+
             </Button>
             <Field
             name = 'title'
@@ -609,7 +614,7 @@ class EditSocialEventForm extends React.Component{
 
             <div className = 'reduxButton'>
             <Button
-            // onClick = {() => this.props.onDelete(eventId)}
+            onClick = {() => this.props.onDelete()}
             >
             Delete
             </Button>

@@ -8,7 +8,7 @@ import ChangeBackgroundModal from '../../PersonalCalendar/EventPage/ChangeBackgr
 import { authAxios } from '../../../components/util';
 import * as socialActions from '../../../store/actions/socialCalendar';
 import { connect } from "react-redux";
-
+import DeleteSocialEventModal from './DeleteSocialEventModal';
 
 
 class SocialEventInfo extends React.Component{
@@ -19,7 +19,8 @@ class SocialEventInfo extends React.Component{
 
   state = {
     edit: false,
-    changeBackgroundView: false
+    changeBackgroundView: false,
+    showDeleteModal: false,
   }
 
   capitalize (str) {
@@ -166,6 +167,24 @@ class SocialEventInfo extends React.Component{
 
   }
 
+  onDeleteSocialEvent = () =>{
+    console.log(this.props.info.id)
+  }
+
+
+  onOpenDeleteSocialModal = () => {
+    this.setState({
+      showDeleteModal: true
+    })
+  }
+
+  onCloseDeleteSocialModal = () => {
+    // This is to close teh dletesocialmodal
+    this.setState({
+      showDeleteModal: false
+    })
+  }
+
 
   render() {
     console.log(this.props)
@@ -237,6 +256,7 @@ class SocialEventInfo extends React.Component{
         {...this.props}
         initialValues = {this.getInitialValue()}
         onSubmit = {this.onSaveEdit}
+        onDelete = {this.onOpenDeleteSocialModal}
          />
 
 
@@ -396,6 +416,13 @@ class SocialEventInfo extends React.Component{
       visible = {this.state.changeBackgroundView}
       close = {this.onChangeBackgroundClose}
       onSubmit = {this.handleBackgroundPictureChange}
+      />
+
+      <DeleteSocialEventModal
+      visible = {this.state.showDeleteModal}
+      onCancel = {this.onCloseDeleteSocialModal}
+      eventId = {this.props.info.id}
+      onDelete = {this.onDeleteSocialEvent}
       />
 
 
