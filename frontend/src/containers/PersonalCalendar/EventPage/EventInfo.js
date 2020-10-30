@@ -17,7 +17,7 @@ import RemoveEventModal from '../EditCalEventForms/RemoveEventModal';
 import background from '../../../components/images/background1.jpg';
 import ChangeBackgroundModal from "./ChangeBackgroundModal";
 import { authAxios } from '../../../components/util';
-
+import Liking from '../../NewsfeedItems/Liking';
 
 class EventInfo extends React.Component{
 
@@ -588,7 +588,7 @@ class EventInfo extends React.Component{
             <br/>
             <br/>
             <br/>
-            <div className = "eventTime">Host</div>
+            <div className = "attendees">Host</div>
             <div className = "eventHost">
 
 
@@ -599,7 +599,8 @@ class EventInfo extends React.Component{
             </div>
 
 
-            <div className = "invitedNum"> {invited.length} Invited </div>
+            <div className = "attendees"> {invited.length} Invited </div>
+            <Liking style={{marginTop:'-200px'}} like_people={invited}/>
             </div>
 
 
