@@ -5,7 +5,7 @@ import Icon from 'antd/lib/icon';
 import PropTypes from 'prop-types';
 import React from "react";
 import './DetailSwitch.css';
-import { Select, Radio, Button, Input, List, Divider, Avatar, Card } from 'antd';
+import { Select, Radio, Button, Input, List, Divider, Avatar, Card, message} from 'antd';
 import dayPic from './dayPic.svg';
 import friendsPic from './friends.svg';
 import bicylePic from './bicycle.svg';
@@ -25,19 +25,21 @@ let count=0;
 
 let dataArray = [
   {
-    color: '#ffe7ba',
-    background: '#ffc069',
+    color: '#faad14',
+    background: '#fa8c16',
   },
   {
-    color: '#e6f7ff',
-    background: '#bae7ff',
+    color: '#1890ff',
+    background: '#2f54eb',
   },
 
 
 
 ];
 
-
+const success = () => {
+  message.success('Sent out Event Sync Invite');
+};
 
 class DetailSwitch extends React.Component {
 
@@ -52,7 +54,7 @@ class DetailSwitch extends React.Component {
       pageNum:0,
       isPageTween: false,
       show: true,
-      friendPerson:'',
+      friendPerson:null,
       rangeChoice: '',
       endDate: '',
       startDate: new Date(),
@@ -87,9 +89,7 @@ class DetailSwitch extends React.Component {
       isPageTween: true,
       show: !this.state.show,
     })
-    console.log(this.state)
-    console.log(this.state.friendPerson)
-    console.log(this.state.friendPerson.username)
+
 
 
   }
@@ -102,13 +102,13 @@ class DetailSwitch extends React.Component {
     if (this.state.rangeChoice === 'day'){
       const newStartDate = dateFns.addDays(this.state.startDate, 1)
       submitContent = {
-        friend: this.state.friend,
+        friend: this.state.friendPerson,
         startDate: newStartDate,
         endDate: this.state.endDate
       }
     } else if (this.state.rangeChoice === 'week'){
       submitContent = {
-        friend: this.state.friend,
+        friend: this.state.friendPerson,
         startDate: this.state.startDate,
         endDate: this.state.endDate
       }
@@ -254,7 +254,7 @@ class DetailSwitch extends React.Component {
           <QueueAnim
             animConfig={this.state.imgAnim}
             duration={this.getDuration}
-            delay={[!i ? this.state.delay : 300, 0]}
+            delay={[!i ? this.state.delay : 7000, 0]}
             ease={['easeOutCubic', 'easeInQuad']}
             key="img-wrapper"
           >
@@ -286,8 +286,14 @@ class DetailSwitch extends React.Component {
 
                 <Card
                   hoverable
-                  style={{ width: 250, height:260, left:'50%', marginTop:'-25px'}}
-                  cover={<img alt="example" src={picArray[2]} />}
+
+                  style={{ width: 225, height:260, left:'50%', marginTop:'-25px'}}
+                  cover={
+
+                    <span class="containImage">
+                      <img alt="example" src={picArray[2]} />
+                    </span>
+                  }
                 >
                   <Meta title="Ping Hsu" description="@admin" />
                 </Card>
@@ -297,25 +303,31 @@ class DetailSwitch extends React.Component {
 
             </QueueAnim>
 
+            {
+              (this.state.friendPerson!=null)?
+                <div style={{marginLeft:'157px', marginTop:'325px'}}>
+                    <div class="fade-in">
+                      <Card
+                        hoverable
+                        style={{ width: 225, height:260}}
+                        cover={
+                            <span class="containImage">
+                              <img
 
-            <div style={{marginLeft:'158px', marginTop:'300px'}}>
-
-
-
-                <div class="fade-in">
-                  <Card
-                    hoverable
-                    style={{ width: 250, height:260}}
-                    cover={<img alt="example" src={'http://127.0.0.1:8000'+this.state.friendPerson.profile_picture} />}
-                  >
-                    <Meta title="Ping Hsu" description={"@"+this.state.friendPerson.username} />
-                  </Card>
+                                alt="example" src={'http://127.0.0.1:8000'+this.state.friendPerson.profile_picture} />
+                            </span>
+                        }
+                      >
+                        <Meta title="Ping Hsu" description={"@"+this.state.friendPerson.username} />
+                      </Card>
+                    </div>
                 </div>
+                :
+                <div></div>
+              }
 
-
-
-
-            </div>
+            :
+            <div></div>
 
           </span>
 
@@ -422,7 +434,7 @@ class DetailSwitch extends React.Component {
           >
             <Form.Item className = 'friendListCon'>
             <Input
-              style={{width:'475px'}}
+              style={{width:'425px'}}
               value = {this.state.search}
               onChange = {this.onHandleChange}
               type = 'text'
@@ -433,7 +445,7 @@ class DetailSwitch extends React.Component {
              <List
                   className = 'friendList'
                   dataSource={friends}
-                  style={{padding:'1px'}}
+                  style={{padding:'1px',width:'425px'}}
                   renderItem={item => (
                     <List.Item
                     key={item.username}
@@ -463,9 +475,10 @@ class DetailSwitch extends React.Component {
             style = {{
               backgroundColor:'dodgerblue',
               color: 'white',
-              width:'475px',
+              width:'425px',
             }}
-
+            shape="round"
+            onClick={success}
             htmlType = 'submit'
             disabled = {this.state.endDate === ''
             || this.state.friend === '' }

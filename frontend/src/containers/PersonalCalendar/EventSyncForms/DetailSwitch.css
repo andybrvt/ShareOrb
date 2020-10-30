@@ -14,7 +14,7 @@
 /* around 2 rows, change height to 570 */
 .details-switch-demo {
   margin: 70px auto;
-  width: 1100px;
+  width: 1000px;
   height: 870px;
   background: #fff;
 
@@ -32,6 +32,18 @@
   height: 395px;
   width:475px;
 
+
+}
+
+.cardBorder{
+border-radius: 25px;
+}
+
+.containImage img {
+    object-fit: cover;
+    width: 225px;
+    height: 170px;
+    margin-top: -1px;
 
 }
 
