@@ -59,7 +59,7 @@
 }
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
-  width: 35%;
+  width: 43%;
   height: 400px;
   padding: 25px;
   background-color: #F5F5F5;
@@ -204,7 +204,7 @@
   position:absolute;
   font-size: 30px;
   top: -140px;
-  left: 1145px;
+  left: 100px;
   cursor: pointer;
   transition: 0.5s;
 }

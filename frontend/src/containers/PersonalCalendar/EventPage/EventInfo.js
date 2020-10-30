@@ -584,10 +584,14 @@ class EventInfo extends React.Component{
 
 
             <div className = 'eventTitle'> {this.capitalize(title)} </div>
-            <div className = "eventDate"> {date} </div>
-            <div className = "eventTime">{start_time}-{end_time}</div>
 
+            <br/>
+            <br/>
+            <br/>
+            <div className = "eventTime">Host</div>
             <div className = "eventHost">
+
+
               <Avatar
               src = {"http://127.0.0.1:8000"+host.profile_picture}
               />
@@ -608,7 +612,8 @@ class EventInfo extends React.Component{
           <div className = 'eventInfo'>
 
             <div className = "aboutEvent"> About the Event </div>
-
+              <div className = "eventDate"> {date} </div>
+              <div className = "eventTime">{start_time}-{end_time}</div>
             {
               content === "" ?
 
@@ -685,7 +690,7 @@ class EventInfo extends React.Component{
             onClick = {() => this.onChangeBackgroundOpen()}
             >
             <i class="far fa-image"></i>
-            <div style = {{fontSize: "8px", marginBottom: "20px"}}>
+            <div style = {{fontSize: "14px", marginBottom: "20px"}}>
             Change Background
             </div>
             </div>
@@ -695,7 +700,7 @@ class EventInfo extends React.Component{
             onClick={() => this.onEditClick()}
             >
             <i class="fas fa-pen" ></i>
-            <div style = {{fontSize: "15px"}}>
+            <div style = {{fontSize: "14px"}}>
             Edit Event
             </div>
             </div>
