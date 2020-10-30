@@ -123,6 +123,7 @@ class SocialEventPage extends React.Component{
       info = {this.props.socialEventInfo}
       userId = {this.props.id}
       active = {this.state.showChats}
+      history = {this.props.history}
        />
 
 

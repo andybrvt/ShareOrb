@@ -169,6 +169,14 @@ class SocialEventInfo extends React.Component{
 
   onDeleteSocialEvent = () =>{
     console.log(this.props.info.id)
+    authAxios.delete('http://127.0.0.1:8000/mySocialCal/socialEvent/delete/'+this.props.info.id)
+    this.props.closeSocialModal()
+    if(this.props.history){
+      this.props.history.push('/current-user/')
+    }
+    // this.setState({
+    //   showDeleteModal: false,
+    // })
   }
 
 
@@ -437,7 +445,8 @@ class SocialEventInfo extends React.Component{
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateSocialEventBackground: backgroundPic => dispatch(socialActions.updateSocialEventBackground(backgroundPic))
+    updateSocialEventBackground: backgroundPic => dispatch(socialActions.updateSocialEventBackground(backgroundPic)),
+    closeSocialModal: () => dispatch(socialActions.closeSocialModal()),
   }
 }
 

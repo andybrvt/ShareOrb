@@ -92,6 +92,18 @@ class WebSocketSocialEventPage{
 
   }
 
+  // sendSocialEventDelete = (eventId) => {
+  //   // This function will delete the social event from your page
+  //   // Then we have to find all the personal cal evnets from people's calendar
+  //   // and delete all of them too but that is for later
+  //   console.log(editId)
+  //   this.setSocialMessage({
+  //     command: 'send_social_event_delete',
+  //     eventId: eventId
+  //   })
+  //
+  // }
+
   socketNewSocialMessage(data){
     // This will be the function that will be calling the callbacks
     console.log('call backs')

@@ -116,3 +116,9 @@ class SocialEventBackgroundUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.SocialEventBackgroundSerializer
     lookup_field = "id"
     queryset = models.SocialCalEvent.objects.all()
+
+
+class DeleteSocialEventView(generics.RetrieveDestroyAPIView):
+    serializer_class = serializers.SocialCalEventSerializer
+    lookup_field = "id"
+    queryset = models.SocialCalEvent.objects.all()
