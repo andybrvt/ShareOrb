@@ -99,10 +99,18 @@ class SocialEventPage extends React.Component{
 
   render(){
 
+    let backgroundImage = ""
+    if(this.props.socialEventInfo.backgroundImg){
+      backgroundImage = this.props.socialEventInfo.backgroundImg
+    }
+
     console.log(this.props)
     return (
       <div className ={`socialEventPageContainer ${this.state.showChats ? "" : "active"}` }>
 
+      <img
+      className = "socialEventBackgroundPic"
+      src = {'http://127.0.0.1:8000'+backgroundImage} />
 
       <div className = "showChatWords"> Show chats </div>
       <Switch

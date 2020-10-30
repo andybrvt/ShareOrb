@@ -17,6 +17,19 @@
   transform: translateX(-48%);
 }
 
+.socialEventPageContainer .socialEventBackgroundPic{
+  width: 100%;
+  filter: brightness(0) invert(1);
+  transition: 0.5s;
+}
+
+.socialEventPageContainer.active .socialEventBackgroundPic{
+  /* filter: brightness(0) invert(1); */
+  filter: brightness(100%) blur(8px);
+  transition: 0.5s;
+
+}
+
 .socialEventPageContainer .showChatSwitch{
   position: absolute;
   left: 65.5%;
@@ -75,7 +88,7 @@
   transition: 0.5s;
 }
 .socialEventInfoContainerContainer.active .socialEventInfoContainer{
-  width: 1066px;
+  width: 1076px;
 }
 
 
@@ -203,6 +216,7 @@
   height: 100%;
   padding: 50px 220px;
   transition: 0.5s;
+  background: white;
 }
 
 .socialEventInfoContainerContainer.active .socialEventInfoContainer .eventInfoView .eventInfo{
@@ -273,6 +287,7 @@
   height: 96%;
   background-color: white;
   overflow: auto;
+  padding: 7px;
   /* background-color: red; */
 }
 
