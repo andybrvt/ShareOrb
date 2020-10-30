@@ -226,7 +226,8 @@ class SocialEventInfo extends React.Component{
     }
 
     return (
-      <div className = "socialEventInfoContainer">
+      <div className = {`socialEventInfoContainerContainer ${this.props.active ? "" : "active"}` }>
+      <div className = "socialEventInfoContainer" >
 
       {
         this.state.edit ?
@@ -400,6 +401,7 @@ class SocialEventInfo extends React.Component{
 
       </div>
 
+    </div>
     )
   }
 

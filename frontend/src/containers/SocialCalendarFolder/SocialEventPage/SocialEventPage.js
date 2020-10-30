@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Switch } from 'antd';
 
 import SocialEventInfo from "./SocialEventInfo";
 import SocialEventGroupChat from "./SocialEventGroupChat";
@@ -13,6 +14,11 @@ class SocialEventPage extends React.Component{
   // This will retrive the values of the invidual evnets and reutrns them
   constructor(props){
     super(props)
+
+  }
+
+  state = {
+    showChats: false,
   }
 
   initialiseSocialEvent(){
@@ -72,15 +78,43 @@ class SocialEventPage extends React.Component{
 
   }
 
+  // onShowViewChat = () => {
+  //   this.setState({
+  //     showChats: true
+  //   })
+  // }
+  //
+  // onCloseViewChat = () => {
+  //   this.setState({
+  //     showChats: false
+  //   })
+  // }
+
+  onShowChatChange = (checked) => {
+    console.log(checked)
+    this.setState({
+      showChats: checked
+    })
+  }
+
   render(){
 
     console.log(this.props)
     return (
-      <div className = "socialEventPageContainer">
+      <div className ={`socialEventPageContainer ${this.state.showChats ? "" : "active"}` }>
+
+
+      <div className = "showChatWords"> Show chats </div>
+      <Switch
+      className = "showChatSwitch"
+
+      defaultChecked checked = {this.state.showChats} onChange={this.onShowChatChange} />
+
 
       <SocialEventInfo
       info = {this.props.socialEventInfo}
       userId = {this.props.id}
+      active = {this.state.showChats}
        />
 
 
@@ -88,7 +122,9 @@ class SocialEventPage extends React.Component{
       messages = {this.props.socialEventMessages}
       id = {this.props.id}
       eventId = {this.props.socialEventInfo.id}
+      active = {this.state.showChats}
        />
+
       </div>
     )
   }

@@ -99,7 +99,7 @@ class SocialEventGroupChat extends React.Component{
       },
     ];
     return (
-      <div className = "socialEventGroupChat">
+      <div className = {`socialEventGroupChat ${this.props.active ? "" : "active"}`}>
          <div className = "socialMessageList">
          <List
              itemLayout="horizontal"

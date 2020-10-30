@@ -216,9 +216,9 @@
   text-align: center;
   padding-top: 3px;
 }
-.editEventBackButtonContainer:hover{
-  background-color: whitesmoke;
-}
+  .editEventBackButtonContainer:hover{
+    background-color: whitesmoke;
+  }
 
 
 .eventGroupChat{
