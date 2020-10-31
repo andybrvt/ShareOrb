@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Switch, notification } from 'antd';
+import { Switch, notification, Button } from 'antd';
 import SocialEventInfo from "./SocialEventInfo";
 import SocialEventGroupChat from "./SocialEventGroupChat";
 import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
@@ -102,14 +102,21 @@ class SocialEventPage extends React.Component{
     })
   }
 
-  onProfileReturn = (key) =>{
-    const username = this.props.socialEventInfo.host.username
-    this.props.history.push("/explore/"+username)
-    notification.close(key);
-  }
 
   openNotification = () => {
-  const key = `open${Date.now()}`;
+    const key = `open${Date.now()}`;
+    const username = this.props.socialEventInfo.host.username
+
+      const btn = (
+        <Button type="primary" size="small" onClick={() => {
+            this.props.history.push("/explore/"+username)
+            notification.close(key)
+
+        }}>
+          Return
+        </Button>
+      );
+
 
     // This is used to indicate that the event has been deleted and exist
     // out of the event
@@ -120,8 +127,9 @@ class SocialEventPage extends React.Component{
     onClick: (key) => {
       this.onProfileReturn(key);
     },
-    duration: 0,
+    btn,
     key,
+    duration: 0,
 
   });
 };
