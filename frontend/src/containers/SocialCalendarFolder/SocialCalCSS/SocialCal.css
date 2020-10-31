@@ -365,6 +365,10 @@
   width: 60px;
   height: 30px;
 }
+.joinEventButtonCover:hover{
+  filter: brightness(90%);
+}
+
 .joinEventButtonCover .joinText{
   position: relative;
   left: 22%;
@@ -384,8 +388,34 @@
   position: absolute;
   left: 150px;
   top: 10%;
-
 }
+
+.alreadyJoinButtonCover:hover{
+  filter:brightness(90%);
+}
+
+
+.alreadyJoinButtonCoverHost{
+  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px;
+  width: 60px;
+  height: 30px;
+  position: absolute;
+  left: 150px;
+  top: 10%;
+}
+.alreadyJoinButtonCoverHost .joinText{
+  position: relative;
+  left: 20%;
+  top: 2px;
+  transform: translateX(-50%);
+}
+
+
+
 .alreadyJoinButtonCover .joinText{
   position: relative;
   left: 20%;
@@ -440,7 +470,7 @@
 }
 
 .viewEventButtonCover:hover{
-  filter: brightness(70%);
+  filter: brightness(90%);
 }
 
 

@@ -59,7 +59,7 @@ class SocialCellCoverEvents extends React.Component{
 
 
   render() {
-    console.log(this.props)
+    console.log(new Date(this.props.cellDay))
     const data = [
       {
         title: 'Ant Design Title 1',
@@ -104,12 +104,12 @@ class SocialCellCoverEvents extends React.Component{
                   </div>
                 </div>
 
-                {dateFns.isAfter(dateFns.endOfDay(dateFns.addHours(new Date(this.props.cellDate), 7)), new Date())?
+                {dateFns.isAfter(dateFns.endOfDay(new Date(this.props.cellDay)), new Date())?
                   <div>
                   {
                     this.checkUser(item.persons) ?
                       item.host.id === this.props.curId ?
-                    <div className = 'alreadyJoinButtonCover'>
+                    <div className = 'alreadyJoinButtonCoverHost'>
                       <span className = 'joinText'> Host </span>
                     </div>
 
