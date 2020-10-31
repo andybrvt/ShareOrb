@@ -106,35 +106,55 @@ class SocialEventPage extends React.Component{
 
     console.log(this.props)
     return (
-      <div className ={`socialEventPageContainer ${this.state.showChats ? "" : "active"}` }>
+      <div>
+      {
+        this.props.socialEventInfo.title ?
 
-      <img
-      className = "socialEventBackgroundPic"
-      src = {'http://127.0.0.1:8000'+backgroundImage} />
+        <div className ={`socialEventPageContainer ${this.state.showChats ? "" : "active"}` }>
 
-      <div className = "showChatWords"> Show chats </div>
-      <Switch
-      className = "showChatSwitch"
+        <img
+        className = "socialEventBackgroundPic"
+        src = {'http://127.0.0.1:8000'+backgroundImage} />
 
-      defaultChecked checked = {this.state.showChats} onChange={this.onShowChatChange} />
+        <div className = "showChatWords"> Show chats </div>
+        <Switch
+        className = "showChatSwitch"
 
-
-      <SocialEventInfo
-      info = {this.props.socialEventInfo}
-      userId = {this.props.id}
-      active = {this.state.showChats}
-      history = {this.props.history}
-       />
+        defaultChecked checked = {this.state.showChats} onChange={this.onShowChatChange} />
 
 
-      <SocialEventGroupChat
-      messages = {this.props.socialEventMessages}
-      id = {this.props.id}
-      eventId = {this.props.socialEventInfo.id}
-      active = {this.state.showChats}
-       />
+        <SocialEventInfo
+        info = {this.props.socialEventInfo}
+        userId = {this.props.id}
+        active = {this.state.showChats}
+        history = {this.props.history}
+         />
+
+
+        <SocialEventGroupChat
+        messages = {this.props.socialEventMessages}
+        id = {this.props.id}
+        eventId = {this.props.socialEventInfo.id}
+        active = {this.state.showChats}
+         />
+
+        </div>
+
+
+        :
+
+        <div className = "socialEventDoesNotPage">
+          <i class="fas fa-exclamation-circle"></i>
+          <div>
+          Event page does not exist anymore.
+          </div>
+        </div>
+
+
+      }
 
       </div>
+
     )
   }
 }

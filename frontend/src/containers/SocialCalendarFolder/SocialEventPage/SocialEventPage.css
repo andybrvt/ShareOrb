@@ -1,4 +1,16 @@
 /* CSS for the whole container */
+
+/* CSS for the no event page */
+.socialEventDoesNotPage{
+  /* background-color: red; */
+  text-align: center;
+  font-size: 40px;
+  height: 690px;
+  padding-top: 110px;
+  position: relative;
+}
+
+
 .socialEventPageContainer{
   background-color: white;
   display: flex;
