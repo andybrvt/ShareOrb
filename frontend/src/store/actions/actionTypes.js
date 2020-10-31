@@ -113,6 +113,7 @@ export const LOAD_SOCIAL_EVENT_INFO = "LOAD_SOCIAL_EVENT_INFO";
 export const SEND_SOCIAL_EVENT_MESSAGE = "SEND_SOCIAL_EVENT_MESSAGE";
 export const UPDATE_SOCIAL_EVENT_PAGE = "UPDATE_SOCIAL_EVENT_PAGE";
 export const UPDATE_SOCIAL_EVENT_BACKGROUND = "UPDATE_SOCIAL_EVENT_BACKGROUND";
+export const SEND_DELETE_SOCIAL_EVENT_NOTI = "SEND_DELETE_SOCIAL_EVENT_NOTI";
 // action type > actions > dispatch > reducers > state
 // when you set a variable in all caps it now becomes a global variable
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Switch } from 'antd';
-
+import { Switch, notification } from 'antd';
 import SocialEventInfo from "./SocialEventInfo";
 import SocialEventGroupChat from "./SocialEventGroupChat";
 import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
@@ -71,6 +70,12 @@ class SocialEventPage extends React.Component{
 
 
     }
+
+    if(newProps.showDeleted){
+      this.openNotification();
+    }
+
+
   }
 
   componentWillUnmount(){
@@ -96,6 +101,30 @@ class SocialEventPage extends React.Component{
       showChats: checked
     })
   }
+
+  onProfileReturn = (key) =>{
+    const username = this.props.socialEventInfo.host.username
+    this.props.history.push("/explore/"+username)
+    notification.close(key);
+  }
+
+  openNotification = () => {
+  const key = `open${Date.now()}`;
+
+    // This is used to indicate that the event has been deleted and exist
+    // out of the event
+  notification.open({
+    message: 'Event Deleted',
+    description:
+      'This event has been deleted by the host. Chats will not work anymore. Please click to return to user profile page',
+    onClick: (key) => {
+      this.onProfileReturn(key);
+    },
+    duration: 0,
+    key,
+
+  });
+};
 
   render(){
 
@@ -163,7 +192,8 @@ const mapStateToProps = state => {
   return {
     socialEventInfo: state.socialCal.selectedSocialEvent,
     socialEventMessages: state.socialCal.socialEventMessages,
-    id: state.auth.id
+    id: state.auth.id,
+    showDeleted: state.socialCal.showDeleted
   }
 }
 

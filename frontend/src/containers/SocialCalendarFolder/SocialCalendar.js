@@ -35,6 +35,11 @@ import './SocialCalCSS/SocialCal.css';
 
 class SocialCalendar extends React.Component{
 
+  constructor(props){
+    super(props)
+    this.props.closeSocialModal()
+  }
+
   state = {
     currentMonth: new Date(),
     selectedDate: new Date(),

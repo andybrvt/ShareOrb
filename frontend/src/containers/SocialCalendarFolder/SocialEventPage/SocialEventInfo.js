@@ -169,14 +169,19 @@ class SocialEventInfo extends React.Component{
 
   onDeleteSocialEvent = () =>{
     console.log(this.props.info.id)
-    authAxios.delete('http://127.0.0.1:8000/mySocialCal/socialEvent/delete/'+this.props.info.id)
-    this.props.closeSocialModal()
+
+    // This sendSocialEventDelete will send notifications of whoever is still in the
+    // event room that the event has been delete so refresh... nothign you do matters 
+    SocialEventPageWebSocketInstance.sendSocialEventDelete(this.props.info.id)
+
+    // authAxios.delete('http://127.0.0.1:8000/mySocialCal/socialEvent/delete/'+this.props.info.id)
+    // this.props.closeSocialModal()
     if(this.props.history){
       this.props.history.push('/current-user/')
     }
-    // this.setState({
-    //   showDeleteModal: false,
-    // })
+    this.setState({
+      showDeleteModal: false,
+    })
   }
 
 

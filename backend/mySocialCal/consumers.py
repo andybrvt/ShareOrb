@@ -74,6 +74,20 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         }
         self.send_social_message(content)
 
+    def send_social_event_delete(self, data):
+        print(data)
+        selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+        serializer = SocialCalEventSerializer(selectedEvent).data
+        personList = serializer['persons'].copy()
+        personList.remove(serializer['host'])
+        selectedEvent.delete();
+
+        content = {
+            "command": "delete_social_eventNotification",
+            "socialEventId": data['eventId']
+        }
+        self.send_social_message(content)
+
     def send_social_message(self, socialEventMessage):
         # This will be for sending inforamtion inot the channel layer to the groups
         channel_layer = get_channel_layer()
@@ -114,6 +128,8 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
             self.send_social_event_message(data)
         if data["command"] == "send_social_edit_event_info":
             self.send_social_edit_event_info(data)
+        if data["command"] == "send_social_event_delete":
+            self.send_social_event_delete(data)
 
     def new_social_message(self, message):
         messageObj = message['eventMessage']

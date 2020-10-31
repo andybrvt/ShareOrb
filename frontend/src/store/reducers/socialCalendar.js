@@ -18,7 +18,9 @@ const initialState = {
   test: '',
   // selectedSocialEvent is for the event page
   selectedSocialEvent: {},
-  socialEventMessages: []
+  socialEventMessages: [],
+  // Show will indicate that the event has been deleted
+  showDeleted: false,
 
 }
 
@@ -168,6 +170,12 @@ const updateSocialEventBackground = (state, action) => {
   })
 }
 
+const sendDeleteSocialEventNoti = (state, action) => {
+  return updateObject(state, {
+    showDeleted: true
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.NEXT_MONTH_SOCIAL:
@@ -204,6 +212,8 @@ const reducer = (state = initialState, action) => {
       return updateSocialEventPage(state, action);
     case actionTypes.UPDATE_SOCIAL_EVENT_BACKGROUND:
       return updateSocialEventBackground(state, action);
+    case actionTypes.SEND_DELETE_SOCIAL_EVENT_NOTI:
+      return sendDeleteSocialEventNoti(state, action);
     default:
       return state;
   }

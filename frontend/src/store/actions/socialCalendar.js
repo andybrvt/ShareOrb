@@ -127,3 +127,12 @@ export const updateSocialEventBackground = (backgroundPic) => {
     backgroundPic: backgroundPic
   }
 }
+
+
+export const sendDeleteSocialEventNoti = () => {
+  // This will jsut indicate that the event has been deleted and you should
+  // return the social cal
+  return{
+    type: actionTypes.SEND_DELETE_SOCIAL_EVENT_NOTI
+  }
+}
