@@ -52,6 +52,11 @@ class SocialCellCoverEvents extends React.Component{
     ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
+  onCoverViewClick = (eventId) => {
+    console.log(eventId)
+    this.props.history.push("/socialcal/event/"+eventId)
+  }
+
 
   render() {
     console.log(this.props)
@@ -129,14 +134,18 @@ class SocialCellCoverEvents extends React.Component{
 
 
 
-                  <div className = 'viewEventButtonCover'>
+                  <div
+                  onClick = {() => this.onCoverViewClick(item.id)}
+                  className = 'viewEventButtonCover'>
                     <span className = 'viewText'> View </span>
                   </div>
                 </div>
 
                 :
 
-                <div className = 'alreadyViewButtonCoverPass'>
+                <div
+                onClick = {() => this.onCoverViewClick(item.id)}
+                className = 'alreadyViewButtonCoverPass'>
                   <span className = 'viewText'> View </span>
                 </div>
 

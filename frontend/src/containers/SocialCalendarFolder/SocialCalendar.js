@@ -324,7 +324,9 @@ class SocialCalendar extends React.Component{
               curId = {this.props.curId}
               cellId = {toDoStuff[0].id}
               cellDay = {cloneDay}
-              events = {toDoStuff[0].get_socialCalEvent}/>
+              events = {toDoStuff[0].get_socialCalEvent}
+              history = {this.props.history}
+              />
               </div>
 
               :

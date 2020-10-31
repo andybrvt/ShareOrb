@@ -393,6 +393,7 @@
   transform: translateX(-50%);
 }
 
+
 .alreadyViewButtonCoverPass{
   background-color: gainsboro;
   border: 1px solid gainsboro;
@@ -406,6 +407,10 @@
   left: 150px;
   top: 30%;
 }
+.alreadyViewButtonCoverPass:hover{
+  filter: brightness(90%);
+}
+
 .alreadyViewButtonCoverPass .viewText{
   position: relative;
   left: 20%;
@@ -433,6 +438,12 @@
   left: 150px;
   top: 50%;
 }
+
+.viewEventButtonCover:hover{
+  filter: brightness(70%);
+}
+
+
 .viewEventButtonCover .viewText{
   position: relative;
   left: 20%;
