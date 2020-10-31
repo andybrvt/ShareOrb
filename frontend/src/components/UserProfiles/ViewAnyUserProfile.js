@@ -114,6 +114,8 @@ class UserProfileView extends React.Component {
 
 
 	render() {
+
+    console.log(this.props)
     if (this.state.id){
       var userData = this.getProfileInfo(this.state.id)
     }
@@ -122,7 +124,9 @@ class UserProfileView extends React.Component {
 
 		return (
 			<div>
-        <PersonalProfile curProfile = {userData} />
+        <PersonalProfile
+        history = {this.props.history}
+        curProfile = {userData} />
       </div>
 
 		)
