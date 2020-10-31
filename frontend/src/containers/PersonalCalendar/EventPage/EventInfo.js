@@ -588,22 +588,31 @@ class EventInfo extends React.Component{
             <br/>
             <br/>
             <br/>
-            <div className = "attendees">Host</div>
-            <div className = "eventHost">
+
+          <div class="flex-container eventCard"
+            style={{width:'400px', height:'125px'}}
+
+          >
+            <div className = "attendees flex-child">Host
+              <div className = "eventHost">
 
 
-              <Avatar
-              src = {"http://127.0.0.1:8000"+host.profile_picture}
-              />
-              <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                <Avatar
+                src = {"http://127.0.0.1:8000"+host.profile_picture}
+                />
+                <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+              </div>
+
             </div>
 
-
-            <div className = "attendees"> {invited.length} Invited </div>
-            <Liking style={{marginTop:'-200px'}} like_people={invited}/>
+            {/*if no one going , THEN show invited else just show invited*/}
+            <div className = "attendees flex-child"> {invited.length} Invited
+              <Liking like_people={invited}/>
             </div>
 
+            </div>
 
+          </div>
 
 
 
@@ -612,7 +621,7 @@ class EventInfo extends React.Component{
 
           <div className = 'eventInfo'>
 
-            <div className = "aboutEvent"> About the Event </div>
+            <div className = "aboutEvent eventCard"> Event Details </div>
               <div className = "eventDate"> {date} </div>
               <div className = "eventTime">{start_time}-{end_time}</div>
             {
