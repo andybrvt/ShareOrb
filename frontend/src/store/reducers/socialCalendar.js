@@ -65,12 +65,12 @@ const closeSocialPictureModal = (state, action) => {
 
 const addSocialLikeOldM = (state, action) => {
   return updateObject (state, {
-    socialObject: [{
+    socialObject: state.socialObject[0] ? [{
         ...state.socialObject[0],
         people_like: [... state.socialObject[0].people_like, action.socialObj.userObj]
 
       }
-    ]
+    ] : []
   })
 }
 
@@ -82,10 +82,10 @@ const addSocialUnLikeM = (state, action) => {
   }
 
   return updateObject(state, {
-    socialObject: [{
+    socialObject: state.socialObject[0] ? [{
       ...state.socialObject[0],
       people_like: state.socialObject[0].people_like.filter(removeUnliker)
-    }]
+    }] : []
   })
 }
 

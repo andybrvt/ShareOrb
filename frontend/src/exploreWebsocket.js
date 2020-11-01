@@ -116,8 +116,19 @@ class WebSocketExplore {
       }
       this.callbacks['new_unFollower'](followObj)
     } else if (command === 'send_social_like_old'){
+      //EFFICENTCY GOOD (O(N) for redux) COULD BE BETTER MAYBE
+
+
       // This is used for when someone sends a like to a old cal cell
       const socialCalCellId = parsedData.socialCalCellObjId
+
+      // To improve run time, I will just pass in all the events as a whole,
+      // so you do not need to loop through to search for the event
+
+      // SocialCal will pretty much be holding all the calcells that you have made
+      const socialCal = parsedData.ownerSocialCal
+
+
       // Remember that the userObj is the one that we would use to add in to the
       // likes
 
@@ -126,6 +137,7 @@ class WebSocketExplore {
       // make another redux fucntion to accomomate fo rthe socialcal reducer
       const userObj = parsedData.userObj
       const exploreObj = {
+        socialCal: socialCal,
         socialCalCell: socialCalCellId,
         userObj: userObj
       }
@@ -134,6 +146,8 @@ class WebSocketExplore {
       this.callbacks['social_like_old'](exploreObj)
       this.callbacks['social_like_old_m'](exploreObj)
     } else if (command === 'send_social_unlike'){
+
+
       // This will be used for indicating the user and then removing the unlike
       // user from the  social cal cell people like
       const socialCalCellId = parsedData.socialCalCellObjId
@@ -186,6 +200,8 @@ class WebSocketExplore {
 
 
     } else if (command == 'add_user_social_event'){
+      // EFFICENTCY: OK(COULD BE BETTER) (MAYBE REPLACE THE WHOLE PROFILE BUT WHO KNOWS)
+
       // This will add the user into the evnets of the calendar ... so this is gonna
       // take a lot of searching SO WE GOTTA FIX THIS LATER ON
 
@@ -206,6 +222,8 @@ class WebSocketExplore {
       this.callbacks['add_user_social_event'](exploreObj)
       this.callbacks['add_user_social_event_m'](exploreObj)
     } else if (command === "remove_user_social_event"){
+      // EFFICENTCY OK (COULD BE BETTER)
+
       // This will just remove the user from the social event
       // A way to help reduce the run time of the evnet is rather than trying to add
       //  or remove a specific person, just replace tehw hoel cell

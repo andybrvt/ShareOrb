@@ -180,33 +180,24 @@ export const addSocialLikeOld = (state, action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
   const userLike = action.exploreObj.userObj
+
+  const calendarCells = action.exploreObj.socialCal
   let curProfileId = ''
 
   if (state.profile){
     curProfileId = state.profile.id
   }
 
-  console.log('like old reducer')
   return updateObject(state, {
     profiles: state.profiles.map(
       profile => profile.id === calendarOwnerId ? {
         ... profile,
-        get_socialCal: profile.get_socialCal.map(
-          socialCell => socialCell.id === calendarCalCellId ? {
-            ...socialCell,
-            people_like: [...socialCell.people_like, userLike]
-          } : socialCell
-        )
+        get_socialCal: calendarCells
       } : profile
     ),
     profile: curProfileId === calendarOwnerId ? {
       ... state.profile,
-      get_socialCal: state.profile.get_socialCal.map(
-        socialCell => socialCell.id === calendarCalCellId ? {
-          ... socialCell,
-          people_like: [...socialCell.people_like, userLike]
-        } : socialCell
-      )
+      get_socialCal: calendarCells
     } : state.profile
   })
 }

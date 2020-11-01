@@ -90,6 +90,29 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 
+class UserSocialCalSerializer(serializers.ModelSerializer):
+
+    # This serializer is used mostly for the social cal to make the run time
+    # more efficent
+
+    get_socialCal = serializers.StringRelatedField(many = True)
+
+
+    class Meta:
+        model = models.User
+        fields = ("get_socialCal",)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        socialCalList = []
+        for socialCells in data['get_socialCal']:
+            socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
+            socialCalList.append(socialCell)
+        data['get_socialCal'] = socialCalList
+        return data
+
+
+
 
 class ProfilePicSerializer(serializers.ModelSerializer):
     class Meta:

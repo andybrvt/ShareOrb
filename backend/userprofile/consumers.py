@@ -24,6 +24,7 @@ from mySocialCal.models import SocialCalEvent
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
 from mySocialCal.serializers import SocialCalEventSerializer
+from .serializers import UserSocialCalSerializer
 
 
 
@@ -628,6 +629,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         #The ownerobj wil be the perosn that owns the post
         ownerObj = FollowUserSerializer(owner, many = False).data
 
+        ownerSocialCalList = UserSocialCalSerializer(owner, many = False).data['get_socialCal']
 
 
         # you probally gotta make 2 redux functions though lol
@@ -654,12 +656,14 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 'command': 'send_social_like_old',
                 'userObj': userObj,
                 'socialCalCellObjId': socialCalCellObj,
+                'ownerSocialCal': ownerSocialCalList,
                 'reciever': ownerObj
             }
             contentLiker = {
                 'command': 'send_social_like_old',
                 'userObj': userObj,
                 'socialCalCellObjId': socialCalCellObj,
+                'ownerSocialCal': ownerSocialCalList,
                 'reciever': userObj
             }
 
