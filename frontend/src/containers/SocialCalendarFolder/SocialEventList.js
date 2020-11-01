@@ -50,6 +50,14 @@ class SocialEventList extends React.Component{
     ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
+  sendLeaveUserEvent = (userId, eventId, socialCalCellId) => {
+    // This willb e sued to sne dthe useId and the eventid to the websocket
+    // so that you can remove some from an event because they want to leave
+
+    console.log(userId, eventId)
+    ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
+  }
+
   viewSocialEventPage = (eventId) => {
     console.log(eventId)
     this.props.history.push("/socialcal/event/"+eventId)
@@ -143,7 +151,9 @@ class SocialEventList extends React.Component{
 
                 :
 
-                <div className = 'alreadyJoinButton'>
+                <div
+                onClick = {() => this.sendLeaveUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
+                className = 'alreadyJoinButton'>
                 <span className = 'joinText'> Leave </span>
               </div>
 

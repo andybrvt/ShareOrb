@@ -52,6 +52,15 @@ class SocialCellCoverEvents extends React.Component{
     ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
+
+  sendLeaveUserEvent = (userId, eventId, socialCalCellId) => {
+    // This willb e sued to sne dthe useId and the eventid to the websocket
+    // so that you can remove some from an event because they want to leave
+
+    console.log(userId, eventId)
+    ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
+  }
+
   onCoverViewClick = (eventId) => {
     console.log(eventId)
     this.props.history.push("/socialcal/event/"+eventId)
@@ -59,6 +68,7 @@ class SocialCellCoverEvents extends React.Component{
 
 
   render() {
+    console.log(this.props)
     console.log(new Date(this.props.cellDay))
     const data = [
       {
@@ -115,7 +125,9 @@ class SocialCellCoverEvents extends React.Component{
 
                     :
 
-                    <div className = 'alreadyJoinButtonCover'>
+                    <div
+                    onClick = {() => this.sendLeaveUserEvent(this.props.curId, item.id, this.props.cellId)}
+                    className = 'alreadyJoinButtonCover'>
                     <span className = 'leaveText'> Leave </span>
                   </div>
 

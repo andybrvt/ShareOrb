@@ -1,6 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
+
+// Profiles will be all the profiles and profile (no s) will be the current user
+// profile
 const initialState = {
   showProfileEdit: false,
   changeProfilePic: false,
@@ -412,6 +415,48 @@ export const addUserSocialEvent = (state, action) => {
 
 }
 
+export const removeUserSocialEvent = (state, action) => {
+  // What is gonna happen is first you will change all cell in profiles (all the profiles)
+  // that are not including th currentProfile. You will prtty much find the host of that event
+  // profile and find the right cell and just replace it, you do not need to find the specific
+  // event and then remoove the user.
+  // For the host you will see a user getting remove from your event, just replace the whole cell
+  const socialCalCellObj = action.exploreObj.socialCalCellObj
+  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
+  const userObj = action.exploreObj.userObj
+
+
+  let curProfileId = ''
+
+  if (state.profile){
+    curProfileId = state.profile.id
+  }
+
+  return updateObject(state, {
+    profiles: state.profiles.map(
+      profile  => profile.id === calendarOwnerId ? {
+        ...profile,
+        get_socialCal: profile.get_socialCal.map(
+          socialCell => socialCell.id === socialCalCellObj.id ? {
+            ... socialCell,
+            get_socialCalEvent: socialCalCellObj.get_socialCalEvent
+          } : socialCell
+        )
+      } : profile
+    ),
+    profile: curProfileId === calendarOwnerId ? {
+      ... state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        socialCell => socialCell.id === socialCalCellObj.id ? {
+          ...socialCell,
+          get_socialCalEvent: socialCalCellObj.get_socialCalEvent
+        } : socialCell
+      )
+    } : state.profile
+
+  })
+}
+
 
 
 
@@ -450,6 +495,8 @@ const reducer = (state = initialState, action) => {
       return addSocailCalCell(state, action)
     case actionTypes.ADD_USER_SOCIAL_EVENT:
       return addUserSocialEvent(state, action)
+    case actionTypes.REMOVE_USER_SOCIAL_EVENT:
+      return removeUserSocialEvent(state, action)
     default:
       return state;
   };

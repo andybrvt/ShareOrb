@@ -92,6 +92,14 @@ export const addUserSocialEventM = (socialObj) => {
   }
 }
 
+export const removeUserSocialEventM = (socialObj) => {
+  // This will remove user from the social events in the calendar cell modal
+  return {
+    type: actionTypes.REMOVE_USER_SOCIAL_EVENT_M,
+    socialObj: socialObj
+  }
+}
+
 export const loadSocialEventInfo = (socialEvent) => {
   // This will load the information about soical event, like the initial
   // connect

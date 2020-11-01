@@ -71,7 +71,9 @@ class App extends Component {
       this.props.addSocialCalCellNew.bind(this),
       this.props.addSocialCalCellNewM.bind(this),
       this.props.addUserSocialEvent.bind(this),
-      this.props.addUserSocialEventM.bind(this)
+      this.props.addUserSocialEventM.bind(this),
+      this.props.removeUserSocialEvent.bind(this),
+      this.props.removeUserSocialEventM.bind(this)
     )
 
     EventPageWebSocketInstance.addCallbacks(
@@ -170,6 +172,8 @@ const mapDispatchToProps = dispatch => {
     addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj)),
     addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
     addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj)),
+    removeUserSocialEvent: exploreObj => dispatch(exploreActions.removeUserSocialEvent(exploreObj)),
+    removeUserSocialEventM: socialObj => dispatch(socialActions.removeUserSocialEventM(socialObj)),
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),
     updateSocialEventPage: updatedSocialEvent => dispatch(socialActions.updateSocialEventPage(updatedSocialEvent)),

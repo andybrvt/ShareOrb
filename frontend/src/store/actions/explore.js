@@ -119,6 +119,14 @@ export const addUserSocialEvent = (exploreObj) => {
   }
 }
 
+export const removeUserSocialEvent = (exploreObj) => {
+  // This will be used to remove a user from the correct event
+  return{
+    type: actionTypes.REMOVE_USER_SOCIAL_EVENT,
+    exploreObj: exploreObj
+  }
+}
+
 
 export const addSocialCalCellNew = (exploreObj) => {
 

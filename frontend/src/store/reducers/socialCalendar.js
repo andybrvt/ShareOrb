@@ -138,6 +138,18 @@ const addUserSocialEventM = (state, action) => {
   })
 }
 
+const removeUserSocialEventM = (state, action) => {
+  const userObj = action.socialObj.userObj
+  const socialEvents = action.socialObj.socialCalCellObj.get_socialCalEvent
+
+  return updateObject(state, {
+    socialObject: state.socialObject[0] ? [{
+      ...state.socialObject[0],
+      get_socialCalEvent: socialEvents
+    }] : []
+  })
+}
+
 const loadSocialEventInfo = (state, action) => {
   // Load out the social event with all the information
 
@@ -204,6 +216,8 @@ const reducer = (state = initialState, action) => {
       return addSocialCellNewM(state, action)
     case actionTypes.ADD_USER_SOCIAL_EVENT_M:
       return addUserSocialEventM (state, action);
+    case actionTypes.REMOVE_USER_SOCIAL_EVENT_M:
+      return removeUserSocialEventM(state, action);
     case actionTypes.LOAD_SOCIAL_EVENT_INFO:
       return loadSocialEventInfo(state, action);
     case actionTypes.SEND_SOCIAL_EVENT_MESSAGE:
