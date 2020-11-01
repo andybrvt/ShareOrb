@@ -586,23 +586,22 @@ class EventInfo extends React.Component{
             <div className = 'eventTitle'> {this.capitalize(title)} </div>
 
             <br/>
-            <br/>
-            <br/>
+
 
           <div class="flex-container eventCard"
-            style={{width:'400px', height:'125px'}}
+            style={{width:'400px', height:'100px'}}
 
           >
             <div className = "attendees flex-child">Host
-              <div className = "eventHost">
-
-
+              <br/>
+              <br/>
+              <span>
                 <Avatar
+                style={{right:'5px'}}
                 src = {"http://127.0.0.1:8000"+host.profile_picture}
                 />
                 <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
-              </div>
-
+              </span>
             </div>
 
             {/*if no one going , THEN show invited else just show invited*/}
@@ -621,9 +620,17 @@ class EventInfo extends React.Component{
 
           <div className = 'eventInfo'>
 
-            <div className = "aboutEvent eventCard"> Event Details </div>
-              <div className = "eventDate"> {date} </div>
-              <div className = "eventTime">{start_time}-{end_time}</div>
+            <div  className = "aboutEvent eventCard" style={{width:'400px', height:'200px'}}> Event Details
+
+              <div class="eventDetails">
+                <div className = "eventDate"> {date} </div>
+                <div className = "eventTime">{start_time}-{end_time}</div>
+              </div>
+
+
+
+             </div>
+
             {
               content === "" ?
 

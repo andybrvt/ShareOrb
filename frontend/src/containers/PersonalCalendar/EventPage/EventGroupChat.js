@@ -99,7 +99,10 @@ class EventGroupChat extends React.Component{
   }
 
     return(
+
+
       <div className = "eventGroupChat">
+        <div>You and 3 others</div>
       { inviteList.length > 0 ?
 
       <div className = 'eventGroupChatContainer'>
@@ -148,7 +151,7 @@ class EventGroupChat extends React.Component{
         </List>
         </div>
 
-        
+
       <div className = 'inputForm'>
 
       <Form>
