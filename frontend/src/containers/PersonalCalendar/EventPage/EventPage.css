@@ -3,15 +3,16 @@
 
 .eventCard{
   position: relative;
-  margin: auto;
   overflow: hidden;
-  width: 520px;
-  height: 350px;
+
   background: gainsboro;
   box-shadow: 5px 5px 15px rgba($rose, .5);
   border-radius: 10px;
-  padding:10px;
+  padding:25px;
+  font-family: 'Segoe UI Regular';
 }
+
+
 
 .flex-container {
     display: flex;
@@ -19,16 +20,22 @@
     /* background: red; */
 }
 
+.eventDetails{
+  font-size: 16px;
+}
+
 .flex-child {
     flex: 1;
+    text-align: center;
+    line-height: 70%;
     /* background: blue; */
 }
 
 .flex-child:first-child {
-    margin-right: 20px;
+    margin-right: 50px;
+    height:25px;
+
 }
-
-
 
 
 
@@ -92,9 +99,11 @@
   display: flex;
 }
 
+
+
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
-  width: 35%;
-  height: 400px;
+  width: 43%;
+  height: 350px;
   padding: 25px;
   background-color: #F5F5F5;
 }
@@ -112,7 +121,8 @@
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .attendees{
   color: black;
-  font-size: 24px;
+  font-size: 16px;
+
   /* margin-top: 10px; */
   /* background-color: red; */
 }
@@ -137,7 +147,7 @@
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
   /* background-color: red; */
   width: 65%;
-  height: 400px;
+  height: 350px;
   border: 10px dashed gainsboro;
   text-align: center;
 
@@ -160,7 +170,7 @@
 
   object-fit: cover;
   width: 500px;
-  height: 400px;
+  height: 350px;
 
 }
 
@@ -267,6 +277,7 @@
 
 
 .eventGroupChat{
+  margin-top: 100px;
   width: 30%;
   /* height: 100%; */
   /* background-color: red; */
