@@ -1,4 +1,38 @@
 /* CSS for the whole container */
+
+
+.eventCard{
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 520px;
+  height: 350px;
+  background: gainsboro;
+  box-shadow: 5px 5px 15px rgba($rose, .5);
+  border-radius: 10px;
+  padding:10px;
+}
+
+.flex-container {
+    display: flex;
+
+    /* background: red; */
+}
+
+.flex-child {
+    flex: 1;
+    /* background: blue; */
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+}
+
+
+
+
+
+
 .eventPageContainer{
   background-color: white;
   display: flex;
@@ -74,9 +108,11 @@
   height: 70px;
   word-break: normal  ;
 }
+
+
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .attendees{
   color: black;
-  font-size: 20px;
+  font-size: 24px;
   /* margin-top: 10px; */
   /* background-color: red; */
 }
