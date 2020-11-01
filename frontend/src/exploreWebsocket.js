@@ -196,12 +196,10 @@ class WebSocketExplore {
 
 
       // You gotta do one for the modal event and then one for the over all calendar
-      const socialCalCellId = parsedData.socialCellId
-      const socialEventObj = parsedData.socialEventObj
+      const socialCalCellObj = parsedData.socialCellObj
       const userObj = parsedData.userObj
       const exploreObj = {
-        socialCalCellId: socialCalCellId,
-        socialEventObj: socialEventObj,
+        socialCalCellObj: socialCalCellObj,
         userObj: userObj
       }
 

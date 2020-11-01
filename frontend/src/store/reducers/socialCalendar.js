@@ -124,16 +124,11 @@ const closeSocialEventModal = (state,action) => {
 const addUserSocialEventM = (state, action) => {
 
   const userObj = action.socialObj.userObj
-  const socialEventId = action.socialObj.socialEventObj.id
+  const socialEvents = action.socialObj.socialCalCellObj.get_socialCalEvent
   return updateObject (state, {
     socialObject: state.socialObject[0] ? [{
       ...state.socialObject[0],
-      get_socialCalEvent: state.socialObject[0].get_socialCalEvent.map(
-        events => events.id === socialEventId ? {
-          ...events,
-          persons: [... events.persons, userObj ]
-        } : events
-      )
+      get_socialCalEvent: socialEvents
     }] : []
   })
 }

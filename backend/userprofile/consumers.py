@@ -864,13 +864,14 @@ class ExploreConsumer(JsonWebsocketConsumer):
         user = get_object_or_404(User, id = data['userId'])
         curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         curSocialEvent.persons.add(user)
-
-        # socialCalCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+        curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
 
 
         socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
+        socialCellObj = SocialCalCellSerializer(curSocialCell).data
+
+
         userObj = FollowUserSerializer(user, many = False).data
-        # socialCalCellObj = SocialCalCellSerializer(socialCalCell, many = False).data
         hostObj = socialEventObj['host']
 
 
@@ -879,18 +880,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
         hostContent = {
         # The host obj will be sent to the channel of the host
             'command': 'add_user_social_event',
-            'socialEventObj': socialEventObj,
             'userObj': userObj,
-            'socialCellId':  data['socialCalCellId'],
+            'socialCellObj': socialCellObj,
             'reciever': hostObj
         }
 
         userContent = {
         # The userObj will be sent to the channel of the user
             'command': 'add_user_social_event',
-            'socialEventObj': socialEventObj,
             'userObj': userObj,
-            'socialCellId':  data['socialCalCellId'],
+            'socialCellObj':socialCellObj,
             'reciever': userObj
         }
 
@@ -908,18 +907,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
         socialCellObj  = SocialCalCellSerializer(curSocialCell).data
-        userObj = FollowUserSerializer(user, many = False).data
 
+
+        userObj = FollowUserSerializer(user, many = False).data
         hostObj = socialEventObj['host']
-        print(socialEventObj['persons'])
 
         hostContent = {
         # This will be sent to the host, pretty used to add in that the a perosn has
         # left one of your events
             'command': 'remove_user_social_event',
-            'socialEventObj': socialEventObj,
             'userObj': userObj,
-            'socialCellId': data['socialCalCellId'],
             'socialCellObj': socialCellObj,
             'reciever': hostObj
         }
@@ -928,9 +925,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This will be sent to the person that wnated to leave the event, this will be sent
         # to show that they left the event
             'command': 'remove_user_social_event',
-            'socialEventObj': socialEventObj,
             'userObj': userObj,
-            'socialCellId': data['socialCalCellId'],
             'socialCellObj': socialCellObj,
             'reciever': userObj
         }

@@ -367,9 +367,12 @@ export const addUserSocialEvent = (state, action) => {
   // Remember that the userObj is the person that is being added to the event
 
 
-  const calendarOwnerId = action.exploreObj.socialEventObj.host.id
-  const calendarCalCellId = action.exploreObj.socialCalCellId
-  const socialEventId = action.exploreObj.socialEventObj.id
+  // To make this more efficent, instead of looking for a specific event,
+  // you can just replace the whole event list again
+
+  const socialCalCellObj = action.exploreObj.socialCalCellObj
+  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
+
   const userObj = action.exploreObj.userObj
 
   let curProfileId = ''
@@ -384,14 +387,9 @@ export const addUserSocialEvent = (state, action) => {
       profile => profile.id === calendarOwnerId ? {
         ... profile,
         get_socialCal: profile.get_socialCal.map(
-          socialCell => socialCell.id === calendarCalCellId ? {
+          socialCell => socialCell.id === socialCalCellObj.id ? {
             ... socialCell,
-            get_socialCalEvent: socialCell.get_socialCalEvent.map(
-              events => events.id === socialEventId ? {
-                ...events,
-                persons: [...events.persons, userObj]
-              }: events
-            )
+            get_socialCalEvent: socialCalCellObj.get_socialCalEvent
           } : socialCell
         )
       } : profile
@@ -399,14 +397,9 @@ export const addUserSocialEvent = (state, action) => {
     profile: curProfileId === calendarOwnerId ? {
       ... state.profile,
       get_socialCal: state.profile.get_socialCal.map(
-        socialCell => socialCell.id === calendarCalCellId ? {
+        socialCell => socialCell.id === socialCalCellObj.id ? {
           ... socialCell,
-          get_socialCalEvent: socialCell.get_socialCalEvent.map(
-            events => events.id === socialEventId ? {
-              ... events,
-              persons: [... events.persons, userObj]
-            } : events
-          )
+          get_socialCalEvent: socialCalCellObj.get_socialCalEvent
         } : socialCell
       )
     } : state.profile
