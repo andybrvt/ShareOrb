@@ -597,7 +597,7 @@ class EventInfo extends React.Component{
 
 
           <div class="flex-container eventCard"
-            style={{width:'400px', height:'100px'}}
+            style={{width:'350px', height:'100px'}}
 
           >
             <div className = "attendees flex-child">Host
@@ -625,12 +625,57 @@ class EventInfo extends React.Component{
 
           </div>
 
+          <div style={{marginLeft:'200px', color:'black', marginTop:'100px'}} class="outerContainerPeople">
 
-          <div className = 'eventInfo'>
-
-            <div  className = "aboutEvent eventCard" style={{left:'80%', width:'350px', height:'150px'}}> Date and Time
+            <div style={{ fontSize:'20px', width:'450px', height:'150px', display:'inline-block' }}
+              class="aboutEvent eventCard innerContainerPeople">
 
               <div class="eventDetails">
+                <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
+                <div className = "eventDate"> {date} </div>
+                <div className = "eventTime">{start_time}-{end_time}</div>
+              </div>
+
+
+
+
+            </div>
+
+             <span class="innerContainerPeople aboutEvent eventCard "
+               style={{  left:'15%', width:'350px', height:'150px',  display:'inline-block'}}>
+               <div class="eventDetails">
+                 <i class="fas fa-clock"></i>
+                 <div className = "eventDate"> {date} </div>
+                 <div className = "eventTime">{start_time}-{end_time}</div>
+               </div>
+
+             </span>
+          </div>
+
+
+
+
+          <div className = 'eventInfo outerContainerPeople'>
+
+            <div className = "aboutEvent eventCard innerContainerPeople"
+              style={{left:'80%', fontSize:'20px', width:'350px', height:'150px'}}> Details
+
+              <div class="eventDetails">
+                <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
+                <div className = "eventDate"> {date} </div>
+                <div className = "eventTime">{start_time}-{end_time}</div>
+              </div>
+
+
+
+             </div>
+
+            <div  className = "aboutEvent eventCard innerContainerPeople"
+              style={{fontSize:'20px', width:'350px', height:'150px'}}>
+              Details
+
+              <div class="eventDetails">
+                <i class="fas fa-clock"></i>
                 <div className = "eventDate"> {date} </div>
                 <div className = "eventTime">{start_time}-{end_time}</div>
               </div>
