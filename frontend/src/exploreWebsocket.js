@@ -116,6 +116,10 @@ class WebSocketExplore {
       }
       this.callbacks['new_unFollower'](followObj)
     } else if (command === 'send_social_like_old'){
+      //EFFICENTCY: OK BUT STILL QUESTIONABLE AS TO WHETHER OR NOT WE CAN
+      //JUST REMOVE CHANNELS ALL TOGETHER AND JUST DO REDUX AND EVERYTIME YOU
+      // REFRESH IT WILL JUST SHOW UP THE LIKING
+
       //EFFICENTCY GOOD (O(N) for redux) COULD BE BETTER MAYBE
 
 
