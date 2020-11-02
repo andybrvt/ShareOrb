@@ -5,11 +5,13 @@
   position: relative;
   overflow: hidden;
 
-  background: gainsboro;
-  box-shadow: 5px 5px 15px rgba($rose, .5);
+  background: white;
+
   border-radius: 10px;
   padding:25px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.10);
   font-family: 'Segoe UI Regular';
+  /* background-color: gainsboro; */
 }
 
 
@@ -50,6 +52,7 @@
   left: 50%;
   bottom: 5px;
   transform: translateX(-48%);
+  font-family: 'Segoe UI Regular';
 }
 
 .dateCircle{
@@ -81,6 +84,7 @@
   width: 70%;
   height: 100%;
   overflow: auto;
+  background: white;
   /* align-items: center; */
 }
 

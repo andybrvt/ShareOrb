@@ -570,20 +570,28 @@ class EventInfo extends React.Component{
             <div
             className = "dateCircle"
             style = {{
-              backgroundColor: color
+              backgroundColor: color,
+              top:'10px'
             }}
             >
               <div
               style = {{
                 color: "white",
-                fontSize: "20px"
+                fontSize: "20px",
+
               }}
               clasName = "month" > {month}</div>
               <div className = "day"> {day} </div>
             </div>
 
 
-            <div className = 'eventTitle'> {this.capitalize(title)} </div>
+            <br/>
+            <br/>
+
+            <div
+              className = 'eventTitle'>
+              {this.capitalize(title)}
+            </div>
 
             <br/>
 
@@ -620,7 +628,7 @@ class EventInfo extends React.Component{
 
           <div className = 'eventInfo'>
 
-            <div  className = "aboutEvent eventCard" style={{width:'400px', height:'200px'}}> Event Details
+            <div  className = "aboutEvent eventCard" style={{left:'80%', width:'350px', height:'150px'}}> Date and Time
 
               <div class="eventDetails">
                 <div className = "eventDate"> {date} </div>
