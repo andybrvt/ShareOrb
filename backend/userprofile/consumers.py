@@ -680,6 +680,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         # remember that user is the perosn that like the post
 
+        # Will make this more efficnet by just getting all the event objects
+        # in the cell and replace the cell rather than just finding the exact
+        # event becuaes I do not want to do a triple for loop
 
         # pretty much refer to the send_social_like function for details
         user = get_object_or_404(User, id = data['userId'])
@@ -703,18 +706,23 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # The ownerObj will be th eperosn taht owns the post
         ownerObj = FollowUserSerializer(owner, many = False).data
 
+        # So we just get the social cal evnet list agian and just replace it
+        ownerSocialCalList = UserSocialCalSerializer(owner, many = False).data['get_socialCal']
+
         # Since we do not need to make a seperate case for the when you have to create
         #  a new
         contentOwner = {
             'command' : 'send_social_unlike',
             'userObj': userObj,
             'socialCalCellObjId': socialCalCellObj,
+            'ownerSocialCal': ownerSocialCalList,
             'reciever': ownerObj
         }
         contentLiker = {
             'command': 'send_social_unlike',
             'userObj': userObj,
             'socialCalCellObjId': socialCalCellObj,
+            'ownerSocialCal': ownerSocialCalList,
             'reciever': userObj
         }
 

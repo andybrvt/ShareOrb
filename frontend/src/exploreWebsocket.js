@@ -153,7 +153,15 @@ class WebSocketExplore {
       const socialCalCellId = parsedData.socialCalCellObjId
       // Pretty much the object used is the same as the like action
       const userObj = parsedData.userObj
+
+
+      // SocialCal cell would pretty be holding all the events of the users events
+      // and then is gonna jsut replace all the events all at once so we dont have
+      //  to search for a specific one
+      const socialCal = parsedData.ownerSocialCal
+
       const exploreObj = {
+        socialCal: socialCal,
         socialCalCell: socialCalCellId,
         userObj: userObj
       }

@@ -208,6 +208,8 @@ export const addSocialUnLike = (state, action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
   const userLike = action.exploreObj.userObj
+
+  const calendarCells = action.exploreObj.socialCal
   let curProfileId = ''
 
   if (state.profile){
@@ -223,24 +225,12 @@ export const addSocialUnLike = (state, action) => {
     profiles: state.profiles.map(
       profile => profile.id === calendarOwnerId ? {
         ... profile,
-        get_socialCal: profile.get_socialCal.map(
-
-          // this will get the right cal cell
-          socialCell => socialCell.id === calendarCalCellId ? {
-            ... socialCell,
-            people_like: socialCell.people_like.filter(removeUnliker)
-          } : socialCell
-        )
+        get_socialCal: calendarCells
       } : profile
     ),
     profile: curProfileId === calendarOwnerId ? {
       ... state.profile,
-      get_socialCal: state.profile.get_socialCal.map(
-        socialCell => socialCell.id === calendarCalCellId ? {
-          ... socialCell,
-          people_like: socialCell.people_like.filter(removeUnliker)
-        } :socialCell
-      )
+      get_socialCal: calendarCells
     } : state.profile
   })
 
