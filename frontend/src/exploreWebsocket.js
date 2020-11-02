@@ -143,7 +143,7 @@ class WebSocketExplore {
       }
       console.log(exploreObj)
       // NOW PUT THE CALL BACK FOR THE REDUX HERE
-      this.callbacks['social_like_old'](exploreObj)
+      this.callbacks['social_like_unlike_old'](exploreObj)
       this.callbacks['social_like_old_m'](exploreObj)
     } else if (command === 'send_social_unlike'){
 
@@ -168,7 +168,10 @@ class WebSocketExplore {
 
       // Now you would put the call backs here
       console.log('stuff stuff stuff')
-      this.callbacks['social_unlike'](exploreObj)
+
+
+      // You can reuse the social_like_old as unlike too
+      this.callbacks['social_like_unlike_old'](exploreObj)
       this.callbacks['social_unlike_m'](exploreObj)
     }  else if (command === 'send_social_comment_old'){
       // So you would pass the socialCalcell obj in first and then the comment
@@ -264,9 +267,8 @@ class WebSocketExplore {
      loadCurrProfile,
      unFollowingCallback,
      unFollowerCallback,
-     addSocialLikeOld,
+     addSocialLikeUnlikeOld,
      addSocialLikeOldM,
-     addSocialUnLike,
      addSocialUnLikeM,
      addSocialCommentOld,
      addSocialCommentOldM,
@@ -284,9 +286,8 @@ class WebSocketExplore {
     this.callbacks['current_user'] = loadCurrProfile
     this.callbacks['new_unFollowing'] = unFollowingCallback
     this.callbacks['new_unFollower'] = unFollowerCallback
-    this.callbacks['social_like_old'] = addSocialLikeOld
+    this.callbacks['social_like_unlike_old'] = addSocialLikeUnlikeOld
     this.callbacks['social_like_old_m'] = addSocialLikeOldM
-    this.callbacks['social_unlike'] = addSocialUnLike
     this.callbacks['social_unlike_m'] = addSocialUnLikeM
     this.callbacks['social_comment_old'] = addSocialCommentOld
     this.callbacks['social_comment_old_m'] = addSocialCommentOldM

@@ -171,7 +171,7 @@ export const addFollowing = (state, action) => {
 // FOR ALL THE NEW CAL CELL BEING CREATED, YOU CAN PROBALLY JUST USE ONE
 // ADD NEW SOCIALCALCELL
 
-export const addSocialLikeOld = (state, action) => {
+export const addSocialLikeUnlikeOld = (state, action) => {
   // so the task here is to find the user, then find the correct cell
   // data then add in the like
 
@@ -202,40 +202,6 @@ export const addSocialLikeOld = (state, action) => {
   })
 }
 
-export const addSocialUnLike = (state, action) => {
-  // This will go to the profiles, find the right person using the calendarOwnerId
-  // and then find the right calenadrObj then take out the user
-  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCell.id
-  const userLike = action.exploreObj.userObj
-
-  const calendarCells = action.exploreObj.socialCal
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  function removeUnliker(unliker) {
-    return unliker.id !== userLike.id
-  }
-
-  // I might have to do a triple forloop but I  might change it later
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ... profile,
-        get_socialCal: calendarCells
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: calendarCells
-    } : state.profile
-  })
-
-
-}
 
 
 export const addSocialCommentOld = (state, action) =>{
@@ -457,10 +423,8 @@ const reducer = (state = initialState, action) => {
       return addUnFollowing(state, action)
     case actionTypes.ADD_UNFOLLOWER:
       return addUnFollower(state, action)
-    case actionTypes.ADD_SOCIAL_LIKE_OLD:
-      return addSocialLikeOld(state, action)
-    case actionTypes.ADD_SOCIAL_UNLIKE:
-      return addSocialUnLike(state,action)
+    case actionTypes.ADD_SOCIAL_LIKE_UNLIKE_OLD:
+      return addSocialLikeUnlikeOld(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD:
       return addSocialCommentOld (state, action)
     case actionTypes.ADD_SOCIAL_EVENT_OLD:
