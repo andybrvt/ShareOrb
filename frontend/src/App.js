@@ -55,6 +55,7 @@ class App extends Component {
     )
 
     ExploreWebSocketInstance.addCallbacks(
+      this.props.loadProfile.bind(this),
       this.props.loadProfiles.bind(this),
       this.props.addFollower.bind(this),
       this.props.addFollowing.bind(this),
@@ -96,7 +97,7 @@ class App extends Component {
   //App.js this method from the store
     this.props.onTryAutoSignup();
     // NotificationWebSocketInstance.connect(this.props.username)
-    ExploreWebSocketInstance.connect(this.props.username)
+    // ExploreWebSocketInstance.connect(this.props.username)
 
 
   }
@@ -104,8 +105,8 @@ class App extends Component {
   componentWillReceiveProps(newProps){
     // NotificationWebSocketInstance.connect(newProps.username)
     if (this.props.username !== newProps.username){
-      ExploreWebSocketInstance.disconnect()
-      ExploreWebSocketInstance.connect(newProps.username)
+      // ExploreWebSocketInstance.disconnect()
+      // ExploreWebSocketInstance.connect(newProps.username)
     }
 
   }
@@ -154,6 +155,7 @@ const mapDispatchToProps = dispatch => {
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
     deletePost: postId => dispatch(newsfeedActions.deletePost(postId)),
+    loadProfile: profile => dispatch(exploreActions.loadProfile(profile)),
     loadProfiles: profiles => dispatch(exploreActions.loadProfiles(profiles)),
     addFollower: followObject => dispatch(exploreActions.addFollower(followObject)),
     addFollowing: followObject => dispatch(exploreActions.addFollowing(followObject)),

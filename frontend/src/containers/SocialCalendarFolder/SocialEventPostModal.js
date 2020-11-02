@@ -126,7 +126,9 @@ class SocialEventPostModal extends React.Component{
 
   // This will be used to send objects to the user channel (you can technically do
 //  it with just axius but it is a bit easier )
-  ExploreWebSocketInstance.sendSocialEvent(eventObj)
+
+
+  // ExploreWebSocketInstance.sendSocialEvent(eventObj)
   this.openNotification('bottomLeft', displayObj)
   this.setState({
     title: '',

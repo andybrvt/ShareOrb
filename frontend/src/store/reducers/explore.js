@@ -8,10 +8,17 @@ const initialState = {
   showProfileEdit: false,
   changeProfilePic: false,
   profiles: [],
+  profile: {},
   // curProfile: [],
   test: '',
   // profile: []
 
+}
+
+export const loadProfile = (state, action) => {
+  return updateObject(state, {
+    profile: action.profile
+  })
 }
 
 export const loadProfiles = (state, action) =>{
@@ -403,6 +410,8 @@ export const removeUserSocialEvent = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
+    case actionTypes.LOAD_PROFILE:
+      return loadProfile(state, action);
     case actionTypes.LOAD_PROFILES:
       return loadProfiles(state, action);
     case actionTypes.ADD_FOLLOWER:

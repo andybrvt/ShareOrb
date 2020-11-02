@@ -1,5 +1,15 @@
 import * as actionTypes from './actionTypes';
 
+
+export const loadProfile = (profile) => {
+  //This will load in the profile for the profile page
+  return {
+    type: actionTypes.LOAD_PROFILE,
+    profile: profile
+  }
+
+}
+
 export const addFollower = followObject => {
   // This will be for the receiving persopn
   return{

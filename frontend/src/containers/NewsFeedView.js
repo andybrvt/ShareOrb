@@ -30,7 +30,7 @@ class NewsFeedView extends React.Component {
 
 	constructor(props){
 		super(props)
-		this.initialiseExplore()
+		// this.initialiseExplore()
 	}
 
 	initialiseExplore(){
@@ -38,8 +38,8 @@ class NewsFeedView extends React.Component {
     // later we are gonna have a search function, so you want to throw this in one
     // of the very first things
     this.waitForSocketConnection(()=> {
-      ExploreWebSocketInstance.fetchFollowerFollowing()
-			ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
+      // Expl	oreWebSocketInstance.fetchFollowerFollowing()
+			// ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
     })
   }
 

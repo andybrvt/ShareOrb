@@ -40,7 +40,7 @@ class WebSocketExplore {
 
     this.socketRef.onclose = () => {
       console.log('websocket is closed')
-      this.connect(username)
+      // this.connect(username)
     }
   }
 
@@ -57,14 +57,19 @@ class WebSocketExplore {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
     console.log(parsedData)
+    console.log(command === 'user_profile_page')
     // The reason why there is only one follower following because
     // whenever somone follows someone else there will be on follower
     // for one person and one following for another so event if someone
     // follows you back the trend will still be the same
-    if (command === 'user_profiles'){
-      const profiles = JSON.parse(parsedData.user_profiles)
-      console.log(profiles)
-      this.callbacks['fetch_profiles'](profiles)
+    if (command === "user_profile"){
+      const profile = JSON.parse(parsedData.profile)
+      console.log(profile)
+
+      //Now redux here
+
+      this.callbacks['load_profile'](profile)
+
     } else if (command === 'send_following'){
       // This is to add the person to your following
       const user = parsedData.actorObjSerial
@@ -265,7 +270,9 @@ class WebSocketExplore {
 
 
 // call backs will pretty much be holding all the redux functions
-  addCallbacks(loadProfiles,
+  addCallbacks(
+     loadProfile,
+     loadProfiles,
      addFollowerCallBack,
      addFollowingCallBack,
      loadCurrProfile,
@@ -284,6 +291,7 @@ class WebSocketExplore {
      removeUserSocialEvent,
      removeUserSocialEventM
    ){
+    this.callbacks['load_profile'] = loadProfile
     this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
     this.callbacks['new_following'] = addFollowingCallBack
@@ -305,8 +313,27 @@ class WebSocketExplore {
   }
 
 
+  fetchProfile(username){
+    // This will fetch the specific profile for the specific perosonal profile
+    // page
+    // The parameter username will be the username of the user (probally gonna
+    // have to change it to id or a combination of id and username so we can pull
+    // pull it easier and stuff like that)
+
+    console.log(username)
+    this.sendExplore({
+      command: 'fetch_profile',
+      username: username
+    })
+  }
+
   fetchFollowerFollowing(){
     // This gets called in teh newsfeedview.js
+
+    //This will pretty much fetch all the users profiles (way too have to have as
+    // channels)
+    // Found in NewsFeedView
+
     this.sendExplore({
       command: 'fetch_follower_following'
     })
@@ -315,6 +342,12 @@ class WebSocketExplore {
   fetchCurrentUserProfile(currUser){
     // Fetch the cur user seperate by the back end so we can avoid looping through
     // all the profiles in the front end
+
+
+    // This will be fetching the currentuserprofile (idk why you just amke it is own
+    // channel.. would be easier
+    //Found in curuserprofile
+
     console.log('fetch profile')
     this.sendExplore({
       command: 'fetch_curUser_profile',
@@ -328,6 +361,10 @@ class WebSocketExplore {
     // to the backend. The follower is the person sending the following
     // request and the following the person gettting the following
 
+    // Call function to send following (have to send it both ways now) Now I just have
+    // to send it into the single channe and rerender everytime (so much easier)
+    // found in the curuserprofile and personalprofile
+
 
     this.sendExplore({
       follower: follower,
@@ -340,6 +377,10 @@ class WebSocketExplore {
     // This function will be used to set up for unfollowing the user
     // the follower again is the person doing the action and the following will
     // be the person receving the follow
+
+
+    // Same spill as the send following
+
     this.sendExplore({
       follower: follower,
       following: following,
@@ -359,6 +400,13 @@ class WebSocketExplore {
 
 
     // The personLike and owner will be the ids of the persons
+
+
+    //Let this operate only in the channels, and it will just rerender everytime someone
+    // goes on to the page or is on the page already (make it really easy)
+    // Foudn on socialcalcellinfo
+
+
     console.log(curDate, personLike)
     this.sendExplore({
       socialCalDate: curDate,
@@ -374,6 +422,8 @@ class WebSocketExplore {
     // the ids of the person taht is gonna unlike and the owner of the calendar
     // personUnlike would be the id of the person liking or unliking
     // owner will be the id of the social cal owner
+
+    //same deal as like
 
     console.log(curDate, personUnLike, owner)
     this.sendExplore({
@@ -393,6 +443,13 @@ class WebSocketExplore {
     // Owner will be the id of the calendar owner
 
     // The userId will be person commenting
+
+
+    // Pretty much like the liking, just gotta like it to only that one channel
+    // that the user will be on and then everytime they get on just rerender
+    // easy peasy
+    // Found on the socialcomment
+
     console.log(comment)
     this.sendExplore({
       socialCalDate: curDate,
@@ -407,6 +464,13 @@ class WebSocketExplore {
     // The event object will be a dict of all the information on the event and
     // it will be sent into the consumers, There will be a same one that will be going
     // to the news feed
+
+    //This will be creating a soical event on the event page (can be made pretty
+    // easy with one single channel for that page ) Everytime you rerneder it will
+    // show up again
+    // This is in sendsocialeventpostmodal
+
+
     this.sendExplore({
       eventObj: eventObj,
       command: 'create_social_event'
@@ -419,6 +483,9 @@ class WebSocketExplore {
     // We will be getting the id of the user and the id of the event
 
 
+    // same deal with the sendsocialevent, should be made more efficient
+    // Find this in both the eventlist
+
     console.log(userId, eventId)
     this.sendExplore({
       userId: userId,
@@ -428,12 +495,15 @@ class WebSocketExplore {
     })
   }
 
+
   sendSocialEventLeave = (userId, eventId, socialCalCellId) => {
     // This will get the userId to know which user to remove,
     // eventId is to know which event to be removed from
     // socialCalcellid to know which cell to add into
 
     console.log(userId, eventId)
+
+    //same deal as sendSocialEventParticipate
 
     this.sendExplore({
       userId: userId,

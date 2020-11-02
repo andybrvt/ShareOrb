@@ -49,7 +49,7 @@ class SocialCellCoverEvents extends React.Component{
     // This will be used to send the userId and the event Id to the websocket
     console.log(userId, eventId)
 
-    ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
+    // ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
 
@@ -58,7 +58,7 @@ class SocialCellCoverEvents extends React.Component{
     // so that you can remove some from an event because they want to leave
 
     console.log(userId, eventId)
-    ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
+    // ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
   }
 
   onCoverViewClick = (eventId) => {

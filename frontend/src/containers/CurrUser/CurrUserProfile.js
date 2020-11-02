@@ -39,7 +39,7 @@ import {
 class CurrUserProfile extends React.Component{
   constructor(props) {
     super(props);
-    this.initialiseExplore()
+    // this.initialiseExplore()
   }
   state = {
     id:'',
@@ -61,7 +61,7 @@ class CurrUserProfile extends React.Component{
     // later we are gonna have a search function, so you want to throw this in one
     // of the very first things
     this.waitForSocketConnection(()=> {
-      ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
+      // ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
     })
   }
 
@@ -161,13 +161,15 @@ class CurrUserProfile extends React.Component{
    onFollow = (follower, following) =>{
      // This is to send a follow into the back end
      // It will use the id of the user to get the user and add the following
-     ExploreWebSocketInstance.sendFollowing(follower, following)
+
+     // ExploreWebSocketInstance.sendFollowing(follower, following)
    }
 
    onUnfollow = (follower, following) => {
      // This will send an unfollow into the back end
      // It will pretty muchh just delete the follower and following
-     ExploreWebSocketInstance.sendUnFollowing(follower, following)
+
+     // ExploreWebSocketInstance.sendUnFollowing(follower, following)
    }
 
    onFollowerOpen = () => {

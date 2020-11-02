@@ -61,7 +61,8 @@ class SocialCalCellInfo extends React.Component{
     // send out a like to the websocket, the curDate will be the current date and
     // The person like will be the perosn who like the post
     console.log(personLike, owner)
-    ExploreWebSocketInstance.sendSocialLike(curDate, personLike, owner)
+
+    // ExploreWebSocketInstance.sendSocialLike(curDate, personLike, owner)
 
   }
 
@@ -70,7 +71,8 @@ class SocialCalCellInfo extends React.Component{
     // and be used to find the cell, the person will be the person that unlikes it and the
      // owener will be the owner of the calendar
      console.log(personUnLike, owner)
-     ExploreWebSocketInstance.sendSocialUnLike(curDate, personUnLike, owner)
+     
+     // ExploreWebSocketInstance.sendSocialUnLike(curDate, personUnLike, owner)
   }
 
 

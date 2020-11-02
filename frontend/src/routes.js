@@ -9,6 +9,7 @@ import Explore from './containers/Explore';
 import InfiniteList from './containers/InfiniteScroll';
 import CurrUserProfile from './containers/CurrUser/CurrUserProfile';
 import ViewAnyUserProfile from './components/UserProfiles/ViewAnyUserProfile';
+import PersonalProfile from './components/UserProfiles/PersonalProfile';
 import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
 import Chat from './containers/Chat';
@@ -19,9 +20,10 @@ import WeekCalendar from './containers/PersonalCalendar/WeekCalendar';
 import YearCalendar from './containers/PersonalCalendar/YearCalendar';
 import SideMenu from './components/SideMenu/SideMenu.js';
 import NoFoundPage from './containers/403.jsx';
-import ProfileCardNewsFeed from './components/ProfileCardNewsFeed'
+import ProfileCardNewsFeed from './components/ProfileCardNewsFeed';
 import EventPage from './containers/PersonalCalendar/EventPage/EventPage.js'
-import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/SocialEventPage'
+import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/SocialEventPage';
+
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -31,6 +33,9 @@ import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/S
 class BaseRouter extends React.Component {
 
 // props and this.props are two different things on the routes
+
+// <Route exact path = '/explore/:username' render={(props) => <ViewAnyUserProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+
   render() {
 
     console.log(this.props);
@@ -50,8 +55,8 @@ class BaseRouter extends React.Component {
 
         <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/explore/:username' render={(props) => <ViewAnyUserProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/current-user/' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/explore/:username' render={(props) => <PersonalProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/current-user/:username' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />

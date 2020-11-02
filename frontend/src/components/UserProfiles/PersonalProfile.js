@@ -13,11 +13,24 @@ import FollowList from './FollowList';
 import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
 
+// From here on out each profile will be its own channel, so we do not need
+// to use ViewAnyUserProfile anymore
+// Each profile will fetch its own information and do its own channel stuff
 
+// For the current User I will probally gonna make it so that there are turnary
+// operators that allows editing and such
+
+
+// So what is gonna happen is that each personal profile will be its own channel
+// so when you log on it will be an own channe, so what happnes on that page, it
+// will show up. So I have to properally do the connect and disconnect for
+// each page (similar to the event page)
 
 class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
+
+    // this.initialiseProfile()
   }
 
   state = {
@@ -26,254 +39,337 @@ class PersonalProfile extends React.Component{
     // following: false,
   }
 
+
+  initialiseProfile() {
+    console.log('hit here')
+    this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          this.props.match.params.username
+        )
+    })
+    if(this.props.match.params.username){
+      ExploreWebSocketInstance.connect(this.props.match.params.username)
+    }
+  }
+
+
+  waitForSocketConnection(callback){
+		// This is pretty much a recursion that tries to reconnect to the websocket
+		// if it does not connect
+		const component = this;
+		setTimeout(
+			function(){
+				console.log(ExploreWebSocketInstance.state())
+				if (ExploreWebSocketInstance.state() === 1){
+					console.log('connection is secure');
+					callback();
+					return;
+				} else {
+					console.log('waiting for connection...')
+					component.waitForSocketConnection(callback)
+				}
+			}, 100)
+	}
+
+
+  componentDidMount(){
+    this.showPanel(0, 'transparent')
+    this.initialiseProfile()
+  }
+
+  componentWillReceiveProps(newProps){
+    console.log(newProps)
+    //This will reconnect to eh proper profile if you were to change the profiles
+
+
+    if(this.props.match.params.username !== newProps.match.params.username){
+      ExploreWebSocketInstance.disconnect();
+      this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          newProps.match.params.username
+        )
+      })
+      ExploreWebSocketInstance.connect(newProps.match.params.username)
+    }
+
+  }
+
+  componentWillUnmount(){
+    //This will disconnect from the channel if you ever exit the page, this will
+    // avoid any connection conflicts
+    //Similar to the event page channel, you will have to remove the recursion from
+    // the disconnect in the websocket
+    ExploreWebSocketInstance.disconnect();
+  }
+
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  componentDidMount(){
-    this.showPanel(0, 'transparent')
 
-  }
 
   // on click add friend starts here
-      onClickSend = (e) =>{
-        e.preventDefault()
-        const username = this.props.match.params.username;
-        // axios.default.headers = {
-        //   "Content-type": "application/json",
-        //   Authorization: `Token ${this.props.token}`
-        // }
-        authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
-        const notificationObject  = {
-          command: 'send_friend_notification',
-          actor: this.props.currentUser,
-          recipient: this.props.match.params.username,
-        }
-        // NotificationWebSocketInstance.disconnect()
-        // NotificationWebSocketInstance.connect(this.props.match.params.username)
-        NotificationWebSocketInstance.sendNotification(notificationObject)
-        // NotificationWebSocketInstance.connect(this.props.currentUser)
+  onClickSend = (e) =>{
+    e.preventDefault()
+    const username = this.props.match.params.username;
+    // axios.default.headers = {
+    //   "Content-type": "application/json",
+    //   Authorization: `Token ${this.props.token}`
+    // }
+    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+    const notificationObject  = {
+      command: 'send_friend_notification',
+      actor: this.props.currentUser,
+      recipient: this.props.match.params.username,
+    }
+    // NotificationWebSocketInstance.disconnect()
+    // NotificationWebSocketInstance.connect(this.props.match.params.username)
+    NotificationWebSocketInstance.sendNotification(notificationObject)
+    // NotificationWebSocketInstance.connect(this.props.currentUser)
 
-        }
+    }
 
 
-      onClickCancel = (e) =>{
+    onClickCancel = (e) =>{
+      // const username = this.props.match.params.username;
+      // authAxios.post('http://127.0.0.1:8000/friends/friend-request/cancel/'+username)
+      }
+
+    onClickDeleteFriend = (e) =>{
+      // This is used to delete friends
         // const username = this.props.match.params.username;
-        // authAxios.post('http://127.0.0.1:8000/friends/friend-request/cancel/'+username)
+        // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
+      }
+
+
+
+    renderProfilePic = () => {
+
+      let profileImage = null
+
+      console.log(this.props.profile)
+      if(this.props.profile){
+        console.log(this.props.profile.profile_picture)
+        if(this.props.profile.profile_picture){
+          profileImage = 'http://127.0.0.1:8000'+this.props.profile.profile_picture
+        }
+      }
+
+      console.log(profileImage)
+      return (
+        <div className = 'profilePic'>
+
+          <Avatar size = {180} src = {profileImage} />
+        </div>
+      )
+    }
+
+    renderCalPostPic = () => {
+      return(
+        <div className = 'cal-post-pic'>
+          {this.onRenderTabs()}
+        </div>
+
+      )
+    }
+
+    onFollow = (follower, following) =>{
+      // This is to send a follow into the back end
+      // It will use the id of the user to get the user and add the following
+
+
+      // ExploreWebSocketInstance.sendFollowing(follower, following)
+
+
+
+      // The follower is you who is sending the reqwuest and the following is the other person
+      const notificationObject = {
+        command: 'send_follow_notification',
+        actor: this.props.currentUser,
+        recipient: this.props.curProfile.username
+      }
+
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+    }
+
+
+    onUnfollow = (follower, following) => {
+      // This will send an unfollow into the back end
+      // It will pretty muchh just delete the follower and following
+
+
+      // ExploreWebSocketInstance.sendUnFollowing(follower, following)
+    }
+
+    // onFollowingOrNot = (username) => {
+    //   // This function will check if the use is following the targeted user
+    //   // or not. If they are it will show a unfollow button if they are not then they
+    //   // will show a follow button
+    //   if (this.props.data){
+    //     if (this.props.followers){
+    //       const followers = this.props.data.get_followers
+    //       console.log(followers)
+    //       for (let i = 0; i < followers.length; i++){
+    //         if(followers[i].username === this.props.currentUser.toString()){
+    //           this.setState({
+    //             following: true
+    //           })
+    //         }
+    //       }
+    //     }
+    //   }
+    //
+    //
+    //
+    // }
+
+    onRenderProfileInfo(){
+      // For the following and the follwers, the get_followers will be the people taht
+      // are your followers and the people that are in
+      // get following are the people taht are you are following, so they would be your
+      // followers
+      let username = ''
+      let firstName = ''
+      let lastName = ''
+      let bio = ''
+      let followers = []
+      let following = []
+      let posts = ''
+      let profileId = ''
+
+      if (this.props.profile){
+        if(this.props.profile.username){
+          username = this.props.profile.username
+        }
+        if(this.props.profile.first_name){
+          firstName = this.props.profile.first_name
+        }
+        if(this.props.profile.last_name){
+          lastName = this.props.profile.last_name
+        }
+        if(this.props.profile.bio){
+          bio = this.props.profile.bio
+        }
+        if(this.props.profile.get_following){
+          following = this.props.profile.get_following
+        }
+        if(this.props.profile.get_posts){
+          posts = this.props.profile.get_posts
+
+        }
+        if(this.props.profile.id){
+          profileId = this.props.profile.id
+
         }
 
-      onClickDeleteFriend = (e) =>{
-        // This is used to delete friends
-          // const username = this.props.match.params.username;
-          // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
-        }
-
-
-
-      renderProfilePic = () => {
-
-        let profileImage = null
-
-        console.log(this.props.curProfile)
-        if(this.props.curProfile){
-          console.log(this.props.curProfile.profile_picture)
-          if(this.props.curProfile.profile_picture){
-            profileImage = 'http://127.0.0.1:8000'+this.props.curProfile.profile_picture
+        if(this.props.profile.get_followers){
+          for(let i =0; i<this.props.profile.get_followers.length; i++){
+            followers.push(
+              this.props.profile.get_followers[i].username
+            )
           }
         }
-
-        console.log(profileImage)
-        return (
-          <div className = 'profilePic'>
-
-            <Avatar size = {180} src = {profileImage} />
-          </div>
-        )
       }
+    console.log(followers)
 
-      renderCalPostPic = () => {
-        return(
-          <div className = 'cal-post-pic'>
-            {this.onRenderTabs()}
-          </div>
+      return (
+        <div className = 'profileInfo'>
 
-        )
-      }
-
-      onFollow = (follower, following) =>{
-        // This is to send a follow into the back end
-        // It will use the id of the user to get the user and add the following
-        ExploreWebSocketInstance.sendFollowing(follower, following)
-        // The follower is you who is sending the reqwuest and the following is the other person
-        const notificationObject = {
-          command: 'send_follow_notification',
-          actor: this.props.currentUser,
-          recipient: this.props.curProfile.username
-        }
-
-        NotificationWebSocketInstance.sendNotification(notificationObject)
-      }
-
-
-      onUnfollow = (follower, following) => {
-        // This will send an unfollow into the back end
-        // It will pretty muchh just delete the follower and following
-        ExploreWebSocketInstance.sendUnFollowing(follower, following)
-      }
-
-      // onFollowingOrNot = (username) => {
-      //   // This function will check if the use is following the targeted user
-      //   // or not. If they are it will show a unfollow button if they are not then they
-      //   // will show a follow button
-      //   if (this.props.data){
-      //     if (this.props.followers){
-      //       const followers = this.props.data.get_followers
-      //       console.log(followers)
-      //       for (let i = 0; i < followers.length; i++){
-      //         if(followers[i].username === this.props.currentUser.toString()){
-      //           this.setState({
-      //             following: true
-      //           })
-      //         }
-      //       }
-      //     }
-      //   }
-      //
-      //
-      //
-      // }
-
-      onRenderProfileInfo(){
-        // For the following and the follwers, the get_followers will be the people taht
-        // are your followers and the people that are in
-        // get following are the people taht are you are following, so they would be your
-        // followers
-        let username = ''
-        let firstName = ''
-        let lastName = ''
-        let bio = ''
-        let followers = []
-        let following = []
-        let posts = ''
-        let profileId = ''
-
-        if (this.props.curProfile){
-          username = this.props.curProfile.username
-          firstName = this.props.curProfile.first_name
-          lastName = this.props.curProfile.last_name
-          bio = this.props.curProfile.bio
-          following = this.props.curProfile.get_following
-          posts = this.props.curProfile.get_posts
-          profileId = this.props.curProfile.id
-
-          if(this.props.curProfile.get_followers){
-            for(let i =0; i<this.props.curProfile.get_followers.length; i++){
-              followers.push(
-                this.props.curProfile.get_followers[i].username
-              )
-            }
-          }
-        }
-      console.log(followers)
-
-        return (
-          <div className = 'profileInfo'>
-
-            <div>
-              <div className = 'profileName'>
-                {this.capitalize(firstName)} {this.capitalize(lastName)}
-              </div>
-
-
-            <div className = 'profilePostFollow'>
-              <div className = 'followItem'>
-                <span
-                className = 'postFollowWords'
-                >Post</span>
-                <br />
-                <span>{posts.length}</span>
-              </div>
-              <div
-              onClick = {() => this.onFollowerOpen()}
-              className = 'followItem'>
-                <span
-                className = 'postFollowWords'
-                >Followers</span>
-                <br />
-                <span>{followers.length}</span>
-              </div>
-              <div
-              onClick = {() => this.onFollowingOpen()}
-              className = 'followItem'>
-                <span
-                className = 'postFollowWords'
-                >Following</span>
-                <br />
-                <span>{following.length}</span>
-              </div>
-            </div>
-
-            <div className = 'profileBio'>
-            {bio}
-            </div>
           <div>
+            <div className = 'profileName'>
+              {this.capitalize(firstName)} {this.capitalize(lastName)}
+            </div>
 
-          <div className = 'profileButtons'>
 
-          {followers.includes(this.props.currentUser.toString()) ?
+          <div className = 'profilePostFollow'>
+            <div className = 'followItem'>
+              <span
+              className = 'postFollowWords'
+              >Post</span>
+              <br />
+              <span>{posts.length}</span>
+            </div>
             <div
-            onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-            className = 'unFollowButton'>
-              Unfollow
+            onClick = {() => this.onFollowerOpen()}
+            className = 'followItem'>
+              <span
+              className = 'postFollowWords'
+              >Followers</span>
+              <br />
+              <span>{followers.length}</span>
             </div>
-
-            :
-
-            <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
-              Follow
+            <div
+            onClick = {() => this.onFollowingOpen()}
+            className = 'followItem'>
+              <span
+              className = 'postFollowWords'
+              >Following</span>
+              <br />
+              <span>{following.length}</span>
             </div>
-
-          }
-
-
-
-
-            <div className = 'messageButton'>
-              Message
-            </div>
-
           </div>
 
+          <div className = 'profileBio'>
+          {bio}
+          </div>
+        <div>
 
+        <div className = 'profileButtons'>
+
+        {followers.includes(this.props.currentUser.toString()) ?
+          <div
+          onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
+          className = 'unFollowButton'>
+            Unfollow
           </div>
 
+          :
+
+          <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
+            Follow
           </div>
-
-          </div>
-
-        )
-
-      }
-
-      showPanel = (panelIndex, colorCode) =>{
-        var tabButtons= document.querySelectorAll('.profile-tabContainer .profile-buttonContainer .profile-Tab')
-        var tabPanels= document.querySelectorAll('.profile-tabContainer .profile-tabPanel')
-        if (tabButtons.length > 0 && tabPanels.length > 0){
-          tabButtons.forEach(function(node){
-            node.style.backgroundColor = "";
-            node.style.color = "";
-          })
-          tabButtons[panelIndex].style.backgroundColor = colorCode;
-          tabButtons[panelIndex].style.color = '#363636';
-          tabPanels.forEach(function(node){
-            node.style.display = 'none'
-          })
-          tabPanels[panelIndex].style.display = 'block';
-          tabPanels[panelIndex].style.backgroundColor = colorCode;
 
         }
 
+
+
+
+          <div className = 'messageButton'>
+            Message
+          </div>
+
+        </div>
+
+
+        </div>
+
+        </div>
+
+        </div>
+
+      )
+
+    }
+
+    showPanel = (panelIndex, colorCode) =>{
+      var tabButtons= document.querySelectorAll('.profile-tabContainer .profile-buttonContainer .profile-Tab')
+      var tabPanels= document.querySelectorAll('.profile-tabContainer .profile-tabPanel')
+      if (tabButtons.length > 0 && tabPanels.length > 0){
+        tabButtons.forEach(function(node){
+          node.style.backgroundColor = "";
+          node.style.color = "";
+        })
+        tabButtons[panelIndex].style.backgroundColor = colorCode;
+        tabButtons[panelIndex].style.color = '#363636';
+        tabPanels.forEach(function(node){
+          node.style.display = 'none'
+        })
+        tabPanels[panelIndex].style.display = 'block';
+        tabPanels[panelIndex].style.backgroundColor = colorCode;
+
       }
+
+    }
 
     onFollowerOpen = () => {
       // This is used to open up the follower list
@@ -336,6 +432,8 @@ class PersonalProfile extends React.Component{
 
   render(){
 
+      console.log(this.props)
+
       let followers = []
       let following = []
 
@@ -385,7 +483,8 @@ const mapStateToProps = state => {
     return {
       currentId: state.auth.id,
       currentUser: state.auth.username,
-      token: state.auth.token
+      token: state.auth.token,
+      profile: state.explore.profile
       };
     };
 

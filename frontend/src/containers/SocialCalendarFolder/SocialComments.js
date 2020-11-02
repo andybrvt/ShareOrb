@@ -22,12 +22,12 @@ class SocialComments extends React.Component{
     console.log('comment submit')
     console.log(this.state.comment)
     if (this.state.comment !== ''){
-      ExploreWebSocketInstance.sendSocialComment(
-        this.props.currentDate,
-        this.props.curUser,
-        this.state.comment,
-        this.props.owner
-      )
+      // ExploreWebSocketInstance.sendSocialComment(
+      //   this.props.currentDate,
+      //   this.props.curUser,
+      //   this.state.comment,
+      //   this.props.owner
+      // )
       this.setState({comment: ''})
     }
 

@@ -583,6 +583,15 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     ### Probally gonna be the websocket for profiles too as well
 
+    def fetch_profile(self, data):
+        profile = get_object_or_404(User, username = data['username'])
+        serializer = UserSerializer(profile).data
+        content = {
+            'command': 'user_profile',
+            'profile': json.dumps(serializer)
+        }
+        self.send_json(content)
+
     def fetch_follower_following(self, data):
         users = User.objects.all()
         serializer = UserSerializer(users, many = True)
@@ -1073,6 +1082,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
     def receive(self, text_data = None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
         print(data)
+        if data['command'] == 'fetch_profile':
+            self.fetch_profile(data)
         if data['command'] == 'fetch_follower_following':
             self.fetch_follower_following(data)
         if data['command'] == 'send_following':

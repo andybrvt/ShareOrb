@@ -20,7 +20,7 @@ import '@ant-design/compatible/assets/index.css';
 class UserProfileView extends React.Component {
   constructor(props) {
     super(props);
-    this.initialiseExplore()
+    // this.initialiseExplore()
   }
 
   state = {
@@ -37,7 +37,7 @@ class UserProfileView extends React.Component {
     // later we are gonna have a search function, so you want to throw this in one
     // of the very first things
     this.waitForSocketConnection(()=> {
-      ExploreWebSocketInstance.fetchFollowerFollowing()
+      // ExploreWebSocketInstance.fetchFollowerFollowing()
     })
   }
 
