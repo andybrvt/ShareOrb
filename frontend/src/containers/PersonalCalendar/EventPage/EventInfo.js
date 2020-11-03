@@ -1,7 +1,7 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Avatar, Modal, message, notification} from 'antd';
-import {PictureOutlined} from '@ant-design/icons';
+import {Button, Progress, Avatar, Modal, message, notification, Statistic} from 'antd';
+import {PictureOutlined, CheckSquareTwoTone, DownloadOutlined, UserOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
@@ -597,10 +597,10 @@ class EventInfo extends React.Component{
 
 
           <div class="flex-container eventCard"
-            style={{width:'350px', height:'100px'}}
+            style={{width:'400px', height:'105px', background:'white'}}
 
           >
-            <div className = "attendees flex-child">Host
+            <div style={{color:'black'}} className = "attendees flex-child">Host
               <br/>
               <br/>
               <span>
@@ -608,12 +608,14 @@ class EventInfo extends React.Component{
                 style={{right:'5px'}}
                 src = {"http://127.0.0.1:8000"+host.profile_picture}
                 />
-                <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
               </span>
             </div>
 
             {/*if no one going , THEN show invited else just show invited*/}
-            <div className = "attendees flex-child"> {invited.length} Invited
+            <div className = "attendees flex-child">
+              <span style={{color:'black'}}> {invited.length} Invited </span>
+
               <Liking like_people={invited}/>
             </div>
 
@@ -625,10 +627,56 @@ class EventInfo extends React.Component{
 
           </div>
 
+
           <div style={{marginLeft:'200px', color:'black'}} class="outerContainer">
+            <span
+              style={{ fontSize:'20px', width:'1000px', height:'110px',
+                 display:'inline-block', marginTop:'100px', padding:'50px'}}
+              class="aboutEvent eventCard innerContainer">
+              <div class="outerContainerPeople">
+              <span class="innerContainerPeople" style={{display:'inline-block'}}>
+
+                <Statistic title="Going" value={3} prefix={<UserOutlined />} />
+
+
+              </span>
+              <span class="innerContainerPeople" style={{marginLeft:'100px',display:'inline-block'}}>
+
+                <Statistic title="Invited" value={5} prefix={<UserOutlined />}>
+
+                </Statistic>
+
+
+              </span>
+
+             <span class="innerContainerPeople"
+               style={{display:'inline-block'}}>
+
+               <Button
+                  type="primary" shape="round"
+                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                  style={{left:'125%', fontSize:'18px'}} size={'large'}>
+
+                 Going
+               </Button>
+               <Button
+                  type="primary" shape="round"
+                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+                  style={{left:'150%', fontSize:'18px'}} size={'large'} danger>
+
+                 Not Going
+               </Button>
+             </span>
+
+               </div>
+            </span>
+
+          </div>
+
+          <div style={{marginLeft:'200px', height:'400px', color:'black'}} class="outerContainer">
 
             <div style={{ fontSize:'20px', width:'450px', height:'250px', display:'inline-block' }}
-              class="aboutEvent eventCard innerContainerPeople">
+              class="aboutEvent eventCard innerContainer">
               Event Details
               <br/>
               <div style={{marginTop:'20px'}} class="eventDetails">
@@ -660,7 +708,7 @@ class EventInfo extends React.Component{
 
             </div>
 
-             <span class="innerContainerPeople aboutEvent eventCard "
+             <span class="innerContainer aboutEvent eventCard "
                style={{  left:'15%', width:'350px', height:'150px',  display:'inline-block'}}>
                <div class="eventDetails">
                  <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
