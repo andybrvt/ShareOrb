@@ -625,15 +625,34 @@ class EventInfo extends React.Component{
 
           </div>
 
-          <div style={{marginLeft:'200px', color:'black', marginTop:'100px'}} class="outerContainerPeople">
+          <div style={{marginLeft:'200px', color:'black'}} class="outerContainer">
 
-            <div style={{ fontSize:'20px', width:'450px', height:'150px', display:'inline-block' }}
+            <div style={{ fontSize:'20px', width:'450px', height:'250px', display:'inline-block' }}
               class="aboutEvent eventCard innerContainerPeople">
+              Event Details
+              <br/>
+              <div style={{marginTop:'20px'}} class="eventDetails">
+                <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-globe"></i>
+                Public Event
+                <br/>
+                <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-map-marker-alt"></i>
+                Tucson, Arizona
+                <br/>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-clock"></i>
+                {date}
+                {start_time}-{end_time}
+                <br/>
+                <br/>
+                {
+                  content === "" ?
 
-              <div class="eventDetails">
-                <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
-                <div className = "eventDate"> {date} </div>
-                <div className = "eventTime">{start_time}-{end_time}</div>
+                  <div className = "contentEventEmpty"> No info... </div>
+                  :
+                  <div className = "contentEvent"> {content} </div>
+
+
+                }
+
               </div>
 
 
@@ -644,12 +663,17 @@ class EventInfo extends React.Component{
              <span class="innerContainerPeople aboutEvent eventCard "
                style={{  left:'15%', width:'350px', height:'150px',  display:'inline-block'}}>
                <div class="eventDetails">
-                 <i class="fas fa-clock"></i>
+                 <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
                  <div className = "eventDate"> {date} </div>
                  <div className = "eventTime">{start_time}-{end_time}</div>
                </div>
 
              </span>
+
+
+
+
+
           </div>
 
 
@@ -657,42 +681,8 @@ class EventInfo extends React.Component{
 
           <div className = 'eventInfo outerContainerPeople'>
 
-            <div className = "aboutEvent eventCard innerContainerPeople"
-              style={{left:'80%', fontSize:'20px', width:'350px', height:'150px'}}> Details
-
-              <div class="eventDetails">
-                <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
-                <div className = "eventDate"> {date} </div>
-                <div className = "eventTime">{start_time}-{end_time}</div>
-              </div>
 
 
-
-             </div>
-
-            <div  className = "aboutEvent eventCard innerContainerPeople"
-              style={{fontSize:'20px', width:'350px', height:'150px'}}>
-              Details
-
-              <div class="eventDetails">
-                <i class="fas fa-clock"></i>
-                <div className = "eventDate"> {date} </div>
-                <div className = "eventTime">{start_time}-{end_time}</div>
-              </div>
-
-
-
-             </div>
-
-            {
-              content === "" ?
-
-              <div className = "contentEventEmpty"> No info... </div>
-              :
-              <div className = "contentEvent"> {content} </div>
-
-
-            }
 
             <div className = "locationEventWord">Location</div>
             {

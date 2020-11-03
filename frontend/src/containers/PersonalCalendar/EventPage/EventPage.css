@@ -6,8 +6,8 @@
   overflow: hidden;
 
   background: white;
-
-  border-radius: 10px;
+  line-height: 150%;
+  border-radius: 15px;
   padding:25px;
   box-shadow:
 
@@ -24,18 +24,21 @@
     /* background: red; */
 }
 
+.outerContainer{
+  height:400px;
+  /* background-color: red; */
+}
+
 .eventDetails{
-  padding:20px;
+
   font-size: 16px;
   position: relative;
 }
 
 .innerContainerPeople{
   position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+
+
 }
 
 .flex-child {
