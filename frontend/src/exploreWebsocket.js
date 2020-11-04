@@ -66,58 +66,31 @@ class WebSocketExplore {
       //STATUS REDONE
 
       const profile = JSON.parse(parsedData.profile)
-      console.log(profile)
-
-      //Now redux here
-
       this.callbacks['load_profile'](profile)
 
-    } else if (command === 'send_following'){
-      // This is to add the person to your following
-      const user = parsedData.actorObjSerial
-      const person_following = parsedData.targetObjSerial
-      console.log(user, person_following)
-      // the user will be the person that will be the user will be the person
-      // that will be getting the following
-      const followObj = {
-        user: user,
-        person_following: person_following
-      }
-      // this.callbacks['new_following'](followObj)
     } else if (command === 'send_follower'){
+      // STATUS REDONE
+
       // This is to add to the other person's followers
       const newFollowerList = parsedData.followerList
+      this.callbacks['new_follower_unfollower'](newFollowerList)
 
-      this.callbacks['new_follower'](newFollowerList)
+    } else if (command === 'send_unfollower'){
+      // This is to un add the other person follower
+
+      const newFollowerList = parsedData.followerList
+      this.callbacks['new_follower_unfollower'](newFollowerList)
+
+
     } else if (command === 'currUser_profile') {
+      // GOTTA RETHINK ON
+
       // This is to send the profile info of the current user
       const profile = JSON.parse(parsedData.user_profile)[0]
       this.callbacks['current_user'](profile)
-    } else if (command === 'send_unfollowing'){
-      // used to send to the backend in order to
-      // This is to do it on the actor side, (the person doing the
-      // following side)
-      // Unadd to the following side
-      const user = parsedData.actorObjSerial
-      const person_unfollowing = parsedData.targetObjSerial
 
-      const followObj = {
-        user: user,
-        person_unfollowing: person_unfollowing
-      }
 
-      this.callbacks['new_unFollowing'](followObj)
-    } else if (command === 'send_unfollower'){
-      // This is to un add the other person follower
-      const user = parsedData.actorObjSerial
-      const person_unfollower = parsedData.targetObjSerial
-
-      const followObj = {
-        user: user,
-        person_unfollower: person_unfollower
-      }
-      this.callbacks['new_unFollower'](followObj)
-    } else if (command === 'send_social_like_old'){
+    }  else if (command === 'send_social_like_old'){
       //EFFICENTCY: OK BUT STILL QUESTIONABLE AS TO WHETHER OR NOT WE CAN
       //JUST REMOVE CHANNELS ALL TOGETHER AND JUST DO REDUX AND EVERYTIME YOU
       // REFRESH IT WILL JUST SHOW UP THE LIKING
@@ -269,10 +242,8 @@ class WebSocketExplore {
 // call backs will pretty much be holding all the redux functions
   addCallbacks(
      loadProfile,
-     addFollowerCallBack,
+     addFollowerUnfollowerCallBack,
      loadCurrProfile,
-     unFollowingCallback,
-     unFollowerCallback,
      addSocialLikeUnlikeOld,
      addSocialLikeOldM,
      addSocialUnLikeM,
@@ -287,10 +258,8 @@ class WebSocketExplore {
      removeUserSocialEventM
    ){
     this.callbacks['load_profile'] = loadProfile
-    this.callbacks['new_follower'] = addFollowerCallBack
+    this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
     this.callbacks['current_user'] = loadCurrProfile
-    this.callbacks['new_unFollowing'] = unFollowingCallback
-    this.callbacks['new_unFollower'] = unFollowerCallback
     this.callbacks['social_like_unlike_old'] = addSocialLikeUnlikeOld
     this.callbacks['social_like_old_m'] = addSocialLikeOldM
     this.callbacks['social_unlike_m'] = addSocialUnLikeM

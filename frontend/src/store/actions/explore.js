@@ -10,10 +10,10 @@ export const loadProfile = (profile) => {
 
 }
 
-export const addFollower = followerList => {
-  // This will be for the receiving persopn
+export const addFollowerUnfollower = followerList => {
+  // This will be for the receiving persopn (both for following and unfollowing)
   return{
-    type: actionTypes.ADD_FOLLOWER,
+    type: actionTypes.ADD_FOLLOWER_UNFOLLOWER,
     followerList: followerList
   }
 }
@@ -47,24 +47,6 @@ export const openChangeProfilePic = () => {
 export const closeChangeProfilePic = () => {
   return {
     type: actionTypes.CLOSE_CHANGE_PROFILE_PIC
-  }
-}
-
-
-export const addUnFollower = (followObject) => {
-  // This will be used for the person getting the follower
-  // basically not you
-  return {
-    type: actionTypes.ADD_UNFOLLOWER,
-    followObject: followObject
-  }
-}
-
-export const addUnFollowing = (followObject) =>{
-  // This one will be used for you as the person doing the unfollowing
-  return {
-    type: actionTypes.ADD_UNFOLLOWING,
-    followObject: followObject
   }
 }
 

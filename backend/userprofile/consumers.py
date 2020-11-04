@@ -983,26 +983,17 @@ class ExploreConsumer(JsonWebsocketConsumer):
         followerObj = UserFollowing.objects.filter(person_following = follower, person_getting_followers = following)
         followerObj.delete()
 
-        # The content_follower is for the person doing the following so its you prietty much
-        content_follower = {
+        # Following will be the host
+        curUser = get_object_or_404(User, id = data['following'])
+        hostObj = UserSerializer(curUser).data
 
-
-            'command': 'send_unfollowing',
-            'targetId': following.id,
-            'targetObjSerial': followingObjSerial,
-            'actorObjSerial': followerObjSerial
-        }
-
-        # This is for the other person
-        content_following ={
+        content = {
             'command': 'send_unfollower',
-            'targetId': follower.id,
-            'targetObjSerial': followerObjSerial,
-            'actorObjSerial': followingObjSerial
+            'followerList': hostObj['get_followers'],
+            'reciever': hostObj['username']
         }
-
-        self.send_new_follow(content_follower)
-        self.send_new_follow(content_following)
+        
+        self.send_new_explore(content)
 
 
     def send_new_follow(self, followObj):
@@ -1068,10 +1059,10 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.fetch_profile(data)
         if data['command'] == 'send_following':
             self.send_following(data)
-        if data['command'] == 'fetch_curUser_profile':
-            self.fetch_curUser_profile(data)
         if data['command'] == 'send_unfollowing':
             self.send_unfollowing(data)
+        if data['command'] == 'fetch_curUser_profile':
+            self.fetch_curUser_profile(data)
         if data['command'] == 'send_social_like':
             self.send_social_like(data)
         if data['command'] == 'send_social_unlike':

@@ -198,30 +198,9 @@ class PersonalProfile extends React.Component{
       // It will pretty muchh just delete the follower and following
 
 
-      // ExploreWebSocketInstance.sendUnFollowing(follower, following)
+      ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
-    // onFollowingOrNot = (username) => {
-    //   // This function will check if the use is following the targeted user
-    //   // or not. If they are it will show a unfollow button if they are not then they
-    //   // will show a follow button
-    //   if (this.props.data){
-    //     if (this.props.followers){
-    //       const followers = this.props.data.get_followers
-    //       console.log(followers)
-    //       for (let i = 0; i < followers.length; i++){
-    //         if(followers[i].username === this.props.currentUser.toString()){
-    //           this.setState({
-    //             following: true
-    //           })
-    //         }
-    //       }
-    //     }
-    //   }
-    //
-    //
-    //
-    // }
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
