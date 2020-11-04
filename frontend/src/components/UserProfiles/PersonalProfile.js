@@ -186,7 +186,7 @@ class PersonalProfile extends React.Component{
       const notificationObject = {
         command: 'send_follow_notification',
         actor: this.props.currentUser,
-        recipient: this.props.curProfile.username
+        recipient: this.props.profile.username
       }
 
       NotificationWebSocketInstance.sendNotification(notificationObject)

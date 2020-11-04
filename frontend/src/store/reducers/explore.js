@@ -7,11 +7,9 @@ import { updateObject } from '../utility';
 const initialState = {
   showProfileEdit: false,
   changeProfilePic: false,
-  profiles: [],
   profile: {},
   // curProfile: [],
   test: '',
-  // profile: []
 
 }
 
@@ -21,12 +19,6 @@ export const loadProfile = (state, action) => {
   })
 }
 
-export const loadProfiles = (state, action) =>{
-  console.log(action)
-  return updateObject(state, {
-    profiles: action.profiles
-  })
-}
 
 export const loadCurProfile = (state,action) =>{
   // The profile will get added in when the getcurprofile is added
@@ -38,21 +30,13 @@ export const loadCurProfile = (state,action) =>{
 }
 
 export const addFollower = (state, action) => {
-  // probally later on have to figure out how to do binary searh on this one
-  console.log(action.followObject)
-  console.log(state.profiles)
-  console.log('add follower')
+
   return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.username === action.followObject.user.username ? {
-        ...profile,
-        get_followers: [...profile.get_followers, action.followObject.person_follower]
-      } : profile.username === action.followObject.person_follower.username ? {
-        ...profile,
-        get_following: [...profile.get_following, action.followObject.user]
-      } : profile
-      // profile => profile.username === action.followObject.person_follower
-    )
+    profile: {
+      ...state.profile,
+      get_followers: action.followerList
+    }
+
   })
 }
 
@@ -157,22 +141,6 @@ export const addUnFollower = (state, action) => {
   })
 }
 
-export const addFollowing = (state, action) => {
-  // probally gonna have to think of a way to do the binary search here
-  //
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.username === action.followObject.user.username ? {
-        ...profile,
-        get_following: [...profile.get_following, action.followObject.person_following]
-      } : profile.username === action.followObject.person_following.username ? {
-        ...profile,
-        get_followers: [...profile.get_followers, action.followObject.user]
-      } : profile
-    )
-  })
-}
 
 
 // FOR ALL THE NEW CAL CELL BEING CREATED, YOU CAN PROBALLY JUST USE ONE
@@ -412,12 +380,8 @@ const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.LOAD_PROFILE:
       return loadProfile(state, action);
-    case actionTypes.LOAD_PROFILES:
-      return loadProfiles(state, action);
     case actionTypes.ADD_FOLLOWER:
       return addFollower(state, action);
-    case actionTypes.ADD_FOLLOWING:
-      return addFollowing(state, action)
     case actionTypes.LOAD_CUR_PROFILE:
       return loadCurProfile(state, action)
     case actionTypes.OPEN_PROFILE_EDIT:

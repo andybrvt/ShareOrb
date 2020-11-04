@@ -136,7 +136,6 @@ class UserProfileView extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    profiles: state.explore.profiles
   }
 }
 export default connect(mapStateToProps)(UserProfileView);

@@ -67,14 +67,12 @@ export const DELETE_POST = 'DELETE_POST';
 
 
 
-export const LOAD_PROFILES = 'LOAD_PROFILES';
 // so adding to follower you will add it to the person getting the following
 // add following would be to the person that is doing the following
 
 export const LOAD_PROFILE  = 'LOAD_PROFILE';
 
 export const ADD_FOLLOWER = 'ADD_FOLLOWER';
-export const ADD_FOLLOWING = 'ADD_FOLLOWING';
 export const LOAD_CUR_PROFILE = 'LOAD_CUR_PROFILE';
 export const OPEN_PROFILE_EDIT = 'OPEN_PROFILE_EDIT';
 export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT';

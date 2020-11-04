@@ -347,7 +347,6 @@ class NewsFeedView extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-		profile: state.explore.profiles,
 		currentUser: state.auth.username,
 		currentProfile: state.explore.profile
   }

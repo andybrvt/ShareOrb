@@ -592,14 +592,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
-    def fetch_follower_following(self, data):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many = True)
-        content = {
-            'command': 'user_profiles',
-            'user_profiles': json.dumps(serializer.data)
-        }
-        self.send_json(content)
 
     def fetch_curUser_profile(self, data):
         currentUser = User.objects.filter(username = data['currUser'])
@@ -963,31 +955,21 @@ class ExploreConsumer(JsonWebsocketConsumer):
         followerObjSerial = FollowUserSerializer(follower, many = False).data
         followingObjSerial = FollowUserSerializer(following, many = False).data
         followerObj = UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
-        serializer = FollowSerializer(followerObj, many = False)
 
-        # Since you will need to add the other persons name into your following and the other
-        # person needs to add you to their follower
-        # content follower will be the info that the person doing the following will get
-        content_follower = {
-            'command': 'send_following',
-            'targetId': following.id,
-            'targetObjSerial': followingObjSerial,
-            'actorObjSerial': followerObjSerial
-        }
 
-        # content_following will be the person getting the follower (the perosn that the user if following)
-        content_following = {
+        curUser = get_object_or_404(User, id = data['following'])
+        hostObj = UserSerializer(curUser).data
+
+
+
+        content = {
             'command': 'send_follower',
-            'targetId': follower.id,
-            'targetObjSerial': followerObjSerial,
-            'actorObjSerial': followingObjSerial
-
+            'followerList': hostObj['get_followers'],
+            'reciever': hostObj['username']
         }
 
 
-
-        self.send_new_follow(content_follower)
-        self.send_new_follow(content_following)
+        self.send_new_explore(content)
 
     def send_unfollowing(self, data):
         # This function is used to get the user objects and then will filter out the following
@@ -1048,7 +1030,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This send will be used for the social cal and that in order for
         # this send to send we need to have a recive object in the content
         channel_layer = get_channel_layer()
-        channel_recipient = exploreObj['reciever']['username']
+        channel_recipient = exploreObj['reciever']
         channel = 'explore_'+channel_recipient
 
 
@@ -1084,8 +1066,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == 'fetch_profile':
             self.fetch_profile(data)
-        if data['command'] == 'fetch_follower_following':
-            self.fetch_follower_following(data)
         if data['command'] == 'send_following':
             self.send_following(data)
         if data['command'] == 'fetch_curUser_profile':

@@ -86,14 +86,9 @@ class WebSocketExplore {
       // this.callbacks['new_following'](followObj)
     } else if (command === 'send_follower'){
       // This is to add to the other person's followers
-      const user = parsedData.actorObjSerial
-      const person_follower = parsedData.targetObjSerial
-      const followObj = {
-        user: user,
-        person_follower: person_follower
-      }
+      const newFollowerList = parsedData.followerList
 
-      this.callbacks['new_follower'](followObj)
+      this.callbacks['new_follower'](newFollowerList)
     } else if (command === 'currUser_profile') {
       // This is to send the profile info of the current user
       const profile = JSON.parse(parsedData.user_profile)[0]
@@ -274,9 +269,7 @@ class WebSocketExplore {
 // call backs will pretty much be holding all the redux functions
   addCallbacks(
      loadProfile,
-     loadProfiles,
      addFollowerCallBack,
-     addFollowingCallBack,
      loadCurrProfile,
      unFollowingCallback,
      unFollowerCallback,
@@ -294,9 +287,7 @@ class WebSocketExplore {
      removeUserSocialEventM
    ){
     this.callbacks['load_profile'] = loadProfile
-    this.callbacks['fetch_profiles'] = loadProfiles
     this.callbacks['new_follower'] = addFollowerCallBack
-    this.callbacks['new_following'] = addFollowingCallBack
     this.callbacks['current_user'] = loadCurrProfile
     this.callbacks['new_unFollowing'] = unFollowingCallback
     this.callbacks['new_unFollower'] = unFollowerCallback
@@ -329,7 +320,7 @@ class WebSocketExplore {
     })
   }
 
-  
+
 
   fetchCurrentUserProfile(currUser){
     // Fetch the cur user seperate by the back end so we can avoid looping through
