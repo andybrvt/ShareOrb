@@ -4,6 +4,7 @@ import { authAxios } from '../util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
 import { Button, Modal, Avatar } from 'antd';
+import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import defaultPicture from '../images/default.png';
@@ -12,7 +13,7 @@ import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar
 import FollowList from './FollowList';
 import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
-
+import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
 // From here on out each profile will be its own channel, so we do not need
 // to use ViewAnyUserProfile anymore
 // Each profile will fetch its own information and do its own channel stuff
@@ -36,6 +37,8 @@ class PersonalProfile extends React.Component{
   state = {
     followerShow: false,
     followingShow: false,
+    showProfileEdit: false,
+    showProfilePicEdit: false,
     // following: false,
   }
 
@@ -106,6 +109,64 @@ class PersonalProfile extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  closeProfileEdit = () => {
+    // You wanna check if the person open and opening is the current user
+    if(this.props.match.params.username === this.props.currentUser){
+      this.setState({
+        showProfileEdit: false,
+      })
+    }
+  }
+
+  openProfileEdit = () => {
+    if(this.props.match.params.username === this.props.currentUser){
+      this.setState({
+        showProfileEdit: true,
+      })
+    }
+  }
+
+  openChangeProfilePic = () => {
+    if(this.props.match.params.username === this.props.currentUser){
+      this.setState({
+        showProfilePicEdit: true
+      })
+    }
+  }
+
+  closeChangeProfilePic = () => {
+    if(this.props.match.params.username === this.props.currentUser){
+      this.setState({
+        showProfilePicEdit: false,
+      })
+    }
+  }
+
+  renderEditButton = () => {
+    return (
+      <div className = 'editButton' onClick = {() => this.openChangeProfilePic()}>
+       <RetweetOutlined />
+
+      </div>
+    )
+  }
+
+
+  handleProfilePicChange = (values) => {
+    // // This is used to changing the profile pic, for submiting.
+    // console.log(values)
+    // const userId = this.props.curProfile.id
+    // var data  = new FormData()
+    // data.append('profile_picture', values)
+    // // To edit information, you usually do put instead of post
+    // authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+    //   data
+    // )
+
+// PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
+
+
+  }
 
 
   // on click add friend starts here
@@ -158,13 +219,22 @@ class PersonalProfile extends React.Component{
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
-
           <Avatar size = {180} src = {profileImage} />
+          {
+            this.props.match.params.username === this.props.currentUser ?
+            this.renderEditButton()
+
+            :
+
+            <div></div>
+          }
         </div>
       )
     }
 
     renderCalPostPic = () => {
+      // This is to display the 3 sections (cal, post, pic)
+      // It allows you to switch between
       return(
         <div className = 'cal-post-pic'>
           {this.onRenderTabs()}
@@ -174,13 +244,8 @@ class PersonalProfile extends React.Component{
     }
 
     onFollow = (follower, following) =>{
-      // This is to send a follow into the back end
-      // It will use the id of the user to get the user and add the following
-
-
+      //Send a follow in the backend
       ExploreWebSocketInstance.sendFollowing(follower, following)
-
-
 
       // The follower is you who is sending the reqwuest and the following is the other person
       const notificationObject = {
@@ -196,7 +261,6 @@ class PersonalProfile extends React.Component{
     onUnfollow = (follower, following) => {
       // This will send an unfollow into the back end
       // It will pretty muchh just delete the follower and following
-
 
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
@@ -293,31 +357,50 @@ class PersonalProfile extends React.Component{
           </div>
         <div>
 
-        <div className = 'profileButtons'>
+        {
+            this.props.match.params.username === this.props.currentUser ?
 
-        {followers.includes(this.props.currentUser.toString()) ?
-          <div
-          onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-          className = 'unFollowButton'>
-            Unfollow
-          </div>
+            <div className = 'selfProfileButtons'>
 
-          :
 
-          <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
-            Follow
-          </div>
+              <div
+              onClick = {() => this.openProfileEdit()}
+              className = 'editProfileButton'>
+                Edit Profile
+              </div>
+
+            </div>
+
+            :
+
+            <div className = 'profileButtons'>
+
+            {followers.includes(this.props.currentUser.toString()) ?
+              <div
+              onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
+              className = 'unFollowButton'>
+                Unfollow
+              </div>
+
+              :
+
+              <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
+                Follow
+              </div>
+
+            }
+
+
+
+
+              <div className = 'messageButton'>
+                Message
+              </div>
+
+            </div>
 
         }
 
-
-
-
-          <div className = 'messageButton'>
-            Message
-          </div>
-
-        </div>
 
 
         </div>
@@ -431,6 +514,19 @@ class PersonalProfile extends React.Component{
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
+        <Modal
+        visible = {this.state.showProfileEdit}
+        onCancel = {() => this.closeProfileEdit()}
+        >
+        This is for editing the profile information
+        </Modal>
+
+        <ChangeProfilePic
+           visible = {this.state.showProfilePicEdit}
+           onCancel = {this.closeChangeProfilePic}
+           onSubmit = {this.handleProfilePicChange}
+         />
+
 
         <Modal
         visible ={this.state.followerShow}

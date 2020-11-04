@@ -50,18 +50,12 @@ class WebSocketExplore {
   }
 
   socketNewExplore(data){
-    console.log('socketNewExplore')
-    // This is pretty much just used to send thinggs to redux
-    // and pretty much anything that needs to update temporarly
 
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
     console.log(parsedData)
     console.log(command === 'user_profile_page')
-    // The reason why there is only one follower following because
-    // whenever somone follows someone else there will be on follower
-    // for one person and one following for another so event if someone
-    // follows you back the trend will still be the same
+
     if (command === "user_profile"){
       //STATUS REDONE
 
@@ -76,6 +70,8 @@ class WebSocketExplore {
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
     } else if (command === 'send_unfollower'){
+      // STATUS REDONE
+
       // This is to un add the other person follower
 
       const newFollowerList = parsedData.followerList

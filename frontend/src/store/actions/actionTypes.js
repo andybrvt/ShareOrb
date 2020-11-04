@@ -79,8 +79,6 @@ export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT';
 export const OPEN_CHANGE_PROFILE_PIC = 'OPEN_CHANGE_PROFILE_PIC';
 export const CLOSE_CHANGE_PROFILE_PIC = 'CLOSE_CHANGE_PROFILE_PIC';
 
-
-
 // This is to set the action social
 export const NEXT_MONTH_SOCIAL = 'NEXT_MONTH_SOCIAL';
 export const PREV_MONTH_SOCIAL = 'PREV_MONTH_SOCIAL';

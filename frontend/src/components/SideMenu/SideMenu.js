@@ -144,6 +144,7 @@ class SideMenu extends React.Component {
 
 
 
+
     return (
       <div style={{marginBottom:30}}>
 
@@ -199,7 +200,7 @@ class SideMenu extends React.Component {
             <Menu.Item key="5">
               <SmileOutlined />
               <span>Social Calendar</span>
-              <Link to={"/current-user/"} />
+              <Link to={"/explore/"+this.props.username} />
             </Menu.Item>
           </Menu>
 
@@ -282,7 +283,7 @@ class SideMenu extends React.Component {
          selectedKeys={[]} >
              { (
                <Menu.Item key="center">
-                 <Link to="/current-user">
+                 <Link to={"/explore/"+this.props.username}>
                    <UserOutlined />
                    Profile
 
@@ -398,6 +399,7 @@ const mapStateToProps = state => {
     notificationDrop: state.nav.showPopup,
     showPickEventSyncModal: state.eventSync.showPickEventSyncModal,
     id: state.auth.id,
+    username: state.auth.username,
     showNotification: state.notifications.showNotification,
     notifications: state.notifications.notifications,
     profilePic: state.auth.profilePic

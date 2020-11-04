@@ -35,6 +35,7 @@ class BaseRouter extends React.Component {
 // props and this.props are two different things on the routes
 
 // <Route exact path = '/explore/:username' render={(props) => <ViewAnyUserProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+// <Route exact path = '/current-user/:username' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
   render() {
 
@@ -56,7 +57,6 @@ class BaseRouter extends React.Component {
         <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/explore/:username' render={(props) => <PersonalProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/current-user/:username' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
