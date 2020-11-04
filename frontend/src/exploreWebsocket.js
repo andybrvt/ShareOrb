@@ -63,6 +63,8 @@ class WebSocketExplore {
     // for one person and one following for another so event if someone
     // follows you back the trend will still be the same
     if (command === "user_profile"){
+      //STATUS REDONE
+
       const profile = JSON.parse(parsedData.profile)
       console.log(profile)
 
@@ -81,7 +83,7 @@ class WebSocketExplore {
         user: user,
         person_following: person_following
       }
-      this.callbacks['new_following'](followObj)
+      // this.callbacks['new_following'](followObj)
     } else if (command === 'send_follower'){
       // This is to add to the other person's followers
       const user = parsedData.actorObjSerial
@@ -327,17 +329,7 @@ class WebSocketExplore {
     })
   }
 
-  fetchFollowerFollowing(){
-    // This gets called in teh newsfeedview.js
-
-    //This will pretty much fetch all the users profiles (way too have to have as
-    // channels)
-    // Found in NewsFeedView
-
-    this.sendExplore({
-      command: 'fetch_follower_following'
-    })
-  }
+  
 
   fetchCurrentUserProfile(currUser){
     // Fetch the cur user seperate by the back end so we can avoid looping through

@@ -178,7 +178,7 @@ class PersonalProfile extends React.Component{
       // It will use the id of the user to get the user and add the following
 
 
-      // ExploreWebSocketInstance.sendFollowing(follower, following)
+      ExploreWebSocketInstance.sendFollowing(follower, following)
 
 
 
@@ -437,12 +437,12 @@ class PersonalProfile extends React.Component{
       let followers = []
       let following = []
 
-      if (this.props.curProfile){
-        if(this.props.curProfile.get_followers){
-          followers = this.props.curProfile.get_followers
+      if (this.props.profile){
+        if(this.props.profile.get_followers){
+          followers = this.props.profile.get_followers
         }
-        if(this.props.curProfile.get_following){
-          following = this.props.curProfile.get_following
+        if(this.props.profile.get_following){
+          following = this.props.profile.get_following
         }
 
       }
