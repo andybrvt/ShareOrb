@@ -18,7 +18,7 @@ import background from '../../../components/images/background1.jpg';
 import ChangeBackgroundModal from "./ChangeBackgroundModal";
 import { authAxios } from '../../../components/util';
 import Liking from '../../NewsfeedItems/Liking';
-
+import { ReactBingmaps } from 'react-bingmaps';
 class EventInfo extends React.Component{
 
   constructor(props){
@@ -632,8 +632,8 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'-75px',marginLeft:'200px', color:'black'}} class="outerContainer">
             <span
-                style={{ fontSize:'20px', width:'1000px', height:'100px',
-                 display:'inline-block', marginTop:'100px', padding:'50px'}}
+                style={{ fontSize:'20px', width:'1000px', height:'75px',
+                 display:'inline-block', marginTop:'100px', padding:'30px'}}
                  class="aboutEvent eventCard innerContainer">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
@@ -682,9 +682,9 @@ class EventInfo extends React.Component{
 
           </div>
 
-          <div style={{marginLeft:'200px', height:'400px', color:'black'}} class="outerContainer">
+          <div style={{marginTop:'40px', marginLeft:'200px', height:'400px', color:'black'}} class="outerContainer">
 
-            <div style={{ fontSize:'20px', width:'450px', height:'250px', display:'inline-block' }}
+            <div style={{ fontSize:'20px', width:'500px', height:'250px', display:'inline-block' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
               <br/>
@@ -717,15 +717,28 @@ class EventInfo extends React.Component{
 
             </div>
 
-             <span class="innerContainer aboutEvent eventCard "
-               style={{  left:'15%', width:'350px', height:'150px',  display:'inline-block'}}>
-               <div class="eventDetails">
-                 <i style={{color:'#1890ff'}} class="fas fa-clock"></i>
-                 <div className = "eventDate"> {date} </div>
-                 <div className = "eventTime">{start_time}-{end_time}</div>
-               </div>
+            <div class="mapEventCard">
 
-             </span>
+              <ReactBingmaps
+                bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                center = {[32.2226, 110.9747]}
+                boundary = {
+                {
+                  "search":"Tucson",
+                  "option":{
+                    entityType: 'PopulatedPlace'
+                  },
+                  "polygonStyle" :{
+                    fillColor: 'rgba(161,224,255,0.4)',
+                    strokeColor: '#a495b2',
+                    strokeThickness: 2
+                  }
+                }
+              }
+                >
+              </ReactBingmaps>
+
+            </div>
 
 
 
@@ -750,7 +763,8 @@ class EventInfo extends React.Component{
             }
 
 
-            <div className = "eventPeopleWord"> People </div>
+
+        <div className = "eventPeopleWord eventCard"> Statistics
 
 
           <div className =  "percentagesBars">
@@ -790,7 +804,7 @@ class EventInfo extends React.Component{
 
           </div>
 
-
+        </div>
 
 
 

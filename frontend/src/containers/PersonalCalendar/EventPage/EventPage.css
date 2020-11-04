@@ -30,6 +30,25 @@
   /* background-color: gainsboro; */
 }
 
+.mapEventCard{
+  position: relative;
+  overflow: hidden;
+  width:400px;
+  height:300px;
+  float:right;
+
+  margin-right: 50px;
+  background: white;
+
+  border-radius: 15px;
+  box-shadow:
+
+  0 10px 50px rgba(0, 0, 0, 0.12);
+  font-family: 'Segoe UI Regular';
+
+  /* background-color: gainsboro; */
+}
+
 
 
 .flex-container {
