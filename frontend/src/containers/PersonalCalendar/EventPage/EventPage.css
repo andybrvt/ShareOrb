@@ -1,5 +1,18 @@
 /* CSS for the whole container */
 
+.innerContainerEvent{
+  position: relative;
+  vertical-align: middle;
+  top: 50%;
+  -webkit-transform: translateY(-0%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+.outerContainerEvent{
+
+}
 
 .eventCard{
   position: relative;
@@ -13,6 +26,7 @@
 
   0 10px 50px rgba(0, 0, 0, 0.12);
   font-family: 'Segoe UI Regular';
+
   /* background-color: gainsboro; */
 }
 

@@ -597,10 +597,11 @@ class EventInfo extends React.Component{
 
 
           <div class="flex-container eventCard"
-            style={{width:'400px', height:'105px', background:'white'}}
+            style={{width:'250px', height:'100px', background:'white'}}
 
           >
-            <div style={{color:'black'}} className = "attendees flex-child">Host
+            <div style={{color:'black'}} className = "attendees">
+              Host
               <br/>
               <br/>
               <span>
@@ -612,12 +613,13 @@ class EventInfo extends React.Component{
               </span>
             </div>
 
-            {/*if no one going , THEN show invited else just show invited*/}
+            {/*if no one going , THEN show invited else just show invited
             <div className = "attendees flex-child">
               <span style={{color:'black'}}> {invited.length} Invited </span>
 
               <Liking like_people={invited}/>
             </div>
+            */}
 
             </div>
 
@@ -628,26 +630,33 @@ class EventInfo extends React.Component{
           </div>
 
 
-          <div style={{marginLeft:'200px', color:'black'}} class="outerContainer">
+          <div style={{marginTop:'-75px',marginLeft:'200px', color:'black'}} class="outerContainer">
             <span
-              style={{ fontSize:'20px', width:'1000px', height:'110px',
+                style={{ fontSize:'20px', width:'1000px', height:'100px',
                  display:'inline-block', marginTop:'100px', padding:'50px'}}
-              class="aboutEvent eventCard innerContainer">
-              <div class="outerContainerPeople">
-              <span class="innerContainerPeople" style={{display:'inline-block'}}>
+                 class="aboutEvent eventCard innerContainer">
+              <div class="outerContainerEvent">
+              <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
-                <Statistic title="Going" value={3} prefix={<UserOutlined />} />
+                <Statistic
+                  title="Going" value={3} prefix={<UserOutlined />} />
 
 
               </span>
-              <span class="innerContainerPeople" style={{marginLeft:'100px',display:'inline-block'}}>
+              <span class="innerContainerEvent" style={{marginLeft:'100px',display:'inline-block'}}>
 
                 <Statistic title="Invited" value={5} prefix={<UserOutlined />}>
 
                 </Statistic>
 
 
+
               </span>
+
+
+            <span class="innerContainerEvent" style={{marginLeft:'50px',display:'inline-block'}}>
+                <Liking style={{display:'inline-block'}} like_people={invited}/>
+            </span>
 
              <span class="innerContainerPeople"
                style={{display:'inline-block'}}>
@@ -655,14 +664,14 @@ class EventInfo extends React.Component{
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                  style={{left:'125%', fontSize:'18px'}} size={'large'}>
+                  style={{left:'85%', fontSize:'15px'}} size={'large'}>
 
                  Going
                </Button>
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'150%', fontSize:'18px'}} size={'large'} danger>
+                  style={{left:'100%', fontSize:'15px'}} size={'large'} danger>
 
                  Not Going
                </Button>

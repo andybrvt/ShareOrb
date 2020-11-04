@@ -15,8 +15,9 @@
 
 .innerContainerPeople{
   position: relative;
+  vertical-align: middle;
   top: 50%;
-  -webkit-transform: translateY(-50%);
+  -webkit-transform: translateY(-0%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   /* background: red; */
