@@ -7,6 +7,7 @@ import { Button, Modal, Avatar } from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
+import * as exploreActions from '../../store/actions/explore';
 import defaultPicture from '../images/default.png';
 import ava1 from '../images/avatar.jpg'
 import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
@@ -153,18 +154,20 @@ class PersonalProfile extends React.Component{
 
 
   handleProfilePicChange = (values) => {
-    // // This is used to changing the profile pic, for submiting.
-    // console.log(values)
-    // const userId = this.props.curProfile.id
-    // var data  = new FormData()
-    // data.append('profile_picture', values)
-    // // To edit information, you usually do put instead of post
-    // authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
-    //   data
-    // )
+    // This is used to changing the profile pic, for submiting.
+    console.log(values)
+    const userId = this.props.profile.id
+    var data  = new FormData()
+    data.append('profile_picture', values)
+    // To edit information, you usually do put instead of post
+    authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+      data
+    ).then(res => {
+      this.props.changeProfilePic(res.data.profile_picture.substring(21,))
+    })
 
 // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
-
+    this.closeChangeProfilePic();
 
   }
 
@@ -560,7 +563,13 @@ const mapStateToProps = state => {
       currentUser: state.auth.username,
       token: state.auth.token,
       profile: state.explore.profile
-      };
     };
+};
 
-export default connect(mapStateToProps)(PersonalProfile);
+const mapDispatchToProps = dispatch => {
+  return {
+    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalProfile);

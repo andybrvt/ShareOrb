@@ -14,8 +14,33 @@ const initialState = {
 }
 
 export const loadProfile = (state, action) => {
+  //IMPROVED
+
   return updateObject(state, {
     profile: action.profile
+  })
+}
+
+export const addFollowerUnfollower = (state, action) => {
+  // IMPROVED
+
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      get_followers: action.followerList
+    }
+
+  })
+}
+
+export const changeProfilePic = (state, action) => {
+  // IMPROVED
+
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      profile_picture: action.profilePic
+    }
   })
 }
 
@@ -26,17 +51,6 @@ export const loadCurProfile = (state,action) =>{
   console.log(action.curProfile)
   return updateObject(state, {
     profile: action.curProfile
-  })
-}
-
-export const addFollowerUnfollower = (state, action) => {
-
-  return updateObject(state, {
-    profile: {
-      ...state.profile,
-      get_followers: action.followerList
-    }
-
   })
 }
 
@@ -64,6 +78,11 @@ export const closeChangeProfilePic = (state, action) => {
     changeProfilePic: false
   })
 }
+
+
+
+
+
 
 
 // FOR ALL THE NEW CAL CELL BEING CREATED, YOU CAN PROBALLY JUST USE ONE
@@ -305,6 +324,10 @@ const reducer = (state = initialState, action) => {
       return loadProfile(state, action);
     case actionTypes.ADD_FOLLOWER_UNFOLLOWER:
       return addFollowerUnfollower(state, action);
+    case actionTypes.CHANGE_PROFILE_PIC:
+      return changeProfilePic(state, action);
+
+
     case actionTypes.LOAD_CUR_PROFILE:
       return loadCurProfile(state, action)
     case actionTypes.OPEN_PROFILE_EDIT:
@@ -315,6 +338,8 @@ const reducer = (state = initialState, action) => {
       return openChangeProfilePic(state, action)
     case actionTypes.CLOSE_CHANGE_PROFILE_PIC:
       return closeChangeProfilePic(state, action)
+
+
     case actionTypes.ADD_SOCIAL_LIKE_UNLIKE_OLD:
       return addSocialLikeUnlikeOld(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD:

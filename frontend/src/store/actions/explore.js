@@ -18,6 +18,16 @@ export const addFollowerUnfollower = followerList => {
   }
 }
 
+export const changeProfilePic = profilePic => {
+  //Use to change the profile pic of the current user
+  return {
+    type: actionTypes.CHANGE_PROFILE_PIC,
+    profilePic: profilePic
+  }
+}
+
+
+// DLETE ALL 5 OF THESE
 export const openProfileEdit = () =>{
   return {
     type: actionTypes.OPEN_PROFILE_EDIT
@@ -49,6 +59,11 @@ export const closeChangeProfilePic = () => {
     type: actionTypes.CLOSE_CHANGE_PROFILE_PIC
   }
 }
+
+
+
+
+
 
 export const addSocialLikeUnlikeOld = (exploreObj) => {
   // This will be used for the social calendar liking when there is an exisiting

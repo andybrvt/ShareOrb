@@ -73,11 +73,19 @@ export const DELETE_POST = 'DELETE_POST';
 export const LOAD_PROFILE  = 'LOAD_PROFILE';
 
 export const ADD_FOLLOWER_UNFOLLOWER = 'ADD_FOLLOWER_UNFOLLOWER';
+export const CHANGE_PROFILE_PIC  = 'CHANGE_PROFILE_PIC';
+
+
+// Delete all 5 of this probally
 export const LOAD_CUR_PROFILE = 'LOAD_CUR_PROFILE';
 export const OPEN_PROFILE_EDIT = 'OPEN_PROFILE_EDIT';
 export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT';
 export const OPEN_CHANGE_PROFILE_PIC = 'OPEN_CHANGE_PROFILE_PIC';
 export const CLOSE_CHANGE_PROFILE_PIC = 'CLOSE_CHANGE_PROFILE_PIC';
+
+
+
+
 
 // This is to set the action social
 export const NEXT_MONTH_SOCIAL = 'NEXT_MONTH_SOCIAL';
