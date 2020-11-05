@@ -690,7 +690,7 @@ class EventInfo extends React.Component{
 
           </div>
 
-          <div style={{marginTop:'40px', marginLeft:'200px', height:'400px', color:'black'}} class="outerContainer">
+          <div style={{marginTop:'40px', marginLeft:'200px', color:'black'}} class="outerContainer">
 
             <div style={{ fontSize:'20px',display:'inline-block' }}
               class="aboutEvent eventCard innerContainer">
@@ -708,15 +708,10 @@ class EventInfo extends React.Component{
                 {start_time}-{end_time}
                 <br/>
                 <br/>
-                {
-                  content === "" ?
 
-                  <div className = "contentEventEmpty"> No info... </div>
-                  :
-                  <div className = "contentEvent"> {content} </div>
+                <div className = "contentEvent"> {content} </div>
 
 
-                }
 
               </div>
 
@@ -774,7 +769,7 @@ class EventInfo extends React.Component{
 
 
 
-        <div className = "eventPeopleWord eventCard"> Statistics
+        <div style={{ marginTop:'100px', width:'950px'}} className = "eventPeopleWord eventCard"> Statistics
 
 
           <div className =  "percentagesBars">
