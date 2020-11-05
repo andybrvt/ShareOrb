@@ -71,7 +71,8 @@
 
 .innerContainer{
   position: relative;
-
+  width:535px;
+  min-height:200px;
 
 }
 
@@ -206,11 +207,11 @@
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
   /* background-color: red; */
-  width: 65%;
+  width: 45%;
   height: 350px;
   border: 10px dashed gainsboro;
   text-align: center;
-
+  margin-left: 200px;
 }
 
 

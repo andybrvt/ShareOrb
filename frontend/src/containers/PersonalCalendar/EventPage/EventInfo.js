@@ -634,7 +634,7 @@ class EventInfo extends React.Component{
             <span
                 style={{ fontSize:'20px', width:'1000px', height:'85px',
                  display:'inline-block', marginTop:'100px', padding:'40px'}}
-                 class="aboutEvent eventCard innerContainer">
+                 class="aboutEvent eventCard">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
@@ -664,15 +664,23 @@ class EventInfo extends React.Component{
 
                <Button
                   type="primary" shape="round"
+                  icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+                  style={{left:'35%', fontSize:'15px'}} size={'large'}>
+
+                 Share
+               </Button>
+
+               <Button
+                  type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                  style={{left:'85%', fontSize:'15px'}} size={'large'}>
+                  style={{left:'40%', fontSize:'15px'}} size={'large'}>
 
                  Going
                </Button>
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'100%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'45%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
@@ -684,7 +692,7 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'40px', marginLeft:'200px', height:'400px', color:'black'}} class="outerContainer">
 
-            <div style={{ fontSize:'20px', width:'500px', height:'250px', display:'inline-block' }}
+            <div style={{ fontSize:'20px',display:'inline-block' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
               <br/>
@@ -752,7 +760,7 @@ class EventInfo extends React.Component{
           <div className = 'eventInfo outerContainerPeople'>
 
 
-
+            {/*
 
             <div className = "locationEventWord">Location</div>
             {
@@ -761,6 +769,8 @@ class EventInfo extends React.Component{
               :
               <div> {this.capitalize(location)} </div>
             }
+
+            */}
 
 
 

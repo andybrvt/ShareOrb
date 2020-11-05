@@ -4,6 +4,7 @@ import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import './EventPage.css';
+import Liking from '../../NewsfeedItems/Liking';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 
 class EventGroupChat extends React.Component{
