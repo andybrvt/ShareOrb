@@ -30,6 +30,11 @@
   /* background-color: gainsboro; */
 }
 
+.addFont{
+  font-family: 'Segoe UI Regular';
+  color:black;
+}
+
 .mapEventCard{
   position: relative;
   overflow: hidden;
@@ -59,6 +64,7 @@
 
 .outerContainer{
   margin-bottom: 10px;
+
   /* background-color: red; */
 }
 

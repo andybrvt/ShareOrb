@@ -632,34 +632,35 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'-75px',marginLeft:'200px', color:'black'}} class="outerContainer">
             <span
-                style={{ fontSize:'20px', width:'1000px', height:'75px',
-                 display:'inline-block', marginTop:'100px', padding:'30px'}}
+                style={{ fontSize:'20px', width:'1000px', height:'85px',
+                 display:'inline-block', marginTop:'100px', padding:'40px'}}
                  class="aboutEvent eventCard innerContainer">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
-                <Statistic
-                  title="Going" value={3} prefix={<UserOutlined />} />
+                <Statistic class="addFont" title="Going" value={3} />
 
 
+
+              </span>
+              <span class="innerContainerEvent" style={{display:'inline-block'}}>
+                  <Liking style={{display:'inline-block'}} like_people={invited}/>
               </span>
               <span class="innerContainerEvent" style={{marginLeft:'100px',display:'inline-block'}}>
 
-                <Statistic title="Invited" value={5} prefix={<UserOutlined />}>
-
-                </Statistic>
+                <Statistic title="Invited" value={6} />
 
 
 
               </span>
 
 
-            <span class="innerContainerEvent" style={{marginLeft:'50px',display:'inline-block'}}>
+            <span class="innerContainerEvent" style={{display:'inline-block'}}>
                 <Liking style={{display:'inline-block'}} like_people={invited}/>
             </span>
 
              <span class="innerContainerPeople"
-               style={{display:'inline-block'}}>
+               style={{display:'inline-block',padding:'15px'}}>
 
                <Button
                   type="primary" shape="round"
@@ -672,8 +673,7 @@ class EventInfo extends React.Component{
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
                   style={{left:'100%', fontSize:'15px'}} size={'large'} danger>
-
-                 Not Going
+                  Delete
                </Button>
              </span>
 
