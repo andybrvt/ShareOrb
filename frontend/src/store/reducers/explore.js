@@ -8,7 +8,6 @@ const initialState = {
   showProfileEdit: false,
   changeProfilePic: false,
   profile: {},
-  // curProfile: [],
   test: '',
 
 }
@@ -45,14 +44,6 @@ export const changeProfilePic = (state, action) => {
 }
 
 
-export const loadCurProfile = (state,action) =>{
-  // The profile will get added in when the getcurprofile is added
-  // when ever the curprofile is loaded up
-  console.log(action.curProfile)
-  return updateObject(state, {
-    profile: action.curProfile
-  })
-}
 
 export const openProfileEdit = (state, action) =>{
   return updateObject (state, {
@@ -328,8 +319,6 @@ const reducer = (state = initialState, action) => {
       return changeProfilePic(state, action);
 
 
-    case actionTypes.LOAD_CUR_PROFILE:
-      return loadCurProfile(state, action)
     case actionTypes.OPEN_PROFILE_EDIT:
       return openProfileEdit(state, action)
     case actionTypes.CLOSE_PROFILE_EDIT:

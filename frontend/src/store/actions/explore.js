@@ -41,12 +41,6 @@ export const closeProfileEdit = () => {
 }
 
 
-export const loadCurProfile = curProfile => {
-  return {
-    type: actionTypes.LOAD_CUR_PROFILE,
-    curProfile: curProfile
-  }
-}
 
 export const openChangeProfilePic = () => {
   return {

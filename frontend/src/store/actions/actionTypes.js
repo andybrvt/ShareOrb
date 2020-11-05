@@ -77,7 +77,6 @@ export const CHANGE_PROFILE_PIC  = 'CHANGE_PROFILE_PIC';
 
 
 // Delete all 5 of this probally
-export const LOAD_CUR_PROFILE = 'LOAD_CUR_PROFILE';
 export const OPEN_PROFILE_EDIT = 'OPEN_PROFILE_EDIT';
 export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT';
 export const OPEN_CHANGE_PROFILE_PIC = 'OPEN_CHANGE_PROFILE_PIC';

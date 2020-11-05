@@ -78,15 +78,7 @@ class WebSocketExplore {
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
 
-    } else if (command === 'currUser_profile') {
-      // GOTTA RETHINK ON
-
-      // This is to send the profile info of the current user
-      const profile = JSON.parse(parsedData.user_profile)[0]
-      this.callbacks['current_user'](profile)
-
-
-    }  else if (command === 'send_social_like_old'){
+    } else if (command === 'send_social_like_old'){
       //EFFICENTCY: OK BUT STILL QUESTIONABLE AS TO WHETHER OR NOT WE CAN
       //JUST REMOVE CHANNELS ALL TOGETHER AND JUST DO REDUX AND EVERYTIME YOU
       // REFRESH IT WILL JUST SHOW UP THE LIKING
@@ -239,7 +231,6 @@ class WebSocketExplore {
   addCallbacks(
      loadProfile,
      addFollowerUnfollowerCallBack,
-     loadCurrProfile,
      addSocialLikeUnlikeOld,
      addSocialLikeOldM,
      addSocialUnLikeM,
@@ -255,7 +246,6 @@ class WebSocketExplore {
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
-    this.callbacks['current_user'] = loadCurrProfile
     this.callbacks['social_like_unlike_old'] = addSocialLikeUnlikeOld
     this.callbacks['social_like_old_m'] = addSocialLikeOldM
     this.callbacks['social_unlike_m'] = addSocialUnLikeM
@@ -286,22 +276,6 @@ class WebSocketExplore {
   }
 
 
-
-  fetchCurrentUserProfile(currUser){
-    // Fetch the cur user seperate by the back end so we can avoid looping through
-    // all the profiles in the front end
-
-
-    // This will be fetching the currentuserprofile (idk why you just amke it is own
-    // channel.. would be easier
-    //Found in curuserprofile
-
-    console.log('fetch profile')
-    this.sendExplore({
-      command: 'fetch_curUser_profile',
-      currUser: currUser
-    })
-  }
 
 
   sendFollowing = (follower, following) => {

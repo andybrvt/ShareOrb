@@ -7,7 +7,6 @@ import Signup from './containers/Signup';
 import AllUsersNotCurrNotCurrFriends from './containers/AllUsersNotCurrNotCurrFriends';
 import Explore from './containers/Explore';
 import InfiniteList from './containers/InfiniteScroll';
-import CurrUserProfile from './containers/CurrUser/CurrUserProfile';
 import ViewAnyUserProfile from './components/UserProfiles/ViewAnyUserProfile';
 import PersonalProfile from './components/UserProfiles/PersonalProfile';
 import FriendRequestList from './components/FriendRequestList';
