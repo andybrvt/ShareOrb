@@ -56,6 +56,28 @@ class ChangeProfilePic extends React.Component{
       }
     };
 
+    handleSubmit = value => {
+      // Used to clear out the modal when you click sumbit
+      this.setState({
+        loading: false,
+        imageFile:"",
+        imageUrl: null,
+      })
+
+      this.props.onSubmit(value)
+    }
+
+    handleCancel = () => {
+      //This will handle the cancelin gof the model. It will clear out the state
+      this.setState({
+        loading: false,
+        imageFile: "",
+        imageUrl: null
+      })
+
+      this.props.onCancel();
+    }
+
     render() {
       console.log(this.props)
       console.log(this.state)
@@ -71,10 +93,10 @@ class ChangeProfilePic extends React.Component{
       return (
       <Modal
       visible = {this.props.visible}
-      onCancel = {this.props.onCancel}
+      onCancel = {() => this.handleCancel()}
       width = {470}
       okText = {'Save'}
-      onOk = {() => this.props.onSubmit(this.state.imageFile)}
+      onOk = {() => this.handleSubmit(this.state.imageFile)}
       >
       <span className = 'uploadProfileText'> Upload Profile Picture </span>
         <Upload

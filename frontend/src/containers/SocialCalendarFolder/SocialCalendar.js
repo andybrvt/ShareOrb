@@ -116,15 +116,15 @@ class SocialCalendar extends React.Component{
     // so they can edit or not
     let friendListId = []
     let calendarOwnerId = ''
-    if(this.props.curProfile){
-      if(this.props.curProfile.friends){
-        for (let i = 0; i< this.props.curProfile.friends.length; i++){
-          friendListId.push(this.props.curProfile.friends[i].id)
+    if(this.props.profile){
+      if(this.props.profile.friends){
+        for (let i = 0; i< this.props.profile.friends.length; i++){
+          friendListId.push(this.props.profile.friends[i].id)
         }
       }
 
-      if (this.props.curProfile.id){
-        calendarOwnerId = this.props.curProfile.id
+      if (this.props.profile.id){
+        calendarOwnerId = this.props.profile.id
       }
     }
 
@@ -390,7 +390,7 @@ class SocialCalendar extends React.Component{
         )} else {
           const socialEvents = [
             {
-              socialCalUser: this.props.curProfile
+              socialCalUser: this.props.profile
             }
           ]
           days.push(
@@ -538,7 +538,7 @@ class SocialCalendar extends React.Component{
         }
       }
 
-      const curId = this.props.curProfile.id
+      const curId = this.props.profile.id
       // formData.append('imgList',fileList)
 
       authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
@@ -561,9 +561,9 @@ class SocialCalendar extends React.Component{
     // className is to determine the style
     console.log(this.props)
     let socialCalCell = []
-    if (this.props.curProfile){
-      if (this.props.curProfile.get_socialCal){
-        socialCalCell = this.props.curProfile.get_socialCal
+    if (this.props.profile){
+      if (this.props.profile.get_socialCal){
+        socialCalCell = this.props.profile.get_socialCal
       }
     }
 
