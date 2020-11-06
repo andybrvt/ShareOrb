@@ -44,15 +44,17 @@ class PersonalProfile extends React.Component{
   }
 
 
+//To get the parms from teh url use THIS.PROPS.PARAMETER.USERNAME (LOWER CASE BTW)
+
   initialiseProfile() {
     console.log('hit here')
     this.waitForSocketConnection(() => {
         ExploreWebSocketInstance.fetchProfile(
-          this.props.match.params.username
+          this.props.parameter.username
         )
     })
-    if(this.props.match.params.username){
-      ExploreWebSocketInstance.connect(this.props.match.params.username)
+    if(this.props.parameter.username){
+      ExploreWebSocketInstance.connect(this.props.parameter.username)
     }
   }
 
@@ -86,14 +88,14 @@ class PersonalProfile extends React.Component{
     //This will reconnect to eh proper profile if you were to change the profiles
 
 
-    if(this.props.match.params.username !== newProps.match.params.username){
+    if(this.props.parameter.username !== newProps.parameter.username){
       ExploreWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
         ExploreWebSocketInstance.fetchProfile(
-          newProps.match.params.username
+          newProps.parameter.username
         )
       })
-      ExploreWebSocketInstance.connect(newProps.match.params.username)
+      ExploreWebSocketInstance.connect(newProps.parameter.username)
     }
 
   }
@@ -112,7 +114,7 @@ class PersonalProfile extends React.Component{
 
   closeProfileEdit = () => {
     // You wanna check if the person open and opening is the current user
-    if(this.props.match.params.username === this.props.currentUser){
+    if(this.props.parameter.username === this.props.currentUser){
       this.setState({
         showProfileEdit: false,
       })
@@ -120,7 +122,7 @@ class PersonalProfile extends React.Component{
   }
 
   openProfileEdit = () => {
-    if(this.props.match.params.username === this.props.currentUser){
+    if(this.props.parameter.username === this.props.currentUser){
       this.setState({
         showProfileEdit: true,
       })
@@ -128,7 +130,7 @@ class PersonalProfile extends React.Component{
   }
 
   openChangeProfilePic = () => {
-    if(this.props.match.params.username === this.props.currentUser){
+    if(this.props.parameter.username === this.props.currentUser){
       this.setState({
         showProfilePicEdit: true
       })
@@ -136,7 +138,7 @@ class PersonalProfile extends React.Component{
   }
 
   closeChangeProfilePic = () => {
-    if(this.props.match.params.username === this.props.currentUser){
+    if(this.props.parameter.username === this.props.currentUser){
       this.setState({
         showProfilePicEdit: false,
       })
@@ -175,7 +177,7 @@ class PersonalProfile extends React.Component{
   // on click add friend starts here
   onClickSend = (e) =>{
     e.preventDefault()
-    const username = this.props.match.params.username;
+    const username = this.props.parameter.username;
     // axios.default.headers = {
     //   "Content-type": "application/json",
     //   Authorization: `Token ${this.props.token}`
@@ -184,7 +186,7 @@ class PersonalProfile extends React.Component{
     const notificationObject  = {
       command: 'send_friend_notification',
       actor: this.props.currentUser,
-      recipient: this.props.match.params.username,
+      recipient: this.props.parameter.username,
     }
     // NotificationWebSocketInstance.disconnect()
     // NotificationWebSocketInstance.connect(this.props.match.params.username)
@@ -224,7 +226,7 @@ class PersonalProfile extends React.Component{
         <div className = 'profilePic'>
           <Avatar size = {180} src = {profileImage} />
           {
-            this.props.match.params.username === this.props.currentUser ?
+            this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
 
             :
@@ -361,7 +363,7 @@ class PersonalProfile extends React.Component{
         <div>
 
         {
-            this.props.match.params.username === this.props.currentUser ?
+            this.props.parameter.username === this.props.currentUser ?
 
             <div className = 'selfProfileButtons'>
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { withRouter } from "react-router";
 import { connect } from 'react-redux';
 import BaseRouter from './routes';
 import LoginRouter from './LoginRoutes.js'
@@ -108,6 +109,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Router>

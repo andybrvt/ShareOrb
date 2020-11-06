@@ -156,7 +156,6 @@ class SocialEventPage extends React.Component{
         <div className = "showChatWords"> Show chats </div>
         <Switch
         className = "showChatSwitch"
-
         defaultChecked checked = {this.state.showChats} onChange={this.onShowChatChange} />
 
 

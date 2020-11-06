@@ -21,6 +21,15 @@ import {
   PlusOutlined,
   EyeOutlined,
   CalendarOutlined } from '@ant-design/icons';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useHistory,
+    useLocation,
+    useParams
+  } from "react-router-dom";
 import * as navActions from '../../store/actions/nav';
 import * as calendarActions from '../../store/actions/calendars';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
@@ -128,7 +137,9 @@ class SocialCalendar extends React.Component{
       }
     }
 
-    console.log(friendListId)
+
+    const location = this.props.location.pathname;
+    console.log(location)
 
 
 
@@ -350,7 +361,7 @@ class SocialCalendar extends React.Component{
                 className = 'eventButton'
                  />
                 <EyeOutlined
-                onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
                 className = 'eyeButton'/>
                 </div>
 
@@ -388,6 +399,7 @@ class SocialCalendar extends React.Component{
 
           </div>
         )} else {
+          //This is used for the current user page
           const socialEvents = [
             {
               socialCalUser: this.props.profile
@@ -421,9 +433,14 @@ class SocialCalendar extends React.Component{
             onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
             className = 'eventButton'
              />
+            <Link to = {{
+              pathname:"/testModal",
+              state:{pathname: location}
+            }} >
             <EyeOutlined
-            onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+            // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
             className = 'eyeButton'/>
+            </Link>
             </div>
 
             : dateFns.isAfter( day, currentMonth) ?

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useLocation, Switch } from 'react-router-dom';
+import { withRouter } from "react-router";
 import NewsFeedView from './containers/NewsFeedView.js';
 import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/LoginPage/Login';
@@ -22,6 +23,7 @@ import NoFoundPage from './containers/403.jsx';
 import ProfileCardNewsFeed from './components/ProfileCardNewsFeed';
 import EventPage from './containers/PersonalCalendar/EventPage/EventPage.js'
 import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/SocialEventPage';
+import testModal from './containers/SocialCalendarFolder/testModal';
 
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
@@ -29,9 +31,13 @@ import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/S
 
 // the way you fixed
 
+
 class BaseRouter extends React.Component {
 
 // props and this.props are two different things on the routes
+
+// The props are the props from routes, it gives the components its history, location, match
+
 
 // <Route exact path = '/explore/:username' render={(props) => <ViewAnyUserProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 // <Route exact path = '/current-user/:username' render={(props) => <CurrUserProfile {...props} isAuthenticated={this.props.isAuthenticated} />}  />
@@ -39,13 +45,27 @@ class BaseRouter extends React.Component {
   render() {
 
     console.log(this.props);
-		return (
+    //It is all about having that path name inside the switch (whatever the switch is
+  // that would be the background)
+  //Example : location = {{pathname: '/home'}}
+
+  //Next task is to find out how to get the current location to here
+
+
+  //FIRGURE OUT A SOLUTION TO WHY MATCH IS NOT CHANGING
+    let location = this.props.location;
+    console.log(location)
+    if(this.props.location.state){
+      location = this.props.location.state
+    }
+    return (
 
 
       <div class="backgroundofEverything"  style={{background:'white',minHeight:'100%',}}>
         { this.props.isAuthenticated?
         <SideMenu>
 
+        <Switch location = {location} >
 
 
         <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
@@ -55,7 +75,7 @@ class BaseRouter extends React.Component {
 
         <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/explore/:username' render={(props) => <PersonalProfile {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+        <Route exact path = '/explore/:username' render={(props) => <PersonalProfile parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
@@ -67,11 +87,13 @@ class BaseRouter extends React.Component {
         <Route exact path = '/personalcal/event/:eventId' render={(props) => <EventPage {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/socialcal/event/:socialEventId' render={(props) => <SocialEventPage {...props} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
+        </Switch>
         </SideMenu>
         :
         <div></div>
         }
         <Route exact path = '/' component = {Login} />
+        {location ? <Route exact path = '/testmodal' component = {testModal} /> : null}
       </div>
 
 
@@ -83,4 +105,4 @@ class BaseRouter extends React.Component {
 
 
 
-export default BaseRouter;
+export default withRouter(BaseRouter);

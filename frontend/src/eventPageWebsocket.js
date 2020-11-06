@@ -38,6 +38,7 @@ class WebSocketEventPage{
     this.socketRef.onerror = (e) => {
       // This will be run if there is an error running or conencting to the websocket
       console.log('websocket is closed')
+      console.log(e.error);
     }
 
     this.socketRef.onclose = () => {
