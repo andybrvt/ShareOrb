@@ -23,7 +23,7 @@ class YearCalendar extends React.Component{
   }
 
   componentDidMount () {
-    const selectedYear = this.props.match.params.year;
+    const selectedYear = this.props.parameter.year;
     const newDate = [selectedYear]
     console.log(newDate)
     const newSelectedDate = dateFns.addYears(new Date (newDate),1)
@@ -225,7 +225,7 @@ class YearCalendar extends React.Component{
 
   onMonthClick = (month) => {
     const selectedMonth = dateFns.getMonth(month)+1
-    const selectedYear = this.props.match.params.year
+    const selectedYear = this.props.parameter.year
     this.props.history.push('/personalcalendar/'+selectedYear+'/'+selectedMonth)
   }
 
@@ -280,7 +280,7 @@ class YearCalendar extends React.Component{
           <CalendarViewDropDown
           calType = "year"
           history = {this.props.history}
-          match = {this.props.match}
+          matchPara = {this.props.parameter}
           />
         </div>
       </div>

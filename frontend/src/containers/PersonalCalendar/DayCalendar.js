@@ -47,9 +47,9 @@ class DayCalendar extends React.Component{
   }
 
   componentDidMount(){
-    const selectedYear = this.props.match.params.year;
-    const selectedMonth = this.props.match.params.month;
-    const selectedDay = this.props.match.params.day;
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const selectedDay = this.props.parameter.day;
     const newDate = [selectedYear, selectedMonth, selectedDay]
     const newsSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newsSelectedDate)
@@ -414,7 +414,7 @@ class DayCalendar extends React.Component{
   }
 
   onYearClick = () => {
-    const selectYear = this.props.match.params.year
+    const selectYear = this.props.parameter.year
     this.props.history.push('/personalcalendar/'+selectYear)
   }
 
@@ -496,7 +496,7 @@ class DayCalendar extends React.Component{
             <CalendarViewDropDown
             calType = "day"
             history = {this.props.history}
-            match = {this.props.match}
+            matchPara = {this.props.parameter}
             curDate = {this.props.currentDate}
             />
             </div>

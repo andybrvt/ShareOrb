@@ -23,11 +23,11 @@ class SocialEventPage extends React.Component{
   initialiseSocialEvent(){
     this.waitForSocketConnection(() => {
       SocialEventPageWebSocketInstance.fetchSocialMessages(
-          this.props.match.params.socialEventId
+          this.props.parameter.socialEventId
       )
     })
-    if(this.props.match.params.socialEventId){
-      SocialEventPageWebSocketInstance.connect(this.props.match.params.socialEventId)
+    if(this.props.parameter.socialEventId){
+      SocialEventPageWebSocketInstance.connect(this.props.parameter.socialEventId)
     }
 
   }
@@ -59,14 +59,14 @@ class SocialEventPage extends React.Component{
   componentWillReceiveProps(newProps){
     // This pretty much checks if the socialevent page has change, to know that if
     // it chaned or not you will look at the soicaleventid
-    if(this.props.match.params.socialEventId !== newProps.match.params.socialEventId){
+    if(this.props.parameter.socialEventId !== newProps.parameter.socialEventId){
       SocialEventPageWebSocketInstance.disconnect();
       this.waitForSocketConnection(()=>{
 				SocialEventPageWebSocketInstance.fetchMessages(
-					newProps.match.params.socialEventId
+					newProps.parameter.socialEventId
 				)
 			})
-			SocialEventPageWebSocketInstance.connect(newProps.match.params.eventId)
+			SocialEventPageWebSocketInstance.connect(newProps.parameter.eventId)
 
 
     }
@@ -86,7 +86,7 @@ class SocialEventPage extends React.Component{
   // onShowViewChat = () => {
   //   this.setState({
   //     showChats: true
-  //   })
+  //   })parameter
   // }
   //
   // onCloseViewChat = () => {

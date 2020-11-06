@@ -43,8 +43,8 @@ class PersonalCalendar extends React.Component{
     });
   };
   componentDidMount(){
-    const selectedYear = this.props.match.params.year;
-    const selectedMonth = this.props.match.params.month;
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
     const newDate = [selectedYear, selectedMonth]
     const newSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newSelectedDate)
@@ -480,7 +480,7 @@ class PersonalCalendar extends React.Component{
   }
 
   onYearClick = () => {
-    const selectedYear = this.props.match.params.year
+    const selectedYear = this.props.parameter.year
     this.props.history.push('/personalcalendar/'+selectedYear)
   }
 
@@ -595,7 +595,7 @@ class PersonalCalendar extends React.Component{
           <CalendarViewDropDown
           calType = "month"
           history = {this.props.history}
-          match = {this.props.match}
+          matchPara = {this.props.parameter}
           />
         </div>
 

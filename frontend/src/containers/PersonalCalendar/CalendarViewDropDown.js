@@ -24,9 +24,9 @@ class CalendarViewDropDown extends React.Component{
     if(this.props.calType === 'week'){
       // This is for when the week cal that is when it shows up for the week
       // calendar
-      const selectYear  = this.props.match.params.year;
-      const selectMonth  = this.props.match.params.month;
-      const selectDay  = this.props.match.params.day;
+      const selectYear  = this.props.matchPara.year;
+      const selectMonth  = this.props.matchPara.month;
+      const selectDay  = this.props.matchPara.day;
       if(calType === 'week'){
         this.props.history.push('/personalcalendar/w/'
         +selectYear+'/'+selectMonth+'/'+selectDay)
@@ -42,8 +42,8 @@ class CalendarViewDropDown extends React.Component{
     } else if(this.props.calType === 'month'){
       // This will be the drop down selection for the week cal
       const curDate = new Date();
-      const selectYear  = this.props.match.params.year;
-      const selectMonth = this.props.match.params.month;
+      const selectYear  = this.props.matchPara.year;
+      const selectMonth = this.props.matchPara.month;
       // The selectedFirstday will get the first day of the
       const selectFirstDay = dateFns.getDate(dateFns.startOfWeek(curDate)).toString();
       const selectDay = dateFns.getDate(curDate).toString()
@@ -67,9 +67,9 @@ class CalendarViewDropDown extends React.Component{
       const firstWeekDay = dateFns.getDate(firstDayWeek).toString()
       const firstWeekMonth = (dateFns.getMonth(firstDayWeek)+1).toString()
       const firstWeekYear = dateFns.getYear(firstDayWeek).toString()
-      const selectYear  = this.props.match.params.year;
-      const selectMonth  = this.props.match.params.month;
-      const selectDay  = this.props.match.params.day;
+      const selectYear  = this.props.matchPara.year;
+      const selectMonth  = this.props.matchPara.month;
+      const selectDay  = this.props.matchPara.day;
       if (calType === 'week'){
         this.props.history.push('/personalcalendar/w/'
         +firstWeekYear+'/'+firstWeekMonth+'/'+firstWeekDay)
@@ -86,7 +86,7 @@ class CalendarViewDropDown extends React.Component{
       // This will be the drop down selection for the year
       const curDate = new Date();
       const selectDayYear = dateFns.getYear(curDate).toString();
-      const selectYear = this.props.match.params.year;
+      const selectYear = this.props.matchPara.year;
       const selectMonth = (dateFns.getMonth(curDate)+1).toString();
       const selectFirstWeekMonth = (dateFns.getMonth(dateFns.startOfWeek(curDate))+1).toString()
       const selectFirstDay = dateFns.getDate(dateFns.startOfWeek(curDate)).toString();

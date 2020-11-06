@@ -19,11 +19,11 @@ class EventPage extends React.Component{
 	initialiseChat() {
 		this.waitForSocketConnection(()=> {
 			EventPageWebSocketInstance.fetchMessages(
-				this.props.match.params.eventId
+				this.props.parameter.eventId
 			)
 		})
-		if(this.props.match.params.eventId){
-			EventPageWebSocketInstance.connect(this.props.match.params.eventId)
+		if(this.props.parameter.eventId){
+			EventPageWebSocketInstance.connect(this.props.parameter.eventId)
 
 		}
 
@@ -62,14 +62,14 @@ class EventPage extends React.Component{
 	componentWillReceiveProps(newProps){
 		console.log(newProps)
 
-		if(this.props.match.params.eventId !== newProps.match.params.eventId){
+		if(this.props.parameter.eventId !== newProps.parameter.eventId){
 			EventPageWebSocketInstance.disconnect();
 			this.waitForSocketConnection(()=>{
 				EventPageWebSocketInstance.fetchMessages(
-					newProps.match.params.eventId
+					newProps.parameter.eventId
 				)
 			})
-			EventPageWebSocketInstance.connect(newProps.match.params.eventId)
+			EventPageWebSocketInstance.connect(newProps.parameter.eventId)
 
 		}
 

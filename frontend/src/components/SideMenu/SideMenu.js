@@ -185,7 +185,7 @@ class SideMenu extends React.Component {
             <Menu.Item key="3"  style={{height:50}}>
               <InboxOutlined />
               <span>Messages</span>
-              <Link to={"chat/1"} />
+              <Link to={"/chat/1"} />
             </Menu.Item>
 
 

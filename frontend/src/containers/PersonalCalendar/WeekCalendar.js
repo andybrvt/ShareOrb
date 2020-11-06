@@ -111,10 +111,10 @@ class WeekCalendar extends React.Component{
   }
   componentDidMount(){
     //I will be pulling the first day of the week to set the week
-    const selectedYear = this.props.match.params.year;
-    const selectedMonth = this.props.match.params.month;
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
     // This will pretty much be the first day of the week
-    const startWeekDay = this.props.match.params.day;
+    const startWeekDay = this.props.parameter.day;
     // this is just to put things in a format so we can get the date working
     const newWeek = [selectedYear, selectedMonth, startWeekDay]
     const newSelectedDate = new Date(newWeek)
@@ -1123,7 +1123,7 @@ class WeekCalendar extends React.Component{
               <CalendarViewDropDown
               calType = "week"
               history = {this.props.history}
-              match = {this.props.match} />
+              matchPara = {this.props.parameter} />
 
             </div>
             {this.renderDays()}
