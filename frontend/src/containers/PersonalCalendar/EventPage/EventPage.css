@@ -336,9 +336,22 @@
     background-color: whitesmoke;
   }
 
+.chatBox{
+  margin-left: 75px;
+  margin-bottom: 50px;
+
+}
+
+.chatHeader{
+  margin-left: 35px;
+  color:#1890ff;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
 
 .eventGroupChat{
-  margin-top: 75px;
+  margin-top: 25px;
   width: 30%;
   /* height: 100%; */
   /* background-color: red; */

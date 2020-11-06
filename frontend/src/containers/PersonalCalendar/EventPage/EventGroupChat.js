@@ -103,8 +103,38 @@ class EventGroupChat extends React.Component{
 
 
       <div className = "eventGroupChat">
-        <div>You and 3 others</div>
-      { inviteList.length > 0 ?
+        <div class="chatBox eventCard flex-container"
+          style={{width:'400px', height:'75px'}}>
+
+            <Liking style={{display:'inline-block'}} like_people={inviteList}/>
+
+          {
+          /*
+          <span class="innerContainerPeople">
+            {
+              inviteList.map(item => (
+                <div style={{display:'inline-block'}} key={item}>
+
+                  <span className = ''> {item.first_name+" "}</span>
+
+
+                </div>
+
+
+                ))
+
+              }
+
+          </span>
+          */
+          }
+          <div class="chatHeader"> You and {inviteList.length-1} others</div>
+
+
+
+
+        </div>
+    { inviteList.length > 0 ?
 
       <div className = 'eventGroupChatContainer'>
 

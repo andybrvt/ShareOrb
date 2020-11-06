@@ -48,6 +48,7 @@ class EventSerializer (serializers.ModelSerializer):
         personList=[]
         inviteList = []
         messageList = []
+        acceptedList=[]
         data = super().to_representation(instance)
         for peopleID in data['person']:
             person = PersonSerializer(models.User.objects.get(id=peopleID)).data
@@ -58,6 +59,10 @@ class EventSerializer (serializers.ModelSerializer):
         for messages in data['get_eventMessages']:
             message = EventMessagesSerializer(models.EventMessages.objects.get(id = messages)).data
             messageList.append(message)
+        for acceptedPerson in data['accepted']:
+            personAccept = PersonSerializer(models.User.objects.get(id=acceptedPerson)).data
+            acceptedList.append(personAccept)
+        data['accepted']=acceptedList
         data['person']  = personList
         data['invited'] = inviteList
         data['get_eventMessages'] = messageList
@@ -79,6 +84,7 @@ class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
+
 
 class CreateEventSerializer (serializers.ModelSerializer):
     # Event serializer for admins

@@ -638,17 +638,17 @@ class EventInfo extends React.Component{
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
-                <Statistic class="addFont" title="Going" value={3} />
+                <Statistic class="addFont" title="Going" value={accepted.length} />
 
 
 
               </span>
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
-                  <Liking style={{display:'inline-block'}} like_people={invited}/>
+                  <Liking style={{display:'inline-block'}} like_people={accepted}/>
               </span>
               <span class="innerContainerEvent" style={{marginLeft:'100px',display:'inline-block'}}>
 
-                <Statistic title="Invited" value={6} />
+                <Statistic title="Invited" value={invited.length} />
 
 
 
@@ -661,6 +661,7 @@ class EventInfo extends React.Component{
 
              <span class="innerContainerPeople"
                style={{display:'inline-block',padding:'15px'}}>
+
 
                <Button
                   type="primary" shape="round"
