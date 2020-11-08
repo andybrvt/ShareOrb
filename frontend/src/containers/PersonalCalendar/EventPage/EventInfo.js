@@ -552,7 +552,6 @@ class EventInfo extends React.Component{
                   <span> No background </span>
 
 
-                  <EyeOutlined className = 'pictureChange'/>
               </div>
 
 
@@ -575,9 +574,7 @@ class EventInfo extends React.Component{
                 src = {'http://127.0.0.1:8000'+eventBackgroundPic}
                 className = 'eventBackgroundImg'
                  />
-                 <EyeOutlined
 
-                   className = 'pictureChange'/>
               </div>
 
             }
@@ -682,7 +679,7 @@ class EventInfo extends React.Component{
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                  style={{left:'50%', fontSize:'15px'}} size={'large'}>
+                  style={{left:'80%', fontSize:'15px'}} size={'large'}>
 
                  Share
                </Button>
@@ -690,14 +687,14 @@ class EventInfo extends React.Component{
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                  style={{left:'55%', fontSize:'15px'}} size={'large'}>
+                  style={{left:'85%', fontSize:'15px'}} size={'large'}>
 
                  Going
                </Button>
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'60%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'90%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
@@ -843,13 +840,11 @@ class EventInfo extends React.Component{
             eventHostId === this.props.userId ?
 
             <div
-            className = 'editEventButton'
-            // onClick= {() => this.onEditClick()} /
+
             >
 
 
-            <Button
-               type="primary" shape="round">
+
 
                <div
                onClick={() => this.onEditClick()}
@@ -857,7 +852,7 @@ class EventInfo extends React.Component{
                <i class="fas fa-pen" ></i>
 
                </div>
-            </Button>
+
 
 
             </div>
