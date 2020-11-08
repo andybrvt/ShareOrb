@@ -128,7 +128,7 @@ class EventGroupChat extends React.Component{
           </span>
           */
           }
-          <div class="chatHeader"> You and {inviteList.length-1} others</div>
+          <div class="chatHeader"> You and {inviteList.length} others</div>
 
 
 

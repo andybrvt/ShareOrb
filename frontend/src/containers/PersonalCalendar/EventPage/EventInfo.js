@@ -1,7 +1,7 @@
 import React from 'react';
 import './EventPage.css';
 import {Button, Progress, Avatar, Modal, message, notification, Statistic} from 'antd';
-import {PictureOutlined, CheckSquareTwoTone, DownloadOutlined, UserOutlined} from '@ant-design/icons';
+import {PictureOutlined, CheckSquareTwoTone, EyeOutlined, DownloadOutlined, UserOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
@@ -544,18 +544,25 @@ class EventInfo extends React.Component{
             {
               eventBackgroundPic === "" ?
               <div
-              className = 'eventBackgroundPic'>
+                onClick = {() => this.onChangeBackgroundOpen()}
+                className = 'eventBackgroundPic hoverCell'>
               <div className = "pictureFrame">
                   <PictureOutlined />
                   <br />
                   <span> No background </span>
+
+
+                  <EyeOutlined className = 'pictureChange'/>
               </div>
+
+
               </div>
 
               :
 
               <div
-              className = 'eventBackgroundWPic'>
+                onClick = {() => this.onChangeBackgroundOpen()}
+                className = 'eventBackgroundWPic hoverPic'>
               {/*
                 <div className ="pictureFrame">
 
@@ -568,6 +575,9 @@ class EventInfo extends React.Component{
                 src = {'http://127.0.0.1:8000'+eventBackgroundPic}
                 className = 'eventBackgroundImg'
                  />
+                 <EyeOutlined
+
+                   className = 'pictureChange'/>
               </div>
 
             }
@@ -734,7 +744,7 @@ class EventInfo extends React.Component{
                 center = {[32.2226, 110.9747]}
                 boundary = {
                 {
-                  "search":"Tucson",
+                  "search":"Fremont, CA",
                   "option":{
                     entityType: 'PopulatedPlace'
                   },
@@ -836,12 +846,7 @@ class EventInfo extends React.Component{
             className = 'editEventButton'
             // onClick= {() => this.onEditClick()} /
             >
-            <div
-            onClick = {() => this.onChangeBackgroundOpen()}
-            >
-            <i class="far fa-image"></i>
 
-            </div>
 
             <Button
                type="primary" shape="round">

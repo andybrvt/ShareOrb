@@ -9,6 +9,39 @@
   transform: translateY(-50%);
 }
 
+/* eyeball css */
+.pictureChange{
+  position:absolute;
+  left: 43%;
+  top: 45%;
+  color: transparent;
+  font-size: 40px;
+  z-index: 1;
+  color:white;
+  font-size: 48px;
+
+}
+
+
+/* gray part of cell if no pic */
+ .hoverCell{  width: 115%;
+  height: 100%;
+  margin-left: -15px;
+
+}
+
+.hoverCell:hover{
+  background-color: #D3D3D3cc;
+
+}
+
+.hoverPic:hover{
+  filter: brightness(90%);
+}
+
+
+
+
 
 .outerContainerEvent{
 
