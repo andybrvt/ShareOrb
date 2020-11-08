@@ -19,6 +19,8 @@ import ChangeBackgroundModal from "./ChangeBackgroundModal";
 import { authAxios } from '../../../components/util';
 import Liking from '../../NewsfeedItems/Liking';
 import { ReactBingmaps } from 'react-bingmaps';
+import {Link, withRouter} from 'react-router-dom';
+import {browserHistory} from 'react-router';
 class EventInfo extends React.Component{
 
   constructor(props){
@@ -441,6 +443,10 @@ class EventInfo extends React.Component{
   }
 
   render(){
+    const currentDay = new Date()
+    const selectYear = dateFns.getYear(currentDay).toString()
+    const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
+    const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.state)
     console.log(this.props)
     let show = this.state.showSureModal
@@ -632,8 +638,8 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'-75px',marginLeft:'200px', color:'black'}} class="outerContainer">
             <span
-                style={{ fontSize:'20px', width:'1000px', height:'85px',
-                 display:'inline-block', marginTop:'100px', padding:'40px'}}
+                style={{ fontSize:'20px', width:'1010px', height:'85px',
+                 display:'inline-block', marginTop:'90px', padding:'45px'}}
                  class="aboutEvent eventCard">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
@@ -666,7 +672,7 @@ class EventInfo extends React.Component{
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                  style={{left:'35%', fontSize:'15px'}} size={'large'}>
+                  style={{left:'50%', fontSize:'15px'}} size={'large'}>
 
                  Share
                </Button>
@@ -674,14 +680,14 @@ class EventInfo extends React.Component{
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                  style={{left:'40%', fontSize:'15px'}} size={'large'}>
+                  style={{left:'55%', fontSize:'15px'}} size={'large'}>
 
                  Going
                </Button>
                <Button
                   type="primary" shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'45%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'60%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
@@ -770,7 +776,7 @@ class EventInfo extends React.Component{
 
 
 
-        <div style={{ marginTop:'100px', width:'950px'}} className = "eventPeopleWord eventCard"> Statistics
+        <div style={{ marginTop:'100px', width:'975px'}} className = "eventPeopleWord eventCard"> Statistics
 
 
           <div className =  "percentagesBars">
@@ -815,6 +821,13 @@ class EventInfo extends React.Component{
 
 
           </div>
+
+          <div className = 'closeEvent'>
+            <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
+            <i style={{fontSize:'50px'}} class="far fa-times-circle">  </i>
+            </Link>
+          </div>
+
           <div className = 'editEventButtonContainer'>
           {
             eventHostId === this.props.userId ?
@@ -827,9 +840,7 @@ class EventInfo extends React.Component{
             onClick = {() => this.onChangeBackgroundOpen()}
             >
             <i class="far fa-image"></i>
-            <div style = {{fontSize: "14px", marginBottom: "20px"}}>
-            Change Background
-            </div>
+
             </div>
 
 
@@ -837,14 +848,9 @@ class EventInfo extends React.Component{
             onClick={() => this.onEditClick()}
             >
             <i class="fas fa-pen" ></i>
-            <div style = {{fontSize: "14px"}}>
-            Edit Event
-            </div>
+
             </div>
 
-            <div>
-            <i class="fas fa-chevron-down"></i>
-            </div>
             </div>
 
             :

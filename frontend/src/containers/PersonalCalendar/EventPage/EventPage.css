@@ -294,7 +294,7 @@
 
 .eventInfoContainer .eventInfoView .eventInfo .percentagesBars .percentage{
   /* background-color: red; */
-  padding: 30px;
+  padding: 25px;
   /* align-items: center; */
   text-align: center;
 }
@@ -304,22 +304,30 @@
   margin-top: 10px;
 }
 
+.closeEvent{
+  /* background-color: red; */
+
+  text-align: center;
+  position:absolute;
+  font-size: 30px;
+  top: 25px;
+  left: 145px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 .editEventButtonContainer{
   /* background-color: red; */
 
   text-align: center;
   position:absolute;
   font-size: 30px;
-  top: -140px;
+  top: 100px;
   left: 100px;
   cursor: pointer;
   transition: 0.5s;
 }
-.editEventButtonContainer:hover{
-  /* background-color: red; */
-  /* right: 100px; */
-  top: 0px;
-}
+
 
 .editEventBackButtonContainer{
   /* background-color: red; */
@@ -343,8 +351,8 @@
 }
 
 .chatHeader{
-  margin-left: 35px;
-  color:#1890ff;
+  margin-left: 50px;
+  color:#096dd9;
   font-size: 14px;
   margin-top: 15px;
 }
