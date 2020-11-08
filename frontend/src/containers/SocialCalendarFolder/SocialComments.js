@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
-import './SocialCalCSS/SocialModal.css';
+import './SocialCalCSS/SocialCellPage.css';
 
 
 const { TextArea } = Input;

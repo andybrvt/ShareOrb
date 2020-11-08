@@ -11,7 +11,7 @@ import AvatarGroups from '../../components/AvatarGroups';
 import UserAvatar from'../NewsfeedItems/UserAvatar.js';
 import Liking from'../NewsfeedItems/Liking.js';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
-import './SocialCalCSS/SocialModal.css';
+import './SocialCalCSS/SocialCellPage.css';
 
 
 class SocialCalCellInfo extends React.Component{

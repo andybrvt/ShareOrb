@@ -7,7 +7,7 @@ import location from '../../components/images/pin.png';
 import AvatarGroups from '../../components/AvatarGroups';
 import userIcon from '../../components/images/user.png';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
-import './SocialCalCSS/SocialModal.css';
+import './SocialCalCSS/SocialCellPage.css';
 import Liking from "../NewsfeedItems/Liking";
 
 

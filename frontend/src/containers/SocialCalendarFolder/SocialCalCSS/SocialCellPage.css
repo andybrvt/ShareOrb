@@ -10,6 +10,8 @@
 
 }
 
+
+/* This is for the page look */
 .socialCalCellModal {
   position: fixed;
   background: white;
@@ -19,4 +21,467 @@
   right: 10%;
   z-index: 100;
 
+}
+
+
+.socialModalDate{
+  /* background-color: red; */
+  text-align: center;
+  font-size: 20px;
+  position:relative;
+  top: 5px;
+  left: 100px;
+}
+
+.socialHolder{
+  /* background-color: red; */
+  /* padding: 10px; */
+  display: flex;
+  height: 920px;
+}
+
+
+
+.socialLeftRight{
+  /* display: flex; */
+}
+.socialLeftRight .socialArrowLeft {
+  position: absolute;
+  /* background-color: red; */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 2%;
+  font-size: 45px;}
+.socialLeftRight .socialArrowRight {
+  position: absolute;
+  /* background-color: red; */
+  bottom: 50%;
+  transform: translateY(50%);
+  left: 67%;
+  /* right: 100%; */
+  z-index: 3;
+  font-size: 45px;}
+
+.socialModalRight {
+  /* background-color: red; */
+  position: relative;
+  bottom: 0px;
+  height: 100%;
+  /* padding: 20px; */
+}
+
+.socialModalRight .socialNameTag {
+  /* background-color: red; */
+  height: 80px;
+  display: flex;
+  padding: 20px;}
+
+
+.socialModalRight .socialNameTag .socialNameUsername{
+    /* background-color: red; */
+    position: relative;
+    left: 5px;
+    bottom: 5px;
+    font-weight: 500;
+}
+
+.socialModalRight .socialNameTag .socialProfileImage {
+  position: relative;
+  /* top: 20%; */
+}
+
+.socialModalRight .socialNameTag .socialName {
+  /* background-color: red; */
+  position: relative;
+  left: 0%;
+  top: 0%;
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.socialListBox{
+  /* background-color: red; */
+  padding: 15px;
+  margin-top: 50px;
+  border: 1px solid gainsboro;
+  height: 235px;
+  width: 450px;
+  overflow: auto;
+
+}
+
+.socialListBox .socialListItem{
+  /* background-color: red; */
+  margin: 3px;
+  padding-left: 15px;
+  /* padding-top: 10px; */
+  height: 140px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}
+
+.socialLikeCommentNum{
+    /* background-color: red; */
+    display: flex;
+    height: 40px;
+}
+.socialLikeCircle{
+  /* background-color: red; */
+  /* margin-left: 30px; */
+  position: relative;
+  left: 25px;
+  top: 8px;
+  height: 20px;
+}
+.socialLikeCommentNum .socialLikeCommentText{
+  /* background-color: red; */
+  margin-left: 30px;
+  position: relative;
+  top: 8px;
+  height: 20px;
+}
+.socialLikeCommentNum .socialLikeAvatar{
+  /* background-color: blue; */
+  position: relative;
+  left: 35%;
+}
+.socialLikeComment{
+  /* background-color: red; */
+  display: flex;
+}
+.socialLikeComment .socialLike{
+  /* background-color: blue; */
+  height: 40px;
+  width: 50%;
+  border: 1px solid gainsboro;
+  border-left: none;
+  text-align: center;
+  margin-left: 2px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.socialLikeComment .socialLike:hover{
+  background-color: gainsboro;
+}
+.socialLikeComment .socialComment{
+  /* background-color: red; */
+  height: 40px;
+  width: 50%;
+  border: 1px solid gainsboro;
+  border-right: none;
+  text-align: center;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.socialLikeComment .socialComment:hover{
+  background-color: gainsboro;
+}
+
+
+
+.socialListItemText{
+  /* background-color: red; */
+  position: relative;
+  bottom: 0px;
+}
+
+.socialEventTitleContainer {
+  /* position: absolute; */
+  /* background-color: red; */
+  display: flex;
+  /* margin-top: 10px; */
+}
+
+.socialEventClock{
+  height: 12px;
+  margin-right: 5px;
+}
+
+.socialEventPin{
+  height: 12px;
+  margin-right: 3px;
+}
+
+.socialEventLocation{
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.socialEventTime{
+  font-size: 13px;
+}
+
+.socialEventCapcity{
+  /* background-color: red; */
+  /* display: flex; */
+}
+
+.socialUserIcon{
+  height: 12px;
+  margin-right: 3px;
+}
+
+ .socialEventTitle{
+  /* background-color: red; */
+  font-size:  25px;
+}
+
+.socialCommentBoxBox{
+  height: 51.5%;
+  width: 450px;
+  overflow:hidden;
+  /* background-color: red; */
+}
+.socialCommentBox {
+  /* background-color: blue  ; */
+  height: 100%;
+  width: 460px;
+  padding-left: 20px;
+  overflow:auto;
+  /* width: 50%; */
+}
+.socialCommentBox .socialCommentItem {
+  /* background-color: red; */
+
+  margin-top: 10px;
+  padding: 5px;
+}
+.socialCommentBox .socialCommentInput{
+  /* background-color: red; */
+  display: flex;
+  position: absolute;
+  left: 0%;
+  bottom: 245px;
+  margin-left: 20px;
+}
+.socialBoxInput{
+  width: 360px;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.sendOutline{
+  /* background-color: red; */
+  font-size: 30px;
+  color: deepskyblue;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+.socialCommentBox .socialCommentItem .socialCommentNameTag{
+  /* background-color: red; */
+  display: flex;
+}
+.socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
+  display: flex;
+  margin-left: 10px;
+}
+
+.socialCommentUsername{
+  font-weight: 400;
+}
+
+.socialCommentDate{
+  /* background-color: red; */
+  position: absolute;
+  left: 80%;
+  /* top: 10%; */
+  height: 20px;
+  font-size: 10px;
+  padding-top: 5px;
+  margin-left: 4px;
+}
+
+.socialCommentText{
+  /* background-color: red; */
+  position: relative;
+  width: 300px;
+  /* top: 50%; */
+  left: 12%;
+  top: -20px;
+}
+
+
+
+.joinEventButton {
+  background-color: limegreen;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 10%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+.joinEventButton .joinText{
+  /* background-color: red; */
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  /* transform: translateY(-50%); */
+
+}
+
+.alreadyJoinButton {
+  background-color: gainsboro;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 10%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+.alreadyJoinButton .joinText{
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+}
+
+
+.viewEventButton{
+  /* background-color: red; */
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 50%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+
+.viewEventButton .viewText{
+  /* background-color: red; */
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+
+}
+
+.viewEventButtonPass{
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 30%;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+}
+.viewEventButtonPass .viewText{
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+
+}
+
+.socialPublicTag{
+  position: relative;
+  background-color: #F5F5F5;
+  color: limegreen;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 12px;
+  /* top:10%;
+  left: 95%; */
+  top: 10px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.socialPrivateTag{
+  position: relative;
+  /* background-color: red; */
+  background-color: #F5F5F5;
+  color: red;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 12px;
+  /* top:10%;
+  left: 95%; */
+  top: 10px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+
+}
+
+.socialHolder .socialCarousel{
+  width: 1100px;
+  height: 100%;
+}
+
+.socialHolder .socialCarouselZero {
+  width: 215%;
+  /* background-color: red; */
+  border: 10px dashed gainsboro;
+  text-align: center;
+}
+
+.socialHolder .socialCarouselZero .pictureFrame{
+  /* background-color: red; */
+  position: relative;
+  top: 40%;
+  font-size: 55px;
+  color: gainsboro;
+}
+
+.socialHolder .socialCarouselSingle{
+  width: 215%;
+  height: 920px;
+  /* background-color: red; */
+  text-align: center;
+  overflow: hidden;
+}
+
+.socialHolder .socialCarouselSingle .singlePic{
+  /* position: relative; */
+  position: relative;
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  height: 920px;
+  /* width: 1100px; */
+}
+
+.picturesRoll{
+  /* height:800px; */
+  /* background-color: #000000cc; */
+  overflow: hidden;
+  height: 920px;
+
+
+}
+
+.picturesRoll .socialImages{
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%)
+  /* top: 50%; */
+}
+
+
+.ant-upload-select-picture-card i {
+  color: #999;
+  font-size: 32px;
+}
+
+.ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  color: #666;
 }

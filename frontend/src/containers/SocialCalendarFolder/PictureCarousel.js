@@ -4,7 +4,7 @@ import {
   RightCircleOutlined,
   LeftCircleOutlined
 } from '@ant-design/icons';
-import './SocialCalCSS/SocialModal.css';
+import './SocialCalCSS/SocialCellPage.css';
 
 
 class PictureCarousel extends React.Component{

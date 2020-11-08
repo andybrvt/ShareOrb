@@ -70,15 +70,6 @@ class SocialCalendar extends React.Component{
     // redux
   }
 
-  onShowSocialCalCellModal() {
-
-    console.log('open social cell here')
-    this.props.openSocialCalCell()
-  }
-
-
-
-
 
   renderHeader() {
     // This will be used to render the header (the month and year in the calendar)
@@ -582,7 +573,6 @@ class SocialCalendar extends React.Component{
               state:{pathname: location}
             }} >
             <EyeOutlined
-            onClick = {() => this.onShowSocialCalCellModal()}
             // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
             className = 'eyeButton'/>
             </Link>
