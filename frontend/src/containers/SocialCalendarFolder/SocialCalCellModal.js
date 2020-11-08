@@ -14,15 +14,8 @@ class SocialCalCellModal extends React.Component{
     return(
       <div
         onClick  = {this.back}
-         style={{
-           position: "absolute",
-           top: 0,
-           left: 0,
-           bottom: 0,
-           right: 0,
-           height: "2000px",
-           background: "rgba(0, 0, 0, 0.45)"
-         }}
+        className = "socialCalCellModalBackground"
+  
        >
        <SocialCalCellPage />
        </div>
