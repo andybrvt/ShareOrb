@@ -1,11 +1,17 @@
 .profilePage{
   background-color: white;
-  position: relative;
-  left:2%;
+  position: absolute;
+  left:4%;
   width: 1760px;
-  bottom: 30px;
+  /* bottom: 30px; */
+  top: 5%;
   padding-top: 40px;
   /* align-items: center; */
+  /* z-index: 0; */
+  /* overflow: hidden; */
+  /* height: 100%; */
+  height: 1700px;
+
 }
 
 .profilePage .profileInfo{
@@ -194,12 +200,12 @@
 
 /* This is for the tab changes */
 .profile-tabContainer {
-  position: relative;
-  top: 50px;
+  position:absolute;
+  top: 520px;
   /* left: 40px; */
   bottom: 28px;
   width: 1760px;
-  height: 100%;
+  height: 90%;
   background-color: #ffffff;
   /* background-color: red; */
 }

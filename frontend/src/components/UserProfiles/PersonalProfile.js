@@ -519,39 +519,39 @@ class PersonalProfile extends React.Component{
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
-        <Modal
-        visible = {this.state.showProfileEdit}
-        onCancel = {() => this.closeProfileEdit()}
-        >
-        This is for editing the profile information
-        </Modal>
+          <Modal
+          visible = {this.state.showProfileEdit}
+          onCancel = {() => this.closeProfileEdit()}
+          >
+          This is for editing the profile information
+          </Modal>
 
-        <ChangeProfilePic
-           visible = {this.state.showProfilePicEdit}
-           onCancel = {this.closeChangeProfilePic}
-           onSubmit = {this.handleProfilePicChange}
-         />
-
-
-        <Modal
-        visible ={this.state.followerShow}
-        onCancel = {this.onFollowerCancel}
-        footer = {null}
-        >
-        <span className ='followWord'> Followers</span>
-        <FollowList follow = {followers} />
-        </Modal>
+          <ChangeProfilePic
+             visible = {this.state.showProfilePicEdit}
+             onCancel = {this.closeChangeProfilePic}
+             onSubmit = {this.handleProfilePicChange}
+           />
 
 
+          <Modal
+          visible ={this.state.followerShow}
+          onCancel = {this.onFollowerCancel}
+          footer = {null}
+          >
+          <span className ='followWord'> Followers</span>
+          <FollowList follow = {followers} />
+          </Modal>
 
-        <Modal
-        visible = {this.state.followingShow}
-        onCancel = {this.onFollowingCancel}
-        footer = {null}
-        >
-        <span className = 'followWord'>Following</span>
-        <FollowList follow = {following}/>
-        </Modal>
+
+
+          <Modal
+          visible = {this.state.followingShow}
+          onCancel = {this.onFollowingCancel}
+          footer = {null}
+          >
+          <span className = 'followWord'>Following</span>
+          <FollowList follow = {following}/>
+          </Modal>
 
         </div>
       )
