@@ -94,7 +94,7 @@ class BaseRouter extends React.Component {
         <div></div>
         }
         <Route exact path = '/' component = {Login} />
-        {location ? <Route exact path = '/testmodal' component = {testModal} /> : null}
+        {location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {testModal} /> : null}
       </div>
 
 
