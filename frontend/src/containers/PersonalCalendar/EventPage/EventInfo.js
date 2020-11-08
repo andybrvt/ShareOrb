@@ -843,13 +843,17 @@ class EventInfo extends React.Component{
 
             </div>
 
+            <Button
+               type="primary" shape="round">
 
-            <div
-            onClick={() => this.onEditClick()}
-            >
-            <i class="fas fa-pen" ></i>
+               <div
+               onClick={() => this.onEditClick()}
+               >
+               <i class="fas fa-pen" ></i>
 
-            </div>
+               </div>
+            </Button>
+
 
             </div>
 
