@@ -23,7 +23,8 @@ import NoFoundPage from './containers/403.jsx';
 import ProfileCardNewsFeed from './components/ProfileCardNewsFeed';
 import EventPage from './containers/PersonalCalendar/EventPage/EventPage.js'
 import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/SocialEventPage';
-import testModal from './containers/SocialCalendarFolder/testModal';
+import SocialCalCellPage from './containers/SocialCalendarFolder/SocialCalCellPage';
+import SocialCalCellModal from './containers/SocialCalendarFolder/SocialCalCellModal';
 
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
@@ -94,7 +95,7 @@ class BaseRouter extends React.Component {
         <div></div>
         }
         <Route exact path = '/' component = {Login} />
-        {location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {testModal} /> : null}
+        {location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {SocialCalCellModal} /> : null}
       </div>
 
 

@@ -63,7 +63,7 @@ class SocialCalCellInfo extends React.Component{
     // owner of the calendar
     console.log(personLike, owner)
 
-    ExploreWebSocketInstance.sendSocialLike(curDate, personLike, owner)
+    // ExploreWebSocketInstance.sendSocialLike(curDate, personLike, owner)
 
   }
 

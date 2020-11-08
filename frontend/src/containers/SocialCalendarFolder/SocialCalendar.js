@@ -305,7 +305,7 @@ class SocialCalendar extends React.Component{
                   and the user is not a friend or calendar owner
                   */}
                 <EyeOutlined
-                onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
                 className = 'eyeButtonPass'/>
                 </Link>
 
@@ -397,7 +397,7 @@ class SocialCalendar extends React.Component{
                      the current
                      */}
                   <EyeOutlined
-                  onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                  // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
                   className = 'eyeButtonPass'/>
                   </Link>
                 }
@@ -414,7 +414,7 @@ class SocialCalendar extends React.Component{
                       or the owner of the calendar
                       */}
                   <EyeOutlined
-                  onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+                  // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
                   className = 'eyeButtonPass'/>
                   </Link>
 
@@ -691,6 +691,7 @@ class SocialCalendar extends React.Component{
 
   onOpenSocialCalModal = (day, socialCalInfo) => {
     // this will open up the modal with all the information and date
+    console.log(socialCalInfo)
     this.props.openSocialModal(socialCalInfo, day)
   }
 
