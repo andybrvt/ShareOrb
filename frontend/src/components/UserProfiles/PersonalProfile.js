@@ -81,12 +81,12 @@ class PersonalProfile extends React.Component{
   componentDidMount(){
     this.showPanel(0, 'transparent')
     this.initialiseProfile()
+
   }
 
   componentWillReceiveProps(newProps){
     console.log(newProps)
     //This will reconnect to eh proper profile if you were to change the profiles
-
 
     if(this.props.parameter.username !== newProps.parameter.username){
       ExploreWebSocketInstance.disconnect();
@@ -500,7 +500,7 @@ class PersonalProfile extends React.Component{
   render(){
 
       console.log(this.props)
-
+      console.log(this.state)
       let followers = []
       let following = []
 
@@ -515,7 +515,7 @@ class PersonalProfile extends React.Component{
       }
 
       return(
-        <div className = 'profilePage'>
+        <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
@@ -564,7 +564,7 @@ const mapStateToProps = state => {
       currentId: state.auth.id,
       currentUser: state.auth.username,
       token: state.auth.token,
-      profile: state.explore.profile
+      profile: state.explore.profile,
     };
 };
 

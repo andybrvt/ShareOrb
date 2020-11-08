@@ -70,6 +70,14 @@ class SocialCalendar extends React.Component{
     // redux
   }
 
+  onShowSocialCalCellModal() {
+
+    console.log('open social cell here')
+    this.props.openSocialCalCell()
+  }
+
+
+
 
 
   renderHeader() {
@@ -574,6 +582,7 @@ class SocialCalendar extends React.Component{
               state:{pathname: location}
             }} >
             <EyeOutlined
+            onClick = {() => this.onShowSocialCalCellModal()}
             // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
             className = 'eyeButton'/>
             </Link>
@@ -804,7 +813,7 @@ const mapDispatchToProps = dispatch => {
     openSocialPictureModal: () => dispatch(socialCalActions.openSocialPictureModal()),
     closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal()),
     openSocialEventModal: (date) => dispatch(socialCalActions.openSocialEventModal(date)),
-    closeSocialEventModal: () => dispatch(socialCalActions.closeSocialEventModal())
+    closeSocialEventModal: () => dispatch(socialCalActions.closeSocialEventModal()),
   }
 }
 

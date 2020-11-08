@@ -13,6 +13,8 @@ export const prevMonthSocial = () => {
   }
 }
 
+
+// DELETE XXX
 export const openSocialModal = (socialObject, day) => {
   return {
     type: actionTypes.OPEN_SOCIAL_MODAL,
@@ -21,6 +23,7 @@ export const openSocialModal = (socialObject, day) => {
   }
 }
 
+// DELETE XXX
 export const closeSocialModal = () => {
   return {
     type: actionTypes.CLOSE_SOCIAL_MODAL

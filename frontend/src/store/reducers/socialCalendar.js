@@ -10,7 +10,11 @@ const initialState = {
   // and add a like to this as well
   socialObject: [],
   socialDate: new Date(),
+
+  // DELETE XXX
   showSocialModal: false,
+
+
   curSocialDate: new Date(),
   showSocialPicModal: false,
   showSocialEventModal: false,
@@ -36,6 +40,8 @@ const prevMonthSocial = (state, action) => {
   })
 }
 
+
+//DELETE XXX
 const openSocialModal = (state, action) => {
   return updateObject ( state, {
     showSocialModal: true,
@@ -43,7 +49,7 @@ const openSocialModal = (state, action) => {
     curSocialDate: action.socialDay
   })
 }
-
+//DELETE XXX
 const closeSocialModal = (state, action) => {
   return updateObject (state, {
     showSocialModal: false
@@ -189,10 +195,17 @@ const reducer = (state = initialState, action) => {
       return nextMonthSocial(state, action)
     case actionTypes.PREV_MONTH_SOCIAL:
       return prevMonthSocial(state, action)
+  
+
+    // DELETE XXX
     case actionTypes.OPEN_SOCIAL_MODAL:
       return openSocialModal(state, action)
+
+    // DELETE XXX
     case actionTypes.CLOSE_SOCIAL_MODAL:
       return closeSocialModal(state, action)
+
+
     case actionTypes.OPEN_SOCIAL_PICTURE_MODAL:
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
