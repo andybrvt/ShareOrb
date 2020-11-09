@@ -73,7 +73,7 @@ class EventGroupChat extends React.Component{
 
 
   render(){
-
+    const { TextArea } = Input;
     console.log(this.props)
     let messages = []
     if (this.props.messages){
@@ -186,16 +186,20 @@ class EventGroupChat extends React.Component{
       <div className = 'inputForm'>
 
       <Form>
-        <Input
+        <TextArea
         className = 'eventChatInput'
         onChange = {this.handleChange}
         value = {this.state.message}
         onPressEnter = {this.handleSubmit}
         placeholder = "Write a message..."
+        rows={2}
         />
 
       </Form>
       </div>
+      <Button
+        shape="round"
+        onClick = {this.handleSubmit} type="primary"> Chat </Button>
 
       </div>
 

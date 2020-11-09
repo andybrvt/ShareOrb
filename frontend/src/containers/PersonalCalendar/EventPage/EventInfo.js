@@ -545,15 +545,13 @@ class EventInfo extends React.Component{
               eventBackgroundPic === "" ?
               <div
                 onClick = {() => this.onChangeBackgroundOpen()}
-                className = 'eventBackgroundPic hoverCell'>
-              <div className = "pictureFrame">
-                  <PictureOutlined />
-                  <br />
-                  <span> No background </span>
+                className = 'eventBackgroundPic hoverPic'>
 
-
-              </div>
-
+                <div className = "pictureFrame">
+                    <PictureOutlined />
+                    <br />
+                    <span> No background </span>
+                </div>
 
               </div>
 
@@ -676,25 +674,40 @@ class EventInfo extends React.Component{
                style={{display:'inline-block',padding:'15px'}}>
 
 
-               <Button
-                  type="primary" shape="round"
-                  icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                  style={{left:'80%', fontSize:'15px'}} size={'large'}>
+                 <Button
+                    type="primary" shape="round"
+                    icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+                    style={{left:'60%', fontSize:'15px'}} size={'large'}>
 
-                 Share
-               </Button>
+                   Share
+                 </Button>
+
+              {
+                (accepted.includes(this.props.username))?
+                   <Button
+                      shape="round"
+                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                      style={{left:'65%', fontSize:'15px'}} size={'large'}>
+
+                     Going
+                   </Button>
+
+                   :
+                   <Button
+                      shape="round" type="primary"
+                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                      style={{left:'65%', fontSize:'15px'}} size={'large'}>
+
+                     Going
+                   </Button>
+
+             }
+
 
                <Button
-                  type="primary" shape="round"
-                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                  style={{left:'85%', fontSize:'15px'}} size={'large'}>
-
-                 Going
-               </Button>
-               <Button
-                  type="primary" shape="round"
+                  shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'90%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'70%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
