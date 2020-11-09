@@ -7,7 +7,8 @@ import {  Avatar } from 'antd';
 import Liking from'../NewsfeedItems/Liking.js';
 import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
-
+import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
+import { connect } from 'react-redux';
 
 
 class SocialCalCellPage extends React.Component{
@@ -15,6 +16,81 @@ class SocialCalCellPage extends React.Component{
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
+
+  initialisePage(){
+    this.waitForSocketConnection(() =>{
+      SocialCalCellPageWebSocketInstance.fetchSocialCalCellInfo(
+        this.props.match.params.username,
+        this.props.match.params.year,
+        this.props.match.params.month,
+        this.props.match.params.day
+      )
+    })
+    if(this.props.match.params.username && this.props.match.params.year
+      && this.props.match.params.month && this.props.match.params.day
+    ) {
+      SocialCalCellPageWebSocketInstance.connect(
+        this.props.match.params.username,
+        this.props.match.params.year,
+        this.props.match.params.month,
+        this.props.match.params.day
+      )
+    }
+
+  }
+
+  componentDidMount() {
+    this.initialisePage()
+  }
+
+
+  waitForSocketConnection(callback){
+		// This is pretty much a recursion that tries to reconnect to the websocket
+		// if it does not connect
+		const component = this;
+		setTimeout(
+			function(){
+				console.log(SocialCalCellPageWebSocketInstance.state())
+				if (SocialCalCellPageWebSocketInstance.state() === 1){
+					console.log('connection is secure');
+					callback();
+					return;
+				} else {
+					console.log('waiting for connection...')
+					component.waitForSocketConnection(callback)
+				}
+			}, 100)
+	}
+
+  componentWillReceiveProps(newProps){
+    if(this.props.match.params.username !== newProps.match.params.username ||
+      this.props.match.params.year !== newProps.match.params.year ||
+      this.props.match.params.month !== newProps.match.params.month ||
+      this.props.match.params.day !== newProps.match.params.day
+    ) {
+      SocialCalCellPageWebSocketInstance.disconnect();
+      this.waitForSocketConnection(() =>{
+        SocialCalCellPageWebSocketInstance.fetchSocialCalCellInfo(
+          newProps.match.params.username,
+          newProps.match.params.year,
+          newProps.match.params.month,
+          newProps.match.params.day
+        )
+      })
+      SocialCalCellPageWebSocketInstance.connect(
+          newProps.match.params.username,
+          newProps.match.params.year,
+          newProps.match.params.month,
+          newProps.match.params.day
+      )
+
+    }
+  }
+
+  componentWillUnmount(){
+    SocialCalCellPageWebSocketInstance.disconnect();
+  }
+
 
   dateView(date) {
     // This will be presenting the calendar day on the modal
@@ -63,7 +139,6 @@ class SocialCalCellPage extends React.Component{
 
   render(){
     console.log(this.props)
-    console.log(this.props)
 
     let socialCalItems = []
     let socialCalEvents = []
@@ -80,39 +155,42 @@ class SocialCalCellPage extends React.Component{
     let peopleLikeId =[]
 
 
-    // if(this.props.socialObject[0]){
-    //   if(this.props.socialObject[0].get_socialCalItems){
-    //     socialCalItems = this.props.socialObject[0].get_socialCalItems
-    //   }
-    //   if(this.props.socialObject[0].get_socialCalEvent){
-    //     socialCalEvents = this.props.socialObject[0].get_socialCalEvent
-    //   }
-    //   if(this.props.socialObject[0].get_socialCalComment){
-    //     socialCalComments = this.props.socialObject[0].get_socialCalComment
-    //   }
-    //   socialCalUsername = this.props.socialObject[0].socialCalUser.username
-    //   socialCalUserId = this.props.socialObject[0].socialCalUser.id
-    //   socialCalProfilePic = 'http://127.0.0.1:8000'+this.props.socialObject[0].socialCalUser.profile_picture
-    //   if(this.props.socialObject[0].socialCaldate){
-    //     socialCalDate = this.props.socialObject[0].socialCaldate
-    //   }
-    //   if(this.props.socialObject[0].people_like){
-    //     people_like = this.props.socialObject[0].people_like
-    //   }
-    //   if(this.props.curSocialDate){
-    //     curDate = dateFns.format(this.props.curSocialDate, 'yyyy-MM-dd')
-    //   }
-    //   if(this.props.socialObject[0].id){
-    //     socialCalCellId = this.props.socialObject[0].id
-    //   }
-    //
-    // }
-    //
-    // if (people_like.length > 0){
-    //   for (let i = 0; i < people_like.length; i++){
-    //     peopleLikeId.push(people_like[i].id)
-    //   }
-    // }
+    if(this.props.socialCalCellInfo){
+      if(this.props.socialCalCellInfo.get_socialCalItems){
+        socialCalItems = this.props.socialCalCellInfo.get_socialCalItems
+      }
+      if(this.props.socialCalCellInfo.get_socialCalEvent){
+        socialCalEvents = this.props.socialCalCellInfo.get_socialCalEvent
+      }
+      if(this.props.socialCalCellInfo.get_socialCalComment){
+        socialCalComments = this.props.socialCalCellInfo.get_socialCalComment
+      }
+      if(this.props.socialCalCellInfo.socialCalUser){
+        socialCalUsername = this.props.socialCalCellInfo.socialCalUser.username
+        socialCalUserId = this.props.socialCalCellInfo.socialCalUser.id
+        socialCalProfilePic = 'http://127.0.0.1:8000'+this.props.socialCalCellInfo.socialCalUser.profile_picture
+
+      }
+      if(this.props.socialCalCellInfo.socialCaldate){
+        socialCalDate = this.props.socialCalCellInfo.socialCaldate
+      }
+      if(this.props.socialCalCellInfo.people_like){
+        people_like = this.props.socialCalCellInfo.people_like
+      }
+      if(this.props.curSocialDate){
+        curDate = dateFns.format(this.props.curSocialDate, 'yyyy-MM-dd')
+      }
+      if(this.props.socialCalCellInfo.id){
+        socialCalCellId = this.props.socialCalCellInfo.id
+      }
+
+    }
+
+    if (people_like.length > 0){
+      for (let i = 0; i < people_like.length; i++){
+        peopleLikeId.push(people_like[i].id)
+      }
+    }
 
     return(
 
@@ -239,4 +317,12 @@ class SocialCalCellPage extends React.Component{
   }
 }
 
-export default SocialCalCellPage;
+const mapStateToProps = state => {
+  return {
+    socialCalCellInfo: state.socialCal.socialCalCellInfo,
+    curId: state.auth.id,
+    curProfilePic: state.auth.profilePic
+  }
+}
+
+export default connect(mapStateToProps)(SocialCalCellPage);

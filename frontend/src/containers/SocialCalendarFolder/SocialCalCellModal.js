@@ -13,13 +13,24 @@ class SocialCalCellModal extends React.Component{
   }
 
   render(){
+
+    console.log(this.props)
     return(
       <div
-        onClick  = {this.back}
+        // onClick  = {this.back}
         className = "socialCalCellModalBackground"
 
        >
-       <SocialCalCellPage />
+       <SocialCalCellPage
+       {...this.props}
+        />
+       <div className = 'exitX'>
+       <i class="fas fa-times"
+       onClick = {this.back}
+       ></i>
+       </div>
+
+
        </div>
 
     )

@@ -13,6 +13,13 @@ export const prevMonthSocial = () => {
   }
 }
 
+export const fetchSocialCalCellPage = (socialCalCellObj) =>{
+  console.log(socialCalCellObj)
+  return {
+    type: actionTypes.FETCH_SOCIAL_CAL_CELL_PAGE,
+    socialCalCellObj: socialCalCellObj
+  }
+}
 
 // DELETE XXX
 export const openSocialModal = (socialObject, day) => {

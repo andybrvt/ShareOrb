@@ -17,7 +17,7 @@ class WebSocketSocialEventPage{
   }
 
   constructor(){
-    this.sockeRef = null
+    this.socketRef = null
   }
 
   connect(socialEventId){

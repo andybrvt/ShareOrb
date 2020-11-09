@@ -10,6 +10,13 @@
 
 }
 
+.exitX{
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
 
 /* This is for the page look */
 .socialCalCellModal {

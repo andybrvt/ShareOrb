@@ -92,6 +92,8 @@ export const PREV_MONTH_SOCIAL = 'PREV_MONTH_SOCIAL';
 export const OPEN_SOCIAL_MODAL = 'OPEN_SOCIAL_MODAL';
 export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
 
+//This is to fetch the social event info
+export const FETCH_SOCIAL_CAL_CELL_PAGE = 'FETCH_SOCIAL_CAL_CELL_PAGE';
 
 // The picture modal is what you would use to upload pictures
 export const OPEN_SOCIAL_PICTURE_MODAL = 'OPEN_SOCIAL_PICTURE_MODAL';

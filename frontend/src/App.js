@@ -13,6 +13,7 @@ import WebSocketPostsInstance from './postWebsocket';
 import ExploreWebSocketInstance from './exploreWebsocket';
 import EventPageWebSocketInstance from './eventPageWebsocket';
 import SocialEventPageWebSocketInstance from './socialEventPageWebsocket';
+import SocialCalCellPageWebSocketInstance from './socialCalCellWebsocket';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -83,6 +84,10 @@ class App extends Component {
       this.props.sendSocialEventMessage.bind(this),
       this.props.updateSocialEventPage.bind(this),
       this.props.sendDeleteSocialEventNoti.bind(this)
+    )
+
+    SocialCalCellPageWebSocketInstance.addCallbacks(
+      this.props.fetchSocialCalCellPage.bind(this)
     )
   }
 
@@ -169,7 +174,8 @@ const mapDispatchToProps = dispatch => {
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),
     updateSocialEventPage: updatedSocialEvent => dispatch(socialActions.updateSocialEventPage(updatedSocialEvent)),
-    sendDeleteSocialEventNoti: () => dispatch(socialActions.sendDeleteSocialEventNoti())
+    sendDeleteSocialEventNoti: () => dispatch(socialActions.sendDeleteSocialEventNoti()),
+    fetchSocialCalCellPage: (socialCalCellObj) => dispatch(socialActions.fetchSocialCalCellPage(socialCalCellObj))
   }
 }
 

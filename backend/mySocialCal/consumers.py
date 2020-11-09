@@ -6,6 +6,9 @@ from userprofile.models import User
 from django.shortcuts import get_object_or_404
 from .models import SocialCalEvent
 from .models import SocialEventMessages
+from .models import SocialCalCell
+from .serializers import SocialCalUserSerializer
+from .serializers import SocialCalCellSerializer
 from .serializers import SocialCalEventSerializer
 from .serializers import SocialEventMessagesSerializer
 
@@ -134,3 +137,72 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
     def new_social_message(self, message):
         messageObj = message['eventMessage']
         return self.send_json(messageObj)
+
+
+
+class SocialCalCellConsumer(JsonWebsocketConsumer):
+    # This is for the specific cells when you open them up, it will connect to
+    # its own cell
+    def send_fetch_social_cal_cell_info(self, data):
+        # This will fetch the information of the cal cell page. It will use
+        # the user name and date to filter that event. if there is no event
+        # you will just return the user object so that it will fill up the page
+        # but no event (hopefully if you filter and it is not there it will be empty)
+
+        print (data)
+        user = get_object_or_404(User, username = data['cellUser'])
+        socialCell = SocialCalCell.objects.filter(
+            socialCalUser = user,
+            socialCaldate = data['cellDate']
+        )
+
+        if socialCell:
+            # When the social cal cell does exist
+            serializerCell = SocialCalCellSerializer(socialCell[0]).data
+            content = {
+                'command': 'fetch_social_cal_cell_info',
+                'socialCalCell': serializerCell
+            }
+            print(content)
+            self.send_json(content)
+        else:
+            # When the social cal cell does not exist
+            serializerUser = SocialCalUserSerializer(user).data
+            content = {
+                'command': 'fetch_social_cal_cell_info',
+                'socialCalCell': {'socialCalUser':serializerUser}
+            }
+            print(content)
+            self.send_json(content)
+
+
+    def connect(self):
+        # gotta connect it properly, the code or name of the social cal cell will
+        # be the combination of the user name, year, month and day
+        print("connect")
+        self.selectedUser = self.scope['url_route']['kwargs']['user']
+        self.selectedYear = self.scope['url_route']['kwargs']['year']
+        self.selectedMonth = self.scope['url_route']['kwargs']['month']
+        self.selectedDay = self.scope['url_route']['kwargs']['day']
+        grp = 'socialCalCell_'+self.selectedUser+'_'+self.selectedYear+'_'+self.selectedMonth+'_'+self.selectedDay
+        print(grp)
+
+        async_to_sync (self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+
+    def disconnect(self, close_code):
+        print("disconnect")
+        self.selectedUser = self.scope['url_route']['kwargs']['user']
+        self.selectedYear = self.scope['url_route']['kwargs']['year']
+        self.selectedMonth = self.scope['url_route']['kwargs']['month']
+        self.selectedDay = self.scope['url_route']['kwargs']['day']
+        grp = 'socialCalCell_'+self.selectedUser+'_'+self.selectedYear+'_'+self.selectedMonth+'_'+self.selectedDay
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
+        print(data)
+        if data['command'] == 'fetch_social_cal_cell_info':
+            self.send_fetch_social_cal_cell_info(data)

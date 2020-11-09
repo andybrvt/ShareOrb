@@ -8,7 +8,13 @@ const initialState = {
   // for each day cell, it will pretty mcuh be like the single cell
   // so then you will have to change the profile object in the explore
   // and add a like to this as well
+
+  // DELETE XXX
   socialObject: [],
+
+  //This will be the information that fills in the socail cal cell page
+  socialCalCellInfo: {},
+
   socialDate: new Date(),
 
   // DELETE XXX
@@ -19,7 +25,6 @@ const initialState = {
   showSocialPicModal: false,
   showSocialEventModal: false,
   curSocialEventDate: new Date(),
-  test: '',
   // selectedSocialEvent is for the event page
   selectedSocialEvent: {},
   socialEventMessages: [],
@@ -37,6 +42,13 @@ const nextMonthSocial = (state, action) => {
 const prevMonthSocial = (state, action) => {
   return updateObject (state, {
     socialDate: dateFns.subMonths(state.socialDate, 1)
+  })
+}
+
+const fetchSocialCalCellPage = (state, action) => {
+  
+  return updateObject (state, {
+    socialCalCellInfo: action.socialCalCellObj
   })
 }
 
@@ -195,7 +207,8 @@ const reducer = (state = initialState, action) => {
       return nextMonthSocial(state, action)
     case actionTypes.PREV_MONTH_SOCIAL:
       return prevMonthSocial(state, action)
-  
+    case actionTypes.FETCH_SOCIAL_CAL_CELL_PAGE:
+      return fetchSocialCalCellPage(state, action)
 
     // DELETE XXX
     case actionTypes.OPEN_SOCIAL_MODAL:
