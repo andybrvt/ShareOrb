@@ -92,8 +92,10 @@ export const PREV_MONTH_SOCIAL = 'PREV_MONTH_SOCIAL';
 export const OPEN_SOCIAL_MODAL = 'OPEN_SOCIAL_MODAL';
 export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
 
-//This is to fetch the social event info
+//This is to fetch the social call cell info
 export const FETCH_SOCIAL_CAL_CELL_PAGE = 'FETCH_SOCIAL_CAL_CELL_PAGE';
+export const SEND_SOCIAL_CAL_CELL_LIKE = 'SEND_SOCIAL_CAL_CELL_LIKE';
+
 
 // The picture modal is what you would use to upload pictures
 export const OPEN_SOCIAL_PICTURE_MODAL = 'OPEN_SOCIAL_PICTURE_MODAL';
@@ -103,6 +105,9 @@ export const OPEN_SOCIAL_EVENT_MODAL = "OPEN_SOCIAL_EVENT_MODAL";
 export const CLOSE_SOCIAL_EVENT_MODAL = 'CLOSE_SOCIAL_EVENT_MODAL';
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
+
+
+// DELETE XXX
 export const ADD_SOCIAL_LIKE_UNLIKE_OLD = 'ADD_SOCIAL_LIKE_UNLIKE_OLD';
 export const ADD_SOCIAL_LIKE_OLD_M = 'ADD_SOCIAL_LIKE_OLD_M';
 export const ADD_SOCIAL_UNLIKE_M = 'ADD_SOCIAL_UNLIKE_M';
@@ -110,6 +115,9 @@ export const ADD_SOCIAL_LIKE_CUR = 'ADD_SOCIAL_LIKE_CUR';
 export const ADD_SOCIAL_UNLIKE_CUR = 'ADD_SOCIAL_LIKE_CUR';
 export const ADD_SOCIAL_COMMENT_OLD = 'ADD_SOCIAL_COMMENT_OLD';
 export const ADD_SOCIAL_COMMENT_OLD_M = 'ADD_SOCIAL_COMMENT_OLD_M';
+
+
+
 export const ADD_SOCIAL_EVENT_OLD = 'ADD_SOCIAL_EVENT_OLD';
 export const ADD_USER_SOCIAL_EVENT = 'ADD_USER_SOCIAL_EVENT';
 export const ADD_USER_SOCIAL_EVENT_M = 'ADD_USER_SOCIAL_EVENT_M';

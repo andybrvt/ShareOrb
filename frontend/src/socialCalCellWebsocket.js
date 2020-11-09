@@ -99,7 +99,7 @@ class WebSocketSocialCalCellPage{
     const command = parsedData.command
 
     console.log(parsedData)
-    if(command == 'fetch_social_cal_cell_info'){
+    if(command === 'fetch_social_cal_cell_info'){
       // This will load up the information for the social cal cell page
       const socialCalCellObj = parsedData.socialCalCell
 
@@ -107,12 +107,25 @@ class WebSocketSocialCalCellPage{
       this.callbacks['fetch_social_cal_cell_info'](socialCalCellObj)
 
     }
+    if(command === 'send_social_cal_cell_like'){
+      //This will send a like to the redux so it can show it in the front end
+
+      //Pretty much what you are ognna do it just repalce the whole like list
+      // with new one
+      const likeList = parsedData.likeList
+
+
+      //ADD CALLBACK HERE
+      this.callbacks['send_social_cal_cell_like'](likeList)
+    }
   }
 
   addCallbacks(
-    fetchSocialCalCellInfo
+    fetchSocialCalCellInfo,
+    sendSocialCalCellLike,
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
+    this.callbacks['send_social_cal_cell_like'] = sendSocialCalCellLike
   }
 
   sendSocialCalCellInfo(data){

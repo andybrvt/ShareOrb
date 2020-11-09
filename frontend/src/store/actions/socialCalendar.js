@@ -21,6 +21,14 @@ export const fetchSocialCalCellPage = (socialCalCellObj) =>{
   }
 }
 
+export const sendSocialCalCellLike = (socialCalCellLikeObj) => {
+  return{
+    type: actionTypes.SEND_SOCIAL_CAL_CELL_LIKE,
+    socialCalCellLikeObj: socialCalCellLikeObj
+  }
+}
+
+
 // DELETE XXX
 export const openSocialModal = (socialObject, day) => {
   return {
