@@ -112,13 +112,19 @@ class SocialCalCellPage extends React.Component{
 
   }
 
-  onSocialLike = (curDate, personLike, owner) => {
+  onSocialLike = (personLike, owner) => {
     // send out a like to the websocket, the curDate will be the current date and
-    // The person like will be the perosn who like the post. Owner will be the
+    // The person like will be the perosn who like the post(it will be the current user
+    // and be indicated with id). Owner will be the
     // owner of the calendar
-    console.log(personLike, owner)
 
-    // ExploreWebSocketInstance.sendSocialLike(curDate, personLike, owner)
+    // You will pull the date using the url on top.
+    const year = this.props.match.params.year
+    const month = this.props.match.params.month
+    const day = this.props.match.params.day
+    const cellDate = year+"-"+month+"-"+day
+
+    SocialCalCellPageWebSocketInstance.sendSocialCalCellLike(cellDate, personLike, owner)
 
     // RECONFIG
 
@@ -154,7 +160,8 @@ class SocialCalCellPage extends React.Component{
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
 
-
+    console.log(people_like)
+    console.log(curDate)
     if(this.props.socialCalCellInfo){
       if(this.props.socialCalCellInfo.get_socialCalItems){
         socialCalItems = this.props.socialCalCellInfo.get_socialCalItems
@@ -192,6 +199,8 @@ class SocialCalCellPage extends React.Component{
       }
     }
 
+    console.log(socialCalUserId)
+    console.log(this.props.curId)
     return(
 
          <div
@@ -277,7 +286,7 @@ class SocialCalCellPage extends React.Component{
              :
 
              <div
-             onClick = {() => this.onSocialLike(curDate, this.props.curId, socialCalUserId)}
+             onClick = {() => this.onSocialLike(this.props.curId, socialCalUserId)}
              className ='socialLike'>
              <i
                style={{ marginRight:'10px'}}

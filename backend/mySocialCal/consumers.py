@@ -176,6 +176,70 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_json(content)
 
 
+    def send_social_cal_cell_like(self, data):
+        # This will pretty much create a social cell object if it is not already
+        # created and then add a like to itself.
+
+        # So you will used get_or_create and then pass it it redux to the event page
+
+        #  personLIke and cellowner will be in id form
+        personLike = get_object_or_404(User, id = data['personLike'])
+        calOwner = get_object_or_404(User, id = data['cellOwner'])
+        print(personLike, calOwner )
+
+        # So to save one space and such, you only want to create a social cal cell object
+        # when there is a like or commment, pics or events. this si where get_or create comes in
+        # handy
+        socialCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = calOwner,
+            socialCaldate = data['cellDate']
+        )
+
+        socialCell.people_like.add(personLike)
+        socialCell.save()
+
+        socialCalCellObj = SocialCalCellSerializer(socialCell).data
+
+        # Unlike the older like, we will remove the testdate bc it will have
+        # conflict in creating the object
+
+        # When sending out the content you have to split it up so that it matches
+        # the right websocket that you are sending it to
+
+        # The format --> socialCalCell_username_year_month_day
+
+        dateList = data['cellDate'].split("-")
+        username = calOwner.username
+        print(dateList)
+        print(username)
+
+        # You will use recipient to attach the group name
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        print(recipient)
+        content = {
+            'command': 'send_social_cal_cell_like',
+            'likeList': socialCalCellObj['people_like'],
+            'recipient': recipient
+        }
+
+
+        self.send_info_cal_cell(content)
+
+    def send_info_cal_cell (self, calCellObj):
+        # This will be used ot send the info into the front end
+        channel_layer = get_channel_layer()
+        channel_recipient = calCellObj['recipient']
+        channel = 'socialCalCell_'+channel_recipient
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_social_cal_cell_action',
+                'socialCalAction': calCellObj
+            }
+        )
+
     def connect(self):
         # gotta connect it properly, the code or name of the social cal cell will
         # be the combination of the user name, year, month and day
@@ -206,3 +270,9 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == 'fetch_social_cal_cell_info':
             self.send_fetch_social_cal_cell_info(data)
+        if data['command'] == 'send_social_cal_cell_like':
+            self.send_social_cal_cell_like(data)
+
+    def new_social_cal_cell_action(self, action):
+        socialCalCellObj = action['socialCalAction']
+        return self.send_json(socialCalCellObj)

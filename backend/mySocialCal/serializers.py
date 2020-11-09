@@ -16,7 +16,6 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
          'id',
          'socialCalUser',
          'socialCaldate',
-         'testDate',
          'people_like',
          'coverPic',
          'get_socialCalItems',

@@ -66,8 +66,21 @@ class WebSocketSocialCalCellPage{
     })
   }
 
-  sendSocialCalCellLike (){
+  sendSocialCalCellLike (cellDate, personLike, owner){
     //This is for liking the social cal cell
+    // The curDate and the owner will be used to either create the new social
+    // cal cell event or filter out the right one
+
+    console.log('hit the like')
+    console.log(cellDate, personLike, owner)
+    this.sendSocialCalCellInfo({
+      command: "send_social_cal_cell_like",
+      cellDate: cellDate,
+      personLike: personLike,
+      cellOwner: owner
+
+    })
+
   }
 
   sendSocialCalCellUnlike() {
