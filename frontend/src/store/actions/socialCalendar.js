@@ -59,15 +59,6 @@ export const closeSocialPictureModal = () => {
 }
 
 
-
-export const addSocialUnLikeM = (socialObj) => {
-  return {
-    type: actionTypes.ADD_SOCIAL_UNLIKE_M,
-    socialObj: socialObj
-  }
-}
-
-
 export const addSocialCommentOldM = (socialObj) => {
   return {
     type: actionTypes.ADD_SOCIAL_COMMENT_OLD_M,

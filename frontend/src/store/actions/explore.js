@@ -27,21 +27,6 @@ export const changeProfilePic = profilePic => {
 }
 
 
-
-
-
-
-
-
-export const addSocialLikeUnlikeOld = (exploreObj) => {
-  // This will be used for the social calendar liking when there is an exisiting
-  // cal cell
-  return {
-    type: actionTypes.ADD_SOCIAL_LIKE_UNLIKE_OLD,
-    exploreObj: exploreObj
-  }
-}
-
 export const addSocialCommentOld = (exploreObj) => {
   // This will be used for the adding the comments when the social cell
   // is already created

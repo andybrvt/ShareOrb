@@ -43,42 +43,6 @@ export const changeProfilePic = (state, action) => {
 
 
 
-// FOR ALL THE NEW CAL CELL BEING CREATED, YOU CAN PROBALLY JUST USE ONE
-// ADD NEW SOCIALCALCELL
-
-export const addSocialLikeUnlikeOld = (state, action) => {
-  // so the task here is to find the user, then find the correct cell
-  // data then add in the like
-
-  // For now I will do a double loop --> probally gonna be shit but if things seem to be better
-  // and sorted I will switch to binary search
-  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCell.id
-  const userLike = action.exploreObj.userObj
-
-  const calendarCells = action.exploreObj.socialCal
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ... profile,
-        get_socialCal: calendarCells
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: calendarCells
-    } : state.profile
-  })
-}
-
-
-
 export const addSocialCommentOld = (state, action) =>{
   // This since the socialcell already exist so what will happen is that you will find
   // the person then find the cell, then go into the comments, and add the comment
@@ -284,8 +248,6 @@ const reducer = (state = initialState, action) => {
       return addFollowerUnfollower(state, action);
     case actionTypes.CHANGE_PROFILE_PIC:
       return changeProfilePic(state, action);
-    case actionTypes.ADD_SOCIAL_LIKE_UNLIKE_OLD:
-      return addSocialLikeUnlikeOld(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD:
       return addSocialCommentOld (state, action)
     case actionTypes.ADD_SOCIAL_EVENT_OLD:

@@ -91,21 +91,6 @@ const closeSocialPictureModal = (state, action) => {
 
 
 
-const addSocialUnLikeM = (state, action) => {
-
-  function removeUnliker(unliker){
-    return unliker.id !== action.socialObj.userObj.id
-  }
-
-  return updateObject(state, {
-    socialObject: state.socialObject[0] ? [{
-      ...state.socialObject[0],
-      people_like: state.socialObject[0].people_like.filter(removeUnliker)
-    }] : []
-  })
-}
-
-
 const addSocialCellNewM = (state, action) => {
   return updateObject (state, {
     socialObject: [
@@ -223,8 +208,6 @@ const reducer = (state = initialState, action) => {
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
       return closeSocialPictureModal(state, action)
-    case actionTypes.ADD_SOCIAL_UNLIKE_M:
-      return addSocialUnLikeM(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD_M:
       return addSocialCommentOldM(state, action)
     case actionTypes.OPEN_SOCIAL_EVENT_MODAL:

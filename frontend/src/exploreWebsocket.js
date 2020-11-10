@@ -78,34 +78,6 @@ class WebSocketExplore {
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
 
-    }  else if (command === 'send_social_unlike'){
-
-
-      // This will be used for indicating the user and then removing the unlike
-      // user from the  social cal cell people like
-      const socialCalCellId = parsedData.socialCalCellObjId
-      // Pretty much the object used is the same as the like action
-      const userObj = parsedData.userObj
-
-
-      // SocialCal cell would pretty be holding all the events of the users events
-      // and then is gonna jsut replace all the events all at once so we dont have
-      //  to search for a specific one
-      const socialCal = parsedData.ownerSocialCal
-
-      const exploreObj = {
-        socialCal: socialCal,
-        socialCalCell: socialCalCellId,
-        userObj: userObj
-      }
-
-      // Now you would put the call backs here
-      console.log('stuff stuff stuff')
-
-
-      // You can reuse the social_like_old as unlike too
-      this.callbacks['social_like_unlike_old'](exploreObj)
-      this.callbacks['social_unlike_m'](exploreObj)
     }  else if (command === 'send_social_comment_old'){
       // So you would pass the socialCalcell obj in first and then the comment
       // The socialCalCell is used to find the ower and the cell
@@ -197,8 +169,6 @@ class WebSocketExplore {
   addCallbacks(
      loadProfile,
      addFollowerUnfollowerCallBack,
-     addSocialLikeUnlikeOld,
-     addSocialUnLikeM,
      addSocialCommentOld,
      addSocialCommentOldM,
      addSocialEventOld,
@@ -211,8 +181,6 @@ class WebSocketExplore {
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
-    this.callbacks['social_like_unlike_old'] = addSocialLikeUnlikeOld
-    this.callbacks['social_unlike_m'] = addSocialUnLikeM
     this.callbacks['social_comment_old'] = addSocialCommentOld
     this.callbacks['social_comment_old_m'] = addSocialCommentOldM
     this.callbacks['social_event_old'] = addSocialEventOld
