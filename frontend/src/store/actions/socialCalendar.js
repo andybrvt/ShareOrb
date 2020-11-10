@@ -21,9 +21,9 @@ export const fetchSocialCalCellPage = (socialCalCellObj) =>{
   }
 }
 
-export const sendSocialCalCellLike = (socialCalCellLikeObj) => {
+export const sendSocialCalCellLikeUnlike = (socialCalCellLikeObj) => {
   return{
-    type: actionTypes.SEND_SOCIAL_CAL_CELL_LIKE,
+    type: actionTypes.SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE,
     socialCalCellLikeObj: socialCalCellLikeObj
   }
 }

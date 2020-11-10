@@ -114,7 +114,7 @@ class WebSocketSocialCalCellPage{
 
     }
     if(command === 'send_social_cal_cell_like_unlike'){
-      //This will send a like to the redux so it can show it in the front end
+      //This will send a like and unlike to the redux so it can show it in the front end
 
       //Pretty much what you are ognna do it just repalce the whole like list
       // with new one
@@ -122,16 +122,18 @@ class WebSocketSocialCalCellPage{
 
 
       //ADD CALLBACK HERE
-      this.callbacks['send_social_cal_cell_like'](likeList)
-    } 
+
+      // YOU WILL BE USING THIS FOR BOTH THE LIKING AND UNLIKING
+      this.callbacks['send_social_cal_cell_like_unlike'](likeList)
+    }
   }
 
   addCallbacks(
     fetchSocialCalCellInfo,
-    sendSocialCalCellLike,
+    sendSocialCalCellLikeUnlike,
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
-    this.callbacks['send_social_cal_cell_like'] = sendSocialCalCellLike
+    this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
   }
 
   sendSocialCalCellInfo(data){

@@ -52,7 +52,7 @@ const fetchSocialCalCellPage = (state, action) => {
   })
 }
 
-const sendSocialCalCellLike = (state, action) => {
+const sendSocialCalCellLikeUnlike = (state, action) => {
   return updateObject(state, {
     socialCalCellInfo: {
       ...state.socialCalCellInfo,
@@ -207,8 +207,8 @@ const reducer = (state = initialState, action) => {
       return prevMonthSocial(state, action)
     case actionTypes.FETCH_SOCIAL_CAL_CELL_PAGE:
       return fetchSocialCalCellPage(state, action)
-    case actionTypes.SEND_SOCIAL_CAL_CELL_LIKE:
-      return sendSocialCalCellLike(state, action)
+    case actionTypes.SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE:
+      return sendSocialCalCellLikeUnlike(state, action)
 
     // DELETE XXX
     case actionTypes.OPEN_SOCIAL_MODAL:

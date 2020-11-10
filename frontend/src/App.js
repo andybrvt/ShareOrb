@@ -87,7 +87,7 @@ class App extends Component {
 
     SocialCalCellPageWebSocketInstance.addCallbacks(
       this.props.fetchSocialCalCellPage.bind(this),
-      this.props.sendSocialCalCellLike.bind(this)
+      this.props.sendSocialCalCellLikeUnlike.bind(this)
     )
   }
 
@@ -175,7 +175,7 @@ const mapDispatchToProps = dispatch => {
     updateSocialEventPage: updatedSocialEvent => dispatch(socialActions.updateSocialEventPage(updatedSocialEvent)),
     sendDeleteSocialEventNoti: () => dispatch(socialActions.sendDeleteSocialEventNoti()),
     fetchSocialCalCellPage: (socialCalCellObj) => dispatch(socialActions.fetchSocialCalCellPage(socialCalCellObj)),
-    sendSocialCalCellLike: (socialCalCellLikeObj) => dispatch(socialActions.sendSocialCalCellLike(socialCalCellLikeObj))
+    sendSocialCalCellLikeUnlike: (socialCalCellLikeObj) => dispatch(socialActions.sendSocialCalCellLikeUnlike(socialCalCellLikeObj))
   }
 }
 

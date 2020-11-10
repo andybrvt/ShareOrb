@@ -86,7 +86,8 @@ export const CLOSE_SOCIAL_MODAL = 'CLOSE_SOCIAL_MODAL';
 
 //This is to fetch the social call cell info
 export const FETCH_SOCIAL_CAL_CELL_PAGE = 'FETCH_SOCIAL_CAL_CELL_PAGE';
-export const SEND_SOCIAL_CAL_CELL_LIKE = 'SEND_SOCIAL_CAL_CELL_LIKE';
+// USE THIS FOR BOTH LIKING AND UNLIKING
+export const SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE = 'SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE';
 
 
 // The picture modal is what you would use to upload pictures
