@@ -93,8 +93,18 @@ class WebSocketSocialCalCellPage{
     })
   }
 
-  sendSocialCalCellComment(){
+  sendSocialCalCellComment(currentDate, curUser, comment, owner){
     //This is to send comments in the social cal cell
+    // cellowner is an id
+    // personcomment is an id
+    console.log(currentDate, curUser, comment, owner)
+    this.sendSocialCalCellInfo({
+      command: "send_social_cal_cell_comment",
+      cellDate: currentDate,
+      personComment: curUser,
+      comment: comment,
+      cellOwner: owner
+    })
   }
 
   socketNewSocialCalCell(data){
@@ -126,14 +136,25 @@ class WebSocketSocialCalCellPage{
       // YOU WILL BE USING THIS FOR BOTH THE LIKING AND UNLIKING
       this.callbacks['send_social_cal_cell_like_unlike'](likeList)
     }
+    if(command === "send_social_cal_cell_comment"){
+      // This will send the comments
+
+      // You will just add the comment in at the end
+
+      const socialComment = parsedData.socialComment
+
+      this.callbacks['send_social_cal_cell_comment'](socialComment)
+    }
   }
 
   addCallbacks(
     fetchSocialCalCellInfo,
     sendSocialCalCellLikeUnlike,
+    sendSocialCalCellComment
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
+    this.callbacks['send_social_cal_cell_comment'] = sendSocialCalCellComment
   }
 
   sendSocialCalCellInfo(data){

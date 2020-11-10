@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
+import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import './SocialCalCSS/SocialCellPage.css';
 
 
@@ -22,12 +23,12 @@ class SocialComments extends React.Component{
     console.log('comment submit')
     console.log(this.state.comment)
     if (this.state.comment !== ''){
-      // ExploreWebSocketInstance.sendSocialComment(
-      //   this.props.currentDate,
-      //   this.props.curUser,
-      //   this.state.comment,
-      //   this.props.owner
-      // )
+      SocialCalCellPageWebSocketInstance.sendSocialCalCellComment(
+        this.props.currentDate,
+        this.props.curUser,
+        this.state.comment,
+        this.props.owner
+      )
       this.setState({comment: ''})
     }
 
@@ -35,7 +36,9 @@ class SocialComments extends React.Component{
 
   handleChange = e =>{
     console.log(e.target.value)
-    this.setState({comment: e.target.value})
+    this.setState({
+      comment: e.target.value
+    })
 
   }
 
@@ -64,7 +67,7 @@ class SocialComments extends React.Component{
 
   render() {
     console.log(this.props)
-
+    console.log(this.state)
 
     return (
       <div className = 'socialCommentBoxBox'>

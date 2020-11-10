@@ -28,6 +28,14 @@ export const sendSocialCalCellLikeUnlike = (socialCalCellLikeObj) => {
   }
 }
 
+export const sendSocialCalCellComment = (socialCalCellCommentObj) => {
+  return {
+    type: actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT,
+    socialCalCellCommentObj: socialCalCellCommentObj
+  }
+}
+
+
 
 export const openSocialPictureModal = () => {
   return {

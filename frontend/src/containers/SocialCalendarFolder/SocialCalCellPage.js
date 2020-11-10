@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 
 class SocialCalCellPage extends React.Component{
 
+
+
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
@@ -112,6 +114,7 @@ class SocialCalCellPage extends React.Component{
 
   }
 
+
   onSocialLike = (personLike, owner) => {
     // STATUS: REDONE
 
@@ -149,6 +152,11 @@ class SocialCalCellPage extends React.Component{
 
   render(){
     console.log(this.props)
+    console.log(this.state)
+
+    const year = this.props.match.params.year
+    const month = this.props.match.params.month
+    const day = this.props.match.params.day
 
     let socialCalItems = []
     let socialCalEvents = []
@@ -158,7 +166,7 @@ class SocialCalCellPage extends React.Component{
     let socialCalProfilePic = ''
     let socialCalDate = ''
     let people_like = []
-    let curDate = ''
+    let curDate = year+"-"+month+"-"+day
     let socialCalCellId = ''
 
     // peopleLikeId is just used for the like and unlike button
@@ -188,9 +196,6 @@ class SocialCalCellPage extends React.Component{
       if(this.props.socialCalCellInfo.people_like){
         people_like = this.props.socialCalCellInfo.people_like
       }
-      if(this.props.curSocialDate){
-        curDate = dateFns.format(this.props.curSocialDate, 'yyyy-MM-dd')
-      }
       if(this.props.socialCalCellInfo.id){
         socialCalCellId = this.props.socialCalCellInfo.id
       }
@@ -203,8 +208,7 @@ class SocialCalCellPage extends React.Component{
       }
     }
 
-    console.log(socialCalUserId)
-    console.log(this.props.curId)
+
     return(
 
          <div
@@ -308,7 +312,7 @@ class SocialCalCellPage extends React.Component{
               Comment </div>
            </div>
              <SocialComments
-             // commentChange = {this.handleChange}
+             // commentChange = {this.handleCommentChange}
              // commentSubmit = {this.handleSubmit}
              // commentValue = {this.state.comment}
              currentDate = {curDate}

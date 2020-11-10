@@ -602,137 +602,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
-    def send_social_like(self, data):
-        # user is the person that like the social cell and the owner is the owner of the
-        # social calendar
-
-        # Since this is gonna be added to the redux, you have to serialize the soical cell
-        # pass it on to the and then pass the like on to, if it already exist that you just have to pass the like
-        # if it doenst then you have to make it, add like, and add it into the redux
-
-        # So to cover all cases you would have to send the socialcal cell, serialzied and the userinformation just incase
-        # the socialcal cell is already made
-        user = get_object_or_404(User, id = data['userId'])
-        owner = get_object_or_404(User, id = data['ownerId'])
-        socialCell, created = SocialCalCell.objects.get_or_create(
-            socialCalUser = owner,
-            socialCaldate = data['socialCalDate'],
-            testDate = data['socialCalDate']
-        )
-
-        socialCell.people_like.add(user)
-        socialCell.save()
-
-        # serialize it so that you can actually send it and use it in the front end
-        socialCalCellObj = SocialCalCellSerializer(socialCell, many = False).data
-        # The userobj will be the person that liked the post
-        userObj = FollowUserSerializer(user, many = False).data
-        #The ownerobj wil be the perosn that owns the post
-        ownerObj = FollowUserSerializer(owner, many = False).data
-
-        ownerSocialCalList = UserSocialCalSerializer(owner, many = False).data['get_socialCal']
-
-
-        # you probally gotta make 2 redux functions though lol
-        if created == True:
-            contentOwner = {
-                'command': 'send_cal_cell_new',
-                'socialCalCellObj':socialCalCellObj,
-                'reciever': ownerObj
-            }
-            contentLiker = {
-                'command': 'send_cal_cell_new',
-                'socialCalCellObj':socialCalCellObj,
-                'reciever': userObj
-            }
-            if userObj == ownerObj:
-                # The if statement is so that if you comment or like on your own
-                # post you dont get it sent twice to you
-                self.send_new_explore(contentOwner)
-            else:
-                self.send_new_explore(contentOwner)
-                self.send_new_explore(contentLiker)
-        if created == False:
-            contentOwner = {
-                'command': 'send_social_like_old',
-                'userObj': userObj,
-                'socialCalCellObjId': socialCalCellObj,
-                'ownerSocialCal': ownerSocialCalList,
-                'reciever': ownerObj
-            }
-            contentLiker = {
-                'command': 'send_social_like_old',
-                'userObj': userObj,
-                'socialCalCellObjId': socialCalCellObj,
-                'ownerSocialCal': ownerSocialCalList,
-                'reciever': userObj
-            }
-
-            if userObj == ownerObj:
-                self.send_new_explore(contentOwner)
-            else:
-                self.send_new_explore(contentOwner)
-                self.send_new_explore(contentLiker)
-
-
-    def send_social_unlike(self, data):
-        # This will pretty much do the opposite of the send social
-        # like
-
-        # remember that user is the perosn that like the post
-
-        # Will make this more efficnet by just getting all the event objects
-        # in the cell and replace the cell rather than just finding the exact
-        # event becuaes I do not want to do a triple for loop
-
-        # pretty much refer to the send_social_like function for details
-        user = get_object_or_404(User, id = data['userId'])
-        owner = get_object_or_404(User, id = data['ownerId'])
-        socialCell, created = SocialCalCell.objects.get_or_create(
-            socialCalUser = owner,
-            socialCaldate = data['socialCalDate'],
-            testDate = data['socialCalDate']
-        )
-
-        socialCell.people_like.remove(user)
-        socialCell.save()
-
-
-        # Now we will serialzie all the data and it to the front end so we can
-        # put some redux into it
-
-        socialCalCellObj = SocialCalCellSerializer(socialCell, many = False).data
-        # The userObj will be the person that unlikes the post
-        userObj = FollowUserSerializer(user, many = False).data
-        # The ownerObj will be th eperosn taht owns the post
-        ownerObj = FollowUserSerializer(owner, many = False).data
-
-        # So we just get the social cal evnet list agian and just replace it
-        ownerSocialCalList = UserSocialCalSerializer(owner, many = False).data['get_socialCal']
-
-        # Since we do not need to make a seperate case for the when you have to create
-        #  a new
-        contentOwner = {
-            'command' : 'send_social_unlike',
-            'userObj': userObj,
-            'socialCalCellObjId': socialCalCellObj,
-            'ownerSocialCal': ownerSocialCalList,
-            'reciever': ownerObj
-        }
-        contentLiker = {
-            'command': 'send_social_unlike',
-            'userObj': userObj,
-            'socialCalCellObjId': socialCalCellObj,
-            'ownerSocialCal': ownerSocialCalList,
-            'reciever': userObj
-        }
-
-        if userObj == ownerObj:
-            self.send_new_explore(contentOwner)
-        else:
-            self.send_new_explore(contentOwner)
-            self.send_new_explore(contentLiker)
-
 
     def send_social_comment(self, data):
         # The process will first be grabing the userObj that made the comment
@@ -992,7 +861,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
             'followerList': hostObj['get_followers'],
             'reciever': hostObj['username']
         }
-        
+
         self.send_new_explore(content)
 
 

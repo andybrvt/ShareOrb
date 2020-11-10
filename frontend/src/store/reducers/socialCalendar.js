@@ -57,6 +57,16 @@ const sendSocialCalCellLikeUnlike = (state, action) => {
   })
 }
 
+const sendSocialCalCellComment = (state, action) => {
+  return updateObject(state, {
+    socialCalCellInfo:{
+      ...state.socialCalCellInfo,
+      get_socialCalComment: [...state.socialCalCellInfo.get_socialCalComment, action.socialCalCellCommentObj]
+    }
+  })
+}
+
+
 
 const openSocialPictureModal = (state, action) => {
   return updateObject (state, {
@@ -175,6 +185,9 @@ const reducer = (state = initialState, action) => {
       return fetchSocialCalCellPage(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE:
       return sendSocialCalCellLikeUnlike(state, action)
+    case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT:
+      return sendSocialCalCellComment(state, action)
+
     case actionTypes.OPEN_SOCIAL_PICTURE_MODAL:
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
@@ -201,6 +214,7 @@ const reducer = (state = initialState, action) => {
       return updateSocialEventBackground(state, action);
     case actionTypes.SEND_DELETE_SOCIAL_EVENT_NOTI:
       return sendDeleteSocialEventNoti(state, action);
+
     default:
       return state;
   }

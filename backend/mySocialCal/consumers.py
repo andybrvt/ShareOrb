@@ -7,10 +7,12 @@ from django.shortcuts import get_object_or_404
 from .models import SocialCalEvent
 from .models import SocialEventMessages
 from .models import SocialCalCell
+from .models import SocialCalComment
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
 from .serializers import SocialCalEventSerializer
 from .serializers import SocialEventMessagesSerializer
+from .serializers import SocialCalCommentSerializer
 
 # This consumer is mostly used for managing the social events ie
 # soical event page. Where as the other cosnumer that is in the
@@ -262,6 +264,54 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         self.send_info_cal_cell(content)
 
+    def send_social_cal_cell_comment(self, data):
+        # This will make teh social comment objects
+        # You will get_or_create on this one because you can have a chance of
+        # making a soical cal cell
+        personComment = get_object_or_404(User, id = data['personComment'])
+        calOwner = get_object_or_404(User, id = data['cellOwner'])
+
+        # First you will create or get the cell
+        socialCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = calOwner,
+            socialCaldate = data['cellDate']
+        )
+
+        # Unlike the likin gyou do not need to add stuff into the object but rather
+        # you will create the social comment
+        socialComment = SocialCalComment.objects.create(
+            calCell = socialCell,
+            body = data['comment'],
+            commentUser = personComment
+        )
+
+        # Now you will serialize teh comment and then you can just send it
+        # You probally don't need to send the whole cell because you just
+        # gotta replace teh get_comments
+
+        socialCalCellComment = SocialCalCommentSerializer(socialComment).data
+
+        print(socialCalCellComment)
+
+        # Now we will create the tag name for the channel group
+        dateList = data['cellDate'].split("-")
+        username = calOwner.username
+
+        # You will the use the recipient to attach to the group name
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        content = {
+            'command': 'send_social_cal_cell_comment',
+            'socialComment': socialCalCellComment,
+            'recipient': recipient
+        }
+
+        self.send_info_cal_cell(content)
+
+
+
+
+
     def send_info_cal_cell (self, calCellObj):
         # This will be used ot send the info into the front end
         channel_layer = get_channel_layer()
@@ -310,6 +360,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_social_cal_cell_like(data)
         if data['command'] == 'send_social_cal_cell_unlike':
             self.send_social_cal_cell_unlike(data)
+        if data['command'] == 'send_social_cal_cell_comment':
+            self.send_social_cal_cell_comment(data)
 
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']

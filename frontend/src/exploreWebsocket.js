@@ -244,50 +244,7 @@ class WebSocketExplore {
 
   }
 
-  sendSocialLike = (curDate, personLike, owner) =>{
-    // This function will be sending out a like to someone's profile and then
-    // pick out the right social calendar cell and then add a like to it. This is
-    // where it will start
 
-    // The two things you are gonna be sending is something tha tyou cna use to identify
-    // the day cell and the user who is gonna like it so you cna grab the user
-
-
-    // The personLike and owner will be the ids of the persons
-
-
-    //Let this operate only in the channels, and it will just rerender everytime someone
-    // goes on to the page or is on the page already (make it really easy)
-    // Foudn on socialcalcellinfo
-
-
-    console.log(curDate, personLike)
-    this.sendExplore({
-      socialCalDate: curDate,
-      userId: personLike,
-      ownerId: owner,
-      command: 'send_social_like'
-    })
-
-  }
-
-  sendSocialUnLike = (curDate, personUnLike, owner) => {
-    // So you want the curDate so that you can pick the right curcell, along with the
-    // the ids of the person taht is gonna unlike and the owner of the calendar
-    // personUnlike would be the id of the person liking or unliking
-    // owner will be the id of the social cal owner
-
-    //same deal as like
-
-    console.log(curDate, personUnLike, owner)
-    this.sendExplore({
-      socialCalDate: curDate,
-      userId: personUnLike,
-      ownerId: owner,
-      command: 'send_social_unlike'
-
-    })
-  }
 
   sendSocialComment = (curDate, personComment, comment, owner) =>{
     // The curdate will be used to get the cell calendar
