@@ -120,13 +120,23 @@ class ChangeBackgroundModal extends React.Component{
     return(
       <Modal
       visible = {this.props.visible}
-      width = {700}
+      width = {1000}
       okText = {'Save'}
       okButtonProps={{ disabled: this.state.imageFile == "" ? true : false }}
       onCancel = {() => this.handleCancel()}
       onOk = {() => this.handleSubmit(this.state.imageFile)}
       >
       <span className = 'uploadProfileText'> Change background Picture </span>
+        {
+          (this.props.pic!=null)?
+          <img class="changeProfilePic"
+            src={'http://127.0.0.1:8000'+this.props.pic}></img>
+
+          :
+          <div></div>
+
+
+        }
         <Upload
           name="avatar"
           listType="picture-card"

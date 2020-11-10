@@ -889,21 +889,22 @@ class EventInfo extends React.Component{
       tempDifference ={this.props.tempDifference}
       onCancel = {this.props.closeAcceptUnshareModal}
       visible = {this.props.showAcceptUnshareModal}
-      onSubmit = {this.onAcceptUnShareEdit}
+      onSubmit = {this  .onAcceptUnShareEdit}
        />
 
       <RemoveEventModal
-      visible = {this.props.showDeleteModal}
-      close = {this.props.closeEventDeleteModal}
-      history = {this.props.history}
-      item = {this.props.deleteEventId}
-      user = {this.props.id}
+        visible = {this.props.showDeleteModal}
+        close = {this.props.closeEventDeleteModal}
+        history = {this.props.history}
+        item = {this.props.deleteEventId}
+        user = {this.props.id}
       />
 
       <ChangeBackgroundModal
-      visible = {this.state.changeBackgroundView}
-      close = {this.onChangeBackgroundClose}
-      onSubmit = {this.handleBackgroundPictureChange}
+        pic={eventBackgroundPic}
+        visible = {this.state.changeBackgroundView}
+        close = {this.onChangeBackgroundClose}
+        onSubmit = {this.handleBackgroundPictureChange}
       />
 
 

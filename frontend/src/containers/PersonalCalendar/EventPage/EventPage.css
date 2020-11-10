@@ -257,6 +257,14 @@
 
 }
 
+.changeProfilePic{
+  object-fit: cover;
+  width: 500px;
+  height: 350px;
+
+
+}
+
 
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic .pictureFrame{
