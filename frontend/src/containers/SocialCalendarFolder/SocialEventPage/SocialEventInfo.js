@@ -171,11 +171,10 @@ class SocialEventInfo extends React.Component{
     console.log(this.props.info.id)
 
     // This sendSocialEventDelete will send notifications of whoever is still in the
-    // event room that the event has been delete so refresh... nothign you do matters 
+    // event room that the event has been delete so refresh... nothign you do matters
     SocialEventPageWebSocketInstance.sendSocialEventDelete(this.props.info.id)
 
     // authAxios.delete('http://127.0.0.1:8000/mySocialCal/socialEvent/delete/'+this.props.info.id)
-    // this.props.closeSocialModal()
     if(this.props.history){
       this.props.history.push('/current-user/')
     }
@@ -451,7 +450,6 @@ class SocialEventInfo extends React.Component{
 const mapDispatchToProps = dispatch => {
   return {
     updateSocialEventBackground: backgroundPic => dispatch(socialActions.updateSocialEventBackground(backgroundPic)),
-    closeSocialModal: () => dispatch(socialActions.closeSocialModal()),
   }
 }
 

@@ -9,16 +9,12 @@ const initialState = {
   // so then you will have to change the profile object in the explore
   // and add a like to this as well
 
-  // DELETE XXX
-  socialObject: [],
-
   //This will be the information that fills in the socail cal cell page
   socialCalCellInfo: {},
 
   socialDate: new Date(),
 
-  // DELETE XXX
-  showSocialModal: false,
+
 
 
   curSocialDate: new Date(),
@@ -61,21 +57,6 @@ const sendSocialCalCellLikeUnlike = (state, action) => {
   })
 }
 
-
-//DELETE XXX
-const openSocialModal = (state, action) => {
-  return updateObject ( state, {
-    showSocialModal: true,
-    socialObject: action.socialObject,
-    curSocialDate: action.socialDay
-  })
-}
-//DELETE XXX
-const closeSocialModal = (state, action) => {
-  return updateObject (state, {
-    showSocialModal: false
-  })
-}
 
 const openSocialPictureModal = (state, action) => {
   return updateObject (state, {
@@ -194,16 +175,6 @@ const reducer = (state = initialState, action) => {
       return fetchSocialCalCellPage(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE:
       return sendSocialCalCellLikeUnlike(state, action)
-
-    // DELETE XXX
-    case actionTypes.OPEN_SOCIAL_MODAL:
-      return openSocialModal(state, action)
-
-    // DELETE XXX
-    case actionTypes.CLOSE_SOCIAL_MODAL:
-      return closeSocialModal(state, action)
-
-
     case actionTypes.OPEN_SOCIAL_PICTURE_MODAL:
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:

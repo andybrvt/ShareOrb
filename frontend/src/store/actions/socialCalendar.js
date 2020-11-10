@@ -29,23 +29,6 @@ export const sendSocialCalCellLikeUnlike = (socialCalCellLikeObj) => {
 }
 
 
-// DELETE XXX
-export const openSocialModal = (socialObject, day) => {
-  return {
-    type: actionTypes.OPEN_SOCIAL_MODAL,
-    socialObject: socialObject,
-    socialDay: day
-  }
-}
-
-// DELETE XXX
-export const closeSocialModal = () => {
-  return {
-    type: actionTypes.CLOSE_SOCIAL_MODAL
-  }
-}
-
-
 export const openSocialPictureModal = () => {
   return {
     type: actionTypes.OPEN_SOCIAL_PICTURE_MODAL

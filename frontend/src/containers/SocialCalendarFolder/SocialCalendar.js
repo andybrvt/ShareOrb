@@ -34,7 +34,6 @@ import * as navActions from '../../store/actions/nav';
 import * as calendarActions from '../../store/actions/calendars';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
 import ava1 from '../../components/images/avatar.jpg'
-import SocialCalCellInfo from './SocialCalCellInfo';
 import SocialUploadPicModal from './SocialUploadPicModal';
 import SocialEventPostModal from './SocialEventPostModal';
 import SocialCellCoverEvents from './SocialCellCoverEvents';
@@ -46,7 +45,6 @@ class SocialCalendar extends React.Component{
 
   constructor(props){
     super(props)
-    this.props.closeSocialModal()
   }
 
   state = {
@@ -691,7 +689,6 @@ class SocialCalendar extends React.Component{
   onOpenSocialCalModal = (day, socialCalInfo) => {
     // this will open up the modal with all the information and date
     console.log(socialCalInfo)
-    this.props.openSocialModal(socialCalInfo, day)
   }
 
   onOpenSocialCalPicModal = () => {
@@ -759,9 +756,7 @@ class SocialCalendar extends React.Component{
           </div>
 
 
-            <SocialCalCellInfo
-            history = {this.props.history}
-            />
+
             <SocialUploadPicModal
             close = {this.props.closeSocialPictureModal}
             view = {this.props.showSocialPicModal}
@@ -798,8 +793,6 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(socialCalActions.nextMonthSocial()),
     prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
-    openSocialModal: (socialObject, day) => dispatch(socialCalActions.openSocialModal(socialObject, day)),
-    closeSocialModal: () => dispatch(socialCalActions.closeSocialModal()),
     openSocialPictureModal: () => dispatch(socialCalActions.openSocialPictureModal()),
     closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal()),
     openSocialEventModal: (date) => dispatch(socialCalActions.openSocialEventModal(date)),
