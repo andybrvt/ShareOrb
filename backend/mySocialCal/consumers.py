@@ -218,11 +218,47 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         print(recipient)
         content = {
-            'command': 'send_social_cal_cell_like',
+            'command': 'send_social_cal_cell_like_unlike',
             'likeList': socialCalCellObj['people_like'],
             'recipient': recipient
         }
 
+
+        self.send_info_cal_cell(content)
+
+    def send_social_cal_cell_unlike(self, data):
+        # This is pretty much simialr to the social cal cell like but you just
+        # remove the user from the like list
+        personUnlike = get_object_or_404(User, id = data['personUnlike'])
+        calOwner = get_object_or_404(User, id = data['cellOwner'])
+
+
+        # Since in order to unlike something you have to already have liked it
+        # so that means the object is already created. So to avoid errors. I will
+        # not do a get or create... maybe do a get_object_or_404
+
+        socialCell = get_object_or_404(SocialCalCell,
+            socialCalUser = calOwner,
+            socialCaldate = data['cellDate']
+        )
+
+        socialCell.people_like.remove(personUnlike)
+        socialCell.save()
+
+        socialCalCellObj = SocialCalCellSerializer(socialCell).data
+
+        # Now we will create the tag name for the channel group
+        dateList = data['cellDate'].split("-")
+        username = calOwner.username
+
+        # You will the use the recipient to attach to the group name
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        content = {
+            'command': 'send_social_cal_cell_like_unlike',
+            'likeList': socialCalCellObj['people_like'],
+            'recipient': recipient
+        }
 
         self.send_info_cal_cell(content)
 
@@ -272,6 +308,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_fetch_social_cal_cell_info(data)
         if data['command'] == 'send_social_cal_cell_like':
             self.send_social_cal_cell_like(data)
+        if data['command'] == 'send_social_cal_cell_unlike':
+            self.send_social_cal_cell_unlike(data)
 
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']

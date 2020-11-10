@@ -5,8 +5,6 @@ import { updateObject } from '../utility';
 // Profiles will be all the profiles and profile (no s) will be the current user
 // profile
 const initialState = {
-  showProfileEdit: false,
-  changeProfilePic: false,
   profile: {},
   test: '',
 
@@ -42,37 +40,6 @@ export const changeProfilePic = (state, action) => {
     }
   })
 }
-
-
-
-export const openProfileEdit = (state, action) =>{
-  return updateObject (state, {
-    showProfileEdit: true
-  })
-}
-
-export const closeProfileEdit = (state, action) => {
-  return updateObject (state, {
-    showProfileEdit: false
-  })
-}
-
-
-export const openChangeProfilePic = (state, action) => {
-  return updateObject (state, {
-    changeProfilePic: true
-  })
-}
-
-export const closeChangeProfilePic = (state, action) => {
-  return updateObject (state, {
-    changeProfilePic: false
-  })
-}
-
-
-
-
 
 
 
@@ -317,18 +284,6 @@ const reducer = (state = initialState, action) => {
       return addFollowerUnfollower(state, action);
     case actionTypes.CHANGE_PROFILE_PIC:
       return changeProfilePic(state, action);
-
-
-    case actionTypes.OPEN_PROFILE_EDIT:
-      return openProfileEdit(state, action)
-    case actionTypes.CLOSE_PROFILE_EDIT:
-      return closeProfileEdit(state, action)
-    case actionTypes.OPEN_CHANGE_PROFILE_PIC:
-      return openChangeProfilePic(state, action)
-    case actionTypes.CLOSE_CHANGE_PROFILE_PIC:
-      return closeChangeProfilePic(state, action)
-
-
     case actionTypes.ADD_SOCIAL_LIKE_UNLIKE_OLD:
       return addSocialLikeUnlikeOld(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD:

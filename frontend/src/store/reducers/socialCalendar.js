@@ -90,17 +90,6 @@ const closeSocialPictureModal = (state, action) => {
 }
 
 
-const addSocialLikeOldM = (state, action) => {
-  return updateObject (state, {
-    socialObject: state.socialObject[0] ? [{
-        ...state.socialObject[0],
-        people_like: [... state.socialObject[0].people_like, action.socialObj.userObj]
-
-      }
-    ] : []
-  })
-}
-
 
 const addSocialUnLikeM = (state, action) => {
 
@@ -234,8 +223,6 @@ const reducer = (state = initialState, action) => {
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
       return closeSocialPictureModal(state, action)
-    case actionTypes.ADD_SOCIAL_LIKE_OLD_M:
-      return addSocialLikeOldM(state, action)
     case actionTypes.ADD_SOCIAL_UNLIKE_M:
       return addSocialUnLikeM(state, action)
     case actionTypes.ADD_SOCIAL_COMMENT_OLD_M:

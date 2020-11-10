@@ -27,32 +27,6 @@ export const changeProfilePic = profilePic => {
 }
 
 
-// DLETE ALL 5 OF THESE
-export const openProfileEdit = () =>{
-  return {
-    type: actionTypes.OPEN_PROFILE_EDIT
-  }
-}
-
-export const closeProfileEdit = () => {
-  return {
-    type: actionTypes.CLOSE_PROFILE_EDIT
-  }
-}
-
-
-
-export const openChangeProfilePic = () => {
-  return {
-    type: actionTypes.OPEN_CHANGE_PROFILE_PIC
-  }
-}
-
-export const closeChangeProfilePic = () => {
-  return {
-    type: actionTypes.CLOSE_CHANGE_PROFILE_PIC
-  }
-}
 
 
 

@@ -71,8 +71,6 @@ class WebSocketSocialCalCellPage{
     // The curDate and the owner will be used to either create the new social
     // cal cell event or filter out the right one
 
-    console.log('hit the like')
-    console.log(cellDate, personLike, owner)
     this.sendSocialCalCellInfo({
       command: "send_social_cal_cell_like",
       cellDate: cellDate,
@@ -83,8 +81,16 @@ class WebSocketSocialCalCellPage{
 
   }
 
-  sendSocialCalCellUnlike() {
+  sendSocialCalCellUnlike(cellDate, personUnlike, owner) {
     //This is for unliking the social cal cell
+    //The curDate and the owner will be used to either create the new social
+    //cal cell event or filter out the right one
+    this.sendSocialCalCellInfo({
+      command: "send_social_cal_cell_unlike",
+      cellDate: cellDate,
+      personUnlike: personUnlike,
+      cellOwner: owner
+    })
   }
 
   sendSocialCalCellComment(){
@@ -107,7 +113,7 @@ class WebSocketSocialCalCellPage{
       this.callbacks['fetch_social_cal_cell_info'](socialCalCellObj)
 
     }
-    if(command === 'send_social_cal_cell_like'){
+    if(command === 'send_social_cal_cell_like_unlike'){
       //This will send a like to the redux so it can show it in the front end
 
       //Pretty much what you are ognna do it just repalce the whole like list
@@ -117,7 +123,7 @@ class WebSocketSocialCalCellPage{
 
       //ADD CALLBACK HERE
       this.callbacks['send_social_cal_cell_like'](likeList)
-    }
+    } 
   }
 
   addCallbacks(

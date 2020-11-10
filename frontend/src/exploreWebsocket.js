@@ -78,41 +78,7 @@ class WebSocketExplore {
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
 
-    } else if (command === 'send_social_like_old'){
-      //EFFICENTCY: OK BUT STILL QUESTIONABLE AS TO WHETHER OR NOT WE CAN
-      //JUST REMOVE CHANNELS ALL TOGETHER AND JUST DO REDUX AND EVERYTIME YOU
-      // REFRESH IT WILL JUST SHOW UP THE LIKING
-
-      //EFFICENTCY GOOD (O(N) for redux) COULD BE BETTER MAYBE
-
-
-      // This is used for when someone sends a like to a old cal cell
-      const socialCalCellId = parsedData.socialCalCellObjId
-
-      // To improve run time, I will just pass in all the events as a whole,
-      // so you do not need to loop through to search for the event
-
-      // SocialCal will pretty much be holding all the calcells that you have made
-      const socialCal = parsedData.ownerSocialCal
-
-
-      // Remember that the userObj is the one that we would use to add in to the
-      // likes
-
-      // So because the information for the social cal modal gets passed into a modal AND
-      // from there the infomration is added into its own redux state, so you would have to
-      // make another redux fucntion to accomomate fo rthe socialcal reducer
-      const userObj = parsedData.userObj
-      const exploreObj = {
-        socialCal: socialCal,
-        socialCalCell: socialCalCellId,
-        userObj: userObj
-      }
-      console.log(exploreObj)
-      // NOW PUT THE CALL BACK FOR THE REDUX HERE
-      this.callbacks['social_like_unlike_old'](exploreObj)
-      this.callbacks['social_like_old_m'](exploreObj)
-    } else if (command === 'send_social_unlike'){
+    }  else if (command === 'send_social_unlike'){
 
 
       // This will be used for indicating the user and then removing the unlike
@@ -232,7 +198,6 @@ class WebSocketExplore {
      loadProfile,
      addFollowerUnfollowerCallBack,
      addSocialLikeUnlikeOld,
-     addSocialLikeOldM,
      addSocialUnLikeM,
      addSocialCommentOld,
      addSocialCommentOldM,
@@ -247,7 +212,6 @@ class WebSocketExplore {
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
     this.callbacks['social_like_unlike_old'] = addSocialLikeUnlikeOld
-    this.callbacks['social_like_old_m'] = addSocialLikeOldM
     this.callbacks['social_unlike_m'] = addSocialUnLikeM
     this.callbacks['social_comment_old'] = addSocialCommentOld
     this.callbacks['social_comment_old_m'] = addSocialCommentOldM
