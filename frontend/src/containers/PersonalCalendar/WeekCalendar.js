@@ -499,7 +499,7 @@ class WeekCalendar extends React.Component{
                     }
 
                     <div>
-                      <i class="fas fa-user-friends" style={{marginRight:'10px'}}></i>
+                      <i class="fas fa-user-friends" style={{marginRight:'5px'}}></i>
                       {
                         (item.invited.length==0)?
                           <span> Just You</span>
@@ -707,7 +707,7 @@ class WeekCalendar extends React.Component{
         >
 
 
-              {  item.accepted.includes(this.props.id) ?
+              {  (item.accepted.includes(this.props.id)||(item.invited.length==0)) ?
                 <div
                    key= {item.title}
                     onClick = {() => this.onClickItem(item)}
@@ -746,7 +746,7 @@ class WeekCalendar extends React.Component{
                       gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
                       // gridRow: 15/17,
                       gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
-                      color:'black',
+                      color:'white',
                       backgroundColor: item.color,
                     }}>
 
