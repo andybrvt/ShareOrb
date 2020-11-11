@@ -1,8 +1,8 @@
 .uploadBox{
   /* margin-top: 100px; */
   text-align: center;
-  width: 400px;
-  height:400px
+  width: 300px;
+  height:300px
 }
 
 .ant-upload-text{
@@ -10,6 +10,21 @@
   /* background-color: red; */
   font-size: 30px;
   top: 50%;
+}
+
+.changeProfilePic{
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+
+
+}
+
+.uploadProfileText{
+  position: relative;
+  left: 27%;
+  font-size: 30px;
+  /* transform: translateX(-50%) */
 }
 
 .uploadBox .plusOutlined{

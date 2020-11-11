@@ -98,6 +98,14 @@
 
 }
 
+.side1{
+  display: inline-block;
+}
+
+.side2{
+  display: inline-block;
+}
+
 .eventDetails{
 
   font-size: 16px;
@@ -257,13 +265,7 @@
 
 }
 
-.changeProfilePic{
-  object-fit: cover;
-  width: 500px;
-  height: 350px;
 
-
-}
 
 
 

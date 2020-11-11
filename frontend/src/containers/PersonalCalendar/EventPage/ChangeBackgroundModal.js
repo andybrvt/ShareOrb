@@ -120,27 +120,35 @@ class ChangeBackgroundModal extends React.Component{
     return(
       <Modal
       visible = {this.props.visible}
-      width = {1000}
+      width = {800}
       okText = {'Save'}
       okButtonProps={{ disabled: this.state.imageFile == "" ? true : false }}
       onCancel = {() => this.handleCancel()}
       onOk = {() => this.handleSubmit(this.state.imageFile)}
       >
-      <span className = 'uploadProfileText'> Change background Picture </span>
+        <div>
+          <div class="side1">hi</div>
+          <div class="side1">hi2</div>
+        <span className = 'uploadProfileText'> Change background Picture </span>
         {
           (this.props.pic!=null)?
-          <img class="changeProfilePic"
-            src={'http://127.0.0.1:8000'+this.props.pic}></img>
+            <div>
+              <img class="changeProfilePic side1"
+                src={'http://127.0.0.1:8000'+this.props.pic}></img>
+
+
+
+            </div>
 
           :
           <div></div>
 
 
-        }
+         }
         <Upload
           name="avatar"
           listType="picture-card"
-          className="avatar-uploader"
+          className="avatar-uploader side1"
           showUploadList={false}
           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           beforeUpload={beforeUpload}
@@ -149,6 +157,7 @@ class ChangeBackgroundModal extends React.Component{
         >
           {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '400px' }} /> : uploadButton}
         </Upload>
+        </div>
       </Modal>
     )
   }
