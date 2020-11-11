@@ -16,16 +16,49 @@
   object-fit: cover;
   width: 300px;
   height: 300px;
+  margin-top: 100px;
 
 
 }
 
+.sideContainer{
+
+  width:750px;
+  height:450px;
+  /* background-color: red; */
+}
+
+
 .uploadProfileText{
-  position: relative;
-  left: 27%;
+  margin-left: -150px;
   font-size: 30px;
   /* transform: translateX(-50%) */
 }
+
+.side1{
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  float:left;
+  margin-left: 20px;
+  margin-right: 50px;
+  /* background-color: blue; */
+}
+
+.side2{
+  display: inline-block;
+  float:right;
+  margin-top: 50px;
+  margin-right: 50px;
+  /* background-color: green; */
+}
+
+.uploadBox{
+
+  width:300px;
+  height:185px;
+}
+
 
 .uploadBox .plusOutlined{
   /* background-color: red; */
