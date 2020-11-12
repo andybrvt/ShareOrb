@@ -203,10 +203,6 @@ const reducer = (state = initialState, action) => {
       return openSocialPictureModal(state, action)
     case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
       return closeSocialPictureModal(state, action)
-    case actionTypes.OPEN_SOCIAL_EVENT_MODAL:
-      return openSocialEventModal(state, action)
-    case actionTypes.CLOSE_SOCIAL_EVENT_MODAL:
-      return closeSocialEventModal(state, action)
     case actionTypes.ADD_SOCIAL_CELL_NEW_M:
       return addSocialCellNewM(state, action)
     case actionTypes.ADD_USER_SOCIAL_EVENT_M:

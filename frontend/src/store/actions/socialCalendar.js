@@ -56,18 +56,6 @@ export const closeSocialPictureModal = () => {
   }
 }
 
-export const openSocialEventModal = (date) => {
-  return {
-    type: actionTypes.OPEN_SOCIAL_EVENT_MODAL,
-    date: date
-  }
-}
-
-export const closeSocialEventModal = () => {
-  return {
-    type: actionTypes.CLOSE_SOCIAL_EVENT_MODAL
-  }
-}
 
 export const addSocialCalCellNew = (socialObj) => {
   return {

@@ -50,6 +50,8 @@ class SocialCalendar extends React.Component{
   state = {
     currentMonth: new Date(),
     selectedDate: new Date(),
+    showSocialEventPostModal: false,
+    showSocialPicPostModal: false,
     events: [],
   }
 
@@ -687,17 +689,21 @@ class SocialCalendar extends React.Component{
     this.props.openModal(oneEvent)
   }
 
-  onOpenSocialCalModal = (day, socialCalInfo) => {
-    // this will open up the modal with all the information and date
-    console.log(socialCalInfo)
-  }
-
   onOpenSocialCalPicModal = () => {
     this.props.openSocialPictureModal()
+
   }
 
   onOpenSocialCalEventModal = (date) => {
-    this.props.openSocialEventModal(date)
+    this.setState({
+      showSocialPicPostModal: true,
+    })
+  }
+
+  onCloseSocialCalEventModal = () => {
+    this.setState({
+      showSocialPicPostModal: false
+    })
   }
 
   handlePictureUpload = (values) => {
@@ -764,8 +770,8 @@ class SocialCalendar extends React.Component{
             onSubmit = {this.handlePictureUpload}
              />
             <SocialEventPostModal
-            close = {this.props.closeSocialEventModal}
-            view = {this.props.showSocialEventModal}
+            close = {this.onCloseSocialCalEventModal}
+            view = {this.state.showSocialPicPostModal}
             curDate = {this.props.curSocialEventDate}
             />
 
@@ -779,9 +785,7 @@ const mapStateToProps = state => {
   return{
     currentDate: state.socialCal.socialDate,
     events: state.socialCal.socialEvents,
-    showSocialModal: state.socialCal.showSocialModal,
     showSocialPicModal: state.socialCal.showSocialPicModal,
-    showSocialEventModal: state.socialCal.showSocialEventModal,
     curSocialEventDate: state.socialCal.curSocialEventDate,
     curId: state.auth.id
   }
@@ -796,9 +800,7 @@ const mapDispatchToProps = dispatch => {
     prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
     openSocialPictureModal: () => dispatch(socialCalActions.openSocialPictureModal()),
     closeSocialPictureModal: () => dispatch(socialCalActions.closeSocialPictureModal()),
-    openSocialEventModal: (date) => dispatch(socialCalActions.openSocialEventModal(date)),
-    closeSocialEventModal: () => dispatch(socialCalActions.closeSocialEventModal()),
-  }
+    }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SocialCalendar);
