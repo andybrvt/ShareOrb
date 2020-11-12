@@ -654,7 +654,7 @@ class SocialCalendar extends React.Component{
     // now this will return a list of list and each week representing a week
     // with each item as the day
 
-    return <div className = "body"> {rows} </div>
+    return <div className = "socialCalBody"> {rows} </div>
   }
 
 

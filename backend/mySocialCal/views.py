@@ -67,7 +67,6 @@ class SocialCalUploadPic(APIView):
                 obj, create = models.SocialCalCell.objects.update_or_create(
                     socialCalUser = user,
                     socialCaldate = time,
-                    testDate = time,
                     defaults = {'coverPic': request.data['image[0]']}
                 )
         # print(request.data)
@@ -87,7 +86,6 @@ class SocialEventCreateView(APIView):
         socialCalCell, created = models.SocialCalCell.objects.get_or_create(
             socialCalUser = user,
             socialCaldate = request.data['date'],
-            testDate = request.data['date']
         )
 
         eventPerson = set()

@@ -614,7 +614,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         socialCalCell, created = SocialCalCell.objects.get_or_create(
             socialCalUser = user,
             socialCaldate = eventObj['date'],
-            testDate = eventObj['date']
         )
 
         socialCalEvent = SocialCalEvent.objects.create(
