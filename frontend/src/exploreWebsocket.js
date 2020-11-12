@@ -227,33 +227,6 @@ class WebSocketExplore {
 
   }
 
-
-
-  sendSocialComment = (curDate, personComment, comment, owner) =>{
-    // The curdate will be used to get the cell calendar
-    // the personComment will be used for the perosn commenting, probally gonna
-    // just be the id
-    // Comment will be the comment itself
-    // Owner will be the id of the calendar owner
-
-    // The userId will be person commenting
-
-
-    // Pretty much like the liking, just gotta like it to only that one channel
-    // that the user will be on and then everytime they get on just rerender
-    // easy peasy
-    // Found on the socialcomment
-
-    console.log(comment)
-    this.sendExplore({
-      socialCalDate: curDate,
-      userId: personComment,
-      comment: comment,
-      ownerId: owner,
-      command: 'send_social_comment'
-    })
-  }
-
   sendSocialEvent = (eventObj) => {
     // The event object will be a dict of all the information on the event and
     // it will be sent into the consumers, There will be a same one that will be going

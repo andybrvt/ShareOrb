@@ -202,6 +202,7 @@ class SocialCalendar extends React.Component{
           // Everything down here to the else are for cal cells that have a social
           // cal that exist within it
           const socialEvents = toDoStuff
+          console.log(socialEvents)
           const calUsername = this.props.profile.username
           const cellYear = dateFns.getYear(day)
           const cellMonth = dateFns.getMonth(day)+1
@@ -726,7 +727,7 @@ class SocialCalendar extends React.Component{
       )
       .then((response)=> {console.log(response)})
       // maybe change this when we have channels working
-      window.location.reload(true)
+      // window.location.reload(true)
     }
 
 

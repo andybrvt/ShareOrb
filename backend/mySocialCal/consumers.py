@@ -290,7 +290,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # gotta replace teh get_comments
 
         socialCalCellComment = SocialCalCommentSerializer(socialComment).data
-
+        socialCalCellComments = SocialCalCellSerializer(socialCell).data['get_socialCalComment']
         print(socialCalCellComment)
 
         # Now we will create the tag name for the channel group
@@ -299,12 +299,21 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         # You will the use the recipient to attach to the group name
         recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+        if created == False:
+            content = {
+                'command': 'send_social_cal_cell_comment',
+                'socialComment': socialCalCellComment,
+                'recipient': recipient
+            }
+        elif created == True:
+            # Created when you first make a cell object, helps prevent sending
+            # all the comments everytime to the front end
+            content = {
+                'command': 'send_social_cal_cell_comment_new',
+                'socialComments': socialCalCellComments,
+                'recipient': recipient
+            }
 
-        content = {
-            'command': 'send_social_cal_cell_comment',
-            'socialComment': socialCalCellComment,
-            'recipient': recipient
-        }
 
         self.send_info_cal_cell(content)
 

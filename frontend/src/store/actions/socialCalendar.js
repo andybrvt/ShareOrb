@@ -35,6 +35,13 @@ export const sendSocialCalCellComment = (socialCalCellCommentObj) => {
   }
 }
 
+export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
+  return {
+    type: actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW,
+    socialCalCellCommentsObj: socialCalCellCommentsObj
+  }
+}
+
 
 
 export const openSocialPictureModal = () => {

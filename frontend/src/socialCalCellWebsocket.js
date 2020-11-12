@@ -145,16 +145,23 @@ class WebSocketSocialCalCellPage{
 
       this.callbacks['send_social_cal_cell_comment'](socialComment)
     }
+    if(command === "send_social_cal_cell_comment_new"){
+      const socialComments = parsedData.socialComments
+
+      this.callbacks['send_social_cal_cell_comment_new'](socialComments)
+    }
   }
 
   addCallbacks(
     fetchSocialCalCellInfo,
     sendSocialCalCellLikeUnlike,
-    sendSocialCalCellComment
+    sendSocialCalCellComment,
+    sendSocialCalCellCommentNew
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
     this.callbacks['send_social_cal_cell_comment'] = sendSocialCalCellComment
+    this.callbacks['send_social_cal_cell_comment_new'] = sendSocialCalCellCommentNew
   }
 
   sendSocialCalCellInfo(data){
