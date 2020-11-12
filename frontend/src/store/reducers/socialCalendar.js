@@ -18,8 +18,6 @@ const initialState = {
 
 
   curSocialDate: new Date(),
-  showSocialPicModal: false,
-  showSocialEventModal: false,
   curSocialEventDate: new Date(),
   // selectedSocialEvent is for the event page
   selectedSocialEvent: {},
@@ -75,19 +73,6 @@ const sendSocialCalCellComments = (state, action) =>{
   })
 }
 
-
-
-const openSocialPictureModal = (state, action) => {
-  return updateObject (state, {
-    showSocialPicModal: true
-  })
-}
-
-const closeSocialPictureModal = (state, action) => {
-  return updateObject (state, {
-    showSocialPicModal: false
-  })
-}
 
 
 
@@ -199,10 +184,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW:
       return sendSocialCalCellComments(state, action)
 
-    case actionTypes.OPEN_SOCIAL_PICTURE_MODAL:
-      return openSocialPictureModal(state, action)
-    case actionTypes.CLOSE_SOCIAL_PICTURE_MODAL:
-      return closeSocialPictureModal(state, action)
+
     case actionTypes.ADD_SOCIAL_CELL_NEW_M:
       return addSocialCellNewM(state, action)
     case actionTypes.ADD_USER_SOCIAL_EVENT_M:

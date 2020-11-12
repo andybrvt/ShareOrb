@@ -88,9 +88,6 @@ export const FETCH_SOCIAL_CAL_CELL_PAGE = 'FETCH_SOCIAL_CAL_CELL_PAGE';
 export const SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE = 'SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE';
 export const SEND_SOCIAL_CAL_CELL_COMMENT = 'SEND_SOCIAL_CAL_CELL_COMMENT';
 export const SEND_SOCIAL_CAL_CELL_COMMENT_NEW = 'SEND_SOCIAL_CAL_CELL_COMMENT_NEW';
-// The picture modal is what you would use to upload pictures
-export const OPEN_SOCIAL_PICTURE_MODAL = 'OPEN_SOCIAL_PICTURE_MODAL';
-export const CLOSE_SOCIAL_PICTURE_MODAL = 'CLOSE_SOCIAL_PICTURE_MODAL';
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
 
