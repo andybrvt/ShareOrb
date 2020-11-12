@@ -37,8 +37,7 @@ class SocialCalUploadPic(APIView):
         # always be the current date... unless it is the commenting and liking
         socialCalCell, created = models.SocialCalCell.objects.get_or_create(
             socialCalUser = user,
-            socialCaldate = time,
-
+            socialCaldate = time
         )
 
         # print(request.data.get('image[0]'))
@@ -61,7 +60,7 @@ class SocialCalUploadPic(APIView):
                 creator = user,
                 itemUser = user,
                 itemImage = request.data['image['+str(i)+']'],
-                calCell = socialCalCellhandlePicthandlePictureUploadureUpload
+                calCell = socialCalCell
             )
         if socialCalCell.coverPic == '':
             if (len(request.data) != 0):
