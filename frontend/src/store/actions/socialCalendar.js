@@ -49,14 +49,6 @@ export const closeSocialPictureModal = () => {
   }
 }
 
-
-export const addSocialCommentOldM = (socialObj) => {
-  return {
-    type: actionTypes.ADD_SOCIAL_COMMENT_OLD_M,
-    socialObj: socialObj
-  }
-}
-
 export const openSocialEventModal = (date) => {
   return {
     type: actionTypes.OPEN_SOCIAL_EVENT_MODAL,

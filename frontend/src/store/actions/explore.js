@@ -27,17 +27,6 @@ export const changeProfilePic = profilePic => {
 }
 
 
-export const addSocialCommentOld = (exploreObj) => {
-  // This will be used for the adding the comments when the social cell
-  // is already created
-  return{
-    type: actionTypes.ADD_SOCIAL_COMMENT_OLD,
-    exploreObj: exploreObj
-  }
-}
-
-
-
 export const addSocialEventOld = (exploreObj) => {
   // This will be used to add the events in when you are creating an event
   // old socialCal

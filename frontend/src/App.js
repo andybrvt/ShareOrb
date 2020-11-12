@@ -59,8 +59,6 @@ class App extends Component {
     ExploreWebSocketInstance.addCallbacks(
       this.props.loadProfile.bind(this),
       this.props.addFollowerUnfollower.bind(this),
-      this.props.addSocialCommentOld.bind(this),
-      this.props.addSocialCommentOldM.bind(this),
       this.props.addSocialEventOld.bind(this),
       this.props.addSocialCalCellNew.bind(this),
       this.props.addSocialCalCellNewM.bind(this),
@@ -158,8 +156,6 @@ const mapDispatchToProps = dispatch => {
     deletePost: postId => dispatch(newsfeedActions.deletePost(postId)),
     loadProfile: profile => dispatch(exploreActions.loadProfile(profile)),
     addFollowerUnfollower: followObject => dispatch(exploreActions.addFollowerUnfollower(followObject)),
-    addSocialCommentOld: exploreObj => dispatch(exploreActions.addSocialCommentOld(exploreObj)),
-    addSocialCommentOldM: socialObj => dispatch(socialActions.addSocialCommentOldM(socialObj)),
     addSocialEventOld: exploreObj => dispatch(exploreActions.addSocialEventOld(exploreObj)),
     addSocialCalCellNew: exploreObj => dispatch(exploreActions.addSocialCalCellNew(exploreObj)),
     addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj)),

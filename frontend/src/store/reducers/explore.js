@@ -248,8 +248,6 @@ const reducer = (state = initialState, action) => {
       return addFollowerUnfollower(state, action);
     case actionTypes.CHANGE_PROFILE_PIC:
       return changeProfilePic(state, action);
-    case actionTypes.ADD_SOCIAL_COMMENT_OLD:
-      return addSocialCommentOld (state, action)
     case actionTypes.ADD_SOCIAL_EVENT_OLD:
       return addSocialEventOld(state,action)
     case actionTypes.ADD_SOCIAL_CELL_NEW:

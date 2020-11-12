@@ -78,20 +78,7 @@ class WebSocketExplore {
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
 
-    }  else if (command === 'send_social_comment_old'){
-      // So you would pass the socialCalcell obj in first and then the comment
-      // The socialCalCell is used to find the ower and the cell
-      const socialCalCellObj = parsedData.socialCalCellObj
-      const socialCommentObj = parsedData.socialCommentObj
-
-      const exploreObj = {
-        socialCalCell: socialCalCellObj,
-        socialComment: socialCommentObj
-      }
-
-      this.callbacks['social_comment_old'](exploreObj)
-      this.callbacks['social_comment_old_m'](exploreObj)
-    }  else if (command === 'send_social_event_old'){
+    } else if (command === 'send_social_event_old'){
       // This will be sending information to redux when the social cal cell is
       // made already
       const socialCalCellObj = parsedData.socialCalCellObj
@@ -169,8 +156,6 @@ class WebSocketExplore {
   addCallbacks(
      loadProfile,
      addFollowerUnfollowerCallBack,
-     addSocialCommentOld,
-     addSocialCommentOldM,
      addSocialEventOld,
      addSocialCalCellNew,
      addSocialCalCellNewM,
@@ -181,8 +166,6 @@ class WebSocketExplore {
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
-    this.callbacks['social_comment_old'] = addSocialCommentOld
-    this.callbacks['social_comment_old_m'] = addSocialCommentOldM
     this.callbacks['social_event_old'] = addSocialEventOld
     this.callbacks['social_cal_cell_new'] = addSocialCalCellNew
     this.callbacks['social_cal_cell_new_m'] = addSocialCalCellNewM
