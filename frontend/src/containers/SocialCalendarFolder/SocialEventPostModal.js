@@ -104,12 +104,15 @@ class SocialEventPostModal extends React.Component{
   // so we are gonna use the eventobj as a way to send it to the newsfeed, socialcal
   // and personal cal
   const eventObj = {
+    // This gonna get send out to the backend
+    // We would also need the host of the calendar which is calOwner
     title: this.state.title,
     content: this.state.content,
     startTime: startTime,
     endTime: endTime,
     location: this.state.location,
     curId: this.props.curId,
+    calOwner: this.props.calendarOwner,
     date: date
   }
 
@@ -128,7 +131,7 @@ class SocialEventPostModal extends React.Component{
 //  it with just axius but it is a bit easier )
 
 
-  // ExploreWebSocketInstance.sendSocialEvent(eventObj)
+  ExploreWebSocketInstance.sendSocialEvent(eventObj)
   this.openNotification('bottomLeft', displayObj)
   this.setState({
     title: '',

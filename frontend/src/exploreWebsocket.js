@@ -78,7 +78,30 @@ class WebSocketExplore {
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
 
-    } else if (command === 'send_social_event_old'){
+    } else if(command === 'send_social_event'){
+
+      // Two senarios, one is when a cell is created and one where there
+      // already exist a cell and you just change the event field to the new
+      // one
+
+      //There is a add social cell method in the redux already so we can
+      // reuse that and then we will have one where it just repalces
+      // the whole event field
+
+      const socialCalCellObj = parsedData.socialCalCellObj
+      const socialCalCellEvents = parsedData.socialCalCellObj.get_socialCalEvent
+      const cellId = parsedData.socialCalCellObj.id
+      if(parsedData.created){
+        // For new cell with new event
+        console.log(socialCalCellObj)
+        this.callbacks['add_social_cell'](socialCalCellObj)
+      } else {
+        // For old cell with new event
+        this.callbacks['add_social_event'](socialCalCellEvents, cellId)
+      }
+    }
+
+    else if (command === 'send_social_event_old'){
       // This will be sending information to redux when the social cal cell is
       // made already
       const socialCalCellObj = parsedData.socialCalCellObj
@@ -156,7 +179,12 @@ class WebSocketExplore {
   addCallbacks(
      loadProfile,
      addFollowerUnfollowerCallBack,
+     addSocialEvent,
+     addSocialCell,
+
      addSocialEventOld,
+
+
      addSocialCalCellNew,
      addSocialCalCellNewM,
      addUserSocialEvent,
@@ -166,7 +194,13 @@ class WebSocketExplore {
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
+    this.callbacks['add_social_event'] = addSocialEvent
+    this.callbacks['add_social_cell'] = addSocialCell
+
+    // DELETE XXX
     this.callbacks['social_event_old'] = addSocialEventOld
+
+
     this.callbacks['social_cal_cell_new'] = addSocialCalCellNew
     this.callbacks['social_cal_cell_new_m'] = addSocialCalCellNewM
     this.callbacks['add_user_social_event'] = addUserSocialEvent

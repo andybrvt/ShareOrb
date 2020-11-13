@@ -101,8 +101,13 @@ export const SEND_SOCIAL_CAL_CELL_COMMENT_NEW = 'SEND_SOCIAL_CAL_CELL_COMMENT_NE
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
 
+export const ADD_SOCIAL_EVENT = 'ADD_SOCIAL_EVENT';
 
+// Delete XXX
 export const ADD_SOCIAL_EVENT_OLD = 'ADD_SOCIAL_EVENT_OLD';
+
+
+
 export const ADD_USER_SOCIAL_EVENT = 'ADD_USER_SOCIAL_EVENT';
 export const ADD_USER_SOCIAL_EVENT_M = 'ADD_USER_SOCIAL_EVENT_M';
 export const REMOVE_USER_SOCIAL_EVENT = 'REMOVE_USER_SOCIAL_EVENT';

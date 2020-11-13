@@ -67,7 +67,23 @@ export const addSocialCellCoverPic = (state, action) => {
   })
 }
 
+export const addSocialEvent = (state, action) => {
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        cells => cells.id === action.cellId ?{
+          ...cells,
+          get_socialCalEvent: action.socialEventList
+        } : cells
+      )
+    }
+  })
+}
 
+
+
+// DELETE XXX
 export const addSocialEventOld = (state,action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
   const calendarCalCellId = action.exploreObj.socialCalCell.id
@@ -106,6 +122,9 @@ export const addSocialEventOld = (state,action) => {
 
   })
 }
+
+
+
 
 export const addSocailCalCell = (state, action) => {
   // This is gonna be used for all the 'new' cal cells
@@ -238,6 +257,10 @@ const reducer = (state = initialState, action) => {
       return addSocialCell(state, action)
     case actionTypes.ADD_SOCIAL_CELL_COVER_PIC:
       return addSocialCellCoverPic(state, action)
+    case actionTypes.ADD_SOCIAL_EVENT:
+      return addSocialEvent(state, action);
+
+    // DELETE XXX
     case actionTypes.ADD_SOCIAL_EVENT_OLD:
       return addSocialEventOld(state,action)
 

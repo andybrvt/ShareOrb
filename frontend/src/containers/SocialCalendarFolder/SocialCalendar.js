@@ -243,10 +243,10 @@ class SocialCalendar extends React.Component{
                 dateFns.isSameDay(day, currentMonth) ?
                 <div>
                 <PlusOutlined
-                onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+                onClick = {() => this.onOpenSocialCalPicModal()}
                 className = 'plusButton'/>
                 <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal()}
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                 className = 'eventButton'
                  />
                  <Link to = {{
@@ -267,7 +267,7 @@ class SocialCalendar extends React.Component{
                   when the user is friend or owner
                   */}
                 <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal()}
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                 className = 'eventButtonAfter'
                  />
                  <Link to = {{
@@ -350,10 +350,10 @@ class SocialCalendar extends React.Component{
                     day
                     */}
                   <PlusOutlined
-                  onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+                  onClick = {() => this.onOpenSocialCalPicModal()}
                   className = 'plusButton'/>
                   <CalendarOutlined
-                  onClick ={() => this.onOpenSocialCalEventModal()}
+                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                   className = 'eventButton'
                    />
                    <Link to = {{
@@ -373,7 +373,7 @@ class SocialCalendar extends React.Component{
                     after the current day
                     */}
                   <CalendarOutlined
-                  onClick ={() => this.onOpenSocialCalEventModal()}
+                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                   className = 'eventButtonAfter'
                    />
 
@@ -454,10 +454,10 @@ class SocialCalendar extends React.Component{
                   */}
 
                 <PlusOutlined
-                onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+                onClick = {() => this.onOpenSocialCalPicModal()}
                 className = 'plusButton'/>
                 <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal()}
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                 className = 'eventButton'
                  />
                  <Link to = {{
@@ -477,7 +477,7 @@ class SocialCalendar extends React.Component{
                   but not cover picture or events
                   */}
                 <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal()}
+                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                 className = 'eventButtonAfter'
                  />
                  <Link to = {{
@@ -564,10 +564,10 @@ class SocialCalendar extends React.Component{
               a picture in it and no cell created
               */}
             <PlusOutlined
-            onClick = {() => this.onOpenSocialCalPicModal(cloneDay, socialEvents)}
+            onClick = {() => this.onOpenSocialCalPicModal()}
             className = 'plusButton'/>
             <CalendarOutlined
-            onClick ={() => this.onOpenSocialCalEventModal()}
+            onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
             className = 'eventButton'
              />
             <Link to = {{
@@ -588,7 +588,7 @@ class SocialCalendar extends React.Component{
               current day and does not have a cover picture and no cell created
               */}
             <CalendarOutlined
-            onClick ={() => this.onOpenSocialCalEventModal()}
+            onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
             className = 'eventButtonAfter'
              />
 
@@ -702,9 +702,11 @@ class SocialCalendar extends React.Component{
     })
   }
 
-  onOpenSocialCalEventModal = () => {
+  onOpenSocialCalEventModal = (eventDay) => {
+    console.log(eventDay)
     this.setState({
       showSocialEventPostModal: true,
+      selectedDate: eventDay
     })
   }
 
@@ -792,7 +794,8 @@ class SocialCalendar extends React.Component{
             <SocialEventPostModal
             close = {this.onCloseSocialCalEventModal}
             view = {this.state.showSocialEventPostModal}
-            curDate = {this.props.curSocialEventDate}
+            curDate = {this.state.selectedDate}
+            calendarOwner = {this.props.profile.id}
             />
 
         </div>

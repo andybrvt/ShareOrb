@@ -592,25 +592,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
-
-    def fetch_curUser_profile(self, data):
-        currentUser = User.objects.filter(username = data['currUser'])
-        serializer = UserSerializer(currentUser, many = True)
-        content = {
-            'command': 'currUser_profile',
-            'user_profile': json.dumps(serializer.data)
-        }
-        self.send_json(content)
-
-
     def create_social_event(self, data):
         # This will pretty much be like the create event view in teh mySocialCal
         # app
 
         # EventObj is a dictionary that contains all the event information
         eventObj = data['eventObj']
+
         print(eventObj['curId'])
         user = get_object_or_404(User, id = eventObj['curId'])
+        calOwner = get_object_or_404(User, id = eventObj['calOwner'])
         socialCalCell, created = SocialCalCell.objects.get_or_create(
             socialCalUser = user,
             socialCaldate = eventObj['date'],
@@ -636,23 +627,35 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         socialEventObj = SocialCalEventSerializer(socialCalEvent, many = False).data
         userObj = FollowUserSerializer(user, many = False).data
+        ownerObj = FollowUserSerializer(calOwner).data
 
-        if created == True:
-            content = {
-                'command': 'send_cal_cell_new',
-                'socialCalCellObj': socialCalCellObj,
-                'reciever': userObj
-            }
-            self.send_new_explore(content)
+        print('hit here')
 
-        if created == False:
-            content = {
-                'command': 'send_social_event_old',
-                'socialCalCellObj': socialCalCellObj,
-                'socialEventObj': socialEventObj,
-                'reciever': userObj
-            }
-            self.send_new_explore(content)
+        content = {
+            'command': 'send_social_event',
+            'socialCalCellObj': socialCalCellObj,
+            'created': created,
+            'reciever': ownerObj['username']
+        }
+
+        self.send_new_explore(content)
+
+        # if created == True:
+        #     content = {
+        #         'command': 'send_cal_cell_new',
+        #         'socialCalCellObj': socialCalCellObj,
+        #         'reciever': userObj
+        #     }
+        #     self.send_new_explore(content)
+        #
+        # if created == False:
+        #     content = {
+        #         'command': 'send_social_event_old',
+        #         'socialCalCellObj': socialCalCellObj,
+        #         'socialEventObj': socialEventObj,
+        #         'reciever': userObj
+        #     }
+        #     self.send_new_explore(content)
 
     def add_user_social_event(self, data):
         # This is pretty much gonna be where you will use the eventId to get the

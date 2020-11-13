@@ -43,6 +43,15 @@ export const addSocialCellCoverPic = (coverPicture, cellId) => {
   }
 }
 
+export const addSocialEvent = (socialEventList, cellId) => {
+  // This will be add new events in to the cover of the social day cell
+  // We will just be replacing the whole list
+  return {
+    type: actionTypes.ADD_SOCIAL_EVENT,
+    socialEventList: socialEventList,
+    cellId: cellId
+  }
+}
 
 
 
