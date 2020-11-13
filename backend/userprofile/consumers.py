@@ -603,7 +603,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         user = get_object_or_404(User, id = eventObj['curId'])
         calOwner = get_object_or_404(User, id = eventObj['calOwner'])
         socialCalCell, created = SocialCalCell.objects.get_or_create(
-            socialCalUser = user,
+            socialCalUser = calOwner,
             socialCaldate = eventObj['date'],
         )
 
