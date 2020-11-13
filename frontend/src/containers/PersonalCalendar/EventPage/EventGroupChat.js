@@ -160,18 +160,19 @@ class EventGroupChat extends React.Component{
                 <div></div>
               }
               <div className = 'messageP'>
-              {this.props.id !== item.messageUser.id ?
-                <span className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
-                </span>
-                :
-                <span></span>
+                {this.props.id !== item.messageUser.id ?
+                  <span className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
+                  </span>
+                  :
+                  <span></span>
 
-              }
+                }
 
 
-            <div>{item.body}</div>
-            <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
+              <div>{item.body}</div>
+              <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
             </div>
+            
             </div>
 
           )}

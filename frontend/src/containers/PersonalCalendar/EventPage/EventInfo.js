@@ -449,6 +449,7 @@ class EventInfo extends React.Component{
     const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.state)
     console.log(this.props)
+
     let show = this.state.showSureModal
 
     let username = ''
@@ -460,6 +461,7 @@ class EventInfo extends React.Component{
     let color = ''
     let date = ''
     let location = ''
+    let repeat="";
     let accepted = []
     let decline = []
     let invited = []
@@ -503,6 +505,10 @@ class EventInfo extends React.Component{
       }
       if(this.props.info.invited){
         invited = this.props.info.invited
+      }
+      if(this.props.info.repeatCondition){
+        repeat = this.props.info.repeatCondition
+        console.log(repeat)
       }
       if(this.props.info.host){
         host = this.props.info.host
@@ -733,8 +739,66 @@ class EventInfo extends React.Component{
                 <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-clock"></i>
                 {date}
                 {start_time}-{end_time}
+
+                <div>
+
+                   {
+                     (repeat=="daily")?
+                     <span>
+                       <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                       Occurs every day
+
+                     </span>
+                     :
+                     <div>
+
+
+                       {
+                         (repeat=="monthly")?
+                         <span>
+                           <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                           Occurs every month
+
+                         </span>
+                         :
+                           <div>
+                             {
+                             (repeat=="weekly")?
+                             <span>
+                               <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                               Occurs weekly
+                               {/*<span>
+                                 &nbsp;
+                               {dateFns.format(currentDay, 'iiii')}
+                                 &nbsp;
+                               </span}
+                               */
+                               }
+
+                             </span>
+                             :
+                             <span></span>
+                             }
+                           </div>
+
+
+
+
+                         }
+
+
+
+
+
+                     </div>
+                   }
+                </div>
+
                 <br/>
                 <br/>
+
+
+
 
                 <div className = "contentEvent"> {content} </div>
 
