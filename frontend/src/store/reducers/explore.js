@@ -41,46 +41,32 @@ export const changeProfilePic = (state, action) => {
   })
 }
 
-
-
-export const addSocialCommentOld = (state, action) =>{
-  // This since the socialcell already exist so what will happen is that you will find
-  // the person then find the cell, then go into the comments, and add the comment
-  // obj in
-
-  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCell.id
-  const commentObj = action.exploreObj.socialComment
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
+export const addSocialCell = (state, action) => {
+  //NEW ADDING CELL
 
   return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ...profile,
-        get_socialCal: profile.get_socialCal.map(
-          socialCell => socialCell.id === calendarCalCellId ? {
-            ...socialCell,
-            get_socialCalComment: [...socialCell.get_socialCalComment, commentObj]
-          } :socialCell
-        )
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: state.profile.get_socialCal.map(
-        socialCell => socialCell.id === calendarCalCellId ? {
-          ... socialCell,
-          get_socialCalComment: [... socialCell.get_socialCalComment, commentObj]
-        } : socialCell
-      )
-    } : state.profile
-
+    profile: {
+      ...state.profile,
+      get_socialCal: [...state.profile.get_socialCal, action.socialCellObj]
+    }
   })
 }
+
+export const addSocialCellCoverPic = (state, action) => {
+  // This will add in the coverpicture when the cell is already created
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      get_socialCal: state.profile.get_socialCal.map(
+        cells => cells.id === action.cellId ? {
+          ...cells,
+          coverPic: action.coverPicture
+        } : cells
+      )
+    }
+  })
+}
+
 
 export const addSocialEventOld = (state,action) => {
   const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
@@ -248,10 +234,19 @@ const reducer = (state = initialState, action) => {
       return addFollowerUnfollower(state, action);
     case actionTypes.CHANGE_PROFILE_PIC:
       return changeProfilePic(state, action);
+    case actionTypes.ADD_SOCIAL_CELL:
+      return addSocialCell(state, action)
+    case actionTypes.ADD_SOCIAL_CELL_COVER_PIC:
+      return addSocialCellCoverPic(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_OLD:
       return addSocialEventOld(state,action)
+
+
+    // delete xxx
     case actionTypes.ADD_SOCIAL_CELL_NEW:
       return addSocailCalCell(state, action)
+
+
     case actionTypes.ADD_USER_SOCIAL_EVENT:
       return addUserSocialEvent(state, action)
     case actionTypes.REMOVE_USER_SOCIAL_EVENT:

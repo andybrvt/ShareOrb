@@ -26,7 +26,29 @@ class SocialUploadPicModal extends React.Component{
     fileList: [],
   };
 
+  // Handle cancel will just be canceling the pic
   handleCancel = () => this.setState({ previewVisible: false });
+
+  handleClose = () => {
+    //This will be closing the modal itself
+    this.setState({
+      previewVisible: false,
+      fileList:[],
+    })
+    this.props.close()
+
+  }
+
+  handleSubmit = () => {
+    //This will handle the submiting of the pictures
+    this.props.onSubmit(this.state.fileList)
+
+      this.setState({
+        previewVisible: false,
+        fileList:[],
+      })
+
+  }
 
   handlePreview = async file => {
    if (!file.url && !file.preview) {
@@ -61,8 +83,8 @@ class SocialUploadPicModal extends React.Component{
     return (
       <Modal
       visible = {this.props.view}
-      onCancel ={this.props.close}
-      onOk = {() => this.props.onSubmit(this.state.fileList)}
+      onCancel ={this.handleClose}
+      onOk = {() => this.handleSubmit()}
       >
         <div className="clearfix">
          <Upload

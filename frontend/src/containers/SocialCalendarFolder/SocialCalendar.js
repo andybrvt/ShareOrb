@@ -33,6 +33,7 @@ import {
 import * as navActions from '../../store/actions/nav';
 import * as calendarActions from '../../store/actions/calendars';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
+import * as exploreActions from '../../store/actions/explore';
 import ava1 from '../../components/images/avatar.jpg'
 import SocialUploadPicModal from './SocialUploadPicModal';
 import SocialEventPostModal from './SocialEventPostModal';
@@ -738,9 +739,21 @@ class SocialCalendar extends React.Component{
         {headers: {"content-type": "multipart/form-data"}}
 
       )
-      .then((response)=> {console.log(response)})
+      .then(res=> {
+        console.log(res.data)
+        if(res.data.coverPicChange){
+          if(res.data.created){
+            this.props.addSocialCell(res.data.cell)
+          } else {
+            // when a new cell is not made
+            console.log('hit here')
+            this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
+          }
+        }
+      })
       // maybe change this when we have channels working
       // window.location.reload(true)
+      this.onCloseSocialCalPicModal();
     }
 
 
@@ -804,6 +817,8 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(socialCalActions.nextMonthSocial()),
     prevMonth: () => dispatch(socialCalActions.prevMonthSocial()),
+    addSocialCell: socialCellObj => dispatch(exploreActions.addSocialCell(socialCellObj)),
+    addSocialCellCoverPic: (coverPic, cellId) => dispatch(exploreActions.addSocialCellCoverPic(coverPic, cellId))
     }
 }
 

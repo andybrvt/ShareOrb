@@ -32,7 +32,7 @@ class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
 
-    // this.initialiseProfile()
+    this.initialiseProfile()
   }
 
   state = {
@@ -86,6 +86,7 @@ class PersonalProfile extends React.Component{
 
   componentWillReceiveProps(newProps){
     console.log(newProps)
+    console.log('hit here')
     //This will reconnect to eh proper profile if you were to change the profiles
 
     if(this.props.parameter.username !== newProps.parameter.username){
@@ -96,6 +97,15 @@ class PersonalProfile extends React.Component{
         )
       })
       ExploreWebSocketInstance.connect(newProps.parameter.username)
+    }
+
+    if(this.props.location.pathname !== newProps.location.pathname){
+      //To refetch the information
+      this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          newProps.parameter.username
+        )
+      })
     }
 
   }

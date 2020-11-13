@@ -75,6 +75,16 @@ export const LOAD_PROFILE  = 'LOAD_PROFILE';
 export const ADD_FOLLOWER_UNFOLLOWER = 'ADD_FOLLOWER_UNFOLLOWER';
 export const CHANGE_PROFILE_PIC  = 'CHANGE_PROFILE_PIC';
 
+// This has to do with the cover picture of the social calendar cell
+// There are two cases, when the cell doesn't exist, I will have to
+// pass it in the whole cell. Second case would be the cell alredy
+// exist and you just put in the cover picture
+
+
+// We will generalized add_social_cell as one action
+// Add social cell cover pic will be when the cell already exist
+export const ADD_SOCIAL_CELL_COVER_PIC = "ADD_SOCIAL_CELL_COVER_PIC";
+export const ADD_SOCIAL_CELL = "ADD_SOCIAL_CELL";
 
 
 

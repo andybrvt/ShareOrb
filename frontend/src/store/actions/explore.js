@@ -26,6 +26,26 @@ export const changeProfilePic = profilePic => {
   }
 }
 
+export const addSocialCell = (newSocialCellObj) => {
+  //This will just add in a new cell object
+  return {
+    type: actionTypes.ADD_SOCIAL_CELL,
+    socialCellObj: newSocialCellObj
+  }
+}
+
+export const addSocialCellCoverPic = (coverPicture, cellId) => {
+  // This will add the cover picture into cells that already exist
+  return{
+    type: actionTypes.ADD_SOCIAL_CELL_COVER_PIC,
+    coverPicture: coverPicture,
+    cellId: cellId
+  }
+}
+
+
+
+
 
 export const addSocialEventOld = (exploreObj) => {
   // This will be used to add the events in when you are creating an event
