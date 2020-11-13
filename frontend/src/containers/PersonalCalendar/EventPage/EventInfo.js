@@ -901,6 +901,7 @@ class EventInfo extends React.Component{
       />
 
       <ChangeBackgroundModal
+        hostPic={host.profile_picture}
         pic={eventBackgroundPic}
         visible = {this.state.changeBackgroundView}
         close = {this.onChangeBackgroundClose}

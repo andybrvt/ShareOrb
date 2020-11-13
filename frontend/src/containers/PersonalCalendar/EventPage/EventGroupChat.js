@@ -185,20 +185,21 @@ class EventGroupChat extends React.Component{
 
       <div className = 'inputForm'>
 
-      <Form>
-        <TextArea
-        className = 'eventChatInput'
-        onChange = {this.handleChange}
-        value = {this.state.message}
-        onPressEnter = {this.handleSubmit}
-        placeholder = "Write a message..."
-        rows={2}
-        />
+        <Form>
+          <TextArea
+          className = 'eventChatInput'
+          onChange = {this.handleChange}
+          value = {this.state.message}
+          onPressEnter = {this.handleSubmit}
+          placeholder = "Write a message..."
+          rows={2}
+          />
 
-      </Form>
+        </Form>
       </div>
       <Button
-        shape="round"
+        style={{float:'right', marginTop:'10px', marginRight:'25px'}}
+
         onClick = {this.handleSubmit} type="primary"> Chat </Button>
 
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, notification, Upload, message } from 'antd';
-import { LoadingOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons';
+import { Modal, notification, Upload, message, Avatar } from 'antd';
+import { LoadingOutlined, PlusOutlined, InboxOutlined, UserOutlined } from '@ant-design/icons';
 // import ImgCrop from 'antd-img-crop';
 
 const {Dragger}  = Upload;
@@ -105,7 +105,7 @@ class ChangeBackgroundModal extends React.Component{
 
 
   render(){
-
+    console.log(this.props)
     console.log(this.state)
     // This is just to render the uploadButton
     const uploadButton = (
@@ -133,17 +133,16 @@ class ChangeBackgroundModal extends React.Component{
           <div class="side1">
 
             {
-            (this.props.pic!=null)?
-                <div>
+            (this.props.pic.length>0)?
+
                   <img class="changeProfilePic"
                     src={'http://127.0.0.1:8000'+this.props.pic}></img>
 
 
 
-                </div>
-
               :
-              <div></div>
+              <div><Avatar style={{left:'30%', marginTop:'150px'}} size={200}
+                icon={<img src={'http://127.0.0.1:8000'+this.props.hostPic}></img>} /></div>
 
 
              }
