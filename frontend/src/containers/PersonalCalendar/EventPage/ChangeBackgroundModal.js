@@ -129,7 +129,7 @@ class ChangeBackgroundModal extends React.Component{
       >
         <div class="sideContainer">
 
-          <span className = 'uploadProfileText'> Change background Picture </span>
+          <span className = 'uploadProfileText'> Change Background Picture </span>
           <div class="side1">
 
             {
