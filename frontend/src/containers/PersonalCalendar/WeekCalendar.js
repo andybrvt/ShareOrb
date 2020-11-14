@@ -614,7 +614,10 @@ class WeekCalendar extends React.Component{
 
 
                               {
-                                (item.host.username==this.props.username|| item.accepted.includes(this.props.id) )?
+                                (item.host.username==this.props.username|| (item.accepted.some(e => e.id == this.props.id))
+
+                                ||(item.host.username==this.props.username))
+                                ?
                                 <div style={{marginRight:'100px'}}>
                                   <Tooltip placement="bottomLeft" title="View event">
                                     <Button
@@ -706,8 +709,14 @@ class WeekCalendar extends React.Component{
 
         >
 
+        {/* color on week calendar */}
+              {   (
+                  (item.accepted.some(e => e.id == this.props.id))
+                  ||(item.invited.length==0)
+                  ||(item.host.username==this.props.username)
+                  )
 
-              {  (item.accepted.includes(this.props.id)||(item.invited.length==0)) ?
+                 ?
                 <div
                    key= {item.title}
                     onClick = {() => this.onClickItem(item)}
@@ -1092,6 +1101,7 @@ class WeekCalendar extends React.Component{
 
   render() {
     console.log(this.props)
+    console.log(this.props.id)
     console.log(Avatar)
 
     return (
