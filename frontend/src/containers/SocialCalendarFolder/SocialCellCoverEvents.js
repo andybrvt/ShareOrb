@@ -58,7 +58,7 @@ class SocialCellCoverEvents extends React.Component{
     // so that you can remove some from an event because they want to leave
 
     console.log(userId, eventId)
-    // ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
+    ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
   }
 
   onCoverViewClick = (eventId) => {

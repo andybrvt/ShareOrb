@@ -654,8 +654,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
 
 
-        # socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
-        # socialCellObj = SocialCalCellSerializer(curSocialCell).data
         socialCellObj = SocialCalCellSerializer(curSocialCell).data
         # get the whole event list instead so you can just replace everything --> faster
         socialCellEventList = socialCellObj['get_socialCalEvent']
@@ -663,8 +661,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         socialCellOwner = socialCellObj['socialCalUser']['username']
         socialCellId = socialCellObj['id']
 
-        # userObj = FollowUserSerializer(user, many = False).data
-        # hostObj = socialEventObj['host']
 
         content = {
             'command': 'add_user_social_event',
@@ -673,63 +669,37 @@ class ExploreConsumer(JsonWebsocketConsumer):
             'reciever': socialCellOwner
         }
 
-
-
-        # hostContent = {
-        # # The host obj will be sent to the channel of the host
-        #     'command': 'add_user_social_event',
-        #     'userObj': userObj,
-        #     'socialCellObj': socialCellObj,
-        #     'reciever': hostObj
-        # }
-        #
-        # userContent = {
-        # # The userObj will be sent to the channel of the user
-        #     'command': 'add_user_social_event',
-        #     'userObj': userObj,
-        #     'socialCellObj':socialCellObj,
-        #     'reciever': userObj
-        # }
-
         self.send_new_explore(content)
-        # self.send_new_explore(userContent)
 
 
     # This will be removign the user from the event
     def remove_user_social_event(self, data):
-        print(data)
+        # Similar to adding users to event but now you are just removing
+
         user = get_object_or_404(User, id = data['userId'])
         curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         curSocialEvent.persons.remove(user)
         curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
 
-        socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
-        socialCellObj  = SocialCalCellSerializer(curSocialCell).data
 
 
-        userObj = FollowUserSerializer(user, many = False).data
-        hostObj = socialEventObj['host']
+        socialCellObj = SocialCalCellSerializer(curSocialCell).data
+        socialCellEventList = socialCellObj['get_socialCalEvent']
 
-        hostContent = {
-        # This will be sent to the host, pretty used to add in that the a perosn has
-        # left one of your events
+        # need username to know where to send
+        socialCellOwner = socialCellObj['socialCalUser']['username']
+        socialCellId = socialCellObj['id']
+
+        content = {
             'command': 'remove_user_social_event',
-            'userObj': userObj,
-            'socialCellObj': socialCellObj,
-            'reciever': hostObj
+            'socialEventList': socialCellEventList,
+            'socialCellId': socialCellId,
+            'reciever': socialCellOwner
         }
 
-        userContent = {
-        # This will be sent to the person that wnated to leave the event, this will be sent
-        # to show that they left the event
-            'command': 'remove_user_social_event',
-            'userObj': userObj,
-            'socialCellObj': socialCellObj,
-            'reciever': userObj
-        }
+        self.send_new_explore(content)
 
-        self.send_new_explore(hostContent)
-        self.send_new_explore(userContent)
+
         # CONTINUE HERE, IT SHOULD BE SIMILAR TO THE VIEWS IN MYSOCIALCAL
     def send_following(self, data):
         # This function is to set up the follow object inorder to be sent into the channel layer

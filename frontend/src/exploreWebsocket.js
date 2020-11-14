@@ -100,44 +100,22 @@ class WebSocketExplore {
         // For old cell with new event
         this.callbacks['add_social_event_join_leave'](socialCalCellEvents, cellId)
       }
-    }
-
-
-
-     else if (command == 'add_user_social_event'){
-
+    } else if (command == 'add_user_social_event'){
+      // STATUS REDONE
 
       console.log(parsedData)
-      // Add callbacks here
       const socialEventList = parsedData.socialEventList
       const socialCellId = parsedData.socialCellId
 
       this.callbacks['add_social_event_join_leave'](socialEventList, socialCellId)
 
-
-
-
     } else if (command === "remove_user_social_event"){
-      // EFFICENTCY OK (COULD BE BETTER)
+      // STATUS REDONE
 
-      // This will just remove the user from the social event
-      // A way to help reduce the run time of the evnet is rather than trying to add
-      //  or remove a specific person, just replace tehw hoel cell
+      const socialEventList = parsedData.socialEventList
+      const socialCellId = parsedData.socialCellId
 
-      // You still might need the user obj to find the user
-      const socialCalCellObj = parsedData.socialCellObj
-      const userObj = parsedData.userObj
-      const exploreObj = {
-        socialCalCellObj:socialCalCellObj,
-        userObj: userObj
-      }
-
-      //Make some new call backs here
-      // Similar to the add event, you have to do an addevent and addeventM for the modal
-      // one for the personal one for the modal
-
-      // this.callbacks['remove_user_social_event'](exploreObj)
-      // this.callbacks['remove_user_social_event_m'](exploreObj)
+      this.callbacks['add_social_event_join_leave'](socialEventList, socialCellId)
 
     }
 
@@ -152,20 +130,12 @@ class WebSocketExplore {
      addSocialEventJoinLeave,
      addSocialCell,
 
-     addUserSocialEvent,
-     addUserSocialEventM,
-     removeUserSocialEvent,
-     removeUserSocialEventM
+
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
     this.callbacks['add_social_event_join_leave'] = addSocialEventJoinLeave
     this.callbacks['add_social_cell'] = addSocialCell
-
-    this.callbacks['add_user_social_event'] = addUserSocialEvent
-    this.callbacks['add_user_social_event_m'] = addUserSocialEventM
-    this.callbacks['remove_user_social_event'] = removeUserSocialEvent
-    this.callbacks['remove_user_social_event_m'] = removeUserSocialEventM
   }
 
 
