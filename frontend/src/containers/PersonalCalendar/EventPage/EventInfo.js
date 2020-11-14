@@ -683,7 +683,7 @@ class EventInfo extends React.Component{
                  <Button
                     type="primary" shape="round"
                     icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                    style={{left:'60%', fontSize:'15px'}} size={'large'}>
+                    style={{left:'70%', fontSize:'15px'}} size={'large'}>
 
                    Share
                  </Button>
@@ -693,7 +693,7 @@ class EventInfo extends React.Component{
                    <Button
                       shape="round"
                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'65%', fontSize:'15px'}} size={'large'}>
+                      style={{left:'75%', fontSize:'15px'}} size={'large'}>
 
                      Going
                    </Button>
@@ -702,7 +702,7 @@ class EventInfo extends React.Component{
                    <Button
                       shape="round" type="primary"
                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'65%', fontSize:'15px'}} size={'large'}>
+                      style={{left:'75%', fontSize:'15px'}} size={'large'}>
 
                      Going
                    </Button>
@@ -713,7 +713,7 @@ class EventInfo extends React.Component{
                <Button
                   shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'70%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'80%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
@@ -733,9 +733,7 @@ class EventInfo extends React.Component{
                 <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-globe"></i>
                 Public Event
                 <br/>
-                <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-map-marker-alt"></i>
-                Tucson, Arizona
-                <br/>
+
                 <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-clock"></i>
                 {date}
                 {start_time}-{end_time}
@@ -793,8 +791,10 @@ class EventInfo extends React.Component{
                      </div>
                    }
                 </div>
-
+                <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-map-marker-alt"></i>
+                Tucson, Arizona
                 <br/>
+
                 <br/>
 
 
@@ -810,29 +810,31 @@ class EventInfo extends React.Component{
 
 
             </div>
+            <div class="eventCard mapEventCard" >
 
-            <div class="mapEventCard">
 
-              <ReactBingmaps
-                bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                center = {[32.2226, 110.9747]}
-                boundary = {
-                {
-                  "search":"Fremont, CA",
-                  "option":{
-                    entityType: 'PopulatedPlace'
-                  },
-                  "polygonStyle" :{
-                    fillColor: 'rgba(161,224,255,0.4)',
-                    strokeColor: '#a495b2',
-                    strokeThickness: 2
+                <ReactBingmaps
+                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                  center = {[32.2226, 110.9747]}
+                  boundary = {
+                  {
+                    "search":"Fremont, CA",
+                    "option":{
+                      entityType: 'PopulatedPlace'
+                    },
+                    "polygonStyle" :{
+                      fillColor: 'rgba(161,224,255,0.4)',
+                      strokeColor: '#a495b2',
+                      strokeThickness: 2
+                    }
                   }
                 }
-              }
-                >
-              </ReactBingmaps>
+                  >
+                </ReactBingmaps>
+
 
             </div>
+
 
 
 
