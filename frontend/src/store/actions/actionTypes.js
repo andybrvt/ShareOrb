@@ -100,8 +100,7 @@ export const SEND_SOCIAL_CAL_CELL_COMMENT = 'SEND_SOCIAL_CAL_CELL_COMMENT';
 export const SEND_SOCIAL_CAL_CELL_COMMENT_NEW = 'SEND_SOCIAL_CAL_CELL_COMMENT_NEW';
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
-export const ADD_SOCIAL_EVENT = 'ADD_SOCIAL_EVENT';
-
+export const ADD_SOCIAL_EVENT_JOIN_LEAVE = 'ADD_SOCIAL_EVENT_JOIN_LEAVE';
 
 //REDO ALL OF THIS (any thing with an m attached to it)
 export const ADD_USER_SOCIAL_EVENT = 'ADD_USER_SOCIAL_EVENT';

@@ -48,16 +48,20 @@ export const addSocialCellCoverPic = (coverPicture, cellId) => {
   }
 }
 
-export const addSocialEvent = (socialEventList, cellId) =>{
+export const addSocialEventJoinLeave = (socialEventList, cellId) =>{
   //IMPROVED
   // This will be add new events in to the cover of the social day cell
   // We will just be replacing the whole list
+
+  //Used for joining and leaving events too
   return {
-    type: actionTypes.ADD_SOCIAL_EVENT,
+    type: actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE,
     socialEventList: socialEventList,
     cellId: cellId
   }
 }
+
+// export const joinSocialEvent = (social)
 
 
 

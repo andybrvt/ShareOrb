@@ -69,7 +69,7 @@ export const addSocialCellCoverPic = (state, action) => {
   })
 }
 
-export const addSocialEvent = (state, action) => {
+export const addSocialEventJoinLeave = (state, action) => {
   //IMPROVED
 
   return updateObject(state, {
@@ -190,8 +190,8 @@ const reducer = (state = initialState, action) => {
       return addSocialCell(state, action)
     case actionTypes.ADD_SOCIAL_CELL_COVER_PIC:
       return addSocialCellCoverPic(state, action)
-    case actionTypes.ADD_SOCIAL_EVENT:
-      return addSocialEvent(state, action);
+    case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE:
+      return addSocialEventJoinLeave(state, action);
 
 
 

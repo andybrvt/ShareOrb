@@ -98,34 +98,25 @@ class WebSocketExplore {
         this.callbacks['add_social_cell'](socialCalCellObj)
       } else {
         // For old cell with new event
-        this.callbacks['add_social_event'](socialCalCellEvents, cellId)
+        this.callbacks['add_social_event_join_leave'](socialCalCellEvents, cellId)
       }
     }
 
 
 
      else if (command == 'add_user_social_event'){
-      // EFFICENTCY: OK(COULD BE BETTER) (MAYBE REPLACE THE WHOLE PROFILE BUT WHO KNOWS)
-
-      // This will add the user into the evnets of the calendar ... so this is gonna
-      // take a lot of searching SO WE GOTTA FIX THIS LATER ON
-
-      // The socialCalCellId will be used to find the the correct cell
-      // The socialEventId will be used to find the correct event in that cal cell
-      // The usreboejct is just that person that is being added to the event
-      //  We will take the host form teh socialEventObj
 
 
-      // You gotta do one for the modal event and then one for the over all calendar
-      const socialCalCellObj = parsedData.socialCellObj
-      const userObj = parsedData.userObj
-      const exploreObj = {
-        socialCalCellObj: socialCalCellObj,
-        userObj: userObj
-      }
+      console.log(parsedData)
+      // Add callbacks here
+      const socialEventList = parsedData.socialEventList
+      const socialCellId = parsedData.socialCellId
 
-      // this.callbacks['add_user_social_event'](exploreObj)
-      // this.callbacks['add_user_social_event_m'](exploreObj)
+      this.callbacks['add_social_event_join_leave'](socialEventList, socialCellId)
+
+
+
+
     } else if (command === "remove_user_social_event"){
       // EFFICENTCY OK (COULD BE BETTER)
 
@@ -158,7 +149,7 @@ class WebSocketExplore {
   addCallbacks(
      loadProfile,
      addFollowerUnfollowerCallBack,
-     addSocialEvent,
+     addSocialEventJoinLeave,
      addSocialCell,
 
      addUserSocialEvent,
@@ -168,7 +159,7 @@ class WebSocketExplore {
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
-    this.callbacks['add_social_event'] = addSocialEvent
+    this.callbacks['add_social_event_join_leave'] = addSocialEventJoinLeave
     this.callbacks['add_social_cell'] = addSocialCell
 
     this.callbacks['add_user_social_event'] = addUserSocialEvent

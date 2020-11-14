@@ -654,34 +654,45 @@ class ExploreConsumer(JsonWebsocketConsumer):
         curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
 
 
-        socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
+        # socialEventObj = SocialCalEventSerializer(curSocialEvent, many = False).data
+        # socialCellObj = SocialCalCellSerializer(curSocialCell).data
         socialCellObj = SocialCalCellSerializer(curSocialCell).data
+        # get the whole event list instead so you can just replace everything --> faster
+        socialCellEventList = socialCellObj['get_socialCalEvent']
+        #  you need the username in order to send it to the right location
+        socialCellOwner = socialCellObj['socialCalUser']['username']
+        socialCellId = socialCellObj['id']
 
+        # userObj = FollowUserSerializer(user, many = False).data
+        # hostObj = socialEventObj['host']
 
-        userObj = FollowUserSerializer(user, many = False).data
-        hostObj = socialEventObj['host']
-
-
-
-
-        hostContent = {
-        # The host obj will be sent to the channel of the host
+        content = {
             'command': 'add_user_social_event',
-            'userObj': userObj,
-            'socialCellObj': socialCellObj,
-            'reciever': hostObj
+            'socialEventList': socialCellEventList,
+            'socialCellId': socialCellId,
+            'reciever': socialCellOwner
         }
 
-        userContent = {
-        # The userObj will be sent to the channel of the user
-            'command': 'add_user_social_event',
-            'userObj': userObj,
-            'socialCellObj':socialCellObj,
-            'reciever': userObj
-        }
 
-        self.send_new_explore(hostContent)
-        self.send_new_explore(userContent)
+
+        # hostContent = {
+        # # The host obj will be sent to the channel of the host
+        #     'command': 'add_user_social_event',
+        #     'userObj': userObj,
+        #     'socialCellObj': socialCellObj,
+        #     'reciever': hostObj
+        # }
+        #
+        # userContent = {
+        # # The userObj will be sent to the channel of the user
+        #     'command': 'add_user_social_event',
+        #     'userObj': userObj,
+        #     'socialCellObj':socialCellObj,
+        #     'reciever': userObj
+        # }
+
+        self.send_new_explore(content)
+        # self.send_new_explore(userContent)
 
 
     # This will be removign the user from the event

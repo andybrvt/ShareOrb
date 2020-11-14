@@ -49,7 +49,7 @@ class SocialCellCoverEvents extends React.Component{
     // This will be used to send the userId and the event Id to the websocket
     console.log(userId, eventId)
 
-    // ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
+    ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
   }
 
 
