@@ -510,6 +510,16 @@ class WeekCalendar extends React.Component{
                       }
                     </div>
                   </p>
+                  {
+                    (item.backgroundImg)?
+                    <img
+                      style={{display:'inline-block', float:'right'}}
+                    src = {item.backgroundImg}
+                    className = 'popoverPic'
+                     />
+                     :
+                     <div></div>
+                  }
 
                   {/* if person is host*
                     item.host
