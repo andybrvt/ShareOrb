@@ -60,25 +60,3 @@ export const addSocialEventJoinLeave = (socialEventList, cellId) =>{
     cellId: cellId
   }
 }
-
-// export const joinSocialEvent = (social)
-
-
-
-
-// Redo the add user and remove user
-// NEEDS TO BE UPDATED
-export const addUserSocialEvent = (exploreObj) => {
-  // This will be used to add the user to the correct event
-  return {
-    type: actionTypes.ADD_USER_SOCIAL_EVENT,
-    exploreObj: exploreObj
-  }
-}
-export const removeUserSocialEvent = (exploreObj) => {
-  // This will be used to remove a user from the correct event
-  return{
-    type: actionTypes.REMOVE_USER_SOCIAL_EVENT,
-    exploreObj: exploreObj
-  }
-}

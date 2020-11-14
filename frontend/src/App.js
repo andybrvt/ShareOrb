@@ -62,10 +62,7 @@ class App extends Component {
       this.props.addSocialEventJoinLeave.bind(this),
       this.props.addSocialCell.bind(this),
 
-      this.props.addUserSocialEvent.bind(this),
-      this.props.addUserSocialEventM.bind(this),
-      this.props.removeUserSocialEvent.bind(this),
-      this.props.removeUserSocialEventM.bind(this)
+
     )
 
     EventPageWebSocketInstance.addCallbacks(
@@ -160,13 +157,6 @@ const mapDispatchToProps = dispatch => {
     addFollowerUnfollower: followObject => dispatch(exploreActions.addFollowerUnfollower(followObject)),
     addSocialEventJoinLeave: (socialEventList, cellId) => dispatch(exploreActions.addSocialEventJoinLeave(socialEventList, cellId)),
     addSocialCell: (newSocialCellObj) => dispatch(exploreActions.addSocialCell(newSocialCellObj)),
-
-
-    addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
-    addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj)),
-    removeUserSocialEvent: exploreObj => dispatch(exploreActions.removeUserSocialEvent(exploreObj)),
-    removeUserSocialEventM: socialObj => dispatch(socialActions.removeUserSocialEventM(socialObj)),
-
 
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),
