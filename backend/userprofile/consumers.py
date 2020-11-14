@@ -640,22 +640,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         self.send_new_explore(content)
 
-        # if created == True:
-        #     content = {
-        #         'command': 'send_cal_cell_new',
-        #         'socialCalCellObj': socialCalCellObj,
-        #         'reciever': userObj
-        #     }
-        #     self.send_new_explore(content)
-        #
-        # if created == False:
-        #     content = {
-        #         'command': 'send_social_event_old',
-        #         'socialCalCellObj': socialCalCellObj,
-        #         'socialEventObj': socialEventObj,
-        #         'reciever': userObj
-        #     }
-        #     self.send_new_explore(content)
+
+
+
 
     def add_user_social_event(self, data):
         # This is pretty much gonna be where you will use the eventId to get the

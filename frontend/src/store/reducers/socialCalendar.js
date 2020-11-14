@@ -40,13 +40,14 @@ const prevMonthSocial = (state, action) => {
 }
 
 const fetchSocialCalCellPage = (state, action) => {
-
+  // IMPROVED
   return updateObject (state, {
     socialCalCellInfo: action.socialCalCellObj
   })
 }
 
 const sendSocialCalCellLikeUnlike = (state, action) => {
+  // IMPROVED
   return updateObject(state, {
     socialCalCellInfo: {
       ...state.socialCalCellInfo,
@@ -56,6 +57,8 @@ const sendSocialCalCellLikeUnlike = (state, action) => {
 }
 
 const sendSocialCalCellComment = (state, action) => {
+  // IMPROVED
+  // When the cell exist already
   return updateObject(state, {
     socialCalCellInfo:{
       ...state.socialCalCellInfo,
@@ -65,6 +68,8 @@ const sendSocialCalCellComment = (state, action) => {
 }
 
 const sendSocialCalCellComments = (state, action) =>{
+  // IMPROVED
+  // When the cell does not exist yet
   return updateObject(state, {
     socialCalCellInfo:{
       ...state.socialCalCellInfo,
@@ -76,37 +81,8 @@ const sendSocialCalCellComments = (state, action) =>{
 
 
 
-const addSocialCellNewM = (state, action) => {
-  return updateObject (state, {
-    socialObject: [
-      action.socialObj.socialCalCellObj
-    ]
-  })
-}
 
-const addSocialCommentOldM = (state, action) => {
-  // This is for when the social cell has been made already
-  return updateObject (state, {
-    socialObject: [{
-      ...state.socialObject[0],
-      get_socialCalComment: [... state.socialObject[0].get_socialCalComment, action.socialObj.socialComment]
-    }]
-  })
-}
-
-const openSocialEventModal = (state, action) => {
-  return updateObject (state, {
-    showSocialEventModal: true,
-    curSocialEventDate: action.date
-  })
-}
-
-const closeSocialEventModal = (state,action) => {
-  return updateObject (state, {
-    showSocialEventModal: false
-  })
-}
-
+// NEEDS TO BE UPDATED
 const addUserSocialEventM = (state, action) => {
 
   const userObj = action.socialObj.userObj
@@ -118,7 +94,6 @@ const addUserSocialEventM = (state, action) => {
     }] : []
   })
 }
-
 const removeUserSocialEventM = (state, action) => {
   const userObj = action.socialObj.userObj
   const socialEvents = action.socialObj.socialCalCellObj.get_socialCalEvent
@@ -131,7 +106,11 @@ const removeUserSocialEventM = (state, action) => {
   })
 }
 
+
+
+
 const loadSocialEventInfo = (state, action) => {
+  // IMPROVED
   // Load out the social event with all the information
 
   console.log(action)
@@ -142,19 +121,21 @@ const loadSocialEventInfo = (state, action) => {
 }
 
 const sendSocialEventMessage = (state, action) => {
-
+  // IMPROVED
   return updateObject(state, {
     socialEventMessages: [...state.socialEventMessages, action.socialMessageObj]
   })
 }
 
 const updateSocialEventPage = (state, action) => {
+  // IMPROVED
   return updateObject(state, {
     selectedSocialEvent: action.updatedSocialEvent
   })
 }
 
 const updateSocialEventBackground = (state, action) => {
+  // IMPROVED
   return updateObject(state, {
     selectedSocialEvent: {
       ...state.selectedSocialEvent,
@@ -164,6 +145,7 @@ const updateSocialEventBackground = (state, action) => {
 }
 
 const sendDeleteSocialEventNoti = (state, action) => {
+  // IMPROVED
   return updateObject(state, {
     showDeleted: true
   })
@@ -185,12 +167,14 @@ const reducer = (state = initialState, action) => {
       return sendSocialCalCellComments(state, action)
 
 
-    case actionTypes.ADD_SOCIAL_CELL_NEW_M:
-      return addSocialCellNewM(state, action)
+      //NEEDS TO BE REDONE
     case actionTypes.ADD_USER_SOCIAL_EVENT_M:
       return addUserSocialEventM (state, action);
     case actionTypes.REMOVE_USER_SOCIAL_EVENT_M:
       return removeUserSocialEventM(state, action);
+
+
+
     case actionTypes.LOAD_SOCIAL_EVENT_INFO:
       return loadSocialEventInfo(state, action);
     case actionTypes.SEND_SOCIAL_EVENT_MESSAGE:

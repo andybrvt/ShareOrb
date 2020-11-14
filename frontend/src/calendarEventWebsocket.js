@@ -57,23 +57,6 @@ class WebSocketCalendarEvent {
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
 
-      // NOTIFICATION THIS WAY IS NOT GONNA WORK
-      // if(parsedData.newEvent.invited.length > 0
-      //   && parsedData.newEvent.host.username !== userId ){
-      //   console.log('hit here')
-      //
-
-        // authAxios.post("http://127.0.0.1:8000/userprofile/notification/create", {
-        //   type: "shared_event",
-        //   actor:parsedData.newEvent.host.id,
-        //   recipient: userId,
-        //   verb: "shared an event at",
-        //   minDate: parsedData.newEvent.start_time
-        // })
-
-      // }
-
-
     }
     else if (command === 'add_accepted'){
       const acceptorId = parsedData.acceptedUser;

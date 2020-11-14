@@ -130,9 +130,6 @@ class WebSocketSocialCalCellPage{
       // with new one
       const likeList = parsedData.likeList
 
-
-      //ADD CALLBACK HERE
-
       // YOU WILL BE USING THIS FOR BOTH THE LIKING AND UNLIKING
       this.callbacks['send_social_cal_cell_like_unlike'](likeList)
     }

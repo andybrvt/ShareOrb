@@ -79,6 +79,7 @@ class WebSocketExplore {
 
 
     } else if(command === 'send_social_event'){
+      // STATUS REDONE
 
       // Two senarios, one is when a cell is created and one where there
       // already exist a cell and you just change the event field to the new
@@ -101,31 +102,9 @@ class WebSocketExplore {
       }
     }
 
-    else if (command === 'send_social_event_old'){
-      // This will be sending information to redux when the social cal cell is
-      // made already
-      const socialCalCellObj = parsedData.socialCalCellObj
-      const socialEventObj = parsedData.socialEventObj
-
-      const exploreObj = {
-        socialCalCell: socialCalCellObj,
-        socialEvent: socialEventObj
-      }
-      this.callbacks['social_event_old'](exploreObj)
-
-    } else if (command === 'send_cal_cell_new'){
-
-      // This command here will pretty much be called when ever you like, comment,
-      // or add event and you need to make a new socialCalCell
-      const socialCalCellObj = parsedData.socialCalCellObj
-      const exploreObj = {
-        socialCalCellObj: socialCalCellObj
-      }
-      this.callbacks['social_cal_cell_new'](exploreObj)
-      this.callbacks['social_cal_cell_new_m'](exploreObj)
 
 
-    } else if (command == 'add_user_social_event'){
+     else if (command == 'add_user_social_event'){
       // EFFICENTCY: OK(COULD BE BETTER) (MAYBE REPLACE THE WHOLE PROFILE BUT WHO KNOWS)
 
       // This will add the user into the evnets of the calendar ... so this is gonna
@@ -145,8 +124,8 @@ class WebSocketExplore {
         userObj: userObj
       }
 
-      this.callbacks['add_user_social_event'](exploreObj)
-      this.callbacks['add_user_social_event_m'](exploreObj)
+      // this.callbacks['add_user_social_event'](exploreObj)
+      // this.callbacks['add_user_social_event_m'](exploreObj)
     } else if (command === "remove_user_social_event"){
       // EFFICENTCY OK (COULD BE BETTER)
 
@@ -166,8 +145,8 @@ class WebSocketExplore {
       // Similar to the add event, you have to do an addevent and addeventM for the modal
       // one for the personal one for the modal
 
-      this.callbacks['remove_user_social_event'](exploreObj)
-      this.callbacks['remove_user_social_event_m'](exploreObj)
+      // this.callbacks['remove_user_social_event'](exploreObj)
+      // this.callbacks['remove_user_social_event_m'](exploreObj)
 
     }
 
@@ -182,11 +161,6 @@ class WebSocketExplore {
      addSocialEvent,
      addSocialCell,
 
-     addSocialEventOld,
-
-
-     addSocialCalCellNew,
-     addSocialCalCellNewM,
      addUserSocialEvent,
      addUserSocialEventM,
      removeUserSocialEvent,
@@ -197,12 +171,6 @@ class WebSocketExplore {
     this.callbacks['add_social_event'] = addSocialEvent
     this.callbacks['add_social_cell'] = addSocialCell
 
-    // DELETE XXX
-    this.callbacks['social_event_old'] = addSocialEventOld
-
-
-    this.callbacks['social_cal_cell_new'] = addSocialCalCellNew
-    this.callbacks['social_cal_cell_new_m'] = addSocialCalCellNewM
     this.callbacks['add_user_social_event'] = addUserSocialEvent
     this.callbacks['add_user_social_event_m'] = addUserSocialEventM
     this.callbacks['remove_user_social_event'] = removeUserSocialEvent

@@ -100,21 +100,18 @@ export const SEND_SOCIAL_CAL_CELL_COMMENT = 'SEND_SOCIAL_CAL_CELL_COMMENT';
 export const SEND_SOCIAL_CAL_CELL_COMMENT_NEW = 'SEND_SOCIAL_CAL_CELL_COMMENT_NEW';
 // Even though these actions are for the social calendar but because the social calendar
 // is part of the profile page
-
 export const ADD_SOCIAL_EVENT = 'ADD_SOCIAL_EVENT';
 
-// Delete XXX
-export const ADD_SOCIAL_EVENT_OLD = 'ADD_SOCIAL_EVENT_OLD';
 
-
-
+//REDO ALL OF THIS (any thing with an m attached to it)
 export const ADD_USER_SOCIAL_EVENT = 'ADD_USER_SOCIAL_EVENT';
 export const ADD_USER_SOCIAL_EVENT_M = 'ADD_USER_SOCIAL_EVENT_M';
 export const REMOVE_USER_SOCIAL_EVENT = 'REMOVE_USER_SOCIAL_EVENT';
 export const REMOVE_USER_SOCIAL_EVENT_M = 'REMOVE_USER_SOCIAL_EVENT_M';
-// This will pretty much be used for any add_social commands with new next to it
-export const ADD_SOCIAL_CELL_NEW = 'ADD_SOCIAL_CELL_NEW';
-export const ADD_SOCIAL_CELL_NEW_M = 'ADD_SOCIAL_CELL_NEW_M'
+
+
+
+
 
 // This would be used for the socialEvents
 export const LOAD_SOCIAL_EVENT_INFO = "LOAD_SOCIAL_EVENT_INFO";

@@ -14,6 +14,7 @@ export const prevMonthSocial = () => {
 }
 
 export const fetchSocialCalCellPage = (socialCalCellObj) =>{
+  //IMPROVED
   console.log(socialCalCellObj)
   return {
     type: actionTypes.FETCH_SOCIAL_CAL_CELL_PAGE,
@@ -22,6 +23,8 @@ export const fetchSocialCalCellPage = (socialCalCellObj) =>{
 }
 
 export const sendSocialCalCellLikeUnlike = (socialCalCellLikeObj) => {
+  //IMPROVED
+  // Covers both the like and unlike
   return{
     type: actionTypes.SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE,
     socialCalCellLikeObj: socialCalCellLikeObj
@@ -29,6 +32,8 @@ export const sendSocialCalCellLikeUnlike = (socialCalCellLikeObj) => {
 }
 
 export const sendSocialCalCellComment = (socialCalCellCommentObj) => {
+  //IMPROVED
+  // Send comments when there is already an existing cell
   return {
     type: actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT,
     socialCalCellCommentObj: socialCalCellCommentObj
@@ -36,6 +41,8 @@ export const sendSocialCalCellComment = (socialCalCellCommentObj) => {
 }
 
 export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
+  //IMPROVED
+  // Send comments when there is no cell existing
   return {
     type: actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW,
     socialCalCellCommentsObj: socialCalCellCommentsObj
@@ -44,14 +51,7 @@ export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
 
 
 
-
-export const addSocialCalCellNew = (socialObj) => {
-  return {
-    type: actionTypes.ADD_SOCIAL_CELL_NEW_M,
-    socialObj: socialObj
-  }
-}
-
+// NEEDS TO BE UPDATED
 export const addUserSocialEventM = (socialObj) => {
   // This will add users to the social events in the calendar cell modal
   return {
@@ -59,7 +59,6 @@ export const addUserSocialEventM = (socialObj) => {
     socialObj: socialObj
   }
 }
-
 export const removeUserSocialEventM = (socialObj) => {
   // This will remove user from the social events in the calendar cell modal
   return {
@@ -68,7 +67,12 @@ export const removeUserSocialEventM = (socialObj) => {
   }
 }
 
+
+
+
+
 export const loadSocialEventInfo = (socialEvent) => {
+  // IMPROVED
   // This will load the information about soical event, like the initial
   // connect
   return {
@@ -78,6 +82,7 @@ export const loadSocialEventInfo = (socialEvent) => {
 }
 
 export const sendSocialEventMessage = (socialMessageObj) =>{
+  // IMPROVED
   // send soial message object to the social event group chat
 
   console.log(socialMessageObj)
@@ -88,6 +93,7 @@ export const sendSocialEventMessage = (socialMessageObj) =>{
 }
 
 export const updateSocialEventPage = (updatedSocialEvent) => {
+  // IMPROVED
   // update the information in the socialevent page as well as the event
   // information
   return{
@@ -97,6 +103,7 @@ export const updateSocialEventPage = (updatedSocialEvent) => {
 }
 
 export const updateSocialEventBackground = (backgroundPic) => {
+  // IMPROVED
   // This will update the background picture of the soical event
   return{
     type: actionTypes.UPDATE_SOCIAL_EVENT_BACKGROUND,
@@ -106,6 +113,7 @@ export const updateSocialEventBackground = (backgroundPic) => {
 
 
 export const sendDeleteSocialEventNoti = () => {
+  // IMPROVED
   // This will jsut indicate that the event has been deleted and you should
   // return the social cal
   return{

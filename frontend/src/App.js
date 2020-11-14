@@ -62,10 +62,6 @@ class App extends Component {
       this.props.addSocialEvent.bind(this),
       this.props.addSocialCell.bind(this),
 
-      this.props.addSocialEventOld.bind(this),
-
-      this.props.addSocialCalCellNew.bind(this),
-      this.props.addSocialCalCellNewM.bind(this),
       this.props.addUserSocialEvent.bind(this),
       this.props.addUserSocialEventM.bind(this),
       this.props.removeUserSocialEvent.bind(this),
@@ -159,17 +155,19 @@ const mapDispatchToProps = dispatch => {
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
     deletePost: postId => dispatch(newsfeedActions.deletePost(postId)),
+
     loadProfile: profile => dispatch(exploreActions.loadProfile(profile)),
     addFollowerUnfollower: followObject => dispatch(exploreActions.addFollowerUnfollower(followObject)),
     addSocialEvent: (socialEventList, cellId) => dispatch(exploreActions.addSocialEvent(socialEventList, cellId)),
     addSocialCell: (newSocialCellObj) => dispatch(exploreActions.addSocialCell(newSocialCellObj)),
-    addSocialEventOld: exploreObj => dispatch(exploreActions.addSocialEventOld(exploreObj)),
-    addSocialCalCellNew: exploreObj => dispatch(exploreActions.addSocialCalCellNew(exploreObj)),
-    addSocialCalCellNewM: socialObj => dispatch(socialActions.addSocialCalCellNew(socialObj)),
+
+
     addUserSocialEvent: exploreObj => dispatch(exploreActions.addUserSocialEvent(exploreObj)),
     addUserSocialEventM: socialObj => dispatch(socialActions.addUserSocialEventM(socialObj)),
     removeUserSocialEvent: exploreObj => dispatch(exploreActions.removeUserSocialEvent(exploreObj)),
     removeUserSocialEventM: socialObj => dispatch(socialActions.removeUserSocialEventM(socialObj)),
+
+
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),
     updateSocialEventPage: updatedSocialEvent => dispatch(socialActions.updateSocialEventPage(updatedSocialEvent)),

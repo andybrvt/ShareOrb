@@ -53,6 +53,8 @@ export const addSocialCell = (state, action) => {
 }
 
 export const addSocialCellCoverPic = (state, action) => {
+  //IMPROVED
+
   // This will add in the coverpicture when the cell is already created
   return updateObject(state, {
     profile: {
@@ -68,6 +70,8 @@ export const addSocialCellCoverPic = (state, action) => {
 }
 
 export const addSocialEvent = (state, action) => {
+  //IMPROVED
+
   return updateObject(state, {
     profile: {
       ...state.profile,
@@ -82,77 +86,7 @@ export const addSocialEvent = (state, action) => {
 }
 
 
-
-// DELETE XXX
-export const addSocialEventOld = (state,action) => {
-  const calendarOwnerId = action.exploreObj.socialCalCell.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCell.id
-  const eventObj = action.exploreObj.socialEvent
-
-  console.log(action.exploreObj.socialCalCell)
-  console.log('hit here ')
-  console.log(eventObj)
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ...profile,
-        get_socialCal: profile.get_socialCal.map(
-          socialCell => socialCell.id === calendarCalCellId ? {
-            ...socialCell,
-            get_socialCalEvent: [...socialCell.get_socialCalEvent, eventObj]
-          } :socialCell
-        )
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: state.profile.get_socialCal.map(
-        socialCell => socialCell.id === calendarCalCellId ? {
-          ... socialCell,
-          get_socialCalEvent: [... socialCell.get_socialCalEvent, eventObj]
-        } : socialCell
-      )
-    } : state.profile
-
-  })
-}
-
-
-
-
-export const addSocailCalCell = (state, action) => {
-  // This is gonna be used for all the 'new' cal cells
-  console.log(action)
-  const calendarOwnerId = action.exploreObj.socialCalCellObj.socialCalUser.id
-  const calendarCalCellId = action.exploreObj.socialCalCellObj.id
-
-  let curProfileId = ''
-
-  if (state.profile){
-    curProfileId = state.profile.id
-  }
-
-  return updateObject(state, {
-    profiles: state.profiles.map(
-      profile => profile.id === calendarOwnerId ? {
-        ... profile,
-        get_socialCal : [... profile.get_socialCal, action.exploreObj.socialCalCellObj]
-      } : profile
-    ),
-    profile: curProfileId === calendarOwnerId ? {
-      ... state.profile,
-      get_socialCal: [... state.profile.get_socialCal, action.exploreObj.socialCalCellObj]
-    } : state.profile
-  })
-
-}
-
+// NEEDS TO BE IMPROVED
 export const addUserSocialEvent = (state, action) => {
   // This will be used to add specific people to an event that exist on your soicla calendar
   // Remember that the userObj is the person that is being added to the event
@@ -198,7 +132,6 @@ export const addUserSocialEvent = (state, action) => {
   })
 
 }
-
 export const removeUserSocialEvent = (state, action) => {
   // What is gonna happen is first you will change all cell in profiles (all the profiles)
   // that are not including th currentProfile. You will prtty much find the host of that event
@@ -260,14 +193,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_SOCIAL_EVENT:
       return addSocialEvent(state, action);
 
-    // DELETE XXX
-    case actionTypes.ADD_SOCIAL_EVENT_OLD:
-      return addSocialEventOld(state,action)
 
-
-    // delete xxx
-    case actionTypes.ADD_SOCIAL_CELL_NEW:
-      return addSocailCalCell(state, action)
 
 
     case actionTypes.ADD_USER_SOCIAL_EVENT:
