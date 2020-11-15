@@ -79,7 +79,7 @@ const sendSocialCalCellComments = (state, action) =>{
 }
 
 const addSocialEventJoinLeaveM =(state, action) => {
-
+  // IMPROVED
   return updateObject(state, {
     socialCalCellInfo:{
       ...state.socialCalCellInfo,
@@ -87,36 +87,6 @@ const addSocialEventJoinLeaveM =(state, action) => {
     }
   })
 }
-
-
-
-
-
-// NEEDS TO BE UPDATED
-const addUserSocialEventM = (state, action) => {
-
-  const userObj = action.socialObj.userObj
-  const socialEvents = action.socialObj.socialCalCellObj.get_socialCalEvent
-  return updateObject (state, {
-    socialObject: state.socialObject[0] ? [{
-      ...state.socialObject[0],
-      get_socialCalEvent: socialEvents
-    }] : []
-  })
-}
-const removeUserSocialEventM = (state, action) => {
-  const userObj = action.socialObj.userObj
-  const socialEvents = action.socialObj.socialCalCellObj.get_socialCalEvent
-
-  return updateObject(state, {
-    socialObject: state.socialObject[0] ? [{
-      ...state.socialObject[0],
-      get_socialCalEvent: socialEvents
-    }] : []
-  })
-}
-
-
 
 
 const loadSocialEventInfo = (state, action) => {
@@ -177,16 +147,6 @@ const reducer = (state = initialState, action) => {
       return sendSocialCalCellComments(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M:
       return addSocialEventJoinLeaveM(state, action)
-
-
-      //NEEDS TO BE REDONE
-    case actionTypes.ADD_USER_SOCIAL_EVENT_M:
-      return addUserSocialEventM (state, action);
-    case actionTypes.REMOVE_USER_SOCIAL_EVENT_M:
-      return removeUserSocialEventM(state, action);
-
-
-
     case actionTypes.LOAD_SOCIAL_EVENT_INFO:
       return loadSocialEventInfo(state, action);
     case actionTypes.SEND_SOCIAL_EVENT_MESSAGE:
