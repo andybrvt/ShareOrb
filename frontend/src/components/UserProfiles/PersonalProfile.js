@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { Route, useLocation, Switch, Link } from 'react-router-dom';
+
 import { authAxios } from '../util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
@@ -11,6 +13,7 @@ import * as exploreActions from '../../store/actions/explore';
 import defaultPicture from '../images/default.png';
 import ava1 from '../images/avatar.jpg'
 import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
+import UserPostList from '../../containers/UserPostTabFolder/UserPostList';
 import FollowList from './FollowList';
 import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
@@ -32,7 +35,7 @@ class PersonalProfile extends React.Component{
   constructor(props) {
     super(props);
 
-    this.initialiseProfile()
+    // this.initialiseProfile()
   }
 
   state = {
@@ -499,9 +502,13 @@ class PersonalProfile extends React.Component{
             <div className = 'profile-slider'></div>
           </div>
           <div className = 'profile-tabPanel'>
-            <SocialCalendar {...this.props}/>
+            {/*
+              <SocialCalendar {...this.props}/>
+              */}
            </div>
-          <div className = 'profile-tabPanel'> Tab 2: Content </div>
+          <div className = 'profile-tabPanel'>
+            <Route exact path = '/explore/:username/posts' render ={(props) => <UserPostList />} />
+          </div>
           <div className = 'profile-tabPanel'> Tab 3: Content </div>
         </div>
       )
@@ -526,6 +533,9 @@ class PersonalProfile extends React.Component{
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
+
+
+
         {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
@@ -541,7 +551,6 @@ class PersonalProfile extends React.Component{
              onCancel = {this.closeChangeProfilePic}
              onSubmit = {this.handleProfilePicChange}
            />
-
 
           <Modal
           visible ={this.state.followerShow}
@@ -562,6 +571,9 @@ class PersonalProfile extends React.Component{
           <span className = 'followWord'>Following</span>
           <FollowList follow = {following}/>
           </Modal>
+
+
+
 
         </div>
       )

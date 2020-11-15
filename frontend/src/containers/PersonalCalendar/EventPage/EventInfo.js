@@ -42,7 +42,7 @@ class EventInfo extends React.Component{
     changeBackgroundView: false,
   }
 
-  
+
   getInitialValue = () => {
     console.log("hi")
     // This will pull the information form the event info so that it can be
@@ -54,11 +54,20 @@ class EventInfo extends React.Component{
       let title = "";
       let content = "";
       let friends = [];
-      const date_start = dateFns.format(new Date(this.props.info.start_time), "yyyy-MM-dd")
-      const date_end = new Date(this.props.info.end_time)
-      const start_time = dateFns.format(new Date(this.props.info.start_time), "hh:mm a")
-      const end_time = dateFns.format(new Date(this.props.info.end_time), "hh:mm a")
-      console.log(date_start, end_time)
+      let start_time = ""
+      let end_time = ""
+      if(this.props.info.start_time){
+        start_time = dateFns.format(new Date(this.props.info.start_time), "hh:mm a")
+      }
+
+      if(this.props.info.end_time){
+        end_time = dateFns.format(new Date(this.props.info.end_time), "hh:mm a")
+
+      }
+      // const date_start = dateFns.format(new Date(this.props.info.start_time), "yyyy-MM-dd")
+      // const date_end = new Date(this.props.info.end_time)
+      // const end_time = dateFns.format(new Date(this.props.info.end_time), "hh:mm a")
+      // console.log(date_start, end_time)
       if(this.props.info.title){
         title = this.props.info.title
       }
@@ -955,9 +964,9 @@ class EventInfo extends React.Component{
         </div>
 
       <DetailEditEventForm
-      {...this.props}
-
-      initialValues = {this.getInitialValue}
+      // {...this.props}
+      info = {this.props.info}
+      initialValues = {this.getInitialValue()}
       onSubmit = {this.onSaveEdit}
       friendList = {this.props.friendList}
       onDelete = {this.onDeleteEvent}

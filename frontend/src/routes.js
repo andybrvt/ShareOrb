@@ -25,7 +25,8 @@ import EventPage from './containers/PersonalCalendar/EventPage/EventPage.js'
 import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/SocialEventPage';
 import SocialCalCellPage from './containers/SocialCalendarFolder/SocialCalCellPage';
 import SocialCalCellModal from './containers/SocialCalendarFolder/SocialCalCellModal';
-
+import UserPostList from './containers/UserPostTabFolder/UserPostList';
+import TestPage from './components/testPage';
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -71,13 +72,15 @@ class BaseRouter extends React.Component {
 
 
         <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
-        <Route exact path = '/test'  render={(props) => <ProfileCardNewsFeed {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
+        <Route exact path = '/test'  render={(props) => <TestPage {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
         <Route exact path = '/signup/' component= {Signup} />
 
         <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+
         <Route exact path = '/explore/:username' render={(props) => <PersonalProfile parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
