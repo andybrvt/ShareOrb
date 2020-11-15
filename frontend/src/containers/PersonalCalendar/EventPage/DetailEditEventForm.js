@@ -589,7 +589,7 @@ class DetailEditEventForm extends React.Component{
 
     return(
       <Drawer
-          title="Create a new account"
+          title="Edit Event"
           width={650}
           onClose={this.onClose}
           visible={true}

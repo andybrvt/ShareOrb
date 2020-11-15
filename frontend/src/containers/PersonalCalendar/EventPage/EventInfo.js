@@ -21,6 +21,14 @@ import Liking from '../../NewsfeedItems/Liking';
 import { ReactBingmaps } from 'react-bingmaps';
 import {Link, withRouter} from 'react-router-dom';
 import {browserHistory} from 'react-router';
+
+
+
+
+
+
+
+
 class EventInfo extends React.Component{
 
   constructor(props){
@@ -33,6 +41,56 @@ class EventInfo extends React.Component{
     edit: false,
     changeBackgroundView: false,
   }
+  getInitialValue = () => {
+    console.log("hi")
+    // This will pull the information form the event info so that it can be
+    // displayed on the event when you wanna edit it
+    // This will be presented somewhat similar to the getInitialValue in the
+    // EditEventPopUp
+    console.log(this.props.info)
+    if(this.props.info){
+      let title = "";
+      let content = "";
+      let friends = [];
+      const date_start = dateFns.format(new Date(this.props.info.start_time), "yyyy-MM-dd")
+      const date_end = new Date(this.props.info.end_time)
+      const start_time = dateFns.format(new Date(this.props.info.start_time), "hh:mm a")
+      const end_time = dateFns.format(new Date(this.props.info.end_time), "hh:mm a")
+      console.log(date_start, end_time)
+      if(this.props.info.title){
+        title = this.props.info.title
+      }
+      if(this.props.info.content){
+        content = this.props.info.content
+      }
+      if(this.props.info.invited){
+        for(let i= 0; i < this.props.info.invited.length; i++){
+          if(this.props.info.invited[i].username !== this.props.username)
+          friends.push(this.props.info.invited[i].username)
+        }
+      }
+
+      console.log(friends)
+
+  // Remember that for start date you have to use a momment object, only that will work
+
+      return{
+        title: this.capitalize(title),
+        content: this.capitalize(content),
+        startTime: start_time,
+        endTime: end_time,
+        eventColor: this.props.info.color,
+        location: this.props.info.location,
+        startDate: moment(this.props.info.start_time, "YYYY-MM-DD"),
+        endDate: moment(this.props.info.end_time, "YYYY-MM-DD"),
+        friends: friends,
+        repeatCondition: this.props.info.repeatCondition
+      }
+    }
+
+
+  }
+
 
   capitalize (str) {
     if(str){
@@ -125,54 +183,7 @@ class EventInfo extends React.Component{
   }
 
 
-  getInitialValue = () => {
-    // This will pull the information form the event info so that it can be
-    // displayed on the event when you wanna edit it
-    // This will be presented somewhat similar to the getInitialValue in the
-    // EditEventPopUp
-    console.log(this.props.info)
-    if(this.props.info){
-      let title = "";
-      let content = "";
-      let friends = [];
-      const date_start = dateFns.format(new Date(this.props.info.start_time), "yyyy-MM-dd")
-      const date_end = new Date(this.props.info.end_time)
-      const start_time = dateFns.format(new Date(this.props.info.start_time), "hh:mm a")
-      const end_time = dateFns.format(new Date(this.props.info.end_time), "hh:mm a")
-      console.log(date_start, end_time)
-      if(this.props.info.title){
-        title = this.props.info.title
-      }
-      if(this.props.info.content){
-        content = this.props.info.content
-      }
-      if(this.props.info.invited){
-        for(let i= 0; i < this.props.info.invited.length; i++){
-          if(this.props.info.invited[i].username !== this.props.username)
-          friends.push(this.props.info.invited[i].username)
-        }
-      }
 
-      console.log(friends)
-
-// Remember that for start date you have to use a momment object, only that will work
-
-      return{
-        title: this.capitalize(title),
-        content: this.capitalize(content),
-        startTime: start_time,
-        endTime: end_time,
-        eventColor: this.props.info.color,
-        location: this.props.info.location,
-        startDate: moment(this.props.info.start_time, "YYYY-MM-DD"),
-        endDate: moment(this.props.info.end_time, "YYYY-MM-DD"),
-        friends: friends,
-        repeatCondition: this.props.info.repeatCondition
-      }
-    }
-
-
-  }
 
 
 
@@ -522,16 +533,9 @@ class EventInfo extends React.Component{
 
     return(
       <div className = 'eventInfoContainer'>
-      {
-        this.state.edit ?
+
         <div>
-        <DetailEditEventForm
-        {...this.props}
-        initialValues = {this.getInitialValue()}
-        onSubmit = {this.onSaveEdit}
-        friendList = {this.props.friendList}
-        onDelete = {this.onDeleteEvent}
-         />
+
 
           <div
           className = "editEventBackButtonContainer "
@@ -541,7 +545,9 @@ class EventInfo extends React.Component{
 
           </div>
         </div>
-        :
+
+
+
 
         <div className = 'eventInfoView' >
           <div className = 'topSectContainier'>
@@ -946,10 +952,14 @@ class EventInfo extends React.Component{
 
         </div>
 
+      <DetailEditEventForm
+      {...this.props}
 
-      }
-
-
+      initialValues = {this.getInitialValue}
+      onSubmit = {this.onSaveEdit}
+      friendList = {this.props.friendList}
+      onDelete = {this.onDeleteEvent}
+       />
       <AcceptShareModal
       info = {this.props.tempEventForModal}
       tempDifference ={this.props.tempDifference}

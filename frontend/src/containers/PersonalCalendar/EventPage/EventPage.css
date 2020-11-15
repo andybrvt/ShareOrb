@@ -161,7 +161,7 @@
 /* CSS for the eventInfo side of the event page */
 .eventInfoContainer{
 
-  width: 70%;
+  width: 80%;
   height: 100%;
   overflow: auto;
   background: white;
@@ -355,7 +355,7 @@
 
 
 .editEventBackButtonContainer{
-  /* background-color: red; */
+  background-color: red;
   border: 1px solid gainsboro;
   height: 50px;
   width: 50px;
