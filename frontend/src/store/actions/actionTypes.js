@@ -103,13 +103,8 @@ export const SEND_SOCIAL_CAL_CELL_COMMENT_NEW = 'SEND_SOCIAL_CAL_CELL_COMMENT_NE
 
 // This will cover add events, join and leave events
 export const ADD_SOCIAL_EVENT_JOIN_LEAVE = 'ADD_SOCIAL_EVENT_JOIN_LEAVE';
-
+export const ADD_SOCIAL_EVENT_JOIN_LEAVE_M = 'ADD_SOCIAL_EVENT_JOIN_LEAVE_M';
 //REDO ALL OF THIS (any thing with an m attached to it)
-export const ADD_USER_SOCIAL_EVENT_M = 'ADD_USER_SOCIAL_EVENT_M';
-export const REMOVE_USER_SOCIAL_EVENT_M = 'REMOVE_USER_SOCIAL_EVENT_M';
-
-
-
 
 
 // This would be used for the socialEvents

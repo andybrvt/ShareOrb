@@ -49,26 +49,12 @@ export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
   }
 }
 
-
-
-// NEEDS TO BE UPDATED
-export const addUserSocialEventM = (socialObj) => {
-  // This will add users to the social events in the calendar cell modal
+export const addSocialEventJoinLeaveM = (socialEventList) => {
   return {
-    type: actionTypes.ADD_USER_SOCIAL_EVENT_M,
-    socialObj: socialObj
+    type: actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M,
+    socialEventList: socialEventList
   }
 }
-export const removeUserSocialEventM = (socialObj) => {
-  // This will remove user from the social events in the calendar cell modal
-  return {
-    type: actionTypes.REMOVE_USER_SOCIAL_EVENT_M,
-    socialObj: socialObj
-  }
-}
-
-
-
 
 
 export const loadSocialEventInfo = (socialEvent) => {

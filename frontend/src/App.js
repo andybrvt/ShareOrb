@@ -82,7 +82,8 @@ class App extends Component {
       this.props.fetchSocialCalCellPage.bind(this),
       this.props.sendSocialCalCellLikeUnlike.bind(this),
       this.props.sendSocialCalCellComment.bind(this),
-      this.props.sendSocialCalCellComments.bind(this)
+      this.props.sendSocialCalCellComments.bind(this),
+      this.props.addSocialEventJoinLeaveM.bind(this)
     )
   }
 
@@ -165,7 +166,8 @@ const mapDispatchToProps = dispatch => {
     fetchSocialCalCellPage: (socialCalCellObj) => dispatch(socialActions.fetchSocialCalCellPage(socialCalCellObj)),
     sendSocialCalCellLikeUnlike: (socialCalCellLikeObj) => dispatch(socialActions.sendSocialCalCellLikeUnlike(socialCalCellLikeObj)),
     sendSocialCalCellComment: (socialCalCellCommentObj) => dispatch(socialActions.sendSocialCalCellComment(socialCalCellCommentObj)),
-    sendSocialCalCellComments: (socialCalCellCommentsObj) => dispatch(socialActions.sendSocialCalCellComments(socialCalCellCommentsObj))
+    sendSocialCalCellComments: (socialCalCellCommentsObj) => dispatch(socialActions.sendSocialCalCellComments(socialCalCellCommentsObj)),
+    addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList))
   }
 }
 

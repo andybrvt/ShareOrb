@@ -107,6 +107,40 @@ class WebSocketSocialCalCellPage{
     })
   }
 
+  sendSocialEventJoin(userId, socialEventId, socialCalCellId, cellDate){
+    // This will send information for someone to join a social event
+    // UserID will be the perosn wanting to join the event
+    // eventid is for the event itself
+    //socialcalcellid is for the social cal cell identification
+
+    // The M is for the modal view
+    this.sendSocialCalCellInfo({
+      command: "add_user_social_event_M",
+      userId: userId,
+      socialEventId: socialEventId,
+      socialCalCellId: socialCalCellId,
+      cellDate: cellDate,
+    })
+  }
+
+  sendSocialEventLeave(userId, socialEventId, socialCalCellId, cellDate){
+    // This will let someone leave an event
+    // UserId will be the perosn wanting to leave the even
+    // eventId is for the even titiself
+
+    //Pretty similar to the socialeventjoin but just someone leaving instead
+    // of joining
+
+    this.sendSocialCalCellInfo({
+      command: "remove_user_social_event_M",
+      userId: userId,
+      socialEventId: socialEventId,
+      socialCalCellId: socialCalCellId,
+      cellDate: cellDate,
+
+    })
+  }
+
   socketNewSocialCalCell(data){
     //This is to process all the command in the backend and tell them where to
     // go
@@ -147,18 +181,32 @@ class WebSocketSocialCalCellPage{
 
       this.callbacks['send_social_cal_cell_comment_new'](socialComments)
     }
+    if(command === "add_user_social_event_M"){
+      const socialEventList = parsedData.socialEventList
+
+      // ADD CALL BACKS HERE
+      this.callbacks['add_social_event_join_leave_M'](socialEventList)
+    }
+    if(command === "remove_user_social_event_M"){
+      const socialEventList = parsedData.socialEventList
+
+      this.callbacks['add_social_event_join_leave_M'](socialEventList)
+
+    }
   }
 
   addCallbacks(
     fetchSocialCalCellInfo,
     sendSocialCalCellLikeUnlike,
     sendSocialCalCellComment,
-    sendSocialCalCellCommentNew
+    sendSocialCalCellCommentNew,
+    addSocialEventJoinLeave,
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
     this.callbacks['send_social_cal_cell_comment'] = sendSocialCalCellComment
     this.callbacks['send_social_cal_cell_comment_new'] = sendSocialCalCellCommentNew
+    this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
   }
 
   sendSocialCalCellInfo(data){

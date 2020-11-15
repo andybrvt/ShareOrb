@@ -317,8 +317,58 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         self.send_info_cal_cell(content)
 
+    def add_user_social_event_M(self, data):
+        # userId: userId,
+        # socialEventId: socialEventId,
+        # socialCalCellId: socialCalCellId
+
+        # similar to the one in the explore page
+        # when you are joining an event, the event itself must exist already
+        user = get_object_or_404(User, id = data['userId'])
+        curSocialEvent = get_object_or_404(SocialCalEvent, id = data['socialEventId'])
+        curSocialEvent.persons.add(user)
+        curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+
+        socialCellObj = SocialCalCellSerializer(curSocialCell).data
+        # Get the soical event list and replace the current one that is showing
+        socialCellEventList = socialCellObj['get_socialCalEvent']
+        # Unlike the explore page the recipient is gonna be made of date and username
+        dateList = data['cellDate'].split("-")
+        username = socialCellObj['socialCalUser']['username']
+
+        # You will the use the recipient to attach to the group name
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+        content = {
+            'command': 'add_user_social_event_M',
+            'socialEventList': socialCellEventList,
+            'recipient': recipient
+        }
+
+        self.send_info_cal_cell(content)
 
 
+    def remove_user_social_event_M(self, data):
+        # similar to the add_user_social_event_M but you just remove the person now
+        user = get_object_or_404(User, id = data['userId'])
+        curSocialEvent = get_object_or_404(SocialCalEvent, id = data['socialEventId'])
+        curSocialEvent.persons.remove(user)
+        curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+
+        socialCellObj = SocialCalCellSerializer(curSocialCell).data
+        socialCellEventList = socialCellObj['get_socialCalEvent']
+
+        dateList = data['cellDate'].split("-")
+        username = socialCellObj['socialCalUser']['username']
+
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        content = {
+            'command': 'remove_user_social_event_M',
+            'socialEventList': socialCellEventList,
+            'recipient': recipient
+        }
+
+        self.send_info_cal_cell(content)
 
 
     def send_info_cal_cell (self, calCellObj):
@@ -371,6 +421,10 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_social_cal_cell_unlike(data)
         if data['command'] == 'send_social_cal_cell_comment':
             self.send_social_cal_cell_comment(data)
+        if data['command'] == 'add_user_social_event_M':
+            self.add_user_social_event_M(data)
+        if data['command'] == 'remove_user_social_event_M':
+            self.remove_user_social_event_M(data)
 
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']
