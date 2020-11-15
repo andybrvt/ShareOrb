@@ -428,6 +428,7 @@ class SocialEventInfo extends React.Component{
       visible = {this.state.changeBackgroundView}
       close = {this.onChangeBackgroundClose}
       onSubmit = {this.handleBackgroundPictureChange}
+      pic = {eventBackgroundPic}
       />
 
       <DeleteSocialEventModal
