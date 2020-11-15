@@ -49,6 +49,13 @@ export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
   }
 }
 
+export const addSocialEventJoinLeaveM = (socialEventList) => {
+  return {
+    type: actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M,
+    socialEventList: socialEventList
+  }
+}
+
 
 
 // NEEDS TO BE UPDATED

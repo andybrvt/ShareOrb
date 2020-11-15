@@ -78,6 +78,16 @@ const sendSocialCalCellComments = (state, action) =>{
   })
 }
 
+const addSocialEventJoinLeaveM =(state, action) => {
+
+  return updateObject(state, {
+    socialCalCellInfo:{
+      ...state.socialCalCellInfo,
+      get_socialCalEvent: action.socialEventList
+    }
+  })
+}
+
 
 
 
@@ -165,6 +175,8 @@ const reducer = (state = initialState, action) => {
       return sendSocialCalCellComment(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW:
       return sendSocialCalCellComments(state, action)
+    case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M:
+      return addSocialEventJoinLeaveM(state, action)
 
 
       //NEEDS TO BE REDONE

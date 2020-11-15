@@ -7,6 +7,7 @@ import location from '../../components/images/pin.png';
 import AvatarGroups from '../../components/AvatarGroups';
 import userIcon from '../../components/images/user.png';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
+import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import './SocialCalCSS/SocialCellPage.css';
 import Liking from "../NewsfeedItems/Liking";
 
@@ -43,11 +44,10 @@ class SocialEventList extends React.Component{
     return personListId.includes(this.props.curId)
   }
 
-  sendJoinUserEvent = (userId, eventId, socialCalCellId )=> {
+  sendJoinUserEvent = (userId, eventId , socialCalCellId, cellDate)=> {
     // This will be used to send the userId and the event Id to the websocket
-    console.log(userId, eventId)
-
-    // ExploreWebSocketInstance.sendSocialEventParticipate(userId, eventId, socialCalCellId)
+    console.log(userId, eventId, socialCalCellId)
+    SocialCalCellPageWebSocketInstance.sendSocialEventJoin(userId, eventId, socialCalCellId, cellDate)
   }
 
   sendLeaveUserEvent = (userId, eventId, socialCalCellId) => {
@@ -162,7 +162,12 @@ class SocialEventList extends React.Component{
                    :
 
                    <div
-                   onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
+                   onClick = {()=> this.sendJoinUserEvent(
+                     this.props.curId,
+                     item.id,
+                     this.props.socialCalCellId,
+                     this.props.cellDate
+                   )}
                    className = 'joinEventButton'>
                      <span className = 'joinText'> Join </span>
                    </div>
