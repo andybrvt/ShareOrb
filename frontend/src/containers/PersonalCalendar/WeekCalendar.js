@@ -400,7 +400,7 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item =>  (
 
               <Popover placement="right"  content={
-                <div style={{padding:30, width:450}}>
+                <div style={{padding:20, width:450}}>
                   <p style={{display:'inline-block'}}>
 
                   </p>
@@ -537,7 +537,7 @@ class WeekCalendar extends React.Component{
 
                       (item.invited.length==0 && item.host.id==this.props.id)?
 
-                      <span style={{float:'right', padding:'10px', marginTop:'-25px'}}>
+                      <span style={{float:'right', padding:'15px', marginTop:'-45px'}}>
 
                         <Tooltip placement="bottomLeft" title="View event">
                           <Button
@@ -629,7 +629,7 @@ class WeekCalendar extends React.Component{
 
                                 ||(item.host.username==this.props.username))
                                 ?
-                                <div style={{marginRight:'100px'}}>
+                                <div style={{marginRight:'100px', marginTop:'-10px'}}>
                                   <Tooltip placement="bottomLeft" title="View event">
                                     <Button
                                     onClick = {() => this.onEventPage(item.id)}
@@ -700,7 +700,7 @@ class WeekCalendar extends React.Component{
 
                                 }
                             </div>
-                            <Liking style={{marginTop:'-200px'}} like_people={item.invited}/>
+                            <Liking like_people={item.invited}/>
                           </Avatar.Group>
 
 
