@@ -120,7 +120,24 @@ class WebSocketSocialCalCellPage{
       socialEventId: socialEventId,
       socialCalCellId: socialCalCellId,
       cellDate: cellDate,
-      cellDate: cellDate
+    })
+  }
+
+  sendSocialEventLeave(userId, socialEventId, socialCalCellId, cellDate){
+    // This will let someone leave an event
+    // UserId will be the perosn wanting to leave the even
+    // eventId is for the even titiself
+
+    //Pretty similar to the socialeventjoin but just someone leaving instead
+    // of joining
+
+    this.sendSocialCalCellInfo({
+      command: "remove_user_social_event_M",
+      userId: userId,
+      socialEventId: socialEventId,
+      socialCalCellId: socialCalCellId,
+      cellDate: cellDate,
+
     })
   }
 
@@ -169,6 +186,12 @@ class WebSocketSocialCalCellPage{
 
       // ADD CALL BACKS HERE
       this.callbacks['add_social_event_join_leave_M'](socialEventList)
+    }
+    if(command === "remove_user_social_event_M"){
+      const socialEventList = parsedData.socialEventList
+
+      this.callbacks['add_social_event_join_leave_M'](socialEventList)
+
     }
   }
 

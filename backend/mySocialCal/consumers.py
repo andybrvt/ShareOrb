@@ -347,6 +347,29 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         self.send_info_cal_cell(content)
 
 
+    def remove_user_social_event_M(self, data):
+        # similar to the add_user_social_event_M but you just remove the person now
+        user = get_object_or_404(User, id = data['userId'])
+        curSocialEvent = get_object_or_404(SocialCalEvent, id = data['socialEventId'])
+        curSocialEvent.persons.remove(user)
+        curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+
+        socialCellObj = SocialCalCellSerializer(curSocialCell).data
+        socialCellEventList = socialCellObj['get_socialCalEvent']
+
+        dateList = data['cellDate'].split("-")
+        username = socialCellObj['socialCalUser']['username']
+
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        content = {
+            'command': 'remove_user_social_event_M',
+            'socialEventList': socialCellEventList,
+            'recipient': recipient
+        }
+
+        self.send_info_cal_cell(content)
+
 
     def send_info_cal_cell (self, calCellObj):
         # This will be used ot send the info into the front end
@@ -400,6 +423,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_social_cal_cell_comment(data)
         if data['command'] == 'add_user_social_event_M':
             self.add_user_social_event_M(data)
+        if data['command'] == 'remove_user_social_event_M':
+            self.remove_user_social_event_M(data)
 
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']

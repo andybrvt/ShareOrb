@@ -50,12 +50,12 @@ class SocialEventList extends React.Component{
     SocialCalCellPageWebSocketInstance.sendSocialEventJoin(userId, eventId, socialCalCellId, cellDate)
   }
 
-  sendLeaveUserEvent = (userId, eventId, socialCalCellId) => {
+  sendLeaveUserEvent = (userId, eventId, socialCalCellId, cellDate) => {
     // This willb e sued to sne dthe useId and the eventid to the websocket
     // so that you can remove some from an event because they want to leave
 
     console.log(userId, eventId)
-    // ExploreWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId)
+    SocialCalCellPageWebSocketInstance.sendSocialEventLeave(userId, eventId, socialCalCellId, cellDate)
   }
 
   viewSocialEventPage = (eventId) => {
@@ -152,7 +152,12 @@ class SocialEventList extends React.Component{
                 :
 
                 <div
-                onClick = {() => this.sendLeaveUserEvent(this.props.curId, item.id, this.props.socialCalCellId)}
+                onClick = {() => this.sendLeaveUserEvent(
+                  this.props.curId,
+                  item.id,
+                  this.props.socialCalCellId,
+                  this.props.cellDate
+                )}
                 className = 'alreadyJoinButton'>
                 <span className = 'joinText'> Leave </span>
               </div>
