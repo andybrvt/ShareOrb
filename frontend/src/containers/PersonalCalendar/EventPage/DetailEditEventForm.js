@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
@@ -196,6 +196,13 @@ const renderStartTime = () => {
 class DetailEditEventForm extends React.Component{
 // This class will be similar to the redux edit event but will be more detailed
   // For detail comments on how redux forms work, check ReduxEditEventForm
+  state = { visible: false };
+
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -581,7 +588,14 @@ class DetailEditEventForm extends React.Component{
     console.log(eventId)
 
     return(
-      <form style={{padding:'25px'}}>
+      <Drawer
+          title="Create a new account"
+          width={650}
+          onClose={this.onClose}
+          visible={true}
+          bodyStyle={{ paddingBottom: 80 }}
+          footer={
+            <form style={{padding:'25px'}}>
           <div className = 'reduxTitle'>
             <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
               {this.props.dayNum}
@@ -736,6 +750,10 @@ class DetailEditEventForm extends React.Component{
            }
 
       </form>
+
+    }>
+    </Drawer>
+
 
     )
   }
