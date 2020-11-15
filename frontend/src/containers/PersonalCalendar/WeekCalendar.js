@@ -432,24 +432,25 @@ class WeekCalendar extends React.Component{
 
                   <p style={{marginTop:'5px', fontSize:'14px'}}>
                     <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
-                    {dateFns.format(new Date(item.start_time), 'M')}/
+                    <span style={{marginRight:'3px'}}>
+                      {dateFns.format(cloneDay, 'iiii')},
 
-                    {dateFns.format(new Date(item.start_time), 'd')}
+
+                    </span>
+                    {dateFns.format(new Date(item.start_time), 'MMMM')}
                     &nbsp;
-                    <span>
-                      {dateFns.format(cloneDay, 'iiii')}
-                      &nbsp;
+                    {dateFns.format(new Date(item.start_time), 'd')}
 
-                    </span>
-                    <span >
 
-                    </span>
+
+                    <br/>
+                    <i style={{marginRight:'10px', marginTop:'10px'}} class="fas fa-clock"></i>
                     <span>
-                      {dateFns.format(new Date(item.start_time),'h:mm a')}
-                      -
-                      {dateFns.format(new Date(item.end_time),'h:mm a')}
-                    </span>
-                  <br/>
+                        {dateFns.format(new Date(item.start_time),'h:mm a')}
+                        -
+                        {dateFns.format(new Date(item.end_time),'h:mm a')}
+                      </span>
+                    <br/>
                     {
                       (item.repeatCondition=="weekly")?
                       <span>
