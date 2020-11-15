@@ -41,6 +41,8 @@ class EventInfo extends React.Component{
     edit: false,
     changeBackgroundView: false,
   }
+
+  
   getInitialValue = () => {
     console.log("hi")
     // This will pull the information form the event info so that it can be
@@ -965,7 +967,7 @@ class EventInfo extends React.Component{
       tempDifference ={this.props.tempDifference}
       onCancel = {this.props.closeAcceptUnshareModal}
       visible = {this.props.showAcceptUnshareModal}
-      onSubmit = {this  .onAcceptUnShareEdit}
+      onSubmit = {this.onAcceptUnShareEdit}
        />
 
       <RemoveEventModal
