@@ -95,7 +95,8 @@ class EventInfo extends React.Component{
         startDate: moment(this.props.info.start_time, "YYYY-MM-DD"),
         endDate: moment(this.props.info.end_time, "YYYY-MM-DD"),
         friends: friends,
-        repeatCondition: this.props.info.repeatCondition
+        repeatCondition: this.props.info.repeatCondition,
+        visibleModal:this.state.edit,
       }
     }
 
@@ -965,6 +966,7 @@ class EventInfo extends React.Component{
 
       <DetailEditEventForm
       // {...this.props}
+
       info = {this.props.info}
       initialValues = {this.getInitialValue()}
       onSubmit = {this.onSaveEdit}

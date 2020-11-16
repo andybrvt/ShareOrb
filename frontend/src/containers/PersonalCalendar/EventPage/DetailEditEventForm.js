@@ -200,7 +200,7 @@ class DetailEditEventForm extends React.Component{
 
   onClose = () => {
     this.setState({
-      visible: false,
+      visibleModal: false,
     });
   };
 
@@ -568,6 +568,8 @@ class DetailEditEventForm extends React.Component{
   render(){
 
     console.log(this.props)
+    console.log(this.state)
+
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
     let eventType = ""
@@ -591,8 +593,9 @@ class DetailEditEventForm extends React.Component{
       <Drawer
           title="Edit Event"
           width={650}
+          visible={this.props.visibleModal}
           onClose={this.onClose}
-          visible={true}
+
           bodyStyle={{ paddingBottom: 80 }}
           footer={
             <div>{ this.props.addEvent ?
@@ -770,6 +773,8 @@ DetailEditEventForm = reduxForm({
 const selector = formValueSelector("detailEventEdit");
 
 export default connect(state => ({
+  visibleModal: selector(state, 'visibleModal'),
+  edit: selector(state, 'edit'),
   title: selector(state, 'title'),
   friends: selector(state, 'friends'),
   content: selector (state, 'content'),
