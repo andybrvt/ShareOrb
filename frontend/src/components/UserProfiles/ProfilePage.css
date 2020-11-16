@@ -315,7 +315,7 @@
 
 .profile-tabContainer .profile-tabPanel{
   /* height: 85%; */
-  background-color: gray;
+  /* background-color: gray; */
   color: #363636;
   text-align: center;
   align-items: center;
@@ -323,7 +323,7 @@
   padding-top: 2%;
   font-family: sans-serif;
   font-size: 22px;
-  display: none;
+  /* display: none; */
   /* overflow: auto; */
   /* height: 850px; */
 }

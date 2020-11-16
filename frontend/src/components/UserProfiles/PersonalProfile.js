@@ -83,7 +83,6 @@ class PersonalProfile extends React.Component{
 
 
   componentDidMount(){
-    this.showPanel(0, 'transparent')
     this.initialiseProfile()
 
   }
@@ -434,25 +433,7 @@ class PersonalProfile extends React.Component{
 
     }
 
-    showPanel = (panelIndex, colorCode) =>{
-      var tabButtons= document.querySelectorAll('.profile-tabContainer .profile-buttonContainer .profile-Tab')
-      var tabPanels= document.querySelectorAll('.profile-tabContainer .profile-tabPanel')
-      if (tabButtons.length > 0 && tabPanels.length > 0){
-        tabButtons.forEach(function(node){
-          node.style.backgroundColor = "";
-          node.style.color = "";
-        })
-        tabButtons[panelIndex].style.backgroundColor = colorCode;
-        tabButtons[panelIndex].style.color = '#363636';
-        tabPanels.forEach(function(node){
-          node.style.display = 'none'
-        })
-        tabPanels[panelIndex].style.display = 'block';
-        tabPanels[panelIndex].style.backgroundColor = colorCode;
 
-      }
-
-    }
 
     onFollowerOpen = () => {
       // This is used to open up the follower list
