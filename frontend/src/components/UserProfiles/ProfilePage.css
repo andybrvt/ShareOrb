@@ -235,11 +235,62 @@
 
 .profile-tabContainer .profile-buttonContainer .profile-Tab{
   width: 33.3333%;
+  /* width: 10px; */
   height: 100%;
   position: relative;
   /* float:none; */
   border-bottom: 1px grey solid;
-  /* background: transparent; */
+  /* border-radius: 25px; */
+  outline: none;
+  cursor: pointer;
+  /* padding: 10px; */
+  font-family: sans-serif;
+  font-size: 15px;
+  /* background-color: #ffffff; */
+  /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
+}
+
+.profile-tabContainer .profile-buttonContainer .profile-Tab-Post{
+  width: 33.3333%;
+  /* width: 10px; */
+  height: 100%;
+  position: relative;
+  /* float:none; */
+  border-bottom: 2px grey solid;
+  /* border-radius: 25px; */
+  outline: none;
+  cursor: pointer;
+  /* padding: 10px; */
+  font-family: sans-serif;
+  font-size: 15px;
+  /* background-color: #ffffff; */
+  /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
+}
+
+.profile-tabContainer .profile-buttonContainer .profile-Tab-Calendar{
+  width: 33.3333%;
+  /* width: 10px; */
+  height: 100%;
+  position: relative;
+  /* float:none; */
+  border-bottom: 2px grey solid;
+  /* border-radius: 25px; */
+  outline: none;
+  cursor: pointer;
+  /* padding: 10px; */
+  font-family: sans-serif;
+  font-size: 15px;
+  /* background-color: #ffffff; */
+  /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
+}
+
+.profile-tabContainer .profile-buttonContainer .profile-Tab-Event{
+  width: 33.3333%;
+  /* width: 10px; */
+  height: 100%;
+  position: relative;
+  /* float:none; */
+  border-bottom: 2px grey solid;
   /* border-radius: 25px; */
   outline: none;
   cursor: pointer;
@@ -256,31 +307,10 @@
 	text-align: center;
 }
 
-.profile-description_tab:first-child.profile-active ~ .profile-slider {
-			left: 0;
-}
-
-.profile-description_tab:nth-child(2).profile-active ~ .profile-slider {
-			left: 33.333%;
-}
-
-.profile-description_tab:nth-child(3).profile-active ~ .profile-slider {
-			left: 66.666%;
-}
 
 
 .profile-tabContainer .profile-buttonContainer button:hover {
   background-color: #DCDCDC;
-}
-
-.profile-slider {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 33.333%;
-		height: 2px;
-		background-color: grey;
-		transition: .5s;
 }
 
 .profile-tabContainer .profile-tabPanel{

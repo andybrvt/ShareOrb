@@ -1,42 +1,27 @@
+// This would be the post page for the personal profile
+
 import React from 'react';
 import axios from 'axios';
 import { Route, useLocation, Switch, Link } from 'react-router-dom';
-
-import { authAxios } from '../util';
+import { authAxios } from '../../components/util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
 import { Button, Modal, Avatar } from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
-import ExploreWebSocketInstance from '../../exploreWebsocket';
 import * as exploreActions from '../../store/actions/explore';
-import defaultPicture from '../images/default.png';
-import ava1 from '../images/avatar.jpg'
-import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
-import FollowList from './FollowList';
-import '@ant-design/compatible/assets/index.css';
-import './ProfilePage.css';
-import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
-// From here on out each profile will be its own channel, so we do not need
-// to use ViewAnyUserProfile anymore
-// Each profile will fetch its own information and do its own channel stuff
-
-// For the current User I will probally gonna make it so that there are turnary
-// operators that allows editing and such
+import '../../components/UserProfiles/ProfilePage.css';
+import ChangeProfilePic from '../CurrUser/ChangeProfilePic';
+import FollowList from '../../components/UserProfiles/FollowList';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
 
 
-// So what is gonna happen is that each personal profile will be its own channel
-// so when you log on it will be an own channe, so what happnes on that page, it
-// will show up. So I have to properally do the connect and disconnect for
-// each page (similar to the event page)
 
-
-//This will be the page for the social calendar
-class PersonalProfile extends React.Component{
-  constructor(props) {
+class PersonalProfileEventList extends React.Component{
+  constructor(props){
     super(props);
-
     // this.initialiseProfile()
+
   }
 
   state = {
@@ -44,11 +29,7 @@ class PersonalProfile extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
-    // following: false,
   }
-
-
-//To get the parms from teh url use THIS.PROPS.PARAMETER.USERNAME (LOWER CASE BTW)
 
   initialiseProfile() {
     console.log('hit here')
@@ -61,7 +42,6 @@ class PersonalProfile extends React.Component{
       ExploreWebSocketInstance.connect(this.props.parameter.username)
     }
   }
-
 
   waitForSocketConnection(callback){
 		// This is pretty much a recursion that tries to reconnect to the websocket
@@ -81,11 +61,11 @@ class PersonalProfile extends React.Component{
 			}, 100)
 	}
 
-
   componentDidMount(){
     this.initialiseProfile()
 
   }
+
 
   componentWillReceiveProps(newProps){
     console.log(newProps)
@@ -109,7 +89,8 @@ class PersonalProfile extends React.Component{
           newProps.parameter.username
         )
       })
-      // ExploreWebSocketInstance.connect(newProps.parameter.username)
+
+      ExploreWebSocketInstance.connect(newProps.parameter.username)
 
     }
 
@@ -122,6 +103,7 @@ class PersonalProfile extends React.Component{
     // the disconnect in the websocket
     ExploreWebSocketInstance.disconnect();
   }
+
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -169,7 +151,6 @@ class PersonalProfile extends React.Component{
     )
   }
 
-
   handleProfilePicChange = (values) => {
     // This is used to changing the profile pic, for submiting.
     console.log(values)
@@ -187,7 +168,6 @@ class PersonalProfile extends React.Component{
     this.closeChangeProfilePic();
 
   }
-
 
   // on click add friend starts here
   onClickSend = (e) =>{
@@ -220,9 +200,7 @@ class PersonalProfile extends React.Component{
       // This is used to delete friends
         // const username = this.props.match.params.username;
         // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
-      }
-
-
+    }
 
     renderProfilePic = () => {
 
@@ -462,38 +440,32 @@ class PersonalProfile extends React.Component{
       })
     }
 
-    onPostTabClick = () => {
-      this.props.history.push("/explore/"+ this.props.parameter.username+"/posts")
-
+    onCalendarTabClick = () => {
+      this.props.history.push("/explore/"+ this.props.parameter.username)
     }
 
-    onEventTabClick = () => {
-      this.props.history.push("/explore/"+this.props.parameter.username +"/events")
+    onPostTabClick = () => {
+      this.props.history.push("/explore/"+ this.props.parameter.username + "/posts")
     }
 
     onRenderTabs= () => {
+
       return (
         <div className = 'profile-tabContainer'>
           <div className = 'profile-buttonContainer'>
-            <div className = 'profile-description_tab profile-Tab-Calendar'>
-             Calendar
+            <div className = 'profile-description_tab profile-Tab'
+            onClick = {() => this.onCalendarTabClick()}
+            >
+            Calendar
             </div>
-
 
             <div className = 'profile-description_tab profile-Tab'
             onClick = {() => this.onPostTabClick()}
-            >
-               Posts
-            </div>
-
-            <div className = 'profile-description_tab profile-Tab'
-            onClick = {() => this.onEventTabClick()}
+            > Posts </div>
+            <div className = 'profile-description_tab profile-Tab-Event'
             > Events </div>
-            <div className = 'profile-slider-calendar'></div>
           </div>
           <div className = 'profile-tabPanel'>
-
-              <SocialCalendar {...this.props}/>
 
            </div>
 
@@ -501,72 +473,80 @@ class PersonalProfile extends React.Component{
       )
     }
 
+
+
+
+
+
+
   render(){
 
-      console.log(this.props)
-      console.log(this.state)
-      let followers = []
-      let following = []
+    console.log(this.props)
+    console.log(this.state)
+    let followers = []
+    let following = []
 
-      if (this.props.profile){
-        if(this.props.profile.get_followers){
-          followers = this.props.profile.get_followers
-        }
-        if(this.props.profile.get_following){
-          following = this.props.profile.get_following
-        }
-
+    if (this.props.profile){
+      if(this.props.profile.get_followers){
+        followers = this.props.profile.get_followers
+      }
+      if(this.props.profile.get_following){
+        following = this.props.profile.get_following
       }
 
-      return(
-        <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-
-
-
-        {this.renderProfilePic()}
-        {this.onRenderProfileInfo()}
-        {this.onRenderTabs()}
-          <Modal
-          visible = {this.state.showProfileEdit}
-          onCancel = {() => this.closeProfileEdit()}
-          >
-          This is for editing the profile information
-          </Modal>
-
-          <ChangeProfilePic
-             visible = {this.state.showProfilePicEdit}
-             onCancel = {this.closeChangeProfilePic}
-             onSubmit = {this.handleProfilePicChange}
-           />
-
-          <Modal
-          visible ={this.state.followerShow}
-          onCancel = {this.onFollowerCancel}
-          footer = {null}
-          >
-          <span className ='followWord'> Followers</span>
-          <FollowList follow = {followers} />
-          </Modal>
-
-
-
-          <Modal
-          visible = {this.state.followingShow}
-          onCancel = {this.onFollowingCancel}
-          footer = {null}
-          >
-          <span className = 'followWord'>Following</span>
-          <FollowList follow = {following}/>
-          </Modal>
-
-
-
-
-        </div>
-      )
-
     }
-    }
+
+
+    return (
+      <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
+
+
+
+      {this.renderProfilePic()}
+      {this.onRenderProfileInfo()}
+      {this.onRenderTabs()}
+        <Modal
+        visible = {this.state.showProfileEdit}
+        onCancel = {() => this.closeProfileEdit()}
+        >
+        This is for editing the profile information
+        </Modal>
+
+        <ChangeProfilePic
+           visible = {this.state.showProfilePicEdit}
+           onCancel = {this.closeChangeProfilePic}
+           onSubmit = {this.handleProfilePicChange}
+         />
+
+        <Modal
+        visible ={this.state.followerShow}
+        onCancel = {this.onFollowerCancel}
+        footer = {null}
+        >
+        <span className ='followWord'> Followers</span>
+        <FollowList follow = {followers} />
+        </Modal>
+
+
+
+        <Modal
+        visible = {this.state.followingShow}
+        onCancel = {this.onFollowingCancel}
+        footer = {null}
+        >
+        <span className = 'followWord'>Following</span>
+        <FollowList follow = {following}/>
+        </Modal>
+
+
+
+
+      </div>
+
+    )
+  }
+}
+
 
 const mapStateToProps = state => {
     return {
@@ -583,4 +563,5 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PersonalProfile);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalProfileEventList);

@@ -26,12 +26,16 @@ import SocialEventPage from './containers/SocialCalendarFolder/SocialEventPage/S
 import SocialCalCellPage from './containers/SocialCalendarFolder/SocialCalCellPage';
 import SocialCalCellModal from './containers/SocialCalendarFolder/SocialCalCellModal';
 import UserPostList from './containers/UserPostTabFolder/UserPostList';
-import TestPage from './components/testPage';
+import PersonalProfilePostList from './containers/UserPostTabFolder/PersonalProfilePostList';
+import PersonalProfileEventList from './containers/UserEventTabFolder/PersonalProfileEventList';
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
 
 // the way you fixed
+const Profile = () => <div>Youre on the Profile Tab</div>;
+const Comments = () => <div>Youre on the Comments Tab</div>;
+const Contact = () => <div>Youre on the Contact Tab</div>;
 
 
 class BaseRouter extends React.Component {
@@ -72,7 +76,6 @@ class BaseRouter extends React.Component {
 
 
         <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
-        <Route exact path = '/test'  render={(props) => <TestPage {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
         <Route exact path = '/signup/' component= {Signup} />
 
@@ -80,7 +83,8 @@ class BaseRouter extends React.Component {
         <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
         <Route exact path = '/explore/:username' render={(props) => <PersonalProfile parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-
+        <Route exact path = '/explore/:username/posts' render = {(props) => <PersonalProfilePostList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
+        <Route exact path = '/explore/:username/events' render = {(props) => <PersonalProfileEventList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
