@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
 import { DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
+import { AimOutlined, PictureOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
 
 
@@ -794,9 +794,16 @@ class DetailEditEventForm extends React.Component{
           />
       </div>
 
-
+      <div className = "noMap">
+          <div class="noMapFrame">
+          <PictureOutlined />
+          <br />
+          <span> No Map </span>
+          </div>
+      </div>
 
       </div>
+
 
 
 

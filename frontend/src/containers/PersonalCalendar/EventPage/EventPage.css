@@ -239,6 +239,7 @@
 
 
 
+
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic{
   /* background-color: red; */
 
@@ -263,6 +264,22 @@
 
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic .pictureFrame{
+  position: relative;
+  top: 28%;
+  font-size: 55px;
+  color: gainsboro;
+}
+
+.noMap{
+  width: 80%;
+  height: 350px;
+  border: 10px dashed gainsboro;
+  text-align: center;
+  margin-left: 100px;
+  margin-top: 200px;
+}
+
+.noMapFrame{
   position: relative;
   top: 28%;
   font-size: 55px;
@@ -356,10 +373,15 @@
   cursor: pointer;
   transition: 0.5s;
 }
+.editEventButtonContainer:hover{
+  background-color: whitesmoke;
+}
+
+
 
 
 .editEventBackButtonContainer{
-  background-color: red;
+  /* background-color: red; */
   border: 1px solid gainsboro;
   height: 50px;
   width: 50px;
@@ -369,9 +391,7 @@
   text-align: center;
   padding-top: 3px;
 }
-  .editEventBackButtonContainer:hover{
-    background-color: whitesmoke;
-  }
+
 
 .chatBox{
   margin-left: 75px;

@@ -146,7 +146,7 @@ class EventInfo extends React.Component{
   }
 
 
-  
+
 
   timeConvertFunction = (time) => {
     // This fucntion will take in a 1-24 hour time
@@ -534,21 +534,6 @@ class EventInfo extends React.Component{
 
     return(
       <div className = 'eventInfoContainer'>
-
-        <div>
-
-
-          <div
-          className = "editEventBackButtonContainer "
-          onClick = {() => this.onCancelEventClick()}>
-
-          <i class="fas fa-arrow-left"></i>
-
-          </div>
-        </div>
-
-
-
 
         <div className = 'eventInfoView' >
           <div className = 'topSectContainier'>
