@@ -146,18 +146,7 @@ class EventInfo extends React.Component{
   }
 
 
-  onEditClick = () => {
-    // This will activate the edit so that you can start editing events
-    this.setState({
-      edit: true
-    })
-  }
-
-  onCancelEventClick = () => {
-    this.setState({
-      edit: false
-    })
-  }
+  
 
   timeConvertFunction = (time) => {
     // This fucntion will take in a 1-24 hour time
@@ -932,40 +921,12 @@ class EventInfo extends React.Component{
             </Link>
           </div>
 
-          <div className = 'editEventButtonContainer'>
-          {
-            eventHostId === this.props.userId ?
 
-            <div
-
-            >
-
-
-
-
-               <div
-               onClick={() => this.onEditClick()}
-               >
-               <i class="fas fa-pen" ></i>
-
-               </div>
-
-
-
-            </div>
-
-            :
-
-            <div></div>
-
-          }
-
-          </div>
 
         </div>
 
       <DetailEditEventForm
-      // {...this.props}
+      {...this.props}
 
       info = {this.props.info}
       initialValues = {this.getInitialValue()}

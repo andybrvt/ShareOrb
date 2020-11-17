@@ -200,7 +200,7 @@ class DetailEditEventForm extends React.Component{
 
   onClose = () => {
     this.setState({
-      visibleModal: false,
+      visible: false,
     });
   };
 
@@ -562,7 +562,18 @@ class DetailEditEventForm extends React.Component{
   }
 
 
+  onEditClick = () => {
+    // This will activate the edit so that you can start editing events
+    this.setState({
+      visible: true
+    })
+  }
 
+  onCancelEventClick = () => {
+    this.setState({
+      visible: false
+    })
+  }
 
 
   render(){
@@ -574,6 +585,12 @@ class DetailEditEventForm extends React.Component{
 
     let eventType = ""
     let eventId = ""
+    let username = ""
+    let eventHostId = ""
+    if(this.props.info.host){
+      username = this.props.info.host.username
+      eventHostId = this.props.info.host.id
+    }
     if(this.props.friends){
       if(this.props.friends.length > 0){
         eventType = "shared"
@@ -590,10 +607,32 @@ class DetailEditEventForm extends React.Component{
     console.log(eventId)
 
     return(
+      <div>
+
+        <div className = 'editEventButtonContainer'>
+          {
+            eventHostId === this.props.userId ?
+
+            <div>
+              <div
+              onClick={() => this.onEditClick()}
+              >
+              <i class="fas fa-pen" ></i>
+              </div>
+            </div>
+
+            :
+
+            <div></div>
+
+          }
+
+        </div>
+
       <Drawer
           title="Edit Event"
-          width={650}
-          visible={this.props.visibleModal}
+          width={550}
+          visible={this.state.visible}
           onClose={this.onClose}
 
           bodyStyle={{ paddingBottom: 80 }}
@@ -758,7 +797,7 @@ class DetailEditEventForm extends React.Component{
 
   </form>
     </Drawer>
-
+    </div>
 
     )
   }
@@ -773,7 +812,6 @@ DetailEditEventForm = reduxForm({
 const selector = formValueSelector("detailEventEdit");
 
 export default connect(state => ({
-  visibleModal: selector(state, 'visibleModal'),
   edit: selector(state, 'edit'),
   title: selector(state, 'title'),
   friends: selector(state, 'friends'),
