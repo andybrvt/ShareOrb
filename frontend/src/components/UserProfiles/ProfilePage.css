@@ -218,15 +218,16 @@
 .profile-tabContainer .profile-buttonContainer{
 
   height: 60px;
-  width: 33.33%;
+  /* width: 33.33%; */
+  width: 100%;
   position: relative;
-  left: 33.33%;
+  /* left: 33.33%; */
   top: 2%;
   display: flex;
   text-align: center;
   /* margin-top: 10px; */
   /* background-color: red; */
-  padding-top: 30px;
+  padding-top: 20px;
   margin-bottom: 10px;
   /* padding-bottom: 5px; */
   }
@@ -245,7 +246,7 @@
   cursor: pointer;
   /* padding: 10px; */
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 25px;
   /* background-color: #ffffff; */
   /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
 }
@@ -256,13 +257,13 @@
   height: 100%;
   position: relative;
   /* float:none; */
-  border-bottom: 2px grey solid;
+  border-bottom: 3px grey solid;
   /* border-radius: 25px; */
   outline: none;
   cursor: pointer;
   /* padding: 10px; */
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 25px;
   /* background-color: #ffffff; */
   /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
 }
@@ -273,13 +274,13 @@
   height: 100%;
   position: relative;
   /* float:none; */
-  border-bottom: 2px grey solid;
+  border-bottom: 3px grey solid;
   /* border-radius: 25px; */
   outline: none;
   cursor: pointer;
   /* padding: 10px; */
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 25px;
   /* background-color: #ffffff; */
   /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
 }
@@ -290,13 +291,13 @@
   height: 100%;
   position: relative;
   /* float:none; */
-  border-bottom: 2px grey solid;
+  border-bottom: 3px grey solid;
   /* border-radius: 25px; */
   outline: none;
   cursor: pointer;
   /* padding: 10px; */
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 25px;
   /* background-color: #ffffff; */
   /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
 }

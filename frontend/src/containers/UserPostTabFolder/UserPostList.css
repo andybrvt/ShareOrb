@@ -1,0 +1,49 @@
+.postListTabContainer{
+  /* background-color: red; */
+  position: relative;
+
+}
+
+
+.postListContainer{
+  /* background-color: red; */
+  width: 86%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  align-content: center;
+  /* align-items: center; */
+  /* text-align: center; */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1px;
+}
+
+.postListContainer .postListSquare{
+  /* background-color: blue; */
+  flex-grow: 1;
+  /* flex-basis: 0; */
+  height: 400px;
+  /* padding-top: 100%; */
+  overflow: hidden;
+  width: 100%;
+  align-items: center;
+}
+
+.postListContainer .postListSquare .squarePic{
+  /* position: relative; */
+  /* object-fit: cover; */
+  /* width: 150%; */
+  /* flex-shrink: 0; */
+  min-height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.postListContainer .postListSquare .squarePicW{
+  min-height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

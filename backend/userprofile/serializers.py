@@ -68,6 +68,7 @@ class UserSerializer(serializers.ModelSerializer):
         followingList = []
         socialCalList = []
         friendList = []
+        postList = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followingList.append(userPerson)
@@ -83,10 +84,15 @@ class UserSerializer(serializers.ModelSerializer):
         for friends in data['friends']:
             friend = FollowUserSerializer(models.User.objects.get(id = friends)).data
             friendList.append(friend)
+
+        for posts in data['get_posts']:
+            post = MiniPostSerializer(models.Post.objects.get(id = posts)).data
+            postList.append(post)
         data['get_following'] = followingList
         data['get_followers'] = followerList
         data['get_socialCal'] = socialCalList
         data['friends']  = friendList
+        data['get_posts'] = postList
         return data
 
 
@@ -145,6 +151,19 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ImageModel
         fields = "__all__"
+
+class MiniPostSerializer(serializers.ModelSerializer):
+    # Mini version of the PostSerializer, this is used to limit the information
+    # sent and used
+    post_images = serializers.StringRelatedField(many = True)
+
+
+    class Meta:
+        model = models.Post
+        # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
+        fields = ('id', 'post_images')
+
+
 
 
 class PostSerializer(serializers.ModelSerializer):

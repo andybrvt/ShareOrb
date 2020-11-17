@@ -467,7 +467,10 @@ class PersonalProfilePostList extends React.Component{
             > Events </div>
           </div>
           <div className = 'profile-tabPanel'>
-            <UserPostList />
+            <UserPostList
+            posts = {this.props.profile.get_posts}
+            cells = {this.props.profile.get_socialCal}
+             />
 
            </div>
 
