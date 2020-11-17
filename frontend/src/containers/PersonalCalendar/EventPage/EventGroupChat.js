@@ -98,6 +98,10 @@ class EventGroupChat extends React.Component{
   if(this.props.inviteList){
     inviteList = this.props.inviteList
   }
+  let eventHostId="";
+  if(this.props.info.host){
+    eventHostId = this.props.info.host.id
+  }
 
     return(
 
@@ -134,7 +138,12 @@ class EventGroupChat extends React.Component{
 
 
         </div>
-    { inviteList.length > 0 ?
+
+      {/*item.host.id==this.props.id
+         (this.props.id==this.props.info.host.id)
+        */}
+
+    { ((inviteList.length > 0)||(eventHostId==this.props.id)) ?
 
       <div className = 'eventGroupChatContainer'>
 
@@ -172,7 +181,7 @@ class EventGroupChat extends React.Component{
               <div>{item.body}</div>
               <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
             </div>
-            
+
             </div>
 
           )}
