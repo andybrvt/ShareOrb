@@ -49,7 +49,7 @@ const renderField = (field) => {
     placeholder= {field.placeholder}
     style={{display:'inline-block'}}
     className = 'box'
-    maxLength = "35"
+    maxLength = "55"
     />
 
     </span>
@@ -62,6 +62,7 @@ const renderTextArea = (field) => {
   return (
     <TextArea
     {...field.input}
+    rows={4}
     type = {field.type}
     placeholder = {field.placeholder}
     />
@@ -654,7 +655,7 @@ class DetailEditEventForm extends React.Component{
 
               :
 
-              <div className = 'reduxButton'>
+              <div style={{float:'right', marginRight:'50px'}}>
               <Button
               onClick = {() => this.props.onDelete(eventId, eventType)}
               >
@@ -663,18 +664,19 @@ class DetailEditEventForm extends React.Component{
               <Button
               type = 'primary'
               onClick = {handleSubmit}
-              style = {{left: '10px', fontSize: '15px'}}
+              style = {{left: '20px', fontSize: '15px'}}
               disabled = {pristine || invalid || this.onRed()}
-              >Save</Button>
+              >Update</Button>
               </div>
 
              }</div>
 
 
     }>
-    <form style={{padding:'25px'}}>
+    <form className="hideXScroll" style={{padding:'10px'}}>
       <div className = 'reduxTitle'>
-        <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
+        <Button
+          style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
           {this.props.dayNum}
         </Button>
         <Field
@@ -706,13 +708,16 @@ class DetailEditEventForm extends React.Component{
                  onChange = {this.onStartDateChange}
                  type = 'date'
                />
-
+             {
+               /*
                <Field
                 name = 'endDate'
                 component = {this.renderEndDate}
                 onChange = {this.handleEndTimeChange}
                 type = 'date'
               />
+              */
+            }
 
 
              <Field

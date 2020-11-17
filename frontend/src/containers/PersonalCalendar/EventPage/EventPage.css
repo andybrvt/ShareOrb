@@ -341,6 +341,10 @@
   transition: 0.5s;
 }
 
+.hideXScroll{
+  overflow-x: hidden;
+}
+
 .editEventButtonContainer{
   /* background-color: red; */
   color:#1890ff;
