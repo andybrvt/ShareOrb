@@ -5,6 +5,15 @@ import {
   PlusOutlined,
   EyeOutlined,
   CalendarOutlined } from '@ant-design/icons';
+  import {
+      BrowserRouter as Router,
+      Switch,
+      Route,
+      Link,
+      useHistory,
+      useLocation,
+      useParams
+    } from "react-router-dom";
 // This will hold all the pictures and post that the user posted
 // This inludues day cells and then post as well. It will probally
 // be linked to the explore channel
@@ -44,10 +53,22 @@ class UserPostList extends React.Component{
         }
         if(renderList[i].get_socialCalItems){
           const image = renderList[i].coverPic
-          console.log(image)
+          const calUsername = renderList[i].socialCalUser.username
+          console.log(renderList[i].socialCaldate.split("-"))
+          const dateList = renderList[i].socialCaldate.split("-")
+          const year = dateList[0]
+          const month = dateList[1]
+          const day = dateList[2]
           boxes.push(
             <div className = "postListSquare">
+            <Link
+            to = {{
+              pathname :"/socialcal/"+calUsername+"/cell/"+year+"/"+month+"/"+day,
+              state: {pathname: this.props.location}
+            }}
+            >
             <EyeOutlined className = 'eyeClick'/>
+            </Link>
             <img
             src = {'http://127.0.0.1:8000'+image}
             className = "squarePic"

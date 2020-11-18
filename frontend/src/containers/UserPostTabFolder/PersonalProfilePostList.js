@@ -449,7 +449,7 @@ class PersonalProfilePostList extends React.Component{
     }
 
     onRenderTabs= () => {
-
+      const location = this.props.location.pathname
 
       return (
         <div className = 'profile-tabContainer'>
@@ -470,6 +470,7 @@ class PersonalProfilePostList extends React.Component{
             <UserPostList
             posts = {this.props.profile.get_posts}
             cells = {this.props.profile.get_socialCal}
+            location = {location}
              />
 
            </div>
@@ -490,6 +491,7 @@ class PersonalProfilePostList extends React.Component{
     console.log(this.state)
     let followers = []
     let following = []
+    let location = ""
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
@@ -500,6 +502,8 @@ class PersonalProfilePostList extends React.Component{
       }
 
     }
+
+
 
 
     return (
