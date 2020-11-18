@@ -98,8 +98,8 @@ export const FETCH_SOCIAL_CAL_CELL_PAGE = 'FETCH_SOCIAL_CAL_CELL_PAGE';
 export const SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE = 'SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE';
 export const SEND_SOCIAL_CAL_CELL_COMMENT = 'SEND_SOCIAL_CAL_CELL_COMMENT';
 export const SEND_SOCIAL_CAL_CELL_COMMENT_NEW = 'SEND_SOCIAL_CAL_CELL_COMMENT_NEW';
-// Even though these actions are for the social calendar but because the social calendar
-// is part of the profile page
+// THIS WILL HELP CLOSING THE SOICAL CAL CELL PAGE MORE SMOOTH
+export const CLOSE_SOCIAL_CAL_CELL_PAGE = 'CLOSE_SOCIAL_CAL_CELL_PAGE';
 
 // This will cover add events, join and leave events
 export const ADD_SOCIAL_EVENT_JOIN_LEAVE = 'ADD_SOCIAL_EVENT_JOIN_LEAVE';

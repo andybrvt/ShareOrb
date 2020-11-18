@@ -9,6 +9,7 @@ import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
 import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import { connect } from 'react-redux';
+import * as socialCalActions  from '../../store/actions/socialCalendar';
 
 
 class SocialCalCellPage extends React.Component{
@@ -91,6 +92,7 @@ class SocialCalCellPage extends React.Component{
 
   componentWillUnmount(){
     SocialCalCellPageWebSocketInstance.disconnect();
+    this.props.closeSocialCalCellPage();
   }
 
 
@@ -342,4 +344,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(SocialCalCellPage);
+const mapDispatchToProps = dispatch => {
+  return {
+    closeSocialCalCellPage: () => dispatch(socialCalActions.closeSocialCalCellPage())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SocialCalCellPage);

@@ -49,6 +49,22 @@ export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
   }
 }
 
+export const closeSocialCalCellPage = () => {
+  // When closing the page, it clears out all the infromation so transtioning will
+  // be more smooth
+  return {
+    type: actionTypes.CLOSE_SOCIAL_CAL_CELL_PAGE,
+    
+  }
+}
+
+
+
+
+
+
+// For social events
+
 export const addSocialEventJoinLeaveM = (socialEventList) => {
   return {
     type: actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M,

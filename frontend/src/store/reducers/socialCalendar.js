@@ -78,6 +78,17 @@ const sendSocialCalCellComments = (state, action) =>{
   })
 }
 
+
+const closeSocialCalCellPage = (state, action) => {
+
+  return updateObject(state, {
+    socialCalCellInfo: {}
+  })
+}
+
+
+
+//This is for social cal events
 const addSocialEventJoinLeaveM =(state, action) => {
   // IMPROVED
   return updateObject(state, {
@@ -145,6 +156,8 @@ const reducer = (state = initialState, action) => {
       return sendSocialCalCellComment(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW:
       return sendSocialCalCellComments(state, action)
+    case actionTypes.CLOSE_SOCIAL_CAL_CELL_PAGE:
+      return closeSocialCalCellPage(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M:
       return addSocialEventJoinLeaveM(state, action)
     case actionTypes.LOAD_SOCIAL_EVENT_INFO:
