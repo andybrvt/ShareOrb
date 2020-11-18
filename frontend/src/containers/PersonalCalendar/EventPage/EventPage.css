@@ -271,18 +271,20 @@
 }
 
 .noMap{
-  width: 80%;
+  width: 70%;
   height: 350px;
   border: 10px dashed gainsboro;
   text-align: center;
-  margin-left: 100px;
-  margin-top: 200px;
+  margin-left: 50px;
+  margin-top: 50px;
+
+
 }
 
 .noMapFrame{
   position: relative;
   top: 28%;
-  font-size: 55px;
+  font-size: 45px;
   color: gainsboro;
 }
 
@@ -358,8 +360,11 @@
   transition: 0.5s;
 }
 
-.hideXScroll{
+.hideScroll{
   overflow-x: hidden;
+  overflow-y: hidden;
+  height:100%;
+  width:100%;
 }
 
 .editEventButtonContainer{

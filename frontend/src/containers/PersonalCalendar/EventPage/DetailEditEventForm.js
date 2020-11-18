@@ -169,11 +169,11 @@ const renderStartTime = () => {
     console.log(field.meta)
     return (
       <span>
-      <Input style={{width:'50%',fontSize:'14px'}}
-      {...field.input}
-      type = {field.type}
-      placeholder= {field.placeholder}
-      className = 'box'/>
+        <Input style={{width:'50%',fontSize:'14px'}}
+        {...field.input}
+        type = {field.type}
+        placeholder= {field.placeholder}
+        className = 'box'/>
 
       </span>
     )
@@ -632,7 +632,7 @@ class DetailEditEventForm extends React.Component{
 
       <Drawer
           title="Edit Event"
-          width={550}
+          width={500}
           visible={this.state.visible}
           onClose={this.onClose}
 
@@ -672,144 +672,146 @@ class DetailEditEventForm extends React.Component{
              }</div>
 
 
-    }>
-    <form className="hideXScroll" style={{padding:'10px'}}>
-      <div className = 'reduxTitle'>
-        <Button
-          style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
-          {this.props.dayNum}
-        </Button>
-        <Field
-        name = 'title'
-        component= {renderField}
-        type= 'text'
-        placeholder = 'Title'
+           }>
+           <div class="hideScroll">
 
-        />
+            <div class = 'reduxTitle'>
+              <Button
+                style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
+                {this.props.dayNum}
+              </Button>
+              <Field
+              name = 'title'
+              component= {renderField}
+              type= 'text'
+              placeholder = 'Title'
 
-
-      </div>
-
-      <div style={{marginLeft:'50px', marginBottom:'15px'}}>
-        <Field
-        name = 'repeatCondition'
-        component = {renderRadioSelect}
-        onChange ={this.handleReoccuringChange}
-        />
-      </div>
-
-      <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
-        <div class="innerContainerPeople">
-          <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
-
-               <Field
-                 name = 'startDate'
-                 component = {renderStartDate}
-                 onChange = {this.onStartDateChange}
-                 type = 'date'
-               />
-             {
-               /*
-               <Field
-                name = 'endDate'
-                component = {this.renderEndDate}
-                onChange = {this.handleEndTimeChange}
-                type = 'date'
               />
-              */
-            }
 
 
-             <Field
-               style={{display: 'inline-block',float: 'left'}}
-               name = 'startTime'
-               component = {renderStartTimeSelect}
-               onChange = {this.handleStartTimeChange}
-               >
-               {renderStartTime()}
-             </Field>
+            </div>
 
-             <Field
-               style={{display: 'inline-block', marginRight:'15px'}}
-               name = 'endTime'
-               onChange = {this.handleEndTimeChange}
-               component = {renderStartTimeSelect}
-               >
-               {this.renderEndTimeSelect()}
-             </Field>
-        </div>
-      </div>
+            <div style={{marginLeft:'50px', marginBottom:'15px'}}>
+              <Field
+              name = 'repeatCondition'
+              component = {renderRadioSelect}
+              onChange ={this.handleReoccuringChange}
+              />
+            </div>
 
+            <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
+              <div class="innerContainerPeople">
+                <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
-
-      {/* need to implement redux form to people */}
-      <div>
-
-        <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
-        <Field
-        name = 'friends'
-        type='text'
-        onChange = {this.handleFriendChange}
-        component = {renderFriendSelect}
-        placeholder = 'Title'
-        >
-          {this.renderShareListSelect()}
-        </Field>
+                     <Field
+                       name = 'startDate'
+                       component = {renderStartDate}
+                       onChange = {this.onStartDateChange}
+                       type = 'date'
+                     />
+                   {
+                     /*
+                     <Field
+                      name = 'endDate'
+                      component = {this.renderEndDate}
+                      onChange = {this.handleEndTimeChange}
+                      type = 'date'
+                    />
+                    */
+                  }
 
 
-        {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
-      </div>
+                   <Field
+                     style={{display: 'inline-block',float: 'left'}}
+                     name = 'startTime'
+                     component = {renderStartTimeSelect}
+                     onChange = {this.handleStartTimeChange}
+                     >
+                     {renderStartTime()}
+                   </Field>
+
+                   <Field
+                     style={{display: 'inline-block', marginRight:'15px'}}
+                     name = 'endTime'
+                     onChange = {this.handleEndTimeChange}
+                     component = {renderStartTimeSelect}
+                     >
+                     {this.renderEndTimeSelect()}
+                   </Field>
+              </div>
+            </div>
 
 
-      <br />
-      <div className  = 'reduxContent'>
-      <i class="fas fa-align-justify" style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
 
-        <Field
-        name = 'content'
-        component= {renderTextArea}
-        type= 'text'
-        placeholder = 'Description'
-        />
-      </div>
+            {/* need to implement redux form to people */}
+            <div>
 
-
-      {/* location */}
-      <div style={{height:'70px'}} className = 'outerContainerPeople'>
-        <div class="innerContainerPeople">
-          <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
-          <Field
-            name = 'location'
-            placeholder="Location"
-            component= {renderLocationField}
-            type= 'text'
+              <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
+              <Field
+              name = 'friends'
+              type='text'
+              onChange = {this.handleFriendChange}
+              component = {renderFriendSelect}
+              placeholder = 'Title'
+              >
+                {this.renderShareListSelect()}
+              </Field>
 
 
-          />
-        <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
-          <Field
-              name = 'eventColor'
-              component = {renderEventColor}
-              type = 'text'
-          />
-      </div>
+              {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
+            </div>
 
-      <div className = "noMap">
-          <div class="noMapFrame">
-          <PictureOutlined />
-          <br />
-          <span> No Map </span>
+
+            <br />
+            <div className  = 'reduxContent'>
+            <i class="fas fa-align-justify" style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
+
+              <Field
+              name = 'content'
+              component= {renderTextArea}
+              type= 'text'
+              placeholder = 'Description'
+              />
+            </div>
+
+
+            {/* location */}
+            <div style={{height:'70px'}} className = 'outerContainerPeople'>
+              <div class="innerContainerPeople">
+                <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+                <Field
+                  name = 'location'
+                  placeholder="Location"
+                  component= {renderLocationField}
+                  type= 'text'
+
+
+                />
+              <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
+                <Field
+                    name = 'eventColor'
+                    component = {renderEventColor}
+                    type = 'text'
+                />
+            </div>
+
+            <div className = "noMap">
+                <div class="noMapFrame">
+                <PictureOutlined />
+                <br />
+                <span> No Location </span>
+                </div>
+            </div>
+
+            </div>
+
+
+
+
           </div>
-      </div>
+        </Drawer>
 
       </div>
-
-
-
-
-  </form>
-    </Drawer>
-    </div>
 
     )
   }
