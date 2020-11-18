@@ -5,7 +5,7 @@
 }
 
 
-.postListContainer{
+.postListTabContainer .postListContainer{
   /* background-color: red; */
   width: 86%;
   position: relative;
@@ -19,10 +19,12 @@
   /* text-align: center; */
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1px;
+  text-align: center;
 }
 
-.postListContainer .postListSquare{
+.postListTabContainer .postListContainer .postListSquare{
   /* background-color: blue; */
+  position: relative;
   flex-grow: 1;
   /* flex-basis: 0; */
   height: 400px;
@@ -30,9 +32,11 @@
   overflow: hidden;
   width: 100%;
   align-items: center;
+
 }
 
-.postListContainer .postListSquare .squarePic{
+
+.postListTabContainer .postListContainer .postListSquare .squarePic{
   /* position: relative; */
   /* object-fit: cover; */
   /* width: 150%; */
@@ -40,10 +44,35 @@
   min-height: 100%;
   width: 100%;
   object-fit: cover;
+
 }
 
-.postListContainer .postListSquare .squarePicW{
+.postListTabContainer .postListContainer .postListSquare:hover .squarePic{
+  filter: brightness(60%);
+
+}
+
+.postListTabContainer .postListContainer .postListSquare .squarePicW{
   min-height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.postListTabContainer .postListContainer .postListSquare .eyeClick{
+  position: absolute;
+  left: 45%;
+  /* transform: translateX(-50%); */
+  top: 45%;
+  color: transparent;
+  font-size: 50px;
+  z-index: 1;
+}
+
+.postListTabContainer .postListContainer .postListSquare .eyeClick:hover{
+  transform: scale(1.2);
+}
+
+.postListTabContainer .postListContainer .postListSquare:hover .eyeClick{
+  color: white;
+
 }

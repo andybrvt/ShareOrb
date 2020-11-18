@@ -1,5 +1,10 @@
 import React from 'react';
 import './UserPostList.css';
+import {
+  UserOutlined,
+  PlusOutlined,
+  EyeOutlined,
+  CalendarOutlined } from '@ant-design/icons';
 // This will hold all the pictures and post that the user posted
 // This inludues day cells and then post as well. It will probally
 // be linked to the explore channel
@@ -29,6 +34,7 @@ class UserPostList extends React.Component{
           console.log(imagesList[0])
           boxes.push(
             <div className = 'postListSquare'>
+              <EyeOutlined className = 'eyeClick'/>
               <img
               src = {'http://127.0.0.1:8000/media/'+imagesList[0]}
               className = "squarePic"
@@ -41,6 +47,7 @@ class UserPostList extends React.Component{
           console.log(image)
           boxes.push(
             <div className = "postListSquare">
+            <EyeOutlined className = 'eyeClick'/>
             <img
             src = {'http://127.0.0.1:8000'+image}
             className = "squarePic"
