@@ -35,6 +35,10 @@
 
 }
 
+.mapSize{
+  width:100px;
+}
+
 .eventCard{
   position: relative;
   overflow: hidden;
@@ -59,14 +63,15 @@
 .mapEventCard{
   position: relative;
   overflow: hidden;
-  width:400px;
-  height:375px;
+  width:450px;
+  height:450px;
   float:right;
-
+  padding:30px;
   margin-right: 50px;
   margin-bottom: 50px;
+  padding-bottom: 200px;
   background: white;
-
+  
   border-radius: 15px;
   box-shadow:
 

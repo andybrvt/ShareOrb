@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Avatar, Modal, message, notification, Statistic} from 'antd';
+import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic} from 'antd';
 import {PictureOutlined, CheckSquareTwoTone, EyeOutlined, DownloadOutlined, UserOutlined} from '@ant-design/icons';
 import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
@@ -720,7 +720,8 @@ class EventInfo extends React.Component{
             <div style={{ fontSize:'20px',display:'inline-block' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
-              <br/>
+              <Divider/>
+
               <div style={{marginTop:'20px'}} class="eventDetails">
                 <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-globe"></i>
                 Public Event
@@ -802,10 +803,13 @@ class EventInfo extends React.Component{
 
 
             </div>
-            <div class="eventCard mapEventCard" >
-
-
+            <div class="mapEventCard">
+              <p style={{fontSize:'20px'}}
+                className="eventDetails"> Location </p>
+              <span>
+                <Divider/>
                 <ReactBingmaps
+
                   bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
                   center = {[32.2226, 110.9747]}
                   boundary = {
@@ -823,6 +827,9 @@ class EventInfo extends React.Component{
                 }
                   >
                 </ReactBingmaps>
+                <Divider/>
+                <i class="fas fa-map-pin" style={{fontSize:'15px', color:'red'}}></i>
+              </span>
 
 
             </div>
