@@ -1,0 +1,181 @@
+/* The back grey part of the modal */
+.userPostModalBackground{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: hidden;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  /* background:red; */
+  z-index: 99;
+
+}
+
+
+/* The outter part of the modal  */
+.userPostModal{
+  position: fixed;
+  background: white;
+  /* height: 100; */
+  top: 10px;
+  left: 10%;
+  right: 10%;
+  z-index: 100;
+
+}
+
+
+
+/* This will hold the pictures of the modal */
+.postHolder{
+  display: flex;
+  height: 920px;
+}
+.postHolder .postPicturesCarousel{
+  width: 70%;
+  height: 100%;
+  background-color: red;
+}
+
+
+/* This will hold all the information on the right of the modal */
+.postModalRight{
+  /* background-color: blue; */
+  position: relative;
+  bottom: 0px;
+  height: 100%;
+  width: 30%;
+}
+.postModalRight .postNameTag{
+  /* background-color: green; */
+  height: 80px;
+  display: flex;
+  padding: 20px;
+
+}
+.postModalRight .postNameTag .postName{
+  position: relative;
+  left: 0%;
+  top: 0%;
+  font-size: 22px;
+  margin-left: 10px;
+}
+.postModalRight .postNameTag .postNameUsername{
+  position: relative;
+  left: 5px;
+  bottom: 5px;
+  font-weight: 500;
+}
+
+.postLikeCommentNum {
+  display: flex;
+  height: 40px;
+}
+.postLikeCommentNum .postLikeCommentText{
+  margin-left: 30px;
+  position: relative;
+  top: 8px;
+  height: 20px;
+}
+.postLikeCommentNum .postLikeAvatar{
+  position: relative;;
+  left: 35%;
+}
+
+
+.postLikeComment{
+  display: flex;
+}
+.postLikeComment .postLike{
+  height: 40px;
+  width: 50%;
+  border: 1px solid gainsboro;
+  border-left: none;
+  text-align: center;
+  margin-left: 2px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.postLikeComment .postLike:hover{
+  background-color: gainsboro;
+}
+.postLikeComment .postComment{
+  height: 40px;
+  width: 50%;
+  border: 1px solid gainsboro;
+  border-right: none;
+  text-align: center;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.postLikeComment .postComment:hover{
+  background-color: gainsboro;
+}
+
+
+/* This part is for the comment area of the post */
+.postCommentBoxBox{
+  height: 75.5%;
+  width: 450px;
+  overflow:hidden;
+  /* background-color: red; */
+}
+.postCommentBox{
+  height: 100%;
+  width: 460px;
+  padding-left: 20px;
+  overflow:auto;
+}
+
+.postCommentBox .postCommentItem {
+  /* background-color: red; */
+
+  margin-top: 10px;
+  padding: 5px;
+}
+.postCommentBox .postCommentItem .postCommentNameTag{
+  /* background-color: red; */
+  display: flex;
+}
+.postCommentBox .postCommentItem .postCommentNameTag .postCommentName{
+  display: flex;
+  margin-left: 10px;
+}
+
+.postCommentUsername{
+  font-weight: 400;
+}
+
+.postCommentDate{
+  /* background-color: red; */
+  position: absolute;
+  left: 80%;
+  /* top: 10%; */
+  height: 20px;
+  font-size: 10px;
+  padding-top: 5px;
+  margin-left: 4px;
+}
+
+.postCommentText{
+  /* background-color: red; */
+  position: relative;
+  width: 300px;
+  /* top: 50%; */
+  left: 12%;
+  top: -20px;
+}
+.postCommentBox .postCommentInput{
+  /* background-color: red; */
+  display: flex;
+  position: absolute;
+  left: 0%;
+  bottom: 15px;
+  margin-left: 20px;
+}
+.postBoxInput{
+  width: 360px;
+  margin-left: 10px;
+  font-size: 15px;
+}

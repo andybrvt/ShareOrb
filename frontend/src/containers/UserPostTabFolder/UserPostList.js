@@ -43,7 +43,14 @@ class UserPostList extends React.Component{
           console.log(imagesList[0])
           boxes.push(
             <div className = 'postListSquare'>
+              <Link
+              to = {{
+                pathname: "/post/admin/1",
+                state: {pathname: this.props.location}
+              }}
+              >
               <EyeOutlined className = 'eyeClick'/>
+              </Link>
               <img
               src = {'http://127.0.0.1:8000/media/'+imagesList[0]}
               className = "squarePic"
@@ -67,6 +74,17 @@ class UserPostList extends React.Component{
               state: {pathname: this.props.location}
             }}
             >
+
+            <i
+            style ={{
+              position: "absolute",
+              zIndex: 1,
+              right: "3%",
+              top: "3%",
+              fontSize: "30px",
+              color: "white"
+            }}
+            class="fas fa-calendar"></i>
             <EyeOutlined className = 'eyeClick'/>
             </Link>
             <img

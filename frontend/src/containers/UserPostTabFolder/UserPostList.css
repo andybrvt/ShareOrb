@@ -74,5 +74,8 @@
 
 .postListTabContainer .postListContainer .postListSquare:hover .eyeClick{
   color: white;
+}
 
+.postListTabContainer .postListContainer .postListSquare:hover .miniCalendar{
+  color: red;
 }

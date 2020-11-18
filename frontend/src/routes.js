@@ -28,14 +28,12 @@ import SocialCalCellModal from './containers/SocialCalendarFolder/SocialCalCellM
 import UserPostList from './containers/UserPostTabFolder/UserPostList';
 import PersonalProfilePostList from './containers/UserPostTabFolder/PersonalProfilePostList';
 import PersonalProfileEventList from './containers/UserEventTabFolder/PersonalProfileEventList';
+import UserPostModal from "./components/PostPageFolder/UserPostModal";
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
 
 // the way you fixed
-const Profile = () => <div>Youre on the Profile Tab</div>;
-const Comments = () => <div>Youre on the Comments Tab</div>;
-const Contact = () => <div>Youre on the Contact Tab</div>;
 
 
 class BaseRouter extends React.Component {
@@ -103,6 +101,7 @@ class BaseRouter extends React.Component {
         }
         <Route exact path = '/' component = {Login} />
         {location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {SocialCalCellModal} /> : null}
+        {location ? <Route exact path = '/post/:username/:postId' component = {UserPostModal} /> : null}
       </div>
 
 
