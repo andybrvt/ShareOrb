@@ -828,7 +828,8 @@ class EventInfo extends React.Component{
                   >
                 </ReactBingmaps>
                 <Divider/>
-                <i class="fas fa-map-pin" style={{fontSize:'15px', color:'red'}}></i>
+                <i class="fas fa-map-pin"
+                  style={{fontSize:'15px', color:'red'}}></i>
               </span>
 
 

@@ -7,7 +7,7 @@ import { DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'an
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { AimOutlined, PictureOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
-
+import { ReactBingmaps } from 'react-bingmaps';
 
 const { Option } = Select;
 
@@ -166,7 +166,6 @@ const renderStartTime = () => {
   }
 
   const renderLocationField = (field) => {
-    console.log(field.meta)
     return (
       <span>
         <Input style={{width:'50%',fontSize:'14px'}}
@@ -197,16 +196,24 @@ const renderStartTime = () => {
 class DetailEditEventForm extends React.Component{
 // This class will be similar to the redux edit event but will be more detailed
   // For detail comments on how redux forms work, check ReduxEditEventForm
-  state = { visible: false };
+  state = {
+    visible: false,
+    locationField:'Shanghai', };
 
   onClose = () => {
     this.setState({
       visible: false,
+
     });
   };
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  onInputChange = (event) => {
+            this.setState({ locationField: event.target.locationField })
+            console.log(this.state.locationField)
   }
 
   handleStartTimeChange = (event, value) => {
@@ -794,13 +801,44 @@ class DetailEditEventForm extends React.Component{
                     type = 'text'
                 />
             </div>
-
+            {/*
             <div className = "noMap">
                 <div class="noMapFrame">
                 <PictureOutlined />
                 <br />
                 <span> No Location </span>
                 </div>
+            </div>
+            */}
+            <div class="mapEventCard" style={{height:100, marginLeft:100, marginRight:-10, marginTop:100}}>
+              <p style={{fontSize:'20px'}}
+                className="eventDetails"> Location </p>
+              <span>
+
+                <ReactBingmaps
+
+                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                  center = {[32.2226, 110.9747]}
+                  boundary = {
+                  {
+                    "search":"Fremont, CA",
+                    "option":{
+                      entityType: 'PopulatedPlace'
+                    },
+                    "polygonStyle" :{
+                      fillColor: 'rgba(161,224,255,0.4)',
+                      strokeColor: '#a495b2',
+                      strokeThickness: 2
+                    }
+                  }
+                }
+                  >
+                </ReactBingmaps>
+
+
+              </span>
+
+
             </div>
 
             </div>
