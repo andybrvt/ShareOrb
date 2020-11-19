@@ -3,11 +3,12 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
+import { ReactBingmaps } from 'react-bingmaps';
 import { DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { AimOutlined, PictureOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
-import { ReactBingmaps } from 'react-bingmaps';
+
 
 const { Option } = Select;
 
@@ -810,11 +811,14 @@ class DetailEditEventForm extends React.Component{
                 </div>
             </div>
             */}
+            <div style={{marginBottom:'100px'}}></div>
+            start
+
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>
               <p style={{fontSize:'20px', color:'black'}}
                 className="eventDetails"> Location </p>
-              <div style={{height:'50px', width:'100px', float:'left'}}>
-              testsetetw
+              <div style={{height:'100px'}}>
+              {/*
               <ReactBingmaps
 
                 bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
@@ -834,6 +838,7 @@ class DetailEditEventForm extends React.Component{
               }
                 >
               </ReactBingmaps>
+              */}
               </div>
 
 

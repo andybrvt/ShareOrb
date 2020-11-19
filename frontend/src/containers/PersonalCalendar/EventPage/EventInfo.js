@@ -493,7 +493,7 @@ class EventInfo extends React.Component{
         content = this.props.info.content
       }
       if(this.props.info.start_time){
-        start_time = dateFns.format(new Date(this.props.info.start_time),'HH:mm aaaa')
+        start_time = dateFns.format(new Date(this.props.info.start_time),'h:mm a')
         date = dateFns.format(new Date(this.props.info.start_time), 'iii, MMMM dd, yyyy ')
         console.log(dateFns.format(new Date(this.props.info.start_time), 'HH:mm'))
         month = dateFns.format(new Date(this.props.info.start_time), 'MMM')
@@ -501,7 +501,7 @@ class EventInfo extends React.Component{
 
       }
       if(this.props.info.end_time){
-        end_time = dateFns.format(new Date(this.props.info.end_time), 'HH:mm aaaa')
+        end_time = dateFns.format(new Date(this.props.info.end_time), 'h:mm a')
       }
       if(this.props.info.color){
         color = this.props.info.color
@@ -723,14 +723,17 @@ class EventInfo extends React.Component{
               <Divider/>
 
               <div style={{marginTop:'20px'}} class="eventDetails">
-                <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-globe"></i>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
                 Public Event
                 <br/>
 
-                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-clock"></i>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
                 {date}
-                {start_time}-{end_time}
 
+                <br/>
+                <i style={{marginRight:'10px', marginTop:'10px', color:'#1890ff'}} class="fas fa-clock"></i>
+                {start_time} - {end_time}
+                <br/>
                 <div>
 
                    {
@@ -784,8 +787,8 @@ class EventInfo extends React.Component{
                      </div>
                    }
                 </div>
-                <i style={{marginRight:'15px', color:'#1890ff'}} class="fas fa-map-marker-alt"></i>
-                Tucson, Arizona
+                <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                {invited.length+1} people
                 <br/>
 
                 <br/>
@@ -807,7 +810,8 @@ class EventInfo extends React.Component{
               <p style={{fontSize:'20px'}}
                 className="eventDetails"> Location </p>
               <span>
-                <Divider/>
+                <Divider style={{marginTop:'-1px'}}/>
+
                 <ReactBingmaps
 
                   bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
@@ -827,9 +831,14 @@ class EventInfo extends React.Component{
                 }
                   >
                 </ReactBingmaps>
+
+                 {/*Saving api calls don't worry about maps*/}
                 <Divider/>
-                <i class="fas fa-map-pin"
-                  style={{fontSize:'15px', color:'red'}}></i>
+                  <i style={{marginRight:'15px', color:'#1890ff',
+                    fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+                  <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+                    Tucson, Arizona
+                  </p>
               </span>
 
 
