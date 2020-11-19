@@ -810,33 +810,32 @@ class DetailEditEventForm extends React.Component{
                 </div>
             </div>
             */}
-            <div class="mapEventCard" style={{height:100, marginLeft:100, marginRight:-10, marginTop:100}}>
-              <p style={{fontSize:'20px'}}
+            <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>
+              <p style={{fontSize:'20px', color:'black'}}
                 className="eventDetails"> Location </p>
-              <span>
+              <div style={{height:'50px', width:'100px', float:'left'}}>
+              testsetetw
+              <ReactBingmaps
 
-                <ReactBingmaps
-
-                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                  center = {[32.2226, 110.9747]}
-                  boundary = {
-                  {
-                    "search":"Fremont, CA",
-                    "option":{
-                      entityType: 'PopulatedPlace'
-                    },
-                    "polygonStyle" :{
-                      fillColor: 'rgba(161,224,255,0.4)',
-                      strokeColor: '#a495b2',
-                      strokeThickness: 2
-                    }
+                bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                center = {[32.2226, 110.9747]}
+                boundary = {
+                {
+                  "search":"Fremont, CA",
+                  "option":{
+                    entityType: 'PopulatedPlace'
+                  },
+                  "polygonStyle" :{
+                    fillColor: 'rgba(161,224,255,0.4)',
+                    strokeColor: '#a495b2',
+                    strokeThickness: 2
                   }
                 }
-                  >
-                </ReactBingmaps>
+              }
+                >
+              </ReactBingmaps>
+              </div>
 
-
-              </span>
 
 
             </div>
