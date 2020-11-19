@@ -156,12 +156,12 @@ class MiniPostSerializer(serializers.ModelSerializer):
     # Mini version of the PostSerializer, this is used to limit the information
     # sent and used
     post_images = serializers.StringRelatedField(many = True)
-
+    user = serializers.StringRelatedField(many = False)
 
     class Meta:
         model = models.Post
         # fields = ('id', 'caption', 'created_at', 'updated_at','image', 'like_count','like_condition','user')
-        fields = ('id', 'post_images')
+        fields = ('id', 'post_images', 'user')
 
 
 

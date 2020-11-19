@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-
+// THESE ACITONS ARE FOR THE POST ON THE NEWSFEED
 export const loadPosts = post => {
   console.log(post)
   // The arguments that will be coming it in will be a
@@ -38,5 +38,15 @@ export const deletePost = post => {
   return {
     type: actionTypes.DELETE_POST,
     postId: post.postId
+  }
+}
+
+
+
+// THESE ACTIONS FOR THE INDIVIDUAL POST PAGES
+export const loadPost = postObj => {
+  return {
+    type: actionTypes.LOAD_POST,
+    postObj: postObj
   }
 }

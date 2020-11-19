@@ -2,7 +2,11 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
+  //Posts will be for all the post in the newsfeed
   posts: [],
+
+  //Post will just be the individual post it self when you open up the
+  // post page
 }
 
 const loadPosts = (state, action) => {
@@ -86,6 +90,15 @@ const deletePost = (state, action) => {
 }
 
 
+
+// THESE FUNCTIONS WILL BE USED FOR THE POST PAGE
+const loadPost =(state, action) => {
+  return updateObject(state, {
+    post: action.postObj
+  })
+}
+
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.LOAD_POSTS:
@@ -98,6 +111,8 @@ const reducer = (state = initialState, action) => {
       return addPostComment(state, action);
     case actionTypes.DELETE_POST:
       return deletePost(state, action);
+    case actionTypes.LOAD_POST:
+      return loadPost(state, action);
     default:
       return state;
   }

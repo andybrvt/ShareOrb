@@ -40,12 +40,14 @@ class UserPostList extends React.Component{
       for (let i = 0; i< renderList.length; i++ ){
         if(renderList[i].post_images){
           let imagesList = renderList[i].post_images
-          console.log(imagesList[0])
+          console.log(renderList[i])
+          const postId = renderList[i].id
+          const postUser = renderList[i].user
           boxes.push(
             <div className = 'postListSquare'>
               <Link
               to = {{
-                pathname: "/post/admin/1",
+                pathname: "/post/"+postUser+"/"+postId,
                 state: {pathname: this.props.location}
               }}
               >

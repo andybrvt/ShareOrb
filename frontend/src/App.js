@@ -14,6 +14,7 @@ import ExploreWebSocketInstance from './exploreWebsocket';
 import EventPageWebSocketInstance from './eventPageWebsocket';
 import SocialEventPageWebSocketInstance from './socialEventPageWebsocket';
 import SocialCalCellPageWebSocketInstance from './socialCalCellWebsocket';
+import UserPostPageWebSocketInstance from './UserPostPageWebsocket';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -85,6 +86,10 @@ class App extends Component {
       this.props.sendSocialCalCellComments.bind(this),
       this.props.addSocialEventJoinLeaveM.bind(this)
     )
+
+    UserPostPageWebSocketInstance.addCallbacks(
+      this.props.loadPost.bind(this)
+    )
   }
 
 //the map state to props allows us to get the state and then
@@ -153,6 +158,8 @@ const mapDispatchToProps = dispatch => {
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
     deletePost: postId => dispatch(newsfeedActions.deletePost(postId)),
+
+    loadPost: postObj => dispatch(newsfeedActions.loadPost(postObj)),
 
     loadProfile: profile => dispatch(exploreActions.loadProfile(profile)),
     addFollowerUnfollower: followObject => dispatch(exploreActions.addFollowerUnfollower(followObject)),

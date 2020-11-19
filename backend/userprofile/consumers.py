@@ -833,3 +833,43 @@ class ExploreConsumer(JsonWebsocketConsumer):
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)
+
+
+
+#  This consumer is for the post page alone
+class UserPostConsumer(JsonWebsocketConsumer):
+    #THIS IS USED FOR THE ALL THE FUNCTION OF THE POST PAGE SUCH AS
+    # LIKING COMMENTING, CLIPPING AND SUCH LIKE THAT
+
+    def fetch_user_post_info(self, data):
+        post = get_object_or_404(Post, id = data['postId'])
+        serializedPost = PostSerializer(post).data
+        content = {
+            'command': "user_post",
+            'post': serializedPost
+        }
+
+        self.send_json(content)
+
+
+    def connect(self):
+        print("connect")
+        self.postUser = self.scope['url_route']['kwargs']['user']
+        self.postId = self.scope['url_route']['kwargs']['postId']
+        grp = 'post_'+self.postUser+'_'+self.postId
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        print("disconnect")
+        self.postUser = self.scope['url_route']['kwargs']['user']
+        self.postId = self.scope['url_route']['kwargs']['postId']
+        grp = 'post_'+self.postUser+'_'+self.postId
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data=None, bytes_data=None, **kwargs):
+        data = json.loads(text_data)
+        print(data)
+        if data['command'] == "fetch_user_post_info":
+            self.fetch_user_post_info(data)

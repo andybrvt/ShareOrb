@@ -59,6 +59,10 @@ export const CLOSE_ACCEPT_UNSHARE_MODAL = 'CLOSE_ACCEPT_UNSHARE_MODAL';
 export const UPDATE_EVENT_PAGE = "UPDATE_EVENT_PAGE";
 export const UPDATE_EVENT_BACKGROUND = "UPDATE_EVENT_BACKGROUND";
 
+
+
+// fIGURE OUT A BETTER WAY TO REDO THIS
+// This is for the newsfeed
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 export const UNADD_POST_LIKE = 'UNADD_POST_LIKE';
@@ -66,6 +70,8 @@ export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
 
 
+// THIS IS FOR THE POST PAGE IT SELF
+export const LOAD_POST = 'LOAD_POST';
 
 // so adding to follower you will add it to the person getting the following
 // add following would be to the person that is doing the following
