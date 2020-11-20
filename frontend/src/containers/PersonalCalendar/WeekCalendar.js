@@ -1135,17 +1135,13 @@ class WeekCalendar extends React.Component{
           <div className = 'weekCalendar'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             <div style={{display: 'inline-block'}}>
-
               {this.renderHeader()}
             </div>
-
             <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
-
               <CalendarViewDropDown
               calType = "week"
               history = {this.props.history}
               matchPara = {this.props.parameter} />
-
             </div>
             {this.renderDays()}
           </div>
@@ -1169,28 +1165,22 @@ class WeekCalendar extends React.Component{
 
 
           <div className = 'miniCalContainer'>
-
-
-
-
             <Button
-            type="primary"
-            className = 'miniEventSyncButton'
-            onClick = {this.onAddEvent}>
-            Create Event
+              type="primary"
+              className = 'miniEventSyncButton'
+              onClick = {this.onAddEvent}>
+              Create Event
             </Button>
             <MiniCalendar {...this.props}/>
             <Button
-            style={{marginTop:'40px'}}
-            type = 'primary'
-            className = 'miniEventSyncButton'
-            onClick = {this.openEventSyncModal}>
-              Event Sync
+              style={{marginTop:'40px'}}
+              type = 'primary'
+              className = 'miniEventSyncButton'
+              onClick = {this.openEventSyncModal}>
+                Event Sync
             </Button>
             <div className = 'timeLayerCon'>
               list of people to be added!
-
-
             </div>
           </div>
 

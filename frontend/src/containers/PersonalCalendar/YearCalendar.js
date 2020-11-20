@@ -257,31 +257,24 @@ class YearCalendar extends React.Component{
             </div>
           </div>
         </div>
-        <div
-        style = {{
-          position: 'relative',
-          left: '-55px'
-        }}
-         className = 'miniCalContainer'>
-        <Button
-        // type = "primary"
-        className = 'addEventButton'
-        onClick={() => this.props.openDrawer()}>
-          Add Event
-        </Button>
+        <div className = 'miniCalContainer'>
+          <Button
+            type="primary"
+            className = 'miniEventSyncButton'
+            onClick = {this.onAddEvent}>
+            Create Event
+          </Button>
           <MiniCalendar {...this.props}/>
           <Button
-          type = 'primary'
-          className = 'miniEventSyncButton'
-          onClick = {this.openEventSyncModal}>
-            Event Sync
+            style={{marginTop:'40px'}}
+            type = 'primary'
+            className = 'miniEventSyncButton'
+            onClick = {this.openEventSyncModal}>
+              Event Sync
           </Button>
-
-          <CalendarViewDropDown
-          calType = "year"
-          history = {this.props.history}
-          matchPara = {this.props.parameter}
-          />
+          <div className = 'timeLayerCon'>
+            list of people to be added!
+          </div>
         </div>
       </div>
     )

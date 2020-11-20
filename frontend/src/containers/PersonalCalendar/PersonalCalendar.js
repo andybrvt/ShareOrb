@@ -564,42 +564,24 @@ class PersonalCalendar extends React.Component{
           <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
           <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
         </div>
-        <div
-        style = {{
-          position: 'relative',
-          left: '-65px'
-      }}
-        className = 'miniCalContainer'>
+        <div className = 'miniCalContainer'>
           <Button
-          // type = "primary"
-          className = 'addEventButton'
-          onClick={() => this.props.openDrawer()}>
-            Add Event
+            type="primary"
+            className = 'miniEventSyncButton'
+            onClick = {this.onAddEvent}>
+            Create Event
           </Button>
-        <MiniCalendar {...this.props}/>
-        <Button
-        type = 'primary'
-        className = 'miniEventSyncButton'
-        onClick = {this.openEventSyncModal}>
-          Event Sync
-        </Button>
-        <div className = 'timeLayerCon'>
+          <MiniCalendar {...this.props}/>
           <Button
-          type = "primary"
-          // shape = "round"
-          className = 'yearButton'
-          onClick = {this.onYearClick}>
-          Year
+            style={{marginTop:'40px'}}
+            type = 'primary'
+            className = 'miniEventSyncButton'
+            onClick = {this.openEventSyncModal}>
+              Event Sync
           </Button>
-
-          <CalendarViewDropDown
-          calType = "month"
-          history = {this.props.history}
-          matchPara = {this.props.parameter}
-          />
-        </div>
-
-
+          <div className = 'timeLayerCon'>
+            list of people to be added!
+          </div>
         </div>
         </div>
     )

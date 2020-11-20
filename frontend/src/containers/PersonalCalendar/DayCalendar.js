@@ -311,16 +311,7 @@ class DayCalendar extends React.Component{
         const startHourDay = dateFns.startOfDay(date);
         let hour = startHourDay;
         hourHour = hour
-      <Popover trigger="click"  placement="right"
-        //onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
-        onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
-        <EditEventPopUp
-        isVisible = {this.props.showModal}
-        close = {() => this.props.closeModal()}
-        dayNum={dateFns.format(cloneDay, 'd')}
 
-        />
-        </div>}>
 
 
 
@@ -335,6 +326,7 @@ class DayCalendar extends React.Component{
             // onClick = {() => this.onHourClick(cloneHour)}
             >
             </div>
+
 
       )
       toDoStuff = []
@@ -502,6 +494,7 @@ class DayCalendar extends React.Component{
   }
 
   render() {
+
     console.log(this.props)
     console.log(this.props.currentDate)
     return (
@@ -515,9 +508,18 @@ class DayCalendar extends React.Component{
         <div className ='mainCalContainer'>
 
           <div className = "weekCalendar">
-          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-          {this.renderHeader()}
-          {this.renderDays()}
+            <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+            <div style={{padding:'30px'}}>
+              <div style={{display: 'inline-block'}}>
+                {this.renderHeader()}
+              </div>
+              <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+                <CalendarViewDropDown
+                calType = "week"
+                history = {this.props.history}
+                matchPara = {this.props.parameter} />
+              </div>
+            </div>
           </div>
           <div className = 'testBox'>
           <div className = 'dayFlex-Container'>
@@ -538,47 +540,22 @@ class DayCalendar extends React.Component{
 
 
           <div className = 'miniCalContainer'>
-          <Button
-           // type="primary"
-           className = 'addEventButton'
-           onClick = {this.onOpenEvent} >
-            Add Event
-          </Button>
+            <Button
+              type="primary"
+              className = 'miniEventSyncButton'
+              onClick = {this.onAddEvent}>
+              Create Event
+            </Button>
             <MiniCalendar {...this.props}/>
             <Button
-             type = 'primary'
-             className = 'miniEventSyncButton'
-            onClick = {this.openEventSyncModal}>
-              Event Sync
+              style={{marginTop:'40px'}}
+              type = 'primary'
+              className = 'miniEventSyncButton'
+              onClick = {this.openEventSyncModal}>
+                Event Sync
             </Button>
             <div className = 'timeLayerCon'>
-            <Button
-            type="primary"
-            // shape="round"
-            className = 'yearButton'
-            onClick = {this.onYearClick}>
-            Year
-            </Button>
-            <Button
-            type="primary"
-            // shape="round"
-            className = 'monthButton'
-            onClick = {this.onMonthClick}>
-            Month
-            </Button>
-            <Button
-            type="primary"
-            // shape="round"
-            className = 'weekButton'
-            onClick = {this.onWeekClick}>
-            Week
-            </Button>
-            <CalendarViewDropDown
-            calType = "day"
-            history = {this.props.history}
-            matchPara = {this.props.parameter}
-            curDate = {this.props.currentDate}
-            />
+              list of people to be added!
             </div>
           </div>
       </div>
