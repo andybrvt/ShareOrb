@@ -82,8 +82,15 @@ class WebSocketUserPostPage{
     })
   }
 
-  sendUserPostComment(){
-    console.log("send comments")
+  sendUserPostComment(curUser, comment, postId){
+    console.log(comment)
+    // curUser will be the person commenting
+    this.sendUserPostInfo({
+      command: "send_user_post_comment",
+      curUser: curUser,
+      comment: comment,
+      postId: postId
+    })
   }
 
 
@@ -109,16 +116,26 @@ class WebSocketUserPostPage{
       this.callbacks['send_user_post_like_unlike'](likeList)
 
     }
+    if(command === "send_user_post_comment"){
+
+      // Add in the comments for the user post
+      const postComment = parsedData.postComment
+
+      // START HERE TOMORROW MORNING
+      this.callbacks['send_user_post_comment'](postComment)
+    }
 
 
   }
 
   addCallbacks(
     fetchUserPostInfo,
-    sendUserPostLikeUnlike
+    sendUserPostLikeUnlike,
+    sendUserPostComment
   ){
     this.callbacks['fetch_user_post_info'] = fetchUserPostInfo
     this.callbacks['send_user_post_like_unlike'] = sendUserPostLikeUnlike
+    this.callbacks['send_user_post_comment'] = sendUserPostComment
   }
 
   sendUserPostInfo(data){

@@ -251,7 +251,13 @@ class UserPostPage extends React.Component{
               <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
                Comment </div>
               </div>
-              <UserPostComments />
+              <UserPostComments
+
+              curUser = {this.props.curId}
+              postId = {this.props.match.params.postId}
+              items = {userPostComments}
+              profilePic = {this.props.curProfilePic}
+               />
 
 
 
@@ -265,7 +271,8 @@ class UserPostPage extends React.Component{
 const mapStateToProps = state => {
   return {
     post: state.newsfeed.post,
-    curId: state.auth.id
+    curId: state.auth.id,
+    curProfilePic: state.auth.profilePic
   }
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import './UserPostPage.css';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
+import UserPostPageWebSocketInstance from '../../UserPostPageWebsocket'
+import * as dateFns from 'date-fns';
 
 
 class UserPostComments extends React.Component{
@@ -10,7 +12,55 @@ class UserPostComments extends React.Component{
   }
 
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  handleSubmit = e => {
+
+    if(this.state.comment !== ''){
+      UserPostPageWebSocketInstance.sendUserPostComment(
+        this.props.curUser,
+        this.state.comment,
+        this.props.postId
+      )
+
+      this.setState({comment: ''})
+    }
+  }
+
+  handleChange = e => {
+    this.setState({
+      comment: e.target.value
+    })
+  }
+
+  renderTimestamp = timestamp =>{
+    console.log(timestamp)
+    let prefix = '';
+    console.log(new Date().getTime())
+    console.log(new Date(timestamp).getTime())
+    const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    console.log(timeDiff)
+    if (timeDiff < 1 ) {
+      prefix = `Just now`;
+    } else if (timeDiff < 60 && timeDiff >= 1 ) {
+      prefix = `${timeDiff} minutes ago`;
+    }else if (timeDiff < 24*60 && timeDiff > 60) {
+      prefix = `${Math.round(timeDiff/60)} hours ago`;
+    } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
+      prefix = `${Math.round(timeDiff/(60*24))} days ago`;
+    } else {
+        prefix = `${dateFns.format(new Date(timestamp), "MMMM d, yyyy")}`;
+    }
+
+    return prefix;
+  }
+
+
   render(){
+
+    console.log(this.props)
     return(
       <div className = "postCommentBoxBox">
         <div className = 'postCommentBox'>

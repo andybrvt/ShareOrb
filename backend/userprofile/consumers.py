@@ -870,7 +870,7 @@ class UserPostConsumer(JsonWebsocketConsumer):
         content = {
             'command': 'send_user_post_like_unlike',
             'likeList': likeList,
-            'recipeint': recipient,
+            'recipient': recipient,
         }
 
         self.send_info_user_post(content)
@@ -892,7 +892,30 @@ class UserPostConsumer(JsonWebsocketConsumer):
         content = {
             'command': 'send_user_post_like_unlike',
             'likeList': likeList,
-            'recipeint': recipient,
+            'recipient': recipient,
+        }
+
+        self.send_info_user_post(content)
+
+    def send_user_post_comment(self, data):
+        # Similar to that of the social cal cell comment
+        post = get_object_or_404(Post, id = data['postId'])
+
+        personComment = get_object_or_404(User, id = data['curUser'])
+        postComment = Comment.objects.create(
+            post = post,
+            commentUser = personComment,
+            body = data['comment']
+        )
+
+        serializedPostComment = CommentSerializer(postComment).data
+        username = post.user.username
+        recipient = username+"_"+str(data['postId'])
+
+        content = {
+            'command': 'send_user_post_comment',
+            'postComment': serializedPostComment,
+            'recipient': recipient
         }
 
         self.send_info_user_post(content)
@@ -900,7 +923,7 @@ class UserPostConsumer(JsonWebsocketConsumer):
     def send_info_user_post(self, userPostObj):
         # This will send information ot the channel layer then intot he front end
         channel_layer = get_channel_layer()
-        channel_recipient = userPostObj['recipeint']
+        channel_recipient = userPostObj['recipient']
         channel = "post_"+channel_recipient
 
         async_to_sync(self.channel_layer.group_send)(
@@ -937,6 +960,8 @@ class UserPostConsumer(JsonWebsocketConsumer):
             self.send_user_post_like(data)
         if data['command'] == 'send_user_post_unlike':
             self.send_user_post_unlike(data)
+        if data['command'] == 'send_user_post_comment':
+            self.send_user_post_comment(data)
 
     def new_user_post_action(self, action):
         userPostObj = action['userPostObj']

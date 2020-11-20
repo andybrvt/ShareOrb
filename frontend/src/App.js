@@ -89,7 +89,8 @@ class App extends Component {
 
     UserPostPageWebSocketInstance.addCallbacks(
       this.props.loadPost.bind(this),
-      this.props.sendUserPostLikeUnlike.bind(this)
+      this.props.sendUserPostLikeUnlike.bind(this),
+      this.props.sendUserPostComment.bind(this)
     )
   }
 
@@ -162,6 +163,7 @@ const mapDispatchToProps = dispatch => {
 
     loadPost: postObj => dispatch(newsfeedActions.loadPost(postObj)),
     sendUserPostLikeUnlike: likeList => dispatch(newsfeedActions.sendUserPostLikeUnlike(likeList)),
+    sendUserPostComment: commentObj => dispatch(newsfeedActions.sendUserPostComment(commentObj)),
 
     loadProfile: profile => dispatch(exploreActions.loadProfile(profile)),
     addFollowerUnfollower: followObject => dispatch(exploreActions.addFollowerUnfollower(followObject)),

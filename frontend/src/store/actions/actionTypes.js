@@ -74,7 +74,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const LOAD_POST = 'LOAD_POST';
 export const CLOSE_POST = 'CLOSE_POST';
 export const SEND_USER_POST_LIKE_UNLIKE = 'SEND_USER_POST_LIKE_UNLIKE';
-
+export const SEND_USER_POST_COMMENT = 'SEND_USER_POST_COMMENT';
 // so adding to follower you will add it to the person getting the following
 // add following would be to the person that is doing the following
 

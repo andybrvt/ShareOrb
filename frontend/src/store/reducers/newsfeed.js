@@ -114,6 +114,15 @@ const sendUserPostLikeUnlike =(state, action) => {
   })
 }
 
+const sendUserPostComment = (state, action) => {
+  return updateObject(state, {
+    post: {
+      ...state.post,
+      post_comments: [...state.post.post_comments, action.commentObj]
+    }
+  })
+}
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -135,6 +144,9 @@ const reducer = (state = initialState, action) => {
       return closePost(state, action);
     case actionTypes.SEND_USER_POST_LIKE_UNLIKE:
       return sendUserPostLikeUnlike(state, action);
+    case actionTypes.SEND_USER_POST_COMMENT:
+      return sendUserPostComment(state, action);
+
 
     default:
       return state;

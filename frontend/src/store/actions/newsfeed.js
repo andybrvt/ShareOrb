@@ -64,3 +64,10 @@ export const sendUserPostLikeUnlike = (likeList) => {
     likeList: likeList
   }
 }
+
+export const sendUserPostComment = (commentObj) => {
+  return {
+    type: actionTypes.SEND_USER_POST_COMMENT,
+    commentObj: commentObj
+  }
+}
