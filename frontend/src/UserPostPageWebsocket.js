@@ -62,8 +62,14 @@ class WebSocketUserPostPage{
     })
   }
 
-  sendUserPostLike (){
+  sendUserPostLike (personLike, postId){
     console.log("send like")
+
+    this.sendUserPostInfo({
+      command: "send_user_post_like",
+      personLike: personLike,
+      postId: postId
+    })
   }
 
   sendUserPostUnlike(){

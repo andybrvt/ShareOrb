@@ -851,6 +851,27 @@ class UserPostConsumer(JsonWebsocketConsumer):
 
         self.send_json(content)
 
+    def send_user_post_like(self, data):
+        post = get_object_or_404(Post, id = data['postId'])
+        personLike = get_object_or_404(User, id = data['personLike'])
+
+
+        post.people_like.add(personLike)
+        post.save()
+
+
+        serializedPost = PostSerializer(post).data
+        likeList = serializer['people_like']
+
+        username = serializedPost['user']['username']
+
+        recipient = username+"_"
+
+        content = {
+            'command': 'send_user_post_like_unlike',
+            'likeList': likeList,
+            'recipeint': recipient,
+        }
 
     def connect(self):
         print("connect")
@@ -873,3 +894,5 @@ class UserPostConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == "fetch_user_post_info":
             self.fetch_user_post_info(data)
+        if data['command'] == 'send_user_post_like':
+            self.send_user_post_like(data)

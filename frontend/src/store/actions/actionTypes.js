@@ -72,6 +72,7 @@ export const DELETE_POST = 'DELETE_POST';
 
 // THIS IS FOR THE POST PAGE IT SELF
 export const LOAD_POST = 'LOAD_POST';
+export const CLOSE_POST = 'CLOSE_POST';
 
 // so adding to follower you will add it to the person getting the following
 // add following would be to the person that is doing the following

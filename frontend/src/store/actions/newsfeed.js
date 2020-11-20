@@ -50,3 +50,10 @@ export const loadPost = postObj => {
     postObj: postObj
   }
 }
+
+export const closePost = () => {
+  return {
+    type: actionTypes.CLOSE_POST,
+
+  }
+}

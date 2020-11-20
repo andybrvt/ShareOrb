@@ -7,6 +7,7 @@ const initialState = {
 
   //Post will just be the individual post it self when you open up the
   // post page
+  post: {}
 }
 
 const loadPosts = (state, action) => {
@@ -98,6 +99,12 @@ const loadPost =(state, action) => {
   })
 }
 
+const closePost = (state, action) => {
+  return updateObject(state, {
+    post: {}
+  })
+}
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -113,6 +120,8 @@ const reducer = (state = initialState, action) => {
       return deletePost(state, action);
     case actionTypes.LOAD_POST:
       return loadPost(state, action);
+    case actionTypes.CLOSE_POST:
+      return closePost(state, action);
     default:
       return state;
   }

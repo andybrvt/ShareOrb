@@ -78,8 +78,12 @@ class Post(models.Model):
     caption = models.CharField(max_length=1000, default = 'caption')
     created_at = models.DateTimeField(default = timezone.now, blank = False)
     updated_at = models.DateTimeField(auto_now_add=True)
+
+    # Delete these two
     like_count = models.IntegerField(default=0, blank = True)
     like_condition = models.BooleanField(default=False, db_index=True)
+
+
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'likeUser', blank = True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'postUser', on_delete=models.CASCADE)
     # comments = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name = 'postComments', blank=True, null=True)
