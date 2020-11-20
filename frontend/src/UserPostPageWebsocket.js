@@ -72,8 +72,14 @@ class WebSocketUserPostPage{
     })
   }
 
-  sendUserPostUnlike(){
+  sendUserPostUnlike(personUnlike, postId){
     console.log("send unlike")
+
+    this.sendUserPostInfo({
+      command: "send_user_post_unlike",
+      personUnlike: personUnlike,
+      postId: postId
+    })
   }
 
   sendUserPostComment(){

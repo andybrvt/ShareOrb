@@ -109,6 +109,11 @@ class UserPostPage extends React.Component{
 
   }
 
+  onPostUnlike = (personUnlike) => {
+
+    UserPostPageWebSocketInstance.sendUserPostUnlike(personUnlike, this.props.match.params.postId)
+  }
+
   render() {
 
     console.log(this.props)
@@ -218,7 +223,7 @@ class UserPostPage extends React.Component{
                 peopleLikeId.includes(this.props.curId) ?
 
                 <div
-                // onClick = {() => this.onSocialUnLike(this.props.curId, socialCalUserId)}
+                onClick = {() => this.onPostUnlike(this.props.curId)}
                 className ='postLike'>
                 <i
                   style={{ marginRight:'10px', color:'red'}}

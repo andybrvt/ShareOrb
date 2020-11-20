@@ -875,6 +875,27 @@ class UserPostConsumer(JsonWebsocketConsumer):
 
         self.send_info_user_post(content)
 
+    def send_user_post_unlike(self, data):
+        post = get_object_or_404(Post, id = data['postId'])
+        personUnlike = get_object_or_404(User, id = data['personUnlike'])
+
+        post.people_like.remove(personUnlike)
+        post.save()
+
+        serializedPost = PostSerializer(post).data
+        likeList = serializedPost['people_like']
+
+        username = serializedPost['user']['username']
+
+        recipient = username+"_"+str(serializedPost['id'])
+
+        content = {
+            'command': 'send_user_post_like_unlike',
+            'likeList': likeList,
+            'recipeint': recipient,
+        }
+
+        self.send_info_user_post(content)
 
     def send_info_user_post(self, userPostObj):
         # This will send information ot the channel layer then intot he front end
@@ -910,11 +931,12 @@ class UserPostConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == "fetch_user_post_info":
             self.fetch_user_post_info(data)
         if data['command'] == 'send_user_post_like':
             self.send_user_post_like(data)
+        if data['command'] == 'send_user_post_unlike':
+            self.send_user_post_unlike(data)
 
     def new_user_post_action(self, action):
         userPostObj = action['userPostObj']
