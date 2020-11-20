@@ -270,7 +270,7 @@ class DayCalendar extends React.Component{
         hours.push(
             toDoStuff.map(item => (
               item.accepted.includes(this.props.id) ?
-              <div className = "eventsDay"
+              <div className = "weekEvent"
               style = {{
                 gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
                 backgroundColor: item.color
@@ -285,7 +285,8 @@ class DayCalendar extends React.Component{
               <div className = "eventsDayAccept"
               style = {{
                 gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
-                backgroundColor: "#E8E8E8"
+                color:'white',
+                backgroundColor: item.color,
               }}
               onClick = {() => this.onClickItem(item)}>
               <span > {dateFns.format(new Date(item.start_time),'hh:mm a')} - {dateFns.format(new Date(item.end_time),'hh:mm a')}</span>
@@ -296,14 +297,45 @@ class DayCalendar extends React.Component{
             ))
         )}
       const hourIndex = i;
+      {/*
+        //used to popover for edit form when youre selecting empty
+        // for var dayDay
+        const selectedDate=this.props.currentDate
+        const weekStart = dateFns.startOfWeek(selectedDate);
+        date=weekStart
+        dayday=date
+        // for var hourHour
+        const selectedDate=this.props.currentDate
+        const weekStart = dateFns.startOfWeek(selectedDate);
+        date=weekStart
+        const startHourDay = dateFns.startOfDay(date);
+        let hour = startHourDay;
+        hourHour = hour
+      <Popover trigger="click"  placement="right"
+        //onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
+        onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
+        <EditEventPopUp
+        isVisible = {this.props.showModal}
+        close = {() => this.props.closeModal()}
+        dayNum={dateFns.format(cloneDay, 'd')}
+
+        />
+        </div>}>
+
+
+
+        </Popover>
+        */}
       border.push(
-        <div
-        style = {{background: this.color(hourIndex)}}
-        onClick = {(e)=> this.onDayHourClick(hourIndex)}
-        className = {`${i%2 === 0 ? 'dayCellT' : 'dayCellB'}`}
-        // onClick = {() => this.onHourClick(cloneHour)}
-        >
-        </div>
+
+            <div
+            style = {{background: this.color(hourIndex)}}
+            onClick = {(e)=> this.onDayHourClick(hourIndex)}
+            className = {`${i%2 === 0 ? 'dayCellT' : 'dayCellB'}`}
+            // onClick = {() => this.onHourClick(cloneHour)}
+            >
+            </div>
+
       )
       toDoStuff = []
       hour = dateFns.addMinutes(hour, 30);
@@ -319,6 +351,53 @@ class DayCalendar extends React.Component{
       </div>
     )
   }
+
+
+  addEventClick = (day, hour) => {
+    console.log(day, hour)
+    // So we will be using the edit modal to add a new event in
+    // but because it requres certain objects we need to have a
+    // dicitonary that holds those specitic attribute so that we can
+    //  meet those requirements
+    // We only need the start and end time tho so all the other fields can
+    // be empty
+    let endDate = ''
+    const specificHour = dateFns.getHours(hour)
+    const specificMinute = dateFns.getMinutes(hour)
+    const startDate = dateFns.addHours (day, specificHour)
+    const newStartDate = dateFns.addMinutes(startDate, specificMinute)
+    console.log(dateFns.getHours(newStartDate));
+    if (dateFns.getHours(newStartDate) === 23 && dateFns.getMinutes(newStartDate) === 30){
+      endDate = dateFns.addMinutes(newStartDate, 30);
+    } else {
+      endDate = dateFns.addHours(newStartDate, 1);
+    }
+
+    const finalStart = dateFns.format(newStartDate, 'yyyy-MM-dd HH:mm:ss')
+    const finalEnd = dateFns.format(endDate, 'yyyy-MM-dd HH:mm:ss')
+    console.log(specificHour, specificMinute)
+    if(specificMinute==0){
+      console.log("made it")
+      this.setState({
+        selectCondition:true,
+      });
+    }
+    console.log(this.state.selectCondition)
+    const subInEvent = {
+      addEvent: true,
+      title: '',
+      content: '',
+      start_time: finalStart,
+      end_time: finalEnd,
+      location: '',
+      color: '#1890ff',
+      calendarId: ''
+    }
+    console.log(subInEvent)
+    this.props.openModal(subInEvent)
+
+  }
+
 
   dayEventIndex = (start_time, end_time, start_index) =>{
     // This function is used to get the index for the grid values for each of the events
@@ -393,7 +472,7 @@ class DayCalendar extends React.Component{
 
   onMonthClick = () => {
     const selectYear = dateFns.getYear(this.props.currentDate).toString()
-    const selectMonth = (dateFns.getMonth(this.props.currentDate)+1).toString()
+    const selectMonth = (dateFns.getMonth(this. props.currentDate)+1).toString()
     this.props.history.push('/personalcalendar/'+selectYear+'/'+selectMonth)
   }
 
@@ -424,6 +503,7 @@ class DayCalendar extends React.Component{
 
   render() {
     console.log(this.props)
+    console.log(this.props.currentDate)
     return (
       <div className = 'calendarContainer'>
         <EventSyncModal
