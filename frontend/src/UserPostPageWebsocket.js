@@ -86,13 +86,21 @@ class WebSocketUserPostPage{
     const parsedData = JSON.parse(data);
     const command = parsedData.command
 
+    console.log(parsedData)
     if(command === "user_post"){
       // This will load up the
-      console.log(parsedData)
       const post = parsedData.post
 
       // add callbacks here
       this.callbacks['fetch_user_post_info'](post)
+
+    }
+    if(command === "send_user_post_like_unlike"){
+      const likeList = parsedData.likeList
+
+
+      // add callbacks for both like and unlike here (they are pretty much the same)
+      this.callbacks['send_user_post_like_unlike'](likeList)
 
     }
 
@@ -100,9 +108,11 @@ class WebSocketUserPostPage{
   }
 
   addCallbacks(
-    fetchUserPostInfo
+    fetchUserPostInfo,
+    sendUserPostLikeUnlike
   ){
     this.callbacks['fetch_user_post_info'] = fetchUserPostInfo
+    this.callbacks['send_user_post_like_unlike'] = sendUserPostLikeUnlike
   }
 
   sendUserPostInfo(data){

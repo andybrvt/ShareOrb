@@ -105,6 +105,15 @@ const closePost = (state, action) => {
   })
 }
 
+const sendUserPostLikeUnlike =(state, action) => {
+  return updateObject(state, {
+    post: {
+      ...state.post,
+      people_like: action.likeList
+    }
+  })
+}
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -118,10 +127,15 @@ const reducer = (state = initialState, action) => {
       return addPostComment(state, action);
     case actionTypes.DELETE_POST:
       return deletePost(state, action);
+
+
     case actionTypes.LOAD_POST:
       return loadPost(state, action);
     case actionTypes.CLOSE_POST:
       return closePost(state, action);
+    case actionTypes.SEND_USER_POST_LIKE_UNLIKE:
+      return sendUserPostLikeUnlike(state, action);
+
     default:
       return state;
   }

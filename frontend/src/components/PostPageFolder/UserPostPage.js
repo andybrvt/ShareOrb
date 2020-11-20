@@ -144,10 +144,15 @@ class UserPostPage extends React.Component{
       if(this.props.post.created_at){
         userPostDate = this.renderTimestamp(this.props.post.created_at)
       }
+      if(this.props.post.people_like){
+        people_like = this.props.post.people_like
+      }
+    }
 
-
-
-
+    if (people_like.length > 0){
+      for (let i = 0; i < people_like.length; i++){
+        peopleLikeId.push(people_like[i].id)
+      }
     }
 
     return(

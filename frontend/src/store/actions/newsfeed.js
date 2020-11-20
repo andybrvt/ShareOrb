@@ -57,3 +57,10 @@ export const closePost = () => {
 
   }
 }
+
+export const sendUserPostLikeUnlike = (likeList) => {
+  return {
+    type: actionTypes.SEND_USER_POST_LIKE_UNLIKE,
+    likeList: likeList
+  }
+}
