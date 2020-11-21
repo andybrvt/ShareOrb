@@ -7,6 +7,7 @@ from typing import Union
 from django.db.models.signals import post_save
 from django.utils.timezone import now
 from mySocialCal.models import SocialCalCell
+from mySocialCal.models import SocialCalEvent
 from django.utils import timezone
 
 
@@ -42,6 +43,10 @@ class User(AbstractUser):
     def get_socialCal(self):
         # This will pull all the socialCallcell for each use and will be used to put in the social calendar
         return SocialCalCell.objects.filter(socialCalUser = self).values_list('id', flat = True)
+
+    def get_socialEvents(self):
+        # This will grab the events where you are the host. This will help with grabbing the events all at once
+        return SocialCalEvent.objects.filter(host = self).values_list("id", flat = True)
 
     def __str__(self):
         return self.username
@@ -106,6 +111,9 @@ class Post(models.Model):
     #
     # def __str__(self):
     #     return self.caption
+
+    class Meta:
+        ordering = ('-created_at', '-updated_at')
 
 class ImageModel(models.Model):
     imageList = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='images', blank = True)

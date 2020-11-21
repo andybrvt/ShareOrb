@@ -74,6 +74,8 @@ class SocialCalItems(models.Model):
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialPost', null = True)
 
     # Everything from here down would be for the events
+    class Meta:
+        ordering = ['created_at']
 
 
 class SocialCalEvent(models.Model):
