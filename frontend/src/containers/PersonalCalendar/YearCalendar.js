@@ -48,7 +48,7 @@ class YearCalendar extends React.Component{
 
   }
 
-  renderYear() {
+  renderHeader() {
     // This is used to render the year
     const dateFormat = 'yyyy'
 
@@ -71,6 +71,7 @@ class YearCalendar extends React.Component{
           <i className = 'arrow arrow-right'></i>
           </div>
         </div>
+
       </div>
     )
   }
@@ -102,12 +103,12 @@ class YearCalendar extends React.Component{
           <div
           className = 'monthBox'
           onClick = {() => this.onMonthClick(monthCopy)}
-          style = {{backgroundImage: this.getMonthColor(monthCopy)}} >
-          <span
-          className = 'monthText'
           >
-          {dateFns.format(month, dateFormat)}
-          </span>
+            <span
+            className = 'monthText'
+            >
+            {dateFns.format(month, dateFormat)}
+            </span>
           </div>
           {this.renderDayName()}
           {this.renderDayInMonth(month)}
@@ -252,7 +253,15 @@ class YearCalendar extends React.Component{
 
           <div className = 'flex-container'>
             <div className = 'calendar'>
-            {this.renderYear()}
+              <div style={{display: 'inline-block'}}>
+                {this.renderHeader()}
+              </div>
+              <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+                <CalendarViewDropDown
+                calType = "week"
+                history = {this.props.history}
+                matchPara = {this.props.parameter} />
+              </div>
             {this.renderMonthCell()}
             </div>
           </div>
