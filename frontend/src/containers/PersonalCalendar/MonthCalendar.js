@@ -7,7 +7,22 @@ import { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { authAxios } from '../../components/util';
-import { Drawer, List, Avatar, Divider, Col, Row, Tag, Button } from 'antd';
+import { Input,
+   Drawer,
+    message,
+    List,
+    Avatar,
+    Divider,
+    Col,
+    Row,
+    Tag,
+    Button,
+    Tooltip,
+    Progress,
+    DatePicker,
+    AvatarGroup,
+    notification,
+    Popover } from 'antd';
 import * as navActions from '../../store/actions/nav';
 import * as calendarEventActions from '../../store/actions/calendarEvent';
 import * as calendarActions from '../../store/actions/calendars';
@@ -204,6 +219,7 @@ class PersonalCalendar extends React.Component{
       // we make it smaller than 7 because we still want to keep the index of the
       // weekdays the same
       for (let i= 0; i<7; i++){
+
         for (let item = 0; item < events.length; item++){
           // So the time we put in is the UTC time (universal time ) but when you
           // put moment or new Date it gives you your time zome date so that is why you
@@ -266,9 +282,13 @@ class PersonalCalendar extends React.Component{
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
-                item.accepted.includes(this.props.id) ?
+
+
+
+
+                (item.accepted.includes(this.props.id)||(item.invited.length === 0)||(item.host.username===this.props.username)) ?
                 <div key={item.content}
-                  className = 'monthEvent'
+                  className = 'weekEvent'
                   style = {{
                     gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1),
                     backgroundColor: item.color
@@ -282,10 +302,11 @@ class PersonalCalendar extends React.Component{
                 :
 
                 <div key={item.content}
-                  className = 'monthEventAccept'
+                  className = 'weekEventAccept testLook'
                   style = {{
                     gridColumn: this.eventIndex(item.start_time, item.end_time, day, i+1),
-                    backgroundColor: "#E8E8E8"
+                    color:'white',
+                    backgroundColor: item.color,
                   }}>
                   <div onClick = {() => this.onClickItem(item)}>
                   <span className = ''> {dateFns.format(new Date(item.start_time),'hh:mm a')}</span>
@@ -293,7 +314,8 @@ class PersonalCalendar extends React.Component{
                   </div>
                 </div>
               ))
-        )} else {days.push(
+        )}
+      else {days.push(
           <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`}
           onClick = { () =>this.onDateClick(cloneDay)}>
           <span className = "number">{formattedDate}</span>
