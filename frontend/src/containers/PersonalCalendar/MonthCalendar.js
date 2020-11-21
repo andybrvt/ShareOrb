@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { authAxios } from '../../components/util';
+import Liking from '../NewsfeedItems/Liking';
 import { Input,
    Drawer,
     message,
@@ -198,7 +199,7 @@ class PersonalCalendar extends React.Component{
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
     const endDate = dateFns.endOfWeek(monthEnd);
-
+    const text = "You're host"
     // Once you have your start date and end date you want to loop through
     // all the days in between
     // then we have to subtract the start of the month with the startoftheweek
@@ -282,9 +283,321 @@ class PersonalCalendar extends React.Component{
             <span className = "number">{formattedDate}</span>
             </div>,
               toDoStuff.map(item => (
+                <Popover placement="right"  content={
+                  <div style={{padding:20, width:450}}>
+                    <p style={{display:'inline-block'}}>
+
+                    </p>
+
+                      {
+                        (item.invited.length==0)?
+                        <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
+
+                        :
+                        <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> public</Tag>
+                      }
 
 
 
+
+                    <span style={{color:'black', marginBottom:'10px'}}>
+                    {
+                      (item.title.length>20)?
+                      <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,20)}...</p>
+
+                      :
+                      <p style={{fontSize:'24px', display:'inline-block'}}>
+                        {item.title.substring(0,20)}
+                      </p>
+                    }
+
+
+                    </span>
+
+                    <p style={{marginTop:'5px', fontSize:'14px'}}>
+                      <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
+                      <span style={{marginRight:'3px'}}>
+                        {dateFns.format(selectedDate, 'iiii')},
+
+
+                      </span>
+                      {dateFns.format(new Date(item.start_time), 'MMMM')}
+                      &nbsp;
+                      {dateFns.format(new Date(item.start_time), 'd')}
+
+
+
+                      <br/>
+                      <i style={{marginRight:'10px', marginTop:'10px'}} class="fas fa-clock"></i>
+                      <span>
+                          {dateFns.format(new Date(item.start_time),'h:mm a')}
+                          -
+                          {dateFns.format(new Date(item.end_time),'h:mm a')}
+                        </span>
+                      <br/>
+                      {
+                        (item.repeatCondition=="weekly")?
+                        <span>
+                          <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                          Occurs every
+
+                          <span>
+                            &nbsp;
+                            {dateFns.format(selectedDate, 'iiii')}
+                            &nbsp;
+                          </span>
+
+                        </span>
+
+                        :
+                        <div>
+
+                          {
+                            (item.repeatCondition=="daily")?
+                            <span>
+                              <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                              Occurs every day
+
+                            </span>
+                            :
+                            <div>
+
+
+                              {
+                                (item.repeatCondition=="monthly")?
+                                <span>
+                                  <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                                  Occurs every month
+
+                                </span>
+                                :
+                                <div></div>
+                              }
+
+
+
+
+                            </div>
+                          }
+                       </div>
+
+                      }
+
+                      <div>
+                        <i class="fas fa-user-friends" style={{marginRight:'5px'}}></i>
+                        {
+                          (item.invited.length==0)?
+                            <span> Just You</span>
+
+                          :
+                              <span>   {item.invited.length+1} people</span>
+
+                        }
+                      </div>
+                    </p>
+                    {
+                      (item.backgroundImg)?
+                      <img
+                        style={{display:'inline-block', float:'right'}}
+                      src = {item.backgroundImg}
+                      className = 'popoverPic'
+                       />
+                       :
+                       <div></div>
+                    }
+
+                    {/* if person is host*
+                      item.host
+                      {item.person.length==1 && item.host.username==this.props.username}
+
+
+                    */}
+
+                      {/* for private events and person is host*/}
+                    <div>
+                      {
+
+
+
+                        (item.invited.length==0 && item.host.id==this.props.id)?
+
+                        <span style={{float:'right', padding:'15px', marginTop:'-45px'}}>
+
+                          <Tooltip placement="bottomLeft" title="View event">
+                            <Button
+                            onClick = {() => this.onEventPage(item.id)}
+                            shape="circle"
+                            size="large"
+                            type="primary">
+                               <i class="fas fa-eye"></i>
+                            </Button>
+                          </Tooltip>
+                          <Tooltip placement="bottomLeft" title="Remove event">
+                            <Button
+                            onClick ={() => this.onDeleteEvent(item.id, 'single')}
+                            shape="circle"
+                            size="large"
+                            type="primary"
+                            style={{marginLeft:'10px'}}>
+                               <i class="fas fa-times"></i>
+                            </Button>
+                          </Tooltip>
+                        </span>
+
+                        :
+
+                        <div>
+                          <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
+
+                          <div style={{marginTop:'50px'}} class="outerContainerPeople">
+
+                            <div class="innerContainerPeople" style={{display:'inline-block'}}>
+
+                              <Avatar
+                                shape="circle"
+                                size={60}
+                                src={'http://127.0.0.1:8000'+item.host.profile_picture}
+                                style={{display:'inline-block'}}
+                               />
+                             {
+
+                                 (item.host.username==this.props.username)?
+                                   <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                     onClick = {() => this.onProfileClick(item.host.username)}
+                                   >
+
+                                     {text}
+                                   </p>
+                                 :
+
+
+                                   <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                     onClick = {() => this.onProfileClick(item.host.username)}
+                                   >
+
+                                     {item.host.first_name} {item.host.last_name}
+                                   </p>
+
+                             }
+
+
+                            </div>
+
+                             <span class="innerContainerPeople" style={{ width: 150, display:'inline-block', float:'right', marginRight:'10px'}}>
+                               {/* going to need a if condition checking if not 100 then you can make status active:
+                                  status="exception"
+                                  <Progress percent={50} size="small" status="active" />
+                                 */}
+                               <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
+                               <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
+                               {
+                                 (Math.floor(100*(item.decline.length/item.invited.length))<100)?
+
+                                  <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small"/>
+                                 :
+                                 <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
+                               }
+
+
+                             </span>
+                          </div>
+                          <div>
+
+
+                            <Avatar.Group>
+                              <div style={{float:'right', marginRight:'50px'}}>
+
+
+                                {
+                                  (item.host.username==this.props.username|| (item.accepted.some(e => e.id == this.props.id))
+
+                                  ||(item.host.username==this.props.username))
+                                  ?
+                                  <div style={{marginRight:'100px', marginTop:'-10px'}}>
+                                    <Tooltip placement="bottomLeft" title="View event">
+                                      <Button
+                                      onClick = {() => this.onEventPage(item.id)}
+                                      shape="circle"
+                                      size="large"
+                                      type="primary">
+                                         <i class="fas fa-eye"></i>
+                                      </Button>
+                                    </Tooltip>
+                                    <Tooltip placement="bottomLeft" title="Remove event">
+                                      <Button
+                                      onClick ={() => this.onDeleteEvent(item.id, 'shared', item.host)}
+                                      shape="circle"
+                                      size="large"
+                                      type="primary"
+                                      style={{marginLeft:'10px'}}>
+                                         <i class="fas fa-times"></i>
+                                      </Button>
+                                    </Tooltip>
+                                  </div>
+                                  :
+                                  <div style={{marginRight:'50px'}}>
+                                    <Tooltip placement="bottomLeft" title="View event">
+                                      <Button
+                                      onClick = {() => this.onEventPage(item.id)}
+                                      shape="circle"
+                                      size="large"
+                                      type="primary">
+                                         <i class="fas fa-eye"></i>
+                                      </Button>
+                                    </Tooltip>
+                                    <Tooltip placement="bottomLeft" title="Remove event">
+                                      <Button
+                                      onClick ={() => this.onDeleteEvent(item.id, 'shared', item.host)}
+                                      shape="circle"
+                                      size="large"
+                                      type="primary"
+                                      style={{marginLeft:'10px'}}>
+                                         <i class="fas fa-times"></i>
+                                      </Button>
+                                    </Tooltip>
+                                    <span>
+                                      <Tooltip placement="bottomLeft" title="Accept Invite">
+                                        <Button
+                                        type="primary"
+                                        shape="circle"
+                                        size="large"
+                                        style={{marginLeft:'10px'}}
+                                        onClick = {() => this.onAcceptShare(item.id, item.host, item.start_time)}
+                                        >
+                                           <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
+                                        </Button>
+                                      </Tooltip>
+                                      <Tooltip placement="bottomLeft" title="Decline Invite">
+                                        <Button
+                                        shape="circle"
+                                        type="primary"
+                                        size="large"
+                                        danger
+                                        style={{marginLeft:'10px'}}
+                                        onClick = {() => this.onDeclineShare(item.id, item.host, item.start_time)}
+                                        >
+                                           <i class="fas fa-user-times"></i>
+                                        </Button>
+                                        </Tooltip>
+                                      </span>
+                                    </div>
+
+                                  }
+                              </div>
+                              <Liking like_people={item.invited}/>
+                            </Avatar.Group>
+
+
+                          </div>
+                        </div>
+
+                      }
+                    </div>
+                  </div>
+
+                  }
+                >
+                {
 
                 (item.accepted.includes(this.props.id)||(item.invited.length === 0)||(item.host.username===this.props.username)) ?
                 <div key={item.content}
@@ -313,6 +626,12 @@ class PersonalCalendar extends React.Component{
                   <span className = ' ' > {item.content} </span>
                   </div>
                 </div>
+
+
+                }
+
+              </Popover>
+
               ))
         )}
       else {days.push(
