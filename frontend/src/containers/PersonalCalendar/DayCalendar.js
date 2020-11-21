@@ -624,7 +624,7 @@ class DayCalendar extends React.Component{
               <div className = "weekEventAccept testLook"
               style = {{
                 gridRow: this.dayEventIndex(item.start_time, item.end_time, cloneHourIndex),
-                color:'black',
+                color:'white',
                 backgroundColor: item.color,
               }}
               onClick = {() => this.onClickItem(item)}>
@@ -676,7 +676,7 @@ class DayCalendar extends React.Component{
         */}
       border.push(
         <Popover trigger="click"  placement="right" onClick = {() =>
-        this.addEventClick(selectedDate, cloneHour)}  content={<div>
+            this.addEventClick(selectedDate, cloneHour)}  content={<div>
           <EditEventPopUp
           isVisible = {this.props.showModal}
           close = {() => this.props.closeModal()}
