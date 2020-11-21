@@ -14,7 +14,7 @@ import '../../components/UserProfiles/ProfilePage.css';
 import ChangeProfilePic from '../CurrUser/ChangeProfilePic';
 import FollowList from '../../components/UserProfiles/FollowList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
-
+import UserEventList from './UserEventList';
 
 
 class PersonalProfileEventList extends React.Component{
@@ -486,7 +486,9 @@ class PersonalProfileEventList extends React.Component{
             > Events </div>
           </div>
           <div className = 'profile-tabPanel'>
-
+          <UserEventList
+          events = {this.props.profile.get_socialEvents}
+           />
            </div>
 
         </div>

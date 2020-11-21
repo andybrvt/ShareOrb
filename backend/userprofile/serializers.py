@@ -9,6 +9,8 @@ from allauth.account.utils import setup_user_email
 from userprofile.models import CustomNotification
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.models import SocialCalCell
+from mySocialCal.models import SocialCalEvent
+from mySocialCal.serializers import SocialCalEventSerializer
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
 class PostUserSerializer(serializers.ModelSerializer):
@@ -46,6 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
     get_following = serializers.StringRelatedField(many = True)
     get_followers = serializers.StringRelatedField(many = True)
     get_socialCal = serializers.StringRelatedField(many = True)
+    get_socialEvents = serializers.StringRelatedField(many = True)
 
 
     class Meta:
@@ -60,6 +63,7 @@ class UserSerializer(serializers.ModelSerializer):
          'get_following',
          'get_followers',
          'get_socialCal',
+         'get_socialEvents',
          'friends',
          'slug')
     def to_representation(self, instance):
@@ -69,6 +73,7 @@ class UserSerializer(serializers.ModelSerializer):
         socialCalList = []
         friendList = []
         postList = []
+        socialEventList = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followingList.append(userPerson)
@@ -88,11 +93,16 @@ class UserSerializer(serializers.ModelSerializer):
         for posts in data['get_posts']:
             post = MiniPostSerializer(models.Post.objects.get(id = posts)).data
             postList.append(post)
+
+        for socialEvents in data['get_socialEvents']:
+            socialEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = socialEvents)).data
+            socialEventList.append(socialEvent)
         data['get_following'] = followingList
         data['get_followers'] = followerList
         data['get_socialCal'] = socialCalList
         data['friends']  = friendList
         data['get_posts'] = postList
+        data['get_socialEvents'] = socialEventList
         return data
 
 
