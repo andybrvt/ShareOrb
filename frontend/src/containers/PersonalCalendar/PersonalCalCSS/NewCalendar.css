@@ -656,7 +656,7 @@ main {
 }
 
 /* cell of the week */
-.weekDayFlex-Container .calendar .weekBody .weekEvent{
+.weekEvent{
   color: white;
   font-size: 15px;
   /* padding-top: 2px; */
@@ -670,8 +670,8 @@ main {
   z-index: 1;
 }
 
-.weekDayFlex-Container .calendar .weekBody .weekEventAccept{
-  /* background-color: red; */
+.weekEventAccept{
+  background-color: black;
   color: white;
   font-size: 15px;
   /* this makes events rounded but gonna take it out for now */

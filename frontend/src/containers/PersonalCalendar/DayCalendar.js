@@ -2,7 +2,23 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import axios from 'axios';
 import { authAxios } from '../../components/util';
-import { Button, Tooltip, List, message, Avatar } from 'antd';
+import Liking from '../NewsfeedItems/Liking';
+import { Input,
+   Drawer,
+    message,
+    List,
+    Avatar,
+    Divider,
+    Col,
+    Row,
+    Tag,
+    Button,
+    Tooltip,
+    Progress,
+    DatePicker,
+    AvatarGroup,
+    notification,
+    Popover } from 'antd';
 import { connect } from 'react-redux';
 import * as navActions from '../../store/actions/nav'
 import * as calendarEventActions from '../../store/actions/calendarEvent';
@@ -166,7 +182,6 @@ class DayCalendar extends React.Component{
   renderCells(events) {
 
     console.log(events)
-    const currentDay = this.state.currentDay
     const selectedDate = this.props.currentDate
     const startHourDay = dateFns.startOfDay(selectedDate)
     const endHourDay = dateFns.endOfDay(selectedDate)
@@ -186,20 +201,22 @@ class DayCalendar extends React.Component{
     let hour = startHourDay;
     let formattedHour = "";
     // they are the same time because when you do a new date it goes on the GM time
-
+    const text = "You're host"
     // Hour is in a date format with the day and time and it will go till the
     // Same day(endHourday) but till the last sec of the day
     // Since we are not doing a list of list and there is just days we do not
     // need the while statment, just a list
-    for (let i = 0; i<48; i++){
+    for (let hourIndex = 0; hourIndex<48; hourIndex++){
       formattedHour = dateFns.format(hour, hourFormat)
+
+      const cloneHourIndex = hourIndex;
+      const cloneHour = hour
       for(let item = 0; item < events.length; item ++){
         // For the if statements and what you put into the calendar depends on
         // if the day is on the day or if the day and time falls between the two days and
         // times
         const startDate = new Date(events[item].start_time)
         const endDate = new Date(events[item].end_time)
-        const cloneHour = hour
         const utcStart = dateFns.addHours(startDate, startDate.getTimezoneOffset()/60)
         const utcEnd = dateFns.addHours(endDate, endDate.getTimezoneOffset()/60)
 
@@ -264,15 +281,337 @@ class DayCalendar extends React.Component{
 
       }
 
-      const cloneHour = hour
       const cloneToDoStuff = toDoStuff
+      console.log(cloneToDoStuff)
       if (toDoStuff.length > 0){
         hours.push(
             toDoStuff.map(item => (
-              item.accepted.includes(this.props.id) ?
+
+              <Popover placement="right"  content={
+                <div style={{padding:20, width:450}}>
+                  <p style={{display:'inline-block'}}>
+
+                  </p>
+
+                    {
+                      (item.invited.length==0)?
+                      <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
+
+                      :
+                      <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> public</Tag>
+                    }
+
+
+
+
+                  <span style={{color:'black', marginBottom:'10px'}}>
+                  {
+                    (item.title.length>20)?
+                    <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,20)}...</p>
+
+                    :
+                    <p style={{fontSize:'24px', display:'inline-block'}}>
+                      {item.title.substring(0,20)}
+                    </p>
+                  }
+
+
+                  </span>
+
+                  <p style={{marginTop:'5px', fontSize:'14px'}}>
+                    <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
+                    <span style={{marginRight:'3px'}}>
+                      {dateFns.format(selectedDate, 'iiii')},
+
+
+                    </span>
+                    {dateFns.format(new Date(item.start_time), 'MMMM')}
+                    &nbsp;
+                    {dateFns.format(new Date(item.start_time), 'd')}
+
+
+
+                    <br/>
+                    <i style={{marginRight:'10px', marginTop:'10px'}} class="fas fa-clock"></i>
+                    <span>
+                        {dateFns.format(new Date(item.start_time),'h:mm a')}
+                        -
+                        {dateFns.format(new Date(item.end_time),'h:mm a')}
+                      </span>
+                    <br/>
+                    {
+                      (item.repeatCondition=="weekly")?
+                      <span>
+                        <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                        Occurs every
+
+                        <span>
+                          &nbsp;
+                          {dateFns.format(selectedDate, 'iiii')}
+                          &nbsp;
+                        </span>
+
+                      </span>
+
+                      :
+                      <div>
+
+                        {
+                          (item.repeatCondition=="daily")?
+                          <span>
+                            <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                            Occurs every day
+
+                          </span>
+                          :
+                          <div>
+
+
+                            {
+                              (item.repeatCondition=="monthly")?
+                              <span>
+                                <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                                Occurs every month
+
+                              </span>
+                              :
+                              <div></div>
+                            }
+
+
+
+
+                          </div>
+                        }
+                     </div>
+
+                    }
+
+                    <div>
+                      <i class="fas fa-user-friends" style={{marginRight:'5px'}}></i>
+                      {
+                        (item.invited.length==0)?
+                          <span> Just You</span>
+
+                        :
+                            <span>   {item.invited.length+1} people</span>
+
+                      }
+                    </div>
+                  </p>
+                  {
+                    (item.backgroundImg)?
+                    <img
+                      style={{display:'inline-block', float:'right'}}
+                    src = {item.backgroundImg}
+                    className = 'popoverPic'
+                     />
+                     :
+                     <div></div>
+                  }
+
+                  {/* if person is host*
+                    item.host
+                    {item.person.length==1 && item.host.username==this.props.username}
+
+
+                  */}
+
+                    {/* for private events and person is host*/}
+                  <div>
+                    {
+
+
+
+                      (item.invited.length==0 && item.host.id==this.props.id)?
+
+                      <span style={{float:'right', padding:'15px', marginTop:'-45px'}}>
+
+                        <Tooltip placement="bottomLeft" title="View event">
+                          <Button
+                          onClick = {() => this.onEventPage(item.id)}
+                          shape="circle"
+                          size="large"
+                          type="primary">
+                             <i class="fas fa-eye"></i>
+                          </Button>
+                        </Tooltip>
+                        <Tooltip placement="bottomLeft" title="Remove event">
+                          <Button
+                          onClick ={() => this.onDeleteEvent(item.id, 'single')}
+                          shape="circle"
+                          size="large"
+                          type="primary"
+                          style={{marginLeft:'10px'}}>
+                             <i class="fas fa-times"></i>
+                          </Button>
+                        </Tooltip>
+                      </span>
+
+                      :
+
+                      <div>
+                        <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
+
+                        <div style={{marginTop:'50px'}} class="outerContainerPeople">
+
+                          <div class="innerContainerPeople" style={{display:'inline-block'}}>
+
+                            <Avatar
+                              shape="circle"
+                              size={60}
+                              src={'http://127.0.0.1:8000'+item.host.profile_picture}
+                              style={{display:'inline-block'}}
+                             />
+                           {
+
+                               (item.host.username==this.props.username)?
+                                 <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                   onClick = {() => this.onProfileClick(item.host.username)}
+                                 >
+
+                                   {text}
+                                 </p>
+                               :
+
+
+                                 <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                   onClick = {() => this.onProfileClick(item.host.username)}
+                                 >
+
+                                   {item.host.first_name} {item.host.last_name}
+                                 </p>
+
+                           }
+
+
+                          </div>
+
+                           <span class="innerContainerPeople" style={{ width: 150, display:'inline-block', float:'right', marginRight:'10px'}}>
+                             {/* going to need a if condition checking if not 100 then you can make status active:
+                                status="exception"
+                                <Progress percent={50} size="small" status="active" />
+                               */}
+                             <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
+                             <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
+                             {
+                               (Math.floor(100*(item.decline.length/item.invited.length))<100)?
+
+                                <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small"/>
+                               :
+                               <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
+                             }
+
+
+                           </span>
+                        </div>
+                        <div>
+
+
+                          <Avatar.Group>
+                            <div style={{float:'right', marginRight:'50px'}}>
+
+
+                              {
+                                (item.host.username==this.props.username|| (item.accepted.some(e => e.id == this.props.id))
+
+                                ||(item.host.username==this.props.username))
+                                ?
+                                <div style={{marginRight:'100px', marginTop:'-10px'}}>
+                                  <Tooltip placement="bottomLeft" title="View event">
+                                    <Button
+                                    onClick = {() => this.onEventPage(item.id)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary">
+                                       <i class="fas fa-eye"></i>
+                                    </Button>
+                                  </Tooltip>
+                                  <Tooltip placement="bottomLeft" title="Remove event">
+                                    <Button
+                                    onClick ={() => this.onDeleteEvent(item.id, 'shared', item.host)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary"
+                                    style={{marginLeft:'10px'}}>
+                                       <i class="fas fa-times"></i>
+                                    </Button>
+                                  </Tooltip>
+                                </div>
+                                :
+                                <div style={{marginRight:'50px'}}>
+                                  <Tooltip placement="bottomLeft" title="View event">
+                                    <Button
+                                    onClick = {() => this.onEventPage(item.id)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary">
+                                       <i class="fas fa-eye"></i>
+                                    </Button>
+                                  </Tooltip>
+                                  <Tooltip placement="bottomLeft" title="Remove event">
+                                    <Button
+                                    onClick ={() => this.onDeleteEvent(item.id, 'shared', item.host)}
+                                    shape="circle"
+                                    size="large"
+                                    type="primary"
+                                    style={{marginLeft:'10px'}}>
+                                       <i class="fas fa-times"></i>
+                                    </Button>
+                                  </Tooltip>
+                                  <span>
+                                    <Tooltip placement="bottomLeft" title="Accept Invite">
+                                      <Button
+                                      type="primary"
+                                      shape="circle"
+                                      size="large"
+                                      style={{marginLeft:'10px'}}
+                                      onClick = {() => this.onAcceptShare(item.id, item.host, item.start_time)}
+                                      >
+                                         <i style={{fontSize:'20px'}} class="fas fa-user-check"></i>
+                                      </Button>
+                                    </Tooltip>
+                                    <Tooltip placement="bottomLeft" title="Decline Invite">
+                                      <Button
+                                      shape="circle"
+                                      type="primary"
+                                      size="large"
+                                      danger
+                                      style={{marginLeft:'10px'}}
+                                      onClick = {() => this.onDeclineShare(item.id, item.host, item.start_time)}
+                                      >
+                                         <i class="fas fa-user-times"></i>
+                                      </Button>
+                                      </Tooltip>
+                                    </span>
+                                  </div>
+
+                                }
+                            </div>
+                            <Liking like_people={item.invited}/>
+                          </Avatar.Group>
+
+
+                        </div>
+                      </div>
+
+                    }
+                  </div>
+                </div>
+
+                }
+
+
+
+            >
+            {
+
+
+              (item.accepted.includes(this.props.id)||(item.invited.length === 0)||(item.host.username===this.props.username)) ?
+
               <div className = "weekEvent"
               style = {{
-                gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
+                gridRow: this.dayEventIndex(item.start_time, item.end_time, cloneHourIndex),
                 backgroundColor: item.color
               }}
               onClick = {() => this.onClickItem(item)}>
@@ -282,10 +621,10 @@ class DayCalendar extends React.Component{
 
               :
 
-              <div className = "eventsDayAccept"
+              <div className = "weekEventAccept testLook"
               style = {{
-                gridRow: this.dayEventIndex(item.start_time, item.end_time, i),
-                color:'white',
+                gridRow: this.dayEventIndex(item.start_time, item.end_time, cloneHourIndex),
+                color:'black',
                 backgroundColor: item.color,
               }}
               onClick = {() => this.onClickItem(item)}>
@@ -294,9 +633,19 @@ class DayCalendar extends React.Component{
               </div>
 
 
+
+
+            }
+
+
+
+
+          </Popover>
+
             ))
         )}
-      const hourIndex = i;
+
+
       {/*
         //used to popover for edit form when youre selecting empty
         // for var dayDay
@@ -312,22 +661,39 @@ class DayCalendar extends React.Component{
         let hour = startHourDay;
         hourHour = hour
 
+        <Popover trigger="click"  placement="right" onClick = {() =>
+        this.addEventClick(dayDay, hourHour)}  content={<div>
+          <EditEventPopUp
+          isVisible = {this.props.showModal}
+          close = {() => this.props.closeModal()}
+          dayNum={dateFns.format(cloneDay, 'd')}
 
+          />
+          </div>}>
 
 
         </Popover>
         */}
       border.push(
+        <Popover trigger="click"  placement="right" onClick = {() =>
+        this.addEventClick(selectedDate, cloneHour)}  content={<div>
+          <EditEventPopUp
+          isVisible = {this.props.showModal}
+          close = {() => this.props.closeModal()}
+          dayNum={dateFns.format(selectedDate, 'd')}
+
+          />
+          </div>}>
 
             <div
             style = {{background: this.color(hourIndex)}}
             onClick = {(e)=> this.onDayHourClick(hourIndex)}
-            className = {`${i%2 === 0 ? 'dayCellT' : 'dayCellB'}`}
+            className = {`${(hourIndex%2 === 0)? 'dayCellT' : 'dayCellB'}`}
             // onClick = {() => this.onHourClick(cloneHour)}
             >
             </div>
 
-
+          </Popover>
       )
       toDoStuff = []
       hour = dateFns.addMinutes(hour, 30);
@@ -396,7 +762,7 @@ class DayCalendar extends React.Component{
     // you will basically get the differnece between the start and end time and add it to the
     // starting index and then you will then add one for any extra 30 mins (there is more math involved
     // but that is the gist of it)
-    console.log(start_time, end_time, start_index)
+    console.log(start_time,end_time, start_index)
     let bottomIndex = ''
     const start = new Date(start_time)
     const end = new Date(end_time)
@@ -424,6 +790,7 @@ class DayCalendar extends React.Component{
     }
 
     const ratio = topIndex + '/' + bottomIndex
+    console.log(ratio)
     return ratio
   }
 
@@ -491,6 +858,10 @@ class DayCalendar extends React.Component{
 
   openEventSyncModal = () => {
     this.props.openEventSyncModal()
+  }
+
+  onEventPage = (eventId) => {
+    this.props.history.push('/personalcal/event/'+eventId)
   }
 
   render() {

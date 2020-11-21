@@ -273,8 +273,8 @@ class WeekCalendar extends React.Component{
   for (let dayIndex = 0; dayIndex < 7; dayIndex++){
 
     for (let hourIndex = 0; hourIndex< 48; hourIndex++){
-        const dayDay = date
-        const hourHour = hour
+
+
         const clonedayIndex = dayIndex
         const clonehourIndex = hourIndex
         const cloneDay = date
@@ -797,7 +797,7 @@ class WeekCalendar extends React.Component{
           )
         }
         border.push(
-          <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(dayDay, hourHour)}  content={<div>
+          <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(cloneDay, cloneHour)}  content={<div>
             <EditEventPopUp
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
