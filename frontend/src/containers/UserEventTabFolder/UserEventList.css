@@ -12,19 +12,46 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+
   /* height: 1000px; */
 }
 
 .eventListTabContainer .eventListContainer .eventContainer{
+  position: relative;
   background-color: white;
-  height: 150px;
+  height: 170px;
   margin: 12px;
   border-radius: 10px;
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
+  overflow: hidden;
 }
 
 
-.eventListTabContainer .eventListContainer .eventContainer{
+.eventListTabContainer .eventListContainer .eventContainer .noPicBox{
+  /* background-color: red; */
+  position: absolute;
+  width: 170px;
+  height: 100%;
+  border: 10px dashed gainsboro;
+  font-size: 40px;
+  color: grey;
+  padding-top: 10px;
+}
+.eventListTabContainer .eventListContainer .eventContainer .picBox{
+  position: absolute;
+  width: 170px;
+  height: 100%;
+  /* border: 10px dashed gainsboro; */
+  font-size: 40px;
+  color: grey;
+  overflow: hidden;
+}
+.eventListTabContainer .eventListContainer .eventContainer .picBox .picBoxPic{
+  height: 100%;
+}
 
+
+.eventListTabContainer .eventListContainer .eventContainer .noPicBox .noPicWords{
+  font-size: 20px;
+  margin: 0;
 }
