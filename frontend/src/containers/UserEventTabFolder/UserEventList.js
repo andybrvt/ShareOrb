@@ -1,5 +1,7 @@
 import React from 'react';
 import './UserEventList.css';
+import {PictureOutlined } from '@ant-design/icons';
+
 
 
 class UserEventList extends React.Component{
@@ -19,12 +21,16 @@ class UserEventList extends React.Component{
           <div className = "eventContainer">
           {
             socialEventList[i].backgroundImg === null ?
-            <div className = ''>
-              Hi
+            <div className = 'noPicBox'>
+            <PictureOutlined />
+            <br />
+              <span className = 'noPicWords'> No picture </span>
             </div>
             :
-            <div className = ''>
-            hey
+            <div className = 'picBox'>
+              <img
+              className = "picBoxPic"
+              src = {'http://127.0.0.1:8000'+socialEventList[i].backgroundImg} />
             </div>
           }
 
