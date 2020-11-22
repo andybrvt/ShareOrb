@@ -1132,16 +1132,17 @@ class WeekCalendar extends React.Component{
          />
 
         <div className = 'mainCalContainer'>
-          <div className = 'weekCalendar'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+          <div className = 'weekCalendar'>
             <div style={{display: 'inline-block'}}>
               {this.renderHeader()}
             </div>
-            <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+            <div style={{display: 'inline-block'}}>
               <CalendarViewDropDown
-              calType = "week"
-              history = {this.props.history}
-              matchPara = {this.props.parameter} />
+                class="CalendarViewCSS"
+                calType = "week"
+                history = {this.props.history}
+                matchPara = {this.props.parameter} />
             </div>
             {this.renderDays()}
           </div>

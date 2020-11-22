@@ -884,16 +884,22 @@ class PersonalCalendar extends React.Component{
           <div className = 'sidecol'>
           {this.renderSide()}
           </div>
-          <div className = 'calendar'>
-            {this.renderHeader()}
-            {this.renderDays()}
-            {this.renderCells(this.props.events)}
-          </div>
-          <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
-            <CalendarViewDropDown
-            calType = "week"
-            history = {this.props.history}
-            matchPara = {this.props.parameter} />
+          <div className = 'weekCalendar'>
+            <div style={{display: 'inline-block'}}>
+              {this.renderHeader()}
+            </div>
+            <div style={{display: 'inline-block'}}>
+              <CalendarViewDropDown
+              calType = "month"
+              history = {this.props.history}
+              matchPara = {this.props.parameter} />
+            </div>
+            <div className = 'calendar'>
+
+              {this.renderDays()}
+              {this.renderCells(this.props.events)}
+            </div>
+
           </div>
         </div>
         <EditEventPopUp

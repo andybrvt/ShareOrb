@@ -473,7 +473,7 @@ main {
   display: block;
   position: relative;
   left: 50px;
-  width: 1310px;
+  width: 1410px;
   /* background: var(--neutral-color); */
   /* border: 1px solid var(--border-color); */
   /* background-color: black; */
@@ -838,18 +838,12 @@ main {
 
 }
 
-
-.miniCalContainer .selectView {
-  /* background-color: red; */
-
-  position: relative;
-  top: 80px;
-  left:70px;
-  width: 250px;
-  margin-bottom: 50px;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
+.CalendarViewCSS{
+float:right;
+background-color: red;
+color:red;
 }
+
 
 .miniCalContainer .addEventButton:hover {
   border: none;

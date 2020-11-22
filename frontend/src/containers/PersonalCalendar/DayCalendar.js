@@ -86,10 +86,8 @@ class DayCalendar extends React.Component{
 
 // render the date on top
   renderHeader(){
-    const dateFormat = 'iiii MMMM dd, yyyy'
-
     return (
-      <div className = {`dayHeader row flex-middle
+      <div className = {`header row flex-middle
         ${dateFns.isSameDay(this.props.currentDate, new Date()) ? 'cellBorderHeader' : ''}
         `}>
         <div className = 'col col-start'>
@@ -99,7 +97,7 @@ class DayCalendar extends React.Component{
         </div>
         <div className = "col col-center">
           <span>
-            {dateFns.format(this.props.currentDate, dateFormat)}
+            {dateFns.format(this.props.currentDate, 'iiii MMMM dd, yyyy')}
           </span>
         </div>
         <div className = "col col-end" onClick = {this.nextDay}>
@@ -877,21 +875,20 @@ class DayCalendar extends React.Component{
         />
 
         <div className ='mainCalContainer'>
-
-          <div className = "weekCalendar">
-            <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-            <div style={{padding:'30px'}}>
+          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+            <div className = 'weekCalendar'>
               <div style={{display: 'inline-block'}}>
                 {this.renderHeader()}
               </div>
-              <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+              <div style={{display: 'inline-block'}}>
                 <CalendarViewDropDown
-                calType = "week"
-                history = {this.props.history}
-                matchPara = {this.props.parameter} />
+                  class="CalendarViewCSS"
+                  calType = "week"
+                  history = {this.props.history}
+                  matchPara = {this.props.parameter} />
               </div>
+              {this.renderDays()}
             </div>
-          </div>
           <div className = 'testBox'>
           <div className = 'dayFlex-Container'>
             <div className = 'timecol'>

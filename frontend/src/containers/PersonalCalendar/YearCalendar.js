@@ -255,9 +255,9 @@ class YearCalendar extends React.Component{
               <div style={{display: 'inline-block'}}>
                 {this.renderHeader()}
               </div>
-              <div style={{display: 'inline-block', float:'right', padding:'40px', color:'black'}} class="selectView">
+              <div>
                 <CalendarViewDropDown
-                calType = "week"
+                calType = "year"
                 history = {this.props.history}
                 matchPara = {this.props.parameter} />
               </div>
