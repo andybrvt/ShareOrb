@@ -889,6 +889,12 @@ class PersonalCalendar extends React.Component{
             {this.renderDays()}
             {this.renderCells(this.props.events)}
           </div>
+          <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+            <CalendarViewDropDown
+            calType = "week"
+            history = {this.props.history}
+            matchPara = {this.props.parameter} />
+          </div>
         </div>
         <EditEventPopUp
           isVisible = {this.props.showModal}

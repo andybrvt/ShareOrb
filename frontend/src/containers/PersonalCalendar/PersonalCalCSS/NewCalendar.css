@@ -165,7 +165,7 @@ main {
 .flex-container {
   display: flex;
   position: relative;
-  left: 10px;
+  left: 30px;
   /* background-color: red; */
   /* width: 10px; */
 }
@@ -458,6 +458,7 @@ main {
 
 
 .calendar {
+
   display: block;
   position: relative;
   width: 100%;
@@ -777,6 +778,7 @@ main {
 
 .miniCalContainer {
   position:relative;
+  margin-left: -35px;
 
 
   /* height: 10px; */
