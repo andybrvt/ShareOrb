@@ -53,7 +53,7 @@ class YearCalendar extends React.Component{
     const dateFormat = 'yyyy'
 
     return(
-      <div className = "header row flex-middle">
+      <div className = "header row flex-middle" style={{marginLeft:'450px'}}>
         <div className = "col col-start">
           <div className = "icon" onClick = {this.prevYear} >
           <i className= 'arrow arrow-left'></i>
@@ -61,7 +61,6 @@ class YearCalendar extends React.Component{
         </div>
         <div className = "col col-center">
           <span
-          style = {{fontSize: '30px'}}
           >
             {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
@@ -256,7 +255,7 @@ class YearCalendar extends React.Component{
               <div style={{display: 'inline-block'}}>
                 {this.renderHeader()}
               </div>
-              <div style={{display: 'inline-block', float:'right', padding:'20px', color:'black'}} class="selectView">
+              <div style={{display: 'inline-block', float:'right', padding:'40px', color:'black'}} class="selectView">
                 <CalendarViewDropDown
                 calType = "week"
                 history = {this.props.history}
