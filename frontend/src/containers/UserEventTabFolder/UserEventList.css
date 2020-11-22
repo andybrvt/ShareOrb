@@ -27,6 +27,7 @@
 }
 
 
+
 .eventListTabContainer .eventListContainer .eventContainer .noPicBox{
   /* background-color: red; */
   position: absolute;
@@ -54,4 +55,54 @@
 .eventListTabContainer .eventListContainer .eventContainer .noPicBox .noPicWords{
   font-size: 20px;
   margin: 0;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxTitle{
+   /* color: red; */
+   position: absolute;
+   font-size:35px;
+   left: 19%;
+   top: 5%;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxContent{
+  color: red;
+  position: absolute;
+  display: none;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxLocation{
+  /* color: red; */
+  position: absolute;
+  color: gray;
+  left: 19%;
+  top: 30%;
+  font-size: 18px;
+  /* display: none; */
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxDay{
+  /* color: red; */
+  position: absolute;
+  left: 19%;
+  top: 45%;
+  color: gray;
+  font-size: 18px;
+  /* display: none; */
+}
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxTimes{
+  /* color: red; */
+  position: absolute;
+  left: 19%;
+  top: 60%;
+  font-size: 18px;
+  color: gray;
+  /* display: none; */
+}
+
+
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxHost{
+  color: red;
+  position: absolute;
+  display: none;
 }
