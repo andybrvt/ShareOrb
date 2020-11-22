@@ -506,6 +506,7 @@ main {
   font-weight: 400;
   font-size: 17px;
   padding: 1em 0;
+  
   /* border-bottom: 1px solid var(--border-color); */
   /* background-color: blue; */
   width: 850px;
@@ -704,12 +705,12 @@ main {
 }
 
 
-.calendarContainer .mainCalContainer{
+.mainCalContainer{
   width: 1500px;
   position: relative;
   left: 15px;
   top: 0px;
-  padding: 0;
+
   /* padding-left: 25px; */
   /* background-color: orange; */
 }
@@ -835,15 +836,14 @@ main {
 }
 
 
-.miniCalContainer .selectView {
+.selectView {
   /* background-color: red; */
 
   position: relative;
-  top: 80px;
-  left:70px;
+  top: 10px;
+  left:125px;
   width: 250px;
   margin-bottom: 50px;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
 
