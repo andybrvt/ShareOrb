@@ -802,7 +802,6 @@ class DetailEditEventForm extends React.Component{
                     type = 'text'
                 />
             </div>
-            {/*
             <div className = "noMap">
                 <div class="noMapFrame">
                 <PictureOutlined />
@@ -810,42 +809,30 @@ class DetailEditEventForm extends React.Component{
                 <span> No Location </span>
                 </div>
             </div>
-            */}
-            <div style={{marginBottom:'100px'}}></div>
-            start
+            
 
+
+
+            <div style={{marginBottom:'100px'}}></div>
+
+            {/*
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>
               <p style={{fontSize:'20px', color:'black'}}
                 className="eventDetails"> Location </p>
               <div style={{height:'100px'}}>
-              {/*
-              <ReactBingmaps
 
-                bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                center = {[32.2226, 110.9747]}
-                boundary = {
-                {
-                  "search":"Fremont, CA",
-                  "option":{
-                    entityType: 'PopulatedPlace'
-                  },
-                  "polygonStyle" :{
-                    fillColor: 'rgba(161,224,255,0.4)',
-                    strokeColor: '#a495b2',
-                    strokeThickness: 2
-                  }
-                }
-              }
-                >
-              </ReactBingmaps>
-              */}
               </div>
 
 
 
             </div>
+            */}
+
+
 
             </div>
+
+
 
 
 
