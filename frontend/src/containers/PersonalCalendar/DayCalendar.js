@@ -92,7 +92,7 @@ class DayCalendar extends React.Component{
         `}>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
-          <i className= 'arrow arrow-left'></i>
+            <i class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
         <div className = "col col-center">
@@ -102,7 +102,7 @@ class DayCalendar extends React.Component{
         </div>
         <div className = "col col-end" onClick = {this.nextDay}>
           <div className = "icon">
-          <i className = 'arrow arrow-right'></i>
+            <i class="fas fa-chevron-circle-right"></i>
           </div>
         </div>
       </div>

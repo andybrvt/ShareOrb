@@ -708,10 +708,10 @@ main {
 }
 
 
-.calendarContainer .mainCalContainer{
+.mainCalContainer{
   width: 1500px;
   position: relative;
-  left: 15px;
+  left: 30px;
   top: 0px;
   padding: 0;
   /* padding-left: 25px; */
