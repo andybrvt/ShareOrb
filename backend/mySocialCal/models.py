@@ -104,6 +104,8 @@ class SocialCalEvent(models.Model):
         # all you have to do is filter out the right messages for each soical event
         return SocialEventMessages.objects.filter(eventObj = self).values_list('id', flat = True)
 
+    class Meta:
+        ordering = ('-event_day', '-start_time')
 
 class SocialEventMessages(models.Model):
     # this modal is for the group chat events that are associated with each social events

@@ -30,6 +30,12 @@ class UserEventList extends React.Component{
 
   }
 
+  openSocialEventPage = (eventId) => {
+    // This function will open the social event page
+    this.props.history.push("/socialcal/event/"+eventId)
+
+  }
+
   dateView(date) {
     // This will be presenting the calendar day on the modal
     // console.log(dateFns.format(new Date(date), ''))
@@ -152,7 +158,9 @@ class UserEventList extends React.Component{
           }
 
 
-          <div className = "viewButton">
+          <div
+          onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+          className = "viewButton">
             <span className = 'viewText'> View </span>
           </div>
 

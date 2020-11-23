@@ -490,6 +490,7 @@ class PersonalProfileEventList extends React.Component{
           events = {this.props.profile.get_socialEvents}
           curId = {this.props.currentId}
           ownerId = {this.props.profile.id}
+          history = {this.props.history}
            />
            </div>
 
