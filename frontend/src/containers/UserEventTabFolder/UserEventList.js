@@ -5,6 +5,7 @@ import * as dateFns from 'date-fns';
 import {Avatar} from 'antd';
 import Liking from "../NewsfeedItems/Liking";
 import userIcon from '../../components/images/user.png';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
 
 
 
@@ -12,6 +13,14 @@ class UserEventList extends React.Component{
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  sendJoinUserEvent = (userId, ownerId, eventId) => {
+    // This will be used to send the userId and the eventid ot the
+    // websocket
+    // The userId will be the person wanting to join the event
+    console.log(userId, eventId)
+    ExploreWebSocketInstance.sendSocialEventJoinPage(userId, ownerId, eventId)
   }
 
   dateView(date) {
@@ -125,7 +134,9 @@ class UserEventList extends React.Component{
 
               :
 
-              <div className = "joinButton">
+              <div
+              onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+              className = "joinButton">
                 <span className = "joinText"> Join </span>
               </div>
 

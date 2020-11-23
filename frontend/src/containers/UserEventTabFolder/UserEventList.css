@@ -139,7 +139,7 @@
 }
 
 .eventListTabContainer .eventListContainer .eventContainer .joinButton{
-  background-color: red;
+  cursor: pointer;
   height: 35%;
   width: 15%;
   position: absolute;

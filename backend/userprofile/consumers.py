@@ -10,6 +10,7 @@ from .serializers import CommentSerializer
 from .serializers import UserSerializer
 from .serializers import FollowSerializer
 from .serializers import FollowUserSerializer
+from .serializers import UserSocialEventSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -672,6 +673,28 @@ class ExploreConsumer(JsonWebsocketConsumer):
         self.send_new_explore(content)
 
 
+    def add_user_social_event_page(self, data):
+        #Similar to the add_user_social_event but it will be used mainly for the
+        # event pages, so you wanna limit certain infomation
+        user = get_object_or_404(User, id = data['userId'])
+        curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+        curSocialEvent.persons.add(user)
+
+        # Owner fo the event page
+        owner = get_object_or_404(User, id = data['ownerId'])
+
+        serializedOnwer = UserSocialEventSerializer(owner).data
+        socialEventList = serializedOnwer['get_socialEvents']
+        socialEventPageOwner = serializedOnwer['username']
+
+        content = {
+            'command': 'add_user_social_event_page',
+            'socialEventList': socialEventList,
+            'reciever': socialEventPageOwner
+        }
+
+        self.send_new_explore(content)
+
     # This will be removign the user from the event
     def remove_user_social_event(self, data):
         # Similar to adding users to event but now you are just removing
@@ -830,6 +853,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.add_user_social_event(data)
         if data['command'] == 'remove_user_social_event':
             self.remove_user_social_event(data)
+        if data['command'] == 'add_user_social_event_page':
+            self.add_user_social_event_page(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)
