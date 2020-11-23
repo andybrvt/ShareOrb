@@ -99,6 +99,15 @@ class UserEventList extends React.Component{
           <div className = "likeList"> <Liking like_people = {socialEventList[i].persons} /> </div>
           </div>
 
+          <div className = "joinButton">
+            <span className = "joinText"> Join </span>
+          </div>
+
+          <div className = "viewButton">
+            <span className = 'viewText'> View </span>
+          </div>
+
+
 
           </div>
 

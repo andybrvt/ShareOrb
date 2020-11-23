@@ -49,6 +49,8 @@
 }
 .eventListTabContainer .eventListContainer .eventContainer .picBox .picBoxPic{
   height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 
@@ -134,4 +136,42 @@
   /* background-color: red; */
   position: absolute;
   left: 82%;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .joinButton{
+  background-color: red;
+  height: 35%;
+  width: 15%;
+  position: absolute;
+  right: 5%;
+  top: 13%;
+  border-radius: 10px;
+  font-size: 27px;
+  color: white;
+  background-color: limegreen;
+  /* padding-top: 30%; */
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .joinButton .joinText{
+  position: relative;
+  top: 15%;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .viewButton{
+  background-color: red;
+  height: 35%;
+  width: 15%;
+  position: absolute;
+  right: 5%;
+  top: 53%;
+  border-radius: 10px;
+  font-size: 27px;
+  color: white;
+  background-color: lightgray;
+  /* padding-top: 30%; */
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .viewButton .viewText{
+  position: relative;
+  top: 15%;
 }
