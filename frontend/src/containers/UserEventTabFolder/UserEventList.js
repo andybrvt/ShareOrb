@@ -23,6 +23,13 @@ class UserEventList extends React.Component{
     ExploreWebSocketInstance.sendSocialEventJoinPage(userId, ownerId, eventId)
   }
 
+  sendLeaveUserEvent = (userId, ownerId, eventId) => {
+    // This is similar to the sendJoinUserEvent, difference is that you are
+    // just leaving the event
+    ExploreWebSocketInstance.sendSocialEventLeavePage(userId, ownerId, eventId)
+
+  }
+
   dateView(date) {
     // This will be presenting the calendar day on the modal
     // console.log(dateFns.format(new Date(date), ''))
@@ -128,7 +135,9 @@ class UserEventList extends React.Component{
 
               :
 
-              <div className = "leaveButton">
+              <div
+              onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+              className = "leaveButton">
                 <span className = "leaveText"> Leave </span>
               </div>
 

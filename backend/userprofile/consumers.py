@@ -683,9 +683,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # Owner fo the event page
         owner = get_object_or_404(User, id = data['ownerId'])
 
-        serializedOnwer = UserSocialEventSerializer(owner).data
-        socialEventList = serializedOnwer['get_socialEvents']
-        socialEventPageOwner = serializedOnwer['username']
+        serializedOwner = UserSocialEventSerializer(owner).data
+        socialEventList = serializedOwner['get_socialEvents']
+        socialEventPageOwner = serializedOwner['username']
 
         content = {
             'command': 'add_user_social_event_page',
@@ -722,6 +722,27 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         self.send_new_explore(content)
 
+    def remove_user_social_event_page(self, data):
+        # This will be similar to the add_user_social_event_page but now you are
+        #  just removing the user instead of adding them
+
+        user = get_object_or_404(User, id = data['userId'])
+        curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+        curSocialEvent.persons.remove(user)
+
+        owner = get_object_or_404(User, id = data['ownerId'])
+
+        serializedOwner = UserSocialEventSerializer(owner).data
+        socialEventList = serializedOwner['get_socialEvents']
+        socialEventPageOwner = serializedOwner['username']
+
+        content = {
+            'command': 'remove_user_social_event_page',
+            'socialEventList': socialEventList,
+            'reciever': socialEventPageOwner
+        }
+
+        self.send_new_explore(content)
 
         # CONTINUE HERE, IT SHOULD BE SIMILAR TO THE VIEWS IN MYSOCIALCAL
     def send_following(self, data):
@@ -855,6 +876,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.remove_user_social_event(data)
         if data['command'] == 'add_user_social_event_page':
             self.add_user_social_event_page(data)
+        if data['command'] == 'remove_user_social_event_page':
+            self.remove_user_social_event_page(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)

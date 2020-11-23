@@ -118,11 +118,20 @@ class WebSocketExplore {
       this.callbacks['add_social_event_join_leave'](socialEventList, socialCellId)
 
     } else if( command === "add_user_social_event_page"){
-
+      // For the event tabs on the profile page
       const socialEventList = parsedData.socialEventList
 
       // add callbacks here
       this.callbacks['add_social_event_join_leave_page'](socialEventList)
+    } else if(command === "remove_user_social_event_page"){
+      // for the event tabs on the profile pages
+      // simlar to the else if above but make this so peple know what
+      // functions there are
+
+      const socialEventList = parsedData.socialEventList
+
+      this.callbacks['add_social_event_join_leave_page'](socialEventList)
+
     }
 
 
@@ -263,6 +272,20 @@ class WebSocketExplore {
       ownerId: ownerId,
       eventId: eventId,
       command: 'add_user_social_event_page'
+    })
+  }
+
+  sendSocialEventLeavePage = (userId, ownerId, eventId) => {
+
+
+    // This will remove the use form the events. Used for people leaving
+    // the events
+
+    this.sendExplore({
+      userId: userId,
+      ownerId: ownerId,
+      eventId: eventId,
+      command: 'remove_user_social_event_page'
     })
   }
 
