@@ -105,6 +105,25 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_socialEvents'] = socialEventList
         return data
 
+class UserSocialEventSerializer(serializers.ModelSerializer):
+    # This will help serialzie the user just to get the socialevents. This will
+    # help avoid getting too much infomration
+    get_socialEvents = serializers.StringRelatedField(many = True)
+    class Meta:
+        model = models.User
+        fields = ("id","username", "get_socialEvents")
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        socialEventList = []
+        for socialEvents in data['get_socialEvents']:
+            socialEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = socialEvents)).data
+            socialEventList.append(socialEvent)
+        data['get_socialEvents'] = socialEventList
+        return data
+
+
+
 
 class UserSocialCalSerializer(serializers.ModelSerializer):
 

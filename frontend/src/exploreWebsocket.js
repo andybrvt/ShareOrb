@@ -244,6 +244,20 @@ class WebSocketExplore {
 
   }
 
+  sendSocialEventJoinPage = (userId, ownerId, eventId) => {
+    // Thsi will add the user to the events, this will be used
+    // mostly for the event page instead of the calendar event it self
+
+    // userId will be the person wanting to join
+    //ownerId will be the person's profile that the event is on
+    this.sendExplore({
+      userId: userId,
+      ownerId: ownerId,
+      eventId: eventId,
+      command: 'add_user_social_event_page'
+    })
+  }
+
 
 
   sendExplore(data){
