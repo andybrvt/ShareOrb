@@ -2,6 +2,9 @@ import React from 'react';
 import './UserEventList.css';
 import {PictureOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
+import {Avatar} from 'antd';
+import Liking from "../NewsfeedItems/Liking";
+import userIcon from '../../components/images/user.png';
 
 
 
@@ -84,9 +87,24 @@ class UserEventList extends React.Component{
           </div>
           <div className = "eventBoxTimes"><i class="far fa-clock"></i> {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}</div>
 
-          <div className = "eventBoxHost "> Host: {socialEventList[i].host.username}</div>
+          <div className = "eventBoxHost ">
+          Host: <Avatar
+            size = {30}
+            src = {"http://127.0.0.1:8000"+socialEventList[i].host.profile_picture}
+          /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
+          </div>
+
+          <div className = "eventBoxParticipant">
+          <span className = "participants"> Participants: </span>
+          <div className = "likeList"> <Liking like_people = {socialEventList[i].persons} /> </div>
+          </div>
+
 
           </div>
+
+
+
+
         )
       }
 
