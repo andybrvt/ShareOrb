@@ -285,7 +285,7 @@ class DayCalendar extends React.Component{
         hours.push(
             toDoStuff.map(item => (
 
-              <Popover placement="right"  content={
+              <Popover content={
                 <div style={{padding:20, width:450}}>
                   <p style={{display:'inline-block'}}>
 
@@ -673,7 +673,7 @@ class DayCalendar extends React.Component{
         </Popover>
         */}
       border.push(
-        <Popover trigger="click"  placement="right" onClick = {() =>
+        <Popover trigger="click" onClick = {() =>
             this.addEventClick(selectedDate, cloneHour)}  content={<div>
           <EditEventPopUp
           isVisible = {this.props.showModal}
@@ -883,7 +883,7 @@ class DayCalendar extends React.Component{
               <div style={{display: 'inline-block'}}>
                 <CalendarViewDropDown
                   class="CalendarViewCSS"
-                  calType = "week"
+                  calType = "day"
                   history = {this.props.history}
                   matchPara = {this.props.parameter} />
               </div>
