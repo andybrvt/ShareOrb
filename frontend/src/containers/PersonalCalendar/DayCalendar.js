@@ -92,7 +92,7 @@ class DayCalendar extends React.Component{
         `}>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
-            <i class="fas fa-chevron-circle-left"></i>
+            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
         <div className = "col col-center">
@@ -102,7 +102,7 @@ class DayCalendar extends React.Component{
         </div>
         <div className = "col col-end" onClick = {this.nextDay}>
           <div className = "icon">
-            <i class="fas fa-chevron-circle-right"></i>
+            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
           </div>
         </div>
       </div>
@@ -922,9 +922,11 @@ class DayCalendar extends React.Component{
               onClick = {this.openEventSyncModal}>
                 Event Sync
             </Button>
+            {/*
             <div className = 'timeLayerCon'>
               list of people to be added!
             </div>
+            */}>
           </div>
       </div>
     )

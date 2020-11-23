@@ -56,7 +56,7 @@ class YearCalendar extends React.Component{
       <div className = "header row flex-middle" style={{marginLeft:'450px'}}>
         <div className = "col col-start">
           <div className = "icon" onClick = {this.prevYear} >
-          <i className= 'arrow arrow-left'></i>
+          <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
         <div className = "col col-center">
@@ -67,7 +67,7 @@ class YearCalendar extends React.Component{
         </div>
         <div className = 'col col-end' onClick = {this.nextYear}>
           <div className = 'icon'>
-          <i className = 'arrow arrow-right'></i>
+            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
           </div>
         </div>
 
@@ -257,7 +257,7 @@ class YearCalendar extends React.Component{
               </div>
               <div>
                 <CalendarViewDropDown
-                calType = "year"
+                calType = "week"
                 history = {this.props.history}
                 matchPara = {this.props.parameter} />
               </div>
@@ -280,9 +280,11 @@ class YearCalendar extends React.Component{
             onClick = {this.openEventSyncModal}>
               Event Sync
           </Button>
+          {/*
           <div className = 'timeLayerCon'>
             list of people to be added!
           </div>
+          */}
         </div>
       </div>
     )
