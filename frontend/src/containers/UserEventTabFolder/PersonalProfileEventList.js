@@ -488,6 +488,7 @@ class PersonalProfileEventList extends React.Component{
           <div className = 'profile-tabPanel'>
           <UserEventList
           events = {this.props.profile.get_socialEvents}
+          curId = {this.props.currentId}
            />
            </div>
 

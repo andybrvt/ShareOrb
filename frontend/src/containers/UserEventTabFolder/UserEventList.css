@@ -158,7 +158,6 @@
 }
 
 .eventListTabContainer .eventListContainer .eventContainer .viewButton{
-  background-color: red;
   height: 35%;
   width: 15%;
   position: absolute;
@@ -168,10 +167,49 @@
   font-size: 27px;
   color: white;
   background-color: lightgray;
+  cursor: pointer;
+
   /* padding-top: 30%; */
 }
 
 .eventListTabContainer .eventListContainer .eventContainer .viewButton .viewText{
+  position: relative;
+  top: 15%;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .hostButton{
+  height: 35%;
+  width: 15%;
+  position: absolute;
+  right: 5%;
+  top: 13%;
+  border-radius: 10px;
+  font-size: 27px;
+  color: white;
+  background-color: lightgray;
+  cursor: pointer;
+
+}
+.eventListTabContainer .eventListContainer .eventContainer .hostButton .hostText{
+  position: relative;
+  top: 15%;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .leaveButton{
+  height: 35%;
+  width: 15%;
+  position: absolute;
+  right: 5%;
+  top: 13%;
+  border-radius: 10px;
+  font-size: 27px;
+  color: white;
+  background-color: lightgray;
+  cursor: pointer;
+
+}
+
+.eventListTabContainer .eventListContainer .eventContainer .leaveButton .leaveText{
   position: relative;
   top: 15%;
 }

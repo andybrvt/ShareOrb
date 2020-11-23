@@ -48,6 +48,18 @@ class UserEventList extends React.Component{
 
   }
 
+  checkUser = (personList) => {
+    // Check if user exist in teh list and will return true or false
+    // The person list is a dicitonary of users
+    let personListId = []
+    for (let i = 0; i<personList.length; i++){
+      const userId = personList[i].id
+      personListId.push(userId)
+    }
+
+    return personListId.includes(this.props.curId)
+  }
+
 
 
   renderEventCells = () => {
@@ -98,10 +110,27 @@ class UserEventList extends React.Component{
           <span className = "participants"> Participants: </span>
           <div className = "likeList"> <Liking like_people = {socialEventList[i].persons} /> </div>
           </div>
+          {
+            this.checkUser(socialEventList[i].persons) ?
+              socialEventList[i].host.id === this.props.curId ?
+              <div className = "hostButton">
+                <span className = "hostText"> Host </span>
+              </div>
 
-          <div className = "joinButton">
-            <span className = "joinText"> Join </span>
-          </div>
+              :
+
+              <div className = "leaveButton">
+                <span className = "leaveText"> Leave </span>
+              </div>
+
+              :
+
+              <div className = "joinButton">
+                <span className = "joinText"> Join </span>
+              </div>
+
+          }
+
 
           <div className = "viewButton">
             <span className = 'viewText'> View </span>
