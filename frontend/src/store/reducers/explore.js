@@ -85,6 +85,16 @@ export const addSocialEventJoinLeave = (state, action) => {
   })
 }
 
+export const addSocialEventJoinLeavePage = (state, action) => {
+
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      get_socialEvents: action.socialEventList
+    }
+  })
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -101,6 +111,8 @@ const reducer = (state = initialState, action) => {
       return addSocialCellCoverPic(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE:
       return addSocialEventJoinLeave(state, action);
+    case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_PAGE:
+      return addSocialEventJoinLeavePage(state, action);
     default:
       return state;
   };

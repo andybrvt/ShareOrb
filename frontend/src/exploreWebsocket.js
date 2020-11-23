@@ -117,6 +117,12 @@ class WebSocketExplore {
 
       this.callbacks['add_social_event_join_leave'](socialEventList, socialCellId)
 
+    } else if( command === "add_user_social_event_page"){
+
+      const socialEventList = parsedData.socialEventList
+
+      // add callbacks here
+      this.callbacks['add_social_event_join_leave_page'](socialEventList)
     }
 
 
@@ -129,6 +135,7 @@ class WebSocketExplore {
      addFollowerUnfollowerCallBack,
      addSocialEventJoinLeave,
      addSocialCell,
+     addSocialEventJoinLeavePage
 
 
    ){
@@ -136,6 +143,7 @@ class WebSocketExplore {
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
     this.callbacks['add_social_event_join_leave'] = addSocialEventJoinLeave
     this.callbacks['add_social_cell'] = addSocialCell
+    this.callbacks['add_social_event_join_leave_page'] = addSocialEventJoinLeavePage
   }
 
 

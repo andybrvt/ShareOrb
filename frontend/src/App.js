@@ -62,6 +62,7 @@ class App extends Component {
       this.props.addFollowerUnfollower.bind(this),
       this.props.addSocialEventJoinLeave.bind(this),
       this.props.addSocialCell.bind(this),
+      this.props.addSocialEventJoinLeavePage.bind(this)
 
 
     )
@@ -168,6 +169,7 @@ const mapDispatchToProps = dispatch => {
     loadProfile: profile => dispatch(exploreActions.loadProfile(profile)),
     addFollowerUnfollower: followObject => dispatch(exploreActions.addFollowerUnfollower(followObject)),
     addSocialEventJoinLeave: (socialEventList, cellId) => dispatch(exploreActions.addSocialEventJoinLeave(socialEventList, cellId)),
+    addSocialEventJoinLeavePage: (socialEventList) => dispatch(exploreActions.addSocialEventJoinLeavePage(socialEventList)),
     addSocialCell: (newSocialCellObj) => dispatch(exploreActions.addSocialCell(newSocialCellObj)),
 
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),

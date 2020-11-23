@@ -60,3 +60,13 @@ export const addSocialEventJoinLeave = (socialEventList, cellId) =>{
     cellId: cellId
   }
 }
+
+export const addSocialEventJoinLeavePage = (socialEventList) => {
+  //This will be similar to the addSocialEventJoinLeave function above but
+  // will be mostly for the soical events
+
+  return {
+    type: actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_PAGE,
+    socialEventList: socialEventList
+  }
+}

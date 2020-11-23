@@ -112,6 +112,7 @@ export const CLOSE_SOCIAL_CAL_CELL_PAGE = 'CLOSE_SOCIAL_CAL_CELL_PAGE';
 // This will cover add events, join and leave events
 export const ADD_SOCIAL_EVENT_JOIN_LEAVE = 'ADD_SOCIAL_EVENT_JOIN_LEAVE';
 export const ADD_SOCIAL_EVENT_JOIN_LEAVE_M = 'ADD_SOCIAL_EVENT_JOIN_LEAVE_M';
+export const ADD_SOCIAL_EVENT_JOIN_LEAVE_PAGE = 'ADD_SOCIAL_EVENT_JOIN_LEAVE_PAGE';
 //REDO ALL OF THIS (any thing with an m attached to it)
 
 
