@@ -3,6 +3,7 @@ import "./SocialEventPage.css";
 import moment from 'moment';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
+import * as dateFns from 'date-fns';
 
 
 class SocialEventGroupChat extends React.Component{
@@ -65,6 +66,22 @@ class SocialEventGroupChat extends React.Component{
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
 
     }
+  }
+
+
+  checkDay = (eventDay, eventTime) =>{
+      // Checks if the event day and time has passed the current event date and
+      // time. If it is then it will return true if it is not the it will retunr
+      // false
+
+    console.log(eventDay, eventTime)
+    let eventDate = dateFns.addHours(new Date(eventDay), 7)
+    const timeList = eventTime.split(":")
+    eventDate = dateFns.addHours(eventDate, timeList[0])
+    eventDate = dateFns.addMinutes(eventDate, timeList[1])
+    console.log(eventDate)
+    return dateFns.isAfter(eventDate, new Date())
+
   }
 
   componentDidMount() {
@@ -142,6 +159,9 @@ class SocialEventGroupChat extends React.Component{
 
 
         <div className = "inputForm">
+        {
+          this.checkDay(this.props.date, this.props.endTime) ?
+
           <Form>
             <Input
             className = "socialEventChatInput"
@@ -151,6 +171,14 @@ class SocialEventGroupChat extends React.Component{
             placeholder = "Write a message..."
             />
           </Form>
+
+          :
+
+          <div className = 'eventEndText' >
+            Event has ended. You can no long send messages.
+          </div>
+        }
+
 
         </div>
 
