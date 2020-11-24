@@ -19,12 +19,12 @@
   margin: 0;
 }
 
-.reactForm .reactColor {
+.reactColor {
   position: absolute;
-  left: 310px;
-  top: 53px;
+  left: 325px;
+  top: 5px;
   width: 50px;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .reactForm .reactLocation{

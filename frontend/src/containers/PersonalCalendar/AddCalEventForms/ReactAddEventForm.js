@@ -39,7 +39,7 @@ class ReactAddEventForm extends React.Component {
       content: '',
       location: '',
       repeatCondition: 'none',
-      eventColor: '#91d5ff',
+      eventColor: '#1890ff',
       error: false,
       person: []
     }
@@ -321,15 +321,7 @@ class ReactAddEventForm extends React.Component {
       // errors['title'] = 'Cannot be empty'
     }
 
-    if (content === ''){
-      buttonDisabled = true
-      // errors['content'] = 'Cannot be empty'
-    }
 
-    if (location === ''){
-      buttonDisabled = true
-      // errors['location'] = 'Cannot be empty'
-    }
 
     if (startDate === null){
       buttonDisabled = true
@@ -551,6 +543,7 @@ class ReactAddEventForm extends React.Component {
          className= 'reactTitle'
          placeholder = 'Title'
          value = {this.state.title}
+         style={{marginTop:'-5px'}}
          />
        </Form.Item>
 
@@ -567,7 +560,8 @@ class ReactAddEventForm extends React.Component {
        <Form.Item
            name="range-time-picker"
           {...rangeConfig}
-           className = 'timepicker'>
+          style={{marginTop:'20px'}}
+           >
            <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-clock"></i>
 
            <DatePicker
@@ -613,14 +607,14 @@ class ReactAddEventForm extends React.Component {
 
 
 
-       <Form.Item>
+       <Form.Item style={{marginTop:'-15px'}}>
          <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
          <Select
            mode="multiple"
            style={{ width: '75%' }}
            onChange={this.handleFriendChange}
            value = {this.state.person}
-           optionLabelProp="label"
+
            placeholder="Add friends"
           >
             {this.renderShareListSelect()}
@@ -628,36 +622,40 @@ class ReactAddEventForm extends React.Component {
 
        </Form.Item>
 
-       <Form.Item name="Content">
+       <div class="innerContainerPeople">
+         <Form.Item name="Location">
+           <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+          <Input style={{width:'50%',fontSize:'14px'}}
+           name = 'location'
+           placeholder = 'Location'
+           value = {this.state.location}
+           />
+        </Form.Item>
+        <AimOutlined style={{marginLeft:'15px', marginTop:'20px', fontSize:'20px', marginRight:'15px'}} className = 'aim'/>
+          <Input type = 'color' className = 'reactColor'
+            name = 'eventColor' defaultValue = '#1890ff'/>
+      </div>
+
+       <Form.Item name="Content" style={{marginTop:'-20px'}}>
+
         <TextArea
         name = 'content'
         placeholder= 'Event Description'
         value = {this.state.content}
         rows ={3}
-        style = {{width: '500px'}}/>
-        <Input type = 'color' className = 'reactColor'
-          name = 'eventColor' defaultValue = '#fadb14'/>
+        style = {{width: '400px', marginLeft:'50px'}}/>
 
       </Form.Item>
 
 
-      <div class="innerContainerPeople">
-        <Form.Item name="Location">
-          <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
-         <Input style={{width:'50%',fontSize:'14px'}}
-          name = 'location'
-          placeholder = 'Location'
-          value = {this.state.location}
-          />
-          <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
-       </Form.Item>
-     </div>
+
         <Form.Item
           wrapperCol={{
             xs: { span: 24, offset: 0 },
             sm: { span: 16, offset: 8 },
           }}
           className = 'buttomHolder'
+          style={{marginLeft:'50px', marginTop:'40px'}}
         >
         <div className = 'clearButtonCon'>
           <Button onClick = {this.onClear}  >
