@@ -809,7 +809,7 @@ class DetailEditEventForm extends React.Component{
                 <span> No Location </span>
                 </div>
             </div>
-            
+            */}
 
 
 
