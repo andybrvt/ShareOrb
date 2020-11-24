@@ -11,6 +11,14 @@ class UserAvatar extends React.Component{
     }
   }
 
+  profileDirect = (username) => {
+      // This will direct the user to a person's profile page when they
+      // click on a person's avatar
+
+      console.log(username)
+    this.props.history.push('/explore/'+username)
+  }
+
   render(){
     console.log(this.props)
     let like_people = this.props.like_people
@@ -27,10 +35,12 @@ class UserAvatar extends React.Component{
         maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
         maxCount={3}
         >
-        
+
         {this.props.like_people.map((user) => (
           <Tooltip placement="topLeft" title={`${user.first_name} ${user.last_name} `}>
-        <Avatar src={'http://127.0.0.1:8000'+user.profile_picture}/>
+        <Avatar
+        onClick = {() => this.profileDirect(user.username)}
+        src={'http://127.0.0.1:8000'+user.profile_picture}/>
         </Tooltip>
       ))}
 

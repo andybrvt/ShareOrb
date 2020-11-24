@@ -43,7 +43,7 @@ class UserEventList extends React.Component{
     let month = ''
     // let day = ''
     if (date !== ''){
-      month = dateFns.format(new Date(date), 'MMM d, yyyy')
+      month = dateFns.format(dateFns.addHours(new Date(date),7), 'MMM d, yyyy')
     }
 
     // console.log(month)
@@ -82,6 +82,28 @@ class UserEventList extends React.Component{
     return personListId.includes(this.props.curId)
   }
 
+  checkDay = (eventDay, eventTime) =>{
+    // Checks if the event day and time has passed the current event date and
+    // time. If it is then it will return true if it is not the it will retunr
+    // false
+
+    console.log(eventDay, eventTime)
+    let eventDate = dateFns.addHours(new Date(eventDay), 7)
+    const timeList = eventTime.split(":")
+    eventDate = dateFns.addHours(eventDate, timeList[0])
+    eventDate = dateFns.addMinutes(eventDate, timeList[1])
+    console.log(eventDate)
+    return dateFns.isAfter(eventDate, new Date())
+
+  }
+
+  profileDirect = (username) => {
+    // This will direct the user to a person's profile page when they
+    // click on a person's avatar
+
+    this.props.history.push('/explore/'+username)
+  }
+
 
 
   renderEventCells = () => {
@@ -96,77 +118,111 @@ class UserEventList extends React.Component{
       var boxes = []
       for(let i = 0; i< socialEventList.length; i++){
         boxes.push(
-          <div className = "eventContainer">
-          {
-            socialEventList[i].backgroundImg === null ?
-            <div className = 'noPicBox'>
-            <PictureOutlined />
-            <br />
-              <span className = 'noPicWords'> No picture </span>
+
+            <div className = {`eventContainer
+            ${this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time)
+              ? "" : "active" }`}>
+            {
+              socialEventList[i].backgroundImg === null ?
+              <div className = 'noPicBox'>
+              <PictureOutlined />
+              <br />
+                <span className = 'noPicWords'> No picture </span>
+              </div>
+              :
+              <div className = 'picBox'>
+                <img
+                className = "picBoxPic"
+                src = {'http://127.0.0.1:8000'+socialEventList[i].backgroundImg} />
+              </div>
+            }
+
+            <div className = "eventBoxTitle">{this.capitalize(socialEventList[i].title)}
+            {
+
+              this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+
+                <span> </span>
+
+                :
+
+                <span className = "endTag"> Ended</span>
+            }
             </div>
+
+            <div className = "eventBoxContent">Content: {socialEventList[i].content} </div>
+            <div className = "eventBoxLocation">
+            <i class="fas fa-map-marker-alt"></i> {socialEventList[i].location}</div>
+            <div className = "eventBoxDay">
+            <i class="far fa-calendar"></i> {this.dateView(socialEventList[i].event_day)}
+            </div>
+            <div className = "eventBoxTimes"><i class="far fa-clock"></i> {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}</div>
+
+            <div className = "eventBoxHost ">
+            Host: <Avatar
+              size = {30}
+              style = {{
+                cursor: "pointer"
+              }}
+              onClick = { () => this.profileDirect(socialEventList[i].host.username)}
+              src = {"http://127.0.0.1:8000"+socialEventList[i].host.profile_picture}
+            /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
+            </div>
+
+            <div className = "eventBoxParticipant">
+            <span className = "participants"> Participants: </span>
+            <div className = "likeList"> <Liking
+            history = {this.props.history}
+            like_people = {socialEventList[i].persons} /> </div>
+            </div>
+
+        {this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+            <div>
+            {
+              this.checkUser(socialEventList[i].persons) ?
+                socialEventList[i].host.id === this.props.curId ?
+                <div className = "hostButton">
+                  <span className = "hostText"> Host </span>
+                </div>
+
+                :
+
+                <div
+                onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+                className = "leaveButton">
+                  <span className = "leaveText"> Leave </span>
+                </div>
+
+                :
+
+                <div
+                onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+                className = "joinButton">
+                  <span className = "joinText"> Join </span>
+                </div>
+
+            }
+
+
+            <div
+            onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+            className = "viewButton">
+              <span className = 'viewText'> View </span>
+            </div>
+            </div>
+
             :
-            <div className = 'picBox'>
-              <img
-              className = "picBoxPic"
-              src = {'http://127.0.0.1:8000'+socialEventList[i].backgroundImg} />
+
+            <div
+            onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+            className = "viewButtonPass">
+              <span className = 'viewText'> View </span>
             </div>
-          }
-
-          <div className = "eventBoxTitle">{this.capitalize(socialEventList[i].title)}</div>
-          <div className = "eventBoxContent">Content: {socialEventList[i].content} </div>
-          <div className = "eventBoxLocation">
-          <i class="fas fa-map-marker-alt"></i> {socialEventList[i].location}</div>
-          <div className = "eventBoxDay">
-          <i class="far fa-calendar"></i> {this.dateView(socialEventList[i].event_day)}
-          </div>
-          <div className = "eventBoxTimes"><i class="far fa-clock"></i> {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}</div>
-
-          <div className = "eventBoxHost ">
-          Host: <Avatar
-            size = {30}
-            src = {"http://127.0.0.1:8000"+socialEventList[i].host.profile_picture}
-          /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
-          </div>
-
-          <div className = "eventBoxParticipant">
-          <span className = "participants"> Participants: </span>
-          <div className = "likeList"> <Liking like_people = {socialEventList[i].persons} /> </div>
-          </div>
-          {
-            this.checkUser(socialEventList[i].persons) ?
-              socialEventList[i].host.id === this.props.curId ?
-              <div className = "hostButton">
-                <span className = "hostText"> Host </span>
-              </div>
-
-              :
-
-              <div
-              onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
-              className = "leaveButton">
-                <span className = "leaveText"> Leave </span>
-              </div>
-
-              :
-
-              <div
-              onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
-              className = "joinButton">
-                <span className = "joinText"> Join </span>
-              </div>
 
           }
 
+            </div>
 
-          <div
-          onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
-          className = "viewButton">
-            <span className = 'viewText'> View </span>
-          </div>
-
-
-
-          </div>
 
 
 
@@ -184,6 +240,7 @@ class UserEventList extends React.Component{
 
   render(){
     console.log(this.props)
+    console.log(new Date())
     return (
       <div className = "eventListTabContainer">
 

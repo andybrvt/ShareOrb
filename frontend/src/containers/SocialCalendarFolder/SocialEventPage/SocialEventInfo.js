@@ -73,6 +73,22 @@ class SocialEventInfo extends React.Component{
 
   }
 
+  checkDay = (eventDay, eventTime) =>{
+    // Checks if the event day and time has passed the current event date and
+    // time. If it is then it will return true if it is not the it will retunr
+    // false
+
+    console.log(eventDay, eventTime)
+    let eventDate = dateFns.addHours(new Date(eventDay), 7)
+    const timeList = eventTime.split(":")
+    eventDate = dateFns.addHours(eventDate, timeList[0])
+    eventDate = dateFns.addMinutes(eventDate, timeList[1])
+    console.log(eventDate)
+    console.log(dateFns.isAfter(eventDate, new Date()))
+    return dateFns.isAfter(eventDate, new Date())
+
+  }
+
   getInitialValue = () => {
     //This will be passed into
     if(this.props.info){
@@ -377,7 +393,7 @@ class SocialEventInfo extends React.Component{
 
             <div className = 'editEventButtonContainer'>
             {
-              eventHostId === this.props.userId ?
+              eventHostId === this.props.userId && this.checkDay(this.props.info.event_day ,this.props.info.end_time) ?
 
               <div
               className = 'editEventButton'

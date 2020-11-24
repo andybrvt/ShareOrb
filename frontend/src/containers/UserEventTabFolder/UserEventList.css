@@ -25,7 +25,9 @@
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   overflow: hidden;
 }
-
+.eventListTabContainer .eventListContainer .eventContainer.active{
+  /* opacity: 0.5; */
+}
 
 
 .eventListTabContainer .eventListContainer .eventContainer .noPicBox{
@@ -65,6 +67,20 @@
    font-size:40px;
    left: 19%;
    top: 5%;
+}
+.eventListTabContainer .eventListContainer .eventContainer .eventBoxTitle .endTag{
+  position: relative;
+  background-color: #F5F5F5;
+  color: red;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 18px;
+  /* top:10%;
+  left: 95%; */
+  bottom: 7px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 .eventListTabContainer .eventListContainer .eventContainer .eventBoxContent{
@@ -172,10 +188,30 @@
   /* padding-top: 30%; */
 }
 
+
 .eventListTabContainer .eventListContainer .eventContainer .viewButton .viewText{
   position: relative;
   top: 15%;
 }
+
+.eventListTabContainer .eventListContainer .eventContainer.active .viewButtonPass{
+  height: 35%;
+  width: 15%;
+  position: absolute;
+  right: 5%;
+  top: 30%;
+  border-radius: 10px;
+  font-size: 27px;
+  color: white;
+  background-color: lightgray;
+  cursor: pointer;
+  opacity: 1;
+}
+.eventListTabContainer .eventListContainer .eventContainer .viewButtonPass .viewText{
+  position: relative;
+  top: 15%;
+}
+
 
 .eventListTabContainer .eventListContainer .eventContainer .hostButton{
   height: 35%;
