@@ -73,6 +73,8 @@ class PersonalProfilePostList extends React.Component{
     //This will reconnect to eh proper profile if you were to change the profiles
 
     if(this.props.parameter.username !== newProps.parameter.username){
+      // put remove redux functions here
+      this.props.closeProfile()
       ExploreWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
         ExploreWebSocketInstance.fetchProfile(
@@ -568,7 +570,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic))
+    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
+    closeProfile: () => dispatch(exploreActions.closeProfile())
   }
 }
 

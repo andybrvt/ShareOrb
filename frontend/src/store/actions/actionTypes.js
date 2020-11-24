@@ -79,7 +79,7 @@ export const SEND_USER_POST_COMMENT = 'SEND_USER_POST_COMMENT';
 // add following would be to the person that is doing the following
 
 export const LOAD_PROFILE  = 'LOAD_PROFILE';
-
+export const CLOSE_PROFILE = 'CLOSE_PROFILE';
 export const ADD_FOLLOWER_UNFOLLOWER = 'ADD_FOLLOWER_UNFOLLOWER';
 export const CHANGE_PROFILE_PIC  = 'CHANGE_PROFILE_PIC';
 

@@ -6,7 +6,6 @@ import { updateObject } from '../utility';
 // profile
 const initialState = {
   profile: {},
-  test: '',
 
 }
 
@@ -15,6 +14,12 @@ export const loadProfile = (state, action) => {
 
   return updateObject(state, {
     profile: action.profile
+  })
+}
+
+export const closeProfile = (state, action ) => {
+  return updateObject(state, {
+    profile: {}
   })
 }
 
@@ -101,6 +106,8 @@ const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.LOAD_PROFILE:
       return loadProfile(state, action);
+    case actionTypes.CLOSE_PROFILE:
+      return closeProfile(state, action);
     case actionTypes.ADD_FOLLOWER_UNFOLLOWER:
       return addFollowerUnfollower(state, action);
     case actionTypes.CHANGE_PROFILE_PIC:

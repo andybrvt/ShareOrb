@@ -11,6 +11,16 @@ export const loadProfile = (profile) => {
 
 }
 
+export const closeProfile = () => {
+  // This will be used to remove the current profile so that
+  // when it laods up a new profile it doesn't load up the old one first
+
+  return{
+    type: actionTypes.CLOSE_PROFILE,
+    
+  }
+}
+
 export const addFollowerUnfollower = followerList => {
 //IMPROVED
   // This will be for the receiving persopn (both for following and unfollowing)
