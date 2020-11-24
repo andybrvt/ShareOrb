@@ -46,12 +46,6 @@ class User(AbstractUser):
 
     def get_socialEvents(self):
         # This will grab the events where you are the host. This will help with grabbing the events all at once
-        # eventDict  = {
-        #     "passed": SocialCalEvent.objects.filter(host = self).values_list("id", flat = True),
-        #     "now": SocialCalEvent.objects.filter(host = self).values_list("id", flat = True),
-        #     "future": SocialCalEvent.objects.filter(host = self).values_list("id", flat = True),
-        #
-        # }
 
         return SocialCalEvent.objects.filter(host = self).values_list("id", flat = True)
 
