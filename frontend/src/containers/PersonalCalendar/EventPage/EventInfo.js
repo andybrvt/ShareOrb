@@ -653,7 +653,9 @@ class EventInfo extends React.Component{
 
               </span>
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
-                  <Liking style={{display:'inline-block'}} like_people={accepted}/>
+                  <Liking
+                  history = {this.props.history}
+                  style={{display:'inline-block'}} like_people={accepted}/>
               </span>
               <span class="innerContainerEvent" style={{marginLeft:'100px',display:'inline-block'}}>
 
@@ -665,7 +667,9 @@ class EventInfo extends React.Component{
 
 
             <span class="innerContainerEvent" style={{display:'inline-block'}}>
-                <Liking style={{display:'inline-block'}} like_people={invited}/>
+                <Liking
+                history = {this.props.history}
+                style={{display:'inline-block'}} like_people={invited}/>
             </span>
 
              <span class="innerContainerPeople"

@@ -586,7 +586,9 @@ class DayCalendar extends React.Component{
 
                                 }
                             </div>
-                            <Liking like_people={item.invited}/>
+                            <Liking
+                            history = {this.props.history}
+                            like_people={item.invited}/>
                           </Avatar.Group>
 
 

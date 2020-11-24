@@ -97,6 +97,13 @@ class UserEventList extends React.Component{
 
   }
 
+  profileDirect = (username) => {
+    // This will direct the user to a person's profile page when they
+    // click on a person's avatar
+
+    this.props.history.push('/explore/'+username)
+  }
+
 
 
   renderEventCells = () => {
@@ -130,7 +137,19 @@ class UserEventList extends React.Component{
               </div>
             }
 
-            <div className = "eventBoxTitle">{this.capitalize(socialEventList[i].title)}</div>
+            <div className = "eventBoxTitle">{this.capitalize(socialEventList[i].title)}
+            {
+
+              this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+
+                <span> </span>
+
+                :
+
+                <span className = "endTag"> Ended</span>
+            }
+            </div>
+
             <div className = "eventBoxContent">Content: {socialEventList[i].content} </div>
             <div className = "eventBoxLocation">
             <i class="fas fa-map-marker-alt"></i> {socialEventList[i].location}</div>
@@ -142,13 +161,19 @@ class UserEventList extends React.Component{
             <div className = "eventBoxHost ">
             Host: <Avatar
               size = {30}
+              style = {{
+                cursor: "pointer"
+              }}
+              onClick = { () => this.profileDirect(socialEventList[i].host.username)}
               src = {"http://127.0.0.1:8000"+socialEventList[i].host.profile_picture}
             /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
             </div>
 
             <div className = "eventBoxParticipant">
             <span className = "participants"> Participants: </span>
-            <div className = "likeList"> <Liking like_people = {socialEventList[i].persons} /> </div>
+            <div className = "likeList"> <Liking
+            history = {this.props.history}
+            like_people = {socialEventList[i].persons} /> </div>
             </div>
 
         {this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?

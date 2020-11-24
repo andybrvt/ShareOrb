@@ -110,7 +110,9 @@ class EventGroupChat extends React.Component{
         <div class="chatBox eventCard flex-container"
           style={{width:'400px', height:'75px'}}>
 
-            <Liking style={{display:'inline-block'}} like_people={inviteList}/>
+            <Liking
+            history = {this.props.history}
+            style={{display:'inline-block'}} like_people={inviteList}/>
 
           {
           /*

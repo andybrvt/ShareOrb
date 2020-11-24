@@ -13,6 +13,15 @@ class Liking extends React.Component{
     }
   }
 
+
+  profileDirect = (username) => {
+      // This will direct the user to a person's profile page when they
+      // click on a person's avatar
+
+      console.log(username)
+    this.props.history.push('/explore/'+username)
+  }
+
   render(){
     let like_people = this.props.like_people
     // let profilePic = ''
@@ -23,6 +32,7 @@ class Liking extends React.Component{
     //
     // console.log(profilePic)
     console.log(like_people)
+    console.log(this.props)
     // let temp="http://127.0.0.1:8000"+this.props.data.post_images;
     // let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
     return (
@@ -66,6 +76,7 @@ class Liking extends React.Component{
                       <Avatar.Group>
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
                              <Avatar
+                              onClick = {() => this.profileDirect(like_people[0].username)}
                               src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
                         </Tooltip>
                       </Avatar.Group>
@@ -81,6 +92,7 @@ class Liking extends React.Component{
                       <Avatar.Group>
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
                              <Avatar
+                             onClick = {() => this.profileDirect(like_people[0].username)}
                               src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
                         </Tooltip>
 
@@ -88,6 +100,7 @@ class Liking extends React.Component{
 
                         <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
                              <Avatar
+                             onClick = {() => this.profileDirect(like_people[1].username)}
                               src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
                         </Tooltip>
 
@@ -99,13 +112,19 @@ class Liking extends React.Component{
 
 
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
-                             <Avatar src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
+                             <Avatar
+                             onClick = {() => this.profileDirect(like_people[0].username)}
+                             src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
                        </Tooltip>
                        <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
-                          <Avatar src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
+                          <Avatar
+                          onClick = {() => this.profileDirect(like_people[1].username)}
+                          src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
                       </Tooltip>
                       <Tooltip placement="topLeft" title={`${like_people[2].first_name} ${like_people[2].last_name} `}>
-                          <Avatar src={'http://127.0.0.1:8000'+like_people[2].profile_picture}/>
+                          <Avatar
+                          onClick = {() => this.profileDirect(like_people[2].username)}
+                           src={'http://127.0.0.1:8000'+like_people[2].profile_picture}/>
                      </Tooltip>
 
                         </Avatar.Group>
