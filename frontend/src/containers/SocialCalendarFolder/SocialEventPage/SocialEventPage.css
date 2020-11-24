@@ -378,3 +378,14 @@
 .socialEventGroupChat .inputForm{
 
 }
+.socialEventGroupChat .inputForm .eventEndText {
+  background-color: white;
+  font-size: 30px;
+  position: relative;
+  /* left: 50%; */
+  /* transform: translateX(-40%); */
+}
+
+.socialEventGroupChat.active .inputForm .eventEndText{
+
+}

@@ -172,6 +172,8 @@ class SocialEventPage extends React.Component{
         id = {this.props.id}
         eventId = {this.props.socialEventInfo.id}
         active = {this.state.showChats}
+        date = {this.props.socialEventInfo.event_day}
+        endTime = {this.props.socialEventInfo.end_time}
          />
 
         </div>
