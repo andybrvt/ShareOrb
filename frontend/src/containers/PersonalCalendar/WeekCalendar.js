@@ -38,7 +38,7 @@ import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
 import Liking from '../NewsfeedItems/Liking';
 import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
-
+import DetailEditEventForm from './EventPage/DetailEditEventForm';
 
 
 const { Group } = Avatar
@@ -145,6 +145,7 @@ class WeekCalendar extends React.Component{
     const startWeek = dateFns.startOfWeek(this.props.currentDate)
     const endWeek = dateFns.endOfWeek(this.props.currentDate)
     return(
+
       <div className = 'header row flex-middle'>
         <div className = 'col col-start'>
           <div className = 'icon' onClick = {this.prevWeek}>

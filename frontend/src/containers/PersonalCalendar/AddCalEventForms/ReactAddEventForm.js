@@ -541,7 +541,7 @@ class ReactAddEventForm extends React.Component {
     return (
       <Form
       className ="reactForm"
-
+      style={{padding:'25px'}}
       onSubmit = {this.handleSubmit}
       onChange = {this.handleChange}
        >
@@ -554,25 +554,35 @@ class ReactAddEventForm extends React.Component {
          />
        </Form.Item>
 
+       <Form.Item>
+        <Radio.Group
+          options={options}
+          name = 'repeatCondition'
+          onChange={this.handleChange}
+          value={this.state.repeatCondition}
+          optionType="button"
+        />
+       </Form.Item>
 
        <Form.Item>
+         <Select
+           mode="multiple"
+          style={{ width: '100%' }}
+          onChange={this.handleFriendChange}
+          value = {this.state.person}
+          optionLabelProp="label"
+          placeholder="Add friends"
+          >
+            {this.renderShareListSelect()}
+         </Select>
 
-       <Select
-       mode="multiple"
-       style={{ width: '100%' }}
-      onChange={this.handleFriendChange}
-      value = {this.state.person}
-      optionLabelProp="label"
-      >
-      {this.renderShareListSelect()}
-      </Select>
        </Form.Item>
 
        <Form.Item name="Content">
         <TextArea
         name = 'content'
         className = 'reactContent'
-        placeholder= 'Event Description'
+        placeholder= 'Event Description!'
         value = {this.state.content}
         rows ={4}
         style = {{width: '500px'}}/>
@@ -583,8 +593,8 @@ class ReactAddEventForm extends React.Component {
 
 
 
-      <Form.Item name="Location" style = {{height: '10px'}} >
-       <Input
+      <Form.Item name="Location">
+       <Input style={{width:'50%',fontSize:'14px'}}
         name = 'location'
         className = 'reactLocation'
         placeholder = 'Location'
@@ -597,16 +607,22 @@ class ReactAddEventForm extends React.Component {
        name="range-time-picker"
       {...rangeConfig}
        className = 'timepicker'>
-       <DatePicker
-       className = ''
-       placeholder = 'startTime'
-       onChange = {this.onStartDateChange}
-       value = {this.state.startDate}
-       suffixIcon={<div></div>}
-       allowClear = {false}
-       bordered = {false}
-       style = {{width: '110px'}}/>
+
+       <div class="innerContainerPeople">
+         <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
+         <DatePicker
+         className = ''
+         placeholder = 'startTime'
+         onChange = {this.onStartDateChange}
+         value = {this.state.startDate}
+         suffixIcon={<div></div>}
+         allowClear = {false}
+         bordered = {false}
+         style = {{width: '110px', marginRight:'15px'}}
+         />
+       </div>
        <ArrowRightOutlined />
+       {/*
        <DatePicker
        className = {` ${this.onRed() ? 'datePicker' : ''}`}
        placeholder = 'endTime'
@@ -616,7 +632,7 @@ class ReactAddEventForm extends React.Component {
        allowClear = {false}
        suffixIcon={<div></div>}
        />
-
+       */}
        <br/>
        <Select
        name = 'timeStart'
@@ -641,15 +657,7 @@ class ReactAddEventForm extends React.Component {
        </Select>
      </Form.Item>
 
-        <Form.Item>
-        <Radio.Group
-         options={options}
-         name = 'repeatCondition'
-         onChange={this.handleChange}
-         value={this.state.repeatCondition}
-         optionType="button"
-       />
-        </Form.Item>
+
 
         <Form.Item
           wrapperCol={{
