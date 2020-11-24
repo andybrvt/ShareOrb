@@ -541,7 +541,7 @@ class ReactAddEventForm extends React.Component {
     return (
       <Form
       className ="reactForm"
-      style={{padding:'25px'}}
+      style={{padding:'50px'}}
       onSubmit = {this.handleSubmit}
       onChange = {this.handleChange}
        >
@@ -554,7 +554,7 @@ class ReactAddEventForm extends React.Component {
          />
        </Form.Item>
 
-       <Form.Item>
+
         <Radio.Group
           options={options}
           name = 'repeatCondition'
@@ -562,16 +562,66 @@ class ReactAddEventForm extends React.Component {
           value={this.state.repeatCondition}
           optionType="button"
         />
-       </Form.Item>
+
+
+       <Form.Item
+           name="range-time-picker"
+          {...rangeConfig}
+           className = 'timepicker'>
+           <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-clock"></i>
+
+           <DatePicker
+           className = ''
+           placeholder = 'startTime'
+           onChange = {this.onStartDateChange}
+           value = {this.state.startDate}
+           suffixIcon={<div></div>}
+           style = {{width: '110px', marginRight:'15px'}}
+           />
+
+           {/*
+           <DatePicker
+           className = {` ${this.onRed() ? 'datePicker' : ''}`}
+           placeholder = 'endTime'
+           onChange = {this.onEndDateChange}
+           value = {this.state.endDate}
+           style = {{width: '110px '}}
+           allowClear = {false}
+           suffixIcon={<div></div>}
+           />
+           */}
+           <Select
+           name = 'timeStart'
+           className = ''
+           style={{ width: 100, marginRight:'15px' }}
+           showArrow  = {false}
+           onChange = {this.onStartTimeChange}
+           value = {this.state.timeStart}>
+             {startChildren}
+           </Select>
+
+           <Select
+           className = ''
+           name = 'timeEnd'
+           style={{ width: 100 }}
+           showArrow  = {false}
+           onChange = {this.onEndTimeChange}
+           value = {this.state.timeEnd}>
+             {endChildren}
+           </Select>
+         </Form.Item>
+
+
 
        <Form.Item>
+         <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
          <Select
            mode="multiple"
-          style={{ width: '100%' }}
-          onChange={this.handleFriendChange}
-          value = {this.state.person}
-          optionLabelProp="label"
-          placeholder="Add friends"
+           style={{ width: '75%' }}
+           onChange={this.handleFriendChange}
+           value = {this.state.person}
+           optionLabelProp="label"
+           placeholder="Add friends"
           >
             {this.renderShareListSelect()}
          </Select>
@@ -581,84 +631,27 @@ class ReactAddEventForm extends React.Component {
        <Form.Item name="Content">
         <TextArea
         name = 'content'
-        className = 'reactContent'
-        placeholder= 'Event Description!'
+        placeholder= 'Event Description'
         value = {this.state.content}
-        rows ={4}
+        rows ={3}
         style = {{width: '500px'}}/>
-        <Input type = 'color' className = 'reactColor' name = 'eventColor' defaultValue = '#fadb14'/>
+        <Input type = 'color' className = 'reactColor'
+          name = 'eventColor' defaultValue = '#fadb14'/>
 
       </Form.Item>
 
 
-
-
-      <Form.Item name="Location">
-       <Input style={{width:'50%',fontSize:'14px'}}
-        name = 'location'
-        className = 'reactLocation'
-        placeholder = 'Location'
-        value = {this.state.location}
-        />
-        <AimOutlined className = 'aim'/>
-     </Form.Item>
-
-     <Form.Item
-       name="range-time-picker"
-      {...rangeConfig}
-       className = 'timepicker'>
-
-       <div class="innerContainerPeople">
-         <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
-         <DatePicker
-         className = ''
-         placeholder = 'startTime'
-         onChange = {this.onStartDateChange}
-         value = {this.state.startDate}
-         suffixIcon={<div></div>}
-         allowClear = {false}
-         bordered = {false}
-         style = {{width: '110px', marginRight:'15px'}}
-         />
-       </div>
-       <ArrowRightOutlined />
-       {/*
-       <DatePicker
-       className = {` ${this.onRed() ? 'datePicker' : ''}`}
-       placeholder = 'endTime'
-       onChange = {this.onEndDateChange}
-       value = {this.state.endDate}
-       style = {{width: '110px '}}
-       allowClear = {false}
-       suffixIcon={<div></div>}
-       />
-       */}
-       <br/>
-       <Select
-       name = 'timeStart'
-       className = ''
-       style={{ width: 100 }}
-       showArrow  = {false}
-       onChange = {this.onStartTimeChange}
-       value = {this.state.timeStart}>
-         {startChildren}
-       </Select>
-
-
-       <ArrowRightOutlined />
-       <Select
-       className = ''
-       name = 'timeEnd'
-       style={{ width: 100 }}
-       showArrow  = {false}
-       onChange = {this.onEndTimeChange}
-       value = {this.state.timeEnd}>
-         {endChildren}
-       </Select>
-     </Form.Item>
-
-
-
+      <div class="innerContainerPeople">
+        <Form.Item name="Location">
+          <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+         <Input style={{width:'50%',fontSize:'14px'}}
+          name = 'location'
+          placeholder = 'Location'
+          value = {this.state.location}
+          />
+          <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
+       </Form.Item>
+     </div>
         <Form.Item
           wrapperCol={{
             xs: { span: 24, offset: 0 },

@@ -186,7 +186,7 @@ class EventModal extends React.Component {
           onCancel={this.props.onClose}
           visible={this.props.visible}
           footer = {false}
-          width  = {450}
+          width  = {600}
         >
         <ReactAddEventForm
         friendList = {this.props.friendList}
