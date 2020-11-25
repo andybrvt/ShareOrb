@@ -149,7 +149,8 @@ const renderStartTime = () => {
   }
 
   const renderFriendSelect = (field) => {
-    console.log(field)
+    console.log(field.input.value)
+
     return (
       <Select
       mode="multiple"
@@ -199,7 +200,10 @@ class DetailEditEventForm extends React.Component{
   // For detail comments on how redux forms work, check ReduxEditEventForm
   state = {
     visible: false,
-    locationField:'Shanghai', };
+    invitedList:[],
+    locationField:'Shanghai'
+
+   };
 
   onClose = () => {
     this.setState({
@@ -484,6 +488,7 @@ class DetailEditEventForm extends React.Component{
 
       for (let i = 0; i< friendList.length; i++ ){
         shareOptions.push(
+
           <Option value = {friendList[i].username}
           label = {
 
@@ -516,7 +521,13 @@ class DetailEditEventForm extends React.Component{
 
   handleFriendChange = (value) => {
     console.log(value)
+
+    this.setState({
+      invitedList:value,
+    })
+    console.log(this.state.invitedList)
   }
+
 
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
@@ -836,7 +847,9 @@ class DetailEditEventForm extends React.Component{
 
             <div style={{marginBottom:'100px'}}></div>
             test
-
+              {this.state.invitedList.map(item => (
+                            <div>{item}</div>
+            ))}
             {/*
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>
               <p style={{fontSize:'20px', color:'black'}}
