@@ -195,7 +195,28 @@ class CustomNotification(models.Model):
         return str(self.recipient)
 
 
+# Explaination of how content type works
+# Content type allows you to create a generic modal that lets you call foreign keys
+# to other models and stores it as that model instance. Essentially it allows you
+# to have a model has instances that has fields that holds different objects.
+# It is good for combining different model types if you need to ever combine them for
+# certain users (ie posts page, newsfeed etc)
+# You can then work with the different object types (ordering, filtering etc)
+# This is similar to queryset chaining but it is more efficent for larger amounts of
+# data
 
+# HOW IT WORKS
+# Works some what like generics in java. But you will need a foriegn key of sorts
+# that leads to Contenttype. Then you will create a new key for that forieng key which
+# will also be related to the forigen key that you just add. Then you will use that model
+# type and the model id to then add to a GenericForeginKey (this will retrive the model
+# object assoicated with the id). You can do this for multiple fields. Contenttype will
+# have access to all the models crated.
+
+# Afterwards, you can pretty much treat this model as a regular model. Make sure when you
+# are serializing you have to do isinstance of.
+# To filter, you cannot filter the GenericForeginKey but you can filter all the other
+# fields suchs as the content type and content id so pick and choose.
 class UserSocialNormPost(models.Model):
     owner_type = models.ForeignKey(ContentType, related_name = "owner_type_post", on_delete=models.CASCADE)
     owner_id = models.PositiveIntegerField()
@@ -204,3 +225,6 @@ class UserSocialNormPost(models.Model):
     post_type = models.ForeignKey(ContentType, related_name = "post_type_post", on_delete=models.CASCADE)
     post_id = models.PositiveIntegerField()
     post = GenericForeignKey('post_type', 'post_id')
+
+    class Meta:
+        ordering = ['-post_date']

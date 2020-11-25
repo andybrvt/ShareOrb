@@ -426,5 +426,6 @@ class NotificationCreateView(generics.ListCreateAPIView):
 
 
 class UserSocialPostContentTypeView(generics.ListCreateAPIView):
+    print(models.UserSocialNormPost.objects.filter(owner_id= 1))
     serializer_class = serializers.UserSocialNormPostSerializer
     queryset = models.UserSocialNormPost.objects.all()

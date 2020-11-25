@@ -19,6 +19,7 @@ from userprofile.models import User
 from .models import Post
 from .models import Comment
 from .models import UserFollowing
+from .models import UserSocialNormPost
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalComment
 from mySocialCal.models import SocialCalEvent
@@ -26,6 +27,7 @@ from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
 from mySocialCal.serializers import SocialCalEventSerializer
 from .serializers import UserSocialCalSerializer
+from django.utils import timezone
 
 
 
@@ -587,6 +589,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
     def fetch_profile(self, data):
         profile = get_object_or_404(User, username = data['username'])
         serializer = UserSerializer(profile).data
+
+        print(UserSocialNormPost.objects.filter())
         content = {
             'command': 'user_profile',
             'profile': json.dumps(serializer)
