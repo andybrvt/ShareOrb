@@ -142,13 +142,14 @@
 
 .dateCircle{
   /* border: 1px solid; */
+  margin-top: 10px;
   width: 60px;
   height: 60px;
   /* border-radius: 30px; */
   padding: 3px;
   text-align: center;
   position: relative;
-
+  border-radius: 10px;
   /* right: 10px; */
   bottom: 10px;
 }
@@ -173,11 +174,11 @@
   /* align-items: center; */
 }
 
-
+/* adjust height of scrollable */
 .eventInfoContainer .eventInfoView{
   /* background-color: red; */
   /* width: 70%; */
-  height: 100%;
+  height: 70%;
   /* position: relative;
   left: 50%;
   transform: translateX(-50%); */
@@ -191,8 +192,9 @@
 
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
-  width: 43%;
-  height: 350px;
+
+  width: 45%;
+  height: 375px;
   padding: 25px;
   background-color: #F5F5F5;
 }
@@ -210,8 +212,8 @@
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .attendees{
   color: black;
-  font-size: 16px;
-  line-height: 70%;
+  font-size: 18px;
+  line-height: 180%;
   /* margin-top: 10px; */
   /* background-color: red; */
 }
@@ -253,6 +255,7 @@
   /* border: 10px dashed gainsboro; */
   text-align: center;
   margin-left: 200px;
+  border-radius: 15px;
 }
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic img{
@@ -260,7 +263,8 @@
 
   object-fit: cover;
   width: 500px;
-  height: 350px;
+  height: 375px;
+  background-color: #F5F5F5;
 
 }
 

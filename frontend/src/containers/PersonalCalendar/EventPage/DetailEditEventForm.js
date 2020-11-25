@@ -153,7 +153,7 @@ const renderStartTime = () => {
     return (
       <Select
       mode="multiple"
-      style={{ width: '50%', marginTop:'20px'}}
+      style={{ width: '80%', marginTop:'20px'}}
       optionLabelProp="label"
       onChange = {field.input.onChange}
       value = {field.input.value}
@@ -712,6 +712,7 @@ class DetailEditEventForm extends React.Component{
                 <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
                      <Field
+                       class="pointerEvent"
                        name = 'startDate'
                        component = {renderStartDate}
                        onChange = {this.onStartDateChange}
@@ -782,9 +783,8 @@ class DetailEditEventForm extends React.Component{
               />
             </div>
 
-
             {/* location */}
-            <div style={{height:'70px'}} className = 'outerContainerPeople'>
+            <div style={{height:'50px'}} className = 'outerContainerPeople'>
               <div class="innerContainerPeople">
                 <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
                 <Field
@@ -792,9 +792,8 @@ class DetailEditEventForm extends React.Component{
                   placeholder="Location"
                   component= {renderLocationField}
                   type= 'text'
-
-
                 />
+
               <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
                 <Field
                     name = 'eventColor'
@@ -802,6 +801,7 @@ class DetailEditEventForm extends React.Component{
                     type = 'text'
                 />
             </div>
+            {/*
             <div className = "noMap">
                 <div class="noMapFrame">
                 <PictureOutlined />

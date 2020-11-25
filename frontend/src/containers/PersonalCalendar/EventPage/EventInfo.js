@@ -580,7 +580,8 @@ class EventInfo extends React.Component{
             className = "dateCircle"
             style = {{
               backgroundColor: color,
-              top:'10px'
+
+
             }}
             >
               <div
@@ -606,12 +607,12 @@ class EventInfo extends React.Component{
 
 
           <div class="flex-container eventCard"
-            style={{width:'250px', height:'100px', background:'white'}}
+            style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
 
           >
             <div style={{color:'black'}} className = "attendees">
               Host
-              <br/>
+
               <br/>
               <span>
                 <Avatar
@@ -641,8 +642,8 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'-75px',marginLeft:'200px', color:'black'}} class="outerContainer">
             <span
-                style={{ fontSize:'20px', width:'1010px', height:'85px',
-                 display:'inline-block', marginTop:'90px', padding:'45px'}}
+                style={{ fontSize:'20px', width:'1050px', height:'85px',
+                 display:'inline-block', marginTop:'100px', padding:'45px'}}
                  class="aboutEvent eventCard">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
@@ -732,11 +733,7 @@ class EventInfo extends React.Component{
                 <br/>
 
                 <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-                {date}
-
-                <br/>
-                <i style={{marginRight:'10px', marginTop:'10px', color:'#1890ff'}} class="fas fa-clock"></i>
-                {start_time} - {end_time}
+                {date} at {start_time} - {end_time}
                 <br/>
                 <div>
 
