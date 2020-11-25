@@ -84,7 +84,7 @@
 
 
 .flex-container {
-    display: flex;
+    position:relative;
 
     /* background: red; */
 }
@@ -202,18 +202,22 @@
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTitle{
   color: black;
   font-size: 30px;
+  line-height: 120%;
   /* font-size: calc(1.2vw); */
   margin-top: 0px;
   /* background-color: red; */
-  height: 70px;
   word-break: normal  ;
 }
 
 
-.eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .attendees{
+.attendees{
   color: black;
   font-size: 18px;
   line-height: 180%;
+  position:absolute;
+
+  margin-left: -50px;
+  bottom:0;
   /* margin-top: 10px; */
   /* background-color: red; */
 }
@@ -238,7 +242,7 @@
 .eventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
   /* background-color: red; */
   width: 45%;
-  height: 350px;
+  height: 375px;
   border: 10px dashed gainsboro;
   text-align: center;
   margin-left: 200px;

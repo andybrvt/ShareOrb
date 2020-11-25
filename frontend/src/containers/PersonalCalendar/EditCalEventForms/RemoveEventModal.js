@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, notification } from 'antd';
+import { Modal, notification, Alert } from 'antd';
 import '../PersonalCalCSS/NewCalendar.css';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import * as dateFns from 'date-fns';
@@ -43,8 +43,15 @@ class RemoveEventModal extends React.Component{
       onOk = {() => this.sendDeleteAll(this.props.item, this.props.user)}
       className = "deleteModal"
       >
-      Are you sure you want to remove the event? This will remove the event
-      for all other users that are shared within this event
+      <Alert
+      message="Warning"
+      description="Are you sure you want to remove the event? This will remove the event
+      for all other users that were shared this event"
+      type="warning"
+      showIcon
+      />
+
+
       </Modal>
     )
   }

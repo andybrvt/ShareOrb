@@ -283,9 +283,6 @@ class EditEventPopUp extends React.Component {
     console.log(this.props)
     return (
       <div>
-      <RadiusBottomleftOutlined />
-
-
         <ReduxEditEventForm
         {...this.props}
         onSubmit = {this.submit}

@@ -598,6 +598,9 @@ class EventInfo extends React.Component{
             <br/>
             <br/>
 
+
+
+        <div class="eventCard" style={{marginTop:'-10px', width:'500px'}}>
             <div
               className = 'eventTitle'>
               {this.capitalize(title)}
@@ -606,11 +609,11 @@ class EventInfo extends React.Component{
             <br/>
 
 
-          <div class="flex-container eventCard"
+          <div class="flex-container"
             style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
 
           >
-            <div style={{color:'black'}} className = "attendees">
+            <div className = "attendees">
               Host
 
               <br/>
@@ -632,6 +635,9 @@ class EventInfo extends React.Component{
             */}
 
             </div>
+
+
+          </div>
 
           </div>
 
