@@ -8,8 +8,10 @@ from allauth.account.utils import setup_user_email
 
 from userprofile.models import CustomNotification
 from mySocialCal.serializers import SocialCalCellSerializer
+from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
+from mySocialCal.models import SocialCalItems
 from mySocialCal.serializers import SocialCalEventSerializer
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
@@ -104,6 +106,7 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_posts'] = postList
         data['get_socialEvents'] = socialEventList
         return data
+
 
 class UserSocialEventSerializer(serializers.ModelSerializer):
     # This will help serialzie the user just to get the socialevents. This will
@@ -343,3 +346,23 @@ class NotificationSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
         return data
+
+class UserSocialNormPostRelatedField(serializers.RelatedField):
+    def to_representation(self, instance):
+        if isinstance(instance, models.User):
+            # user = UserSerializer(models.User.objects.get(id = instance.id)).data
+            return instance.id
+        elif isinstance(instance, models.Post):
+            post = MiniPostSerializer(models.Post.objects.get(id = instance.id)).data
+            return post
+        elif isinstance(instance, SocialCalItems):
+            socialPost = SocialCalItemsSerializer(SocialCalItems.objects.get(id = instance.id)).data
+            return socialPost
+
+class UserSocialNormPostSerializer(serializers.ModelSerializer):
+    owner = UserSocialNormPostRelatedField(read_only = True)
+    post = UserSocialNormPostRelatedField(read_only = True)
+
+    class Meta:
+        model = models.UserSocialNormPost
+        fields = ('owner', 'post', 'post_date')

@@ -9,7 +9,8 @@ from django.utils.timezone import now
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from django.utils import timezone
-
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
@@ -192,3 +193,14 @@ class CustomNotification(models.Model):
 
     def __str__(self):
         return str(self.recipient)
+
+
+
+class UserSocialNormPost(models.Model):
+    owner_type = models.ForeignKey(ContentType, related_name = "owner_type_post", on_delete=models.CASCADE)
+    owner_id = models.PositiveIntegerField()
+    owner = GenericForeignKey("owner_type", "owner_id")
+    post_date = models.DateTimeField(default = timezone.now)
+    post_type = models.ForeignKey(ContentType, related_name = "post_type_post", on_delete=models.CASCADE)
+    post_id = models.PositiveIntegerField()
+    post = GenericForeignKey('post_type', 'post_id')

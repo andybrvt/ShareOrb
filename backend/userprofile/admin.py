@@ -23,3 +23,4 @@ admin.site.register(models.Post);
 admin.site.register(models.FriendRequest);
 admin.site.register(models.CustomNotification)
 admin.site.register(models.UserFollowing)
+admin.site.register(models.UserSocialNormPost)

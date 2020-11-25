@@ -423,3 +423,8 @@ class NotificationView(generics.ListAPIView):
 class NotificationCreateView(generics.ListCreateAPIView):
     serializer_class = serializers.NotificationSerializer
     queryset = models.CustomNotification.objects.all()
+
+
+class UserSocialPostContentTypeView(generics.ListCreateAPIView):
+    serializer_class = serializers.UserSocialNormPostSerializer
+    queryset = models.UserSocialNormPost.objects.all()
