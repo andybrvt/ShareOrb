@@ -51,11 +51,12 @@ class UserSerializer(serializers.ModelSerializer):
     get_followers = serializers.StringRelatedField(many = True)
     get_socialCal = serializers.StringRelatedField(many = True)
     get_socialEvents = serializers.StringRelatedField(many = True)
-
+    get_allPost = serializers.StringRelatedField(many  = True)
 
     class Meta:
         model = models.User
-        fields = ('id',
+        fields = (
+         'id',
          'username',
          'first_name',
          'last_name',
@@ -67,7 +68,8 @@ class UserSerializer(serializers.ModelSerializer):
          'get_socialCal',
          'get_socialEvents',
          'friends',
-         'slug')
+         'get_allPost'
+         )
     def to_representation(self, instance):
         data = super().to_representation(instance)
         followerList = []
@@ -76,6 +78,7 @@ class UserSerializer(serializers.ModelSerializer):
         friendList = []
         postList = []
         socialEventList = []
+        allPostList = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followingList.append(userPerson)
@@ -99,12 +102,16 @@ class UserSerializer(serializers.ModelSerializer):
         for socialEvents in data['get_socialEvents']:
             socialEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = socialEvents)).data
             socialEventList.append(socialEvent)
+        for allPosts in data['get_allPost']:
+            allPost = UserSocialNormPostSerializer(models.UserSocialNormPost.objects.get(id = allPosts)).data
+            allPostList.append(allPost)
         data['get_following'] = followingList
         data['get_followers'] = followerList
         data['get_socialCal'] = socialCalList
         data['friends']  = friendList
         data['get_posts'] = postList
         data['get_socialEvents'] = socialEventList
+        data['get_allPost'] = allPostList
         return data
 
 
