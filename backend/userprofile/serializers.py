@@ -365,4 +365,4 @@ class UserSocialNormPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserSocialNormPost
-        fields = ('owner', 'post', 'post_date')
+        fields = ('id', 'owner', 'post', 'post_date')
