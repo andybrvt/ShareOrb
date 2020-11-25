@@ -50,6 +50,11 @@ class User(AbstractUser):
 
         return SocialCalEvent.objects.filter(host = self).values_list("id", flat = True)
 
+    def get_allPost(self):
+        # This will grab all the post and events that the user has made in one. It will be calling the contenttype
+
+        return UserSocialNormPost.objects.filter(owner_id = self.id)
+
     def __str__(self):
         return self.username
 
@@ -228,3 +233,5 @@ class UserSocialNormPost(models.Model):
 
     class Meta:
         ordering = ['-post_date']
+    def __str__(self):
+        return str(self.id)
