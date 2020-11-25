@@ -4,7 +4,7 @@ import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
 import { ReactBingmaps } from 'react-bingmaps';
-import { DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
+import { Avatar, DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { AimOutlined, PictureOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
@@ -479,14 +479,23 @@ class DetailEditEventForm extends React.Component{
   renderShareListSelect = () => {
     if(this.props.friendList !== undefined){
       const friendList = this.props.friendList
-
+      console.log(friendList)
       let shareOptions = []
 
       for (let friend = 0; friend< friendList.length; friend++ ){
         shareOptions.push(
           <Option value = {friendList[friend].username}
           label = {this.capitalize(friendList[friend].username)}>
-            {this.capitalize(friendList[friend].username)}
+            <div style={{padding:'10px'}}>
+              <Avatar
+                style={{marginRight:'10px'}}
+                size="small"
+                src={'http://127.0.0.1:8000'+friendList[friend].profile_picture}/>
+              <span>
+                {this.capitalize(friendList[friend].username)}
+              </span>
+            </div>
+
           </Option>
         )
       }
@@ -586,9 +595,10 @@ class DetailEditEventForm extends React.Component{
 
 
   render(){
-
+    const friendList = this.props.friendList
     console.log(this.props)
     console.log(this.state)
+
 
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
@@ -801,6 +811,7 @@ class DetailEditEventForm extends React.Component{
                     type = 'text'
                 />
             </div>
+
             {/*
             <div className = "noMap">
                 <div class="noMapFrame">
@@ -814,6 +825,7 @@ class DetailEditEventForm extends React.Component{
 
 
             <div style={{marginBottom:'100px'}}></div>
+            test
 
             {/*
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>

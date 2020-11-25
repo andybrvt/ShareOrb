@@ -81,6 +81,11 @@
   /* background-color: gainsboro; */
 }
 
+.personProfilePic{
+  object-fit: cover;
+  width:10px;
+  height:10px;
+}
 
 
 .flex-container {

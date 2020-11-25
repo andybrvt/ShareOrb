@@ -654,7 +654,7 @@ class EventInfo extends React.Component{
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
-                <Statistic class="addFont" title="Going" value={accepted.length} />
+                <Statistic style={{color:'red'}} class="addFont" title="Going" value={accepted.length} />
 
 
 
