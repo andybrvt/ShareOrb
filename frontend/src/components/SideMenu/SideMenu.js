@@ -34,6 +34,7 @@ import {
   AutoComplete,
   Badge,
   Select,
+  Option,
 } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
@@ -138,7 +139,28 @@ class SideMenu extends React.Component {
 
     const temp=[]
     this.state.profileList.forEach(item => {
-      temp.push(item.username);
+      temp.push(
+        <Option value = {item.username}
+        label = {this.capitalize(item.username)}>
+          <div style={{padding:'10px'}}>
+            <Avatar
+              style={{marginRight:'10px'}}
+              size="small"
+              src={item.profile_picture}/>
+            <span>
+              {this.capitalize(item.first_name)} {this.capitalize(item.last_name)}
+              <br/>
+              <div
+                class="headerPostText"
+                style={{marginLeft:'35px'}}
+              >
+                {"@"+item.username}
+              </div>
+            </span>
+          </div>
+
+        </Option>
+      );
     })
     console.log(temp)
 
@@ -228,11 +250,13 @@ class SideMenu extends React.Component {
          <AutoComplete
            dataSource={temp}
 
-           filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+           filterOption={(inputValue, option) =>
+             option.props.children.toUpperCase().
+             indexOf(inputValue.toUpperCase()) !== -1}
            onSearch={this.handleSearch}
            onSelect={this.onSelect}
            dropdownClassName="certain-category-search-dropdown"
-           dropdownMatchSelectWidth={500}
+           dropdownMatchSelectWidth={400}
            style={{
             // marginLeft:150,
             marginLeft:'25%',

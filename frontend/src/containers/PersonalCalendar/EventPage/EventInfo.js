@@ -600,7 +600,7 @@ class EventInfo extends React.Component{
 
 
 
-        <div class="eventCard" style={{marginTop:'-10px', width:'500px'}}>
+        <div class="eventCard" style={{marginTop:'-10px', width:'500px',padding:'30px'}}>
             <div
               className = 'eventTitle'>
               {this.capitalize(title)}

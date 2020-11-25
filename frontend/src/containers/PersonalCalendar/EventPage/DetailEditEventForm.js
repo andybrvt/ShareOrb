@@ -482,17 +482,27 @@ class DetailEditEventForm extends React.Component{
       console.log(friendList)
       let shareOptions = []
 
-      for (let friend = 0; friend< friendList.length; friend++ ){
+      for (let i = 0; i< friendList.length; i++ ){
         shareOptions.push(
-          <Option value = {friendList[friend].username}
-          label = {this.capitalize(friendList[friend].username)}>
+          <Option value = {friendList[i].username}
+          label = {
+
+            this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)
+          }>
             <div style={{padding:'10px'}}>
               <Avatar
                 style={{marginRight:'10px'}}
                 size="small"
-                src={'http://127.0.0.1:8000'+friendList[friend].profile_picture}/>
+                src={'http://127.0.0.1:8000'+friendList[i].profile_picture}/>
               <span>
-                {this.capitalize(friendList[friend].username)}
+                {this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}
+                <br/>
+                <div
+                  class="headerPostText"
+                  style={{marginLeft:'35px'}}
+                >
+                  {"@"+friendList[i].username}
+                </div>
               </span>
             </div>
 
