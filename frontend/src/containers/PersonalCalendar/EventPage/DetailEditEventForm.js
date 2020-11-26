@@ -149,16 +149,17 @@ const renderStartTime = () => {
   }
 
   const renderFriendSelect = (field) => {
-    console.log(field)
+    console.log(field.input.value)
+
     return (
       <Select
-      mode="multiple"
-      style={{ width: '80%', marginTop:'20px'}}
-      optionLabelProp="label"
-      onChange = {field.input.onChange}
-      value = {field.input.value}
-      placeholder="Add friends"
-          >
+        mode="multiple"
+
+        style={{ width: '82%', marginTop:'20px', }}
+        onChange = {field.input.onChange}
+        value = {field.input.value}
+        placeholder="Add friends"
+      >
       {field.children}
 
       </Select>
@@ -199,7 +200,10 @@ class DetailEditEventForm extends React.Component{
   // For detail comments on how redux forms work, check ReduxEditEventForm
   state = {
     visible: false,
-    locationField:'Shanghai', };
+    invitedList:[],
+    locationField:'Shanghai'
+
+   };
 
   onClose = () => {
     this.setState({
@@ -484,11 +488,15 @@ class DetailEditEventForm extends React.Component{
 
       for (let i = 0; i< friendList.length; i++ ){
         shareOptions.push(
+
           <Option value = {friendList[i].username}
           label = {
+            <div style={{padding:'5px'}}>
+            <Avatar size={15} style={{marginRight:'10px'}} src= {'http://127.0.0.1:8000'+friendList[i].profile_picture} />
 
-            this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)
-          }>
+            <span>{this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}</span>
+            </div>
+        }>
             <div style={{padding:'10px'}}>
               <Avatar
                 style={{marginRight:'10px'}}
@@ -835,7 +843,6 @@ class DetailEditEventForm extends React.Component{
 
 
             <div style={{marginBottom:'100px'}}></div>
-            test
 
             {/*
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>

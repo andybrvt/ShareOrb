@@ -150,7 +150,6 @@
   margin-top: 10px;
   width: 60px;
   height: 60px;
-  /* border-radius: 30px; */
   padding: 3px;
   text-align: center;
   position: relative;
@@ -200,16 +199,17 @@
 
   width: 45%;
   height: 375px;
-  padding: 25px;
+  padding: 30px;
   background-color: #F5F5F5;
 }
 
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventTitle{
   color: black;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 120%;
   /* font-size: calc(1.2vw); */
   margin-top: 0px;
+
   /* background-color: red; */
   word-break: normal  ;
 }
@@ -218,12 +218,11 @@
 .attendees{
   color: black;
   font-size: 18px;
-  line-height: 180%;
+  line-height: 150%;
   position:absolute;
 
   margin-left: -50px;
-  bottom:0;
-  /* margin-top: 10px; */
+  bottom:-10px;
   /* background-color: red; */
 }
 .eventInfoContainer .eventInfoView .topSectContainier .eventTopSide .eventDate{
@@ -251,6 +250,7 @@
   border: 10px dashed gainsboro;
   text-align: center;
   margin-left: 200px;
+  border-radius: 10px;
 }
 
 
@@ -417,9 +417,10 @@
 
 
 .chatBox{
-  margin-left: 75px;
-  margin-bottom: 50px;
+  margin-left: 25px;
+  margin-bottom: 100px;
 
+  line-height: 100%;
 }
 
 .chatHeader{
@@ -455,8 +456,8 @@
 }
 
 .eventGroupChatContainer .messageList{
-  width: 102%;
-  height: 90%;
+  width: 100%;
+  height: 80%;
   background-color: white;
   overflow: auto;
 }
