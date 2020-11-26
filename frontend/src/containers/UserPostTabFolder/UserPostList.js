@@ -43,10 +43,10 @@ class UserPostList extends React.Component{
       var boxes = []
       for (let i = 0; i< renderList.length; i++ ){
         if(renderList[i].post.post_images){
-          let imagesList = renderList[i].post_images
+          let imagesList = renderList[i].post.post_images
           console.log(renderList[i])
-          const postId = renderList[i].id
-          const postUser = renderList[i].user
+          const postId = renderList[i].post.id
+          const postUser = renderList[i].post.user
           boxes.push(
             <div className = 'postListSquare'>
               <Link
@@ -65,40 +65,40 @@ class UserPostList extends React.Component{
           )
         }
         if(renderList[i].post.get_socialCalItems){
-          // const image = renderList[i].coverPic
-          // const calUsername = renderList[i].socialCalUser.username
-          // console.log(renderList[i].socialCaldate.split("-"))
-          // const dateList = renderList[i].socialCaldate.split("-")
-          // const year = dateList[0]
-          // const month = dateList[1]
-          // const day = dateList[2]
-          // boxes.push(
-          //   <div className = "postListSquare">
-          //   <Link
-          //   to = {{
-          //     pathname :"/socialcal/"+calUsername+"/cell/"+year+"/"+month+"/"+day,
-          //     state: {pathname: this.props.location}
-          //   }}
-          //   >
-          //
-          //   <i
-          //   style ={{
-          //     position: "absolute",
-          //     zIndex: 1,
-          //     right: "3%",
-          //     top: "3%",
-          //     fontSize: "30px",
-          //     color: "white"
-          //   }}
-          //   class="fas fa-calendar"></i>
-          //   <EyeOutlined className = 'eyeClick'/>
-          //   </Link>
-          //   <img
-          //   src = {'http://127.0.0.1:8000'+image}
-          //   className = "squarePic"
-          //   />
-          //   </div>
-          // )
+          const image = renderList[i].post.coverPic
+          const calUsername = renderList[i].post.socialCalUser.username
+          console.log(renderList[i].post.socialCaldate.split("-"))
+          const dateList = renderList[i].post.socialCaldate.split("-")
+          const year = dateList[0]
+          const month = dateList[1]
+          const day = dateList[2]
+          boxes.push(
+            <div className = "postListSquare">
+            <Link
+            to = {{
+              pathname :"/socialcal/"+calUsername+"/cell/"+year+"/"+month+"/"+day,
+              state: {pathname: this.props.location}
+            }}
+            >
+
+            <i
+            style ={{
+              position: "absolute",
+              zIndex: 1,
+              right: "3%",
+              top: "3%",
+              fontSize: "30px",
+              color: "white"
+            }}
+            class="fas fa-calendar"></i>
+            <EyeOutlined className = 'eyeClick'/>
+            </Link>
+            <img
+            src = {'http://127.0.0.1:8000'+image}
+            className = "squarePic"
+            />
+            </div>
+          )
         }
 
       }
