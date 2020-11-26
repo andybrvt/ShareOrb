@@ -146,7 +146,7 @@ class WeekCalendar extends React.Component{
     const endWeek = dateFns.endOfWeek(this.props.currentDate)
     return(
 
-      <div className = 'header row flex-middle'>
+      <div style={{width:'550px'}} className = 'header row'>
         <div className = 'col col-start'>
           <div className = 'icon' onClick = {this.prevWeek}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>

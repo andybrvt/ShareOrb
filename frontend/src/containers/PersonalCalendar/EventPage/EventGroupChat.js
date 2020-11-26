@@ -106,14 +106,14 @@ class EventGroupChat extends React.Component{
     return(
 
 
-      <div className = "eventGroupChat">
-        <div class="chatBox eventCard flex-container"
-          style={{width:'400px', height:'60px', padding:'10px'}}>
+      <div>
+        <div class="chatBox eventCard"
+          style={{marginTop:'20px',width:'400px',
+            height:'60px', padding:'10px',marginBottom:'10px'}}>
 
             <Liking
             history = {this.props.history}
             style={{display:'inline-block'}} like_people={inviteList}/>
-
           {
           /*
           <span class="innerContainerPeople">
@@ -134,7 +134,9 @@ class EventGroupChat extends React.Component{
           </span>
           */
           }
-          <div style={{fontSize:'16px'}} class="chatHeader"> You and {inviteList.length} others</div>
+          <div class="chatHeader">
+            You and {inviteList.length} others
+          </div>
 
 
 
@@ -203,15 +205,16 @@ class EventGroupChat extends React.Component{
           onChange = {this.handleChange}
           value = {this.state.message}
           onPressEnter = {this.handleSubmit}
-          placeholder = "Write a message..."
-          rows={2}
+          placeholder = "Send a message"
+          rows={1}
+          style={{marginTop:'10px'}}
           />
 
         </Form>
       </div>
       <Button
-        style={{float:'right', marginTop:'10px', marginRight:'25px'}}
-
+        style={{float:'right', marginTop:'10px', marginRight:'10px'}}
+        class="roundButton"
         onClick = {this.handleSubmit} type="primary"> Chat </Button>
 
       </div>

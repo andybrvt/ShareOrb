@@ -87,9 +87,7 @@ class DayCalendar extends React.Component{
 // render the date on top
   renderHeader(){
     return (
-      <div className = {`header row flex-middle
-        ${dateFns.isSameDay(this.props.currentDate, new Date()) ? 'cellBorderHeader' : ''}
-        `}>
+      <div style={{width:'550px', marginBottom:'-100px'}} className = 'header row'>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
@@ -132,7 +130,7 @@ class DayCalendar extends React.Component{
     };
 
     return (
-      <div className = 'dayDays row'>
+      <div className = 'dayDays'>
       {days}
       </div>
       )

@@ -53,7 +53,7 @@ class YearCalendar extends React.Component{
     const dateFormat = 'yyyy'
 
     return(
-      <div className = "header row flex-middle" style={{marginLeft:'450px'}}>
+      <div style={{width:'550px'}} className = "header row flex-middle">
         <div className = "col col-start">
           <div className = "icon" onClick = {this.prevYear} >
           <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>

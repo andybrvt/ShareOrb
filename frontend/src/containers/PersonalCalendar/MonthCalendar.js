@@ -86,7 +86,7 @@ class PersonalCalendar extends React.Component{
     // for formatting using moment or whatever you do
     // .format('give a date here', what kind of formatting here)
     return (
-      <div className= "header row flex-middle">
+      <div style={{width:'550px'}} className= "header row flex-middle">
         <div className = "col col-start">
           <div className = "icon" onClick ={this.prevMonth}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
