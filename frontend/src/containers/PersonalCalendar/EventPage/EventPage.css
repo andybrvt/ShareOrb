@@ -538,7 +538,7 @@
 
 .selectBox{
    white-space: nowrap;
-   line-height: 200px;
+   line-height: 40px;
    overflow: auto;
    border: none;
 }

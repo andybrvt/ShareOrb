@@ -50,7 +50,7 @@ const renderField = (field) => {
     placeholder= {field.placeholder}
     style={{display:'inline-block'}}
     className = 'box'
-    maxLength = "55"
+    maxLength = "125"
     />
 
     </span>
@@ -154,14 +154,14 @@ const renderStartTime = () => {
     return (
       <Select
         mode="multiple"
-        // listHeight = {100}
         style={{ width: '82%',
-         marginTop:'20px', }}
-        size = {'large'}
+         marginTop:'30px', }}
+
         onChange = {field.input.onChange}
         value = {field.input.value}
         placeholder="Add friends"
         className = 'selectBox'
+        optionLabelProp="label"
       >
       {field.children}
 
@@ -494,8 +494,8 @@ class DetailEditEventForm extends React.Component{
 
           <Option value = {friendList[i].username}
           label = {
-            <div style={{padding:'5px'}}>
-            <Avatar size={15} style={{marginRight:'10px'}} src= {'http://127.0.0.1:8000'+friendList[i].profile_picture} />
+            <div style={{padding:'3px'}}>
+            <Avatar size={15} style={{marginRight:'10px', marginBottom:'5px'}} src= {'http://127.0.0.1:8000'+friendList[i].profile_picture} />
 
             <span>{this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}</span>
             </div>
