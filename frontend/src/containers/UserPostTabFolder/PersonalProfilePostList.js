@@ -472,6 +472,7 @@ class PersonalProfilePostList extends React.Component{
             <UserPostList
             posts = {this.props.profile.get_posts}
             cells = {this.props.profile.get_socialCal}
+            allpost = {this.props.profile.get_allPost}
             location = {location}
              />
 

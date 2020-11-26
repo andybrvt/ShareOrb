@@ -12,28 +12,29 @@ from django.contrib.contenttypes.models import ContentType
 
 def create_all_post(sender, instance, created, **kwargs):
     # This will be simlar to the one in the userprofile  models
-    print(instance)
+    print(instance.get_socialCalItems())
     userModal = apps.get_model('userprofile', 'User')
     userSocialNormPost = apps.get_model('userprofile', 'UserSocialNormPost')
 
     post_type = ContentType.objects.get_for_model(instance)
     owner_type = ContentType.objects.get_for_model(userModal)
-    try:
-        post = userSocialNormPost.objects.get(
-            owner_type = owner_type,
-            owner_id = instance.creator.id,
-            post_type = post_type,
-            post_id = instance.id
-        )
-    except userSocialNormPost.DoesNotExist:
-        post = userSocialNormPost(
-            owner_type = owner_type,
-            owner_id = instance.creator.id,
-            post_type = post_type,
-            post_id = instance.id
-        )
-    post.post_date = instance.created_at
-    post.save()
+    if(len(instance.get_socialCalItems()) > 0):
+        try:
+            post = userSocialNormPost.objects.get(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        except userSocialNormPost.DoesNotExist:
+            post = userSocialNormPost(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        post.post_date = instance.created_at
+        post.save()
 
 
 #These models are used to work with the social cal and all its backend
@@ -54,6 +55,8 @@ class SocialCalCell(models.Model):
     #This is to set the cover picture of the cell
     coverPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
+    # This will be used for the date and time it was created at
+    created_at = models.DateTimeField(default = timezone.now, blank = False)
 
     # This will cover the like of the day
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
@@ -72,6 +75,7 @@ class SocialCalCell(models.Model):
         return SocialCalComment.objects.filter(calCell = self).values_list('id', flat = True)
 
 
+post_save.connect(create_all_post, sender = SocialCalCell )
 
 
 class SocialCalItems(models.Model):
@@ -108,7 +112,6 @@ class SocialCalItems(models.Model):
     class Meta:
         ordering = ['created_at']
 
-post_save.connect(create_all_post, sender = SocialCalItems)
 
 class SocialCalEvent(models.Model):
     # This modelis for the social events taht you are gonna post for the public

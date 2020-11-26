@@ -362,8 +362,8 @@ class UserSocialNormPostRelatedField(serializers.RelatedField):
         elif isinstance(instance, models.Post):
             post = MiniPostSerializer(models.Post.objects.get(id = instance.id)).data
             return post
-        elif isinstance(instance, SocialCalItems):
-            socialPost = SocialCalItemsSerializer(SocialCalItems.objects.get(id = instance.id)).data
+        elif isinstance(instance, SocialCalCell):
+            socialPost = SocialCalCellSerializer(SocialCalCell.objects.get(id = instance.id)).data
             return socialPost
 
 class UserSocialNormPostSerializer(serializers.ModelSerializer):
