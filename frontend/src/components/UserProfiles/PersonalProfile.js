@@ -17,6 +17,7 @@ import FollowList from './FollowList';
 import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
 import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
+import EditProfileForm from './EditProfile/EditProfileForm';
 // From here on out each profile will be its own channel, so we do not need
 // to use ViewAnyUserProfile anymore
 // Each profile will fetch its own information and do its own channel stuff
@@ -531,7 +532,7 @@ class PersonalProfile extends React.Component{
           visible = {this.state.showProfileEdit}
           onCancel = {() => this.closeProfileEdit()}
           >
-          This is for editing the profile information
+          <EditProfileForm />
           </Modal>
 
           <ChangeProfilePic
