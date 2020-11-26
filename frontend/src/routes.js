@@ -29,6 +29,7 @@ import UserPostList from './containers/UserPostTabFolder/UserPostList';
 import PersonalProfilePostList from './containers/UserPostTabFolder/PersonalProfilePostList';
 import PersonalProfileEventList from './containers/UserEventTabFolder/PersonalProfileEventList';
 import UserPostModal from "./components/PostPageFolder/UserPostModal";
+
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
