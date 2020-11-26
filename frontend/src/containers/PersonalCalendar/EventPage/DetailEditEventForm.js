@@ -522,9 +522,7 @@ class DetailEditEventForm extends React.Component{
     }
   }
 
-    = (value) => {
-    console.log(value)
-  }
+
 
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
