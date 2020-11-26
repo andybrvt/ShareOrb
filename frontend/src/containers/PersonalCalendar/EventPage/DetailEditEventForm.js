@@ -154,11 +154,14 @@ const renderStartTime = () => {
     return (
       <Select
         mode="multiple"
-
-        style={{ width: '82%', marginTop:'20px', }}
+        // listHeight = {100}
+        style={{ width: '82%',
+         marginTop:'20px', }}
+        size = {'large'}
         onChange = {field.input.onChange}
         value = {field.input.value}
         placeholder="Add friends"
+        className = 'selectBox'
       >
       {field.children}
 

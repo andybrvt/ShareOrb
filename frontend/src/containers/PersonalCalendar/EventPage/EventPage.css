@@ -534,3 +534,11 @@
   font-size: 16px;
 
 }
+
+
+.selectBox{
+   white-space: nowrap;
+   line-height: 200px;
+   overflow: auto;
+   border: none;
+}
