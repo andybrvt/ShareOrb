@@ -188,7 +188,7 @@ class WeekCalendar extends React.Component{
         >
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           <br />
-          <span onClick = {() => this.onDateClick(cloneCloneStartDate)}>
+          <span class="weekDayHover" onClick = {() => this.onDateClick(cloneCloneStartDate)}>
           {dateFns.format(dateFns.addDays(startDate, i), dayFormat)}
           </span>
         </div>
