@@ -108,7 +108,7 @@ class EventGroupChat extends React.Component{
 
       <div className = "eventGroupChat">
         <div class="chatBox eventCard flex-container"
-          style={{width:'400px', height:'75px'}}>
+          style={{width:'400px', height:'60px', padding:'10px'}}>
 
             <Liking
             history = {this.props.history}
@@ -134,7 +134,7 @@ class EventGroupChat extends React.Component{
           </span>
           */
           }
-          <div class="chatHeader"> You and {inviteList.length} others</div>
+          <div style={{fontSize:'16px'}} class="chatHeader"> You and {inviteList.length} others</div>
 
 
 

@@ -491,9 +491,12 @@ class DetailEditEventForm extends React.Component{
 
           <Option value = {friendList[i].username}
           label = {
+            <div style={{padding:'5px'}}>
+            <Avatar size={15} style={{marginRight:'10px'}} src= {'http://127.0.0.1:8000'+friendList[i].profile_picture} />
 
-            this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)
-          }>
+            <span>{this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}</span>
+            </div>
+        }>
             <div style={{padding:'10px'}}>
               <Avatar
                 style={{marginRight:'10px'}}
@@ -521,13 +524,7 @@ class DetailEditEventForm extends React.Component{
 
   handleFriendChange = (value) => {
     console.log(value)
-
-    this.setState({
-      invitedList:value,
-    })
-    console.log(this.state.invitedList)
   }
-
 
   renderEndTimeSelect = () => {
     console.log(this.props.startTime)
@@ -847,9 +844,7 @@ class DetailEditEventForm extends React.Component{
 
             <div style={{marginBottom:'100px'}}></div>
             test
-              {this.state.invitedList.map(item => (
-                            <div>{item}</div>
-            ))}
+
             {/*
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>
               <p style={{fontSize:'20px', color:'black'}}
