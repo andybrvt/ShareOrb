@@ -153,13 +153,13 @@ const renderStartTime = () => {
 
     return (
       <Select
-      mode="multiple"
-      style={{ width: '80%', marginTop:'20px'}}
-      optionLabelProp="label"
-      onChange = {field.input.onChange}
-      value = {field.input.value}
-      placeholder="Add friends"
-          >
+        mode="multiple"
+
+        style={{ width: '82%', marginTop:'20px', }}
+        onChange = {field.input.onChange}
+        value = {field.input.value}
+        placeholder="Add friends"
+      >
       {field.children}
 
       </Select>
@@ -843,7 +843,6 @@ class DetailEditEventForm extends React.Component{
 
 
             <div style={{marginBottom:'100px'}}></div>
-            test
 
             {/*
             <div class="mapEventCard" style={{height:300, float:'left',  marginTop:100}}>
