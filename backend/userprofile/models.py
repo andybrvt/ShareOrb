@@ -12,6 +12,34 @@ from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
+def create_all_post(sender, instance, created, **kwargs):
+    # This is a post save handler that will create a content type ojbect whenever
+    # a socialcal or post object is created
+    print(instance)
+    # The sender will be the model class and the instnace will
+    # the specific instance of that class
+    post_type = ContentType.objects.get_for_model(instance)
+    owner_type = ContentType.objects.get_for_model(User)
+    try:
+        post = UserSocialNormPost.objects.get(
+            owner_type = owner_type,
+            owner_id = instance.user.id,
+            post_type = post_type,
+            post_id = instance.id
+        )
+    except UserSocialNormPost.DoesNotExist:
+        post = UserSocialNormPost(
+            owner_type = owner_type,
+            owner_id = instance.user.id,
+            post_type = post_type,
+            post_id = instance.id
+        )
+    post.post_date = instance.created_at
+    post.save()
+
+
+
+
 class User(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=250)
     profile_picture = models.ImageField(('profile_picture'),
@@ -121,6 +149,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-created_at', '-updated_at')
+
+post_save.connect(create_all_post, sender = Post)
 
 class ImageModel(models.Model):
     imageList = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='images', blank = True)

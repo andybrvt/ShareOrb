@@ -514,7 +514,7 @@ class DetailEditEventForm extends React.Component{
     }
   }
 
-  handleFriendChange = (value) => {
+    = (value) => {
     console.log(value)
   }
 
