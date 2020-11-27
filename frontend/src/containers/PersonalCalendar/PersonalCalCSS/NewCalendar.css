@@ -206,7 +206,7 @@ main {
   padding: 0;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 50%;
+  width: 100%;
   /* background-color: blue; */
 }
 
