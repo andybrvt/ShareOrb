@@ -473,6 +473,16 @@ class PersonalProfile extends React.Component{
       this.props.history.push("/explore/"+this.props.parameter.username +"/events")
     }
 
+    getInitialValue = () => {
+      // This function will get the initial value of the edit profile page, which
+      // in this case is the name, last name, bio, picture etc what ever else you
+      // wanna edit
+
+      if(this.props.profile){
+        
+      }
+    }
+
     onRenderTabs= () => {
       return (
         <div className = 'profile-tabContainer'>

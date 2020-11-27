@@ -2,6 +2,7 @@ import React from 'react';
 import './EditProfile.css';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Avatar, DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
+import { connect } from "react-redux";
 
 
 
@@ -38,6 +39,7 @@ class EditProfileForm extends React.Component{
       <div className = "">
 
         <div>
+        First name:
         <Field
         name = 'first_name'
         component = {renderInput}
@@ -46,6 +48,7 @@ class EditProfileForm extends React.Component{
         </div>
 
         <div>
+        Last name:
         <Field
         name = 'last_name'
         component = {renderInput}
@@ -54,6 +57,7 @@ class EditProfileForm extends React.Component{
         </div>
 
         <div>
+        Bio:
         <Field
         name = 'bio'
         component = {renderTextArea}
@@ -73,5 +77,12 @@ EditProfileForm = reduxForm({
   enableReinitialize:  true,
 }) (EditProfileForm)
 
+const selector = formValueSelector("editProfileForm");
 
-export default EditProfileForm;
+
+
+export default connect(state => ({
+  first_name:  selector(state, 'first_name'),
+  last_name: selector(state, 'last_name'),
+  bio: selector(state, 'bio')
+})) (EditProfileForm);

@@ -15,6 +15,7 @@ import ChangeProfilePic from '../CurrUser/ChangeProfilePic';
 import FollowList from '../../components/UserProfiles/FollowList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import UserEventList from './UserEventList';
+import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
 
 
 class PersonalProfileEventList extends React.Component{
@@ -534,7 +535,7 @@ class PersonalProfileEventList extends React.Component{
         visible = {this.state.showProfileEdit}
         onCancel = {() => this.closeProfileEdit()}
         >
-        This is for editing the profile information
+        <EditProfileForm />       
         </Modal>
 
         <ChangeProfilePic
