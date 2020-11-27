@@ -68,7 +68,9 @@ class UserSerializer(serializers.ModelSerializer):
          'get_socialCal',
          'get_socialEvents',
          'friends',
-         'get_allPost'
+         'get_allPost',
+         'phone_number',
+         'email'
          )
     def to_representation(self, instance):
         data = super().to_representation(instance)

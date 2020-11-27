@@ -67,6 +67,24 @@ class EditProfileForm extends React.Component{
         />
         </div>
 
+        <div>
+        Phone number:
+        <Field
+        name = 'phone_number'
+        component = {renderInput}
+        type  = "text"
+        />
+        </div>
+
+        <div>
+        Email:
+        <Field
+        name = "email"
+        component= {renderInput}
+        type = 'text'
+        />
+        </div>
+
 
 
       </div>
@@ -86,5 +104,7 @@ const selector = formValueSelector("editProfileForm");
 export default connect(state => ({
   first_name:  selector(state, 'first_name'),
   last_name: selector(state, 'last_name'),
-  bio: selector(state, 'bio')
+  bio: selector(state, 'bio'),
+  phone_number: selector(state, "phone_number"),
+  email: selector(state, 'email')
 })) (EditProfileForm);
