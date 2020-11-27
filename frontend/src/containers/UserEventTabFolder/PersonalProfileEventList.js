@@ -550,6 +550,7 @@ class PersonalProfileEventList extends React.Component{
     console.log(this.state)
     let followers = []
     let following = []
+    let profilePic = ""
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
@@ -557,6 +558,9 @@ class PersonalProfileEventList extends React.Component{
       }
       if(this.props.profile.get_following){
         following = this.props.profile.get_following
+      }
+      if(this.props.profile.profile_picture){
+        profilePic = this.props.profile.profile_picture
       }
 
     }
@@ -576,6 +580,7 @@ class PersonalProfileEventList extends React.Component{
         >
         <EditProfileForm
         initialValues = {this.getInitialValue()}
+        profilePic = {profilePic}
          />
         </Modal>
 

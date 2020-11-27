@@ -36,9 +36,19 @@ class EditProfileForm extends React.Component{
 
   render(){
     console.log(this.props)
+    let profilePic = ""
+    if(this.props.profilePic){
+      profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+    }
 
     return(
       <div className = "">
+
+        <div>
+          <Avatar
+          size = {100}
+           src = {profilePic}/>
+        </div>
 
         <div>
         First name:
