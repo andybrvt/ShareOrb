@@ -41,7 +41,7 @@ def create_all_post(sender, instance, created, **kwargs):
 
 
 class User(AbstractUser):
-    bio = models.CharField(blank=True, null=True, max_length=250)
+    bio = models.TextField(blank=True, null=True, max_length=250)
     profile_picture = models.ImageField(('profile_picture'),
                                         upload_to='PostPic/public/profile_pictures/%Y/%m',
                                         blank=True,

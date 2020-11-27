@@ -450,6 +450,36 @@ class PersonalProfilePostList extends React.Component{
       this.props.history.push("/explore/"+ this.props.parameter.username + "/events")
     }
 
+    getInitialValue = () => {
+      // This function will get the initial value of the edit profile page, which
+      // in this case is the name, last name, bio, picture etc what ever else you
+      // wanna edit
+
+      if(this.props.profile){
+        let firstName = "";
+        let lastName = "";
+        let bio = "";
+        if(this.props.profile.first_name){
+          firstName = this.props.profile.first_name
+        }
+        if(this.props.profile.last_name){
+          lastName = this.props.profile.last_name
+        }
+        if(this.props.profile.bio !== null){
+          bio = this.props.profile.bio
+        }
+
+        return {
+          first_name: firstName,
+          last_name: lastName,
+          bio: bio,
+        }
+      }
+
+
+    }
+
+
     onRenderTabs= () => {
       const location = this.props.location.pathname
 
@@ -521,7 +551,9 @@ class PersonalProfilePostList extends React.Component{
         visible = {this.state.showProfileEdit}
         onCancel = {() => this.closeProfileEdit()}
         >
-        <EditProfileForm />
+        <EditProfileForm
+        initialValues = {this.getInitialValue()}
+        />
         </Modal>
 
         <ChangeProfilePic

@@ -12,6 +12,8 @@ const renderInput = (field) => {
 
   return (
       <Input
+      {...field.input}
+      type = {field.type}
       placeholder = {field.placeholder}
       maxLength = "125"
       />
@@ -21,6 +23,7 @@ const renderInput = (field) => {
 const renderTextArea = (field) => {
   return (
     <TextArea
+    {...field.input}
     rows = {4}
     type = {field.type}
     placeholder = {field.placeholder}
@@ -31,9 +34,8 @@ const renderTextArea = (field) => {
 class EditProfileForm extends React.Component{
 
 
-
   render(){
-
+    console.log(this.props)
 
     return(
       <div className = "">
