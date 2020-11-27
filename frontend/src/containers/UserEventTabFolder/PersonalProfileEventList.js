@@ -470,6 +470,8 @@ class PersonalProfileEventList extends React.Component{
         let firstName = "";
         let lastName = "";
         let bio = "";
+        let phone_number = "";
+        let email = "";
         if(this.props.profile.first_name){
           firstName = this.props.profile.first_name
         }
@@ -479,11 +481,19 @@ class PersonalProfileEventList extends React.Component{
         if(this.props.profile.bio !== null){
           bio = this.props.profile.bio
         }
+        if(this.props.profile.phone_number){
+          phone_number = this.props.profile.phone_number
+        }
+        if(this.props.profile.email){
+          email = this.props.profile.email
+        }
 
         return {
           first_name: firstName,
           last_name: lastName,
           bio: bio,
+          phone_number: phone_number,
+          email: email,
         }
       }
 
