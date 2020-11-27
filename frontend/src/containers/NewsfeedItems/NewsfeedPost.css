@@ -159,14 +159,19 @@
 
 .likeCSS{
   font-size:14px;
-  color:gray;
+
   margin-left: 20px;
   margin-top:10px;
+  background-color: red;
 }
 
 body{
   background:#311b92;
   position:relative;
+}
+
+.boldLikeComment{
+  font-weight: bold;
 }
 
 .cardborder{

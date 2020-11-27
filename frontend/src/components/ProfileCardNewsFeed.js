@@ -87,7 +87,9 @@ class ProfileCardNewsFeed extends React.Component{
 
         </div>
         <div className = 'social-NF'>
-        <div className = 'social-links-NF'>
+        <div className = 'social-links-NF'
+          
+        >
           <div
           onClick = {() => this.onFollowerOpen()}
           className = 'btn-NF'> Followers </div>

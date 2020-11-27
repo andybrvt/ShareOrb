@@ -28,12 +28,16 @@ class UserAvatar extends React.Component{
     const textColor=['#FFFFFF']
     console.log(this.props.data)
     console.log(like_people)
+    let defaultNum=3
+    if(this.props.num){
+      defaultNum=this.props.num;
+    }
     return (
       <span>
 
         <Avatar.Group
         maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
-        maxCount={3}
+        maxCount={defaultNum}
         >
 
         {this.props.like_people.map((user) => (
