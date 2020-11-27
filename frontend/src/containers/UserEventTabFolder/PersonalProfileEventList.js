@@ -461,6 +461,16 @@ class PersonalProfileEventList extends React.Component{
       })
     }
 
+
+    onSaveEdit = (values) => {
+        // This function will be called when you make a change on the profile infomraiton
+        // and then save it. Pretty much it will get informaiton form the editprofileform
+        // that was change and then get sent into the channel and then update it in the back
+        // end then that information will get sent back into the frot end and changed
+
+      console.log(values)
+    }
+
     getInitialValue = () => {
       // This function will get the initial value of the edit profile page, which
       // in this case is the name, last name, bio, picture etc what ever else you
@@ -577,10 +587,12 @@ class PersonalProfileEventList extends React.Component{
         <Modal
         visible = {this.state.showProfileEdit}
         onCancel = {() => this.closeProfileEdit()}
+        footer = {null}
         >
         <EditProfileForm
         initialValues = {this.getInitialValue()}
         profilePic = {profilePic}
+        onSubmit = {this.onSaveEdit}
          />
         </Modal>
 

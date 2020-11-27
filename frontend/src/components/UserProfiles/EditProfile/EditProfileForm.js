@@ -41,6 +41,9 @@ class EditProfileForm extends React.Component{
       profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
     }
 
+    const {handleSubmit, pristine, invalid, reset} = this.props;
+
+
     return(
       <div className = "">
 
@@ -48,6 +51,7 @@ class EditProfileForm extends React.Component{
           <Avatar
           size = {100}
            src = {profilePic}/>
+           Change Profile Picture
         </div>
 
         <div>
@@ -93,6 +97,18 @@ class EditProfileForm extends React.Component{
         component= {renderInput}
         type = 'text'
         />
+        </div>
+
+        <div>
+        <Button > Clear </Button>
+        </div>
+        <div>
+        <Button
+        type = "primary"
+        onClick = {handleSubmit}
+        htmlType = "submit">
+          Submit
+        </Button>
         </div>
 
 
