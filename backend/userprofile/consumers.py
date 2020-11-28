@@ -590,7 +590,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         profile = get_object_or_404(User, username = data['username'])
         serializer = UserSerializer(profile).data
 
-        print(UserSocialNormPost.objects.filter())
         content = {
             'command': 'user_profile',
             'profile': json.dumps(serializer)
