@@ -10,6 +10,7 @@ import { Button, Modal, Avatar } from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import * as exploreActions from '../../store/actions/explore';
+import * as authActions from '../../store/actions/auth';
 import '../../components/UserProfiles/ProfilePage.css';
 import ChangeProfilePic from '../CurrUser/ChangeProfilePic';
 import FollowList from '../../components/UserProfiles/FollowList';
@@ -75,6 +76,8 @@ class PersonalProfileEventList extends React.Component{
     //This will reconnect to eh proper profile if you were to change the profiles
 
     if(this.props.parameter.username !== newProps.parameter.username){
+
+      this.props.closeProfile()
       ExploreWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
         ExploreWebSocketInstance.fetchProfile(
@@ -164,6 +167,8 @@ class PersonalProfileEventList extends React.Component{
       data
     ).then(res => {
       this.props.changeProfilePic(res.data.profile_picture.substring(21,))
+      this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
+
     })
 
 // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
@@ -660,7 +665,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic))
+    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
+    changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
+    closeProfile: () => dispatch(exploreActions.closeProfile()),
+
   }
 }
 

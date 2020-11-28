@@ -10,6 +10,7 @@ import { Button, Modal, Avatar } from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import * as exploreActions from '../../store/actions/explore';
+import * as authActions from '../../store/actions/auth';
 import '../../components/UserProfiles/ProfilePage.css';
 import ChangeProfilePic from '../CurrUser/ChangeProfilePic';
 import FollowList from '../../components/UserProfiles/FollowList';
@@ -156,7 +157,11 @@ class PersonalProfilePostList extends React.Component{
   handleProfilePicChange = (values) => {
     // This is used to changing the profile pic, for submiting.
     console.log(values)
-    const userId = this.props.profile.id
+    let userId = ""
+    if(this.props.profile){
+      userId = this.props.profile.id
+
+    }
     var data  = new FormData()
     data.append('profile_picture', values)
     // To edit information, you usually do put instead of post
@@ -164,6 +169,8 @@ class PersonalProfilePostList extends React.Component{
       data
     ).then(res => {
       this.props.changeProfilePic(res.data.profile_picture.substring(21,))
+      this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
+
     })
 
 // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
@@ -652,7 +659,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
-    closeProfile: () => dispatch(exploreActions.closeProfile())
+    closeProfile: () => dispatch(exploreActions.closeProfile()),
+    changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic))
+
   }
 }
 
