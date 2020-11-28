@@ -608,6 +608,9 @@ class PersonalProfilePostList extends React.Component{
         initialValues = {this.getInitialValue()}
         profilePic = {profilePic}
         onSubmit = {this.onSaveEdit}
+        changeProfilePic = {this.props.changeProfilePic}
+        changeProfilePicAuth = {this.props.changeProfilePicAuth}
+        curId = {this.props.currentId}
         />
         </Modal>
 

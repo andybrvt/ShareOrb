@@ -159,7 +159,12 @@ class PersonalProfileEventList extends React.Component{
   handleProfilePicChange = (values) => {
     // This is used to changing the profile pic, for submiting.
     console.log(values)
-    const userId = this.props.profile.id
+    console.log(this.props.profile)
+    let userId = ""
+    if(this.props.profile){
+      userId = this.props.profile.id
+
+    }
     var data  = new FormData()
     data.append('profile_picture', values)
     // To edit information, you usually do put instead of post
@@ -615,6 +620,9 @@ class PersonalProfileEventList extends React.Component{
         initialValues = {this.getInitialValue()}
         profilePic = {profilePic}
         onSubmit = {this.onSaveEdit}
+        changeProfilePic = {this.props.changeProfilePic}
+        changeProfilePicAuth = {this.props.changeProfilePicAuth}
+        curId = {this.props.currentId}
          />
         </Modal>
 
