@@ -162,7 +162,7 @@
 
   margin-left: 20px;
   margin-top:10px;
-  background-color: red;
+  /* background-color: red; */
 }
 
 body{
@@ -171,7 +171,10 @@ body{
 }
 
 .boldLikeComment{
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-family: "Segoe UI";
+
+  color:black;
 }
 
 .cardborder{
@@ -437,7 +440,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 .photoText{
     line-height: 130%;
-
+    font-family: "Segoe UI";
 }
 
 
