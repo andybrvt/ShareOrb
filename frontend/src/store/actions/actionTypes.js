@@ -82,6 +82,11 @@ export const LOAD_PROFILE  = 'LOAD_PROFILE';
 export const CLOSE_PROFILE = 'CLOSE_PROFILE';
 export const ADD_FOLLOWER_UNFOLLOWER = 'ADD_FOLLOWER_UNFOLLOWER';
 export const CHANGE_PROFILE_PIC  = 'CHANGE_PROFILE_PIC';
+export const CHANGE_PROFILE_PIC_AUTH = 'CHANGE_PROFILE_PIC_AUTH';
+// This will change all the information about the user in the auth (over sceme)
+// when you are changing the profile information
+export const EDIT_PROFILE_AUTH = 'EDIT_PROFILE_AUTH';
+
 
 // This has to do with the cover picture of the social calendar cell
 // There are two cases, when the cell doesn't exist, I will have to

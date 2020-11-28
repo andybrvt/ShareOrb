@@ -10,6 +10,7 @@ import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import * as exploreActions from '../../store/actions/explore';
+import * as authActions from '../../store/actions/auth';
 import defaultPicture from '../images/default.png';
 import ava1 from '../images/avatar.jpg'
 import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
@@ -182,6 +183,7 @@ class PersonalProfile extends React.Component{
       data
     ).then(res => {
       this.props.changeProfilePic(res.data.profile_picture.substring(21,))
+      this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
     })
 
 // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
@@ -610,6 +612,7 @@ class PersonalProfile extends React.Component{
           profilePic = {profilePic}
           onSubmit = {this.onSaveEdit}
           changeProfilePic = {this.props.changeProfilePic}
+          changeProfilePicAuth = {this.props.changeProfilePicAuth}
           curId = {this.props.currentId}
            />
           </Modal>
@@ -660,7 +663,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic))
+    changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
+    changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic))
   }
 }
 

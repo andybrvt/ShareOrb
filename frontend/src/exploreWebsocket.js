@@ -140,7 +140,7 @@ class WebSocketExplore {
 
       // Add the callbacks here
       this.callbacks['load_profile'](updatedProfile)
-
+      this.callbacks['edit_profile_auth'](updatedProfile)
     }
 
 
@@ -153,8 +153,8 @@ class WebSocketExplore {
      addFollowerUnfollowerCallBack,
      addSocialEventJoinLeave,
      addSocialCell,
-     addSocialEventJoinLeavePage
-
+     addSocialEventJoinLeavePage,
+     editProfileAuth,
 
    ){
     this.callbacks['load_profile'] = loadProfile
@@ -162,6 +162,7 @@ class WebSocketExplore {
     this.callbacks['add_social_event_join_leave'] = addSocialEventJoinLeave
     this.callbacks['add_social_cell'] = addSocialCell
     this.callbacks['add_social_event_join_leave_page'] = addSocialEventJoinLeavePage
+    this.callbacks['edit_profile_auth'] = editProfileAuth
   }
 
 

@@ -93,6 +93,7 @@ class EditProfileForm extends React.Component{
         data
       ).then(res => {
         this.props.changeProfilePic(res.data.profile_picture.substring(21,))
+        this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
       })
 
   // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE

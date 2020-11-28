@@ -60,6 +60,20 @@ const addCredentials = (state, action) => {
   });
 };
 
+const editProfileAuth = (state, action) => {
+  return updateObject (state, {
+    firstName: action.editProfileObj.first_name,
+    lastName: action.editProfileObj.last_name,
+
+  })
+}
+
+const changeProfilePicAuth = (state, action) => {
+  return updateObject (state, {
+    profilePic: action.profilePic
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -72,6 +86,10 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.ADD_CREDENTIALS:
       return addCredentials(state, action);
+    case actionTypes.EDIT_PROFILE_AUTH:
+      return editProfileAuth(state,action);
+    case actionTypes.CHANGE_PROFILE_PIC_AUTH:
+      return changeProfilePicAuth(state, action);
     default:
       return state;
   }

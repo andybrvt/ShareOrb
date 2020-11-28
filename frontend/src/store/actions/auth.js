@@ -257,3 +257,18 @@ export const authCheckState = () => {
     }
   };
 };
+
+export const editProfileAuth = (editProfileObj) => {
+  return {
+    type: actionTypes.EDIT_PROFILE_AUTH,
+    editProfileObj: editProfileObj
+  }
+}
+
+
+export const changeProfilePicAuth = (profilePic) => {
+  return {
+    type: actionTypes.CHANGE_PROFILE_PIC_AUTH,
+    profilePic: profilePic
+  }
+}
