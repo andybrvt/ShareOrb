@@ -8,15 +8,45 @@ import { connect } from "react-redux";
 
 const { TextArea } = Input
 
+
+const validate = values => {
+  const errors = {}
+  // This will validate certain fields tos ee if they are good
+  if(!values.first_name){
+    errors.first_name = "Required"
+  }
+  if(!values.last_name){
+    errors.last_name = "Required"
+  }
+
+  return errors
+}
+
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+
+export const phoneNumber = value =>
+  value && !/^(0|[1-9][0-9]{9})$/i.test(value)
+    ? 'Invalid phone number, must be 10 digits'
+    : undefined
+
 const renderInput = (field) => {
 
+  console.log(field)
   return (
+    <div>
       <Input
       {...field.input}
       type = {field.type}
       placeholder = {field.placeholder}
       maxLength = "125"
       />
+      {field.meta.touched &&
+        ((field.meta.error && <span>{field.meta.error}</span>) ||
+          (field.meta.warning && <span>{field.meta.warning}</span>))}
+    </div>
   )
 }
 
@@ -51,7 +81,7 @@ class EditProfileForm extends React.Component{
           <Avatar
           size = {100}
            src = {profilePic}/>
-           Change Profile Picture 
+           Change Profile Picture
         </div>
 
         <div>
@@ -87,6 +117,8 @@ class EditProfileForm extends React.Component{
         name = 'phone_number'
         component = {renderInput}
         type  = "text"
+        validate={phoneNumber}
+
         />
         </div>
 
@@ -96,16 +128,17 @@ class EditProfileForm extends React.Component{
         name = "email"
         component= {renderInput}
         type = 'text'
+        validate={email}
+
         />
         </div>
 
-        <div>
-        <Button > Clear </Button>
-        </div>
+
         <div>
         <Button
         type = "primary"
         onClick = {handleSubmit}
+        disabled = {pristine || invalid}
         htmlType = "submit">
           Submit
         </Button>
@@ -121,6 +154,7 @@ class EditProfileForm extends React.Component{
 EditProfileForm = reduxForm({
   form: 'editProfileForm',
   enableReinitialize:  true,
+  validate
 }) (EditProfileForm)
 
 const selector = formValueSelector("editProfileForm");
