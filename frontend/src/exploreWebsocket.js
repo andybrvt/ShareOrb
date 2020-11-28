@@ -132,6 +132,15 @@ class WebSocketExplore {
 
       this.callbacks['add_social_event_join_leave_page'](socialEventList)
 
+    } else if(command === "edited_profile"){
+      // This will go in and update the profile information by just replacing
+      // the whole profile with the new updated profile
+
+      const updatedProfile = parsedData.editedProfile
+
+      // Add the callbacks here
+      this.callbacks['load_profile'](updatedProfile)
+
     }
 
 
