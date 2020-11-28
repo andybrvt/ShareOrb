@@ -442,6 +442,12 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
     line-height: 130%;
     font-family: "Segoe UI";
 }
+.userNamePart{
+  font-weight: 650;
+  font-size: 16px;
+  display: inline-block;
+
+}
 
 
 header {
