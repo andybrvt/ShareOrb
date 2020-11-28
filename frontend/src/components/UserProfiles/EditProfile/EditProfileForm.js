@@ -3,6 +3,8 @@ import './EditProfile.css';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Avatar, DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { connect } from "react-redux";
+import ChangeProfilePic from '../../../containers/CurrUser/ChangeProfilePic';
+import { authAxios } from '../../util';
 
 
 
@@ -63,6 +65,40 @@ const renderTextArea = (field) => {
 
 class EditProfileForm extends React.Component{
 
+  state = {
+    showUploadModal: false
+  }
+
+  onOpenChangeProfilePic = () => {
+    this.setState({
+      showUploadModal: true
+    })
+  }
+
+  onCloseChangeProfilePic = () => {
+    this.setState({
+      showUploadModal: false
+    })
+  }
+
+
+    handleProfilePicChange = (values) => {
+      // This is used to changing the profile pic, for submiting.
+      console.log(values)
+      const userId = this.props.curId
+      var data  = new FormData()
+      data.append('profile_picture', values)
+      // To edit information, you usually do put instead of post
+      authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+        data
+      ).then(res => {
+        this.props.changeProfilePic(res.data.profile_picture.substring(21,))
+      })
+
+  // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
+      this.onCloseChangeProfilePic();
+
+    }
 
   render(){
     console.log(this.props)
@@ -77,9 +113,11 @@ class EditProfileForm extends React.Component{
     return(
       <div className = "">
 
-        <div>
+        <div
+        onClick = {() => this.onOpenChangeProfilePic()}
+        >
           <Avatar
-          size = {100}
+           size = {100}
            src = {profilePic}/>
            Change Profile Picture
         </div>
@@ -145,6 +183,11 @@ class EditProfileForm extends React.Component{
         </div>
 
 
+        <ChangeProfilePic
+          visible = {this.state.showUploadModal}
+          onCancel = {this.onCloseChangeProfilePic}
+          onSubmit = {this.handleProfilePicChange}
+         />
 
       </div>
     )
