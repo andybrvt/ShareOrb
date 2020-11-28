@@ -597,6 +597,36 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
+
+    def edit_profile(self, data):
+        # This function will grab the current user that wants to change the
+        # information in their profile. The first thing you want to do is
+        # grab the current user. Then pull up the fields and then start
+        # picking out the fields and changing them
+        print(data)
+        profile = get_object_or_404(User, id = data['editProfileObj']['userId'])
+
+        profile.first_name = data['editProfileObj']['first_name']
+        profile.last_name = data['editProfileObj']['last_name']
+        profile.bio = data['editProfileObj']['bio']
+        profile.phone_number = data['editProfileObj']['phone_number']
+        profile.email = data['editProfileObj']['email']
+
+        profile.save()
+
+        # Now you are gonna get the updated profile
+
+        updatedProfile = get_object_or_404(User, id = data['editProfileObj']['userId'])
+        serializedProfile = UserSerializer(updatedProfile).data
+        content = {
+            'command': 'edited_profile',
+            'editedProfile': serializedProfile,
+            'reciever': serializedProfile['username']
+        }
+
+        self.send_new_explore(content)
+
+
     def create_social_event(self, data):
         # This will pretty much be like the create event view in teh mySocialCal
         # app
@@ -882,6 +912,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.add_user_social_event_page(data)
         if data['command'] == 'remove_user_social_event_page':
             self.remove_user_social_event_page(data)
+        if data['command'] == 'edit_profile':
+            self.edit_profile(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)

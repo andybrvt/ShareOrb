@@ -51,7 +51,7 @@ class EditProfileForm extends React.Component{
           <Avatar
           size = {100}
            src = {profilePic}/>
-           Change Profile Picture
+           Change Profile Picture 
         </div>
 
         <div>

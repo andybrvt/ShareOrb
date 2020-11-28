@@ -170,6 +170,20 @@ class WebSocketExplore {
     })
   }
 
+  editChangeProfile(editProfileObj){
+    // This function will recieve information when you edit an profile and will send
+    // the new edited profile object whne you save the edit
+
+    // The paraemeter editProfileObj will be an object that contains all the
+    // new edited information
+
+    this.sendExplore({
+      command: 'edit_profile',
+      editProfileObj: editProfileObj
+    })
+
+  }
+
 
 
 
