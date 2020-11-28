@@ -496,6 +496,8 @@ class PersonalProfile extends React.Component{
       }
 
       ExploreWebSocketInstance.editChangeProfile(editProfileObj)
+
+      this.closeProfileEdit()
     }
 
     getInitialValue = () => {

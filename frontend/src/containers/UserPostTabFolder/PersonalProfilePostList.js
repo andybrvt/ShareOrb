@@ -458,6 +458,24 @@ class PersonalProfilePostList extends React.Component{
         // end then that information will get sent back into the frot end and changed
 
       console.log(values)
+      //The currentId would not be using for the editing the user but rather find the
+      // user. And since the current user can only edit its own page, the current
+      // user id should be good
+      console.log(values)
+
+      const editProfileObj = {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        bio: values.bio,
+        email: values.email,
+        phone_number: values.phone_number,
+        userId: this.props.currentId
+      }
+
+      ExploreWebSocketInstance.editChangeProfile(editProfileObj)
+
+      this.closeProfileEdit()
+
     }
 
 
