@@ -634,19 +634,19 @@ class NewsfeedPost extends React.Component {
               <Menu>
                 <Menu.Item>
                   <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                    <i style={{marginRight:'0px' }} class="far fa-bookmark"></i>
-                    Save this post
+                    <i style={{marginRight:'5px' }} class="far fa-bookmark"></i>
+                     <span style={{marginLeft:'2px'}}> Save this post</span>
                   </a>
                 </Menu.Item>
                 <Menu.Item>
                   <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                    <i style={{marginRight:'0px'}} class="far fa-eye-slash"></i>
-                    Hide this post
+                    <i class="far fa-eye-slash"></i>
+                     <span style={{marginLeft:'5px'}}>Hide this post</span>
                   </a>
                 </Menu.Item>
                 <Menu.Item danger onClick={this.deletePost}>
-                  <i style={{marginRight:'25px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-                  Delete post
+                  <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+                  <span style={{marginLeft:'10px'}}>Delete post</span>
                 </Menu.Item>
               </Menu>
             }>
@@ -668,7 +668,7 @@ class NewsfeedPost extends React.Component {
         <div>
     <div>
 
-    <Divider style={{'marginTop':-2}}/>
+    <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
 
 
 
@@ -678,7 +678,7 @@ class NewsfeedPost extends React.Component {
       </div>
 
 
-      <p style={{marginLeft:'20px', marginBottom:'20px',fontSize: '14px', color:'black'}}>
+      <p style={{marginLeft:'20px', marginTop:'15px', fontSize: '14px', color:'black'}}>
                 {
 
                    ((this.props.data.caption).length>140)?
@@ -701,7 +701,8 @@ class NewsfeedPost extends React.Component {
                    :
                    <div style={{display:'flex'}}>
                      <p  class="photoText" style={{fontSize:'16px'}}>
-                     @{this.props.data.user.username} {this.props.data.caption}
+                       <p class="userNamePart">@{this.props.data.user.username}</p>
+                       &nbsp; {this.props.data.caption}
 
                      </p>
 
