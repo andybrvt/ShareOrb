@@ -373,45 +373,82 @@ class NewsfeedPost extends React.Component {
 
         </div>
 
-        <div class="box-buttons">
-          <div class="row">
-            {
-              (peopleLikeId.includes(this.props.userId))?
+        <p style={{marginTop:'15px', fontSize: '14px', color:'black'}}>
+                  {
 
-                <button
-                  class="box-click"
-                  onClick ={this.AddOneToLike}>
-                  <i
-                    style={{ marginRight:'10px', color:'red'}}
-                    class="fa fa-heart">
-                  </i>
-                  <span class="textHighlight">
-                    Like
-                  </span>
-                </button>
-              :
-                <button
-                  class="box-click"
-                  onClick ={this.AddOneToLike} >
-                  <i
-                    style={{ marginRight:'10px'}}
-                    class="far fa-heart">
-                  </i>
-                  <span>
-                    Like
-                  </span>
-                </button>
-            }
-            <button onClick ={this.OnClickPost} >
+                     ((this.props.data.caption).length>140)?
+                     <div class="photoText">
 
-              <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
-            </button>
-            <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
-          </div>
-        </div>
+                         <span>
+                          {this.props.data.caption.substring(0,140)}
+                         </span>
+
+                         <span class="grayout outerSeeMore"> {this.props.data.caption.substring(140,175)}</span>
+                         <div
+                           style={{marginLeft: '10px', marginTop:'10px'}}
+                           class="seeMore outerSeeMore"
+                           onClick={this.OnClickPost}
+                           >
+                            ... see more
+                         </div>
+
+                      </div>
+                     :
+                     <div style={{display:'flex'}}>
+                       <div class="photoText">
+
+                           <span>
+                            {this.props.data.caption}
+                           </span>
+
+
+
+                        </div>
+
+
+                      </div>
+                   }
+
+          </p>
+
 
         <div>
+          <div class="box-buttons">
+            <div class="row">
+              {
+                (peopleLikeId.includes(this.props.userId))?
 
+                  <button
+                    class="box-click"
+                    onClick ={this.AddOneToLike}>
+                    <i
+                      style={{ marginRight:'10px', color:'red'}}
+                      class="fa fa-heart">
+                    </i>
+                    <span class="textHighlight">
+                      Like
+                    </span>
+                  </button>
+                :
+                  <button
+                    class="box-click"
+                    onClick ={this.AddOneToLike} >
+                    <i
+                      style={{ marginRight:'10px'}}
+                      class="far fa-heart">
+                    </i>
+                    <span>
+                      Like
+                    </span>
+                  </button>
+              }
+              <button onClick ={this.OnClickPost} >
+
+                <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
+              </button>
+              <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
+            </div>
+          </div>
 
           {
             (this.state.commentsCondition==true) ?
@@ -678,40 +715,6 @@ class NewsfeedPost extends React.Component {
       </div>
 
 
-      <p style={{marginLeft:'20px', marginTop:'15px', fontSize: '14px', color:'black'}}>
-                {
-
-                   ((this.props.data.caption).length>140)?
-                   <div class="photoText">
-
-                       <span>
-                        {this.props.data.caption.substring(0,140)}
-                       </span>
-
-                       <span class="grayout outerSeeMore"> {this.props.data.caption.substring(140,175)}</span>
-                       <div
-                         style={{marginLeft: '10px', marginTop:'10px'}}
-                         class="seeMore outerSeeMore"
-                         onClick={this.OnClickPost}
-                         >
-                          ... see more
-                       </div>
-
-                    </div>
-                   :
-                   <div style={{display:'flex'}}>
-                     <p  class="photoText" style={{fontSize:'16px'}}>
-                       <p class="userNamePart">@{this.props.data.user.username}</p>
-                       &nbsp; {this.props.data.caption}
-
-                     </p>
-
-
-                    </div>
-                 }
-
-        </p>
-
       {this.BottomLikeCommentPost()}
 
 
@@ -867,34 +870,7 @@ class NewsfeedPost extends React.Component {
 
       <Divider style={{'marginTop':-2}}/>
 
-    <p style={{color:'black'}}>
-              {
 
-
-                 ((this.props.data.caption).length>600)?
-
-                 <div class="outerSeeMore">
-                   <span class="innerSeeMore">
-
-
-                   {this.props.data.caption.substring(0,550)}
-
-
-                   </span>
-                   <span class="grayout" class="innerSeeMore"> {this.props.data.caption.substring(550,600)}</span>
-                   <div style={{marginTop:10}} class="seeMore"> ... see more </div>
-                 </div>
-                 :
-                 <div style={{padding:'60px', fontSize:'18px', marginTop:'50px', marginBottom:'50px', }} >
-
-
-                 {this.props.data.caption}
-
-
-                 </div>
-               }
-
-    </p>
     <Divider style={{ marginBottom: 1 }}/>
 
 
