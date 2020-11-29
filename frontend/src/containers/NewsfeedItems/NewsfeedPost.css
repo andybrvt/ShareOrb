@@ -432,6 +432,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 
 
+
 .innerSeeMore {
 
   /* align the text to one line. */
@@ -441,6 +442,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 .photoText{
     line-height: 130%;
     font-family: "Segoe UI";
+    padding-right: 10px;
 }
 .userNamePart{
   font-weight: 650;

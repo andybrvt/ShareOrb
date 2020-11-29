@@ -110,36 +110,35 @@ class NewsFeedView extends React.Component {
 
 				<Row style = {{
 					display: 'flex',
-					// backgroundColor: 'blue',
 					position: 'relative',
 					marginLeft: '350px'
 				}}>
 
 
-				<div>
-
-					<div class="createEventCSS" style = {{
-						// backgroundColor: 'white',
-						height: '300px',
-						width: '300px',
-						// postion: 'fixed',
-						position: 'relative',
-
-
-					}}>
+				<div class="wrap">
+					<div class="headers">
+					<Col
+						style={{backgroundColor:'black',
+						marginLeft:'-100px', marginRight:'50px'}}
+						span={5}
+						class="scroller"
+						>
 
 
 
-				<ProfileCardNewsFeed profile = {this.props.currentProfile} />
+					<ProfileCardNewsFeed
+						class="track"
+						profile = {this.props.currentProfile} />
+
+
+
+
+
+					</Col>
 					</div>
-
-
-
-
-
 				</div>
 
-				<Col style={{}} span={11}>
+				<Col style={{}} span={11} style={{backgroundColor:'green'}}>
 
 
 
@@ -277,20 +276,17 @@ class NewsFeedView extends React.Component {
 
 
 
-			<div style = {{
-
+			<div
+				style = {{
 				height: '450px',
 				width: '400px',
+				background:'white',
 				// postion: 'fixed',
 				position: 'relative',
-				left:'50px'
-			}}
-
-			class="shadowBox suggestFriendsCSS"
-
+				left:'75px'
+				}}
+			class="fixedOnNewsFeed"
 			>
-
-
 
 
 			<div  style={{textAlign:'center', fontSize:'18px',marginTop:'20px'}}>
@@ -308,7 +304,7 @@ class NewsFeedView extends React.Component {
 					width: '400px',
 
 					// postion: 'fixed',
-					overflow: 'hidden',
+					// overflow: 'hidden',
 
 					marginTop:120,
 				}}>

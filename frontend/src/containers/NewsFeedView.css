@@ -110,6 +110,40 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
   width: 50%;
 }
 
+.wrap {
+  position: relative;
+  margin: 10em auto 30em;
+  max-width: 960px;
+  overscroll-behavior: contain;
+}
+
+.headers {
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+}
+
+.scroller {
+  overflow: auto;
+  display: flex;
+  
+}
+
+.track {
+  flex: 1 0 calc(22% + 2px);
+  scroll-snap-align: start;
+}
+.fixedOnNewsFeedParent{
+position: absolute;
+bottom: 0; width: 100%;
+margin: 0; padding: 0;
+
+}
+
+.fixedOnNewsFeedChild{
+  overflow: scroll;
+}
 
 .avatar {
   vertical-align: middle;
