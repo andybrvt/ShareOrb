@@ -423,7 +423,7 @@ class PersonalProfileEventList extends React.Component{
 
                 <div>
                 {
-                  !friends.includes(this.props.curId) ?
+                  !friends.includes(profileId) ?
                   <div>
                     Add Friend
                   </div>

@@ -460,7 +460,7 @@ class PersonalProfile extends React.Component{
 
               <div>
               {
-                !friends.includes(this.props.curId) ?
+                !friends.includes(profileId) ?
                 <div
                 onClick = {() => this.onAddCloseFriendOpen()}
                 >
@@ -497,6 +497,8 @@ class PersonalProfile extends React.Component{
         <ConfirmAddFriend
         visible = {this.state.showFriendConfirm}
         onClose = {this.onAddCloseFriendClose}
+        curId = {curId}
+        friendId = {profileId}
          />
 
         </div>
