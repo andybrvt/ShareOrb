@@ -115,11 +115,11 @@ class NewsFeedView extends React.Component {
 				}}>
 
 
-				<div class="wrap">
+				<div>
 					<div class="headers">
 					<Col
-						style={{backgroundColor:'black',
-						marginLeft:'-100px', marginRight:'50px'}}
+						style={{
+						marginLeft:'-125px', marginRight:'100px'}}
 						span={5}
 						class="scroller"
 						>
@@ -127,7 +127,6 @@ class NewsFeedView extends React.Component {
 
 
 					<ProfileCardNewsFeed
-						class="track"
 						profile = {this.props.currentProfile} />
 
 
@@ -138,7 +137,7 @@ class NewsFeedView extends React.Component {
 					</div>
 				</div>
 
-				<Col style={{}} span={11} style={{backgroundColor:'green'}}>
+				<Col style={{}} span={11}>
 
 
 
@@ -238,7 +237,7 @@ class NewsFeedView extends React.Component {
 				 </div>
 
 
-}
+			 }
 
 
 
@@ -273,56 +272,63 @@ class NewsFeedView extends React.Component {
 
 				Loading...
 			</Col>
+			<div style={{marginLeft:'100px'}}>
+				<div class="headers">
+					<Col style={{}}  span={6}
+						class="scroller"
+					>
+						<div
+							style = {{
+							height: '450px',
+							width: '400px',
+							background:'white',
+							// postion: 'fixed',
+							position: 'relative',
+							}}
+						>
+
+
+						<div  style={{textAlign:'center', fontSize:'18px', top:'50%'}}>
+							More People
+
+						</div>
+
+
+								<div style={{ marginTop:'25px'}}>
+
+								<SuggestedFriends  style={{position:'fixed'}}{...this.props}/>
+
+						{/*
+						<div class="shadowBox suggestFriendsCSS" style = {{
+
+							height: '250px',
+							width: '400px',
+
+							// postion: 'fixed',
+							// overflow: 'hidden',
+
+							marginTop:120,
+						}}>
 
 
 
-			<div
-				style = {{
-				height: '450px',
-				width: '400px',
-				background:'white',
-				// postion: 'fixed',
-				position: 'relative',
-				left:'75px'
-				}}
-			class="fixedOnNewsFeed"
-			>
+							<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
+								Today's events
 
+							</span>
 
-			<div  style={{textAlign:'center', fontSize:'18px',marginTop:'20px'}}>
-				More People
+							<Divider/>
+							<TodayEvents {...this.props}/>
 
-			</div>
+						</div>
+						*/}
+							</div>
+						</div>
 
-
-				<div style={{ marginTop:'25px'}}>
-
-				<SuggestedFriends  style={{position:'fixed'}}{...this.props}/>
-				<div class="shadowBox suggestFriendsCSS" style = {{
-
-					height: '250px',
-					width: '400px',
-
-					// postion: 'fixed',
-					// overflow: 'hidden',
-
-					marginTop:120,
-				}}>
-
-
-
-					<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
-						Today's events
-
-					</span>
-
-					<Divider/>
-					<TodayEvents {...this.props}/>
-					</div>
+					</Col>
 				</div>
 			</div>
-
-				</Row>
+			</Row>
 
 					 :
 
