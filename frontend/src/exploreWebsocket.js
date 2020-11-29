@@ -313,6 +313,21 @@ class WebSocketExplore {
     })
   }
 
+  sendAddFriend = (curId, friendId) => {
+    // This will add friend with someone one, you will add them as close friend
+    // and then give them access to edit their social calendar
+
+
+    //curId will the current person id
+    // friendid will be the person you are trying to add as close friend
+
+    this.sendExplore({
+      curId,
+      friendId,
+      command: 'add_user_close_friend'
+    })
+  }
+
 
 
   sendExplore(data){

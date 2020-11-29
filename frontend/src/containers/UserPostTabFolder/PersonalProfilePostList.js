@@ -272,6 +272,12 @@ class PersonalProfilePostList extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
+    onAddCloseFriend = () => {
+
+
+
+    }
+
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
@@ -286,6 +292,8 @@ class PersonalProfilePostList extends React.Component{
       let following = []
       let posts = ''
       let profileId = ''
+      let friends = []
+
 
       if (this.props.profile){
         if(this.props.profile.username){
@@ -319,6 +327,15 @@ class PersonalProfilePostList extends React.Component{
             )
           }
         }
+
+        if(this.props.curUserFriend){
+          for(let i = 0; i< this.props.curUserFriend.length; i++){
+            friends.push(
+              this.props.curUserFriend[i].id
+            )
+          }
+        }
+
       }
     console.log(followers)
 
@@ -403,6 +420,36 @@ class PersonalProfilePostList extends React.Component{
               <div className = 'messageButton'>
                 Message
               </div>
+
+              {
+                this.props.parameter.username !== this.props.currentUser
+                && followers.includes(this.props.currentUser.toString()) ?
+
+                <div>
+                {
+                  !friends.includes(this.props.curId) ?
+                  <div
+
+                  >
+                    Add Friend
+                  </div>
+
+                  :
+
+                  <div>
+                    Unfriend
+                  </div>
+                }
+                </div>
+
+
+                :
+
+                <div></div>
+
+
+
+              }
 
             </div>
 
@@ -656,6 +703,7 @@ const mapStateToProps = state => {
       currentUser: state.auth.username,
       token: state.auth.token,
       profile: state.explore.profile,
+      curUserFriend: state.auth.friends
     };
 };
 

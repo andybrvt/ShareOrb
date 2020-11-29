@@ -289,6 +289,8 @@ class PersonalProfileEventList extends React.Component{
       let following = []
       let posts = ''
       let profileId = ''
+      let friends = []
+
 
       if (this.props.profile){
         if(this.props.profile.username){
@@ -319,6 +321,14 @@ class PersonalProfileEventList extends React.Component{
           for(let i =0; i<this.props.profile.get_followers.length; i++){
             followers.push(
               this.props.profile.get_followers[i].username
+            )
+          }
+        }
+
+        if(this.props.curUserFriend){
+          for(let i = 0; i< this.props.curUserFriend.length; i++){
+            friends.push(
+              this.props.curUserFriend[i].id
             )
           }
         }
@@ -406,6 +416,34 @@ class PersonalProfileEventList extends React.Component{
               <div className = 'messageButton'>
                 Message
               </div>
+
+              {
+                this.props.parameter.username !== this.props.currentUser
+                && followers.includes(this.props.currentUser.toString()) ?
+
+                <div>
+                {
+                  !friends.includes(this.props.curId) ?
+                  <div>
+                    Add Friend
+                  </div>
+
+                  :
+
+                  <div>
+                    Unfriend
+                  </div>
+                }
+                </div>
+
+
+                :
+
+                <div></div>
+
+
+
+              }
 
             </div>
 
@@ -668,6 +706,7 @@ const mapStateToProps = state => {
       currentUser: state.auth.username,
       token: state.auth.token,
       profile: state.explore.profile,
+      curUserFriend: state.auth.friends
     };
 };
 

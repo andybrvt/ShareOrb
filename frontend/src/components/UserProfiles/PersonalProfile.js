@@ -19,6 +19,7 @@ import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
 import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
 import EditProfileForm from './EditProfile/EditProfileForm';
+import ConfirmAddFriend from './ConfirmAddFriend';
 // From here on out each profile will be its own channel, so we do not need
 // to use ViewAnyUserProfile anymore
 // Each profile will fetch its own information and do its own channel stuff
@@ -46,6 +47,7 @@ class PersonalProfile extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
+    showFriendConfirm: false,
     // following: false,
   }
 
@@ -294,6 +296,18 @@ class PersonalProfile extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
+    onAddCloseFriendOpen = () => {
+      this.setState({
+        showFriendConfirm: true
+      })
+    }
+
+    onAddCloseFriendClose = () => {
+      this.setState({
+        showFriendConfirm: false
+      })
+    }
+
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
@@ -308,6 +322,12 @@ class PersonalProfile extends React.Component{
       let following = []
       let posts = ''
       let profileId = ''
+      let friends = []
+      let curId = ''
+
+      if(this.props.currentId){
+        curId = this.props.currentId
+      }
 
       if (this.props.profile){
         if(this.props.profile.username){
@@ -341,8 +361,16 @@ class PersonalProfile extends React.Component{
             )
           }
         }
+
+        if(this.props.curUserFriend){
+          for(let i = 0; i< this.props.curUserFriend.length; i++){
+            friends.push(
+              this.props.curUserFriend[i].id
+            )
+          }
+        }
       }
-    console.log(followers)
+    console.log(friends)
 
       return (
         <div className = 'profileInfo'>
@@ -426,6 +454,36 @@ class PersonalProfile extends React.Component{
                 Message
               </div>
 
+            {
+              this.props.parameter.username !== this.props.currentUser
+              && followers.includes(this.props.currentUser.toString()) ?
+
+              <div>
+              {
+                !friends.includes(this.props.curId) ?
+                <div
+                onClick = {() => this.onAddCloseFriendOpen()}
+                >
+                  Add Friend
+                </div>
+
+                :
+
+                <div>
+                  Unfriend
+                </div>
+              }
+              </div>
+
+
+              :
+
+              <div></div>
+
+
+
+            }
+
             </div>
 
         }
@@ -435,6 +493,11 @@ class PersonalProfile extends React.Component{
         </div>
 
         </div>
+
+        <ConfirmAddFriend
+        visible = {this.state.showFriendConfirm}
+        onClose = {this.onAddCloseFriendClose}
+         />
 
         </div>
 
@@ -664,6 +727,7 @@ const mapStateToProps = state => {
       currentUser: state.auth.username,
       token: state.auth.token,
       profile: state.explore.profile,
+      curUserFriend: state.auth.friends
     };
 };
 
