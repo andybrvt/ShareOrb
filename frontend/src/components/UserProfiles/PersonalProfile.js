@@ -177,7 +177,11 @@ class PersonalProfile extends React.Component{
   handleProfilePicChange = (values) => {
     // This is used to changing the profile pic, for submiting.
     console.log(values)
-    const userId = this.props.profile.id
+    let userId = ""
+    if(this.props.profile){
+      userId = this.props.profile.id
+
+    }
     var data  = new FormData()
     data.append('profile_picture', values)
     // To edit information, you usually do put instead of post

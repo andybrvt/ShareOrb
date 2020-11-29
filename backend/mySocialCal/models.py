@@ -33,7 +33,7 @@ def create_all_post(sender, instance, created, **kwargs):
                 post_type = post_type,
                 post_id = instance.id
             )
-        post.post_date = instance.created_at
+        post.post_date = instance.socialCaldate
         post.save()
 
 
