@@ -272,3 +272,11 @@ export const changeProfilePicAuth = (profilePic) => {
     profilePic: profilePic
   }
 }
+
+export const addRemoveCloseFriend = (friendList) => {
+  console.log(friendList)
+  return {
+    type: actionTypes.ADD_REMOVE_CLOSE_FRIEND,
+    friendList: friendList
+  }
+}

@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
   username: null,
   id: null,
-  friends: '',
+  friends: [],
   posts: [],
   firstName: '',
   lastName: '',
@@ -74,6 +74,13 @@ const changeProfilePicAuth = (state, action) => {
   })
 }
 
+const addRemoveCloseFriend = (state, action) => {
+  console.log(action.friendList)
+  return updateObject(state, {
+    friends: action.friendList
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -90,6 +97,8 @@ const reducer = (state = initialState, action) => {
       return editProfileAuth(state,action);
     case actionTypes.CHANGE_PROFILE_PIC_AUTH:
       return changeProfilePicAuth(state, action);
+    case actionTypes.ADD_REMOVE_CLOSE_FRIEND:
+      return addRemoveCloseFriend(state, action);
     default:
       return state;
   }

@@ -141,6 +141,15 @@ class WebSocketExplore {
       // Add the callbacks here
       this.callbacks['load_profile'](updatedProfile)
       this.callbacks['edit_profile_auth'](updatedProfile)
+    } else if(command === 'add_user_close_friend'){
+      // This will recieve the friend list of the current user that just added
+      // a new user to the friend list. This will go into auth and replace the
+      // the old friendlist
+
+      const friendList = parsedData.friendList
+      // add callbacks here
+      this.callbacks['add_remove_close_friend'](friendList)
+
     }
 
 
@@ -155,7 +164,7 @@ class WebSocketExplore {
      addSocialCell,
      addSocialEventJoinLeavePage,
      editProfileAuth,
-
+     addRemoveCloseFriend
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
@@ -163,6 +172,7 @@ class WebSocketExplore {
     this.callbacks['add_social_cell'] = addSocialCell
     this.callbacks['add_social_event_join_leave_page'] = addSocialEventJoinLeavePage
     this.callbacks['edit_profile_auth'] = editProfileAuth
+    this.callbacks['add_remove_close_friend'] = addRemoveCloseFriend
   }
 
 
