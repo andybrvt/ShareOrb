@@ -336,36 +336,37 @@ class NewsfeedPost extends React.Component {
     return (
 
       <div style={{marginLeft:'15px', fontSize:'14px'}}>
-        {
-          (peopleLikeId.includes(this.props.userId))?
-          <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
-          :
-          <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-        }
 
-        <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+        <div class='outerContainerPeople'>
 
-         <span class="boldLikeComment">{like_people.length} likes</span>
-        </span>
-        <div class='likeInPost'>
+          <div class="innerContainerLike">
+              <div>
+                {
+                  (peopleLikeId.includes(this.props.userId))?
+                  <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                  :
+                  <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+                }
 
-          <div class="linewrapper" >
-             <Divider type="vertical" style={{background:'#d9d9d9'}}/>
+                <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
 
-           <span class="LikeCommentHover" onClick={this.OnClickPost} style={{marginTop:'-20px'}}>
-             <span class="boldLikeComment">
-               {this.props.data.post_comments.length} Comments
-             </span>
-           </span>
+                 <span class="boldLikeComment">{like_people.length} likes</span>
+                </span>
+                 <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
-           <div class='commentInPost'>
-                 <Liking
-                  num={5}
-                  history  = {this.props.history}
-                  like_people={this.props.data.people_like} {...this.props}/>
-           </div>
+                 <span class="LikeCommentHover" onClick={this.OnClickPost} style={{marginTop:'-20px'}}>
+                   <span class="boldLikeComment">
+                     {this.props.data.post_comments.length} Comments
+                   </span>
+                 </span>
 
-
+                 <div class='commentInPost'>
+                       <Liking
+                        num={5}
+                        history  = {this.props.history}
+                        like_people={this.props.data.people_like} {...this.props}/>
+                </div>
+              </div>
 
            </div>
 

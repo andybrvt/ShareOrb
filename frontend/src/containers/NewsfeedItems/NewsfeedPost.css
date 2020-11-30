@@ -73,11 +73,38 @@
 }
 
 .likeInPost{
-  display:inline-block;
+  margin-left: -10px;
+  /* background-color: red; */
+  width:100%;
+  margin-bottom: -15px;
+}
+
+.innerContainerLike{
+  position: relative;
+  vertical-align: middle;
+  top: 50%;
+  -webkit-transform: translateY(-0%);
+  -ms-transform: translateY(-25%);
+  transform: translateY(-25%);
+  /* background: red; */
+}
+
+.halfUpLikePost{
+  background-color: green;
+  height:50px;
+}
+
+.boldLikeComment{
+  /* font-weight: bold; */
+
+  /* background-color: blue; */
+  color:black;
+
 }
 
 .commentInPost{
   /* position:absolute; */
+  margin-top: 10px;
   margin-left: 315px;
   display:inline-block;
 }
@@ -170,12 +197,7 @@ body{
   position:relative;
 }
 
-.boldLikeComment{
-  /* font-weight: bold; */
-  font-family: "Segoe UI";
 
-  color:black;
-}
 
 .cardborder{
 
