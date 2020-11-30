@@ -460,6 +460,7 @@ class PersonalProfileEventList extends React.Component{
                   !friends.includes(profileId) ?
                   <div
                   onClick = {() => this.onAddCloseFriendOpen()}
+                  className = 'addFriendButton'
                   >
                     Add Friend
                   </div>
@@ -468,6 +469,7 @@ class PersonalProfileEventList extends React.Component{
 
                   <div
                   onClick ={() => this.onUnAddCloseFriendOpen()}
+                  className = 'unFriendButton'
                   >
                     Unfriend
                   </div>
