@@ -11,7 +11,7 @@ class FollowList extends React.Component{
   }
 
   onFollowItemClick = (user) => {
-    window.location.href = 'explore/'+user
+    window.location.href = '/explore/'+user
   }
 
 

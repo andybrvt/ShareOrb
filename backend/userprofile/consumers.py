@@ -828,7 +828,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         self.send_new_explore(content)
 
     def addUserCloseFriend(self, data):
-        print(data)
         # This function is used to add a User to close friend which allows the
         # other person to post stuff on their social calendar
         # First you will get the current user. And then get the other user
@@ -845,6 +844,28 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         content = {
             'command': 'add_user_close_friend',
+            'friendList': serializedFriendList,
+            'reciever': friend.username
+        }
+
+        self.send_new_explore(content)
+
+    def removeUserCloseFriend(self, data):
+        # similar to addUserCloseFriend but you are removing a user from your
+        # friendsList
+
+        curUser = get_object_or_404(User, id = data['curId'])
+        friend = get_object_or_404(User, id = data['friendId'])
+
+        curUser.friends.remove(friend)
+
+        serializedFriendList = UserSerializer(curUser).data['friends']
+
+        # After you add the friend, then you serialized the user and then grab
+        # grab the userfriend list and then send it to the frotn end
+
+        content = {
+            'command': 'remove_user_close_friend',
             'friendList': serializedFriendList,
             'reciever': friend.username
         }
@@ -939,6 +960,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.edit_profile(data)
         if data['command'] == 'add_user_close_friend':
             self.addUserCloseFriend(data)
+        if data['command'] == 'remove_user_close_friend':
+            self.removeUserCloseFriend(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)

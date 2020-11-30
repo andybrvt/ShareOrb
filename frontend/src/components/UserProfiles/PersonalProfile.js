@@ -20,6 +20,7 @@ import './ProfilePage.css';
 import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
 import EditProfileForm from './EditProfile/EditProfileForm';
 import ConfirmAddFriend from './ConfirmAddFriend';
+import ConfirmUnfriend from './ConfirmUnfriend';
 // From here on out each profile will be its own channel, so we do not need
 // to use ViewAnyUserProfile anymore
 // Each profile will fetch its own information and do its own channel stuff
@@ -48,6 +49,7 @@ class PersonalProfile extends React.Component{
     showProfileEdit: false,
     showProfilePicEdit: false,
     showFriendConfirm: false,
+    showUnfriend: false,
     // following: false,
   }
 
@@ -309,6 +311,19 @@ class PersonalProfile extends React.Component{
     }
 
 
+    onUnAddCloseFriendOpen = () => {
+      this.setState({
+        showUnfriend: true
+      })
+    }
+
+    onUnAddCloseFriendClose = () => {
+      this.setState({
+        showUnfriend: false
+      })
+    }
+
+
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
       // are your followers and the people that are in
@@ -469,7 +484,9 @@ class PersonalProfile extends React.Component{
 
                 :
 
-                <div>
+                <div
+                onClick = {() => this.onUnAddCloseFriendOpen()}
+                >
                   Unfriend
                 </div>
               }
@@ -499,6 +516,13 @@ class PersonalProfile extends React.Component{
         onClose = {this.onAddCloseFriendClose}
         curId = {curId}
         friendId = {profileId}
+         />
+
+         <ConfirmUnfriend
+         visible = {this.state.showUnfriend}
+         onClose = {this.onUnAddCloseFriendClose}
+         curId = {curId}
+         friendId = {profileId}
          />
 
         </div>

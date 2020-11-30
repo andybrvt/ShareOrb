@@ -150,6 +150,12 @@ class WebSocketExplore {
       // add callbacks here
       this.callbacks['add_remove_close_friend'](friendList)
 
+    } else if(command === 'remove_user_close_friend'){
+      // This will pretty mcuh be the smae as the above command but now
+      // you are reomoving a user from the friend list
+      const friendList = parsedData.friendList
+
+      this.callbacks['add_remove_close_friend'](friendList)
     }
 
 
@@ -338,6 +344,17 @@ class WebSocketExplore {
       curId: curId,
       friendId: friendId,
       command: 'add_user_close_friend'
+    })
+  }
+
+  sendUnfriend = (curId, friendId) => {
+    // This will pretty much be like sendAddCloseFriend but will be the opposite
+    // of it. It will be removing the friend
+
+    this.sendExplore({
+      curId: curId,
+      friendId: friendId,
+      command: 'remove_user_close_friend'
     })
   }
 

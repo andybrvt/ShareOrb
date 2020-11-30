@@ -6,11 +6,11 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 // This will be the modal that will confirm whether or not
 // you will wnat to add someone as a close friend
 
-class ConfirmAddFriend extends React.Component{
+class ConfirmUnfriend extends React.Component{
 
 
 
-  confirmCloseFriend = () => {
+  confirmUnfriend = () => {
     // Thsi function will confirm the add as close friend. It will call
     // the exportwebsocket and then send information into the backend to
     // then add as friends.
@@ -31,11 +31,11 @@ class ConfirmAddFriend extends React.Component{
     }
 
 
-    ExploreWebSocketInstance.sendAddCloseFriend(
+    ExploreWebSocketInstance.sendUnfriend(
       curId, friendId
     )
+    this.props.onClose();
 
-    this.props.onClose()
 
   }
 
@@ -49,7 +49,7 @@ class ConfirmAddFriend extends React.Component{
       footer = {null}
       >
         <div>
-          Do you accept them as a friend?
+          Are you sure you want to unfriend?
 
         </div>
 
@@ -60,9 +60,9 @@ class ConfirmAddFriend extends React.Component{
         Cancel
         </Button>
         <Button
-        onClick = {() => this.confirmCloseFriend()}
+        onClick = {() => this.confirmUnfriend()}
         >
-          Yes
+        Yes
         </Button>
       </Modal>
 
@@ -71,4 +71,4 @@ class ConfirmAddFriend extends React.Component{
 
 }
 
-export default ConfirmAddFriend;
+export default ConfirmUnfriend;
