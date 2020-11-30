@@ -58,8 +58,8 @@ import { authAxios } from '../../components/util';
               )}
               { (
                 <Menu.Item key="settings">
-                  <SettingOutlined />
-                  Settings
+                  <i style={{marginRight:'5px' }} class="fas fa-cog"></i>
+                  <span style={{marginLeft:'2px'}}> Settingsss</span>
                 </Menu.Item>
               )}
               { <Menu.Divider />}

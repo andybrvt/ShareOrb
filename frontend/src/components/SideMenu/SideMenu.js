@@ -306,10 +306,10 @@ class SideMenu extends React.Component {
          }}
          selectedKeys={[]} >
              { (
-               <Menu.Item key="center">
+               <Menu.Item style={{marginTop:'-2px'}} key="center">
                  <Link to={"/explore/"+this.props.username}>
-                   <UserOutlined />
-                   Profile
+                   <i style={{marginRight:'3px' }} class="far fa-user"></i>
+                   <span style={{marginLeft:'2px'}}> Profile</span>
 
                  </Link>
 
@@ -317,11 +317,11 @@ class SideMenu extends React.Component {
              )}
              { (
                <Menu.Item key="settings">
-                 <SettingOutlined />
-                 Settings
+                 <i class="fas fa-cog"></i>
+                 <span style={{marginLeft:'2px'}}> Settings</span>
                </Menu.Item>
              )}
-             { <Menu.Divider />}
+             { <Menu.Divider style={{marginTop:'-1px',marginBottom:'-1px'}}/>}
 
 
 
@@ -329,9 +329,8 @@ class SideMenu extends React.Component {
 
              <Menu.Item key="logout" onClick={this.props.logout}>
                <Link to="/">
-                 <LogoutOutlined />
-                 Logout
-
+                 <i class="fas fa-sign-out-alt"></i>
+                 <span style={{marginLeft:'2px'}}> Logout</span>
                </Link>
 
              </Menu.Item>

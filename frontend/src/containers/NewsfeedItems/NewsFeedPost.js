@@ -672,14 +672,14 @@ class NewsfeedPost extends React.Component {
               <Menu>
                 <Menu.Item>
                   <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                    <i style={{marginRight:'5px' }} class="far fa-bookmark"></i>
-                     <span style={{marginLeft:'2px'}}> Save this post</span>
+                    <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-bookmark"></i>
+                    <span style={{marginLeft:'3px'}}> Save this post</span>
                   </a>
                 </Menu.Item>
                 <Menu.Item>
                   <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
                     <i class="far fa-eye-slash"></i>
-                     <span style={{marginLeft:'5px'}}>Hide this post</span>
+                    <span style={{marginLeft:'5px'}}>Hide this post</span>
                   </a>
                 </Menu.Item>
                 <Menu.Item danger onClick={this.deletePost}>

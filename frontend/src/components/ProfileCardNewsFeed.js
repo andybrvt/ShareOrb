@@ -76,7 +76,10 @@ class ProfileCardNewsFeed extends React.Component{
     return (
       <div className = "profileCard-NF">
         <div className = 'image-box-NF'>
-        <Avatar size = {250} shape = 'square' src = {profilePic} />
+          <Avatar
+            style={{left:'50%', top:'5%'}}
+            size = {125} shape = 'circle'
+            src = {profilePic} />
 
         </div>
         <div className = 'top-NF'>
@@ -88,7 +91,7 @@ class ProfileCardNewsFeed extends React.Component{
         </div>
         <div className = 'social-NF'>
         <div className = 'social-links-NF'
-          
+
         >
           <div
           onClick = {() => this.onFollowerOpen()}
@@ -100,10 +103,10 @@ class ProfileCardNewsFeed extends React.Component{
         <div className = 'social-links-NF'>
         <div
         onClick = {() => this.onFollowerOpen()}
-        className = 'num-NF'> {followers.length} </div>
+        className = 'showNums'> {followers.length} </div>
         <div
         onClick = {() => this.onFollowingOpen()}
-        className = 'num-NF'> {following.length} </div>
+        className = 'showNums'> {following.length} </div>
         </div>
         </div>
         <Modal
