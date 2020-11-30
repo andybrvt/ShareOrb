@@ -17,7 +17,8 @@ import FollowList from '../../components/UserProfiles/FollowList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import UserEventList from './UserEventList';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
-
+import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
+import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
 
 class PersonalProfileEventList extends React.Component{
   constructor(props){
@@ -31,6 +32,9 @@ class PersonalProfileEventList extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
+    showFriendConfirm: false,
+    showUnfriend: false,
+
   }
 
   initialiseProfile() {
@@ -275,6 +279,32 @@ class PersonalProfileEventList extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
+    onAddCloseFriendOpen = () => {
+      this.setState({
+        showFriendConfirm: true
+      })
+    }
+
+    onAddCloseFriendClose = () => {
+      this.setState({
+        showFriendConfirm: false
+      })
+    }
+
+
+    onUnAddCloseFriendOpen = () => {
+      this.setState({
+        showUnfriend: true
+      })
+    }
+
+    onUnAddCloseFriendClose = () => {
+      this.setState({
+        showUnfriend: false
+      })
+    }
+
+
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
@@ -290,7 +320,11 @@ class PersonalProfileEventList extends React.Component{
       let posts = ''
       let profileId = ''
       let friends = []
+      let curId = ''
 
+      if(this.props.currentId){
+        curId = this.props.currentId
+      }
 
       if (this.props.profile){
         if(this.props.profile.username){
@@ -424,13 +458,17 @@ class PersonalProfileEventList extends React.Component{
                 <div>
                 {
                   !friends.includes(profileId) ?
-                  <div>
+                  <div
+                  onClick = {() => this.onAddCloseFriendOpen()}
+                  >
                     Add Friend
                   </div>
 
                   :
 
-                  <div>
+                  <div
+                  onClick ={() => this.onUnAddCloseFriendOpen()}
+                  >
                     Unfriend
                   </div>
                 }
@@ -454,6 +492,20 @@ class PersonalProfileEventList extends React.Component{
         </div>
 
         </div>
+
+        <ConfirmAddFriend
+        visible = {this.state.showFriendConfirm}
+        onClose = {this.onAddCloseFriendClose}
+        curId = {curId}
+        friendId = {profileId}
+         />
+
+         <ConfirmUnfriend
+         visible = {this.state.showUnfriend}
+         onClose = {this.onUnAddCloseFriendClose}
+         curId = {curId}
+         friendId = {profileId}
+         />
 
         </div>
 
