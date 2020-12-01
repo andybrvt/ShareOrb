@@ -16,7 +16,7 @@ import {
 // import { connect } from 'react-redux';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
-
+import NotificationWebSocketInstance from '../../notificationWebsocket';
 
 const { TextArea } = Input
 
@@ -88,21 +88,8 @@ class SocialEventPostModal extends React.Component{
 
     const startTime = this.timeConvert(this.state.timeStart)
     const endTime = this.timeConvert(this.state.timeEnd)
-  //   const formData = new FormData()
-  //   formData.append('title', this.state.title)
-  //   formData.append('content', this.state.content)
-  //   formData.append('startTime', startTime)
-  //   formData.append('endTime', endTime)
-  //   formData.append('location', this.state.location)
-  //   formData.append('curId', this.props.curId)
-  //   formData.append('date', date)
-  //   authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent',
-  //   formData
-  // )
 
-  // So the authAxios is not gonna work that well so we gonna have to use channels,
-  // so we are gonna use the eventobj as a way to send it to the newsfeed, socialcal
-  // and personal cal
+
   const eventObj = {
     // This gonna get send out to the backend
     // We would also need the host of the calendar which is calOwner
@@ -131,7 +118,27 @@ class SocialEventPostModal extends React.Component{
 //  it with just axius but it is a bit easier )
 
 
-  ExploreWebSocketInstance.sendSocialEvent(eventObj)
+  // Accomodate for when the person posting the event is not the calendar own but the
+  // calendar owner friend. First you will check if the calendarownerId is the same
+  // as the curId. If they are the same then that means that the owner is posting on
+  // their own calander however, if they are not the same then you will have to
+  // ask permission of the social calendar owner
+
+  // Two ways:
+  // 1) either attach the event object with the notificaiton and when the owner approves
+  //  the event object will be created
+  // 2) Make the event object first then put a non accepted field on it and put a
+  // ternary operator on teh social cal for non approvaed events. When the owner
+  // accepts on notification you will then change the non accepted to accepted
+  // then it will show up on social cal.
+
+
+  if(this.props.curId === this.props.calendarOwner){
+    ExploreWebSocketInstance.sendSocialEvent(eventObj)
+  } else {
+    NotificationWebSocketInstance.sendPendingSocialEvent(eventObj)
+  }
+
   this.openNotification('bottomLeft', displayObj)
   this.setState({
     title: '',
@@ -141,8 +148,6 @@ class SocialEventPostModal extends React.Component{
     location: '',
   })
   this.props.close()
-
-
 
   }
 

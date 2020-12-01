@@ -17,8 +17,10 @@ import FollowList from '../../components/UserProfiles/FollowList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import UserEventList from './UserEventList';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
-import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
-import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
+
+// DELETE LATER
+// import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
+// import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
 
 class PersonalProfileEventList extends React.Component{
   constructor(props){
@@ -32,8 +34,8 @@ class PersonalProfileEventList extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
-    showFriendConfirm: false,
-    showUnfriend: false,
+    // showFriendConfirm: false,
+    // showUnfriend: false,
 
   }
 
@@ -279,30 +281,33 @@ class PersonalProfileEventList extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
-    onAddCloseFriendOpen = () => {
-      this.setState({
-        showFriendConfirm: true
-      })
-    }
-
-    onAddCloseFriendClose = () => {
-      this.setState({
-        showFriendConfirm: false
-      })
-    }
 
 
-    onUnAddCloseFriendOpen = () => {
-      this.setState({
-        showUnfriend: true
-      })
-    }
-
-    onUnAddCloseFriendClose = () => {
-      this.setState({
-        showUnfriend: false
-      })
-    }
+    // DELETE LATER
+    // onAddCloseFriendOpen = () => {
+    //   this.setState({
+    //     showFriendConfirm: true
+    //   })
+    // }
+    //
+    // onAddCloseFriendClose = () => {
+    //   this.setState({
+    //     showFriendConfirm: false
+    //   })
+    // }
+    //
+    //
+    // onUnAddCloseFriendOpen = () => {
+    //   this.setState({
+    //     showUnfriend: true
+    //   })
+    // }
+    //
+    // onUnAddCloseFriendClose = () => {
+    //   this.setState({
+    //     showUnfriend: false
+    //   })
+    // }
 
 
 
@@ -359,13 +364,15 @@ class PersonalProfileEventList extends React.Component{
           }
         }
 
-        if(this.props.curUserFriend){
-          for(let i = 0; i< this.props.curUserFriend.length; i++){
-            friends.push(
-              this.props.curUserFriend[i].id
-            )
-          }
-        }
+
+        //DELETE LATER
+        // if(this.props.curUserFriend){
+        //   for(let i = 0; i< this.props.curUserFriend.length; i++){
+        //     friends.push(
+        //       this.props.curUserFriend[i].id
+        //     )
+        //   }
+        // }
       }
     console.log(followers)
 
@@ -451,7 +458,7 @@ class PersonalProfileEventList extends React.Component{
                 Message
               </div>
 
-              {
+              {/*
                 this.props.parameter.username !== this.props.currentUser
                 && followers.includes(this.props.currentUser.toString()) ?
 
@@ -483,7 +490,7 @@ class PersonalProfileEventList extends React.Component{
 
 
 
-              }
+              */}
 
             </div>
 
@@ -494,20 +501,22 @@ class PersonalProfileEventList extends React.Component{
         </div>
 
         </div>
+        {/*
+          <ConfirmAddFriend
+          visible = {this.state.showFriendConfirm}
+          onClose = {this.onAddCloseFriendClose}
+          curId = {curId}
+          friendId = {profileId}
+           />
 
-        <ConfirmAddFriend
-        visible = {this.state.showFriendConfirm}
-        onClose = {this.onAddCloseFriendClose}
-        curId = {curId}
-        friendId = {profileId}
-         />
+           <ConfirmUnfriend
+           visible = {this.state.showUnfriend}
+           onClose = {this.onUnAddCloseFriendClose}
+           curId = {curId}
+           friendId = {profileId}
+           />
+          */}
 
-         <ConfirmUnfriend
-         visible = {this.state.showUnfriend}
-         onClose = {this.onUnAddCloseFriendClose}
-         curId = {curId}
-         friendId = {profileId}
-         />
 
         </div>
 

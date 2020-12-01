@@ -19,6 +19,9 @@ import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
 import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
 import EditProfileForm from './EditProfile/EditProfileForm';
+
+
+// DELETE LATER
 import ConfirmAddFriend from './ConfirmAddFriend';
 import ConfirmUnfriend from './ConfirmUnfriend';
 // From here on out each profile will be its own channel, so we do not need
@@ -48,8 +51,8 @@ class PersonalProfile extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
-    showFriendConfirm: false,
-    showUnfriend: false,
+    // showFriendConfirm: false,
+    // showUnfriend: false,
     // following: false,
   }
 
@@ -298,30 +301,30 @@ class PersonalProfile extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
-    onAddCloseFriendOpen = () => {
-      this.setState({
-        showFriendConfirm: true
-      })
-    }
-
-    onAddCloseFriendClose = () => {
-      this.setState({
-        showFriendConfirm: false
-      })
-    }
-
-
-    onUnAddCloseFriendOpen = () => {
-      this.setState({
-        showUnfriend: true
-      })
-    }
-
-    onUnAddCloseFriendClose = () => {
-      this.setState({
-        showUnfriend: false
-      })
-    }
+    // onAddCloseFriendOpen = () => {
+    //   this.setState({
+    //     showFriendConfirm: true
+    //   })
+    // }
+    //
+    // onAddCloseFriendClose = () => {
+    //   this.setState({
+    //     showFriendConfirm: false
+    //   })
+    // }
+    //
+    //
+    // onUnAddCloseFriendOpen = () => {
+    //   this.setState({
+    //     showUnfriend: true
+    //   })
+    // }
+    //
+    // onUnAddCloseFriendClose = () => {
+    //   this.setState({
+    //     showUnfriend: false
+    //   })
+    // }
 
 
     onRenderProfileInfo(){
@@ -377,13 +380,13 @@ class PersonalProfile extends React.Component{
           }
         }
 
-        if(this.props.curUserFriend){
-          for(let i = 0; i< this.props.curUserFriend.length; i++){
-            friends.push(
-              this.props.curUserFriend[i].id
-            )
-          }
-        }
+        // if(this.props.curUserFriend){
+        //   for(let i = 0; i< this.props.curUserFriend.length; i++){
+        //     friends.push(
+        //       this.props.curUserFriend[i].id
+        //     )
+        //   }
+        // }
       }
     console.log(friends)
 
@@ -469,7 +472,7 @@ class PersonalProfile extends React.Component{
                 Message
               </div>
 
-            {
+            {/*
               this.props.parameter.username !== this.props.currentUser
               && followers.includes(this.props.currentUser.toString()) ?
 
@@ -501,7 +504,7 @@ class PersonalProfile extends React.Component{
 
 
 
-            }
+            */}
 
             </div>
 
@@ -513,19 +516,25 @@ class PersonalProfile extends React.Component{
 
         </div>
 
-        <ConfirmAddFriend
-        visible = {this.state.showFriendConfirm}
-        onClose = {this.onAddCloseFriendClose}
-        curId = {curId}
-        friendId = {profileId}
-         />
+        {/*
 
-         <ConfirmUnfriend
-         visible = {this.state.showUnfriend}
-         onClose = {this.onUnAddCloseFriendClose}
-         curId = {curId}
-         friendId = {profileId}
-         />
+          DELETE LATER
+          <ConfirmAddFriend
+          visible = {this.state.showFriendConfirm}
+          onClose = {this.onAddCloseFriendClose}
+          curId = {curId}
+          friendId = {profileId}
+           />
+
+           <ConfirmUnfriend
+           visible = {this.state.showUnfriend}
+           onClose = {this.onUnAddCloseFriendClose}
+           curId = {curId}
+           friendId = {profileId}
+           />
+
+          */}
+
 
         </div>
 

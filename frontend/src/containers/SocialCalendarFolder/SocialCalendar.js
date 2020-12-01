@@ -121,15 +121,25 @@ class SocialCalendar extends React.Component{
   renderCells(events) {
     console.log(events)
 
-    // This will provide the id so that you cna check whether or not they friends
-    // so they can edit or not
-    let friendListId = []
+  
+    // followerList and following list will be made up fo ids of the people that are
+    // following or follower of you. This will be used to check if the person
+    // can add stuff to the social calendar
+    let followerList = []
+    let followingList = []
+
+
     let calendarOwnerId = ""
     let calendarOwnerUsername = ''
     if(this.props.profile){
-      if(this.props.profile.friends){
-        for (let i = 0; i< this.props.profile.friends.length; i++){
-          friendListId.push(this.props.profile.friends[i].id)
+      if(this.props.profile.get_followers){
+        for (let i = 0; i< this.props.profile.get_followers.length; i++){
+          followerList.push(this.props.profile.get_followers[i].id)
+        }
+      }
+      if(this.props.profile.get_following){
+        for (let i = 0; i < this.props.profile.get_following.length; i++){
+          followingList.push(this.props.profile.get_following[i].id)
         }
       }
 
@@ -141,7 +151,7 @@ class SocialCalendar extends React.Component{
 
 
     const location = this.props.location.pathname;
-    console.log(location)
+    console.log(followerList, followingList)
 
 
 
@@ -230,7 +240,8 @@ class SocialCalendar extends React.Component{
                 */}
 
               {
-                friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+                (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
+                ||  calendarOwnerId === this.props.curId ?
 
                 <div>
                 {/*
@@ -331,7 +342,8 @@ class SocialCalendar extends React.Component{
                 >
                 <span className = "bg"> {formattedDate}</span>
                 {
-                  friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+                  (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
+                  ||  calendarOwnerId === this.props.curId ?
 
                   <div>
                   {/*
@@ -441,7 +453,8 @@ class SocialCalendar extends React.Component{
                 cover cell and there are no event list
                 */}
               {
-                friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+                (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
+                ||  calendarOwnerId === this.props.curId ?
 
                 <div>
 
@@ -553,7 +566,8 @@ class SocialCalendar extends React.Component{
 
 
           {
-            friendListId.includes(this.props.curId) ||  calendarOwnerId === this.props.curId ?
+            (followerList.includes(this.props.curId) && followingList.includes(this.props.curId))
+            ||  calendarOwnerId === this.props.curId ?
 
             <div>
 

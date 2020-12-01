@@ -97,6 +97,14 @@ class WebSocketNotifications {
     })
   }
 
+  // This will send the pending social event information into the backend
+  sendPendingSocialEvent = (socialEventObj) => {
+    this.sendNotification({
+      command: 'send_pending_social_event',
+      socialEventObj: socialEventObj
+    })
+  }
+
   sendNotification(data) {
     // this is good, it only sends 1 time
     // This will recieve information from onClickSend from PersonalProfile.js

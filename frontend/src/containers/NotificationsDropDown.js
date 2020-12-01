@@ -676,6 +676,32 @@ class NotificationsDropDown extends React.Component{
 
           </li>
         )
+      } if(notifications[i].type === 'pending_social_event'){
+        notificationList.push(
+          <li className = 'notificationListContainer'>
+          <div className = 'notificationIcon'>
+            <Avatar size = {55} style ={{
+              verticalAlign: 'middle'}}
+              // icon = {<UserOutlined />}
+              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+              >
+            </Avatar>
+          </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                wants to add an event to your social calendar on {notifications[i].pendingEventDate}. Click to check it out!
+                <br />
+                <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+          </li>
+        )
       }
 
 

@@ -17,8 +17,10 @@ import FollowList from '../../components/UserProfiles/FollowList';
 import UserPostList from './UserPostList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
-import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
-import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
+
+// DELETE LATER
+// import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
+// import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
 
 
 class PersonalProfilePostList extends React.Component{
@@ -33,8 +35,8 @@ class PersonalProfilePostList extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
-    showFriendConfirm: false,
-    showUnfriend: false,
+    // showFriendConfirm: false,
+    // showUnfriend: false,
 
   }
 
@@ -277,30 +279,32 @@ class PersonalProfilePostList extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
-    onAddCloseFriendOpen = () => {
-      this.setState({
-        showFriendConfirm: true
-      })
-    }
 
-    onAddCloseFriendClose = () => {
-      this.setState({
-        showFriendConfirm: false
-      })
-    }
-
-
-    onUnAddCloseFriendOpen = () => {
-      this.setState({
-        showUnfriend: true
-      })
-    }
-
-    onUnAddCloseFriendClose = () => {
-      this.setState({
-        showUnfriend: false
-      })
-    }
+    // DELETE LATER
+    // onAddCloseFriendOpen = () => {
+    //   this.setState({
+    //     showFriendConfirm: true
+    //   })
+    // }
+    //
+    // onAddCloseFriendClose = () => {
+    //   this.setState({
+    //     showFriendConfirm: false
+    //   })
+    // }
+    //
+    //
+    // onUnAddCloseFriendOpen = () => {
+    //   this.setState({
+    //     showUnfriend: true
+    //   })
+    // }
+    //
+    // onUnAddCloseFriendClose = () => {
+    //   this.setState({
+    //     showUnfriend: false
+    //   })
+    // }
 
 
     onRenderProfileInfo(){
@@ -356,13 +360,13 @@ class PersonalProfilePostList extends React.Component{
           }
         }
 
-        if(this.props.curUserFriend){
-          for(let i = 0; i< this.props.curUserFriend.length; i++){
-            friends.push(
-              this.props.curUserFriend[i].id
-            )
-          }
-        }
+        // if(this.props.curUserFriend){
+        //   for(let i = 0; i< this.props.curUserFriend.length; i++){
+        //     friends.push(
+        //       this.props.curUserFriend[i].id
+        //     )
+        //   }
+        // }
 
       }
     console.log(followers)
@@ -449,7 +453,7 @@ class PersonalProfilePostList extends React.Component{
                 Message
               </div>
 
-              {
+              {/*
                 this.props.parameter.username !== this.props.currentUser
                 && followers.includes(this.props.currentUser.toString()) ?
 
@@ -481,7 +485,7 @@ class PersonalProfilePostList extends React.Component{
 
 
 
-              }
+              */}
 
             </div>
 
@@ -493,19 +497,24 @@ class PersonalProfilePostList extends React.Component{
 
         </div>
 
-        <ConfirmAddFriend
-        visible = {this.state.showFriendConfirm}
-        onClose = {this.onAddCloseFriendClose}
-        curId = {curId}
-        friendId = {profileId}
-         />
+        {/*
+          //DELETE LATER
+          <ConfirmAddFriend
+          visible = {this.state.showFriendConfirm}
+          onClose = {this.onAddCloseFriendClose}
+          curId = {curId}
+          friendId = {profileId}
+           />
 
-         <ConfirmUnfriend
-         visible = {this.state.showUnfriend}
-         onClose = {this.onUnAddCloseFriendClose}
-         curId = {curId}
-         friendId = {profileId}
-         />
+           <ConfirmUnfriend
+           visible = {this.state.showUnfriend}
+           onClose = {this.onUnAddCloseFriendClose}
+           curId = {curId}
+           friendId = {profileId}
+           />
+
+          */}
+
 
         </div>
 

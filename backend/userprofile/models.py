@@ -191,6 +191,14 @@ class FriendRequest(models.Model):
 
 
 class CustomNotification(models.Model):
+
+    # The type of the notification is really important, it tells us which type
+    # of notification it is
+
+    # All the types and thier association.
+
+
+    # pending_social_event --> this is for the calendar onwer to accept a add event request
     type = models.CharField(default='friend', max_length=30)
 
     recipient = models.ForeignKey(
@@ -225,6 +233,22 @@ class CustomNotification(models.Model):
     # eventId field is used for calendar event related objects
     # so that we can go into the eventid page directly
     eventId = models.BigIntegerField(blank = True, null = True)
+
+    # These fields in combination with minDate and maxDate will hold informaiton
+    # about an event that wants to be approved.Once approvaed the new soical
+    # cal event will be created. Also gotta add in to the fact that if the date of
+    # that event passes the notificaiton will be deleted or disabled.
+    # This is for social calendar
+
+    # Fields will be similar to socailCaleventmodal
+    pendingEventTitle = models.CharField(max_length= 222, blank = True)
+    pendingEventContent = models.TextField(blank = True)
+    pendingEventLocation = models.CharField(max_length = 255, blank = True)
+    pendingEventCurId = models.IntegerField(blank = True, null = True)
+    pendingCalendarOwnerId = models.IntegerField(blank = True, null = True)
+    pendingEventDate = models.DateField(default = timezone.now, blank = True)
+    pendingEventStartTime = models.TimeField(default = timezone.now, blank = True)
+    pendingEventEndTime = models.TimeField(default = timezone.now, blank = True)
 
     def __str__(self):
         return str(self.recipient)

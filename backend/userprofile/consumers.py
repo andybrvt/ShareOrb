@@ -239,6 +239,39 @@ class NotificationConsumer(JsonWebsocketConsumer):
                 self.send_new_notification(content)
 
 
+    def send_social_cal_notification(self, data):
+        # This method will be used for notifications related to the socialCalendar
+
+        print(data)
+        if data['command'] == 'send_pending_social_event':
+            actor = get_object_or_404(User, id = data['socialEventObj']['curId'])
+            recipient = get_object_or_404(User, id = data['socialEventObj']['calOwner'])
+            eventObj = data['socialEventObj']
+            notification = CustomNotification.objects.create(
+                 type = "pending_social_event",
+                 actor = actor,
+                 recipient = recipient,
+                 verb = "wants to post a social event",
+                 pendingEventStartTime = eventObj['startTime'], #start time of event
+                 pendingEventEndTime = eventObj['endTime'], #end time of event
+                 pendingEventTitle = eventObj['title'],
+                 pendingEventContent = eventObj['content'],
+                 pendingEventLocation = eventObj['location'],
+                 pendingEventCurId = eventObj['curId'],
+                 pendingCalendarOwnerId = eventObj['calOwner'],
+                 pendingEventDate = eventObj['date']
+            )
+            serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_notification",
+                "notification": json.dumps(serializer.data),
+                "recipient": recipient.username,
+            }
+
+            self.send_new_notification(content)
+
+
+
 
 #So this one is to delete the friend request notificaton, so since recipeint for this person
 # is the person receive the friend request but once recipient accpets it then they are the actor
@@ -441,6 +474,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_personalCal_event_notification(data)
         if data['command'] == 'send_edited_event_notification':
             self.send_personalCal_event_notification(data)
+        if data['command'] == 'send_pending_social_event':
+            self.send_social_cal_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
