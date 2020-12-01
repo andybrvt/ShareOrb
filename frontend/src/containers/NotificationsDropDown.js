@@ -12,13 +12,15 @@ import * as eventSyncActions from '../store/actions/eventSync';
 import PickEventSyncModal from './PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as dateFns from 'date-fns';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
-
+import PendingSocialEventModal from './NotificationFolder/PendingSocialEventModal';
 
 // This one is for holding the notifications and all its function
 
 class NotificationsDropDown extends React.Component{
   state = {
     visible: false,
+    showPendingEvent: false,
+    pendingEvent: {}
   };
 
   handleMenuClick = (e) => {
@@ -137,6 +139,23 @@ class NotificationsDropDown extends React.Component{
     }
 
     return prefix;
+  }
+
+  onOpenPendingEvent = (pendingEventObj) => {
+    // This function will open the modal to show the user what the pending soical
+    // event will look like
+    this.setState({
+      showPendingEvent: true,
+      pendingEvent: pendingEventObj
+    })
+  }
+
+  onClosePendingEvent = () => {
+    // This function will close the modal of the pending evnet
+    this.setState({
+      showPendingEvent: false,
+      pendingEvent: {}
+    })
   }
 
   renderNotifications = () => {
@@ -677,8 +696,21 @@ class NotificationsDropDown extends React.Component{
           </li>
         )
       } if(notifications[i].type === 'pending_social_event'){
+        const pendingEventObj = {
+          title: notifications[i].pendingEventTitle,
+          content: notifications[i].pendingEventContent,
+          location: notifications[i].pendingEventLocation,
+          curId: notifications[i].pendingEventCurId,
+          ownerId: notifications[i].pendingCalendarOwnerId,
+          eventDate: notifications[i].pendingEventDate,
+          eventStart: notifications[i].pendingEventStartTime,
+          eventEnd: notifications[i].pendingEventEndTime
+        }
+
         notificationList.push(
-          <li className = 'notificationListContainer'>
+          <li
+          onClick = {() =>this.onOpenPendingEvent(pendingEventObj)}
+          className = 'notificationListContainer'>
           <div className = 'notificationIcon'>
             <Avatar size = {55} style ={{
               verticalAlign: 'middle'}}
@@ -747,6 +779,7 @@ class NotificationsDropDown extends React.Component{
     );
 
     return(
+      <div>
       <Dropdown
         overlay={this.renderNotifications()}
         onVisibleChange={this.handleVisibleChange}
@@ -759,8 +792,14 @@ class NotificationsDropDown extends React.Component{
         <i class="far fa-bell" aria-hidden="true"></i>
 
         </a>
-      </Dropdown>
 
+      </Dropdown>
+      <PendingSocialEventModal
+      visible = {this.state.showPendingEvent}
+      onClose = {this.onClosePendingEvent}
+      pendingEvent = {this.state.pendingEvent}
+      />
+      </div>
     )
   }
 }
