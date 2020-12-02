@@ -185,7 +185,7 @@ class SideMenu extends React.Component {
 
           <div class="logo-wrap">
             <div class="logo">
-              <span>C</span>
+              <span>S</span>
             </div>
             <span class="logo-text">Colorlib</span>
           </div>
