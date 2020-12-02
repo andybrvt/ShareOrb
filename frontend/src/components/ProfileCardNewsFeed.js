@@ -5,7 +5,7 @@ import ava1 from './images/avatar.jpg';
 import defaultPic from './images/default.png';
 import { connect } from "react-redux";
 import FollowList from './UserProfiles/FollowList';
-import { Modal, Avatar } from 'antd';
+import { Modal, Avatar, Row, Col, Statistic} from 'antd';
 
 
 
@@ -77,8 +77,8 @@ class ProfileCardNewsFeed extends React.Component{
       <div className = "profileCard-NF">
         <div className = 'image-box-NF'>
           <Avatar
-            style={{left:'50%', top:'5%'}}
-            size = {125} shape = 'circle'
+            style={{left:'40%', top:'5%'}}
+            size = {150} shape = 'circle'
             src = {profilePic} />
 
         </div>
@@ -89,26 +89,20 @@ class ProfileCardNewsFeed extends React.Component{
           <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
         </div>
-        <div className = 'social-NF'>
-        <div className = 'social-links-NF'
-
-        >
-          <div
-          onClick = {() => this.onFollowerOpen()}
-          className = 'btn-NF'> Followers </div>
-          <div className = 'btn-NF'
-          onClick = {() => this.onFollowingOpen()}
-          > Following </div>
-        </div>
-        <div className = 'social-links-NF'>
-        <div
-        onClick = {() => this.onFollowerOpen()}
-        className = 'showNums'> {followers.length} </div>
-        <div
-        onClick = {() => this.onFollowingOpen()}
-        className = 'showNums'> {following.length} </div>
-        </div>
-        </div>
+        <Row gutter={12} style={{marginTop:'20px'}}>
+          <Col offset={4} span={10}>
+            <Statistic
+              class="statisticTest"
+              valueStyle={{ fontSize:'18px', color:'black'}}
+              title={<span style={{fontSize:'16px',}}>Followers</span>} value={112893} />
+          </Col>
+          <Col span={10}>
+            <Statistic
+              valueStyle={{ fontSize:'18px', color:'black'}}
+              title={<span style={{fontSize:'16px',}}>Following</span>}
+             value={112893} loading />
+          </Col>
+        </Row>
         <Modal
         visible ={this.state.followerShow}
         onCancel = {this.onFollowerCancel}
