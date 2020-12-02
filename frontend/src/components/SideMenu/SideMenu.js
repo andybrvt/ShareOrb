@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   CalendarOutlined,
@@ -49,8 +48,13 @@ import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';
 import defaultPicture from '../images/default.png';
-import { connect } from 'react-redux';
+import './style.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
+
+
+import { connect } from 'react-redux';
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -171,63 +175,37 @@ class SideMenu extends React.Component {
       <div style={{marginBottom:30}}>
 
 
-      <Sider trigger={null} collapsible collapsed={this.state.collapsed}style={{
-        backgroundColor: 'white',
-        height: '100vh',
-        position: 'fixed',
+        <aside class="sidebar">
+        <div class="toggle">
+          <a class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span></span>
+              </a>
+        </div>
+        <div class="side-inner">
 
-      }}
-      className="SideMenuAppearBefore">
-
-              <img  class="logo" src={testPic}  style={{width:100, height:100}} />
-
-
-          <Menu style={{height:1000}}
-           defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          theme="dark"
-          class="ant-menu"
-          >
+          <div class="logo-wrap">
+            <div class="logo">
+              <span>C</span>
+            </div>
+            <span class="logo-text">Colorlib</span>
+          </div>
 
 
-          <Menu.Item key="1" style={{height:50}}>
-            <HomeOutlined />
-            <span> Home </span>
-            <Link to={"/home"} />
-          </Menu.Item>
+          <div class="nav-menu">
+            <ul>
+              <button type="button" class="btn btn-primary">Primary</button>
+              <li class="active"><a href="#" class="d-flex align-items-center"><i class="fas fa-calendar-alt"> Personal calendar</i><span class="menu-text">Home</span></a></li>
+              <li class="active"><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-home2 mr-3"></span><span class="menu-text">Home</span></a></li>
+              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-videocam mr-3"></span><span class="menu-text">Videos</span></a></li>
+              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-book mr-3"></span><span class="menu-text">Books</span></a></li>
+              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-shopping-cart mr-3"></span><span class="menu-text">Store</span></a></li>
+              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-pie-chart mr-3"></span><span class="menu-text">Analytics</span></a></li>
+              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-cog mr-3"></span><span class="menu-text">Settings</span></a></li>
+            </ul>
+          </div>
+        </div>
 
-
-            <Menu.Item key="2" style={{height:50}}>
-              <UserOutlined />
-              <span> Explore </span>
-              <Link to={"/explore"} />
-            </Menu.Item>
-
-            <Menu.Item key="3"  style={{height:50}}>
-              <InboxOutlined />
-              <span>Messages</span>
-              <Link to={"/chat/1"} />
-            </Menu.Item>
-
-
-            <Menu.Item key="4"  style={{height:50}}>
-              <CalendarOutlined />
-              <span>Personal Calendar </span>
-              <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} />
-            </Menu.Item>
-
-
-
-            <Menu.Item key="5">
-              <SmileOutlined />
-              <span>Social Calendar</span>
-              <Link to={"/explore/"+this.props.username} />
-            </Menu.Item>
-          </Menu>
-
-
-        </Sider>
+      </aside>
 
 
 
