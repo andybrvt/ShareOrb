@@ -77,7 +77,7 @@ class ProfileCardNewsFeed extends React.Component{
       <div className = "profileCard-NF">
         <div className = 'image-box-NF'>
           <Avatar
-            style={{left:'40%', top:'5%'}}
+            style={{left:'30%', top:'5%'}}
             size = {125} shape = 'circle'
             src = {profilePic} />
 
@@ -89,18 +89,31 @@ class ProfileCardNewsFeed extends React.Component{
           <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
         </div>
-        <Row gutter={12} style={{marginTop:'25px'}}>
-          <Col offset={3} span={10}>
-            <Statistic
-              class="statisticTest"
-              valueStyle={{ fontSize:'18px', color:'black'}}
-              title={<span style={{fontSize:'16px',}}>Followers</span>} value={112893} />
+        <Row gutter={12} style={{marginTop:'50px'}}>
+          <Col
+            offset={3}
+            span={10}
+            onClick = {() => this.onFollowerOpen()}
+            class="clickable"
+          >
+          <Statistic
+
+            valueStyle={{ marginLeft:'25px',fontSize:'18px', color:'black'}}
+            title={<span style={{fontSize:'16px',}}>Following</span>}
+           value={following.length} loading />
+
           </Col>
-          <Col span={10}>
-            <Statistic
-              valueStyle={{ fontSize:'18px', color:'black'}}
-              title={<span style={{fontSize:'16px',}}>Following</span>}
-             value={112893} loading />
+          <Col
+            onClick = {() => this.onFollowingOpen()}
+            span={10}
+            class="clickable"
+          >
+          <Statistic
+
+            class="statisticTest"
+            valueStyle={{ marginLeft:'25px',fontSize:'18px', color:'black'}}
+            title={<span style={{fontSize:'16px',}}>Followers</span>}
+            value={followers.length} />
           </Col>
         </Row>
         <Modal

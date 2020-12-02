@@ -158,7 +158,7 @@ class SuggestedFriends extends React.Component {
             </List.Item>
           )}
         />
-      <div style={{padding:'20px'}}>
+      <div style={{padding:'30px'}}>
         {((list.length)<=5)?
 
           <Button style={{left:'35%', float:'bottom'}} onClick={this.onLoadMore}>Load More</Button>

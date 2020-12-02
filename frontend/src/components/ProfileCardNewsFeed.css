@@ -1,6 +1,6 @@
 .profileCard-NF{
   background-color: white;
-  width: 225px;
+  width: 200px;
   height: 260px;
   z-index: 1;
   border-radius: 10px;
@@ -12,6 +12,10 @@
   padding:10px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.12);
 
+}
+
+.clickable{
+  cursor: pointer;
 }
 
 .image-box-NF{
@@ -49,7 +53,7 @@
 
 .bottom-NF {
   position: absolute;
-  bottom: 22.5%;
+  bottom: 20%;
   display: grid;
   grid-template-rows: auto 30px;
   justify-content: center;
@@ -62,7 +66,7 @@
 .name-NF {
   /* position: absolute; */
 
-  margin-left: 75px;
+  margin-left: 100px;
   /* background-color: red; */
   /* color: #ffffff; */
   color:grey;
