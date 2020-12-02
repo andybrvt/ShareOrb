@@ -78,7 +78,7 @@ class ProfileCardNewsFeed extends React.Component{
         <div className = 'image-box-NF'>
           <Avatar
             style={{left:'40%', top:'5%'}}
-            size = {150} shape = 'circle'
+            size = {125} shape = 'circle'
             src = {profilePic} />
 
         </div>
@@ -89,8 +89,8 @@ class ProfileCardNewsFeed extends React.Component{
           <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
         </div>
-        <Row gutter={12} style={{marginTop:'20px'}}>
-          <Col offset={4} span={10}>
+        <Row gutter={12} style={{marginTop:'25px'}}>
+          <Col offset={3} span={10}>
             <Statistic
               class="statisticTest"
               valueStyle={{ fontSize:'18px', color:'black'}}

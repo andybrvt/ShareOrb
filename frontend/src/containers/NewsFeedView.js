@@ -111,7 +111,8 @@ class NewsFeedView extends React.Component {
 				<Row style = {{
 					display: 'flex',
 					position: 'relative',
-					marginLeft: '350px'
+					marginTop:'10px',
+					marginLeft: '350px',
 				}}>
 
 
@@ -119,7 +120,7 @@ class NewsFeedView extends React.Component {
 					<div class="headers">
 					<Col
 						style={{
-						marginLeft:'-125px', marginRight:'100px'}}
+						marginLeft:'-125px', marginRight:'125px'}}
 						span={5}
 						class="scroller"
 						>
@@ -272,7 +273,7 @@ class NewsFeedView extends React.Component {
 
 				Loading...
 			</Col>
-			<div style={{marginLeft:'100px'}}>
+			<div style={{marginLeft:'125px'}}>
 				<div class="headers">
 					<Col style={{}}  span={6}
 						class="scroller"
@@ -284,11 +285,13 @@ class NewsFeedView extends React.Component {
 							background:'white',
 							// postion: 'fixed',
 							position: 'relative',
-							}}
+						}}
+						class="morePeopleBox"
+
 						>
 
 
-						<div  style={{textAlign:'center', fontSize:'18px', top:'50%'}}>
+						<div  style={{textAlign:'center', fontSize:'18px'}}>
 							More People
 
 						</div>
