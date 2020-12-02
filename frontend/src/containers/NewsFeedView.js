@@ -280,7 +280,7 @@ class NewsFeedView extends React.Component {
 					>
 						<div
 							style = {{
-							height: '450px',
+						
 							width: '400px',
 							background:'white',
 							// postion: 'fixed',
@@ -291,13 +291,14 @@ class NewsFeedView extends React.Component {
 						>
 
 
-						<div  style={{textAlign:'center', fontSize:'18px'}}>
-							More People
-
+						<div
+							 class="morePeopleHeader"
+							>
+								More People
 						</div>
 
 
-								<div style={{ marginTop:'25px'}}>
+								<div>
 
 								<SuggestedFriends  style={{position:'fixed'}}{...this.props}/>
 

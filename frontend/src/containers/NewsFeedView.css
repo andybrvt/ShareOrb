@@ -192,6 +192,17 @@ color: #203758;
 
 }
 
+.morePeopleHeader{
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  height:75px;
+  /* background-color: red; */
+  padding-top: 25px;
+  /* color:#1890ff; */
+
+}
+
 
 .usertext {
   color: rgb(20, 24, 35);
