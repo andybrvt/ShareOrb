@@ -189,8 +189,8 @@ class SideMenu extends React.Component {
       </div>
     </div>
 
-
-        <aside class="sidebar">
+<body class ="show-sidebar">
+        <aside class="sidebar" >
         <div class="toggle">
           <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
                 <span></span>
@@ -223,6 +223,7 @@ class SideMenu extends React.Component {
 
       </aside>
 
+</body>
 
 
       <Layout>
