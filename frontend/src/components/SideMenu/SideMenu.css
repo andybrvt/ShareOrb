@@ -24,6 +24,11 @@
 background: #f5222d;
 }
 
+.HeaderPosition{
+  margin-top: -10px;
+  padding-bottom: 80px;
+}
+
 .site-layout .site-layout-background {
   background: #fff;
   /* background-color: black; */
