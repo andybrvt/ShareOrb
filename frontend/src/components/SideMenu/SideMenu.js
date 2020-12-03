@@ -175,6 +175,7 @@ class SideMenu extends React.Component {
       <div style={{marginBottom:30}}>
 
 
+<<<<<<< HEAD
       <p>
       <a class="btn btn-primary" data-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         Link with href
@@ -190,6 +191,9 @@ class SideMenu extends React.Component {
     </div>
 
 <body class ="">
+=======
+<body class ="show-sidebar">
+>>>>>>> 781ba07585db2705f8a7bf1f623d36f3538ea23f
         <aside class="sidebar" >
         <div class="toggle">
           <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
