@@ -186,7 +186,17 @@ class SideMenu extends React.Component {
         <p class ="show-sidebar">
                 <aside class="sidebar" >
                 <div class="toggle">
-                  <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
+                  {/*
+                    <MenuFoldOutlined
+                      href="#collapseExample" role = "button" class="js-menu-toggle"
+                       data-toggle="collapse"
+                      >
+                    </MenuFoldOutlined>
+
+
+                    */}
+                  <a href="#collapseExample" role = "button"
+                    class="burger js-menu-toggle" data-toggle="collapse" >
                         <span></span>
                       </a>
                 </div>
@@ -197,20 +207,22 @@ class SideMenu extends React.Component {
                     <div class="logo">
                       <span>S</span>
                     </div>
-                    <span class="logo-text">Colorlib</span>
+                    <span class="logo-text">hareOrb</span>
                   </div>
 
 
                   <div class="nav-menu">
                     <ul>
-                      <button type="button" class="btn btn-primary">Primary</button>
-                      <li class="active"><a href="#" class="d-flex align-items-center"><i class="fas fa-calendar-alt"> Personal calendar</i><span class="menu-text">Home</span></a></li>
-                      <li class="active"><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-home2 mr-3"></span><span class="menu-text">Home</span></a></li>
-                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-videocam mr-3"></span><span class="menu-text">Videos</span></a></li>
-                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-book mr-3"></span><span class="menu-text">Books</span></a></li>
-                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-shopping-cart mr-3"></span><span class="menu-text">Store</span></a></li>
-                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-pie-chart mr-3"></span><span class="menu-text">Analytics</span></a></li>
-                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-cog mr-3"></span><span class="menu-text">Settings</span></a></li>
+                      <li class="active"><a href="/home" class="d-flex align-items-center"> <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">Home</span></a></li>
+                      <li><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px'}}/><span class="menu-text">Explore</span></a></li>
+                      <li><a href={"/chat/1"} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
+                      <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
+                        class="d-flex align-items-center">
+                        <CalendarOutlined style={{marginRight:'10px'}}/>
+                        <span class="menu-text">Personal Calendar</span>
+                      </a></li>
+
+                      <li><a href={"/explore/"+this.props.username} class="d-flex align-items-center"><SmileOutlined style={{marginRight:'10px'}}/><span class="menu-text">Social Calendar</span></a></li>
                     </ul>
                   </div>
                 </div>
@@ -218,6 +230,12 @@ class SideMenu extends React.Component {
               </aside>
 
         </p>
+
+        {/*<div class="toggle">
+          <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
+                <span></span>
+              </a>
+        </div>*/}
       <span style = {{
         color: 'black',
         marginLeft:'10%',
