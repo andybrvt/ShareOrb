@@ -1,15 +1,10 @@
 body {
-<<<<<<< HEAD
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  background-color: #efefef;
- }
-=======
+
   font-family: "Roboto", -apple-system, BlinkMacSystemFont,
   "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
   background-color: #efefef; }
->>>>>>> 6373a8632cd0e0b7f400ddcc51c9cf860bc10518
 
 p {
   color: #b3b3b3;
