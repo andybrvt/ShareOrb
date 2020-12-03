@@ -20,7 +20,8 @@ class NotificationsDropDown extends React.Component{
   state = {
     visible: false,
     showPendingEvent: false,
-    pendingEvent: {}
+    pendingEvent: {},
+    selectedUser: ""
   };
 
   handleMenuClick = (e) => {
@@ -124,8 +125,12 @@ class NotificationsDropDown extends React.Component{
   }
 
   renderTimestamp = timestamp =>{
+    console.log(timestamp)
     let prefix = '';
+    console.log(new Date().getTime())
+    console.log(new Date(timestamp).getTime())
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    console.log(timeDiff)
     if (timeDiff < 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
@@ -135,18 +140,20 @@ class NotificationsDropDown extends React.Component{
     } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
       prefix = `${Math.round(timeDiff/(60*24))} days ago`;
     } else {
-        prefix = `${new Date(timestamp)}`;
+        prefix = `${dateFns.format(new Date(timestamp), "MMMM d, yyyy")}`;
     }
 
     return prefix;
   }
 
-  onOpenPendingEvent = (pendingEventObj) => {
+
+  onOpenPendingEvent = (pendingEventObj, selectedUser) => {
     // This function will open the modal to show the user what the pending soical
     // event will look like
     this.setState({
       showPendingEvent: true,
-      pendingEvent: pendingEventObj
+      pendingEvent: pendingEventObj,
+      selectedUser: selectedUser
     })
   }
 
@@ -154,7 +161,8 @@ class NotificationsDropDown extends React.Component{
     // This function will close the modal of the pending evnet
     this.setState({
       showPendingEvent: false,
-      pendingEvent: {}
+      pendingEvent: {},
+      selectedUser: ""
     })
   }
 
@@ -709,7 +717,7 @@ class NotificationsDropDown extends React.Component{
 
         notificationList.push(
           <li
-          onClick = {() =>this.onOpenPendingEvent(pendingEventObj)}
+          onClick = {() =>this.onOpenPendingEvent(pendingEventObj, notifications[i].actor.username)}
           className = 'notificationListContainer'>
           <div className = 'notificationIcon'>
             <Avatar size = {55} style ={{
@@ -798,6 +806,7 @@ class NotificationsDropDown extends React.Component{
       visible = {this.state.showPendingEvent}
       onClose = {this.onClosePendingEvent}
       pendingEvent = {this.state.pendingEvent}
+      selectedUser = {this.state.selectedUser}
       />
       </div>
     )
