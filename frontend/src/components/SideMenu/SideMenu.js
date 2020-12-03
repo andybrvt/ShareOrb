@@ -175,46 +175,49 @@ class SideMenu extends React.Component {
       <div style={{marginBottom:30}}>
 
 
-<body class ="show-sidebar">
-        <aside class="sidebar" >
-        <div class="toggle">
-          <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
-                <span></span>
-              </a>
-        </div>
-
-        <div class="side-inner">
-
-          <div class="logo-wrap">
-            <div class="logo">
-              <span>S</span>
-            </div>
-            <span class="logo-text">Colorlib</span>
-          </div>
-
-
-          <div class="nav-menu">
-            <ul>
-              <button type="button" class="btn btn-primary">Primary</button>
-              <li class="active"><a href="#" class="d-flex align-items-center"><i class="fas fa-calendar-alt"> Personal calendar</i><span class="menu-text">Home</span></a></li>
-              <li class="active"><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-home2 mr-3"></span><span class="menu-text">Home</span></a></li>
-              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-videocam mr-3"></span><span class="menu-text">Videos</span></a></li>
-              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-book mr-3"></span><span class="menu-text">Books</span></a></li>
-              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-shopping-cart mr-3"></span><span class="menu-text">Store</span></a></li>
-              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-pie-chart mr-3"></span><span class="menu-text">Analytics</span></a></li>
-              <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-cog mr-3"></span><span class="menu-text">Settings</span></a></li>
-            </ul>
-          </div>
-        </div>
-
-      </aside>
-
-</body>
 
 
       <Layout>
 
+
+
+
       <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', background:'white' }}>
+        <p class ="show-sidebar">
+                <aside class="sidebar" >
+                <div class="toggle">
+                  <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
+                        <span></span>
+                      </a>
+                </div>
+
+                <div class="side-inner">
+
+                  <div class="logo-wrap">
+                    <div class="logo">
+                      <span>S</span>
+                    </div>
+                    <span class="logo-text">Colorlib</span>
+                  </div>
+
+
+                  <div class="nav-menu">
+                    <ul>
+                      <button type="button" class="btn btn-primary">Primary</button>
+                      <li class="active"><a href="#" class="d-flex align-items-center"><i class="fas fa-calendar-alt"> Personal calendar</i><span class="menu-text">Home</span></a></li>
+                      <li class="active"><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-home2 mr-3"></span><span class="menu-text">Home</span></a></li>
+                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-videocam mr-3"></span><span class="menu-text">Videos</span></a></li>
+                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-book mr-3"></span><span class="menu-text">Books</span></a></li>
+                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-shopping-cart mr-3"></span><span class="menu-text">Store</span></a></li>
+                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-pie-chart mr-3"></span><span class="menu-text">Analytics</span></a></li>
+                      <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-cog mr-3"></span><span class="menu-text">Settings</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </aside>
+
+        </p>
       <span style = {{
         color: 'black',
         marginLeft:'10%',

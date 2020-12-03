@@ -1,5 +1,8 @@
 body {
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+   sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
   background-color: #efefef; }
 
 p {
@@ -20,9 +23,9 @@ a {
 h2 {
   font-size: 20px; }
 
-body {
+p {
   position: relative; }
-  body:before {
+  p:before {
     position: absolute;
     content: "";
     z-index: 1;
@@ -36,9 +39,9 @@ body {
     -webkit-transition: .3s all ease-in-out;
     -o-transition: .3s all ease-in-out;
     transition: .3s all ease-in-out; }
-  body.show-sidebar {
+  p.show-sidebar {
     overflow: hidden; }
-    body.show-sidebar:before {
+    p.show-sidebar:before {
       opacity: 1;
       visibility: visible; }
 
@@ -75,7 +78,7 @@ aside {
     -ms-transform: translateX(100%);
     transform: translateX(100%); }
     .show-sidebar aside .toggle .burger:before, .show-sidebar aside .toggle .burger span, .show-sidebar aside .toggle .burger:after {
-      background: #fff; }
+      background: red; }
   .show-sidebar aside {
     -webkit-box-shadow: 10px 0 30px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 10px 0 30px 0 rgba(0, 0, 0, 0.2); }
