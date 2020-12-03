@@ -176,10 +176,12 @@ class SideMenu extends React.Component {
 
 
       <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <a class="btn btn-primary" data-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         Link with href
       </a>
-
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+      </button>
     </p>
     <div class="collapse" id="collapseExample">
       <div class="card card-body">
@@ -188,9 +190,9 @@ class SideMenu extends React.Component {
     </div>
 
 
-        <aside class="sidebar ">
+        <aside class="sidebar">
         <div class="toggle">
-          <a class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+          <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
                 <span></span>
               </a>
         </div>
