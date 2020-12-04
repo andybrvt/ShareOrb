@@ -237,10 +237,15 @@ class SideMenu extends React.Component {
                       <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
                         class="d-flex align-items-center">
                         <CalendarOutlined style={{marginRight:'10px'}}/>
-                        <span class="menu-text">Personal Calendar</span>
+                        <span class="menu-text">Personal</span>
+                        <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
                       </a></li>
 
-                      <li><a href={"/explore/"+this.props.username} class="d-flex align-items-center"><SmileOutlined style={{marginRight:'10px'}}/><span class="menu-text">Social Calendar</span></a></li>
+                      <li><a href={"/explore/"+this.props.username}
+                        class="d-flex align-items-center">
+                        <SmileOutlined style={{marginRight:'10px'}}/>
+                          <span class="menu-text">Social</span>
+                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span></a></li>
                     </ul>
                   </div>
                 </div>
@@ -253,8 +258,27 @@ class SideMenu extends React.Component {
           <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
                 <span></span>
               </a>
-        </div>*/}
+        </div>
 
+
+
+
+        */}
+      <span
+
+        href="#collapseExample" role = "button"
+        class="burgerTest js-menu-toggle"
+        style = {{
+        color: 'black',
+
+        marginLeft:'15%',
+        fontSize:'20px',
+      }}>
+        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+
+          onClick: this.toggle,
+        })}
+      </span>
 
 
 
