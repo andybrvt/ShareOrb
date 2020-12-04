@@ -89,6 +89,9 @@ class PendingSocialEventModal extends React.Component{
           <br />
           <span></span>
         </div>
+
+        <button> Accept </button>
+        <button> Decline </button>
       </Modal>
 
     )

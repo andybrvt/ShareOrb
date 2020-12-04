@@ -21,7 +21,8 @@ class NotificationsDropDown extends React.Component{
     visible: false,
     showPendingEvent: false,
     pendingEvent: {},
-    selectedUser: ""
+    selectedUser: "",
+    selectedUserProfile: ""
   };
 
   handleMenuClick = (e) => {
@@ -147,13 +148,15 @@ class NotificationsDropDown extends React.Component{
   }
 
 
-  onOpenPendingEvent = (pendingEventObj, selectedUser) => {
+  onOpenPendingEvent = (pendingEventObj, selectedUser, selectedUserProfile) => {
     // This function will open the modal to show the user what the pending soical
     // event will look like
     this.setState({
       showPendingEvent: true,
       pendingEvent: pendingEventObj,
-      selectedUser: selectedUser
+      selectedUser: selectedUser,
+      selectedUserProfile: selectedUserProfile,
+
     })
   }
 
@@ -162,7 +165,8 @@ class NotificationsDropDown extends React.Component{
     this.setState({
       showPendingEvent: false,
       pendingEvent: {},
-      selectedUser: ""
+      selectedUser: "",
+      selectedUserProfile: "",
     })
   }
 
