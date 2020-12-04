@@ -188,17 +188,18 @@ class SideMenu extends React.Component {
                 <div class="toggle">
                   {/*
                     <MenuFoldOutlined
-                      href="#collapseExample" role = "button" class="js-menu-toggle"
-                       data-toggle="collapse"
+
                       >
                     </MenuFoldOutlined>
 
 
                     */}
+                    {/*
                   <a href="#collapseExample" role = "button"
                     class="burger js-menu-toggle" data-toggle="collapse" >
                         <span></span>
-                      </a>
+                  </a>
+                  */}
                 </div>
 
                 <div class="side-inner">
@@ -214,7 +215,7 @@ class SideMenu extends React.Component {
                   <div class="nav-menu">
                     <ul>
                       <li class="active"><a href="/home" class="d-flex align-items-center"> <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">Home</span></a></li>
-                      <li><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px'}}/><span class="menu-text">Explore</span></a></li>
+                      <li><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
                       <li><a href={"/chat/1"} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
                       <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
                         class="d-flex align-items-center">
@@ -236,13 +237,17 @@ class SideMenu extends React.Component {
                 <span></span>
               </a>
         </div>*/}
-      <span style = {{
-        color: 'black',
-        marginLeft:'10%',
+      <span
 
+        href="#collapseExample" role = "button"
+        class=" js-menu-toggle"
+        style = {{
+        color: 'black',
+        marginLeft:'20%',
+        fontSize:'24px',
       }}>
         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-          className: 'trigger',
+
           onClick: this.toggle,
         })}
       </span>

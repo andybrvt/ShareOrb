@@ -68,6 +68,7 @@ aside {
   transition: 0.7s width cubic-bezier(0.23, 1, 0.32, 1); }
   .show-sidebar aside {
     width: 260px;
+    
     -webkit-transform: translateX(0%);
     -ms-transform: translateX(0%);
     transform: translateX(0%); }
@@ -172,8 +173,8 @@ aside {
         display: block;
         padding-left: 23px;
         padding-right: 30px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         color: #b1b1b1;
         position: relative;
         -webkit-transition: .3s all ease;
@@ -225,6 +226,20 @@ main {
     font-size: 15px;
     color: #ccc; }
 
+.burgerTest{
+  width: 28px;
+  height: 32px;
+  cursor: pointer;
+  position: relative;
+  z-index: 99;
+  background-color: red;
+  float: left;
+}
+.burger.active:after {
+  background-color: red;
+  /*for IE*/ }
+
+
 /* Burger */
 .burger {
   width: 28px;
@@ -232,7 +247,7 @@ main {
   cursor: pointer;
   position: relative;
   z-index: 99;
-  float: right; }
+  float: left; }
 
 .burger:before, .burger span, .burger:after {
   width: 100%;
