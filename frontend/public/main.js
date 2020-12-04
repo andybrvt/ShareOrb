@@ -26,7 +26,7 @@ $(function() {
     if (!container.is(e.target) && container.has(e.target).length === 0) {
       if ( $('p').hasClass('show-sidebar') ) {
 				$('p').removeClass('show-sidebar');
-				$('').find('.js-menu-toggle').removeClass('active');
+				$('p').find('.js-menu-toggle').removeClass('active');
 			}
     }
 	});
