@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal, Avatar, notification } from 'antd';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import './PendingEventCard.css';
+import { authAxios } from '../../components/util';
 
 
 // This will be a modal that opens to check the event that someone wants
@@ -63,7 +64,24 @@ class PendingSocialEventModal extends React.Component{
         date: this.props.pendingEvent.eventDate
       }
 
-      ExploreWebSocketInstance.sendSocialEvent(eventObj)
+      if(this.props.location.pathname.includes("explore")){
+        ExploreWebSocketInstance.sendSocialEvent(eventObj)
+
+      } else {
+        console.log('authAxios here')
+        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent', {
+          title: this.props.pendingEvent.title,
+          content: this.props.pendingEvent.content,
+          startTime: this.props.pendingEvent.eventStart,
+          endTime: this.props.pendingEvent.eventEnd,
+          location: this.props.pendingEvent.location,
+          curId: this.props.pendingEvent.curId,
+          calOwner: this.props.pendingEvent.ownerId,
+          date: this.props.pendingEvent.eventDate
+        })
+      }
+
+
       this.openNotification('bottomLeft', displayObj)
       this.props.onClose();
 
@@ -87,6 +105,7 @@ class PendingSocialEventModal extends React.Component{
 
   render(){
     console.log(this.props)
+
     let title = ""
     let content = ""
     let location = ""

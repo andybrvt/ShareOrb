@@ -816,6 +816,7 @@ class NotificationsDropDown extends React.Component{
       pendingEvent = {this.state.pendingEvent}
       selectedUser = {this.state.selectedUser}
       userprofile = {this.state.selectedUserProfile}
+      location = {this.props.location}
       />
       </div>
     )

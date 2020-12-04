@@ -95,17 +95,25 @@ class SocialEventCreateView(APIView):
         # the socialCalcell with the date that you got passed in
         # Once you have gotten all that, you would then start making the event,
         # you would add all the information an
-        user = get_object_or_404(User, id = request.data['curId'])
+
+        # The user will be the owner of the calendar
+        # You will also need to get the owner of the calendar which will be
+        # calOwner. It will replace the socialCalUser pulling the cal owner
+        # cell. So you have to replace that. Making the event though you will
+        # use the curId
+        curUser = get_object_or_404(User, id = request.data['curId'])
+        calOwner = get_object_or_404(User, id = request.data['calOwner'])
         socialCalCell, created = models.SocialCalCell.objects.get_or_create(
-            socialCalUser = user,
+            socialCalUser = calOwner,
             socialCaldate = request.data['date'],
         )
 
-        eventPerson = set()
-        eventPerson.add(user)
 
+        # When creating the event, the host will be the curUser not the calOwner,
+        # and because you are using this when you are asking for requestion. Most
+        # likely the users will be different
         socialCalEvent = models.SocialCalEvent.objects.create(
-            host = user,
+            host = curUser,
             title = request.data['title'],
             content = request.data['content'],
             start_time = request.data['startTime'],
@@ -115,8 +123,8 @@ class SocialEventCreateView(APIView):
             calCell = socialCalCell
         )
 
-        socialCalEvent.persons.add(user)
-        return Response('Uploaded Pictures')
+        socialCalEvent.persons.add(curUser)
+        return Response('Uploaded pending social event')
 
 class ShowSocialEvents(generics.ListAPIView):
     serializer_class = serializers.SocialCalEventSerializer

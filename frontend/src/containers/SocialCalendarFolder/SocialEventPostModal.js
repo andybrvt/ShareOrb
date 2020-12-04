@@ -139,7 +139,6 @@ class SocialEventPostModal extends React.Component{
     NotificationWebSocketInstance.sendPendingSocialEvent(eventObj)
   }
 
-  this.openNotification('bottomLeft', displayObj)
   this.setState({
     title: '',
     content: '',
