@@ -721,7 +721,11 @@ class NotificationsDropDown extends React.Component{
 
         notificationList.push(
           <li
-          onClick = {() =>this.onOpenPendingEvent(pendingEventObj, notifications[i].actor.username)}
+          onClick = {() =>this.onOpenPendingEvent(
+            pendingEventObj,
+            notifications[i].actor.username,
+            notifications[i].actor.profile_picture
+           )}
           className = 'notificationListContainer'>
           <div className = 'notificationIcon'>
             <Avatar size = {55} style ={{
@@ -811,6 +815,7 @@ class NotificationsDropDown extends React.Component{
       onClose = {this.onClosePendingEvent}
       pendingEvent = {this.state.pendingEvent}
       selectedUser = {this.state.selectedUser}
+      userprofile = {this.state.selectedUserProfile}
       />
       </div>
     )
