@@ -121,7 +121,7 @@ class SocialCalendar extends React.Component{
   renderCells(events) {
     console.log(events)
 
-  
+
     // followerList and following list will be made up fo ids of the people that are
     // following or follower of you. This will be used to check if the person
     // can add stuff to the social calendar
@@ -810,6 +810,7 @@ class SocialCalendar extends React.Component{
             view = {this.state.showSocialEventPostModal}
             curDate = {this.state.selectedDate}
             calendarOwner = {this.props.profile.id}
+            calOwnerUsername = {this.props.profile.username}
             />
 
         </div>

@@ -135,8 +135,11 @@ class SocialEventPostModal extends React.Component{
 
   if(this.props.curId === this.props.calendarOwner){
     ExploreWebSocketInstance.sendSocialEvent(eventObj)
+    this.openNotification("bottomRight", displayObj)
   } else {
     NotificationWebSocketInstance.sendPendingSocialEvent(eventObj)
+    const calOwner = this.props.calOwnerUsername
+    this.openPendingNotification("bottomRight", calOwner)
   }
 
   this.setState({
@@ -150,7 +153,14 @@ class SocialEventPostModal extends React.Component{
 
   }
 
-
+  onPendingNotification = (placement, calOwner) => {
+    notification.info({
+      message: "Request Sent.",
+      description:
+        'You sent a request to add a social event on '+calOwner+'\'s social calendar.',
+      placement,
+    });
+  }
 
   openNotification = (placement, info) => {
     // The info parameter will be used to add stuff into the descrption
@@ -158,7 +168,7 @@ class SocialEventPostModal extends React.Component{
     const title = this.capitalize(info.title)
 
   notification.info({
-    message: `New Social Event Posted`,
+    message: "New Social Event Posted",
     description:
       'You added an public event '+title+' on '+info.startTime+' to '+info.endTime,
     placement,

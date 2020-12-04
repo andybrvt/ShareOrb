@@ -838,6 +838,7 @@ class DayCalendar extends React.Component{
     const selectYear = dateFns.getYear(week).toString()
     const selectMonth = (dateFns.getMonth(week)+1).toString()
     const selectDay = dateFns.getDate(week).toString()
+    console.log(selectYear, selectMonth, selectDay)
     this.props.history.push('/personalcalendar/w/'+selectYear+'/'+selectMonth+'/'+selectDay)
   }
 
@@ -884,6 +885,7 @@ class DayCalendar extends React.Component{
                 <CalendarViewDropDown
                   class="CalendarViewCSS"
                   calType = "day"
+                  curDate = {this.props.currentDate}
                   history = {this.props.history}
                   matchPara = {this.props.parameter} />
               </div>

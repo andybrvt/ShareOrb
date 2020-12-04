@@ -82,7 +82,7 @@ class PendingSocialEventModal extends React.Component{
       }
 
 
-      this.openNotification('bottomLeft', displayObj)
+      this.openNotification('bottomRight', displayObj)
       this.props.onClose();
 
     }

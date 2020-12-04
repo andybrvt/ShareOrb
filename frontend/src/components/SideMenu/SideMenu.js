@@ -194,12 +194,29 @@ class SideMenu extends React.Component {
 
 
                     */}
-                    {/*
-                  <a href="#collapseExample" role = "button"
-                    class="burger js-menu-toggle" data-toggle="collapse" >
-                        <span></span>
-                  </a>
-                  */}
+                  {/*
+                    <a href="#collapseExample" role = "button"
+                      class="burger js-menu-toggle" data-toggle="collapse" >
+                          <span></span>
+                    </a>
+                    */}
+                    <span
+
+                      role = "button"
+                      class=" js-menu-toggle"
+                      data-toggle="collapse"
+                      style = {{
+                      color: 'black',
+                      marginLeft:'20%',
+                      fontSize:'24px',
+                    }}>
+                      {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+
+                        onClick: this.toggle,
+                      })}
+                    </span>
+
+
                 </div>
 
                 <div class="side-inner">
@@ -237,20 +254,7 @@ class SideMenu extends React.Component {
                 <span></span>
               </a>
         </div>*/}
-      <span
 
-        href="#collapseExample" role = "button"
-        class=" js-menu-toggle"
-        style = {{
-        color: 'black',
-        marginLeft:'20%',
-        fontSize:'24px',
-      }}>
-        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-
-          onClick: this.toggle,
-        })}
-      </span>
 
 
 

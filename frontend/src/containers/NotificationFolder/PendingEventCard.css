@@ -23,8 +23,9 @@
   color: darkgrey;
   position:relative;
   bottom: 10px;
-  left: 45%;
+  /* left: 45%; */
   font-size: 15px;
+  text-align: center;
   /* transform: translateX(-50%); */
 
 }
