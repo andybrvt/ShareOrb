@@ -21,7 +21,8 @@ class NotificationsDropDown extends React.Component{
     visible: false,
     showPendingEvent: false,
     pendingEvent: {},
-    selectedUser: ""
+    selectedUser: "",
+    selectedUserProfile: ""
   };
 
   handleMenuClick = (e) => {
@@ -147,13 +148,15 @@ class NotificationsDropDown extends React.Component{
   }
 
 
-  onOpenPendingEvent = (pendingEventObj, selectedUser) => {
+  onOpenPendingEvent = (pendingEventObj, selectedUser, selectedUserProfile) => {
     // This function will open the modal to show the user what the pending soical
     // event will look like
     this.setState({
       showPendingEvent: true,
       pendingEvent: pendingEventObj,
-      selectedUser: selectedUser
+      selectedUser: selectedUser,
+      selectedUserProfile: selectedUserProfile,
+
     })
   }
 
@@ -162,7 +165,8 @@ class NotificationsDropDown extends React.Component{
     this.setState({
       showPendingEvent: false,
       pendingEvent: {},
-      selectedUser: ""
+      selectedUser: "",
+      selectedUserProfile: "",
     })
   }
 
@@ -717,7 +721,11 @@ class NotificationsDropDown extends React.Component{
 
         notificationList.push(
           <li
-          onClick = {() =>this.onOpenPendingEvent(pendingEventObj, notifications[i].actor.username)}
+          onClick = {() =>this.onOpenPendingEvent(
+            pendingEventObj,
+            notifications[i].actor.username,
+            notifications[i].actor.profile_picture
+           )}
           className = 'notificationListContainer'>
           <div className = 'notificationIcon'>
             <Avatar size = {55} style ={{
@@ -807,6 +815,8 @@ class NotificationsDropDown extends React.Component{
       onClose = {this.onClosePendingEvent}
       pendingEvent = {this.state.pendingEvent}
       selectedUser = {this.state.selectedUser}
+      userprofile = {this.state.selectedUserProfile}
+      location = {this.props.location}
       />
       </div>
     )

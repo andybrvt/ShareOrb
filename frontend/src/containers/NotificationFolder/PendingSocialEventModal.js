@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Modal, Avatar } from 'antd';
+import { Button, Modal, Avatar, notification } from 'antd';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import './PendingEventCard.css';
+import { authAxios } from '../../components/util';
+
 
 // This will be a modal that opens to check the event that someone wants
 // to post on your calendar whne you click on the notificaiton
@@ -33,9 +35,77 @@ class PendingSocialEventModal extends React.Component{
 
   }
 
+  onAcceptEvent = () => {
+    // This function will be called when you accep the follower friend to
+    // post and event on your page. This function will similar to the
+    // onHandleEventSubmit on the socialeventpostmodal. Gotta set up the
+    // eventobject and send it into the ExploreWebSocketInstance.sendSocialEvent
+
+    if(this.props.pendingEvent){
+      console.log(this.props.pendingEvent)
+      const eventObj = {
+        title: this.props.pendingEvent.title,
+        content: this.props.pendingEvent.content,
+        startTime: this.props.pendingEvent.eventStart,
+        endTime: this.props.pendingEvent.eventEnd,
+        location: this.props.pendingEvent.location,
+        curId: this.props.pendingEvent.curId,
+        calOwner: this.props.pendingEvent.ownerId,
+        date: this.props.pendingEvent.eventDate
+      }
+
+      const displayObj = {
+        title: this.props.pendingEvent.title,
+        content: this.props.pendingEvent.content,
+        startTime: this.timeFormater(this.props.pendingEvent.eventStart),
+        endTime: this.timeFormater(this.props.pendingEvent.eventEnd),
+        location: this.props.pendingEvent.location,
+        curId: this.props.pendingEvent.curId,
+        date: this.props.pendingEvent.eventDate
+      }
+
+      if(this.props.location.pathname.includes("explore")){
+        ExploreWebSocketInstance.sendSocialEvent(eventObj)
+
+      } else {
+        console.log('authAxios here')
+        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent', {
+          title: this.props.pendingEvent.title,
+          content: this.props.pendingEvent.content,
+          startTime: this.props.pendingEvent.eventStart,
+          endTime: this.props.pendingEvent.eventEnd,
+          location: this.props.pendingEvent.location,
+          curId: this.props.pendingEvent.curId,
+          calOwner: this.props.pendingEvent.ownerId,
+          date: this.props.pendingEvent.eventDate
+        })
+      }
+
+
+      this.openNotification('bottomLeft', displayObj)
+      this.props.onClose();
+
+    }
+
+  }
+
+  openNotification = (placement, info) => {
+    // The info parameter will be used to add stuff into the descrption
+
+    const title = this.capitalize(info.title)
+
+  notification.info({
+    message: `New Social Event Posted`,
+    description:
+      'You added an public event '+title+' on '+info.startTime+' to '+info.endTime,
+    placement,
+  });
+};
+
 
   render(){
     console.log(this.props)
+
     let title = ""
     let content = ""
     let location = ""
@@ -43,6 +113,7 @@ class PendingSocialEventModal extends React.Component{
     let startTime = ""
     let endTime = ""
     let user = ""
+    let userprofile = ""
 
     if(this.props.pendingEvent) {
       if(this.props.pendingEvent.title){
@@ -67,6 +138,9 @@ class PendingSocialEventModal extends React.Component{
     if(this.props.selectedUser){
       user = this.props.selectedUser
     }
+    if(this.props.userprofile){
+      userprofile = "http://127.0.0.1:8000"+this.props.userprofile
+    }
 
     return (
       <Modal
@@ -79,15 +153,23 @@ class PendingSocialEventModal extends React.Component{
         </div>
 
         <div className = "pendingEventCard">
-          <span className = "title"> Title: {title} </span>
+          <span className = "title"> {this.capitalize(title)} </span>
+          <div className = "secondRow">
+          <span className = "times"><i class="far fa-clock"></i> {this.timeFormater(startTime)}-{this.timeFormater(endTime)}</span>
+          <span className = "hostPic"> Host: <Avatar src = {userprofile} /> </span>
+          </div>
+          <div className = "location"><i class="fas fa-map-marker-alt"></i> {this.capitalize(location)} </div>
           <br />
-          <span className = "content"> Content: {content} </span>
-          <br />
-          <span className = "location">Location: {location} </span>
-          <br />
-          <span className = "times">{this.timeFormater(startTime)}-{this.timeFormater(endTime)}</span>
-          <br />
-          <span></span>
+          <div className = "content">{this.capitalize(content)} </div>
+
+        </div>
+        <div className = "pendingButtons">
+        <div
+        className = "pendingDeclineButton"> Decline </div>
+        <div
+        onClick = {() => this.onAcceptEvent()}
+        className = "pendingAcceptButton"> Accept </div>
+
         </div>
       </Modal>
 

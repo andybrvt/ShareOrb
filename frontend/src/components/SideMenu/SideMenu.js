@@ -183,7 +183,7 @@ class SideMenu extends React.Component {
 
 
       <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', background:'white' }}>
-        <p class ="show-sidebar">
+        <p class ="">
                 <aside class="sidebar" >
                 <div class="toggle">
                   {/*
