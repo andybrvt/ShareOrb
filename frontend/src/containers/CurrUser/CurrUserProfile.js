@@ -13,7 +13,7 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 import ChangeProfilePic from './ChangeProfilePic';
 import FollowList from '../../components/UserProfiles/FollowList';
 import './CurrUserProfile.css';
-
+import { EditOutlined } from '@ant-design/icons';
 
 import {
   Button,
@@ -280,6 +280,9 @@ class CurrUserProfile extends React.Component{
          className = 'editProfileButton'>
            Edit Profile
          </div>
+
+
+         
 
        </div>
 

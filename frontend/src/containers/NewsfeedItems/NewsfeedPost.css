@@ -113,9 +113,10 @@
 
 
 
-.boldLikeComment{
+.boldLikeComment {
+  font-weight: 225px;
   /* font-weight: bold; */
-
+  /* font-we */
   /* background-color: blue; */
   color:black;
 
