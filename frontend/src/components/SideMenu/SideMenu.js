@@ -208,7 +208,7 @@ class SideMenu extends React.Component {
                       style = {{
                       color: 'black',
                       marginLeft:'20%',
-                      fontSize:'24px',
+                      fontSize:'20px',
                     }}>
                       {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
 
@@ -264,21 +264,6 @@ class SideMenu extends React.Component {
 
 
         */}
-      <span
-
-        href="#collapseExample" role = "button"
-        class="burgerTest js-menu-toggle"
-        style = {{
-        color: 'black',
-
-        marginLeft:'15%',
-        fontSize:'20px',
-      }}>
-        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-
-          onClick: this.toggle,
-        })}
-      </span>
 
 
 
