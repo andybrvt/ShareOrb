@@ -61,5 +61,6 @@ urlpatterns = [
 
 	path('notification', views.NotificationView.as_view(), name = 'notification'),
 	path('notification/create', views.NotificationCreateView.as_view(), name = 'create_notification'),
+	path('notification/pendingPic/<slug:curId>/<slug:ownerId>', views.PendingPicNotificationView.as_view(), name = 'create_pending_pic_noti'),
 	path('post', views.NewPostingView.as_view(), name = 'new_posting')
 ]

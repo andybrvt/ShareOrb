@@ -347,9 +347,32 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 class NotificationSerializer(serializers.ModelSerializer):
 
+    get_pendingImages = serializers.StringRelatedField(many = True)
+
     class Meta:
         model = CustomNotification
-        fields = "__all__"
+        # fields = "__all__"
+        fields = (
+            'id',
+            'type',
+            'recipient',
+            'actor',
+            'verb',
+            'description',
+            'timestamp',
+            'minDate',
+            'maxDate',
+            'eventId',
+            'pendingEventTitle',
+            'pendingEventContent',
+            'pendingEventLocation',
+            'pendingEventCurId',
+            'pendingCalendarOwnerId',
+            'pendingEventDate',
+            'pendingEventStartTime',
+            'pendingEventEndTime',
+            'get_pendingImages'
+        )
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

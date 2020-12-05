@@ -425,6 +425,58 @@ class NotificationCreateView(generics.ListCreateAPIView):
     queryset = models.CustomNotification.objects.all()
 
 
+class PendingPicNotificationView(APIView):
+    # This view will be used specifically to make the notification that has
+    # the pendign pictures
+
+    # curId will be the actor (the person who is asking to approvae the picture)
+    # ownerId will be the person approvign(reciever)
+    def post(self, request, curId, ownerId, *args, **kwargs):
+        print(request.data)
+        # So what you are doing, the first thing you have to do is create
+        # the notification using the curId as the actor, ownerId as the reciever
+        # and then since you are can only post pictures on the current day, you
+        # can call the time zone now. Once you create the notification then you
+        # will then start creating the pendingimages objects then return it
+
+        # the ownerId will be the reciever
+        actor = get_object_or_404(models.User, id = curId)
+        recipient = get_object_or_404(models.User, id = ownerId)
+
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+
+        print(time)
+
+        # When making the new notification the type will be pending_social_pics
+        notification = models.CustomNotification.objects.create(
+            type = "pending_social_pics",
+            actor = actor,
+            recipient = recipient,
+            verb = "wants to post a picture on your social calendar",
+            pendingEventDate =time
+        )
+
+        # Now we will loop through all the pictures that were sent into the backend
+        # and then make the pendingsoicalPic objects for each one of them and then
+        # link it up with the correct notification
+        print("success")
+        for i in range(len(request.data)):
+            print(request.data['image['+str(i)+']'])
+
+            pendingPicObj = models.PendingSocialPics.objects.create(
+                itemImage = request.data['image['+str(i)+']'],
+                creator = actor,
+                notification = notification
+            )
+
+        # serializer = serializers.NotificationSerializer(notification).data
+
+        print(notification.id)
+
+        return Response(notification.id)
+
+
 class UserSocialPostContentTypeView(generics.ListCreateAPIView):
     serializer_class = serializers.UserSocialNormPostSerializer
     queryset = models.UserSocialNormPost.objects.all()

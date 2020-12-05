@@ -27,6 +27,7 @@ class SocialCalCellView(generics.ListAPIView):
 class SocialCalUploadPic(APIView):
     # parser_classes = (FormParser, MultiPartParser)
     def post(self, request, id, *args, **kwargs):
+        print(request.data)
         # This is to adjust the time to the correct timezone
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")

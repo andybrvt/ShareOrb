@@ -38,6 +38,7 @@ import ava1 from '../../components/images/avatar.jpg'
 import SocialUploadPicModal from './SocialUploadPicModal';
 import SocialEventPostModal from './SocialEventPostModal';
 import SocialCellCoverEvents from './SocialCellCoverEvents';
+import NotificationWebSocketInstance from '../../notificationWebsocket';
 import './SocialCalCSS/SocialCal.css';
 
 
@@ -747,26 +748,43 @@ class SocialCalendar extends React.Component{
         }
       }
 
-      const curId = this.props.profile.id
+      // This will be the current user
+      const curId = this.props.curId
+
+      // This will be the owner of the calendar Id
+      const ownerId = this.props.profile.id
       // formData.append('imgList',fileList)
 
-      authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+curId,
-        formData,
-        {headers: {"content-type": "multipart/form-data"}}
 
-      )
-      .then(res=> {
-        console.log(res.data)
-        if(res.data.coverPicChange){
-          if(res.data.created){
-            this.props.addSocialCell(res.data.cell)
-          } else {
-            // when a new cell is not made
-            console.log('hit here')
-            this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
+      if(curId === ownerId){
+        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+ownerId,
+          formData,
+          {headers: {"content-type": "multipart/form-data"}}
+
+        )
+        .then(res=> {
+          console.log(res.data)
+          if(res.data.coverPicChange){
+            if(res.data.created){
+              this.props.addSocialCell(res.data.cell)
+            } else {
+              // when a new cell is not made
+              console.log('hit here')
+              this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
+            }
           }
-        }
+        })
+      } else {
+        authAxios.post('http://127.0.0.1:8000/userprofile/notification/pendingPic/'+curId+'/'+ownerId,
+          formData,
+          {headers: {"content-type": "multipart/form-data"}}
+      )
+      .then(res =>{
+        console.log(res.data)
       })
+        // NotificationWebSocketInstance.sendPendingSocialPics(formData)
+      }
+
       // maybe change this when we have channels working
       // window.location.reload(true)
       this.onCloseSocialCalPicModal();

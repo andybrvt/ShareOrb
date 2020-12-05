@@ -6,7 +6,6 @@ from django.utils import timezone
 from django.db.models.signals import post_save
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
-
 # from userprofile.models import UserSocialNormPost
 # from userprofile.models import User
 
@@ -107,6 +106,8 @@ class SocialCalItems(models.Model):
     #    #This will be the foreign key that connects the pictures and post with the correct calCell
 
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialPost', null = True)
+
+
 
     # Everything from here down would be for the events
     class Meta:

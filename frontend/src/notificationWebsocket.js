@@ -105,12 +105,32 @@ class WebSocketNotifications {
     })
   }
 
+  // This will send the pending photos for the social calendar into the backend
+  sendPendingSocialPics = (pictureFileList) => {
+
+    console.log(pictureFileList)
+    this.sendNotification({
+      command: 'send_pending_social_pics',
+      pictureFileList: pictureFileList
+    })
+  }
+
   sendNotification(data) {
     // this is good, it only sends 1 time
     // This will recieve information from onClickSend from PersonalProfile.js
     // and will send it to the userprofile.consumers
 
     // GOOD TILL HERE
+
+    console.log('send_notification')
+    try{
+      this.socketRef.send(JSON.stringify({...data }))
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  sendPicNotification(data){
     console.log('send_notification')
     try{
       this.socketRef.send(JSON.stringify({...data }))

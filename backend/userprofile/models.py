@@ -246,12 +246,40 @@ class CustomNotification(models.Model):
     pendingEventLocation = models.CharField(max_length = 255, blank = True)
     pendingEventCurId = models.IntegerField(blank = True, null = True)
     pendingCalendarOwnerId = models.IntegerField(blank = True, null = True)
+
+    # Pending event date will be used for the date that the pictures will be assoicated to
+    # assoicate it with the cal cell
     pendingEventDate = models.DateField(default = timezone.now, blank = True)
+
     pendingEventStartTime = models.TimeField(default = timezone.now, blank = True)
     pendingEventEndTime = models.TimeField(default = timezone.now, blank = True)
 
     def __str__(self):
         return str(self.recipient)
+
+    def get_pendingImages(self):
+        # This will call all the pending images that are assocated with the notification
+        return PendingSocialPics.objects.filter(notification = self).values_list('id', flat = True)
+
+# This model will be a temporary modal to hold the pending pictures. It will be linked
+# to a speicific notification. It will include a picture, the selected Date, creator (the person
+# who want to upload the pic on your calendar. Whne the perosn accepts the picture then
+# we will transfer all the pictures with the foregin key connected witht he notificaiton
+# to the approciate cal cell.
+class PendingSocialPics(models.Model):
+
+     created_at = models.DateTimeField(default = timezone.now)
+
+     # This will store the pending pictures
+     itemImage = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
+     # creator will be the person who want to upload the picture
+     creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='pending_pic_creator', on_delete= models.CASCADE)
+
+     #notification will be the notification that this picture is attached to
+     notification = models.ForeignKey(CustomNotification, related_name = "attached_noti", on_delete = models.CASCADE)
+
+     def __str__(self):
+         return str(self.id)
 
 
 # Explaination of how content type works
