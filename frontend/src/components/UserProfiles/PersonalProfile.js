@@ -403,7 +403,7 @@ class PersonalProfile extends React.Component{
             <div className = 'followItem'>
               <span
               className = 'postFollowWords'
-              >Post</span>
+              >Posts</span>
               <br />
               <span>{posts.length}</span>
             </div>
@@ -441,7 +441,7 @@ class PersonalProfile extends React.Component{
                   onClick = {() => this.openProfileEdit()}
                   type="primary"
                   shape="round"
-                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-edit"></i>}
                   style={{fontSize:'15px'}} size={'large'}>
 
                  Edit Profile
