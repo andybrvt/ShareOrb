@@ -775,14 +775,17 @@ class SocialCalendar extends React.Component{
           }
         })
       } else {
+        // Since it is better to add pictures with an http call. We will add pictures
+        // using an authaxios call then we will return the id of the notificaiton and then
+        // take that id and then sent it into the websocket.
         authAxios.post('http://127.0.0.1:8000/userprofile/notification/pendingPic/'+curId+'/'+ownerId,
           formData,
           {headers: {"content-type": "multipart/form-data"}}
       )
       .then(res =>{
-        console.log(res.data)
+        NotificationWebSocketInstance.sendPendingSocialPics(res.data)
+
       })
-        // NotificationWebSocketInstance.sendPendingSocialPics(formData)
       }
 
       // maybe change this when we have channels working

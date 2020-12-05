@@ -105,13 +105,14 @@ class WebSocketNotifications {
     })
   }
 
-  // This will send the pending photos for the social calendar into the backend
-  sendPendingSocialPics = (pictureFileList) => {
+  // This will send the pending photos notification for the social
+  // calendar into the backend. It recieved information from the http
+  // call and then send inot websocket
+  sendPendingSocialPics = (notificationId) => {
 
-    console.log(pictureFileList)
     this.sendNotification({
       command: 'send_pending_social_pics',
-      pictureFileList: pictureFileList
+      notificationId: notificationId
     })
   }
 
@@ -130,14 +131,7 @@ class WebSocketNotifications {
     }
   }
 
-  sendPicNotification(data){
-    console.log('send_notification')
-    try{
-      this.socketRef.send(JSON.stringify({...data }))
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
+
 
 
   state() {
