@@ -208,7 +208,7 @@ class SideMenu extends React.Component {
                       style = {{
                       color: 'black',
                       marginLeft:'20%',
-                      fontSize:'24px',
+                      fontSize:'20px',
                     }}>
                       {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
 
@@ -264,21 +264,6 @@ class SideMenu extends React.Component {
 
 
         */}
-      <span
-
-        href="#collapseExample" role = "button"
-        class="burgerTest js-menu-toggle"
-        style = {{
-        color: 'black',
-
-        marginLeft:'15%',
-        fontSize:'20px',
-      }}>
-        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-
-          onClick: this.toggle,
-        })}
-      </span>
 
 
 
@@ -294,8 +279,8 @@ class SideMenu extends React.Component {
            dropdownMatchSelectWidth={400}
            style={{
             // marginLeft:150,
-            marginLeft:'25%',
-            marginRight:'20%', width: 400,
+            marginLeft:'35%',
+            marginRight:'27%', width: 400,
            // backgroundColor: 'red'
          }}
 
@@ -317,21 +302,21 @@ class SideMenu extends React.Component {
 
     <Badge
 
-    count = {this.props.notifications.length}>
-         <Button
-
+      count = {this.props.notifications.length}>
+      <Button
+        
          onClick = {() => this.onShowNotification()}
-
          >
           <Notifications {...this.props}/>
-          </Button>
+      </Button>
     </Badge>
     </span>
 
 
     <span
     style = {{
-        marginLeft:'20px',
+      float:'right',
+      marginRight:'50px',
     }}
     >
          <Dropdown overlay={

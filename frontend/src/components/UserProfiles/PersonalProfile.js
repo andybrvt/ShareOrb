@@ -6,7 +6,7 @@ import { authAxios } from '../util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
 import { Button, Modal, Avatar } from 'antd';
-import { RetweetOutlined } from '@ant-design/icons';
+import { RetweetOutlined, EditOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import * as exploreActions from '../../store/actions/explore';
@@ -403,7 +403,7 @@ class PersonalProfile extends React.Component{
             <div className = 'followItem'>
               <span
               className = 'postFollowWords'
-              >Post</span>
+              >Posts</span>
               <br />
               <span>{posts.length}</span>
             </div>
@@ -437,13 +437,15 @@ class PersonalProfile extends React.Component{
 
             <div className = 'selfProfileButtons'>
 
+               <Button
+                  onClick = {() => this.openProfileEdit()}
+                  type="primary"
+                  shape="round"
+                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-edit"></i>}
+                  style={{fontSize:'15px'}} size={'large'}>
 
-              <div
-              onClick = {() => this.openProfileEdit()}
-              className = 'editProfileButton'>
-                Edit Profile
-              </div>
-
+                 Edit Profile
+               </Button>
             </div>
 
             :

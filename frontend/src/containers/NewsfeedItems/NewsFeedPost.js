@@ -374,13 +374,15 @@ class NewsfeedPost extends React.Component {
 
         </div>
 
-        <p style={{marginTop:'15px', fontSize: '14px', color:'black'}}>
+        <p style={{ fontSize: '14px', color:'black'}}>
                   {
 
                      ((this.props.data.caption).length>140)?
                      <div class="photoText">
 
                          <span>
+                           @{this.props.data.user.username}
+                           &nbsp;
                           {this.props.data.caption.substring(0,140)}
                          </span>
 
@@ -398,7 +400,11 @@ class NewsfeedPost extends React.Component {
                      <div style={{display:'flex'}}>
                        <div class="photoText">
 
+
+
                            <span>
+                             @{this.props.data.user.username}
+                             &nbsp;
                             {this.props.data.caption}
                            </span>
 

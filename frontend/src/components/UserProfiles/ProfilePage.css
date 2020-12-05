@@ -33,6 +33,11 @@
   /* background-color: blue; */
 }
 
+.editProfile{
+  /* padding:50px; */
+  padding:10px;
+}
+
 .profileName {
   /* background-color: red; */
   font-size: 45px;
