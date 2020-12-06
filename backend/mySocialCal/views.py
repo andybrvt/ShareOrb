@@ -10,6 +10,7 @@ from rest_framework import viewsets
 from datetime import datetime
 from django.utils import timezone
 from userprofile.models import User
+from userprofile.models import CustomNotification
 import pytz
 from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser

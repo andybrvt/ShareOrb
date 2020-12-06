@@ -23,6 +23,7 @@ from .models import UserSocialNormPost
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalComment
 from mySocialCal.models import SocialCalEvent
+from mySocialCal.models import SocialCalItems
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
 from mySocialCal.serializers import SocialCalEventSerializer
@@ -926,6 +927,41 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         self.send_new_explore(content)
 
+    def approve_social_pics(self, data):
+        # This function will post the approved pictures on teh right place of the
+        # social cal. This function will recieve the id of the custom notification
+        # and the pull the pictuures and then add the pictures into the social
+        # cal. Then information will be sent into the front end to update the social
+        # cal
+        print(data)
+        # First thing is grab the notification
+        notification = get_object_or_404(CustomNotification, id = data['notificationId'])
+        serializedNotification = NotificationSerializer(notification).data
+        print(serializedNotification)
+
+        # Now we will get the social cal cell
+        calOwner = get_object_or_404(User, id = data['ownerId'])
+        socialCalCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = calOwner,
+            socialCaldate = data['eventDate']
+        )
+
+        # Then you will lopo through each of the picture that is in the custom notificaiton
+        # and then add those into social cal items along with foreign key to the
+        # social cal cell
+        imgOwner = get_object_or_404(User, id = data['curId'])
+        for items in serializedNotification['get_pendingImages']:
+            image = items['itemImage']
+            image = image.lstrip("/media")
+            SocialCalItems.objects.create(
+                creator = imgOwner,
+                itemUser = calOwner,
+                itemImage = image,
+                calCell = socialCalCell
+            )
+
+
+        # Add the path to send information into the front end here
 
     def send_new_follow(self, followObj):
         # This function is used to send follow objs into the websocket and to everyone
@@ -1016,6 +1052,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.addUserCloseFriend(data)
         if data['command'] == 'remove_user_close_friend':
             self.removeUserCloseFriend(data)
+        if data['command'] == 'approve_social_pics':
+            self.approve_social_pics(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)

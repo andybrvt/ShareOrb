@@ -8,6 +8,7 @@ from .models import SocialCalEvent
 from .models import SocialEventMessages
 from .models import SocialCalCell
 from .models import SocialCalComment
+from userprofile.models import CustomNotification
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
 from .serializers import SocialCalEventSerializer
@@ -371,6 +372,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         self.send_info_cal_cell(content)
 
 
+
+
     def send_info_cal_cell (self, calCellObj):
         # This will be used ot send the info into the front end
         channel_layer = get_channel_layer()
@@ -425,6 +428,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.add_user_social_event_M(data)
         if data['command'] == 'remove_user_social_event_M':
             self.remove_user_social_event_M(data)
+
 
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']

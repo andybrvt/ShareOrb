@@ -42,6 +42,7 @@ class UserPostList extends React.Component{
     if(renderList.length !== 0 ){
       var boxes = []
       for (let i = 0; i< renderList.length; i++ ){
+        console.log(renderList[i])
         if(renderList[i].post.post_images){
           let imagesList = renderList[i].post.post_images
           console.log(renderList[i])

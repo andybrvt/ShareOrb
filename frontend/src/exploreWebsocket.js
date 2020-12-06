@@ -358,6 +358,23 @@ class WebSocketExplore {
     })
   }
 
+  sendAcceptedSocialPics = (notificationId, ownerId, eventDate, curId) => {
+    // This function will be when the curUser accepts the pending of picturs
+    // of users. This function since we are trying to post pictures and we
+    // already have the pictures in the notifcationId, we will just call it in
+    // the back end and then add it to the social cal. (We will do a get or create
+    // on the soical cal
+
+    this.sendExplore({
+      notificationId: notificationId,
+      ownerId: ownerId,
+      eventDate: eventDate,
+      curId: curId,
+      command: 'approve_social_pics'
+    })
+
+  }
+
 
 
   sendExplore(data){

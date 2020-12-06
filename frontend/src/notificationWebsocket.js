@@ -116,6 +116,8 @@ class WebSocketNotifications {
     })
   }
 
+  
+
   sendNotification(data) {
     // this is good, it only sends 1 time
     // This will recieve information from onClickSend from PersonalProfile.js

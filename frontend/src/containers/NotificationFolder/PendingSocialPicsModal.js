@@ -15,6 +15,53 @@ class PendingSocialPicsModal extends React.Component{
   }
 
 
+  onAcceptPics = () => {
+    // This function will be called when you accept the followerfriend to post pics on
+    // on your calendar. This function will be similar to the handle picture upload in
+    // the social calendar. Like that, it will make an http call for all the pics
+    // and then return an object that contains all the pics into the weboscket
+
+
+    // OwnerId will just be the current user who is approving the notification
+    let ownerId = ""
+    let notificationId = ""
+    let date = ""
+    let curId = ""
+    if(this.props.ownerId){
+      ownerId = this.props.ownerId
+    }
+    if(this.props.notificationId){
+      notificationId = this.props.notificationId
+    }
+    if(this.props.eventDate){
+      date = this.props.eventDate
+    }
+
+    // curId will be the person that owns the pending pictures
+    if(this.props.curId){
+      curId = this.props.curId
+    }
+
+
+    if(this.props.pendingPictures){
+      if(this.props.location.pathname.includes("explore")){
+        //  put the websocket path here becuase if you are on an explore
+        // you are on one of the explore websocket and the explore weboskcet shold
+        // work. Put another condition wher eit has to be your ussername as well
+        ExploreWebSocketInstance.sendAcceptedSocialPics(notificationId, ownerId, date, curId)
+
+
+      } else {
+        // This will be where we just put the http call because you are not
+        // on your profile calendar. So you do not need to see things in real
+        // time
+      }
+
+
+    }
+
+  }
+
   render(){
 
     console.log(this.props)
@@ -31,9 +78,12 @@ class PendingSocialPicsModal extends React.Component{
     }
     if(this.props.pendingPictures){
       imageList = this.props.pendingPictures
-
+    }
+    if(this.props.eventDate){
+      date = this.props.eventDate
     }
 
+    console.log(date)
 
 
 
@@ -48,7 +98,9 @@ class PendingSocialPicsModal extends React.Component{
 
       <div className = "pendingButtons">
       <div className = "pendingDeclineButton"> Decline </div>
-      <div className = "pendingAcceptButton"> Accept </div>
+      <div
+      onClick = {() => this.onAcceptPics()}
+      className = "pendingAcceptButton"> Accept </div>
       </div>
 
       </Modal>

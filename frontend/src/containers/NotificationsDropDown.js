@@ -24,7 +24,12 @@ class NotificationsDropDown extends React.Component{
     pendingEvent: {},
     pendingPictures: {},
     selectedUser: "",
-    selectedUserProfile: ""
+    selectedUserProfile: "",
+    // The notification id will be the that of the notification. This is mostly
+    // used for the pending picture notificaitons. Same with eventDate
+    notificationId: "",
+    eventDate: "",
+    selectedUserId:""
   };
 
   handleMenuClick = (e) => {
@@ -172,12 +177,15 @@ class NotificationsDropDown extends React.Component{
     })
   }
 
-  onOpenPendingPics = (pendingPicObj, selectedUser, selectedUserProfile) => {
+  onOpenPendingPics = (pendingPicObj, selectedUser, selectedUserProfile, notificationId, eventDate,selectedUserId) => {
      this.setState({
        showPendingPics: true,
        pendingPictures: pendingPicObj,
        selectedUser: selectedUser,
-       selectedUserProfile: selectedUserProfile
+       selectedUserProfile: selectedUserProfile,
+       notificationId: notificationId,
+       eventDate:eventDate,
+       selectedUserId: selectedUserId
      })
   }
 
@@ -187,7 +195,10 @@ class NotificationsDropDown extends React.Component{
       showPendingPics: false,
       pendingPictures: {},
       selectedUser: "",
-      selectedUserProfile: ""
+      selectedUserProfile: "",
+      notificationId: "",
+      eventDate: "",
+      selectedUserId: ""
     })
   }
 
@@ -779,7 +790,10 @@ class NotificationsDropDown extends React.Component{
         onClick = {() => this.onOpenPendingPics(
           notifications[i].get_pendingImages,
           notifications[i].actor.username,
-          notifications[i].actor.profile_picture
+          notifications[i].actor.profile_picture,
+          notifications[i].id,
+          notifications[i].pendingEventDate,
+          notifications[i].actor.id
          )}
         className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
@@ -881,6 +895,10 @@ class NotificationsDropDown extends React.Component{
       selectedUser = {this.state.selectedUser}
       userprofile = {this.state.selectedUser}
       location = {this.props.location}
+      ownerId = {this.props.curId}
+      notificationId = {this.state.notificationId}
+      eventDate = {this.state.eventDate}
+      curId = {this.state.selectedUserId}
       />
       </div>
     )
@@ -890,6 +908,7 @@ class NotificationsDropDown extends React.Component{
 const mapStateToProps = state => {
   return {
     showNotification: state.notifications.showNotification,
+    curId: state.auth.id
 
   }
 }
@@ -902,4 +921,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(NotificationsDropDown);
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationsDropDown);
