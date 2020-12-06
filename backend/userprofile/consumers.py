@@ -269,6 +269,23 @@ class NotificationConsumer(JsonWebsocketConsumer):
             }
 
             self.send_new_notification(content)
+        if data['command'] == "send_pending_social_pics":
+            # So the send pending social pics is a bit differnet from all the other
+            # websocket becuase it involes sending images. So since the notification
+            # for the pending pictures was already made we just have to call it
+            # from the id
+            notification = get_object_or_404(CustomNotification, id = data['notificationId'])
+
+            serializer = NotificationSerializer(notification)
+            print(notification.recipient.username)
+            content = {
+                "command": "new_notification",
+                "notification": json.dumps(serializer.data),
+                "recipient": notification.recipient.username
+            }
+
+            self.send_new_notification(content)
+
 
 
 
@@ -475,6 +492,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_edited_event_notification':
             self.send_personalCal_event_notification(data)
         if data['command'] == 'send_pending_social_event':
+            self.send_social_cal_notification(data)
+        if data['command'] == 'send_pending_social_pics':
             self.send_social_cal_notification(data)
     def new_notification(self, event):
         notification = event['notification']

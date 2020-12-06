@@ -7,6 +7,7 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
 from userprofile.models import CustomNotification
+from userprofile.models import PendingSocialPics
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.models import SocialCalCell
@@ -377,7 +378,18 @@ class NotificationSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
+        pendingImageList = []
+        for images in data['get_pendingImages']:
+            image = PendingSocialPicsSerializer(models.PendingSocialPics.objects.get(id = images)).data
+            pendingImageList.append(image)
+        data['get_pendingImages'] = pendingImageList
         return data
+
+class PendingSocialPicsSerializer(serializers.ModelSerializer):
+    # This serializer will serialized the pendign events
+    class Meta:
+        model = PendingSocialPics
+        fields = ("id", "itemImage", "creator")
 
 class UserSocialNormPostRelatedField(serializers.RelatedField):
     def to_representation(self, instance):
