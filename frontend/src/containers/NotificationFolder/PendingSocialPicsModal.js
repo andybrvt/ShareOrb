@@ -46,10 +46,10 @@ class PendingSocialPicsModal extends React.Component{
       Would you like to allow {this.capitalize(user)} to post these pictures on {date} on your social calendar?
       <PendingPictureCarousel items = {imageList} />
 
-      <div
-      className = ""> Decline </div>
-      <div
-      className = ""> Accept </div>
+      <div className = "pendingButtons">
+      <div className = "pendingDeclineButton"> Decline </div>
+      <div className = "pendingAcceptButton"> Accept </div>
+      </div>
 
       </Modal>
 

@@ -4,6 +4,7 @@ import {
   RightCircleOutlined,
   LeftCircleOutlined
 } from '@ant-design/icons';
+import './PendingEventCard.css';
 
 
 class PendingPictureCarousel extends React.Component{
@@ -37,9 +38,9 @@ class PendingPictureCarousel extends React.Component{
 
       for (let i = 0 ; i< pictureList.length; i++){
         socialItems.push(
-          <div className = ''>
+          <div className = 'pendingPicRoll'>
             <img
-            className = ''
+            className = 'pendingSocialImg'
             src ={'http://127.0.0.1:8000'+pictureList[i].itemImage} />
           </div>
         )
@@ -69,10 +70,8 @@ class PendingPictureCarousel extends React.Component{
     };
 
     return (
-      <div className = ''>
-        <LeftCircleOutlined
-        className = 'socialArrowLeft'
-        onClick = {this.previous} />
+      <div className = 'pendingEventCard'>
+
         <Carousel
         arrows = {true}
         effect = 'null'
@@ -80,6 +79,9 @@ class PendingPictureCarousel extends React.Component{
         afterChange={onChange}>
           {this.renderPictures(itemList)}
         </Carousel>
+        <LeftCircleOutlined
+        className = 'socialArrowLeft'
+        onClick = {this.previous} />
         <RightCircleOutlined
         className = 'socialArrowRight'
         onClick = {this.next} />

@@ -13,6 +13,7 @@
   margin-top: 12px;
 }
 
+/* These css is used for the event pending */
 .pendingEventCard .title{
   /* color: red; */
   font-size: 35px;
@@ -81,4 +82,33 @@
   left: 29%;
   top: 11px;
   cursor: pointer;
+}
+
+
+/* This is for the pending pictures */
+.pendingEventCard .socialArrowLeft{
+  position: absolute;
+  left: 4%;
+  top: 50%;
+  font-size: 30px;
+}
+
+.pendingEventCard .socialArrowRight{
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  font-size: 30px;
+
+}
+
+.pendingPicRoll {
+  overflow: hidden;
+  height: 400px;
+}
+
+.pendingPicRoll .pendingSocialImg{
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%)
 }
