@@ -13,14 +13,16 @@ import PickEventSyncModal from './PersonalCalendar/EventSyncForms/PickEventSyncM
 import * as dateFns from 'date-fns';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import PendingSocialEventModal from './NotificationFolder/PendingSocialEventModal';
-
+import PendingSocialPicsModal from './NotificationFolder/PendingSocialPicsModal';
 // This one is for holding the notifications and all its function
 
 class NotificationsDropDown extends React.Component{
   state = {
     visible: false,
     showPendingEvent: false,
+    showPendingPics: false,
     pendingEvent: {},
+    pendingPictures: {},
     selectedUser: "",
     selectedUserProfile: ""
   };
@@ -167,6 +169,25 @@ class NotificationsDropDown extends React.Component{
       pendingEvent: {},
       selectedUser: "",
       selectedUserProfile: "",
+    })
+  }
+
+  onOpenPendingPics = (pendingPicObj, selectedUser, selectedUserProfile) => {
+     this.setState({
+       showPendingPics: true,
+       pendingPictures: pendingPicObj,
+       selectedUser: selectedUser,
+       selectedUserProfile: selectedUserProfile
+     })
+  }
+
+  onClosePendingPics = () => {
+    // This function will cose the modal of the pending pic
+    this.setState({
+      showPendingPics: false,
+      pendingPictures: {},
+      selectedUser: "",
+      selectedUserProfile: ""
     })
   }
 
@@ -755,7 +776,11 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
 
         <li
-
+        onClick = {() => this.onOpenPendingPics(
+          notifications[i].get_pendingImages,
+          notifications[i].actor.username,
+          notifications[i].actor.profile_picture
+         )}
         className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
           <Avatar size = {55} style ={{
@@ -846,6 +871,15 @@ class NotificationsDropDown extends React.Component{
       pendingEvent = {this.state.pendingEvent}
       selectedUser = {this.state.selectedUser}
       userprofile = {this.state.selectedUserProfile}
+      location = {this.props.location}
+      />
+
+      <PendingSocialPicsModal
+      visible = {this.state.showPendingPics}
+      onClose = {this.onClosePendingPics}
+      pendingPictures = {this.state.pendingPictures}
+      selectedUser = {this.state.selectedUser}
+      userprofile = {this.state.selectedUser}
       location = {this.props.location}
       />
       </div>
