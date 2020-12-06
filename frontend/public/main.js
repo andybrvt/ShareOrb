@@ -8,17 +8,20 @@ $(function() {
 
 
 
-  	if ( $('p').hasClass('show-sidebar') ) {
-  		$('p').removeClass('show-sidebar');
+  	if ( $('div').hasClass('show-sidebar') ) {
+  		$('div').removeClass('show-sidebar');
   		$this.removeClass('active');
   	} else {
-  		$('p').addClass('show-sidebar');
+  		$('div').addClass('show-sidebar');
   		$this.addClass('active');
   	}
 
   	e.preventDefault();
 
   });
+
+
+
 
   // click outisde offcanvas
 	$(document).mouseup(function(e) {
@@ -28,6 +31,7 @@ $(function() {
 				$('p').removeClass('show-sidebar');
 				$('p').find('.js-menu-toggle').removeClass('active');
 			}
+
     }
 	});
 

@@ -38,15 +38,9 @@
   padding:10px;
 }
 
-.profileName {
-  /* background-color: red; */
-  font-size: 45px;
-  font-weight: 100px;
-  color: black;
-}
 
 .profileBio{
-  /* background-color: red; */
+  /* background-color: green; */
   padding: 40px 0px;
   width:550px;
   position: relative;
@@ -57,7 +51,7 @@
 
 .profileButtons{
   /* background-color: red; */
-  width: 510px;
+  width: 425px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -70,7 +64,7 @@
   /* background-color: red; */
   padding-top: 4px;
   /* position: absolute; */
-  width: 250px;
+  width: 200px;
   height: 38px;
   /* border: 1px solid; */
   background: deepskyblue;
@@ -79,8 +73,7 @@
   cursor: pointer;
   user-select: none;
   overflow: hidden;
-  z-index: 2;
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
 
 }
 
@@ -88,7 +81,7 @@
   /* background-color: red; */
   padding-top: 4px;
   /* position: absolute; */
-  width: 250px;
+  width: 200px;
   height: 38px;
   border: 1px solid;
   /* background: transparent; */
@@ -190,7 +183,7 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: blue;
-  height: 250px;
+  height: 200px;
   width: 1760px;
   overflow: hidden;
 }
@@ -202,12 +195,28 @@
   bottom: -100%;
 }
 
+.parentFlexContainer{
+  display: flex;
+   flex-direction: row;
+   margin-left: 750px;
+   margin-bottom: 20px;
+}
+.profileName {
+  /* background-color: red; */
+  font-size: 25px;
+  font-weight: 100px;
+  color: black;
+  margin-left: -50px;
+  margin-top: 75px
+
+}
+
 .profilePic{
   /* background-color: yellow; */
   width: 200px;
   height: 180px;
-  position: relative;
-  left: 50%;
+
+
   /* bottom:45%; */
   text-align: center;
   transform: translateX(-50%);
@@ -247,7 +256,7 @@
 /* This is for the tab changes */
 .profile-tabContainer {
   position:absolute;
-  top: 520px;
+  top: 450px;
   /* left: 40px; */
   bottom: 28px;
   width: 1760px;

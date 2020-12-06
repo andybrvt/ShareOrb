@@ -333,8 +333,7 @@ class PersonalProfile extends React.Component{
       // get following are the people taht are you are following, so they would be your
       // followers
       let username = ''
-      let firstName = ''
-      let lastName = ''
+
       let bio = ''
       let followers = []
       let following = []
@@ -351,12 +350,7 @@ class PersonalProfile extends React.Component{
         if(this.props.profile.username){
           username = this.props.profile.username
         }
-        if(this.props.profile.first_name){
-          firstName = this.props.profile.first_name
-        }
-        if(this.props.profile.last_name){
-          lastName = this.props.profile.last_name
-        }
+
         if(this.props.profile.bio){
           bio = this.props.profile.bio
         }
@@ -391,12 +385,12 @@ class PersonalProfile extends React.Component{
     console.log(friends)
 
       return (
+      <div>
+
         <div className = 'profileInfo'>
 
           <div>
-            <div className = 'profileName'>
-              {this.capitalize(firstName)} {this.capitalize(lastName)}
-            </div>
+
 
 
           <div className = 'profilePostFollow'>
@@ -459,12 +453,16 @@ class PersonalProfile extends React.Component{
                 Unfollow
               </div>
 
+
+
               :
 
-              <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
-                Follow
-              </div>
 
+              <Button
+                style={{fontSize:'18px'}}
+                onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                 className = 'followButton'
+                id="follow-button"> Follow </Button>
             }
 
 
@@ -539,6 +537,8 @@ class PersonalProfile extends React.Component{
 
 
         </div>
+
+      </div>
 
       )
 
@@ -686,7 +686,8 @@ class PersonalProfile extends React.Component{
       let followers = []
       let following = []
       let profilePic = ""
-
+      let firstName=""
+      let lastName=""
 
       if (this.props.profile){
         if(this.props.profile.get_followers){
@@ -700,13 +701,29 @@ class PersonalProfile extends React.Component{
         }
 
       }
+      if(this.props.profile.first_name){
+        firstName = this.props.profile.first_name
+      }
+      if(this.props.profile.last_name){
+        lastName = this.props.profile.last_name
+      }
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
+          <div class="parentFlexContainer">
+
+            {this.renderProfilePic()}
+
+            <span className = 'profileName'>
+              {this.capitalize(firstName)} {this.capitalize(lastName)}
+              <br/>
+              @admin
+            </span>
+
+          </div>
 
 
-        {this.renderProfilePic()}
         {this.onRenderProfileInfo()}
         {this.onRenderTabs()}
           <Modal

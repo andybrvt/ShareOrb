@@ -230,9 +230,9 @@ class SideMenu extends React.Component {
 
 
                   <div class="nav-menu">
-                    <ul>
-                      <li class="active"><a href="/home" class="d-flex align-items-center"> <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">Home</span></a></li>
-                      <li><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
+                    <ul class="sidebarList">
+                      <li><a href="/home" class="d-flex align-items-center"> <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">Home</span></a></li>
+                      <li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
                       <li><a href={"/chat/1"} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
                       <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
                         class="d-flex align-items-center">
@@ -245,7 +245,8 @@ class SideMenu extends React.Component {
                         class="d-flex align-items-center">
                         <SmileOutlined style={{marginRight:'10px'}}/>
                           <span class="menu-text">Social</span>
-                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span></a></li>
+                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span></a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -280,7 +281,7 @@ class SideMenu extends React.Component {
            style={{
             // marginLeft:150,
             marginLeft:'35%',
-            marginRight:'27%', width: 400,
+            marginRight:'20%', width: 450,
            // backgroundColor: 'red'
          }}
 
@@ -304,7 +305,7 @@ class SideMenu extends React.Component {
 
       count = {this.props.notifications.length}>
       <Button
-        
+
          onClick = {() => this.onShowNotification()}
          >
           <Notifications {...this.props}/>
@@ -316,7 +317,7 @@ class SideMenu extends React.Component {
     <span
     style = {{
       float:'right',
-      marginRight:'50px',
+      marginRight:'100px',
     }}
     >
          <Dropdown overlay={

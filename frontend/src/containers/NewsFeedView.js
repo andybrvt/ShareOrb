@@ -139,7 +139,7 @@ class NewsFeedView extends React.Component {
 				</div>
 
 				<Col style={{}} span={11}>
-
+				
 
 
 				<div>
@@ -280,7 +280,7 @@ class NewsFeedView extends React.Component {
 					>
 						<div
 							style = {{
-						
+
 							width: '400px',
 							background:'white',
 							// postion: 'fixed',
