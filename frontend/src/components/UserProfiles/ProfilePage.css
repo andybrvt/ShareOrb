@@ -158,12 +158,13 @@
   /* background-color: red; */
   display: flex;
   flex-direction: row;
-  padding: 0px 10px;
-  width: 650px;
+  padding: 0px 20px;
+  top:15px;
+  width: 450px;
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
-  left: 50%;
+  left: 46%;
   transform: translateX(-50%);
 }
 
@@ -174,8 +175,9 @@
 }
 
 .postFollowWords{
-  color: lightgrey;
-  font-size: 20px;
+  color:black;
+  font-weight: 375;
+  font-size: 18px;
 }
 
 .background{
@@ -204,11 +206,18 @@
 .profileName {
   /* background-color: red; */
   font-size: 25px;
-  font-weight: 100px;
+  font-weight: 400;
   color: black;
   margin-left: -50px;
-  margin-top: 75px
+  margin-top: 50px;
 
+}
+
+.profileUserName{
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 100px;
+    margin-left: -100px;
 }
 
 .profilePic{

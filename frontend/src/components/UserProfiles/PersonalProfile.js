@@ -399,7 +399,7 @@ class PersonalProfile extends React.Component{
               className = 'postFollowWords'
               >Posts</span>
               <br />
-              <span>{posts.length}</span>
+              <span class="postFollowWords">{posts.length}</span>
             </div>
             <div
             onClick = {() => this.onFollowerOpen()}
@@ -408,7 +408,7 @@ class PersonalProfile extends React.Component{
               className = 'postFollowWords'
               >Followers</span>
               <br />
-              <span>{followers.length}</span>
+              <span class="postFollowWords">{followers.length}</span>
             </div>
             <div
             onClick = {() => this.onFollowingOpen()}
@@ -417,7 +417,7 @@ class PersonalProfile extends React.Component{
               className = 'postFollowWords'
               >Following</span>
               <br />
-              <span>{following.length}</span>
+              <span class="postFollowWords">{following.length}</span>
             </div>
           </div>
 
@@ -711,34 +711,32 @@ class PersonalProfile extends React.Component{
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
-          <div class="parentFlexContainer">
+            <div class="parentFlexContainer">
+              {this.renderProfilePic()}
+              <span className = 'profileName'>
+                {this.capitalize(firstName)} {this.capitalize(lastName)}
+                <br/>
 
-            {this.renderProfilePic()}
-
-            <span className = 'profileName'>
-              {this.capitalize(firstName)} {this.capitalize(lastName)}
-              <br/>
-              @admin
-            </span>
-
-          </div>
+              </span>
+              <span class="profileUserName">{"@"+this.props.username}</span>
+            </div>
 
 
         {this.onRenderProfileInfo()}
+
         {this.onRenderTabs()}
           <Modal
           visible = {this.state.showProfileEdit}
           onCancel = {() => this.closeProfileEdit()}
           footer = {null}
-
           >
           <EditProfileForm
-          initialValues = {this.getInitialValue()}
-          profilePic = {profilePic}
-          onSubmit = {this.onSaveEdit}
-          changeProfilePic = {this.props.changeProfilePic}
-          changeProfilePicAuth = {this.props.changeProfilePicAuth}
-          curId = {this.props.currentId}
+            initialValues = {this.getInitialValue()}
+            profilePic = {profilePic}
+            onSubmit = {this.onSaveEdit}
+            changeProfilePic = {this.props.changeProfilePic}
+            changeProfilePicAuth = {this.props.changeProfilePicAuth}
+            curId = {this.props.currentId}
            />
           </Modal>
 
@@ -749,24 +747,24 @@ class PersonalProfile extends React.Component{
            />
 
           <Modal
-          visible ={this.state.followerShow}
-          onCancel = {this.onFollowerCancel}
-          footer = {null}
-          >
-          <span className ='followWord'> Followers</span>
-          <FollowList follow = {followers} />
-          </Modal>
+            visible ={this.state.followerShow}
+            onCancel = {this.onFollowerCancel}
+            footer = {null}
+            >
+            <span className ='followWord'> Followers</span>
+            <FollowList follow = {followers} />
+            </Modal>
 
 
 
           <Modal
-          visible = {this.state.followingShow}
-          onCancel = {this.onFollowingCancel}
-          footer = {null}
-          >
-          <span className = 'followWord'>Following</span>
-          <FollowList follow = {following}/>
-          </Modal>
+            visible = {this.state.followingShow}
+            onCancel = {this.onFollowingCancel}
+            footer = {null}
+            >
+            <span className = 'followWord'>Following</span>
+            <FollowList follow = {following}/>
+            </Modal>
 
 
 
