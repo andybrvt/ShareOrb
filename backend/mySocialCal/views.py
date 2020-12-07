@@ -11,6 +11,7 @@ from datetime import datetime
 from django.utils import timezone
 from userprofile.models import User
 from userprofile.models import CustomNotification
+from userprofile.serializers import NotificationSerializer
 import pytz
 from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
@@ -127,6 +128,45 @@ class SocialEventCreateView(APIView):
 
         socialCalEvent.persons.add(curUser)
         return Response('Uploaded pending social event')
+
+class SocialPictureCreateView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data) # consist of notificationId, ownerId, date, curId
+        # This function will pretty be the http version of teh approve_social_pics
+        # in the userprofile consumers. It is used to make the calcell or grab it
+        # and make the calendar items
+
+        notification = get_object_or_404(CustomNotification, id = request.data['notificationId'])
+        serializedNotification = NotificationSerializer(notification).data
+
+        # Now we will get the social cal cell
+        calOwner = get_object_or_404(User, id = request.data['ownerId'])
+        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+            socialCalUser = calOwner,
+            socialCaldate = request.data['date']
+        )
+
+        # Then you will loop through all the picutres that are in the notification
+        # and then add them to soicalitems that are assocated wit the soicalcalcells
+
+        imgOwner = get_object_or_404(User, id= request.data['curId'])
+        for items in serializedNotification['get_pendingImages']:
+            image = items['itemImage']
+            image = image.lstrip("/media")
+            if socialCalCell.coverPic == "":
+                socialCalCell.coverPic = image
+                socialCalCell.save()
+
+            models.SocialCalItems.objects.create(
+                creator = imgOwner,
+                itemUser = calOwner,
+                itemImage = image,
+                calCell = socialCalCell
+            )
+
+
+
+        return Response("Uploaded pending social picture")
 
 class ShowSocialEvents(generics.ListAPIView):
     serializer_class = serializers.SocialCalEventSerializer
