@@ -653,9 +653,9 @@ class PersonalProfile extends React.Component{
       return (
         <div className = 'profile-tabContainer'>
           <div className = 'profile-buttonContainer'>
-            <div className = 'profile-description_tab profile-Tab-Calendar'>
+            <p className = 'profile-description_tab profile-Tab-Calendar'>
              Calendar
-            </div>
+           </p>
 
 
             <div className = 'profile-description_tab profile-Tab'
