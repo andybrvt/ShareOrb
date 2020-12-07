@@ -135,11 +135,11 @@ class SocialEventPostModal extends React.Component{
 
   if(this.props.curId === this.props.calendarOwner){
     ExploreWebSocketInstance.sendSocialEvent(eventObj)
-    this.openNotification("bottomRight", displayObj)
+    this.onPendingNotification("bottomRight", displayObj)
   } else {
     NotificationWebSocketInstance.sendPendingSocialEvent(eventObj)
     const calOwner = this.props.calOwnerUsername
-    this.openPendingNotification("bottomRight", calOwner)
+    this.onPendingNotification("bottomRight", calOwner)
   }
 
   this.setState({

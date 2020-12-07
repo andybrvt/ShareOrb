@@ -81,11 +81,25 @@ class PendingSocialEventModal extends React.Component{
         })
       }
 
-
+      if(this.props.notificationId){
+        this.props.deleteNotification(this.props.notificationId)
+      }
       this.openNotification('bottomRight', displayObj)
+
       this.props.onClose();
 
     }
+
+  }
+
+  onDeclineEvents = () => {
+    // Used to decline social events
+    if(this.props.notificationId){
+      this.props.deleteNotification(this.props.notificationId)
+    }
+    this.openDeclineNotification("bottomRight")
+    this.props.onClose()
+
 
   }
 
@@ -101,6 +115,19 @@ class PendingSocialEventModal extends React.Component{
     placement,
   });
 };
+
+openDeclineNotification = (placement) => {
+  // This will show a small notificaiton to show that you decline a requestion
+
+
+  notification.info({
+    message: `Decline Social Event Request`,
+    description:
+      "You decline a social event request." ,
+    placement,
+  });
+}
+
 
 
   render(){
@@ -165,6 +192,7 @@ class PendingSocialEventModal extends React.Component{
         </div>
         <div className = "pendingButtons">
         <div
+        onClick = {() => this.onDeclineEvents()}
         className = "pendingDeclineButton"> Decline </div>
         <div
         onClick = {() => this.onAcceptEvent()}

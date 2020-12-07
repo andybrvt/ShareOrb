@@ -27,6 +27,7 @@ class PendingSocialPicsModal extends React.Component{
     let notificationId = ""
     let date = ""
     let curId = ""
+    let pictureLen = ""
     if(this.props.ownerId){
       ownerId = this.props.ownerId
     }
@@ -40,6 +41,9 @@ class PendingSocialPicsModal extends React.Component{
     // curId will be the person that owns the pending pictures
     if(this.props.curId){
       curId = this.props.curId
+    }
+    if(this.props.pendingPictures){
+      pictureLen = this.props.pendingPictures.length
     }
 
 
@@ -64,9 +68,55 @@ class PendingSocialPicsModal extends React.Component{
       }
 
 
+
+
     }
 
+    if(this.props.notificationId){
+      this.props.deleteNotification(this.props.notificationId)
+    }
+    this.openNotification("bottomRight", date, pictureLen)
+    this.props.onClose()
+
   }
+
+  onDeclinePics = () => {
+    // This function is called when you decline the pending pic
+    // it will mostly just close the modal. Decline the event
+    // and then delete the notification
+
+    if(this.props.notificationId){
+      this.props.deleteNotification(this.props.notificationId)
+    }
+    this.openDeclineNotification("bottomRight")
+    this.props.onClose()
+
+
+  }
+
+  openNotification = (placement, date, picLen) => {
+    // The info parameter will be used to add stuff into the descrption
+
+
+  notification.info({
+    message: `New Social Picture Posted`,
+    description:
+      "You added "+picLen+" to your social calendar on "+date,
+    placement,
+  });
+};
+
+openDeclineNotification = (placement) => {
+  // This will show a small notificaiton to show that you decline a requestion
+
+
+  notification.info({
+    message: `Decline Social Picture Request`,
+    description:
+      "You decline a social picture request." ,
+    placement,
+  });
+}
 
   render(){
 
@@ -103,7 +153,9 @@ class PendingSocialPicsModal extends React.Component{
       <PendingPictureCarousel items = {imageList} />
 
       <div className = "pendingButtons">
-      <div className = "pendingDeclineButton"> Decline </div>
+      <div
+      onClick = {() => this.onDeclinePics()}
+      className = "pendingDeclineButton"> Decline </div>
       <div
       onClick = {() => this.onAcceptPics()}
       className = "pendingAcceptButton"> Accept </div>

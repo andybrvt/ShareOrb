@@ -110,9 +110,9 @@ class NotificationsDropDown extends React.Component{
     })
   }
 
-  onDeleteNotifcation = (notificationId) => {
+  onDeleteNotification = (notificationId) => {
     console.log(notificationId)
-    this.deleteSideNotification('bottomLeft')
+    this.deleteSideNotification('bottomRight')
     authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
     this.props.deleteNotification(notificationId)
   }
@@ -155,7 +155,7 @@ class NotificationsDropDown extends React.Component{
   }
 
 
-  onOpenPendingEvent = (pendingEventObj, selectedUser, selectedUserProfile) => {
+  onOpenPendingEvent = (pendingEventObj, selectedUser, selectedUserProfile, notificationId) => {
     // This function will open the modal to show the user what the pending soical
     // event will look like
     this.setState({
@@ -163,7 +163,7 @@ class NotificationsDropDown extends React.Component{
       pendingEvent: pendingEventObj,
       selectedUser: selectedUser,
       selectedUserProfile: selectedUserProfile,
-
+      notificationId: notificationId
     })
   }
 
@@ -174,6 +174,7 @@ class NotificationsDropDown extends React.Component{
       pendingEvent: {},
       selectedUser: "",
       selectedUserProfile: "",
+      notificationId: ""
     })
   }
 
@@ -245,7 +246,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
           </h4>
         </li>
         )
@@ -272,7 +273,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
               </div>
           </h4>
         </li>
@@ -300,7 +301,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
               </div>
           </h4>
         </li>
@@ -380,7 +381,7 @@ class NotificationsDropDown extends React.Component{
             <Button type ='text'
              shape = 'circle'
              className = 'deleteButton'
-             onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }>
+             onClick = {()=> this.onDeleteNotification(notifications[i].id) }>
              X </Button>
           </h4>
         </li>
@@ -413,7 +414,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
               </div>
           </h4>
         </li>
@@ -490,7 +491,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }>
                X </Button>
 
           </h4>
@@ -521,7 +522,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }>
               X </Button>
               </div>
           </h4>
@@ -550,7 +551,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -578,7 +579,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -606,7 +607,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -637,7 +638,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -669,7 +670,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -701,7 +702,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -733,7 +734,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -756,7 +757,8 @@ class NotificationsDropDown extends React.Component{
           onClick = {() =>this.onOpenPendingEvent(
             pendingEventObj,
             notifications[i].actor.username,
-            notifications[i].actor.profile_picture
+            notifications[i].actor.profile_picture,
+            notifications[i].id
            )}
           className = 'notificationListContainer'>
           <div className = 'notificationIcon'>
@@ -777,7 +779,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -815,7 +817,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotifcation(notifications[i].id) }> X </Button>
+              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
               </div>
           </h4>
         </li>
@@ -886,6 +888,8 @@ class NotificationsDropDown extends React.Component{
       selectedUser = {this.state.selectedUser}
       userprofile = {this.state.selectedUserProfile}
       location = {this.props.location}
+      notificationId = {this.state.notificationId}
+      deleteNotification = {this.onDeleteNotification}
       />
 
       <PendingSocialPicsModal
@@ -899,6 +903,7 @@ class NotificationsDropDown extends React.Component{
       notificationId = {this.state.notificationId}
       eventDate = {this.state.eventDate}
       curId = {this.state.selectedUserId}
+      deleteNotification = {this.onDeleteNotification}
       />
       </div>
     )
