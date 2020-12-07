@@ -165,6 +165,7 @@ class SocialPictureCreateView(APIView):
             )
 
 
+        socialCalCell.save()
 
         return Response("Uploaded pending social picture")
 

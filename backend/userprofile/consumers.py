@@ -967,6 +967,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 calCell = socialCalCell
             )
 
+        socialCalCell.save()
+
         socialCalCellObj = SocialCalCellSerializer(socialCalCell).data
         content = {
             'command': 'approve_social_pics',
