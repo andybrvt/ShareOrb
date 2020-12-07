@@ -949,10 +949,17 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # Then you will lopo through each of the picture that is in the custom notificaiton
         # and then add those into social cal items along with foreign key to the
         # social cal cell
+
+        print("coverpic here")
+        print(socialCalCell.coverPic)
         imgOwner = get_object_or_404(User, id = data['curId'])
         for items in serializedNotification['get_pendingImages']:
             image = items['itemImage']
             image = image.lstrip("/media")
+            if socialCalCell.coverPic == "":
+                socialCalCell.coverPic = image
+                socialCalCell.save()
+
             SocialCalItems.objects.create(
                 creator = imgOwner,
                 itemUser = calOwner,
@@ -960,6 +967,16 @@ class ExploreConsumer(JsonWebsocketConsumer):
                 calCell = socialCalCell
             )
 
+        socialCalCellObj = SocialCalCellSerializer(socialCalCell).data
+        content = {
+            'command': 'approve_social_pics',
+            'socialCelCellObj':socialCalCellObj,
+            'created': created,
+            'reciever': socialCalCellObj['socialCalUser']['username']
+
+        }
+
+        self.send_new_explore(content)
 
         # Add the path to send information into the front end here
 

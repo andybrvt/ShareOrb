@@ -64,8 +64,8 @@ class App extends Component {
       this.props.addSocialCell.bind(this),
       this.props.addSocialEventJoinLeavePage.bind(this),
       this.props.editProfileAuth.bind(this),
-      this.props.addRemoveCloseFriend.bind(this)
-
+      this.props.addRemoveCloseFriend.bind(this),
+      this.props.addSocialCellCoverPic.bind(this)
     )
 
     EventPageWebSocketInstance.addCallbacks(
@@ -173,8 +173,10 @@ const mapDispatchToProps = dispatch => {
     addSocialEventJoinLeave: (socialEventList, cellId) => dispatch(exploreActions.addSocialEventJoinLeave(socialEventList, cellId)),
     addSocialEventJoinLeavePage: (socialEventList) => dispatch(exploreActions.addSocialEventJoinLeavePage(socialEventList)),
     addSocialCell: (newSocialCellObj) => dispatch(exploreActions.addSocialCell(newSocialCellObj)),
+    addSocialCellCoverPic: (coverPicture, cellId) => dispatch(exploreActions.addSocialCellCoverPic(coverPicture, cellId)),
     editProfileAuth: (editProfileObj) => dispatch(authActions.editProfileAuth(editProfileObj)),
     addRemoveCloseFriend: (friendList) => dispatch(authActions.addRemoveCloseFriend(friendList)),
+
 
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),

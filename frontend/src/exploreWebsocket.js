@@ -156,6 +156,29 @@ class WebSocketExplore {
       const friendList = parsedData.friendList
 
       this.callbacks['add_remove_close_friend'](friendList)
+    } else if(command === 'approve_social_pics'){
+      // This function will add in pending pictures to the social calendar in the
+      // appropriate cell
+      const socialCalCellObj = parsedData.socialCelCellObj
+
+      if(parsedData.created){
+        // if by approving the pending picture you created another social cell then
+        // you would just add it in like ususal
+
+        console.log('created pending pics')
+        this.callbacks['add_social_cell'](socialCalCellObj)
+
+      } else {
+        // This is for when the social cal cell is alrady created so you just have
+        // to add in more social cell items
+
+
+        // create call back here to search for the social cell and then add the pics
+        // in
+        // YOU HONELSTY JUST NEED TO ADD COVER PIC HERE
+        this.callbacks['add_cover_pic'](socialCalCellObj.coverPic, socialCalCellObj.id)
+
+      }
     }
 
 
@@ -170,7 +193,8 @@ class WebSocketExplore {
      addSocialCell,
      addSocialEventJoinLeavePage,
      editProfileAuth,
-     addRemoveCloseFriend
+     addRemoveCloseFriend,
+     addCoverPic,
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
@@ -179,6 +203,7 @@ class WebSocketExplore {
     this.callbacks['add_social_event_join_leave_page'] = addSocialEventJoinLeavePage
     this.callbacks['edit_profile_auth'] = editProfileAuth
     this.callbacks['add_remove_close_friend'] = addRemoveCloseFriend
+    this.callbacks['add_cover_pic'] = addCoverPic
   }
 
 

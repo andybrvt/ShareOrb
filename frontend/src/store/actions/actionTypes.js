@@ -88,7 +88,7 @@ export const CHANGE_PROFILE_PIC_AUTH = 'CHANGE_PROFILE_PIC_AUTH';
 export const EDIT_PROFILE_AUTH = 'EDIT_PROFILE_AUTH';
 
 // This will add the friendList to the current User friend list. Mostly acting on the
-// auth 
+// auth
 export const ADD_REMOVE_CLOSE_FRIEND = 'ADD_REMOVE_CLOSE_FRIEND';
 
 
@@ -102,7 +102,6 @@ export const ADD_REMOVE_CLOSE_FRIEND = 'ADD_REMOVE_CLOSE_FRIEND';
 // Add social cell cover pic will be when the cell already exist
 export const ADD_SOCIAL_CELL_COVER_PIC = "ADD_SOCIAL_CELL_COVER_PIC";
 export const ADD_SOCIAL_CELL = "ADD_SOCIAL_CELL";
-
 
 
 // This is to set the action social
