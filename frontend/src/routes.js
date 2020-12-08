@@ -13,6 +13,7 @@ import PersonalProfile from './components/UserProfiles/PersonalProfile';
 import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
 import Chat from './containers/Chat';
+import NewChat from './containers/NewChatFolder/NewChat';
 import Notifications from './containers/Notifications';
 import MonthCalendar from './containers/PersonalCalendar/MonthCalendar';
 import DayCalendar from './containers/PersonalCalendar/DayCalendar';
@@ -90,7 +91,8 @@ class BaseRouter extends React.Component {
 
         <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/chat/:id' render={(props) => <Chat parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+
+        <Route exact path = '/chat' render={(props) => <NewChat parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year/:month' render={(props) => <MonthCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
         <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar  parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />

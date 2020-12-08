@@ -1,0 +1,43 @@
+.chatContainer {
+  background-color: white;
+
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 30%;
+  left: 4%;
+  display: flex;
+}
+
+.chatContainer .chatLeftSide{
+  background-color: red;
+  width: 23%;
+  height: 100%;
+}
+
+.chatContainer .chatRightSide{
+  display: flex;
+  flex-direction: column;
+  background-color: "white";
+  width: 77%;
+  height: 100%;
+}
+
+.chatContainer .chatLeftSide .newSidePanel{
+  background-color: red;
+  width: 25%;
+  height: 100%;
+}
+
+
+.chatContainer .chatRightSide .newChatContent{
+  background-color: blue;
+  height: 92%;
+  position: relative;
+}
+
+.chatContainer .chatRightSide .newChatHeader{
+  background-color: green;
+  height: 8%;
+  position: relative;
+}
