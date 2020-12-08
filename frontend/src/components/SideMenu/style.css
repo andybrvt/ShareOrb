@@ -48,8 +48,9 @@ p {
   padding: 7rem 0; }
 
 aside, main {
-  height: 100vh;
-  min-height: 580px; }
+  /* height: 100vh; */
+  min-height: 580px;
+}
 
 aside {
   width: 70px;
@@ -211,7 +212,8 @@ main {
     -ms-transform: translateX(0px);
     transform: translateX(0px); }
   main .post-entry {
-    margin-bottom: 30px; }
+    margin-bottom: 30px;
+  }
     main .post-entry .custom-thumbnail {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 80px;
