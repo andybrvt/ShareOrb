@@ -21,7 +21,7 @@
 
 .profileInfo{
   /* position: absolute; */
-  margin-top: -15px;
+  margin-top: -10px;
   position: relative;
   height: 100%;
   margin-left: 10px;
@@ -206,7 +206,7 @@
 .parentFlexContainer{
   display: flex;
    flex-direction: row;
-   margin-left: 470px;
+   margin-left: 370px;
    margin-bottom: 20px;
    /* background-color: red; */
 }
@@ -271,7 +271,7 @@
 }
 
 .cal-post-pic{
-  background-color: red;
+  /* background-color: red; */
   border-top: 2px gainsboro solid;
   width: 1000px;
   position: relative;
