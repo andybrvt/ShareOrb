@@ -19,11 +19,12 @@
   overflow-y: hidden;
 }
 
-.profilePage .profileInfo{
+.profileInfo{
   /* position: absolute; */
+  margin-top: -15px;
   position: relative;
   height: 100%;
-  width: 1200px;
+  margin-left: 10px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -31,23 +32,17 @@
   align-content: center;
   font-size: 20px;
   /* background-color: blue; */
-}
 
-.editProfile{
-  /* padding:50px; */
-  padding:10px;
 }
 
 
-.profileBio{
-  /* background-color: green; */
-  padding: 40px 0px;
-  width:550px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 15px;
+.selfProfileButtons{
+  margin-top: 40px;
+  margin-left: -50px;
+  /* left: 50%; */
 }
+
+
 
 .profileButtons{
   /* background-color: red; */
@@ -57,8 +52,19 @@
   transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
+  margin-top: 25px;
   /* justify-content: center; */
 }
+
+
+
+.editProfile{
+  /* padding:50px; */
+  padding:10px;
+}
+
+
+
 
 .followButton{
   /* background-color: red; */
@@ -200,8 +206,9 @@
 .parentFlexContainer{
   display: flex;
    flex-direction: row;
-   margin-left: 750px;
+   margin-left: 470px;
    margin-bottom: 20px;
+   /* background-color: red; */
 }
 .profileName {
   /* background-color: red; */
@@ -209,14 +216,26 @@
   font-weight: 400;
   color: black;
   margin-left: -50px;
-  margin-top: 50px;
+  margin-top: 60px;
+
+
+}
+
+
+.profileBio{
+  /* background-color: green; */
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  margin-left: -75px;
+  margin-top: 150px;
 
 }
 
 .profileUserName{
     font-size: 20px;
     font-weight: 400;
-    margin-top: 100px;
+    margin-top: 105px;
     margin-left: -100px;
 }
 

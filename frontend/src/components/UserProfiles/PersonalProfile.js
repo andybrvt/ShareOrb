@@ -334,7 +334,6 @@ class PersonalProfile extends React.Component{
       // followers
       let username = ''
 
-      let bio = ''
       let followers = []
       let following = []
       let posts = ''
@@ -351,9 +350,7 @@ class PersonalProfile extends React.Component{
           username = this.props.profile.username
         }
 
-        if(this.props.profile.bio){
-          bio = this.props.profile.bio
-        }
+
         if(this.props.profile.get_following){
           following = this.props.profile.get_following
         }
@@ -390,41 +387,29 @@ class PersonalProfile extends React.Component{
         <div className = 'profileInfo'>
 
           <div>
-
-
-
-          <div className = 'profilePostFollow'>
-            <div className = 'followItem'>
-              <span
-              className = 'postFollowWords'
-              >Posts</span>
-              <br />
-              <span class="postFollowWords">{posts.length}</span>
+            <div className = 'profilePostFollow'>
+              <div
+              onClick = {() => this.onFollowerOpen()}
+              className = 'followItem'>
+                <span
+                className = 'postFollowWords'
+                >Followers</span>
+                <br />
+                <span class="postFollowWords">{followers.length}</span>
+              </div>
+              <div
+              onClick = {() => this.onFollowingOpen()}
+              className = 'followItem'>
+                <span
+                className = 'postFollowWords'
+                >Following</span>
+                <br />
+                <span class="postFollowWords">{following.length}</span>
+              </div>
             </div>
-            <div
-            onClick = {() => this.onFollowerOpen()}
-            className = 'followItem'>
-              <span
-              className = 'postFollowWords'
-              >Followers</span>
-              <br />
-              <span class="postFollowWords">{followers.length}</span>
-            </div>
-            <div
-            onClick = {() => this.onFollowingOpen()}
-            className = 'followItem'>
-              <span
-              className = 'postFollowWords'
-              >Following</span>
-              <br />
-              <span class="postFollowWords">{following.length}</span>
-            </div>
-          </div>
 
-          <div className = 'profileBio'>
-          {bio}
-          </div>
-        <div>
+
+          <div>
 
         {
             this.props.parameter.username === this.props.currentUser ?
@@ -688,7 +673,7 @@ class PersonalProfile extends React.Component{
       let profilePic = ""
       let firstName=""
       let lastName=""
-
+      let bio=""
       if (this.props.profile){
         if(this.props.profile.get_followers){
           followers = this.props.profile.get_followers
@@ -707,10 +692,13 @@ class PersonalProfile extends React.Component{
       if(this.props.profile.last_name){
         lastName = this.props.profile.last_name
       }
+      if(this.props.profile.bio){
+        bio = this.props.profile.bio
+      }
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-
+          <div class="eventCard" style={{left:'15%',width:'1200px', height:'375px', }}>
             <div class="parentFlexContainer">
               {this.renderProfilePic()}
               <span className = 'profileName'>
@@ -719,10 +707,14 @@ class PersonalProfile extends React.Component{
 
               </span>
               <span class="profileUserName">{"@"+this.props.username}</span>
+              <span class="profileBio">{bio}</span>
             </div>
 
 
-        {this.onRenderProfileInfo()}
+            {this.onRenderProfileInfo()}
+          </div>
+
+
 
         {this.onRenderTabs()}
           <Modal
