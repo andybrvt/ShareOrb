@@ -698,7 +698,7 @@ class PersonalProfile extends React.Component{
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-          <div class="eventCard" style={{left:'22%',width:'1000px', height:'375px', }}>
+          <div class="eventCard" style={{marginTop:'25px',left:'22%',width:'1000px', height:'375px', }}>
             <div class="parentFlexContainer">
               {this.renderProfilePic()}
               <span className = 'profileName'>

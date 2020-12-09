@@ -86,7 +86,7 @@ class SocialCalendar extends React.Component{
           </div>
         </div>
         <div className = "col col-center">
-          <span>
+          <span style={{fontSize:'22px'}}>
            {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
