@@ -1,5 +1,8 @@
 import React from 'react';
 import "./NewChat.css";
+import { Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
 
 class NewChatHeader extends React.Component{
 
@@ -10,7 +13,14 @@ class NewChatHeader extends React.Component{
 
     return(
       <div className = 'newChatHeader'>
-        Header
+      <Avatar
+      className = "avaHeader"
+       size={50} icon={<UserOutlined />} />
+
+       <span
+       className = "nameHeader"
+       > Put Name Here </span>
+
       </div>
     )
   }

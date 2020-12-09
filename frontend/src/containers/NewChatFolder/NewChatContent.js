@@ -9,6 +9,18 @@ class NewChatContent extends React.Component{
     return (
       <div className = "newChatContent">
         Content
+
+        <div className = "bottomBox">
+          <form>
+            <div className = "">
+              <input
+              className = "chatInput"
+              type = "text" />
+              <button />
+
+            </div>
+          </form>
+        </div>
       </div>
     )
   }
