@@ -221,8 +221,10 @@ class SocialCalCellPage extends React.Component{
          {
            socialCalItems.length === 1 ?
 
-           <div className = 'socialCarouselSingle'>
+           <div className = 'singlePic'>
+             <img
 
+             src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
            </div>
 
            : socialCalItems.length === 0 ?

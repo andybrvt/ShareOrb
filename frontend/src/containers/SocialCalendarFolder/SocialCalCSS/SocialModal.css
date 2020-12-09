@@ -425,20 +425,6 @@
   overflow: hidden;
 }
 
-..socialCarouselSingle .singlePic{
-  /* position: relative; */
-  position: relative;
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
-  height: 920px;
-  /* width: 1100px; */
-}
-
-/* singlePic img {
-    object-fit: cover;
-    width: 200px;
-    height: 200px;
-} */
 
 .picturesRoll{
   /* height:800px; */

@@ -13,6 +13,20 @@
 
 }
 
+.singlePic{
+  width:70%;
+  height:100%;
+
+}
+
+
+.singlePic img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
 .exitX{
   color: white;
   font-size: 40px;
