@@ -222,9 +222,7 @@ class SocialCalCellPage extends React.Component{
            socialCalItems.length === 1 ?
 
            <div className = 'socialCarouselSingle'>
-             <img
-             className = 'singlePic'
-             src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
+
            </div>
 
            : socialCalItems.length === 0 ?
@@ -312,6 +310,10 @@ class SocialCalCellPage extends React.Component{
              <div className  = 'socialComment'>
              <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
               Comment </div>
+              <div className  = 'socialComment'>
+                <span style={{ marginRight:'10px'}} class="fa fa-archive">
+                </span> Clip
+            </div>
            </div>
              <SocialComments
              // commentChange = {this.handleCommentChange}

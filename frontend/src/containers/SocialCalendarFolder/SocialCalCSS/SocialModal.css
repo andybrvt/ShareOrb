@@ -417,7 +417,7 @@
   color: gainsboro;
 }
 
-.socialHolder .socialCarouselSingle{
+.socialCarouselSingle{
   width: 215%;
   height: 920px;
   /* background-color: red; */
@@ -425,7 +425,7 @@
   overflow: hidden;
 }
 
-.socialHolder .socialCarouselSingle .singlePic{
+..socialCarouselSingle .singlePic{
   /* position: relative; */
   position: relative;
   /* left: 50%; */
@@ -433,6 +433,12 @@
   height: 920px;
   /* width: 1100px; */
 }
+
+/* singlePic img {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+} */
 
 .picturesRoll{
   /* height:800px; */
