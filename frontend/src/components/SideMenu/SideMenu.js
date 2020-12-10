@@ -232,8 +232,9 @@ class SideMenu extends React.Component {
                   <div class="nav-menu">
                     <ul class="sidebarList">
                       <li><a href="/home" class="d-flex align-items-center"> <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">Home</span></a></li>
-                      <li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
-                      <li><a href={"/chat/1"} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
+                      {/*<li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
+                    */}
+                    <li><a href={"/chat/1"} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
                       <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
                         class="d-flex align-items-center">
                         <CalendarOutlined style={{marginRight:'10px'}}/>

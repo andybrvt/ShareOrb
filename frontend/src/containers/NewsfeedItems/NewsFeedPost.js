@@ -381,8 +381,7 @@ class NewsfeedPost extends React.Component {
                      <div class="photoText">
 
                          <span>
-                           @{this.props.data.user.username}
-                           &nbsp;
+
                           {this.props.data.caption.substring(0,140)}
                          </span>
 
@@ -403,8 +402,7 @@ class NewsfeedPost extends React.Component {
 
 
                            <span>
-                             @{this.props.data.user.username}
-                             &nbsp;
+
                             {this.props.data.caption}
                            </span>
 

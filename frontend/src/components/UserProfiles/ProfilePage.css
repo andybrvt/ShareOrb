@@ -270,6 +270,7 @@
   transform: translateX(30%);
 }
 
+
 .cal-post-pic{
   /* background-color: red; */
   border-top: 2px gainsboro solid;
@@ -280,11 +281,15 @@
   height: 700px;
 }
 
-
+.stepTab{
+  padding-left: 100px;
+  padding-right: 100px;
+}
 /* This is for the tab changes */
 .profile-tabContainer {
   position:absolute;
-  top: 450px;
+  top: 475px;
+  padding-top: 25px;
 
   /* left: 40px; */
   bottom: 28px;
@@ -306,7 +311,7 @@
   text-align: center;
   /* margin-top: 10px; */
   /* background-color: red; */
-  color:red;
+  /* color:red; */
   padding-top: 20px;
   margin-bottom: 10px;
   /* padding-bottom: 5px; */
@@ -398,17 +403,20 @@
 }
 
 /* social calendar css */
-.profile-tabContainer .profile-tabPanel{
+.profile-tabPanel{
   /* height: 85%; */
   /* background-color: gray; */
-  color: #363636;
+  color:#51565d;
+
   text-align: center;
   align-items: center;
   align-content: center;
   padding-top: 1.5%;
-  font-family: "Segoe UI";
-  font-size: 22px;
-  color:red;
+   /* font-family: Montserrat, "sans-serif"; */
+   color:grey;
+   font-weight: 600;
+  font-size: 32px;
+  /* color:red; */
 
   /* display: none; */
   /* overflow: auto; */

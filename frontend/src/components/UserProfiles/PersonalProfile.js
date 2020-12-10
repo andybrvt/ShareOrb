@@ -5,7 +5,7 @@ import { Route, useLocation, Switch, Link } from 'react-router-dom';
 import { authAxios } from '../util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { Button, Modal, Avatar } from 'antd';
+import { Button, Modal, Avatar, Steps, Divider} from 'antd';
 import { RetweetOutlined, EditOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
@@ -37,7 +37,7 @@ import ConfirmUnfriend from './ConfirmUnfriend';
 // will show up. So I have to properally do the connect and disconnect for
 // each page (similar to the event page)
 
-
+const { Step } = Steps
 //This will be the page for the social calendar
 class PersonalProfile extends React.Component{
   constructor(props) {
@@ -273,6 +273,7 @@ class PersonalProfile extends React.Component{
       // It allows you to switch between
       return(
         <div className = 'cal-post-pic'>
+
           {this.onRenderTabs()}
         </div>
 
@@ -637,7 +638,15 @@ class PersonalProfile extends React.Component{
     onRenderTabs= () => {
       return (
         <div className = 'profile-tabContainer'>
-          <div className = 'profile-buttonContainer'>
+          <div style={{
+          background:'white'}} class="stepTab">
+          <Steps size="large"  onChange={this.onChange}>
+            <Step title="Calendar" description="Social Calendar" />
+            <Step title="Posts" description="All posts"   onClick = {() => this.onPostTabClick()}/>
+            <Step title="Events" description="Social Events" onClick = {() => this.onEventTabClick()} />
+          </Steps>
+          </div>
+          {/*<div className = 'profile-buttonContainer'>
             <p className = 'profile-description_tab profile-Tab-Calendar'>
              Calendar
            </p>
@@ -653,7 +662,7 @@ class PersonalProfile extends React.Component{
             onClick = {() => this.onEventTabClick()}
             > Events </div>
             <div className = 'profile-slider-calendar'></div>
-          </div>
+          </div>*/}
           <div className = 'profile-tabPanel'>
 
               <SocialCalendar {...this.props}/>
@@ -698,7 +707,7 @@ class PersonalProfile extends React.Component{
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-          <div class="eventCard" style={{marginTop:'25px',left:'22%',width:'1000px', height:'375px', }}>
+          <div class="eventCard" style={{marginTop:'25px',left:'10%',width:'900px', height:'375px', }}>
             <div class="parentFlexContainer">
               {this.renderProfilePic()}
               <span className = 'profileName'>
@@ -713,8 +722,10 @@ class PersonalProfile extends React.Component{
 
             {this.onRenderProfileInfo()}
           </div>
-
-
+          {/*
+            <div class="eventCard" style={{marginTop:'25px',left:'3%',width:'250px', height:'375px', }}>
+            </div>
+`           */}`
 
         {this.onRenderTabs()}
           <Modal

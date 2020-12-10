@@ -81,8 +81,8 @@ class SocialCalendar extends React.Component{
     return (
       <div className= "header row flex-middle">
         <div className = "col col-start">
-          <div className = "icon" onClick ={this.prevMonth}>
-            <i className= 'arrow arrow-left'></i>
+          <div className = 'icon' onClick ={this.prevMonth}>
+            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
         <div className = "col col-center">
@@ -91,9 +91,9 @@ class SocialCalendar extends React.Component{
           </span>
         </div>
         <div className= "col col-end" onClick = {this.nextMonth}>
-          <div className = "icon">
-          <i className = 'arrow arrow-right'></i>
-          </div>
+
+            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
+
         </div>
       </div>
     );
@@ -815,6 +815,7 @@ class SocialCalendar extends React.Component{
 
           <div className = 'socialCalendar'>
             {this.renderHeader()}
+            <Divider style={{marginTop:'-10px'}}/>
             {this.renderDays()}
             {this.renderCells(socialCalCell)}
           </div>

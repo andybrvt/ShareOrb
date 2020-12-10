@@ -24,12 +24,13 @@
   display: block;
   position: relative;
   width: 100%;
+
   /* background-color: red; */
   background: var(--neutral-color);
   /* border: 1px solid var(--border-color); */
 }
 .socialCalendar .header {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 15px;
   padding: 1.5em 0;
   /* border-bottom: 1px solid var(--border-color); */
@@ -54,7 +55,7 @@
 
 .socialCalendar .days{
   width: 1700px;
-  font-weight: 100;
+  font-weight: 500;
   color: ;
   font-size: 20px;
   padding: .75em 0;
@@ -83,6 +84,7 @@
   cursor: pointer;
   text-align: left;
   align-items: center;
+
   /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
   background-color: transparent;
@@ -104,8 +106,8 @@
 
 
 .socialCalendar .socialCalBody .row .cell .bg{
-  color: black;
-  font-weight: 100;
+  color: grey;
+  font-weight: 400;
   font-size: 15px;
   position: absolute;
   left: 50%;
