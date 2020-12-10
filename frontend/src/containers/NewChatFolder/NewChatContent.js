@@ -1,5 +1,8 @@
 import React from 'react';
 import './NewChat.css';
+import { Input } from 'antd';
+
+
 
 class NewChatContent extends React.Component{
   // This file will contain all the text in the current chat.
@@ -12,11 +15,17 @@ class NewChatContent extends React.Component{
 
         <div className = "bottomBox">
           <form>
-            <div className = "">
-              <input
+            <div className = "formInputs">
+              <Input
               className = "chatInput"
-              type = "text" />
-              <button />
+              type = "text"
+              placeholder = "Write your message..."
+              />
+
+              <span className = "sendButton">
+              <i class="far fa-paper-plane"></i>
+              </span>
+
 
             </div>
           </form>

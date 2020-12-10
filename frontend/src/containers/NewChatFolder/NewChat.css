@@ -45,6 +45,21 @@
   border: 1px solid grey;
 }
 
+.chatContainer .chatRightSide .newChatContent .bottomBox .formInputs{
+  position: relative;
+  left: 40%;
+  /* top: 10px; */
+}
+.chatContainer .chatRightSide .newChatContent .bottomBox .formInputs .sendButton{
+  color: dodgerblue;
+  font-size: 30px;
+  position: relative;
+  left: 25px;
+  top: 7px;
+  cursor: pointer;
+
+}
+
 .chatContainer .chatRightSide .newChatHeader{
   background-color: white;
   border: 1px solid grey;
@@ -67,5 +82,5 @@
   width: 700px;
   height: 40px;
   border-radius: 25px;
-  border: none;
+  background-color: whitesmoke;
 }
