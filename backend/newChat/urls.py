@@ -7,6 +7,7 @@ from . import views
 # The viewchats and viewmessages are used for viewing the data purposes
 # only
 urlpatterns = [
+    path("", views.NewChatListView.as_view()),
     path("viewChats", views.ChatView.as_view(), name = "view_chat" ),
     path("viewMessages", views.MessageView.as_view(), name = "view_messages")
 ]
