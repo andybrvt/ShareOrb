@@ -40,6 +40,7 @@ class NewChat extends React.Component{
       <div className = "chatLeftSide">
         <NewSidePanel
         chatList = {this.state.chatList}
+        param = {this.props.parameter}
         />
       </div>
 

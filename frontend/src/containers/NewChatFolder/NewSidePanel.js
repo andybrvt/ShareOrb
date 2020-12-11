@@ -55,7 +55,7 @@ class NewSidePanel extends React.Component{
         renderItem={item => (
 
           item.participants.length === 2 ?
-          <List className = "chatItem">
+          <List className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
             <div className = "chatWrap">
             <Avatar size = {50}
             className = "chatAva"

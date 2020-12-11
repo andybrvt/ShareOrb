@@ -86,9 +86,11 @@
 
 .chatItem {
   padding: 10px;
-  background-color: ;
   height: 90px;
   width: 100%;
+}
+.chatItem.current{
+  background-color: whitesmoke;
 }
 .chatItem .chatWrap{
   display: flex;
