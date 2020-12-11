@@ -85,6 +85,23 @@
 }
 
 .chatItem {
-  background-color: red;
   padding: 10px;
+  background-color: ;
+  height: 90px;
+  width: 100%;
+}
+.chatItem .chatWrap{
+  display: flex;
+}
+.chatItem .chatWrap .chatAva{
+  margin-top: 12px;
+}
+.chatItem .chatWrap .chatText{
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.chatItem .chatWrap .chatText .chatName {
+  font-size: 20px;
+  color: black;
 }
