@@ -25,7 +25,6 @@
 
 .chatContainer .chatLeftSide .newSidePanel{
   /* background-color: white; */
-  padding: 10px;
   width: 100%;
   height: 100%;
 }
@@ -83,4 +82,9 @@
   height: 40px;
   border-radius: 25px;
   background-color: whitesmoke;
+}
+
+.chatItem {
+  background-color: red;
+  padding: 10px;
 }

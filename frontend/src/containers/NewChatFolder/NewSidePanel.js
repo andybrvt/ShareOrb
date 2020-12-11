@@ -10,6 +10,13 @@ class NewSidePanel extends React.Component{
 
   render(){
 
+    console.log(this.props)
+
+    let chatList = []
+
+    if(this.props.chatList){
+      chatList = this.props.chatList
+    }
 
     const data = [
       {
@@ -30,15 +37,26 @@ class NewSidePanel extends React.Component{
       <div className = "newSidePanel">
       <List
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={chatList}
         renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title={<a href="https://ant.design">{item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            />
-          </List.Item>
+
+          item.participants.length === 2 ?
+          <List className = "chatItem">
+            <div>
+            <Avatar src = {'http://127.0.0.1:8000'+item.participants[1].profile_picture} />
+            <div>
+              <p>{item.participants[1].first_name} {item.participants[1].last_name}</p>
+              <p> This is the description of the text </p>
+            </div>
+
+            </div>
+          </List>
+
+          :
+
+          <div>
+
+          </div>
         )}
       />
       </div>
