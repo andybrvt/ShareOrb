@@ -4,6 +4,7 @@ import chat.routing
 import userprofile.routing
 import mycalendar.routing
 import mySocialCal.routing
+import newChat.routing
 
 
 from channels.http import AsgiHandler
@@ -25,6 +26,7 @@ application = ProtocolTypeRouter ({
         + chat.routing.websocket_urlpatterns
         + mycalendar.routing.websocket_urlpatterns
         + mySocialCal.routing.websocket_urlpatterns
+        + newChat.routing.websocket_urlpatterns
         )
     )
 })

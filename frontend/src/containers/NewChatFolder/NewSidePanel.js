@@ -1,5 +1,6 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -55,6 +56,9 @@ class NewSidePanel extends React.Component{
         renderItem={item => (
 
           item.participants.length === 2 ?
+          <NavLink
+          to = {''+item.id}
+          >
           <List className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
             <div className = "chatWrap">
             <Avatar size = {50}
@@ -67,6 +71,7 @@ class NewSidePanel extends React.Component{
 
             </div>
           </List>
+          </NavLink>
 
           :
 
