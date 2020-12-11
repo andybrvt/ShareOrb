@@ -641,11 +641,19 @@ class PersonalProfile extends React.Component{
           <div style={{
           background:'white'}} class="stepTab">
           <Steps size="large"  onChange={this.onChange}>
-            <Step title="Calendar" description="Social Calendar" />
-            <Step title="Posts" description="All posts"   onClick = {() => this.onPostTabClick()}/>
-            <Step title="Events" description="Social Events" onClick = {() => this.onEventTabClick()} />
+            <Step title="Calendar"
+              icon={<i class="far fa-calendar-alt"></i>} />
+            <Step title="Posts"
+              onClick = {() => this.onPostTabClick()}
+              icon={<i class="far fa-edit"></i>} />
+            <Step
+              title="Events"
+
+              onClick = {() => this.onEventTabClick()}
+              icon={<i class="fas fa-users"></i>} />
           </Steps>
           </div>
+
           {/*<div className = 'profile-buttonContainer'>
             <p className = 'profile-description_tab profile-Tab-Calendar'>
              Calendar
@@ -707,25 +715,48 @@ class PersonalProfile extends React.Component{
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-          <div class="eventCard" style={{marginTop:'25px',left:'10%',width:'900px', height:'375px', }}>
-            <div class="parentFlexContainer">
-              {this.renderProfilePic()}
-              <span className = 'profileName'>
-                {this.capitalize(firstName)} {this.capitalize(lastName)}
-                <br/>
+          <div class="profilePageTopFlex">
+            <div class="eventCard" style={{ left:'5%',marginTop:'50px',width:'900px', height:'350px', }}>
+              <div class="parentFlexContainer">
+                {this.renderProfilePic()}
+                <span className = 'profileName'>
+                  {this.capitalize(firstName)} {this.capitalize(lastName)}
+                  <br/>
 
-              </span>
-              <span class="profileUserName">{"@"+this.props.username}</span>
-              <span class="profileBio">{bio}</span>
+                </span>
+                <span class="profileUserName">{"@"+this.props.username}</span>
+                <span class="profileBio">{bio}</span>
+              </div>
+
+
+
+              {this.onRenderProfileInfo()}
             </div>
-
-
-            {this.onRenderProfileInfo()}
+            <div class="eventCard" style={{marginTop:'50px',left:'30%',width:'300px', height:'350px', }}>
+              Tabs
+              <br/>
+              <br/>
+              <Steps direction="vertical" current={1}>
+                <Step title="Finished"
+                  description="This is a description."
+                  icon={<i class="far fa-calendar-alt"></i>}
+                   />
+                <Step status="progress"
+                  title="Posts"
+                  description="This is a description."
+                  icon={<i class="far fa-edit"></i>} />
+                <Step
+                  status="wait"
+                  title="Events"
+                  description="This is a description."
+                  icon={<i class="fas fa-users"></i>} />
+              </Steps>,
+            </div>
           </div>
           {/*
             <div class="eventCard" style={{marginTop:'25px',left:'3%',width:'250px', height:'375px', }}>
             </div>
-`           */}`
+`           */}
 
         {this.onRenderTabs()}
           <Modal

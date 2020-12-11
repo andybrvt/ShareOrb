@@ -203,6 +203,12 @@
   bottom: -100%;
 }
 
+
+.profilePageTopFlex{
+  display: flex;
+   flex-direction: row;
+}
+
 .parentFlexContainer{
   display: flex;
    flex-direction: row;
