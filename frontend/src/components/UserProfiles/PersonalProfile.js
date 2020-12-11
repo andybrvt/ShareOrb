@@ -645,14 +645,20 @@ class PersonalProfile extends React.Component{
           <div style={{
           background:'white'}} class="stepTab">
           <Steps
+            type="navigation"
             size="large"
             current={this.state.current}
             onChange={this.onChange}>
             <Step title="Calendar"
               icon={<i class="far fa-calendar-alt"></i>} />
+
+            {/*  PersonalProfilePostList.js */}
             <Step title="Posts"
               onClick = {() => this.onPostTabClick()}
               icon={<i class="far fa-edit"></i>} />
+
+            {/*  PersonalProfileEventList.js */}
+
             <Step
               title="Events"
 
@@ -660,6 +666,7 @@ class PersonalProfile extends React.Component{
               icon={<i class="fas fa-users"></i>} />
           </Steps>
           </div>
+          <Divider style={{marginTop:'-1px'}}/>
 
           {/*<div className = 'profile-buttonContainer'>
             <p className = 'profile-description_tab profile-Tab-Calendar'>
@@ -692,7 +699,7 @@ class PersonalProfile extends React.Component{
       const { current } = this.state;
       console.log(this.props)
       console.log(this.state)
-  
+
       let followers = []
       let following = []
       let profilePic = ""
@@ -747,7 +754,6 @@ class PersonalProfile extends React.Component{
               <Steps
                 current={current}
                  direction="vertical"
-                 current={current}
                  onChange={this.onChange}>
                 <Step title="Calendar"
                   description="This is a description."

@@ -733,23 +733,23 @@ class PersonalProfilePostList extends React.Component{
             <br/>
             <br/>
             <Steps
-              current={current}
+               current={1}
+               type="navigation"
                direction="vertical"
-               current={current}
                onChange={this.onChange}>
               <Step title="Calendar"
-                description="This is a description."
+                description="Social Calendar"
                 icon={<i class="far fa-calendar-alt"></i>}
                  />
               <Step
                 title="Posts"
-                description="This is a description."
+                description="Ping's posts"
                 icon={<i class="far fa-edit"></i>} />
               <Step
                 title="Events"
-                description="This is a description."
+                description="Social Events"
                 icon={<i class="fas fa-users"></i>} />
-            </Steps>,
+            </Steps>
           </div>
         </div>
       {this.onRenderTabs()}
