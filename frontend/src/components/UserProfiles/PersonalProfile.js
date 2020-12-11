@@ -51,12 +51,16 @@ class PersonalProfile extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
+    current: 0,
     // showFriendConfirm: false,
     // showUnfriend: false,
     // following: false,
   }
 
-
+  onChange = current => {
+    console.log(current)
+      this.setState({ current });
+    };
 //To get the parms from teh url use THIS.PROPS.PARAMETER.USERNAME (LOWER CASE BTW)
 
   initialiseProfile() {
@@ -640,7 +644,10 @@ class PersonalProfile extends React.Component{
         <div className = 'profile-tabContainer'>
           <div style={{
           background:'white'}} class="stepTab">
-          <Steps size="large"  onChange={this.onChange}>
+          <Steps
+            size="large"
+            current={this.state.current}
+            onChange={this.onChange}>
             <Step title="Calendar"
               icon={<i class="far fa-calendar-alt"></i>} />
             <Step title="Posts"
@@ -682,9 +689,10 @@ class PersonalProfile extends React.Component{
     }
 
   render(){
-
+      const { current } = this.state;
       console.log(this.props)
       console.log(this.state)
+  
       let followers = []
       let following = []
       let profilePic = ""
@@ -736,17 +744,20 @@ class PersonalProfile extends React.Component{
               Tabs
               <br/>
               <br/>
-              <Steps direction="vertical" current={1}>
-                <Step title="Finished"
+              <Steps
+                current={current}
+                 direction="vertical"
+                 current={current}
+                 onChange={this.onChange}>
+                <Step title="Calendar"
                   description="This is a description."
                   icon={<i class="far fa-calendar-alt"></i>}
                    />
-                <Step status="progress"
+                <Step
                   title="Posts"
                   description="This is a description."
                   icon={<i class="far fa-edit"></i>} />
                 <Step
-                  status="wait"
                   title="Events"
                   description="This is a description."
                   icon={<i class="fas fa-users"></i>} />

@@ -6,7 +6,7 @@ import { Route, useLocation, Switch, Link } from 'react-router-dom';
 import { authAxios } from '../../components/util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { Button, Modal, Avatar } from 'antd';
+import { Button, Modal, Avatar, Steps} from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import * as exploreActions from '../../store/actions/explore';
@@ -18,6 +18,7 @@ import UserPostList from './UserPostList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
 
+const { Step } = Steps
 // DELETE LATER
 // import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
 // import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
@@ -667,14 +668,16 @@ class PersonalProfilePostList extends React.Component{
 
 
   render(){
-
+    const { current } = this.state;
     console.log(this.props)
     console.log(this.state)
     let followers = []
     let following = []
     let location = ""
     let profilePic = ""
-
+    let firstName=""
+    let lastName=""
+    let bio=""
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
@@ -689,6 +692,17 @@ class PersonalProfilePostList extends React.Component{
 
     }
 
+    if(this.props.profile.first_name){
+      firstName = this.props.profile.first_name
+    }
+    if(this.props.profile.last_name){
+      lastName = this.props.profile.last_name
+    }
+    if(this.props.profile.bio){
+      bio = this.props.profile.bio
+    }
+
+
 
 
 
@@ -697,8 +711,47 @@ class PersonalProfilePostList extends React.Component{
 
 
 
-      {this.renderProfilePic()}
-      {this.onRenderProfileInfo()}
+        <div class="profilePageTopFlex">
+          <div class="eventCard" style={{ left:'5%',marginTop:'50px',width:'900px', height:'350px', }}>
+            <div class="parentFlexContainer">
+              {this.renderProfilePic()}
+              <span className = 'profileName'>
+                {this.capitalize(firstName)} {this.capitalize(lastName)}
+                <br/>
+
+              </span>
+              <span class="profileUserName">{"@"+this.props.username}</span>
+              <span class="profileBio">{bio}</span>
+            </div>
+
+
+
+            {this.onRenderProfileInfo()}
+          </div>
+          <div class="eventCard" style={{marginTop:'50px',left:'30%',width:'300px', height:'350px', }}>
+            Tabs
+            <br/>
+            <br/>
+            <Steps
+              current={current}
+               direction="vertical"
+               current={current}
+               onChange={this.onChange}>
+              <Step title="Calendar"
+                description="This is a description."
+                icon={<i class="far fa-calendar-alt"></i>}
+                 />
+              <Step
+                title="Posts"
+                description="This is a description."
+                icon={<i class="far fa-edit"></i>} />
+              <Step
+                title="Events"
+                description="This is a description."
+                icon={<i class="fas fa-users"></i>} />
+            </Steps>,
+          </div>
+        </div>
       {this.onRenderTabs()}
         <Modal
         visible = {this.state.showProfileEdit}
