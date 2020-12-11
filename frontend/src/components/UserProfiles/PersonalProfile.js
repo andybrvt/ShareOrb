@@ -751,23 +751,25 @@ class PersonalProfile extends React.Component{
               Tabs
               <br/>
               <br/>
-              <Steps
-                current={current}
-                 direction="vertical"
-                 onChange={this.onChange}>
-                <Step title="Calendar"
-                  description="This is a description."
-                  icon={<i class="far fa-calendar-alt"></i>}
-                   />
-                <Step
-                  title="Posts"
-                  description="This is a description."
-                  icon={<i class="far fa-edit"></i>} />
-                <Step
-                  title="Events"
-                  description="This is a description."
-                  icon={<i class="fas fa-users"></i>} />
-              </Steps>,
+                <Steps
+                   current={0}
+                   direction="vertical"
+                   onChange={this.onChange}>
+                  <Step title="Calendar"
+                    description="Social Calendar"
+                    icon={<i class="far fa-calendar-alt"></i>}
+                     />
+                  <Step
+                    title="Posts"
+                    description="Ping's posts"
+                    onClick = {() => this.onPostTabClick()}
+                    icon={<i class="far fa-edit"></i>} />
+                  <Step
+                    title="Events"
+                    onClick = {() => this.onEventTabClick()}
+                    description="Social Events"
+                    icon={<i class="fas fa-users"></i>} />
+                </Steps>
             </div>
           </div>
           {/*

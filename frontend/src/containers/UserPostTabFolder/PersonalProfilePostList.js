@@ -2,11 +2,11 @@
 
 import React from 'react';
 import axios from 'axios';
-import { Route, useLocation, Switch, Link } from 'react-router-dom';
+import { Route, useLocation, Switch, Link} from 'react-router-dom';
 import { authAxios } from '../../components/util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { Button, Modal, Avatar, Steps} from 'antd';
+import { Button, Modal, Avatar, Steps, Divider} from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import * as exploreActions from '../../store/actions/explore';
@@ -556,9 +556,15 @@ class PersonalProfilePostList extends React.Component{
       this.props.history.push("/explore/"+ this.props.parameter.username)
     }
 
-    onEventTabClick = () => {
-      this.props.history.push("/explore/"+ this.props.parameter.username + "/events")
+    onPostTabClick = () => {
+      this.props.history.push("/explore/"+ this.props.parameter.username+"/posts")
+
     }
+
+    onEventTabClick = () => {
+      this.props.history.push("/explore/"+this.props.parameter.username +"/events")
+    }
+
 
 
     onSaveEdit = (values) => {
@@ -634,19 +640,35 @@ class PersonalProfilePostList extends React.Component{
 
       return (
         <div className = 'profile-tabContainer'>
-          <div className = 'profile-buttonContainer'>
-            <div className = 'profile-description_tab profile-Tab'
-            onClick = {() => this.onCalendarTabClick()}
-            >
-            Calendar
-            </div>
+          <div style={{
+          background:'white'}} class="stepTab">
+          <Steps
+            type="navigation"
+            size="large"
+            current={1}
+            onChange={this.onChange}>
+            <Step title="Calendar"
+              icon={<i class="far fa-calendar-alt"></i>}
+              onClick = {() => this.onCalendarTabClick()}
+            />
 
-            <div className = 'profile-description_tab profile-Tab-Post'
-            > Posts </div>
-            <div className = 'profile-description_tab profile-Tab'
-            onClick = {() => this.onEventTabClick()}
-            > Events </div>
+            {/*  PersonalProfilePostList.js */}
+            <Step title="Posts"
+              onClick = {() => this.onPostTabClick()}
+              icon={<i class="far fa-edit"></i>} />
+
+            {/*  PersonalProfileEventList.js */}
+
+            <Step
+              title="Events"
+
+              onClick = {() => this.onEventTabClick()}
+              icon={<i class="fas fa-users"></i>} />
+          </Steps>
           </div>
+          <Divider style={{marginTop:'-1px'}}/>
+
+
           <div className = 'profile-tabPanel'>
             <UserPostList
             posts = {this.props.profile.get_posts}
@@ -734,19 +756,21 @@ class PersonalProfilePostList extends React.Component{
             <br/>
             <Steps
                current={1}
-               type="navigation"
                direction="vertical"
                onChange={this.onChange}>
               <Step title="Calendar"
                 description="Social Calendar"
                 icon={<i class="far fa-calendar-alt"></i>}
+                onClick = {() => this.onCalendarTabClick()}
                  />
               <Step
                 title="Posts"
                 description="Ping's posts"
+                onClick = {() => this.onPostTabClick()}
                 icon={<i class="far fa-edit"></i>} />
               <Step
                 title="Events"
+                onClick = {() => this.onEventTabClick()}
                 description="Social Events"
                 icon={<i class="fas fa-users"></i>} />
             </Steps>
