@@ -36,4 +36,4 @@ class Message(models.Model):
     messageUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "message_user", on_delete = models.CASCADE, null = True)
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']

@@ -15,6 +15,7 @@ import EventPageWebSocketInstance from './eventPageWebsocket';
 import SocialEventPageWebSocketInstance from './socialEventPageWebsocket';
 import SocialCalCellPageWebSocketInstance from './socialCalCellWebsocket';
 import UserPostPageWebSocketInstance from './UserPostPageWebsocket';
+import NewChatWebSocketInstance from './newChatWebsocket';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -29,10 +30,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     // this.initialiseExplore()
+
+    // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
     WebSocketInstance.addCallbacks(
       this.props.setMessages.bind(this),
       this.props.addMessage.bind(this)
     );
+
+
+
+
     NotificationWebSocketInstance.addCallbacks(
       this.props.setNotifications.bind(this),
       this.props.newNotification.bind(this)
@@ -94,6 +101,10 @@ class App extends Component {
       this.props.loadPost.bind(this),
       this.props.sendUserPostLikeUnlike.bind(this),
       this.props.sendUserPostComment.bind(this)
+    )
+
+    NewChatWebSocketInstance.addCallbacks(
+      this.props.setMessages.bind(this)
     )
   }
 

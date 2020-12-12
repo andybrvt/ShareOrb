@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   background-color: "white";
-  width: 77%;
+  width: 50%;
   height: 100%;
 }
 
@@ -36,6 +36,84 @@
   height: 92%;
   position: relative;
 }
+
+.chatContainer .chatRightSide .newChatContent .chatWrapContainer{
+  /* background-color: red; */
+  height: 93%;
+
+}
+
+
+.chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer{
+  overflow: auto;
+  height: 100%;
+
+}
+.chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer .chatTextBox{
+  display: inline-block;
+  clear: both;
+  float: left;
+  margin: 15px 15px 5px 15px;
+  width: calc(100% - 25px);
+  font-size: 0.9em;
+  position: relative;
+  /* background-color: blue; */
+}
+/* This will be for the current user side */
+.chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer .chatTextBoxRight{
+  display: inline-block;
+  clear: both;
+  float: right;
+  margin: 15px 15px 5px 15px;
+  width: calc(100% - 25px);
+  font-size: 0.9em;
+  position: relative;
+  text-align: right;
+  /* background-color: blue; */
+}
+
+
+.chatNameTime {
+  display: flex;
+  position:absolute;
+  left: 50px;
+  top: 3px;
+}
+.chatNameTimeRight {
+  display: flex;
+  position:absolute;
+  right: 50px;
+  top: 3px;
+  /* background-color: red; */
+}
+.chatNameTimeRight .chatNameRight {
+  font-size: 18px;
+  position: relative;
+  bottom: 6px;
+}
+.chatNameTime .chatName {
+  font-size: 18px;
+  position: relative;
+  bottom: 6px;
+}
+
+
+.chatContentText{
+  position: relative;
+  width: 50%;
+  left: 50px;
+  bottom: 17px;
+}
+.chatContentTextRight{
+  position: relative;
+  text-align: right;
+  width: 50%;
+  left: 44%;
+  bottom: 17px;
+  /* background-color: blue; */
+}
+
+
 .chatContainer .chatRightSide .newChatContent .bottomBox{
   position: absolute;
   bottom: 0px;
@@ -46,7 +124,7 @@
 
 .chatContainer .chatRightSide .newChatContent .bottomBox .formInputs{
   position: relative;
-  left: 40%;
+  left: 250px;
   /* top: 10px; */
 }
 .chatContainer .chatRightSide .newChatContent .bottomBox .formInputs .sendButton{
@@ -78,7 +156,7 @@
 }
 
 .chatInput{
-  width: 700px;
+  width: 600px;
   height: 40px;
   border-radius: 25px;
   background-color: whitesmoke;

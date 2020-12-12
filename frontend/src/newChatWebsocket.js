@@ -29,6 +29,7 @@ class WebSocketNewChat {
       console.log(e.data)
 
       // put the onmessage receiever here
+      this.socketNewChatMessages(e.data)
     }
 
     this.socketRef.onerror = (e) => {
@@ -59,11 +60,29 @@ class WebSocketNewChat {
     const command = parsedData.command
     console.log(parsedData)
 
+    if(command === "fetch_messages"){
+      const messages = parsedData.messages
+
+      this.callbacks['set_messages'](messages)
+    }
+  }
+
+  fetchMessages = (chatId) => {
+    // This function will send a command into the backend consumer to fetch
+    // the chat from the chatId
+    console.log('fetch chat messages')
+    this.sendMessage({
+      command: 'fetch_new_chat_messages',
+      chatId: chatId
+    })
   }
 
   // now callbacks
-  addCallbacks(){
+  addCallbacks(
+    setMessages
+  ){
     // add callbacks here
+    this.callbacks['set_messages'] = setMessages
   }
 
   sendMessage(data){

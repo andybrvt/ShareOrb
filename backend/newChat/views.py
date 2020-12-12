@@ -8,6 +8,11 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
+# get the last 10 messages in the chat
+# def get_last_10_messages(chatId):
+#     chat = get_object_or_404(models.Chat, id = chatId)
+#     return chat.get_messages()[:10]
+
 # to check out the chat view and the message view first
 class ChatView(generics.ListAPIView):
     # This will show the chat view
