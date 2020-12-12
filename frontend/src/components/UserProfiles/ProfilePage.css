@@ -166,11 +166,11 @@
   flex-direction: row;
   padding: 0px 20px;
   top:15px;
-  width: 450px;
+  width: 400px;
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
-  left: 46%;
+  left: 48%;
   transform: translateX(-50%);
 }
 
@@ -247,6 +247,9 @@
 
 .profilePic{
   /* background-color: yellow; */
+  margin-top: 50px;
+  margin-left: 850px;
+
   width: 200px;
   height: 180px;
 
@@ -292,9 +295,10 @@
   padding-right: 100px;
 }
 /* This is for the tab changes */
+/* how far up the tab is */
 .profile-tabContainer {
   position:absolute;
-  top: 475px;
+  top: 450px;
   padding-top: 25px;
 
   /* left: 40px; */

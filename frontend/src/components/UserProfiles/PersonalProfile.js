@@ -730,54 +730,10 @@ class PersonalProfile extends React.Component{
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-          <div class="profilePageTopFlex">
-            <div class="eventCard" style={{ left:'5%',marginTop:'50px',width:'900px', height:'350px', }}>
-              <div class="parentFlexContainer">
-                {this.renderProfilePic()}
-                <span className = 'profileName'>
-                  {this.capitalize(firstName)} {this.capitalize(lastName)}
-                  <br/>
+          {this.renderProfilePic()}
+          {this.onRenderProfileInfo()}
+          {this.onRenderTabs()}
 
-                </span>
-                <span class="profileUserName">{"@"+this.props.username}</span>
-                <span class="profileBio">{bio}</span>
-              </div>
-
-
-
-              {this.onRenderProfileInfo()}
-            </div>
-            <div class="eventCard" style={{marginTop:'50px',left:'30%',width:'300px', height:'350px', }}>
-              Tabs
-              <br/>
-              <br/>
-                <Steps
-                   current={0}
-                   direction="vertical"
-                   onChange={this.onChange}>
-                  <Step title="Calendar"
-                    description="Social Calendar"
-                    icon={<i class="far fa-calendar-alt"></i>}
-                     />
-                  <Step
-                    title="Posts"
-                    description="Ping's posts"
-                    onClick = {() => this.onPostTabClick()}
-                    icon={<i class="far fa-edit"></i>} />
-                  <Step
-                    title="Events"
-                    onClick = {() => this.onEventTabClick()}
-                    description="Social Events"
-                    icon={<i class="fas fa-users"></i>} />
-                </Steps>
-            </div>
-          </div>
-          {/*
-            <div class="eventCard" style={{marginTop:'25px',left:'3%',width:'250px', height:'375px', }}>
-            </div>
-`           */}
-
-        {this.onRenderTabs()}
           <Modal
           visible = {this.state.showProfileEdit}
           onCancel = {() => this.closeProfileEdit()}
