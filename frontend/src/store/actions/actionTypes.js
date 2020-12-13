@@ -9,7 +9,9 @@ export const CLOSE_POPUP = "CLOSE_POPUP";
 
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const SET_MESSAGES = "SET_MESSAGES";
+export const SET_CHATS = "SET_CHATS";
 
+// DELETE THIS SOON
 export const GET_CHATS_SUCCESS = "GET_CHATS_SUCCESS";
 
 export const SET_NOTIFICATIONS = 'SET_NOTIFICATIONS';

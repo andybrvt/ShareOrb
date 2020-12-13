@@ -6,10 +6,67 @@ from channels.layers import get_channel_layer
 from . import views
 from .serializers import MessageSerializer
 from .serializers import ChatSerializer
+from .serializers import MiniChatSerializer
 from .models import Chat
 from .models import Message
 from django.shortcuts import get_object_or_404
 from userprofile.models import User
+
+class NewChatSidePanelConsumer(JsonWebsocketConsumer):
+    # This consumer will be incharge of the sidemenu and all the stuff
+    # that goes on with it, like recieving new updates when people text you
+    # updating the message that is shown when you type a text or some else
+    # types a text in the chat
+
+    # Use in conjunction with notifications for chats to work well.
+    def send_fetch_all_user_chats(self, data):
+        # This will fetch all the users chats
+        if data['userId'] is not None:
+
+            user = get_object_or_404(User, id = data['userId'])
+            chats = user.chat_parti.all()
+            # When you do many = True it will serialize the list of chat objects
+            chatList = MiniChatSerializer(chats, many = True).data
+            print(chatList)
+            content = {
+                'command': 'fetch_all_user_chats',
+                'chats': chatList
+            }
+            self.send_json(content)
+
+
+    def connect(self):
+        # This will be used to connect into the chats,you chats so taht your
+        # sidepanel can be working
+        print("connect")
+
+        self.chats_id = self.scope['url_route']['kwargs']['chatsOwnerId']
+        grp = 'chats_list_'+self.chats_id
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+
+    def disconnect(self, close_code):
+        # This will be the disconnect when you wnat to disocnnect from your
+        # chat, used mainly when exiting chats. I don't think i want to keep chat
+        # open during the login... maybe
+        print("disconnect")
+        # Each channel layer will be specific to a user. It will be a channel layer
+        # of the chats
+
+        self.chats_id = self.scope['url_route']['kwargs']['chatsOwnerId']
+        grp = 'chats_list_'+self.chats_id
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        # This is for when you are receivng information from other poeple and you
+        # want to update your shit
+        print(text_data)
+        data = json.loads(text_data)
+        print(data)
+        if data['command'] == 'fetch_all_user_chats':
+            self.send_fetch_all_user_chats(data)
 
 class NewChatConsumer(JsonWebsocketConsumer):
     # This consumer well be used to manage the backend for sending text

@@ -16,6 +16,18 @@ export const setMessages = messages => {
   }
 }
 
+
+
+export const setChats = chats => {
+  return {
+    type: actionTypes.SET_CHATS,
+    chats: chats
+  }
+}
+
+
+
+// DELETE LATER
 const getUserChatsSuccesss = chats => {
   return {
     type: actionTypes.GET_CHATS_SUCCESS,
@@ -23,6 +35,10 @@ const getUserChatsSuccesss = chats => {
   };
 };
 
+
+// Since you are gonna receive data from other poeple and not just your self
+// you will probally not eed this
+// DELETE SOON
 export const getUserChats = (username, token) => {
   return dispatch => {
     axios.defaults.headers ={

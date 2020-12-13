@@ -33,7 +33,7 @@ const reducer = (state= initialState, action ) => {
      return addMessage(state, action);
     case actionTypes.SET_MESSAGES:
      return setMessages(state, action);
-    case actionTypes.GET_CHATS_SUCCESS:
+    case actionTypes.SET_CHATS:
      return setChats(state,action);
      default:
        return state;

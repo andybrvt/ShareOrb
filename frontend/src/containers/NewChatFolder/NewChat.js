@@ -19,7 +19,6 @@ class NewChat extends React.Component{
   // have
   state = {
     // The messgaes will be specific to the chat
-    chatList: [],
     // Friend list is used to search for friend to find or make a new chat
     friendList:[]
   }
@@ -69,13 +68,7 @@ class NewChat extends React.Component{
       NewChatWebSocketInstance.connect(newProps.parameter.id)
     }
 
-    authAxios.get('http://127.0.0.1:8000/newChat/?userId='+newProps.id)
-    .then( res => {
-      console.log(res.data)
-      this.setState({
-        chatList: res.data
-      })
-    })
+    
 
 
   }
@@ -109,9 +102,14 @@ class NewChat extends React.Component{
     console.log(this.props)
     console.log(this.state)
     let messages = []
+    let chats = []
 
     if(this.props.messages){
       messages = this.props.messages
+    }
+
+    if(this.props.chats){
+      chats = this.props.chats
     }
 
     return(
@@ -119,8 +117,9 @@ class NewChat extends React.Component{
 
       <div className = "chatLeftSide">
         <NewSidePanel
-        chatList = {this.state.chatList}
+        chatList = {chats}
         param = {this.props.parameter}
+        curId = {this.props.id}
         />
       </div>
 
@@ -142,7 +141,8 @@ class NewChat extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    messages: state.message.messages
+    messages: state.message.messages,
+    chats: state.message.chats
   }
 }
 

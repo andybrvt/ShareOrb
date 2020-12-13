@@ -37,6 +37,26 @@ class ChatSerializer(serializers.ModelSerializer):
 
         return data
 
+class MiniChatSerializer(serializers.ModelSerializer):
+    # This MiniChatSerializer is used for serializng just the chats objects
+    # on the side panel of the
+
+    class Meta:
+        model = models.Chat
+        fields = (
+            "id",
+            "participants"
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        participantList = []
+        for participants in data['participants']:
+            participant = ChatUser(User.objects.get(id = participants)).data
+            participantList.append(participant)
+        data['participants'] = participantList
+        return data
+
 
 # Since we don't need everyting from the user class on the chat we can just
 # use this serializer to limit what we show
