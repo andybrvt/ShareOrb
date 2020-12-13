@@ -45,7 +45,10 @@ class MiniChatSerializer(serializers.ModelSerializer):
         model = models.Chat
         fields = (
             "id",
-            "participants"
+            "participants",
+            "recentMessage",
+            "recentSender",
+            "recentTime"
         )
 
     def to_representation(self, instance):

@@ -1,6 +1,7 @@
 from django.db import models
 from userprofile.models import User
 from django.conf import settings
+from django.utils import timezone
 
 
 # Create your models here.
@@ -17,6 +18,14 @@ class Chat(models.Model):
     # you will need the participants, usually this includes you as well
     # so it would be a ManyToManyField
     participants = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "chat_parti")
+
+    # Recent message (this will be the most recent message), the one that you are gonna
+    # show on the side panel
+    recentMessage = models.TextField(default = "Message")
+    recentSender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name = "recent_sender", null = True)
+
+    # The recent time will be the most recent time that a text was sent
+    recentTime = models.DateTimeField(default = timezone.now)
 
     # you are gonna put a function here that gets all the message object
     # for this chat

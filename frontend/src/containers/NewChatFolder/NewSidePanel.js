@@ -49,6 +49,7 @@ class NewSidePanel extends React.Component{
     // This fucntion will take in a string and check how long it is, if it is
     // passed a certain lenght you would just put ... at the end of it
     let finalStr = str
+    console.log(str)
     if(str.length > 30){
       finalStr = finalStr.substring(0,30)
       finalStr = finalStr+"..."
@@ -81,7 +82,6 @@ class NewSidePanel extends React.Component{
       },
     ];
 
-    // {this.chatDescription(item.get_messages[item.get_messages.length-1].body)}
     return(
       <div className = "newSidePanel">
       <List
@@ -100,7 +100,7 @@ class NewSidePanel extends React.Component{
              src = {'http://127.0.0.1:8000'+this.getChatUserProfile(item.participants)} />
             <div className = "chatText">
               <div className = "chatName">{this.getChatUserName(item.participants)}</div>
-              <div className = "chatDescription"></div>
+              <div className = "chatDescription"> {this.chatDescription(item.recentMessage)}</div>
             </div>
 
             </div>

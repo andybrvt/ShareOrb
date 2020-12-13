@@ -31,6 +31,8 @@ class NewChatContent extends React.Component{
         this.state.message
       )
 
+      // Send one to the chat list as well to update it 
+
       this.setState({
         message: ""
       })
@@ -122,7 +124,7 @@ class NewChatContent extends React.Component{
 
             }
 
-            
+
             </div>
 
 
