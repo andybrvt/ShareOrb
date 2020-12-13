@@ -104,7 +104,9 @@ class App extends Component {
     )
 
     NewChatWebSocketInstance.addCallbacks(
-      this.props.setMessages.bind(this)
+      this.props.setMessages.bind(this),
+      this.props.addMessage.bind(this)
+
     )
   }
 

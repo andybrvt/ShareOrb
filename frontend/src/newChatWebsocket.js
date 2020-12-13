@@ -65,6 +65,12 @@ class WebSocketNewChat {
 
       this.callbacks['set_messages'](messages)
     }
+    if(command === "send_new_chat_created_message"){
+      const message = parsedData.newMessage
+
+      // Put call backs here
+      this.callbacks['send_message'](message)
+    }
   }
 
   fetchMessages = (chatId) => {
@@ -77,12 +83,27 @@ class WebSocketNewChat {
     })
   }
 
+  sendNewChatCreatedMessage = (chatId, senderId, message) => {
+    // This function will recieve in put when you are sending a message
+    // and then send it inot the backedn to channel to create all messages
+
+    console.log(chatId, senderId, message)
+    this.sendMessage({
+      command: "send_new_chat_created_message",
+      chatId: chatId,
+      senderId: senderId,
+      message: message
+    })
+  }
+
   // now callbacks
   addCallbacks(
-    setMessages
+    setMessages,
+    sendMessage
   ){
     // add callbacks here
     this.callbacks['set_messages'] = setMessages
+    this.callbacks['send_message'] = sendMessage
   }
 
   sendMessage(data){

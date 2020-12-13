@@ -80,6 +80,9 @@ class NewChat extends React.Component{
 
   }
 
+
+
+
   renderTimestamp = timestamp =>{
     console.log(timestamp)
     let prefix = '';
@@ -127,6 +130,7 @@ class NewChat extends React.Component{
         <NewChatContent
         messages = {messages}
         curId = {this.props.id}
+        parameter = {this.props.parameter}
          />
 
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './NewChat.css';
 import { Input, List, Avatar} from 'antd';
+import NewChatWebSocketInstance from '../../newChatWebsocket';
 
 
 
@@ -14,12 +15,41 @@ class NewChatContent extends React.Component{
   handleChange = e => {
     console.log(e.target.value)
     this.setState({
-      messsage: e.target.value
+      message: e.target.value
     })
+  }
+
+  // This will handle the submiting of the chats. You will need to submit
+  // the chatid, current person sending the chat id, and the message
+  handleMessageSubmit = e => {
+    e.preventDefault()
+    if(this.state.message !== ""){
+      NewChatWebSocketInstance.sendNewChatCreatedMessage(
+        this.props.parameter.id,
+        this.props.curId,
+        this.state.message
+      )
+
+      this.setState({
+        message: ""
+      })
+    }
   }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   render(){
@@ -83,7 +113,11 @@ class NewChatContent extends React.Component{
 
         }
 
-        />
+        >
+        <div style={{ float:"left", clear: "both" }}
+            ref={(el) => { this.messagesEnd = el; }}>
+       </div>
+        </List>
         </div>
 
         <div className = "bottomBox">
@@ -91,9 +125,11 @@ class NewChatContent extends React.Component{
             <div className = "formInputs">
               <Input
               onChange = {this.handleChange}
+              value = {this.state.message}
               className = "chatInput"
               type = "text"
               placeholder = "Write your message..."
+              onPressEnter = {this.handleMessageSubmit}
               />
 
               <span className = "sendButton">
