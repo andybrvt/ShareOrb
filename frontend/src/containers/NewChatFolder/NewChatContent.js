@@ -1,7 +1,8 @@
 import React from 'react';
 import './NewChat.css';
-import { Input, List, Avatar} from 'antd';
+import { Input, List, Avatar, Spin} from 'antd';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
+import { LoadingOutlined } from '@ant-design/icons';
 
 
 
@@ -41,7 +42,10 @@ class NewChatContent extends React.Component{
   }
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    if(this.messagesEnd){
+        this.messagesEnd.scrollIntoView({ behavior: "auto" });
+    }
+
   }
 
   componentDidMount() {
@@ -55,69 +59,90 @@ class NewChatContent extends React.Component{
   render(){
     console.log(this.props)
     console.log(this.state.message)
+    let message = []
+    if(this.props.messages){
+      message = this.props.messages
+    }
 
     return (
       <div className = "newChatContent">
       <div className = "chatWrapContainer">
-        <List
-        className = "newChatTextContainer"
-        itemLayout = "horizontal"
-        dataSource = {this.props.messages}
-        renderItem = { item => (
+        {
+          !this.props.messages ?
 
-          <div>
-          {
-            this.props.curId === item.messageUser.id ?
+          <LoadingOutlined style={{ fontSize: 24 }} spin />
 
-            <div className = "chatTextBoxRight">
-            <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
-            <div className = 'chatNameTimeRight'>
-              <div className = 'chatNameRight'>
-                {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
+          :
+
+          <List
+          className = "newChatTextContainer"
+          itemLayout = "horizontal"
+          dataSource = {message}
+          renderItem = { item => (
+
+            <div>
+            {
+              this.props.curId === item.messageUser.id ?
+
+              <div className = "chatTextBoxRight">
+              <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
+              <div className = 'chatNameTimeRight'>
+                <div className = 'chatNameRight'>
+                  {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
+                </div>
+                <div>
+
+                </div>
               </div>
-              <div>
 
+              <div className = "chatContentTextRight">
+                {item.body}
               </div>
-            </div>
-
-            <div className = "chatContentTextRight">
-              {item.body}
-            </div>
-
-            </div>
-
-            :
-
-            <div className = "chatTextBox">
-            <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
-            <div className = 'chatNameTime'>
-              <div className = 'chatName'>
-                {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
-              </div>
-              <div>
 
               </div>
+
+              :
+
+              <div className = "chatTextBox">
+              <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
+              <div className = 'chatNameTime'>
+                <div className = 'chatName'>
+                  {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
+                </div>
+                <div>
+
+                </div>
+              </div>
+
+              <div className = "chatContentText">
+                {item.body}
+              </div>
+
+              </div>
+
+            }
+
+            
             </div>
 
-            <div className = "chatContentText">
-              {item.body}
-            </div>
 
-            </div>
+          )
 
           }
-          </div>
 
+          >
+          <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+         </div>
+          </List>
 
-        )
 
         }
 
-        >
-        <div style={{ float:"left", clear: "both" }}
-            ref={(el) => { this.messagesEnd = el; }}>
-       </div>
-        </List>
+
+
+
+
         </div>
 
         <div className = "bottomBox">

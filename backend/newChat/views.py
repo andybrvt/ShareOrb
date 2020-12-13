@@ -29,6 +29,8 @@ class MessageView(generics.ListAPIView):
 # This view will get all the chats pretaining to a specific user
 # if you wanna search up a speicfic user chats use ($username=username)
 
+
+# DELETE LATER
 class NewChatListView(generics.ListAPIView):
     serializer_class = serializers.ChatSerializer
     permission_classes = (permissions.AllowAny,)

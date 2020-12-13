@@ -1,4 +1,5 @@
-// This websocket will be used for the new chat
+// This websocket will be used for the new chat, it will be for
+// each individual chat, 
 class WebSocketNewChat {
   static instance = null;
   callbacks = {}

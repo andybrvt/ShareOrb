@@ -16,6 +16,7 @@ import SocialEventPageWebSocketInstance from './socialEventPageWebsocket';
 import SocialCalCellPageWebSocketInstance from './socialCalCellWebsocket';
 import UserPostPageWebSocketInstance from './UserPostPageWebsocket';
 import NewChatWebSocketInstance from './newChatWebsocket';
+import ChatSidePanelWebSocketInstance from './newChatSidePanelWebsocket';
 import AddChatModal from './containers/Popup';
 import * as navActions from './store/actions/nav';
 import * as messageActions from './store/actions/messages';
@@ -30,6 +31,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     // this.initialiseExplore()
+
+    this.initialiseChats()
 
     // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
     WebSocketInstance.addCallbacks(
@@ -108,7 +111,49 @@ class App extends Component {
       this.props.addMessage.bind(this)
 
     )
+
+    ChatSidePanelWebSocketInstance.addCallbacks(
+      // These function is to set the chats in
+      this.props.setChats.bind(this)
+    )
+
   }
+
+
+// So since you are gonna render the notification and chats at the
+// beginning when you first login, and to get chat notifcation,
+// so you want to connect to chats channel and notificaiton websocket
+// right away so that it is already connected whne you login
+  initialiseChats(){
+    this.waitForChatsSocketConnection(() =>{
+      console.log(this.props.id)
+      ChatSidePanelWebSocketInstance.fetchChats(
+        this.props.id
+      )
+
+    })
+    ChatSidePanelWebSocketInstance.connect(this.props.id)
+
+  }
+
+  waitForChatsSocketConnection(callback) {
+    const component = this;
+    setTimeout(
+      function(){
+
+        if (ChatSidePanelWebSocketInstance.state() === 1){
+
+          callback();
+          return;
+        } else{
+
+            component.waitForChatsSocketConnection(callback);
+        }
+      }, 100)
+
+  }
+
+
 
 //the map state to props allows us to get the state and then
 //turn it to props then call those props in Layouts.js
@@ -116,18 +161,31 @@ class App extends Component {
   //everythign this is run it will do a try auto signup, it will give
   //App.js this method from the store
     this.props.onTryAutoSignup();
-    // NotificationWebSocketInstance.connect(this.props.username)
-    // ExploreWebSocketInstance.connect(this.props.username)
 
 
   }
 
   componentWillReceiveProps(newProps){
-    // NotificationWebSocketInstance.connect(newProps.username)
-    if (this.props.username !== newProps.username){
-      // ExploreWebSocketInstance.disconnect()
-      // ExploreWebSocketInstance.connect(newProps.username)
+    if(newProps.isAuthenticated){
+      console.log(this.props.id, parseInt(newProps.id))
+      if(parseInt(this.props.id) !== parseInt(newProps.id)){
+        // This if statement will see if a person has login and is isAuthenticated
+        // and id has not change so we can connect to the right chat
+        ChatSidePanelWebSocketInstance.disconnect();
+        this.waitForChatsSocketConnection(() =>{
+          ChatSidePanelWebSocketInstance.fetchChats(
+            newProps.id
+          )
+
+        })
+        ChatSidePanelWebSocketInstance.connect(newProps.id)
+      }
     }
+    // NotificationWebSocketInstance.connect(newProps.username)
+    // if (this.props.username !== newProps.username){
+    //   // ExploreWebSocketInstance.disconnect()
+    //   // ExploreWebSocketInstance.connect(newProps.username)
+    // }
 
   }
 
@@ -162,6 +220,7 @@ const mapDispatchToProps = dispatch => {
     onTryAutoSignup: () => dispatch(authActions.authCheckState()),
     addMessage: message => dispatch(messageActions.addMessage(message)),
     setMessages: messages => dispatch(messageActions.setMessages(messages)),
+    setChats: chats => dispatch(messageActions.setChats(chats)),
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
     addEvent: events => dispatch(calendarActions.addEvent(events)),

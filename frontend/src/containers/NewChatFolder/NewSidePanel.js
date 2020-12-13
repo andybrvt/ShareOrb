@@ -12,6 +12,39 @@ class NewSidePanel extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+
+  getChatUserProfile(participantList){
+    // This function will show the correct userProfile that you are chatting
+    // with
+
+    // There should jsut be 2 for here so not too much run time
+    var profilePic = ""
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        profilePic = participantList[i].profile_picture
+      }
+    }
+
+    return profilePic;
+
+  }
+
+  getChatUserName(participantList){
+    // This function will show the correct name of the user that you are chatting
+    // with
+
+    var name = ""
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        name = this.capitalize(participantList[i].first_name)+ ' '
+        +this.capitalize(participantList[i].last_name)
+      }
+    }
+
+    return name;
+
+  }
+
   chatDescription (str){
     // This fucntion will take in a string and check how long it is, if it is
     // passed a certain lenght you would just put ... at the end of it
@@ -48,6 +81,7 @@ class NewSidePanel extends React.Component{
       },
     ];
 
+    // {this.chatDescription(item.get_messages[item.get_messages.length-1].body)}
     return(
       <div className = "newSidePanel">
       <List
@@ -63,10 +97,10 @@ class NewSidePanel extends React.Component{
             <div className = "chatWrap">
             <Avatar size = {50}
             className = "chatAva"
-             src = {'http://127.0.0.1:8000'+item.participants[1].profile_picture} />
+             src = {'http://127.0.0.1:8000'+this.getChatUserProfile(item.participants)} />
             <div className = "chatText">
-              <div className = "chatName">{this.capitalize(item.participants[1].first_name)} {this.capitalize(item.participants[1].last_name)}</div>
-              <div className = "chatDescription">{this.chatDescription(item.get_messages[item.get_messages.length-1].body)}</div>
+              <div className = "chatName">{this.getChatUserName(item.participants)}</div>
+              <div className = "chatDescription"></div>
             </div>
 
             </div>
