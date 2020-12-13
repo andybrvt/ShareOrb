@@ -88,12 +88,12 @@
   /* background-color: red; */
 }
 .chatNameTimeRight .chatNameRight {
-  font-size: 18px;
+  font-size: 10px;
   position: relative;
   bottom: 6px;
 }
 .chatNameTime .chatName {
-  font-size: 18px;
+  font-size: 10px;
   position: relative;
   bottom: 6px;
 }
@@ -103,14 +103,16 @@
   position: relative;
   width: 50%;
   left: 50px;
-  bottom: 17px;
+  bottom: 35px;
+  font-size: 18px;
 }
 .chatContentTextRight{
   position: relative;
   text-align: right;
   width: 50%;
   left: 44%;
-  bottom: 17px;
+  bottom: 35px;
+  font-size: 18px;
   /* background-color: blue; */
 }
 
