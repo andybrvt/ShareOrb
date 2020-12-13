@@ -6,12 +6,25 @@ import { Input, List, Avatar} from 'antd';
 
 class NewChatContent extends React.Component{
   // This file will contain all the text in the current chat.
+
+  state = {
+    message: ""
+  }
+
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({
+      messsage: e.target.value
+    })
+  }
+
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
   render(){
     console.log(this.props)
+    console.log(this.state.message)
 
     return (
       <div className = "newChatContent">
@@ -77,13 +90,13 @@ class NewChatContent extends React.Component{
           <form>
             <div className = "formInputs">
               <Input
+              onChange = {this.handleChange}
               className = "chatInput"
               type = "text"
               placeholder = "Write your message..."
               />
 
               <span className = "sendButton">
-              <i class="far fa-paper-plane"></i>
               </span>
 
 

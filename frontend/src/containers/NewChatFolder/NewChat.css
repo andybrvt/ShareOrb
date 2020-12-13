@@ -39,14 +39,15 @@
 
 .chatContainer .chatRightSide .newChatContent .chatWrapContainer{
   /* background-color: red; */
-  height: 93%;
+  height: 100%;
 
 }
 
 
 .chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer{
   overflow: auto;
-  height: 100%;
+  height: 93%;
+  background-color: red;
 
 }
 .chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer .chatTextBox{
@@ -124,7 +125,9 @@
 
 .chatContainer .chatRightSide .newChatContent .bottomBox .formInputs{
   position: relative;
-  left: 250px;
+  left: 25%;
+  /* background-color: red; */
+  width: 73%;
   /* top: 10px; */
 }
 .chatContainer .chatRightSide .newChatContent .bottomBox .formInputs .sendButton{
@@ -156,7 +159,10 @@
 }
 
 .chatInput{
-  width: 600px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+
   height: 40px;
   border-radius: 25px;
   background-color: whitesmoke;
