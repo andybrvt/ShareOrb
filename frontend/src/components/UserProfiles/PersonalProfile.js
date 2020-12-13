@@ -338,7 +338,8 @@ class PersonalProfile extends React.Component{
       // get following are the people taht are you are following, so they would be your
       // followers
       let username = ''
-
+      let firstName = ''
+      let lastName = ''
       let followers = []
       let following = []
       let posts = ''
@@ -355,7 +356,12 @@ class PersonalProfile extends React.Component{
           username = this.props.profile.username
         }
 
-
+        if(this.props.profile.first_name){
+          firstName = this.props.profile.first_name
+        }
+        if(this.props.profile.last_name){
+          lastName = this.props.profile.last_name
+        }
         if(this.props.profile.get_following){
           following = this.props.profile.get_following
         }
@@ -392,7 +398,16 @@ class PersonalProfile extends React.Component{
         <div className = 'profileInfo'>
 
           <div>
+            <div className = 'profileName'>
+              {this.capitalize(firstName)} {this.capitalize(lastName)}
+              <br/>
+              <span class="profileUserName">{"@"+username}</span>
+
+            </div>
+
+
             <div className = 'profilePostFollow'>
+
               <div
               onClick = {() => this.onFollowerOpen()}
               className = 'followItem'>
@@ -400,7 +415,7 @@ class PersonalProfile extends React.Component{
                 className = 'postFollowWords'
                 >Followers</span>
                 <br />
-                <span class="postFollowWords">{followers.length}</span>
+                <span>{followers.length}</span>
               </div>
               <div
               onClick = {() => this.onFollowingOpen()}
@@ -409,9 +424,10 @@ class PersonalProfile extends React.Component{
                 className = 'postFollowWords'
                 >Following</span>
                 <br />
-                <span class="postFollowWords">{following.length}</span>
+                <span>{following.length}</span>
               </div>
             </div>
+
 
 
           <div>

@@ -191,7 +191,8 @@ export const grabUserCredentials = () => {
            res.data.get_following,
            res.data.get_followers
          ));
-        dispatch(checkAuthTimeout(3600));
+         {/*when it times out*/}
+        dispatch(checkAuthTimeout(100000));
 
       })
       .catch(err => {

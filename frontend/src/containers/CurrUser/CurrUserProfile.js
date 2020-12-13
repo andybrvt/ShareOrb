@@ -282,7 +282,7 @@ class CurrUserProfile extends React.Component{
          </div>
 
 
-         
+
 
        </div>
 
