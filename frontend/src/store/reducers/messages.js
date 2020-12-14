@@ -25,9 +25,15 @@ const setMessages = (state, action) => {
 };
 
 const setChats = (state, action) => {
+  let curChat = ""
+  if(action.chats.length === 0){
+    curChat = 0
+  } else {
+    curChat = action.chats[0].id
+  }
   return updateObject(state, {
     chats:action.chats,
-    curChatId: action.chats[0].id
+    curChatId: curChat
   })
 }
 

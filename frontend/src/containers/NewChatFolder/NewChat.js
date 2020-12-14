@@ -7,7 +7,7 @@ import { authAxios } from '../../components/util';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
-
+import ManageChatHeader from './ManageChatHeader';
 
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
@@ -99,7 +99,7 @@ class NewChat extends React.Component{
   }
 
   render(){
-    console.log(this.props)
+    console.log(this.props.parameter.id)
     console.log(this.state)
     let messages = []
     let chats = []
@@ -116,6 +116,8 @@ class NewChat extends React.Component{
       <div className = "chatContainer">
 
       <div className = "chatLeftSide">
+        <ManageChatHeader />
+
         <NewSidePanel
         chatList = {chats}
         param = {this.props.parameter}
@@ -123,19 +125,32 @@ class NewChat extends React.Component{
         />
       </div>
 
+      {
+        parseInt(this.props.parameter.id) === 0 ?
 
-      <div className = "chatRightSide">
-        <NewChatHeader
-        curChat = {this.props.curChat}
-        curId = {this.props.id}
-        />
-        <NewChatContent
-        messages = {messages}
-        curId = {this.props.id}
-        parameter = {this.props.parameter}
-         />
+        <div className = "chatRightSide">
+          Hi there
 
-      </div>
+        </div>
+
+        :
+
+        <div className = "chatRightSide">
+          <NewChatHeader
+          curChat = {this.props.curChat}
+          curId = {this.props.id}
+          />
+          <NewChatContent
+          messages = {messages}
+          curId = {this.props.id}
+          parameter = {this.props.parameter}
+           />
+
+        </div>
+
+
+      }
+
 
       </div>
     )
