@@ -276,6 +276,7 @@ class PersonalProfile extends React.Component{
       // This is to display the 3 sections (cal, post, pic)
       // It allows you to switch between
       return(
+
         <div className = 'cal-post-pic'>
 
           {this.onRenderTabs()}
@@ -401,12 +402,7 @@ class PersonalProfile extends React.Component{
         <div className = 'profileInfo'>
 
           <div>
-            <div className = 'profileName'>
-              {this.capitalize(firstName)} {this.capitalize(lastName)}
-              <br/>
-              <span class="profileUserName">{"@"+username}</span>
-              {bio}
-            </div>
+
 
 
             <div className = 'profilePostFollow'>
@@ -660,9 +656,12 @@ class PersonalProfile extends React.Component{
 
     onRenderTabs= () => {
       return (
+        <div>
+
         <div className = 'profile-tabContainer'>
           <div style={{
           background:'white'}} class="stepTab">
+
           <Steps
             type="navigation"
             size="large"
@@ -711,6 +710,8 @@ class PersonalProfile extends React.Component{
            </div>
 
         </div>
+
+        </div>
       )
     }
 
@@ -749,8 +750,29 @@ class PersonalProfile extends React.Component{
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-          {this.renderProfilePic()}
-          {this.onRenderProfileInfo()}
+
+          <div class="eventCard" style={{marginTop:'38px',left:'25%', width:'1000px', height:'400px'}}>
+
+            <div class="parentFlexContainer">
+              {this.renderProfilePic()}
+              <span className = 'profileName'>
+                {this.capitalize(firstName)} {this.capitalize(lastName)}
+                <br/>
+
+              </span>
+              <span class="profileUserName">{"@"+this.props.username}</span>
+              <span class="profileBio">{bio}</span>
+            </div>
+
+            {this.onRenderProfileInfo()}
+
+          </div>
+
+
+
+
+
+
           {this.onRenderTabs()}
 
           <Modal

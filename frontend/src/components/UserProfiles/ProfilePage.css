@@ -37,10 +37,16 @@
 
 
 .selfProfileButtons{
-  margin-top: -300px;
-  margin-right: 50px;
+  margin-top: -175px;
+  margin-right: 25px;
   float:right;
   /* left: 50%; */
+}
+
+.dividerProfile{
+  color:red;
+  margin-bottom: 20px;
+  z-index: 3;
 }
 
 
@@ -160,18 +166,18 @@
   padding-top: 60px;
 }
 
-
+/* followers following count on profile */
 .profilePostFollow{
   /* background-color: red; */
   display: flex;
   flex-direction: row;
   padding: 0px 20px;
-  top:15px;
+  top:50px;
   width: 400px;
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
-  left: 48%;
+  left: 45%;
   transform: translateX(-50%);
 }
 
@@ -183,7 +189,7 @@
 
 .postFollowWords{
   color:black;
-  font-weight: 375;
+  font-weight: 400;
   font-size: 18px;
 }
 
@@ -213,7 +219,6 @@
 .parentFlexContainer{
   display: flex;
    flex-direction: row;
-   margin-left: 370px;
    margin-bottom: 20px;
    /* background-color: red; */
 }
@@ -243,14 +248,14 @@
     font-size: 20px;
     font-weight: 400;
     margin-top: 90px;
-
+    margin-left: -100px;
     color:grey;
 }
 
 .profilePic{
   /* background-color: yellow; */
-  margin-top: 50px;
-  margin-left: 850px;
+  margin-top: 10px;
+  margin-left: 350px;
 
   width: 200px;
   height: 180px;
@@ -299,8 +304,9 @@
 /* This is for the tab changes */
 /* how far up the tab is */
 .profile-tabContainer {
+  border-top: 2px solid #f0f0f0;
   position:absolute;
-  top: 450px;
+  top: 400px;
   padding-top: 25px;
 
   /* left: 40px; */
