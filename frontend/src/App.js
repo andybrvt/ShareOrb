@@ -219,7 +219,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onTryAutoSignup: () => dispatch(authActions.authCheckState()),
     addMessage: message => dispatch(messageActions.addMessage(message)),
-    setMessages: messages => dispatch(messageActions.setMessages(messages)),
+    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat)),
     setChats: chats => dispatch(messageActions.setChats(chats)),
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),

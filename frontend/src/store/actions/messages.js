@@ -9,10 +9,11 @@ export const addMessage = message => {
 };
 
 // This will set the messages when you first fetch the messages for the chat
-export const setMessages = messages => {
+export const setMessages = (messages, curChat) => {
   return {
     type: actionTypes.SET_MESSAGES,
-    messages: messages
+    messages: messages,
+    curChat: curChat
   }
 }
 
