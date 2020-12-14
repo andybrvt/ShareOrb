@@ -58,9 +58,7 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
 
 
     def send_social_edit_event_info(self, data):
-        print(data)
         eventEdit = get_object_or_404(SocialCalEvent, id = data['editSocialEventObj']['eventId'])
-        print(eventEdit)
         eventEdit.title = data['editSocialEventObj']['title']
         eventEdit.content = data['editSocialEventObj']['content']
         eventEdit.start_time = data['editSocialEventObj']['start_time']
@@ -81,7 +79,6 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         self.send_social_message(content)
 
     def send_social_event_delete(self, data):
-        print(data)
         selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         serializer = SocialCalEventSerializer(selectedEvent).data
         personList = serializer['persons'].copy()
@@ -111,14 +108,12 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
     def connect(self):
         # self.scope will pull stuff from the channel instance, the url kwargs is
         # to specific info off the channel urls
-        print("connect")
         self.selected_event = self.scope['url_route']['kwargs']['socialEventId']
         grp = 'socialEvent_'+self.selected_event
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
         self.accept()
 
     def disconnect(self, close_code):
-        print("disconnect")
         # Pretty much the same as cnnnect but now you are disconnecting
         self.selected_event = self.scope['url_route']['kwargs']['socialEventId']
         grp = 'socialEvent_'+self.selected_event
@@ -127,7 +122,6 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
 
         data = json.loads(text_data)
-        print(data)
         if data["command"] == "fetch_social_event_messages":
             self.send_fetch_social_event_messages(data);
         if data["command"] == "send_social_event_message":
@@ -152,7 +146,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # you will just return the user object so that it will fill up the page
         # but no event (hopefully if you filter and it is not there it will be empty)
 
-        print (data)
         user = get_object_or_404(User, username = data['cellUser'])
         socialCell = SocialCalCell.objects.filter(
             socialCalUser = user,
@@ -166,7 +159,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
                 'command': 'fetch_social_cal_cell_info',
                 'socialCalCell': serializerCell
             }
-            print(content)
             self.send_json(content)
         else:
             # When the social cal cell does not exist
@@ -175,7 +167,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
                 'command': 'fetch_social_cal_cell_info',
                 'socialCalCell': {'socialCalUser':serializerUser}
             }
-            print(content)
             self.send_json(content)
 
 
@@ -188,7 +179,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         #  personLIke and cellowner will be in id form
         personLike = get_object_or_404(User, id = data['personLike'])
         calOwner = get_object_or_404(User, id = data['cellOwner'])
-        print(personLike, calOwner )
 
         # So to save one space and such, you only want to create a social cal cell object
         # when there is a like or commment, pics or events. this si where get_or create comes in
@@ -213,13 +203,11 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         dateList = data['cellDate'].split("-")
         username = calOwner.username
-        print(dateList)
-        print(username)
+
 
         # You will use recipient to attach the group name
         recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
 
-        print(recipient)
         content = {
             'command': 'send_social_cal_cell_like_unlike',
             'likeList': socialCalCellObj['people_like'],
@@ -292,7 +280,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         socialCalCellComment = SocialCalCommentSerializer(socialComment).data
         socialCalCellComments = SocialCalCellSerializer(socialCell).data['get_socialCalComment']
-        print(socialCalCellComment)
 
         # Now we will create the tag name for the channel group
         dateList = data['cellDate'].split("-")
@@ -391,20 +378,17 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
     def connect(self):
         # gotta connect it properly, the code or name of the social cal cell will
         # be the combination of the user name, year, month and day
-        print("connect")
         self.selectedUser = self.scope['url_route']['kwargs']['user']
         self.selectedYear = self.scope['url_route']['kwargs']['year']
         self.selectedMonth = self.scope['url_route']['kwargs']['month']
         self.selectedDay = self.scope['url_route']['kwargs']['day']
         grp = 'socialCalCell_'+self.selectedUser+'_'+self.selectedYear+'_'+self.selectedMonth+'_'+self.selectedDay
-        print(grp)
 
         async_to_sync (self.channel_layer.group_add)(grp, self.channel_name)
         self.accept()
 
 
     def disconnect(self, close_code):
-        print("disconnect")
         self.selectedUser = self.scope['url_route']['kwargs']['user']
         self.selectedYear = self.scope['url_route']['kwargs']['year']
         self.selectedMonth = self.scope['url_route']['kwargs']['month']
@@ -415,7 +399,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_social_cal_cell_info':
             self.send_fetch_social_cal_cell_info(data)
         if data['command'] == 'send_social_cal_cell_like':

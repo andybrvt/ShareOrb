@@ -15,7 +15,6 @@ from django.contrib.contenttypes.models import ContentType
 def create_all_post(sender, instance, created, **kwargs):
     # This is a post save handler that will create a content type ojbect whenever
     # a socialcal or post object is created
-    print(instance)
     # The sender will be the model class and the instnace will
     # the specific instance of that class
     post_type = ContentType.objects.get_for_model(instance)
@@ -59,11 +58,9 @@ class User(AbstractUser):
         return Post.objects.filter(user=self).values_list('id', flat=True)
 
     def get_following(self):
-        print(UserFollowing.objects.filter(person_following = self).values_list('person_getting_followers__username', flat= True))
+
         # for i in UserFollowing.objects.filter(person_following = self).values_list('person_getting_followers__username', flat =True):
-        #     print(i)
-        #     # list = []
-        #     # print (User.objects.get(id = i).id)
+
         return UserFollowing.objects.filter(person_following = self).values_list('person_getting_followers__username', flat= True)
 
     def get_followers(self):
@@ -135,13 +132,10 @@ class Post(models.Model):
 
 
     def post_comments(self):
-        # print(Post.objects.filter(user=self).values_list())
         return (Comment.objects.filter(post=self.id).values_list('id', flat = True))
 
     def post_images(self):
-        # print(Post.objects.filter(user=self).values_list())
         return (ImageModel.objects.filter(imageList=self.id).values_list('mainimage', flat= True ))
-        # return Comment.objects.filter(post=self.id)
 
     #
     # def __str__(self):

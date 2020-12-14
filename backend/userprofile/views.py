@@ -61,7 +61,6 @@ class NewPostingView(APIView):
     def post(self, request, *args, **kwargs):
         # So first you must create the post then like the foreign key to the
         # images
-        print(request.data)
         timezone.activate(pytz.timezone('MST'))
         time = timezone.localtime(timezone.now())
         # The first thing you wanna get is the user
@@ -277,7 +276,7 @@ class postCommentTest(APIView):
         post= get_object_or_404(models.Post, id=postID)
         # filter retrieves all the active comments for the post
         # comments = post.comments.filter(active=True)
-        # print(comments)
+
         new_comment = None
 
 
@@ -399,10 +398,6 @@ class ViewComment(APIView):
         # if(grabComment.id in grabPost.comments):
         # check if comment id is in list of grabpost.comemnts
 
-
-        # grabComment=grabPost.get(id=commentID)
-        # print(grabComment)
-#         print(grabComment.caption)
         return Response('Grabbing the comment')
 
 
@@ -432,7 +427,6 @@ class PendingPicNotificationView(APIView):
     # curId will be the actor (the person who is asking to approvae the picture)
     # ownerId will be the person approvign(reciever)
     def post(self, request, curId, ownerId, *args, **kwargs):
-        print(request.data)
         # So what you are doing, the first thing you have to do is create
         # the notification using the curId as the actor, ownerId as the reciever
         # and then since you are can only post pictures on the current day, you
@@ -446,7 +440,6 @@ class PendingPicNotificationView(APIView):
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
 
-        print(time)
 
         # When making the new notification the type will be pending_social_pics
         notification = models.CustomNotification.objects.create(
@@ -460,7 +453,6 @@ class PendingPicNotificationView(APIView):
         # Now we will loop through all the pictures that were sent into the backend
         # and then make the pendingsoicalPic objects for each one of them and then
         # link it up with the correct notification
-        print("success")
         for i in range(len(request.data)):
             print(request.data['image['+str(i)+']'])
 
@@ -472,7 +464,6 @@ class PendingPicNotificationView(APIView):
 
         # serializer = serializers.NotificationSerializer(notification).data
 
-        print(notification.id)
 
         return Response(notification.id)
 

@@ -19,7 +19,6 @@ from mySocialCal.serializers import SocialCalEventSerializer
 class PostUserSerializer(serializers.ModelSerializer):
     friends = serializers.SerializerMethodField()
     def get_friends(self, obj):
-        # print(obj.friends.all().first().username)
         list = []
         for i in obj.friends.all():
             user = i.username
@@ -225,7 +224,6 @@ class PostSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['user'] = UserSerializer(models.User.objects.get(pk=data['user'])).data
-        print(data['post_comments'])
         comment_list = []
         userLike_list=[]
 
@@ -241,7 +239,6 @@ class PostSerializer(serializers.ModelSerializer):
 
         data['people_like'] = userLike_list
         # if (len(data['post_images']) > 0):
-        #     print(list(models.ImageModel.objects.filter(imageList = data['id'])))
         #     list = []
         #     for pictures in ImageSerializer(models.ImageModel.objects.filter(imageList = 1)).data:
         #         list.append(pictures)

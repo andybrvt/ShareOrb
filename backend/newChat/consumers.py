@@ -31,8 +31,10 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             user = get_object_or_404(User, id = data['userId'])
             chats = user.chat_parti.all()
             # When you do many = True it will serialize the list of chat objects
+            print("does it here start")
             chatList = MiniChatSerializer(chats, many = True).data
             print(chatList)
+            print("does it hit here")
             content = {
                 'command': 'fetch_all_user_chats',
                 'chats': chatList
@@ -42,7 +44,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
     def send_update_recent_chat(self, data):
         # This function will update the current with the current message sent,
         # person sent it and what time
-        print("update chats")
         curChat = get_object_or_404(Chat, id = data['chatId'])
         sender = get_object_or_404(User, id = data['senderId'])
 
@@ -56,8 +57,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         curChat.save()
 
         serializedChat = MiniChatSerializer(curChat).data
-        print('right here')
-        print(curChat.participants)
         for participant in serializedChat['participants']:
             # you will loop through the users and then send it to each of them
             # a new chat that is updated
@@ -91,7 +90,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
     def connect(self):
         # This will be used to connect into the chats,you chats so taht your
         # sidepanel can be working
-        print("connect")
 
         self.chats_id = self.scope['url_route']['kwargs']['chatsOwnerId']
         grp = 'chats_list_'+self.chats_id
@@ -103,7 +101,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         # This will be the disconnect when you wnat to disocnnect from your
         # chat, used mainly when exiting chats. I don't think i want to keep chat
         # open during the login... maybe
-        print("disconnect")
         # Each channel layer will be specific to a user. It will be a channel layer
         # of the chats
 
@@ -115,9 +112,7 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         # This is for when you are receivng information from other poeple and you
         # want to update your shit
-        print(text_data)
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_all_user_chats':
             self.send_fetch_all_user_chats(data)
         if data['command'] == 'update_recent_chat':
@@ -134,7 +129,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
 
     def send_fetch_new_chat_messages(self, data):
         # This will fetch the messages of the current chat that is open
-        # print('fetch')
         # messages = views.get_last_10_messages(data['chatId'])
         #
         # content = {
@@ -184,7 +178,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
         }
 
         self.send_messsage(content)
-        print(data)
 
     def send_messsage(self, newMessageObj):
         # This function will be sending information to the channel layer
@@ -203,7 +196,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
 
     def connect(self):
         # This will connect to the correct chat weboscket
-        print("connect")
         # get the channel name
         self.chat_id = self.scope['url_route']['kwargs']['newChatId']
         grp = 'newChat_'+self.chat_id
@@ -215,7 +207,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
     def disconnect(self, close_code):
         #This will be the disconnect in order to disconnect the channel
         # and connect to a  new one
-        print("disconnect")
         # pretty much the same as connect but now you are just disconnecting
         self.chat_id = self.scope['url_route']['kwargs']['newChatId']
         grp = 'newChat_'+self.chat_id
@@ -225,7 +216,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
         # This is for receiving information from the front end
 
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_new_chat_messages':
             self.send_fetch_new_chat_messages(data)
         if data['command'] == 'send_new_chat_created_message':

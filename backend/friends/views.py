@@ -47,12 +47,7 @@ class FriendRequestList(generics.ListAPIView):
 # 	context = {
 # 		'users': users
 # 	}
-# 	print(users)
 # 	for element2 in users:
-# 		print(element2)
-# 	print(request)
-# 	print(request.body)
-# 	print(context)
 #
 # 	# return HttpResponse(request.bodyf
 # 	# return HttpResponseRedirect('/users')

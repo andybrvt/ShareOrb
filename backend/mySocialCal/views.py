@@ -29,7 +29,6 @@ class SocialCalCellView(generics.ListAPIView):
 class SocialCalUploadPic(APIView):
     # parser_classes = (FormParser, MultiPartParser)
     def post(self, request, id, *args, **kwargs):
-        print(request.data)
         # This is to adjust the time to the correct timezone
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
@@ -43,8 +42,7 @@ class SocialCalUploadPic(APIView):
             socialCaldate = time
         )
 
-        # print(request.data.get('image[0]'))
-        # print(request.body)
+
         change = False
 
         for i in range(len(request.data)):
@@ -74,7 +72,6 @@ class SocialCalUploadPic(APIView):
                     defaults = {'coverPic': request.data['image[0]']}
                 )
                 change = True
-        # print(request.data)
         # Get social cal again so we can pull the cover picture
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
             socialCalUser = user,
@@ -91,7 +88,6 @@ class SocialCalUploadPic(APIView):
 
 class SocialEventCreateView(APIView):
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         # For this psot function, what you wanna do is, first get the user object
         # which is the person who made the event then you would then get_or_create
@@ -131,7 +127,7 @@ class SocialEventCreateView(APIView):
 
 class SocialPictureCreateView(APIView):
     def post(self, request, *args, **kwargs):
-        print(request.data) # consist of notificationId, ownerId, date, curId
+        # consist of notificationId, ownerId, date, curId
         # This function will pretty be the http version of teh approve_social_pics
         # in the userprofile consumers. It is used to make the calcell or grab it
         # and make the calendar items

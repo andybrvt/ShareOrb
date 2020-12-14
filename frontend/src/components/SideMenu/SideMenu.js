@@ -124,6 +124,7 @@ class SideMenu extends React.Component {
     let firstName = ''
     let lastName = ''
 
+
     console.log(this.props)
     if (this.props.profilePic){
       profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
@@ -136,10 +137,8 @@ class SideMenu extends React.Component {
 
 
 
-
     const { dataSource } = this.state;
     const { Option } = Select;
-
 
     const temp=[]
     this.state.profileList.forEach(item => {
@@ -234,7 +233,7 @@ class SideMenu extends React.Component {
                       <li><a href="/home" class="d-flex align-items-center"> <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">Home</span></a></li>
                       {/*<li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
                     */}
-                    <li><a href={"/chat/1"} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
+                    <li><a href={"/chat/"+this.props.curChatId} class="d-flex align-items-center"><InboxOutlined style={{marginRight:'10px'}}/><span class="menu-text">Messages</span></a></li>
                       <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
                         class="d-flex align-items-center">
                         <CalendarOutlined style={{marginRight:'10px'}}/>
@@ -447,8 +446,8 @@ const mapStateToProps = state => {
     username: state.auth.username,
     showNotification: state.notifications.showNotification,
     notifications: state.notifications.notifications,
-    profilePic: state.auth.profilePic
-
+    profilePic: state.auth.profilePic,
+    curChatId: state.message.curChatId
   }
 }
 

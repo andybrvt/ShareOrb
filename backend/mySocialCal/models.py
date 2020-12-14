@@ -11,7 +11,6 @@ from django.contrib.contenttypes.models import ContentType
 
 def create_all_post(sender, instance, created, **kwargs):
     # This will be simlar to the one in the userprofile  models
-    print(instance.get_socialCalItems())
     userModal = apps.get_model('userprofile', 'User')
     userSocialNormPost = apps.get_model('userprofile', 'UserSocialNormPost')
 

@@ -106,7 +106,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
             'newEvent': serializer.data,
             # 'users': person,
         }
-        print(content)
         return self.send_new_event(content)
 
     def accept_shared_event(self, data):
@@ -324,7 +323,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'add_sync_event':
             # XXX NOT CHECKED
             self.add_share_sync_event(data)
@@ -343,7 +341,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
 
     def new_event(self, event):
         newEvent = event['newEvent']
-        print ('new_event_test_test')
         return self.send_json(newEvent)
 
     def accepted_share(self, event):
@@ -388,7 +385,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
             'eventMessageObj': eventMessageObj,
             'eventObjId': data['eventId']
         }
-        # print (content)
         self.send_message(content)
 
     def send_edit_event_info(self, data):
@@ -458,7 +454,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
         )
 
     def connect (self):
-        print ('connect')
         # self.scope will pull stuff from channel instance, the url_route kwargs will
         # pull the eventId
         self.selected_event = self.scope['url_route']['kwargs']['eventId']
@@ -469,7 +464,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
         self.accept()
 
     def disconnect(self, close_code):
-        print ('diconnect')
         # Pretty much the same as the connect function but instaed of group add
         # it is group discard
         self.selected_event = self.scope['url_route']['kwargs']['eventId']
@@ -485,7 +479,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
             self.send_event_message(data)
         if data['command'] == "send_edit_event_info":
             self.send_edit_event_info(data);
-        print(data)
 
     def new_message(self, message):
         messageObj = message['eventMessage']

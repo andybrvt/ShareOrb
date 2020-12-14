@@ -44,8 +44,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
     def fetch_notifications(self, data):
 
         user = self.scope['user']
-        # print('first')
-        # print(user)
         # This is where all the notifications get pulled
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId']).order_by('-timestamp')
         serializer = NotificationSerializer(notifications, many=True)
@@ -109,12 +107,10 @@ class NotificationConsumer(JsonWebsocketConsumer):
             "notification": json.dumps(serializer.data),
             "recipient": recipient.username #important for group send (group name)
         }
-        print('send_notification')
         return self.send_new_notification(content)
 
     def send_event_sync_notification(self, data):
         # This is to send custom notification for event sync
-        print(data)
         if data['command'] == 'send_friend_event_sync':
             recipient = get_object_or_404(User, username = data['recipient']['username'])
             actor = get_object_or_404(User, username = data['actor'])
@@ -155,8 +151,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
     def send_personalCal_event_notification(self, data):
         #This method is to use for all the notificaiton for personal calendar
-        print(data)
-        print('right here')
         # if data['command'] == "send_shared_event_notification":
         #     actor = get_object_or_404(User, id = data["actor"])
         #     # for recipients in data['recipient']:
@@ -243,7 +237,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
     def send_social_cal_notification(self, data):
         # This method will be used for notifications related to the socialCalendar
 
-        print(data)
         if data['command'] == 'send_pending_social_event':
             actor = get_object_or_404(User, id = data['socialEventObj']['curId'])
             recipient = get_object_or_404(User, id = data['socialEventObj']['calOwner'])
@@ -278,7 +271,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
             notification = get_object_or_404(CustomNotification, id = data['notificationId'])
 
             serializer = NotificationSerializer(notification)
-            print(notification.recipient.username)
             content = {
                 "command": "new_notification",
                 "notification": json.dumps(serializer.data),
@@ -460,8 +452,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print (data)
-        print ("test test")
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -573,9 +563,7 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
 
     def delete_post(self, data):
         # This will delete the post
-        print('you delete the post object')
         Post.objects.get(id = data['postId']).delete()
-        print(data['postId'])
         content = {
             'command':'delete_post',
             'postId': data['postId']
@@ -657,7 +645,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # information in their profile. The first thing you want to do is
         # grab the current user. Then pull up the fields and then start
         # picking out the fields and changing them
-        print(data)
         profile = get_object_or_404(User, id = data['editProfileObj']['userId'])
 
         profile.first_name = data['editProfileObj']['first_name']
@@ -688,7 +675,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # EventObj is a dictionary that contains all the event information
         eventObj = data['eventObj']
 
-        print(eventObj['curId'])
         user = get_object_or_404(User, id = eventObj['curId'])
         calOwner = get_object_or_404(User, id = eventObj['calOwner'])
         socialCalCell, created = SocialCalCell.objects.get_or_create(
@@ -718,7 +704,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         userObj = FollowUserSerializer(user, many = False).data
         ownerObj = FollowUserSerializer(calOwner).data
 
-        print('hit here')
 
         content = {
             'command': 'send_social_event',
@@ -933,11 +918,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # and the pull the pictuures and then add the pictures into the social
         # cal. Then information will be sent into the front end to update the social
         # cal
-        print(data)
         # First thing is grab the notification
         notification = get_object_or_404(CustomNotification, id = data['notificationId'])
         serializedNotification = NotificationSerializer(notification).data
-        print(serializedNotification)
 
         # Now we will get the social cal cell
         calOwner = get_object_or_404(User, id = data['ownerId'])
@@ -950,8 +933,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # and then add those into social cal items along with foreign key to the
         # social cal cell
 
-        print("coverpic here")
-        print(socialCalCell.coverPic)
         imgOwner = get_object_or_404(User, id = data['curId'])
         for items in serializedNotification['get_pendingImages']:
             image = items['itemImage']
@@ -1180,7 +1161,6 @@ class UserPostConsumer(JsonWebsocketConsumer):
 
 
     def connect(self):
-        print("connect")
         self.postUser = self.scope['url_route']['kwargs']['user']
         self.postId = self.scope['url_route']['kwargs']['postId']
         grp = 'post_'+self.postUser+'_'+self.postId
@@ -1188,7 +1168,6 @@ class UserPostConsumer(JsonWebsocketConsumer):
         self.accept()
 
     def disconnect(self, close_code):
-        print("disconnect")
         self.postUser = self.scope['url_route']['kwargs']['user']
         self.postId = self.scope['url_route']['kwargs']['postId']
         grp = 'post_'+self.postUser+'_'+self.postId

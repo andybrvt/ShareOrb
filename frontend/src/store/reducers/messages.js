@@ -5,6 +5,7 @@ import { updateObject } from '../utility';
 const initialState = {
   messages:[],
   chats: [],
+  curChatId: 0,
   curChat:{}
 }
 
@@ -25,7 +26,8 @@ const setMessages = (state, action) => {
 
 const setChats = (state, action) => {
   return updateObject(state, {
-    chats:action.chats
+    chats:action.chats,
+    curChatId: action.chats[0].id
   })
 }
 
