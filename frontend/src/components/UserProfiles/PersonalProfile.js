@@ -259,7 +259,7 @@ class PersonalProfile extends React.Component{
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
-          <Avatar size = {175} src = {profileImage} />
+          <Avatar size = {150} src = {profileImage} />
           {
             this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
@@ -751,7 +751,7 @@ class PersonalProfile extends React.Component{
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
-          <div class="eventCard" style={{marginTop:'38px',left:'25%', width:'1000px', height:'400px'}}>
+          <div class="profileEventCard" style={{marginTop:'50px',width:'900px', height:'275px'}}>
 
             <div class="parentFlexContainer">
               {this.renderProfilePic()}
