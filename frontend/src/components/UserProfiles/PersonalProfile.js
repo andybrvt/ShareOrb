@@ -259,7 +259,7 @@ class PersonalProfile extends React.Component{
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
-          <Avatar size = {180} src = {profileImage} />
+          <Avatar size = {175} src = {profileImage} />
           {
             this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
@@ -346,7 +346,7 @@ class PersonalProfile extends React.Component{
       let profileId = ''
       let friends = []
       let curId = ''
-
+      let bio=''
       if(this.props.currentId){
         curId = this.props.currentId
       }
@@ -372,6 +372,9 @@ class PersonalProfile extends React.Component{
         if(this.props.profile.id){
           profileId = this.props.profile.id
 
+        }
+        if(this.props.profile.bio !== null){
+          bio = this.props.profile.bio
         }
 
         if(this.props.profile.get_followers){
@@ -402,7 +405,7 @@ class PersonalProfile extends React.Component{
               {this.capitalize(firstName)} {this.capitalize(lastName)}
               <br/>
               <span class="profileUserName">{"@"+username}</span>
-
+              {bio}
             </div>
 
 

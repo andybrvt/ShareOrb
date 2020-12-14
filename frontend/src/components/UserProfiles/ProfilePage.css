@@ -243,7 +243,7 @@
     font-size: 20px;
     font-weight: 400;
     margin-top: 90px;
-    margin-left: -100px;
+
     color:grey;
 }
 
@@ -423,7 +423,7 @@
   text-align: center;
   align-items: center;
   align-content: center;
-  padding-top: 1.5%;
+
    /* font-family: Montserrat, "sans-serif"; */
    color:grey;
    font-weight: 600;
