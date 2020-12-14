@@ -11,6 +11,11 @@ from .models import Chat
 from .models import Message
 from django.shortcuts import get_object_or_404
 from userprofile.models import User
+from django.utils import timezone
+import pytz
+from datetime import datetime
+
+
 
 class NewChatSidePanelConsumer(JsonWebsocketConsumer):
     # This consumer will be incharge of the sidemenu and all the stuff
@@ -34,6 +39,54 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             }
             self.send_json(content)
 
+    def send_update_recent_chat(self, data):
+        # This function will update the current with the current message sent,
+        # person sent it and what time
+        print("update chats")
+        curChat = get_object_or_404(Chat, id = data['chatId'])
+        sender = get_object_or_404(User, id = data['senderId'])
+
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+
+
+        curChat.recentMessage = data['message']
+        curChat.recentSender = sender
+        curChat.recentTime = time
+        curChat.save()
+
+        serializedChat = MiniChatSerializer(curChat).data
+        print('right here')
+        print(curChat.participants)
+        for participant in serializedChat['participants']:
+            # you will loop through the users and then send it to each of them
+            # a new chat that is updated
+            user = get_object_or_404(User, id = int(participant['id']))
+            chats = user.chat_parti.all()
+            # When you do many = True it will serialize the list of chat objects
+            chatList = MiniChatSerializer(chats, many = True).data
+            content = {
+                "command": "update_chat_list",
+                "chatList": chatList,
+                "chatUserId": user.id
+            }
+            self.send_chats(content)
+
+    def send_chats(self, chatListObj):
+        # This function will leading to sending the chat list to the right person
+        # in the front end
+        # Pretty much getting the channel layer
+        channel_layer = get_channel_layer()
+        channel_recipient = chatListObj['chatUserId']
+        channel = 'chats_list_'+str(channel_recipient)
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type': 'new_chat_lists',
+                'chatList': chatListObj
+            }
+        )
 
     def connect(self):
         # This will be used to connect into the chats,you chats so taht your
@@ -67,6 +120,13 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == 'fetch_all_user_chats':
             self.send_fetch_all_user_chats(data)
+        if data['command'] == 'update_recent_chat':
+            self.send_update_recent_chat(data)
+
+    def new_chat_lists(self, chatObj):
+        # This will be sneding it to the front end
+        chatListObj = chatObj['chatList']
+        return self.send_json(chatListObj)
 
 class NewChatConsumer(JsonWebsocketConsumer):
     # This consumer well be used to manage the backend for sending text

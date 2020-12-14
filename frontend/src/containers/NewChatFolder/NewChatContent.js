@@ -2,6 +2,7 @@ import React from 'react';
 import './NewChat.css';
 import { Input, List, Avatar, Spin} from 'antd';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
+import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
 import { LoadingOutlined } from '@ant-design/icons';
 
 
@@ -31,7 +32,12 @@ class NewChatContent extends React.Component{
         this.state.message
       )
 
-      // Send one to the chat list as well to update it 
+      // Send one to the chat list as well to update it
+      ChatSidePanelWebSocketInstance.updateRecentChat(
+        this.props.parameter.id,
+        this.props.curId,
+        this.state.message
+      )
 
       this.setState({
         message: ""

@@ -77,6 +77,14 @@ class WebSocketNewChatSidePanel {
 
       this.callbacks['fetch_chats'](chatList)
     }
+    if(command == "update_chat_list"){
+      const chatList = parsedData.chatList
+
+      // Since this updating the chats too, the redux will be
+      // similar to the fetch chats so you cna just reuse the
+      // fetch_catch call back
+      this.callbacks['fetch_chats'](chatList)
+    }
   }
 
   fetchChats =(userId) => {
@@ -85,6 +93,18 @@ class WebSocketNewChatSidePanel {
     this.sendChats({
       userId: userId,
       command: 'fetch_all_user_chats'
+    })
+  }
+
+  updateRecentChat = (chatId, senderId, message) =>{
+    // this function will be sent with the sendNewChatCreatedMessage
+    // function in the newchatwebsocket inorder to update the
+    // chat function.
+    this.sendChats({
+      chatId: chatId,
+      senderId: senderId,
+      message: message,
+      command: 'update_recent_chat'
     })
   }
 
