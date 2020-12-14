@@ -1,6 +1,7 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
 import { NavLink } from 'react-router-dom';
+import * as dateFns from 'date-fns';
 
 
 
@@ -45,17 +46,49 @@ class NewSidePanel extends React.Component{
 
   }
 
-  chatDescription (str){
+  chatDescription (str, senderObj, recentTime){
     // This fucntion will take in a string and check how long it is, if it is
     // passed a certain lenght you would just put ... at the end of it
     let finalStr = str
-    console.log(str)
+    console.log(recentTime)
     if(str.length > 30){
       finalStr = finalStr.substring(0,30)
       finalStr = finalStr+"..."
     }
+    if(senderObj.id === this.props.curId){
+      // This is if you sent the message
+      finalStr = "You: "+finalStr
+    } else {
+      finalStr = senderObj.first_name+": "+finalStr
+    }
+
+    console.log(senderObj.recentTime)
+    const timeStamp = this.renderTimestamp(recentTime)
+    finalStr = finalStr +" - "+timeStamp
     return this.capitalize(finalStr)
   }
+
+  renderTimestamp = timestamp =>{
+    console.log(timestamp)
+    let prefix = '';
+    console.log(Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000))
+    const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    console.log(timeDiff)
+    if (timeDiff < 1 ) {
+      prefix = `Just now`;
+    } else if (timeDiff < 60 && timeDiff >= 1 ) {
+      prefix = `${timeDiff}min`;
+    }else if (timeDiff < 24*60 && timeDiff > 60) {
+      prefix = `${Math.round(timeDiff/60)}h`;
+    } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
+      prefix = `${Math.round(timeDiff/(60*24))}days`;
+    } else {
+        prefix = `${dateFns.format(new Date(timestamp), "MM/dd/yy")}`;
+    }
+
+    return prefix;
+  }
+
 
   render(){
 
@@ -100,7 +133,10 @@ class NewSidePanel extends React.Component{
              src = {'http://127.0.0.1:8000'+this.getChatUserProfile(item.participants)} />
             <div className = "chatText">
               <div className = "chatName">{this.getChatUserName(item.participants)}</div>
-              <div className = "chatDescription"> {this.chatDescription(item.recentMessage)}</div>
+              <div className = "chatDescription"> {this.chatDescription(item.recentMessage,
+                item.recentSender,
+                item.recentTime
+              )}</div>
             </div>
 
             </div>

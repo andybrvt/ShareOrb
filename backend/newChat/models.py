@@ -29,11 +29,14 @@ class Chat(models.Model):
 
     # you are gonna put a function here that gets all the message object
     # for this chat
+    class Meta:
+        ordering = ['-recentTime']
 
     def get_messages(self):
         # This will attached the messages to the right chat by the foriegnkey. All
         # you have to do is filter out the right messages for each social event
         return Message.objects.filter(chat = self).values_list('id', flat = True)
+
 
 # This class will be fore the methods inside the chat
 class Message(models.Model):

@@ -58,6 +58,7 @@ class MiniChatSerializer(serializers.ModelSerializer):
             participant = ChatUser(User.objects.get(id = participants)).data
             participantList.append(participant)
         data['participants'] = participantList
+        data['recentSender'] = ChatUser(User.objects.get(id = data['recentSender'])).data
         return data
 
 
