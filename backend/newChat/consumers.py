@@ -148,7 +148,8 @@ class NewChatConsumer(JsonWebsocketConsumer):
         messages = serializedChat['get_messages'][:10]
         content = {
             'command': 'fetch_messages',
-            'messages': messages
+            'messages': messages,
+            "curChat": serializedChat
         }
         self.send_json(content)
 

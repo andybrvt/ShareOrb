@@ -68,7 +68,7 @@ class NewChat extends React.Component{
       NewChatWebSocketInstance.connect(newProps.parameter.id)
     }
 
-    
+
 
 
   }
@@ -125,7 +125,10 @@ class NewChat extends React.Component{
 
 
       <div className = "chatRightSide">
-        <NewChatHeader />
+        <NewChatHeader
+        curChat = {this.props.curChat}
+        curId = {this.props.id}
+        />
         <NewChatContent
         messages = {messages}
         curId = {this.props.id}
@@ -142,7 +145,8 @@ class NewChat extends React.Component{
 const mapStateToProps = state => {
   return {
     messages: state.message.messages,
-    chats: state.message.chats
+    chats: state.message.chats,
+    curChat: state.message.curChat
   }
 }
 

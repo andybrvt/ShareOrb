@@ -4,7 +4,8 @@ import { updateObject } from '../utility';
 
 const initialState = {
   messages:[],
-  chats: []
+  chats: [],
+  curChat:{}
 }
 
 // makes a new list and then adds the action.message in
@@ -15,8 +16,10 @@ const addMessage = (state, action) =>{
 };
 
 const setMessages = (state, action) => {
+  console.log(action.curChat)
   return updateObject(state, {
-    messages: action.messages.reverse()
+    messages: action.messages.reverse(),
+    curChat: action.curChat
   });
 };
 

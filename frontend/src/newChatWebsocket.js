@@ -1,5 +1,5 @@
 // This websocket will be used for the new chat, it will be for
-// each individual chat, 
+// each individual chat,
 class WebSocketNewChat {
   static instance = null;
   callbacks = {}
@@ -63,8 +63,8 @@ class WebSocketNewChat {
 
     if(command === "fetch_messages"){
       const messages = parsedData.messages
-
-      this.callbacks['set_messages'](messages)
+      const curChat = parsedData.curChat
+      this.callbacks['set_messages'](messages, curChat)
     }
     if(command === "send_new_chat_created_message"){
       const message = parsedData.newMessage
