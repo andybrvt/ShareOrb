@@ -31,6 +31,24 @@
   display: flex;
 }
 
+.chatContainer .chatRightSide .noChatsScreen{
+  /* background-color: red; */
+  position: relative;
+  padding-top: 40%;
+  width: 100%;
+  height: 100%;
+  border: 1px solid gray;
+}
+.chatContainer .chatRightSide .noChatsScreen .noChatsWord{
+  color: gray;
+  font-size: 2vw;
+  text-align: center;
+}
+.createChatButtonContainer{
+  /* background-color: red; */
+  text-align: center;
+}
+
 .manageChatForm{
   /* background-color: red; */
   position:relative;

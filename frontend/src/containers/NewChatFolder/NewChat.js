@@ -8,6 +8,7 @@ import NewChatWebSocketInstance from '../../newChatWebsocket';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import ManageChatHeader from './ManageChatHeader';
+import NoChatsScreen from './NoChatsScreen';
 
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
@@ -129,24 +130,37 @@ class NewChat extends React.Component{
         parseInt(this.props.parameter.id) === 0 ?
 
         <div className = "chatRightSide">
-          Hi there
-
+          <NoChatsScreen
+          history = {this.props.history}
+          />
         </div>
 
         :
 
-        <div className = "chatRightSide">
-          <NewChatHeader
-          curChat = {this.props.curChat}
-          curId = {this.props.id}
-          />
-          <NewChatContent
-          messages = {messages}
-          curId = {this.props.id}
-          parameter = {this.props.parameter}
-           />
 
-        </div>
+          this.props.parameter.id === "newchat" ?
+
+          <div>
+            New chat
+          </div>
+
+          :
+
+          <div className = "chatRightSide">
+            <NewChatHeader
+            curChat = {this.props.curChat}
+            curId = {this.props.id}
+            />
+            <NewChatContent
+            messages = {messages}
+            curId = {this.props.id}
+            parameter = {this.props.parameter}
+             />
+
+          </div>
+
+
+
 
 
       }
