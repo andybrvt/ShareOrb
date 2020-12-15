@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import ManageChatHeader from './ManageChatHeader';
 import NoChatsScreen from './NoChatsScreen';
-
+import AddNewChatContent from './AddNewChatContent';
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
 
@@ -117,7 +117,9 @@ class NewChat extends React.Component{
       <div className = "chatContainer">
 
       <div className = "chatLeftSide">
-        <ManageChatHeader />
+        <ManageChatHeader
+        history = {this.props.history}
+         />
 
         <NewSidePanel
         chatList = {chats}
@@ -140,8 +142,8 @@ class NewChat extends React.Component{
 
           this.props.parameter.id === "newchat" ?
 
-          <div>
-            New chat
+          <div className = "chatRightSide">
+            <AddNewChatContent />
           </div>
 
           :

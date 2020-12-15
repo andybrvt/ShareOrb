@@ -165,8 +165,7 @@ class NewChatContent extends React.Component{
               onPressEnter = {this.handleMessageSubmit}
               />
 
-              <span className = "sendButton">
-              </span>
+            
 
 
             </div>

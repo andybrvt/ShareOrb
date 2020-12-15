@@ -4,7 +4,10 @@ import './NewChat.css';
 
 class ManageChatHeader extends React.Component{
 
-
+  onClickAddChats = () =>{
+    // This will redirect to the right create chat area
+    this.props.history.push("/chat/newchat")
+  }
 
 
   render(){
@@ -22,7 +25,9 @@ class ManageChatHeader extends React.Component{
         <div
         className = "addChatsButton"
         >
-          <i class="far fa-plus-square"></i>
+          <i
+          onClick = {() => this.onClickAddChats()}
+          class="far fa-plus-square"></i>
         </div>
 
         </div>
