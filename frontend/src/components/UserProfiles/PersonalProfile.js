@@ -660,7 +660,7 @@ class PersonalProfile extends React.Component{
 
         <div className = 'profile-tabContainer'>
           <div style={{
-          background:'white'}} class="stepTab">
+          background:'white'}} >
 
           <Steps
             type="navigation"
@@ -684,7 +684,7 @@ class PersonalProfile extends React.Component{
               icon={<i class="fas fa-users"></i>} />
           </Steps>
           </div>
-          <Divider style={{marginTop:'-1px'}}/>
+          <Divider style={{marginTop:'-1px', marginBot:'-1px'}}/>
 
           {/*<div className = 'profile-buttonContainer'>
             <p className = 'profile-description_tab profile-Tab-Calendar'>
@@ -751,7 +751,7 @@ class PersonalProfile extends React.Component{
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
-          <div class="profileEventCard" style={{marginTop:'50px',width:'900px', height:'275px'}}>
+          <div class="profileEventCard" style={{marginTop:'40px',width:'900px', height:'300px'}}>
 
             <div class="parentFlexContainer">
               {this.renderProfilePic()}

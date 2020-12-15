@@ -172,12 +172,12 @@
   display: flex;
   flex-direction: row;
   padding: 0px 20px;
-  top:30px;
+  top:40px;
   width: 400px;
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
-  left: 45%;
+  left: 42.5%;
   transform: translateX(-50%);
 }
 
@@ -263,7 +263,7 @@
 .profileUserName{
     font-size: 20px;
     font-weight: 400;
-    margin-top: 75px;
+    margin-top: 80px;
     margin-left: -100px;
     color:grey;
 }
@@ -313,10 +313,7 @@
   height: 700px;
 }
 
-.stepTab{
-  padding-left: 100px;
-  padding-right: 100px;
-}
+
 /* This is for the tab changes */
 /* how far up the tab is */
 .profile-tabContainer {
@@ -324,6 +321,7 @@
   position:absolute;
   top: 400px;
 
+  font-family: 'Segoe UI Regular';
 
   /* left: 40px; */
   bottom: 28px;
@@ -422,7 +420,7 @@
   /* background-color: #ffffff; */
   /* box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
 }
-
+gf
 .profile-description_tab{
   float: left;
 	width: 33.333%;

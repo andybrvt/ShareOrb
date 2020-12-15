@@ -90,10 +90,10 @@ class SocialCalendar extends React.Component{
            {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
-        <div className= "col col-end" onClick = {this.nextMonth}>
-
+        <div className= "col col-end">
+          <div className = 'icon' onClick ={this.nextMonth}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
-
+          </div>
         </div>
       </div>
     );
@@ -815,7 +815,6 @@ class SocialCalendar extends React.Component{
 
           <div className = 'socialCalendar'>
             {this.renderHeader()}
-            <Divider style={{marginTop:'-10px'}}/>
             {this.renderDays()}
             {this.renderCells(socialCalCell)}
           </div>
