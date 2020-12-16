@@ -119,6 +119,14 @@
 }
 
 
+/* This is for the CurChatManager */
+.chatContainer .chatFarRightSide{
+    /* background-color: red; */
+    width: 27%;
+}
+
+
+
 /* This is for the chat content page */
 .chatContainer .chatRightSide .newChatContent{
   background-color: white;

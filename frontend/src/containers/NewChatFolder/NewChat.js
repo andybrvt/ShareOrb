@@ -10,6 +10,7 @@ import * as dateFns from 'date-fns';
 import ManageChatHeader from './ManageChatHeader';
 import NoChatsScreen from './NoChatsScreen';
 import AddNewChatContent from './AddNewChatContent';
+import CurChatManager from './CurChatManager';
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
 
@@ -167,6 +168,11 @@ class NewChat extends React.Component{
 
       }
 
+      <div className = "chatFarRightSide">
+
+        <CurChatManager />
+
+      </div>  
 
       </div>
     )
