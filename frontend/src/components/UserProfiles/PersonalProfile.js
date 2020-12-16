@@ -464,7 +464,7 @@ class PersonalProfile extends React.Component{
 
 
               <Button
-                style={{fontSize:'18px'}}
+                style={{fontSize:'16px'}}
                 onClick = {() => this.onFollow(this.props.currentId, profileId)}
                  className = 'followButton'
                 id="follow-button"> Follow </Button>
@@ -751,7 +751,7 @@ class PersonalProfile extends React.Component{
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
-          <div class="profileEventCard" style={{marginTop:'40px',width:'900px', height:'300px'}}>
+          <div class="profileEventCard" style={{marginTop:'40px', height:'300px'}}>
 
             <div class="parentFlexContainer">
               {this.renderProfilePic()}

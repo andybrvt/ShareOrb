@@ -37,8 +37,8 @@
 
 
 .selfProfileButtons{
-  margin-top: -175px;
-  margin-right: 25px;
+  margin-top: -150px;
+  margin-right: 10px;
   float:right;
   /* left: 50%; */
 }
@@ -53,13 +53,16 @@
 
 .profileButtons{
   /* background-color: red; */
-  width: 425px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  float:right;
+
+  height:200px;
+  width: 225px;
+  margin-top:-175px;
+  padding:10px;
   display: flex;
-  justify-content: space-between;
-  margin-top: 25px;
+   flex-flow: column;
+    justify-content: space-around;
+
   /* justify-content: center; */
 }
 
@@ -76,6 +79,7 @@
 .followButton{
   /* background-color: red; */
   padding-top: 4px;
+
   /* position: absolute; */
   width: 200px;
   height: 38px;
@@ -171,13 +175,13 @@
   /* background-color: red; */
   display: flex;
   flex-direction: row;
-  padding: 0px 20px;
-  top:40px;
+
+  top:30px;
   width: 400px;
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
-  left: 42.5%;
+  left: 33%;
   transform: translateX(-50%);
 }
 
@@ -216,11 +220,41 @@
    flex-direction: row;
 }
 
+
+
+.profileEventCard{
+  position: relative;
+  overflow: hidden;
+  left:26%;
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:25px;
+  max-width: 900px;
+  font-family: 'Segoe UI Regular';
+
+  /* background-color: gainsboro; */
+}
+
+
+.profileBio{
+  /* background-color: green; */
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  margin-left: -75px;
+  margin-top: 130px;
+  width:375px;
+  height:25px;
+  /* background-color: green; */
+
+}
+
 .parentFlexContainer{
   display: flex;
    flex-direction: row;
    margin-bottom: 20px;
-   margin-left: -50px;
+   margin-left: -125px;
    /* background-color: red; */
 }
 .profileName {
@@ -235,30 +269,6 @@
 }
 
 
-.profileEventCard{
-  position: relative;
-  overflow: hidden;
-  left:26%;
-  background: white;
-  line-height: 150%;
-  border-radius: 15px;
-  padding:25px;
-
-  font-family: 'Segoe UI Regular';
-
-  /* background-color: gainsboro; */
-}
-
-
-.profileBio{
-  /* background-color: green; */
-  font-size: 18px;
-  font-weight: 400;
-  color: black;
-  margin-left: -75px;
-  margin-top: 130px;
-
-}
 
 .profileUserName{
     font-size: 20px;

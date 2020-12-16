@@ -11,6 +11,7 @@ import {
   SettingOutlined,
   SmileOutlined,
   UploadOutlined,
+  NotificationOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
@@ -171,7 +172,7 @@ class SideMenu extends React.Component {
 
 
     return (
-      <div style={{marginBottom:30}}>
+      <div style={{marginBottom:20}}>
 
 
 
@@ -277,11 +278,11 @@ class SideMenu extends React.Component {
            onSearch={this.handleSearch}
            onSelect={this.onSelect}
            dropdownClassName="certain-category-search-dropdown"
-           dropdownMatchSelectWidth={400}
+           dropdownMatchSelectWidth={550}
            style={{
             // marginLeft:150,
-            marginLeft:'35%',
-            marginRight:'20%', width: 450,
+            marginLeft:'33%',
+            marginRight:'12%', width: 550,
            // backgroundColor: 'red'
          }}
 
@@ -294,31 +295,31 @@ class SideMenu extends React.Component {
          <span className="avatar-item" style={{marginRight:40}}>
     </span>
 
-    <span
-    style = {{
+  <span style={{marginRight:'50px', fontSize:'10px'}} ><Badge count={5}>
+      <NotificationOutlined />
+    </Badge>
+  </span>
 
-    }}
-     >
 
 
-    <Badge
 
-      count = {this.props.notifications.length}>
+
       <Button
 
          onClick = {() => this.onShowNotification()}
          >
           <Notifications {...this.props}/>
       </Button>
-    </Badge>
-    </span>
+
+
 
 
     <span
-    style = {{
-      float:'right',
-      marginRight:'100px',
-    }}
+      class="pointerEvent"
+      style = {{
+        float:'right',
+        marginRight:'100px',
+      }}
     >
          <Dropdown overlay={
 
