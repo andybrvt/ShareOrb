@@ -32,7 +32,7 @@
   height: 100%;
 }
 .chatContainer .chatRightSide .addNewChatContainer .searchFormBox{
-  background-color: red;
+  /* background-color: red; */
   height: 8%;
 }
 .chatContainer .chatRightSide .addNewChatContainer .searchChatContent{

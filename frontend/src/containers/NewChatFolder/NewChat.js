@@ -60,7 +60,7 @@ class NewChat extends React.Component{
 
   componentWillReceiveProps(newProps){
     console.log("new props")
-    if(this.props.parameter.id !== newProps.parameter.id){
+    if(this.props.parameter.id !== newProps.parameter.id && newProps.parameter.id !== "newchat"){
       NewChatWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
         NewChatWebSocketInstance.fetchMessages(
@@ -144,7 +144,10 @@ class NewChat extends React.Component{
           this.props.parameter.id === "newchat" ?
 
           <div className = "chatRightSide">
-            <AddNewChatContent />
+            <AddNewChatContent
+            followers = {this.props.followers}
+            following = {this.props.following}
+            />
           </div>
 
           :
@@ -172,7 +175,7 @@ class NewChat extends React.Component{
 
         <CurChatManager />
 
-      </div>  
+      </div>
 
       </div>
     )
@@ -183,7 +186,9 @@ const mapStateToProps = state => {
   return {
     messages: state.message.messages,
     chats: state.message.chats,
-    curChat: state.message.curChat
+    curChat: state.message.curChat,
+    following: state.auth.following,
+    followers: state.auth.followers
   }
 }
 
