@@ -118,7 +118,28 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             }
             self.send_chats(content)
 
+    def send_new_created_chat(self, data):
+        # This function will just grab the chat and then grab the users that are
+        # associated with teh chat and then update there chatList in the front
+        # end
 
+        # First get the chat
+        curChat = get_object_or_404(Chat, id = data['chatId'])
+        serializedChat = MiniChatSerializer(curChat).data
+
+        # Once you pull the chat, then you will go through the participants and
+        # then start sending out the updated chatList
+        for participant in serializedChat['participants']:
+            user = get_object_or_404(User, id = int(participant['id']))
+            chats = user.chat_parti.all()
+            chatList = MiniChatSerializer(chats, many = True).data
+
+            content = {
+                "command": "update_chat_list",
+                "chatList": chatList,
+                "chatUserId": user.id
+            }
+            self.send_chats(content)
 
     def send_chats(self, chatListObj):
         # This function will leading to sending the chat list to the right person
@@ -168,6 +189,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             self.send_update_recent_chat(data)
         if data['command'] == 'update_recent_chat_message':
             self.send_update_recent_chat_message(data)
+        if data['command'] == 'send_new_created_chat':
+            self.send_new_created_chat(data)
 
     def new_chat_lists(self, chatObj):
         # This will be sneding it to the front end

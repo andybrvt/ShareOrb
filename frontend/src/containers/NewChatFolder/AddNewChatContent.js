@@ -71,12 +71,48 @@ class AddNewChatContent extends React.Component{
         this.state.message
       )
 
+      this.setState({
+        person: [],
+        messages: [],
+        message: '',
+        curChatId: ''
+      })
+
       this.props.history.push("/chat/"+this.state.curChatId)
 
 
     } else{
       // If there is no curChatId then you gotta make it so that the chat creates
       // and then direct to the new chat page
+
+      console.log('create new chat here')
+      authAxios.post("http://127.0.0.1:8000/newChat/createChat",{
+        senderId: this.props.curId,
+        chatParticipants: [...this.state.person, this.props.curId],
+        message: this.state.message
+      })
+      .then(
+        res=> {
+          console.log(res.data)
+          // Now that you created the chat you can redirect to the new page
+          // Now you would wnat to throw in the websocket for chatList her
+          ChatSidePanelWebSocketInstance.sendNewCreatedChat(res.data)
+
+          this.setState({
+            person: [],
+            messages: [],
+            message: '',
+            curChatId: ''
+          })
+          this.props.history.push("/chat/"+res.data)
+        }
+      )
+      // ChatSidePanelWebSocketInstance.createNewChatMessage(
+      //   this.props.curId,
+      //   this.state.person,
+      //   this.state.message
+      // )
+
     }
   }
 
