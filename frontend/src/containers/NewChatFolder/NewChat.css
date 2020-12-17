@@ -36,16 +36,28 @@
   position: relative;
   border: 1px solid gray;
   height: 8%;
+  width: 100%;
 }
-.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .chatForm{
-  background-color: red;
+.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .searchForm{
+  /* background-color: red; */
+  width: 90%;
+  display: flex;
+  position: relative;
+  top: 30%;
 }
-.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .chatForm .searchBox{
+
+.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .searchForm .toText{
+  font-size: 22px;
+  margin-right: 10px;
+
+}
+.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .searchForm .searchBox{
   /* background-color: red; */
   /* border: none; */
     /* top: 50%; */
-  display: none;
-  width: 90%;
+  /* display: none; */
+
+  width: 100%;
 }
 
 

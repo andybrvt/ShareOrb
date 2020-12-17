@@ -173,6 +173,9 @@ class AddNewChatContent extends React.Component{
       <div className ="addNewChatContainer">
         <div className = "searchFormBox">
           <form className = "searchForm">
+          <div className = 'toText'>
+          To:
+          </div>
           <Select
             mode="multiple"
             // style={{ width: '100%' }}
