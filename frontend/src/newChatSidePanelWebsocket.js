@@ -108,6 +108,23 @@ class WebSocketNewChatSidePanel {
     })
   }
 
+  updateRecentChatMessage = (chatId , senderId, message) => {
+    // This function will be similar to the updateRecentChat function
+    // but it will create the chat itself too instead of just filling in the
+    // current date of the chat
+    // This will be used for when you are typeing in the chat search
+    // and the chat is already created and so you just need to send it and pull
+    // it up
+    this.sendChats({
+      chatId: chatId,
+      senderId: senderId,
+      message: message,
+      command: 'update_recent_chat_message'
+    })
+
+    }
+
+
   addCallbacks(
     fetchAllUserChats
   ){

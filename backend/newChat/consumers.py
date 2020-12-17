@@ -54,6 +54,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         curChat.recentMessage = data['message']
         curChat.recentSender = sender
         curChat.recentTime = time
+
+        # When you get the current chat you can also create the messages here
         curChat.save()
 
         serializedChat = MiniChatSerializer(curChat).data
@@ -70,6 +72,53 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
                 "chatUserId": user.id
             }
             self.send_chats(content)
+
+    def send_update_recent_chat_message(self,data):
+        # This will be similar to teh send update recentchat but because
+        # we are not on two different chats at the same time and we wnat the message
+        # and chat to be updated at the smae time and then return the proper
+        # messages
+        curChat = get_object_or_404(Chat, id = data['chatId'])
+        sender = get_object_or_404(User, id = data['senderId'])
+
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+
+        newMessage = Message.objects.create(
+            chat = curChat,
+            body = data['message'],
+            messageUser = sender
+        )
+        newMessage.save()
+
+        curChat.recentMessage = data['message']
+        curChat.recentSender = sender
+        curChat.recentTime = time
+
+        # When you get the current chat you can also create the messages here
+        curChat.save()
+
+        serializedChat = ChatSerializer(curChat).data
+        # The curMessages is mostly used for the person
+        curMessages = serializedChat['get_messages']
+        for participant in serializedChat['participants']:
+            # you will loop through the users and then send it to each of them
+            # a new chat that is updated
+            user = get_object_or_404(User, id = int(participant['id']))
+            chats = user.chat_parti.all()
+            # When you do many = True it will serialize the list of chat objects
+            chatList = MiniChatSerializer(chats, many = True).data
+            # if int(participant) == data['senderId']:
+            #     # This will check if it is the current person that sent the chat
+            #     # because for them they will be directed to
+            content = {
+                "command": "update_chat_list",
+                "chatList": chatList,
+                "chatUserId": user.id
+            }
+            self.send_chats(content)
+
+
 
     def send_chats(self, chatListObj):
         # This function will leading to sending the chat list to the right person
@@ -117,6 +166,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             self.send_fetch_all_user_chats(data)
         if data['command'] == 'update_recent_chat':
             self.send_update_recent_chat(data)
+        if data['command'] == 'update_recent_chat_message':
+            self.send_update_recent_chat_message(data)
 
     def new_chat_lists(self, chatObj):
         # This will be sneding it to the front end

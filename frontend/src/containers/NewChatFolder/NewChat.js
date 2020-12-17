@@ -148,6 +148,8 @@ class NewChat extends React.Component{
             followers = {this.props.followers}
             following = {this.props.following}
             curId = {this.props.curId}
+            history = {this.props.history}
+
             />
           </div>
 
