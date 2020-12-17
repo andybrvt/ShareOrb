@@ -39,6 +39,37 @@
   /* background-color: blue; */
   height: 85%;
 }
+
+/* This will be the css that governs  */
+.searchChatContent .newChatTextContainer{
+  /* background-color: red; */
+  overflow: auto;
+  height: 100%;
+}
+
+.searchChatContent .newChatTextContainer .chatTextBoxRight{
+  display: inline-block;
+  clear: both;
+  float:left;
+  margin: 15px 15px 5px 15px;
+  width: calc(100% - 25px);
+  font-size: 0.9em;
+  position: relative;
+
+  text-align: right;
+
+}
+
+.searchChatContent .newChatTextContainer .chatTextBox{
+  display: inline-block;
+  clear: both;
+  float: left;
+  margin: 15px 15px 5px 15px;
+  width: calc(100% - 25px);
+  font-size: 0.9em;
+  position: relative;
+}
+
 .chatContainer .chatRightSide .addNewChatContainer .searchChatInput{
   position: absolute;
   bottom: 0px;

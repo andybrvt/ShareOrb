@@ -62,6 +62,13 @@ class GetChatSearchView(APIView):
         for names in request.data['person']:
             chatList = chatList.filter(participants__id = names).distinct()
 
+        print(chatList)
+
         serializedChat = serializers.ChatSerializer(chatList, many = True).data
-        messages = serializedChat[0]['get_messages']
+
+
+        print(len(serializedChat))
+        messages = []
+        if(len(serializedChat) != 0):
+            messages = serializedChat[0]['get_messages']
         return Response(messages)

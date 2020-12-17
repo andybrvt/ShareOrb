@@ -15,11 +15,25 @@ class AddNewChatContent extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      person: []
+      person: [],
+      messages: []
     }
   }
 
+  scrollToBottom = () => {
+    if(this.messagesEnd){
+        this.messagesEnd.scrollIntoView({ behavior: "auto" });
+    }
 
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
 
 
   capitalize (str) {
@@ -67,15 +81,27 @@ class AddNewChatContent extends React.Component{
       person: value
     })
 
-    authAxios.post("http://127.0.0.1:8000/newChat/getChat",
-      {
-        person: [...value, this.props.curId]
-      }
-    ).then(
-      res => {
-        console.log(res.data)
-      }
-    )
+    if(value.length > 0){
+      authAxios.post("http://127.0.0.1:8000/newChat/getChat",
+        {
+          person: [...value, this.props.curId]
+        }
+      ).then(
+        res => {
+          console.log(res.data)
+          this.setState({
+            messages:res.data
+          })
+        }
+      )
+    } else {
+      this.setState({
+        messages: []
+      })
+    }
+
+
+
 
   }
 
@@ -120,19 +146,72 @@ class AddNewChatContent extends React.Component{
         </div>
 
       <div className = "searchChatContent">
+
+
       <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title={<a href="https://ant.design">{item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            />
-          </List.Item>
-        )}
-      />
+      className = "newChatTextContainer"
+      itemLayout = "horizontal"
+      dataSource = {this.state.messages}
+      renderItem = { item => (
+
+        <div>
+        {
+          this.props.curId === item.messageUser.id ?
+
+          <div className = "chatTextBoxRight">
+          <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
+          <div className = 'chatNameTimeRight'>
+            <div className = 'chatNameRight'>
+              {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
+            </div>
+            <div>
+
+            </div>
+          </div>
+
+          <div className = "chatContentTextRight">
+            {item.body}
+          </div>
+
+          </div>
+
+          :
+
+          <div className = "chatTextBox">
+          <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
+          <div className = 'chatNameTime'>
+            <div className = 'chatName'>
+              {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
+            </div>
+            <div>
+
+            </div>
+          </div>
+
+          <div className = "chatContentText">
+            {item.body}
+          </div>
+
+          </div>
+
+        }
+
+
+        </div>
+
+
+      )
+
+      }
+
+      >
+      <div style={{ float:"left", clear: "both" }}
+          ref={(el) => { this.messagesEnd = el; }}>
+     </div>
+      </List>
+
+
+
       </div>
 
 
