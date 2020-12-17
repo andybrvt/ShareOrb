@@ -149,7 +149,7 @@ class EditProfileForm extends React.Component{
         type = 'text'
         />
         </div>
-
+        {/*
         <div>
         Phone number:
         <Field
@@ -171,6 +171,8 @@ class EditProfileForm extends React.Component{
 
         />
         </div>
+
+        */}
 
 
         <div>

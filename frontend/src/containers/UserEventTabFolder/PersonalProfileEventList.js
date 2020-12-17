@@ -236,7 +236,7 @@ class PersonalProfileEventList extends React.Component{
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
-          <Avatar size = {180} src = {profileImage} />
+          <Avatar size = {150} src = {profileImage} />
           {
             this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
