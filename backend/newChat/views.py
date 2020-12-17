@@ -5,6 +5,8 @@ from . import serializers
 from userprofile.models import User
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -46,3 +48,20 @@ class NewChatListView(generics.ListAPIView):
             # you can call the related name of a modal to call the modal
             queryset = user.chat_parti.all()
         return queryset
+
+
+class GetChatSearchView(APIView):
+    # This class will use to find the correct chat inorder to show when you
+    # are searching for an existing chat in the chats
+
+    def post(self, request, *args, **kwargs):
+        print("get chats")
+        print(request.data)
+
+        chatList = models.Chat.objects.all()
+        for names in request.data['person']:
+            chatList = chatList.filter(participants__id = names).distinct()
+
+        serializedChat = serializers.ChatSerializer(chatList, many = True).data
+        messages = serializedChat[0]['get_messages']
+        return Response(messages)

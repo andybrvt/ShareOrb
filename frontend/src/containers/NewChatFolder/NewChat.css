@@ -36,7 +36,7 @@
   height: 8%;
 }
 .chatContainer .chatRightSide .addNewChatContainer .searchChatContent{
-  background-color: blue;
+  /* background-color: blue; */
   height: 85%;
 }
 .chatContainer .chatRightSide .addNewChatContainer .searchChatInput{

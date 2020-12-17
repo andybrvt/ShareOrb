@@ -2,6 +2,8 @@ import React from 'react';
 import { Input, List, Avatar, Spin, Select} from 'antd';
 import './NewChat.css';
 import { connect } from 'react-redux';
+import { authAxios } from '../../components/util';
+
 // This fucntion will be the search function and add function
 // when you are trying to add new chats or make new chats
 const { Option } = Select;
@@ -9,6 +11,16 @@ const { Option } = Select;
 
 
 class AddNewChatContent extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      person: []
+    }
+  }
+
+
+
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -38,7 +50,7 @@ class AddNewChatContent extends React.Component{
     for(let i = 0; i<following.length; i++){
       // This will make all the select child
       chatOptions.push(
-        <Option value = {following[i].username}
+        <Option value = {following[i].id}
         label = {this.capitalize(following[i].username)}>
           {this.capitalize(following[i].username)}
         </Option>
@@ -50,15 +62,28 @@ class AddNewChatContent extends React.Component{
 
   }
 
+  handleChange = (value) =>{
+    this.setState({
+      person: value
+    })
+
+    authAxios.post("http://127.0.0.1:8000/newChat/getChat",
+      {
+        person: [...value, this.props.curId]
+      }
+    ).then(
+      res => {
+        console.log(res.data)
+      }
+    )
+
+  }
+
 
   render(){
 
     console.log(this.props)
-
-
-    function handleChange(value) {
-      console.log(`selected ${value}`);
-    }
+    console.log(this.state)
 
 
     const data = [
@@ -85,7 +110,8 @@ class AddNewChatContent extends React.Component{
             mode="multiple"
             style={{ width: '100%' }}
             placeholder="Search users"
-            onChange={handleChange}
+            onChange={this.handleChange}
+            value = {this.state.person}
             optionLabelProp="label"
           >
             {this.renderPeopleSearch()}

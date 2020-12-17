@@ -147,6 +147,7 @@ class NewChat extends React.Component{
             <AddNewChatContent
             followers = {this.props.followers}
             following = {this.props.following}
+            curId = {this.props.curId}
             />
           </div>
 
@@ -188,7 +189,8 @@ const mapStateToProps = state => {
     chats: state.message.chats,
     curChat: state.message.curChat,
     following: state.auth.following,
-    followers: state.auth.followers
+    followers: state.auth.followers,
+    curId: state.auth.id
   }
 }
 
