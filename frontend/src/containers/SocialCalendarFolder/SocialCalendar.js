@@ -6,6 +6,8 @@ import { authAxios } from '../../components/util';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import Animate from 'rc-animate';
+import './SocialCalCSS/SocialCalAnim.css';
 import {
   Drawer,
   List,
@@ -55,6 +57,7 @@ class SocialCalendar extends React.Component{
     showSocialEventPostModal: false,
     showSocialPicPostModal: false,
     events: [],
+    animate:true,
   }
 
 
@@ -692,10 +695,16 @@ class SocialCalendar extends React.Component{
   // You can use the addMonths function to add one month to the
   // current month
   nextMonth = () => {
+    this.setState({
+      animate: !this.state.animate,
+    });
     this.props.nextMonth();
   }
 
   prevMonth = () => {
+    this.setState({
+      animate: !this.state.animate,
+    });
     this.props.prevMonth()
   }
 
@@ -815,8 +824,15 @@ class SocialCalendar extends React.Component{
 
           <div className = 'socialCalendar'>
             {this.renderHeader()}
+            <Animate
+              showProp="show"
+              transitionName="fade"
+            >
+            <div show={this.state.animate}>
             {this.renderDays()}
             {this.renderCells(socialCalCell)}
+            </div>
+          </Animate>
           </div>
 
 

@@ -291,11 +291,11 @@ class SideMenu extends React.Component {
       </AutoComplete>
 
 
-      <span style={{fontSize:'30px', marginRight:'50px'}}>
-        
+      <span style={{marginRight:'50px'}}>
+
 
         <Badge count={5}>
-         <NotificationOutlined  />
+        test
        </Badge>
 
       </span>

@@ -768,11 +768,6 @@ class PersonalProfile extends React.Component{
 
           </div>
 
-
-
-
-
-
           {this.onRenderTabs()}
 
           <Modal

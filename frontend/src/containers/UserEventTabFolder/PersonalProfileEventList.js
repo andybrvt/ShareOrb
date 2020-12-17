@@ -390,80 +390,85 @@ class PersonalProfileEventList extends React.Component{
     console.log(followers)
 
       return (
-        <div className = 'profileInfo'>
-
-          <div>
-            <div className = 'profileName'>
-              {this.capitalize(firstName)} {this.capitalize(lastName)}
-            </div>
-
-
-            <div className = 'profilePostFollow'>
-
-              <div
-              onClick = {() => this.onFollowerOpen()}
-              className = 'followItem'>
-                <span
-                className = 'postFollowWords'
-                >Followers</span>
-                <br />
-                <span>{followers.length}</span>
-              </div>
-              <div
-              onClick = {() => this.onFollowingOpen()}
-              className = 'followItem'>
-                <span
-                className = 'postFollowWords'
-                >Following</span>
-                <br />
-                <span>{following.length}</span>
-              </div>
-            </div>
-
-          <div className = 'profileBio'>
-          {bio}
-          </div>
         <div>
 
-        {
-            this.props.parameter.username === this.props.currentUser ?
+          <div className = 'profileInfo'>
 
-            <div className = 'selfProfileButtons'>
+            <div>
 
 
-              <div
-              onClick = {() => this.openProfileEdit()}
-              className = 'editProfileButton'>
-                Edit Profile
+
+              <div className = 'profilePostFollow'>
+
+                <div
+                onClick = {() => this.onFollowerOpen()}
+                className = 'followItem'>
+                  <span
+                  className = 'postFollowWords'
+                  >Followers</span>
+                  <br />
+                  <span>{followers.length}</span>
+                </div>
+                <div
+                onClick = {() => this.onFollowingOpen()}
+                className = 'followItem'>
+                  <span
+                  className = 'postFollowWords'
+                  >Following</span>
+                  <br />
+                  <span>{following.length}</span>
+                </div>
               </div>
 
-            </div>
 
-            :
 
-            <div className = 'profileButtons'>
+            <div>
 
-            {followers.includes(this.props.currentUser.toString()) ?
-              <div
-              onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-              className = 'unFollowButton'>
-                Unfollow
+          {
+              this.props.parameter.username === this.props.currentUser ?
+
+              <div className = 'selfProfileButtons'>
+
+                 <Button
+                    onClick = {() => this.openProfileEdit()}
+                    type="primary"
+                    shape="round"
+                    icon={<i  style={{marginRight:'10px'}} class="fas fa-user-edit"></i>}
+                    style={{fontSize:'15px'}} size={'large'}>
+
+                   Edit Profile
+                 </Button>
               </div>
 
               :
 
-              <div onClick = {() => this.onFollow(this.props.currentId, profileId)} className = 'followButton'>
-                Follow
-              </div>
+              <div className = 'profileButtons'>
 
-            }
+              {followers.includes(this.props.currentUser.toString()) ?
+                <div
+                onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
+                className = 'unFollowButton'>
+                  Unfollow
+                </div>
+
+
+
+                :
+
+
+                <Button
+                  style={{fontSize:'16px'}}
+                  onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                   className = 'followButton'
+                  id="follow-button"> Follow </Button>
+              }
 
 
 
 
-              <div className = 'messageButton'>
-                Message
-              </div>
+                <div className = 'messageButton'>
+                  Message
+                </div>
 
               {/*
                 this.props.parameter.username !== this.props.currentUser
@@ -474,7 +479,7 @@ class PersonalProfileEventList extends React.Component{
                   !friends.includes(profileId) ?
                   <div
                   onClick = {() => this.onAddCloseFriendOpen()}
-                  className = 'addFriendButton'
+                  className = "addFriendButton"
                   >
                     Add Friend
                   </div>
@@ -482,7 +487,7 @@ class PersonalProfileEventList extends React.Component{
                   :
 
                   <div
-                  onClick ={() => this.onUnAddCloseFriendOpen()}
+                  onClick = {() => this.onUnAddCloseFriendOpen()}
                   className = 'unFriendButton'
                   >
                     Unfriend
@@ -499,31 +504,37 @@ class PersonalProfileEventList extends React.Component{
 
               */}
 
-            </div>
+              </div>
 
-        }
+          }
 
 
 
-        </div>
+          </div>
 
-        </div>
-        {/*
-          <ConfirmAddFriend
-          visible = {this.state.showFriendConfirm}
-          onClose = {this.onAddCloseFriendClose}
-          curId = {curId}
-          friendId = {profileId}
-           />
+          </div>
 
-           <ConfirmUnfriend
-           visible = {this.state.showUnfriend}
-           onClose = {this.onUnAddCloseFriendClose}
-           curId = {curId}
-           friendId = {profileId}
-           />
-          */}
+          {/*
 
+            DELETE LATER
+            <ConfirmAddFriend
+            visible = {this.state.showFriendConfirm}
+            onClose = {this.onAddCloseFriendClose}
+            curId = {curId}
+            friendId = {profileId}
+             />
+
+             <ConfirmUnfriend
+             visible = {this.state.showUnfriend}
+             onClose = {this.onUnAddCloseFriendClose}
+             curId = {curId}
+             friendId = {profileId}
+             />
+
+            */}
+
+
+          </div>
 
         </div>
 
@@ -693,7 +704,9 @@ class PersonalProfileEventList extends React.Component{
     let followers = []
     let following = []
     let profilePic = ""
-
+    let firstName=""
+    let lastName=""
+    let bio=""
     if (this.props.profile){
       if(this.props.profile.get_followers){
         followers = this.props.profile.get_followers
@@ -706,15 +719,36 @@ class PersonalProfileEventList extends React.Component{
       }
 
     }
+    if(this.props.profile.first_name){
+      firstName = this.props.profile.first_name
+    }
+    if(this.props.profile.last_name){
+      lastName = this.props.profile.last_name
+    }
+    if(this.props.profile.bio){
+      bio = this.props.profile.bio
+    }
 
 
     return (
       <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
+        <div class="profileEventCard" style={{marginTop:'40px', height:'300px'}}>
 
+          <div class="parentFlexContainer">
+            {this.renderProfilePic()}
+            <span className = 'profileName'>
+              {this.capitalize(firstName)} {this.capitalize(lastName)}
+              <br/>
 
-      {this.renderProfilePic()}
-      {this.onRenderProfileInfo()}
+            </span>
+            <span class="profileUserName">{"@"+this.props.username}</span>
+            <span class="profileBio">{bio}</span>
+          </div>
+
+          {this.onRenderProfileInfo()}
+
+        </div>
       {this.onRenderTabs()}
         <Modal
         visible = {this.state.showProfileEdit}
