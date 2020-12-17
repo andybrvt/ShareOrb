@@ -12,7 +12,8 @@ import ExploreWebSocketInstance from '../exploreWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
 
-import { Row, Col, Card, Upload, Divider, Checkbox, Avatar, Statistic, Button} from 'antd';
+import { Row, Col, Card, Upload, Divider, Checkbox,
+	 Avatar, Statistic, Button} from 'antd';
 import { InboxOutlined, UserOutlined } from '@ant-design/icons';
 
 import NoFoundPage from './403.jsx';
@@ -139,7 +140,7 @@ class NewsFeedView extends React.Component {
 				</div>
 
 				<Col style={{}} span={11}>
-				
+
 
 
 				<div>

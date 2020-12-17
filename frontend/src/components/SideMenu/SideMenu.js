@@ -182,7 +182,7 @@ class SideMenu extends React.Component {
 
 
 
-      <Header className="site-layout HeaderPosition appearBefore" style={{  mfontSize:20,   position: 'fixed', background:'white' }}>
+      <Header className="site-layout HeaderPosition appearBefore" style={{    position: 'fixed', background:'white' }}>
         <p class ="">
                 <aside class="sidebar" >
                 <div class="toggle">
@@ -291,14 +291,17 @@ class SideMenu extends React.Component {
       </AutoComplete>
 
 
+      <span style={{fontSize:'30px', marginRight:'50px'}}>
+        
 
-         <span className="avatar-item" style={{marginRight:40}}>
-    </span>
+        <Badge count={5}>
+         <NotificationOutlined  />
+       </Badge>
 
-  <span style={{marginRight:'50px', fontSize:'10px'}} ><Badge count={5}>
-      <NotificationOutlined />
-    </Badge>
-  </span>
+      </span>
+
+
+
 
 
 
