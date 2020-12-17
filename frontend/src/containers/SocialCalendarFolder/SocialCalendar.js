@@ -823,14 +823,16 @@ class SocialCalendar extends React.Component{
       <div className = 'socialCalContainer'>
 
           <div className = 'socialCalendar'>
-            {this.renderHeader()}
+
             <Animate
               showProp="show"
               transitionName="fade"
+
             >
             <div show={this.state.animate}>
-            {this.renderDays()}
-            {this.renderCells(socialCalCell)}
+              {this.renderHeader()}
+              {this.renderDays()}
+              {this.renderCells(socialCalCell)}
             </div>
           </Animate>
           </div>
