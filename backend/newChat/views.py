@@ -69,6 +69,13 @@ class GetChatSearchView(APIView):
 
         print(len(serializedChat))
         messages = []
+        chatId = ""
         if(len(serializedChat) != 0):
             messages = serializedChat[0]['get_messages']
-        return Response(messages)
+            chatId = serializedChat[0]['id']
+
+        content = {
+            "messages": messages,
+            "chatId": chatId
+        }
+        return Response(content)

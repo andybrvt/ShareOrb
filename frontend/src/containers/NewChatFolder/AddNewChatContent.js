@@ -3,6 +3,8 @@ import { Input, List, Avatar, Spin, Select} from 'antd';
 import './NewChat.css';
 import { connect } from 'react-redux';
 import { authAxios } from '../../components/util';
+import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
+
 
 // This fucntion will be the search function and add function
 // when you are trying to add new chats or make new chats
@@ -16,7 +18,9 @@ class AddNewChatContent extends React.Component{
     super(props);
     this.state = {
       person: [],
-      messages: []
+      messages: [],
+      message: '',
+      curChatId: ''
     }
   }
 
@@ -38,6 +42,42 @@ class AddNewChatContent extends React.Component{
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  handleInputChange = e => {
+    // This is the handle change for the input
+    this.setState({
+      message: e.target.value
+    })
+  }
+
+  handleMessageSubmit = e => {
+    e.preventDefault()
+    // This will handle the submission of the chats. What is gonna happend
+    // is that you are gonna send it by the chats websocket. You will
+    // find the right chat, get out the messages and then send out the
+    // chat list, you don't need to send the message because you will make it
+    // in the backend before the chat renders so it would get it
+
+    // You have to handle the case where a chat does exist and a chant doesnot exist
+
+    if(this.state.curChatId !== ""){
+      // This would mean that there is a chat that exist, so you would just send
+      // a message.
+      // The updateRecentChat should work for this part
+      ChatSidePanelWebSocketInstance.updateRecentChatMessage(
+        this.state.curChatId,
+        this.props.curId,
+        this.state.message
+      )
+
+      this.props.history.push("/chat/"+this.state.curChatId)
+
+
+    } else{
+      // If there is no curChatId then you gotta make it so that the chat creates
+      // and then direct to the new chat page
+    }
   }
 
   renderPeopleSearch = () => {
@@ -90,7 +130,8 @@ class AddNewChatContent extends React.Component{
         res => {
           console.log(res.data)
           this.setState({
-            messages:res.data
+            messages:res.data.messages,
+            curChatId: res.data.chatId
           })
         }
       )
@@ -131,14 +172,15 @@ class AddNewChatContent extends React.Component{
     return(
       <div className ="addNewChatContainer">
         <div className = "searchFormBox">
-          <form>
+          <form className = "searchForm">
           <Select
             mode="multiple"
-            style={{ width: '100%' }}
+            // style={{ width: '100%' }}
             placeholder="Search users"
             onChange={this.handleChange}
             value = {this.state.person}
             optionLabelProp="label"
+            className = "searchBox"
           >
             {this.renderPeopleSearch()}
             </Select>
@@ -214,16 +256,31 @@ class AddNewChatContent extends React.Component{
 
       </div>
 
+      {
+        this.state.person.length > 0 ?
+        <div className = "searchChatInput">
+          <form>
+            <div className = "searchChatInputBox">
+            <Input
+            onChange = {this.handleInputChange}
+            value = {this.state.message}
+            placeholder = "Write your message..."
+            className = "chatInput"
+            onPressEnter = {this.handleMessageSubmit}
+             />
+            </div>
+          </form>
+        </div>
 
-      <div className = "searchChatInput">
-        <form>
-          <div className = "searchChatInputBox">
-          <Input
-          className = "chatInput"
-           />
-          </div>
-        </form>
-      </div>
+        :
+
+        <div></div>
+
+      }
+
+
+
+
       </div>
 
     )

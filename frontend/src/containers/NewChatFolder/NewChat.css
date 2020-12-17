@@ -33,14 +33,29 @@
 }
 .chatContainer .chatRightSide .addNewChatContainer .searchFormBox{
   /* background-color: red; */
+  position: relative;
+  border: 1px solid gray;
   height: 8%;
 }
+.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .chatForm{
+  background-color: red;
+}
+.chatContainer .chatRightSide .addNewChatContainer .searchFormBox .chatForm .searchBox{
+  /* background-color: red; */
+  /* border: none; */
+    /* top: 50%; */
+  display: none;
+  width: 90%;
+}
+
+
 .chatContainer .chatRightSide .addNewChatContainer .searchChatContent{
   /* background-color: blue; */
+  border: 1px solid gray;
   height: 85%;
 }
 
-/* This will be the css that governs  */
+/* This will be the css that governs the chat box */
 .searchChatContent .newChatTextContainer{
   /* background-color: red; */
   overflow: auto;
