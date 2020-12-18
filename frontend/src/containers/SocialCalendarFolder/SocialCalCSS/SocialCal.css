@@ -9,6 +9,11 @@
   display: flex;
 }
 
+.socialParent{
+  height:10px;
+
+}
+
 
 .socialCalCellProfilePic{
   object-fit: cover;
@@ -18,6 +23,7 @@
 
   overflow: none;
   }
+
 
 
 .socialCalendar {

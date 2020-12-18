@@ -213,125 +213,122 @@ class SocialCalCellPage extends React.Component{
 
     return(
 
-         <div
-          className = "socialCalCellModal"
-
-         >
-         <div className = 'socialHolder'>
-         {
-           socialCalItems.length === 1 ?
-
-           <div className = 'singlePic'>
-             <img
-
-             src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
-           </div>
-
-           : socialCalItems.length === 0 ?
-
-           <div className = 'socialCarouselZero'>
-           <div className = 'pictureFrame'>
-             <PictureOutlined  />
-             <br />
-             <span> No posts </span>
-           </div>
-           </div>
-
-           :
-
-           <div className = 'socialCarousel'>
-             <PictureCarousel items = {socialCalItems} />
-           </div>
-         }
-
-
-           <div className = 'socialModalRight'>
-
-           <div className = 'socialNameTag'>
-
-           <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
-           <div>
-             <div className = 'socialName'> {this.capitalize(socialCalUsername)}</div>
-             <div className = 'socialNameUsername'><b> @{this.capitalize(socialCalUsername)}</b></div>
-           </div>
-           {this.dateView(socialCalDate)}
-           </div>
-           <div className = 'socialLikeCommentNum'>
+         <div className = "socialCalCellModal">
+           <div className = 'socialHolder'>
            {
-             peopleLikeId.includes(this.props.curId) ?
+             socialCalItems.length === 1 ?
 
-             <div className = 'socialLikeCircle'>
-             <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+             <div className = 'singlePic'>
+               <img
+
+               src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
+             </div>
+
+             : socialCalItems.length === 0 ?
+
+             <div className = 'socialCarouselZero'>
+             <div className = 'pictureFrame'>
+               <PictureOutlined  />
+               <br />
+               <span> No posts </span>
+             </div>
              </div>
 
              :
 
-             <div className = 'socialLikeCircle'>
-             <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+             <div className = 'socialCarousel'>
+               <PictureCarousel items = {socialCalItems} />
              </div>
            }
 
 
-           <span className = 'socialLikeCommentText'> {people_like.length} Likes . {socialCalComments.length} comments </span>
-           <div className = 'socialLikeAvatar'>
-             <Liking {...this.props} like_people={people_like}/>
-           </div>
-           </div>
+             <div className = 'socialModalRight'>
 
-           <div className = 'socialLikeComment'>
+             <div className = 'socialNameTag'>
 
-           {
-             peopleLikeId.includes(this.props.curId) ?
+             <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
+             <div>
+               <div className = 'socialName'> {this.capitalize(socialCalUsername)}</div>
+               <div className = 'socialNameUsername'><b> @{this.capitalize(socialCalUsername)}</b></div>
+             </div>
+             {this.dateView(socialCalDate)}
+             </div>
+             <div className = 'socialLikeCommentNum'>
+             {
+               peopleLikeId.includes(this.props.curId) ?
 
-             <div
-             onClick = {() => this.onSocialUnLike(this.props.curId, socialCalUserId)}
-             className ='socialLike'>
-             <i
-               style={{ marginRight:'10px', color:'red'}}
-               class="fa fa-heart">
-             </i>
-             Unlike
+               <div className = 'socialLikeCircle'>
+               <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+               </div>
+
+               :
+
+               <div className = 'socialLikeCircle'>
+               <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+               </div>
+             }
+
+
+             <span className = 'socialLikeCommentText'> {people_like.length} Likes . {socialCalComments.length} comments </span>
+             <div className = 'socialLikeAvatar'>
+               <Liking {...this.props} like_people={people_like}/>
+             </div>
              </div>
 
-             :
+             <div className = 'socialLikeComment'>
 
-             <div
-             onClick = {() => this.onSocialLike(this.props.curId, socialCalUserId)}
-             className ='socialLike'>
-             <i
-               style={{ marginRight:'10px'}}
-               class="fa fa-heart">
-             </i>
-             Like
+             {
+               peopleLikeId.includes(this.props.curId) ?
+
+               <div
+               onClick = {() => this.onSocialUnLike(this.props.curId, socialCalUserId)}
+               className ='socialLike'>
+               <i
+                 style={{ marginRight:'10px', color:'red'}}
+                 class="fa fa-heart">
+               </i>
+               Unlike
+               </div>
+
+               :
+
+               <div
+               onClick = {() => this.onSocialLike(this.props.curId, socialCalUserId)}
+               className ='socialLike'>
+               <i
+                 style={{ marginRight:'10px'}}
+                 class="fa fa-heart">
+               </i>
+               Like
+               </div>
+
+
+
+             }
+
+               <div className  = 'socialComment'>
+               <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
+                Comment </div>
+
              </div>
+               <SocialComments
+               // commentChange = {this.handleCommentChange}
+               // commentSubmit = {this.handleSubmit}
+               // commentValue = {this.state.comment}
+               currentDate = {curDate}
+               curUser = {this.props.curId}
+               owner = {socialCalUserId}
+               items = {socialCalComments}
+               profilePic = {this.props.curProfilePic}/>
+               <SocialEventList
+               history = {this.props.history}
+               curId = {this.props.curId}
+               socialCalCellId = {socialCalCellId}
+               cellDate = {socialCalDate}
+               items = {socialCalEvents}/>
 
-
-
-           }
-
-             <div className  = 'socialComment'>
-             <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-              Comment </div>
-            
+             </div>
            </div>
-             <SocialComments
-             // commentChange = {this.handleCommentChange}
-             // commentSubmit = {this.handleSubmit}
-             // commentValue = {this.state.comment}
-             currentDate = {curDate}
-             curUser = {this.props.curId}
-             owner = {socialCalUserId}
-             items = {socialCalComments}
-             profilePic = {this.props.curProfilePic}/>
-             <SocialEventList
-             history = {this.props.history}
-             curId = {this.props.curId}
-             socialCalCellId = {socialCalCellId}
-             cellDate = {socialCalDate}
-             items = {socialCalEvents}/>
-
-           </div>
-         </div>
          </div>
     )
   }

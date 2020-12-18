@@ -16,19 +16,23 @@ class SocialCalCellModal extends React.Component{
 
     console.log(this.props)
     return(
+
       <div
-        // onClick  = {this.back}
-        className = "socialCalCellModalBackground"
+        class="socialParent"
 
        >
-       <SocialCalCellPage
-       {...this.props}
-        />
-       <div className = 'exitX'>
-       <i class="fas fa-times"
-       onClick = {this.back}
-       ></i>
+       <div className = "socialCalCellModalBackground">
+         <SocialCalCellPage
+         {...this.props}
+          />
+          <div className = 'exitX'>
+          <i class="fas fa-times"
+          onClick = {this.back}
+          ></i>
+          </div>
        </div>
+
+
 
 
        </div>

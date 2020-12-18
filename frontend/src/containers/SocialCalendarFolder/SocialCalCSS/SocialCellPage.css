@@ -1,12 +1,15 @@
 .socialCalCellModalBackground{
-  position: absolute;
+  margin:0;
+
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
-  /* bottom: 0px; */
-  height: 100vh;
+  bottom: 0px;
 
-  overflow: hidden;
+  height: 100%;
+
+  overflow:hidden;
   background: rgba(0, 0, 0, 0.45);
   z-index: 99;
   /* margin-bottom: 1000px; */
@@ -40,7 +43,7 @@
   position: fixed;
   background: white;
   /* height: 100; */
-  top: 10px;
+  top: 3.5%;
   left: 10%;
   right: 10%;
   z-index: 100;
