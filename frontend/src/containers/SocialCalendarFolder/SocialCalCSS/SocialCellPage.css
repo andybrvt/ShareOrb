@@ -81,7 +81,8 @@
   transform: translateY(-50%);
   z-index: 3;
   left: 2%;
-  font-size: 45px;}
+  font-size: 45px;
+}
 .socialLeftRight .socialArrowRight {
   position: absolute;
   /* background-color: red; */
@@ -90,7 +91,8 @@
   left: 67%;
   /* right: 100%; */
   z-index: 3;
-  font-size: 45px;}
+  font-size: 45px;
+}
 
 .socialModalRight {
   /* background-color: red; */

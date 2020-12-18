@@ -15,7 +15,7 @@ import QueueAnim from 'rc-queue-anim';
 import defaultPic from '../../components/images/default.png'
 import Liking from './Liking';
 import LikeList from './LikeList';
-
+import PostPicCarousel from '../../components/PostPageFolder/PostPicCarousel';
 
 
 class NewsfeedPost extends React.Component {
@@ -103,67 +103,29 @@ class NewsfeedPost extends React.Component {
   }
 
   revealPhoto = () => {
+      let userPostImages = []
+      if(this.props.data){
+        if(this.props.data.post_images){
+          userPostImages = this.props.data.post_images
+        }
+      }
 
-      if((this.props.data.post_images).length==1){
+      if(userPostImages.length==1){
         return(
         <div class="imageContainer">
-
-        <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
-
-        </div>)
-      }
-        else if((this.props.data.post_images).length==2){
+          <a href=""><img src={"http://127.0.0.1:8000/media/"+userPostImages[0]} alt="" /></a>
+        </div>
+          )
+        }
+        else if(userPostImages.length==2){
           return(
-          <div class="TwoImageContainer">
-
-            <div class="TwoHalfImageContainer">
-
-              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
-
-              </div>
-                <div class="TwoHalfImageContainer" style={{marginLeft:'3px'}}>
-
-              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
-
+            <div className = "postPicCarouselNews">
+               <PostPicCarousel items = {userPostImages} />
             </div>
-
-
-
-          </div>)
-        }
-        else if((this.props.data.post_images).length==3){
-          return(
-            <div>
-            <div class="ThreeImageContainer">
-
-              <div class="FirstThirdImageContainer">
-
-              <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[0]} alt="" /></a>
-
-              </div>
-
-              <div class="TopandBottomThirdContainer">
-                <div class="SecondThirdImageContainer" style={{marginLeft:'3px'}}>
-
-                <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[1]} alt="" /></a>
-
-                </div>
-
-                <div class="ThreeThirdImageContainer" style={{marginLeft:'3px'}}>
-
-                <a href=""><img src={"http://127.0.0.1:8000/media/"+this.props.data.post_images[2]} alt="" /></a>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-        )
+          )
 
         }
-        else{
 
-        }
 
  }
 

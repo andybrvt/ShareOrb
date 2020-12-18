@@ -243,12 +243,53 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   height:615px;
 
 }
-
-
 .imageContainer img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* This is for the carousel in the postnewsfeed*/
+.postPicCarouselNews{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+
+}
+.postPicCarouselNews .socialLeftRight{
+  /* display: none; */
+}
+.postPicCarouselNews .socialLeftRight .socialArrowLeft{
+  position: absolute;
+  /* background-color: red; */
+  color: white;
+  top: 37%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 0%;
+  font-size: 45px;
+}
+.postPicCarouselNews .socialLeftRight .socialArrowRight{
+  position: absolute;
+  /* background-color: red; */
+  color: white;
+  bottom: 63%;
+  transform: translateY(50%);
+  left: 93%;
+  /* right: 100%; */
+  z-index: 3;
+  font-size: 45px;
+}
+.postPicCarouselNews .socialLeftRight .picturesRoll{
+  overflow: hidden;
+  height: 615px;
+}
+.postPicCarouselNews .socialLeftRight .picturesRoll .socialImages{
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%)
 }
 
 
