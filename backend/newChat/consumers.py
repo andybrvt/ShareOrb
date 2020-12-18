@@ -210,7 +210,8 @@ class NewChatConsumer(JsonWebsocketConsumer):
         #     'messages': self.serializedMessages(messages)
         # }
         # self.send_json(content)
-
+        print("fetch the chat stuff here")
+        print(data['chatId'])
         chat = get_object_or_404(Chat, id = data['chatId'])
         serializedChat = ChatSerializer(chat).data
         messages = serializedChat['get_messages'][:10]

@@ -32,7 +32,12 @@ class NewChat extends React.Component{
         this.props.parameter.id
       )
     })
-    NewChatWebSocketInstance.connect(this.props.parameter.id)
+    if(this.props.parameter.id === 'newchat'){
+        NewChatWebSocketInstance.connect(null)
+    } else{
+      NewChatWebSocketInstance.connect(this.props.parameter.id)
+    }
+
   }
 
   waitForSocketConnection (callback) {
@@ -55,6 +60,7 @@ class NewChat extends React.Component{
   constructor(props){
     super(props)
     this.initialiseChat()
+
   }
 
 
