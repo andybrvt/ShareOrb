@@ -17,21 +17,28 @@
   width: 300px;
   height: 300px;
   margin-top: 100px;
-  font-family: sans-serif;
   overflow: none;
-  } 
+  border-radius: 10px;
+  }
+
+  .fitPhoto{
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+  }
 
 .sideContainer{
-
+  padding-top: 10px;
   width:750px;
-  height:450px;
   /* background-color: red; */
 }
 
 
 .uploadProfileText{
   margin-left: -125px;
-  font-size: 28px;
+  font-size: 25px;
+  color:#1890ff;
+  /* font-family: 'Segoe UI Regular'; */
   /* transform: translateX(-50%) */
 }
 
@@ -40,8 +47,8 @@
   height: 300px;
   display: inline-block;
   float:left;
-  margin-left: 20px;
-  margin-right: 50px;
+  margin-left: 25px;
+  margin-right: 25px;
   /* background-color: blue; */
 }
 
