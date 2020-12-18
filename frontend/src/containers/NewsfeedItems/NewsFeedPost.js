@@ -335,6 +335,7 @@ class NewsfeedPost extends React.Component {
 
     return (
 
+
       <div style={{marginLeft:'15px', fontSize:'14px'}}>
 
         <div class='outerContainerPeople'>
@@ -373,6 +374,8 @@ class NewsfeedPost extends React.Component {
 
 
         </div>
+
+
 
         <p style={{ fontSize: '14px', color:'black'}}>
                   {
@@ -719,7 +722,7 @@ class NewsfeedPost extends React.Component {
 
       </div>
 
-
+      <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
       {this.BottomLikeCommentPost()}
 
 

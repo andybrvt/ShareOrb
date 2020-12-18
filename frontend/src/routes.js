@@ -75,32 +75,32 @@ class BaseRouter extends React.Component {
         { this.props.isAuthenticated?
         <SideMenu>
 
-        <Switch location = {location} >
+          <Switch location = {location} >
 
 
-        <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
+            <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
-        <Route exact path = '/signup/' component= {Signup} />
+            <Route exact path = '/signup/' component= {Signup} />
 
-        <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
-        <Route exact path = '/explore/:username' render={(props) => <PersonalProfile parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/explore/:username/posts' render = {(props) => <PersonalProfilePostList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
-        <Route exact path = '/explore/:username/events' render = {(props) => <PersonalProfileEventList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
+            <Route exact path = '/explore/:username' render={(props) => <PersonalProfile parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/explore/:username/posts' render = {(props) => <PersonalProfilePostList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
+            <Route exact path = '/explore/:username/events' render = {(props) => <PersonalProfileEventList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
 
-        <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
-        <Route exact path = '/chat/:id' render={(props) => <NewChat parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/personalcalendar/:year/:month' render={(props) => <MonthCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar  parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/personalcalendar/:year' render={(props) => <YearCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/personalcal/event/:eventId' render={(props) => <EventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-        <Route exact path = '/socialcal/event/:socialEventId' render={(props) => <SocialEventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/chat/:id' render={(props) => <NewChat parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/personalcalendar/:year/:month' render={(props) => <MonthCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/personalcalendar/w/:year/:month/:day' render={(props) => <WeekCalendar  parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/personalcalendar/:year' render={(props) => <YearCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/personalcal/event/:eventId' render={(props) => <EventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/socialcal/event/:socialEventId' render={(props) => <SocialEventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
-        </Switch>
+          </Switch>
         </SideMenu>
         :
         <div></div>
