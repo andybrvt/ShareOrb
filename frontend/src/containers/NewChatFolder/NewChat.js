@@ -107,7 +107,7 @@ class NewChat extends React.Component{
   }
 
   render(){
-    console.log(this.props.parameter.id)
+    console.log(this.props)
     console.log(this.state)
     let messages = []
     let chats = []
@@ -182,7 +182,10 @@ class NewChat extends React.Component{
 
       <div className = "chatFarRightSide">
 
-        <CurChatManager />
+        <CurChatManager
+        curChat = {this.props.curChat}
+        curId = {this.props.id}
+         />
 
       </div>
 

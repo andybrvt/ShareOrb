@@ -115,7 +115,6 @@ class NewSidePanel extends React.Component{
       finalStr = senderObj.first_name+": "+finalStr
     }
 
-    console.log(senderObj.recentTime)
     const timeStamp = this.renderTimestamp(recentTime)
     finalStr = finalStr +" - "+timeStamp
     return this.capitalize(finalStr)
