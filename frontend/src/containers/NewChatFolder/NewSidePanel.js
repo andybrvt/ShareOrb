@@ -42,8 +42,61 @@ class NewSidePanel extends React.Component{
       }
     }
 
+    console.log(name)
     return name;
 
+  }
+
+  getGroupChatName(participantList){
+    // This function will show the correct name of the group chats
+    var names = ""
+    let noCurUserList = []
+    for(let i = 0; i < participantList.length; i++){
+      console.log(participantList[i].first_name)
+      if(participantList[i].id !== this.props.curId){
+        const name = this.capitalize(participantList[i].first_name)+ ' '
+        +this.capitalize(participantList[i].last_name)
+        noCurUserList.push(name)
+      }
+    }
+
+    if(noCurUserList.length <= 3){
+      for (let i = 0; i < noCurUserList.length; i++){
+        if(i === 0){
+          names = names+noCurUserList[i]
+        } else if(i === noCurUserList.length-1){
+          if(noCurUserList.length === 2){
+              names = names+" and "+noCurUserList[i]
+          } else {
+            names = names+" ,and "+noCurUserList[i]
+          }
+        } else {
+          names = names + ", "+ noCurUserList[i]
+        }
+
+      }
+
+
+    } else {
+      for (let i = 0; i < 2; i++){
+        if(i === 0){
+          names = names+noCurUserList[i]
+        } else {
+          names = names + ", "+ noCurUserList[i]
+        }
+
+      }
+
+      names = names +", and "+(noCurUserList.length-2)+ " others"
+
+    }
+
+
+
+    console.log(noCurUserList)
+
+
+    return names;
   }
 
   chatDescription (str, senderObj, recentTime){
@@ -126,7 +179,7 @@ class NewSidePanel extends React.Component{
           <NavLink
           to = {''+item.id}
           >
-          <List className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
+          <List.Item className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
             <div className = "chatWrap">
             <Avatar size = {50}
             className = "chatAva"
@@ -140,14 +193,29 @@ class NewSidePanel extends React.Component{
             </div>
 
             </div>
-          </List>
+          </List.Item>
           </NavLink>
 
           :
 
-          <div>
+          <NavLink
+          to = {''+item.id}
+          >
+          {/*This is for the group chats*/}
+          <List.Item className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
+            <div className = "chatWrap">
+              <div className = "chatText">
+              <div className = "chatName">{this.getGroupChatName(item.participants)}</div>
+              <div className = "chatDescription"> {this.chatDescription(item.recentMessage,
+                item.recentSender,
+                item.recentTime
+              )}</div>
+            </div>
 
-          </div>
+            </div>
+          </List.Item>
+          </NavLink>
+
         )}
       />
       </div>
