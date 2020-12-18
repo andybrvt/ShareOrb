@@ -298,6 +298,10 @@
   height: 8%;
   position: relative;
 }
+.chatContainer .chatRightSide .newChatHeader .groupsHeader{
+  margin-top: 7px;
+  display: flex;
+}
 .chatContainer .chatRightSide .newChatHeader .avaHeader{
   margin-top: 10px;
   margin-left: 10px;

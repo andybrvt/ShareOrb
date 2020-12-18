@@ -48,7 +48,7 @@ p {
   padding: 7rem 0; }
 
 aside, main {
-  height: 100vh;
+  /* height: 100vh; */
   min-height: 580px;
 }
 
