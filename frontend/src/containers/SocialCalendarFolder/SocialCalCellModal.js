@@ -25,8 +25,8 @@ class SocialCalCellModal extends React.Component{
          <SocialCalCellPage
          {...this.props}
           />
-          <div className = 'exitX'>
-          <i class="fas fa-times"
+        <div className = 'exitX' style={{padding:'20px'}}>
+          <i class="fas fa-times" style={{fontSize:'30px'}}
           onClick = {this.back}
           ></i>
           </div>
