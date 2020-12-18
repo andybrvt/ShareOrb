@@ -218,12 +218,10 @@ class NewsfeedPost extends React.Component {
     });
   };
 
-  OnClickPost=()=> {
-    console.log("pressed on post")
-    // return <NewsFeedPostModal /
-    console.log(this.state.visibleModal);
-    this.showModal();
-    console.log(this.state.visibleModal);
+  OnClickPost=(postId, username)=> {
+    // This is used to open up the post modal
+
+    this.props.history.push("/post/"+username+'/'+postId)
   }
 
 
@@ -311,27 +309,31 @@ class NewsfeedPost extends React.Component {
     let like_people = this.props.data.people_like
     let profilePic = ''
     let peopleLikeId = []
+    let postId = 0
+    let userUsername = ''
 
     if (this.props.data.user.profile_picture){
       profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
     }
+    if(this.props.data.id){
+      postId = this.props.data.id
+    }
+    if(this.props.data.user){
+      userUsername = this.props.data.user.username
+    }
 
-    console.log(profilePic)
 
     let temp="http://127.0.0.1:8000"+this.props.data.post_images;
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
 
     const success = () => {
-    message.success('Clipped to your album!');
+      message.success('Clipped to your album!');
     };
-    console.log(temp)
-
     if(like_people.length > 0){
       for(let i = 0; i< like_people.length; i++){
         peopleLikeId.push(like_people[i].id)
       }
     }
-    console.log(peopleLikeId)
 
     return (
 
@@ -355,7 +357,7 @@ class NewsfeedPost extends React.Component {
                 </span>
                  <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
-                 <span class="LikeCommentHover" onClick={this.OnClickPost} style={{marginTop:'-20px'}}>
+                 <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
                    <span class="boldLikeComment">
                      {this.props.data.post_comments.length} Comments
                    </span>
@@ -392,7 +394,7 @@ class NewsfeedPost extends React.Component {
                          <div
                            style={{marginLeft: '10px', marginTop:'10px'}}
                            class="seeMore outerSeeMore"
-                           onClick={this.OnClickPost}
+                           onClick={() => this.OnClickPost(postId, userUsername)}
                            >
                             ... see more
                          </div>
@@ -450,7 +452,7 @@ class NewsfeedPost extends React.Component {
                     </span>
                   </button>
               }
-              <button onClick ={this.OnClickPost} >
+              <button onClick ={() => this.OnClickPost(postId, userUsername)} >
 
                 <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
               </button>
@@ -1050,75 +1052,73 @@ class NewsfeedPost extends React.Component {
     }
 
     render() {
-      console.log(this.props.data)
+      console.log(this.props)
       let temp="http://127.0.0.1:8000"+this.props.data.post_images;
-      console.log(temp);
       const success = () => {
       message.success('Clipped to your album!');
       };
-      console.log(this.props);
       const { TextArea } = Input;
-  return (
-    <div>
-
-    {/*
-    {this.ContentOfEvent()}
-    */}
+      return (
       <div>
 
+      {/*
+      {this.ContentOfEvent()}
+      */}
+        <div>
 
-      <Modal
-        class="modalOuterContainer"
-        title={`Likes on Post`}
-        visible={this.state.testLike}
-        onOk={this.handleOk}
-        onCancel={this.handleCancel}
-        width="600px"
-        height="1000px"
-        style={{marginTop:'-50px'}}
-        >
-
-
-        <LikeList {...this.props}/>
-
-        </Modal>
 
         <Modal
           class="modalOuterContainer"
-          title={`Post by ${this.props.data.user.username}`}
-          visible={this.state.visibleModal}
+          title={`Likes on Post`}
+          visible={this.state.testLike}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-          width="1600px"
-          height="800px"
+          width="600px"
+          height="1000px"
           style={{marginTop:'-50px'}}
           >
 
-          <div class="modalInnerContainer">
 
-          {
-                  this.props.data.post_images.length>0 ?
+          <LikeList {...this.props}/>
 
-               <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
+          </Modal>
 
-          //
-                  :
+          <Modal
+            class="modalOuterContainer"
+            title={`Post by ${this.props.data.user.username}`}
+            visible={this.state.visibleModal}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            width="1600px"
+            height="800px"
+            style={{marginTop:'-50px'}}
+            >
 
-          <p  class="modalCardBorder modalInnerPicture"> {this.ContentOfPost()} </p>
-          }
-            <p  class="modalCardBorder">{this.ContentofComments()}</p>
-          </div>
-        </Modal>
+            <div class="modalInnerContainer">
 
-      </div>
+            {
+                    this.props.data.post_images.length>0 ?
 
-      {
-            this.props.data.post_images.length>0 ?
-           <p>{this.ContentOfPic()}</p>
-              :
-      <p> {this.ContentOfPost()} </p>
-      }
-      </div>
+                 <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
+
+            //
+                    :
+
+            <p  class="modalCardBorder modalInnerPicture"> {this.ContentOfPost()} </p>
+            }
+              <p  class="modalCardBorder">{this.ContentofComments()}</p>
+            </div>
+          </Modal>
+
+        </div>
+
+        {
+              this.props.data.post_images.length>0 ?
+             <p>{this.ContentOfPic()}</p>
+                :
+        <p> {this.ContentOfPost()} </p>
+        }
+        </div>
   );
 };
 }

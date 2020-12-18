@@ -1,3 +1,4 @@
+
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -111,7 +112,9 @@ class InfiniteList extends React.Component {
       <hr />
 
       {post.map((j,index) => {
-        return <NewsFeedPost data = {j}  />
+        return <NewsFeedPost
+          history = {this.props.data.history}
+         data = {j}  />
       })}
 
      </div>
