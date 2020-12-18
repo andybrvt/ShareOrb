@@ -44,6 +44,59 @@ class CurChatManager extends React.Component{
 
   }
 
+  getGroupChatName(participantList){
+    // This function will show the correct name of the group chats
+    var names = ""
+    let noCurUserList = []
+    for(let i = 0; i < participantList.length; i++){
+      console.log(participantList[i].first_name)
+      if(participantList[i].id !== this.props.curId){
+        const name = this.capitalize(participantList[i].first_name)+ ' '
+        +this.capitalize(participantList[i].last_name)
+        noCurUserList.push(name)
+      }
+    }
+
+    if(noCurUserList.length <= 3){
+      for (let i = 0; i < noCurUserList.length; i++){
+        if(i === 0){
+          names = names+noCurUserList[i]
+        } else if(i === noCurUserList.length-1){
+          if(noCurUserList.length === 2){
+              names = names+" and "+noCurUserList[i]
+          } else {
+            names = names+" ,and "+noCurUserList[i]
+          }
+        } else {
+          names = names + ", "+ noCurUserList[i]
+        }
+
+      }
+
+
+    } else {
+      for (let i = 0; i < 2; i++){
+        if(i === 0){
+          names = names+noCurUserList[i]
+        } else {
+          names = names + ", "+ noCurUserList[i]
+        }
+
+      }
+
+      names = names +", and "+(noCurUserList.length-2)+ " others"
+
+    }
+
+
+
+    console.log(noCurUserList)
+
+
+    return names;
+  }
+
+
 
 
   render(){
@@ -57,6 +110,7 @@ class CurChatManager extends React.Component{
         partiLen =this.props.curChat.participants.length
         if(this.props.curChat.participants.length > 2){
           // This is for group chats
+          chatUserName = this.getGroupChatName(this.props.curChat.participants)
         } else {
           profilePic = this.getChatUserProfile(this.props.curChat.participants)
           chatUserName = this.getChatUserName(this.props.curChat.participants)
@@ -69,21 +123,40 @@ class CurChatManager extends React.Component{
       <div className = "chatManagerContainer">
         {
           partiLen > 2 ?
-          <div>
+          <div className = 'chatGroupBox'>
+            <div className = "chatGroupAva">
+            <i
+            style = {{
+              position: "relative",
+              // left: "40%",
+              // tranform: "translateX(-50%)"
+            }}
+            class="fas fa-user-friends"></i>
+            </div>
+            <div
+            className = "chatName"
+            >{chatUserName}</div>
+
+            <div className = "">
+              This part shows all the group members
+            </div>
+
           </div>
 
           :
 
-          <div>
+          <div className = 'chatRightSideBox'>
           <Avatar
           size = {200}
           src = {"http://127.0.0.1:8000"+profilePic}
           />
-          <div>{chatUserName}</div>
+          <div
+          className= 'chatName'
+          >{chatUserName}</div>
           </div>
         }
 
-        <div>
+        <div className ="" >
         <Button> Event Sync </Button>
         <Button> Share Event </Button>
         </div>

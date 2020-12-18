@@ -187,7 +187,37 @@
 .chatContainer .chatFarRightSide .chatManagerContainer{
   /* background-color: red; */
   text-align: center;
+  position: relative;
+  top: 10%;
 
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox{
+  /* background-color: red; */
+  position: relative;
+  /* top: 25px; */
+
+
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatName{
+  font-size: 25px;
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatGroupAva{
+  background-color: gainsboro;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  font-size: 125px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox{
+  /* background-color: red; */
+  position: relative;
+  /* top: 25px; */
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox{
+  font-size: 25px;
 }
 
 
