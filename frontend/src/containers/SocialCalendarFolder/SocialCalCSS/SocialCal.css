@@ -10,7 +10,8 @@
 }
 
 .socialParent{
-  height:10px;
+  overflow: hidden;
+  height:0%;
 
 }
 

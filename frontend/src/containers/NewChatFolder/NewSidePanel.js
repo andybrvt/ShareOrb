@@ -204,6 +204,16 @@ class NewSidePanel extends React.Component{
           {/*This is for the group chats*/}
           <List.Item className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
             <div className = "chatWrap">
+              <div className = "chatGroupAva">
+              <i
+              style = {{
+                position: "relative",
+                // left: "40%",
+                // tranform: "translateX(-50%)"
+              }}
+              class="fas fa-user-friends"></i>
+              </div>
+
               <div className = "chatText">
               <div className = "chatName">{this.getGroupChatName(item.participants)}</div>
               <div className = "chatDescription"> {this.chatDescription(item.recentMessage,

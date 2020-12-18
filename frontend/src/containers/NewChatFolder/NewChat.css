@@ -148,9 +148,10 @@
   position:relative;
   padding-top: 4px;
   font-size: 2.2vw;
-  color: black;
+  color: #383838;
   width: 20%;
   text-align: center;
+  cursor: pointer;
 }
 
 
@@ -335,6 +336,21 @@
 }
 .chatItem .chatWrap{
   display: flex;
+}
+.chatItem .chatWrap .chatGroupAva{
+  position: relative;
+  margin-top: 10px;
+  /* background-color: red; */
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 40px;
+
+}
+.chatItem .chatWrap .chatGroupAva .icon{
+  position: relative;
+  left: 10px;
 }
 .chatItem .chatWrap .chatAva{
   margin-top: 12px;
