@@ -10,10 +10,13 @@
 }
 
 .socialParent{
-  overflow: hidden;
-  height:0%;
+  /* height:74vh; */
 
 }
+
+/* .socialParent aside main{
+  height:10vh;
+} */
 
 
 .socialCalCellProfilePic{
