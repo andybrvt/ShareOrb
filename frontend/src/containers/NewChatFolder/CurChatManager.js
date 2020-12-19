@@ -122,6 +122,7 @@ class CurChatManager extends React.Component{
     let profilePic = ""
     let partiLen = 0
     let chatUserName = ""
+    let eventList = []
     if(this.props.curChat){
       if(this.props.curChat.participants){
         partiLen =this.props.curChat.participants.length
@@ -133,6 +134,10 @@ class CurChatManager extends React.Component{
           chatUserName = this.getChatUserName(this.props.curChat.participants)
         }
       }
+    }
+
+    if(this.props.eventList){
+      eventList = this.props.eventList
     }
 
 
@@ -185,7 +190,9 @@ class CurChatManager extends React.Component{
         footer= {null}
         >
 
-        <CurChatEventList />
+        <CurChatEventList
+        eventList = {eventList}
+        />
 
         </Modal>
 

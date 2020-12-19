@@ -1,0 +1,42 @@
+/* This is the css for the share event modal */
+
+.chatEventShare{
+  /* background-color: red; */
+  position: relative;
+}
+
+.chatEventShare .searchChatContainer {
+  /* background-color: red; */
+  /* height: 300px; */
+}
+.chatEventShare .searchChatContainer .searchForm{
+  /* width: 10px; */
+}
+.chatEventShare .searchChatContainer .searchForm .input{
+  /* border-radius: 5px; */
+}
+
+.chatEventShare .eventListContainer {
+  /* background-color: red; */
+}
+
+.chatEvent{
+  /* background-color: red; */
+  border: 1px solid gray;
+}
+.chatEvent .title{
+  /* background-color: red; */
+}
+.chatEvent .times{
+
+}
+.chatEvent .numPeople{
+
+}
+.chatEvent .location{
+
+}
+
+.chatEventShare .chatEventButton{
+  /* background-color: red; */
+}

@@ -43,7 +43,8 @@ class MiniEventSerializer(serializers.ModelSerializer):
             "repeatCondition",
             "start_time",
             "end_time",
-            "color"
+            "color",
+            "person"
         )
 
 class EventSerializer (serializers.ModelSerializer):
