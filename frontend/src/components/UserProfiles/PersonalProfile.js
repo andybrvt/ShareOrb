@@ -19,7 +19,7 @@ import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
 import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
 import EditProfileForm from './EditProfile/EditProfileForm';
-
+import ChangeBackgroundModal from '../../containers/PersonalCalendar/EventPage/ChangeBackgroundModal.js';
 
 // DELETE LATER
 import ConfirmAddFriend from './ConfirmAddFriend';
@@ -252,14 +252,14 @@ class PersonalProfile extends React.Component{
       if(this.props.profile){
         console.log(this.props.profile.profile_picture)
         if(this.props.profile.profile_picture){
-          profileImage = 'http://127.0.0.1:8000'+this.props.profile.profile_picture
+          profileImage = this.props.profile.profile_picture
         }
       }
 
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
-          <Avatar size = {150} src = {profileImage} />
+          <Avatar size = {150} src = {'http://127.0.0.1:8000'+profileImage} />
           {
             this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
@@ -726,6 +726,7 @@ class PersonalProfile extends React.Component{
       let firstName=""
       let lastName=""
       let bio=""
+      let profileImage = null
       if (this.props.profile){
         if(this.props.profile.get_followers){
           followers = this.props.profile.get_followers
@@ -746,6 +747,13 @@ class PersonalProfile extends React.Component{
       }
       if(this.props.profile.bio){
         bio = this.props.profile.bio
+      }
+
+      if(this.props.profile){
+        console.log(this.props.profile.profile_picture)
+        if(this.props.profile.profile_picture){
+          profileImage = 'http://127.0.0.1:8000'+this.props.profile.profile_picture
+        }
       }
 
       return(
@@ -785,12 +793,18 @@ class PersonalProfile extends React.Component{
            />
           </Modal>
 
+          {/*
+          <ChangeBackgroundModal
+            pic={profileImage}
+            visible = {this.state.showProfilePicEdit}
+            close = {this.closeChangeProfilePic}
+            onSubmit = {this.handleProfilePicChange}
+          />*/}
           <ChangeProfilePic
              visible = {this.state.showProfilePicEdit}
              onCancel = {this.closeChangeProfilePic}
              onSubmit = {this.handleProfilePicChange}
            />
-
           <Modal
             visible ={this.state.followerShow}
             onCancel = {this.onFollowerCancel}

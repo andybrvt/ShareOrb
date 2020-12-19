@@ -686,7 +686,12 @@ class PersonalProfileEventList extends React.Component{
           </Steps>
           </div>
           <Divider style={{marginTop:'-1px'}}/>
-
+            <UserEventList
+            events = {this.props.profile.get_socialEvents}
+            curId = {this.props.currentId}
+            ownerId = {this.props.profile.id}
+            history = {this.props.history}
+             />
         </div>
       )
     }
