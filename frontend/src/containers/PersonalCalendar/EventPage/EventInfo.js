@@ -600,7 +600,7 @@ class EventInfo extends React.Component{
 
 
 
-        <div class="eventCard" style={{marginTop:'-25px', width:'500px',padding:'30px'}}>
+        <div class="eventCard" style={{marginTop:'-25px', width:'500px',padding:'40px'}}>
             <div
               className = 'eventTitle'>
               {this.capitalize(title)}
@@ -646,10 +646,10 @@ class EventInfo extends React.Component{
           </div>
 
 
-          <div style={{marginTop:'-100px',marginLeft:'265px', color:'black'}} class="outerContainer">
+          <div style={{marginTop:'-75px',marginLeft:'290px', color:'black'}} class="outerContainer">
             <span
-                style={{ fontSize:'20px', width:'1100px', height:'85px',
-                 display:'inline-block', marginTop:'100px', padding:'45px'}}
+                style={{ fontSize:'20px', width:'1125px', height:'60px',
+                 display:'inline-block', marginTop:'100px', padding:'50px'}}
                  class="aboutEvent eventCard">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
@@ -726,7 +726,7 @@ class EventInfo extends React.Component{
 
           </div>
 
-          <div style={{marginTop:'40px', marginLeft:'265px', color:'black'}} class="outerContainer">
+          <div style={{marginTop:'40px', marginLeft:'290px', color:'black'}} class="outerContainer">
 
             <div style={{ fontSize:'20px',display:'inline-block' }}
               class="aboutEvent eventCard innerContainer">
@@ -878,7 +878,7 @@ class EventInfo extends React.Component{
 
 
 
-        <div style={{ marginLeft:'90px',marginTop:'100px', width:'1075px'}} className = "eventPeopleWord eventCard"> Statistics
+        <div style={{ marginLeft:'75px',marginTop:'100px', width:'1100px'}} className = "eventPeopleWord eventCard"> Statistics
 
 
           <div className =  "percentagesBars">
