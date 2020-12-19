@@ -675,7 +675,7 @@ main {
 }
 
 .weekEventAccept{
-  background-color: black;
+  /* background-color: black; */
   color: white;
   font-size: 15px;
   /* this makes events rounded but gonna take it out for now */

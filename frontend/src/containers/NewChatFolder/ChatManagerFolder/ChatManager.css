@@ -22,7 +22,13 @@
 
 .chatEvent{
   /* background-color: red; */
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
+  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+  color: white;
+  border-radius: 5px;
+  width: 60%;
+  padding-left: 15px;
 }
 .chatEvent .title{
   /* background-color: red; */
@@ -30,13 +36,21 @@
 .chatEvent .times{
 
 }
+.chatEvent .times .text{
+  margin-left: 3px;
+}
 .chatEvent .numPeople{
 
 }
-.chatEvent .location{
+.chatEvent .numPeople .text{
+  margin-left: 3px;
+}
+.chatEvent .date{
 
 }
+.chatEvent .date .text{
 
+}
 .chatEventShare .chatEventButton{
   /* background-color: red; */
 }
