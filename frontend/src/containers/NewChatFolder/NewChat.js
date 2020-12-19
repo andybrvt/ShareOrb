@@ -11,6 +11,8 @@ import ManageChatHeader from './ManageChatHeader';
 import NoChatsScreen from './NoChatsScreen';
 import AddNewChatContent from './AddNewChatContent';
 import CurChatManager from './CurChatManager';
+import * as calendarActions from '../../store/actions/calendars';
+
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
 
@@ -22,7 +24,8 @@ class NewChat extends React.Component{
   state = {
     // The messgaes will be specific to the chat
     // Friend list is used to search for friend to find or make a new chat
-    friendList:[]
+    friendList:[],
+    eventList: []
   }
 
   initialiseChat(){
@@ -60,7 +63,12 @@ class NewChat extends React.Component{
   constructor(props){
     super(props)
     this.initialiseChat()
-
+    authAxios.get('http://127.0.0.1:8000/mycalendar/avaliEvents')
+    .then(res => {
+      this.setState({
+        eventList: res.data
+      })
+    })
   }
 
 
@@ -185,7 +193,7 @@ class NewChat extends React.Component{
         <CurChatManager
         curChat = {this.props.curChat}
         curId = {this.props.id}
-
+        eventList = {this.state.eventList}
          />
 
       </div>
@@ -207,4 +215,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(NewChat);
+const mapDispatchToProps = dispatch => {
+  return{
+    getEvents: () => dispatch(calendarActions.getUserEvents()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewChat);

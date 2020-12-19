@@ -30,6 +30,22 @@ class CalendarOwnedSerializer(serializers.ModelSerializer):
         model = models.Calendar
         fields = ('id','person', 'title')
 
+class MiniEventSerializer(serializers.ModelSerializer):
+    # This is a miniSerializer that will be used for the
+    # chat page so that you dont pull too much information
+
+    class Meta:
+        model = models.Event
+        fields = (
+            "id",
+            "title",
+            "content",
+            "repeatCondition",
+            "start_time",
+            "end_time",
+            "color"
+        )
+
 class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins
     # id = serializers.ReadyOnlyField()

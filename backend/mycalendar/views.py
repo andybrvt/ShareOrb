@@ -3,6 +3,8 @@ from . import models
 from rest_framework import generics
 from . import serializers
 from django.db.models import Q
+from django.utils import timezone
+import datetime
 
 # Create your views here.
 # def get_calendar(request):
@@ -56,12 +58,22 @@ class AllEventsView(generics.ListAPIView):
 
 
 class CalendarEventsView(generics.ListAPIView):
+    # This function will grab all the users events so that it can be used
+    # inside the personal calendar
     serializer_class = serializers.EventSerializer
     def get_queryset(self):
         user = self.request.user
         queryset = models.Event.objects.filter(person = user).order_by('start_time')
         return queryset
 
+class CalendarCurEventView(generics.ListAPIView):
+    # This function will grab all the users event that are current or future
+    # so that it cna be used to share with others or invite others
+    serializer_class = serializers.MiniEventSerializer
+    def get_queryset(self):
+        user = self.request.user
+        queryset = models.Event.objects.filter(person = user).filter(start_time__gte =datetime.date.today()).order_by('start_time')
+        return queryset
 
 class GrabDayEvents(generics.ListAPIView):
     serializer_class = serializers.EventSerializer

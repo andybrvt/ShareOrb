@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Button, Modal } from 'antd';
-
+import CurChatEventList from './ChatManagerFolder/CurChatEventList';
 
 // This will be the far right side of the chats that holds the
 // user profile pic and actions such as event sync, event invite,
@@ -185,7 +185,7 @@ class CurChatManager extends React.Component{
         footer= {null}
         >
 
-        This is where I am gonna add the modal
+        <CurChatEventList />
 
         </Modal>
 
