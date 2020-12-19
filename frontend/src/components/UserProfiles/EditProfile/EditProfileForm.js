@@ -114,13 +114,12 @@ class EditProfileForm extends React.Component{
     return(
       <div className = "">
 
-        <div
+        <div style={{background:'red'}}
         onClick = {() => this.onOpenChangeProfilePic()}
         >
           <Avatar
            size = {100}
            src = {profilePic}/>
-           Change Profile Picture
         </div>
 
         <div>

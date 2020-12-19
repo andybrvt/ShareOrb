@@ -259,7 +259,10 @@ class PersonalProfile extends React.Component{
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
-          <Avatar size = {150} src = {'http://127.0.0.1:8000'+profileImage} />
+          <Avatar
+            onClick = {() => this.onOpenChangeProfilePic()}
+            size = {150}
+            src = {'http://127.0.0.1:8000'+profileImage} />
           {
             this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
@@ -270,6 +273,12 @@ class PersonalProfile extends React.Component{
           }
         </div>
       )
+    }
+
+    onOpenChangeProfilePic = () => {
+      this.setState({
+        showProfilePicEdit: true
+      })
     }
 
     renderCalPostPic = () => {
@@ -793,18 +802,14 @@ class PersonalProfile extends React.Component{
            />
           </Modal>
 
-          {/*
+
           <ChangeBackgroundModal
-            pic={profileImage}
+            pic={profilePic}
             visible = {this.state.showProfilePicEdit}
             close = {this.closeChangeProfilePic}
             onSubmit = {this.handleProfilePicChange}
-          />*/}
-          <ChangeProfilePic
-             visible = {this.state.showProfilePicEdit}
-             onCancel = {this.closeChangeProfilePic}
-             onSubmit = {this.handleProfilePicChange}
-           />
+          />
+
           <Modal
             visible ={this.state.followerShow}
             onCancel = {this.onFollowerCancel}
