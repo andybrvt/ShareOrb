@@ -522,8 +522,8 @@ class ReduxEditEventForm extends React.Component{
   }
 
   renderShareListSelect = () => {
-    if(this.props.friendList !== undefined){
-      const friendList = this.props.friendList
+    if(this.props.following !== undefined && this.props.followers !== undefined){
+      const friendList = this.props.following
 
       let shareOptions = []
 

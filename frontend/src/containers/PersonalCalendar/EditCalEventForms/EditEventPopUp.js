@@ -289,6 +289,8 @@ class EditEventPopUp extends React.Component {
         initialValues = {this.getInitialValue()}
         onDelete = {this.delete}
         friendList = {this.props.friendList}
+        following = {this.props.following}
+        followers = {this.props.followers}
         />
 
 
@@ -311,6 +313,8 @@ const mapStateToProps = state => {
     id: state.auth.id,
     username: state.auth.username,
     friendList: state.auth.friends,
+    following: state.auth.following,
+    followers: state.auth.followers,
     profilePic: state.auth.profilePic,
     firstName: state.auth.firstName,
     lastName: state.auth.lastName

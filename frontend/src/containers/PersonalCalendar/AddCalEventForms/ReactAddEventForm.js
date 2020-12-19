@@ -408,8 +408,11 @@ class ReactAddEventForm extends React.Component {
   };
 
   renderShareListSelect = () => {
-    if(this.props.friendList !== undefined){
-      const friendList = this.props.friendList
+    if(this.props.following !== undefined && this.props.followers !== undefined){
+
+      // This const is what determines the people you can share with.
+      // EVENTUALLY YOU 
+      const friendList = this.props.following
 
       let shareOptions = []
 
@@ -517,6 +520,7 @@ class ReactAddEventForm extends React.Component {
     // it allows for us to be able to input stuff into the form item
     // because it is what connents to the onChange for the states
     console.log(this.state)
+    console.log(this.props)
     const startChildren = this.renderStartTime();
     const endChildren = this.renderEndTime()
     console.log(this.handleValidation())

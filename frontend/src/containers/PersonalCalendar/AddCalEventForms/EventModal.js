@@ -190,7 +190,10 @@ class EventModal extends React.Component {
         >
         <ReactAddEventForm
         friendList = {this.props.friendList}
-        onSubmit = {this.submit} />
+        onSubmit = {this.submit}
+        following = {this.props.following}
+        followers = {this.props.followers}
+        />
         </Modal>
       </div>
     );
@@ -200,6 +203,8 @@ class EventModal extends React.Component {
 const mapStateToProps = state => {
   return {
     friendList: state.auth.friends,
+    following: state.auth.following,
+    followers: state.auth.followers,
     username: state.auth.username,
     id: state.auth.id,
 
