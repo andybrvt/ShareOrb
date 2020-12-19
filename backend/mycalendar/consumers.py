@@ -19,6 +19,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def add_share_sync_event(self, data):
         # CHECKED
 
+        print(data)
         # THIS IS GONNA BE SIMILAR TO THE SHARED EVENT SO YOU GOTTA STRUCTURE YOUR
         # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT
 

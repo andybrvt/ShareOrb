@@ -11,6 +11,9 @@ from mySocialCal.models import SocialCalEvent
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+import datetime
+
+
 
 def create_all_post(sender, instance, created, **kwargs):
     # This is a post save handler that will create a content type ojbect whenever
@@ -243,10 +246,10 @@ class CustomNotification(models.Model):
 
     # Pending event date will be used for the date that the pictures will be assoicated to
     # assoicate it with the cal cell
-    pendingEventDate = models.DateField(default = timezone.now, blank = True)
+    pendingEventDate = models.DateField(default =datetime.date.today, blank = True)
 
-    pendingEventStartTime = models.TimeField(default = timezone.now, blank = True)
-    pendingEventEndTime = models.TimeField(default = timezone.now, blank = True)
+    pendingEventStartTime = models.TimeField(default = datetime.time, blank = True)
+    pendingEventEndTime = models.TimeField(default = datetime.time, blank = True)
 
     def __str__(self):
         return str(self.recipient)

@@ -185,6 +185,7 @@ class NewChat extends React.Component{
         <CurChatManager
         curChat = {this.props.curChat}
         curId = {this.props.id}
+
          />
 
       </div>
@@ -201,7 +202,8 @@ const mapStateToProps = state => {
     curChat: state.message.curChat,
     following: state.auth.following,
     followers: state.auth.followers,
-    curId: state.auth.id
+    curId: state.auth.id,
+    events: state.calendar.events
   }
 }
 

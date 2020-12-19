@@ -1,11 +1,16 @@
 import React from 'react';
-import { Avatar, Button } from 'antd';
+import { Avatar, Button, Modal } from 'antd';
 
 
 // This will be the far right side of the chats that holds the
 // user profile pic and actions such as event sync, event invite,
 // share events etc
 class CurChatManager extends React.Component{
+
+
+  state = {
+    showShareEvent: false
+  }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -96,6 +101,18 @@ class CurChatManager extends React.Component{
     return names;
   }
 
+  onOpenEventModal = () => {
+    this.setState({
+      showShareEvent: true
+    })
+  }
+
+  onCloseEventModal = () => {
+    this.setState({
+      showShareEvent: false
+    })
+  }
+
 
 
 
@@ -157,9 +174,23 @@ class CurChatManager extends React.Component{
         }
 
         <div className ="" >
-        <Button> Event Sync </Button>
-        <Button> Share Event </Button>
+        <Button
+        onClick = {() => this.onOpenEventModal()}
+        > Share Event </Button>
         </div>
+
+        <Modal
+        visible = {this.state.showShareEvent}
+        onCancel = {() => this.onCloseEventModal()}
+        footer= {null}
+        >
+
+        This is where I am gonna add the modal
+
+        </Modal>
+
+
+
       </div>
     )
   }
