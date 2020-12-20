@@ -2,6 +2,7 @@ from django.db import models
 from userprofile.models import User
 from django.conf import settings
 from django.utils import timezone
+import datetime
 
 
 # Create your models here.
@@ -46,6 +47,13 @@ class Message(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     messageUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "message_user", on_delete = models.CASCADE, null = True)
+
+    # The type is mostly used for more unique messages such as sharing an
+    # event within the group chats
+    type = models.CharField( default = "text", max_length = 30)
+    eventTitle = models.CharField(max_length = 255, blank = True)
+    eventStartTime = models.DateTimeField(default = timezone.now, blank = True)
+    eventEndTime = models.DateTimeField(default = timezone.now, blank = True)
 
     class Meta:
         ordering = ['-created_at']

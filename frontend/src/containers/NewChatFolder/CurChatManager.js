@@ -148,10 +148,10 @@ class CurChatManager extends React.Component{
     })
   }
 
-  submitShareEventConfig = (eventId) => {
+  submitShareEventConfig = (eventId, eventObj) => {
 
     const idList = this.getChatUserId(this.props.curChat.participants)
-    this.props.submitShareEvent(eventId, idList)
+    this.props.submitShareEvent(eventId, idList, eventObj)
   }
 
   onProfileClick = (username) => {

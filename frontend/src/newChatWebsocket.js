@@ -97,6 +97,20 @@ class WebSocketNewChat {
     })
   }
 
+  sendSharedEventMessage = (chatId, senderId, eventObj) => {
+    // This function will be sent when you share and event with the chat group
+
+    // You will need the chatId to send to the right chat, the sender Id
+    // to know who the sender is. Then you have to set up fields liek title
+    // start date and end date and times taken from the event object
+    this.sendMessage({
+      command: "send_shared_event_message",
+      chatId: chatId,
+      senderId: senderId,
+      eventObj: eventObj
+    })
+  }
+
   // now callbacks
   addCallbacks(
     setMessages,

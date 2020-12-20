@@ -71,7 +71,7 @@ class CurChatEventList extends React.Component{
                 </div>
 
                 <div
-                onClick = {() => {this.props.submitShareEvent(item.id)}}
+                onClick = {() => {this.props.submitShareEvent(item.id, item)}}
                 className = "shareEventButton">
                   <i class="fas fa-user-plus"></i>
                 </div>

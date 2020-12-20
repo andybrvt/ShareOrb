@@ -254,6 +254,41 @@ class NewChatConsumer(JsonWebsocketConsumer):
 
         self.send_messsage(content)
 
+    def send_shared_event_message(self, data):
+        # this function will send a message but this message will be an event
+        # message that will display info about the event
+        # You will have to add extra fields to the messages now like
+        # type, eventTitle, date, starttime , endtime
+
+        chatObj = get_object_or_404(Chat, id = data['chatId'])
+        senderObj = get_object_or_404(User, id = data['senderId'])
+
+        # Since this message is gonna be more unqiue, there will be
+        # more fields getting filled in
+        newMessage = Message.objects.create(
+            chat = chatObj,
+            body = senderObj.username+" shared an event",
+            messageUser = senderObj,
+            type= 'event',
+            eventTitle = data['eventObj']['title'],
+            eventStartTime = data['eventObj']['start_time'],
+            eventEndTime = data['eventObj']['end_time']
+        )
+
+        newMessage.save()
+
+        serializedMessage = MessageSerializer(newMessage)
+
+        content = {
+            "command": "send_new_chat_created_message",
+            "newMessage": serializedMessage.data,
+            "chatId": data['chatId']
+        }
+
+        self.send_messsage(content)
+
+    
+
     def send_messsage(self, newMessageObj):
         # This function will be sending information to the channel layer
         # it will send it to the appropriate chat giving the chatId
@@ -291,10 +326,13 @@ class NewChatConsumer(JsonWebsocketConsumer):
         # This is for receiving information from the front end
 
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_new_chat_messages':
             self.send_fetch_new_chat_messages(data)
         if data['command'] == 'send_new_chat_created_message':
             self.send_new_chat_created_message(data)
+        if data['command'] == 'send_shared_event_message':
+            self.send_shared_event_message(data)
 
     def new_chat_message(self, message):
         # This will be sending the chat message into the front end
