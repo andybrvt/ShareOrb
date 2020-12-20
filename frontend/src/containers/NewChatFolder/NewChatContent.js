@@ -4,6 +4,7 @@ import { Input, List, Avatar, Spin} from 'antd';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
 import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
 import { LoadingOutlined } from '@ant-design/icons';
+import * as dateFns from 'date-fns';
 
 
 
@@ -20,6 +21,7 @@ class NewChatContent extends React.Component{
       message: e.target.value
     })
   }
+
 
   // This will handle the submiting of the chats. You will need to submit
   // the chatid, current person sending the chat id, and the message
@@ -64,6 +66,116 @@ class NewChatContent extends React.Component{
     this.scrollToBottom();
   }
 
+  renderMessages = (messageItem) => {
+
+    // SEE IF THIS WORKS, IF IT DOES NOT THEN TRY JUST DOING A DIV AND THEN
+    // LOOPING THROUGH ALL THE MESSAGES INTO A [] AND THEN REDNER IN INOT A
+    // DIV --> SIMILAR TO THE CALENDAR
+
+    // This function will render the correct message and messsage type
+    const curUser = this.props.curId
+    const messageUser = messageItem.messageUser.id
+
+    if(curUser === messageUser){
+      // This message will take care of the case when you are the current user
+        if(messageItem.type === "event"){
+          // This conditional will take care of the event
+          const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
+          const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
+          const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
+
+          return (
+            <div className = "chatTextBoxRight">
+            <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+            <div className = 'chatNameTimeRight'>
+              <div className = 'chatNameRight'>
+                {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+              </div>
+              <div>
+
+              </div>
+            </div>
+
+            <div className = "chatContentTextRight">
+              {this.capitalize(messageItem.body)}
+              <br />
+              Title: {messageItem.eventTitle}
+              <br />
+              Date: {eventDate}
+              <br />
+              {eventStartTime} - {eventEndTime}
+              <br />
+              Click to check it out.
+            </div>
+
+            </div>
+          )
+        } else if (messageItem.type === "text"){
+          // This will take care of the case where the message is just the chat
+          return (
+            <div className = "chatTextBoxRight">
+            <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+            <div className = 'chatNameTimeRight'>
+              <div className = 'chatNameRight'>
+                {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+              </div>
+              <div>
+
+              </div>
+            </div>
+
+            <div className = "chatContentTextRight">
+              {messageItem.body}
+            </div>
+
+            </div>
+
+          )
+        }
+
+    } else{
+      if(messageItem.type === "event"){
+        // This conditional will take care of the event
+        return (
+          <div className= "chatTextBox">
+          <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+
+          This is some text
+          </div>
+        )
+      } else if (messageItem.type === "text"){
+        // This will take care of the case where the message is just the chat
+        return (
+          <div className = "chatTextBox">
+          <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+          <div className = 'chatNameTime'>
+            <div className = 'chatName'>
+              {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+            </div>
+            <div>
+
+            </div>
+          </div>
+
+          <div className = "chatContentText">
+            {messageItem.body}
+          </div>
+
+          </div>
+
+        )
+      }
+
+
+
+    }
+
+
+
+  }
+
+
+
   render(){
     console.log(this.props)
     console.log(this.state.message)
@@ -89,50 +201,8 @@ class NewChatContent extends React.Component{
           renderItem = { item => (
 
             <div>
-            {
-              this.props.curId === item.messageUser.id ?
-
-              <div className = "chatTextBoxRight">
-              <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
-              <div className = 'chatNameTimeRight'>
-                <div className = 'chatNameRight'>
-                  {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
-                </div>
-                <div>
-
-                </div>
-              </div>
-
-              <div className = "chatContentTextRight">
-                {item.body}
-              </div>
-
-              </div>
-
-              :
-
-              <div className = "chatTextBox">
-              <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
-              <div className = 'chatNameTime'>
-                <div className = 'chatName'>
-                  {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
-                </div>
-                <div>
-
-                </div>
-              </div>
-
-              <div className = "chatContentText">
-                {item.body}
-              </div>
-
-              </div>
-
-            }
-
-
+            {this.renderMessages(item)}
             </div>
-
 
           )
 
@@ -165,7 +235,7 @@ class NewChatContent extends React.Component{
               onPressEnter = {this.handleMessageSubmit}
               />
 
-            
+
 
 
             </div>
