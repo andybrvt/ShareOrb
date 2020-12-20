@@ -122,7 +122,18 @@ class WebSocketNewChatSidePanel {
       command: 'update_recent_chat_message'
     })
 
-    }
+  }
+
+  updateRecentChatEvent = (chatId, senderId) => {
+    // This function will be sent to the chat list when you share an event with the
+    // chat
+
+    this.sendChats({
+      chatId: chatId,
+      senderId: senderId,
+      command: 'update_recent_chat_event'
+    })
+  }
 
   sendNewCreatedChat = (chatId) => {
 

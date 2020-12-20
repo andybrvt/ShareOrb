@@ -118,6 +118,43 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             }
             self.send_chats(content)
 
+    def send_update_recent_chat_event(self, data):
+        # This function will take care of updating the chat when people share an
+        # event in the chat
+
+        # First get the chat
+        curChat = get_object_or_404(Chat, id = data['chatId'])
+        sender = get_object_or_404(User, id = data['senderId'])
+
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+
+        curChat.recentMessage = sender.username+ " shared an event"
+        curChat.recentSender = sender
+        curChat.recentTime = time
+
+        curChat.save()
+
+
+        # You serialize the chat so that you can use it later to send it out to the
+        # differnet people
+        serializedChat = MiniChatSerializer(curChat).data
+        for participant in serializedChat['participants']:
+            # you will loop through the users and then send it to each of them
+            # a new chat that is updated
+            user = get_object_or_404(User, id = int(participant['id']))
+            chats = user.chat_parti.all()
+            # When you do many = True it will serialize the list of chat objects
+            chatList = MiniChatSerializer(chats, many = True).data
+            content = {
+                "command": "update_chat_list",
+                "chatList": chatList,
+                "chatUserId": user.id
+            }
+            self.send_chats(content)
+
+
+
     def send_new_created_chat(self, data):
         # This function will just grab the chat and then grab the users that are
         # associated with teh chat and then update there chatList in the front
@@ -183,6 +220,7 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         # This is for when you are receivng information from other poeple and you
         # want to update your shit
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_all_user_chats':
             self.send_fetch_all_user_chats(data)
         if data['command'] == 'update_recent_chat':
@@ -191,6 +229,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             self.send_update_recent_chat_message(data)
         if data['command'] == 'send_new_created_chat':
             self.send_new_created_chat(data)
+        if data['command'] == 'update_recent_chat_event':
+            self.send_update_recent_chat_event(data)
 
     def new_chat_lists(self, chatObj):
         # This will be sneding it to the front end
@@ -287,7 +327,7 @@ class NewChatConsumer(JsonWebsocketConsumer):
 
         self.send_messsage(content)
 
-    
+
 
     def send_messsage(self, newMessageObj):
         # This function will be sending information to the channel layer

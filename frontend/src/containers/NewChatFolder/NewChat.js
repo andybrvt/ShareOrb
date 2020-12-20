@@ -5,6 +5,7 @@ import NewChatContent from './NewChatContent';
 import NewChatHeader from './NewChatHeader';
 import { authAxios } from '../../components/util';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
+import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import ManageChatHeader from './ManageChatHeader';
@@ -102,16 +103,16 @@ class NewChat extends React.Component{
     // Now you will call a authaxios call inorder to add users in
 
 
-    // authAxios.post("http://127.0.0.1:8000/mycalendar/shareEvent", {
-    //   eventId: eventId,
-    //   participants: participants,
-    //   curId: this.props.curId
-    // }).then(res => {
-    //   console.log(res.data)
-    //   this.setState({
-    //     eventList: res.data
-    //   })
-    // })
+    authAxios.post("http://127.0.0.1:8000/mycalendar/shareEvent", {
+      eventId: eventId,
+      participants: participants,
+      curId: this.props.curId
+    }).then(res => {
+      console.log(res.data)
+      this.setState({
+        eventList: res.data
+      })
+    })
     const chatId = this.props.parameter.id
     const senderId = this.props.curId
 
@@ -120,6 +121,13 @@ class NewChat extends React.Component{
       senderId,
       eventObj
     )
+
+    ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+      chatId,
+      senderId
+    )
+
+
 
   }
 
