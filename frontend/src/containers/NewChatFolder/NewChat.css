@@ -216,10 +216,25 @@
   position: relative;
   /* top: 25px; */
 }
-.chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox{
+.chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox .chatName{
   font-size: 25px;
 }
-
+.chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList{
+  /* background-color: red; */
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 88%;
+  /* overflow: auto; */
+  /* height: 400px; */
+  text-align: left;
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .chatMemberText{
+  font-size: 25px;
+}
+.chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .groupMemberList{
+  overflow: auto;
+  height: 400px;
+}
 
 /* This is for the chat content page */
 .chatContainer .chatRightSide .newChatContent{

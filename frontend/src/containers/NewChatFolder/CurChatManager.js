@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Modal } from 'antd';
+import { Avatar, Button, Modal, List } from 'antd';
 import CurChatEventList from './ChatManagerFolder/CurChatEventList';
 
 // This will be the far right side of the chats that holds the
@@ -67,6 +67,21 @@ class CurChatManager extends React.Component{
     console.log(name)
     return name;
 
+  }
+
+  getMemberList(participantList){
+    // This will get all the members that are not the current user
+    var ids = []
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        ids.push(
+            participantList[i]
+        )
+
+      }
+    }
+
+    return ids;
   }
 
   getGroupChatName(participantList){
@@ -139,7 +154,10 @@ class CurChatManager extends React.Component{
     this.props.submitShareEvent(eventId, idList)
   }
 
-
+  onProfileClick = (username) => {
+    // This will redirec to the user profile page
+    this.props.history.push("/explore/"+username)
+  }
 
 
   render(){
@@ -149,9 +167,11 @@ class CurChatManager extends React.Component{
     let partiLen = 0
     let chatUserName = ""
     let eventList = []
+    let memberList = []
     if(this.props.curChat){
       if(this.props.curChat.participants){
         partiLen =this.props.curChat.participants.length
+        memberList = this.getMemberList(this.props.curChat.participants)
         if(this.props.curChat.participants.length > 2){
           // This is for group chats
           chatUserName = this.getGroupChatName(this.props.curChat.participants)
@@ -185,9 +205,6 @@ class CurChatManager extends React.Component{
             className = "chatName"
             >{chatUserName}</div>
 
-            <div className = "">
-              This part shows all the group members
-            </div>
 
           </div>
 
@@ -209,6 +226,36 @@ class CurChatManager extends React.Component{
         onClick = {() => this.onOpenEventModal()}
         > Share Event </Button>
         </div>
+
+        {
+            partiLen > 2 ?
+            <div className = "chatMemberList">
+            <div className = "chatMemberText"> Group memebers </div>
+            <List
+                className = "groupMemberList"
+               itemLayout="horizontal"
+               dataSource={memberList}
+               renderItem={item => (
+                 <List.Item
+                 onClick = {() => this.onProfileClick(item.username)}
+                 >
+                 <List.Item.Meta
+                   avatar={<Avatar src= {'http://127.0.0.1:8000'+item.profile_picture} /> }
+                   title={<span>{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</span>}
+                   description= {<b>@{this.capitalize(item.username)}</b>}
+                 />
+                 </List.Item>
+               )}
+              />
+            </div>
+
+            :
+
+            <div>
+            </div>
+
+
+        }
 
         <Modal
         visible = {this.state.showShareEvent}

@@ -221,6 +221,7 @@ class NewChat extends React.Component{
         eventList = {this.state.eventList}
         parameter = {this.props.parameter}
         submitShareEvent = {this.submitShareEvent}
+        history = {this.props.history}
          />
 
       </div>
