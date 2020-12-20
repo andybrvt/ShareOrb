@@ -14,6 +14,37 @@ class CurChatEventList extends React.Component{
   }
 
 
+  getMemberIds = (memberList) => {
+    // This function will turn the list into a list of ids
+    let idList = []
+
+    for(let i = 0; i< memberList.length; i++){
+      idList.push(memberList[i].id)
+    }
+
+    return idList;
+  }
+
+  sharedMemberEvent = (participants) => {
+    // This function is to see if the event is shared among all the participants
+    // yet. return true if everyone in the chat is in the event
+    // return false if
+
+    console.log(participants)
+
+    const memberListId = this.getMemberIds(this.props.memberList)
+    const eventPartiId = participants
+
+    console.log(memberListId, eventPartiId)
+    for(let i = 0; i<memberListId.length; i++){
+      if(!eventPartiId.includes(memberListId[i])){
+        return false
+      }
+    }
+
+    return true
+  }
+
 
 
   render(){
@@ -69,12 +100,26 @@ class CurChatEventList extends React.Component{
                       <span className = "text">{item.person.length}</span>
                     </div>
                 </div>
+                {
+                  this.sharedMemberEvent(item.person) ?
 
-                <div
-                onClick = {() => {this.props.submitShareEvent(item.id, item)}}
-                className = "shareEventButton">
-                  <i class="fas fa-user-plus"></i>
-                </div>
+                  <div
+                  className = "alreadyShareEventButton"
+                  >
+                  <i class="far fa-check-circle"></i>
+
+                  </div>
+
+                  :
+
+                  <div
+                  onClick = {() => {this.props.submitShareEvent(item.id, item)}}
+                  className = "shareEventButton">
+                    <i class="fas fa-user-plus"></i>
+                  </div>
+
+                }
+
 
                </div>
 

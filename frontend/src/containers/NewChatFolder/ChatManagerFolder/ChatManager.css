@@ -78,6 +78,15 @@
   font-size: 25px;
   cursor: pointer;
 }
+.chatEvent .alreadyShareEventButton {
+  /* color: red; */
+  position: absolute;
+  z-index: 100;
+  left: 85%;
+  top: 20%;
+  font-size: 25px;
+  /* cursor: pointer; */
+}
 .chatEvent .shareEventButton:hover {
   transform: scale(1.3);
 }

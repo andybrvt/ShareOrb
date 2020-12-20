@@ -267,6 +267,7 @@ class CurChatManager extends React.Component{
         <CurChatEventList
         eventList = {eventList}
         submitShareEvent = {this.submitShareEventConfig}
+        memberList = {this.props.curChat.participants}
         />
 
         </Modal>
