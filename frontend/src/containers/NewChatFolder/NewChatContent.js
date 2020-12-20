@@ -101,8 +101,10 @@ class NewChatContent extends React.Component{
               <br />
               Title: {messageItem.eventTitle}
               <br />
-              Date: {eventDate}
+              <i class="far fa-calendar"></i>
+              {eventDate}
               <br />
+              <i class="far fa-clock"></i>
               {eventStartTime} - {eventEndTime}
               <br />
               Click to check it out.
@@ -136,11 +138,37 @@ class NewChatContent extends React.Component{
     } else{
       if(messageItem.type === "event"){
         // This conditional will take care of the event
+
+        const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
+        const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
+        const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
+
         return (
           <div className= "chatTextBox">
           <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+          <div className = 'chatNameTime'>
+            <div className = 'chatName'>
+              {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+            </div>
+            <div>
 
-          This is some text
+            </div>
+          </div>
+
+          <div className = "chatContentText">
+            {this.capitalize(messageItem.body)}
+            <br />
+            Title: {messageItem.eventTitle}
+            <br />
+            <i class="far fa-calendar"></i>
+            {eventDate}
+            <br />
+            <i class="far fa-clock"></i>
+            {eventStartTime} - {eventEndTime}
+            <br />
+            Click to check it out.
+          </div>
+
           </div>
         )
       } else if (messageItem.type === "text"){
