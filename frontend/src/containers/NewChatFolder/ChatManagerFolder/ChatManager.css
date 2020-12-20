@@ -3,54 +3,81 @@
 .chatEventShare{
   /* background-color: red; */
   position: relative;
+  display:flex;
+  width: 100%;
 }
 
-.chatEventShare .searchChatContainer {
+.chatEventShare .chatEventShareLeft{
+  /* background-color: red; */
+  /* overflow: auto; */
+  /* height: 500px; */
+  width: 40%;
+}
+
+.chatEventShare .chatEventShareLeft .searchChatContainer {
   /* background-color: red; */
   /* height: 300px; */
 }
-.chatEventShare .searchChatContainer .searchForm{
+.chatEventShare .chatEventShareLeft .searchChatContainer .searchForm{
   /* width: 10px; */
 }
-.chatEventShare .searchChatContainer .searchForm .input{
+.chatEventShare .chatEventShareLeft .searchChatContainer .searchForm .input{
   /* border-radius: 5px; */
 }
 
-.chatEventShare .eventListContainer {
+.chatEventShare .chatEventShareLeft .eventListContainer {
   /* background-color: red; */
+  overflow: auto;
+  height: 480px;
 }
 
 .chatEvent{
   /* background-color: red; */
   /* border: 1px solid gray; */
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
+  position: relative;
   color: white;
   border-radius: 5px;
-  width: 60%;
+  width: 100%;
   padding-left: 15px;
+  margin-bottom: 3px;
 }
 .chatEvent .title{
   /* background-color: red; */
 }
-.chatEvent .times{
+
+.chatEvent .infoBox{
+  display: flex;
+}
+.chatEvent .infoBox .times{
 
 }
-.chatEvent .times .text{
+.chatEvent .infoBox .times .text{
   margin-left: 3px;
 }
-.chatEvent .numPeople{
-
+.chatEvent .infoBox .numPeople{
+  /* color:red; */
 }
-.chatEvent .numPeople .text{
+.chatEvent .infoBox .numPeople .text{
   margin-left: 3px;
+  /* color: red; */
 }
-.chatEvent .date{
+.chatEvent .infoBox .date{
 
 }
-.chatEvent .date .text{
+.chatEvent .infoBox .date .text{
 
 }
-.chatEventShare .chatEventButton{
-  /* background-color: red; */
+
+.chatEvent .shareEventButton {
+  /* color: red; */
+  position: absolute;
+  z-index: 100;
+  left: 85%;
+  top: 20%;
+  font-size: 25px;
+  cursor: pointer;
+}
+.chatEvent .shareEventButton:hover {
+  transform: scale(1.3);
 }

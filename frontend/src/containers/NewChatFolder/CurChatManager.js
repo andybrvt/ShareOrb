@@ -188,6 +188,7 @@ class CurChatManager extends React.Component{
         visible = {this.state.showShareEvent}
         onCancel = {() => this.onCloseEventModal()}
         footer= {null}
+        width = {800}
         >
 
         <CurChatEventList
