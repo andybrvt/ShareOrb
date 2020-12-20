@@ -375,17 +375,7 @@
   margin-top: 10px;
 }
 
-.closeEvent{
-  /* background-color: red; */
 
-  text-align: center;
-  position:absolute;
-  font-size: 25px;
-  top: 25px;
-  left: 1170px;
-  cursor: pointer;
-  transition: 0.5s;
-}
 
 .hideScroll{
   overflow-x: hidden;
@@ -395,7 +385,7 @@
 }
 
 
-/* times */
+
 
 .editEventBackButtonContainer{
   /* background-color: red; */
@@ -409,6 +399,23 @@
   padding-top: 3px;
 }
 
+
+
+
+/* close */
+.closeEvent{
+  /* background-color: red; */
+
+  text-align: center;
+  position:absolute;
+  font-size: 40px;
+  top: 10px;
+  left: 1170px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+
 /* pencil */
 .editEventButtonContainer{
   /* background-color: red; */
@@ -416,8 +423,8 @@
   text-align: center;
   position:absolute;
   font-size: 30px;
-  top: 90px;
-  left: 1180px;
+  top: 75px;
+  left: 1175px;
   cursor: pointer;
   transition: 0.5s;
 }

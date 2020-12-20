@@ -108,10 +108,11 @@ class EventGroupChat extends React.Component{
 
       <div>
         <div class="chatBox eventCard"
-          style={{marginTop:'20px',width:'400px',
+          style={{marginTop:'30px',width:'550px',
             height:'60px', padding:'10px',marginBottom:'10px'}}>
 
             <Liking
+            num={5}
             history = {this.props.history}
             style={{display:'inline-block'}} like_people={inviteList}/>
           {
@@ -206,7 +207,7 @@ class EventGroupChat extends React.Component{
           value = {this.state.message}
           onPressEnter = {this.handleSubmit}
           placeholder = "Send a message"
-          rows={1}
+          rows={2}
           style={{marginTop:'10px'}}
           />
 

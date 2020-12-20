@@ -686,9 +686,9 @@ class EventInfo extends React.Component{
                  <Button
                     type="primary" shape="round"
                     icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                    style={{left:'70%', fontSize:'15px'}} size={'large'}>
+                    style={{left:'115%', fontSize:'15px'}} size={'large'}>
 
-                   Share
+                   Invite
                  </Button>
 
               {
@@ -696,7 +696,7 @@ class EventInfo extends React.Component{
                    <Button
                       shape="round"
                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'75%', fontSize:'15px'}} size={'large'}>
+                      style={{left:'120%', fontSize:'15px'}} size={'large'}>
 
                      Going
                    </Button>
@@ -705,7 +705,7 @@ class EventInfo extends React.Component{
                    <Button
                       shape="round" type="primary"
                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'75%', fontSize:'15px'}} size={'large'}>
+                      style={{left:'120%', fontSize:'15px'}} size={'large'}>
 
                      Going
                    </Button>
@@ -716,7 +716,7 @@ class EventInfo extends React.Component{
                <Button
                   shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'80%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'125%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
@@ -926,7 +926,7 @@ class EventInfo extends React.Component{
 
           <div className = 'closeEvent'>
             <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
-            <i style={{fontSize:'50px'}} class="far fa-times-circle">  </i>
+            <i class="far fa-times-circle">  </i>
             </Link>
           </div>
 
