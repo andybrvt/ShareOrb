@@ -3,7 +3,7 @@ import { List, Avatar, Input, Divider } from 'antd';
 import * as dateFns from 'date-fns';
 import './ChatManager.css'
 import userIcon from '../../../components/images/user.png';
-
+import CreateShareEventChat from './CreateShareEventChat';
 
 // This will be used to display the list and search of the events
 // that you can share with the person that you are chatting with
@@ -142,7 +142,7 @@ class CurChatEventList extends React.Component{
           <div
           className = "chatEventButton"
           >
-            <button> Create shared event </button>
+            <CreateShareEventChat />
           </div>
 
         </div>

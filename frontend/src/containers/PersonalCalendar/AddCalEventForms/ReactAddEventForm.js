@@ -411,7 +411,7 @@ class ReactAddEventForm extends React.Component {
     if(this.props.following !== undefined && this.props.followers !== undefined){
 
       // This const is what determines the people you can share with.
-      // EVENTUALLY YOU 
+      // EVENTUALLY YOU
       const friendList = this.props.following
 
       let shareOptions = []
