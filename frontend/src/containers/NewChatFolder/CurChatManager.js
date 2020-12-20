@@ -9,7 +9,8 @@ class CurChatManager extends React.Component{
 
 
   state = {
-    showShareEvent: false
+    showShareEvent: false,
+    eventList: []
   }
 
   capitalize (str) {
@@ -29,6 +30,25 @@ class CurChatManager extends React.Component{
     }
 
     return profilePic;
+
+  }
+
+  getChatUserId(participantList){
+    // This function will show the correct userProfile that you are chatting
+    // with
+
+    // There should jsut be 2 for here so not too much run time
+    var ids = []
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        ids.push(
+            participantList[i].id
+        )
+
+      }
+    }
+
+    return ids;
 
   }
 
@@ -113,6 +133,12 @@ class CurChatManager extends React.Component{
     })
   }
 
+  submitShareEventConfig = (eventId) => {
+
+    const idList = this.getChatUserId(this.props.curChat.participants)
+    this.props.submitShareEvent(eventId, idList)
+  }
+
 
 
 
@@ -193,6 +219,7 @@ class CurChatManager extends React.Component{
 
         <CurChatEventList
         eventList = {eventList}
+        submitShareEvent = {this.submitShareEventConfig}
         />
 
         </Modal>

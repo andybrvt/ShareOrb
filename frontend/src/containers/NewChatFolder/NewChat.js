@@ -85,6 +85,31 @@ class NewChat extends React.Component{
     }
 
 
+  }
+
+  submitShareEvent = (eventId, participants) => {
+    // This function will share an event with everyon inside the chat
+    // and then send a message in the chat to tell everyone that
+    // someone shared and event to everyone
+
+    // First get a list of ids, or names of everyone in the group and then
+    // send that list into the backend, the mycalendar views and then
+    // send a message in the chat. When they click on the chat it will direct
+    // them to the event
+
+    console.log(eventId, participants)
+
+    // Now you will call a authaxios call inorder to add users in
+    authAxios.post("http://127.0.0.1:8000/mycalendar/shareEvent", {
+      eventId: eventId,
+      participants: participants,
+      curId: this.props.curId
+    }).then(res => {
+      console.log(res.data)
+      this.setState({
+        eventList: res.data
+      })
+    })
 
 
   }
@@ -194,6 +219,8 @@ class NewChat extends React.Component{
         curChat = {this.props.curChat}
         curId = {this.props.id}
         eventList = {this.state.eventList}
+        parameter = {this.props.parameter}
+        submitShareEvent = {this.submitShareEvent}
          />
 
       </div>

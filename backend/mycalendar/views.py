@@ -5,6 +5,10 @@ from . import serializers
 from django.db.models import Q
 from django.utils import timezone
 import datetime
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.shortcuts import render, get_object_or_404
+from userprofile.models import User
 
 # Create your views here.
 # def get_calendar(request):
@@ -74,6 +78,25 @@ class CalendarCurEventView(generics.ListAPIView):
         user = self.request.user
         queryset = models.Event.objects.filter(person = user).filter(start_time__gte =datetime.date.today()).order_by('start_time')
         return queryset
+
+class ShareEventInChatsView(APIView):
+    # This function will share event with everyone in chat that is shared
+    def post(self, request, *args, **kwargs):
+
+        print(request.data)
+        # First you will get the chat
+        sharedChat = get_object_or_404(models.Event, id = request.data['eventId'])
+        for users in request.data['participants']:
+            print(users)
+            user = get_object_or_404(User, id = users);
+            sharedChat.person.add(user)
+
+        curUser = get_object_or_404(User, id = request.data['curId'])
+
+        eventList = models.Event.objects.filter(host = curUser).filter(start_time__gte = datetime.date.today()).order_by('start_time')
+
+        serializedEventList = serializers.MiniEventSerializer(eventList, many= True).data
+        return Response(serializedEventList)
 
 class GrabDayEvents(generics.ListAPIView):
     serializer_class = serializers.EventSerializer
