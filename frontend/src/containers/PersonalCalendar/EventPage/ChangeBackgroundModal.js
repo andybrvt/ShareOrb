@@ -119,17 +119,18 @@ class ChangeBackgroundModal extends React.Component{
 
     return(
       <Modal
-      visible = {this.props.visible}
-      bodyStyle={{height:'450px'}}
-      width={800}
-      okText = {'Save'}
-      okButtonProps={{ disabled: this.state.imageFile == "" ? true : false }}
-      onCancel = {() => this.handleCancel()}
-      onOk = {() => this.handleSubmit(this.state.imageFile)}
+        centered
+        visible = {this.props.visible}
+        bodyStyle={{height:'450px'}}
+        width={800}
+        okText = {'Save'}
+        okButtonProps={{ disabled: this.state.imageFile == "" ? true : false }}
+        onCancel = {() => this.handleCancel()}
+        onOk = {() => this.handleSubmit(this.state.imageFile)}
       >
         <div class="sideContainer">
 
-          <span className = 'uploadProfileText'> Change Background Picture </span>
+
           <div class="side1">
 
             {

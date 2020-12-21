@@ -654,7 +654,7 @@ class EventInfo extends React.Component{
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
-                <Statistic style={{color:'red'}} class="addFont" title="Going" value={accepted.length} />
+                <Statistic class="addFont" title="Going" value={accepted.length} />
 
 
 
@@ -728,7 +728,7 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'40px', marginLeft:'290px', color:'black'}} class="outerContainer">
 
-            <div style={{ fontSize:'20px',display:'inline-block', width:'600px' }}
+            <div style={{ fontSize:'20px',display:'inline-block', width:'575px' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
               <Divider/>
@@ -878,22 +878,31 @@ class EventInfo extends React.Component{
 
 
 
-        <div style={{ left:'72%',marginTop:'150px', width:'450px'}} className = "eventPeopleWord eventCard"> Statistics
+        <div style={{ left:'72%',marginTop:'150px', width:'450px', padding:'40px'}} className = "eventPeopleWord eventCard"> Statistics
 
           <Divider/>
           <div className =  "percentagesBars">
 
           <div className = "percentage">
 
-          <Progress type = "circle" percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))} size="small" status="active" gap/>
+          <Progress
+            type = "circle"
+            percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
+             size="small"
+             status="active"
+             width={80}
+             gap
+          />
           <div className = "percentageTerm"> Responded </div>
           </div>
 
           <div className = 'percentage'>
           <Progress
-          type = "circle"
-          status = "success"
-          percent={Math.floor(100*((accepted.length-1)/(invited.length)))} size="small" />
+            type = "circle"
+
+            percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
+            width={80}
+          />
 
           <div className = "percentageTerm"> Accepted </div>
           </div>
@@ -903,12 +912,17 @@ class EventInfo extends React.Component{
             (Math.floor(100*(decline.length/invited.length))<100)?
 
              <Progress
-             status="exception"
-             type = "circle" percent={Math.floor(100*(decline.length/invited.length))} size="small"/>
+
+               type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
+               width={80}
+             />
             :
             <Progress
-            status="exception"
-            type ="circle" percent={Math.floor(100*(decline.length/invited.length))} size="small" status="exception" />
+
+              type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
+
+              width={80}
+             />
           }
 
           <div className = "percentageTerm" > Declined </div>
