@@ -409,8 +409,15 @@
   margin-left: 5px;
   margin-top: 10px;
 }
-
 .chatItem .chatWrap .chatText .chatName {
   font-size: 20px;
+  color: black;
+}
+.chatItem .chatWrap .chatText .chatDescription{
+  /* font-weight: bold; */
+  /* font-size: 15px; */
+}
+.chatItem .chatWrap .chatText .chatDescription.active{
+  font-weight: bold;
   color: black;
 }

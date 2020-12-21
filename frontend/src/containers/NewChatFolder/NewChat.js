@@ -291,6 +291,7 @@ class NewChat extends React.Component{
         chatList = {chats}
         param = {this.props.parameter}
         curId = {this.props.id}
+        username = {this.props.username}
         />
       </div>
 
@@ -366,7 +367,8 @@ const mapStateToProps = state => {
     following: state.auth.following,
     followers: state.auth.followers,
     curId: state.auth.id,
-    events: state.calendar.events
+    events: state.calendar.events,
+    username: state.auth.username
   }
 }
 

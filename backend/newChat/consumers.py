@@ -50,7 +50,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
-
+        curChat.seen.clear()
+        curChat.seen.add(sender)
         curChat.recentMessage = data['message']
         curChat.recentSender = sender
         curChat.recentTime = time
@@ -91,6 +92,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         )
         newMessage.save()
 
+        curChat.seen.clear()
+        curChat.seen.add(sender)
         curChat.recentMessage = data['message']
         curChat.recentSender = sender
         curChat.recentTime = time
@@ -129,6 +132,9 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
+
+        curChat.seen.clear()
+        curChat.seen.add(sender)
         curChat.recentMessage = sender.username+ " shared an event"
         curChat.recentSender = sender
         curChat.recentTime = time

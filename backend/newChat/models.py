@@ -28,6 +28,10 @@ class Chat(models.Model):
     # The recent time will be the most recent time that a text was sent
     recentTime = models.DateTimeField(default = timezone.now)
 
+    # This field is used notifications of events, to show if the user has seent eh event or not
+    # For seen you can just leave it as ids becuase we will not be doing too much with it, just
+    # to show if some people have seen it or not
+    seen =  models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "chat_seen")
     # you are gonna put a function here that gets all the message object
     # for this chat
     class Meta:
@@ -54,6 +58,7 @@ class Message(models.Model):
     eventTitle = models.CharField(max_length = 255, blank = True)
     eventStartTime = models.DateTimeField(default = timezone.now, blank = True)
     eventEndTime = models.DateTimeField(default = timezone.now, blank = True)
+
 
     class Meta:
         ordering = ['-created_at']
