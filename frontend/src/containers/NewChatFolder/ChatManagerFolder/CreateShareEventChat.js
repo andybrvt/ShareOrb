@@ -58,6 +58,23 @@ class CreateShareEventChat extends React.Component{
     })
   }
 
+
+  showPeopleShared = (nameList) => {
+    // this function will take in a list of usernames and then return a string
+    // showing who the event will be shared with
+
+    let shareStr = "**This event will be shared with "
+    for(let i = 0; i< nameList.length; i++){
+      if(i === 0){
+        shareStr = shareStr+this.capitalize(nameList[i])
+      } else {
+        shareStr = shareStr+ ", "+this.capitalize(nameList[i])
+      }
+    }
+
+    return shareStr;
+  }
+
   onStartDateChange = (time) => {
     // This is to handle the onChange
     let startDate = time
@@ -492,12 +509,17 @@ class CreateShareEventChat extends React.Component{
       const endChildren = this.renderEndTime()
       console.log(this.handleValidation())
 
+
       const options = [
       { label: 'Normal', value: 'none' },
       { label: 'Weekly', value: 'weekly' },
       { label: 'Daily', value: 'daily' },
       ];
 
+      let nameList = ""
+      if(this.props.usernameList){
+        nameList = this.showPeopleShared(this.props.usernameList)
+      }
 
       return(
         <Form
@@ -591,7 +613,7 @@ class CreateShareEventChat extends React.Component{
 
         </Form.Item>
 
-
+        <div> {nameList} </div>
 
           <Form.Item
             wrapperCol={{

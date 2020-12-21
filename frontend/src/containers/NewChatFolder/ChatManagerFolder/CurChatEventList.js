@@ -151,6 +151,7 @@ class CurChatEventList extends React.Component{
           >
             <CreateShareEventChat
             submitCreateEvent = {this.handleCreateEvent}
+            usernameList = {this.props.usernameList}
             />
           </div>
 

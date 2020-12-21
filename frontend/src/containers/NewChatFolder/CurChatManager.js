@@ -52,6 +52,25 @@ class CurChatManager extends React.Component{
 
   }
 
+  getChatUserUsername(participantList){
+    // This function will show the correct userProfile that you are chatting
+    // with
+
+    // There should jsut be 2 for here so not too much run time
+    var names = []
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        names.push(
+            participantList[i].username
+        )
+
+      }
+    }
+
+    return names;
+
+  }
+
   getChatUserName(participantList){
     // This function will show the correct name of the user that you are chatting
     // with
@@ -173,10 +192,12 @@ class CurChatManager extends React.Component{
     let chatUserName = ""
     let eventList = []
     let memberList = []
+    let usernameList = []
     if(this.props.curChat){
       if(this.props.curChat.participants){
         partiLen =this.props.curChat.participants.length
         memberList = this.getMemberList(this.props.curChat.participants)
+        usernameList = this.getChatUserUsername(this.props.curChat.participants)
         if(this.props.curChat.participants.length > 2){
           // This is for group chats
           chatUserName = this.getGroupChatName(this.props.curChat.participants)
@@ -274,6 +295,7 @@ class CurChatManager extends React.Component{
         submitShareEvent = {this.submitShareEventConfig}
         submitCreateEvent = {this.submitCreateEventConfig}
         memberList = {this.props.curChat.participants}
+        usernameList = {usernameList}
         />
 
         </Modal>
