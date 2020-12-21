@@ -159,6 +159,32 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             }
             self.send_chats(content)
 
+    def send_chat_seen(self, data):
+        # This function will in charge of adding the user to the seen list
+        # to show that the cur user has seen the chat
+        curChat = get_object_or_404(Chat, id = data['chatId'])
+
+        # The senderId in this case would be the person that seen the message
+        seenUser = get_object_or_404(User, id = data['senderId'])
+
+        curChat.seen.add(seenUser)
+        curChat.save()
+
+        # Now just send the new updated chat to everyone
+        serializedChat = MiniChatSerializer(curChat).data
+        for participant in serializedChat['participants']:
+            # you will loop through the users and then send it to each of them
+            # a new chat that is updated
+            user = get_object_or_404(User, id = int(participant['id']))
+            chats = user.chat_parti.all()
+            # When you do many = True it will serialize the list of chat objects
+            chatList = MiniChatSerializer(chats, many = True).data
+            content = {
+                "command": "update_chat_list",
+                "chatList": chatList,
+                "chatUserId": user.id
+            }
+            self.send_chats(content)
 
 
     def send_new_created_chat(self, data):
@@ -237,6 +263,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             self.send_new_created_chat(data)
         if data['command'] == 'update_recent_chat_event':
             self.send_update_recent_chat_event(data)
+        if data['command'] == 'send_chat_seen':
+            self.send_chat_seen(data)
 
     def new_chat_lists(self, chatObj):
         # This will be sneding it to the front end

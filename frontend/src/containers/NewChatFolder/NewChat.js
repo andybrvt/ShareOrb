@@ -40,6 +40,10 @@ class NewChat extends React.Component{
     if(this.props.parameter.id === 'newchat'){
         NewChatWebSocketInstance.connect(null)
     } else{
+      ChatSidePanelWebSocketInstance.sendSeen(
+        this.props.parameter.id,
+        this.props.curId
+      )
       NewChatWebSocketInstance.connect(this.props.parameter.id)
     }
 
@@ -76,6 +80,9 @@ class NewChat extends React.Component{
 
   componentWillReceiveProps(newProps){
     console.log("new props")
+
+    // When ever a new message is sent or you open up a new chat
+    // it should send out an update of the seen
     if(this.props.parameter.id !== newProps.parameter.id && newProps.parameter.id !== "newchat"){
       NewChatWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
@@ -83,7 +90,13 @@ class NewChat extends React.Component{
           newProps.parameter.id
         )
       })
+
+      ChatSidePanelWebSocketInstance.sendSeen(
+        newProps.parameter.id,
+        newProps.curId
+      )
       NewChatWebSocketInstance.connect(newProps.parameter.id)
+
     }
 
 
