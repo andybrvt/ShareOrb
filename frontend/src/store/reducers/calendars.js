@@ -135,7 +135,7 @@ const acceptEventShare = (state, action) => {
     events: state.events.map(
       item => item.id === action.acceptShareObj.eventId ? {
         ...item,
-        accepted: [...item.accepted, action.acceptShareObj.acceptorId]
+        accepted: action.acceptShareObj.person
       } : item
     )
   })

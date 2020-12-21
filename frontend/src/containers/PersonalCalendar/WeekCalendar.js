@@ -138,6 +138,8 @@ class WeekCalendar extends React.Component{
     }
   }
 
+
+
   // This will be rending the header of the view, for weekly view, it will be
   // the start week to the end of the start week and start of the week
   renderHeader() {
@@ -628,7 +630,7 @@ class WeekCalendar extends React.Component{
 
 
                               {
-                                (item.host.username==this.props.username|| (item.accepted.some(e => e.id == this.props.id))
+                                (item.host.username==this.props.username|| (item.accepted.some(e => e.id === this.props.id))
 
                                 ||(item.host.username==this.props.username))
                                 ?
@@ -725,7 +727,7 @@ class WeekCalendar extends React.Component{
 
         {/* color on week calendar */}
               {   (
-                  (item.accepted.some(e => e.id == this.props.id))
+                  (item.accepted.some(e => e.id === this.props.id))
                   ||(item.invited.length==0)
                   ||(item.host.username==this.props.username)
                   )

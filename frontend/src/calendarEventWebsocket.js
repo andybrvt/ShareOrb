@@ -60,10 +60,12 @@ class WebSocketCalendarEvent {
     }
     else if (command === 'add_accepted'){
       const acceptorId = parsedData.acceptedUser;
-      const eventId = parsedData.eventId
+      const eventId = parsedData.eventId;
+      const person = parsedData.person;
 
       const acceptShareObj = {
         acceptorId: acceptorId,
+        person: person,
         eventId: eventId
       }
 
