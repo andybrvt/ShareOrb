@@ -92,7 +92,7 @@ class ShareEventInChatsView(APIView):
             print(users)
             user = get_object_or_404(User, id = users);
             sharedChat.person.add(user)
-            sharedChat.inivted.add(user)
+            sharedChat.invited.add(user)
 
         curUser = get_object_or_404(User, id = request.data['curId'])
 

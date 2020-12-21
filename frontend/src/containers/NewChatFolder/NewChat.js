@@ -13,6 +13,7 @@ import NoChatsScreen from './NoChatsScreen';
 import AddNewChatContent from './AddNewChatContent';
 import CurChatManager from './CurChatManager';
 import * as calendarActions from '../../store/actions/calendars';
+import { notification } from 'antd';
 
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
@@ -98,6 +99,8 @@ class NewChat extends React.Component{
     // send a message in the chat. When they click on the chat it will direct
     // them to the event
 
+    this.openNotification("bottomRight")
+
     console.log(eventId, participants, eventObj)
 
     // Now you will call a authaxios call inorder to add users in
@@ -167,6 +170,8 @@ class NewChat extends React.Component{
     // shared with them
     console.log(eventObj, participants)
 
+    this.openNotification("bottomRight")
+
     let start_date = dateFns.startOfDay(new Date(eventObj.start_date))
     let end_date = dateFns.startOfDay(new Date(eventObj.end_date))
 
@@ -222,7 +227,18 @@ class NewChat extends React.Component{
 
 
 
+
   }
+
+
+  openNotification = (placement) => {
+  notification.info({
+    message: `Event Shared`,
+    description:
+      'You shared an event to the group',
+    placement,
+  });
+  };
 
 
 
