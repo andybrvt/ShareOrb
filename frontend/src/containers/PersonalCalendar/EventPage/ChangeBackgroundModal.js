@@ -142,8 +142,8 @@ class ChangeBackgroundModal extends React.Component{
 
 
               :
-              <div><Avatar style={{left:'30%', marginTop:'150px'}} size={200}
-                icon={<img class="changeProfilePic" src={'http://127.0.0.1:8000'+this.props.hostPic}></img>} /></div>
+              <div><Avatar style={{left:'20%', marginTop:'150px'}} size={200}
+                icon={<img class="changeAvatar" src={'http://127.0.0.1:8000'+this.props.hostPic}></img>} /></div>
 
 
              }
@@ -167,7 +167,7 @@ class ChangeBackgroundModal extends React.Component{
                   <img class="fitPhoto" src={imageUrl} alt="avatar" />
                   :
 
-                  <i style={{fontSize:'75px', marginTop:'100px'}} class="fas fa-upload uploadBox"></i>
+                  <i style={{fontSize:'60px', marginTop:'130px'}} class="fas fa-upload uploadBox"></i>
                 }
               </div>
 
