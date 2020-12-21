@@ -13,5 +13,6 @@ urlpatterns = [
     path('events/update/<slug:id>', views.CalendarEventUpdate.as_view()),
     path('events/delete/<slug:id>', views.CalendarEventDelete.as_view()),
     path('events/updatebackground/<slug:id>', views.EventBackgroundUpdate.as_view()),
-    path('shareEvent', views.ShareEventInChatsView.as_view())
+    path('shareEvent', views.ShareEventInChatsView.as_view()),
+    path('createChatEvent', views.CreateSharedEventView.as_view())
 ]

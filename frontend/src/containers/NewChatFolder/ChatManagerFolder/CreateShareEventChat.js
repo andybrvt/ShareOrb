@@ -380,10 +380,9 @@ class CreateShareEventChat extends React.Component{
             end_time: this.state.timeEnd,
             event_color: this.state.eventColor,
             repeatCondition:this.state.repeatCondition,
-            person: this.state.person,
           }
           this.onClear()
-          this.props.onSubmit(submitContent)
+          this.props.submitCreateEvent(submitContent)
 
       }
 

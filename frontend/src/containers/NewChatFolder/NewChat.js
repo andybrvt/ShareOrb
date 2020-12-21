@@ -131,6 +131,85 @@ class NewChat extends React.Component{
 
   }
 
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
+      }
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
+      }
+    }
+
+    const timeBundle = {
+      firstHour: hour,
+      firstMin: minutes
+    }
+
+    return timeBundle
+
+  }
+
+
+  submitCreateEvent = (eventObj, participants) => {
+    // This function will be used to create an shared event with everyone in
+    // the group. and then send out to everyone in the chat that an event has been
+    // shared with them
+    console.log(eventObj, participants)
+
+    let start_date = dateFns.startOfDay(new Date(eventObj.start_date))
+    let end_date = dateFns.startOfDay(new Date(eventObj.end_date))
+
+
+    const start_time  = this.timeConvert(eventObj.start_time)
+    const end_time = this.timeConvert(eventObj.end_time)
+
+    start_date = dateFns.addHours(start_date, start_time.firstHour)
+    start_date = dateFns.addMinutes(start_date, start_time.firstMin)
+
+    end_date = dateFns.addHours(end_date, end_time.firstHour)
+    end_date = dateFns.addMinutes(end_date, end_time.firstMin)
+
+    const eventObjNew = {
+      title: eventObj.title,
+      content: eventObj.content,
+      start_time: start_date,
+      end_time: end_date,
+      location: eventObj.location,
+      eventColor: eventObj.event_color,
+      repeatCondition: eventObj.repeatCondition,
+
+    }
+    // You have to process the start date and time so that it is one adherence
+    // date time to be used in the models
+
+
+    authAxios.post("http://127.0.0.1:8000/mycalendar/createChatEvent", {
+      eventObj: eventObjNew,
+      participants: participants,
+      curId: this.props.curId
+    }).then(res => {
+      console.log(res.data)
+      this.setState({
+        eventList: res.data
+      })
+
+    })
+
+
+
+  }
+
 
 
 
@@ -239,6 +318,7 @@ class NewChat extends React.Component{
         parameter = {this.props.parameter}
         submitShareEvent = {this.submitShareEvent}
         history = {this.props.history}
+        submitCreateEvent ={this.submitCreateEvent}
          />
 
       </div>

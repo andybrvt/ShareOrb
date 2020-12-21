@@ -46,6 +46,13 @@ class CurChatEventList extends React.Component{
   }
 
 
+  handleCreateEvent = (eventObj) => {
+
+
+    this.props.submitCreateEvent(eventObj)
+  }
+
+
 
   render(){
     console.log(this.props)
@@ -142,7 +149,9 @@ class CurChatEventList extends React.Component{
           <div
           className = "chatEventButton"
           >
-            <CreateShareEventChat />
+            <CreateShareEventChat
+            submitCreateEvent = {this.handleCreateEvent}
+            />
           </div>
 
         </div>

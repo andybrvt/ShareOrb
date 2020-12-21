@@ -154,6 +154,11 @@ class CurChatManager extends React.Component{
     this.props.submitShareEvent(eventId, idList, eventObj)
   }
 
+  submitCreateEventConfig = (eventObj) => {
+    const idList = this.getChatUserId(this.props.curChat.participants)
+    this.props.submitCreateEvent(eventObj, idList)
+  }
+
   onProfileClick = (username) => {
     // This will redirec to the user profile page
     this.props.history.push("/explore/"+username)
@@ -261,12 +266,13 @@ class CurChatManager extends React.Component{
         visible = {this.state.showShareEvent}
         onCancel = {() => this.onCloseEventModal()}
         footer= {null}
-        width = {800}
+        width = {900}
         >
 
         <CurChatEventList
         eventList = {eventList}
         submitShareEvent = {this.submitShareEventConfig}
+        submitCreateEvent = {this.submitCreateEventConfig}
         memberList = {this.props.curChat.participants}
         />
 

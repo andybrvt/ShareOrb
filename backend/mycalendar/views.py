@@ -81,6 +81,8 @@ class CalendarCurEventView(generics.ListAPIView):
 
 class ShareEventInChatsView(APIView):
     # This function will share event with everyone in chat that is shared
+
+    # Make sure  add people to invite list here
     def post(self, request, *args, **kwargs):
 
         print(request.data)
@@ -90,6 +92,7 @@ class ShareEventInChatsView(APIView):
             print(users)
             user = get_object_or_404(User, id = users);
             sharedChat.person.add(user)
+            sharedChat.inivted.add(user)
 
         curUser = get_object_or_404(User, id = request.data['curId'])
 
@@ -114,6 +117,50 @@ class CalendarTestEventsView(generics.ListAPIView):
         # return a list of all the events
         qs = filter(self.request)
         return qs
+
+
+class CreateSharedEventView(APIView):
+    # This function will be in charge of creating the shared event in the chats
+    # This will take in an event object and list of participants and then create
+    # a shared event
+    # You will need the current user to get the host
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        data = request.data
+        # First get the user object
+        host = get_object_or_404(User, id = data['curId'])
+
+        # Now you can start creatign the event
+        sharedEvent = models.Event.objects.create(
+            title = data['eventObj']['title'],
+            content = data['eventObj']['content'],
+            repeatCondition = data['eventObj']['repeatCondition'],
+            start_time = data['eventObj']['start_time'],
+            end_time = data['eventObj']['end_time'],
+            location = data['eventObj']['location'],
+            color = data['eventObj']['eventColor'],
+            host = host
+        )
+        # add the host to the person list
+        sharedEvent.person.add(host)
+        sharedEvent.accepted.add(host)
+        for participant in data['participants']:
+            user = get_object_or_404(User, id = participant)
+            # add each participant to the person list as well
+            sharedEvent.person.add(user)
+            # then add them to hte invite list for later use
+            sharedEvent.invited.add(user)
+
+        # Since you are doing it in chat you do not need to return it, you just
+        # have to return the users list so that you can update the eventList
+
+        eventList = models.Event.objects.filter(host = host).filter(start_time__gte = datetime.date.today()).order_by('start_time')
+
+        serializedEventList = serializers.MiniEventSerializer(eventList, many= True).data
+
+        return Response(serializedEventList)
 
 class CalendarEventsCreate(generics.CreateAPIView):
     serializer_class = serializers.CreateEventSerializer
