@@ -728,7 +728,7 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'40px', marginLeft:'290px', color:'black'}} class="outerContainer">
 
-            <div style={{ fontSize:'20px',display:'inline-block' }}
+            <div style={{ fontSize:'20px',display:'inline-block', width:'600px' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
               <Divider/>
@@ -878,9 +878,9 @@ class EventInfo extends React.Component{
 
 
 
-        <div style={{ marginLeft:'75px',marginTop:'100px', width:'1100px'}} className = "eventPeopleWord eventCard"> Statistics
+        <div style={{ left:'72%',marginTop:'150px', width:'450px'}} className = "eventPeopleWord eventCard"> Statistics
 
-
+          <Divider/>
           <div className =  "percentagesBars">
 
           <div className = "percentage">

@@ -6,10 +6,10 @@
 
 .popoverPic{
   object-fit: cover;
-  width:75px;
-  height:75px;
+  width:100px;
+  height:100px;
   border-radius: 10px;
-  margin-top: -130px;
+  margin-top: -125px;
 }
 
 .buttonSize{

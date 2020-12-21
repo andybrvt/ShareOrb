@@ -703,7 +703,7 @@ class WeekCalendar extends React.Component{
 
                                 }
                             </div>
-                            <Liking like_people={item.invited}/>
+                            <Liking num={5} like_people={item.accepted}/>
                           </Avatar.Group>
 
 
