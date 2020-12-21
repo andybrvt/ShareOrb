@@ -206,6 +206,20 @@ class NewChat extends React.Component{
 
     })
 
+    const chatId = this.props.parameter.id
+    const senderId = this.props.curId
+
+    NewChatWebSocketInstance.sendSharedEventMessage(
+      chatId,
+      senderId,
+      eventObjNew
+    )
+
+    ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+      chatId,
+      senderId
+    )
+
 
 
   }
