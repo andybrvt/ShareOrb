@@ -53,6 +53,13 @@ class PostPicCarousel extends React.Component{
     return socialItems
   }
 
+  onChange= (a) => {
+    // This on change will show the indexes of the carousel
+    console.log(a);
+    this.props.picIndexChange(a)
+  }
+
+
   render(){
     console.log(this.props)
     let itemList = []
@@ -60,9 +67,6 @@ class PostPicCarousel extends React.Component{
       itemList = this.props.items
     }
 
-    function onChange(a, b, c) {
-      console.log(a, b, c);
-    }
 
     const contentStyle = {
       height: '800px',
@@ -81,7 +85,7 @@ class PostPicCarousel extends React.Component{
         arrows = {true}
         effect = 'null'
         ref = {node => {this.carousel = node}}
-        afterChange={onChange}>
+        afterChange={this.onChange}>
           {this.renderPictures(itemList)}
         </Carousel>
         <RightCircleOutlined

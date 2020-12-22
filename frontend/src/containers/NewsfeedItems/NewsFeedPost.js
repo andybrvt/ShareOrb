@@ -31,6 +31,9 @@ class NewsfeedPost extends React.Component {
       stepCount:0,
       avatarColor:'',
       testLike: false,
+
+      // The cur pic index will be used for the clipping
+      curPicIndex: 0,
     }
   }
 
@@ -120,12 +123,13 @@ class NewsfeedPost extends React.Component {
         else if(userPostImages.length==2){
           return(
             <div className = "postPicCarouselNews">
-               <PostPicCarousel items = {userPostImages} />
+               <PostPicCarousel
+               picIndexChange = {this.onCurPhotoChange}
+               items = {userPostImages} />
             </div>
           )
 
         }
-
 
  }
 
@@ -143,12 +147,10 @@ class NewsfeedPost extends React.Component {
   };
 
   changeLikeListCondition = () => {
-    console.log("hello")
-    console.log(this.state.testLike)
     this.setState({
       testLike: true,
     });
-    console.log(this.state.testLike)
+
   }
 
   onClick = () => {
@@ -188,14 +190,12 @@ class NewsfeedPost extends React.Component {
 
 
   handleCommentChange = e => {
-        console.log(e.target.value);
     this.setState({
       commentPost: e.target.value,
     });
   };
 
   onProfileClick = (username) => {
-    console.log(username)
     if (username === this.props.currentUser){
       window.location.href = 'current-user/'
     } else {
@@ -223,6 +223,42 @@ class NewsfeedPost extends React.Component {
     return prefix;
   }
 
+  onClipPhoto = () => {
+    // This function will be in charge of clipping the current photo and caption
+    // into your social calendar in the social day. It will look like a polaroid
+
+    // So you will need the current picture that shows up on the newsfeed,
+    // to add in (it will probally be one photo)
+    // Then you will put the caption on the polaroid (maybe not the caption)
+    // but the post owner has to be a must
+
+    let curPic = ""
+    let postOwnerId = ""
+    const picIndex = this.state.curPicIndex
+    if(this.props.data){
+      if(this.props.data.post_images){
+        curPic = this.props.data.post_images[picIndex]
+      }
+      if(this.props.data.user){
+        postOwnerId = this.props.data.user.id
+      }
+    }
+
+
+    console.log(curPic, postOwnerId)
+
+
+
+  }
+
+  onCurPhotoChange = (picIndex) => {
+    // This function will be an on change for the current picture that is shown
+    // on the profile picture
+    this.setState({
+      curPicIndex: picIndex
+    })
+  }
+
 
   handleSubmit = () => {
     WebSocketPostsInstance.sendComment(
@@ -244,28 +280,7 @@ class NewsfeedPost extends React.Component {
       NotificationWebSocketInstance.sendNotification(notificationObject)
     }
 
-    // var data = new FormData();
-    // // change this later to curr user
-    // data.append("name", localStorage.getItem('username'));
-    // data.append("body", this.state.commentPost);
-    // for (var pair of data.entries()) {
-    //  console.log(pair[0]+ ', ' + pair[1]);
-    // }
-    // console.log(localStorage.getItem('token'))
-    //
-    // fetch('http://127.0.0.1:8000/userprofile/testComment/'+this.props.data.id+'/',{
-    //  method: 'POST',NotificationWebNotificationWebSocketInstanceSocketInstance
-    //    headers: {
-    //      Authorization: `Token ${localStorage.getItem('token')}`,
-    //    },
-    //    body:data
-    // })
-    //   .then (res =>res.json())
-    //   .then(json =>{
-    //  	 console.log(json)
-    //  	 return json
-    //   })
-     }
+  }
 
   BottomLikeCommentPost(){
     let like_people = this.props.data.people_like
@@ -298,12 +313,8 @@ class NewsfeedPost extends React.Component {
     }
 
     return (
-
-
       <div style={{marginLeft:'15px', fontSize:'14px'}}>
-
         <div class='outerContainerPeople'>
-
           <div class="innerContainerLike">
               <div>
                 {
@@ -312,19 +323,15 @@ class NewsfeedPost extends React.Component {
                   :
                   <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
                 }
-
                 <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
-
-                 <span class="boldLikeComment">{like_people.length} likes</span>
+                <span class="boldLikeComment">{like_people.length} likes</span>
                 </span>
                  <Divider type="vertical" style={{background:'#d9d9d9'}}/>
-
                  <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
                    <span class="boldLikeComment">
                      {this.props.data.post_comments.length} Comments
                    </span>
                  </span>
-
                  <div class='commentInPost'>
                        <Liking
                         num={5}
@@ -332,14 +339,8 @@ class NewsfeedPost extends React.Component {
                         like_people={this.props.data.people_like} {...this.props}/>
                 </div>
               </div>
-
            </div>
-
-
-
         </div>
-
-
 
         <p style={{ fontSize: '14px', color:'black'}}>
                   {
@@ -365,22 +366,12 @@ class NewsfeedPost extends React.Component {
                      :
                      <div style={{display:'flex'}}>
                        <div class="photoText">
-
-
-
                            <span>
-
                             {this.props.data.caption}
                            </span>
-
-
-
                         </div>
-
-
                       </div>
                    }
-
           </p>
 
 
@@ -418,16 +409,22 @@ class NewsfeedPost extends React.Component {
 
                 <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
               </button>
-              <button><span style={{ marginRight:'10px'}} class="fa fa-archive"></span> Clip </button>
+              <button
+              onClick = {() => this.onClipPhoto()}
+              >
+              <span
+              style={{ marginRight:'10px'}}
+              class="fa fa-archive"></span> Clip </button>
             </div>
           </div>
-
           {
             (this.state.commentsCondition==true) ?
-
-
             <div>
-               <div>{this.props.data.post_comments.length!=0 ? <PreviewComments className="fontTest" newsfeed={this.props} /> : ''}</div>
+               <div>{this.props.data.post_comments.length!=0 ?
+                 <PreviewComments className="fontTest" newsfeed={this.props} />
+                 :
+                 ''}
+              </div>
             </div>
 
 
@@ -439,16 +436,7 @@ class NewsfeedPost extends React.Component {
             </div>
 
           }
-
-
-
           </div>
-
-
-
-
-
-
       </div>
 
     )
@@ -504,15 +492,10 @@ class NewsfeedPost extends React.Component {
         </Popover>
            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
              {this.capitalize(this.props.data.user.username)}
-
              <div>
              <span class="fb-group-date alignleft" > Tucson, Arizona</span>
-
-              <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
+             <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
             </div>
-
-
-
         </span>
 
 
@@ -689,18 +672,9 @@ class NewsfeedPost extends React.Component {
       <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
       {this.BottomLikeCommentPost()}
 
-
-
-
         </div>
-
       </div>
-
-
-
     </div>
-
-
   </div>
     )
   }
@@ -842,35 +816,15 @@ class NewsfeedPost extends React.Component {
 
       <Divider style={{'marginTop':-2}}/>
 
-
-    <Divider style={{ marginBottom: 1 }}/>
-
-
-
-    {/* show the first 3 people
-      like_people[0]'s avatar'
-      like_people[1]'s avatar
-      like_people[2]'s avatar
-      and + like_people.length-3 like this
-      */}
+      <Divider style={{ marginBottom: 1 }}/>
 
       {this.BottomLikeCommentPost()}
 
-  <div>
-
-
-
-
-
-
+      <div>
       </div>
-
-    </div>
-
-
-
-    </div>
-  )
+      </div>
+      </div>
+    )
   }
 
 
@@ -1015,17 +969,16 @@ class NewsfeedPost extends React.Component {
 
     render() {
       console.log(this.props)
+      console.log(this.state)
       let temp="http://127.0.0.1:8000"+this.props.data.post_images;
       const success = () => {
-      message.success('Clipped to your album!');
+        message.success('Clipped to your album!');
       };
       const { TextArea } = Input;
+
+
       return (
       <div>
-
-      {/*
-      {this.ContentOfEvent()}
-      */}
         <div>
 
 
@@ -1061,9 +1014,8 @@ class NewsfeedPost extends React.Component {
             {
                     this.props.data.post_images.length>0 ?
 
-                 <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
+            <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
 
-            //
                     :
 
             <p  class="modalCardBorder modalInnerPicture"> {this.ContentOfPost()} </p>
@@ -1076,9 +1028,9 @@ class NewsfeedPost extends React.Component {
 
         {
               this.props.data.post_images.length>0 ?
-             <p>{this.ContentOfPic()}</p>
-                :
-        <p> {this.ContentOfPost()} </p>
+              <p>{this.ContentOfPic()}</p>
+                      :
+              <p> {this.ContentOfPost()} </p>
         }
         </div>
   );
