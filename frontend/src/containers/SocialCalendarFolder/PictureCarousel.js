@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel } from 'antd';
+import { Carousel, Avatar } from 'antd';
 import {
   RightCircleOutlined,
   LeftCircleOutlined
@@ -17,6 +17,10 @@ class PictureCarousel extends React.Component{
     this.carousel = React.createRef()
   }
 
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   next() {
     this.carousel.next()
   }
@@ -25,7 +29,26 @@ class PictureCarousel extends React.Component{
     this.carousel.prev()
   }
 
-  
+
+  getChatUserName(postOwnerName){
+    // This function will show the correct name of the user that you are chatting
+    // with
+
+    var name = ""
+
+    if(postOwnerName.creator){
+      name = this.capitalize(postOwnerName.creator.first_name)+ ' '
+          +this.capitalize(postOwnerName.creator.last_name)
+
+    }
+
+
+
+    console.log(name)
+    return name;
+
+  }
+
 
 
 
@@ -37,13 +60,48 @@ class PictureCarousel extends React.Component{
     {
       pictureList.map(
         item => {
-          socialItems.push(
-            <div className = 'picturesRoll'>
+          if(item.socialItemType === "clip"){
+            socialItems.push(
+
+              <div className = "clipPicBackground">
+
               <img
-              className = 'socialImages'
+              className = 'backgroundPic'
               src ={'http://127.0.0.1:8000'+item.itemImage} />
-            </div>
-          )
+
+              <div className = 'clipPicturesRoll'>
+
+                <div className = "ownerHolder">
+                  <Avatar
+                  src = {'http://127.0.0.1:8000'+item.creator.profile_picture}
+                  size = {65}/>
+                  <div className = "ownerName">
+                    <div> {this.getChatUserName(item)} </div>
+                    <div> @{item.creator.username} </div>
+                  </div>
+                </div>
+                    <div className = "polaroidHolder">
+                    <img
+                    className = 'socialImages'
+                    src ={'http://127.0.0.1:8000'+item.itemImage} />
+                    </div>
+              </div>
+
+
+
+              </div>
+            )
+          }
+          if(item.socialItemType === "picture"){
+            socialItems.push(
+              <div className = 'picturesRoll'>
+                <img
+                className = 'socialImages'
+                src ={'http://127.0.0.1:8000'+item.itemImage} />
+              </div>
+            )
+          }
+
         }
       )
     }

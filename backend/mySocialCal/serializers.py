@@ -60,6 +60,12 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         model = models.SocialCalItems
         fields = ('id','socialItemType', 'socialItemCaption', 'created_at', 'creator',  'itemUser', 'itemImage' )
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
+
+        return data
+
 class SocialCalEventSerializer(serializers.ModelSerializer):
 
     get_socialEventMessage = serializers.StringRelatedField(many = True)
