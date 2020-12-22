@@ -234,6 +234,7 @@ class NewsfeedPost extends React.Component {
 
     let curPic = ""
     let postOwnerId = ""
+    let curId = ""
     const picIndex = this.state.curPicIndex
     if(this.props.data){
       if(this.props.data.post_images){
@@ -243,9 +244,20 @@ class NewsfeedPost extends React.Component {
         postOwnerId = this.props.data.user.id
       }
     }
+    if(this.props.userId){
+      curId = this.props.userId
+    }
 
+    // Now you would add the auth axios call. You do not need to do a websocket
+    // because we are in a seperate page. You might need websocket for notification
+    // but that pretty much it
 
     console.log(curPic, postOwnerId)
+    authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping", {
+      clipPic: curPic,
+      postOwnerId: postOwnerId,
+      curId: curId
+    })
 
 
 

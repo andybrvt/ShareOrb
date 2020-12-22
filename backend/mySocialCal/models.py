@@ -83,8 +83,7 @@ class SocialCalItems(models.Model):
     # So since there will be different items for the social cal, I want to h ave differnt
     # types
     # The types will be:
-        # clip_w_pic
-        # clip_pic
+        # clip
         # picture
 
     # MAKE SURE TO FIX THE NAME WHEN YOU HAVE THE TIME

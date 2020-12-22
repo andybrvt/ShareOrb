@@ -86,6 +86,48 @@ class SocialCalUploadPic(APIView):
         }
         return Response(content)
 
+class SocialClippingView(APIView):
+    # This class is used for adding the clipping of pictures into the social
+    # calendar. Pretty similar to uploading pictures but now you just ahve the picture
+    def post(self, request, *args, **kwargs):
+        # This is to adjust the time to the correct timezone
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        # This will grab the user
+        user = get_object_or_404(User, id = request.data['curId'])
+        # This will either create or get the socialCalCell and since you can only add pictures
+        # to the current day that is why we are putting the socialCalDate and testDate will
+        # always be the current date... unless it is the commenting and liking
+        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+            socialCalUser = user,
+            socialCaldate = time
+        )
+
+        # So the soical itme type clip will be a clipped pictures, and in thr
+        # front end it will look like a polaroid
+
+        # So unlike the upload pic the creator will be the ower of the post and not
+        # the current user
+        postOwner = get_object_or_404(User, id = request.data['postOwnerId'])
+
+        socialCalItem = models.SocialCalItems.objects.create(
+            socialItemType = "clip",
+            creator = postOwner,
+            itemUser = user,
+            itemImage = request.data['clipPic'],
+            calCell = socialCalCell
+        )
+
+        if socialCalCell.coverPic == '':
+            socialCalCell.coverPic = request.data['clipPic']
+
+        # Now you have create it and add in the cover pic
+        socialCalCell.save()
+
+
+        return Response("Clipping of pictures")
+
+
 class SocialEventCreateView(APIView):
     def post(self, request, *args, **kwargs):
 
