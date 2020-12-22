@@ -147,6 +147,20 @@ class WebSocketNewChatSidePanel {
 
   }
 
+  sendSeen = (chatId, senderId) => {
+    // This function will add in the people into the seen list if they have
+    //  seen the message
+
+    // You will need the chat id to get the chat and then get the curId
+    // to add themselves in and then you send the chat list into the frontend
+    // in order to update the event list
+    this.sendChats({
+      command: "send_chat_seen",
+      chatId: chatId,
+      senderId: senderId
+    })
+  }
+
 
   addCallbacks(
     fetchAllUserChats

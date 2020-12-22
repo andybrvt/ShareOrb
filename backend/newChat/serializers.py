@@ -9,13 +9,14 @@ from userprofile.models import User
 # This will be the serializer for each chat, which consist of the users and messages
 class ChatSerializer(serializers.ModelSerializer):
     get_messages = serializers.StringRelatedField(many = True)
-
+    seen = serializers.StringRelatedField(many = True, read_only = True)
     class Meta:
         model = models.Chat
         fields = (
             "id",
             "participants",
-            "get_messages"
+            "get_messages",
+            'seen'
     )
 
 
@@ -40,6 +41,8 @@ class ChatSerializer(serializers.ModelSerializer):
 class MiniChatSerializer(serializers.ModelSerializer):
     # This MiniChatSerializer is used for serializng just the chats objects
     # on the side panel of the
+    seen = serializers.StringRelatedField(many = True, read_only = True)
+
 
     class Meta:
         model = models.Chat
@@ -48,7 +51,8 @@ class MiniChatSerializer(serializers.ModelSerializer):
             "participants",
             "recentMessage",
             "recentSender",
-            "recentTime"
+            "recentTime",
+            'seen'
         )
 
     def to_representation(self, instance):

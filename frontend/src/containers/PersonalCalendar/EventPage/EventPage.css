@@ -5,10 +5,11 @@
   width: 1865px;
   /* padding: 30px; */
 
-  height: 93%;
+  height: 91.5vh;
   position: absolute;
   left: 50%;
-  bottom: 5px;
+  top:31%;
+  /* bottom: 5px; */
   transform: translateX(-48%);
   font-family: 'Segoe UI Regular';
 }

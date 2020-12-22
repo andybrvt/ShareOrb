@@ -35,6 +35,7 @@ class NewChatContent extends React.Component{
       )
 
       // Send one to the chat list as well to update it
+      // This where you will be adding people to seen here
       ChatSidePanelWebSocketInstance.updateRecentChat(
         this.props.parameter.id,
         this.props.curId,

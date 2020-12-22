@@ -147,26 +147,14 @@ class NewSidePanel extends React.Component{
     console.log(this.props)
 
     let chatList = []
+    let seenList = []
 
     if(this.props.chatList){
       chatList = this.props.chatList
+
     }
 
-    const data = [
-      {
-        title: 'Ant Design Title 1',
-      },
-      {
-        title: 'Ant Design Title 2',
-      },
-      {
-        title: 'Ant Design Title 3',
-      },
-      {
-        title: 'Ant Design Title 4',
-      },
-    ];
-
+    console.log(seenList.includes(this.props.username))
     return(
       <div className = "newSidePanel">
       <List
@@ -185,7 +173,7 @@ class NewSidePanel extends React.Component{
              src = {'http://127.0.0.1:8000'+this.getChatUserProfile(item.participants)} />
             <div className = "chatText">
               <div className = "chatName">{this.getChatUserName(item.participants)}</div>
-              <div className = "chatDescription"> {this.chatDescription(item.recentMessage,
+              <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}> {this.chatDescription(item.recentMessage,
                 item.recentSender,
                 item.recentTime
               )}</div>
@@ -215,7 +203,7 @@ class NewSidePanel extends React.Component{
 
               <div className = "chatText">
               <div className = "chatName">{this.getGroupChatName(item.participants)}</div>
-              <div className = "chatDescription"> {this.chatDescription(item.recentMessage,
+              <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}> {this.chatDescription(item.recentMessage,
                 item.recentSender,
                 item.recentTime
               )}</div>

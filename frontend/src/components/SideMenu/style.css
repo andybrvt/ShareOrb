@@ -46,11 +46,12 @@ p {
 
 .site-section {
   padding: 7rem 0; }
+/* 
+  aside, main {
+    height: 74vh;
+    min-height: 580px;
+  } */
 
-aside, main {
-  height: 74vh;
-  min-height: 580px;
-}
 
 aside {
   width: 70px;
@@ -200,7 +201,7 @@ aside {
       aside .side-inner .nav-menu ul li.active a {
         color: #000; }
 
-main {
+/* main {
   width: calc(100%);
   -webkit-transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
   transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
@@ -223,4 +224,4 @@ main {
     font-size: 18px; }
   main .post-content .post-meta {
     font-size: 15px;
-    color: #ccc; }
+    color: #ccc; } */

@@ -25,17 +25,15 @@ class PictureCarousel extends React.Component{
     this.carousel.prev()
   }
 
+  
+
 
 
   renderPictures = pictureList => {
     console.log(pictureList)
     let socialItems = []
 
-    // if(pictureList.length === 0){
-    //   return
-    // } else if (pictureList.length === 1){
-    //
-    // }
+
     {
       pictureList.map(
         item => {
