@@ -84,7 +84,7 @@
   float:right;
   padding:40px;
   margin-right: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
   padding-bottom: 175px;
   background: white;
 
@@ -187,7 +187,7 @@
 .eventInfoContainer .eventInfoView{
 
   /* width: 70%; */
-  height: 65%;
+  height: 100%;
   margin-left: -200px;
   /* position: relative;
   left: 50%;
@@ -270,7 +270,7 @@
 
   overflow: hidden;
   /* border: 10px dashed gainsboro; */
-  margin-left: 300px;
+  margin-left: 275px;
 
 }
 

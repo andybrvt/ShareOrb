@@ -648,8 +648,8 @@ class EventInfo extends React.Component{
 
           <div style={{marginTop:'-75px',marginLeft:'290px', color:'black'}} class="outerContainer">
             <span
-                style={{ fontSize:'20px', width:'1125px', height:'60px',
-                 display:'inline-block', marginTop:'100px', padding:'50px'}}
+                style={{ fontSize:'20px', width:'1100px', height:'60px',
+                 display:'inline-block', marginTop:'100px', padding:'45px'}}
                  class="aboutEvent eventCard">
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
@@ -662,7 +662,9 @@ class EventInfo extends React.Component{
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
                   <Liking
                   history = {this.props.history}
-                  style={{display:'inline-block'}} like_people={accepted}/>
+                  style={{display:'inline-block'}}
+                  num={5}
+                  like_people={accepted}/>
               </span>
               <span class="innerContainerEvent" style={{marginLeft:'100px',display:'inline-block'}}>
 
@@ -675,8 +677,9 @@ class EventInfo extends React.Component{
 
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
                   <Liking
-                  history = {this.props.history}
-                  style={{display:'inline-block'}} like_people={invited}/>
+                    num={5}
+                    history = {this.props.history}
+                    style={{display:'inline-block'}} like_people={invited}/>
               </span>
 
              <span class="innerContainerPeople"
@@ -686,7 +689,7 @@ class EventInfo extends React.Component{
                  <Button
                     type="primary" shape="round"
                     icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                    style={{left:'115%', fontSize:'15px'}} size={'large'}>
+                    style={{left:'110%', fontSize:'15px'}} size={'large'}>
 
                    Invite
                  </Button>
@@ -696,7 +699,7 @@ class EventInfo extends React.Component{
                    <Button
                       shape="round"
                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'120%', fontSize:'15px'}} size={'large'}>
+                      style={{left:'115%', fontSize:'15px'}} size={'large'}>
 
                      Going
                    </Button>
@@ -705,7 +708,7 @@ class EventInfo extends React.Component{
                    <Button
                       shape="round" type="primary"
                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'120%', fontSize:'15px'}} size={'large'}>
+                      style={{left:'115%', fontSize:'15px'}} size={'large'}>
 
                      Going
                    </Button>
@@ -716,7 +719,7 @@ class EventInfo extends React.Component{
                <Button
                   shape="round"
                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'125%', fontSize:'15px'}} size={'large'} danger>
+                  style={{left:'120%', fontSize:'15px'}} size={'large'} danger>
                   Delete
                </Button>
              </span>
@@ -807,12 +810,14 @@ class EventInfo extends React.Component{
 
 
 
+                </div>
+
+
+
+
               </div>
 
 
-
-
-            </div>
             <div class="mapEventCard">
               <p style={{fontSize:'20px'}}
                 className="eventDetails"> Location </p>
@@ -878,7 +883,9 @@ class EventInfo extends React.Component{
 
 
 
-        <div style={{ left:'72%',marginTop:'150px', width:'450px', padding:'40px'}} className = "eventPeopleWord eventCard"> Statistics
+        <div style={{ left:'72%',marginTop:'150px', width:'450px',
+          padding:'40px'}} className = "eventPeopleWord eventCard">
+           Statistics
 
           <Divider/>
           <div className =  "percentagesBars">
@@ -931,6 +938,19 @@ class EventInfo extends React.Component{
 
 
           </div>
+
+        </div>
+
+
+        <div style={{ left:'72%',marginTop:'50px', width:'450px', height:'300px',
+          padding:'40px'}} className = "eventPeopleWord eventCard">
+           Suggested Friends
+
+          <Divider/>
+
+
+
+
 
         </div>
 
