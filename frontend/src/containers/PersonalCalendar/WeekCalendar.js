@@ -519,7 +519,7 @@ class WeekCalendar extends React.Component{
                   {
                     (item.backgroundImg)?
                     <img
-                      style={{display:'inline-block', float:'right'}}
+                      style={{display:'inline-block', float:'right', marginRight:'25px'}}
                     src = {item.backgroundImg}
                     className = 'popoverPic'
                      />
@@ -542,7 +542,8 @@ class WeekCalendar extends React.Component{
 
                       (item.invited.length==0 && item.host.id==this.props.id)?
 
-                      <span style={{float:'right', padding:'15px', marginTop:'-45px'}}>
+                      <span style={{float:'right',
+                        marginTop:'-25px', marginRight:'25px'}}>
 
                         <Tooltip placement="bottomLeft" title="View event">
                           <Button
@@ -592,7 +593,7 @@ class WeekCalendar extends React.Component{
                                :
 
 
-                                 <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                                 <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', display:'inline-block'}}
                                    onClick = {() => this.onProfileClick(item.host.username)}
                                  >
 

@@ -85,7 +85,7 @@ class ChangeProfilePic extends React.Component{
 
       const uploadButton = (
         <div className = 'uploadBox'>
-          {this.state.loading ? <LoadingOutlined className = 'plusOutlined' /> : <PlusOutlined className = 'plusOutlined'/>}
+          {this.state.loading ? <LoadingOutlined className = 'plusOutlined' spin /> : <PlusOutlined className = 'plusOutlined'/>}
           <div className="ant-upload-text">Upload</div>
         </div>
       );
