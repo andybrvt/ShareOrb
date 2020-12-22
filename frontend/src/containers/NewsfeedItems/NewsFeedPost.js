@@ -3,7 +3,27 @@ import "./NewsfeedPost.css";
 import Comments from '../../containers/comments/comments.js';
 import PreviewComments from '../../containers/comments/PreviewComments.js';
 import { authAxios } from '../../components/util';
-import {Avatar, Icon, Message, Menu, Dropdown, Tooltip, Row, Skeleton, Switch, Card,Divider, Comment, Button, List, Input, Popover, message, Space, Form, Modal} from 'antd';
+import {Avatar,
+   Icon,
+   Message,
+   Menu,
+   Dropdown,
+   Tooltip,
+   Row,
+   Skeleton,
+   Switch,
+   Card,Divider,
+   Comment,
+   Button,
+   List,
+   Input,
+   Popover,
+   message,
+   Space,
+   Form,
+   Modal,
+   notification
+ } from 'antd';
 import { EditOutlined, EllipsisOutlined, AntDesignOutlined, ExclamationCircleOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
@@ -16,6 +36,7 @@ import defaultPic from '../../components/images/default.png'
 import Liking from './Liking';
 import LikeList from './LikeList';
 import PostPicCarousel from '../../components/PostPageFolder/PostPicCarousel';
+import * as dateFns from 'date-fns';
 
 
 class NewsfeedPost extends React.Component {
@@ -259,9 +280,24 @@ class NewsfeedPost extends React.Component {
       curId: curId
     })
 
+    this.openNotification("bottomRight")
+
 
 
   }
+
+  openNotification = placement => {
+
+  const today = dateFns.format(new Date(), 'MMM dd, yyyy')
+
+  notification.info({
+    message: `Photo Clipped!`,
+    description:
+      'A photo has been clipped to your calendar on '+today+'.',
+    placement,
+  });
+  };
+
 
   onCurPhotoChange = (picIndex) => {
     // This function will be an on change for the current picture that is shown
