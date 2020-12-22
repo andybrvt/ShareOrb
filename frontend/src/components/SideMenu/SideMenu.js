@@ -291,13 +291,11 @@ class SideMenu extends React.Component {
       </AutoComplete>
 
 
+
       <span style={{marginRight:'50px'}}>
-
-
         <Badge count={5}>
         test
        </Badge>
-
       </span>
 
 
@@ -307,10 +305,7 @@ class SideMenu extends React.Component {
 
 
 
-      <Button
-
-         onClick = {() => this.onShowNotification()}
-         >
+      <Button onClick = {() => this.onShowNotification()}>
           <Notifications {...this.props}/>
       </Button>
 
@@ -325,8 +320,6 @@ class SideMenu extends React.Component {
       }}
     >
          <Dropdown overlay={
-
-
            <Menu style = {{
          }}
          selectedKeys={[]} >
@@ -347,17 +340,11 @@ class SideMenu extends React.Component {
                </Menu.Item>
              )}
              { <Menu.Divider style={{marginTop:'-1px',marginBottom:'-1px'}}/>}
-
-
-
-
-
              <Menu.Item key="logout" onClick={this.props.logout}>
                <Link to="/">
                  <i class="fas fa-sign-out-alt"></i>
                  <span style={{marginLeft:'2px'}}> Logout</span>
                </Link>
-
              </Menu.Item>
            </Menu>}>
 
@@ -365,7 +352,6 @@ class SideMenu extends React.Component {
 
 
            <span >
-
            {
              profilePic != '' ?
                <Avatar
@@ -381,9 +367,6 @@ class SideMenu extends React.Component {
                size="large"
                className = 'miniProfilePic'
                src={defaultPicture} alt="avatar" />
-
-
-
            }
              <span>{this.capitalize(firstName)} {this.capitalize(lastName)}</span>
            </span>
@@ -402,19 +385,17 @@ class SideMenu extends React.Component {
 
           {/* length of banner from the very top*/}
 
-
-
-
-
-
           <Content
 
 
             style={{
 
               // backgroundColor: 'red'
+
             }}
           >
+
+
 
               {this.props.children}
           </Content>

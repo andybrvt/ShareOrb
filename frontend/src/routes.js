@@ -68,7 +68,8 @@ class BaseRouter extends React.Component {
     return (
 
 
-      <div class="backgroundofEverything"  style={{
+      <div class="backgroundofEverything"
+      style={{
         position: 'relative',
         background:'white',
         minHeight:'100%',}}>
