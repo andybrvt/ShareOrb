@@ -211,18 +211,58 @@ class SocialCalCellPage extends React.Component{
     }
 
 
+    console.log(socialCalItems)
     return(
 
          <div className = "socialCalCellModal">
            <div className = 'socialHolder'>
            {
              socialCalItems.length === 1 ?
+             <div className = "singlePicHolder">
+               {socialCalItems[0].socialItemType === "clip" ?
 
-             <div className = 'singlePic'>
-               <img
+               <div className = 'singlePic'>
+                 <img
+                 className = "backgroundPic"
+                 src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage}
+                  />
 
-               src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
-             </div>
+
+                  <div className = "clipPicturesRoll">
+                    <div className = "ownerHolder">
+                       <Avatar
+                       size = {65}
+                       src = {'http://127.0.0.1:8000' +socialCalItems[0].creator.profile_picture}
+                       />
+                       <div className = "ownerName">
+                         <div> Andy Le </div>
+                         <div> @andybrvt </div>
+                       </div>
+                    </div>
+                   <div className = "polaroidHolder">
+                    <img
+                    className = "socialImages"
+                    src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage}
+                     />
+                   </div>
+                  </div>
+
+
+
+
+
+               </div>
+
+               :
+
+               <div className = 'singlePic'>
+                 <img
+                 className ="picture"
+                 src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
+               </div>
+
+              }
+            </div>
 
              : socialCalItems.length === 0 ?
 
