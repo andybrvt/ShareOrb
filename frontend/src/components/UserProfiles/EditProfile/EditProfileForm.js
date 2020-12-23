@@ -56,7 +56,8 @@ const renderTextArea = (field) => {
   return (
     <TextArea
     {...field.input}
-    rows = {4}
+    rows = {3}
+    showCount
     type = {field.type}
     placeholder = {field.placeholder}
     />
@@ -182,6 +183,7 @@ class EditProfileForm extends React.Component{
         type = "primary"
         onClick = {handleSubmit}
         disabled = {pristine || invalid}
+        style={{marginTop:'25px'}}
         htmlType = "submit">
           Submit
         </Button>

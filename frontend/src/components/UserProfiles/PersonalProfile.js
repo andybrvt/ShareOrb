@@ -791,6 +791,9 @@ class PersonalProfile extends React.Component{
           visible = {this.state.showProfileEdit}
           onCancel = {() => this.closeProfileEdit()}
           footer = {null}
+          width={500}
+          bodyStyle={{padding:'50px'}}
+          centered
           >
           <EditProfileForm
             initialValues = {this.getInitialValue()}
