@@ -545,7 +545,7 @@
 }
 
 .socialHolder .socialCarouselZero {
-  width: 215%;
+  width: 70%;
   /* background-color: red; */
   border: 10px dashed gainsboro;
   text-align: center;
@@ -560,7 +560,7 @@
 }
 
 .socialHolder .socialCarouselSingle{
-  width: 215%;
+  width: 70%;
   height: 920px;
   /* background-color: red; */
   text-align: center;
