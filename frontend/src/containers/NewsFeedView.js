@@ -96,6 +96,11 @@ class NewsFeedView extends React.Component {
 
 	}
 
+	onViewAlbum = () => {
+		// This function will be used to open up the current day cal cell modal
+		console.log('this props')
+	}
+
 	render() {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
@@ -184,7 +189,9 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>
 
 
-								<div class="topCard">
+								<div
+								onClick = {() => this.onViewAlbum()}
+								class="topCard">
 
 									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 

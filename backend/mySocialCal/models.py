@@ -87,7 +87,7 @@ class SocialCalItems(models.Model):
         # picture
 
     # MAKE SURE TO FIX THE NAME WHEN YOU HAVE THE TIME
-    socialItemType = models.CharField(max_length = 30, default = 'post_pic')
+    socialItemType = models.CharField(max_length = 30, default = 'picture')
     socialItemCaption = models.CharField(max_length = 1000, blank = True)
     # So we would need a created_at to determine where to put the social cal item
     # the only time this created_at will not be used and instead use the start date and

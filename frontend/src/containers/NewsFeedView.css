@@ -24,7 +24,7 @@ width: 100%;
 
 .topCard {
   position: relative;
-
+  cursor: pointer;
   background: #FFFFFF;
 
   width:215px;
