@@ -41,8 +41,8 @@ const renderInput = (field) => {
       <Input
       {...field.input}
       type = {field.type}
-      placeholder = {field.placeholder}
-      maxLength = "125"
+      placeholder = {"Insert Bio"}
+
       style={{}}
       />
       {field.meta.touched &&
@@ -53,11 +53,15 @@ const renderInput = (field) => {
 }
 
 const renderTextArea = (field) => {
+
+
+  const { TextArea } = Input
+
   return (
     <TextArea
     {...field.input}
     rows = {3}
-    showCount
+    showCount maxLength={50}
     type = {field.type}
     placeholder = {field.placeholder}
     />
@@ -109,23 +113,29 @@ class EditProfileForm extends React.Component{
       profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
     }
 
+
+
+
+    const { TextArea } = Input
+
+
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
 
     return(
       <div className = "">
-        {/*
-        <div style={{background:'red'}}
+
+        <div
         onClick = {() => this.onOpenChangeProfilePic()} >
           <Avatar
            size = {100}
            src = {profilePic}/>
         </div>
-        */}
 
 
 
 
+        {/*
         <div>
         First name
         <Field
@@ -144,6 +154,8 @@ class EditProfileForm extends React.Component{
         />
         </div>
 
+        */}
+        <TextArea showCount maxLength={100} />
         <div>
         Bio:
         <Field

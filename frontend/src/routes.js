@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, useLocation, Switch } from 'react-router-dom';
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import NewsFeedView from './containers/NewsFeedView.js';
 import ArticleDetail from './containers/ArticleDetailView';
 import Login from './containers/LoginPage/Login';
