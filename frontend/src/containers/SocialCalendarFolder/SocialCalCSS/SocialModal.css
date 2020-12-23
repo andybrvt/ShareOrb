@@ -426,22 +426,7 @@
 }
 
 
-.picturesRoll{
-  /* height:800px; */
-  /* background-color: #000000cc; */
-  overflow: hidden;
-  height: 920px;
 
-
-}
-
-.picturesRoll .socialImages{
-  position: relative;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%)
-  /* top: 50%; */
-}
 
 
 .ant-upload-select-picture-card i {

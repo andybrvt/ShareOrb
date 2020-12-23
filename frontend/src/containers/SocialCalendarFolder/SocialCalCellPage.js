@@ -170,6 +170,16 @@ class SocialCalCellPage extends React.Component{
   }
 
 
+  threeDotDropDown = () => {
+
+
+    return (
+      <div className = "threeDot">
+      <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px'}}></i>
+      </div>
+    )
+  }
+
 
   render(){
     console.log(this.props)
@@ -246,8 +256,7 @@ class SocialCalCellPage extends React.Component{
                  src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage}
                   />
 
-                  <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
-
+                  {this.threeDotDropDown()}
 
                   <div className = "clipPicturesRoll">
                     <div className = "ownerHolder">
@@ -272,8 +281,7 @@ class SocialCalCellPage extends React.Component{
                :
 
                <div className = 'singlePic'>
-               <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
-
+              {this.threeDotDropDown()}
                  <img
                  className ="picture"
                  src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />

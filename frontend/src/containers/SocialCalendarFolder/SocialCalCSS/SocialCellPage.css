@@ -50,6 +50,14 @@
 
 }
 
+.singlePicHolder .singlePic .threeDot{
+  position: absolute;
+  right: 0%;
+  z-index: 100;
+  color: white;
+}
+
+
 .singlePicHolder .singlePic .clipPicturesRoll{
   position: relative;
   overflow: hidden;
@@ -581,6 +589,13 @@
   /* background-color: #000000cc; */
   overflow: hidden;
   height: 920px;
+  position: relative;
+}
+.picturesRoll .threeDot{
+  position: absolute;
+  right:0%;
+  z-index: 100;
+  color:white;
 }
 
 .clipPicBackground {
@@ -594,7 +609,9 @@
 .clipPicBackground .threeDot{
   position: absolute;
   right: 0%;
-
+  color: white;
+  cursor: pointer;
+  z-index: 100;
 }
 
 .clipPicBackground .backgroundPic {
@@ -642,8 +659,10 @@
   position: relative;
   height: 100%;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
+  /* display: none; */
   /* top: 50%; */
+
 }
 
 .clipPicBackground .clipPicturesRoll .polaroidHolder{
