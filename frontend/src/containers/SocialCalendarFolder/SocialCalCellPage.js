@@ -14,11 +14,13 @@ import SocialEventList from './SocialEventList';
 import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
-
+import DeleteSocialPostModal from './DeleteSocialPostModal';
 
 class SocialCalCellPage extends React.Component{
 
-
+  state ={
+    showDelete: false,
+  }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -175,10 +177,23 @@ class SocialCalCellPage extends React.Component{
 
   deleteSocialPost = () => {
     console.log('delete social post')
+    this.setState({
+      showDelete: true
+    })
+
+  }
+
+  closeDelete = () => {
+    // This function will be used close the delete
+    this.setState({
+      showDelete: false
+    })
   }
 
   threeDotDropDown = () => {
 
+    // This will hold the drop down for the pictures that incldues
+    // deleting and all other functions
 
     return (
       <div className = "threeDot">
@@ -432,6 +447,11 @@ class SocialCalCellPage extends React.Component{
 
              </div>
            </div>
+
+           <DeleteSocialPostModal
+           visible = {this.state.showDelete}
+           onClose = {this.closeDelete}
+            />
          </div>
     )
   }
