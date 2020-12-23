@@ -111,7 +111,7 @@ class SocialComments extends React.Component{
         size = {40}
         className ='socialPicInput'
         src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
-        <Form>
+        <Form className = "socialInputForm">
           <Input
           className= 'socialBoxInput'
           onChange ={this.handleChange}

@@ -150,6 +150,25 @@ class SocialCalCellPage extends React.Component{
      SocialCalCellPageWebSocketInstance.sendSocialCalCellUnlike(cellDate, personUnLike, owner)
   }
 
+  getChatUserName(postOwnerName){
+    // This function will show the correct name of the user that you are chatting
+    // with
+
+    var name = ""
+
+    if(postOwnerName.creator){
+      name = this.capitalize(postOwnerName.creator.first_name)+ ' '
+          +this.capitalize(postOwnerName.creator.last_name)
+
+    }
+
+
+
+    console.log(name)
+    return name;
+
+  }
+
 
 
   render(){
@@ -235,8 +254,8 @@ class SocialCalCellPage extends React.Component{
                        src = {'http://127.0.0.1:8000' +socialCalItems[0].creator.profile_picture}
                        />
                        <div className = "ownerName">
-                         <div> Andy Le </div>
-                         <div> @andybrvt </div>
+                         <div>{this.getChatUserName(socialCalItems[0])} </div>
+                         <div> @{socialCalItems[0].creator.username} </div>
                        </div>
                     </div>
                    <div className = "polaroidHolder">
@@ -246,11 +265,6 @@ class SocialCalCellPage extends React.Component{
                      />
                    </div>
                   </div>
-
-
-
-
-
                </div>
 
                :
@@ -294,25 +308,25 @@ class SocialCalCellPage extends React.Component{
              {this.dateView(socialCalDate)}
              </div>
              <div className = 'socialLikeCommentNum'>
-             {
-               peopleLikeId.includes(this.props.curId) ?
+               {
+                 peopleLikeId.includes(this.props.curId) ?
 
-               <div className = 'socialLikeCircle'>
-               <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                 <div className = 'socialLikeCircle'>
+                 <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                 </div>
+
+                 :
+
+                 <div className = 'socialLikeCircle'>
+                 <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+                 </div>
+               }
+
+
+               <span className = 'socialLikeCommentText'> {people_like.length} Likes . {socialCalComments.length} comments </span>
+               <div className = 'socialLikeAvatar'>
+                 <Liking {...this.props} like_people={people_like}/>
                </div>
-
-               :
-
-               <div className = 'socialLikeCircle'>
-               <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-               </div>
-             }
-
-
-             <span className = 'socialLikeCommentText'> {people_like.length} Likes . {socialCalComments.length} comments </span>
-             <div className = 'socialLikeAvatar'>
-               <Liking {...this.props} like_people={people_like}/>
-             </div>
              </div>
 
              <div className = 'socialLikeComment'>
