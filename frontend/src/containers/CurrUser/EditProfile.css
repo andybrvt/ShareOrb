@@ -5,6 +5,17 @@
   height:300px
 }
 
+
+.editFormBox{
+
+  background-color: #f5f5f5;
+  margin-top:10px;
+  border-radius: 10px;
+  margin-left: 15px;
+  font-size: 15px;
+  padding:10px;
+}
+
 .ant-upload-text{
   position:relative;
   /* background-color: red; */
@@ -25,7 +36,7 @@
   }
 
   .changeAvatar{
-    
+
   }
 
   .fitPhoto{

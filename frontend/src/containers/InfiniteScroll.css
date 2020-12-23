@@ -1,1 +1,10 @@
-p { font-family: "Segoe UI"; font-size: 18px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 29px; }
+p {
+  font-family: "Segoe UI";
+   font-size: 18px; font-style: normal;
+   font-variant: normal;
+   font-weight: 500;
+   line-height: 29px; }
+
+.intro{
+  font-weight: 500;
+}
