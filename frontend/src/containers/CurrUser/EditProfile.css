@@ -5,6 +5,20 @@
   height:300px
 }
 
+.profileEditUserName{
+  position:absolute;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: -35px;
+    margin-left: 140px;
+    color:grey;
+}
+
+.editLineHeight{
+  line-height: 10%;
+}
+
+
 
 .editFormBox{
 

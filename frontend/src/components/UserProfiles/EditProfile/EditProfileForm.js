@@ -1,7 +1,7 @@
 import React from 'react';
 import './EditProfile.css';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Avatar, DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
+import { Avatar, Divider, DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { connect } from "react-redux";
 import ChangeProfilePic from '../../../containers/CurrUser/ChangeProfilePic';
 import { authAxios } from '../../util';
@@ -61,7 +61,8 @@ const renderTextArea = (field) => {
     <TextArea
     {...field.input}
     rows = {3}
-    showCount maxLength={50}
+    showCount
+    maxLength={100}
     type = {field.type}
     placeholder = {field.placeholder}
     />
@@ -106,12 +107,28 @@ class EditProfileForm extends React.Component{
 
     }
 
+
+    capitalize (str) {
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
   render(){
     console.log(this.props)
     let profilePic = ""
+    let firstName=""
+    let lastName=""
+
     if(this.props.profilePic){
       profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
     }
+    if(this.props.first_name){
+      firstName = this.props.profile.first_name
+    }
+    if(this.props.last_name){
+      lastName = this.props.profile.last_name
+    }
+
+
 
 
 
@@ -123,13 +140,24 @@ class EditProfileForm extends React.Component{
 
 
     return(
-      <div className = "">
+      <div className = "eventCard" style={{padding:'50px'}}>
 
         <div
         onClick = {() => this.onOpenChangeProfilePic()} >
           <Avatar
            size = {100}
            src = {profilePic}/>
+
+           <span style={{marginLeft:'40px'}} className = 'profileName'>
+               {this.capitalize(firstName)} {this.capitalize(lastName)}
+                <br/>
+                <span  class="profileEditUserName">
+                 {"@"+this.props.username}
+                </span>
+
+
+          </span>
+
         </div>
 
 
@@ -155,14 +183,14 @@ class EditProfileForm extends React.Component{
         </div>
 
         */}
-        <TextArea showCount maxLength={100} />
-        <div>
-        Bio:
-        <Field
-        name = 'bio'
-        component = {renderTextArea}
-        type = 'text'
-        />
+        <Divider/>
+        <div style={{marginTop:'10px'}}>
+          Bio
+          <Field
+          name = 'bio'
+          component = {renderTextArea}
+          type = 'text'
+          />
         </div>
         {/*
         <div>
@@ -192,11 +220,12 @@ class EditProfileForm extends React.Component{
 
         <div>
         <Button
-        type = "primary"
-        onClick = {handleSubmit}
-        disabled = {pristine || invalid}
-        style={{marginTop:'25px'}}
-        htmlType = "submit">
+
+          type = "primary"
+          onClick = {handleSubmit}
+          disabled = {pristine || invalid}
+          style={{marginTop:'25px', float:'right'}}
+          htmlType = "submit">
           Submit
         </Button>
         </div>
