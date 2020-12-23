@@ -1,5 +1,10 @@
 import React from 'react';
-import { Carousel, Avatar } from 'antd';
+import {
+  Carousel,
+  Avatar,
+  Dropdown,
+  Menu
+ } from 'antd';
 import {
   RightCircleOutlined,
   LeftCircleOutlined
@@ -49,12 +54,40 @@ class PictureCarousel extends React.Component{
 
   }
 
+  deleteSocialPost = () => {
+    console.log('delete social post')
+  }
+
   threeDotDropDown = () => {
 
 
     return (
       <div className = "threeDot">
-      <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px'}}></i>
+      <Dropdown overlay={
+        <Menu>
+          <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+              <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-bookmark"></i>
+              <span style={{marginLeft:'3px'}}> Save this post</span>
+            </a>
+          </Menu.Item>
+          <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+              <i class="far fa-eye-slash"></i>
+              <span style={{marginLeft:'5px'}}>Hide this post</span>
+            </a>
+          </Menu.Item>
+          <Menu.Item danger onClick={this.deleteSocialPost}>
+            <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+            <span style={{marginLeft:'10px'}}>Delete post</span>
+          </Menu.Item>
+        </Menu>
+      }>
+      <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+        <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px', color: "white"}}></i>
+      </a>
+      </Dropdown>
+
       </div>
     )
   }
