@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, Upload, Divider, Checkbox,
 	 Avatar, Statistic, Button} from 'antd';
 import { InboxOutlined, UserOutlined } from '@ant-design/icons';
-
+import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
 // Function: Holds Forms3 and the Infinite scroll
@@ -105,6 +105,19 @@ class NewsFeedView extends React.Component {
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		console.log(this.props)
+		const curDate = new Date()
+
+		let username = ""
+		const cellYear = dateFns.getYear(curDate)
+		const cellMonth = dateFns.getMonth(curDate)+1
+		const cellDay = dateFns.getDate(curDate)
+		if(this.props.username){
+			username = this.props.username
+		}
+
+		console.log(cellYear, cellMonth, cellDay)
+		const location = this.props.location.pathname;
+
 		return (
 			<div>
 
@@ -188,7 +201,11 @@ class NewsFeedView extends React.Component {
 
 							<Col span={8}>
 
-							<Link >
+							<Link to = {{
+								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+								state:{pathname:location}
+							}}
+							 >
 								<div class="topCard">
 
 									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
