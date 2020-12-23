@@ -35,7 +35,6 @@ export const phoneNumber = value =>
     : undefined
 
 const renderInput = (field) => {
-
   console.log(field)
   return (
     <div>
@@ -44,6 +43,7 @@ const renderInput = (field) => {
       type = {field.type}
       placeholder = {field.placeholder}
       maxLength = "125"
+      style={{}}
       />
       {field.meta.touched &&
         ((field.meta.error && <span>{field.meta.error}</span>) ||
@@ -113,17 +113,20 @@ class EditProfileForm extends React.Component{
 
     return(
       <div className = "">
-
+        {/*
         <div style={{background:'red'}}
-        onClick = {() => this.onOpenChangeProfilePic()}
-        >
+        onClick = {() => this.onOpenChangeProfilePic()} >
           <Avatar
            size = {100}
            src = {profilePic}/>
         </div>
+        */}
+
+
+
 
         <div>
-        First name:
+        First name
         <Field
         name = 'first_name'
         component = {renderInput}
@@ -132,7 +135,7 @@ class EditProfileForm extends React.Component{
         </div>
 
         <div>
-        Last name:
+        Last name
         <Field
         name = 'last_name'
         component = {renderInput}
