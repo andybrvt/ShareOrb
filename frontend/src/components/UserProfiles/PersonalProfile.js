@@ -259,10 +259,13 @@ class PersonalProfile extends React.Component{
       console.log(profileImage)
       return (
         <div className = 'profilePic'>
+
           <Avatar
             onClick = {() => this.onOpenChangeProfilePic()}
             size = {150}
             src = {'http://127.0.0.1:8000'+profileImage} />
+
+
           {
             this.props.parameter.username === this.props.currentUser ?
             this.renderEditButton()
@@ -271,7 +274,9 @@ class PersonalProfile extends React.Component{
 
             <div></div>
           }
+
         </div>
+
       )
     }
 
@@ -768,10 +773,12 @@ class PersonalProfile extends React.Component{
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
-          <div class="profileEventCard" style={{marginTop:'40px', height:'300px'}}>
+          <div class="profileEventCard" style={{marginTop:'50px', height:'300px', padding:'25px'}}>
 
             <div class="parentFlexContainer">
+
               {this.renderProfilePic()}
+
               <span className = 'profileName'>
                 {this.capitalize(firstName)} {this.capitalize(lastName)}
                 <br/>
