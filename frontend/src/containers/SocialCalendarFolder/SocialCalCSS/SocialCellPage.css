@@ -117,16 +117,7 @@
 }
 
 
-.socialModalDate{
-  /* background-color: red; */
-  text-align: center;
-  color:black;
-  font-weight: 500;
-  font-size: 18px;
-  position:relative;
-  top: 5px;
-  left: 100px;
-}
+
 
 .socialHolder{
   /* background-color: red; */
@@ -165,14 +156,31 @@
   position: relative;
   bottom: 0px;
   height: 100%;
+  width: 30%;
+  /* width: 100%; */
   /* padding: 20px; */
 }
 
 .socialModalRight .socialNameTag {
   /* background-color: red; */
-  height: 80px;
+  height: 9%;
+  width: 100%;
   display: flex;
-  padding: 20px;}
+  padding: 20px;
+  position: relative;
+}
+
+.socialModalRight .socialNameTag .socialModalDate{
+  /* background-color: red; */
+  text-align: center;
+  color:black;
+  font-weight: 500;
+  font-size: 18px;
+  position:relative;
+  width: 40%;
+  top: 5%;
+  left: 20%;
+}
 
 
 .socialModalRight .socialNameTag .socialNameUsername{
@@ -202,8 +210,8 @@
   padding: 15px;
   margin-top: 50px;
   border: 1px solid gainsboro;
-  height: 235px;
-  width: 450px;
+  height: 25.5%;
+  width: 100%;
   overflow: auto;
 
 }
@@ -224,26 +232,31 @@
     /* background-color: red; */
     display: flex;
     height: 40px;
+    width: 100%;
+    position: relative;
 }
 .socialLikeCircle{
   /* background-color: red; */
   /* margin-left: 30px; */
   position: relative;
-  left: 25px;
+  left: 6%;
   top: 8px;
   height: 20px;
 }
 .socialLikeCommentNum .socialLikeCommentText{
   /* background-color: red; */
-  margin-left: 30px;
+  margin-left: 7%;
   position: relative;
+  width: 35%;
   top: 8px;
   height: 20px;
 }
 .socialLikeCommentNum .socialLikeAvatar{
   /* background-color: blue; */
+  width: 10%;
   position: relative;
-  left: 35%;
+  left: 30%;
+  /* padding-right: -10px; */
 }
 .socialLikeComment{
   /* background-color: red; */
@@ -328,14 +341,14 @@
 
 .socialCommentBoxBox{
   height: 51.5%;
-  width: 450px;
+  width: 100%;
   overflow:hidden;
   /* background-color: red; */
 }
 .socialCommentBox {
   /* background-color: blue  ; */
   height: 100%;
-  width: 460px;
+  width: 100%;
   padding-left: 20px;
   overflow:auto;
   /* width: 50%; */
@@ -351,13 +364,21 @@
   display: flex;
   position: absolute;
   left: 0%;
-  bottom: 245px;
-  margin-left: 20px;
+  bottom: 26%;
+  margin-left: 3%;
+  width: 100%;
 }
+.socialCommentBox .socialCommentInput .socialInputForm{
+  width: 80%;
+  position: relative;
+}
+
+
 .socialBoxInput{
-  width: 360px;
+  width: 100%;
   margin-left: 10px;
   font-size: 15px;
+  position: relative;
 }
 .sendOutline{
   /* background-color: red; */
