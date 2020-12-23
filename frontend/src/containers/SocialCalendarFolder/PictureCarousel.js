@@ -64,7 +64,9 @@ class PictureCarousel extends React.Component{
             socialItems.push(
 
               <div className = "clipPicBackground">
-
+              <div className = "threeDot">
+                <i class="fas fa-ellipsis-v" style={{fontSize:'25px', padding:'5px'}}></i>
+              </div>
               <img
               className = 'backgroundPic'
               src ={'http://127.0.0.1:8000'+item.itemImage} />
@@ -95,6 +97,9 @@ class PictureCarousel extends React.Component{
           if(item.socialItemType === "picture"){
             socialItems.push(
               <div className = 'picturesRoll'>
+              <div>
+              <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
+              </div>
                 <img
                 className = 'socialImages'
                 src ={'http://127.0.0.1:8000'+item.itemImage} />

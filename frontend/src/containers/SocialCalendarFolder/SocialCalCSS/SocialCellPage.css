@@ -591,6 +591,12 @@
   position: relative;
 }
 
+.clipPicBackground .threeDot{
+  position: absolute;
+  right: 0%;
+
+}
+
 .clipPicBackground .backgroundPic {
   position: absolute;
   /* height: %; */

@@ -246,6 +246,8 @@ class SocialCalCellPage extends React.Component{
                  src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage}
                   />
 
+                  <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
+
 
                   <div className = "clipPicturesRoll">
                     <div className = "ownerHolder">
@@ -270,6 +272,8 @@ class SocialCalCellPage extends React.Component{
                :
 
                <div className = 'singlePic'>
+               <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
+
                  <img
                  className ="picture"
                  src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
