@@ -11,7 +11,7 @@ import SuggestedFriends from './Layouts/SuggestedFriends.js';
 import ExploreWebSocketInstance from '../exploreWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
-
+import { Link } from 'react-router-dom';
 import { Row, Col, Card, Upload, Divider, Checkbox,
 	 Avatar, Statistic, Button} from 'antd';
 import { InboxOutlined, UserOutlined } from '@ant-design/icons';
@@ -188,17 +188,15 @@ class NewsFeedView extends React.Component {
 
 							<Col span={8}>
 
-
-								<div
-								onClick = {() => this.onViewAlbum()}
-								class="topCard">
+							<Link >
+								<div class="topCard">
 
 									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 
 									 <p  class="cardAlign"> View album </p>
 
 								</div>
-
+							</Link>
 
 				      </Col>
 

@@ -88,17 +88,18 @@
 /* This is for the pending pictures */
 .pendingEventCard .socialArrowLeft{
   position: absolute;
-  left: 4%;
+  left: 0%;
   top: 50%;
   font-size: 30px;
+  /* color: white; */
 }
 
 .pendingEventCard .socialArrowRight{
   position: absolute;
-  right: 4%;
+  right: 0%;
   top: 50%;
   font-size: 30px;
-
+  /* color: white; */
 }
 
 .pendingPicRoll {

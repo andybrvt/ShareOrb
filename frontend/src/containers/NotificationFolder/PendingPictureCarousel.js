@@ -79,12 +79,22 @@ class PendingPictureCarousel extends React.Component{
         afterChange={onChange}>
           {this.renderPictures(itemList)}
         </Carousel>
-        <LeftCircleOutlined
-        className = 'socialArrowLeft'
-        onClick = {this.previous} />
-        <RightCircleOutlined
-        className = 'socialArrowRight'
-        onClick = {this.next} />
+        {
+          itemList.length > 1 ?
+          <div>
+          <LeftCircleOutlined
+          className = 'socialArrowLeft'
+          onClick = {this.previous} />
+          <RightCircleOutlined
+          className = 'socialArrowRight'
+          onClick = {this.next} />
+          </div>
+          :
+
+          <div></div>
+
+        }
+
       </div>
     )
   }
