@@ -184,13 +184,13 @@
   /* background-color: red; */
   display: flex;
   flex-direction: row;
-
+  color:black;
   top:30px;
-  width: 400px;
+  width: 250px;
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
-  left: 33%;
+  left: 19%;
   transform: translateX(-50%);
 }
 
@@ -259,6 +259,13 @@
 
 }
 
+.dividerContainer{
+  color:black;
+  position:absolute;
+  margin-left: 200px;
+  margin-top: 200px;
+}
+
 .parentFlexContainer{
   display: flex;
    flex-direction: row;
@@ -290,9 +297,9 @@
 .profilePic{
   /* background-color: yellow; */
   margin-top: 10px;
-  margin-left: 350px;
+  margin-left: 300px;
 
-  width: 200px;
+  width: 250px;
   height: 180px;
 
 
@@ -338,7 +345,7 @@
 .profile-tabContainer {
   border-top: 1px solid #f0f0f0;
   position:absolute;
-  top: 400px;
+  top: 425px;
 
   font-family: 'Segoe UI Regular';
 
