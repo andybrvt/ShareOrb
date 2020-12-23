@@ -141,6 +141,21 @@ class WebSocketSocialCalCellPage{
     })
   }
 
+  sendDeleteSocialPic(socialItemId, socialCellId, cellDate){
+    // This function will send a request into the backend inorder to delete
+    // a specfic socialcalitem. The social cellId will be used to grab the
+    // current cell and then just update the soical cel call. The cell date
+    // will be used for the socketname
+
+    console.log('send seoms tuff')
+    this.sendSocialCalCellInfo({
+      command: "delete_social_cell_item",
+      socialItemId: socialItemId,
+      socialCellId: socialCellId,
+      cellDate: cellDate
+    })
+  }
+
   socketNewSocialCalCell(data){
     //This is to process all the command in the backend and tell them where to
     // go

@@ -399,6 +399,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_social_cal_cell_info':
             self.send_fetch_social_cal_cell_info(data)
         if data['command'] == 'send_social_cal_cell_like':

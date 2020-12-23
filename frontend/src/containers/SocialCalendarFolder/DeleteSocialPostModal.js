@@ -3,6 +3,12 @@ import { Modal } from 'antd'
 
 class DeleteSocialPostModal extends React.Component{
 
+
+  onDeleteSubmit = () => {
+    // This function is just to submit the the delete picture
+    this.props.onDeleteSubmit()
+  }
+
   render(){
     return(
       <Modal
@@ -12,8 +18,11 @@ class DeleteSocialPostModal extends React.Component{
       >
         Are you sure you want to delete this picture?
 
-        <div> Delete </div>
-        <div> Cancel </div>
+
+      <div> Cancel </div>
+      <div
+      onClick = {() =>this.onDeleteSubmit()}
+      > Delete </div>
       </Modal>
     )
   }

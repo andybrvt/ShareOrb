@@ -56,6 +56,7 @@ class PictureCarousel extends React.Component{
 
   deleteSocialPost = () => {
     console.log('delete social post')
+    this.props.onOpenDelete()
   }
 
   threeDotDropDown = () => {
@@ -155,6 +156,10 @@ class PictureCarousel extends React.Component{
 
     return socialItems
   }
+  onChange =(a) => {
+    console.log(a);
+    this.props.onPicChange(a)
+  }
 
   render(){
     console.log(this.props)
@@ -163,9 +168,7 @@ class PictureCarousel extends React.Component{
       itemList = this.props.items
     }
 
-    function onChange(a, b, c) {
-      console.log(a, b, c);
-    }
+
 
     const contentStyle = {
       height: '800px',
@@ -184,7 +187,7 @@ class PictureCarousel extends React.Component{
         arrows = {true}
         effect = 'null'
         ref = {node => {this.carousel = node}}
-        afterChange={onChange}>
+        afterChange={this.onChange}>
           {this.renderPictures(itemList)}
         </Carousel>
         <RightCircleOutlined

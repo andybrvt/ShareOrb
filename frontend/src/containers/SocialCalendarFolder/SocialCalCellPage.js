@@ -20,6 +20,7 @@ class SocialCalCellPage extends React.Component{
 
   state ={
     showDelete: false,
+    curSocialPic: 0,
   }
 
   capitalize (str) {
@@ -46,6 +47,12 @@ class SocialCalCellPage extends React.Component{
       )
     }
 
+  }
+
+  changeCurSocialPic = (picIndex) => {
+    this.setState({
+      curSocialPic: picIndex
+    })
   }
 
   componentDidMount() {
@@ -175,7 +182,44 @@ class SocialCalCellPage extends React.Component{
 
   }
 
+  onDeleteSocialPost = () => {
+    // This function will be called when you accept deleting the picture
+    // This function will get passed into the deletesocialPostModal
+
+    // The way this function is gonna work is that the state has a current
+    // pic index and then you get the picture list. Use the index to pull the
+    // correct pic and then send it into the backend through the socket
+
+    const year = this.props.match.params.year
+    const month = this.props.match.params.month
+    const day = this.props.match.params.day
+    const cellDate = year+"-"+month+"-"+day
+
+    let socialCalItems = []
+    let socialCellId = 0
+
+    if(this.props.socialCalCellInfo){
+      if(this.props.socialCalCellInfo.get_socialCalItems){
+        socialCalItems = this.props.socialCalCellInfo.get_socialCalItems
+      }
+      if(this.props.socialCalCellInfo.id){
+        socialCellId = this.props.socialCalCellInfo.id
+      }
+    }
+
+    // Now that you pulled the the list of socialcalitem, you can use the index
+    // in state to pull the right item
+    var cellItemId = socialCalItems[this.state.curSocialPic].id
+
+
+    // start of the path to sending things in to the backend
+    SocialCalCellPageWebSocketInstance.sendDeleteSocialPic(cellItemId, socialCellId, cellDate)
+
+    console.log('delete post')
+  }
+
   deleteSocialPost = () => {
+    // This function will just open the modal that will delete the post
     console.log('delete social post')
     this.setState({
       showDelete: true
@@ -248,8 +292,7 @@ class SocialCalCellPage extends React.Component{
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
 
-    console.log(people_like)
-    console.log(curDate)
+
     if(this.props.socialCalCellInfo){
       if(this.props.socialCalCellInfo.get_socialCalItems){
         socialCalItems = this.props.socialCalCellInfo.get_socialCalItems
@@ -348,7 +391,10 @@ class SocialCalCellPage extends React.Component{
              :
 
              <div className = 'socialCarousel'>
-               <PictureCarousel items = {socialCalItems} />
+               <PictureCarousel
+               onOpenDelete = {this.deleteSocialPost}
+               onPicChange = {this.changeCurSocialPic}
+               items = {socialCalItems} />
              </div>
            }
 
@@ -451,6 +497,7 @@ class SocialCalCellPage extends React.Component{
            <DeleteSocialPostModal
            visible = {this.state.showDelete}
            onClose = {this.closeDelete}
+           onDeleteSubmit = {this.onDeleteSocialPost}
             />
          </div>
     )
