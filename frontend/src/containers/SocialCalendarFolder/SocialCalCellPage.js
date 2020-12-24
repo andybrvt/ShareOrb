@@ -427,7 +427,6 @@ class SocialCalCellPage extends React.Component{
              </div>
            }
 
-           <Divider type="vertical" style={{height:'100%'}}/>
              <div className = 'socialModalRight'>
 
              <div className = 'socialNameTag'>

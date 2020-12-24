@@ -26,3 +26,4 @@ yarn-error.log*
 dump.rdb
 
 *.rdb
+.eslintcache
