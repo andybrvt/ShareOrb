@@ -1,6 +1,6 @@
 import React from 'react';
 import { Upload, Modal, Input, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
 
@@ -23,7 +23,7 @@ class NewNewsfeedFormPost extends React.Component{
       previewTitle: '',
       fileList :[],
       caption: '',
-
+      cameraShow:false,
     }
 
     handleCancel = () => this.setState({ previewVisible: false });
@@ -40,6 +40,12 @@ class NewNewsfeedFormPost extends React.Component{
         previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
       });
     };
+
+    conditionUploadBox=()=>{
+      this.setState({
+        cameraShow:true,
+        });
+    }
 
     handleChange = ({ fileList }) => this.setState({ fileList });
 
@@ -98,18 +104,8 @@ class NewNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div className="clearfix">
-        <Upload
-          // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={this.handlePreview}
-          onChange={this.handleChange}
-          beforeUpload  = {() => false} // prevents it from uploading right away
-          name = 'image'
-        >
-          {fileList.length >= 8 ? null : uploadButton}
-        </Upload>
+      <div className="eventCard" style={{width:'600px', height:'300px'}}>
+
         <TextArea rows = {4} type = 'text' name = 'caption' onChange = {this.handleCaptionChange} value = {this.state.caption} />
         <Modal
           visible={previewVisible}
@@ -119,8 +115,26 @@ class NewNewsfeedFormPost extends React.Component{
         >
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
-        <Button  type="primary" style={{ background: "#0069FF" }} onClick={this.onFormSubmit}>Post</Button>
-      </div>
+        <Button  type="primary" style={{ background: "#0069FF", float:'right'}} onClick={this.onFormSubmit}>Post</Button>
+        {
+          (this.state.cameraShow)?
+
+          <Upload
+            // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={this.handlePreview}
+            onChange={this.handleChange}
+            beforeUpload  = {() => false} // prevents it from uploading right away
+            name = 'image'
+          >
+            {fileList.length >= 8 ? null : uploadButton}
+          </Upload>
+          :
+          <div></div>
+      }
+        <i onClick = {this.conditionUploadBox} style={{fontSize:'20px'}} class="fas fa-camera"></i>
+    </div>
     );
     }
 }

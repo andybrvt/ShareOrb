@@ -12,7 +12,7 @@ import ExploreWebSocketInstance from '../exploreWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
 import { Link } from 'react-router-dom';
-import { Row, Col, Card, Upload, Divider, Checkbox,
+import { Row, Col, Card, Upload, Divider, Modal, Checkbox,
 	 Avatar, Statistic, Button} from 'antd';
 import { InboxOutlined, UserOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
@@ -76,6 +76,15 @@ class NewsFeedView extends React.Component {
       picShow: !(this.state.picShow),
     });
   };
+
+	closeProfileEdit = () => {
+    // You wanna check if the person open and opening is the current user
+
+      this.setState({
+        postShow: false,
+      })
+
+  }
 
 
 	componentWillReceiveProps(newProps){
@@ -226,8 +235,16 @@ class NewsFeedView extends React.Component {
 
 	<div style={{marginTop:'50px'}}>
 
+		<Modal
+		visible = {this.state.postShow}
+		onCancel = {() => this.closeProfileEdit()}
+		footer = {null}
+		width={800}
+		bodyStyle={{padding:'100px'}}
+		centered
+		>
 	<NewNewsfeedFormPost />
-
+	</Modal>
 	</div>
 
 
