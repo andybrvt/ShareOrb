@@ -497,14 +497,25 @@ class SocialCalCellPage extends React.Component{
 
                <div className  = 'socialComment'>
                <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-                Comment </div>
+                Comment
+                </div>
 
+                {
+                  this.props.match.params.username === this.props.username   ?
 
-                <div className  = 'socialComment'>
-                  <span
-                  style={{ marginRight:'10px'}}
-                  class="fa fa-archive"></span>
-                 Clip </div>
+                  <div></div>
+
+                  :
+
+                  <div className  = 'socialComment'>
+                    <span
+                    style={{ marginRight:'10px'}}
+                    class="fa fa-archive"></span>
+                   Clip
+                   </div>
+
+                }
+
 
              </div>
                <SocialComments
@@ -540,7 +551,8 @@ const mapStateToProps = state => {
   return {
     socialCalCellInfo: state.socialCal.socialCalCellInfo,
     curId: state.auth.id,
-    curProfilePic: state.auth.profilePic
+    curProfilePic: state.auth.profilePic,
+    username: state.auth.username
   }
 }
 
