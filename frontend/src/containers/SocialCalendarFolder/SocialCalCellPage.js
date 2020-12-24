@@ -7,7 +7,8 @@ import {
   Avatar,
   Dropdown,
   Divider,
-  Menu
+  Menu,
+  notification
  } from 'antd';
 import Liking from'../NewsfeedItems/Liking.js';
 import SocialComments from './SocialComments';
@@ -16,6 +17,9 @@ import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
 import DeleteSocialPostModal from './DeleteSocialPostModal';
+import { authAxios } from '../../components/util';
+
+
 
 class SocialCalCellPage extends React.Component{
 
@@ -201,6 +205,53 @@ class SocialCalCellPage extends React.Component{
     return name;
 
   }
+
+  onClipCurPhoto = () => {
+    // This function will be used to clipp the current photo in the carousel
+    // to their calendar and current day in the social calendar
+
+    let curPic = ""
+    let postOwnerId = ""
+    let curId = ""
+
+    const picIndex = this.state.curSocialPic
+    if(this.props.socialCalCellInfo){
+      if(this.prop.socialCalCellInfo.get_socialCalItems){
+        const calItem = this.prop.socialCalCellInfo.get_socialCalItems[picIndex]
+        curPic = calItem.itemImage
+        postOwnerId = calItem.creator.id
+      }
+    }
+  if(this.props.curId){
+    curId = this.props.curId
+  }
+
+  // Now you just do an auth axios call bc you are not on your own calendar so
+  // you dont have to worry about websocket
+
+  authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping", {
+    clipPic: curPic,
+    postOwnerId: postOwnerId,
+    curId: curId
+  })
+
+  this.openNotification("bottomRight")
+
+
+  }
+
+  openNotification = placement => {
+
+  const today = dateFns.format(new Date(), 'MMM dd, yyyy')
+
+  notification.info({
+    message: `Photo Clipped!`,
+    description:
+      'A photo has been clipped to your calendar on '+today+'.',
+    placement,
+  });
+  };
+
 
   onDeleteSocialPost = () => {
     // This function will be called when you accept deleting the picture

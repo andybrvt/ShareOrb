@@ -390,7 +390,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         socialItemList = socialCellObj['get_socialCalItems']
 
         if(len(socialItemList) == 0):
-            socialCell.coverPic.delete()
+            socialCell.coverPic = ""
             socialCell.save()
         elif(len(socialItemList) > 0):
             if curCoverPic == deletedPic:
