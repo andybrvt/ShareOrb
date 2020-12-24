@@ -7,6 +7,7 @@ class DeleteSocialPostModal extends React.Component{
   onDeleteSubmit = () => {
     // This function is just to submit the the delete picture
     this.props.onDeleteSubmit()
+    this.props.onClose()
   }
 
   render(){
@@ -22,6 +23,7 @@ class DeleteSocialPostModal extends React.Component{
       <div className = "buttons">
       <div
       className = "cancelDelete"
+      onClick = {this.props.onClose}
       > Cancel </div>
       <div
       onClick = {() =>this.onDeleteSubmit()}
