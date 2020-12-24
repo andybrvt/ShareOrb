@@ -141,6 +141,21 @@ class WebSocketSocialCalCellPage{
     })
   }
 
+  sendDeleteSocialPic(socialItemId, socialCellId, cellDate){
+    // This function will send a request into the backend inorder to delete
+    // a specfic socialcalitem. The social cellId will be used to grab the
+    // current cell and then just update the soical cel call. The cell date
+    // will be used for the socketname
+
+    console.log('send seoms tuff')
+    this.sendSocialCalCellInfo({
+      command: "delete_social_cell_item",
+      socialItemId: socialItemId,
+      socialCellId: socialCellId,
+      cellDate: cellDate
+    })
+  }
+
   socketNewSocialCalCell(data){
     //This is to process all the command in the backend and tell them where to
     // go
@@ -193,6 +208,12 @@ class WebSocketSocialCalCellPage{
       this.callbacks['add_social_event_join_leave_M'](socialEventList)
 
     }
+    if(command === "delete_social_cell_item"){
+      const socialItemList = parsedData.socialItemList
+
+      // Add the call back here
+      this.callbacks['delete_social_cell_item'](socialItemList)
+    }
   }
 
   addCallbacks(
@@ -201,12 +222,14 @@ class WebSocketSocialCalCellPage{
     sendSocialCalCellComment,
     sendSocialCalCellCommentNew,
     addSocialEventJoinLeave,
+    deleteSocialItem
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
     this.callbacks['send_social_cal_cell_comment'] = sendSocialCalCellComment
     this.callbacks['send_social_cal_cell_comment_new'] = sendSocialCalCellCommentNew
     this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
+    this.callbacks['delete_social_cell_item'] = deleteSocialItem
   }
 
   sendSocialCalCellInfo(data){

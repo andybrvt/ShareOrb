@@ -1,7 +1,13 @@
 import React from 'react';
 import { Modal } from 'antd'
-
+import "./SocialCalCSS/SocialCellPage.css";
 class DeleteSocialPostModal extends React.Component{
+
+
+  onDeleteSubmit = () => {
+    // This function is just to submit the the delete picture
+    this.props.onDeleteSubmit()
+  }
 
   render(){
     return(
@@ -10,10 +16,18 @@ class DeleteSocialPostModal extends React.Component{
       onCancel = {this.props.onClose}
       footer = {null}
       >
-        Are you sure you want to delete this picture?
 
-        <div> Delete </div>
-        <div> Cancel </div>
+      <span>Are you sure you want to delete this picture?</span>
+
+      <div className = "buttons">
+      <div
+      className = "cancelDelete"
+      > Cancel </div>
+      <div
+      onClick = {() =>this.onDeleteSubmit()}
+      className = "acceptDelete"
+      > Delete </div>
+      </div>
       </Modal>
     )
   }

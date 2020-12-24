@@ -97,7 +97,8 @@ class App extends Component {
       this.props.sendSocialCalCellLikeUnlike.bind(this),
       this.props.sendSocialCalCellComment.bind(this),
       this.props.sendSocialCalCellComments.bind(this),
-      this.props.addSocialEventJoinLeaveM.bind(this)
+      this.props.addSocialEventJoinLeaveM.bind(this),
+      this.props.deleteSocialCellItem.bind(this)
     )
 
     UserPostPageWebSocketInstance.addCallbacks(
@@ -249,7 +250,6 @@ const mapDispatchToProps = dispatch => {
     editProfileAuth: (editProfileObj) => dispatch(authActions.editProfileAuth(editProfileObj)),
     addRemoveCloseFriend: (friendList) => dispatch(authActions.addRemoveCloseFriend(friendList)),
 
-
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),
     updateSocialEventPage: updatedSocialEvent => dispatch(socialActions.updateSocialEventPage(updatedSocialEvent)),
@@ -258,6 +258,7 @@ const mapDispatchToProps = dispatch => {
     sendSocialCalCellLikeUnlike: (socialCalCellLikeObj) => dispatch(socialActions.sendSocialCalCellLikeUnlike(socialCalCellLikeObj)),
     sendSocialCalCellComment: (socialCalCellCommentObj) => dispatch(socialActions.sendSocialCalCellComment(socialCalCellCommentObj)),
     sendSocialCalCellComments: (socialCalCellCommentsObj) => dispatch(socialActions.sendSocialCalCellComments(socialCalCellCommentsObj)),
+    deleteSocialCellItem: (socialItemList) => dispatch(socialActions.deleteSocialCellItem(socialItemList)),
     addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList))
   }
 }
