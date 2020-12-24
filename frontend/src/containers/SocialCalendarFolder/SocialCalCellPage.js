@@ -6,6 +6,7 @@ import PictureCarousel from './PictureCarousel';
 import {
   Avatar,
   Dropdown,
+  Divider,
   Menu
  } from 'antd';
 import Liking from'../NewsfeedItems/Liking.js';
@@ -244,6 +245,8 @@ class SocialCalCellPage extends React.Component{
     let people_like = []
     let curDate = year+"-"+month+"-"+day
     let socialCalCellId = ''
+    let socialCalFirstName = ''
+    let socialCalLastName = ''
 
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
@@ -274,6 +277,10 @@ class SocialCalCellPage extends React.Component{
       }
       if(this.props.socialCalCellInfo.id){
         socialCalCellId = this.props.socialCalCellInfo.id
+      }
+      if(this.props.socialCalCellInfo.socialCalUser){
+        socialCalFirstName = this.props.socialCalCellInfo.socialCalUser.first_name
+        socialCalLastName = this.props.socialCalCellInfo.socialCalUser.last_name
       }
 
     }
@@ -310,9 +317,10 @@ class SocialCalCellPage extends React.Component{
                        src = {'http://127.0.0.1:8000' +socialCalItems[0].creator.profile_picture}
                        />
                        <div className = "ownerName">
-                         <div>{this.getChatUserName(socialCalItems[0])} </div>
-                         <div> @{socialCalItems[0].creator.username} </div>
+                         <div>{socialCalFirstName+' '+socialCalLastName} </div>
+
                        </div>
+                       <div class="socialCalCellUsername"> @{socialCalItems[0].creator.username} </div>
                     </div>
                    <div className = "polaroidHolder">
                     <img
@@ -352,15 +360,15 @@ class SocialCalCellPage extends React.Component{
              </div>
            }
 
-
+           <Divider type="vertical" style={{height:'100%'}}/>
              <div className = 'socialModalRight'>
 
              <div className = 'socialNameTag'>
 
              <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
              <div>
-               <div className = 'socialName'> {this.capitalize(socialCalUsername)}</div>
-               <div className = 'socialNameUsername'><b> @{this.capitalize(socialCalUsername)}</b></div>
+               <div className = 'socialName'>{socialCalFirstName+' '+socialCalLastName} </div>
+               <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
              </div>
              {this.dateView(socialCalDate)}
              </div>
@@ -380,7 +388,11 @@ class SocialCalCellPage extends React.Component{
                }
 
 
-               <span className = 'socialLikeCommentText'> {people_like.length} Likes . {socialCalComments.length} comments </span>
+               <span className = 'socialLikeCommentText'>
+                 {people_like.length} Likes
+                 <Divider type="vertical" style={{height:'100%'}}/>
+                {socialCalComments.length} comments
+               </span>
                <div className = 'socialLikeAvatar'>
                  <Liking {...this.props} like_people={people_like}/>
                </div>

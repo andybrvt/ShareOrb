@@ -57,6 +57,7 @@
     object-fit: cover;
     width: 300px;
     height: 300px;
+    border-radius: 10px;
   }
 
 .sideContainer{
@@ -91,12 +92,6 @@
   margin-top: 60px;
   margin-right: 50px;
   /* background-color: green; */
-}
-
-.uploadBox{
-
-  width:300px;
-  height:155px;
 }
 
 
