@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd'
-
+import "./SocialCalCSS/SocialCellPage.css";
 class DeleteSocialPostModal extends React.Component{
 
 
@@ -16,13 +16,18 @@ class DeleteSocialPostModal extends React.Component{
       onCancel = {this.props.onClose}
       footer = {null}
       >
-        Are you sure you want to delete this picture?
 
+      <span>Are you sure you want to delete this picture?</span>
 
-      <div> Cancel </div>
+      <div className = "buttons">
+      <div
+      className = "cancelDelete"
+      > Cancel </div>
       <div
       onClick = {() =>this.onDeleteSubmit()}
+      className = "acceptDelete"
       > Delete </div>
+      </div>
       </Modal>
     )
   }

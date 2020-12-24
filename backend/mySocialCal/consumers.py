@@ -394,11 +394,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             socialCell.save()
         elif(len(socialItemList) > 0):
             if curCoverPic == deletedPic:
-                # print("it hit here")
-                # print(socialCell.get_socialCalItems().first())
-                # firstPic = get_object_or_404(SocialCalItems, id = socialCell.get_socialCalItems().first())
-                # print(firstPic.itemImage)
-                # socialCell.coverPic = firstPic.itemImage
+
                 curPicList = socialItemList[0]['itemImage'].split("/")
                 curPic = curPicList[len(curPicList)-1]
                 print(socialItemList[0]['itemImage'])

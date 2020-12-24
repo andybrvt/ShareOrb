@@ -695,3 +695,38 @@
   margin-top: 8px;
   color: #666;
 }
+
+
+/* css for the deletesoicalpost modal */
+.buttons{
+  display: flex;
+}
+
+.buttons .cancelDelete{
+  background-color: red;
+  color: white;
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 7px;
+  position: relative;
+  left: 29%;
+  top: 11px;
+  cursor: pointer;
+}
+
+.buttons .acceptDelete{
+  background-color: #0099FF;
+  color: white;
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 7px;
+  /* border: 1px grey solid; */
+  position: relative;
+  left: 35%;
+  top: 11px;
+  cursor: pointer;
+}
