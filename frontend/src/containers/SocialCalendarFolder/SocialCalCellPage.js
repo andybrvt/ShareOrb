@@ -183,6 +183,25 @@ class SocialCalCellPage extends React.Component{
 
   }
 
+  getPageName(postOwnerName){
+    // This function will show the correct name of the user that you are chatting
+    // with
+
+    var name = ""
+    console.log(postOwnerName)
+    if(postOwnerName.socialCalUser){
+      name = this.capitalize(postOwnerName.socialCalUser.first_name)+ ' '
+          +this.capitalize(postOwnerName.socialCalUser.last_name)
+
+    }
+
+
+
+    console.log(name)
+    return name;
+
+  }
+
   onDeleteSocialPost = () => {
     // This function will be called when you accept deleting the picture
     // This function will get passed into the deletesocialPostModal
@@ -292,6 +311,7 @@ class SocialCalCellPage extends React.Component{
     let socialCalFirstName = ''
     let socialCalLastName = ''
 
+    let socialUser = {}
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
 
@@ -322,6 +342,7 @@ class SocialCalCellPage extends React.Component{
         socialCalCellId = this.props.socialCalCellInfo.id
       }
       if(this.props.socialCalCellInfo.socialCalUser){
+        socialUser = this.props.socialCalCellInfo
         socialCalFirstName = this.props.socialCalCellInfo.socialCalUser.first_name
         socialCalLastName = this.props.socialCalCellInfo.socialCalUser.last_name
       }
@@ -360,10 +381,10 @@ class SocialCalCellPage extends React.Component{
                        src = {'http://127.0.0.1:8000' +socialCalItems[0].creator.profile_picture}
                        />
                        <div className = "ownerName">
-                         <div>{socialCalFirstName+' '+socialCalLastName} </div>
+                         <div>{this.getChatUserName(socialCalItems[0])} </div>
+                         <div class="socialCalCellUsername"> @{socialCalItems[0].creator.username} </div>
 
                        </div>
-                       <div class="socialCalCellUsername"> @{socialCalItems[0].creator.username} </div>
                     </div>
                    <div className = "polaroidHolder">
                     <img
@@ -413,7 +434,7 @@ class SocialCalCellPage extends React.Component{
 
              <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
              <div>
-               <div className = 'socialName'>{socialCalFirstName+' '+socialCalLastName} </div>
+               <div className = 'socialName'>{this.getPageName(socialUser)} </div>
                <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
              </div>
              {this.dateView(socialCalDate)}
