@@ -262,7 +262,7 @@ class SocialCalCellPage extends React.Component{
         </Menu>
       }>
       <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-        <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px', color: "black"}}></i>
+        <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px', color: "gray"}}></i>
       </a>
       </Dropdown>
       </div>

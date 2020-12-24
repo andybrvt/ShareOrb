@@ -366,20 +366,51 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # First you will get the social cell item
         socialItem = get_object_or_404(SocialCalItems, id = data['socialItemId'])
 
+
+
+        # Get file name to check if it is the same or different from the coverpic
+        deletedPicList = str(socialItem.itemImage).split("/")
+        deletedPic = deletedPicList[len(deletedPicList)-1]
+        print(deletedPic)
+
         # Then you delete it
         socialItem.delete()
+
+        # You want to get the cover pic take care of first before you delete
+        # the post
 
         # Now you will grab the new social cal cell that just got a item deleted
         socialCell = get_object_or_404(SocialCalCell, id = data['socialCellId'])
         # Now serialize the social cell to be sent into the front end
+
         socialCellObj = SocialCalCellSerializer(socialCell).data
+        curCoverPicList = socialCellObj['coverPic'].split("/")
+        curCoverPic = curCoverPicList[len(curCoverPicList)-1]
+        print(curCoverPic)
         socialItemList = socialCellObj['get_socialCalItems']
 
+        if(len(socialItemList) == 0):
+            socialCell.coverPic.delete()
+            socialCell.save()
+        elif(len(socialItemList) > 0):
+            if curCoverPic == deletedPic:
+                # print("it hit here")
+                # print(socialCell.get_socialCalItems().first())
+                # firstPic = get_object_or_404(SocialCalItems, id = socialCell.get_socialCalItems().first())
+                # print(firstPic.itemImage)
+                # socialCell.coverPic = firstPic.itemImage
+                curPicList = socialItemList[0]['itemImage'].split("/")
+                curPic = curPicList[len(curPicList)-1]
+                print(socialItemList[0]['itemImage'])
+                socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("/media")
+                socialCell.save()
         # Now you get the date so that you can send it to the right websocket
         dateList = data['cellDate'].split("-")
         username = socialCellObj['socialCalUser']['username']
 
         recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+
 
         content = {
             'command': 'delete_social_cell_item',
