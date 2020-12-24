@@ -208,6 +208,12 @@ class WebSocketSocialCalCellPage{
       this.callbacks['add_social_event_join_leave_M'](socialEventList)
 
     }
+    if(command === "delete_social_cell_item"){
+      const socialItemList = parsedData.socialItemList
+
+      // Add the call back here
+      this.callbacks['delete_social_cell_item'](socialItemList)
+    }
   }
 
   addCallbacks(
@@ -216,12 +222,14 @@ class WebSocketSocialCalCellPage{
     sendSocialCalCellComment,
     sendSocialCalCellCommentNew,
     addSocialEventJoinLeave,
+    deleteSocialItem
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
     this.callbacks['send_social_cal_cell_comment'] = sendSocialCalCellComment
     this.callbacks['send_social_cal_cell_comment_new'] = sendSocialCalCellCommentNew
     this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
+    this.callbacks['delete_social_cell_item'] = deleteSocialItem
   }
 
   sendSocialCalCellInfo(data){

@@ -78,6 +78,18 @@ const sendSocialCalCellComments = (state, action) =>{
   })
 }
 
+const deleteSocialCellItem =(state, action) => {
+  // This is used to update the social cal cell item list after you have delete a
+  // photo
+
+  return updateObject(state, {
+    socialCalCellInfo:{
+      ...state.socialCalCellInfo,
+      get_socialCalItems: action.socialItemList
+    }
+  })
+}
+
 
 const closeSocialCalCellPage = (state, action) => {
 
@@ -135,12 +147,15 @@ const updateSocialEventBackground = (state, action) => {
   })
 }
 
+
 const sendDeleteSocialEventNoti = (state, action) => {
   // IMPROVED
   return updateObject(state, {
     showDeleted: true
   })
 }
+
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -170,7 +185,8 @@ const reducer = (state = initialState, action) => {
       return updateSocialEventBackground(state, action);
     case actionTypes.SEND_DELETE_SOCIAL_EVENT_NOTI:
       return sendDeleteSocialEventNoti(state, action);
-
+    case actionTypes.DELETE_SOCIAL_CELL_ITEM:
+      return deleteSocialCellItem(state, action);
     default:
       return state;
   }

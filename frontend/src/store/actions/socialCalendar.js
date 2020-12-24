@@ -49,12 +49,21 @@ export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
   }
 }
 
+export const deleteSocialCellItem = (socialItemList) => {
+  // This is used to update the socialcell items list after you have
+  // deleted on of the photos
+  return {
+    type: actionTypes.DELETE_SOCIAL_CELL_ITEM,
+    socialItemList: socialItemList
+  }
+}
+
 export const closeSocialCalCellPage = () => {
   // When closing the page, it clears out all the infromation so transtioning will
   // be more smooth
   return {
     type: actionTypes.CLOSE_SOCIAL_CAL_CELL_PAGE,
-    
+
   }
 }
 
