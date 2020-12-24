@@ -33,6 +33,23 @@ def create_all_post(sender, instance, created, **kwargs):
             )
         post.post_date = instance.socialCaldate
         post.save()
+    elif(len(instance.get_socialCalItems()) == 0):
+        try:
+            post = userSocialNormPost.objects.get(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        except userSocialNormPost.DoesNotExist:
+            post = userSocialNormPost(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        post.save()
+        post.delete()
 
 
 #These models are used to work with the social cal and all its backend
