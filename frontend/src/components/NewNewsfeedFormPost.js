@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, Modal, Input, Button } from 'antd';
+import { Upload, Modal, Input, Avatar, Button, Divider } from 'antd';
 import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
@@ -94,6 +94,10 @@ class NewNewsfeedFormPost extends React.Component{
     }
 
     render(){
+      let profilePic = ''
+      if (this.props.profilePic){
+        profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+      }
       console.log(this.state)
       console.log(this.props)
       const { previewVisible, previewImage, fileList, previewTitle } = this.state;
@@ -104,9 +108,22 @@ class NewNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div className="eventCard" style={{width:'600px', height:'300px'}}>
-
-        <TextArea rows = {4} type = 'text' name = 'caption' onChange = {this.handleCaptionChange} value = {this.state.caption} />
+      <div className="eventCard" style={{width:'700px', height:'400px'}}>
+        <Avatar
+          style={{ top:'5%'}}
+          size = {100} shape = 'circle'
+          src = {profilePic} />
+        <TextArea
+          style={{fontSize:'18px', marginTop:'50px'}}
+          rows = {2}
+          maxLength={150}
+          bordered={false}
+          type = 'text'
+          placeholder="Write a Post"
+          name = 'caption'
+          onChange = {this.handleCaptionChange}
+          value = {this.state.caption} />
+        <Divider/>
         <Modal
           visible={previewVisible}
           title={previewTitle}
@@ -115,7 +132,12 @@ class NewNewsfeedFormPost extends React.Component{
         >
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
-        <Button  type="primary" style={{ background: "#0069FF", float:'right'}} onClick={this.onFormSubmit}>Post</Button>
+        <div style={{marginTop:'25px'}}>
+          <i onClick = {this.conditionUploadBox} style={{fontSize:'20px', float:'left'}} class="fas fa-camera"></i>
+            <Button  type="primary" style={{ background: "#0069FF", float:'right'}} onClick={this.onFormSubmit}>Post</Button>
+
+        </div>
+
         {
           (this.state.cameraShow)?
 
@@ -133,7 +155,7 @@ class NewNewsfeedFormPost extends React.Component{
           :
           <div></div>
       }
-        <i onClick = {this.conditionUploadBox} style={{fontSize:'20px'}} class="fas fa-camera"></i>
+
     </div>
     );
     }

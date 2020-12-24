@@ -230,55 +230,22 @@ class NewsFeedView extends React.Component {
 
 
 
-{
-	this.state.postShow?
-
-	<div style={{marginTop:'50px'}}>
+	<div>
 
 		<Modal
 		visible = {this.state.postShow}
 		onCancel = {() => this.closeProfileEdit()}
 		footer = {null}
-		width={800}
-		bodyStyle={{padding:'100px'}}
+		width={825}
+		bodyStyle={{padding:'75px'}}
 		centered
 		>
-	<NewNewsfeedFormPost />
+	<NewNewsfeedFormPost profile = {this.props.currentProfile}/>
 	</Modal>
 	</div>
 
 
 
-	:
-
-				<div>
-
-				{
-					!this.state.picShow?
-					<div>
-
-
-
-					</div>
-
-
-				:
-
-				<div style={{marginTop:'100px'}}>
-
-
-				dsafsdfasfd
-
-
-				</div>
-
-
-				}
-
-				 </div>
-
-
-			 }
 
 
 
