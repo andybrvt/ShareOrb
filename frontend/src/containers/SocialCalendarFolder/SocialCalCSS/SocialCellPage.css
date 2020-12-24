@@ -82,6 +82,7 @@
 .singlePicHolder .singlePic .clipPicturesRoll .ownerHolder .ownerName{
   position: relative;
   left: 10%;
+  font-weight: 500;
 }
 
 .singlePicHolder .singlePic .clipPicturesRoll .polaroidHolder{
@@ -165,6 +166,7 @@
   bottom: 0px;
   height: 100%;
   width: 30%;
+
   /* width: 100%; */
   /* padding: 20px; */
 }
@@ -193,14 +195,16 @@
 
 .socialModalRight .socialNameTag .socialNameUsername{
     /* background-color: red; */
+    color:grey;
     position: relative;
     left: 5px;
     bottom: 5px;
-    font-weight: 500;
+    font-weight: 350;
 }
 
 .socialModalRight .socialNameTag .socialProfileImage {
   position: relative;
+  margin-right: 10px;
   /* top: 20%; */
 }
 
@@ -209,8 +213,11 @@
   position: relative;
   left: 0%;
   top: 0%;
-  font-size: 22px;
+  font-size: 20px;
   margin-left: 10px;
+  color:black;
+  font-weight: 500;
+  font-family: "Segoe UI Regular";
 }
 
 .socialListBox{
@@ -258,6 +265,8 @@
   width: 35%;
   top: 8px;
   height: 20px;
+  font-weight: 400;
+  color:black;
 }
 .socialLikeCommentNum .socialLikeAvatar{
   /* background-color: blue; */
@@ -653,6 +662,12 @@
 .clipPicBackground .clipPicturesRoll .ownerHolder .ownerName{
   position: relative;
   left: 10%;
+
+
+}
+
+.socialCalCellUsername{
+  font-weight: 700;
 }
 
 .picturesRoll .socialImages{

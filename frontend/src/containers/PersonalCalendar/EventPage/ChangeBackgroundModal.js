@@ -167,7 +167,7 @@ class ChangeBackgroundModal extends React.Component{
                   <img class="fitPhoto" src={imageUrl} alt="avatar" />
                   :
 
-                  <i style={{fontSize:'60px', marginTop:'130px'}} class="fas fa-upload uploadBox"></i>
+                  <i style={{fontSize:'80px', marginTop:'200px'}} class="fas fa-upload"></i>
                 }
               </div>
 

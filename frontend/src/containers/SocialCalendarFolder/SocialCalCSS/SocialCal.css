@@ -66,14 +66,12 @@
 
 .socialCalendar .days{
   width: 1700px;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: "Segoe UI Regular";
   color: ;
-  font-size: 20px;
-  padding: .75em 0;
-  /* border-top: 1px solid var(--border-color); */
+  font-size: 18px;
   border-bottom: 1px solid var(--border-color);
   /* background-color: red; */
-  /* width: 700px; */
 }
 
 
