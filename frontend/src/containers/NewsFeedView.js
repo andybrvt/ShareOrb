@@ -161,8 +161,6 @@ class NewsFeedView extends React.Component {
 
 
 
-
-
 					</Col>
 					</div>
 				</div>
