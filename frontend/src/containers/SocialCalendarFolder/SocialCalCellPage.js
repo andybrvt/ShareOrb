@@ -19,6 +19,7 @@ import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
 import DeleteSocialPostModal from './DeleteSocialPostModal';
+import AddDayCaptionModal from './AddDayCaptionModal';
 import { authAxios } from '../../components/util';
 
 
@@ -28,7 +29,8 @@ class SocialCalCellPage extends React.Component{
   state ={
     showDelete: false,
     curSocialPic: 0,
-    comment: ""
+    comment: "",
+    captionModal: false,
   }
 
   capitalize (str) {
@@ -364,6 +366,19 @@ class SocialCalCellPage extends React.Component{
     })
   }
 
+  openCaptionModal = () => {
+    // This function will open the caption modal
+    this.setState({
+      captionModal: true
+    })
+  }
+
+  closeCaptionModal = () => {
+    this.setState({
+      captionModal: false
+    })
+  }
+
   threeDotDropDown = () => {
 
     // This will hold the drop down for the pictures that incldues
@@ -407,11 +422,11 @@ class SocialCalCellPage extends React.Component{
       <div className = "cellThreeDots">
         <Dropdown overlay={
           <Menu>
-            <Menu.Item>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            <Menu.Item
+            onClick = {this.openCaptionModal}
+            >
                 <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
                 <span style={{marginLeft:'3px'}}> Write a caption</span>
-              </a>
             </Menu.Item>
             <Menu.Item>
               <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
@@ -728,6 +743,12 @@ class SocialCalCellPage extends React.Component{
            onClose = {this.closeDelete}
            onDeleteSubmit = {this.onDeleteSocialPost}
             />
+
+          <AddDayCaptionModal
+          visible = {this.state.captionModal}
+          onClose = {this.closeCaptionModal}
+          />
+
          </div>
     )
   }

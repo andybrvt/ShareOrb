@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal,  notification } from 'antd'
 import "./SocialCalCSS/SocialCellPage.css";
+
 class DeleteSocialPostModal extends React.Component{
 
 
