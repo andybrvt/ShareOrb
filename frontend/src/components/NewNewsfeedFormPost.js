@@ -108,16 +108,18 @@ class NewNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div className="eventCard" style={{width:'700px', height:'400px'}}>
+      <div class="eventCard" style={{width:'800px', height:'500px'}}>
         <Avatar
           style={{ top:'5%'}}
           size = {100} shape = 'circle'
           src = {profilePic} />
         <TextArea
-          style={{fontSize:'18px', marginTop:'50px'}}
+          style={{ marginTop:'25px'}}
           rows = {2}
+          allowClear
           maxLength={150}
           bordered={false}
+          showCount
           type = 'text'
           placeholder="Write a Post"
           name = 'caption'
@@ -132,16 +134,7 @@ class NewNewsfeedFormPost extends React.Component{
         >
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
-        <div style={{marginTop:'25px'}}>
-          <i onClick = {this.conditionUploadBox} style={{fontSize:'20px', float:'left'}} class="fas fa-camera"></i>
-            <Button  type="primary" style={{ background: "#0069FF", float:'right'}} onClick={this.onFormSubmit}>Post</Button>
-
-        </div>
-
-        {
-          (this.state.cameraShow)?
-
-          <Upload
+        <Upload
             // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             listType="picture-card"
             fileList={fileList}
@@ -152,9 +145,12 @@ class NewNewsfeedFormPost extends React.Component{
           >
             {fileList.length >= 8 ? null : uploadButton}
           </Upload>
-          :
-          <div></div>
-      }
+
+          <div style={{marginTop:'25px'}}>
+            <i onClick = {this.conditionUploadBox} style={{fontSize:'20px', float:'left'}} class="fas fa-camera"></i>
+              <Button  type="primary" style={{ background: "#0069FF", float:'right'}} onClick={this.onFormSubmit}>Post</Button>
+
+          </div>
 
     </div>
     );
