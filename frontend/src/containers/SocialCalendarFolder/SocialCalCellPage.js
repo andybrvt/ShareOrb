@@ -506,7 +506,7 @@ class SocialCalCellPage extends React.Component{
     }
 
 
-    console.log(socialCalItems)
+    console.log(dayCaption === "")
     return(
 
          <div className = "socialCalCellModal">
@@ -680,7 +680,7 @@ class SocialCalCellPage extends React.Component{
 
              </div>
 
-             <div className = {`commentEventHolder ${dayCaption === "" ? "" : "hasCaption"}`}>
+             <div className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
                <SocialComments
                currentDate = {curDate}
                curUser = {this.props.curId}
