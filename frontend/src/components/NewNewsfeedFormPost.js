@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, Modal, Input, Avatar, Button, Divider } from 'antd';
+import { Upload, Modal, Input, Avatar, Button, Divider, Switch } from 'antd';
 import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
@@ -45,6 +45,10 @@ class NewNewsfeedFormPost extends React.Component{
       this.setState({
         cameraShow:true,
         });
+    }
+
+    onChange=()=>{
+      console.log("Hi")
     }
 
     handleChange = ({ fileList }) => this.setState({ fileList });
@@ -94,8 +98,14 @@ class NewNewsfeedFormPost extends React.Component{
     }
 
     render(){
+      let firstName = ''
+      let lastName = ''
       let profilePic = ''
-      if (this.props.profilePic){
+      if (this.props.firstName){
+        firstName = this.props.firstName
+      } if (this.props.lastName){
+        lastName = this.props.lastName
+      } if (this.props.profilePic){
         profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
       }
       console.log(this.state)
@@ -108,16 +118,28 @@ class NewNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div class="eventCard" style={{width:'800px', height:'500px'}}>
-        <Avatar
-          style={{ top:'5%'}}
-          size = {100} shape = 'circle'
-          src = {profilePic} />
+      <div class="eventCard" style={{width:'800px', height:'500px', padding:'25px'}}>
+        <div style={{marginTop:'10px', marginLeft:'20px', height:'125px'}} class="outerContainerPeople">
+          <div class="innerContainerPeople">
+            <Avatar
+              style={{ top:'5%'}}
+              size = {100} shape = 'circle'
+              src = {profilePic} >
+
+            </Avatar>
+            <span style={{marginLeft:"20px", fontSize:'20px'}}>
+              {firstName+" "+lastName}
+            </span>
+              <Switch defaultChecked style={{float:'right', marginRight:'50px', marginRight:'25px'}} onChange={this.onChange} />
+              <br/><span style={{float:'right'}}>Clip to Social Calendar</span>
+        </div>
+        </div>
+        <Divider style={{marginTop:'0px'}}/>
         <TextArea
-          style={{ marginTop:'25px'}}
-          rows = {2}
+          rows = {3}
           allowClear
-          maxLength={150}
+          size="large"
+          maxLength={300}
           bordered={false}
           showCount
           type = 'text'
@@ -125,7 +147,7 @@ class NewNewsfeedFormPost extends React.Component{
           name = 'caption'
           onChange = {this.handleCaptionChange}
           value = {this.state.caption} />
-        <Divider/>
+        <Divider style={{top:'-10px'}}/>
         <Modal
           visible={previewVisible}
           title={previewTitle}
@@ -146,10 +168,10 @@ class NewNewsfeedFormPost extends React.Component{
             {fileList.length >= 8 ? null : uploadButton}
           </Upload>
 
-          <div style={{marginTop:'25px'}}>
-            <i onClick = {this.conditionUploadBox} style={{fontSize:'20px', float:'left'}} class="fas fa-camera"></i>
-              <Button  type="primary" style={{ background: "#0069FF", float:'right'}} onClick={this.onFormSubmit}>Post</Button>
+          <div>
 
+              <Button style={{fontSize:'24px'}} shape="round" type="primary"
+                style={{float:'right'}} onClick={this.onFormSubmit}>Post</Button>
           </div>
 
     </div>
@@ -160,6 +182,9 @@ class NewNewsfeedFormPost extends React.Component{
 const mapStateToProps = state => {
 
   return {
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName,
+    profilePic: state.auth.profilePic,
     curUserId: state.auth.id
   }
 }
