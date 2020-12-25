@@ -8,7 +8,9 @@ import {
   Dropdown,
   Divider,
   Menu,
-  notification
+  notification,
+  Form,
+  Input
  } from 'antd';
 import Liking from'../NewsfeedItems/Liking.js';
 import SocialComments from './SocialComments';
@@ -17,6 +19,7 @@ import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
 import DeleteSocialPostModal from './DeleteSocialPostModal';
+import AddDayCaptionModal from './AddDayCaptionModal';
 import { authAxios } from '../../components/util';
 
 
@@ -26,6 +29,8 @@ class SocialCalCellPage extends React.Component{
   state ={
     showDelete: false,
     curSocialPic: 0,
+    comment: "",
+    captionModal: false,
   }
 
   capitalize (str) {
@@ -111,6 +116,26 @@ class SocialCalCellPage extends React.Component{
   componentWillUnmount(){
     SocialCalCellPageWebSocketInstance.disconnect();
     this.props.closeSocialCalCellPage();
+  }
+
+  onCommentChange = e =>{
+    // This will be in charge of the onchange comments
+
+    this.setState({
+      comment: e.target.value
+    })
+  }
+
+  handleCommentSubmit = (curDate, calOwner) => {
+    if(this.state.comment !== ""){
+      SocialCalCellPageWebSocketInstance.sendSocialCalCellComment(
+        curDate,
+        this.props.curId,
+        this.state.comment,
+        calOwner
+      )
+      this.setState({comment: ""})
+    }
   }
 
 
@@ -341,6 +366,19 @@ class SocialCalCellPage extends React.Component{
     })
   }
 
+  openCaptionModal = () => {
+    // This function will open the caption modal
+    this.setState({
+      captionModal: true
+    })
+  }
+
+  closeCaptionModal = () => {
+    this.setState({
+      captionModal: false
+    })
+  }
+
   threeDotDropDown = () => {
 
     // This will hold the drop down for the pictures that incldues
@@ -384,11 +422,11 @@ class SocialCalCellPage extends React.Component{
       <div className = "cellThreeDots">
         <Dropdown overlay={
           <Menu>
-            <Menu.Item>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-bookmark"></i>
-                <span style={{marginLeft:'3px'}}> Save this post</span>
-              </a>
+            <Menu.Item
+            onClick = {this.openCaptionModal}
+            >
+                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
+                <span style={{marginLeft:'3px'}}> Write a caption</span>
             </Menu.Item>
             <Menu.Item>
               <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
@@ -436,7 +474,7 @@ class SocialCalCellPage extends React.Component{
     let socialUser = {}
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
-
+    let dayCaption = ""
 
     if(this.props.socialCalCellInfo){
       if(this.props.socialCalCellInfo.get_socialCalItems){
@@ -469,6 +507,11 @@ class SocialCalCellPage extends React.Component{
         socialCalLastName = this.props.socialCalCellInfo.socialCalUser.last_name
       }
 
+      if(this.props.socialCalCellInfo.dayCaption){
+        dayCaption = this.props.socialCalCellInfo.dayCaption
+      }
+
+
     }
 
     if (people_like.length > 0){
@@ -478,7 +521,7 @@ class SocialCalCellPage extends React.Component{
     }
 
 
-    console.log(socialCalItems)
+    console.log(dayCaption === "")
     return(
 
          <div className = "socialCalCellModal">
@@ -558,9 +601,17 @@ class SocialCalCellPage extends React.Component{
                <div className = 'socialName'>{this.getPageName(socialUser)} </div>
                <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
              </div>
+
              {this.dateView(socialCalDate)}
              {this.cellThreeDots()}
+
              </div>
+
+             <div className = "dayCaption">
+
+            </div>
+
+
              <div className = 'socialLikeCommentNum'>
                {
                  peopleLikeId.includes(this.props.curId) ?
@@ -643,21 +694,46 @@ class SocialCalCellPage extends React.Component{
 
 
              </div>
+
+             <div className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
                <SocialComments
-               // commentChange = {this.handleCommentChange}
-               // commentSubmit = {this.handleSubmit}
-               // commentValue = {this.state.comment}
                currentDate = {curDate}
                curUser = {this.props.curId}
                owner = {socialCalUserId}
                items = {socialCalComments}
-               profilePic = {this.props.curProfilePic}/>
+               />
+               <div className = 'socialCommentInput'>
+                 <Avatar
+                 size = {40}
+                 className ='socialPicInput'
+                 src = {'http://127.0.0.1:8000'+ this.props.curProfilePic}/>
+                 <Form className = "socialInputForm">
+                   <Input
+                   className= 'socialBoxInput'
+                   onChange ={this.onCommentChange}
+                   value = {this.state.comment}
+                   // bordered = {false}
+                   placeholder = 'Write a comment'
+                   name = 'socialComment'
+                   onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
+                   // rows = {1}
+                    />
+
+                   <button
+                   // type = 'submit'
+                   // onClick = {this.handleSubmit}
+                   style = {{display: 'none'}}
+                   />
+                 </Form>
+               </div>
                <SocialEventList
                history = {this.props.history}
                curId = {this.props.curId}
                socialCalCellId = {socialCalCellId}
                cellDate = {socialCalDate}
                items = {socialCalEvents}/>
+              </div>
+
 
              </div>
            </div>
@@ -667,6 +743,12 @@ class SocialCalCellPage extends React.Component{
            onClose = {this.closeDelete}
            onDeleteSubmit = {this.onDeleteSocialPost}
             />
+
+          <AddDayCaptionModal
+          visible = {this.state.captionModal}
+          onClose = {this.closeCaptionModal}
+          />
+
          </div>
     )
   }

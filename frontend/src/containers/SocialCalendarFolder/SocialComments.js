@@ -20,28 +20,22 @@ class SocialComments extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  handleSubmit = e => {
-    console.log('comment submit')
-    console.log(this.state.comment)
-    if (this.state.comment !== ''){
-      SocialCalCellPageWebSocketInstance.sendSocialCalCellComment(
-        this.props.currentDate,
-        this.props.curUser,
-        this.state.comment,
-        this.props.owner
-      )
-      this.setState({comment: ''})
-    }
+  // handleSubmit = e => {
+  //   console.log('comment submit')
+  //   console.log(this.state.comment)
+  //   if (this.state.comment !== ''){
+  //     SocialCalCellPageWebSocketInstance.sendSocialCalCellComment(
+  //       this.props.currentDate,
+  //       this.props.curUser,
+  //       this.state.comment,
+  //       this.props.owner
+  //     )
+  //     this.setState({comment: ''})
+  //   }
+  //
+  // }
 
-  }
 
-  handleChange = e =>{
-    console.log(e.target.value)
-    this.setState({
-      comment: e.target.value
-    })
-
-  }
 
   componentWillReceiveProps = (newProps) => {
     console.log(newProps)
@@ -106,30 +100,33 @@ class SocialComments extends React.Component{
             </div>
         )}
       />
-      <div className = 'socialCommentInput'>
-        <Avatar
-        size = {40}
-        className ='socialPicInput'
-        src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
-        <Form className = "socialInputForm">
-          <Input
-          className= 'socialBoxInput'
-          onChange ={this.handleChange}
-          value = {this.state.comment}
-          // bordered = {false}
-          placeholder = 'Write a comment'
-          name = 'socialComment'
-          onPressEnter = {this.handleSubmit}
-          // rows = {1}
-           />
+      {/*
+        <div className = 'socialCommentInput'>
+          <Avatar
+          size = {40}
+          className ='socialPicInput'
+          src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
+          <Form className = "socialInputForm">
+            <Input
+            className= 'socialBoxInput'
+            onChange ={this.handleChange}
+            value = {this.state.comment}
+            // bordered = {false}
+            placeholder = 'Write a comment'
+            name = 'socialComment'
+            onPressEnter = {this.handleSubmit}
+            // rows = {1}
+             />
 
-          <button
-          // type = 'submit'
-          // onClick = {this.handleSubmit}
-          style = {{display: 'none'}}
-          />
-        </Form>
-      </div>
+            <button
+            // type = 'submit'
+            // onClick = {this.handleSubmit}
+            style = {{display: 'none'}}
+            />
+          </Form>
+        </div>
+        */}
+
       </div>
 
     </div>
