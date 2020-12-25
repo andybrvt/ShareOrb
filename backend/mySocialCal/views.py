@@ -114,12 +114,12 @@ class SocialClippingView(APIView):
             socialItemType = "clip",
             creator = postOwner,
             itemUser = user,
-            itemImage = request.data['clipPic'],
+            itemImage = request.data['clipPic'].lstrip("/media"),
             calCell = socialCalCell
         )
 
         if socialCalCell.coverPic == '':
-            socialCalCell.coverPic = request.data['clipPic']
+            socialCalCell.coverPic = request.data['clipPic'].lstrip("/media")
 
         # Now you have create it and add in the cover pic
         socialCalCell.save()

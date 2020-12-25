@@ -210,32 +210,57 @@ class SocialCalCellPage extends React.Component{
     // This function will be used to clipp the current photo in the carousel
     // to their calendar and current day in the social calendar
 
+
+
+
     let curPic = ""
     let postOwnerId = ""
     let curId = ""
 
     const picIndex = this.state.curSocialPic
     if(this.props.socialCalCellInfo){
-      if(this.prop.socialCalCellInfo.get_socialCalItems){
-        const calItem = this.prop.socialCalCellInfo.get_socialCalItems[picIndex]
-        curPic = calItem.itemImage
-        postOwnerId = calItem.creator.id
+
+      if(this.props.socialCalCellInfo.get_socialCalItems){
+
+        if(this.props.socialCalCellInfo.get_socialCalItems[picIndex]){
+          // This checks if there is actuall a picture present
+
+          const calItem = this.props.socialCalCellInfo.get_socialCalItems[picIndex]
+          curPic = calItem.itemImage
+          postOwnerId = calItem.creator.id
+
+          if(this.props.curId){
+            curId = this.props.curId
+          }
+
+          // Now you just do an auth axios call bc you are not on your own calendar so
+          // you dont have to worry about websocket
+          authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping", {
+            clipPic: curPic,
+            postOwnerId: postOwnerId,
+            curId: curId
+          })
+
+          this.openNotification("bottomRight")
+
+
+
+        } else {
+          // This is if there is no pictures but there is a social cell present
+          this.fullOpenNotification("bottomRight")
+
+        }
+
+
+
+      } else {
+        // This is for when there is no socialcalcell
+        this.fullOpenNotification("bottomRight")
       }
     }
-  if(this.props.curId){
-    curId = this.props.curId
-  }
 
-  // Now you just do an auth axios call bc you are not on your own calendar so
-  // you dont have to worry about websocket
 
-  authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping", {
-    clipPic: curPic,
-    postOwnerId: postOwnerId,
-    curId: curId
-  })
 
-  this.openNotification("bottomRight")
 
 
   }
@@ -248,6 +273,17 @@ class SocialCalCellPage extends React.Component{
     message: `Photo Clipped!`,
     description:
       'A photo has been clipped to your calendar on '+today+'.',
+    placement,
+  });
+  };
+
+  fullOpenNotification = placement => {
+
+
+  notification.info({
+    message: `No Photos`,
+    description:
+      'There are no photos to clip.',
     placement,
   });
   };
@@ -558,7 +594,9 @@ class SocialCalCellPage extends React.Component{
 
                   :
 
-                  <div className  = 'socialComment'>
+                  <div
+                  onClick = {() => this.onClipCurPhoto()}
+                  className  = 'socialComment'>
                     <span
                     style={{ marginRight:'10px'}}
                     class="fa fa-archive"></span>
