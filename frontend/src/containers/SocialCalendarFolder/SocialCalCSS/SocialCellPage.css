@@ -185,11 +185,18 @@
   text-align: center;
   color:black;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   position:relative;
   width: 40%;
-  top: 5%;
-  left: 20%;
+  top: 7px;
+  left: 15%;
+}
+
+.socialModalRight .socialNameTag .cellThreeDots{
+  /* background-color: red; */
+  position: relative;
+  left: 16%;
+  bottom: 30%;
 }
 
 
@@ -211,6 +218,7 @@
 .socialModalRight .socialNameTag .socialName {
   /* background-color: red; */
   position: relative;
+  width: 100%;
   left: 0%;
   top: 0%;
   font-size: 20px;

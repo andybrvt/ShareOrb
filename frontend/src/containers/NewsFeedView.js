@@ -156,9 +156,8 @@ class NewsFeedView extends React.Component {
 
 
 					<ProfileCardNewsFeed
-						profile = {this.props.currentProfile} />
-
-
+						profile = {this.props.currentProfile}
+						 />
 
 
 
@@ -244,14 +243,6 @@ class NewsFeedView extends React.Component {
 	<NewNewsfeedFormPost profile = {this.props.currentProfile}/>
 	</Modal>
 	</div>
-
-
-
-
-
-
-
-
 
 
 							 <div>
