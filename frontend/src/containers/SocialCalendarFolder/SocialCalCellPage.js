@@ -28,6 +28,7 @@ class SocialCalCellPage extends React.Component{
   state ={
     showDelete: false,
     curSocialPic: 0,
+    comment: ""
   }
 
   capitalize (str) {
@@ -113,6 +114,26 @@ class SocialCalCellPage extends React.Component{
   componentWillUnmount(){
     SocialCalCellPageWebSocketInstance.disconnect();
     this.props.closeSocialCalCellPage();
+  }
+
+  onCommentChange = e =>{
+    // This will be in charge of the onchange comments
+
+    this.setState({
+      comment: e.target.value
+    })
+  }
+
+  handleCommentSubmit = (curDate, calOwner) => {
+    if(this.state.comment !== ""){
+      SocialCalCellPageWebSocketInstance.sendSocialCalCellComment(
+        curDate,
+        this.props.curId,
+        this.state.comment,
+        calOwner
+      )
+      this.setState({comment: ""})
+    }
   }
 
 
@@ -661,28 +682,25 @@ class SocialCalCellPage extends React.Component{
 
              <div className = {`commentEventHolder ${dayCaption === "" ? "" : "hasCaption"}`}>
                <SocialComments
-               // commentChange = {this.handleCommentChange}
-               // commentSubmit = {this.handleSubmit}
-               // commentValue = {this.state.comment}
                currentDate = {curDate}
                curUser = {this.props.curId}
                owner = {socialCalUserId}
                items = {socialCalComments}
-               profilePic = {this.props.curProfilePic}/>
+               />
                <div className = 'socialCommentInput'>
                  <Avatar
                  size = {40}
                  className ='socialPicInput'
-                 src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
+                 src = {'http://127.0.0.1:8000'+ this.props.curProfilePic}/>
                  <Form className = "socialInputForm">
                    <Input
                    className= 'socialBoxInput'
-                   onChange ={this.handleChange}
+                   onChange ={this.onCommentChange}
                    value = {this.state.comment}
                    // bordered = {false}
                    placeholder = 'Write a comment'
                    name = 'socialComment'
-                   onPressEnter = {this.handleSubmit}
+                   onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
                    // rows = {1}
                     />
 
