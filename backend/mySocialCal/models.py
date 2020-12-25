@@ -76,6 +76,10 @@ class SocialCalCell(models.Model):
     # This will cover the like of the day
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'socialLiker', blank = True)
 
+    # This field will be for the caption on the day modal
+    dayCaption = models.TextField(blank = True)
+
+
     def get_socialCalItems(self):
         #This will call all the social cal events like pictures and post and such and will return a list of all the ids
         # which then I will go into the serializers and do to representation to return all the needed values

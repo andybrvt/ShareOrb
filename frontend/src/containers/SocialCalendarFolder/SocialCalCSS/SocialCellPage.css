@@ -166,9 +166,17 @@
   bottom: 0px;
   height: 100%;
   width: 30%;
+  display: flex;
+  flex-direction: column;
+
 
   /* width: 100%; */
   /* padding: 20px; */
+}
+
+.socialModalRight .dayCaption{
+  /* background-color: red; */
+  padding: 5px;
 }
 
 .socialModalRight .socialNameTag {
@@ -228,18 +236,22 @@
   font-family: "Segoe UI Regular";
 }
 
-.socialListBox{
+
+
+.commentEventHolder .socialListBox{
   /* background-color: red; */
   padding: 15px;
-  margin-top: 50px;
+  margin-top: 0px;
   border: 1px solid gainsboro;
-  height: 25.5%;
+  /* height: 25.5%; */
+  max-height: 25.5%;
   width: 100%;
   overflow: auto;
-
+  position:relative;
+  /* bottom: 3%; */
 }
 
-.socialListBox .socialListItem{
+.commentEventHolder .socialListBox .socialListItem{
   /* background-color: red; */
   margin: 3px;
   padding-left: 15px;
@@ -364,13 +376,32 @@
   font-size:  25px;
 }
 
-.socialCommentBoxBox{
-  height: 51.5%;
+.commentEventHolder{
+  /* position: sticky; */
+  position: relative;
+  height: 99%;
+  width: 100%;
+  /* float: bottom; */
+  bottom: 0%;
+  /* top: 81%; */
+  /* transform: translateY(-100%); */
+  /* display: flex; */
+  /* padding-top: 10px; */
+}
+.commentEventHolder.hasCaption{
+  height: 81%;
+}
+
+.commentEventHolder .socialCommentBoxBox{
+  position: relative;
+  height: 80%;
+  max-height: 55%;
   width: 100%;
   overflow:hidden;
+  /* display: flex; */
   /* background-color: red; */
 }
-.socialCommentBox {
+.commentEventHolder .socialCommentBoxBox .socialCommentBox {
   /* background-color: blue  ; */
   height: 100%;
   width: 100%;
@@ -378,22 +409,23 @@
   overflow:auto;
   /* width: 50%; */
 }
-.socialCommentBox .socialCommentItem {
+.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem {
   /* background-color: red; */
 
   margin-top: 10px;
   padding: 5px;
 }
-.socialCommentBox .socialCommentInput{
+.commentEventHolder .socialCommentInput{
   /* background-color: red; */
   display: flex;
-  position: absolute;
+  position: relative;
   left: 0%;
-  bottom: 26%;
-  margin-left: 3%;
+  bottom: 0%;
+  padding-left: 10px;
+  /* margin-left: 3%; */
   width: 100%;
 }
-.socialCommentBox .socialCommentInput .socialInputForm{
+.commentEventHolder .socialCommentInput .socialInputForm{
   width: 80%;
   position: relative;
 }
@@ -412,11 +444,11 @@
   padding-left: 10px;
   padding-bottom: 5px;
 }
-.socialCommentBox .socialCommentItem .socialCommentNameTag{
+.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag{
   /* background-color: red; */
   display: flex;
 }
-.socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
+.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
   display: flex;
   margin-left: 10px;
 }

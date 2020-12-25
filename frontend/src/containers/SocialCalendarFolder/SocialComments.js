@@ -106,30 +106,33 @@ class SocialComments extends React.Component{
             </div>
         )}
       />
-      <div className = 'socialCommentInput'>
-        <Avatar
-        size = {40}
-        className ='socialPicInput'
-        src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
-        <Form className = "socialInputForm">
-          <Input
-          className= 'socialBoxInput'
-          onChange ={this.handleChange}
-          value = {this.state.comment}
-          // bordered = {false}
-          placeholder = 'Write a comment'
-          name = 'socialComment'
-          onPressEnter = {this.handleSubmit}
-          // rows = {1}
-           />
+      {/*
+        <div className = 'socialCommentInput'>
+          <Avatar
+          size = {40}
+          className ='socialPicInput'
+          src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
+          <Form className = "socialInputForm">
+            <Input
+            className= 'socialBoxInput'
+            onChange ={this.handleChange}
+            value = {this.state.comment}
+            // bordered = {false}
+            placeholder = 'Write a comment'
+            name = 'socialComment'
+            onPressEnter = {this.handleSubmit}
+            // rows = {1}
+             />
 
-          <button
-          // type = 'submit'
-          // onClick = {this.handleSubmit}
-          style = {{display: 'none'}}
-          />
-        </Form>
-      </div>
+            <button
+            // type = 'submit'
+            // onClick = {this.handleSubmit}
+            style = {{display: 'none'}}
+            />
+          </Form>
+        </div>
+        */}
+
       </div>
 
     </div>

@@ -8,7 +8,9 @@ import {
   Dropdown,
   Divider,
   Menu,
-  notification
+  notification,
+  Form,
+  Input
  } from 'antd';
 import Liking from'../NewsfeedItems/Liking.js';
 import SocialComments from './SocialComments';
@@ -386,8 +388,8 @@ class SocialCalCellPage extends React.Component{
           <Menu>
             <Menu.Item>
               <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-bookmark"></i>
-                <span style={{marginLeft:'3px'}}> Save this post</span>
+                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
+                <span style={{marginLeft:'3px'}}> Write a caption</span>
               </a>
             </Menu.Item>
             <Menu.Item>
@@ -436,7 +438,7 @@ class SocialCalCellPage extends React.Component{
     let socialUser = {}
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
-
+    let dayCaption = ""
 
     if(this.props.socialCalCellInfo){
       if(this.props.socialCalCellInfo.get_socialCalItems){
@@ -468,6 +470,11 @@ class SocialCalCellPage extends React.Component{
         socialCalFirstName = this.props.socialCalCellInfo.socialCalUser.first_name
         socialCalLastName = this.props.socialCalCellInfo.socialCalUser.last_name
       }
+
+      if(this.props.socialCalCellInfo.dayCaption){
+        dayCaption = this.props.socialCalCellInfo.dayCaption
+      }
+
 
     }
 
@@ -558,9 +565,17 @@ class SocialCalCellPage extends React.Component{
                <div className = 'socialName'>{this.getPageName(socialUser)} </div>
                <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
              </div>
+
              {this.dateView(socialCalDate)}
              {this.cellThreeDots()}
+
              </div>
+
+             <div className = "dayCaption">
+
+            </div>
+
+
              <div className = 'socialLikeCommentNum'>
                {
                  peopleLikeId.includes(this.props.curId) ?
@@ -643,6 +658,8 @@ class SocialCalCellPage extends React.Component{
 
 
              </div>
+
+             <div className = {`commentEventHolder ${dayCaption === "" ? "" : "hasCaption"}`}>
                <SocialComments
                // commentChange = {this.handleCommentChange}
                // commentSubmit = {this.handleSubmit}
@@ -652,12 +669,38 @@ class SocialCalCellPage extends React.Component{
                owner = {socialCalUserId}
                items = {socialCalComments}
                profilePic = {this.props.curProfilePic}/>
+               <div className = 'socialCommentInput'>
+                 <Avatar
+                 size = {40}
+                 className ='socialPicInput'
+                 src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
+                 <Form className = "socialInputForm">
+                   <Input
+                   className= 'socialBoxInput'
+                   onChange ={this.handleChange}
+                   value = {this.state.comment}
+                   // bordered = {false}
+                   placeholder = 'Write a comment'
+                   name = 'socialComment'
+                   onPressEnter = {this.handleSubmit}
+                   // rows = {1}
+                    />
+
+                   <button
+                   // type = 'submit'
+                   // onClick = {this.handleSubmit}
+                   style = {{display: 'none'}}
+                   />
+                 </Form>
+               </div>
                <SocialEventList
                history = {this.props.history}
                curId = {this.props.curId}
                socialCalCellId = {socialCalCellId}
                cellDate = {socialCalDate}
                items = {socialCalEvents}/>
+              </div>
+
 
              </div>
            </div>

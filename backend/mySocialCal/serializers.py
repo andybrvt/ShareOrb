@@ -18,6 +18,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
          'socialCaldate',
          'people_like',
          'coverPic',
+         'dayCaption',
          'get_socialCalItems',
          'get_socialCalEvent',
          'get_socialCalComment')
