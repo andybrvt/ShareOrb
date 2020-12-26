@@ -67,17 +67,6 @@ const sendSocialCalCellComment = (state, action) => {
   })
 }
 
-const sendSocialCalCellComments = (state, action) =>{
-  // IMPROVED
-  // When the cell does not exist yet
-  return updateObject(state, {
-    socialCalCellInfo:{
-      ...state.socialCalCellInfo,
-      get_socialCalComment: action.socialCalCellCommentsObj
-    }
-  })
-}
-
 const deleteSocialCellItem =(state, action) => {
   // This is used to update the social cal cell item list after you have delete a
   // photo
@@ -178,8 +167,6 @@ const reducer = (state = initialState, action) => {
       return sendSocialCalCellLikeUnlike(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT:
       return sendSocialCalCellComment(state, action)
-    case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW:
-      return sendSocialCalCellComments(state, action)
     case actionTypes.CLOSE_SOCIAL_CAL_CELL_PAGE:
       return closeSocialCalCellPage(state, action)
     case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_M:
