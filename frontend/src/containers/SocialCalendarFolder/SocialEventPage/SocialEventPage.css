@@ -15,17 +15,17 @@
   background-color: white;
   display: flex;
   /* width: 1765px; */
-  width: 95%;
+  width: 1865px;
   /* padding: 30px; */
 
   /* To fix the issue with the whole page scrolling, just dont put height
   to 100% */
-  overflow: hidden;
-  height: 93%;
+  /* overflow: hidden; */
+  height: 91.5vh;
 
   position: absolute;
   left: 50%;
-  bottom: 5px;
+  /* bottom: 5px; */
   transform: translateX(-48%);
 }
 

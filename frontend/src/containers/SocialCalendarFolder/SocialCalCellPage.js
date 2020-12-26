@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
 import DeleteSocialPostModal from './DeleteSocialPostModal';
 import AddDayCaptionModal from './AddDayCaptionModal';
+import DeleteSocialCellModal from './DeleteSocialCellModal';
 import { authAxios } from '../../components/util';
 
 
@@ -28,6 +29,7 @@ class SocialCalCellPage extends React.Component{
 
   state ={
     showDelete: false,
+    showDeleteCell: false,
     curSocialPic: 0,
     comment: "",
     captionModal: false,
@@ -350,6 +352,29 @@ class SocialCalCellPage extends React.Component{
     console.log('delete post')
   }
 
+  onDeleteCellSubmit = () => {
+    // This function will be used for the submission to delete the social cal cell
+
+    // You pretty just have to send the social cal cell id into the backedn
+    // gotta take care of the content type tho as well.
+
+    const year = this.props.match.params.year
+    const month = this.props.match.params.month
+    const day = this.props.match.params.day
+    const cellDate = year+"-"+month+"-"+day
+
+    let socialCellId = ""
+
+    if(this.props.socialCalCellInfo){
+      socialCellId = this.props.socialCalCellInfo.id
+    }
+
+    const curId = this.props.curId
+
+    console.log(socialCellId)
+    // SocialCalCellPageWebSocketInstance.sendDeleteSocialCell(socialCellId, curId, cellDate)
+  }
+
   deleteSocialPost = () => {
     // This function will just open the modal that will delete the post
     console.log('delete social post')
@@ -376,6 +401,20 @@ class SocialCalCellPage extends React.Component{
   closeCaptionModal = () => {
     this.setState({
       captionModal: false
+    })
+  }
+
+  openDeleteCellModal = () => {
+    // open the delete cell modal
+    this.setState({
+      showDeleteCell: true
+    })
+  }
+
+  closeDeleteCellModal = () => {
+    // close the delete cell modal
+    this.setState({
+      showDeleteCell: false
     })
   }
 
@@ -434,9 +473,11 @@ class SocialCalCellPage extends React.Component{
                 <span style={{marginLeft:'5px'}}>Hide this post</span>
               </a>
             </Menu.Item>
-            <Menu.Item danger >
+            <Menu.Item danger
+            onClick = {this.openDeleteCellModal}
+             >
               <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-              <span style={{marginLeft:'10px'}}>Delete post</span>
+              <span style={{marginLeft:'10px'}}>Delete day</span>
             </Menu.Item>
           </Menu>
         }>
@@ -759,6 +800,12 @@ class SocialCalCellPage extends React.Component{
           curDate = {curDate}
           curId = {this.props.curId}
           />
+
+          <DeleteSocialCellModal
+          visible = {this.state.showDeleteCell}
+          onClose = {this.closeDeleteCellModal}
+          onDeleteSubmit = {this.onDeleteCellSubmit}
+           />
 
          </div>
     )

@@ -170,6 +170,23 @@ class WebSocketSocialCalCellPage{
     })
   }
 
+  sendDeleteSocialCell(socialCellId, curId, cellDate){
+    // This function will be send a request into the backend inorder to delete the
+    // whole day cell object. Teh social cell id will be used to get the social
+    // cal cell day. the curid and cell date be used to send it to the right
+    // websocket.
+
+    // Remember you have to check teh content type and somehow delete it too
+
+    this.sendSocialCalCellInfo({
+      command: "delete_social_cell_day",
+      socialCellId: socialCellId,
+      curId: curId,
+      cellDate: cellDate
+    })
+
+  }
+
   socketNewSocialCalCell(data){
     //This is to process all the command in the backend and tell them where to
     // go

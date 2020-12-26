@@ -51,19 +51,22 @@ class AddDayCaptionModal extends React.Component{
 
         <TextArea
         onChange = {this.onTextChange}
-        showCount 
+        showCount
         maxLength = {300}
 
          />
 
-         <div
-         className = ""
-         onClick = {this.props.onClose}
-         > Cancel </div>
-         <div
-         onClick = {() =>this.onCaptionSubmit()}
-         className = ""
-         > Save </div>
+         <div className = "buttons">
+           <div
+           className = "cancelDelete"
+           onClick = {this.props.onClose}
+           > Cancel </div>
+           <div
+           onClick = {() =>this.onCaptionSubmit()}
+           className = "acceptDelete"
+           > Save </div>
+         </div>
+
         </Modal>
     )
   }
