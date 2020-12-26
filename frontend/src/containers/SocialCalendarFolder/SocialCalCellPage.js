@@ -603,7 +603,16 @@ class SocialCalCellPage extends React.Component{
              </div>
 
              {this.dateView(socialCalDate)}
-             {this.cellThreeDots()}
+
+
+             { socialCalUserId === this.props.curId ?
+               this.cellThreeDots()
+
+               :
+
+               <div> </div>
+
+             }
 
              </div>
 
