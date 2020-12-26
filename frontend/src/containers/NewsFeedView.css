@@ -25,6 +25,11 @@ width: 100%;
 
 }
 
+.postModalMain{
+  max-height: 575px;
+}
+
+
 .cardAlign{
   position: absolute;
 

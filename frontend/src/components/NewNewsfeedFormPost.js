@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, Modal, Input, Avatar, Button, Divider, Switch } from 'antd';
+import { Upload, Modal, Input, Avatar, Button, Divider, Switch, Alert, message } from 'antd';
 import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
@@ -15,6 +15,17 @@ function getBase64(file) {
   });
 }
 
+function beforeUpload(file) {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('You can only upload JPG/PNG file!');
+  }
+
+  return file.type === 'image/png';
+}
+
+
+
 class NewNewsfeedFormPost extends React.Component{
 
     state = {
@@ -24,6 +35,7 @@ class NewNewsfeedFormPost extends React.Component{
       fileList :[],
       caption: '',
       cameraShow:false,
+      socialClip:false,
     }
 
     handleCancel = () => this.setState({ previewVisible: false });
@@ -48,7 +60,9 @@ class NewNewsfeedFormPost extends React.Component{
     }
 
     onChange=()=>{
-      console.log("Hi")
+      this.setState({
+        socialClip:!this.state.socialClip,
+      });
     }
 
     handleChange = ({ fileList }) => this.setState({ fileList });
@@ -61,6 +75,11 @@ class NewNewsfeedFormPost extends React.Component{
 
     onFormSubmit= () => {
       console.log(this.state)
+
+      if(this.state.fileList.length == 0){
+         message.error('No Image Attatched!');
+         return;
+      }
 
 
       if(this.state.caption !== '' || this.state.fileList.length !== 0){
@@ -118,7 +137,7 @@ class NewNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div class="eventCard" style={{width:'800px', height:'500px', padding:'25px'}}>
+      <div class="eventCard postModalMain" style={{width:'800px', padding:'25px'}}>
         <div style={{marginTop:'10px', marginLeft:'20px', height:'125px'}} class="outerContainerPeople">
           <div class="innerContainerPeople">
             <Avatar
@@ -130,24 +149,55 @@ class NewNewsfeedFormPost extends React.Component{
             <span style={{marginLeft:"20px", fontSize:'20px'}}>
               {firstName+" "+lastName}
             </span>
-              <Switch defaultChecked style={{float:'right', marginRight:'50px', marginRight:'25px'}} onChange={this.onChange} />
-              <br/><span style={{float:'right'}}>Clip to Social Calendar</span>
+
+              <Switch style={{float:'right', marginRight:'50px', marginRight:'25px'}} onChange={this.onChange} />
+              {
+                (this.state.socialClip)?
+
+                  <span style={{float:'right', marginRight:'25px'}}>
+                    <Alert
+                      message="Toggle Social Clip On"
+                      description="Directly clip images to your social calendar"
+                      type="info"
+                      showIcon
+                    />
+                  </span>
+                :
+                <span style={{float:'right', marginRight:'25px'}}>
+                  <Alert
+                    message="Post on NewsFeed"
+                    description="Post your photos and caption on your newsfeed"
+                    type="info"
+                    showIcon
+                  />
+                </span>
+              }
         </div>
         </div>
-        <Divider style={{marginTop:'0px'}}/>
-        <TextArea
-          rows = {3}
-          allowClear
-          size="large"
-          maxLength={300}
-          bordered={false}
-          showCount
-          type = 'text'
-          placeholder="Write a Post"
-          name = 'caption'
-          onChange = {this.handleCaptionChange}
-          value = {this.state.caption} />
-        <Divider style={{top:'-10px'}}/>
+        <Divider />
+          {
+            (!this.state.socialClip)?
+            <div>
+
+              <TextArea
+                rows = {3}
+                allowClear
+                size="large"
+                maxLength={300}
+                bordered={false}
+                showCount
+                type = 'text'
+                placeholder="Write a Post"
+                name = 'caption'
+                onChange = {this.handleCaptionChange}
+                value = {this.state.caption} />
+              <Divider style={{top:'-10px'}}/>
+              </div>
+            :
+
+            <div style={{marginTop:'25px'}}></div>
+          }
+
         <Modal
           visible={previewVisible}
           title={previewTitle}
@@ -160,9 +210,10 @@ class NewNewsfeedFormPost extends React.Component{
             // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             listType="picture-card"
             fileList={fileList}
+            beforeUpload={beforeUpload}
             onPreview={this.handlePreview}
             onChange={this.handleChange}
-            beforeUpload  = {() => false} // prevents it from uploading right away
+
             name = 'image'
           >
             {fileList.length >= 8 ? null : uploadButton}
@@ -170,8 +221,9 @@ class NewNewsfeedFormPost extends React.Component{
 
           <div>
 
-              <Button style={{fontSize:'24px'}} shape="round" type="primary"
-                style={{float:'right'}} onClick={this.onFormSubmit}>Post</Button>
+              <Button style={{fontSize:'24px', }} shape="round" type="primary"
+                style={{float:'right', marginTop:'25px', marginRight:'25px'}}
+                onClick={this.onFormSubmit}>Post</Button>
           </div>
 
     </div>
