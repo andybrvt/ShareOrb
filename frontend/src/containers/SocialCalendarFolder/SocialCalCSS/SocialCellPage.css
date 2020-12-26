@@ -176,7 +176,9 @@
 
 .socialModalRight .dayCaption{
   /* background-color: red; */
-  padding: 5px;
+  position: relative;
+  padding-left: 5%;
+  /* height: 12.5%; */
 }
 
 .socialModalRight .socialNameTag {

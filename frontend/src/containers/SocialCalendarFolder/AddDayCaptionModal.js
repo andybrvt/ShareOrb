@@ -28,6 +28,8 @@ class AddDayCaptionModal extends React.Component{
         this.props.curId,
         this.state.caption
       )
+
+      this.props.onClose()
     }
 
   }
@@ -49,6 +51,9 @@ class AddDayCaptionModal extends React.Component{
 
         <TextArea
         onChange = {this.onTextChange}
+        showCount 
+        maxLength = {300}
+
          />
 
          <div
