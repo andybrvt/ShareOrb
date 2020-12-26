@@ -366,13 +366,40 @@ class SocialCalCellPage extends React.Component{
     let socialCellId = ""
 
     if(this.props.socialCalCellInfo){
-      socialCellId = this.props.socialCalCellInfo.id
+      if(this.props.socialCalCellInfo.id){
+        // This will check if the social cal cell exist
+        socialCellId = this.props.socialCalCellInfo.id
+
+        const curId = this.props.curId
+
+        console.log(socialCellId)
+        SocialCalCellPageWebSocketInstance.sendDeleteSocialCell(socialCellId, curId, cellDate)
+
+        this.openDeleteCellNotification("bottomRight")
+
+      } else {
+        this.openNoCellNotification("bottomRight")
+      }
     }
 
-    const curId = this.props.curId
+    }
 
-    console.log(socialCellId)
-    // SocialCalCellPageWebSocketInstance.sendDeleteSocialCell(socialCellId, curId, cellDate)
+  openDeleteCellNotification = placement => {
+  notification.info({
+    message: `Day deleted`,
+    description:
+      'Day cell has been deleted',
+    placement,
+  });
+};
+
+  openNoCellNotification = placement => {
+    notification.info({
+      message: `No info on day`,
+      description:
+        'There is information to delete',
+      placement,
+    });
   }
 
   deleteSocialPost = () => {

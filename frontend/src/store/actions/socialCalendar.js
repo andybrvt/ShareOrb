@@ -40,15 +40,6 @@ export const sendSocialCalCellComment = (socialCalCellCommentObj) => {
   }
 }
 
-export const sendSocialCalCellComments = (socialCalCellCommentsObj) => {
-  //IMPROVED
-  // Send comments when there is no cell existing
-  return {
-    type: actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_NEW,
-    socialCalCellCommentsObj: socialCalCellCommentsObj
-  }
-}
-
 export const deleteSocialCellItem = (socialItemList) => {
   // This is used to update the socialcell items list after you have
   // deleted on of the photos
