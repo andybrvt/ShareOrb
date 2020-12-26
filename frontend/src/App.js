@@ -98,7 +98,8 @@ class App extends Component {
       this.props.sendSocialCalCellComment.bind(this),
       this.props.sendSocialCalCellComments.bind(this),
       this.props.addSocialEventJoinLeaveM.bind(this),
-      this.props.deleteSocialCellItem.bind(this)
+      this.props.deleteSocialCellItem.bind(this),
+      this.props.addSocialDayCaption.bind(this)
     )
 
     UserPostPageWebSocketInstance.addCallbacks(
@@ -259,7 +260,8 @@ const mapDispatchToProps = dispatch => {
     sendSocialCalCellComment: (socialCalCellCommentObj) => dispatch(socialActions.sendSocialCalCellComment(socialCalCellCommentObj)),
     sendSocialCalCellComments: (socialCalCellCommentsObj) => dispatch(socialActions.sendSocialCalCellComments(socialCalCellCommentsObj)),
     deleteSocialCellItem: (socialItemList) => dispatch(socialActions.deleteSocialCellItem(socialItemList)),
-    addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList))
+    addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList)),
+    addSocialDayCaption: (socialDayCaption) => dispatch(socialActions.addSocialDayCaption(socialDayCaption))
   }
 }
 

@@ -306,6 +306,45 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         self.send_info_cal_cell(content)
 
+    def send_social_day_caption(self, data):
+        # This function is used create the caption for the day. It will be somewhat
+        # simlar to the send social cal cell comment
+
+        # You will first first get the calOwner. Then you will get or create
+        # the social cal cell
+
+        calOwner = get_object_or_404(User, id = data['cellOwner'])
+
+
+        # First you will get or create the cell
+        socialCell, created = SocialCalCell.objects.get_or_create(
+            socialCalUser = calOwner,
+            socialCaldate = data['cellDate']
+        )
+
+        # So since we are just updating the day caption, we will just update
+        # it here
+        socialCell.dayCaption = data['dayCaption']
+        socialCell.save()
+
+
+        socialUpdatedCell = SocialCalCellSerializer(socialCell).data
+
+
+
+        dateList = data['cellDate'].split("-")
+        username = calOwner.username
+
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        content = {
+            'command': "send_social_day_caption",
+            'dayCaption': socialUpdatedCell['dayCaption'],
+            'recipient': recipient
+        }
+
+        self.send_info_cal_cell(content)
+
     def add_user_social_event_M(self, data):
         # userId: userId,
         # socialEventId: socialEventId,
@@ -471,6 +510,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.remove_user_social_event_M(data)
         if data['command'] == 'delete_social_cell_item':
             self.delete_social_cell_item(data)
+        if data['command'] == 'send_social_day_caption':
+            self.send_social_day_caption(data)
 
 
     def new_social_cal_cell_action(self, action):

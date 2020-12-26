@@ -58,6 +58,16 @@ export const deleteSocialCellItem = (socialItemList) => {
   }
 }
 
+export const addSocialDayCaption = (socialDayCaption) => {
+  // This will be used to update the social cal cell when you update the
+  // caption of the cell
+
+  return {
+    type: actionTypes.ADD_SOCIAL_DAY_CAPTION,
+    socialDayCaption: socialDayCaption
+  }
+}
+
 export const closeSocialCalCellPage = () => {
   // When closing the page, it clears out all the infromation so transtioning will
   // be more smooth
@@ -66,6 +76,7 @@ export const closeSocialCalCellPage = () => {
 
   }
 }
+
 
 
 

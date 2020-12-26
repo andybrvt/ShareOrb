@@ -608,7 +608,7 @@ class SocialCalCellPage extends React.Component{
              </div>
 
              <div className = "dayCaption">
-
+             {dayCaption}
             </div>
 
 
@@ -747,6 +747,8 @@ class SocialCalCellPage extends React.Component{
           <AddDayCaptionModal
           visible = {this.state.captionModal}
           onClose = {this.closeCaptionModal}
+          curDate = {curDate}
+          curId = {this.props.curId}
           />
 
          </div>

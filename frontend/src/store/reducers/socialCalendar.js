@@ -155,6 +155,15 @@ const sendDeleteSocialEventNoti = (state, action) => {
   })
 }
 
+const addSocialDayCaption = (state, action) => {
+  return updateObject(state, {
+    socialCalCellInfo:{
+      ...state.socialCalCellInfo,
+      dayCaption: action.socialDayCaption
+    }
+  })
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -187,6 +196,8 @@ const reducer = (state = initialState, action) => {
       return sendDeleteSocialEventNoti(state, action);
     case actionTypes.DELETE_SOCIAL_CELL_ITEM:
       return deleteSocialCellItem(state, action);
+    case actionTypes.ADD_SOCIAL_DAY_CAPTION:
+      return addSocialDayCaption(state, action);
     default:
       return state;
   }

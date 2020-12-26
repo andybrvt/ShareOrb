@@ -81,6 +81,20 @@ class WebSocketSocialCalCellPage{
 
   }
 
+  sendSocialDayCaption(cellDate, cellOwner, dayCaption){
+    // This is for the writing the caption of the cell
+    // The cur date and the cellOwner will be used to either create or
+    // find the right cal cell.
+
+    this.sendSocialCalCellInfo({
+      command: "send_social_day_caption",
+      cellDate: cellDate,
+      cellOwner: cellOwner,
+      dayCaption: dayCaption
+    })
+
+  }
+
   sendSocialCalCellUnlike(cellDate, personUnlike, owner) {
     //This is for unliking the social cal cell
     //The curDate and the owner will be used to either create the new social
@@ -214,6 +228,15 @@ class WebSocketSocialCalCellPage{
       // Add the call back here
       this.callbacks['delete_social_cell_item'](socialItemList)
     }
+    if(command === "send_social_day_caption"){
+      const dayCaption = parsedData.dayCaption
+
+      // This is teh calback
+      this.callbacks['add_social_day_caption'](dayCaption)
+
+    }
+
+
   }
 
   addCallbacks(
@@ -222,7 +245,8 @@ class WebSocketSocialCalCellPage{
     sendSocialCalCellComment,
     sendSocialCalCellCommentNew,
     addSocialEventJoinLeave,
-    deleteSocialItem
+    deleteSocialItem,
+    addSocialDayCaption
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
@@ -230,6 +254,7 @@ class WebSocketSocialCalCellPage{
     this.callbacks['send_social_cal_cell_comment_new'] = sendSocialCalCellCommentNew
     this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
     this.callbacks['delete_social_cell_item'] = deleteSocialItem
+    this.callbacks['add_social_day_caption'] = addSocialDayCaption
   }
 
   sendSocialCalCellInfo(data){
