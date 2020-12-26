@@ -209,11 +209,22 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # You will use recipient to attach the group name
         recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
 
-        content = {
-            'command': 'send_social_cal_cell_like_unlike',
-            'likeList': socialCalCellObj['people_like'],
-            'recipient': recipient
-        }
+        # So you have to take into consideration when you are creating a new
+        # event becuase this will mess up the comments
+        if created == False:
+            content = {
+                'command': 'send_social_cal_cell_like_unlike',
+                'likeList': socialCalCellObj['people_like'],
+                'recipient': recipient
+            }
+        elif created == True:
+            # This if the new cell is made you will jsut send the whole
+            # social cal
+            content = {
+                'command': 'fetch_social_cal_cell_info',
+                'socialCalCell': socialCalCellObj,
+                'recipient': recipient
+            }
 
 
         self.send_info_cal_cell(content)
@@ -280,7 +291,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # gotta replace teh get_comments
 
         socialCalCellComment = SocialCalCommentSerializer(socialComment).data
-        socialCalCellComments = SocialCalCellSerializer(socialCell).data['get_socialCalComment']
+        socialCalCellComments = SocialCalCellSerializer(socialCell).data
 
         # Now we will create the tag name for the channel group
         dateList = data['cellDate'].split("-")
@@ -298,8 +309,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             # Created when you first make a cell object, helps prevent sending
             # all the comments everytime to the front end
             content = {
-                'command': 'send_social_cal_cell_comment_new',
-                'socialComments': socialCalCellComments,
+                'command': 'fetch_social_cal_cell_info',
+                'socialCalCell': socialCalCellComments,
                 'recipient': recipient
             }
 
