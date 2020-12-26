@@ -4,6 +4,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
+from django.db.models.signals import pre_delete
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 # from userprofile.models import UserSocialNormPost
@@ -51,6 +53,34 @@ def create_all_post(sender, instance, created, **kwargs):
         post.save()
         post.delete()
 
+def delete_all_post(sender, instance, **kwargs):
+    # This will be for whne you delete the social cal cell
+    userModal = apps.get_model("userprofile", "User")
+    # This to get the user model
+    userSocialNormPost = apps.get_model('userprofile', "UserSocialNormPost")
+    # To get the content type model
+
+    post_type = ContentType.objects.get_for_model(instance)
+    # this will be social cal cell instance
+    owner_type = ContentType.objects.get_for_model(userModal)
+    print("hit here")
+    print(instance)
+
+    if(len(instance.get_socialCalItems()) > 0):
+        # Delete the normal post if there is a picture
+
+        post = userSocialNormPost.objects.get(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+        )
+        print(post)
+        post.delete()
+
+
+
+
 
 #These models are used to work with the social cal and all its backend
 #functions
@@ -95,7 +125,7 @@ class SocialCalCell(models.Model):
 
 
 post_save.connect(create_all_post, sender = SocialCalCell )
-
+pre_delete.connect(delete_all_post, sender = SocialCalCell)
 
 class SocialCalItems(models.Model):
     # The social calendar items will include all the pictures, post, and social
