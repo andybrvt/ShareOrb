@@ -9,18 +9,10 @@ class DeleteSocialCellModal extends React.Component{
     onDeleteSubmit = () => {
       // This function is just to submit the the delete picture
       this.props.onDeleteSubmit()
-      this.openNotification("bottomRight")
       this.props.onClose()
     }
 
-    openNotification = placement => {
-    notification.info({
-      message: `Day deleted`,
-      description:
-        'Day cell has been deleted',
-      placement,
-    });
-  };
+
 
 
 

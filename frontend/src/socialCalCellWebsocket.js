@@ -252,6 +252,14 @@ class WebSocketSocialCalCellPage{
       this.callbacks['add_social_day_caption'](dayCaption)
 
     }
+    if(command === "deleted_social_cal_cell"){
+      // This function will be similar to redux fetch function when there
+      // is no cell in that day
+      const socialCalCellObj = parsedData.socialCalCell
+
+      // Add the call back in here
+      this.callbacks['fetch_social_cal_cell_info'](socialCalCellObj)
+    }
 
 
   }

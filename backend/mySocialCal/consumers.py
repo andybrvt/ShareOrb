@@ -456,6 +456,38 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         self.send_info_cal_cell(content)
 
 
+    def delete_social_cell_day(self, data):
+        # This function will be in charge of deleting the social cal cell day
+
+        # First you will pull the social cal cell using the social cal cell Id
+        socialCalCell = get_object_or_404(SocialCalCell, id = data['socialCellId'])
+
+        socialCalCell.delete()
+
+        # So once you delete social cal cell you will set up social cell object
+        # so show a delete social cal cell
+        calOwner = get_object_or_404(User, id = data['curId'])
+
+        serializedUser = SocialCalUserSerializer(calOwner).data
+
+        dateList = data['cellDate'].split("-")
+        username = serializedUser['username']
+
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+
+        content = {
+            'command': 'deleted_social_cal_cell',
+            'socialCalCell': {'socialCalUser': serializedUser},
+            "recipient": recipient
+        }
+
+        self.send_info_cal_cell(content)
+
+
+        # So after delelting it, you just gotta send the
+
+
 
     def send_info_cal_cell (self, calCellObj):
         # This will be used ot send the info into the front end
@@ -512,6 +544,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.delete_social_cell_item(data)
         if data['command'] == 'send_social_day_caption':
             self.send_social_day_caption(data)
+        if data['command'] == 'delete_social_cell_day':
+            self.delete_social_cell_day(data)
 
 
     def new_social_cal_cell_action(self, action):
