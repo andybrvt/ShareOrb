@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Progress, Avatar, Modal, message, notification} from 'antd';
+import {Button, Progress, Avatar, Modal, message, notification, Divider} from 'antd';
 import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
@@ -369,7 +369,27 @@ class SocialEventInfo extends React.Component{
           </div>
 
           <div className = "eventInfo">
-            <div className = "aboutEvent"> About the Event </div>
+            <div style={{ fontSize:'20px',display:'inline-block', width:'575px' }}
+              class="aboutEvent eventCard innerContainer">
+              Event Details
+              <Divider/>
+              <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+                {date} at {start_time} - {end_time}
+              <br/>
+                <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                10 people
+                <br/>
+
+                <br/>
+
+
+
+
+                <div className = "contentEvent"> {content} </div>
+            </div>
+
+
+
             {
               content === "" ?
 

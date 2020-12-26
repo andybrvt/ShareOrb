@@ -22,7 +22,7 @@
   to 100% */
   /* overflow: hidden; */
   height: 91.5vh;
-
+  overflow: hidden;
   position: absolute;
   left: 50%;
   /* bottom: 5px; */
@@ -80,14 +80,15 @@
   left: 0%;
   transition: 0.5s;
 
-  background-color: white;
+  /* background-color: red; */
 }
 
+/* bar for social event width */
 .socialEventInfoContainerContainer.active{
   width: 60%;
   overflow:hidden;
-  left: 19%;
-  /* background-color: red; */
+  left: 21%;
+  /* background-color: green; */
 }
 
 .socialEventInfoContainerContainer .socialEventInfoContainer{
@@ -101,6 +102,7 @@
 }
 .socialEventInfoContainerContainer.active .socialEventInfoContainer{
   width: 1076px;
+  /* background-color: grey; */
 }
 
 
@@ -284,6 +286,7 @@
   /* left: 0; */
   height: 100%;
   /* background-color: blue; */
+  z-index: 102;
   transition: 0.5s;
 }
 
