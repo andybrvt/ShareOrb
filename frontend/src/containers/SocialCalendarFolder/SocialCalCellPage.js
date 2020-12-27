@@ -318,25 +318,29 @@ class SocialCalCellPage extends React.Component{
 
     if(this.props.socialCalCellInfo){
       if(this.props.socialCalCellInfo.get_socialCalItems){
-        socialCalItems = this.props.socialCalCellInfo.get_socialCalItems
-      }
-      if(this.props.socialCalCellInfo.id){
-        socialCellId = this.props.socialCalCellInfo.id
+
+        if(this.props.socialCalCellInfo.get_socialCalItems[coverPicIndex]){
+          coverPic = this.props.socialCalCellInfo.get_socialCalItems[coverPicIndex].itemImage
+          socialCellId = this.props.socialCalCellInfo.id
+          authAxios.post("http://127.0.0.1:8000/mySocialCal/changeCoverPic",{
+            coverPic: coverPic,
+            socialCellId: socialCellId,
+          })
+
+          this.openCoverNotification("bottomRight")
+        }
       }
     }
 
+  }
 
-
-    coverPic = socialCalItems[coverPicIndex].itemImage
-
-    authAxios.post("http://127.0.0.1:8000/mySocialCal/changeCoverPic",{
-      coverPic: coverPic,
-      socialCellId: socialCellId,
-    })
-    // Now you will start sending things into the backend
-
-
-
+  openCoverNotification = placement => {
+    notification.info({
+      message: `Cover photo changed`,
+      description:
+        'You have changed the cover photo of this cell.',
+      placement,
+    });
   }
 
   openNotification = placement => {
@@ -483,9 +487,19 @@ class SocialCalCellPage extends React.Component{
 
   openDeleteCellModal = () => {
     // open the delete cell modal
-    this.setState({
-      showDeleteCell: true
-    })
+    if(this.props.socialCalCellInfo){
+        if(this.props.socialCalCellInfo.id){
+          this.setState({
+            showDeleteCell: true
+          })
+        } else {
+          this.openNoCellNotification("bottomRight")
+        }
+    } else {
+      this.openNoCellNotification("bottomRight")
+    }
+
+
   }
 
   closeDeleteCellModal = () => {
@@ -497,10 +511,31 @@ class SocialCalCellPage extends React.Component{
 
   openChangeCoverModal = () => {
     // This will open up the change cover cell modal
+    if(this.props.socialCalCellInfo){
+        if(this.props.socialCalCellInfo.get_socialCalItems){
+          if(this.props.socialCalCellInfo.get_socialCalItems.length > 0){
+            this.setState({
+              coverPicModal: true
+            })
+          } else {
+            this.openNoPicsNotification('bottomRight')
+          }
+        } else {
+          this.openNoPicsNotification('bottomRight')
+        }
+    } else {
+      this.openNoPicsNotification('bottomRight')
+    }
 
-    this.setState({
-      coverPicModal: true
-    })
+  }
+
+  openNoPicsNotification = placement => {
+    notification.info({
+      message: `No pictures`,
+      description:
+        'There are no pictures avaliable.',
+      placement,
+    });
   }
 
   closeChangeCoverModal = () => {

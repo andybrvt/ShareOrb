@@ -60,6 +60,7 @@ class ChangeCoverPicModal extends React.Component{
     // This function will be used for submiting the change of the social cell
 
     this.props.onPicSubmit()
+    this.props.onClose()
   }
 
 
