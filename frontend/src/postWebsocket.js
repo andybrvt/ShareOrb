@@ -13,28 +13,6 @@ class WebSocketPosts {
     this.socketRef = null
   }
 
-  // connect(postId){
-  //   const path = 'ws://127.0.0.1:8000/ws/like-commenting-post/'+postId
-  //   console.log(path)
-  //   this.socketRef = new WebSocket(path)
-  //   this.socketRef.onopen = () => {
-  //     console.log('websocket open')
-  //   }
-  //   this.socketRef.onmessage = (e) => {
-  //     console.log(e.data)
-  //     this.socketNewPost(e.data)
-  //   }
-  //
-  //   this.socketRef.onerror = (e) => {
-  //     console.log(e.message);
-  //   }
-  //
-  //   this.socketRef.onclose = () => {
-  //     console.log('WebSocket is closed')
-  //     this.connect(postId)
-  //   }
-  // }
-
   connect(){
     const path = 'ws://127.0.0.1:8000/ws/newsfeed'
     console.log(path)
@@ -52,7 +30,7 @@ class WebSocketPosts {
 
     this.socketRef.onclose = () => {
       console.log('WebSocket is closed')
-      this.connect()
+      // this.connect()
     }
   }
 

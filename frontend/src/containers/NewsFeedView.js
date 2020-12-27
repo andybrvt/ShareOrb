@@ -22,7 +22,6 @@ import './NewsFeedView.css'
 class NewsFeedView extends React.Component {
 
 	state={
-		profileList:[],
 		username: '',
 		id: '',
 		postShow:false,
@@ -31,36 +30,7 @@ class NewsFeedView extends React.Component {
 
 	constructor(props){
 		super(props)
-		// this.initialiseExplore()
 	}
-
-	initialiseExplore(){
-    // This will pretty much be for loading up the users following status, because
-    // later we are gonna have a search function, so you want to throw this in one
-    // of the very first things
-    this.waitForSocketConnection(()=> {
-      // Expl	oreWebSocketInstance.fetchFollowerFollowing()
-			// ExploreWebSocketInstance.fetchCurrentUserProfile(this.props.currentUser)
-    })
-  }
-
-	waitForSocketConnection (callback) {
-    const component = this;
-    setTimeout(
-      function(){
-
-        if (ExploreWebSocketInstance.state() === 1){
-
-          callback();
-          return;
-        } else{
-
-            component.waitForSocketConnection(callback);
-        }
-      }, 100)
-
-  }
-
 
 	postCondition = () => {
     this.setState({
@@ -89,20 +59,6 @@ class NewsFeedView extends React.Component {
 
 	componentWillReceiveProps(newProps){
 		this.props.grabUserCredentials();
-		console.log(newProps);
-		if(newProps.token){
-			axios.defaults.headers = {
-				"Content-Type": "application/json",
-				Authorization: newProps.token,
-			}
-			axios.get('http://127.0.0.1:8000/userprofile/list/')
-			.then(res=> {
-				this.setState({
-					profileList:res.data,
-				});
-			});
-		}
-
 	}
 
 	onViewAlbum = () => {

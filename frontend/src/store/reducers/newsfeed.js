@@ -7,7 +7,6 @@ const initialState = {
 
   //Post will just be the individual post it self when you open up the
   // post page
-  post: {}
 }
 
 const loadPosts = (state, action) => {
@@ -64,6 +63,8 @@ const unaddPostLike = (state, action) => {
 }
 
 
+
+// Delete this
 const addPostComment = (state, action ) => {
   console.log(action.comment.comment.post)
   return updateObject(state, {
@@ -77,6 +78,7 @@ const addPostComment = (state, action ) => {
 
 }
 
+// REDO THIS
 const deletePost = (state, action) => {
 
     const postId = action.postId
@@ -93,18 +95,17 @@ const deletePost = (state, action) => {
 
 
 // THESE FUNCTIONS WILL BE USED FOR THE POST PAGE
+// DELETE THESE BECAUSE NOW YOU HAVE A POST PAGE ALREADY
 const loadPost =(state, action) => {
   return updateObject(state, {
     post: action.postObj
   })
 }
-
 const closePost = (state, action) => {
   return updateObject(state, {
     post: {}
   })
 }
-
 const sendUserPostLikeUnlike =(state, action) => {
   return updateObject(state, {
     post: {

@@ -57,7 +57,7 @@ class InfiniteList extends React.Component {
 
 
   componentDidMount() {
-    WebSocketPostsInstance.connect()
+    // WebSocketPostsInstance.connect()
 
   }
 

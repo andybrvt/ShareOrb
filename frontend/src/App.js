@@ -33,6 +33,7 @@ class App extends Component {
     // this.initialiseExplore()
 
     this.initialiseChats()
+    this.initialisePost()
 
     // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
     WebSocketInstance.addCallbacks(
@@ -120,13 +121,41 @@ class App extends Component {
 
   }
 
+// You would want to render the newsfeed right when you get it and it wont
+// keep refreshing everytime you go onto the newsfeed bc that would be hella
+// annoying
+
+  initialisePost(){
+    // This will use to retrive the posts right when you log in
+    // so that whne you go back to the page it doesnt keep  reloading
+    this.waitForPostSocketConnection(() => {
+      WebSocketPostsInstance.fetchPosts(this.props.id)
+    })
+
+    WebSocketPostsInstance.connect()
+
+  }
+
+  waitForPostSocketConnection(callback){
+    const component = this
+    setTimeout(
+      function(){
+        if(WebSocketPostsInstance.state() === 1){
+          callback()
+          return;
+        } else {
+          component.waitForPostSocketConnection(callback);
+        }
+      }, 100)
+  }
+
 
 // So since you are gonna render the notification and chats at the
 // beginning when you first login, and to get chat notifcation,
 // so you want to connect to chats channel and notificaiton websocket
 // right away so that it is already connected whne you login
   initialiseChats(){
-    this.waitForChatsSocketConnection(() =>{
+    this.waitForChatsSocketConnection(() => {
       console.log(this.props.id)
       ChatSidePanelWebSocketInstance.fetchChats(
         this.props.id
@@ -172,6 +201,15 @@ class App extends Component {
       if(parseInt(this.props.id) !== parseInt(newProps.id)){
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
+        WebSocketPostsInstance.disconnect()
+        this.waitForPostSocketConnection(() => {
+          WebSocketPostsInstance.fetchPosts(newProps.id)
+        })
+
+        WebSocketPostsInstance.connect()
+
+
+
         ChatSidePanelWebSocketInstance.disconnect();
         this.waitForChatsSocketConnection(() =>{
           ChatSidePanelWebSocketInstance.fetchChats(
@@ -180,6 +218,9 @@ class App extends Component {
 
         })
         ChatSidePanelWebSocketInstance.connect(newProps.id)
+
+
+
       }
     }
     // NotificationWebSocketInstance.connect(newProps.username)
