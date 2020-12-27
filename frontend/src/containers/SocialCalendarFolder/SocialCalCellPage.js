@@ -21,6 +21,7 @@ import * as socialCalActions  from '../../store/actions/socialCalendar';
 import DeleteSocialPostModal from './DeleteSocialPostModal';
 import AddDayCaptionModal from './AddDayCaptionModal';
 import DeleteSocialCellModal from './DeleteSocialCellModal';
+import ChangeCoverPicModal from './ChangeCoverPicModal';
 import { authAxios } from '../../components/util';
 
 
@@ -33,6 +34,7 @@ class SocialCalCellPage extends React.Component{
     curSocialPic: 0,
     comment: "",
     captionModal: false,
+    coverPicModal: false
   }
 
   capitalize (str) {
@@ -445,6 +447,21 @@ class SocialCalCellPage extends React.Component{
     })
   }
 
+  openChangeCoverModal = () => {
+    // This will open up the change cover cell modal
+
+    this.setState({
+      coverPicModal: true
+    })
+  }
+
+  closeChangeCoverModal = () => {
+    // This will close the change cover cell modal
+    this.setState({
+      coverPicModal: false
+    })
+  }
+
   threeDotDropDown = () => {
 
     // This will hold the drop down for the pictures that incldues
@@ -494,11 +511,11 @@ class SocialCalCellPage extends React.Component{
                 <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
                 <span style={{marginLeft:'3px'}}> Write a caption</span>
             </Menu.Item>
-            <Menu.Item>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                <i class="far fa-eye-slash"></i>
-                <span style={{marginLeft:'5px'}}>Hide this post</span>
-              </a>
+            <Menu.Item
+            onClick = {this.openChangeCoverModal}
+            >
+                <i class="far fa-image"></i>
+                <span style={{marginLeft:'5px'}}>Change cover picture</span>
             </Menu.Item>
             <Menu.Item danger
             onClick = {this.openDeleteCellModal}
@@ -833,6 +850,11 @@ class SocialCalCellPage extends React.Component{
           onClose = {this.closeDeleteCellModal}
           onDeleteSubmit = {this.onDeleteCellSubmit}
            />
+
+           <ChangeCoverPicModal
+           visible = {this.state.coverPicModal}
+           onClose = {this.closeChangeCoverModal}
+            />
 
          </div>
     )
