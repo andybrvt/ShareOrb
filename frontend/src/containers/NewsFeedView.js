@@ -141,7 +141,7 @@ class NewsFeedView extends React.Component {
 
 
 									<i class="far fa-edit share" style={{fontSize:'25px', color:'#1890ff'}}></i>
-									 <p  class="cardAlign"> Write a post </p>
+									 <p style={{ color:'#1890ff'}} class="cardAlign"> Write a post </p>
 
 								</div>
 
@@ -155,7 +155,7 @@ class NewsFeedView extends React.Component {
 
 									<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 
-									 <p  class="cardAlign"> Create event  </p>
+									 <p style={{ color:'#1890ff'}} class="cardAlign"> Create event  </p>
 
 								</div>
 

@@ -156,7 +156,7 @@ class NewNewsfeedFormPost extends React.Component{
 
                   <span style={{float:'right', marginRight:'25px'}}>
                     <Alert
-                      message="Toggle Social Clip"
+                      message="Clip directly while posting"
                       description="Clip images from the post to your social calendar"
                       type="info"
                       showIcon

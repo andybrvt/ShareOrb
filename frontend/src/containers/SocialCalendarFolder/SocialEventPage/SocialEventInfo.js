@@ -339,7 +339,7 @@ class SocialEventInfo extends React.Component{
             <div
               className = "dateCircle"
               style = {{
-                backgroundColor: "blue"
+                backgroundColor: "#1890ff"
               }}
             >
             <div
@@ -351,25 +351,42 @@ class SocialEventInfo extends React.Component{
             <div className = "day"> {day} </div>
             </div>
 
-            <div className = 'eventTitle'> {this.capitalize(title)} </div>
-            <div className = "eventDate"> {date} </div>
-            <div className = "eventTime">{start_time}-{end_time}</div>
+            <div class="eventCard" style={{width:'325px',padding:'40px'}}>
+                <div
+                  className = 'eventTitle'>
+                  {this.capitalize(title)}
+                </div>
 
-            <div className = "eventHost">
-              <Avatar
-              src = {"http://127.0.0.1:8000"+host.profile_picture}
-              />
-              <span> {this.capitalize(host.first_name)} {this.capitalize(host.last_name)}</span>
-            </div>
+                <br/>
 
-            <div className = "invitedNum"> {persons.length} Going </div>
+
+              <div class="flex-container"
+                style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
+
+              >
+                testestest
+
+                {/*if no one going , THEN show invited else just show invited
+                <div className = "attendees flex-child">
+                  <span style={{color:'black'}}> {invited.length} Invited </span>
+
+                  <Liking like_people={invited}/>
+                </div>
+                */}
+
+                </div>
+
+
+              </div>
+
+
 
           </div>
 
           </div>
 
-          <div className = "eventInfo">
-            <div style={{ fontSize:'20px',display:'inline-block', width:'575px' }}
+          <div className = "eventInfo outerContainer">
+            <div style={{ fontSize:'20px',display:'inline-block', width:'500px' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
               <Divider/>
@@ -378,7 +395,7 @@ class SocialEventInfo extends React.Component{
                   {date} at {start_time} - {end_time}
                 <br/>
                 <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                  10 people
+                  {persons.length} Going
                 <br/>
                 <br/>
                 <div className = "contentEvent"> {content} </div>
@@ -390,65 +407,74 @@ class SocialEventInfo extends React.Component{
 
 
             </div>
+            <div className = 'eventInfo innerContainer'>
+              <div style={{ left:'100%', width:'300px', height:'200px',
+                padding:'40px'}} class="eventCard">
+                <div>
+                  Host
 
-            <div class="mapEventCard">
-              <p style={{fontSize:'20px'}}
-                className="eventDetails"> Location </p>
-              <span>
-                <Divider style={{marginTop:'-1px'}}/>
+                  <br/>
+                  <span>
+                    <Avatar
+                    style={{right:'5px'}}
+                    src = {"http://127.0.0.1:8000"+host.profile_picture}
+                    />
+                    <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                  </span>
+                </div>
 
-                <ReactBingmaps
 
-                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                  center = {[32.2226, 110.9747]}
-                  boundary = {
-                  {
-                    "search":"Fremont, CA",
-                    "option":{
-                      entityType: 'PopulatedPlace'
-                    },
-                    "polygonStyle" :{
-                      fillColor: 'rgba(161,224,255,0.4)',
-                      strokeColor: '#a495b2',
-                      strokeThickness: 2
+              </div>
+
+              <div class="mapEventCard">
+                <p style={{fontSize:'20px'}}
+                  className="eventDetails"> Location </p>
+                <span>
+                  <Divider style={{marginTop:'-1px'}}/>
+
+                  <ReactBingmaps
+
+                    bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                    center = {[32.2226, 110.9747]}
+                    boundary = {
+                    {
+                      "search":"Fremont, CA",
+                      "option":{
+                        entityType: 'PopulatedPlace'
+                      },
+                      "polygonStyle" :{
+                        fillColor: 'rgba(161,224,255,0.4)',
+                        strokeColor: '#a495b2',
+                        strokeThickness: 2
+                      }
                     }
                   }
-                }
-                  >
-                </ReactBingmaps>
+                    >
+                  </ReactBingmaps>
 
-                 {/*Saving api calls don't worry about maps*/}
-                <Divider/>
-                  <i style={{marginRight:'15px', color:'#1890ff',
-                    fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
-                  <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
-                    Tucson, Arizona
-                  </p>
-              </span>
+                   {/*Saving api calls don't worry about maps*/}
+                  <Divider/>
+                    <i style={{marginRight:'15px', color:'#1890ff',
+                      fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+                    <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+                      Tucson, Arizona
+                    </p>
+                </span>
 
 
-            </div>
+              </div>
 
             {/*
 
 
 
 
-              
+
             */}
 
 
 
-            {
-              content === "" ?
-
-              <div className = "contentEventEmpty"> No info... </div>
-              :
-              <div className = "contentEvent"> {content} </div>
-
-
-            }
-
+          </div>
             <div className = "locationEventWord"> Location</div>
             {
               location === "" ?
@@ -457,7 +483,6 @@ class SocialEventInfo extends React.Component{
               <div> {this.capitalize(location)} </div>
             }
 
-            <div className = "eventPeopleWord"> People </div>
 
 
             <div className = 'editEventButtonContainer'>
