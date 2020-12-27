@@ -153,6 +153,23 @@ class SocialEventPage extends React.Component{
         className = "socialEventBackgroundPic"
         src = {'http://127.0.0.1:8000'+backgroundImage} />
 
+      {(!this.state.showChats)?
+        <div>
+          <div class="noSocialChatContainer">
+            <span class="noSocialChatIcon">
+              <i style={{fontSize:'54px'}} class="fas fa-comment-alt"></i>
+
+            </span>
+            <br/>
+            <span class="noSocialChatMessage"> No chats shown...</span>
+          </div>
+        </div>
+
+
+        :
+        <div></div>
+      }
+
         <div className = "showChatWords"> Show chats </div>
         <Switch
         className = "showChatSwitch"

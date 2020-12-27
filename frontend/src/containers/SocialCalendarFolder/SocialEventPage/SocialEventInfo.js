@@ -9,7 +9,7 @@ import { authAxios } from '../../../components/util';
 import * as socialActions from '../../../store/actions/socialCalendar';
 import { connect } from "react-redux";
 import DeleteSocialEventModal from './DeleteSocialEventModal';
-
+import { ReactBingmaps } from 'react-bingmaps';
 
 class SocialEventInfo extends React.Component{
 
@@ -373,20 +373,69 @@ class SocialEventInfo extends React.Component{
               class="aboutEvent eventCard innerContainer">
               Event Details
               <Divider/>
-              <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-                {date} at {start_time} - {end_time}
-              <br/>
+              <div style={{fontSize:'16px'}}>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+                  {date} at {start_time} - {end_time}
+                <br/>
                 <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                10 people
+                  10 people
                 <br/>
-
                 <br/>
-
-
-
-
                 <div className = "contentEvent"> {content} </div>
+
+              </div>
+
+
+
+
+
             </div>
+
+            <div class="mapEventCard">
+              <p style={{fontSize:'20px'}}
+                className="eventDetails"> Location </p>
+              <span>
+                <Divider style={{marginTop:'-1px'}}/>
+
+                <ReactBingmaps
+
+                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                  center = {[32.2226, 110.9747]}
+                  boundary = {
+                  {
+                    "search":"Fremont, CA",
+                    "option":{
+                      entityType: 'PopulatedPlace'
+                    },
+                    "polygonStyle" :{
+                      fillColor: 'rgba(161,224,255,0.4)',
+                      strokeColor: '#a495b2',
+                      strokeThickness: 2
+                    }
+                  }
+                }
+                  >
+                </ReactBingmaps>
+
+                 {/*Saving api calls don't worry about maps*/}
+                <Divider/>
+                  <i style={{marginRight:'15px', color:'#1890ff',
+                    fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+                  <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+                    Tucson, Arizona
+                  </p>
+              </span>
+
+
+            </div>
+
+            {/*
+
+
+
+
+              
+            */}
 
 
 

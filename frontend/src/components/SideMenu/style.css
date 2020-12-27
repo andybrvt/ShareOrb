@@ -46,7 +46,7 @@ p {
 
 .site-section {
   padding: 7rem 0; }
-/* 
+/*
   aside, main {
     height: 74vh;
     min-height: 580px;
@@ -54,8 +54,10 @@ p {
 
 
 aside {
+
   width: 70px;
   left: 0;
+  border-right: 1px solid #f0f0f0;
   z-index: 1001;
   position: fixed;
   -webkit-transform: translateX(0px);

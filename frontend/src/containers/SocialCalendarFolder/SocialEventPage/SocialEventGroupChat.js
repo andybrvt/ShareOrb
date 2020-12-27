@@ -161,17 +161,23 @@ class SocialEventGroupChat extends React.Component{
         <div className = "inputForm">
         {
           this.checkDay(this.props.date, this.props.endTime) ?
+          <div>
+            <Form>
+              <Input
+              className = "eventChatInput"
+              onChange = {this.handleChange}
+              value = {this.state.message}
+              onPressEnter = {this.handleSubmit}
+              placeholder = "Write a message..."
+              />
+            </Form>
+            <Button
+              style={{float:'right', marginTop:'10px', marginRight:'20px'}}
+              class="roundButton"
+              onClick = {this.handleSubmit} type="primary"> Chat </Button>
+            </div>
 
-          <Form>
-            <Input
-            className = "socialEventChatInput"
-            onChange = {this.handleChange}
-            value = {this.state.message}
-            onPressEnter = {this.handleSubmit}
-            placeholder = "Write a message..."
-            />
-          </Form>
-
+          
           :
 
           <div className = 'eventEndText' >

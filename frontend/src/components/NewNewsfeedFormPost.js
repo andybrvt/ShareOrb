@@ -156,8 +156,8 @@ class NewNewsfeedFormPost extends React.Component{
 
                   <span style={{float:'right', marginRight:'25px'}}>
                     <Alert
-                      message="Toggle Social Clip On"
-                      description="Directly clip images to your social calendar"
+                      message="Toggle Social Clip"
+                      description="Clip images from the post to your social calendar"
                       type="info"
                       showIcon
                     />
@@ -166,7 +166,7 @@ class NewNewsfeedFormPost extends React.Component{
                 <span style={{float:'right', marginRight:'25px'}}>
                   <Alert
                     message="Post on NewsFeed"
-                    description="Post your photos and caption on your newsfeed"
+                    description="Post photos and caption on the newsfeed"
                     type="info"
                     showIcon
                   />
@@ -175,8 +175,7 @@ class NewNewsfeedFormPost extends React.Component{
         </div>
         </div>
         <Divider />
-          {
-            (!this.state.socialClip)?
+
             <div>
 
               <TextArea
@@ -193,10 +192,7 @@ class NewNewsfeedFormPost extends React.Component{
                 value = {this.state.caption} />
               <Divider style={{top:'-10px'}}/>
               </div>
-            :
 
-            <div style={{marginTop:'25px'}}></div>
-          }
 
         <Modal
           visible={previewVisible}
