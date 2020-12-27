@@ -613,6 +613,7 @@ class EventInfo extends React.Component{
             style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
 
           >
+
             <div className = "attendees">
               Host
 
@@ -654,7 +655,9 @@ class EventInfo extends React.Component{
               <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
-                <Statistic class="addFont" title="Going" value={accepted.length} />
+                <Statistic class="addFont" title="Going" value={accepted.length}
+
+                  />
 
 
 
