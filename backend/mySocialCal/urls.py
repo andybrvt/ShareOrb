@@ -11,5 +11,6 @@ urlpatterns = [
     path('socialEvent/updatebackground/<slug:id>', views.SocialEventBackgroundUpdate.as_view(), name = "change_socialevent_background"),
     path('socialEvent/delete/<slug:id>', views.DeleteSocialEventView.as_view(), name = 'delete_social_event'),
     path('uploadPicture', views.SocialPictureCreateView.as_view(), name = "socialCalendar_uploadPic"),
-    path('pictureClipping', views.SocialClippingView.as_view(), name = "picture_clipping")
+    path('pictureClipping', views.SocialClippingView.as_view(), name = "picture_clipping"),
+    path('changeCoverPic', views.SocialChangeCoverPic.as_view(), name = "change_cover_pic")
 ]

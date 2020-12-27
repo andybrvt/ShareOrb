@@ -187,6 +187,7 @@ class WebSocketSocialCalCellPage{
 
   }
 
+
   socketNewSocialCalCell(data){
     //This is to process all the command in the backend and tell them where to
     // go

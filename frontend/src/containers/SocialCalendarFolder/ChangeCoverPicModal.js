@@ -51,8 +51,15 @@ class ChangeCoverPicModal extends React.Component{
     this.carousel.prev()
   }
 
-  onChange(a){
+  onChange = (a) =>{
     console.log(a);
+    this.props.onPicChange(a)
+  }
+
+  onChangeSubmit = () => {
+    // This function will be used for submiting the change of the social cell
+
+    this.props.onPicSubmit()
   }
 
 
@@ -108,7 +115,7 @@ class ChangeCoverPicModal extends React.Component{
         onClick = {this.props.onClose}
         > Cancel </div>
         <div
-        onClick = {() =>this.onDeleteSubmit()}
+        onClick = {() =>this.onChangeSubmit()}
         className = "acceptButton"
         > Save </div>
 

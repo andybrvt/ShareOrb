@@ -127,6 +127,33 @@ class SocialClippingView(APIView):
 
         return Response("Clipping of pictures")
 
+class SocialChangeCoverPic(APIView):
+    def post(self, request, *args, **kwargs):
+
+        # This post function will be used for changing the cover pic of the
+        # certain cell
+
+        # You will first pull the social cal cell using the id that is getting passed
+        # if
+
+        # Then you will just change the coverPic field on the cell and then save
+        # it.
+
+        # You do not need to return anything because the social cal cell will
+        # update itself
+        print(request.data)
+
+        socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['socialCellId'])
+
+
+        coverPic = request.data['coverPic'].lstrip("/media")
+
+        socialCalCell.coverPic = coverPic
+
+        socialCalCell.save()
+
+        return Response("Change cover pic")
+
 
 class SocialEventCreateView(APIView):
     def post(self, request, *args, **kwargs):

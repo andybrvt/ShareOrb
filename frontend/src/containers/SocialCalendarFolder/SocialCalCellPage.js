@@ -34,7 +34,8 @@ class SocialCalCellPage extends React.Component{
     curSocialPic: 0,
     comment: "",
     captionModal: false,
-    coverPicModal: false
+    coverPicModal: false,
+    curCoverPic: 0
   }
 
   capitalize (str) {
@@ -66,6 +67,12 @@ class SocialCalCellPage extends React.Component{
   changeCurSocialPic = (picIndex) => {
     this.setState({
       curSocialPic: picIndex
+    })
+  }
+
+  changeCoverPic = (picIndex) =>{
+    this.setState({
+      curCoverPic: picIndex
     })
   }
 
@@ -288,7 +295,45 @@ class SocialCalCellPage extends React.Component{
       }
     }
 
+  }
 
+  changeCoverPicSubmit = () => {
+    // This function will be used to change the cover photo of the day cell
+
+    // So you will need the userid and the cell date to get the right cal cell
+    // Then get the photo to change the cover photo
+
+    let coverPic = ""
+    let socialCalItems = []
+    let socialCellId = 0
+    let curId = ""
+
+    const year = this.props.match.params.year
+    const month = this.props.match.params.month
+    const day = this.props.match.params.day
+    const cellDate = year+"-"+month+"-"+day
+
+
+    const coverPicIndex = this.state.curCoverPic
+
+    if(this.props.socialCalCellInfo){
+      if(this.props.socialCalCellInfo.get_socialCalItems){
+        socialCalItems = this.props.socialCalCellInfo.get_socialCalItems
+      }
+      if(this.props.socialCalCellInfo.id){
+        socialCellId = this.props.socialCalCellInfo.id
+      }
+    }
+
+
+
+    coverPic = socialCalItems[coverPicIndex].itemImage
+
+    authAxios.post("http://127.0.0.1:8000/mySocialCal/changeCoverPic",{
+      coverPic: coverPic,
+      socialCellId: socialCellId,
+    })
+    // Now you will start sending things into the backend
 
 
 
@@ -384,7 +429,10 @@ class SocialCalCellPage extends React.Component{
       }
     }
 
-    }
+  }
+
+
+
 
   openDeleteCellNotification = placement => {
   notification.info({
@@ -855,6 +903,8 @@ class SocialCalCellPage extends React.Component{
            visible = {this.state.coverPicModal}
            onClose = {this.closeChangeCoverModal}
            items = {socialCalItems}
+           onPicChange = {this.changeCoverPic}
+           onPicSubmit = {this.changeCoverPicSubmit}
             />
 
          </div>
