@@ -729,151 +729,7 @@ class NewsfeedPost extends React.Component {
 
   // this renders the posts on the newsfeed
 
-  ContentOfPost(){
-    console.log(this.props.data)
-    let like_people = this.props.data.people_like
-    let profilePic = ''
 
-    if (this.props.data.user.profile_picture){
-      console.log(this.props.data.user.profile_picture)
-      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
-    }
-
-
-
-    return(
-      // if you want anywhere in the post to click on and open modal put OnClickPost in this div
-    <div>
-
-
-    <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10, marginLeft:'-5px'}}>
-
-      <span class="profilePicHeader">
-        <span class="headerContainer" >
-
-            <span class="g grid-13">
-              <Popover
-                 style={{width:'200px'}}
-                 content={<div>
-                   <Avatar
-                    shape="square"
-                    size="large"
-                    src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
-                    />
-                   <div> 110 followers </div>
-                 </div>}
-
-                >
-                  {
-                    profilePic != '' ?
-                    <Avatar
-                    size="large"
-                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                    size="large"
-                    style = {{
-                      cursor: 'pointer',
-                    }}
-                    src={profilePic} alt="avatar" />
-
-                    :
-
-                    <Avatar
-                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                    size="large"
-                    style = {{
-                      cursor: 'pointer',
-                    }}
-                    src={defaultPic} alt="avatar" />
-
-                  }
-
-
-                </Popover>
-
-            </span>
-              <span class="g grid-33">
-
-                <span class="headerPost">
-
-                  <span
-                    style={{color:'black', fontSize:'15px'}}
-                    class="headerPostText alignleft" >
-                    {this.props.data.user.first_name}{' '}{this.props.data.user.last_name} <br/>
-                  <span>
-                  <span
-                    style={{fontSize:'13px'}}
-                    class="headerPostText LikeCommentHover">
-                    @{this.props.data.user.username}
-                  </span>
-                </span>
-                    </span>
-
-                      <span class="headerPostText alignright" style={{fontSize:'13px'}} >
-
-
-
-                        <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
-                        Tucson, Arizona <br/>
-
-                        <span style={{float:'right'}}>
-                        {this.renderTimestamp(this.props.data.created_at)}
-                        </span>
-                  </span>
-
-                </span>
-
-              </span>
-
-
-
-        </span>
-          <span class="optionPostHeader">
-            <Dropdown overlay={
-              <Menu>
-                <Menu.Item>
-                  <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                    <i style={{marginRight:'0px' }} class="far fa-bookmark"></i>
-                    Save this post
-                  </a>
-                </Menu.Item>
-                <Menu.Item>
-                  <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                    <i style={{marginRight:'0px'}} class="far fa-eye-slash"></i>
-                    Hide this post
-                  </a>
-                </Menu.Item>
-                <Menu.Item danger onClick={this.deletePost}>
-                  <i style={{marginRight:'25px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-                  Delete post
-                </Menu.Item>
-              </Menu>
-            }>
-              <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-              <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
-              </a>
-            </Dropdown>
-
-
-          </span>
-
-      </span>
-
-
-
-
-
-      <Divider style={{'marginTop':-2}}/>
-
-      <Divider style={{ marginBottom: 1 }}/>
-
-      {this.BottomLikeCommentPost()}
-
-      <div>
-      </div>
-      </div>
-      </div>
-    )
-  }
 
 
   ContentofComments(){
@@ -1059,15 +915,10 @@ class NewsfeedPost extends React.Component {
 
             <div class="modalInnerContainer">
 
-            {
-                    this.props.data.post_images.length>0 ?
 
             <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
 
-                    :
 
-            <p  class="modalCardBorder modalInnerPicture"> {this.ContentOfPost()} </p>
-            }
               <p  class="modalCardBorder">{this.ContentofComments()}</p>
             </div>
           </Modal>

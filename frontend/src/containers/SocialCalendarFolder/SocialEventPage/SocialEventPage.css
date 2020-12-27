@@ -6,11 +6,11 @@
   text-align: center;
   font-size: 40px;
   height: 690px;
-  padding-top: 110px;
+  padding-top: 120px;
   position: relative;
 }
 
-
+/* transforms show chats container */
 .socialEventPageContainer{
   background-color: white;
   display: flex;
@@ -21,13 +21,15 @@
   /* To fix the issue with the whole page scrolling, just dont put height
   to 100% */
   /* overflow: hidden; */
-  height: 91.5vh;
+  height: 90.5vh;
   overflow: hidden;
   position: absolute;
   left: 50%;
   /* bottom: 5px; */
   transform: translateX(-48%);
 }
+
+
 
 .socialEventPageContainer .socialEventBackgroundPic{
   width: 100%;
@@ -324,9 +326,10 @@
 
 }
 
+/* adjust height of social cal cell */
 .socialEventGroupChat .socialMessageList{
-  width: 105%;
-  height: 96%;
+  width: 100%;
+  height: 85%;
   background-color: white;
   overflow: auto;
   padding: 7px;
