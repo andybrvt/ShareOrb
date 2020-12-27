@@ -670,6 +670,9 @@ class NewsfeedPost extends React.Component {
           </span>
 
           <span class="optionPostHeader">
+          {
+            this.props.data.user.id === this.props.userId ?
+
             <Dropdown overlay={
               <Menu>
                 <Menu.Item>
@@ -694,6 +697,14 @@ class NewsfeedPost extends React.Component {
               <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
               </a>
             </Dropdown>
+
+            :
+
+            <div></div>
+
+
+
+          }
 
 
             </span>
@@ -828,6 +839,7 @@ class NewsfeedPost extends React.Component {
 
         </span>
           <span class="optionPostHeader">
+
             <Dropdown overlay={
               <Menu>
                 <Menu.Item>
