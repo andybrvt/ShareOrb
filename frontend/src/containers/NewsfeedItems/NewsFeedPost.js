@@ -729,9 +729,6 @@ class NewsfeedPost extends React.Component {
 
   // this renders the posts on the newsfeed
 
-
-
-
   ContentofComments(){
 
     let profilePic = ''
@@ -916,6 +913,7 @@ class NewsfeedPost extends React.Component {
             <div class="modalInnerContainer">
 
 
+
             <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
 
 
@@ -925,12 +923,8 @@ class NewsfeedPost extends React.Component {
 
         </div>
 
-        {
-              this.props.data.post_images.length>0 ?
               <p>{this.ContentOfPic()}</p>
-                      :
-              <p> {this.ContentOfPost()} </p>
-        }
+
         </div>
   );
 };
