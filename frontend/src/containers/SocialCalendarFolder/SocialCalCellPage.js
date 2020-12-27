@@ -854,6 +854,7 @@ class SocialCalCellPage extends React.Component{
            <ChangeCoverPicModal
            visible = {this.state.coverPicModal}
            onClose = {this.closeChangeCoverModal}
+           items = {socialCalItems}
             />
 
          </div>

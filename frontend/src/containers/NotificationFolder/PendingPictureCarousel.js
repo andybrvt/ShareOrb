@@ -76,7 +76,8 @@ class PendingPictureCarousel extends React.Component{
         arrows = {true}
         effect = 'null'
         ref = {node => {this.carousel = node}}
-        afterChange={onChange}>
+        afterChange={onChange}
+        >
           {this.renderPictures(itemList)}
         </Carousel>
         {

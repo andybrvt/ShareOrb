@@ -787,3 +787,70 @@
   top: 11px;
   cursor: pointer;
 }
+
+
+/* This is for the change cover picture modal */
+.coverPicRoll{
+  overflow:hidden;
+  height: 400px;
+}
+
+.coverPicRoll .coverPicImg{
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.changeCoverPicModal .socialArrowLeft{
+  position: absolute;
+  /* background-color: red; */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 0%;
+  font-size: 45px;
+}
+
+.changeCoverPicModal .socialArrowRight{
+  position: absolute;
+  /* background-color: red; */
+  bottom: 50%;
+  transform: translateY(50%);
+  right: 0%;
+  /* right: 100%; */
+  z-index: 3;
+  font-size: 45px;
+
+}
+
+.changeCoverPicModal .buttons{
+  display: flex;
+}
+.changeCoverPicModal .buttons .cancelButton{
+  background-color: red;
+  color: white;
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 7px;
+  position: relative;
+  left: 29%;
+  top: 11px;
+  cursor: pointer;
+}
+.changeCoverPicModal .buttons .acceptButton{
+  background-color: #0099FF;
+  color: white;
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 7px;
+  /* border: 1px grey solid; */
+  position: relative;
+  left: 35%;
+  top: 11px;
+  cursor: pointer;
+}
