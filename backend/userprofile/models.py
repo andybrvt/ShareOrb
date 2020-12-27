@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, AnonymousUser
 from typing import Union
 from django.db.models.signals import post_save
+from django.db.models.signals import pre_delete
 from django.utils.timezone import now
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
@@ -39,6 +40,18 @@ def create_all_post(sender, instance, created, **kwargs):
     post.post_date = instance.created_at
     post.save()
 
+def delete_all_post(sender, instance, **kwargs):
+    # This will be used fro when we delete a post on newsfeed
+    post_type = ContentType.objects.get_for_model(instance)
+    owner_type = ContentType.objects.get_for_model(User)
+    post = UserSocialNormPost.objects.get(
+        owner_type = owner_type,
+        owner_id = instance.user.id,
+        post_type = post_type,
+        post_id = instance.id
+    )
+    # Delete the post whne you delete the post on newsfeed
+    post.delete()
 
 
 
@@ -148,6 +161,8 @@ class Post(models.Model):
         ordering = ('-created_at', '-updated_at')
 
 post_save.connect(create_all_post, sender = Post)
+pre_delete.connect(delete_all_post, sender = Post)
+
 
 class ImageModel(models.Model):
     imageList = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='images', blank = True)
