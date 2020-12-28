@@ -138,6 +138,8 @@ class WebSocketPosts {
     })
   }
 
+
+// DELETE THIS LATER
   sendComment(userId, postId, comment){
     this.sendPostsInfo({
       userId: userId,
@@ -147,10 +149,24 @@ class WebSocketPosts {
     })
   }
 
+
+
+
+
   deletePost(postId){
     this.sendPostsInfo({
       postId: postId,
       command: 'delete_post'
+    })
+  }
+
+  addPost(postId){
+    // This function will be used to add a new post into the newsfeed after
+    // you have created one from the auth axios.
+    // Pretty much just gonna get post, serialize it and then send it off
+    this.sendPostsInfo({
+      postId: postId,
+      command: "add_post"
     })
   }
 

@@ -120,16 +120,9 @@ class NewsFeedView extends React.Component {
 					</Col>
 					</div>
 				</div>
-
 				<Col style={{}} span={11}>
-
-
-
 				<div>
-
 					<div>
-
-
 						<div>
 						<Row gutter={20}>
 

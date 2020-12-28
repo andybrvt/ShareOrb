@@ -548,6 +548,8 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         }
         self.send_new_action(content)
 
+
+# DELETE THIS
     def send_comment(self, data):
         postObj = get_object_or_404(Post, id = data['postId'])
         person = User.objects.get(id = data['userId']).username
@@ -561,6 +563,11 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         }
         return self.send_new_action(content)
 
+
+
+
+
+
     def delete_post(self, data):
         # This will delete the post
         Post.objects.get(id = data['postId']).delete()
@@ -570,6 +577,20 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         }
         return self.send_new_action(content)
 
+
+    def add_post(self, data):
+        # This function will be adding in a post to the newsfeed after we have
+        # created the post
+
+        # This will get post
+        post = get_object_or_404(Post, id = data['postId'])
+        postObj = PostSerializer(post).data
+        content = {
+            'command': 'add_post',
+            'postObj': postObj
+        }
+
+        return self.send_new_action(content)
 
 
     def send_new_action(self, postAction):
@@ -604,6 +625,7 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data =None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_posts':
             self.fetch_posts(data)
         if data['command'] == 'send_one_like':
@@ -614,6 +636,8 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
             self.send_comment(data)
         if data['command'] == 'delete_post':
             self.delete_post(data)
+        if data['command'] == 'add_post':
+            self.add_post(data)
 
     def send_post_action(self, postActions):
         postAction = postActions['action']

@@ -84,7 +84,13 @@ class NewPostingView(APIView):
             )
 
 
-        return Response('Post the post')
+        postObj.save()
+        # Once you made the post, you would wnat to return the id and then
+        # send it into the websocket
+        content = {
+            "postId": postObj.id
+        }
+        return Response(content)
 
 # Needed for ReactInfiniteView grabs offset and limit in infinite scroll
 def infinite_filter(request):

@@ -3,6 +3,8 @@ import { Upload, Modal, Input, Avatar, Button, Divider, Switch, Alert, message }
 import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
+import WebSocketPostsInstance from '../postWebsocket';
+
 
 const {TextArea} = Input
 
@@ -73,16 +75,36 @@ class NewNewsfeedFormPost extends React.Component{
       })
     }
 
+    handleValidation(){
+      // This function will handle the validating whether or not you are allowed to post
+
+      // Since we want only post with pictures, so we have to make a conditional
+      // where if there is a photo and no caption then post would work, if there is
+      // just post and no pictures then it would not work
+
+      let caption = this.state.caption
+      let fileList = this.state.fileList
+      let buttonDisabled = true
+
+      // Only in the case where there are photos then buttom should not be
+      // disabled
+      if(caption !== "" && fileList.length > 0){
+        buttonDisabled = false
+      } else if (caption === "" && fileList.length > 0){
+        buttonDisabled = false
+      } else {
+        buttonDisabled = true
+      }
+
+      return buttonDisabled
+
+
+    }
+
     onFormSubmit= () => {
       console.log(this.state)
 
-      if(this.state.fileList.length == 0){
-         message.error('No Image Attatched!');
-         return;
-      }
 
-
-      if(this.state.caption !== '' || this.state.fileList.length !== 0){
         // In order to post data into the post modal we would need
         // the username, caption, and maybe the post images
         // And since the post images are ina list and we want a lsit of the
@@ -91,7 +113,7 @@ class NewNewsfeedFormPost extends React.Component{
         const formData = new FormData()
         formData.append('user', this.props.curUserId)
         // if (this.state.caption !== ''){
-          formData.append('caption', this.state.caption)
+        formData.append('caption', this.state.caption)
         // }
         if(this.state.fileList.length !== 0){
           for(let i = 0; i<this.state.fileList.length; i++){
@@ -103,16 +125,18 @@ class NewNewsfeedFormPost extends React.Component{
           formData,
           {headers: {"content-type": "multipart/form-data"}}
 
-      )
-        // Now that you have the data all set up now you need to go to the back end and
-        // start making the post function for the posting
+        ).then(res => {
+          console.log(res.data.postId)
 
+          // Now you will make a websocket that will accept the post Id then
+          // send it into the frotn end
+          WebSocketPostsInstance.addPost(res.data.postId)
+        })
+      // Now when you do an axios call to post the pictures, you will then return the
+      // post id so that you can send it into the websocket so that it can update teh
+      // newsfeed
 
-      window.location.reload(true)
-
-      }
-
-
+      // window.location.reload(true)
 
     }
 
@@ -217,7 +241,9 @@ class NewNewsfeedFormPost extends React.Component{
 
           <div>
 
-              <Button style={{fontSize:'24px', }} shape="round" type="primary"
+              <Button
+              disabled = {this.handleValidation()}
+              style={{fontSize:'24px', }} shape="round" type="primary"
                 style={{float:'right', marginTop:'25px', marginRight:'25px'}}
                 onClick={this.onFormSubmit}>Post</Button>
           </div>
