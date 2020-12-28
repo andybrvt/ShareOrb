@@ -108,9 +108,18 @@ class NewsfeedPost extends React.Component {
 
   DestroyPost= () => {
     WebSocketPostsInstance.deletePost(this.props.data.id)
+    this.openDeleteNotification("bottomRight")
     Modal.destroyAll();
     // window.location.reload();
   }
+
+  openDeleteNotification = placement => {
+  notification.info({
+    message: `Post deleted`,
+    description:"You have deleted a post.",
+    placement,
+  });
+};
 
 
    ShowNextSteps = () => {

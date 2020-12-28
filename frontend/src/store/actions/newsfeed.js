@@ -34,10 +34,10 @@ export const addPostComment = comment => {
   }
 }
 
-export const deletePost = post => {
+export const deletePost = postList => {
   return {
     type: actionTypes.DELETE_POST,
-    postId: post.postId
+    postList: postList
   }
 }
 

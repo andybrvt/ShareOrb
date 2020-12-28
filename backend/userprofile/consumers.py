@@ -571,9 +571,12 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
     def delete_post(self, data):
         # This will delete the post
         Post.objects.get(id = data['postId']).delete()
+        post_list = Post.objects.all().order_by('-created_at', '-updated_at')
+        # num_likes = Post.objects.filter(id = data['postId'])
+        serializedPostList = PostSerializer(post_list, many= True).data
         content = {
             'command':'delete_post',
-            'postId': data['postId']
+            'postList': serializedPostList
         }
         return self.send_new_action(content)
 

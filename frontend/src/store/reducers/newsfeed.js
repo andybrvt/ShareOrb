@@ -81,15 +81,9 @@ const addPostComment = (state, action ) => {
 // REDO THIS
 const deletePost = (state, action) => {
 
-    const postId = action.postId
-
-    function removePost(post) {
-      return post.id !== postId
-    }
-
-    return updateObject(state, {
-      posts: state.posts.filter(removePost)
-    })
+  return updateObject(state, {
+    posts: action.postList
+  })
 }
 
 

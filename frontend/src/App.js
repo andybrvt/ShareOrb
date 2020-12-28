@@ -285,7 +285,7 @@ const mapDispatchToProps = dispatch => {
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
 
 
-    deletePost: postId => dispatch(newsfeedActions.deletePost(postId)),
+    deletePost: postList => dispatch(newsfeedActions.deletePost(postList)),
     addPost: postObj => dispatch(newsfeedActions.addPost(postObj)),
 
 

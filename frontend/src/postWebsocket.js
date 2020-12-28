@@ -84,13 +84,12 @@ class WebSocketPosts {
 
       this.callbacks['new_comments'](commentObject)
     } else if (command === 'delete_post'){
-      console.log('we hit delete post')
 
-      const postId = parsedData.postId
-      const postObject ={
-        postId: postId
-      }
-      this.callbacks['delete_post'](postObject)
+      const postList = parsedData.postList
+
+
+      this.callbacks['delete_post'](postList)
+
 
     } else if( command === "add_post"){
       // This will add a new post when we are posting somethign new on the newsfeed
