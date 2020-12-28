@@ -129,6 +129,27 @@ class SideMenu extends React.Component {
 
   }
 
+  onChatDirect = () => {
+    if(this.props.location.pathname === "/chat/"+this.props.curChatId){
+      window.location.reload()
+    } else {
+      this.props.history.push("/chat/"+this.props.curChatId)
+    }
+
+  }
+
+  onCalendarDirect = () => {
+    const currentDay = new Date()
+    const selectYear = dateFns.getYear(currentDay).toString()
+    const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
+    const selectDay = dateFns.getDate(currentDay).toString()
+
+    if(this.props.location.pathname === "/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay){
+      window.location.reload()
+    } else {
+      this.props.history.push("/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay)
+    }
+  }
 
   onProfileDirect = () => {
     if(this.props.location.pathname === "/explore/"+this.props.username){
@@ -265,17 +286,23 @@ class SideMenu extends React.Component {
                        </li>
                       {/*<li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
                     */}
-                    <li><a href={"/chat/"+this.props.curChatId}
-                      class="d-flex align-items-center">
+                    <li
+                    onClick = {() => this.onChatDirect()}
+                    >
+                    <a class="d-flex align-items-center">
                       <i class="far fa-comment"></i>
                       <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
-                    </a></li>
-                      <li><a href={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay}
-                        class="d-flex align-items-center">
-                        <i style={{marginLeft:'1px'}} class="far fa-calendar-alt"></i>
-                        <span style={{marginLeft:'10px'}} class="menu-text">Personal</span>
-                        <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
-                      </a></li>
+                    </a>
+                    </li>
+                      <li
+                      onClick = {() => this.onCalendarDirect()}
+                      >
+                        <a class="d-flex align-items-center">
+                          <i style={{marginLeft:'1px'}} class="far fa-calendar-alt"></i>
+                          <span style={{marginLeft:'10px'}} class="menu-text">Personal</span>
+                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
+                        </a>
+                      </li>
 
                       <li
                       onClick = {() => this.onProfileDirect()}
