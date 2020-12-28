@@ -167,40 +167,35 @@
   padding-top: 3px;
 }
 
-.socialEventInfoContainerContainer .socialEventInfoContainer .editEventBackButtonContainer:hover{
-  background-color: whitesmoke;
-}
 
-.socialEventInfoContainerContainer .socialEventInfoContainer .editEventButtonContainer{
+
+
+/* edit pencil social event  */
+.editPencilSocialEvent{
+  /* background-color: red; */
+  color:#1890ff;
   text-align: center;
   position:absolute;
   font-size: 30px;
-  top: -140px;
-  left: 1120px;
-  width: 100px;
+  top: 75px;
+  left: 1025px;
   cursor: pointer;
+  transition: 0.5s;
+
+}
+
+/* close social event times */
+.closeSocialEvent{
   /* background-color: red; */
+
+  text-align: center;
+  position:absolute;
+  font-size: 40px;
+  top: 10px;
+  left: 1020px;
+  cursor: pointer;
   transition: 0.5s;
 }
-
-.socialEventInfoContainerContainer .socialEventInfoContainer .editEventButtonContainer:hover{
-  top: 0px;
-}
-
-/* edit button */
-.socialEventInfoContainerContainer.active .socialEventInfoContainer .editEventButtonContainer{
-  /* top: -140px; */
-  left: 960px;
-}
-
-.socialEventInfoContainerContainer.active .socialEventInfoContainer .editEventButtonContainer:hover{
-  top: 0px;
-
-}
-
-
-
-
 
 /* Transfer more of that editing and event pge into the soical calendar events */
 

@@ -599,12 +599,7 @@ class DetailEditEventForm extends React.Component{
   }
 
 
-  onEditClick = () => {
-    // This will activate the edit so that you can start editing events
-    this.setState({
-      visible: true
-    })
-  }
+
 
   onCancelEventClick = () => {
     this.setState({
@@ -647,30 +642,12 @@ class DetailEditEventForm extends React.Component{
     return(
       <div>
 
-        <div className = 'editEventButtonContainer'>
-          {
-            eventHostId === this.props.userId ?
 
-            <div>
-              <div
-              onClick={() => this.onEditClick()}
-              >
-              <i class="fas fa-pen" ></i>
-              </div>
-            </div>
-
-            :
-
-            <div></div>
-
-          }
-
-        </div>
 
       <Drawer
           title="Edit Event"
           width={500}
-          visible={this.state.visible}
+          visible={this.props.visible}
           onClose={this.onClose}
 
           bodyStyle={{ paddingBottom: 80 }}

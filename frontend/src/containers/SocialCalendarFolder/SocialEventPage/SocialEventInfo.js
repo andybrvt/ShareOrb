@@ -10,6 +10,7 @@ import * as socialActions from '../../../store/actions/socialCalendar';
 import { connect } from "react-redux";
 import DeleteSocialEventModal from './DeleteSocialEventModal';
 import { ReactBingmaps } from 'react-bingmaps';
+import {Link, withRouter} from 'react-router-dom';
 import DetailEditEventForm from '../../PersonalCalendar/EventPage/DetailEditEventForm';
 class SocialEventInfo extends React.Component{
 
@@ -270,31 +271,52 @@ class SocialEventInfo extends React.Component{
         persons = this.props.info.persons
       }
 
+
     }
 
     return (
+
+
+
       <div className = {`socialEventInfoContainerContainer ${this.props.active ? "" : "active"}` }>
       <div className = "socialEventInfoContainer" >
+        <div className = 'closeSocialEvent'>
+          <Link to={"/explore/admin"} >
+          <i class="far fa-times-circle">  </i>
+          </Link>
+        </div>
+        <div className = 'editPencilSocialEvent'>
+          {
+            eventHostId === this.props.userId ?
 
+            <div>
+              <div
+              onClick={() => this.onEditClick()}
+              >
+              <i class="fas fa-pen" ></i>
+              </div>
+            </div>
+
+            :
+
+            <div></div>
+
+          }
+
+        </div>
       {
         this.state.edit ?
 
         <div>
-        <DetailEditEventForm
-        {...this.props}
-        initialValues = {this.getInitialValue()}
-        onSubmit = {this.onSaveEdit}
-        onDelete = {this.onOpenDeleteSocialModal}
-         />
+          <DetailEditEventForm
+          {...this.props}
+          visible={this.state.edit}
+          initialValues = {this.getInitialValue()}
+          onSubmit = {this.onSaveEdit}
+          onDelete = {this.onOpenDeleteSocialModal}
+           />
 
 
-        <div
-        className = "editEventBackButtonContainer "
-        onClick = {() => this.onCancelEventClick()}>
-
-        <i class="fas fa-arrow-left"></i>
-
-        </div>
         </div>
 
         :
@@ -306,7 +328,9 @@ class SocialEventInfo extends React.Component{
           {
             eventBackgroundPic === "" ?
             <div
-            className = 'eventBackgroundPic'>
+            className = 'eventBackgroundPic'
+            onClick = {() => this.onChangeBackgroundOpen()}
+            >
             <div className = "pictureFrame">
                 <PictureOutlined />
                 <br />
@@ -540,45 +564,6 @@ class SocialEventInfo extends React.Component{
 
 
 
-            <div className = 'editEventButtonContainer'>
-            {
-              eventHostId === this.props.userId && this.checkDay(this.props.info.event_day ,this.props.info.end_time) ?
-
-              <div
-              className = 'editEventButton'
-              // onClick= {() => this.onEditClick()} /
-              >
-              <div
-              onClick = {() => this.onChangeBackgroundOpen()}
-              >
-              <i class="far fa-image"></i>
-              <div style = {{fontSize: "8px", marginBottom: "20px"}}>
-              Change Background
-              </div>
-              </div>
-
-
-              <div
-              onClick={() => this.onEditClick()}
-              >
-              <i class="fas fa-pen" ></i>
-              <div style = {{fontSize: "15px"}}>
-              Edit Event
-              </div>
-              </div>
-
-              <div>
-              <i class="fas fa-chevron-down"></i>
-              </div>
-              </div>
-
-              :
-
-              <div></div>
-
-            }
-
-            </div>
 
           </div>
 
