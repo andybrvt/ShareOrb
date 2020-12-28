@@ -114,7 +114,7 @@ class NewNewsfeedFormPost extends React.Component{
     onFormSubmit= () => {
       console.log(this.state)
 
-
+      const ownerId = this.props.curUserId
         // In order to post data into the post modal we would need
         // the username, caption, and maybe the post images
         // And since the post images are ina list and we want a lsit of the
@@ -145,6 +145,29 @@ class NewNewsfeedFormPost extends React.Component{
       // Now when you do an axios call to post the pictures, you will then return the
       // post id so that you can send it into the websocket so that it can update teh
       // newsfeed
+      if(this.state.socialClip){
+        // This will check if the user wanted to post the photos that they are posting
+        // right now to the social cal cell as well
+
+        // Since the view for uploading pics on social cal require pics only
+        // we have to make a new formdata
+        const socialFormData = new FormData()
+        if(this.state.fileList.length !== 0){
+          for(let i = 0; i<this.state.fileList.length; i++){
+            socialFormData.append('image['+i+']', this.state.fileList[i].originFileObj)
+          }
+        }
+
+        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+ownerId,
+          socialFormData,
+          {headers: {"content-type": "multipart/form-data"}}
+
+        )
+
+        this.openSocialNotification("bottomRight")
+
+      }
+
 
       this.setState({
         fileList: [],
@@ -162,6 +185,15 @@ class NewNewsfeedFormPost extends React.Component{
         message: `Pictures posted`,
         description:
           'You have posted pictures to newsfeed.',
+        placement,
+      });
+    };
+
+    openSocialNotification = placement => {
+      notification.info({
+        message: `Pictures posted to social calendar`,
+        description:
+          'You have posted pictures to social calendar.',
         placement,
       });
     };

@@ -44,6 +44,7 @@ class SocialCalUploadPic(APIView):
 
 
         change = False
+        print(request.data)
 
         for i in range(len(request.data)):
             print(request.data['image['+str(i)+']'])
