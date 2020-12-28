@@ -116,6 +116,28 @@ class SideMenu extends React.Component {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  onNewsfeedDirect = () => {
+    // This will re redner the newsfeed if it is on the page, if it is not
+    // then it will just do a history.push
+    if(this.props.location.pathname === "/home"){
+      // you want to re render here
+      window.location.reload();
+
+    } else {
+      this.props.history.push("/home")
+    }
+
+  }
+
+
+  onProfileDirect = () => {
+    if(this.props.location.pathname === "/explore/"+this.props.username){
+      window.location.reload()
+    } else {
+      this.props.history.push("/explore/"+this.props.username)
+    }
+  }
+
   render() {
     const currentDay = new Date()
     const selectYear = dateFns.getYear(currentDay).toString()
@@ -231,10 +253,15 @@ class SideMenu extends React.Component {
 
                   <div class="nav-menu">
                     <ul class="sidebarList">
-                      <li><a href="/home" class="d-flex align-items-center">
-                         <HomeOutlined  style={{marginRight:'10px'}}/><span class="menu-text">
+                      <li
+                      onClick = {() => this.onNewsfeedDirect()}
+                      >
+                      <a class="d-flex align-items-center">
+                         <HomeOutlined  style={{marginRight:'10px'}}/>
+                         <span class="menu-text">
                            Home
-                         </span></a>
+                         </span>
+                      </a>
                        </li>
                       {/*<li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
                     */}
@@ -250,11 +277,14 @@ class SideMenu extends React.Component {
                         <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
                       </a></li>
 
-                      <li><a href={"/explore/"+this.props.username}
-                        class="d-flex align-items-center">
-                        <i  style={{marginLeft:'-2px'}} class="fas fa-user-friends"></i>
+                      <li
+                      onClick = {() => this.onProfileDirect()}
+                      >
+                      <a class="d-flex align-items-center">
+                        <i style={{marginLeft:'-2px'}} class="fas fa-user-friends"></i>
                           <span style={{marginLeft:'10px'}}  class="menu-text">Social</span>
-                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span></a>
+                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
+                      </a>
                       </li>
                     </ul>
                   </div>
