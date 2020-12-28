@@ -110,6 +110,13 @@ class EventInfo extends React.Component{
 
   }
 
+  onEditClick = () => {
+    // This will activate the edit so that you can start editing events
+    this.setState({
+      edit: true
+    })
+  }
+
   timeConvert = (time) => {
     // This function will take in a time and then covert the time to
     // a 1-24 hour hour so that it cna be used to add into the
@@ -966,6 +973,26 @@ class EventInfo extends React.Component{
             </Link>
           </div>
 
+          <div className = 'editEventButtonContainer'>
+            {
+              eventHostId === this.props.userId ?
+
+              <div>
+                <div
+                onClick={() => this.onEditClick()}
+                >
+                <i class="fas fa-pen" ></i>
+                </div>
+              </div>
+
+              :
+
+              <div></div>
+
+            }
+
+          </div>
+
 
 
         </div>
@@ -976,6 +1003,7 @@ class EventInfo extends React.Component{
       info = {this.props.info}
       initialValues = {this.getInitialValue()}
       onSubmit = {this.onSaveEdit}
+      visible={this.state.edit}
       friendList = {this.props.friendList}
       onDelete = {this.onDeleteEvent}
        />
