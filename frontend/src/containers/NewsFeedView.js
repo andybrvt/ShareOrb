@@ -189,7 +189,9 @@ class NewsFeedView extends React.Component {
 		centered
 
 		>
-	<NewNewsfeedFormPost profile = {this.props.currentProfile}/>
+	<NewNewsfeedFormPost
+	onCancel = {this.closeProfileEdit}
+	profile = {this.props.currentProfile}/>
 	</Modal>
 	</div>
 

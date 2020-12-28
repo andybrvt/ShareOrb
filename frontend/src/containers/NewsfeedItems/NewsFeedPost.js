@@ -142,6 +142,7 @@ class NewsfeedPost extends React.Component {
           )
         }
         else if(userPostImages.length==2){
+          
           return(
             <div className = "postPicCarouselNews">
                <PostPicCarousel

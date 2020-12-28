@@ -191,3 +191,42 @@
   margin-left: 10px;
   font-size: 15px;
 }
+
+.postLeftRight{
+
+}
+
+.postLeftRight .postArrowLeft{
+  position: absolute;
+  /* background-color: red; */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 0%;
+  font-size: 45px;
+}
+
+.postLeftRight .postArrowRight{
+  position: absolute;
+  /* background-color: red; */
+  bottom: 50%;
+  transform: translateY(50%);
+  left: 67%;
+  /* right: 100%; */
+  z-index: 3;
+  font-size: 45px;
+}
+
+.postPicturesRoll{
+  /* height:800px; */
+  /* background-color: #000000cc; */
+  overflow: hidden;
+  height: 920px;
+  position: relative;
+}
+.postPicturesRoll .socialImages{
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}

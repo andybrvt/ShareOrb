@@ -64,8 +64,13 @@ class App extends Component {
       this.props.setPosts.bind(this),
       this.props.addLike.bind(this),
       this.props.unaddLike.bind(this),
+
+      // DELETE THIS LATER
       this.props.addComment.bind(this),
-      this.props.deletePost.bind(this)
+
+
+      this.props.deletePost.bind(this),
+      this.props.addPost.bind(this)
     )
 
     ExploreWebSocketInstance.addCallbacks(
@@ -275,8 +280,14 @@ const mapDispatchToProps = dispatch => {
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
+
+    // DELETE THIS LATER
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
+
+
     deletePost: postId => dispatch(newsfeedActions.deletePost(postId)),
+    addPost: postObj => dispatch(newsfeedActions.addPost(postObj)),
+
 
     loadPost: postObj => dispatch(newsfeedActions.loadPost(postObj)),
     sendUserPostLikeUnlike: likeList => dispatch(newsfeedActions.sendUserPostLikeUnlike(likeList)),

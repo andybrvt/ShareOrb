@@ -136,7 +136,11 @@ class NewNewsfeedFormPost extends React.Component{
       // post id so that you can send it into the websocket so that it can update teh
       // newsfeed
 
-      // window.location.reload(true)
+      this.setState({
+        fileList: [],
+        caption: ""
+      })
+      this.props.onCancel()
 
     }
 

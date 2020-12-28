@@ -41,6 +41,13 @@ export const deletePost = post => {
   }
 }
 
+export const addPost = postObj => {
+  return {
+    type: actionTypes.ADD_POST,
+    postObj: postObj
+  }
+}
+
 
 
 // THESE ACTIONS FOR THE INDIVIDUAL POST PAGES

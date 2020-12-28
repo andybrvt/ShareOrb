@@ -76,9 +76,7 @@ class WebSocketPosts {
 
       this.callbacks['un_like'](unlikeObject)
     } else if (command === 'new_comment'){
-      console.log(parsedData)
       const comment = JSON.parse(parsedData.comment)
-      console.log(comment)
       // This will send the comment portion into redux
       const commentObject = {
         comment: comment
@@ -94,6 +92,13 @@ class WebSocketPosts {
       }
       this.callbacks['delete_post'](postObject)
 
+    } else if( command === "add_post"){
+      // This will add a new post when we are posting somethign new on the newsfeed
+      const postObj = parsedData.postObj
+
+      // add callbacks here
+      this.callbacks['add_post'](postObj)
+
     }
   }
 
@@ -102,13 +107,15 @@ class WebSocketPosts {
       newLikeCallback,
       unLikeCallback,
       newCommentsCallback,
-      deletePostCallback
+      deletePostCallback,
+      addPostCallback
     ){
     this.callbacks['fetch_posts'] = postsCallback;
     this.callbacks['new_like'] = newLikeCallback;
     this.callbacks['un_like'] = unLikeCallback;
     this.callbacks['new_comments'] = newCommentsCallback;
     this.callbacks['delete_post'] = deletePostCallback;
+    this.callbacks['add_post'] = addPostCallback
   }
 
   fetchPosts(userId){

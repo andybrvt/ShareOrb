@@ -92,10 +92,16 @@ const deletePost = (state, action) => {
     })
 }
 
+const addPost = (state, action) => {
+  return updateObject(state, {
+    posts: [action.postObj, ...state.posts]
+  })
+}
+
+
 
 
 // THESE FUNCTIONS WILL BE USED FOR THE POST PAGE
-// DELETE THESE BECAUSE NOW YOU HAVE A POST PAGE ALREADY
 const loadPost =(state, action) => {
   return updateObject(state, {
     post: action.postObj
@@ -137,6 +143,8 @@ const reducer = (state = initialState, action) => {
       return addPostComment(state, action);
     case actionTypes.DELETE_POST:
       return deletePost(state, action);
+    case actionTypes.ADD_POST:
+      return addPost(state, action);
 
 
     case actionTypes.LOAD_POST:

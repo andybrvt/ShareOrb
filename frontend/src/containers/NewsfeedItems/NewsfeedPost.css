@@ -263,8 +263,8 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 .postPicCarouselNews .socialLeftRight .socialArrowLeft{
   position: absolute;
   /* background-color: red; */
-  color: white;
-  top: 37%;
+  color: gray;
+  top: 45%;
   transform: translateY(-50%);
   z-index: 3;
   left: 0%;
@@ -273,8 +273,8 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 .postPicCarouselNews .socialLeftRight .socialArrowRight{
   position: absolute;
   /* background-color: red; */
-  color: white;
-  bottom: 63%;
+  color: gray;
+  bottom: 55%;
   transform: translateY(50%);
   left: 93%;
   /* right: 100%; */

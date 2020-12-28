@@ -70,7 +70,7 @@ export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 export const UNADD_POST_LIKE = 'UNADD_POST_LIKE';
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
-
+export const ADD_POST = 'ADD_POST';
 
 // THIS IS FOR THE POST PAGE IT SELF
 export const LOAD_POST = 'LOAD_POST';

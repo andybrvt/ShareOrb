@@ -114,6 +114,11 @@ class UserPostPage extends React.Component{
     UserPostPageWebSocketInstance.sendUserPostUnlike(personUnlike, this.props.match.params.postId)
   }
 
+  onCurPhotoChange = (picIndex) => {
+    // This will be used for clipping
+    console.log(picIndex)
+  }
+
   render() {
 
     console.log(this.props)
@@ -179,7 +184,9 @@ class UserPostPage extends React.Component{
           :
 
           <div className = "postPicturesCarousel">
-             <PostPicCarousel items = {userPostImages} />
+             <PostPicCarousel
+             picIndexChange = {this.onCurPhotoChange}
+             items = {userPostImages} />
           </div>
 
         }
