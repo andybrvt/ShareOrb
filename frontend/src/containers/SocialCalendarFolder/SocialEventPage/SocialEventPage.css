@@ -25,6 +25,7 @@
   overflow: hidden;
   position: absolute;
   left: 50%;
+  margin-top: -25px;
   /* bottom: 5px; */
   transform: translateX(-48%);
 }
@@ -186,6 +187,7 @@
   top: 0px;
 }
 
+/* edit button */
 .socialEventInfoContainerContainer.active .socialEventInfoContainer .editEventButtonContainer{
   /* top: -140px; */
   left: 960px;
@@ -215,9 +217,9 @@
 }
 /* gray container */
 .socialEventInfoContainerContainer .socialEventInfoContainer .eventInfoView .topSectContainier .eventTopSide{
-  width: 45%;
-  height: 400px;
-  padding: 50px;
+  width: 50%;
+  height: 375px;
+  padding: 40px;
   background-color: #F5F5F5;
 }
 
@@ -250,14 +252,14 @@
 
 .socialEventInfoContainerContainer .socialEventInfoContainer .eventInfoView .topSectContainier .eventBackgroundPic{
   width: 50%;
-  height: 400px;
+  height: 375px;
   border: 10px dashed gainsboro;
   text-align: center;
 }
 
 .socialEventInfoContainerContainer .socialEventInfoContainer .eventInfoView .topSectContainier .eventBackgroundWPic{
   width: 50%;
-  height: 400px;
+  height: 375px;
   overflow: hidden;
   border-radius: 10px;
   /* border: 10px dashed gainsboro; */
