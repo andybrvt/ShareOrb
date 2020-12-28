@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Modal, List } from 'antd';
+import { Avatar, Button, Modal, List, Divider } from 'antd';
 import CurChatEventList from './ChatManagerFolder/CurChatEventList';
 
 // This will be the far right side of the chats that holds the
@@ -237,20 +237,24 @@ class CurChatManager extends React.Component{
           :
 
           <div className = 'chatRightSideBox'>
-          <Avatar
-          size = {200}
-          src = {"http://127.0.0.1:8000"+profilePic}
-          />
-          <div
-          className= 'chatName'
-          >{chatUserName}</div>
-          </div>
-        }
+            <Avatar
+            size = {200}
+            src = {"http://127.0.0.1:8000"+profilePic}
+            />
 
-        <div className ="" >
+            <div
+            className= 'mainChatUserName'
+            >{chatUserName}ff</div>
+          </div>
+
+        }
+        <Divider/>
+
+        <div className ="" style={{marginTop:'40px'}} >
         <Button
         onClick = {() => this.onOpenEventModal()}
         > Share Event </Button>
+
         </div>
 
         {

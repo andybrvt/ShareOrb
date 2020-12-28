@@ -215,7 +215,7 @@ class AddNewChatContent extends React.Component{
           <Select
             mode="multiple"
             // style={{ width: '100%' }}
-            placeholder="Search users"
+            placeholder={<i class="newUserSearchChat fas fa-user"> Search Users </i> }
             onChange={this.handleChange}
             value = {this.state.person}
             optionLabelProp="label"

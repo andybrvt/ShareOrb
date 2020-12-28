@@ -210,7 +210,7 @@ class DetailEditEventForm extends React.Component{
 
   onClose = () => {
     this.setState({
-      visible: false,
+      visible: !this.state.visible,
 
     });
   };
@@ -645,10 +645,11 @@ class DetailEditEventForm extends React.Component{
 
 
       <Drawer
-          title="Edit Event"
+
           width={500}
           visible={this.props.visible}
           onClose={this.onClose}
+
 
           bodyStyle={{ paddingBottom: 80 }}
           footer={

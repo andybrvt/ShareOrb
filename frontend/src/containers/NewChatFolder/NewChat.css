@@ -16,6 +16,13 @@
   height: 100%;
 }
 
+.mainChatUserName{
+  font-weight: 500;
+  color:black;
+  margin-top: 15px;
+  font-size: 25px;
+}
+
 .chatContainer .chatRightSide{
   display: flex;
   flex-direction: column;
@@ -136,11 +143,11 @@
 }
 .manageChatForm .searchInput{
   position: relative;
-  top: 12px;
-  /* left: 1%; */
+  top: 20px;
+  left: 1%;
   box-sizing: border-box;
   width: 100%;
-  height: 70%;
+  height: 60%;
   border-radius: 25px;
   background-color: whitesmoke;
 }
@@ -155,6 +162,12 @@
   cursor: pointer;
 }
 
+.newUserSearchChat{
+
+  font-family: 'Segoe UI Regular';
+  font-size: 14px;
+
+}
 
 
 /* This is for the nochatscreen.js */
@@ -200,6 +213,7 @@
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatName{
   font-size: 25px;
+  font-weight: 500;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatGroupAva{
   background-color: gainsboro;
@@ -322,23 +336,34 @@
   height: 7.5%;
   width: 100%;
   border: 1px solid grey;
+  /* background-color: red; */
 }
 
 .chatContainer .chatRightSide .newChatContent .bottomBox .formInputs{
   position: relative;
-  left: 25%;
+
   /* background-color: red; */
-  width: 73%;
+  left:3%;
+  width: 90%;
   /* top: 10px; */
 }
-.chatContainer .chatRightSide .newChatContent .bottomBox .formInputs .sendButton{
-  color: dodgerblue;
-  font-size: 30px;
-  position: relative;
-  left: 25px;
-  top: 7px;
-  cursor: pointer;
+.formInputs .sendButton{
+  /* background-color: yellow; */
+  top:40%;
+  position:absolute;
+  margin-left: 10px;
+  font-size: 25px;
+}
 
+
+.chatInput{
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  height: 35px;
+  border-radius: 25px;
+  background-color: whitesmoke;
 }
 
 
@@ -366,15 +391,6 @@
 }
 
 
-.chatInput{
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 10px;
-  height: 40px;
-  border-radius: 25px;
-  background-color: whitesmoke;
-}
 
 .chatItem {
   padding: 10px;
@@ -410,7 +426,8 @@
   margin-top: 10px;
 }
 .chatItem .chatWrap .chatText .chatName {
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
   color: black;
 }
 .chatItem .chatWrap .chatText .chatDescription{

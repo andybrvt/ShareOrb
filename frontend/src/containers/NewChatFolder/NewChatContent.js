@@ -266,8 +266,9 @@ class NewChatContent extends React.Component{
 
 
 
-
+            <i style={{color:'#1890ff', float:'right'}} class="sendButton fas fa-paper-plane"></i>
             </div>
+
           </form>
         </div>
       </div>
