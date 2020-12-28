@@ -109,7 +109,7 @@ class NewsfeedPost extends React.Component {
   DestroyPost= () => {
     WebSocketPostsInstance.deletePost(this.props.data.id)
     Modal.destroyAll();
-    window.location.reload();
+    // window.location.reload();
   }
 
 
@@ -154,7 +154,7 @@ class NewsfeedPost extends React.Component {
         }
  }
 
- 
+
 
  randomAvatarColor = () => {
 

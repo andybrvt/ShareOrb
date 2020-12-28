@@ -92,6 +92,7 @@ const deletePost = (state, action) => {
     })
 }
 
+
 const addPost = (state, action) => {
   return updateObject(state, {
     posts: [action.postObj, ...state.posts]

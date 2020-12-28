@@ -266,7 +266,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   color: gray;
   top: 45%;
   transform: translateY(-50%);
-  z-index: 3;
+  z-index: 2;
   left: 0%;
   font-size: 45px;
 }
@@ -278,7 +278,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   transform: translateY(50%);
   left: 93%;
   /* right: 100%; */
-  z-index: 3;
+  z-index: 2;
   font-size: 45px;
 }
 .postPicCarouselNews .socialLeftRight .picturesRoll{

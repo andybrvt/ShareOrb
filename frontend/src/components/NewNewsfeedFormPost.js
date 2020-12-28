@@ -150,6 +150,8 @@ class NewNewsfeedFormPost extends React.Component{
         fileList: [],
         caption: ""
       })
+
+      this.openNotification("bottomRight")
       this.props.onCancel()
 
     }
@@ -157,9 +159,9 @@ class NewNewsfeedFormPost extends React.Component{
 
     openNotification = placement => {
       notification.info({
-        message: `Notification ${placement}`,
+        message: `Pictures posted`,
         description:
-          'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          'You have posted pictures to newsfeed.',
         placement,
       });
     };
