@@ -10,7 +10,7 @@ import * as socialActions from '../../../store/actions/socialCalendar';
 import { connect } from "react-redux";
 import DeleteSocialEventModal from './DeleteSocialEventModal';
 import { ReactBingmaps } from 'react-bingmaps';
-
+import DetailEditEventForm from '../../PersonalCalendar/EventPage/DetailEditEventForm';
 class SocialEventInfo extends React.Component{
 
   constructor(props){
@@ -280,7 +280,7 @@ class SocialEventInfo extends React.Component{
         this.state.edit ?
 
         <div>
-        <EditSocialEventForm
+        <DetailEditEventForm
         {...this.props}
         initialValues = {this.getInitialValue()}
         onSubmit = {this.onSaveEdit}
@@ -351,7 +351,7 @@ class SocialEventInfo extends React.Component{
             <div className = "day"> {day} </div>
             </div>
 
-            <div class="eventCard" style={{marginTop:'25px',width:'400px', height:'200px',padding:'50px'}}>
+            <div class="eventCard" style={{marginTop:'25px',width:'450px', height:'225px',padding:'50px'}}>
                 <div
                   className = 'eventTitle'>
                   {this.capitalize(title)}
@@ -359,7 +359,47 @@ class SocialEventInfo extends React.Component{
 
                 <br/>
 
+                  <span
+                    style={{display:'inline-block'}}>
 
+
+                      <Button
+                         type="primary" shape="round"
+                         icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+                         style={{left:'0%', fontSize:'15px'}} size={'large'}>
+
+                        Invite
+                      </Button>
+
+                   {
+                     (persons.includes(this.props.username))?
+                        <Button
+                           shape="round"
+                           icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                           style={{left:'5%', fontSize:'15px'}} size={'large'}>
+
+                          Going
+                        </Button>
+
+                        :
+                        <Button
+                           shape="round" type="primary"
+                           icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                           style={{left:'5%', fontSize:'15px'}} size={'large'}>
+
+                          Going
+                        </Button>
+
+                  }
+
+
+                    <Button
+                       shape="round"
+                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+                       style={{left:'10%', fontSize:'15px'}} size={'large'} danger>
+                       Delete
+                    </Button>
+                  </span>
               <div class="flex-container"
                 style={{width:'250px', color:'#1890ff', padding:'10px', background:'white'}}
 
@@ -385,11 +425,14 @@ class SocialEventInfo extends React.Component{
           </div>
 
           <div className = "eventInfo outerContainer">
-            <div style={{ fontSize:'20px',display:'inline-block', width:'500px' }}
+            <div style={{ marginLeft:'15px', fontSize:'20px',display:'inline-block', width:'500px' }}
               class="aboutEvent eventCard innerContainer">
               Event Details
               <Divider/>
               <div style={{fontSize:'16px'}}>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
+                Social Event
+                <br/>
                 <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
                   {date} at {start_time} - {end_time}
                 <br/>
@@ -423,12 +466,14 @@ class SocialEventInfo extends React.Component{
 
 
               </div>
-              <div class="socialEventHeader" style={{float:'right'}}>
+
+              <div class="socialEventHeader" style={{float:'right', marginRight:'50px'}}>
+
                 Going
 
                 <br/>
-                <span>
-                44
+                <span style={{marginLeft:'10px', fontSize:"24px"}}>
+                {persons.length}
                 </span>
 
 

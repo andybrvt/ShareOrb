@@ -2,7 +2,6 @@ import React from 'react';
 import './EventPage.css';
 import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic} from 'antd';
 import {PictureOutlined, CheckSquareTwoTone, EyeOutlined, DownloadOutlined, UserOutlined} from '@ant-design/icons';
-import ReduxEditEventForm from '../EditCalEventForms/ReduxEditEventForm';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
