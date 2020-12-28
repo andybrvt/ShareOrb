@@ -1,5 +1,15 @@
 import React from 'react';
-import { Upload, Modal, Input, Avatar, Button, Divider, Switch, Alert, message } from 'antd';
+import { Upload,
+   Modal,
+   Input,
+   Avatar,
+   Button,
+   Divider,
+   Switch,
+   Alert,
+   message,
+   notification
+  } from 'antd';
 import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
@@ -143,6 +153,16 @@ class NewNewsfeedFormPost extends React.Component{
       this.props.onCancel()
 
     }
+
+
+    openNotification = placement => {
+      notification.info({
+        message: `Notification ${placement}`,
+        description:
+          'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        placement,
+      });
+    };
 
     render(){
       let firstName = ''

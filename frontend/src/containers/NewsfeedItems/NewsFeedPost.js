@@ -141,8 +141,8 @@ class NewsfeedPost extends React.Component {
         </div>
           )
         }
-        else if(userPostImages.length==2){
-          
+        else if(userPostImages.length>1){
+
           return(
             <div className = "postPicCarouselNews">
                <PostPicCarousel
@@ -152,8 +152,9 @@ class NewsfeedPost extends React.Component {
           )
 
         }
-
  }
+
+ 
 
  randomAvatarColor = () => {
 
