@@ -14,7 +14,10 @@ const initialState = {
   profilePic: '',
   following: [],
   followers: [],
-  sharedList: []
+  sharedList: [],
+  phone_number: "",
+  email: "",
+  dob: ""
 };
 
 const authStart = (state, action) => {
@@ -47,7 +50,8 @@ const authLogout = (state, action) => {
 
 const addCredentials = (state, action) => {
 
-
+  console.log("how many times this hits")
+  console.log(action)
 
   return updateObject(state, {
     username: action.username,
@@ -58,7 +62,10 @@ const addCredentials = (state, action) => {
     lastName: action.lastName,
     profilePic: action.profilePic,
     following: action.following,
-    followers: action.followers
+    followers: action.followers,
+    phone_number: action.phone_number,
+    email: action.email,
+    dob: action.dob
 
   });
 };

@@ -58,7 +58,7 @@ class NewsFeedView extends React.Component {
 
 
 	componentWillReceiveProps(newProps){
-		this.props.grabUserCredentials();
+		// this.props.grabUserCredentials();
 	}
 
 	onViewAlbum = () => {

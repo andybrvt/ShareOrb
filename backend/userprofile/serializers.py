@@ -70,7 +70,8 @@ class UserSerializer(serializers.ModelSerializer):
          'friends',
          'get_allPost',
          'phone_number',
-         'email'
+         'email',
+         'dob'
          )
     def to_representation(self, instance):
         data = super().to_representation(instance)

@@ -131,7 +131,10 @@ const mapStateToProps = state => {
     initialValues: {
       username: state.auth.username,
       firstName: state.auth.firstName,
-      lastName: state.auth.lastName
+      lastName: state.auth.lastName,
+      email: state.auth.email,
+      dob: state.auth.dob,
+      phone_number: state.auth.phone_number
     }
   }
 }

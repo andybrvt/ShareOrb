@@ -203,6 +203,8 @@ class App extends Component {
   componentWillReceiveProps(newProps){
     if(newProps.isAuthenticated){
       console.log(this.props.id, parseInt(newProps.id))
+
+      this.props.grabUserCredentials()
       if(parseInt(this.props.id) !== parseInt(newProps.id)){
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
@@ -265,6 +267,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onTryAutoSignup: () => dispatch(authActions.authCheckState()),
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials()),
     addMessage: message => dispatch(messageActions.addMessage(message)),
     setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat)),
     setChats: chats => dispatch(messageActions.setChats(chats)),

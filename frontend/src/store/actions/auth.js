@@ -28,7 +28,10 @@ export const addCredentials = (
    lastName,
    profilePic,
    following,
-   followers
+   followers,
+   phone_number,
+   email,
+   dob
  ) => {
   return {
     type: actionTypes.ADD_CREDENTIALS,
@@ -40,7 +43,10 @@ export const addCredentials = (
     lastName: lastName,
     profilePic: profilePic,
     following: following,
-    followers: followers
+    followers: followers,
+    phone_number: phone_number,
+    email:email,
+    dob: dob
   };
 };
 
@@ -64,6 +70,9 @@ export const logout = () => {
   localStorage.removeItem('following')
   localStorage.removeItem('followers')
   localStorage.removeItem('suggestedFriends')
+  localStorage.removeItem('phone_number')
+  localStorage.removeItem('email')
+  localStorage.removeItem('dob')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -84,11 +93,6 @@ export const authLogin = (username, password) => {
   // const[username1, setUsername1] = useState('');
   return dispatch => {
     dispatch(authStart());
-
-
-
-
-
 
 
         authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
@@ -171,6 +175,9 @@ export const grabUserCredentials = () => {
         const profilePic = res.data.profile_picture;
         const following = res.data.get_following;
         const followers = res.data.get_followers;
+        const phone_number = res.data.phone_number;
+        const email = res.data.email;
+        const dob = res.data.dob
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
         localStorage.setItem('friends', friends);
@@ -180,6 +187,9 @@ export const grabUserCredentials = () => {
         localStorage.setItem('profilePic', profilePic);
         localStorage.setItem('following', following);
         localStorage.setItem('followers', followers);
+        localStorage.setItem('phone_number', phone_number );
+        localStorage.setItem('email', email);
+        localStorage.setItem('dob', dob);
         dispatch(addCredentials(
            res.data.username,
            res.data.id,
@@ -189,7 +199,10 @@ export const grabUserCredentials = () => {
            res.data.last_name,
            res.data.profile_picture,
            res.data.get_following,
-           res.data.get_followers
+           res.data.get_followers,
+           res.data.phone_number,
+           res.data.email,
+           res.data.dob
          ));
          {/*when it times out*/}
         dispatch(checkAuthTimeout(100000));
