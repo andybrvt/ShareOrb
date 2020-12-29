@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Avatar, notification, Menu, Dropdown } from 'antd';
+import {  Avatar, notification, Menu, Dropdown, Modal } from 'antd';
 import { authAxios } from '../../components/util';
 import Liking from '../../containers/NewsfeedItems/Liking';
 import UserPostComments from './UserPostComments';
@@ -9,6 +9,8 @@ import PostPicCarousel from './PostPicCarousel';
 import * as newsfeedActions from '../../store/actions/newsfeed';
 import * as dateFns from 'date-fns';
 import './UserPostPage.css';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+
 
 class UserPostPage extends React.Component{
 
@@ -181,6 +183,46 @@ class UserPostPage extends React.Component{
   };
 
 
+  deletePost = () => {
+
+    // console.log(this.props.data.id)
+    // authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
+    // message.success('Post deleted successfully!');
+    Modal.confirm({
+    title: 'Confirm',
+    icon: <ExclamationCircleOutlined />,
+    content: 'Are you sure you want to delete this post?',
+    okText: 'OK',
+    cancelText: 'Cancel',
+    okButtonProps: { type: 'danger', onClick:this.DestroyPost},
+  });
+
+	}
+
+  DestroyPost= () => {
+    // Since this is its own page, you proboaly dont need to do websocket for this one
+    // because you first have to exit cell into the new newsfeed. So authaxios call
+    // should be enough
+
+    authAxios.post("http://127.0.0.1:8000/userprofile/deletePost", {
+      postId: this.props.post.id
+    })
+
+    this.props.history.push("/home")
+    this.openDeleteNotification("bottomRight")
+    Modal.destroyAll();
+    //
+  }
+
+  openDeleteNotification = placement => {
+  notification.info({
+    message: `Post deleted`,
+    description:"You have deleted a post.",
+    placement,
+  });
+};
+
+
   cellThreeDots = () => {
     // This drop down is for the calendar cell in itself. To delete the cell
     // and write a post
@@ -200,9 +242,10 @@ class UserPostPage extends React.Component{
                 <span style={{marginLeft:'5px'}}>Change cover picture</span>
             </Menu.Item>
             <Menu.Item danger
+            onClick = {() => this.deletePost()}
              >
               <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-              <span style={{marginLeft:'10px'}}>Delete day</span>
+              <span style={{marginLeft:'10px'}}>Delete post</span>
             </Menu.Item>
           </Menu>
         }>

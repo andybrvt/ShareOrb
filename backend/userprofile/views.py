@@ -314,6 +314,17 @@ class PostTest(generics.ListAPIView):
         queryset = models.Post.objects.all()
         return queryset
 
+class DeletePostView(APIView):
+    # This function will be used to to delete a post whe you are trying to delete
+    # a post from a post page. Since you are deleting it from a different
+    # page than the newsfeed you do no tneed a websocket
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        models.Post.objects.get(id = request.data['postId']).delete()
+        return Response("Post deleted")
+
+
 class First3CommentsInPost(generics.ListAPIView):
     serializer_class = serializers.CommentSerializer
     lookup_url_kwarg = "postID"
