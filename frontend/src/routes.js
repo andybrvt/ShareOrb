@@ -30,7 +30,7 @@ import UserPostList from './containers/UserPostTabFolder/UserPostList';
 import PersonalProfilePostList from './containers/UserPostTabFolder/PersonalProfilePostList';
 import PersonalProfileEventList from './containers/UserEventTabFolder/PersonalProfileEventList';
 import UserPostModal from "./components/PostPageFolder/UserPostModal";
-
+import UserInfoSettings from "./containers/SettingsFolder/UserInfoSettings";
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -82,7 +82,6 @@ class BaseRouter extends React.Component {
             <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
             <Route exact path = '/signup/' component= {Signup} />
-
             <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
@@ -100,6 +99,7 @@ class BaseRouter extends React.Component {
             <Route exact path = '/personalcalendar/:year' render={(props) => <YearCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/personalcal/event/:eventId' render={(props) => <EventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/socialcal/event/:socialEventId' render={(props) => <SocialEventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/settings' render={(props) => <UserInfoSettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
           </Switch>
         </SideMenu>

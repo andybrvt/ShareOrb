@@ -1,0 +1,16 @@
+/* This will be the settings for the settings */
+.settingsBackGround{
+  background-color: white;
+  display: flex;
+  width: 1300px;
+}
+
+.settingsBackGround .sideMenu{
+  background-color: white;
+
+}
+
+.settingsBackGround .rightInfo{
+  /* background-color: red; */
+  width: 81%;
+}
