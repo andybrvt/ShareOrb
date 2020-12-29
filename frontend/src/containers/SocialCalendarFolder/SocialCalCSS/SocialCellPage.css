@@ -390,9 +390,9 @@
   /* display: flex; */
   /* padding-top: 10px; */
 }
-.commentEventHolder.hasCaption{
+/* .commentEventHolder.hasCaption{
   height: 81%;
-}
+} */
 
 .commentEventHolder .socialCommentBoxBox{
   position: relative;

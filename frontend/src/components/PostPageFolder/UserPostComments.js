@@ -41,7 +41,7 @@ class UserPostComments extends React.Component{
 
     const base = 75.5
 
-    const final = base - (captionLen/10)
+    const final = base - (captionLen/30)
     const finalStr = final+"%"
 
     return finalStr;
@@ -82,7 +82,7 @@ class UserPostComments extends React.Component{
       style = {{
         height: this.heightCal(caption.length)
       }}
-      className ={`postCommentBoxBox ${caption === "" ? "" : "hasCaption"}`}>
+      className ='postCommentBoxBox'>
         <div className = 'postCommentBox'>
         <List
           className="comment-list"

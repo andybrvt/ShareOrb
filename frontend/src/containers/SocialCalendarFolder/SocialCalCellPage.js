@@ -617,6 +617,18 @@ class SocialCalCellPage extends React.Component{
     )
   }
 
+  heightCal = (captionLen) => {
+    // This function is used to calculate the height of the comments by the
+    // length of the caption
+
+    const base = 99
+
+    const final = base - (captionLen/16.6667)
+    const finalStr = final+"%"
+
+    return finalStr;
+  }
+
 
   render(){
     console.log(this.props)
@@ -872,7 +884,11 @@ class SocialCalCellPage extends React.Component{
 
              </div>
 
-             <div className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
+             <div
+             style = {{
+               height: this.heightCal(dayCaption.length)
+             }}
+             className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
                <SocialComments
                currentDate = {curDate}
                curUser = {this.props.curId}
