@@ -359,7 +359,7 @@ class UserPostPage extends React.Component{
 
               </div>
 
-              <div>
+              <div className = "caption">
               {caption}
               </div>
 

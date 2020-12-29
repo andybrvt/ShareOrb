@@ -54,6 +54,11 @@
   height: 100%;
   width: 30%;
 }
+.postModalRight .caption{
+  position: relative;
+  padding-left: 5%;
+}
+
 .postModalRight .postNameTag{
   /* background-color: green; */
   height: 80px;
