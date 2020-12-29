@@ -136,6 +136,19 @@ class NewsfeedPost extends React.Component {
   }
 
   revealPhoto = () => {
+    let postId = ""
+    let username = ""
+
+    if(this.props.data.id){
+      postId = this.props.data.id
+    }
+    if(this.props.data.user){
+      username = this.props.data.user.username
+    }
+
+
+
+
       let userPostImages = []
       if(this.props.data){
         if(this.props.data.post_images){
@@ -145,15 +158,19 @@ class NewsfeedPost extends React.Component {
 
       if(userPostImages.length==1){
         return(
-        <div class="imageContainer">
-          <a href=""><img src={"http://127.0.0.1:8000/media/"+userPostImages[0]} alt="" /></a>
+        <div
+        onClick = {() => this.OnClickPost(postId, username)}
+        class="imageContainer">
+          <a><img src={"http://127.0.0.1:8000/media/"+userPostImages[0]} alt="" /></a>
         </div>
           )
         }
         else if(userPostImages.length>1){
 
           return(
-            <div className = "postPicCarouselNews">
+            <div
+            onClick = {() => this.OnClickPost(postId, username)}
+            className = "postPicCarouselNews">
                <PostPicCarousel
                picIndexChange = {this.onCurPhotoChange}
                items = {userPostImages} />
