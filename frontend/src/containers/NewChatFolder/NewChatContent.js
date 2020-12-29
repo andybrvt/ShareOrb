@@ -87,7 +87,7 @@ class NewChatContent extends React.Component{
 
           return (
             <div className = "chatTextBoxRight">
-            <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+            <Avatar size = {30} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
             <div className = 'chatNameTimeRight'>
               <div className = 'chatNameRight'>
                 {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
@@ -114,20 +114,18 @@ class NewChatContent extends React.Component{
             </div>
           )
         } else if (messageItem.type === "text"){
+          // you are getting hte text
           // This will take care of the case where the message is just the chat
           return (
             <div className = "chatTextBoxRight">
-            <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
             <div className = 'chatNameTimeRight'>
-              <div className = 'chatNameRight'>
-                {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
-              </div>
+
               <div>
 
               </div>
             </div>
 
-            <div className = "chatContentTextRight">
+            <div className = "messageToUser">
               {messageItem.body}
             </div>
 
@@ -173,20 +171,19 @@ class NewChatContent extends React.Component{
           </div>
         )
       } else if (messageItem.type === "text"){
+        // user is getting text from someone else
         // This will take care of the case where the message is just the chat
         return (
           <div className = "chatTextBox">
-          <Avatar size = {45} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+          <Avatar size = {30} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
           <div className = 'chatNameTime'>
-            <div className = 'chatName'>
-              {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
-            </div>
+
             <div>
 
             </div>
           </div>
 
-          <div className = "chatContentText">
+          <div className = "messageReceived">
             {messageItem.body}
           </div>
 

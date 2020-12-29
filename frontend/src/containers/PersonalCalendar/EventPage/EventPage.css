@@ -491,7 +491,7 @@
 
 
 
-.eventGroupChatContainer .messageList .eventMessageItemUser{
+.eventMessageItemUser{
   /* background-color: red; */
   clear:both;
   display: inline-block;

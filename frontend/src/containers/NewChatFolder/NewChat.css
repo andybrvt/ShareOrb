@@ -201,7 +201,7 @@
   /* background-color: red; */
   text-align: center;
   position: relative;
-  top: 10%;
+  top: 5%;
 
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox{
@@ -230,9 +230,7 @@
   position: relative;
   /* top: 25px; */
 }
-.chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox .chatName{
-  font-size: 25px;
-}
+
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList{
   /* background-color: red; */
   margin-top: 20px;
@@ -304,22 +302,55 @@
   top: 3px;
   /* background-color: red; */
 }
-.chatNameTimeRight .chatNameRight {
-  font-size: 10px;
-  position: relative;
-  bottom: 6px;
+
+.messageToUser{
+  /* background-color: red; */
+  clear:both;
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 2px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 350px;
+  /* line-height: 130%; */
+  background: #00BFFF;
+  color: #f5f5f5;
+  float: right;
+  font-size: 15px;
+  font-weight: 400;
 }
+
+
+.messageReceived{
+  /* background-color: red; */
+  clear:both;
+  /* display: inline-block; */
+  display:flex;
+  padding: 10px 15px;
+  margin: 2px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 350px;
+  /* line-height: 130%; */
+  background: #f5f5f5;
+  float: left;
+  font-size: 15px;
+  font-weight: 400;
+
+}
+.eventGro
+
 .chatNameTime .chatName {
-  font-size: 10px;
+  font-size: 14px;
   position: relative;
   bottom: 6px;
+  font-weight: 400;
 }
 .chatContentText{
   position: relative;
   width: 50%;
   left: 50px;
   bottom: 35px;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 400;
 }
 .chatContentTextRight{
   position: relative;
@@ -412,6 +443,7 @@
   height: 50px;
   border-radius: 25px;
   font-size: 40px;
+  margin-right: 10px;
 
 }
 .chatItem .chatWrap .chatGroupAva .icon{
@@ -420,10 +452,11 @@
 }
 .chatItem .chatWrap .chatAva{
   margin-top: 12px;
+  margin-right: 10px;
 }
 .chatItem .chatWrap .chatText{
   margin-left: 5px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .chatItem .chatWrap .chatText .chatName {
   font-weight: 500;
@@ -431,8 +464,9 @@
   color: black;
 }
 .chatItem .chatWrap .chatText .chatDescription{
-  /* font-weight: bold; */
-  /* font-size: 15px; */
+  font-weight: 400;
+  font-size: 14px;
+  color:grey;
 }
 .chatItem .chatWrap .chatText .chatDescription.active{
   font-weight: bold;

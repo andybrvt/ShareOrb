@@ -173,7 +173,8 @@ class NewSidePanel extends React.Component{
              src = {'http://127.0.0.1:8000'+this.getChatUserProfile(item.participants)} />
             <div className = "chatText">
               <div className = "chatName">{this.getChatUserName(item.participants)}</div>
-              <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}> {this.chatDescription(item.recentMessage,
+              <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}>
+                {this.chatDescription(item.recentMessage,
                 item.recentSender,
                 item.recentTime
               )}</div>

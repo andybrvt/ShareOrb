@@ -238,13 +238,13 @@ class CurChatManager extends React.Component{
 
           <div className = 'chatRightSideBox'>
             <Avatar
-            size = {200}
+            size = {250}
             src = {"http://127.0.0.1:8000"+profilePic}
             />
 
             <div
             className= 'mainChatUserName'
-            >{chatUserName}ff</div>
+            >{chatUserName}</div>
           </div>
 
         }
@@ -267,6 +267,7 @@ class CurChatManager extends React.Component{
                dataSource={memberList}
                renderItem={item => (
                  <List.Item
+
                  onClick = {() => this.onProfileClick(item.username)}
                  >
                  <List.Item.Meta
