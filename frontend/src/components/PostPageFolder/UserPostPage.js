@@ -1,5 +1,6 @@
 import React from 'react';
-import {  Avatar } from 'antd';
+import {  Avatar, notification } from 'antd';
+import { authAxios } from '../../components/util';
 import Liking from '../../containers/NewsfeedItems/Liking';
 import UserPostComments from './UserPostComments';
 import UserPostPageWebSocketInstance from '../../UserPostPageWebsocket'
@@ -10,6 +11,11 @@ import * as dateFns from 'date-fns';
 
 
 class UserPostPage extends React.Component{
+
+  state = {
+    curCoverPic: 0
+
+  }
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -116,12 +122,68 @@ class UserPostPage extends React.Component{
 
   onCurPhotoChange = (picIndex) => {
     // This will be used for clipping
-    console.log(picIndex)
+
+    this.setState({
+      curCoverPic: picIndex
+    })
   }
+
+  onClipCurPhoto = () => {
+    // This function will be similar to the clip function in the newsfeed post
+    // It will clip to the soical calendar
+
+    // So you will need the current picture that shows up in teh carousel.
+
+    let curPic = ""
+    let postOwnerId = ""
+    let curId= ""
+
+    const picIndex = this.state.curCoverPic
+    if(this.props.post){
+      if(this.props.post.post_images){
+        curPic = this.props.post.post_images[picIndex]
+      }
+      if(this.props.post.user){
+        postOwnerId = this.props.post.user.id
+      }
+    }
+
+    if(this.props.curId){
+      curId = this.props.curId
+    }
+
+    // Now you will then make an auth axios call because you are not doing this
+    // in real time.
+
+    console.log(curPic, postOwnerId)
+
+    authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping",{
+      clipPic: curPic,
+      postOwnerId: postOwnerId,
+      curId: curId
+    })
+
+    this.openNotification("bottomRight")
+
+
+  }
+
+  openNotification = placement => {
+
+  const today = dateFns.format(new Date(), 'MMM dd, yyyy')
+
+  notification.info({
+    message: `Photo Clipped!`,
+    description:
+      'A photo has been clipped to your calendar on '+today+'.',
+    placement,
+  });
+  };
 
   render() {
 
     console.log(this.props)
+    console.log(this.state)
 
     let userPostImages = []
     let userPostComments = []
@@ -256,8 +318,33 @@ class UserPostPage extends React.Component{
               }
               <div className  = 'postComment'>
               <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-               Comment </div>
+               Comment
+               </div>
+
+               {
+                 this.props.match.params.username === this.props.username   ?
+
+                 <div></div>
+
+                 :
+
+                 <div
+                 onClick = {() => this.onClipCurPhoto()}
+                 className  = 'postComment'>
+                   <span
+                   style={{ marginRight:'10px'}}
+                   class="fa fa-archive"></span>
+                  Clip
+                  </div>
+
+               }
+
+
+
               </div>
+
+
+
               <UserPostComments
 
               curUser = {this.props.curId}
@@ -279,7 +366,8 @@ const mapStateToProps = state => {
   return {
     post: state.newsfeed.post,
     curId: state.auth.id,
-    curProfilePic: state.auth.profilePic
+    curProfilePic: state.auth.profilePic,
+    username: state.auth.username
   }
 }
 
