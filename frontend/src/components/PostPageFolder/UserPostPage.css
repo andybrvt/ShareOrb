@@ -80,6 +80,12 @@
   right: 40px;
 }
 
+.postModalRight .postNameTag .cellThreeDots{
+  position: relative;
+  left: 70%;
+  bottom: 30%;
+}
+
 .postLikeCommentNum {
   display: flex;
   height: 40px;

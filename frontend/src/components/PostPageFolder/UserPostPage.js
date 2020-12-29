@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Avatar, notification } from 'antd';
+import {  Avatar, notification, Menu, Dropdown } from 'antd';
 import { authAxios } from '../../components/util';
 import Liking from '../../containers/NewsfeedItems/Liking';
 import UserPostComments from './UserPostComments';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import PostPicCarousel from './PostPicCarousel';
 import * as newsfeedActions from '../../store/actions/newsfeed';
 import * as dateFns from 'date-fns';
-
+import './UserPostPage.css';
 
 class UserPostPage extends React.Component{
 
@@ -180,6 +180,43 @@ class UserPostPage extends React.Component{
   });
   };
 
+
+  cellThreeDots = () => {
+    // This drop down is for the calendar cell in itself. To delete the cell
+    // and write a post
+
+    return(
+      <div className = "cellThreeDots">
+        <Dropdown overlay={
+          <Menu>
+            <Menu.Item
+            >
+                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
+                <span style={{marginLeft:'3px'}}> Write a caption</span>
+            </Menu.Item>
+            <Menu.Item
+            >
+                <i class="far fa-image"></i>
+                <span style={{marginLeft:'5px'}}>Change cover picture</span>
+            </Menu.Item>
+            <Menu.Item danger
+             >
+              <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+              <span style={{marginLeft:'10px'}}>Delete day</span>
+            </Menu.Item>
+          </Menu>
+        }>
+        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+          <i class="fas fa-ellipsis-v" style={{fontSize:'30px', padding:'0px', color: "gray"}}></i>
+        </a>
+        </Dropdown>
+
+      </div>
+    )
+  }
+
+
+
   render() {
 
     console.log(this.props)
@@ -264,7 +301,20 @@ class UserPostPage extends React.Component{
                   <div className = "postNameUsername"> @{this.capitalize(userPostUsername)} </div>
                   <div className = "postTimeStamp"> {userPostDate} </div>
                 </div>
+                {
+                  userPostUserId === this.props.curId ?
+                  this.cellThreeDots()
+
+                  :
+
+                  <div> </div>
+
+                }
+
               </div>
+
+
+
 
               <div className = "postLikeCommentNum">
               {
