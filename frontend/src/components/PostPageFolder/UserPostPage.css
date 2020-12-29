@@ -134,11 +134,15 @@
 
 /* This part is for the comment area of the post */
 .postCommentBoxBox{
-  height: 75.5%;
+  /* height: 75.5%; */
   width: 450px;
   overflow:hidden;
   /* background-color: red; */
 }
+/*
+.postCommentBoxBox.hasCaption{
+  height: 65%;
+} */
 .postCommentBox{
   height: 100%;
   width: 460px;

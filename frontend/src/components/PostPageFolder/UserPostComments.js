@@ -35,6 +35,18 @@ class UserPostComments extends React.Component{
     })
   }
 
+  heightCal = (captionLen) => {
+    // This function is used to calculate the height of the comments by the
+    // length of the caption
+
+    const base = 75.5
+
+    const final = base - (captionLen/10)
+    const finalStr = final+"%"
+
+    return finalStr;
+  }
+
   renderTimestamp = timestamp =>{
     console.log(timestamp)
     let prefix = '';
@@ -60,9 +72,17 @@ class UserPostComments extends React.Component{
 
   render(){
 
+    let caption = ""
+    if (this.props.caption){
+      caption = this.props.caption
+    }
     console.log(this.props)
     return(
-      <div className = "postCommentBoxBox">
+      <div
+      style = {{
+        height: this.heightCal(caption.length)
+      }}
+      className ={`postCommentBoxBox ${caption === "" ? "" : "hasCaption"}`}>
         <div className = 'postCommentBox'>
         <List
           className="comment-list"

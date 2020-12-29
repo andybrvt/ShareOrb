@@ -15,8 +15,8 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 class UserPostPage extends React.Component{
 
   state = {
-    curCoverPic: 0
-
+    curCoverPic: 0,
+    hasCaption: false
   }
 
   capitalize (str) {
@@ -278,7 +278,7 @@ class UserPostPage extends React.Component{
 
     // peopleLikeId is just used for the like and unlike button
     let peopleLikeId =[]
-
+    let caption = ""
 
 
     if(this.props.post){
@@ -298,6 +298,9 @@ class UserPostPage extends React.Component{
       }
       if(this.props.post.people_like){
         people_like = this.props.post.people_like
+      }
+      if(this.props.post.caption){
+        caption = this.props.post.caption
       }
     }
 
@@ -356,7 +359,9 @@ class UserPostPage extends React.Component{
 
               </div>
 
-
+              <div>
+              {caption}
+              </div>
 
 
               <div className = "postLikeCommentNum">
@@ -439,7 +444,7 @@ class UserPostPage extends React.Component{
 
 
               <UserPostComments
-
+              caption = {caption}
               curUser = {this.props.curId}
               postId = {this.props.match.params.postId}
               items = {userPostComments}
