@@ -124,7 +124,7 @@ class NewChatContent extends React.Component{
 
               </div>
             </div>
-
+            
             <div className = "messageToUser">
               {messageItem.body}
             </div>
@@ -175,14 +175,14 @@ class NewChatContent extends React.Component{
         // This will take care of the case where the message is just the chat
         return (
           <div className = "chatTextBox">
-          <Avatar size = {30} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+
           <div className = 'chatNameTime'>
 
             <div>
 
             </div>
           </div>
-
+          <Avatar size = {30} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
           <div className = "messageReceived">
             {messageItem.body}
           </div>

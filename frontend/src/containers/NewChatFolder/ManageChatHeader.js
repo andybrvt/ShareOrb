@@ -26,10 +26,10 @@ class ManageChatHeader extends React.Component{
         className = "addChatsButton"
         >
 
-
-          <i
+        <i
           onClick = {() => this.onClickAddChats()}
-          class="fas fa-feather-alt"></i>
+          style={{color:'#1890ff', fontSize:'24px'}}
+          class="fas fa-plus-circle"></i>
         </div>
 
         </div>
