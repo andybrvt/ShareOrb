@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Alert, Radio } from 'antd';
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
 
@@ -522,119 +522,129 @@ class CreateShareEventChat extends React.Component{
       }
 
       return(
-        <Form
-        className ="reactForm"
-        style={{padding:'50px'}}
-        onSubmit = {this.handleSubmit}
-        onChange = {this.handleChange}
-         >
-          <Form.Item>
-           <Input
-           name = 'title'
-           className= 'reactTitle'
-           placeholder = 'Title'
-           value = {this.state.title}
-           style={{marginTop:'-5px'}}
-           />
-         </Form.Item>
-
-
-          <Radio.Group
-            options={options}
-            name = 'repeatCondition'
-            onChange={this.handleChange}
-            value={this.state.repeatCondition}
-            optionType="button"
+        <div>
+          <Alert
+            message="Share Event"
+            description={nameList}
+            type="info"
+            showIcon
           />
+          <Form
+          className ="reactForm"
+          style={{padding:'50px', marginTop:'-25px'}}
+          onSubmit = {this.handleSubmit}
+          onChange = {this.handleChange}
+           >
 
 
-         <Form.Item
-             name="range-time-picker"
-            {...rangeConfig}
-            style={{marginTop:'20px'}}
-             >
-             <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-clock"></i>
 
-             <DatePicker
-             className = ''
-             placeholder = 'startTime'
-             onChange = {this.onStartDateChange}
-             value = {this.state.startDate}
-             suffixIcon={<div></div>}
-             style = {{width: '110px', marginRight:'15px'}}
+            <Form.Item>
+             <Input
+             name = 'title'
+             className= 'reactTitle'
+             placeholder = 'Title'
+             value = {this.state.title}
+             style={{marginTop:'-5px'}}
              />
-
-
-             <Select
-             name = 'timeStart'
-             className = ''
-             style={{ width: 100, marginRight:'15px' }}
-             showArrow  = {false}
-             onChange = {this.onStartTimeChange}
-             value = {this.state.timeStart}>
-               {startChildren}
-             </Select>
-
-             <Select
-             className = ''
-             name = 'timeEnd'
-             style={{ width: 100 }}
-             showArrow  = {false}
-             onChange = {this.onEndTimeChange}
-             value = {this.state.timeEnd}>
-               {endChildren}
-             </Select>
            </Form.Item>
 
 
+            <Radio.Group
+              options={options}
+              name = 'repeatCondition'
+              onChange={this.handleChange}
+              value={this.state.repeatCondition}
+              optionType="button"
+            />
 
-         <div class="innerContainerPeople">
-           <Form.Item name="Location">
-             <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
-            <Input style={{width:'50%',fontSize:'14px'}}
-             name = 'location'
-             placeholder = 'Location'
-             value = {this.state.location}
-             />
+
+           <Form.Item
+               name="range-time-picker"
+              {...rangeConfig}
+              style={{marginTop:'20px'}}
+               >
+               <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-clock"></i>
+
+               <DatePicker
+               className = ''
+               placeholder = 'startTime'
+               onChange = {this.onStartDateChange}
+               value = {this.state.startDate}
+               suffixIcon={<div></div>}
+               style = {{width: '110px', marginRight:'15px'}}
+               />
+
+
+               <Select
+               name = 'timeStart'
+               className = ''
+               style={{ width: 100, marginRight:'15px' }}
+               showArrow  = {false}
+               onChange = {this.onStartTimeChange}
+               value = {this.state.timeStart}>
+                 {startChildren}
+               </Select>
+
+               <Select
+               className = ''
+               name = 'timeEnd'
+               style={{ width: 100 }}
+               showArrow  = {false}
+               onChange = {this.onEndTimeChange}
+               value = {this.state.timeEnd}>
+                 {endChildren}
+               </Select>
+             </Form.Item>
+
+
+
+           <div class="innerContainerPeople">
+             <Form.Item name="Location">
+               <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+              <Input style={{width:'50%',fontSize:'14px'}}
+               name = 'location'
+               placeholder = 'Location'
+               value = {this.state.location}
+               />
+            </Form.Item>
+            <AimOutlined style={{marginLeft:'15px', marginTop:'20px', fontSize:'20px', marginRight:'15px'}} className = 'aim'/>
+              <Input type = 'color' className = 'reactColor'
+                name = 'eventColor' defaultValue = '#1890ff'/>
+          </div>
+
+           <Form.Item name="Content" style={{marginTop:'-20px'}}>
+
+            <TextArea
+            name = 'content'
+            placeholder= 'Event Description'
+            value = {this.state.content}
+            rows ={3}
+            style = {{width: '400px', marginLeft:'50px'}}/>
+
           </Form.Item>
-          <AimOutlined style={{marginLeft:'15px', marginTop:'20px', fontSize:'20px', marginRight:'15px'}} className = 'aim'/>
-            <Input type = 'color' className = 'reactColor'
-              name = 'eventColor' defaultValue = '#1890ff'/>
+
+
+            <Form.Item
+              wrapperCol={{
+                xs: { span: 24, offset: 0 },
+                sm: { span: 16, offset: 8 },
+              }}
+              className = 'buttomHolder'
+              style={{marginLeft:'50px', marginTop:'40px'}}
+            >
+            <div className = 'clearButtonCon'>
+              <Button onClick = {this.onClear}  >
+                Clear Values
+              </Button>
+            </div>
+            <div className = 'submitButtonCon'>
+              <Button type="primary" htmlType="submit" disabled = {this.handleValidation()}>
+                Submit
+              </Button>
+            </div>
+            </Form.Item>
+          </Form>
         </div>
-
-         <Form.Item name="Content" style={{marginTop:'-20px'}}>
-
-          <TextArea
-          name = 'content'
-          placeholder= 'Event Description'
-          value = {this.state.content}
-          rows ={3}
-          style = {{width: '400px', marginLeft:'50px'}}/>
-
-        </Form.Item>
-
-        <div> {nameList} </div>
-
-          <Form.Item
-            wrapperCol={{
-              xs: { span: 24, offset: 0 },
-              sm: { span: 16, offset: 8 },
-            }}
-            className = 'buttomHolder'
-            style={{marginLeft:'50px', marginTop:'40px'}}
-          >
-          <div className = 'clearButtonCon'>
-            <Button onClick = {this.onClear}  >
-              Clear Values
-            </Button>
-          </div>
-          <div className = 'submitButtonCon'>
-            <Button type="primary" htmlType="submit" disabled = {this.handleValidation()}>
-              Submit
-            </Button>
-          </div>
-          </Form.Item>
-        </Form>
       )
     }
 

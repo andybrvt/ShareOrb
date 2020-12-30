@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Button, Modal, List, Divider } from 'antd';
 import CurChatEventList from './ChatManagerFolder/CurChatEventList';
-
+import {CalendarOutlined} from '@ant-design/icons';
 // This will be the far right side of the chats that holds the
 // user profile pic and actions such as event sync, event invite,
 // share events etc
@@ -251,9 +251,11 @@ class CurChatManager extends React.Component{
         <Divider/>
 
         <div className ="" style={{marginTop:'40px'}} >
-        <Button
-        onClick = {() => this.onOpenEventModal()}
-        > Share Event </Button>
+
+        <Button type="primary" shape="round" size="large"
+
+          onClick = {() => this.onOpenEventModal()}
+        >  Share Events </Button>
 
         </div>
 
@@ -291,6 +293,7 @@ class CurChatManager extends React.Component{
         <Modal
         visible = {this.state.showShareEvent}
         onCancel = {() => this.onCloseEventModal()}
+        bodyStyle={{padding:'75px'}}
         footer= {null}
         width = {900}
         >
