@@ -262,7 +262,7 @@ class CurChatManager extends React.Component{
         {
             partiLen > 2 ?
             <div className = "chatMemberList">
-            <div className = "chatMemberText"> Group memebers </div>
+            <div className = "chatMemberText"> Group members </div>
             <List
                 className = "groupMemberList"
                itemLayout="horizontal"

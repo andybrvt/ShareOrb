@@ -197,10 +197,11 @@
     width: 25%;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer{
-  /* background-color: red; */
+  /* background-color: blue; */
   text-align: center;
   position: relative;
   top: 5%;
+  height:100%;
 
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox{
@@ -232,7 +233,11 @@
 
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList{
   /* background-color: red; */
-  margin-top: 20px;
+  position:absolute;
+
+  bottom: 10%;
+  height:250px;
+  /* overflow-y: auto; */
   margin-left: 20px;
   width: 88%;
   /* overflow: auto; */
@@ -240,7 +245,9 @@
   text-align: left;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .chatMemberText{
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 500;
+  color:black;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .groupMemberList{
   overflow: auto;
