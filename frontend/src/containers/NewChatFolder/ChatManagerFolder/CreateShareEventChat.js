@@ -524,10 +524,12 @@ class CreateShareEventChat extends React.Component{
       return(
         <div>
           <Alert
-            message="Share Event"
+
+            message="Create Event"
             description={nameList}
             type="info"
             showIcon
+            style={{marginLeft:'50px'}}
           />
           <Form
           className ="reactForm"

@@ -97,7 +97,7 @@ class NewChatContent extends React.Component{
               </div>
             </div>
 
-            <div className = "chatContentTextRight">
+            <div className = "chatContentTextRight eventCard">
               {this.capitalize(messageItem.body)}
               <br />
               Title: {messageItem.eventTitle}
@@ -124,7 +124,7 @@ class NewChatContent extends React.Component{
 
               </div>
             </div>
-            
+
             <div className = "messageToUser">
               {messageItem.body}
             </div>
