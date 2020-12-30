@@ -30,6 +30,7 @@ const renderField = (field) => {
 
 
 const validate = values => {
+  console.log(values.newPassword !== values.comfirmPassword)
   const errors = {}
     // This will validate certain fields tos ee if they are good
   if(!values.oldPassword){
@@ -42,7 +43,7 @@ const validate = values => {
     errors.confirmPassword = "Required"
   }
 
-  if(values.newPassword !== values.oldPassword){
+  if(values.newPassword !== values.confirmPassword){
     // Check if the new password is the sme as the confirm password
     errors.confirmPassword = "Passwords do not match"
   }
