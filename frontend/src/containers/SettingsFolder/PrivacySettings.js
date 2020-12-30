@@ -39,6 +39,41 @@ class PrivacySettings extends React.Component{
     this.setState({ [values.target.name]: values.target.value})
   }
 
+  onHandleSubmit = e => {
+    // This function will be used to handle the submit for the change in paasword
+    // it will send into the backend and then check if the older password matches
+    // the new one and then change it
+
+    // You will use the states so no need to use the e in this case
+
+    const passwordObj = {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword,
+      confirmPassword: this.state.confirmPassword
+    }
+
+    // send into the views and then redux (probally don't event need redux)
+  }
+
+  handleSubmitButton = () => {
+    // this function will handle the disabling of the change password button
+    // All the fields must be filled in order for the button to be pressable
+
+
+    // You will also put some validation in the front end as well
+
+    let disabled = true
+
+    if(this.state.oldPassword.length > 0 &&
+      this.state.newPassword.length > 0 &&
+      this.state.confirmPassword.length > 0
+    ) {
+      disabled = false
+    }
+
+    return disabled;
+  }
+
   render(){
     console.log(this.props)
     console.log(this.state)
@@ -76,7 +111,7 @@ class PrivacySettings extends React.Component{
 
           <div>
             <span> Old Password </span>
-            <Input
+            <Input.Password
             name = "oldPassword"
             onChange = {this.onOldChange}
              />
@@ -84,7 +119,7 @@ class PrivacySettings extends React.Component{
 
           <div>
             <span> New Password </span>
-            <Input
+            <Input.Password
             name = "newPassword"
             onChange = {this.onNewChange}
              />
@@ -92,13 +127,16 @@ class PrivacySettings extends React.Component{
 
           <div>
             <span> Comfirm New Password </span>
-            <Input
+            <Input.Password
             name = "confirmPassword"
             onChange = {this.onConfirmChange}
             />
           </div>
 
-          <Button> Save </Button>
+          <Button
+          type = "primary"
+          disabled = {this.handleSubmitButton()}
+          > Save </Button>
 
 
         </form>
