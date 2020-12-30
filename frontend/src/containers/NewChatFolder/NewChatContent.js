@@ -84,7 +84,7 @@ class NewChatContent extends React.Component{
           const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
           const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
           const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
-
+          const test=messageItem.eventPersons
           return (
             <div className = "chatTextBoxRight">
             <Avatar size = {30} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
@@ -99,20 +99,21 @@ class NewChatContent extends React.Component{
               </div>
             </div>
             */}
-            <div className = "chatContentTextRight eventCard">
-              <span style={{float:'left'}}>
+            <div className = "chatContentTextRight eventCard" style={{fontSize:'16px'}}>
+              <span style={{float:'left', fontSize:'14px'}}>
                 {this.capitalize(messageItem.body)}
               </span>
               <Divider/>
               {messageItem.eventTitle}
               <br />
-              <i class="far fa-calendar"></i>
-              {eventDate}
+              <i style={{color:"#1890ff",  marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
+                 {eventDate}
               <br />
-              <i class="fas fa-clock" style={{color:"#1890ff"}}></i>
+              <i class="fas fa-clock" style={{color:"#1890ff",  marginRight:'10px'}}></i>
               {eventStartTime} - {eventEndTime}
               <br />
-              2 people
+              <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
+              {test} people
               <br/>
               <Button type="primary" shape="round" style={{float:'right'}}>
                 View Event
@@ -217,7 +218,7 @@ class NewChatContent extends React.Component{
     if(this.props.messages){
       message = this.props.messages
     }
-
+    console.log(message)
     return (
       <div className = "newChatContent">
       <div className = "chatWrapContainer">

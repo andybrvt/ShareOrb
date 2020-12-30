@@ -346,7 +346,9 @@ class NewChatConsumer(JsonWebsocketConsumer):
             type= 'event',
             eventTitle = data['eventObj']['title'],
             eventStartTime = data['eventObj']['start_time'],
-            eventEndTime = data['eventObj']['end_time']
+            eventEndTime = data['eventObj']['end_time'],
+            eventPersons=len(data['eventObj']['person'])
+
         )
 
         newMessage.save()

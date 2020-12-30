@@ -62,7 +62,7 @@ class CurChatEventList extends React.Component{
     if(this.props.eventList){
       eventList = this.props.eventList
     }
-
+    console.log(eventList)
       return(
         <div className = "chatEventShare">
 
