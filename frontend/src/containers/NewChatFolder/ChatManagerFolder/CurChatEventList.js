@@ -141,7 +141,9 @@ class CurChatEventList extends React.Component{
           <Divider
           style = {{
             height: "500px",
-            color: "black"
+            color: "black",
+
+            marginLeft:"50px",
           }}
           type = "vertical"  />
 
