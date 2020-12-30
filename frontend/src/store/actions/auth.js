@@ -50,6 +50,15 @@ export const addCredentials = (
   };
 };
 
+export const updateCredentials = (updatedUserObj) => {
+  // This function will be used to update the user basic information
+  // from the settings
+  return {
+    type: actionTypes.UPDATE_CREDENTIALS,
+    updatedUserObj: updatedUserObj
+  }
+}
+
 export const authFail = error => {
   return {
     type: actionTypes.AUTH_FAIL,

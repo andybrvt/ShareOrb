@@ -30,8 +30,6 @@ class UserIDView(APIView):
     def get(self, request, *args, **kwargs):
         return Response({'userID': request.user.id,'currentUser': request.user.username}, status=HTTP_200_OK)
 
-
-
 class ImageView(generics.ListAPIView):
     queryset = models.ImageModel.objects.all()
     serializer_class = serializers.ImageSerializer
@@ -156,11 +154,6 @@ class ExploreView(generics.ListAPIView):
         # This is filtering by username in the list
         queryset = models.User.objects.exclude(username__in = list)
         return queryset
-
-
-
-
-
 
 
 
@@ -488,3 +481,29 @@ class PendingPicNotificationView(APIView):
 class UserSocialPostContentTypeView(generics.ListCreateAPIView):
     serializer_class = serializers.UserSocialNormPostSerializer
     queryset = models.UserSocialNormPost.objects.all()
+
+
+class EditUserInfoView(APIView):
+    # This function will be used to edit the user info form teh settings of the
+    # frontend
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        # First you will grab the user
+        profile = get_object_or_404(models.User, id = request.data['curId'])
+
+        profile.username = request.data['editProfileObj']['username']
+        profile.first_name = request.data['editProfileObj']['first_name']
+        profile.last_name = request.data['editProfileObj']['last_name']
+        profile.dob = request.data['editProfileObj']['dob']
+        profile.phone_number = request.data['editProfileObj']['phone_number']
+        profile.email = request.data['editProfileObj']['email']
+
+        profile.save()
+
+        updatedProfile = get_object_or_404(models.User, id = request.data['curId'])
+        serializedProfile = serializers.UserSerializer(updatedProfile).data
+
+
+        return Response(serializedProfile)
