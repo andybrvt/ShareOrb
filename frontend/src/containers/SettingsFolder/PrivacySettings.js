@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input } from 'antd';
+import { Menu, Form, Input, Button } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from "react-redux";
@@ -29,10 +29,19 @@ class PrivacySettings extends React.Component{
   // This setting will be used for mostly usersetttings, changing like basic user
   // information like name, username, phone number, etc
 
-//
+  state = {
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  }
+
+  onChange = (values) => {
+    this.setState({ [values.target.name]: values.target.value})
+  }
 
   render(){
     console.log(this.props)
+    console.log(this.state)
 
     return(
       <div className = "settingsBackGround">
@@ -61,10 +70,35 @@ class PrivacySettings extends React.Component{
 
         <div className = "rightInfo">
 
-        <form>
+        <form
+        onChange = {this.onChange}
+        >
 
+          <div>
+            <span> Old Password </span>
+            <Input
+            name = "oldPassword"
+            onChange = {this.onOldChange}
+             />
+          </div>
 
-          <button> Save </button>
+          <div>
+            <span> New Password </span>
+            <Input
+            name = "newPassword"
+            onChange = {this.onNewChange}
+             />
+          </div>
+
+          <div>
+            <span> Comfirm New Password </span>
+            <Input
+            name = "confirmPassword"
+            onChange = {this.onConfirmChange}
+            />
+          </div>
+
+          <Button> Save </Button>
 
 
         </form>
