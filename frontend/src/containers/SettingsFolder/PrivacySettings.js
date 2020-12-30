@@ -4,7 +4,7 @@ import { Menu, Form, Input, Button } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from "react-redux";
-
+import { authAxios } from '../../components/util';
 
 const { SubMenu } = Menu;
 
@@ -70,6 +70,17 @@ class PrivacySettings extends React.Component{
 
   submit = (values) => {
     console.log(values)
+    // Now you will send it into the backend through views
+    authAxios.post("http://127.0.0.1:8000/rest-auth/password/change/",{
+      new_password1: values.newPassword,
+      new_password2: values.confirmPassword,
+      old_password: values.oldPassword
+    })
+    .then(res => {
+      console.log(res)
+    
+    })
+    // then you call an axios call here to change it
 
   }
 
@@ -108,6 +119,7 @@ class PrivacySettings extends React.Component{
 
         <form
         // onChange = {this.onChange}
+        onSubmit = {handleSubmit(this.submit)}
         >
 
           <div>
