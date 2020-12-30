@@ -25,10 +25,13 @@
   /* border-radius: 5px; */
 }
 
+
+/* share event list modal */
 .chatEventShare .chatEventShareLeft .eventListContainer {
   /* background-color: red; */
-  overflow: auto;
-  height: 480px;
+  margin-top: 15px;
+  overflow: hidden;
+  height: 465px;
 }
 
 .chatEvent{

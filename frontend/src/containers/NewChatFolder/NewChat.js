@@ -335,10 +335,12 @@ class NewChat extends React.Component{
           :
 
           <div className = "chatRightSide">
+            {/*
             <NewChatHeader
             curChat = {this.props.curChat}
             curId = {this.props.id}
             />
+            */}
             <NewChatContent
             messages = {messages}
             curId = {this.props.id}
