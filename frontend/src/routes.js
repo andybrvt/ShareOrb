@@ -31,6 +31,9 @@ import PersonalProfilePostList from './containers/UserPostTabFolder/PersonalProf
 import PersonalProfileEventList from './containers/UserEventTabFolder/PersonalProfileEventList';
 import UserPostModal from "./components/PostPageFolder/UserPostModal";
 import UserInfoSettings from "./containers/SettingsFolder/UserInfoSettings";
+import CalPrefSettings from "./containers/SettingsFolder/CalPrefSettings";
+import PrivacySettings from "./containers/SettingsFolder/PrivacySettings";
+
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
 //routes component ArticleDetail gets individual profiles
@@ -100,6 +103,9 @@ class BaseRouter extends React.Component {
             <Route exact path = '/personalcal/event/:eventId' render={(props) => <EventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/socialcal/event/:socialEventId' render={(props) => <SocialEventPage parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/settings' render={(props) => <UserInfoSettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/settings/calPref' render={(props) => <CalPrefSettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/settings/privacy' render={(props) => <PrivacySettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+
 
           </Switch>
         </SideMenu>

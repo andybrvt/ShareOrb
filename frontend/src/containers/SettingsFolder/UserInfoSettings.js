@@ -5,6 +5,7 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from "react-redux";
 
+
 const { SubMenu } = Menu;
 
 const renderField = (field) => {
@@ -28,7 +29,8 @@ class UserInfoSettings extends React.Component{
   // This setting will be used for mostly usersetttings, changing like basic user
   // information like name, username, phone number, etc
 
-//
+
+
 
   render(){
     console.log(this.props)
@@ -37,14 +39,24 @@ class UserInfoSettings extends React.Component{
       <div className = "settingsBackGround">
 
         <Menu
-          onClick={this.handleClick}
+          selectedKeys = {["1"]}
+          // onClick={this.handleClick}
           style={{ width: 256 }}
           mode="inline"
           className ="sideMenu"
         >
-          <Menu.Item> User Information </Menu.Item>
-          <Menu.Item> Calendar Preference </Menu.Item>
-          <Menu.Item> Privacy </Menu.Item>
+          <Menu.Item
+          key = "1"
+          onClick = {() => this.props.history.push("/settings")}
+          > User Information </Menu.Item>
+          <Menu.Item
+          key = "2"
+          onClick = {() => this.props.history.push("/settings/calPref")}
+          > Calendar Preference </Menu.Item>
+          <Menu.Item
+          key = "3"
+          onClick = {() => this.props.history.push("/settings/privacy")}
+          > Privacy </Menu.Item>
         </Menu>
 
         <div className = "rightInfo">
@@ -106,6 +118,9 @@ class UserInfoSettings extends React.Component{
             type = "text"
             />
           </div>
+
+          <button> Save </button>
+
 
         </form>
 

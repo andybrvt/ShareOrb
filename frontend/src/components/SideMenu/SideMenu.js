@@ -159,6 +159,14 @@ class SideMenu extends React.Component {
     }
   }
 
+  onSettingDirect = () => {
+    if(this.props.location.pathname === '/settings'){
+      window.location.reload()
+    } else {
+      this.props.history.push("/settings")
+    }
+  }
+
   render() {
     const currentDay = new Date()
     const selectYear = dateFns.getYear(currentDay).toString()
@@ -399,7 +407,9 @@ class SideMenu extends React.Component {
                </Menu.Item>
              )}
              { (
-               <Menu.Item key="settings">
+               <Menu.Item
+               onClick = {() => this.onSettingDirect()}
+                key="settings">
                  <i class="fas fa-cog"></i>
                  <span style={{marginLeft:'2px'}}> Settings</span>
                </Menu.Item>
