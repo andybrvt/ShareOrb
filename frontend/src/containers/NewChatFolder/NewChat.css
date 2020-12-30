@@ -356,7 +356,7 @@
 }
 .chatContentTextRight{
   position: relative;
-  text-align: right;
+  text-align: left;
   width: 50%;
   left: 44%;
   bottom: 35px;

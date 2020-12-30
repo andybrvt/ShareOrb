@@ -1,6 +1,6 @@
 import React from 'react';
 import './NewChat.css';
-import { Input, List, Avatar, Spin} from 'antd';
+import { Input, List, Avatar, Spin, Divider, Button} from 'antd';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
 import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -88,27 +88,35 @@ class NewChatContent extends React.Component{
           return (
             <div className = "chatTextBoxRight">
             <Avatar size = {30} src = {'http://127.0.0.1:8000' +messageItem.messageUser.profile_picture}  />
+            {/*
             <div className = 'chatNameTimeRight'>
               <div className = 'chatNameRight'>
-                {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+                {this.capitalize(messageItem.messageUser.first_name)}
+                 {this.capitalize(messageItem.messageUser.last_name)}
               </div>
               <div>
 
               </div>
             </div>
-
+            */}
             <div className = "chatContentTextRight eventCard">
-              {this.capitalize(messageItem.body)}
-              <br />
-              Title: {messageItem.eventTitle}
+              <span style={{float:'left'}}>
+                {this.capitalize(messageItem.body)}
+              </span>
+              <Divider/>
+              {messageItem.eventTitle}
               <br />
               <i class="far fa-calendar"></i>
               {eventDate}
               <br />
-              <i class="far fa-clock"></i>
+              <i class="fas fa-clock" style={{color:"#1890ff"}}></i>
               {eventStartTime} - {eventEndTime}
               <br />
-              Click to check it out.
+              2 people
+              <br/>
+              <Button type="primary" shape="round" style={{float:'right'}}>
+                View Event
+              </Button>
             </div>
 
             </div>
