@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input } from 'antd';
+import { Menu, Form, Input, Button } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from "react-redux";
@@ -29,10 +29,54 @@ class PrivacySettings extends React.Component{
   // This setting will be used for mostly usersetttings, changing like basic user
   // information like name, username, phone number, etc
 
-//
+  state = {
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  }
+
+  onChange = (values) => {
+    this.setState({ [values.target.name]: values.target.value})
+  }
+
+  onHandleSubmit = e => {
+    // This function will be used to handle the submit for the change in paasword
+    // it will send into the backend and then check if the older password matches
+    // the new one and then change it
+
+    // You will use the states so no need to use the e in this case
+
+    const passwordObj = {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword,
+      confirmPassword: this.state.confirmPassword
+    }
+
+    // send into the views and then redux (probally don't event need redux)
+  }
+
+  handleSubmitButton = () => {
+    // this function will handle the disabling of the change password button
+    // All the fields must be filled in order for the button to be pressable
+
+
+    // You will also put some validation in the front end as well
+
+    let disabled = true
+
+    if(this.state.oldPassword.length > 0 &&
+      this.state.newPassword.length > 0 &&
+      this.state.confirmPassword.length > 0
+    ) {
+      disabled = false
+    }
+
+    return disabled;
+  }
 
   render(){
     console.log(this.props)
+    console.log(this.state)
 
     return(
       <div className = "settingsBackGround">
@@ -61,10 +105,38 @@ class PrivacySettings extends React.Component{
 
         <div className = "rightInfo">
 
-        <form>
+        <form
+        onChange = {this.onChange}
+        >
 
+          <div>
+            <span> Old Password </span>
+            <Input.Password
+            name = "oldPassword"
+            onChange = {this.onOldChange}
+             />
+          </div>
 
-          <button> Save </button>
+          <div>
+            <span> New Password </span>
+            <Input.Password
+            name = "newPassword"
+            onChange = {this.onNewChange}
+             />
+          </div>
+
+          <div>
+            <span> Comfirm New Password </span>
+            <Input.Password
+            name = "confirmPassword"
+            onChange = {this.onConfirmChange}
+            />
+          </div>
+
+          <Button
+          type = "primary"
+          disabled = {this.handleSubmitButton()}
+          > Save </Button>
 
 
         </form>
