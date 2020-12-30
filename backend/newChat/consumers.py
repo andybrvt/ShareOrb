@@ -341,7 +341,7 @@ class NewChatConsumer(JsonWebsocketConsumer):
         # more fields getting filled in
         newMessage = Message.objects.create(
             chat = chatObj,
-            body = senderObj.username+" shared an event",
+            body = senderObj.first_name+" shared an event",
             messageUser = senderObj,
             type= 'event',
             eventTitle = data['eventObj']['title'],
