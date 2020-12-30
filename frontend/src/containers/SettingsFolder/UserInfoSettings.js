@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input, Button } from 'antd';
+import { Menu, Form, Input, Button, notification } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from "react-redux";
@@ -90,9 +90,18 @@ class UserInfoSettings extends React.Component{
       this.props.updateCredentials(res.data)
     })
 
+    this.openNotification('bottomRight')
+
   }
 
-
+  openNotification = placement => {
+  notification.info({
+    message: `Notification ${placement}`,
+    description:
+      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    placement,
+  });
+};
 
   render(){
     console.log(this.props)

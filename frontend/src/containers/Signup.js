@@ -48,7 +48,7 @@ class Signup extends React.Component {
 
     validateUpper = (rule, value, callback) => {
       if(value.search(/[A-Z]/) < 0) {
-        return callback('Password must have a upper case letter!')
+        return callback('Password must have an upper case letter!')
       }else {
         callback();
         }

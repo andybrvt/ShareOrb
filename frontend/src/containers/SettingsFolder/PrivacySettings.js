@@ -20,63 +20,63 @@ const renderField = (field) => {
     style={{display:'inline-block'}}
     maxLength = "80"
     className = 'box'/>
+    {field.meta.touched &&
+      ((field.meta.error && <span>{field.meta.error}</span>) ||
+        (field.meta.warning && <span>{field.meta.warning}</span>))}
 
     </span>
   )
+}
+
+
+const validate = values => {
+  const errors = {}
+    // This will validate certain fields tos ee if they are good
+  if(!values.oldPassword){
+      errors.oldPassword = "Required"
+  }
+  if(!values.newPassword){
+    errors.newPassword = "Required"
+  }
+  if(!values.confirmPassword){
+    errors.confirmPassword = "Required"
+  }
+
+  if(values.newPassword !== values.oldPassword){
+    // Check if the new password is the sme as the confirm password
+    errors.confirmPassword = "Passwords do not match"
+  }
+
+  if(values.newPassword){
+    if(values.newPassword.length < 8){
+      // validate if the password is longer than 8 characters
+      errors.newPassword = "New password must be at least 9 characters long."
+    } else if(values.newPassword.search(/[A-Z]/)< 0){
+      // Validates if it has an uppercase
+      errors.newPassword = "New password must have an upper case letter."
+    } else if(values.newPassword.search(/[0-9]/)< 0){
+      // Validate if it has a number
+      errors.newPassword = 'New password must have at least one number.'
+    }
+  }
+
+  return errors
 }
 
 class PrivacySettings extends React.Component{
   // This setting will be used for mostly usersetttings, changing like basic user
   // information like name, username, phone number, etc
 
-  state = {
-    oldPassword: "",
-    newPassword: "",
-    confirmPassword: ""
-  }
+  submit = (values) => {
+    console.log(values)
 
-  onChange = (values) => {
-    this.setState({ [values.target.name]: values.target.value})
-  }
-
-  onHandleSubmit = e => {
-    // This function will be used to handle the submit for the change in paasword
-    // it will send into the backend and then check if the older password matches
-    // the new one and then change it
-
-    // You will use the states so no need to use the e in this case
-
-    const passwordObj = {
-      oldPassword: this.state.oldPassword,
-      newPassword: this.state.newPassword,
-      confirmPassword: this.state.confirmPassword
-    }
-
-    // send into the views and then redux (probally don't event need redux)
-  }
-
-  handleSubmitButton = () => {
-    // this function will handle the disabling of the change password button
-    // All the fields must be filled in order for the button to be pressable
-
-
-    // You will also put some validation in the front end as well
-
-    let disabled = true
-
-    if(this.state.oldPassword.length > 0 &&
-      this.state.newPassword.length > 0 &&
-      this.state.confirmPassword.length > 0
-    ) {
-      disabled = false
-    }
-
-    return disabled;
   }
 
   render(){
     console.log(this.props)
     console.log(this.state)
+    const {handleSubmit, pristine, invalid, reset} = this.props;
+
 
     return(
       <div className = "settingsBackGround">
@@ -106,36 +106,41 @@ class PrivacySettings extends React.Component{
         <div className = "rightInfo">
 
         <form
-        onChange = {this.onChange}
+        // onChange = {this.onChange}
         >
 
           <div>
             <span> Old Password </span>
-            <Input.Password
+            <Field
             name = "oldPassword"
-            onChange = {this.onOldChange}
+            component = {renderField}
+            type = "password"
              />
           </div>
 
           <div>
             <span> New Password </span>
-            <Input.Password
+            <Field
             name = "newPassword"
-            onChange = {this.onNewChange}
+            component = {renderField}
+            type = "password"
              />
           </div>
 
           <div>
             <span> Comfirm New Password </span>
-            <Input.Password
+            <Field
             name = "confirmPassword"
-            onChange = {this.onConfirmChange}
-            />
+            component = {renderField}
+            type = "password"
+             />
           </div>
 
           <Button
           type = "primary"
-          disabled = {this.handleSubmitButton()}
+          // disabled = {this.handleSubmitButton()}
+          disabled = {pristine || invalid}
+          htmlType = "submit"
           > Save </Button>
 
 
@@ -152,7 +157,8 @@ class PrivacySettings extends React.Component{
 // Now you will need to create the redux form
 PrivacySettings = reduxForm({
   form: "Privacy settings",  // give the form a name
-  enableReinitialize: true,
+  // enableReinitialize: true,
+  validate
 }) (PrivacySettings)
 
 // const selector = formValueSelector("user info settings")
