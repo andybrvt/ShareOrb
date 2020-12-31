@@ -16,7 +16,7 @@
   /* background-color: red; */
 }
 
-.notificationListContainer .listNotificationSingle {
+.listNotificationSingle {
   /* This is for the notifications that do not have a button */
   position: relative;
   top: 25%;
