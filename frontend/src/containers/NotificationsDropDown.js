@@ -216,7 +216,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-        <Avatar size = {55} style ={{
+        <Avatar size = {45} style ={{
           backgroundColor: 'blue',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
@@ -255,7 +255,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-          <Avatar size = {55} style ={{
+          <Avatar size = {45} style ={{
             backgroundColor: 'lightskyblue',
             verticalAlign: 'middle'}}
             // icon = {<UserOutlined />}
@@ -283,7 +283,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-        <Avatar size = {55} style ={{
+        <Avatar size = {45} style ={{
           backgroundColor: 'orangered',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
@@ -321,7 +321,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-        <Avatar size = {55} style ={{
+        <Avatar size = {45} style ={{
           backgroundColor: 'limegreen',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
@@ -395,7 +395,7 @@ class NotificationsDropDown extends React.Component{
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
         <Avatar
-        size = {55}
+        size = {45}
         style ={{
           backgroundColor: 'darkgrey',
           verticalAlign: 'middle'}}
@@ -428,7 +428,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-        <Avatar size = {55} style ={{
+        <Avatar size = {45} style ={{
           backgroundColor: 'fuchsia',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
@@ -503,7 +503,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
         <li className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-        <Avatar size = {55} style ={{
+        <Avatar size = {45} style ={{
           backgroundColor: 'orangered',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
@@ -514,7 +514,8 @@ class NotificationsDropDown extends React.Component{
         </div>
           <h4 className = 'listNotificationSingle'>
               <b>{this.capitalize(notifications[i].actor.username)} </b>
-              set an event on {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
+              set an event on {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
+              at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
               <div>
@@ -533,7 +534,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
           <li className = 'notificationListContainer'>
             <div className = 'notificationIcon'>
-            <Avatar size = {55} style = {{
+            <Avatar size = {45} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
@@ -560,7 +561,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
           <li className = 'notificationListContainer'>
             <div className = 'notificationIcon'>
-            <Avatar size = {55} style = {{
+            <Avatar size = {45} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
@@ -588,7 +589,7 @@ class NotificationsDropDown extends React.Component{
         notificationList.push(
           <li className = 'notificationListContainer' onClick = {() => this.onProfileClick(notifications[i].actor.username)}>
             <div className = 'notificationIcon'>
-            <Avatar size = {55} style = {{
+            <Avatar size = {45} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
@@ -618,7 +619,7 @@ class NotificationsDropDown extends React.Component{
           onClick = {() => this.onEventPageClick(notifications[i].eventId)}
           className = "notificationListContainer">
             <div className = 'notificationIcon'>
-              <Avatar size = {55} style = {{
+              <Avatar size = {45} style = {{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
@@ -629,7 +630,9 @@ class NotificationsDropDown extends React.Component{
             </div>
             <h4 className = 'listNotificationSingle'>
                 <b>{this.capitalize(notifications[i].actor.username)} </b>
-                 shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+                 shared an event with you on <br/>
+               <b>{dateFns.format(new Date(notifications[i].minDate), 'iiii')+", "} </b>
+                 <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
@@ -650,7 +653,7 @@ class NotificationsDropDown extends React.Component{
           onClick = {() => this.onEventPageClick(notifications[i].eventId)}
           className = "notificationListContainer">
             <div className = 'notificationIcon'>
-              <Avatar size = {55} style = {{
+              <Avatar size = {45} style = {{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
@@ -661,7 +664,7 @@ class NotificationsDropDown extends React.Component{
             </div>
             <h4 className = 'listNotificationSingle'>
                 <b>{this.capitalize(notifications[i].actor.username)} </b>
-                 accepted shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+                 shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
@@ -771,8 +774,9 @@ class NotificationsDropDown extends React.Component{
           </div>
             <h4 className = 'listNotificationSingle'>
                 <b>{this.capitalize(notifications[i].actor.username)} </b>
-                added an event to your social calendar on {notifications[i].pendingEventDate}
-                <br />
+                added an event to your social calendar on
+                <b>{" "+dateFns.format(new Date(notifications[i].pendingEventDate), 'iiii')+", "+dateFns.format(new Date(notifications[i].pendingEventDate), 'MMM d')} </b>
+                  <br/>
                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
                 <div>
                 <Button
@@ -829,10 +833,9 @@ class NotificationsDropDown extends React.Component{
       <List
       // getPopupContainer={() => document.getElementById("position")}
       style = {{
-        // position: 'fixed',
-        right: '-100px',
-        top:'60px',
-        bottom : '63px'
+        position: 'relative',
+        right: '-90%',
+        marginTop:'15px',
       }}
       onClick = {this.handleMenuClick}>
       {/*
