@@ -181,6 +181,8 @@ REST_AUTH_REGISTER_SERIALIZERS = {
         'REGISTER_SERIALIZER': 'userprofile.serializers.RegisterSerializer',
 }
 
+LOGOUT_ON_PASSWORD_CHANGE = False
+OLD_PASSWORD_FIELD_ENABLED = True
 
 ASGI_APPLICATION = 'core.routing.application'
 CHANNEL_LAYERS = {
