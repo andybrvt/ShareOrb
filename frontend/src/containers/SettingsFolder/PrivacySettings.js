@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input, Button } from 'antd';
+import { Menu, Form, Input, Button, Switch } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from "react-redux";
@@ -90,6 +90,10 @@ class PrivacySettings extends React.Component{
 
   }
 
+  onChange(checked) {
+    console.log(`switch to ${checked}`);
+  }
+
   render(){
     console.log(this.props)
     console.log(this.state)
@@ -123,48 +127,65 @@ class PrivacySettings extends React.Component{
 
         <div className = "rightInfo">
 
-        <form
-        // onChange = {this.onChange}
-        onSubmit = {handleSubmit(this.submit)}
-        >
 
+        <div>
+          <div> Change password </div>
+          <form
+          // onChange = {this.onChange}
+          onSubmit = {handleSubmit(this.submit)}
+          >
+
+            <div>
+              <span> Old Password </span>
+              <Field
+              name = "oldPassword"
+              component = {renderField}
+              type = "password"
+               />
+            </div>
+
+            <div>
+              <span> New Password </span>
+              <Field
+              name = "newPassword"
+              component = {renderField}
+              type = "password"
+               />
+            </div>
+
+            <div>
+              <span> Comfirm New Password </span>
+              <Field
+              name = "confirmPassword"
+              component = {renderField}
+              type = "password"
+               />
+            </div>
+
+            {error && <strong>{error}</strong>}
+            <Button
+            type = "primary"
+            // disabled = {this.handleSubmitButton()}
+            disabled = {pristine || invalid}
+            htmlType = "submit"
+            > Save </Button>
+
+
+          </form>
+        </div>
+
+        <div>
+          <div> Private Account </div>
           <div>
-            <span> Old Password </span>
-            <Field
-            name = "oldPassword"
-            component = {renderField}
-            type = "password"
-             />
+            <Switch defaultChecked onChange={this.onChange} />
+          </div>
+          <div>
+            This will make your account private. People who you have not approved
+            can see you account.
           </div>
 
-          <div>
-            <span> New Password </span>
-            <Field
-            name = "newPassword"
-            component = {renderField}
-            type = "password"
-             />
-          </div>
 
-          <div>
-            <span> Comfirm New Password </span>
-            <Field
-            name = "confirmPassword"
-            component = {renderField}
-            type = "password"
-             />
-          </div>
-
-          {error && <strong>{error}</strong>}
-          <Button
-          type = "primary"
-          // disabled = {this.handleSubmitButton()}
-          disabled = {pristine || invalid}
-          htmlType = "submit"
-          > Save </Button>
-
-
-        </form>
+        </div>
 
         </div>
 
