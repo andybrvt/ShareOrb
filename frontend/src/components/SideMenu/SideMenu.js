@@ -378,9 +378,16 @@ class SideMenu extends React.Component {
 
 
 
-      <Button onClick = {() => this.onShowNotification()}>
+      <Badge
+        style={{padding:'initial', margin:'initial'}}
+      count = {this.props.notifications.length}>
+      <Button
+        shape="round"
+         onClick = {() => this.onShowNotification()}
+         >
           <Notifications {...this.props}/>
       </Button>
+    </Badge>
 
 
 

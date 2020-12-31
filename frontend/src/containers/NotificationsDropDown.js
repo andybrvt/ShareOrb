@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Dropdown, List, Button, Avatar, Badge, notification } from 'antd';
+import { Menu, Dropdown, List, Button, Avatar, Badge, notification, Divider } from 'antd';
 import { DownOutlined, NotificationOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../notificationWebsocket';
 import { authAxios } from '../components/util';
@@ -830,15 +830,19 @@ class NotificationsDropDown extends React.Component{
       // getPopupContainer={() => document.getElementById("position")}
       style = {{
         position: 'fixed',
-        right: '20px',
+        right: '10px',
+        top:'60px',
         bottom : '63px'
       }}
       onClick = {this.handleMenuClick}>
+      {/*
       <div
       className = 'notificationHeader'
       >
         <h2 className = 'notificationWord'> Notifications </h2>
       </div>
+      <Divider style={{marginTop:'-10px', marginBottom:'-10px'}}/>
+      */}
       <div className = 'notificationScroll'>
       { notificationList.length === 0 ?
         <li

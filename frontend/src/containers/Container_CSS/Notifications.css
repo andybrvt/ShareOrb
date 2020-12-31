@@ -126,6 +126,7 @@
 .notificationListContainer{
   display: flex;
   /* background-color: red; */
+  overflow-x: hidden;
   height: 100px;
   width: 400px;
   cursor: pointer;
@@ -150,9 +151,8 @@
   width: 400px;
   top: -5px;
   height: 60px;
-  border-bottom: 3px solid lightgrey;
   text-align: center;
-  background-image: linear-gradient(to bottom right, #2193b0 , #1E90FF);
+
 
   /* border-radius: 5px 5px 0px 0px; */
 
@@ -167,8 +167,10 @@
 }
 
 .notificationWord {
-  color: white;
+  color: black;
   position: relative;
+  font-size: 30px;
+  font-family: "Segoe UI Regular";
   top: 10px;
 }
 
