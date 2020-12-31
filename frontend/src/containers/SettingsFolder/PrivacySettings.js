@@ -1,8 +1,8 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input, Button } from 'antd';
+import { Menu, Form, Input, Button, Switch } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from "react-redux";
 import { authAxios } from '../../components/util';
 
@@ -71,23 +71,33 @@ class PrivacySettings extends React.Component{
   submit = (values) => {
     console.log(values)
     // Now you will send it into the backend through views
-    authAxios.post("http://127.0.0.1:8000/rest-auth/password/change/",{
+  return authAxios.post("http://127.0.0.1:8000/rest-auth/password/change/",{
       new_password1: values.newPassword,
       new_password2: values.confirmPassword,
       old_password: values.oldPassword
-    })
-    .then(res => {
+    }) .then(res => {
       console.log(res)
-    
+
+    }).catch(err => {
+      // this is use to catch the erros in the password change call
+      if(err){
+        throw new SubmissionError({oldPassword: err.response.data.old_password[0]})
+      }
+      console.log(err.response.data.old_password[0])
+
     })
     // then you call an axios call here to change it
 
   }
 
+  onChange(checked) {
+    console.log(`switch to ${checked}`);
+  }
+
   render(){
     console.log(this.props)
     console.log(this.state)
-    const {handleSubmit, pristine, invalid, reset} = this.props;
+    const {handleSubmit, pristine, invalid, reset, error} = this.props;
 
 
     return(
@@ -117,47 +127,65 @@ class PrivacySettings extends React.Component{
 
         <div className = "rightInfo">
 
-        <form
-        // onChange = {this.onChange}
-        onSubmit = {handleSubmit(this.submit)}
-        >
 
+        <div>
+          <div> Change password </div>
+          <form
+          // onChange = {this.onChange}
+          onSubmit = {handleSubmit(this.submit)}
+          >
+
+            <div>
+              <span> Old Password </span>
+              <Field
+              name = "oldPassword"
+              component = {renderField}
+              type = "password"
+               />
+            </div>
+
+            <div>
+              <span> New Password </span>
+              <Field
+              name = "newPassword"
+              component = {renderField}
+              type = "password"
+               />
+            </div>
+
+            <div>
+              <span> Comfirm New Password </span>
+              <Field
+              name = "confirmPassword"
+              component = {renderField}
+              type = "password"
+               />
+            </div>
+
+            {error && <strong>{error}</strong>}
+            <Button
+            type = "primary"
+            // disabled = {this.handleSubmitButton()}
+            disabled = {pristine || invalid}
+            htmlType = "submit"
+            > Save </Button>
+
+
+          </form>
+        </div>
+
+        <div>
+          <div> Private Account </div>
           <div>
-            <span> Old Password </span>
-            <Field
-            name = "oldPassword"
-            component = {renderField}
-            type = "password"
-             />
+            <Switch defaultChecked onChange={this.onChange} />
+          </div>
+          <div>
+            This will make your account private. People who you have not approved
+            can see you account.
           </div>
 
-          <div>
-            <span> New Password </span>
-            <Field
-            name = "newPassword"
-            component = {renderField}
-            type = "password"
-             />
-          </div>
 
-          <div>
-            <span> Comfirm New Password </span>
-            <Field
-            name = "confirmPassword"
-            component = {renderField}
-            type = "password"
-             />
-          </div>
-
-          <Button
-          type = "primary"
-          // disabled = {this.handleSubmitButton()}
-          disabled = {pristine || invalid}
-          htmlType = "submit"
-          > Save </Button>
-
-
-        </form>
+        </div>
 
         </div>
 
