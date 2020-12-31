@@ -228,7 +228,7 @@ class NotificationsDropDown extends React.Component{
         </li>
         )
       }
-      
+
 
       if (notifications[i].type === 'send_friend_event_sync'){
         // ACCEPTS: works
@@ -292,7 +292,7 @@ class NotificationsDropDown extends React.Component{
               notifications[i].maxDate
             )}> Accept</Button>
             <Button
-            type ="priamry"
+            type ="primary"
             className = 'declineButton'
             onClick = {()=> this.onEventSyncDecline(
               notifications[i].recipient,
@@ -757,8 +757,8 @@ class NotificationsDropDown extends React.Component{
       // getPopupContainer={() => document.getElementById("position")}
       style = {{
         position: 'relative',
-        right: '-90%',
-        marginTop:'15px',
+        right: '-70%',
+        marginTop:'10px',
       }}
       onClick = {this.handleMenuClick}>
       {/*
@@ -806,7 +806,7 @@ class NotificationsDropDown extends React.Component{
       >
 
         <a className="ant-dropdown-link" href="#">
-        <i class="far fa-bell" aria-hidden="true"></i>
+        <i style={{fontSize:'20px', marginTop:'30px'}} class="far fa-bell" aria-hidden="true"></i>
 
         </a>
 

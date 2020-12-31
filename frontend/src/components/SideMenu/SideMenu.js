@@ -233,7 +233,8 @@ class SideMenu extends React.Component {
 
 
 
-      <Header className="site-layout HeaderPosition appearBefore" style={{    position: 'fixed', background:'white' }}>
+      <Header className="site-layout HeaderPosition appearBefore"
+         style={{ marginTop:'-20px',   position: 'fixed', background:'white'}}>
         <p class ="">
                 <aside class="sidebar" >
                 <div class="toggle">
@@ -351,42 +352,55 @@ class SideMenu extends React.Component {
            onSearch={this.handleSearch}
            onSelect={this.onSelect}
            dropdownClassName="certain-category-search-dropdown"
-           dropdownMatchSelectWidth={550}
+           dropdownMatchSelectWidth={700}
            style={{
-            // marginLeft:150,
-            marginLeft:'33%',
-            marginRight:'12%', width: 550,
+            marginRight:'12%',
+            marginLeft:'500px',
+
+
            // backgroundColor: 'red'
          }}
 
+
          >
-        <Input.Search size="large" placeholder="Search" />
+        <Input.Search
+          style={{
+           // marginLeft:150,\
+
+           marginRight:'8%',
+           marginTop:'-15px',
+           width: 690,
+
+
+          // backgroundColor: 'red'
+        }}
+
+           compact size="large" placeholder="Search" />
       </AutoComplete>
 
 
 
       <span style={{marginRight:'50px'}}>
-        <Badge count={5}>
-        test
+        <Badge dot={true} count={6}>
+            <i style={{color:'#1890ff', fontSize:'20px'}} class="fas fa-envelope"></i>
        </Badge>
       </span>
 
 
-
-
-
+      {/*
+          Grab notification length for now
+           count = {this.props.notifications.length}
+           */}
 
 
 
       <Badge
-        style={{padding:'initial', margin:'initial'}}
+        style={{padding:'initial', margin:'initial', marginTop:'30px'}}
+        dot={true}
       count = {this.props.notifications.length}>
-      <Button
-        shape="round"
-         onClick = {() => this.onShowNotification()}
-         >
+
           <Notifications {...this.props}/>
-      </Button>
+
     </Badge>
 
 
@@ -396,7 +410,8 @@ class SideMenu extends React.Component {
       class="pointerEvent"
       style = {{
         float:'right',
-        marginRight:'100px',
+        marginRight:'75px',
+        marginTop:'5px',
       }}
     >
          <Dropdown overlay={
