@@ -450,7 +450,7 @@ class SideMenu extends React.Component {
                className = 'miniProfilePic'
                src={defaultPicture} alt="avatar" />
            }
-             <span>{this.capitalize(firstName)} {this.capitalize(lastName)}</span>
+             <span class="sideMenuName">{this.capitalize(firstName)} {this.capitalize(lastName)}</span>
            </span>
 
        </Dropdown>

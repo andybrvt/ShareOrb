@@ -215,98 +215,21 @@ class NotificationsDropDown extends React.Component{
         console.log(this.renderTimestamp(notifications[i].timestamp))
         notificationList.push(
         <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-        <Avatar size = {45} style ={{
-          backgroundColor: 'blue',
-          verticalAlign: 'middle'}}
-          // icon = {<UserOutlined />}
-          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
-          >
-        </Avatar>
-        </div>
-          <h4 className = 'listNotificationFriend'>
-            <span className = 'notificationWords'>
-            <b>{this.capitalize(notifications[i].actor.username)} </b>
-             sent you a friend request.
-            </span>
-            <br />
-            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-            <div className ='pickEventSyncButton'>
-            <Button
-             type ="primary"
-             className = 'acceptButton'
-             onClick = {()=> this.onAccept(notifications[i].recipient, notifications[i].actor.username)}> Accept</Button>
-            <Button
-             className = 'declineButton'
-             onClick = {()=> this.onDecline(notifications[i].recipient, notifications[i].actor.username)}> Decline </Button>
-            </div>
-
-            <Button
-
-              type ='text'
-              shape = 'circle'
-              className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
-          </h4>
-        </li>
-        )
-      }
-      if (notifications[i].type === 'accepted_friend') {
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
+          <div className = 'notificationIcon'>
           <Avatar size = {45} style ={{
-            backgroundColor: 'lightskyblue',
+            backgroundColor: 'blue',
             verticalAlign: 'middle'}}
             // icon = {<UserOutlined />}
             src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
             >
           </Avatar>
-        </div>
-          <h4 className = 'listNotificationSingle'>
-              <b>{this.capitalize(notifications[i].actor.username)} </b>
-              accepted your friend request.
-              <br />
-              <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div>
-              <Button
-              type ='text'
-              shape = 'circle'
-              className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
-              </div>
-          </h4>
+          </div>
+
         </li>
         )
       }
-      if (notifications[i].type === 'declined_friend'){
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-        <Avatar size = {45} style ={{
-          backgroundColor: 'orangered',
-          verticalAlign: 'middle'}}
-          // icon = {<UserOutlined />}
-          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
-          >
-        </Avatar>
-        </div>
-          <h4 className = 'listNotificationSingle'>
-              <b>{this.capitalize(notifications[i].actor.username)} </b>
-               declined your friend request.
-               <br />
-               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div>
-              <Button
-              type ='text'
-              shape = 'circle'
-              className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
-              </div>
-          </h4>
-        </li>
-        )
-      }
+      
+
       if (notifications[i].type === 'send_friend_event_sync'){
         // ACCEPTS: works
           // Bascially when you accept, it will send a notification to to the
