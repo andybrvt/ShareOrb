@@ -6,7 +6,7 @@ import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form
 import { connect } from "react-redux";
 import { authAxios } from '../../components/util';
 import * as authActions from '../../store/actions/auth';
-
+import ConfirmPublicModal from './ConfirmPublicModal';
 
 
 const { SubMenu } = Menu;
@@ -70,6 +70,10 @@ const validate = values => {
 class PrivacySettings extends React.Component{
   // This setting will be used for mostly usersetttings, changing like basic user
   // information like name, username, phone number, etc
+  state = {
+    confirmPublic: false,
+  }
+
 
   submit = (values) => {
     console.log(values)
@@ -103,12 +107,27 @@ class PrivacySettings extends React.Component{
     message.error('Password inputed was incorrect.');
   };
 
+  openConfirmPublic = () => {
+    // This function will be used to open the modal that will confirm that you
+    // are sure you want to switch your account ot public
+    this.setState({
+      confirmPublic: true
+    })
+  }
+
+  closeConfirmPublic = () => {
+    this.setState({
+      confirmPublic: false
+    })
+  }
+
 
   onChange =(checked) => {
     console.log(`switch to ${checked}`);
     // This will be in charge of switching the true and false of the
     if(checked === false){
-
+      console.log('hit here')
+      this.openConfirmPublic()
     } else {
       authAxios.post("http://127.0.0.1:8000/userprofile/privateChange", {
         privatePro: checked,
@@ -117,7 +136,7 @@ class PrivacySettings extends React.Component{
       .then(res =>{
         // Now you will put a redux call here ot change the backend
         this.props.changePrivate(res.data)
-      }) 
+      })
     }
 
   }
@@ -217,6 +236,10 @@ class PrivacySettings extends React.Component{
 
         </div>
 
+        <ConfirmPublicModal
+        visible = {this.state.confirmPublic}
+        onClose = {this.closeConfirmPublic}
+         />
 
       </div>
     )
