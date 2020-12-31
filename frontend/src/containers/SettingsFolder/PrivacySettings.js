@@ -2,7 +2,7 @@ import React from 'react';
 import './Settings.css';
 import { Menu, Form, Input, Button } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from "react-redux";
 import { authAxios } from '../../components/util';
 
@@ -71,14 +71,20 @@ class PrivacySettings extends React.Component{
   submit = (values) => {
     console.log(values)
     // Now you will send it into the backend through views
-    authAxios.post("http://127.0.0.1:8000/rest-auth/password/change/",{
+  return authAxios.post("http://127.0.0.1:8000/rest-auth/password/change/",{
       new_password1: values.newPassword,
       new_password2: values.confirmPassword,
       old_password: values.oldPassword
-    })
-    .then(res => {
+    }) .then(res => {
       console.log(res)
-    
+
+    }).catch(err => {
+      // this is use to catch the erros in the password change call
+      if(err){
+        throw new SubmissionError({oldPassword: err.response.data.old_password[0]})
+      }
+      console.log(err.response.data.old_password[0])
+
     })
     // then you call an axios call here to change it
 
@@ -87,7 +93,7 @@ class PrivacySettings extends React.Component{
   render(){
     console.log(this.props)
     console.log(this.state)
-    const {handleSubmit, pristine, invalid, reset} = this.props;
+    const {handleSubmit, pristine, invalid, reset, error} = this.props;
 
 
     return(
@@ -149,6 +155,7 @@ class PrivacySettings extends React.Component{
              />
           </div>
 
+          {error && <strong>{error}</strong>}
           <Button
           type = "primary"
           // disabled = {this.handleSubmitButton()}

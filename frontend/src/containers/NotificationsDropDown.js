@@ -829,8 +829,8 @@ class NotificationsDropDown extends React.Component{
       <List
       // getPopupContainer={() => document.getElementById("position")}
       style = {{
-        position: 'fixed',
-        right: '10px',
+        // position: 'fixed',
+        right: '-100px',
         top:'60px',
         bottom : '63px'
       }}
