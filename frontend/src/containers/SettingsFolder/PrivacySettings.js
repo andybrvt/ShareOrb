@@ -5,6 +5,9 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from "react-redux";
 import { authAxios } from '../../components/util';
+import * as authActions from '../../store/actions/auth';
+
+
 
 const { SubMenu } = Menu;
 
@@ -101,8 +104,22 @@ class PrivacySettings extends React.Component{
   };
 
 
-  onChange(checked) {
+  onChange =(checked) => {
     console.log(`switch to ${checked}`);
+    // This will be in charge of switching the true and false of the
+    if(checked === false){
+
+    } else {
+      authAxios.post("http://127.0.0.1:8000/userprofile/privateChange", {
+        privatePro: checked,
+        curId: this.props.curId
+      })
+      .then(res =>{
+        // Now you will put a redux call here ot change the backend
+        this.props.changePrivate(res.data)
+      }) 
+    }
+
   }
 
   render(){
@@ -188,7 +205,7 @@ class PrivacySettings extends React.Component{
         <div>
           <div> Private Account </div>
           <div>
-            <Switch defaultChecked onChange={this.onChange} />
+            <Switch checked ={this.props.privatePro} onChange={this.onChange} />
           </div>
           <div>
             This will make your account private. People who you have not approved
@@ -215,6 +232,17 @@ PrivacySettings = reduxForm({
 
 // const selector = formValueSelector("user info settings")
 // For descrption go to ReduxEditEventForm.js
+const mapStateToProps = state => {
+  return {
+    curId: state.auth.id,
+    privatePro: state.auth.private
+  }
+}
 
+const mapDispatchToProps = dispatch => {
+  return {
+    changePrivate: (privateCall) => dispatch(authActions.changePrivate(privateCall))
+  }
+}
 
-export default PrivacySettings;
+export default connect(mapStateToProps, mapDispatchToProps)(PrivacySettings);

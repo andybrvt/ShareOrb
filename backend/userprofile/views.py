@@ -513,5 +513,13 @@ class PrivateChangeView(APIView):
     # and will be called in the PrivacySettings.js
     def post(self, request, *args, **kwargs):
         print(request.data)
+        # First you will pull the user
+        user = get_object_or_404(models.User, id = request.data['curId'])
 
-        return  Response("account privacy")
+        user.private = request.data['privatePro']
+        user.save()
+
+        # once you change it, now you will send it to the front end to change the
+        # redux
+        print(user.private)
+        return  Response(user.private)
