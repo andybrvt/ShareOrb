@@ -1,5 +1,7 @@
 .timeStamp {
   font-size: 12px;
+  font-family: "Segoe UI Regular";
+
 }
 
 .notificationListContainer .listNotification {
@@ -17,8 +19,8 @@
 .notificationListContainer .listNotificationSingle {
   /* This is for the notifications that do not have a button */
   position: relative;
-  top: 30px;
-  left: 25px;
+  top: 25%;
+  left: 30px;
   height: 70px;
   /* margin: 20px; */
   width: 290px;
@@ -139,7 +141,7 @@
   height: 55px;
   position: relative;
   left: 15px;
-  top: 20px
+  top: 25%;
 }
 
 .notificationHeader {

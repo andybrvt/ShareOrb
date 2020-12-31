@@ -682,7 +682,7 @@ class NotificationsDropDown extends React.Component{
           onClick = {() => this.onEventPageClick(notifications[i].eventId)}
           className = "notificationListContainer">
             <div className = 'notificationIcon'>
-              <Avatar size = {55} style = {{
+              <Avatar size = {45} style = {{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
@@ -714,7 +714,7 @@ class NotificationsDropDown extends React.Component{
           onClick = {() => this.onEventPageClick(notifications[i].eventId)}
           className = "notificationListContainer">
             <div className = 'notificationIcon'>
-              <Avatar size = {55} style = {{
+              <Avatar size = {45} style = {{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
@@ -762,7 +762,7 @@ class NotificationsDropDown extends React.Component{
            )}
           className = 'notificationListContainer'>
           <div className = 'notificationIcon'>
-            <Avatar size = {55} style ={{
+            <Avatar size = {45} style ={{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
               src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
@@ -771,7 +771,7 @@ class NotificationsDropDown extends React.Component{
           </div>
             <h4 className = 'listNotificationSingle'>
                 <b>{this.capitalize(notifications[i].actor.username)} </b>
-                wants to add an event to your social calendar on {notifications[i].pendingEventDate}. Click to check it out!
+                added an event to your social calendar on {notifications[i].pendingEventDate}
                 <br />
                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
                 <div>
@@ -799,7 +799,7 @@ class NotificationsDropDown extends React.Component{
          )}
         className = 'notificationListContainer'>
         <div className = 'notificationIcon'>
-          <Avatar size = {55} style ={{
+          <Avatar size = {45} style ={{
             verticalAlign: 'middle'}}
             // icon = {<UserOutlined />}
             src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
