@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input, Button, Switch } from 'antd';
+import { Menu, Form, Input, Button, Switch, message } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from "react-redux";
@@ -77,18 +77,29 @@ class PrivacySettings extends React.Component{
       old_password: values.oldPassword
     }) .then(res => {
       console.log(res)
-
+      this.success()
+      this.props.reset()
     }).catch(err => {
       // this is use to catch the erros in the password change call
-      if(err){
+      console.log(err)
+      if(err.response){
+        this.error()
         throw new SubmissionError({oldPassword: err.response.data.old_password[0]})
       }
-      console.log(err.response.data.old_password[0])
 
     })
     // then you call an axios call here to change it
 
   }
+
+  success = () => {
+    message.success('Password changed successfully.');
+  };
+
+  error = () => {
+    message.error('Password inputed was incorrect.');
+  };
+
 
   onChange(checked) {
     console.log(`switch to ${checked}`);

@@ -159,9 +159,9 @@ class EventSyncReactForm extends React.Component {
 
 
     return (
-
+      <div>
       <DetailSwitch {...this.props}/>
-
+      </div>
     )
   }
 }

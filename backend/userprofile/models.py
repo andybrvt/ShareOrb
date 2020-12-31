@@ -67,7 +67,9 @@ class User(AbstractUser):
     phone_number = models.CharField(blank=True, null=True, max_length=10)
     slug = models.SlugField(blank = True)
     friends = models.ManyToManyField("self", blank=True, related_name = 'friends')
-
+    # Private will handle wheter or not the account is private and other people
+    # are allow to see it or not
+    private = models.BooleanField(default = False)
 
     def get_posts(self):
 

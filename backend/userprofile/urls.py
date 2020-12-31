@@ -66,5 +66,7 @@ urlpatterns = [
 	path('deletePost', views.DeletePostView.as_view(), name = "delete_post"),
 
 	# This is used to edit user information
-	path('editUserInfo', views.EditUserInfoView.as_view(), name = "edit_user_info")
+	path('editUserInfo', views.EditUserInfoView.as_view(), name = "edit_user_info"),
+	# This will be used for changing the account from private to public
+	path('privateChange', views.PrivateChangeView.as_view(), name = "change_private")
 ]

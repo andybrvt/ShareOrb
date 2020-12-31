@@ -507,3 +507,11 @@ class EditUserInfoView(APIView):
 
 
         return Response(serializedProfile)
+
+class PrivateChangeView(APIView):
+    # This function will be used to set the user profile to either true or false
+    # and will be called in the PrivacySettings.js
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        return  Response("account privacy")

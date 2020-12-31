@@ -499,50 +499,50 @@ class DetailSwitch extends React.Component {
     );
     });
 
-    const textChildren2 = dataArray.map((item, i) => {
-      console.log(dataArray);
-      const { title, content, background } = item;
-      return (<Element
-        style={{
-          background: item.color,
-          height: '100%',
-        }}
-         key={i}>
-
-
-        <div>
-          <QueueAnim type="bottom"
-            duration={1500}
-             delay={[!i ? this.state.delay + 500 : 800, 0]}>
-
-            <h1 key="h1">{'Day View'}</h1>
-            <em key="em" style={{ background }} />
-            <p key="p">{
-                <div>test</div>
-
-          }</p>
-
-
-          </QueueAnim>
-
-
-        <QueueAnim type="bottom"
-          duration={1500}
-           delay={[!i ? this.state.delay + 500 : 800, 0]}>
-
-          <h1 style={{ marginTop:'125px'}} key="h1">{'Week View'}</h1>
-          <em key="em" style={{ background }} />
-          <p key="p">{
-            <div>test2</div>
-        }</p>
-
-
-        </QueueAnim>
-      </div>
-
-      </Element>
-    );
-    });
+    // const textChildren2 = dataArray.map((item, i) => {
+    //   console.log(dataArray);
+    //   const { title, content, background } = item;
+    //   return (<Element
+    //     style={{
+    //       background: item.color,
+    //       height: '100%',
+    //     }}
+    //      key={i}>
+    //
+    //
+    //     <div>
+    //       <QueueAnim type="bottom"
+    //         duration={1500}
+    //          delay={[!i ? this.state.delay + 500 : 800, 0]}>
+    //
+    //         <h1 key="h1">{'Day View'}</h1>
+    //         <em key="em" style={{ background }} />
+    //         <p key="p">{
+    //             <div>test</div>
+    //
+    //       }</p>
+    //
+    //
+    //       </QueueAnim>
+    //
+    //
+    //     <QueueAnim type="bottom"
+    //       duration={1500}
+    //        delay={[!i ? this.state.delay + 500 : 800, 0]}>
+    //
+    //       <h1 style={{ marginTop:'125px'}} key="h1">{'Week View'}</h1>
+    //       <em key="em" style={{ background }} />
+    //       <p key="p">{
+    //         <div>test2</div>
+    //     }</p>
+    //
+    //
+    //     </QueueAnim>
+    //   </div>
+    //
+    //   </Element>
+    // );
+    // });
 
 
     return (
@@ -586,7 +586,8 @@ class DetailSwitch extends React.Component {
 
 
       </div>
-    </div>);
+    </div>
+    );
   }
 }
 const mapStateToProps = state => {

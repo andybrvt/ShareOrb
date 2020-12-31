@@ -292,7 +292,6 @@ class PersonalProfile extends React.Component{
       return(
 
         <div className = 'cal-post-pic'>
-
           {this.onRenderTabs()}
         </div>
 
@@ -320,31 +319,6 @@ class PersonalProfile extends React.Component{
 
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
-
-    // onAddCloseFriendOpen = () => {
-    //   this.setState({
-    //     showFriendConfirm: true
-    //   })
-    // }
-    //
-    // onAddCloseFriendClose = () => {
-    //   this.setState({
-    //     showFriendConfirm: false
-    //   })
-    // }
-    //
-    //
-    // onUnAddCloseFriendOpen = () => {
-    //   this.setState({
-    //     showUnfriend: true
-    //   })
-    // }
-    //
-    // onUnAddCloseFriendClose = () => {
-    //   this.setState({
-    //     showUnfriend: false
-    //   })
-    // }
 
 
     onRenderProfileInfo(){
@@ -416,8 +390,6 @@ class PersonalProfile extends React.Component{
         <div className = 'profileInfo'>
 
           <div>
-
-
 
             <div className = 'profilePostFollow'>
 
@@ -491,40 +463,6 @@ class PersonalProfile extends React.Component{
                 Message
               </div>
 
-            {/*
-              this.props.parameter.username !== this.props.currentUser
-              && followers.includes(this.props.currentUser.toString()) ?
-
-              <div>
-              {
-                !friends.includes(profileId) ?
-                <div
-                onClick = {() => this.onAddCloseFriendOpen()}
-                className = "addFriendButton"
-                >
-                  Add Friend
-                </div>
-
-                :
-
-                <div
-                onClick = {() => this.onUnAddCloseFriendOpen()}
-                className = 'unFriendButton'
-                >
-                  Unfriend
-                </div>
-              }
-              </div>
-
-
-              :
-
-              <div></div>
-
-
-
-            */}
-
             </div>
 
         }
@@ -534,25 +472,6 @@ class PersonalProfile extends React.Component{
         </div>
 
         </div>
-
-        {/*
-
-          DELETE LATER
-          <ConfirmAddFriend
-          visible = {this.state.showFriendConfirm}
-          onClose = {this.onAddCloseFriendClose}
-          curId = {curId}
-          friendId = {profileId}
-           />
-
-           <ConfirmUnfriend
-           visible = {this.state.showUnfriend}
-           onClose = {this.onUnAddCloseFriendClose}
-           curId = {curId}
-           friendId = {profileId}
-           />
-
-          */}
 
 
         </div>
