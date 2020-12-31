@@ -1,7 +1,26 @@
 import React from 'react';
 import { Modal } from 'antd';
+import { authAxios } from '../../components/util';
+
 
 class ConfirmPublicModal extends React.Component{
+
+  onCancel = () => {
+    this.props.onClose()
+  }
+
+  onAcceptPublic = () => {
+    // this function will change the account to public again
+    authAxios.post("http://127.0.0.1:8000/userprofile/privateChange", {
+      privatePro: false,
+      curId: this.props.curId
+    })
+    .then(res =>{
+      // Now you will put a redux call here ot change the backend
+      this.props.changePrivate(res.data)
+    })
+    this.props.onClose()
+  }
 
   render(){
     console.log(this.props)
@@ -9,8 +28,23 @@ class ConfirmPublicModal extends React.Component{
       <Modal
       visible = {this.props.visible}
       onCancel = {this.props.onClose}
+      footer = {null}
       >
-        this is for confirm
+      Are you sure you want to make your account public?
+
+      <div className = "pendingButtons">
+        <div
+        onClick ={() => this.onCancel()}
+        className = "pendingDeclineButton">
+          Cancel
+        </div>
+
+        <div
+        onClick = {() =>this.onAcceptPublic()}
+        className = "pendingAcceptButton">
+          Accept
+        </div>
+      </div>
       </Modal>
     )
   }

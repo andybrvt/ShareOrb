@@ -239,6 +239,8 @@ class PrivacySettings extends React.Component{
         <ConfirmPublicModal
         visible = {this.state.confirmPublic}
         onClose = {this.closeConfirmPublic}
+        curId = {this.props.curId}
+        changePrivate = {this.props.changePrivate}
          />
 
       </div>
