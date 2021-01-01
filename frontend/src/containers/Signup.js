@@ -92,7 +92,7 @@ class Signup extends React.Component {
         <div class="one">
           {/* color is #68BFFD*/}
           <img src={worldPic} width="100%"
-            style={{position:'relative',left:'15%',marginTop:'250px'}}/>
+            style={{position:'relative',left:'20%',marginTop:'300px'}}/>
         </div>
 
         <div class="two">

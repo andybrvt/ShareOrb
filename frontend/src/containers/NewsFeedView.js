@@ -25,7 +25,7 @@ class NewsFeedView extends React.Component {
 		username: '',
 		id: '',
 		postShow:false,
-		picShow:false,
+		eventShow:false,
 	}
 
 	constructor(props){
@@ -34,16 +34,14 @@ class NewsFeedView extends React.Component {
 
 	postCondition = () => {
     this.setState({
-			picShow:false,
       postShow: !(this.state.postShow),
     });
   };
 
 
-	picCondition = () => {
+	eventCondition = () => {
     this.setState({
-			postShow:false,
-      picShow: !(this.state.picShow),
+			eventShow:true,
     });
   };
 
@@ -52,6 +50,7 @@ class NewsFeedView extends React.Component {
 
       this.setState({
         postShow: false,
+				eventShow:false,
       })
 
   }
@@ -144,7 +143,7 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>
 
 
-								<div class="topCard" onClick ={this.picCondition}>
+								<div class="topCard" onClick ={this.eventCondition}>
 
 									<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 
@@ -180,7 +179,7 @@ class NewsFeedView extends React.Component {
 
 	<div>
 
-		<Modal
+	<Modal
 		visible = {this.state.postShow}
 		onCancel = {() => this.closeProfileEdit()}
 		footer = {null}
@@ -189,9 +188,27 @@ class NewsFeedView extends React.Component {
 		centered
 
 		>
-	<NewNewsfeedFormPost
-	onCancel = {this.closeProfileEdit}
-	profile = {this.props.currentProfile}/>
+
+
+
+				<NewNewsfeedFormPost
+				onCancel = {this.closeProfileEdit}
+				profile = {this.props.currentProfile}/>
+	</Modal>
+
+
+	<Modal
+		visible = {this.state.eventShow}
+		onCancel = {() => this.closeProfileEdit()}
+		footer = {null}
+		width={900}
+		bodyStyle={{padding:'50px'}}
+		centered
+
+		>
+
+
+
 	</Modal>
 	</div>
 

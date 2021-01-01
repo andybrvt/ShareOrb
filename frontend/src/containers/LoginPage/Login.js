@@ -64,17 +64,13 @@ if (token) {
     }
 
 
-    const tailLayout = {
-      wrapperCol: {
-        offset: 6,
-
-      },
-    };
-
     return (
       <div style={{height:'100%', background:'#fafafa'}} class="parentContainer">
         <div class="one">
           {/* color is #68BFFD*/}
+
+
+
           <div class="loginTitle">Connecting people through calendars</div>
             <div class="eventCard allStyle" style={{left:'20%',
             width:'600px', height:'400px', padding:'75px'}}>
@@ -120,7 +116,7 @@ if (token) {
                     Log In
 
                   </Button>
-                  <div>  New to ShareOrb? <NavLink to="/signup">Sign Up</NavLink></div>
+                  <div>  New? <NavLink to="/signup">Sign Up</NavLink></div>
                 </Form.Item>
 
                 </Form>
