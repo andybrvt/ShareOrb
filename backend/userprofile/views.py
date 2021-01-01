@@ -535,7 +535,7 @@ class onAcceptFollow(APIView):
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])
         followerObj = models.UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
-
+        followerObj.save()
         # Now you will grab the following of the current user and then
         # replace the one you have in the front end
         curUser = get_object_or_404(models.User, id = request.data['following'])

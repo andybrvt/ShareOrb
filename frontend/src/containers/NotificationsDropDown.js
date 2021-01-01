@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Dropdown, List, Button, Avatar, Badge, notification, Divider } from 'antd';
+import { Menu, Dropdown, List, Button, Avatar, Badge, notification, Divider, message } from 'antd';
 import { DownOutlined, NotificationOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../notificationWebsocket';
 import { authAxios } from '../components/util';
@@ -204,12 +204,17 @@ class NotificationsDropDown extends React.Component{
     })
   }
 
-  onAcceptFollow = (follower, following) => {
+  successFollow = () => {
+    message.success('This is a success message');
+  };
+
+  onAcceptFollow = (follower, following, notificationId) => {
     // This function will used to accept the follower, allow request and delete the notifications
     // The follower parameter will be the actor of the notification (it will be the
     // person trying to request)
     // The following parameter will be the recipient or in this case the person who
     // is accepting the follow
+    this.onDeleteNotification(notificationId)
 
     console.log(follower, following)
     // Once you get the ids you can then send an axios call
@@ -220,6 +225,7 @@ class NotificationsDropDown extends React.Component{
     .then(res => {
       console.log(res.data)
       this.props.updateFollowers(res.data)
+      this.successFollow()
       // You also want to send a notification too
     })
 
@@ -807,7 +813,8 @@ class NotificationsDropDown extends React.Component{
                  type ="primary"
                  onClick = {() => this.onAcceptFollow(
                    notifications[i].actor.id,
-                   notifications[i].recipient
+                   notifications[i].recipient,
+                   notifications[i].id
                  )}
                  > Accept</Button>
                  <Button

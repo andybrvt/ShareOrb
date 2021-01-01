@@ -276,7 +276,7 @@ class CustomNotification(models.Model):
     pendingEventEndTime = models.TimeField(default = datetime.time, blank = True)
 
     def __str__(self):
-        return str(self.recipient)
+        return str(self.id)
 
     def get_pendingImages(self):
         # This will call all the pending images that are assocated with the notification
