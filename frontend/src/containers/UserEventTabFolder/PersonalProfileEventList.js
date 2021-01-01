@@ -638,7 +638,8 @@ class PersonalProfileEventList extends React.Component{
     let bio=""
     let privatePro = true
 
-
+    // follower list will used mostly for private events
+    let followerList = []
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
@@ -656,7 +657,17 @@ class PersonalProfileEventList extends React.Component{
         privatePro = false
       } else {
         // In the case that it is not the current user
-        privatePro = this.props.profile.private
+        if(this.props.profile.get_followers){
+          for (let i = 0; i< this.props.profile.get_followers.length; i++){
+            followerList.push(this.props.profile.get_followers[i].id)
+          }
+        }
+        if(followerList.includes(this.props.currentId)){
+          privatePro = false
+        } else {
+          privatePro = this.props.profile.private
+        }
+
       }
 
     }
