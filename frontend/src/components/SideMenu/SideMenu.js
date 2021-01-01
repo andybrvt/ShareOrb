@@ -452,7 +452,7 @@ class SideMenu extends React.Component {
            {
              profilePic != '' ?
                <Avatar
-               size={45}
+               size={35}
                src={profilePic}
                alt="avatar"
                className = 'miniProfilePic'
