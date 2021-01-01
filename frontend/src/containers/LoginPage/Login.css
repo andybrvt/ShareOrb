@@ -1,11 +1,12 @@
 .loginTitle{
-  color:black;
-  font-size: 30px;
-  margin-top: 250px;
+  color:#68BFFD;
+  font-size: 45px;
+  margin-top: 200px;
   margin-left: 200px;
   left:'20%';
   position:'absolute';
   font-weight: 400;
+  margin-bottom: 25px;
   /* background-color: red; */
 }
 

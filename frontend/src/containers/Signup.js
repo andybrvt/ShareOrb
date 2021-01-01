@@ -96,6 +96,7 @@ class Signup extends React.Component {
         </div>
 
         <div class="two">
+
           <div class="eventCard allStyle" style={{left:'20%',top:'15%',
           width:'500px', height:'700px', padding:'75px'}}>
 
