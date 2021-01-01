@@ -300,16 +300,52 @@ class PersonalProfile extends React.Component{
 
     onFollow = (follower, following) =>{
       //Send a follow in the backend
-      ExploreWebSocketInstance.sendFollowing(follower, following)
 
-      // The follower is you who is sending the reqwuest and the following is the other person
-      const notificationObject = {
-        command: 'send_follow_notification',
-        actor: this.props.currentUser,
-        recipient: this.props.profile.username
+      let privatePro = ""
+      if(this.props.profile.private){
+        privatePro = this.props.profile.private
       }
 
-      NotificationWebSocketInstance.sendNotification(notificationObject)
+      if(privatePro === true ){
+        // true will be if the profile is private. If it is private then it will
+        // send a request to follow. Once you send in the request, if the person
+        // is following you (and the other person is approved) then you can
+        // see the private. If the other person does not approve then you are not
+        // following them and you cannot see their page
+
+
+        // So if it is private then it will sned a request instead of a follow
+
+        // Put request here
+
+        console.log("send a request to follow")
+        // pretty much you will send a notifcation here and then antd notifcaiton
+        // to tell them that they want to follow you
+
+        // You will use the id instead of username
+
+        const notificationObject = {
+          command: 'send_follow_request_notification',
+          actor: this.props.currentId,
+          recipient: this.props.profile.id
+        }
+
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+      } else {
+        ExploreWebSocketInstance.sendFollowing(follower, following)
+
+        // The follower is you who is sending the reqwuest and the following is the other person
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: this.props.currentUser,
+          recipient: this.props.profile.username
+        }
+
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+      }
+
+
     }
 
 
@@ -726,7 +762,8 @@ class PersonalProfile extends React.Component{
 
           </div>
 
-          { privatePro ?
+          {
+            privatePro ?
             this.onRenderPrivate()
 
             :

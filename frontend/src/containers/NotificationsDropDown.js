@@ -748,7 +748,35 @@ class NotificationsDropDown extends React.Component{
               </div>
           </h4>
         </li>
-      )}
+      )} if(notifications[i].type === 'follow_request_notification'){
+        notificationList.push(
+          <li className = 'notificationListContainer' onClick = {() => this.onProfileClick(notifications[i].actor.username)}>
+            <div className = 'notificationIcon'>
+            <Avatar size = {45} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              // icon = {<UserOutlined />}
+              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 request to follow you.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div>
+                <Button
+                type ='text'
+                shape = 'circle'
+                className = 'deleteButton'
+                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                </div>
+            </h4>
+          </li>
+        )
+      }
 
 
     }
