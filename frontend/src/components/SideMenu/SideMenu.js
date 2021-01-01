@@ -93,7 +93,9 @@ class SideMenu extends React.Component {
 
   onSelect = (value) => {
     console.log('onSelect', value);
-    window.location.href = 'http://localhost:3000/explore/'+value
+    const nameList = value.split(" ")
+    this.props.history.push("/explore/"+nameList[0])
+    // window.location.href = 'http://localhost:3000/explore/'+value
   }
 
   handleSearch = (value) => {
@@ -111,6 +113,7 @@ class SideMenu extends React.Component {
       this.props.openNotification()
     }
   }
+
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -195,7 +198,7 @@ class SideMenu extends React.Component {
     const temp=[]
     this.state.profileList.forEach(item => {
       temp.push(
-        <Option value = {item.username}
+        <Option value = {item.username+' '+item.first_name+' '+item.last_name}
         label = {this.capitalize(item.username)}>
           <div style={{padding:'10px'}}>
             <Avatar
@@ -347,8 +350,8 @@ class SideMenu extends React.Component {
            dataSource={temp}
 
            filterOption={(inputValue, option) =>
-             option.props.children.toUpperCase().
-             indexOf(inputValue.toUpperCase()) !== -1}
+              option.value.includes(inputValue)
+           }
            onSearch={this.handleSearch}
            onSelect={this.onSelect}
            dropdownClassName="certain-category-search-dropdown"
@@ -419,12 +422,14 @@ class SideMenu extends React.Component {
          }}
          selectedKeys={[]} >
              { (
-               <Menu.Item style={{marginTop:'-2px'}} key="center">
-                 <Link to={"/explore/"+this.props.username}>
+               <Menu.Item
+               onClick = {()=>this.props.history.push("/explore/"+this.props.username)}
+               style={{marginTop:'-2px'}} key="center">
+
                    <i style={{marginRight:'3px' }} class="far fa-user"></i>
                    <span style={{marginLeft:'2px'}}> Profile</span>
 
-                 </Link>
+
 
                </Menu.Item>
              )}

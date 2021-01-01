@@ -73,10 +73,9 @@ class User(AbstractUser):
     # are allow to see it or not
     private = models.BooleanField(default = False)
 
-    # This is for when you make your account private, and this field will be used to
-    # approve of the people that can see your page
-    # YOU DONT NEED THIS ANY MORE BECAUSE YOU CAN USE FOLLOWERS AND FOLLOWING
-    approved = models.ManyToManyField("self", blank = True, related_name = "private_approved")
+    # This is for when you make your account private, and this field will have people
+    # that request to see your page
+    requested = models.ManyToManyField("self", blank = True, related_name = "private_approved")
 
     def get_posts(self):
 
