@@ -766,6 +766,26 @@ class NotificationsDropDown extends React.Component{
                  request to follow you.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                 <div className = 'pickEventSyncButton'>
+                 <Button
+                 className = 'acceptButton'
+                 type ="primary"
+                 onClick = {()=> this.onEventSyncAccept(
+                   notifications[i].recipient,
+                   notifications[i].actor.username,
+                   notifications[i].minDate,
+                   notifications[i].maxDate
+                 )}> Accept</Button>
+                 <Button
+                 type ="primary"
+                 className = 'declineButton'
+                 onClick = {()=> this.onEventSyncDecline(
+                   notifications[i].recipient,
+                   notifications[i].actor.username,
+                   notifications[i].minDate,
+                   notifications[i].maxDate
+                 )}> Decline </Button>
+                 </div>
                 <div>
                 <Button
                 type ='text'

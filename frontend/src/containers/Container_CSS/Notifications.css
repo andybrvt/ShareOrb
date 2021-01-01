@@ -19,7 +19,7 @@
 .listNotificationSingle {
   /* This is for the notifications that do not have a button */
   position: relative;
-  top: 25%;
+  top: 20%;
   left: 30px;
   height: 70px;
   /* margin: 20px; */
@@ -87,6 +87,23 @@
   text-align: center;
   border: none;
 }
+
+.notificationListContainer .listNotificationSingle .pickEventSyncButton{
+  position: relative;
+  top: 5px;
+}
+.notificationListContainer .listNotificationSingle .pickEventSyncButton .acceptButton{
+  /* height: 25px; */
+  /* padding-bottom: 5px; */
+}
+.notificationListContainer .listNotificationSingle .pickEventSyncButton .declineButton{
+  /* height : 25px; */
+  position: relative;
+  left: 5px;
+}
+
+
+
 
 .notificationListContainer .listNotification .pickEventSyncButton{
   /* background-color: red; */
