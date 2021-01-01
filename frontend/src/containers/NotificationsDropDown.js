@@ -7,6 +7,7 @@ import axios from 'axios';
 import './Container_CSS/Notifications.css';
 import { UserOutlined, SmileTwoTone, FrownOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
+import * as authActions from '../store/actions/auth';
 import * as notificationsActions from '../store/actions/notifications';
 import * as eventSyncActions from '../store/actions/eventSync';
 import PickEventSyncModal from './PersonalCalendar/EventSyncForms/PickEventSyncModal';
@@ -201,6 +202,40 @@ class NotificationsDropDown extends React.Component{
       eventDate: "",
       selectedUserId: ""
     })
+  }
+
+  onAcceptFollow = (follower, following) => {
+    // This function will used to accept the follower, allow request and delete the notifications
+    // The follower parameter will be the actor of the notification (it will be the
+    // person trying to request)
+    // The following parameter will be the recipient or in this case the person who
+    // is accepting the follow
+
+    console.log(follower, following)
+    // Once you get the ids you can then send an axios call
+    authAxios.post("http://127.0.0.1:8000/userprofile/approveFollow", {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      console.log(res.data)
+      this.props.updateFollowers(res.data)
+      // You also want to send a notification too
+    })
+
+    // So since this is not real time, you can just call a axios call instead of
+    // a websocket call
+
+
+
+    // Now you will send a new notification to the other user
+
+  }
+
+  onDeclineFollow = () => {
+    // This will decline the follow request and then delete the request
+    // notification
+    console.log('decline')
   }
 
   renderNotifications = () => {
@@ -750,14 +785,14 @@ class NotificationsDropDown extends React.Component{
         </li>
       )} if(notifications[i].type === 'follow_request_notification'){
         notificationList.push(
-          <li className = 'notificationListContainer' onClick = {() => this.onProfileClick(notifications[i].actor.username)}>
+          <li className = 'notificationListContainer' >
             <div className = 'notificationIcon'>
             <Avatar size = {45} style = {{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
               src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
-
+              onClick = {() => this.onProfileClick(notifications[i].actor.username)}
               >
             </Avatar>
             </div>
@@ -770,21 +805,16 @@ class NotificationsDropDown extends React.Component{
                  <Button
                  className = 'acceptButton'
                  type ="primary"
-                 onClick = {()=> this.onEventSyncAccept(
-                   notifications[i].recipient,
-                   notifications[i].actor.username,
-                   notifications[i].minDate,
-                   notifications[i].maxDate
-                 )}> Accept</Button>
+                 onClick = {() => this.onAcceptFollow(
+                   notifications[i].actor.id,
+                   notifications[i].recipient
+                 )}
+                 > Accept</Button>
                  <Button
                  type ="primary"
                  className = 'declineButton'
-                 onClick = {()=> this.onEventSyncDecline(
-                   notifications[i].recipient,
-                   notifications[i].actor.username,
-                   notifications[i].minDate,
-                   notifications[i].maxDate
-                 )}> Decline </Button>
+                 onClick = {() => this.onDeclineFollow()}
+                 > Decline </Button>
                  </div>
                 <div>
                 <Button
@@ -900,7 +930,8 @@ const mapDispatchToProps = dispatch => {
   // most of the other props are in the Layouts
   return {
     deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId)),
-    openNotification: () => dispatch(notificationsActions.openNotification())
+    openNotification: () => dispatch(notificationsActions.openNotification()),
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
   }
 }
 

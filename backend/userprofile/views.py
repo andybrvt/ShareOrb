@@ -523,3 +523,25 @@ class PrivateChangeView(APIView):
         # redux
         print(user.private)
         return  Response(user.private)
+
+
+class onAcceptFollow(APIView):
+    # This funciton will be used to approve of a person following and seeing
+    # your page
+    # Pretty much a normal follow
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        follower = get_object_or_404(models.User, id = request.data['follower'])
+        following = get_object_or_404(models.User, id = request.data['following'])
+        followerObj = models.UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
+
+        # Now you will grab the following of the current user and then
+        # replace the one you have in the front end
+        curUser = get_object_or_404(models.User, id = request.data['following'])
+        hostObj = serializers.UserSerializer(curUser).data
+
+        followerList = hostObj['get_followers']
+        # You will return your new follow list to update your list
+
+        return Response(followerList)

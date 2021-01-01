@@ -110,6 +110,12 @@ const changePrivate = (state, action) => {
   })
 }
 
+const updateFollowers = (state, action) => {
+  return updateObject(state, {
+    followers: action.followerList
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -135,6 +141,8 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.CHANGE_PRIVATE:
       return changePrivate(state, action);
+    case actionTypes.UPDATE_FOLLOWERS:
+      return updateFollowers(state, action);
     default:
       return state;
   }

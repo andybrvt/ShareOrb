@@ -91,7 +91,7 @@ class ProfileCardNewsFeed extends React.Component{
           <Col
             offset={3}
             span={10}
-            onClick = {() => this.onFollowerOpen()}
+            onClick = {() => this.onFollowingOpen()}
             class="clickable"
           >
           <Statistic
@@ -102,7 +102,7 @@ class ProfileCardNewsFeed extends React.Component{
 
           </Col>
           <Col
-            onClick = {() => this.onFollowingOpen()}
+            onClick = {() => this.onFollowerOpen()}
             span={10}
             class="clickable"
           >

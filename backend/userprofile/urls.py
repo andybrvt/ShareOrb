@@ -68,5 +68,7 @@ urlpatterns = [
 	# This is used to edit user information
 	path('editUserInfo', views.EditUserInfoView.as_view(), name = "edit_user_info"),
 	# This will be used for changing the account from private to public
-	path('privateChange', views.PrivateChangeView.as_view(), name = "change_private")
+	path('privateChange', views.PrivateChangeView.as_view(), name = "change_private"),
+	# This will be for accepting follow and seeing private
+	path('approveFollow', views.onAcceptFollow.as_view(), name = "approve_follow")
 ]

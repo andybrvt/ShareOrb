@@ -319,3 +319,12 @@ export const changePrivate = (privateCall) => {
     privateCall: privateCall
   }
 }
+
+export const updateFollowers = (followerList) => {
+  // This function will update your follower list after you have approved someone
+  // following you
+  return {
+    type: actionTypes.UPDATE_FOLLOWERS,
+    followerList: followerList
+  }
+}
