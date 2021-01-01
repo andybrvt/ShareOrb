@@ -31,7 +31,8 @@ export const addCredentials = (
    followers,
    phone_number,
    email,
-   dob
+   dob,
+   privatePro
  ) => {
   return {
     type: actionTypes.ADD_CREDENTIALS,
@@ -46,7 +47,8 @@ export const addCredentials = (
     followers: followers,
     phone_number: phone_number,
     email:email,
-    dob: dob
+    dob: dob,
+    private: privatePro
   };
 };
 
@@ -82,6 +84,7 @@ export const logout = () => {
   localStorage.removeItem('phone_number')
   localStorage.removeItem('email')
   localStorage.removeItem('dob')
+  localStorage.removeItem('private')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -187,6 +190,7 @@ export const grabUserCredentials = () => {
         const phone_number = res.data.phone_number;
         const email = res.data.email;
         const dob = res.data.dob
+        const privatePro = res.data.private
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
         localStorage.setItem('friends', friends);
@@ -199,6 +203,7 @@ export const grabUserCredentials = () => {
         localStorage.setItem('phone_number', phone_number );
         localStorage.setItem('email', email);
         localStorage.setItem('dob', dob);
+        localStorage.setItem('private', privatePro)
         dispatch(addCredentials(
            res.data.username,
            res.data.id,
@@ -211,7 +216,8 @@ export const grabUserCredentials = () => {
            res.data.get_followers,
            res.data.phone_number,
            res.data.email,
-           res.data.dob
+           res.data.dob,
+           res.data.private
          ));
          {/*when it times out*/}
         dispatch(checkAuthTimeout(100000));
@@ -296,10 +302,20 @@ export const changeProfilePicAuth = (profilePic) => {
   }
 }
 
+
+// DELETE THIS LATER
 export const addRemoveCloseFriend = (friendList) => {
   console.log(friendList)
   return {
     type: actionTypes.ADD_REMOVE_CLOSE_FRIEND,
     friendList: friendList
+  }
+}
+
+export const changePrivate = (privateCall) => {
+  // This function will change the private field in the user information
+  return {
+    type: actionTypes.CHANGE_PRIVATE,
+    privateCall: privateCall
   }
 }

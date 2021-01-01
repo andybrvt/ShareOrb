@@ -14,3 +14,8 @@
   /* background-color: red; */
   width: 81%;
 }
+
+
+.acceptPublicButtons{
+  display: flex;
+}

@@ -4,6 +4,7 @@ export const AUTH_FAIL ='AUTH_FAIL';
 export const AUTH_LOGOUT ='AUTH_LOGOUT';
 export const ADD_CREDENTIALS='ADD_CREDENTIALS';
 export const UPDATE_CREDENTIALS = "UPDATE_CREDENTIALS";
+export const CHANGE_PRIVATE = "CHANGE_PRIVATE";
 
 export const OPEN_POPUP = "OPEN_POPUP";
 export const CLOSE_POPUP = "CLOSE_POPUP";
@@ -92,6 +93,7 @@ export const EDIT_PROFILE_AUTH = 'EDIT_PROFILE_AUTH';
 
 // This will add the friendList to the current User friend list. Mostly acting on the
 // auth
+// DELETE THIS LATER
 export const ADD_REMOVE_CLOSE_FRIEND = 'ADD_REMOVE_CLOSE_FRIEND';
 
 

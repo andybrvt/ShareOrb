@@ -17,7 +17,8 @@ const initialState = {
   sharedList: [],
   phone_number: "",
   email: "",
-  dob: ""
+  dob: "",
+  private: false
 };
 
 const authStart = (state, action) => {
@@ -65,8 +66,8 @@ const addCredentials = (state, action) => {
     followers: action.followers,
     phone_number: action.phone_number,
     email: action.email,
-    dob: action.dob
-
+    dob: action.dob,
+    private: action.private
   });
 };
 
@@ -95,10 +96,17 @@ const changeProfilePicAuth = (state, action) => {
   })
 }
 
+// DELETE THIS LATER
 const addRemoveCloseFriend = (state, action) => {
   console.log(action.friendList)
   return updateObject(state, {
     friends: action.friendList
+  })
+}
+
+const changePrivate = (state, action) => {
+  return updateObject(state, {
+    private: action.privateCall
   })
 }
 
@@ -120,8 +128,13 @@ const reducer = (state = initialState, action) => {
       return editProfileAuth(state,action);
     case actionTypes.CHANGE_PROFILE_PIC_AUTH:
       return changeProfilePicAuth(state, action);
+
+    // DELETE THIS LATER
     case actionTypes.ADD_REMOVE_CLOSE_FRIEND:
       return addRemoveCloseFriend(state, action);
+
+    case actionTypes.CHANGE_PRIVATE:
+      return changePrivate(state, action);
     default:
       return state;
   }
