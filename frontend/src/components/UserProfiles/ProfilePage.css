@@ -10,7 +10,7 @@
   /* z-index: 0; */
   /* overflow: hidden; */
   /* height: 100%; */
-  height: 1700px;
+  /* height: 1700px; */
 
 }
 .profilePage.active{
@@ -340,6 +340,30 @@
 }
 
 
+
+.privateAccountPage{
+  border-top: 1px solid #f0f0f0;
+  position:absolute;
+  top: 425px;
+
+  font-family: 'Segoe UI Regular';
+
+  /* left: 40px; */
+  bottom: 28px;
+  width: 1760px;
+  height: 90%;
+  background-color: #ffffff;
+  font-size: 25px;
+}
+
+.privateAccountPage .textHolder{
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
 /* This is for the tab changes */
 /* how far up the tab is */
 .profile-tabContainer {
@@ -356,6 +380,7 @@
   background-color: #ffffff;
   /* background-color: red; */
 }
+
 
 .profile-tabContainer .profile-buttonContainer{
 

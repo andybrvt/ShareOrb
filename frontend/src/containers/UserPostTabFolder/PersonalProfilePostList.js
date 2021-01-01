@@ -281,32 +281,21 @@ class PersonalProfilePostList extends React.Component{
     }
 
 
-    // DELETE LATER
-    // onAddCloseFriendOpen = () => {
-    //   this.setState({
-    //     showFriendConfirm: true
-    //   })
-    // }
-    //
-    // onAddCloseFriendClose = () => {
-    //   this.setState({
-    //     showFriendConfirm: false
-    //   })
-    // }
-    //
-    //
-    // onUnAddCloseFriendOpen = () => {
-    //   this.setState({
-    //     showUnfriend: true
-    //   })
-    // }
-    //
-    // onUnAddCloseFriendClose = () => {
-    //   this.setState({
-    //     showUnfriend: false
-    //   })
-    // }
+    onRenderPrivate = () => {
+      // This function will be used to show when the account is private and
 
+
+      return (
+        <div className = "privateAccountPage">
+          <div className = "textHolder">
+          <i class="fas fa-user-shield"></i>
+            <div className = "">
+            This account is private.
+            </div>
+          </div>
+        </div>
+      )
+    }
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
@@ -323,6 +312,7 @@ class PersonalProfilePostList extends React.Component{
       let profileId = ''
       let friends = []
       let curId = ''
+
 
       if(this.props.currentId){
         curId = this.props.currentId
@@ -361,13 +351,6 @@ class PersonalProfilePostList extends React.Component{
           }
         }
 
-        // if(this.props.curUserFriend){
-        //   for(let i = 0; i< this.props.curUserFriend.length; i++){
-        //     friends.push(
-        //       this.props.curUserFriend[i].id
-        //     )
-        //   }
-        // }
 
       }
     console.log(followers)
@@ -453,40 +436,6 @@ class PersonalProfilePostList extends React.Component{
                   Message
                 </div>
 
-              {/*
-                this.props.parameter.username !== this.props.currentUser
-                && followers.includes(this.props.currentUser.toString()) ?
-
-                <div>
-                {
-                  !friends.includes(profileId) ?
-                  <div
-                  onClick = {() => this.onAddCloseFriendOpen()}
-                  className = "addFriendButton"
-                  >
-                    Add Friend
-                  </div>
-
-                  :
-
-                  <div
-                  onClick = {() => this.onUnAddCloseFriendOpen()}
-                  className = 'unFriendButton'
-                  >
-                    Unfriend
-                  </div>
-                }
-                </div>
-
-
-                :
-
-                <div></div>
-
-
-
-              */}
-
               </div>
 
           }
@@ -496,26 +445,6 @@ class PersonalProfilePostList extends React.Component{
           </div>
 
           </div>
-
-          {/*
-
-            DELETE LATER
-            <ConfirmAddFriend
-            visible = {this.state.showFriendConfirm}
-            onClose = {this.onAddCloseFriendClose}
-            curId = {curId}
-            friendId = {profileId}
-             />
-
-             <ConfirmUnfriend
-             visible = {this.state.showUnfriend}
-             onClose = {this.onUnAddCloseFriendClose}
-             curId = {curId}
-             friendId = {profileId}
-             />
-
-            */}
-
 
           </div>
 
@@ -685,10 +614,21 @@ class PersonalProfilePostList extends React.Component{
       )
     }
 
+    onRenderPrivate = () => {
+      // This function will be used to show when the account is private and
 
 
-
-
+      return (
+        <div className = "privateAccountPage">
+          <div className = "textHolder">
+          <i class="fas fa-user-shield"></i>
+            <div className = "">
+            This account is private.
+            </div>
+          </div>
+        </div>
+      )
+    }
 
 
   render(){
@@ -702,6 +642,9 @@ class PersonalProfilePostList extends React.Component{
     let firstName=""
     let lastName=""
     let bio=""
+    let privatePro = true
+
+
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
@@ -713,6 +656,15 @@ class PersonalProfilePostList extends React.Component{
       if(this.props.profile.profile_picture){
         profilePic = this.props.profile.profile_picture
       }
+
+      if(this.props.profile.id === this.props.currentId){
+        // This will check if it is the currrent user
+        privatePro = false
+      } else {
+        // In the case that it is not the current user
+        privatePro = this.props.profile.private
+      }
+
 
     }
 
@@ -728,7 +680,7 @@ class PersonalProfilePostList extends React.Component{
 
 
 
-
+    console.log(privatePro)
 
     return (
       <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
@@ -748,7 +700,15 @@ class PersonalProfilePostList extends React.Component{
           {this.onRenderProfileInfo()}
 
         </div>
-        {this.onRenderTabs()}
+        {
+          privatePro ?
+          this.onRenderPrivate()
+
+          :
+
+          this.onRenderTabs()
+
+        }
         <Modal
         visible = {this.state.showProfileEdit}
         onCancel = {() => this.closeProfileEdit()}

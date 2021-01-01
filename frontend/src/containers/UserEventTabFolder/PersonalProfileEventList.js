@@ -282,34 +282,6 @@ class PersonalProfileEventList extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
     }
 
-
-
-    // DELETE LATER
-    // onAddCloseFriendOpen = () => {
-    //   this.setState({
-    //     showFriendConfirm: true
-    //   })
-    // }
-    //
-    // onAddCloseFriendClose = () => {
-    //   this.setState({
-    //     showFriendConfirm: false
-    //   })
-    // }
-    //
-    //
-    // onUnAddCloseFriendOpen = () => {
-    //   this.setState({
-    //     showUnfriend: true
-    //   })
-    // }
-    //
-    // onUnAddCloseFriendClose = () => {
-    //   this.setState({
-    //     showUnfriend: false
-    //   })
-    // }
-
     onCalendarTabClick = () => {
       this.props.history.push("/explore/"+ this.props.parameter.username)
     }
@@ -377,15 +349,6 @@ class PersonalProfileEventList extends React.Component{
           }
         }
 
-
-        //DELETE LATER
-        // if(this.props.curUserFriend){
-        //   for(let i = 0; i< this.props.curUserFriend.length; i++){
-        //     friends.push(
-        //       this.props.curUserFriend[i].id
-        //     )
-        //   }
-        // }
       }
     console.log(followers)
 
@@ -470,40 +433,6 @@ class PersonalProfileEventList extends React.Component{
                   Message
                 </div>
 
-              {/*
-                this.props.parameter.username !== this.props.currentUser
-                && followers.includes(this.props.currentUser.toString()) ?
-
-                <div>
-                {
-                  !friends.includes(profileId) ?
-                  <div
-                  onClick = {() => this.onAddCloseFriendOpen()}
-                  className = "addFriendButton"
-                  >
-                    Add Friend
-                  </div>
-
-                  :
-
-                  <div
-                  onClick = {() => this.onUnAddCloseFriendOpen()}
-                  className = 'unFriendButton'
-                  >
-                    Unfriend
-                  </div>
-                }
-                </div>
-
-
-                :
-
-                <div></div>
-
-
-
-              */}
-
               </div>
 
           }
@@ -513,26 +442,6 @@ class PersonalProfileEventList extends React.Component{
           </div>
 
           </div>
-
-          {/*
-
-            DELETE LATER
-            <ConfirmAddFriend
-            visible = {this.state.showFriendConfirm}
-            onClose = {this.onAddCloseFriendClose}
-            curId = {curId}
-            friendId = {profileId}
-             />
-
-             <ConfirmUnfriend
-             visible = {this.state.showUnfriend}
-             onClose = {this.onUnAddCloseFriendClose}
-             curId = {curId}
-             friendId = {profileId}
-             />
-
-            */}
-
 
           </div>
 
@@ -697,6 +606,21 @@ class PersonalProfileEventList extends React.Component{
     }
 
 
+    onRenderPrivate = () => {
+      // This function will be used to show when the account is private and
+
+
+      return (
+        <div className = "privateAccountPage">
+          <div className = "textHolder">
+          <i class="fas fa-user-shield"></i>
+            <div className = "">
+            This account is private.
+            </div>
+          </div>
+        </div>
+      )
+    }
 
 
 
@@ -712,6 +636,10 @@ class PersonalProfileEventList extends React.Component{
     let firstName=""
     let lastName=""
     let bio=""
+    let privatePro = true
+
+
+
     if (this.props.profile){
       if(this.props.profile.get_followers){
         followers = this.props.profile.get_followers
@@ -721,6 +649,14 @@ class PersonalProfileEventList extends React.Component{
       }
       if(this.props.profile.profile_picture){
         profilePic = this.props.profile.profile_picture
+      }
+
+      if(this.props.profile.id === this.props.currentId){
+        // This will check if it is the currrent user
+        privatePro = false
+      } else {
+        // In the case that it is not the current user
+        privatePro = this.props.profile.private
       }
 
     }
@@ -754,7 +690,14 @@ class PersonalProfileEventList extends React.Component{
           {this.onRenderProfileInfo()}
 
         </div>
-      {this.onRenderTabs()}
+      {
+        privatePro ?
+          this.onRenderPrivate()
+
+          :
+
+          this.onRenderTabs()
+      }
         <Modal
         visible = {this.state.showProfileEdit}
         onCancel = {() => this.closeProfileEdit()}

@@ -66,10 +66,16 @@ class User(AbstractUser):
     dob = models.DateField(blank=True, null=True, max_length=12)
     phone_number = models.CharField(blank=True, null=True, max_length=10)
     slug = models.SlugField(blank = True)
+
+    # DELETE THIS LATER
     friends = models.ManyToManyField("self", blank=True, related_name = 'friends')
     # Private will handle wheter or not the account is private and other people
     # are allow to see it or not
     private = models.BooleanField(default = False)
+
+    # This is for when you make your account private, and this field will be used to
+    # approve of the people that can see your page
+    approved = models.ManyToManyField("self", blank = True, related_name = "private_approved")
 
     def get_posts(self):
 

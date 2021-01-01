@@ -619,23 +619,6 @@ class PersonalProfile extends React.Component{
           </div>
           <Divider style={{marginTop:'-1px', marginBot:'-1px'}}/>
 
-          {/*<div className = 'profile-buttonContainer'>
-            <p className = 'profile-description_tab profile-Tab-Calendar'>
-             Calendar
-           </p>
-
-
-            <div className = 'profile-description_tab profile-Tab'
-            onClick = {() => this.onPostTabClick()}
-            >
-               Posts
-            </div>
-
-            <div className = 'profile-description_tab profile-Tab'
-            onClick = {() => this.onEventTabClick()}
-            > Events </div>
-            <div className = 'profile-slider-calendar'></div>
-          </div>*/}
           <div className = 'profile-tabPanel'>
 
               <SocialCalendar {...this.props}/>
@@ -647,6 +630,22 @@ class PersonalProfile extends React.Component{
         </div>
       )
     }
+
+  onRenderPrivate = () => {
+    // This function will be used to show when the account is private and
+
+
+    return (
+      <div className = "privateAccountPage">
+        <div className = "textHolder">
+        <i class="fas fa-user-shield"></i>
+          <div className = "">
+          This account is private.
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   render(){
       const { current } = this.state;
@@ -660,6 +659,10 @@ class PersonalProfile extends React.Component{
       let lastName=""
       let bio=""
       let profileImage = null
+      let privatePro = true
+
+
+
       if (this.props.profile){
         if(this.props.profile.get_followers){
           followers = this.props.profile.get_followers
@@ -670,6 +673,16 @@ class PersonalProfile extends React.Component{
         if(this.props.profile.profile_picture){
           profilePic = this.props.profile.profile_picture
         }
+
+        if(this.props.profile.id === this.props.currentId){
+          // This will check if it is the currrent user
+          privatePro = false
+        } else {
+          // In the case that it is not the current user
+          privatePro = this.props.profile.private
+        }
+
+
 
       }
       if(this.props.profile.first_name){
@@ -688,6 +701,8 @@ class PersonalProfile extends React.Component{
           profileImage = 'http://127.0.0.1:8000'+this.props.profile.profile_picture
         }
       }
+
+      console.log(privatePro)
 
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
@@ -711,7 +726,14 @@ class PersonalProfile extends React.Component{
 
           </div>
 
-          {this.onRenderTabs()}
+          { privatePro ?
+            this.onRenderPrivate()
+
+            :
+
+            this.onRenderTabs()
+
+          }
 
           <Modal
           visible = {this.state.showProfileEdit}
