@@ -143,16 +143,19 @@ class SuggestedFriends extends React.Component {
               <Skeleton avatar title={false} loading={item.loading} active>
 
               <List.Item.Meta
+
                 avatar={
                   <Avatar src={item.profile_picture} />
                 }
                 title={<a href={"http://localhost:3000/explore/"+item.username}> {item.first_name} {item.last_name}</a>}
-                description={item.get_followers.length +" followers"}
+                description={
+                  <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                  }
               />
 
 
 
-                  <Button id="follow-button"> Follow </Button>
+            <Button shape="round" type="primary">Follow</Button>
 
               </Skeleton>
             </List.Item>

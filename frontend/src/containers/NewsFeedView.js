@@ -95,7 +95,6 @@ class NewsFeedView extends React.Component {
 				<Row style = {{
 					display: 'flex',
 					position: 'relative',
-					marginTop:'10px',
 					marginLeft: '350px',
 				}}>
 
@@ -106,6 +105,7 @@ class NewsFeedView extends React.Component {
 						style={{
 						marginLeft:'-125px', marginRight:'125px'}}
 						span={5}
+
 						class="scroller"
 						>
 
@@ -120,7 +120,7 @@ class NewsFeedView extends React.Component {
 					</Col>
 					</div>
 				</div>
-				<Col style={{}} span={11}>
+				<Col style={{}} offset={0.5} span={11}>
 				<div>
 					<div>
 						<div>

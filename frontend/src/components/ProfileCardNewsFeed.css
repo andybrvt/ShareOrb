@@ -62,14 +62,20 @@
   color: #363636;
   /* background-color: red; */
 }
+.statHover{
+  background: red;
+}
+.statHover:hover{
+
+  background: blue;
+  border-radius: 20px;
+}
 
 .name-NF {
   /* position: absolute; */
-
+  color:black;
   margin-left: 100px;
   /* background-color: red; */
-  /* color: #ffffff; */
-  color:grey;
   font-weight: 500;
   /* font-weight: bold; */
   font-size: 22px;

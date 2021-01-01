@@ -369,7 +369,7 @@ class SideMenu extends React.Component {
 
            marginRight:'8%',
            marginTop:'-15px',
-           width: 690,
+           width: 700,
 
 
           // backgroundColor: 'red'
@@ -379,13 +379,13 @@ class SideMenu extends React.Component {
       </AutoComplete>
 
 
-
+      {/*
       <span style={{marginRight:'50px'}}>
         <Badge dot={true} count={6}>
             <i style={{color:'#1890ff', fontSize:'20px'}} class="fas fa-envelope"></i>
        </Badge>
       </span>
-
+      */}
 
       {/*
           Grab notification length for now
@@ -452,7 +452,7 @@ class SideMenu extends React.Component {
            {
              profilePic != '' ?
                <Avatar
-               size="large"
+               size={35}
                src={profilePic}
                alt="avatar"
                className = 'miniProfilePic'

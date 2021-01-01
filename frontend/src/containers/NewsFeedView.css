@@ -222,8 +222,13 @@ color: #203758;
   /* background-color: red; */
   padding-top: 25px;
   max-height: 450px;
+  font-weight: 500;
   /* color:#1890ff; */
 
+}
+
+.statsNewsFeed{
+  font-weight: 500;
 }
 
 

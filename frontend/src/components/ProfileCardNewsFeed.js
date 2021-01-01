@@ -82,9 +82,7 @@ class ProfileCardNewsFeed extends React.Component{
             src = {profilePic} />
 
         </div>
-        <div className = 'top-NF'>
-        <MoreOutlined />
-        </div>
+
         <div className = 'bottom-NF'>
           <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
@@ -97,10 +95,10 @@ class ProfileCardNewsFeed extends React.Component{
             class="clickable"
           >
           <Statistic
-
+            class="statHover"
             valueStyle={{ marginLeft:'25px',fontSize:'18px', color:'black'}}
-            title={<span style={{fontSize:'16px',}}>Following</span>}
-           value={following.length} loading />
+            title={<span class="statsNewsFeed" style={{fontSize:'16px',}}>Following</span>}
+           value={following.length} />
 
           </Col>
           <Col
@@ -112,7 +110,7 @@ class ProfileCardNewsFeed extends React.Component{
 
             class="statisticTest"
             valueStyle={{ marginLeft:'25px',fontSize:'18px', color:'black'}}
-            title={<span style={{fontSize:'16px',}}>Followers</span>}
+            title={<span class="statsNewsFeed" style={{fontSize:'16px',}}>Followers</span>}
             value={followers.length} />
           </Col>
         </Row>
