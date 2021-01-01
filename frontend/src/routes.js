@@ -84,7 +84,7 @@ class BaseRouter extends React.Component {
 
             <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
-            <Route exact path = '/signup/' component= {Signup} />
+
             <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
@@ -115,6 +115,7 @@ class BaseRouter extends React.Component {
         <Route exact path = '/' component = {Login} />
         {location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {SocialCalCellModal} /> : null}
         {location ? <Route exact path = '/post/:username/:postId' component = {UserPostModal} /> : null}
+        <Route exact path = '/signup/' component= {Signup} />
       </div>
 
 

@@ -159,8 +159,8 @@ class NewsfeedPost extends React.Component {
       if(userPostImages.length==1){
         return(
         <div
-        // onClick = {() => this.OnClickPost(postId, username)}
-        class="imageContainer">
+          onClick = {() => this.OnClickPost(postId, username)}
+          class="imageContainer">
           <a><img src={"http://127.0.0.1:8000/media/"+userPostImages[0]} alt="" /></a>
         </div>
           )
@@ -169,8 +169,8 @@ class NewsfeedPost extends React.Component {
 
           return(
             <div
-            // onClick = {() => this.OnClickPost(postId, username)}
-            className = "postPicCarouselNews">
+              onClick = {() => this.OnClickPost(postId, username)}
+              className = "postPicCarouselNews">
                <PostPicCarousel
                picIndexChange = {this.onCurPhotoChange}
                items = {userPostImages} />
