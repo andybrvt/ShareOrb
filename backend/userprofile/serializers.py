@@ -72,7 +72,8 @@ class UserSerializer(serializers.ModelSerializer):
          'phone_number',
          'email',
          'dob',
-         'private'
+         'private',
+         'requested'
          )
     def to_representation(self, instance):
         data = super().to_representation(instance)

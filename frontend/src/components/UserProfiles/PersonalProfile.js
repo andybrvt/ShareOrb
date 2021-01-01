@@ -372,7 +372,7 @@ class PersonalProfile extends React.Component{
       let friends = []
       let curId = ''
       let bio=''
-
+      let requested = []
 
       if(this.props.currentId){
         curId = this.props.currentId
@@ -410,6 +410,10 @@ class PersonalProfile extends React.Component{
               this.props.profile.get_followers[i].username
             )
           }
+        }
+
+        if(this.props.profile.requested){
+          requested = this.props.profile.requested
         }
 
         // if(this.props.curUserFriend){
@@ -698,7 +702,7 @@ class PersonalProfile extends React.Component{
       let bio=""
       let profileImage = null
       let privatePro = true
-
+      let requested = []
 
       // follower list will used mostly for private events
       let followerList = []
@@ -733,6 +737,9 @@ class PersonalProfile extends React.Component{
 
         }
 
+        if(this.props.profile.requested){
+          requested = this.props.profile.requested
+        }
 
 
       }
@@ -850,7 +857,8 @@ const mapStateToProps = state => {
       currentUser: state.auth.username,
       token: state.auth.token,
       profile: state.explore.profile,
-      curUserFriend: state.auth.friends
+      curUserFriend: state.auth.friends,
+
     };
 };
 

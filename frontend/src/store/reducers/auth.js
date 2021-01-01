@@ -18,7 +18,8 @@ const initialState = {
   phone_number: "",
   email: "",
   dob: "",
-  private: false
+  private: false,
+  requested: []
 };
 
 const authStart = (state, action) => {
@@ -67,7 +68,8 @@ const addCredentials = (state, action) => {
     phone_number: action.phone_number,
     email: action.email,
     dob: action.dob,
-    private: action.private
+    private: action.private,
+    requested: action.requested
   });
 };
 
