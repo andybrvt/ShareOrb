@@ -65,6 +65,8 @@ class WebSocketExplore {
     } else if (command === 'send_follower'){
       // STATUS REDONE
 
+      // MAKE SURE TO ADD A METHOD TO UPDATE THE AUTH TOO
+
       // This is to add to the other person's followers
       const newFollowerList = parsedData.followerList
       this.callbacks['new_follower_unfollower'](newFollowerList)
@@ -72,8 +74,9 @@ class WebSocketExplore {
     } else if (command === 'send_unfollower'){
       // STATUS REDONE
 
-      // This is to un add the other person follower
+      // MAKE SURE TO ADD A METHOD TO UPDATE THE AUTH TOO
 
+      // This is to un add the other person follower
       const newFollowerList = parsedData.followerList
       this.callbacks['new_follower_unfollower'](newFollowerList)
 
@@ -141,7 +144,11 @@ class WebSocketExplore {
       // Add the callbacks here
       this.callbacks['load_profile'](updatedProfile)
       this.callbacks['edit_profile_auth'](updatedProfile)
-    } else if(command === 'add_user_close_friend'){
+    }
+
+
+    // DELETE THIS LATER
+    else if(command === 'add_user_close_friend'){
       // This will recieve the friend list of the current user that just added
       // a new user to the friend list. This will go into auth and replace the
       // the old friendlist
@@ -156,7 +163,13 @@ class WebSocketExplore {
       const friendList = parsedData.friendList
 
       this.callbacks['add_remove_close_friend'](friendList)
-    } else if(command === 'approve_social_pics'){
+    }
+
+
+
+
+
+    else if(command === 'approve_social_pics'){
       // This function will add in pending pictures to the social calendar in the
       // appropriate cell
       const socialCalCellObj = parsedData.socialCelCellObj
@@ -252,6 +265,18 @@ class WebSocketExplore {
       follower: follower,
       following: following,
       command: 'send_following'
+    })
+  }
+
+  sendFollowRequest = (follower, following) => {
+    // This function will be in charge of sending the request to follow
+    // The follower parameter will be the person sending the request
+    // The following parameter will be the person getting requested
+
+    this.sendExplore({
+        follower: follower,
+        following: following,
+        command: 'send_following_request'
     })
   }
 

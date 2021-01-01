@@ -330,9 +330,17 @@ class PersonalProfile extends React.Component{
           recipient: this.props.profile.id
         }
 
+        // Now you will send one for requested
+
+        // MAKE SURE TO UPDATE THE AUTH TOO
+
+        ExploreWebSocketInstance.sendFollowRequest(follower, following)
+
         NotificationWebSocketInstance.sendNotification(notificationObject)
 
       } else {
+        // MAKE SURE TO UPDATE THE AUTH TOO
+
         ExploreWebSocketInstance.sendFollowing(follower, following)
 
         // The follower is you who is sending the reqwuest and the following is the other person
