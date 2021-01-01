@@ -81,9 +81,9 @@ if (token) {
     };
 
     return (
-      <div>
+      <div style={{height:'100%'}} class="parentContainer">
 
-        <div>
+        <div style={{position:'relative', marginTop:'100px'}}>
 
           <Form
           {...layout}
@@ -113,6 +113,8 @@ if (token) {
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
+
+
             <Form.Item {...tailLayout}>
               <Button
                htmlType = 'submit'
@@ -123,6 +125,7 @@ if (token) {
                 Submit
 
               </Button>
+              <div>  New to us? <NavLink to="/signup">Sign Up</NavLink></div>
             </Form.Item>
 
         </Form>

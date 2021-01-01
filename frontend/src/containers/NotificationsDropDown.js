@@ -757,7 +757,7 @@ class NotificationsDropDown extends React.Component{
       // getPopupContainer={() => document.getElementById("position")}
       style = {{
         position: 'relative',
-        right: '-70%',
+        right: '-45%',
         marginTop:'10px',
       }}
       onClick = {this.handleMenuClick}>

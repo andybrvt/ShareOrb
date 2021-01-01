@@ -354,7 +354,7 @@ class SideMenu extends React.Component {
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={700}
            style={{
-            marginRight:'12%',
+            marginRight:'18%',
             marginLeft:'500px',
 
 
@@ -410,7 +410,7 @@ class SideMenu extends React.Component {
       class="pointerEvent"
       style = {{
         float:'right',
-        marginRight:'75px',
+        marginRight:'25px',
         marginTop:'5px',
       }}
     >
@@ -452,7 +452,7 @@ class SideMenu extends React.Component {
            {
              profilePic != '' ?
                <Avatar
-               size={35}
+               size={45}
                src={profilePic}
                alt="avatar"
                className = 'miniProfilePic'
@@ -465,7 +465,7 @@ class SideMenu extends React.Component {
                className = 'miniProfilePic'
                src={defaultPicture} alt="avatar" />
            }
-             <span class="sideMenuName">{this.capitalize(firstName)} {this.capitalize(lastName)}</span>
+
            </span>
 
        </Dropdown>

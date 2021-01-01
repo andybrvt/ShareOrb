@@ -339,12 +339,12 @@ class UserPostPage extends React.Component{
 
           <div className = "postModalRight">
               <div className = "postNameTag">
-                <Avatar size = {50}
+                <Avatar size = {45}
                 src = {userPostProfilePic}
                 className = 'socialProfileImage'/>
                 <div>
-                  <div className = 'postName'> {this.capitalize(userPostUsername)}</div>
-                  <div className = "postNameUsername"> @{this.capitalize(userPostUsername)} </div>
+                  <div className = 'ownerHolder'> {this.capitalize(userPostUsername)}</div>
+                  <div className = "socialCalCellUsername"> @{this.capitalize(userPostUsername)} </div>
                   <div className = "postTimeStamp"> {userPostDate} </div>
                 </div>
                 {
