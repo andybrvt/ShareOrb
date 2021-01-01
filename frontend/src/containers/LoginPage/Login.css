@@ -1,4 +1,13 @@
-
+.loginTitle{
+  color:black;
+  font-size: 30px;
+  margin-top: 250px;
+  margin-left: 200px;
+  left:'20%';
+  position:'absolute';
+  font-weight: 400;
+  /* background-color: red; */
+}
 
 .custom-shape-divider-top-1591819966 {
     position: absolute;

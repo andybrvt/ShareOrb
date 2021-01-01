@@ -12,12 +12,13 @@ import { NavLink, Redirect, } from "react-router-dom";
 import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../../store/actions/auth";
 import NotificationWebSocketInstance from '../../notificationWebsocket';
-import pic1 from './LoginCalendar.svg';
-import pic2 from './loginHelloPic2.svg';
+
+import pic2 from './calendar.svg';
 import 'antd/dist/antd.css';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Button, Checkbox } from 'antd';
+import { Input, Button, Checkbox, Avatar } from 'antd';
+import './Login.css';
 // Function: logs user in
 class LoginForm extends React.Component {
   constructor(props) {
@@ -62,17 +63,7 @@ if (token) {
        return <Redirect to="/home" />
     }
 
-    const layout = {
 
-      // controls how far left/right the login is on the page
-      labelCol: {
-        span: 6,
-      },
-      // how long the size of user/pass input box is
-      wrapperCol: {
-        span: 4,
-      },
-    };
     const tailLayout = {
       wrapperCol: {
         offset: 6,
@@ -81,58 +72,70 @@ if (token) {
     };
 
     return (
-      <div style={{height:'100%'}} class="parentContainer">
+      <div style={{height:'100%', background:'#fafafa'}} class="parentContainer">
+        <div class="one">
+          {/* color is #68BFFD*/}
+          <div class="loginTitle">Connecting people through calendars</div>
+            <div class="eventCard allStyle" style={{left:'20%',
+            width:'600px', height:'400px', padding:'75px'}}>
 
-        <div style={{position:'relative', marginTop:'100px'}}>
+              <Form
+              name="basic"
+              initialValues={{ remember: true }}
+              // onSubmit = {this.handleSubmit}
+              >
+                <Form.Item
+                onChange={this.handleUserName}
+                test="username"
+                label="Username"
 
-          <Form
-          {...layout}
-          name="basic"
-          initialValues={{ remember: true }}
-          // onSubmit = {this.handleSubmit}
-          >
-            <Form.Item
-            onChange={this.handleUserName}
-            test="username"
-            label="Username"
+                >
+                  <Input />
+                </Form.Item>
 
-            >
-              <Input />
-            </Form.Item>
+                <Form.Item
+                  onChange={this.handlePasword}
+                  value={password}
+                  test="password"
+                  label="Password"
+                >
+                  <Input.Password />
+                </Form.Item>
 
-            <Form.Item
-              onChange={this.handlePasword}
-              value={password}
-              test="password"
-              label="Password"
-            >
-              <Input.Password />
-            </Form.Item>
-
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+                <Form.Item name="remember" valuePropName="checked">
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
 
 
 
-            <Form.Item {...tailLayout}>
-              <Button
-               htmlType = 'submit'
-               type="primary"
-               onClick={this.handleSubmit}
-               loading={loading}
-               >
-                Submit
+                <Form.Item>
+                  <Button
+                   htmlType = 'submit'
+                   type="primary"
+                   shape="round"
+                   size="large"
+                   onClick={this.handleSubmit}
+                   loading={loading}
+                   >
+                    Log In
 
-              </Button>
-              <div>  New to us? <NavLink to="/signup">Sign Up</NavLink></div>
-            </Form.Item>
+                  </Button>
+                  <div>  New to ShareOrb? <NavLink to="/signup">Sign Up</NavLink></div>
+                </Form.Item>
 
-        </Form>
-      </div>
+                </Form>
+              </div>
+        </div>
 
-      <img src={pic1} width="30%" style={{marginRight:"250px"}}/>
-      <img src={pic2} width="30%"/>
+        <div class="two">
+          {/* color is #68BFFD*/}
+
+          <img src={pic2} width="33%"
+            style={{position:'relative',top:'25%', left:'15%'}}/>
+        </div>
+
+
+
       </div>
     );
   }
