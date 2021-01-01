@@ -86,8 +86,8 @@ class Signup extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
       return (
-        <div>
-          <div class="eventCard allStyle" style={{left:'75%', marginTop:'100px',
+        <div class="parentContainer" style={{background:'#fafafa'}}>
+          <div class="eventCard allStyle" style={{left:'65%', marginTop:'100px',
           width:'500px', height:'700px', padding:'75px'}}>
 
           <span style={{fontSize:'20px'}}> Sign Up</span>
