@@ -143,7 +143,7 @@ class WeekCalendar extends React.Component{
   // This will be rending the header of the view, for weekly view, it will be
   // the start week to the end of the start week and start of the week
   renderHeader() {
-    const dateFormat = 'MMMM, yyyy'
+    const dateFormat = 'MMMM yyyy'
     const startWeek = dateFns.startOfWeek(this.props.currentDate)
     const endWeek = dateFns.endOfWeek(this.props.currentDate)
     return(
