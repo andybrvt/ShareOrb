@@ -344,7 +344,7 @@ controls all colors and font weight */
 .flex-container .sidecol .sideBar .holder {
   transform: rotate(-90deg);
   padding-bottom: 125px;
-  padding-left: 30px;
+
 }
 
 /* PersonalCalendar weekbar */
@@ -359,7 +359,7 @@ controls all colors and font weight */
 }
 
 .flex-container .sidecol .sideBar .holder .tabs:hover{
-  background: lightgrey;
+  opacity:0.8;
   transition: 0.2 ease-in;
 }
 
@@ -499,7 +499,7 @@ controls all colors and font weight */
   /* to the right of this is day/week dropdown */
 
   /* background-color: blue; */
-  width: 580px;
+  width: 600px;
 }
 
 .weekCalendar .dayHeader {
@@ -842,9 +842,7 @@ controls all colors and font weight */
 }
 
 .CalendarViewCSS{
-float:right;
-background-color: red;
-color:red;
+position:absolute;
 }
 
 

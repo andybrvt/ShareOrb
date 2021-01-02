@@ -219,6 +219,7 @@ class YearCalendar extends React.Component{
               </div>
               <div style={{display: 'inline-block'}}>
                 <CalendarViewDropDown
+                  class="CalendarViewCSS"
                 calType = "year"
                 history = {this.props.history}
                 matchPara = {this.props.parameter} />

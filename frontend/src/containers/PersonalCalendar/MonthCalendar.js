@@ -125,27 +125,6 @@ class PersonalCalendar extends React.Component{
     return <div className = "days row"> {days} </div>
   }
 
-  checkArrays = (array1, array2) => {
-
-  }
-
-  renderColor = () => {
-    const color = ["green","yellow","red","blue","orange","pink","cyan"]
-    const len = color.length
-    const randomNum = Math.floor(Math.random()*len)
-    const pickcolor = color[randomNum]
-    return pickcolor
-
-  }
-
-  renderNumber = () => {
-    const randomNum = Math.floor(Math.random()*7)
-    console.log(randomNum)
-    const gridColumn = randomNum + '/8'
-    console.log(gridColumn)
-    return gridColumn
-  }
-
 
   renderSide() {
     // So what you want is to get the date of the first day of each week
@@ -877,11 +856,11 @@ class PersonalCalendar extends React.Component{
           close = {() => this.props.closeEventSyncModal()}
         />
 
-        <div className = 'mainCalContainer'>
+      <div className = 'mainCalContainer' style={{marginLeft:'-15px', marginTop:'-10px'}}>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
 
         <div className = 'flex-container'>
-          <div className = 'sidecol'>
+          <div  s className = 'sidecol'>
           {this.renderSide()}
           </div>
           <div className = 'weekCalendar'>
@@ -894,7 +873,7 @@ class PersonalCalendar extends React.Component{
               history = {this.props.history}
               matchPara = {this.props.parameter} />
             </div>
-            <div className = 'calendar'>
+            <div style={{marginLeft:'-25px', marginTop:'-20px'}} className = 'calendar'>
 
               {this.renderDays()}
               {this.renderCells(this.props.events)}

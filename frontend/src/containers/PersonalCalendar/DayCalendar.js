@@ -87,7 +87,7 @@ class DayCalendar extends React.Component{
 // render the date on top
   renderHeader(){
     return (
-      <div style={{width:'550px', marginBottom:'-100px'}} className = 'header row'>
+      <div style={{marginBottom:'-100px'}} className = 'header row'>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
