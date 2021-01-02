@@ -259,17 +259,48 @@ class PersonalProfilePostList extends React.Component{
     }
 
     onFollow = (follower, following) =>{
-      //Send a follow in the backend
-      ExploreWebSocketInstance.sendFollowing(follower, following)
-
-      // The follower is you who is sending the reqwuest and the following is the other person
-      const notificationObject = {
-        command: 'send_follow_notification',
-        actor: this.props.currentUser,
-        recipient: this.props.profile.username
+      // For more info check personalprofile
+      let privatePro = ""
+      if(this.props.profile.private){
+        privatePro = this.props.profile.private
       }
 
-      NotificationWebSocketInstance.sendNotification(notificationObject)
+      if(privatePro === true) {
+
+        const notificationObject = {
+          command: 'send_follow_request_notification',
+          actor: this.props.currentId,
+          recipient: this.props.profile.id
+        }
+
+        ExploreWebSocketInstance.sendFollowRequest(follower, following)
+
+        // NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
+      } else {
+
+        //Send a follow in the backend
+        ExploreWebSocketInstance.sendFollowing(follower, following)
+
+        // The follower is you who is sending the reqwuest and the following is the other person
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: this.props.currentUser,
+          recipient: this.props.profile.username
+        }
+
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+      }
+
+    }
+
+    onUnRequest = (follower, following) => {
+      // This is to undo the request if you did send one (make sure you delete
+      // the notification as well )
+
+      ExploreWebSocketInstance.unSendFollowRequest(follower, following)
     }
 
 
@@ -281,21 +312,7 @@ class PersonalProfilePostList extends React.Component{
     }
 
 
-    onRenderPrivate = () => {
-      // This function will be used to show when the account is private and
 
-
-      return (
-        <div className = "privateAccountPage">
-          <div className = "textHolder">
-          <i class="fas fa-user-shield"></i>
-            <div className = "">
-            This account is private.
-            </div>
-          </div>
-        </div>
-      )
-    }
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
@@ -312,6 +329,7 @@ class PersonalProfilePostList extends React.Component{
       let profileId = ''
       let friends = []
       let curId = ''
+      let requested = []
 
 
       if(this.props.currentId){
@@ -351,9 +369,14 @@ class PersonalProfilePostList extends React.Component{
           }
         }
 
+        if(this.props.profile.private){
+          if(this.props.profile.requested){
+            requested = this.props.profile.requested
+          }
+        }
+
 
       }
-    console.log(followers)
 
       return (
         <div>
@@ -422,11 +445,26 @@ class PersonalProfilePostList extends React.Component{
                 :
 
 
-                <Button
-                  style={{fontSize:'16px'}}
-                  onClick = {() => this.onFollow(this.props.currentId, profileId)}
-                   className = 'followButton'
-                  id="follow-button"> Follow </Button>
+                <div>
+                {
+                    requested.includes(this.props.currentId) ?
+
+                    <Button
+                      style={{fontSize:'16px'}}
+                      onClick = {() => this.onUnRequest(this.props.currentId, profileId)}
+                       className = 'followButton'
+                      id="follow-button"> Requested </Button>
+
+                    :
+
+                    <Button
+                      style={{fontSize:'16px'}}
+                      onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                       className = 'followButton'
+                      id="follow-button"> Follow </Button>
+
+                }
+                </div>
               }
 
 
