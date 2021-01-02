@@ -111,6 +111,7 @@ export const sendRequested = (state, action) => {
 
 
 
+
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.LOAD_PROFILE:

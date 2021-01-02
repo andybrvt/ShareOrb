@@ -356,6 +356,13 @@ class PersonalProfile extends React.Component{
 
     }
 
+    onUnRequest = (follower, following) => {  
+      // This is to undo the request if you did send one (make sure you delete
+      // the notification as well )
+
+      ExploreWebSocketInstance.unSendFollowRequest(follower, following)
+    }
+
 
     onUnfollow = (follower, following) => {
       // This will send an unfollow into the back end
@@ -507,7 +514,7 @@ class PersonalProfile extends React.Component{
 
                   <Button
                     style={{fontSize:'16px'}}
-                    onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                    onClick = {() => this.onUnRequest(this.props.currentId, profileId)}
                      className = 'followButton'
                     id="follow-button"> Requested </Button>
 

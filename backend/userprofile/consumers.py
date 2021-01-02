@@ -1022,6 +1022,24 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         # Now you will go in and then start updating the users information
 
+    def unsend_following_request(self, data):
+        # pretty much do the opposite of send_following_request
+
+        follower = get_object_or_404(User, id = data['follower'])
+        following = get_object_or_404(User, id = data['following'])
+
+        following.requested.remove(follower)
+        following.save()
+
+        curUser = UserSerializer(following).data
+
+        content = {
+            'command': 'unsend_requested',
+            'requestedList': curUser['requested'],
+            'reciever': curUser['username']
+        }
+
+        self.send_new_explore(content)
 
     def send_new_follow(self, followObj):
         # This function is used to send follow objs into the websocket and to everyone
@@ -1116,6 +1134,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.approve_social_pics(data)
         if data['command'] == 'send_following_request':
             self.send_following_request(data)
+        if data['command'] == 'unsend_following_request':
+            self.unsend_following_request(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)

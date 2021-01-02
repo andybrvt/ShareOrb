@@ -199,6 +199,10 @@ class WebSocketExplore {
       this.callbacks['send_requested'](requestedList)
 
 
+    } else if(command === "unsend_requested"){
+      const requestedList = parsedData.requestedList
+
+      this.callbacks['send_requested'](requestedList)
     }
 
 
@@ -287,6 +291,16 @@ class WebSocketExplore {
         follower: follower,
         following: following,
         command: 'send_following_request'
+    })
+  }
+
+  unSendFollowRequest = (follower, following) => {
+    // This will unsend the follow request
+
+    this.sendExplore({
+      follower: follower,
+      following: following,
+      command: "unsend_following_request"
     })
   }
 
