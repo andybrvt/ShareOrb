@@ -39,21 +39,13 @@ class YearCalendar extends React.Component{
     }
   }
 
-  renderColor = () => {
-    const color = ["green","yellow","red","blue","orange","pink","cyan"]
-    const len = color.length
-    const randomNum = Math.floor(Math.random()*len)
-    const pickcolor = color[randomNum]
-    return pickcolor
-
-  }
 
   renderHeader() {
     // This is used to render the year
     const dateFormat = 'yyyy'
 
     return(
-      <div style={{width:'550px'}} className = "header row flex-middle">
+      <div style={{width:'550px'}} className = "header row">
         <div className = "col col-start">
           <div className = "icon" onClick = {this.prevYear} >
           <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
@@ -182,35 +174,6 @@ class YearCalendar extends React.Component{
     return <div className = 'monthcell'> {rows} </div>
   }
 
-  getMonthColor = (month) => {
-    console.log(month)
-    let monthNum = ''
-    if (month){
-      monthNum = dateFns.getMonth(month)
-      console.log(monthNum)
-    }
-    console.log(monthNum)
-    const listColor = [
-      'linear-gradient(to bottom right, #00008B , #8B0000)',
-      'linear-gradient(to bottom right, #ADD8E6 , #FFFF00)',
-      'linear-gradient(to bottom right, #ADD8E6 , #FFFFFF)',
-      'linear-gradient(to bottom right, #FFFF00 , #FF0000)',
-      'linear-gradient(to bottom right, #FFFF00 , #32CD32)',
-      'linear-gradient(to bottom right, #fffdd0 , #0000FF)',
-      'linear-gradient(to bottom right, #80461b , #FF0000)',
-      'linear-gradient(to bottom right, #FF0000 , #90EE90)',
-      'linear-gradient(to bottom right, #A0522D , #00008B)',
-      'linear-gradient(to bottom right, #FFA500 , #FFFF00)',
-      'linear-gradient(to bottom right, #FFD700 , #A52A2A)',
-      'linear-gradient(to bottom right, #4B0082 , #185a9d)',
-    ]
-
-    if (monthNum !== ''){
-      return listColor[monthNum]
-    }
-
-  }
-
   prevYear = () =>{
     this.props.prevYear()
   }
@@ -238,7 +201,6 @@ class YearCalendar extends React.Component{
   }
 
   render(){
-    console.log(this.getMonthColor())
     return(
       <div className = 'calendarContainer'>
       <EventSyncModal
@@ -250,7 +212,7 @@ class YearCalendar extends React.Component{
         <div className = 'mainCalContainer'>
         <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
 
-          <div className = 'flex-container'>
+          <div className = 'weekCalendar'>
             <div className = 'calendar'>
               <div style={{display: 'inline-block'}}>
                 {this.renderHeader()}

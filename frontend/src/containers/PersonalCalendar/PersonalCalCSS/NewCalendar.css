@@ -141,16 +141,21 @@ main {
 
 }
 
-/* Container that holds Calendar */
+/* Container that holds Calendar,
+controls all colors and font weight */
 .calendarContainer{
   position: absolute;
   left: 3%;
   width: 100%;
-  height: 91vh;
+  height: 94.5vh;
   top:22%;
+  font-weight: 500;
+  /* color:black; */
   /* bottom: 0px; */
   background-color: white;
   display: flex;
+  overflow: hidden;
+  font-family: "Segoe UI Regular";
 }
 
 .weekCalContainer {
@@ -485,10 +490,10 @@ main {
 
 
 .weekCalendar .header {
-  /* text-transform: uppercase; */
-  font-weight: 400;
+  text-transform: uppercase;
+  font-weight: 800;
   font-size: 21px;
-  padding: 1em 0;
+  padding: 1em 1em;
   /* border-bottom: 1px solid var(--border-color); */
   margin-left: 400px;
   /* to the right of this is day/week dropdown */
@@ -539,7 +544,7 @@ main {
 }
 
 .calendar .days {
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
   width: 1310px;
   font-weight: 400;
   color: ;
@@ -859,7 +864,7 @@ color:red;
 }
 
 .miniCalContainer .miniCalendar .header{
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 700;
   font-size: 100%;
   /* width: 100px; */
@@ -885,21 +890,26 @@ color:red;
   flex-basis: 0;
   /* max-width: 80%; */
   text-align:center;
+  font-family: "Segoe UI Regular";
+  font-weight: 500;
   /* background-color: red; */
 }
 
 .miniCalContainer .miniCalendar .miniCol-center{
-
+  font-family: "Segoe UI Regular";
+  font-weight: 700;
 }
 
 
 .miniCalContainer .miniCalendar .miniCol .miniMonth{
   /* color: white; */
   /* background-color: red; */
+  font-family: "Segoe UI Regular";
+  font-weight: 700;
 }
 
 .miniCalContainer .miniCalendar .miniCol .miniMonth:hover{
-
+  font-family: "Segoe UI Regular";
   cursor: pointer;
   /* color: white; */
 }
@@ -917,6 +927,7 @@ color:red;
   flex-direction: row;
   flex-wrap: wrap;
   width: 80%;
+
 }
 
 .miniCalContainer .miniCalendar .miniBody .miniRow{
@@ -928,6 +939,7 @@ color:red;
   flex-basis: calc(100%/7);
   width: calc(100%/7);
   /* background-color: red; */
+
 }
 
 .miniCalContainer .miniCalendar .body .miniCell{
@@ -985,6 +997,7 @@ color:red;
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
+
 }
 
 .calendar .body .yearcell .monthBox {
@@ -1009,6 +1022,7 @@ color:red;
   padding: .75em 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+
   /* background-color: red; */
 }
 
@@ -1037,6 +1051,7 @@ color:red;
   text-align:center;
   overflow: hidden;
   cursor: pointer;
+
   /* background: var(--neutral-color); */
 }
 
@@ -1419,7 +1434,7 @@ to make it adjustable */
   max-width: 50px;
   width: 40%;
   background: #e6f2ff  ;
-  color: black;
+
   overflow: hidden;
   position: relative;
 }
