@@ -529,11 +529,15 @@ class onAcceptFollow(APIView):
     # This funciton will be used to approve of a person following and seeing
     # your page
     # Pretty much a normal follow
+
+    # You have to remove the person from request
     def post(self, request, *args, **kwargs):
         print(request.data)
 
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])
+        following.requested.remove(follower)
+        following.save()
         followerObj = models.UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
         followerObj.save()
         # Now you will grab the following of the current user and then
@@ -541,7 +545,14 @@ class onAcceptFollow(APIView):
         curUser = get_object_or_404(models.User, id = request.data['following'])
         hostObj = serializers.UserSerializer(curUser).data
 
+
         followerList = hostObj['get_followers']
+        requestedList = hostObj['requested']
+
+        content = {
+            'followerList': followerList,
+            'requestedList': requestedList
+        }
         # You will return your new follow list to update your list
 
-        return Response(followerList)
+        return Response(content)

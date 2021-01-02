@@ -275,7 +275,7 @@ class PersonalProfilePostList extends React.Component{
 
         ExploreWebSocketInstance.sendFollowRequest(follower, following)
 
-        // NotificationWebSocketInstance.sendNotification(notificationObject)
+        NotificationWebSocketInstance.sendNotification(notificationObject)
 
 
       } else {

@@ -114,7 +114,8 @@ const changePrivate = (state, action) => {
 
 const updateFollowers = (state, action) => {
   return updateObject(state, {
-    followers: action.followerList
+    followers: action.followerList,
+    requested: action.requestedList
   })
 }
 

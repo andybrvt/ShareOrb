@@ -331,6 +331,7 @@ export const updateFollowers = (followerList) => {
   // following you
   return {
     type: actionTypes.UPDATE_FOLLOWERS,
-    followerList: followerList
+    followerList: followerList.followerList,
+    requestedList: followerList.requestedList
   }
 }

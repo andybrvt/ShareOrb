@@ -214,7 +214,6 @@ class NotificationsDropDown extends React.Component{
     // person trying to request)
     // The following parameter will be the recipient or in this case the person who
     // is accepting the follow
-    this.onDeleteNotification(notificationId)
 
     console.log(follower, following)
     // Once you get the ids you can then send an axios call
@@ -227,6 +226,8 @@ class NotificationsDropDown extends React.Component{
       this.props.updateFollowers(res.data)
       this.successFollow()
       // You also want to send a notification too
+      this.onDeleteNotification(notificationId)
+
     })
 
     // So since this is not real time, you can just call a axios call instead of
