@@ -336,7 +336,7 @@ class PersonalProfile extends React.Component{
 
         ExploreWebSocketInstance.sendFollowRequest(follower, following)
 
-        NotificationWebSocketInstance.sendNotification(notificationObject)
+        // NotificationWebSocketInstance.sendNotification(notificationObject)
 
       } else {
         // MAKE SURE TO UPDATE THE AUTH TOO
@@ -420,9 +420,12 @@ class PersonalProfile extends React.Component{
           }
         }
 
-        if(this.props.profile.requested){
-          requested = this.props.profile.requested
+        if(this.props.profile.private){
+          if(this.props.profile.requested){
+            requested = this.props.profile.requested
+          }
         }
+
 
         // if(this.props.curUserFriend){
         //   for(let i = 0; i< this.props.curUserFriend.length; i++){
@@ -498,12 +501,27 @@ class PersonalProfile extends React.Component{
 
               :
 
+              <div>
+              {
+                  requested.includes(this.props.currentId) ?
 
-              <Button
-                style={{fontSize:'16px'}}
-                onClick = {() => this.onFollow(this.props.currentId, profileId)}
-                 className = 'followButton'
-                id="follow-button"> Follow </Button>
+                  <Button
+                    style={{fontSize:'16px'}}
+                    onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                     className = 'followButton'
+                    id="follow-button"> Requested </Button>
+
+                  :
+
+                  <Button
+                    style={{fontSize:'16px'}}
+                    onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                     className = 'followButton'
+                    id="follow-button"> Follow </Button>
+
+              }
+              </div>
+
             }
 
 

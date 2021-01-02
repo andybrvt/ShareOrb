@@ -17,7 +17,7 @@ export const closeProfile = () => {
 
   return{
     type: actionTypes.CLOSE_PROFILE,
-    
+
   }
 }
 
@@ -78,5 +78,14 @@ export const addSocialEventJoinLeavePage = (socialEventList) => {
   return {
     type: actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_PAGE,
     socialEventList: socialEventList
+  }
+}
+
+export const sendRequested = (requestedList) => {
+  // This will be used to change the request
+
+  return {
+    type: actionTypes.SEND_REQUESTED,
+    requestedList: requestedList
   }
 }

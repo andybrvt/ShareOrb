@@ -995,6 +995,34 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         # Add the path to send information into the front end here
 
+    def send_following_request(self, data):
+        # This function is used to set up the request, pretty much whenver someone is
+        # on private and it will add them to requested and it will show them as
+        # a requested button
+
+        # Remember the follower will be the person wanting the request and the
+        # following is the person getting the request
+        follower = get_object_or_404(User, id = data['follower'])
+        following = get_object_or_404(User, id = data['following'])
+
+        # So since the following is the person getting the request,  you will
+        # just add teh follower to the following requested list
+        following.requested.add(follower)
+        following.save()
+
+        curUser = UserSerializer(following).data
+
+        content = {
+            'command': 'send_requested',
+            'requestedList': curUser['requested'],
+            'reciever': curUser['username']
+        }
+
+        self.send_new_explore(content)
+
+        # Now you will go in and then start updating the users information
+
+
     def send_new_follow(self, followObj):
         # This function is used to send follow objs into the websocket and to everyone
         # in the channel layer
@@ -1086,6 +1114,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.removeUserCloseFriend(data)
         if data['command'] == 'approve_social_pics':
             self.approve_social_pics(data)
+        if data['command'] == 'send_following_request':
+            self.send_following_request(data)
     def new_follower_following(self, event):
         followObj = event['followObj']
         return self.send_json(followObj)

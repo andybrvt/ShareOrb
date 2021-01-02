@@ -171,6 +171,8 @@ REST_FRAMEWORK = {
         ),
     }
 
+
+# pip install django-cors-headers
 CORS_ORIGIN_ALLOW_ALL = True
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'

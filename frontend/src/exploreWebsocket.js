@@ -192,7 +192,15 @@ class WebSocketExplore {
         this.callbacks['add_cover_pic'](socialCalCellObj.coverPic, socialCalCellObj.id)
 
       }
+    } else if(command === "send_requested"){
+      const requestedList = parsedData.requestedList
+
+      // Now put the call back here
+      this.callbacks['send_requested'](requestedList)
+
+
     }
+
 
 
   }
@@ -208,6 +216,7 @@ class WebSocketExplore {
      editProfileAuth,
      addRemoveCloseFriend,
      addCoverPic,
+     addRequestCallBack
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
@@ -217,6 +226,7 @@ class WebSocketExplore {
     this.callbacks['edit_profile_auth'] = editProfileAuth
     this.callbacks['add_remove_close_friend'] = addRemoveCloseFriend
     this.callbacks['add_cover_pic'] = addCoverPic
+    this.callbacks['send_requested'] = addRequestCallBack
   }
 
 

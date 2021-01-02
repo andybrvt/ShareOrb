@@ -100,6 +100,15 @@ export const addSocialEventJoinLeavePage = (state, action) => {
   })
 }
 
+export const sendRequested = (state, action) => {
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      requested: action.requestedList
+    }
+  })
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -120,6 +129,8 @@ const reducer = (state = initialState, action) => {
       return addSocialEventJoinLeave(state, action);
     case actionTypes.ADD_SOCIAL_EVENT_JOIN_LEAVE_PAGE:
       return addSocialEventJoinLeavePage(state, action);
+    case actionTypes.SEND_REQUESTED:
+      return sendRequested(state, action);
     default:
       return state;
   };
