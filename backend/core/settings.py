@@ -26,9 +26,9 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 DEBUG = True
 
 
-# ALLOWED_HOSTS = ['django-env.eba-kawap7jy.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com']
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -178,12 +178,12 @@ SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 # AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 # This one is for development
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
 # Use this one if you want to deploy
-# AWS_STORAGE_BUCKET_NAME = 'shareorb'
-# MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_STORAGE_BUCKET_NAME = 'shareorb'
+MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
