@@ -78,7 +78,7 @@
   /* background-color: red; */
   font-weight: 500;
   /* font-weight: bold; */
-  font-size: 22px;
+  font-size: 20px;
   line-height: 26px;
   z-index: 1;
 }
@@ -91,6 +91,15 @@
   left: 87%;
 }
 
+
+.statsHeader{
+  font-weight: 500;
+}
+.statsNewsFeed{
+  font-weight: 450;
+  position: relative;
+  left:175%;
+}
 
 
 
