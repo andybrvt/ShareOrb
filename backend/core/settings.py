@@ -25,8 +25,8 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eb-virt.eba-paq3ygtm.us-west-2.elasticbeanstalk.com']
-
+ALLOWED_HOSTS = ['127.0.0.1:8000','eb-virt.eba-paq3ygtm.us-west-2.elasticbeanstalk.com']
+# ALLOWED_HOSTS = []
 
 # Application definition
 
