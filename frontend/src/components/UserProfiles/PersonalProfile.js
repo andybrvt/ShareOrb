@@ -334,6 +334,10 @@ class PersonalProfile extends React.Component{
 
         // MAKE SURE TO UPDATE THE AUTH TOO
 
+        // You have to figure out a way to grab the follower form here because
+        // you cannot grab it in the explore WebSocket bc that will be sent
+        // to everyone else
+
         ExploreWebSocketInstance.sendFollowRequest(follower, following)
 
         NotificationWebSocketInstance.sendNotification(notificationObject)
@@ -342,6 +346,10 @@ class PersonalProfile extends React.Component{
         // MAKE SURE TO UPDATE THE AUTH TOO
 
         ExploreWebSocketInstance.sendFollowing(follower, following)
+
+        // This is to update the AUTH
+        this.props.grabUserCredentials()
+        console.log('it hits here')
 
         // The follower is you who is sending the reqwuest and the following is the other person
         const notificationObject = {
@@ -361,6 +369,8 @@ class PersonalProfile extends React.Component{
       // the notification as well )
 
       ExploreWebSocketInstance.unSendFollowRequest(follower, following)
+
+      // This is used to update the auth
     }
 
 
@@ -369,6 +379,9 @@ class PersonalProfile extends React.Component{
       // It will pretty muchh just delete the follower and following
 
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
+      this.props.grabUserCredentials()
+
+      console.log('it hits here')
     }
 
 
@@ -388,6 +401,10 @@ class PersonalProfile extends React.Component{
       let curId = ''
       let bio=''
       let requested = []
+
+      // userObj will be the object used tos end into teh auth in order to update
+      // the follower and following
+      let userObj = {}
 
       if(this.props.currentId){
         curId = this.props.currentId
@@ -900,6 +917,7 @@ const mapDispatchToProps = dispatch => {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
     changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials())
 
   }
 }
