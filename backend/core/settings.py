@@ -25,7 +25,7 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['eb-virt.eba-paq3ygtm.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -100,20 +100,37 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # test if commented
-DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-        'PORT': '',
-    },
-}
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'test',
+            'USER': 'root',
+            'PASSWORD': 'password',
+            'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+            'PORT': '',
+        },
+    }
 
+
+# AWS EB Settings
+AWS_QUERYSTRING_AUTH = False
+AWS_ACCESS_KEY_ID = 'AKIATPBEN3PQCULDTYXA'
+AWS_SECRET_ACCESS_KEY = '75YUqArIbGOh/bOzcO45ZmeymSiRB2OV9gll8lXX'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -151,13 +168,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = "userprofile.User"
 ACCOUNT_ADAPTER = 'userprofile.adapters.CustomUserAccountAdapter'
 SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 # AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+
+
+AWS_STORAGE_BUCKET_NAME = 'shareorb'
+MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
