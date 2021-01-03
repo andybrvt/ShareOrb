@@ -25,8 +25,10 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-env.eba-kawap7jy.us-west-2.elasticbeanstalk.com']
 
+# ALLOWED_HOSTS = ['django-env.eba-kawap7jy.us-west-2.elasticbeanstalk.com']
+
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -180,7 +182,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 
 AWS_STORAGE_BUCKET_NAME = 'shareorb'
 MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (

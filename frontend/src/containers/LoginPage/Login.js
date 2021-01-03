@@ -71,7 +71,7 @@ if (token) {
 
 
 
-          <div class="loginTitle">Connecting people through calendars</div>
+          <div class="loginTitle">Connecting people through calendars test</div>
             <div class="eventCard allStyle" style={{left:'20%',
             width:'600px', height:'400px', padding:'75px'}}>
 

@@ -87,32 +87,44 @@ class ProfileCardNewsFeed extends React.Component{
           <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
         </div>
-        <Row gutter={12} style={{marginTop:'50px'}}>
+        <Row gutter={12} style={{marginTop:'50px', marginLeft:'5px'}}>
           <Col
-            offset={3}
-            span={10}
+            offset={0.5}
+            span={4}
             onClick = {() => this.onFollowingOpen()}
             class="clickable"
           >
-          <Statistic
-            class="statHover"
-            valueStyle={{ marginLeft:'25px',fontSize:'18px', color:'black'}}
-            title={<span class="statsNewsFeed" style={{fontSize:'16px',}}>Following</span>}
-           value={following.length} />
+
+           <span class="statsHeader" style={{fontSize:'18px',}}>Following
+             <br/>
+             <span
+               style={{fontSize:'18x'}}
+               class="statsNewsFeed">
+               {following.length}
+             </span>
+           </span>
+
 
           </Col>
           <Col
             onClick = {() => this.onFollowerOpen()}
-            span={10}
+            offset={8}
+            span={4}
             class="clickable"
           >
-          <Statistic
 
-            class="statisticTest"
-            valueStyle={{ marginLeft:'25px',fontSize:'18px', color:'black'}}
-            title={<span class="statsNewsFeed" style={{fontSize:'16px',}}>Followers</span>}
-            value={followers.length} />
+
+          <span class="statsHeader" style={{fontSize:'18px',}}>Followers
+            <br/>
+            <span
+              style={{fontSize:'18x'}}
+              class="statsNewsFeed">
+              {followers.length}
+            </span>
+          </span>
+
           </Col>
+
         </Row>
         <Modal
         visible ={this.state.followerShow}
