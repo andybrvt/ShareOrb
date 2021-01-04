@@ -115,19 +115,19 @@ DATABASES = {
     }
 }
 # else:
-#     DATABASES = {
-#         'default': {
+# DATABASES = {
+#     'default': {
 #             # 'ENGINE': 'django.db.backends.sqlite3',
 #             # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': 'test',
-#             'USER': 'root',
-#             'PASSWORD': 'password',
-#             'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-#             'PORT': '',
-#         },
-#     }
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'test',
+#         'USER': 'root',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+#         'PORT': '',
+#     },
+# }
 
 
 # AWS EB Settings
