@@ -1,10 +1,20 @@
+
+
+.reactForm {
+  font-family: "Segoe UI Regular";
+  font-weight: 550;
+}
+
+
 .reactForm .reactTitle {
   /* outline: none; */
   border: none;
   border-bottom: 2px solid deepskyblue;
   font-size: 25px;
   height: 40px;
+
 }
+
 
 .reactForm .reactTitle:focus{
   box-shadow: none;

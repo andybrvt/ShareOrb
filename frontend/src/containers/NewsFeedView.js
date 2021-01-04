@@ -45,6 +45,10 @@ class NewsFeedView extends React.Component {
     });
   };
 
+	onAddEvent = () => {
+		this.props.openDrawer()
+	}
+
 	closeProfileEdit = () => {
     // You wanna check if the person open and opening is the current user
 
@@ -143,7 +147,7 @@ class NewsFeedView extends React.Component {
 							<Col span={8}>
 
 
-								<div class="topCard" onClick ={this.eventCondition}>
+								<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
 
 									<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 

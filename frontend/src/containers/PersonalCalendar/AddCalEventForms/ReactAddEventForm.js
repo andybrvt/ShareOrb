@@ -548,12 +548,14 @@ class ReactAddEventForm extends React.Component {
          placeholder = 'Title'
          value = {this.state.title}
          style={{marginTop:'-5px'}}
-         maxLength = "80"
+         maxLength={200}
+
          />
        </Form.Item>
 
 
         <Radio.Group
+          buttonStyle="solid"
           options={options}
           name = 'repeatCondition'
           onChange={this.handleChange}
@@ -567,7 +569,7 @@ class ReactAddEventForm extends React.Component {
           {...rangeConfig}
           style={{marginTop:'20px'}}
            >
-           <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-clock"></i>
+           <i style={{marginLeft:'10px', marginRight:'21px',  color:'#595959'}} class="fas fa-clock"></i>
 
            <DatePicker
            className = ''
@@ -613,7 +615,7 @@ class ReactAddEventForm extends React.Component {
 
 
        <Form.Item style={{marginTop:'-15px'}}>
-         <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
+         <i style={{marginLeft:'10px', marginRight:'21px',  color:'#595959'}} class="fas fa-user-friends"></i>
          <Select
            mode="multiple"
            style={{ width: '75%' }}
@@ -629,7 +631,8 @@ class ReactAddEventForm extends React.Component {
 
        <div class="innerContainerPeople">
          <Form.Item name="Location">
-           <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+           <i class="fas fa-globe-americas"
+              style={{marginLeft:'10px', marginRight:'25px', color:'#595959'}} ></i>
           <Input style={{width:'50%',fontSize:'14px'}}
            name = 'location'
            placeholder = 'Location'
@@ -647,7 +650,8 @@ class ReactAddEventForm extends React.Component {
         name = 'content'
         placeholder= 'Event Description'
         value = {this.state.content}
-        rows ={3}
+        rows ={4}
+
         style = {{width: '400px', marginLeft:'50px'}}/>
 
       </Form.Item>
