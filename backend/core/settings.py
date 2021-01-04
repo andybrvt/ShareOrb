@@ -103,17 +103,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # test if commented
-if 'RDS_HOSTNAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ebdb',
+        'USER': 'shareorbDB',
+        'PASSWORD': 'Pingandy123',
+        'HOST': 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
+}
 # else:
 #     DATABASES = {
 #         'default': {
