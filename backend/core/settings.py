@@ -62,7 +62,7 @@ INSTALLED_APPS =[
     'newChat',
     'mycalendar',
     'mySocialCal',
-    'storages'
+    'storages',
 
 ]
 
