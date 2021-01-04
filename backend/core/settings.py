@@ -109,7 +109,7 @@ if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ['ebdb'],
             'USER': os.environ['shareorbDB'],
-            'PASSWORD': os.environ['pingandy123'],
+            'PASSWORD': os.environ['Pingandy123'],
             'HOST': os.environ['aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com'],
             'PORT': os.environ['3306'],
         }
