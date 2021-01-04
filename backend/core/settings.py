@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 
 ALLOWED_HOSTS = ['shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com']
@@ -102,31 +103,31 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # test if commented
-if 'RDS_DB_NAME' in os.environ:
+if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['ebdb'],
+            'USER': os.environ['shareorbDB'],
+            'PASSWORD': os.environ['Pingandy123'],
+            'HOST': os.environ['aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com'],
+            'PORT': os.environ['3306'],
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            # 'ENGINE': 'django.db.backends.sqlite3',
-            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'test',
-            'USER': 'root',
-            'PASSWORD': 'password',
-            'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-            'PORT': '',
-        },
-    }
+# else:
+#     DATABASES = {
+#         'default': {
+#             # 'ENGINE': 'django.db.backends.sqlite3',
+#             # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'test',
+#             'USER': 'root',
+#             'PASSWORD': 'password',
+#             'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+#             'PORT': '',
+#         },
+#     }
 
 
 # AWS EB Settings
