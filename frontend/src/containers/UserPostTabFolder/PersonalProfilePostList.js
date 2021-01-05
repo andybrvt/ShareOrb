@@ -283,6 +283,8 @@ class PersonalProfilePostList extends React.Component{
         //Send a follow in the backend
         ExploreWebSocketInstance.sendFollowing(follower, following)
 
+        this.props.grabUserCredentials()
+
         // The follower is you who is sending the reqwuest and the following is the other person
         const notificationObject = {
           command: 'send_follow_notification',
@@ -309,6 +311,8 @@ class PersonalProfilePostList extends React.Component{
       // It will pretty muchh just delete the follower and following
 
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
+      this.props.grabUserCredentials()
+
     }
 
 
@@ -826,7 +830,8 @@ const mapDispatchToProps = dispatch => {
   return {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
-    changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic))
+    changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials())
 
   }
 }

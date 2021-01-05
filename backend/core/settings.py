@@ -184,9 +184,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 MEDIA_URL = '/media/'
 
 # Use this one if you want to deploy
-AWS_STORAGE_BUCKET_NAME = 'shareorb'
+# AWS_STORAGE_BUCKET_NAME = 'shareorb'
 # MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (

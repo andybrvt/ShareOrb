@@ -285,6 +285,7 @@ class PersonalProfileEventList extends React.Component{
 
       } else {
         ExploreWebSocketInstance.sendFollowing(follower, following)
+        this.props.grabUserCredentials()
 
         // The follower is you who is sending the reqwuest and the following is the other person
         const notificationObject = {
@@ -313,6 +314,8 @@ class PersonalProfileEventList extends React.Component{
       // It will pretty muchh just delete the follower and following
 
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
+      this.props.grabUserCredentials()
+
     }
 
     onCalendarTabClick = () => {
@@ -832,6 +835,8 @@ const mapDispatchToProps = dispatch => {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
     changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials())
+
 
   }
 }
