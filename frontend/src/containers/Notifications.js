@@ -19,25 +19,25 @@ class Notifications extends React.Component{
 // remember that you can add the call backs in using redux
 // you like the functions in the notificationWebsocket to the notificaiton.js through callbacks and bind
 // baically the information will be called to the states
-  initialiseNotification(){
-    this.waitForSocketConnection(() => {
-      // when you do the fetchFriendRequests it already called the actions
-      NotificationWebSocketInstance.fetchFriendRequests(
-        this.props.id
-      )
-      })
-      // NotificationWebSocketInstance.connect(this.props.match.params.username)
-    }
+  // initialiseNotification(){
+  //   this.waitForSocketConnection(() => {
+  //     // when you do the fetchFriendRequests it already called the actions
+  //     NotificationWebSocketInstance.fetchFriendRequests(
+  //       this.props.id
+  //     )
+  //     })
+  //     // NotificationWebSocketInstance.connect(this.props.match.params.username)
+  //   }
 
     constructor(props){
       super(props)
-      this.initialiseNotification()
+      // this.initialiseNotification()
       // these will give the commands the function --> this is similar to the command
       // array in the consumer.py
     }
 
   componentDidMount(){
-    NotificationWebSocketInstance.connect(this.props.username)
+    // NotificationWebSocketInstance.connect(this.props.username)
 
 
   }
@@ -106,26 +106,6 @@ class Notifications extends React.Component{
     return prefix;
   }
 
-  // renderNotifications = (notifications) => {
-  //   return notifications.map(notification => (
-  //     <li class="list">
-  //         <a href="#" title="">
-  //             <img src="images/resources/thumb-1.jpg" alt=""/>
-  //             <div class="mesg-meta">
-  //                 <div> This is the actor (person sending) [{notification.actor.username}] sent recepient (person receiving) [{notification.recipient}] </div>
-  //                 <div>  </div>
-  //                 <div> This is the message: [{notification.description}] </div>
-  //                   <i>The time of this notification: {this.renderTimeStamp(notification.timestamp)}</i>
-  //
-  //
-  //             </div>
-  //         </a>
-  //      </li>;
-  //
-  //    )
-  //   )
-  // }
-
   onLoadMore = () => {
     this.setState({
       loading: true,
@@ -151,10 +131,10 @@ class Notifications extends React.Component{
 
   componentWillReceiveProps(newProps){
     console.log(newProps)
-    if(this.props.username !== newProps.username){
-      NotificationWebSocketInstance.disconnect()
-      NotificationWebSocketInstance.connect(newProps.username)
-    }
+    // if(this.props.username !== newProps.username){
+    //   NotificationWebSocketInstance.disconnect()
+    //   NotificationWebSocketInstance.connect(newProps.username)
+    // }
 
 
   }

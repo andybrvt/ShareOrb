@@ -34,6 +34,7 @@ class App extends Component {
 
     this.initialiseChats()
     this.initialisePost()
+    this.initialiseNotification()
 
     // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
     WebSocketInstance.addCallbacks(
@@ -189,6 +190,33 @@ class App extends Component {
 
   }
 
+  initialiseNotification(){
+    this.waitForNotificationSocketConnection(() => {
+      NotificationWebSocketInstance.fetchFriendRequests(
+        this.props.id
+      )
+    })
+    NotificationWebSocketInstance.connect(this.props.id)
+
+  }
+
+  waitForNotificationSocketConnection (callback) {
+    const component = this;
+    setTimeout(
+      function(){
+
+        if (NotificationWebSocketInstance.state() === 1){
+
+          callback();
+          return;
+        } else{
+
+            component.waitForNotificationSocketConnection(callback);
+        }
+      }, 100)
+
+  }
+
 
 
 //the map state to props allows us to get the state and then
@@ -228,14 +256,17 @@ class App extends Component {
         ChatSidePanelWebSocketInstance.connect(newProps.id)
 
 
+        NotificationWebSocketInstance.disconnect()
+        this.waitForNotificationSocketConnection(() => {
+          NotificationWebSocketInstance.fetchFriendRequests(
+            newProps.id
+          )
+        })
+        NotificationWebSocketInstance.connect(newProps.username)
+
 
       }
     }
-    // NotificationWebSocketInstance.connect(newProps.username)
-    // if (this.props.username !== newProps.username){
-    //   // ExploreWebSocketInstance.disconnect()
-    //   // ExploreWebSocketInstance.connect(newProps.username)
-    // }
 
   }
 

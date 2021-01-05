@@ -209,40 +209,6 @@ class PersonalProfile extends React.Component{
   }
 
 
-  // on click add friend starts here
-  onClickSend = (e) =>{
-    e.preventDefault()
-    const username = this.props.parameter.username;
-    // axios.default.headers = {
-    //   "Content-type": "application/json",
-    //   Authorization: `Token ${this.props.token}`
-    // }
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
-    const notificationObject  = {
-      command: 'send_friend_notification',
-      actor: this.props.currentUser,
-      recipient: this.props.parameter.username,
-    }
-    // NotificationWebSocketInstance.disconnect()
-    // NotificationWebSocketInstance.connect(this.props.match.params.username)
-    NotificationWebSocketInstance.sendNotification(notificationObject)
-    // NotificationWebSocketInstance.connect(this.props.currentUser)
-
-    }
-
-
-    onClickCancel = (e) =>{
-      // const username = this.props.match.params.username;
-      // authAxios.post('http://127.0.0.1:8000/friends/friend-request/cancel/'+username)
-      }
-
-    onClickDeleteFriend = (e) =>{
-      // This is used to delete friends
-        // const username = this.props.match.params.username;
-        // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
-      }
-
-
 
     renderProfilePic = () => {
 

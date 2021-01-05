@@ -91,35 +91,32 @@ class ProfileCardNewsFeed extends React.Component{
           <Col
             offset={0.5}
             span={4}
-            onClick = {() => this.onFollowingOpen()}
+            onClick = {() => this.onFollowerOpen()}
             class="clickable"
           >
-
-           <span class="statsHeader" style={{fontSize:'18px',}}>Following
+           <span class="statsHeader" style={{fontSize:'18px',}}> Followers
              <br/>
              <span
                style={{fontSize:'18x'}}
                class="statsNewsFeed">
-               {following.length}
+               {followers.length}
              </span>
            </span>
 
 
           </Col>
           <Col
-            onClick = {() => this.onFollowerOpen()}
+            onClick = {() => this.onFollowingOpen()}
             offset={8}
             span={4}
             class="clickable"
           >
-
-
-          <span class="statsHeader" style={{fontSize:'18px',}}>Followers
+          <span class="statsHeader" style={{fontSize:'18px',}}>Following
             <br/>
             <span
               style={{fontSize:'18x'}}
               class="statsNewsFeed">
-              {followers.length}
+              {following.length}
             </span>
           </span>
 

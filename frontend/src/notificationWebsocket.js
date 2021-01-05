@@ -90,6 +90,7 @@ class WebSocketNotifications {
 
   }
   // this will send the messages to the backend
+  // it will pull all the notifications taht currently exist 
   fetchFriendRequests(userId){
     this.sendNotification({
       userId: userId,
@@ -116,7 +117,7 @@ class WebSocketNotifications {
     })
   }
 
-  
+
 
   sendNotification(data) {
     // this is good, it only sends 1 time
