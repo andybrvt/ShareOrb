@@ -12,7 +12,8 @@
   overflow:hidden;
   background: rgba(0, 0, 0, 0.45);
   z-index: 99;
-  /* margin-bottom: 1000px; */
+
+    /* margin-bottom: 1000px; */
 
 }
 
@@ -73,11 +74,8 @@
   z-index: 10;
 }
 
-.singlePicHolder .singlePic .clipPicturesRoll .ownerHolder{
-  position: absolute;
-  left: 7.5%;
-  top: 5%;
-  display: flex;
+.ownerHolder{
+  font-size: 20px;
 }
 .singlePicHolder .singlePic .clipPicturesRoll .ownerHolder .ownerName{
   position: relative;
@@ -210,13 +208,12 @@
 }
 
 
-.socialModalRight .socialNameTag .socialNameUsername{
+.postUsername{
     /* background-color: red; */
-    color:grey;
-    position: relative;
-    left: 5px;
-    bottom: 5px;
-    font-weight: 350;
+    color:black;
+    font-weight: 500;
+    font-size: 12x;
+    font-family: "Segoe UI Regular";
 }
 
 .socialModalRight .socialNameTag .socialProfileImage {

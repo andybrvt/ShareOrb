@@ -270,7 +270,8 @@ class UserPostPage extends React.Component{
     let userPostUsername = ''
     let userPostUserId = ''
     let userPostProfilePic = ''
-
+    let userFirstName=''
+    let userLastName=''
     let userPostDate = ''
     let people_like = []
     // let curDate = year+"-"+month+"-"+day
@@ -292,6 +293,8 @@ class UserPostPage extends React.Component{
         userPostUsername = this.props.post.user.username
         userPostProfilePic = 'http://127.0.0.1:8000'+this.props.post.user.profile_picture
         userPostUserId = this.props.post.user.id
+        userFirstName=this.props.post.user.first_name
+        userLastName=this.props.post.user.last_name
       }
       if(this.props.post.created_at){
         userPostDate = this.renderTimestamp(this.props.post.created_at)
@@ -343,8 +346,12 @@ class UserPostPage extends React.Component{
                 src = {userPostProfilePic}
                 className = 'socialProfileImage'/>
                 <div>
-                  <div className = 'ownerHolder'> {this.capitalize(userPostUsername)}</div>
-                  <div className = "socialCalCellUsername"> @{this.capitalize(userPostUsername)} </div>
+                  <div className = 'ownerHolder'> 
+                    {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
+                  </div>
+                  <div className = "postUsername"
+                    > @{userPostUsername}
+                  </div>
                   <div className = "postTimeStamp"> {userPostDate} </div>
                 </div>
                 {

@@ -19,10 +19,13 @@
   position: fixed;
   background: white;
   /* height: 100; */
-  top: 10px;
+  top: 45px;
   left: 10%;
   right: 10%;
   z-index: 100;
+  color:black;
+  font-weight: 500;
+  font-family: "Segoe UI Regular";
 }
 
 
@@ -30,10 +33,12 @@
 /* This will hold the pictures of the modal */
 .postHolder{
   display: flex;
-  height: 920px;
+  height: 900px;
+  /* background-color: red;
+   */
 }
 .postHolder .postPicturesCarousel{
-  width: 70%;
+  width: 65%;
   height: 100%;
   text-align: center;
   overflow: hidden;
@@ -52,10 +57,11 @@
 /* This will hold all the information on the right of the modal */
 .postModalRight{
   /* background-color: blue; */
+  padding:10px;
   position: relative;
   bottom: 0px;
   height: 100%;
-  width: 30%;
+  width: 35%;
   border-left: 1px solid #f0f0f0;
 }
 .postModalRight .caption{
@@ -89,9 +95,9 @@
   right: 40px;
 }
 
-.postModalRight .postNameTag .cellThreeDots{
+.cellThreeDots{
   position: relative;
-  left: 70%;
+  left: 80%;
   bottom: 30%;
 }
 
