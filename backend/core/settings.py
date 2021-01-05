@@ -104,17 +104,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # test if commented
-if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'ebdb',
-            'USER': 'shareorbDB',
-            'PASSWORD': 'Pingandy123',
-            'HOST': 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
-            'PORT': '3306',
-        }
+# if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ebdb',
+        'USER': 'shareorbDB',
+        'PASSWORD': 'Pingandy123',
+        'HOST': 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
+}
 # else:
 #     DATABASES = {
 #         'default': {
