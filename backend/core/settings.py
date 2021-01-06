@@ -27,7 +27,7 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['api.shareorb.com','shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com']
 
 # ALLOWED_HOSTS = []
 
@@ -104,6 +104,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # test if commented
+
+# TAKE OUT IF AND ELSE WHEN DEPLOYING
+
 # if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
 DATABASES = {
     'default': {
