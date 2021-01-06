@@ -876,11 +876,10 @@ class NotificationsDropDown extends React.Component{
       <div className = 'notificationScroll'>
       { notificationList.length === 0 ?
         <li
-        className = "notificationListContainer"
-        style = {{
-          textAlign: 'center'
-        }}
-        > You have no notifications </li>
+        className = "noNotificationListContainer"
+        >
+        <span> You have no notifications </span>
+        </li>
         :
         notificationList}
       </div>

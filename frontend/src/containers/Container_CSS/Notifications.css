@@ -149,6 +149,16 @@
   cursor: pointer;
 
 }
+.noNotificationListContainer{
+  /* background-color: red; */
+  /* overflow-x: hidden; */
+  height: 100px;
+  width: 400px;
+  cursor: pointer;
+  text-align: center;
+}
+
+
 
 .notificationListContainer:hover{
 
@@ -194,7 +204,7 @@
 
 .notificationScroll {
   overflow: auto;
-  height: 800px;
+  max-height: 800px;
 }
 
 
