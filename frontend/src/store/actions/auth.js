@@ -116,8 +116,8 @@ export const authLogin = (username, password) => {
 
          });
 
-
-        axios.post("http://127.0.0.1:8000/rest-auth/login/", {
+         // http://127.0.0.1:8000/rest-auth/login/
+        axios.post("http://api.shareorb.com/rest-auth/login/", {
           username: username,
           password: password
         })
