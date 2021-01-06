@@ -111,7 +111,8 @@ class NotificationsDropDown extends React.Component{
     })
   }
 
-  onDeleteNotification = (notificationId) => {
+  onDeleteNotification = (e,notificationId) => {
+    console.log(e.stopPropagation())
     console.log(notificationId)
     this.deleteSideNotification('bottomRight')
     authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
@@ -248,29 +249,14 @@ class NotificationsDropDown extends React.Component{
   renderNotifications = () => {
     // For the accept notificaiton, you want to pass in min and max date and the requested user so you can
      // filter out later
-    const notificationList = []
-    const notifications = this.props.notifications
+    let notificationList = []
+    let notifications = []
+    if(this.props.notifications){
+      notifications = this.props.notifications
+    }
+
+    console.log(notifications)
     for (let i = 0; i<notifications.length; i++){
-      if(notifications[i].type === 'friend'){
-        console.log( new Date() )
-        console.log(new Date(notifications[i].timestamp))
-        console.log(this.renderTimestamp(notifications[i].timestamp))
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-          <div className = 'notificationIcon'>
-          <Avatar size = {45} style ={{
-            backgroundColor: 'blue',
-            verticalAlign: 'middle'}}
-            // icon = {<UserOutlined />}
-            src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
-            >
-          </Avatar>
-          </div>
-
-        </li>
-        )
-      }
-
 
       if (notifications[i].type === 'send_friend_event_sync'){
         // ACCEPTS: works
@@ -346,7 +332,7 @@ class NotificationsDropDown extends React.Component{
             <Button type ='text'
              shape = 'circle'
              className = 'deleteButton'
-             onClick = {()=> this.onDeleteNotification(notifications[i].id) }>
+             onClick = { e => this.onDeleteNotification(e, notifications[i].id) }>
              X </Button>
           </h4>
         </li>
@@ -379,7 +365,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
               </div>
           </h4>
         </li>
@@ -456,7 +442,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }>
                X </Button>
 
           </h4>
@@ -488,7 +474,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }>
               X </Button>
               </div>
           </h4>
@@ -517,7 +503,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = {e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -545,7 +531,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -573,7 +559,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -606,7 +592,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -638,7 +624,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -670,7 +656,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -702,7 +688,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
 
@@ -748,7 +734,7 @@ class NotificationsDropDown extends React.Component{
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
@@ -786,7 +772,7 @@ class NotificationsDropDown extends React.Component{
               type ='text'
               shape = 'circle'
               className = 'deleteButton'
-              onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
               </div>
           </h4>
         </li>
@@ -808,28 +794,31 @@ class NotificationsDropDown extends React.Component{
                  request to follow you.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                 <div className = 'pickEventSyncButton'>
-                 <Button
-                 className = 'acceptButton'
-                 type ="primary"
-                 onClick = {() => this.onAcceptFollow(
-                   notifications[i].actor.id,
-                   notifications[i].recipient,
-                   notifications[i].id
-                 )}
-                 > Accept</Button>
-                 <Button
-                 type ="primary"
-                 className = 'declineButton'
-                 onClick = {() => this.onDeclineFollow()}
-                 > Decline </Button>
-                 </div>
+
+                   <div className = 'pickEventSyncButton'>
+                   <Button
+                   className = 'acceptButton'
+                   type ="primary"
+                   onClick = {() => this.onAcceptFollow(
+                     notifications[i].actor.id,
+                     notifications[i].recipient,
+                     notifications[i].id
+                   )}
+                   > Accept</Button>
+                   <Button
+                   type ="primary"
+                   className = 'declineButton'
+                   onClick = {() => this.onDeclineFollow()}
+                   > Decline </Button>
+                   </div>
+
+
                 <div>
                 <Button
                 type ='text'
                 shape = 'circle'
                 className = 'deleteButton'
-                onClick = {()=> this.onDeleteNotification(notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
                 </div>
             </h4>
           </li>
