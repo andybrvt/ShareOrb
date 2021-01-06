@@ -50,8 +50,7 @@ import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';
 import defaultPicture from '../images/default.png';
 import './style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+
 
 
 
