@@ -346,10 +346,10 @@ class UserPostPage extends React.Component{
                 src = {userPostProfilePic}
                 className = 'socialProfileImage'/>
                 <div>
-                  <div className = 'ownerHolder'> 
+                  <div style={{marginLeft:'10px'}} className = 'ownerHolder'>
                     {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
                   </div>
-                  <div className = "postUsername"
+                  <div style={{marginLeft:'10px'}} className = "postUsername"
                     > @{userPostUsername}
                   </div>
                   <div className = "postTimeStamp"> {userPostDate} </div>
