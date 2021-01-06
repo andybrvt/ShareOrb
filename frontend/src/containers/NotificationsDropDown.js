@@ -258,6 +258,14 @@ class NotificationsDropDown extends React.Component{
     console.log(notifications)
     for (let i = 0; i<notifications.length; i++){
 
+      {/* These notifications are for event sync
+        it handles:
+        sending event sync
+        declining event sync
+        accepting event sync
+        event that is created for the sync
+        */}
+
       if (notifications[i].type === 'send_friend_event_sync'){
         // ACCEPTS: works
           // Bascially when you accept, it will send a notification to to the
@@ -329,11 +337,12 @@ class NotificationsDropDown extends React.Component{
               notifications[i].maxDate
             )}> Decline </Button>
             </div>
-            <Button type ='text'
-             shape = 'circle'
-             className = 'deleteButton'
-             onClick = { e => this.onDeleteNotification(e, notifications[i].id) }>
-             X </Button>
+            <div
+            className = 'deleteButton'
+            onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+            >
+            <i class="far fa-times-circle"></i>
+            </div>
           </h4>
         </li>
         )
@@ -360,13 +369,12 @@ class NotificationsDropDown extends React.Component{
                declined your event sync request.
                <br />
                <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div>
-              <Button
-              type ='text'
-              shape = 'circle'
-              className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-              </div>
+               <div
+               className = 'deleteButton'
+               onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+               >
+               <i class="far fa-times-circle"></i>
+               </div>
           </h4>
         </li>
         )
@@ -438,12 +446,12 @@ class NotificationsDropDown extends React.Component{
                 notifications[i].id,
               )}> Pick Date </Button>
               </div>
-              <Button
-              type ='text'
-              shape = 'circle'
+              <div
               className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }>
-               X </Button>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+              >
+              <i class="far fa-times-circle"></i>
+              </div>
 
           </h4>
 
@@ -469,18 +477,18 @@ class NotificationsDropDown extends React.Component{
               at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div>
-              <Button
-              type ='text'
-              shape = 'circle'
+              <div
               className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }>
-              X </Button>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+              >
+              <i class="far fa-times-circle"></i>
               </div>
           </h4>
         </li>
         )
       }
+
+      {/* This will be for when a user likes your post */}
       if(notifications[i].type === 'like_notification'){
         notificationList.push(
           <li className = 'notificationListContainer'>
@@ -498,17 +506,21 @@ class NotificationsDropDown extends React.Component{
                  liked your post.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = {e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
           </li>
         )
-      } if (notifications[i].type === 'comment_notification'){
+      }
+
+      {/*This is for when some one comments on your post*/}
+      if (notifications[i].type === 'comment_notification'){
         notificationList.push(
           <li className = 'notificationListContainer'>
             <div className = 'notificationIcon'>
@@ -526,17 +538,20 @@ class NotificationsDropDown extends React.Component{
                  commented on your post.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
           </li>
         )
-      } if(notifications[i].type === 'follow_notification'){
+      }
+      {/* This is for when someone follows */}
+      if(notifications[i].type === 'follow_notification'){
         notificationList.push(
           <li className = 'notificationListContainer' onClick = {() => this.onProfileClick(notifications[i].actor.username)}>
             <div className = 'notificationIcon'>
@@ -554,17 +569,22 @@ class NotificationsDropDown extends React.Component{
                  followed you.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
           </li>
         )
-      } if(notifications[i].type === "shared_event"){
+      }
+
+
+      {/* This will let someone know when you shared an event with them*/}
+      if(notifications[i].type === "shared_event"){
         notificationList.push(
           <li
           onClick = {() => this.onEventPageClick(notifications[i].eventId)}
@@ -587,13 +607,16 @@ class NotificationsDropDown extends React.Component{
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
+                <div
                 className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                >
+
+                <i class="far fa-times-circle"></i>
+
                 </div>
+
+
             </h4>
 
           </li>
@@ -619,13 +642,14 @@ class NotificationsDropDown extends React.Component{
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
 
           </li>
@@ -651,13 +675,14 @@ class NotificationsDropDown extends React.Component{
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
 
           </li>
@@ -683,13 +708,14 @@ class NotificationsDropDown extends React.Component{
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
 
           </li>
@@ -729,12 +755,13 @@ class NotificationsDropDown extends React.Component{
                 <b>{" "+dateFns.format(new Date(notifications[i].pendingEventDate), 'iiii')+", "+dateFns.format(new Date(notifications[i].pendingEventDate), 'MMM d')} </b>
                   <br/>
                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
+                <div
                 className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                >
+
+                <i class="far fa-times-circle"></i>
+
                 </div>
             </h4>
           </li>
@@ -767,12 +794,13 @@ class NotificationsDropDown extends React.Component{
               wants to add pictures to your social calendar on {notifications[i].pendingEventDate}. Click to check it out!
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div>
-              <Button
-              type ='text'
-              shape = 'circle'
+              <div
               className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
+              onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+              >
+
+              <i class="far fa-times-circle"></i>
+
               </div>
           </h4>
         </li>
@@ -813,13 +841,14 @@ class NotificationsDropDown extends React.Component{
                    </div>
 
 
-                <div>
-                <Button
-                type ='text'
-                shape = 'circle'
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id) }> X </Button>
-                </div>
+                   <div
+                   className = 'deleteButton'
+                   onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                   >
+
+                   <i class="far fa-times-circle"></i>
+
+                   </div>
             </h4>
           </li>
         )
@@ -847,6 +876,7 @@ class NotificationsDropDown extends React.Component{
       <div className = 'notificationScroll'>
       { notificationList.length === 0 ?
         <li
+        className = "notificationListContainer"
         style = {{
           textAlign: 'center'
         }}
