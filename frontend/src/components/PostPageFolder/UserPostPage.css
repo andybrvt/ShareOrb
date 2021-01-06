@@ -64,9 +64,10 @@
   width: 35%;
   border-left: 1px solid #f0f0f0;
 }
-.postModalRight .caption{
+ .captionUniversal{
   position: relative;
   padding-left: 5%;
+  font-size: 14px;
 }
 
 .postModalRight .postNameTag{
@@ -113,7 +114,9 @@
 }
 .postLikeCommentNum .postLikeAvatar{
   position: relative;;
-  left: 35%;
+  left: 45%;
+  /* background: red; */
+  width:100px;
 }
 
 

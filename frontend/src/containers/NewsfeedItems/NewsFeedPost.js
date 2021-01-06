@@ -412,6 +412,7 @@ class NewsfeedPost extends React.Component {
                        <Liking
                         num={5}
                         history  = {this.props.history}
+                        specifySize={"small"}
                         like_people={this.props.data.people_like} {...this.props}/>
                 </div>
               </div>

@@ -32,12 +32,17 @@ class UserAvatar extends React.Component{
     if(this.props.num){
       defaultNum=this.props.num;
     }
+    let specifySize=""
+    if(this.props.specifySize){
+      specifySize=this.props.specifySize;
+    }
     return (
       <span>
 
         <Avatar.Group
-        maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
-        maxCount={defaultNum}
+          size={specifySize}
+          maxStyle={{ color: textColor[num], backgroundColor: avatarColor[num] }}
+          maxCount={defaultNum}
         >
 
         {this.props.like_people.map((user) => (

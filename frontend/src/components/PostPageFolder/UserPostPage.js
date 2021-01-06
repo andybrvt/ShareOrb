@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Avatar, notification, Menu, Dropdown, Modal } from 'antd';
+import {  Avatar, notification, Menu, Dropdown, Modal, Divider} from 'antd';
 import { authAxios } from '../../components/util';
 import Liking from '../../containers/NewsfeedItems/Liking';
 import UserPostComments from './UserPostComments';
@@ -345,15 +345,19 @@ class UserPostPage extends React.Component{
                 <Avatar size = {45}
                 src = {userPostProfilePic}
                 className = 'socialProfileImage'/>
-                <div>
-                  <div style={{marginLeft:'10px'}} className = 'ownerHolder'>
-                    {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
-                  </div>
-                  <div style={{marginLeft:'10px'}} className = "postUsername"
-                    > @{userPostUsername}
-                  </div>
-                  <div className = "postTimeStamp"> {userPostDate} </div>
-                </div>
+
+                <span
+                  style={{color:'black', fontSize:'15px', marginLeft:'10px'}}
+                  class="headerPostText alignleft" >
+                    {userFirstName}{' '}{userLastName} <br/>
+                  <span>
+                    <span
+                      style={{fontSize:'13px'}}
+                      class="headerPostText LikeCommentHover">
+                      @{userPostUsername}
+                    </span>
+                  </span>
+                </span>
                 {
                   userPostUserId === this.props.curId ?
                   this.cellThreeDots()
@@ -366,30 +370,38 @@ class UserPostPage extends React.Component{
 
               </div>
 
-              <div className = "caption">
+              <div className = "captionUniversal">
               {caption}
               </div>
 
 
               <div className = "postLikeCommentNum">
-              {
-                peopleLikeId.includes(this.props.curId) ?
+                {
+                  peopleLikeId.includes(this.props.curId) ?
 
-                <div className = 'socialLikeCircle'>
-                <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                  <div className = 'socialLikeCircle'>
+                  <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
+                  </div>
+
+                  :
+
+                  <div className = 'socialLikeCircle'>
+                  <i class="far fa-heart" style={{marginRight:'5px'}}></i>
+                  </div>
+                }
+
+                <span className = 'postLikeCommentText' style={{color:'#595959'}}>
+                  {people_like.length}
+                  <Divider type="vertical" style={{background:'#d9d9d9'}}/>
+                  {userPostComments.length} comments
+                </span>
+                <div className = 'postLikeAvatar'>
+                  <Liking {...this.props}
+
+                    like_people={people_like}
+                    specifySize={"small"}
+                    num={5}/>
                 </div>
-
-                :
-
-                <div className = 'socialLikeCircle'>
-                <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-                </div>
-              }
-
-              <span className = 'postLikeCommentText'> {people_like.length} Likes . {userPostComments.length} comments </span>
-              <div className = 'postLikeAvatar'>
-                <Liking {...this.props} like_people={people_like}/>
-              </div>
               </div>
 
               <div className = "postLikeComment">
@@ -401,7 +413,7 @@ class UserPostPage extends React.Component{
                 className ='postLike'>
                 <i
                   style={{ marginRight:'10px', color:'red'}}
-                  class="fa fa-heart">
+                  class="fas fa-heart">
                 </i>
                 Unlike
                 </div>
@@ -413,7 +425,7 @@ class UserPostPage extends React.Component{
                 className ='postLike'>
                 <i
                   style={{ marginRight:'10px'}}
-                  class="fa fa-heart">
+                  class="far fa-heart">
                 </i>
                 Like
                 </div>
