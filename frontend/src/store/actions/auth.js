@@ -107,17 +107,21 @@ export const authLogin = (username, password) => {
   // const[id, setID] = useState(null);
   // const[username1, setUsername1] = useState('');
   return dispatch => {
+
+    console.log('hits the auth login')
+
     dispatch(authStart());
 
-
-        authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+    // http://api.shareorb.com/userprofile/suggestedFriends
+    // http://127.0.0.1:8000/userprofile/suggestedFriends
+        authAxios.get('http://api.shareorb.com/userprofile/suggestedFriends')
           .then(res=> {
             localStorage.setItem("suggestedFriends", (res.data.username));
 
          });
 
-
-        axios.post("http://127.0.0.1:8000/rest-auth/login/", {
+     // http://api.shareorb.com/rest-auth/login/
+        axios.post("http://api.shareorb.com/rest-auth/login/", {
           username: username,
           password: password
         })
@@ -138,7 +142,8 @@ export const authLogin = (username, password) => {
 
         dispatch(authSuccess(token));
         window.location.reload(true);
-        return axios.get('http://127.0.0.1:8000/userprofile/current-user')
+        // http://api.shareorb.com/userprofile/current-user
+        return axios.get('http://api.shareorb.com/userprofile/current-user')
       })
       .then(res => {
             console.log(res.data)
