@@ -182,7 +182,7 @@ AUTH_USER_MODEL = "userprofile.User"
 ACCOUNT_ADAPTER = 'userprofile.adapters.CustomUserAccountAdapter'
 SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 # AUTH_USER_MODEL = 'userprofile.User'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 # This one is for development
 MEDIA_URL = '/media/'
 

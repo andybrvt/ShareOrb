@@ -131,6 +131,7 @@ aside {
         visibility: hidden; }
         .show-sidebar aside .side-inner .logo-wrap .logo-text {
           opacity: 1;
+          font-weight: 600;
           visibility: visible; }
     aside .side-inner .search-form {
       padding-left: 20px;
