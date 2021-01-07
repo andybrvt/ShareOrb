@@ -45,6 +45,8 @@
   border-radius: 25px;
 
 }
+
+
 /* highlight like */
 .LikeCommentHover:hover {
   color: #3399FF;
@@ -115,6 +117,7 @@
 
 .boldLikeComment {
   font-weight: 225px;
+
   /* font-weight: bold; */
   /* font-we */
   /* background-color: blue; */

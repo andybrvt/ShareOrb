@@ -5,7 +5,7 @@ import ava1 from './images/avatar.jpg';
 import defaultPic from './images/default.png';
 import { connect } from "react-redux";
 import FollowList from './UserProfiles/FollowList';
-import { Modal, Avatar, Row, Col, Statistic} from 'antd';
+import { Modal, Avatar, Row, Col, Statistic, Divider} from 'antd';
 
 
 
@@ -87,7 +87,9 @@ class ProfileCardNewsFeed extends React.Component{
           <div className = 'name-NF'> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
 
         </div>
+
         <Row gutter={12} style={{marginTop:'50px', marginLeft:'5px'}}>
+          <Divider style={{marginTop:'-10px', marginBottom:'-10px', paddign:'10px'}}/>
           <Col
             offset={0.5}
             span={4}
@@ -126,6 +128,8 @@ class ProfileCardNewsFeed extends React.Component{
         onCancel = {this.onFollowerCancel}
         footer = {null}
         >
+
+
         <span className ='followWord'> Followers</span>
         <FollowList follow = {followers} />
         </Modal>

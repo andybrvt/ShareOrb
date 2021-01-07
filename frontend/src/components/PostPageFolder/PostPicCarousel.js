@@ -60,7 +60,7 @@ class PostPicCarousel extends React.Component{
   }
 
 
-  
+
 
   render(){
     console.log(this.props)
@@ -79,10 +79,13 @@ class PostPicCarousel extends React.Component{
     };
 
     return (
-      <div className = 'socialLeftRight'>
-        <LeftCircleOutlined
-        className = 'socialArrowLeft'
-        onClick = {this.previous} />
+      <div onClick = {this.previous} className = 'socialLeftRight'>
+        <div class="leftArrowPost">
+          <i style={{color:'#8c8c8c'}}
+              onClick = {this.previous}
+            class="fas fa-chevron-circle-left"></i>
+        </div>
+
         <Carousel
         arrows = {true}
         effect = 'null'
@@ -90,9 +93,18 @@ class PostPicCarousel extends React.Component{
         afterChange={this.onChange}>
           {this.renderPictures(itemList)}
         </Carousel>
-        <RightCircleOutlined
-        className = 'socialArrowRight'
-        onClick = {this.next} />
+
+        <div class="leftArrowPost">
+          <i style={{color:'#8c8c8c'}}
+            class="fas fa-chevron-circle-left"></i>
+        </div>
+
+        <div class="rightArrowPost">
+          <i style={{color:'#8c8c8c'}}
+              onClick = {this.next}
+            class="fas fa-chevron-circle-right"></i>
+        </div>
+
       </div>
     )
   }

@@ -228,6 +228,31 @@
   font-size: 15px;
 }
 
+
+
+.postCarousel{
+
+}
+
+
+.leftArrowPost{
+  float:left;
+  font-size: 30px;
+  top:45%;
+  left:1%;
+  position:absolute;
+}
+
+.rightArrowPost{
+  float:right;
+  font-size: 30px;
+  top:45%;
+  left:65%;
+  position:absolute;
+}
+
+
+
 .postLeftRight{
 
 }

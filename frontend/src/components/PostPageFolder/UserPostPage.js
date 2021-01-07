@@ -383,7 +383,7 @@ class UserPostPage extends React.Component{
                 <span className = 'postLikeCommentText' style={{color:'#595959'}}>
                   {people_like.length}  <Divider type="vertical" style={{background:'#d9d9d9'}}/> {userPostComments.length} comments </span>
                 <div className = 'postLikeAvatar'>
-                <Liking {...this.props} like_people={people_like} specifySize={27} num={10}/>
+                <Liking {...this.props} like_people={people_like} specifySize={25} num={5}/>
                 </div>
               </div>
 

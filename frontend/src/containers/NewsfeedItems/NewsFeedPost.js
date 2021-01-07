@@ -24,7 +24,7 @@ import {Avatar,
    Modal,
    notification
  } from 'antd';
-import { EditOutlined, EllipsisOutlined, AntDesignOutlined, ExclamationCircleOutlined, SettingOutlined, SearchOutlined,UserOutlined, ArrowRightOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, AntDesignOutlined, ExclamationCircleOutlined, SettingOutlined, SearchOutlined,UserOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
@@ -400,15 +400,17 @@ class NewsfeedPost extends React.Component {
                   :
                   <i class="far fa-heart" style={{marginRight:'5px'}}></i>
                 }
-                <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
-                <span class="boldLikeComment">{like_people.length} </span>
-                </span>
-                 <Divider type="vertical" style={{background:'#d9d9d9'}}/>
-                 <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
-                   <span class="boldLikeComment">
-                     {this.props.data.post_comments.length} Comments
+
+                  <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+                  <span class="boldLikeComment">{like_people.length} </span>
+                  </span>
+                   <Divider type="vertical" style={{background:'#d9d9d9'}}/>
+                   <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
+                     <span class="boldLikeComment">
+                       {this.props.data.post_comments.length} Comments
+                     </span>
                    </span>
-                 </span>
+
                  <div class='commentInPost'>
                        <Liking
                         num={10}
