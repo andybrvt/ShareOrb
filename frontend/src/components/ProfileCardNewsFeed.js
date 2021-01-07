@@ -94,10 +94,9 @@ class ProfileCardNewsFeed extends React.Component{
             onClick = {() => this.onFollowerOpen()}
             class="clickable"
           >
-           <span class="statsHeader" style={{fontSize:'18px',}}> Followers
+           <span class="statsHeader"> Followers
              <br/>
              <span
-               style={{fontSize:'18x'}}
                class="statsNewsFeed">
                {followers.length}
              </span>
@@ -111,10 +110,9 @@ class ProfileCardNewsFeed extends React.Component{
             span={4}
             class="clickable"
           >
-          <span class="statsHeader" style={{fontSize:'18px',}}>Following
+          <span class="statsHeader"> Following
             <br/>
             <span
-              style={{fontSize:'18x'}}
               class="statsNewsFeed">
               {following.length}
             </span>

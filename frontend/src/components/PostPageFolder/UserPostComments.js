@@ -115,7 +115,7 @@ class UserPostComments extends React.Component{
         />
         <div className = 'postCommentInput'>
           <Avatar
-          size = {40}
+          size = {30}
           className ='postPicInput'
           src = {'http://127.0.0.1:8000'+ this.props.profilePic}/>
           <Form>

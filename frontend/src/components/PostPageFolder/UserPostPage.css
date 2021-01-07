@@ -19,10 +19,13 @@
   position: fixed;
   background: white;
   /* height: 100; */
-  top: 45px;
-  left: 10%;
+  top: 75px;
+  left: 6.5%;
   right: 10%;
   z-index: 100;
+  width:1600px;
+  height:832px;
+
   color:black;
   font-weight: 500;
   font-family: "Segoe UI Regular";
@@ -38,8 +41,8 @@
    */
 }
 .postHolder .postPicturesCarousel{
-  width: 65%;
-  height: 100%;
+  width: 80%;
+  height: 92.5%;
   text-align: center;
   overflow: hidden;
   /* background-color: red; */
@@ -57,16 +60,17 @@
 /* This will hold all the information on the right of the modal */
 .postModalRight{
   /* background-color: blue; */
-  padding:10px;
   position: relative;
   bottom: 0px;
-  height: 100%;
+  height: 92%;
+
   width: 35%;
   border-left: 1px solid #f0f0f0;
 }
  .captionUniversal{
   position: relative;
   padding-left: 5%;
+  padding-right: 2%;
   font-size: 14px;
 }
 
@@ -98,8 +102,9 @@
 
 .cellThreeDots{
   position: relative;
-  left: 75%;
-  bottom: 30%;
+  left: 71%;
+  bottom: 10%;
+  font-size: 20px;
 }
 
 .postLikeCommentNum {
@@ -117,6 +122,8 @@
  .postLikeAvatar{
    margin-left: auto;
    order: 2;
+   margin-right: 10px;
+   margin-top: -5px;
   /* background: red; */
 }
 
@@ -154,7 +161,7 @@
 /* This part is for the comment area of the post */
 .postCommentBoxBox{
   /* height: 75.5%; */
-  width: 450px;
+  width: 500px;
   overflow:hidden;
   /* background-color: red; */
 }
@@ -216,7 +223,7 @@
   margin-left: 20px;
 }
 .postBoxInput{
-  width: 360px;
+  width: 400px;
   margin-left: 10px;
   font-size: 15px;
 }

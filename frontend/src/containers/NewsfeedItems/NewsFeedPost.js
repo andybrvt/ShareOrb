@@ -411,9 +411,9 @@ class NewsfeedPost extends React.Component {
                  </span>
                  <div class='commentInPost'>
                        <Liking
-                        num={5}
+                        num={10}
                         history  = {this.props.history}
-                        specifySize={"small"}
+                        specifySize={27}
                         like_people={this.props.data.people_like} {...this.props}/>
                 </div>
               </div>

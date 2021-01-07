@@ -231,16 +231,6 @@ class UserPostPage extends React.Component{
       <div className = "cellThreeDots">
         <Dropdown overlay={
           <Menu>
-            <Menu.Item
-            >
-                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
-                <span style={{marginLeft:'3px'}}> Write a caption</span>
-            </Menu.Item>
-            <Menu.Item
-            >
-                <i class="far fa-image"></i>
-                <span style={{marginLeft:'5px'}}>Change cover picture</span>
-            </Menu.Item>
             <Menu.Item danger
             onClick = {() => this.deletePost()}
              >
@@ -250,7 +240,7 @@ class UserPostPage extends React.Component{
           </Menu>
         }>
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          <i class="fas fa-ellipsis-v" style={{fontSize:'30px', padding:'0px', color: "gray"}}></i>
+          <i class="fas fa-ellipsis-h" style={{color: "gray"}}></i>
         </a>
         </Dropdown>
 
@@ -393,7 +383,7 @@ class UserPostPage extends React.Component{
                 <span className = 'postLikeCommentText' style={{color:'#595959'}}>
                   {people_like.length}  <Divider type="vertical" style={{background:'#d9d9d9'}}/> {userPostComments.length} comments </span>
                 <div className = 'postLikeAvatar'>
-                <Liking {...this.props} like_people={people_like} specifySize={"small"} num={5}/>
+                <Liking {...this.props} like_people={people_like} specifySize={27} num={10}/>
                 </div>
               </div>
 

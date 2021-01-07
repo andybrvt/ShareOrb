@@ -71,17 +71,6 @@
   border-radius: 20px;
 }
 
-.name-NF {
-  /* position: absolute; */
-  color:black;
-  margin-left: 100px;
-  /* background-color: red; */
-  font-weight: 500;
-  /* font-weight: bold; */
-  font-size: 20px;
-  line-height: 26px;
-  z-index: 1;
-}
 
 .top-NF{
   position: absolute;
@@ -93,12 +82,33 @@
 
 
 .statsHeader{
-  font-weight: 500;
-}
-.statsNewsFeed{
   font-weight: 450;
+  color:black;
+  font-size: 15px;
+
+}
+
+
+.name-NF {
+  /* position: absolute; */
+  color:black;
+  left:60%;
+  position:relative;
+  /* background-color: red; */
+  font-weight: 550;
+  /* font-weight: bold; */
+  font-size: 20px;
+  line-height: 26px;
+  z-index: 1;
+}
+
+
+.statsNewsFeed{
+  font-weight: 650;
   position: relative;
   left:175%;
+  color:#40a9ff;
+  font-size: 14px;
 }
 
 

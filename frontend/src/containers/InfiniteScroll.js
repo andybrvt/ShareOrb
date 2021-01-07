@@ -110,13 +110,13 @@ class InfiniteList extends React.Component {
         <div class="intro" style={{color:'black', fontSize:25, marginTop:'40px'}}>
           Welcome, {this.props.data.username}. Here's what's going on today! </div>
 
-      <hr />
+        <hr style={{marginBottom:'25px'}} />
 
-      {post.map((j,index) => {
-        return <NewsFeedPost
-          history = {this.props.data.history}
-         data = {j}  />
-      })}
+        {post.map((j,index) => {
+          return <NewsFeedPost
+            history = {this.props.data.history}
+           data = {j}  />
+        })}
 
      </div>
    );
