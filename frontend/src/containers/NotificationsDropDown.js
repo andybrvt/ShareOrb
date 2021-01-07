@@ -254,6 +254,12 @@ class NotificationsDropDown extends React.Component{
     })
   }
 
+  onCloseDropDown = () => {
+    this.setState({
+      showDropDown: false,
+    })
+  }
+
 
   renderNotifications = () => {
     // For the accept notificaiton, you want to pass in min and max date and the requested user so you can
