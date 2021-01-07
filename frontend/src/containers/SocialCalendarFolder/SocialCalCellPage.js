@@ -24,7 +24,7 @@ import DeleteSocialCellModal from './DeleteSocialCellModal';
 import ChangeCoverPicModal from './ChangeCoverPicModal';
 import { authAxios } from '../../components/util';
 
-
+const { TextArea } = Input
 
 class SocialCalCellPage extends React.Component{
 
@@ -35,7 +35,8 @@ class SocialCalCellPage extends React.Component{
     comment: "",
     captionModal: false,
     coverPicModal: false,
-    curCoverPic: 0
+    curCoverPic: 0,
+    showCaptionInput: false,
   }
 
   capitalize (str) {
@@ -620,13 +621,38 @@ class SocialCalCellPage extends React.Component{
   heightCal = (captionLen) => {
     // This function is used to calculate the height of the comments by the
     // length of the caption
+    if(captionLen < 0){
+      let base = 97
 
-    const base = 99
+      if(this.state.showCaptionInput){
+        base = 91
+      }
 
-    const final = base - (captionLen/16.6667)
-    const finalStr = final+"%"
+      return base+"%";
+    } else {
 
-    return finalStr;
+      const base = 99
+
+      const final = base - (captionLen/16.6667)
+      const finalStr = final+"%"
+
+      return finalStr;
+
+    }
+
+
+      }
+
+  showEditCaption = () => {
+    this.setState({
+      showCaptionInput: true
+    })
+  }
+
+  unShowEditCaption = () => {
+    this.setState({
+      showCaptionInput: false
+    })
   }
 
 
@@ -797,7 +823,36 @@ class SocialCalCellPage extends React.Component{
              </div>
 
              <div className = "dayCaption">
-             {dayCaption}
+             {
+               dayCaption.length > 0 ?
+
+               dayCaption
+
+               :
+
+               this.state.showCaptionInput ?
+               <div className = "textAreaHolder">
+                <TextArea
+                className = "captionTextHolder"
+                placeHolder = "Write a caption"
+                 />
+                 <div className = "penIcon">
+                 <i
+                 onClick = {() => this.unShowEditCaption()}
+                 class="fas fa-pen"></i>
+                 </div>
+               </div>
+
+               :
+
+               <div
+               onClick = {() => this.showEditCaption()}
+               className = "writeCaptionText">
+               Write a caption <i class="fas fa-pen"></i>
+
+               </div>
+
+             }
             </div>
 
 
