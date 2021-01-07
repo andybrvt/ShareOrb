@@ -94,6 +94,7 @@ class NewsfeedPost extends React.Component {
     // authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
     // message.success('Post deleted successfully!');
     Modal.confirm({
+    centered:'true',
     title: 'Confirm',
     icon: <ExclamationCircleOutlined />,
     content: 'Are you sure you want to delete this post?',
@@ -395,12 +396,12 @@ class NewsfeedPost extends React.Component {
               <div>
                 {
                   (peopleLikeId.includes(this.props.userId))?
-                  <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                  <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
                   :
-                  <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+                  <i class="far fa-heart" style={{marginRight:'5px'}}></i>
                 }
                 <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
-                <span class="boldLikeComment">{like_people.length} likes</span>
+                <span class="boldLikeComment">{like_people.length} </span>
                 </span>
                  <Divider type="vertical" style={{background:'#d9d9d9'}}/>
                  <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
@@ -570,8 +571,8 @@ class NewsfeedPost extends React.Component {
            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
              {this.capitalize(this.props.data.user.username)}
              <div>
-             <span class="fb-group-date alignleft" > Tucson, Arizona</span>
-             <span class="fb-group-date alignright" > {this.renderTimestamp(this.props.data.created_at)}</span>
+             <span class="fb-group-date" > Tucson, Arizona</span>
+             <span class="fb-group-date" > {this.renderTimestamp(this.props.data.created_at)}</span>
             </div>
         </span>
 
@@ -622,24 +623,13 @@ class NewsfeedPost extends React.Component {
         <span class="headerContainer" >
 
             <span class="g grid-13">
-              <Popover
-                 style={{width:'200px'}}
-                 content={<div>
-                   <Avatar
-                    shape="square"
-                    size="large"
-                    src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
-                    />
-                   <div> 110 followers </div>
-                 </div>}
 
-                >
                   {
                     profilePic != '' ?
                     <Avatar
                     size="large"
                     onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                    size="large"
+                    size={42}
                     style = {{
                       cursor: 'pointer',
                     }}
@@ -656,9 +646,6 @@ class NewsfeedPost extends React.Component {
                     src={defaultPic} alt="avatar" />
 
                   }
-
-
-                </Popover>
 
             </span>
               <span class="g grid-33">
@@ -703,18 +690,6 @@ class NewsfeedPost extends React.Component {
            this.props.data.user.id === this.props.userId ?
             <Dropdown overlay={
               <Menu>
-                <Menu.Item>
-                  <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                    <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-bookmark"></i>
-                    <span style={{marginLeft:'3px'}}> Save this post</span>
-                  </a>
-                </Menu.Item>
-                <Menu.Item>
-                  <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                    <i class="far fa-eye-slash"></i>
-                    <span style={{marginLeft:'5px'}}>Hide this post</span>
-                  </a>
-                </Menu.Item>
                 <Menu.Item danger onClick={this.deletePost}>
                   <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
                   <span style={{marginLeft:'10px'}}>Delete post</span>

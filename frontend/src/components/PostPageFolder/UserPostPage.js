@@ -391,16 +391,9 @@ class UserPostPage extends React.Component{
                 }
 
                 <span className = 'postLikeCommentText' style={{color:'#595959'}}>
-                  {people_like.length}
-                  <Divider type="vertical" style={{background:'#d9d9d9'}}/>
-                  {userPostComments.length} comments
-                </span>
+                  {people_like.length}  <Divider type="vertical" style={{background:'#d9d9d9'}}/> {userPostComments.length} comments </span>
                 <div className = 'postLikeAvatar'>
-                  <Liking {...this.props}
-
-                    like_people={people_like}
-                    specifySize={"small"}
-                    num={5}/>
+                <Liking {...this.props} like_people={people_like} specifySize={"small"} num={5}/>
                 </div>
               </div>
 

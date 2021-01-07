@@ -105,6 +105,8 @@
 .postLikeCommentNum {
   display: flex;
   height: 40px;
+  /* background: blue; */
+  margin-top: 10px;
 }
 .postLikeCommentNum .postLikeCommentText{
   margin-left: 30px;
@@ -112,11 +114,10 @@
   top: 8px;
   height: 20px;
 }
-.postLikeCommentNum .postLikeAvatar{
-  position: relative;;
-  left: 45%;
+ .postLikeAvatar{
+   margin-left: auto;
+   order: 2;
   /* background: red; */
-  width:100px;
 }
 
 
