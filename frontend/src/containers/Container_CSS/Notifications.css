@@ -226,6 +226,7 @@
   /* bottom: 0; */
   right: 0vw;
   top: 6vh;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 
 }
@@ -234,6 +235,7 @@
 .notificationScroll {
   overflow: auto;
   max-height: 800px;
+  background-color: white;
 
 }
 
