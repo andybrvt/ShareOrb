@@ -1,3 +1,32 @@
+/* CSS for the dropdown from scratch */
+.dropdown{
+  /* background-color: red; */
+}
+
+.dropdownClick{
+  cursor: pointer;
+}
+
+.dropdown-content{
+  display: none;
+  position: fixed;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  z-index: 1;
+}
+
+.show {
+  display:block;
+  z-index: 1;
+}
+
+
+
+
+
+
 .timeStamp {
   font-size: 12px;
   font-family: "Segoe UI Regular";
@@ -142,7 +171,7 @@
 
 .notificationListContainer{
   display: flex;
-  /* background-color: red; */
+  background-color: white;
   overflow-x: hidden;
   height: 100px;
   width: 400px;
@@ -150,7 +179,7 @@
 
 }
 .noNotificationListContainer{
-  /* background-color: red; */
+  background-color: white;
   /* overflow-x: hidden; */
   height: 100px;
   width: 400px;
@@ -180,18 +209,6 @@
   top: -5px;
   height: 60px;
   text-align: center;
-
-
-  /* border-radius: 5px 5px 0px 0px; */
-
-  /* right: 5px; */
-  /* top: */
-  /* height: 10px; */
-  /* margin-top: 10px; */
-  /* margin-left: 20px; */
-  /* border: 2px solid; */
-  /* background-color: red; */
-
 }
 
 .notificationWord {
@@ -202,9 +219,22 @@
   top: 10px;
 }
 
+
+.notificationDropDown{
+  position: fixed;
+  /* top: 0; */
+  /* bottom: 0; */
+  right: 0vw;
+  top: 6vh;
+
+
+}
+
+
 .notificationScroll {
   overflow: auto;
   max-height: 800px;
+
 }
 
 

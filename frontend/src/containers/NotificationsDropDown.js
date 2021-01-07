@@ -30,7 +30,8 @@ class NotificationsDropDown extends React.Component{
     // used for the pending picture notificaitons. Same with eventDate
     notificationId: "",
     eventDate: "",
-    selectedUserId:""
+    selectedUserId:"",
+    showDropDown: false,
   };
 
   handleMenuClick = (e) => {
@@ -245,6 +246,14 @@ class NotificationsDropDown extends React.Component{
     // notification
     console.log('decline')
   }
+
+  onOpenDropDown = () =>{
+    console.log("button click")
+    this.setState({
+      showDropDown: !this.state.showDropDown
+    })
+  }
+
 
   renderNotifications = () => {
     // For the accept notificaiton, you want to pass in min and max date and the requested user so you can
@@ -859,11 +868,7 @@ class NotificationsDropDown extends React.Component{
     return (
       <List
       // getPopupContainer={() => document.getElementById("position")}
-      style = {{
-        position: 'relative',
-        right: '-45%',
-        marginTop:'10px',
-      }}
+      className = "notificationDropDown"
       onClick = {this.handleMenuClick}>
       {/*
       <div
@@ -878,7 +883,9 @@ class NotificationsDropDown extends React.Component{
         <li
         className = "noNotificationListContainer"
         >
-        <span> You have no notifications </span>
+        <span
+        className = ""
+        > You have no notifications </span>
         </li>
         :
         notificationList}
@@ -891,30 +898,57 @@ class NotificationsDropDown extends React.Component{
 
   render() {
     console.log(this.props)
-    const menu = (
-      <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="1">Clicking me will not close the menu.</Menu.Item>
-        <Menu.Item key="2">Clicking me will not close the menu also.</Menu.Item>
-        <Menu.Item key="3">Clicking me will close the menu</Menu.Item>
-      </Menu>
-    );
+    console.log(this.state)
+
+  //   window.onclick = function(event) {
+  //   if (!event.target.matches('.dropbtn')) {
+  //     var dropdowns = document.getElementsByClassName("dropdown-content");
+  //     var i;
+  //     for (i = 0; i < dropdowns.length; i++) {
+  //       var openDropdown = dropdowns[i];
+  //       if (openDropdown.classList.contains('show')) {
+  //         openDropdown.classList.remove('show');
+  //       }
+  //     }
+  //   }
+  // }
 
     return(
       <div>
-      <Dropdown
+      {/*
+        <Dropdown
         overlay={this.renderNotifications()}
         onVisibleChange={this.handleVisibleChange}
         visible={this.state.visible}
-        placement = 'bottomRight'
+        placement = 'bottomCenter'
         trigger = {['click']}
-      >
+        >
 
         <a className="ant-dropdown-link" href="#">
-        <i style={{fontSize:'20px', marginTop:'30px', marginLeft:'75px'}} class="far fa-bell" aria-hidden="true"></i>
+
+          <i style={{fontSize:'20px', marginTop:'30px', marginLeft:'75px'}} class="far fa-bell" aria-hidden="true"></i>
 
         </a>
 
       </Dropdown>
+
+        */}
+
+      <div className = "dropdown">
+
+      <div
+      onClick = {() => this.onOpenDropDown()}
+      className = 'dropdownClick'
+      >
+        <i style={{fontSize:'20px', marginTop:'30px', marginLeft:'75px'}} class="far fa-bell" aria-hidden="true"></i>
+      </div>
+        <div className = {`dropdown-content ${this.state.showDropDown ? "show" : ""}`} >
+          {this.renderNotifications()}
+        </div>
+
+      </div>
+
+
       <PendingSocialEventModal
       visible = {this.state.showPendingEvent}
       onClose = {this.onClosePendingEvent}
