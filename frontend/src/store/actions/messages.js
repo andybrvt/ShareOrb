@@ -46,7 +46,7 @@ export const getUserChats = (username, token) => {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
-    axios.get(`http://127.0.0.1:8000/chat/?username=${username}`)
+    axios.get(`${global.API_ENDPOINT}/chat/?username=${username}`)
       .then(res => dispatch(getUserChatsSuccesss(res.data)));
   };
 };

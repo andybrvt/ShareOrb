@@ -69,7 +69,7 @@ class PendingSocialEventModal extends React.Component{
 
       } else {
         console.log('authAxios here')
-        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadEvent', {
+        authAxios.post(`${global.API_ENDPOINT}/mySocialCal/uploadEvent`, {
           title: this.props.pendingEvent.title,
           content: this.props.pendingEvent.content,
           startTime: this.props.pendingEvent.eventStart,
@@ -166,7 +166,8 @@ openDeclineNotification = (placement) => {
       user = this.props.selectedUser
     }
     if(this.props.userprofile){
-      userprofile = "http://127.0.0.1:8000"+this.props.userprofile
+      // PICTURE URL
+      userprofile = `${global.API_ENDPOINT}`+this.props.userprofile
     }
 
     return (

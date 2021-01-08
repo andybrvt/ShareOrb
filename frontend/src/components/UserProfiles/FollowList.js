@@ -30,9 +30,11 @@ class FollowList extends React.Component{
         onClick = {() => this.onFollowItemClick(item.username)}
         >
         <List.Item.Meta
+        // PICTURE URL
           avatar={
             item.profile_picture ?
-              <Avatar src= {'http://127.0.0.1:8000'+item.profile_picture} />
+
+              <Avatar src= {`${global.API_ENDPOINT}`+item.profile_picture} />
 
               :
 

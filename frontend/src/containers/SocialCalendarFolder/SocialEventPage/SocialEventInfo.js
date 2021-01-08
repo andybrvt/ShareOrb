@@ -173,7 +173,7 @@ class SocialEventInfo extends React.Component{
     var data = new FormData();
 
     data.append("backgroundImg", value)
-    authAxios.put('http://127.0.0.1:8000/mySocialCal/socialEvent/updatebackground/'+eventId,
+    authAxios.put(`${global.API_ENDPOINT}/mySocialCal/socialEvent/updatebackground/`+eventId,
     data
   ).then(res => {
     // Now you will run the redux to replace the picture
@@ -191,7 +191,6 @@ class SocialEventInfo extends React.Component{
     // event room that the event has been delete so refresh... nothign you do matters
     SocialEventPageWebSocketInstance.sendSocialEventDelete(this.props.info.id)
 
-    // authAxios.delete('http://127.0.0.1:8000/mySocialCal/socialEvent/delete/'+this.props.info.id)
     if(this.props.history){
       this.props.history.push('/current-user/')
     }
@@ -351,7 +350,8 @@ class SocialEventInfo extends React.Component{
                 </div>
               */}
               <img
-              src = {'http://127.0.0.1:8000'+eventBackgroundPic}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+eventBackgroundPic}
               className = 'eventBackgroundImg'
                />
             </div>
@@ -483,7 +483,7 @@ class SocialEventInfo extends React.Component{
                   <span>
                     <Avatar
                     style={{right:'5px'}}
-                    src = {"http://127.0.0.1:8000"+host.profile_picture}
+                    src = {`${global.API_ENDPOINT}`+host.profile_picture}
                     />
                     <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
                   </span>

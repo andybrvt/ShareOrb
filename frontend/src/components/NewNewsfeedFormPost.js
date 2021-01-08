@@ -131,7 +131,7 @@ class NewNewsfeedFormPost extends React.Component{
           }
         }
 
-        authAxios.post('http://127.0.0.1:8000/userprofile/post',
+        authAxios.post(`${global.API_ENDPOINT}/userprofile/post`,
           formData,
           {headers: {"content-type": "multipart/form-data"}}
 
@@ -158,7 +158,7 @@ class NewNewsfeedFormPost extends React.Component{
           }
         }
 
-        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+ownerId,
+        authAxios.post(`${global.API_ENDPOINT}/mySocialCal/uploadPic/`+ownerId,
           socialFormData,
           {headers: {"content-type": "multipart/form-data"}}
 
@@ -207,7 +207,8 @@ class NewNewsfeedFormPost extends React.Component{
       } if (this.props.lastName){
         lastName = this.props.lastName
       } if (this.props.profilePic){
-        profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+        // PICTURE URL
+        profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
       }
       console.log(this.state)
       console.log(this.props)

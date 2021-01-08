@@ -173,7 +173,7 @@ class PersonalProfilePostList extends React.Component{
     var data  = new FormData()
     data.append('profile_picture', values)
     // To edit information, you usually do put instead of post
-    authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+    authAxios.put(`${global.API_ENDPOINT}/userprofile/profile/update/`+userId,
       data
     ).then(res => {
       this.props.changeProfilePic(res.data.profile_picture.substring(21,))
@@ -194,7 +194,7 @@ class PersonalProfilePostList extends React.Component{
     //   "Content-type": "application/json",
     //   Authorization: `Token ${this.props.token}`
     // }
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/send/`+username)
     const notificationObject  = {
       command: 'send_friend_notification',
       actor: this.props.currentUser,
@@ -210,13 +210,11 @@ class PersonalProfilePostList extends React.Component{
 
     onClickCancel = (e) =>{
       // const username = this.props.match.params.username;
-      // authAxios.post('http://127.0.0.1:8000/friends/friend-request/cancel/'+username)
       }
 
     onClickDeleteFriend = (e) =>{
       // This is used to delete friends
         // const username = this.props.match.params.username;
-        // authAxios.post('http://127.0.0.1:8000/friends/remove-friend/'+username)
     }
 
     renderProfilePic = () => {
@@ -227,7 +225,7 @@ class PersonalProfilePostList extends React.Component{
       if(this.props.profile){
         console.log(this.props.profile.profile_picture)
         if(this.props.profile.profile_picture){
-          profileImage = 'http://127.0.0.1:8000'+this.props.profile.profile_picture
+          profileImage = `${global.API_ENDPOINT}`+this.props.profile.profile_picture
         }
       }
 

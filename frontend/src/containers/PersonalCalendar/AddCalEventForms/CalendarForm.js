@@ -50,7 +50,7 @@ const CalendarForm = (props) => {
    data.append("person", post.person);
 
 
-   fetch('http://127.0.0.1:8000/mycalendar/events/create/',{
+   fetch(`${global.API_ENDPOINT}/mycalendar/events/create/`,{
   	method: 'POST',
       headers: {
   	    Authorization: `Token ${localStorage.getItem('token')}`,

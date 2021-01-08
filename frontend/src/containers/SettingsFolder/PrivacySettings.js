@@ -78,7 +78,7 @@ class PrivacySettings extends React.Component{
   submit = (values) => {
     console.log(values)
     // Now you will send it into the backend through views
-  return authAxios.post("http://127.0.0.1:8000/rest-auth/password/change/",{
+  return authAxios.post(`${global.API_ENDPOINT}/rest-auth/password/change/`,{
       new_password1: values.newPassword,
       new_password2: values.confirmPassword,
       old_password: values.oldPassword
@@ -129,7 +129,7 @@ class PrivacySettings extends React.Component{
       console.log('hit here')
       this.openConfirmPublic()
     } else {
-      authAxios.post("http://127.0.0.1:8000/userprofile/privateChange", {
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/privateChange`, {
         privatePro: checked,
         curId: this.props.curId
       })

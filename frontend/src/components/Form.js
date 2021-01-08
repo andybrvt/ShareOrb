@@ -25,14 +25,14 @@ class ProfilePost extends React.Component {
 			}
       switch ( requestType ) {
         case 'post':
-          return axios.post('http://127.0.0.1:8000/userprofile/list/', {
+          return axios.post(`${global.API_ENDPOINT}/userprofile/list/`, {
             Caption: title,
             User: content,
           })
           .then(res => console.log(res))
           .catch(error=> console.error(error));
         case 'put':
-          return axios.put('http://127.0.0.1:8000/userprofile/list/'+articleID+'/', {
+          return axios.put(`${global.API_ENDPOINT}/userprofile/list/`+articleID+'/', {
             Caption: title,
             User: content,
           })

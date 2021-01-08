@@ -1,6 +1,5 @@
-// const instagram_url = 'http://127.0.0.1:8000/userprofile' //url for all the posts
 import axios from 'axios';
-const post_url = 'http://127.0.0.1:8000/userprofile/list/'
+const post_url = `${global.API_ENDPOINT}/userprofile/list/`
 
 // export const fetchPosts = async() =>{
 // 	return fetch(instagram_url, {})
@@ -47,7 +46,7 @@ const post_url = 'http://127.0.0.1:8000/userprofile/list/'
 	// data.append("image", post.image);
 	// data.append("image_filter", post.image_filter);
   console.log(data)
-  axios.post('http://127.0.0.1:8000/userprofile/list/', {
+  axios.post(`${global.API_ENDPOINT}/userprofile/list/`, {
     Caption: data,
   })
 	.then (res =>res.json())

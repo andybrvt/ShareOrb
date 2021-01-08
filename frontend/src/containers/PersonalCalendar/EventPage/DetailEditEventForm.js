@@ -495,7 +495,7 @@ class DetailEditEventForm extends React.Component{
           <Option value = {friendList[i].username}
           label = {
             <div style={{padding:'3px'}}>
-            <Avatar size={15} style={{marginRight:'10px', marginBottom:'5px'}} src= {'http://127.0.0.1:8000'+friendList[i].profile_picture} />
+            <Avatar size={15} style={{marginRight:'10px', marginBottom:'5px'}} src= {`${global.API_ENDPOINT}`+friendList[i].profile_picture} />
 
             <span>{this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}</span>
             </div>
@@ -504,7 +504,7 @@ class DetailEditEventForm extends React.Component{
               <Avatar
                 style={{marginRight:'10px'}}
                 size="small"
-                src={'http://127.0.0.1:8000'+friendList[i].profile_picture}/>
+                src={`${global.API_ENDPOINT}`+friendList[i].profile_picture}/>
               <span>
                 {this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}
                 <br/>

@@ -330,7 +330,8 @@ class SocialCalendar extends React.Component{
               className = 'imgCover'
               size = {250}
               shape= 'square'
-              src = {'http://127.0.0.1:8000'+toDoStuff[0].coverPic} />
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+toDoStuff[0].coverPic} />
               <span className = "bgD"> {formattedDate}</span>
               </div>
 
@@ -766,7 +767,7 @@ class SocialCalendar extends React.Component{
 
 
       if(curId === ownerId){
-        authAxios.post('http://127.0.0.1:8000/mySocialCal/uploadPic/'+ownerId,
+        authAxios.post(`${global.API_ENDPOINT}/mySocialCal/uploadPic/`+ownerId,
           formData,
           {headers: {"content-type": "multipart/form-data"}}
 
@@ -787,7 +788,7 @@ class SocialCalendar extends React.Component{
         // Since it is better to add pictures with an http call. We will add pictures
         // using an authaxios call then we will return the id of the notificaiton and then
         // take that id and then sent it into the websocket.
-        authAxios.post('http://127.0.0.1:8000/userprofile/notification/pendingPic/'+curId+'/'+ownerId,
+        authAxios.post(`${global.API_ENDPOINT}/userprofile/notification/pendingPic/`+curId+'/'+ownerId,
           formData,
           {headers: {"content-type": "multipart/form-data"}}
       )

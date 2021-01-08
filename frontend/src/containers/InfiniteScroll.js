@@ -71,7 +71,7 @@ class InfiniteList extends React.Component {
      this.setState({loading: true}, () => {
        const {offset, limit} = this.state;
        authAxios.get(
-         'http://127.0.0.1:8000/userprofile/infinite-post/?limit='+limit+'&offset='+offset
+         `${global.API_ENDPOINT}/userprofile/infinite-post/?limit=`+limit+'&offset='+offset
 
        )
        .then(res => {

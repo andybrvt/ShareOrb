@@ -81,7 +81,7 @@ class SideMenu extends React.Component {
 
 
   componentDidMount(){
-    authAxios.get('http://127.0.0.1:8000/userprofile/all-users')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/all-users`)
       .then(res=> {
         console.log(res)
         this.setState({
@@ -182,7 +182,8 @@ class SideMenu extends React.Component {
 
     console.log(this.props)
     if (this.props.profilePic){
-      profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+      // PICTURE URL
+      profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
     } if (this.props.firstName){
       firstName = this.props.firstName
     } if (this.props.lastName){

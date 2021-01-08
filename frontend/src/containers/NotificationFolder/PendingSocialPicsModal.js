@@ -59,7 +59,7 @@ class PendingSocialPicsModal extends React.Component{
         // This will be where we just put the http call because you are not
         // on your profile calendar. So you do not need to see things in real
         // time
-        authAxios.post("http://127.0.0.1:8000/mySocialCal/uploadPicture", {
+        authAxios.post(`${global.API_ENDPOINT}/mySocialCal/uploadPicture`, {
             notificationId: notificationId,
             ownerId: ownerId,
             date: date,
@@ -130,7 +130,7 @@ openDeclineNotification = (placement) => {
       user = this.props.selectedUser
     }
     if(this.props.userprofile){
-      userprofile = "http://127.0.0.1:8000"+this.props.userprofile
+      userprofile = `${global.API_ENDPOINT}`+this.props.userprofile
     }
     if(this.props.pendingPictures){
       imageList = this.props.pendingPictures

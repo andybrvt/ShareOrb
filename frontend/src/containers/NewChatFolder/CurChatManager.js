@@ -239,7 +239,7 @@ class CurChatManager extends React.Component{
           <div className = 'chatRightSideBox'>
             <Avatar
             size = {250}
-            src = {"http://127.0.0.1:8000"+profilePic}
+            src = {`${global.API_ENDPOINT}`+profilePic}
             />
 
             <div
@@ -273,7 +273,9 @@ class CurChatManager extends React.Component{
                  onClick = {() => this.onProfileClick(item.username)}
                  >
                  <List.Item.Meta
-                   avatar={<Avatar src= {'http://127.0.0.1:8000'+item.profile_picture} /> }
+                   avatar={<Avatar
+                     // PICTURE URL
+                     src= {`${global.API_ENDPOINT}`+item.profile_picture} /> }
                    title={<span>{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</span>}
                    description= {<b>@{this.capitalize(item.username)}</b>}
                  />

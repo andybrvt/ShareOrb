@@ -25,7 +25,7 @@ import { authAxios } from '../../components/util';
 
   componentWillReceiveProps(newProps){
 
-    authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user/`)
       .then(res=> {
         console.log(res.data.username)
         this.setState({

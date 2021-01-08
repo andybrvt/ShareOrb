@@ -18,7 +18,7 @@ import socialCalReducer from './store/reducers/socialCalendar';
 import {reducer as formReducer } from 'redux-form';
 import $ from 'jquery';
 import Popper from 'popper.js';
-
+import './global.js'
 
 
 

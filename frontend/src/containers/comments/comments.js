@@ -84,7 +84,7 @@ class Comments extends React.Component {
                 avatar={
 
                   <Avatar
-                  src={"http://127.0.0.1:8000"+item.commentUser.profile_picture}
+                  src={`${global.API_ENDPOINT}`+item.commentUser.profile_picture}
                   alt="Han Solo"
                   />
                 }

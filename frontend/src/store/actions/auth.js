@@ -112,24 +112,23 @@ export const authLogin = (username, password) => {
 
     dispatch(authStart());
 
+    console.log(global.API_ENDPOINT)
+
     // http://api.shareorb.com/userprofile/suggestedFriends
-    // http://127.0.0.1:8000/userprofile/suggestedFriends
-        authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+    // ${global.API_ENDPOINT}/userprofile/suggestedFriends
+        authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestedFriends`)
           .then(res=> {
             localStorage.setItem("suggestedFriends", (res.data.username));
 
          });
 
      // http://api.shareorb.com/rest-auth/login/
-        axios.post("http://127.0.0.1:8000/rest-auth/login/", {
+        axios.post(`${global.API_ENDPOINT}/rest-auth/login/`, {
           username: username,
           password: password
         })
-
-
       .then(res => {
         console.log(res.data)
-
 
         // setUsername1(res2.data.username)
         // setID(res2.data.id)
@@ -143,7 +142,7 @@ export const authLogin = (username, password) => {
         dispatch(authSuccess(token));
         window.location.reload(true);
         // http://api.shareorb.com/userprofile/current-user
-        return axios.get('http://127.0.0.1:8000/userprofile/current-user')
+        return axios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
       })
       .then(res => {
             console.log(res.data)
@@ -183,7 +182,7 @@ export const grabUserCredentials = () => {
   return dispatch => {
 
 
-    authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
       .then(res => {
         console.log(res)
         const username1 = res.data.username;
@@ -248,7 +247,7 @@ export const authSignup = (first_name, last_name, dob, bio, email, phone_number,
   return dispatch => {
     dispatch(authStart());
     axios
-      .post("http://127.0.0.1:8000/rest-auth/registration/", {
+      .post(`${global.API_ENDPOINT}/rest-auth/registration/`, {
         first_name: first_name,
         last_name: last_name,
         dob: dob,

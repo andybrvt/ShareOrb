@@ -26,7 +26,7 @@ class PickEventSyncUserProfileCard extends React.Component {
   onClickSend = (e) => {
     const username = this.props.data.username;
     console.log(this.props)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/send/`+username)
 
     this.setState({value: e.target.value});
     }
@@ -68,7 +68,8 @@ class PickEventSyncUserProfileCard extends React.Component {
 
     if(this.props.data){
       if(this.props.data.profile_picture){
-        profileImage = 'http://127.0.0.1:8000'+this.props.data.profile_picture
+        // PICTURE URL
+        profileImage = `${global.API_ENDPOINT}`+this.props.data.profile_picture
       }
     }
 

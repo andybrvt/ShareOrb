@@ -91,7 +91,6 @@ class NewsfeedPost extends React.Component {
   deletePost = () => {
 
     // console.log(this.props.data.id)
-    // authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
     // message.success('Post deleted successfully!');
     Modal.confirm({
     centered:'true',
@@ -162,7 +161,7 @@ class NewsfeedPost extends React.Component {
         <div
           onClick = {() => this.OnClickPost(postId, username)}
           class="imageContainer">
-          <a><img src={"http://127.0.0.1:8000/media/"+userPostImages[0]} alt="" /></a>
+          <a><img src={`${global.API_ENDPOINT}/media/`+userPostImages[0]} alt="" /></a>
         </div>
           )
         }
@@ -303,7 +302,7 @@ class NewsfeedPost extends React.Component {
     // but that pretty much it
 
     console.log(curPic, postOwnerId)
-    authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping", {
+    authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`, {
       clipPic: curPic,
       postOwnerId: postOwnerId,
       curId: curId
@@ -367,7 +366,7 @@ class NewsfeedPost extends React.Component {
     let userUsername = ''
 
     if (this.props.data.user.profile_picture){
-      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
     }
     if(this.props.data.id){
       postId = this.props.data.id
@@ -377,7 +376,8 @@ class NewsfeedPost extends React.Component {
     }
 
 
-    let temp="http://127.0.0.1:8000"+this.props.data.post_images;
+    // PICTURE URL
+    let temp=`${global.API_ENDPOINT}`+this.props.data.post_images;
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
 
     const success = () => {
@@ -528,7 +528,8 @@ class NewsfeedPost extends React.Component {
 
 
     if (this.props.data.user.profile_picture){
-      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+      // PROFILE URL
+      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
     }
 
     return(
@@ -602,11 +603,13 @@ class NewsfeedPost extends React.Component {
     let profilePic = ''
 
     if (this.props.data.user.profile_picture){
-      profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
+      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
     }
 
 
-    let temp="http://127.0.0.1:8000"+this.props.data.post_images;
+    let temp=`${global.API_ENDPOINT}`+this.props.data.post_images;
+
+
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
 
     const success = () => {
@@ -748,7 +751,8 @@ class NewsfeedPost extends React.Component {
     let profilePic = ''
 
     if (this.props.currentProfilePic){
-      profilePic = 'http://127.0.0.1:8000'+this.props.currentProfilePic
+      // PICTURE URL
+      profilePic = `${global.API_ENDPOINT}`+this.props.currentProfilePic
     }
 
     return(
@@ -877,7 +881,6 @@ class NewsfeedPost extends React.Component {
     }
 
 
-    // authAxios.post('http://127.0.0.1:8000/userprofile/add-like/'+this.props.data.id+'/')
 
 
     }
@@ -885,7 +888,8 @@ class NewsfeedPost extends React.Component {
     render() {
       console.log(this.props)
       console.log(this.state)
-      let temp="http://127.0.0.1:8000"+this.props.data.post_images;
+      // PICTURE URL
+      let temp=`${global.API_ENDPOINT}`+this.props.data.post_images;
       const success = () => {
         message.success('Clipped to your album!');
       };

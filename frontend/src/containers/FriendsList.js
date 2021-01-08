@@ -16,7 +16,7 @@ class FriendsList extends React.Component {
 	}
 
   componentDidMount(){
-        authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
+        authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
         .then(res=> {
           console.log(res.data)
           this.setState({
@@ -28,7 +28,7 @@ class FriendsList extends React.Component {
   componentWillReceiveProps(newProps) {
     console.log(newProps)
     if(newProps.isAuthenticated){
-      authAxios.get('http://127.0.0.1:8000/userprofile/current-user')
+      authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
         .then(res=> {
           console.log(res.data)
           this.setState({

@@ -56,7 +56,7 @@ class NotificationsDropDown extends React.Component{
     // the person that sent the request
     console.log(actor)
     console.log(recipient)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+recipient)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/accept/`+recipient)
     const acceptNotificationObject = {
 
       command: 'accept_friend_request_notification',
@@ -69,7 +69,7 @@ class NotificationsDropDown extends React.Component{
   }
 
   onDecline = (actor, recipient) => {
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+recipient)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/delete/`+recipient)
     const declineNotificationObject = {
       command: 'decline_friend_request_notification',
       actor: actor,
@@ -116,7 +116,7 @@ class NotificationsDropDown extends React.Component{
     console.log(e.stopPropagation())
     console.log(notificationId)
     this.deleteSideNotification('bottomRight')
-    authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+    authAxios.delete(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
     this.props.deleteNotification(notificationId)
   }
 
@@ -219,7 +219,7 @@ class NotificationsDropDown extends React.Component{
 
     console.log(follower, following)
     // Once you get the ids you can then send an axios call
-    authAxios.post("http://127.0.0.1:8000/userprofile/approveFollow", {
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
       follower: follower,
       following: following
     })
@@ -299,7 +299,7 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'limegreen',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -375,7 +375,8 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'darkgrey',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+          // PICTURE URL
+          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -406,7 +407,8 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'fuchsia',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+          // PICTURE URL
+          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
           >
         </Avatar>
@@ -481,7 +483,8 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'orangered',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+          // PICTURE URL
+          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
           >
         </Avatar>
@@ -512,7 +515,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
               >
             </Avatar>
             </div>
@@ -543,7 +547,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
               >
             </Avatar>
@@ -574,7 +579,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
               >
             </Avatar>
@@ -609,7 +615,8 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+                // PICTURE URL
+                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -646,7 +653,8 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+                // PICTURE URL
+                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -679,7 +687,8 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+                // PICTURE URL
+                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -712,7 +721,8 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+                // PICTURE URL
+                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -760,7 +770,8 @@ class NotificationsDropDown extends React.Component{
             <Avatar size = {45} style ={{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
               >
             </Avatar>
           </div>
@@ -799,7 +810,8 @@ class NotificationsDropDown extends React.Component{
           <Avatar size = {45} style ={{
             verticalAlign: 'middle'}}
             // icon = {<UserOutlined />}
-            src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+            // PICTURE URL
+            src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
 
             >
           </Avatar>
@@ -827,7 +839,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {"http://127.0.0.1:8000"+notifications[i].actor.profile_picture}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
               onClick = {() => this.onProfileClick(notifications[i].actor.username)}
               >
             </Avatar>

@@ -17,7 +17,7 @@ export const getUserEvents = () => {
   // since we are going to call an action in here so we need to use dispatch
   console.log('hit')
   return dispatch => {
-    authAxios.get('http://127.0.0.1:8000/mycalendar/events')
+    authAxios.get(`${global.API_ENDPOINT}/mycalendar/events`)
     .then(res => dispatch(loadEvents(res.data))
   )};
 };
@@ -42,7 +42,7 @@ export const editEvents = events => {
 
 export const deleteEvents = eventId => {
   console.log(eventId)
-  authAxios.delete('http://127.0.0.1:8000/mycalendar/events/delete/'+eventId)
+  authAxios.delete(`${global.API_ENDPOINT}/mycalendar/events/delete/`+eventId)
   return {
     type: actionTypes.DELETE_EVENT_CALENDAR,
     eventId: eventId

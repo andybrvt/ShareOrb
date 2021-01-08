@@ -34,7 +34,7 @@ componentWillReceiveProps(newProps){
 			console.log("made it to aricle detailncompoennt");
 	    const articleID = this.props.match.params.id;
 
-			axios.get('http://127.0.0.1:8000/api/newsfeed/'+articleID)
+			axios.get(`${global.API_ENDPOINT}/api/newsfeed/`+articleID)
 				.then(res=> {
 					this.setState({
 						profileInfo:res.data,
@@ -79,7 +79,7 @@ componentWillReceiveProps(newProps){
 
 			})
 			const articleID = this.props.match.params.id;
-			axios.delete('http://127.0.0.1:8000/api/profiles/'+articleID);
+			axios.delete(`${global.API_ENDPOINT}/api/profiles/`+articleID);
 		}
 
 

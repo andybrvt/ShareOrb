@@ -95,7 +95,7 @@ class EditProfileForm extends React.Component{
       var data  = new FormData()
       data.append('profile_picture', values)
       // To edit information, you usually do put instead of post
-      authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+      authAxios.put(`${global.API_ENDPOINT}/userprofile/profile/update/`+userId,
         data
       ).then(res => {
         this.props.changeProfilePic(res.data.profile_picture.substring(21,))
@@ -119,7 +119,8 @@ class EditProfileForm extends React.Component{
     let lastName=""
 
     if(this.props.profilePic){
-      profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+      // PICTURE URL
+      profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
     }
     if(this.props.first_name){
       firstName = this.props.profile.first_name
