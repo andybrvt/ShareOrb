@@ -192,13 +192,27 @@
 .socialModalRight .dayCaption .textAreaHolder .penIcon{
   margin-left: 5px;
   cursor: pointer;
+  color: lightgray;
 }
+.socialModalRight .dayCaption .textAreaHolder .penIcon:hover{
+  color: gray;
+  cursor: pointer;
+}
+
 
 .socialModalRight .dayCaption .writeCaptionText{
   color: lightgray;
   font-size: 15px;
 }
 .socialModalRight .dayCaption .writeCaptionText:hover{
+  color: gray;
+  cursor: pointer;
+}
+
+.editCaptionPen {
+  color: lightgray;
+}
+.editCaptionPen:hover{
   color: gray;
   cursor: pointer;
 }

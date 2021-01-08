@@ -632,12 +632,18 @@ class SocialCalCellPage extends React.Component{
       return base+"%";
     } else {
 
-      const base = 99
+      let base = 99
 
-      const final = base - (captionLen/16.6667)
-      const finalStr = final+"%"
+      if(this.state.showCaptionInput){
+        return "87%"
+      } else {
+        const final = base - (captionLen/16)
+        const finalStr = final+"%"
 
-      return finalStr;
+        return finalStr;
+
+      }
+
 
     }
 
@@ -645,6 +651,15 @@ class SocialCalCellPage extends React.Component{
       }
 
   showEditCaption = () => {
+      this.setState({
+        showCaptionInput: true,
+        caption: this.props.socialCalCellInfo.dayCaption
+      })
+  }
+
+  showNoCaptionEdit = () => {
+    // This is for when there are no caption
+
     this.setState({
       showCaptionInput: true
     })
@@ -671,7 +686,8 @@ class SocialCalCellPage extends React.Component{
       )
 
       this.setState({
-        caption: ""
+        caption: "",
+        showCaptionInput: false
       })
     }
   }
@@ -847,7 +863,33 @@ class SocialCalCellPage extends React.Component{
              {
                dayCaption.length > 0 ?
 
-               dayCaption
+               this.state.showCaptionInput ?
+
+               <div className = "textAreaHolder">
+                <TextArea
+                className = "captionTextHolder"
+                placeHolder = "Write a caption"
+                maxLength = {250}
+                showCount
+                onChange = {this.onCaptionChange}
+                value = {this.state.caption}
+                onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
+                 />
+                 <div className = "penIcon">
+                 <i
+                 onClick = {() => this.unShowEditCaption()}
+                 class="fas fa-pen"></i>
+                 </div>
+               </div>
+
+               :
+
+               <div>
+               {dayCaption} <span
+               className = "editCaptionPen"
+               onClick = {() => this.showEditCaption()}
+               > <i class="fas fa-pen"></i> </span>
+               </div>
 
                :
 
@@ -871,7 +913,7 @@ class SocialCalCellPage extends React.Component{
                :
 
                <div
-               onClick = {() => this.showEditCaption()}
+               onClick = {() => this.showNoCaptionEdit()}
                className = "writeCaptionText">
                Write a caption <i class="fas fa-pen"></i>
 
