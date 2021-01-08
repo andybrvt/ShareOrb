@@ -59,7 +59,8 @@ class UserPostList extends React.Component{
               <EyeOutlined className = 'eyeClick'/>
               </Link>
               <img
-              src = {'http://127.0.0.1:8000/media/'+imagesList[0]}
+              // PICTURE URL
+              src = {`${global.API_ENDPOINT}/media/`+imagesList[0]}
               className = "squarePic"
               />
             </div>
@@ -95,7 +96,8 @@ class UserPostList extends React.Component{
             <EyeOutlined className = 'eyeClick'/>
             </Link>
             <img
-            src = {'http://127.0.0.1:8000'+image}
+            // PICTURE URL
+            src = {`${global.API_ENDPOINT}`+image}
             className = "squarePic"
             />
             </div>

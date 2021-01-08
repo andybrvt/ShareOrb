@@ -66,7 +66,7 @@ class Notifications extends React.Component{
     // the person that sent the request
     console.log(actor)
     console.log(recipient)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+recipient)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/accept/`+recipient)
     const acceptNotificationObject = {
 
       command: 'accept_friend_request_notification',
@@ -79,7 +79,7 @@ class Notifications extends React.Component{
   }
 
   onDecline = (actor, recipient) => {
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+recipient)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/delete/`+recipient)
     const declineNotificationObject = {
       command: 'decline_friend_request_notification',
       actor: actor,

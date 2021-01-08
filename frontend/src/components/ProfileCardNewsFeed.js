@@ -68,10 +68,11 @@ class ProfileCardNewsFeed extends React.Component{
     } if (this.props.following){
       following = this.props.following
     } if (this.props.profilePic){
-      profilePic = 'http://127.0.0.1:8000'+this.props.profilePic
+      profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
     }
 
 
+    console.log(profilePic)
 
     return (
       <div className = "profileCard-NF">

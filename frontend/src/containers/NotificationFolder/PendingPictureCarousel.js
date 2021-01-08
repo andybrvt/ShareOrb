@@ -41,7 +41,8 @@ class PendingPictureCarousel extends React.Component{
           <div className = 'pendingPicRoll'>
             <img
             className = 'pendingSocialImg'
-            src ={'http://127.0.0.1:8000'+pictureList[i].itemImage} />
+            // PICTURE URL
+            src ={`${global.API_ENDPOINT}`+pictureList[i].itemImage} />
           </div>
         )
       }

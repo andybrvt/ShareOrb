@@ -53,7 +53,7 @@ class PickEventSyncModal extends React.Component{
     const date_min = this.props.minDate
     const date_max = this.props.maxDate
     const person = this.props.currentUser
-    authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
+    authAxios.get(`${global.API_ENDPOINT}/mycalendar/testEvents/`, {
       params:{
         friend,
         person,
@@ -87,7 +87,7 @@ class PickEventSyncModal extends React.Component{
     const person = newProps.currentUser
 
     console.log(date_min, date_max)
-    authAxios.get('http://127.0.0.1:8000/mycalendar/testEvents/', {
+    authAxios.get(`${global.API_ENDPOINT}/mycalendar/testEvents/`, {
       params:{
         friend,
         person,

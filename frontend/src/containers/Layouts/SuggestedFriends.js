@@ -22,20 +22,6 @@ class SuggestedFriends extends React.Component {
   };
 
 
-  // async componentDidMount(){
-  //
-  //   await authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
-  //     .then(res=> {
-  //       console.log(res)
-  //       console.log(res.data)
-  //       this.setState({
-  //         list:res.data,
-  //         data:res.data,
-  //      });
-  //    });
-  //  }
-
-
 
   componentDidMount() {
     console.log("made it")
@@ -48,7 +34,7 @@ class SuggestedFriends extends React.Component {
     });
 
 
-    authAxios.get('http://127.0.0.1:8000/userprofile/everyoneSuggested')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/everyoneSuggested`)
         .then(res=> {
           console.log(res)
 
@@ -61,7 +47,7 @@ class SuggestedFriends extends React.Component {
   }
 
   getData = callback => {
-    authAxios.get('http://127.0.0.1:8000/userprofile/suggestedFriends')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestedFriends`)
         .then(res=> {
 
           this.setState({

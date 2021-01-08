@@ -36,7 +36,7 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
 	}
 
   componentDidMount(){
-    authAxios.get('http://127.0.0.1:8000/userprofile/explore')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/explore`)
       .then(res=> {
         console.log(res)
         this.setState({
@@ -47,7 +47,7 @@ class AllUsersNotCurrNotCurrFriends extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if(newProps.isAuthenticated){
-      authAxios.get('http://127.0.0.1:8000/userprofile/explore')
+      authAxios.get(`${global.API_ENDPOINT}/userprofile/explore`)
         .then(res=> {
           console.log(res)
           this.setState({

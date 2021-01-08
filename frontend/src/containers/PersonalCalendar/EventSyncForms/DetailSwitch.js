@@ -226,7 +226,8 @@ class DetailSwitch extends React.Component {
     console.log(this.state)
     console.log(this.props.currentProfile)
     let friends = this.props.friends
-    let personPic1='http://127.0.0.1:8000'+this.props.currentProfile
+    // PICTURE URL
+    let personPic1=`${global.API_ENDPOINT}`+this.props.currentProfile
     let picArray=[gamingPic, notesPic, personPic1]
     console.log(friends)
     let friend = this.state.search.trim().toLowerCase()
@@ -314,7 +315,7 @@ class DetailSwitch extends React.Component {
                             <span class="containImage">
                               <img
 
-                                alt="example" src={'http://127.0.0.1:8000'+this.state.friendPerson.profile_picture} />
+                                alt="example" src={`${global.API_ENDPOINT}`+this.state.friendPerson.profile_picture} />
                             </span>
                         }
                       >
@@ -455,7 +456,9 @@ class DetailSwitch extends React.Component {
                     >
                       <List.Item.Meta
                         avatar={
-                          <Avatar src={'http://127.0.0.1:8000'+item.profile_picture} />
+                          <Avatar
+                          // PICTURE URL
+                          src={`${global.API_ENDPOINT}`+item.profile_picture} />
                         }
                         title={<a>{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
                         description={"@"+item.username}

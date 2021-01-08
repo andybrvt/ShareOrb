@@ -196,7 +196,7 @@ class PersonalProfile extends React.Component{
     var data  = new FormData()
     data.append('profile_picture', values)
     // To edit information, you usually do put instead of post
-    authAxios.put('http://127.0.0.1:8000/userprofile/profile/update/'+userId,
+    authAxios.put(`${global.API_ENDPOINT}/userprofile/profile/update/`+userId,
       data
     ).then(res => {
       this.props.changeProfilePic(res.data.profile_picture.substring(21,))
@@ -229,7 +229,8 @@ class PersonalProfile extends React.Component{
           <Avatar
             onClick = {() => this.onOpenChangeProfilePic()}
             size = {150}
-            src = {'http://127.0.0.1:8000'+profileImage} />
+            // PICTURE URL
+            src = {`${global.API_ENDPOINT}`+profileImage} />
 
 
           {
@@ -773,7 +774,8 @@ class PersonalProfile extends React.Component{
       if(this.props.profile){
         console.log(this.props.profile.profile_picture)
         if(this.props.profile.profile_picture){
-          profileImage = 'http://127.0.0.1:8000'+this.props.profile.profile_picture
+          // PICTURE URL
+          profileImage = `${global.API_ENDPOINT}`+this.props.profile.profile_picture
         }
       }
 

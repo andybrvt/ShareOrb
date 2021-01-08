@@ -137,13 +137,16 @@ class ChangeBackgroundModal extends React.Component{
             (this.props.pic.length>0)?
 
                   <img class="changeProfilePic"
-                    src={'http://127.0.0.1:8000'+this.props.pic}></img>
+                  // PICTURE URL
+                    src={`${global.API_ENDPOINT}`+this.props.pic}></img>
 
 
 
               :
               <div><Avatar style={{left:'20%', marginTop:'150px'}} size={200}
-                icon={<img class="changeAvatar" src={'http://127.0.0.1:8000'+this.props.hostPic}></img>} /></div>
+                icon={<img class="changeAvatar"
+                // PICTURE URL
+                src={`${global.API_ENDPOINT}`+this.props.hostPic}></img>} /></div>
 
 
              }

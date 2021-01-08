@@ -159,7 +159,7 @@ class UserPostPage extends React.Component{
 
     console.log(curPic, postOwnerId)
 
-    authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping",{
+    authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`,{
       clipPic: curPic,
       postOwnerId: postOwnerId,
       curId: curId
@@ -186,7 +186,7 @@ class UserPostPage extends React.Component{
   deletePost = () => {
 
     // console.log(this.props.data.id)
-    // authAxios.delete('http://127.0.0.1:8000/userprofile/post/delete/'+this.props.data.id);
+    // authAxios.delete(`${global.API_ENDPOINT}/userprofile/post/delete/`+this.props.data.id);
     // message.success('Post deleted successfully!');
     Modal.confirm({
     title: 'Confirm',
@@ -204,7 +204,7 @@ class UserPostPage extends React.Component{
     // because you first have to exit cell into the new newsfeed. So authaxios call
     // should be enough
 
-    authAxios.post("http://127.0.0.1:8000/userprofile/deletePost", {
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/deletePost`, {
       postId: this.props.post.id
     })
 
@@ -281,7 +281,7 @@ class UserPostPage extends React.Component{
       }
       if(this.props.post.user){
         userPostUsername = this.props.post.user.username
-        userPostProfilePic = 'http://127.0.0.1:8000'+this.props.post.user.profile_picture
+        userPostProfilePic = `${global.API_ENDPOINT}`+this.props.post.user.profile_picture
         userPostUserId = this.props.post.user.id
         userFirstName=this.props.post.user.first_name
         userLastName=this.props.post.user.last_name
@@ -315,7 +315,7 @@ class UserPostPage extends React.Component{
           <div className = "postPicturesCarousel">
             <img
               className = 'singlePic'
-              src = {'http://127.0.0.1:8000/media/'+userPostImages[0]}
+              src = {`${global.API_ENDPOINT}/media/`+userPostImages[0]}
              />
           </div>
 

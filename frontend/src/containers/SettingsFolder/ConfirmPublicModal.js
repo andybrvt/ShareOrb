@@ -11,7 +11,7 @@ class ConfirmPublicModal extends React.Component{
 
   onAcceptPublic = () => {
     // this function will change the account to public again
-    authAxios.post("http://127.0.0.1:8000/userprofile/privateChange", {
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/privateChange`, {
       privatePro: false,
       curId: this.props.curId
     })

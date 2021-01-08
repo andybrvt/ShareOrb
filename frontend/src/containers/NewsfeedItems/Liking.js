@@ -26,9 +26,6 @@ class Liking extends React.Component{
     let like_people = this.props.like_people
     // let profilePic = ''
     //
-    // if (this.props.data.user.profile_picture){
-    //   profilePic = 'http://127.0.0.1:8000'+this.props.data.user.profile_picture
-    // }
     //
     // console.log(profilePic)
     console.log(like_people)
@@ -37,7 +34,6 @@ class Liking extends React.Component{
     if(this.props.specifySize){
       specifySize=this.props.specifySize;
     }
-    // let temp="http://127.0.0.1:8000"+this.props.data.post_images;
     // let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
     return (
       <div class="likeCSS">
@@ -76,7 +72,8 @@ class Liking extends React.Component{
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
                              <Avatar
                               onClick = {() => this.profileDirect(like_people[0].username)}
-                              src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
+                              // PROFILE ULR
+                              src={`${global.API_ENDPOINT}`+like_people[0].profile_picture}/>
                         </Tooltip>
                       </Avatar.Group>
                     </span>
@@ -92,7 +89,8 @@ class Liking extends React.Component{
                         <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
                              <Avatar
                              onClick = {() => this.profileDirect(like_people[0].username)}
-                              src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
+                             // PICTURE URL
+                              src={`${global.API_ENDPOINT}`+like_people[0].profile_picture}/>
                         </Tooltip>
 
 
@@ -100,7 +98,8 @@ class Liking extends React.Component{
                         <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
                              <Avatar
                              onClick = {() => this.profileDirect(like_people[1].username)}
-                              src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
+                             // PICTURE URL
+                              src={`${global.API_ENDPOINT}`+like_people[1].profile_picture}/>
                         </Tooltip>
 
 
@@ -111,17 +110,20 @@ class Liking extends React.Component{
                            <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
                                  <Avatar
                                  onClick = {() => this.profileDirect(like_people[0].username)}
-                                 src={'http://127.0.0.1:8000'+like_people[0].profile_picture}/>
+                                 // PICTURE URL
+                                 src={`${global.API_ENDPOINT}`+like_people[0].profile_picture}/>
                            </Tooltip>
                            <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
                               <Avatar
                               onClick = {() => this.profileDirect(like_people[1].username)}
-                              src={'http://127.0.0.1:8000'+like_people[1].profile_picture}/>
+                              // PICTURE URL
+                              src={`${global.API_ENDPOINT}`+like_people[1].profile_picture}/>
                            </Tooltip>
                            <Tooltip placement="topLeft" title={`${like_people[2].first_name} ${like_people[2].last_name} `}>
                                 <Avatar
                                 onClick = {() => this.profileDirect(like_people[2].username)}
-                                 src={'http://127.0.0.1:8000'+like_people[2].profile_picture}/>
+                                // PICTURE URL
+                                src={`${global.API_ENDPOINT}`+like_people[2].profile_picture}/>
                             </Tooltip>
 
                         </Avatar.Group>

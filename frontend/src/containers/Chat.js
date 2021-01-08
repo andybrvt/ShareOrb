@@ -89,8 +89,8 @@ class Chat extends React.Component{
       const username = newProps.username
       if(newProps.isAuthenticated){
       axios.all([
-        authAxios.get('http://127.0.0.1:8000/userprofile/current-user'),
-        authAxios.get('http://127.0.0.1:8000/chat/?username='+username)
+        authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user`),
+        authAxios.get(`${global.API_ENDPOINT}/chat/?username=`+username)
       ])
       .then(axios.spread((get1, get2)=> {
             this.setState({

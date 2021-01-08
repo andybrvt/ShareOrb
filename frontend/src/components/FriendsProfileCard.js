@@ -5,6 +5,9 @@ import { authAxios } from '../components/util';
 
 const { Meta } = Card;
 
+// DELETE THIS SOON
+
+
 class FriendProfileCard extends React.Component {
   constructor(props) {
     super(props);
@@ -14,10 +17,8 @@ class FriendProfileCard extends React.Component {
   onClickSend = (e) => {
     // const username = this.props.data.username;
     // console.log(this.props)
-    // authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
-    // this.setState({value: e.target.value});
+  // this.setState({value: e.target.value});
     }
-  // let temp="http://127.0.0.1:8000"+props.data.image;
   // this is a card that displays the profile picture and user name
   render() {
     console.log(this.props)

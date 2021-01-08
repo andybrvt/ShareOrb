@@ -52,7 +52,7 @@ class PostUpload extends React.Component{
      }
      // data.append("image", post.image);
      // data.append("image_filter", post.image_filter);
-     fetch('http://127.0.0.1:8000/userprofile/list/', {
+     fetch(`${global.API_ENDPOINT}/userprofile/list/`, {
     	method: 'POST',
         headers: {
     	    Authorization: `Token ${localStorage.getItem('token')}`,

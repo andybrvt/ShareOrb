@@ -424,7 +424,7 @@ class EventInfo extends React.Component{
     // I guess you will have to do a put method to change it. But I mean a post
     // should be alright too
 
-    authAxios.put('http://127.0.0.1:8000/mycalendar/events/updatebackground/'+eventId,
+    authAxios.put(`${global.API_ENDPOINT}/mycalendar/events/updatebackground/`+eventId,
     data
   ).then (res => {
     // Now you will run the redux to replace the pic, you just have to change the one
@@ -573,7 +573,8 @@ class EventInfo extends React.Component{
                   </div>
                 */}
                 <img
-                src = {'http://127.0.0.1:8000'+eventBackgroundPic}
+                // PICTURE URL
+                src = {`${global.API_ENDPOINT}`+eventBackgroundPic}
                 className = 'eventBackgroundImg'
                  />
 
@@ -627,7 +628,8 @@ class EventInfo extends React.Component{
               <span>
                 <Avatar
                 style={{right:'5px'}}
-                src = {"http://127.0.0.1:8000"+host.profile_picture}
+                // PICTURE URL
+                src = {`${global.API_ENDPOINT}`+host.profile_picture}
                 />
                 <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
               </span>

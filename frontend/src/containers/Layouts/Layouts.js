@@ -38,7 +38,7 @@ class CustomLayout extends React.Component {
 
 
   async componentDidMount(){
-    await authAxios.get('http://127.0.0.1:8000/userprofile/current-user/')
+    await authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user/`)
       .then(res=> {
         this.setState({
           username: res.data.username,

@@ -79,7 +79,7 @@ class UserInfoSettings extends React.Component{
       email: values.email,
     }
 
-    authAxios.post("http://127.0.0.1:8000/userprofile/editUserInfo",{
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/editUserInfo`,{
       curId: this.props.curId,
       editProfileObj
     })

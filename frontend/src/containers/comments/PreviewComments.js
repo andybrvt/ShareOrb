@@ -71,7 +71,8 @@ class Comments extends React.Component {
 
       actions={actions}
       author={item.name}
-      avatar={'http://127.0.0.1:8000'+item.commentUser.profile_picture}
+      // PICTURE URL
+      avatar={`${global.API_ENDPOINT}`+item.commentUser.profile_picture}
       content={item.body}
       datetime={"few seconds ago"}
       />

@@ -69,7 +69,7 @@ class NewChat extends React.Component{
   constructor(props){
     super(props)
     this.initialiseChat()
-    authAxios.get('http://127.0.0.1:8000/mycalendar/avaliEvents')
+    authAxios.get(`${global.API_ENDPOINT}/mycalendar/avaliEvents`)
     .then(res => {
       this.setState({
         eventList: res.data
@@ -119,7 +119,7 @@ class NewChat extends React.Component{
     // Now you will call a authaxios call inorder to add users in
 
 
-    authAxios.post("http://127.0.0.1:8000/mycalendar/shareEvent", {
+    authAxios.post(`${global.API_ENDPOINT}/mycalendar/shareEvent`, {
       eventId: eventId,
       participants: participants,
       curId: this.props.curId
@@ -212,7 +212,7 @@ class NewChat extends React.Component{
     // date time to be used in the models
 
 
-    authAxios.post("http://127.0.0.1:8000/mycalendar/createChatEvent", {
+    authAxios.post(`${global.API_ENDPOINT}/mycalendar/createChatEvent`, {
       eventObj: eventObjNew,
       participants: participants,
       curId: this.props.curId

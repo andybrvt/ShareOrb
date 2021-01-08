@@ -105,7 +105,7 @@ class EventModal extends React.Component {
     // This will add information in to the backend but it doesnt change the props so you
     // have to find some way to change the props so this thing pops up
     if (values.person.length === 0){
-      authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+      authAxios.post(`${global.API_ENDPOINT}/mycalendar/events/create/`,{
         title: values.title,
         content: values.content,
         start_time: start_date,

@@ -133,7 +133,7 @@ class UserEventList extends React.Component{
               <div className = 'picBox'>
                 <img
                 className = "picBoxPic"
-                src = {'http://127.0.0.1:8000'+socialEventList[i].backgroundImg} />
+                src = {`${global.API_ENDPOINT}`+socialEventList[i].backgroundImg} />
               </div>
             }
 
@@ -165,7 +165,7 @@ class UserEventList extends React.Component{
                 cursor: "pointer"
               }}
               onClick = { () => this.profileDirect(socialEventList[i].host.username)}
-              src = {"http://127.0.0.1:8000"+socialEventList[i].host.profile_picture}
+              src = {`${global.API_ENDPOINT}`+socialEventList[i].host.profile_picture}
             /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
             </div>
 

@@ -31,7 +31,7 @@ class UserProfileCard extends React.Component {
   onClickSend = (e) => {
     const username = this.props.data.username;
     console.log(this.props)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/send/'+username)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/send/`+username)
 
     this.setState({value: e.target.value});
     }

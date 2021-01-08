@@ -49,7 +49,8 @@ class UserAvatar extends React.Component{
           <Tooltip placement="topLeft" title={`${user.first_name} ${user.last_name} `}>
         <Avatar
         onClick = {() => this.profileDirect(user.username)}
-        src={'http://127.0.0.1:8000'+user.profile_picture}/>
+        // PICTURE URL
+        src={`${global.API_ENDPOINT}`+user.profile_picture}/>
         </Tooltip>
       ))}
 

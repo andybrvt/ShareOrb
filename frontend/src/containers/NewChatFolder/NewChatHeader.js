@@ -137,7 +137,8 @@ class NewChatHeader extends React.Component{
           <Avatar
           className = "avaHeader"
            size={50}
-           src = {'http://127.0.0.1:8000'+profilePic}
+           // PICTURE URL
+           src = {`${global.API_ENDPOINT}`+profilePic}
             />
           <span
             className = "nameHeader"

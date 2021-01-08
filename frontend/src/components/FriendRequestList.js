@@ -19,7 +19,7 @@ class FriendRequestList extends React.Component {
   }
 
   componentDidMount(){
-    authAxios.get('http://127.0.0.1:8000/userprofile/current-user/friends')
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user/friends`)
     .then(res =>{
       console.log(res)
       this.setState({
@@ -32,14 +32,14 @@ class FriendRequestList extends React.Component {
   onClickAccept = (userID) => {
     const user = userID
     console.log(userID)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/accept/'+user)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/accept/`+user)
     }
 
 
   onClickDecline = (userID) => {
     const user = userID
     console.log(userID)
-    authAxios.post('http://127.0.0.1:8000/userprofile/friend-request/delete/'+user)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/delete/`+user)
     }
 // you do the {() => this.WHATEVER FUNCTION ()} this will allow you to add parameters into your function and
 // allow you to do a onclick as well

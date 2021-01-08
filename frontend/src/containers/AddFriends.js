@@ -45,7 +45,7 @@ class HorizontalAddChatForm extends React.Component {
       if (!err) {
         const combinedUsers = [...usernames, this.props.username]
         console.log(combinedUsers)
-        authAxios.post("http://127.0.0.1:8000/chat/create/", {
+        authAxios.post(`${global.API_ENDPOINT}/chat/create/`, {
           messages:[],
           participants: combinedUsers
         })

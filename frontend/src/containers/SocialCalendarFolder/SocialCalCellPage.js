@@ -273,7 +273,7 @@ class SocialCalCellPage extends React.Component{
 
           // Now you just do an auth axios call bc you are not on your own calendar so
           // you dont have to worry about websocket
-          authAxios.post("http://127.0.0.1:8000/mySocialCal/pictureClipping", {
+          authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`, {
             clipPic: curPic,
             postOwnerId: postOwnerId,
             curId: curId
@@ -324,7 +324,7 @@ class SocialCalCellPage extends React.Component{
         if(this.props.socialCalCellInfo.get_socialCalItems[coverPicIndex]){
           coverPic = this.props.socialCalCellInfo.get_socialCalItems[coverPicIndex].itemImage
           socialCellId = this.props.socialCalCellInfo.id
-          authAxios.post("http://127.0.0.1:8000/mySocialCal/changeCoverPic",{
+          authAxios.post(`${global.API_ENDPOINT}/mySocialCal/changeCoverPic`,{
             coverPic: coverPic,
             socialCellId: socialCellId,
           })
@@ -714,7 +714,7 @@ class SocialCalCellPage extends React.Component{
       if(this.props.socialCalCellInfo.socialCalUser){
         socialCalUsername = this.props.socialCalCellInfo.socialCalUser.username
         socialCalUserId = this.props.socialCalCellInfo.socialCalUser.id
-        socialCalProfilePic = 'http://127.0.0.1:8000'+this.props.socialCalCellInfo.socialCalUser.profile_picture
+        socialCalProfilePic = `${global.API_ENDPOINT}`+this.props.socialCalCellInfo.socialCalUser.profile_picture
 
       }
       if(this.props.socialCalCellInfo.socialCaldate){
@@ -759,7 +759,7 @@ class SocialCalCellPage extends React.Component{
                <div className = 'singlePic'>
                  <img
                  className = "backgroundPic"
-                 src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage}
+                 src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
                   />
 
                   {this.threeDotDropDown()}
@@ -768,7 +768,7 @@ class SocialCalCellPage extends React.Component{
                     <div className = "ownerHolder">
                        <Avatar
                        size = {65}
-                       src = {'http://127.0.0.1:8000' +socialCalItems[0].creator.profile_picture}
+                       src = {`${global.API_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
                        />
                        <div className = "ownerName">
                          <div>{this.getChatUserName(socialCalItems[0])} </div>
@@ -779,7 +779,7 @@ class SocialCalCellPage extends React.Component{
                    <div className = "polaroidHolder">
                     <img
                     className = "socialImages"
-                    src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage}
+                    src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
                      />
                    </div>
                   </div>
@@ -791,7 +791,7 @@ class SocialCalCellPage extends React.Component{
               {this.threeDotDropDown()}
                  <img
                  className ="picture"
-                 src = {'http://127.0.0.1:8000'+ socialCalItems[0].itemImage} />
+                 src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage} />
                </div>
 
               }
@@ -1015,7 +1015,7 @@ class SocialCalCellPage extends React.Component{
                  <Avatar
                  size = {40}
                  className ='socialPicInput'
-                 src = {'http://127.0.0.1:8000'+ this.props.curProfilePic}/>
+                 src = {`${global.API_ENDPOINT}`+ this.props.curProfilePic}/>
                  <Form className = "socialInputForm">
                    <Input
                    className= 'socialBoxInput'

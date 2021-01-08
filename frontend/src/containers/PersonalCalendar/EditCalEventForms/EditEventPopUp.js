@@ -97,7 +97,7 @@ class EditEventPopUp extends React.Component {
       let eventId = ""
 
       if(values.friends.length === 0 ){
-        authAxios.post('http://127.0.0.1:8000/mycalendar/events/create/',{
+        authAxios.post(`${global.API_ENDPOINT}/mycalendar/events/create/`,{
           title: values.title,
           content: values.content,
           start_time: start_date,

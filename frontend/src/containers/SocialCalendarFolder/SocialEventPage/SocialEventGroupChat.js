@@ -129,7 +129,8 @@ class SocialEventGroupChat extends React.Component{
                    <div>
                    <Avatar
                    className = 'eventMessageAvatar'
-                   size = {30} src = {'http://127.0.0.1:8000'+item.messageUser.profile_picture} />
+                   // PICTURE URL
+                   size = {30} src = {`${global.API_ENDPOINT}`+item.messageUser.profile_picture} />
                    </div>
                    :
 
@@ -177,7 +178,7 @@ class SocialEventGroupChat extends React.Component{
               onClick = {this.handleSubmit} type="primary"> Chat </Button>
             </div>
 
-          
+
           :
 
           <div className = 'eventEndText' >

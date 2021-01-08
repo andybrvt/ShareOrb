@@ -111,13 +111,13 @@ class PictureCarousel extends React.Component{
               {this.threeDotDropDown()}
               <img
               className = 'backgroundPic'
-              src ={'http://127.0.0.1:8000'+item.itemImage} />
+              src ={`${global.API_ENDPOINT}`+item.itemImage} />
 
               <div className = 'clipPicturesRoll'>
 
                 <div className = "ownerHolder">
                   <Avatar
-                  src = {'http://127.0.0.1:8000'+item.creator.profile_picture}
+                  src = {`${global.API_ENDPOINT}`+item.creator.profile_picture}
                   size = {65}/>
                   <div className = "ownerName">
                     <div> {this.getChatUserName(item)} </div>
@@ -127,7 +127,7 @@ class PictureCarousel extends React.Component{
                     <div className = "polaroidHolder">
                     <img
                     className = 'socialImages'
-                    src ={'http://127.0.0.1:8000'+item.itemImage} />
+                    src ={`${global.API_ENDPOINT}`+item.itemImage} />
                     </div>
               </div>
 
@@ -144,7 +144,7 @@ class PictureCarousel extends React.Component{
 
                 <img
                 className = 'socialImages'
-                src ={'http://127.0.0.1:8000'+item.itemImage} />
+                src ={`${global.API_ENDPOINT}`+item.itemImage} />
 
               </div>
             )

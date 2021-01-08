@@ -86,7 +86,7 @@ class AddNewChatContent extends React.Component{
       // and then direct to the new chat page
 
       console.log('create new chat here')
-      authAxios.post("http://127.0.0.1:8000/newChat/createChat",{
+      authAxios.post(`${global.API_ENDPOINT}/newChat/createChat`,{
         senderId: this.props.curId,
         chatParticipants: [...this.state.person, this.props.curId],
         message: this.state.message
@@ -158,7 +158,7 @@ class AddNewChatContent extends React.Component{
     })
 
     if(value.length > 0){
-      authAxios.post("http://127.0.0.1:8000/newChat/getChat",
+      authAxios.post(`${global.API_ENDPOINT}/newChat/getChat`,
         {
           person: [...value, this.props.curId]
         }
@@ -240,7 +240,9 @@ class AddNewChatContent extends React.Component{
           this.props.curId === item.messageUser.id ?
 
           <div className = "chatTextBoxRight">
-          <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
+          <Avatar size = {45}
+          // PICTURE URL
+          src = {`${global.API_ENDPOINT}`+item.messageUser.profile_picture}  />
           <div className = 'chatNameTimeRight'>
             <div className = 'chatNameRight'>
               {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
@@ -259,7 +261,9 @@ class AddNewChatContent extends React.Component{
           :
 
           <div className = "chatTextBox">
-          <Avatar size = {45} src = {'http://127.0.0.1:8000' +item.messageUser.profile_picture}  />
+          <Avatar size = {45}
+          // PICTURE URL
+          src = {`${global.API_ENDPOINT}` +item.messageUser.profile_picture}  />
           <div className = 'chatNameTime'>
             <div className = 'chatName'>
               {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}

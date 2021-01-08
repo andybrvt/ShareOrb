@@ -1175,7 +1175,7 @@ class PickEventSyncDay extends React.Component{
         NotificationWebSocketInstance.sendNotification(submitNotification)
         this.props.closePickEventSyncModal()
         // // This is just to delete the notificaiton
-        authAxios.delete('http://127.0.0.1:8000/userprofile/notifications/delete/'+notificationId)
+        authAxios.delete(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
         this.props.deleteNotification(notificationId)
         this.openNotification('bottomLeft', this.state.selectedDate)
       }
