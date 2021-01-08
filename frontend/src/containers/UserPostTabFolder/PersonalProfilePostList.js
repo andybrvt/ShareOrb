@@ -332,10 +332,13 @@ class PersonalProfilePostList extends React.Component{
       let friends = []
       let curId = ''
       let requested = []
-
+      let curRequested = []
 
       if(this.props.currentId){
         curId = this.props.currentId
+      }
+      if(this.props.curRequested){
+        curRequested = this.props.curRequested
       }
 
       if (this.props.profile){
@@ -435,7 +438,19 @@ class PersonalProfilePostList extends React.Component{
 
               <div className = 'profileButtons'>
 
-              {followers.includes(this.props.currentUser.toString()) ?
+              {curRequested.includes(profileId) ?
+
+                <div
+                style={{
+                  paddingTop: "7px",
+                  fontSize:'16px'}}
+                className = 'followButton'>
+                  Accept
+                </div>
+
+                :
+
+                followers.includes(this.props.currentUser.toString()) ?
                 <div
                 onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
                 className = 'unFollowButton'>
@@ -820,7 +835,9 @@ const mapStateToProps = state => {
       currentUser: state.auth.username,
       token: state.auth.token,
       profile: state.explore.profile,
-      curUserFriend: state.auth.friends
+      curUserFriend: state.auth.friends,
+      curRequested: state.auth.requested
+
     };
 };
 
