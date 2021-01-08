@@ -37,6 +37,7 @@ class SocialCalCellPage extends React.Component{
     coverPicModal: false,
     curCoverPic: 0,
     showCaptionInput: false,
+    caption: "",
   }
 
   capitalize (str) {
@@ -621,11 +622,11 @@ class SocialCalCellPage extends React.Component{
   heightCal = (captionLen) => {
     // This function is used to calculate the height of the comments by the
     // length of the caption
-    if(captionLen < 0){
+    if(captionLen === 0){
       let base = 97
 
       if(this.state.showCaptionInput){
-        base = 91
+        base = 90
       }
 
       return base+"%";
@@ -653,6 +654,26 @@ class SocialCalCellPage extends React.Component{
     this.setState({
       showCaptionInput: false
     })
+  }
+
+  onCaptionChange = e => {
+    this.setState({
+      caption: e.target.value
+    })
+  }
+
+  onCaptionSubmit = (e, curDate) => {
+    if(this.state.caption !== ""){
+      SocialCalCellPageWebSocketInstance.sendSocialDayCaption(
+        curDate,
+        this.props.curId,
+        this.state.caption
+      )
+
+      this.setState({
+        caption: ""
+      })
+    }
   }
 
 
@@ -835,6 +856,10 @@ class SocialCalCellPage extends React.Component{
                 <TextArea
                 className = "captionTextHolder"
                 placeHolder = "Write a caption"
+                maxLength = {250}
+                showCount
+                onChange = {this.onCaptionChange}
+                onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
                  />
                  <div className = "penIcon">
                  <i

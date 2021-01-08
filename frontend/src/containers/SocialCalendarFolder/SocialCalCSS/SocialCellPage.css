@@ -186,8 +186,7 @@
 }
 
 .socialModalRight .dayCaption .textAreaHolder .captionTextHolder{
-  rows: 1;
-  /* width: 10px; */
+  width: 100%;
 }
 
 .socialModalRight .dayCaption .textAreaHolder .penIcon{
