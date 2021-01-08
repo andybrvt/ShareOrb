@@ -55,7 +55,7 @@ class UserPostComments extends React.Component{
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
     console.log(timeDiff)
     if (timeDiff < 1 ) {
-      prefix = `Just now`;
+      prefix = `now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
       prefix = `${timeDiff}m`;
     }else if (timeDiff < 24*60 && timeDiff > 60) {
@@ -100,7 +100,7 @@ class UserPostComments extends React.Component{
 
                         <span
                            class="headerPostText LikeCommentHover"
-                           style={{marginLeft:'7.5px', fontSize:'11px'}}
+                           style={{marginLeft:'7.5px', fontSize:'12px'}}
                            >{"@"+item.commentUser.username}
                         </span>
                   </div>
@@ -118,7 +118,8 @@ class UserPostComments extends React.Component{
                 <div className = 'postCommentText'>
                   {item.body}
                 </div>
-
+                <i style={{}} class="far fa-thumbs-up"></i>
+                Like 1
               </div>
           )}
         />

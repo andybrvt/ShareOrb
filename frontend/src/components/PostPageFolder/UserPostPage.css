@@ -161,11 +161,12 @@
 /* This part is for the comment area of the post */
 .postCommentBoxBox{
   /* height: 75.5%; */
+
   margin-top: 10px;
   width: 500px;
   overflow:hidden;
-
   /* background-color: red; */
+  max-height: 560px;
 }
 /*
 .postCommentBoxBox.hasCaption{
@@ -251,7 +252,7 @@
 .leftArrowPost{
   float:left;
   font-size: 30px;
-  top:45%;
+  top:47%;
   left:1%;
   position:absolute;
 }
@@ -259,7 +260,7 @@
 .rightArrowPost{
   float:right;
   font-size: 30px;
-  top:45%;
+  top:47%;
   left:65%;
   position:absolute;
 }
