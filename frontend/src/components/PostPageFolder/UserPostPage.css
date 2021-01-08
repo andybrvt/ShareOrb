@@ -161,17 +161,25 @@
 /* This part is for the comment area of the post */
 .postCommentBoxBox{
   /* height: 75.5%; */
+  margin-top: 10px;
   width: 500px;
   overflow:hidden;
+
   /* background-color: red; */
 }
 /*
 .postCommentBoxBox.hasCaption{
   height: 65%;
 } */
+
+.middleDot{
+  position:relative;
+
+}
+
 .postCommentBox{
   height: 100%;
-  width: 460px;
+  width: 500px;
   padding-left: 20px;
   overflow:auto;
 }
@@ -180,11 +188,13 @@
   /* background-color: red; */
 
   margin-top: 10px;
-  padding: 5px;
+  height:50px;
+
 }
 .postCommentBox .postCommentItem .postCommentNameTag{
   /* background-color: red; */
   display: flex;
+  line-height: 80%;
 }
 .postCommentBox .postCommentItem .postCommentNameTag .postCommentName{
   display: flex;
@@ -193,26 +203,29 @@
 
 .postCommentUsername{
   font-weight: 400;
+  font-size: 13px;
+
 }
 
 .postCommentDate{
   /* background-color: red; */
+  color:#bfbfbf;
   position: absolute;
-  left: 80%;
+  left: 90%;
   /* top: 10%; */
   height: 20px;
-  font-size: 10px;
+  font-size: 12px;
   padding-top: 5px;
-  margin-left: 4px;
+
 }
 
 .postCommentText{
   /* background-color: red; */
   position: relative;
-  width: 300px;
+  width: 340px;
   /* top: 50%; */
-  left: 12%;
-  top: -20px;
+  left: 9.65%;
+  top: -15px;
 }
 .postCommentBox .postCommentInput{
   /* background-color: red; */

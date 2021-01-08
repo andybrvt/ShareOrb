@@ -57,11 +57,11 @@ class UserPostComments extends React.Component{
     if (timeDiff < 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
-      prefix = `${timeDiff} minutes ago`;
+      prefix = `${timeDiff}m`;
     }else if (timeDiff < 24*60 && timeDiff > 60) {
-      prefix = `${Math.round(timeDiff/60)} hours ago`;
+      prefix = `${Math.round(timeDiff/60)}h`;
     } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
-      prefix = `${Math.round(timeDiff/(60*24))} days ago`;
+      prefix = `${Math.round(timeDiff/(60*24))}d`;
     } else {
         prefix = `${dateFns.format(new Date(timestamp), "MMMM d, yyyy")}`;
     }
@@ -92,23 +92,32 @@ class UserPostComments extends React.Component{
 
               <div className = 'postCommentItem'>
 
-              <div className = 'postCommentNameTag'>
-                <Avatar size = {40} src = {'http://127.0.0.1:8000'+item.commentUser.profile_picture} />
-                <div className = 'postCommentName'>
-                  <div className = 'postCommentUsername'>
-                  <b>{this.capitalize(item.commentUser.first_name)} {this.capitalize(item.commentUser.last_name)} </b>
+                <div className = 'postCommentNameTag'>
+                  <Avatar size = {35} src = {'http://127.0.0.1:8000'+item.commentUser.profile_picture} />
+                  <div className = 'postCommentName'>
+                    <div className = 'postCommentUsername'>
+                      <b>{this.capitalize(item.commentUser.first_name)} {this.capitalize(item.commentUser.last_name)} </b>
+
+                        <span
+                           class="headerPostText LikeCommentHover"
+                           style={{marginLeft:'7.5px', fontSize:'11px'}}
+                           >{"@"+item.commentUser.username}
+                        </span>
                   </div>
-                  <div className = 'postCommentDate'>
-                  {this.renderTimestamp(new Date(item.created_on))}
-                  </div>
+                    <div className = 'postCommentDate'>
+                      {/*
+                      <i class="middleDot" style={{fontSize:'3px', marginLeft:'-10px', color:'#8c8c8c', marginTop:'5px', position:'absolute'}} class="fas fa-circle"></i>
+                      */}
+                      {this.renderTimestamp(new Date(item.created_on))}
+                    </div>
 
 
+                  </div>
                 </div>
-              </div>
 
-              <div className = 'postCommentText'>
-              {item.body}
-              </div>
+                <div className = 'postCommentText'>
+                  {item.body}
+                </div>
 
               </div>
           )}
