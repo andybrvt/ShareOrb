@@ -368,6 +368,7 @@ class PersonalProfile extends React.Component{
       let curId = ''
       let bio=''
       let requested = []
+      let curRequested = []
 
       // userObj will be the object used tos end into teh auth in order to update
       // the follower and following
@@ -375,6 +376,9 @@ class PersonalProfile extends React.Component{
 
       if(this.props.currentId){
         curId = this.props.currentId
+      }
+      if(this.props.curRequested){
+        curRequested = this.props.curRequested
       }
 
       if (this.props.profile){
@@ -480,10 +484,25 @@ class PersonalProfile extends React.Component{
             :
 
             <div className = 'profileButtons'>
+            {  curRequested.includes(profileId) ?
 
-            {followers.includes(this.props.currentUser.toString()) ?
               <div
-              style={{fontSize:'16px'}}
+              style={{
+                paddingTop: "7px",
+                fontSize:'16px'}}
+              className = 'followButton'>
+                Accept
+              </div>
+
+              :
+
+
+
+              followers.includes(this.props.currentUser.toString()) ?
+              <div
+              style={{
+                paddingTop: "7px",
+                ontSize:'16px'}}
               onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
               className = 'followButton'>
                 Unfollow
@@ -721,7 +740,6 @@ class PersonalProfile extends React.Component{
       let profileImage = null
       let privatePro = true
       let requested = []
-
       // follower list will used mostly for private events
       let followerList = []
 
@@ -877,7 +895,7 @@ const mapStateToProps = state => {
       token: state.auth.token,
       profile: state.explore.profile,
       curUserFriend: state.auth.friends,
-
+      curRequested: state.auth.requested
     };
 };
 
