@@ -172,9 +172,19 @@ class NewsfeedPost extends React.Component {
             <div
               onClick = {() => this.OnClickPost(postId, username)}
               className = "postPicCarouselNews">
+              <div class="leftArrowPost">
+                <i style={{color:'#8c8c8c'}}
+                    onClick = {this.previous}
+                  class="fas fa-chevron-circle-left"></i>
+              </div>
                <PostPicCarousel
                picIndexChange = {this.onCurPhotoChange}
                items = {userPostImages} />
+               <div class="rightArrowPost">
+                 <i style={{color:'#8c8c8c'}}
+                     onClick = {this.next}
+                   class="fas fa-chevron-circle-right"></i>
+               </div>
             </div>
           )
 

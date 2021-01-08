@@ -320,7 +320,7 @@ class UserPostPage extends React.Component{
           </div>
 
           :
-
+          
           <div className = "postPicturesCarousel">
              <PostPicCarousel
              picIndexChange = {this.onCurPhotoChange}

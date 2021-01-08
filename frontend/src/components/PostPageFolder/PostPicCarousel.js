@@ -80,13 +80,10 @@ class PostPicCarousel extends React.Component{
 
     return (
       <div onClick = {this.previous} className = 'socialLeftRight'>
-        <div class="leftArrowPost">
-          <i style={{color:'#8c8c8c'}}
-              onClick = {this.previous}
-            class="fas fa-chevron-circle-left"></i>
-        </div>
+
 
         <Carousel
+          autoplay
         arrows = {true}
         effect = 'null'
         ref = {node => {this.carousel = node}}
@@ -95,12 +92,12 @@ class PostPicCarousel extends React.Component{
         </Carousel>
 
         <div class="leftArrowPost">
-          <i style={{color:'#8c8c8c'}}
+          <i style={{color:'#d9d9d9'}}
             class="fas fa-chevron-circle-left"></i>
         </div>
 
         <div class="rightArrowPost">
-          <i style={{color:'#8c8c8c'}}
+          <i style={{color:'#d9d9d9'}}
               onClick = {this.next}
             class="fas fa-chevron-circle-right"></i>
         </div>
