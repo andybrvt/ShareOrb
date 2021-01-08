@@ -858,69 +858,81 @@ class SocialCalCellPage extends React.Component{
              }
 
              </div>
-
-             <div className = "dayCaption">
              {
-               dayCaption.length > 0 ?
+               this.props.curId === socialCalUserId ?
 
-               this.state.showCaptionInput ?
+               <div className = "dayCaption">
+               {
+                 dayCaption.length > 0 ?
 
-               <div className = "textAreaHolder">
-                <TextArea
-                className = "captionTextHolder"
-                placeHolder = "Write a caption"
-                maxLength = {250}
-                showCount
-                onChange = {this.onCaptionChange}
-                value = {this.state.caption}
-                onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
-                 />
-                 <div className = "penIcon">
-                 <i
-                 onClick = {() => this.unShowEditCaption()}
-                 class="fas fa-pen"></i>
+                 this.state.showCaptionInput ?
+
+                 <div className = "textAreaHolder">
+                  <TextArea
+                  className = "captionTextHolder"
+                  placeHolder = "Write a caption"
+                  maxLength = {250}
+                  showCount
+                  onChange = {this.onCaptionChange}
+                  value = {this.state.caption}
+                  onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
+                   />
+                   <div className = "penIcon">
+                   <i
+                   onClick = {() => this.unShowEditCaption()}
+                   class="fas fa-pen"></i>
+                   </div>
                  </div>
-               </div>
 
-               :
+                 :
 
-               <div>
-               {dayCaption} <span
-               className = "editCaptionPen"
-               onClick = {() => this.showEditCaption()}
-               > <i class="fas fa-pen"></i> </span>
-               </div>
-
-               :
-
-               this.state.showCaptionInput ?
-               <div className = "textAreaHolder">
-                <TextArea
-                className = "captionTextHolder"
-                placeHolder = "Write a caption"
-                maxLength = {250}
-                showCount
-                onChange = {this.onCaptionChange}
-                onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
-                 />
-                 <div className = "penIcon">
-                 <i
-                 onClick = {() => this.unShowEditCaption()}
-                 class="fas fa-pen"></i>
+                 <div>
+                 {dayCaption} <span
+                 className = "editCaptionPen"
+                 onClick = {() => this.showEditCaption()}
+                 > <i class="fas fa-pen"></i> </span>
                  </div>
-               </div>
 
-               :
+                 :
 
-               <div
-               onClick = {() => this.showNoCaptionEdit()}
-               className = "writeCaptionText">
-               Write a caption <i class="fas fa-pen"></i>
+                 this.state.showCaptionInput ?
+                 <div className = "textAreaHolder">
+                  <TextArea
+                  className = "captionTextHolder"
+                  placeHolder = "Write a caption"
+                  maxLength = {250}
+                  showCount
+                  onChange = {this.onCaptionChange}
+                  onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
+                   />
+                   <div className = "penIcon">
+                   <i
+                   onClick = {() => this.unShowEditCaption()}
+                   class="fas fa-pen"></i>
+                   </div>
+                 </div>
 
-               </div>
+                 :
+
+                 <div
+                 onClick = {() => this.showNoCaptionEdit()}
+                 className = "writeCaptionText">
+                 Write a caption <i class="fas fa-pen"></i>
+
+                 </div>
+
+               }
+              </div>
+
+
+              :
+
+              <div className = "dayCaption">
+              {dayCaption}
+             </div>
+
 
              }
-            </div>
 
 
              <div className = 'socialLikeCommentNum'>
