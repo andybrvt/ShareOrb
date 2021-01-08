@@ -332,14 +332,14 @@ class UserPostPage extends React.Component{
 
           <div className = "postModalRight">
               <div className = "postNameTag">
-                <Avatar size = {45}
+                <Avatar size = {42.5}
                 src = {userPostProfilePic}
                 className = 'socialProfileImage'/>
 
                 <span
                   style={{color:'black', fontSize:'15px', marginLeft:'10px'}}
                   class="headerPostText alignleft" >
-                    {userFirstName}{' '}{userLastName} <br/>
+                    <b>{userFirstName}{' '}{userLastName}</b> <br/>
                   <span>
                     <span
                       style={{fontSize:'13px'}}
@@ -383,11 +383,11 @@ class UserPostPage extends React.Component{
                 <span className = 'postLikeCommentText' style={{color:'#595959'}}>
                   {people_like.length}  <Divider type="vertical" style={{background:'#d9d9d9'}}/> {userPostComments.length} comments </span>
                 <div className = 'postLikeAvatar'>
-                <Liking {...this.props} like_people={people_like} specifySize={25} num={5}/>
+                <Liking {...this.props} like_people={people_like} specifySize={25} num={10}/>
                 </div>
               </div>
 
-              <div className = "postLikeComment">
+              <div style={{color:'#595959'}} className = "postLikeComment">
               {
                 peopleLikeId.includes(this.props.curId) ?
 
