@@ -482,8 +482,9 @@ class PersonalProfile extends React.Component{
 
             {followers.includes(this.props.currentUser.toString()) ?
               <div
+              style={{fontSize:'16px'}}
               onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-              className = 'unFollowButton'>
+              className = 'followButton'>
                 Unfollow
               </div>
 

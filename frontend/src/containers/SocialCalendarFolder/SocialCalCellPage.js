@@ -474,18 +474,6 @@ class SocialCalCellPage extends React.Component{
     })
   }
 
-  openCaptionModal = () => {
-    // This function will open the caption modal
-    this.setState({
-      captionModal: true
-    })
-  }
-
-  closeCaptionModal = () => {
-    this.setState({
-      captionModal: false
-    })
-  }
 
   openDeleteCellModal = () => {
     // open the delete cell modal
@@ -590,12 +578,6 @@ class SocialCalCellPage extends React.Component{
       <div className = "cellThreeDots">
         <Dropdown overlay={
           <Menu>
-            <Menu.Item
-            onClick = {this.openCaptionModal}
-            >
-                <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-edit"></i>
-                <span style={{marginLeft:'3px'}}> Write a caption</span>
-            </Menu.Item>
             <Menu.Item
             onClick = {this.openChangeCoverModal}
             >
