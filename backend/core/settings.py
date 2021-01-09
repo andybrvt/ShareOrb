@@ -23,13 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 
 
-ALLOWED_HOSTS = ['api.shareorb.com','shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com']
+# ALLOWED_HOSTS = ['api.shareorb.com','shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com']
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -100,7 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-WSGIPassAuthorization = 'On'
+# WSGIPassAuthorization On
 
 
 
@@ -110,30 +110,30 @@ WSGIPassAuthorization = 'On'
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
 # if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ebdb',
-        'USER': 'shareorbDB',
-        'PASSWORD': 'Pingandy123',
-        'HOST': 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
-        'PORT': '3306',
-    }
-}
-# else:
 # DATABASES = {
 #     'default': {
-#                 # 'ENGINE': 'django.db.backends.sqlite3',
-#                 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'test',
-#         'USER': 'root',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-#         'PORT': '',
-#     },
+#         'NAME': 'ebdb',
+#         'USER': 'shareorbDB',
+#         'PASSWORD': 'Pingandy123',
+#         'HOST': 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
 # }
+# else:
+DATABASES = {
+    'default': {
+                # 'ENGINE': 'django.db.backends.sqlite3',
+                # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+        'PORT': '',
+    },
+}
 
 
 # AWS EB Settings
@@ -189,9 +189,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 MEDIA_URL = '/media/'
 
 # Use this one if you want to deploy
-AWS_STORAGE_BUCKET_NAME = 'shareorb'
-MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# AWS_STORAGE_BUCKET_NAME = 'shareorb'
+# MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
+# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
@@ -200,7 +200,7 @@ REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.TokenAuthentication',
              'rest_framework.authentication.SessionAuthentication',
-             'rest_framework.authentication.BasicAuthentication',
+             # 'rest_framework.authentication.BasicAuthentication',
 
         ),
     }

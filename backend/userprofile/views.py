@@ -135,6 +135,8 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
+    print('current user')
+    print(request)
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
 
