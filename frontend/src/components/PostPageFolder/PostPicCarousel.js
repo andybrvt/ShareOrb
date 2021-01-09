@@ -43,7 +43,7 @@ class PostPicCarousel extends React.Component{
             <div className = 'picturesRoll'>
               <img
               className = 'socialImages'
-              // PICTURE URL
+              // PICTUREXXXURL
               src ={`${global.API_ENDPOINT}/media/`+item} />
             </div>
           )

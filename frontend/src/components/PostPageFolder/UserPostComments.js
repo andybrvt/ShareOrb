@@ -127,8 +127,7 @@ class UserPostComments extends React.Component{
           <Avatar
           size = {30}
           className ='postPicInput'
-          // PICTURE URL
-          src = {`${global.API_ENDPOINT}`+ this.props.profilePic}/>
+          src = {this.props.profilePic}/>
           <Form>
             <Input
             className= 'postBoxInput'

@@ -68,8 +68,8 @@ class PickEventSyncUserProfileCard extends React.Component {
 
     if(this.props.data){
       if(this.props.data.profile_picture){
-        // PICTURE URL
-        profileImage = `${global.API_ENDPOINT}`+this.props.data.profile_picture
+        
+        profileImage = this.props.data.profile_picture
       }
     }
 

@@ -93,7 +93,7 @@ class PersonalProfile extends React.Component{
 
 
   componentDidMount(){
-    // this.initialiseProfile()
+    this.initialiseProfile()
 
   }
 
@@ -102,28 +102,28 @@ class PersonalProfile extends React.Component{
     console.log('hit here')
     //This will reconnect to eh proper profile if you were to change the profiles
 
-    // if(this.props.parameter.username !== newProps.parameter.username){
-    //
-    //   this.props.closeProfile()
-    //   ExploreWebSocketInstance.disconnect();
-    //   this.waitForSocketConnection(() => {
-    //     ExploreWebSocketInstance.fetchProfile(
-    //       newProps.parameter.username
-    //     )
-    //   })
-    //   ExploreWebSocketInstance.connect(newProps.parameter.username)
-    // }
-    //
-    // if(this.props.location.pathname !== newProps.location.pathname){
-    //   //To refetch the information
-    //   this.waitForSocketConnection(() => {
-    //     ExploreWebSocketInstance.fetchProfile(
-    //       newProps.parameter.username
-    //     )
-    //   })
-    //   // ExploreWebSocketInstance.connect(newProps.parameter.username)
-    //
-    // }
+    if(this.props.parameter.username !== newProps.parameter.username){
+
+      this.props.closeProfile()
+      ExploreWebSocketInstance.disconnect();
+      this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          newProps.parameter.username
+        )
+      })
+      ExploreWebSocketInstance.connect(newProps.parameter.username)
+    }
+
+    if(this.props.location.pathname !== newProps.location.pathname){
+      //To refetch the information
+      this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          newProps.parameter.username
+        )
+      })
+      // ExploreWebSocketInstance.connect(newProps.parameter.username)
+
+    }
 
   }
 
@@ -132,7 +132,7 @@ class PersonalProfile extends React.Component{
     // avoid any connection conflicts
     //Similar to the event page channel, you will have to remove the recursion from
     // the disconnect in the websocket
-    // ExploreWebSocketInstance.disconnect();
+    ExploreWebSocketInstance.disconnect();
   }
 
   capitalize (str) {
@@ -231,8 +231,8 @@ class PersonalProfile extends React.Component{
           <Avatar
             onClick = {() => this.onOpenChangeProfilePic()}
             size = {150}
-            // PICTURE URL
-            src = {`${global.API_ENDPOINT}`+profileImage} />
+
+            src = {profileImage} />
 
 
           {
@@ -818,8 +818,7 @@ class PersonalProfile extends React.Component{
       if(this.props.profile){
         console.log(this.props.profile.profile_picture)
         if(this.props.profile.profile_picture){
-          // PICTURE URL
-          profileImage = `${global.API_ENDPOINT}`+this.props.profile.profile_picture
+          profileImage = this.props.profile.profile_picture
         }
       }
 

@@ -119,8 +119,7 @@ class EditProfileForm extends React.Component{
     let lastName=""
 
     if(this.props.profilePic){
-      // PICTURE URL
-      profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
+      profilePic = this.props.profilePic
     }
     if(this.props.first_name){
       firstName = this.props.profile.first_name

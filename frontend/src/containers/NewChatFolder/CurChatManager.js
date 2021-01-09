@@ -274,8 +274,7 @@ class CurChatManager extends React.Component{
                  >
                  <List.Item.Meta
                    avatar={<Avatar
-                     // PICTURE URL
-                     src= {`${global.API_ENDPOINT}`+item.profile_picture} /> }
+                     src= {item.profile_picture} /> }
                    title={<span>{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</span>}
                    description= {<b>@{this.capitalize(item.username)}</b>}
                  />

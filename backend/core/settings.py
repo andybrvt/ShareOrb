@@ -185,8 +185,8 @@ ACCOUNT_ADAPTER = 'userprofile.adapters.CustomUserAccountAdapter'
 SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
-# This one is for development
-MEDIA_URL = '/media/'
+# This one is for development, and this is what ill show up for the image link
+MEDIA_URL = 'http://127.0.0.1:8000/media/'
 
 # Use this one if you want to deploy
 # AWS_STORAGE_BUCKET_NAME = 'shareorb'

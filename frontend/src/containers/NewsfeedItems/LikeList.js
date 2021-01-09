@@ -39,7 +39,7 @@ class LikeList extends React.Component{
 
     if (this.props.data.user.profile_picture){
       console.log(this.props.data.user.profile_picture)
-      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
+      profilePic = this.props.data.user.profile_picture
     }
     return (
 
@@ -57,12 +57,10 @@ class LikeList extends React.Component{
         onClick = {this.onProfileClick}
         >
         <List.Item.Meta
-        // PICTURE URL
           avatar={
             item.profile_picture ?
               <Avatar
-              // PICTURE URL
-              src= {`${global.API_ENDPOINT}`+item.profile_picture} />
+              src= {item.profile_picture} />
 
               :
 

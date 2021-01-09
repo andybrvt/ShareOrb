@@ -573,8 +573,7 @@ class EventInfo extends React.Component{
                   </div>
                 */}
                 <img
-                // PICTURE URL
-                src = {`${global.API_ENDPOINT}`+eventBackgroundPic}
+                src = {eventBackgroundPic}
                 className = 'eventBackgroundImg'
                  />
 
@@ -628,8 +627,8 @@ class EventInfo extends React.Component{
               <span>
                 <Avatar
                 style={{right:'5px'}}
-                // PICTURE URL
-                src = {`${global.API_ENDPOINT}`+host.profile_picture}
+
+                src = {host.profile_picture}
                 />
                 <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
               </span>

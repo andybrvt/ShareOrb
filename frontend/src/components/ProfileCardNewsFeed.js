@@ -74,6 +74,7 @@ class ProfileCardNewsFeed extends React.Component{
 
 
     console.log(profilePic)
+    console.log(global.API_ENDPOINT)
 
     return (
       <div className = "profileCard-NF">

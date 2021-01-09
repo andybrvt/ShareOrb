@@ -236,7 +236,7 @@ class NotificationsDropDown extends React.Component{
     // a websocket call
 
 
-    
+
 
     // Now you will send a new notification to the other user
 
@@ -376,8 +376,8 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'darkgrey',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          // PICTURE URL
-          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+          src = {notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -408,8 +408,8 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'fuchsia',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          // PICTURE URL
-          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+          src = {notifications[i].actor.profile_picture}
 
           >
         </Avatar>
@@ -484,8 +484,8 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'orangered',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          // PICTURE URL
-          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+          src = {notifications[i].actor.profile_picture}
 
           >
         </Avatar>
@@ -516,8 +516,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+              src = {notifications[i].actor.profile_picture}
               >
             </Avatar>
             </div>
@@ -548,8 +548,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+              src = {notifications[i].actor.profile_picture}
 
               >
             </Avatar>
@@ -580,8 +580,8 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+              src = {notifications[i].actor.profile_picture}
 
               >
             </Avatar>
@@ -616,8 +616,8 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                // PICTURE URL
-                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+                src = {notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -654,8 +654,8 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                // PICTURE URL
-                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+                src = {notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -688,8 +688,7 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                // PICTURE URL
-                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+                src = {notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -722,8 +721,7 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                // PICTURE URL
-                src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+                src = {notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -771,8 +769,7 @@ class NotificationsDropDown extends React.Component{
             <Avatar size = {45} style ={{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+              src = {notifications[i].actor.profile_picture}
               >
             </Avatar>
           </div>
@@ -811,8 +808,8 @@ class NotificationsDropDown extends React.Component{
           <Avatar size = {45} style ={{
             verticalAlign: 'middle'}}
             // icon = {<UserOutlined />}
-            // PICTURE URL
-            src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+            src = {notifications[i].actor.profile_picture}
 
             >
           </Avatar>
@@ -840,8 +837,7 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+              src = {notifications[i].actor.profile_picture}
               onClick = {() => this.onProfileClick(notifications[i].actor.username)}
               >
             </Avatar>

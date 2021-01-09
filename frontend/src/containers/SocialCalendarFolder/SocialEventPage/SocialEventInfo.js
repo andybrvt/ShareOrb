@@ -350,8 +350,7 @@ class SocialEventInfo extends React.Component{
                 </div>
               */}
               <img
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}`+eventBackgroundPic}
+              src = {eventBackgroundPic}
               className = 'eventBackgroundImg'
                />
             </div>

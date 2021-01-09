@@ -182,8 +182,7 @@ class SideMenu extends React.Component {
 
     console.log(this.props)
     if (this.props.profilePic){
-      // PICTURE URL
-      profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
+      profilePic = this.props.profilePic
     } if (this.props.firstName){
       firstName = this.props.firstName
     } if (this.props.lastName){

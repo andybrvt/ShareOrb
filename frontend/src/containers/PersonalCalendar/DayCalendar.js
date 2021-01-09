@@ -456,8 +456,8 @@ class DayCalendar extends React.Component{
                             <Avatar
                               shape="circle"
                               size={60}
-                              // PICTURE URL
-                              src={`${global.API_ENDPOINT}`+item.host.profile_picture}
+                              
+                              src={item.host.profile_picture}
                               style={{display:'inline-block'}}
                              />
                            {

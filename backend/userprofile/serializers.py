@@ -46,12 +46,14 @@ class UserSerializer(serializers.ModelSerializer):
             user = i.username
             list.append(user)
         return list
+
     get_posts = serializers.StringRelatedField(many = True)
     get_following = serializers.StringRelatedField(many = True)
     get_followers = serializers.StringRelatedField(many = True)
     get_socialCal = serializers.StringRelatedField(many = True)
     get_socialEvents = serializers.StringRelatedField(many = True)
     get_allPost = serializers.StringRelatedField(many  = True)
+
 
     class Meta:
         model = models.User

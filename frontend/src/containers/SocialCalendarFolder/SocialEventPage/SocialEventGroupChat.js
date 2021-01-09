@@ -129,8 +129,7 @@ class SocialEventGroupChat extends React.Component{
                    <div>
                    <Avatar
                    className = 'eventMessageAvatar'
-                   // PICTURE URL
-                   size = {30} src = {`${global.API_ENDPOINT}`+item.messageUser.profile_picture} />
+                   size = {30} src = {item.messageUser.profile_picture} />
                    </div>
                    :
 
