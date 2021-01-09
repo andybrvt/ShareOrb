@@ -100,7 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# WSGIPassAuthorization On
+WSGIPassAuthorization = 'On'
 
 
 
