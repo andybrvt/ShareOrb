@@ -93,11 +93,6 @@ export const SEND_REQUESTED = 'SEND_REQUESTED';
 // when you are changing the profile information
 export const EDIT_PROFILE_AUTH = 'EDIT_PROFILE_AUTH';
 
-// This will add the friendList to the current User friend list. Mostly acting on the
-// auth
-// DELETE THIS LATER
-export const ADD_REMOVE_CLOSE_FRIEND = 'ADD_REMOVE_CLOSE_FRIEND';
-
 
 // This has to do with the cover picture of the social calendar cell
 // There are two cases, when the cell doesn't exist, I will have to

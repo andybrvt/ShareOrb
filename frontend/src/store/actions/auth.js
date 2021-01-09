@@ -313,15 +313,6 @@ export const changeProfilePicAuth = (profilePic) => {
 }
 
 
-// DELETE THIS LATER
-export const addRemoveCloseFriend = (friendList) => {
-  console.log(friendList)
-  return {
-    type: actionTypes.ADD_REMOVE_CLOSE_FRIEND,
-    friendList: friendList
-  }
-}
-
 export const changePrivate = (privateCall) => {
   // This function will change the private field in the user information
   return {

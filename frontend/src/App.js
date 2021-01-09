@@ -81,7 +81,6 @@ class App extends Component {
       this.props.addSocialCell.bind(this),
       this.props.addSocialEventJoinLeavePage.bind(this),
       this.props.editProfileAuth.bind(this),
-      this.props.addRemoveCloseFriend.bind(this),
       this.props.addSocialCellCoverPic.bind(this),
       this.props.sendRequested.bind(this)
     )
@@ -336,7 +335,6 @@ const mapDispatchToProps = dispatch => {
     addSocialCellCoverPic: (coverPicture, cellId) => dispatch(exploreActions.addSocialCellCoverPic(coverPicture, cellId)),
     sendRequested: (requestedList) => dispatch(exploreActions.sendRequested(requestedList)),
     editProfileAuth: (editProfileObj) => dispatch(authActions.editProfileAuth(editProfileObj)),
-    addRemoveCloseFriend: (friendList) => dispatch(authActions.addRemoveCloseFriend(friendList)),
 
     loadSocialEventInfo: socialEventInfoObj => dispatch(socialActions.loadSocialEventInfo(socialEventInfoObj)),
     sendSocialEventMessage: socialEventMessageObj => dispatch(socialActions.sendSocialEventMessage(socialEventMessageObj)),

@@ -363,6 +363,9 @@ class PersonalProfile extends React.Component{
 
       ExploreWebSocketInstance.sendAcceptFollowing(follower, following)
 
+      // Now up date your credentials
+      this.props.grabUserCredentials()
+
       // This function will include redux to update the auth as well
 
 

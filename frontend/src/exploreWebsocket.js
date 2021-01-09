@@ -145,30 +145,6 @@ class WebSocketExplore {
       this.callbacks['load_profile'](updatedProfile)
       this.callbacks['edit_profile_auth'](updatedProfile)
     }
-
-
-    // DELETE THIS LATER
-    else if(command === 'add_user_close_friend'){
-      // This will recieve the friend list of the current user that just added
-      // a new user to the friend list. This will go into auth and replace the
-      // the old friendlist
-
-      const friendList = parsedData.friendList
-      // add callbacks here
-      this.callbacks['add_remove_close_friend'](friendList)
-
-    } else if(command === 'remove_user_close_friend'){
-      // This will pretty mcuh be the smae as the above command but now
-      // you are reomoving a user from the friend list
-      const friendList = parsedData.friendList
-
-      this.callbacks['add_remove_close_friend'](friendList)
-    }
-
-
-
-
-
     else if(command === 'approve_social_pics'){
       // This function will add in pending pictures to the social calendar in the
       // appropriate cell
@@ -209,7 +185,7 @@ class WebSocketExplore {
 
       const newFollowingList = parsedData.followingList
 
-      
+
 
 
     }
@@ -227,7 +203,6 @@ class WebSocketExplore {
      addSocialCell,
      addSocialEventJoinLeavePage,
      editProfileAuth,
-     addRemoveCloseFriend,
      addCoverPic,
      addRequestCallBack
    ){
@@ -237,7 +212,6 @@ class WebSocketExplore {
     this.callbacks['add_social_cell'] = addSocialCell
     this.callbacks['add_social_event_join_leave_page'] = addSocialEventJoinLeavePage
     this.callbacks['edit_profile_auth'] = editProfileAuth
-    this.callbacks['add_remove_close_friend'] = addRemoveCloseFriend
     this.callbacks['add_cover_pic'] = addCoverPic
     this.callbacks['send_requested'] = addRequestCallBack
   }
