@@ -18,10 +18,6 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 import UserEventList from './UserEventList';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
 
-// DELETE LATER
-// import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
-// import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
-
 const { Step } = Steps
 class PersonalProfileEventList extends React.Component{
   constructor(props){

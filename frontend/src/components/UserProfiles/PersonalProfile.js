@@ -5,7 +5,7 @@ import { Route, useLocation, Switch, Link } from 'react-router-dom';
 import { authAxios } from '../util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { Button, Modal, Avatar, Steps, Divider} from 'antd';
+import { Button, Modal, Avatar, Steps, Divider, message } from 'antd';
 import { RetweetOutlined, EditOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
@@ -21,9 +21,6 @@ import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
 import EditProfileForm from './EditProfile/EditProfileForm';
 import ChangeBackgroundModal from '../../containers/PersonalCalendar/EventPage/ChangeBackgroundModal.js';
 
-// DELETE LATER
-import ConfirmAddFriend from './ConfirmAddFriend';
-import ConfirmUnfriend from './ConfirmUnfriend';
 // From here on out each profile will be its own channel, so we do not need
 // to use ViewAnyUserProfile anymore
 // Each profile will fetch its own information and do its own channel stuff
@@ -351,6 +348,47 @@ class PersonalProfile extends React.Component{
       console.log('it hits here')
     }
 
+    successFollow = () => {
+      message.success('You accepted a follower.');
+    };
+
+    onAcceptFollow = (follower, following) => {
+      // This function will used to accept the follower, allow request and delete the notifications
+      // The follower parameter will be the actor of the notification (it will be the
+      // person trying to request)
+      // The following parameter will be the recipient or in this case the person who
+      // is accepting the follow
+
+      console.log(follower, following)
+
+      ExploreWebSocketInstance.sendAcceptFollowing(follower, following)
+
+      // This function will include redux to update the auth as well
+
+
+      // Once you get the ids you can then send an axios call
+      // authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
+      //   follower: follower,
+      //   following: following
+      // })
+      // .then(res => {
+      //   console.log(res.data)
+      //   this.props.updateFollowers(res.data)
+      //   this.successFollow()
+      //   // You also want to send a notification too
+      //
+      // })
+
+      // So since this is not real time, you can just call a axios call instead of
+      // a websocket call
+
+
+
+
+      // Now you will send a new notification to the other user
+
+    }
+
 
     onRenderProfileInfo(){
       // For the following and the follwers, the get_followers will be the people taht
@@ -490,6 +528,7 @@ class PersonalProfile extends React.Component{
               style={{
                 paddingTop: "7px",
                 fontSize:'16px'}}
+              onClick = {() => this.onAcceptFollow(profileId, curId)}
               className = 'followButton'>
                 Accept
               </div>
@@ -904,8 +943,8 @@ const mapDispatchToProps = dispatch => {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
     changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
-    grabUserCredentials: () => dispatch(authActions.grabUserCredentials())
-
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials()),
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
   }
 }
 

@@ -207,7 +207,7 @@ class NotificationsDropDown extends React.Component{
   }
 
   successFollow = () => {
-    message.success('This is a success message');
+    message.success('You accepted a follower.');
   };
 
   onAcceptFollow = (follower, following, notificationId) => {
@@ -236,6 +236,7 @@ class NotificationsDropDown extends React.Component{
     // a websocket call
 
 
+    
 
     // Now you will send a new notification to the other user
 

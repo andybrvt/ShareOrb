@@ -203,6 +203,15 @@ class WebSocketExplore {
       const requestedList = parsedData.requestedList
 
       this.callbacks['send_requested'](requestedList)
+    } else if(command === 'send_following'){
+      // This function will pretty much update the following of the current page
+      // because
+
+      const newFollowingList = parsedData.followingList
+
+      
+
+
     }
 
 
@@ -321,6 +330,17 @@ class WebSocketExplore {
 
   }
 
+  sendAcceptFollowing = (follower, following) => {
+    // This will be for when the perosn accepts your follow, on the profile page
+    // This is simlar to the send_following but you will remove the requested and
+    // then send it back so it updates
+    this.sendExplore({
+      follower: follower,
+      following: following,
+      command: 'send_accepted_following'
+    })
+  }
+
   sendSocialEvent = (eventObj) => {
     // The event object will be a dict of all the information on the event and
     // it will be sent into the consumers, There will be a same one that will be going
@@ -400,35 +420,6 @@ class WebSocketExplore {
       ownerId: ownerId,
       eventId: eventId,
       command: 'remove_user_social_event_page'
-    })
-  }
-
-  sendAddCloseFriend = (curId, friendId) => {
-    // This will add friend with someone one, you will add them as close friend
-    // and then give them access to edit their social calendar
-
-
-    //curId will the current person id
-    // friendid will be the person you are trying to add as close friend
-
-
-    console.log("hit close friend")
-    console.log(curId, friendId)
-    this.sendExplore({
-      curId: curId,
-      friendId: friendId,
-      command: 'add_user_close_friend'
-    })
-  }
-
-  sendUnfriend = (curId, friendId) => {
-    // This will pretty much be like sendAddCloseFriend but will be the opposite
-    // of it. It will be removing the friend
-
-    this.sendExplore({
-      curId: curId,
-      friendId: friendId,
-      command: 'remove_user_close_friend'
     })
   }
 

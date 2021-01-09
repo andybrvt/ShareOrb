@@ -6,7 +6,7 @@ import { Route, useLocation, Switch, Link} from 'react-router-dom';
 import { authAxios } from '../../components/util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { Button, Modal, Avatar, Steps, Divider} from 'antd';
+import { Button, Modal, Avatar, Steps, Divider, message} from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import * as exploreActions from '../../store/actions/explore';
@@ -19,9 +19,6 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
 
 const { Step } = Steps
-// DELETE LATER
-// import ConfirmAddFriend from '../../components/UserProfiles/ConfirmAddFriend';
-// import ConfirmUnfriend from '../../components/UserProfiles/ConfirmUnfriend';
 
 
 class PersonalProfilePostList extends React.Component{
@@ -310,6 +307,41 @@ class PersonalProfilePostList extends React.Component{
 
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
       this.props.grabUserCredentials()
+
+    }
+
+    successFollow = () => {
+      message.success('You accepted a follower.');
+    };
+
+    onAcceptFollow = (follower, following) => {
+      // This function will used to accept the follower, allow request and delete the notifications
+      // The follower parameter will be the actor of the notification (it will be the
+      // person trying to request)
+      // The following parameter will be the recipient or in this case the person who
+      // is accepting the follow
+
+      console.log(follower, following)
+      // Once you get the ids you can then send an axios call
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
+        this.props.updateFollowers(res.data)
+        this.successFollow()
+        // You also want to send a notification too
+
+      })
+
+      // So since this is not real time, you can just call a axios call instead of
+      // a websocket call
+
+
+
+
+      // Now you will send a new notification to the other user
 
     }
 
