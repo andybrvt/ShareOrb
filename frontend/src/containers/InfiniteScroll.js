@@ -12,7 +12,7 @@ import WebSocketPostsInstance from  '../postWebsocket';
 class InfiniteList extends React.Component {
   constructor(props){
     super(props);
-    this.initialisePost()
+    // this.initialisePost()
     this.state = {
       error: false,
       loading: false,

@@ -65,15 +65,17 @@ if (token) {
 
 
     return (
-      <div style={{height:'100%', background:'#fafafa'}} class="parentContainer">
+      <div style={{
+      // height:'100%',
+      background:'#fafafa'}} class="parentContainer">
         <div class="one">
           {/* color is #68BFFD*/}
 
 
 
-          <div class="loginTitle">Connecting people through calendars test test</div>
+          <div class="loginTitle">Connecting people through calendars test4</div>
             <div class="eventCard allStyle" style={{left:'20%',
-            width:'600px', height:'400px', padding:'75px'}}>
+            width:'25%', height:'200px', padding:'75px'}}>
 
               <Form
               name="basic"

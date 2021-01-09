@@ -68,7 +68,8 @@ class ProfileCardNewsFeed extends React.Component{
     } if (this.props.following){
       following = this.props.following
     } if (this.props.profilePic){
-      profilePic = `${global.API_ENDPOINT}`+this.props.profilePic
+      profilePic = this.props.profilePic
+      // `${global.API_ENDPOINT}`+
     }
 
 

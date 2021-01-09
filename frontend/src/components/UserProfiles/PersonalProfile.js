@@ -93,7 +93,7 @@ class PersonalProfile extends React.Component{
 
 
   componentDidMount(){
-    this.initialiseProfile()
+    // this.initialiseProfile()
 
   }
 
@@ -102,28 +102,28 @@ class PersonalProfile extends React.Component{
     console.log('hit here')
     //This will reconnect to eh proper profile if you were to change the profiles
 
-    if(this.props.parameter.username !== newProps.parameter.username){
-
-      this.props.closeProfile()
-      ExploreWebSocketInstance.disconnect();
-      this.waitForSocketConnection(() => {
-        ExploreWebSocketInstance.fetchProfile(
-          newProps.parameter.username
-        )
-      })
-      ExploreWebSocketInstance.connect(newProps.parameter.username)
-    }
-
-    if(this.props.location.pathname !== newProps.location.pathname){
-      //To refetch the information
-      this.waitForSocketConnection(() => {
-        ExploreWebSocketInstance.fetchProfile(
-          newProps.parameter.username
-        )
-      })
-      // ExploreWebSocketInstance.connect(newProps.parameter.username)
-
-    }
+    // if(this.props.parameter.username !== newProps.parameter.username){
+    //
+    //   this.props.closeProfile()
+    //   ExploreWebSocketInstance.disconnect();
+    //   this.waitForSocketConnection(() => {
+    //     ExploreWebSocketInstance.fetchProfile(
+    //       newProps.parameter.username
+    //     )
+    //   })
+    //   ExploreWebSocketInstance.connect(newProps.parameter.username)
+    // }
+    //
+    // if(this.props.location.pathname !== newProps.location.pathname){
+    //   //To refetch the information
+    //   this.waitForSocketConnection(() => {
+    //     ExploreWebSocketInstance.fetchProfile(
+    //       newProps.parameter.username
+    //     )
+    //   })
+    //   // ExploreWebSocketInstance.connect(newProps.parameter.username)
+    //
+    // }
 
   }
 
@@ -132,7 +132,7 @@ class PersonalProfile extends React.Component{
     // avoid any connection conflicts
     //Similar to the event page channel, you will have to remove the recursion from
     // the disconnect in the websocket
-    ExploreWebSocketInstance.disconnect();
+    // ExploreWebSocketInstance.disconnect();
   }
 
   capitalize (str) {
@@ -186,8 +186,8 @@ class PersonalProfile extends React.Component{
     // This is used to changing the profile pic, for submiting.
     console.log(values)
     let userId = ""
-    if(this.props.profile){
-      userId = this.props.profile.id
+    if(this.props.currentId){
+      userId = this.props.currentId
 
     }
     var data  = new FormData()
@@ -196,8 +196,13 @@ class PersonalProfile extends React.Component{
     authAxios.put(`${global.API_ENDPOINT}/userprofile/profile/update/`+userId,
       data
     ).then(res => {
-      this.props.changeProfilePic(res.data.profile_picture.substring(21,))
-      this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
+      console.log(res)
+      this.props.changeProfilePic(res.data.profile_picture
+        // .substring(21,)
+      )
+      this.props.changeProfilePicAuth(res.data.profile_picture
+        // .substring(21,)
+      )
     })
 
 // PROBALLY ADD IN THE REDUX LIKE EVENT PAGE

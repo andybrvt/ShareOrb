@@ -35,6 +35,8 @@ export const addCredentials = (
    privatePro,
    requested
  ) => {
+   console.log(localStorage)
+  console.log(username, id)
   return {
     type: actionTypes.ADD_CREDENTIALS,
     username: username,
@@ -116,11 +118,11 @@ export const authLogin = (username, password) => {
 
     // http://api.shareorb.com/userprofile/suggestedFriends
     // ${global.API_ENDPOINT}/userprofile/suggestedFriends
-        authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestedFriends`)
-          .then(res=> {
-            localStorage.setItem("suggestedFriends", (res.data.username));
-
-         });
+        // authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestedFriends`)
+        //   .then(res=> {
+        //     localStorage.setItem("suggestedFriends", (res.data.username));
+        //
+        //  });
 
      // http://api.shareorb.com/rest-auth/login/
         axios.post(`${global.API_ENDPOINT}/rest-auth/login/`, {
@@ -145,7 +147,7 @@ export const authLogin = (username, password) => {
         return axios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
       })
       .then(res => {
-            console.log(res.data)
+            console.log(res)
             const username1 = res.data.username;
             const id = res.data.id;
             const friends = res.data.friends;

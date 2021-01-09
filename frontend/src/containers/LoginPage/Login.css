@@ -1,13 +1,12 @@
 .loginTitle{
   color:#68BFFD;
-  font-size: 45px;
-  margin-top: 200px;
-  margin-left: 200px;
-  left:'20%';
+  font-size: 2.5vw;
+  margin-top: 30%;
+  margin-left: 20%;
   position:'absolute';
   font-weight: 500;
-  margin-bottom: 25px;
-  /* background-color: red; */
+  margin-bottom: 5%;
+  background-color: r ed;
 }
 
 .custom-shape-divider-top-1591819966 {
@@ -19,12 +18,6 @@
     line-height: 0;
 }
 
-.custom-shape-divider-top-1591819966 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 150px;
-}
 
 .custom-shape-divider-top-1591819966 .shape-fill {
     fill: #FFFFFF;

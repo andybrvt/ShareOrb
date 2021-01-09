@@ -59,11 +59,11 @@ class ChangeBackgroundModal extends React.Component{
 
     console.log(info)
     // Handle the change of the picture
-    if(info.file.status === "uploading"){
-      this.setState({loading: true});
-      return;
-    }
-    if(info.file.status  === "done"){
+    // if(info.file.status === "uploading"){
+    //   this.setState({loading: true});
+    //   return;
+    // }
+    // if(info.file.status  === "done"){
       // Whne uploading is done, you will upload it
       this.setState({
         imageFile: info.file.originFileObj
@@ -74,7 +74,7 @@ class ChangeBackgroundModal extends React.Component{
           loading: false
         })
       )
-    }
+    // }
 
   }
 
@@ -158,7 +158,7 @@ class ChangeBackgroundModal extends React.Component{
               listType="picture-card"
               className="uploadBox"
               showUploadList={false}
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               beforeUpload={beforeUpload}
               onChange={this.handleChange}
 
