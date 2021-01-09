@@ -369,27 +369,6 @@ class PersonalProfile extends React.Component{
       // This function will include redux to update the auth as well
 
 
-      // Once you get the ids you can then send an axios call
-      // authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
-      //   follower: follower,
-      //   following: following
-      // })
-      // .then(res => {
-      //   console.log(res.data)
-      //   this.props.updateFollowers(res.data)
-      //   this.successFollow()
-      //   // You also want to send a notification too
-      //
-      // })
-
-      // So since this is not real time, you can just call a axios call instead of
-      // a websocket call
-
-
-
-
-      // Now you will send a new notification to the other user
-
     }
 
 

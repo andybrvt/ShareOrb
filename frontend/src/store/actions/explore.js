@@ -89,3 +89,12 @@ export const sendRequested = (requestedList) => {
     requestedList: requestedList
   }
 }
+
+export const addFollowing = (followingList) =>{
+  // This function will be used to update the following list
+
+  return {
+    type: actionTypes.ADD_FOLLOWING,
+    followingList: followingList
+  }
+}

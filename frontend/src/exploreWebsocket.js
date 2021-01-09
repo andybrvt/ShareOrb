@@ -186,7 +186,8 @@ class WebSocketExplore {
       const newFollowingList = parsedData.followingList
 
 
-
+      // add call back here
+      this.callbacks['send_following'](newFollowingList)
 
     }
 
@@ -204,7 +205,8 @@ class WebSocketExplore {
      addSocialEventJoinLeavePage,
      editProfileAuth,
      addCoverPic,
-     addRequestCallBack
+     addRequestCallBack,
+     addFollowing
    ){
     this.callbacks['load_profile'] = loadProfile
     this.callbacks['new_follower_unfollower'] = addFollowerUnfollowerCallBack
@@ -214,6 +216,7 @@ class WebSocketExplore {
     this.callbacks['edit_profile_auth'] = editProfileAuth
     this.callbacks['add_cover_pic'] = addCoverPic
     this.callbacks['send_requested'] = addRequestCallBack
+    this.callbacks['send_following'] = addFollowing
   }
 
 

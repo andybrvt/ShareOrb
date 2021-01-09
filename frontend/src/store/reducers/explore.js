@@ -109,6 +109,15 @@ export const sendRequested = (state, action) => {
   })
 }
 
+export const addFollowing = (state, action) => {
+  return updateObject(state, {
+    profile: {
+      ...state.profile,
+      get_following: action.followingList
+    }
+  })
+}
+
 
 
 
@@ -132,6 +141,8 @@ const reducer = (state = initialState, action) => {
       return addSocialEventJoinLeavePage(state, action);
     case actionTypes.SEND_REQUESTED:
       return sendRequested(state, action);
+    case actionTypes.ADD_FOLLOWING:
+      return addFollowing(state, action);
     default:
       return state;
   };

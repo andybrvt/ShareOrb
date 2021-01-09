@@ -89,6 +89,7 @@ export const ADD_FOLLOWER_UNFOLLOWER = 'ADD_FOLLOWER_UNFOLLOWER';
 export const CHANGE_PROFILE_PIC  = 'CHANGE_PROFILE_PIC';
 export const CHANGE_PROFILE_PIC_AUTH = 'CHANGE_PROFILE_PIC_AUTH';
 export const SEND_REQUESTED = 'SEND_REQUESTED';
+export const ADD_FOLLOWING = "ADD_FOLLOWING";
 // This will change all the information about the user in the auth (over sceme)
 // when you are changing the profile information
 export const EDIT_PROFILE_AUTH = 'EDIT_PROFILE_AUTH';
