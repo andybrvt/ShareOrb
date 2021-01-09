@@ -75,7 +75,7 @@ if (token) {
 
           <div class="loginTitle">Connecting people through calendars test4</div>
             <div class="eventCard allStyle" style={{left:'20%',
-            width:'25%', height:'200px', padding:'75px'}}>
+            width:'80%', height:'40%', padding:'75px'}}>
 
               <Form
               name="basic"
