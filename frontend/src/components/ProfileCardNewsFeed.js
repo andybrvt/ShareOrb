@@ -68,7 +68,10 @@ class ProfileCardNewsFeed extends React.Component{
     } if (this.props.following){
       following = this.props.following
     } if (this.props.profilePic){
-      profilePic = this.props.profilePic
+      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.profilePic
+
+      // http://127.0.0.1:8000/media/PostPic/public/profile_pictures/2021/01/keitravis-squire-zrfviPQ5rWE-unsplash.jpg
+
       // `${global.API_ENDPOINT}`+
     }
 

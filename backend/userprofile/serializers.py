@@ -47,6 +47,8 @@ class UserSerializer(serializers.ModelSerializer):
             list.append(user)
         return list
 
+
+
     get_posts = serializers.StringRelatedField(many = True)
     get_following = serializers.StringRelatedField(many = True)
     get_followers = serializers.StringRelatedField(many = True)
