@@ -330,7 +330,7 @@ class SocialCalendar extends React.Component{
               className = 'imgCover'
               size = {250}
               shape= 'square'
-              src = {toDoStuff[0].coverPic} />
+              src = {`${global.IMAGE_ENDPOINT}`+toDoStuff[0].coverPic} />
               <span className = "bgD"> {formattedDate}</span>
               </div>
 

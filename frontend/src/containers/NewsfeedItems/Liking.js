@@ -73,7 +73,7 @@ class Liking extends React.Component{
                              <Avatar
                               onClick = {() => this.profileDirect(like_people[0].username)}
                               // PROFILE ULR
-                              src={`${global.API_ENDPOINT}`+like_people[0].profile_picture}/>
+                              src={`${global.IMAGE_ENDPOINT}`+like_people[0].profile_picture}/>
                         </Tooltip>
                       </Avatar.Group>
                     </span>
@@ -90,7 +90,7 @@ class Liking extends React.Component{
                              <Avatar
                              onClick = {() => this.profileDirect(like_people[0].username)}
 
-                              src={like_people[0].profile_picture}/>
+                              src={`${global.IMAGE_ENDPOINT}`+like_people[0].profile_picture}/>
                         </Tooltip>
 
 
@@ -98,7 +98,7 @@ class Liking extends React.Component{
                         <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
                              <Avatar
                              onClick = {() => this.profileDirect(like_people[1].username)}
-                              src={like_people[1].profile_picture}/>
+                              src={`${global.IMAGE_ENDPOINT}`+like_people[1].profile_picture}/>
                         </Tooltip>
 
 
@@ -109,19 +109,19 @@ class Liking extends React.Component{
                            <Tooltip placement="topLeft" title={`${like_people[0].first_name} ${like_people[0].last_name} `}>
                                  <Avatar
                                  onClick = {() => this.profileDirect(like_people[0].username)}
-                                 src={like_people[0].profile_picture}/>
+                                 src={`${global.IMAGE_ENDPOINT}`+like_people[0].profile_picture}/>
                            </Tooltip>
                            <Tooltip placement="topLeft" title={`${like_people[1].first_name} ${like_people[1].last_name} `}>
                               <Avatar
                               onClick = {() => this.profileDirect(like_people[1].username)}
 
-                              src={like_people[1].profile_picture}/>
+                              src={`${global.IMAGE_ENDPOINT}`+like_people[1].profile_picture}/>
                            </Tooltip>
                            <Tooltip placement="topLeft" title={`${like_people[2].first_name} ${like_people[2].last_name} `}>
                                 <Avatar
                                 onClick = {() => this.profileDirect(like_people[2].username)}
-                                
-                                src={like_people[2].profile_picture}/>
+
+                                src={`${global.IMAGE_ENDPOINT}`+like_people[2].profile_picture}/>
                             </Tooltip>
 
                         </Avatar.Group>

@@ -71,7 +71,7 @@ class Comments extends React.Component {
 
       actions={actions}
       author={item.name}
-      avatar={item.commentUser.profile_picture}
+      avatar={`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture}
       content={item.body}
       datetime={"few seconds ago"}
       />

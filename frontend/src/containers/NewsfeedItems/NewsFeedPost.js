@@ -387,7 +387,7 @@ class NewsfeedPost extends React.Component {
 
 
 
-    let temp=this.props.data.post_images;
+    let temp=`${global.IMAGE_ENDPOINT}`+this.props.data.post_images;
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
 
     const success = () => {
@@ -538,8 +538,7 @@ class NewsfeedPost extends React.Component {
 
 
     if (this.props.data.user.profile_picture){
-      // PROFILE URL
-      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
+      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.user.profile_picture
     }
 
     return(
@@ -899,7 +898,7 @@ class NewsfeedPost extends React.Component {
       console.log(this.props)
       console.log(this.state)
 
-      let temp=this.props.data.post_images;
+      let temp=`${global.IMAGE_ENDPOINT}`+this.props.data.post_images;
       const success = () => {
         message.success('Clipped to your album!');
       };

@@ -138,15 +138,15 @@ class ChangeBackgroundModal extends React.Component{
 
                   <img class="changeProfilePic"
 
-                    src={this.props.pic}></img>
+                    src={`${global.IMAGE_ENDPOINT}`+this.props.pic}></img>
 
 
 
               :
               <div><Avatar style={{left:'20%', marginTop:'150px'}} size={200}
                 icon={<img class="changeAvatar"
-                
-                src={this.props.hostPic}></img>} /></div>
+
+                src={`${global.IMAGE_ENDPOINT}`+this.props.hostPic}></img>} /></div>
 
 
              }

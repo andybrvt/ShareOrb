@@ -207,7 +207,7 @@ class NewNewsfeedFormPost extends React.Component{
       } if (this.props.lastName){
         lastName = this.props.lastName
       } if (this.props.profilePic){
-        profilePic = this.props.profilePic
+        profilePic = `${global.IMAGE_ENDPOINT}`+this.props.profilePic
       }
       console.log(this.state)
       console.log(this.props)

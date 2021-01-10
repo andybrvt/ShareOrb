@@ -33,7 +33,7 @@ class FollowList extends React.Component{
           avatar={
             item.profile_picture ?
 
-              <Avatar src= {item.profile_picture} />
+              <Avatar src= {`${global.IMAGE_ENDPOINT}`+item.profile_picture} />
 
               :
 

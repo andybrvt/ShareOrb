@@ -350,7 +350,7 @@ class SocialEventInfo extends React.Component{
                 </div>
               */}
               <img
-              src = {eventBackgroundPic}
+              src = {`${global.IMAGE_ENDPOINT}`+eventBackgroundPic}
               className = 'eventBackgroundImg'
                />
             </div>
@@ -482,7 +482,7 @@ class SocialEventInfo extends React.Component{
                   <span>
                     <Avatar
                     style={{right:'5px'}}
-                    src = {`${global.API_ENDPOINT}`+host.profile_picture}
+                    src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
                     />
                     <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
                   </span>

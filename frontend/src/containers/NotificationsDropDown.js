@@ -300,7 +300,7 @@ class NotificationsDropDown extends React.Component{
           backgroundColor: 'limegreen',
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
-          src = {`${global.API_ENDPOINT}`+notifications[i].actor.profile_picture}
+          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -377,7 +377,7 @@ class NotificationsDropDown extends React.Component{
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
 
-          src = {notifications[i].actor.profile_picture}
+          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
           >
         </Avatar>
         </div>
@@ -409,7 +409,7 @@ class NotificationsDropDown extends React.Component{
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
 
-          src = {notifications[i].actor.profile_picture}
+          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
           >
         </Avatar>
@@ -485,7 +485,7 @@ class NotificationsDropDown extends React.Component{
           verticalAlign: 'middle'}}
           // icon = {<UserOutlined />}
 
-          src = {notifications[i].actor.profile_picture}
+          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
           >
         </Avatar>
@@ -517,7 +517,7 @@ class NotificationsDropDown extends React.Component{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
 
-              src = {notifications[i].actor.profile_picture}
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
               >
             </Avatar>
             </div>
@@ -549,7 +549,7 @@ class NotificationsDropDown extends React.Component{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
 
-              src = {notifications[i].actor.profile_picture}
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
               >
             </Avatar>
@@ -581,7 +581,7 @@ class NotificationsDropDown extends React.Component{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
 
-              src = {notifications[i].actor.profile_picture}
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
               >
             </Avatar>
@@ -617,7 +617,7 @@ class NotificationsDropDown extends React.Component{
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
 
-                src = {notifications[i].actor.profile_picture}
+                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -655,7 +655,7 @@ class NotificationsDropDown extends React.Component{
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
 
-                src = {notifications[i].actor.profile_picture}
+                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -688,7 +688,7 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                src = {notifications[i].actor.profile_picture}
+                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -721,7 +721,7 @@ class NotificationsDropDown extends React.Component{
                 backgroundColor: 'purple',
                 verticalAlign: 'middle'}}
                 // icon = {<UserOutlined />}
-                src = {notifications[i].actor.profile_picture}
+                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
                 >
               </Avatar>
@@ -769,7 +769,7 @@ class NotificationsDropDown extends React.Component{
             <Avatar size = {45} style ={{
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {notifications[i].actor.profile_picture}
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
               >
             </Avatar>
           </div>
@@ -809,7 +809,7 @@ class NotificationsDropDown extends React.Component{
             verticalAlign: 'middle'}}
             // icon = {<UserOutlined />}
 
-            src = {notifications[i].actor.profile_picture}
+            src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
 
             >
           </Avatar>
@@ -837,7 +837,7 @@ class NotificationsDropDown extends React.Component{
               backgroundColor: 'purple',
               verticalAlign: 'middle'}}
               // icon = {<UserOutlined />}
-              src = {notifications[i].actor.profile_picture}
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
               onClick = {() => this.onProfileClick(notifications[i].actor.username)}
               >
             </Avatar>

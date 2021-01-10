@@ -223,7 +223,7 @@ class PersonalProfileEventList extends React.Component{
       if(this.props.profile){
         console.log(this.props.profile.profile_picture)
         if(this.props.profile.profile_picture){
-          profileImage = this.props.profile.profile_picture
+          profileImage = `${global.IMAGE_ENDPOINT}`+this.props.profile.profile_picture
         }
       }
 

@@ -520,7 +520,7 @@ class WeekCalendar extends React.Component{
                     (item.backgroundImg)?
                     <img
                       style={{display:'inline-block', float:'right', marginRight:'25px'}}
-                    src = {item.backgroundImg}
+                    src = {`${global.IMAGE_ENDPOINT}`+item.backgroundImg}
                     className = 'popoverPic'
                      />
                      :
@@ -578,7 +578,7 @@ class WeekCalendar extends React.Component{
                             <Avatar
                               shape="circle"
                               size={60}
-                              src={item.host.profile_picture}
+                              src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture}
                               style={{display:'inline-block'}}
                              />
                            {
