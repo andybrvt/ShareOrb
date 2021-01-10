@@ -225,7 +225,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('172.31.4.232', 6379)],
+            "hosts": [('shareorbredisnew.bz41az.ng.0001.usw1.cache.amazonaws.com', 6379)],
         },
     },
 }
