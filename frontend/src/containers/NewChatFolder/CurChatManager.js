@@ -239,7 +239,7 @@ class CurChatManager extends React.Component{
           <div className = 'chatRightSideBox'>
             <Avatar
             size = {250}
-            src = {`${global.API_ENDPOINT}`+profilePic}
+            src = {`${global.IMAGE_ENDPOINT}`+profilePic}
             />
 
             <div
@@ -274,7 +274,7 @@ class CurChatManager extends React.Component{
                  >
                  <List.Item.Meta
                    avatar={<Avatar
-                     src= {item.profile_picture} /> }
+                     src= {`${global.IMAGE_ENDPOINT}`+item.profile_picture} /> }
                    title={<span>{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</span>}
                    description= {<b>@{this.capitalize(item.username)}</b>}
                  />

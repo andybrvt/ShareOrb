@@ -93,7 +93,7 @@ class UserPostComments extends React.Component{
               <div className = 'postCommentItem'>
 
                 <div className = 'postCommentNameTag'>
-                  <Avatar size = {35} src = {`${global.API_ENDPOINT}`+item.commentUser.profile_picture} />
+                  <Avatar size = {35} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
                   <div className = 'postCommentName'>
                     <div className = 'postCommentUsername'>
                       <b>{this.capitalize(item.commentUser.first_name)} {this.capitalize(item.commentUser.last_name)} </b>
@@ -132,7 +132,7 @@ class UserPostComments extends React.Component{
           <Avatar
           size = {30}
           className ='postPicInput'
-          src = {this.props.profilePic}/>
+          src = {`${global.IMAGE_ENDPOINT}`+this.props.profilePic}/>
           <Form>
             <Input
             className= 'postBoxInput'

@@ -166,8 +166,8 @@ openDeclineNotification = (placement) => {
       user = this.props.selectedUser
     }
     if(this.props.userprofile){
-    
-      userprofile = this.props.userprofile
+
+      userprofile = `${global.IMAGE_ENDPOINT}`+this.props.userprofile
     }
 
     return (

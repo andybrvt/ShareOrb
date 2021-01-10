@@ -170,7 +170,7 @@ class NewSidePanel extends React.Component{
             <div className = "chatWrap">
             <Avatar size = {50}
             className = "chatAva"
-             src = {this.getChatUserProfile(item.participants)} />
+             src = {`${global.IMAGE_ENDPOINT}`+this.getChatUserProfile(item.participants)} />
             <div className = "chatText">
               <div className = "chatName">{this.getChatUserName(item.participants)}</div>
               <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}>

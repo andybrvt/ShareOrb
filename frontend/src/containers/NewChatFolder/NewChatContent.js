@@ -88,7 +88,7 @@ class NewChatContent extends React.Component{
           return (
             <div className = "chatTextBoxRight">
             <Avatar size = {30}
-            src = {messageItem.messageUser.profile_picture}  />
+            src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
             {/*
             <div className = 'chatNameTimeRight'>
               <div className = 'chatNameRight'>
@@ -155,7 +155,7 @@ class NewChatContent extends React.Component{
         return (
           <div className= "chatTextBox">
           <Avatar size = {45}
-          src = {messageItem.messageUser.profile_picture}  />
+          src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
           <div className = 'chatNameTime'>
             <div className = 'chatName'>
               {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
@@ -193,7 +193,7 @@ class NewChatContent extends React.Component{
 
             </div>
           </div>
-          <Avatar size = {30} src = {messageItem.messageUser.profile_picture}  />
+          <Avatar size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
           <div className = "messageReceived">
             {messageItem.body}
           </div>

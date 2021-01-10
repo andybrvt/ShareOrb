@@ -151,8 +151,8 @@ class SocialEventPage extends React.Component{
 
         <img
         className = "socialEventBackgroundPic"
-        
-        src = {backgroundImage} />
+
+        src = {`${global.IMAGE_ENDPOINT}`+backgroundImage} />
 
       {(!this.state.showChats)?
         <div>

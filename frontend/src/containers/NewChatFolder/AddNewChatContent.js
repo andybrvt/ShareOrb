@@ -241,7 +241,7 @@ class AddNewChatContent extends React.Component{
 
           <div className = "chatTextBoxRight">
           <Avatar size = {45}
-          src = {item.messageUser.profile_picture}  />
+          src = {`${global.IMAGE_ENDPOINT}`+item.messageUser.profile_picture}  />
           <div className = 'chatNameTimeRight'>
             <div className = 'chatNameRight'>
               {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
@@ -261,7 +261,7 @@ class AddNewChatContent extends React.Component{
 
           <div className = "chatTextBox">
           <Avatar size = {45}
-          src = {item.messageUser.profile_picture}  />
+          src = {`${global.IMAGE_ENDPOINT}`+item.messageUser.profile_picture}  />
           <div className = 'chatNameTime'>
             <div className = 'chatName'>
               {this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}

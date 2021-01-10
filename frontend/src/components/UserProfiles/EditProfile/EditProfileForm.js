@@ -98,6 +98,7 @@ class EditProfileForm extends React.Component{
       authAxios.put(`${global.API_ENDPOINT}/userprofile/profile/update/`+userId,
         data
       ).then(res => {
+        console.log(res)
         this.props.changeProfilePic(res.data.profile_picture.substring(21,))
         this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
       })
@@ -119,7 +120,7 @@ class EditProfileForm extends React.Component{
     let lastName=""
 
     if(this.props.profilePic){
-      profilePic = this.props.profilePic
+      profilePic =`${global.IMAGE_ENDPOINT}`+ this.props.profilePic
     }
     if(this.props.first_name){
       firstName = this.props.profile.first_name

@@ -90,7 +90,7 @@ class WebSocketNotifications {
 
   }
   // this will send the messages to the backend
-  // it will pull all the notifications taht currently exist 
+  // it will pull all the notifications taht currently exist
   fetchFriendRequests(userId){
     this.sendNotification({
       userId: userId,

@@ -226,7 +226,7 @@ class DetailSwitch extends React.Component {
     console.log(this.state)
     console.log(this.props.currentProfile)
     let friends = this.props.friends
-    let personPic1=this.props.currentProfile
+    let personPic1=`${global.IMAGE_ENDPOINT}`+this.props.currentProfile
     let picArray=[gamingPic, notesPic, personPic1]
     console.log(friends)
     let friend = this.state.search.trim().toLowerCase()
@@ -261,11 +261,11 @@ class DetailSwitch extends React.Component {
 
           {/*if the page count is 1*/}
             <div className={`${this.props.className}-map map${i}`} key="map">
-              <img style={{marginLeft:'100px'}} src={picArray[0]} width="100%" />
+              <img style={{marginLeft:'100px'}} src={`${global.IMAGE_ENDPOINT}`+picArray[0]} width="100%" />
             </div>
 
             <div style={{marginTop:'225px' }} className={`${this.props.className}-map map${i}`} key="map">
-              <img style={{marginLeft:'100px'}} src={picArray[1]} width="100%" />
+              <img style={{marginLeft:'100px'}} src={`${global.IMAGE_ENDPOINT}`+picArray[1]} width="100%" />
             </div>
               {/*if the page count is 2*/}
 
@@ -291,7 +291,7 @@ class DetailSwitch extends React.Component {
                   cover={
 
                     <span class="containImage">
-                      <img alt="example" src={picArray[2]} />
+                      <img alt="example" src={`${global.IMAGE_ENDPOINT}`+picArray[2]} />
                     </span>
                   }
                 >
@@ -314,7 +314,7 @@ class DetailSwitch extends React.Component {
                             <span class="containImage">
                               <img
 
-                                alt="example" src={`${global.API_ENDPOINT}`+this.state.friendPerson.profile_picture} />
+                                alt="example" src={`${global.IMAGE_ENDPOINT}`+this.state.friendPerson.profile_picture} />
                             </span>
                         }
                       >
@@ -456,7 +456,7 @@ class DetailSwitch extends React.Component {
                       <List.Item.Meta
                         avatar={
                           <Avatar
-                          src={item.profile_picture} />
+                          src={`${global.IMAGE_ENDPOINT}`+item.profile_picture} />
                         }
                         title={<a>{this.capitalize(item.first_name)+" "+this.capitalize(item.last_name)}</a>}
                         description={"@"+item.username}
