@@ -162,7 +162,6 @@
 .postCommentBoxBox{
   /* height: 75.5%; */
 
-  margin-top: 10px;
   width: 500px;
   overflow:hidden;
   /* background-color: red; */
@@ -187,8 +186,8 @@
 
 .postCommentBox .postCommentItem {
   /* background-color: red; */
-
-  margin-top: 10px;
+  /* was 10  */
+  margin-top: 35px;
   height:50px;
 
 }
@@ -203,7 +202,7 @@
 }
 
 .postCommentUsername{
-  font-weight: 400;
+  font-weight: 350;
   font-size: 13px;
 
 }
@@ -220,10 +219,23 @@
 
 }
 
+.postCommentContainer{
+
+}
+
+.postCommentChild{
+  display:inline-block;
+  vertical-align: middle;
+  line-height: 125%;
+}
+
+
+
 .postCommentText{
   /* background-color: red; */
   position: relative;
   width: 340px;
+
   /* top: 50%; */
   left: 9.65%;
   top: -15px;

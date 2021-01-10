@@ -84,7 +84,6 @@ class PostPicCarousel extends React.Component{
 
 
         <Carousel
-          autoplay
         arrows = {true}
         effect = 'null'
         ref = {node => {this.carousel = node}}

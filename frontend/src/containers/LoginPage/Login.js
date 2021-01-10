@@ -73,55 +73,56 @@ if (token) {
 
 
 
-          <div class="loginTitle">Connecting people through calendars test4</div>
+          <div class="loginTitle">Connecting people through calendars </div>
             <div class="eventCard allStyle" style={{left:'20%',
-            width:'80%', height:'40%', padding:'75px'}}>
-
-              <Form
-              name="basic"
-              initialValues={{ remember: true }}
-              // onSubmit = {this.handleSubmit}
-              >
-                <Form.Item
-                onChange={this.handleUserName}
-                test="username"
-                label="Username"
-
+            width:'80%', height:'50%', padding:'50px'}}>
+              <div class="loginFormInnerContent">
+                <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                // onSubmit = {this.handleSubmit}
                 >
-                  <Input />
-                </Form.Item>
-
-                <Form.Item
-                  onChange={this.handlePasword}
-                  value={password}
-                  test="password"
-                  label="Password"
-                >
-                  <Input.Password />
-                </Form.Item>
-
-                <Form.Item name="remember" valuePropName="checked">
-                  <Checkbox>Remember me</Checkbox>
-                </Form.Item>
+                  <Form.Item
+                  onChange={this.handleUserName}
+                  test="username"
 
 
+                  >
+                    <Input placeholder="Enter Username"/>
+                  </Form.Item>
 
-                <Form.Item>
-                  <Button
-                   htmlType = 'submit'
-                   type="primary"
-                   shape="round"
-                   size="large"
-                   onClick={this.handleSubmit}
-                   loading={loading}
-                   >
-                    Log In
+                  <Form.Item
+                    onChange={this.handlePasword}
+                    value={password}
+                    test="password"
 
-                  </Button>
-                  <div>  New? <NavLink to="/signup">Sign Up</NavLink></div>
-                </Form.Item>
+                  >
+                    <Input.Password placeholder="Enter Password"/>
+                  </Form.Item>
 
-                </Form>
+                  <Form.Item name="remember" valuePropName="checked">
+                    <Checkbox>Remember me</Checkbox>
+                  </Form.Item>
+
+
+
+                  <Form.Item>
+                    <Button
+                     htmlType = 'submit'
+                     type="primary"
+                     shape="round"
+                     size="large"
+                     onClick={this.handleSubmit}
+                     loading={loading}
+                     >
+                      Log In
+
+                    </Button>
+                    <div>  New? <NavLink to="/signup">Sign Up</NavLink></div>
+                  </Form.Item>
+
+                  </Form>
+                </div>
               </div>
         </div>
 
@@ -129,7 +130,7 @@ if (token) {
           {/* color is #68BFFD*/}
 
           <img src={pic2} width="33%"
-            style={{position:'relative',top:'25%', left:'15%'}}/>
+            style={{position:'relative',top:'25%', left:'10%'}}/>
         </div>
 
 

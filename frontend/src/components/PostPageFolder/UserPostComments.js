@@ -100,7 +100,7 @@ class UserPostComments extends React.Component{
 
                         <span
                            class="headerPostText LikeCommentHover"
-                           style={{marginLeft:'7.5px', fontSize:'12px'}}
+                           style={{marginLeft:'5px', color:'#bfbfbf'}}
                            >{"@"+item.commentUser.username}
                         </span>
                   </div>
@@ -114,12 +114,17 @@ class UserPostComments extends React.Component{
 
                   </div>
                 </div>
+                <div class="postCommentContainer">
+                  <div className = 'postCommentText postCommentChild'>
+                    {item.body}
 
-                <div className = 'postCommentText'>
-                  {item.body}
+                  </div>
+                  <div class="postCommentText postCommentChild">
+                    <i style={{ fontSize:'12px', marginRight:'5px', color:'#434343'}} class="far fa-heart"></i>
+                    <span style={{color:'#bfbfbf'}}>Like</span>
+                  </div>
                 </div>
-                <i style={{}} class="far fa-thumbs-up"></i>
-                Like 1
+
               </div>
           )}
         />
