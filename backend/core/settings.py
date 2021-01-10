@@ -225,7 +225,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('api.shareorb.com', 6379)],
+            "hosts": [('shareorbredis', 6379)],
         },
     },
 }
