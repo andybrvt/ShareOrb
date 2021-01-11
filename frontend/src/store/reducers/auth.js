@@ -19,7 +19,7 @@ const initialState = {
   email: "",
   dob: "",
   private: false,
-  requested: []
+  requestList: []
 };
 
 const authStart = (state, action) => {
@@ -69,7 +69,7 @@ const addCredentials = (state, action) => {
     email: action.email,
     dob: action.dob,
     private: action.private,
-    requested: action.requested
+    requestList: action.requestList
   });
 };
 

@@ -133,7 +133,7 @@ componentDidMount(){
     //Similar to the event page channel, you will have to remove the recursion from
     // the disconnect in the websocket
 
-    
+
     ExploreWebSocketInstance.disconnect();
   }
 
@@ -394,7 +394,11 @@ componentDidMount(){
       let friends = []
       let curId = ''
       let bio=''
+
+      // Requested will be froe the other user so you can know if you reqested them
       let requested = []
+
+      // curRequested is your requst to show whether or not you can accept
       let curRequested = []
 
       // userObj will be the object used tos end into teh auth in order to update
@@ -405,7 +409,11 @@ componentDidMount(){
         curId = this.props.currentId
       }
       if(this.props.curRequested){
-        curRequested = this.props.curRequested
+        for(let i = 0; i< this.props.curRequested.length; i++){
+          curRequested.push(
+            this.props.curRequested[i].id
+          )
+        }
       }
 
       if (this.props.profile){
@@ -443,8 +451,12 @@ componentDidMount(){
         }
 
         if(this.props.profile.private){
-          if(this.props.profile.requested){
-            requested = this.props.profile.requested
+          if(this.props.profile.get_follow_request){
+            for(let i= 0; i<this.props.profile.get_follow_request.length; i++){
+                requested.push(
+                  this.props.profile.get_follow_request[i].id
+                )
+            }
           }
         }
 
@@ -922,7 +934,7 @@ const mapStateToProps = state => {
       token: state.auth.token,
       profile: state.explore.profile,
       curUserFriend: state.auth.friends,
-      curRequested: state.auth.requested
+      curRequested: state.auth.requestList
     };
 };
 

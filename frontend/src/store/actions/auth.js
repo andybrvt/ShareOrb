@@ -33,7 +33,7 @@ export const addCredentials = (
    email,
    dob,
    privatePro,
-   requested
+   requestList
  ) => {
    console.log(localStorage)
   console.log(username, id)
@@ -52,7 +52,7 @@ export const addCredentials = (
     email:email,
     dob: dob,
     private: privatePro,
-    requested:requested
+    requestList:requestList
   };
 };
 
@@ -89,7 +89,7 @@ export const logout = () => {
   localStorage.removeItem('email')
   localStorage.removeItem('dob')
   localStorage.removeItem('private')
-  localStorage.removeItem('requested')
+  localStorage.removeItem('requestList')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -200,7 +200,7 @@ export const grabUserCredentials = () => {
         const email = res.data.email;
         const dob = res.data.dob;
         const privatePro = res.data.private;
-        const requested = res.data.requested
+        const requestList = res.data.get_follow_request;
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
         localStorage.setItem('friends', friends);
@@ -214,7 +214,7 @@ export const grabUserCredentials = () => {
         localStorage.setItem('email', email);
         localStorage.setItem('dob', dob);
         localStorage.setItem('private', privatePro)
-        localStorage.setItem('requested', requested)
+        localStorage.setItem('requestList', requestList)
         dispatch(addCredentials(
            res.data.username,
            res.data.id,
@@ -229,7 +229,7 @@ export const grabUserCredentials = () => {
            res.data.email,
            res.data.dob,
            res.data.private,
-           res.data.requested
+           res.data.get_follow_request
          ));
          {/*when it times out*/}
         dispatch(checkAuthTimeout(100000));
