@@ -75,6 +75,12 @@ class User(AbstractUser):
 
     # This is for when you make your account private, and this field will have people
     # that request to see your page
+
+    # This does not work that well bc if you create a reqeust, then it would show
+    # up on both peoples request so you dont want that.
+    # The way you want to do this is make a request model so that each request can
+    # be shared and added and each person would have a list of request instead
+    # of both poeple getting a request like ManyToManyField
     requested = models.ManyToManyField("self", blank = True, related_name = "private_approved")
 
     def get_posts(self):
@@ -135,6 +141,19 @@ class UserFollowing(models.Model):
     # So basically how this works is that if you want to follow someone, you will be the person_following and
     # the person gettting the following will be the person_getting_followers
 
+class UserFollowingRequest(models.Model):
+    # Pretty much make this the same as UserFollowing pretty much, a person would
+    # send a request, and then one person accepting the requeset
+
+    # send_request would be for the person sending the request
+    # accept_request would be for the person accepting the request
+    send_request = models.ForeignKey(User, related_name = "send_request", on_delete = models.CASCADE)
+    accept_request = models.ForeignKey(User, related_name = "accept_request", on_delete = models.CASCADE)
+
+    created = models.DateTimeField(auto_now_add = True)
+
+
+    
 class Post(models.Model):
     caption = models.CharField(max_length=1000, default = 'caption')
     created_at = models.DateTimeField(default = timezone.now, blank = False)

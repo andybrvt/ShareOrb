@@ -68,7 +68,7 @@ class NewChat extends React.Component{
 
   constructor(props){
     super(props)
-    this.initialiseChat()
+    // this.initialiseChat()
     authAxios.get(`${global.API_ENDPOINT}/mycalendar/avaliEvents`)
     .then(res => {
       this.setState({

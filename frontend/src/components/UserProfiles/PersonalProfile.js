@@ -92,7 +92,7 @@ class PersonalProfile extends React.Component{
 	}
 
 
-  componentDidMount(){
+componentDidMount(){
     this.initialiseProfile()
 
   }
