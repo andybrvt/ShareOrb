@@ -99,12 +99,12 @@ if (token) {
                   >
                     <Input.Password placeholder="Enter Password"/>
                   </Form.Item>
-
+                  {/*
                   <Form.Item name="remember" valuePropName="checked">
                     <Checkbox>Remember me</Checkbox>
                   </Form.Item>
 
-
+                  */}
 
                   <Form.Item>
                     <Button

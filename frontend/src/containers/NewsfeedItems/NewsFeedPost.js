@@ -417,7 +417,8 @@ class NewsfeedPost extends React.Component {
                    <Divider type="vertical" style={{background:'#d9d9d9'}}/>
                    <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
                      <span class="boldLikeComment">
-                       {this.props.data.post_comments.length} Comments
+
+                       {this.props.data.post_comments.length} comments
                      </span>
                    </span>
 
@@ -431,7 +432,7 @@ class NewsfeedPost extends React.Component {
               </div>
            </div>
         </div>
-
+        <Divider style={{marginTop:'-10px'}}/>
         <p style={{ fontSize: '14px', color:'black'}}>
                   {
 
@@ -497,7 +498,7 @@ class NewsfeedPost extends React.Component {
               }
               <button onClick ={() => this.OnClickPost(postId, userUsername)} >
 
-                <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i> Comment
+                <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comment"></i> Comment
               </button>
               <button
               onClick = {() => this.onClipPhoto()}
