@@ -31,7 +31,7 @@ class WebSocketNewChatSidePanel {
     // on the right chat when you click on the chat tab
 
     // GO INTO BACKEND AND START SETTING UP THE NEW CHANNEL
-    const path = 'ws://127.0.0.1:8000/ws/allChats/'+chatUserId
+    const path = `ws://${global.WS_ENDPOINT}/ws/allChats/`+chatUserId
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen =() => {

@@ -68,7 +68,7 @@ class NewChat extends React.Component{
 
   constructor(props){
     super(props)
-    // this.initialiseChat()
+    this.initialiseChat()
     authAxios.get(`${global.API_ENDPOINT}/mycalendar/avaliEvents`)
     .then(res => {
       this.setState({
@@ -81,8 +81,8 @@ class NewChat extends React.Component{
   componentWillReceiveProps(newProps){
     console.log("new props")
 
-    // When ever a new message is sent or you open up a new chat
-    // it should send out an update of the seen
+    When ever a new message is sent or you open up a new chat
+    it should send out an update of the seen
     if(this.props.parameter.id !== newProps.parameter.id && newProps.parameter.id !== "newchat"){
       NewChatWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {

@@ -132,6 +132,8 @@ componentDidMount(){
     // avoid any connection conflicts
     //Similar to the event page channel, you will have to remove the recursion from
     // the disconnect in the websocket
+
+    
     ExploreWebSocketInstance.disconnect();
   }
 

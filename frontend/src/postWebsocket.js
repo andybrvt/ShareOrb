@@ -14,7 +14,7 @@ class WebSocketPosts {
   }
 
   connect(){
-    const path = 'ws://127.0.0.1:8000/ws/newsfeed'
+    const path = `ws://${global.WS_ENDPOINT}/ws/newsfeed`
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {

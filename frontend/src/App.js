@@ -246,23 +246,23 @@ class App extends Component {
 
 
 
-        ChatSidePanelWebSocketInstance.disconnect();
-        this.waitForChatsSocketConnection(() =>{
-          ChatSidePanelWebSocketInstance.fetchChats(
-            newProps.id
-          )
-
-        })
-        ChatSidePanelWebSocketInstance.connect(newProps.id)
-
-
-        NotificationWebSocketInstance.disconnect()
-        this.waitForNotificationSocketConnection(() => {
-          NotificationWebSocketInstance.fetchFriendRequests(
-            newProps.id
-          )
-        })
-        NotificationWebSocketInstance.connect(newProps.username)
+        // ChatSidePanelWebSocketInstance.disconnect();
+        // this.waitForChatsSocketConnection(() =>{
+        //   ChatSidePanelWebSocketInstance.fetchChats(
+        //     newProps.id
+        //   )
+        //
+        // })
+        // ChatSidePanelWebSocketInstance.connect(newProps.id)
+        //
+        //
+        // NotificationWebSocketInstance.disconnect()
+        // this.waitForNotificationSocketConnection(() => {
+        //   NotificationWebSocketInstance.fetchFriendRequests(
+        //     newProps.id
+        //   )
+        // })
+        // NotificationWebSocketInstance.connect(newProps.username)
 
 
       }

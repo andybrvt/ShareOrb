@@ -110,6 +110,9 @@ class User(AbstractUser):
 
         return UserSocialNormPost.objects.filter(owner_id = self.id)
 
+    def get_follow_request(self):
+        # This will grab all the follow request that a perosn has
+        return UserFollowingRequest.objects.filter(accept_request = self.id).values_list('send_request__username', flat = True)
     def __str__(self):
         return self.username
 
@@ -153,7 +156,7 @@ class UserFollowingRequest(models.Model):
     created = models.DateTimeField(auto_now_add = True)
 
 
-    
+
 class Post(models.Model):
     caption = models.CharField(max_length=1000, default = 'caption')
     created_at = models.DateTimeField(default = timezone.now, blank = False)
