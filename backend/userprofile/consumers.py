@@ -20,6 +20,7 @@ from .models import Post
 from .models import Comment
 from .models import UserFollowing
 from .models import UserSocialNormPost
+from .models import UserFollowingRequest
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalComment
 from mySocialCal.models import SocialCalEvent
@@ -962,15 +963,21 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
         # So since the following is the person getting the request,  you will
         # just add teh follower to the following requested list
-        following.requested.add(follower)
-        following.save()
 
-        curUser = UserSerializer(following).data
+
+        # So you create a request model here
+        requestObj = UserFollowingRequest.objects.create(
+            send_request = follower,
+            accept_request = following
+        )
+
+        curUser = get_object_or_404(User, id = data['following'])
+        hostObj = UserSerializer(curUser).data
 
         content = {
             'command': 'send_requested',
-            'requestedList': curUser['requested'],
-            'reciever': curUser['username']
+            'requestedList': hostObj['get_follow_request'],
+            'reciever': hostObj['username']
         }
 
         self.send_new_explore(content)

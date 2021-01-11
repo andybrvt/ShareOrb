@@ -100,7 +100,6 @@ class UserSerializer(serializers.ModelSerializer):
             followerList.append(userPerson)
 
         for user in data['get_follow_request']:
-            print(user)
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             requestList.append(userPerson)
 

@@ -104,7 +104,7 @@ export const sendRequested = (state, action) => {
   return updateObject(state, {
     profile: {
       ...state.profile,
-      requested: action.requestedList
+      get_follow_request: action.requestedList
     }
   })
 }

@@ -92,7 +92,7 @@ class PersonalProfile extends React.Component{
 	}
 
 
-componentDidMount(){
+  componentDidMount(){
     this.initialiseProfile()
 
   }
@@ -311,7 +311,7 @@ componentDidMount(){
 
         ExploreWebSocketInstance.sendFollowRequest(follower, following)
 
-        NotificationWebSocketInstance.sendNotification(notificationObject)
+        // NotificationWebSocketInstance.sendNotification(notificationObject)
 
       } else {
         // MAKE SURE TO UPDATE THE AUTH TOO
