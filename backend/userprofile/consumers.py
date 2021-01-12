@@ -990,15 +990,20 @@ class ExploreConsumer(JsonWebsocketConsumer):
         follower = get_object_or_404(User, id = data['follower'])
         following = get_object_or_404(User, id = data['following'])
 
-        following.requested.remove(follower)
-        following.save()
+        # You will first get the request object and then delete it
+        requestObj = UserFollowingRequest.objects.filter(
+            send_request = follower,
+            accept_request = following
+        )
+        requestObj.delete()
 
-        curUser = UserSerializer(following).data
+        curUser = get_object_or_404(User, id = data['following'])
+        hostObj = UserSerializer(following).data
 
         content = {
             'command': 'unsend_requested',
-            'requestedList': curUser['requested'],
-            'reciever': curUser['username']
+            'requestedList': hostObj['get_follow_request'],
+            'reciever': hostObj['username']
         }
 
         self.send_new_explore(content)
