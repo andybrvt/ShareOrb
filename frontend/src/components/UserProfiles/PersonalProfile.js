@@ -311,7 +311,7 @@ class PersonalProfile extends React.Component{
 
         ExploreWebSocketInstance.sendFollowRequest(follower, following)
 
-        // NotificationWebSocketInstance.sendNotification(notificationObject)
+        NotificationWebSocketInstance.sendNotification(notificationObject)
 
       } else {
         // MAKE SURE TO UPDATE THE AUTH TOO
@@ -339,9 +339,18 @@ class PersonalProfile extends React.Component{
       // This is to undo the request if you did send one (make sure you delete
       // the notification as well )
 
+      // Probally gonna do a delete notification here
       ExploreWebSocketInstance.unSendFollowRequest(follower, following)
 
-      // This is used to update the auth
+      // Pretty much this will unsend the notification for follow and stuff
+      const notificationObject = {
+        command: 'unsend_follow_notification',
+        actor: this.props.currentId,
+        recipient: this.props.profile.id
+      }
+
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
     }
 
 

@@ -282,6 +282,29 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
             self.send_new_notification(content)
 
+    def unsend_notification(self, data):
+        # This function will be used to remove notifications from the the other users
+        # notification. These will be used most for notifications that are more
+        # important that has actions associated with themself.
+
+        if data['command'] == 'unsend_follow_notification':
+            actor = get_object_or_404(User, id = data['actor'])
+            recipient = get_object_or_404(User, id = data['recipient'])
+            notification = CustomNotification.objects.filter(type = "follow_request_notification", recipient = recipient, actor = actor, verb = "requested to follow you")
+            notification.delete()
+
+            # once you delete the notifcations then you would wnat to grab the
+            # users notifications
+            notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['recipient']).order_by('-timestamp')
+            serializer = NotificationSerializer(notifications, many=True)
+            content = {
+                'command': 'notifications',
+                'notifications': json.dumps(serializer.data),
+                'recipient': recipient.username
+
+            }
+            self.send_new_notification(content)
+
 
 
 
@@ -492,6 +515,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_social_cal_notification(data)
         if data['command'] == 'send_pending_social_pics':
             self.send_social_cal_notification(data)
+        if data['command'] == 'unsend_follow_notification':
+            self.unsend_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
