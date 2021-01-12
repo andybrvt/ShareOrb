@@ -21,7 +21,7 @@ from core.token_auth import AuthMiddlewareStack
 # the ProtocolTypeRouter takes in a dictionary of stuff such as
 #websocket and its urls
 application = ProtocolTypeRouter ({
-    'websocket': AuthMiddlewareStack(
+    'websocket': TokenAuthMiddlewareStack(
         URLRouter(
         userprofile.routing.websocket_urlpatterns
         + chat.routing.websocket_urlpatterns
