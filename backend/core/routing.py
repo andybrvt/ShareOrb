@@ -9,10 +9,8 @@ import newChat.routing
 
 from channels.http import AsgiHandler
 from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.auth import AuthMiddlewareStack
 
 from core.token_auth import TokenAuthMiddlewareStack
-from core.token_auth import AuthMiddlewareStack
 
 
 
@@ -21,7 +19,7 @@ from core.token_auth import AuthMiddlewareStack
 # the ProtocolTypeRouter takes in a dictionary of stuff such as
 #websocket and its urls
 application = ProtocolTypeRouter ({
-    'websocket': TokenAuthMiddlewareStack(
+    'websocket': AuthMiddlewareStack(
         URLRouter(
         userprofile.routing.websocket_urlpatterns
         + chat.routing.websocket_urlpatterns
