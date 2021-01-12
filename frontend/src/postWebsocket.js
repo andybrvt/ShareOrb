@@ -30,7 +30,7 @@ class WebSocketPosts {
 
     this.socketRef.onclose = () => {
       console.log('WebSocket is closed')
-      // this.connect()
+      this.connect()
     }
   }
 
