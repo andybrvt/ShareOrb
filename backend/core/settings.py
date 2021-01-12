@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
  '172.31.4.121',
  'api.shareorb.com',
  'shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
- '54.183.46.151'
+ '54.183.46.151',
+ '127.0.0.1:5000'
  ]
 
 # ALLOWED_HOSTS = []
