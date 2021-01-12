@@ -32,9 +32,9 @@ class App extends Component {
     super(props);
     // this.initialiseExplore()
 
-    this.initialiseChats()
+    // this.initialiseChats()
     this.initialisePost()
-    this.initialiseNotification()
+    // this.initialiseNotification()
 
     // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
     WebSocketInstance.addCallbacks(
@@ -246,23 +246,23 @@ class App extends Component {
 
 
 
-        ChatSidePanelWebSocketInstance.disconnect();
-        this.waitForChatsSocketConnection(() =>{
-          ChatSidePanelWebSocketInstance.fetchChats(
-            newProps.id
-          )
-
-        })
-        ChatSidePanelWebSocketInstance.connect(newProps.id)
-
-
-        NotificationWebSocketInstance.disconnect()
-        this.waitForNotificationSocketConnection(() => {
-          NotificationWebSocketInstance.fetchFriendRequests(
-            newProps.id
-          )
-        })
-        NotificationWebSocketInstance.connect(newProps.username)
+        // ChatSidePanelWebSocketInstance.disconnect();
+        // this.waitForChatsSocketConnection(() =>{
+        //   ChatSidePanelWebSocketInstance.fetchChats(
+        //     newProps.id
+        //   )
+        //
+        // })
+        // ChatSidePanelWebSocketInstance.connect(newProps.id)
+        //
+        //
+        // NotificationWebSocketInstance.disconnect()
+        // this.waitForNotificationSocketConnection(() => {
+        //   NotificationWebSocketInstance.fetchFriendRequests(
+        //     newProps.id
+        //   )
+        // })
+        // NotificationWebSocketInstance.connect(newProps.username)
 
 
       }
