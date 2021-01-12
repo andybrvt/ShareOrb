@@ -332,9 +332,11 @@ class UserPostPage extends React.Component{
 
           <div className = "postModalRight">
               <div className = "postNameTag">
-                <Avatar size = {42.5}
-                src = {userPostProfilePic}
-                className = 'socialProfileImage'/>
+                <Avatar
+                  size = {42.5}
+                  src = {userPostProfilePic}
+                  className = 'socialProfileImage'
+                />
 
                 <span
                   style={{color:'black', fontSize:'15px', marginLeft:'10px'}}

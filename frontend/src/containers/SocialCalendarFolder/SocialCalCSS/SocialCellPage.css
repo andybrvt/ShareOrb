@@ -1,3 +1,20 @@
+/* This is for the page look */
+.socialCalCellModal {
+  position: fixed;
+  background: white;
+  /* height: 100; */
+  top: 3.5%;
+  left: 10%;
+  right: 10%;
+  z-index: 100;
+  color:black;
+  font-weight: 500;
+  font-family: "Segoe UI Regular";
+}
+
+
+
+
 .socialCalCellModalBackground{
   margin:0;
 
@@ -111,17 +128,7 @@
   cursor: pointer;
 }
 
-/* This is for the page look */
-.socialCalCellModal {
-  position: fixed;
-  background: white;
-  /* height: 100; */
-  top: 3.5%;
-  left: 10%;
-  right: 10%;
-  z-index: 100;
 
-}
 
 
 

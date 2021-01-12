@@ -226,18 +226,18 @@ class SideMenu extends React.Component {
 
 
     return (
-      <div style={{marginBottom:20}}>
+      <div>
 
-
-
-
-      <Layout>
+        {/*
+        background everything
+        */}
+      <Layout  style={{width:'100vw'}} class="backgroundofEverything">
 
 
 
 
       <Header className="site-layout HeaderPosition appearBefore"
-         style={{ marginTop:'-20px',   position: 'fixed', background:'white'}}>
+         style={{ background:'white'}}>
         <p class ="">
                 <aside class="sidebar" >
                 <div class="toggle">
