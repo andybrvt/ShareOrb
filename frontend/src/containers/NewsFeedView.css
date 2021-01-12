@@ -96,20 +96,7 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
 
 } */
 
-.bottomRightCircle {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-top: 50;
-  width: 50px;
-  height: 50px;
-  background-color: #0069FF;
 
-       border-radius: 100px 0 0 0;
--moz-border-radius: 100px 0 0 0;
--webkit-border-radius: 100px 0 0 0;
-
- }
 
 .circle {
   background: #456BD9;
@@ -139,13 +126,6 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
   overscroll-behavior: contain;
 } */
 
-.headers {
-  top: 100px;
-  position: -webkit-sticky;
-  position: sticky;
-  z-index: 1;
-
-}
 
 .scroller {
   overflow: auto;

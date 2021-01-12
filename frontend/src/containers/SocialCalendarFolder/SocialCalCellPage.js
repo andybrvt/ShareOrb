@@ -767,13 +767,13 @@ class SocialCalCellPage extends React.Component{
                   <div className = "clipPicturesRoll">
                     <div className = "ownerHolder">
                        <Avatar
-                       size = {65}
-                       src = {`${global.API_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
+                         size = {42.5}
+                         src = {`${global.API_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
                        />
                        <div className = "ownerName">
                          <div>{this.getChatUserName(socialCalItems[0])} </div>
-                         <div class="socialCalCellUsername"> @{socialCalItems[0].creator.username} </div>
-
+                         <div class="headerPostText"> @{socialCalItems[0].creator.username} </div>
+                         
                        </div>
                     </div>
                    <div className = "polaroidHolder">

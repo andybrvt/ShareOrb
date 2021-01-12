@@ -95,39 +95,41 @@ class NewsFeedView extends React.Component {
 
 
 
-				<Row style = {{
+				<Row  style = {{
 					display: 'flex',
 					position: 'relative',
-					marginLeft: '350px',
+					width:'100vw',
+					left:'20%',
 				}}>
 
 
 				<div>
-					<div class="headers">
-					<Col
-						style={{
-						marginLeft:'-125px', marginRight:'125px'}}
-						span={5}
+					<div>
+						<Col
+							style={{
+								width:'10vw',
+							 right:'40%'}}
+							span={5}
 
-						class="scroller"
-						>
-
-
-
-					<ProfileCardNewsFeed
-						profile = {this.props.currentProfile}
-						 />
+							class="scroller"
+							>
 
 
 
-					</Col>
+						<ProfileCardNewsFeed
+							profile = {this.props.currentProfile}
+							 />
+
+
+
+						</Col>
 					</div>
 				</div>
-				<Col style={{}} offset={0.5} span={11}>
+				<Col span={11}>
 				<div>
 					<div>
 						<div>
-						<Row gutter={20}>
+						<Row style={{width:'55vw'}}>
 
 
 							<Col span={8}>
@@ -137,7 +139,7 @@ class NewsFeedView extends React.Component {
 
 
 									<i class="far fa-edit share" style={{fontSize:'25px', color:'#1890ff'}}></i>
-									 <p style={{ color:'#1890ff'}} class="cardAlign"> Write a post </p>
+									 <p style={{ color:'#1890ff'}} class="cardAlign"> Write a post</p>
 
 								</div>
 
