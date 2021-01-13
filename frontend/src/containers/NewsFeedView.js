@@ -99,7 +99,8 @@ class NewsFeedView extends React.Component {
 					display: 'flex',
 					position: 'relative',
 					width:'100vw',
-					left:'20%',
+					height:'100vh',
+					left:'15vw',
 				}}>
 
 
@@ -108,8 +109,8 @@ class NewsFeedView extends React.Component {
 						<Col
 							style={{
 								width:'10vw',
-							 right:'40%'}}
-							span={5}
+							 right:'10vw'}}
+
 
 							class="scroller"
 							>
@@ -129,24 +130,24 @@ class NewsFeedView extends React.Component {
 				<div>
 					<div>
 						<div>
-						<Row style={{width:'55vw'}}>
+						<Row style={{width:'50vw', right:'10vw'}}>
 
 
-							<Col span={8}>
+							<Col style={{right:'10%'}}>
 
 
-								<div onClick ={this.postCondition} class="topCard">
+								<div style={{right:'5%'}} onClick ={this.postCondition} class="topCard">
 
 
 									<i class="far fa-edit share" style={{fontSize:'25px', color:'#1890ff'}}></i>
-									 <p style={{ color:'#1890ff'}} class="cardAlign"> Write a post</p>
+									 <p style={{ color:'#1890ff',}} class="cardAlign"> Write a post</p>
 
 								</div>
 
 
 				      </Col>
 
-							<Col span={8}>
+							<Col style={{right:'5%'}}>
 
 
 								<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
@@ -161,7 +162,7 @@ class NewsFeedView extends React.Component {
 				      </Col>
 
 
-							<Col span={8}>
+							<Col>
 
 							<Link to = {{
 								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
