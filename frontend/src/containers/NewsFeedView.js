@@ -100,15 +100,15 @@ class NewsFeedView extends React.Component {
 					position: 'relative',
 					width:'100vw',
 					height:'100vh',
+				 	background:'green',
 					left:'15vw',
 				}}>
 
 
-				<div>
-					<div>
 						<Col
 							style={{
 								width:'10vw',
+								background:'red',
 							 right:'10vw'}}
 
 
@@ -124,13 +124,12 @@ class NewsFeedView extends React.Component {
 
 
 						</Col>
-					</div>
-				</div>
-				<Col span={11}>
+
+				<Col style={{background:'red', width:'60vw'}}>
 				<div>
 					<div>
 						<div>
-						<Row style={{width:'50vw', right:'10vw'}}>
+						<Row style={{width:'75%', background:'brown'}}>
 
 
 							<Col style={{right:'10%'}}>

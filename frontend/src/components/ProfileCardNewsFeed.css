@@ -1,6 +1,6 @@
 .profileCard-NF{
   background-color: white;
-  width: 200px;
+  width: 10vw;
   height: 260px;
   z-index: 1;
   border-radius: 10px;
@@ -30,7 +30,7 @@
   position: absolute;
   /* width: 320px; */
   height: 146%;
-  left: 50%;
+  left: 40%;
   bottom: 0%;
   transform: translateX(-50%);
 }
@@ -92,7 +92,7 @@
 .name-NF {
   /* position: absolute; */
   color:black;
-  left:60%;
+  left:50%;
   position:relative;
   /* background-color: red; */
   font-weight: 550;

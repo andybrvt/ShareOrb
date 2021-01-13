@@ -231,9 +231,6 @@ class SideMenu extends React.Component {
         {/*
         background everything
         */}
-      <Layout  style={{width:'100vw'}}>
-
-
 
 
       <Header className="site-layout HeaderPosition appearBefore"
@@ -369,7 +366,6 @@ class SideMenu extends React.Component {
          >
         <Input.Search
           style={{
-           // marginLeft:150,\
 
            marginRight:'8%',
            width: 700,
@@ -478,31 +474,12 @@ class SideMenu extends React.Component {
 
       </Header>
 
-      // outer boundary
-        <Layout className="site-layout" style={{
-          background:'#f5f5f5',
-          display:'flex',
-
-        }}>
-
-          {/* length of banner from the very top*/}
-
-          <Content
-
-
-            style={{
-
-              // backgroundColor: 'red'
-
-            }}
-          >
-
-
-
+      {/*everything container*/}
+        <Layout >
+          <div>
               {this.props.children}
-          </Content>
+          </div>
         </Layout>
-      </Layout>
 
 
 
