@@ -161,7 +161,7 @@ class NewsfeedPost extends React.Component {
         <div
           onClick = {() => this.OnClickPost(postId, username)}
           class="imageContainer">
-          <a><img src={`${global.API_ENDPOINT}/media/`+userPostImages[0]} alt="" /></a>
+          <a><img src={`${global.NEWSFEED_PICS}`+userPostImages[0]} alt="" /></a>
         </div>
           )
         }
@@ -376,7 +376,7 @@ class NewsfeedPost extends React.Component {
     let userUsername = ''
 
     if (this.props.data.user.profile_picture){
-      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
+      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.user.profile_picture
     }
     if(this.props.data.id){
       postId = this.props.data.id
@@ -613,11 +613,11 @@ class NewsfeedPost extends React.Component {
     let profilePic = ''
 
     if (this.props.data.user.profile_picture){
-      profilePic = `${global.API_ENDPOINT}`+this.props.data.user.profile_picture
+      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.user.profile_picture
     }
 
 
-    let temp=`${global.API_ENDPOINT}`+this.props.data.post_images;
+    let temp=`${global.IMAGE_ENDPOINT}`+this.props.data.post_images;
 
 
     let viewPersonPage="http://localhost:3000/explore/"+this.props.data.user.username;
