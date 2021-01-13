@@ -231,7 +231,7 @@ class SideMenu extends React.Component {
         {/*
         background everything
         */}
-      <Layout  style={{width:'100vw'}} class="backgroundofEverything">
+      <Layout  style={{width:'100vw'}}>
 
 
 
@@ -358,7 +358,8 @@ class SideMenu extends React.Component {
            dropdownMatchSelectWidth={700}
            style={{
             marginRight:'18%',
-            marginLeft:'500px',
+            left:'33%',
+            top:'25%',
 
 
            // backgroundColor: 'red'
@@ -371,7 +372,6 @@ class SideMenu extends React.Component {
            // marginLeft:150,\
 
            marginRight:'8%',
-           marginTop:'-15px',
            width: 700,
 
 
@@ -506,11 +506,6 @@ class SideMenu extends React.Component {
 
 
 
-
-
-      <div class="newsfeed">
-
-      </div>
 
       <div>
         <PickEventSyncModal
