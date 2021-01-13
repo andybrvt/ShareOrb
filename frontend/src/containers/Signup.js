@@ -64,20 +64,22 @@ class Signup extends React.Component {
       }
 
     handleSubmit = (e) => {
+
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
+        console.log(values)
         if (!err && values.password.length > 8) {
           this.props.onAuth(
+            values.username,
             values.first_name,
             values.last_name,
             values.dob,
-            values.bio,
             values.email,
             values.phone_number,
             values.password,
             values.confirm,
           );
-          this.props.history.push('/home');
+          // this.props.history.push('/home');
         }
     });
   }
@@ -103,6 +105,14 @@ class Signup extends React.Component {
             <span style={{fontSize:'20px'}}> Sign Up</span>
 
             <Form style={{marginTop:'25px'}} onSubmit={this.handleSubmit}>
+
+            <FormItem>
+                {getFieldDecorator('username', {
+                    rules: [{ required: true, message: 'Please input your username!' }],
+                })(
+                    <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                )}
+            </FormItem>
 
             <FormItem>
                 {getFieldDecorator('first_name', {
@@ -209,7 +219,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   // this is where the actual sign up fucntion is called
     return {
-        onAuth: (first_name, last_name, dob, bio, email, phone_number, password1, password2) => dispatch(actions.authSignup(first_name, last_name, dob, bio, email, phone_number, password1, password2)),
+        onAuth: (username,first_name, last_name, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(username, first_name, last_name, dob, email, phone_number, password1, password2)),
     }
 }
 

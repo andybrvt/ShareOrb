@@ -245,28 +245,57 @@ export const grabUserCredentials = () => {
   }
 
 
-export const authSignup = (first_name, last_name, dob, bio, email, phone_number, password1, password2) => {
+export const authSignup = (username, first_name, last_name, dob, email, phone_number, password1, password2) => {
   return dispatch => {
     dispatch(authStart());
     axios
       .post(`${global.API_ENDPOINT}/rest-auth/registration/`, {
+        username: username,
         first_name: first_name,
         last_name: last_name,
         dob: dob,
-        bio: bio,
         email: email,
         phone_number: phone_number,
         password1: password1,
         password2: password2
       })
       .then(res => {
+        console.log(res)
         const token = res.data.key;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
         dispatch(authSuccess(token));
-        dispatch(checkAuthTimeout(3600));
+
+        window.location.reload(true);
+
+        return axios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
+
       })
+      .then(res => {
+            console.log(res)
+            const username1 = res.data.username;
+            const id = res.data.id;
+            const friends = res.data.friends;
+
+            localStorage.setItem("username", username1);
+            localStorage.setItem("id", id);
+            localStorage.setItem('friends', friends);
+
+            dispatch(addCredentials(
+               res.data.username,
+               res.data.id,
+               res.data.friends,
+               res.data.get_posts,
+               res.data.first_name,
+               res.data.last_name,
+               res.data.profile_picture,
+               res.data.get_following,
+               res.data.get_followers
+             ));
+            dispatch(checkAuthTimeout(3600));
+
+        })
       .catch(err => {
         dispatch(authFail(err));
       });

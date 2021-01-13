@@ -93,7 +93,7 @@ class PersonalProfile extends React.Component{
 
 
   componentDidMount(){
-    // this.initialiseProfile()
+    this.initialiseProfile()
 
   }
 
@@ -102,28 +102,28 @@ class PersonalProfile extends React.Component{
     console.log('hit here')
     //This will reconnect to eh proper profile if you were to change the profiles
 
-    // if(this.props.parameter.username !== newProps.parameter.username){
-    //
-    //   this.props.closeProfile()
-    //   ExploreWebSocketInstance.disconnect();
-    //   this.waitForSocketConnection(() => {
-    //     ExploreWebSocketInstance.fetchProfile(
-    //       newProps.parameter.username
-    //     )
-    //   })
-    //   ExploreWebSocketInstance.connect(newProps.parameter.username)
-    // }
-    //
-    // if(this.props.location.pathname !== newProps.location.pathname){
-    //   //To refetch the information
-    //   this.waitForSocketConnection(() => {
-    //     ExploreWebSocketInstance.fetchProfile(
-    //       newProps.parameter.username
-    //     )
-    //   })
-    //   // ExploreWebSocketInstance.connect(newProps.parameter.username)
-    //
-    // }
+    if(this.props.parameter.username !== newProps.parameter.username){
+
+      this.props.closeProfile()
+      ExploreWebSocketInstance.disconnect();
+      this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          newProps.parameter.username
+        )
+      })
+      ExploreWebSocketInstance.connect(newProps.parameter.username)
+    }
+
+    if(this.props.location.pathname !== newProps.location.pathname){
+      //To refetch the information
+      this.waitForSocketConnection(() => {
+        ExploreWebSocketInstance.fetchProfile(
+          newProps.parameter.username
+        )
+      })
+      // ExploreWebSocketInstance.connect(newProps.parameter.username)
+
+    }
 
   }
 
