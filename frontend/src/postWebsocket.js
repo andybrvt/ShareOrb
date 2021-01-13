@@ -17,6 +17,7 @@ class WebSocketPosts {
     const path = `ws://${global.WS_ENDPOINT}/ws/newsfeed`
     console.log(path)
     this.socketRef = new WebSocket(path)
+    console.log(this.socketRef)
     this.socketRef.onopen = () => {
       console.log('websocket open')
     }
@@ -25,12 +26,12 @@ class WebSocketPosts {
     }
 
     this.socketRef.onerror = (e) => {
-      console.log(e.message);
+      console.log(e);
     }
 
     this.socketRef.onclose = () => {
       console.log('WebSocket is closed')
-      this.connect()
+      // this.connect()
     }
   }
 
