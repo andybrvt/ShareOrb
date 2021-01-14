@@ -1,14 +1,13 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+import axios from "axios";
 
-// DELETE LATER
-import { Form } from '@ant-design/compatible';
 
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Button } from 'antd';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import { LockOutlined, MailOutlined, QuestionCircleOutlined, UserOutlined } from '@ant-design/icons';
 import './Home.css';
@@ -16,7 +15,6 @@ import worldPic from './LoginPage/world.svg';
 
 
 
-const FormItem = Form.Item;
 
 const renderField = (field) => {
   // Typical input field, most use for the title
@@ -79,10 +77,22 @@ const validate = values => {
   if(!values.confirm){
     errors.confirm = "Please confirm your password."
   }
+  if(!values.dob){
+    errors.dob = "Please enter a date of birth."
+  }
+  if(!values.email){
+    errors.email = "Please enter an email."
+  }
+  if(!values.phone_number){
+    errors.phone_number = "Please enter a number."
+  }
 
   if(values.password !== values.confirm){
     // Check if the new password is the sme as the confirm password
     errors.confirm = "Passwords do not match"
+  }
+  if(!values.email){
+    errors.email = "Please input your email."
   }
 
   if(values.password){
@@ -110,38 +120,92 @@ class Signup extends React.Component {
   }
 
 
-    handleSubmit = (value) => {
+    handleSubmit = (values) => {
+     this.props.onAuth(
+            values.username,
+            values.first_name,
+            values.last_name,
+            values.dob,
+            values.email,
+            values.phone_number,
+            values.password,
+            values.confirm,
+      )
+    return axios.post(`${global.API_ENDPOINT}/rest-auth/registration/`, {
+      username: values.username,
+      first_name: values.first_name,
+      last_name: values.last_name,
+      dob: values.dob,
+      email: values.email,
+      phone_number: values.phone_number,
+      password1: values.password,
+      password2: values.confirm
+    }).then( res => {
+      console.log(res)
+      const token = res.data.key;
+      const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+      localStorage.setItem("token", token);
+      localStorage.setItem("expirationDate", expirationDate);
+      this.props.authSuccess(token);
 
-      console.log(value)
+      this.props.history.push('/home')
+      window.location.reload();
 
-    //   e.preventDefault();
-    //   this.props.form.validateFieldsAndScroll((err, values) => {
-    //     console.log(values)
-    //     if (!err && values.password.length > 8) {
-    //       this.props.onAuth(
-    //         values.username,
-    //         values.first_name,
-    //         values.last_name,
-    //         values.dob,
-    //         values.email,
-    //         values.phone_number,
-    //         values.password,
-    //         values.confirm,
-    //       );
-    //
-    //       if(this.props.error === null){
-    //           this.props.history.push('/home');
-    //       }
-    //     }
-    // });
-  }
+      return axios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
 
+    }) .then(res => {
+      const username1 = res.data.username;
+      const id = res.data.id;
+      const friends = res.data.friends;
+
+      localStorage.setItem("username", username1);
+      localStorage.setItem("id", id);
+      localStorage.setItem('friends', friends);
+
+      this.props.addCredentials(
+         res.data.username,
+         res.data.id,
+         res.data.friends,
+         res.data.get_posts,
+         res.data.first_name,
+         res.data.last_name,
+         res.data.profile_picture,
+         res.data.get_following,
+         res.data.get_followers
+       );
+      this.props.checkAuthTimeout(3600);
+
+    }).catch( err => {
+      console.log(err)
+      console.log(err.response)
+      if(err.response){
+        if(err.response.status === 500){
+          throw new SubmissionError({username: "User name already exist"})
+
+        } else {
+          this.props.authFail(err.response.data)
+          throw new SubmissionError(err.response.data)
+        }
+      } else {
+        this.props.history.push('/home')
+        window.location.reload();
+      }
+
+
+    })
+
+
+
+
+
+    }
 
 
   render() {
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
 
+    console.log(this.props)
       return (
       <div class="parentContainer" style={{background:'lightblue'}}>
 
@@ -275,7 +339,6 @@ class Signup extends React.Component {
 
 
 
-const WrappedSignup = Form.create()(Signup);
 
 Signup = reduxForm({
   form: 'user sign up', // give the form a name
@@ -288,7 +351,7 @@ Signup = reduxForm({
 const mapStateToProps = (state) => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        errorMessage: state.auth.error
     }
 }
 
@@ -296,6 +359,31 @@ const mapDispatchToProps = dispatch => {
   // this is where the actual sign up fucntion is called
     return {
         onAuth: (username,first_name, last_name, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(username, first_name, last_name, dob, email, phone_number, password1, password2)),
+        authSuccess: (token) => dispatch(actions.authSuccess(token)),
+        addCredentials: (
+          username,
+          id,
+          friends,
+          posts,
+          first_name,
+          last_name,
+          profile_picture,
+          following,
+          followers
+        ) => dispatch(actions.addCredentials(
+          username,
+          id,
+          friends,
+          posts,
+          first_name,
+          last_name,
+          profile_picture,
+          following,
+          followers
+        )),
+        checkAuthTimeout: (time) => dispatch(actions.checkAuthTimeout(time)),
+        authFail: (err) => dispatch(actions.authFail(err))
+
     }
 }
 

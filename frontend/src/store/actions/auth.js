@@ -297,7 +297,8 @@ export const authSignup = (username, first_name, last_name, dob, email, phone_nu
 
         })
       .catch(err => {
-        dispatch(authFail(err));
+        console.log(err.response)
+        dispatch(authFail(err.response.data));
       });
   };
 };
