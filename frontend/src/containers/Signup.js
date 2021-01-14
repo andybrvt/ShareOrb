@@ -1,6 +1,10 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+
+// DELETE LATER
 import { Form } from '@ant-design/compatible';
+
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Button } from 'antd';
 import { connect } from 'react-redux';
@@ -9,7 +13,66 @@ import * as actions from '../store/actions/auth';
 import { LockOutlined, MailOutlined, QuestionCircleOutlined, UserOutlined } from '@ant-design/icons';
 import './Home.css';
 import worldPic from './LoginPage/world.svg';
+
+
+
 const FormItem = Form.Item;
+
+const renderField = (field) => {
+  // Typical input field, most use for the title
+  console.log(field.meta)
+  return (
+    <div style = {{
+      position: "relative",
+      height: "65px",
+  }}>
+    <Input
+
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    maxLength = "80"
+    className = 'box'
+    prefix = {field.prefix}
+    />
+
+    {field.meta.touched &&
+      ((field.meta.error && <span style = {{
+        color: 'red'
+      }}>{field.meta.error}</span>) ||
+        (field.meta.warning && <span
+          style = {{
+            color: 'red'
+          }}
+          >{field.meta.warning}</span>))}
+    </div>
+  )
+}
+
+const validate = values => {
+  const errors = {}
+    // This will validate certain fields tos ee if they are good
+  if(!values.first_name){
+      errors.first_name = "Please input your first name."
+  }
+  if(!values.last_name){
+    errors.last_name = "Please input your last name."
+  }
+  if(!values.username){
+    errors.username = "Pleast input your username."
+  }
+  if(!values.password){
+    errors.password = "Please input a password."
+  }
+  if(!values.confirm){
+    errors.confirm = "Please confirm your password."
+  }
+
+  return errors
+}
+
+
+
 
 class Signup extends React.Component {
   constructor(props) {
@@ -63,31 +126,38 @@ class Signup extends React.Component {
         }
       }
 
-    handleSubmit = (e) => {
+    handleSubmit = (value) => {
 
-      e.preventDefault();
-      this.props.form.validateFieldsAndScroll((err, values) => {
-        console.log(values)
-        if (!err && values.password.length > 8) {
-          this.props.onAuth(
-            values.username,
-            values.first_name,
-            values.last_name,
-            values.dob,
-            values.email,
-            values.phone_number,
-            values.password,
-            values.confirm,
-          );
-          // this.props.history.push('/home');
-        }
-    });
+      console.log(value)
+
+    //   e.preventDefault();
+    //   this.props.form.validateFieldsAndScroll((err, values) => {
+    //     console.log(values)
+    //     if (!err && values.password.length > 8) {
+    //       this.props.onAuth(
+    //         values.username,
+    //         values.first_name,
+    //         values.last_name,
+    //         values.dob,
+    //         values.email,
+    //         values.phone_number,
+    //         values.password,
+    //         values.confirm,
+    //       );
+    //
+    //       if(this.props.error === null){
+    //           this.props.history.push('/home');
+    //       }
+    //     }
+    // });
   }
 
 
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const {handleSubmit, pristine, invalid, reset} = this.props;
+
+
       return (
       <div class="parentContainer" style={{background:'#fafafa'}}>
 
@@ -100,104 +170,211 @@ class Signup extends React.Component {
         <div class="two">
 
           <div class="eventCard allStyle" style={{left:'20%',top:'15%',
-          width:'500px', height:'700px', padding:'75px'}}>
+          width:'500px', height:'700px', padding:'50px'}}>
 
             <span style={{fontSize:'20px'}}> Sign Up</span>
+            {/*
+              <Form style={{marginTop:'25px'}} onSubmit={this.handleSubmit}>
 
-            <Form style={{marginTop:'25px'}} onSubmit={this.handleSubmit}>
+              <FormItem>
+                  {getFieldDecorator('username', {
+                      rules: [{ required: true, message: 'Please input your username!' }],
+                  })(
+                      <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                  )}
+              </FormItem>
 
-            <FormItem>
-                {getFieldDecorator('username', {
-                    rules: [{ required: true, message: 'Please input your username!' }],
+              <FormItem>
+                  {getFieldDecorator('first_name', {
+                      rules: [{ required: true, message: 'Please input your first name!' }],
+                  })(
+                      <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
+                  )}
+              </FormItem>
+              <FormItem>
+                  {getFieldDecorator('last_name', {
+                      rules: [{ required: true, message: 'Please input your last name!' }],
+                  })(
+                      <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
+                  )}
+              </FormItem>
+
+              <FormItem>
+                  {getFieldDecorator('dob', {
+                      rules: [{ required: true, message: 'Please input your date of birth!' }],
+                  })(
+                      <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Date of Birth" />
+                  )}
+              </FormItem>
+
+
+              <FormItem>
+
+                {getFieldDecorator('email', {
+                  rules: [{
+                    type: 'email', message: 'The input is not valid E-mail!',
+                  }, {
+                    required: true, message: 'Please input your E-mail!',
+                  }],
                 })(
-                    <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                  <Input prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
                 )}
-            </FormItem>
-
-            <FormItem>
-                {getFieldDecorator('first_name', {
-                    rules: [{ required: true, message: 'Please input your first name!' }],
+              </FormItem>
+              <FormItem>
+                  {getFieldDecorator('phone_number', {
+                      rules: [{ required: true, message: 'Please input your phone number!' }],
+                  })(
+                      <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Phone Number" />
+                  )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [{
+                    required: true, message: 'Please input your password!',
+                  }, {
+                    validator: this.validateToNextPassword,
+                  }, {
+                    validator: this.validateLength,
+                  }, {
+                    validator: this.validateUpper,
+                  }, {
+                    validator: this.validateNumeric,
+                  }],
                 })(
-                    <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
+                  <Input prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"/>
                 )}
-            </FormItem>
-            <FormItem>
-                {getFieldDecorator('last_name', {
-                    rules: [{ required: true, message: 'Please input your last name!' }],
+              </FormItem>
+
+              <FormItem>
+                {getFieldDecorator('confirm', {
+                  rules: [{
+                    required: true, message: 'Please confirm your password!',
+                  }, {
+                    validator: this.compareToFirstPassword,
+                  }],
                 })(
-                    <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
+                  <Input prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm your Password" onBlur={this.handleConfirmBlur} />
                 )}
-            </FormItem>
+              </FormItem>
 
-            <FormItem>
-                {getFieldDecorator('dob', {
-                    rules: [{ required: true, message: 'Please input your date of birth!' }],
-                })(
-                    <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Date of Birth" />
-                )}
-            </FormItem>
+              <FormItem>
+                <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
+                    Sign Up
+                </Button>
+                Or
+                <NavLink
+                    style={{marginRight: '10px'}}
+                    to='/'> login
+                </NavLink>
+              </FormItem>
+              </Form>
+              */}
 
 
-            <FormItem>
 
-              {getFieldDecorator('email', {
-                rules: [{
-                  type: 'email', message: 'The input is not valid E-mail!',
-                }, {
-                  required: true, message: 'Please input your E-mail!',
-                }],
-              })(
-                <Input prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-              )}
-            </FormItem>
-            <FormItem>
-                {getFieldDecorator('phone_number', {
-                    rules: [{ required: true, message: 'Please input your phone number!' }],
-                })(
-                    <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Phone Number" />
-                )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
-                rules: [{
-                  required: true, message: 'Please input your password!',
-                }, {
-                  validator: this.validateToNextPassword,
-                }, {
-                  validator: this.validateLength,
-                }, {
-                  validator: this.validateUpper,
-                }, {
-                  validator: this.validateNumeric,
-                }],
-              })(
-                <Input prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"/>
-              )}
-            </FormItem>
+            <form
+            onSubmit = {handleSubmit(this.handleSubmit)}
+            style={{marginTop:'25px', position: 'relative'}}>
 
-            <FormItem>
-              {getFieldDecorator('confirm', {
-                rules: [{
-                  required: true, message: 'Please confirm your password!',
-                }, {
-                  validator: this.compareToFirstPassword,
-                }],
-              })(
-                <Input prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm your Password" onBlur={this.handleConfirmBlur} />
-              )}
-            </FormItem>
+              <div >
+                <Field
+                name = 'username'
+                component = {renderField}
+                type = 'text'
+                placeholder= 'Username'
+                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                />
+              </div>
 
-            <FormItem>
-              <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
-                  Sign Up
-              </Button>
-              Or
-              <NavLink
-                  style={{marginRight: '10px'}}
-                  to='/'> login
-              </NavLink>
-            </FormItem>
-            </Form>
+              <div>
+                  <Field
+                  name = 'first_name'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "First Name"
+                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                  <Field
+                  name = 'last_name'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Last Name"
+                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+              {/* Gonna change this to see if there are specfic inputs to handle
+                date of birth
+                */}
+                  <Field
+                  name = 'dob'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Date of Birth"
+                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                  <Field
+                  name = 'email'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Email"
+                  prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                  <Field
+                  name = 'phone_number'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Phone Number"
+                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                  <Field
+                  name = 'password'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Password"
+                  prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                  <Field
+                  name = 'confirm'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Confirm your Password"
+                  prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                <Button
+                type="primary"
+                htmlType="submit"
+                style={{marginRight: '10px'}}>
+                    Sign Up
+                </Button>
+                Or
+                <NavLink
+                    style={{marginRight: '10px'}}
+                    to='/'> login
+                </NavLink>
+              </div>
+
+            </form>
+
           </div>
         </div>
 
@@ -206,7 +383,17 @@ class Signup extends React.Component {
   }
 }
 
+
+
+
 const WrappedSignup = Form.create()(Signup);
+
+Signup = reduxForm({
+  form: 'user sign up', // give the form a name
+  validate
+})(Signup)
+
+
 
 
 const mapStateToProps = (state) => {
@@ -224,4 +411,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedSignup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
