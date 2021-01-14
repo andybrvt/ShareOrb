@@ -4,7 +4,6 @@ node_modules/
 dump.rdb
 *.rdb
 
-**/migrations/
 
 env/
 .env

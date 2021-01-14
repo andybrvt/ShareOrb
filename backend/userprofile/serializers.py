@@ -281,18 +281,18 @@ class NewPostSerializer(serializers.ModelSerializer):
 # custom serializer for signup-- view 127.0.0.1:8000/rest-auth
 class RegisterSerializer(serializers.Serializer):
 
+    username = serializers.CharField(required = True, write_only = True)
     first_name = serializers.CharField(required=True, write_only=True)
     last_name = serializers.CharField(required=True, write_only=True)
     dob = serializers.CharField(required=True, write_only=True)
-    bio = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
-    phone_number = serializers.CharField(required=True, write_only=True)
+    phone_number = serializers.CharField(required=False, write_only=True)
     password1 = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
 
     class Meta:
         model = models.User
-        fields = ('id', 'number', 'dob', 'first_name', 'last_name', 'email', 'phone_number', 'password1 ', 'password2')
+        fields = ('id', 'username', 'number', 'dob', 'first_name', 'last_name', 'email', 'phone_number', 'password1 ', 'password2')
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
@@ -313,6 +313,7 @@ class RegisterSerializer(serializers.Serializer):
 
     def get_cleaned_data(self):
         return {
+            'username': self.validated_data.get('username', ''),
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', ''),
             # 'bio': self.validated_data.get('bio', ''),

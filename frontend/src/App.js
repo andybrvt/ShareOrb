@@ -32,7 +32,7 @@ class App extends Component {
     super(props);
     // this.initialiseExplore()
 
-    // this.initialiseChats()
+    this.initialiseChats()
     this.initialisePost()
     this.initialiseNotification()
 
@@ -237,32 +237,32 @@ class App extends Component {
       if(parseInt(this.props.id) !== parseInt(newProps.id)){
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
-        // WebSocketPostsInstance.disconnect()
-        // this.waitForPostSocketConnection(() => {
-        //   WebSocketPostsInstance.fetchPosts(newProps.id)
-        // })
-        //
-        // WebSocketPostsInstance.connect()
+        WebSocketPostsInstance.disconnect()
+        this.waitForPostSocketConnection(() => {
+          WebSocketPostsInstance.fetchPosts(newProps.id)
+        })
+
+        WebSocketPostsInstance.connect()
 
 
 
-        // ChatSidePanelWebSocketInstance.disconnect();
-        // this.waitForChatsSocketConnection(() =>{
-        //   ChatSidePanelWebSocketInstance.fetchChats(
-        //     newProps.id
-        //   )
-        //
-        // })
-        // ChatSidePanelWebSocketInstance.connect(newProps.id)
-        //
-        //
-        // NotificationWebSocketInstance.disconnect()
-        // this.waitForNotificationSocketConnection(() => {
-        //   NotificationWebSocketInstance.fetchFriendRequests(
-        //     newProps.id
-        //   )
-        // })
-        // NotificationWebSocketInstance.connect(newProps.username)
+        ChatSidePanelWebSocketInstance.disconnect();
+        this.waitForChatsSocketConnection(() =>{
+          ChatSidePanelWebSocketInstance.fetchChats(
+            newProps.id
+          )
+
+        })
+        ChatSidePanelWebSocketInstance.connect(newProps.id)
+
+
+        NotificationWebSocketInstance.disconnect()
+        this.waitForNotificationSocketConnection(() => {
+          NotificationWebSocketInstance.fetchFriendRequests(
+            newProps.id
+          )
+        })
+        NotificationWebSocketInstance.connect(newProps.username)
 
 
       }
