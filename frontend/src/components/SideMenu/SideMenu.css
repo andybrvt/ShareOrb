@@ -1,3 +1,28 @@
+
+
+
+@media screen and (min-height: 540px) and (max-height: 780px) {
+    .sideBarHeight {
+        height:'40%';
+        position:'absolute';
+        background: white;
+    }
+}
+
+@media screen and (min-height: 780px) {
+    .sideBarHeight {
+        height:'50%';
+        position:'absolute';
+        background: white;
+    }
+}
+
+
+
+
+
+
+
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;

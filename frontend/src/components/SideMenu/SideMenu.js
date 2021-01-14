@@ -233,8 +233,8 @@ class SideMenu extends React.Component {
         */}
 
 
-      <Header className="site-layout HeaderPosition appearBefore"
-         style={{ background:'white'}}>
+      <Header className="site-layout appearBefore"
+         style={{ background:'white', position:'absolute', height:"7.5%"}}>
         <p class ="">
                 <aside>
                 <div class="toggle">
@@ -260,7 +260,9 @@ class SideMenu extends React.Component {
                       style = {{
                       color: 'black',
                       marginLeft:'20%',
-                      fontSize:'20px',
+                      position:'absolute',
+                      top:'25%',
+                      fontSize:'1em',
                     }}>
                       {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
 
@@ -354,27 +356,27 @@ class SideMenu extends React.Component {
            dropdownClassName="certain-category-search-dropdown"
            dropdownMatchSelectWidth={700}
            style={{
-            marginRight:'18%',
-            left:'33%',
-            top:'25%',
-
-
-           // backgroundColor: 'red'
+             position:'absolute',
+             top:'25%',
+             // backgroundColor: 'red'
          }}
 
 
          >
+
+         {/*search bar*/}
         <Input.Search
           style={{
+            position:'relative',
+           left:'50%',
 
-           marginRight:'8%',
            width: 700,
 
 
           // backgroundColor: 'red'
         }}
 
-           compact size="large" placeholder="Search" />
+           compact size="0.5em" placeholder="Search" />
       </AutoComplete>
 
 
@@ -394,7 +396,7 @@ class SideMenu extends React.Component {
 
 
       <Badge
-        style={{padding:'initial', margin:'initial', marginTop:'30px'}}
+        style={{padding:'initial', margin:'initial', }}
         dot={true}
       count = {this.props.notifications.length}>
 
@@ -453,17 +455,19 @@ class SideMenu extends React.Component {
            {
              profilePic != '' ?
                <Avatar
-               size={35}
+               size={'1em'}
                src={profilePic}
                alt="avatar"
                className = 'miniProfilePic'
+               style={{position:'absolute', top:'25%'}}
                 />
 
                :
 
                <Avatar
-               size="large"
+               size={'1em'}
                className = 'miniProfilePic'
+               style={{position:'absolute', top:'25%'}}
                src={defaultPicture} alt="avatar" />
            }
 
