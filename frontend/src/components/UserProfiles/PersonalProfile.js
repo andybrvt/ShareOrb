@@ -121,7 +121,7 @@ class PersonalProfile extends React.Component{
           newProps.parameter.username
         )
       })
-      // ExploreWebSocketInstance.connect(newProps.parameter.username)
+      ExploreWebSocketInstance.connect(newProps.parameter.username)
 
     }
 
@@ -134,7 +134,7 @@ class PersonalProfile extends React.Component{
     // the disconnect in the websocket
 
 
-    // ExploreWebSocketInstance.disconnect();
+    ExploreWebSocketInstance.disconnect();
   }
 
   capitalize (str) {
@@ -361,7 +361,6 @@ class PersonalProfile extends React.Component{
       ExploreWebSocketInstance.sendUnFollowing(follower, following)
       this.props.grabUserCredentials()
 
-      console.log('it hits here')
     }
 
     successFollow = () => {
@@ -544,8 +543,6 @@ class PersonalProfile extends React.Component{
               </div>
 
               :
-
-
 
               followers.includes(this.props.currentUser.toString()) ?
               <div

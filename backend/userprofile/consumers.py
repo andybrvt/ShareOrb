@@ -101,9 +101,24 @@ class NotificationConsumer(JsonWebsocketConsumer):
             actor = get_object_or_404(User, username = data['actor'])
             notification = CustomNotification.objects.create(type = 'follow_notification', recipient = recipient, actor = actor, verb = 'followed you')
         if data['command'] == 'send_follow_request_notification': #this is for follow for private
+            # This one is a bit more special because it will be used to update the
+            # other person following list or request list
+
             recipient = get_object_or_404(User, id = data['recipient'])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = "follow_request_notification", recipient = recipient, actor = actor, verb = "requested to follow you")
+            serializer = NotificationSerializer(notification)
+
+            # grab the user recipeitn for the requeest
+            serializedRequest = FollowUserSerializer(actor).data
+            content = {
+                "command": "new_notification",
+                "notificaton": json.dumps(serializer.data),
+                "requestObj": serializedRequest,
+                "recipient": recipient.username
+            }
+            return self.send_new_notification(content)
+
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
@@ -144,6 +159,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
             maxDate = data['minDate']
             notification = CustomNotification.objects.create(type='new_event', recipient = recipient, actor = actor, verb = 'picked a time',
             minDate = minDate, maxDate = maxDate)
+
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
@@ -151,6 +167,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             "recipient": recipient.username, #important for group send (group name)
         }
         return self.send_new_notification(content)
+
+
 
     def send_personalCal_event_notification(self, data):
         #This method is to use for all the notificaiton for personal calendar

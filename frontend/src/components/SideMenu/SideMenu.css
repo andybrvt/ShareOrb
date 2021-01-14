@@ -61,3 +61,9 @@ background: #f5222d;
   /* background-color: red; */
   margin-right: 10px;
 }
+
+.backgroundofEverything{
+  width:100vw;
+  height:100vh;
+  background:pink;
+}

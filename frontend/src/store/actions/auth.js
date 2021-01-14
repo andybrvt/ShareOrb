@@ -103,8 +103,6 @@ export const checkAuthTimeout = expirationTime => {
   };
 };
 
-
-
 export const authLogin = (username, password) => {
   // const[id, setID] = useState(null);
   // const[username1, setUsername1] = useState('');
