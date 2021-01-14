@@ -93,60 +93,64 @@ class NewsFeedView extends React.Component {
 			{isLoggedIn ?
 
 
+				<div>
 
+					<div
+						style={{
+							position: 'absolute',
+							width:'15%',
+						 left:'7.5%'}}
+
+
+						class="scroller"
+						>
+
+
+
+					<ProfileCardNewsFeed
+						profile = {this.props.currentProfile}
+						 />
+
+
+
+				 </div>
 
 				<Row  style = {{
 					display: 'flex',
-					position: 'relative',
-					width:'100vw',
+					position: 'absolute',
+					width:'80%',
 					height:'100vh',
 				 	background:'green',
-					left:'15vw',
+					left:'20%'
 				}}>
 
 
-						<Col
-							style={{
-								width:'10vw',
-								background:'red',
-							 right:'10vw'}}
 
 
-							class="scroller"
-							>
-
-
-
-						<ProfileCardNewsFeed
-							profile = {this.props.currentProfile}
-							 />
-
-
-
-						</Col>
-
-				<Col style={{background:'red', width:'60vw'}}>
+				<Col style={{position:'absolute',background:'orange', width:'70%'}}>
 				<div>
 					<div>
 						<div>
-						<Row style={{width:'75%', background:'brown'}}>
+						<Row>
 
 
-							<Col style={{right:'10%'}}>
+							<Col style={{position:'relative', width:'25%', }}>
+
+								<div>
+								<div onClick ={this.postCondition} class="topCard">
 
 
-								<div style={{right:'5%'}} onClick ={this.postCondition} class="topCard">
-
-
-									<i class="far fa-edit share" style={{fontSize:'25px', color:'#1890ff'}}></i>
+									<i class="far fa-edit share"
+										style={{fontSize:'25px', color:'#1890ff'}}></i>
 									 <p style={{ color:'#1890ff',}} class="cardAlign"> Write a post</p>
 
+								</div>
 								</div>
 
 
 				      </Col>
 
-							<Col style={{right:'5%'}}>
+							<Col style={{position:'relative', width:'25%', left:'10%'}}>
 
 
 								<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
@@ -161,7 +165,7 @@ class NewsFeedView extends React.Component {
 				      </Col>
 
 
-							<Col>
+							<Col style={{left:'15%', position:'relative', width:'25%', }}>
 
 							<Link to = {{
 								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
@@ -246,18 +250,17 @@ class NewsFeedView extends React.Component {
 
 				Loading...
 			</Col>
-			<div style={{marginLeft:'125px'}}>
+			<div>
 				<div class="headers">
-					<Col style={{}}  span={6}
-						class="scroller"
-					>
+
 						<div
 							style = {{
 
-							width: '400px',
+							width: '25%',
+							left:'70%',
 							background:'white',
 							// postion: 'fixed',
-							position: 'relative',
+							position: 'absolute',
 						}}
 						class="morePeopleBox"
 
@@ -302,11 +305,10 @@ class NewsFeedView extends React.Component {
 							</div>
 						</div>
 
-					</Col>
 				</div>
 			</div>
 			</Row>
-
+		</div>
 					 :
 
 

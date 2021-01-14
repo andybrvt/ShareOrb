@@ -236,7 +236,7 @@ class SideMenu extends React.Component {
       <Header className="site-layout HeaderPosition appearBefore"
          style={{ background:'white'}}>
         <p class ="">
-                <aside class="sidebar" >
+                <aside>
                 <div class="toggle">
                   {/*
                     <MenuFoldOutlined
@@ -475,8 +475,8 @@ class SideMenu extends React.Component {
       </Header>
 
       {/*everything container*/}
-        <Layout >
-          <div>
+        <Layout class="backgroundofEverything">
+          <div >
               {this.props.children}
           </div>
         </Layout>
