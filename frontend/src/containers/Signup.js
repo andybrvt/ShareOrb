@@ -49,6 +49,18 @@ const renderField = (field) => {
   )
 }
 
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+
+
+
+export const phoneNumber = value =>
+  value && !/^(0|[1-9][0-9]{9})$/i.test(value)
+    ? 'Invalid phone number, must be 10 digits'
+    : undefined
+
 const validate = values => {
   const errors = {}
     // This will validate certain fields tos ee if they are good
@@ -66,6 +78,24 @@ const validate = values => {
   }
   if(!values.confirm){
     errors.confirm = "Please confirm your password."
+  }
+
+  if(values.password !== values.confirm){
+    // Check if the new password is the sme as the confirm password
+    errors.confirm = "Passwords do not match"
+  }
+
+  if(values.password){
+    if(values.password.length < 8){
+      // validate if the password is longer than 8 characters
+      errors.password = "New password must be at least 9 characters long."
+    } else if(values.password.search(/[A-Z]/)< 0){
+      // Validates if it has an uppercase
+      errors.password = "New password must have an upper case letter."
+    } else if(values.password.search(/[0-9]/)< 0){
+      // Validate if it has a number
+      errors.password = 'New password must have at least one number.'
+    }
   }
 
   return errors
@@ -315,6 +345,7 @@ class Signup extends React.Component {
                   component = {renderField}
                   type = 'text'
                   placeholder = "Date of Birth"
+
                   prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
               </div>
@@ -325,6 +356,7 @@ class Signup extends React.Component {
                   component = {renderField}
                   type = 'text'
                   placeholder = "Email"
+                  validate = {email}
                   prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
               </div>
@@ -335,6 +367,7 @@ class Signup extends React.Component {
                   component = {renderField}
                   type = 'text'
                   placeholder = "Phone Number"
+                  validate = {phoneNumber}
                   prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
               </div>
@@ -343,7 +376,7 @@ class Signup extends React.Component {
                   <Field
                   name = 'password'
                   component = {renderField}
-                  type = 'text'
+                  type = 'password'
                   placeholder = "Password"
                   prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
@@ -353,7 +386,7 @@ class Signup extends React.Component {
                   <Field
                   name = 'confirm'
                   component = {renderField}
-                  type = 'text'
+                  type = 'password'
                   placeholder = "Confirm your Password"
                   prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
