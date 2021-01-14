@@ -57,6 +57,7 @@ class LoginForm extends React.Component {
 
   render() {
     console.log(this.state)
+    console.log(this.props)
     const { error, loading, token } = this.props;
     const { username, password } = this.state;
     if (token) {

@@ -148,7 +148,6 @@ class Signup extends React.Component {
       localStorage.setItem("expirationDate", expirationDate);
       this.props.authSuccess(token);
 
-      this.props.history.push('/home')
       window.location.reload();
 
       return axios.get(`${global.API_ENDPOINT}/userprofile/current-user`)
@@ -203,7 +202,11 @@ class Signup extends React.Component {
 
   render() {
     const {handleSubmit, pristine, invalid, reset} = this.props;
+    const { token } = this.props;
 
+    if(token){
+      return <Redirect to = '/home' />
+    }
 
     console.log(this.props)
       return (
@@ -351,7 +354,8 @@ Signup = reduxForm({
 const mapStateToProps = (state) => {
     return {
         loading: state.auth.loading,
-        errorMessage: state.auth.error
+        errorMessage: state.auth.error,
+        token: state.auth.token
     }
 }
 
