@@ -121,13 +121,13 @@ class NewsFeedView extends React.Component {
 					width:'80%',
 					height:'100vh',
 				 	background:'green',
-					left:'20%'
+					left:'20%',
 				}}>
 
 
 
 
-				<Col style={{position:'absolute',background:'orange', width:'70%'}}>
+				<Col style={{position:'absolute',background:'orange', width:'70%', padding:'5%'}}>
 				<div>
 					<div>
 						<div>
@@ -250,21 +250,18 @@ class NewsFeedView extends React.Component {
 
 				Loading...
 			</Col>
-			<div>
+
+			<div style = {{
+
+			width: '33%',
+			left:'65%',
+			background:'white',
+			// postion: 'fixed',
+			position: 'absolute',
+			}}>
 				<div class="headers">
 
-						<div
-							style = {{
-
-							width: '25%',
-							left:'70%',
-							background:'white',
-							// postion: 'fixed',
-							position: 'absolute',
-						}}
-						class="morePeopleBox"
-
-						>
+						<div>
 
 
 						<div
@@ -274,39 +271,15 @@ class NewsFeedView extends React.Component {
 						</div>
 
 
-								<div>
-
-								<SuggestedFriends  style={{position:'fixed'}}{...this.props}/>
-
-						{/*
-						<div class="shadowBox suggestFriendsCSS" style = {{
-
-							height: '250px',
-							width: '400px',
-
-							// postion: 'fixed',
-							// overflow: 'hidden',
-
-							marginTop:120,
-						}}>
+								<SuggestedFriends {...this.props}/>
 
 
 
-							<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
-								Today's events
-
-							</span>
-
-							<Divider/>
-							<TodayEvents {...this.props}/>
-
-						</div>
-						*/}
-							</div>
 						</div>
 
 				</div>
 			</div>
+
 			</Row>
 		</div>
 					 :
@@ -323,7 +296,30 @@ class NewsFeedView extends React.Component {
 	}
 }
 
+{/*
+<div class="shadowBox suggestFriendsCSS" style = {{
 
+	height: '250px',
+	width: '400px',
+
+	// postion: 'fixed',
+	// overflow: 'hidden',
+
+	marginTop:120,
+}}>
+
+
+
+	<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
+		Today's events
+
+	</span>
+
+	<Divider/>
+	<TodayEvents {...this.props}/>
+
+</div>
+*/}
 
 const mapStateToProps = state => {
   return {
