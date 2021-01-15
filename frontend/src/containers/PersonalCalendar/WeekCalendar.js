@@ -59,9 +59,9 @@ class WeekCalendar extends React.Component{
     activeY: null,
   }
   scrollToMyRef = (ref) => {
-    if(ref){
-    ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    // if(ref){
+    // ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    // }
   }
   onProfileClick = (username) => {
     console.log(username)
@@ -1159,7 +1159,7 @@ class WeekCalendar extends React.Component{
             <div className = 'timecol'>
               {this.renderSide()}
             </div>
-            <div className = 'calendar'  ref={this.scrollToMyRef} >
+            <div className = 'calendar' >
             {this.renderWeekCell(this.props.events)}
             </div>
           </div>
