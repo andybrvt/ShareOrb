@@ -1,38 +1,43 @@
-.parentBox{
-width: 100%;
+.newsfeedParentParenet{
+  width: 100vw;
+  height: 100vh;
+  /* background-color: red; */
+  position: relative;
+  /* left: 7%; */
+}
+
+.newsfeedParent{
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+}
+
+.newsfeedParent .profileCardContainer{
+  background-color: red;
 }
 
 
-.childBox{
-  width: 33%; height: 400px; float: left; background: green;
-}
-
-.testModal{
-
-    overflow: hidden;
-    width:1200px;
-    height:800px;
-    top:25%;
-    left:25%;
-    background: white;
-    line-height: 150%;
-    border-radius: 15px;
-
-    box-shadow:  0 10px 50px rgba(0, 0, 0, 0.13);
-    font-family: 'Segoe UI Regular';
 
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
 
 .postModalMain{
   max-height: 575px;
 }
 
-
 .cardAlign{
   position: absolute;
-
   top: 50%;
   left:43%;
   font-size: 18px;
@@ -48,26 +53,13 @@ width: 100%;
   position: relative;
   cursor: pointer;
   background: #FFFFFF;
-
   padding:30px;
-
-
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
-
-
-
 .share{
-
-
-
   position: absolute;
-
   top: 35%;
   left:20%;
-
-
-
 }
 
 
@@ -126,12 +118,6 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
 } */
 
 
-.scroller {
-  overflow: auto;
-  display: flex;
-
-}
-
 
 .avatar {
   vertical-align: middle;
@@ -171,26 +157,17 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
 
 .sectionTitles{
   /* Section Title */
-
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 500;
 font-size: 17px;
 line-height: 21px;
-/* identical to box height */
-
-
-/* Catalina Blue */
-
 color: #203758;
 }
 
 
 .avatarPic {
-
-    font-size: 12;
-
-
+  font-size: 12;
 }
 
 .morePeopleHeader{
@@ -226,46 +203,8 @@ color: #203758;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .newsfeed {
-margin-left: 10px;
-
+  margin-left: 10px;
   minHeight: 0px;
   /* overflow:auto; */
   /* background-color: red; */
@@ -273,10 +212,8 @@ margin-left: 10px;
 
 
 .suggestFriendsCSS {
-
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   background-color: #ffffff;
-
   width: 200px;
   height: 150px;
 }

@@ -161,7 +161,8 @@ export const mapStateToProps = state => {
     lastName: state.auth.lastName,
     profilePic: state.auth.profilePic,
     following: state.auth.following,
-    followers: state.auth.followers
+    followers: state.auth.followers,
+    requestList: state.auth.requestList
   }
 }
 

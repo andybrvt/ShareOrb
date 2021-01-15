@@ -87,85 +87,32 @@ class NewsFeedView extends React.Component {
 		const location = this.props.location.pathname;
 
 		return (
-			<div>
+			<div className = "newsfeedParentParenet">
 
 
 			{isLoggedIn ?
 
 
-				<div>
-
-					<div
-						style={{
-							position: 'absolute',
-							width:'15%',
-						 left:'7.5%'}}
-
-
-						class="scroller"
-						>
+				<div className = "newsfeedParent">
+					<div className = "profileCardContainer">
+						<ProfileCardNewsFeed
+							profile = {this.props.currentProfile}
+							 />
+					</div>
 
 
+					<div className = "newfeedMidContainer">
+						<div className = "newsfeedActionButtons">
+							<div onClick ={this.postCondition} class="topCard">
+								<i class="far fa-edit share"
+									style={{fontSize:'25px', color:'#1890ff'}}></i>
+								 <p style={{ color:'#1890ff',}} class="cardAlign"> Write a post</p>
+							</div>
 
-					<ProfileCardNewsFeed
-						profile = {this.props.currentProfile}
-						 />
-
-
-
-				 </div>
-
-				<Row  style = {{
-					display: 'flex',
-					position: 'absolute',
-					width:'80%',
-					height:'100vh',
-				 	background:'green',
-					left:'20%',
-				}}>
-
-
-
-
-				<Col style={{position:'absolute',background:'orange', width:'70%', padding:'5%'}}>
-				<div>
-					<div>
-						<div>
-						<Row>
-
-
-							<Col style={{position:'relative', width:'25%', }}>
-
-								<div>
-								<div onClick ={this.postCondition} class="topCard">
-
-
-									<i class="far fa-edit share"
-										style={{fontSize:'25px', color:'#1890ff'}}></i>
-									 <p style={{ color:'#1890ff',}} class="cardAlign"> Write a post</p>
-
-								</div>
-								</div>
-
-
-				      </Col>
-
-							<Col style={{position:'relative', width:'25%', left:'10%'}}>
-
-
-								<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
-
-									<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
-
-									 <p style={{ color:'#1890ff'}} class="cardAlign"> Create event  </p>
-
-								</div>
-
-
-				      </Col>
-
-
-							<Col style={{left:'15%', position:'relative', width:'25%', }}>
+							<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
+								<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
+								 <p style={{ color:'#1890ff'}} class="cardAlign"> Create event  </p>
+							</div>
 
 							<Link to = {{
 								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
@@ -173,122 +120,71 @@ class NewsFeedView extends React.Component {
 							}}
 							 >
 								<div class="topCard">
-
 									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
-
 									 <p  class="cardAlign"> View album </p>
-
 								</div>
 							</Link>
+						</div>
 
-				      </Col>
-
-							<div >
-
-
-
-	<div>
-
-	<Modal
-		visible = {this.state.postShow}
-		onCancel = {() => this.closeProfileEdit()}
-		footer = {null}
-		width={900}
-		bodyStyle={{padding:'50px'}}
-		centered
-
-		>
+						<div className = "newsfeedItself">
+							<InfiniteList data={this.props} />
+						</div>
+					</div>
 
 
-
-				<NewNewsfeedFormPost
-				onCancel = {this.closeProfileEdit}
-				profile = {this.props.currentProfile}/>
-	</Modal>
-
-
-	<Modal
-		visible = {this.state.eventShow}
-		onCancel = {() => this.closeProfileEdit()}
-		footer = {null}
-		width={900}
-		bodyStyle={{padding:'50px'}}
-		centered
-
-		>
-
-
-
-	</Modal>
-	</div>
-
-
-							 <div>
-
-
-
-									<div className = 'newsfeed' >
-										<InfiniteList data={this.props} />
+					<div className = "suggestedFriendsContainer">
+						<div style = {{
+						width: '33%',
+						left:'65%',
+						background:'white',
+						// postion: 'fixed',
+						position: 'absolute',
+						}}>
+							<div class="headers">
+									<div>
+											<div class="morePeopleHeader">
+													More People
+											</div>
+											<SuggestedFriends {...this.props}/>
 									</div>
-										{/*
-										<div class="rightBox">
-										 <Layouts/>
-									 </div>
-									 */
-									}
-							 </div>
-							 </div>
+							</div>
+						</div>
+					</div>
 
+					<Modal
+						visible = {this.state.postShow}
+						onCancel = {() => this.closeProfileEdit()}
+						footer = {null}
+						width={900}
+						bodyStyle={{padding:'50px'}}
+						centered
+					>
+								<NewNewsfeedFormPost
+								onCancel = {this.closeProfileEdit}
+								profile = {this.props.currentProfile}/>
+					</Modal>
 
-							 </Row>
-							 </div>
-					 </div>
+					<Modal
+						visible = {this.state.eventShow}
+						onCancel = {() => this.closeProfileEdit()}
+						footer = {null}
+						width={900}
+						bodyStyle={{padding:'50px'}}
+						centered
 
+						>
 
+					</Modal>
 
 				</div>
 
-				Loading...
-			</Col>
-
-			<div style = {{
-
-			width: '33%',
-			left:'65%',
-			background:'white',
-			// postion: 'fixed',
-			position: 'absolute',
-			}}>
-				<div class="headers">
-
-						<div>
+			:
 
 
-						<div
-							 class="morePeopleHeader"
-							>
-								More People
-						</div>
-
-
-								<SuggestedFriends {...this.props}/>
-
-
-
-						</div>
-
-				</div>
+			<div>
+					< NoFoundPage />
 			</div>
-
-			</Row>
-		</div>
-					 :
-
-
-					 <div>
-					 		< NoFoundPage />
-
-						</div>}
+				}
 
 
     </div>
