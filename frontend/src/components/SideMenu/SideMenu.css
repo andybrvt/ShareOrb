@@ -1,6 +1,6 @@
 
 .everythingContainer{
-  background-color: red;
+  /* background-color: red; */
   display: flex;
   width: 100vw;
   position: relative;
@@ -9,11 +9,11 @@
 
 @media screen and (max-width: 1000px){
   .everythingContainer .sideMenuContainer aside{
-    /* display: none; */
-    width: 0%;
+    display: none;
+    /* width: 0%; */
   }
   .show-sidebar aside {
-    width: 210px;
+    /* width: 210px; */
   }
 
 
@@ -132,7 +132,7 @@ background: #f5222d;
 .backgroundofEverything{
   width:100vw;
   height:100vh;
-  background:pink;
+  /* background:pink; */
   position: relative;
 
   left: 0%;

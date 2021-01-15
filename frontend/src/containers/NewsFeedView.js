@@ -102,6 +102,10 @@ class NewsFeedView extends React.Component {
 
 
 					<div className = "newsfeedMidContainer">
+
+
+						<div className = "newsfeedItself">
+
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="topCard">
 								<i class="far fa-edit share"
@@ -126,8 +130,6 @@ class NewsFeedView extends React.Component {
 								</div>
 							</Link>
 						</div>
-
-						<div className = "newsfeedItself">
 							<InfiniteList data={this.props} />
 						</div>
 					</div>
