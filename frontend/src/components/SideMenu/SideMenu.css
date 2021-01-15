@@ -3,19 +3,27 @@
   background-color: red;
   display: flex;
   width: 100vw;
+  position: relative;
 
 }
 
 @media screen and (max-width: 1000px){
+  .everythingContainer .sideMenuContainer aside{
+    /* display: none; */
+    width: 0%;
+  }
+  .show-sidebar aside {
+    width: 210px;
+  }
+
+
+}
+
+/* @media all and (min-width: 1000px) and {
   .everythingContainer .sideMenuContainer{
     display: none;
   }
-}
-@media all and (min-width: 1000px) and {
-  .everythingContainer .sideMenuContainer{
-    display: none;
-  }
-}
+} */
 
 .everythingContainer .sideMenuContainer{
   position: relative;
@@ -156,6 +164,7 @@ aside {
   border-right: 1px solid #f0f0f0;
   z-index: 1001;
   position: relative;
+  height: 100%;
   /* -webkit-transform: translateX(0px); */
   /* -ms-transform: translateX(0px); */
   /* transform: translateX(0px); */

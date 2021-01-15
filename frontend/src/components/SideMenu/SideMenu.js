@@ -415,7 +415,6 @@ class SideMenu extends React.Component {
           <div className = "layoutContainer">
             <Layout class="backgroundofEverything">
                   {this.props.children}
-                  some text
 
             </Layout>
           </div>

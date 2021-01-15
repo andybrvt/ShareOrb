@@ -14,13 +14,21 @@
 }
 
 .newsfeedParent .profileCardContainer{
-  background-color: red;
+  /* background-color: red; */
   width: 18%;
+}
+
+@media screen and (max-width: 1000px){
+  .profileCardContainer {
+    display: none;
+  }
 }
 
 .newsfeedParent .newsfeedMidContainer{
   background-color: blue;
   width: 50%;
+  /* text-align: center; */
+  /* align-items: center; */
 }
 
 .newsfeedParent .newsfeedMidContainer .newsfeedActionButtons{
