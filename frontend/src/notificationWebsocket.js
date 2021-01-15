@@ -78,7 +78,9 @@ class WebSocketNotifications {
     } else if (command === 'new_notification') {
         console.log(data)
         this.showNotification(parsedData, 'bottomRight')
-        this.callbacks['new_notification'](JSON.parse(parsedData.notification))
+
+
+        // this.callbacks['new_notification'](JSON.parse(parsedData.notification))
         // createNotification(JSON.parse(data['notification']));
     }
   }
