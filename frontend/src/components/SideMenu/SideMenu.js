@@ -49,7 +49,6 @@ import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import Notifications from '../../containers/Notifications';
 import defaultPicture from '../images/default.png';
-import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -226,55 +225,11 @@ class SideMenu extends React.Component {
 
 
     return (
-      <div>
 
-        {/*
-        background everything
-        */}
-
-
-      <Header className="site-layout appearBefore"
-         style={{ background:'white', position:'fixed', height:"7.5%"}}>
-        <p class ="">
-                <aside>
-                <div class="toggle">
-                  {/*
-                    <MenuFoldOutlined
-
-                      >
-                    </MenuFoldOutlined>
-
-
-                    */}
-                  {/*
-                    <a href="#collapseExample" role = "button"
-                      class="burger js-menu-toggle" data-toggle="collapse" >
-                          <span></span>
-                    </a>
-                    */}
-                    <span
-
-                      role = "button"
-                      class=" js-menu-toggle"
-                      data-toggle="collapse"
-                      style = {{
-                      color: 'black',
-                      marginLeft:'20%',
-                      position:'absolute',
-                      top:'25%',
-                      fontSize:'1em',
-                    }}>
-                      {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-
-                        onClick: this.toggle,
-                      })}
-                    </span>
-
-
-                </div>
-
+      <div className = "everythingContainer">
+        <div className = "sideMenuContainer">
+            <aside>
                 <div class="side-inner">
-
                   <div class="logo-wrap">
                     <div class="logo">
                       <span>S</span>
@@ -328,173 +283,153 @@ class SideMenu extends React.Component {
                   </div>
                 </div>
 
-              </aside>
+            </aside>
 
-        </p>
 
-        {/*<div class="toggle">
-          <a href="#collapseExample" role = "button" class="burger js-menu-toggle" data-toggle="collapse" >
-                <span></span>
-              </a>
         </div>
 
+        <div className = "rightContentContainer">
+          <div>
+            <Header className="site-layout appearBefore"
+               style={{ background:'white', position:'fixed', height:"7.5%"}}>
+               <div className="toggle">
+                   <span
+
+                     role = "button"
+                     class=" js-menu-toggle"
+                     data-toggle="collapse"
+                    >
+                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+
+                       onClick: this.toggle,
+                     })}
+                   </span>
+               </div>
+               <AutoComplete
+                 dataSource={temp}
+
+                 filterOption={(inputValue, option) =>
+                    option.value.includes(inputValue)
+                 }
+                 onSearch={this.handleSearch}
+                 onSelect={this.onSelect}
+                 dropdownClassName="certain-category-search-dropdown"
+                 dropdownMatchSelectWidth={700}
+                 style={{
+                   position:'absolute',
+                   top:'25%',
+                   // backgroundColor: 'red'
+               }}>
+
+               {/*search bar*/}
+              <Input.Search
+                style={{
+                  position:'relative',
+                 left:'50%',
+                 width: 700,
+                // backgroundColor: 'red'
+              }}
+
+                 compact size="0.5em" placeholder="Search" />
+            </AutoComplete>
+            <Badge
+              style={{padding:'initial', margin:'initial', }}
+              dot={true}
+            count = {this.props.notifications.length}>
+
+                <Notifications {...this.props}/>
+
+          </Badge>
+          <span
+            class="pointerEvent"
+            style = {{
+              float:'right',
+              marginRight:'25px',
+              marginTop:'5px',
+            }}
+          >
+               <Dropdown overlay={
+                 <Menu style = {{
+               }}
+               selectedKeys={[]} >
+                   { (
+                     <Menu.Item
+                     onClick = {()=>this.props.history.push("/explore/"+this.props.username)}
+                     style={{marginTop:'-2px'}} key="center">
+
+                         <i style={{marginRight:'3px' }} class="far fa-user"></i>
+                         <span style={{marginLeft:'2px'}}> Profile</span>
 
 
 
-        */}
-
-
-
-         <AutoComplete
-           dataSource={temp}
-
-           filterOption={(inputValue, option) =>
-              option.value.includes(inputValue)
-           }
-           onSearch={this.handleSearch}
-           onSelect={this.onSelect}
-           dropdownClassName="certain-category-search-dropdown"
-           dropdownMatchSelectWidth={700}
-           style={{
-             position:'absolute',
-             top:'25%',
-             // backgroundColor: 'red'
-         }}
-
-
-         >
-
-         {/*search bar*/}
-        <Input.Search
-          style={{
-            position:'relative',
-           left:'50%',
-
-           width: 700,
-
-
-          // backgroundColor: 'red'
-        }}
-
-           compact size="0.5em" placeholder="Search" />
-      </AutoComplete>
-
-
-      {/*
-      <span style={{marginRight:'50px'}}>
-        <Badge dot={true} count={6}>
-            <i style={{color:'#1890ff', fontSize:'20px'}} class="fas fa-envelope"></i>
-       </Badge>
-      </span>
-      */}
-
-      {/*
-          Grab notification length for now
-           count = {this.props.notifications.length}
-           */}
-
-
-
-      <Badge
-        style={{padding:'initial', margin:'initial', }}
-        dot={true}
-      count = {this.props.notifications.length}>
-
-          <Notifications {...this.props}/>
-
-    </Badge>
-
-
-
-
-    <span
-      class="pointerEvent"
-      style = {{
-        float:'right',
-        marginRight:'25px',
-        marginTop:'5px',
-      }}
-    >
-         <Dropdown overlay={
-           <Menu style = {{
-         }}
-         selectedKeys={[]} >
-             { (
-               <Menu.Item
-               onClick = {()=>this.props.history.push("/explore/"+this.props.username)}
-               style={{marginTop:'-2px'}} key="center">
-
-                   <i style={{marginRight:'3px' }} class="far fa-user"></i>
-                   <span style={{marginLeft:'2px'}}> Profile</span>
-
-
-
-               </Menu.Item>
-             )}
-             { (
-               <Menu.Item
-               onClick = {() => this.onSettingDirect()}
-                key="settings">
-                 <i class="fas fa-cog"></i>
-                 <span style={{marginLeft:'2px'}}> Settings</span>
-               </Menu.Item>
-             )}
-             { <Menu.Divider style={{marginTop:'-1px',marginBottom:'-1px'}}/>}
-             <Menu.Item key="logout" onClick={this.props.logout}>
-               <Link to="/">
-                 <i class="fas fa-sign-out-alt"></i>
-                 <span style={{marginLeft:'2px'}}> Logout</span>
-               </Link>
-             </Menu.Item>
-           </Menu>}>
+                     </Menu.Item>
+                   )}
+                   { (
+                     <Menu.Item
+                     onClick = {() => this.onSettingDirect()}
+                      key="settings">
+                       <i class="fas fa-cog"></i>
+                       <span style={{marginLeft:'2px'}}> Settings</span>
+                     </Menu.Item>
+                   )}
+                   { <Menu.Divider style={{marginTop:'-1px',marginBottom:'-1px'}}/>}
+                   <Menu.Item key="logout" onClick={this.props.logout}>
+                     <Link to="/">
+                       <i class="fas fa-sign-out-alt"></i>
+                       <span style={{marginLeft:'2px'}}> Logout</span>
+                     </Link>
+                   </Menu.Item>
+                 </Menu>}>
 
 
 
 
-           <span >
-           {
-             profilePic != '' ?
-               <Avatar
-               size={'1em'}
-               src={profilePic}
-               alt="avatar"
-               className = 'miniProfilePic'
-               style={{position:'absolute', top:'25%'}}
-                />
+                 <span >
+                 {
+                   profilePic != '' ?
+                     <Avatar
+                     size={'1em'}
+                     src={profilePic}
+                     alt="avatar"
+                     className = 'miniProfilePic'
+                     style={{position:'absolute', top:'25%'}}
+                      />
 
-               :
+                     :
 
-               <Avatar
-               size={'1em'}
-               className = 'miniProfilePic'
-               style={{position:'absolute', top:'25%'}}
-               src={defaultPicture} alt="avatar" />
-           }
+                     <Avatar
+                     size={'1em'}
+                     className = 'miniProfilePic'
+                     style={{position:'absolute', top:'25%'}}
+                     src={defaultPicture} alt="avatar" />
+                 }
 
-           </span>
+                 </span>
 
-       </Dropdown>
-       </span>
+             </Dropdown>
+             </span>
 
-      </Header>
-
-      {/*everything container*/}
-        <Layout class="backgroundofEverything">
-          <div >
-              {this.props.children}
+            </Header>
           </div>
-        </Layout>
+
+          <div className = "layoutContainer">
+            <Layout class="backgroundofEverything">
+                  {this.props.children}
+                  some text
+
+            </Layout>
+          </div>
 
 
+        </div>
 
-
-      <div>
         <PickEventSyncModal
         // {... this.props}
         isVisible = {this.props.showPickEventSyncModal}
         close = {this.props.closePickEventSyncModal} />
+
+
       </div>
-     </div>
     );
   }
 }
