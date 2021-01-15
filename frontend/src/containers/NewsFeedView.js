@@ -101,7 +101,7 @@ class NewsFeedView extends React.Component {
 					</div>
 
 
-					<div className = "newfeedMidContainer">
+					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="topCard">
 								<i class="far fa-edit share"
@@ -118,8 +118,9 @@ class NewsFeedView extends React.Component {
 								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
 								state:{pathname:location}
 							}}
+							className = "topCard"
 							 >
-								<div class="topCard">
+								<div >
 									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
 									 <p  class="cardAlign"> View album </p>
 								</div>
@@ -133,13 +134,7 @@ class NewsFeedView extends React.Component {
 
 
 					<div className = "suggestedFriendsContainer">
-						<div style = {{
-						width: '33%',
-						left:'65%',
-						background:'white',
-						// postion: 'fixed',
-						position: 'absolute',
-						}}>
+						<div className = "suggestedFriendsCard">
 							<div class="headers">
 									<div>
 											<div class="morePeopleHeader">
