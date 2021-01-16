@@ -1,6 +1,6 @@
 
 .everythingContainer{
-  /* background-color: red; */
+  /* background-color: pink; */
   display: flex;
   width: 100vw;
   position: relative;
@@ -164,17 +164,21 @@ aside {
   border-right: 1px solid #f0f0f0;
   z-index: 1001;
   position: relative;
-  height: 100%;
+  /* height: 100%; */
   /* -webkit-transform: translateX(0px); */
   /* -ms-transform: translateX(0px); */
   /* transform: translateX(0px); */
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: white;
   -webkit-transition: 0.7s width cubic-bezier(0.23, 1, 0.32, 1);
   -o-transition: 0.7s width cubic-bezier(0.23, 1, 0.32, 1);
   transition: 0.7s width cubic-bezier(0.23, 1, 0.32, 1); }
 
   /* width when opened sidemenu */
   .show-sidebar aside {
+    position:relative;
+    top:0;
+    /* background:blue; */
     width:210px;
 
     /* -webkit-transform: translateX(0%); */
@@ -198,6 +202,19 @@ aside {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     position: relative;
+  }
+
+  aside .whiteFixBackground {
+    width: 4vw;
+    height: 100vh;
+    position: fixed;
+    background-color: #1890ff;
+    border-right: 1px solid #bfbfbf;
+
+  }
+
+  .show-sidebar aside .whiteFixBackground{
+    width: 210px;
   }
     aside .side-inner::-webkit-scrollbar {
       display: none; }
@@ -291,7 +308,7 @@ aside {
         /* padding-right: 50px; */
         padding-top: 20px;
         padding-bottom: 20px;
-        color: black;
+        color: white;
         position: relative;
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;

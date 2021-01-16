@@ -229,6 +229,8 @@ class SideMenu extends React.Component {
       <div className = "everythingContainer">
         <div className = "sideMenuContainer">
             <aside>
+              <div className = "whiteFixBackground"> </div>
+
                 <div class="side-inner">
                   <div class="logo-wrap">
                     <div class="logo">
