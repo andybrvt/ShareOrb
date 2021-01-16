@@ -8,7 +8,7 @@
   height: 100vh;
   background: rgba(0, 0, 0, 0.45);
   /* background:red; */
-  z-index: 99;
+  z-index: 1002;
 
 
 }
@@ -16,15 +16,15 @@
 
 /* The outter part of the modal  */
 .userPostModal{
-  position: fixed;
+  position: relative;
   background: white;
   /* height: 100; */
-  top: 75px;
-  left: 6.5%;
+  top: 5%;
+  left:7.5%;
   right: 10%;
   z-index: 100;
-  width:1600px;
-  height:832px;
+  width:85%;
+  height:90%;
 
   color:black;
   font-weight: 500;
@@ -36,9 +36,9 @@
 /* This will hold the pictures of the modal */
 .postHolder{
   display: flex;
-  height: 900px;
-  /* background-color: red;
-   */
+  height: 100%;
+  /* background-color: red; */
+
 }
 .postHolder .postPicturesCarousel{
   width: 80%;
@@ -62,7 +62,8 @@
   /* background-color: blue; */
   position: relative;
   bottom: 0px;
-  height: 92%;
+  padding:1%;
+  height: 100%;
 
   width: 35%;
   border-left: 1px solid #f0f0f0;
@@ -243,13 +244,13 @@
 .postCommentBox .postCommentInput{
   /* background-color: red; */
   display: flex;
-  position: absolute;
+
   left: 0%;
   bottom: 15px;
-  margin-left: 20px;
 }
 .postBoxInput{
-  width: 400px;
+  position:relative;
+  width: 190%;
   margin-left: 10px;
   font-size: 15px;
 }
