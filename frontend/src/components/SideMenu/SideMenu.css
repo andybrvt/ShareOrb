@@ -399,11 +399,18 @@ aside {
 
 
 
-.headerContainer .headersNotificationContainer{
-  position: relative;
-  background:green;
-
+.headersNotificationContainer{
+  /* background:green; */
   width:12.5%;
+  height:100%;
+}
+
+
+.headersNotificationContainer .notificationsInner{
+  position: relative;
+  top:25%;
+  left:80%;
+
 }
 
 .headerContainer .headersProfileContainer{
@@ -414,8 +421,13 @@ aside {
 
 .headerContainer .headersProfileContainer .profileHeader{
   position: relative;
-  left:40%;
+  left:50%;
   transform: translateX(-50%);
   top:5px;
 
+}
+
+
+.showBell{
+  color:#1890ff;
 }

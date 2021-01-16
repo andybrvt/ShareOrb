@@ -68,6 +68,7 @@ class SideMenu extends React.Component {
       collapsed:true,
       profileList:[],
       name:'',
+      showDropDown:false,
     };
   }
   toggle = () => {
@@ -101,6 +102,13 @@ class SideMenu extends React.Component {
    this.setState({
      dataSource: ['test1', 'test2', 'test3']
    });
+ }
+
+ onOpenDropDown = () =>{
+   console.log("button click")
+   this.setState({
+     showDropDown: !this.state.showDropDown
+   })
  }
 
 
@@ -328,6 +336,29 @@ class SideMenu extends React.Component {
                  </div>
                 </div>
 
+
+                <div className="headersNotificationContainer">
+
+                <div
+                onClick = {() => this.onOpenDropDown()}
+                className = 'notificationsInner'
+                >
+                  <i
+                    class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
+                    aria-hidden="true"
+                    style={{fontSize:'25px'}}
+                    >
+
+
+                  </i>
+                </div>
+                <div className = {`dropdown-content ${this.state.showDropDown ? "show" : ""}`} >
+
+                    <Notifications {...this.props} showNoti={true}/>
+                  </div>
+
+                </div>
+                {/*
                 <div className = "headersNotificationContainer">
                   <Badge
                   style={{padding:'initial', margin:'initial', }}
@@ -338,6 +369,8 @@ class SideMenu extends React.Component {
 
 
                 </div>
+
+                */}
 
                 <div className = "headersProfileContainer">
 

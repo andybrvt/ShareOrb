@@ -949,19 +949,10 @@ class NotificationsDropDown extends React.Component{
 
         */}
 
-      <div className = "dropdown">
-
-      <div
-      onClick = {() => this.onOpenDropDown()}
-      className = 'dropdownClick'
-      >
-        <i style={{fontSize:'20px', marginTop:'30px', marginLeft:'75px'}} class="far fa-bell" aria-hidden="true"></i>
-      </div>
-        <div className = {`dropdown-content ${this.state.showDropDown ? "show" : ""}`} >
+      <div className = {`dropdown-content ${this.props.showNoti ? "show" : ""}`} >
           {this.renderNotifications()}
         </div>
 
-      </div>
 
 
       <PendingSocialEventModal
