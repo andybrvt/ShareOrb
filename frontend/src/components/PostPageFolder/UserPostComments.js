@@ -16,24 +16,9 @@ class UserPostComments extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  handleSubmit = e => {
 
-    if(this.state.comment !== ''){
-      UserPostPageWebSocketInstance.sendUserPostComment(
-        this.props.curUser,
-        this.state.comment,
-        this.props.postId
-      )
 
-      this.setState({comment: ''})
-    }
-  }
-
-  handleChange = e => {
-    this.setState({
-      comment: e.target.value
-    })
-  }
+  
 
   heightCal = (captionLen) => {
     // This function is used to calculate the height of the comments by the
@@ -128,30 +113,7 @@ class UserPostComments extends React.Component{
               </div>
           )}
         />
-        <div className = 'postCommentInput'>
-          <Avatar
-          size = {30}
-          className ='postPicInput'
-          src = {`${global.IMAGE_ENDPOINT}`+this.props.profilePic}/>
-          <Form>
-            <Input
-            className= 'postBoxInput'
-            onChange ={this.handleChange}
-            value = {this.state.comment}
-            // bordered = {false}
-            placeholder = 'Write a comment'
-            name = 'postComment'
-            onPressEnter = {this.handleSubmit}
-            // rows = {1}
-             />
 
-            <button
-            // type = 'submit'
-            // onClick = {this.handleSubmit}
-            style = {{display: 'none'}}
-            />
-          </Form>
-        </div>
         </div>
 
       </div>

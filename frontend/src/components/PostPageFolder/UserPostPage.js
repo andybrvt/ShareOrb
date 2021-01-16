@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Avatar, notification, Menu, Dropdown, Modal, Divider} from 'antd';
+import {  Avatar, notification, Menu, Dropdown, Form, Input, Modal, Divider} from 'antd';
 import { authAxios } from '../../components/util';
 import Liking from '../../containers/NewsfeedItems/Liking';
 import UserPostComments from './UserPostComments';
@@ -82,6 +82,25 @@ class UserPostPage extends React.Component{
     UserPostPageWebSocketInstance.disconnect();
     this.props.closePost();
 
+  }
+
+  handleSubmit = e => {
+
+    if(this.state.comment !== ''){
+      UserPostPageWebSocketInstance.sendUserPostComment(
+        this.props.curUser,
+        this.state.comment,
+        this.props.postId
+      )
+
+      this.setState({comment: ''})
+    }
+  }
+
+  handleChange = e => {
+    this.setState({
+      comment: e.target.value
+    })
   }
 
   renderTimestamp = timestamp =>{
@@ -457,7 +476,30 @@ class UserPostPage extends React.Component{
               items = {userPostComments}
               profilePic = {this.props.curProfilePic}
                />
+               <div className = 'postCommentInput'>
+                 <Avatar
+                 size = {30}
+                 className ='postPicInput'
+                 src = {`${global.IMAGE_ENDPOINT}`+this.props.profilePic}/>
+                 <Form>
+                   <Input
+                   className= 'postBoxInput'
+                   onChange ={this.handleChange}
+                   value = {this.state.comment}
+                   // bordered = {false}
+                   placeholder = 'Write a comment'
+                   name = 'postComment'
+                   onPressEnter = {this.handleSubmit}
+                   // rows = {1}
+                    />
 
+                   <button
+                   // type = 'submit'
+                   // onClick = {this.handleSubmit}
+                   style = {{display: 'none'}}
+                   />
+                 </Form>
+               </div>
 
 
           </div>

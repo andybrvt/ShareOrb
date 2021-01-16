@@ -22,12 +22,13 @@ class UserPostModal extends React.Component{
       <div
       className = "userPostModalBackground"
       >
-        <UserPostPage {...this.props} />
-        <div className = 'exitX'>
+      <div className = 'exitX'>
         <i class="fas fa-times"
         onClick = {this.back}
         ></i>
-        </div>
+      </div>
+        <UserPostPage {...this.props} />
+
       </div>
     )
   }
