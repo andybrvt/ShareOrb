@@ -229,10 +229,12 @@ aside {
 
 
       aside .side-inner .logo-wrap .logo {
-        width: 2.5vw;
+
+        width: 2.7vw;
         float: left;
-        height: 2.5vw;
-        background: #007bff;
+        height: 2.7vw;
+        border: 3px solid white;
+        background: #1890ff;
         border-radius: 50%;
         position: relative;
         -webkit-transition: .3s margin ease;
@@ -244,8 +246,8 @@ aside {
 
         }
       .show-sidebar aside .side-inner .logo-wrap .logo{
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
       }
         /* logo of closed side menu */
         aside .side-inner .logo-wrap .logo span {
@@ -271,7 +273,9 @@ aside {
         -o-transition: .3s all ease;
         transition: .3s all ease;
         opacity: 0;
-        visibility: hidden; }
+        visibility: hidden;
+        color: white;
+       }
         .show-sidebar aside .side-inner .logo-wrap .logo-text {
           opacity: 1;
           font-weight: 600;
