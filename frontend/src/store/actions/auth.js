@@ -360,3 +360,13 @@ export const updateFollowers = (followerList) => {
     requestedList: followerList.requestedList
   }
 }
+
+
+export const updateRequestList = (newRequest) => {
+  // This function will be used to update the request lsit after someone made
+  // a reqeust to your page
+  return {
+    type: actionTypes.UPDATE_REQUEST_LIST,
+    newRequest: newRequest
+  }
+}

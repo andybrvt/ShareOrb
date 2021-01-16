@@ -113,8 +113,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             serializedRequest = FollowUserSerializer(actor).data
             content = {
                 "command": "new_notification",
-                "notificaton": json.dumps(serializer.data),
-                "requestObj": serializedRequest,
+                "notification": json.dumps(serializer.data),
+                "requestObj": json.dumps(serializedRequest),
                 "recipient": recipient.username
             }
             return self.send_new_notification(content)

@@ -107,7 +107,13 @@ const changePrivate = (state, action) => {
 const updateFollowers = (state, action) => {
   return updateObject(state, {
     followers: action.followerList,
-    requested: action.requestedList
+    requestList: action.requestedList
+  })
+}
+
+const updateRequestList = (state, action) => {
+  return updateObject(state, {
+    requestList: [...state.requestList, action.newRequest]
   })
 }
 
@@ -133,6 +139,8 @@ const reducer = (state = initialState, action) => {
       return changePrivate(state, action);
     case actionTypes.UPDATE_FOLLOWERS:
       return updateFollowers(state, action);
+    case actionTypes.UPDATE_REQUEST_LIST:
+      return updateRequestList(state, action);
     default:
       return state;
   }
