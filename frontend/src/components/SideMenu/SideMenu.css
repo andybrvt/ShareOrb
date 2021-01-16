@@ -210,6 +210,7 @@ aside {
     position: fixed;
     background-color: #1890ff;
     border-right: 1px solid #bfbfbf;
+    transition: 0.3s;
 
   }
 
@@ -288,7 +289,6 @@ aside {
       width: 3.5%;
       /* background-color: red; */
       top: 110px;
-
     }
 
     .show-sidebar aside .side-inner .nav-menu ul{
