@@ -25,7 +25,7 @@
 }
 
 .newsfeedParent .newsfeedMidContainer{
-  background-color: blue;
+  /* background-color: blue; */
   width: 55%;
   position: relative;
   /* text-align: center; */
@@ -35,18 +35,19 @@
 .newsfeedParent .newsfeedMidContainer .newsfeedItself{
   position: relative;
   width: 100%;
-  left: 40%;
-  transform: translateX(-50%);
-  background-color: green;
+  left: 10%;
+  /* left: 40%; */
+  /* transform: translateX(-50%); */
+  /* background-color: green; */
 }
 
 .newsfeedParent .newsfeedMidContainer .newsfeedItself .newsfeedActionButtons{
   display:  flex;
   flex-direction: row;
-  background-color: red;
+  /* background-color: red;. */
   position: relative;
   /* flex-wrap: wrap; */
-  width: 100%;
+  width: 45vw;
   gap: 3%;
 }
 

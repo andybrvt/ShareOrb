@@ -1,12 +1,12 @@
 /* These are for the NewChat.js */
 .chatContainer {
-  background-color: white;
+  /* background-color: blue; */
 
   position: absolute;
-  height: 95vh;
+  height: 93vh;
   width: 100vw;
-  top:3%;
-  overflow: hidden;
+  top:5%;
+  /* overflow: hidden; */
   left: 3.8%;
   display: flex;
 }
@@ -26,9 +26,9 @@
 }
 
 .chatContainer .chatRightSide{
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
-  background-color: "white";
+  background-color: red;
   width: 50%;
   height: 100%;
 }
@@ -36,7 +36,7 @@
 
 /* This is for the add chats feature */
 .chatContainer .chatRightSide .addNewChatContainer{
-  /* background-color: red; */
+  background-color: red;
   position:relative;
   width: 100%;
   height: 100%;
@@ -190,6 +190,7 @@
   /* background-color: white; */
   width: 100%;
   height: 93%;
+  overflow: auto;
 }
 
 
@@ -214,31 +215,31 @@
 
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatName{
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatGroupAva{
   background-color: gainsboro;
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
   font-size: 125px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox{
-  /* background-color: red; */
+  /* background-color: green; */
   position: relative;
   /* top: 25px; */
 }
 
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList{
-  /* background-color: red; */
-  position:absolute;
+  background-color: red;
+  position:relative;
 
-  bottom: 10%;
-  height:100px;
+  top: 10%;
+
   /* overflow-y: auto; */
   margin-left: 20px;
   width: 88%;
@@ -253,17 +254,17 @@
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .groupMemberList{
   overflow: auto;
-  height: 400px;
+  height:150px;
 }
 
 /* This is for the chat content page */
 .chatContainer .chatRightSide .newChatContent{
-  margin-top: 50px;
-  background-color: white;
+  /* margin-top: 50px; */
+  background-color: blue;
   border-top: 1px solid #f0f0f0;
   border-right: 1px solid #f0f0f0;
   border-left: 1px solid #f0f0f0;
-  height: 95%;
+  height: 100%;
   position: relative;
 }
 .chatContainer .chatRightSide .newChatContent .chatWrapContainer{
@@ -347,7 +348,6 @@
   font-weight: 400;
 
 }
-.eventGro
 
 .chatNameTime .chatName {
   font-size: 14px;

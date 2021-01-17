@@ -238,7 +238,7 @@ class CurChatManager extends React.Component{
 
           <div className = 'chatRightSideBox'>
             <Avatar
-            size = {225}
+            size = {150}
             src = {`${global.IMAGE_ENDPOINT}`+profilePic}
             />
 
