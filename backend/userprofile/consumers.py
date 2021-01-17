@@ -315,9 +315,13 @@ class NotificationConsumer(JsonWebsocketConsumer):
             # users notifications
             notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['recipient']).order_by('-timestamp')
             serializer = NotificationSerializer(notifications, many=True)
+
+            serializedRecipientReq = UserSerializer(recipient).data['get_follow_request']
+
             content = {
                 'command': 'notifications',
                 'notifications': json.dumps(serializer.data),
+                'requestList': json.dumps(serializedRecipientReq),
                 'recipient': recipient.username
 
             }

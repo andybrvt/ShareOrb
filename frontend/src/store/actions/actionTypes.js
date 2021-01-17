@@ -8,8 +8,10 @@ export const ADD_CREDENTIALS='ADD_CREDENTIALS';
 export const UPDATE_CREDENTIALS = "UPDATE_CREDENTIALS";
 export const CHANGE_PRIVATE = "CHANGE_PRIVATE";
 export const UPDATE_FOLLOWERS = "UPDATE_FOLLOWERS";
+// the update request list will add one new ojbect to the request list
 export const UPDATE_REQUEST_LIST = "UPDATE_REQUEST_LIST";
-
+// the new up request list will be used for when you remvoe a user
+export const NEW_UP_REQUEST_LIST = "NEW_UP_REQUEST_LIST";
 
 export const OPEN_POPUP = "OPEN_POPUP";
 export const CLOSE_POPUP = "CLOSE_POPUP";

@@ -75,6 +75,15 @@ class WebSocketNotifications {
         const notifications = JSON.parse(parsedData.notifications);
         this.callbacks['notifications'](notifications)
             // createNotification(notifications[i]);
+        if(parsedData.requestList){
+          const requestList = JSON.parse(parsedData.requestList)
+
+          console.log(requestList)
+          // Add call back here
+
+          this.callbacks['update_follow_request'](requestList)
+        }
+
 
     } else if (command === 'new_notification') {
         this.showNotification(parsedData, 'bottomRight')
@@ -97,12 +106,14 @@ class WebSocketNotifications {
   addCallbacks(
     notificationsCallback,
     newNotificationCallback,
-    addNewFollowRequest
+    addNewFollowRequest,
+    updateFollowRequest
   ){
 
     this.callbacks['notifications'] = notificationsCallback;
     this.callbacks['new_notification'] = newNotificationCallback;
     this.callbacks['new_follow_request'] = addNewFollowRequest;
+    this.callbacks['update_follow_request'] = updateFollowRequest
   }
   // this will send the messages to the backend
   // it will pull all the notifications taht currently exist

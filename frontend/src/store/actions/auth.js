@@ -370,3 +370,12 @@ export const updateRequestList = (newRequest) => {
     newRequest: newRequest
   }
 }
+
+export const newUpRequestList = (requestList) => {
+  // Will prett much replace the request list
+  return {
+    type: actionTypes.NEW_UP_REQUEST_LIST,
+    requestList: requestList
+  }
+
+}

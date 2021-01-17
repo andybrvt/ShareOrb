@@ -117,6 +117,12 @@ const updateRequestList = (state, action) => {
   })
 }
 
+const newUpRequestList = (state, action) => {
+  return updateObject(state, {
+    requestList: action.requestList
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -141,6 +147,8 @@ const reducer = (state = initialState, action) => {
       return updateFollowers(state, action);
     case actionTypes.UPDATE_REQUEST_LIST:
       return updateRequestList(state, action);
+    case actionTypes.NEW_UP_REQUEST_LIST:
+      return newUpRequestList(state, action);
     default:
       return state;
   }
