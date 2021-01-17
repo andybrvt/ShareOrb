@@ -108,8 +108,7 @@ class NewsFeedView extends React.Component {
 
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="topCard">
-								<i class="far fa-edit share"
-									style={{fontSize:'25px', color:'#1890ff'}}></i>
+								<i class="far fa-edit share"></i>
 								 <p style={{ color:'#1890ff',}} class="cardAlign"> Write a post</p>
 							</div>
 

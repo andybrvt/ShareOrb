@@ -14,7 +14,6 @@ import FriendRequestList from './components/FriendRequestList';
 import FriendsList from './containers/FriendsList';
 import Chat from './containers/Chat';
 import NewChat from './containers/NewChatFolder/NewChat';
-import Notifications from './containers/Notifications';
 import MonthCalendar from './containers/PersonalCalendar/MonthCalendar';
 import DayCalendar from './containers/PersonalCalendar/DayCalendar';
 import WeekCalendar from './containers/PersonalCalendar/WeekCalendar';
@@ -71,7 +70,7 @@ class BaseRouter extends React.Component {
     return (
 
 
-      <div class="backgroundofEverything" 
+      <div class="backgroundofEverything"
       >
         { this.props.isAuthenticated?
         <SideMenu>

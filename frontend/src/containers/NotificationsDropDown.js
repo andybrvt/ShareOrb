@@ -987,8 +987,9 @@ class NotificationsDropDown extends React.Component{
 const mapStateToProps = state => {
   return {
     showNotification: state.notifications.showNotification,
-    curId: state.auth.id
-
+    curId: state.auth.id,
+    notifications: state.notifications.notifications,
+    username: state.auth.username,
   }
 }
 

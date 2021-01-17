@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import NoticeList from './NoticeList';
 import HeaderDropdown from '../HeaderDropdown/index';
 import styles from './index.less';
-import Notifications from '../Notifications';
 
 const { TabPane } = Tabs;
 

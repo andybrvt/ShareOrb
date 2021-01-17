@@ -40,7 +40,6 @@ import * as actions from '../../store/actions/auth';
 import PickEventSyncModal from '../../containers/PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
-import Notifications from '../../containers/Notifications';
 import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;

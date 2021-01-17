@@ -36,6 +36,8 @@ import defaultPic from '../../components/images/default.png'
 import Liking from './Liking';
 import LikeList from './LikeList';
 import PostPicCarousel from '../../components/PostPageFolder/PostPicCarousel';
+import NewsfeedSpecCarousel from './NewsfeedSpecCarousel';
+
 import * as dateFns from 'date-fns';
 
 
@@ -62,31 +64,9 @@ class NewsfeedPost extends React.Component {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-
-  // initialisePost(){
-  //   this.waitForSocketConnection(() =>{
-  //     WebSocketPostsInstance.fetchLikes(this.props.data.id)
-  //     WebSocketPostsInstance.fetchComments(this.props.data.id)
-  //   })
-  // }
-
-
   componentDidMount() {
     // WebSocketPostsInstance.connect()
   }
-
-  // waitForSocketConnection(callback){
-  //   const component = this
-  //   setTimeout(
-  //     function(){
-  //       if(WebSocketPostsInstance.state() ===1){
-  //         callback();
-  //         return;
-  //       } else {
-  //         component.waitForSocketConnection(callback);
-  //       }
-  //     }, 100)
-  // }
 
   deletePost = () => {
 
@@ -145,59 +125,37 @@ class NewsfeedPost extends React.Component {
     if(this.props.data.user){
       username = this.props.data.user.username
     }
-
-
-
-
-      let userPostImages = []
-      if(this.props.data){
-        if(this.props.data.post_images){
+    let userPostImages = []
+    if(this.props.data){
+      if(this.props.data.post_images){
           userPostImages = this.props.data.post_images
-        }
       }
+    }
 
-      if(userPostImages.length==1){
-        return(
+    if(userPostImages.length==1){
+      return(
         <div
           onClick = {() => this.OnClickPost(postId, username)}
           class="imageContainer">
           <a><img src={`${global.NEWSFEED_PICS}`+userPostImages[0]} alt="" /></a>
         </div>
-          )
-        }
-        else if(userPostImages.length>1){
+      )
+    } else if(userPostImages.length>1){
+      return(
+        <div
+        onClick = {() => this.OnClickPost(postId, username)}
+        className = "postPicCarouselNews">
 
-          return(
-            <div
-              onClick = {() => this.OnClickPost(postId, username)}
-              className = "postPicCarouselNews">
-              <div class="leftArrowPost">
-                <i style={{color:'#8c8c8c'}}
-                    onClick = {this.previous}
-                  class="fas fa-chevron-circle-left"></i>
-              </div>
-               <PostPicCarousel
-               picIndexChange = {this.onCurPhotoChange}
-               items = {userPostImages} />
-               <div class="rightArrowPost">
-                 <i style={{color:'#8c8c8c'}}
-                     onClick = {this.next}
-                   class="fas fa-chevron-circle-right"></i>
-               </div>
-            </div>
-          )
 
-        }
+        <NewsfeedSpecCarousel
+        picIndexChange = {this.onCurPhotoChange}
+        items = {userPostImages} />
+
+        </div>
+      )
+    }
  }
 
-
-
- randomAvatarColor = () => {
-
-   this.setState({
-     avatarColor:'#ff0000',
-   });
- };
 
   showModal = () => {
     this.setState({
@@ -326,14 +284,14 @@ class NewsfeedPost extends React.Component {
 
   openNotification = placement => {
 
-  const today = dateFns.format(new Date(), 'MMM dd, yyyy')
+    const today = dateFns.format(new Date(), 'MMM dd, yyyy')
 
-  notification.info({
-    message: `Photo Clipped!`,
-    description:
-      'A photo has been clipped to your calendar on '+today+'.',
-    placement,
-  });
+    notification.info({
+      message: `Photo Clipped!`,
+      description:
+        'A photo has been clipped to your calendar on '+today+'.',
+      placement,
+    });
   };
 
 
@@ -365,7 +323,6 @@ class NewsfeedPost extends React.Component {
 
       NotificationWebSocketInstance.sendNotification(notificationObject)
     }
-
   }
 
   BottomLikeCommentPost(){
@@ -401,113 +358,105 @@ class NewsfeedPost extends React.Component {
 
     return (
       <div style={{marginLeft:'15px', fontSize:'14px'}}>
+
+
         <div class='outerContainerPeople'>
           <div class="innerContainerLike">
-              <div>
-                {
-                  (peopleLikeId.includes(this.props.userId))?
-                  <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
-                  :
-                  <i class="far fa-heart" style={{marginRight:'5px'}}></i>
-                }
-
-                  <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+            {
+            (peopleLikeId.includes(this.props.userId))?
+            <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
+              :
+            <i class="far fa-heart" style={{marginRight:'5px'}}></i>
+            }
+            <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
                   <span class="boldLikeComment">{like_people.length} </span>
-                  </span>
-                   <Divider type="vertical" style={{background:'#d9d9d9'}}/>
-                   <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
-                     <span class="boldLikeComment">
+            </span>
 
-                       {this.props.data.post_comments.length} comments
-                     </span>
-                   </span>
+            <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
-                 <div class='commentInPost'>
-                       <Liking
-                        num={10}
-                        history  = {this.props.history}
-                        specifySize={27}
-                        like_people={this.props.data.people_like} {...this.props}/>
+            <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
+              <span class="boldLikeComment"> {this.props.data.post_comments.length} comments</span>
+            </span>
+
+            <div class='commentInPost'>
+              <Liking
+                num={10}
+                history  = {this.props.history}
+                specifySize={27}
+                like_people={this.props.data.people_like} {...this.props}/>
+            </div>
+          </div>
+        </div>
+
+        <Divider style={{marginTop:'-10px'}}/>
+
+        <p style={{ fontSize: '14px', color:'black'}}>
+          {
+            ((this.props.data.caption).length>140)?
+              <div class="photoText">
+                <span>
+                  {this.props.data.caption.substring(0,140)}
+                </span>
+                <span class="grayout outerSeeMore"> {this.props.data.caption.substring(140,175)}</span>
+                <div
+                  style={{marginLeft: '10px', marginTop:'10px'}}
+                  class="seeMore outerSeeMore"
+                  onClick={() => this.OnClickPost(postId, userUsername)}
+                >
+                  ... see more
+                </div>
+
+              </div>
+
+            :
+
+              <div style={{display:'flex'}}>
+                <div class="photoText">
+                    <span>
+                      {this.props.data.caption}
+                    </span>
                 </div>
               </div>
-           </div>
-        </div>
-        <Divider style={{marginTop:'-10px'}}/>
-        <p style={{ fontSize: '14px', color:'black'}}>
-                  {
-
-                     ((this.props.data.caption).length>140)?
-                     <div class="photoText">
-
-                         <span>
-
-                          {this.props.data.caption.substring(0,140)}
-                         </span>
-
-                         <span class="grayout outerSeeMore"> {this.props.data.caption.substring(140,175)}</span>
-                         <div
-                           style={{marginLeft: '10px', marginTop:'10px'}}
-                           class="seeMore outerSeeMore"
-                           onClick={() => this.OnClickPost(postId, userUsername)}
-                           >
-                            ... see more
-                         </div>
-
-                      </div>
-                     :
-                     <div style={{display:'flex'}}>
-                       <div class="photoText">
-                           <span>
-                            {this.props.data.caption}
-                           </span>
-                        </div>
-                      </div>
-                   }
-          </p>
+          }
+        </p>
 
 
         <div>
           <div class="box-buttons">
             <div class="row">
-              {
-                (peopleLikeId.includes(this.props.userId))?
-
-                  <button
-                    class="box-click"
-                    onClick ={this.AddOneToLike}>
-                    <i
-                      style={{ marginRight:'10px', color:'red'}}
-                      class="fa fa-heart">
-                    </i>
-                    <span class="textHighlight">
+              {(peopleLikeId.includes(this.props.userId))?
+              <button
+              class="box-click"
+              onClick ={this.AddOneToLike}>
+                <i style={{ marginRight:'10px', color:'red'}} class="fa fa-heart">
+                </i>
+                <span class="textHighlight">
                       Like
-                    </span>
-                  </button>
-                :
-                  <button
-                    class="box-click"
-                    onClick ={this.AddOneToLike} >
-                    <i
-                      style={{ marginRight:'10px'}}
-                      class="far fa-heart">
-                    </i>
-                    <span>
-                      Like
-                    </span>
-                  </button>
+                </span>
+              </button>
+              :
+              <button
+              class="box-click"
+              onClick ={this.AddOneToLike} >
+                  <i
+                    style={{ marginRight:'10px'}}
+                    class="far fa-heart">
+                  </i>
+                  <span> Like </span>
+              </button>
               }
               <button onClick ={() => this.OnClickPost(postId, userUsername)} >
 
                 <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comment"></i> Comment
               </button>
-              <button
-              onClick = {() => this.onClipPhoto()}
-              >
-              <span
-              style={{ marginRight:'10px'}}
-              class="fa fa-archive"></span> Clip </button>
+              <button onClick = {() => this.onClipPhoto()}>
+                <span style={{ marginRight:'10px'}} class="fa fa-archive"></span>
+                Clip
+              </button>
             </div>
           </div>
+
+
           {
             (this.state.commentsCondition==true) ?
             <div>
@@ -517,9 +466,6 @@ class NewsfeedPost extends React.Component {
                  ''}
               </div>
             </div>
-
-
-
             :
 
             <div>
@@ -527,9 +473,8 @@ class NewsfeedPost extends React.Component {
             </div>
 
           }
-          </div>
       </div>
-
+    </div>
     )
   }
 
@@ -605,8 +550,10 @@ class NewsfeedPost extends React.Component {
 
       </div>
     )
-
   }
+
+
+
 
   ContentOfPic() {
     let like_people = this.props.data.people_like
@@ -615,7 +562,6 @@ class NewsfeedPost extends React.Component {
     if (this.props.data.user.profile_picture){
       profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.user.profile_picture
     }
-
 
     let temp=`${global.IMAGE_ENDPOINT}`+this.props.data.post_images;
 
@@ -627,77 +573,51 @@ class NewsfeedPost extends React.Component {
     };
 
     return(
-    <div>
-
-      <div>
-
-
-      <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
-
+    <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
       <span class="profilePicHeader">
         <span class="headerContainer" >
-
             <span class="g grid-13">
+              {
+                profilePic != '' ?
+              <Avatar
+              size="large"
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              size={42}
+              style = {{cursor: 'pointer'}}
+              src={profilePic} alt="avatar" />
 
-                  {
-                    profilePic != '' ?
-                    <Avatar
-                    size="large"
-                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                    size={42}
-                    style = {{
-                      cursor: 'pointer',
-                    }}
-                    src={profilePic} alt="avatar" />
+              :
 
-                    :
-
-                    <Avatar
-                    onClick = {() => this.onProfileClick(this.props.data.user.username)}
-                    size="large"
-                    style = {{
-                      cursor: 'pointer',
-                    }}
-                    src={defaultPic} alt="avatar" />
-
-                  }
+              <Avatar
+              onClick = {() => this.onProfileClick(this.props.data.user.username)}
+              size="large"
+              style = {{cursor: 'pointer' }}
+              src={defaultPic} alt="avatar" />
+            }
 
             </span>
-              <span class="g grid-33">
-
-                <span class="headerPost">
-
-                  <span
-                    style={{color:'black', fontSize:'15px', marginLeft:'-5px'}}
-                    class="headerPostText alignleft" >
-                      {this.props.data.user.first_name}{' '}{this.props.data.user.last_name} <br/>
-                  <span>
+            <span class="g grid-33">
+              <span class="headerPost">
+                <span
+                  style={{color:'black', fontSize:'15px', marginLeft:'-5px'}}
+                  class="headerPostText alignleft" >
                   <span
                     style={{fontSize:'13px'}}
                     class="headerPostText LikeCommentHover">
                     @{this.props.data.user.username}
                   </span>
+
                 </span>
-                    </span>
 
-                      <span class="headerPostText alignright" style={{fontSize:'13px'}} >
-
-
-
-                        <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
-                        Tucson, Arizona <br/>
-
-                        <span style={{float:'right'}}>
-                        {this.renderTimestamp(this.props.data.created_at)}
-                        </span>
+                <span class="headerPostText alignright" style={{fontSize:'13px'}} >
+                  <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
+                    Tucson, Arizona <br/>
+                  <span style={{float:'right'}}>
+                      {this.renderTimestamp(this.props.data.created_at)}
                   </span>
-
                 </span>
-
               </span>
-
-
-
+            </span>
           </span>
 
           <span class="optionPostHeader">
@@ -725,136 +645,24 @@ class NewsfeedPost extends React.Component {
 
             </span>
 
-        </span>
+    </span>
 
-
-
-
-
-
-        <div>
     <div>
+      <div>
 
-    <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
-
-
-
-
-      {this.revealPhoto()}
-
+        <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
+        {this.revealPhoto()}
       </div>
 
-      <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
-      {this.BottomLikeCommentPost()}
+        <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
+        {this.BottomLikeCommentPost()}
 
-        </div>
       </div>
     </div>
-  </div>
     )
   }
 
   // this renders the posts on the newsfeed
-
-  ContentofComments(){
-
-    let profilePic = ''
-
-    if (this.props.currentProfilePic){
-
-      profilePic = this.props.currentProfilePic
-    }
-
-    return(
-
-    <div>
-      {
-
-
-        (this.props.data.post_comments.length==0) ?
-
-        <div>
-
-          <Comment
-          style={{ width: 600 }}
-          required={true}
-           avatar={
-             profilePic != '' ?
-             <Avatar
-             onClick = {() => this.onProfileClick(this.props.currentUser)}
-             size="large"
-             style = {{
-               cursor: 'pointer',
-             }}
-             src={profilePic} alt="avatar" />
-
-             :
-
-             <Avatar
-             onClick = {() => this.onProfileClick(this.props.data.user.username)}
-             size="large"
-             style = {{
-               cursor: 'pointer',
-             }}
-             src={defaultPic} alt="avatar" />
-           }
-           content={
-            <div>
-            <Form>
-             <Form.Item name="note"  rules={[{ required: true }]}  >
-               <Input
-               placeholder="Write a comment"
-                rows={4}
-                onChange={this.handleCommentChange}
-               />
-               <Button type="primary"  onClick={this.handleSubmit}>
-                 Add Comment
-               </Button>
-             </Form.Item>
-
-             </Form>
-
-            </div>
-          }
-
-         />
-
-        </div>
-        :
-
-        <div>
-
-        <Comments className="fontTest" newsfeed={this.props}/>
-        <Form.Item>
-          <Input
-          placeholder="Write a comment"
-           rows={4}
-           class="fontTest"
-
-           onChange={this.handleCommentChange}
-          />
-          <Button type="primary" onClick={this.handleSubmit}>
-            Add Comment
-          </Button>
-
-        </Form.Item>
-
-
-        </div>
-
-
-
-      }
-
-    </div>
-
-    )
-
-  }
-
-
-
-
 
   AddOneToLike = (e) => {
     e.stopPropagation();
@@ -889,11 +697,7 @@ class NewsfeedPost extends React.Component {
       }
       // NotificationWebSocketInstance.sendNotification()
     }
-
-
-
-
-    }
+  }
 
     render() {
       console.log(this.props)
@@ -921,37 +725,13 @@ class NewsfeedPost extends React.Component {
           height="1000px"
           style={{marginTop:'-50px'}}
           >
-
-
           <LikeList {...this.props}/>
+        </Modal>
 
-          </Modal>
-
-          <Modal
-            class="modalOuterContainer"
-            title={`Post by ${this.props.data.user.username}`}
-            visible={this.state.visibleModal}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            width="1600px"
-            height="800px"
-            style={{marginTop:'-50px'}}
-            >
-
-            <div class="modalInnerContainer">
-
-
-
-            <p class="modalCardBorder modalInnerPicture">{this.ContentOfPic()}</p>
-
-
-              <p  class="modalCardBorder">{this.ContentofComments()}</p>
-            </div>
-          </Modal>
 
         </div>
 
-              <p>{this.ContentOfPic()}</p>
+        <p>{this.ContentOfPic()}</p>
 
         </div>
   );

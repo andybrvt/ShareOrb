@@ -1,0 +1,71 @@
+
+.postPicCarouselNews .specLeftRight .specPictureRoll{
+  /* height:800px; */
+  /* background-color: #000000cc; */
+  overflow: hidden;
+  width:45vw;
+  height: 90vh;
+  position: relative;
+
+}
+
+.postPicCarouselNews .specLeftRight .specPictureRoll img{
+  object-fit: cover;
+  width:100%;
+  height:100%;
+}
+.postPicCarouselNews .specLeftRight .specPictureRoll .specImages{
+  position: relative;
+
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.postPicCarouselNews .specLeftRight{
+  /* display: flex; */
+  width:100%;
+  height:100%;
+}
+
+.postPicCarouselNews .specLeftRight .newsFeedArrowLeft {
+  position: absolute;
+  /* background-color: red; */
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 0%;
+  font-size: 45px;
+}
+.postPicCarouselNews .specLeftRight .newsFeedArrowRight {
+  position: absolute;
+  /* background-color: red; */
+  top: 45%;
+  transform: translateY(-50%);
+  right:0%;
+  /* right: 100%; */
+  background:red;
+  z-index: 10;
+  font-size: 45px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* image of carousel */
+/* . img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+} */

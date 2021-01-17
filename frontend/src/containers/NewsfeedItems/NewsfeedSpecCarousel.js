@@ -1,0 +1,113 @@
+import React from 'react';
+import { Carousel } from 'antd';
+import {
+  RightCircleOutlined,
+  LeftCircleOutlined
+} from '@ant-design/icons';
+import './NewsfeedSpecCarousel.css';
+
+class NewsfeedSpecCarousel extends React.Component{
+  constructor(props){
+    super(props);
+    this.next = this.next.bind(this)
+    this.previous = this.previous.bind(this);
+    // createRef is used to refer to the DOM element in the render with the
+    // ref in the tab
+    this.carousel = React.createRef()
+  }
+
+  next() {
+    this.carousel.next()
+  }
+
+  previous() {
+    this.carousel.prev()
+  }
+
+
+
+  renderPictures = pictureList => {
+    console.log(pictureList)
+    let socialItems = []
+
+    // if(pictureList.length === 0){
+    //   return
+    // } else if (pictureList.length === 1){
+    //
+    // }
+    {
+      pictureList.map(
+        item => {
+          socialItems.push(
+            <div className = 'specPictureRoll'>
+              <img
+              className = 'specImages'
+              // PICTUREXXXURL
+              src ={`${global.API_ENDPOINT}/media/`+item} />
+
+            </div>
+          )
+        }
+      )
+    }
+
+    return socialItems
+  }
+
+  onChange= (a) => {
+    // This on change will show the indexes of the carousel
+    console.log(a);
+    this.props.picIndexChange(a)
+  }
+
+
+
+
+  render(){
+    console.log(this.props)
+    let itemList = []
+    if(this.props.items !== []){
+      itemList = this.props.items
+    }
+
+
+    const contentStyle = {
+      height: '800px',
+      color: '#fff',
+      lineHeight: '160px',
+      textAlign: 'center',
+      background: '#364d79',
+    };
+
+    return (
+      <div onClick = {this.previous} className = 'specLeftRight'>
+
+
+        <Carousel
+        arrows = {true}
+        effect = 'null'
+        ref = {node => {this.carousel = node}}
+        afterChange={this.onChange}>
+          {this.renderPictures(itemList)}
+        </Carousel>
+
+        <div class="newsFeedArrowLeft">
+          <i style={{color:'#d9d9d9'}}
+            class="fas fa-chevron-circle-left"></i>
+        </div>
+
+        <div class="newsFeedArrowRight">
+          <i style={{color:'#d9d9d9'}}
+              onClick = {this.next}
+            class="fas fa-chevron-circle-right"></i>
+        </div>
+
+      </div>
+    )
+  }
+
+}
+
+
+
+export default NewsfeedSpecCarousel;

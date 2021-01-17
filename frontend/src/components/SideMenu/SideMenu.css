@@ -337,23 +337,33 @@ aside {
   flex-direction: column;
 }
 
+.rightContentContainer.show-sidebar{
+  /* width: 80vw; */
+}
+
 /* header */
-.headerContainer{
+.mainHeaderContainer{
   z-index: 3;
   background: white;
   display: flex;
-  width: 100%;
+  width: 96%;
   height: 40px;
-  position: relative;
+  position: fixed;
   padding: 0px;
+  border-bottom: 1px solid #d9d9d9;
   /* padding-top: 0px; */
+  transition: 0.3s;
+}
+.mainHeaderContainer.show-sidebar{
+  width: 85%;
+
 }
 
 .mainContentContainer{
   /* background-color:red; */
 }
 
-.headerContainer .burgerContainer{
+.mainHeaderContainer .burgerContainer{
   /* background-color: red; */
   text-align: center;
   width: 5%;
@@ -376,7 +386,8 @@ aside {
 
 
 .searchBarContainer{
-  width:70%;
+  left:10%;
+  width:60%;
   /* background-color: blue; */
 
 }
@@ -413,13 +424,13 @@ aside {
 
 }
 
-.headerContainer .headersProfileContainer{
+.mainHeaderContainer .headersProfileContainer{
   position: relative;
   /* background:brown; */
   width:12.5%
 }
 
-.headerContainer .headersProfileContainer .profileHeader{
+.mainHeaderContainer .headersProfileContainer .profileHeader{
   position: relative;
   left:50%;
   transform: translateX(-50%);

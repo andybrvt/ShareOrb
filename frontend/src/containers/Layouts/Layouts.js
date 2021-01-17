@@ -17,7 +17,6 @@ import SideMenu from '../../components/SideMenu/SideMenu';
 
 import './Layouts.css';
 
-import Notifications from '../Notifications';
 import NotificationsDropDown from '../NotificationsDropDown';
 import PickEventSyncModal from '../PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';

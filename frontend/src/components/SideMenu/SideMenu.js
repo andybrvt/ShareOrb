@@ -47,7 +47,6 @@ import * as actions from '../../store/actions/auth';
 import PickEventSyncModal from '../../containers/PersonalCalendar/EventSyncForms/PickEventSyncModal';
 import * as eventSyncActions from '../../store/actions/eventSync';
 import NotificationsDropDown from '../../containers/NotificationsDropDown';
-import Notifications from '../../containers/Notifications';
 import defaultPicture from '../images/default.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -299,7 +298,7 @@ class SideMenu extends React.Component {
         </div>
 
         <div className = "rightContentContainer">
-            <div className="headerContainer" >
+            <div className="mainHeaderContainer" >
               <div className = "burgerContainer">
                 <div className="toggle">
                   <span
@@ -346,7 +345,7 @@ class SideMenu extends React.Component {
                   <i
                     class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
                     aria-hidden="true"
-                    style={{fontSize:'25px'}}
+                    style={{fontSize:'22px'}}
                     >
 
 
@@ -354,7 +353,7 @@ class SideMenu extends React.Component {
                 </div>
                 <div className = {`dropdown-content ${this.state.showDropDown ? "show" : ""}`} >
 
-                    <Notifications {...this.props} showNoti={true}/>
+                    <NotificationsDropDown {...this.props} showNoti={true}/>
                   </div>
 
                 </div>
