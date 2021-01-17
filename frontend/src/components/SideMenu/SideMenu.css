@@ -412,7 +412,7 @@ aside {
 
 .headersNotificationContainer{
   /* background:green; */
-
+  position: relative;
   width:12.5%;
   height:100%;
 }
@@ -421,8 +421,11 @@ aside {
 .headersNotificationContainer .notificationsInner{
   position: relative;
   top:25%;
-  left:100%;
-
+  left:90%;
+  width: 10%;
+  /* float:right; */
+  cursor: pointer;
+  /* background-color: red; */
 }
 
 .mainHeaderContainer .headersProfileContainer{

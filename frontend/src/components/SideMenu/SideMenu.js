@@ -339,10 +339,10 @@ class SideMenu extends React.Component {
                 <div className="headersNotificationContainer">
 
                 <div
-                onClick = {() => this.onOpenDropDown()}
                 className = 'notificationsInner'
                 >
                   <i
+                    onClick = {() => this.onOpenDropDown()}
                     class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
                     aria-hidden="true"
                     style={{fontSize:'22px'}}
@@ -351,9 +351,9 @@ class SideMenu extends React.Component {
 
                   </i>
                 </div>
-                <div className = {`dropdown-content ${this.state.showDropDown ? "show" : ""}`} >
+                <div >
 
-                    <NotificationsDropDown {...this.props} showNoti={true}/>
+                    <NotificationsDropDown {...this.props} showNoti={this.state.showDropDown}/>
                   </div>
 
                 </div>
