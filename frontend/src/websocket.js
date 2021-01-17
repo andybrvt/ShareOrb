@@ -27,7 +27,7 @@ class WebSocketService {
   // this.socketRef is basically our WebSocket
 
   connect(chatUrl) {
-    const path ='ws://127.0.0.1:8000/ws/chat/'+chatUrl+'/';
+    const path =`ws://${global.WS_ENDPOINT}/ws/chat/`+chatUrl+'/';
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {

@@ -22,7 +22,7 @@ class WebSocketEventPage{
   connect(eventId){
     // This will connect individually to each event page. So pretty much
     // each event page will be its own channel when you href to that page
-    const path = 'ws://127.0.0.1:8000/ws/calendarEvent/'+eventId
+    const path = `ws://${global.WS_ENDPOINT}/ws/calendarEvent/`+eventId
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {

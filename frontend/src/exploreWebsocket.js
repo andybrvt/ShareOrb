@@ -21,7 +21,7 @@ class WebSocketExplore {
   }
 
   connect(username){
-    const path = 'ws://127.0.0.1:8000/ws/explore/' + username
+    const path = `ws://${global.WS_ENDPOINT}/ws/explore/` + username
     // I place the connection path in the app.js
     console.log(path)
     this.socketRef = new WebSocket(path)
