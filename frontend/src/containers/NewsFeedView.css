@@ -34,7 +34,7 @@
 
 .newsfeedParent .newsfeedMidContainer .newsfeedItself{
   position: relative;
-  width: 74%;
+  width: 100%;
   left: 40%;
   transform: translateX(-50%);
   background-color: green;
@@ -71,8 +71,10 @@
 } */
 
 .newsfeedParent .suggestedFriendsContainer{
-  background-color: red;
-  width: 27%;
+  /* background-color: red; */
+  width: 25%;
+  height:50px;
+  padding:2%;
 }
 
 .newsfeedParent .suggestedFriendsContainer .suggestedFriendsCard {
@@ -229,13 +231,14 @@ color: #203758;
 .morePeopleHeader{
   text-align: center;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 16px;
   height:75px;
   /* background-color: red; */
-  padding-top: 25px;
-  max-height: 450px;
+  padding-top: 10px;
+  max-height: 400px;
   font-weight: 500;
   color:black;
+
   /* color:#1890ff; */
 
 }

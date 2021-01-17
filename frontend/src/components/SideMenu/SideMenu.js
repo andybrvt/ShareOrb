@@ -330,7 +330,7 @@ class SideMenu extends React.Component {
                     {/*search bar*/}
                       <Input.Search
                         class="inputSearchCSS"
-                        compact size="0.35em" placeholder="Search" />
+                        compact placeholder="Search" />
                     </AutoComplete>
                  </div>
                 </div>

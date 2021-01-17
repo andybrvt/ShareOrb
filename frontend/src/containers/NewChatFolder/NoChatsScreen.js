@@ -15,7 +15,7 @@ class NoChatsScreen extends React.Component{
     return (
       <div className= "noChatsScreen">
       <div className = "noChatsWord">
-        No chats avaliable
+        No chats available
       </div>
         <div className = "createChatButtonContainer">
         <Button

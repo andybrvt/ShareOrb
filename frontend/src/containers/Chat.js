@@ -183,7 +183,7 @@ class Chat extends React.Component{
       console.log(this.props)
       const messages = this.state.messages;
       return(
-        <div id="frame">
+        <div class="testChat">
           <Sidepanel {...this.props} {...this.state}/>
           <AddChatModal
           isVisible ={this.props.showPopup}

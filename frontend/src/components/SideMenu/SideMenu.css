@@ -387,7 +387,7 @@ aside {
 
 .searchBarContainer{
   left:10%;
-  width:60%;
+  width:80%;
   /* background-color: blue; */
 
 }
@@ -396,7 +396,7 @@ aside {
 .searchBarContainer .autoCompleteHeader{
   /* background:blue; */
   position:relative;
-  left: 25%;
+  left: 30%;
   /* transform: translateX(-50%); */
   top:2.5px;
   color: black;
@@ -412,6 +412,7 @@ aside {
 
 .headersNotificationContainer{
   /* background:green; */
+
   width:12.5%;
   height:100%;
 }
@@ -420,7 +421,7 @@ aside {
 .headersNotificationContainer .notificationsInner{
   position: relative;
   top:25%;
-  left:80%;
+  left:100%;
 
 }
 
@@ -432,7 +433,7 @@ aside {
 
 .mainHeaderContainer .headersProfileContainer .profileHeader{
   position: relative;
-  left:50%;
+  left:75%;
   transform: translateX(-50%);
   top:5px;
 

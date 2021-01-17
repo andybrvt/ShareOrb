@@ -634,15 +634,17 @@ class CreateShareEventChat extends React.Component{
               className = 'buttomHolder'
               style={{marginLeft:'50px', marginTop:'40px'}}
             >
-            <div className = 'clearButtonCon'>
-              <Button onClick = {this.onClear}  >
-                Clear Values
-              </Button>
-            </div>
-            <div className = 'submitButtonCon'>
-              <Button type="primary" htmlType="submit" disabled = {this.handleValidation()}>
-                Submit
-              </Button>
+            <div style={{marginTop:'-25px'}}>
+              <div className = 'clearButtonCon'>
+                <Button onClick = {this.onClear}  >
+                  Clear Values
+                </Button>
+              </div>
+              <div style={{marginRight:'10px'}}>
+                <Button type="primary" htmlType="submit" disabled = {this.handleValidation()}>
+                  Submit
+                </Button>
+              </div>
             </div>
             </Form.Item>
           </Form>

@@ -238,7 +238,7 @@ class CurChatManager extends React.Component{
 
           <div className = 'chatRightSideBox'>
             <Avatar
-            size = {250}
+            size = {225}
             src = {`${global.IMAGE_ENDPOINT}`+profilePic}
             />
 
@@ -292,9 +292,10 @@ class CurChatManager extends React.Component{
         }
 
         <Modal
+          centered
         visible = {this.state.showShareEvent}
         onCancel = {() => this.onCloseEventModal()}
-        bodyStyle={{padding:'50px'}}
+        bodyStyle={{padding:'50px', height:'550px'}}
         footer= {null}
         width = {1050}
         >

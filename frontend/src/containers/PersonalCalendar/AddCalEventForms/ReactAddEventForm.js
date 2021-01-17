@@ -676,6 +676,7 @@ class ReactAddEventForm extends React.Component {
             Submit
           </Button>
         </div>
+
         </Form.Item>
       </Form>
     );

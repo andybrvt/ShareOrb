@@ -1,3 +1,5 @@
+
+
 body {
   /* display: flex; */
   align-items: center;
@@ -14,13 +16,14 @@ body {
 }
 
 #frame {
-  width: 1000px;
+  width: 100vh;
   min-width: 360px;
   max-width: 1000px;
-  height: 92vh;
+  height: 10vh;
   min-height: 300px;
   max-height: 720px;
-  background: #E6EAEA;
+  /* background: #E6EAEA; */
+  background: red;
 }
 @media screen and (max-width: 360px) {
   #frame {

@@ -3,15 +3,17 @@
   background-color: white;
 
   position: absolute;
-  height: 92.5vh;
-  width: 100%;
-  top: 30%;
+  height: 95vh;
+  width: 100vw;
+  top:3%;
+  overflow: hidden;
   left: 3.8%;
   display: flex;
 }
 
 .chatContainer .chatLeftSide{
-  background-color: white;
+  /* background-color: red; */
+  padding:10px;
   width: 23%;
   height: 100%;
 }
