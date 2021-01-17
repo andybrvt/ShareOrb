@@ -178,10 +178,25 @@ class FriendNotification(generics.ListAPIView):
 	serializer_class = serializers.NotificationSerializer
 	queryset = models.CustomNotification.objects.all()
 
-class onDeleteNotification(generics.RetrieveDestroyAPIView):
-    serializer_class = serializers.NotificationSerializer
-    lookup_field = 'id'
-    queryset = models.CustomNotification.objects.all()
+# class onDeleteNotification(generics.RetrieveDestroyAPIView):
+#     serializer_class = serializers.NotificationSerializer
+#     lookup_field = 'id'
+#     queryset = models.CustomNotification.objects.all()
+
+class onDeleteNotification(APIView):
+    # This will jsut delete the notification
+    # You will first delete the notificatoin but you must grab the recipient
+    # first then get the notification fo the use so you can update it later
+    # in the front end
+    def post(self, request, id, *args, **kwargs):
+        notification = get_object_or_404(models.CustomNotification, id = id)
+        recipient = notification.recipient
+        print(recipient)
+        notification.delete()
+        notifications = models.CustomNotification.objects.select_related('actor').filter(recipient = recipient).order_by('-timestamp')
+        serializer = serializers.NotificationSerializer(notifications, many = True).data
+        return Response(serializer)
+
 
 
 class deletePostCall(generics.RetrieveDestroyAPIView):

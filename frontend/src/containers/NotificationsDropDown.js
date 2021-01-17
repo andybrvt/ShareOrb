@@ -113,10 +113,12 @@ class NotificationsDropDown extends React.Component{
   }
 
   onDeleteNotification = (e,notificationId) => {
-    console.log(notificationId)
     this.deleteSideNotification('bottomRight')
-    authAxios.delete(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
-    this.props.deleteNotification(notificationId)
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
+    .then(res => {
+      console.log(res)
+      this.props.setNotifications(res.data)
+    })
   }
 
   onProfileClick = (user) => {
@@ -216,7 +218,7 @@ class NotificationsDropDown extends React.Component{
     // The following parameter will be the recipient or in this case the person who
     // is accepting the follow
 
-    console.log(follower, following)
+    console.log(follower, following, notificationId)
     // Once you get the ids you can then send an axios call
     authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
       follower: follower,
@@ -227,7 +229,7 @@ class NotificationsDropDown extends React.Component{
       this.props.updateFollowers(res.data)
       this.successFollow()
       // You also want to send a notification too
-      this.onDeleteNotification(notificationId)
+      this.onDeleteNotification(null, notificationId)
 
     })
 
@@ -996,7 +998,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   // most of the other props are in the Layouts
   return {
-    deleteNotification: notificationId => dispatch(notificationsActions.deleteNotification(notificationId)),
+    setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     openNotification: () => dispatch(notificationsActions.openNotification()),
     updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
   }
