@@ -68,7 +68,7 @@ class NewSidePanel extends React.Component{
           if(noCurUserList.length === 2){
               names = names+" and "+noCurUserList[i]
           } else {
-            names = names+" ,and "+noCurUserList[i]
+            names = names+" , and "+noCurUserList[i]
           }
         } else {
           names = names + ", "+ noCurUserList[i]
