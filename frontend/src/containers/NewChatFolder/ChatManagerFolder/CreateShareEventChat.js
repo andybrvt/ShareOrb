@@ -634,13 +634,13 @@ class CreateShareEventChat extends React.Component{
               className = 'buttomHolder'
               style={{marginLeft:'50px', marginTop:'40px'}}
             >
-            <div style={{marginTop:'-25px'}}>
+            <div>
               <div className = 'clearButtonCon'>
                 <Button onClick = {this.onClear}  >
                   Clear Values
                 </Button>
               </div>
-              <div style={{marginRight:'10px'}}>
+              <div className = 'submitButtonCon'>
                 <Button type="primary" htmlType="submit" disabled = {this.handleValidation()}>
                   Submit
                 </Button>
