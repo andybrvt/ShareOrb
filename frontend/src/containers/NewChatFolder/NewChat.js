@@ -81,6 +81,8 @@ class NewChat extends React.Component{
   componentWillReceiveProps(newProps){
     console.log("new props")
 
+    console.log(this.props)
+    console.log(newProps)
     // When ever a new message is sent or you open up a new chat
     // it should send out an update of the seen
     if(this.props.parameter.id !== newProps.parameter.id && newProps.parameter.id !== "newchat"){
@@ -146,6 +148,12 @@ class NewChat extends React.Component{
 
 
   }
+
+  componentWillUnmount(){
+    NewChatWebSocketInstance.disconnect();
+
+  }
+
 
   timeConvert = (time) => {
     // This function will take in a time and then covert the time to
