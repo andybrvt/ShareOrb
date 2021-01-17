@@ -47,6 +47,9 @@ class NewSidePanel extends React.Component{
 
   }
 
+
+
+
   getGroupChatName(participantList){
     // This function will show the correct name of the group chats
     var names = ""
