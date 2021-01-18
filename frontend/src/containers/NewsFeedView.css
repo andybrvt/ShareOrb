@@ -4,7 +4,7 @@
   /* background-color: red; */
   position: relative;
   /* left: 7%; */
-  top: 50px;
+  top: 75px;
 }
 
 .newsfeedParent{
@@ -35,7 +35,7 @@
 .newsfeedParent .newsfeedMidContainer .newsfeedItself{
   position: relative;
   width: 100%;
-  left: 10%;
+  left: 8%;
   /* left: 40%; */
   /* transform: translateX(-50%); */
   /* background-color: green; */
@@ -73,15 +73,17 @@
 
 .newsfeedParent .suggestedFriendsContainer{
   /* background-color: red; */
-  width: 25%;
-  height:50px;
-  padding:2%;
+  width: 22.5%;
+  position:relative;
+  left:3%;
+  height:100%;
 }
 
 .newsfeedParent .suggestedFriendsContainer .suggestedFriendsCard {
   width:100%;
   background:white;
   position: relative;
+  border-radius: 10px;
 }
 
 

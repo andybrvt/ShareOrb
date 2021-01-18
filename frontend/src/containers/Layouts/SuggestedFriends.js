@@ -116,7 +116,7 @@ class SuggestedFriends extends React.Component {
       <div>
         <List
           className="demo-loadmore-list scrollableFeature"
-
+          style={{marginTop:'-10px'}}
           itemLayout="horizontal"
           loadMore={loadMore}
           dataSource={list}
@@ -141,7 +141,7 @@ class SuggestedFriends extends React.Component {
 
 
 
-            <Button shape="round" type="primary">Follow</Button>
+            <Button style={{fontSize:'14px'}} size="small" shape="round" type="primary">Follow</Button>
 
               </Skeleton>
             </List.Item>

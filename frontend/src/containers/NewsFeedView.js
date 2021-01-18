@@ -3,6 +3,7 @@ import InfiniteList from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import NewsFeedFormPost from '../components/NewsFeedFormPost';
 import NewNewsfeedFormPost from '../components/NewNewsfeedFormPost';
+import NewsFeedEventModal from '../components/NewsFeedEventModal.js';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -167,8 +168,9 @@ class NewsFeedView extends React.Component {
 						width={900}
 						bodyStyle={{padding:'50px'}}
 						centered
-
 						>
+
+						<NewsFeedEventModal {...this.props}/>
 
 					</Modal>
 

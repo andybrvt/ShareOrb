@@ -8,10 +8,7 @@ import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
 
 const { TextArea } = Input
-
 const { MonthPicker, RangePicker } = DatePicker;
-
-
 const { Option } = Select;
 
 

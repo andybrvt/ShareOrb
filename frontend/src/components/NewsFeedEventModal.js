@@ -1,13 +1,13 @@
 import React from 'react';
+import { DatePicker, TimePicker, Button, Input, Select, Alert, Radio } from 'antd';
+import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
+import { connect } from "react-redux";
+import { authAxios } from './util';
+import WebSocketPostsInstance from '../postWebsocket';
+import { Form } from '@ant-design/compatible';
+import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import moment from 'moment';
-import { connect } from "react-redux";
-import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
-import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import '../PersonalCalCSS/ReactForm.css';
-import '@ant-design/compatible/assets/index.css';
-
 
 const { TextArea } = Input
 const { MonthPicker, RangePicker } = DatePicker;
@@ -16,10 +16,7 @@ const rangeConfig = {
   rules: [{ type: 'array', required: true, message: 'Please select time!' }],
 };
 
-// The reason for switching back to the antd form is because the redux form doenst
-// support time picker that well
-
-class ReactAddEventForm extends React.Component {
+class NewsFeedEventModal extends React.Component{
   constructor (props) {
     super(props);
     this.state = {
@@ -44,7 +41,6 @@ class ReactAddEventForm extends React.Component {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-
   handleChange = (values) => {
     this.setState({ [values.target.name]: values.target.value})
   }
@@ -54,7 +50,6 @@ class ReactAddEventForm extends React.Component {
       dateRange: time
     })
   }
-
   onStartDateChange = (time) => {
     // This is to handle the onChange
     let startDate = time
@@ -281,253 +276,210 @@ class ReactAddEventForm extends React.Component {
       }
     }
 
+    
 
+    handleValidation(){
+      // You will use this to disable or non disable the button, so because of that
+      // the true and false will be flipped
+      let title = this.state.title
+      let content = this.state.content
+      let location = this.state.location
+      let startDate = this.state.startDate
+      let endDate = this.state.endDate
+      let repeatCondition = this.state.repeatCondition
+      let errors = {}
+      let buttonDisabled = false
 
-  onEndTimeChange = (time) => {
-    console.log(time)
-    this.setState({
-      timeEnd: time
-    })
-  }
-
-  handleFriendChange = (value) => {
-    console.log(value)
-    this.setState({
-      person: value
-    })
-  }
-
-  handleValidation(){
-    // You will use this to disable or non disable the button, so because of that
-    // the true and false will be flipped
-    let title = this.state.title
-    let content = this.state.content
-    let location = this.state.location
-    let startDate = this.state.startDate
-    let endDate = this.state.endDate
-    let repeatCondition = this.state.repeatCondition
-    let errors = {}
-    let buttonDisabled = false
-
-    if (title === ''){
-      buttonDisabled = true
-      // errors['title'] = 'Cannot be empty'
-    }
-
-
-
-    if (startDate === null){
-      buttonDisabled = true
-
-    }
-
-    if (endDate === null){
-      buttonDisabled = true
-    }
-
-    if (dateFns.isAfter(new Date(startDate), new Date(endDate))){
-      buttonDisabled = true
-    } else if (repeatCondition === "weekly" &&
-      !dateFns.isSameWeek(new Date(startDate), new Date(endDate))
-    ) {
-      buttonDisabled = true
-    } else if (repeatCondition === "daily" &&
-      !dateFns.isSameDay(new Date (startDate), new Date(endDate))
-    ) {
-      buttonDisabled = true
-    }
-
-    console.log(buttonDisabled)
-    return buttonDisabled
-
-  }
-
-  onRed = () => {
-    let startDate = this.state.startDate
-    let endDate = this.state.endDate
-    let repeatCondition = this.state.repeatCondition
-
-    let boxcolor = false
-
-    if (dateFns.isAfter(new Date(startDate), new Date(endDate))){
-      boxcolor = true
-    } else if (repeatCondition === "weekly" &&
-      !dateFns.isSameWeek(new Date(startDate), new Date(endDate))
-    ) {
-      boxcolor = true
-    } else if (repeatCondition === "daily" &&
-      !dateFns.isSameDay(new Date (startDate), new Date(endDate))
-    ) {
-      boxcolor = true
-    }
-    return boxcolor
-  }
-
-  onClear = () => {
-    this.setState({
-      title: '',
-      content: '',
-      location: '',
-      error: false,
-      person: []
-    })
-  }
-
-  handleSubmit =(event) => {
-    event.preventDefault();
-      const submitContent = {
-        title: this.state.title,
-        content: this.state.content,
-        location: this.state.location,
-        start_date: this.state.startDate.toDate(),
-        end_date: this.state.endDate.toDate(),
-        start_time: this.state.timeStart,
-        end_time: this.state.timeEnd,
-        event_color: this.state.eventColor,
-        repeatCondition:this.state.repeatCondition,
-        person: this.state.person,
+      if (title === ''){
+        buttonDisabled = true
+        // errors['title'] = 'Cannot be empty'
       }
-      this.onClear()
-      this.props.onSubmit(submitContent)
 
-  }
 
-  onFinish = values => {
-    console.log('Success:', values);
-  };
 
-  onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
+      if (startDate === null){
+        buttonDisabled = true
 
-  renderShareListSelect = () => {
-    if(this.props.following !== undefined && this.props.followers !== undefined){
+      }
 
-      // This const is what determines the people you can share with.
-      // EVENTUALLY YOU
-      const friendList = this.props.following
+      if (endDate === null){
+        buttonDisabled = true
+      }
 
-      let shareOptions = []
+      if (dateFns.isAfter(new Date(startDate), new Date(endDate))){
+        buttonDisabled = true
+      } else if (repeatCondition === "weekly" &&
+        !dateFns.isSameWeek(new Date(startDate), new Date(endDate))
+      ) {
+        buttonDisabled = true
+      } else if (repeatCondition === "daily" &&
+        !dateFns.isSameDay(new Date (startDate), new Date(endDate))
+      ) {
+        buttonDisabled = true
+      }
 
-      for (let friend = 0; friend< friendList.length; friend++ ){
-        shareOptions.push(
-          <Option value = {friendList[friend].username}
-          label = {this.capitalize(friendList[friend].username)}>
-            {this.capitalize(friendList[friend].username)}
-          </Option>
+      console.log(buttonDisabled)
+      return buttonDisabled
+
+    }
+
+    onClear = () => {
+      this.setState({
+        title: '',
+        content: '',
+        location: '',
+        error: false,
+      })
+    }
+
+    handleSubmit =(event) => {
+      event.preventDefault();
+        const submitContent = {
+          title: this.state.title,
+          content: this.state.content,
+          location: this.state.location,
+          start_date: this.state.startDate.toDate(),
+          end_date: this.state.endDate.toDate(),
+          start_time: this.state.timeStart,
+          end_time: this.state.timeEnd,
+          event_color: this.state.eventColor,
+          repeatCondition:this.state.repeatCondition,
+        }
+        this.onClear()
+        this.props.onSubmit(submitContent)
+
+    }
+
+    onFinish = values => {
+      console.log('Success:', values);
+    };
+
+    onFinishFailed = errorInfo => {
+      console.log('Failed:', errorInfo);
+    };
+
+    renderShareListSelect = () => {
+      if(this.props.following !== undefined && this.props.followers !== undefined){
+
+        // This const is what determines the people you can share with.
+        // EVENTUALLY YOU
+        const friendList = this.props.following
+
+        let shareOptions = []
+
+        for (let friend = 0; friend< friendList.length; friend++ ){
+          shareOptions.push(
+            <Option value = {friendList[friend].username}
+            label = {this.capitalize(friendList[friend].username)}>
+              {this.capitalize(friendList[friend].username)}
+            </Option>
+          )
+        }
+
+        return shareOptions
+      }
+    }
+
+    renderStartTime = () => {
+      const timeFormat = "hh:mm a"
+      const time = []
+      let start = dateFns.startOfDay(new Date())
+      let startHour = dateFns.getHours(new Date())
+      let startMins = dateFns.getMinutes(new Date())
+      for (let i = 0; i< 48; i++){
+        const cloneTime = startHour + ':' + startMins
+        time.push(
+          <Option key = {dateFns.format(start, timeFormat)}>{dateFns.format(start, timeFormat)}</Option>
         )
+        start = dateFns.addMinutes(start, 30)
       }
-
-      return shareOptions
-    }
-  }
-
-
-  renderStartTime = () => {
-    const timeFormat = "hh:mm a"
-    const time = []
-    let start = dateFns.startOfDay(new Date())
-    let startHour = dateFns.getHours(new Date())
-    let startMins = dateFns.getMinutes(new Date())
-    for (let i = 0; i< 48; i++){
-      const cloneTime = startHour + ':' + startMins
-      time.push(
-        <Option key = {dateFns.format(start, timeFormat)}>{dateFns.format(start, timeFormat)}</Option>
-      )
-      start = dateFns.addMinutes(start, 30)
-    }
-    console.log(time)
-    return time
-  }
-
-  renderEndTime = () => {
-    // So for rendering the tiem for the end time, you first want to get the
-    // time of the starting time so that you can get the time afterwards
-    // but since all the time selections are strings we must first convert to ints
-    // and the time after PM to plus 12 more so that you can compare. So you would
-    // get the startTime in the states and convert it to int and all that stuff and then
-    // you get the list of all the times and then convert to ints and then compare with the state
-    // time, if it is after then you put it in the list if not then you dont (remember to put them
-  // in a option tag)
-    const baseTime = this.renderStartTime()
-    let endTime = []
-
-    let setHour = ''
-    let setMin = ''
-
-    if (this.state.timeStart.includes("PM")){
-      setHour = parseInt(this.state.timeStart.substring(0,2))
-      setMin = parseInt(this.state.timeStart.substring(3,5))
-      if (setHour !== 12){
-        setHour = setHour + 12
-    }} else if (this.state.timeStart.includes("AM")){
-      setHour = parseInt(this.state.timeStart.substring(0,2))
-      setMin = parseInt(this.state.timeStart.substring(3,5))
-      if (setHour === 12){
-        setHour = 0
-      }
+      console.log(time)
+      return time
     }
 
-    for(let i = 0; i< baseTime.length; i++){
-      if (baseTime[i].key.includes('PM')){
-        let hour = parseInt(baseTime[i].key.substring(0,2))
-        if (hour !== 12){
-          hour = hour+12
+    renderEndTime = () => {
+      // So for rendering the tiem for the end time, you first want to get the
+      // time of the starting time so that you can get the time afterwards
+      // but since all the time selections are strings we must first convert to ints
+      // and the time after PM to plus 12 more so that you can compare. So you would
+      // get the startTime in the states and convert it to int and all that stuff and then
+      // you get the list of all the times and then convert to ints and then compare with the state
+      // time, if it is after then you put it in the list if not then you dont (remember to put them
+    // in a option tag)
+      const baseTime = this.renderStartTime()
+      let endTime = []
+
+      let setHour = ''
+      let setMin = ''
+
+      if (this.state.timeStart.includes("PM")){
+        setHour = parseInt(this.state.timeStart.substring(0,2))
+        setMin = parseInt(this.state.timeStart.substring(3,5))
+        if (setHour !== 12){
+          setHour = setHour + 12
+      }} else if (this.state.timeStart.includes("AM")){
+        setHour = parseInt(this.state.timeStart.substring(0,2))
+        setMin = parseInt(this.state.timeStart.substring(3,5))
+        if (setHour === 12){
+          setHour = 0
         }
-        const min = baseTime[i].key.substring(3,5)
-        if (setHour < hour){
-          endTime.push(
-            <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
-          )} else if (setHour === hour){
-            if(setMin < min){
-              endTime.push(
-                <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
-              )
-            }
+      }
+
+      for(let i = 0; i< baseTime.length; i++){
+        if (baseTime[i].key.includes('PM')){
+          let hour = parseInt(baseTime[i].key.substring(0,2))
+          if (hour !== 12){
+            hour = hour+12
           }
-        } else if (baseTime[i].key.includes("AM")) {
-        let hour = parseInt(baseTime[i].key.substring(0,2))
-        if (hour === 12){
-          hour = 0
-        }
-        const min = baseTime[i].key.substring(3,5)
-        if(setHour < hour){
-          endTime.push(
-            <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
-          )} else if (setHour === hour){
-            if(setMin < min){
-              endTime.push(
-                <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
-              )
+          const min = baseTime[i].key.substring(3,5)
+          if (setHour < hour){
+            endTime.push(
+              <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
+            )} else if (setHour === hour){
+              if(setMin < min){
+                endTime.push(
+                  <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
+                )
+              }
+            }
+          } else if (baseTime[i].key.includes("AM")) {
+          let hour = parseInt(baseTime[i].key.substring(0,2))
+          if (hour === 12){
+            hour = 0
+          }
+          const min = baseTime[i].key.substring(3,5)
+          if(setHour < hour){
+            endTime.push(
+              <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
+            )} else if (setHour === hour){
+              if(setMin < min){
+                endTime.push(
+                  <Option key= {baseTime[i].key}>{baseTime[i].key}</Option>
+                )
+              }
             }
           }
         }
+        return (endTime)
       }
-      return (endTime)
-    }
 
-
-
-  render (){
-    // The name of the inputt values are important
-    // it allows for us to be able to input stuff into the form item
-    // because it is what connents to the onChange for the states
-    console.log(this.state)
-    console.log(this.props)
-    const startChildren = this.renderStartTime();
-    const endChildren = this.renderEndTime()
-    console.log(this.handleValidation())
-
+  render(){
     const options = [
     { label: 'Normal', value: 'none' },
     { label: 'Weekly', value: 'weekly' },
     { label: 'Daily', value: 'daily' },
-  ];
-    // for (let i = 10; i < 36; i++) {
-    //   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    // }
+    ];
 
-    return (
+    let nameList = ""
+    if(this.props.usernameList){
+      nameList = this.showPeopleShared(this.props.usernameList)
+    }
+    const startChildren = this.renderStartTime();
+    const endChildren = this.renderEndTime()
+
+  return(
+    <div>
+
       <Form
       className ="reactForm"
       style={{padding:'50px'}}
@@ -672,9 +624,21 @@ class ReactAddEventForm extends React.Component {
 
         </Form.Item>
       </Form>
-    );
+
+    </div>
+  )
   }
 
 }
+const mapStateToProps = state => {
 
-export default ReactAddEventForm;
+  return {
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName,
+    profilePic: state.auth.profilePic,
+    curUserId: state.auth.id
+  }
+}
+
+
+export default connect(mapStateToProps)(NewsFeedEventModal);

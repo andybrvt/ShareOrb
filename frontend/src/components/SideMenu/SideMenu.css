@@ -387,7 +387,7 @@ aside {
 
 .searchBarContainer{
   left:10%;
-  width:80%;
+  width:100%;
   /* background-color: blue; */
 
 }
@@ -436,7 +436,7 @@ aside {
 
 .mainHeaderContainer .headersProfileContainer .profileHeader{
   position: relative;
-  left:75%;
+  left:25%;
   transform: translateX(-50%);
   top:5px;
 
