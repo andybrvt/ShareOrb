@@ -1064,27 +1064,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
         self.send_new_explore(content)
 
     def send_accepted_following(self, data):
-        # This will be pretty much like send following but you will be removing
-        # removing people from the request
-
-        # follower will be the person that is sending the request (and will be
-        # removed from the request)
+        # Views will do all the work, you just have to get the following list
+        # of the follower
         follower = get_object_or_404(User, id = data['follower']) # host
-        following = get_object_or_404(User, id = data['following'])
-
-        following.requested.remove(follower)
-        following.save()
-        followerObj= UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
-        followerObj.save()
-
-        # This one is a bit different fromt eh send following is because, for the send_following
-        # you are following the other person so websocket would would update the
-        # host followers list. But when you do accept following that would mean
-        # the host would be the person (it would be the follower), and you wont get
-        # the followers this time but the following bc that would be be going up by one
-
-        # So for the cur User it would not be the following bc the person on the page
-        # would be the follower
         curUser = get_object_or_404(User, id = data['follower'])
         hostObj = UserSerializer(curUser).data
 

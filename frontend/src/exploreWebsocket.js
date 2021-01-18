@@ -307,13 +307,12 @@ class WebSocketExplore {
 
   }
 
-  sendAcceptFollowing = (follower, following) => {
+  sendAcceptFollowing = (follower) => {
     // This will be for when the perosn accepts your follow, on the profile page
     // This is simlar to the send_following but you will remove the requested and
     // then send it back so it updates
     this.sendExplore({
       follower: follower,
-      following: following,
       command: 'send_accepted_following'
     })
   }

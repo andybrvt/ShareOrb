@@ -374,9 +374,24 @@ class PersonalProfile extends React.Component{
       // The following parameter will be the recipient or in this case the person who
       // is accepting the follow
 
-      console.log(follower, following)
+      // Make the process teh same as the onAcceptFollow on notification drop
+      // down but with the explorewebsocketinstance
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        // This will update the current user auth
+        this.props.updateFollowers(res.data)
+        ExploreWebSocketInstance.sendAcceptFollowing(follower)
+        // This wil update the following for the user page
 
-      ExploreWebSocketInstance.sendAcceptFollowing(follower, following)
+        console.log(res.data)
+      })
+
+
+
+
 
       // Now up date your credentials
       this.props.grabUserCredentials()
