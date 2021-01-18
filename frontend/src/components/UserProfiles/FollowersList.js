@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Button } from 'antd';
 import defaultPicture from '../images/default.png';
 
 // This will be similar to the followList but will be used for the followers
@@ -35,9 +35,18 @@ class FollowersList extends React.Component{
               <Avatar src={defaultPicture} />
 
             }
-          title={<a href="https://ant.design">{this.capitalize(request[i].first_name)} {this.capitalize(request[i].last_name)}</a>}
+          title={
+        <span>
+          <a>{this.capitalize(request[i].first_name)} {this.capitalize(request[i].last_name)}</a>  <span
+            style = {{color: "red"}}
+            > *Request* </span>
+        </span>
+          }
           description= {<b>@{this.capitalize(request[i].username)}</b>}
         />
+      <Button type = "primary">
+          Accept
+        </Button>
         </List.Item>
       )
     }
