@@ -546,6 +546,8 @@ class onAcceptFollow(APIView):
     # This funciton will be used to approve of a person following and seeing
     # your page
     # Pretty much a normal follow
+    # But becuase the request object is different now we have to find the requested
+    # object and then delete it
 
     # You have to remove the person from request
     def post(self, request, *args, **kwargs):
@@ -553,8 +555,15 @@ class onAcceptFollow(APIView):
 
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])
-        following.requested.remove(follower)
-        following.save()
+
+        requestObj = models.UserFollowingRequest.objects.filter(
+            send_request = follower,
+            accept_request = following
+        )
+        # now delete the requestObj
+        requestObj.delete()
+
+        # Now create the following object
         followerObj = models.UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
         followerObj.save()
         # Now you will grab the following of the current user and then
@@ -564,7 +573,7 @@ class onAcceptFollow(APIView):
 
 
         followerList = hostObj['get_followers']
-        requestedList = hostObj['requested']
+        requestedList = hostObj['get_follow_request']
 
         content = {
             'followerList': followerList,
