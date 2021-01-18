@@ -6,7 +6,7 @@ import defaultPic from './images/default.png';
 import { connect } from "react-redux";
 import FollowList from './UserProfiles/FollowList';
 import { Modal, Avatar, Row, Col, Statistic, Divider} from 'antd';
-
+import FollowersList from './UserProfiles/FollowersList';
 
 
 
@@ -57,6 +57,7 @@ class ProfileCardNewsFeed extends React.Component{
     let lastName = ''
     let followers = []
     let following = []
+    let request = []
     let profilePic = ''
 
     if (this.props.firstName){
@@ -73,6 +74,8 @@ class ProfileCardNewsFeed extends React.Component{
       // http://127.0.0.1:8000/media/PostPic/public/profile_pictures/2021/01/keitravis-squire-zrfviPQ5rWE-unsplash.jpg
 
       // `${global.API_ENDPOINT}`+
+    } if(this.props.requestList){
+      request = this.props.requestList
     }
 
 
@@ -137,7 +140,7 @@ class ProfileCardNewsFeed extends React.Component{
 
 
         <span className ='followWord'> Followers</span>
-        <FollowList follow = {followers} />
+        <FollowersList follow = {followers} request = {request} />
         </Modal>
 
 
