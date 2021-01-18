@@ -15,6 +15,7 @@ import defaultPicture from '../images/default.png';
 import ava1 from '../images/avatar.jpg'
 import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
 import FollowList from './FollowList';
+import FollowersList from './FollowersList';
 import '@ant-design/compatible/assets/index.css';
 import './ProfilePage.css';
 import ChangeProfilePic from '../../containers/CurrUser/ChangeProfilePic';
@@ -944,7 +945,7 @@ class PersonalProfile extends React.Component{
             footer = {null}
             >
             <span className ='followWord'> Followers</span>
-            <FollowList follow = {followers} />
+            <FollowersList follow = {followers} />
             </Modal>
 
 
