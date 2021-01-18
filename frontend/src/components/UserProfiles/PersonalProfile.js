@@ -383,8 +383,19 @@ class PersonalProfile extends React.Component{
       .then(res => {
         // This will update the current user auth
         this.props.updateFollowers(res.data)
-        ExploreWebSocketInstance.sendAcceptFollowing(follower)
         // This wil update the following for the user page
+        ExploreWebSocketInstance.sendAcceptFollowing(follower)
+
+        // Now delete the notification
+        const notificationObj = {
+          command: 'unsend_follow_notification',
+          actor: follower,
+          recipient: following
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObj)
+
+
+        // Then send out a notification
 
         console.log(res.data)
       })

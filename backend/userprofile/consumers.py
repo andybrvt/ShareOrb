@@ -334,9 +334,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_new_notification(content)
 
 
-
-
-
 #So this one is to delete the friend request notificaton, so since recipeint for this person
 # is the person receive the friend request but once recipient accpets it then they are the actor
 # but in the models for that notification the reicipeint should be the actor in this case
