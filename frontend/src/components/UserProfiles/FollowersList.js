@@ -93,6 +93,15 @@ class FollowersList extends React.Component{
     const followList = this.props.follow
     const requestList = this.props.request
 
+    let curId = 0
+    let profileId = -1
+    if(this.props.curId){
+      curId = this.props.curId
+    }
+    if(this.props.profileId){
+      profileId = this.props.profileId
+    }
+
     return (
       <div>
 
@@ -122,7 +131,16 @@ class FollowersList extends React.Component{
         //   </List.Item>
         // )}
         >
-        {this.renderRequestList()}
+        {
+          curId === profileId ?
+
+          this.renderRequestList()
+
+          :
+
+          <div></div>
+        }
+
         {this.renderFollowList()}
         </List>
 

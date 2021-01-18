@@ -823,6 +823,7 @@ class PersonalProfile extends React.Component{
       let requested = []
       // follower list will used mostly for private events
       let followerList = []
+      let curRequested = []
 
 
       if (this.props.profile){
@@ -875,6 +876,9 @@ class PersonalProfile extends React.Component{
         if(this.props.profile.profile_picture){
           profileImage = `${global.IMAGE_ENDPOINT}`+this.props.profile.profile_picture
         }
+      }
+      if(this.props.curRequested){
+        curRequested = this.props.curRequested
       }
 
       console.log(privatePro)
@@ -945,7 +949,11 @@ class PersonalProfile extends React.Component{
             footer = {null}
             >
             <span className ='followWord'> Followers</span>
-            <FollowersList follow = {followers} />
+            <FollowersList
+              curId = {this.props.currentId}
+              profileId = {this.props.profile.id}
+              request = {curRequested}
+              follow = {followers} />
             </Modal>
 
 
