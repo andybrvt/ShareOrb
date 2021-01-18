@@ -113,6 +113,7 @@ class NotificationsDropDown extends React.Component{
   }
 
   onDeleteNotification = (e,notificationId) => {
+    e.stopPropagation()
     this.deleteSideNotification('bottomRight')
     authAxios.post(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
     .then(res => {

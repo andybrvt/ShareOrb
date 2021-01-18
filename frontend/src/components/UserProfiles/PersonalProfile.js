@@ -394,10 +394,18 @@ class PersonalProfile extends React.Component{
         }
         NotificationWebSocketInstance.sendNotification(notificationObj)
 
+        // Now you have to send a notification ot the other perosn saying
+        // that you accept their request
 
+        const notificationObject = {
+          command: 'accept_follow_request',
+          actor: following,
+          recipient: follower
+        }
         // Then send out a notification
+        NotificationWebSocketInstance.sendNotification(notificationObject)
 
-        console.log(res.data)
+        this.successFollow()
       })
 
 
