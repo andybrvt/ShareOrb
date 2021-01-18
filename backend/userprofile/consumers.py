@@ -119,6 +119,12 @@ class NotificationConsumer(JsonWebsocketConsumer):
             }
             return self.send_new_notification(content)
 
+        if data['command'] == 'accept_follow_request':
+            # This will just send a notification back to the request user sayin g
+            # that the other person accept their request
+            recipient = get_object_or_404(User, id = data["recipient"])
+            actor = get_object_or_404(User, id = data['actor'])
+            notification = CustomNotification.objects.create(type = 'accept_follow_request', recipient = recipient, actor = actor, verb = "accepted follow")
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
@@ -539,6 +545,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_social_cal_notification(data)
         if data['command'] == 'unsend_follow_notification':
             self.unsend_notification(data)
+        if data['command'] == 'accept_follow_request':
+            self.send_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE

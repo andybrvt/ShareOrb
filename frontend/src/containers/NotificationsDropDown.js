@@ -123,8 +123,11 @@ class NotificationsDropDown extends React.Component{
 
   onProfileClick = (user) => {
     console.log(user)
-    this.props.history.push('/explore/'+user)
-
+    if(this.props.location.pathname === '/explore/'+user){
+      window.location.reload()
+    } else {
+      this.props.history.push('/explore/'+user)
+    }
   }
 
   onEventPageClick = (eventId) =>{
@@ -230,6 +233,13 @@ class NotificationsDropDown extends React.Component{
       this.successFollow()
       // You also want to send a notification too
       this.onDeleteNotification(null, notificationId)
+
+      const notificationObj = {
+        command: 'accept_follow_request',
+        actor: following,
+        recipient: follower
+      }
+      NotificationWebSocketInstance.sendNotification(notificationObj)
 
     })
 
@@ -875,6 +885,37 @@ class NotificationsDropDown extends React.Component{
                    <i class="far fa-times-circle"></i>
 
                    </div>
+            </h4>
+          </li>
+        )
+      }
+      if(notifications[i].type === 'accept_follow_request'){
+        notificationList.push(
+          <li className = 'notificationListContainer' onClick = {() => this.onProfileClick(notifications[i].actor.username)}>
+            <div className = 'notificationIcon'>
+            <Avatar size = {45} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              // icon = {<UserOutlined />}
+
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                 accepted your follow request.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
             </h4>
           </li>
         )
