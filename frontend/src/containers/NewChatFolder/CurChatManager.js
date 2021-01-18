@@ -250,7 +250,7 @@ class CurChatManager extends React.Component{
         }
         <Divider/>
 
-        <div className ="" style={{marginTop:'40px'}} >
+        <div className =""  >
 
         <Button type="primary" shape="round" size="large"
 
