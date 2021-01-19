@@ -1,7 +1,9 @@
 import React from 'react';
-import { List, Avatar, Button } from 'antd';
+import { List, Avatar, Button, message } from 'antd';
 import defaultPicture from '../images/default.png';
 import { authAxios } from '../util';
+import NotificationWebSocketInstance from '../../notificationWebsocket';
+import ExploreWebSocketInstance from '../../exploreWebsocket';
 
 // This will be similar to the followList but will be used for the followers
 // to handle request as well
@@ -16,15 +18,44 @@ class FollowersList extends React.Component{
     window.location.href = '/explore/'+user
   }
 
+  successFollow = () => {
+    message.success('You accepted a follower.');
+  };
+
   onAcceptFollow = (follower, following) => {
     // Pretty much for accepting the onAccept follow on the users page
 
     console.log(follower, following)
-    // authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
-    //   follower: follower,
-    //   following: following
-    // })
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      this.props.updateFollowers(res.data)
 
+      ExploreWebSocketInstance.sendAcceptFollowing(follower)
+
+      const notificationObj = {
+        command: 'unsend_follow_notification',
+        actor: follower,
+        recipient: following
+      }
+      NotificationWebSocketInstance.sendNotification(notificationObj)
+
+      // Now you have to send a notification ot the other perosn saying
+      // that you accept their request
+
+      const notificationObject = {
+        command: 'accept_follow_request',
+        actor: following,
+        recipient: follower
+      }
+      // Then send out a notification
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+      this.successFollow()
+
+    })
 
   }
 

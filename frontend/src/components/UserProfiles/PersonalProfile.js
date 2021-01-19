@@ -471,7 +471,16 @@ class PersonalProfile extends React.Component{
           lastName = this.props.profile.last_name
         }
         if(this.props.profile.get_following){
-          following = this.props.profile.get_following
+          if(this.props.profile.id === this.props.currentId){
+            // This one is to change the following list to be same as the auth if
+            // you are on your own page
+
+            following = this.props.following
+          } else {
+            // This is for everyone else
+            following = this.props.profile.get_following
+          }
+
         }
         if(this.props.profile.get_posts){
           posts = this.props.profile.get_posts
@@ -486,11 +495,21 @@ class PersonalProfile extends React.Component{
         }
 
         if(this.props.profile.get_followers){
-          for(let i =0; i<this.props.profile.get_followers.length; i++){
-            followers.push(
-              this.props.profile.get_followers[i].username
-            )
+          if(this.props.profile.id === this.props.currentId){
+            // Same deal as teh followers
+            for(let i =0; i<this.props.followers.length; i++){
+              followers.push(
+                this.props.followers[i].username
+              )
+            }
+          } else {
+            for(let i =0; i<this.props.profile.get_followers.length; i++){
+              followers.push(
+                this.props.profile.get_followers[i].username
+              )
+            }
           }
+
         }
 
         if(this.props.profile.private){
@@ -504,13 +523,7 @@ class PersonalProfile extends React.Component{
         }
 
 
-        // if(this.props.curUserFriend){
-        //   for(let i = 0; i< this.props.curUserFriend.length; i++){
-        //     friends.push(
-        //       this.props.curUserFriend[i].id
-        //     )
-        //   }
-        // }
+
       }
     console.log(friends)
 
@@ -828,10 +841,19 @@ class PersonalProfile extends React.Component{
 
       if (this.props.profile){
         if(this.props.profile.get_followers){
-          followers = this.props.profile.get_followers
+          if(this.props.profile.id === this.props.currentId){
+            followers = this.props.followers
+          } else {
+            followers = this.props.profile.get_followers
+          }
+
         }
         if(this.props.profile.get_following){
-          following = this.props.profile.get_following
+          if(this.props.profile.id === this.props.currentId){
+            following = this.props.following
+          } else {
+            following = this.props.profile.get_following
+          }
         }
         if(this.props.profile.profile_picture){
           profilePic = this.props.profile.profile_picture
@@ -953,7 +975,9 @@ class PersonalProfile extends React.Component{
               curId = {this.props.currentId}
               profileId = {this.props.profile.id}
               request = {curRequested}
-              follow = {followers} />
+              follow = {followers}
+              updateFollowers = {this.props.updateFollowers}
+              />
             </Modal>
 
 
@@ -983,7 +1007,9 @@ const mapStateToProps = state => {
       token: state.auth.token,
       profile: state.explore.profile,
       curUserFriend: state.auth.friends,
-      curRequested: state.auth.requestList
+      curRequested: state.auth.requestList,
+      followers: state.auth.followers,
+      following: state.auth.following
     };
 };
 
