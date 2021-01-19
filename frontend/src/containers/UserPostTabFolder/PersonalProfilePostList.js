@@ -522,6 +522,7 @@ class PersonalProfilePostList extends React.Component{
                 style={{
                   paddingTop: "7px",
                   fontSize:'16px'}}
+                onClick = {() => this.onAcceptFollow(profileId, curId)}
                 className = 'followButton'>
                   Accept
                 </div>

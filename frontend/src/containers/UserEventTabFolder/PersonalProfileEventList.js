@@ -6,7 +6,7 @@ import { Route, useLocation, Switch, Link } from 'react-router-dom';
 import { authAxios } from '../../components/util';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { Button, Modal, Avatar, Steps, Divider} from 'antd';
+import { Button, Modal, Avatar, Steps, Divider, message} from 'antd';
 import { RetweetOutlined } from '@ant-design/icons';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import * as exploreActions from '../../store/actions/explore';
@@ -17,6 +17,8 @@ import FollowList from '../../components/UserProfiles/FollowList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import UserEventList from './UserEventList';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
+import FollowersList from '../../components/UserProfiles/FollowersList';
+
 
 const { Step } = Steps
 class PersonalProfileEventList extends React.Component{
@@ -312,6 +314,64 @@ class PersonalProfileEventList extends React.Component{
 
     }
 
+
+    successFollow = () => {
+      message.success('You accepted a follower.');
+    };
+
+    onAcceptFollow = (follower, following) => {
+      // This function will used to accept the follower, allow request and delete the notifications
+      // The follower parameter will be the actor of the notification (it will be the
+      // person trying to request)
+      // The following parameter will be the recipient or in this case the person who
+      // is accepting the follow
+
+      // Make the process teh same as the onAcceptFollow on notification drop
+      // down but with the explorewebsocketinstance
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        // This will update the current user auth
+        this.props.updateFollowers(res.data)
+        // This wil update the following for the user page
+        ExploreWebSocketInstance.sendAcceptFollowing(follower)
+
+        // Now delete the notification
+        const notificationObj = {
+          command: 'unsend_follow_notification',
+          actor: follower,
+          recipient: following
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObj)
+
+        // Now you have to send a notification ot the other perosn saying
+        // that you accept their request
+
+        const notificationObject = {
+          command: 'accept_follow_request',
+          actor: following,
+          recipient: follower
+        }
+        // Then send out a notification
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+        this.successFollow()
+      })
+
+
+
+
+
+      // Now up date your credentials
+      // this.props.grabUserCredentials()
+
+      // This function will include redux to update the auth as well
+
+
+    }
+
     onCalendarTabClick = () => {
       this.props.history.push("/explore/"+ this.props.parameter.username)
     }
@@ -368,7 +428,15 @@ class PersonalProfileEventList extends React.Component{
           bio = this.props.profile.bio
         }
         if(this.props.profile.get_following){
-          following = this.props.profile.get_following
+          if(this.props.profile.id === this.props.currentId){
+            // This one is to change the following list to be same as the auth if
+            // you are on your own page
+
+            following = this.props.following
+          } else {
+            // This is for everyone else
+            following = this.props.profile.get_following
+          }
         }
         if(this.props.profile.get_posts){
           posts = this.props.profile.get_posts
@@ -380,10 +448,19 @@ class PersonalProfileEventList extends React.Component{
         }
 
         if(this.props.profile.get_followers){
-          for(let i =0; i<this.props.profile.get_followers.length; i++){
-            followers.push(
-              this.props.profile.get_followers[i].username
-            )
+          if(this.props.profile.id === this.props.currentId){
+            // Same deal as teh followers
+            for(let i =0; i<this.props.followers.length; i++){
+              followers.push(
+                this.props.followers[i].username
+              )
+            }
+          } else {
+            for(let i =0; i<this.props.profile.get_followers.length; i++){
+              followers.push(
+                this.props.profile.get_followers[i].username
+              )
+            }
           }
         }
 
@@ -462,6 +539,7 @@ class PersonalProfileEventList extends React.Component{
                 style={{
                   paddingTop: "7px",
                   fontSize:'16px'}}
+                  onClick = {() => this.onAcceptFollow(profileId, curId)}
                 className = 'followButton'>
                   Accept
                 </div>
@@ -714,16 +792,29 @@ class PersonalProfileEventList extends React.Component{
     let lastName=""
     let bio=""
     let privatePro = true
+    let profileImage = null
+    let requested = []
+
 
     // follower list will used mostly for private events
     let followerList = []
+    let curRequested = []
+
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
-        followers = this.props.profile.get_followers
+        if(this.props.profile.id === this.props.currentId){
+          followers = this.props.followers
+        } else {
+          followers = this.props.profile.get_followers
+        }
       }
       if(this.props.profile.get_following){
-        following = this.props.profile.get_following
+        if(this.props.profile.id === this.props.currentId){
+          following = this.props.following
+        } else {
+          following = this.props.profile.get_following
+        }
       }
       if(this.props.profile.profile_picture){
         profilePic = this.props.profile.profile_picture
@@ -758,6 +849,15 @@ class PersonalProfileEventList extends React.Component{
       bio = this.props.profile.bio
     }
 
+    if(this.props.profile){
+      console.log(this.props.profile.profile_picture)
+      if(this.props.profile.profile_picture){
+        profileImage = `${global.IMAGE_ENDPOINT}`+this.props.profile.profile_picture
+      }
+    }
+    if(this.props.curRequested){
+      curRequested = this.props.curRequested
+    }
 
     return (
       <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
@@ -813,7 +913,13 @@ class PersonalProfileEventList extends React.Component{
         footer = {null}
         >
         <span className ='followWord'> Followers</span>
-        <FollowList follow = {followers} />
+        <FollowersList
+          curId = {this.props.currentId}
+          profileId = {this.props.profile.id}
+          request = {curRequested}
+          follow = {followers}
+          updateFollowers = {this.props.updateFollowers}
+          />
         </Modal>
 
 
@@ -844,7 +950,9 @@ const mapStateToProps = state => {
       token: state.auth.token,
       profile: state.explore.profile,
       curUserFriend: state.auth.friends,
-      curRequested: state.auth.requestList
+      curRequested: state.auth.requestList,
+      followers: state.auth.followers,
+      following: state.auth.following
     };
 };
 
@@ -853,7 +961,8 @@ const mapDispatchToProps = dispatch => {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
     changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
-    grabUserCredentials: () => dispatch(authActions.grabUserCredentials())
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials()),
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
 
 
   }
