@@ -171,7 +171,12 @@ class NewsFeedView extends React.Component {
 						centered
 						>
 
-						<NewsFeedEventModal {...this.props}/>
+						<NewsFeedEventModal
+							friendList = {this.props.friendList}
+			        onSubmit = {this.submit}
+			        following = {this.props.following}
+			        followers = {this.props.followers}
+							{...this.props}/>
 
 					</Modal>
 
