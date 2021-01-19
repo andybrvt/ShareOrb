@@ -17,6 +17,7 @@ import FollowList from '../../components/UserProfiles/FollowList';
 import UserPostList from './UserPostList';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
+import FollowersList from '../../components/UserProfiles/FollowersList';
 
 const { Step } = Steps
 
@@ -330,9 +331,28 @@ class PersonalProfilePostList extends React.Component{
       .then(res => {
         console.log(res.data)
         this.props.updateFollowers(res.data)
-        this.successFollow()
-        // You also want to send a notification too
+        ExploreWebSocketInstance.sendAcceptFollowing(follower)
 
+        // Now delete the notification
+        const notificationObj = {
+          command: 'unsend_follow_notification',
+          actor: follower,
+          recipient: following
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObj)
+
+        // Now you have to send a notification ot the other perosn saying
+        // that you accept their request
+
+        const notificationObject = {
+          command: 'accept_follow_request',
+          actor: following,
+          recipient: follower
+        }
+        // Then send out a notification
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+        this.successFollow()
       })
 
       // So since this is not real time, you can just call a axios call instead of
@@ -340,6 +360,7 @@ class PersonalProfilePostList extends React.Component{
 
 
 
+      // this.props.grabUserCredentials()
 
       // Now you will send a new notification to the other user
 
@@ -391,7 +412,15 @@ class PersonalProfilePostList extends React.Component{
           bio = this.props.profile.bio
         }
         if(this.props.profile.get_following){
-          following = this.props.profile.get_following
+          if(this.props.profile.id === this.props.currentId){
+            // This one is to change the following list to be same as the auth if
+            // you are on your own page
+
+            following = this.props.following
+          } else {
+            // This is for everyone else
+            following = this.props.profile.get_following
+          }
         }
         if(this.props.profile.get_posts){
           posts = this.props.profile.get_posts
@@ -403,10 +432,19 @@ class PersonalProfilePostList extends React.Component{
         }
 
         if(this.props.profile.get_followers){
-          for(let i =0; i<this.props.profile.get_followers.length; i++){
-            followers.push(
-              this.props.profile.get_followers[i].username
-            )
+          if(this.props.profile.id === this.props.currentId){
+            // Same deal as teh followers
+            for(let i =0; i<this.props.followers.length; i++){
+              followers.push(
+                this.props.followers[i].username
+              )
+            }
+          } else {
+            for(let i =0; i<this.props.profile.get_followers.length; i++){
+              followers.push(
+                this.props.profile.get_followers[i].username
+              )
+            }
           }
         }
 
@@ -737,19 +775,30 @@ class PersonalProfilePostList extends React.Component{
     let firstName=""
     let lastName=""
     let bio=""
+    let profileImage = null
     let privatePro = true
+    let requested = []
 
     // follower list will used mostly for private events
     let followerList = []
+    let curRequested = []
 
 
 
     if (this.props.profile){
       if(this.props.profile.get_followers){
-        followers = this.props.profile.get_followers
+        if(this.props.profile.id === this.props.currentId){
+          followers = this.props.followers
+        } else {
+          followers = this.props.profile.get_followers
+        }
       }
       if(this.props.profile.get_following){
-        following = this.props.profile.get_following
+        if(this.props.profile.id === this.props.currentId){
+          following = this.props.following
+        } else {
+          following = this.props.profile.get_following
+        }
       }
       if(this.props.profile.profile_picture){
         profilePic = this.props.profile.profile_picture
@@ -773,6 +822,10 @@ class PersonalProfilePostList extends React.Component{
 
       }
 
+      if(this.props.profile.requested){
+        requested = this.props.profile.requested
+      }
+
 
     }
 
@@ -784,6 +837,17 @@ class PersonalProfilePostList extends React.Component{
     }
     if(this.props.profile.bio){
       bio = this.props.profile.bio
+    }
+
+    if(this.props.profile){
+      console.log(this.props.profile.profile_picture)
+      if(this.props.profile.profile_picture){
+        profileImage = `${global.IMAGE_ENDPOINT}`+this.props.profile.profile_picture
+      }
+    }
+
+    if(this.props.curRequested){
+      curRequested = this.props.curRequested
     }
 
 
@@ -845,7 +909,13 @@ class PersonalProfilePostList extends React.Component{
         footer = {null}
         >
         <span className ='followWord'> Followers</span>
-        <FollowList follow = {followers} />
+          <FollowersList
+            curId = {this.props.currentId}
+            profileId = {this.props.profile.id}
+            request = {curRequested}
+            follow = {followers}
+            updateFollowers = {this.props.updateFollowers}
+            />
         </Modal>
 
 
@@ -876,8 +946,9 @@ const mapStateToProps = state => {
       token: state.auth.token,
       profile: state.explore.profile,
       curUserFriend: state.auth.friends,
-      curRequested: state.auth.requestList
-
+      curRequested: state.auth.requestList,
+      followers: state.auth.followers,
+      following: state.auth.following
     };
 };
 
@@ -886,8 +957,8 @@ const mapDispatchToProps = dispatch => {
     changeProfilePic: (profilePic) => dispatch(exploreActions.changeProfilePic(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
     changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
-    grabUserCredentials: () => dispatch(authActions.grabUserCredentials())
-
+    grabUserCredentials: () => dispatch(authActions.grabUserCredentials()),
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
   }
 }
 

@@ -414,7 +414,7 @@ class PersonalProfile extends React.Component{
 
 
       // Now up date your credentials
-      this.props.grabUserCredentials()
+      // this.props.grabUserCredentials()
 
       // This function will include redux to update the auth as well
 
@@ -834,6 +834,7 @@ class PersonalProfile extends React.Component{
       let profileImage = null
       let privatePro = true
       let requested = []
+
       // follower list will used mostly for private events
       let followerList = []
       let curRequested = []
@@ -877,9 +878,7 @@ class PersonalProfile extends React.Component{
 
         }
 
-        if(this.props.profile.requested){
-          requested = this.props.profile.requested
-        }
+
 
 
       }
