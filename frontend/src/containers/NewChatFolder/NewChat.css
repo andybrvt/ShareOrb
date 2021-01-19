@@ -2,20 +2,42 @@
 .chatContainer {
   /* background-color: blue; */
 
-  position: absolute;
+  position: relative;
   height: 93vh;
-  width: 100vw;
+  width: 96vw;
   top:5%;
   /* overflow: hidden; */
-  left: 3.8%;
+  /* left: 3.8%; */
   display: flex;
+  flex-wrap: wrap;
 }
+
+@media screen {
+  .chatContainer .chatRightSide{
+    width: 50%;
+  }
+}
+
+@media screen and (max-width:1000px){
+  .chatContainer .chatLeftSide{
+    display: none;
+
+  }
+  .chatContainer .chatRightSide {
+    /* background-color: blue; */
+    width: 70%;
+  }
+
+}
+
+
 
 .chatContainer .chatLeftSide{
   /* background-color: red; */
   padding:10px;
   width: 23%;
   height: 100%;
+  /* float:left; */
 }
 
 .mainChatUserName{
@@ -27,16 +49,17 @@
 
 .chatContainer .chatRightSide{
   /* display: flex; */
-  flex-direction: column;
-  background-color: red;
-  width: 50%;
+  /* flex-direction: column; */
+  position: relative;
+  /* background-color: red; */
+  /* width: 50%; */
   height: 100%;
 }
 
 
 /* This is for the add chats feature */
 .chatContainer .chatRightSide .addNewChatContainer{
-  background-color: red;
+  /* background-color: red; */
   position:relative;
   width: 100%;
   height: 100%;
@@ -196,8 +219,9 @@
 
 /* This is for the CurChatManager */
 .chatContainer .chatFarRightSide{
-    /* background-color: red; */
-    width: 25%;
+    /* background-color: blue; */
+    position: relative;
+    width: 27%;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer{
   /* background-color: blue; */
@@ -216,7 +240,8 @@
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatName{
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
+  color: black;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatGroupBox .chatGroupAva{
   background-color: gainsboro;
@@ -227,6 +252,7 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  overflow: hidden;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatRightSideBox{
   /* background-color: green; */
@@ -235,14 +261,16 @@
 }
 
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList{
-  background-color: red;
+  /* background-color: red; */
   position:relative;
 
   top: 10%;
 
   /* overflow-y: auto; */
-  margin-left: 20px;
-  width: 88%;
+  /* margin-left: 20px; */
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
   /* overflow: auto; */
   /* height: 400px; */
   text-align: left;
@@ -250,17 +278,19 @@
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .chatMemberText{
   font-size: 20px;
   font-weight: 500;
+
   color:black;
 }
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList .groupMemberList{
   overflow: auto;
+
   height:150px;
 }
 
 /* This is for the chat content page */
 .chatContainer .chatRightSide .newChatContent{
   /* margin-top: 50px; */
-  background-color: blue;
+  /* background-color: blue; */
   border-top: 1px solid #f0f0f0;
   border-right: 1px solid #f0f0f0;
   border-left: 1px solid #f0f0f0;

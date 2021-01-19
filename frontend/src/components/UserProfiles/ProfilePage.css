@@ -521,6 +521,9 @@ gf
 
 .followListItem{
   cursor: pointer;
+  /* padding: 3px; */
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .followListItem:hover{
   background-color: gainsboro;
