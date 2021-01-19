@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import FollowList from './UserProfiles/FollowList';
 import { Modal, Avatar, Row, Col, Statistic, Divider} from 'antd';
 import FollowersList from './UserProfiles/FollowersList';
+import * as authActions from '../store/actions/auth';
 
 
 
@@ -143,7 +144,9 @@ class ProfileCardNewsFeed extends React.Component{
         <FollowersList
           follow = {followers}
           request = {request}
+          curId = {this.props.curId}
           location = {this.props.location}
+          updateFollowers = {this.props.updateFollowers}
            />
         </Modal>
 
@@ -169,8 +172,14 @@ export const mapStateToProps = state => {
     profilePic: state.auth.profilePic,
     following: state.auth.following,
     followers: state.auth.followers,
-    requestList: state.auth.requestList
+    requestList: state.auth.requestList,
+    curId: state.auth.id
   }
 }
 
-export default connect(mapStateToProps)(ProfileCardNewsFeed);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileCardNewsFeed);
