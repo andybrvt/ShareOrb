@@ -87,7 +87,7 @@ class DayCalendar extends React.Component{
 // render the date on top
   renderHeader(){
     return (
-      <div style={{marginBottom:'-100px'}} className = 'header row'>
+      <div className = 'header row'>
         <div className = 'col col-start'>
           <div className = "icon" onClick = {this.prevDay}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
@@ -879,10 +879,8 @@ class DayCalendar extends React.Component{
         <div className ='mainCalContainer'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             <div className = 'weekCalendar'>
-              <div style={{display: 'inline-block'}}>
+              <div className = "topHeaderCal">
                 {this.renderHeader()}
-              </div>
-              <div style={{display: 'inline-block'}}>
                 <CalendarViewDropDown
                   class="CalendarViewCSS"
                   calType = "day"
@@ -890,23 +888,24 @@ class DayCalendar extends React.Component{
                   history = {this.props.history}
                   matchPara = {this.props.parameter} />
               </div>
+
               {this.renderDays()}
             </div>
-          <div className = 'testBox'>
-          <div className = 'dayFlex-Container'>
-            <div className = 'timecol'>
-              {this.renderHours()}
-            </div>
-            <div className = 'calendar'>
-
-              {this.renderCells(this.props.events)}
+          <div className = 'scrollCalContent'>
+            <div className = 'weekDayFlex-Container'>
+              <div className = 'timecol'>
+                {this.renderHours()}
               </div>
+              <div className = 'calendar'>
+
+                {this.renderCells(this.props.events)}
+                </div>
+              </div>
+              <EditEventPopUp
+              isVisible = {this.props.showModal}
+              close = {() => this.props.closeModal()}
+              />
             </div>
-            <EditEventPopUp
-            isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
-            />
-          </div>
           </div>
 
 

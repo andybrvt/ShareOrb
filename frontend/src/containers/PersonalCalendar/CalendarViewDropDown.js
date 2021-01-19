@@ -116,11 +116,11 @@ class CalendarViewDropDown extends React.Component{
     console.log(this.props)
 
     return(
-      <div>
+      <div className = "calendarDropDownCSS">
         <Select
           onChange = {this.onCalTypeChange}
           value = {this.props.calType}
-          style={{ width: 160, fontSize:'16px', marginLeft:'225px'}}
+          style= {{width: "100px"}}
         >
           <Option value = 'week'> <b>Week</b> </Option>
           <Option value = "day"> <b>Day</b> </Option>

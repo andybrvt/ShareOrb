@@ -1,3 +1,153 @@
+/* Holds all the calendars */
+/* Stuff under here are shared among all the calendars */
+
+.calendarContainer{
+  position: relative;
+  /* left: 3%; */
+  width: 96vw;
+  height: 93vh;
+  top:7%;
+  /* color:black; */
+  /* bottom: 0px; */
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  font-family: "Segoe UI Regular";
+}
+
+.calendarContainer .mainCalContainer{
+  width: 82.5%;
+  position: relative;
+  padding: 0;
+  /* background-color: blue; */
+}
+.calendarContainer .miniCalContainer {
+  position:relative;
+  width: 17.5%;
+  background-color: green;
+}
+.weekCalendar {
+  position: relative;
+  width: 100%;
+  left: 0%;
+  /* background: var(--neutral-color); */
+  /* border: 1px solid var(--border-color); */
+  /* background-color: black; */
+}
+
+.topHeaderCal{
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  width: 100%;
+}
+
+.weekCalendar .header {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 16px;
+  /* padding: 1% 1%; */
+  /* height: 100%; */
+  /* border-bottom: 1px solid var(--border-color); */
+  /* to the right of this is day/week dropdown */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: orange;
+  width: 45%;
+  justify-content: center;
+  text-align: center;
+}
+
+@media screen and (max-width:1000px){
+  .miniCalContainer {
+    /* display:none; */
+  }
+  .mainCalContainer{
+    /* width: 100%; */
+  }
+}
+
+.calendarDropDownCSS{
+  position: relative;
+  left:40%;
+  padding-top: 3px;
+  background-color: green;
+  font-size: 14px;
+}
+
+
+
+
+
+/* Shared between week, month */
+/* Day has it but doesnt use it */
+
+.weekCalendar .weekDays {
+  font-weight: 100;
+  font-size: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* background-color: red; */
+}
+
+.weekCalendar .weekDays .weekcol {
+  justify-content: center;
+  text-align: center;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+  font-size: 10px;
+  /* border-right: 1px solid ; */
+  /* background-color: red; */
+  /* border-left: 2px solid; */
+  /* border-color: darkgrey; */
+}
+
+.weekCalendar .weekDays .weekcol:first {
+
+}
+
+
+/* This will be specific to the week and day calendar */
+.scrollCalContent{
+  overflow:hidden;
+  width: 100%;
+  height: 480px;
+  background-color: red;
+}
+
+.scrollCalContent .weekDayFlex-Container{
+  display: flex;
+  overflow: auto;
+  background-color: red;
+  /* overflow-y: hidden; */
+  width: 101%;
+  height: 480px;
+  border-top: 2px solid;
+  border-color: darkgrey;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .outerContainerPeople{
 
   /* margin-bottom: 15px; */
@@ -108,25 +258,6 @@ body {
     position: relative;
 }
 
-header {
-  display: block;
-  width: 100%;
-  padding: 1.75em 0;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--neutral-color);
-}
-
-header #logo {
-  font-size: 175%;
-  text-align: center;
-  color: var(--main-color);
-  line-height: 1;
-}
-
-header #logo .icon {
-  padding-right: .25em;
-}
-
 main {
   display: block;
   margin: 0 auto;
@@ -143,20 +274,7 @@ main {
 
 /* Container that holds Calendar,
 controls all colors and font weight */
-.calendarContainer{
-  position: absolute;
-  left: 3%;
-  width: 100%;
-  height: 94.5vh;
-  top:22%;
-  font-weight: 500;
-  /* color:black; */
-  /* bottom: 0px; */
-  background-color: white;
-  display: flex;
-  overflow: hidden;
-  font-family: "Segoe UI Regular";
-}
+
 
 .weekCalContainer {
   position: relative;
@@ -179,24 +297,9 @@ controls all colors and font weight */
   /* width: 10px; */
 }
 
-.testBox{
-  overflow:hidden;
-  width: 1460px;
 
-  /* background-color: red; */
-}
 
-.weekDayFlex-Container{
-  display: flex;
-  overflow: auto;
-  /* background-color: red; */
-  /* overflow-y: hidden; */
-  margin-left: 70px;
-  width: 1470px;
-  height: 780px;
-  border-top: 2px solid;
-  border-color: darkgrey;
-}
+
 
 .dayFlex-Container{
   display: flex;
@@ -246,15 +349,7 @@ controls all colors and font weight */
   /* background-color: red; */
 }
 
-.weekcol {
-  flex-grow: 1;
-  flex-basis: 0;
-  max-width: 100%;
-  /* border-right: 1px solid ; */
-  /* background-color: red; */
-  /* border-left: 2px solid; */
-  /* border-color: darkgrey; */
-}
+
 
 /* current day color */
 .cellBorder {
@@ -273,10 +368,7 @@ controls all colors and font weight */
  background-color: gainsboro;
 }
 
-.weekcol:first-child{
-  /* border-left: 2px solid; */
-  /* border-color: darkgrey; */
-}
+
 
 .col-start {
   justify-content: flex-start;
@@ -284,13 +376,6 @@ controls all colors and font weight */
 
   /* width: 20px; */
   /* background-color: red; */
-}
-
-.col-center {
-  justify-content: center;
-  text-align: center;
-  /* background-color: red; */
-  /* width: 40px; */
 }
 
 .col-end {
@@ -477,30 +562,8 @@ controls all colors and font weight */
   /* border: 1px solid var(--border-color); */
 }
 
-.weekCalendar {
-  display: block;
-  position: relative;
-  left: 50px;
-  width: 1410px;
-  /* background: var(--neutral-color); */
-  /* border: 1px solid var(--border-color); */
-  /* background-color: black; */
-}
 
 
-
-.weekCalendar .header {
-  text-transform: uppercase;
-  font-weight: 800;
-  font-size: 21px;
-  padding: 1em 1em;
-  /* border-bottom: 1px solid var(--border-color); */
-  margin-left: 400px;
-  /* to the right of this is day/week dropdown */
-
-  /* background-color: blue; */
-  width: 600px;
-}
 
 .weekCalendar .dayHeader {
   font-weight: 400;
@@ -588,19 +651,6 @@ controls all colors and font weight */
   /* width: 700px; */
 }
 
-/* mon - sun  */
-.weekCalendar .weekDays {
-  font-weight: 100;
-  color: ;
-  font-size: 100%;
-  /* padding: .75em 0; */
-  /* border-top: 1px solid var(--border-color); */
-  /* border-bottom: 1px solid var(--border-color); */
-  /* border-right: 1px solid var(--border-color); */
-  width: 1365px;
-
-  /* background-color: red; */
-}
 
 .weekCalendar .dayDays {
   font-weight: 100;
@@ -714,15 +764,7 @@ controls all colors and font weight */
 }
 
 
-.mainCalContainer{
-  width: 1500px;
-  position: relative;
-  left: 30px;
-  top: 0px;
-  padding: 0;
-  /* padding-left: 25px; */
-  /* background-color: orange; */
-}
+
 
 .calendarContainer .mainWeekCalContainer{
   width: 1600px;
@@ -786,11 +828,6 @@ controls all colors and font weight */
   transform-origin: bottom;
 }
 
-.miniCalContainer {
-  position:relative;
-  /* height: 10px; */
-  /* background-color: red; */
-}
 
 
 .miniCalContainer .miniCalendar {
@@ -841,9 +878,7 @@ controls all colors and font weight */
 
 }
 
-.CalendarViewCSS{
-position:absolute;
-}
+
 
 
 .miniCalContainer .addEventButton:hover {
@@ -957,22 +992,7 @@ position:absolute;
   line-height: 15px;
 }
 
-/* // entire right side container */
-.calendarContainer .miniCalContainer{
-  flex-grow: 0;
-  flex-shrink: 0;
-  /* background-color:#e6f7ff; */
-  /* flex-basis: 100%; */
-  position: relative;
-  left:-15px;
-  /* right: 200px; */
-  width: 350px;
-  /* top: 110px; */
-  /* background-color:#696969; */
-  /* background-color:#000080; */
 
-  opacity: 0.8;
-}
 
 .rightMini{
   margin-left: -200px;
@@ -1419,6 +1439,7 @@ to make it adjustable */
 
 .calendar .body .weekcol {
   flex-grow: 0;
+  background-color: black;
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }

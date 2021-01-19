@@ -86,7 +86,7 @@ class PersonalCalendar extends React.Component{
     // for formatting using moment or whatever you do
     // .format('give a date here', what kind of formatting here)
     return (
-      <div style={{width:'550px'}} className= "header row flex-middle">
+      <div className= "header row">
         <div className = "col col-start">
           <div className = "icon" onClick ={this.prevMonth}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
@@ -115,14 +115,15 @@ class PersonalCalendar extends React.Component{
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
       days.push(
-        <div className ="col col-center" key = {i}>
+        <div className ="weekcol" key = {i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           </div>
       )
     }
     // the days will be a list of dates that are put in by the for loops
      // and then the return will return all those days out
-    return <div className = "days row"> {days} </div>
+
+    return <div className = "weekDays"> {days} </div>
   }
 
 
@@ -856,31 +857,26 @@ class PersonalCalendar extends React.Component{
           close = {() => this.props.closeEventSyncModal()}
         />
 
-      <div className = 'mainCalContainer' style={{marginLeft:'-15px', marginTop:'-10px'}}>
+      <div className = 'mainCalContainer'>
           <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
-
-        <div className = 'flex-container'>
-          <div  s className = 'sidecol'>
-          {this.renderSide()}
-          </div>
           <div className = 'weekCalendar'>
-            <div style={{display: 'inline-block'}}>
+            <div className = "topHeaderCal">
               {this.renderHeader()}
-            </div>
-            <div style={{display: 'inline-block'}}>
               <CalendarViewDropDown
-              calType = "month"
-              history = {this.props.history}
-              matchPara = {this.props.parameter} />
-            </div>
-            <div style={{marginLeft:'-25px', marginTop:'-20px'}} className = 'calendar'>
+                calType = "month"
+                history = {this.props.history}
+                matchPara = {this.props.parameter} />
 
-              {this.renderDays()}
-              {this.renderCells(this.props.events)}
             </div>
+            {this.renderDays()}
 
           </div>
-        </div>
+
+
+          <div className = 'calendar'>
+            {this.renderCells(this.props.events)}
+          </div>
+
 
         </div>
         <div className = 'miniCalContainer'>

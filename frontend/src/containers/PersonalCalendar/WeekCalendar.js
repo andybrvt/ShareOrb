@@ -154,7 +154,7 @@ class WeekCalendar extends React.Component{
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
-        <div className = 'col col-center'>
+        <div className = 'col'>
           <span>
             {dateFns.format(startWeek, dateFormat)}
           </span>
@@ -183,7 +183,7 @@ class WeekCalendar extends React.Component{
       const cloneCloneStartDate = cloneStartDate
       days.push(
         <div
-        className = {`weekcol col-center
+        className = {`weekcol
           ${dateFns.isSameDay(cloneCloneStartDate, new Date()) ? 'cellBorder' : ''} `}
         key = {i}
 
@@ -199,7 +199,7 @@ class WeekCalendar extends React.Component{
     };
 
     return (
-      <div className = 'weekDays row'>
+      <div className = 'weekDays '>
       {days}
       </div>
       )
@@ -406,9 +406,6 @@ class WeekCalendar extends React.Component{
 
               <Popover placement="right"  content={
                 <div style={{padding:20, width:450}}>
-                  <p style={{display:'inline-block'}}>
-
-                  </p>
 
                     {
                       (item.invited.length==0)?
@@ -802,6 +799,8 @@ class WeekCalendar extends React.Component{
 
           )
         }
+
+
         border.push(
           <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(cloneDay, cloneHour)}  content={<div>
             <EditEventPopUp
@@ -1123,37 +1122,23 @@ class WeekCalendar extends React.Component{
 
     return (
     <div className = 'calendarContainer'>
-        <EventSyncModal
-          {...this.props}
-          isVisble = {this.props.showEventSyncModal}
-          close = {() => this.props.closeEventSyncModal()}
-        />
 
-        <RemoveEventModal
-        visible = {this.props.showDeleteModal}
-        close = {this.props.closeEventDeleteModal}
-        item = {this.props.deleteEventId}
-        user = {this.props.id}
-
-         />
-
-        <div className = 'mainCalContainer'>
-          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+      <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
-            <div style={{display: 'inline-block'}}>
+
+            <div className = "topHeaderCal">
               {this.renderHeader()}
-            </div>
-            <div style={{display: 'inline-block'}}>
               <CalendarViewDropDown
-                class="CalendarViewCSS"
                 calType = "week"
                 history = {this.props.history}
                 matchPara = {this.props.parameter} />
             </div>
             {this.renderDays()}
+
+
           </div>
 
-          <div className = "testBox">
+          <div className = "scrollCalContent">
             {/*window.scrollTo(0, 800)*/}
           <div className = 'weekDayFlex-Container'>
             <div className = 'timecol'>
@@ -1165,13 +1150,12 @@ class WeekCalendar extends React.Component{
           </div>
           </div>
 
+          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
+
+      </div>
 
 
-          </div>
-
-
-
-          <div className = 'miniCalContainer'>
+      <div className = 'miniCalContainer'>
             <Button
               type="primary"
               className = 'miniEventSyncButton'
@@ -1186,15 +1170,21 @@ class WeekCalendar extends React.Component{
               onClick = {this.openEventSyncModal}>
                 Event Sync
             </Button>
-            {/*
-            <div className = 'timeLayerCon'>
-              list of people to be added!
-            </div>
-            */}
-          </div>
+      </div>
 
 
+          <EventSyncModal
+          {...this.props}
+          isVisble = {this.props.showEventSyncModal}
+          close = {() => this.props.closeEventSyncModal()}
+          />
 
+          <RemoveEventModal
+          visible = {this.props.showDeleteModal}
+          close = {this.props.closeEventDeleteModal}
+          item = {this.props.deleteEventId}
+          user = {this.props.id}
+          />
       </div>
     )
   }

@@ -140,7 +140,11 @@ class ProfileCardNewsFeed extends React.Component{
 
 
         <span className ='followWord'> Followers</span>
-        <FollowersList follow = {followers} request = {request} />
+        <FollowersList
+          follow = {followers}
+          request = {request}
+          location = {this.props.location}
+           />
         </Modal>
 
 

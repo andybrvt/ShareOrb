@@ -98,6 +98,7 @@ class NewsFeedView extends React.Component {
 					<div className = "profileCardContainer">
 						<ProfileCardNewsFeed
 							profile = {this.props.currentProfile}
+							location = {this.props.location}
 							 />
 					</div>
 

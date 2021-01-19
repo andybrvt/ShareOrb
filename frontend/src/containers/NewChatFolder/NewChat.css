@@ -1,11 +1,11 @@
 /* These are for the NewChat.js */
 .chatContainer {
-  /* background-color: blue; */
+  background-color: blue;
 
   position: relative;
   height: 93vh;
   width: 96vw;
-  top:5%;
+  top:7%;
   /* overflow: hidden; */
   /* left: 3.8%; */
   display: flex;

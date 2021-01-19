@@ -95,11 +95,15 @@ class FollowersList extends React.Component{
 
     let curId = 0
     let profileId = -1
+    let pathname = ""
     if(this.props.curId){
       curId = this.props.curId
     }
     if(this.props.profileId){
       profileId = this.props.profileId
+    }
+    if(this.props.location){
+      pathname = this.props.location.pathname
     }
 
     return (
@@ -110,29 +114,10 @@ class FollowersList extends React.Component{
         itemLayout = 'horizontal'
         // dataSource = {followList}
         // renderItem = {item => (
-        //   <List.Item
-        //   className = 'followListItem'
-        //   onClick = {() => this.onFollowItemClick(item.username)}
-        //   >
-        //   <List.Item.Meta
-        //     avatar={
-        //       item.profile_picture ?
-        //
-        //         <Avatar src= {`${global.IMAGE_ENDPOINT}`+item.profile_picture} />
-        //
-        //         :
-        //
-        //         <Avatar src={defaultPicture} />
-        //
-        //       }
-        //     title={<a href="https://ant.design">{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</a>}
-        //     description= {<b>@{this.capitalize(item.username)}</b>}
-        //   />
-        //   </List.Item>
-        // )}
+
         >
         {
-          curId === profileId ?
+          curId === profileId || pathname === "/home" ?
 
           this.renderRequestList()
 
