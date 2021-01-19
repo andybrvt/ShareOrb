@@ -590,10 +590,11 @@ class NewsfeedPost extends React.Component {
                 <span
                   style={{color:'black', fontSize:'15px', marginLeft:'-5px'}}
                   class="headerPostText alignleft" >
+                  {this.capitalize(this.props.data.user.first_name)+" "+this.capitalize(this.props.data.user.last_name)}
                   <span
                     style={{fontSize:'13px'}}
                     class="headerPostText LikeCommentHover">
-                    {this.capitalize(this.props.data.user.first_name)+" "+this.capitalize(this.props.data.user.last_name)}
+
                     <br/>
                     @{this.props.data.user.username}
                   </span>
