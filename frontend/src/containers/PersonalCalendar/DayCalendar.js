@@ -699,12 +699,12 @@ class DayCalendar extends React.Component{
     }
     return(
       <div className = 'scrollBody'>
-      <div className = 'backDayBody'>
-      {border}
-      </div>
-      <div className = 'dayBody'>
-      {hours}
-      </div>
+        <div className = 'backDayBody'>
+          {border}
+        </div>
+        <div className = 'dayBody'>
+          {hours}
+        </div>
       </div>
     )
   }
@@ -897,15 +897,15 @@ class DayCalendar extends React.Component{
                 {this.renderHours()}
               </div>
               <div className = 'calendar'>
-
                 {this.renderCells(this.props.events)}
                 </div>
               </div>
-              <EditEventPopUp
-              isVisible = {this.props.showModal}
-              close = {() => this.props.closeModal()}
-              />
             </div>
+
+            <EditEventPopUp
+            isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
+            />
           </div>
 
 

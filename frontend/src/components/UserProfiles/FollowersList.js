@@ -1,6 +1,7 @@
 import React from 'react';
 import { List, Avatar, Button } from 'antd';
 import defaultPicture from '../images/default.png';
+import { authAxios } from '../util';
 
 // This will be similar to the followList but will be used for the followers
 // to handle request as well
@@ -15,6 +16,18 @@ class FollowersList extends React.Component{
     window.location.href = '/explore/'+user
   }
 
+  onAcceptFollow = (follower, following) => {
+    // Pretty much for accepting the onAccept follow on the users page
+
+    console.log(follower, following)
+    // authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
+    //   follower: follower,
+    //   following: following
+    // })
+
+
+  }
+
   renderRequestList = () => {
     let requestList = []
     const request = this.props.request
@@ -22,7 +35,7 @@ class FollowersList extends React.Component{
       requestList.push(
         <List.Item
         className = 'followListItem'
-        onClick = {() => this.onFollowItemClick(request[i].username)}
+        // onClick = {() => this.onFollowItemClick(request[i].username)}
         >
         <List.Item.Meta
           avatar={
@@ -44,7 +57,9 @@ class FollowersList extends React.Component{
           }
           description= {<b>@{this.capitalize(request[i].username)}</b>}
         />
-      <Button type = "primary">
+      <Button
+        onClick = {() => this.onAcceptFollow(request[i].id, this.props.curId)}
+        type = "primary">
           Accept
         </Button>
         </List.Item>
