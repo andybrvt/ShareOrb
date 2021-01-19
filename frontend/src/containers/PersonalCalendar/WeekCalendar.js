@@ -739,7 +739,6 @@ class WeekCalendar extends React.Component{
                       gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
                       // gridRow: 15/17,
                       gridRow: this.hourEventIndex(item.start_time, item.end_time, clonehourIndex),
-
                       backgroundColor: item.color
                     }}>
 
@@ -908,27 +907,26 @@ class WeekCalendar extends React.Component{
         // The start day is in the week but not the end day
         // The start nor end day is in the week (gotta make preperations for this up on the place where the events gets filtered out)
         // The end day is in the week but not the start day
-    // const start = new Date(start_time)
-    // const end = new Date(end_time)
-    // const eventDay = new Date(day)
-    // const index = start_index + 1
-    // if (dateFns.isSameWeek(start, end)){
-    //   const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
-    //   const ratio = index + '/' + (index+sameWeekDifference)
-    //   return ratio
-    // } else {
-    //    if(dateFns.isSameWeek(start, eventDay)){
-    //      const ratio = index+ '/'+8
-    //      return ratio
-    //    } else if (dateFns.isSameWeek(end, eventDay)){
-    //      const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+2
-    //      return '1/'+differentWeekDifference
-    //    } else {
-    //      return '1/8'
-    //    }
-    // }
+    const start = new Date(start_time)
+    const end = new Date(end_time)
+    const eventDay = new Date(day)
+    const index = start_index + 1
+    if (dateFns.isSameWeek(start, end)){
+      const sameWeekDifference = Math.abs(dateFns.differenceInDays(start, end))+1
+      const ratio = index + '/' + (index+sameWeekDifference)
+      return ratio
+    } else {
+       if(dateFns.isSameWeek(start, eventDay)){
+         const ratio = index+ '/'+8
+         return ratio
+       } else if (dateFns.isSameWeek(end, eventDay)){
+         const differentWeekDifference = Math.abs(dateFns.differenceInDays(eventDay, end))+2
+         return '1/'+differentWeekDifference
+       } else {
+         return '1/8'
+       }
+    }
 
-    return "1/2"
 
   }
 
@@ -988,8 +986,8 @@ class WeekCalendar extends React.Component{
     const ratio = topIndex + '/' + bottomIndex
     console.log(ratio)
 
-    // return ratio
-    return '1/49'
+    return ratio
+    // return '34//48'
   }
 
 
