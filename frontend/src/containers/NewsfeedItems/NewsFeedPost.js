@@ -492,18 +492,7 @@ class NewsfeedPost extends React.Component {
       <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
 
       <div style={{padding:20,}}>
-      <Popover
-         style={{width:'200px'}}
-         content={<div>
-           <Avatar
-            shape="square"
-            size="large"
-            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80"
-            />
-           <div> 110 followers </div>
-         </div>}
 
-        >
         {
           profilePic != '' ?
           <Avatar
@@ -525,7 +514,7 @@ class NewsfeedPost extends React.Component {
           src={defaultPic} alt="avatar" />
 
         }
-        </Popover>
+
            <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
              {this.capitalize(this.props.data.user.username)}
              <div>
@@ -604,6 +593,8 @@ class NewsfeedPost extends React.Component {
                   <span
                     style={{fontSize:'13px'}}
                     class="headerPostText LikeCommentHover">
+                    {this.capitalize(this.props.data.user.first_name)+" "+this.capitalize(this.props.data.user.last_name)}
+                    <br/>
                     @{this.props.data.user.username}
                   </span>
 

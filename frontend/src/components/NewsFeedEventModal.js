@@ -276,7 +276,7 @@ class NewsFeedEventModal extends React.Component{
       }
     }
 
-    
+
 
     handleValidation(){
       // You will use this to disable or non disable the button, so because of that
@@ -344,6 +344,7 @@ class NewsFeedEventModal extends React.Component{
           end_time: this.state.timeEnd,
           event_color: this.state.eventColor,
           repeatCondition:this.state.repeatCondition,
+          person: this.state.person,
         }
         this.onClear()
         this.props.onSubmit(submitContent)
