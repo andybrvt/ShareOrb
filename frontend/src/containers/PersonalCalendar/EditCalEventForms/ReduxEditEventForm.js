@@ -776,6 +776,7 @@ class ReduxEditEventForm extends React.Component{
               >
               Delete
               </Button>
+
               <Button
               type = 'primary'
               onClick = {handleSubmit}

@@ -24,7 +24,7 @@
 .calendarContainer .miniCalContainer {
   position:relative;
   width: 15%;
-  background-color: green;
+  /* background-color: green; */
 }
 .weekCalendar {
   position: relative;
@@ -875,7 +875,6 @@ controls all colors and font weight */
   position: relative;
   top: 50px;
   /* height: 300px; */
-  left: 20px;
   width: 300px;
   /* color: white; */
 }
@@ -887,7 +886,7 @@ controls all colors and font weight */
   box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   position: relative;
 
-  top: 40px;
+  top: 20px;
   height: 50px;
   font-size: 20px;
 }
@@ -908,12 +907,26 @@ controls all colors and font weight */
   /* background-color: red; */
   position: relative;
   top: 50px;
-  left:30px;
-  width: 225px;
+  left:10%;
+  width: 175px;
+  font-size: 14px;
   margin-bottom: 50px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
 }
+
+.miniCalContainer .weekCreateEvent {
+  /* background-color: red; */
+  position: relative;
+  top: 25px;
+  left:10%;
+  width: 175px;
+  font-size: 14px;
+  margin-bottom: 50px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}
+
 
 
 
@@ -945,9 +958,7 @@ controls all colors and font weight */
 
 .miniCalContainer .miniCalendar .days{
   text-transform: uppercase;
-  font-weight: 400;
-  color: ;
-  font-size: 100%;
+  font-size: 14px;
   padding: .75em 0;
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -996,7 +1007,7 @@ controls all colors and font weight */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 80%;
+  width: 100%;
 
 }
 
@@ -1014,14 +1025,14 @@ controls all colors and font weight */
 
 .miniCalContainer .miniCalendar .body .miniCell{
   position: relative;
-  height: 40px;
+  height: 20px;
   width: 5em;
   /* border-right: 1px solid var(--border-color); */
   overflow: hidden;
   cursor: pointer;
   /* background: var(--neutral-color); */
   transition: 0.25s ease-out;
-  font-size: 15px;
+  font-size: 11px;
 }
 
 .miniCalContainer .miniCalendar .body .miniRow .miniCell .miniDay:hover{

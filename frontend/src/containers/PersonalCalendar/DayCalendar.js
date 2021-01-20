@@ -318,13 +318,10 @@ class DayCalendar extends React.Component{
                     <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
                     <span style={{marginRight:'3px'}}>
                       {dateFns.format(selectedDate, 'iiii')},
-
-
                     </span>
                     {dateFns.format(new Date(item.start_time), 'MMMM')}
                     &nbsp;
                     {dateFns.format(new Date(item.start_time), 'd')}
-
 
 
                     <br/>
