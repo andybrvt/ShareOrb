@@ -9,6 +9,3 @@ env/
 .env
 
 media/
-
-
-**/migrations/

@@ -156,7 +156,7 @@ class DayCalendar extends React.Component{
       startTime = dateFns.addHours(startTime, 1)
     }
     // render it our but you have to fix the css
-    return <div className = 'body'>{hours}</div>
+    return <div className = 'sideTime'>{hours}</div>
   }
 
 

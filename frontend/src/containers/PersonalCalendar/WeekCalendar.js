@@ -65,7 +65,7 @@ class WeekCalendar extends React.Component{
   }
 
 
-  
+
 
   onDayHourClick = (positionX, positionY) => {
 
@@ -210,7 +210,7 @@ class WeekCalendar extends React.Component{
       )
       startHour = dateFns.addHours(startHour, 1)
     }
-    return <div className= 'body'> {hour} </div>
+    return <div className= 'sideTime'> {hour} </div>
   }
 
 

@@ -53,7 +53,7 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: orange;
+  /* background-color: orange; */
   width: 45%;
   justify-content: center;
   text-align: center;
@@ -72,7 +72,7 @@
   position: relative;
   left:40%;
   padding-top: 3px;
-  background-color: green;
+  /* background-color: green; */
   font-size: 14px;
 }
 
@@ -86,10 +86,12 @@
 .weekCalendar .weekDays {
   font-weight: 100;
   font-size: 100%;
-  width: 100%;
+  width: 95.7%;
   display: flex;
   flex-direction: row;
   /* background-color: red; */
+  position: relative;
+  left: 3%;
 }
 
 .weekCalendar .weekDays .weekcol {
@@ -121,18 +123,19 @@
   /* background-color: red; */
   /* overflow-y: hidden; */
   width: 101%;
-  height: 470px;
+  height: 460px;
   border-top: 2px solid;
   border-color: darkgrey;
 }
 
 .scrollCalContent .weekDayFlex-Container .timecol{
-  width: 50px;
+  width: 3%;
   float: left;
   position:relative;
-  top: 40px;
-  background-color: red;
+  /* background-color: red; */
 }
+
+
 
 .scrollCalContent .weekDayFlex-Container .calendar{
   display: block;
@@ -144,9 +147,35 @@
 
 .scrollCalContent .weekDayFlex-Container .calendar .scrollBody{
   width: 100%;
-  height: 1200px;
+  height: 1104px;
   background-color: white;
 }
+
+.sideTime {
+
+}
+
+.sideTime .cell{
+  position: relative;
+  top: 45.5px;
+  height: 46px;
+  border-top: 1px solid grey;
+  overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.sideTime .cell .number{
+  font-size: 75.5%;
+  line-height: 1;
+  font-weight: 10;
+  position: relative;
+
+}
+
+
+
 
 /* This is for weekcalendar specficially */
 .backWeekBody{
@@ -551,54 +580,6 @@ controls all colors and font weight */
   transition: .25 ease-out;
 }
 
-
-
-/* this is for the date time for week calendar */
-.calendarContainer .weekDayFlex-Container.timecol .body .cell:first-child{
-  /* border-top: 1px solid grey; */
-  /* background-color: red; */
-}
-
-/* time side for weekCalendar */
-.calendarContainer .weekDayFlex-Container .timecol .body .cell{
-  position: relative;
-  top: 10px;
-  height: 50px;
-  border-top: 1px solid grey;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.25s ease-out;
-  width: 70px;
-  /* background-color: blue; */
-}
-
-.calendarContainer .dayFlex-Container .timecol .body .cell{
-  position: relative;
-  height: 50px;
-  border-top: 1px solid grey;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.25s ease-out;
-  width: 70px;
-  /* background-color: blue; */
-}
-
-
-.calendarContainer .weekDayFlex-Container .timecol .body .cell .number{
-  font-size: 82.5%;
-  line-height: 1;
-  top: .75em;
-  right: .75em;
-  font-weight: 10;
-}
-
-.calendarContainer .dayFlex-Container .timecol .body .cell .number{
-  font-size: 82.5%;
-  line-height: 1;
-  top: .75em;
-  right: .75em;
-  font-weight: 10;
-}
 
 /* Calendar */
 /* this will help control the width of the calendar */
