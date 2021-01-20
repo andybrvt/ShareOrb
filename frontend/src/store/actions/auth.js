@@ -361,6 +361,15 @@ export const updateFollowers = (followerList) => {
   }
 }
 
+export const updateFollowing = (followingList) => {
+  // This function will update your following after you have followed someone on
+  // the suggest friend page
+  return{
+    type: actionTypes.UPDATE_FOLLOWING,
+    followingList: followingList
+  }
+}
+
 
 export const updateRequestList = (newRequest) => {
   // This function will be used to update the request lsit after someone made

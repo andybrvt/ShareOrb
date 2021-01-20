@@ -234,6 +234,7 @@ const mapDispatchToProps = dispatch => {
 	// function: grab user ID and username to put into forms
   return {
     grabUserCredentials: () => dispatch(actions.grabUserCredentials()),
+		updateFollowing: (followingList) => dispatch(actions.updateFollowing(followingList))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NewsFeedView);

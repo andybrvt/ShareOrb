@@ -100,6 +100,8 @@ class SuggestedFriends extends React.Component {
     // to send the right request
     // The parameterfollower will you, and following will be the person you are
     // trying to follow.
+
+    console.log(privatePro, follower, following)
     if(privatePro === true) {
       // if true then the perosn profile will be private and then when you click
       // follow it will show a reqeust instead of followed
@@ -110,7 +112,7 @@ class SuggestedFriends extends React.Component {
         recipient: following
       }
 
-      // add auth here 
+      // add auth here
 
       // Simlar to the personal profile but without sending it throught he weboscket
       NotificationWebSocketInstance.sendNotification(notificationObject)
@@ -118,6 +120,15 @@ class SuggestedFriends extends React.Component {
 
     } else {
       // This will be for when it is not a private event
+
+      authAxios.post("http://127.0.0.1:8000/userprofile/onFollow", {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
+        this.props.updateFollowing(res.data)
+      })
     }
   }
 
@@ -218,7 +229,7 @@ class SuggestedFriends extends React.Component {
               :
 
               <Button
-                // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
+                onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
                 style={{fontSize:'14px'}} size="small" shape="round" type="primary">
                 Follow
               </Button>

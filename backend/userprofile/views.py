@@ -584,3 +584,27 @@ class onAcceptFollow(APIView):
         # You will return your new follow list to update your list
 
         return Response(content)
+
+
+class onFollowView(APIView):
+    # This function will be used for creating a new follower through view,
+    # mostly used for the suggested friends list in the news feed
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        # This is just the view.py version of the send_follow in the consumers
+        follower = get_object_or_404(models.User, id = request.data['follower'])
+        following = get_object_or_404(models.User, id = request.data['following'])
+        followerObj = models.UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
+
+        # Instead of returning this to the follower, you will return this to the
+        # curUser that sent out the follow
+        curUser = get_object_or_404(models.User, id = request.data['follower'])
+        hostObj = serializers.UserSerializer(curUser).data
+
+        # instead of returning the follower list, you will return the following
+        # list to update the auth in the users page
+
+        followingList = hostObj['get_following']
+
+
+        return Response(followingList)
