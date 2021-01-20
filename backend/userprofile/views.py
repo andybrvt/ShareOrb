@@ -366,9 +366,11 @@ class AllSuggested(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
     def get_queryset(self):
         list = []
-        temp=(self.request.user.friends.all())
+        temp=(self.request.user.get_following())
         for i in temp:
-            list.append(i.username)
+            print(i)
+            list.append(i)
+            # print(i)
         list.append(self.request.user)
 
         # Your can exclude a list by using keyword __in

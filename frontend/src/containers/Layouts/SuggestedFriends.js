@@ -8,6 +8,7 @@ SearchOutlined
 // import reqwest from 'reqwest';
 import React from 'react';
 import { authAxios } from '../../components/util';
+import NotificationWebSocketInstance from '../../notificationWebsocket';
 
 
 
@@ -47,7 +48,7 @@ class SuggestedFriends extends React.Component {
   }
 
   getData = callback => {
-    authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestedFriends`)
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/everyoneSuggested`)
         .then(res=> {
 
           this.setState({
@@ -60,7 +61,9 @@ class SuggestedFriends extends React.Component {
 
 
 
-
+  profileDirect = (user) => {
+    this.props.history.push('/explore/'+user)
+  }
 
   onLoadMore = () => {
     console.log(this.state.counter)
@@ -89,11 +92,56 @@ class SuggestedFriends extends React.Component {
 
              },
        )
-       }
+    }
+
+  onFollow = (privatePro, follower, following) => {
+    // This function will be used to handle the follow or request
+    // The parameter privatePro will be used to see if the account is private or not
+    // to send the right request
+    // The parameterfollower will you, and following will be the person you are
+    // trying to follow.
+    if(privatePro === true) {
+      // if true then the perosn profile will be private and then when you click
+      // follow it will show a reqeust instead of followed
+
+      const notificationObject = {
+        command: 'send_follow_request_notification',
+        actor: follower,
+        recipient: following
+      }
+
+      // add auth here 
+
+      // Simlar to the personal profile but without sending it throught he weboscket
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
+    } else {
+      // This will be for when it is not a private event
+    }
+  }
 
 
   render() {
-    console.log(this.state.data)
+    console.log(this.props)
+    let following = []
+    let requestList = []
+
+    if(this.props.following){
+      for(let i = 0; i< this.props.following.length; i++){
+        following.push(
+          this.props.following[i].id
+        )
+      }
+    }
+    if(this.props.requestList){
+      for(let i = 0; i< this.props.requestList.length; i++){
+        requestList.push(
+          this.props.requestList[i].id
+        )
+      }
+    }
+
     const { initLoading, loading, list } = this.state;
     const loadMore =
        !initLoading && !loading ? (
@@ -109,6 +157,8 @@ class SuggestedFriends extends React.Component {
 
         </div>
       ) : null;
+
+    console.log(following, requestList)
 
     return (
 
@@ -131,17 +181,51 @@ class SuggestedFriends extends React.Component {
               <List.Item.Meta
 
                 avatar={
-                  <Avatar src={item.profile_picture} />
+                  <Avatar
+                    style = {{
+                      cursor: "pointer"
+                    }}
+                    onClick = {() => this.profileDirect(item.username)}
+                     src={item.profile_picture} />
                 }
-                title={<a href={"http://localhost:3000/explore/"+item.username}> {item.first_name} {item.last_name}</a>}
+                title={<span
+                  style = {{cursor: "pointer"}}
+                   onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
                 description={
                   <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
                   }
               />
 
+            {
+              following.includes(item.id) ?
+
+              <Button
+                // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
+                style={{fontSize:'14px'}} size="small" shape="round" type="primary">
+                Following
+              </Button>
+
+              :
+
+              requestList.includes(item.id) ?
+
+              <Button
+                // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
+                style={{fontSize:'14px'}} size="small" shape="round" type="primary">
+                Requested
+              </Button>
+
+              :
+
+              <Button
+                // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
+                style={{fontSize:'14px'}} size="small" shape="round" type="primary">
+                Follow
+              </Button>
+
+            }
 
 
-            <Button style={{fontSize:'14px'}} size="small" shape="round" type="primary">Follow</Button>
 
               </Skeleton>
             </List.Item>

@@ -225,7 +225,9 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
 		currentUser: state.auth.username,
-		currentProfile: state.explore.profile
+		currentProfile: state.explore.profile,
+		following: state.auth.following,
+		requestList: state.auth.requestList
   }
 }
 const mapDispatchToProps = dispatch => {

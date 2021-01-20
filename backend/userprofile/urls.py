@@ -27,14 +27,17 @@ urlpatterns = [
 	path('explore', views.ExploreView.as_view()),
 	path('suggestedFriends', views.NewsFeedSuggestedFriends.as_view()),
 	path('everyoneSuggested', views.AllSuggested.as_view()),
+
+	# DELETE LATER
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),
 	path('friend-request/accept/<slug:username>', views.AcceptFriendRequest.as_view(), name='accept_request'),
 	path('friend-request/delete/<slug:username>', views.DeleteFriendRequest.as_view(), name='delete_request'),
 	path('current-user/friends', views.FriendRequestsToUser.as_view(), name='friend_request_list'),
-
 	path('remove-friend/<slug:username>', views.DeleteFriends.as_view(), name='delete_friend'),
 	path('friendnotificationrequest', views.FriendNotification.as_view(), name='userprofile-friend-notifications'),
+
+
 	path('add-like/<slug:id>/', views.AddOneLikeToPost.as_view(), name='curr post'),
 	path('notifications/delete/<slug:id>', views.onDeleteNotification.as_view(), name='delete notification'),
 
@@ -71,4 +74,6 @@ urlpatterns = [
 	path('privateChange', views.PrivateChangeView.as_view(), name = "change_private"),
 	# This will be for accepting follow and seeing private
 	path('approveFollow', views.onAcceptFollow.as_view(), name = "approve_follow")
+
+
 ]
