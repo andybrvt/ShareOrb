@@ -65,14 +65,7 @@ class WeekCalendar extends React.Component{
   }
 
 
-  declineEventMessage = () => {
-    message.success('You have declined the event' , 2);
-  };
-
-  acceptEventMessage = () => {
-    message.success('You have accepted the event' , 2);
-  };
-
+  
 
   onDayHourClick = (positionX, positionY) => {
 

@@ -48,6 +48,13 @@ class CalendarPopOver extends React.Component{
       activeX: null,
       activeY: null,
     }
+    declineEventMessage = () => {
+      message.success('You have declined the event' , 2);
+    };
+
+    acceptEventMessage = () => {
+      message.success('You have accepted the event' , 2);
+    };
 
     openNotification = placement => {
     notification.info({
