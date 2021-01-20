@@ -74,6 +74,7 @@ urlpatterns = [
 	path('privateChange', views.PrivateChangeView.as_view(), name = "change_private"),
 	# This will be for accepting follow and seeing private
 	path('approveFollow', views.onAcceptFollow.as_view(), name = "approve_follow"),
-	path('onFollow', views.onFollowView.as_view(), name = "follow_user")
+	path('onFollow', views.onFollowView.as_view(), name = "follow_user"),
+	path('onUnfollow', views.onUnfollowView.as_view(), name = "unfollow_user")
 
 ]

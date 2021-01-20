@@ -100,6 +100,10 @@ class NotificationConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, username = data['recipient'])
             actor = get_object_or_404(User, username = data['actor'])
             notification = CustomNotification.objects.create(type = 'follow_notification', recipient = recipient, actor = actor, verb = 'followed you')
+
+            # Gotta update this on the auth for the other person
+        
+
         if data['command'] == 'send_follow_request_notification': #this is for follow for private
             # This one is a bit more special because it will be used to update the
             # other person following list or request list

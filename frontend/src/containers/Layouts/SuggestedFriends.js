@@ -121,15 +121,39 @@ class SuggestedFriends extends React.Component {
     } else {
       // This will be for when it is not a private event
 
-      authAxios.post("http://127.0.0.1:8000/userprofile/onFollow", {
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/onFollow`, {
         follower: follower,
         following: following
       })
       .then(res => {
         console.log(res.data)
         this.props.updateFollowing(res.data)
+        // Send a notification to the other person here
+
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: follower,
+          recipient: following
+        }
+
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
       })
     }
+  }
+
+  onUnfollow = (follower, following) => {
+    // This will unfollow the person
+
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/onUnfollow`, {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      console.log(res.data)
+      this.props.updateFollowing(res.data)
+    })
+
   }
 
 
@@ -211,7 +235,7 @@ class SuggestedFriends extends React.Component {
               following.includes(item.id) ?
 
               <Button
-                // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
+                onClick = {() => this.onUnfollow(this.props.id, item.id ) }
                 style={{fontSize:'14px'}} size="small" shape="round" type="primary">
                 Following
               </Button>

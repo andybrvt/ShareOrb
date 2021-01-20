@@ -608,3 +608,23 @@ class onFollowView(APIView):
 
 
         return Response(followingList)
+
+class onUnfollowView(APIView):
+    # This function will be used for deleting a follower through
+    # view. Pretty much the same as the one in consumer
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        follower = get_object_or_404(models.User, id = request.data['follower'])
+        following = get_object_or_404(models.User, id = request.data['following'])
+        followerObj = models.UserFollowing.objects.filter(person_following = follower, person_getting_followers = following)
+        followerObj.delete()
+
+
+        curUser = get_object_or_404(models.User, id = request.data['follower'])
+        hostObj = serializers.UserSerializer(curUser).data
+
+
+        followingList = hostObj['get_following']
+
+        return Response(followingList)
