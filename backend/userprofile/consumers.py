@@ -97,12 +97,21 @@ class NotificationConsumer(JsonWebsocketConsumer):
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = 'comment_notification', recipient = recipient, actor = actor, verb = 'commented on your post')
         if data['command'] == 'send_follow_notification': #this is just for following
-            recipient = get_object_or_404(User, username = data['recipient'])
-            actor = get_object_or_404(User, username = data['actor'])
+            recipient = get_object_or_404(User, id = data['recipient'])
+            actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = 'follow_notification', recipient = recipient, actor = actor, verb = 'followed you')
+            serializer = NotificationSerializer(notification)
 
+            serializedFollower = FollowUserSerializer(actor).data
             # Gotta update this on the auth for the other person
-        
+
+            content = {
+                "command": 'new_notification',
+                "notification": json.dumps(serializer.data),
+                "followerObj": json.dumps(serializedFollower),
+                "recipient":recipient.username
+            }
+            return self.send_new_notification(content)
 
         if data['command'] == 'send_follow_request_notification': #this is for follow for private
             # This one is a bit more special because it will be used to update the

@@ -388,3 +388,11 @@ export const newUpRequestList = (requestList) => {
   }
 
 }
+
+export const authAddFollower = (followerObj) => {
+  // This is to update the follower when there is no private involed
+  return {
+    type: actionTypes.AUTH_ADD_FOLLOWER,
+    followerObj: followerObj
+  }
+}
