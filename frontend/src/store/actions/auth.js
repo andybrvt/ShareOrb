@@ -396,3 +396,12 @@ export const authAddFollower = (followerObj) => {
     followerObj: followerObj
   }
 }
+
+export const authUpdateFollowers = (followerList) =>{
+  // This function will be used whne someone unfollows you, pretty much
+  // delete follower
+  return {
+    type: actionTypes.AUTH_UPDATE_FOLLOWERS,
+    followerList: followerList
+  }
+}

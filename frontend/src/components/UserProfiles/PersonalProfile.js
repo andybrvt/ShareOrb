@@ -345,7 +345,7 @@ class PersonalProfile extends React.Component{
 
       // Pretty much this will unsend the notification for follow and stuff
       const notificationObject = {
-        command: 'unsend_follow_notification',
+        command: 'unsend_follow_request_notification',
         actor: this.props.currentId,
         recipient: this.props.profile.id
       }
@@ -389,7 +389,7 @@ class PersonalProfile extends React.Component{
 
         // Now delete the notification
         const notificationObj = {
-          command: 'unsend_follow_notification',
+          command: 'unsend_follow_request_notification',
           actor: follower,
           recipient: following
         }

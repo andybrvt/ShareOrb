@@ -136,6 +136,12 @@ const authAddFollower = (state, action) => {
   })
 }
 
+const authUpdateFollowers = (state, action) => {
+  return updateObject(state, {
+    followers: action.followerList
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -166,6 +172,8 @@ const reducer = (state = initialState, action) => {
       return updateFollowing(state, action);
     case actionTypes.AUTH_ADD_FOLLOWER:
       return authAddFollower(state, action);
+    case actionTypes.AUTH_UPDATE_FOLLOWERS:
+      return authUpdateFollowers(state, action);
     default:
       return state;
   }

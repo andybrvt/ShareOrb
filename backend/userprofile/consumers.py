@@ -324,7 +324,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
         # notification. These will be used most for notifications that are more
         # important that has actions associated with themself.
 
-        if data['command'] == 'unsend_follow_notification':
+        if data['command'] == 'unsend_follow_request_notification':
             actor = get_object_or_404(User, id = data['actor'])
             recipient = get_object_or_404(User, id = data['recipient'])
             notification = CustomNotification.objects.filter(type = "follow_request_notification", recipient = recipient, actor = actor, verb = "requested to follow you")
@@ -346,6 +346,30 @@ class NotificationConsumer(JsonWebsocketConsumer):
             }
             self.send_new_notification(content)
 
+        if data['command'] == 'unsend_follow_notification':
+            # This function is used to delete all teh follow notification when
+            # someone unfollows you
+            actor = get_object_or_404(User, id = data['actor'])
+            recipient = get_object_or_404(User, id = data['recipient'])
+            notification = CustomNotification.objects.filter(type = "follow_notification", recipient = recipient, actor = actor, verb = 'followed you')
+            notification.delete()
+
+            # delete notification then grab the user notification to update it in
+            # the front end
+            notifications = CustomNotification.objects.select_related('actor').filter (recipient= data['recipient']).order_by('-timestamp')
+            serializer = NotificationSerializer(notifications, many = True)
+
+
+            serializedRecipientFollowers = UserSerializer(recipient).data['get_followers']
+
+            content = {
+                'command': 'notifications',
+                'notifications': json.dumps(serializer.data),
+                'followersList': json.dumps(serializedRecipientFollowers),
+                'recipient': recipient.username
+            }
+
+            self.send_new_notification(content)
 
 #So this one is to delete the friend request notificaton, so since recipeint for this person
 # is the person receive the friend request but once recipient accpets it then they are the actor
@@ -553,10 +577,12 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_social_cal_notification(data)
         if data['command'] == 'send_pending_social_pics':
             self.send_social_cal_notification(data)
-        if data['command'] == 'unsend_follow_notification':
+        if data['command'] == 'unsend_follow_request_notification':
             self.unsend_notification(data)
         if data['command'] == 'accept_follow_request':
             self.send_notification(data)
+        if data['command'] == 'unsend_follow_notification':
+            self.unsend_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE

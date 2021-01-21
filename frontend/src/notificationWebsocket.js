@@ -84,6 +84,14 @@ class WebSocketNotifications {
 
           this.callbacks['update_follow_request'](requestList)
         }
+        if(parsedData.followersList){
+          const followersList = JSON.parse(parsedData.followersList)
+
+          console.log(followersList)
+
+          // Add call back here
+          this.callbacks['auth_update_followers'](followersList)
+        }
 
 
     } else if (command === 'new_notification') {
@@ -120,14 +128,16 @@ class WebSocketNotifications {
     newNotificationCallback,
     addNewFollowRequest,
     updateFollowRequest,
-    authAddFollower
+    authAddFollower,
+    authUpdateFollowers
   ){
 
     this.callbacks['notifications'] = notificationsCallback;
     this.callbacks['new_notification'] = newNotificationCallback;
     this.callbacks['new_follow_request'] = addNewFollowRequest;
     this.callbacks['update_follow_request'] = updateFollowRequest;
-    this.callbacks['auth_add_follower'] = authAddFollower
+    this.callbacks['auth_add_follower'] = authAddFollower;
+    this.callbacks['auth_update_followers'] = authUpdateFollowers;
   }
   // this will send the messages to the backend
   // it will pull all the notifications taht currently exist

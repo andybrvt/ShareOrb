@@ -340,7 +340,7 @@ class PersonalProfileEventList extends React.Component{
 
         // Now delete the notification
         const notificationObj = {
-          command: 'unsend_follow_notification',
+          command: 'unsend_follow_request_notification',
           actor: follower,
           recipient: following
         }
