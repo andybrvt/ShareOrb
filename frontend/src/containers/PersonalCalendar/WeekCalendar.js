@@ -185,7 +185,7 @@ class WeekCalendar extends React.Component{
     };
 
     return (
-      <div className = 'weekDays '>
+      <div className = 'weekDays'>
       {days}
       </div>
       )
