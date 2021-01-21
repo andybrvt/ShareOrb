@@ -21,11 +21,7 @@
   padding: 0;
   /* background-color: blue; */
 }
-.calendarContainer .miniCalContainer {
-  position:relative;
-  width: 15%;
-  /* background-color: green; */
-}
+
 .weekCalendar {
   position: relative;
   width: 100%;
@@ -70,8 +66,9 @@
 
 .calendarDropDownCSS{
   position: relative;
-  left:40%;
-  padding-top: 3px;
+  left:35%;
+  padding-top: 10px;
+  padding-bottom: 3px;
   /* background-color: green; */
   font-size: 14px;
 }
@@ -112,7 +109,7 @@
 /* This will be specific to the week and day calendar */
 .scrollCalContent{
   overflow:hidden;
-  width: 100%;
+  width: 97%;
   height: 470px;
   /* background-color: red; */
 }
@@ -122,7 +119,7 @@
   overflow: auto;
   /* background-color: red; */
   /* overflow-y: hidden; */
-  width: 101%;
+  width: 105%;
   height: 460px;
   border-top: 2px solid;
   border-color: darkgrey;
@@ -846,7 +843,12 @@ controls all colors and font weight */
   transform-origin: bottom;
 }
 
-
+.calendarContainer .miniCalContainer {
+  position:relative;
+  width: 15%;
+  right:1%;
+  /* background-color: green; */
+}
 
 .miniCalContainer .miniCalendar {
   /* background-color: red; */
@@ -856,57 +858,31 @@ controls all colors and font weight */
   position: relative;
   top: 50px;
   /* height: 300px; */
-  width: 300px;
-  /* color: white; */
-}
 
-.miniCalContainer .addEventButton {
-  border: none;
-  color: white;
-  /* background-image: linear-gradient(to bottom right, #43cea2 , #185a9d); */
-  box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-  position: relative;
-
-  top: 20px;
-  height: 50px;
-  font-size: 20px;
-}
-
-.miniCalContainer .timeLayerCon{
-  background-color: gainsboro;
   width: 200px;
-  height:350px;
-  position: relative;
-  top: 75px;
-  left: 40px;
-}
-
-
-
-
-.miniCalContainer .miniEventSyncButton {
-  /* background-color: red; */
-  position: relative;
-  top: 50px;
-  left:10%;
-  width: 175px;
-  font-size: 14px;
-  margin-bottom: 50px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
+  /* color: white; */
 }
 
 .miniCalContainer .weekCreateEvent {
   /* background-color: red; */
   position: relative;
-  top: 25px;
-  left:10%;
+  top: 50px;
   width: 175px;
   font-size: 14px;
   margin-bottom: 50px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
 }
+
+.miniCalContainer .miniEventSyncButton {
+  /* background-color: red; */
+  position: relative;
+  top: 75px;
+  width: 175px;
+  font-size: 14px;
+  margin-bottom: 50px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
 
 
 

@@ -120,7 +120,7 @@ class CalendarViewDropDown extends React.Component{
         <Select
           onChange = {this.onCalTypeChange}
           value = {this.props.calType}
-          style= {{width: "100px"}}
+          style= {{width: "150px"}}
         >
           <Option value = 'week'> <b>Week</b> </Option>
           <Option value = "day"> <b>Day</b> </Option>
