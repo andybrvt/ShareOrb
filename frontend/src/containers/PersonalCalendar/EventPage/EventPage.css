@@ -1,14 +1,41 @@
 /* CSS for the whole container */
+
+
+
+/* CSS for the eventInfo side of the event page */
+.eventInfoContainer{
+  position: relative;
+  width: 80%;
+  height: 100%;
+  overflow: auto;
+  background: green;
+  /* align-items: center; */
+}
+
+/* adjust height of scrollable */
+.eventInfoContainer .eventInfoView{
+
+  /* width: 70%; */
+  height: 100%;
+  margin-left: -200px;
+  /* position: relative;
+  left: 50%;
+  transform: translateX(-50%); */
+}
+
+
+
+
+
 .eventPageContainer{
   background-color: white;
   display: flex;
-  width: 1865px;
+  width: 100vw;
   /* padding: 30px; */
 
   height: 91.5vh;
   position: absolute;
   left: 50%;
-  top:31%;
   /* bottom: 5px; */
   transform: translateX(-48%);
   font-family: 'Segoe UI Regular';
@@ -172,27 +199,6 @@
 
 
 
-/* CSS for the eventInfo side of the event page */
-.eventInfoContainer{
-
-  width: 67%;
-  height: 100%;
-  overflow: auto;
-  /* background: green; */
-  margin-left: -25px;
-  /* align-items: center; */
-}
-
-/* adjust height of scrollable */
-.eventInfoContainer .eventInfoView{
-
-  /* width: 70%; */
-  height: 100%;
-  margin-left: -200px;
-  /* position: relative;
-  left: 50%;
-  transform: translateX(-50%); */
-}
 /* image padding */
 .eventInfoContainer .eventInfoView .topSectContainier{
   background-color: #f5f5f5;
