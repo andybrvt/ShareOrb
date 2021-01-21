@@ -57,6 +57,7 @@ class WeekCalendar extends React.Component{
     events: [],
     activeX: null,
     activeY: null,
+    showAddEventModal: false,
   }
   scrollToMyRef = (ref) => {
     // if(ref){
@@ -134,18 +135,18 @@ class WeekCalendar extends React.Component{
     const endWeek = dateFns.endOfWeek(this.props.currentDate)
     return(
 
-      <div className = 'header row'>
-        <div className = 'col col-start'>
+      <div className = 'header'>
+        <div className = 'arrowLeft'>
           <div className = 'icon' onClick = {this.prevWeek}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
-        <div className = 'col'>
+        <div className = 'midText'>
           <span>
             {dateFns.format(startWeek, dateFormat)}
           </span>
         </div>
-        <div className = 'col col-end' onClick = {this.nextWeek}>
+        <div className = 'arrowRight' onClick = {this.nextWeek}>
           <div className = 'icon'>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
           </div>

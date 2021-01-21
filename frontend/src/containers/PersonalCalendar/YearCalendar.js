@@ -45,19 +45,19 @@ class YearCalendar extends React.Component{
     const dateFormat = 'yyyy'
 
     return(
-      <div className = "header row">
-        <div className = "col col-start">
+      <div className = "header">
+        <div className = "arrowLeft">
           <div className = "icon" onClick = {this.prevYear} >
           <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
-        <div className = "col">
+        <div className = "midText">
           <span
           >
             {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
-        <div className = 'col col-end' onClick = {this.nextYear}>
+        <div className = 'arrowRight' onClick = {this.nextYear}>
           <div className = 'icon'>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
           </div>

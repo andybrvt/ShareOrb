@@ -87,18 +87,18 @@ class DayCalendar extends React.Component{
 // render the date on top
   renderHeader(){
     return (
-      <div className = 'header row'>
-        <div className = 'col col-start'>
+      <div className = 'header'>
+        <div className = 'arrowLeft'>
           <div className = "icon" onClick = {this.prevDay}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
-        <div className = "col col-center">
+        <div className = "midText">
           <span>
             {dateFns.format(this.props.currentDate, 'iiii MMMM dd, yyyy')}
           </span>
         </div>
-        <div className = "col col-end" onClick = {this.nextDay}>
+        <div className = "arrowRight" onClick = {this.nextDay}>
           <div className = "icon">
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
           </div>
@@ -279,15 +279,16 @@ class DayCalendar extends React.Component{
 
       const cloneToDoStuff = toDoStuff
       console.log(cloneToDoStuff)
-      if (toDoStuff.length > 0){
+      if (cloneToDoStuff.length > 0){
         hours.push(
             toDoStuff.map(item => (
 
               <CalendarPopOver
                 item={item}
-                date={selectedDate}
-                dayIndex={hourIndex}
+                date={hour}
+                dayIndex={0}
                 cloneHourIndex={cloneHourIndex}
+                cloneDay={startHourDay}
                 {...this.props}
               />
 
@@ -514,6 +515,10 @@ class DayCalendar extends React.Component{
     this.props.history.push('/personalcal/event/'+eventId)
   }
 
+  onAddEvent = () => {
+    this.props.openDrawer()
+  }
+
   render() {
 
     console.log(this.props)
@@ -527,12 +532,10 @@ class DayCalendar extends React.Component{
         />
 
         <div className ='mainCalContainer'>
-          <EventModal visible={this.props.showDrawer} onClose={this.props.closeDrawer} {...this.props} />
             <div className = 'weekCalendar'>
               <div className = "topHeaderCal">
                 {this.renderHeader()}
                 <CalendarViewDropDown
-                  class="CalendarViewCSS"
                   calType = "day"
                   curDate = {this.props.currentDate}
                   history = {this.props.history}
@@ -552,17 +555,15 @@ class DayCalendar extends React.Component{
               </div>
             </div>
 
-            <EditEventPopUp
-            isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
-            />
+            <EventModal visible = {this.props.showDrawer} onClose = {this.props.closeDrawer} {... this.props} />
+
           </div>
 
 
           <div className = 'miniCalContainer'>
             <Button
               type="primary"
-              className = 'miniEventSyncButton'
+              className = 'weekCreateEvent'
               onClick = {this.onAddEvent}>
               Create Event
             </Button>

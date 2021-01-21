@@ -214,7 +214,7 @@ class CalendarPopOver extends React.Component{
       console.log(ratio)
 
       return ratio
-      // return '34//48'
+      // return '1/2'
     }
 
 
@@ -572,7 +572,7 @@ class CalendarPopOver extends React.Component{
 
 
                   <span style={{marginLeft:'10px'}}  className="pointerEvent">
-                    <span sclassName = 'pointerEvent' > {item.title.substring(0,25)} </span>
+                    <span className = 'pointerEvent' > {item.title.substring(0,25)} </span>
                     <br/>
                     <span style={{marginLeft:'10px'}}  className = 'pointerEvent'>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}

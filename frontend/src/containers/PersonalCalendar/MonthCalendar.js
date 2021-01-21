@@ -86,18 +86,18 @@ class PersonalCalendar extends React.Component{
     // for formatting using moment or whatever you do
     // .format('give a date here', what kind of formatting here)
     return (
-      <div className= "header row">
-        <div className = "col col-start">
+      <div className= "header">
+        <div className = "arrowLeft">
           <div className = "icon" onClick ={this.prevMonth}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
-        <div className = "col col-center">
+        <div className = "midText">
           <span>
            {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
-        <div className= "col col-end" onClick = {this.nextMonth}>
+        <div className= "arrowRight" onClick = {this.nextMonth}>
           <div className = "icon">
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
            </div>

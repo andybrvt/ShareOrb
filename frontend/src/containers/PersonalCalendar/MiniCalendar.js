@@ -183,17 +183,13 @@ class MiniCalendar extends React.Component{
   render() {
     // You can add in {this.renderSide()} any time
     return(
-      <div className = "miniflex-container">
-        <div className = 'miniSidecol'>
 
-        </div>
         <div className = 'miniCalendar'>
           {this.renderHeader()}
           {this.renderDays()}
           {this.renderCells()}
 
         </div>
-      </div>
     )
   }
 
