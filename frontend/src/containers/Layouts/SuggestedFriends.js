@@ -152,6 +152,15 @@ class SuggestedFriends extends React.Component {
     .then(res => {
       console.log(res.data)
       this.props.updateFollowing(res.data)
+
+      // This will unsend the follow notification if the person decides to unfollow
+      const notificationObject = {
+        command: 'unsend_follow_notification',
+        actor: follower,
+        recipient: following
+      }
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
     })
 
   }

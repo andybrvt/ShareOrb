@@ -49,7 +49,9 @@ class App extends Component {
       this.props.setNotifications.bind(this),
       this.props.newNotification.bind(this),
       this.props.updateRequestList.bind(this),
-      this.props.newUpRequestList.bind(this)
+      this.props.newUpRequestList.bind(this),
+      this.props.authAddFollower.bind(this),
+      this.props.authUpdateFollowers.bind(this)
     )
     // For the calendarEventWebosocket you just need to have one
     // action (the addEvent) because the data for the each person is
@@ -320,6 +322,9 @@ const mapDispatchToProps = dispatch => {
 
     updateRequestList: newRequest => dispatch(authActions.updateRequestList(newRequest)),
     newUpRequestList: requestList => dispatch(authActions.newUpRequestList(requestList)),
+    authAddFollower: followerObj => dispatch(authActions.authAddFollower(followerObj)),
+    authUpdateFollowers: followerList => dispatch(authActions.authUpdateFollowers(followerList)),
+
     // DELETE THIS LATER
     addComment: comment => dispatch(newsfeedActions.addPostComment(comment)),
 

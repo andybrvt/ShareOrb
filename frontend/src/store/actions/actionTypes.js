@@ -7,8 +7,13 @@ export const AUTH_LOGOUT ='AUTH_LOGOUT';
 export const ADD_CREDENTIALS='ADD_CREDENTIALS';
 export const UPDATE_CREDENTIALS = "UPDATE_CREDENTIALS";
 export const CHANGE_PRIVATE = "CHANGE_PRIVATE";
+// This will be used to update the followers and the request
 export const UPDATE_FOLLOWERS = "UPDATE_FOLLOWERS";
 export const UPDATE_FOLLOWING = "UPDATE_FOLLOWING";
+// This function will be used to add a follower to the person gettign followed
+export const AUTH_ADD_FOLLOWER = "AUTH_ADD_FOLLOWER";
+// This function will be used to update just the follower list
+export const AUTH_UPDATE_FOLLOWERS = "AUTH_UPDATE_FOLLOWERS";
 // the update request list will add one new ojbect to the request list
 export const UPDATE_REQUEST_LIST = "UPDATE_REQUEST_LIST";
 // the new up request list will be used for when you remvoe a user

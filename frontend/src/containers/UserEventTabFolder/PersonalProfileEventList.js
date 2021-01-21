@@ -286,8 +286,8 @@ class PersonalProfileEventList extends React.Component{
         // The follower is you who is sending the reqwuest and the following is the other person
         const notificationObject = {
           command: 'send_follow_notification',
-          actor: this.props.currentUser,
-          recipient: this.props.profile.username
+          actor: this.props.currentId,
+          recipient: this.props.profile.id
         }
 
         NotificationWebSocketInstance.sendNotification(notificationObject)
@@ -340,7 +340,7 @@ class PersonalProfileEventList extends React.Component{
 
         // Now delete the notification
         const notificationObj = {
-          command: 'unsend_follow_notification',
+          command: 'unsend_follow_request_notification',
           actor: follower,
           recipient: following
         }

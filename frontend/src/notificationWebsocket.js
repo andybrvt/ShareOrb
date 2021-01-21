@@ -67,9 +67,10 @@ class WebSocketNotifications {
 // The command notification is sent from the friends.consumer.fetch_messages
 // The command new_notification comes from the group send on the friends.viwes.sendFriendRequest
   socketNewNotification(data) {
+    console.log(data)
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
-    console.log(parsedData.command)
+    console.log(parsedData)
 
     if (command === 'notifications') {
         const notifications = JSON.parse(parsedData.notifications);
@@ -82,6 +83,14 @@ class WebSocketNotifications {
           // Add call back here
 
           this.callbacks['update_follow_request'](requestList)
+        }
+        if(parsedData.followersList){
+          const followersList = JSON.parse(parsedData.followersList)
+
+          console.log(followersList)
+
+          // Add call back here
+          this.callbacks['auth_update_followers'](followersList)
         }
 
 
@@ -99,6 +108,17 @@ class WebSocketNotifications {
           console.log(newRequest)
           this.callbacks['new_follow_request'](newRequest)
         }
+        if(notification.type === "follow_notification"){
+
+          console.log(parsedData.followerObj)
+          const newFollower = JSON.parse(parsedData.followerObj)
+
+          console.log(newFollower)
+          // START HERE AND TRYING GETTING AUTH TO UPDATE
+
+          // add call back here
+          this.callbacks['auth_add_follower'](newFollower)
+        }
         // createNotification(JSON.parse(data['notification']));
     }
   }
@@ -107,13 +127,17 @@ class WebSocketNotifications {
     notificationsCallback,
     newNotificationCallback,
     addNewFollowRequest,
-    updateFollowRequest
+    updateFollowRequest,
+    authAddFollower,
+    authUpdateFollowers
   ){
 
     this.callbacks['notifications'] = notificationsCallback;
     this.callbacks['new_notification'] = newNotificationCallback;
     this.callbacks['new_follow_request'] = addNewFollowRequest;
-    this.callbacks['update_follow_request'] = updateFollowRequest
+    this.callbacks['update_follow_request'] = updateFollowRequest;
+    this.callbacks['auth_add_follower'] = authAddFollower;
+    this.callbacks['auth_update_followers'] = authUpdateFollowers;
   }
   // this will send the messages to the backend
   // it will pull all the notifications taht currently exist
