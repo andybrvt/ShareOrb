@@ -155,7 +155,6 @@ class CalendarPopOver extends React.Component{
          }
       }
 
-
     }
 
     hourEventIndex = (start_time, end_time, start_index ) => {

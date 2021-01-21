@@ -19,7 +19,7 @@
   width: 85%;
   position: relative;
   padding: 0;
-  /* background-color: blue; */
+  background-color: blue;
 }
 
 .weekCalendar {
@@ -109,7 +109,7 @@
 /* This will be specific to the week and day calendar */
 .scrollCalContent{
   overflow:hidden;
-  width: 97%;
+  width: 100%;
   height: 470px;
   /* background-color: red; */
 }
@@ -119,7 +119,7 @@
   overflow: auto;
   /* background-color: red; */
   /* overflow-y: hidden; */
-  width: 105%;
+  width: 101%;
   height: 460px;
   border-top: 2px solid;
   border-color: darkgrey;
@@ -222,10 +222,10 @@
   /* border-bottom: 1px solid var(--border-color); */
   /* grid-auto-flow: dense; */
   width: 100%;
-  grid-template-columns: repeat(7, 13.7%);
+  grid-template-columns: repeat(7, 13.8%);
   grid-template-rows: repeat(48, 20.3px);
   /* background-color: red; */
-  grid-column-gap: 0.7%;
+  grid-column-gap: 0.55%;
   grid-row-gap: 2.8px;
   position:absolute;
   top: 0;
