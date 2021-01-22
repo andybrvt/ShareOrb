@@ -367,8 +367,11 @@ class AllSuggested(generics.ListAPIView):
     def get_queryset(self):
         list = []
         temp=(self.request.user.get_following())
+        request = (self.request.user.get_sent_follow_request())
         for i in temp:
             print(i)
+            list.append(i)
+        for i in request:
             list.append(i)
             # print(i)
         list.append(self.request.user)
@@ -651,4 +654,24 @@ class onSentRequestView(APIView):
 
         sentRequestList = hostObj['get_sent_follow_request']
 
+        return Response(sentRequestList)
+
+class onUnsendRequestView(APIView):
+    # Pretty much the opposite of the onSentRequestView
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        follower = get_object_or_404(models.User, id = request.data['follower'])
+        following = get_object_or_404(models.User, id = request.data['following'])
+
+        requestObj = models.UserFollowingRequest.objects.filter(
+            send_request = follower,
+            accept_request = following
+        )
+        requestObj.delete()
+
+        curUser = get_object_or_404(models.User, id = request.data['follower'])
+        hostObj = serializers.UserSerializer(curUser).data
+
+        sentRequestList = hostObj['get_sent_follow_request']
         return Response(sentRequestList)

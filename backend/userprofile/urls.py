@@ -76,5 +76,6 @@ urlpatterns = [
 	path('approveFollow', views.onAcceptFollow.as_view(), name = "approve_follow"),
 	path('onFollow', views.onFollowView.as_view(), name = "follow_user"),
 	path('onUnfollow', views.onUnfollowView.as_view(), name = "unfollow_user"),
-	path('sendFollowRequest', views.onSentRequestView.as_view(), name = 'send_follow_request')
+	path('sendFollowRequest', views.onSentRequestView.as_view(), name = 'send_follow_request'),
+	path('unsendFollowRequest', views.onUnsendRequestView.as_view(), name = 'unsend_follow_request')
 ]

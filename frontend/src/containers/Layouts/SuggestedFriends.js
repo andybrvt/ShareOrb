@@ -120,6 +120,8 @@ class SuggestedFriends extends React.Component {
         // and update their auth too as well
         this.props.updateSentRequestList(res.data)
 
+        // ADD THE NOTIFICATIONI HERE TO UPDATE THE FOLLOWING AUTH
+
 
       })
       // const notificationObject = {
@@ -179,6 +181,20 @@ class SuggestedFriends extends React.Component {
 
     })
 
+  }
+
+  onUnsendRequest = (follower, following) => {
+    // axios then notification after wards
+    authAxios.post (`${global.API_ENDPOINT}/userprofile/unsendFollowRequest`, {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      this.props.updateSentRequestList(res.data)
+
+
+      // update notification here 
+    })
   }
 
 
@@ -278,7 +294,7 @@ class SuggestedFriends extends React.Component {
               sentRequestList.includes(item.id) ?
 
               <Button
-                // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
+                onClick = {() => this.onUnsendRequest(this.props.id, item.id ) }
                 style={{fontSize:'14px'}} size="small" shape="round" type="primary">
                 Requested
               </Button>
