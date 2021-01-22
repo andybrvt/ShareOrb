@@ -392,6 +392,7 @@ class WeekCalendar extends React.Component{
             toDoStuff.map(item =>  (
 
               <CalendarPopOver
+                orientation="right"
                 item={item}
                 date={date}
                 dayIndex={dayIndex}

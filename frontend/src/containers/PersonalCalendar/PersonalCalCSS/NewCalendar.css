@@ -220,6 +220,15 @@
 }
 
 
+.popOverSizeSolo{
+  padding:20px;
+   width:400px;
+}
+
+.popOverSizeMultiple{
+  padding:20px;
+  width:450px;
+}
 
 
 /* This is for weekcalendar specficially */
@@ -816,7 +825,6 @@ controls all colors and font weight */
 /* cell of the week */
 .weekEvent{
   color: white;
-  font-size: 15px;
   /* padding-top: 2px; */
   /* margin-bottom: 100px; */
   /* this makes events rounded but gonna take it out for now */
@@ -824,8 +832,18 @@ controls all colors and font weight */
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.12), 2px 3px 4px rgba(0, 0, 0, 0.24);
   width:100%;
   height: 100%;
-  /* grid-column: 1/7; */
   z-index: 1;
+}
+
+.eventTitle{
+  font-size: 14px;
+  margin-left: 5px;
+  white-space:nowrap;
+}
+
+.eventTimeInfo{
+  font-size: 12px;
+  margin-left: 5px;
 }
 
 .weekEventAccept{
@@ -834,12 +852,24 @@ controls all colors and font weight */
   font-size: 15px;
   /* this makes events rounded but gonna take it out for now */
   /* border-radius: 10px; */
-  padding-left: 10px;
   /* box-shadow: 0 7px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
   width:100%;
   height: 100%;
   /* grid-column: 1/7; */
   z-index: 1;
+}
+
+.weekEventAccept:before {
+  content: "";
+  position: relative;
+  top: -1px;
+  right: -1px;
+  transform:translate(50%,-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: red;
+  mix-blend-mode:darken;
 }
 
 .weekDayFlex-Container .calendar .weekBody .weekEvent:hover{

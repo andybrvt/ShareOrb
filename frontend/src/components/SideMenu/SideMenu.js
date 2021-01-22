@@ -52,7 +52,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 
-
 import { connect } from 'react-redux';
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
@@ -339,8 +338,13 @@ class SideMenu extends React.Component {
                 <div className="headersNotificationContainer">
 
                 <div
-                className = 'notificationsInner'
+                className = 'notificationsInner '
                 >
+                {/*
+                <button class="btn btn-default btn-lg btn-link">
+                  <span class="glyphicon glyphicon-comment"></span>
+                </button>
+                */}
                   <i
                     onClick = {() => this.onOpenDropDown()}
                     class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
@@ -350,6 +354,8 @@ class SideMenu extends React.Component {
 
 
                   </i>
+
+
                 </div>
                 <div >
 
@@ -372,7 +378,6 @@ class SideMenu extends React.Component {
                 */}
 
                 <div className = "headersProfileContainer">
-
                   <span class="profileHeader">
                        <Dropdown overlay={
                          <Menu style={{marginTop:'20px'}}>
@@ -401,9 +406,6 @@ class SideMenu extends React.Component {
                              </Link>
                            </Menu.Item>
                          </Menu>}>
-
-
-
 
                          <span >
                          {

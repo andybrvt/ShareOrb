@@ -78,6 +78,7 @@ class LoginForm extends React.Component {
             <div class="eventCard allStyle" style={{left:'20%',
             width:'80%', height:'50%', padding:'50px'}}>
               <div class="loginFormInnerContent">
+
                 <Form
                 name="basic"
                 initialValues={{ remember: true }}

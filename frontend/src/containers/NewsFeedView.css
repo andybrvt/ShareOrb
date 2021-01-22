@@ -90,6 +90,9 @@
 
 
 
+.intro{
+  font-weight: 400;
+}
 
 
 
@@ -107,7 +110,7 @@
   position: absolute;
   top: 50%;
   left:43%;
-  font-size: 18px;
+  font-size: 16px;
   transform: translateY(-50%);
 }
 
@@ -239,7 +242,7 @@ color: #203758;
   /* background-color: red; */
   padding-top: 10px;
   max-height: 400px;
-  font-weight: 500;
+  font-weight: 400;
   color:black;
 
   /* color:#1890ff; */
