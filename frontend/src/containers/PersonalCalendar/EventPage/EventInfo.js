@@ -539,9 +539,11 @@ class EventInfo extends React.Component{
     }
 
     return(
-      <div className = 'eventInfoContainer'>
+      <div>
 
         <div className = 'eventInfoView' >
+
+          <div class="eventTopEntire">
           <div className = 'topSectContainier'>
 
 
@@ -581,7 +583,10 @@ class EventInfo extends React.Component{
 
             }
 
-            <div className = 'eventTopSide'>
+
+          </div>
+
+          <div className = 'topSectContainierRight'>
             <div
             className = "dateCircle"
             style = {{
@@ -606,55 +611,49 @@ class EventInfo extends React.Component{
 
 
 
-        <div class="eventCard" style={{marginTop:'-25px', width:'500px',padding:'40px'}}>
-            <div
-              className = 'eventTitle'>
-              {this.capitalize(title)}
-            </div>
+            <div class="eventCard" style={{marginTop:'-25px', width:'500px',padding:'40px'}}>
+                <div
+                  className = 'eventTitle'>
+                  {this.capitalize(title)}
+                </div>
 
-            <br/>
+                <br/>
 
 
-          <div class="flex-container"
-            style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
+              <div class="flex-container"
+                style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
 
-          >
+              >
 
-            <div className = "attendees">
-              Host
+                <div className = "attendees">
+                  Host
 
-              <br/>
-              <span>
-                <Avatar
-                style={{right:'5px'}}
+                  <br/>
+                  <span>
+                    <Avatar
+                    style={{right:'5px'}}
 
-                src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
-                />
-                <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
-              </span>
-            </div>
+                    src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
+                    />
+                    <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                  </span>
+                </div>
 
-            {/*if no one going , THEN show invited else just show invited
-            <div className = "attendees flex-child">
-              <span style={{color:'black'}}> {invited.length} Invited </span>
+                {/*if no one going , THEN show invited else just show invited
+                <div className = "attendees flex-child">
+                  <span style={{color:'black'}}> {invited.length} Invited </span>
 
-              <Liking like_people={invited}/>
-            </div>
-            */}
-
+                  <Liking like_people={invited}/>
+                </div>
+                */}
+                </div>
+              </div>
             </div>
 
 
           </div>
-
-          </div>
-
-
-
-          </div>
-
-
-          <div style={{marginTop:'-75px',marginLeft:'290px', color:'black'}} class="outerContainer">
+      <div/>
+          <div style={{marginLeft:'290px', color:'black'}} class="outerContainer">
             <span
                 style={{ fontSize:'20px', width:'1100px', height:'60px',
                  display:'inline-block', marginTop:'100px', padding:'45px'}}
@@ -739,132 +738,151 @@ class EventInfo extends React.Component{
 
           </div>
 
-          <div style={{marginTop:'40px', marginLeft:'290px', color:'black'}} class="outerContainer">
 
-            <div style={{ fontSize:'20px',display:'inline-block', width:'575px' }}
-              class="aboutEvent eventCard innerContainer">
-              Event Details
-              <Divider/>
+          <div class="eventLeftContainer">
 
-              <div style={{marginTop:'20px'}} class="eventDetails">
-                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
-                Public Event
-                <br/>
+            <div class="innerLeftEvent">
+              <div style={{ fontSize:'20px',display:'inline-block', width:'450px' }}
+                class="aboutEvent eventCard innerContainer">
+                Event Details
+                <Divider/>
 
-                <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-                {date} at {start_time} - {end_time}
-                <br/>
-                <div>
+                <div style={{marginTop:'20px'}} class="eventDetails">
+                  <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
+                  Public Event
+                  <br/>
 
-                   {
-                     (repeat=="daily")?
-                     <span>
-                       <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                       Occurs every day
+                  <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+                  {date} at {start_time} - {end_time}
+                  <br/>
+                  <div>
 
-                     </span>
-                     :
-                     <div>
+                     {
+                       (repeat=="daily")?
+                       <span>
+                         <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                         Occurs every day
+
+                       </span>
+                       :
+                       <div>
 
 
-                       {
-                         (repeat=="monthly")?
-                         <span>
-                           <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                           Occurs every month
+                         {
+                           (repeat=="monthly")?
+                           <span>
+                             <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                             Occurs every month
 
-                         </span>
-                         :
-                           <div>
-                             {
-                             (repeat=="weekly")?
-                             <span>
-                               <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                               Occurs weekly
-                               {/*<span>
-                                 &nbsp;
-                               {dateFns.format(currentDay, 'iiii')}
-                                 &nbsp;
-                               </span}
-                               */
+                           </span>
+                           :
+                             <div>
+                               {
+                               (repeat=="weekly")?
+                               <span>
+                                 <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                                 Occurs weekly
+                                 {/*<span>
+                                   &nbsp;
+                                 {dateFns.format(currentDay, 'iiii')}
+                                   &nbsp;
+                                 </span}
+                                 */
+                                 }
+
+                               </span>
+                               :
+                               <span></span>
                                }
-
-                             </span>
-                             :
-                             <span></span>
-                             }
-                           </div>
+                             </div>
 
 
 
 
-                         }
+                           }
 
 
 
 
 
-                     </div>
-                   }
+                       </div>
+                     }
+                  </div>
+                  <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                  {invited.length+1} people
+                  <br/>
+
+                  <br/>
+
+
+
+
+                  <div className = "contentEvent"> {content} </div>
+
+
+
+                  </div>
+
+
+
+
                 </div>
-                <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                {invited.length+1} people
-                <br/>
-
-                <br/>
 
 
+            </div>
 
 
-                <div className = "contentEvent"> {content} </div>
+            <div class="innerRightEvent">
 
+              <div class="mapEventCard">
+                <p style={{fontSize:'20px'}}
+                  className="eventDetails"> Location </p>
+                <span>
+                  <Divider style={{marginTop:'-1px'}}/>
 
+                  <ReactBingmaps
 
-                </div>
+                    bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                    center = {[32.2226, 110.9747]}
+                    boundary = {
+                    {
+                      "search":"Fremont, CA",
+                      "option":{
+                        entityType: 'PopulatedPlace'
+                      },
+                      "polygonStyle" :{
+                        fillColor: 'rgba(161,224,255,0.4)',
+                        strokeColor: '#a495b2',
+                        strokeThickness: 2
+                      }
+                    }
+                  }
+                    >
+                  </ReactBingmaps>
 
-
+                   {/*Saving api calls don't worry about maps*/}
+                  <Divider/>
+                    <i style={{marginRight:'15px', color:'#1890ff',
+                      fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+                    <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+                      Tucson, Arizona
+                    </p>
+                </span>
 
 
               </div>
 
 
-            <div class="mapEventCard">
-              <p style={{fontSize:'20px'}}
-                className="eventDetails"> Location </p>
-              <span>
-                <Divider style={{marginTop:'-1px'}}/>
-
-                <ReactBingmaps
-
-                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                  center = {[32.2226, 110.9747]}
-                  boundary = {
-                  {
-                    "search":"Fremont, CA",
-                    "option":{
-                      entityType: 'PopulatedPlace'
-                    },
-                    "polygonStyle" :{
-                      fillColor: 'rgba(161,224,255,0.4)',
-                      strokeColor: '#a495b2',
-                      strokeThickness: 2
-                    }
-                  }
-                }
-                  >
-                </ReactBingmaps>
-
-                 {/*Saving api calls don't worry about maps*/}
-                <Divider/>
-                  <i style={{marginRight:'15px', color:'#1890ff',
-                    fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
-                  <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
-                    Tucson, Arizona
-                  </p>
-              </span>
-
-
             </div>
+
+          </div>
+
+          <div style={{marginTop:'40px', marginLeft:'100px', color:'black'}} class="innerLeftEvent">
+
+
+
+
+
 
 
 

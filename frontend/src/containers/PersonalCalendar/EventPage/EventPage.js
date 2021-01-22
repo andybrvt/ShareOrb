@@ -86,22 +86,21 @@ class EventPage extends React.Component{
 
 		return (
       <div className = 'eventPageContainer'>
-
+				<div className = 'eventInfoContainer'>
 				<EventInfo
 				info = {this.props.eventInfo}
 				userId = {this.props.id}
 				history = {this.props.history}
 				 />
-
-
-				<EventGroupChat
-				info = {this.props.eventInfo}
-				messages = {this.props.eventMessages}
-				eventId = {this.props.eventInfo.id}
-				inviteList = {this.props.eventInfo.invited}
-				 />
-
-
+		 	 	</div>
+				 <div className = 'eventGroupChatContainer'>
+					<EventGroupChat
+					info = {this.props.eventInfo}
+					messages = {this.props.eventMessages}
+					eventId = {this.props.eventInfo.id}
+					inviteList = {this.props.eventInfo.invited}
+					 />
+			 </div>
     </div>
 
 		)

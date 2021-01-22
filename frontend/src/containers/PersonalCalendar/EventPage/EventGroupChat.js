@@ -151,7 +151,7 @@ class EventGroupChat extends React.Component{
 
     { ((inviteList.length > 0)||(eventHostId==this.props.id)) ?
 
-      <div className = 'eventGroupChatContainer'>
+      <div>
 
       <div className = 'messageList'>
       <List
