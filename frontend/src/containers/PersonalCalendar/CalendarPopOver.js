@@ -155,6 +155,10 @@ class CalendarPopOver extends React.Component{
          }
       }
 
+      // return '1/8'
+
+
+
     }
 
     hourEventIndex = (start_time, end_time, start_index ) => {
@@ -213,8 +217,14 @@ class CalendarPopOver extends React.Component{
       const ratio = topIndex + '/' + bottomIndex
       console.log(ratio)
 
-      return ratio
-      // return '1/2'
+
+      if(this.props.month){
+        return ""
+      } else {
+        return ratio
+      }
+      // return ratio
+      // return '2/3'
     }
 
 
@@ -229,6 +239,13 @@ class CalendarPopOver extends React.Component{
       let cloneHourIndex=this.props.cloneHourIndex;
       let cloneDay=this.props.cloneDay;
       let orientation=this.props.orientation;
+      let month = false;
+
+
+      if(this.props.month){
+        month = this.props.month
+      }
+
       const text = "You're host"
 
       console.log(item)
@@ -575,7 +592,14 @@ class CalendarPopOver extends React.Component{
                     <span className = 'eventTitle pointerEvent' >
                       {item.title.substring(0,19)}
                     </span>
+                    {month ?
+                    <span></span>
+
+                    :
+
                     <br/>
+                    }
+
                     <span className = 'eventTimeInfo pointerEvent'>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
                       -
@@ -583,7 +607,7 @@ class CalendarPopOver extends React.Component{
 
                     </span>
                     {
-                      (item.host.username!=this.props.username)?
+                      (item.host.username!=this.props.username && month === false)?
                         <Avatar style={{float:'right', marginTop:'7px'}} size={20}
                           src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture} />
 
@@ -611,7 +635,13 @@ class CalendarPopOver extends React.Component{
 
                     <span className="pointerEvent">
                       <span className = 'eventTitle pointerEvent' > {item.title.substring(0,19) } </span>
-                      <br/>
+                        {month ?
+                        <span></span>
+
+                        :
+
+                        <br/>
+                        }
                       <span className = 'eventTimeInfo pointerEvent'>
                         {dateFns.format(new Date(item.start_time),'h:mm a')}
                         -
@@ -633,7 +663,7 @@ class CalendarPopOver extends React.Component{
                         </Avatar.Group>
                         */}
                         {
-                          (item.host.username!=this.props.username)?
+                          (item.host.username!=this.props.username && month === false)?
                             <Avatar style={{float:'right', marginTop:'7px'}} size={20}
                               src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture} />
 

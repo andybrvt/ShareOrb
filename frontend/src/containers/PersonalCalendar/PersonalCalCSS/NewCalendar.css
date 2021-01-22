@@ -14,6 +14,7 @@
   width: 82.5%;
   position: relative;
   padding: 0;
+  /* background-color: blue */
 }
 
 .weekCalendar {
@@ -340,6 +341,57 @@
 
 
 
+/* This will be month calendar specific */
+.monthCalContainer{
+  position: relative;
+  left: 3%;
+  width: 96.7%;
+  /* background-color: red; */
+  height:475px;
+  overflow: hidden;
+}
+
+.monthCalContainer .monthBody {
+  position: relative;
+  width: 101.25%;
+  border-left: 1px solid #D9D9D9;
+  border-right: 1px solid #D9D9D9;
+  overflow: auto;
+  height: 475px;
+
+}
+
+.monthCalContainer .monthBody .monthRow {
+  display: grid;
+  grid-template-columns: repeat(7, 14.17%);
+  /* grid-template-rows: repeat(6, 11.05px); */
+  grid-template-rows: repeat(6, 15px);
+  grid-auto-flow: dense;
+  grid-row-gap: 2px;
+  grid-column-gap: 1px;
+  border-bottom: 1px solid #D9D9D9;
+  /* border-right: 1px solid var(--border-color); */
+  /* background-color: red; */
+}
+
+.monthCalContainer .monthBody .monthRow .calendarNum {
+  grid-row-start: 1;
+  text-align: right;
+  /* background-color: red; */
+  border-right: 1px solid #D9D9D9;
+  height: 100px;
+  /* cursor: pointer; */
+}
+
+.monthCalContainer .monthBody .monthRow .calendarNumCur{
+  grid-row-start: 1;
+  text-align: right;
+  /* background-color: white; */
+  border-right: 1px solid #D9D9D9;
+  height: 100px;
+  border: 1px solid blue;
+}
+
 
 
 
@@ -622,10 +674,7 @@ controls all colors and font weight */
 }
 
 
-.calendar .body {
-  background-color: blue;
-  width: 1315px;
-}
+
 
 
 
@@ -1217,17 +1266,7 @@ controls all colors and font weight */
 
 /* For the sizing of the calendar, you have to fix again sometime soon
 to make it adjustable */
-.calendar .body .row {
-  display: grid;
-  grid-template-columns: repeat(7, 187px);
-  grid-template-rows: repeat(6, 25px);
-  grid-auto-flow: dense;
-  grid-row-gap: 2px;
-  grid-column-gap: 1px;
-  border-bottom: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
-  background-color: red;
-}
+
 
 .calendar .body .yearRow {
   display: grid;
@@ -1307,27 +1346,6 @@ to make it adjustable */
 .calendar .body .cell .circle:hover {
   background-color: #bbb;
 }
-
-/* This is to test for day number on each column */
-.calendar .body .row .calendarNum {
-  grid-row-start: 1;
-  text-align: right;
-  background-color: white;
-  border-right: 1px solid var(--border-color);
-  height: 160px;
-  /* cursor: pointer; */
-}
-
-.calendar .body .row .calendarNumCur{
-  grid-row-start: 1;
-  text-align: right;
-  background-color: white;
-  border-right: 1px solid var(--border-color);
-  height: 160px;
-  border: 1px solid blue;
-}
-
-
 
 .calendar .body .daycell .number {
   position: absolute;

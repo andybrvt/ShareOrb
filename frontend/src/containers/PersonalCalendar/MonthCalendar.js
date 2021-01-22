@@ -266,6 +266,10 @@ class PersonalCalendar extends React.Component{
                 <CalendarPopOver
                   item={item}
                   cloneDay={cloneDay}
+                  dayIndex = {i}
+                  date = {day}
+                  orientation = {"right"}
+                  month = {true}
                   {...this.props}/>
 
               ))
@@ -283,7 +287,7 @@ class PersonalCalendar extends React.Component{
       // once done it will push the list into the rows
       // so there will be a list of list and each list would be a week
       rows.push(
-        <div className='row' key ={day}>
+        <div className='monthRow' key ={day}>
           {days}
         </div>
       );
@@ -294,126 +298,9 @@ class PersonalCalendar extends React.Component{
     // now this will return a list of list and each week representing a week
     // with each item as the day
 
-    return <div className = "body"> {rows} </div>
+    return <div className = "monthBody"> {rows} </div>
   }
 
-  // renderCells(events) {
-  //     console.log(events)
-  //     // startOfMonth() will give you the date of the first day of the current month
-  //     // endOfMonth() will give you the date of the last day of the current month
-  //     // the const start date is to fill in the days of the week of the previous month
-  //     // similarly as the end date
-  //     const currentMonth = this.state.currentMonth;
-  //     const selectedDate = this.props.currentDate;
-  //     const monthStart = dateFns.startOfMonth(selectedDate);
-  //     const monthEnd = dateFns.endOfMonth(monthStart);
-  //     const startDate = dateFns.startOfWeek(monthStart);
-  //     const endDate = dateFns.endOfWeek(monthEnd);
-  //
-  //     // Once you have your start date and end date you want to loop through
-  //     // all the days in between
-  //     // then we have to subtract the start of the month with the startoftheweek
-  //     // if they are not the same so that they are unclickable
-  //
-  //     const dateFormat = "d";
-  //     const rows = []
-  //     let toDoStuff = []
-  //     let days = [];
-  //     // day is the startday, which starts at the first day of the week
-  //     // for the 42 block of time
-  //     let day = startDate;
-  //     let formattedDate = "";
-  //     // this loop will loop through all the days of the month
-  //     while (day <=endDate){
-  //
-  //
-  //       // we make it smaller than 7 because we still want to keep the index of the
-  //       // weekdays the same
-  //       for (let i= 0; i<7; i++){
-  //         for (let item = 0; item < events.length; item++){
-  //           // So the time we put in is the UTC time (universal time ) but when you
-  //           // put moment or new Date it gives you your time zome date so that is why you
-  //           // have to convert it
-  //           const date = new Date(events[item].start_time)
-  //           const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
-  //           if (dateFns.isSameDay(utc, day)){
-  //             toDoStuff.push(
-  //               events[item]
-  //             )
-  //           }
-  //         }
-  //         // this give the date will give the day numnber in 1-365
-  //
-  //         formattedDate = dateFns.format(day, dateFormat);
-  //         // used clone day so that it would do the selected day and not the endDay
-  //         // because the loop will end on end day and it w3il always click that day
-  //         const cloneDay = day;
-  //         // the classname in the bottom is to check if its not in the smae month
-  //         // the cell will be disabled
-  //         // It is also to check if the day is the smae as the current day
-  //         if (toDoStuff.length > 0){
-  //           days.push(
-  //             <div
-  //               className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-  //               : dateFns.isSameDay(day, currentMonth) ?
-  //             "selected": ""
-  //               }`}
-  //               key = {day}
-  //             >
-  //             <div className = 'uppertab'>
-  //               <div className = 'circle' onClick = { () =>
-  //                 this.onDateClick(cloneDay)}>
-  //                 <span className = "number">{formattedDate}</span>
-  //               </div>
-  //             </div>
-  //             <span className = "bg"> {formattedDate}</span>
-  //             <ul className = 'monthList'>
-  //               {toDoStuff.map(item => (
-  //                 <li key={item.content} className = 'monthListItem'>
-  //                   <div onClick = {() => this.onClickItem(item)}>
-  //                   <span className = ''> {dateFns.format(dateFns.addHours(new Date(item.start_time),new Date(item.start_time).getTimezoneOffset()/60),
-  //                      'HH:mm a')}</span>
-  //                   <span className = ' ' > {item.content} </span>
-  //                   </div>
-  //                 </li>
-  //               ))}
-  //             </ul>
-  //           </div>
-  //         )} else {days.push(
-  //           <div
-  //             className ={`col cell ${!dateFns.isSameMonth(day,monthStart) ? "disabled"
-  //             : dateFns.isSameDay(day, currentMonth) ?
-  //           "selected": ""
-  //             }`}
-  //             key = {day}
-  //           >
-  //           <div className = 'circle' onClick = { () =>
-  //             this.onDateClick(cloneDay)}>
-  //           <span className = "number">{formattedDate}</span>
-  //           </div>
-  //           <span className = "bg"> {formattedDate}</span>
-  //         </div>
-  //         )}
-  //       toDoStuff = []
-  //       day = dateFns.addDays(day, 1);
-  //       }
-  //       // so this will start at the start of the week and then loop through the 7 days
-  //       // once done it will push the list into the rows
-  //       // so there will be a list of list and each list would be a week
-  //       rows.push(
-  //         <div className='row' key ={day}>
-  //           {days}
-  //         </div>
-  //       );
-  //       // once the list filled with each day is filled he empties the list and
-  //       // does it again in the loop
-  //       days = []
-  //     }
-  //     // now this will return a list of list and each week representing a week
-  //     // with each item as the day
-  //
-  //     return <div className = "body"> {rows} </div>
-  //   }
 
   // so we need function to deal with cell click to change the date
   // Then you need function to show previous and next monthly
@@ -527,7 +414,7 @@ class PersonalCalendar extends React.Component{
             {this.renderDays()}
 
           </div>
-          <div className = 'calendar'>
+          <div className = 'monthCalContainer'>
             {this.renderCells(this.props.events)}
           </div>
 
@@ -536,7 +423,7 @@ class PersonalCalendar extends React.Component{
         <div className = 'miniCalContainer'>
           <Button
             type="primary"
-            className = 'miniEventSyncButton'
+            className = 'weekCreateEvent'
             onClick = {this.onAddEvent}>
             Create Event
           </Button>
