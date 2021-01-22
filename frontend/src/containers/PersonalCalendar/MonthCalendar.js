@@ -527,8 +527,6 @@ class PersonalCalendar extends React.Component{
             {this.renderDays()}
 
           </div>
-
-
           <div className = 'calendar'>
             {this.renderCells(this.props.events)}
           </div>
