@@ -265,7 +265,8 @@ class PersonalCalendar extends React.Component{
               toDoStuff.map(item => (
                 <CalendarPopOver
                   item={item}
-                  cloneDay={cloneDay} {...this.props}/>
+                  cloneDay={cloneDay}
+                  {...this.props}/>
 
               ))
         )}

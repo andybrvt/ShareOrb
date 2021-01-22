@@ -19,6 +19,7 @@ const initialState = {
   email: "",
   dob: "",
   private: false,
+  sentRequestList: [],
   requestList: []
 };
 
@@ -69,6 +70,7 @@ const addCredentials = (state, action) => {
     email: action.email,
     dob: action.dob,
     private: action.private,
+    sentRequestList: action.sentRequestList,
     requestList: action.requestList
   });
 };
@@ -142,6 +144,12 @@ const authUpdateFollowers = (state, action) => {
   })
 }
 
+const updateSentRequestList = (state, action) => {
+  return updateObject(state, {
+    sentRequestList: action.sentRequestList
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -174,6 +182,8 @@ const reducer = (state = initialState, action) => {
       return authAddFollower(state, action);
     case actionTypes.AUTH_UPDATE_FOLLOWERS:
       return authUpdateFollowers(state, action);
+    case actionTypes.UPDATE_SENT_REQUEST_LIST:
+      return updateSentRequestList(state, action);
     default:
       return state;
   }

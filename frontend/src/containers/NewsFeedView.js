@@ -227,6 +227,7 @@ const mapStateToProps = state => {
 		currentUser: state.auth.username,
 		currentProfile: state.explore.profile,
 		following: state.auth.following,
+		sentRequestList: state.auth.sentRequestList,
 		requestList: state.auth.requestList
   }
 }
@@ -234,7 +235,8 @@ const mapDispatchToProps = dispatch => {
 	// function: grab user ID and username to put into forms
   return {
     grabUserCredentials: () => dispatch(actions.grabUserCredentials()),
-		updateFollowing: (followingList) => dispatch(actions.updateFollowing(followingList))
-  }
+		updateFollowing: (followingList) => dispatch(actions.updateFollowing(followingList)),
+		updateSentRequestList: (sentRequestList) => dispatch(actions.updateSentRequestList(sentRequestList))
+	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NewsFeedView);

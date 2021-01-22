@@ -55,6 +55,7 @@ class UserSerializer(serializers.ModelSerializer):
     get_socialCal = serializers.StringRelatedField(many = True)
     get_socialEvents = serializers.StringRelatedField(many = True)
     get_allPost = serializers.StringRelatedField(many  = True)
+    get_sent_follow_request = serializers.StringRelatedField(many = True)
     get_follow_request = serializers.StringRelatedField(many = True)
 
 
@@ -79,6 +80,7 @@ class UserSerializer(serializers.ModelSerializer):
          'dob',
          'private',
          'requested',
+         'get_sent_follow_request',
          'get_follow_request'
          )
     def to_representation(self, instance):
@@ -90,6 +92,7 @@ class UserSerializer(serializers.ModelSerializer):
         postList = []
         socialEventList = []
         allPostList = []
+        sentRequestList = []
         requestList = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
@@ -98,6 +101,11 @@ class UserSerializer(serializers.ModelSerializer):
         for user in data['get_followers']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followerList.append(userPerson)
+
+        for user in data['get_sent_follow_request']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            sentRequestList.append(userPerson)
+
 
         for user in data['get_follow_request']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
@@ -128,6 +136,7 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_posts'] = postList
         data['get_socialEvents'] = socialEventList
         data['get_allPost'] = allPostList
+        data['get_sent_follow_request'] = sentRequestList
         data['get_follow_request'] = requestList
         return data
 
