@@ -199,8 +199,15 @@ class SuggestedFriends extends React.Component {
     .then(res => {
       this.props.updateSentRequestList(res.data)
 
+      const notificationObject = {
+        command: 'unsend_follow_request_notification',
+        actor: follower,
+        recipient: following
+      }
 
-      // update notification here
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
     })
   }
 
