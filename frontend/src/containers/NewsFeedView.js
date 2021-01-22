@@ -110,12 +110,12 @@ class NewsFeedView extends React.Component {
 
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="topCard">
-								<i class="far fa-edit share"></i>
+								<i class="far fa-edit share" style={{fontSize:'20px', color:'#1890ff'}}></i>
 								 <p style={{ color:'#1890ff',}} class="cardAlign"> Write a post</p>
 							</div>
 
 							<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
-								<i class="fas fa-plus share" style={{fontSize:'25px', color:'#1890ff'}}></i>
+								<i class="fas fa-plus share" style={{fontSize:'20px', color:'#1890ff'}}></i>
 								 <p style={{ color:'#1890ff'}} class="cardAlign"> Create event  </p>
 							</div>
 
@@ -126,7 +126,7 @@ class NewsFeedView extends React.Component {
 							className = "topCard"
 							 >
 								<div >
-									<i class="far fa-image share" style={{fontSize:'25px', color:'#1890ff'}}></i>
+									<i class="far fa-image share" style={{fontSize:'20px', color:'#1890ff'}}></i>
 									 <p  class="cardAlign"> View album </p>
 								</div>
 							</Link>

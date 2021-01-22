@@ -1,4 +1,10 @@
-
+/* CSS used here will be applied after bootstrap.css */
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -35px;
+  }
 .everythingContainer{
   /* background-color: pink; */
   display: flex;

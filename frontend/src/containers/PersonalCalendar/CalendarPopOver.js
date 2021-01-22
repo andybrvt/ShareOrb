@@ -228,13 +228,14 @@ class CalendarPopOver extends React.Component{
       let dayIndex=this.props.dayIndex;
       let cloneHourIndex=this.props.cloneHourIndex;
       let cloneDay=this.props.cloneDay;
+      let orientation=this.props.orientation;
       const text = "You're host"
 
       console.log(item)
 
       return (
-        <Popover placement="right"  content={
-          <div style={{padding:20, width:450}}>
+        <Popover placement={orientation}  content={
+          <div  className={ (item.invited.length==0) ? 'popOverSizeSolo' : 'popOverSizeMultiple' }>
 
               {
                 (item.invited.length==0)?
@@ -249,12 +250,12 @@ class CalendarPopOver extends React.Component{
 
             <span style={{color:'black', marginBottom:'10px'}}>
             {
-              (item.title.length>20)?
-              <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,20)}...</p>
+              (item.title.length>22)?
+              <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,22)}...</p>
 
               :
               <p style={{fontSize:'24px', display:'inline-block'}}>
-                {item.title.substring(0,20)}
+                {item.title}
               </p>
             }
 
@@ -562,25 +563,33 @@ class CalendarPopOver extends React.Component{
            ?
           <div
              key= {item.title}
-               className = "weekEvent"
-               style = {{
+             className = "weekEvent"
+             style = {{
                 gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                // gridRow: 15/17,
                 gridRow: this.hourEventIndex(item.start_time, item.end_time, cloneHourIndex),
                 backgroundColor: item.color
               }}>
 
 
-                  <span style={{marginLeft:'10px'}}  className="pointerEvent">
-                    <span className = 'pointerEvent' > {item.title.substring(0,25)} </span>
+                  <span className="pointerEvent">
+                    <span className = 'eventTitle pointerEvent' >
+                      {item.title.substring(0,19)}
+                    </span>
                     <br/>
-                    <span style={{marginLeft:'10px'}}  className = 'pointerEvent'>
+                    <span className = 'eventTimeInfo pointerEvent'>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
                       -
                       {dateFns.format(new Date(item.end_time),'h:mm a')}
 
                     </span>
+                    {
+                      (item.host.username!=this.props.username)?
+                        <Avatar style={{float:'right', marginTop:'7px'}} size={20}
+                          src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture} />
 
+                      :
+                      <div></div>
+                    }
                   </span>
 
 
@@ -588,33 +597,53 @@ class CalendarPopOver extends React.Component{
 
           :
 
-          <div
-             key= {item.title}
-              onClick = {() => this.onClickItem(item)}
-               className = "weekEventAccept testLook"
-               style = {{
-                gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                // gridRow: 15/17,
-                gridRow: this.hourEventIndex(item.start_time, item.end_time, cloneHourIndex),
-                color:'white',
-                backgroundColor: item.color,
-              }}>
+            <div
+               key= {item.title}
+                onClick = {() => this.onClickItem(item)}
+                 className = "weekEventAccept testLook"
+                 style = {{
+                  gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
+                  gridRow: this.hourEventIndex(item.start_time, item.end_time, cloneHourIndex),
+                  color:'white',
+                  backgroundColor: item.color,
+                }}>
 
 
-                  <span className="pointerEvent">
-                    <span className = 'pointerEvent' > {item.title.substring(0,25) } </span>
-                    <br/>
-                    <span className = 'pointerEvent'>
-                      {dateFns.format(new Date(item.start_time),'h:mm a')}
-                      -
-                      {dateFns.format(new Date(item.end_time),'h:mm a')}
+                    <span className="pointerEvent">
+                      <span className = 'eventTitle pointerEvent' > {item.title.substring(0,19) } </span>
+                      <br/>
+                      <span className = 'eventTimeInfo pointerEvent'>
+                        {dateFns.format(new Date(item.start_time),'h:mm a')}
+                        -
+                        {dateFns.format(new Date(item.end_time),'h:mm a')}
+
+                      </span>
 
                     </span>
 
-                  </span>
+                    <span>
+                        {/*
+                          <Avatar.Group size={20} maxCount={2} style={{float:'right'}}>
+                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                            <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
+                            <Tooltip title="Ant User" placement="top">
+                              <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                            </Tooltip>
+                            <Avatar style={{ backgroundColor: '#1890ff' }} icon={<AntDesignOutlined />} />
+                        </Avatar.Group>
+                        */}
+                        {
+                          (item.host.username!=this.props.username)?
+                            <Avatar style={{float:'right', marginTop:'7px'}} size={20}
+                              src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture} />
 
+                          :
+                          <div></div>
+                        }
+                    </span>
 
-          </div>
+              </div>
+
         }
 
 

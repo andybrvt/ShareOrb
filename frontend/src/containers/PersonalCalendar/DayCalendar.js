@@ -284,6 +284,7 @@ class DayCalendar extends React.Component{
             toDoStuff.map(item => (
 
               <CalendarPopOver
+                orientation="bottom"
                 item={item}
                 date={hour}
                 dayIndex={0}

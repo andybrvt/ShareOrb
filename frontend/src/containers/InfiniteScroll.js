@@ -107,7 +107,7 @@ class InfiniteList extends React.Component {
 
       <div style={{ flex: 1}}>
 
-        <div class="intro" style={{color:'black', fontSize:25, marginTop:'40px'}}>
+        <div class="intro" style={{color:'black', fontSize:20, marginTop:'25px'}}>
           Welcome, {this.props.data.username}. Here's what's going on today! </div>
 
         <hr style={{marginBottom:'25px'}} />
