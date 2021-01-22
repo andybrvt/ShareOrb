@@ -33,6 +33,7 @@ export const addCredentials = (
    email,
    dob,
    privatePro,
+   sentRequestList,
    requestList
  ) => {
    console.log(localStorage)
@@ -52,6 +53,7 @@ export const addCredentials = (
     email:email,
     dob: dob,
     private: privatePro,
+    sentRequestList: sentRequestList,
     requestList:requestList
   };
 };
@@ -89,6 +91,7 @@ export const logout = () => {
   localStorage.removeItem('email')
   localStorage.removeItem('dob')
   localStorage.removeItem('private')
+  localStorage.removeItem('sentRequestList')
   localStorage.removeItem('requestList')
   return {
     type: actionTypes.AUTH_LOGOUT
@@ -198,6 +201,7 @@ export const grabUserCredentials = () => {
         const email = res.data.email;
         const dob = res.data.dob;
         const privatePro = res.data.private;
+        const sentRequestList = res.data.get_sent_follow_request;
         const requestList = res.data.get_follow_request;
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
@@ -212,6 +216,7 @@ export const grabUserCredentials = () => {
         localStorage.setItem('email', email);
         localStorage.setItem('dob', dob);
         localStorage.setItem('private', privatePro)
+        localStorage.setItem('sentRequestList', sentRequestList)
         localStorage.setItem('requestList', requestList)
         dispatch(addCredentials(
            res.data.username,
@@ -227,6 +232,7 @@ export const grabUserCredentials = () => {
            res.data.email,
            res.data.dob,
            res.data.private,
+           res.data.get_sent_follow_request,
            res.data.get_follow_request
          ));
          {/*when it times out*/}
@@ -403,5 +409,12 @@ export const authUpdateFollowers = (followerList) =>{
   return {
     type: actionTypes.AUTH_UPDATE_FOLLOWERS,
     followerList: followerList
+  }
+}
+
+export const updateSentRequestList = (sentRequestList) => {
+  return {
+    type: actionTypes.UPDATE_SENT_REQUEST_LIST,
+    sentRequestList: sentRequestList
   }
 }

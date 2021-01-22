@@ -628,3 +628,27 @@ class onUnfollowView(APIView):
         followingList = hostObj['get_following']
 
         return Response(followingList)
+
+class onSentRequestView(APIView):
+    # This function will be in charge of taking care of the request function in the
+    # front end when its on your page and not on profile page (suggest friends)
+    def post (self, request, *args, **kwargs):
+        print(request.data)
+
+        # This will be similar to the one in consumer but will be used to update the
+        # follower page
+        follower = get_object_or_404(models.User, id = request.data['follower'])
+        following = get_object_or_404(models.User, id = request.data['following'])
+
+        requestObj = models.UserFollowingRequest.objects.create(
+            send_request = follower,
+            accept_request = following
+        )
+
+        # Since this will be sent to the follower page
+        curUser = get_object_or_404(models.User, id = request.data['follower'])
+        hostObj = serializers.UserSerializer(curUser).data
+
+        sentRequestList = hostObj['get_sent_follow_request']
+
+        return Response(sentRequestList)

@@ -106,16 +106,32 @@ class SuggestedFriends extends React.Component {
       // if true then the perosn profile will be private and then when you click
       // follow it will show a reqeust instead of followed
 
-      const notificationObject = {
-        command: 'send_follow_request_notification',
-        actor: follower,
-        recipient: following
-      }
+      // Make an axios call here that creates taht sent request event and update
+      // it in the front end and then send a notification to the other person
 
-      // add auth here
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/sendFollowRequest`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
 
-      // Simlar to the personal profile but without sending it throught he weboscket
-      NotificationWebSocketInstance.sendNotification(notificationObject)
+        // update your redux first and then send a notificaiton to the other person
+        // and update their auth too as well
+        this.props.updateSentRequestList(res.data)
+
+
+      })
+      // const notificationObject = {
+      //   command: 'send_follow_request_notification',
+      //   actor: follower,
+      //   recipient: following
+      // }
+      //
+      // // add auth here
+      //
+      // // Simlar to the personal profile but without sending it throught he weboscket
+      // NotificationWebSocketInstance.sendNotification(notificationObject)
 
 
     } else {
@@ -169,6 +185,7 @@ class SuggestedFriends extends React.Component {
   render() {
     console.log(this.props)
     let following = []
+    let sentRequestList = []
     let requestList = []
 
     if(this.props.following){
@@ -182,6 +199,13 @@ class SuggestedFriends extends React.Component {
       for(let i = 0; i< this.props.requestList.length; i++){
         requestList.push(
           this.props.requestList[i].id
+        )
+      }
+    }
+    if(this.props.sentRequestList){
+      for(let i = 0; i< this.props.sentRequestList.length; i++){
+        sentRequestList.push(
+          this.props.sentRequestList[i].id
         )
       }
     }
@@ -251,7 +275,7 @@ class SuggestedFriends extends React.Component {
 
               :
 
-              requestList.includes(item.id) ?
+              sentRequestList.includes(item.id) ?
 
               <Button
                 // onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }

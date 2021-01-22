@@ -18,6 +18,7 @@ export const AUTH_UPDATE_FOLLOWERS = "AUTH_UPDATE_FOLLOWERS";
 export const UPDATE_REQUEST_LIST = "UPDATE_REQUEST_LIST";
 // the new up request list will be used for when you remvoe a user
 export const NEW_UP_REQUEST_LIST = "NEW_UP_REQUEST_LIST";
+export const UPDATE_SENT_REQUEST_LIST = "UPDATE_SENT_REQUEST_lIST";
 
 export const OPEN_POPUP = "OPEN_POPUP";
 export const CLOSE_POPUP = "CLOSE_POPUP";

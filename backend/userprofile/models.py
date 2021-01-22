@@ -110,6 +110,10 @@ class User(AbstractUser):
 
         return UserSocialNormPost.objects.filter(owner_id = self.id)
 
+    def get_sent_follow_request(self):
+        # This will grab all the request that you sent out
+        # Pretty much the opposite of the get_follow_request
+        return UserFollowingRequest.objects.filter(send_request = self.id).values_list('accept_request__username', flat = True)
     def get_follow_request(self):
         # This will grab all the follow request that a perosn has
         return UserFollowingRequest.objects.filter(accept_request = self.id).values_list('send_request__username', flat = True)
