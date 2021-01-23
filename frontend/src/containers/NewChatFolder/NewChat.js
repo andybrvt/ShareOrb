@@ -31,13 +31,14 @@ class NewChat extends React.Component{
   }
 
   initialiseChat(){
+    console.log(this.props)
     this.waitForSocketConnection(() => {
 
       NewChatWebSocketInstance.fetchMessages(
         this.props.parameter.id
       )
     })
-    if(this.props.parameter.id === 'newchat'){
+    if(this.props.parameter.id === 'newchat' || this.props.parameter.id === "0"){
         NewChatWebSocketInstance.connect(null)
     } else{
       ChatSidePanelWebSocketInstance.sendSeen(
@@ -85,7 +86,10 @@ class NewChat extends React.Component{
     console.log(newProps)
     // When ever a new message is sent or you open up a new chat
     // it should send out an update of the seen
-    if(this.props.parameter.id !== newProps.parameter.id && newProps.parameter.id !== "newchat"){
+    if(this.props.parameter.id !== newProps.parameter.id
+      && newProps.parameter.id !== "newchat"
+      && newProps.parameter.id !== "0"
+    ){
       NewChatWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
         NewChatWebSocketInstance.fetchMessages(
@@ -343,7 +347,7 @@ class NewChat extends React.Component{
           :
 
           <div className = "chatRightSide">
-          
+
             <NewChatContent
             messages = {messages}
             curId = {this.props.id}
@@ -358,19 +362,29 @@ class NewChat extends React.Component{
 
       }
 
-      <div className = "chatFarRightSide">
+      {
+        this.props.parameter.id === "newchat" ?
 
-        <CurChatManager
-        curChat = {this.props.curChat}
-        curId = {this.props.id}
-        eventList = {this.state.eventList}
-        parameter = {this.props.parameter}
-        submitShareEvent = {this.submitShareEvent}
-        history = {this.props.history}
-        submitCreateEvent ={this.submitCreateEvent}
-         />
+        <div></div>
 
-      </div>
+        :
+
+        <div className = "chatFarRightSide">
+
+          <CurChatManager
+          curChat = {this.props.curChat}
+          curId = {this.props.id}
+          eventList = {this.state.eventList}
+          parameter = {this.props.parameter}
+          submitShareEvent = {this.submitShareEvent}
+          history = {this.props.history}
+          submitCreateEvent ={this.submitCreateEvent}
+           />
+
+        </div>
+
+      }
+
 
       </div>
     )

@@ -249,7 +249,8 @@ class App extends Component {
         WebSocketPostsInstance.connect()
 
 
-
+        console.log('disconnected chat')
+        console.log(newProps.id)
         ChatSidePanelWebSocketInstance.disconnect();
         this.waitForChatsSocketConnection(() =>{
           ChatSidePanelWebSocketInstance.fetchChats(
