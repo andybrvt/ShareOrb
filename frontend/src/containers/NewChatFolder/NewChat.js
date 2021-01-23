@@ -362,12 +362,6 @@ class NewChat extends React.Component{
 
       }
 
-      {
-        this.props.parameter.id === "newchat" ?
-
-        <div></div>
-
-        :
 
         <div className = "chatFarRightSide">
 
@@ -383,8 +377,7 @@ class NewChat extends React.Component{
 
         </div>
 
-      }
-
+  
 
       </div>
     )

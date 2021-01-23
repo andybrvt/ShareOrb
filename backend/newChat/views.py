@@ -118,3 +118,6 @@ class GetChatSearchView(APIView):
             "chatId": chatId
         }
         return Response(content)
+
+
+# Create a search view for chats here later

@@ -1019,7 +1019,8 @@ const mapStateToProps = state => {
       curUserFriend: state.auth.friends,
       curRequested: state.auth.requestList,
       followers: state.auth.followers,
-      following: state.auth.following
+      following: state.auth.following,
+      chats: state.message.chats
     };
 };
 
