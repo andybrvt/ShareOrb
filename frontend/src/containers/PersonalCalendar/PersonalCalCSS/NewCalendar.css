@@ -26,6 +26,7 @@
 .topHeaderCal{
   display: flex;
   flex-direction: row;
+  /* background-color: red; */
   width: 100%;
 }
 
@@ -111,7 +112,7 @@
 }
 
 
-.miniCalContainer .miniCalendar {
+.miniCalendar {
   /* background-color: red; */
   position: relative;
   left: 50%;
@@ -121,6 +122,101 @@
   /* color: white; */
 }
 
+.miniCalendar .header{
+  /* text-transform: uppercase; */
+  position: relative;
+  font-weight: 700;
+  font-size: 100%;
+  width: 100%;
+  border-bottom: 3px solid var(--border-color);
+  /* background-color: red; */
+  color:#1890ff;
+  display: flex;
+  flex-direction: row;
+}
+
+.miniCalendar .header .arrowLeft{
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+}
+
+.miniCalendar .header .arrowRight{
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.miniCalendar .header .miniMonth{
+  position: relative;
+}
+
+
+.miniCalContainer .miniCalendar .miniCol{
+  flex-grow: 1;
+  flex-basis: 0;
+  /* max-width: 80%; */
+  text-align:center;
+  font-family: "Segoe UI Regular";
+  font-weight: 500;
+  /* background-color: red; */
+}
+
+.miniCalContainer .miniCalendar .miniCol-center{
+  font-family: "Segoe UI Regular";
+  font-weight: 700;
+}
+
+
+
+.miniCalContainer .miniCalendar .miniRow{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
+
+.miniCalContainer .miniCalendar .body .miniCol{
+  flex-grow: 0;
+  flex-basis: calc(100%/7);
+  width: calc(100%/7);
+  /* background-color: red; */
+
+}
+
+.miniCalContainer .miniCalendar .body .miniCell{
+  position: relative;
+  height: 20px;
+  width: 5em;
+  /* border-right: 1px solid var(--border-color); */
+  overflow: hidden;
+  cursor: pointer;
+  /* background: var(--neutral-color); */
+  transition: 0.25s ease-out;
+  font-size: 11px;
+}
+
+.miniCalendar .body .miniRow .miniDayIn{
+  color: black;
+}
+
+.miniCalendar .body .miniRow .miniDayOut{
+  color: gray;
+}
+
+.miniCalendar .body .miniRow .miniDayIn:hover{
+  transform: scale(1.25);
+  transition: .1s ease-out;
+}
+
+.miniCalendar .body .miniRow .miniDayOut:hover{
+  transform: scale(1.25);
+  transition: .1s ease-out;
+}
 
 
 
@@ -159,7 +255,7 @@
 .scrollCalContent{
   overflow:hidden;
   width: 100%;
-  height: 450px;
+  height: 78vh;
   /* background-color: red; */
 }
 
@@ -169,7 +265,7 @@
   /* background-color: red; */
   /* overflow-y: hidden; */
   width: 101%;
-  height: 445px;
+  height: 78vh;
   border-top: 2px solid;
   border-color: darkgrey;
 }
@@ -347,7 +443,7 @@
   left: 3%;
   width: 96.7%;
   /* background-color: red; */
-  height:475px;
+  height: 80vh;
   overflow: hidden;
 }
 
@@ -357,7 +453,7 @@
   border-left: 1px solid #D9D9D9;
   border-right: 1px solid #D9D9D9;
   overflow: auto;
-  height: 475px;
+  height: 80vh;
 
 }
 
@@ -365,7 +461,7 @@
   display: grid;
   grid-template-columns: repeat(7, 14.17%);
   /* grid-template-rows: repeat(6, 11.05px); */
-  grid-template-rows: repeat(6, 15px);
+  grid-template-rows: repeat(6, 22px);
   grid-auto-flow: dense;
   grid-row-gap: 2px;
   grid-column-gap: 1px;
@@ -379,7 +475,7 @@
   text-align: right;
   /* background-color: red; */
   border-right: 1px solid #D9D9D9;
-  height: 100px;
+  height: 142px;
   /* cursor: pointer; */
 }
 
@@ -388,11 +484,143 @@
   text-align: right;
   /* background-color: white; */
   border-right: 1px solid #D9D9D9;
-  height: 100px;
+  height: 142px;
   border: 1px solid blue;
 }
 
+/* This will be year specific */
+.yearMonthContainer {
+  position: relative;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: auto;
+  height: 85vh;
+}
 
+.yearMonthContainer .yearMonthCell{
+  flex-grow: 0;
+  width: calc(92%/4);
+  cursor: pointer;
+  position: relative;
+  /* height: 20em; */
+  margin: 1%;
+}
+
+.yearMonthTitle{
+  font-size: 18px;
+  text-align: center;
+  color:#1890ff;
+}
+
+.yearMonthContainer .yearMonthCell .yearMonthTitle:hover{
+  /* transform: scale(1.); */
+  /* transition: .2s ease-out; */
+}
+
+
+.yearWeekContainer{
+  /* background-color: red; */
+  display: flex;
+  width: 100%;
+  border-bottom: 4px solid #D9D9D9;
+}
+.yearWeekContainer .yearWeekDays{
+  width: calc(100%/7);
+  text-align: center;
+}
+
+.yearDayContainer{
+  /* background-color: red; */
+  position: relative;
+  width: 100%;
+}
+
+.yearDayContainer .yearDaysRows{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.yearDayContainer .yearDaysRows .yearDayIn{
+  width: calc(100%/7);
+  text-align: center;
+  color: black;
+}
+
+.yearDayContainer .yearDaysRows .yearDayOut{
+  width: calc(100%/7);
+  text-align: center;
+  color: #8c8c8c;
+}
+
+.yearDayContainer .yearDaysRows .yearDayIn:hover{
+  transform: scale(1.25);
+  transition: .1s ease-out;
+}
+
+.yearDayContainer .yearDaysRows .yearDayOut:hover{
+  transform: scale(1.25);
+  transition: .1s ease-out;
+}
+
+
+
+.calendar .body .yearcell .monthcell .yearRow .monthDayCell {
+  position: relative;
+  height: 38px;
+  /* border-right: 1px solid var(--border-color); */
+  line-height: 40px;
+  text-align:center;
+  overflow: hidden;
+  cursor: pointer;
+  flex-grow: 0;
+  flex-basis: calc(100%/7);
+  width: calc(100%/7);
+  /* background-color: red; */
+  /* background: var(--neutral-color); */
+}
+
+.calendar .body .yearcell .monthcell .yearRow .monthDayCell:hover{
+  font-size: 25px;
+  max-height: 2em;
+  line-height: 20px;
+  margin-top: 5px;
+  /* margin-left: 1px; */
+  /* margin-right: 1px; */
+  margin-bottom: -20px;
+}
+
+
+.calendar .body .yearcell .monthcell .yearRow{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  /* background-color: red; */
+
+}
+
+.calendar .body .yearRow {
+  display: grid;
+  grid-template-columns: repeat(7, 216px);
+  grid-template-rows: repeat(6, 25px);
+  grid-auto-flow: dense;
+  grid-row-gap: 2px;
+  grid-column-gap: 1px;
+  /* height: 10px; */
+  /* border-bottom: 1px solid var(--border-color); */
+  /* border-right: 1px solid var(--border-color); */
+  /* background-color: red; */
+}
+
+
+/* This is for the minicalendar */
 
 
 
@@ -507,6 +735,7 @@ body {
     color: var(--text-color);
     background: var(--bg-color);
     position: relative;
+
 }
 
 main {
@@ -571,14 +800,7 @@ controls all colors and font weight */
   /* background-color: blue; */
 }
 
-.yearRow {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
+
 
 .row-middle {
   align-items: center;
@@ -1020,15 +1242,7 @@ controls all colors and font weight */
 
 }
 
-.miniCalContainer .miniCalendar .header{
-  /* text-transform: uppercase; */
-  font-weight: 700;
-  font-size: 100%;
-  /* width: 100px; */
-  /* padding: 10em 10px; */
-  border-bottom: 3px solid var(--border-color);
-  /* background-color: red; */
-}
+
 
 .miniCalContainer .miniCalendar .days{
   text-transform: uppercase;
@@ -1040,118 +1254,23 @@ controls all colors and font weight */
 
 }
 
-.miniCalContainer .miniCalendar .miniCol{
-  flex-grow: 1;
-  flex-basis: 0;
-  /* max-width: 80%; */
-  text-align:center;
-  font-family: "Segoe UI Regular";
-  font-weight: 500;
-  /* background-color: red; */
-}
-
-.miniCalContainer .miniCalendar .miniCol-center{
-  font-family: "Segoe UI Regular";
-  font-weight: 700;
-}
-
-
-.miniCalContainer .miniCalendar .miniCol .miniMonth{
-  /* color: white; */
-  /* background-color: red; */
-  font-family: "Segoe UI Regular";
-  font-weight: 700;
-}
-
-.miniCalContainer .miniCalendar .miniCol .miniMonth:hover{
-  font-family: "Segoe UI Regular";
-  cursor: pointer;
-  /* color: white; */
-}
-
-.miniCalContainer .miniCalendar .miniCol .icon:hover {
-  transform: scale(1.2);
-}
 
 
 
-.miniCalContainer .miniCalendar .miniRow{
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
 
-}
 
 .miniCalContainer .miniCalendar .miniBody .miniRow{
   /* background-color: red; */
 }
 
-.miniCalContainer .miniCalendar .body .miniCol{
-  flex-grow: 0;
-  flex-basis: calc(100%/7);
-  width: calc(100%/7);
-  /* background-color: red; */
-
-}
-
-.miniCalContainer .miniCalendar .body .miniCell{
-  position: relative;
-  height: 20px;
-  width: 5em;
-  /* border-right: 1px solid var(--border-color); */
-  overflow: hidden;
-  cursor: pointer;
-  /* background: var(--neutral-color); */
-  transition: 0.25s ease-out;
-  font-size: 11px;
-}
-
-.miniCalContainer .miniCalendar .body .miniRow .miniCell .miniDay:hover{
-  font-size: 15px;
-  line-height: 15px;
-}
 
 
 
 
 /* This is to control the year view */
-.calendar .body .yearcol {
-  flex-grow: 0;
-  flex-basis: calc(100%/4);
-  width: calc(100%/4);
-  padding: 10px;
-  /* background-color: red; */
-}
 
-.calendar .body .yearcell {
-  position: relative;
-  height: 20em;
-  /* background-color: red; */
-  /* border-right: 1px solid var(--border-color); */
-  overflow: hidden;
-  cursor: pointer;
-  background: var(--neutral-color);
-  transition: 0.25s ease-out;
 
-}
 
-.calendar .body .yearcell .monthBox {
-  /* background-image: linear-gradient(to bottom right, #43cea2 , #185a9d); */
-  font-size: 18px;
-  text-align: center;
-  font-family: 'Segoe UI Regular';
-  color:'black';
-
-}
-
-.calendar .body .yearcell .monthBox:hover {
-  /* font-size: 20px; */
-  transform: scale(1.25);
-  transition: .2s ease-out;
-}
 
 .calendar .body .yearcell .yearDays {
   font-weight: 400;
@@ -1163,51 +1282,6 @@ controls all colors and font weight */
 
   /* background-color: red; */
 }
-
-.calendar .body .yearcell .monthcell .yearRow{
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  /* background-color: red; */
-
-}
-
-.calendar .body .yearcell .monthcell .yearRow .monthCellCol {
-  flex-grow: 0;
-  flex-basis: calc(100%/7);
-  width: calc(100%/7);
-}
-
-.calendar .body .yearcell .monthcell .yearRow .monthDayCell {
-  position: relative;
-  height: 38px;
-  /* border-right: 1px solid var(--border-color); */
-  line-height: 40px;
-  text-align:center;
-  overflow: hidden;
-  cursor: pointer;
-
-  /* background: var(--neutral-color); */
-}
-
-.calendar .body .yearcell .monthcell .yearRow .monthDayCell:hover{
-  font-size: 25px;
-  max-height: 2em;
-  line-height: 20px;
-  margin-top: 5px;
-  /* margin-left: 1px; */
-  /* margin-right: 1px; */
-  margin-bottom: -20px;
-}
-
-/* .calendar .body .yearcell .monthcell .yearRow .monthDayCell .dayText:hover{
-  font-size: 25px;
-  transition: .2s ease-out;
-} */
-
 
 
 
@@ -1268,29 +1342,8 @@ controls all colors and font weight */
 to make it adjustable */
 
 
-.calendar .body .yearRow {
-  display: grid;
-  grid-template-columns: repeat(7, 216px);
-  grid-template-rows: repeat(6, 25px);
-  grid-auto-flow: dense;
-  grid-row-gap: 2px;
-  grid-column-gap: 1px;
-  /* height: 10px; */
-  /* border-bottom: 1px solid var(--border-color); */
-  /* border-right: 1px solid var(--border-color); */
-  /* background-color: red; */
-}
 
-.calendar .body .dayYearRow{
-  display: grid;
-  grid-template-columns: repeat(7, 46.5px);
-  text-align: center;
-  /* grid-template-rows: repeat(6, 25px); */
-  grid-auto-flow: dense;
-  border-bottom: 3px solid var(--border-color);
-  /* grid-column-gap: 1px; */
-  /* background-color: red; */
-}
+
 
 
 

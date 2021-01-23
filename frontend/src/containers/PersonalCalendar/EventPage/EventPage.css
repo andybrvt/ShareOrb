@@ -1,7 +1,4 @@
-/* CSS for the whole container */
-
-
-
+/* CSS for container that holds the event page */
 .eventPageContainer{
   background-color: white;
   width: 96vw;
@@ -13,10 +10,6 @@
   /* overflow: hidden; */
 }
 
-
-
-
-
 /* CSS for the eventInfo side of the event page */
 .eventInfoContainer{
   width:70%;
@@ -25,6 +18,20 @@
   /* align-items: center; */
 }
 
+
+/* CSS for the group chat side of the event page */
+.eventGroupChatContainer{
+  width:30%;
+  height:100%;
+  position:relative;
+  background: red;
+}
+
+.eventInfoView{
+  /* width: 70%; */
+  height: 100%;
+
+}
 
 .eventTopEntire{
   width: 100%;
@@ -35,27 +42,24 @@
   background-color: white;
 }
 
-
- .topSectContainerLeft{
-  background-color: #f5f5f5;
-
-  padding:25px;
-  display: flex;
-  width:50%;
-  left:10%;
-  position: relative;
-  background: purple;
+.eventTopEntire .topSectContainerLeft{
+ background-color: #f5f5f5;
+ padding:25px;
+ display: flex;
+ width:50%;
+ position: relative;
+ background: purple;
 }
 
+.eventTopEntire .topSectContainerRight{
+ padding-top: 5%;
+ width:40%;
+ position: relative;
+ background: orange;
+}
 
-
-
-.topSectContainerRight{
-  padding-top: 5%;
-  width:40%;
-  left:10%;
-  position: relative;
-  background: orange;
+.hoverPic:hover{
+  filter: brightness(90%);
 }
 
 .eventBackgroundPic{
@@ -66,10 +70,281 @@
   height:75%;
   border: 10px dashed gainsboro;
   text-align: center;
-
   position: relative;
+}
+
+
+.eventBackgroundWPic{
+  /* background-color: red; */
+  width: 80%;
+  position: relative;
+  left:20%;
+  height: 350px;
+  overflow: hidden;
+  /* border: 10px dashed gainsboro; */
+  border-radius: 10px;
 
 }
+.eventBackgroundWPic img{
+  /* background-color: red; */
+
+  object-fit: cover;
+  position:relative;
+  width:100%;
+  height:100%;
+  top:10%;
+  height: 350px;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+.pictureFrame{
+  top:25%;
+  width: 80%;
+  position: relative;
+  left:10%;
+  height: 350px;
+  font-size: 55px;
+  color: gainsboro;
+
+}
+
+.closeEvent{
+  /* background-color: red; */
+  float:right;
+  font-size: 40px;
+  top: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.editEvent{
+  /* background-color: red; */
+  float:right;
+  font-size: 40px;
+  top: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.dateCircle{
+  /* border: 1px solid; */
+  margin-top: 10px;
+  width: 60px;
+  height: 60px;
+  padding: 3px;
+  text-align: center;
+  position: relative;
+  border-radius: 10px;
+  /* right: 10px; */
+  bottom: 10px;
+  color: "white";
+  font-size: "20px";
+
+}
+.dateCircle .month{
+  color: white;
+  font-size: 20px;
+}
+.dateCircle .day{
+  color: white;
+  font-size: 15px;
+}
+
+.eventCard{
+  position: relative;
+  overflow: hidden;
+
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:40px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+
+  /* background-color: gainsboro; */
+}
+
+
+/* Title card css */
+.titleCard{
+  position: relative;
+  overflow: hidden;
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:40px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+}
+.titleCard .eventTitle{
+  color: black;
+  font-size: 28px;
+  line-height: 120%;
+  /* font-size: calc(1.2vw); */
+  margin-top: 0px;
+
+  /* background-color: red; */
+  word-break: normal  ;
+}
+.titleCard .hostHolder{
+  position: relative;
+  background-color: red;
+  color:'#1890ff';
+}
+.titleCard .hostHolder .attendees{
+  color: black;
+  font-size: 18px;
+  line-height: 150%;
+  position:absolute;
+
+  margin-left: -50px;
+  bottom:-10px;
+  /* background-color: red; */
+}
+
+/* Middle invite card */
+.middleInviteCard{
+  font-size: 20px;
+  width:900px;
+  height:60px;
+  display:'inline-block';
+  margin-top:'100px';
+  padding:'45px';
+}
+
+.middleInviteCard .addFont{
+  font-family: 'Segoe UI Regular';
+  color:black;
+}
+
+.middleInviteCard .buttonHolder{
+  display:inline-block;
+  padding:15px;
+}
+
+/* Event detail card */
+.eventDetailCard{
+  position: relative;
+  overflow: hidden;
+
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:40px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+  width:450px;
+  font-size: 20px;
+}
+
+.eventDetailCard .eventDetails{
+  font-size: 16px;
+  position: relative;
+  margin-top:20px;
+}
+
+.eventDetailCard .contentEvent {
+
+}
+
+
+
+
+/* Statistic Card */
+.statEventCard{
+  position: relative;
+  overflow: hidden;
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:40px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+}
+.statEventCard .percentagesBars{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* top: 300px; */
+}
+.statEventCard .percentage{
+  padding: 25px;
+  text-align: center;
+}
+.statEventCard .percentageTerm{
+  margin-top: 10px;
+}
+/* Statistic Card Title */
+.statEventCard .statTitle{
+  color:black;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+/* Suggested Friends Card */
+.inviteFriendsEventCard{
+  position: relative;
+  left:50%;
+  overflow: hidden;
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:40px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+}
+
+/* Suggested Friends Card Title */
+.inviteFriendsEventCard .suggestedFriendTitle{
+  color:black;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+/* Map card */
+
+.mapEventCard{
+  position: relative;
+  overflow: hidden;
+  width:50%;
+  height:400px;
+  float:right;
+  padding:30px;
+  margin-right: 25px;
+  margin-bottom: 100px;
+  padding-bottom: 175px;
+  background: white;
+
+  border-radius: 15px;
+  box-shadow:
+
+  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+
+  /* background-color: gainsboro; */
+}
+.mapEventCard .eventDetails{
+  font-size: 16px;
+  position: relative;
+  margin-top:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .eventLeftContainer{
   position:relative;
@@ -98,29 +373,6 @@
 
 
 
-
-.eventGroupChatContainer{
-  width:30%;
-  height:100%;
-  position:relative;
-  background: red;
-}
-/* adjust height of scrollable */
-.eventInfoContainer .eventInfoView{
-
-  /* width: 70%; */
-  height: 100%;
-  margin-left: -200px;
-  /* position: relative;
-  left: 50%;
-  transform: translateX(-50%); */
-}
-
-
-
-
-
-
 .innerContainerEvent{
   font-family: "Segoe UI";
   font-weight: 400;
@@ -146,9 +398,7 @@
 
 
 
-.hoverPic:hover{
-  filter: brightness(90%);
-}
+
 
 
 
@@ -163,76 +413,10 @@
   width:100px;
 }
 
-.eventCard{
-  position: relative;
-  overflow: hidden;
-
-  background: white;
-  line-height: 150%;
-  border-radius: 15px;
-  padding:40px;
-  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI Regular';
-
-  /* background-color: gainsboro; */
-}
-
-.addFont{
-  font-family: 'Segoe UI Regular';
-  color:black;
-}
-
-.mapEventCard{
-  position: relative;
-  overflow: hidden;
-  width:100%;
-  height:400px;
-  float:right;
-  padding:30px;
-  margin-right: 25px;
-  margin-bottom: 100px;
-  padding-bottom: 175px;
-  background: white;
-
-  border-radius: 15px;
-  box-shadow:
-
-  0 10px 50px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI Regular';
-
-  /* background-color: gainsboro; */
-}
-
 .personProfilePic{
   object-fit: cover;
   width:10px;
   height:10px;
-}
-
-
-.flex-container {
-    position:relative;
-
-    /* background: red; */
-}
-
-
-
-
-
-
-.innerContainer{
-  position: relative;
-  width:535px;
-  min-height:200px;
-
-}
-
-
-.eventDetails{
-
-  font-size: 16px;
-  position: relative;
 }
 
 
@@ -253,53 +437,6 @@
 
 
 
-.dateCircle{
-  /* border: 1px solid; */
-  margin-top: 10px;
-  width: 60px;
-  height: 60px;
-  padding: 3px;
-  text-align: center;
-  position: relative;
-  border-radius: 10px;
-  /* right: 10px; */
-  bottom: 10px;
-}
-.dateCircle .month{
-  color: white;
-  font-size: 20px;
-}
-.dateCircle .day{
-  color: white;
-  font-size: 15px;
-}
-
-
-
-
-
- .eventTitle{
-  color: black;
-  font-size: 28px;
-  line-height: 120%;
-  /* font-size: calc(1.2vw); */
-  margin-top: 0px;
-
-  /* background-color: red; */
-  word-break: normal  ;
-}
-
-
-.attendees{
-  color: black;
-  font-size: 18px;
-  line-height: 150%;
-  position:absolute;
-
-  margin-left: -50px;
-  bottom:-10px;
-  /* background-color: red; */
-}
 .eventDate{
   color: black;
   font-size: 20px;
@@ -322,41 +459,11 @@
 
 
 
-.eventBackgroundWPic{
-  /* background-color: red; */
-  width: 80%;
-  position: relative;
-  left:20%;
-  height: 350px;
-  overflow: hidden;
-  /* border: 10px dashed gainsboro; */
-  border-radius: 10px;
 
-}
 
-.eventBackgroundWPic img{
-  /* background-color: red; */
 
-  object-fit: cover;
-  position:relative;
-  width:100%;
-  height:100%;
-  top:10%;
-  height: 350px;
-  background-color: #F5F5F5;
-  border-radius: 10px;
-}
 
-.eventBackgroundPic .pictureFrame{
-  top:25%;
-  width: 80%;
-  position: relative;
-  left:10%;
-  height: 350px;
-  font-size: 55px;
-  color: gainsboro;
 
-}
 
 .noMap{
   width: 70%;
@@ -386,22 +493,6 @@
 .eventInfoContainer .eventInfoView .eventInfo .title{
   font-size: 30px;
 }
-.eventInfoContainer .eventInfoView .eventInfo .aboutEvent{
-  color: black;
-  margin-bottom: 30px;
-}
-.eventInfoContainer .eventInfoView .eventInfo .contentEvent{
-  margin-bottom: 30px;
-}
-.eventInfoContainer .eventInfoView .eventInfo .contentEventEmpty{
-  margin-bottom: 30px;
-  height: 100px;
-  text-align: center;
-  font-size: 20px;
-  /* border: 5px dashed gainsboro; */
-
-  /* background-color: red; */
-}
 
 .eventInfoContainer .eventInfoView .eventInfo .locationEventWord{
   font-size: 20px;
@@ -409,31 +500,9 @@
   margin-bottom: 10px;
 
 }
-.eventPeopleWord {
-  font-size: 20px;
-  color: black;
-  margin-top: 40px;
-}
-.percentagesBars {
-  /* background-color: red; */
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* top: 300px; */
-}
 
-.percentage{
-  /* background-color: red; */
-  padding: 25px;
-  /* align-items: center; */
-  text-align: center;
-}
-.percentageTerm{
-  /* background-color: red; */
-  /* padding: 30px; */
-  margin-top: 10px;
-}
+
+
 
 
 
@@ -462,15 +531,7 @@
 
 
 
-/* close */
-.closeEvent{
-  /* background-color: red; */
-  float:right;
-  font-size: 40px;
-  top: 10px;
-  cursor: pointer;
-  transition: 0.5s;
-}
+
 
 
 /* pencil */
@@ -526,7 +587,7 @@
 
 .messageList{
   width: 100%;
-  height: 82%;
+  height: 92%;
   /* background-color: red; */
   overflow: auto;
   margin-top: 20px;

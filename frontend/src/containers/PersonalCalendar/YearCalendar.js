@@ -90,14 +90,12 @@ class YearCalendar extends React.Component{
     while (month <= yearEnd){
       const monthCopy = month
         year.push(
-        <div className = 'yearcol yearcell'>
+        <div className = 'yearMonthCell'>
           <div
-          className = 'monthBox'
+          className = 'yearMonthTitle'
           onClick = {() => this.onMonthClick(monthCopy)}
           >
-            <span
-            className = 'monthText'
-            >
+            <span>
             {dateFns.format(month, dateFormat)}
             </span>
           </div>
@@ -107,7 +105,7 @@ class YearCalendar extends React.Component{
       )
       month = dateFns.addMonths(month, 1)
     }
-    return <div className = 'body yearRow'>{year}</div>
+    return <div className = 'yearMonthContainer'>{year}</div>
   }
 
   renderDayName() {
@@ -119,14 +117,14 @@ class YearCalendar extends React.Component{
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
       days.push(
-        <div className ="monthCellCol monthDayCell" key = {i}>
+        <div className ="yearWeekDays" key = {i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           </div>
       )
     }
     // the days will be a list of dates that are put in by the for loops
      // and then the return will return all those days out
-    return <div className = "dayYearRow"> {days} </div>
+    return <div className = "yearWeekContainer"> {days} </div>
   }
 
   renderDayInMonth = (month) =>{
@@ -136,6 +134,9 @@ class YearCalendar extends React.Component{
     const endMonth = dateFns.endOfMonth(monthStart)
     const startWeek = dateFns.startOfWeek(monthStart)
     const endWeek = dateFns.endOfWeek(endMonth)
+
+    const diffWeeks = dateFns.differenceInCalendarWeeks(endWeek, startWeek)
+    console.log(diffWeeks)
     const rows = []
     let week = []
     let day = startWeek;
@@ -145,33 +146,76 @@ class YearCalendar extends React.Component{
     // The while loop is for each week
      // The for loop how ever is for each day of the week
      // Basically a 2D loop of the months that hold each week
-    while (day <= endWeek){
-      for (let i= 0; i<7; i++){
-        const cloneDay = day
-        week.push(
-          <div
-          className ='monthCellCol monthDayCell'
-          key = {day}
-          onClick = {() => this.onSelectedDate(cloneDay)}
-          >
-          <span
-          className = 'dayText'
-          >
-          {dateFns.format(day, dateFormat)}
-          </span>
+    if(diffWeeks === 4){
+      while (day <= dateFns.addWeeks(endWeek, 1)){
+        for (let i= 0; i<7; i++){
+          const cloneDay = day
+          week.push(
+            <div
+            className = {dateFns.isSameMonth(cloneDay,monthStart) ?
+              "yearDayIn"
+
+              :
+
+              "yearDayOut"
+
+            }
+            key = {day}
+            onClick = {() => this.onSelectedDate(cloneDay)}
+            >
+            <span
+            className = ''
+            >
+            {dateFns.format(day, dateFormat)}
+            </span>
+            </div>
+          )
+          day = dateFns.addDays(day, 1)
+        }
+        rows.push(
+          <div className = 'yearDaysRows' >
+            {week}
           </div>
         )
-        day = dateFns.addDays(day, 1)
+        week = []
       }
-      rows.push(
-        <div className = 'yearRow' style = {{}}>
-          {week}
-        </div>
-      )
-      week = []
+    } else if(diffWeeks === 5){
+      while (day <= endWeek){
+        for (let i= 0; i<7; i++){
+          const cloneDay = day
+          week.push(
+            <div
+              className = {dateFns.isSameMonth(cloneDay,monthStart) ?
+                "yearDayIn"
+
+                :
+
+                "yearDayOut"
+
+              }
+              key = {day}
+            onClick = {() => this.onSelectedDate(cloneDay)}
+            >
+            <span
+            className = ''
+            >
+            {dateFns.format(day, dateFormat)}
+            </span>
+            </div>
+          )
+          day = dateFns.addDays(day, 1)
+        }
+        rows.push(
+          <div className = 'yearDaysRows' >
+            {week}
+          </div>
+        )
+        week = []
+      }
     }
 
-    return <div className = 'monthcell'> {rows} </div>
+
+    return <div className = 'yearDayContainer'> {rows} </div>
   }
 
   prevYear = () =>{
@@ -226,10 +270,11 @@ class YearCalendar extends React.Component{
             </div>
           </div>
         </div>
+
         <div className = 'miniCalContainer'>
           <Button
             type="primary"
-            className = 'miniEventSyncButton'
+            className = 'weekCreateEvent'
             onClick = {this.onAddEvent}>
             Create Event
           </Button>

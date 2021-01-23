@@ -539,522 +539,321 @@ class EventInfo extends React.Component{
     }
 
     return(
-      <div>
 
-        <div className = 'eventInfoView' >
-
+        <div className = 'eventInfoView'>
           <div class="eventTopEntire">
           <div className = 'topSectContainerLeft'>
-
-
             {
               eventBackgroundPic === "" ?
               <div
                 onClick = {() => this.onChangeBackgroundOpen()}
                 className = 'eventBackgroundPic hoverPic'>
-
                 <div className = "pictureFrame">
                     <PictureOutlined />
                     <br />
                     <span> No background </span>
                 </div>
-
               </div>
-
               :
-
               <div
                 onClick = {() => this.onChangeBackgroundOpen()}
                 className = 'eventBackgroundWPic hoverPic'>
-              {/*
-                <div className ="pictureFrame">
-
-                <PictureOutlined />
-                <br />
-                <span> No background </span>
-                  </div>
-                */}
                 <img
                 src = {`${global.IMAGE_ENDPOINT}`+eventBackgroundPic}
-                className = 'eventBackgroundImg'
                  />
-
               </div>
-
             }
-
-
           </div>
 
           <div className = 'topSectContainerRight'>
-
             <div className = 'closeEvent'>
               <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
               <i class="far fa-times-circle">  </i>
               </Link>
             </div>
 
-            <div className = 'closeEvent'>
+            <div className = 'editEvent'>
               {
                 eventHostId === this.props.userId ?
-
                 <div>
-                  <div
-                  onClick={() => this.onEditClick()}
-                  >
-                  <i class="fas fa-pen" ></i>
+                  <div onClick={() => this.onEditClick()}>
+                    <i class="fas fa-pen" ></i>
                   </div>
                 </div>
 
                 :
 
                 <div></div>
-
               }
 
             </div>
             <div
-            className = "dateCircle"
-            style = {{
-              backgroundColor: color,
-
-            }}
-            >
-              <div
+              className = "dateCircle"
               style = {{
-                color: "white",
-                fontSize: "20px",
-
+                backgroundColor: color,
               }}
-              clasName = "month" > {month}</div>
+              >
+              <div clasName = "month" > {month}</div>
               <div className = "day"> {day} </div>
             </div>
 
+            <div class="titleCard" style={{marginTop:'-25px', width:'300px',padding:'40px'}}>
 
-            <br/>
-            <br/>
+              <div
+                className = 'eventTitle'>
+                {this.capitalize(title)}
+              </div>
+              <br/>
+            <div class="hostHolder">
 
-
-
-            <div class="eventCard" style={{marginTop:'-25px', width:'300px',padding:'40px'}}>
-                <div
-                  className = 'eventTitle'>
-                  {this.capitalize(title)}
-                </div>
-
+              <div className = "attendees">
+                Host
                 <br/>
-
-
-              <div class="flex-container"
-                style={{width:'250px', color:'#1890ff', padding:'25px', background:'white'}}
-
-              >
-
-                <div className = "attendees">
-                  Host
-
-                  <br/>
-                  <span>
-                    <Avatar
-                    style={{right:'5px'}}
-
-                    src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
-                    />
-                    <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
-                  </span>
-                </div>
-
-                {/*if no one going , THEN show invited else just show invited
-                <div className = "attendees flex-child">
-                  <span style={{color:'black'}}> {invited.length} Invited </span>
-
-                  <Liking like_people={invited}/>
-                </div>
-                */}
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-      <div/>
-          <div style={{marginLeft:'290px', color:'black'}} class="outerContainerEvent">
-            <span
-                style={{ fontSize:'20px', width:'900px', height:'60px',
-                 display:'inline-block', marginTop:'100px', padding:'45px'}}
-                 class="aboutEvent eventCard">
-              <span class="innerContainerEvent" style={{display:'inline-block'}}>
-
-                <Statistic class="addFont" title="Going" value={accepted.length}
-
-                  />
-
-
-
-              </span>
-              <span class="innerContainerEvent" style={{display:'inline-block'}}>
-                  <Liking
-                  history = {this.props.history}
-                  style={{display:'inline-block'}}
-                  num={5}
-                  like_people={accepted}/>
-              </span>
-              <span class="innerContainerEvent" style={{marginLeft:'100px',display:'inline-block'}}>
-
-                <Statistic title="Invited" value={invited.length} />
-
-
-
-              </span>
-
-
-              <span class="innerContainerEvent" style={{display:'inline-block'}}>
-                  <Liking
-                    num={5}
-                    history = {this.props.history}
-                    style={{display:'inline-block'}} like_people={invited}/>
-              </span>
-
-             <span class="innerContainerPeople"
-               style={{display:'inline-block',padding:'15px'}}>
-
-
-                 <Button
-                    type="primary" shape="round"
-                    icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                    style={{left:'110%', fontSize:'15px'}} size={'large'}>
-
-                   Invite
-                 </Button>
-
-              {
-                (accepted.includes(this.props.username))?
-                   <Button
-                      shape="round"
-                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'115%', fontSize:'15px'}} size={'large'}>
-
-                     Going
-                   </Button>
-
-                   :
-                   <Button
-                      shape="round" type="primary"
-                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                      style={{left:'115%', fontSize:'15px'}} size={'large'}>
-
-                     Going
-                   </Button>
-
-             }
-
-
-               <Button
-                  shape="round"
-                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                  style={{left:'120%', fontSize:'15px'}} size={'large'} danger>
-                  Delete
-               </Button>
-             </span>
-
-
-            </span>
-
-          </div>
-
-
-          <div class="eventLeftContainer">
-
-            <div class="innerLeftEvent">
-              <div style={{ fontSize:'20px',display:'inline-block', width:'450px' }}
-                class="aboutEvent eventCard innerContainer">
-                Event Details
-                <Divider/>
-
-                <div style={{marginTop:'20px'}} class="eventDetails">
-                  <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
-                  Public Event
-                  <br/>
-
-                  <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-                  {date} at {start_time} - {end_time}
-                  <br/>
-                  <div>
-
-                     {
-                       (repeat=="daily")?
-                       <span>
-                         <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                         Occurs every day
-
-                       </span>
-                       :
-                       <div>
-
-
-                         {
-                           (repeat=="monthly")?
-                           <span>
-                             <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                             Occurs every month
-
-                           </span>
-                           :
-                             <div>
-                               {
-                               (repeat=="weekly")?
-                               <span>
-                                 <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                                 Occurs weekly
-                                 {/*<span>
-                                   &nbsp;
-                                 {dateFns.format(currentDay, 'iiii')}
-                                   &nbsp;
-                                 </span}
-                                 */
-                                 }
-
-                               </span>
-                               :
-                               <span></span>
-                               }
-                             </div>
-
-
-
-
-                           }
-
-
-
-
-
-                       </div>
-                     }
-                  </div>
-                  <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                  {invited.length+1} people
-                  <br/>
-
-                  <br/>
-
-
-
-
-                  <div className = "contentEvent"> {content} </div>
-
-
-
-                  </div>
-
-
-
-
-                </div>
-
-
-            </div>
-
-
-            <div class="innerRightEvent">
-
-              <div class="mapEventCard">
-                <p style={{fontSize:'20px'}}
-                  className="eventDetails"> Location </p>
                 <span>
-                  <Divider style={{marginTop:'-1px'}}/>
-
-                  <ReactBingmaps
-
-                    bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                    center = {[32.2226, 110.9747]}
-                    boundary = {
-                    {
-                      "search":"Fremont, CA",
-                      "option":{
-                        entityType: 'PopulatedPlace'
-                      },
-                      "polygonStyle" :{
-                        fillColor: 'rgba(161,224,255,0.4)',
-                        strokeColor: '#a495b2',
-                        strokeThickness: 2
-                      }
-                    }
-                  }
-                    >
-                  </ReactBingmaps>
-
-                   {/*Saving api calls don't worry about maps*/}
-                  <Divider/>
-                    <i style={{marginRight:'15px', color:'#1890ff',
-                      fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
-                    <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
-                      Tucson, Arizona
-                    </p>
+                  <Avatar
+                  src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
+                  />
+                  <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
                 </span>
-
-
               </div>
-
-
-
-                      <div style={{ marginTop:'150px', width:'450px',
-                        padding:'40px'}} className = "eventPeopleWord eventCard">
-                         Statistics
-
-                        <Divider/>
-                        <div className =  "percentagesBars">
-
-                        <div className = "percentage">
-
-                        <Progress
-                          type = "circle"
-                          percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
-                           size="small"
-                           status="active"
-                           width={80}
-                           gap
-                        />
-                        <div className = "percentageTerm"> Responded </div>
-                        </div>
-
-                        <div className = 'percentage'>
-                        <Progress
-                          type = "circle"
-
-                          percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
-                          width={80}
-                        />
-
-                        <div className = "percentageTerm"> Accepted </div>
-                        </div>
-
-                        <div className = "percentage">
-                        {
-                          (Math.floor(100*(decline.length/invited.length))<100)?
-
-                           <Progress
-
-                             type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
-                             width={80}
-                           />
-                          :
-                          <Progress
-
-                            type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
-
-                            width={80}
-                           />
-                        }
-
-                        <div className = "percentageTerm" > Declined </div>
-                        </div>
-
-
-
-                        </div>
-
-                      </div>
-
-
-                      <div style={{ left:'72%',marginTop:'50px', width:'450px', height:'300px',
-                        padding:'40px'}} className = "eventPeopleWord eventCard">
-                         Suggested Friends
-
-                        <Divider/>
-
-
-
-
-
-                      </div>
-
-
-
-
             </div>
 
-          </div>
-
-          <div style={{marginTop:'40px', marginLeft:'100px', color:'black'}} class="innerLeftEvent">
-
-
-
-
-
-
-
-
-
-
 
           </div>
+        </div>
+      </div>
 
 
 
-
-          <div className = 'eventInfo outerContainerPeople'>
-
-
-            {/*
-
-            <div className = "locationEventWord">Location</div>
-            {
-              location === "" ?
-              <div className = "contentEventEmpty"> No info... </div>
-              :
-              <div> {this.capitalize(location)} </div>
-            }
-
-            */}
-
-
-
-
-          </div>
-
-
-
-
-
+      {/* Middle invite card*/}
+      <div class="middleInviteCard">
+        <Statistic class="addFont" title="Going" value={accepted.length} />
+        <div className = "">
+          <Liking
+          history = {this.props.history}
+          style={{display:'inline-block'}}
+          num={5}
+          like_people={accepted}/>
+        </div>
+        <Statistic title="Invited" value={invited.length} />
+        <div className = "">
+          <Liking
+          num={5}
+          history = {this.props.history}
+          style={{display:'inline-block'}}
+          like_people={invited}/>
         </div>
 
-      <DetailEditEventForm
-      {...this.props}
+        <div class="buttonHolder">
+           <Button
+              type="primary" shape="round"
+              icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+              style={{left:'110%', fontSize:'15px'}} size={'large'}>
+             Invite
+           </Button>
+           {
+          (accepted.includes(this.props.username))?
+             <Button
+                shape="round"
+                icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                style={{left:'115%', fontSize:'15px'}} size={'large'}>
+               Going
+             </Button>
 
-      info = {this.props.info}
-      initialValues = {this.getInitialValue()}
-      onSubmit = {this.onSaveEdit}
-      visible={this.state.edit}
-      friendList = {this.props.friendList}
-      onDelete = {this.onDeleteEvent}
-       />
-      <AcceptShareModal
-      info = {this.props.tempEventForModal}
-      tempDifference ={this.props.tempDifference}
-      onCancel = {this.props.closeAcceptUnshareModal}
-      visible = {this.props.showAcceptUnshareModal}
-      onSubmit = {this.onAcceptUnShareEdit}
-       />
+             :
+             <Button
+                shape="round" type="primary"
+                icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                style={{left:'115%', fontSize:'15px'}} size={'large'}>
+               Going
+             </Button>
+           }
+         <Button
+            shape="round"
+            icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+            style={{left:'120%', fontSize:'15px'}} size={'large'} danger>
+            Delete
+         </Button>
+        </div>
+    </div>
 
-      <RemoveEventModal
-        visible = {this.props.showDeleteModal}
-        close = {this.props.closeEventDeleteModal}
-        history = {this.props.history}
-        item = {this.props.deleteEventId}
-        user = {this.props.id}
-      />
+    {/* Event details card*/}
+    <div class="eventDetailCard">
+      Event Details
+      <Divider/>
+      <div class="eventDetails">
+      <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
+        Public Event
+      <br/>
+      <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+        {date} at {start_time} - {end_time}
+      <br/>
+      <div>
+        {
+          (repeat=="daily")?
+          <span>
+           <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+             Occurs every day
+          </span>
+            :
+          <div>
+            {
+              (repeat=="monthly")?
+              <span>
+                <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                       Occurs every month
+              </span>
+                  :
+               <div>
+                  {
+                  (repeat=="weekly") ?
+                   <span>
+                     <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                     Occurs weekly
+                   </span>
 
-      <ChangeBackgroundModal
-        hostPic={host.profile_picture}
-        pic={eventBackgroundPic}
-        visible = {this.state.changeBackgroundView}
-        close = {this.onChangeBackgroundClose}
-        onSubmit = {this.handleBackgroundPictureChange}
-      />
-
-
+                   :
+                  <span></span>
+                  }
+              </div>
+            }
+          </div>
+        }
       </div>
+
+        <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+        {invited.length+1} people
+
+        <div className = "contentEvent"> {content} </div>
+      </div>
+    </div>
+
+
+    {/* Invite friends */}
+    <div style={{marginTop:'50px', width:'450px', height:'300px',
+        padding:'40px'}} className = "inviteFriendsEventCard">
+        Invite Friends
+        <Divider/>
+    </div>
+
+    {/* The Map card*/}
+    <div class="mapEventCard">
+      <p style={{fontSize:'20px'}}
+        className="eventDetails"> Location </p>
+      <span>
+        <Divider style={{marginTop:'-1px'}}/>
+        <ReactBingmaps
+          bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+          center = {[32.2226, 110.9747]}
+          boundary = {
+          {
+            "search":"Fremont, CA",
+            "option":{
+              entityType: 'PopulatedPlace'
+            },
+            "polygonStyle" :{
+              fillColor: 'rgba(161,224,255,0.4)',
+              strokeColor: '#a495b2',
+              strokeThickness: 2
+            }
+          }
+        }
+          >
+        </ReactBingmaps>
+
+         {/*Saving api calls don't worry about maps*/}
+        <Divider/>
+          <i style={{marginRight:'15px', color:'#1890ff',
+            fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+          <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+            Tucson, Arizona
+          </p>
+      </span>
+    </div>
+
+
+    {/* Statistic card */}
+    <div style={{ marginTop:'150px', width:'450px',
+      padding:'40px'}} className = "statEventCard">
+       <span> Statistics </span>
+      <Divider/>
+      <div className =  "percentagesBars">
+        <div className = "percentage">
+          <Progress
+            type = "circle"
+            percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
+             size="small"
+             status="active"
+             width={80}
+             gap
+          />
+          <div className = "percentageTerm"> Responded </div>
+        </div>
+      <div className = 'percentage'>
+        <Progress
+          type = "circle"
+          percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
+          width={80}
+        />
+        <div className = "percentageTerm"> Accepted </div>
+        </div>
+
+        <div className = "percentage">
+        {
+          (Math.floor(100*(decline.length/invited.length))<100)?
+           <Progress
+             type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
+             width={80}
+           />
+          :
+          <Progress
+            type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
+            width={80}
+           />
+        }
+        <div className = "percentageTerm" > Declined </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <DetailEditEventForm
+    {...this.props}
+
+    info = {this.props.info}
+    initialValues = {this.getInitialValue()}
+    onSubmit = {this.onSaveEdit}
+    visible={this.state.edit}
+    friendList = {this.props.friendList}
+    onDelete = {this.onDeleteEvent}
+     />
+    <AcceptShareModal
+    info = {this.props.tempEventForModal}
+    tempDifference ={this.props.tempDifference}
+    onCancel = {this.props.closeAcceptUnshareModal}
+    visible = {this.props.showAcceptUnshareModal}
+    onSubmit = {this.onAcceptUnShareEdit}
+     />
+
+    <RemoveEventModal
+      visible = {this.props.showDeleteModal}
+      close = {this.props.closeEventDeleteModal}
+      history = {this.props.history}
+      item = {this.props.deleteEventId}
+      user = {this.props.id}
+    />
+
+    <ChangeBackgroundModal
+      hostPic={host.profile_picture}
+      pic={eventBackgroundPic}
+      visible = {this.state.changeBackgroundView}
+      close = {this.onChangeBackgroundClose}
+      onSubmit = {this.handleBackgroundPictureChange}
+    />
+
+    </div>
 
     )
   }

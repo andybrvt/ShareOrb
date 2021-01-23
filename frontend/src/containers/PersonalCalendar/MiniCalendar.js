@@ -21,8 +21,8 @@ class MiniCalendar extends React.Component{
     return (
       <div>
 
-        <div className= "header miniRow flex-middle">
-          <div className = "miniCol miniCol-start">
+        <div className= "header">
+          <div className = "arrowLeft">
             <div className = "icon" onClick ={this.prevMonth}>
             <i className= 'arrow arrow-left'></i>
             </div>
@@ -34,7 +34,7 @@ class MiniCalendar extends React.Component{
              {dateFns.format(this.state.currentMonth, dateFormat)}
             </span>
           </div>
-          <div className= "miniCol miniCol-end" onClick = {this.nextMonth}>
+          <div className= "arrowRight" onClick = {this.nextMonth}>
             <div className = "icon">
             <i className = 'arrow arrow-right'></i>
             </div>
@@ -64,40 +64,6 @@ class MiniCalendar extends React.Component{
 
   }
 
-  renderSide() {
-    // This is just to render the tiny tabs for the week view in the mini
-    // calendar
-    const {currentMonth, selectedDate} = this.state
-    const startDateMonth = dateFns.startOfMonth(currentMonth);
-    const endDateMonth = dateFns.endOfMonth(currentMonth);
-    const startFirstWeek = dateFns.startOfWeek(startDateMonth);
-    const startLastWeek = dateFns.startOfWeek(endDateMonth);
-
-    let date = startFirstWeek;
-    let formattedWeek = '';
-    const weekFormat = 'dd mmmm yyyy'
-
-    const week = []
-    while (date <= startLastWeek){
-      formattedWeek = dateFns.format(date, weekFormat)
-      const cloneDate = date
-      week.push(
-        <div className = 'miniholder'>
-        <div
-        onClick = {() => this.onWeekClick(cloneDate)}
-        className = 'minitabs'
-        >
-        <span></span>
-        </div>
-        </div>
-      )
-      date = dateFns.addWeeks(date, 1)
-    }
-    return <div className = 'minisideBar'> {week} </div>
-
-
-  }
-
 
   renderCells () {
     const {currentMonth, selectedDate} = this.state;
@@ -105,6 +71,10 @@ class MiniCalendar extends React.Component{
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
     const endDate = dateFns.endOfWeek(monthEnd);
+
+    const diffWeeks = dateFns.differenceInCalendarWeeks(endDate, startDate)
+
+
 
     const dateFormat = "d";
     const rows = [];
@@ -114,31 +84,78 @@ class MiniCalendar extends React.Component{
     let day = startDate;
     let formattedDate = "";
 
-    while (day <= endDate){
-      for (let i=0; i<7; i++){
-        formattedDate = dateFns.format(day, dateFormat)
-        const cloneDay = day;
-        days.push(
-          <div
-            className = 'miniCol miniCell'
-            key = {day}
-          >
-            <div className = 'miniDay' onClick = {() =>
-            this.onDateClick(cloneDay)}>
-              <span className = ''>{formattedDate}</span>
+    if(diffWeeks === 4){
+      while (day <= dateFns.addWeeks(endDate,1)){
+        for (let i=0; i<7; i++){
+          formattedDate = dateFns.format(day, dateFormat)
+          const cloneDay = day;
+          days.push(
+            <div
+              className = 'miniCol miniCell'
+              key = {day}
+            >
+              <div
+
+                className = {dateFns.isSameMonth(cloneDay,monthStart) ?
+                  "miniDayIn"
+
+                  :
+
+                  "miniDayOut"
+
+                }
+                onClick = {() => this.onDateClick(cloneDay)}>
+                <span className = ''>{formattedDate}</span>
+              </div>
             </div>
+          )
+          day = dateFns.addDays(day, 1)
+        }
+
+        rows.push(
+          <div className = 'miniRow' key = {day}>
+            {days}
           </div>
         )
-        day = dateFns.addDays(day, 1)
+        days = []
       }
+    } else if(diffWeeks === 5){
+      while (day <= endDate){
+        for (let i=0; i<7; i++){
+          formattedDate = dateFns.format(day, dateFormat)
+          const cloneDay = day;
+          days.push(
+            <div
+              className = 'miniCol miniCell'
+              key = {day}
+            >
+              <div
+                className = {dateFns.isSameMonth(cloneDay,monthStart) ?
+                  "miniDayIn"
 
-      rows.push(
-        <div className = 'miniRow' key = {day}>
-          {days}
-        </div>
-      )
-      days = []
+                  :
+
+                  "miniDayOut"
+
+                }
+                onClick = {() => this.onDateClick(cloneDay)}>
+                <span className = ''>{formattedDate}</span>
+              </div>
+            </div>
+          )
+          day = dateFns.addDays(day, 1)
+        }
+
+        rows.push(
+          <div className = 'miniRow' key = {day}>
+            {days}
+          </div>
+        )
+        days = []
+      }
     }
+
+
     return <div className = 'body'>{rows}</div>
   }
 

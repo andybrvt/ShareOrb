@@ -599,6 +599,12 @@ class CalendarPopOver extends React.Component{
 
                     <br/>
                     }
+                    {
+                      month ?
+
+                      <span></span>
+
+                    :
 
                     <span className = 'eventTimeInfo pointerEvent'>
                       {dateFns.format(new Date(item.start_time),'h:mm a')}
@@ -606,6 +612,8 @@ class CalendarPopOver extends React.Component{
                       {dateFns.format(new Date(item.end_time),'h:mm a')}
 
                     </span>
+                    }
+
                     {
                       (item.host.username!=this.props.username && month === false)?
                         <Avatar style={{float:'right', marginTop:'7px'}} size={20}
@@ -642,12 +650,20 @@ class CalendarPopOver extends React.Component{
 
                         <br/>
                         }
-                      <span className = 'eventTimeInfo pointerEvent'>
-                        {dateFns.format(new Date(item.start_time),'h:mm a')}
-                        -
-                        {dateFns.format(new Date(item.end_time),'h:mm a')}
+                        {
+                          month ?
 
-                      </span>
+                          <span></span>
+
+                        :
+
+                        <span className = 'eventTimeInfo pointerEvent'>
+                          {dateFns.format(new Date(item.start_time),'h:mm a')}
+                          -
+                          {dateFns.format(new Date(item.end_time),'h:mm a')}
+
+                        </span>
+                        }
 
                     </span>
 
