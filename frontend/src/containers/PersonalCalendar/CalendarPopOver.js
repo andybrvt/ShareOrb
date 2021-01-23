@@ -589,7 +589,7 @@ class CalendarPopOver extends React.Component{
 
 
                   <span className="pointerEvent">
-                    <span className = 'eventTitle pointerEvent' >
+                    <span className = 'eventPageTitle pointerEvent' >
                       {item.title.substring(0,19)}
                     </span>
                     {month ?
@@ -634,7 +634,7 @@ class CalendarPopOver extends React.Component{
 
 
                     <span className="pointerEvent">
-                      <span className = 'eventTitle pointerEvent' > {item.title.substring(0,19) } </span>
+                      <span className = 'eventPageTitle pointerEvent' > {item.title.substring(0,19) } </span>
                         {month ?
                         <span></span>
 

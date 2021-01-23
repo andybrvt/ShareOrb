@@ -14,6 +14,9 @@
 }
 
 
+
+
+
 /* CSS for the eventInfo side of the event page */
 .eventInfoContainer{
   width:70%;
@@ -23,46 +26,73 @@
 }
 
 
-
-
-
 .eventTopEntire{
   width: 100%;
-  /* padding: 30px; */
   height: 100%;
   font-family: 'Segoe UI Regular';
   display: flex;
   flex-direction: row;
   background-color: white;
-
 }
 
 
-.topSectContainierRight{
-  width:40%;
-  position: relative;
-}
-
-/* image padding */
- .topSectContainier{
+ .topSectContainerLeft{
   background-color: #f5f5f5;
-  padding-left: 20px;
-  padding-top: 30px;
-  padding-bottom: 10px;
+
+  padding:25px;
   display: flex;
+  width:50%;
+  left:10%;
+  position: relative;
+  background: purple;
+}
+
+
+
+
+.topSectContainerRight{
+  padding-top: 5%;
+  width:40%;
+  left:10%;
+  position: relative;
+  background: orange;
+}
+
+.eventBackgroundPic{
+  background-color: red;
+  width: 80%;
+  top:10%;
+  left:20%;
+  height:75%;
+  border: 10px dashed gainsboro;
+  text-align: center;
+
+  position: relative;
+
+}
+
+.eventLeftContainer{
+  position:relative;
+  width:85%;
+  height:100%;
+  left:14%;
+  display:flex;
+  flex-direction: row;
+  background:blue;
 }
 
 
 
 .innerLeftEvent{
   position:relative;
-  width:40%;
+  width:50%;
+  padding-left: 50px;
   background-color: pink;
 }
 
 .innerRightEvent{
   position:relative;
-  width:40%;
+  width:50%;
   background-color: brown;
 }
 
@@ -70,9 +100,8 @@
 
 
 .eventGroupChatContainer{
-  top:10%;
   width:30%;
-  height:100vh;
+  height:100%;
   position:relative;
   background: red;
 }
@@ -126,7 +155,8 @@
 
 
 .outerContainerEvent{
-
+  position:relative;
+  left:10%;
 }
 
 .mapSize{
@@ -186,16 +216,6 @@
     /* background: red; */
 }
 
-
-.eventLeftContainer{
-  position:relative;
-  width:100%;
-  height:100%;
-  left:20%;
-  display:flex;
-  flex-direction: row;
-  background:blue;
-}
 
 
 
@@ -258,14 +278,6 @@
 
 
 
-
-.eventTopSide{
-
-
-  padding: 50px;
-  /* background-color: red; */
-}
-
  .eventTitle{
   color: black;
   font-size: 28px;
@@ -306,29 +318,19 @@
 }
 
 
-.eventBackgroundPic{
-  /* background-color: red; */
-  width: 60%;
-  height: 350px;
-  border: 10px dashed gainsboro;
-  text-align: center;
-  left:20%;]
-  position: relative;
-  border-radius: 10px;
-}
 
 
 
 
 .eventBackgroundWPic{
-  background-color: red;
-  width: 60%;
+  /* background-color: red; */
+  width: 80%;
   position: relative;
-  left:30%;
+  left:20%;
   height: 350px;
   overflow: hidden;
   /* border: 10px dashed gainsboro; */
-
+  border-radius: 10px;
 
 }
 
@@ -338,15 +340,18 @@
   object-fit: cover;
   position:relative;
   width:100%;
+  height:100%;
+  top:10%;
   height: 350px;
   background-color: #F5F5F5;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .eventBackgroundPic .pictureFrame{
-  width: 60%;
+  top:25%;
+  width: 80%;
   position: relative;
-  left:30%;
+  left:10%;
   height: 350px;
   font-size: 55px;
   color: gainsboro;
@@ -404,12 +409,12 @@
   margin-bottom: 10px;
 
 }
-.eventInfoContainer .eventInfoView .eventInfo .eventPeopleWord {
+.eventPeopleWord {
   font-size: 20px;
   color: black;
   margin-top: 40px;
 }
-.eventInfoContainer .eventInfoView .eventInfo .percentagesBars {
+.percentagesBars {
   /* background-color: red; */
   position: relative;
   display: flex;
@@ -418,13 +423,13 @@
   /* top: 300px; */
 }
 
-.eventInfoContainer .eventInfoView .eventInfo .percentagesBars .percentage{
+.percentage{
   /* background-color: red; */
   padding: 25px;
   /* align-items: center; */
   text-align: center;
 }
-.eventInfoContainer .eventInfoView .eventInfo .percentagesBars .percentage .percentageTerm{
+.percentageTerm{
   /* background-color: red; */
   /* padding: 30px; */
   margin-top: 10px;
@@ -460,12 +465,9 @@
 /* close */
 .closeEvent{
   /* background-color: red; */
-
-  text-align: center;
-  position:absolute;
+  float:right;
   font-size: 40px;
   top: 10px;
-  left: 1170px;
   cursor: pointer;
   transition: 0.5s;
 }
@@ -475,11 +477,8 @@
 .editEventButtonContainer{
   /* background-color: red; */
   color:#1890ff;
-  text-align: center;
-  position:absolute;
-  font-size: 30px;
-  top: 75px;
-  left: 1175px;
+
+  position:relative;
   cursor: pointer;
   transition: 0.5s;
 }

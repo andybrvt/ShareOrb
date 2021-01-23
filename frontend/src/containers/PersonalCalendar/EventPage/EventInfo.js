@@ -544,7 +544,7 @@ class EventInfo extends React.Component{
         <div className = 'eventInfoView' >
 
           <div class="eventTopEntire">
-          <div className = 'topSectContainier'>
+          <div className = 'topSectContainerLeft'>
 
 
             {
@@ -586,12 +586,37 @@ class EventInfo extends React.Component{
 
           </div>
 
-          <div className = 'topSectContainierRight'>
+          <div className = 'topSectContainerRight'>
+
+            <div className = 'closeEvent'>
+              <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
+              <i class="far fa-times-circle">  </i>
+              </Link>
+            </div>
+
+            <div className = 'closeEvent'>
+              {
+                eventHostId === this.props.userId ?
+
+                <div>
+                  <div
+                  onClick={() => this.onEditClick()}
+                  >
+                  <i class="fas fa-pen" ></i>
+                  </div>
+                </div>
+
+                :
+
+                <div></div>
+
+              }
+
+            </div>
             <div
             className = "dateCircle"
             style = {{
               backgroundColor: color,
-
 
             }}
             >
@@ -611,7 +636,7 @@ class EventInfo extends React.Component{
 
 
 
-            <div class="eventCard" style={{marginTop:'-25px', width:'500px',padding:'40px'}}>
+            <div class="eventCard" style={{marginTop:'-25px', width:'300px',padding:'40px'}}>
                 <div
                   className = 'eventTitle'>
                   {this.capitalize(title)}
@@ -653,12 +678,11 @@ class EventInfo extends React.Component{
 
           </div>
       <div/>
-          <div style={{marginLeft:'290px', color:'black'}} class="outerContainer">
+          <div style={{marginLeft:'290px', color:'black'}} class="outerContainerEvent">
             <span
-                style={{ fontSize:'20px', width:'1100px', height:'60px',
+                style={{ fontSize:'20px', width:'900px', height:'60px',
                  display:'inline-block', marginTop:'100px', padding:'45px'}}
                  class="aboutEvent eventCard">
-              <div class="outerContainerEvent">
               <span class="innerContainerEvent" style={{display:'inline-block'}}>
 
                 <Statistic class="addFont" title="Going" value={accepted.length}
@@ -733,7 +757,7 @@ class EventInfo extends React.Component{
                </Button>
              </span>
 
-               </div>
+
             </span>
 
           </div>
@@ -873,6 +897,81 @@ class EventInfo extends React.Component{
               </div>
 
 
+
+                      <div style={{ marginTop:'150px', width:'450px',
+                        padding:'40px'}} className = "eventPeopleWord eventCard">
+                         Statistics
+
+                        <Divider/>
+                        <div className =  "percentagesBars">
+
+                        <div className = "percentage">
+
+                        <Progress
+                          type = "circle"
+                          percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
+                           size="small"
+                           status="active"
+                           width={80}
+                           gap
+                        />
+                        <div className = "percentageTerm"> Responded </div>
+                        </div>
+
+                        <div className = 'percentage'>
+                        <Progress
+                          type = "circle"
+
+                          percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
+                          width={80}
+                        />
+
+                        <div className = "percentageTerm"> Accepted </div>
+                        </div>
+
+                        <div className = "percentage">
+                        {
+                          (Math.floor(100*(decline.length/invited.length))<100)?
+
+                           <Progress
+
+                             type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
+                             width={80}
+                           />
+                          :
+                          <Progress
+
+                            type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
+
+                            width={80}
+                           />
+                        }
+
+                        <div className = "percentageTerm" > Declined </div>
+                        </div>
+
+
+
+                        </div>
+
+                      </div>
+
+
+                      <div style={{ left:'72%',marginTop:'50px', width:'450px', height:'300px',
+                        padding:'40px'}} className = "eventPeopleWord eventCard">
+                         Suggested Friends
+
+                        <Divider/>
+
+
+
+
+
+                      </div>
+
+
+
+
             </div>
 
           </div>
@@ -911,106 +1010,10 @@ class EventInfo extends React.Component{
 
 
 
-        <div style={{ left:'72%',marginTop:'150px', width:'450px',
-          padding:'40px'}} className = "eventPeopleWord eventCard">
-           Statistics
-
-          <Divider/>
-          <div className =  "percentagesBars">
-
-          <div className = "percentage">
-
-          <Progress
-            type = "circle"
-            percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
-             size="small"
-             status="active"
-             width={80}
-             gap
-          />
-          <div className = "percentageTerm"> Responded </div>
-          </div>
-
-          <div className = 'percentage'>
-          <Progress
-            type = "circle"
-
-            percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
-            width={80}
-          />
-
-          <div className = "percentageTerm"> Accepted </div>
-          </div>
-
-          <div className = "percentage">
-          {
-            (Math.floor(100*(decline.length/invited.length))<100)?
-
-             <Progress
-
-               type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
-               width={80}
-             />
-            :
-            <Progress
-
-              type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
-
-              width={80}
-             />
-          }
-
-          <div className = "percentageTerm" > Declined </div>
-          </div>
-
-
 
           </div>
 
-        </div>
 
-
-        <div style={{ left:'72%',marginTop:'50px', width:'450px', height:'300px',
-          padding:'40px'}} className = "eventPeopleWord eventCard">
-           Suggested Friends
-
-          <Divider/>
-
-
-
-
-
-        </div>
-
-
-
-          </div>
-
-          <div className = 'closeEvent'>
-            <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
-            <i class="far fa-times-circle">  </i>
-            </Link>
-          </div>
-
-          <div className = 'editEventButtonContainer'>
-            {
-              eventHostId === this.props.userId ?
-
-              <div>
-                <div
-                onClick={() => this.onEditClick()}
-                >
-                <i class="fas fa-pen" ></i>
-                </div>
-              </div>
-
-              :
-
-              <div></div>
-
-            }
-
-          </div>
 
 
 

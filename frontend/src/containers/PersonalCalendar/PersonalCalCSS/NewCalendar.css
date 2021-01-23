@@ -884,7 +884,7 @@ controls all colors and font weight */
   z-index: 1;
 }
 
-.eventTitle{
+.eventPageTitle{
   font-size: 14px;
   margin-left: 5px;
   white-space:nowrap;
