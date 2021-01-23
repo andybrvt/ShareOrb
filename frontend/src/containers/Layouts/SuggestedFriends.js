@@ -120,7 +120,14 @@ class SuggestedFriends extends React.Component {
         // and update their auth too as well
         this.props.updateSentRequestList(res.data)
 
+
+        const notificationObject = {
+          command: 'send_follow_request_notification',
+          actor: follower,
+          recipient: following
+        }
         // ADD THE NOTIFICATIONI HERE TO UPDATE THE FOLLOWING AUTH
+        NotificationWebSocketInstance.sendNotification(notificationObject)
 
 
       })
@@ -192,8 +199,15 @@ class SuggestedFriends extends React.Component {
     .then(res => {
       this.props.updateSentRequestList(res.data)
 
+      const notificationObject = {
+        command: 'unsend_follow_request_notification',
+        actor: follower,
+        recipient: following
+      }
 
-      // update notification here 
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
     })
   }
 

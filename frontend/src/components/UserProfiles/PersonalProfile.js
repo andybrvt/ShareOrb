@@ -368,6 +368,12 @@ class PersonalProfile extends React.Component{
       message.success('You accepted a follower.');
     };
 
+
+    onDirectMessages = () => {
+      // This function will be used
+    }
+
+
     onAcceptFollow = (follower, following) => {
       // This function will used to accept the follower, allow request and delete the notifications
       // The follower parameter will be the actor of the notification (it will be the
@@ -593,15 +599,22 @@ class PersonalProfile extends React.Component{
               :
 
               followers.includes(this.props.currentUser.toString()) ?
-              <div
-              style={{
-                paddingTop: "7px",
-                ontSize:'16px'}}
-              onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-              className = 'followButton'>
-                Unfollow
-              </div>
 
+              <div>
+                <div
+                style={{
+                  paddingTop: "7px",
+                  ontSize:'16px'}}
+                onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
+                className = 'followButton'>
+                  Unfollow
+                </div>
+              <br />
+                <div
+                  className = 'messageButton'>
+                  Message
+                </div>
+              </div>
 
 
               :
@@ -632,9 +645,7 @@ class PersonalProfile extends React.Component{
 
 
 
-              <div className = 'messageButton'>
-                Message
-              </div>
+
 
             </div>
 

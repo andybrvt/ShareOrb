@@ -136,7 +136,7 @@ class WebSocketNewChatSidePanel {
   }
 
   sendNewCreatedChat = (chatId) => {
-
+    console.log(chatId)
     // This function will accept the new created chat id and then send it out
     // into the chatList of all other people that are part of the chat
 

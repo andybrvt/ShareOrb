@@ -548,11 +548,20 @@ class PersonalProfileEventList extends React.Component{
 
 
                 followers.includes(this.props.currentUser.toString()) ?
-                <div
-                onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-                className = 'unFollowButton'>
-                  Unfollow
+
+                <div>
+                  <div
+                  onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
+                  className = 'unFollowButton'>
+                    Unfollow
+                  </div>
+                  <br />
+                  <div className = 'messageButton'>
+                    Message
+                  </div>
+                
                 </div>
+
 
 
 
@@ -584,9 +593,7 @@ class PersonalProfileEventList extends React.Component{
 
 
 
-                <div className = 'messageButton'>
-                  Message
-                </div>
+
 
               </div>
 
