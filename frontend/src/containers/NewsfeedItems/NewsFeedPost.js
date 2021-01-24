@@ -644,9 +644,10 @@ class NewsfeedPost extends React.Component {
 
         <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
         {this.revealPhoto()}
+
       </div>
 
-        <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
+
         {this.BottomLikeCommentPost()}
 
       </div>
