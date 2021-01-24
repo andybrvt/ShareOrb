@@ -3,7 +3,7 @@
   background-color: white;
   width: 96vw;
   /* padding: 30px; */
-  height:95vh;
+  height:93vh;
   font-family: 'Segoe UI Regular';
   display: flex;
   flex-direction: row;
@@ -18,14 +18,17 @@
   position:relative;
   /* background: yellow; */
   /* align-items: center; */
+  overflow: auto;
+  height: 100%;
 }
 
 
 /* CSS for the group chat side of the event page */
 .eventGroupChatContainer{
   width:30%;
+  height: 100%;
   position:relative;
-  background: red;
+  /* background: red; */
 }
 
 .eventInfoView{
@@ -51,7 +54,7 @@
  display: flex;
  width:45%;
  position: relative;
- /* background: purple; */
+
 }
 
 .eventTopEntire .topSectContainerRight{
@@ -218,7 +221,7 @@
 .middleInviteCard{
   font-size: 20px;
   width:95%;
-  height:100%;
+  height:80%;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   position: relative;
   top: 50%;
@@ -231,6 +234,7 @@
 
 .middleInviteCard .goingHolder{
   /* background-color: red; */
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 20%;
@@ -246,11 +250,13 @@
 
 .middleInviteCard .invitedHolder{
   /* background-color: blue; */
+  position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 15px;
   width: 10%;
+
 }
 
 .middleInviteCard .invitedHolder .inviteTitle{
@@ -296,6 +302,7 @@
 
 .eventBottomEntire .eventBottomLeft{
   width: 50%;
+  /* background-color: red; */
 }
 
 .eventBottomEntire .eventBottomRight{
@@ -316,15 +323,15 @@
   padding:30px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
-  width: 90%;
+  width: 95%;
   font-size: 20px;
-  left: 50%;
+  left: 52.5%;
   top: 10px;
   transform: translateX(-50%);
 }
 
 .eventDetailCard .eventDetails{
-  font-size: 16px;
+  font-size: 14px;
   position: relative;
   margin-top:20px;
   color:black;
@@ -422,14 +429,164 @@
 }
 
 
-/* CSS for the bottm part of the event page */
+
+
+
+/* CSS for the group chats in the event  */
+.eventGCContainer{
+  /* background-color: red; */
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.notDisabledChatContainer{
+  /* background-color: red; */
+  height: 100%;
+  position: relative;
+
+}
+
+.messageCardContainer{
+  position: relative;
+  background-color: blue;
+  height: 10%;
+}
+
+.messageCardContainer .eventGroupChatCard{
+  position:relative;
+  width:80%;
+  top: 50%;
+  padding:10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: white;
+  line-height: 150%;
+  border-radius: 10px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+}
+
+.messageCardContainer .eventGroupChatCard .eventChatHeaderMiddle{
+  font-family: "Segoe UI";
+  font-weight: 400;
+  position: relative;
+  vertical-align: middle;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.messageList{
+  width: 100%;
+  height: 80%;
+  background-color: green;
+  overflow: auto;
+  /* padding:10px; */
+  padding-top: 20px;
+}
+
+.messageList .eventMessageItemUser{
+  /* background-color: red; */
+  clear:both;
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 2px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 350px;
+  /* line-height: 130%; */
+  background: #00BFFF;
+  color: #f5f5f5;
+  float: right;
+  font-size: 15px;
+}
+
+.messageList .eventMessageItemNotUser{
+  /* background-color: red; */
+  clear:both;
+  /* display: inline-block; */
+  display:flex;
+  padding: 10px 15px;
+  margin: 2px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 350px;
+  /* line-height: 130%; */
+  background: #f5f5f5;
+  float: left;
+  font-size: 15px;
+
+}
+
+.messageList  .eventMessageItemUser .eventMessageAvatar{
+  position: relative;
+  float:right;
+}
+
+.messageList .eventMessageItemNotUser .eventMessageAvatar{
+  /* margin-left: 5px; */
+}
+
+.messageList .eventMessageItemNotUser .messageP{
+  /* background-color: red; */
+  margin-left: 10px;
+  /* padding-top: -5px; */
+}
+
+.messageList .eventMessageItemUser .eventTimeStamp{
+  display:inline-block;
+  float:right;
+}
+
+.eventTextMessageHolder{
+  float:right;
+  margin-left: 5px;
+}
+
+
+.eventTextMessageHolder .userName{
+  /* background-color: red; */
+  /* position: absolute; */
+  /* margin-top: -25px; */
+  color: grey;
+  font-size: 14px;
+  /* font-family: "Segoe UI"; */
+}
+
+.eventTextMessageHolder .eventMessage{
+}
+
+.eventTextMessageHolder .eventTimeStamp{
+  font-size: 9px;
+
+}
 
 
 
 
 
+.eventMessageInputForm{
+  background-color: red;
+  height: 10%;
+}
+
+.eventChatInput {
+  background-color: #f5f5f5;
+  margin-top:10px;
+  border-radius: 10px;
+  margin-left: 15px;
+  width:95%;
+  font-size: 15px;
+  padding:10px;
+}
 
 
+.chatDisabledPage{
+  background-color: whitesmoke;
+  padding-top: 50%;
+  font-size: 15px;
+  text-align: center;
+  height: 100%;
+}
 
 
 
@@ -648,18 +805,9 @@
 .chatBox{
   height:100%;
   position: relative;
-
-
   line-height: 100%;
 }
 
-.eventGroupChat .chatDisabledPage{
-  background-color: whitesmoke;
-  padding-top: 50%;
-  font-size: 15px;
-  text-align: center;
-  height: 100%;
-}
 .chatHeader{
   margin-left: 150px;
   color:#096dd9;
@@ -676,88 +824,18 @@
 
 
 
-.messageList{
-  width: 100%;
-  height: 92%;
-  /* background-color: red; */
-  overflow: auto;
-  margin-top: 20px;
-  /* padding:10px; */
-  padding-top: 20px;
-}
 
 
 
-.eventMessageItemUser{
-  /* background-color: red; */
-  clear:both;
-  display: inline-block;
-  padding: 10px 15px;
-  margin: 2px 15px 5px 15px;
-  border-radius: 20px;
-  max-width: 350px;
-  /* line-height: 130%; */
-  background: #00BFFF;
-  color: #f5f5f5;
-  float: right;
-  font-size: 15px;
-}
-.eventGroupChatContainer .messageList .eventMessageItemUser .messageP .eventTimeStamp{
-  display:inline-block;
-  float:right;
-  font-size: 9px;
-}
-.eventGroupChatContainer .messageList  .eventMessageItemUser .eventMessageAvatar{
-  position: relative;
-  float:right;
-}
 
-.eventGroupChatContainer .messageList .eventMessageItemNotUser{
-  /* background-color: red; */
-  clear:both;
-  /* display: inline-block; */
-  display:flex;
-  padding: 10px 15px;
-  margin: 2px 15px 5px 15px;
-  border-radius: 20px;
-  max-width: 350px;
-  /* line-height: 130%; */
-  background: #f5f5f5;
-  float: left;
-  font-size: 15px;
 
-}
-.eventGroupChatContainer .messageList .eventMessageItemNotUser .messageP .userName{
-  /* background-color: red; */
-  /* position: absolute; */
-  /* margin-top: -25px; */
-  color: grey;
-  font-size: 14px;
-  font-family: "Segoe UI";
-}
-.eventGroupChatContainer .messageList .eventMessageItemNotUser .messageP .eventTimeStamp{
-  font-size: 9px;
-}
 
-.eventGroupChatContainer .messageList .eventMessageItemNotUser .messageP{
-  /* background-color: red; */
-  margin-left: 10px;
-  /* padding-top: -5px; */
-}
 
-.eventGroupChatContainer .messageList .eventMessageItemNotUser .eventMessageAvatar{
-  /* margin-left: 5px; */
-}
 
-.eventChatInput {
-  background-color: #f5f5f5;
-  margin-top:10px;
-  border-radius: 10px;
-  margin-left: 15px;
-  width:95%;
-  font-size: 15px;
-  padding:10px;
-}
+
+
+
+
 
 .roundButton{
   border-radius: 10px;

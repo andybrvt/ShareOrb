@@ -34,6 +34,15 @@ class EventGroupChat extends React.Component{
     return prefix;
   }
 
+  renderTimeDiff = timestamp => {
+    const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    if(timeDiff > 20){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   handleChange = e => {
     console.log(e.target.value)
     this.setState({
@@ -106,44 +115,8 @@ class EventGroupChat extends React.Component{
     return(
 
 
-      <div>
-        <div class="chatBox eventCard"
-          style={{marginTop:'30px',width:'550px',
-            height:'60px', padding:'10px',marginBottom:'10px'}}>
+      <div className = "eventGCContainer">
 
-            <Liking
-            num={10}
-            history = {this.props.history}
-            style={{display:'inline-block'}} like_people={inviteList}/>
-          {
-          /*
-          <span class="innerContainerPeople">
-            {
-              inviteList.map(item => (
-                <div style={{display:'inline-block'}} key={item}>
-
-                  <span className = ''> {item.first_name+" "}</span>
-
-
-                </div>
-
-
-                ))
-
-              }
-
-          </span>
-          */
-          }
-          {/*
-          <div class="chatHeader">
-            You and {inviteList.length} others
-          </div>
-          */}
-
-
-
-        </div>
 
       {/*item.host.id==this.props.id
          (this.props.id==this.props.info.host.id)
@@ -151,7 +124,21 @@ class EventGroupChat extends React.Component{
 
     { ((inviteList.length > 0)||(eventHostId==this.props.id)) ?
 
-      <div>
+      <div className = "notDisabledChatContainer">
+        <div className = "messageCardContainer">
+          <div class="eventGroupChatCard">
+            <div clasName="eventChatHeaderMiddle">
+              <Liking
+              num={4}
+              history = {this.props.history}
+              style={{display:'inline-block'}} like_people={inviteList}/>
+              <div class="chatHeader">
+                You and {inviteList.length} others
+              </div>
+              </div>
+          </div>
+        </div>
+
 
       <div className = 'messageList'>
       <List
@@ -169,26 +156,34 @@ class EventGroupChat extends React.Component{
                 <Avatar
                 className = 'eventMessageAvatar'
                 size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.messageUser.profile_picture} />
-                </div>
-                :
+              <span className = "eventTextMessageHolder">
+                <div className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}</div>
+                <div className = "eventMessage">{item.body}</div>
 
-                <div></div>
-              }
-              <div className = 'messageP'>
-                {this.props.id !== item.messageUser.id ?
-                  <span className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
-                  </span>
+                {
+                  this.renderTimeDiff(item.created_on) ?
+
+                  <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
                   :
-                  <span></span>
+
+                  <div></div>
 
                 }
+              </span>
+
+              </div>
+                :
+
+                <div>
+                  <div>{item.body}</div>
+
+                </div>
+              }
 
 
-              <div>{item.body}</div>
-              <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
+
             </div>
 
-            </div>
 
           )}
         >
@@ -199,10 +194,10 @@ class EventGroupChat extends React.Component{
         </div>
 
 
-      <div className = 'inputForm'>
+      <div className = 'eventMessageInputForm'>
 
         <Form>
-          <TextArea
+          <Input
           className = 'eventChatInput'
           onChange = {this.handleChange}
           value = {this.state.message}
@@ -213,11 +208,14 @@ class EventGroupChat extends React.Component{
           />
 
         </Form>
+
+        <Button
+          style={{float:'right'}}
+          class="roundButton"
+          onClick = {this.handleSubmit}
+          type="primary"> Chat </Button>
       </div>
-      <Button
-        style={{float:'right', marginTop:'10px', marginRight:'20px'}}
-        class="roundButton"
-        onClick = {this.handleSubmit} type="primary"> Chat </Button>
+
 
       </div>
 

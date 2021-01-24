@@ -631,11 +631,14 @@ class EventInfo extends React.Component{
             <div className="goingTitle"> Going</div>
             <div className="goingInviteNumber">{accepted.length}</div>
               <div className = "">
-                <Liking
-                history = {this.props.history}
-                style={{display:'inline-block'}}
-                num={5}
-                like_people={accepted}/>
+                {/*
+                  <Liking
+                  history = {this.props.history}
+                  style={{display:'inline-block'}}
+                  num={5}
+                  like_people={accepted}/>
+                  */}
+
               </div>
         </div>
 
@@ -643,11 +646,14 @@ class EventInfo extends React.Component{
           <div className="inviteTitle"> Invited</div>
           <div className="goingInviteNumber">{invited.length}</div>
           <div className = "">
-            <Liking
-            num={5}
-            history = {this.props.history}
-            style={{display:'inline-block'}}
-            like_people={invited}/>
+            {/*
+              <Liking
+              num={5}
+              history = {this.props.history}
+              style={{display:'inline-block'}}
+              like_people={invited}/>
+              */}
+
           </div>
         </div>
 
