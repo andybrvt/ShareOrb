@@ -701,144 +701,154 @@ class EventInfo extends React.Component{
       </div>
       {/* Middle invite card*/}
 
-    {/* Event details card*/}
-    <div class="eventDetailCard">
-      Event Details
-      <Divider/>
-      <div class="eventDetails">
-      <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
-        Public Event
-      <br/>
-      <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-        {date} at {start_time} - {end_time}
-      <br/>
-      <div>
-        {
-          (repeat=="daily")?
-          <span>
-           <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-             Occurs every day
-          </span>
-            :
+
+    <div className = "eventBottomEntire">
+      <div className = "eventBottomLeft">
+        <div class="eventDetailCard">
+          Event Details
+          <Divider/>
+          <div class="eventDetails">
+          <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
+            Public Event
+          <br/>
+          <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+            {date} at {start_time} - {end_time}
+          <br/>
           <div>
             {
-              (repeat=="monthly")?
+              (repeat=="daily")?
               <span>
-                <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                       Occurs every month
+               <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                 Occurs every day
               </span>
-                  :
-               <div>
-                  {
-                  (repeat=="weekly") ?
-                   <span>
-                     <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                     Occurs weekly
-                   </span>
+                :
+              <div>
+                {
+                  (repeat=="monthly")?
+                  <span>
+                    <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                           Occurs every month
+                  </span>
+                      :
+                   <div>
+                      {
+                      (repeat=="weekly") ?
+                       <span>
+                         <i class="fas fa-redo-alt" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                         Occurs weekly
+                       </span>
 
-                   :
-                  <span></span>
-                  }
+                       :
+                      <span></span>
+                      }
+                  </div>
+                }
               </div>
             }
           </div>
-        }
+
+            <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+            {invited.length+1} people
+
+            <div className = "contentEvent"> {content} </div>
+            </div>
+          </div>
+
       </div>
 
-        <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-        {invited.length+1} people
-
-        <div className = "contentEvent"> {content} </div>
-      </div>
-    </div>
 
 
-    {/* Invite friends */}
-    <div style={{marginTop:'50px', width:'450px', height:'300px',
-        padding:'40px'}} className = "inviteFriendsEventCard">
-        Invite Friends
-        <Divider/>
-    </div>
+      <div className = "eventBottomRight">
+        {/* Invite friends */}
+        <div className = "inviteFriendsEventCard">
+            Invite Friends
+            <Divider/>
+        </div>
 
-    {/* The Map card*/}
-    <div class="mapEventCard">
-      <p style={{fontSize:'20px'}}
-        className="eventDetails"> Location </p>
-      <span>
-        <Divider style={{marginTop:'-1px'}}/>
-        <ReactBingmaps
-          bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-          center = {[32.2226, 110.9747]}
-          boundary = {
-          {
-            "search":"Fremont, CA",
-            "option":{
-              entityType: 'PopulatedPlace'
-            },
-            "polygonStyle" :{
-              fillColor: 'rgba(161,224,255,0.4)',
-              strokeColor: '#a495b2',
-              strokeThickness: 2
+        {/* The Map card*/}
+        <div class="mapEventCard">
+          <p style={{fontSize:'20px'}}
+            className="eventDetails"> Location </p>
+          <span>
+            <Divider style={{marginTop:'-1px'}}/>
+            <ReactBingmaps
+              bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+              center = {[32.2226, 110.9747]}
+              boundary = {
+              {
+                "search":"Fremont, CA",
+                "option":{
+                  entityType: 'PopulatedPlace'
+                },
+                "polygonStyle" :{
+                  fillColor: 'rgba(161,224,255,0.4)',
+                  strokeColor: '#a495b2',
+                  strokeThickness: 2
+                }
+              }
             }
-          }
-        }
-          >
-        </ReactBingmaps>
+              >
+            </ReactBingmaps>
 
-         {/*Saving api calls don't worry about maps*/}
-        <Divider/>
-          <i style={{marginRight:'15px', color:'#1890ff',
-            fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
-          <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
-            Tucson, Arizona
-          </p>
-      </span>
-    </div>
-
-
-    {/* Statistic card */}
-    <div style={{ marginTop:'150px', width:'450px',
-      padding:'40px'}} className = "statEventCard">
-       <span> Statistics </span>
-      <Divider/>
-      <div className =  "percentagesBars">
-        <div className = "percentage">
-          <Progress
-            type = "circle"
-            percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
-             size="small"
-             status="active"
-             width={80}
-             gap
-          />
-          <div className = "percentageTerm"> Responded </div>
-        </div>
-      <div className = 'percentage'>
-        <Progress
-          type = "circle"
-          percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
-          width={80}
-        />
-        <div className = "percentageTerm"> Accepted </div>
+             {/*Saving api calls don't worry about maps*/}
+            <Divider/>
+              <i style={{marginRight:'15px', color:'#1890ff',
+                fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+              <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+                Tucson, Arizona
+              </p>
+          </span>
         </div>
 
-        <div className = "percentage">
-        {
-          (Math.floor(100*(decline.length/invited.length))<100)?
-           <Progress
-             type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
-             width={80}
-           />
-          :
-          <Progress
-            type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
-            width={80}
-           />
-        }
-        <div className = "percentageTerm" > Declined </div>
+
+        {/* Statistic card */}
+        <div className = "statEventCard">
+           <span> Statistics </span>
+          <Divider/>
+          <div className =  "percentagesBars">
+            <div className = "percentage">
+              <Progress
+                type = "circle"
+                percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
+                 size="small"
+                 status="active"
+                 width={80}
+                 gap
+              />
+              <div className = "percentageTerm"> Responded </div>
+            </div>
+          <div className = 'percentage'>
+            <Progress
+              type = "circle"
+              percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
+              width={80}
+            />
+            <div className = "percentageTerm"> Accepted </div>
+            </div>
+
+            <div className = "percentage">
+            {
+              (Math.floor(100*(decline.length/invited.length))<100)?
+               <Progress
+                 type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
+                 width={80}
+               />
+              :
+              <Progress
+                type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
+                width={80}
+               />
+            }
+            <div className = "percentageTerm" > Declined </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
+    {/* Event details card*/}
+
+
 
 
 

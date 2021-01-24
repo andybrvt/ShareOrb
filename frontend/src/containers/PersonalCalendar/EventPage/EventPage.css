@@ -16,7 +16,7 @@
 .eventInfoContainer{
   width:70%;
   position:relative;
-  background: yellow;
+  /* background: yellow; */
   /* align-items: center; */
 }
 
@@ -210,6 +210,7 @@
 /* Middle invite card */
 .middleCardContainer{
   /* background-color: red; */
+  margin-top: 15px;
   position: relative;
   height: 15%;
 }
@@ -287,10 +288,27 @@
 
 }
 
+.eventBottomEntire{
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+}
+
+.eventBottomEntire .eventBottomLeft{
+  width: 50%;
+}
+
+.eventBottomEntire .eventBottomRight{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
 /* Event detail card */
 .eventDetailCard{
   position: relative;
-  overflow: hidden;
   color:black;
   background: white;
   line-height: 150%;
@@ -298,8 +316,11 @@
   padding:30px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
-  width:450px;
+  width: 90%;
   font-size: 20px;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
 }
 
 .eventDetailCard .eventDetails{
@@ -319,13 +340,17 @@
 /* Statistic Card */
 .statEventCard{
   position: relative;
-  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
   background: white;
   line-height: 150%;
   border-radius: 15px;
   padding:40px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
+  width: 90%;
+  height: 300px;
+  margin-top: 10px;
 }
 .statEventCard .percentagesBars{
   position: relative;
@@ -335,6 +360,7 @@
   /* top: 300px; */
 }
 .statEventCard .percentage{
+  position: relative;
   padding: 25px;
   text-align: center;
 }
@@ -352,13 +378,16 @@
 .inviteFriendsEventCard{
   position: relative;
   left:50%;
-  overflow: hidden;
+  transform: translateX(-50%);
   background: white;
   line-height: 150%;
   border-radius: 15px;
   padding:40px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
+  width:90%;
+  height: 300px;
+  margin-top: 10px;
 }
 
 /* Suggested Friends Card Title */
@@ -372,20 +401,16 @@
 
 .mapEventCard{
   position: relative;
-  overflow: hidden;
-  width:50%;
   height:400px;
-  float:right;
   padding:30px;
-  margin-right: 25px;
-  margin-bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
   padding-bottom: 175px;
   background: white;
-
+  width: 90%;
   border-radius: 15px;
-  box-shadow:
-
-  0 10px 50px rgba(0, 0, 0, 0.08);
+  box-shadow:0 10px 50px rgba(0, 0, 0, 0.08);
+  margin-top: 10px;
   font-family: 'Segoe UI Regular';
 
   /* background-color: gainsboro; */
@@ -393,8 +418,17 @@
 .mapEventCard .eventDetails{
   font-size: 16px;
   position: relative;
-  margin-top:20px;
+  /* margin-top:20px; */
 }
+
+
+/* CSS for the bottm part of the event page */
+
+
+
+
+
+
 
 
 
