@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import EventGroupChat from './EventGroupChat';
 import EventInfo from './EventInfo';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
+import "./EventPage.css";
 
 class EventPage extends React.Component{
 //this takes each of the value of the individual evnets and
@@ -87,20 +88,27 @@ class EventPage extends React.Component{
 		return (
       <div className = 'eventPageContainer'>
 				<div className = 'eventInfoContainer'>
-				<EventInfo
-				info = {this.props.eventInfo}
-				userId = {this.props.id}
-				history = {this.props.history}
-				 />
+
+						<EventInfo
+						info = {this.props.eventInfo}
+						userId = {this.props.id}
+						history = {this.props.history}
+						 />
+					
+
 		 	 	</div>
-				 <div className = 'eventGroupChatContainer'>
-					<EventGroupChat
-					info = {this.props.eventInfo}
-					messages = {this.props.eventMessages}
-					eventId = {this.props.eventInfo.id}
-					inviteList = {this.props.eventInfo.invited}
-					 />
-			 </div>
+				<div className = "eventGroupChatContainer">
+
+				</div>
+					 {/*
+						 <EventGroupChat
+ 						info = {this.props.eventInfo}
+ 						messages = {this.props.eventMessages}
+ 						eventId = {this.props.eventInfo.id}
+ 						inviteList = {this.props.eventInfo.invited}
+ 						 />
+						 */}
+
     </div>
 
 		)

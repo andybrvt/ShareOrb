@@ -566,27 +566,28 @@ class EventInfo extends React.Component{
           </div>
 
           <div className = 'topSectContainerRight'>
-            <div className = 'closeEvent'>
-              <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
-              <i class="far fa-times-circle">  </i>
-              </Link>
-            </div>
+            <div className = "menuButtonHolder">
+              <div className = 'closeEvent'>
+                <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
+                <i class="far fa-times-circle">  </i>
+                </Link>
+              </div>
 
-            <div className = 'editEvent'>
-              {
-                eventHostId === this.props.userId ?
-                <div>
-                  <div onClick={() => this.onEditClick()}>
-                    <i class="fas fa-pen" ></i>
+              <div className = 'editEvent'>
+                {
+                  eventHostId === this.props.userId ?
+                  <div>
+                    <div onClick={() => this.onEditClick()}>
+                      <i class="fas fa-pen" ></i>
+                    </div>
                   </div>
+
+                  :
+
+                  <div></div>
+                  }
                 </div>
-
-                :
-
-                <div></div>
-              }
-
-            </div>
+              </div>
             <div
               className = "dateCircle"
               style = {{
@@ -597,13 +598,12 @@ class EventInfo extends React.Component{
               <div className = "day"> {day} </div>
             </div>
 
-            <div class="titleCard" style={{marginTop:'-25px', width:'300px',padding:'40px'}}>
+            <div class="titleCard">
 
               <div
                 className = 'eventTitle'>
                 {this.capitalize(title)}
               </div>
-              <br/>
             <div class="hostHolder">
 
               <div className = "attendees">
@@ -613,7 +613,7 @@ class EventInfo extends React.Component{
                   <Avatar
                   src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
                   />
-                  <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                <span class="highlightWord" > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
                 </span>
               </div>
             </div>
@@ -624,58 +624,82 @@ class EventInfo extends React.Component{
       </div>
 
 
+      <div className = "middleCardContainer">
+        <div class="middleInviteCard">
 
+          <div className = "goingHolder">
+            <div className="goingTitle"> Going</div>
+            <div className="goingInviteNumber">{accepted.length}</div>
+              <div className = "">
+                <Liking
+                history = {this.props.history}
+                style={{display:'inline-block'}}
+                num={5}
+                like_people={accepted}/>
+              </div>
+        </div>
+
+        <div className = "invitedHolder">
+          <div className="inviteTitle"> Invited</div>
+          <div className="goingInviteNumber">{invited.length}</div>
+          <div className = "">
+            <Liking
+            num={5}
+            history = {this.props.history}
+            style={{display:'inline-block'}}
+            like_people={invited}/>
+          </div>
+        </div>
+
+
+
+          <div class="buttonHolder">
+            <div className = "buttonsHolder">
+              <Button
+                 type="primary" shape="round"
+                 icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+                 size={'large'}
+                 style={{marginRight:'1%'}}
+                 >
+
+                Invite
+              </Button>
+              {
+             (accepted.includes(this.props.username))?
+                <Button
+                   shape="round"
+                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                  size={'large'}
+                  style={{marginRight:'1%'}}
+                  >
+                  Going
+                </Button>
+
+                :
+                <Button
+                   shape="round" type="primary"
+                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                    size={'large'}
+                    style={{marginRight:'1%'}}
+                    >
+                  Going
+                </Button>
+              }
+            <Button
+               shape="round"
+               icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+
+               style = {{marginRight: '3%'}}
+                size={'large'} danger>
+               Delete
+            </Button>
+            </div>
+          </div>
+      </div>
+
+
+      </div>
       {/* Middle invite card*/}
-      <div class="middleInviteCard">
-        <Statistic class="addFont" title="Going" value={accepted.length} />
-        <div className = "">
-          <Liking
-          history = {this.props.history}
-          style={{display:'inline-block'}}
-          num={5}
-          like_people={accepted}/>
-        </div>
-        <Statistic title="Invited" value={invited.length} />
-        <div className = "">
-          <Liking
-          num={5}
-          history = {this.props.history}
-          style={{display:'inline-block'}}
-          like_people={invited}/>
-        </div>
-
-        <div class="buttonHolder">
-           <Button
-              type="primary" shape="round"
-              icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-              style={{left:'110%', fontSize:'15px'}} size={'large'}>
-             Invite
-           </Button>
-           {
-          (accepted.includes(this.props.username))?
-             <Button
-                shape="round"
-                icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                style={{left:'115%', fontSize:'15px'}} size={'large'}>
-               Going
-             </Button>
-
-             :
-             <Button
-                shape="round" type="primary"
-                icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                style={{left:'115%', fontSize:'15px'}} size={'large'}>
-               Going
-             </Button>
-           }
-         <Button
-            shape="round"
-            icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-            style={{left:'120%', fontSize:'15px'}} size={'large'} danger>
-            Delete
-         </Button>
-        </div>
-    </div>
 
     {/* Event details card*/}
     <div class="eventDetailCard">

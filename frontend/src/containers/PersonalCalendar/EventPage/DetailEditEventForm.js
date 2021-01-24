@@ -50,7 +50,8 @@ const renderField = (field) => {
     placeholder= {field.placeholder}
     style={{display:'inline-block'}}
     className = 'box'
-    maxLength = "125"
+    maxLength = {75}
+    showCount
     />
 
     </span>
@@ -66,6 +67,7 @@ const renderTextArea = (field) => {
     rows={4}
     type = {field.type}
     placeholder = {field.placeholder}
+    showCount
     />
   )
 
