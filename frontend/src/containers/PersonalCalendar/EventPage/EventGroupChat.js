@@ -121,21 +121,25 @@ class EventGroupChat extends React.Component{
       {/*item.host.id==this.props.id
          (this.props.id==this.props.info.host.id)
         */}
-
     { ((inviteList.length > 0)||(eventHostId==this.props.id)) ?
 
       <div className = "notDisabledChatContainer">
         <div className = "messageCardContainer">
           <div class="eventGroupChatCard">
-            <div clasName="eventChatHeaderMiddle">
+
+
+            <div className = "eventChatHeaderMiddle">
               <Liking
               num={4}
               history = {this.props.history}
-              style={{display:'inline-block'}} like_people={inviteList}/>
+              like_people={inviteList}/>
               <div class="chatHeader">
                 You and {inviteList.length} others
               </div>
-              </div>
+            </div>
+
+
+
           </div>
         </div>
 
@@ -196,7 +200,7 @@ class EventGroupChat extends React.Component{
 
       <div className = 'eventMessageInputForm'>
 
-        <Form>
+        <Form className = "eventInputForm">
           <Input
           className = 'eventChatInput'
           onChange = {this.handleChange}
@@ -204,16 +208,18 @@ class EventGroupChat extends React.Component{
           onPressEnter = {this.handleSubmit}
           placeholder = "Send a message"
           rows={1}
-          style={{marginTop:'10px'}}
           />
 
+        <div className = "eventInputButtons">
+          <div
+            class="roundButton"
+            onClick = {this.handleSubmit}
+            type="primary"> Send
+          </div>
+        </div>
         </Form>
 
-        <Button
-          style={{float:'right'}}
-          class="roundButton"
-          onClick = {this.handleSubmit}
-          type="primary"> Chat </Button>
+
       </div>
 
 

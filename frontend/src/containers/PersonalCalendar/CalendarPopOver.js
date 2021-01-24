@@ -18,7 +18,9 @@ Progress,
 DatePicker,
 AvatarGroup,
 notification,
-Popover } from 'antd';
+Popover,
+Badge
+ } from 'antd';
 import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -578,54 +580,69 @@ class CalendarPopOver extends React.Component{
             )
 
            ?
-          <div
-             key= {item.title}
-             className = "weekEvent"
-             style = {{
-                gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
-                gridRow: this.hourEventIndex(item.start_time, item.end_time, cloneHourIndex),
-                backgroundColor: item.color
-              }}>
 
 
-                  <span className="pointerEvent">
-                    <span className = 'eventPageTitle pointerEvent' >
-                      {item.title.substring(0,19)}
-                    </span>
-                    {month ?
-                    <span></span>
+            <div
+               key= {item.title}
+               className = "weekEvent"
+               style = {{
+                  gridColumn: this.dayEventIndex(item.start_time, item.end_time, date, dayIndex) ,
+                  gridRow: this.hourEventIndex(item.start_time, item.end_time, cloneHourIndex),
+                  backgroundColor: item.color
+                }}>
 
-                    :
+                {
+                  true ?
+                  <div
+                    className = "calendarEventBadge"
+                    ></div>
 
-                    <br/>
-                    }
-                    {
-                      month ?
+                  :
 
+                  <div></div>
+
+                }
+
+
+                    <span className="pointerEvent">
+                      <span className = 'eventPageTitle pointerEvent' >
+                        {item.title.substring(0,19)}
+                      </span>
+                      {month ?
                       <span></span>
 
-                    :
+                      :
 
-                    <span className = 'eventTimeInfo pointerEvent'>
-                      {dateFns.format(new Date(item.start_time),'h:mm a')}
-                      -
-                      {dateFns.format(new Date(item.end_time),'h:mm a')}
+                      <br/>
+                      }
+                      {
+                        month ?
 
-                    </span>
-                    }
-
-                    {
-                      (item.host.username!=this.props.username && month === false)?
-                        <Avatar style={{float:'right', marginTop:'7px'}} size={20}
-                          src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture} />
+                        <span></span>
 
                       :
-                      <div></div>
-                    }
-                  </span>
+
+                      <span className = 'eventTimeInfo pointerEvent'>
+                        {dateFns.format(new Date(item.start_time),'h:mm a')}
+                        -
+                        {dateFns.format(new Date(item.end_time),'h:mm a')}
+
+                      </span>
+                      }
+
+                      {
+                        (item.host.username!=this.props.username && month === false)?
+                          <Avatar style={{float:'right', marginTop:'7px'}} size={20}
+                            src={`${global.IMAGE_ENDPOINT}`+item.host.profile_picture} />
+
+                        :
+                        <div></div>
+                      }
+                    </span>
 
 
-          </div>
+            </div>
+
 
           :
 
