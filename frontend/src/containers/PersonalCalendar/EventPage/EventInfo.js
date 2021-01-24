@@ -773,8 +773,7 @@ class EventInfo extends React.Component{
 
         {/* The Map card*/}
         <div class="mapEventCard">
-          <p style={{fontSize:'20px'}}
-            className="eventDetails"> Location </p>
+          Location
           <span>
             <Divider style={{marginTop:'-1px'}}/>
             <ReactBingmaps

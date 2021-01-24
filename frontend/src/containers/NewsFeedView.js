@@ -1,5 +1,5 @@
 import React from 'react';
-import InfiniteList from './InfiniteScroll';
+import InfiniteScroll from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import NewsFeedFormPost from '../components/NewsFeedFormPost';
 import NewNewsfeedFormPost from '../components/NewNewsfeedFormPost';
@@ -104,10 +104,7 @@ class NewsFeedView extends React.Component {
 
 
 					<div className = "newsfeedMidContainer">
-
-
 						<div className = "newsfeedItself">
-
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="topCard">
 								<i class="far fa-edit share" style={{fontSize:'20px', color:'#1890ff'}}></i>
@@ -131,7 +128,8 @@ class NewsFeedView extends React.Component {
 								</div>
 							</Link>
 						</div>
-							<InfiniteList data={this.props} />
+						
+							<InfiniteScroll data={this.props} />
 						</div>
 					</div>
 

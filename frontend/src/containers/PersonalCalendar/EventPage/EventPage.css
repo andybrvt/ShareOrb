@@ -316,7 +316,6 @@
 /* Event detail card */
 .eventDetailCard{
   position: relative;
-  color:black;
   background: white;
   line-height: 150%;
   border-radius: 15px;
@@ -324,6 +323,7 @@
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
   width: 95%;
+  color:black;
   font-size: 16px;
   left: 52.5%;
   top: 10px;
@@ -358,6 +358,8 @@
   width: 90%;
   height: 300px;
   margin-top: 10px;
+  font-size: 16px;
+  color:black;
 }
 .statEventCard .percentagesBars{
   position: relative;
@@ -395,6 +397,8 @@
   width:90%;
   height: 300px;
   margin-top: 10px;
+  font-size: 16px;
+  color:black;
 }
 
 /* Suggested Friends Card Title */
@@ -419,7 +423,8 @@
   box-shadow:0 10px 50px rgba(0, 0, 0, 0.08);
   margin-top: 10px;
   font-family: 'Segoe UI Regular';
-
+  font-size: 16px;
+  color:black;
   /* background-color: gainsboro; */
 }
 .mapEventCard .eventDetails{
@@ -785,10 +790,8 @@
 }
 
 .eventInfoContainer .eventInfoView .eventInfo .locationEventWord{
-  font-size: 20px;
+  font-size: 16px;
   color: black;
-  margin-bottom: 10px;
-
 }
 
 

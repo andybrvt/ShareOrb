@@ -6,7 +6,7 @@ import NewsFeedPost from '../containers/NewsfeedItems/NewsFeedPost';
 import { authAxios } from '../components/util';
 import './InfiniteScroll.css';
 import WebSocketPostsInstance from  '../postWebsocket';
-
+import { Divider } from 'antd';
 
 // Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.Component {
@@ -107,11 +107,9 @@ class InfiniteList extends React.Component {
 
       <div style={{ flex: 1}}>
 
-        <div class="intro" style={{color:'black', fontSize:20, marginTop:'25px'}}>
+        <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
           Welcome, {this.props.data.username}. Here's what's going on today! </div>
-
-        <hr style={{marginBottom:'25px'}} />
-
+        <Divider style={{marginBottom:'25px'}}/>
         {post.map((j,index) => {
           return <NewsFeedPost
             history = {this.props.data.history}

@@ -22,11 +22,16 @@
   .profileCardContainer {
     display: none;
   }
+
+  .newsfeedMidContainer{
+    left:10%;
+  }
 }
 
 .newsfeedParent .newsfeedMidContainer{
   /* background-color: blue; */
-  width: 55%;
+  padding-right: 100px;
+  width: 52%;
   position: relative;
   /* text-align: center; */
   /* align-items: center; */
@@ -71,11 +76,17 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 } */
 
+
+@media screen and (max-width:900px){
+  .suggestedFriendsContainer {
+    display:none;
+  }
+}
 .newsfeedParent .suggestedFriendsContainer{
   /* background-color: red; */
+  left:3%;
   width: 22.5%;
   position:relative;
-  left:3%;
   height:100%;
 }
 

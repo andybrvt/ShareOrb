@@ -1,0 +1,104 @@
+.uploadBox{
+  /* margin-top: 100px; */
+  text-align: center;
+  width: 300px;
+  height:300px
+}
+
+.profileEditUserName{
+  position:absolute;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: -35px;
+    margin-left: 140px;
+    color:grey;
+}
+
+.editLineHeight{
+  line-height: 10%;
+}
+
+
+
+.editFormBox{
+
+  background-color: #f5f5f5;
+  margin-top:10px;
+  border-radius: 10px;
+  margin-left: 15px;
+  font-size: 15px;
+  padding:10px;
+}
+
+.ant-upload-text{
+  position:relative;
+  /* background-color: red; */
+  font-size: 30px;
+  top: 50%;
+}
+
+.changeProfilePic{
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  margin-top:60px;
+  overflow: none;
+  border-radius: 10px;
+  box-shadow:
+
+  0 10px 50px rgba(0, 0, 0, 0.08);
+  }
+
+  .changeAvatar{
+
+  }
+
+  .fitPhoto{
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+  }
+
+.sideContainer{
+  padding: 20px;
+
+
+  /* background-color: red; */
+}
+
+
+.uploadProfileText{
+  margin-left: -125px;
+  font-size: 25px;
+  color:#1890ff;
+  /* font-family: 'Segoe UI Regular'; */
+  /* transform: translateX(-50%) */
+}
+
+.side1{
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  float:left;
+  margin-left: 25px;
+  margin-right: 25px;
+  /* background-color: blue; */
+}
+
+.side2{
+  display: inline-block;
+  float:right;
+  margin-top: 60px;
+  margin-right: 50px;
+  /* background-color: green; */
+}
+
+
+.uploadBox .plusOutlined{
+  /* background-color: red; */
+  font-size: 30px;
+  position: absolute;
+  top: 38%;
+  right: 48%;
+}
