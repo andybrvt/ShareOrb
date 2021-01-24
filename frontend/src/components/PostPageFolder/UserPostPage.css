@@ -19,11 +19,11 @@
   position: relative;
   background: white;
   /* height: 100; */
-  top: 6%;
-  left:6%;
+  top: 4%;
+  left:5%;
   right: 10%;
   z-index: 100;
-  width:85%;
+  width:90%;
   height:90%;
 
   color:black;
@@ -42,7 +42,7 @@
 }
 .postHolder .postPicturesCarousel{
   width: 80%;
-  height: 92.5%;
+  height: 100%;
   text-align: center;
   overflow: hidden;
   /* background-color: red; */
@@ -55,8 +55,6 @@
 }
 
 
-
-
 /* This will hold all the information on the right of the modal */
 .postModalRight{
   /* background-color: blue; */
@@ -66,7 +64,7 @@
   height: 100%;
 
   width: 35%;
-  border-left: 1px solid #f0f0f0;
+
 }
  .captionUniversal{
   position: relative;
@@ -103,9 +101,9 @@
 
 .cellThreeDots{
   position: relative;
-  left: 71%;
+  left: 60%;
   bottom: 10%;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .postLikeCommentNum {
@@ -186,9 +184,8 @@
 }
 
 .postCommentBox .postCommentItem {
-  /* background-color: red; */
   /* was 10  */
-  margin-top: 35px;
+  margin-top: 10px;
   height:50px;
 
 }
