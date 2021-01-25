@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic} from 'antd';
+import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic, List, Skeleton} from 'antd';
 import {PictureOutlined, CheckSquareTwoTone, EyeOutlined, DownloadOutlined, UserOutlined} from '@ant-design/icons';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
@@ -39,7 +39,31 @@ class EventInfo extends React.Component{
   state = {
     edit: false,
     changeBackgroundView: false,
+    list: [],
+
   }
+
+  componentDidMount() {
+    this.getData(res => {
+      this.setState({
+        list: res.data,
+      });
+    });
+  }
+
+
+  getData = callback => {
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/inviteList`)
+        .then(res=> {
+
+          this.setState({
+            list:res.data,
+         });
+       });
+       console.log(this.state.list)
+
+  };
+
 
 
   getInitialValue = () => {
@@ -467,7 +491,7 @@ class EventInfo extends React.Component{
     const selectDay = dateFns.getDate(currentDay).toString()
     console.log(this.state)
     console.log(this.props)
-
+    const list=this.state.list;
     let show = this.state.showSureModal
 
     let username = ''
@@ -769,6 +793,41 @@ class EventInfo extends React.Component{
         <div className = "inviteFriendsEventCard">
             Invite Friends
             <Divider/>
+              <List
+                className="demo-loadmore-list scrollableFeature"
+                style={{marginTop:'-10px'}}
+                itemLayout="horizontal"
+                dataSource={list}
+                renderItem={item => (
+
+                  <List.Item>
+
+                    <Skeleton avatar title={false} loading={item.loading} active>
+
+                    <List.Item.Meta
+
+                      avatar={
+                        <Avatar
+                          style = {{
+                            cursor: "pointer"
+                          }}
+                          onClick = {() => this.profileDirect(item.username)}
+                           src={item.profile_picture} />
+                      }
+                      title={<span
+                        style = {{cursor: "pointer"}}
+                         onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
+                      description={
+                        <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                        }
+                    />
+
+
+
+                    </Skeleton>
+                  </List.Item>
+                )}
+              />
         </div>
 
         {/* The Map card*/}

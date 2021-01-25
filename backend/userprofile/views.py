@@ -346,6 +346,21 @@ class First3CommentsInPost(generics.ListAPIView):
         return queryset
 
 
+class inviteList(generics.ListAPIView):
+    serializer_class = serializers.UserSerializer
+    def get_queryset(self):
+        list = []
+        temp=(self.request.user.get_following())
+        for i in temp:
+            list.append(i)
+        list.append(self.request.user)
+        print(list)
+        # Your can exclude a list by using keyword __in
+        # This is filtering by username in the list
+
+        queryset = models.User.objects.exclude(username__in = list)
+        return queryset
+
 # Grabs everyone but current user and friends
 class NewsFeedSuggestedFriends(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
@@ -362,7 +377,7 @@ class NewsFeedSuggestedFriends(generics.ListAPIView):
         queryset = models.User.objects.exclude(username__in = list)[0:3]
         return queryset
 
-class AllSuggested(generics.ListAPIView):
+class everyoneSuggested(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
     def get_queryset(self):
         list = []

@@ -26,8 +26,8 @@ urlpatterns = [
 	path('post/delete/<slug:id>', views.deletePostCall.as_view(), name='delete notification'),
 	path('explore', views.ExploreView.as_view()),
 	path('suggestedFriends', views.NewsFeedSuggestedFriends.as_view()),
-	path('everyoneSuggested', views.AllSuggested.as_view()),
-
+	path('everyoneSuggested', views.everyoneSuggested.as_view()),
+	path('inviteList', views.inviteList.as_view()),
 	# DELETE LATER
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),
