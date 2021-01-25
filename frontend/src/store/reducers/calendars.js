@@ -188,6 +188,19 @@ const sendEventMessage = (state, action) =>{
   })
 }
 
+const updateSeenEventMessage = (state, action) => {
+  // This will updat ethe seen field in the selected event object
+  // maybe the state.events too but gotta check
+
+  return updateObject(state, {
+    selectedEvent: {
+      ...state.selectedEvent,
+      seen: action.seenEventObj
+    }
+  })
+}
+
+
 const openAcceptUnshareModal = (state, action) => {
   console.log(action)
   return updateObject(state, {
@@ -273,6 +286,8 @@ const reducer = (state = initialState, action) => {
       return updateEventPage(state, action)
     case actionTypes.UPDATE_EVENT_BACKGROUND:
       return updateEventBackground(state, action)
+    case actionTypes.UPDATE_SEEN_EVENT_MESSAGE:
+      return updateSeenEventMessage(state, action)
     default:
       return state;
   }

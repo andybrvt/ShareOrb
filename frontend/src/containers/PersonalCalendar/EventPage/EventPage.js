@@ -39,6 +39,8 @@ class EventPage extends React.Component{
 
 	componentDidMount (){
 		this.initialiseChat()
+		console.log("hit here for me")
+		console.log(this.props.eventInfo)
 	}
 
 	waitForSocketConnection(callback){
@@ -71,6 +73,13 @@ class EventPage extends React.Component{
 				)
 			})
 			EventPageWebSocketInstance.connect(newProps.parameter.eventId)
+
+		}
+
+		if(newProps){
+			if(!newProps.eventInfo.seen.includes(newProps.id)){
+				EventPageWebSocketInstance.sendEventSeen(newProps.id, newProps.eventInfo.id)
+			}
 
 		}
 

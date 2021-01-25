@@ -49,6 +49,9 @@ class Event(models.Model):
 
 	# This is for the background picture on personal cal events
 	backgroundImg = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
+
+	# This will be used to check if the messages are seen or not
+	seen = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "seen_event_chat")
 	def __unicode__(self):
 		return self.title
 

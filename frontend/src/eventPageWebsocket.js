@@ -80,6 +80,18 @@ class WebSocketEventPage{
     })
   }
 
+  sendEventSeen = (userId, eventId) =>{
+    // This will be used when somone goes on an event page and they are not in the
+    // seen list so the list must be updated
+
+    console.log(userId, eventId)
+    this.sendMessage({
+      command: 'send_seen_event',
+      userId: userId,
+      eventId: eventId
+    })
+  }
+
   sendEditEvent = (editEventObj) =>{
     // This will send to the backend and change the information about the event
     // then will be sent back to the front end
@@ -118,10 +130,25 @@ class WebSocketEventPage{
 
       const messageObj = parsedData.eventMessageObj
       const eventId = parsedData.eventObjId
+      const eventSeenObj = parsedData.eventSeenObj
 
+      console.log(eventSeenObj)
       console.log(messageObj, eventId)
       this.callbacks['send_event_message'](messageObj)
-    } else if (command === 'edited_event'){
+
+      this.callbacks['update_seen_event_message'](eventSeenObj)
+
+    } else if (command == 'send_seen_event'){
+      // This will be used to update the seen event when you
+      // go into an event page
+
+      const eventSeenObj = parsedData.eventSeenObj
+      console.log(eventSeenObj)
+
+      this.callbacks['update_seen_event_message'](eventSeenObj)
+
+    }
+    else if (command === 'edited_event'){
       // This will be edit information in the page when you are done editing the
       // page you will not have to change the redux for the eventweek because
       // the weekview will rerender it self
@@ -138,12 +165,14 @@ class WebSocketEventPage{
   addCallbacks (
     fetchEventInfo,
     sendEventMessage,
-    updateEventCallBack
+    updateEventCallBack,
+    updateSeenCallBack
   ){
     // Add all the call backs here
     this.callbacks['fetch_event_info'] = fetchEventInfo
     this.callbacks['send_event_message'] = sendEventMessage
     this.callbacks['update_event_page'] = updateEventCallBack
+    this.callbacks['update_seen_event_message'] = updateSeenCallBack
   }
 
 

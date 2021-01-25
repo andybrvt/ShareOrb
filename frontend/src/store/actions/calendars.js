@@ -182,3 +182,10 @@ export const updateEventBackground = (backgroundPic) => {
     backgroundPic: backgroundPic
   }
 }
+
+export const updateSeenEventMessage = (seenEventObj)  => {
+  return{
+    type: actionTypes.UPDATE_SEEN_EVENT_MESSAGE,
+    seenEventObj: seenEventObj
+  }
+}

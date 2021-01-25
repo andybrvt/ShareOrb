@@ -233,7 +233,7 @@ class CalendarPopOver extends React.Component{
     render() {
 
 
-
+      console.log(this.props)
 
       let item=this.props.item;
       let date=this.props.date;
@@ -242,10 +242,16 @@ class CalendarPopOver extends React.Component{
       let cloneDay=this.props.cloneDay;
       let orientation=this.props.orientation;
       let month = false;
-
+      let seen = []
 
       if(this.props.month){
         month = this.props.month
+      }
+
+      if(this.props.item){
+        if(this.props.item.seen){
+          seen = this.props.item.seen
+        }
       }
 
       const text = "You're host"
@@ -592,14 +598,15 @@ class CalendarPopOver extends React.Component{
                 }}>
 
                 {
-                  true ?
-                  <div
-                    className = "calendarEventBadge"
-                    ></div>
+                  seen.includes(this.props.id) ?
+
+                  <div></div>
 
                   :
 
-                  <div></div>
+                  <div
+                    className = "calendarEventBadge"
+                    ></div>
 
                 }
 

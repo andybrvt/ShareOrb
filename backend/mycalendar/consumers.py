@@ -374,17 +374,43 @@ class EventPageConsumer (JsonWebsocketConsumer):
     def send_event_message(self, data):
         viewEvent = get_object_or_404(Event, id = data['eventId'])
         user = get_object_or_404(User, id = data['userId'])
+
+
         eventMessage, created = EventMessages.objects.get_or_create(
             eventObj = viewEvent,
             body = data['message'],
             messageUser = user
         )
 
+        viewEvent.seen.clear()
+        viewEvent.seen.add(user)
+
+        eventSeen = EventSerializer(viewEvent).data['seen']
+
         eventMessageObj = EventMessagesSerializer(eventMessage, many = False).data
+
         content = {
             'command': 'send_event_message',
             'eventMessageObj': eventMessageObj,
-            'eventObjId': data['eventId']
+            'eventObjId': data['eventId'],
+            'eventSeenObj': eventSeen
+        }
+        self.send_message(content)
+
+    def send_seen_event(self, data):
+        # This function will grab the user and the event and add the user to the
+        # seen field of the event
+        viewEvent = get_object_or_404(Event, id = data['eventId'])
+        user = get_object_or_404(User, id = data['userId'])
+
+        viewEvent.seen.add(user)
+
+        eventSeen = EventSerializer(viewEvent).data['seen']
+
+        content = {
+            'command': 'send_seen_event',
+            'eventSeenObj': eventSeen,
+            'eventObjId':data['eventId']
         }
         self.send_message(content)
 
@@ -480,6 +506,8 @@ class EventPageConsumer (JsonWebsocketConsumer):
             self.send_event_message(data)
         if data['command'] == "send_edit_event_info":
             self.send_edit_event_info(data);
+        if data['command'] == 'send_seen_event':
+            self.send_seen_event(data);
 
     def new_message(self, message):
         messageObj = message['eventMessage']
