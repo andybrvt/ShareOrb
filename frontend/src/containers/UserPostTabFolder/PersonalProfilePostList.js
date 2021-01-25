@@ -243,16 +243,6 @@ class PersonalProfilePostList extends React.Component{
       )
     }
 
-    renderCalPostPic = () => {
-      // This is to display the 3 sections (cal, post, pic)
-      // It allows you to switch between
-      return(
-        <div className = 'cal-post-pic'>
-          {this.onRenderTabs()}
-        </div>
-
-      )
-    }
 
     onFollow = (follower, following) =>{
       // For more info check personalprofile

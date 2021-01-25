@@ -245,17 +245,6 @@ class PersonalProfileEventList extends React.Component{
       )
     }
 
-    renderCalPostPic = () => {
-      // This is to display the 3 sections (cal, post, pic)
-      // It allows you to switch between
-      return(
-        <div className = 'cal-post-pic'>
-          {this.onRenderTabs()}
-        </div>
-
-      )
-    }
-
     onFollow = (follower, following) =>{
       //Send a follow in the backend
 
@@ -479,6 +468,7 @@ class PersonalProfileEventList extends React.Component{
     console.log(followers)
 
       return (
+
         <div>
 
           <div className = 'profileInfo'>
@@ -522,7 +512,8 @@ class PersonalProfileEventList extends React.Component{
                     onClick = {() => this.openProfileEdit()}
                     type="primary"
                     shape="round"
-                    icon={<i  style={{marginRight:'10px'}} class="fas fa-user-edit"></i>}
+                    icon={<i  style={{marginRight:'10px'}}
+                    class="fas fa-user-edit"></i>}
                     style={{fontSize:'15px'}} size={'large'}>
 
                    Edit Profile
@@ -559,7 +550,7 @@ class PersonalProfileEventList extends React.Component{
                   <div className = 'messageButton'>
                     Message
                   </div>
-                
+
                 </div>
 
 
@@ -589,17 +580,8 @@ class PersonalProfileEventList extends React.Component{
                 }
                 </div>
               }
-
-
-
-
-
-
               </div>
-
           }
-
-
 
           </div>
 
@@ -610,26 +592,6 @@ class PersonalProfileEventList extends React.Component{
         </div>
 
       )
-
-    }
-
-    showPanel = (panelIndex, colorCode) =>{
-      var tabButtons= document.querySelectorAll('.profile-tabContainer .profile-buttonContainer .profile-Tab')
-      var tabPanels= document.querySelectorAll('.profile-tabContainer .profile-tabPanel')
-      if (tabButtons.length > 0 && tabPanels.length > 0){
-        tabButtons.forEach(function(node){
-          node.style.backgroundColor = "";
-          node.style.color = "";
-        })
-        tabButtons[panelIndex].style.backgroundColor = colorCode;
-        tabButtons[panelIndex].style.color = '#363636';
-        tabPanels.forEach(function(node){
-          node.style.display = 'none'
-        })
-        tabPanels[panelIndex].style.display = 'block';
-        tabPanels[panelIndex].style.backgroundColor = colorCode;
-
-      }
 
     }
 

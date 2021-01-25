@@ -82,18 +82,18 @@ class SocialCalendar extends React.Component{
     const dateFormat = "MMMM yyyy"
 
     return (
-      <div className= "header row flex-middle">
-        <div className = "col col-start">
+      <div className= "header">
+        <div className = "">
           <div className = 'icon' onClick ={this.prevMonth}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
           </div>
         </div>
-        <div className = "col col-center">
+        <div className = "">
           <span style={{fontSize:'22px'}}>
            {dateFns.format(this.props.currentDate, dateFormat)}
           </span>
         </div>
-        <div className= "col col-end">
+        <div className= "">
           <div className = 'icon' onClick ={this.nextMonth}>
             <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
           </div>
@@ -111,14 +111,14 @@ class SocialCalendar extends React.Component{
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
       days.push(
-        <div className ="col col-center" key = {i}>
+        <div className ="" key = {i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           </div>
       )
     }
     // the days will be a list of dates that are put in by the for loops
      // and then the return will return all those days out
-    return <div className = "days row"> {days} </div>
+    return <div className = "days"> {days} </div>
   }
 
 
@@ -179,23 +179,15 @@ class SocialCalendar extends React.Component{
     const rows = []
     let toDoStuff = []
     let days = [];
-    // day is the startday, which starts at the first day of the week
-    // for the 42 block of time
     let day = startDate;
     let formattedDate = "";
-    // this loop will loop through all the days of the month
     while (day <=endDate){
-
-
-      // we make it smaller than 7 because we still want to keep the index of the
-      // weekdays the same
       for (let i= 0; i<7; i++){
         for (let item = 0; item < events.length; item++){
           // So the time we put in is the UTC time (universal time ) but when you
           // put moment or new Date it gives you your time zome date so that is why you
           // have to convert it
           const date = new Date(events[item].socialCaldate)
-          console.log(events[item])
           const utc = dateFns.addHours(date, date.getTimezoneOffset()/60)
           if (dateFns.isSameDay(utc, day)){
             toDoStuff.push(
@@ -206,12 +198,7 @@ class SocialCalendar extends React.Component{
         // this give the date will give the day numnber in 1-365
 
         formattedDate = dateFns.format(day, dateFormat);
-        // used clone day so that it would do the selected day and not the endDay
-        // because the loop will end on end day and it w3il always click that day
         const cloneDay = day;
-        // the classname in the bottom is to check if its not in the smae month
-        // the cell will be disabled
-        // It is also to check if the day is the smae as the current day
         if (toDoStuff.length > 0){
           // The socialEvents should only have 1 item because it holds just the single
           // social cell
@@ -219,188 +206,148 @@ class SocialCalendar extends React.Component{
           // Everything down here to the else are for cal cells that have a social
           // cal that exist within it
           const socialEvents = toDoStuff
-          console.log(socialEvents)
           const calUsername = this.props.profile.username
           const cellYear = dateFns.getYear(day)
           const cellMonth = dateFns.getMonth(day)+1
           const cellDay = dateFns.getDate(day)
           days.push(
             <div
-              className ={`col cell ${dateFns.isSameDay(day, currentMonth) ?
-            "selected": ""
-              }`}
-              key = {day}
+            className ={`cell ${dateFns.isSameDay(day, currentMonth) ?
+            "selected": ""}`}
+            key = {day}
             >
 
             {
-              toDoStuff[0].coverPic ?
+            toDoStuff[0].coverPic ?
               <div
-              // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
               className = 'hoverCell'
               >
-              {/*
-                This items in the turnary operator is the eyes, calendar addition,
-                event addition for event calendar cells that have a cover picture
-                */}
+                {/*This items in the turnary operator is the eyes, calendar addition,
+                  event addition for event calendar cells that have a cover picture*/}
+                {
+                  (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
+                  ||  calendarOwnerId === this.props.curId ?
+                  <div>
+                  {/*This is to check if cells that have social cell in them allow
+                    for the owern and friends to edit and add stuff to it that has
+                    a cover cell and the user either is owner or friend*/}
+                  {
+                    dateFns.isSameDay(day, currentMonth) ?
 
-              {
-                (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
-                ||  calendarOwnerId === this.props.curId ?
+                    <div>
+                      <PlusOutlined
+                      onClick = {() => this.onOpenSocialCalPicModal()}
+                      className = 'plusButton'/>
+                      <CalendarOutlined
+                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      className = 'eventButton'/>
+                      <Link to = {{
+                       pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                       state:{pathname: location}}}>
+                        <EyeOutlined className = 'eyeButton'/>
+                      </Link>
+                    </div>
 
-                <div>
-                {/*
-                  This is to check if cells that have social cell in them allow
-                  for the owern and friends to edit and add stuff to it that has
-                  a cover cell and the user either is owner or friend
-                  */}
+                    : dateFns.isAfter( day, currentMonth) ?
 
-              {
-                dateFns.isSameDay(day, currentMonth) ?
-                <div>
-                <PlusOutlined
-                onClick = {() => this.onOpenSocialCalPicModal()}
-                className = 'plusButton'/>
-                <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                className = 'eventButton'
-                 />
-                 <Link to = {{
-                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                   state:{pathname: location}
-                 }} >
-                <EyeOutlined
-                // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                className = 'eyeButton'/>
-                </Link>
-                </div>
+                    <div>
+                    {/*This is for the add event, eye that have a social cell in the
+                      cell that are after the current date that has a cover cell
+                      when the user is friend or owner*/}
+                      <CalendarOutlined
+                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      className = 'eventButtonAfter'/>
+                      <Link to = {{
+                         pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                         state:{pathname: location}}}>
+                         <EyeOutlined className = 'eyeButtonAfter'/>
+                      </Link>
+                    </div>
 
-                : dateFns.isAfter( day, currentMonth) ?
-                <div>
-                {/*
-                  This is for the add event, eye that have a social cell in the
-                  cell that are after the current date that has a cover cell
-                  when the user is friend or owner
-                  */}
-                <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                className = 'eventButtonAfter'
-                 />
-                 <Link to = {{
-                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                   state:{pathname: location}
-                 }} >
-                 <EyeOutlined
-                 // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                 className = 'eyeButtonAfter'/>
-                 </Link>
-                 </div>
+                     :
 
-                 :
-                 <Link to = {{
-                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                   state:{pathname: location}
-                 }} >
-                 {/*
-                   This is for the days that have already passed that has a cover cell
-                   and when the user is either friend or calendar owner
-                   */}
-                <EyeOutlined
-                // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                className = 'eyeButtonPass'/>
-                </Link>
-              }
-                </div>
+                    <Link to = {{
+                       pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                       state:{pathname: location} }}>
+                     {/* This is for the days that have already passed that has a cover cell
+                       and when the user is either friend or calendar owner*/}
+                       <EyeOutlined className = 'eyeButtonPass'/>
+                    </Link>
+                  }
+                  </div>
 
                 :
+
+
                 <Link to = {{
                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                  state:{pathname: location}
-                }} >
-                {/*
-                  This is for viewing the event when there is a cover picture on teh cell
-                  and the user is not a friend or calendar owner
-                  */}
-                <EyeOutlined
-                // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                className = 'eyeButtonPass'/>
+                  state:{pathname: location}}} >
+                  {/*This is for viewing the event when there is a cover picture on teh cell
+                    and the user is not a friend or calendar owner*/}
+                  <EyeOutlined
+                  className = 'eyeButtonPass'/>
+
                 </Link>
 
-              }
-              <Avatar
-              className = 'imgCover'
-              size = {250}
-              shape= 'square'
-              src = {`${global.IMAGE_ENDPOINT}`+toDoStuff[0].coverPic} />
-              <span className = "bgD"> {formattedDate}</span>
+                }
+
+                {/* SHOULD CHANGE TO PHOTO LATER */}
+                <Avatar
+                className = 'imgCover'
+                size = {250}
+                shape= 'square'
+                src = {`${global.IMAGE_ENDPOINT}`+toDoStuff[0].coverPic} />
+
+                <span className = "bgD"> {formattedDate}</span>
               </div>
 
               : toDoStuff[0].get_socialCalEvent.length !== 0 ?
 
               <div>
-              {/*
-                These are for when there is no cover photo but there is are events
-                that we want to show.
-                */}
-                <div
-                className = 'eventBoxListHeader'
-                >
-                <span className = "bg"> {formattedDate}</span>
+              {/*These are for when there is no cover photo but there is are events
+                that we want to show.*/}
+                <div className = 'eventBoxListHeader'>
+                  <span className = "bg"> {formattedDate}</span>
                 {
                   (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
                   ||  calendarOwnerId === this.props.curId ?
 
                   <div>
-                  {/*
-                    This is for when the user is a friend or the owenr of the
-                    social calendar
-                    */}
+                  {/*This is for when the user is a friend or the owenr of the
+                    social calendar*/}
 
-                {
+                  {
                   dateFns.isSameDay(day, currentMonth) ?
-                  <div
-                  className = 'buttonHolder'
-                  >
+                  <div className = 'buttonHolder'>
 
-                  {/*
-                    This will be the button at the top of the cell list of the current
-                    day
-                    */}
-                  <PlusOutlined
-                  onClick = {() => this.onOpenSocialCalPicModal()}
-                  className = 'plusButton'/>
-                  <CalendarOutlined
-                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                  className = 'eventButton'
-                   />
-                   <Link to = {{
-                     pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                     state:{pathname: location}
-                   }} >
-                  <EyeOutlined
-                  // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                  className = 'eyeButton'/>
-                  </Link>
+                    {/*This will be the button at the top of the cell list of the current
+                      day*/}
+                    <PlusOutlined
+                    onClick = {() => this.onOpenSocialCalPicModal()}
+                    className = 'plusButton'/>
+                    <CalendarOutlined
+                    onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                    className = 'eventButton'/>
+                    <Link to = {{
+                      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                      state:{pathname: location}}} >
+                      <EyeOutlined className = 'eyeButton'/>
+                    </Link>
                   </div>
 
                   : dateFns.isAfter( day, currentMonth) ?
-                  <div>
-                  {/*
-                    This will be the buttons on top of the eventList for the days
-                    after the current day
-                    */}
-                  <CalendarOutlined
-                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                  className = 'eventButtonAfter'
-                   />
 
-                   <Link to = {{
+                  <div>
+                  {/* This will be the buttons on top of the eventList for the days
+                    after the current day*/}
+                    <CalendarOutlined
+                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      className = 'eventButtonAfter'/>
+                    <Link to = {{
                      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                     state:{pathname: location}
-                   }} >
-                   <EyeOutlined
-                   // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                   className = 'eyeButtonAfter'/>
-                   </Link>
+                     state:{pathname: location}}} >
+                      <EyeOutlined className = 'eyeButtonAfter'/>
+                     </Link>
                    </div>
 
                    :
@@ -409,34 +356,25 @@ class SocialCalendar extends React.Component{
                      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
                      state:{pathname: location}
                    }} >
-                   {/*
-                     This is for the buttons on top of the event list for days before
-                     the current
-                     */}
-                  <EyeOutlined
-                  // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                  className = 'eyeButtonPass'/>
+                     {/*This is for the buttons on top of the event list for days before
+                       the current day*/}
+                    <EyeOutlined className = 'eyeButtonPass'/>
                   </Link>
-                }
-                  </div>
-
-                  :
-
-                    <Link to = {{
-                      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                      state:{pathname: location}
-                    }} >
-                    {/*
-                      For the eye above the event cell for people who are not friends
-                      or the owner of the calendar
-                      */}
-                  <EyeOutlined
-                  // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                  className = 'eyeButtonPass'/>
-                  </Link>
-
                 }
                 </div>
+
+              :
+
+                <Link to = {{
+                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                state:{pathname: location}}} >
+                {/*For the eye above the event cell for people who are not friends
+                  or the owner of the calendar*/}
+                  <EyeOutlined className = 'eyeButtonPass'/>
+                </Link>
+
+              }
+            </div>
 
               <SocialCellCoverEvents
               curId = {this.props.curId}
@@ -445,17 +383,15 @@ class SocialCalendar extends React.Component{
               events = {toDoStuff[0].get_socialCalEvent}
               history = {this.props.history}
               />
-              </div>
+            </div>
 
-              :
+            :
 
-              <div
+            <div
               className = 'hoverCell'
               >
-              {/*
-                This is for when the cal cell object is there but there is no
-                cover cell and there are no event list
-                */}
+              {/*This is for when the cal cell object is there but there is no
+                cover cell and there are no event list*/}
               {
                 (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
                 ||  calendarOwnerId === this.props.curId ?
@@ -465,84 +401,71 @@ class SocialCalendar extends React.Component{
               {
                 dateFns.isSameDay(day, currentMonth) ?
                 <div>
-                {/*
-                  When there is a social cell object but no cover cell and event
-                  list. This will be for the current day
-                  */}
+                  {/*When there is a social cell object but no cover cell and event
+                    list. This will be for the current day*/}
 
-                <PlusOutlined
-                onClick = {() => this.onOpenSocialCalPicModal()}
-                className = 'plusButton'/>
-                <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                className = 'eventButton'
-                 />
-                 <Link to = {{
-                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                   state:{pathname: location}
-                 }} >
-                <EyeOutlined
-                // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                className = 'eyeButton'/>
+                  <PlusOutlined
+                  onClick = {() => this.onOpenSocialCalPicModal()}
+                  className = 'plusButton'/>
+                  <CalendarOutlined
+                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                  className = 'eventButton'/>
+                  <Link to = {{
+                    pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                    state:{pathname: location}
+                  }} >
+                    <EyeOutlined className = 'eyeButton'/>
                 </Link>
                 </div>
 
                 : dateFns.isAfter( day, currentMonth) ?
+
                 <div>
-                {/*
-                  For days after the social cell and there is a social cal cell object
-                  but not cover picture or events
-                  */}
-                <CalendarOutlined
-                onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                className = 'eventButtonAfter'
-                 />
-                 <Link to = {{
-                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                   state:{pathname: location}
-                 }} >
-                 <EyeOutlined
-                 // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                 className = 'eyeButtonAfter'/>
-                 </Link>
+                  {/* For days after the social cell and there is a social cal cell object
+                    but not cover picture or events*/}
+                  <CalendarOutlined
+                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                  className = 'eventButtonAfter'
+                   />
+                  <Link to = {{
+                    pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                    state:{pathname: location}
+                  }} >
+                   <EyeOutlined className = 'eyeButtonAfter'/>
+                  </Link>
                  </div>
 
                  :
+
                  <Link to = {{
                    pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
                    state:{pathname: location}
                  }} >
-                 {/*
-                   For days before the current day with a social cal cell object
-                   but no cover photo or events
-                   */}
-                <EyeOutlined
-                // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                className = 'eyeButtonPass'/>
+                 {/* For days before the current day with a social cal cell object
+                   but no cover photo or events */}
+                  <EyeOutlined className = 'eyeButtonPass'/>
                 </Link>
-              }
-                </div>
-
-                :
-                <Link to = {{
-                  pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                  state:{pathname: location}
-                }} >
-                {/*
-                  This is for viewing the event cell when there is a social cell object
-                  but you are not a friend or ower
-                  */}
-                <EyeOutlined
-                // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-                className = 'eyeButtonPass'/>
-                </Link>
-              }
-              <span className = "bg"> {formattedDate}</span>
+                }
               </div>
-            }
 
+              :
 
-          </div>
+              <Link to = {{
+                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                state:{pathname: location}
+              }} >
+                {/*This is for viewing the event cell when there is a social cell object
+                  but you are not a friend or ower*/}
+                <EyeOutlined
+                className = 'eyeButtonPass'/>
+              </Link>
+              }
+
+              <span className = "bg"> {formattedDate}</span>
+
+            </div>
+          }
+        </div>
         )} else {
           //This is used for the current user page
           //Everything from here down is for all the cells that do not have a
@@ -558,7 +481,7 @@ class SocialCalendar extends React.Component{
           const cellDay = dateFns.getDate(day)
           days.push(
           <div
-            className ={`col cell  ${ dateFns.isSameDay(day, currentMonth) ?
+            className ={`cell  ${ dateFns.isSameDay(day, currentMonth) ?
           "selected": ""
             }`}
             key = {day}
@@ -579,90 +502,74 @@ class SocialCalendar extends React.Component{
             dateFns.isSameDay(day, currentMonth) ?
             <div>
             {/* This is for the eye, calendar, event post for the current day without
-              a picture in it and no cell created
-              */}
+              a picture in it and no cell created  */}
             <PlusOutlined
             onClick = {() => this.onOpenSocialCalPicModal()}
             className = 'plusButton'/>
             <CalendarOutlined
             onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-            className = 'eventButton'
-             />
-            <Link to = {{
-              pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-              state:{pathname: location}
-            }} >
-            <EyeOutlined
-            // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-            className = 'eyeButton'/>
-            </Link>
+            className = 'eventButton'/>
+              <Link to = {{
+                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                state:{pathname: location}
+              }} >
+                <EyeOutlined className = 'eyeButton'/>
+              </Link>
             </div>
 
             : dateFns.isAfter( day, currentMonth) ?
 
             <div>
-            {/*
-              This is for the eye, calendar for all the cells that are after teh
-              current day and does not have a cover picture and no cell created
-              */}
-            <CalendarOutlined
-            onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-            className = 'eventButtonAfter'
-             />
+              {/*This is for the eye, calendar for all the cells that are after teh
+                current day and does not have a cover picture and no cell created*/}
+              <CalendarOutlined
+              onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+              className = 'eventButtonAfter' />
 
-             <Link to = {{
-               pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-               state:{pathname: location}
-             }} >
-             <EyeOutlined
-             // onClick ={() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-             className = 'eyeButtonAfter'/>
-             </Link>
-             </div>
+              <Link to = {{
+                 pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                 state:{pathname: location}}}>
+                 <EyeOutlined className = 'eyeButtonAfter'/>
+              </Link>
+            </div>
 
              :
              <Link to = {{
                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-               state:{pathname: location}
-             }} >
-             {/*
-               This is for the the eye that is before the current day for cells that
-               do not have the cell object created
-               */}
-            <EyeOutlined
-            // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
-            className = 'eyeButtonPass'/>
-            </Link>
-          }
-            </div>
+               state:{pathname: location}}} >
+             {/*This is for the the eye that is before the current day for cells that
+               do not have the cell object created */}
+               <EyeOutlined className = 'eyeButtonPass'/>
+             </Link>
+           }
+          </div>
 
-            :
+          :
 
-            <Link to = {{
+          <Link to = {{
               pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-              state:{pathname: location}
-            }} >
+              state:{pathname: location}}} >
             {/*
               This is for the eye on the social calendar where the calendar is not
               not of a friend or of the own and so it is just viewing. This is for
               cells that do not have an existing social cell in it
               */}
-            <EyeOutlined
-            // onClick = {() => this.onOpenSocialCalModal(cloneDay, socialEvents)}
+          <EyeOutlined
             className = 'eyeButtonPass'/>
-            </Link>
+          </Link>
 
           }
           <span className = "bg"> {formattedDate}</span>
           </div>
         </div>
         )}
+
       toDoStuff = []
       day = dateFns.addDays(day, 1);
       }
-      // so this will start at the start of the week and then loop through the 7 days
-      // once done it will push the list into the rows
-      // so there will be a list of list and each list would be a week
+      {/* so this will start at the start of the week and then loop through the 7 days
+        once done it will push the list into the rows
+        so there will be a list of list and each list would be a week  */}
       rows.push(
         <div className='row' key ={day}>
           {days}
@@ -827,7 +734,6 @@ class SocialCalendar extends React.Component{
             <Animate
               showProp="show"
               transitionName="fade"
-
             >
             <div show={this.state.animate}>
               {this.renderHeader()}

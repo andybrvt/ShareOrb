@@ -175,15 +175,6 @@ class PersonalProfile extends React.Component{
     }
   }
 
-  renderEditButton = () => {
-    return (
-      <div className = 'editButton' onClick = {() => this.openChangeProfilePic()}>
-       <RetweetOutlined />
-
-      </div>
-    )
-  }
-
 
   handleProfilePicChange = (values) => {
     // This is used to changing the profile pic, for submiting.
@@ -232,20 +223,10 @@ class PersonalProfile extends React.Component{
         <div className = 'profilePic'>
 
           <Avatar
+            className = "picture"
             onClick = {() => this.onOpenChangeProfilePic()}
-            size = {150}
-
+            size = {125}
             src = {`${global.IMAGE_ENDPOINT}`+profileImage} />
-
-
-          {
-            this.props.parameter.username === this.props.currentUser ?
-            this.renderEditButton()
-
-            :
-
-            <div></div>
-          }
 
         </div>
 
@@ -256,18 +237,6 @@ class PersonalProfile extends React.Component{
       this.setState({
         showProfilePicEdit: true
       })
-    }
-
-    renderCalPostPic = () => {
-      // This is to display the 3 sections (cal, post, pic)
-      // It allows you to switch between
-      return(
-
-        <div className = 'cal-post-pic'>
-          {this.onRenderTabs()}
-        </div>
-
-      )
     }
 
     onFollow = (follower, following) =>{
@@ -531,140 +500,132 @@ class PersonalProfile extends React.Component{
 
 
       }
-    console.log(friends)
 
-      return (
-      <div>
+  return (
+    <div class="profileEventCard">
+        <div class="parentFlexContainer">
 
-        <div className = 'profileInfo'>
-
-          <div>
-
+          <div className = "picFollowerHolder">
+            {this.renderProfilePic()}
             <div className = 'profilePostFollow'>
-
               <div
               onClick = {() => this.onFollowerOpen()}
               className = 'followItem'>
-                <span
+                <div
                 className = 'postFollowWords'
-                >Followers</span>
-                <br />
-                <span>{followers.length}</span>
+                >Followers</div>
+                <div
+                  className = "postFollowNum"
+                  >{followers.length}</div>
               </div>
               <div
               onClick = {() => this.onFollowingOpen()}
               className = 'followItem'>
-                <span
+                <div
                 className = 'postFollowWords'
-                >Following</span>
-                <br />
-                <span>{following.length}</span>
+                >Following</div>
+                <div
+                  className = "postFollowNum"
+                  >{following.length}</div>
               </div>
             </div>
+          </div>
 
 
 
-          <div>
 
-        {
-            this.props.parameter.username === this.props.currentUser ?
+          <div className = "nameBioHolder">
+            <span className = 'profileName'>
+              {this.capitalize(firstName)} {this.capitalize(lastName)}
+            </span>
+            <br />
+            <span class="profileUserName">{"@"+this.props.username}</span>
+            <div class="profileBio">{bio}</div>
 
-            <div className = 'selfProfileButtons'>
+          </div>
 
-               <Button
-                  onClick = {() => this.openProfileEdit()}
-                  type="primary"
-                  shape="round"
-                  icon={<i  style={{marginRight:'10px'}} class="fas fa-user-edit"></i>}
-                  style={{fontSize:'15px'}} size={'large'}>
 
-                 Edit Profile
-               </Button>
-            </div>
 
-            :
 
-            <div className = 'profileButtons'>
-            {  curRequested.includes(profileId) ?
 
-              <div
-              style={{
-                paddingTop: "7px",
-                fontSize:'16px'}}
-              onClick = {() => this.onAcceptFollow(profileId, curId)}
-              className = 'followButton'>
-                Accept
-              </div>
-
-              :
-
-              followers.includes(this.props.currentUser.toString()) ?
-
-              <div>
-                <div
-                style={{
-                  paddingTop: "7px",
-                  ontSize:'16px'}}
-                onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-                className = 'followButton'>
-                  Unfollow
+          <div className = "buttonHolder">
+            {
+                this.props.parameter.username === this.props.currentUser ?
+                <div className = 'selfProfileButtons'>
+                   <Button
+                      onClick = {() => this.openProfileEdit()}
+                      type="primary"
+                      shape="round"
+                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-edit"></i>}
+                      style={{fontSize:'15px'}} size={'large'}>
+                     Edit Profile
+                   </Button>
                 </div>
-              <br />
-                <div
-                  className = 'messageButton'>
-                  Message
-                </div>
-              </div>
-
-
-              :
-
-              <div>
-              {
-                  requested.includes(this.props.currentId) ?
-
-                  <Button
-                    style={{fontSize:'16px'}}
-                    onClick = {() => this.onUnRequest(this.props.currentId, profileId)}
-                     className = 'followButton'
-                    id="follow-button"> Requested </Button>
-
+                :
+                <div className = 'profileButtons'>
+                {  curRequested.includes(profileId) ?
+                  <div
+                  style={{
+                    paddingTop: "7px",
+                    fontSize:'16px'}}
+                  onClick = {() => this.onAcceptFollow(profileId, curId)}
+                  className = 'followButton'>
+                    Accept
+                  </div>
                   :
+                  followers.includes(this.props.currentUser.toString()) ?
+                  <div>
+                    <div
+                    style={{
+                      paddingTop: "7px",
+                      ontSize:'16px'}}
+                    onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
+                    className = 'followButton'>
+                      Unfollow
+                    </div>
+                    <br />
+                    <div
+                      className = 'messageButton'>
+                      Message
+                    </div>
+                  </div>
+                  :
+                  <div>
+                  {
+                      requested.includes(this.props.currentId) ?
+                      <Button
+                        style={{fontSize:'16px'}}
+                        onClick = {() => this.onUnRequest(this.props.currentId, profileId)}
+                        className = 'followButton'
+                        id="follow-button"> Requested </Button>
 
-                  <Button
-                    style={{fontSize:'16px'}}
-                    onClick = {() => this.onFollow(this.props.currentId, profileId)}
-                     className = 'followButton'
-                    id="follow-button"> Follow </Button>
+                      :
 
-              }
-              </div>
-
+                      <Button
+                        style={{fontSize:'16px'}}
+                        onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                        className = 'followButton'
+                        id="follow-button"> Follow
+                      </Button>
+                  }
+                  </div>
+                }
+                </div>
             }
+          </div>
 
 
 
-
-
-
-            </div>
-
-        }
-
-
-
-        </div>
-
-        </div>
-
-
-        </div>
 
       </div>
 
-      )
 
-    }
+
+
+
+      </div>
+    )
+  }
 
 
 
@@ -711,8 +672,6 @@ class PersonalProfile extends React.Component{
       // and then save it. Pretty much it will get informaiton form the editprofileform
       // that was change and then get sent into the channel and then update it in the back
       // end then that information will get sent back into the frot end and changed
-
-
       //The currentId would not be using for the editing the user but rather find the
       // user. And since the current user can only edit its own page, the current
       // user id should be good
@@ -736,7 +695,6 @@ class PersonalProfile extends React.Component{
       // This function will get the initial value of the edit profile page, which
       // in this case is the name, last name, bio, picture etc what ever else you
       // wanna edit
-
       if(this.props.profile){
         let firstName = "";
         let lastName = "";
@@ -758,7 +716,6 @@ class PersonalProfile extends React.Component{
         if(this.props.profile.email){
           email = this.props.profile.email
         }
-
         return {
           first_name: firstName,
           last_name: lastName,
@@ -767,18 +724,13 @@ class PersonalProfile extends React.Component{
           email: email,
         }
       }
-
-
     }
 
     onRenderTabs= () => {
       return (
-        <div>
-
         <div className = 'profile-tabContainer'>
           <div style={{
           background:'white'}} >
-
           <Steps
             type="navigation"
             size="large"
@@ -786,31 +738,22 @@ class PersonalProfile extends React.Component{
             onChange={this.onChange}>
             <Step title="Calendar"
               icon={<i class="far fa-calendar-alt"></i>} />
-
             {/*  PersonalProfilePostList.js */}
             <Step title="Posts"
               onClick = {() => this.onPostTabClick()}
               icon={<i class="far fa-edit"></i>} />
-
             {/*  PersonalProfileEventList.js */}
-
             <Step
               title="Events"
-
               onClick = {() => this.onEventTabClick()}
               icon={<i class="fas fa-users"></i>} />
           </Steps>
           </div>
           <Divider style={{marginTop:'-1px', marginBot:'-1px'}}/>
-
           <div className = 'profile-tabPanel'>
-
               <SocialCalendar {...this.props}/>
 
            </div>
-
-        </div>
-
         </div>
       )
     }
@@ -918,25 +861,8 @@ class PersonalProfile extends React.Component{
       return(
         <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
 
-          <div class="profileEventCard" style={{marginTop:'50px', height:'300px', padding:'25px'}}>
 
-            <div class="parentFlexContainer">
-
-              {this.renderProfilePic()}
-
-              <span className = 'profileName'>
-                {this.capitalize(firstName)} {this.capitalize(lastName)}
-                <br/>
-
-              </span>
-              <span class="profileUserName">{"@"+this.props.username}</span>
-              <span class="profileBio">{bio}</span>
-            </div>
-
-            {this.onRenderProfileInfo()}
-
-          </div>
-
+          {this.onRenderProfileInfo()}
           {
             privatePro ?
             this.onRenderPrivate()
@@ -991,7 +917,6 @@ class PersonalProfile extends React.Component{
             </Modal>
 
 
-
           <Modal
             visible = {this.state.followingShow}
             onCancel = {this.onFollowingCancel}
@@ -1000,10 +925,6 @@ class PersonalProfile extends React.Component{
             <span className = 'followWord'>Following</span>
             <FollowList follow = {following}/>
             </Modal>
-
-
-
-
         </div>
       )
 
