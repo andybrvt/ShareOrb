@@ -176,6 +176,7 @@ class PersonalProfile extends React.Component{
   }
 
 
+
   handleProfilePicChange = (values) => {
     // This is used to changing the profile pic, for submiting.
     console.log(values)
@@ -339,7 +340,35 @@ class PersonalProfile extends React.Component{
 
 
     onDirectMessages = () => {
-      // This function will be used
+      // This function will be used be used to direct the page to the chats
+      // when someone clicks on the message button
+
+
+      let profileId = ""
+      let userId = ""
+      if(this.props.profile.id){
+          profileId = this.props.profile.id
+      }
+      if(this.props.currentId){
+        userId= this.props.currentId
+      }
+
+
+      console.log(profileId)
+      authAxios.post(`${global.API_ENDPOINT}/newChat/getExisitingChat`, {
+        user1: profileId,
+        user2: userId
+      })
+      .then(res => {
+        console.log(res.data)
+        if(res.data !== "No chat"){
+          // When there is a chat that exist
+          this.props.history.push("/chat/"+res.data)
+        } else {
+          // When there is  not chat that exist
+        }
+
+      })
     }
 
 
@@ -585,6 +614,7 @@ class PersonalProfile extends React.Component{
                     </div>
                     <br />
                     <div
+                      onClick = {() => this.onDirectMessages()}
                       className = 'messageButton'>
                       Message
                     </div>

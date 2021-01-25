@@ -55,7 +55,7 @@ class EventInfo extends React.Component{
   getData = callback => {
     authAxios.get(`${global.API_ENDPOINT}/userprofile/inviteList`)
         .then(res=> {
-
+          console.log(res.data)
           this.setState({
             list:res.data,
          });

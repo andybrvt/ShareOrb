@@ -358,7 +358,7 @@ class inviteList(generics.ListAPIView):
         # Your can exclude a list by using keyword __in
         # This is filtering by username in the list
 
-        queryset = models.User.objects.exclude(username__in = list)
+        queryset = models.User.objects.fitler(username__in = list)
         return queryset
 
 # Grabs everyone but current user and friends
