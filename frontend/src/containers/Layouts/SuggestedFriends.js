@@ -33,18 +33,6 @@ class SuggestedFriends extends React.Component {
         list: res.data,
       });
     });
-
-
-    authAxios.get(`${global.API_ENDPOINT}/userprofile/everyoneSuggested`)
-        .then(res=> {
-          console.log(res)
-
-          console.log(res.data)
-          this.setState({
-            data:res.data,
-         });
-       });
-       console.log(this.state.data)
   }
 
   getData = callback => {
@@ -251,16 +239,12 @@ class SuggestedFriends extends React.Component {
              lineHeight: '32px',
            }}
          >
-
-
         </div>
       ) : null;
 
     console.log(following, requestList)
 
     return (
-
-
       <div>
         <List
           className="demo-loadmore-list scrollableFeature"
@@ -270,9 +254,7 @@ class SuggestedFriends extends React.Component {
           dataSource={list}
           renderItem={item => (
 
-            <List.Item
-
-            >
+            <List.Item>
 
               <Skeleton avatar title={false} loading={item.loading} active>
 
