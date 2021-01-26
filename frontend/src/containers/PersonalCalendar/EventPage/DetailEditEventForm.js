@@ -67,7 +67,6 @@ const renderTextArea = (field) => {
     rows={4}
     type = {field.type}
     placeholder = {field.placeholder}
-    showCount
     />
   )
 
@@ -650,7 +649,7 @@ class DetailEditEventForm extends React.Component{
 
           width={500}
           visible={this.props.visible}
-          onClose={this.onClose}
+          onClose={() =>this.props.onClose()}
 
 
           bodyStyle={{ paddingBottom: 80 }}

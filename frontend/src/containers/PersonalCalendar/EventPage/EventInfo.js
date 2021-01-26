@@ -141,6 +141,12 @@ class EventInfo extends React.Component{
     })
   }
 
+  onCloseEditClick = () => {
+    this.setState({
+      edit: false
+    })
+  }
+
   timeConvert = (time) => {
     // This function will take in a time and then covert the time to
     // a 1-24 hour hour so that it cna be used to add into the
@@ -365,6 +371,8 @@ class EventInfo extends React.Component{
 
 
   }
+
+
 
   onCloseSureModal = () => {
     this.setState({
@@ -919,7 +927,7 @@ class EventInfo extends React.Component{
 
     <DetailEditEventForm
     {...this.props}
-
+    onClose = {this.onCloseEditClick}
     info = {this.props.info}
     initialValues = {this.getInitialValue()}
     onSubmit = {this.onSaveEdit}
