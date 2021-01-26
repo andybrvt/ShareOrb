@@ -353,12 +353,10 @@ class inviteList(generics.ListAPIView):
         temp=(self.request.user.get_following())
         for i in temp:
             list.append(i)
-        list.append(self.request.user)
-        print(list)
         # Your can exclude a list by using keyword __in
         # This is filtering by username in the list
 
-        queryset = models.User.objects.exclude(username__in = list)
+        queryset = models.User.objects.filter(username__in = list)
         return queryset
 
 # Grabs everyone but current user and friends

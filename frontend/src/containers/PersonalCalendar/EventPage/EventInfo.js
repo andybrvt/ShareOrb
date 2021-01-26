@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic, List, Skeleton} from 'antd';
+import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic, List, Skeleton, Tabs} from 'antd';
 import {PictureOutlined, CheckSquareTwoTone, EyeOutlined, DownloadOutlined, UserOutlined} from '@ant-design/icons';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
@@ -23,7 +23,7 @@ import {browserHistory} from 'react-router';
 
 
 
-
+const { TabPane } = Tabs;
 
 
 
@@ -489,6 +489,7 @@ class EventInfo extends React.Component{
     const selectYear = dateFns.getYear(currentDay).toString()
     const selectMonth = (dateFns.getMonth(currentDay)+1).toString()
     const selectDay = dateFns.getDate(currentDay).toString()
+
     console.log(this.state)
     console.log(this.props)
     const list=this.state.list;
@@ -793,41 +794,46 @@ class EventInfo extends React.Component{
         <div className = "inviteFriendsEventCard">
             Invite Friends
             <Divider/>
-              <List
-                className="demo-loadmore-list scrollableFeature"
-                style={{marginTop:'-10px'}}
-                itemLayout="horizontal"
-                dataSource={list}
-                renderItem={item => (
+            <Tabs defaultActiveKey="1">
+              <TabPane tab="Suggested Friends" key="1">
 
-                  <List.Item>
+                <List
+                    className="demo-loadmore-list scrollableFeature"
+                    style={{marginTop:'-10px'}}
+                    itemLayout="horizontal"
+                    dataSource={list}
+                    renderItem={item => (
 
-                    <Skeleton avatar title={false} loading={item.loading} active>
+                    <List.Item>
 
-                    <List.Item.Meta
+                      <Skeleton avatar title={false} loading={item.loading} active>
 
-                      avatar={
-                        <Avatar
-                          style = {{
-                            cursor: "pointer"
-                          }}
-                          onClick = {() => this.profileDirect(item.username)}
-                           src={item.profile_picture} />
-                      }
-                      title={<span
-                        style = {{cursor: "pointer"}}
-                         onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
-                      description={
-                        <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
-                        }
-                    />
-
-
-
-                    </Skeleton>
-                  </List.Item>
+                        <List.Item.Meta
+                          avatar={
+                            <Avatar
+                              style = {{
+                                cursor: "pointer"
+                              }}
+                              onClick = {() => this.profileDirect(item.username)}
+                               src={item.profile_picture} />
+                            }
+                            title={<span
+                              style = {{cursor: "pointer"}}
+                               onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
+                            description={
+                              <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                              }
+                          />
+                        </Skeleton>
+                    </List.Item>
                 )}
               />
+            </TabPane>
+            <TabPane tab="Pending Invites (2)" key="2">
+
+              <div>hi</div>
+            </TabPane>
+          </Tabs>
         </div>
 
         {/* The Map card*/}
@@ -835,6 +841,7 @@ class EventInfo extends React.Component{
           Location
           <span>
             <Divider style={{marginTop:'-1px'}}/>
+            {/*
             <ReactBingmaps
               bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
               center = {[32.2226, 110.9747]}
@@ -853,7 +860,7 @@ class EventInfo extends React.Component{
             }
               >
             </ReactBingmaps>
-
+            */}
              {/*Saving api calls don't worry about maps*/}
             <Divider/>
               <i style={{marginRight:'15px', color:'#1890ff',
