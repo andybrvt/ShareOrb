@@ -633,7 +633,7 @@ class PersonalProfileHeader extends React.Component{
         onCancel = {() => this.closeProfileEdit()}
         footer = {null}
         width={700}
-        bodyStyle={{padding:'25px'}}
+        bodyStyle={{padding:'50px'}}
         centered
         >
           <EditProfileForm

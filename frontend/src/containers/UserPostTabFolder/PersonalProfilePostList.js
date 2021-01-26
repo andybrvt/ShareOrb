@@ -727,7 +727,6 @@ class PersonalProfilePostList extends React.Component{
               icon={<i class="fas fa-users"></i>} />
           </Steps>
           </div>
-          <Divider style={{marginTop:'-1px'}}/>
 
 
           <div className = 'profile-tabPanel'>

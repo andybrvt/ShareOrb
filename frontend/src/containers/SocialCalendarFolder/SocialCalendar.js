@@ -82,22 +82,23 @@ class SocialCalendar extends React.Component{
     const dateFormat = "MMMM yyyy"
 
     return (
-      <div className= "header">
-        <div className = "">
-          <div className = 'icon' onClick ={this.prevMonth}>
-            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
+      <div className= "socialHeader">
+          <div className = "leftArrow">
+            <div className = 'icon' onClick ={this.prevMonth}>
+              <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
+            </div>
           </div>
-        </div>
-        <div className = "">
-          <span style={{fontSize:'22px'}}>
-           {dateFns.format(this.props.currentDate, dateFormat)}
-          </span>
-        </div>
-        <div className= "">
-          <div className = 'icon' onClick ={this.nextMonth}>
-            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
+          <div className = "midText">
+            <span style={{fontSize:'22px'}}>
+             {dateFns.format(this.props.currentDate, dateFormat)}
+            </span>
           </div>
-        </div>
+          <div className= "rightArrow">
+            <div className = 'icon' onClick ={this.nextMonth}>
+              <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
+            </div>
+          </div>
+
       </div>
     );
   }
@@ -111,7 +112,7 @@ class SocialCalendar extends React.Component{
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
       days.push(
-        <div className ="" key = {i}>
+        <div className ="day" key = {i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           </div>
       )

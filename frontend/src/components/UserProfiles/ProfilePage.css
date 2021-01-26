@@ -20,6 +20,7 @@
 .profilePage .bottomSectProfilePage{
   /* background-color: green; */
   position: relative;
+  width: 100%;
   height: 55%;
 }
 
@@ -35,6 +36,7 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
  width: 100%;
  height: 90%;
  background-color: #ffffff;
+ /* border-bottom: 1px solid #f0f0f0;  */
 }
 
 
@@ -292,9 +294,6 @@ STILL SHARED BETWEEN EVERYONE
   /* height: 85%; */
   /* background-color: gray; */
   color:#51565d;
-  text-align: center;
-  align-items: center;
-  align-content: center;
   font-weight: 600;
   font-size: 32px;
 }
