@@ -61,7 +61,11 @@ class FollowersList extends React.Component{
 
   renderRequestList = () => {
     let requestList = []
-    const request = this.props.request
+    let request = []
+    if(this.props.request){
+      request = this.props.request
+    }
+    
     for(let i = 0; i< request.length; i++){
       requestList.push(
         <List.Item

@@ -82,22 +82,23 @@ class SocialCalendar extends React.Component{
     const dateFormat = "MMMM yyyy"
 
     return (
-      <div className= "header">
-        <div className = "">
-          <div className = 'icon' onClick ={this.prevMonth}>
-            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
+      <div className= "socialHeader">
+          <div className = "leftArrow">
+            <div className = 'icon' onClick ={this.prevMonth}>
+              <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
+            </div>
           </div>
-        </div>
-        <div className = "">
-          <span style={{fontSize:'22px'}}>
-           {dateFns.format(this.props.currentDate, dateFormat)}
-          </span>
-        </div>
-        <div className= "">
-          <div className = 'icon' onClick ={this.nextMonth}>
-            <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
+          <div className = "midText">
+            <span style={{fontSize:'22px'}}>
+             {dateFns.format(this.props.currentDate, dateFormat)}
+            </span>
           </div>
-        </div>
+          <div className= "rightArrow">
+            <div className = 'icon' onClick ={this.nextMonth}>
+              <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
+            </div>
+          </div>
+
       </div>
     );
   }
@@ -111,7 +112,7 @@ class SocialCalendar extends React.Component{
     // to the start date which is the start of the day in the current date
     for (let i= 0; i<7; i++){
       days.push(
-        <div className ="" key = {i}>
+        <div className ="day" key = {i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
           </div>
       )
@@ -119,6 +120,13 @@ class SocialCalendar extends React.Component{
     // the days will be a list of dates that are put in by the for loops
      // and then the return will return all those days out
     return <div className = "days"> {days} </div>
+  }
+
+  onLinkClick = (calUsername, cellYear, cellMonth, cellDay, location) => {
+    this.props.history.push({
+      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+      state:{pathname: location}
+    })
   }
 
 
@@ -234,18 +242,26 @@ class SocialCalendar extends React.Component{
                   {
                     dateFns.isSameDay(day, currentMonth) ?
 
-                    <div>
+                    <div className = "buttonHolder">
                       <PlusOutlined
                       onClick = {() => this.onOpenSocialCalPicModal()}
                       className = 'plusButton'/>
                       <CalendarOutlined
                       onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                       className = 'eventButton'/>
-                      <Link to = {{
-                       pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                       state:{pathname: location}}}>
-                        <EyeOutlined className = 'eyeButton'/>
-                      </Link>
+
+
+
+                      <EyeOutlined
+                        onClick = {() => this.onLinkClick(calUsername,
+                            cellYear,
+                            cellMonth,
+                            cellDay,
+                            location
+                           )}
+                      className = 'eyeButton'/>
+
+
                     </div>
 
                     : dateFns.isAfter( day, currentMonth) ?
@@ -257,45 +273,51 @@ class SocialCalendar extends React.Component{
                       <CalendarOutlined
                       onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                       className = 'eventButtonAfter'/>
-                      <Link to = {{
-                         pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                         state:{pathname: location}}}>
-                         <EyeOutlined className = 'eyeButtonAfter'/>
-                      </Link>
+                     <EyeOutlined
+                     onClick = {() => this.onLinkClick(calUsername,
+                         cellYear,
+                         cellMonth,
+                         cellDay,
+                         location
+                        )}
+                     className = 'eyeButtonAfter'/>
                     </div>
 
                      :
 
-                    <Link to = {{
-                       pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                       state:{pathname: location} }}>
-                     {/* This is for the days that have already passed that has a cover cell
-                       and when the user is either friend or calendar owner*/}
-                       <EyeOutlined className = 'eyeButtonPass'/>
-                    </Link>
+                       <EyeOutlined
+                         onClick = {() => this.onLinkClick(calUsername,
+                             cellYear,
+                             cellMonth,
+                             cellDay,
+                             location
+                            )}
+                         className = 'eyeButtonPass'/>
                   }
                   </div>
 
                 :
 
 
-                <Link to = {{
-                  pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                  state:{pathname: location}}} >
-                  {/*This is for viewing the event when there is a cover picture on teh cell
-                    and the user is not a friend or calendar owner*/}
+
+
                   <EyeOutlined
+                    // This is for viewing the event when there is a cover picture on teh cell
+                    //   and the user is not a friend or calendar owner
+                    onClick = {() => this.onLinkClick(calUsername,
+                        cellYear,
+                        cellMonth,
+                        cellDay,
+                        location
+                       )}
                   className = 'eyeButtonPass'/>
 
-                </Link>
 
                 }
 
                 {/* SHOULD CHANGE TO PHOTO LATER */}
-                <Avatar
+                <img
                 className = 'imgCover'
-                size = {250}
-                shape= 'square'
                 src = {`${global.IMAGE_ENDPOINT}`+toDoStuff[0].coverPic} />
 
                 <span className = "bgD"> {formattedDate}</span>
@@ -328,11 +350,16 @@ class SocialCalendar extends React.Component{
                     <CalendarOutlined
                     onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                     className = 'eventButton'/>
-                    <Link to = {{
-                      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                      state:{pathname: location}}} >
-                      <EyeOutlined className = 'eyeButton'/>
-                    </Link>
+
+                    <EyeOutlined
+                      onClick = {() => this.onLinkClick(calUsername,
+                          cellYear,
+                          cellMonth,
+                          cellDay,
+                          location
+                         )}
+                      className = 'eyeButton'/>
+
                   </div>
 
                   : dateFns.isAfter( day, currentMonth) ?
@@ -343,35 +370,46 @@ class SocialCalendar extends React.Component{
                     <CalendarOutlined
                       onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                       className = 'eventButtonAfter'/>
-                    <Link to = {{
-                     pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                     state:{pathname: location}}} >
-                      <EyeOutlined className = 'eyeButtonAfter'/>
-                     </Link>
+
+                    <EyeOutlined
+                      onClick = {() => this.onLinkClick(calUsername,
+                          cellYear,
+                          cellMonth,
+                          cellDay,
+                          location
+                         )}
+                      className = 'eyeButtonAfter'/>
+
                    </div>
 
                    :
 
-                   <Link to = {{
-                     pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                     state:{pathname: location}
-                   }} >
-                     {/*This is for the buttons on top of the event list for days before
-                       the current day*/}
-                    <EyeOutlined className = 'eyeButtonPass'/>
-                  </Link>
+
+                    <EyeOutlined
+                      // This is for the buttons on top of the event list for days before
+                      //   the current day
+                      onClick = {() => this.onLinkClick(calUsername,
+                          cellYear,
+                          cellMonth,
+                          cellDay,
+                          location
+                         )}
+                      className = 'eyeButtonPass'/>
                 }
                 </div>
 
               :
 
-                <Link to = {{
-                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                state:{pathname: location}}} >
-                {/*For the eye above the event cell for people who are not friends
-                  or the owner of the calendar*/}
-                  <EyeOutlined className = 'eyeButtonPass'/>
-                </Link>
+                <EyeOutlined
+                  // For the eye above the event cell for people who are not friends
+                  //   or the owner of the calendar
+                  onClick = {() => this.onLinkClick(calUsername,
+                      cellYear,
+                      cellMonth,
+                      cellDay,
+                      location
+                     )}
+                  className = 'eyeButtonPass'/>
 
               }
             </div>
@@ -410,12 +448,15 @@ class SocialCalendar extends React.Component{
                   <CalendarOutlined
                   onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                   className = 'eventButton'/>
-                  <Link to = {{
-                    pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                    state:{pathname: location}
-                  }} >
-                    <EyeOutlined className = 'eyeButton'/>
-                </Link>
+
+                  <EyeOutlined
+                    onClick = {() => this.onLinkClick(calUsername,
+                        cellYear,
+                        cellMonth,
+                        cellDay,
+                        location
+                       )}
+                    className = 'eyeButton'/>
                 </div>
 
                 : dateFns.isAfter( day, currentMonth) ?
@@ -427,38 +468,44 @@ class SocialCalendar extends React.Component{
                   onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                   className = 'eventButtonAfter'
                    />
-                  <Link to = {{
-                    pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                    state:{pathname: location}
-                  }} >
-                   <EyeOutlined className = 'eyeButtonAfter'/>
-                  </Link>
+
+                 <EyeOutlined
+                   onClick = {() => this.onLinkClick(calUsername,
+                       cellYear,
+                       cellMonth,
+                       cellDay,
+                       location
+                      )}
+                   className = 'eyeButtonAfter'/>
                  </div>
 
                  :
 
-                 <Link to = {{
-                   pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                   state:{pathname: location}
-                 }} >
-                 {/* For days before the current day with a social cal cell object
-                   but no cover photo or events */}
-                  <EyeOutlined className = 'eyeButtonPass'/>
-                </Link>
+                <EyeOutlined
+                  // For days before the current day with a social cal cell object
+                  //   but no cover photo or events
+                  onClick = {() => this.onLinkClick(calUsername,
+                      cellYear,
+                      cellMonth,
+                      cellDay,
+                      location
+                     )}
+                   className = 'eyeButtonPass'/>
                 }
               </div>
 
               :
 
-              <Link to = {{
-                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                state:{pathname: location}
-              }} >
-                {/*This is for viewing the event cell when there is a social cell object
-                  but you are not a friend or ower*/}
-                <EyeOutlined
-                className = 'eyeButtonPass'/>
-              </Link>
+              <EyeOutlined
+                // This is for viewing the event cell when there is a social cell object
+                //   but you are not a friend or ower
+                onClick = {() => this.onLinkClick(calUsername,
+                    cellYear,
+                    cellMonth,
+                    cellDay,
+                    location
+                   )}
+              className = 'eyeButtonPass'/>
               }
 
               <span className = "bg"> {formattedDate}</span>
@@ -509,12 +556,16 @@ class SocialCalendar extends React.Component{
             <CalendarOutlined
             onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
             className = 'eventButton'/>
-              <Link to = {{
-                pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                state:{pathname: location}
-              }} >
-                <EyeOutlined className = 'eyeButton'/>
-              </Link>
+
+            <EyeOutlined
+              onClick = {() => this.onLinkClick(calUsername,
+                  cellYear,
+                  cellMonth,
+                  cellDay,
+                  location
+                 )}
+               className = 'eyeButton'/>
+
             </div>
 
             : dateFns.isAfter( day, currentMonth) ?
@@ -526,37 +577,47 @@ class SocialCalendar extends React.Component{
               onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
               className = 'eventButtonAfter' />
 
-              <Link to = {{
-                 pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-                 state:{pathname: location}}}>
-                 <EyeOutlined className = 'eyeButtonAfter'/>
-              </Link>
+
+             <EyeOutlined
+               onClick = {() => this.onLinkClick(calUsername,
+                   cellYear,
+                   cellMonth,
+                   cellDay,
+                   location
+                  )}
+               className = 'eyeButtonAfter'/>
+
             </div>
 
              :
-             <Link to = {{
-               pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-               state:{pathname: location}}} >
-             {/*This is for the the eye that is before the current day for cells that
-               do not have the cell object created */}
-               <EyeOutlined className = 'eyeButtonPass'/>
-             </Link>
+
+             <EyeOutlined
+               // This is for the the eye that is before the current day for cells that
+               //   do not have the cell object created
+               onClick = {() => this.onLinkClick(calUsername,
+                   cellYear,
+                   cellMonth,
+                   cellDay,
+                   location
+                  )}
+               className = 'eyeButtonPass'/>
            }
           </div>
 
           :
 
-          <Link to = {{
-              pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-              state:{pathname: location}}} >
-            {/*
-              This is for the eye on the social calendar where the calendar is not
-              not of a friend or of the own and so it is just viewing. This is for
-              cells that do not have an existing social cell in it
-              */}
           <EyeOutlined
+            // This is for the eye on the social calendar where the calendar is not
+            // not of a friend or of the own and so it is just viewing. This is for
+            // cells that do not have an existing social cell in it
+            onClick = {() => this.onLinkClick(calUsername,
+                cellYear,
+                cellMonth,
+                cellDay,
+                location
+               )}
             className = 'eyeButtonPass'/>
-          </Link>
+
 
           }
           <span className = "bg"> {formattedDate}</span>

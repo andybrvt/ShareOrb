@@ -7,23 +7,36 @@
   width: 96vw;
   height: 93vh;
   top: 7%;
+  display: flex;
+  flex-direction: column;
 }
 
+.profilePage .topSectProfilePage{
+  /* background-color: red; */
+  position: relative;
+  height: 45%;
+}
+
+.profilePage .bottomSectProfilePage{
+  /* background-color: green; */
+  position: relative;
+  width: 100%;
+  height: 55%;
+}
 
 
 /* CSS for onRenderTabs
 STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
  */
 .profile-tabContainer {
-  background-color: blue;
+ position: relative;
  border-top: 1px solid #f0f0f0;
- position:absolute;
- top: 425px;
+ position:relative;
  font-family: 'Segoe UI Regular';
- bottom: 28px;
  width: 100%;
  height: 90%;
  background-color: #ffffff;
+ /* border-bottom: 1px solid #f0f0f0;  */
 }
 
 
@@ -34,22 +47,22 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
 .profileEventCard{
   position: relative;
   left: 50%;
-  top: 5%;
-  transform:translateX(-50%);
+  top: 50%;
+  transform:translateX(-50%) translateY(-50%);
   background: white;
   line-height: 150%;
   border-radius: 15px;
   width: 80%;
   font-family: 'Segoe UI Regular';
-  height: 250px;
-  background-color: gainsboro;
+  height: 80%;
+  /* background-color: gainsboro; */
 }
 .parentFlexContainer{
   display: flex;
   height: 100%;
   /* display: none; */
   flex-direction: row;
-  background-color: red;
+  /* background-color: red; */
   position: relative;
 }
 
@@ -57,20 +70,20 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
   position:relative;
   width:30%;
   height: 100%;
-  background-color: orange;
+  /* background-color: orange; */
 }
 
 .parentFlexContainer .nameBioHolder{
   position:relative;
   width:45%;
 
-  background-color: green;
+  /* background-color: green; */
 }
 
 .parentFlexContainer .buttonHolder{
   position: relative;
   width: 25%;
-  background-color: blue;
+  /* background-color: blue; */
 }
 
 
@@ -87,7 +100,7 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
   transform: translateX(-50%);
 }
 .profileUserName{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     position:relative;
     color:grey;
@@ -98,7 +111,7 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
 .profileBio{
   /* background-color: green; */
   position: relative;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   color: black;
   top:50%;
@@ -110,7 +123,7 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
 /* CSS fro renderProfilePic */
 .profilePic{
   width: 100%;
-  height: 65%;
+  height: 75%;
   z-index: 1;
 }
 .profilePic .picture{
@@ -166,9 +179,9 @@ STILL SHARED BETWEEN EVERYONE
 }
 .profilePostFollow{
   position: relative;
-  width: 100%;
-  height: 35%;
-  background-color: red;
+  width: 70%;
+  height: 25%;
+  /* background-color: red; */
   display: flex;
   flex-direction: row;
   color:black;
@@ -185,33 +198,28 @@ STILL SHARED BETWEEN EVERYONE
   position: relative;
   width: 100%;
 
-  color:blue;
+  /* color:blue; */
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
 }
 .postFollowNum{
   position: relative;
   width: 100%;
-  color:blue;
+  /* color:blue; */
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
 }
 .selfProfileButtons{
   position: relative;
-  top:25%;
+  width: 100%;
+  top: 25%;
   /* left: 50%; */
 }
 .profileButtons{
-  /* background-color: red; */
-  float:right;
-
-  height:200px;
-  width: 225px;
-  margin-top:-175px;
-  padding:10px;
+  top: 25%;
+  position: relative;
   display: flex;
-   flex-flow: column;
-    justify-content: space-around;
+  flex-flow: column;
 
   /* justify-content: center; */
 }
@@ -267,12 +275,10 @@ STILL SHARED BETWEEN EVERYONE
 /* CSS for onRenderPrivate  */
 .privateAccountPage{
   border-top: 1px solid #f0f0f0;
-  position:absolute;
-  top: 425px;
+  position:relative;
   font-family: 'Segoe UI Regular';
-  bottom: 28px;
-  width: 1760px;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   background-color: #ffffff;
   font-size: 25px;
 }
@@ -288,9 +294,6 @@ STILL SHARED BETWEEN EVERYONE
   /* height: 85%; */
   /* background-color: gray; */
   color:#51565d;
-  text-align: center;
-  align-items: center;
-  align-content: center;
   font-weight: 600;
   font-size: 32px;
 }

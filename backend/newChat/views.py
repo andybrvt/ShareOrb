@@ -121,3 +121,18 @@ class GetChatSearchView(APIView):
 
 
 # Create a search view for chats here later
+class GetIndividualExisitingChat(APIView):
+    # This function will be used mainly for the profile page in order to redirect
+    # them to the chat list. In this case it will be searching if the perosn exist
+    # and along with the current person and then check the length is only
+    # 2
+    def post(self, request, *args, **kwargs):
+
+        print(request.data)
+        users = [request.data['user1'], request.data['user2']]
+        existingChats = models.Chat.objects.filter(participants__id = request.data['user1']).filter(participants__id = request.data['user2']).distinct()
+
+        for chats in existingChats:
+            if chats.participants.count() == 2:
+                return Response(chats.id)
+        return Response("No chat")

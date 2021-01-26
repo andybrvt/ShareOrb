@@ -67,7 +67,6 @@ const renderTextArea = (field) => {
     rows={4}
     type = {field.type}
     placeholder = {field.placeholder}
-    showCount
     />
   )
 
@@ -209,13 +208,6 @@ class DetailEditEventForm extends React.Component{
     locationField:'Shanghai'
 
    };
-
-  onClose = () => {
-    this.setState({
-      visible: !this.state.visible,
-
-    });
-  };
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -650,7 +642,7 @@ class DetailEditEventForm extends React.Component{
 
           width={500}
           visible={this.props.visible}
-          onClose={this.onClose}
+          onClose={() =>this.props.onClose()}
 
 
           bodyStyle={{ paddingBottom: 80 }}

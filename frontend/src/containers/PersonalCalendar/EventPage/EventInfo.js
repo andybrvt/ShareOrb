@@ -55,7 +55,7 @@ class EventInfo extends React.Component{
   getData = callback => {
     authAxios.get(`${global.API_ENDPOINT}/userprofile/inviteList`)
         .then(res=> {
-
+          console.log(res.data)
           this.setState({
             list:res.data,
          });
@@ -138,6 +138,12 @@ class EventInfo extends React.Component{
     // This will activate the edit so that you can start editing events
     this.setState({
       edit: true
+    })
+  }
+
+  onCloseEditClick = () => {
+    this.setState({
+      edit: false
     })
   }
 
@@ -365,6 +371,8 @@ class EventInfo extends React.Component{
 
 
   }
+
+
 
   onCloseSureModal = () => {
     this.setState({
@@ -926,7 +934,7 @@ class EventInfo extends React.Component{
 
     <DetailEditEventForm
     {...this.props}
-
+    onClose = {this.onCloseEditClick}
     info = {this.props.info}
     initialValues = {this.getInitialValue()}
     onSubmit = {this.onSaveEdit}
