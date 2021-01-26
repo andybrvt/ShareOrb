@@ -129,45 +129,48 @@
 }
 
 .hoverCell{
-  width: 115%;
+  position: relative;
+  width: 100%;
   height: 100%;
-  margin-left: -15px;
 }
 .hoverCell:hover{
   background-color: #D3D3D3cc;
 }
-.hoverCell .plusButton{
-  position:absolute;
-  left: 20%;
-  top: 45%;
+
+.hoverCell .buttonHolder{
+  display: flex;
+  background-color: red;
+  flex-direction: row;
+}
+
+.hoverCell .buttonHolder .plusButton{
+  position: relative;
+
   color: transparent;
-  font-size: 40px;
+  font-size: 35px;
   z-index: 1;
 }
-.hoverCell .plusButton:hover{
+.hoverCell .buttonHolder .plusButton:hover{
   transform: scale(1.2);
 }
-.hoverCell .eyeButton{
-  position:absolute;
-  left: 65%;
-  top: 45%;
+.hoverCell .buttonHolder .eyeButton{
+  position:relative;
   color: transparent;
-  font-size: 40px;
+  font-size: 35px;
   z-index: 1;
 }
-.hoverCell .eyeButton:hover{
+.hoverCell .buttonHolder .eyeButton:hover{
   transform: scale(1.2)
 }
 
-.hoverCell .eventButton{
-  position:absolute;
-  left: 42%;
-  top: 45%;
+.hoverCell .buttonHolder .eventButton{
+  position:relative;
+
   color: transparent;
-  font-size: 40px;
+  font-size: 35px;
   z-index: 1;
 }
- .hoverCell .eventButton:hover{
+ .hoverCell .buttonHolder .eventButton:hover{
   transform: scale(1.2)
 }
 
@@ -234,11 +237,22 @@
 .hoverCell:hover .eyeButtonAfter{
   color:white;
 }
+
 .hoverCell .imgCover {
-  position: absolute;
-  /* left: 20px; */
-  left: 0%
+  width: 100%;
+  position: relative;
+  height: 100%;
 }
+
+.imgCover img{
+  /* background-color: red; */
+
+  object-fit: cover;
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
 .hoverCell:hover .imgCover{
   filter: brightness(60%);
 }
