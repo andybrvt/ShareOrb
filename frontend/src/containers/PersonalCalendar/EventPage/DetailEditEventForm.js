@@ -209,13 +209,6 @@ class DetailEditEventForm extends React.Component{
 
    };
 
-  onClose = () => {
-    this.setState({
-      visible: !this.state.visible,
-
-    });
-  };
-
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
