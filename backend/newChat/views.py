@@ -135,4 +135,16 @@ class GetIndividualExisitingChat(APIView):
         for chats in existingChats:
             if chats.participants.count() == 2:
                 return Response(chats.id)
+
+        # So if you can't find a chat that works you will
+        # return the name of the participants and then try to
+        # create a tempoary chat on the chat list
+        user1 = get_object_or_404(User, id = request.data['user1'])
+        user2 = get_object_or_404(User, id = request.data['user2'])
+
+
+
+        # content = {
+        #     participants:
+        # }
         return Response("No chat")

@@ -325,11 +325,11 @@ class SocialCalendar extends React.Component{
 
               : toDoStuff[0].get_socialCalEvent.length !== 0 ?
 
-              <div>
+              <div className = "eventBoxBox">
               {/*These are for when there is no cover photo but there is are events
                 that we want to show.*/}
                 <div className = 'eventBoxListHeader'>
-                  <span className = "bg"> {formattedDate}</span>
+                  <div className = "bg"> {formattedDate}</div>
                 {
                   (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
                   ||  calendarOwnerId === this.props.curId ?
