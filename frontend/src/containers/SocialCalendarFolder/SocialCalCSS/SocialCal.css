@@ -61,7 +61,6 @@
   width: 100%;
   font-weight: 300;
   font-family: "Segoe UI Regular";
-  color: ;
   font-size: 18px;
   border-bottom: 1px solid var(--border-color);
   /* background-color: red; */
@@ -117,7 +116,7 @@
 .socialCalBody .row .cell:first-child{
   border-left: 1px solid var(--border-color)
 }
-.socialCalBody .row .cell .bg{
+.socialCalBody .row .cell .hoverCell .bg{
   color: grey;
   font-weight: 400;
   font-size: 15px;
@@ -136,12 +135,12 @@
   background-color: #D3D3D3cc;
 }
 
-.hoverCell .buttonHolder{
+.hoverCell .buttonHolder {
 
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 50%;
+  width: 70%;
   transform: translateX(-50%) translateY(-50%);
   display: flex;
   flex-direction: row;
@@ -183,22 +182,20 @@
 }
 
 .hoverCell .eventButtonAfter {
-  position:absolute;
-  left: 30%;
-  top: 45%;
+  position:relative;
   color: transparent;
-  font-size: 40px;
+  width: calc(100%/2);
+  font-size: 100%;
   z-index: 1;
 }
 .hoverCell .eventButtonAfter:hover{
   transform: scale(1.2)
 }
 .hoverCell .eyeButtonAfter{
-  position:absolute;
-  left: 55%;
-  top: 45%;
+  position:relative;
+  width: calc(100%/2);
   color: transparent;
-  font-size: 40px;
+  font-size: 100%;
   z-index: 1;
 }
 .hoverCell .eyeButtonAfter:hover{
@@ -219,23 +216,24 @@
   transform: translateX(-50%) translateY(-50%) scale(1.2);
 }
 
-.socialCalBody .row .cell .bgD{
+.socialCalBody .row .cell .hoverCell .bgD{
   color: white;
   font-weight: 100;
   font-size: 15px;
   position: absolute;
   left: 50%;
+  top: 0;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 4;
 }
 
-.hoverCell:hover .plusButton{
+.hoverCell:hover .buttonHolder .plusButton{
   color: white;
 }
-.hoverCell:hover .eyeButton{
+.hoverCell:hover .buttonHolder .eyeButton{
   color: white;
 }
-.hoverCell:hover .eventButton{
+.hoverCell:hover .buttonHolder .eventButton{
   color:white;
 }
 .hoverCell:hover .eyeButtonPass{
@@ -254,11 +252,10 @@
   height: 100%;
 }
 
-.imgCover img{
+.hoverCell  .imgCover img{
   /* background-color: red; */
 
   object-fit: cover;
-  position:relative;
   width:100%;
   height:100%;
 }
@@ -340,90 +337,106 @@
   position: relative;
   height: 18%;
   width: 100%;
-
+  /* align-items: center;
+  text-align: center; */
   display: flex;
   flex-direction: column;
 }
 
 .eventBoxListHeader .bg{
   color: grey;
-  font-weight: 400;
   font-size: 15px;
   position: relative;
   width: 100%;
   left: 50%;
   height: 50%;
-  background-color: blue;
   transform: translateX(-50%);
   z-index: 3;
+  text-align: center;
 }
 
-.eventBoxListHeader .buttonHolder {
-  /* margin-top: 5px; */
+.eventBoxListHeader .buttonHolderHolder{
   position: relative;
-
-  /* left: 3px; */
   height: 50%;
-
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: red;
+  width: 100%;
 }
 
-.eventBoxListHeader .buttonHolder .plusButton {
+.eventBoxListHeader .buttonHolderHolder .buttonHolder {
+  position: relative;
+  width: 50%;
+  height: 50%;
+  left: 50%;
+
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+
+  font-size:24px;
+}
+
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .plusButton {
   /* color: red; */
   /* position:absolute; */
   /* left: 20%; */
   /* top: 45%; */
   /* color: transparent; */
   /* font-size: 40px; */
+  position: relative;
   z-index: 1;
-  font-size: 24px;
-
+  width: calc(100%/3);
+  display: flex;
 }
 
-.eventBoxListHeader .buttonHolder .plusButton:hover{
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .plusButton:hover{
   transform: scale(1.2)
 
 }
-.eventBoxListHeader .buttonHolder .eventButton {
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .eventButton {
   /* color: gainsboro; */
-  margin-left: 15px;
-  margin-right: 15px;
-  font-size: 24px;
+  position: relative;
+  width: calc(100%/3);
+  display: flex;
 
 }
-.eventBoxListHeader .buttonHolder .eventButton:hover{
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .eventButton:hover{
   transform: scale(1.2)
 
 }
-.eventBoxListHeader .buttonHolder .eyeButton {
-  /* color: red; */
-  font-size: 24px;
-}
-
-.eventBoxListHeader .buttonHolder .eyeButton:hover{
-  transform: scale(1.2)
-}
-.eventBoxListHeader .eventButtonAfter {
-  /* color: red; */
-  font-size: 24px;
-  padding-right: 15px;
-
-}
-.eventBoxListHeader .eyeButtonAfter {
-  /* color: red; */
-  font-size: 24px;
-  padding-left: 15px;
-
-
-}
-.eventBoxListHeader .eyeButtonPass {
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .eyeButton {
   /* color: red; */
   position: relative;
-  left: 0px;
-  /* transform: translateX(-100%); */
-  padding-top: 17px;
+  width: calc(100%/3);
+  display: flex;
+}
+
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .eyeButton:hover{
+  transform: scale(1.2)
+}
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .eventButtonAfter {
+  /* color: red; */
+  position: relative;
+  width: calc(100%/2);
+  display: flex;
+
+
+}
+.eventBoxListHeader .buttonHolderHolder .buttonHolder .eyeButtonAfter {
+  /* color: red; */
+  position: relative;
+  width: calc(100%/2);
+  display: flex;
+
+
+}
+.eventBoxListHeader .buttonHolderHolder .eyeButtonPass {
+  /* color: red; */
+  position: relative;
+  height: 100%;
+  width: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
   font-size: 24px;
 
 }
