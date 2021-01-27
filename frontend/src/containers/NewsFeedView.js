@@ -19,6 +19,7 @@ import { InboxOutlined, UserOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
+import Spinner from './Spinner.js';
 // Function: Holds Forms3 and the Infinite scroll
 class NewsFeedView extends React.Component {
 
@@ -71,6 +72,7 @@ class NewsFeedView extends React.Component {
 	}
 
 	render() {
+
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		console.log(this.props)
@@ -128,9 +130,11 @@ class NewsFeedView extends React.Component {
 								</div>
 							</Link>
 						</div>
-						
+
+
 							<InfiniteScroll data={this.props} />
-						</div>
+
+					</div>
 					</div>
 
 

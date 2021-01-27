@@ -341,10 +341,24 @@ class SideMenu extends React.Component {
                 className = 'notificationsInner '
                 >
                 {/*
-                <button class="btn btn-default btn-lg btn-link">
-                  <span class="glyphicon glyphicon-comment"></span>
-                </button>
+
+
+
+                    <div class="notification-box">
+                      <span class="notification-count">6</span>
+                        <i
+                          onClick = {() => this.onOpenDropDown()}
+                          class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
+                          aria-hidden="true"
+                          style={{fontSize:'22px'}}
+                          >
+
+
+                        </i>
+                  </div>
+
                 */}
+                <Badge count={3}>
                   <i
                     onClick = {() => this.onOpenDropDown()}
                     class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
@@ -354,8 +368,7 @@ class SideMenu extends React.Component {
 
 
                   </i>
-
-
+                  </Badge>
                 </div>
                 <div >
 

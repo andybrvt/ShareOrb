@@ -7,7 +7,7 @@ import { authAxios } from '../components/util';
 import './InfiniteScroll.css';
 import WebSocketPostsInstance from  '../postWebsocket';
 import { Divider } from 'antd';
-
+import Spinner from './Spinner.js';
 // Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.Component {
   constructor(props){
@@ -20,6 +20,7 @@ class InfiniteList extends React.Component {
       hasMore: true,
       offset: 0,
       limit: 3,
+      newsfeedLoad:false,
     };
     window.onscroll = () => {
       const {
@@ -104,19 +105,26 @@ class InfiniteList extends React.Component {
 
     return (
 
+      <div>
+        { this.state.loading?
+           <Spinner/>
+           :
 
-      <div style={{ flex: 1}}>
 
-        <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
-          Welcome, {this.props.data.username}. Here's what's going on today! </div>
-        <Divider style={{marginBottom:'25px'}}/>
-        {post.map((j,index) => {
-          return <NewsFeedPost
-            history = {this.props.data.history}
-           data = {j}  />
-        })}
+          <div style={{ flex: 1}}>
 
-     </div>
+            <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
+              Welcome, {this.props.data.username}. Here's what's going on today! </div>
+            <Divider style={{marginBottom:'25px'}}/>
+            {post.map((j,index) => {
+              return <NewsFeedPost
+                history = {this.props.data.history}
+               data = {j}  />
+            })}
+
+         </div>
+       }
+      </div>
    );
   }
 }
