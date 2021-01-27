@@ -55,10 +55,7 @@ class PersonalProfile extends React.Component{
     // following: false,
   }
 
-  onChange = current => {
-    console.log(current)
-      this.setState({ current });
-    };
+
 //To get the parms from teh url use THIS.PROPS.PARAMETER.USERNAME (LOWER CASE BTW)
 
   initialiseProfile() {

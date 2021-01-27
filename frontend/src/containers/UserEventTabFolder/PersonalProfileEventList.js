@@ -18,6 +18,7 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 import UserEventList from './UserEventList';
 import EditProfileForm from '../../components/UserProfiles/EditProfile/EditProfileForm';
 import FollowersList from '../../components/UserProfiles/FollowersList';
+import PersonalProfileHeader from '../../components/UserProfiles/PersonalProfileHeader';
 
 
 const { Step } = Steps
@@ -33,6 +34,7 @@ class PersonalProfileEventList extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
+    current: 2,
     // showFriendConfirm: false,
     // showUnfriend: false,
 
@@ -119,635 +121,75 @@ class PersonalProfileEventList extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  closeProfileEdit = () => {
-    // You wanna check if the person open and opening is the current user
-    if(this.props.parameter.username === this.props.currentUser){
-      this.setState({
-        showProfileEdit: false,
-      })
-    }
+  onCalendarTabClick = () => {
+    this.props.history.push("/explore/"+ this.props.parameter.username)
   }
 
-  openProfileEdit = () => {
-    if(this.props.parameter.username === this.props.currentUser){
-      this.setState({
-        showProfileEdit: true,
-      })
-    }
+  onPostTabClick = () => {
+    this.props.history.push("/explore/"+ this.props.parameter.username+"/posts")
+
   }
 
-  openChangeProfilePic = () => {
-    if(this.props.parameter.username === this.props.currentUser){
-      this.setState({
-        showProfilePicEdit: true
-      })
-    }
+  onEventTabClick = () => {
+    this.props.history.push("/explore/"+this.props.parameter.username +"/events")
   }
 
-  closeChangeProfilePic = () => {
-    if(this.props.parameter.username === this.props.currentUser){
-      this.setState({
-        showProfilePicEdit: false,
-      })
-    }
-  }
+  onRenderTabs= () => {
 
-  renderEditButton = () => {
     return (
-      <div className = 'editButton' onClick = {() => this.openChangeProfilePic()}>
-       <RetweetOutlined />
+      <div className = 'profile-tabContainer'>
+        <div style={{
+        background:'white'}} class="stepTab">
+        <Steps
+          type="navigation"
+          size="large"
+          current={2}
+          onChange={this.onChange}>
+          <Step title="Calendar"
+            onClick = {() => this.onCalendarTabClick()}
+            icon={<i class="far fa-calendar-alt"></i>} />
 
+          {/*  PersonalProfilePostList.js */}
+          <Step title="Posts"
+            onClick = {() => this.onPostTabClick()}
+            icon={<i class="far fa-edit"></i>} />
+
+          {/*  PersonalProfileEventList.js */}
+
+          <Step
+            title="Events"
+
+            onClick = {() => this.onEventTabClick()}
+            icon={<i class="fas fa-users"></i>} />
+        </Steps>
+        </div>
+        <Divider style={{marginTop:'-1px'}}/>
+          <UserEventList
+          events = {this.props.profile.get_socialEvents}
+          curId = {this.props.currentId}
+          ownerId = {this.props.profile.id}
+          history = {this.props.history}
+           />
       </div>
     )
   }
 
-  handleProfilePicChange = (values) => {
-    // This is used to changing the profile pic, for submiting.
-    console.log(values)
-    console.log(this.props.profile)
-    let userId = ""
-    if(this.props.profile){
-      userId = this.props.profile.id
 
-    }
-    var data  = new FormData()
-    data.append('profile_picture', values)
-    // To edit information, you usually do put instead of post
-    authAxios.put(`${global.API_ENDPOINT}/userprofile/profile/update/`+userId,
-      data
-    ).then(res => {
-      this.props.changeProfilePic(res.data.profile_picture.substring(21,))
-      this.props.changeProfilePicAuth(res.data.profile_picture.substring(21,))
+  onRenderPrivate = () => {
+    // This function will be used to show when the account is private and
 
-    })
 
-// PROBALLY ADD IN THE REDUX LIKE EVENT PAGE
-    this.closeChangeProfilePic();
-
+    return (
+      <div className = "privateAccountPage">
+        <div className = "textHolder">
+        <i class="fas fa-user-shield"></i>
+          <div className = "">
+          This account is private.
+          </div>
+        </div>
+      </div>
+    )
   }
-
-  // on click add friend starts here
-  onClickSend = (e) =>{
-    e.preventDefault()
-    const username = this.props.parameter.username;
-    // axios.default.headers = {
-    //   "Content-type": "application/json",
-    //   Authorization: `Token ${this.props.token}`
-    // }
-    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/send/`+username)
-    const notificationObject  = {
-      command: 'send_friend_notification',
-      actor: this.props.currentUser,
-      recipient: this.props.parameter.username,
-    }
-    // NotificationWebSocketInstance.disconnect()
-    // NotificationWebSocketInstance.connect(this.props.match.params.username)
-    NotificationWebSocketInstance.sendNotification(notificationObject)
-    // NotificationWebSocketInstance.connect(this.props.currentUser)
-
-    }
-
-
-    onClickCancel = (e) =>{
-      // const username = this.props.match.params.username;
-      }
-
-    onClickDeleteFriend = (e) =>{
-      // This is used to delete friends
-        // const username = this.props.match.params.username;
-    }
-
-    renderProfilePic = () => {
-
-      let profileImage = null
-
-      console.log(this.props.profile)
-      if(this.props.profile){
-        console.log(this.props.profile.profile_picture)
-        if(this.props.profile.profile_picture){
-          profileImage = `${global.IMAGE_ENDPOINT}`+this.props.profile.profile_picture
-        }
-      }
-
-      console.log(profileImage)
-      return (
-        <div className = 'profilePic'>
-          <Avatar size = {150} src = {profileImage} />
-          {
-            this.props.parameter.username === this.props.currentUser ?
-            this.renderEditButton()
-
-            :
-
-            <div></div>
-          }
-        </div>
-      )
-    }
-
-    onFollow = (follower, following) =>{
-      //Send a follow in the backend
-
-
-      let privatePro = ""
-      if(this.props.profile.private){
-        privatePro = this.props.profile.private
-      }
-
-      if(privatePro === true){
-        // same as personalprofile
-
-        const notificationObject = {
-          command: 'send_follow_request_notification',
-          actor: this.props.currentId,
-          recipient: this.props.profile.id
-        }
-
-        ExploreWebSocketInstance.sendFollowRequest(follower, following)
-
-        NotificationWebSocketInstance.sendNotification(notificationObject)
-
-
-      } else {
-        ExploreWebSocketInstance.sendFollowing(follower, following)
-        this.props.grabUserCredentials()
-
-        // The follower is you who is sending the reqwuest and the following is the other person
-        const notificationObject = {
-          command: 'send_follow_notification',
-          actor: this.props.currentId,
-          recipient: this.props.profile.id
-        }
-
-        NotificationWebSocketInstance.sendNotification(notificationObject)
-
-      }
-
-
-    }
-
-    onUnRequest = (follower, following) => {
-      // This is to undo the request if you did send one (make sure you delete
-      // the notification as well )
-
-      ExploreWebSocketInstance.unSendFollowRequest(follower, following)
-    }
-
-
-    onUnfollow = (follower, following) => {
-      // This will send an unfollow into the back end
-      // It will pretty muchh just delete the follower and following
-
-      ExploreWebSocketInstance.sendUnFollowing(follower, following)
-      this.props.grabUserCredentials()
-
-    }
-
-
-    successFollow = () => {
-      message.success('You accepted a follower.');
-    };
-
-    onAcceptFollow = (follower, following) => {
-      // This function will used to accept the follower, allow request and delete the notifications
-      // The follower parameter will be the actor of the notification (it will be the
-      // person trying to request)
-      // The following parameter will be the recipient or in this case the person who
-      // is accepting the follow
-
-      // Make the process teh same as the onAcceptFollow on notification drop
-      // down but with the explorewebsocketinstance
-      authAxios.post(`${global.API_ENDPOINT}/userprofile/approveFollow`, {
-        follower: follower,
-        following: following
-      })
-      .then(res => {
-        // This will update the current user auth
-        this.props.updateFollowers(res.data)
-        // This wil update the following for the user page
-        ExploreWebSocketInstance.sendAcceptFollowing(follower)
-
-        // Now delete the notification
-        const notificationObj = {
-          command: 'unsend_follow_request_notification',
-          actor: follower,
-          recipient: following
-        }
-        NotificationWebSocketInstance.sendNotification(notificationObj)
-
-        // Now you have to send a notification ot the other perosn saying
-        // that you accept their request
-
-        const notificationObject = {
-          command: 'accept_follow_request',
-          actor: following,
-          recipient: follower
-        }
-        // Then send out a notification
-        NotificationWebSocketInstance.sendNotification(notificationObject)
-
-        this.successFollow()
-      })
-
-
-
-
-
-      // Now up date your credentials
-      // this.props.grabUserCredentials()
-
-      // This function will include redux to update the auth as well
-
-
-    }
-
-    onCalendarTabClick = () => {
-      this.props.history.push("/explore/"+ this.props.parameter.username)
-    }
-
-    onPostTabClick = () => {
-      this.props.history.push("/explore/"+ this.props.parameter.username+"/posts")
-
-    }
-
-    onEventTabClick = () => {
-      this.props.history.push("/explore/"+this.props.parameter.username +"/events")
-    }
-
-
-    onRenderProfileInfo(){
-      // For the following and the follwers, the get_followers will be the people taht
-      // are your followers and the people that are in
-      // get following are the people taht are you are following, so they would be your
-      // followers
-      let username = ''
-      let firstName = ''
-      let lastName = ''
-      let bio = ''
-      let followers = []
-      let following = []
-      let posts = ''
-      let profileId = ''
-      let friends = []
-      let curId = ''
-      let requested = []
-      let curRequested = []
-
-      if(this.props.currentId){
-        curId = this.props.currentId
-      }
-      if(this.props.curRequested){
-        for(let i = 0; i< this.props.curRequested.length; i++){
-          curRequested.push(
-            this.props.curRequested[i].id
-          )
-        }      }
-
-      if (this.props.profile){
-        if(this.props.profile.username){
-          username = this.props.profile.username
-        }
-        if(this.props.profile.first_name){
-          firstName = this.props.profile.first_name
-        }
-        if(this.props.profile.last_name){
-          lastName = this.props.profile.last_name
-        }
-        if(this.props.profile.bio){
-          bio = this.props.profile.bio
-        }
-        if(this.props.profile.get_following){
-          if(this.props.profile.id === this.props.currentId){
-            // This one is to change the following list to be same as the auth if
-            // you are on your own page
-
-            following = this.props.following
-          } else {
-            // This is for everyone else
-            following = this.props.profile.get_following
-          }
-        }
-        if(this.props.profile.get_posts){
-          posts = this.props.profile.get_posts
-
-        }
-        if(this.props.profile.id){
-          profileId = this.props.profile.id
-
-        }
-
-        if(this.props.profile.get_followers){
-          if(this.props.profile.id === this.props.currentId){
-            // Same deal as teh followers
-            for(let i =0; i<this.props.followers.length; i++){
-              followers.push(
-                this.props.followers[i].username
-              )
-            }
-          } else {
-            for(let i =0; i<this.props.profile.get_followers.length; i++){
-              followers.push(
-                this.props.profile.get_followers[i].username
-              )
-            }
-          }
-        }
-
-        if(this.props.profile.private){
-          if(this.props.profile.get_follow_request){
-            for(let i= 0; i<this.props.profile.get_follow_request.length; i++){
-                requested.push(
-                  this.props.profile.get_follow_request[i].id
-                )
-            }
-          }
-        }
-
-
-      }
-    console.log(followers)
-
-      return (
-
-        <div>
-
-          <div className = 'profileInfo'>
-
-            <div>
-
-
-
-              <div className = 'profilePostFollow'>
-
-                <div
-                onClick = {() => this.onFollowerOpen()}
-                className = 'followItem'>
-                  <span
-                  className = 'postFollowWords'
-                  >Followers</span>
-                  <br />
-                  <span>{followers.length}</span>
-                </div>
-                <div
-                onClick = {() => this.onFollowingOpen()}
-                className = 'followItem'>
-                  <span
-                  className = 'postFollowWords'
-                  >Following</span>
-                  <br />
-                  <span>{following.length}</span>
-                </div>
-              </div>
-
-
-
-            <div>
-
-          {
-              this.props.parameter.username === this.props.currentUser ?
-
-              <div className = 'selfProfileButtons'>
-
-                 <Button
-                    onClick = {() => this.openProfileEdit()}
-                    type="primary"
-                    shape="round"
-                    icon={<i  style={{marginRight:'10px'}}
-                    class="fas fa-user-edit"></i>}
-                    style={{fontSize:'15px'}} size={'large'}>
-
-                   Edit Profile
-                 </Button>
-              </div>
-
-              :
-
-              <div className = 'profileButtons'>
-
-              {curRequested.includes(profileId) ?
-
-                <div
-                style={{
-                  paddingTop: "7px",
-                  fontSize:'16px'}}
-                  onClick = {() => this.onAcceptFollow(profileId, curId)}
-                className = 'followButton'>
-                  Accept
-                </div>
-
-                :
-
-
-                followers.includes(this.props.currentUser.toString()) ?
-
-                <div>
-                  <div
-                  onClick = {() => this.onUnfollow(this.props.currentId, profileId)}
-                  className = 'unFollowButton'>
-                    Unfollow
-                  </div>
-                  <br />
-                  <div className = 'messageButton'>
-                    Message
-                  </div>
-
-                </div>
-
-
-
-
-                :
-
-
-                <div>
-                {
-                    requested.includes(this.props.currentId) ?
-
-                    <Button
-                      style={{fontSize:'16px'}}
-                      onClick = {() => this.onUnRequest(this.props.currentId, profileId)}
-                       className = 'followButton'
-                      id="follow-button"> Requested </Button>
-
-                    :
-
-                    <Button
-                      style={{fontSize:'16px'}}
-                      onClick = {() => this.onFollow(this.props.currentId, profileId)}
-                       className = 'followButton'
-                      id="follow-button"> Follow </Button>
-
-                }
-                </div>
-              }
-              </div>
-          }
-
-          </div>
-
-          </div>
-
-          </div>
-
-        </div>
-
-      )
-
-    }
-
-    onFollowerOpen = () => {
-      // This is used to open up the follower list
-      this.setState({
-        followerShow: true
-      })
-    }
-
-    onFollowerCancel = () => {
-      // This is used to close the follower list
-      this.setState({
-        followerShow: false
-      })
-    }
-
-    onFollowingOpen = () => {
-      // This is used to open up the following list
-      this.setState({
-        followingShow: true
-      })
-    }
-
-    onFollowingCancel = () => {
-      // This is to close the following list
-      this.setState({
-        followingShow: false
-      })
-    }
-
-
-    onSaveEdit = (values) => {
-        // This function will be called when you make a change on the profile infomraiton
-        // and then save it. Pretty much it will get informaiton form the editprofileform
-        // that was change and then get sent into the channel and then update it in the back
-        // end then that information will get sent back into the frot end and changed
-
-        //The currentId would not be using for the editing the user but rather find the
-        // user. And since the current user can only edit its own page, the current
-        // user id should be good
-        console.log(values)
-
-        const editProfileObj = {
-          first_name: values.first_name,
-          last_name: values.last_name,
-          bio: values.bio,
-          email: values.email,
-          phone_number: values.phone_number,
-          userId: this.props.currentId
-        }
-
-        ExploreWebSocketInstance.editChangeProfile(editProfileObj)
-
-        this.closeProfileEdit()
-
-    }
-
-    getInitialValue = () => {
-      // This function will get the initial value of the edit profile page, which
-      // in this case is the name, last name, bio, picture etc what ever else you
-      // wanna edit
-
-      if(this.props.profile){
-        let firstName = "";
-        let lastName = "";
-        let bio = "";
-        let phone_number = "";
-        let email = "";
-        if(this.props.profile.first_name){
-          firstName = this.props.profile.first_name
-        }
-        if(this.props.profile.last_name){
-          lastName = this.props.profile.last_name
-        }
-        if(this.props.profile.bio !== null){
-          bio = this.props.profile.bio
-        }
-        if(this.props.profile.phone_number){
-          phone_number = this.props.profile.phone_number
-        }
-        if(this.props.profile.email){
-          email = this.props.profile.email
-        }
-
-        return {
-          first_name: firstName,
-          last_name: lastName,
-          bio: bio,
-          phone_number: phone_number,
-          email: email,
-        }
-      }
-
-
-    }
-
-    onRenderTabs= () => {
-
-      return (
-        <div className = 'profile-tabContainer'>
-          <div style={{
-          background:'white'}} class="stepTab">
-          <Steps
-            type="navigation"
-            size="large"
-            current={2}
-            onChange={this.onChange}>
-            <Step title="Calendar"
-              onClick = {() => this.onCalendarTabClick()}
-              icon={<i class="far fa-calendar-alt"></i>} />
-
-            {/*  PersonalProfilePostList.js */}
-            <Step title="Posts"
-              onClick = {() => this.onPostTabClick()}
-              icon={<i class="far fa-edit"></i>} />
-
-            {/*  PersonalProfileEventList.js */}
-
-            <Step
-              title="Events"
-
-              onClick = {() => this.onEventTabClick()}
-              icon={<i class="fas fa-users"></i>} />
-          </Steps>
-          </div>
-          <Divider style={{marginTop:'-1px'}}/>
-            <UserEventList
-            events = {this.props.profile.get_socialEvents}
-            curId = {this.props.currentId}
-            ownerId = {this.props.profile.id}
-            history = {this.props.history}
-             />
-        </div>
-      )
-    }
-
-
-    onRenderPrivate = () => {
-      // This function will be used to show when the account is private and
-
-
-      return (
-        <div className = "privateAccountPage">
-          <div className = "textHolder">
-          <i class="fas fa-user-shield"></i>
-            <div className = "">
-            This account is private.
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-
-
 
 
   render(){
@@ -830,23 +272,13 @@ class PersonalProfileEventList extends React.Component{
 
     return (
       <div className = {`profilePage ${this.props.location.state ? "active" : ""}`}>
-
-        <div class="profileEventCard" style={{marginTop:'40px', height:'300px'}}>
-
-          <div class="parentFlexContainer">
-            {this.renderProfilePic()}
-            <span className = 'profileName'>
-              {this.capitalize(firstName)} {this.capitalize(lastName)}
-              <br/>
-
-            </span>
-            <span class="profileUserName">{"@"+this.props.username}</span>
-            <span class="profileBio">{bio}</span>
-          </div>
-
-          {this.onRenderProfileInfo()}
+        <div className = "topSectProfilePage">
+          <PersonalProfileHeader
+            {...this.props}
+          />
 
         </div>
+
       {
         privatePro ?
           this.onRenderPrivate()
@@ -855,55 +287,6 @@ class PersonalProfileEventList extends React.Component{
 
           this.onRenderTabs()
       }
-        <Modal
-        visible = {this.state.showProfileEdit}
-        onCancel = {() => this.closeProfileEdit()}
-        footer = {null}
-        >
-        <EditProfileForm
-        initialValues = {this.getInitialValue()}
-        profilePic = {profilePic}
-        onSubmit = {this.onSaveEdit}
-        changeProfilePic = {this.props.changeProfilePic}
-        changeProfilePicAuth = {this.props.changeProfilePicAuth}
-        curId = {this.props.currentId}
-         />
-        </Modal>
-
-        <ChangeProfilePic
-           visible = {this.state.showProfilePicEdit}
-           onCancel = {this.closeChangeProfilePic}
-           onSubmit = {this.handleProfilePicChange}
-         />
-
-        <Modal
-        visible ={this.state.followerShow}
-        onCancel = {this.onFollowerCancel}
-        footer = {null}
-        >
-        <span className ='followWord'> Followers</span>
-        <FollowersList
-          curId = {this.props.currentId}
-          profileId = {this.props.profile.id}
-          request = {curRequested}
-          follow = {followers}
-          updateFollowers = {this.props.updateFollowers}
-          />
-        </Modal>
-
-
-
-        <Modal
-        visible = {this.state.followingShow}
-        onCancel = {this.onFollowingCancel}
-        footer = {null}
-        >
-        <span className = 'followWord'>Following</span>
-        <FollowList follow = {following}/>
-        </Modal>
-
-
-
 
       </div>
 

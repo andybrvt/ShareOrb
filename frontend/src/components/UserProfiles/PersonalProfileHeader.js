@@ -9,6 +9,7 @@ import ChangeBackgroundModal from '../../containers/PersonalCalendar/EventPage/C
 import FollowList from './FollowList';
 import FollowersList from './FollowersList';
 
+
 class PersonalProfileHeader extends React.Component{
   state = {
     followerShow: false,
