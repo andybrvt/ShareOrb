@@ -249,9 +249,6 @@ class SocialCalendar extends React.Component{
                       <CalendarOutlined
                       onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
                       className = 'eventButton'/>
-
-
-
                       <EyeOutlined
                         onClick = {() => this.onLinkClick(calUsername,
                             cellYear,
@@ -315,26 +312,29 @@ class SocialCalendar extends React.Component{
 
                 }
 
-                {/* SHOULD CHANGE TO PHOTO LATER */}
-                <img
-                className = 'imgCover'
-                src = {`${global.IMAGE_ENDPOINT}`+toDoStuff[0].coverPic} />
+                <div className = 'imgCover'>
+                  <img
+
+                  src = {`${global.IMAGE_ENDPOINT}`+toDoStuff[0].coverPic} />
+
+                </div>
+
 
                 <span className = "bgD"> {formattedDate}</span>
               </div>
 
               : toDoStuff[0].get_socialCalEvent.length !== 0 ?
 
-              <div>
+              <div className = "eventBoxBox">
               {/*These are for when there is no cover photo but there is are events
                 that we want to show.*/}
                 <div className = 'eventBoxListHeader'>
-                  <span className = "bg"> {formattedDate}</span>
+                  <div className = "bg"> {formattedDate}</div>
                 {
                   (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
                   ||  calendarOwnerId === this.props.curId ?
 
-                  <div>
+                  <div className = "buttonHolderHolder">
                   {/*This is for when the user is a friend or the owenr of the
                     social calendar*/}
 
@@ -344,6 +344,7 @@ class SocialCalendar extends React.Component{
 
                     {/*This will be the button at the top of the cell list of the current
                       day*/}
+
                     <PlusOutlined
                     onClick = {() => this.onOpenSocialCalPicModal()}
                     className = 'plusButton'/>
@@ -364,7 +365,7 @@ class SocialCalendar extends React.Component{
 
                   : dateFns.isAfter( day, currentMonth) ?
 
-                  <div>
+                  <div className = "buttonHolder">
                   {/* This will be the buttons on top of the eventList for the days
                     after the current day*/}
                     <CalendarOutlined
@@ -438,7 +439,7 @@ class SocialCalendar extends React.Component{
 
               {
                 dateFns.isSameDay(day, currentMonth) ?
-                <div>
+                <div className = "buttonHolder">
                   {/*When there is a social cell object but no cover cell and event
                     list. This will be for the current day*/}
 
@@ -461,7 +462,7 @@ class SocialCalendar extends React.Component{
 
                 : dateFns.isAfter( day, currentMonth) ?
 
-                <div>
+                <div className = "buttonHolder">
                   {/* For days after the social cell and there is a social cal cell object
                     but not cover picture or events*/}
                   <CalendarOutlined
@@ -547,7 +548,7 @@ class SocialCalendar extends React.Component{
 
           {
             dateFns.isSameDay(day, currentMonth) ?
-            <div>
+            <div className = "buttonHolder">
             {/* This is for the eye, calendar, event post for the current day without
               a picture in it and no cell created  */}
             <PlusOutlined
@@ -570,7 +571,7 @@ class SocialCalendar extends React.Component{
 
             : dateFns.isAfter( day, currentMonth) ?
 
-            <div>
+            <div className = "buttonHolder" >
               {/*This is for the eye, calendar for all the cells that are after teh
                 current day and does not have a cover picture and no cell created*/}
               <CalendarOutlined

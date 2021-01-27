@@ -166,6 +166,7 @@ class PersonalProfileHeader extends React.Component{
         this.props.history.push("/chat/"+res.data)
       } else {
         // When there is  not chat that exist
+        console.log("no chats are avaliable")
       }
 
     })
