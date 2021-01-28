@@ -264,28 +264,7 @@
   filter: brightness(60%);
 }
 
-
-
-
-/* CSS for social cal cell modal */
-
-
-
-
-
-
-.socialCalCellProfilePic{
-  object-fit: cover;
-  width: 300px;
-  height: 300px;
-  margin-top: 100px;
-
-  overflow: none;
-  }
-
-
-
-
+/* Headers for the social calendar */
 .socialCalendar .socialHeader .icon {
   cursor: pointer;
   transition: .15s ease-out;
@@ -297,15 +276,11 @@
 }
 
 
-
-
-
+/* CSS for the calendar cell box */
 .coverCellBox{
   position: relative;
   width: 100%;
   height: 82%;
-  /* width: 100px;`` */
-  /* padding: -100px; */
   overflow: auto;
 }
 
@@ -375,12 +350,6 @@
 }
 
 .eventBoxListHeader .buttonHolderHolder .buttonHolder .plusButton {
-  /* color: red; */
-  /* position:absolute; */
-  /* left: 20%; */
-  /* top: 45%; */
-  /* color: transparent; */
-  /* font-size: 40px; */
   position: relative;
   z-index: 1;
   width: calc(100%/3);
@@ -426,7 +395,6 @@
   width: calc(100%/2);
   display: flex;
 
-
 }
 .eventBoxListHeader .buttonHolderHolder .eyeButtonPass {
   /* color: red; */
@@ -441,43 +409,32 @@
 
 }
 
-.coverEventCapacity{
-  /* background-color: red; */
-  display: flex;
-}
-.coverEventCapacity .coverEventNumber{
-  /* background-color: red; */
-  padding-top: 5px;
-}
-
-.coverEventCapacity .avatarContainer{
-  /* background-color: blue; */
-  /* position: relative; */
-  margin-left: 5px;
-}
+/* CSS for cover event list on calendar */
 
 .joinEventButtonCover{
   background-color: limegreen;
   cursor: pointer;
   color: white;
   font-size: 15px;
-  position: absolute;
   border: 1px solid gainsboro;
   border-radius: 5px;
-  top: 10%;
-  left: 150px;
-  width: 60px;
-  height: 30px;
+  width: 80%;
+  height: 60%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
 }
+
 .joinEventButtonCover:hover{
   filter: brightness(90%);
 }
 
 .joinEventButtonCover .joinText{
   position: relative;
-  left: 22%;
-  top: 2px;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .alreadyJoinButtonCover{
@@ -487,11 +444,13 @@
   cursor: pointer;
   color: white;
   font-size: 15px;
-  width: 60px;
-  height: 30px;
-  position: absolute;
-  left: 150px;
-  top: 10%;
+  width: 80%;
+  height: 60%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
 }
 
 .alreadyJoinButtonCover:hover{
@@ -505,17 +464,19 @@
   border-radius: 5px;
   color: white;
   font-size: 15px;
-  width: 60px;
-  height: 30px;
-  position: absolute;
-  left: 150px;
-  top: 10%;
+  width: 80%;
+  height: 60%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
+
 }
 .alreadyJoinButtonCoverHost .joinText{
   position: relative;
-  left: 20%;
-  top: 2px;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 
@@ -555,9 +516,8 @@
 
 .alreadyJoinButtonCover .leaveText{
   position: relative;
-  left: 14%;
-  top: 2px;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 .viewEventButtonCover{
   background-color: gainsboro;
@@ -566,11 +526,13 @@
   cursor: pointer;
   color: white;
   font-size: 15px;
-  width: 60px;
-  height: 30px;
-  position: absolute;
-  left: 150px;
+  width: 80%;
+  height: 60%;
+  position: relative;
+  left: 50%;
   top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
 }
 
 .viewEventButtonCover:hover{
@@ -580,16 +542,72 @@
 
 .viewEventButtonCover .viewText{
   position: relative;
-  left: 20%;
-  top: 2px;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 
 }
 
 .coverCellEventText{
-  /* background-color: red; */
   position: relative;
-  margin-left: 7px;
+  width: 100%;
+  display: flex;
+}
+
+.coverCellTextSide{
+  /* background-color: red; */
+  width: 65%;
+}
+
+.coverCellTextSide .coverCellEventTitle{
+  font-size: 110%;
+}
+.coverCellTextSide .coverCellEventTime{
+  display: flex;
+}
+.coverCellTextSide .coverCellEventTime .timeNum{
+  margin-left: 2px;
+}
+
+.coverCellTextSide .coverCellEventNum{
+  display: flex;
+}
+.coverCellTextSide .coverCellEventNum .profileIcon{
+
+}
+.coverCellTextSide .coverCellEventNum .profileIcon .centerBox{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.coverCellTextSide .coverCellEventNum .likingCon{
+  margin-left: 3px;
+}
+.coverCellTextSide .coverCellEventNum .likingCon .centerBox{
+  position: relative;
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+
+.coverCellButtonSide{
+  width: 35%;
+  position: relative;
+
+}
+
+.coverCellButtonSide .miniEventButtonHolder{
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.miniEventButtonHolder .miniButtonHolderTop{
+  height: calc(100%/2);
+}
+
+.miniEventButtonHolder .miniButtonHolderBottom{
+  height: calc(100%/2);
 }
 
 

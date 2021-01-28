@@ -66,6 +66,17 @@ class SocialCellCoverEvents extends React.Component{
     this.props.history.push("/socialcal/event/"+eventId)
   }
 
+  eventTitleLength = (title) => {
+    // this fucntion will shortend the title if it is too long
+
+    let newTitle = title;
+    if(title.length > 25){
+      newTitle = newTitle.substring(0, 20)+'...'
+    }
+
+    return newTitle;
+  }
+
 
   render() {
     console.log(this.props)
@@ -96,61 +107,80 @@ class SocialCellCoverEvents extends React.Component{
             className = 'coverCellBoxItem'
             >
               <div className = 'coverCellEventText'>
-                <span> {this.capitalize(item.title)} </span>
-                <span className = 'socialEventTime'>
-                <br />
-                <img src = {clock} className = 'socialEventClock' />
-                {this.timeFormater(item.start_time)}-
-                {this.timeFormater(item.end_time)}
-                </span>
-                <br />
-                <div className = 'coverEventCapacity'>
-                <div className = 'coverEventNumber'>
-                <img src ={userIcon} className = 'socialUserIcon' />
-                {item.persons.length}
-                </div>
-                  <div className = 'avatarContainer'>
-                  <Liking like_people ={item.persons} />
-                  </div>
-                </div>
 
-                {dateFns.isAfter(dateFns.endOfDay(new Date(this.props.cellDay)), new Date())?
-                  <div>
-                  {
-                    this.checkUser(item.persons) ?
-                      item.host.id === this.props.curId ?
-                    <div className = 'alreadyJoinButtonCoverHost'>
-                      <span className = 'joinText'> Host </span>
+                <div className = 'coverCellTextSide'>
+                  <div className = "coverCellEventTitle">
+                    {this.eventTitleLength(this.capitalize(item.title))} </div>
+                  <div className = 'coverCellEventTime'>
+                    <div>
+                      <i class="far fa-clock"></i>
+                    </div>
+                    <div className = 'timeNum'>
+                      {this.timeFormater(item.start_time)}-{this.timeFormater(item.end_time)}
                     </div>
 
-                    :
-
-                    <div
-                    onClick = {() => this.sendLeaveUserEvent(this.props.curId, item.id, this.props.cellId)}
-                    className = 'alreadyJoinButtonCover'>
-                    <span className = 'leaveText'> Leave </span>
                   </div>
-
-
-
-                       :
-
-                       <div
-                       onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.cellId)}
-                       className = 'joinEventButtonCover'>
-                         <span className = 'joinText'> Join </span>
-                       </div>
-
-                  }
-
-
-
-
-                  <div
-                  onClick = {() => this.onCoverViewClick(item.id)}
-                  className = 'viewEventButtonCover'>
-                    <span className = 'viewText'> View </span>
+                  <div className = 'coverCellEventNum'>
+                    <div className = 'profileIcon'>
+                      <div className = "centerBox">
+                        <i class="far fa-user"></i>
+                        {item.persons.length}
+                      </div>
+                    </div>
+                      <div className = 'likingCon'>
+                        <div className = "centerBox">
+                          <Liking like_people ={item.persons} />
+                        </div>
+                      </div>
                   </div>
+                </div>
+
+
+
+
+              <div className = "coverCellButtonSide">
+
+                {dateFns.isAfter(dateFns.endOfDay(new Date(this.props.cellDay)), new Date())?
+                  <div className = "miniEventButtonHolder">
+
+                      <div className = "miniButtonHolderTop">
+                        {
+                          this.checkUser(item.persons) ?
+                            item.host.id === this.props.curId ?
+                          <div className = 'alreadyJoinButtonCoverHost'>
+                            <div className = 'joinText'> Host </div>
+                          </div>
+
+                          :
+
+                          <div
+                          onClick = {() => this.sendLeaveUserEvent(this.props.curId, item.id, this.props.cellId)}
+                          className = 'alreadyJoinButtonCover'>
+                          <div className = 'leaveText'> Leave </div>
+                        </div>
+
+
+
+                             :
+
+                             <div
+                             onClick = {()=> this.sendJoinUserEvent(this.props.curId, item.id, this.props.cellId)}
+                             className = 'joinEventButtonCover'>
+                               <div className = 'joinText'> Join </div>
+                             </div>
+
+                        }
+
+                      </div>
+
+                      <div className = "miniButtonHolderBottom">
+                        <div
+                        onClick = {() => this.onCoverViewClick(item.id)}
+                        className = 'viewEventButtonCover'>
+                          <div className = 'viewText'> View </div>
+                        </div>
+                      </div>
+
                 </div>
 
                 :
@@ -163,16 +193,15 @@ class SocialCellCoverEvents extends React.Component{
 
 
                 }
-
-
-
-
               </div>
 
-            </List.Item>
-          )}
-        />
-        </div>
+
+          </div>
+
+        </List.Item>
+      )}
+    />
+    </div>
 
     )
   }
