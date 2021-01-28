@@ -5,15 +5,15 @@ import {
   PlusOutlined,
   EyeOutlined,
   CalendarOutlined } from '@ant-design/icons';
-  import {
-      BrowserRouter as Router,
-      Switch,
-      Route,
-      Link,
-      useHistory,
-      useLocation,
-      useParams
-    } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useHistory,
+    useLocation,
+    useParams
+  } from "react-router-dom";
 // This will hold all the pictures and post that the user posted
 // This inludues day cells and then post as well. It will probally
 // be linked to the explore channel
@@ -59,8 +59,7 @@ class UserPostList extends React.Component{
               <EyeOutlined className = 'eyeClick'/>
               </Link>
               <img
-              // PICTURE URL
-              src = {`${global.API_ENDPOINT}/media/`+imagesList[0]}
+              src = {`${global.POSTLIST_SPEC}`+imagesList[0]}
               className = "squarePic"
               />
             </div>
@@ -96,8 +95,7 @@ class UserPostList extends React.Component{
             <EyeOutlined className = 'eyeClick'/>
             </Link>
             <img
-            // PICTURE URL
-            src = {`${global.API_ENDPOINT}`+image}
+            src = {`${global.IMAGE_ENDPOINT}`+image}
             className = "squarePic"
             />
             </div>

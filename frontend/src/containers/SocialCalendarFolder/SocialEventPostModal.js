@@ -503,6 +503,8 @@ class SocialEventPostModal extends React.Component{
             name = 'title'
             placeholder = 'Title'
             value = {this.state.title}
+            maxLength = {80}
+            showCount
             />
           </Form.Item>
 
@@ -511,6 +513,7 @@ class SocialEventPostModal extends React.Component{
             name = 'content'
             placeholder = 'Content'
             value = {this.state.content}
+            
             />
           </Form.Item>
 

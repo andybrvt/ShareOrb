@@ -541,7 +541,7 @@ class ReactAddEventForm extends React.Component {
          placeholder = 'Title'
          value = {this.state.title}
          style={{marginTop:'-5px'}}
-         maxLength={200}
+         maxLength={80}
 
          />
        </Form.Item>
