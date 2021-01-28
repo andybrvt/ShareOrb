@@ -12,7 +12,7 @@ import { NavLink, Redirect, } from "react-router-dom";
 import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../../store/actions/auth";
 import NotificationWebSocketInstance from '../../notificationWebsocket';
-
+import { LockOutlined, UserOutlined, PhoneOutlined,  } from '@ant-design/icons';
 import pic2 from './calendar.svg';
 import 'antd/dist/antd.css';
 import { Form } from '@ant-design/compatible';
@@ -75,31 +75,35 @@ class LoginForm extends React.Component {
 
 
           <div class="loginTitle">Connecting people through calendars </div>
-            <div class="eventCard allStyle" style={{left:'20%',
-            width:'80%', height:'50%', padding:'50px'}}>
+          <div class="LeftLoginContainer">
+            <div class="eventCard allStyle"
+              style={{
+                position:'relative', width:'100%',
+                 height:'90%'}}>
               <div class="loginFormInnerContent">
-
                 <Form
-                name="basic"
-                initialValues={{ remember: true }}
-                // onSubmit = {this.handleSubmit}
-                >
+
+                name="basic">
+
                   <Form.Item
-                  onChange={this.handleUserName}
-                  test="username"
 
-
-                  >
-                    <Input placeholder="Enter Username"/>
+                    onChange={this.handleUserName}
+                    test="username">
+                    <Input
+                      size="middle"
+                      prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                      placeholder="Enter Username"/>
                   </Form.Item>
 
                   <Form.Item
                     onChange={this.handlePasword}
                     value={password}
-                    test="password"
 
-                  >
-                    <Input.Password placeholder="Enter Password"/>
+                    test="password">
+                    <Input.Password
+                       size="middle"
+                       prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                       placeholder="Enter Password"/>
                   </Form.Item>
                   {/*
                   <Form.Item name="remember" valuePropName="checked">
@@ -126,13 +130,17 @@ class LoginForm extends React.Component {
                   </Form>
                 </div>
               </div>
+
+
+          </div>
+
         </div>
 
         <div class="two">
           {/* color is #68BFFD*/}
 
-          <img src={pic2} width="33%"
-            style={{position:'relative',top:'25%', left:'10%'}}/>
+          <img src={pic2} width="60%"
+            style={{position:'relative',top:'30%', left:'15%'}}/>
         </div>
 
 

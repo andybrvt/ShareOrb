@@ -18,6 +18,7 @@ import {
 import {Link, withRouter} from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import testPic from './antd.png';
+import './badge.css';
 import {
   Drawer,
   Layout,
@@ -264,6 +265,9 @@ class SideMenu extends React.Component {
                     onClick = {() => this.onChatDirect()}
                     >
                     <a class="d-flex align-items-center">
+                      <span class="notification-count">
+                        <span class="notificationInside">6 </span>
+                        </span>
                       <i class="far fa-comment"></i>
                       <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
                     </a>
@@ -358,17 +362,20 @@ class SideMenu extends React.Component {
                   </div>
 
                 */}
-                <Badge count={3}>
-                  <i
-                    onClick = {() => this.onOpenDropDown()}
-                    class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
-                    aria-hidden="true"
-                    style={{fontSize:'22px'}}
-                    >
+                <div class="badgeOuter">
+                  <span class="notification-count">
+                    <span class="notificationInside">{this.props.notifications.length} </span>
+                    </span>
+                    <i
+                      onClick = {() => this.onOpenDropDown()}
+                      class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
+                      aria-hidden="true"
+                      style={{fontSize:'22px'}}
+                      >
 
+                    </i>
 
-                  </i>
-                  </Badge>
+                </div>
                 </div>
                 <div >
 

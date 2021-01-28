@@ -33,6 +33,8 @@
     top:0px;
     left:0px;
     z-index:1000;
+    display: flex;
+    flex-direction: row;
 }
 .container {
   width: 100%;
@@ -40,19 +42,48 @@
   padding: 10px;
 }
 
+
+
 .one {
   width: 50%;
   height: 100%;
   /* background: red; */
+  position: relative;
   float: left;
 }
 
-.two {
 
+
+.LeftLoginContainer{
+  position:absolute;
+  top:65%;
+  left:60%;
+  height:55%;
+  width:80%;
+  transform: translateX(-50%) translateY(-50%);
+  /* background-color: green; */
+}
+
+.oneSignupImage{
+  position:relative;
+  left:50%;
+  top:50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.two {
+  width: 50%;
   height: 100%;
+  position:relative;
   /* background: black; */
 }
 
+.rightSignupForm{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translateX(-50%) translateY(-50%);
+}
 
 .loginCircle {
     /* background: #f00; */
@@ -68,4 +99,27 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+.FirstLastNameContainer{
+  position:relative;
+  display:flex;
+  flex-direction: row;
+  /* background: blue; */
+  width:100%;
+
+}
+
+.frontFirstLastName{
+  width:50%;
+  height:100%;
+  position:relative;
+  /* background: red; */
+}
+
+.backFirstLastName{
+  width:50%;
+  height:100%;
+  position:relative;
+  /* background: orange; */
 }

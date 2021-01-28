@@ -9,20 +9,20 @@ import { Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
-import { LockOutlined, MailOutlined, QuestionCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined, QuestionCircleOutlined,
+   UserOutlined, PhoneOutlined, CalendarOutlined } from '@ant-design/icons';
 import './Home.css';
 import worldPic from './LoginPage/world.svg';
 
 
-
-
-const renderField = (field) => {
+const renderPersonal = (field) => {
   // Typical input field, most use for the title
   console.log(field.meta)
   return (
     <div style = {{
       position: "relative",
-      height: "65px",
+      height: "52px",
+      width:'90%',
   }}>
     <Input
 
@@ -30,7 +30,36 @@ const renderField = (field) => {
     type = {field.type}
     placeholder= {field.placeholder}
     maxLength = "80"
-    className = 'box'
+    prefix = {field.prefix}
+    />
+
+    {field.meta.touched &&
+      ((field.meta.error && <span style = {{
+        color: 'red'
+      }}>{field.meta.error}</span>) ||
+        (field.meta.warning && <span
+          style = {{
+            color: 'red'
+          }}
+          >{field.meta.warning}</span>))}
+    </div>
+  )
+}
+
+const renderField = (field) => {
+  // Typical input field, most use for the title
+  console.log(field.meta)
+  return (
+    <div style = {{
+      position: "relative",
+      height: "50px",
+  }}>
+    <Input
+
+    {...field.input}
+    type = {field.type}
+    placeholder= {field.placeholder}
+    maxLength = "20"
     prefix = {field.prefix}
     />
 
@@ -214,14 +243,17 @@ class Signup extends React.Component {
 
         <div class="one">
           {/* color is #68BFFD*/}
-          <img src={worldPic} width="100%"
-            style={{position:'relative',left:'20%',marginTop:'300px'}}/>
+          <div class="oneSignupImage">
+          <img src={worldPic} width="100%"/>
+          </div>
         </div>
 
         <div class="two">
-
-          <div class="eventCard allStyle" style={{left:'20%',top:'15%',
-          width:'500px', height:'700px', padding:'50px'}}>
+          <div class="rightSignupForm">
+          <div class="eventCard allStyle"
+            style={{
+              position:'relative', width:'500px',
+               height:'50%',padding:'50px'}}>
 
             <span style={{fontSize:'20px'}}> Sign Up</span>
 
@@ -238,25 +270,46 @@ class Signup extends React.Component {
                 prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 />
               </div>
+              {/*
 
-              <div>
-                  <Field
-                  name = 'first_name'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "First Name"
-                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
-              </div>
+                <Field
+                name = 'first_name'
+                component = {renderPersonal}
+                type = 'text'
+                placeholder = "First Name"
+                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                />
 
-              <div>
-                  <Field
-                  name = 'last_name'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Last Name"
-                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
+                <Field
+                name = 'last_name'
+                component = {renderPersonal}
+                type = 'text'
+                placeholder = "Last Name"
+                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                />
+                */}
+              <div class="FirstLastNameContainer">
+                  <div class="frontFirstLastName">
+                    <Field
+                    name = 'first_name'
+                    component = {renderPersonal}
+                    type = 'text'
+                    placeholder = "First Name"
+                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    />
+
+
+                  </div>
+                  <div class="backFirstLastName">
+
+                    <Field
+                    name = 'last_name'
+                    component = {renderPersonal}
+                    type = 'text'
+                    placeholder = "Last Name"
+                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    />
+                  </div>
               </div>
 
               <div>
@@ -269,7 +322,7 @@ class Signup extends React.Component {
                   type = 'text'
                   placeholder = "Date of Birth"
 
-                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<CalendarOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
               </div>
 
@@ -291,7 +344,7 @@ class Signup extends React.Component {
                   type = 'text'
                   placeholder = "Phone Number"
                   validate = {phoneNumber}
-                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
               </div>
 
@@ -332,7 +385,8 @@ class Signup extends React.Component {
             </form>
 
           </div>
-        </div>
+          </div>
+          </div>
 
       </div>
       );
