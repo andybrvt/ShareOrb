@@ -17,7 +17,7 @@ class WebSocketNotifications {
 
 // start HERE
   connect(username){
-    const path = `ws://${global.WS_ENDPOINT}/ws/friend-request-notification/`+username
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/friend-request-notification/`+username
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () =>{

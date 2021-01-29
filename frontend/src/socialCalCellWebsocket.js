@@ -25,7 +25,7 @@ class WebSocketSocialCalCellPage{
     //This will be for connecting to each individual soical cal cell page
     //each one will be its own channel, this will optimize the liking and
     // commenting
-    const path = `ws://${global.WS_ENDPOINT}/ws/socialCalendarCellPage/`+user+'/'+year+'/'+month+'/'+day
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/socialCalendarCellPage/`+user+'/'+year+'/'+month+'/'+day
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {

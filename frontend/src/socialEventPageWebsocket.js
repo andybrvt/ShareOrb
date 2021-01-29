@@ -24,7 +24,7 @@ class WebSocketSocialEventPage{
     // This will connect individually whne you opne up the soical events. Each social
     // event will be its own channel, like a big gropu chat
 
-    const path = `ws://${global.WS_ENDPOINT}/ws/socialCalendarEvent/`+socialEventId
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/socialCalendarEvent/`+socialEventId
     console.log(path)
     // This will make a new WebSocket with teh path name
     this.socketRef = new WebSocket(path)

@@ -28,7 +28,7 @@ class WebSocketUserPostPage{
     // each one post will have its own channel. Similarly to the social cal cell
     // this will make liking and commenting and such faster.
 
-    const path = `ws://${global.WS_ENDPOINT}/ws/post/`+user+'/'+postId
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/post/`+user+'/'+postId
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () =>{

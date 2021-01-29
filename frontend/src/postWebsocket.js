@@ -14,7 +14,7 @@ class WebSocketPosts {
   }
 
   connect(){
-    const path = `ws://${global.WS_ENDPOINT}/ws/newsfeed`
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/newsfeed`
     console.log(path)
     this.socketRef = new WebSocket(path)
     console.log(this.socketRef)

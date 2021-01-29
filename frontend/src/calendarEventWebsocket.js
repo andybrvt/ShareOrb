@@ -21,7 +21,7 @@ class WebSocketCalendarEvent {
   }
 
   connect(userId){
-    const path = `ws://${global.WS_ENDPOINT}/ws/calendar/`+userId
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/calendar/`+userId
     console.log(path)
     this.socketRef = new WebSocket(path)
     this.socketRef.onopen = () => {

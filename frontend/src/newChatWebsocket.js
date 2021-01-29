@@ -19,7 +19,7 @@ class WebSocketNewChat {
 
   connect(newChatId){
     // This will be the connection between the channel and websocket
-    const path = `ws://${global.WS_ENDPOINT}/ws/newChat/`+newChatId
+    const path = `${global.WS_HEADER}://${global.WS_ENDPOINT}/ws/newChat/`+newChatId
     console.log(path)
     // makes a new websocket object to connect with the path
     this.socketRef = new WebSocket(path)
