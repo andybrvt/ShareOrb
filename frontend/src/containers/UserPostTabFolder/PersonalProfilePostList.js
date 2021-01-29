@@ -147,23 +147,35 @@ class PersonalProfilePostList extends React.Component{
           size="large"
           current={1}
           onChange={this.onChange}>
-          <Step title="Calendar"
+          <Step
+            title="Calendar"
             icon={<i class="far fa-calendar-alt"></i>}
             onClick = {() => this.onCalendarTabClick()}
+            style = {{
+              cursor: "pointer"
+            }}
           />
 
           {/*  PersonalProfilePostList.js */}
-          <Step title="Posts"
+          <Step
+            title="Posts"
             onClick = {() => this.onPostTabClick()}
-            icon={<i class="far fa-edit"></i>} />
+            icon={<i class="far fa-edit"></i>}
+            style = {{
+              cursor: "pointer"
+            }}
+            />
 
           {/*  PersonalProfileEventList.js */}
 
           <Step
             title="Events"
-
             onClick = {() => this.onEventTabClick()}
-            icon={<i class="fas fa-users"></i>} />
+            icon={<i class="fas fa-users"></i>}
+            style = {{
+              cursor: "pointer"
+            }}
+            />
         </Steps>
         </div>
 

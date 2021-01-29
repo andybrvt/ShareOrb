@@ -372,7 +372,7 @@ class CalendarPopOver extends React.Component{
               (item.backgroundImg)?
               <img
                 style={{display:'inline-block', float:'right', marginRight:'25px'}}
-              src = {`${global.IMAGE_ENDPOINT}`+item.backgroundImg}
+              src = {item.backgroundImg}
               className = 'popoverPic'
                />
                :

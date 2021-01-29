@@ -160,14 +160,23 @@ class PersonalProfile extends React.Component{
           current={this.state.current}
           onChange={this.onChange}>
           <Step title="Calendar"
+            style = {{
+              cursor: "pointer"
+            }}
             icon={<i class="far fa-calendar-alt"></i>} />
           {/*  PersonalProfilePostList.js */}
           <Step title="Posts"
+            style = {{
+              cursor: "pointer"
+            }}
             onClick = {() => this.onPostTabClick()}
             icon={<i class="far fa-edit"></i>} />
           {/*  PersonalProfileEventList.js */}
           <Step
             title="Events"
+            style = {{
+              cursor: "pointer"
+            }}
             onClick = {() => this.onEventTabClick()}
             icon={<i class="fas fa-users"></i>} />
         </Steps>

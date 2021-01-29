@@ -104,6 +104,16 @@ class UserEventList extends React.Component{
     this.props.history.push('/explore/'+username)
   }
 
+  eventTitleLength = (title) => {
+
+    let newTitle = title
+    if(title.length> 30){
+      newTitle = title.substring(0, 30)+'...'
+    }
+
+    return newTitle
+  }
+
 
 
   renderEventCells = () => {
@@ -122,104 +132,166 @@ class UserEventList extends React.Component{
             <div className = {`eventContainer
             ${this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time)
               ? "" : "active" }`}>
-            {
-              socialEventList[i].backgroundImg === null ?
-              <div className = 'noPicBox'>
-              <PictureOutlined />
-              <br />
-                <span className = 'noPicWords'> No picture </span>
+
+              <div className = "eventContainerFirst">
+                {
+
+                  socialEventList[i].backgroundImg === null ?
+                  <div className = 'noPicBox'>
+                    <div className = "inContainer">
+                      <PictureOutlined />
+                      <div className = 'noPicWords'> No picture </div>
+                    </div>
+
+                  </div>
+                  :
+                  <div className = 'picBox'>
+                    <img
+                    className = "picBoxPic"
+                    src = {`${global.API_ENDPOINT}`+socialEventList[i].backgroundImg} />
+                  </div>
+                }
               </div>
-              :
-              <div className = 'picBox'>
-                <img
-                className = "picBoxPic"
-                src = {`${global.API_ENDPOINT}`+socialEventList[i].backgroundImg} />
+
+
+
+              <div className = "eventContainerSecond">
+
+                <div className = "secondContainerFirst">
+                  <div className = "eventBoxTitle">{this.eventTitleLength(this.capitalize(socialEventList[i].title))}</div>
+                  <div className = "tabSect">
+                    {
+
+                        this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+
+                          <div> </div>
+
+                          :
+
+                          <div className = "endTag"> Ended</div>
+                      }
+
+                  </div>
+
+                </div>
+
+                <div className = "secondContainerSecond">
+                  <div className = "locationHolder">
+                    <div className = "locationPin">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </div>
+
+                    <div className = "eventLocation">
+                      {this.capitalize(socialEventList[i].location)}
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div className = "secondContainerThird">
+
+                  <div className = 'firstHalf'>
+
+
+                        <div className = "eventBoxDay">
+                          <div className = "calendarIcon">
+                            <i class="far fa-calendar"></i>
+                          </div>
+                          <div className = "dateInfo">
+                            {this.dateView(socialEventList[i].event_day)}
+                          </div>
+
+                        </div>
+
+                  </div>
+
+                  <div className = 'secondHalf'>
+                    hellow
+                    {/*
+                      <div className = "eventBoxHost ">
+                      Host: <Avatar
+                        size = {30}
+                        style = {{
+                          cursor: "pointer"
+                        }}
+                        onClick = { () => this.profileDirect(socialEventList[i].host.username)}
+                        src = {`${global.API_ENDPOINT}`+socialEventList[i].host.profile_picture}
+                      /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
+                      </div>
+                      */}
+
+                  </div>
+
+
+                </div>
+
+                <div className = "secondContainerFourth">
+                  Hello
+
+                  {/*
+                    <div className = "eventBoxTimes"><i class="far fa-clock"></i> {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}</div>
+
+                    <div className = "eventBoxParticipant">
+                    <span className = "participants"> Participants: </span>
+                    <div className = "likeList"> <Liking
+                    history = {this.props.history}
+                    like_people = {socialEventList[i].persons} /> </div>
+                    </div>
+                    */}
+
+                </div>
+
+
               </div>
-            }
 
-            <div className = "eventBoxTitle">{this.capitalize(socialEventList[i].title)}
-            {
+              <div className = "eventContainerThird">
+                Hello
+                {/*this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+                    <div>
+                    {
+                      this.checkUser(socialEventList[i].persons) ?
+                        socialEventList[i].host.id === this.props.curId ?
+                        <div className = "hostButton">
+                          <span className = "hostText"> Host </span>
+                        </div>
 
-              this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+                        :
 
-                <span> </span>
+                        <div
+                        onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+                        className = "leaveButton">
+                          <span className = "leaveText"> Leave </span>
+                        </div>
 
-                :
+                        :
 
-                <span className = "endTag"> Ended</span>
-            }
-            </div>
+                        <div
+                        onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+                        className = "joinButton">
+                          <span className = "joinText"> Join </span>
+                        </div>
 
-            <div className = "eventBoxContent">Content: {socialEventList[i].content} </div>
-            <div className = "eventBoxLocation">
-            <i class="fas fa-map-marker-alt"></i> {socialEventList[i].location}</div>
-            <div className = "eventBoxDay">
-            <i class="far fa-calendar"></i> {this.dateView(socialEventList[i].event_day)}
-            </div>
-            <div className = "eventBoxTimes"><i class="far fa-clock"></i> {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}</div>
-
-            <div className = "eventBoxHost ">
-            Host: <Avatar
-              size = {30}
-              style = {{
-                cursor: "pointer"
-              }}
-              onClick = { () => this.profileDirect(socialEventList[i].host.username)}
-              src = {`${global.API_ENDPOINT}`+socialEventList[i].host.profile_picture}
-            /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
-            </div>
-
-            <div className = "eventBoxParticipant">
-            <span className = "participants"> Participants: </span>
-            <div className = "likeList"> <Liking
-            history = {this.props.history}
-            like_people = {socialEventList[i].persons} /> </div>
-            </div>
-
-        {this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
-            <div>
-            {
-              this.checkUser(socialEventList[i].persons) ?
-                socialEventList[i].host.id === this.props.curId ?
-                <div className = "hostButton">
-                  <span className = "hostText"> Host </span>
-                </div>
-
-                :
-
-                <div
-                onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
-                className = "leaveButton">
-                  <span className = "leaveText"> Leave </span>
-                </div>
-
-                :
-
-                <div
-                onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
-                className = "joinButton">
-                  <span className = "joinText"> Join </span>
-                </div>
-
-            }
+                    }
 
 
-            <div
-            onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
-            className = "viewButton">
-              <span className = 'viewText'> View </span>
-            </div>
-            </div>
+                    <div
+                    onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+                    className = "viewButton">
+                      <span className = 'viewText'> View </span>
+                    </div>
+                    </div>
 
-            :
+                    :
 
-            <div
-            onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
-            className = "viewButtonPass">
-              <span className = 'viewText'> View </span>
-            </div>
+                    <div
+                    onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+                    className = "viewButtonPass">
+                      <span className = 'viewText'> View </span>
+                    </div>
 
-          }
+                  */}
+              </div>
 
             </div>
 

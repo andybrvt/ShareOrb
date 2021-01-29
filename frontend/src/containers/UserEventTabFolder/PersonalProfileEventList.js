@@ -145,14 +145,23 @@ class PersonalProfileEventList extends React.Component{
           size="large"
           current={2}
           onChange={this.onChange}>
-          <Step title="Calendar"
+          <Step
+            title="Calendar"
             onClick = {() => this.onCalendarTabClick()}
-            icon={<i class="far fa-calendar-alt"></i>} />
+            icon={<i class="far fa-calendar-alt"></i>}
+            style = {{
+              cursor: "pointer"
+            }}
+             />
 
           {/*  PersonalProfilePostList.js */}
           <Step title="Posts"
             onClick = {() => this.onPostTabClick()}
-            icon={<i class="far fa-edit"></i>} />
+            icon={<i class="far fa-edit"></i>}
+            style = {{
+              cursor: "pointer"
+            }}
+             />
 
           {/*  PersonalProfileEventList.js */}
 
@@ -160,10 +169,13 @@ class PersonalProfileEventList extends React.Component{
             title="Events"
 
             onClick = {() => this.onEventTabClick()}
-            icon={<i class="fas fa-users"></i>} />
+            icon={<i class="fas fa-users"></i>}
+            style = {{
+              cursor: "pointer"
+            }}
+            />
         </Steps>
         </div>
-        <Divider style={{marginTop:'-1px'}}/>
           <UserEventList
           events = {this.props.profile.get_socialEvents}
           curId = {this.props.currentId}
@@ -279,14 +291,17 @@ class PersonalProfileEventList extends React.Component{
 
         </div>
 
-      {
-        privatePro ?
-          this.onRenderPrivate()
+        <div className = "bottomSectProfilePage">
+          {
+            privatePro ?
+              this.onRenderPrivate()
 
-          :
+              :
 
-          this.onRenderTabs()
-      }
+              this.onRenderTabs()
+          }
+        </div>
+
 
       </div>
 
