@@ -453,6 +453,7 @@ aside {
 .searchBarContainer{
   left:10%;
   width:100%;
+
   /* background-color: blue; */
 
 }
@@ -461,7 +462,7 @@ aside {
 .searchBarContainer .autoCompleteHeader{
   /* background:blue; */
   position:relative;
-  left: 30%;
+  left: 23.4%;
   /* transform: translateX(-50%); */
   top:2.5px;
   color: black;
@@ -469,8 +470,8 @@ aside {
 
 .searchBarContainer .autoCompleteHeader .inputSearchCSS{
   position:relative;
- left:50%;
- width: 500;
+  left:50%;
+
 }
 
 
@@ -486,7 +487,7 @@ aside {
 .headersNotificationContainer .notificationsInner{
   position: relative;
   top:25%;
-  left:90%;
+  left:75%;
   width: 10%;
   /* float:right; */
   cursor: pointer;

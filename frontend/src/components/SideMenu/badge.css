@@ -1,12 +1,12 @@
 .notification-count {
   position: absolute;
   z-index: 1;
-  top: -1px;
-  right: 10px;
-  width: 25px;
-  height: 25px;
+  top: 10px;
+  right: 7.5px;
+  width: 20px;
+  height: 20px;
   line-height: 30px;
-  font-size: 16px;
+  font-size: 13px;
   padding-left: 3px;
   border-radius: 50%;
   background-color: #ff4927;
@@ -16,31 +16,42 @@
 }
 
 .notificationInside{
-  left:25%;
+  left:20%;
   position: relative;
   transform: translateX(50%);
+  bottom:25%;
+  font-weight: 600;
 }
 
 
-.notification-count-menu {
+.headerNotificationButton {
   position: absolute;
   z-index: 1;
-  right: 0px;
-  width: 25px;
-  height: 25px;
+  top: -10px;
+  left: 12px;
+  width: 20px;
+  height: 20px;
   line-height: 30px;
-  font-size: 16px;
+  font-size: 13px;
   padding-left: 3px;
   border-radius: 50%;
   background-color: #ff4927;
   color: #fff;
-
   /* animation: zoom 2s 2s both; */
 }
 
 .notification-count:hover {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
   animation: rubberBand 1s 1s infinite;
 }
+
+li:hover{
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  animation: rubberBand 1s 1s infinite;
+  }
+
 
 .badgeOuter:hover {
   animation: rubberBand 1s 1s infinite;

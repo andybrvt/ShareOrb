@@ -261,16 +261,24 @@ class SideMenu extends React.Component {
                        </li>
                       {/*<li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
                     */}
+
+
                     <li
                     onClick = {() => this.onChatDirect()}
                     >
-                    <a class="d-flex align-items-center">
-                      <span class="notification-count">
-                        <span class="notificationInside">6 </span>
-                        </span>
-                      <i class="far fa-comment"></i>
-                      <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
-                    </a>
+
+
+
+                      <a class="d-flex">
+                        <span class="notification-count">
+                          <span class="notificationInside"> 6 </span>
+                          </span>
+                        <i class="far fa-comment"></i>
+                        <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
+                      </a>
+
+
+
                     </li>
                       <li
                       onClick = {() => this.onCalendarDirect()}
@@ -321,7 +329,7 @@ class SideMenu extends React.Component {
                   <div className = "autoCompleteHeader">
                     <AutoComplete
                       dataSource={temp}
-                      style = {{width:'55%'}}
+                      style = {{width:'62.25%', height:'10%'}}
                       filterOption={(inputValue, option) =>
                          option.value.includes(inputValue)
                       }
@@ -340,48 +348,23 @@ class SideMenu extends React.Component {
 
 
                 <div className="headersNotificationContainer">
-
-                <div
-                className = 'notificationsInner '
-                >
-                {/*
-
-
-
-                    <div class="notification-box">
-                      <span class="notification-count">6</span>
+                  <div className = 'notificationsInner'>
+                    <div class="badgeOuter">
                         <i
                           onClick = {() => this.onOpenDropDown()}
                           class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
                           aria-hidden="true"
                           style={{fontSize:'22px'}}
                           >
-
-
                         </i>
+                        <span class="headerNotificationButton">
+                          <span class="notificationInside">{this.props.notifications.length} </span>
+                        </span>
+                    </div>
                   </div>
-
-                */}
-                <div class="badgeOuter">
-                  <span class="notification-count">
-                    <span class="notificationInside">{this.props.notifications.length} </span>
-                    </span>
-                    <i
-                      onClick = {() => this.onOpenDropDown()}
-                      class={`${this.state.showDropDown ? "far fa-bell showBell" : "far fa-bell"}`}
-                      aria-hidden="true"
-                      style={{fontSize:'22px'}}
-                      >
-
-                    </i>
-
-                </div>
-                </div>
-                <div >
-
+                  <div >
                     <NotificationsDropDown {...this.props} showNoti={this.state.showDropDown}/>
                   </div>
-
                 </div>
                 {/*
                 <div className = "headersNotificationContainer">

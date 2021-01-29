@@ -75,10 +75,10 @@
 }
 .newsfeedParent .suggestedFriendsContainer{
   /* background-color: red; */
-  left:3%;
-  width: 22.5%;
-  position:relative;
-  height:100%;
+  position: relative;
+  left:6.75%;
+  width: 22%;
+
 }
 
 .newsfeedParent .suggestedFriendsContainer .suggestedFriendsCard {

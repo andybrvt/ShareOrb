@@ -106,9 +106,6 @@ class InfiniteList extends React.Component {
     return (
 
       <div>
-        { this.state.loading?
-           <Spinner/>
-           :
 
 
           <div style={{ flex: 1}}>
@@ -123,7 +120,7 @@ class InfiniteList extends React.Component {
             })}
 
          </div>
-       }
+       
       </div>
    );
   }
