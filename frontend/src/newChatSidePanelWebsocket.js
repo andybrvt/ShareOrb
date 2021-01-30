@@ -73,17 +73,22 @@ class WebSocketNewChatSidePanel {
     console.log(parsedData)
 
     if(command == 'fetch_all_user_chats'){
-      const chatList = parsedData.chats
+      const content = {
+        chatList:parsedData.chats,
+        unseen: parsedData.unseen
+      }
 
-      this.callbacks['fetch_chats'](chatList)
+      this.callbacks['fetch_chats'](content)
     }
     if(command == "update_chat_list"){
-      const chatList = parsedData.chatList
-
+      const content = {
+        chatList:parsedData.chatList,
+        unseen: parsedData.unseen
+      }
       // Since this updating the chats too, the redux will be
       // similar to the fetch chats so you cna just reuse the
       // fetch_catch call back
-      this.callbacks['fetch_chats'](chatList)
+      this.callbacks['fetch_chats'](content)
     }
   }
 

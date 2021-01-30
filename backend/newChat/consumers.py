@@ -30,6 +30,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
 
             user = get_object_or_404(User, id = data['userId'])
             chats = user.chat_parti.all()
+            unseen = chats.exclude(seen__id = data['userId'])
+            print (unseen)
             # When you do many = True it will serialize the list of chat objects
             print("does it here start")
             chatList = MiniChatSerializer(chats, many = True).data
@@ -37,7 +39,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             print("does it hit here")
             content = {
                 'command': 'fetch_all_user_chats',
-                'chats': chatList
+                'chats': chatList,
+                'unseen': len(unseen)
             }
             self.send_json(content)
 
@@ -65,12 +68,15 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             # a new chat that is updated
             user = get_object_or_404(User, id = int(participant['id']))
             chats = user.chat_parti.all()
+
+            unseen = chats.exclude(seen__id = int(participant['id']))
             # When you do many = True it will serialize the list of chat objects
             chatList = MiniChatSerializer(chats, many = True).data
             content = {
                 "command": "update_chat_list",
                 "chatList": chatList,
-                "chatUserId": user.id
+                "chatUserId": user.id,
+                'unseen': len(unseen)
             }
             self.send_chats(content)
 
@@ -109,6 +115,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             # a new chat that is updated
             user = get_object_or_404(User, id = int(participant['id']))
             chats = user.chat_parti.all()
+            unseen = chats.exclude(seen__id = int(participant['id']))
+
             # When you do many = True it will serialize the list of chat objects
             chatList = MiniChatSerializer(chats, many = True).data
             # if int(participant) == data['senderId']:
@@ -117,7 +125,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             content = {
                 "command": "update_chat_list",
                 "chatList": chatList,
-                "chatUserId": user.id
+                "chatUserId": user.id,
+                "unseen": len(unseen)
             }
             self.send_chats(content)
 
@@ -150,12 +159,15 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             # a new chat that is updated
             user = get_object_or_404(User, id = int(participant['id']))
             chats = user.chat_parti.all()
+            unseen = chats.exclude(seen__id = int(participant['id']))
+
             # When you do many = True it will serialize the list of chat objects
             chatList = MiniChatSerializer(chats, many = True).data
             content = {
                 "command": "update_chat_list",
                 "chatList": chatList,
-                "chatUserId": user.id
+                "chatUserId": user.id,
+                "unseen": len(unseen)
             }
             self.send_chats(content)
 
@@ -177,12 +189,15 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             # a new chat that is updated
             user = get_object_or_404(User, id = int(participant['id']))
             chats = user.chat_parti.all()
+            unseen = chats.exclude(seen__id = int(participant['id']))
+
             # When you do many = True it will serialize the list of chat objects
             chatList = MiniChatSerializer(chats, many = True).data
             content = {
                 "command": "update_chat_list",
                 "chatList": chatList,
-                "chatUserId": user.id
+                "chatUserId": user.id,
+                'unseen': len(unseen)
             }
             self.send_chats(content)
 
@@ -201,12 +216,15 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         for participant in serializedChat['participants']:
             user = get_object_or_404(User, id = int(participant['id']))
             chats = user.chat_parti.all()
+            unseen = chats.exclude(seen__id = int(participant['id']))
+
             chatList = MiniChatSerializer(chats, many = True).data
 
             content = {
                 "command": "update_chat_list",
                 "chatList": chatList,
-                "chatUserId": user.id
+                "chatUserId": user.id,
+                "unseen": len(unseen)
             }
             self.send_chats(content)
 

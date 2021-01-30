@@ -20,6 +20,7 @@ export const setMessages = (messages, curChat) => {
 
 
 export const setChats = chats => {
+  console.log(chats)
   return {
     type: actionTypes.SET_CHATS,
     chats: chats

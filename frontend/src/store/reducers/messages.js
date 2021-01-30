@@ -6,7 +6,8 @@ const initialState = {
   messages:[],
   chats: [],
   curChatId: 0,
-  curChat:{}
+  curChat:{},
+  unseen: 0,
 }
 
 // makes a new list and then adds the action.message in
@@ -26,13 +27,16 @@ const setMessages = (state, action) => {
 
 const setChats = (state, action) => {
   let curChat = ""
-  if(action.chats.length === 0){
+  console.log(action.chats)
+  if(action.chats.chatList.length === 0){
     curChat = 0
   } else {
-    curChat = action.chats[0].id
+    curChat = action.chats.chatList[0].id
   }
+
   return updateObject(state, {
-    chats:action.chats,
+    chats:action.chats.chatList,
+    unseen: action.chats.unseen,
     curChatId: curChat
   })
 }

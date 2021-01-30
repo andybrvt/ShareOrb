@@ -270,9 +270,19 @@ class SideMenu extends React.Component {
 
 
                       <a class="d-flex">
-                        <span class="notification-count">
-                          <span class="notificationInside"> 6 </span>
+                        {
+                          this.props.unseen === 0 ?
+                          <div> </div>
+
+                          :
+
+                          <span class="notification-count">
+                            <span class="notificationInside"> {this.props.unseen} </span>
                           </span>
+
+                        }
+
+
                         <i class="far fa-comment"></i>
                         <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
                       </a>
@@ -470,7 +480,8 @@ const mapStateToProps = state => {
     showNotification: state.notifications.showNotification,
     notifications: state.notifications.notifications,
     profilePic: state.auth.profilePic,
-    curChatId: state.message.curChatId
+    curChatId: state.message.curChatId,
+    unseen: state.message.unseen,
   }
 }
 
