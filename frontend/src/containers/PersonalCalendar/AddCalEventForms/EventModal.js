@@ -115,7 +115,8 @@ class EventModal extends React.Component {
         person: [this.props.id],
         repeatCondition: values.repeatCondition,
         host: this.props.id,
-        accepted: [this.props.id]
+        accepted: [this.props.id],
+        seen: [this.props.id]
       })
 
       // The event instance is pretty much used when you just recently added an
@@ -142,7 +143,8 @@ class EventModal extends React.Component {
         repeatCondition: values.repeatCondition,
         host: curUserObj,
         accepted: [this.props.id],
-        decline: []
+        decline: [],
+        seen: [this.props.id]
 
 
       }

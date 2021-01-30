@@ -325,7 +325,7 @@ class UserEventList extends React.Component{
 
                     <div className = "buttonJustViewHolder">
                       <div
-                      onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+                        onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
                       className = "viewButtonPass">
                         <div className = 'viewText'> View </div>
                       </div>
