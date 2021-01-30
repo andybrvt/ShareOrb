@@ -108,6 +108,7 @@ class EditEventPopUp extends React.Component {
           repeatCondition: values.repeatCondition,
           host: this.props.id,
           accepted: [this.props.id],
+          seen: [this.props.id ]
         })
         .then(res => {
 

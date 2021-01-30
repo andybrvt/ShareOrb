@@ -60,6 +60,7 @@ class CalendarConsumer(JsonWebsocketConsumer):
         host = get_object_or_404(User, id = data['host']);
         # person = [currentUser, userFriend];
         accepted = [host];
+        seen = [host];
         color = data['eventColor'];
         repeatCondition = data['repeatCondition'];
         newEvent = Event.objects.create(
@@ -71,10 +72,12 @@ class CalendarConsumer(JsonWebsocketConsumer):
             color = color,
             repeatCondition = repeatCondition,
             host = host,
+
         )
         newEvent.person.set(person)
         newEvent.accepted.set(accepted)
         newEvent.invited.set(invited)
+        newEvent.seen.set(seen)
 
         serializer = EventSerializer(newEvent)
 

@@ -278,51 +278,61 @@ class UserEventList extends React.Component{
               </div>
 
               <div className = "eventContainerThird">
-                Hello
-                {/*this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
-                    <div>
-                    {
-                      this.checkUser(socialEventList[i].persons) ?
-                        socialEventList[i].host.id === this.props.curId ?
-                        <div className = "hostButton">
-                          <span className = "hostText"> Host </span>
-                        </div>
 
-                        :
+                {this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
+                    <div className = "buttonRightHolder">
 
+                      <div className = "topHalf">
+                        {
+                          this.checkUser(socialEventList[i].persons) ?
+                            socialEventList[i].host.id === this.props.curId ?
+                            <div className = "hostButton">
+                              <div className = "hostText"> Host </div>
+                            </div>
+
+                            :
+
+                            <div
+                            onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+                            className = "hostButton">
+                              <div className = "hostText"> Leave </div>
+                            </div>
+
+                            :
+
+                            <div
+                            onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
+                            className = "joinButton">
+                              <div className = "joinText"> Join </div>
+                            </div>
+
+                        }
+                      </div>
+
+
+                      <div className = "bottomHalf">
                         <div
-                        onClick = {() => this.sendLeaveUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
-                        className = "leaveButton">
-                          <span className = "leaveText"> Leave </span>
+                        onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+                        className = "viewButton">
+                          <div className = 'viewText'> View </div>
                         </div>
 
-                        :
+                      </div>
 
-                        <div
-                        onClick = {() => this.sendJoinUserEvent(this.props.curId, this.props.ownerId, socialEventList[i].id)}
-                        className = "joinButton">
-                          <span className = "joinText"> Join </span>
-                        </div>
-
-                    }
-
-
-                    <div
-                    onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
-                    className = "viewButton">
-                      <span className = 'viewText'> View </span>
-                    </div>
                     </div>
 
                     :
 
-                    <div
-                    onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
-                    className = "viewButtonPass">
-                      <span className = 'viewText'> View </span>
+                    <div className = "buttonJustViewHolder">
+                      <div
+                        onClick = {() => this.openSocialEventPage(socialEventList[i].id)}
+                      className = "viewButtonPass">
+                        <div className = 'viewText'> View </div>
+                      </div>
                     </div>
 
-                  */}
+
+                }
               </div>
 
             </div>

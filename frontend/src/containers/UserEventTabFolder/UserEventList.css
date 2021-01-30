@@ -6,7 +6,6 @@
 }
 
 .eventListTabContainer .eventListContainer{
-  background-color: red;
   /* overflow: auto; */
   width: 60%;
   position: relative;
@@ -15,7 +14,7 @@
 
   /* height: 1000px; */
 }
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1300px){
   .eventListTabContainer .eventListContainer{
     width: 100%;
   }
@@ -30,6 +29,13 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.eventListTabContainer .eventListContainer .eventContainer:hover{
+  transform: scale(1.05);
 }
 .eventListTabContainer .eventListContainer .eventContainer.active{
   /* opacity: 0.5; */
@@ -42,14 +48,12 @@
   width: 62%;
 }
 .eventContainer .eventContainerThird{
-  background-color: green;
   width: 20%;
 }
 
 
 
 .eventContainer .eventContainerFirst .noPicBox{
-  /* background-color: red; */
   position: relative;
   width: 100%;
   height: 100%;
@@ -314,96 +318,120 @@
 
 /* For the buttons */
 
-.eventContainer .joinButton{
+.eventContainerThird .buttonRightHolder{
+  position: relative;
+  width: 80%;
+  height: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+}
+
+.eventContainerThird .buttonJustViewHolder{
+  position: relative;
+  width: 80%;
+  height: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+
+.eventContainerThird .buttonRightHolder .topHalf{
+  position: relative;
+  height: 50%;
+}
+
+.eventContainerThird .buttonRightHolder .bottomHalf{
+  position: relative;
+  height: 50%;
+}
+
+
+.eventContainerThird .buttonRightHolder .topHalf .joinButton{
   cursor: pointer;
-  height: 35%;
-  width: 15%;
-  position: absolute;
-  right: 5%;
-  top: 13%;
+  height: 75%;
+  width: 85%;
+  position: relative;
   border-radius: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   font-size: 27px;
   color: white;
   background-color: limegreen;
+  text-align: center;
   /* padding-top: 30%; */
 }
 
-.eventContainer .joinButton .joinText{
+.eventContainerThird .buttonRightHolder .topHalf .joinButton .joinText{
   position: relative;
-  top: 15%;
-}
+  top: 50%;
+  transform: translateY(-50%);}
 
-.eventContainer .viewButton{
-  height: 35%;
-  width: 15%;
-  position: absolute;
-  right: 5%;
-  top: 53%;
+.eventContainerThird .buttonRightHolder .bottomHalf .viewButton{
+  height: 75%;
+  width: 85%;
+  position: relative;
   border-radius: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   font-size: 27px;
   color: white;
   background-color: lightgray;
   cursor: pointer;
+  text-align: center;
 
   /* padding-top: 30%; */
 }
 
 
-.eventContainer .viewButton .viewText{
+.eventContainerThird .buttonRightHolder .viewButton .viewText{
   position: relative;
-  top: 15%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.eventContainer.active .viewButtonPass{
-  height: 35%;
-  width: 15%;
-  position: absolute;
-  right: 5%;
-  top: 30%;
+.eventContainerThird .buttonJustViewHolder .viewButtonPass{
+  height: 37.5%;
+  width: 85%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   border-radius: 10px;
   font-size: 27px;
   color: white;
   background-color: lightgray;
   cursor: pointer;
-  opacity: 1;
+  text-align: center;
 }
-.eventContainer .viewButtonPass .viewText{
+.eventContainerThird .buttonJustViewHolder .viewButtonPass .viewText{
   position: relative;
-  top: 15%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.eventContainer .hostButton{
-  height: 35%;
-  width: 15%;
-  position: absolute;
-  right: 5%;
-  top: 13%;
+.eventContainerThird .buttonRightHolder .topHalf .hostButton{
+  height: 75%;
+  width: 85%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   border-radius: 10px;
   font-size: 27px;
   color: white;
   background-color: lightgray;
   cursor: pointer;
+  text-align: center;
 
 }
-.eventContainer .hostButton .hostText{
+.eventContainerThird .buttonRightHolder .topHalf .hostButton .hostText{
   position: relative;
-  top: 15%;
-}
-
-.eventContainer .leaveButton{
-  height: 35%;
-  width: 15%;
-  position: absolute;
-  right: 5%;
-  top: 13%;
-  border-radius: 10px;
-  font-size: 27px;
-  color: white;
-  background-color: lightgray;
-  cursor: pointer;
-
-}
-.eventContainer .leaveButton .leaveText{
-  position: relative;
-  top: 15%;
+  top: 50%;
+  transform: translateY(-50%);
 }
