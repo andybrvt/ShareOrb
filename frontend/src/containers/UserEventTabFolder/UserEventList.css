@@ -105,19 +105,20 @@
 
 .eventContainerSecond .secondContainerThird{
   position: relative;
-  background-color: green;
   height: 20%;
   display: flex;
   flex-direction: row;
 }
 
 .eventContainerSecond .secondContainerFourth{
-  background-color: orange;
+  position: relative;
   height: 20%;
+  display: flex;
+  flex-direction: row;
 }
 
 .eventContainerSecond .secondContainerFirst .eventBoxTitle{
-   /* color: red; */
+   color: black;
    position: relative;
    font-size:40px;
 
@@ -152,7 +153,7 @@
 .eventContainerSecond .secondContainerSecond .locationHolder .locationPin{
   /* color: red; */
   position: relative;
-  color: gray;
+  color: black;
   font-size: 20px;
   top: 50%;
   transform: translateY(-50%);
@@ -160,7 +161,7 @@
 }
 .eventContainerSecond .secondContainerSecond .locationHolder .eventLocation{
   position: relative;
-  color: gray;
+  color: black;
   font-size: 15px;
   top: 50%;
   height: 70%;
@@ -169,14 +170,13 @@
 }
 
 .eventContainerSecond .secondContainerThird .firstHalf{
-  background-color: red;
   position: relative;
   width: 50%;
+  padding-left: 10px;
 
 }
 
 .eventContainerSecond .secondContainerThird .secondHalf{
-  background-color: blue;
   position: relative;
   width: 50%;
 }
@@ -187,55 +187,127 @@
 
   /* color: red; */
   position: relative;
-  color: gray;
+  color: black;
   font-size: 20px;
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
-.eventContainer .eventBoxTimes{
-  /* color: red; */
-  position: absolute;
-  left: 19%;
-  top: 75%;
+.eventContainerSecond .secondContainerThird .firstHalf .eventBoxDay .calendarIcon{
+  position: relative;
+  color: black;
   font-size: 20px;
-  color: gray;
-  /* display: none; */
+  top: 50%;
+  transform: translateY(-50%);
+
+}
+.eventContainerSecond .secondContainerThird .firstHalf .eventBoxDay .dateInfo{
+  position: relative;
+  color: black;
+  font-size: 15px;
+  top: 50%;
+  height: 70%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+}
+
+.eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostText{
+  position: relative;
+  color: black;
+  font-size: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostNameAva{
+  position: relative;
+  color: black;
+  font-size: 15px;
+  top: 50%;
+  height: 100%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+.eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostNameAva .hostAvatar{
+  font-size: 100%;
+  position: relative;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+.eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostNameAva .hostName{
+  margin-left: 3px;
+  color: black;
 }
 
 
-.eventContainer .eventBoxHost{
-  /* color: red; */
-  position: absolute;
-  /* display: none; */
-  font-size: 18px;
-  top: 57%;
-  left: 50%;
-  color: gray;
+.eventContainerSecond .secondContainerFourth .firstHalf{
+  width: 50%;
+  padding-left: 10px;
+}
+.eventContainerSecond .secondContainerFourth .secondHalf{
+  position: relative;
+  width: 50%;
 }
 
-.eventContainer .eventBoxParticipant{
-  /* background-color: red; */
-  font-size: 18px;
-  position: absolute;
-  left: 44.5%;
-  top: 70%;
-  color: gray;
+
+.eventContainerSecond .secondContainerFourth .firstHalf .eventBoxTimes{
+  position: relative;
+  height: 100%;
+  color: black;
   display: flex;
 }
-
-
-.participants{
-  /* background-color: red; */
-  padding-top: 10px;
-  /* position: absolute;
-  left: -159%;
-  top: 22%; */
-
+.eventContainerSecond .secondContainerFourth .firstHalf .eventBoxTimes .eventClock{
+  position: relative;
+  color: black;
+  font-size: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
-.eventContainer .eventBoxParticipant .likeList{
+.eventContainerSecond .secondContainerFourth .firstHalf .eventBoxTimes .eventTime{
+  position: relative;
+  color: black;
+  font-size: 15px;
+  top: 50%;
+  height: 70%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+}
+
+
+
+
+.eventContainerSecond .secondContainerFourth .secondHalf .eventBoxParticipant{
+  position: relative;
+  color: black;
+  display: flex;
+  flex-direction: row
+}
+
+
+.eventContainerSecond .secondContainerFourth .secondHalf .eventBoxParticipant .participants{
+  position: relative;
+  color: black;
+  font-size: 20px;
+  top: 50%;
+}
+.eventContainerSecond .secondContainerFourth .secondHalf .eventBoxParticipant .likeList{
   /* background-color: red; */
-  position: absolute;
-  left: 82%;
+  position: relative;
+  margin-left: 3px;
 }
 
 

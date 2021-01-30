@@ -207,19 +207,28 @@ class UserEventList extends React.Component{
                   </div>
 
                   <div className = 'secondHalf'>
-                    hellow
-                    {/*
-                      <div className = "eventBoxHost ">
-                      Host: <Avatar
-                        size = {30}
-                        style = {{
-                          cursor: "pointer"
-                        }}
-                        onClick = { () => this.profileDirect(socialEventList[i].host.username)}
-                        src = {`${global.API_ENDPOINT}`+socialEventList[i].host.profile_picture}
-                      /> {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
+
+                      <div className = "eventBoxHost">
+
+                      <div className = 'hostText'>
+                        Host:
                       </div>
-                      */}
+
+                      <div className = "hostNameAva">
+                        <div className = "hostAvatar">
+                          <Avatar
+                           size = {24}
+                           onClick = { () => this.profileDirect(socialEventList[i].host.username)}
+                           src = {`${global.API_ENDPOINT}`+socialEventList[i].host.profile_picture}
+                         />
+                        </div>
+                     <div className = "hostName">
+                       {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
+
+                      </div>
+                      </div>
+                    </div>
+
 
                   </div>
 
@@ -227,18 +236,41 @@ class UserEventList extends React.Component{
                 </div>
 
                 <div className = "secondContainerFourth">
-                  Hello
 
-                  {/*
-                    <div className = "eventBoxTimes"><i class="far fa-clock"></i> {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}</div>
+                  <div className = "firstHalf">
 
-                    <div className = "eventBoxParticipant">
-                    <span className = "participants"> Participants: </span>
-                    <div className = "likeList"> <Liking
-                    history = {this.props.history}
-                    like_people = {socialEventList[i].persons} /> </div>
-                    </div>
-                    */}
+
+                      <div className = "eventBoxTimes">
+                        <div className = "eventClock">
+                          <i class="far fa-clock"></i>
+                        </div>
+
+                        <div className = "eventTime">
+                          {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}
+                        </div>
+
+                      </div>
+
+
+                  </div>
+
+                  <div className = "secondHalf">
+
+
+
+                      <div className = "eventBoxParticipant">
+                        <div className = "participants"> Participants: </div>
+                        <div className = "likeList">
+                          <Liking
+                        history = {this.props.history}
+                        like_people = {socialEventList[i].persons} />
+                        </div>
+                      </div>
+
+
+
+                  </div>
+
 
                 </div>
 
