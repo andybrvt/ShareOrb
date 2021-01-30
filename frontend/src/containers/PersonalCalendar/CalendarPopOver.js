@@ -14,6 +14,7 @@ Row,
 Tag,
 Button,
 Tooltip,
+Statistic,
 Progress,
 DatePicker,
 AvatarGroup,
@@ -287,7 +288,7 @@ class CalendarPopOver extends React.Component{
 
             </span>
 
-            <p style={{marginTop:'5px', fontSize:'14px'}}>
+            <p style={{marginTop:'5px', fontSize:'14px', color:'black'}} class="popoverFontWeight">
               <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
               <span style={{marginRight:'3px'}}>
                 {dateFns.format(cloneDay, 'iiii')},
@@ -371,7 +372,7 @@ class CalendarPopOver extends React.Component{
             {
               (item.backgroundImg)?
               <img
-                style={{display:'inline-block', float:'right', marginRight:'25px'}}
+
               src = {item.backgroundImg}
               className = 'popoverPic'
                />
@@ -421,11 +422,11 @@ class CalendarPopOver extends React.Component{
                 :
 
                 <div>
-                  <Divider style={{marginTop:'-1px', marginBottom:'-1px'}}/>
+                  <Divider style={{marginTop:'-5px', marginBottom:'-1px'}}/>
 
                   <div style={{marginTop:'50px'}} class="outerContainerPeople">
 
-                    <div class="innerContainerPeople" style={{display:'inline-block'}}>
+                    <div class="innerContainerPeople hostNameAva" style={{display:'inline-block', padding:'10px'}}>
 
                       <Avatar
                         shape="circle"
@@ -456,24 +457,17 @@ class CalendarPopOver extends React.Component{
 
 
                     </div>
+                    <div class="innerContainerPeople" style={{display:'inline-block', width:'40%'}}>
+                     <div class="weekCalPopOverStat">
+                       <div class="weekCalPopOverFirst">
+                         <Statistic title="Going" value={item.person.length} />
+                       </div>
+                       <div class="weekCalPopOverSecond">
+                         <Statistic title="Invited" value={item.invited.length+1} />
+                       </div>
 
-                     <span class="innerContainerPeople" style={{ width: 150, display:'inline-block', float:'right', marginRight:'10px'}}>
-                       {/* going to need a if condition checking if not 100 then you can make status active:
-                          status="exception"
-                          <Progress percent={50} size="small" status="active" />
-                         */}
-                       <Progress percent={Math.floor(100*(((item.accepted.length-1)+item.decline.length)/item.invited.length))} size="small" status="active" gap/>
-                       <Progress percent={Math.floor(100*((item.accepted.length-1)/(item.invited.length)))} size="small" />
-                       {
-                         (Math.floor(100*(item.decline.length/item.invited.length))<100)?
-
-                          <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small"/>
-                         :
-                         <Progress percent={Math.floor(100*(item.decline.length/item.invited.length))} size="small" status="exception" />
-                       }
-
-
-                     </span>
+                     </div>
+                    </div>
                   </div>
                   <div>
 
@@ -481,7 +475,7 @@ class CalendarPopOver extends React.Component{
                     <Avatar.Group>
                       <div style={{float:'right', marginRight:'50px'}}>
 
-
+                        {/* user is host or user accepted */}
                         {
                           (item.host.username==this.props.username|| (item.accepted.some(e => e.id === this.props.id))
 
@@ -509,7 +503,7 @@ class CalendarPopOver extends React.Component{
                             </Tooltip>
                           </div>
                           :
-                          <div style={{marginRight:'50px'}}>
+                          <div style={{marginRight:'50px', marginTop:'-10px'}}>
                             <Tooltip placement="bottomLeft" title="View event">
                               <Button
                               onClick = {() => this.onEventPage(item.id)}

@@ -226,7 +226,7 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostNameAva{
+.hostNameAva{
   position: relative;
   color: black;
   font-size: 15px;
