@@ -1,42 +1,66 @@
-/* This is for the page look */
-.socialCalCellModal {
-  position: fixed;
-  background: white;
-  /* height: 100; */
-  top: 3.5%;
-  left: 10%;
-  right: 10%;
-  z-index: 100;
-  color:black;
-  font-weight: 500;
-  font-family: "Segoe UI Regular";
-}
-
-
-
-
+/* CSS FOR CONTAINERS ON SocialCalCellModal */
 .socialCalCellModalBackground{
   margin:0;
-
   position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
-
   height: 100%;
-
   overflow:hidden;
   background: rgba(0, 0, 0, 0.45);
   z-index: 99;
+}
 
-    /* margin-bottom: 1000px; */
+.exitX{
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  top: 0;
+  right: 1%;
+  cursor: pointer;
+}
 
+
+
+
+
+/* CSS FOR THE socialcalcellpage */
+.socialCalCellModal {
+  position: fixed;
+  background: white;
+  /* height: 100; */
+  top: 50%;
+  width: 80%;
+  height: 90%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 100;
+  color:black;
+  font-weight: 500;
+  font-family: "Segoe UI Regular";
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 1200px){
+  .socialCalCellModal{
+    width: 95%;
+  }
+}
+
+
+/* CSS FOR THE PICTURE SIDE OF THE SOICAL CAL CELL MODAL */
+.socialModalLeft{
+  position: relative;
+  background-color: red;
+  width: 70%;
+  height: 100%;
 }
 
 .singlePicHolder{
-  width: 70%;
-  height: 920px;
+  width: 100%;
+  height: 100%;
   position: relative;
 }
 .singlePicHolder .singlePic{
@@ -46,28 +70,19 @@
   position: relative;
 }
 
-.singlePicHolder .singlePic .picture{
-  /* width: 100%; */
-  position: relative;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .singlePicHolder .singlePic .backgroundPic {
     /* object-fit: cover; */
     width: 100%;
     height: 100%;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
     filter: blur(20px);
     overflow: hidden;
-    /* -webkit-filter: blur(20px); */
     z-index: 0;
 
 }
-
 .singlePicHolder .singlePic .threeDot{
   position: absolute;
   right: 0%;
@@ -75,11 +90,10 @@
   color: white;
 }
 
-
 .singlePicHolder .singlePic .clipPicturesRoll{
   position: relative;
   overflow: hidden;
-  height: 920px;
+  height: 100%;
   width: 85%;
   background-color: white;
   left: 50%;
@@ -120,13 +134,15 @@
   transform: translateX(-50%)
 }
 
-.exitX{
-  color: white;
-  font-size: 40px;
-  position: absolute;
-  right: 10px;
 
-  cursor: pointer;
+
+
+
+/* CSS FOR THE TEXT AND COMMENT SIDE OF THE SOCIAL CAL CELL MODAL */
+.socialModalRight {
+  position: relative;
+  height: 100%;
+  width: 30%;
 }
 
 
@@ -134,12 +150,24 @@
 
 
 
-.socialHolder{
-  /* background-color: red; */
-  /* padding: 10px; */
-  display: flex;
-  height: 920px;
+
+.singlePicHolder .singlePic .picture{
+  /* width: 100%; */
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -166,19 +194,6 @@
   font-size: 45px;
 }
 
-.socialModalRight {
-  /* background-color: red; */
-  position: relative;
-  bottom: 0px;
-  height: 100%;
-  width: 30%;
-  /* display: flex;
-  flex-direction: column; */
-
-
-  /* width: 100%; */
-  /* padding: 20px; */
-}
 
 .socialModalRight .dayCaption{
   /* background-color: red; */

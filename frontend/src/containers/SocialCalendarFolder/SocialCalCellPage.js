@@ -750,302 +750,317 @@ class SocialCalCellPage extends React.Component{
     return(
 
          <div className = "socialCalCellModal">
-           <div className = 'socialHolder'>
-           {
-             socialCalItems.length === 1 ?
-             <div className = "singlePicHolder">
-               {socialCalItems[0].socialItemType === "clip" ?
 
-               <div className = 'singlePic'>
-                 <img
-                 className = "backgroundPic"
-                 src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
-                  />
+            <div className = "socialModalLeft">
 
-                  {this.threeDotDropDown()}
+              {
+                socialCalItems.length === 1 ?
+                <div className = "singlePicHolder">
+                  {socialCalItems[0].socialItemType === "clip" ?
 
-                  <div className = "clipPicturesRoll">
-                    <div className = "ownerHolder">
-                       <Avatar
-                         size = {42.5}
-                         src = {`${global.API_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
-                       />
-                       <div className = "ownerName">
-                         <div>{this.getChatUserName(socialCalItems[0])} </div>
-                         <div class="headerPostText"> @{socialCalItems[0].creator.username} </div>
-                         
-                       </div>
-                    </div>
-                   <div className = "polaroidHolder">
+                  <div className = 'singlePic'>
                     <img
-                    className = "socialImages"
+                    className = "backgroundPic"
                     src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
                      />
-                   </div>
+
+                     {this.threeDotDropDown()}
+
+
+                  <div className = "clipPicturesRoll">
+
+                      <div className = "ownerHolder">
+                          <Avatar
+                            size = {42.5}
+                            src = {`${global.API_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
+                          />
+                          <div className = "ownerName">
+                            <div>{this.getChatUserName(socialCalItems[0])} </div>
+                            <div class="headerPostText"> @{socialCalItems[0].creator.username} </div>
+
+                          </div>
+                      </div>
+
+                      <div className = "polaroidHolder">
+                       <img
+                       className = "socialImages"
+                       src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
+                        />
+                      </div>
+
                   </div>
-               </div>
-
-               :
-
-               <div className = 'singlePic'>
-              {this.threeDotDropDown()}
-                 <img
-                 className ="picture"
-                 src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage} />
-               </div>
-
-              }
-            </div>
-
-             : socialCalItems.length === 0 ?
-
-             <div className = 'socialCarouselZero'>
-             <div className = 'pictureFrame'>
-               <PictureOutlined  />
-               <br />
-               <span> No posts </span>
-             </div>
-             </div>
-
-             :
-
-             <div className = 'socialCarousel'>
-               <PictureCarousel
-               onOpenDelete = {this.deleteSocialPost}
-               onPicChange = {this.changeCurSocialPic}
-               items = {socialCalItems} />
-             </div>
-           }
-
-             <div className = 'socialModalRight'>
-
-             <div className = 'socialNameTag'>
-
-             <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
-             <div>
-               <div className = 'socialName'>{this.getPageName(socialUser)} </div>
-               <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
-             </div>
-
-             {this.dateView(socialCalDate)}
-
-
-             { socialCalUserId === this.props.curId ?
-               this.cellThreeDots()
-
-               :
-
-               <div> </div>
-
-             }
-
-             </div>
-             {
-               this.props.curId === socialCalUserId ?
-
-               <div className = "dayCaption">
-               {
-                 dayCaption.length > 0 ?
-
-                 this.state.showCaptionInput ?
-
-                 <div className = "textAreaHolder">
-                  <TextArea
-                  className = "captionTextHolder"
-                  placeHolder = "Write a caption"
-                  maxLength = {250}
-                  showCount
-                  onChange = {this.onCaptionChange}
-                  value = {this.state.caption}
-                  onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
-                   />
-                   <div className = "penIcon">
-                   <i
-                   onClick = {() => this.unShowEditCaption()}
-                   class="fas fa-pen"></i>
-                   </div>
-                 </div>
-
-                 :
-
-                 <div>
-                 {dayCaption} <span
-                 className = "editCaptionPen"
-                 onClick = {() => this.showEditCaption()}
-                 > <i class="fas fa-pen"></i> </span>
-                 </div>
-
-                 :
-
-                 this.state.showCaptionInput ?
-                 <div className = "textAreaHolder">
-                  <TextArea
-                  className = "captionTextHolder"
-                  placeHolder = "Write a caption"
-                  maxLength = {250}
-                  showCount
-                  onChange = {this.onCaptionChange}
-                  onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
-                   />
-                   <div className = "penIcon">
-                   <i
-                   onClick = {() => this.unShowEditCaption()}
-                   class="fas fa-pen"></i>
-                   </div>
-                 </div>
-
-                 :
-
-                 <div
-                 onClick = {() => this.showNoCaptionEdit()}
-                 className = "writeCaptionText">
-                 Write a caption <i class="fas fa-pen"></i>
-
-                 </div>
-
-               }
-              </div>
-
-
-              :
-
-              <div className = "dayCaption">
-              {dayCaption}
-             </div>
-
-
-             }
-
-
-             <div className = 'socialLikeCommentNum'>
-               {
-                 peopleLikeId.includes(this.props.curId) ?
-
-                 <div className = 'socialLikeCircle'>
-                 <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
-                 </div>
-
-                 :
-
-                 <div className = 'socialLikeCircle'>
-                 <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
-                 </div>
-               }
-
-
-               <span className = 'socialLikeCommentText'>
-                 {people_like.length} Likes
-                 <Divider type="vertical" style={{height:'100%'}}/>
-                {socialCalComments.length} comments
-               </span>
-               <div className = 'socialLikeAvatar'>
-                 <Liking {...this.props} like_people={people_like}/>
-               </div>
-             </div>
-
-             <div className = 'socialLikeComment'>
-
-             {
-               peopleLikeId.includes(this.props.curId) ?
-
-               <div
-               onClick = {() => this.onSocialUnLike(this.props.curId, socialCalUserId)}
-               className ='socialLike'>
-               <i
-                 style={{ marginRight:'10px', color:'red'}}
-                 class="fa fa-heart">
-               </i>
-               Unlike
-               </div>
-
-               :
-
-               <div
-               onClick = {() => this.onSocialLike(this.props.curId, socialCalUserId)}
-               className ='socialLike'>
-               <i
-                 style={{ marginRight:'10px'}}
-                 class="fa fa-heart">
-               </i>
-               Like
-               </div>
 
 
 
-             }
-
-               <div className  = 'socialComment'>
-               <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-                Comment
-                </div>
-
-                {
-                  this.props.match.params.username === this.props.username   ?
-
-                  <div></div>
+                  </div>
 
                   :
 
-                  <div
-                  onClick = {() => this.onClipCurPhoto()}
-                  className  = 'socialComment'>
-                    <span
-                    style={{ marginRight:'10px'}}
-                    class="fa fa-archive"></span>
-                   Clip
+                  <div className = 'singlePic'>
+                 {this.threeDotDropDown()}
+                    <img
+                    className ="picture"
+                    src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage} />
+                  </div>
+
+                 }
+               </div>
+
+                : socialCalItems.length === 0 ?
+
+                <div className = 'socialCarouselZero'>
+                <div className = 'pictureFrame'>
+                  <PictureOutlined  />
+                  <br />
+                  <span> No posts </span>
+                </div>
+                </div>
+
+                :
+
+                <div className = 'socialCarousel'>
+                  <PictureCarousel
+                  onOpenDelete = {this.deleteSocialPost}
+                  onPicChange = {this.changeCurSocialPic}
+                  items = {socialCalItems} />
+                </div>
+              }
+
+            </div>
+
+
+             <div className = 'socialModalRight'>
+               Hi
+               {/*
+                 <div className = 'socialNameTag'>
+
+                 <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
+                 <div>
+                   <div className = 'socialName'>{this.getPageName(socialUser)} </div>
+                   <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
+                 </div>
+
+                 {this.dateView(socialCalDate)}
+
+
+                 { socialCalUserId === this.props.curId ?
+                   this.cellThreeDots()
+
+                   :
+
+                   <div> </div>
+
+                 }
+
+                 </div>
+                 {
+                   this.props.curId === socialCalUserId ?
+
+                   <div className = "dayCaption">
+                   {
+                     dayCaption.length > 0 ?
+
+                     this.state.showCaptionInput ?
+
+                     <div className = "textAreaHolder">
+                      <TextArea
+                      className = "captionTextHolder"
+                      placeHolder = "Write a caption"
+                      maxLength = {250}
+                      showCount
+                      onChange = {this.onCaptionChange}
+                      value = {this.state.caption}
+                      onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
+                       />
+                       <div className = "penIcon">
+                       <i
+                       onClick = {() => this.unShowEditCaption()}
+                       class="fas fa-pen"></i>
+                       </div>
+                     </div>
+
+                     :
+
+                     <div>
+                     {dayCaption} <span
+                     className = "editCaptionPen"
+                     onClick = {() => this.showEditCaption()}
+                     > <i class="fas fa-pen"></i> </span>
+                     </div>
+
+                     :
+
+                     this.state.showCaptionInput ?
+                     <div className = "textAreaHolder">
+                      <TextArea
+                      className = "captionTextHolder"
+                      placeHolder = "Write a caption"
+                      maxLength = {250}
+                      showCount
+                      onChange = {this.onCaptionChange}
+                      onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
+                       />
+                       <div className = "penIcon">
+                       <i
+                       onClick = {() => this.unShowEditCaption()}
+                       class="fas fa-pen"></i>
+                       </div>
+                     </div>
+
+                     :
+
+                     <div
+                     onClick = {() => this.showNoCaptionEdit()}
+                     className = "writeCaptionText">
+                     Write a caption <i class="fas fa-pen"></i>
+
+                     </div>
+
+                   }
+                  </div>
+
+
+                  :
+
+                  <div className = "dayCaption">
+                  {dayCaption}
+                 </div>
+
+
+                 }
+
+
+                 <div className = 'socialLikeCommentNum'>
+                   {
+                     peopleLikeId.includes(this.props.curId) ?
+
+                     <div className = 'socialLikeCircle'>
+                     <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                     </div>
+
+                     :
+
+                     <div className = 'socialLikeCircle'>
+                     <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+                     </div>
+                   }
+
+
+                   <span className = 'socialLikeCommentText'>
+                     {people_like.length} Likes
+                     <Divider type="vertical" style={{height:'100%'}}/>
+                    {socialCalComments.length} comments
+                   </span>
+                   <div className = 'socialLikeAvatar'>
+                     <Liking {...this.props} like_people={people_like}/>
+                   </div>
+                 </div>
+
+                 <div className = 'socialLikeComment'>
+
+                 {
+                   peopleLikeId.includes(this.props.curId) ?
+
+                   <div
+                   onClick = {() => this.onSocialUnLike(this.props.curId, socialCalUserId)}
+                   className ='socialLike'>
+                   <i
+                     style={{ marginRight:'10px', color:'red'}}
+                     class="fa fa-heart">
+                   </i>
+                   Unlike
                    </div>
 
-                }
+                   :
+
+                   <div
+                   onClick = {() => this.onSocialLike(this.props.curId, socialCalUserId)}
+                   className ='socialLike'>
+                   <i
+                     style={{ marginRight:'10px'}}
+                     class="fa fa-heart">
+                   </i>
+                   Like
+                   </div>
 
 
-             </div>
 
-             <div
-             style = {{
-               height: this.heightCal(dayCaption.length)
-             }}
-             className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
-               <SocialComments
-               currentDate = {curDate}
-               curUser = {this.props.curId}
-               owner = {socialCalUserId}
-               items = {socialCalComments}
-               />
-               <div className = 'socialCommentInput'>
-                 <Avatar
-                 size = {40}
-                 className ='socialPicInput'
-                 src = {`${global.API_ENDPOINT}`+ this.props.curProfilePic}/>
-                 <Form className = "socialInputForm">
-                   <Input
-                   className= 'socialBoxInput'
-                   onChange ={this.onCommentChange}
-                   value = {this.state.comment}
-                   // bordered = {false}
-                   placeholder = 'Write a comment'
-                   name = 'socialComment'
-                   onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
-                   // rows = {1}
-                    />
+                 }
 
-                   <button
-                   // type = 'submit'
-                   // onClick = {this.handleSubmit}
-                   style = {{display: 'none'}}
+                   <div className  = 'socialComment'>
+                   <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
+                    Comment
+                    </div>
+
+                    {
+                      this.props.match.params.username === this.props.username   ?
+
+                      <div></div>
+
+                      :
+
+                      <div
+                      onClick = {() => this.onClipCurPhoto()}
+                      className  = 'socialComment'>
+                        <span
+                        style={{ marginRight:'10px'}}
+                        class="fa fa-archive"></span>
+                       Clip
+                       </div>
+
+                    }
+
+
+                 </div>
+
+                 <div
+                 style = {{
+                   height: this.heightCal(dayCaption.length)
+                 }}
+                 className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
+                   <SocialComments
+                   currentDate = {curDate}
+                   curUser = {this.props.curId}
+                   owner = {socialCalUserId}
+                   items = {socialCalComments}
                    />
-                 </Form>
-               </div>
-               <SocialEventList
-               history = {this.props.history}
-               curId = {this.props.curId}
-               socialCalCellId = {socialCalCellId}
-               cellDate = {socialCalDate}
-               items = {socialCalEvents}/>
-              </div>
+                   <div className = 'socialCommentInput'>
+                     <Avatar
+                     size = {40}
+                     className ='socialPicInput'
+                     src = {`${global.API_ENDPOINT}`+ this.props.curProfilePic}/>
+                     <Form className = "socialInputForm">
+                       <Input
+                       className= 'socialBoxInput'
+                       onChange ={this.onCommentChange}
+                       value = {this.state.comment}
+                       // bordered = {false}
+                       placeholder = 'Write a comment'
+                       name = 'socialComment'
+                       onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
+                       // rows = {1}
+                        />
+
+                       <button
+                       // type = 'submit'
+                       // onClick = {this.handleSubmit}
+                       style = {{display: 'none'}}
+                       />
+                     </Form>
+                   </div>
+                   <SocialEventList
+                   history = {this.props.history}
+                   curId = {this.props.curId}
+                   socialCalCellId = {socialCalCellId}
+                   cellDate = {socialCalDate}
+                   items = {socialCalEvents}/>
+                  </div>
+
+                 */}
+
 
 
              </div>
-           </div>
 
            <DeleteSocialPostModal
            visible = {this.state.showDelete}
