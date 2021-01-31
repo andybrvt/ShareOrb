@@ -20,3 +20,5 @@ global.WS_HEADER = "ws"
 // global.POSTLIST_SPEC = "https://shareorb.s3.amazonaws.com/"
 // global.NEWSFEED_PICS = 'https://shareorb.s3.amazonaws.com/'
 // global.WS_HEADER = "wss"
+// global.IMAGE_ENDPOINT = ""
+// global.WS_ENDPOINT = "api.shareorb.com"

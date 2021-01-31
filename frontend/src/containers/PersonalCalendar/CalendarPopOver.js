@@ -33,8 +33,7 @@ import './PersonalCalCSS/NewCalendar.css';
 import 'antd/dist/antd.css';
 import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
 import DetailEditEventForm from './EventPage/DetailEditEventForm';
-
-
+import './calPopOver.css';
 
 class CalendarPopOver extends React.Component{
   // So when ever you do calendars, for states  you always want
@@ -263,6 +262,7 @@ class CalendarPopOver extends React.Component{
         <Popover placement={orientation}  content={
           <div  className={ (item.invited.length==0) ? 'popOverSizeSolo' : 'popOverSizeMultiple' }>
 
+
               {
                 (item.invited.length==0)?
                 <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
@@ -276,8 +276,8 @@ class CalendarPopOver extends React.Component{
 
             <span style={{color:'black', marginBottom:'10px'}}>
             {
-              (item.title.length>22)?
-              <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,22)}...</p>
+              (item.title.length>30)?
+              <p style={{fontSize:'24px', display:'inline-block'}}>{item.title.substring(0,30)}...</p>
 
               :
               <p style={{fontSize:'24px', display:'inline-block'}}>
@@ -287,98 +287,106 @@ class CalendarPopOver extends React.Component{
 
 
             </span>
-
-            <p style={{marginTop:'5px', fontSize:'14px', color:'black'}} class="popoverFontWeight">
-              <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
-              <span style={{marginRight:'3px'}}>
-                {dateFns.format(cloneDay, 'iiii')},
-
-
-              </span>
-              {dateFns.format(new Date(item.start_time), 'MMMM')}
-              &nbsp;
-              {dateFns.format(new Date(item.start_time), 'd')}
+            <div className="popOverTopFlex">
+              <div className="popOverTopLeft">
+                <p style={{marginTop:'5px', fontSize:'14px', color:'black'}} class="topPopover popoverFontWeight">
+                <i style={{marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
+                <span style={{marginRight:'3px'}}>
+                  {dateFns.format(cloneDay, 'iiii')},
 
 
-
-              <br/>
-              <i style={{marginRight:'10px', marginTop:'10px'}} class="fas fa-clock"></i>
-              <span>
-                  {dateFns.format(new Date(item.start_time),'h:mm a')}
-                  -
-                  {dateFns.format(new Date(item.end_time),'h:mm a')}
                 </span>
-              <br/>
-              {
-                (item.repeatCondition=="weekly")?
-                <span>
-                  <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
-                  Occurs every
+                {dateFns.format(new Date(item.start_time), 'MMMM')}
+                &nbsp;
+                {dateFns.format(new Date(item.start_time), 'd')}
 
+
+
+                <br/>
+                <i style={{marginRight:'10px', marginTop:'10px'}} class="fas fa-clock"></i>
+                <span>
+                    {dateFns.format(new Date(item.start_time),'h:mm a')}
+                    -
+                    {dateFns.format(new Date(item.end_time),'h:mm a')}
+                  </span>
+                <br/>
+                {
+                  (item.repeatCondition=="weekly")?
                   <span>
-                    &nbsp;
-                    {dateFns.format(cloneDay, 'iiii')}
-                    &nbsp;
+                    <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                    Occurs every
+
+                    <span>
+                      &nbsp;
+                      {dateFns.format(cloneDay, 'iiii')}
+                      &nbsp;
+                    </span>
+
                   </span>
 
-                </span>
-
-                :
-                <div>
-
-                  {
-                    (item.repeatCondition=="daily")?
-                    <span>
-                      <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
-                      Occurs every day
-
-                    </span>
-                    :
-                    <div>
-
-
-                      {
-                        (item.repeatCondition=="monthly")?
-                        <span>
-                          <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
-                          Occurs every month
-
-                        </span>
-                        :
-                        <div></div>
-                      }
-
-
-
-
-                    </div>
-                  }
-               </div>
-
-              }
-
-              <div>
-                <i class="fas fa-user-friends" style={{marginRight:'5px'}}></i>
-                {
-                  (item.invited.length==0)?
-                    <span> Just You</span>
-
                   :
-                      <span>   {item.invited.length+1} people</span>
+                  <div>
+
+                    {
+                      (item.repeatCondition=="daily")?
+                      <span>
+                        <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                        Occurs every day
+
+                      </span>
+                      :
+                      <div>
+
+
+                        {
+                          (item.repeatCondition=="monthly")?
+                          <span>
+                            <i class="fas fa-redo-alt" style={{marginRight:'10px'}}></i>
+                            Occurs every month
+
+                          </span>
+                          :
+                          <div></div>
+                        }
+
+
+
+
+                      </div>
+                    }
+                 </div>
 
                 }
-              </div>
-            </p>
-            {
-              (item.backgroundImg)?
-              <img
 
-              src = {item.backgroundImg}
-              className = 'popoverPic'
-               />
-               :
-               <div></div>
-            }
+                <div>
+                  <i class="fas fa-user-friends" style={{marginRight:'5px'}}></i>
+                  {
+                    (item.invited.length==0)?
+                      <span> Just You</span>
+
+                    :
+                        <span>   {item.invited.length+1} people</span>
+
+                  }
+                </div>
+
+              </p>
+              </div>
+
+              <div className="popOverTopRight">
+              {
+                (item.backgroundImg)?
+                <img
+
+                src = {item.backgroundImg}
+                className = 'popoverPic'
+                 />
+                 :
+                 <div></div>
+              }
+
+              </div>
+            </div>
 
             {/* if person is host*
               item.host
@@ -395,9 +403,7 @@ class CalendarPopOver extends React.Component{
 
                 (item.invited.length==0 && item.host.id==this.props.id)?
 
-                <span style={{float:'right',
-                  marginTop:'-25px', marginRight:'25px'}}>
-
+                <div class="popOverBotFlex">
                   <Tooltip placement="bottomLeft" title="View event">
                     <Button
                     onClick = {() => this.onEventPage(item.id)}
@@ -417,16 +423,16 @@ class CalendarPopOver extends React.Component{
                        <i class="fas fa-times"></i>
                     </Button>
                   </Tooltip>
-                </span>
+                </div>
 
                 :
 
                 <div>
-                  <Divider style={{marginTop:'-5px', marginBottom:'-1px'}}/>
+                  <div class="popOverDivider"></div>
 
-                  <div style={{marginTop:'50px'}} class="outerContainerPeople">
-
-                    <div class="innerContainerPeople hostNameAva" style={{display:'inline-block', padding:'10px'}}>
+                  <div class="popOverMidFlex">
+                    <div class="popOverMidLeft">
+                      <div class="popOverHost">
 
                       <Avatar
                         shape="circle"
@@ -437,7 +443,7 @@ class CalendarPopOver extends React.Component{
                      {
 
                          (item.host.username==this.props.username)?
-                           <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', color:'black', display:'inline-block'}}
+                           <p class="highlightWord"
                              onClick = {() => this.onProfileClick(item.host.username)}
                            >
 
@@ -457,7 +463,8 @@ class CalendarPopOver extends React.Component{
 
 
                     </div>
-                    <div class="innerContainerPeople" style={{display:'inline-block', width:'40%'}}>
+                    </div>
+                    <div class="popOverMidRight" style={{display:'inline-block', width:'40%'}}>
                      <div class="weekCalPopOverStat">
                        <div class="weekCalPopOverFirst">
                          <Statistic title="Going" value={item.person.length} />
@@ -472,8 +479,8 @@ class CalendarPopOver extends React.Component{
                   <div>
 
 
-                    <Avatar.Group>
-                      <div style={{float:'right', marginRight:'50px'}}>
+                    <div class="popOverBotFlex">
+                      <div class="popOverBotLeft">
 
                         {/* user is host or user accepted */}
                         {
@@ -481,7 +488,7 @@ class CalendarPopOver extends React.Component{
 
                           ||(item.host.username==this.props.username))
                           ?
-                          <div style={{marginRight:'100px', marginTop:'-10px'}}>
+                          <div>
                             <Tooltip placement="bottomLeft" title="View event">
                               <Button
                               onClick = {() => this.onEventPage(item.id)}
@@ -503,7 +510,7 @@ class CalendarPopOver extends React.Component{
                             </Tooltip>
                           </div>
                           :
-                          <div style={{marginRight:'50px', marginTop:'-10px'}}>
+                          <div>
                             <Tooltip placement="bottomLeft" title="View event">
                               <Button
                               onClick = {() => this.onEventPage(item.id)}
@@ -552,9 +559,10 @@ class CalendarPopOver extends React.Component{
 
                           }
                       </div>
-                      <Liking num={5} like_people={item.accepted}/>
-                    </Avatar.Group>
-
+                      <div class="popOverBotRight">
+                        <Liking num={5} like_people={item.accepted}/>
+                      </div>
+                    </div>
 
                   </div>
                 </div>
