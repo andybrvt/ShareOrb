@@ -53,7 +53,6 @@
 /* CSS FOR THE PICTURE SIDE OF THE SOICAL CAL CELL MODAL */
 .socialModalLeft{
   position: relative;
-  background-color: red;
   width: 70%;
   height: 100%;
 }
@@ -68,6 +67,14 @@
   height:100%;
   overflow: hidden;
   position: relative;
+}
+
+.singlePicHolder .singlePic .picture{
+  /* width: 100%; */
+  position: relative;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .singlePicHolder .singlePic .backgroundPic {
@@ -94,86 +101,108 @@
   position: relative;
   overflow: hidden;
   height: 100%;
-  width: 85%;
+  width: 80%;
   background-color: white;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
   /* box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24); */
   /* border-radius: 10px; */
   z-index: 10;
+  display: flex;
+  flex-direction: column;
 }
 
 .ownerHolder{
   font-size: 18px;
-}
-.singlePicHolder .singlePic .clipPicturesRoll .ownerHolder .ownerName{
+  height: 15%;
   position: relative;
-  left: 10%;
-  font-weight: 500;
 }
-
-.singlePicHolder .singlePic .clipPicturesRoll .polaroidHolder{
+.ownerHolder .ownerHolderHolder{
   position: relative;
-  object-fit: cover;
+  display: flex;
+  flex-direction: row;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 3%;
+}
+.ownerHolder .ownerHolderHolder .ownerName{
+  position: relative;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.ownerHolder .ownerHolderHolder .ownerName .headerPostName{
+  font-size: 20px;
+  color: black;
+}
+.ownerHolder .ownerHolderHolder .ownerName .headerPostText{
+  font-size: 13px;
+  color: gray;
+}
+.ownerHolder .ownerHolderHolder .ownerAvatar{
 
+}
+.polaroidHolder{
+  position: relative;
+
+  height: 85%;
+
+}
+.polaroidHolder .polaroidHolderHolder{
+  position: relative;
+  overflow: hidden;
   left: 50%;
-  top: 15%;
+  width: 100%;
+  height: 100%;
   transform: translateX(-50%);
   /* border: 1px solid gray; */
-  height: 80%;
-  overflow: hidden;
-  width: 85%;
+}
+
+.polaroidHolder .polaroidHolderHolder .socialImages{
+  position: relative;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.socialModalLeft .socialCarouselZero {
+  position: relative;
+  width: 100%;
+  height: 100%;
   /* background-color: red; */
+  border: 10px dashed gainsboro;
+  text-align: center;
 }
-.singlePicHolder .singlePic .clipPicturesRoll .polaroidHolder .socialImages{
+
+.socialModalLeft .socialCarouselZero .pictureFrame{
+  /* background-color: red; */
   position: relative;
+  top: 40%;
   height: 100%;
-  left: 50%;
-  transform: translateX(-50%)
+  font-size: 55px;
+  color: gainsboro;
 }
 
-
-
-
-
-/* CSS FOR THE TEXT AND COMMENT SIDE OF THE SOCIAL CAL CELL MODAL */
-.socialModalRight {
+.socialModalLeft .socialCarousel{
   position: relative;
+  width: 100%;
   height: 100%;
-  width: 30%;
 }
 
-
-
-
-
-
-
-.singlePicHolder .singlePic .picture{
-  /* width: 100%; */
-  position: relative;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* CSS FOR THE PICTUREE CAROUSEL */
 .socialLeftRight{
-  /* display: flex; */
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
+
+
 .socialLeftRight .socialArrowLeft {
   position: absolute;
   /* background-color: red; */
@@ -188,11 +217,39 @@
   /* background-color: red; */
   bottom: 50%;
   transform: translateY(50%);
-  left: 67%;
+  right: 0%;
   /* right: 100%; */
   z-index: 3;
   font-size: 45px;
 }
+
+.clipPicBackground .threeDot{
+  position: absolute;
+  right: 0%;
+  color: white;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.picturesRoll .threeDot{
+  position: absolute;
+  right:0%;
+  z-index: 100;
+  color:white;
+}
+
+
+
+
+
+/* CSS FOR THE TEXT AND COMMENT SIDE OF THE SOCIAL CAL CELL MODAL */
+.socialModalRight {
+  position: relative;
+  height: 100%;
+  width: 30%;
+}
+
+
 
 
 .socialModalRight .dayCaption{
@@ -657,26 +714,6 @@
 
 }
 
-.socialHolder .socialCarousel{
-  width: 70%;
-  height: 100%;
-}
-
-.socialHolder .socialCarouselZero {
-  width: 70%;
-  /* background-color: red; */
-  border: 10px dashed gainsboro;
-  text-align: center;
-}
-
-.socialHolder .socialCarouselZero .pictureFrame{
-  /* background-color: red; */
-  position: relative;
-  top: 40%;
-  font-size: 55px;
-  color: gainsboro;
-}
-
 .socialHolder .socialCarouselSingle{
   width: 70%;
   height: 920px;
@@ -701,12 +738,7 @@
   height: 920px;
   position: relative;
 }
-.picturesRoll .threeDot{
-  position: absolute;
-  right:0%;
-  z-index: 100;
-  color:white;
-}
+
 
 .clipPicBackground {
   overflow: hidden;
@@ -716,13 +748,7 @@
   position: relative;
 }
 
-.clipPicBackground .threeDot{
-  position: absolute;
-  right: 0%;
-  color: white;
-  cursor: pointer;
-  z-index: 100;
-}
+
 
 .clipPicBackground .backgroundPic {
   position: absolute;

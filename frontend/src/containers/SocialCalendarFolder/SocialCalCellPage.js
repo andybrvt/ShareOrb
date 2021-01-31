@@ -761,7 +761,7 @@ class SocialCalCellPage extends React.Component{
                   <div className = 'singlePic'>
                     <img
                     className = "backgroundPic"
-                    src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
+                    src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage}
                      />
 
                      {this.threeDotDropDown()}
@@ -770,29 +770,40 @@ class SocialCalCellPage extends React.Component{
                   <div className = "clipPicturesRoll">
 
                       <div className = "ownerHolder">
-                          <Avatar
-                            size = {42.5}
-                            src = {`${global.API_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
-                          />
+
+                        <div className = "ownerHolderHolder">
+                          <div className = "ownerAvatar">
+                            <Avatar
+                              size = {50}
+                              src = {`${global.IMAGE_ENDPOINT}` +socialCalItems[0].creator.profile_picture}
+                            />
+                          </div>
+
                           <div className = "ownerName">
-                            <div>{this.getChatUserName(socialCalItems[0])} </div>
+                            <div className = "headerPostName">{this.getChatUserName(socialCalItems[0])} </div>
                             <div class="headerPostText"> @{socialCalItems[0].creator.username} </div>
 
                           </div>
+
+                        </div>
+
                       </div>
 
                       <div className = "polaroidHolder">
-                       <img
-                       className = "socialImages"
-                       src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage}
-                        />
+
+                        <div className = "polaroidHolderHolder">
+                          <img
+                          className = "socialImages"
+                          src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage}
+                           />
+
+                        </div>
+
+
                       </div>
 
                   </div>
-
-
-
-                  </div>
+                </div>
 
                   :
 
@@ -800,7 +811,7 @@ class SocialCalCellPage extends React.Component{
                  {this.threeDotDropDown()}
                     <img
                     className ="picture"
-                    src = {`${global.API_ENDPOINT}`+ socialCalItems[0].itemImage} />
+                    src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage} />
                   </div>
 
                  }
@@ -812,7 +823,7 @@ class SocialCalCellPage extends React.Component{
                 <div className = 'pictureFrame'>
                   <PictureOutlined  />
                   <br />
-                  <span> No posts </span>
+                  <div> No posts </div>
                 </div>
                 </div>
 
