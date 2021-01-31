@@ -107,40 +107,51 @@ class PictureCarousel extends React.Component{
           if(item.socialItemType === "clip"){
             socialItems.push(
 
-              <div className = "clipPicBackground">
+            <div className = "clipPicBackground">
               {this.threeDotDropDown()}
-              <img
-              className = 'backgroundPic'
-              src ={`${global.API_ENDPOINT}`+item.itemImage} />
 
-              <div className = 'clipPicturesRoll'>
+                <img
+                className = 'backgroundPic'
+                src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
 
-                <div className = "ownerHolder">
-                  <Avatar
-                  src = {`${global.API_ENDPOINT}`+item.creator.profile_picture}
-                  size = {65}/>
-                  <div className = "ownerName">
-                    <div> {this.getChatUserName(item)} </div>
-                    <div> @{item.creator.username} </div>
-                  </div>
-                </div>
-                    <div className = "polaroidHolder">
-                    <img
-                    className = 'socialImages'
-                    src ={`${global.API_ENDPOINT}`+item.itemImage} />
+
+                <div className = 'clipPicturesRoll'>
+
+                      <div className = "ownerHolder">
+
+                        <div className = "ownerHolderHolder">
+                          <div className ="ownerAvatar">
+                            <Avatar
+                            src = {`${global.IMAGE_ENDPOINT}`+item.creator.profile_picture}
+                            size = {50}/>
+                          </div>
+
+                          <div className = "ownerName">
+                            <div className = "headerPostName"> {this.getChatUserName(item)} </div>
+                            <div className = "headerPostText"> @{item.creator.username} </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div className = "polaroidHolder">
+
+                        <div className = "polaroidHolderHolder">
+                          <img
+                          className = 'socialImages'
+                          src ={`${global.IMAGE_ENDPOINT}`+item.itemImage}
+                          />
+                        </div>
+
+                      </div>
                     </div>
-              </div>
-
-
-
-              </div>
+            </div>
             )
           }
           if(item.socialItemType === "picture"){
             socialItems.push(
               <div className = 'picturesRoll'>
               {this.threeDotDropDown()}
-
 
                 <img
                 className = 'socialImages'
@@ -190,6 +201,8 @@ class PictureCarousel extends React.Component{
         afterChange={this.onChange}>
           {this.renderPictures(itemList)}
         </Carousel>
+
+
         <RightCircleOutlined
         className = 'socialArrowRight'
         onClick = {this.next} />

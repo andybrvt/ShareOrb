@@ -782,7 +782,6 @@ class SocialCalCellPage extends React.Component{
                           <div className = "ownerName">
                             <div className = "headerPostName">{this.getChatUserName(socialCalItems[0])} </div>
                             <div class="headerPostText"> @{socialCalItems[0].creator.username} </div>
-
                           </div>
 
                         </div>
