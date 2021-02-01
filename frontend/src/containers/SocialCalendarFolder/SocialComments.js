@@ -36,6 +36,15 @@ class SocialComments extends React.Component{
   // }
 
 
+  nameShortener = (firstName, lastName) => {
+    let name = firstName+ " " +lastName
+    if(name.length > 30){
+      name = name.substring(0,30)+'...'
+    }
+
+    return name
+  }
+
 
   componentWillReceiveProps = (newProps) => {
     console.log(newProps)
@@ -64,6 +73,8 @@ class SocialComments extends React.Component{
   }
 
 
+
+
   render() {
     console.log(this.props)
     console.log(this.state)
@@ -79,23 +90,30 @@ class SocialComments extends React.Component{
 
             <div className = 'socialCommentItem'>
 
-            <div className = 'socialCommentNameTag'>
-              <Avatar size = {40} src = {`${global.API_ENDPOINT}`+item.commentUser.profile_picture} />
-              <div className = 'socialCommentName'>
-                <div className = 'socialCommentUsername'>
-                <b>{this.capitalize(item.commentUser.first_name)} {this.capitalize(item.commentUser.last_name)} </b>
-                </div>
-                <div className = 'socialCommentDate'>
-                {this.renderTimestamp(new Date(item.created_on))}
-                </div>
-
-
+              <div className = 'socialCommentDate'>
+              {this.renderTimestamp(new Date(item.created_on))}
               </div>
-            </div>
 
-            <div className = 'socialCommentText'>
-            {item.body}
-            </div>
+              <div className = "socialCommentAvatarSect">
+                <Avatar size = {40} src = {`${global.API_ENDPOINT}`+item.commentUser.profile_picture} />
+              </div>
+
+              <div className = 'socialCommentTextSect'>
+                <div className = "socialCommentNameTime">
+                    <div className = 'socialCommentUsername'>
+                    <b>
+                        {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                    </b>
+                    </div>
+                </div>
+
+                <div className = "socialCommentBody">
+                  <div className = 'socialCommentText'>
+                  {item.body}
+                  </div>
+                </div>
+              </div>
+
 
             </div>
         )}

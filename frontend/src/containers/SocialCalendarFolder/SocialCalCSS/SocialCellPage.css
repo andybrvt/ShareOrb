@@ -546,21 +546,141 @@
 
 
 
-
+/* This is to hold the comment section */
 .socialModalRight .bottomSection .socialCommentListSect{
   height: 59%;
-  background-color: pink;
+}
+.socialCommentListSect .socialCommentBoxBox{
+  position: relative;
+  height: 100%;
+  /* max-height: 55%; */
+  width: 100%;
+  overflow:hidden;
+  /* display: flex; */
+  /* background-color: red; */
+}
+.socialCommentListSect .socialCommentBoxBox .socialCommentBox {
+  /* background-color: blue  ; */
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  overflow:auto;
+  /* width: 50%; */
+}
+.socialCommentItem {
+  margin-top: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+}
+.socialCommentItem .socialCommentAvatarSect{
+
+}
+.socialCommentItem .socialCommentTextSect{
+  width: 70%;
+  margin-left: 5px;
+}
+.socialCommentItem .socialCommentTextSect .socialCommentNameTime{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.socialCommentNameTime .socialCommentUsername{
+  position: relative;
+  left: 0;
+
+}
+.socialCommentItem .socialCommentDate{
+  /* background-color: red; */
+  position: absolute;
+  right: 6%;
+  font-size: 10px;
+  /* top: 10%; */
+
+}
+.socialCommentItem .socialCommentBody{
+  color: black;
+}
+
+.socialCommentItem .socialCommentBody .socialCommentText{
+  /* background-color: red; */
+  position: relative;
+  /* top: 50%; */
+
 }
 
 .socialModalRight .bottomSection .socialCommentInputSect{
   height: 8%;
-  background-color: orange;
+}
+
+.socialCommentInputSect .socialCommentInput{
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.socialCommentInputSect .socialCommentInput .socialInputFormHolder{
+  position: relative;
+  width: 88%;
+}
+.socialCommentInputSect .socialCommentInput .socialInputFormHolder .socialInputForm{
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+
 }
 
 .socialModalRight .bottomSection .socialEventSect{
   height: 27%;
   background-color: yellow;
 }
+.socialEventSect .socialListBox{
+  /* background-color: red; */
+  padding: 15px;
+  margin-top: 0px;
+  border: 1px solid gainsboro;
+  /* height: 25.5%; */
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position:relative;
+  /* bottom: 3%; */
+}
+
+.socialEventSect .socialListBox .socialListItem{
+  /* background-color: red; */
+  margin: 3px;
+  padding-left: 15px;
+  /* padding-top: 10px; */
+  height: 140px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}
+
+.socialListItemText{
+  /* background-color: red; */
+  position: relative;
+  bottom: 0px;
+}
+.socialEventTitleContainer {
+  /* position: absolute; */
+  /* background-color: red; */
+  display: flex;
+  /* margin-top: 10px; */
+}
+.socialEventTitle{
+ /* background-color: red; */
+ font-size:  25px;
+}
+
 
 
 
@@ -579,75 +699,8 @@
   /* display: flex; */
   /* padding-top: 10px; */
 }
-.commentEventHolder .socialListBox{
-  /* background-color: red; */
-  padding: 15px;
-  margin-top: 0px;
-  border: 1px solid gainsboro;
-  /* height: 25.5%; */
-  max-height: 25.5%;
-  width: 100%;
-  overflow: auto;
-  position:relative;
-  /* bottom: 3%; */
-}
 
-.commentEventHolder .socialListBox .socialListItem{
-  /* background-color: red; */
-  margin: 3px;
-  padding-left: 15px;
-  /* padding-top: 10px; */
-  height: 140px;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
-}
-.commentEventHolder .socialCommentBoxBox{
-  position: relative;
-  height: 55%;
-  /* max-height: 55%; */
-  width: 100%;
-  overflow:hidden;
-  /* display: flex; */
-  /* background-color: red; */
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox {
-  /* background-color: blue  ; */
-  height: 100%;
-  width: 100%;
-  padding-left: 20px;
-  overflow:auto;
-  /* width: 50%; */
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem {
-  /* background-color: red; */
-
-  margin-top: 10px;
-  padding: 5px;
-}
-.commentEventHolder .socialCommentInput{
-  /* background-color: red; */
-  display: flex;
-  position: relative;
-  left: 0%;
-  bottom: 0%;
-  padding-left: 10px;
-  /* margin-left: 3%; */
-  width: 100%;
-}
-.commentEventHolder .socialCommentInput .socialInputForm{
-  width: 80%;
-  position: relative;
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag{
-  /* background-color: red; */
-  display: flex;
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
-  display: flex;
-  margin-left: 10px;
-}
 
 
 
@@ -678,18 +731,9 @@
     font-size: 12x;
     font-family: "Segoe UI Regular";
 }
-.socialListItemText{
-  /* background-color: red; */
-  position: relative;
-  bottom: 0px;
-}
 
-.socialEventTitleContainer {
-  /* position: absolute; */
-  /* background-color: red; */
-  display: flex;
-  /* margin-top: 10px; */
-}
+
+
 
 .socialEventClock{
   height: 12px;
@@ -720,10 +764,7 @@
   margin-right: 3px;
 }
 
- .socialEventTitle{
-  /* background-color: red; */
-  font-size:  25px;
-}
+
 
 
 .socialBoxInput{
@@ -740,30 +781,6 @@
   padding-bottom: 5px;
 }
 
-
-.socialCommentUsername{
-  font-weight: 400;
-}
-
-.socialCommentDate{
-  /* background-color: red; */
-  position: absolute;
-  left: 80%;
-  /* top: 10%; */
-  height: 20px;
-  font-size: 10px;
-  padding-top: 5px;
-  margin-left: 4px;
-}
-
-.socialCommentText{
-  /* background-color: red; */
-  position: relative;
-  width: 300px;
-  /* top: 50%; */
-  left: 12%;
-  top: -20px;
-}
 
 .joinEventButton {
   background-color: limegreen;

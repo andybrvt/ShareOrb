@@ -1090,74 +1090,76 @@ class SocialCalCellPage extends React.Component{
 
 
                  <div className = "socialCommentListSect">
-                   Hey
-                 </div>
-
-
-                <div className = "socialCommentInputSect">
-                  Hey
-                 </div>
-
-
-                 <div className = "socialEventSect">
-                   Hey
-                 </div>
-
-
-               </div>
-
-
-               {/*
-
-
-
-
-
-                 <div
-                 style = {{
-                   height: this.heightCal(dayCaption.length)
-                 }}
-                 className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
                    <SocialComments
                    currentDate = {curDate}
                    curUser = {this.props.curId}
                    owner = {socialCalUserId}
                    items = {socialCalComments}
                    />
-                   <div className = 'socialCommentInput'>
-                     <Avatar
-                     size = {40}
-                     className ='socialPicInput'
-                     src = {`${global.API_ENDPOINT}`+ this.props.curProfilePic}/>
-                     <Form className = "socialInputForm">
-                       <Input
-                       className= 'socialBoxInput'
-                       onChange ={this.onCommentChange}
-                       value = {this.state.comment}
-                       // bordered = {false}
-                       placeholder = 'Write a comment'
-                       name = 'socialComment'
-                       onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
-                       // rows = {1}
-                        />
+                 </div>
 
-                       <button
-                       // type = 'submit'
-                       // onClick = {this.handleSubmit}
-                       style = {{display: 'none'}}
-                       />
-                     </Form>
-                   </div>
+
+                <div className = "socialCommentInputSect">
+                  <div className = 'socialCommentInput'>
+                    <Avatar
+                    size = {40}
+                    className ='socialPicInput'
+                    src = {`${global.API_ENDPOINT}`+ this.props.curProfilePic}/>
+                  <div className = 'socialInputFormHolder'>
+                      <Form className = "socialInputForm">
+                        <Input
+                        className= 'socialBoxInput'
+                        onChange ={this.onCommentChange}
+                        value = {this.state.comment}
+                        // bordered = {false}
+                        placeholder = 'Write a comment'
+                        name = 'socialComment'
+                        onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
+                        // rows = {1}
+                         />
+
+                        <button
+                        // type = 'submit'
+                        // onClick = {this.handleSubmit}
+                        style = {{display: 'none'}}
+                        />
+                      </Form>
+                    </div>
+
+                  </div>
+                 </div>
+
+
+                 <div className = "socialEventSect">
                    <SocialEventList
                    history = {this.props.history}
                    curId = {this.props.curId}
                    socialCalCellId = {socialCalCellId}
                    cellDate = {socialCalDate}
                    items = {socialCalEvents}/>
+                 </div>
+
+
+               </div>
+
+               {/*
+                 <div
+                 style = {{
+                   height: this.heightCal(dayCaption.length)
+                 }}
+                 className = {`commentEventHolder ${dayCaption === ""  ? "" : "hasCaption"}`}>
+
+
+
+
+
                   </div>
 
-
                  */}
+
+
+
+
 
 
 
