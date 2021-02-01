@@ -378,20 +378,114 @@
 }
 .socialNameSect .socialDate .socialDateDate{
   position: relative;
-  top: 35%;
+  top: 32%;
   transform: translateY(-50%);
 }
 
 
-
+/* CSS for the caption and adding the caption */
+/* XXX come back for this */
 .socialCaptionSect{
-  background-color: yellow;
   height: 25%;
 }
+.socialCaptionSect .dayCaption{
+  position: relative;
+  width: 90%;
+  left: 50%;
+  transform:translateX(-50%);
+  /* height: 12.5%; */
+}
+.editCaptionPen {
+  color: lightgray;
+}
+.editCaptionPen:hover{
+  color: gray;
+  cursor: pointer;
+}
+.socialCaptionSect .dayCaption .textAreaHolder{
+  /* background-color: red; */
+  display: flex;
+  padding-right: 5%;
+}
+.socialCaptionSect .dayCaption .textAreaHolder .captionTextHolder{
+  width: 100%;
+}
+.socialCaptionSect .dayCaption .textAreaHolder .penIcon{
+  margin-left: 5px;
+  cursor: pointer;
+  color: lightgray;
+}
+.socialCaptionSect .dayCaption .textAreaHolder .penIcon:hover{
+  color: gray;
+  cursor: pointer;
+}
+.socialCaptionSect .dayCaption .writeCaptionText{
+  color: lightgray;
+  font-size: 15px;
+}
+.socialCaptionSect .dayCaption .writeCaptionText:hover{
+  color: gray;
+  cursor: pointer;
+}
+
+
+
+
 .socialLikingSect{
-  background-color: purple;
   height: 25%;
+  display: flex;
 }
+.socialLikingSect .socialLikeCommentNum{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 50%;
+    position: relative;
+}
+.socialLikeCommentNumHolder{
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  height: 50%;
+  position: relative;
+  left:50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.socialLikeCommentNumHolder .socialLikeCircle{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.socialLikeCommentNumHolder .socialLikeCommentText{
+  /* background-color: red; */
+
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  font-weight: 400;
+  color:black;
+}
+
+
+
+.socialLikingSect .socialLikingLiking{
+  width: 50%;
+  position: relative;
+}
+.socialLikingLiking .socialLikeAvatar{
+  position: relative;
+  width: 80%;
+  height:80%;
+  left:50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* padding-right: -10px; */
+}
+
+
 
 
 
@@ -400,84 +494,32 @@
   background-color: green;
   position: relative;
   height: 82%;
-
 }
 
-
-
-.socialModalRight .dayCaption{
-  /* background-color: red; */
-  position: relative;
-  padding-left: 5%;
-  /* height: 12.5%; */
+.socialModalRight .bottomSection .socialLikeCommentSect{
+  height: 6%;
+  background-color: blue;
 }
 
-
-.editCaptionPen {
-  color: lightgray;
-}
-.editCaptionPen:hover{
-  color: gray;
-  cursor: pointer;
+.socialModalRight .bottomSection .socialCommentListSect{
+  height: 59%;
+  background-color: pink;
 }
 
-.socialModalRight .dayCaption .textAreaHolder{
-  /* background-color: red; */
-  display: flex;
-  padding-right: 5%;
+.socialModalRight .bottomSection .socialCommentInputSect{
+  height: 8%;
+  background-color: orange;
 }
-.socialModalRight .dayCaption .textAreaHolder .captionTextHolder{
-  width: 100%;
+
+.socialModalRight .bottomSection .socialEventSect{
+  height: 27%;
+  background-color: yellow;
 }
-.socialModalRight .dayCaption .textAreaHolder .penIcon{
-  margin-left: 5px;
-  cursor: pointer;
-  color: lightgray;
-}
-.socialModalRight .dayCaption .textAreaHolder .penIcon:hover{
-  color: gray;
-  cursor: pointer;
-}
-.socialModalRight .dayCaption .writeCaptionText{
-  color: lightgray;
-  font-size: 15px;
-}
-.socialModalRight .dayCaption .writeCaptionText:hover{
-  color: gray;
-  cursor: pointer;
-}
-.socialLikeCommentNum{
-    /* background-color: red; */
-    display: flex;
-    height: 40px;
-    width: 100%;
-    position: relative;
-}
-.socialLikeCircle{
-  /* background-color: red; */
-  /* margin-left: 30px; */
-  position: relative;
-  left: 6%;
-  top: 8px;
-  height: 20px;
-}
-.socialLikeCommentNum .socialLikeCommentText{
-  /* background-color: red; */
-  margin-left: 7%;
-  position: relative;
-  width: 35%;
-  top: 8px;
-  height: 20px;
-  font-weight: 400;
-  color:black;
-}
-.socialLikeCommentNum .socialLikeAvatar{
-  /* background-color: blue; */
-  width: 10%;
-  position: relative;
-  left: 30%;
-  /* padding-right: -10px; */
-}
+
+
+
+
+
 .socialLikeComment{
   /* background-color: red; */
   display: flex;
