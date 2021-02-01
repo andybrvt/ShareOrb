@@ -100,10 +100,10 @@
 }
 
 .cellThreeDots{
-  position: relative;
+  /* position: relative;
   left: 60%;
   bottom: 10%;
-  font-size: 25px;
+  font-size: 25px; */
 }
 
 .postLikeCommentNum {

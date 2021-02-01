@@ -45,7 +45,7 @@
 
 @media screen and (max-width: 1200px){
   .socialCalCellModal{
-    width: 95%;
+    width: 100%;
   }
 }
 
@@ -293,8 +293,9 @@
   transform: translateX(-50%);
   /* display: none; */
   /* top: 50%; */
-
 }
+
+
 
 
 
@@ -305,8 +306,102 @@
   position: relative;
   height: 100%;
   width: 30%;
+  display: flex;
+  flex-direction: column;
 }
 
+.socialModalRight .cellThreeDots{
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  z-index: 100;
+  color: white;
+
+}
+/* CSS that is used to contain the name, avatar and date */
+.socialModalRight .topSection{
+  position: relative;
+  height: 18%;
+  display: flex;
+  flex-direction: column;
+}
+
+.socialNameSect{
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+}
+.socialNameSect .socialName{
+  position: relative;
+  width: 90%;
+}
+
+.socialNameSect .socialName .socialNameTag {
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.socialNameTag .socialProfileHolder{
+  width: 25%;
+}
+.socialNameTag .socialNameHolder{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.socialNameTag .socialProfileHolder .socialProfileImage {
+  position: relative;
+  /* top: 20%; */
+}
+.socialNameTag .socialNameHolder .socialNameName{
+  height: 50%;
+  font-size: 15px;
+  color: black;
+}
+.socialNameTag .socialNameHolder .socialUsername{
+  height: 50%;
+  color: gray;
+}
+
+.socialNameSect .socialDate{
+  position: relative;
+  width: 50%;
+  text-align: center;
+  color: black;
+}
+.socialNameSect .socialDate .socialDateDate{
+  position: relative;
+  top: 35%;
+  transform: translateY(-50%);
+}
+
+
+
+.socialCaptionSect{
+  background-color: yellow;
+  height: 25%;
+}
+.socialLikingSect{
+  background-color: purple;
+  height: 25%;
+}
+
+
+
+
+.socialModalRight .bottomSection{
+  background-color: green;
+  position: relative;
+  height: 82%;
+
+}
 
 
 
@@ -317,35 +412,6 @@
   /* height: 12.5%; */
 }
 
-.socialModalRight .dayCaption .textAreaHolder{
-  /* background-color: red; */
-  display: flex;
-  padding-right: 5%;
-}
-
-.socialModalRight .dayCaption .textAreaHolder .captionTextHolder{
-  width: 100%;
-}
-
-.socialModalRight .dayCaption .textAreaHolder .penIcon{
-  margin-left: 5px;
-  cursor: pointer;
-  color: lightgray;
-}
-.socialModalRight .dayCaption .textAreaHolder .penIcon:hover{
-  color: gray;
-  cursor: pointer;
-}
-
-
-.socialModalRight .dayCaption .writeCaptionText{
-  color: lightgray;
-  font-size: 15px;
-}
-.socialModalRight .dayCaption .writeCaptionText:hover{
-  color: gray;
-  cursor: pointer;
-}
 
 .editCaptionPen {
   color: lightgray;
@@ -355,90 +421,31 @@
   cursor: pointer;
 }
 
-
-.socialModalRight .socialNameTag {
+.socialModalRight .dayCaption .textAreaHolder{
   /* background-color: red; */
-  height: 9%;
-  width: 100%;
   display: flex;
-  padding: 20px;
-  position: relative;
+  padding-right: 5%;
 }
-
-.socialModalRight .socialNameTag .socialModalDate{
-  /* background-color: red; */
-  text-align: center;
-  color:black;
-  font-weight: 500;
+.socialModalRight .dayCaption .textAreaHolder .captionTextHolder{
+  width: 100%;
+}
+.socialModalRight .dayCaption .textAreaHolder .penIcon{
+  margin-left: 5px;
+  cursor: pointer;
+  color: lightgray;
+}
+.socialModalRight .dayCaption .textAreaHolder .penIcon:hover{
+  color: gray;
+  cursor: pointer;
+}
+.socialModalRight .dayCaption .writeCaptionText{
+  color: lightgray;
   font-size: 15px;
-  position:relative;
-  width: 40%;
-  top: 7px;
-  left: 15%;
 }
-
-.socialModalRight .socialNameTag .cellThreeDots{
-  /* background-color: red; */
-  position: relative;
-  left: 16%;
-  bottom: 30%;
+.socialModalRight .dayCaption .writeCaptionText:hover{
+  color: gray;
+  cursor: pointer;
 }
-
-
-.postUsername{
-    /* background-color: red; */
-    color:black;
-    font-weight: 500;
-    font-size: 12x;
-    font-family: "Segoe UI Regular";
-}
-
-.socialModalRight .socialNameTag .socialProfileImage {
-  position: relative;
-  margin-right: 10px;
-  /* top: 20%; */
-}
-
-.socialModalRight .socialNameTag .socialName {
-  /* background-color: red; */
-  position: relative;
-  width: 100%;
-  left: 0%;
-  top: 0%;
-  font-size: 20px;
-  margin-left: 10px;
-  color:black;
-  font-weight: 500;
-  font-family: "Segoe UI Regular";
-}
-
-
-
-.commentEventHolder .socialListBox{
-  /* background-color: red; */
-  padding: 15px;
-  margin-top: 0px;
-  border: 1px solid gainsboro;
-  /* height: 25.5%; */
-  max-height: 25.5%;
-  width: 100%;
-  overflow: auto;
-  position:relative;
-  /* bottom: 3%; */
-}
-
-.commentEventHolder .socialListBox .socialListItem{
-  /* background-color: red; */
-  margin: 3px;
-  padding-left: 15px;
-  /* padding-top: 10px; */
-  height: 140px;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
-}
-
 .socialLikeCommentNum{
     /* background-color: red; */
     display: flex;
@@ -503,8 +510,117 @@
   background-color: gainsboro;
 }
 
+.commentEventHolder{
+  /* position: sticky; */
+  position: relative;
+  height: 99%;
+  width: 100%;
+  /* float: bottom; */
+  bottom: 0%;
+  /* top: 81%; */
+  /* transform: translateY(-100%); */
+  /* display: flex; */
+  /* padding-top: 10px; */
+}
+.commentEventHolder .socialListBox{
+  /* background-color: red; */
+  padding: 15px;
+  margin-top: 0px;
+  border: 1px solid gainsboro;
+  /* height: 25.5%; */
+  max-height: 25.5%;
+  width: 100%;
+  overflow: auto;
+  position:relative;
+  /* bottom: 3%; */
+}
+
+.commentEventHolder .socialListBox .socialListItem{
+  /* background-color: red; */
+  margin: 3px;
+  padding-left: 15px;
+  /* padding-top: 10px; */
+  height: 140px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+}
+.commentEventHolder .socialCommentBoxBox{
+  position: relative;
+  height: 55%;
+  /* max-height: 55%; */
+  width: 100%;
+  overflow:hidden;
+  /* display: flex; */
+  /* background-color: red; */
+}
+.commentEventHolder .socialCommentBoxBox .socialCommentBox {
+  /* background-color: blue  ; */
+  height: 100%;
+  width: 100%;
+  padding-left: 20px;
+  overflow:auto;
+  /* width: 50%; */
+}
+.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem {
+  /* background-color: red; */
+
+  margin-top: 10px;
+  padding: 5px;
+}
+.commentEventHolder .socialCommentInput{
+  /* background-color: red; */
+  display: flex;
+  position: relative;
+  left: 0%;
+  bottom: 0%;
+  padding-left: 10px;
+  /* margin-left: 3%; */
+  width: 100%;
+}
+.commentEventHolder .socialCommentInput .socialInputForm{
+  width: 80%;
+  position: relative;
+}
+.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag{
+  /* background-color: red; */
+  display: flex;
+}
+.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
+  display: flex;
+  margin-left: 10px;
+}
 
 
+
+
+
+
+
+
+
+
+
+.socialModalRight .socialNameTag .socialModalDate{
+  /* background-color: red; */
+  text-align: center;
+  color:black;
+  font-weight: 500;
+  font-size: 15px;
+  position:relative;
+  width: 40%;
+  top: 7px;
+  left: 15%;
+}
+
+.postUsername{
+    /* background-color: red; */
+    color:black;
+    font-weight: 500;
+    font-size: 12x;
+    font-family: "Segoe UI Regular";
+}
 .socialListItemText{
   /* background-color: red; */
   position: relative;
@@ -552,60 +668,6 @@
   font-size:  25px;
 }
 
-.commentEventHolder{
-  /* position: sticky; */
-  position: relative;
-  height: 99%;
-  width: 100%;
-  /* float: bottom; */
-  bottom: 0%;
-  /* top: 81%; */
-  /* transform: translateY(-100%); */
-  /* display: flex; */
-  /* padding-top: 10px; */
-}
-/* .commentEventHolder.hasCaption{
-  height: 81%;
-} */
-
-.commentEventHolder .socialCommentBoxBox{
-  position: relative;
-  height: 55%;
-  /* max-height: 55%; */
-  width: 100%;
-  overflow:hidden;
-  /* display: flex; */
-  /* background-color: red; */
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox {
-  /* background-color: blue  ; */
-  height: 100%;
-  width: 100%;
-  padding-left: 20px;
-  overflow:auto;
-  /* width: 50%; */
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem {
-  /* background-color: red; */
-
-  margin-top: 10px;
-  padding: 5px;
-}
-.commentEventHolder .socialCommentInput{
-  /* background-color: red; */
-  display: flex;
-  position: relative;
-  left: 0%;
-  bottom: 0%;
-  padding-left: 10px;
-  /* margin-left: 3%; */
-  width: 100%;
-}
-.commentEventHolder .socialCommentInput .socialInputForm{
-  width: 80%;
-  position: relative;
-}
-
 
 .socialBoxInput{
   width: 100%;
@@ -620,14 +682,7 @@
   padding-left: 10px;
   padding-bottom: 5px;
 }
-.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag{
-  /* background-color: red; */
-  display: flex;
-}
-.commentEventHolder .socialCommentBoxBox .socialCommentBox .socialCommentItem .socialCommentNameTag .socialCommentName{
-  display: flex;
-  margin-left: 10px;
-}
+
 
 .socialCommentUsername{
   font-weight: 400;
@@ -652,8 +707,6 @@
   left: 12%;
   top: -20px;
 }
-
-
 
 .joinEventButton {
   background-color: limegreen;

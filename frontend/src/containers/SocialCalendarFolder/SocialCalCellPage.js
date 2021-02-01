@@ -237,6 +237,9 @@ class SocialCalCellPage extends React.Component{
 
     }
 
+    if(name.length > 20){
+      name = name.substring(0,20)+'...'
+    }
 
 
     console.log(name)
@@ -587,8 +590,8 @@ class SocialCalCellPage extends React.Component{
             <Menu.Item danger
             onClick = {this.openDeleteCellModal}
              >
-              <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-              <span style={{marginLeft:'10px'}}>Delete day</span>
+              <i class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+              <span style={{marginLeft:'5px'}}>Delete day</span>
             </Menu.Item>
           </Menu>
         }>
@@ -840,29 +843,69 @@ class SocialCalCellPage extends React.Component{
 
 
              <div className = 'socialModalRight'>
-               Hi
+               { socialCalUserId === this.props.curId ?
+                 this.cellThreeDots()
+
+                 :
+
+                 <div> </div>
+
+               }
+               <div className = "topSection">
+                 <div className = 'socialNameSect'>
+
+                   <div className = "socialName">
+                     <div className = 'socialNameTag'>
+
+                      <div className = "socialProfileHolder">
+                        <Avatar
+                          size = {50}
+                          src = {socialCalProfilePic}
+                          className = 'socialProfileImage'/>
+                      </div>
+
+                     <div className = "socialNameHolder">
+                       <div className = 'socialNameName'>{this.getPageName(socialUser)} </div>
+                       <div className = 'socialUsername'>@{socialCalUsername}</div>
+                     </div>
+
+                     </div>
+                   </div>
+
+                   <div className = "socialDate">
+                     <div className ="socialDateDate">
+                       {this.dateView(socialCalDate)}
+                     </div>
+                   </div>
+
+
+                 </div>
+
+                 <div className = "socialCaptionSect">
+                   Hi
+                 </div>
+
+
+
+                 <div className = "socialLikingSect">
+                   Hi
+                 </div>
+
+
+
+
+
+               </div>
+
+
+               <div className = "bottomSection">
+                 hellow
+               </div>
+
+
                {/*
-                 <div className = 'socialNameTag'>
-
-                 <Avatar size = {50} src = {socialCalProfilePic} className = 'socialProfileImage'/>
-                 <div>
-                   <div className = 'socialName'>{this.getPageName(socialUser)} </div>
-                   <div className = 'socialNameUsername'><b> @{socialCalUsername}</b></div>
-                 </div>
-
-                 {this.dateView(socialCalDate)}
 
 
-                 { socialCalUserId === this.props.curId ?
-                   this.cellThreeDots()
-
-                   :
-
-                   <div> </div>
-
-                 }
-
-                 </div>
                  {
                    this.props.curId === socialCalUserId ?
 
@@ -1066,7 +1109,11 @@ class SocialCalCellPage extends React.Component{
                    items = {socialCalEvents}/>
                   </div>
 
+
                  */}
+
+
+
 
 
 
