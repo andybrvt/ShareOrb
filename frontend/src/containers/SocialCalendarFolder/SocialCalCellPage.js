@@ -981,13 +981,13 @@ class SocialCalCellPage extends React.Component{
 
 
                       <div className = 'socialLikeCommentText'>
-                        <div>
-                          {people_like.length} Likes
+                        <div >
+                          {people_like.length} <span className = "disappearLikes"> Likes</span>
                         </div>
 
                         <Divider type="vertical" style={{height:'100%'}}/>
                         <div>
-                          {socialCalComments.length} Comments
+                          {socialCalComments.length} <span className = 'disappearComments'> Comments </span>
                         </div>
 
                      </div>
@@ -1011,8 +1011,8 @@ class SocialCalCellPage extends React.Component{
                <div className = "bottomSection">
 
                  <div className = "socialLikeCommentSect">
-                   Hye
-                   {/*
+
+
                      <div className = 'socialLikeComment'>
 
                      {
@@ -1021,11 +1021,15 @@ class SocialCalCellPage extends React.Component{
                        <div
                        onClick = {() => this.onSocialUnLike(this.props.curId, socialCalUserId)}
                        className ='socialLike'>
-                       <i
-                         style={{ marginRight:'10px', color:'red'}}
-                         class="fa fa-heart">
-                       </i>
-                       Unlike
+                        <div className = "textHeightCenter">
+                          <i
+                            style={{ marginRight:'10px', color:'red'}}
+                            class="fa fa-heart">
+                          </i>
+                          Unlike
+                        </div>
+
+
                        </div>
 
                        :
@@ -1033,11 +1037,15 @@ class SocialCalCellPage extends React.Component{
                        <div
                        onClick = {() => this.onSocialLike(this.props.curId, socialCalUserId)}
                        className ='socialLike'>
-                       <i
-                         style={{ marginRight:'10px'}}
-                         class="fa fa-heart">
-                       </i>
-                       Like
+
+                       <div className = 'textHeightCenter'>
+                         <i
+                           style={{ marginRight:'10px'}}
+                           class="fa fa-heart">
+                         </i>
+                         Like
+                       </div>
+
                        </div>
 
 
@@ -1045,8 +1053,10 @@ class SocialCalCellPage extends React.Component{
                      }
 
                        <div className  = 'socialComment'>
-                       <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-                        Comment
+                        <div className = 'textHeightCenter'>
+                          <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
+                           Comment
+                        </div>
                         </div>
 
                         {
@@ -1059,10 +1069,13 @@ class SocialCalCellPage extends React.Component{
                           <div
                           onClick = {() => this.onClipCurPhoto()}
                           className  = 'socialComment'>
-                            <span
+                          <div className = "textHeightCenter">
+                            <i
                             style={{ marginRight:'10px'}}
-                            class="fa fa-archive"></span>
+                            class="fa fa-archive"></i>
                            Clip
+                          </div>
+
                            </div>
 
                         }
@@ -1071,7 +1084,7 @@ class SocialCalCellPage extends React.Component{
                      </div>
 
 
-                     */}
+
 
                  </div>
 
