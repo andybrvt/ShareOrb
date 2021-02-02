@@ -67,28 +67,7 @@
   margin-left: 10px;
 }
 
-.socialListBox{
-  /* background-color: red; */
-  padding: 15px;
-  margin-top: 50px;
-  border: 1px solid gainsboro;
-  height: 235px;
-  width: 450px;
-  overflow: auto;
 
-}
-
-.socialListBox .socialListItem{
-  /* background-color: red; */
-  margin: 3px;
-  padding-left: 15px;
-  /* padding-top: 10px; */
-  height: 140px;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
-}
 
 .socialLikeCommentNum{
     /* background-color: red; */
