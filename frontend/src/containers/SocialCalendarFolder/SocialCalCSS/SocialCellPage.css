@@ -58,11 +58,35 @@
   }
 }
 
+@media screen and (max-width: 1100px){
+  .socialCommentDate{
+    display: none;
+  }
+}
+
+@media screen{
+  .socialModalLeft{
+    width: 70%;
+  }
+  .socialModalRight{
+    width: 30%,auto;
+    display: flex;
+
+  }
+}
+@media screen and (max-width: 700px){
+  .socialModalLeft{
+    width: 100%;
+  }
+  .socialModalRight{
+    display: none;
+  }
+}
+
 
 /* CSS FOR THE PICTURE SIDE OF THE SOICAL CAL CELL MODAL */
 .socialModalLeft{
   position: relative;
-  width: 70%;
   height: 100%;
 }
 
@@ -315,7 +339,6 @@
   position: relative;
   height: 100%;
   width: 30%;
-  display: flex;
   flex-direction: column;
 }
 
@@ -328,15 +351,16 @@
 
 }
 /* CSS that is used to contain the name, avatar and date */
+/* XXX go back to here */
 .socialModalRight .topSection{
   position: relative;
-  height: 18%;
   display: flex;
   flex-direction: column;
 }
 
 .socialNameSect{
-  height: 50%;
+  padding-top: 20px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: row;
 }
@@ -395,8 +419,8 @@
 /* CSS for the caption and adding the caption */
 /* XXX come back for this */
 .socialCaptionSect{
-  height: 25%;
 }
+
 .socialCaptionSect .dayCaption{
   position: relative;
   width: 90%;
@@ -439,9 +463,8 @@
 
 
 
-
+/* XXX come back to this */
 .socialLikingSect{
-  height: 25%;
   display: flex;
 }
 .socialLikingSect .socialLikeCommentNum{
@@ -501,7 +524,8 @@
 
 .socialModalRight .bottomSection{
   position: relative;
-  height: 82%;
+  /* height: 84%; */
+  /* height: 74%; */
 }
 
 .socialModalRight .bottomSection .socialLikeCommentSect{

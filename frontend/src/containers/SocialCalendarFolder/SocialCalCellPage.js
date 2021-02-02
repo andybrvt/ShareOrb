@@ -608,21 +608,33 @@ class SocialCalCellPage extends React.Component{
     // This function is used to calculate the height of the comments by the
     // length of the caption
     if(captionLen === 0){
-      let base = 97
+      let base = 84
 
       if(this.state.showCaptionInput){
-        base = 90
+        base = 78
       }
 
       return base+"%";
     } else {
 
-      let base = 99
+      // let base = 74
+      let base = 84
 
       if(this.state.showCaptionInput){
-        return "87%"
+        return "77.5%"
       } else {
-        const final = base - (captionLen/16)
+        // if(captionLen <= 50 ){
+        //   return "84%"
+        // } else if(captionLen >50 && captionLen <= 130){
+        //   return "81.5%"
+        // } else if(captionLen >130 && captionLen <= 180){
+        //   return "79%"
+        // }else if(captionLen >180 && captionLen <= 230){
+        //   return "76.5%"
+        // } else if(captionLen >230 && captionLen <= 250){
+        //   return "74%"
+        // }
+        const final = base - (captionLen/24)
         const finalStr = final+"%"
 
         return finalStr;
@@ -851,7 +863,9 @@ class SocialCalCellPage extends React.Component{
                  <div> </div>
 
                }
-               <div className = "topSection">
+               <div
+                 style = {{}}
+                 className = "topSection">
                  <div className = 'socialNameSect'>
 
                    <div className = "socialName">
@@ -880,7 +894,10 @@ class SocialCalCellPage extends React.Component{
                  </div>
 
 
-                 <div className = "socialCaptionSect">
+                 <div
+
+                   style = {{}}
+                   className = "socialCaptionSect">
                    {
                      this.props.curId === socialCalUserId ?
 
@@ -1008,7 +1025,11 @@ class SocialCalCellPage extends React.Component{
                </div>
 
 
-               <div className = "bottomSection">
+               <div
+                 style = {{
+                   height: this.heightCal(dayCaption.length)
+                 }}
+                 className = "bottomSection">
 
                  <div className = "socialLikeCommentSect">
 
