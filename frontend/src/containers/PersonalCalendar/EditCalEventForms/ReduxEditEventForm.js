@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio, Avatar} from 'antd';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import * as navActions from '../../../store/actions/nav';
@@ -258,6 +258,45 @@ const validate = values => {
 
 class ReduxEditEventForm extends React.Component{
 
+  constructor(props){
+    super(props)
+    this.state = {
+      geoLat: "",
+      geoLong: "",
+    }
+  }
+
+
+
+
+  handleLocation=()=>{
+    let longitude=0;
+    let latitude=0;
+    console.log("hit")
+    if (navigator.geolocation) {
+        let success = position => {
+        // cache values
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude, longitude);
+        this.setState(
+          {
+            geoLat: latitude,
+            geoLong: longitude
+          },
+          () => console.log(this.state.geoLat, this.state.geoLong)
+        );
+        console.log(this.state);
+      };
+
+      function error() {
+        console.log("Unable to retrieve your location");
+      }
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+    console.log(this.state)
+  }
+
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
@@ -456,6 +495,8 @@ class ReduxEditEventForm extends React.Component{
     )
   }
 
+
+
   handleReoccuringChange = (event) => {
      const { change } = this.props
 
@@ -526,12 +567,16 @@ class ReduxEditEventForm extends React.Component{
       const friendList = this.props.following
 
       let shareOptions = []
+      console.log(friendList)
 
       for (let friend = 0; friend< friendList.length; friend++ ){
         shareOptions.push(
           <Option value = {friendList[friend].username}
-          label = {this.capitalize(friendList[friend].username)}>
-            {this.capitalize(friendList[friend].username)}
+          label = {
+            this.capitalize(friendList[friend].first_name)+" "+this.capitalize(friendList[friend].last_name)
+          } >
+            <Avatar size={20} style={{marginRight:'10px'}} src= {`${global.API_ENDPOINT}`+friendList[friend].profile_picture} />
+            {friendList[friend].first_name+" "+friendList[friend].last_name}
           </Option>
         )
       }
@@ -710,8 +755,8 @@ class ReduxEditEventForm extends React.Component{
               placeholder = 'Title'
               >
                 {this.renderShareListSelect()}
-              </Field>
 
+              </Field>
 
               {/*<Input style={{width:'250px', marginBottom:'15px'}} placeholder="Add People" prefix={<SearchOutlined />} /> */}
             </div>
@@ -740,7 +785,9 @@ class ReduxEditEventForm extends React.Component{
 
 
                 />
-              <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
+              <AimOutlined
+                onClick={this.handleLocation()}
+                style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
                 <Field
                     name = 'eventColor'
                     component = {renderEventColor}

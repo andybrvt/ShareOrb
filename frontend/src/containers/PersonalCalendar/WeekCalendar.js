@@ -40,7 +40,8 @@ import Liking from '../NewsfeedItems/Liking';
 import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
 import DetailEditEventForm from './EventPage/DetailEditEventForm';
 import CalendarPopOver from './CalendarPopOver.js';
-
+import Animate from 'rc-animate';
+import '../SocialCalendarFolder/SocialCalCSS/SocialCalAnim.css';
 const { Group } = Avatar
 
 class WeekCalendar extends React.Component{
@@ -58,12 +59,15 @@ class WeekCalendar extends React.Component{
     activeX: null,
     activeY: null,
     showAddEventModal: false,
+    animate:true,
   }
   scrollToMyRef = (ref) => {
     // if(ref){
     // ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
     // }
   }
+
+
 
 
 
@@ -510,12 +514,19 @@ class WeekCalendar extends React.Component{
 
   // this is a onclick function that goes to the next week
   nextWeek =() =>{
+    this.setState({
+      animate: !this.state.animate,
+    });
     this.props.nextWeek()
   }
 
 
   // onClick function that goes to the prvious week
   prevWeek = () => {
+    this.setState({
+      animate: !this.state.animate,
+    });
+    console.log(this.state.animate)
     this.props.prevWeek()
   }
 
@@ -581,9 +592,15 @@ class WeekCalendar extends React.Component{
             <div className = 'timecol'>
               {this.renderSide()}
             </div>
-            <div className = 'calendar' >
+            <Animate
+              className = 'calendar'
+              showProp="show"
+              transitionName="fade"
+            >
+            <div >
             {this.renderWeekCell(this.props.events)}
-            </div>
+          </div>
+        </Animate>
           </div>
           </div>
 

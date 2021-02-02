@@ -37,7 +37,7 @@
   /* background-color: green; */
 }
 
-.newsfeedParent .newsfeedMidContainer .newsfeedItself .newsfeedActionButtons{
+.newsfeedActionButtons{
   display:  flex;
   flex-direction: row;
   /* background-color: red;. */
@@ -55,7 +55,9 @@
   background: #FFFFFF;
   padding:30px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  width:215px;
+  width:100%;
+  font-weight: 800;
+  /* background-color: red; */
 
 }
 
