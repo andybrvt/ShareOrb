@@ -63,6 +63,23 @@ class SocialEventList extends React.Component{
     this.props.history.push("/socialcal/event/"+eventId)
   }
 
+  eventTitle = (eventTitle) => {
+    let name = eventTitle
+    if(name.length > 20 ){
+      name = name.substring(0,20) +"..."
+    }
+
+    return name
+  }
+
+  eventLocation = (eventTitle) => {
+    let name = eventTitle
+    if(name.length > 40 ){
+      name = name.substring(0,40) +"..."
+    }
+
+    return name
+  }
 
   render(){
 
@@ -105,11 +122,14 @@ class SocialEventList extends React.Component{
        renderItem={item => (
          <List.Item className = 'socialListItem'>
 
-           {/*
-             <div className = 'socialListItemText'>
+           <div className = "socialEventListText">
 
+
+             <div className = "socialEventListTextFirst">
                <div className = 'socialEventTitleContainer'>
-               <span className = 'socialEventTitle'>{this.capitalize(item.title)} </span>
+               <div className = 'socialEventTitle'>
+                 {this.eventTitle(this.capitalize(item.title))}
+               </div>
                {
                  true ?
 
@@ -120,75 +140,116 @@ class SocialEventList extends React.Component{
                  <div className = 'socialPrivateTag'> Private </div>
                }
                </div>
+             </div>
 
-               <span className = 'socialEventTime'>
-               <img src = {clock} className = 'socialEventClock' />
-               {this.timeFormater(item.start_time)}-
-               {this.timeFormater(item.end_time)}
-               </span>
 
-               <span className = 'socialEventLocation'>
-               <img src = {location} className = 'socialEventPin' />
-               {this.capitalize(item.location)}
-               </span>
+             <div className = 'socialEventListTextSecond'>
+               <div className = 'socialEventLocation'>
+                 <div className = "socialEventPin">
+                   <i class="fas fa-map-marker-alt"></i>
+                 </div>
 
-               <br />
+                 <div className = "socialEventLocationText">
+                   {this.eventLocation(this.capitalize(item.location))}
+                 </div>
 
-               <span className = 'socialEventCapcity'>
-               <img src ={userIcon} className = 'socialUserIcon' />
-               {item.persons.length}
-               <div>
+              </div>
+             </div>
+
+
+             <div className = "socialEventListTextThird">
+               <div className = 'socialEventTime'>
+                <div className = "socialEventClock">
+                  <i class="fas fa-clock"></i>
+                </div>
+
+                <div className = "socialEventTimeText">
+                  {this.timeFormater(item.start_time)}-
+                  {this.timeFormater(item.end_time)}
+                </div>
+
+             </div>
+             </div>
+
+             <div className = 'socialEventListTextFourth'>
+               <div className = 'socialEventCapcity'>
+              <div className = "socialEventUserIcon">
+                <div>
+                  <i class="fas fa-user"></i>
+                </div>
+
+                <div className = "socialEventLikingNum">
+                   {item.persons.length}
+                </div>
+
+              </div>
+
+               <div className = "socialEventLiking">
                <Liking like_people = {item.persons} />
                </div>
-               </span>
+             </div>
+             </div>
+
+           </div>
+
+
+           <div className = 'socialEventListButtons'>
+             <div className = 'socialListItemText'>
+
+
 
                {dateFns.isAfter(dateFns.endOfDay(dateFns.addHours(new Date(this.props.cellDate), 7)), new Date()) ?
-                 <div>
-                 {
-                   this.checkUser(item.persons) ?
-                     item.host.id === this.props.curId ?
-                     <div className = 'alreadyJoinButton'>
-                     <span className = 'joinText'> Host </span>
-                   </div>
+                 <div className = "socialCurDayEventButton">
 
-                   :
+                    <div className = "curDayEventTop">
+                      {
+                        this.checkUser(item.persons) ?
+                          item.host.id === this.props.curId ?
+                          <div className = 'alreadyJoinButton'>
+                          <div className = 'joinText'> Host </div>
+                        </div>
 
-                   <div
-                   onClick = {() => this.sendLeaveUserEvent(
-                     this.props.curId,
-                     item.id,
-                     this.props.socialCalCellId,
-                     this.props.cellDate
-                   )}
-                   className = 'alreadyJoinButton'>
-                   <span className = 'joinText'> Leave </span>
-                 </div>
+                        :
 
-
-
-                      :
-
-                      <div
-                      onClick = {()=> this.sendJoinUserEvent(
-                        this.props.curId,
-                        item.id,
-                        this.props.socialCalCellId,
-                        this.props.cellDate
-                      )}
-                      className = 'joinEventButton'>
-                        <span className = 'joinText'> Join </span>
+                        <div
+                        onClick = {() => this.sendLeaveUserEvent(
+                          this.props.curId,
+                          item.id,
+                          this.props.socialCalCellId,
+                          this.props.cellDate
+                        )}
+                        className = 'alreadyJoinButton'>
+                        <div className = 'joinText'> Leave </div>
                       </div>
 
-                 }
 
 
+                           :
+
+                           <div
+                           onClick = {()=> this.sendJoinUserEvent(
+                             this.props.curId,
+                             item.id,
+                             this.props.socialCalCellId,
+                             this.props.cellDate
+                           )}
+                           className = 'joinEventButton'>
+                             <div className = 'joinText'> Join </div>
+                           </div>
+
+                      }
+
+                    </div>
 
 
-                 <div
-                 onClick = {() => this.viewSocialEventPage(item.id)}
-                 className = 'viewEventButton'>
-                   <span className = 'viewText'> View </span>
-                 </div>
+                    <div className = "curDayEventBottom">
+                      <div
+                      onClick = {() => this.viewSocialEventPage(item.id)}
+                      className = 'viewEventButton'>
+                        <div className = 'viewText'> View </div>
+                      </div>
+                    </div>
+
 
                  </div>
 
@@ -197,9 +258,9 @@ class SocialEventList extends React.Component{
 
                  <div className = 'viewEventButtonPass'>
 
-                 <span
+                 <div
                  onClick = {() => this.viewSocialEventPage(item.id)}
-                 className = 'viewText'>View </span>
+                 className = 'viewText'>View </div>
                  </div>
 
                 }
@@ -209,7 +270,7 @@ class SocialEventList extends React.Component{
 
 
              </div>
-             */}
+           </div>
 
          </List.Item>
        )}

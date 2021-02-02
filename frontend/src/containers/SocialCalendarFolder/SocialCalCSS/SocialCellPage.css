@@ -662,24 +662,249 @@
   border: 1px solid gainsboro;
   border-radius: 5px;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: row;
+}
+
+.socialListItem .socialEventListText{
+  width: 70%;
+  height: 100%;
+}
+
+.socialEventListText .socialEventListTextFirst{
+  width: 100%;
+  height: 30%;
 
 }
 
-.socialListItemText{
-  /* background-color: red; */
-  position: relative;
-  bottom: 0px;
-}
 .socialEventTitleContainer {
   /* position: absolute; */
-  /* background-color: red; */
   display: flex;
   /* margin-top: 10px; */
 }
-.socialEventTitle{
+.socialEventTitleContainer .socialEventTitle{
  /* background-color: red; */
  font-size:  25px;
 }
+.socialEventTitleContainer .socialPublicTag{
+  position: relative;
+  background-color: #F5F5F5;
+  color: limegreen;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 12px;
+  /* top:10%;
+  left: 95%; */
+  top: 10px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.socialEventTitleContainer .socialPrivateTag{
+  position: relative;
+  /* background-color: red; */
+  background-color: #F5F5F5;
+  color: red;
+  border-radius: 10px;
+  height: 20px;
+  font-size: 12px;
+  /* top:10%;
+  left: 95%; */
+  top: 10px;
+  margin-left: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+
+}
+.socialEventListText .socialEventListTextSecond{
+  width: 100%;
+  height: 20%;
+}
+.socialEventListTextSecond .socialEventLocation{
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+.socialEventLocation .socialEventPin{
+  height: 100%;
+  color: black;
+  width: 7%;
+}
+.socialEventLocation .socialEventLocationText{
+  height: 100%;
+  color: black;
+}
+.socialEventListText .socialEventListTextThird{
+  width: 100%;
+}
+.socialEventListTextThird .socialEventTime{
+  font-size: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+}
+.socialEventTime .socialEventClock{
+  height: 100%;
+  color: black;
+  width: 7%;
+}
+.socialEventTime .socialEventTimeText{
+  height: 100%;
+  color: black;
+}
+
+.socialEventListText .socialEventListTextFourth{
+  width: 100%;
+  height: 20%;
+}
+.socialEventListTextFourth .socialEventCapcity{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: 100%;
+}
+.socialEventCapcity .socialEventUserIcon{
+  position: relative;
+  width: 30%;
+  height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+}
+.socialEventCapcity .socialEventUserIcon .socialEventLikingNum{
+  margin-left: 7px;
+}
+
+.socialEventCapcity .socialEventLiking{
+  position: relative;
+  width: 70%;
+  height: 50%;
+
+}
+
+
+
+
+.socialListItem .socialEventListButtons{
+  width: 30%;
+  height: 100%;
+}
+.socialListItemText{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.socialCurDayEventButton{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.socialCurDayEventButton .curDayEventTop{
+  height: 50%;
+}
+
+.socialCurDayEventButton .curDayEventBottom{
+  height: 50%;
+}
+
+.alreadyJoinButton {
+  background-color: gainsboro;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: relative;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 90%;
+  height: 40px;
+  text-align: center;
+}
+.alreadyJoinButton .joinText{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.joinEventButton {
+  background-color: limegreen;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: relative;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 90%;
+  height: 40px;
+  text-align: center;
+}
+.joinEventButton .joinText{
+  /* background-color: red; */
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+}
+.viewEventButton{
+  /* background-color: red; */
+  cursor: pointer;
+  position: relative;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 90%;
+  height: 40px;
+  text-align: center;
+}
+
+.viewEventButton .viewText{
+  /* background-color: red; */
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+}
+.viewEventButtonPass{
+  cursor: pointer;
+  position: relative;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  height: 40px;
+  text-align: center;
+}
+.viewEventButtonPass .viewText{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -699,17 +924,6 @@
   /* display: flex; */
   /* padding-top: 10px; */
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 .socialModalRight .socialNameTag .socialModalDate{
@@ -732,41 +946,6 @@
     font-family: "Segoe UI Regular";
 }
 
-
-
-
-.socialEventClock{
-  height: 12px;
-  margin-right: 5px;
-}
-
-.socialEventPin{
-  height: 12px;
-  margin-right: 3px;
-}
-
-.socialEventLocation{
-  font-size: 13px;
-  margin-left: 10px;
-}
-
-.socialEventTime{
-  font-size: 13px;
-}
-
-.socialEventCapcity{
-  /* background-color: red; */
-  /* display: flex; */
-}
-
-.socialUserIcon{
-  height: 12px;
-  margin-right: 3px;
-}
-
-
-
-
 .socialBoxInput{
   width: 100%;
   margin-left: 10px;
@@ -779,124 +958,6 @@
   color: deepskyblue;
   padding-left: 10px;
   padding-bottom: 5px;
-}
-
-
-.joinEventButton {
-  background-color: limegreen;
-  cursor: pointer;
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  top: 10%;
-  left: 260px;
-  width: 100px;
-  height: 40px;
-}
-.joinEventButton .joinText{
-  /* background-color: red; */
-  position: absolute;
-  left: 50%;
-  top: 5px;
-  transform: translateX(-50%);
-  /* transform: translateY(-50%); */
-
-}
-
-.alreadyJoinButton {
-  background-color: gainsboro;
-  cursor: pointer;
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  top: 10%;
-  left: 260px;
-  width: 100px;
-  height: 40px;
-}
-.alreadyJoinButton .joinText{
-  position: absolute;
-  left: 50%;
-  top: 5px;
-  transform: translateX(-50%);
-}
-
-
-.viewEventButton{
-  /* background-color: red; */
-  cursor: pointer;
-  position: absolute;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  font-size: 20px;
-  top: 50%;
-  left: 260px;
-  width: 100px;
-  height: 40px;
-}
-
-.viewEventButton .viewText{
-  /* background-color: red; */
-  position: absolute;
-  left: 50%;
-  top: 5px;
-  transform: translateX(-50%);
-
-}
-
-.viewEventButtonPass{
-  cursor: pointer;
-  position: absolute;
-  border: 1px solid gainsboro;
-  border-radius: 5px;
-  font-size: 20px;
-  top: 30%;
-  left: 260px;
-  width: 100px;
-  height: 40px;
-}
-.viewEventButtonPass .viewText{
-  position: absolute;
-  left: 50%;
-  top: 5px;
-  transform: translateX(-50%);
-
-}
-
-.socialPublicTag{
-  position: relative;
-  background-color: #F5F5F5;
-  color: limegreen;
-  border-radius: 10px;
-  height: 20px;
-  font-size: 12px;
-  /* top:10%;
-  left: 95%; */
-  top: 10px;
-  margin-left: 10px;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.socialPrivateTag{
-  position: relative;
-  /* background-color: red; */
-  background-color: #F5F5F5;
-  color: red;
-  border-radius: 10px;
-  height: 20px;
-  font-size: 12px;
-  /* top:10%;
-  left: 95%; */
-  top: 10px;
-  margin-left: 10px;
-  padding-left: 3px;
-  padding-right: 3px;
-
 }
 
 .socialHolder .socialCarouselSingle{
