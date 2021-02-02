@@ -16,7 +16,7 @@
 .eventInfoContainer{
   width:70%;
   position:relative;
-  /* background: yellow; */
+  background: yellow;
   /* align-items: center; */
   overflow: auto;
   height: 100%;
@@ -28,7 +28,7 @@
   width:30%;
   height: 100%;
   position:relative;
-  /* background: red; */
+  background: orange;
 }
 
 .eventInfoView{

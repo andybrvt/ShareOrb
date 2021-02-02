@@ -98,6 +98,10 @@ class SocialEventGroupChat extends React.Component{
     if(this.props.messages){
       messages = this.props.messages
     }
+    let inviteList = [];
+    if(this.props.inviteList){
+      inviteList = this.props.inviteList
+    }
 
   console.log(this.props)
 
@@ -116,9 +120,30 @@ class SocialEventGroupChat extends React.Component{
       },
     ];
     return (
-      <div className = {`socialEventGroupChat ${this.props.active ? "" : "active"}`}>
-         <div className = "socialMessageList">
-         <List
+      <div className = {`eventGCContainer ${this.props.active ? "" : "active"}`}>
+
+        <div className = "messageCardContainer">
+          <div class="eventGroupChatCard">
+
+
+            <div className = "eventChatHeaderMiddle">
+
+              {/* <Liking
+              num={4}
+              history = {this.props.history}
+              like_people={inviteList}/> */}
+
+              <div class="chatHeader">
+                You and {inviteList.length} others
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <div className = "messageList">
+        <List
              itemLayout="horizontal"
              dataSource={messages}
              renderItem={item => (

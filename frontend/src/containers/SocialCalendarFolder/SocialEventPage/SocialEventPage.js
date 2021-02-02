@@ -144,71 +144,29 @@ class SocialEventPage extends React.Component{
     console.log(this.props)
     return (
       <div>
-      {
-        this.props.socialEventInfo.title ?
 
-        <div className ={`socialEventPageContainer ${this.state.showChats ? "" : "active"}` }>
-
-        <img
-        className = "socialEventBackgroundPic"
-
-        src = {`${global.IMAGE_ENDPOINT}`+backgroundImage} />
-
-      {(!this.state.showChats)?
-        <div>
-          <div class="noSocialChatContainer">
-            <span class="noSocialChatIcon">
-              <i style={{fontSize:'54px'}} class="fas fa-comment-alt"></i>
-
-            </span>
-            <br/>
-            <span class="noSocialChatMessage"> No chats shown...</span>
+        <div class="eventPageContainer">
+          <div className = 'eventInfoContainer'>
+            <SocialEventInfo
+            info = {this.props.socialEventInfo}
+            userId = {this.props.id}
+            active = {this.state.showChats}
+            history = {this.props.history}
+             />
           </div>
-        </div>
 
-
-        :
-        <div></div>
-      }
-
-        <div className = "showChatWords"> Show chats </div>
-        <Switch
-        className = "showChatSwitch"
-        defaultChecked checked = {this.state.showChats} onChange={this.onShowChatChange} />
-
-
-        <SocialEventInfo
-        info = {this.props.socialEventInfo}
-        userId = {this.props.id}
-        active = {this.state.showChats}
-        history = {this.props.history}
-         />
-
-
-        <SocialEventGroupChat
-        messages = {this.props.socialEventMessages}
-        id = {this.props.id}
-        eventId = {this.props.socialEventInfo.id}
-        active = {this.state.showChats}
-        date = {this.props.socialEventInfo.event_day}
-        endTime = {this.props.socialEventInfo.end_time}
-         />
-
-        </div>
-
-
-        :
-
-        <div className = "socialEventDoesNotPage">
-          <i class="fas fa-exclamation-circle"></i>
-          <div>
-          Event page does not exist anymore.
+          <div className = "eventGroupChatContainer">
+            <SocialEventGroupChat
+            messages = {this.props.socialEventMessages}
+            id = {this.props.id}
+            eventId = {this.props.socialEventInfo.id}
+            active = {true}
+            date = {this.props.socialEventInfo.event_day}
+            endTime = {this.props.socialEventInfo.end_time}
+             />
           </div>
+
         </div>
-
-
-      }
-
       </div>
 
     )

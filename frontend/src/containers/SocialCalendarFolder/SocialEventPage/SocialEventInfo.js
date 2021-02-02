@@ -277,8 +277,8 @@ class SocialEventInfo extends React.Component{
 
 
 
-      <div className = {`socialEventInfoContainerContainer ${this.props.active ? "" : "active"}` }>
-      <div className = "socialEventInfoContainer" >
+      <div className = {`eventInfoView ${this.props.active ? "" : "active"}` }>
+      <div className = "eventInfoView" >
         <div className = 'closeSocialEvent'>
           <Link to={"/explore/admin"} >
           <i class="far fa-times-circle">  </i>
@@ -287,7 +287,6 @@ class SocialEventInfo extends React.Component{
         <div className = 'editPencilSocialEvent'>
           {
             eventHostId === this.props.userId ?
-
             <div>
               <div
               onClick={() => this.onEditClick()}
@@ -295,17 +294,12 @@ class SocialEventInfo extends React.Component{
               <i class="fas fa-pen" ></i>
               </div>
             </div>
-
             :
-
             <div></div>
-
           }
-
         </div>
       {
         this.state.edit ?
-
         <div>
           <DetailEditEventForm
           {...this.props}
@@ -314,165 +308,151 @@ class SocialEventInfo extends React.Component{
           onSubmit = {this.onSaveEdit}
           onDelete = {this.onOpenDeleteSocialModal}
            />
-
-
         </div>
-
         :
-
         <div className = "eventInfoView">
+          <div className = "eventTopEntire">
+            <div className = 'topSectContainerLeft'>
+            {
+              eventBackgroundPic === "" ?
+              <div
+              className = 'eventBackgroundPic'
+              onClick = {() => this.onChangeBackgroundOpen()}
+              >
+              <div className = "pictureFrame">
+                  <PictureOutlined />
+                  <br />
+                  <span> No background </span>
+              </div>
+              </div>
 
-        <div className = "topSectContainier">
+              :
 
-          {
-            eventBackgroundPic === "" ?
-            <div
-            className = 'eventBackgroundPic'
-            onClick = {() => this.onChangeBackgroundOpen()}
-            >
-            <div className = "pictureFrame">
+              <div
+              className = 'eventBackgroundWPic'>
+              {/*
+                <div className ="pictureFrame">
+
                 <PictureOutlined />
                 <br />
                 <span> No background </span>
+                  </div>
+                */}
+                <img
+                src = {`${global.IMAGE_ENDPOINT}`+eventBackgroundPic}
+                className = 'eventBackgroundImg'
+                 />
+              </div>
+
+
+            }
             </div>
-            </div>
+            <div className = "topSectContainerRight">
+              <div
+                className = "dateCircle"
+                style = {{
+                  backgroundColor: "#1890ff"
+                }}
+              >
+                <div clasName = "month" > {month}</div>
+                <div className = "day"> {day} </div>
+              </div>
+              <div class="titleCard">
+                  <div
+                    className = 'eventTitle'>
+                    {this.capitalize(title)}
+                  </div>
 
-            :
+                  <br/>
 
-            <div
-            className = 'eventBackgroundWPic'>
-            {/*
-              <div className ="pictureFrame">
-
-              <PictureOutlined />
-              <br />
-              <span> No background </span>
-                </div>
-              */}
-              <img
-              src = {`${global.IMAGE_ENDPOINT}`+eventBackgroundPic}
-              className = 'eventBackgroundImg'
-               />
-            </div>
+                    <span
+                      style={{display:'inline-block'}}>
 
 
-          }
+                        <Button
+                           type="primary" shape="round"
+                           icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+                           style={{left:'0%', fontSize:'15px'}} size={'large'}>
 
-          <div className = "eventTopSide">
-            <div
-              className = "dateCircle"
-              style = {{
-                backgroundColor: "#1890ff"
-              }}
-            >
-            <div
-            style = {{
-              color: "white",
-              fontSize: "20px"
-            }}
-            clasName = "month" > {month}</div>
-            <div className = "day"> {day} </div>
-            </div>
+                          Invite
+                        </Button>
 
-            <div class="eventCard" style={{marginTop:'25px',width:'450px', height:'225px',padding:'50px'}}>
-                <div
-                  className = 'eventTitle'>
-                  {this.capitalize(title)}
-                </div>
+                     {
+                       (persons.includes(this.props.username))?
+                          <Button
+                             shape="round"
+                             icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                             style={{left:'5%', fontSize:'15px'}} size={'large'}>
 
-                <br/>
+                            Going
+                          </Button>
 
-                  <span
-                    style={{display:'inline-block'}}>
+                          :
+                          <Button
+                             shape="round" type="primary"
+                             icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                             style={{left:'5%', fontSize:'15px'}} size={'large'}>
+
+                            Going
+                          </Button>
+
+                    }
 
 
                       <Button
-                         type="primary" shape="round"
-                         icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                         style={{left:'0%', fontSize:'15px'}} size={'large'}>
-
-                        Invite
+                         shape="round"
+                         icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+                         style={{left:'10%', fontSize:'15px'}} size={'large'} danger>
+                         Delete
                       </Button>
+                    </span>
+                <div class="flex-container"
+                  style={{width:'250px', color:'#1890ff', padding:'10px', background:'white'}}
+                >
 
-                   {
-                     (persons.includes(this.props.username))?
-                        <Button
-                           shape="round"
-                           icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                           style={{left:'5%', fontSize:'15px'}} size={'large'}>
+                  {/*if no one going , THEN show invited else just show invited
+                  <div className = "attendees flex-child">
+                    <span style={{color:'black'}}> {invited.length} Invited </span>
 
-                          Going
-                        </Button>
+                    <Liking like_people={invited}/>
+                  </div>
+                  */}
 
-                        :
-                        <Button
-                           shape="round" type="primary"
-                           icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                           style={{left:'5%', fontSize:'15px'}} size={'large'}>
+                  </div>
 
-                          Going
-                        </Button>
-
-                  }
-
-
-                    <Button
-                       shape="round"
-                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                       style={{left:'10%', fontSize:'15px'}} size={'large'} danger>
-                       Delete
-                    </Button>
-                  </span>
-              <div class="flex-container"
-                style={{width:'250px', color:'#1890ff', padding:'10px', background:'white'}}
-
-              >
-
-                {/*if no one going , THEN show invited else just show invited
-                <div className = "attendees flex-child">
-                  <span style={{color:'black'}}> {invited.length} Invited </span>
-
-                  <Liking like_people={invited}/>
-                </div>
-                */}
 
                 </div>
-
-
-              </div>
 
 
 
           </div>
 
-          </div>
+        </div>
 
-          <div className = "eventInfo outerContainer">
-            <div style={{ marginLeft:'15px', fontSize:'20px',display:'inline-block', width:'500px' }}
-              class="aboutEvent eventCard innerContainer">
-              Event Details
-              <Divider/>
-              <div style={{fontSize:'16px'}}>
-                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
-                Social Event
-                <br/>
-                <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-                  {date} at {start_time} - {end_time}
-                <br/>
-                <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                  {persons.length} Going
-                <br/>
-                <br/>
-                <div className = "contentEvent"> {content} </div>
+          <div className = "eventBottomEntire">
+            <div className = "eventBottomLeft">
+              <div
+                class="eventDetailCard">
+                Event Details
+                <Divider/>
+                <div style={{fontSize:'16px'}}>
+                  <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
+                  Social Event
+                  <br/>
+                  <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+                    {date} at {start_time} - {end_time}
+                  <br/>
+                  <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                    {persons.length} Going
+                  <br/>
+                  <br/>
+                  <div className = "contentEvent"> {content} </div>
 
+                 </div>
+                </div>
               </div>
-
-
-
-
-
-            </div>
-            <div className = 'eventInfo innerContainer' style={{float:'right'}}>
+            <div class="eventBottomRight">
+              <div className = 'eventInfo innerContainer' style={{float:'right'}}>
               <div style={{ marginLeft:'25px', marginTop:'-50px', width:'450px', height:'150px',
                 }} class="eventCard">
                 <div class="socialEventHeader" style={{float:'left'}}>
@@ -548,14 +528,7 @@ class SocialEventInfo extends React.Component{
 
               }
 
-
-            {/*
-
-
-
-
-
-            */}
+            </div>
 
 
 

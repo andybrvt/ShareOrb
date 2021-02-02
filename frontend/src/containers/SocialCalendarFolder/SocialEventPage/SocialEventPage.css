@@ -328,16 +328,6 @@
 
 
 /* This is for the socialevent group chat size fo the event page */
-.socialEventGroupChat{
-  width: 30%;
-  position: absolute;
-  left: 70%;
-  /* left: 0; */
-  height: 100%;
-  /* background-color: blue; */
-  z-index: 102;
-  transition: 0.5s;
-}
 
 .socialEventGroupChat.active{
   /* background-color: red; */
