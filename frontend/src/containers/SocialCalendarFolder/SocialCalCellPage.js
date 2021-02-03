@@ -607,11 +607,29 @@ class SocialCalCellPage extends React.Component{
   heightCal = (captionLen) => {
     // This function is used to calculate the height of the comments by the
     // length of the caption
+
+    let hostId = 0
+    let userId = 0
+    if(this.props.socialCalCellInfo){
+      if(this.props.socialCalCellInfo.socialCalUser){
+        if(this.props.socialCalCellInfo.socialCalUser.id){
+          hostId = this.props.socialCalCellInfo.socialCalUser.id
+        }
+      }
+
+    }
+    if(this.props.curId){
+      userId = this.props.curId
+    }
+
     if(captionLen === 0){
       let base = 84
 
       if(this.state.showCaptionInput){
-        base = 78
+        base = 72.75
+      }
+      if(userId !== hostId){
+        base = base + 1.25
       }
 
       return base+"%";
@@ -621,7 +639,7 @@ class SocialCalCellPage extends React.Component{
       let base = 84
 
       if(this.state.showCaptionInput){
-        return "77.5%"
+        return "72.75%"
       } else {
         // if(captionLen <= 50 ){
         //   return "84%"
@@ -634,7 +652,7 @@ class SocialCalCellPage extends React.Component{
         // } else if(captionLen >230 && captionLen <= 250){
         //   return "74%"
         // }
-        const final = base - (captionLen/24)
+        const final = base - (captionLen/23)
         const finalStr = final+"%"
 
         return finalStr;
@@ -729,7 +747,7 @@ class SocialCalCellPage extends React.Component{
       if(this.props.socialCalCellInfo.socialCalUser){
         socialCalUsername = this.props.socialCalCellInfo.socialCalUser.username
         socialCalUserId = this.props.socialCalCellInfo.socialCalUser.id
-        socialCalProfilePic = `${global.API_ENDPOINT}`+this.props.socialCalCellInfo.socialCalUser.profile_picture
+        socialCalProfilePic = `${global.IMAGE_ENDPOINT}`+this.props.socialCalCellInfo.socialCalUser.profile_picture
 
       }
       if(this.props.socialCalCellInfo.socialCaldate){
@@ -873,7 +891,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = "socialProfileHolder">
                         <Avatar
-                          size = {30}
+                          size = {35}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
                       </div>
@@ -1020,6 +1038,7 @@ class SocialCalCellPage extends React.Component{
 
 
                       <div className = 'socialLikeAvatar'>
+
                         <Liking {...this.props} like_people={people_like}/>
                       </div>
 
@@ -1127,9 +1146,9 @@ class SocialCalCellPage extends React.Component{
                 <div className = "socialCommentInputSect">
                   <div className = 'socialCommentInput'>
                     <Avatar
-                    size = {40}
+                    size = {30}
                     className ='socialPicInput'
-                    src = {`${global.API_ENDPOINT}`+ this.props.curProfilePic}/>
+                    src = {`${global.IMAGE_ENDPOINT}`+ this.props.curProfilePic}/>
                   <div className = 'socialInputFormHolder'>
                       <Form className = "socialInputForm">
                         <Input

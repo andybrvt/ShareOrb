@@ -95,7 +95,7 @@ class SocialComments extends React.Component{
               </div>
 
               <div className = "socialCommentAvatarSect">
-                <Avatar size = {40} src = {`${global.API_ENDPOINT}`+item.commentUser.profile_picture} />
+                <Avatar size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
               </div>
 
               <div className = 'socialCommentTextSect'>

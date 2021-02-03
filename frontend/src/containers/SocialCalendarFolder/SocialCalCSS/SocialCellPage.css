@@ -32,7 +32,7 @@
   /* height: 100; */
   top: 50%;
   width: 90%;
-  height: 550px;
+  height: 95%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 100;
@@ -473,7 +473,7 @@
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: 50%;
+    width: 70%;
     position: relative;
 }
 .socialLikeCommentNumHolder{
@@ -506,7 +506,7 @@
 
 
 .socialLikingSect .socialLikingLiking{
-  width: 50%;
+  width: 30%;
   position: relative;
 }
 .socialLikingLiking .socialLikeAvatar{
@@ -594,8 +594,8 @@
   /* width: 50%; */
 }
 .socialCommentItem {
-  margin-top: 10px;
-  padding: 5px;
+  margin-top: 5px;
+  padding: 2px;
   display: flex;
   flex-direction: row;
 }
