@@ -143,8 +143,6 @@ class SocialEventPage extends React.Component{
 
     console.log(this.props)
     return (
-      <div>
-
         <div class="eventPageContainer">
           <div className = 'eventInfoContainer'>
             <SocialEventInfo
@@ -167,7 +165,6 @@ class SocialEventPage extends React.Component{
           </div>
 
         </div>
-      </div>
 
     )
   }

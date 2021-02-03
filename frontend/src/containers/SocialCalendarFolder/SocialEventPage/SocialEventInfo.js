@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Progress, Avatar, Modal, message, notification, Divider, Statistic} from 'antd';
+import {Button, Progress, Avatar, Modal, message, notification, Divider, Statistic, List, Skeleton, Tabs} from 'antd';
 import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
@@ -12,6 +12,10 @@ import DeleteSocialEventModal from './DeleteSocialEventModal';
 import { ReactBingmaps } from 'react-bingmaps';
 import {Link, withRouter} from 'react-router-dom';
 import DetailEditEventForm from '../../PersonalCalendar/EventPage/DetailEditEventForm';
+
+const { TabPane } = Tabs;
+
+
 class SocialEventInfo extends React.Component{
 
   constructor(props){
@@ -61,16 +65,18 @@ class SocialEventInfo extends React.Component{
 
 
   timeFormater(time){
-    // This will change the format of the time properly to the 1-12 hour
-    console.log(time)
-    const timeList = time.split(':')
-    let hour = parseInt(timeList[0])
-    let minutes = timeList[1]
-    var suffix  = hour >= 12 ? "PM":"AM"
+    // NEED FIXING xxx
 
-    console.log(11%12)
-    hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
-    return hour
+    // This will change the format of the time properly to the 1-12 hour
+    // console.log(time)
+    // const timeList = time.split(':')
+    // let hour = parseInt(timeList[0])
+    // let minutes = timeList[1]
+    // var suffix  = hour >= 12 ? "PM":"AM"
+    //
+    // console.log(11%12)
+    // hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
+    // return hour
 
   }
 
@@ -214,6 +220,13 @@ class SocialEventInfo extends React.Component{
   }
 
 
+  back = e => {
+    e.stopPropagation();
+    this.props.history.goBack();
+
+  }
+
+
   render() {
     console.log(this.props)
 
@@ -231,6 +244,13 @@ class SocialEventInfo extends React.Component{
     let day = "";
     let persons = [];
     let host = "";
+
+
+    // These are just place holders
+    let list = []
+    let accepted = [];
+    let decline = [];
+    let invited = [];
 
     if(this.props.info){
       if(this.props.info.host){
@@ -275,48 +295,14 @@ class SocialEventInfo extends React.Component{
 
     return (
 
+      <div className = 'eventInfoView'>
 
-
-      <div className = {`eventInfoView ${this.props.active ? "" : "active"}` }>
-      <div className = "eventInfoView" >
-        <div className = 'closeSocialEvent'>
-          <Link to={"/explore/admin"} >
-          <i class="far fa-times-circle">  </i>
-          </Link>
-        </div>
-        <div className = 'editPencilSocialEvent'>
-          {
-            eventHostId === this.props.userId ?
-            <div>
-              <div
-              onClick={() => this.onEditClick()}
-              >
-              <i class="fas fa-pen" ></i>
-              </div>
-            </div>
-            :
-            <div></div>
-          }
-        </div>
-      {
-        this.state.edit ?
-        <div>
-          <DetailEditEventForm
-          {...this.props}
-          visible={this.state.edit}
-          initialValues = {this.getInitialValue()}
-          onSubmit = {this.onSaveEdit}
-          onDelete = {this.onOpenDeleteSocialModal}
-           />
-        </div>
-        :
-        <div className = "eventInfoView">
-          <div className = "eventTopEntire">
-            <div className = 'topSectContainerLeft'>
+        <div className = "eventTopEntire">
+          <div className = "topSectContainerLeft">
             {
               eventBackgroundPic === "" ?
               <div
-              className = 'eventBackgroundPic'
+              className = 'eventBackgroundPic hoverPic'
               onClick = {() => this.onChangeBackgroundOpen()}
               >
               <div className = "pictureFrame">
@@ -329,241 +315,337 @@ class SocialEventInfo extends React.Component{
               :
 
               <div
-              className = 'eventBackgroundWPic'>
-              {/*
-                <div className ="pictureFrame">
-
-                <PictureOutlined />
-                <br />
-                <span> No background </span>
-                  </div>
-                */}
+              onClick = {() => this.onChangeBackgroundOpen()}
+              className = 'eventBackgroundWPic hoverPic'>
                 <img
                 src = {`${global.IMAGE_ENDPOINT}`+eventBackgroundPic}
-                className = 'eventBackgroundImg'
                  />
               </div>
-
-
             }
-            </div>
-            <div className = "topSectContainerRight">
-              <div
-                className = "dateCircle"
-                style = {{
-                  backgroundColor: "#1890ff"
-                }}
-              >
-                <div clasName = "month" > {month}</div>
-                <div className = "day"> {day} </div>
-              </div>
-              <div class="titleCard">
-                  <div
-                    className = 'eventTitle'>
-                    {this.capitalize(title)}
-                  </div>
-
-                  <br/>
-
-                    <span
-                      style={{display:'inline-block'}}>
-
-
-                        <Button
-                           type="primary" shape="round"
-                           icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                           style={{left:'0%', fontSize:'15px'}} size={'large'}>
-
-                          Invite
-                        </Button>
-
-                     {
-                       (persons.includes(this.props.username))?
-                          <Button
-                             shape="round"
-                             icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                             style={{left:'5%', fontSize:'15px'}} size={'large'}>
-
-                            Going
-                          </Button>
-
-                          :
-                          <Button
-                             shape="round" type="primary"
-                             icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                             style={{left:'5%', fontSize:'15px'}} size={'large'}>
-
-                            Going
-                          </Button>
-
-                    }
-
-
-                      <Button
-                         shape="round"
-                         icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-                         style={{left:'10%', fontSize:'15px'}} size={'large'} danger>
-                         Delete
-                      </Button>
-                    </span>
-                <div class="flex-container"
-                  style={{width:'250px', color:'#1890ff', padding:'10px', background:'white'}}
-                >
-
-                  {/*if no one going , THEN show invited else just show invited
-                  <div className = "attendees flex-child">
-                    <span style={{color:'black'}}> {invited.length} Invited </span>
-
-                    <Liking like_people={invited}/>
-                  </div>
-                  */}
-
-                  </div>
-
-
-                </div>
-
-
-
           </div>
 
-        </div>
-
-          <div className = "eventBottomEntire">
-            <div className = "eventBottomLeft">
-              <div
-                class="eventDetailCard">
-                Event Details
-                <Divider/>
-                <div style={{fontSize:'16px'}}>
-                  <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
-                  Social Event
-                  <br/>
-                  <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
-                    {date} at {start_time} - {end_time}
-                  <br/>
-                  <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
-                    {persons.length} Going
-                  <br/>
-                  <br/>
-                  <div className = "contentEvent"> {content} </div>
-
-                 </div>
-                </div>
+          <div className = "topSectContainerRight">
+            <div className = "menuButtonHolder">
+              <div className = "closeEvent">
+                <i
+                  onClick = {this.back}
+                  class="far fa-times-circle">
+                </i>
               </div>
-            <div class="eventBottomRight">
-              <div className = 'eventInfo innerContainer' style={{float:'right'}}>
-              <div style={{ marginLeft:'25px', marginTop:'-50px', width:'450px', height:'150px',
-                }} class="eventCard">
-                <div class="socialEventHeader" style={{float:'left'}}>
-                  Host
 
-                  <br/>
+              <div className = "editEvent">
+                {
+                  eventHostId === this.props.userId ?
+                  <div>
+                    <div
+                    onClick={() => this.onEditClick()}
+                    >
+                    <i class="fas fa-pen" ></i>
+                    </div>
+                  </div>
+                  :
+                  <div></div>
+                }
+              </div>
+            </div>
+
+            <div
+              className = "dateCircle"
+              style = {{
+                backgroundColor: "#1890ff"
+              }}
+            >
+              <div clasName = "month" > {month}</div>
+              <div className = "day"> {day} </div>
+            </div>
+
+            <div className = "titleCard">
+              <div
+                className = 'eventTitle'>
+                {this.capitalize(title)}
+              </div>
+              <div className = "hostHolder">
+                <div className = "attendees">
+                  Host
+                  <br />
                   <span>
                     <Avatar
-                    style={{right:'5px'}}
-                    src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
-                    />
-                    <span > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                      src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
+                      />
+                      <span class="highlightWord" > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
                   </span>
-
-
+                </div>
               </div>
 
-              <div class="socialEventHeader" style={{float:'right', marginRight:'50px'}}>
 
-                Going
+            </div>
+          </div>
+        </div>
 
-                <br/>
-                <span style={{marginLeft:'10px', fontSize:"24px"}}>
-                {persons.length}
-                </span>
-
-
-              </div>
-
-              </div>
-
-              {
-                location === "" ?
-                <div className = "contentEventEmpty"> </div>
-                :
-                <div style={{marginTop:'50px',}} class="mapEventCard">
-                  <p style={{fontSize:'20px'}}
-                    className="eventDetails"> Location </p>
-                  <span>
-                    <Divider style={{marginTop:'-1px'}}/>
-
-                    <ReactBingmaps
-
-                      bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
-                      center = {[32.2226, 110.9747]}
-                      boundary = {
-                      {
-                        "search":"Fremont, California",
-                        "option":{
-                          entityType: 'PopulatedPlace'
-                        },
-                        "polygonStyle" :{
-                          fillColor: 'rgba(161,224,255,0.4)',
-                          strokeColor: '#a495b2',
-                          strokeThickness: 2
-                        }
-                      }
-                    }
-                      >
-                    </ReactBingmaps>
-
-                     {/*Saving api calls don't worry about maps*/}
-                    <Divider/>
-                      <i style={{marginRight:'15px', color:'#1890ff',
-                        fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
-                      <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
-                        {location}
-                      </p>
-                  </span>
-
+        <div className = "middleCardContainer">
+          <div className = "middleInviteCard">
+            <div className = "goingHolder">
+              <div className="goingTitle"> Going</div>
+              <div className="goingInviteNumber">###</div>
+                <div className = "">
+                  {/*
+                    <Liking
+                    history = {this.props.history}
+                    style={{display:'inline-block'}}
+                    num={5}
+                    like_people={accepted}/>
+                    */}
 
                 </div>
+          </div>
+
+          <div className = "invitedHolder">
+            <div className="inviteTitle"> Invited</div>
+            <div className="goingInviteNumber">###</div>
+            <div className = "">
+              {/*
+                <Liking
+                num={5}
+                history = {this.props.history}
+                style={{display:'inline-block'}}
+                like_people={invited}/>
+                */}
+
+            </div>
+          </div>
+
+          <div className = "buttonHolder">
+            <div className = "buttonsHolder">
+              <Button
+                 type="primary" shape="round"
+                 icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
+                 style={{marginRight:'1%'}}
+                size={'large'}>
+
+                Invite
+              </Button>
+
+               {
+                 (persons.includes(this.props.username))?
+                    <Button
+                       shape="round"
+                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                       style={{marginRight:'1%'}}
+                      size={'large'}>
+
+                      Going
+                    </Button>
+
+                    :
+                    <Button
+                       shape="round" type="primary"
+                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                       style={{marginRight:'1%'}}
+                       size={'large'}>
+
+                      Going
+                    </Button>
 
               }
 
+
+            <Button
+               shape="round"
+               icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+               style = {{marginRight: '3%'}}
+               size={'large'} danger>
+               Delete
+            </Button>
+
+
+            </div>
+          </div>
+
+
+          </div>
+        </div>
+
+        <div className = "eventBottomEntire">
+          <div className = "eventBottomLeft">
+            <div
+              class="eventDetailCard">
+              Event Details
+              <Divider/>
+              <div style={{fontSize:'16px'}}>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
+                Social Event
+                <br/>
+                <i style={{marginRight:'10px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
+                  {date} at {start_time} - {end_time}
+                <br/>
+                <i class="fas fa-user-friends" style={{marginRight:'10px', color:'#1890ff'}}></i>
+                  {persons.length} Going
+                <br/>
+                <br/>
+                <div className = "contentEvent"> {content} </div>
+
+               </div>
+              </div>
+          </div>
+
+          <div className = 'eventBottomRight'>
+            <div className = "inviteFriendsEventCard">
+                Invite Friends
+                <Divider/>
+                <Tabs defaultActiveKey="1">
+                  <TabPane tab="Suggested Friends" key="1">
+
+                    <List
+                        className="demo-loadmore-list scrollableFeature"
+                        style={{marginTop:'-10px'}}
+                        itemLayout="horizontal"
+                        dataSource={list}
+                        renderItem={item => (
+
+                        <List.Item>
+
+                          <Skeleton avatar title={false} loading={item.loading} active>
+
+                            <List.Item.Meta
+                              avatar={
+                                <Avatar
+                                  style = {{
+                                    cursor: "pointer"
+                                  }}
+                                  onClick = {() => this.profileDirect(item.username)}
+                                   src={item.profile_picture} />
+                                }
+                                title={<span
+                                  style = {{cursor: "pointer"}}
+                                   onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
+                                description={
+                                  <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                                  }
+                              />
+                            </Skeleton>
+                        </List.Item>
+                    )}
+                  />
+                </TabPane>
+                <TabPane tab="Pending Invites (2)" key="2">
+
+                  <div>hi</div>
+                </TabPane>
+              </Tabs>
+            </div>
+
+            <div class="mapEventCard">
+              Location
+              <span>
+                <Divider style={{marginTop:'-1px'}}/>
+                {/*
+                <ReactBingmaps
+                  bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+                  center = {[32.2226, 110.9747]}
+                  boundary = {
+                  {
+                    "search":"Fremont, CA",
+                    "option":{
+                      entityType: 'PopulatedPlace'
+                    },
+                    "polygonStyle" :{
+                      fillColor: 'rgba(161,224,255,0.4)',
+                      strokeColor: '#a495b2',
+                      strokeThickness: 2
+                    }
+                  }
+                }
+                  >
+                </ReactBingmaps>
+                */}
+                 {/*Saving api calls don't worry about maps*/}
+                <Divider/>
+                  <i style={{marginRight:'15px', color:'#1890ff',
+                    fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
+                  <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
+                    Tucson, Arizona
+                  </p>
+              </span>
+            </div>
+
+            <div className = "statEventCard">
+               <span> Statistics </span>
+              <Divider/>
+              <div className =  "percentagesBars">
+                <div className = "percentage">
+                  <Progress
+                    type = "circle"
+                    // percent={Math.floor(100*(((accepted.length-1)+decline.length)/invited.length))}
+                     size="small"
+                     status="active"
+                     width={80}
+                     gap
+                  />
+                  <div className = "percentageTerm"> Responded </div>
+                </div>
+              <div className = 'percentage'>
+                <Progress
+                  type = "circle"
+                  percent={Math.floor(100*((accepted.length-1)/(invited.length)))}
+                  width={80}
+                />
+                <div className = "percentageTerm"> Accepted </div>
+                </div>
+
+                <div className = "percentage">
+                {
+                  (Math.floor(100*(decline.length/invited.length))<100)?
+                   <Progress
+                     type = "circle" percent={Math.floor(100*(decline.length/invited.length))}
+                     width={80}
+                   />
+                  :
+                  <Progress
+                    type ="circle" percent={Math.floor(100*(decline.length/invited.length))}
+                    width={80}
+                   />
+                }
+                <div className = "percentageTerm" > Declined </div>
+                </div>
+              </div>
             </div>
 
 
 
-          </div>
-
-
 
 
           </div>
-
         </div>
 
-      }
+        <ChangeBackgroundModal
+        visible = {this.state.changeBackgroundView}
+        close = {this.onChangeBackgroundClose}
+        onSubmit = {this.handleBackgroundPictureChange}
+        pic = {eventBackgroundPic}
+        />
 
+        <DeleteSocialEventModal
+        visible = {this.state.showDeleteModal}
+        onCancel = {this.onCloseDeleteSocialModal}
+        eventId = {this.props.info.id}
+        onDelete = {this.onDeleteSocialEvent}
+        />
 
-
-
-      <ChangeBackgroundModal
-      visible = {this.state.changeBackgroundView}
-      close = {this.onChangeBackgroundClose}
-      onSubmit = {this.handleBackgroundPictureChange}
-      pic = {eventBackgroundPic}
-      />
-
-      <DeleteSocialEventModal
-      visible = {this.state.showDeleteModal}
-      onCancel = {this.onCloseDeleteSocialModal}
-      eventId = {this.props.info.id}
-      onDelete = {this.onDeleteSocialEvent}
-      />
-
+        <DetailEditEventForm
+        {...this.props}
+        visible={this.state.edit}
+        initialValues = {this.getInitialValue()}
+        onClose = {this.onCancelEventClick}
+        onSubmit = {this.onSaveEdit}
+        onDelete = {this.onOpenDeleteSocialModal}
+         />
 
       </div>
 
-    </div>
+
+
+
+
     )
   }
 

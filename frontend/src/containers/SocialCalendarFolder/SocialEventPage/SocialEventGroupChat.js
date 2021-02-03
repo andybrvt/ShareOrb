@@ -74,14 +74,28 @@ class SocialEventGroupChat extends React.Component{
       // time. If it is then it will return true if it is not the it will retunr
       // false
 
-    console.log(eventDay, eventTime)
-    let eventDate = dateFns.addHours(new Date(eventDay), 7)
-    const timeList = eventTime.split(":")
-    eventDate = dateFns.addHours(eventDate, timeList[0])
-    eventDate = dateFns.addMinutes(eventDate, timeList[1])
-    console.log(eventDate)
-    return dateFns.isAfter(eventDate, new Date())
 
+    if(eventDay && eventTime){
+      console.log(eventDay, eventTime)
+      let eventDate = dateFns.addHours(new Date(eventDay), 7)
+      const timeList = eventTime.split(":")
+      eventDate = dateFns.addHours(eventDate, timeList[0])
+      eventDate = dateFns.addMinutes(eventDate, timeList[1])
+      console.log(eventDate)
+      return dateFns.isAfter(eventDate, new Date())
+
+
+    }
+
+  }
+
+  renderTimeDiff = timestamp => {
+    const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
+    if(timeDiff > 20){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   componentDidMount() {
@@ -95,6 +109,8 @@ class SocialEventGroupChat extends React.Component{
   render(){
 
     let messages = []
+
+
     if(this.props.messages){
       messages = this.props.messages
     }
@@ -121,6 +137,8 @@ class SocialEventGroupChat extends React.Component{
     ];
     return (
       <div className = {`eventGCContainer ${this.props.active ? "" : "active"}`}>
+
+
 
         <div className = "messageCardContainer">
           <div class="eventGroupChatCard">
@@ -155,24 +173,30 @@ class SocialEventGroupChat extends React.Component{
                    <Avatar
                    className = 'eventMessageAvatar'
                    size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.messageUser.profile_picture} />
-                   </div>
-                   :
+                 <span className = "eventTextMessageHolder">
+                   <div className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}</div>
+                   <div className = "eventMessage">{item.body}</div>
+                   {
+                     this.renderTimeDiff(item.created_on) ?
 
-                   <div></div>
-                 }
-                 <div className = 'messageP'>
-                 {this.props.id !== item.messageUser.id ?
-                   <span className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}
-                   </span>
-                   :
-                   <span></span>
+                     <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
+                     :
 
-                 }
+                     <div></div>
+
+                   }
+
+                 </span>
 
 
-               <div>{item.body}</div>
-               <div className = 'eventTimeStamp'> {this.renderTimestamp(item.created_on)}</div>
                </div>
+                   :
+
+                   <div>
+                     <div> {item.body}</div>
+                   </div>
+                 }
+
                </div>
              )}
            >
@@ -183,10 +207,10 @@ class SocialEventGroupChat extends React.Component{
         </div>
 
 
-        <div className = "inputForm">
+        <div className = "eventMessageInputForm">
         {
           this.checkDay(this.props.date, this.props.endTime) ?
-          <div>
+          <div className = 'eventInputForm'>
             <Form>
               <Input
               className = "eventChatInput"
@@ -195,11 +219,16 @@ class SocialEventGroupChat extends React.Component{
               onPressEnter = {this.handleSubmit}
               placeholder = "Write a message..."
               />
+              <div className = "eventInputButtons">
+                <div
+                  class="roundButton"
+                  onClick = {this.handleSubmit}
+                  type="primary"> Send
+                </div>
+              </div>
+
             </Form>
-            <Button
-              style={{float:'right', marginTop:'10px', marginRight:'20px'}}
-              class="roundButton"
-              onClick = {this.handleSubmit} type="primary"> Chat </Button>
+
             </div>
 
 

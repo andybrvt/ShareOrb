@@ -709,7 +709,7 @@ class EventInfo extends React.Component{
                    shape="round"
                    icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
                   size={'large'}
-                  style={{marginRight:'1%'}}
+
                   >
                   Going
                 </Button>
