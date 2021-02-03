@@ -1,6 +1,5 @@
 /* CSS for container that holds the event page */
 .eventPageContainer{
-  background-color: white;
   width: 96vw;
   /* padding: 30px; */
   height:93vh;
@@ -12,13 +11,51 @@
   /* overflow: hidden; */
 }
 
+.eventBackgroundImg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+}
+.eventBackgroundImg.active{
+}
+.socialEventBackgroundPicN{
+  width: 100%;
+  height: 100%;
+  filter: brightness(100%) blur(8px);
+}
+
 /* CSS for the eventInfo side of the event page */
+/* @media screen and (min-width: 1001px){
+  .eventInfoContainer.active{
+    width: 60%;
+  }
+} */
+
+
+/* @media screen and (max-width: 1000px){
+  .eventInfoContainer.active{
+    width: 100%;
+  }
+} */
+
 .eventInfoContainer{
   width:70%;
   position:relative;
   /* align-items: center; */
   overflow: auto;
   height: 100%;
+  transition: 0.5s;
+  left: 0;
+  background-color: white;
+}
+
+.eventInfoContainer.active{
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
 }
 
 
@@ -27,6 +64,14 @@
   width:30%;
   height: 100%;
   position:relative;
+  transition: 0.7s;
+  left: 0;
+  background-color: white;
+}
+
+.eventGroupChatContainer.active{
+  /* display: none; */
+  left: 40%;
 }
 
 .eventInfoView{
@@ -106,6 +151,12 @@
   font-size: 250%;
   color: gainsboro;
 
+}
+
+.chatSwitchHolder{
+  position: absolute;
+  right: 10%;
+  top: 3%;
 }
 
 .menuButtonHolder{

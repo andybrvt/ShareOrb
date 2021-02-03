@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Progress, Avatar, Modal, message, notification, Divider, Statistic, List, Skeleton, Tabs} from 'antd';
+import {Button, Progress, Avatar, Modal, message, notification, Divider, Statistic, List, Skeleton, Tabs, Switch} from 'antd';
 import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
@@ -227,6 +227,8 @@ class SocialEventInfo extends React.Component{
   }
 
 
+
+
   render() {
     console.log(this.props)
 
@@ -325,6 +327,11 @@ class SocialEventInfo extends React.Component{
           </div>
 
           <div className = "topSectContainerRight">
+            <div className = "chatSwitchHolder">
+              <div>
+                <Switch checked = {this.props.active} onChange = {this.props.onShowViewChat}/>
+              </div>
+            </div>
             <div className = "menuButtonHolder">
               <div className = "closeEvent">
                 <i
@@ -336,7 +343,7 @@ class SocialEventInfo extends React.Component{
               <div className = "editEvent">
                 {
                   eventHostId === this.props.userId ?
-                  <div>
+                  <div className = "">
                     <div
                     onClick={() => this.onEditClick()}
                     >

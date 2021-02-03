@@ -103,6 +103,7 @@ class SocialEventPage extends React.Component{
   }
 
 
+
   openNotification = () => {
     const key = `open${Date.now()}`;
     const username = this.props.socialEventInfo.host.username
@@ -144,21 +145,39 @@ class SocialEventPage extends React.Component{
     console.log(this.props)
     return (
         <div class="eventPageContainer">
-          <div className = 'eventInfoContainer'>
-            <SocialEventInfo
-            info = {this.props.socialEventInfo}
-            userId = {this.props.id}
-            active = {this.state.showChats}
-            history = {this.props.history}
-             />
+          <div className = {`eventBackgroundImg ${this.state.showChats ?
+              "active" : ""
+              }`}>
+            <img
+              className = "socialEventBackgroundPicN"
+              src = {`${global.IMAGE_ENDPOINT}`+backgroundImage}
+            />
+
           </div>
 
-          <div className = "eventGroupChatContainer">
+
+            <div className = {`eventInfoContainer ${this.state.showChats ?
+                "" : "active"
+                }`}>
+              <SocialEventInfo
+              info = {this.props.socialEventInfo}
+              userId = {this.props.id}
+              active = {this.state.showChats}
+              history = {this.props.history}
+              onShowViewChat = {this.onShowChatChange}
+               />
+            </div>
+      
+
+
+          <div className = {`eventGroupChatContainer ${this.state.showChats ?
+              "" : "active"
+              }`}>
             <SocialEventGroupChat
             messages = {this.props.socialEventMessages}
             id = {this.props.id}
             eventId = {this.props.socialEventInfo.id}
-            active = {true}
+            active = {this.state.showChats}
             date = {this.props.socialEventInfo.event_day}
             endTime = {this.props.socialEventInfo.end_time}
              />
