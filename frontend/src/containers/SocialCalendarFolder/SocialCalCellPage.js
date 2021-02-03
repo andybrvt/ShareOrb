@@ -873,7 +873,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = "socialProfileHolder">
                         <Avatar
-                          size = {50}
+                          size = {30}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
                       </div>
@@ -926,7 +926,11 @@ class SocialCalCellPage extends React.Component{
 
                        :
 
-                       <div>
+                       <div
+                         style = {{
+                           "fontSize": "12px"
+                         }}
+                         >
                        {dayCaption} <span
                        className = "editCaptionPen"
                        onClick = {() => this.showEditCaption()}

@@ -55,7 +55,7 @@
 .eventInfoContainer.active{
   left: 50%;
   transform: translateX(-50%);
-  width: 60%;
+  width: 70%;
 }
 
 
@@ -71,7 +71,7 @@
 
 .eventGroupChatContainer.active{
   /* display: none; */
-  left: 40%;
+  left: 30%;
 }
 
 .eventInfoView{
@@ -156,7 +156,7 @@
 .chatSwitchHolder{
   position: absolute;
   right: 10%;
-  top: 3%;
+  top: 15px;
 }
 
 .menuButtonHolder{
