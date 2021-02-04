@@ -425,6 +425,9 @@
 .socialCaptionSect{
 }
 
+.dayCaptionC{
+  word-break: break-all;
+}
 
 .socialCaptionSect .dayCaption{
   position: relative;
@@ -633,7 +636,7 @@
 }
 
 .socialCommentItem .socialCommentBody .socialCommentText{
-  /* background-color: red; */
+  word-break: break-all;
   position: relative;
   /* top: 50%; */
 

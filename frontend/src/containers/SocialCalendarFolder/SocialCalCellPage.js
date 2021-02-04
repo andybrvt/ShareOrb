@@ -944,7 +944,7 @@ class SocialCalCellPage extends React.Component{
 
                        :
 
-                       <div>
+                       <div className = "dayCaptionC">
                        {dayCaption} <span
                        className = "editCaptionPen"
                        onClick = {() => this.showEditCaption()}
