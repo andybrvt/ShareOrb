@@ -652,7 +652,7 @@ class SocialCalCellPage extends React.Component{
         // } else if(captionLen >230 && captionLen <= 250){
         //   return "74%"
         // }
-        const final = base - (captionLen/23)
+        const final = base - (captionLen/23.7)
         const finalStr = final+"%"
 
         return finalStr;
