@@ -443,7 +443,7 @@ class CalendarPopOver extends React.Component{
                      {
 
                          (item.host.username==this.props.username)?
-                           <p class="highlightWord"
+                           <p class="centerPopUpName highlightWord"
                              onClick = {() => this.onProfileClick(item.host.username)}
                            >
 
@@ -452,7 +452,7 @@ class CalendarPopOver extends React.Component{
                          :
 
 
-                           <p class="highlightWord" style={{marginLeft:'15px', fontSize:'16px', display:'inline-block'}}
+                           <p class=" centerPopUpName highlightWord"
                              onClick = {() => this.onProfileClick(item.host.username)}
                            >
 
