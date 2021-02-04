@@ -154,21 +154,28 @@ class ChangeBackgroundModal extends React.Component{
           <div class="side2">
             <div class="imageMiddle">
               <Upload
+
                 name="avatar"
                 listType="picture-card"
-                className="uploadBox"
+                className = "uploadBox"
+
 
                 showUploadList={false}
                 // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
-                centered
               >
-                <div>
+                <div
+                  style = {{
+                    width: "500px"
+
+                  }}
+                  >
                   {
                     (imageUrl) ?
                     <img class="fitPhoto" src={imageUrl} alt="avatar" />
                     :
+
                     <i style={{fontSize:'80px', }} class="fas fa-upload"></i>
                   }
                 </div>
