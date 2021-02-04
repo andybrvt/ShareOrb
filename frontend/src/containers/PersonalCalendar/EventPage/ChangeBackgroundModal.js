@@ -135,15 +135,15 @@ class ChangeBackgroundModal extends React.Component{
 
             {
             (this.props.pic.length>0)?
-
+              <div class="imageMiddle">
                   <img class="changeProfilePic"
 
                     src={`${global.IMAGE_ENDPOINT}`+this.props.pic}></img>
-
+                </div>
 
 
               :
-              <div><Avatar style={{left:'20%', marginTop:'150px'}} size={200}
+              <div class="imageMiddle"><Avatar size={200}
                 icon={<img class="changeAvatar"
 
                 src={`${global.IMAGE_ENDPOINT}`+this.props.hostPic}></img>} /></div>
@@ -152,30 +152,29 @@ class ChangeBackgroundModal extends React.Component{
              }
           </div>
           <div class="side2">
+            <div class="imageMiddle">
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                className="uploadBox"
 
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="uploadBox"
-              showUploadList={false}
-              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              beforeUpload={beforeUpload}
-              onChange={this.handleChange}
+                showUploadList={false}
+                // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                beforeUpload={beforeUpload}
+                onChange={this.handleChange}
+                centered
+              >
+                <div>
+                  {
+                    (imageUrl) ?
+                    <img class="fitPhoto" src={imageUrl} alt="avatar" />
+                    :
+                    <i style={{fontSize:'80px', }} class="fas fa-upload"></i>
+                  }
+                </div>
 
-
-            >
-              <div>
-                {
-                  (imageUrl) ?
-                  <img class="fitPhoto" src={imageUrl} alt="avatar" />
-                  :
-
-                  <i style={{fontSize:'80px', marginTop:'200px'}} class="fas fa-upload"></i>
-                }
-              </div>
-
-            </Upload>
-
+              </Upload>
+            </div>
           </div>
 
 

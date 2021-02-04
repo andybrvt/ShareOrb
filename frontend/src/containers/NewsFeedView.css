@@ -56,7 +56,6 @@
   padding:30px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   width:100%;
-  font-weight: 800;
   /* background-color: red; */
 
 }
@@ -223,20 +222,10 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
 }
 
 
-.sectionTitles{
-  /* Section Title */
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 17px;
-line-height: 21px;
-color: #203758;
+.topCardHeader{
+  font-weight: 400;
 }
 
-
-.avatarPic {
-  font-size: 12;
-}
 
 .morePeopleHeader{
   text-align: center;
