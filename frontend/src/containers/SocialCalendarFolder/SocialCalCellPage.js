@@ -626,10 +626,10 @@ class SocialCalCellPage extends React.Component{
       let base = 84
 
       if(this.state.showCaptionInput){
-        base = 72.75
+        base = 74.2
       }
       if(userId !== hostId){
-        base = base + 1.25
+        base = base + 2.75
       }
 
       return base+"%";
@@ -639,23 +639,23 @@ class SocialCalCellPage extends React.Component{
       let base = 84
 
       if(this.state.showCaptionInput){
-        return "72.75%"
+        return "73.75%"
       } else {
-        // if(captionLen <= 50 ){
-        //   return "84%"
-        // } else if(captionLen >50 && captionLen <= 130){
-        //   return "81.5%"
-        // } else if(captionLen >130 && captionLen <= 180){
-        //   return "79%"
-        // }else if(captionLen >180 && captionLen <= 230){
-        //   return "76.5%"
-        // } else if(captionLen >230 && captionLen <= 250){
-        //   return "74%"
-        // }
-        const final = base - (captionLen/23.7)
-        const finalStr = final+"%"
-
-        return finalStr;
+        if(captionLen <= 80 ){
+          return "84%"
+        } else if(captionLen >80 && captionLen <= 130){
+          return "81.5%"
+        } else if(captionLen >130 && captionLen <= 180){
+          return "79%"
+        }else if(captionLen >180 && captionLen <= 230){
+          return "76.5%"
+        } else if(captionLen >230 && captionLen <= 250){
+          return "74%"
+        }
+        // const final = base - (captionLen/23)
+        // const finalStr = final+"%"
+        //
+        // return finalStr;
 
       }
 
@@ -881,9 +881,7 @@ class SocialCalCellPage extends React.Component{
                  <div> </div>
 
                }
-               <div
-                 style = {{}}
-                 className = "topSection">
+               <div className = "topSection">
                  <div className = 'socialNameSect'>
 
                    <div className = "socialName">
@@ -891,7 +889,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = "socialProfileHolder">
                         <Avatar
-                          size = {35}
+                          size = {40}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
                       </div>
@@ -926,11 +924,13 @@ class SocialCalCellPage extends React.Component{
                        this.state.showCaptionInput ?
 
                        <div className = "textAreaHolder">
+
                         <TextArea
                         className = "captionTextHolder"
                         placeHolder = "Write a caption"
                         maxLength = {250}
                         showCount
+                        rows = {4}
                         onChange = {this.onCaptionChange}
                         value = {this.state.caption}
                         onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
@@ -944,11 +944,7 @@ class SocialCalCellPage extends React.Component{
 
                        :
 
-                       <div
-                         style = {{
-                           "fontSize": "12px"
-                         }}
-                         >
+                       <div>
                        {dayCaption} <span
                        className = "editCaptionPen"
                        onClick = {() => this.showEditCaption()}
@@ -964,6 +960,7 @@ class SocialCalCellPage extends React.Component{
                         placeHolder = "Write a caption"
                         maxLength = {250}
                         showCount
+                        rows = {15}
                         onChange = {this.onCaptionChange}
                         onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
                          />
@@ -1045,14 +1042,8 @@ class SocialCalCellPage extends React.Component{
                   </div>
 
                  </div>
-               </div>
 
 
-               <div
-                 style = {{
-                   height: this.heightCal(dayCaption.length)
-                 }}
-                 className = "bottomSection">
 
                  <div className = "socialLikeCommentSect">
 
@@ -1143,35 +1134,43 @@ class SocialCalCellPage extends React.Component{
                  </div>
 
 
-                <div className = "socialCommentInputSect">
-                  <div className = 'socialCommentInput'>
-                    <Avatar
-                    size = {30}
-                    className ='socialPicInput'
-                    src = {`${global.IMAGE_ENDPOINT}`+ this.props.curProfilePic}/>
-                  <div className = 'socialInputFormHolder'>
-                      <Form className = "socialInputForm">
-                        <Input
-                        className= 'socialBoxInput'
-                        onChange ={this.onCommentChange}
-                        value = {this.state.comment}
-                        // bordered = {false}
-                        placeholder = 'Write a comment'
-                        name = 'socialComment'
-                        onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
-                        // rows = {1}
+
+
+               </div>
+
+
+               <div className = "bottomSection">
+
+                 <div className = "socialCommentInputSect">
+                   <div className = 'socialCommentInput'>
+                     <Avatar
+                     size = {30}
+                     className ='socialPicInput'
+                     src = {`${global.IMAGE_ENDPOINT}`+ this.props.curProfilePic}/>
+                   <div className = 'socialInputFormHolder'>
+                       <Form className = "socialInputForm">
+                         <Input
+                         className= 'socialBoxInput'
+                         onChange ={this.onCommentChange}
+                         value = {this.state.comment}
+                         // bordered = {false}
+                         placeholder = 'Write a comment'
+                         name = 'socialComment'
+                         onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
+                         // rows = {1}
+                          />
+
+                         <button
+                         // type = 'submit'
+                         // onClick = {this.handleSubmit}
+                         style = {{display: 'none'}}
                          />
+                       </Form>
+                     </div>
 
-                        <button
-                        // type = 'submit'
-                        // onClick = {this.handleSubmit}
-                        style = {{display: 'none'}}
-                        />
-                      </Form>
-                    </div>
-
+                   </div>
                   </div>
-                 </div>
+
 
 
                  <div className = "socialEventSect">

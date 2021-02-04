@@ -120,7 +120,7 @@ class SocialEventList extends React.Component{
        itemLayout="horizontal"
        dataSource={itemList}
        renderItem={item => (
-         <List.Item className = 'socialListItem'>
+         <div className = 'socialListItem'>
 
            <div className = "socialEventListText">
 
@@ -185,7 +185,9 @@ class SocialEventList extends React.Component{
               </div>
 
                <div className = "socialEventLiking">
-               <Liking like_people = {item.persons} />
+               <Liking
+                 specifySize = {25}
+                 like_people = {item.persons} />
                </div>
              </div>
              </div>
@@ -272,7 +274,7 @@ class SocialEventList extends React.Component{
              </div>
            </div>
 
-         </List.Item>
+         </div>
        )}
      />
      </div>

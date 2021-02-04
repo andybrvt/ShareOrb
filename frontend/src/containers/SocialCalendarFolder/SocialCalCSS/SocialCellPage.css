@@ -233,7 +233,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: red;
 }
 
 
@@ -257,9 +256,10 @@
   font-size: 45px;
 }
 
+
 .clipPicBackground {
   position: relative;
-  height: 550px;
+  height: 95vh;
   width: 100%;
 }
 
@@ -307,7 +307,7 @@
   /* height:800px; */
   /* background-color: #000000cc; */
   overflow: hidden;
-  height: 100%;
+  height: 95vh;
   position: relative;
 }
 
@@ -356,11 +356,13 @@
 .socialModalRight .topSection{
   position: relative;
   display: flex;
+  overflow: auto;
   flex-direction: column;
+  height: 75%;
 }
 
 .socialNameSect{
-  padding-top: 5px;
+  padding-top: 10px;
   padding-bottom: 5px;
   display: flex;
   flex-direction: row;
@@ -381,7 +383,7 @@
 }
 
 .socialNameTag .socialProfileHolder{
-  width: 25%;
+  width: 20%;
 }
 .socialNameTag .socialNameHolder{
   width: 70%;
@@ -396,13 +398,13 @@
 }
 .socialNameTag .socialNameHolder .socialNameName{
   height: 50%;
-  font-size: 12px;
+  font-size: 15px;
   color: black;
 }
 .socialNameTag .socialNameHolder .socialUsername{
   height: 50%;
   color: gray;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .socialNameSect .socialDate{
@@ -423,12 +425,12 @@
 .socialCaptionSect{
 }
 
+
 .socialCaptionSect .dayCaption{
   position: relative;
   width: 90%;
   left: 50%;
   transform:translateX(-50%);
-  font-size: 12px;
   /* height: 12.5%; */
 }
 .editCaptionPen {
@@ -527,12 +529,13 @@
 
 .socialModalRight .bottomSection{
   position: relative;
+  height: 30%;
   /* height: 84%; */
   /* height: 74%; */
 }
 
-.socialModalRight .bottomSection .socialLikeCommentSect{
-  height: 6%;
+.socialModalRight .topSection .socialLikeCommentSect{
+  height: 40px;
 }
 .socialLikeComment{
   /* background-color: red; */
@@ -574,24 +577,23 @@
 
 
 /* This is to hold the comment section */
-.socialModalRight .bottomSection .socialCommentListSect{
-  height: 59%;
+.socialModalRight .topSection .socialCommentListSect{
 }
 .socialCommentListSect .socialCommentBoxBox{
   position: relative;
   height: 100%;
   /* max-height: 55%; */
   width: 100%;
-  overflow:hidden;
+  /* overflow:hidden; */
   /* display: flex; */
   /* background-color: red; */
 }
 .socialCommentListSect .socialCommentBoxBox .socialCommentBox {
   /* background-color: blue  ; */
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   padding-left: 10px;
-  overflow:auto;
+  /* overflow:auto; */
   /* width: 50%; */
 }
 .socialCommentItem {
@@ -638,7 +640,7 @@
 }
 
 .socialModalRight .bottomSection .socialCommentInputSect{
-  height: 8%;
+  height: 20%;
 }
 
 .socialCommentInputSect .socialCommentInput{
@@ -653,7 +655,7 @@
 
 .socialCommentInputSect .socialCommentInput .socialInputFormHolder{
   position: relative;
-  width: 88%;
+  width: 80%;
 }
 .socialCommentInputSect .socialCommentInput .socialInputFormHolder .socialInputForm{
   width: 100%;
@@ -664,7 +666,7 @@
 }
 
 .socialModalRight .bottomSection .socialEventSect{
-  height: 27%;
+  height: 80%;
 }
 .socialEventSect .socialListBox{
   /* background-color: red; */
@@ -681,15 +683,19 @@
 
 .socialEventSect .socialListBox .socialListItem{
   /* background-color: red; */
-  margin: 3px;
+  margin: 5px;
   padding-left: 15px;
-  /* padding-top: 10px; */
-  height: 140px;
+  /* padding-top: 5px; */
+  height: 100px;
   border: 1px solid gainsboro;
   border-radius: 5px;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   display: flex;
   flex-direction: row;
+  transition: 0.2s;
+}
+.socialEventSect .socialListBox .socialListItem:hover{
+  transform: scale(1.05);
 }
 
 .socialListItem .socialEventListText{
@@ -710,7 +716,7 @@
 }
 .socialEventTitleContainer .socialEventTitle{
  /* background-color: red; */
- font-size:  25px;
+ font-size:  20px;
 }
 .socialEventTitleContainer .socialPublicTag{
   position: relative;
@@ -747,7 +753,7 @@
   height: 20%;
 }
 .socialEventListTextSecond .socialEventLocation{
-  font-size: 15px;
+  font-size: 12px;
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -761,12 +767,12 @@
 .socialEventLocation .socialEventLocationText{
   height: 100%;
   color: black;
+  font-size: 12px;
 }
 .socialEventListText .socialEventListTextThird{
   width: 100%;
 }
 .socialEventListTextThird .socialEventTime{
-  font-size: 15px;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -777,10 +783,13 @@
   height: 100%;
   color: black;
   width: 7%;
+  font-size: 12px;
 }
 .socialEventTime .socialEventTimeText{
   height: 100%;
   color: black;
+  font-size: 12px;
+
 }
 
 .socialEventListText .socialEventListTextFourth{
@@ -792,6 +801,7 @@
   flex-direction: row;
   position: relative;
   height: 100%;
+  font-size: 12px;
 }
 .socialEventCapcity .socialEventUserIcon{
   position: relative;

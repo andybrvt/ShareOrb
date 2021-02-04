@@ -195,44 +195,20 @@ class PictureCarousel extends React.Component{
         className = 'socialArrowLeft'
         onClick = {this.previous} />
 
-      <Carousel
+        <Carousel
         arrows = {true}
         effect = 'null'
         ref = {node => {this.carousel = node}}
-        afterChange={this.onChange}
-        >
+        afterChange={this.onChange}>
+          {this.renderPictures(itemList)}
+        </Carousel>
 
 
-        <div>
-          hey there
-
-        </div>
-
-        <div>
-          sup man
-        </div>
-      </Carousel>
 
         <RightCircleOutlined
         className = 'socialArrowRight'
         onClick = {this.next} />
-        {/*
 
-          <Carousel
-          style = {{
-            backgroundColor: "red",
-            height: "100%"
-          }}
-          arrows = {true}
-          effect = 'null'
-          ref = {node => {this.carousel = node}}
-          afterChange={this.onChange}>
-            {this.renderPictures(itemList)}
-          </Carousel>
-
-
-
-          */}
 
       </div>
     )
