@@ -137,7 +137,7 @@ class NewsfeedPost extends React.Component {
         <div
           onClick = {() => this.OnClickPost(postId, username)}
           class="imageContainer">
-          <a><img src={`${global.NEWSFEED_PICS}`+userPostImages[0]} alt="" /></a>
+          <div class="testMiddle"><img src={`${global.NEWSFEED_PICS}`+userPostImages[0]} alt="" /></div>
         </div>
       )
     } else if(userPostImages.length>1){

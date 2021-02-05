@@ -351,9 +351,9 @@ getPageName(postOwnerName){
       <div className = "socialModalLeft">
         {
           userPostImages.length === 1 ?
-          <div>
+          <div   className = 'testSingle'>
             <img
-              className = 'testSingle'
+
               src = {`${global.API_ENDPOINT}/media/`+userPostImages[0]}
              />
           </div>
