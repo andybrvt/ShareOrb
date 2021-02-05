@@ -42,9 +42,9 @@ class PostPicCarousel extends React.Component{
           socialItems.push(
             <div className = 'picturesRoll'>
               <img
-              className = 'socialImages'
+
               // PICTUREXXXURL
-              src ={`${global.API_ENDPOINT}/media/`+item} />
+              src ={`${global.NEWSFEED_PICS}`+item} />
             </div>
           )
         }
@@ -71,7 +71,7 @@ class PostPicCarousel extends React.Component{
     }
 
 
-  
+
     return (
       <div className = 'socialLeftRight'>
 

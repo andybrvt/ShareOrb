@@ -324,7 +324,7 @@ getPageName(postOwnerName){
       if(this.props.post.user){
         userUser = this.props.post.user
         userPostUsername = this.props.post.user.username
-        userPostProfilePic = `${global.API_ENDPOINT}`+this.props.post.user.profile_picture
+        userPostProfilePic = `${global.IMAGE_ENDPOINT}`+this.props.post.user.profile_picture
         userPostUserId = this.props.post.user.id
         userFirstName=this.props.post.user.first_name
         userLastName=this.props.post.user.last_name
@@ -355,7 +355,7 @@ getPageName(postOwnerName){
           <div className = "singlePicHolder">
             <img
               className = 'singlePic'
-              src = {`${global.API_ENDPOINT}/media/`+userPostImages[0]}
+              src = {`${global.NEWSFEED_PICS}`+userPostImages[0]}
              />
           </div>
 

@@ -308,17 +308,3 @@
   z-index: 3;
   font-size: 45px;
 }
-
-.postPicturesRoll{
-  /* height:800px; */
-  /* background-color: #000000cc; */
-  overflow: hidden;
-  height: 920px;
-  position: relative;
-}
-.postPicturesRoll .socialImages{
-  position: relative;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
