@@ -112,102 +112,115 @@ class UserInfoSettings extends React.Component{
     return(
       <div className = "settingsBackGround">
 
-        <Menu
-          selectedKeys = {["1"]}
-          // onClick={this.handleClick}
-          style={{ width: 256 }}
-          mode="inline"
-          className ="sideMenu"
-        >
-          <Menu.Item
-          key = "1"
-          onClick = {() => this.props.history.push("/settings")}
-          > User Information </Menu.Item>
-          <Menu.Item
-          key = "2"
-          onClick = {() => this.props.history.push("/settings/calPref")}
-          > Calendar Preference </Menu.Item>
-          <Menu.Item
-          key = "3"
-          onClick = {() => this.props.history.push("/settings/privacy")}
-          > Privacy </Menu.Item>
-        </Menu>
+        <div  className = "sideMenu">
+          <Menu
+            selectedKeys = {["1"]}
+            // onClick={this.handleClick}
+            mode="inline"
+            className = "sideMenuMenu"
+          >
+            <Menu.Item
+            key = "1"
+            onClick = {() => this.props.history.push("/settings")}
+            > User Information </Menu.Item>
+            <Menu.Item
+            key = "2"
+            onClick = {() => this.props.history.push("/settings/calPref")}
+            > Calendar Preference </Menu.Item>
+            <Menu.Item
+            key = "3"
+            onClick = {() => this.props.history.push("/settings/privacy")}
+            > Privacy </Menu.Item>
+          </Menu>
 
-        <div className = "rightInfo">
-
-        <form onSubmit = {handleSubmit(this.submit)}>
-
-          <div>
-            <span> Username </span>
-            <Field
-            name = 'username'
-            component = {renderField}
-            type = "text"
-            />
-
-          </div>
-
-          <div>
-            <span> First Name </span>
-            <Field
-            name = 'firstName'
-            component = {renderField}
-            type = 'text'
-            />
-          </div>
-
-          <div>
-            <span> Last Name </span>
-            <Field
-            name = "lastName"
-            component = {renderField}
-            type = "text"
-            />
-          </div>
-
-          <div>
-            <span> Date of Birth </span>
-            <Field
-            name = "dob"
-            component = {renderField}
-            type = "text"
-            />
-          </div>
-
-          <div>
-          <span> Phone number </span>
-            <Field
-            name = "phone_number"
-            component = {renderField}
-            type = "text"
-            validate={phoneNumber}
-
-            />
-          </div>
-
-
-          <div>
-            <span> Email </span>
-            <Field
-            name = "email"
-            component = {renderField}
-            type = "text"
-            validate={email}
-
-            />
-          </div>
-
-          <Button
-          type = "primary"
-          // handleSubmit = {}
-          disabled = {pristine || invalid}
-          htmlType = "submit"
-          > Save </Button>
-
-
-        </form>
 
         </div>
+
+        <div className = "rightInfo">
+          <form
+            className = "userInfoSettingsForm"
+             onSubmit = {handleSubmit(this.submit)}>
+
+            <div className = "settingsTextField">
+              <div className = "settingText"> Username </div>
+              <Field
+              name = 'username'
+              component = {renderField}
+              type = "text"
+              />
+
+            </div>
+
+            <div className = "settingsTextField">
+              <div className = "settingText"> First Name </div>
+              <Field
+              name = 'firstName'
+              component = {renderField}
+              type = 'text'
+              />
+            </div>
+
+            <div className = "settingsTextField">
+              <div className = 'settingText'> Last Name </div>
+              <Field
+              name = "lastName"
+              component = {renderField}
+              type = "text"
+              />
+            </div>
+
+            <div className = "settingsTextField">
+              <div className = "settingText"> Date of Birth </div>
+              <Field
+              name = "dob"
+              component = {renderField}
+              type = "text"
+              />
+            </div>
+
+            <div className = "settingsTextField">
+            <div className= "settingText"> Phone number </div>
+              <Field
+              name = "phone_number"
+              component = {renderField}
+              type = "text"
+              validate={phoneNumber}
+
+              />
+            </div>
+
+
+            <div className = "settingsTextField">
+              <div className = "settingText"> Email </div>
+              <Field
+              name = "email"
+              component = {renderField}
+              type = "text"
+              validate={email}
+
+              />
+            </div>
+
+            <Button
+            type = "primary"
+            // handleSubmit = {}
+            disabled = {pristine || invalid}
+            htmlType = "submit"
+            > Save </Button>
+
+
+          </form>
+
+        </div>
+
+        {/*
+
+          <div className = "rightInfo">
+
+
+          </div>
+
+          */}
 
 
       </div>

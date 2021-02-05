@@ -181,13 +181,6 @@ class PictureCarousel extends React.Component{
 
 
 
-    const contentStyle = {
-      height: '800px',
-      color: '#fff',
-      lineHeight: '160px',
-      textAlign: 'center',
-      background: '#364d79',
-    };
 
     return (
       <div className = 'socialLeftRight'>

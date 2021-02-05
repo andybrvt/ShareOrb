@@ -43,7 +43,7 @@ class NewsfeedSpecCarousel extends React.Component{
               <img
               className = 'specImages'
               // PICTUREXXXURL
-              src ={`${global.API_ENDPOINT}/media/`+item} />
+              src ={`${global.NEWSFEED_PICS}`+item} />
 
             </div>
           )

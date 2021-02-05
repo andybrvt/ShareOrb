@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import PostPicCarousel from './PostPicCarousel';
 import * as newsfeedActions from '../../store/actions/newsfeed';
 import * as dateFns from 'date-fns';
-import './UserPostPage.css';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 
@@ -88,9 +87,9 @@ class UserPostPage extends React.Component{
 
     if(this.state.comment !== ''){
       UserPostPageWebSocketInstance.sendUserPostComment(
-        this.props.curUser,
+        this.props.curId,
         this.state.comment,
-        this.props.postId
+        this.props.post.id
       )
 
       this.setState({comment: ''})
@@ -241,6 +240,28 @@ class UserPostPage extends React.Component{
   });
 };
 
+getPageName(postOwnerName){
+  // This function will show the correct name of the user that you are chatting
+  // with
+
+  var name = ""
+  console.log(postOwnerName)
+  if(postOwnerName.first_name && postOwnerName.last_name){
+    name = this.capitalize(postOwnerName.first_name)+ ' '
+        +this.capitalize(postOwnerName.last_name)
+
+  }
+
+  if(name.length > 20){
+    name = name.substring(0,20)+'...'
+  }
+
+
+  console.log(name)
+  return name;
+
+}
+
 
   cellThreeDots = () => {
     // This drop down is for the calendar cell in itself. To delete the cell
@@ -259,7 +280,7 @@ class UserPostPage extends React.Component{
           </Menu>
         }>
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          <i class="fas fa-ellipsis-h" style={{color: "gray"}}></i>
+          <i class="fas fa-ellipsis-v" style={{fontSize:'30px', padding:'0px', color: "gray"}}></i>
         </a>
         </Dropdown>
 
@@ -274,6 +295,7 @@ class UserPostPage extends React.Component{
     console.log(this.props)
     console.log(this.state)
 
+    let userUser = {}
     let userPostImages = []
     let userPostComments = []
     let userPostUsername = ''
@@ -299,8 +321,9 @@ class UserPostPage extends React.Component{
         userPostComments = this.props.post.post_comments
       }
       if(this.props.post.user){
+        userUser = this.props.post.user
         userPostUsername = this.props.post.user.username
-        userPostProfilePic = `${global.API_ENDPOINT}`+this.props.post.user.profile_picture
+        userPostProfilePic = `${global.IMAGE_ENDPOINT}`+this.props.post.user.profile_picture
         userPostUserId = this.props.post.user.id
         userFirstName=this.props.post.user.first_name
         userLastName=this.props.post.user.last_name
@@ -323,12 +346,9 @@ class UserPostPage extends React.Component{
     }
 
     return(
-      <div
-      className = "userPostModal"
-      >
-        <div
-        className = "postHolder"
-        >
+      <div className = "socialCalCellModal">
+
+      <div className = "socialModalLeft">
         {
           userPostImages.length === 1 ?
           <div>
@@ -347,15 +367,226 @@ class UserPostPage extends React.Component{
           </div>
 
         }
+      </div>
+
+
+      <div className = "socialModalRight">
+
+        {
+          userPostUserId === this.props.curId ?
+          this.cellThreeDots()
+
+          :
+
+          <div> </div>
+
+        }
+
+        <div className = "postTopSection">
+          <div className = "socialNameSect">
+            <div className = "socialName">
+              <div className = "socialNameTag">
+                <div className = "socialProfileHolder">
+                  <Avatar
+                    size = {40}
+                    src = {userPostProfilePic}
+                    className = 'socialProfileImage'
+                  />
+                </div>
+
+                <div className = "socialNameHolder">
+                  <div className = "socialNameName"> {this.getPageName(userUser)} </div>
+                  <div className = "socialUsername"> @{userPostUsername}</div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className = "socialDate">
+              <div className = "socialDateDate">
+                {userPostDate}
+              </div>
+            </div>
+          </div>
+
+          <div className = "socialCaptionSect">
+            <div className = "dayCaption">
+                {caption}
+            </div>
+
+          </div>
+
+          <div className = "socialLikingSect">
+
+            <div className = "socialLikeCommentNum">
+              <div className = "socialLikeCommentNumHolder">
+                {
+                  peopleLikeId.includes(this.props.curId) ?
+
+                  <div className = ''>
+                    <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                  </div>
+
+                  :
+
+                  <div className = ''>
+                    <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+
+                  </div>
+                }
+                <div className = "socialLikeCommentText">
+                  <div>
+                    {people_like.length} <span className = "disappearLikes"> Likes</span>
+                  </div>
+                  <Divider type="vertical" style={{height:'100%'}}/>
+
+                  <div>
+                    {userPostComments.length} <span className = 'disappearComments'> Comments </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div className = "socialLikingLiking">
+              <div className = "socialLikeAvatar">
+
+                <Liking {...this.props} like_people={people_like} specifySize={25} num={10}/>
+
+              </div>
+            </div>
+
+
+          </div>
+
+          <div className = 'socialLikeCommentSect'>
+
+            <div className = "socialLikeComment">
+              {
+                peopleLikeId.includes(this.props.curId) ?
+
+                <div
+                onClick = {() => this.onPostUnlike(this.props.curId)}
+                className ='socialLike'>
+                <div className = "textHeightCenter">
+                  <i
+                    style={{ marginRight:'10px', color:'red'}}
+                    class="fas fa-heart">
+                  </i>
+                  Unlike
+                </div>
+
+                </div>
+
+                :
+
+                <div
+                onClick = {() => this.onPostLike(this.props.curId)}
+                className ='socialLike'>
+                <div className = 'textHeightCenter'>
+                  <i
+                    style={{ marginRight:'10px'}}
+                    class="fa fa-heart">
+                  </i>
+                  Like
+                </div>
+                </div>
+
+              }
+              <div className  = 'socialComment'>
+               <div className = 'textHeightCenter'>
+                 <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
+                  Comment
+               </div>
+              </div>
+
+              {
+                this.props.match.params.username === this.props.username   ?
+
+                <div></div>
+
+                :
+
+                <div
+                onClick = {() => this.onClipCurPhoto()}
+                className  = 'socialComment'>
+                <div className = "textHeightCenter">
+                  <i
+                  style={{ marginRight:'10px'}}
+                  class="fa fa-archive"></i>
+                 Clip
+                </div>
+                </div>
+
+              }
+
+
+
+            </div>
+
+          </div>
+
+          <div className = "socialCommentListSect">
+            <UserPostComments
+            caption = {caption}
+            curUser = {this.props.curId}
+            postId = {this.props.match.params.postId}
+            items = {userPostComments}
+            profilePic = {this.props.curProfilePic}
+             />
+
+         </div>
+
+
+        </div>
+
+        <div className ="postBottomSection">
+
+          <div className = "socialCommentInputSect">
+            <div className = "socialCommentInput">
+              <Avatar
+              size = {30}
+              className ='socialPicInput'
+              src = {`${global.IMAGE_ENDPOINT}`+this.props.curProfilePic}/>
+              <Form>
+                <Input
+                className= 'socialBoxInput'
+                onChange ={this.handleChange}
+                value = {this.state.comment}
+                // bordered = {false}
+                placeholder = 'Write a comment'
+                name = 'postComment'
+                onPressEnter = {() =>this.handleSubmit()}
+                // rows = {1}
+                 />
+
+                <button
+                type = 'submit'
+                onClick = {() => this.handleSubmit()}
+                style = {{display: 'none'}}
+                />
+              </Form>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      {/*
+        <div
+        className = "postHolder"
+        >
+
 
 
           <div className = "postModalRight">
               <div className = "postNameTag">
-                <Avatar
-                  size = {42.5}
-                  src = {userPostProfilePic}
-                  className = 'socialProfileImage'
-                />
+
 
                 <span
                   style={{color:'black', fontSize:'15px', marginLeft:'10px'}}
@@ -369,15 +600,6 @@ class UserPostPage extends React.Component{
                     </span>
                   </span>
                 </span>
-                {
-                  userPostUserId === this.props.curId ?
-                  this.cellThreeDots()
-
-                  :
-
-                  <div> </div>
-
-                }
 
               </div>
 
@@ -387,19 +609,7 @@ class UserPostPage extends React.Component{
 
 
               <div className = "postLikeCommentNum">
-                {
-                  peopleLikeId.includes(this.props.curId) ?
 
-                  <div className = 'socialLikeCircle'>
-                  <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
-                  </div>
-
-                  :
-
-                  <div className = 'socialLikeCircle'>
-                  <i class="far fa-heart" style={{marginRight:'5px'}}></i>
-                  </div>
-                }
 
                 <span className = 'postLikeCommentText' style={{color:'#595959'}}>
                   {people_like.length}
@@ -407,61 +617,12 @@ class UserPostPage extends React.Component{
                   <i style={{marginRight:'5px'}} class="far fa-comment"></i>
                   {userPostComments.length} comments </span>
                 <div className = 'postLikeAvatar'>
-                <Liking {...this.props} like_people={people_like} specifySize={25} num={10}/>
                 </div>
               </div>
 
               <div style={{color:'#595959'}} className = "postLikeComment">
-              {
-                peopleLikeId.includes(this.props.curId) ?
-
-                <div
-                onClick = {() => this.onPostUnlike(this.props.curId)}
-                className ='postLike'>
-                <i
-                  style={{ marginRight:'10px', color:'red'}}
-                  class="fas fa-heart">
-                </i>
-                Unlike
-                </div>
-
-                :
-
-                <div
-                onClick = {() => this.onPostLike(this.props.curId)}
-                className ='postLike'>
-                <i
-                  style={{ marginRight:'10px'}}
-                  class="far fa-heart">
-                </i>
-                Like
-                </div>
 
 
-
-              }
-              <div className  = 'postComment'>
-              <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-               Comment
-               </div>
-
-               {
-                 this.props.match.params.username === this.props.username   ?
-
-                 <div></div>
-
-                 :
-
-                 <div
-                 onClick = {() => this.onClipCurPhoto()}
-                 className  = 'postComment'>
-                   <span
-                   style={{ marginRight:'10px'}}
-                   class="fa fa-archive"></span>
-                  Clip
-                  </div>
-
-               }
 
 
 
@@ -469,41 +630,17 @@ class UserPostPage extends React.Component{
 
 
 
-              <UserPostComments
-              caption = {caption}
-              curUser = {this.props.curId}
-              postId = {this.props.match.params.postId}
-              items = {userPostComments}
-              profilePic = {this.props.curProfilePic}
-               />
-               <div className = 'postCommentInput'>
-                 <Avatar
-                 size = {30}
-                 className ='postPicInput'
-                 src = {`${global.IMAGE_ENDPOINT}`+this.props.profilePic}/>
-                 <Form>
-                   <Input
-                   className= 'postBoxInput'
-                   onChange ={this.handleChange}
-                   value = {this.state.comment}
-                   // bordered = {false}
-                   placeholder = 'Write a comment'
-                   name = 'postComment'
-                   onPressEnter = {this.handleSubmit}
-                   // rows = {1}
-                    />
 
-                   <button
-                   // type = 'submit'
-                   // onClick = {this.handleSubmit}
-                   style = {{display: 'none'}}
-                   />
-                 </Form>
+               <div className = 'postCommentInput'>
+
                </div>
 
 
           </div>
         </div>
+
+        */}
+
       </div>
     )
   }

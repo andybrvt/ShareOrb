@@ -1,5 +1,4 @@
 import React from 'react';
-import './UserPostPage.css';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import UserPostPageWebSocketInstance from '../../UserPostPageWebsocket'
 import * as dateFns from 'date-fns';
@@ -18,7 +17,7 @@ class UserPostComments extends React.Component{
 
 
 
-  
+
 
   heightCal = (captionLen) => {
     // This function is used to calculate the height of the comments by the
@@ -54,6 +53,15 @@ class UserPostComments extends React.Component{
     return prefix;
   }
 
+  nameShortener = (firstName, lastName) => {
+    let name = firstName+ " " +lastName
+    if(name.length > 30){
+      name = name.substring(0,30)+'...'
+    }
+
+    return name
+  }
+
 
   render(){
 
@@ -63,52 +71,42 @@ class UserPostComments extends React.Component{
     }
     console.log(this.props)
     return(
-      <div
-      style = {{
-        height: this.heightCal(caption.length)
-      }}
-      className ='postCommentBoxBox'>
-        <div className = 'postCommentBox'>
+      <div className ='socialCommentBoxBox'>
+        <div className = 'socialCommentBox'>
         <List
           className="comment-list"
           itemLayout="horizontal"
           dataSource={this.props.items}
           renderItem={item => (
 
-              <div className = 'postCommentItem'>
+              <div className = 'socialCommentItem'>
+                <div className = "socialCommentDate">
+                  {this.renderTimestamp(new Date(item.created_on))}
+                </div>
 
-                <div className = 'postCommentNameTag'>
-                  <Avatar size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
-                  <div className = 'postCommentName'>
-                    <div className = 'postCommentUsername'>
-                      <b>{this.capitalize(item.commentUser.first_name)} {this.capitalize(item.commentUser.last_name)} </b>
+                <div className = "socialCommentAvatarSect">
+                  <Avatar size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+                </div>
 
-                        <span
-                           class="headerPostText LikeCommentHover"
-                           style={{marginLeft:'5px', color:'#bfbfbf'}}
-                           >{"@"+item.commentUser.username}
-                        </span>
+                <div className = "socialCommentTextSect">
+                  <div className = "socialCommentNameTime">
+                    <div className = "socialCommentUsername">
+                      <b>
+                        {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                      </b>
+                    </div>
                   </div>
-                    <div className = 'postCommentDate'>
-                      {/*
-                      <i class="middleDot" style={{fontSize:'3px', marginLeft:'-10px', color:'#8c8c8c', marginTop:'5px', position:'absolute'}} class="fas fa-circle"></i>
-                      */}
-                      {this.renderTimestamp(new Date(item.created_on))}
+
+
+                  <div className = "socialCommentBody">
+                    <div className = "socialCommentText">
+                        {item.body}
                     </div>
 
+                  </div>
 
-                  </div>
                 </div>
-                <div class="postCommentContainer">
-                  <div className = 'postCommentText postCommentChild'>
-                    {item.body}
 
-                  </div>
-                  <div class="postCommentText postCommentChild">
-                    <i style={{ fontSize:'12px', marginRight:'5px', color:'#434343'}} class="far fa-heart"></i>
-                    <span style={{color:'#bfbfbf'}}>Like</span>
-                  </div>
-                </div>
 
               </div>
           )}
