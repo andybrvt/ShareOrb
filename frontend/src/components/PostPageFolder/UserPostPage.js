@@ -331,16 +331,16 @@ class UserPostPage extends React.Component{
         >
         {
           userPostImages.length === 1 ?
-          <div className = "postPicturesCarousel">
+          <div>
             <img
-              className = 'singlePic'
+              className = 'testSingle'
               src = {`${global.API_ENDPOINT}/media/`+userPostImages[0]}
              />
           </div>
 
           :
 
-          <div className = "postPicturesCarousel">
+          <div>
              <PostPicCarousel
              picIndexChange = {this.onCurPhotoChange}
              items = {userPostImages} />
