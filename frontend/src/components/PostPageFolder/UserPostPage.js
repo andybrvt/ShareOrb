@@ -354,7 +354,7 @@ getPageName(postOwnerName){
           <div   className = 'testSingle'>
             <img
               class="singlePic"
-              src = {`${global.API_ENDPOINT}/media/`+userPostImages[0]}
+              src = {`${global.NEWSFEED_PICS}`+userPostImages[0]}
              />
           </div>
 

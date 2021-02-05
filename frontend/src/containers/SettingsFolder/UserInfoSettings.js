@@ -137,90 +137,87 @@ class UserInfoSettings extends React.Component{
         </div>
 
         <div className = "rightInfo">
-          <form
-            className = "userInfoSettingsForm"
-             onSubmit = {handleSubmit(this.submit)}>
-
-            <div className = "settingsTextField">
-              <div className = "settingText"> Username </div>
-              <Field
-              name = 'username'
-              component = {renderField}
-              type = "text"
-              />
-
-            </div>
-
-            <div className = "settingsTextField">
-              <div className = "settingText"> First Name </div>
-              <Field
-              name = 'firstName'
-              component = {renderField}
-              type = 'text'
-              />
-            </div>
-
-            <div className = "settingsTextField">
-              <div className = 'settingText'> Last Name </div>
-              <Field
-              name = "lastName"
-              component = {renderField}
-              type = "text"
-              />
-            </div>
-
-            <div className = "settingsTextField">
-              <div className = "settingText"> Date of Birth </div>
-              <Field
-              name = "dob"
-              component = {renderField}
-              type = "text"
-              />
-            </div>
-
-            <div className = "settingsTextField">
-            <div className= "settingText"> Phone number </div>
-              <Field
-              name = "phone_number"
-              component = {renderField}
-              type = "text"
-              validate={phoneNumber}
-
-              />
-            </div>
 
 
-            <div className = "settingsTextField">
-              <div className = "settingText"> Email </div>
-              <Field
-              name = "email"
-              component = {renderField}
-              type = "text"
-              validate={email}
+          <div className = "userInfoSettingsForm">
+            <div className = "titleFont"> Change User Information </div>
+            <form
+               onSubmit = {handleSubmit(this.submit)}>
 
-              />
-            </div>
+              <div className = "settingsTextField">
+                <div className = "settingPasswordText"> Username </div>
+                <Field
+                name = 'username'
+                component = {renderField}
+                type = "text"
+                />
 
-            <Button
-            type = "primary"
-            // handleSubmit = {}
-            disabled = {pristine || invalid}
-            htmlType = "submit"
-            > Save </Button>
+              </div>
+
+              <div className = "settingsTextField">
+                <div className = "settingPasswordText"> First Name </div>
+                <Field
+                name = 'firstName'
+                component = {renderField}
+                type = 'text'
+                />
+              </div>
+
+              <div className = "settingsTextField">
+                <div className = 'settingPasswordText'> Last Name </div>
+                <Field
+                name = "lastName"
+                component = {renderField}
+                type = "text"
+                />
+              </div>
+
+              <div className = "settingsTextField">
+                <div className = "settingPasswordText"> Date of Birth </div>
+                <Field
+                name = "dob"
+                component = {renderField}
+                type = "text"
+                />
+              </div>
+
+              <div className = "settingsTextField">
+              <div className= "settingPasswordText"> Phone number </div>
+                <Field
+                name = "phone_number"
+                component = {renderField}
+                type = "text"
+                validate={phoneNumber}
+
+                />
+              </div>
 
 
-          </form>
+              <div className = "settingsTextField">
+                <div className = "settingPasswordText"> Email </div>
+                <Field
+                name = "email"
+                component = {renderField}
+                type = "text"
+                validate={email}
 
-        </div>
+                />
+              </div>
 
-        {/*
+              <Button
+              type = "primary"
+              // handleSubmit = {}
+              disabled = {pristine || invalid}
+              htmlType = "submit"
+              > Save </Button>
 
-          <div className = "rightInfo">
 
+            </form>
 
           </div>
 
-          */}
+
+        </div>
 
 
       </div>

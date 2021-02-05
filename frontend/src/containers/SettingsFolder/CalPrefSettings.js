@@ -37,37 +37,41 @@ class CalPrefSettings extends React.Component{
     return(
       <div className = "settingsBackGround">
 
-        <Menu
-          selectedKeys = {["2"]}
-          onClick={this.handleClick}
-          style={{ width: 256 }}
-          mode="inline"
-          className ="sideMenu"
-        >
-        <Menu.Item
-        key = "1"
-        onClick = {() => this.props.history.push("/settings")}
-        > User Information </Menu.Item>
-        <Menu.Item
-        key = "2"
-        onClick = {() => this.props.history.push("/settings/calPref")}
-        > Calendar Preference </Menu.Item>
-        <Menu.Item
-        key = "3"
-        onClick = {() => this.props.history.push("/settings/privacy")}
-        > Privacy </Menu.Item>
-      </Menu>
+
+        <div className = "sideMenu">
+          <Menu
+            selectedKeys = {["2"]}
+            onClick={this.handleClick}
+            mode="inline"
+            className ="sideMenuMenu"
+          >
+          <Menu.Item
+          key = "1"
+          onClick = {() => this.props.history.push("/settings")}
+          > User Information </Menu.Item>
+          <Menu.Item
+          key = "2"
+          onClick = {() => this.props.history.push("/settings/calPref")}
+          > Calendar Preference </Menu.Item>
+          <Menu.Item
+          key = "3"
+          onClick = {() => this.props.history.push("/settings/privacy")}
+          > Privacy </Menu.Item>
+        </Menu>
+
+
+        </div>
 
 
         <div className = "rightInfo">
 
-        <form>
+          <form className = "userInfoSettingsForm">
 
 
-          <button> Save </button>
+            <button> Save </button>
 
 
-        </form>
+          </form>
 
         </div>
 
