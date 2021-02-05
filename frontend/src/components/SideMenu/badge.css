@@ -6,7 +6,7 @@
   width: 20px;
   height: 20px;
   line-height: 30px;
-  font-size: 13px;
+  font-size: 12px;
   padding-left: 3px;
   border-radius: 50%;
   background-color: #ff4927;
@@ -27,15 +27,30 @@
 .headerNotificationButton {
   position: absolute;
   z-index: 1;
-  top: -10px;
+  top: -9px;
   left: 12px;
   width: 20px;
   height: 20px;
   line-height: 30px;
-  font-size: 13px;
-  padding-left: 3px;
+  font-size: 12px;
+  padding-left: 4px;
   border-radius: 50%;
   background-color: #ff4927;
   color: #fff;
   /* animation: zoom 2s 2s both; */
+}
+
+.GreaterTenNotifications{
+  position: absolute;
+  z-index: 1;
+  top: -9px;
+  left: 12px;
+  width: 20px;
+  height: 20px;
+  line-height: 30px;
+  padding-left: -1px;
+  font-size: 12px;
+  border-radius: 50%;
+  background-color: #ff4927;
+  color: #fff;
 }
