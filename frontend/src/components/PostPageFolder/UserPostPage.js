@@ -281,7 +281,7 @@ getPageName(postOwnerName){
           </Menu>
         }>
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          <i class="fas fa-ellipsis-h" style={{color: "gray"}}></i>
+          <i class="fas fa-ellipsis-v" style={{fontSize:'30px', padding:'0px', color: "gray"}}></i>
         </a>
         </Dropdown>
 
@@ -372,6 +372,17 @@ getPageName(postOwnerName){
 
 
       <div className = "socialModalRight">
+
+        {
+          userPostUserId === this.props.curId ?
+          this.cellThreeDots()
+
+          :
+
+          <div> </div>
+
+        }
+
         <div className = "postTopSection">
           <div className = "socialNameSect">
             <div className = "socialName">
@@ -590,15 +601,6 @@ getPageName(postOwnerName){
                     </span>
                   </span>
                 </span>
-                {
-                  userPostUserId === this.props.curId ?
-                  this.cellThreeDots()
-
-                  :
-
-                  <div> </div>
-
-                }
 
               </div>
 
