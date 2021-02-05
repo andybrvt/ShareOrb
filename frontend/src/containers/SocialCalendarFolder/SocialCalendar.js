@@ -344,22 +344,33 @@ class SocialCalendar extends React.Component{
 
                     {/*This will be the button at the top of the cell list of the current
                       day*/}
+                    <div className = "plusButton">
+                      <PlusOutlined
+                      onClick = {() => this.onOpenSocialCalPicModal()}
+                      className = 'iconIcon'/>
+                    </div>
 
-                    <PlusOutlined
-                    onClick = {() => this.onOpenSocialCalPicModal()}
-                    className = 'plusButton'/>
-                    <CalendarOutlined
-                    onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                    className = 'eventButton'/>
+                    <div className = "eventButton">
+                      <CalendarOutlined
+                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      className = 'iconIcon'/>
+                    </div>
 
-                    <EyeOutlined
-                      onClick = {() => this.onLinkClick(calUsername,
-                          cellYear,
-                          cellMonth,
-                          cellDay,
-                          location
-                         )}
-                      className = 'eyeButton'/>
+                    <div className = "eyeButton">
+                      <EyeOutlined
+                        onClick = {() => this.onLinkClick(calUsername,
+                            cellYear,
+                            cellMonth,
+                            cellDay,
+                            location
+                           )}
+                        className = 'iconIcon'/>
+                    </div>
+
+
+
+
+
 
                   </div>
 
@@ -368,39 +379,48 @@ class SocialCalendar extends React.Component{
                   <div className = "buttonHolder">
                   {/* This will be the buttons on top of the eventList for the days
                     after the current day*/}
-                    <CalendarOutlined
-                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
-                      className = 'eventButtonAfter'/>
+                    <div className = "eventButtonAfter">
+                      <CalendarOutlined
+                        onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                        className = 'iconIcon'/>
+                    </div>
 
-                    <EyeOutlined
-                      onClick = {() => this.onLinkClick(calUsername,
-                          cellYear,
-                          cellMonth,
-                          cellDay,
-                          location
-                         )}
-                      className = 'eyeButtonAfter'/>
+                    <div className = "eyeButtonAfter">
+                      <EyeOutlined
+                        onClick = {() => this.onLinkClick(calUsername,
+                            cellYear,
+                            cellMonth,
+                            cellDay,
+                            location
+                           )}
+                        className = 'iconIcon'/>
+                    </div>
+
+
+
 
                    </div>
 
                    :
 
+                   <div className ="eyeButtonPass">
+                     <EyeOutlined
+                       // This is for the buttons on top of the event list for days before
+                       //   the current day
+                       onClick = {() => this.onLinkClick(calUsername,
+                           cellYear,
+                           cellMonth,
+                           cellDay,
+                           location
+                          )}
+                       className = 'iconIcon'/>
+                   </div>
 
-                    <EyeOutlined
-                      // This is for the buttons on top of the event list for days before
-                      //   the current day
-                      onClick = {() => this.onLinkClick(calUsername,
-                          cellYear,
-                          cellMonth,
-                          cellDay,
-                          location
-                         )}
-                      className = 'eyeButtonPass'/>
                 }
                 </div>
 
               :
-
+              <div className = "eyeButtonPass">
                 <EyeOutlined
                   // For the eye above the event cell for people who are not friends
                   //   or the owner of the calendar
@@ -410,7 +430,9 @@ class SocialCalendar extends React.Component{
                       cellDay,
                       location
                      )}
-                  className = 'eyeButtonPass'/>
+                  className = 'iconIcon'/>
+
+              </div>
 
               }
             </div>
