@@ -367,7 +367,7 @@ class SideMenu extends React.Component {
                           style={{fontSize:'22px'}}
                           >
                         </i>
-                        <span class="headerNotificationButton">
+                        <span class={`${this.props.notifications.length>=10 ? "GreaterTenNotifications" : "headerNotificationButton"}`}>
                           <span class="notificationInside">{this.props.notifications.length} </span>
                         </span>
                     </div>
