@@ -188,7 +188,7 @@ class SocialCellCoverEvents extends React.Component{
                 <div
                 onClick = {() => this.onCoverViewClick(item.id)}
                 className = 'alreadyViewButtonCoverPass'>
-                  <span className = 'viewText'> View </span>
+                  <div className = 'viewText'> View </div>
                 </div>
 
 

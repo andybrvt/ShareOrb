@@ -236,7 +236,7 @@ class PrivacySettings extends React.Component{
               </div>
               <div className = "someTextFontHolder">
                 This will make your account private. People who you have not approved
-                can see you account.
+                cannot see your account.
               </div>
 
 
