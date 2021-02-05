@@ -1,5 +1,4 @@
 import React from 'react';
-import './UserPostPage.css';
 import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
 import UserPostPageWebSocketInstance from '../../UserPostPageWebsocket'
 import * as dateFns from 'date-fns';
@@ -107,7 +106,7 @@ class UserPostComments extends React.Component{
                   </div>
 
                 </div>
-                
+
 
               </div>
           )}

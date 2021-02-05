@@ -2,17 +2,44 @@
 .settingsBackGround{
   background-color: white;
   display: flex;
-  width: 1300px;
+  position: relative;
+  width: 96vw;
+  height: 93vh;
+  top: 7%;
 }
 
 .settingsBackGround .sideMenu{
-  background-color: white;
+  position: relative;
+  width: 15%;
+  height: 100%;
+  border-right: 1px solid lightblue;
+}
 
+.sideMenuMenu{
+  position: relative;
+  width: 100%;
+  background-color: white;
+}
+
+.userInfoSettingsForm{
+  position: relative;
+  width: 75%;
+  left: 2%;
+  top: 2%;
+}
+
+.settingsTextField{
+  font-size: 18px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.settingsTextField .settingText{
+  margin-bottom: 5px;
 }
 
 .settingsBackGround .rightInfo{
-  /* background-color: red; */
-  width: 81%;
+  width: 85%;
 }
 
 

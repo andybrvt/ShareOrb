@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import PostPicCarousel from './PostPicCarousel';
 import * as newsfeedActions from '../../store/actions/newsfeed';
 import * as dateFns from 'date-fns';
-import './UserPostPage.css';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 
@@ -550,11 +549,11 @@ getPageName(postOwnerName){
             <div className = "socialCommentInput">
               <Avatar
               size = {30}
-              className ='postPicInput'
+              className ='socialPicInput'
               src = {`${global.IMAGE_ENDPOINT}`+this.props.curProfilePic}/>
               <Form>
                 <Input
-                className= 'postBoxInput'
+                className= 'socialBoxInput'
                 onChange ={this.handleChange}
                 value = {this.state.comment}
                 // bordered = {false}
