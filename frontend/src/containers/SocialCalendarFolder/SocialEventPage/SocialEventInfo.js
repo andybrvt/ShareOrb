@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Progress, Avatar, Modal, message, notification, Divider, Statistic, List, Skeleton, Tabs, Switch} from 'antd';
+import {Button, Progress, Avatar, Modal, message, notification, Divider, Tooltip, Statistic, List, Skeleton, Tabs, Switch} from 'antd';
 import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
@@ -333,27 +333,30 @@ class SocialEventInfo extends React.Component{
               </div>
             </div>
             <div className = "menuButtonHolder">
-              <div className = "closeEvent">
-                <i
-                  onClick = {this.back}
-                  class="far fa-times-circle">
-                </i>
-              </div>
-
-              <div className = "editEvent">
-                {
-                  eventHostId === this.props.userId ?
-                  <div className = "">
-                    <div
-                    onClick={() => this.onEditClick()}
-                    >
-                    <i class="fas fa-pen" ></i>
+              <Tooltip placement="left" title="Close Event">
+                <div className = "closeEvent">
+                  <i
+                    onClick = {this.back}
+                    class="far fa-times-circle">
+                  </i>
+                </div>
+              </Tooltip>
+              <Tooltip placement="left" title="Edit Event">
+                <div className = "editEvent">
+                  {
+                    eventHostId === this.props.userId ?
+                    <div className = "">
+                      <div
+                      onClick={() => this.onEditClick()}
+                      >
+                      <i class="fas fa-pen" ></i>
+                      </div>
                     </div>
-                  </div>
-                  :
-                  <div></div>
-                }
-              </div>
+                    :
+                    <div></div>
+                  }
+                </div>
+              </Tooltip>
             </div>
 
             <div
