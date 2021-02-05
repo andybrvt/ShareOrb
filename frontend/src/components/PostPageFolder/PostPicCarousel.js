@@ -71,16 +71,13 @@ class PostPicCarousel extends React.Component{
     }
 
 
-    const contentStyle = {
-      height: '800px',
-      color: '#fff',
-      lineHeight: '160px',
-      textAlign: 'center',
-      background: '#364d79',
-    };
-
+  
     return (
-      <div onClick = {this.previous} className = 'socialLeftRight'>
+      <div className = 'socialLeftRight'>
+
+        <LeftCircleOutlined
+        className = 'socialArrowLeft'
+        onClick = {this.previous} />
 
 
         <Carousel
@@ -91,16 +88,11 @@ class PostPicCarousel extends React.Component{
           {this.renderPictures(itemList)}
         </Carousel>
 
-        <div class="leftArrowPost">
-          <i style={{color:'#d9d9d9'}}
-            class="fas fa-chevron-circle-left"></i>
-        </div>
 
-        <div class="rightArrowPost">
-          <i style={{color:'#d9d9d9'}}
-              onClick = {this.next}
-            class="fas fa-chevron-circle-right"></i>
-        </div>
+
+        <RightCircleOutlined
+        className = 'socialArrowRight'
+        onClick = {this.next} />
 
       </div>
     )

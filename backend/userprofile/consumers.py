@@ -645,26 +645,6 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
         }
         self.send_new_action(content)
 
-
-# DELETE THIS
-    def send_comment(self, data):
-        postObj = get_object_or_404(Post, id = data['postId'])
-        person = User.objects.get(id = data['userId']).username
-        comment = Comment.objects.create(post = postObj,
-        name = person, body = data['comment']  )
-        # Post.save()
-        serializer = CommentSerializer(comment)
-        content = {
-            'command': 'new_comment',
-            'comment': json.dumps(serializer.data)
-        }
-        return self.send_new_action(content)
-
-
-
-
-
-
     def delete_post(self, data):
         # This will delete the post
         Post.objects.get(id = data['postId']).delete()

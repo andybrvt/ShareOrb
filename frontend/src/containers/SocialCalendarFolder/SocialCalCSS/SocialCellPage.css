@@ -360,6 +360,14 @@
   flex-direction: column;
   height: 75%;
 }
+.socialModalRight .postTopSection{
+  position: relative;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  height: 95%;
+}
+
 
 .socialNameSect{
   padding-top: 10px;
@@ -537,7 +545,16 @@
   /* height: 74%; */
 }
 
+.socialModalRight .postBottomSection{
+  position: relative;
+  height: 5%;
+}
+
 .socialModalRight .topSection .socialLikeCommentSect{
+  height: 40px;
+}
+
+.socialModalRight .postTopSection .socialLikeCommentSect{
   height: 40px;
 }
 .socialLikeComment{
@@ -644,6 +661,10 @@
 
 .socialModalRight .bottomSection .socialCommentInputSect{
   height: 20%;
+}
+
+.socialModalRight .postBottomSection .socialCommentInputSect{
+  height: 100%;
 }
 
 .socialCommentInputSect .socialCommentInput{

@@ -2,7 +2,6 @@ import React from 'react';
 import UserPostPage from './UserPostPage';
 import "./UserPostPage.css";
 
-
 // This file will be used to hold the post modal. This will have its own
 // channels, it will make liking and commenting faster
 
@@ -20,15 +19,16 @@ class UserPostModal extends React.Component{
 
     return(
       <div
-      className = "userPostModalBackground"
+      className = "socialCalCellModalBackground"
       >
+        <UserPostPage {...this.props} />
+
       <div className = 'exitX'>
         <i class="fas fa-times"
         onClick = {this.back}
         ></i>
       </div>
-        <UserPostPage {...this.props} />
-
+    
       </div>
     )
   }
