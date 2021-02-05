@@ -172,7 +172,7 @@
   transition: 0.5s;
 }
 .menuButtonHolder .editEvent{
-  font-size: 27px;
+  font-size: 25px;
   top: 5%;
   cursor: pointer;
   transition: 0.5s;
@@ -215,6 +215,7 @@
 }
 
 
+
 /* Title card css */
 .titleCard{
   position: absolute;
@@ -222,14 +223,14 @@
   border-radius: 15px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
-  width:72.5%;
+  width:85%;
   max-height: 65%;
   min-height: 40%;
   top: 32%;
   /* max-height: 60%; */
   display: flex;
   flex-direction: column;
-  padding:10px;
+  padding:15px;
 }
 .eventTitle{
   color: black;
@@ -246,8 +247,21 @@
   position: relative;
   /* bottom: 0%; */
   /* background-color: red; */
-  width: 90%;
+  width: 45%;
   color:'#1890ff';
+}
+
+.eventHostContainer{
+  position: relative;
+  color: black;
+  font-size: 15px;
+  height: 100%;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
 }
 .titleCard .hostHolder .attendees{
   color: black;
@@ -297,6 +311,11 @@
   color:black;
 }
 
+.goingInviteNumber{
+  font-size: 20px;
+  color:black;
+}
+
 .middleInviteCard .invitedHolder{
   /* background-color: blue; */
   position: relative;
@@ -314,10 +333,7 @@
   color:black;
 }
 
-.goingInviteNumber{
-  font-size: 22px;
-  color:black;
-}
+
 
 .middleInviteCard .goingHolder .addFont{
   font-family: 'Segoe UI Regular';
@@ -440,7 +456,7 @@
   background: white;
   line-height: 150%;
   border-radius: 15px;
-  padding:40px;
+  padding:30px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
   width:90%;

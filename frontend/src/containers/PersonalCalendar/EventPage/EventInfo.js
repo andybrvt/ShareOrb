@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventPage.css';
-import {Button, Progress, Divider, Avatar, Modal, message, notification, Statistic, List, Skeleton, Tabs} from 'antd';
+import {Button, Progress, Divider, Avatar, Modal, message, Tooltip, notification, Statistic, List, Skeleton, Tabs} from 'antd';
 import {PictureOutlined, CheckSquareTwoTone, EyeOutlined, DownloadOutlined, UserOutlined} from '@ant-design/icons';
 import DetailEditEventForm from './DetailEditEventForm';
 import EventPageWebSocketInstance from '../../../eventPageWebsocket';
@@ -600,19 +600,22 @@ class EventInfo extends React.Component{
 
           <div className = 'topSectContainerRight'>
             <div className = "menuButtonHolder">
-              <div className = 'closeEvent'>
-                <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
-                <i class="far fa-times-circle">  </i>
-                </Link>
-              </div>
-
+              <Tooltip placement="left" title="Close Event">
+                <div className = 'closeEvent'>
+                  <Link to={"/personalcalendar/w/"+selectYear+'/'+selectMonth+'/'+selectDay} >
+                  <i class="far fa-times-circle">  </i>
+                  </Link>
+                </div>
+              </Tooltip>
               <div className = 'editEvent'>
                 {
                   eventHostId === this.props.userId ?
                   <div>
-                    <div onClick={() => this.onEditClick()}>
-                      <i class="fas fa-pen" ></i>
-                    </div>
+                    <Tooltip placement="left" title="Edit Event">
+                      <div onClick={() => this.onEditClick()}>
+                        <i class="fas fa-pen" ></i>
+                      </div>
+                    </Tooltip>
                   </div>
 
                   :
@@ -637,17 +640,19 @@ class EventInfo extends React.Component{
                 className = 'eventTitle'>
                 {this.capitalize(title)}
               </div>
-            <div class="hostHolder">
-
-              <div className = "attendees">
-                Host
-                <br/>
-                <span>
-                  <Avatar
-                  src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
-                  />
-                <span class="highlightWord" > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
-                </span>
+            <div class="eventHostContainer hostHolder">
+              <div class="">
+                <div className = "attendees">
+                  Host
+                  <br/>
+                  <span>
+                    <Avatar
+                      size={20}
+                    src = {`${global.IMAGE_ENDPOINT}`+host.profile_picture}
+                    />
+                  <span class="highlightWord" > {this.capitalize(host.first_name)} {this.capitalize(host.last_name)} </span>
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -744,8 +749,10 @@ class EventInfo extends React.Component{
     <div className = "eventBottomEntire">
       <div className = "eventBottomLeft">
         <div class="eventDetailCard">
+
+
           Event Details
-          <Divider/>
+          <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
           <div class="eventDetails">
           <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
             Public Event
@@ -801,7 +808,7 @@ class EventInfo extends React.Component{
         {/* Invite friends */}
         <div className = "inviteFriendsEventCard">
             Invite Friends
-            <Divider/>
+            <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
             <Tabs defaultActiveKey="1">
               <TabPane tab="Suggested Friends" key="1">
 
@@ -848,7 +855,7 @@ class EventInfo extends React.Component{
         <div class="mapEventCard">
           Location
           <span>
-            <Divider style={{marginTop:'-1px'}}/>
+            <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
             {/*
             <ReactBingmaps
               bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
@@ -883,7 +890,7 @@ class EventInfo extends React.Component{
         {/* Statistic card */}
         <div className = "statEventCard">
            <span> Statistics </span>
-          <Divider/>
+          <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
           <div className =  "percentagesBars">
             <div className = "percentage">
               <Progress

@@ -35,10 +35,8 @@ function beforeUpload(file) {
     message.error('You can only upload JPG/PNG file!');
   }
   const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
+
+  return isJpgOrPng;
 }
 
 
@@ -157,27 +155,27 @@ class ChangeBackgroundModal extends React.Component{
 
                 name="avatar"
                 listType="picture-card"
-                className = "uploadBox"
 
 
+                style={{width:200}}
                 showUploadList={false}
                 // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
               >
                 <div
-                  style = {{
-                    width: "500px"
 
-                  }}
                   >
                   {
                     (imageUrl) ?
-                    <img class="fitPhoto" src={imageUrl} alt="avatar" />
+                    <img class="changeProfilePic" src={imageUrl} alt="avatar" />
                     :
-
-                    <i style={{fontSize:'80px', }} class="fas fa-upload"></i>
-                  }
+                    <div style={{background:'#f0f0f0', height:200, width:200}}>
+                        <div class="fitUploadAvatar">
+                          <i style={{fontSize:'80px'}} class="fas fa-upload"></i>
+                        </div>
+                    </div>
+                }
                 </div>
 
               </Upload>
