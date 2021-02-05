@@ -38,8 +38,25 @@
   margin-bottom: 5px;
 }
 
+.settingsTextField .settingPasswordText{
+  font-size: 14px;
+}
+
 .settingsBackGround .rightInfo{
   width: 85%;
+}
+
+.titleFont{
+  font-size: 20px;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.privacySwitchHolder{
+  margin-bottom: 15px;
+}
+.someTextFontHolder{
+  color: black;
 }
 
 

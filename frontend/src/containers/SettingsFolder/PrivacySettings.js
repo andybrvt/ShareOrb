@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.css';
-import { Menu, Form, Input, Button, Switch, message } from 'antd';
+import { Menu, Form, Input, Button, Switch, message, Divider } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { connect } from "react-redux";
@@ -150,89 +150,101 @@ class PrivacySettings extends React.Component{
     return(
       <div className = "settingsBackGround">
 
-        <Menu
-          selectedKeys = {["3"]}
-          onClick={this.handleClick}
-          style={{ width: 256 }}
-          mode="inline"
-          className ="sideMenu"
-        >
-        <Menu.Item
-        key = "1"
-        onClick = {() => this.props.history.push("/settings")}
-        > User Information </Menu.Item>
-        <Menu.Item
-        key = "2"
-        onClick = {() => this.props.history.push("/settings/calPref")}
-        > Calendar Preference </Menu.Item>
-        <Menu.Item
-        key = "3"
-        onClick = {() => this.props.history.push("/settings/privacy")}
-        > Privacy </Menu.Item>
-      </Menu>
+        <div className = "sideMenu">
+          <Menu
+            selectedKeys = {["3"]}
+            onClick={this.handleClick}
+            mode="inline"
+            className ="sideMenuMenu"
+          >
+          <Menu.Item
+          key = "1"
+          onClick = {() => this.props.history.push("/settings")}
+          > User Information </Menu.Item>
+          <Menu.Item
+          key = "2"
+          onClick = {() => this.props.history.push("/settings/calPref")}
+          > Calendar Preference </Menu.Item>
+          <Menu.Item
+          key = "3"
+          onClick = {() => this.props.history.push("/settings/privacy")}
+          > Privacy </Menu.Item>
+        </Menu>
+
+
+        </div>
+
 
 
         <div className = "rightInfo">
 
-
-        <div>
-          <div> Change password </div>
-          <form
-          // onChange = {this.onChange}
-          onSubmit = {handleSubmit(this.submit)}
-          >
-
+          <div className = "userInfoSettingsForm">
             <div>
-              <span> Old Password </span>
-              <Field
-              name = "oldPassword"
-              component = {renderField}
-              type = "password"
-               />
+              <div
+                className = "titleFont"
+                > Change password </div>
+              <form
+              // onChange = {this.onChange}
+              onSubmit = {handleSubmit(this.submit)}
+              >
+
+                <div className = "settingsTextField">
+                  <div className = "settingPasswordText"> Old Password </div>
+                  <Field
+                  name = "oldPassword"
+                  component = {renderField}
+                  type = "password"
+                   />
+                </div>
+
+                <div className = "settingsTextField">
+                  <div className = "settingPasswordText"> New Password </div>
+                  <Field
+                  name = "newPassword"
+                  component = {renderField}
+                  type = "password"
+                   />
+                </div>
+
+                <div className = "settingsTextField">
+                  <div className = "settingPasswordText"> Comfirm New Password </div>
+                  <Field
+                  name = "confirmPassword"
+                  component = {renderField}
+                  type = "password"
+                   />
+                </div>
+
+                {error && <strong>{error}</strong>}
+                <Button
+                type = "primary"
+                // disabled = {this.handleSubmitButton()}
+                disabled = {pristine || invalid}
+                htmlType = "submit"
+                > Save </Button>
+
+
+              </form>
             </div>
 
-            <div>
-              <span> New Password </span>
-              <Field
-              name = "newPassword"
-              component = {renderField}
-              type = "password"
-               />
-            </div>
+            <Divider />
 
             <div>
-              <span> Comfirm New Password </span>
-              <Field
-              name = "confirmPassword"
-              component = {renderField}
-              type = "password"
-               />
+              <div className = "titleFont"> Private Account </div>
+              <div className = "privacySwitchHolder">
+                <Switch checked ={this.props.privatePro} onChange={this.onChange} />
+              </div>
+              <div className = "someTextFontHolder">
+                This will make your account private. People who you have not approved
+                can see you account.
+              </div>
+
+
             </div>
 
-            {error && <strong>{error}</strong>}
-            <Button
-            type = "primary"
-            // disabled = {this.handleSubmitButton()}
-            disabled = {pristine || invalid}
-            htmlType = "submit"
-            > Save </Button>
-
-
-          </form>
-        </div>
-
-        <div>
-          <div> Private Account </div>
-          <div>
-            <Switch checked ={this.props.privatePro} onChange={this.onChange} />
           </div>
-          <div>
-            This will make your account private. People who you have not approved
-            can see you account.
-          </div>
 
 
-        </div>
 
         </div>
 
