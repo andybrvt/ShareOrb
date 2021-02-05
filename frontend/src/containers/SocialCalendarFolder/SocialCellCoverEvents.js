@@ -129,7 +129,9 @@ class SocialCellCoverEvents extends React.Component{
                     </div>
                       <div className = 'likingCon'>
                         <div className = "centerBox">
-                          <Liking like_people ={item.persons} />
+                          <Liking
+                            specifySize={20}
+                             like_people ={item.persons} />
                         </div>
                       </div>
                   </div>

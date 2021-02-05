@@ -290,7 +290,7 @@
   width: 100%;
 }
 .coverCellBoxList .coverCellBoxItem {
-  /* background-color: red; */
+  background-color: red;
   margin: 2px;
   width: 99%;
   padding-left: 3px;
@@ -565,6 +565,7 @@
 }
 .coverCellTextSide .coverCellEventTime{
   display: flex;
+  font-size: 10px;
 }
 .coverCellTextSide .coverCellEventTime .timeNum{
   margin-left: 2px;
@@ -572,6 +573,7 @@
 
 .coverCellTextSide .coverCellEventNum{
   display: flex;
+  font-size: 10px;
 }
 .coverCellTextSide .coverCellEventNum .profileIcon{
 
