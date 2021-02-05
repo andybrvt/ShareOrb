@@ -43,7 +43,7 @@ class PostPicCarousel extends React.Component{
             <div className = 'testSingle'>
                 <img
                   class="singlePic"
-                src ={`${global.API_ENDPOINT}/media/`+item} />
+                src ={`${global.NEWSFEED_PICS}`+item} />
 
               </div>
 
