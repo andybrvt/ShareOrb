@@ -353,7 +353,7 @@ getPageName(postOwnerName){
           userPostImages.length === 1 ?
           <div   className = 'testSingle'>
             <img
-
+              class="singlePic"
               src = {`${global.API_ENDPOINT}/media/`+userPostImages[0]}
              />
           </div>

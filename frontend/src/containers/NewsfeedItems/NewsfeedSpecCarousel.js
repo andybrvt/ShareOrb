@@ -38,12 +38,13 @@ class NewsfeedSpecCarousel extends React.Component{
     {
       pictureList.map(
         item => {
-          socialItems.push(
-            <div className = 'specPictureRoll'>
+          socialItems.push(<div class="outerPicCarousel">
+            <div className = 'imageContainer'>
               <img
-              className = 'specImages'
-              // PICTUREXXXURL
+              className = 'testMiddle'
               src ={`${global.NEWSFEED_PICS}`+item} />
+
+            </div>
 
             </div>
           )

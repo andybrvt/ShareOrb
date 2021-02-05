@@ -305,8 +305,7 @@
 }
 
 
-.testSingle img{
-  object-fit: cover;
+.testSingle{
   width: 100%;
   height: 95vh;
 }
