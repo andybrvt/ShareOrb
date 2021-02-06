@@ -245,6 +245,7 @@
   z-index: 3;
   left: 0%;
   font-size: 45px;
+  color: white;
 }
 .socialLeftRight .socialArrowRight {
   position: absolute;
@@ -255,6 +256,7 @@
   /* right: 100%; */
   z-index: 3;
   font-size: 45px;
+  color: white;
 }
 
 
@@ -336,10 +338,11 @@
 .picturesRoll{
   /* height:800px; */
   /* background-color: #000000cc; */
+  /* background-color: #1f1f1f; */
   overflow: hidden;
   width: 100%;
   position: relative;
-  height: 95%;
+  height: 95vh;
 }
 
 .innerPic{
@@ -349,18 +352,9 @@
 }
 
 
-.picturesRoll img{
-  object-fit: cover;
-  width:100%;
-  height:100%;
-}
-
-
 .picturesRoll .socialImages{
   position: relative;
   height: 100%;
-  width: 100%;
-  object-fit: cover;
   left: 50%;
   transform: translateX(-50%);
   /* display: none; */
@@ -379,6 +373,7 @@
   height: 100%;
   width: 30%;
   flex-direction: column;
+  border-left: 1px solid lightgray;
 }
 
 .socialModalRight .cellThreeDots{

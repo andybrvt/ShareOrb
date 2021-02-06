@@ -40,9 +40,9 @@ class PostPicCarousel extends React.Component{
       pictureList.map(
         item => {
           socialItems.push(
-            <div className = 'testSingle'>
+            <div className = 'picturesRoll'>
                 <img
-                  class="singlePic"
+                  class="socialImages"
                 src ={`${global.NEWSFEED_PICS}`+item} />
 
               </div>

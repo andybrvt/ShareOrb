@@ -38,7 +38,8 @@ class NewsfeedSpecCarousel extends React.Component{
     {
       pictureList.map(
         item => {
-          socialItems.push(<div class="outerPicCarousel">
+          socialItems.push(
+
             <div className = 'imageContainer'>
               <img
               className = 'testMiddle'
@@ -46,7 +47,6 @@ class NewsfeedSpecCarousel extends React.Component{
 
             </div>
 
-            </div>
           )
         }
       )
@@ -83,6 +83,10 @@ class NewsfeedSpecCarousel extends React.Component{
     return (
       <div onClick = {this.previous} className = 'specLeftRight'>
 
+        <div class="newsFeedArrowLeft">
+          <i style={{color:'#d9d9d9'}}
+            class="fas fa-chevron-circle-left"></i>
+        </div>
 
         <Carousel
         arrows = {true}
@@ -92,10 +96,7 @@ class NewsfeedSpecCarousel extends React.Component{
           {this.renderPictures(itemList)}
         </Carousel>
 
-        <div class="newsFeedArrowLeft">
-          <i style={{color:'#d9d9d9'}}
-            class="fas fa-chevron-circle-left"></i>
-        </div>
+
 
         <div class="newsFeedArrowRight">
           <i style={{color:'#d9d9d9'}}

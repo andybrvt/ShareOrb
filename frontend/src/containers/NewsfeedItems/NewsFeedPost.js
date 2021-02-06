@@ -142,12 +142,12 @@ class NewsfeedPost extends React.Component {
             <img class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} alt="" />
           </div>
         </div>
-      
+
       )
     } else if(userPostImages.length>1){
       return(
         <div
-        onClick = {() => this.OnClickPost(postId, username)}
+        // onClick = {() => this.OnClickPost(postId, username)}
         className = "postPicCarouselNews">
 
 

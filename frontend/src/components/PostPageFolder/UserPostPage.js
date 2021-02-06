@@ -351,12 +351,16 @@ getPageName(postOwnerName){
       <div className = "socialModalLeft">
         {
           userPostImages.length === 1 ?
-          <div   className = 'testSingle'>
-            <img
-              class="singlePic"
-              src = {`${global.NEWSFEED_PICS}`+userPostImages[0]}
-             />
+
+          <div className = "singlePicHolder">
+            <div  className = 'singlePic'>
+              <img
+                class="picture"
+                src = {`${global.NEWSFEED_PICS}`+userPostImages[0]}
+               />
+            </div>
           </div>
+
 
           :
 

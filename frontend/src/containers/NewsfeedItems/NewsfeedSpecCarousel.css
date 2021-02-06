@@ -24,14 +24,15 @@
 
 .postPicCarouselNews .specLeftRight{
   /* display: flex; */
+  position: relative;
   width:100%;
-  height:100%;
+  height: 90vh;
 }
 
 .postPicCarouselNews .specLeftRight .newsFeedArrowLeft {
   position: absolute;
   /* background-color: red; */
-  top: 45%;
+  top: 50%;
   transform: translateY(-50%);
   z-index: 3;
   left: 0%;
@@ -40,7 +41,7 @@
 .postPicCarouselNews .specLeftRight .newsFeedArrowRight {
   position: absolute;
   /* background-color: red; */
-  top: 45%;
+  top: 50%;
   transform: translateY(-50%);
   right:0%;
   /* right: 100%; */
@@ -49,6 +50,21 @@
   font-size: 45px;
 }
 
+.imageContainer{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) ;
+  width:100%;
+  height: 90vh;
+  overflow: hidden;
+  background-color: red;
+}
+.testMiddle{
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  object-fit: cover;
+}
 
 
 
