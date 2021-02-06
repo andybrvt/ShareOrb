@@ -41,10 +41,10 @@ class NewsfeedSpecCarousel extends React.Component{
           socialItems.push(
 
             <div className = 'imageContainer'>
+              <div class="testMiddle">
               <img
-              className = 'testMiddle'
               src ={`${global.NEWSFEED_PICS}`+item} />
-
+              </div>
             </div>
 
           )
