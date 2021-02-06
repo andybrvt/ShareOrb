@@ -42,9 +42,8 @@ class NewsfeedSpecCarousel extends React.Component{
 
             <div className = 'imageContainer'>
               <img
-              className = 'testMiddle'
+                className = "testMiddle"
               src ={`${global.NEWSFEED_PICS}`+item} />
-
             </div>
 
           )

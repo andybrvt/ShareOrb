@@ -219,8 +219,8 @@ class NewNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div class="eventCard postModalMain" style={{width:'800px', padding:'25px'}}>
-        <div style={{marginTop:'10px', marginLeft:'20px', height:'125px'}} class="outerContainerPeople">
+      <div class="eventCard postModalMain" style={{width:'850px', height:'500px',padding:'25px'}}>
+        <div style={{marginTop:'10px', marginLeft:'20px', height:'100px'}} class="outerContainerPeople">
           <div class="innerContainerPeople">
             <Avatar
               style={{ top:'5%'}}
@@ -302,7 +302,7 @@ class NewNewsfeedFormPost extends React.Component{
               <Button
               disabled = {this.handleValidation()}
               style={{fontSize:'24px', }} shape="round" type="primary"
-                style={{float:'right', marginTop:'25px', marginRight:'25px'}}
+                style={{float:'right', marginRight:'25px'}}
                 onClick={this.onFormSubmit}>Post</Button>
           </div>
 
