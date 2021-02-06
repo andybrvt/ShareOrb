@@ -66,6 +66,8 @@
   position: relative;
   width: 100%;
   height: 90vh;
+  left: 50%;
+  transform:translateX(-50%);
   /* background-size:cover; */
   object-fit: cover;
 
