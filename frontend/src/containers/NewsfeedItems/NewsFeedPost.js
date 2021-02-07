@@ -142,10 +142,11 @@ class NewsfeedPost extends React.Component {
               backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0] +")"
             }}
           class="imageContainer">
+          
           {/*
             <img class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} />
             */}
-          
+
         </div>
 
       )
