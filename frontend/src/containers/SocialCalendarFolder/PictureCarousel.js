@@ -155,7 +155,7 @@ class PictureCarousel extends React.Component{
 
                 <img
                 className = 'socialImages'
-                src ={`${global.API_ENDPOINT}`+item.itemImage} />
+                src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
 
               </div>
             )
