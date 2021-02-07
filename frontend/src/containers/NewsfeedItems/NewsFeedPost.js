@@ -138,11 +138,16 @@ class NewsfeedPost extends React.Component {
         <div
           onClick = {() => this.OnClickPost(postId, username)}
 
-          style = {{
-              backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0] +")"
-            }}
-          class="imageContainer">
-          
+
+          class="imageContainerSingle">
+          <div
+            style = {{
+                backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0] +")"
+              }}
+              className = "backgroundImageNewsSingle"
+            >
+
+          </div>
           {/*
             <img class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} />
             */}
