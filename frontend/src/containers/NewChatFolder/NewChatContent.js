@@ -1,6 +1,6 @@
 import React from 'react';
 import './NewChat.css';
-import { Input, List, Avatar, Spin, Divider, Button} from 'antd';
+import { Input, List, Avatar, Spin, Divider, Button, Tooltip} from 'antd';
 import NewChatWebSocketInstance from '../../newChatWebsocket';
 import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -76,7 +76,7 @@ class NewChatContent extends React.Component{
     // This function will render the correct message and messsage type
     const curUser = this.props.curId
     const messageUser = messageItem.messageUser.id
-
+    console.log(messageItem)
     if(curUser === messageUser){
       // This message will take care of the case when you are the current user
         if(messageItem.type === "event"){
@@ -134,11 +134,11 @@ class NewChatContent extends React.Component{
 
               </div>
             </div>
-
-            <div className = "messageToUser">
-              {messageItem.body}
-            </div>
-
+            <Tooltip placement="left" title={"8:00PM"}>
+              <div className = "messageToUser">
+                {messageItem.body}
+              </div>
+            </Tooltip>
             </div>
 
           )
@@ -185,20 +185,20 @@ class NewChatContent extends React.Component{
         // user is getting text from someone else
         // This will take care of the case where the message is just the chat
         return (
-          <div className = "chatTextBox">
 
-          <div className = 'chatNameTime'>
-
-            <div>
-
+            <div className = "eventMessageItemNotUser">
+              <Avatar style={{marginTop:'5px', marginRight:'5px'}} className = 'eventMessageAvatar'
+                size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
+              <Tooltip placement="right" title={"8:00PM"}>
+                <span className = "eventTextMessageHolder">
+                  <div className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
+                  <div className = "eventMessage">
+                    {messageItem.body}
+                  </div>
+                </span>
+              </Tooltip>
             </div>
-          </div>
-          <Avatar size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
-          <div className = "messageReceived">
-            {messageItem.body}
-          </div>
 
-          </div>
 
         )
       }

@@ -149,9 +149,6 @@ class EventGroupChat extends React.Component{
           itemLayout="horizontal"
           dataSource={messages}
           renderItem={item => (
-
-
-
             <div className = {`${this.props.id === item.messageUser.id ?
               "eventMessageItemUser" : "eventMessageItemNotUser"}`}>
 
@@ -162,8 +159,7 @@ class EventGroupChat extends React.Component{
                 size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.messageUser.profile_picture} />
               <span className = "eventTextMessageHolder">
                 <div className = 'userName'>{this.capitalize(item.messageUser.first_name)} {this.capitalize(item.messageUser.last_name)}</div>
-                <div className = "eventMessage">{item.body}</div>
-
+                  <div className = "eventMessage">{item.body}</div>
                 {
                   this.renderTimeDiff(item.created_on) ?
 
@@ -179,8 +175,9 @@ class EventGroupChat extends React.Component{
                 :
 
                 <div>
-                  <div>{item.body}</div>
-
+                  <Tooltip placement="left" title={this.renderTimestamp(item.created_on)}>
+                    <div>{item.body}</div>
+                  </Tooltip>
                 </div>
               }
 

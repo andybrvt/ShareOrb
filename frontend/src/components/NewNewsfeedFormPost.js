@@ -228,7 +228,7 @@ class NewNewsfeedFormPost extends React.Component{
               src = {profilePic} >
 
             </Avatar>
-            <span style={{marginLeft:"20px", fontSize:'20px'}}>
+            <span class="WritePostNameContainer" style={{marginLeft:"20px", fontSize:'20px'}}>
               {firstName+" "+lastName}
             </span>
 
