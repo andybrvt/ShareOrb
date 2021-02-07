@@ -13,6 +13,7 @@ import NoChatsScreen from './NoChatsScreen';
 import AddNewChatContent from './AddNewChatContent';
 import CurChatManager from './CurChatManager';
 import * as calendarActions from '../../store/actions/calendars';
+import * as messageActions from '../../store/actions/messages';
 import { notification } from 'antd';
 
 // This file will be holding all the components of the chat such as
@@ -340,7 +341,7 @@ class NewChat extends React.Component{
             following = {this.props.following}
             curId = {this.props.curId}
             history = {this.props.history}
-
+            setMessages = {this.props.setMessages}
             />
           </div>
 
@@ -377,7 +378,7 @@ class NewChat extends React.Component{
 
         </div>
 
-  
+
 
       </div>
     )
@@ -400,6 +401,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     getEvents: () => dispatch(calendarActions.getUserEvents()),
+    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat))
   }
 }
 

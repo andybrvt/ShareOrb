@@ -98,6 +98,8 @@ class GetChatSearchView(APIView):
         print(request.data)
 
         chatList = models.Chat.objects.all()
+
+        # This can use some improvements
         for names in request.data['person']:
             chatList = chatList.filter(participants__id = names).distinct()
 
@@ -109,14 +111,33 @@ class GetChatSearchView(APIView):
         print(len(serializedChat))
         messages = []
         chatId = ""
+        participants = []
+        curChat = {}
         if(len(serializedChat) != 0):
             messages = serializedChat[0]['get_messages']
             chatId = serializedChat[0]['id']
+            curChat = serializedChat[0]
 
-        content = {
-            "messages": messages,
-            "chatId": chatId
-        }
+            content = {
+                "messages": messages,
+                "chatId": chatId,
+                "curChat": curChat
+            }
+        else:
+            # This is for when there are not chats that exist for that list of
+            # persons
+            # You just pull the users so that you can just fill up the curChats
+            # so that there will be something there
+            userList = User.objects.filter(id__in = request.data['person'])
+            participants = serializers.ChatUser(userList, many = True).data
+            content = {
+
+                "messages": messages,
+                "chatId": chatId,
+                "curChat": {"participants": participants}
+            }
+
+
         return Response(content)
 
 

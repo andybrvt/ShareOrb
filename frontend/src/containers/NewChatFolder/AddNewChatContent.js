@@ -32,6 +32,7 @@ class AddNewChatContent extends React.Component{
   }
 
   componentDidMount() {
+    this.props.setMessages([], {})
     this.scrollToBottom();
   }
 
@@ -116,6 +117,41 @@ class AddNewChatContent extends React.Component{
     }
   }
 
+  getChatUserProfile(participantList){
+    // This function will show the correct userProfile that you are chatting
+    // with
+
+    // There should jsut be 2 for here so not too much run time
+    var profilePic = ""
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        profilePic = participantList[i].profile_picture
+      }
+    }
+
+    return profilePic;
+
+  }
+
+  getChatUserUsername(participantList){
+    // This function will show the correct userProfile that you are chatting
+    // with
+
+    // There should jsut be 2 for here so not too much run time
+    var names = []
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        names.push(
+            participantList[i].username
+        )
+
+      }
+    }
+
+    return names;
+
+  }
+
   renderPeopleSearch = () => {
     // This part will consit of all your followers and following
     // let followers = this.props.followers
@@ -169,12 +205,21 @@ class AddNewChatContent extends React.Component{
             messages:res.data.messages,
             curChatId: res.data.chatId
           })
+
+          this.props.setMessages(res.data.messages, res.data.curChat)
+
         }
       )
     } else {
+
+
       this.setState({
         messages: []
       })
+
+      this.props.setMessages([], {})
+
+
     }
 
 
