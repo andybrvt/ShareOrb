@@ -46,6 +46,22 @@ class SocialCalUploadPic(APIView):
         change = False
         print(request.data)
 
+        if socialCalCell.coverPic == '':
+            if (len(request.data) != 0):
+
+                socialCalCell.coverPic = request.data['image[0]']
+                socialCalCell.save()
+                # obj, create = models.SocialCalCell.objects.update_or_create(
+                #     socialCalUser = user,
+                #     socialCaldate = time,
+                #     coverPic = request.data['image[0]']
+                #     # defaults = {'coverPic': request.data['image[0]']}
+                # )
+
+                # obj.coverPic = request.data['image[0]']
+                print("there is no cover photo")
+                change = True
+
         for i in range(len(request.data)):
             print(request.data['image['+str(i)+']'])
 
@@ -65,14 +81,7 @@ class SocialCalUploadPic(APIView):
                 itemImage = request.data['image['+str(i)+']'],
                 calCell = socialCalCell
             )
-        if socialCalCell.coverPic == '':
-            if (len(request.data) != 0):
-                obj, create = models.SocialCalCell.objects.update_or_create(
-                    socialCalUser = user,
-                    socialCaldate = time,
-                    defaults = {'coverPic': request.data['image[0]']}
-                )
-                change = True
+
         # Get social cal again so we can pull the cover picture
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
             socialCalUser = user,
