@@ -30,6 +30,14 @@ class NewsfeedSpecCarousel extends React.Component{
     console.log(pictureList)
     let socialItems = []
 
+    const contentStyle = {
+      height: '160px',
+      color: '#fff',
+      lineHeight: '160px',
+      textAlign: 'center',
+      background: '#364d79',
+    };
+
     // if(pictureList.length === 0){
     //   return
     // } else if (pictureList.length === 1){
@@ -40,10 +48,24 @@ class NewsfeedSpecCarousel extends React.Component{
         item => {
           socialItems.push(
 
-            <div className = 'imageContainer'>
-              <img
+            <div
+
+
+              className = 'imageContainer'>
+
+              <div
+                style = {{
+                    backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+item +")"
+                  }}
+                  className = "backgroundImageNews"
+                >
+              </div>
+              {/*
+                <img
                 className = "testMiddle"
               src ={`${global.NEWSFEED_PICS}`+item} />
+                */}
+
             </div>
 
           )
