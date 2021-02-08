@@ -136,6 +136,70 @@ class NewChat extends React.Component{
         eventList: res.data
       })
     })
+
+
+    // Now we got to make it suitable for chats that you are searching up
+
+    if(this.props.parameter.id === "newchat"){
+      // Pretty much the same as creating an event but now you are just
+      // sharing the event
+      if(this.props.curChat.id){
+        // This function will be for when the chat already exist
+        const chatId = this.props.curChat.id
+        const senderId = this.props.curId
+
+        // First you will update the side panel
+        ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+          chatId,
+          senderId
+        )
+
+        authAxios.post(`${global.API_ENDPOINT}/newChat/createChatEventMessage`,{
+          chatId: this.props.curChat.id,
+          senderId: senderId,
+          eventObj: eventObj
+        })
+        .then(
+          res => {
+            this.props.history.push("/chat/"+res.data)
+          }
+        )
+
+        // Now you will have to make an axios call to acutally
+
+      } else {
+        // thi else will be for when the chat doesnt exsit and you
+        // need to make a new one
+
+        const senderId = this.props.curId
+
+        console.log("does it hit here")
+        authAxios.post(`${global.API_ENDPOINT}/newChat/createNewChatEventMessage`,{
+          senderId: senderId,
+          chatParticipants: [...participants, this.props.curId],
+          eventObj: eventObj
+        })
+        .then(
+          res => {
+            console.log(res.data)
+            ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+              res.data,
+              senderId
+            )
+            this.props.history.push("/chat/"+res.data)
+
+          }
+
+        )
+
+
+      }
+
+
+
+    } else {
+      // This is for when you are not trying to search someone up
+      // and you are on their chat already
     const chatId = this.props.parameter.id
     const senderId = this.props.curId
 
@@ -149,6 +213,11 @@ class NewChat extends React.Component{
       chatId,
       senderId
     )
+
+
+    }
+
+
 
 
 
@@ -303,6 +372,10 @@ class NewChat extends React.Component{
 
 
     } else {
+
+      const chatId = this.props.curChat.id
+      const senderId = this.props.curId
+
       // This is used to actually send the message out to the
       // current chat (needs to be on the chat page tho)
       NewChatWebSocketInstance.sendSharedEventMessage(
@@ -311,8 +384,7 @@ class NewChat extends React.Component{
         eventObjNew
       )
 
-      const chatId = this.props.curChat.id
-      const senderId = this.props.curId
+
 
 
       // This is just used to update the side panel

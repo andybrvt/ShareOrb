@@ -30,8 +30,8 @@
 .chatEventShare .chatEventShareLeft .eventListContainer {
   /* background-color: red; */
   margin-top: 15px;
-  overflow: hidden;
-  height: 465px;
+  overflow: auto;
+  height: 430px;
   width:300px;
 }
 
