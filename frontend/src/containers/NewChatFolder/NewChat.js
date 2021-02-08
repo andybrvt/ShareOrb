@@ -219,6 +219,7 @@ class NewChat extends React.Component{
       location: eventObj.location,
       eventColor: eventObj.event_color,
       repeatCondition: eventObj.repeatCondition,
+      person: [this.props.curId]
 
     }
     // You have to process the start date and time so that it is one adherence
@@ -237,7 +238,7 @@ class NewChat extends React.Component{
 
     })
 
-    const chatId = this.props.parameter.id
+    const chatId = this.props.curChat.id
     const senderId = this.props.curId
 
     NewChatWebSocketInstance.sendSharedEventMessage(
