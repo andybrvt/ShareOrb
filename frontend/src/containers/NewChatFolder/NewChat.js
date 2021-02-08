@@ -276,6 +276,29 @@ class NewChat extends React.Component{
 
       } else {
 
+        const senderId = this.props.curId
+
+
+        console.log('does it hit here')
+        // now you will create an event for this
+        authAxios.post(`${global.API_ENDPOINT}/newChat/createNewChatEventMessage`,{
+          senderId: senderId,
+          chatParticipants: [...participants, this.props.curId],
+          eventObj: eventObjNew
+        })
+        .then(
+          res => {
+            console.log(res.data)
+            ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+              res.data,
+              senderId
+            )
+            this.props.history.push("/chat/"+res.data)
+
+          }
+        )
+
+
       }
 
 

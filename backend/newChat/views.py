@@ -213,9 +213,38 @@ class CreateNewChatEventMessage(APIView):
     # This view is used to create a new chat and then create a
     # new chat event message
 
+    # pretty much the same as the createnew chat view but now with the messages
+    # changed
+
     def post(self, request, *args, **kwargs):
         print(request.data)
 
+        recentSender = get_object_or_404(User, id = request.data['senderId'])
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+
+        chat = models.Chat.objects.create(
+            recentMessage = recentSender.first_name+" shared an event",
+            recentSender = recentSender,
+            recentTime = time
+        )
+
+        # this is to add participants in
+        for participant in request.data['chatParticipants']:
+            chatUser = get_object_or_404(User, id = participant)
+            chat.participants.add(participant)
+
+        # Add the new event message
+        newMessage = models.Message.objects.create(
+            chat = chat,
+            body = recentSender.first_name+" shared an event",
+            messageUser = recentSender,
+            type = "event",
+            eventTitle = request.data['eventObj']['title'],
+            eventStartTime = request.data['eventObj']['start_time'],
+            eventEndTime = request.data['eventObj']['end_time'],
+            eventPersons = len(request.data['eventObj']['person'])
+        )
 
 
-        return Response("new chat event message")
+        return Response(chat.id)
