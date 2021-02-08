@@ -379,9 +379,9 @@ class NewsfeedPost extends React.Component {
           <div class="innerContainerLike">
             {
             (peopleLikeId.includes(this.props.userId))?
-            <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
+            <i class="fas fa-heart fa-lg" style={{marginRight:'5px', color:'red'}}></i>
               :
-            <i class="far fa-heart" style={{marginRight:'5px'}}></i>
+            <i class="far fa-heart fa-lg" style={{marginRight:'5px'}}></i>
             }
             <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
                   <span class="boldLikeComment">{like_people.length} </span>
@@ -390,7 +390,10 @@ class NewsfeedPost extends React.Component {
             <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
             <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
-              <span class="boldLikeComment"> {this.props.data.post_comments.length} comments</span>
+              <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
+              <span class="boldLikeComment">
+
+                {this.props.data.post_comments.length} comments</span>
             </span>
 
             <div class='commentInPost'>
@@ -402,8 +405,12 @@ class NewsfeedPost extends React.Component {
             </div>
           </div>
         </div>
-
+      { this.props.data.caption?
         <Divider style={{marginTop:'-10px'}}/>
+        :
+        <Divider style={{marginTop:'-10px', marginBottom:'-10px'}}/>
+      }
+      {this.props.data.caption?
 
         <p style={{ fontSize: '14px', color:'black'}}>
           {
@@ -427,6 +434,9 @@ class NewsfeedPost extends React.Component {
 
               <div style={{display:'flex'}}>
                 <div class="photoText">
+                    <span class="boldedText">
+                    @{this.props.data.user.username+" "}
+                    </span>
                     <span>
                       {this.props.data.caption}
                     </span>
@@ -434,7 +444,9 @@ class NewsfeedPost extends React.Component {
               </div>
           }
         </p>
-
+        :
+        <span> </span>
+      }
 
         <div>
           <div class="box-buttons">
@@ -462,7 +474,7 @@ class NewsfeedPost extends React.Component {
               }
               <button onClick ={() => this.OnClickPost(postId, userUsername)} >
 
-                <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comment"></i> Comment
+                <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comments"></i> Comment
               </button>
               <button onClick = {() => this.onClipPhoto()}>
                 <span style={{ marginRight:'10px'}} class="fa fa-archive"></span>

@@ -116,8 +116,8 @@
 
 
 .boldLikeComment {
-  font-weight: 225px;
-
+  font-weight: 400px;
+  color:black;
   /* font-weight: bold; */
   /* font-we */
   /* background-color: blue; */
@@ -509,6 +509,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
     line-height: 130%;
     font-family: "Segoe UI";
     padding-right: 10px;
+    font-weight: 400;
 }
 .userNamePart{
   font-weight: 650;
