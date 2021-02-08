@@ -169,3 +169,53 @@ class GetIndividualExisitingChat(APIView):
         #     participants:
         # }
         return Response("No chat")
+
+class CreateChatEventMessage(APIView):
+    # This view will be used to create a chat event when the chat already
+    # exist. The reason I am not do a get_or_create is because there are
+    # events that have the same name and could possiblity the same
+    # information
+
+    # You will just need the chat id and then the event information
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        # Now you will pretty much create the chat event message here
+
+        chatObj = get_object_or_404(models.Chat, id = request.data['chatId'])
+        senderObj = get_object_or_404(User, id = request.data['senderId'])
+
+        # Now you will create teh message.
+
+        newMessage = models.Message.objects.create(
+            chat = chatObj,
+            body = senderObj.first_name+" shared an event",
+            messageUser = senderObj,
+            type = "event",
+            eventTitle = request.data['eventObj']['title'],
+            eventStartTime = request.data['eventObj']['start_time'],
+            eventEndTime = request.data['eventObj']['end_time'],
+            eventPersons = len(request.data['eventObj']['person'])
+        )
+
+        newMessage.save()
+
+        # Now return the chat id and that is it so that you cna redirect to the
+        # page
+
+
+
+
+        return Response(chatObj.id)
+
+
+class CreateNewChatEventMessage(APIView):
+    # This view is used to create a new chat and then create a
+    # new chat event message
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+
+
+        return Response("new chat event message")

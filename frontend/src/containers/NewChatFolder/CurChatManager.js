@@ -306,6 +306,7 @@ class CurChatManager extends React.Component{
         submitCreateEvent = {this.submitCreateEventConfig}
         memberList = {this.props.curChat.participants}
         usernameList = {usernameList}
+        onClose = {this.onCloseEventModal}
         />
 
         </Modal>

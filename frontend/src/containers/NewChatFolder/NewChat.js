@@ -238,20 +238,66 @@ class NewChat extends React.Component{
 
     })
 
-    const chatId = this.props.curChat.id
-    const senderId = this.props.curId
 
-    NewChatWebSocketInstance.sendSharedEventMessage(
-      chatId,
-      senderId,
-      eventObjNew
-    )
 
-    ChatSidePanelWebSocketInstance.updateRecentChatEvent(
-      chatId,
-      senderId
-    )
 
+    // Now we need to do one where you are on the search
+    if(this.props.parameter.id === "newchat"){
+      // For here you will push to the chat page, but before you do that you have
+      // to create the event message. You will do this through an axios call
+
+
+      // Now you have to differentiate whether or not it is a new chat or a
+      // old chat so that you know whether or not to create one or just create
+      // a message and then pull it.
+      if(this.props.curChat.id){
+        // This will check if the chat exist or not
+
+        const chatId = this.props.curChat.id
+        const senderId = this.props.curId
+
+
+        // This is just used to update the side panel
+        ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+          chatId,
+          senderId
+        )
+
+        authAxios.post(`${global.API_ENDPOINT}/newChat/createChatEventMessage`,{
+          chatId: this.props.curChat.id,
+          senderId: senderId,
+          eventObj: eventObjNew
+        })
+        .then(
+          res => {
+            this.props.history.push("/chat/"+res.data)
+          }
+        )
+
+      } else {
+
+      }
+
+
+    } else {
+      // This is used to actually send the message out to the
+      // current chat (needs to be on the chat page tho)
+      NewChatWebSocketInstance.sendSharedEventMessage(
+        chatId,
+        senderId,
+        eventObjNew
+      )
+
+      const chatId = this.props.curChat.id
+      const senderId = this.props.curId
+
+
+      // This is just used to update the side panel
+      ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+        chatId,
+        senderId
+      )
+    }
 
 
 

@@ -50,6 +50,7 @@ class CurChatEventList extends React.Component{
 
 
     this.props.submitCreateEvent(eventObj)
+    this.props.onClose()
   }
 
 
