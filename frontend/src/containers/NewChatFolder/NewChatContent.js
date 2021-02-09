@@ -87,11 +87,10 @@ class NewChatContent extends React.Component{
           const test=messageItem.eventPersons
           return (
             <div className = "chatListItemR">
-              <div className = "chatTextBoxRight">
-              <div className = "chatContentTextRight eventCard" style={{fontSize:'16px'}}>
-                <span style={{float:'left', fontSize:'14px'}}>
+              <div className= "messageEventContainerR eventCard">
+                <div className = "messageEventTitleText">
                   {this.capitalize(messageItem.body)}
-                </span>
+                </div>
                 <Divider/>
                 {messageItem.eventTitle}
                 <br />
@@ -104,13 +103,11 @@ class NewChatContent extends React.Component{
                 <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
                 {test} people
                 <br/>
-                <Button type="primary" shape="round" style={{float:'right'}}>
-                  View Event
-                </Button>
-              </div>
+                  <Button type="primary" shape="round" style={{float:'right', marginTop:"5px"}}>
+                    View Event
+                  </Button>
 
               </div>
-
 
             </div>
 
@@ -140,41 +137,41 @@ class NewChatContent extends React.Component{
         const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
         const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
         const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
+        const test=messageItem.eventPersons
 
         return (
           <div className = "chatListItemL">
-            eventother
 
-
-            {/*
-              <div className= "chatTextBox">
-              <Avatar size = {30}
-              src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
-              <div className = 'chatNameTime'>
-                <div className = 'chatName'>
-                  {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+            <div className = "messageEventContainerL">
+              <div className = "insideMessasgeHolder">
+                <div className = "messageEventAvatarHolder">
+                  <Avatar className = 'messageAvatar'
+                    size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
                 </div>
-                <div>
 
+                <div className = "messageEventTextHolder">
+                  <div className = "messageEventTitleText">
+                    {this.capitalize(messageItem.body)}
+                  </div>
+                  <Divider/>
+                  {messageItem.eventTitle}
+                  <br />
+                  <i style={{color:"#1890ff",  marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
+                     {eventDate}
+                  <br />
+                  <i class="fas fa-clock" style={{color:"#1890ff",  marginRight:'10px'}}></i>
+                  {eventStartTime} - {eventEndTime}
+                  <br />
+                  <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
+                  {test} people
+                  <br/>
+                    <Button type="primary" shape="round" style={{float:'right', marginTop:"5px"}}>
+                      View Event
+                    </Button>
                 </div>
-              </div>
-
-              <div className = "chatContentText">
-                {this.capitalize(messageItem.body)}
-                <br />
-                Title: {messageItem.eventTitle}
-                <br />
-                <i class="far fa-calendar"></i>
-                {eventDate}
-                <br />
-                <i class="far fa-clock"></i>
-                {eventStartTime} - {eventEndTime}
-                <br />
-                Click to check it out.
-              </div>
 
               </div>
-              */}
+            </div>
           </div>
 
 
@@ -274,9 +271,9 @@ class NewChatContent extends React.Component{
 
         </div>
 
-        <div className = "bottomBox">
+        <div className = "searchChatInput">
           <form>
-            <div className = "formInputs">
+            <div className = "searchChatInputBox">
               <Input
               onChange = {this.handleChange}
               value = {this.state.message}
@@ -285,10 +282,6 @@ class NewChatContent extends React.Component{
               placeholder = "Write your message..."
               onPressEnter = {this.handleMessageSubmit}
               />
-
-
-
-            <i style={{color:'#1890ff', float:'right'}} class="sendButton fas fa-paper-plane"></i>
             </div>
 
           </form>
