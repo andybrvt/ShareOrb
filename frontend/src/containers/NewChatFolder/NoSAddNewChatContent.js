@@ -35,9 +35,51 @@ class NoSAddNewChatContent extends React.Component{
   }
 
 
+  handleMessageSubmit = e => {
+    e.preventDefault()
+    // This function will be used to handle submission of chats but the thing
+    // that this is different from that of the handleMessageSubmit in the
+    // addNewChatContainer because this is only for new chats only
+    // so we will only just have to create the chats
+
+    let participantList = []
+    for(let i = 0; i< this.props.curChat.participants.length; i++){
+      participantList.push(
+        this.props.curChat.participants[i].id
+      )
+    }
+
+
+    if(this.state.message != ""){
+      authAxios.post(`${global.API_ENDPOINT}/newChat/createChat`, {
+        senderId: this.props.curId,
+        chatParticipants: participantList,
+        message: this.state.message
+      })
+      .then(
+        res => {
+          console.log(res.data)
+          // Now that you have created the chat now you can just redict to it
+          // and then send it through the side panel
+          ChatSidePanelWebSocketInstance.sendNewCreatedChat(res.data)
+
+          this.setState({
+            message: ""
+          })
+          this.props.history.push("/chat/"+res.data)
+
+        }
+      )
+    }
+
+
+  }
+
+
 
 
   render() {
+    console.log(this.props)
     return(
 
       <div className = "addNewChatContainer">

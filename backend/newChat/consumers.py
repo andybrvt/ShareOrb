@@ -207,6 +207,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         # associated with teh chat and then update there chatList in the front
         # end
 
+        print("hit right here bro ")
+        print(data)
         # First get the chat
         curChat = get_object_or_404(Chat, id = data['chatId'])
         serializedChat = MiniChatSerializer(curChat).data

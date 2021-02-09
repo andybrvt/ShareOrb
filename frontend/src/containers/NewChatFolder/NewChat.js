@@ -40,7 +40,9 @@ class NewChat extends React.Component{
         this.props.parameter.id
       )
     })
-    if(this.props.parameter.id === 'newchat' || this.props.parameter.id === "0"){
+    if(this.props.parameter.id === 'newchat' || this.props.parameter.id === "0"
+    || this.props.parameter.id === "nosnewchat"
+    ){
         NewChatWebSocketInstance.connect(null)
     } else{
       ChatSidePanelWebSocketInstance.sendSeen(
@@ -91,6 +93,7 @@ class NewChat extends React.Component{
     if(this.props.parameter.id !== newProps.parameter.id
       && newProps.parameter.id !== "newchat"
       && newProps.parameter.id !== "0"
+      && newProps.parameter.id !== "nosnewchat"
     ){
       NewChatWebSocketInstance.disconnect();
       this.waitForSocketConnection(() => {
@@ -497,6 +500,7 @@ class NewChat extends React.Component{
             curId = {this.props.curId}
             history = {this.props.history}
             setMessages = {this.props.setMessages}
+            curChat = {this.props.curChat}
             />
           </div>
 
