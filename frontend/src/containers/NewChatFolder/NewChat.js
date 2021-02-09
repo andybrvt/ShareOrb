@@ -144,7 +144,7 @@ class NewChat extends React.Component{
 
     // Now we got to make it suitable for chats that you are searching up
 
-    if(this.props.parameter.id === "newchat"){
+    if(this.props.parameter.id === "newchat" || this.props.parameter.id === "nosnewchat"){
       // Pretty much the same as creating an event but now you are just
       // sharing the event
       if(this.props.curChat.id){
@@ -315,7 +315,7 @@ class NewChat extends React.Component{
 
 
     // Now we need to do one where you are on the search
-    if(this.props.parameter.id === "newchat"){
+    if(this.props.parameter.id === "newchat" || this.props.parameter.id === "nosnewchat"){
       // For here you will push to the chat page, but before you do that you have
       // to create the event message. You will do this through an axios call
 
@@ -349,6 +349,8 @@ class NewChat extends React.Component{
 
       } else {
 
+        // This will also take care of the shared event when you are sending to
+        // someone new through the mesasge button
         const senderId = this.props.curId
 
 
