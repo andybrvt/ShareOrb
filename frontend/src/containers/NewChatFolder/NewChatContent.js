@@ -86,60 +86,49 @@ class NewChatContent extends React.Component{
           const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
           const test=messageItem.eventPersons
           return (
-            <div className = "chatTextBoxRight">
-            <Avatar size = {30}
-            src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
-            {/*
-            <div className = 'chatNameTimeRight'>
-              <div className = 'chatNameRight'>
-                {this.capitalize(messageItem.messageUser.first_name)}
-                 {this.capitalize(messageItem.messageUser.last_name)}
+            <div className = "chatListItemR">
+              <div className = "chatTextBoxRight">
+              <div className = "chatContentTextRight eventCard" style={{fontSize:'16px'}}>
+                <span style={{float:'left', fontSize:'14px'}}>
+                  {this.capitalize(messageItem.body)}
+                </span>
+                <Divider/>
+                {messageItem.eventTitle}
+                <br />
+                <i style={{color:"#1890ff",  marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
+                   {eventDate}
+                <br />
+                <i class="fas fa-clock" style={{color:"#1890ff",  marginRight:'10px'}}></i>
+                {eventStartTime} - {eventEndTime}
+                <br />
+                <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
+                {test} people
+                <br/>
+                <Button type="primary" shape="round" style={{float:'right'}}>
+                  View Event
+                </Button>
               </div>
-              <div>
 
               </div>
-            </div>
-            */}
-            <div className = "chatContentTextRight eventCard" style={{fontSize:'16px'}}>
-              <span style={{float:'left', fontSize:'14px'}}>
-                {this.capitalize(messageItem.body)}
-              </span>
-              <Divider/>
-              {messageItem.eventTitle}
-              <br />
-              <i style={{color:"#1890ff",  marginRight:'10px', marginTop:'15px'}} class="far fa-calendar-alt"></i>
-                 {eventDate}
-              <br />
-              <i class="fas fa-clock" style={{color:"#1890ff",  marginRight:'10px'}}></i>
-              {eventStartTime} - {eventEndTime}
-              <br />
-              <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
-              {test} people
-              <br/>
-              <Button type="primary" shape="round" style={{float:'right'}}>
-                View Event
-              </Button>
-            </div>
+
 
             </div>
+
           )
         } else if (messageItem.type === "text"){
           // you are getting hte text
           // This will take care of the case where the message is just the chat
           return (
-            <div className = "chatTextBoxRight">
-            <div className = 'chatNameTimeRight'>
-
-              <div>
-
+            <div className = "chatListItemR">
+              <div className = "textMessageRight">
+                <Tooltip placement="left" title={"8:00PM"}>
+                  <div className = "messageRight">
+                    {messageItem.body}
+                  </div>
+                </Tooltip>
               </div>
             </div>
-            <Tooltip placement="left" title={"8:00PM"}>
-              <div className = "messageToUser">
-                {messageItem.body}
-              </div>
-            </Tooltip>
-            </div>
+
 
           )
         }
@@ -153,51 +142,76 @@ class NewChatContent extends React.Component{
         const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
 
         return (
-          <div className= "chatTextBox">
-          <Avatar size = {45}
-          src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
-          <div className = 'chatNameTime'>
-            <div className = 'chatName'>
-              {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
-            </div>
-            <div>
+          <div className = "chatListItemL">
+            eventother
 
-            </div>
+
+            {/*
+              <div className= "chatTextBox">
+              <Avatar size = {30}
+              src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
+              <div className = 'chatNameTime'>
+                <div className = 'chatName'>
+                  {this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}
+                </div>
+                <div>
+
+                </div>
+              </div>
+
+              <div className = "chatContentText">
+                {this.capitalize(messageItem.body)}
+                <br />
+                Title: {messageItem.eventTitle}
+                <br />
+                <i class="far fa-calendar"></i>
+                {eventDate}
+                <br />
+                <i class="far fa-clock"></i>
+                {eventStartTime} - {eventEndTime}
+                <br />
+                Click to check it out.
+              </div>
+
+              </div>
+              */}
           </div>
 
-          <div className = "chatContentText">
-            {this.capitalize(messageItem.body)}
-            <br />
-            Title: {messageItem.eventTitle}
-            <br />
-            <i class="far fa-calendar"></i>
-            {eventDate}
-            <br />
-            <i class="far fa-clock"></i>
-            {eventStartTime} - {eventEndTime}
-            <br />
-            Click to check it out.
-          </div>
 
-          </div>
         )
       } else if (messageItem.type === "text"){
         // user is getting text from someone else
         // This will take care of the case where the message is just the chat
         return (
+          <div className = "chatListItemL">
 
-            <div className = "eventMessageItemNotUser">
-              <Avatar style={{marginTop:'5px', marginRight:'5px'}} className = 'eventMessageAvatar'
-                size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
-              <Tooltip placement="right" title={"8:00PM"}>
-                <span className = "eventTextMessageHolder">
-                  <div className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
-                  <div className = "eventMessage">
-                    {messageItem.body}
-                  </div>
-                </span>
-              </Tooltip>
+            <div className = "textMessageLeft">
+
+              <div className = "insideMessasgeHolder">
+                <div className = "messageAvatarHolder">
+                  <Avatar className = 'messageAvatar'
+                    size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
+                </div>
+
+                <div className = "messageTextHolder">
+                  <Tooltip placement="right" title={"8:00PM"}>
+                    <span className = "messageText">
+                      <div className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
+                      <div className = "eventMessage">
+                        {messageItem.body}
+                      </div>
+                    </span>
+                  </Tooltip>
+                </div>
+              </div>
+
+
             </div>
+
+
+          </div>
+
+
 
 
         )

@@ -99,27 +99,117 @@
   height: 85%;
 }
 
+
+
+
 /* This will be the css that governs the chat box */
-.searchChatContent .newChatTextContainer{
-  /* background-color: red; */
+.newChatTextContainer{
   overflow: auto;
   height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.searchChatContent .newChatTextContainer .chatTextBoxRight{
+/* chatListItem pretty much is the container that holds the
+  chat bubble
+ */
+.newChatTextContainer .chatListItemL{
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.newChatTextContainer .chatListItemR{
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: right;
+}
+
+.chatListItemL .textMessageLeft{
+  /* display: inline-block; */
+  position: relative;
+  display:inline-block;
+
+  flex-direction: row;
+  padding: 10px 15px;
+  margin: 2px 15px 5px 10px;
+  border-radius: 20px;
+  max-width: 40%;
+  /* line-height: 130%; */
+  background:#E8E8E8;
+  font-size: 15px;
+
+}
+
+.chatListItemR .textMessageRight{
+  position: relative;
+  clear:both;
   display: inline-block;
-  clear: both;
+  padding: 10px 15px;
+  margin: 2px 15px 5px 15px;
+  border-radius: 20px;
+  max-width: 40%;
+  /* line-height: 130%; */
+  background: #00BFFF;
+  color: #f5f5f5;
+  font-size: 15px;
+
+}
+
+.messageRight{
+  text-align: justify;
+}
+
+.insideMessasgeHolder{
+  display: flex;
+}
+
+.messageAvatarHolder{
+  position: relative;
+  width: 30px;
+}
+.messageAvatar{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.messageTextHolder{
+  position: relative;
+  width: 90%;
+  margin-left: 5px;
+}
+.messageText{
   float:left;
-  margin: 15px 15px 5px 15px;
+}
+.messageText .userName{
+  color: grey;
+  font-size: 14px;
+}
+.messageText .eventMessage{
+}
+.messageText .eventTimeStamp{
+  font-size: 9px;
+}
+
+
+
+.chatTextBoxRight{
+  display: inline-block;
+  float:left;
+  margin: 10px 15px 5px 15px;
   width: calc(100% - 25px);
   font-size: 0.9em;
   position: relative;
-
+  background-color: red;
   text-align: right;
 
 }
 
-.searchChatContent .newChatTextContainer .chatTextBox{
+.newChatTextContainer .chatTextBox{
   display: inline-block;
   clear: both;
   float: left;
@@ -128,6 +218,12 @@
   font-size: 0.9em;
   position: relative;
 }
+
+
+
+
+
+
 
 .chatContainer .chatRightSide .addNewChatContainer .searchChatInput{
   position: absolute;
@@ -300,35 +396,8 @@
   height: 93%;
 
 }
-.chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer{
-  overflow: auto;
-  height: 100%;
-  /* background-color: red; */
-}
-.chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer .chatTextBox{
-  display: inline-block;
-  clear: both;
-  float: left;
-  margin: 15px 15px 5px 15px;
-  width: calc(100% - 25px);
-  font-size: 0.9em;
-  position: relative;
-  /* background-color: blue; */
-}
 
-/* This will be for the current user side */
-.chatContainer .chatRightSide .newChatContent .chatWrapContainer .newChatTextContainer .chatTextBoxRight{
-  display: inline-block;
-  clear: both;
-  float:left;
-  margin: 15px 15px 5px 15px;
-  width: calc(100% - 25px);
-  font-size: 0.9em;
-  position: relative;
 
-  text-align: right;
-  /* background-color: blue; */
-}
 .chatNameTime {
   display: flex;
   position:absolute;
@@ -343,39 +412,6 @@
   /* background-color: red; */
 }
 
-.messageToUser{
-  /* background-color: red; */
-  clear:both;
-  display: inline-block;
-  padding: 10px 15px;
-  margin: 2px 15px 5px 15px;
-  border-radius: 20px;
-  max-width: 350px;
-  /* line-height: 130%; */
-  background: #00BFFF;
-  color: #f5f5f5;
-  float: right;
-  font-size: 15px;
-    margin-top: -20px;
-}
-
-
-.messageReceived{
-  /* background-color: red; */
-  clear:both;
-  /* display: inline-block; */
-  display:flex;
-  padding: 10px 15px;
-  margin-top: -20px;
-  border-radius: 20px;
-  max-width: 350px;
-  /* line-height: 130%; */
-  background: #f5f5f5;
-  float: left;
-  font-size: 15px;
-  font-weight: 400;
-
-}
 
 .chatNameTime .chatName {
   font-size: 14px;
@@ -436,29 +472,6 @@
   background-color: whitesmoke;
 }
 
-
-/* This is for the chat header */
-.chatContainer .chatRightSide .newChatHeader{
-  background-color: white;
-  border: 1px solid grey;
-  height: 8%;
-  position: relative;
-}
-.chatContainer .chatRightSide .newChatHeader .groupsHeader{
-  margin-top: 7px;
-  display: flex;
-}
-.chatContainer .chatRightSide .newChatHeader .avaHeader{
-  margin-top: 10px;
-  margin-left: 10px;
-}
-.chatContainer .chatRightSide .newChatHeader .nameHeader{
-  font-size: 25px;
-  position: relative;
-  top: 5px;
-  left: 5px;
-
-}
 
 
 
