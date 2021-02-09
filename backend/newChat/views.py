@@ -155,7 +155,11 @@ class GetIndividualExisitingChat(APIView):
 
         for chats in existingChats:
             if chats.participants.count() == 2:
-                return Response(chats.id)
+                content = {
+                    "curChat": chats.id,
+                    "hasChats": True
+                }
+                return Response(content)
 
         # So if you can't find a chat that works you will
         # return the name of the participants and then try to
@@ -163,12 +167,15 @@ class GetIndividualExisitingChat(APIView):
         user1 = get_object_or_404(User, id = request.data['user1'])
         user2 = get_object_or_404(User, id = request.data['user2'])
 
+        user1 = serializers.ChatUser(user1).data
+        user2 = serializers.ChatUser(user2).data
 
 
-        # content = {
-        #     participants:
-        # }
-        return Response("No chat")
+        content = {
+            "curChat": {"participants": [user1, user2]},
+            "hasChats": False
+        }
+        return Response(content)
 
 class CreateChatEventMessage(APIView):
     # This view will be used to create a chat event when the chat already

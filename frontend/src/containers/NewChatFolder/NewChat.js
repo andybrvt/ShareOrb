@@ -12,6 +12,7 @@ import ManageChatHeader from './ManageChatHeader';
 import NoChatsScreen from './NoChatsScreen';
 import AddNewChatContent from './AddNewChatContent';
 import CurChatManager from './CurChatManager';
+import NoSAddNewChatContent from './NoSAddNewChatContent';
 import * as calendarActions from '../../store/actions/calendars';
 import * as messageActions from '../../store/actions/messages';
 import { notification } from 'antd';
@@ -481,6 +482,18 @@ class NewChat extends React.Component{
             <AddNewChatContent
             followers = {this.props.followers}
             following = {this.props.following}
+            curId = {this.props.curId}
+            history = {this.props.history}
+            setMessages = {this.props.setMessages}
+            />
+          </div>
+
+          :
+
+          this.props.parameter.id === "nosnewchat" ?
+
+          <div className = "chatRightSide">
+            <NoSAddNewChatContent
             curId = {this.props.curId}
             history = {this.props.history}
             setMessages = {this.props.setMessages}

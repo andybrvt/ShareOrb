@@ -162,12 +162,16 @@ class PersonalProfileHeader extends React.Component{
     })
     .then(res => {
       console.log(res.data)
-      if(res.data !== "No chat"){
+      if(res.data.hasChats){
         // When there is a chat that exist
-        this.props.history.push("/chat/"+res.data)
+        this.props.history.push("/chat/"+res.data.curChat)
       } else {
         // When there is  not chat that exist
-        console.log("no chats are avaliable")
+    
+        this.props.setMessages([], res.data.curChat)
+        this.props.history.push("/chat/nosnewchat")
+
+
       }
 
     })

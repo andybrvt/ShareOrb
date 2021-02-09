@@ -11,6 +11,7 @@ import NotificationWebSocketInstance from '../../notificationWebsocket';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import * as exploreActions from '../../store/actions/explore';
 import * as authActions from '../../store/actions/auth';
+import * as messageActions from '../../store/actions/messages';
 import defaultPicture from '../images/default.png';
 import ava1 from '../images/avatar.jpg'
 import SocialCalendar from '../../containers/SocialCalendarFolder/SocialCalendar';
@@ -339,7 +340,8 @@ const mapDispatchToProps = dispatch => {
     changeProfilePicAuth: profilePic => dispatch(authActions.changeProfilePicAuth(profilePic)),
     closeProfile: () => dispatch(exploreActions.closeProfile()),
     grabUserCredentials: () => dispatch(authActions.grabUserCredentials()),
-    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList)),
+    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat))
   }
 }
 
