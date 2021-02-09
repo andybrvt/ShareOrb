@@ -372,47 +372,50 @@ class NewsfeedPost extends React.Component {
     }
 
     return (
-      <div style={{marginLeft:'15px', fontSize:'14px'}}>
+      <div>
 
 
-        <div class='outerContainerPeople'>
-          <div class="innerContainerLike">
+        <div class='postLikeContainer'>
+          <div class="LeftinnerContainerLike">
             {
             (peopleLikeId.includes(this.props.userId))?
-            <i class="fas fa-heart fa-lg" style={{marginRight:'5px', color:'red'}}></i>
+            <i class="fas fa-heart" style={{marginRight:'5px', color:'red', fontSize:'14px'}}></i>
               :
-            <i class="far fa-heart fa-lg" style={{marginRight:'5px'}}></i>
+            <i class="far fa-heart" style={{marginRight:'5px', fontSize:'14px'}}></i>
             }
             <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
-                  <span class="boldLikeComment">{like_people.length} </span>
+                  <span class="boldLikeComment" style={{fontSize:'14px'}}>{like_people.length} </span>
             </span>
 
             <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
             <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
-              <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
-              <span class="boldLikeComment">
+              <i style={{ marginRight:'10px', fontSize:'14px'}} class="far fa-comments fa-lg"></i>
+              <span class="boldLikeComment" style={{fontSize:'14px'}}>
 
                 {this.props.data.post_comments.length} comments</span>
             </span>
 
-            <div class='commentInPost'>
+
+          </div>
+
+          <div class='RightinnerContainerLike'>
+            <div class="likingPostAvatarGroup">
               <Liking
                 num={10}
-                history  = {this.props.history}
                 specifySize={27}
                 like_people={this.props.data.people_like} {...this.props}/>
             </div>
           </div>
         </div>
       { this.props.data.caption?
-        <Divider style={{marginTop:'-10px'}}/>
+        <Divider style={{marginTop:'5px'}}/>
         :
-        <Divider style={{marginTop:'-10px', marginBottom:'-10px'}}/>
+        <Divider style={{marginTop:'5px', marginBottom:'-10px'}}/>
       }
       {this.props.data.caption?
 
-        <p style={{ fontSize: '14px', color:'black'}}>
+        <p style={{ fontSize: '14px', color:'black', marginLeft:'15px', marginTop:'-10px' }}>
           {
             ((this.props.data.caption).length>140)?
               <div class="photoText">
@@ -505,72 +508,6 @@ class NewsfeedPost extends React.Component {
     )
   }
 
-  ContentOfEvent() {
-
-    let profilePic = ''
-
-
-    if (this.props.data.user.profile_picture){
-      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.user.profile_picture
-    }
-
-    return(
-
-      <div class="card" style={{marginLeft:10, marginRight:10, minHeight:10, marginBottom:40}}>
-
-      <div style={{padding:20,}}>
-
-        {
-          profilePic != '' ?
-          <Avatar
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
-
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={profilePic} alt="avatar" />
-
-          :
-
-          <Avatar
-          onClick = {() => this.onProfileClick(this.props.data.user.username)}
-          size="large"
-          style = {{
-            cursor: 'pointer',
-          }}
-          src={defaultPic} alt="avatar" />
-
-        }
-
-           <span class="personName"  onClick = {() => this.onProfileClick(this.props.data.user.username)}>
-             {this.capitalize(this.props.data.user.username)}
-             <div>
-             <span class="fb-group-date" > Tucson, Arizona</span>
-             <span class="fb-group-date" > {this.renderTimestamp(this.props.data.created_at)}</span>
-            </div>
-        </span>
-
-
-
-
-      </div>
-
-      <Divider/>
-
-      <div style={{marginLeft:'20px',fontSize: '30px', color:'black'}}>
-      8/17 Thursday 3PM
-      </div>
-      <i  style={{marginLeft:'20px',fontSize: '20px', color:'#13c2c2'}} class="fa fa-users" aria-hidden="true"></i>
-
-
-
-      </div>
-    )
-  }
-
-
-
-
   ContentOfPic() {
     let like_people = this.props.data.people_like
     let profilePic = ''
@@ -592,7 +529,7 @@ class NewsfeedPost extends React.Component {
     <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
       <span class="profilePicHeader">
         <span class="headerContainer" >
-            <span class="g grid-13">
+            <span class="topleftNewsFeedPost">
               {
                 profilePic != '' ?
               <Avatar
@@ -612,21 +549,42 @@ class NewsfeedPost extends React.Component {
             }
 
             </span>
-            <span class="g grid-33">
-              <span class="headerPost">
+            <span class="topRightNewsFeedPost">
+              <span
+                style={{color:'black', fontSize:'15px'}}
+                class="headerPostText alignleft" >
+                {this.capitalize(this.props.data.user.first_name)+" "+this.capitalize(this.props.data.user.last_name)}
                 <span
-                  style={{color:'black', fontSize:'15px', marginLeft:'-5px'}}
-                  class="headerPostText alignleft" >
-                  {this.capitalize(this.props.data.user.first_name)+" "+this.capitalize(this.props.data.user.last_name)}
-                  <span
-                    style={{fontSize:'13px'}}
-                    class="headerPostText LikeCommentHover">
-
-                    <br/>
-                    @{this.props.data.user.username}
-                  </span>
+                  style={{fontSize:'13px'}}
+                  class="headerPostText LikeCommentHover">
+                  <br/>
+                  @{this.props.data.user.username}
+                </span>
 
                 </span>
+                {
+                 this.props.data.user.id === this.props.userId ?
+                   <span class="optionPostHeader">
+                    <Dropdown placement="bottom" overlay={
+                      <Menu>
+                        <Menu.Item danger onClick={this.deletePost}>
+                          <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+                          <span style={{marginLeft:'10px'}}>Delete post</span>
+                        </Menu.Item>
+                      </Menu>
+                    }>
+
+                      <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        <div class="threeDotPost">
+                        <i class="fas fa-ellipsis-v" style={{fontSize:'20px'}}></i>
+                        </div>
+                      </a>
+
+                    </Dropdown>
+                    </span>
+                  :
+                  <div class="optionNoPostHeader"> </div>
+                 }
 
                 <span class="headerPostText alignright" style={{fontSize:'13px'}} >
                   <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
@@ -635,34 +593,14 @@ class NewsfeedPost extends React.Component {
                       {this.renderTimestamp(this.props.data.created_at)}
                   </span>
                 </span>
-              </span>
+
             </span>
           </span>
 
-          <span class="optionPostHeader">
-            {
-           this.props.data.user.id === this.props.userId ?
-            <Dropdown overlay={
-              <Menu>
-                <Menu.Item danger onClick={this.deletePost}>
-                  <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-                  <span style={{marginLeft:'10px'}}>Delete post</span>
-                </Menu.Item>
-              </Menu>
-            }>
-              <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-              <i class="fas fa-ellipsis-v" style={{fontSize:'20px', padding:'5px'}}></i>
-              </a>
-            </Dropdown>
-            :
-
-            <div></div>
 
 
 
-          }
 
-            </span>
 
     </span>
 
