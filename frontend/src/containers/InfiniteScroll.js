@@ -8,6 +8,20 @@ import './InfiniteScroll.css';
 import WebSocketPostsInstance from  '../postWebsocket';
 import { Divider } from 'antd';
 import Spinner from './Spinner.js';
+
+import LazyLoad from 'react-lazyload';
+
+const TestSpinner = () => {
+
+    return (
+      <div className = "post loading">
+        <h5> Loading ...</h5>
+      </div>
+    )
+
+
+}
+
 // Fucntion: take in all the post and then put them in an infinite scroll list
 class InfiniteList extends React.Component {
   constructor(props){
@@ -114,13 +128,18 @@ class InfiniteList extends React.Component {
               Welcome, {this.props.data.username}. Here's what's going on today! </div>
             <Divider style={{marginBottom:'25px'}}/>
             {post.map((j,index) => {
-              return <NewsFeedPost
-                history = {this.props.data.history}
-               data = {j}  />
+              return(
+
+                  <NewsFeedPost
+                    history = {this.props.data.history}
+                   data = {j}  />
+              )
+
+
             })}
 
          </div>
-       
+
       </div>
    );
   }

@@ -22,6 +22,7 @@ import {Avatar,
    Space,
    Form,
    Modal,
+   Spin,
    notification
  } from 'antd';
 import { EditOutlined, EllipsisOutlined, AntDesignOutlined, ExclamationCircleOutlined, SettingOutlined, SearchOutlined,UserOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
@@ -37,7 +38,7 @@ import Liking from './Liking';
 import LikeList from './LikeList';
 import PostPicCarousel from '../../components/PostPageFolder/PostPicCarousel';
 import NewsfeedSpecCarousel from './NewsfeedSpecCarousel';
-
+import LazyLoad from 'react-lazyload';
 import * as dateFns from 'date-fns';
 
 
@@ -140,7 +141,11 @@ class NewsfeedPost extends React.Component {
 
 
           class="imageContainerSingle">
-          {/*
+          <LazyLoad
+            once = {true}
+            placeholder = {<Spin />}
+            >
+
             <div
               style = {{
                   backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0] +")"
@@ -149,13 +154,12 @@ class NewsfeedPost extends React.Component {
               >
 
             </div>
+
+          </LazyLoad>
+
+          {/*
+            <img class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} />
             */}
-
-
-            <img
-              loading = "lazy"
-              class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} />
-
 
         </div>
 
@@ -381,7 +385,7 @@ class NewsfeedPost extends React.Component {
 
 
         <div class='postLikeContainer'>
-          <div class="LeftinnerContainerLike" style={{color:'black'}}>
+          <div class="LeftinnerContainerLike">
             {
             (peopleLikeId.includes(this.props.userId))?
             <i class="fas fa-heart" style={{marginRight:'5px', color:'red', fontSize:'14px'}}></i>
@@ -591,7 +595,7 @@ class NewsfeedPost extends React.Component {
                   <div class="optionNoPostHeader"> </div>
                  }
 
-                <span class="headerPostText alignright" style={{fontSize:'12px'}} >
+                <span class="headerPostText alignright" style={{fontSize:'13px'}} >
                   <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
                     Tucson, Arizona <br/>
                   <span style={{float:'right'}}>
