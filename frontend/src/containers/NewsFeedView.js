@@ -169,7 +169,7 @@ class NewsFeedView extends React.Component {
 						onCancel = {() => this.closeProfileEdit()}
 						footer = {null}
 						width={900}
-						bodyStyle={{padding:'25px', height:'575px'}}
+						bodyStyle={{padding:'20px', height:'525px'}}
 						centered
 						>
 
