@@ -28,6 +28,8 @@ class PostUserSerializer(serializers.ModelSerializer):
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio', 'friends')
 
+
+
 # Used in UserListView, UserDetailView in views.py
 # Purpose: UserListView it shows a list and UserDetailView grabbing person info
 
@@ -247,7 +249,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['user'] = UserSerializer(models.User.objects.get(pk=data['user'])).data
+        data['user'] = FollowUserSerializer(models.User.objects.get(pk=data['user'])).data
         comment_list = []
         userLike_list=[]
 
@@ -258,7 +260,7 @@ class PostSerializer(serializers.ModelSerializer):
         data['post_comments'] = comment_list
 
         for user in data['people_like']:
-            likePerson = UserSerializer(models.User.objects.get(id = user)).data
+            likePerson = FollowUserSerializer(models.User.objects.get(id = user)).data
             userLike_list.append(likePerson)
 
         data['people_like'] = userLike_list
