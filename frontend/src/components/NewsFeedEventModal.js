@@ -519,7 +519,7 @@ class NewsFeedEventModal extends React.Component{
 
            <DatePicker
            className = ''
-           placeholder = 'startTime'
+           placeholder = 'Date'
            onChange = {this.onStartDateChange}
            value = {this.state.startDate}
            suffixIcon={<div></div>}
@@ -605,12 +605,7 @@ class NewsFeedEventModal extends React.Component{
 
 
         <Form.Item
-          wrapperCol={{
-            xs: { span: 24, offset: 0 },
-            sm: { span: 16, offset: 8 },
-          }}
-          className = 'buttomHolder'
-          style={{marginLeft:'50px', marginTop:'40px'}}
+          style={{marginLeft:'500px'}}
         >
         <div className = 'clearButtonCon'>
           <Button onClick = {this.onClear}  >

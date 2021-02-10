@@ -76,10 +76,10 @@ class PostPicCarousel extends React.Component{
     return (
       <div className = 'socialLeftRight'>
 
-        <LeftCircleOutlined
-        className = 'socialArrowLeft'
-        onClick = {this.previous} />
-
+        <i class="fas fa-chevron-circle-left"
+          style={{marginLeft:'30px', fontSize:'55px', color:'red'}}
+          className = 'socialArrowLeft'
+          onClick = {this.previous} ></i>
 
         <Carousel
         arrows = {true}
@@ -90,10 +90,10 @@ class PostPicCarousel extends React.Component{
         </Carousel>
 
 
-
         <RightCircleOutlined
-        className = 'socialArrowRight'
-        onClick = {this.next} />
+          style={{marginRight:'30px'}}
+          className = 'socialArrowRight'
+          onClick = {this.next} />
 
       </div>
     )

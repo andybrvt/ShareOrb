@@ -376,7 +376,7 @@ class NewsfeedPost extends React.Component {
 
 
         <div class='postLikeContainer'>
-          <div class="LeftinnerContainerLike">
+          <div class="LeftinnerContainerLike" style={{color:'black'}}>
             {
             (peopleLikeId.includes(this.props.userId))?
             <i class="fas fa-heart" style={{marginRight:'5px', color:'red', fontSize:'14px'}}></i>
@@ -586,7 +586,7 @@ class NewsfeedPost extends React.Component {
                   <div class="optionNoPostHeader"> </div>
                  }
 
-                <span class="headerPostText alignright" style={{fontSize:'13px'}} >
+                <span class="headerPostText alignright" style={{fontSize:'12px'}} >
                   <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
                     Tucson, Arizona <br/>
                   <span style={{float:'right'}}>
