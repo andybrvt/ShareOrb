@@ -140,17 +140,22 @@ class NewsfeedPost extends React.Component {
 
 
           class="imageContainerSingle">
-          <div
-            style = {{
-                backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0] +")"
-              }}
-              className = "backgroundImageNewsSingle"
-            >
-
-          </div>
           {/*
-            <img class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} />
+            <div
+              style = {{
+                  backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0] +")"
+                }}
+                className = "backgroundImageNewsSingle"
+              >
+
+            </div>
             */}
+
+
+            <img
+              loading = "lazy"
+              class="testMiddle" src={`${global.NEWSFEED_PICS}`+userPostImages[0]} />
+
 
         </div>
 

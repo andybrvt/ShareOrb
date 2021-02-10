@@ -136,11 +136,11 @@ export const authLogin = (username, password) => {
         // setUsername1(res2.data.username)
         // setID(res2.data.id)
         const token = res.data.key;
-        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        // const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         const username1 = res.data.username;
         const id = res.data.id;
         localStorage.setItem("token", token);
-        localStorage.setItem("expirationDate", expirationDate);
+        // localStorage.setItem("expirationDate", expirationDate);
 
         dispatch(authSuccess(token));
         window.location.reload(true);
@@ -168,7 +168,7 @@ export const authLogin = (username, password) => {
                res.data.get_following,
                res.data.get_followers
              ));
-            dispatch(checkAuthTimeout(3600));
+            // dispatch(checkAuthTimeout(3600));
 
         })
           .catch(err => {
@@ -236,7 +236,7 @@ export const grabUserCredentials = () => {
            res.data.get_follow_request
          ));
          {/*when it times out*/}
-        dispatch(checkAuthTimeout(100000));
+        // dispatch(checkAuthTimeout(100000));
 
       })
       .catch(err => {
@@ -266,9 +266,9 @@ export const authSignup = (username, first_name, last_name, dob, email, phone_nu
       .then(res => {
         console.log(res)
         const token = res.data.key;
-        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        // const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
-        localStorage.setItem("expirationDate", expirationDate);
+        // localStorage.setItem("expirationDate", expirationDate);
         dispatch(authSuccess(token));
 
         window.location.reload(true);
@@ -297,7 +297,7 @@ export const authSignup = (username, first_name, last_name, dob, email, phone_nu
                res.data.get_following,
                res.data.get_followers
              ));
-            dispatch(checkAuthTimeout(3600));
+            // dispatch(checkAuthTimeout(3600));
 
         })
       .catch(err => {
@@ -314,21 +314,22 @@ export const authCheckState = () => {
         if (token === undefined) {
       dispatch(logout());
     } else {
-      const expirationDate = new Date(localStorage.getItem("expirationDate"));
-      if (expirationDate <= new Date()) {
-        dispatch(logout());
-      } else {
+      // const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      // if (expirationDate <= new Date()) {
+      //   dispatch(logout());
+      // }
+       // else {
         dispatch(authSuccess(token));
         dispatch(grabUserCredentials())
         const username = localStorage.getItem('username')
         const id = localStorage.getItem('id')
         dispatch(addCredentials(username, id));
-        dispatch(
-          checkAuthTimeout(
-            (expirationDate.getTime() - new Date().getTime()) / 1000
-          )
-        );
-      }
+        // dispatch(
+        //   checkAuthTimeout(
+        //     (expirationDate.getTime() - new Date().getTime()) / 1000
+        //   )
+        // );
+      // }
     }
   };
 };

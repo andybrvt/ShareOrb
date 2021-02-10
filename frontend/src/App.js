@@ -31,9 +31,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     // this.initialiseExplore()
-
-    this.initialiseChats()
     this.initialisePost()
+    this.initialiseChats()
     this.initialiseNotification()
 
     // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
