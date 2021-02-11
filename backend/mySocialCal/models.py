@@ -94,7 +94,7 @@ def delete_all_post(sender, instance, **kwargs):
 # a content type is made here
 
 # FOR SOICAL CAL PIC
-def create_social_all_post(sender, instance, created, **kwargs):
+def create_social_cell_post(sender, instance, created, **kwargs):
 
     print("create social all post")
     # save handler that will create the social cell event post
@@ -174,7 +174,7 @@ def create_social_all_post(sender, instance, created, **kwargs):
 
 # Now this will be similar to the saving but for deleting social cal cell when
 # you want to delete it
-def delete_social_all_post(sender, instance, **kwargs):
+def delete_social_cell_post(sender, instance, **kwargs):
     # Similarly to the top you have to grab the usermodal
     userModal = apps.get_model("userprofile", "User")
 
@@ -193,6 +193,66 @@ def delete_social_all_post(sender, instance, **kwargs):
         )
 
         post.delete()
+
+
+
+# These function will be using the same content type as the create_social_cell_post
+# but now this is for social events
+# This one should be simplier because there is not that much conditions,
+# You would just make the event. Then set the post date to be that of the
+# current time that it is posted there will be a date on it(that will be the date
+# of the event so that is just assoicated with the event) There is a bit of
+# difference among that
+
+# FOR SOCIAL CAL EVENT
+def create_social_event_post(sender, instance, created, **kwargs):
+    # same deal as the create_social_cell_post
+
+    userModal = apps.get_model('userprofile', "User")
+
+    # The instance will be the social event
+    post_type = ContentType.objects.get_for_model(instance)
+    owner_type = ContentType.objects.get_for_model(userModal)
+
+    try:
+        # check to see if we can grab it to update it
+        post = SocialCellEventPost.objects.get(
+            owner_type = owner_type,
+            owner_id = instance.host.id,
+            post_type = post_type,
+            post_id = instance.id
+        )
+    except SocialCellEventPost.DoesNotExist:
+        # handle an exception
+        post = SocialCellEventPost(
+            owner_type = owner_type,
+            owner_id = instance.host.id,
+            post_type = post_type,
+            post_id = instance.id
+        )
+    timezone.activate(pytz.timezone("MST"))
+    time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+
+    post.post_date = time;
+    post.save()
+
+def delete_social_event_post(sender, instance, created, **kwargs):
+    # pretty much like the create but deleting now
+    userModal = apps.get_model("userprofile", "User")
+
+    post_type = ContentType.objects.get_for_model(instance)
+    owner_type = ContentType.objects.get_for_model(userModal)
+
+    # Since you are getting it then it should exisit so no need to try and
+    # catch exceptions
+    post = SocialCellEventPost.objects.get(
+        owner_type = owner_type,
+        owner_id = instance.host.id,
+        post_type = post_type,
+        post_id = instance.id
+    )
+
+    post.delete()
 
 
 #These models are used to work with the social cal and all its backend
@@ -236,8 +296,8 @@ class SocialCalCell(models.Model):
 
         return SocialCalComment.objects.filter(calCell = self).values_list('id', flat = True)
 
-post_save.connect(create_social_all_post, sender = SocialCalCell)
-pre_delete.connect(delete_social_all_post, sender = SocialCalCell)
+post_save.connect(create_social_cell_post, sender = SocialCalCell)
+pre_delete.connect(delete_social_cell_post, sender = SocialCalCell)
 
 
 # THESE TWO ARE FOR THE USEROSOCIALNORMPOST
@@ -312,6 +372,12 @@ class SocialCalEvent(models.Model):
 
     class Meta:
         ordering = ('-event_day', '-start_time')
+
+post_save.connect(create_social_event_post, sender = SocialCalEvent)
+pre_delete.connect(delete_social_event_post, sender = SocialCalEvent)
+
+
+
 
 class SocialEventMessages(models.Model):
     # this modal is for the group chat events that are associated with each social events
