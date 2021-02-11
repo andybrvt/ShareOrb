@@ -82,11 +82,16 @@ class SocialCalUploadPic(APIView):
                 calCell = socialCalCell
             )
 
+        # Gotta make sure you save()
+        socialCalCell.save()
+
         # Get social cal again so we can pull the cover picture
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
             socialCalUser = user,
             socialCaldate = time
          )
+
+
         # This is most just to get the current cover profile for the front end
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCellNew).data
         content = {

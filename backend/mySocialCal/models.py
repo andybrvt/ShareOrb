@@ -8,9 +8,16 @@ from django.db.models.signals import post_delete
 from django.db.models.signals import pre_delete
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+
+import pytz
+from datetime import datetime
 # from userprofile.models import UserSocialNormPost
 # from userprofile.models import User
 
+
+# THESE create_all_post AND delete_all_post are used for the content type on
+# the userprofile.
 def create_all_post(sender, instance, created, **kwargs):
     # This will be simlar to the one in the userprofile  models
     userModal = apps.get_model('userprofile', 'User')
@@ -82,6 +89,112 @@ def delete_all_post(sender, instance, **kwargs):
 
 
 
+# This will be used for the new newsfeed that holds the social cal cell and
+# any social events. So whenever you make a social cal cell or soical event
+# a content type is made here
+
+# FOR SOICAL CAL PIC
+def create_social_all_post(sender, instance, created, **kwargs):
+
+    print("create social all post")
+    # save handler that will create the social cell event post
+    # when saved
+    # The spender will be the model class and the instance will be the
+    # specific instance of that class
+    # You probally will only create this only if you make a picture probally
+    # gonn have to make two seperate ones, one for the event and one for the
+    # social cal cell
+
+    # First you will get the usermodal and then the user instance that you
+    # will get from social cal isntance
+
+    # Since we are unable to get the modal directly this is another way of pulling
+    # it, you get the user modal from the userprofile app
+    userModal = apps.get_model('userprofile', "User")
+
+    # Since most of the things we need are in this modal we dont need to out source
+    # as much, just need to get the user
+
+    # get_for_modal either take a modal or instance and then retunr a contenttype instnace
+    # This inputed instance will be that of the soical cal cell when saved
+    post_type = ContentType.objects.get_for_model(instance)
+    owner_type = ContentType.objects.get_for_model(userModal)
+    if(len(instance.get_socialCalItems()) > 0):
+        # Check if the soical cal cell has pictures
+        try:
+            # See if there exist one to get it
+            post = SocialCellEventPost.objects.get(
+                owner_type = owner_type,
+                # the instance will be the social cal cell
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        except SocialCellEventPost.DoesNotExist:
+            # This is to catch the errors when then get does not
+            # get anything. So you have to create one.
+
+            post = SocialCellEventPost(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+
+        # The post date will be the date that the soical cal cell gets updated
+        # so that it can be moved when shit gets updated
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+
+        # This is a bit different from the post bc things will get update so
+        # you will have to update the time
+        post.post_date = time;
+        post.save()
+    elif(len(instance.get_socialCalItems()) == 0):
+        # This is when there is no pictures any more so you are gonna delete the
+        # socialcellevnetpost instance
+        try:
+            # Try to get it
+            post = SocialCellEventPost.objects.get(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        except SocialCellEventPost.DoesNotExist:
+            # This is just for error check
+            post = SocialCellEventPost(
+                owner_type = owner_type,
+                owner_id = instance.socialCalUser.id,
+                post_type = post_type,
+                post_id = instance.id
+            )
+        post.save()
+        post.delete()
+
+# Now this will be similar to the saving but for deleting social cal cell when
+# you want to delete it
+def delete_social_all_post(sender, instance, **kwargs):
+    # Similarly to the top you have to grab the usermodal
+    userModal = apps.get_model("userprofile", "User")
+
+    post_type = ContentType.objects.get_for_model(instance)
+    owner_type = ContentType.objects.get_for_model(userModal)
+
+
+    if(len(instance.get_socialCalItems()) > 0):
+        # Delete the socialcellevent post if there are pictures
+
+        post = SocialCellEventPost.objects.get(
+            owner_type = owner_type,
+            owner_id = instance.socialCalUser.id,
+            post_type = post_type,
+            post_id = instance.id
+        )
+
+        post.delete()
+
+
 #These models are used to work with the social cal and all its backend
 #functions
 class SocialCalCell(models.Model):
@@ -123,9 +236,17 @@ class SocialCalCell(models.Model):
 
         return SocialCalComment.objects.filter(calCell = self).values_list('id', flat = True)
 
+post_save.connect(create_social_all_post, sender = SocialCalCell)
+pre_delete.connect(delete_social_all_post, sender = SocialCalCell)
 
-post_save.connect(create_all_post, sender = SocialCalCell )
-pre_delete.connect(delete_all_post, sender = SocialCalCell)
+
+# THESE TWO ARE FOR THE USEROSOCIALNORMPOST
+# post_save.connect(create_all_post, sender = SocialCalCell )
+# pre_delete.connect(delete_all_post, sender = SocialCalCell)
+
+
+
+
 
 class SocialCalItems(models.Model):
     # The social calendar items will include all the pictures, post, and social
@@ -210,3 +331,27 @@ class SocialCalComment(models.Model):
     body = models.TextField(blank = True)
     created_on = models.DateTimeField(auto_now_add = True)
     commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'socialUserComment', on_delete = models.CASCADE, null = True )
+
+
+# This is for the new newsfeed modal that would hold all the social cal cell
+# and social events on the newsfeed
+# Since this is a combinaiton of two different modals it will be a content type
+
+# for more information check userSocialNormPost on models userprofile, it will tell
+# you how you should user this
+class SocialCellEventPost(models.Model):
+    # Owner type will be user modal
+    owner_type = models.ForeignKey(ContentType, related_name = "owner_type_social", on_delete = models.CASCADE)
+    owner_id = models.PositiveIntegerField()
+    owner = GenericForeignKey("owner_type", "owner_id")
+
+    post_date = models.DateTimeField(default = timezone.now)
+    post_type = models.ForeignKey(ContentType, related_name = "post_type_social", on_delete = models.CASCADE)
+    post_id = models.PositiveIntegerField()
+    post = GenericForeignKey('post_type', 'post_id')
+
+    class Meta:
+        ordering = ['-post_date']
+
+    def __str__(self):
+        return str(self.id)
