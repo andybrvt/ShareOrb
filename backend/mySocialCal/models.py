@@ -236,7 +236,7 @@ def create_social_event_post(sender, instance, created, **kwargs):
     post.post_date = time;
     post.save()
 
-def delete_social_event_post(sender, instance, created, **kwargs):
+def delete_social_event_post(sender, instance, **kwargs):
     # pretty much like the create but deleting now
     userModal = apps.get_model("userprofile", "User")
 
