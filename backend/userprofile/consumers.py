@@ -797,6 +797,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
             calCell = socialCalCell
         )
         socialCalEvent.persons.add(user)
+
+        socialCalEvent.save()
         # This one you are just sending it to your self so its fine, I will have
         # to do one where we send it to the newsfeed, and one for persnal cal
         # probally gonna have to make a function where it creates a channel for when
@@ -829,6 +831,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
         user = get_object_or_404(User, id = data['userId'])
         curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         curSocialEvent.persons.add(user)
+
+        curSocialEvent.save()
+
         curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
 
 
@@ -857,6 +862,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
         curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         curSocialEvent.persons.add(user)
 
+        curSocialEvent.save()
+
         # Owner fo the event page
         owner = get_object_or_404(User, id = data['ownerId'])
 
@@ -879,6 +886,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
         user = get_object_or_404(User, id = data['userId'])
         curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         curSocialEvent.persons.remove(user)
+
+        curSocialEvent.save()
+
         curSocialCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
 
 
@@ -906,6 +916,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
         user = get_object_or_404(User, id = data['userId'])
         curSocialEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         curSocialEvent.persons.remove(user)
+
+        curSocialEvent.save()
 
         owner = get_object_or_404(User, id = data['ownerId'])
 
