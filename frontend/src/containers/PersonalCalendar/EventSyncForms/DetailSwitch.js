@@ -565,7 +565,7 @@ class DetailSwitch extends React.Component {
           onChange={this.onChangeAnimation}
           dragPlay={false}
         >
-          {imgChildren}
+        {imgChildren}
 
         </BannerAnim>
         <BannerAnim
@@ -579,8 +579,8 @@ class DetailSwitch extends React.Component {
           ref={(c) => { this.bannerText = c; }}
           dragPlay={false}
         >
-          {textChildren}
 
+        {textChildren}
         </BannerAnim>
 
 
