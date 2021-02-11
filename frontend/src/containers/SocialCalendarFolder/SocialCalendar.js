@@ -764,15 +764,15 @@ class SocialCalendar extends React.Component{
         )
         .then(res=> {
           console.log(res.data)
-          // if(res.data.coverPicChange){
-          //   if(res.data.created){
-          //     this.props.addSocialCell(res.data.cell)
-          //   } else {
-          //     // when a new cell is not made
-          //     console.log('hit here')
-          //     this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
-          //   }
-          // }
+          if(res.data.coverPicChange){
+            if(res.data.created){
+              this.props.addSocialCell(res.data.cell)
+            } else {
+              // when a new cell is not made
+              console.log('hit here')
+              this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
+            }
+          }
         })
       } else {
         // Since it is better to add pictures with an http call. We will add pictures
