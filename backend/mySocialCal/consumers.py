@@ -562,3 +562,24 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']
         return self.send_json(socialCalCellObj)
+
+
+class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
+    # This websocket will be  be used to handle the channel and weboscket
+    # for the newsfeed that holds the social calendar and the social events
+
+    def connect(self):
+        # As all ways you first have to connect to the websocekt
+
+        grp = "socialNewsfeed"
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        grp = "socialNewsfeed"
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
+        print(data)

@@ -11,7 +11,7 @@ class WebSocketSocialCalCellPage{
     // it will make one
 
     if(!WebSocketSocialCalCellPage.instance){
-      WebSocketSocialCalCellPage.instance = new WebSocketSocialCalCellPage
+      WebSocketSocialCalCellPage.instance = new WebSocketSocialCalCellPage()
     }
 
     return WebSocketSocialCalCellPage.instance
