@@ -3,19 +3,13 @@
     padding: 0;
 }
 
-.details-switch-demo-wrapper {
-  position: relative;
-  overflow: hidden;
-  height: 700px;
-  transition: background 1s;
-}
 
 /* // if you want it to be wrapped
 /* around 2 rows, change height to 570 */
 .details-switch-demo {
   margin: 70px auto;
-  width: 1000px;
-  height: 870px;
+
+  height: 500px;
   background: #fff;
 
   overflow: hidden;

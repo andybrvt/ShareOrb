@@ -710,7 +710,7 @@ const mapStateToProps = state => {
   return {
     userId: state.auth.id,
     currentUser: state.auth.username,
-    currentProfilePic: state.auth.profilePic
+    profilepic: state.auth.profilePic
   }
 }
 

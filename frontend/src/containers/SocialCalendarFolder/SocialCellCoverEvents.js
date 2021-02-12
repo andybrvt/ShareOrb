@@ -2,8 +2,6 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import { List, Avatar } from 'antd';
 import {ClockCircleOutlined } from '@ant-design/icons';
-import clock from '../../components/images/clock.png';
-import location from '../../components/images/pin.png';
 import AvatarGroups from '../../components/AvatarGroups';
 import userIcon from '../../components/images/user.png';
 import ExploreWebSocketInstance from '../../exploreWebsocket';

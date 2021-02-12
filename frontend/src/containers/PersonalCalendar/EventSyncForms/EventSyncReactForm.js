@@ -149,19 +149,13 @@ class EventSyncReactForm extends React.Component {
       friends = friends.filter(val => val.username.toLowerCase().match(friend))
     }
 
-    const radioStyle = {
-      display: 'block',
-      height: '30px',
-      lineHeight: '30px',
-    };
-
     const friendListChild = this.renderFriends()
 
 
     return (
-      <div>
+
       <DetailSwitch {...this.props}/>
-      </div>
+
     )
   }
 }

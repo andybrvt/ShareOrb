@@ -5,9 +5,6 @@ import { EnvironmentOutlined, MoreOutlined } from '@ant-design/icons';
 import ava1 from '../images/avatar.jpg';
 import ava2 from '../images/avatar2.jpg';
 import defaultPicture from '../images/default.png';
-import facebook from '../images/facebook.png';
-import instagram from '../images/instagram.png';
-import twitter from '../images/twitter.png';
 import './UserProfileCard.css';
 
 
