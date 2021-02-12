@@ -10,6 +10,7 @@ import * as actions from '../store/actions/auth';
 import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
 import ExploreWebSocketInstance from '../exploreWebsocket';
+import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
 import { Link } from 'react-router-dom';
@@ -32,6 +33,32 @@ class NewsFeedView extends React.Component {
 
 	constructor(props){
 		super(props)
+
+		this.initialiseSocialNewsfeed()
+
+	}
+
+	initialiseSocialNewsfeed(){
+		// use to initialize the social newsfeed
+		this.waitForSocialNewsfeedSocketConnection(() => {
+			// You will fetch the social cotnent type here
+			WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
+		})
+		WebSocketSocialNewsfeedInstance.connect()
+
+	}
+
+	waitForSocialNewsfeedSocketConnection(callback){
+		const component = this
+		setTimeout(
+			function(){
+				if(WebSocketSocialNewsfeedInstance.state() === 1){
+					callback()
+					return;
+				} else {
+					component.waitForSocialNewsfeedSocketConnection(callback);
+				}
+			}, 100)
 	}
 
 	postCondition = () => {
@@ -64,6 +91,13 @@ class NewsFeedView extends React.Component {
 
 	componentWillReceiveProps(newProps){
 		// this.props.grabUserCredentials();
+		WebSocketSocialNewsfeedInstance.disconnect()
+		this.waitForSocialNewsfeedSocketConnection(() => {
+			// Fetch stuff here
+			WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id)
+
+		})
+		WebSocketSocialNewsfeedInstance.connect()
 	}
 
 	onViewAlbum = () => {

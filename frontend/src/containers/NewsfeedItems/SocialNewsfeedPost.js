@@ -234,9 +234,14 @@ class SocialNewsfeedPost extends React.Component {
     });
   };
 
-  OnClickPost=(postId, username)=> {
+  OnClickPost=(calUsername, cellYear, cellMonth, cellDay, location)=> {
     // This is used to open up the social cell day post modal
 
+
+    this.props.history.push({
+      pathname:"/socialcal/"+calUsername+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+      state:{pathname: location}
+    })
 
   }
 
@@ -316,6 +321,16 @@ class SocialNewsfeedPost extends React.Component {
     let userUsername = '';
     let caption = "";
     let commentList = [];
+    let cellYear = ""
+    let cellMonth = ""
+    let cellDay = ""
+    let location = ""
+
+
+
+    location = this.props.history.location.pathname
+
+
 
     if(this.props.data){
       if(this.props.data.post){
@@ -336,7 +351,12 @@ class SocialNewsfeedPost extends React.Component {
           caption = this.props.data.post.dayCaption
         }
 
-
+        if(this.props.data.post.socialCaldate){
+          const date = this.props.data.post.socialCaldate.split("-")
+          cellYear = date[0]
+          cellMonth = date[1]
+          cellDay = date[2]
+        }
 
       }
       if(this.props.data.owner){
@@ -379,7 +399,15 @@ class SocialNewsfeedPost extends React.Component {
 
             <Divider type="vertical" style={{background:'#d9d9d9'}}/>
 
-            <span class="LikeCommentHover" onClick={() => this.OnClickPost(postId, userUsername)} style={{marginTop:'-20px'}}>
+            <span class="LikeCommentHover"
+              onClick={() => this.OnClickPost(
+                userUsername,
+                cellYear,
+                cellMonth,
+                cellDay,
+                location
+              )}
+              style={{marginTop:'-20px'}}>
               <i style={{ marginRight:'10px', fontSize:'14px'}} class="far fa-comments fa-lg"></i>
               <span class="boldLikeComment" style={{fontSize:'14px'}}>
 
@@ -413,7 +441,13 @@ class SocialNewsfeedPost extends React.Component {
                 <div
                   style={{marginLeft: '10px', marginTop:'10px'}}
                   class="seeMore outerSeeMore"
-                  onClick={() => this.OnClickPost(postId, userUsername)}
+                  onClick={() => this.OnClickPost(
+                    userUsername,
+                    cellYear,
+                    cellMonth,
+                    cellDay,
+                    location
+                  )}
                 >
                   ... see more
                 </div>
@@ -462,7 +496,13 @@ class SocialNewsfeedPost extends React.Component {
                   <span> Like </span>
               </button>
               }
-              <button onClick ={() => this.OnClickPost(postId, userUsername)} >
+              <button onClick ={() => this.OnClickPost(
+                userUsername,
+                cellYear,
+                cellMonth,
+                cellDay,
+                location
+                )}>
 
                 <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comments"></i> Comment
               </button>

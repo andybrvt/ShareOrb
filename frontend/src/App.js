@@ -36,7 +36,7 @@ class App extends Component {
     // this.initialiseExplore()
     // this.initialisePost()
 
-    this.initialiseSocialNewsfeed()
+    // this.initialiseSocialNewsfeed()
     this.initialiseChats()
     this.initialiseNotification()
 
@@ -172,28 +172,28 @@ class App extends Component {
       }, 100)
   }
 
-  initialiseSocialNewsfeed(){
-    // use to initialize the social newsfeed
-    this.waitForSocialNewsfeedSocketConnection(() => {
-      // You will fetch the social cotnent type here
-      WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
-    })
-    WebSocketSocialNewsfeedInstance.connect()
-
-  }
-
-  waitForSocialNewsfeedSocketConnection(callback){
-    const component = this
-    setTimeout(
-      function(){
-        if(WebSocketSocialNewsfeedInstance.state() === 1){
-          callback()
-          return;
-        } else {
-          component.waitForSocialNewsfeedSocketConnection(callback);
-        }
-      }, 100)
-  }
+  // initialiseSocialNewsfeed(){
+  //   // use to initialize the social newsfeed
+  //   this.waitForSocialNewsfeedSocketConnection(() => {
+  //     // You will fetch the social cotnent type here
+  //     WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
+  //   })
+  //   WebSocketSocialNewsfeedInstance.connect()
+  //
+  // }
+  //
+  // waitForSocialNewsfeedSocketConnection(callback){
+  //   const component = this
+  //   setTimeout(
+  //     function(){
+  //       if(WebSocketSocialNewsfeedInstance.state() === 1){
+  //         callback()
+  //         return;
+  //       } else {
+  //         component.waitForSocialNewsfeedSocketConnection(callback);
+  //       }
+  //     }, 100)
+  // }
 
 
 
@@ -286,13 +286,13 @@ class App extends Component {
         //
         // WebSocketPostsInstance.connect()
 
-        WebSocketSocialNewsfeedInstance.disconnect()
-        this.waitForSocialNewsfeedSocketConnection(() => {
-          // Fetch stuff here
-          WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id)
-
-        })
-        WebSocketSocialNewsfeedInstance.connect()
+        // WebSocketSocialNewsfeedInstance.disconnect()
+        // this.waitForSocialNewsfeedSocketConnection(() => {
+        //   // Fetch stuff here
+        //   WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id)
+        //
+        // })
+        // WebSocketSocialNewsfeedInstance.connect()
 
 
         console.log('disconnected chat')
