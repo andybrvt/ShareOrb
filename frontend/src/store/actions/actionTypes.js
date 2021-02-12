@@ -97,6 +97,11 @@ export const SEND_USER_POST_COMMENT = 'SEND_USER_POST_COMMENT';
 // so adding to follower you will add it to the person getting the following
 // add following would be to the person that is doing the following
 
+
+// THIS IS FOR THE NEWSFEED BUT FOR SOCIAL CELL AND EVNETS ONLY
+export const LOAD_SOCIAL_POSTS = "LOAD_SOCIAL_POSTS";
+
+
 export const LOAD_PROFILE  = 'LOAD_PROFILE';
 export const CLOSE_PROFILE = 'CLOSE_PROFILE';
 export const ADD_FOLLOWER_UNFOLLOWER = 'ADD_FOLLOWER_UNFOLLOWER';

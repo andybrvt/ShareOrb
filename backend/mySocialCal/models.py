@@ -70,8 +70,7 @@ def delete_all_post(sender, instance, **kwargs):
     post_type = ContentType.objects.get_for_model(instance)
     # this will be social cal cell instance
     owner_type = ContentType.objects.get_for_model(userModal)
-    print("hit here")
-    print(instance)
+
 
     if(len(instance.get_socialCalItems()) > 0):
         # Delete the normal post if there is a picture
@@ -82,7 +81,6 @@ def delete_all_post(sender, instance, **kwargs):
                 post_type = post_type,
                 post_id = instance.id
         )
-        print(post)
         post.delete()
 
 
@@ -96,7 +94,6 @@ def delete_all_post(sender, instance, **kwargs):
 # FOR SOICAL CAL PIC
 def create_social_cell_post(sender, instance, created, **kwargs):
 
-    print("create social all post")
     # save handler that will create the social cell event post
     # when saved
     # The spender will be the model class and the instance will be the
@@ -410,7 +407,7 @@ class SocialCellEventPost(models.Model):
     owner_type = models.ForeignKey(ContentType, related_name = "owner_type_social", on_delete = models.CASCADE)
     owner_id = models.PositiveIntegerField()
     owner = GenericForeignKey("owner_type", "owner_id")
-
+    # post date will be the date it is post and the date it is updated too 
     post_date = models.DateTimeField(default = timezone.now)
     post_type = models.ForeignKey(ContentType, related_name = "post_type_social", on_delete = models.CASCADE)
     post_id = models.PositiveIntegerField()

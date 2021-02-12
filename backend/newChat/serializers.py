@@ -57,13 +57,11 @@ class MiniChatSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        print(data)
         participantList = []
         for participants in data['participants']:
             participant = ChatUser(User.objects.get(id = participants)).data
             participantList.append(participant)
         data['participants'] = participantList
-        print(data['recentSender'])
         data['recentSender'] = ChatUser(User.objects.get(id = data['recentSender'])).data
         return data
 

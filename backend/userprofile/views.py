@@ -74,7 +74,7 @@ class NewPostingView(APIView):
         # Now you will loop through all the photos but since there is the name and
         # caption you will minus 2
         for i in range(len(request.data) -2):
-            print(request.data['image['+str(i)+']'])
+
 
             imageObj = models.ImageModel.objects.create(
                 imageList = postObj,
@@ -135,8 +135,7 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    print('current user')
-    print(request)
+
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
 
@@ -191,7 +190,6 @@ class onDeleteNotification(APIView):
     def post(self, request, id, *args, **kwargs):
         notification = get_object_or_404(models.CustomNotification, id = id)
         recipient = notification.recipient
-        print(recipient)
         notification.delete()
         notifications = models.CustomNotification.objects.select_related('actor').filter(recipient = recipient).order_by('-timestamp')
         serializer = serializers.NotificationSerializer(notifications, many = True).data
@@ -330,7 +328,6 @@ class DeletePostView(APIView):
     # page than the newsfeed you do no tneed a websocket
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         models.Post.objects.get(id = request.data['postId']).delete()
         return Response("Post deleted")
 
@@ -382,11 +379,9 @@ class everyoneSuggested(generics.ListAPIView):
         temp=(self.request.user.get_following())
         request = (self.request.user.get_sent_follow_request())
         for i in temp:
-            print(i)
             list.append(i)
         for i in request:
             list.append(i)
-            # print(i)
         list.append(self.request.user)
 
         # Your can exclude a list by using keyword __in
@@ -499,7 +494,6 @@ class PendingPicNotificationView(APIView):
         # and then make the pendingsoicalPic objects for each one of them and then
         # link it up with the correct notification
         for i in range(len(request.data)):
-            print(request.data['image['+str(i)+']'])
 
             pendingPicObj = models.PendingSocialPics.objects.create(
                 itemImage = request.data['image['+str(i)+']'],
@@ -523,7 +517,6 @@ class EditUserInfoView(APIView):
     # frontend
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         # First you will grab the user
         profile = get_object_or_404(models.User, id = request.data['curId'])
@@ -547,7 +540,6 @@ class PrivateChangeView(APIView):
     # This function will be used to set the user profile to either true or false
     # and will be called in the PrivacySettings.js
     def post(self, request, *args, **kwargs):
-        print(request.data)
         # First you will pull the user
         user = get_object_or_404(models.User, id = request.data['curId'])
 
@@ -556,7 +548,6 @@ class PrivateChangeView(APIView):
 
         # once you change it, now you will send it to the front end to change the
         # redux
-        print(user.private)
         return  Response(user.private)
 
 
@@ -569,7 +560,6 @@ class onAcceptFollow(APIView):
 
     # You have to remove the person from request
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])
@@ -606,7 +596,6 @@ class onFollowView(APIView):
     # This function will be used for creating a new follower through view,
     # mostly used for the suggested friends list in the news feed
     def post(self, request, *args, **kwargs):
-        print(request.data)
         # This is just the view.py version of the send_follow in the consumers
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])
@@ -630,7 +619,6 @@ class onUnfollowView(APIView):
     # view. Pretty much the same as the one in consumer
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])
         followerObj = models.UserFollowing.objects.filter(person_following = follower, person_getting_followers = following)
@@ -649,7 +637,6 @@ class onSentRequestView(APIView):
     # This function will be in charge of taking care of the request function in the
     # front end when its on your page and not on profile page (suggest friends)
     def post (self, request, *args, **kwargs):
-        print(request.data)
 
         # This will be similar to the one in consumer but will be used to update the
         # follower page
@@ -672,7 +659,6 @@ class onSentRequestView(APIView):
 class onUnsendRequestView(APIView):
     # Pretty much the opposite of the onSentRequestView
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         follower = get_object_or_404(models.User, id = request.data['follower'])
         following = get_object_or_404(models.User, id = request.data['following'])

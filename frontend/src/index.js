@@ -15,6 +15,7 @@ import eventSyncReducer from './store/reducers/eventSync';
 import newsfeedReducer from './store/reducers/newsfeed';
 import exploreReducer from './store/reducers/explore';
 import socialCalReducer from './store/reducers/socialCalendar';
+import socialNewsfeedReducer from './store/reducers/socialNewsfeed';
 import {reducer as formReducer } from 'redux-form';
 import $ from 'jquery';
 import Popper from 'popper.js';
@@ -39,7 +40,8 @@ const rootReducer = combineReducers({
   eventSync: eventSyncReducer,
   newsfeed: newsfeedReducer,
   explore: exploreReducer,
-  socialCal: socialCalReducer
+  socialCal: socialCalReducer,
+  socialNewsfeed: socialNewsfeedReducer
 })
 //store takes in reducer and an enhancer to handle the middleware
 

@@ -24,7 +24,7 @@ class WebSocketSocialNewsfeed{
       console.log('websocket open')
     }
     this.socketRef.onmessage = (e) => {
-
+      this.socketNewSocialPost(e.data)
     }
 
     this.socketRef.onerror = (e) => {
@@ -46,19 +46,34 @@ class WebSocketSocialNewsfeed{
   socketNewSocialPost(data){
     // Pretty much will process the data when it is received from the backend
 
+    console.log(data)
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
 
+    console.log(parsedData)
     // Make the different calls here
-    if(command === "fetch_social_post"){
+    if(command === "fetch_social_posts"){
       // pull data and add callbacks here
+      // add call back here
+      const socialPost = JSON.parse(parsedData.social_posts)
+      this.callbacks['fetch_social_posts'](socialPost)
 
     }
 
   }
 
-  addCallbacks(){
-      console.log("some callbacks")
+  addCallbacks(
+    loadSocialPostCallback
+  ){
+    this.callbacks['fetch_social_posts'] = loadSocialPostCallback
+  }
+
+  fetchSocialPost(userId){
+    this.sendPostsInfo({
+      userId: userId,
+      command: "fetch_social_posts"
+    })
+
   }
 
   sendOneLike(){

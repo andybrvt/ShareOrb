@@ -31,12 +31,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
             user = get_object_or_404(User, id = data['userId'])
             chats = user.chat_parti.all()
             unseen = chats.exclude(seen__id = data['userId'])
-            print (unseen)
             # When you do many = True it will serialize the list of chat objects
-            print("does it here start")
             chatList = MiniChatSerializer(chats, many = True).data
-            print(chatList)
-            print("does it hit here")
             content = {
                 'command': 'fetch_all_user_chats',
                 'chats': chatList,
@@ -207,8 +203,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         # associated with teh chat and then update there chatList in the front
         # end
 
-        print("hit right here bro ")
-        print(data)
         # First get the chat
         curChat = get_object_or_404(Chat, id = data['chatId'])
         serializedChat = MiniChatSerializer(curChat).data
@@ -272,7 +266,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         # This is for when you are receivng information from other poeple and you
         # want to update your shit
         data = json.loads(text_data)
-        print('hit here bro')
         print(data)
         if data['command'] == 'fetch_all_user_chats':
             self.send_fetch_all_user_chats(data)
@@ -305,8 +298,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
         #     'messages': self.serializedMessages(messages)
         # }
         # self.send_json(content)
-        print("fetch the chat stuff here")
-        print(data['chatId'])
         chat = get_object_or_404(Chat, id = data['chatId'])
         serializedChat = ChatSerializer(chat).data
         messages = serializedChat['get_messages'][:10]

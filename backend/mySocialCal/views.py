@@ -44,7 +44,6 @@ class SocialCalUploadPic(APIView):
 
 
         change = False
-        print(request.data)
 
         if socialCalCell.coverPic == '':
             if (len(request.data) != 0):
@@ -59,16 +58,13 @@ class SocialCalUploadPic(APIView):
                 # )
 
                 # obj.coverPic = request.data['image[0]']
-                print("there is no cover photo")
                 change = True
 
         for i in range(len(request.data)):
-            print(request.data['image['+str(i)+']'])
 
         # Now we will loop through all the photos and make an isntance for eahc one and
         # add a foregin key to it so that it can connect to the right socialcalCell
         # for images in request.data['fileList']:
-        #     print(images)
         #
             # Gotta remember that the socialCalItem has to be the right type (jsut for future refernce)
             # clip_w_pic
@@ -156,7 +152,6 @@ class SocialChangeCoverPic(APIView):
 
         # You do not need to return anything because the social cal cell will
         # update itself
-        print(request.data)
 
         socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['socialCellId'])
 

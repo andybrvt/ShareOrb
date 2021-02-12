@@ -141,7 +141,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_POST:
       return addPost(state, action);
 
-
+      
     case actionTypes.LOAD_POST:
       return loadPost(state, action);
     case actionTypes.CLOSE_POST:

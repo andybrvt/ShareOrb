@@ -10,6 +10,7 @@ import WebSocketInstance from './websocket';
 import NotificationWebSocketInstance from './notificationWebsocket';
 import CalendarEventWebSocketInstance from './calendarEventWebsocket';
 import WebSocketPostsInstance from './postWebsocket';
+import WebSocketSocialNewsfeedInstance from './socialNewsfeedWebsocket';
 import ExploreWebSocketInstance from './exploreWebsocket';
 import EventPageWebSocketInstance from './eventPageWebsocket';
 import SocialEventPageWebSocketInstance from './socialEventPageWebsocket';
@@ -25,13 +26,17 @@ import * as calendarActions from './store/actions/calendars';
 import * as newsfeedActions from './store/actions/newsfeed';
 import * as exploreActions from './store/actions/explore';
 import * as socialActions from './store/actions/socialCalendar';
+import * as socialNewsfeedActions from './store/actions/socialNewsfeed';
+
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     // this.initialiseExplore()
-    this.initialisePost()
+    // this.initialisePost()
+
+    this.initialiseSocialNewsfeed()
     this.initialiseChats()
     this.initialiseNotification()
 
@@ -76,6 +81,14 @@ class App extends Component {
       this.props.deletePost.bind(this),
       this.props.addPost.bind(this)
     )
+
+
+    WebSocketSocialNewsfeedInstance.addCallbacks(
+      this.props.loadSocialPosts.bind(this)
+    )
+
+
+
 
     ExploreWebSocketInstance.addCallbacks(
       this.props.loadProfile.bind(this),
@@ -159,6 +172,30 @@ class App extends Component {
       }, 100)
   }
 
+  initialiseSocialNewsfeed(){
+    // use to initialize the social newsfeed
+    this.waitForSocialNewsfeedSocketConnection(() => {
+      // You will fetch the social cotnent type here
+      WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
+    })
+    WebSocketSocialNewsfeedInstance.connect()
+
+  }
+
+  waitForSocialNewsfeedSocketConnection(callback){
+    const component = this
+    setTimeout(
+      function(){
+        if(WebSocketSocialNewsfeedInstance.state() === 1){
+          callback()
+          return;
+        } else {
+          component.waitForSocialNewsfeedSocketConnection(callback);
+        }
+      }, 100)
+  }
+
+
 
 // So since you are gonna render the notification and chats at the
 // beginning when you first login, and to get chat notifcation,
@@ -240,12 +277,22 @@ class App extends Component {
       if(parseInt(this.props.id) !== parseInt(newProps.id)){
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
-        WebSocketPostsInstance.disconnect()
-        this.waitForPostSocketConnection(() => {
-          WebSocketPostsInstance.fetchPosts(newProps.id)
-        })
 
-        WebSocketPostsInstance.connect()
+        // THIS IS FOR THE OLD POST
+        // WebSocketPostsInstance.disconnect()
+        // this.waitForPostSocketConnection(() => {
+        //   WebSocketPostsInstance.fetchPosts(newProps.id)
+        // })
+        //
+        // WebSocketPostsInstance.connect()
+
+        WebSocketSocialNewsfeedInstance.disconnect()
+        this.waitForSocialNewsfeedSocketConnection(() => {
+          // Fetch stuff here
+          WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id)
+
+        })
+        WebSocketSocialNewsfeedInstance.connect()
 
 
         console.log('disconnected chat')
@@ -320,6 +367,8 @@ const mapDispatchToProps = dispatch => {
     setPosts: likes => dispatch(newsfeedActions.loadPosts(likes)),
     addLike: like => dispatch(newsfeedActions.addPostLike(like)),
     unaddLike: unlike => dispatch(newsfeedActions.unaddPostLike(unlike)),
+
+    loadSocialPosts: post => dispatch(socialNewsfeedActions.loadSocialPosts(post)),
 
     updateRequestList: newRequest => dispatch(authActions.updateRequestList(newRequest)),
     newUpRequestList: requestList => dispatch(authActions.newUpRequestList(requestList)),

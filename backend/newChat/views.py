@@ -57,9 +57,6 @@ class CreateNewChatView(APIView):
     # created chat to the other users
 
     def post(self, request, *args, **kwargs):
-        print('new chats')
-        print(request.data)
-
         recentSender = get_object_or_404(User, id = request.data['senderId'])
 
         timezone.activate(pytz.timezone("MST"))
@@ -94,8 +91,6 @@ class GetChatSearchView(APIView):
     # are searching for an existing chat in the chats
 
     def post(self, request, *args, **kwargs):
-        print("get chats")
-        print(request.data)
 
         chatList = models.Chat.objects.all()
 
@@ -103,12 +98,7 @@ class GetChatSearchView(APIView):
         for names in request.data['person']:
             chatList = chatList.filter(participants__id = names).distinct()
 
-        print(chatList)
-
         serializedChat = serializers.ChatSerializer(chatList, many = True).data
-
-
-        print(len(serializedChat))
         messages = []
         chatId = ""
         participants = []
@@ -149,7 +139,6 @@ class GetIndividualExisitingChat(APIView):
     # 2
     def post(self, request, *args, **kwargs):
 
-        print(request.data)
         users = [request.data['user1'], request.data['user2']]
         existingChats = models.Chat.objects.filter(participants__id = request.data['user1']).filter(participants__id = request.data['user2']).distinct()
 
@@ -186,7 +175,6 @@ class CreateChatEventMessage(APIView):
     # You will just need the chat id and then the event information
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         # Now you will pretty much create the chat event message here
 
         chatObj = get_object_or_404(models.Chat, id = request.data['chatId'])
@@ -224,7 +212,6 @@ class CreateNewChatEventMessage(APIView):
     # changed
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         recentSender = get_object_or_404(User, id = request.data['senderId'])
         timezone.activate(pytz.timezone("MST"))

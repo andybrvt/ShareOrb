@@ -149,7 +149,8 @@ const mapStateToProps = state => {
   return {
     id: state.auth.id,
     friends: state.auth.friends,
-    posts: state.newsfeed.posts
+    posts: state.newsfeed.posts,
+    socialPosts: state.socialNewsfeed.socialPosts
   }
 }
 

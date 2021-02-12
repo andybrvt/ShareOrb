@@ -9,12 +9,14 @@ from .models import SocialEventMessages
 from .models import SocialCalCell
 from .models import SocialCalComment
 from .models import SocialCalItems
+from .models import SocialCellEventPost
 from userprofile.models import CustomNotification
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
 from .serializers import SocialCalEventSerializer
 from .serializers import SocialEventMessagesSerializer
 from .serializers import SocialCalCommentSerializer
+from .serializers import SocialCellEventSerializer
 
 # This consumer is mostly used for managing the social events ie
 # soical event page. Where as the other cosnumer that is in the
@@ -421,7 +423,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # Get file name to check if it is the same or different from the coverpic
         deletedPicList = str(socialItem.itemImage).split("/")
         deletedPic = deletedPicList[len(deletedPicList)-1]
-        print(deletedPic)
 
         # Then you delete it
         socialItem.delete()
@@ -436,7 +437,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         socialCellObj = SocialCalCellSerializer(socialCell).data
         curCoverPicList = socialCellObj['coverPic'].split("/")
         curCoverPic = curCoverPicList[len(curCoverPicList)-1]
-        print(curCoverPic)
         socialItemList = socialCellObj['get_socialCalItems']
 
         if(len(socialItemList) == 0):
@@ -447,7 +447,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
                 curPicList = socialItemList[0]['itemImage'].split("/")
                 curPic = curPicList[len(curPicList)-1]
-                print(socialItemList[0]['itemImage'])
                 socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("/media")
                 socialCell.save()
         # Now you get the date so that you can send it to the right websocket
@@ -568,6 +567,23 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
     # This websocket will be  be used to handle the channel and weboscket
     # for the newsfeed that holds the social calendar and the social events
 
+    def send_fetch_social_post(self, data):
+        # This function will be incharge of fetching the social content type
+        # and the push all of it out to the newsfeed. Eventually there will be
+        # better filtering and such but for now it will just be everything
+
+        post_list = SocialCellEventPost.objects.all().order_by('-post_date')
+
+        serializer = SocialCellEventSerializer(post_list, many = True)
+
+        content = {
+            'command': 'fetch_social_posts',
+            'social_posts': json.dumps(serializer.data)
+        }
+
+        self.send_json(content)
+        # Now you have to serialize the content type
+
     def connect(self):
         # As all ways you first have to connect to the websocekt
 
@@ -583,3 +599,5 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
         print(data)
+        if data['command'] == 'fetch_social_posts':
+            self.send_fetch_social_post(data)

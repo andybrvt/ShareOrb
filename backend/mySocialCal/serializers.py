@@ -116,3 +116,31 @@ class SocialEventBackgroundSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SocialCalEvent
         fields = ("backgroundImg",)
+
+
+# For content type you will need 2 serializer class. One to serialize the specific
+# fields in side the serializer
+class SocialCellEventRelatedField(serializers.RelatedField):
+    # This serializer will check which kind of model the content type is and then
+    def to_representation(self, instance):
+        # now this will check what the instance is
+        if isinstance(instance, User):
+        #   Might use a mini serializer for this later
+            user = SocialCalUserSerializer(User.objects.get(id = instance.id)).data
+            return user
+
+        elif isinstance(instance, models.SocialCalCell):
+            socialCalCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = instance.id)).data
+            return socialCalCell
+
+        elif isinstance(instance, models.SocialCalEvent):
+            socialCalEvent = SocialCalEventSerializer()
+
+
+class SocialCellEventSerializer(serializers.ModelSerializer):
+    owner = SocialCellEventRelatedField(read_only = True)
+    post = SocialCellEventRelatedField(read_only = True)
+
+    class Meta:
+        model = models.SocialCellEventPost
+        fields = ("id", 'owner', 'post', 'post_date')
