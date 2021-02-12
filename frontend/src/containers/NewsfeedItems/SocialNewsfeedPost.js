@@ -504,6 +504,34 @@ class SocialNewsfeedPost extends React.Component {
     let userId = ""
     let postCreatedAt = ""
 
+    if(this.props.data){
+      if(this.props.data.owner){
+        if(this.props.data.owner.profile_picture){
+          profilePic = this.props.data.owner.profile_picture
+        }
+
+        if(this.props.data.owner.first_name){
+          userFirstName = this.props.data.owner.first_name
+        }
+        if(this.props.data.owner.last_name){
+          userLastName = this.props.data.owner.last_name
+        }
+
+        if(this.props.data.owner.id){
+          userId = this.props.data.owner.id
+        }
+
+        if(this.props.data.owner.username){
+          userUsername = this.props.data.owner.username
+        }
+
+      }
+
+      if(this.props.data.post_date){
+        postCreatedAt = this.props.data.post_date
+      }
+
+    }
 
     return(
     <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
@@ -517,7 +545,7 @@ class SocialNewsfeedPost extends React.Component {
               onClick = {() => this.onProfileClick(userUsername)}
               size={42}
               style = {{cursor: 'pointer'}}
-              src={profilePic} alt="avatar" />
+              src={`${global.IMAGE_ENDPOINT}`+profilePic} alt="avatar" />
 
               :
 
@@ -525,7 +553,7 @@ class SocialNewsfeedPost extends React.Component {
               onClick = {() => this.onProfileClick(userUsername)}
               size="large"
               style = {{cursor: 'pointer' }}
-              src={defaultPic} alt="avatar" />
+              src={`${global.IMAGE_ENDPOINT}`+defaultPic} alt="avatar" />
             }
 
             </span>
