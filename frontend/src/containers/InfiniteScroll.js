@@ -3,6 +3,8 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import NewsFeedPost from '../containers/NewsfeedItems/NewsFeedPost';
+import SocialNewsfeedPost from '../containers/NewsfeedItems/SocialNewsfeedPost';
+import SocialEventNewsfeedPost from '../containers/NewsfeedItems/SocialEventNewsfeedPost';
 import { authAxios } from '../components/util';
 import './InfiniteScroll.css';
 import WebSocketPostsInstance from  '../postWebsocket';
@@ -111,7 +113,11 @@ class InfiniteList extends React.Component {
   render () {
     console.log(this.props)
     // const { error, hasMore, loading, post} = this.state
-    let post = this.props.posts
+    let post = []
+
+    if(this.props.socialPosts){
+      post = this.props.socialPosts
+    }
 
     // {error  && <div>{error}</div>}
     // {loading && <div>Loading...</div>}
@@ -125,14 +131,32 @@ class InfiniteList extends React.Component {
           <div style={{ flex: 1}}>
 
             <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
-              Welcome, {this.props.data.username}. Here's what's going on today! </div>
+              Welcome, {this.props.userName}. Here's what's going on today! </div>
             <Divider style={{marginBottom:'25px'}}/>
             {post.map((j,index) => {
               return(
 
-                  <NewsFeedPost
+                <div>
+
+                  {
+                    j.post.get_socialCalItems ?
+
+                    <SocialNewsfeedPost
                     history = {this.props.data.history}
-                   data = {j}  />
+                     data = {j}  />
+
+                   :
+
+                   <SocialEventNewsfeedPost />
+                    
+                  }
+
+
+
+                </div>
+
+
+
               )
 
 
@@ -148,6 +172,7 @@ class InfiniteList extends React.Component {
 const mapStateToProps = state => {
   return {
     id: state.auth.id,
+    userName: state.auth.username,
     friends: state.auth.friends,
     posts: state.newsfeed.posts,
     socialPosts: state.socialNewsfeed.socialPosts

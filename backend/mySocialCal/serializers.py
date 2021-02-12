@@ -134,7 +134,8 @@ class SocialCellEventRelatedField(serializers.RelatedField):
             return socialCalCell
 
         elif isinstance(instance, models.SocialCalEvent):
-            socialCalEvent = SocialCalEventSerializer()
+            socialCalEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = instance.id)).data
+            return socialCalEvent
 
 
 class SocialCellEventSerializer(serializers.ModelSerializer):

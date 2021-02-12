@@ -55,7 +55,7 @@ class NewsfeedSpecCarousel extends React.Component{
 
               <div
                 style = {{
-                    backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+item +")"
+                    backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+item.itemImage +")"
                   }}
                   className = "backgroundImageNews"
                 >
