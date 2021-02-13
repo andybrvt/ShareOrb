@@ -63,7 +63,7 @@ class SocialCalUploadPic(APIView):
                 calCell = socialCalCell
             )
 
-        if socialCalCell.coverPic == '' && len(request.data) != 0 :
+        if socialCalCell.coverPic == '' and len(request.data) != 0 :
             socialCalCell.coverPic = request.data['image[0]']
             socialCalCell.save()
             # obj, create = models.SocialCalCell.objects.update_or_create(
