@@ -45,32 +45,32 @@ class SocialCalUploadPic(APIView):
 
         change = False
 
-        for i in range(len(request.data)):
-
-        # Now we will loop through all the photos and make an isntance for eahc one and
-        # add a foregin key to it so that it can connect to the right socialcalCell
-        # for images in request.data['fileList']:
+        # for i in range(len(request.data)):
         #
-            # Gotta remember that the socialCalItem has to be the right type (jsut for future refernce)
-            # clip_w_pic
-            # clip_pic
-            # picture
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                itemImage = request.data['image['+str(i)+']'],
-                calCell = socialCalCell
-            )
+        # # Now we will loop through all the photos and make an isntance for eahc one and
+        # # add a foregin key to it so that it can connect to the right socialcalCell
+        # # for images in request.data['fileList']:
+        # #
+        #     # Gotta remember that the socialCalItem has to be the right type (jsut for future refernce)
+        #     # clip_w_pic
+        #     # clip_pic
+        #     # picture
+        #     socialCalItem = models.SocialCalItems.objects.create(
+        #         socialItemType = 'picture',
+        #         creator = user,
+        #         itemUser = user,
+        #         itemImage = request.data['image['+str(i)+']'],
+        #         calCell = socialCalCell
+        #     )
 
         # Gotta make sure you save()
 
         socialCalCell.save()
 
 
-        # if socialCalCell.coverPic == '' and len(request.data) != 0:
-        # socialCalCell.coverPic = request.data['image[0]']
-        # socialCalCell.save()
+        if socialCalCell.coverPic == '' and len(request.data) != 0:
+            socialCalCell.coverPic = request.data['image[0]']
+            socialCalCell.save()
             # obj, create = models.SocialCalCell.objects.update_or_create(
             #     socialCalUser = user,
             #     socialCaldate = time,
@@ -79,7 +79,7 @@ class SocialCalUploadPic(APIView):
             # )
 
             # obj.coverPic = request.data['image[0]']
-        change = True
+            change = True
 
         # Get social cal again so we can pull the cover picture
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
