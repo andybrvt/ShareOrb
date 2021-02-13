@@ -293,8 +293,8 @@ class SocialCalCell(models.Model):
 
         return SocialCalComment.objects.filter(calCell = self).values_list('id', flat = True)
 
-post_save.connect(create_social_cell_post, sender = SocialCalCell)
-pre_delete.connect(delete_social_cell_post, sender = SocialCalCell)
+# post_save.connect(create_social_cell_post, sender = SocialCalCell)
+# pre_delete.connect(delete_social_cell_post, sender = SocialCalCell)
 
 
 # THESE TWO ARE FOR THE USEROSOCIALNORMPOST
@@ -370,8 +370,8 @@ class SocialCalEvent(models.Model):
     class Meta:
         ordering = ('-event_day', '-start_time')
 
-post_save.connect(create_social_event_post, sender = SocialCalEvent)
-pre_delete.connect(delete_social_event_post, sender = SocialCalEvent)
+# post_save.connect(create_social_event_post, sender = SocialCalEvent)
+# pre_delete.connect(delete_social_event_post, sender = SocialCalEvent)
 
 
 
@@ -407,7 +407,7 @@ class SocialCellEventPost(models.Model):
     owner_type = models.ForeignKey(ContentType, related_name = "owner_type_social", on_delete = models.CASCADE)
     owner_id = models.PositiveIntegerField()
     owner = GenericForeignKey("owner_type", "owner_id")
-    # post date will be the date it is post and the date it is updated too 
+    # post date will be the date it is post and the date it is updated too
     post_date = models.DateTimeField(default = timezone.now)
     post_type = models.ForeignKey(ContentType, related_name = "post_type_social", on_delete = models.CASCADE)
     post_id = models.PositiveIntegerField()
