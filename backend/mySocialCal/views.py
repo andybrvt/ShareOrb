@@ -79,7 +79,7 @@ class SocialCalUploadPic(APIView):
             # )
 
             # obj.coverPic = request.data['image[0]']
-            change = True
+        change = True
 
         # Get social cal again so we can pull the cover picture
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
