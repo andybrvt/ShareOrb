@@ -225,18 +225,17 @@ class DetailSwitch extends React.Component {
     console.log(this.props)
     console.log(this.state)
     console.log(this.props)
-    let friends = this.props.friends
+
     let personPic1=`${global.IMAGE_ENDPOINT}`+this.props.currentProfile
     console.log(personPic1)
     console.log(gamingPic)
     console.log(notesPic)
     let picArray=[gamingPic, notesPic, personPic1]
-    console.log(friends)
+    let followers = this.props.followers
     let friend = this.state.search.trim().toLowerCase()
     if (friend.length > 0){
-      friends = friends.filter(val => val.username.toLowerCase().match(friend))
+      followers = followers.filter(val => val.username.toLowerCase().match(friend))
     }
-    const friendListChild = this.renderFriends()
     console.log(this.bannerImg)
     const imgChildren = dataArray.map((item, i) => (
 
@@ -288,63 +287,39 @@ class DetailSwitch extends React.Component {
             {/*if the page count is 1*/}
               <div className={`${this.props.className}-map map${i}`} key="map">
 
-                <Card
-                  hoverable
-
-                  style={{ width: 225, height:260, left:'50%', marginTop:'-25px'}}
-                  cover={
-
                     <span class="containImage">
                       <img alt="example" src={picArray[2]} />
                     </span>
-                  }
-                >
-                  <Meta title="Ping Hsu" description="@admin" />
-                </Card>
 
               </div>
                 {/*if the page count is 2*/}
 
             </QueueAnim>
-
             {
               (this.state.friendPerson!=null)?
-                <div style={{marginLeft:'157px', marginTop:'325px'}}>
+                <div className={`${this.props.className}-map map${i}`}
+                  style={{marginTop:'225px'}}>
                     <div class="fade-in">
-                      <Card
-                        hoverable
-                        style={{ width: 225, height:260}}
-                        cover={
+
                             <span class="containImage">
                               <img
-
                                 alt="example" src={`${global.IMAGE_ENDPOINT}`+this.state.friendPerson.profile_picture} />
                             </span>
-                        }
-                      >
-                        <Meta title="Ping Hsu" description={"@"+this.state.friendPerson.username} />
-                      </Card>
                     </div>
                 </div>
                 :
                 <div></div>
               }
-
             :
             <div></div>
-
           </span>
-
           }
-
-
       </Element>));
 
     const textChildren = dataArray.map((item, i) => {
       console.log(dataArray);
       const { title, content, background } = item;
       return (<Element key={i}>
-
         {
         (this.state.pageNum==0)?
 
@@ -352,13 +327,11 @@ class DetailSwitch extends React.Component {
           <QueueAnim type="bottom"
             duration={1500}
              delay={[!i ? this.state.delay + 500 : 800, 0]}>
-
             <h1 style={{marginTop:'30px'}} key="h1">{'Day Request'}</h1>
             <em key="em" style={{ background }} />
             <p key="p">{
               <div class="eventSyncForm">
                 <div className = 'radioCon'>
-
                 <Radio.Button
                   onClick={this.onRight}
                   className = 'dayEsync'
@@ -377,19 +350,14 @@ class DetailSwitch extends React.Component {
                     </span>
                   </Radio.Button>
                 </div>
-
-
               </div>
           }</p>
 
-
           </QueueAnim>
-
 
         <QueueAnim type="bottom"
           duration={1500}
            delay={[!i ? this.state.delay + 500 : 800, 0]}>
-
           <h1 style={{ marginTop:'100px'}} key="h1">{'Week Request'}</h1>
           <em key="em" style={{ background }} />
           <p key="p">{
@@ -399,8 +367,7 @@ class DetailSwitch extends React.Component {
               onClick={this.onRight}
               onChange={this.onChange}
               className = 'weekEsync buttonGrow'
-              value={this.renderEndDay('week')}
-            >
+              value={this.renderEndDay('week')} >
               <span className = 'syncTitle'> Week Event Sync </span>
               <br />
               <span>
@@ -437,7 +404,7 @@ class DetailSwitch extends React.Component {
           >
             <Form.Item className = 'friendListCon'>
             <Input
-              style={{width:'425px'}}
+              style={{width:'400px'}}
               value = {this.state.search}
               onChange = {this.onHandleChange}
               type = 'text'
@@ -447,8 +414,8 @@ class DetailSwitch extends React.Component {
 
              <List
                   className = 'friendList'
-                  dataSource={friends}
-                  style={{padding:'1px',width:'425px'}}
+                  dataSource={followers}
+                  style={{padding:'1px',width:'400px'}}
                   renderItem={item => (
                     <List.Item
                     key={item.username}
@@ -479,7 +446,7 @@ class DetailSwitch extends React.Component {
             style = {{
               backgroundColor:'dodgerblue',
               color: 'white',
-              width:'425px',
+              width:'400px',
             }}
             shape="round"
             onClick={success}
@@ -552,7 +519,7 @@ class DetailSwitch extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    friends: state.auth.friends,
+    followers: state.auth.followers,
 
   }
 }

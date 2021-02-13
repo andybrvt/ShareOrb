@@ -116,7 +116,8 @@ class PickEventSyncModal extends React.Component{
           visible = {this.props.isVisible}
           // visible = {true}
           onCancel = {this.props.close}
-          width = {1550}>
+          width = {1400}
+          bodyStyle={{height:'600px'}}>
 
           { dateFns.differenceInCalendarDays(
             new Date (this.props.maxDate),

@@ -18,13 +18,13 @@
 
 .eventSyncForm .friendListCon .friendList{
   margin-top: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   overflow: auto;
   padding: 8px 24px;
-  height: 395px;
-  width:475px;
+  height: 300px;
+
 
 
 }
@@ -38,6 +38,10 @@ border-radius: 25px;
     width: 225px;
     height: 170px;
     margin-top: -1px;
+    border-radius: 10px;
+    left:50%;
+    position: absolute;
+
 
 }
 
