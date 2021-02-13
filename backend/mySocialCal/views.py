@@ -55,6 +55,20 @@ class SocialCalUploadPic(APIView):
             # clip_w_pic
             # clip_pic
             # picture
+            if socialCalCell.coverPic == '' and i == 0:
+                socialCalCell.coverPic = request.data['image['+str(i)+']']
+                socialCalCell.save()
+                # obj, create = models.SocialCalCell.objects.update_or_create(
+                #     socialCalUser = user,
+                #     socialCaldate = time,
+                #     coverPic = request.data['image[0]']
+                #     # defaults = {'coverPic': request.data['image[0]']}
+                # )
+
+                # obj.coverPic = request.data['image[0]']
+                change = True
+
+
             socialCalItem = models.SocialCalItems.objects.create(
                 socialItemType = 'picture',
                 creator = user,
@@ -64,18 +78,6 @@ class SocialCalUploadPic(APIView):
             )
 
         # Gotta make sure you save()
-        if socialCalCell.coverPic == '' and len(request.data) != 0 :
-            socialCalCell.coverPic = request.data['image[0]']
-            # socialCalCell.save()
-            # obj, create = models.SocialCalCell.objects.update_or_create(
-            #     socialCalUser = user,
-            #     socialCaldate = time,
-            #     coverPic = request.data['image[0]']
-            #     # defaults = {'coverPic': request.data['image[0]']}
-            # )
-
-            # obj.coverPic = request.data['image[0]']
-            change = True
 
         socialCalCell.save()
 
