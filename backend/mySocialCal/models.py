@@ -293,8 +293,8 @@ class SocialCalCell(models.Model):
 
         return SocialCalComment.objects.filter(calCell = self).values_list('id', flat = True)
 
-post_save.connect(create_social_cell_post, sender = SocialCalCell)
-pre_delete.connect(delete_social_cell_post, sender = SocialCalCell)
+# post_save.connect(create_social_cell_post, sender = SocialCalCell)
+# pre_delete.connect(delete_social_cell_post, sender = SocialCalCell)
 
 
 # THESE TWO ARE FOR THE USEROSOCIALNORMPOST
@@ -370,8 +370,8 @@ class SocialCalEvent(models.Model):
     class Meta:
         ordering = ('-event_day', '-start_time')
 
-post_save.connect(create_social_event_post, sender = SocialCalEvent)
-pre_delete.connect(delete_social_event_post, sender = SocialCalEvent)
+# post_save.connect(create_social_event_post, sender = SocialCalEvent)
+# pre_delete.connect(delete_social_event_post, sender = SocialCalEvent)
 
 
 
