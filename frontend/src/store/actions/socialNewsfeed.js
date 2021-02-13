@@ -8,3 +8,11 @@ export const loadSocialPosts = post =>{
     post: post
   }
 }
+
+
+export const addSocialPostLike = postObj => {
+  return {
+    type: actionTypes.ADD_SOCIAL_POST_LIKE,
+    postObj: postObj
+  }
+}

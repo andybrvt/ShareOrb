@@ -27,6 +27,7 @@ import {Avatar,
  } from 'antd';
 import { EditOutlined, EllipsisOutlined, AntDesignOutlined, ExclamationCircleOutlined, SettingOutlined, SearchOutlined,UserOutlined, FolderAddTwoTone, ShareAltOutlined, HeartTwoTone, EditTwoTone} from '@ant-design/icons';
 import WebSocketPostsInstance from  '../../postWebsocket';
+import WebSocketSocialNewsfeedInstance from '../../socialNewsfeedWebsocket';
 import NotificationWebSocketInstance from  '../../notificationWebsocket';
 import { connect } from 'react-redux';
 import heart  from './heart.svg';
@@ -148,7 +149,7 @@ class SocialNewsfeedPost extends React.Component {
       return(
 
         <div
-          onClick = {() => this.OnClickPost(postId, username)}
+          // onClick = {() => this.OnClickPost(postId, username)}
 
 
           class="imageContainerSingle">
@@ -325,7 +326,7 @@ class SocialNewsfeedPost extends React.Component {
     let cellMonth = ""
     let cellDay = ""
     let location = ""
-
+    let contentTypeId = ""
 
 
     location = this.props.history.location.pathname
@@ -333,6 +334,9 @@ class SocialNewsfeedPost extends React.Component {
 
 
     if(this.props.data){
+
+      contentTypeId = this.props.data.id
+
       if(this.props.data.post){
 
         if(this.props.data.post.people_like){
@@ -478,7 +482,7 @@ class SocialNewsfeedPost extends React.Component {
               {(peopleLikeId.includes(this.props.userId))?
               <button
               class="box-click"
-              onClick ={this.AddOneToLike}>
+              onClick ={() => this.AddOneToUnlike(postId, this.props.userId, contentTypeId)}>
                 <i style={{ marginRight:'10px', color:'red'}} class="fa fa-heart">
                 </i>
                 <span class="textHighlight">
@@ -488,7 +492,7 @@ class SocialNewsfeedPost extends React.Component {
               :
               <button
               class="box-click"
-              onClick ={this.AddOneToLike} >
+              onClick ={() => this.AddOneToLike(postId, this.props.userId, contentTypeId)} >
                   <i
                     style={{ marginRight:'10px'}}
                     class="far fa-heart">
@@ -670,10 +674,28 @@ class SocialNewsfeedPost extends React.Component {
 
   // this renders the posts on the newsfeed
 
-  AddOneToLike = (e) => {
-    e.stopPropagation();
+  AddOneToLike = (socialCalCellId, personLike, contentTypeId) => {
     this.triggerComments();
-    let peopleLikeId = []
+    // This will add one to like to the social cal cell
+    // Since this is on the newsfeed already then that means it already
+    // exist so therefore you can just get the socail cal id then
+    // the perosn taht likes the social cal
+
+    // Since you dont wnat to update everything when you add a like
+    // instead of updating the whole newsfeed you will just find the post
+    // and replace it
+
+
+    console.log(socialCalCellId, personLike)
+    WebSocketSocialNewsfeedInstance.sendOneLike(socialCalCellId, personLike, contentTypeId)
+
+  }
+
+  AddOneToUnlike = (socialCalCellId, personUnlike, contentTypeId) =>{
+    // This will be for unliking the post
+    // This like the addonetolike but now you unlike
+    this.triggerComments();
+    WebSocketSocialNewsfeedInstance.unSendOneUnlike(socialCalCellId, personUnlike, contentTypeId)
 
 
   }

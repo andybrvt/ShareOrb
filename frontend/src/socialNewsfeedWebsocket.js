@@ -58,14 +58,39 @@ class WebSocketSocialNewsfeed{
       const socialPost = JSON.parse(parsedData.social_posts)
       this.callbacks['fetch_social_posts'](socialPost)
 
+    } else if (command === "send_social_post_like"){
+      const contentTypeId = parsedData.contentTypeId
+      const socialCalCellObj = parsedData.socialCalCellObj
+
+      const content = {
+        contentTypeId: contentTypeId,
+        socialCalCellObj: socialCalCellObj
+      }
+
+      // put the call back here
+      this.callbacks['add_social_post_like'](content)
+
+    } else if( command === "send_social_post_unlike"){
+      const contentTypeId = parsedData.contentTypeId
+      const socialCalCellObj = parsedData.socialCalCellObj
+
+      const content = {
+        contentTypeId: contentTypeId,
+        socialCalCellObj: socialCalCellObj
+      }
+
+      // put the call back here
+      this.callbacks['add_social_post_like'](content)
     }
 
   }
 
   addCallbacks(
-    loadSocialPostCallback
+    loadSocialPostCallback,
+    addSocialLikeCallback
   ){
     this.callbacks['fetch_social_posts'] = loadSocialPostCallback
+    this.callbacks['add_social_post_like'] = addSocialLikeCallback
   }
 
   fetchSocialPost(userId){
@@ -76,12 +101,25 @@ class WebSocketSocialNewsfeed{
 
   }
 
-  sendOneLike(){
+  sendOneLike(socialCalCellId, personLike, contentTypeId){
     // This is to send a like
+    this.sendPostsInfo({
+      socialCalCellId: socialCalCellId,
+      personLike: personLike,
+      contentTypeId: contentTypeId,
+      command: "send_social_post_like"
+    })
   }
 
-  unSendOneLike(){
+  unSendOneUnlike(socialCalCellId, personUnlike, contentTypeId){
     // This is to unsend a like
+
+    this.sendPostsInfo({
+      socialCalCellId: socialCalCellId,
+      personUnlike: personUnlike,
+      contentTypeId: contentTypeId,
+      command:"send_social_post_unlike"
+    })
   }
 
   deletePost(){

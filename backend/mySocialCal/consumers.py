@@ -584,6 +584,68 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         self.send_json(content)
         # Now you have to serialize the content type
 
+
+    def send_social_post_like(self, data):
+        # This function will be pretty much similar to that of the social cal cell
+        # page like but now this one since it already exist you will just pull the
+        # id
+
+        socialCalCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+        # now that you got the social cal cell
+        # now grab the person like
+        personLike = get_object_or_404(User, id = data['personLike'])
+
+        socialCalCell.people_like.add(personLike)
+        # socialCalCell.save()
+
+        # Now that you saved it, you would want to serialize it and then return
+        # it. You will return the id to search for it and then replace it
+
+        socialCalCellObj = SocialCalCellSerializer(socialCalCell).data
+
+        content = {
+            'command': 'send_social_post_like',
+            'contentTypeId': data['contentTypeId'],
+            'socialCalCellObj': socialCalCellObj
+        }
+
+        self.send_new_social_post_action(content)
+
+    def send_social_post_unlike(self, data):
+        # pretty much like that of the like but now you are unliking
+
+        socialCalCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+
+        personUnlike = get_object_or_404(User, id = data['personUnlike'])
+        socialCalCell.people_like.remove(personUnlike)
+        # socialCalCell.save()
+
+        socialCalCellObj = SocialCalCellSerializer(socialCalCell).data
+        content = {
+            "command": 'send_social_post_unlike',
+            'contentTypeId': data['contentTypeId'],
+            'socialCalCellObj': socialCalCellObj
+        }
+
+        print("the stuff right here")
+        self.send_new_social_post_action(content)
+
+    def send_new_social_post_action(self, socialPostAction):
+        # This will be used to send the actions out to the front end
+
+        channel_layer = get_channel_layer()
+        channel = "socialNewsfeed"
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                "type": 'send_social_post_action',
+                "action": socialPostAction
+
+            }
+        )
+
+
+
     def connect(self):
         # As all ways you first have to connect to the websocekt
 
@@ -601,3 +663,11 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         print(data)
         if data['command'] == 'fetch_social_posts':
             self.send_fetch_social_post(data)
+        if data['command'] == 'send_social_post_like':
+            self.send_social_post_like(data)
+        if data['command'] == 'send_social_post_unlike':
+            self.send_social_post_unlike(data)
+
+    def send_social_post_action(self, postActions):
+        postAction = postActions['action']
+        return self.send_json(postAction)
