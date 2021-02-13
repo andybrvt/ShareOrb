@@ -2,7 +2,7 @@
 global.API_ENDPOINT = "http://127.0.0.1:8000"
 global.IMAGE_ENDPOINT = "http://127.0.0.1:8000"
 global.WS_ENDPOINT = "127.0.0.1:8000"
-global.NEWSFEED_PICS = 'http://127.0.0.1:8000'
+global.NEWSFEED_PICS = 'http://127.0.0.1:8000/media/'
 global.POSTLIST_SPEC = 'http://127.0.0.1:8000/media/'
 global.WS_HEADER = "ws"
 

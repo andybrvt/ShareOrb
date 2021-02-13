@@ -60,22 +60,6 @@ class EventSyncReactForm extends React.Component {
     console.log(friend)
   }
 
-  renderFriends = () => {
-    let friends = []
-    if(this.props.friends){
-      for (let i = 0; i < this.props.friends.length; i++ ){
-        friends.push(
-          <Option
-          key = {this.props.friends[i]}
-          value = {this.props.friends[i]}>
-            {this.props.friends[i]}
-          </Option>
-        )
-      }
-    }
-    console.log(friends)
-
-  }
 
 
   renderEndDay = (range) => {
@@ -142,14 +126,6 @@ class EventSyncReactForm extends React.Component {
   render() {
     console.log(this.props)
     console.log(this.state)
-    let friends = this.props.friends
-    console.log(friends)
-    let friend = this.state.search.trim().toLowerCase()
-    if (friend.length > 0){
-      friends = friends.filter(val => val.username.toLowerCase().match(friend))
-    }
-
-    const friendListChild = this.renderFriends()
 
 
     return (
@@ -163,7 +139,7 @@ class EventSyncReactForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    friends: state.auth.friends,
+    friends: state.auth.followers,
     currentProfile: state.auth.profilePic,
   }
 }
