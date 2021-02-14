@@ -27,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
  '172.31.4.121',
  'api.shareorb.com',
- 'shareorb-env-new.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+ 'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
  '54.183.46.151',
  '127.0.0.1:5000',
  '52.8.250.165',
@@ -115,27 +115,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
 # if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ebdb',
-#         'USER': 'shareorbDB',
-#         'PASSWORD': 'Pingandy123',
-#         'HOST': 'aat7s9ag0csr72.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
-#         'PORT': '3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['RDS_DB_NAME'],
-        'USER': os.environ['RDS_USERNAME'],
-        'PASSWORD': os.environ['RDS_PASSWORD'],
-        'HOST': os.environ['RDS_HOSTNAME'],
-        'PORT': os.environ['RDS_PORT'],
+        'NAME': 'ebdb',
+        'USER': 'shareorbDB',
+        'PASSWORD': 'Pingandy123',
+        'HOST': 'aasvdqwumvx57q.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.environ['RDS_DB_NAME'],
+#         'USER': os.environ['RDS_USERNAME'],
+#         'PASSWORD': os.environ['RDS_PASSWORD'],
+#         'HOST': os.environ['RDS_HOSTNAME'],
+#         'PORT': os.environ['RDS_PORT'],
+#     }
+# }
 
 # else:
 # DATABASES = {
