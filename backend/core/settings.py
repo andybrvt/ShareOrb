@@ -27,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
  '172.31.4.121',
  'api.shareorb.com',
- 'shareorb-env.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+ 'shareorb-env-new.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
  '54.183.46.151',
  '127.0.0.1:5000',
  '52.8.250.165',
@@ -121,7 +121,7 @@ DATABASES = {
         'NAME': 'ebdb',
         'USER': 'shareorbDB',
         'PASSWORD': 'Pingandy123',
-        'HOST': 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'HOST': 'aat7s9ag0csr72.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }

@@ -44,7 +44,6 @@ class SocialCalUploadPic(APIView):
 
 
         change = False
-
         for i in range(len(request.data)):
 
         # Now we will loop through all the photos and make an isntance for eahc one and
@@ -68,14 +67,14 @@ class SocialCalUploadPic(APIView):
 
 
         if socialCalCell.coverPic == '' and len(request.data) != 0:
-            # socialCalCell.coverPic = request.data['image[0]']
+            socialCalCell.coverPic = request.data['image[0]']
             # socialCalCell.save()
-            obj, create = models.SocialCalCell.objects.update_or_create(
-                socialCalUser = user,
-                socialCaldate = time,
-                # coverPic = request.data['image[0]']
-                defaults = {'coverPic': request.data['image[0]']}
-            )
+            # obj, create = models.SocialCalCell.objects.update_or_create(
+            #     socialCalUser = user,
+            #     socialCaldate = time,
+            #     # coverPic = request.data['image[0]']
+            #     defaults = {'coverPic': request.data['image[0]']}
+            # )
 
             # obj.coverPic = request.data['image[0]']
             change = True
