@@ -44,7 +44,21 @@ class SocialCalUploadPic(APIView):
 
 
         change = False
+        print(request.data)
         for i in range(len(request.data)):
+
+            if socialCalCell.coverPic == '':
+                socialCalCell.coverPic = request.data['image[0]']
+                socialCalCell.save()
+                socialCalItem = models.SocialCalItems.objects.create(
+                    socialItemType = 'picture',
+                    creator = user,
+                    itemUser = user,
+                    itemImage = request.data['image['+str(i)+']'],
+                    calCell = socialCalCell
+                )
+                # obj.coverPic = request.data['image[0]']
+                change = True
 
         # Now we will loop through all the photos and make an isntance for eahc one and
         # add a foregin key to it so that it can connect to the right socialcalCell
@@ -66,20 +80,7 @@ class SocialCalUploadPic(APIView):
 
 
 
-        if socialCalCell.coverPic == '' and len(request.data) != 0:
-            socialCalCell.coverPic = request.data['image[0]']
-            # socialCalCell.save()
-            # obj, create = models.SocialCalCell.objects.update_or_create(
-            #     socialCalUser = user,
-            #     socialCaldate = time,
-            #     # coverPic = request.data['image[0]']
-            #     defaults = {'coverPic': request.data['image[0]']}
-            # )
 
-            # obj.coverPic = request.data['image[0]']
-            change = True
-
-        socialCalCell.save()
 
         # Get social cal again so we can pull the cover picture
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
