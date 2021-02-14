@@ -115,16 +115,28 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
 # if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ebdb',
+#         'USER': 'shareorbDB',
+#         'PASSWORD': 'Pingandy123',
+#         'HOST': 'aat7s9ag0csr72.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ebdb',
-        'USER': 'shareorbDB',
-        'PASSWORD': 'Pingandy123',
-        'HOST': 'aat7s9ag0csr72.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'NAME': os.environ['RDS_DB_NAME'],
+        'USER': os.environ['RDS_USERNAME'],
+        'PASSWORD': os.environ['RDS_PASSWORD'],
+        'HOST': os.environ['RDS_HOSTNAME'],
+        'PORT': os.environ['RDS_PORT'],
     }
 }
+
 # else:
 # DATABASES = {
 #     'default': {
