@@ -484,26 +484,14 @@ class PickEventSyncForm extends React.Component {
 
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
-
-
-
-
-
-      <Card
-        title="Schedule event"
-         extra={
-           <Button style={{float:'left', marginRight:'15px',
-             display:'inline-block'}} type="primary"
-            shape="circle" size={'large'}>
-             {this.props.whichDay}
-           </Button>
-         }
-        style={{ width: 400,
-          marginLeft:'25px',
-          marginTop:'15px',
-           padding:'10px' }}>
-
+      <div class="eventSyncCard">
           <form class="eSyncForm">
+            {/*<Button style={{float:'left', marginRight:'15px',
+              display:'inline-block'}} type="primary"
+             shape="circle" size={'large'}>
+              {this.props.whichDay}
+            </Button>
+            */}
               <div className = 'eSyncTitle'>
                 <Field
                 name = 'title'
@@ -596,7 +584,7 @@ class PickEventSyncForm extends React.Component {
             </div>
           </div>
           </form>
-        </Card>
+        </div>
 
     )
   }

@@ -63,55 +63,47 @@ class PickEventSyncUserProfileCard extends React.Component {
 
 
   render() {
+    console.log(this.props)
     console.log(this.props.data)
     let profileImage = null
 
     if(this.props.data){
       if(this.props.data.profile_picture){
-
         profileImage = `${global.IMAGE_ENDPOINT}`+this.props.data.profile_picture
       }
     }
 
     console.log(profileImage)
     return (
+    <div>
+        <div>
+          <div className = "EsyncProfileCard">
+            <div className = 'image-box'>
+            {profileImage === null ?
+              <img className = 'profile-image' src = {defaultPicture} alt = 'Avatar'/>
+              :
+              <img className = 'profile-image' src = {profileImage} alt = 'Avatar'/>
+            }
 
-      <div className = "EsyncProfileCard">
-        <div className = 'image-box'>
-
-        {profileImage === null ?
-
-
-          <img className = 'profile-image' src = {defaultPicture} alt = 'Avatar'/>
-
-          :
-
-          <img className = 'profile-image' src = {profileImage} alt = 'Avatar'/>
-
-
-        }
-
-
-
-        </div>
-        <div className = 'EsyncTop'>
-        <MoreOutlined />
-        </div>
-        <div className = 'bottom'>
-          <div className = 'name'> {this.capitalize(this.props.data.first_name)+" "+this.capitalize(this.props.data.last_name)} </div>
-          <div className = 'location'> <EnvironmentOutlined /> Tucson, AZ </div>
-        </div>
-        <div className = 'social'>
-        <div className = 'social-links'>
-          <div
-          onClick = {this.onProfileClick}
-          className = 'btn'> Profile </div>
-          <div className = 'btn'> Follow </div>
-        </div>
+            </div>
+            <div className = 'EsyncTop'>
+            <MoreOutlined />
+            </div>
+            <div className = 'bottom'>
+              <div className = 'name'> {this.capitalize(this.props.data.first_name)+" "+this.capitalize(this.props.data.last_name)} </div>
+              <div className = 'location'> <EnvironmentOutlined /> Tucson, AZ </div>
+            </div>
+            <div className = 'social'>
+            <div className = 'social-links'>
+              <div
+              onClick = {this.onProfileClick}
+              className = 'btn'> Profile </div>
+              <div className = 'btn'> Follow </div>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
-
-
 
     );
 

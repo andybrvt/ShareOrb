@@ -746,14 +746,14 @@ class PickEventSyncDay extends React.Component{
       const dateFormat = 'MMMM yyyy'
       const minDate = this.props.minDate
       return(
-        <div className = 'header'>
-          <div className = 'col-center'>
-            <span style={{display: 'inline-block'}}>
+        <div className = 'header' style={{fontSize:'24px'}}>
+          <div>
+            <span>
               {dateFns.format(new Date(minDate) , dateFormat)}
             </span>
 
           </div>
-          <span className = 'col-center' style={{marginLeft:'400px', display: 'inline-block'}}>
+          <span className = 'col-center' style={{marginLeft:'200px', display: 'inline-block'}}>
             {this.props.userFriend.first_name}{eventSyncWeekText}
           </span>
         </div>
@@ -1283,16 +1283,23 @@ class PickEventSyncDay extends React.Component{
 
           <Row style={{}}>
 
-            <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
-            <PickEventSyncForm
-            onSubmit = {this.submit}
-            initialValues = {this.getInitialValue()}
-            active = {this.state.active} />
+            <div class="rightEventSyncContainer">
+              <div class="rightTopEventSync">
+                <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
+
+              </div>
+              <div class="rightBottomEventSync">
+                <PickEventSyncForm
+                onSubmit = {this.submit}
+                initialValues = {this.getInitialValue()}
+                active = {this.state.active} />
+              </div>
 
 
-            <Col span={8}></Col>
 
 
+
+            </div>
 
 
           </Row>

@@ -1,8 +1,46 @@
+
+.parentEventSyncContainer{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  /* background: blue; */
+}
+
+
+.rightEventSyncContainer{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* background: yellow; */
+  left:10%;
+}
+
+.rightTopEventSync{
+  position: relative;
+  height: 40%;
+  vertical-align: middle;
+
+  /* background: green; */
+  /* background: green; */
+}
+
+.rightBottomEventSync{
+  position: relative;
+  height:60%;
+  /* background: red; */
+
+  /* background: red; */
+}
 .EsyncProfileCard{
   background-color: white;
-  margin-top: 50px;
-  width: 325px;
-  height: 376px;
+  position: relative;
+  width:50%;
+  height:40%;
+  height: 250px;
   border-radius: 10px;
   display: grid;
   /* grid-template-rows: auto 100px; */
@@ -415,7 +453,8 @@
 
 /* start of pick event form css */
 .eSyncForm .eSyncTitle {
-  width: 500px;
+  position: relative;
+  width:90%;
 
 }
 
