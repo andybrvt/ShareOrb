@@ -748,6 +748,8 @@ class SocialCalendar extends React.Component{
         }
       }
 
+
+
       // This will be the current user
       const curId = this.props.curId
 
@@ -764,15 +766,31 @@ class SocialCalendar extends React.Component{
         )
         .then(res=> {
           console.log(res.data)
-          if(res.data.coverPicChange){
-            if(res.data.created){
-              this.props.addSocialCell(res.data.cell)
-            } else {
-              // when a new cell is not made
-              console.log('hit here')
-              this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
-            }
+          if(!res.data.coverPicChange){
+            // This is where you will change the cover pic
+            const coverPicForm = new FormData()
+            formData.append("coverImage", values[0].originFileObj)
+            formData.append("cellId", res.data.cell.id)
+            authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
+              formData,
+              {headers: {"content-type": "multipart/form-data"}}
+            ).then(res => {
+              this.props.addSocialCellCoverPic(res.data.coverPic, res.data.id)
+            })
+
+          } else {
+            this.props.addSocialCell(res.data.cell)
           }
+
+          //
+          // if(res.data.created){
+          //
+          // } else {
+          //   // when a new cell is not made
+          //   console.log('hit here')
+          //   this.props.addSocialCellCoverPic(res.data.cell.coverPic, res.data.cell.id)
+          // }
+
         })
       } else {
         // Since it is better to add pictures with an http call. We will add pictures
