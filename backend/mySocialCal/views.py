@@ -47,18 +47,19 @@ class SocialCalUploadPic(APIView):
         print(request.data)
         for i in range(len(request.data)):
 
-            if socialCalCell.coverPic == '':
-                socialCalCell.coverPic = request.data['image[0]']
-                socialCalCell.save()
-                socialCalItem = models.SocialCalItems.objects.create(
-                    socialItemType = 'picture',
-                    creator = user,
-                    itemUser = user,
-                    itemImage = request.data['image['+str(i)+']'],
-                    calCell = socialCalCell
-                )
-                # obj.coverPic = request.data['image[0]']
-                change = True
+            if i == 0:
+                if socialCalCell.coverPic == '':
+                    socialCalCell.coverPic = request.data['image[0]']
+                    socialCalCell.save()
+                    socialCalItem = models.SocialCalItems.objects.create(
+                        socialItemType = 'picture',
+                        creator = user,
+                        itemUser = user,
+                        itemImage = request.data['image['+str(i)+']'],
+                        calCell = socialCalCell
+                    )
+                    # obj.coverPic = request.data['image[0]']
+                    change = True
 
         # Now we will loop through all the photos and make an isntance for eahc one and
         # add a foregin key to it so that it can connect to the right socialcalCell
@@ -68,13 +69,14 @@ class SocialCalUploadPic(APIView):
             # clip_w_pic
             # clip_pic
             # picture
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                itemImage = request.data['image['+str(i)+']'],
-                calCell = socialCalCell
-            )
+            else:
+                socialCalItem = models.SocialCalItems.objects.create(
+                    socialItemType = 'picture',
+                    creator = user,
+                    itemUser = user,
+                    itemImage = request.data['image['+str(i)+']'],
+                    calCell = socialCalCell
+                )
 
         # Gotta make sure you save()
 
