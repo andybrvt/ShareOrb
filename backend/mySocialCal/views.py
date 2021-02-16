@@ -43,22 +43,17 @@ class SocialCalUploadPic(APIView):
         )
 
 
-        change = False
+        change = bool(socialCalCell.coverPic)
         print(request.data)
         for i in range(len(request.data)):
 
-            if socialCalCell.coverPic == '':
-                socialCalCell.coverPic = request.data['image[0]']
-                socialCalCell.save()
-                socialCalItem = models.SocialCalItems.objects.create(
-                    socialItemType = 'picture',
-                    creator = user,
-                    itemUser = user,
-                    itemImage = request.data['image['+str(i)+']'],
-                    calCell = socialCalCell
-                )
-                # obj.coverPic = request.data['image[0]']
-                change = True
+
+            # if socialCalCell.coverPic == '':
+            #     socialCalCell.coverPic = request.data['image[0]']
+            #     socialCalCell.save()
+            #
+            #     # obj.coverPic = request.data['image[0]']
+            #     change = True
 
         # Now we will loop through all the photos and make an isntance for eahc one and
         # add a foregin key to it so that it can connect to the right socialcalCell
@@ -68,6 +63,7 @@ class SocialCalUploadPic(APIView):
             # clip_w_pic
             # clip_pic
             # picture
+
             socialCalItem = models.SocialCalItems.objects.create(
                 socialItemType = 'picture',
                 creator = user,
@@ -79,7 +75,7 @@ class SocialCalUploadPic(APIView):
         # Gotta make sure you save()
 
 
-
+        socialCalCell.save()
 
 
         # Get social cal again so we can pull the cover picture
@@ -97,6 +93,21 @@ class SocialCalUploadPic(APIView):
             "cell": serializedSocialCell
         }
         return Response(content)
+
+class UpdateSocialCellCoverPic(APIView):
+    # This function will update the cover picture of the cell
+    def post(self, request, id, *args, **kwargs):
+        # First you will grab the social cal cell given the id
+        # then you will just change the cover pic and then return the serialized cell
+        # and the you are good to go
+        socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['cellId'])
+        socialCalCell.coverPic = request.data['coverImage']
+        socialCalCell.save()
+
+        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
+
+
+        return Response(serializedSocialCell)
 
 class SocialClippingView(APIView):
     # This class is used for adding the clipping of pictures into the social
