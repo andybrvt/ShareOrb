@@ -16,3 +16,10 @@ export const addSocialPostLike = postObj => {
     postObj: postObj
   }
 }
+
+export const loadCurSocialCell = socialCell => {
+  return {
+    type: actionTypes.LOAD_CUR_SOCIAL_CELL,
+    socialCell: socialCell
+  }
+}

@@ -91,6 +91,8 @@ class NewsFeedView extends React.Component {
 
 	componentWillReceiveProps(newProps){
 		// this.props.grabUserCredentials();
+
+		console.log(newProps)
 		WebSocketSocialNewsfeedInstance.disconnect()
 		this.waitForSocialNewsfeedSocketConnection(() => {
 			// Fetch stuff here
@@ -98,6 +100,11 @@ class NewsFeedView extends React.Component {
 
 		})
 		WebSocketSocialNewsfeedInstance.connect()
+	}
+
+	componentWillMount(){
+		WebSocketSocialNewsfeedInstance.disconnect()
+
 	}
 
 	onViewAlbum = () => {
@@ -232,30 +239,6 @@ class NewsFeedView extends React.Component {
 	}
 }
 
-{/*
-<div class="shadowBox suggestFriendsCSS" style = {{
-
-	height: '250px',
-	width: '400px',
-
-	// postion: 'fixed',
-	// overflow: 'hidden',
-
-	marginTop:120,
-}}>
-
-
-
-	<span  style={{textAlign:'center', fontSize:'18px',marginTop:'200px'}}>
-		Today's events
-
-	</span>
-
-	<Divider/>
-	<TodayEvents {...this.props}/>
-
-</div>
-*/}
 
 const mapStateToProps = state => {
   return {
@@ -264,7 +247,7 @@ const mapStateToProps = state => {
 		currentProfile: state.explore.profile,
 		following: state.auth.following,
 		sentRequestList: state.auth.sentRequestList,
-		requestList: state.auth.requestList
+		requestList: state.auth.requestList,
   }
 }
 const mapDispatchToProps = dispatch => {
