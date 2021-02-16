@@ -51,13 +51,7 @@ class SocialCalUploadPic(APIView):
                 if socialCalCell.coverPic == '':
                     socialCalCell.coverPic = request.data['image[0]']
                     socialCalCell.save()
-                    socialCalItem = models.SocialCalItems.objects.create(
-                        socialItemType = 'picture',
-                        creator = user,
-                        itemUser = user,
-                        itemImage = request.data['image['+str(i)+']'],
-                        calCell = socialCalCell
-                    )
+                
                     # obj.coverPic = request.data['image[0]']
                     change = True
 
