@@ -18,7 +18,7 @@ global.WS_HEADER = "ws"
 // DEPLOYMENT FOR CLOUDFRONT
 // global.API_ENDPOINT = "https://api.shareorb.com"
 // global.POSTLIST_SPEC = "https://shareorb.s3.amazonaws.com/"
-// global.NEWSFEED_PICS = 'https://shareorb.s3.amazonaws.com/'
+// global.NEWSFEED_PICS = ''
 // global.WS_HEADER = "wss"
 // global.IMAGE_ENDPOINT = ""
 // global.WS_ENDPOINT = "api.shareorb.com"
