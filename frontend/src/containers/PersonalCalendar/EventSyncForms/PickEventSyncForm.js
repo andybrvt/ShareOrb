@@ -18,6 +18,8 @@ const renderField = (field) => {
 return (
     <Input
     {...field.input}
+    style={{width:'300px'}}
+
     type = {field.type}
     placeholder= {field.placeholder}
     className = 'box'/>
@@ -40,7 +42,7 @@ const renderLocationField = (field) => {
   console.log(field.meta)
   return (
     <span>
-    <Input style={{width:'50%',fontSize:'14px'}}
+    <Input style={{width:'80%',fontSize:'14px'}}
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
@@ -517,7 +519,7 @@ class PickEventSyncForm extends React.Component {
 
               <div style={{height:'70px'}} className = 'outerContainerPeople'>
                 <div class="innerContainerPeople">
-                  <i class="fas fa-globe-americas"  style={{marginRight:'25px'}} ></i>
+                  <i class="fas fa-globe-americas"  style={{marginRight:'10px'}} ></i>
                   <Field
                     name = 'location'
                     placeholder="Location"
@@ -531,7 +533,7 @@ class PickEventSyncForm extends React.Component {
 
             <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
               <div class="innerContainerPeople">
-                <i style={{marginRight:'25px'}}  class="fas fa-clock"></i>
+                <i style={{marginRight:'10px'}}  class="fas fa-clock"></i>
 
 
                     {/*
@@ -572,7 +574,7 @@ class PickEventSyncForm extends React.Component {
             <div className = 'clearEventSyncFormButton' >
               <Button
               diabled = {pristine}
-              onClick= {reset}>Clear Values</Button>
+              onClick= {reset}>Clear</Button>
             </div>
             <div className = 'eventSyncSubmitButton'>
               <Button

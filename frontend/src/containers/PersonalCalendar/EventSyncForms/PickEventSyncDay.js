@@ -109,32 +109,18 @@ class PickEventSyncDay extends React.Component{
     selectedDate: null,
   }
 
-      renderHeader(){
-        // The difference between the week and the day is that
-        // the day cal is just for the next day so  you want to
-        // switch all the minDates with maxdates
-        const dateFormat = 'MMMM yyyy'
-        const minDate = this.props.maxDate
-        return(
-          <div className = 'header'>
-            <div className = 'col-center'>
-              <span>
-                {dateFns.format(new Date(minDate) , dateFormat)}
-              </span>
-            </div>
-          </div>
-        )
-      }
+
 
       renderDays() {
         // This is just to render out the days in the date range
         const dateFormat = 'iii'
         const dayFormat = 'd'
         const days = []
-
+        const monthFormat = 'MMMM'
+        const yearFormat='yyyy'
         let minDate = dateFns.addDays(new Date(this.props.minDate),1)
         let maxDate = dateFns.addDays(new Date(this.props.maxDate),1)
-
+        var eventSyncWeekText="'s calendar"
         const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
         let cloneMaxDate = this.props.maxDate
 
@@ -143,18 +129,26 @@ class PickEventSyncDay extends React.Component{
             const cloneCloneMaxDate = cloneMaxDate
             days.push(
               <div
-              className = 'syncCol col-center '
+              className = 'syncCol'
               key = {i}
+              style={{fontSize:'20px'}}
               >
                 {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
-                <br />
+                ,&nbsp;
+                {dateFns.format(new Date(cloneMaxDate) , monthFormat)}
+                &nbsp;
                 {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
+                <span style={{marginLeft:'100px'}}>{this.props.userFriend.first_name}{eventSyncWeekText}</span>
               </div>
             )
             cloneMaxDate = dateFns.addDays(cloneCloneMaxDate, 1)
         }
         return <div className = 'days row'>{days}</div>
       }
+
+
+
+
 
       renderSide() {
         // Render side, you would want to start off at 11:30 am and end at 11:30 pm
@@ -740,57 +734,6 @@ class PickEventSyncDay extends React.Component{
     }
 
 
-    renderHeader(){
-      // This is to render the mini Calendar month givien the date range
-      var eventSyncWeekText="'s calendar"
-      const dateFormat = 'MMMM yyyy'
-      const minDate = this.props.minDate
-      return(
-        <div className = 'header' style={{fontSize:'24px'}}>
-          <div>
-            <span>
-              {dateFns.format(new Date(minDate) , dateFormat)}
-            </span>
-
-          </div>
-          <span className = 'col-center' style={{marginLeft:'200px', display: 'inline-block'}}>
-            {this.props.userFriend.first_name}{eventSyncWeekText}
-          </span>
-        </div>
-      )
-    }
-
-    renderDays() {
-      // This is just to render out the days in the date range
-      const dateFormat = 'iii'
-      const dayFormat = 'd'
-      const days = []
-
-      console.log (new Date(this.props.minDate))
-      let minDate = dateFns.addDays(new Date(this.props.minDate),1)
-      let maxDate = dateFns.addDays(new Date(this.props.maxDate),1)
-      // Added one day so that you can compare them to make sure things are more accurate
-      // Plus when you do new date it think it goes back 7 hours, and since the max and min
-      // dates are at 00
-      const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
-      let cloneMinDate = this.props.minDate
-
-      for(let i = 0; i<difference; i++){
-          const cloneCloneMinDate = cloneMinDate
-          days.push(
-            <div
-            className = 'syncCol col-center '
-            key = {i}
-            >
-              {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
-              <br />
-              {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
-            </div>
-          )
-          cloneMinDate = dateFns.addDays(cloneMinDate, 1)
-      }
-      return <div className = 'days row'>{days}</div>
-    }
 
     renderSide() {
       // Render side, you would want to start off at 11:30 am and end at 11:30 pm
@@ -1268,8 +1211,9 @@ class PickEventSyncDay extends React.Component{
         <div className = 'eventSyncCalendarContainer'>
           <div className = 'syncCalendar'>
             <div className = 'syncHeader'>
-              {this.renderHeader()}
               {this.renderDays()}
+
+
             </div>
             <div className = 'syncBody'>
               <div className = 'timecol'>

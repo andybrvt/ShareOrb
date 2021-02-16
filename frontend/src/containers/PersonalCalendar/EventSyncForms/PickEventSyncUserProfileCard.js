@@ -98,7 +98,7 @@ class PickEventSyncUserProfileCard extends React.Component {
               <div
               onClick = {this.onProfileClick}
               className = 'btn'> Profile </div>
-              <div className = 'btn'> Follow </div>
+        
             </div>
             </div>
           </div>

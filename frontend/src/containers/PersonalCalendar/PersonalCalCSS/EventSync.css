@@ -5,12 +5,13 @@
 .eventSyncCard{
   position: relative;
   overflow: hidden;
-  width:50%;
-  top:25%;
+  width:65%;
+  top:15%;
+  height: 90%;
   background: white;
   line-height: 150%;
   border-radius: 15px;
-  padding:40px;
+  padding:20px;
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
 }
@@ -127,7 +128,7 @@
 
 .eventSyncCalendarContainer .syncCalendar .syncHeader{
   /* background-color: red; */
-  width: 1000px;
+  width: 100%;
   position: relative;
   left: 50px;
 }
@@ -157,9 +158,9 @@
   /* padding: .75em 0; */
   height: 40px;
   border-bottom: 1px solid var(--border-color);
-  border-left: 2px solid darkgrey;
   /* border: 1px solid; */
-  width: 1000px;
+  width: 90%;
+  position: relative;
   /* background-color: blue; */
 }
 
@@ -167,7 +168,7 @@
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .disabled{
   color: var(--text-color-light);
   color: black;
-  pointer-events: none;
+  cursor: not-allowed;
   /* background-color: blue; */
 }
 
@@ -175,6 +176,7 @@
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
+  font-weight: 400;
 }
 
 
@@ -184,10 +186,10 @@
   display: flex;
   overflow: auto;
   position: relative;
-  height: 80%;
+  height: 85%;
   border-top: 2px solid;
   border-color: darkgrey;
-  width: 700px;
+  width: 680px;
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body{
