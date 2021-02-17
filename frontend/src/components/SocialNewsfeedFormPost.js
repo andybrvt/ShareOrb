@@ -65,12 +65,29 @@ class SocialNewsfeedFormPost extends React.Component{
           caption = this.props.curSocialCalCell.dayCaption
         }
 
+        // Now you will set the pictures in
+        if(this.props.curSocialCalCell.get_socialCalItems){
+          for(let i = 0; i<this.props.curSocialCalCell.get_socialCalItems.length; i++ ){
+            fileList.push(
+
+              {
+                uid: i,
+                name: 'image.png',
+                status: 'done',
+                url: `${global.IMAGE_ENDPOINT}`+this.props.curSocialCalCell.get_socialCalItems[i].itemImage,
+              }
+            )
+          }
+
+        }
+
 
       }
 
 
       this.setState({
-        caption: caption
+        caption: caption,
+        fileList: fileList
       })
     }
 
@@ -88,12 +105,28 @@ class SocialNewsfeedFormPost extends React.Component{
           caption = newProps.curSocialCalCell.dayCaption
         }
 
+        if(this.props.curSocialCalCell.get_socialCalItems){
+          for(let i = 0; i<this.props.curSocialCalCell.get_socialCalItems.length; i++ ){
+            fileList.push(
+
+              {
+                uid: i,
+                name: 'image.png',
+                status: 'done',
+                url: `${global.IMAGE_ENDPOINT}`+this.props.curSocialCalCell.get_socialCalItems[i].itemImage,
+              }
+            )
+          }
+
+        }
+
 
       }
 
 
       this.setState({
-        caption: caption
+        caption: caption,
+        fileList: fileList
       })
 
 
