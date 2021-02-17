@@ -56,6 +56,7 @@
 
 .weekCalendar .header .midText{
   position: relative;
+  font-size: 18px;
 }
 
 .weekCalendar .header .arrowRight{
@@ -76,7 +77,7 @@
 
 .calendarDropDownCSS{
   position: relative;
-  left:42%;
+  left:40%;
   padding-top: 10px;
   padding-bottom: 3px;
   font-size: 14px;
@@ -245,6 +246,16 @@
   /* background-color: red; */
   position: relative;
   left: 3%;
+}
+
+.weekShortDay{
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.weekDayNum{
+  font-size: 20px;
+  text-transform: uppercase;
 }
 
 .weekCalendar .weekDays .weekcol {

@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
  ]
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -193,7 +193,6 @@ AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 # This one is for development, and this is what ill show up for the image link
 # MEDIA_URL = '/media/'
-
 # Use this one if you want to deploy
 AWS_STORAGE_BUCKET_NAME = 'shareorb'
 MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME

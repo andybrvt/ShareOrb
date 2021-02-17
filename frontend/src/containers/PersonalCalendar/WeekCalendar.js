@@ -164,7 +164,7 @@ class WeekCalendar extends React.Component{
   // This is to render the days on top (like Mon, tuesday etc)
   renderDays(){
     // so iiii format actually renders the name of the day
-    const dateFormat = 'iiii'
+    const dateFormat = 'iii'
     const dayFormat = 'd'
     const days = []
 
@@ -179,10 +179,14 @@ class WeekCalendar extends React.Component{
         key = {i}
 
         >
-          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+          <span class="weekShortDay">
+            {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+          </span>
           <br />
-          <span class="weekDayHover" onClick = {() => this.onDateClick(cloneCloneStartDate)}>
-          {dateFns.format(dateFns.addDays(startDate, i), dayFormat)}
+          <span className="weekDayNum">
+            <span class="weekDayHover" onClick = {() => this.onDateClick(cloneCloneStartDate)}>
+              {dateFns.format(dateFns.addDays(startDate, i), dayFormat)}
+            </span>
           </span>
         </div>
       )
