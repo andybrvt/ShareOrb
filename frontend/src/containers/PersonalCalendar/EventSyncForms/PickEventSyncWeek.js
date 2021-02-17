@@ -112,52 +112,6 @@ class PickEventSyncWeek extends React.Component{
 
 
 
-    renderHeader(){
-      // The difference between the week and the day is that
-      // the day cal is just for the next day so  you want to
-      // switch all the minDates with maxdates
-      const dateFormat = 'MMMM yyyy'
-      const minDate = this.props.maxDate
-      return(
-        <div className = 'header'>
-          <div className = 'col-center'>
-            <span>
-              {dateFns.format(new Date(minDate) , dateFormat)}
-            </span>
-          </div>
-        </div>
-      )
-    }
-
-    renderDays() {
-      // This is just to render out the days in the date range
-      const dateFormat = 'iii'
-      const dayFormat = 'd'
-      const days = []
-
-      let minDate = dateFns.addDays(new Date(this.props.minDate),1)
-      let maxDate = dateFns.addDays(new Date(this.props.maxDate),1)
-
-      const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
-      let cloneMaxDate = this.props.maxDate
-
-      // This is only for one day but the css and everything is already set up
-      for(let i = 0; i<difference; i++){
-          const cloneCloneMaxDate = cloneMaxDate
-          days.push(
-            <div
-            className = 'syncCol col-center '
-            key = {i}
-            >
-              {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
-              <br />
-              {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
-            </div>
-          )
-          cloneMaxDate = dateFns.addDays(cloneCloneMaxDate, 1)
-      }
-      return <div className = 'days row'>{days}</div>
-    }
 
     renderSide() {
       // Render side, you would want to start off at 11:30 am and end at 11:30 pm
@@ -743,26 +697,6 @@ class PickEventSyncWeek extends React.Component{
   }
 
 
-  renderHeader(){
-    // This is to render the mini Calendar month givien the date range
-    var eventSyncWeekText="'s calendar"
-    const dateFormat = 'MMMM yyyy'
-    const minDate = this.props.minDate
-    return(
-      <div className = 'header'>
-        <div className = 'col-center'>
-          <span style={{display: 'inline-block'}}>
-            {dateFns.format(new Date(minDate) , dateFormat)}
-          </span>
-
-        </div>
-        <span className = 'col-center' style={{marginLeft:'400px', display: 'inline-block'}}>
-          {this.props.userFriend.first_name}{eventSyncWeekText}
-        </span>
-      </div>
-    )
-  }
-
   renderDays() {
     // This is just to render out the days in the date range
     const dateFormat = 'iii'
@@ -785,9 +719,12 @@ class PickEventSyncWeek extends React.Component{
           className = 'syncCol col-center '
           key = {i}
           >
+
             {dateFns.format(dateFns.addDays(minDate, i), dateFormat)}
             <br />
-            {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
+            <span style={{fontSize:'24px'}}>
+              {dateFns.format(dateFns.addDays(minDate, i), dayFormat)}
+            </span>
           </div>
         )
         cloneMinDate = dateFns.addDays(cloneMinDate, 1)
@@ -1272,8 +1209,8 @@ class PickEventSyncWeek extends React.Component{
     return (
       <div className = 'eventSyncCalendarContainer'>
         <div className = 'syncCalendar'>
-          <div className = 'syncHeader'>
-            {this.renderHeader()}
+          <div className = 'syncHeader' style={{marginBottom:'25px'}}>
+
             {this.renderDays()}
           </div>
           <div className = 'syncBody'>
@@ -1293,10 +1230,11 @@ class PickEventSyncWeek extends React.Component{
         */}
         <Row style={{}}>
 
-
-          <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
-
-
+          <div class="rightEventSyncContainer">
+            <div class="rightTopEventSync">
+              <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
+            </div>
+            <div class="rightBottomEventSync">
               <PickEventSyncForm
               onSubmit = {this.submit}
               initialValues = {this.getInitialValue()}
@@ -1304,15 +1242,10 @@ class PickEventSyncWeek extends React.Component{
               startTime={dateFns.format(new Date(this.state.selectedDate), "hh:mm a" )}
               endTime={dateFns.format(dateFns.addHours(new Date(this.state.selectedDate),1), "hh:mm a" )}
               whichDay={dateFns.format(new Date(this.state.selectedDate), "d" )}
-
-
                />
-
-
-
+             </div>
           <Col span={8}></Col>
-
-
+          </div>
 
 
         </Row>

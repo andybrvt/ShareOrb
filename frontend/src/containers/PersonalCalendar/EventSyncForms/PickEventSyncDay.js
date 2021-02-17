@@ -129,7 +129,7 @@ class PickEventSyncDay extends React.Component{
             const cloneCloneMaxDate = cloneMaxDate
             days.push(
               <div
-              className = 'syncCol'
+              className = 'syncCol col-center '
               key = {i}
               style={{fontSize:'20px'}}
               >
