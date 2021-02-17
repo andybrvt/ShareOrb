@@ -85,7 +85,8 @@ class App extends Component {
 
     WebSocketSocialNewsfeedInstance.addCallbacks(
       this.props.loadSocialPosts.bind(this),
-      this.props.addSocialPostLike.bind(this)
+      this.props.addSocialPostLike.bind(this),
+      this.props.loadCurSocialCell.bind(this)
     )
 
 
@@ -371,6 +372,7 @@ const mapDispatchToProps = dispatch => {
 
     loadSocialPosts: post => dispatch(socialNewsfeedActions.loadSocialPosts(post)),
     addSocialPostLike: postObj => dispatch(socialNewsfeedActions.addSocialPostLike(postObj)),
+    loadCurSocialCell: socialCell => dispatch(socialNewsfeedActions.loadCurSocialCell(socialCell)),
 
     updateRequestList: newRequest => dispatch(authActions.updateRequestList(newRequest)),
     newUpRequestList: requestList => dispatch(authActions.newUpRequestList(requestList)),

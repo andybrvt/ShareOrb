@@ -160,7 +160,7 @@ class SocialNewsfeedPost extends React.Component {
 
             <div
               style = {{
-                  backgroundImage: `url(` + `${global.NEWSFEED_PICS}`+userPostImages[0].itemImage +")"
+                  backgroundImage: `url(` + `${global.IMAGE_ENDPOINT}`+userPostImages[0].itemImage +")"
                 }}
                 className = "backgroundImageNewsSingle"
               >
@@ -282,9 +282,35 @@ class SocialNewsfeedPost extends React.Component {
     // Then you will put the caption on the polaroid (maybe not the caption)
     // but the post owner has to be a must
 
+    let curPic = ""
+    let postOwnerId = ""
+    let curId = ""
+
+    const picIndex = this.state.curPicIndex
+    if(this.props.data){
+      if(this.props.data.post){
+        if(this.props.data.post.get_socialCalItems){
+          curPic = this.props.data.post.get_socialCalItems[picIndex].itemImage
+        }
+      }
+      if(this.props.data.owner){
+        postOwnerId = this.props.data.owner.id
+      }
+    }
+    if(this.props.userId){
+      curId = this.props.userId
+    }
+    console.log(picIndex)
 
 
-    // GET CLIPPING DONE HERE --> RELOOK AT IT
+    console.log(curPic)
+    authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`, {
+      clipPic: curPic,
+      postOwnerId: postOwnerId,
+      curId: curId
+    })
+
+    this.openNotification("bottomRight")
 
 
 

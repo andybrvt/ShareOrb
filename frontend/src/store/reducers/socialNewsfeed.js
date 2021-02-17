@@ -5,6 +5,7 @@ import { updateObject } from "../utility";
 const initialState = {
 
   socialPosts: [],
+  curSocialCell: {}
 }
 
 
@@ -26,6 +27,13 @@ const addSocialPostLike = (state, action) => {
   })
 }
 
+const loadCurSocialCell = (state, action) => {
+
+  return updateObject(state, {
+    curSocialCell: action.socialCell
+  })
+}
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -33,6 +41,8 @@ const reducer = (state = initialState, action) => {
       return loadSocialPosts(state, action);
     case actionTypes.ADD_SOCIAL_POST_LIKE:
       return addSocialPostLike(state, action);
+    case actionTypes.LOAD_CUR_SOCIAL_CELL:
+      return loadCurSocialCell(state, action)
     default:
       return state;
 

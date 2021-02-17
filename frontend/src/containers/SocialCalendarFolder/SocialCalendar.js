@@ -263,7 +263,7 @@ class SocialCalendar extends React.Component{
 
                     : dateFns.isAfter( day, currentMonth) ?
 
-                    <div>
+                    <div className = "buttonHolder">
                     {/*This is for the add event, eye that have a social cell in the
                       cell that are after the current date that has a cover cell
                       when the user is friend or owner*/}

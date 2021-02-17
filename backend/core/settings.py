@@ -23,7 +23,11 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 # DEBUG = False
 DEBUG = True
 
+<<<<<<< HEAD
 #
+=======
+
+>>>>>>> 82c3f59dc45ba34238d399ad7042e70b28015500
 # ALLOWED_HOSTS = [
 #  '172.31.4.121',
 #  'api.shareorb.com',

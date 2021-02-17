@@ -55,8 +55,22 @@ class WebSocketSocialNewsfeed{
     if(command === "fetch_social_posts"){
       // pull data and add callbacks here
       // add call back here
+      const curSocialCalCellList = JSON.parse(parsedData.curSocialCalCell)
+
+      let curSocialCell = {}
+      if(curSocialCalCellList.length > 0){
+        curSocialCell = curSocialCalCellList[0];
+      }
+
       const socialPost = JSON.parse(parsedData.social_posts)
       this.callbacks['fetch_social_posts'](socialPost)
+
+      // add a call back here to update the current socialcal in redux here
+      // probally just gonna include it in the soical newsfeed bc it will
+      // be used mostly there
+
+      this.callbacks['fetch_cur_social_cell'](curSocialCell)
+
 
     } else if (command === "send_social_post_like"){
       const contentTypeId = parsedData.contentTypeId
@@ -87,10 +101,12 @@ class WebSocketSocialNewsfeed{
 
   addCallbacks(
     loadSocialPostCallback,
-    addSocialLikeCallback
+    addSocialLikeCallback,
+    loadCurSocialCellCallback
   ){
     this.callbacks['fetch_social_posts'] = loadSocialPostCallback
     this.callbacks['add_social_post_like'] = addSocialLikeCallback
+    this.callbacks['fetch_cur_social_cell'] = loadCurSocialCellCallback
   }
 
   fetchSocialPost(userId){

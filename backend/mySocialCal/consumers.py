@@ -17,6 +17,8 @@ from .serializers import SocialCalEventSerializer
 from .serializers import SocialEventMessagesSerializer
 from .serializers import SocialCalCommentSerializer
 from .serializers import SocialCellEventSerializer
+import datetime
+
 
 # This consumer is mostly used for managing the social events ie
 # soical event page. Where as the other cosnumer that is in the
@@ -576,9 +578,32 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         serializer = SocialCellEventSerializer(post_list, many = True)
 
+        # You would want to grab the current day and then grab the social cal cell
+        # of that day if it exist.
+
+        # So you will be filtering social cal cell
+        curUser = get_object_or_404(User, id = data['userId'])
+
+        currentDay = datetime.date.today()
+
+        socialCalCell = SocialCalCell.objects.all().filter(
+        socialCalUser = curUser
+        ).filter(
+        socialCaldate = currentDay
+        )
+
+        print("this is the current social cal cell")
+        print(socialCalCell)
+
+        # Now you will serialize the socialcalcell
+
+        serializedSocialCalCell = SocialCalCellSerializer(socialCalCell, many = True).data
+
+
         content = {
             'command': 'fetch_social_posts',
-            'social_posts': json.dumps(serializer.data)
+            'social_posts': json.dumps(serializer.data),
+            "curSocialCalCell": json.dumps(serializedSocialCalCell)
         }
 
         self.send_json(content)
