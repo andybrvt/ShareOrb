@@ -101,7 +101,13 @@ class UpdateSocialCellCoverPic(APIView):
         # then you will just change the cover pic and then return the serialized cell
         # and the you are good to go
         socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['cellId'])
-        socialCalCell.coverPic = request.data['coverImage']
+        if(isinstance(request.data['coverImage'], str)):
+            # check if its already save as a directory
+            socialCalCell.coverPic = request.data['coverImage'].lstrip("/media")
+        else:
+            # This is for a inmemory file object
+            socialCalCell.coverPic = request.data['coverImage']
+
         socialCalCell.save()
 
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
@@ -270,3 +276,85 @@ class DeleteSocialEventView(generics.RetrieveDestroyAPIView):
     serializer_class = serializers.SocialCalEventSerializer
     lookup_field = "id"
     queryset = models.SocialCalEvent.objects.all()
+
+
+class SocialCapUploadNewsfeed(APIView):
+    # This function will be used in the newsfeed part where you will upload a
+    # caption and Pictures
+    def post(self, request, id, *args, **kwargs):
+
+        print("it hits here pretty well")
+        print(request.data)
+        # You want to first grab the time
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+
+        # Then you grab the user
+        user = get_object_or_404(User, id = id)
+
+        # Now you will get or create to make sure you cover all the basis
+        # if you were gonna update or create a new social cal cell
+        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+            socialCalUser = user,
+            socialCaldate = time
+        )
+
+
+        # Add in the day caption here
+        socialCalCell.dayCaption = request.data['dayCaption']
+
+        # Check if the social cal cell has any pictures attached to it
+
+
+        socialCalCellItemList = models.SocialCalItems.objects.all().filter(calCell = socialCalCell)
+        if(socialCalCellItemList.count() > 0):
+            # Delete all of them so that you can update the list
+            socialCalCellItemList.delete()
+
+        # Clear out the social coverPic
+        socialCalCell.coverPic = ""
+
+
+        change = False
+        if(int(request.data['fileListLength']) > 0):
+            # check if there are actually pictures
+            change = True
+
+        # Check if it has a cover pic in order for you to update or not
+        # You dont need to check, this will cover pretty much all the cases
+        # Now you will use the length of the file list
+        for i in range(int(request.data['fileListLength'])):
+            # Now you will create the social cal cell items
+
+            if(isinstance(request.data['image['+str(i)+']'], str)):
+                # check if image is just a path or a uploaded file
+                socialCalItem = models.SocialCalItems.objects.create(
+                    socialItemType = 'picture',
+                    creator = user,
+                    itemUser = user,
+                    itemImage = request.data['image['+str(i)+']'].lstrip("/media"),
+                    calCell = socialCalCell
+                )
+            else:
+                socialCalItem = models.SocialCalItems.objects.create(
+                    socialItemType = 'picture',
+                    creator = user,
+                    itemUser = user,
+                    itemImage = request.data['image['+str(i)+']'],
+                    calCell = socialCalCell
+                )
+
+        # Now save the social cal cell
+        socialCalCell.save()
+
+        # Now you will serialized the socialCalCell
+
+        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
+
+        content = {
+            "coverPicChange": change,
+            "cell": serializedSocialCell
+        }
+
+
+        return Response(content)

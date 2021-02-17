@@ -142,8 +142,14 @@ class WebSocketSocialNewsfeed{
 
   }
 
-  addPost(){
+  addUpdateSocialPost(cellId){
+    // This will run when you have already made a cell and everything is updated
     // make an axios call and then send it through the here
+    this.sendPostsInfo({
+      socialCalCellId: cellId,
+      command: "grab_new_updated_social_cell"
+    })
+
   }
 
   sendPostsInfo(data){

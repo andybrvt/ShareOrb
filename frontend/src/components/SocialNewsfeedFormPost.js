@@ -194,70 +194,81 @@ class SocialNewsfeedFormPost extends React.Component{
     }
 
     onFormSubmit= () => {
+      // This is where you will be use to update your social cal cell
+      // So prett much you will grab the social cal cell. You will model
+      // it similarly to that of the post on social cal where if there isnt a
+      // social cal then you make one, the only difference is that you will do
+      // this in consumer and you will update the news feed
+
+      // Probally gonna have to make a new one, you probally gonna have to make
+      // this one in the consumers. But since you are sending pictures
+      // you probally gonna have to make an axios call and then send it through
+      // consumers
+
       console.log(this.state)
+      const ownerId = this.props.curUserId;
+      const caption = this.state.caption;
+      const fileList = this.state.fileList;
 
-      const ownerId = this.props.curUserId
-        // In order to post data into the post modal we would need
-        // the username, caption, and maybe the post images
-        // And since the post images are ina list and we want a lsit of the
-        // originFileObj we will loop through the this.state.file list and
-        // append one by one
-        const formData = new FormData()
-        formData.append('user', this.props.curUserId)
-        // if (this.state.caption !== ''){
-        formData.append('caption', this.state.caption)
-        // }
-        if(this.state.fileList.length !== 0){
-          for(let i = 0; i<this.state.fileList.length; i++){
-            formData.append('image['+i+']', this.state.fileList[i].originFileObj)
+      // So you have to check if it has originFileObj
+      const formData = new FormData()
+      // first append the day caption
+      formData.append("dayCaption", caption);
+
+      if(fileList.length !== 0){
+        // Now append the length of the file list so you know how much you
+        // will need to loop through
+        formData.append("fileListLength", fileList.length);
+        // Now you will loop through
+        for(let i = 0; i<fileList.length; i++){
+          if(fileList[i].originFileObj){
+            // If this is a new uploaded file
+            formData.append("image[" + i +']', fileList[i].originFileObj)
+          } else {
+            // If this is just an old one picture
+            formData.append("image[" + i +']', fileList[i].url.replace(global.IMAGE_ENDPOINT, ""))
           }
         }
-
-        authAxios.post(`${global.API_ENDPOINT}/userprofile/post`,
-          formData,
-          {headers: {"content-type": "multipart/form-data"}}
-
-        ).then(res => {
-          console.log(res.data.postId)
-
-          // Now you will make a websocket that will accept the post Id then
-          // send it into the frotn end
-          WebSocketPostsInstance.addPost(res.data.postId)
-        })
-      // Now when you do an axios call to post the pictures, you will then return the
-      // post id so that you can send it into the websocket so that it can update teh
-      // newsfeed
-      if(this.state.socialClip){
-        // This will check if the user wanted to post the photos that they are posting
-        // right now to the social cal cell as well
-
-        // Since the view for uploading pics on social cal require pics only
-        // we have to make a new formdata
-        const socialFormData = new FormData()
-        if(this.state.fileList.length !== 0){
-          for(let i = 0; i<this.state.fileList.length; i++){
-            socialFormData.append('image['+i+']', this.state.fileList[i].originFileObj)
-          }
-        }
-
-        authAxios.post(`${global.API_ENDPOINT}/mySocialCal/uploadPic/`+ownerId,
-          socialFormData,
-          {headers: {"content-type": "multipart/form-data"}}
-
-        )
-
-        this.openSocialNotification("bottomRight")
-
       }
 
+      // Now you have all the caption and pictures uploaded
 
-      this.setState({
-        fileList: [],
-        caption: ""
+      authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCurSocialCell/`+ownerId,
+        formData,
+        {headers: {"content-type": "multipart/form-data"}}
+      )
+      .then(res => {
+        // Now you will update the cover pic and then send a websocket
+        // that updates the newsfeed
+
+        // update the cover pic here
+        if( res.data.coverPicChange){
+          const coverPicForm = new FormData()
+          // Put the id of the cell in first so you can find it later
+          coverPicForm.append("cellId", res.data.cell.id)
+          // Now add the cover pic
+          if(fileList[0].originFileObj){
+            // If this is a new uploaded file
+            coverPicForm.append("coverImage", fileList[0].originFileObj)
+          } else {
+            // If this is just an old one picture
+            coverPicForm.append("coverImage", fileList[0].url.replace(global.IMAGE_ENDPOINT, ""))
+          }
+
+          // Now change the cover picture here
+          authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
+            coverPicForm,
+            {headers: {"content-type": "multipart/form-data"}}
+          )
+
+        }
+
+
+        // udpate newsfeed here
+
+
+
       })
-
-      this.openNotification("bottomRight")
-      this.props.onCancel()
 
     }
 
@@ -314,28 +325,15 @@ class SocialNewsfeedFormPost extends React.Component{
               {firstName+" "+lastName}
             </span>
 
-              <Switch style={{float:'right', marginRight:'50px', marginRight:'25px'}} onChange={this.onChange} />
-              {
-                (this.state.socialClip)?
-
-                  <span style={{float:'right', marginRight:'25px'}}>
-                    <Alert
-                      message="Clip directly while posting"
-                      description="Clip images from the post to your social calendar"
-                      type="info"
-                      showIcon
-                    />
-                  </span>
-                :
                 <span style={{float:'right', marginRight:'25px'}}>
                   <Alert
-                    message="Post on NewsFeed"
-                    description="Post photos and caption on the newsfeed"
+                    message="Update current day"
+                    description="Update your current day album."
                     type="info"
                     showIcon
                   />
                 </span>
-              }
+
         </div>
         </div>
         <Divider />
