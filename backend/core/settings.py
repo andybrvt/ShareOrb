@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
  ]
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Application definition
 
