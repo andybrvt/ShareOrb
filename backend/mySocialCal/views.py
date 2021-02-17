@@ -352,6 +352,7 @@ class SocialCapUploadNewsfeed(APIView):
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
 
         content = {
+            "created": created,
             "coverPicChange": change,
             "cell": serializedSocialCell
         }

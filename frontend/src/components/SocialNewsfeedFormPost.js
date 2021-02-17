@@ -14,7 +14,7 @@ import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
 import WebSocketPostsInstance from '../postWebsocket';
-
+import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 
 const {TextArea} = Input
 
@@ -238,34 +238,63 @@ class SocialNewsfeedFormPost extends React.Component{
         {headers: {"content-type": "multipart/form-data"}}
       )
       .then(res => {
-        // Now you will update the cover pic and then send a websocket
-        // that updates the newsfeed
 
-        // update the cover pic here
-        if( res.data.coverPicChange){
-          const coverPicForm = new FormData()
-          // Put the id of the cell in first so you can find it later
-          coverPicForm.append("cellId", res.data.cell.id)
-          // Now add the cover pic
-          if(fileList[0].originFileObj){
-            // If this is a new uploaded file
-            coverPicForm.append("coverImage", fileList[0].originFileObj)
-          } else {
-            // If this is just an old one picture
-            coverPicForm.append("coverImage", fileList[0].url.replace(global.IMAGE_ENDPOINT, ""))
+
+        // Have a condiation where if there are not social cal items you will
+        // delete and remove the content type post
+        if(res.data.cell.get_socialCalItems === 0) {
+          // If there are no exisiting social cal cell you want to remove it and no need
+          // to update teh coverpic
+
+          // this one you removed the content type already
+
+          // Put a consumer function here
+
+        } else {
+          // This is if there are socialcalcellitems to post
+          if( res.data.coverPicChange){
+            const coverPicForm = new FormData()
+            // Put the id of the cell in first so you can find it later
+            coverPicForm.append("cellId", res.data.cell.id)
+            // Now add the cover pic
+            if(fileList[0].originFileObj){
+              // If this is a new uploaded file
+              coverPicForm.append("coverImage", fileList[0].originFileObj)
+            } else {
+              // If this is just an old one picture
+              coverPicForm.append("coverImage", fileList[0].url.replace(global.IMAGE_ENDPOINT, ""))
+            }
+
+            // Now change the cover picture here
+            authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
+              coverPicForm,
+              {headers: {"content-type": "multipart/form-data"}}
+            )
+
           }
 
-          // Now change the cover picture here
-          authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
-            coverPicForm,
-            {headers: {"content-type": "multipart/form-data"}}
+
+          // udpate newsfeed here
+
+
+
+          WebSocketSocialNewsfeedInstance.addUpdateSocialPost(
+            ownerId,
+            res.data.cell.id,
+            res.data.created
           )
+
+
 
         }
 
 
-        // udpate newsfeed here
 
+        // Now you will update the cover pic and then send a websocket
+        // that updates the newsfeed
+
+
+        // update the cover pic here
 
 
       })

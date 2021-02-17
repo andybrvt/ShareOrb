@@ -660,6 +660,43 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         print("the stuff right here")
         self.send_new_social_post_action(content)
 
+    def grab_new_updated_social_cell(self, data):
+        # This function willb e used to grab the new updated social cal cell and then
+        # either if new add it to the top of the redux or update an existing one
+
+
+        # socialCalCell = get_object_or_404(SocialCalCell, id = data['socialCalCellId'])
+
+
+
+        # You want to grab the content type so that you can
+        # update it
+        contentTypeObj = SocialCellEventPost.objects.get(
+            owner_id = data['curId'],
+            post_id = data['socialCalCellId']
+        )
+
+        # Now you will serialize it
+        # socialCalCellObj = SocialCalCellSerializer(socialCalCell).data
+
+        serializedSocialObj = SocialCellEventSerializer(contentTypeObj).data
+
+
+        # Now you just have to send it off into the weboscket
+        # You will have the curId to check with the social cal cell
+        # You will use created to choose teh right path to add the cell in
+
+        content = {
+            'command': 'update_new_cell_social_newsfeed',
+            'curId': data['curId'],
+            'created': data['created'],
+            'socialPostObj': serializedSocialObj
+        }
+
+        self.send_new_social_post_action(content)
+
+
+
     def send_new_social_post_action(self, socialPostAction):
         # This will be used to send the actions out to the front end
 
@@ -697,6 +734,8 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
             self.send_social_post_like(data)
         if data['command'] == 'send_social_post_unlike':
             self.send_social_post_unlike(data)
+        if data['command'] == 'grab_new_updated_social_cell':
+            self.grab_new_updated_social_cell(data)
 
     def send_social_post_action(self, postActions):
         postAction = postActions['action']
