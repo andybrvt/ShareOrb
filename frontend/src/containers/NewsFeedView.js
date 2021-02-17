@@ -103,7 +103,7 @@ class NewsFeedView extends React.Component {
 		WebSocketSocialNewsfeedInstance.connect()
 	}
 
-	componentWillMount(){
+	componentWillUnmount(){
 		WebSocketSocialNewsfeedInstance.disconnect()
 
 	}

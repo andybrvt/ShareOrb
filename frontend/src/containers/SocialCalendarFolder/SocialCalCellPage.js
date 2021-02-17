@@ -930,7 +930,7 @@ class SocialCalCellPage extends React.Component{
                         placeHolder = "Write a caption"
                         maxLength = {250}
                         showCount
-                        rows = {4}
+                        rows = {3}
                         onChange = {this.onCaptionChange}
                         value = {this.state.caption}
                         onPressEnter = {e => this.onCaptionSubmit(e, curDate)}

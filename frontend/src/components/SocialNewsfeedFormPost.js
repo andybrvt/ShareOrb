@@ -50,6 +50,55 @@ class SocialNewsfeedFormPost extends React.Component{
       socialClip:false,
     }
 
+
+
+    componentDidMount(){
+      // This will try to set the state if there are stuff in the states so that
+      // it can be fill
+      let caption = "";
+      let fileList = [];
+
+      if(this.props.curSocialCalCell){
+        if(this.props.curSocialCalCell.dayCaption){
+          // If there is a day caption then you will just add it in to the
+          // states
+          caption = this.props.curSocialCalCell.dayCaption
+        }
+
+
+      }
+
+
+      this.setState({
+        caption: caption
+      })
+    }
+
+
+    componentWillReceiveProps(newProps){
+      // this will update the caption and stuff when there is a caption change
+      console.log(newProps)
+      let caption = "";
+      let fileList = []
+
+      if(newProps.curSocialCalCell){
+        if(newProps.curSocialCalCell.dayCaption){
+          // If there is a day caption then you will just add it in to the
+          // states
+          caption = newProps.curSocialCalCell.dayCaption
+        }
+
+
+      }
+
+
+      this.setState({
+        caption: caption
+      })
+
+
+    }
+
     handleCancel = () => this.setState({ previewVisible: false });
 
 
@@ -264,7 +313,7 @@ class SocialNewsfeedFormPost extends React.Component{
                 rows = {3}
                 allowClear
                 size="large"
-                maxLength={300}
+                maxLength={250}
                 bordered={false}
                 showCount
                 type = 'text'
