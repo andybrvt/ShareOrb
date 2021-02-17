@@ -2,6 +2,7 @@ import React from 'react';
 import InfiniteScroll from './InfiniteScroll';
 import PostUpload from '../components/Forms2';
 import NewsFeedFormPost from '../components/NewsFeedFormPost';
+import SocialNewsfeedFormPost from '../components/SocialNewsfeedFormPost';
 import NewNewsfeedFormPost from '../components/NewNewsfeedFormPost';
 import NewsFeedEventModal from '../components/NewsFeedEventModal.js';
 import axios from 'axios';
@@ -200,7 +201,7 @@ class NewsFeedView extends React.Component {
 						bodyStyle={{padding:'25px'}}
 						centered
 					>
-								<NewNewsfeedFormPost
+								<SocialNewsfeedFormPost
 								onCancel = {this.closeProfileEdit}
 								profile = {this.props.currentProfile}/>
 					</Modal>

@@ -18,6 +18,9 @@ from .serializers import SocialEventMessagesSerializer
 from .serializers import SocialCalCommentSerializer
 from .serializers import SocialCellEventSerializer
 import datetime
+from django.utils import timezone
+import pytz
+
 
 
 # This consumer is mostly used for managing the social events ie
@@ -584,12 +587,14 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # So you will be filtering social cal cell
         curUser = get_object_or_404(User, id = data['userId'])
 
-        currentDay = datetime.date.today()
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        print(time)
 
         socialCalCell = SocialCalCell.objects.all().filter(
         socialCalUser = curUser
         ).filter(
-        socialCaldate = currentDay
+        socialCaldate = time
         )
 
         print("this is the current social cal cell")
