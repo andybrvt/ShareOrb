@@ -86,7 +86,10 @@
 .calendarContainer .miniCalContainer {
   position:relative;
   width: 17.5%;
-  /* background-color: green; */
+  border-left: 1px solid #d9d9d9;
+  background-color: #f0f0f0;
+  margin-left: -2px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
 }
 
 .miniCalContainer .weekCreateEvent {
@@ -249,13 +252,16 @@
 }
 
 .weekShortDay{
-  font-size: 14px;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color:#8c8c8c;
+  /* text-transform: uppercase; */
 }
 
 .weekDayNum{
   font-size: 20px;
-  text-transform: uppercase;
+  font-weight: 600;
+  color:#595959;
 }
 
 .weekCalendar .weekDays .weekcol {
@@ -277,7 +283,7 @@
 .scrollCalContent{
   overflow:hidden;
   width: 100%;
-  height: 78vh;
+  height: 77vh;
   /* background-color: red; */
 }
 
@@ -287,7 +293,7 @@
   /* background-color: red; */
   /* overflow-y: hidden; */
   width: 101%;
-  height: 78vh;
+  height: 77vh;
   border-top: 2px solid;
   border-color: darkgrey;
 }
@@ -321,9 +327,10 @@
 
 .sideTime .cell{
   position: relative;
-  top: 45.5px;
+  top: 33.5px;
   height: 46px;
-  border-top: 1px solid grey;
+  color:#595959;
+  /* border-top: 1px solid grey; */
   overflow: hidden;
   cursor: pointer;
   width: 100%;
