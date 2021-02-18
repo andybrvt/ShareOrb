@@ -62,9 +62,9 @@ class WeekCalendar extends React.Component{
     animate:true,
   }
   scrollToMyRef = (ref) => {
-    // if(ref){
-    // ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    // }
+    if(ref){
+    ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
 
@@ -585,6 +585,7 @@ class WeekCalendar extends React.Component{
                 history = {this.props.history}
                 matchPara = {this.props.parameter} />
             </div>
+            
             {this.renderDays()}
 
 
@@ -594,6 +595,7 @@ class WeekCalendar extends React.Component{
             {/*window.scrollTo(0, 800)*/}
           <div className = 'weekDayFlex-Container'>
             <div className = 'timecol'>
+
               {this.renderSide()}
             </div>
             <Animate
@@ -601,10 +603,11 @@ class WeekCalendar extends React.Component{
               showProp="show"
               transitionName="fade"
             >
-            <div >
-            {this.renderWeekCell(this.props.events)}
-          </div>
-        </Animate>
+              <div >
+                {this.renderWeekCell(this.props.events)}
+              </div>
+            </Animate>
+
           </div>
           </div>
 
