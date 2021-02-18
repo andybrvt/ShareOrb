@@ -105,15 +105,15 @@ class SocialNewsfeedFormPost extends React.Component{
           caption = newProps.curSocialCalCell.dayCaption
         }
 
-        if(this.props.curSocialCalCell.get_socialCalItems){
-          for(let i = 0; i<this.props.curSocialCalCell.get_socialCalItems.length; i++ ){
+        if(newProps.curSocialCalCell.get_socialCalItems){
+          for(let i = 0; i<newProps.curSocialCalCell.get_socialCalItems.length; i++ ){
             fileList.push(
 
               {
                 uid: i,
                 name: 'image.png',
                 status: 'done',
-                url: `${global.IMAGE_ENDPOINT}`+this.props.curSocialCalCell.get_socialCalItems[i].itemImage,
+                url: `${global.IMAGE_ENDPOINT}`+newProps.curSocialCalCell.get_socialCalItems[i].itemImage,
               }
             )
           }
@@ -250,6 +250,7 @@ class SocialNewsfeedFormPost extends React.Component{
 
           // Put a consumer function here
 
+
         } else {
           // This is if there are socialcalcellitems to post
           if( res.data.coverPicChange){
@@ -274,7 +275,6 @@ class SocialNewsfeedFormPost extends React.Component{
           }
 
 
-          // udpate newsfeed here
 
 
 
@@ -283,6 +283,9 @@ class SocialNewsfeedFormPost extends React.Component{
             res.data.cell.id,
             res.data.created
           )
+
+          message.success('You updated your day album.', 7);
+
 
 
 

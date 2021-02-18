@@ -696,6 +696,39 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         self.send_new_social_post_action(content)
 
 
+    def remove_all_photo_social_post(self, data):
+        # This is for when you remove all the pictures and you just need to return
+        # the cur social cal cell and then the newsfeed again
+        post_list = SocialCellEventPost.objects.all().order_by('-post_date')
+        serializer = SocialCellEventSerializer(post_list, many = True)
+
+
+        curUser = get_object_or_404(User, id = data['userId'])
+
+        timezone.activate(pytz.timezone("MST"))
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        print(time)
+
+        socialCalCell = SocialCalCell.objects.all().filter(
+        socialCalUser = curUser
+        ).filter(
+        socialCaldate = time
+        )
+
+
+        # You are gonna have a picture almost every time here
+
+        serializedSocialCalCell = SocialCalCellSerializer(socialCalCell, many = True).data
+
+        content = {
+            'command': 'remove_all_photo_social_post',
+            'social_posts': serializer.data,
+            "curSocialCalCell": serializedSocialCalCell,
+            'curId': data['userId']
+        }
+
+        self.send_new_social_post_action(content)
+
 
     def send_new_social_post_action(self, socialPostAction):
         # This will be used to send the actions out to the front end
@@ -736,6 +769,8 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
             self.send_social_post_unlike(data)
         if data['command'] == 'grab_new_updated_social_cell':
             self.grab_new_updated_social_cell(data)
+        if data['command'] == 'remove_all_photo_social_post':
+            self.remove_all_photo_social_post(data)
 
     def send_social_post_action(self, postActions):
         postAction = postActions['action']

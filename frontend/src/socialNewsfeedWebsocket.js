@@ -104,18 +104,20 @@ class WebSocketSocialNewsfeed{
 
       if(curId === socialPostObj.owner.id){
         // Put call back for updating the cursocialcalcell
-
+        // just load up the cur social cal cell
+        this.callbacks['fetch_cur_social_cell'](socialPostObj.post)
       }
 
       if(created === true){
         // this is if this is a new social cal cell so you just add it to the top
         // of the newsfeed
+        this.callbacks['add_first_social_cell_post'](socialPostObj)
 
-        // add callback here
       } else if(created === false){
         // if its a old newsfeed cell and needs to be updated
 
-        // add callback here
+        this.callbacks['update_social_cell_post'](socialPostObj)
+
       }
 
 
@@ -130,11 +132,15 @@ class WebSocketSocialNewsfeed{
   addCallbacks(
     loadSocialPostCallback,
     addSocialLikeCallback,
-    loadCurSocialCellCallback
+    loadCurSocialCellCallback,
+    addFirstSocialCellPost,
+    updateSocialCellPost
   ){
     this.callbacks['fetch_social_posts'] = loadSocialPostCallback
     this.callbacks['add_social_post_like'] = addSocialLikeCallback
     this.callbacks['fetch_cur_social_cell'] = loadCurSocialCellCallback
+    this.callbacks['add_first_social_cell_post'] = addFirstSocialCellPost
+    this.callbacks['update_social_cell_post'] = updateSocialCellPost
   }
 
   fetchSocialPost(userId){
@@ -168,6 +174,17 @@ class WebSocketSocialNewsfeed{
 
   deletePost(){
 
+  }
+
+
+  removeAllPhotoSocialPost(curId){
+    // This function happens when you remove all the pictures in
+    // you day cell. This is just use to update the cursoical cal cell
+    // and then update the newsfeed
+    this.sendPostInfo({
+      userId: curId,
+      command: "remove_all_photo_social_post"
+    })
   }
 
   addUpdateSocialPost(curId, cellId, created){

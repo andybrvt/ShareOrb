@@ -23,3 +23,20 @@ export const loadCurSocialCell = socialCell => {
     socialCell: socialCell
   }
 }
+
+export const addFirstSocialCellPost = socialCell => {
+  // this function will add in the new social cal cell if its newly
+  // creatd
+  return {
+    type: actionTypes.ADD_FIRST_SOCIAL_CELL_POST,
+    socialCell: socialCell
+  }
+}
+
+export const updateSocialCellPost = socialCell => {
+  // this will update the exisiting social cal cell
+  return {
+    type: actionTypes.UPDATE_SOCIAL_CELL_POST,
+    socialCell: socialCell
+  }
+}
