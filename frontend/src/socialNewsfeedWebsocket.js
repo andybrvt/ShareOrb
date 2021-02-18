@@ -95,6 +95,34 @@ class WebSocketSocialNewsfeed{
 
       // put the call back here
       this.callbacks['add_social_post_like'](content)
+    } else if (command === "update_new_cell_social_newsfeed"){
+      // path to update the newsfeed
+      // You grab the postObj
+      const socialPostObj = parsedData.socialPostObj
+      const curId = parsedData.curId
+      const created = parsedData.created
+
+      if(curId === socialPostObj.owner.id){
+        // Put call back for updating the cursocialcalcell
+
+      }
+
+      if(created === true){
+        // this is if this is a new social cal cell so you just add it to the top
+        // of the newsfeed
+
+        // add callback here
+      } else if(created === false){
+        // if its a old newsfeed cell and needs to be updated
+
+        // add callback here
+      }
+
+
+      // Now check if the currentId equals to taht of the user in the social postobj
+      // if it is equal then that means you should update the curSocialCal
+
+
     }
 
   }
@@ -142,8 +170,24 @@ class WebSocketSocialNewsfeed{
 
   }
 
-  addPost(){
+  addUpdateSocialPost(curId, cellId, created){
+    // The curId will be used later to check if the social cal cell belongs to that
+    // of the current user, if it is then you would update it
+
+    // The cellid will be used to grab the actual cell
+
+    // Craeted will check if it is new or not so that for the redux
+    // you can either add to the top of the list of update an existing one
+
+    // This will run when you have already made a cell and everything is updated
     // make an axios call and then send it through the here
+    this.sendPostsInfo({
+      curId: curId,
+      socialCalCellId: cellId,
+      created: created,
+      command: "grab_new_updated_social_cell"
+    })
+
   }
 
   sendPostsInfo(data){

@@ -24,6 +24,7 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 DEBUG = True
 
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = [
  '172.31.4.121',
  'api.shareorb.com',
@@ -33,6 +34,17 @@ ALLOWED_HOSTS = [
  '52.8.250.165',
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
  ]
+=======
+# ALLOWED_HOSTS = [
+#  '172.31.4.121',
+#  'api.shareorb.com',
+#  'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+#  '54.183.46.151',
+#  '127.0.0.1:5000',
+#  '52.8.250.165',
+#  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
+#  ]
+>>>>>>> e1f847fd8d565f55a2130b0658a923d8308e20c0
 
 # ALLOWED_HOSTS = []
 

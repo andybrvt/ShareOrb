@@ -14,7 +14,7 @@ import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
 import WebSocketPostsInstance from '../postWebsocket';
-
+import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 
 const {TextArea} = Input
 
@@ -48,6 +48,88 @@ class SocialNewsfeedFormPost extends React.Component{
       caption: '',
       cameraShow:false,
       socialClip:false,
+    }
+
+
+
+    componentDidMount(){
+      // This will try to set the state if there are stuff in the states so that
+      // it can be fill
+      let caption = "";
+      let fileList = [];
+
+      if(this.props.curSocialCalCell){
+        if(this.props.curSocialCalCell.dayCaption){
+          // If there is a day caption then you will just add it in to the
+          // states
+          caption = this.props.curSocialCalCell.dayCaption
+        }
+
+        // Now you will set the pictures in
+        if(this.props.curSocialCalCell.get_socialCalItems){
+          for(let i = 0; i<this.props.curSocialCalCell.get_socialCalItems.length; i++ ){
+            fileList.push(
+
+              {
+                uid: i,
+                name: 'image.png',
+                status: 'done',
+                url: `${global.IMAGE_ENDPOINT}`+this.props.curSocialCalCell.get_socialCalItems[i].itemImage,
+              }
+            )
+          }
+
+        }
+
+
+      }
+
+
+      this.setState({
+        caption: caption,
+        fileList: fileList
+      })
+    }
+
+
+    componentWillReceiveProps(newProps){
+      // this will update the caption and stuff when there is a caption change
+      console.log(newProps)
+      let caption = "";
+      let fileList = []
+
+      if(newProps.curSocialCalCell){
+        if(newProps.curSocialCalCell.dayCaption){
+          // If there is a day caption then you will just add it in to the
+          // states
+          caption = newProps.curSocialCalCell.dayCaption
+        }
+
+        if(this.props.curSocialCalCell.get_socialCalItems){
+          for(let i = 0; i<this.props.curSocialCalCell.get_socialCalItems.length; i++ ){
+            fileList.push(
+
+              {
+                uid: i,
+                name: 'image.png',
+                status: 'done',
+                url: `${global.IMAGE_ENDPOINT}`+this.props.curSocialCalCell.get_socialCalItems[i].itemImage,
+              }
+            )
+          }
+
+        }
+
+
+      }
+
+
+      this.setState({
+        caption: caption,
+        fileList: fileList
+      })
+
+
     }
 
     handleCancel = () => this.setState({ previewVisible: false });
@@ -112,70 +194,110 @@ class SocialNewsfeedFormPost extends React.Component{
     }
 
     onFormSubmit= () => {
+      // This is where you will be use to update your social cal cell
+      // So prett much you will grab the social cal cell. You will model
+      // it similarly to that of the post on social cal where if there isnt a
+      // social cal then you make one, the only difference is that you will do
+      // this in consumer and you will update the news feed
+
+      // Probally gonna have to make a new one, you probally gonna have to make
+      // this one in the consumers. But since you are sending pictures
+      // you probally gonna have to make an axios call and then send it through
+      // consumers
+
       console.log(this.state)
+      const ownerId = this.props.curUserId;
+      const caption = this.state.caption;
+      const fileList = this.state.fileList;
 
-      const ownerId = this.props.curUserId
-        // In order to post data into the post modal we would need
-        // the username, caption, and maybe the post images
-        // And since the post images are ina list and we want a lsit of the
-        // originFileObj we will loop through the this.state.file list and
-        // append one by one
-        const formData = new FormData()
-        formData.append('user', this.props.curUserId)
-        // if (this.state.caption !== ''){
-        formData.append('caption', this.state.caption)
-        // }
-        if(this.state.fileList.length !== 0){
-          for(let i = 0; i<this.state.fileList.length; i++){
-            formData.append('image['+i+']', this.state.fileList[i].originFileObj)
+      // So you have to check if it has originFileObj
+      const formData = new FormData()
+      // first append the day caption
+      formData.append("dayCaption", caption);
+
+      if(fileList.length !== 0){
+        // Now append the length of the file list so you know how much you
+        // will need to loop through
+        formData.append("fileListLength", fileList.length);
+        // Now you will loop through
+        for(let i = 0; i<fileList.length; i++){
+          if(fileList[i].originFileObj){
+            // If this is a new uploaded file
+            formData.append("image[" + i +']', fileList[i].originFileObj)
+          } else {
+            // If this is just an old one picture
+            formData.append("image[" + i +']', fileList[i].url.replace(global.IMAGE_ENDPOINT, ""))
           }
         }
-
-        authAxios.post(`${global.API_ENDPOINT}/userprofile/post`,
-          formData,
-          {headers: {"content-type": "multipart/form-data"}}
-
-        ).then(res => {
-          console.log(res.data.postId)
-
-          // Now you will make a websocket that will accept the post Id then
-          // send it into the frotn end
-          WebSocketPostsInstance.addPost(res.data.postId)
-        })
-      // Now when you do an axios call to post the pictures, you will then return the
-      // post id so that you can send it into the websocket so that it can update teh
-      // newsfeed
-      if(this.state.socialClip){
-        // This will check if the user wanted to post the photos that they are posting
-        // right now to the social cal cell as well
-
-        // Since the view for uploading pics on social cal require pics only
-        // we have to make a new formdata
-        const socialFormData = new FormData()
-        if(this.state.fileList.length !== 0){
-          for(let i = 0; i<this.state.fileList.length; i++){
-            socialFormData.append('image['+i+']', this.state.fileList[i].originFileObj)
-          }
-        }
-
-        authAxios.post(`${global.API_ENDPOINT}/mySocialCal/uploadPic/`+ownerId,
-          socialFormData,
-          {headers: {"content-type": "multipart/form-data"}}
-
-        )
-
-        this.openSocialNotification("bottomRight")
-
       }
 
+      // Now you have all the caption and pictures uploaded
 
-      this.setState({
-        fileList: [],
-        caption: ""
+      authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCurSocialCell/`+ownerId,
+        formData,
+        {headers: {"content-type": "multipart/form-data"}}
+      )
+      .then(res => {
+
+
+        // Have a condiation where if there are not social cal items you will
+        // delete and remove the content type post
+        if(res.data.cell.get_socialCalItems === 0) {
+          // If there are no exisiting social cal cell you want to remove it and no need
+          // to update teh coverpic
+
+          // this one you removed the content type already
+
+          // Put a consumer function here
+
+        } else {
+          // This is if there are socialcalcellitems to post
+          if( res.data.coverPicChange){
+            const coverPicForm = new FormData()
+            // Put the id of the cell in first so you can find it later
+            coverPicForm.append("cellId", res.data.cell.id)
+            // Now add the cover pic
+            if(fileList[0].originFileObj){
+              // If this is a new uploaded file
+              coverPicForm.append("coverImage", fileList[0].originFileObj)
+            } else {
+              // If this is just an old one picture
+              coverPicForm.append("coverImage", fileList[0].url.replace(global.IMAGE_ENDPOINT, ""))
+            }
+
+            // Now change the cover picture here
+            authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
+              coverPicForm,
+              {headers: {"content-type": "multipart/form-data"}}
+            )
+
+          }
+
+
+          // udpate newsfeed here
+
+
+
+          WebSocketSocialNewsfeedInstance.addUpdateSocialPost(
+            ownerId,
+            res.data.cell.id,
+            res.data.created
+          )
+
+
+
+        }
+
+
+
+        // Now you will update the cover pic and then send a websocket
+        // that updates the newsfeed
+
+
+        // update the cover pic here
+
+
       })
-
-      this.openNotification("bottomRight")
-      this.props.onCancel()
 
     }
 
@@ -232,28 +354,15 @@ class SocialNewsfeedFormPost extends React.Component{
               {firstName+" "+lastName}
             </span>
 
-              <Switch style={{float:'right', marginRight:'50px', marginRight:'25px'}} onChange={this.onChange} />
-              {
-                (this.state.socialClip)?
-
-                  <span style={{float:'right', marginRight:'25px'}}>
-                    <Alert
-                      message="Clip directly while posting"
-                      description="Clip images from the post to your social calendar"
-                      type="info"
-                      showIcon
-                    />
-                  </span>
-                :
                 <span style={{float:'right', marginRight:'25px'}}>
                   <Alert
-                    message="Post on NewsFeed"
-                    description="Post photos and caption on the newsfeed"
+                    message="Update current day"
+                    description="Update your current day album."
                     type="info"
                     showIcon
                   />
                 </span>
-              }
+
         </div>
         </div>
         <Divider />
@@ -264,7 +373,7 @@ class SocialNewsfeedFormPost extends React.Component{
                 rows = {3}
                 allowClear
                 size="large"
-                maxLength={300}
+                maxLength={250}
                 bordered={false}
                 showCount
                 type = 'text'
