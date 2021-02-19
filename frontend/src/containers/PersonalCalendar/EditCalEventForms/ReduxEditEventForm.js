@@ -34,7 +34,6 @@ const { TextArea } = Input
 // With the props passed in, it makes it pretty 'universal' to all the Fields in the form
 const renderRadioSelect = (field) => {
   // render the radio to pick normal date, weekly, or daily
-  console.log(field)
   const options = [
   { label: 'Non-repeating', value: 'none' },
   { label: 'Weekly', value: 'weekly' },
@@ -54,7 +53,6 @@ const renderRadioSelect = (field) => {
 const renderFriendSelect = (field) => {
   //This will render the list of friends so you can pick which friends you want
   // to share this event with
-  console.log(field)
   return (
     <Select
     mode="multiple"
@@ -73,7 +71,6 @@ const renderFriendSelect = (field) => {
 
 const renderField = (field) => {
   // Typical input field, most use for the title
-  console.log(field.meta)
   return (
     <span>
     <Input style={{width:'50%', height:'30px', fontSize:'15px'}}
@@ -90,7 +87,6 @@ const renderField = (field) => {
 
 const renderLocationField = (field) => {
   //Typical input field, used for the location
-  console.log(field.meta)
   return (
     <span>
     <Input style={{width:'50%',fontSize:'14px'}}
@@ -107,7 +103,6 @@ const renderLocationField = (field) => {
 
 const renderTextArea = (field) => {
   // Text field used for the content
-  console.log(field.meta)
   return (
     <TextArea
     {...field.input}
@@ -125,7 +120,6 @@ const renderTextArea = (field) => {
 const renderStartDate = (field) => {
 
   // This is used for the date selection (to pick the right day)
-  console.log(field)
   return (
     <DatePicker
     onChange = {field.input.onChange}
@@ -138,7 +132,6 @@ const renderStartDate = (field) => {
 }
 
 const renderEndDate = (field) => {
-  console.log(field)
   return (
     <DatePicker
     onChange = {field.input.onChange}
@@ -162,7 +155,6 @@ const renderStartDateTime = (field) => {
   // is just for show
 
   // Used to pick the right start time.
-  console.log(field)
   return (
     <Select
       // {...field.input}
@@ -211,7 +203,6 @@ const renderStartTime = () => {
       )
       start = dateFns.addMinutes(start, 30)
     }
-    console.log(time)
     return time
   }
 
@@ -236,7 +227,6 @@ const validate = values => {
   // As the name implies , it will validate the values of the form.
   const errors = {}
 
-  console.log(values)
   if (!values.title){
     errors.title = "Required"
   }
@@ -272,7 +262,6 @@ class ReduxEditEventForm extends React.Component{
   handleLocation=()=>{
     let longitude=0;
     let latitude=0;
-    console.log("hit")
     if (navigator.geolocation) {
         let success = position => {
         // cache values
@@ -286,7 +275,6 @@ class ReduxEditEventForm extends React.Component{
           },
           () => console.log(this.state.geoLat, this.state.geoLong)
         );
-        console.log(this.state);
       };
 
       function error() {
@@ -294,7 +282,6 @@ class ReduxEditEventForm extends React.Component{
       }
       navigator.geolocation.getCurrentPosition(success, error);
     }
-    console.log(this.state)
   }
 
   capitalize (str) {
@@ -309,7 +296,6 @@ class ReduxEditEventForm extends React.Component{
     // startTime value just the endTime value will be affected
 
 
-    console.log(value)
     change('startTime', value)
 
     // Like every other time related events we have to converted all
@@ -320,7 +306,6 @@ class ReduxEditEventForm extends React.Component{
     let endMin = parseInt(this.props.endTime.substring(3,5))
     let endTime = ''
 
-    console.log(startHour)
 
 
 
@@ -355,8 +340,7 @@ class ReduxEditEventForm extends React.Component{
       if (startMin > endMin){
         endMin = "00"
         endHour = startHour + 1
-        console.log(startHour)
-        console.log(endHour)
+
         if (startHour === 11 && ampm === 'AM'){
           endTime = '12:'+endMin + ' PM'
         } else if (startHour === 23 && ampm === " PM"){
@@ -383,7 +367,6 @@ class ReduxEditEventForm extends React.Component{
       } else if (startMin === endMin ){
         // This is the case where the times are identical to each other
         // REMEMBER THAT ENDHOUR AND STARTHOUR ARE USING THE 1-24 TIME
-        console.log(startHour, endHour)
         if (startHour === 0 && ampm === ' AM' && startMin === 0){
           endTime = '12:30 AM'
         } else if (startHour === 12 && ampm === ' PM' && startMin === 0){
@@ -400,7 +383,6 @@ class ReduxEditEventForm extends React.Component{
                 endTime =  '12:' + endMin + ' AM'
               }
             else {
-              console.log(endHour)
               endHour = startHour +1
                 if (endHour<10){
                     endHour = '0'+endHour
@@ -418,15 +400,12 @@ class ReduxEditEventForm extends React.Component{
             }
           } else if (startMin === 0){
             endMin = '30'
-            console.log(ampm)
             if (endHour<10){
                 endHour = '0'+endHour
             } else {
               if(ampm === ' AM'){
-                console.log('am')
                 endHour = endHour
               } else if (ampm === ' PM'){
-                console.log('pm')
                 if (endHour === 12){
                   endHour = 12
                 }else {
@@ -486,13 +465,9 @@ class ReduxEditEventForm extends React.Component{
   }
 
   handleEndTimeChange = (event) => {
-    console.log(event)
 
     const {change} = this.props
-    return (
-      console.log('endTime')
-      // change('endTime', event)
-    )
+    
   }
 
 
@@ -501,7 +476,6 @@ class ReduxEditEventForm extends React.Component{
      const { change } = this.props
 
      change('repeatCondition', event.target.value)
-     console.log(this.props)
 
   }
 
@@ -519,7 +493,6 @@ class ReduxEditEventForm extends React.Component{
 
     let boxcolor = false
 
-    console.log(repeatCondition)
 
 
     if (repeatCondition === 'weekly'){
@@ -556,7 +529,6 @@ class ReduxEditEventForm extends React.Component{
 
     // So this is where the end Date will be changed if the startDate or endDate
     // seems to be ahead of the endDate
-    console.log(value)
     // if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
     change('endDate', value)
     // }
@@ -567,7 +539,6 @@ class ReduxEditEventForm extends React.Component{
       const friendList = this.props.following
 
       let shareOptions = []
-      console.log(friendList)
 
       for (let friend = 0; friend< friendList.length; friend++ ){
         shareOptions.push(
@@ -586,11 +557,10 @@ class ReduxEditEventForm extends React.Component{
   }
 
   handleFriendChange = (value) => {
-    console.log(value)
+
   }
 
   renderEndTimeSelect = () => {
-    console.log(this.props.startTime)
 
     if (this.props.startTime !== undefined ){
       // So basically the way I am making this will be the same way I made the

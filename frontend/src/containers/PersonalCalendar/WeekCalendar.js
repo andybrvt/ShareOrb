@@ -536,7 +536,6 @@ class WeekCalendar extends React.Component{
 
           // The day index represents the start column and the hour index represent the start row
           let startDate = dateFns.startOfWeek(this.props.currentDate)
-          console.log(toDoStuff)
           const text = "You're host"
           days.push(
 
@@ -555,7 +554,6 @@ class WeekCalendar extends React.Component{
           )
         }
 
-      console.log(days)
 
 
         border.push(
