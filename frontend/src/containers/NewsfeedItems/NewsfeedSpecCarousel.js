@@ -106,7 +106,7 @@ class NewsfeedSpecCarousel extends React.Component{
     };
 
     return (
-      <div onClick = {this.previous} className = 'specLeftRight'>
+      <div className = 'specLeftRight'>
 
         <div class="newsFeedArrowLeft">
           <i style={{color:'#d9d9d9'}}
