@@ -31,7 +31,7 @@ class ChangeCoverPicModal extends React.Component{
           <div className = "coverPicRoll">
             <img
             className = "coverPicImg"
-            src ={`${global.API_ENDPOINT}`+pictureList[i].itemImage}
+            src ={`${global.IMAGE_ENDPOINT}`+pictureList[i].itemImage}
              />
           </div>
         )
