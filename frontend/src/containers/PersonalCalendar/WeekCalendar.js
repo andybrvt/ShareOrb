@@ -231,7 +231,7 @@ class WeekCalendar extends React.Component{
         </div>
       )
       startHour = dateFns.addHours(startHour, 1)
-      {
+      {/*
         (i==7)?
         <div>
           <div style={{ float:"left", clear: "both" }}
@@ -240,7 +240,7 @@ class WeekCalendar extends React.Component{
         </div>
         :
           <div></div>
-      }
+      */}
     }
     return <div className= 'sideTime'> {hour} </div>
   }
@@ -454,6 +454,19 @@ class WeekCalendar extends React.Component{
             onClick = {(e) => this.onDayHourClick(dayIndex, hourIndex)}
             className = {`backWeekCol ${hourIndex % 2 === 0 ? 'hourcellT' : 'hourcellB' }` }
             >
+            { hourIndex === 13 ?
+
+              <div style={{ float:"left", clear: "both" }}
+                  ref={(el) => { this.messagesEnd = el; }}>
+             </div>
+
+             :
+
+             <div>
+             </div>
+
+            }
+
             </div>
 
 
@@ -478,6 +491,7 @@ class WeekCalendar extends React.Component{
       <div className = 'scrollBody'>
       <div className = 'backWeekBody'>
       {border}
+
       </div>
       <div className= 'weekBody'>
           {days}
