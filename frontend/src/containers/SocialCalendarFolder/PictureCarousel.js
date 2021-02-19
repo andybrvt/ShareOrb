@@ -184,10 +184,13 @@ class PictureCarousel extends React.Component{
 
     return (
       <div className = 'socialLeftRight'>
-        <LeftCircleOutlined
-        className = 'socialArrowLeft'
-        onClick = {this.previous} />
-
+        <div class="socialArrowLeft">
+          <i
+            style={{color:'#d9d9d9'}}
+            onClick = {this.previous}
+            class="fas fa-chevron-circle-left">
+          </i>
+        </div>
         <Carousel
         arrows = {true}
         effect = 'null'
@@ -197,10 +200,14 @@ class PictureCarousel extends React.Component{
         </Carousel>
 
 
+        <div class="socialArrowRight">
+          <i
+            style={{color:'#d9d9d9'}}
+            onClick = {this.next}
+            class="fas fa-chevron-circle-right">
+          </i>
+        </div>
 
-        <RightCircleOutlined
-        className = 'socialArrowRight'
-        onClick = {this.next} />
 
 
       </div>

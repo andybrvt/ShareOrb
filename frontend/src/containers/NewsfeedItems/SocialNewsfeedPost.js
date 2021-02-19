@@ -125,23 +125,34 @@ class SocialNewsfeedPost extends React.Component {
   revealPhoto = () => {
     let postId = ""
     let username = ""
-
+    let cellYear = ""
+    let cellMonth = ""
+    let cellDay = ""
+    let location = ""
+    let userUsername = '';
     // THESE ARE FOR THE SOCIAL CAL PICTURES
     // YOU ARE GONNA NEED THE CONTENT TYPE ID
     // THE USER WITH USER NAME
 
-    // IF IT IS SOCAIL CAL CELL THEN IT WILL HOLD PHOTOS
-
-
-
+    // IF IT IS SOCIAL CAL CELL THEN IT WILL HOLD PHOTOS
     let userPostImages = []
 
-    if(this.props.data){
-      if(this.props.data.post){
-        if(this.props.data.post.get_socialCalItems){
+    if(this.props.data) {
+      if(this.props.data.post) {
+        if(this.props.data.post.get_socialCalItems) {
           userPostImages = this.props.data.post.get_socialCalItems;
         }
       }
+      if(this.props.data.owner.username) {
+        userUsername = this.props.data.owner.username
+      }
+      if(this.props.data.post.socialCaldate) {
+        const date = this.props.data.post.socialCaldate.split("-")
+        cellYear = date[0]
+        cellMonth = date[1]
+        cellDay = date[2]
+      }
+      location = this.props.history.location.pathname
 
     }
 
@@ -149,10 +160,14 @@ class SocialNewsfeedPost extends React.Component {
       return(
 
         <div
-          // onClick = {() => this.OnClickPost(postId, username)}
-
-
-          class="imageContainerSingle">
+          onClick={() => this.OnClickPost(
+            userUsername,
+            cellYear,
+            cellMonth,
+            cellDay,
+            location
+          )}
+        className = "postPicCarouselNews">
           <LazyLoad
             once = {true}
             placeholder = {<Spin />}
@@ -179,7 +194,13 @@ class SocialNewsfeedPost extends React.Component {
     } else if(userPostImages.length>1){
       return(
         <div
-        // onClick = {() => this.OnClickPost(postId, username)}
+          onClick={() => this.OnClickPost(
+            userUsername,
+            cellYear,
+            cellMonth,
+            cellDay,
+            location
+          )}
         className = "postPicCarouselNews">
 
 
@@ -574,7 +595,7 @@ class SocialNewsfeedPost extends React.Component {
     let userId = ""
     let postCreatedAt = ""
 
-    if(this.props.data){
+    if(this.props.data) {
       if(this.props.data.owner){
         if(this.props.data.owner.profile_picture){
           profilePic = this.props.data.owner.profile_picture

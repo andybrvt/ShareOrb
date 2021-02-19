@@ -61,9 +61,6 @@ class PostPicCarousel extends React.Component{
     this.props.picIndexChange(a)
   }
 
-
-
-
   render(){
     console.log(this.props)
     let itemList = []
@@ -71,15 +68,14 @@ class PostPicCarousel extends React.Component{
       itemList = this.props.items
     }
 
-
-
     return (
       <div className = 'socialLeftRight'>
 
-        <i class="fas fa-chevron-circle-left"
-          style={{marginLeft:'30px', fontSize:'55px', color:'red'}}
-          className = 'socialArrowLeft'
-          onClick = {this.previous} ></i>
+        <div class="socialArrowLeft">
+          <i style={{color:'#d9d9d9'}}
+            class="fas fa-chevron-circle-left"></i>
+        </div>
+
 
         <Carousel
         arrows = {true}
@@ -90,10 +86,11 @@ class PostPicCarousel extends React.Component{
         </Carousel>
 
 
-        <RightCircleOutlined
-          style={{marginRight:'30px'}}
-          className = 'socialArrowRight'
-          onClick = {this.next} />
+        <div class="socialArrowRight">
+          <i style={{color:'#d9d9d9'}}
+            class="fas fa-chevron-circle-left"></i>
+        </div>
+
 
       </div>
     )

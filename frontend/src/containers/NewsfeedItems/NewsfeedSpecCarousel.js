@@ -16,12 +16,16 @@ class NewsfeedSpecCarousel extends React.Component{
     this.carousel = React.createRef()
   }
 
-  next() {
+  next= e => {
+
     this.carousel.next()
+    e.stopPropagation();
   }
 
-  previous() {
+  previous= e => {
+
     this.carousel.prev()
+    e.stopPropagation();
   }
 
 
@@ -102,10 +106,11 @@ class NewsfeedSpecCarousel extends React.Component{
     };
 
     return (
-      <div onClick = {this.previous} className = 'specLeftRight'>
+      <div className = 'specLeftRight'>
 
         <div class="newsFeedArrowLeft">
           <i style={{color:'#d9d9d9'}}
+            onClick = {this.previous}
             class="fas fa-chevron-circle-left"></i>
         </div>
 
@@ -120,8 +125,9 @@ class NewsfeedSpecCarousel extends React.Component{
 
 
         <div class="newsFeedArrowRight">
-          <i style={{color:'#d9d9d9'}}
-              onClick = {this.next}
+          <i
+            style={{color:'#d9d9d9'}}
+            onClick = {this.next}
             class="fas fa-chevron-circle-right"></i>
         </div>
 
