@@ -41,6 +41,8 @@ import RemoveEventModal from './EditCalEventForms/RemoveEventModal';
 import DetailEditEventForm from './EventPage/DetailEditEventForm';
 import CalendarPopOver from './CalendarPopOver.js';
 import Animate from 'rc-animate';
+import PropTypes from 'prop-types';
+
 import '../SocialCalendarFolder/SocialCalCSS/SocialCalAnim.css';
 const { Group } = Avatar
 
@@ -51,6 +53,9 @@ class WeekCalendar extends React.Component{
   constructor(props) {
         super(props)
         this.myRef = React.createRef()
+        this.wrapperRef = React.createRef()
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this)
     }
 
   state = {
@@ -62,6 +67,9 @@ class WeekCalendar extends React.Component{
     showAddEventModal: false,
     animate:true,
 
+
+    showAddEventPopover: false,
+
     // The temp state will be used to change the position of the selected date
     tempStart: -1,
     tempEnd: -1,
@@ -71,18 +79,46 @@ class WeekCalendar extends React.Component{
     tempTitle: "",
   }
 
+  handleClickOutside(event) {
+    console.log(event.target)
+    console.log(this.wrapperRef)
+    console.log("does this hit")
+
+    // var popoverElement = document.getElementById
+      if (this.wrapperRef && this.wrapperRef.current.contains(event.target)) {
+        this.setState({
+          showAddEventPopover: false,
+          tempStart: -1,
+          tempEnd: -1,
+          tempStartDate: "",
+          tempEndDate: "",
+          tempColor: "blue",
+          tempTitle: "",
+        })
+      }
+    }
+
+   setWrapperRef(node) {
+     this.wrapperRef = node;
+   }
+
   onTempChange = (values) => {
     // This function will be in charge of the on change of the states
     // that will be used to show the tempoaray event
     console.log(values)
+
+
+
     this.setState({
       tempStartDate: values.startDate,
       tempEndDate: values.endDate,
       tempStart: values.startTime,
       tempEnd: values.endTime,
       tempColor: values.eventColor,
-      tempTitle: values.title
+      tempTitle: values.title,
     })
+
+
   }
 
   timeConvert = (time) => {
@@ -216,6 +252,9 @@ class WeekCalendar extends React.Component{
     return '';
   }
   componentDidMount(){
+
+    document.addEventListener('mousedown', this.handleClickOutside);
+
     //I will be pulling the first day of the week to set the week
     const selectedYear = this.props.parameter.year;
     const selectedMonth = this.props.parameter.month;
@@ -239,6 +278,10 @@ class WeekCalendar extends React.Component{
   }
   componentDidUpdate() {
     // this.scrollToBottom();
+  }
+
+  componentWillUnmount() {
+      document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
 
@@ -557,20 +600,11 @@ class WeekCalendar extends React.Component{
 
 
         border.push(
-          <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(cloneDay, cloneHour)}  content={<div>
-            <EditEventPopUp
-            onChange = {this.onTempChange}
-            isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
-            dayNum={dateFns.format(cloneDay, 'd')}
 
-            />
-            </div>}>
 
 
             <div
-            style={{background: this.color(dayIndex, hourIndex)}}
-            onClick = {(e) => this.onDayHourClick(dayIndex, hourIndex)}
+            onClick = {() => this.addEventClick(cloneDay, cloneHour)}
             className = {`backWeekCol ${hourIndex % 2 === 0 ? 'hourcellT' : 'hourcellB' }` }
             >
             { hourIndex === 13 ?
@@ -589,7 +623,7 @@ class WeekCalendar extends React.Component{
             </div>
 
 
-              </Popover>
+
 
         )
         toDoStuff =[]
@@ -612,11 +646,32 @@ class WeekCalendar extends React.Component{
       {border}
 
       </div>
-      <div className= 'weekBody'>
+      <div
+
+        className= 'weekBody'>
+
+
+        <Popover
+          placement="right"
+          visible = {this.state.showAddEventPopover}
+          content={
+          <div>
+            <EditEventPopUp
+            onChange = {this.onTempChange}
+            // isVisible = {this.props.showModal}
+            close = {() => this.props.closeModal()}
+            // dayNum={dateFns.format(cloneDay, 'd')}
+
+            />
+          </div>
+        }>
+
+
         <div
            // key= {item.title}
            className = "weekEvent"
            style = {{
+              display: this.state.tempStart === -1 ? "none" : "",
               gridColumn: this.dayEventIndex(this.state.tempStartDate, this.state.tempEndDate),
               gridRow: this.hourEventIndex(this.state.tempStart, this.state.tempEnd),
               backgroundColor: this.state.tempColor
@@ -640,6 +695,11 @@ class WeekCalendar extends React.Component{
 
         </div>
 
+          </Popover>
+
+
+
+
           {days}
       </div>
       </div>
@@ -656,6 +716,12 @@ class WeekCalendar extends React.Component{
     //  meet those requirements
     // We only need the start and end time tho so all the other fields can
     // be empty
+
+
+    this.setState({
+      showAddEventPopover: true,
+    })
+
     let endDate = ''
     const specificHour = dateFns.getHours(hour)
     const specificMinute = dateFns.getMinutes(hour)
@@ -756,7 +822,9 @@ class WeekCalendar extends React.Component{
     console.log(Avatar)
 
     return (
-    <div className = 'calendarContainer'>
+    <div
+      ref={this.wrapperRef}
+      className = 'calendarContainer'>
 
       <div className = 'mainCalContainer'>
           <div className = 'weekCalendar'>
@@ -834,6 +902,10 @@ class WeekCalendar extends React.Component{
   }
 
 }
+
+WeekCalendar.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 const mapStateToProps = state => {
   return{
