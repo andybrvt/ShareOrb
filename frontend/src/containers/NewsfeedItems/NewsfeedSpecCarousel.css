@@ -35,7 +35,7 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  left: 0%;
+  left: 1%;
   font-size: 45px;
 }
 .postPicCarouselNews .specLeftRight .newsFeedArrowRight {
@@ -43,10 +43,10 @@
   /* background-color: red; */
   top: 50%;
   transform: translateY(-50%);
-  right:0%;
+  right:1%;
   /* right: 100%; */
   /* background:red; */
-  z-index: 10;
+  z-index: 0;
   font-size: 45px;
 }
 
