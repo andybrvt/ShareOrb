@@ -364,6 +364,11 @@ class WeekCalendar extends React.Component{
   // USE THIS
   renderWeekCell(events){
     console.log(events)
+
+    let tempTitle = ""
+    if(this.state.tempTitle){
+      tempTitle = this.state.tempTitle
+    }
     // To explain the grid --> there is a big container that holds many rows and each
     // row is split into 7 columns and 2 rows and there is 24 rows and you will place the
     // information
@@ -619,7 +624,21 @@ class WeekCalendar extends React.Component{
               backgroundColor: this.state.tempColor
             }}
             >
+            <span className="pointerEvent">
+              <span className = 'eventPageTitle pointerEvent' >
+                {tempTitle.substring(0,19)}
+              </span>
+              <br />
+              <span className = 'eventTimeInfo pointerEvent'>
+                {this.state.tempStart}
+                -
+                {this.state.tempEnd}
 
+              </span>
+
+
+
+            </span>
 
         </div>
 
