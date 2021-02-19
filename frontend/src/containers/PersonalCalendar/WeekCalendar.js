@@ -112,8 +112,20 @@ class WeekCalendar extends React.Component{
     this.props.getSelectedDate(newSelectedDate)
     // you want to call the events from the redux instead of the states
     this.props.getEvents()
-
+    this.scrollToBottom();
   }
+
+  scrollToBottom = () => {
+    console.log("hello")
+    if(this.messagesEnd){
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+
+    }
+  }
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
 
   componentWillReceiveProps(newProps){
     console.log(this.props.currentDate, newProps.currentDate)
@@ -215,9 +227,20 @@ class WeekCalendar extends React.Component{
           key = {hour}
         >
         <span className = 'number'>{formattedHour}</span>
+
         </div>
       )
       startHour = dateFns.addHours(startHour, 1)
+      {
+        (i==7)?
+        <div>
+          <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+          </div>
+        </div>
+        :
+          <div></div>
+      }
     }
     return <div className= 'sideTime'> {hour} </div>
   }
@@ -585,7 +608,7 @@ class WeekCalendar extends React.Component{
                 history = {this.props.history}
                 matchPara = {this.props.parameter} />
             </div>
-            
+
             {this.renderDays()}
 
 
