@@ -557,9 +557,9 @@ class ReduxEditEventForm extends React.Component{
     // So this is where the end Date will be changed if the startDate or endDate
     // seems to be ahead of the endDate
     console.log(value)
-    if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
-      change('endDate', value)
-    }
+    // if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
+    change('endDate', value)
+    // }
   }
 
   renderShareListSelect = () => {
@@ -665,7 +665,7 @@ class ReduxEditEventForm extends React.Component{
     render(){
       console.log(this.props)
       // handleSubmit will actually run this.prop.onSubmit
-      const {handleSubmit, pristine, invalid, reset} = this.props;
+      const {onChange, handleSubmit, pristine, invalid, reset} = this.props;
       // For the component of the fields you can create your own stateles function
       // to be put in there but it has to be outisde of your render
       // You can call an <input/> into the field component
@@ -685,7 +685,9 @@ class ReduxEditEventForm extends React.Component{
       // the submit function in the eventeditpopup. so all the values that are in
       // that form even though it might not seem like it from just this file
       return(
-        <form style={{padding:'25px'}}>
+        <form
+          onChange = {this.props.onTempChange}
+          style={{padding:'25px'}}>
             <div className = 'reduxTitle'>
               <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
                 {this.props.dayNum}

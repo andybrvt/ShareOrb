@@ -286,6 +286,7 @@ class EditEventPopUp extends React.Component {
       <div>
         <ReduxEditEventForm
         {...this.props}
+        onTempChange = {this.props.onChange}
         onSubmit = {this.submit}
         initialValues = {this.getInitialValue()}
         onDelete = {this.delete}

@@ -137,6 +137,8 @@ class CalendarPopOver extends React.Component{
           // The start day is in the week but not the end day
           // The start nor end day is in the week (gotta make preperations for this up on the place where the events gets filtered out)
           // The end day is in the week but not the start day
+
+      console.log(start_time, end_time)
       const start = new Date(start_time)
       const end = new Date(end_time)
       const eventDay = new Date(day)

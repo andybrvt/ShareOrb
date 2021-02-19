@@ -52,6 +52,7 @@ class WeekCalendar extends React.Component{
         super(props)
         this.myRef = React.createRef()
     }
+
   state = {
     currentWeek: new Date(),
     selectedDate: new Date(),
@@ -60,17 +61,131 @@ class WeekCalendar extends React.Component{
     activeY: null,
     showAddEventModal: false,
     animate:true,
+
+    // The temp state will be used to change the position of the selected date
+    tempStart: -1,
+    tempEnd: -1,
+    tempStartDate: "",
+    tempEndDate: "",
+    tempColor: "blue",
+    tempTitle: "",
   }
+
+  onTempChange = (values) => {
+    // This function will be in charge of the on change of the states
+    // that will be used to show the tempoaray event
+    console.log(values)
+    this.setState({
+      tempStartDate: values.startDate,
+      tempEndDate: values.endDate,
+      tempStart: values.startTime,
+      tempEnd: values.endTime,
+      tempColor: values.eventColor,
+      tempTitle: values.title
+    })
+  }
+
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+
+    console.log(time)
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    console.log(minutes)
+    console.log(hour)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
+      }
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
+      }
+    }
+
+    const timeBundle = {
+      firstHour: hour,
+      firstMin: minutes
+    }
+
+    return timeBundle
+
+  }
+
+
+  dayEventIndex = (startDate, endDate) => {
+
+    // Simlar to taht of the dayEventIndex in calednarpoppover but the only input
+    // will be that of the startDate
+
+    console.log(new Date(startDate))
+    const curStartDate = new Date(startDate)
+    const curEndDate = new Date(endDate)
+    const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
+    const startWeek = dateFns.startOfWeek(curStartDate)
+    const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
+
+
+    let startIndex = dayDiff+1
+    let endIndex = startIndex+curDayDiff+ 1
+
+    console.log(dayDiff)
+    console.log(curDayDiff)
+
+    return startIndex+'/'+endIndex
+
+
+
+  }
+
+  hourEventIndex = (start_time, end_time ) => {
+
+    // Simlar to that of the hourEvent index of the calendarpopover
+    // but because the inputs are in the format "HH:MM am" there is a bit of a
+    // change
+
+    console.log(start_time, end_time)
+    if(start_time === -1 || end_time === -1){
+      return "-1"
+    } else if(start_time && end_time){
+      const start = this.timeConvert(start_time)
+      const end = this.timeConvert(end_time)
+      console.log(start, end)
+      let startIndex = (start.firstHour * 2) +1
+      if(start.firstMin === 30){
+        startIndex = startIndex +1
+      }
+
+      let endIndex = end.firstHour * 2
+      if(end.firstMin === 30){
+        endIndex = endIndex + 1
+      }
+      endIndex = endIndex +1
+
+      return startIndex+"/"+endIndex
+
+
+    }
+
+
+  }
+
+
+
+
+
   scrollToMyRef = (ref) => {
     if(ref){
     ref.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
-
-
-
-
-
 
   onDayHourClick = (positionX, positionY) => {
 
@@ -123,7 +238,7 @@ class WeekCalendar extends React.Component{
     }
   }
   componentDidUpdate() {
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
 
@@ -441,6 +556,7 @@ class WeekCalendar extends React.Component{
         border.push(
           <Popover trigger="click"  placement="right" onClick = {() => this.addEventClick(cloneDay, cloneHour)}  content={<div>
             <EditEventPopUp
+            onChange = {this.onTempChange}
             isVisible = {this.props.showModal}
             close = {() => this.props.closeModal()}
             dayNum={dateFns.format(cloneDay, 'd')}
@@ -494,6 +610,19 @@ class WeekCalendar extends React.Component{
 
       </div>
       <div className= 'weekBody'>
+        <div
+           // key= {item.title}
+           className = "weekEvent"
+           style = {{
+              gridColumn: this.dayEventIndex(this.state.tempStartDate, this.state.tempEndDate),
+              gridRow: this.hourEventIndex(this.state.tempStart, this.state.tempEnd),
+              backgroundColor: this.state.tempColor
+            }}
+            >
+
+
+        </div>
+
           {days}
       </div>
       </div>
