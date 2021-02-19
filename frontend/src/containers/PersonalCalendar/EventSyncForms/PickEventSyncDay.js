@@ -147,9 +147,6 @@ class PickEventSyncDay extends React.Component{
       }
 
 
-
-
-
       renderSide() {
         // Render side, you would want to start off at 11:30 am and end at 11:30 pm
         const dateFormat = 'h a'

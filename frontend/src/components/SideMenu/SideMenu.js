@@ -32,6 +32,7 @@ import {
   Avatar,
   Button,
   Divider,
+  Tooltip,
   AutoComplete,
   Badge,
   Select,
@@ -196,8 +197,6 @@ class SideMenu extends React.Component {
     }
 
 
-
-
     const { dataSource } = this.state;
     const { Option } = Select;
 
@@ -237,7 +236,6 @@ class SideMenu extends React.Component {
         <div className = "sideMenuContainer">
             <aside>
               <div className = "whiteFixBackground"> </div>
-
                 <div class="side-inner">
                   <div class="logo-wrap">
                     <div class="logo">
@@ -246,76 +244,67 @@ class SideMenu extends React.Component {
                     <span class="logo-text">hareOrb</span>
                   </div>
 
-
-                  <div class="nav-menu">
-                    <ul class="sidebarList">
+                <div class="nav-menu">
+                  <ul class="sidebarList">
+                    <Tooltip placement="right" title={"Home"}>
                       <li
                       onClick = {() => this.onNewsfeedDirect()}
                       >
-                      <a class="d-flex align-items-center">
-                         <HomeOutlined  style={{marginRight:'10px'}}/>
-                         <span class="menu-text">
-                           Home
-                         </span>
-                      </a>
-                       </li>
-                      {/*<li ><a href="/explore" class="d-flex align-items-center"><UserOutlined style={{marginRight:'10px',}}/><span class="menu-text">Explore</span></a></li>
-                    */}
-
-
-                    <li
-                    onClick = {() => this.onChatDirect()}
-                    >
-
-
-
-                      <a class="d-flex">
-                        {
-                          this.props.unseen === 0 ?
-                          <div> </div>
-
-                          :
-
-                          <span class="notification-count">
-                            <span class="notificationInside"> {this.props.unseen} </span>
-                          </span>
-
-                        }
-
-
-                        <i class="far fa-comment"></i>
-                        <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
-                      </a>
-
-
-
-                    </li>
-                      <li
-                      onClick = {() => this.onCalendarDirect()}
-                      >
                         <a class="d-flex align-items-center">
-                          <i style={{marginLeft:'1px'}} class="far fa-calendar-alt"></i>
-                          <span style={{marginLeft:'10px'}} class="menu-text">Personal</span>
-                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
+                           <HomeOutlined  style={{marginRight:'10px'}}/>
+                           <span class="menu-text">
+                             Home
+                           </span>
                         </a>
                       </li>
-
+                    </Tooltip>
+                    <Tooltip placement="right" title={"Messages"}>
                       <li
-                      onClick = {() => this.onProfileDirect()}
+                      onClick = {() => this.onChatDirect()}
                       >
-                      <a class="d-flex align-items-center">
-                        <i style={{marginLeft:'-2px'}} class="fas fa-user-friends"></i>
-                          <span style={{marginLeft:'10px'}}  class="menu-text">Social</span>
-                          <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
-                      </a>
-                      </li>
+                        <a class="d-flex">
+                          {
+                            this.props.unseen === 0 ?
+                            <div> </div>
+                            :
+                            <span class="notification-count">
+                              <span class="notificationInside"> {this.props.unseen} </span>
+                            </span>
+
+                          }
+                            <i class="far fa-comment"></i>
+                            <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
+                          </a>
+                        </li>
+                      </Tooltip>
+
+                      <Tooltip placement="right" title={"Personal Calendar"}>
+                        <li
+                        onClick = {() => this.onCalendarDirect()}
+                        >
+                          <a class="d-flex align-items-center">
+                            <i style={{marginLeft:'1px'}} class="far fa-calendar-alt"></i>
+                            <span style={{marginLeft:'10px'}} class="menu-text">Personal</span>
+                            <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
+                          </a>
+                        </li>
+                      </Tooltip>
+
+                      <Tooltip placement="right" title={"Social Calendar"}>
+                        <li
+                        onClick = {() => this.onProfileDirect()}
+                        >
+                        <a class="d-flex align-items-center">
+                          <i style={{marginLeft:'-2px'}} class="fas fa-user-friends"></i>
+                            <span style={{marginLeft:'10px'}}  class="menu-text">Social</span>
+                            <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
+                        </a>
+                        </li>
+                      </Tooltip>
                     </ul>
                   </div>
                 </div>
-
             </aside>
-
-
         </div>
 
         <div className = "rightContentContainer">
@@ -327,9 +316,6 @@ class SideMenu extends React.Component {
                    class="js-menu-toggle"
                    data-toggle="collapse"
                    >
-                  {/*React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                    onClick: this.toggle,
-                  })*/}
                   <i class="fas fa-bars"></i>
                   </span>
                </div>
@@ -347,7 +333,6 @@ class SideMenu extends React.Component {
                       onSelect={this.onSelect}
                       dropdownClassName="searchBarContainer"
                       class="">
-
                     {/*search bar*/}
                       <Input.Search
                         class="inputSearchCSS"
@@ -376,19 +361,6 @@ class SideMenu extends React.Component {
                     <NotificationsDropDown {...this.props} showNoti={this.state.showDropDown}/>
                   </div>
                 </div>
-                {/*
-                <div className = "headersNotificationContainer">
-                  <Badge
-                  style={{padding:'initial', margin:'initial', }}
-                  dot={true}
-                  count = {this.props.notifications.length}>
-                  <Notifications {...this.props}/>
-                  </Badge>
-
-
-                </div>
-
-                */}
 
                 <div className = "headersProfileContainer">
                   <span class="profileHeader">
@@ -430,21 +402,16 @@ class SideMenu extends React.Component {
                              className = 'miniProfilePic'
                              style={{position:'absolute', top:'25%'}}
                               />
-
                              :
-
                              <Avatar
                              size={'1em'}
                              className = 'miniProfilePic'
                              style={{position:'absolute', top:'25%'}}
                              src={defaultPicture} alt="avatar" />
                          }
-
                          </span>
-
                      </Dropdown>
                      </span>
-
                 </div>
             </div>
 
