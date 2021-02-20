@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../PersonalCalCSS/EventSync.css';
-import { DatePicker, TimePicker, Button, Input, Select, Radio, Card, Row, Col, notification } from 'antd';
+import { DatePicker, TimePicker, Avatar, Button, Input, Select, Radio, Card, Row, Col, notification } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
@@ -1232,7 +1232,9 @@ class PickEventSyncWeek extends React.Component{
 
           <div class="rightEventSyncContainer">
             <div class="rightTopEventSync">
-              <PickEventSyncUserProfileCard data = {this.props.userFriend}/>
+              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+
             </div>
             <div class="rightBottomEventSync">
               <PickEventSyncForm
