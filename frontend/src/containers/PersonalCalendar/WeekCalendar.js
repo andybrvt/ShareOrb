@@ -290,6 +290,7 @@ class WeekCalendar extends React.Component{
   }
   componentDidUpdate() {
     // this.scrollToBottom();
+    this.scrollToEvent()
   }
 
   componentWillUnmount() {
@@ -680,6 +681,7 @@ class WeekCalendar extends React.Component{
 
 
         <div
+          ref={(el) => { this.eventEnd = el; }}
            // key= {item.title}
            className = "weekEvent"
            style = {{
