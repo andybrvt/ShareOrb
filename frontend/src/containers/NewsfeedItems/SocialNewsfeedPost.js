@@ -323,7 +323,7 @@ class SocialNewsfeedPost extends React.Component {
     }
     console.log(picIndex)
 
-
+    curPic = curPic.replace(global.POSTLIST_SPEC, "")
     console.log(curPic)
     authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`, {
       clipPic: curPic,
