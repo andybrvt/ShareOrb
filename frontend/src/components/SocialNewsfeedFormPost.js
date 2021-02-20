@@ -226,7 +226,8 @@ class SocialNewsfeedFormPost extends React.Component{
             formData.append("image[" + i +']', fileList[i].originFileObj)
           } else {
             // If this is just an old one picture
-            formData.append("image[" + i +']', fileList[i].url.replace(global.IMAGE_ENDPOINT, ""))
+            // formData.append("image[" + i +']', fileList[i].url.replace(global.IMAGE_ENDPOINT, ""))
+            formData.append("image[" + i +']', fileList[i].url.replace(global.POSTLIST_SPEC, ""))
           }
         }
       }
