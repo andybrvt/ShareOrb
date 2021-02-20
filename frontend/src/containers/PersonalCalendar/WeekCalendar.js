@@ -94,7 +94,7 @@ class WeekCalendar extends React.Component{
           tempStartDate: -1,
           tempEndDate: -1,
           tempColor: "blue",
-          // tempTitle: "",
+          tempTitle: "",
         })
       }
     }
@@ -154,6 +154,19 @@ class WeekCalendar extends React.Component{
 
 
 
+  }
+
+  onClearEditTextInfo = () => {
+    // This is used to clear out the events whne you submit
+    this.setState({
+      showAddEventPopover: false,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: -1,
+      tempEndDate: -1,
+      tempColor: "blue",
+      tempTitle: "",
+    })
   }
 
   timeConvert = (time) => {
@@ -737,8 +750,9 @@ class WeekCalendar extends React.Component{
           <div>
             <EditEventPopUp
             onChange = {this.onTempChange}
+
             // isVisible = {this.props.showModal}
-            close = {() => this.props.closeModal()}
+            close = {this.onClearEditTextInfo}
             // dayNum={dateFns.format(cloneDay, 'd')}
 
             />

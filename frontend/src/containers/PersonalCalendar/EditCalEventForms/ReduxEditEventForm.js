@@ -74,9 +74,9 @@ const renderField = (field) => {
   return (
     <span>
     <Input style={{width:'50%', height:'30px', fontSize:'15px'}}
-    // {...field.input}
-    
-    onChange = {field.input.onChange}
+    {...field.input}
+
+    // onChange = {field.input.onChange}
     type = {field.type}
     placeholder= {field.placeholder}
     style={{display:'inline-block'}}
@@ -92,8 +92,8 @@ const renderLocationField = (field) => {
   return (
     <span>
     <Input style={{width:'50%',fontSize:'14px'}}
-    // {...field.input}
-    onChange = {field.input.onChange}
+    {...field.input}
+    // onChange = {field.input.onChange}
 
     type = {field.type}
     placeholder= {field.placeholder}
@@ -109,8 +109,8 @@ const renderTextArea = (field) => {
   // Text field used for the content
   return (
     <TextArea
-    // {...field.input}
-    onChange = {field.input.onChange}
+    {...field.input}
+    // onChange = {field.input.onChange}
     type = {field.type}
     placeholder= {field.placeholder}
     rows = {2}
@@ -636,6 +636,13 @@ class ReduxEditEventForm extends React.Component{
   }
 
 
+  newHandleSubmit = (value) => {
+    this.props.handleSubmit(value)
+
+    this.props.reset('edit event')
+  }
+
+
 
     render(){
       console.log(this.props)
@@ -777,39 +784,23 @@ class ReduxEditEventForm extends React.Component{
 
             </div>
 
-            { this.props.addEvent ?
+
               <div className = 'reduxButton' style={{padding:'10px'}}>
               <Button
               onClick = {reset}
               >
               Clear
               </Button>
-              <Button
-              type = 'primary'
-              onClick = {handleSubmit}
-              style = {{left: '10px', fontSize: '15px'}}
-              disabled = {pristine || invalid || this.onRed()}
-              >Add</Button>
-              </div>
-
-              :
-
-              <div className = 'reduxButton'>
-              <Button
-              onClick = {(e) => this.props.onDelete(e,this.props.calendarId)}
-              >
-              Delete
-              </Button>
 
               <Button
               type = 'primary'
-              onClick = {handleSubmit}
+              onClick = {this.newHandleSubmit}
               style = {{left: '10px', fontSize: '15px'}}
               disabled = {pristine || invalid || this.onRed()}
               >Save</Button>
               </div>
 
-             }
+
 
         </form>
       )
