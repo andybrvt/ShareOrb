@@ -164,7 +164,7 @@ class EventModal extends React.Component {
         eventColor: values.event_color,
         person: shareList,
         invited: inviteList,
-        repeatCondition: values.repeatCondition,
+      repeatCondition: values.repeatCondition,
         host: this.props.id,
       }
       CalendarEventWebSocketInstance.sendEvent(createSharedEventObject);
@@ -189,6 +189,8 @@ class EventModal extends React.Component {
           visible={this.props.visible}
           footer = {false}
           width  = {600}
+          bodyStyle={{height:'550px'}}
+          centered
         >
         <ReactAddEventForm
         friendList = {this.props.friendList}

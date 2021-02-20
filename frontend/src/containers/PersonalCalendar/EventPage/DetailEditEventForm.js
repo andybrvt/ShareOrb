@@ -596,6 +596,7 @@ class DetailEditEventForm extends React.Component{
 
 
   onCancelEventClick = () => {
+    console.log("made this")
     this.setState({
       visible: false
     })
@@ -606,8 +607,6 @@ class DetailEditEventForm extends React.Component{
     const friendList = this.props.friendList
     console.log(this.props)
     console.log(this.state)
-
-
     const {handleSubmit, pristine, invalid, reset} = this.props;
 
     let eventType = ""
@@ -649,10 +648,8 @@ class DetailEditEventForm extends React.Component{
           footer={
             <div>{ this.props.addEvent ?
               <div className = 'reduxButton' style={{padding:'10px'}}>
-              <Button
-              onClick = {reset}
-              >
-              Clear
+              <Button onClick={() =>this.props.onClose()}>
+              Cancel
               </Button>
               <Button
               type = 'primary'
@@ -663,20 +660,33 @@ class DetailEditEventForm extends React.Component{
               </div>
 
               :
+              <div>
+                <div style={{float:'left', marginRight:'50px'}}>
+                  <Button
+                    type="primary"
+                    danger
+                    onClick = {() => this.props.onDelete(eventId, eventType)}
+                  >
+                  Delete Event
+                  </Button>
+                </div>
 
-              <div style={{float:'right', marginRight:'50px'}}>
-              <Button
-              onClick = {() => this.props.onDelete(eventId, eventType)}
-              >
-              Delete
-              </Button>
-              <Button
-              type = 'primary'
-              onClick = {handleSubmit}
-              style = {{left: '20px', fontSize: '15px'}}
-              disabled = {pristine || invalid || this.onRed()}
-              >Update</Button>
-              </div>
+
+                <div style={{float:'right', marginRight:'50px'}}>
+
+                  <Button onClick={() =>this.props.onClose()}>
+                  Cancel
+                  </Button>
+                  <Button
+                  type = 'primary'
+                  onClick = {handleSubmit}
+                  style = {{left: '20px', fontSize: '15px'}}
+                  disabled = {pristine || invalid || this.onRed()}
+                  >Update</Button>
+                  </div>
+
+
+                </div>
 
              }</div>
 
@@ -780,7 +790,7 @@ class DetailEditEventForm extends React.Component{
               name = 'content'
               component= {renderTextArea}
               type= 'text'
-              placeholder = 'Description'
+              placeholder = 'Event Description'
               />
             </div>
 
