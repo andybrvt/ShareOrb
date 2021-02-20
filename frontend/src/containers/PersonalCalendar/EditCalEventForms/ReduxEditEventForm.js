@@ -74,7 +74,9 @@ const renderField = (field) => {
   return (
     <span>
     <Input style={{width:'50%', height:'30px', fontSize:'15px'}}
-    {...field.input}
+    // {...field.input}
+    
+    onChange = {field.input.onChange}
     type = {field.type}
     placeholder= {field.placeholder}
     style={{display:'inline-block'}}
@@ -90,7 +92,9 @@ const renderLocationField = (field) => {
   return (
     <span>
     <Input style={{width:'50%',fontSize:'14px'}}
-    {...field.input}
+    // {...field.input}
+    onChange = {field.input.onChange}
+
     type = {field.type}
     placeholder= {field.placeholder}
     className = 'box'/>
@@ -105,7 +109,8 @@ const renderTextArea = (field) => {
   // Text field used for the content
   return (
     <TextArea
-    {...field.input}
+    // {...field.input}
+    onChange = {field.input.onChange}
     type = {field.type}
     placeholder= {field.placeholder}
     rows = {2}
@@ -467,7 +472,7 @@ class ReduxEditEventForm extends React.Component{
   handleEndTimeChange = (event) => {
 
     const {change} = this.props
-    
+
   }
 
 

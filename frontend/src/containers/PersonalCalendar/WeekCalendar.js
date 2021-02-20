@@ -94,7 +94,7 @@ class WeekCalendar extends React.Component{
           tempStartDate: -1,
           tempEndDate: -1,
           tempColor: "blue",
-          tempTitle: "",
+          // tempTitle: "",
         })
       }
     }
@@ -106,8 +106,40 @@ class WeekCalendar extends React.Component{
   onTempChange = (values) => {
     // This function will be in charge of the on change of the states
     // that will be used to show the tempoaray event
+    console.log(this.props.parameter)
     console.log(values)
 
+    // The values that come in you have to check if they fall within the
+    // week of the current week. So what you have to do is get teh date
+    // from the url and then check it on the start date to see if it fall
+    // within if not then you do a push
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const startWeekDay = this.props.parameter.day;
+
+    const curWeek = [selectedYear, selectedMonth, startWeekDay]
+    const curStartSelectedDate = dateFns.startOfWeek(new Date(curWeek))
+
+    // now check if the selected date falls wtih the cur week
+
+    if(values.startDate){
+      const pickedDate = new Date(values.startDate);
+
+      const startPickedDate = dateFns.startOfWeek(pickedDate)
+
+      if(!dateFns.isSameWeek(curStartSelectedDate, pickedDate)){
+        const pickedYear = dateFns.getYear(startPickedDate)
+        const pickedMonth= dateFns.getMonth(startPickedDate)+1
+        const pickedDay = dateFns.getDate(startPickedDate)
+
+
+        this.props.history.push('/personalcalendar/w/'+pickedYear+'/'+pickedMonth+'/'+pickedDay)
+      }
+
+    }
+
+    console.log(curStartSelectedDate)
+    // Now you will get the start of the week
 
 
     this.setState({
@@ -119,6 +151,7 @@ class WeekCalendar extends React.Component{
       tempColor: values.eventColor,
       tempTitle: values.title,
     })
+
 
 
   }
@@ -308,6 +341,8 @@ class WeekCalendar extends React.Component{
       const year = dateFns.getYear(newProps.currentDate)
       const month = dateFns.getMonth(newProps.currentDate)
       const day = dateFns.getDate(newProps.currentDate)
+
+
       this.props.history.push('/personalcalendar/w/'+year+'/'+(month+1)+'/'+day)
     }
   }
@@ -318,8 +353,14 @@ class WeekCalendar extends React.Component{
   // the start week to the end of the start week and start of the week
   renderHeader() {
     const dateFormat = 'MMMM yyyy'
-    const startWeek = dateFns.startOfWeek(this.props.currentDate)
-    const endWeek = dateFns.endOfWeek(this.props.currentDate)
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const startWeekDay = this.props.parameter.day;
+
+    const curWeek = [selectedYear, selectedMonth, startWeekDay]
+    const curStartSelectedDate = new Date(curWeek)
+    const startWeek = dateFns.startOfWeek(curStartSelectedDate)
+    const endWeek = dateFns.endOfWeek(curStartSelectedDate)
     return(
 
       <div className = 'header'>
@@ -351,8 +392,15 @@ class WeekCalendar extends React.Component{
     const dayFormat = 'd'
     const days = []
 
-    let startDate = dateFns.startOfWeek(this.props.currentDate)
-    let cloneStartDate = dateFns.startOfWeek(this.props.currentDate)
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const startWeekDay = this.props.parameter.day;
+
+    const curWeek = [selectedYear, selectedMonth, startWeekDay]
+    const curStartSelectedDate = new Date(curWeek)
+
+    let startDate = dateFns.startOfWeek(curStartSelectedDate)
+    let cloneStartDate = dateFns.startOfWeek(curStartSelectedDate)
     for (let i = 0; i<7; i++){
       const cloneCloneStartDate = cloneStartDate
       days.push(
@@ -389,7 +437,17 @@ class WeekCalendar extends React.Component{
   renderSide() {
     const dateFormat = 'h a'
     const hour = []
-    let startHour = dateFns.addHours(dateFns.startOfDay(this.props.currentDate),1)
+
+
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const startWeekDay = this.props.parameter.day;
+
+    const curWeek = [selectedYear, selectedMonth, startWeekDay]
+    const curStartSelectedDate = new Date(curWeek)
+
+
+    let startHour = dateFns.addHours(dateFns.startOfDay(curStartSelectedDate),1)
     for (let i = 0; i<23; i++){
       const formattedHour = dateFns.format(startHour, dateFormat)
       hour.push(
@@ -434,9 +492,17 @@ class WeekCalendar extends React.Component{
     // 24 items
     const currentWeek = this.state.currentWeek;
     const selectedDate = this.props.currentDate;
+
+
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const startWeekDay = this.props.parameter.day;
+
+    const curWeek = [selectedYear, selectedMonth, startWeekDay]
+    const curStartSelectedDate = new Date(curWeek)
     // this will give you the first day of the week
-    const weekStart = dateFns.startOfWeek(selectedDate);
-    const weekEnd = dateFns.endOfWeek(selectedDate);
+    const weekStart = dateFns.startOfWeek(curStartSelectedDate);
+    const weekEnd = dateFns.endOfWeek(curStartSelectedDate);
 
     const hourFormat = 'h a'
     const dayFormat = 'd MMMM'
