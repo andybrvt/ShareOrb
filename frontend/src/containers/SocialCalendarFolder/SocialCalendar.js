@@ -780,7 +780,7 @@ class SocialCalendar extends React.Component{
               {headers: {"content-type": "multipart/form-data"}}
             ).then(res => {
               console.log(res.data)
-
+              // some stuff here
               if(res.data.created === "true"){
                 console.log(res.data)
                 this.props.addSocialCell(res.data.socialCell)
