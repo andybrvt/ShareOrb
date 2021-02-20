@@ -53,6 +53,7 @@ class WeekCalendar extends React.Component{
   constructor(props) {
         super(props)
         this.myRef = React.createRef()
+        this.eventRef = React.createRef()
         this.wrapperRef = React.createRef()
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this)
@@ -73,8 +74,8 @@ class WeekCalendar extends React.Component{
     // The temp state will be used to change the position of the selected date
     tempStart: -1,
     tempEnd: -1,
-    tempStartDate: "",
-    tempEndDate: "",
+    tempStartDate: -1,
+    tempEndDate: -1,
     tempColor: "blue",
     tempTitle: "",
   }
@@ -90,8 +91,8 @@ class WeekCalendar extends React.Component{
           showAddEventPopover: false,
           tempStart: -1,
           tempEnd: -1,
-          tempStartDate: "",
-          tempEndDate: "",
+          tempStartDate: -1,
+          tempEndDate: -1,
           tempColor: "blue",
           tempTitle: "",
         })
@@ -110,10 +111,11 @@ class WeekCalendar extends React.Component{
 
 
     this.setState({
-      tempStartDate: values.startDate,
-      tempEndDate: values.endDate,
+
       tempStart: values.startTime,
       tempEnd: values.endTime,
+      tempStartDate: values.startDate,
+      tempEndDate: values.endDate,
       tempColor: values.eventColor,
       tempTitle: values.title,
     })
@@ -160,22 +162,26 @@ class WeekCalendar extends React.Component{
 
     // Simlar to taht of the dayEventIndex in calednarpoppover but the only input
     // will be that of the startDate
+     if(startDate === -1 || endDate === -1){
+       return "-1"
+     } else {
+       console.log(new Date(startDate))
+       const curStartDate = new Date(startDate)
+       const curEndDate = new Date(endDate)
+       const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
+       const startWeek = dateFns.startOfWeek(curStartDate)
+       const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
 
-    console.log(new Date(startDate))
-    const curStartDate = new Date(startDate)
-    const curEndDate = new Date(endDate)
-    const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
-    const startWeek = dateFns.startOfWeek(curStartDate)
-    const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
 
+       let startIndex = dayDiff+1
+       let endIndex = startIndex+curDayDiff+ 1
 
-    let startIndex = dayDiff+1
-    let endIndex = startIndex+curDayDiff+ 1
+       console.log(dayDiff)
+       console.log(curDayDiff)
 
-    console.log(dayDiff)
-    console.log(curDayDiff)
+       return startIndex+'/'+endIndex
 
-    return startIndex+'/'+endIndex
+     }
 
 
 
@@ -274,6 +280,12 @@ class WeekCalendar extends React.Component{
     if(this.messagesEnd){
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
 
+    }
+  }
+
+  scrollToEvent = () => {
+    if(this.eventEnd){
+      this.eventEnd.scrollIntoView({ behavior: "smooth" })
     }
   }
   componentDidUpdate() {
@@ -678,16 +690,16 @@ class WeekCalendar extends React.Component{
             }}
             >
             <span className="pointerEvent">
-              <span className = 'eventPageTitle pointerEvent' >
+              <div className = 'eventPageTitle pointerEvent' >
                 {tempTitle.substring(0,19)}
-              </span>
-              <br />
-              <span className = 'eventTimeInfo pointerEvent'>
+              </div>
+
+              <div className = 'eventTimeInfo pointerEvent'>
                 {this.state.tempStart}
                 -
                 {this.state.tempEnd}
 
-              </span>
+              </div>
 
 
 
