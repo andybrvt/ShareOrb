@@ -59,6 +59,7 @@ class Message(models.Model):
     eventStartTime = models.DateTimeField(default = timezone.now, blank = True)
     eventEndTime = models.DateTimeField(default = timezone.now, blank = True)
     eventPersons=models.IntegerField(blank = True, null = True)
+    eventId = models.IntegerField(default = 0, blank = False)
 
     class Meta:
         ordering = ['-created_at']
