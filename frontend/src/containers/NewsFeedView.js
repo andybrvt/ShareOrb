@@ -38,6 +38,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
+import { authAxios } from '../components/util';
+
 // Function: Holds Forms3 and the Infinite scroll
 class NewsFeedView extends React.Component {
 
@@ -77,9 +79,23 @@ class NewsFeedView extends React.Component {
   };
 
   hideModal = () => {
-    this.setState({
-      firstTimeModal: false,
-    });
+
+		let curId = ""
+		if(this.props.curId){
+			curId = this.props.curId
+		}
+
+		authAxios.post(`${global.API_ENDPOINT}/userprofile/unShowIntialInstructions/`+curId)
+		.then(res => {
+			// Now just change the showIntialInstructions to false
+			this.props.unShowIntialInstructions(res.data)
+
+		})
+
+
+
+
+
   };
 
 	initialiseSocialNewsfeed(){
@@ -174,6 +190,12 @@ class NewsFeedView extends React.Component {
 		console.log(cellYear, cellMonth, cellDay)
 		const location = this.props.location.pathname;
 
+
+		let showIntialInstructions = false;
+		if(this.props.showIntialInstructions){
+			showIntialInstructions = this.props.showIntialInstructions
+		}
+
 		return (
 			<div className = "newsfeedParentParenet">
 
@@ -184,7 +206,7 @@ class NewsFeedView extends React.Component {
 				<div className = "newsfeedParent">
 					<Modal
 						 title="Welcome to ShareOrb!"
-						 visible={this.state.firstTimeModal}
+						 visible={showIntialInstructions}
 						 onOk={this.hideModal}
 						 okText="Let's Go!"
 						 width={625}
@@ -227,7 +249,7 @@ class NewsFeedView extends React.Component {
 						<Checkbox
 	            checked={this.state.checked}
 	            onChange={this.onChange}>
-	            Don't show again
+	            Cool, I got it!
 	          </Checkbox>
 					</div>
 
@@ -341,11 +363,13 @@ class NewsFeedView extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
+		curId: state.auth.id,
 		currentUser: state.auth.username,
 		currentProfile: state.explore.profile,
 		following: state.auth.following,
 		sentRequestList: state.auth.sentRequestList,
 		requestList: state.auth.requestList,
+		showIntialInstructions: state.auth.showIntialInstructions
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -353,7 +377,8 @@ const mapDispatchToProps = dispatch => {
   return {
     grabUserCredentials: () => dispatch(actions.grabUserCredentials()),
 		updateFollowing: (followingList) => dispatch(actions.updateFollowing(followingList)),
-		updateSentRequestList: (sentRequestList) => dispatch(actions.updateSentRequestList(sentRequestList))
+		updateSentRequestList: (sentRequestList) => dispatch(actions.updateSentRequestList(sentRequestList)),
+		unShowIntialInstructions: (bool) => dispatch(actions.unShowIntialInstructions(bool))
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NewsFeedView);

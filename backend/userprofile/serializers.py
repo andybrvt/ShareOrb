@@ -83,7 +83,8 @@ class UserSerializer(serializers.ModelSerializer):
          'private',
          'requested',
          'get_sent_follow_request',
-         'get_follow_request'
+         'get_follow_request',
+         'showIntialInstructions',
          )
     def to_representation(self, instance):
         data = super().to_representation(instance)

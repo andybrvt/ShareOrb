@@ -34,7 +34,8 @@ export const addCredentials = (
    dob,
    privatePro,
    sentRequestList,
-   requestList
+   requestList,
+   showIntialInstructions,
  ) => {
    console.log(localStorage)
   console.log(username, id)
@@ -54,7 +55,8 @@ export const addCredentials = (
     dob: dob,
     private: privatePro,
     sentRequestList: sentRequestList,
-    requestList:requestList
+    requestList:requestList,
+    showIntialInstructions: showIntialInstructions
   };
 };
 
@@ -93,6 +95,7 @@ export const logout = () => {
   localStorage.removeItem('private')
   localStorage.removeItem('sentRequestList')
   localStorage.removeItem('requestList')
+  localStorage.removeItem('showIntialInstructions')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -203,6 +206,7 @@ export const grabUserCredentials = () => {
         const privatePro = res.data.private;
         const sentRequestList = res.data.get_sent_follow_request;
         const requestList = res.data.get_follow_request;
+        const showIntialInstructions = res.data.showIntialInstructions;
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
         localStorage.setItem('friends', friends);
@@ -218,6 +222,7 @@ export const grabUserCredentials = () => {
         localStorage.setItem('private', privatePro)
         localStorage.setItem('sentRequestList', sentRequestList)
         localStorage.setItem('requestList', requestList)
+        localStorage.setItem('showIntialInstructions', showIntialInstructions)
         dispatch(addCredentials(
            res.data.username,
            res.data.id,
@@ -233,7 +238,8 @@ export const grabUserCredentials = () => {
            res.data.dob,
            res.data.private,
            res.data.get_sent_follow_request,
-           res.data.get_follow_request
+           res.data.get_follow_request,
+           res.data.showIntialInstructions
          ));
          {/*when it times out*/}
         // dispatch(checkAuthTimeout(100000));
@@ -417,5 +423,12 @@ export const updateSentRequestList = (sentRequestList) => {
   return {
     type: actionTypes.UPDATE_SENT_REQUEST_LIST,
     sentRequestList: sentRequestList
+  }
+}
+
+export const unShowIntialInstructions = (bool) => {
+  return {
+    type: actionTypes.UNSHOW_INITIAL_INSTRUCTIONS,
+    bool: bool
   }
 }

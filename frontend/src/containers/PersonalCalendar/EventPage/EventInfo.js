@@ -462,7 +462,8 @@ class EventInfo extends React.Component{
     // Now you will run the redux to replace the pic, you just have to change the one
     // in the page
     console.log(res.data)
-    this.props.updateEventBackground(res.data.backgroundImg.substring(21,))
+    // this.props.updateEventBackground(res.data.backgroundImg.substring(21,))
+    this.props.updateEventBackground(res.data.backgroundImg)
   })
 
 

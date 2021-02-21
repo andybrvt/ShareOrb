@@ -674,3 +674,16 @@ class onUnsendRequestView(APIView):
 
         sentRequestList = hostObj['get_sent_follow_request']
         return Response(sentRequestList)
+
+
+class unShowIntialInstructions(APIView):
+    # Used for unshowing the initial instructions on newsfeed
+
+    def post(self, request, id, *args, **kwargs):
+
+        # this will get teh user
+        curUser = get_object_or_404(models.User, id = id)
+
+        curUser.showIntialInstructions = False
+        curUser.save()
+        return Response(curUser.showIntialInstructions)
