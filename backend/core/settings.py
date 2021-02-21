@@ -34,6 +34,10 @@ DEBUG = True
 #  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
 #  ]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ca993edd6707e59f51f528d487a34b548e42ef18
 ALLOWED_HOSTS = []
 
 # Application definition

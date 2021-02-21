@@ -83,6 +83,8 @@ class User(AbstractUser):
     # of both poeple getting a request like ManyToManyField
     requested = models.ManyToManyField("self", blank = True, related_name = "private_approved")
 
+    # This will be used to show the instructions at the beginning of the login
+    showIntialInstructions = models.BooleanField(default = True)
     def get_posts(self):
 
         return Post.objects.filter(user=self).values_list('id', flat=True)

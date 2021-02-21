@@ -77,5 +77,6 @@ urlpatterns = [
 	path('onFollow', views.onFollowView.as_view(), name = "follow_user"),
 	path('onUnfollow', views.onUnfollowView.as_view(), name = "unfollow_user"),
 	path('sendFollowRequest', views.onSentRequestView.as_view(), name = 'send_follow_request'),
-	path('unsendFollowRequest', views.onUnsendRequestView.as_view(), name = 'unsend_follow_request')
+	path('unsendFollowRequest', views.onUnsendRequestView.as_view(), name = 'unsend_follow_request'),
+	path('unShowIntialInstructions/<slug:id>', views.unShowIntialInstructions.as_view(), name = "unshow_intial_instruction")
 ]

@@ -20,7 +20,8 @@ const initialState = {
   dob: "",
   private: false,
   sentRequestList: [],
-  requestList: []
+  requestList: [],
+  showIntialInstructions: false,
 };
 
 const authStart = (state, action) => {
@@ -71,7 +72,8 @@ const addCredentials = (state, action) => {
     dob: action.dob,
     private: action.private,
     sentRequestList: action.sentRequestList,
-    requestList: action.requestList
+    requestList: action.requestList,
+    showIntialInstructions: action.showIntialInstructions
   });
 };
 
@@ -150,6 +152,12 @@ const updateSentRequestList = (state, action) => {
   })
 }
 
+const unShowIntialInstructions = (state, action) => {
+  return updateObject(state, {
+    showIntialInstructions: action.bool
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -184,6 +192,8 @@ const reducer = (state = initialState, action) => {
       return authUpdateFollowers(state, action);
     case actionTypes.UPDATE_SENT_REQUEST_LIST:
       return updateSentRequestList(state, action);
+    case actionTypes.UNSHOW_INITIAL_INSTRUCTIONS:
+      return unShowIntialInstructions(state, action);
     default:
       return state;
   }
