@@ -167,7 +167,7 @@ class PersonalProfileHeader extends React.Component{
         this.props.history.push("/chat/"+res.data.curChat)
       } else {
         // When there is  not chat that exist
-    
+
         this.props.setMessages([], res.data.curChat)
         this.props.history.push("/chat/nosnewchat")
 
@@ -542,7 +542,7 @@ class PersonalProfileHeader extends React.Component{
                 {this.capitalize(firstName)} {this.capitalize(lastName)}
               </span>
               <br />
-              <span class="profileUserName">{"@"+this.props.username}</span>
+              <span class="profileUserName">{"@"+username}</span>
               <div class="profileBio">{bio}</div>
 
             </div>
