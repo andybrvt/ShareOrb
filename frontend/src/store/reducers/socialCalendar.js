@@ -128,6 +128,7 @@ const updateSocialEventPage = (state, action) => {
 
 const updateSocialEventBackground = (state, action) => {
   // IMPROVED
+  console.log(action)
   return updateObject(state, {
     selectedSocialEvent: {
       ...state.selectedSocialEvent,
