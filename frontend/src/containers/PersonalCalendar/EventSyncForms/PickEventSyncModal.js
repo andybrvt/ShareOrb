@@ -124,7 +124,7 @@ class PickEventSyncModal extends React.Component{
               new Date (this.props.maxDate),
               new Date (this.props.minDate)
             ) === 1 ?
-              <PickEventSyncDay />
+              <PickEventSyncDay {...this.props}/>
                 :
               <PickEventSyncWeek />
             }

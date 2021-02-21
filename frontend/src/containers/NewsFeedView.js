@@ -15,13 +15,29 @@ import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
 import { Link } from 'react-router-dom';
-import { Row, Col, Card, Upload, Divider, Modal, Checkbox,
-	 Avatar, Statistic, Button} from 'antd';
-import { InboxOutlined, UserOutlined } from '@ant-design/icons';
+import { Row, Col, Card, Upload, Divider, Checkbox,
+	 Avatar, Statistic, Button, Modal, Timeline} from 'antd';
 import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
 import Spinner from './Spinner.js';
+import {
+  CalendarOutlined,
+  HeartTwoTone,
+  HomeOutlined,
+	HomeTwoTone,
+  InboxOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  SearchOutlined,
+  SettingOutlined,
+  SmileOutlined,
+  UploadOutlined,
+  NotificationOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from '@ant-design/icons';
 // Function: Holds Forms3 and the Infinite scroll
 class NewsFeedView extends React.Component {
 
@@ -30,6 +46,8 @@ class NewsFeedView extends React.Component {
 		id: '',
 		postShow:false,
 		eventShow:false,
+		checked:false,
+		firstTimeModal:true,
 	}
 
 	constructor(props){
@@ -38,6 +56,31 @@ class NewsFeedView extends React.Component {
 		this.initialiseSocialNewsfeed()
 
 	}
+
+
+	toggleChecked = () => {
+    this.setState({ checked: !this.state.checked });
+  };
+
+	onChange = e => {
+    console.log('checked = ', e.target.checked);
+    this.setState({
+      checked: e.target.checked,
+    });
+  };
+
+
+	showModal = () => {
+    this.setState({
+      firstTimeModal: true,
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      firstTimeModal: false,
+    });
+  };
 
 	initialiseSocialNewsfeed(){
 		// use to initialize the social newsfeed
@@ -139,6 +182,60 @@ class NewsFeedView extends React.Component {
 
 
 				<div className = "newsfeedParent">
+					<Modal
+						 title="Welcome to ShareOrb!"
+						 visible={this.state.firstTimeModal}
+						 onOk={this.hideModal}
+						 okText="Let's Go!"
+						 width={625}
+						 centered
+						 closable={false}
+          	// cancelText="取消"
+							okButtonProps={{ disabled: !this.state.checked }}
+						cancelButtonProps={{ style: { display: 'none' } }}
+						 >
+	        <div class="firstTimeModalText">
+						We believe every day is special. Create a unique album each day to save memories in your life!
+						Let's dive into some of the features:
+						<br/>
+						<br/>
+
+							<Timeline style={{marginLeft:'25px'}}>
+								<Timeline.Item>
+									<i style={{color:'#1890ff', marginRight:'5px'}}
+										class="fas fa-home"></i>
+									Home: Every album on the newsfeed is from a person's social calendar.
+									 Post or clip photos from your newsfeed to add to your daily album.
+
+								</Timeline.Item>
+								<Timeline.Item>
+									<i style={{color:'#1890ff', marginRight:'5px'}}
+										class="far fa-comment"></i>
+									Chats: Message and schedule events together
+								</Timeline.Item>
+								<Timeline.Item>
+									<i style={{color:'#1890ff', marginRight:'5px'}}
+										class="far fa-calendar-alt"></i>
+									Personal Calendar: Your private calendar, sync with friends and plan your day
+								</Timeline.Item>
+								<Timeline.Item>
+									<i style={{color:'#1890ff', marginRight:'5px'}}
+										class="fas fa-user-friends"></i>
+									Social Calendar: Your public calendar, creating a unique, single album per day.
+								</Timeline.Item>
+							</Timeline>
+						<Checkbox
+	            checked={this.state.checked}
+	            onChange={this.onChange}>
+	            Don't show again
+	          </Checkbox>
+					</div>
+
+
+	      </Modal>
+
+
+
 					<div className = "profileCardContainer">
 						<ProfileCardNewsFeed
 							profile = {this.props.currentProfile}

@@ -517,19 +517,7 @@ class PickEventSyncForm extends React.Component {
               </div>
               */}
 
-              <div style={{height:'70px'}} className = 'outerContainerPeople'>
-                <div class="innerContainerPeople">
-                  <i class="fas fa-globe-americas"  style={{marginRight:'10px'}} ></i>
-                  <Field
-                    name = 'location'
-                    placeholder="Location"
-                    component= {renderLocationField}
-                    type= 'text'
-
-
-                  />
-              </div>
-            </div>
+              
 
             <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
               <div class="innerContainerPeople">

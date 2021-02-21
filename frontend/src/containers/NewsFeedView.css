@@ -90,7 +90,11 @@
 }
 
 
-
+.firstTimeModalText{
+  font-family: "Segoe UI Regular";
+  font-size: 15px;
+  color:black;
+}
 
 
 .intro{
