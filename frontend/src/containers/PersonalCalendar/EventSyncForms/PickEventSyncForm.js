@@ -517,11 +517,11 @@ class PickEventSyncForm extends React.Component {
               </div>
               */}
 
-              
+
 
             <div style={{display:'flex', height:'30px', width:'500px'}} className = 'pointerEvent outerContainerPeople'>
               <div class="innerContainerPeople">
-                <i style={{marginRight:'10px'}}  class="fas fa-clock"></i>
+                <i style={{marginTop:'25px', marginRight:'10px'}}  class="fas fa-clock"></i>
 
 
                     {/*

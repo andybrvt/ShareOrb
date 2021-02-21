@@ -1231,31 +1231,25 @@ class PickEventSyncDay extends React.Component{
                   <Avatar
                     size={60}
                     src={`${global.API_ENDPOINT}`+this.props.userFriend.profile_picture} />
-
-                    <Avatar
-                      size={60}
-                      src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 </div>
                 <div style={{marginTop:'25px'}}>
-                  <i class="fas fa-user" style={{fontSize:'16px', color:'#8c8c8c', marginRight:'10px'}}></i>
+                  <i class="fas fa-user" style={{fontSize:'15px', color:'#8c8c8c', marginRight:'10px'}}></i>
 
                   {this.props.userFriend.first_name+" "+this.props.userFriend.last_name}
                 </div>
-                <div style={{marginLeft:'25px'}}>
-                  Person 2
-                </div>
+
 
 
                 <div style={{marginTop:'10px'}}>
 
-                  <i class="fas fa-clock" style={{fontSize:'16px', color:'#8c8c8c', marginRight:'10px'}}></i>
+                  <i class="fas fa-clock" style={{fontSize:'15px', color:'#8c8c8c', marginRight:'10px'}}></i>
                   60 Minutes
 
                 </div>
 
                 <div style={{marginTop:'10px'}}>
 
-                  <i class="fas fa-map-marker-alt" style={{fontSize:'16px', color:'#8c8c8c', marginRight:'10px'}}></i>
+                  <i class="fas fa-map-marker-alt" style={{fontSize:'15px', color:'#8c8c8c', marginRight:'10px'}}></i>
                   Tucson, Arizona
 
                 </div>

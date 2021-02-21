@@ -26,7 +26,7 @@
   height: 40%;
   vertical-align: middle;
   transform: translateX(-50%) translateY(-50%);
-  font-weight: 600;
+  font-weight: 550;
   font-size: 16px;
   color:grey;
   /* background: green; */
@@ -35,7 +35,7 @@
 
 .rightBottomEventSync{
   position: relative;
-  height:60%;
+  height:50%;
   /* background: red; */
   width:100%;
   /* background: red; */
