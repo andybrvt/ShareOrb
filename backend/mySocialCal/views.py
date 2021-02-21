@@ -100,6 +100,9 @@ class UpdateSocialCellCoverPic(APIView):
         # First you will grab the social cal cell given the id
         # then you will just change the cover pic and then return the serialized cell
         # and the you are good to go
+
+        print("hit here")
+        print(request.data)
         socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['cellId'])
         if(isinstance(request.data['coverImage'], str)):
             # check if its already save as a directory
@@ -112,8 +115,11 @@ class UpdateSocialCellCoverPic(APIView):
 
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
 
-
-        return Response(serializedSocialCell)
+        content = {
+            "socialCell": serializedSocialCell,
+            "created": request.data['createdCell']
+        }
+        return Response(content)
 
 class SocialClippingView(APIView):
     # This class is used for adding the clipping of pictures into the social

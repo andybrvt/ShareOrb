@@ -141,7 +141,7 @@ class SocialEventPage extends React.Component{
     if(this.props.socialEventInfo.backgroundImg){
       backgroundImage = this.props.socialEventInfo.backgroundImg
     }
-
+    console.log(backgroundImage)
     console.log(this.props)
     return (
         <div class="eventPageContainer">
@@ -167,7 +167,7 @@ class SocialEventPage extends React.Component{
               onShowViewChat = {this.onShowChatChange}
                />
             </div>
-      
+
 
 
           <div className = {`eventGroupChatContainer ${this.state.showChats ?

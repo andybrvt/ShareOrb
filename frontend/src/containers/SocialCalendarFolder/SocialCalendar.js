@@ -749,6 +749,8 @@ class SocialCalendar extends React.Component{
       }
 
 
+      // formData.append("fileListLength", values.length);
+
 
       // This will be the current user
       const curId = this.props.curId
@@ -767,15 +769,25 @@ class SocialCalendar extends React.Component{
         .then(res=> {
           console.log(res.data)
           if(!res.data.coverPicChange){
+            console.log("does it hit here")
             // This is where you will change the cover pic
             const coverPicForm = new FormData()
-            formData.append("coverImage", values[0].originFileObj)
-            formData.append("cellId", res.data.cell.id)
+            coverPicForm.append("coverImage", values[0].originFileObj)
+            coverPicForm.append("cellId", res.data.cell.id)
+            coverPicForm.append("createdCell", res.data.created)
             authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
-              formData,
+              coverPicForm,
               {headers: {"content-type": "multipart/form-data"}}
             ).then(res => {
-              this.props.addSocialCellCoverPic(res.data.coverPic, res.data.id)
+              console.log(res.data)
+              // some stuff here
+              if(res.data.created === "true"){
+                console.log(res.data)
+                this.props.addSocialCell(res.data.socialCell)
+              } else {
+                this.props.addSocialCellCoverPic(res.data.socialCell.coverPic, res.data.socialCell.id)
+
+              }
             })
 
           } else {

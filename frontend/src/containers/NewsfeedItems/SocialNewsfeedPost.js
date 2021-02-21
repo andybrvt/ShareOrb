@@ -344,7 +344,7 @@ class SocialNewsfeedPost extends React.Component {
     notification.info({
       message: `Photo Clipped!`,
       description:
-        'A photo has been clipped to your calendar on '+today+'.',
+        'A photo has been clipped to your social calendar on '+today+'.',
       placement,
     });
   };

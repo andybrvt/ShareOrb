@@ -184,7 +184,8 @@ class SocialEventInfo extends React.Component{
   ).then(res => {
     // Now you will run the redux to replace the picture
     console.log(res.data)
-    this.props.updateSocialEventBackground(res.data.backgroundImg.substring(21,))
+    // this.props.updateSocialEventBackground(res.data.backgroundImg.substring(21,))
+    this.props.updateSocialEventBackground(res.data.backgroundImg)
 
   })
 

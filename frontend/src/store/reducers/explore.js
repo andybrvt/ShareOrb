@@ -61,6 +61,7 @@ export const addSocialCellCoverPic = (state, action) => {
   //IMPROVED
 
   // This will add in the coverpicture when the cell is already created
+  console.log(action)
   return updateObject(state, {
     profile: {
       ...state.profile,
