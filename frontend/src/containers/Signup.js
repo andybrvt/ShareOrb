@@ -59,7 +59,7 @@ const renderField = (field) => {
     {...field.input}
     type = {field.type}
     placeholder= {field.placeholder}
-    maxLength = "20"
+    // maxLength = "20"
     prefix = {field.prefix}
     />
 
