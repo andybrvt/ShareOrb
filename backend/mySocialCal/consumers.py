@@ -455,7 +455,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
                 print(curPicList)
                 curPic = curPicList[4:]
 
-                curPic = curPic.join("/")
+                curPic = "/".join(curPic)
 
                 # socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("/media")
                 # socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("https://shareorb.s3.amazonaws.com/")
