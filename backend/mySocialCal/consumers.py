@@ -453,12 +453,14 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
                 curPicList = socialItemList[0]['itemImage'].split("/")
 
                 print(curPicList)
-                curPic = curPicList[len(curPicList)-1]
+                curPic = curPicList[4:]
+
+                curPic = curPic.join("/")
 
                 # socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("/media")
-                socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("https://shareorb.s3.amazonaws.com/")
+                # socialCell.coverPic = socialItemList[0]['itemImage'].lstrip("https://shareorb.s3.amazonaws.com/")
                 # socialCell.coverPic = socialItemList[0]['itemImage'].path
-                # socialCell.coverPic = curPic
+                socialCell.coverPic = curPic
                 socialCell.save()
         # Now you get the date so that you can send it to the right websocket
         dateList = data['cellDate'].split("-")
