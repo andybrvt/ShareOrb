@@ -180,12 +180,13 @@ class SocialNewsfeedFormPost extends React.Component{
 
       // Only in the case where there are photos then buttom should not be
       // disabled
-      if(caption !== "" && fileList.length > 0){
-        buttonDisabled = false
-      } else if (caption === "" && fileList.length > 0){
-        buttonDisabled = false
+      // if(caption !== "" && fileList.length > 0){
+      //   buttonDisabled = false
+      // }
+      if(caption === "" && fileList.length === 0){
+          buttonDisabled = true
       } else {
-        buttonDisabled = true
+        buttonDisabled = false
       }
 
       return buttonDisabled
