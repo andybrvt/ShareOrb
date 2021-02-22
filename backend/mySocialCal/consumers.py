@@ -453,7 +453,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
                 curPicList = socialItemList[0]['itemImage'].split("/")
 
                 print(curPicList)
-                curPic = curPicList[4:]
+                curPic = curPicList[3:]
 
                 curPic = "/".join(curPic)
 
