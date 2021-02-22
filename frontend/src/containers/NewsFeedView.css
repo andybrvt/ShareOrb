@@ -1,3 +1,105 @@
+/* CSS test for the post buttons */
+.newUpdateButtonContainer{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.newUpdateDayContainer{
+  height: 65%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.newBottomButtonHolder{
+  height: 35%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.leftPart{
+  width: 50%;
+  text-align: center;
+  border-right: 1px solid lightgray;
+}
+.textCenter{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.rightPart{
+  width: 50%;
+  text-align: center;
+}
+
+.upperTopContainer{
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.upperTopCard{
+  background-color: white;
+  width: 100%;
+  height: 95%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.upperTopLeftContainer{
+  width: 10%;
+}
+.avatarHolder{
+  position: relative;
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.upperTopRightContainer{
+  width: 87%;
+  height: 95%;
+  position: relative;
+  background-color: whitesmoke;
+  padding-left: 10px;
+}
+.writeAPostText{
+  color: lightgray;
+  font-size: 25px;
+  top: 50%;
+  position: relative;
+  transform:translateY(-50%);
+}
+
+.upperBottomContainer{
+  height: 50%;
+}
+.newPictureHolder{
+  height: 95%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  /* background-color: red; */
+  left: 11%;
+}
+.miniPics{
+  background-color: lightgray;
+  width: 60px;
+  margin-right: 20px;
+  border-radius: 2px;
+}
+.circlePlus{
+  font-size: 40px;
+}
+
+
+
 .newsfeedParentParenet{
   width: 100%;
   height: 100%;

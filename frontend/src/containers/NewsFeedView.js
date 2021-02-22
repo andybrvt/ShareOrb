@@ -16,7 +16,7 @@ import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, Upload, Divider, Checkbox,
-	 Avatar, Statistic, Button, Modal, Timeline} from 'antd';
+	 Avatar, Statistic, Button, Modal, Timeline, Input} from 'antd';
 import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
@@ -37,6 +37,7 @@ import {
   NotificationOutlined,
   UserOutlined,
   VideoCameraOutlined,
+	PlusOutlined
 } from '@ant-design/icons';
 import { authAxios } from '../components/util';
 
@@ -196,6 +197,52 @@ class NewsFeedView extends React.Component {
 			showIntialInstructions = this.props.showIntialInstructions
 		}
 
+		const uploadButton = (
+		 <div>
+			 <PlusOutlined />
+			 <div style={{ marginTop: 8 }}>Upload</div>
+		 </div>
+	 );
+
+	 const fileList= [
+      {
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-2',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-3',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-4',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-xxx',
+        percent: 50,
+        name: 'image.png',
+        status: 'uploading',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-5',
+        name: 'image.png',
+        status: 'error',
+      },
+    ]
+
 		return (
 			<div className = "newsfeedParentParenet">
 
@@ -268,6 +315,81 @@ class NewsFeedView extends React.Component {
 
 					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedItself">
+
+
+						<div className = "newUpdateButtonContainer">
+
+							<div className = "newUpdateDayContainer">
+
+								<div className = "upperTopCard">
+									<div className = "upperTopContainer">
+
+
+
+										<div className = "upperTopLeftContainer">
+											<div className = "avatarHolder">
+												<Avatar size = {45} />
+											</div>
+
+										</div>
+
+										<div className = "upperTopRightContainer">
+											<div className = "writeAPostText">
+												Write a post...
+											</div>
+										</div>
+
+
+
+									</div>
+
+									<div className = "upperBottomContainer">
+										<div className = "newPictureHolder">
+											<div className = "miniPics">
+
+											</div>
+
+											<div className = "miniPics">
+
+											</div>
+
+											<div className = "miniPics">
+
+											</div>
+
+											<div className = "circlePlus">
+												<i class="fas fa-plus-circle"></i>
+											</div>
+
+
+
+										</div>
+
+									</div>
+
+
+								</div>
+
+
+							</div>
+
+
+							<div className = "newBottomButtonHolder">
+								<div className = "leftPart">
+									<div className = "textCenter">
+										Create Event
+									</div>
+								</div>
+
+								<div className = "rightPart">
+									<div className = "textCenter">
+										View Album
+									</div>
+								</div>
+							</div>
+						</div>
+
+
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="topCard">
 								<i class="far fa-edit share" style={{fontSize:'20px', color:'#1890ff'}}></i>
