@@ -49,7 +49,9 @@ class ProfileCardNewsFeed extends React.Component{
       followingShow: false
     })
   }
-
+  viewUserPage = (username) => {
+    window.location.href = '/explore/'+username
+  }
 
 
   render(){
@@ -60,7 +62,7 @@ class ProfileCardNewsFeed extends React.Component{
     let following = []
     let request = []
     let profilePic = ''
-
+    let username=''
     if (this.props.firstName){
       firstName = this.props.firstName
     } if (this.props.lastName){
@@ -71,7 +73,9 @@ class ProfileCardNewsFeed extends React.Component{
       following = this.props.following
     } if (this.props.profilePic){
       profilePic = `${global.IMAGE_ENDPOINT}`+this.props.profilePic
-
+      if (this.props.firstName){
+        username = this.props.username
+      }
       // http://127.0.0.1:8000/media/PostPic/public/profile_pictures/2021/01/keitravis-squire-zrfviPQ5rWE-unsplash.jpg
 
       // `${global.API_ENDPOINT}`+
@@ -86,10 +90,21 @@ class ProfileCardNewsFeed extends React.Component{
     return (
       <div className = "profileCard-NF">
         <div className = 'image-box-NF'>
+          { profilePic != '' ?
           <Avatar
+            onClick = {() => this.viewUserPage(username)}
             style={{left:'30%', top:'5%'}}
-            size = {125} shape = 'circle'
+            size = {125}
+            shape = 'circle'
             src = {profilePic} />
+            :
+            <Avatar
+              onClick = {() => this.viewUserPage(username)}
+              style={{left:'30%', top:'5%'}}
+              size = {125}
+              shape = 'circle'
+              src = {defaultPic} />
+          }
 
         </div>
 
@@ -169,6 +184,7 @@ export const mapStateToProps = state => {
   return {
     firstName: state.auth.firstName,
     lastName: state.auth.lastName,
+    username: state.auth.username,
     profilePic: state.auth.profilePic,
     following: state.auth.following,
     followers: state.auth.followers,

@@ -538,40 +538,7 @@ class SocialCalCellPage extends React.Component{
     })
   }
 
-  threeDotDropDown = () => {
 
-    // This will hold the drop down for the pictures that incldues
-    // deleting and all other functions
-
-    return (
-      <div className = "threeDot">
-      <Dropdown overlay={
-        <Menu>
-          <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-              <i style={{marginLeft:'1px',marginRight:'4px' }} class="far fa-bookmark"></i>
-              <span style={{marginLeft:'3px'}}> Save this post</span>
-            </a>
-          </Menu.Item>
-          <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-              <i class="far fa-eye-slash"></i>
-              <span style={{marginLeft:'5px'}}>Hide this post</span>
-            </a>
-          </Menu.Item>
-          <Menu.Item danger onClick={this.deleteSocialPost}>
-            <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-            <span style={{marginLeft:'10px'}}>Delete post</span>
-          </Menu.Item>
-        </Menu>
-      }>
-      <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-        <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px', color: "gray"}}></i>
-      </a>
-      </Dropdown>
-      </div>
-    )
-  }
 
   cellThreeDots = () => {
     // This drop down is for the calendar cell in itself. To delete the cell
@@ -585,13 +552,17 @@ class SocialCalCellPage extends React.Component{
             onClick = {this.openChangeCoverModal}
             >
                 <i class="far fa-image"></i>
-                <span style={{marginLeft:'5px'}}>Change cover picture</span>
+                <span style={{marginLeft:'10px'}}>Change cover picture</span>
             </Menu.Item>
             <Menu.Item danger
             onClick = {this.openDeleteCellModal}
              >
-              <i class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-              <span style={{marginLeft:'5px'}}>Delete day</span>
+              <i class="fas fa-calendar-times" style={{color:"#ff4d4f"}}></i>
+              <span style={{marginLeft:'10px'}}>Delete day</span>
+            </Menu.Item>
+            <Menu.Item danger onClick={this.deleteSocialPost}>
+              <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
+              <span style={{marginLeft:'10px'}}>Delete post</span>
             </Menu.Item>
           </Menu>
         }>
@@ -797,7 +768,7 @@ class SocialCalCellPage extends React.Component{
                     src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage}
                      />
 
-                     {this.threeDotDropDown()}
+
 
 
                   <div className = "clipPicturesRoll">
@@ -840,7 +811,8 @@ class SocialCalCellPage extends React.Component{
                   :
 
                   <div className = 'singlePic'>
-                 {this.threeDotDropDown()}
+
+
                     <img
                     className ="picture"
                     src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage} />
@@ -960,7 +932,7 @@ class SocialCalCellPage extends React.Component{
                         placeHolder = "Write a caption"
                         maxLength = {250}
                         showCount
-                        rows = {15}
+                        rows = {3}
                         onChange = {this.onCaptionChange}
                         onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
                          />

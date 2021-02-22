@@ -22,6 +22,10 @@ class FollowersList extends React.Component{
     message.success('You accepted a follower.');
   };
 
+  viewUserPage = (username) => {
+    window.location.href = '/explore/'+username
+  }
+
   onAcceptFollow = (follower, following) => {
     // Pretty much for accepting the onAccept follow on the users page
 
@@ -65,7 +69,7 @@ class FollowersList extends React.Component{
     if(this.props.request){
       request = this.props.request
     }
-    
+
     for(let i = 0; i< request.length; i++){
       requestList.push(
         <List.Item
@@ -127,7 +131,11 @@ class FollowersList extends React.Component{
               <Avatar src={defaultPicture} />
 
             }
-          title={<a href="https://ant.design">{this.capitalize(followers[i].first_name)} {this.capitalize(followers[i].last_name)}</a>}
+          title={
+            <a onClick = {() => this.viewUserPage(followers[i].username)}>
+              {this.capitalize(followers[i].first_name)} {this.capitalize(followers[i].last_name)}
+            </a>
+          }
           description= {<b>@{this.capitalize(followers[i].username)}</b>}
         />
         </List.Item>
@@ -168,9 +176,7 @@ class FollowersList extends React.Component{
         >
         {
           curId === profileId || pathname === "/home" ?
-
           this.renderRequestList()
-
           :
 
           <div></div>

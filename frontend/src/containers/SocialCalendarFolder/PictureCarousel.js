@@ -59,28 +59,7 @@ class PictureCarousel extends React.Component{
     this.props.onOpenDelete()
   }
 
-  threeDotDropDown = () => {
 
-
-    return (
-      <div className = "threeDot">
-      <Dropdown overlay={
-        <Menu>
-    
-          <Menu.Item danger onClick={this.deleteSocialPost}>
-            <i style={{marginRight:'45px' }} class="fas fa-trash" style={{color:"#ff4d4f"}}></i>
-            <span style={{marginLeft:'10px'}}>Delete post</span>
-          </Menu.Item>
-        </Menu>
-      }>
-      <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-        <i class="fas fa-ellipsis-v" style={{fontSize:'40px', padding:'5px', color: "gray"}}></i>
-      </a>
-      </Dropdown>
-
-      </div>
-    )
-  }
 
 
 
@@ -97,7 +76,7 @@ class PictureCarousel extends React.Component{
             socialItems.push(
 
             <div className = "clipPicBackground">
-              {this.threeDotDropDown()}
+
 
                 <img
                 className = 'backgroundPic'
@@ -140,7 +119,7 @@ class PictureCarousel extends React.Component{
           if(item.socialItemType === "picture"){
             socialItems.push(
               <div className = 'picturesRoll'>
-              {this.threeDotDropDown()}
+
 
                 <img
                 className = 'socialImages'

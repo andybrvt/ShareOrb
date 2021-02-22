@@ -295,7 +295,7 @@ class SideMenu extends React.Component {
                         onClick = {() => this.onProfileDirect()}
                         >
                         <a class="d-flex align-items-center">
-                          <i style={{marginLeft:'-2px'}} class="fas fa-user-friends"></i>
+                          <i style={{fontSize:'16px'}} class="far fa-user"></i>
                             <span style={{marginLeft:'10px'}}  class="menu-text">Social</span>
                             <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
                         </a>

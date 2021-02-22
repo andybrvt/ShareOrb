@@ -14,6 +14,9 @@ class FollowList extends React.Component{
     window.location.href = '/explore/'+user
   }
 
+  viewUserPage = (username) => {
+    window.location.href = '/explore/'+username
+  }
 
   render () {
     console.log(this.props)
@@ -40,7 +43,11 @@ class FollowList extends React.Component{
               <Avatar src={defaultPicture} />
 
             }
-          title={<a href="https://ant.design">{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</a>}
+          title={
+            <a onClick = {() => this.viewUserPage(item.username)}>
+              {this.capitalize(item.first_name)} {this.capitalize(item.last_name)}
+            </a>
+          }
           description= {<b>@{this.capitalize(item.username)}</b>}
         />
         </List.Item>
