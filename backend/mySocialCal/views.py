@@ -180,9 +180,14 @@ class SocialChangeCoverPic(APIView):
         socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['socialCellId'])
 
 
-        coverPic = request.data['coverPic'].lstrip("/media")
+        coverPicList = request.data['coverPic'].split("/")
 
-        socialCalCell.coverPic = coverPic
+        curPic = coverPicList[3:]
+
+        curPic = "/".join(curPic)
+        # coverPic = request.data['coverPic'].lstrip("/media")
+
+        socialCalCell.coverPic = curPic
 
         socialCalCell.save()
 

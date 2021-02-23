@@ -324,6 +324,7 @@ class NewsFeedView extends React.Component {
 							username = {this.props.username}
 							location = {this.props.location}
 							profile = {this.props.currentProfile}
+							openEvent = {this.eventCondition}
 							 />
 
 

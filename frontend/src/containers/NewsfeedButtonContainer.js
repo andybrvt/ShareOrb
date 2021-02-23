@@ -96,24 +96,15 @@ class NewsfeedButtonContainer extends React.Component{
           </div>
 
           <div className = "upperTopRightContainer">
-            {
-              dayCaption.length > 0 ?
+
 
               <div
                 onClick = {this.props.postCondition}
-                 className = "writeAPostText">
-                {this.eventTitle(this.capitalize(dayCaption))}
+                className = "writeAPostText">
+                Update your day...
               </div>
 
-              :
 
-              <div
-                onClick = {this.props.postCondition}
-                 className = "writeAPostText">
-                Write a post...
-              </div>
-
-            }
 
           </div>
 
@@ -156,7 +147,9 @@ class NewsfeedButtonContainer extends React.Component{
 
 
         <div className = "newBottomButtonHolder">
-          <div className = "leftPart">
+          <div
+            onClick = {this.props.openEvent}
+            className = "leftPart">
 
             <div className = "newButtonCard">
               <div className = "textCenter">
