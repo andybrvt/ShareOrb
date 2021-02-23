@@ -269,10 +269,15 @@ class NewsFeedView extends React.Component {
 					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedItself">
 						<div className = "newsfeedActionButtons">
-							<div onClick ={this.postCondition} class="topCard">
-								<i class="far fa-edit share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-								 <p style={{ color:'#1890ff',}} class="topCardHeader cardAlign"> Update Day</p>
+							<div onClick ={this.postCondition} class="writePostCard">
+							  <div class="writePostCardLeftPart">
+							    <i class="far fa-edit share" style={{fontSize:'20px', color:'white'}}></i>
+							  </div>
+							  <div class="writePostCardRightPart">
+							       <p style={{ color:'#1890ff',}} class="topCardHeader writePostCardAlign"> Update Day</p>
+							  </div>
 							</div>
+
 
 							<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
 								<i class="fas fa-plus share" style={{fontSize:'20px', color:'#1890ff'}}></i>
@@ -287,7 +292,7 @@ class NewsFeedView extends React.Component {
 							 >
 								<div >
 									<i class="far fa-image share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-									 <p  class="topCardHeader cardAlign"> View album </p>
+									 <p  class="topCardHeader cardAlign"> View Today</p>
 								</div>
 							</Link>
 						</div>

@@ -44,7 +44,7 @@
   position: relative;
   /* flex-wrap: wrap; */
   width: 45vw;
-  gap: 3%;
+  gap: 2%;
 }
 
 
@@ -53,11 +53,53 @@
   position: relative;
   cursor: pointer;
   background: #FFFFFF;
-  padding:30px;
+  padding:27.5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   width:100%;
   /* background-color: red; */
 
+}
+
+ .writePostCard {
+  position: relative;
+  cursor: pointer;
+  background: #FFFFFF;
+  width:120%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  position: relative;
+}
+
+.writePostCardLeftPart{
+  position: relative;
+  width:25%;
+  background: #1890ff;
+}
+
+.writePostCardRightPart{
+  position: relative;
+  width:75%;
+  /* background: black; */
+  padding:27.5px;
+
+}
+
+.writePostCardAlign{
+  position: absolute;
+  top: 50%;
+
+  font-size: 16px;
+  transform: translateY(-50%);
+}
+
+.cardAlign{
+  position: absolute;
+  top: 50%;
+  left:42%;
+  font-size: 16px;
+  transform: translateY(-50%);
 }
 
 /* .topCard {
@@ -112,14 +154,12 @@
 .postModalMain{
   max-height: 575px;
 }
+.specialcardAlign{
 
-.cardAlign{
-  position: absolute;
-  top: 50%;
-  left:43%;
   font-size: 16px;
-  transform: translateY(-50%);
+
 }
+
 
 .shadowBox{
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
