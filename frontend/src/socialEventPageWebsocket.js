@@ -104,6 +104,15 @@ class WebSocketSocialEventPage{
 
   }
 
+  onInvitePeople = (eventId, userId) => {
+    // This function will be used to invite a user to a social event
+    this.sendSocialMessage({
+      command: "send_social_event_invite",
+      eventId: eventId,
+      userId: userId,
+    })
+  }
+
   socketNewSocialMessage(data){
     // This will be the function that will be calling the callbacks
     console.log('call backs')

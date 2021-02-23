@@ -235,6 +235,11 @@ class SocialEventInfo extends React.Component{
 
     console.log(eventId, userId)
 
+    SocialEventPageWebSocketInstance.onInvitePeople(eventId, userId)
+
+    // Send out a notification too
+
+
   }
 
 
@@ -257,6 +262,8 @@ class SocialEventInfo extends React.Component{
     let day = "";
     let persons = [];
     let personId = [];
+    let inviteList = [];
+    let inviteId = []
     let host = "";
     let eventId = ""
 
@@ -313,6 +320,15 @@ class SocialEventInfo extends React.Component{
         for(let i = 0; i< this.props.info.persons.length; i++){
           personId.push(
             this.props.info.persons[i].id
+          )
+        }
+      }
+      if(this.props.info.inviteList){
+        inviteList = this.props.info.inviteList
+
+        for(let i = 0; i< this.props.info.inviteList.length; i++){
+          inviteId.push(
+            this.props.info.inviteList[i].id
           )
         }
       }
@@ -558,7 +574,7 @@ class SocialEventInfo extends React.Component{
                                   }
                               />
 
-                            { personId.includes(item.id) ?
+                            { inviteId.includes(item.id) ?
 
                               <div className = "invitedButton">
                                 <i class="far fa-check-circle"></i>
@@ -567,7 +583,7 @@ class SocialEventInfo extends React.Component{
                               :
 
                               <div
-                                onClick = {this.onInvitePeople(eventId, item.id)}
+                                onClick = {() => this.onInvitePeople(eventId, item.id)}
                                 className = "inviteButton">
                                 <i class="fas fa-user-plus"></i>
                               </div>

@@ -79,14 +79,19 @@ class SocialCalEventSerializer(serializers.ModelSerializer):
         data['host'] = SocialCalUserSerializer(User.objects.get(id = data['host'])).data
         personList = []
         messageList = []
+        inviteList = []
         for people in data['persons']:
             person = SocialCalUserSerializer(User.objects.get(id = people)).data
             personList.append(person)
         for messages in data['get_socialEventMessage']:
             message = SocialEventMessagesSerializer(models.SocialEventMessages.objects.get(id = messages)).data
             messageList.append(message)
+        for invite in data['inviteList']:
+            invite = SocialCalUserSerializer(User.objects.get(id = invite)).data
+            inviteList.append(invite)
         data['persons'] = personList
         data['get_socialEventMessage'] = messageList
+        data['inviteList'] = inviteList
         return data
 
 class SocialEventMessagesSerializer(serializers.ModelSerializer):

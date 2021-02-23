@@ -99,6 +99,37 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         }
         self.send_social_message(content)
 
+    def send_social_event_invite(self, data):
+        # This will just be used to invite friends to your event
+        # You will first grab the user
+        # Then grab the social event
+        # Then add that person to the event and then it send it back into the front
+        # end
+
+        print(data)
+        selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+        addedUser = get_object_or_404(User, id = data['userId'] )
+
+        # Now add the user to the invite list
+        selectedEvent.inviteList.add(addedUser)
+        # The selected event should be updated now
+        # Now you will serialize the event and then return it to the front end
+
+        selectedEvent.save()
+
+        serializedEvent = SocialCalEventSerializer(selectedEvent, many = False).data
+
+
+        # Now you just have to return the invite list
+        content = {
+            "command": 'send_social_event_invite',
+            "inviteList": serializedEvent['inviteList'],
+            "socialEventId": data['eventId']
+        }
+
+        self.send_social_message(content)
+
+
     def send_social_message(self, socialEventMessage):
         # This will be for sending inforamtion inot the channel layer to the groups
         channel_layer = get_channel_layer()
@@ -138,6 +169,8 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
             self.send_social_edit_event_info(data)
         if data["command"] == "send_social_event_delete":
             self.send_social_event_delete(data)
+        if data['command'] == "send_social_event_invite":
+            self.send_social_event_invite(data)
 
     def new_social_message(self, message):
         messageObj = message['eventMessage']
@@ -457,7 +490,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
                 curPic = "/".join(curPic)
 
-                
+
                 socialCell.coverPic = curPic
                 socialCell.save()
         # Now you get the date so that you can send it to the right websocket

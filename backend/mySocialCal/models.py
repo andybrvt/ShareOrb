@@ -362,6 +362,8 @@ class SocialCalEvent(models.Model):
     # it will pretty much be a room where people can join to be ready to go to an event
     backgroundImg = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True, )
 
+    inviteList = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'social_invite_list')
+
     def get_socialEventMessage(self):
         # This will attach the messeges to the socialCalEvent by the foreginkey
         # all you have to do is filter out the right messages for each soical event
