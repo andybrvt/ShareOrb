@@ -70,7 +70,43 @@ class SideMenu extends React.Component {
       name:'',
       showDropDown:false,
     };
+
+    // This is used to reference the onclick outside the notification
+    // drop down
+    this.wrapperRef = React.createRef()
+    this.setWrapperRef = this.setWrapperRef.bind(this)
+    this.handleClickOutside = this.handleClickOutside.bind(this)
+
   }
+
+
+  handleClickOutside(event){
+
+
+    console.log(event.target)
+    console.log(this.wrapperRef)
+    var notification = document.getElementById('notificatonDropdownId')
+    console.log(notification)
+    // so this will hanlde what happens when you do click out side
+    if(this.wrapperRef
+      && !this.wrapperRef.current.contains(event.target)
+      && this.state.showDropDown === true
+    ){
+      console.log('stuff happens')
+      this.setState({
+        showDropDown: false
+      })
+    }
+
+  }
+
+  setWrapperRef(node) {
+    // node will pretty much be the who element
+    this.wrapperRef = node
+  }
+
+
+
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -81,6 +117,8 @@ class SideMenu extends React.Component {
 
 
   componentDidMount(){
+    document.addEventListener('mousedown', this.handleClickOutside);
+
     authAxios.get(`${global.API_ENDPOINT}/userprofile/all-users`)
       .then(res=> {
         console.log(res)
@@ -90,6 +128,10 @@ class SideMenu extends React.Component {
       });
 
   }
+
+  componentWillUnmount() {
+       document.removeEventListener('mousedown', this.handleClickOutside);
+   }
 
   onSelect = (value) => {
     console.log('onSelect', value);
@@ -232,7 +274,8 @@ class SideMenu extends React.Component {
 
     return (
 
-      <div className = "everythingContainer">
+      <div
+        className = "everythingContainer">
         <div className = "sideMenuContainer">
             <aside>
               <div className = "whiteFixBackground"> </div>
@@ -342,7 +385,10 @@ class SideMenu extends React.Component {
                 </div>
 
 
-                <div className="headersNotificationContainer">
+                <div
+                  ref = {this.wrapperRef}
+
+                  className="headersNotificationContainer">
                   <div className = 'notificationsInner'>
                     <div class="badgeOuter">
                         <i
@@ -357,8 +403,11 @@ class SideMenu extends React.Component {
                         </span>
                     </div>
                   </div>
-                  <div >
-                    <NotificationsDropDown {...this.props} showNoti={this.state.showDropDown}/>
+                  <div
+                    id = "notificatonDropdownId" ref = "notificationDD">
+                    <NotificationsDropDown
+
+                      {...this.props} showNoti={this.state.showDropDown}/>
                   </div>
                 </div>
 

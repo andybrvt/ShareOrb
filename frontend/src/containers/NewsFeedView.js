@@ -5,6 +5,7 @@ import NewsFeedFormPost from '../components/NewsFeedFormPost';
 import SocialNewsfeedFormPost from '../components/SocialNewsfeedFormPost';
 import NewNewsfeedFormPost from '../components/NewNewsfeedFormPost';
 import NewsFeedEventModal from '../components/NewsFeedEventModal.js';
+import NewsfeedButtonContainer from './NewsfeedButtonContainer';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -16,7 +17,7 @@ import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
 import TodayEvents from './todayEvents';
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, Upload, Divider, Checkbox,
-	 Avatar, Statistic, Button, Modal, Timeline} from 'antd';
+	 Avatar, Statistic, Button, Modal, Timeline, Input} from 'antd';
 import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
@@ -37,6 +38,7 @@ import {
   NotificationOutlined,
   UserOutlined,
   VideoCameraOutlined,
+	PlusOutlined
 } from '@ant-design/icons';
 import { authAxios } from '../components/util';
 
@@ -196,6 +198,52 @@ class NewsFeedView extends React.Component {
 			showIntialInstructions = this.props.showIntialInstructions
 		}
 
+		const uploadButton = (
+		 <div>
+			 <PlusOutlined />
+			 <div style={{ marginTop: 8 }}>Upload</div>
+		 </div>
+	 );
+
+	 const fileList= [
+      {
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-2',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-3',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-4',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-xxx',
+        percent: 50,
+        name: 'image.png',
+        status: 'uploading',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
+        uid: '-5',
+        name: 'image.png',
+        status: 'error',
+      },
+    ]
+
 		return (
 			<div className = "newsfeedParentParenet">
 
@@ -262,12 +310,14 @@ class NewsFeedView extends React.Component {
 						<ProfileCardNewsFeed
 							profile = {this.props.currentProfile}
 							location = {this.props.location}
+
 							 />
 					</div>
 
 
 					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedItself">
+{/*
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="writePostCard">
 							  <div class="writePostCardLeftPart">
@@ -296,6 +346,17 @@ class NewsFeedView extends React.Component {
 								</div>
 							</Link>
 						</div>
+*/}
+
+
+						<NewsfeedButtonContainer
+							postCondition = {this.postCondition}
+							profilePic = {this.props.profilePic}
+							username = {this.props.username}
+							location = {this.props.location}
+							profile = {this.props.currentProfile}
+							 />
+
 
 
 							<InfiniteScroll data={this.props} />
@@ -370,6 +431,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
 		curId: state.auth.id,
 		currentUser: state.auth.username,
+		profilePic: state.auth.profilePic,
 		currentProfile: state.explore.profile,
 		following: state.auth.following,
 		sentRequestList: state.auth.sentRequestList,
