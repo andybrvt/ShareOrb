@@ -5,6 +5,7 @@ import NewsFeedFormPost from '../components/NewsFeedFormPost';
 import SocialNewsfeedFormPost from '../components/SocialNewsfeedFormPost';
 import NewNewsfeedFormPost from '../components/NewNewsfeedFormPost';
 import NewsFeedEventModal from '../components/NewsFeedEventModal.js';
+import NewsfeedButtonContainer from './NewsfeedButtonContainer';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -309,6 +310,7 @@ class NewsFeedView extends React.Component {
 						<ProfileCardNewsFeed
 							profile = {this.props.currentProfile}
 							location = {this.props.location}
+
 							 />
 					</div>
 
@@ -317,102 +319,42 @@ class NewsFeedView extends React.Component {
 						<div className = "newsfeedItself">
 
 
-						<div className = "newUpdateButtonContainer">
-
-							<div className = "newUpdateDayContainer">
-
-								<div className = "upperTopCard">
-									<div className = "upperTopContainer">
-
-
-
-										<div className = "upperTopLeftContainer">
-											<div className = "avatarHolder">
-												<Avatar size = {45} />
-											</div>
-
-										</div>
-
-										<div className = "upperTopRightContainer">
-											<div className = "writeAPostText">
-												Write a post...
-											</div>
-										</div>
+						<NewsfeedButtonContainer
+							postCondition = {this.postCondition}
+							profilePic = {this.props.profilePic}
+							username = {this.props.username}
+							location = {this.props.location}
+							profile = {this.props.currentProfile}
+							 />
 
 
+						 {/*
+							 <div className = "newsfeedActionButtons">
+	 							<div onClick ={this.postCondition} class="topCard">
+	 								<i class="far fa-edit share" style={{fontSize:'20px', color:'#1890ff'}}></i>
+	 								 <p style={{ color:'#1890ff',}} class="topCardHeader cardAlign"> Update Day</p>
+	 							</div>
 
-									</div>
+	 							<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
+	 								<i class="fas fa-plus share" style={{fontSize:'20px', color:'#1890ff'}}></i>
+	 								 <p style={{ color:'#1890ff'}} class="topCardHeader cardAlign"> Create event  </p>
+	 							</div>
 
-									<div className = "upperBottomContainer">
-										<div className = "newPictureHolder">
-											<div className = "miniPics">
-
-											</div>
-
-											<div className = "miniPics">
-
-											</div>
-
-											<div className = "miniPics">
-
-											</div>
-
-											<div className = "circlePlus">
-												<i class="fas fa-plus-circle"></i>
-											</div>
-
-
-
-										</div>
-
-									</div>
+	 							<Link to = {{
+	 								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+	 								state:{pathname:location}
+	 							}}
+	 							className = "topCard"
+	 							 >
+	 								<div >
+	 									<i class="far fa-image share" style={{fontSize:'20px', color:'#1890ff'}}></i>
+	 									 <p  class="topCardHeader cardAlign"> View album </p>
+	 								</div>
+	 							</Link>
+	 						</div>
 
 
-								</div>
-
-
-							</div>
-
-
-							<div className = "newBottomButtonHolder">
-								<div className = "leftPart">
-									<div className = "textCenter">
-										Create Event
-									</div>
-								</div>
-
-								<div className = "rightPart">
-									<div className = "textCenter">
-										View Album
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<div className = "newsfeedActionButtons">
-							<div onClick ={this.postCondition} class="topCard">
-								<i class="far fa-edit share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-								 <p style={{ color:'#1890ff',}} class="topCardHeader cardAlign"> Update Day</p>
-							</div>
-
-							<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
-								<i class="fas fa-plus share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-								 <p style={{ color:'#1890ff'}} class="topCardHeader cardAlign"> Create event  </p>
-							</div>
-
-							<Link to = {{
-								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-								state:{pathname:location}
-							}}
-							className = "topCard"
-							 >
-								<div >
-									<i class="far fa-image share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-									 <p  class="topCardHeader cardAlign"> View album </p>
-								</div>
-							</Link>
-						</div>
+							 */}
 
 
 							<InfiniteScroll data={this.props} />
@@ -487,6 +429,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
 		curId: state.auth.id,
 		currentUser: state.auth.username,
+		profilePic: state.auth.profilePic,
 		currentProfile: state.explore.profile,
 		following: state.auth.following,
 		sentRequestList: state.auth.sentRequestList,
