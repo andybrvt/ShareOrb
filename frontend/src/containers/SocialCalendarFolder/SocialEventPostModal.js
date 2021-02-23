@@ -135,7 +135,7 @@ class SocialEventPostModal extends React.Component{
 
   if(this.props.curId === this.props.calendarOwner){
     ExploreWebSocketInstance.sendSocialEvent(eventObj)
-    this.onPendingNotification("bottomRight", displayObj)
+    this.onAddEventNotification("bottomRight", date)
   } else {
     NotificationWebSocketInstance.sendPendingSocialEvent(eventObj)
     const calOwner = this.props.calOwnerUsername
@@ -152,6 +152,16 @@ class SocialEventPostModal extends React.Component{
   this.props.close()
 
   }
+
+  onAddEventNotification = (placement, cellDate) => {
+    notification.info({
+      message: "Social event added.",
+      description:
+        "You added a social event to your calendar on "+ cellDate,
+        placement
+    })
+  }
+
 
   onPendingNotification = (placement, calOwner) => {
     notification.info({
@@ -513,7 +523,7 @@ class SocialEventPostModal extends React.Component{
             name = 'content'
             placeholder = 'Content'
             value = {this.state.content}
-            
+
             />
           </Form.Item>
 
