@@ -117,7 +117,8 @@ class App extends Component {
       this.props.loadSocialEventInfo.bind(this),
       this.props.sendSocialEventMessage.bind(this),
       this.props.updateSocialEventPage.bind(this),
-      this.props.sendDeleteSocialEventNoti.bind(this)
+      this.props.sendDeleteSocialEventNoti.bind(this),
+      this.props.sendSocialEventInvite.bind(this)
     )
 
     SocialCalCellPageWebSocketInstance.addCallbacks(
@@ -415,7 +416,8 @@ const mapDispatchToProps = dispatch => {
     sendSocialCalCellComment: (socialCalCellCommentObj) => dispatch(socialActions.sendSocialCalCellComment(socialCalCellCommentObj)),
     deleteSocialCellItem: (socialItemList) => dispatch(socialActions.deleteSocialCellItem(socialItemList)),
     addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList)),
-    addSocialDayCaption: (socialDayCaption) => dispatch(socialActions.addSocialDayCaption(socialDayCaption))
+    addSocialDayCaption: (socialDayCaption) => dispatch(socialActions.addSocialDayCaption(socialDayCaption)),
+    sendSocialEventInvite: (inviteList) => dispatch(socialActions.sendSocialEventInvite(inviteList))
   }
 }
 
