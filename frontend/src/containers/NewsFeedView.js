@@ -22,6 +22,7 @@ import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
 import Spinner from './Spinner.js';
+
 import {
   CalendarOutlined,
   HeartTwoTone,
@@ -182,13 +183,18 @@ class NewsFeedView extends React.Component {
 		const curDate = new Date()
 
 		let username = ""
+		let firstName=""
+
 		const cellYear = dateFns.getYear(curDate)
 		const cellMonth = dateFns.getMonth(curDate)+1
 		const cellDay = dateFns.getDate(curDate)
 		if(this.props.username){
 			username = this.props.username
 		}
-
+		if (this.props.firstName){
+			firstName = this.props.firstName
+		}
+		let startModalText="Welcome to ShareOrb, "+firstName+"!"
 		console.log(cellYear, cellMonth, cellDay)
 		const location = this.props.location.pathname;
 
@@ -205,44 +211,7 @@ class NewsFeedView extends React.Component {
 		 </div>
 	 );
 
-	 const fileList= [
-      {
-        uid: '-1',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-2',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-3',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-4',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-xxx',
-        percent: 50,
-        name: 'image.png',
-        status: 'uploading',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-5',
-        name: 'image.png',
-        status: 'error',
-      },
-    ]
+
 
 		return (
 			<div className = "newsfeedParentParenet">
@@ -253,7 +222,7 @@ class NewsFeedView extends React.Component {
 
 				<div className = "newsfeedParent">
 					<Modal
-						 title="Welcome to ShareOrb!"
+						 title={startModalText}
 						 visible={showIntialInstructions}
 						 onOk={this.hideModal}
 						 okText="Let's Go!"
@@ -265,7 +234,7 @@ class NewsFeedView extends React.Component {
 						cancelButtonProps={{ style: { display: 'none' } }}
 						 >
 	        <div class="firstTimeModalText">
-						We believe every day is special. Create a unique album each day to save memories in your life!
+						We believe every day is special. Create a unique album of pictures each day to save memories in your life!
 						Let's dive into some of the features:
 						<br/>
 						<br/>
@@ -274,8 +243,8 @@ class NewsFeedView extends React.Component {
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="fas fa-home"></i>
-									Home: Every album on the newsfeed is from a person's social calendar.
-									 Post or clip photos from your newsfeed to add to your daily album.
+									Home: Every post on the newsfeed you see today represents what a person did today. Today's the 22nd of Febuary right?
+									Any pictures you add today will be inside today's album (on the 22nd)!
 
 								</Timeline.Item>
 								<Timeline.Item>
@@ -291,7 +260,7 @@ class NewsFeedView extends React.Component {
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="fas fa-user-friends"></i>
-									Social Calendar: Your public calendar, creating a unique, single album per day.
+									Social Calendar: Your public calendar, accessible by anyone. A collection of memories you've saved throughout the month
 								</Timeline.Item>
 							</Timeline>
 						<Checkbox
@@ -429,9 +398,10 @@ class NewsFeedView extends React.Component {
 
 const mapStateToProps = state => {
   return {
+		firstName: state.auth.firstName,
+		currentUser: state.auth.username,
     token: state.auth.token,
 		curId: state.auth.id,
-		currentUser: state.auth.username,
 		profilePic: state.auth.profilePic,
 		currentProfile: state.explore.profile,
 		following: state.auth.following,
