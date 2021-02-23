@@ -165,6 +165,7 @@ class SocialEventPage extends React.Component{
               active = {this.state.showChats}
               history = {this.props.history}
               onShowViewChat = {this.onShowChatChange}
+              following = {this.props.following}
                />
             </div>
 
@@ -194,7 +195,8 @@ const mapStateToProps = state => {
     socialEventInfo: state.socialCal.selectedSocialEvent,
     socialEventMessages: state.socialCal.socialEventMessages,
     id: state.auth.id,
-    showDeleted: state.socialCal.showDeleted
+    showDeleted: state.socialCal.showDeleted,
+    following: state.auth.following
   }
 }
 

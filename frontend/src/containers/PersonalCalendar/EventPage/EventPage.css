@@ -458,10 +458,22 @@
   box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI Regular';
   width:90%;
-  height: 300px;
+  height: 500px;
   margin-top: 10px;
   font-size: 16px;
   color:black;
+}
+
+.invitedButton{
+  font-size: 25px;
+  color: limegreen;
+}
+
+.inviteButton{
+  font-size: 25px;
+}
+.inviteButton:hover{
+  transform: scale(1.2);
 }
 
 /* Suggested Friends Card Title */

@@ -15,7 +15,8 @@
     border-radius: 4px;
     overflow: auto;
     padding: 8px 24px;
-    max-height: 300px;
+    height: 300px;
+
 }
 
 .followerFollowingStat{

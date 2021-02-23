@@ -228,6 +228,16 @@ class SocialEventInfo extends React.Component{
   }
 
 
+  onInvitePeople = (eventId, userId) =>{
+    // This function will be used to invite someone to the event
+    // pretty much just add them to the invite list and see if they want to
+    // join
+
+    console.log(eventId, userId)
+
+  }
+
+
 
 
   render() {
@@ -246,8 +256,9 @@ class SocialEventInfo extends React.Component{
     let month = "";
     let day = "";
     let persons = [];
+    let personId = [];
     let host = "";
-
+    let eventId = ""
 
     // These are just place holders
     let list = []
@@ -255,7 +266,14 @@ class SocialEventInfo extends React.Component{
     let decline = [];
     let invited = [];
 
+    if(this.props.following){
+      list = this.props.following
+    }
+
     if(this.props.info){
+      if(this.props.info.id){
+        eventId = this.props.info.id
+      }
       if(this.props.info.host){
         username = this.props.info.host.username
         eventHostId = this.props.info.host.id
@@ -291,6 +309,12 @@ class SocialEventInfo extends React.Component{
       }
       if(this.props.info.persons){
         persons = this.props.info.persons
+
+        for(let i = 0; i< this.props.info.persons.length; i++){
+          personId.push(
+            this.props.info.persons[i].id
+          )
+        }
       }
 
 
@@ -524,15 +548,35 @@ class SocialEventInfo extends React.Component{
                                     cursor: "pointer"
                                   }}
                                   onClick = {() => this.profileDirect(item.username)}
-                                   src={item.profile_picture} />
+                                   src={`${global.IMAGE_ENDPOINT}`+item.profile_picture} />
                                 }
                                 title={<span
                                   style = {{cursor: "pointer"}}
                                    onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
                                 description={
-                                  <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                                  <span class="followerFollowingStat"> {"@" + item.username}</span>
                                   }
                               />
+
+                            { personId.includes(item.id) ?
+
+                              <div className = "invitedButton">
+                                <i class="far fa-check-circle"></i>
+                              </div>
+
+                              :
+
+                              <div
+                                onClick = {this.onInvitePeople(eventId, item.id)}
+                                className = "inviteButton">
+                                <i class="fas fa-user-plus"></i>
+                              </div>
+
+
+                            }
+
+
+
                             </Skeleton>
                         </List.Item>
                     )}
