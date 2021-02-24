@@ -640,6 +640,12 @@ class SocialEventInfo extends React.Component{
                         dataSource={list}
                         renderItem={item => (
 
+                          personId.includes(item.id) || notGoingId.includes(item.id) ?
+
+                          <div></div>
+
+                        :
+
                         <List.Item>
 
                           <Skeleton avatar title={false} loading={item.loading} active>
