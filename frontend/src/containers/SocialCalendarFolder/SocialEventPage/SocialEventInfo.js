@@ -519,6 +519,19 @@ class SocialEventInfo extends React.Component{
 
                   >
                   You are the host
+
+                    <Tooltip title = "Add to personal calendar">
+                      <Button
+                        style={{
+                          marginLeft:'10px',
+                          color: 'black'
+                        }}
+                        size = {'large'}
+                        >
+                        <i class="far fa-calendar-plus"></i>
+                      </Button>
+                    </Tooltip>
+
                 </div>
 
                 :
@@ -587,6 +600,19 @@ class SocialEventInfo extends React.Component{
 
 
             }
+
+            <Tooltip title = "Add to personal calendar" >
+              <Button
+                style={{
+                  marginRight:'5%',
+                  color: 'black',
+                }}
+                size = {'large'}
+                >
+                <i class="far fa-calendar-plus"></i>
+              </Button>
+            </Tooltip>
+
              </div>
 
 
@@ -598,6 +624,12 @@ class SocialEventInfo extends React.Component{
 
 
             </div>
+
+
+
+
+
+
           </div>
 
 
