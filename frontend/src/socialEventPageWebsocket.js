@@ -153,18 +153,27 @@ class WebSocketSocialEventPage{
       this.callbacks['delete_social_event_noti']();
 
     }
+    if(command === 'send_social_event_invite'){
+
+      // add the callback here
+      const inviteList = parsedData.inviteList
+
+      this.callbacks['send_social_event_invite'](inviteList)
+    }
   }
 
   addCallbacks(
     fetchSocialEventInfo,
     sendSocialMessageCallbacks,
     updateSocialEventCallbacks,
-    sendSocialEventDeleteNoti
+    sendSocialEventDeleteNoti,
+    sendSocialEventInvite
   ){
     this.callbacks['fetch_social_event_info'] = fetchSocialEventInfo
     this.callbacks['send_social_event_message'] = sendSocialMessageCallbacks
     this.callbacks['update_social_event_page'] = updateSocialEventCallbacks
     this.callbacks['delete_social_event_noti'] = sendSocialEventDeleteNoti
+    this.callbacks['send_social_event_invite'] = sendSocialEventInvite
   }
 
   sendSocialMessage (data){

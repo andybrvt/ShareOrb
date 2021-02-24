@@ -154,6 +154,15 @@ const addSocialDayCaption = (state, action) => {
   })
 }
 
+const sendSocialEventInvite = (state, action) => {
+  return updateObject(state, {
+    selectedSocialEvent:{
+      ...state.selectedSocialEvent,
+      inviteList: action.inviteList
+    }
+  })
+}
+
 
 
 const reducer = (state = initialState, action) => {
@@ -186,6 +195,8 @@ const reducer = (state = initialState, action) => {
       return deleteSocialCellItem(state, action);
     case actionTypes.ADD_SOCIAL_DAY_CAPTION:
       return addSocialDayCaption(state, action);
+    case actionTypes.SEND_SOCIAL_EVENT_INVITE:
+      return sendSocialEventInvite(state, action);
     default:
       return state;
   }

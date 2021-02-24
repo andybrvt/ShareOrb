@@ -133,3 +133,12 @@ export const sendDeleteSocialEventNoti = () => {
     type: actionTypes.SEND_DELETE_SOCIAL_EVENT_NOTI
   }
 }
+
+export const sendSocialEventInvite = (inviteList) => {
+  // This will be used to send out an event invite to people
+  return {
+    type: actionTypes.SEND_SOCIAL_EVENT_INVITE,
+    inviteList:inviteList
+
+  }
+}

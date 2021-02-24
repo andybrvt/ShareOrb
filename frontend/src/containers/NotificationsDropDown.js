@@ -140,6 +140,13 @@ class NotificationsDropDown extends React.Component{
 
   }
 
+  onSocialEventClick = (eventId) => {
+    // This will redirect to the social cal cell page
+    if(eventId){
+      this.props.history.push("/socialcal/event/"+eventId)
+    }
+  }
+
   renderTimestamp = timestamp =>{
     console.log(timestamp)
     let prefix = '';
@@ -921,6 +928,43 @@ class NotificationsDropDown extends React.Component{
 
                  </div>
             </h4>
+          </li>
+        )
+      }
+
+      if(notifications[i].type === "invite_social_event"){
+        notificationList.push(
+          <li
+          onClick = {() => this.onSocialEventClick(notifications[i].eventId)}
+          className = "notificationListContainer">
+            <div className = 'notificationIcon'>
+              <Avatar size = {45} style = {{
+                verticalAlign: 'middle'}}
+                // icon = {<UserOutlined />}
+
+                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+
+                >
+              </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+                 invited you to a social event.
+
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                <div
+                className = 'deleteButton'
+                onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                >
+
+                <i class="far fa-times-circle"></i>
+
+                </div>
+
+
+            </h4>
+
           </li>
         )
       }

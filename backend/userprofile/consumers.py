@@ -190,38 +190,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
 
     def send_personalCal_event_notification(self, data):
-        #This method is to use for all the notificaiton for personal calendar
-        # if data['command'] == "send_shared_event_notification":
-        #     actor = get_object_or_404(User, id = data["actor"])
-        #     # for recipients in data['recipient']:
-        #     #     recipient = get_object_or_404(User, id = recipients['id'])
-        #     #     notification = CustomNotification.objects.create(type = "shared_event",
-        #     #     actor = actor,
-        #     #     recipient = recipient,
-        #     #     verb = "shared an event at "+data['eventDate'],
-        #     #     minDate = data['eventDate'])
-        #     #     serializer = NotificationSerializer(notification)
-        #     #     content = {
-        #     #         "command": "new_notification",
-        #     #         "notification":json.dumps(serializer.data),
-        #     #         "recipient": recipient.username,
-        #     #     }
-        #     #     self.send_new_notification(content)
-        #     recipient = get_object_or_404(User, id = data['recipient'])
-        #     notification = CustomNotification.objects.create(
-        #     type = "shared_event",
-        #     actor = actor,
-        #     recipient = recipient,
-        #     verb = "shared an event at "+data['eventDate'],
-        #     minDate = data['eventDate'])
-        #     serializer = NotificationSerializer(notification)
-        #     content = {
-        #         "command": "new_notification",
-        #         "notification":json.dumps(serializer.data),
-        #         "recipient": recipient.username,
-        #     }
-        #     self.send_new_notification(content)
-
         if data['command'] == 'send_accepted_shared_event':
             actor = get_object_or_404(User, id = data['actor'])
             recipient = get_object_or_404(User, id = data['recipient'])
@@ -317,6 +285,33 @@ class NotificationConsumer(JsonWebsocketConsumer):
                 "recipient": notification.recipient.username
             }
 
+            self.send_new_notification(content)
+
+
+    def send_social_cal_event_notification(self, data):
+        # This function will be used to handle all the notification that will come
+        # from the social cal events
+        if data['command'] == "send_social_event_invite_notification":
+            # This function will be used to send a notification to the person
+            # that got invited to a social cal event
+
+            # Since this one has to do with events, you want to attach the event
+            # id to the modal
+            recipient = get_object_or_404(User, id = data['recipient'])
+            actor = get_object_or_404(User, id = data['actor'])
+            # Make the notification
+            notification = CustomNotification.objects.create(
+            type = "invite_social_event",
+            actor = actor,
+            recipient = recipient,
+            eventId = data['eventId']
+            )
+            serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_notification",
+                "notification": json.dumps(serializer.data),
+                "recipient": recipient.username
+            }
             self.send_new_notification(content)
 
     def unsend_notification(self, data):
@@ -583,6 +578,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_notification(data)
         if data['command'] == 'unsend_follow_notification':
             self.unsend_notification(data)
+        if data['command'] == 'send_social_event_invite_notification':
+            self.send_social_cal_event_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
