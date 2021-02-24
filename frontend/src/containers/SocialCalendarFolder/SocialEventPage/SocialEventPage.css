@@ -432,3 +432,71 @@
 .socialEventGroupChat.active .inputForm .eventEndText{
 
 }
+
+
+
+/* This is for part of the profile carousel */
+.profileSlide{
+  position: relative;
+  height: 270px;
+  /* display: flex;
+  flex-direction: row; */
+  column-count: 3;
+  column-gap: 0;
+
+}
+.profileSlide .singleProfile{
+  position: relative;
+  height: 90px;
+  background-color: white;
+  /* width: calc(100%/3); */
+  flex-basis: calc(100%/3);
+
+}
+.miniHolderHolder{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.miniAvatarHolder{
+  width: 100%;
+  text-align: center;
+}
+
+.miniNameHolder{
+  width: 100%;
+  text-align: center;
+}
+
+.profileSlide .singleEmptyProfile{
+  position: relative;
+  height: 90px;
+  background-color: white;
+  /* width: calc(100%/3); */
+  flex-basis: calc(100%/3);
+
+}
+
+.miniArrowLeft{
+  position: absolute;
+  /* background-color: red; */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  left: 1%;
+  font-size: 25px;
+  color: white;
+}
+.miniArrowRight{
+  position: absolute;
+  /* background-color: red; */
+  bottom: 50%;
+  transform: translateY(50%);
+  right: 0%;
+  /* right: 100%; */
+  z-index: 3;
+  right: 1%;
+  font-size: 25px;
+  color: white;
+}

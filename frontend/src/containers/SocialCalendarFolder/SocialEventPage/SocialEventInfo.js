@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Progress, Avatar, Modal, message, notification, Divider, Tooltip, Statistic, List, Skeleton, Tabs, Switch} from 'antd';
+import {Carousel,Button, Progress, Avatar, Modal, message, notification, Divider, Tooltip, Statistic, List, Skeleton, Tabs, Switch} from 'antd';
 import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
@@ -13,6 +13,7 @@ import DeleteSocialEventModal from './DeleteSocialEventModal';
 import { ReactBingmaps } from 'react-bingmaps';
 import {Link, withRouter} from 'react-router-dom';
 import DetailEditEventForm from '../../PersonalCalendar/EventPage/DetailEditEventForm';
+import UserAvaCarousel from './UserAvaCarousel';
 
 const { TabPane } = Tabs;
 
@@ -608,7 +609,11 @@ class SocialEventInfo extends React.Component{
             <div
               class="eventDetailCard">
               Event Details
-              <Divider/>
+              <Divider
+                style = {{
+                  background: "black"
+                }}
+                />
               <div style={{fontSize:'16px'}}>
                 <i style={{marginRight:'10px', color:'#1890ff'}} class="fas fa-globe"></i>
                 Social Event
@@ -624,12 +629,30 @@ class SocialEventInfo extends React.Component{
 
                </div>
               </div>
+
+              <div class = "personListCard">
+                People who are going
+                <Divider
+                  style = {{
+                    background: "black"
+                  }}
+                  />
+
+                <UserAvaCarousel
+                  persons = {persons}
+                   />
+
+              </div>
           </div>
 
           <div className = 'eventBottomRight'>
             <div className = "inviteFriendsEventCard">
                 Invite Friends
-                <Divider/>
+                <Divider
+                  style = {{
+                    background: "black"
+                  }}
+                  />
                 <Tabs defaultActiveKey="1">
                   <TabPane tab="Suggested Friends" key="1">
 
@@ -732,7 +755,11 @@ class SocialEventInfo extends React.Component{
             <div class="mapEventCard">
               Location
               <span>
-                <Divider style={{marginTop:'-1px'}}/>
+                <Divider
+
+                   style={{
+                     background: "black",
+                     marginTop:'-1px'}}/>
                 {/*
                 <ReactBingmaps
                   bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
@@ -765,7 +792,11 @@ class SocialEventInfo extends React.Component{
 
             <div className = "statEventCard">
                <span> Statistics </span>
-              <Divider/>
+              <Divider
+                style = {{
+                  background: "black"
+                }}
+                />
               <div className =  "percentagesBars">
                 <div className = "percentage">
                   <Progress
