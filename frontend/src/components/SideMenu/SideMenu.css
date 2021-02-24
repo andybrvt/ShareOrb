@@ -256,6 +256,7 @@ aside {
     aside .side-inner .logo-wrap {
       display: block;
       /* background-color: red; */
+
       position: fixed;
       top: 5px;
       /* width: 5%; */
@@ -264,7 +265,7 @@ aside {
 
 
       aside .side-inner .logo-wrap .logo {
-
+        font-weight: 600;
         width: 2.7vw;
         float: left;
         height: 2.7vw;
@@ -294,7 +295,7 @@ aside {
           color: #fff;
           font-size: 1.2vw;
           top: 50%;
-          left: 50%;
+          left: 52%;
           -webkit-transform: translate(-50%, -50%);
           -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -303,6 +304,27 @@ aside {
         font-size: 1.5rem;
 
       }
+
+      .testBackLogo{
+        position: absolute;
+        top: 10%;
+        margin-left: 5px;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+        opacity: 0;
+        visibility: hidden;
+        color: white;
+        width:100px;
+      }
+
+      .show-sidebar .testBackLogo{
+        opacity: 1;
+        font-weight: 600;
+
+        visibility: visible;
+      }
+
       aside .side-inner .logo-wrap .logo-text {
         position: absolute;
         top: 10%;
@@ -318,6 +340,7 @@ aside {
         .show-sidebar aside .side-inner .logo-wrap .logo-text {
           opacity: 1;
           font-weight: 600;
+
           visibility: visible; }
 
 
@@ -380,6 +403,7 @@ aside {
         aside .side-inner .nav-menu ul li a .wrap-icon {
           font-size: 1.2rem; }
         aside .side-inner .nav-menu ul li a .menu-text {
+          font-weight: 400;
           opacity: 0;
           visibility: hidden;
           -webkit-transition: .3s all ease;

@@ -52,8 +52,9 @@ import NotificationsDropDown from '../../containers/NotificationsDropDown';
 import defaultPicture from '../images/default.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-
-
+import mainLogo from '../../logo.svg';
+import backPartLogo from '../../hareOrb.svg';
+import frontPartLogo from '../../frontPartLogo.svg';
 import { connect } from 'react-redux';
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
@@ -284,7 +285,8 @@ class SideMenu extends React.Component {
                     <div class="logo">
                       <span>S</span>
                     </div>
-                    <span class="logo-text">hareOrb</span>
+                    <img src={backPartLogo} style={{top:'25%'}} class="testBackLogo"
+                    />
                   </div>
 
                 <div class="nav-menu">

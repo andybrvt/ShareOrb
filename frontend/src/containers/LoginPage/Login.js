@@ -19,6 +19,7 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Button, Checkbox, Avatar } from 'antd';
 import './Login.css';
+import mainLogo from '../../logo.svg';
 // Function: logs user in
 class LoginForm extends React.Component {
   constructor(props) {
@@ -73,7 +74,8 @@ class LoginForm extends React.Component {
           {/* color is #68BFFD*/}
 
 
-
+          <img src={mainLogo} width="20%"
+            style={{position:'absolute',top:'7.5%', left:'19%'}}/>
           <div class="loginTitle">Connecting people through calendars </div>
           <div class="LeftLoginContainer">
             <div class="eventCard allStyle"

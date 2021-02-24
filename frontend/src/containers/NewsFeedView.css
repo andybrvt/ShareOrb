@@ -4,9 +4,46 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  background: white;
+}
+
+.upperTopContainer{
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  cursor: pointer;
+  /* background: blue; */
+}
+
+.upperTopRightContainer{
+  width: 90%;
+  height: 95%;
+  position: relative;
+  top:15%;
+  /* background: red; */
+  /* background-color: whitesmoke; */
 
 }
 
+
+
+.writeAPostText{
+  color: gray;
+  background: #f5f5f5;
+
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  padding:7.5px;
+
+  /* top: 50%; */
+  position: relative;
+  /* transform:translateY(-50%); */
+}
+.writeAPostText:hover{
+  background: #f0f0f0;
+}
 
 
 .newUpdateDayContainer{
@@ -23,16 +60,11 @@
   flex-direction: row;
 }
 
-.leftPart{
-  width: 50%;
-  text-align: center;
-  border-right: 1px solid lightgray;
-
-}
 
 .newButtonCard{
   position: relative;
   background-color: white;
+  border-top: 1px solid #f0f0f0;
   height: 100%;
   width: 100%;
   left: 50%;
@@ -53,18 +85,20 @@
   transform: translateX(-50%) translateY(-50%);
 
 }
+
+.leftPart{
+  width: 50%;
+  text-align: center;
+  border-right: 1px solid lightgray;
+
+}
+
+
 .rightPart{
   width: 50%;
   text-align: center;
 }
 
-.upperTopContainer{
-  height: 75px;
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  cursor: pointer;
-}
 
 .upperTopCard{
   background-color: white;
@@ -77,32 +111,16 @@
 }
 .upperTopLeftContainer{
   width: 10%;
+  /* background: red; */
+  position: relative;
 }
 .avatarHolder{
   position: relative;
-  left: 50%;
+  left: 75%;
   top: 50%;
   transform: translateY(-50%) translateX(-50%);
 }
-.upperTopRightContainer{
-  width: 90%;
-  height: 95%;
-  position: relative;
-  /* background-color: whitesmoke; */
-  padding-left: 10px;
-}
-.upperTopRightContainer:hover{
-  background-color: whitesmoke;
-}
 
-.writeAPostText{
-  color: gray;
-  font-size: 20px;
-  top: 30%;
-  /* top: 50%; */
-  position: relative;
-  /* transform:translateY(-50%); */
-}
 
 .upperBottomContainer{
   height: 75px;
@@ -131,7 +149,7 @@
   width: 60px;
   height: 60px;
   margin-right: 20px;
-  border-radius: 2px;
+  border-radius: 5px;
   overflow: hidden;
 }
 .miniPics img{

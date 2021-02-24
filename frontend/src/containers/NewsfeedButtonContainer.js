@@ -90,25 +90,34 @@ class NewsfeedButtonContainer extends React.Component{
 
           <div className = "upperTopLeftContainer">
             <div className = "avatarHolder">
-              <Avatar size = {45} src  = {`${global.IMAGE_ENDPOINT}`+profilePic} />
+              <Avatar size = {35} src  = {`${global.IMAGE_ENDPOINT}`+profilePic} />
             </div>
 
           </div>
 
           <div className = "upperTopRightContainer">
-
+            {
+              dayCaption.length > 0 ?
 
               <div
                 onClick = {this.props.postCondition}
-                className = "writeAPostText">
-                Update your day...
+                 className = "writeAPostText">
+                {this.eventTitle(this.capitalize(dayCaption))}
               </div>
 
+              :
 
+              <div
+                onClick = {this.props.postCondition}
+                 className = "writeAPostText">
+                Write a post...
+              </div>
+
+            }
 
           </div>
 
-
+f
 
         </div>
 
@@ -147,9 +156,7 @@ class NewsfeedButtonContainer extends React.Component{
 
 
         <div className = "newBottomButtonHolder">
-          <div
-            onClick = {this.props.openEvent}
-            className = "leftPart">
+          <div className = "leftPart">
 
             <div className = "newButtonCard">
               <div className = "textCenter">
