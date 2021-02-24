@@ -98,6 +98,7 @@ class WebSocketNotifications {
         this.showNotification(parsedData, 'bottomRight')
 
         const notification = JSON.parse(parsedData.notification)
+        console.log(notification)
         this.callbacks['new_notification'](notification)
         if(notification.type === "follow_request_notification"){
           // put the call back for updating the request in the auth here.

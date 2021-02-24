@@ -4,6 +4,7 @@ import * as dateFns from 'date-fns';
 import EditSocialEventForm from './EditSocialEventForm';
 import {PictureOutlined} from '@ant-design/icons';
 import SocialEventPageWebSocketInstance from '../../../socialEventPageWebsocket';
+import NotificationWebSocketInstance from '../../../notificationWebsocket';
 import ChangeBackgroundModal from '../../PersonalCalendar/EventPage/ChangeBackgroundModal';
 import { authAxios } from '../../../components/util';
 import * as socialActions from '../../../store/actions/socialCalendar';
@@ -233,12 +234,21 @@ class SocialEventInfo extends React.Component{
     // pretty much just add them to the invite list and see if they want to
     // join
 
+    // userId will be the person that you are gonna try to invite
     console.log(eventId, userId)
 
     SocialEventPageWebSocketInstance.onInvitePeople(eventId, userId)
 
-    // Send out a notification too
+    // Send out a notification too, this will just send out a notification to the
+    // invited and when they click on the invit eit will direct them to the
+    const notificationObject = {
+      command: 'send_social_event_invite_notification',
+      actor: this.props.userId,
+      recipient: userId,
+      eventId: eventId
+    }
 
+    NotificationWebSocketInstance.sendNotification(notificationObject)
 
   }
 
@@ -600,7 +610,38 @@ class SocialEventInfo extends React.Component{
                 </TabPane>
                 <TabPane tab="Pending Invites (2)" key="2">
 
-                  <div>hi</div>
+                  <List
+                      className="demo-loadmore-list scrollableFeature"
+                      style={{marginTop:'-10px'}}
+                      itemLayout="horizontal"
+                      dataSource={inviteList}
+                      renderItem={item => (
+
+                      <List.Item>
+
+                        <Skeleton avatar title={false} loading={item.loading} active>
+
+                          <List.Item.Meta
+                            avatar={
+                              <Avatar
+                                style = {{
+                                  cursor: "pointer"
+                                }}
+                                onClick = {() => this.profileDirect(item.username)}
+                                 src={`${global.IMAGE_ENDPOINT}`+item.profile_picture} />
+                              }
+                              title={<span
+                                style = {{cursor: "pointer"}}
+                                 onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
+                              description={
+                                <span class="followerFollowingStat"> {"@" + item.username}</span>
+                                }
+                            />
+
+                          </Skeleton>
+                      </List.Item>
+                  )}
+                />
                 </TabPane>
               </Tabs>
             </div>
