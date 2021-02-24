@@ -321,7 +321,7 @@ class NotificationsDropDown extends React.Component{
             {dateFns.differenceInCalendarDays(
               new Date(notifications[i].maxDate),new Date(notifications[i].minDate)) === 1
               ? <span className ='notificationWords'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
               wants to event sync with you for: <b>
               {dateFns.format(
                 dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
@@ -331,7 +331,7 @@ class NotificationsDropDown extends React.Component{
               :
 
               <span className ='notificationWords'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
               wants to event sync with you from: <b>
               {dateFns.format(
                 dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
@@ -433,8 +433,8 @@ class NotificationsDropDown extends React.Component{
                ?
 
               <span className = 'notificationWords'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
-               accepted your event sync request for: <b>
+              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
+               accepted your event sync request on <b>
               {dateFns.format(
                 dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
               </b>
@@ -503,8 +503,11 @@ class NotificationsDropDown extends React.Component{
         </Avatar>
         </div>
           <h4 className = 'listNotificationSingle'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
-              set an event on {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
+              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+              set an event on your calendar on
+              <br/>
+              {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
+
               at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
@@ -534,7 +537,7 @@ class NotificationsDropDown extends React.Component{
             </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
                  liked your post.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
@@ -567,7 +570,7 @@ class NotificationsDropDown extends React.Component{
             </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b> {notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+                <b> {this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
                  commented on your post.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
@@ -599,7 +602,7 @@ class NotificationsDropDown extends React.Component{
             </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
                  followed you.
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
@@ -635,7 +638,7 @@ class NotificationsDropDown extends React.Component{
               </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
                  shared an event with you on <br/>
                <b>{dateFns.format(new Date(notifications[i].minDate), 'iiii')+", "} </b>
                  <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d')} </b> at
@@ -673,7 +676,7 @@ class NotificationsDropDown extends React.Component{
               </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
                  shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
@@ -706,7 +709,7 @@ class NotificationsDropDown extends React.Component{
               </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b>{this.capitalize(notifications[i].actor.username)} </b>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
                  declined shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
@@ -739,7 +742,7 @@ class NotificationsDropDown extends React.Component{
               </Avatar>
             </div>
             <h4 className = 'listNotificationSingle'>
-                <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name} </b>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
                  edited a shared event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
@@ -827,7 +830,7 @@ class NotificationsDropDown extends React.Component{
           </Avatar>
         </div>
           <h4 className = 'listNotificationSingle'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
+              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
               wants to add pictures to your social calendar on {notifications[i].pendingEventDate}. Click to check it out!
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
