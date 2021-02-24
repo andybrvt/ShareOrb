@@ -129,6 +129,64 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
 
         self.send_social_message(content)
 
+    def send_social_event_going(self, data):
+        # This function will pretty much remove someone from the invite
+        # list and then add them to the person list
+
+        # first grab the event
+        print(data)
+        selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+
+        # Then grab the user
+        goingUser = get_object_or_404(User, id = data['userId'])
+
+        # So you wnat to remove that person from the invite list and then
+        # add them to the person list
+        selectedEvent.inviteList.remove(goingUser)
+        selectedEvent.notGoingList.remove(goingUser)
+        # Then add them to person
+        selectedEvent.persons.add(goingUser)
+        selectedEvent.save()
+
+        serializedEvent = SocialCalEventSerializer(selectedEvent, many = False).data
+
+        content = {
+            "command": "send_social_event_going",
+            "socialEvent": serializedEvent,
+            "socialEventId": data['eventId']
+        }
+
+        self.send_social_message(content)
+
+    def send_social_event_not_going(self, data):
+        # This will just remove the user from the invite list and then add them
+        # to the notGoingList
+
+        print(data)
+        print("does it hit here")
+        selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
+        notGoingUser = get_object_or_404(User, id = data['userId'])
+
+
+        # Now remove the person from the person and invite list and add them
+        # to the notGoingList
+        selectedEvent.inviteList.remove(notGoingUser)
+        selectedEvent.persons.remove(notGoingUser)
+
+        selectedEvent.notGoingList.add(notGoingUser)
+
+        selectedEvent.save()
+
+        serializedEvent = SocialCalEventSerializer(selectedEvent, many = False).data
+
+        # It uses teh same redux so no need to make a new one
+        content = {
+            'command': "send_social_event_going",
+            "socialEvent": serializedEvent,
+            "socialEventId":data['eventId']
+        }
+
+        self.send_social_message(content)
 
     def send_social_message(self, socialEventMessage):
         # This will be for sending inforamtion inot the channel layer to the groups
@@ -161,6 +219,7 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
 
         data = json.loads(text_data)
+        print(data)
         if data["command"] == "fetch_social_event_messages":
             self.send_fetch_social_event_messages(data);
         if data["command"] == "send_social_event_message":
@@ -171,6 +230,11 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
             self.send_social_event_delete(data)
         if data['command'] == "send_social_event_invite":
             self.send_social_event_invite(data)
+        if data['command'] == "send_social_event_going":
+            self.send_social_event_going(data)
+        if data['command'] == "send_social_event_not_going":
+            print('it hits the if statement')
+            self.send_social_event_not_going(data)
 
     def new_social_message(self, message):
         messageObj = message['eventMessage']

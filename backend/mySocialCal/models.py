@@ -363,6 +363,7 @@ class SocialCalEvent(models.Model):
     backgroundImg = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True, )
 
     inviteList = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'social_invite_list')
+    notGoingList = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "social_not_going_list")
 
     def get_socialEventMessage(self):
         # This will attach the messeges to the socialCalEvent by the foreginkey

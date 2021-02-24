@@ -253,6 +253,22 @@ class SocialEventInfo extends React.Component{
   }
 
 
+  onGoingEvent = (eventId, userId) => {
+    // This function will add the person to the perosn list in the
+
+    console.log(eventId, userId)
+    SocialEventPageWebSocketInstance.onGoingEvent(eventId, userId)
+
+    // Add small notification here
+  }
+
+  onNotGoingEvent = (eventId, userId) => {
+    // This function will add the person to the not going list
+
+    SocialEventPageWebSocketInstance.onNotGoingEvent(eventId, userId)
+
+  }
+
 
 
   render() {
@@ -276,6 +292,8 @@ class SocialEventInfo extends React.Component{
     let inviteId = []
     let host = "";
     let eventId = ""
+    let notGoingList = []
+    let notGoingId = []
 
     // These are just place holders
     let list = []
@@ -341,6 +359,17 @@ class SocialEventInfo extends React.Component{
             this.props.info.inviteList[i].id
           )
         }
+      }
+
+      if(this.props.info.notGoingList){
+        notGoingList = this.props.info.notGoingList
+
+        for(let i = 0; i< this.props.info.notGoingList.length; i++){
+          notGoingId.push(
+            this.props.info.notGoingList[i].id
+          )
+        }
+
       }
 
 
@@ -477,46 +506,94 @@ class SocialEventInfo extends React.Component{
 
           <div className = "buttonHolder">
             <div className = "buttonsHolder">
-              <Button
-                 type="primary" shape="round"
-                 icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                 style={{marginRight:'1%'}}
-                size={'large'}>
 
-                Invite
-              </Button>
+              {
+                eventHostId === this.props.userId ?
 
+                <div
+                  style={{
+                    marginRight:'5%',
+                    color: 'black'
+                  }}
+
+                  >
+                  You are the host
+                </div>
+
+                :
+
+
+             <div>
                {
-                 (persons.includes(this.props.username))?
+                 personId.includes(this.props.userId) ?
+                   <Button
+                      shape="round"
+                      type="primary"
+                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                      style={{
+                        marginRight:'1%',
+                        cursor: "default"
+                      }}
+                      size={'large'}>
+
+                     Going
+                   </Button>
+
+                   :
+
                     <Button
+                      onClick = {() =>this.onGoingEvent(eventId, this.props.userId)}
+
                        shape="round"
-                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user"></i>}
                        style={{marginRight:'1%'}}
                       size={'large'}>
 
                       Going
                     </Button>
 
-                    :
-                    <Button
-                       shape="round" type="primary"
-                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                       style={{marginRight:'1%'}}
-                       size={'large'}>
 
-                      Going
-                    </Button>
 
               }
 
+            {
+              notGoingId.includes(this.props.userId) ?
 
-            <Button
-               shape="round"
-               icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
-               style = {{marginRight: '3%'}}
-               size={'large'} danger>
-               Delete
-            </Button>
+              <Button
+                type = "primary"
+                 shape="round"
+                 icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+                 style = {{
+                   marginRight: '3%',
+                   cursor: "default"
+
+                 }}
+                 size={'large'} danger>
+                 Not going
+              </Button>
+
+              :
+
+              <Button
+                onClick = {() => this.onNotGoingEvent(eventId, this.props.userId)}
+
+                 shape="round"
+                 icon={<i  style={{marginRight:'10px'}} class="fas fa-user"></i>}
+                 style = {{marginRight: '3%'}}
+                 size={'large'} danger>
+                 Not going
+              </Button>
+
+
+            }
+             </div>
+
+
+
+
+            }
+
+
 
 
             </div>

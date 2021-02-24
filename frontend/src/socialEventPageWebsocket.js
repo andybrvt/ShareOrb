@@ -113,6 +113,26 @@ class WebSocketSocialEventPage{
     })
   }
 
+  onGoingEvent = (eventId, userId) => {
+    // This function will be used to add a person to the social event
+    // person list
+    this.sendSocialMessage({
+      command: "send_social_event_going",
+      eventId: eventId,
+      userId: userId
+    })
+
+  }
+
+  onNotGoingEvent = (eventId, userId) => {
+    // for not going to the event
+    this.sendSocialMessage({
+      command: "send_social_event_not_going",
+      eventId: eventId,
+      userId: userId
+    })
+  }
+
   socketNewSocialMessage(data){
     // This will be the function that will be calling the callbacks
     console.log('call backs')
@@ -134,7 +154,6 @@ class WebSocketSocialEventPage{
 
     }
     if(command === 'send_social_event_message'){
-      console.log('sup sup sup')
       const socialMessageObj = parsedData.socialEventMessgaeObj
       const socialEventId = parsedData.socialEventId
       this.callbacks['send_social_event_message'](socialMessageObj)
@@ -159,6 +178,14 @@ class WebSocketSocialEventPage{
       const inviteList = parsedData.inviteList
 
       this.callbacks['send_social_event_invite'](inviteList)
+    }
+    if(command === "send_social_event_going"){
+
+
+      const eventObj = parsedData.socialEvent
+
+      // Add call back here
+      this.callbacks['update_social_event_page'](eventObj)
     }
   }
 
