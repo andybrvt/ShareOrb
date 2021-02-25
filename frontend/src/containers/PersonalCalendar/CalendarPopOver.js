@@ -68,6 +68,10 @@ class CalendarPopOver extends React.Component{
       this.props.history.push('/personalcal/event/'+eventId)
     }
 
+    onSocialEventPage = (eventId) =>{
+      this.props.history.push("/socialcal/event/"+eventId)
+    }
+
     onDeleteEvent = (eventId, eventType, host) => {
       console.log(eventId)
 
@@ -266,6 +270,13 @@ class CalendarPopOver extends React.Component{
 
 
               {
+                item.type === "social" ?
+
+                <Tag style={{
+                    fontSize:'15px', display:'inline-block'}} color="#f50"> social</Tag>
+
+                :
+
                 (item.invited.length==0)?
                 <Tag style={{fontSize:'15px', display:'inline-block'}} color={item.color}> private</Tag>
 
@@ -407,13 +418,28 @@ class CalendarPopOver extends React.Component{
 
                 <div class="popOverBotFlex">
                   <Tooltip placement="bottomLeft" title="View event">
-                    <Button
-                    onClick = {() => this.onEventPage(item.id)}
-                    shape="circle"
-                    size="large"
-                    type="primary">
-                       <i class="fas fa-eye"></i>
-                    </Button>
+                    {
+                      item.type === "social" ?
+
+                      <Button
+                      onClick = {() => this.onSocialEventPage(item.socialId)}
+                      shape="circle"
+                      size="large"
+                      type="primary">
+                         <i class="fas fa-eye"></i>
+                      </Button>
+
+                      :
+
+                      <Button
+                      onClick = {() => this.onEventPage(item.id)}
+                      shape="circle"
+                      size="large"
+                      type="primary">
+                         <i class="fas fa-eye"></i>
+                      </Button>
+
+                    }
                   </Tooltip>
                   <Tooltip placement="bottomLeft" title="Remove event">
                     <Button
@@ -492,13 +518,30 @@ class CalendarPopOver extends React.Component{
                           ?
                           <div>
                             <Tooltip placement="bottomLeft" title="View event">
-                              <Button
-                              onClick = {() => this.onEventPage(item.id)}
-                              shape="circle"
-                              size="large"
-                              type="primary">
-                                 <i class="fas fa-eye"></i>
-                              </Button>
+                              {
+                                item.type === "social" ?
+
+                                <Button
+                                onClick = {() => this.onSocialEventPage(item.socialId)}
+                                shape="circle"
+                                size="large"
+                                type="primary">
+                                   <i class="fas fa-eye"></i>
+                                </Button>
+
+                                :
+
+                                <Button
+                                onClick = {() => this.onEventPage(item.id)}
+                                shape="circle"
+                                size="large"
+                                type="primary">
+                                   <i class="fas fa-eye"></i>
+                                </Button>
+
+                              }
+
+
                             </Tooltip>
                             <Tooltip placement="bottomLeft" title="Remove event">
                               <Button
@@ -514,13 +557,28 @@ class CalendarPopOver extends React.Component{
                           :
                           <div>
                             <Tooltip placement="bottomLeft" title="View event">
-                              <Button
-                              onClick = {() => this.onEventPage(item.id)}
-                              shape="circle"
-                              size="large"
-                              type="primary">
-                                 <i class="fas fa-eye"></i>
-                              </Button>
+                              {
+                                item.type === "social" ?
+
+                                <Button
+                                onClick = {() => this.onSocialEventPage(item.socialId)}
+                                shape="circle"
+                                size="large"
+                                type="primary">
+                                   <i class="fas fa-eye"></i>
+                                </Button>
+
+                                :
+
+                                <Button
+                                onClick = {() => this.onEventPage(item.id)}
+                                shape="circle"
+                                size="large"
+                                type="primary">
+                                   <i class="fas fa-eye"></i>
+                                </Button>
+
+                              }
                             </Tooltip>
                             <Tooltip placement="bottomLeft" title="Remove event">
                               <Button
@@ -616,9 +674,24 @@ class CalendarPopOver extends React.Component{
 
 
                     <span className="pointerEvent">
-                      <span className = 'eventPageTitle pointerEvent' >
-                        {item.title.substring(0,19)}
-                      </span>
+                      {
+                        item.type === "social" ?
+
+                        <span className = 'eventPageTitle pointerEvent' >
+                          {item.title.substring(0,19)}
+                          <Tag style={{fontSize:'12px', display:'inline-block',
+                            marginLeft: "3px",
+                          }} color="#f50"> social</Tag>
+                        </span>
+
+                        :
+
+                        <span className = 'eventPageTitle pointerEvent' >
+                          {item.title.substring(0,19)}
+                        </span>
+
+                      }
+
                       {month ?
                       <span></span>
 
@@ -670,7 +743,21 @@ class CalendarPopOver extends React.Component{
 
 
                     <span className="pointerEvent">
-                      <span className = 'eventPageTitle pointerEvent' > {item.title.substring(0,19) } </span>
+                      {
+                        item.type === "social" ?
+
+                        <span className = 'eventPageTitle pointerEvent' >
+                          {item.title.substring(0,19)}
+                          <span className = "socialTag"> social </span>
+                        </span>
+
+                        :
+
+                        <span className = 'eventPageTitle pointerEvent' >
+                          {item.title.substring(0,19)}
+                        </span>
+
+                      }
                         {month ?
                         <span></span>
 

@@ -53,6 +53,12 @@ class Event(models.Model):
 
 	# This will be used to check if the messages are seen or not
 	seen = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "seen_event_chat")
+
+	# This will be used mostly to id if it is a social cal or a normal cal event
+	# 2 options either it is normal or social as a type
+	type = models.CharField(max_length = 255, blank = True, default = "normal")
+
+	socialId = models.IntegerField(blank = True, null = True)
 	def __unicode__(self):
 		return self.title
 

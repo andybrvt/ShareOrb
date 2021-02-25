@@ -226,7 +226,9 @@ class CreateSocialPersonalCalEvent(APIView):
             start_time = startDateTime,
             end_time = endDateTime,
             color = "#1E90FF",
-            repeatCondition = "none"
+            repeatCondition = "none",
+            type = "social",
+            socialId = request.data['socialEventId']
         )
         newEvent.person.add(curUser)
 
