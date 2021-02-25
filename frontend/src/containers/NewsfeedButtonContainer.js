@@ -60,65 +60,37 @@ class NewsfeedButtonContainer extends React.Component{
 
     const location = this.props.location.pathname;
 
-    const data = [
-      {
-        title: 'Title 1',
-      },
-      {
-        title: 'Title 2',
-      },
-      {
-        title: 'Title 3',
-      },
-      {
-        title: 'Title 4',
-      },
-    ];
-
     console.log(picExist)
 
     return (
       <div className = "newUpdateButtonContainer">
-
-
         <div
           onClick = {this.props.postCondition}
-
-           className ="upperTopContainer">
-
-
+          className ="upperTopContainer">
 
           <div className = "upperTopLeftContainer">
             <div className = "avatarHolder">
               <Avatar size = {35} src  = {`${global.IMAGE_ENDPOINT}`+profilePic} />
             </div>
-
           </div>
 
           <div className = "upperTopRightContainer">
             {
               dayCaption.length > 0 ?
-
-              <div
-                onClick = {this.props.postCondition}
-                 className = "writeAPostText">
-                {this.eventTitle(this.capitalize(dayCaption))}
-              </div>
-
+                <div
+                  onClick = {this.props.postCondition}
+                   className = "writeAPostText">
+                  {this.eventTitle(this.capitalize(dayCaption))}
+                </div>
               :
 
-              <div
-                onClick = {this.props.postCondition}
-                 className = "writeAPostText">
-                Write a post...
-              </div>
-
-            }
-
+                <div
+                  onClick = {this.props.postCondition}
+                   className = "writeAPostText">
+                  Write a post...
+                </div>
+              }
           </div>
-
-f
-
         </div>
 
         <div

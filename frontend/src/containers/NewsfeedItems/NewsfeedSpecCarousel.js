@@ -51,12 +51,8 @@ class NewsfeedSpecCarousel extends React.Component{
       pictureList.map(
         item => {
           socialItems.push(
-
             <div
-
-
               className = 'imageContainer'>
-
               <div
                 style = {{
                     backgroundImage: `url(` + `${global.IMAGE_ENDPOINT}`+item.itemImage +")"
