@@ -5,10 +5,13 @@ from . import serializers
 from django.db.models import Q
 from django.utils import timezone
 import datetime
+import pytz
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import render, get_object_or_404
 from userprofile.models import User
+from mySocialCal.models import SocialCalEvent
 
 # Create your views here.
 # def get_calendar(request):
@@ -179,3 +182,57 @@ class EventBackgroundUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.EventBackgroundSerializer
     lookup_field = "id"
     queryset = models.Event.objects.all()
+
+class CreateSocialPersonalCalEvent(APIView):
+    # This function will be used to create a social event type
+    # on the personal calendar
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        # Now grab the social cal event here given the id
+        socialCalEvent = get_object_or_404(SocialCalEvent, id = request.data['socialEventId'])
+
+        # Now grab the current user
+        curUser = get_object_or_404(User, id = request.data['userId'])
+
+        # Now you have both the even and the curUser, now you will make the event
+
+        # So for the events, they are filtered and added to the calendar
+        # by the person list and the host will be that of the social event
+
+        print(socialCalEvent.start_time)
+        print(socialCalEvent.end_time)
+        print(socialCalEvent.event_day)
+
+        eventDate = socialCalEvent.event_day
+
+        startHour = socialCalEvent.start_time
+        endHour = socialCalEvent.end_time
+
+        # startHourAdd = datetime.timedelta(hour = startHour)
+        # endHourAdd = datetime.timedelta(hour = endHour)
+
+        startDateTime = datetime.datetime.combine(eventDate, startHour)
+        endDateTime = datetime.datetime.combine(eventDate, endHour)
+        print(startDateTime)
+        print(endDateTime)
+
+
+
+        newEvent = models.Event.objects.create(
+            host = socialCalEvent.host,
+            title = socialCalEvent.title,
+            content = socialCalEvent.content,
+            location = socialCalEvent.location,
+            start_time = startDateTime,
+            end_time = endDateTime,
+            color = "#1E90FF",
+            repeatCondition = "none"
+        )
+        newEvent.person.add(curUser)
+
+        newEvent.save()
+
+
+
+
+        return Response("some stuff")

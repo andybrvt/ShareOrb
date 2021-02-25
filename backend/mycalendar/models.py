@@ -28,6 +28,7 @@ class Event(models.Model):
 	host = models.ForeignKey(settings.AUTH_USER_MODEL, related_name ='personal_host', on_delete= models.CASCADE, null = True)
 	# GONNA DELETE THIS CALENDAR FIELD TOO AS WELL
 	calendar = models.ManyToManyField(Calendar, blank = True)
+
 	title = models.CharField(max_length = 255)
 	content = models.TextField(blank = True)
 	# repeated weekly/monthly/daily (for this field you are either gonna label it as

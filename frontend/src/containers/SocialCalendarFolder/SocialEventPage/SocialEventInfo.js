@@ -270,6 +270,24 @@ class SocialEventInfo extends React.Component{
 
   }
 
+  onAddToPersonalCalendar = (socialEventId, userId) => {
+    // This function will be used to add this social cal event to the personal calendar
+    // Since you are adding to personal calendar you dont really need to send this
+    // through consumer, just an api call should be good
+
+    // You would wnat to get the eventId to grab the soical event
+    // grab user and then make a event object
+    // you might have to do a api then consumer combo
+
+    authAxios.post(`${global.API_ENDPOINT}/mycalendar/createSocialTypeEvent`,{
+      socialEventId: socialEventId,
+      userId: userId
+    })
+
+
+
+  }
+
 
 
   render() {
@@ -522,6 +540,8 @@ class SocialEventInfo extends React.Component{
 
                     <Tooltip title = "Add to personal calendar">
                       <Button
+                        onClick = {() =>this.onAddToPersonalCalendar(eventId, this.props.userId)}
+
                         style={{
                           marginLeft:'10px',
                           color: 'black'
@@ -603,6 +623,7 @@ class SocialEventInfo extends React.Component{
 
             <Tooltip title = "Add to personal calendar" >
               <Button
+                onClick = {() =>this.onAddToPersonalCalendar(eventId, this.props.userId)}
                 style={{
                   marginRight:'5%',
                   color: 'black',
