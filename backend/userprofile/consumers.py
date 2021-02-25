@@ -105,6 +105,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
             serializedFollower = FollowUserSerializer(actor).data
             # Gotta update this on the auth for the other person
 
+            recipient.notificationSeen += 1
             content = {
                 "command": 'new_notification',
                 "notification": json.dumps(serializer.data),
@@ -124,6 +125,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
             # grab the user recipeitn for the requeest
             serializedRequest = FollowUserSerializer(actor).data
+
+            recipient.notificationSeen += 1
             content = {
                 "command": "new_notification",
                 "notification": json.dumps(serializer.data),
@@ -138,6 +141,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             recipient = get_object_or_404(User, id = data["recipient"])
             actor = get_object_or_404(User, id = data['actor'])
             notification = CustomNotification.objects.create(type = 'accept_follow_request', recipient = recipient, actor = actor, verb = "accepted follow")
+
+        recipient.notificationSeen += 1
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
