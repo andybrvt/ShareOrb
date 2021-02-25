@@ -230,6 +230,7 @@ class CreateSocialPersonalCalEvent(APIView):
             type = "social",
             socialId = request.data['socialEventId']
         )
+        newEvent.seen.add(curUser)
         newEvent.person.add(curUser)
 
         newEvent.save()
