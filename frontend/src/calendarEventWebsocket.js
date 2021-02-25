@@ -105,6 +105,7 @@ class WebSocketCalendarEvent {
       // page
       const notification = parsedData.notification
       // add call back here
+      this.callbacks['add_one_notification_seen']()
       this.callbacks['new_shared_event_notification'](notification)
     }
 
@@ -116,8 +117,8 @@ class WebSocketCalendarEvent {
     acceptEventShareCallback,
     declineElseEventShareCallback,
     declineEventShareCallback,
-    newShareEventNotificationCallback
-
+    newShareEventNotificationCallback,
+    addOneNotificationSeen,
   ){
     // you just need to add the event so just one call back
     this.callbacks['new_event'] = newEventCallback;
@@ -125,7 +126,7 @@ class WebSocketCalendarEvent {
     this.callbacks['decline_share_else'] = declineElseEventShareCallback;
     this.callbacks['decline_share'] = declineEventShareCallback;
     this.callbacks['new_shared_event_notification'] = newShareEventNotificationCallback;
-
+    this.callbacks['add_one_notification_seen'] = addOneNotificationSeen
   }
 
   acceptSharedEvent = (eventId, acceptorId) => {

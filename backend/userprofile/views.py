@@ -687,3 +687,16 @@ class unShowIntialInstructions(APIView):
         curUser.showIntialInstructions = False
         curUser.save()
         return Response(curUser.showIntialInstructions)
+
+
+class resetNotificationSeen(APIView):
+    # This function will be used to reset the notification see of a user
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        curUser = get_object_or_404(models.User, id = request.data['curId'])
+
+        curUser.notificationSeen = 0
+        curUser.save()
+
+        return Response("reset notification seen")

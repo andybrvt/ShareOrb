@@ -78,5 +78,6 @@ urlpatterns = [
 	path('onUnfollow', views.onUnfollowView.as_view(), name = "unfollow_user"),
 	path('sendFollowRequest', views.onSentRequestView.as_view(), name = 'send_follow_request'),
 	path('unsendFollowRequest', views.onUnsendRequestView.as_view(), name = 'unsend_follow_request'),
-	path('unShowIntialInstructions/<slug:id>', views.unShowIntialInstructions.as_view(), name = "unshow_intial_instruction")
+	path('unShowIntialInstructions/<slug:id>', views.unShowIntialInstructions.as_view(), name = "unshow_intial_instruction"),
+	path('resetNotificationSeen', views.resetNotificationSeen.as_view(), name = "reset_notification_seen")
 ]

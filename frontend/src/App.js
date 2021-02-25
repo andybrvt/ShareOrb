@@ -55,7 +55,8 @@ class App extends Component {
       this.props.updateRequestList.bind(this),
       this.props.newUpRequestList.bind(this),
       this.props.authAddFollower.bind(this),
-      this.props.authUpdateFollowers.bind(this)
+      this.props.authUpdateFollowers.bind(this),
+      this.props.addOneNotificationSeen.bind(this)
     )
     // For the calendarEventWebosocket you just need to have one
     // action (the addEvent) because the data for the each person is
@@ -65,7 +66,8 @@ class App extends Component {
       this.props.acceptEventShare.bind(this),
       this.props.declineElseEventShare.bind(this),
       this.props.declineEventShare.bind(this),
-      this.props.newNotification.bind(this)
+      this.props.newNotification.bind(this),
+      this.props.addOneNotificationSeen.bind(this)
 
     )
 
@@ -361,6 +363,7 @@ const mapDispatchToProps = dispatch => {
     setChats: chats => dispatch(messageActions.setChats(chats)),
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
+    addOneNotificationSeen: () => dispatch(authActions.addOneNotificationSeen()),
     addEvent: events => dispatch(calendarActions.addEvent(events)),
     acceptEventShare: acceptShareObj => dispatch(calendarActions.acceptEventShare(acceptShareObj)),
     declineElseEventShare: declineShareObj => dispatch(calendarActions.declineElseEventShare(declineShareObj)),

@@ -106,6 +106,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
             # Gotta update this on the auth for the other person
 
             recipient.notificationSeen += 1
+            recipient.save()
             content = {
                 "command": 'new_notification',
                 "notification": json.dumps(serializer.data),
@@ -127,6 +128,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
             serializedRequest = FollowUserSerializer(actor).data
 
             recipient.notificationSeen += 1
+            recipient.save()
             content = {
                 "command": "new_notification",
                 "notification": json.dumps(serializer.data),
@@ -143,6 +145,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
             notification = CustomNotification.objects.create(type = 'accept_follow_request', recipient = recipient, actor = actor, verb = "accepted follow")
 
         recipient.notificationSeen += 1
+        recipient.save()
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
@@ -184,6 +187,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             notification = CustomNotification.objects.create(type='new_event', recipient = recipient, actor = actor, verb = 'picked a time',
             minDate = minDate, maxDate = maxDate)
 
+        recipient.notificationSeen += 1
+        recipient.save()
         serializer = NotificationSerializer(notification)
         content = {
             "command": "new_notification",
@@ -205,6 +210,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
             minDate = data['eventDate'],
             eventId = data['eventId']
             )
+
+            recipient.notificationSeen += 1
+            recipient.save()
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -221,6 +229,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
             verb = "declined shared event",
             minDate = data['eventDate'],
             eventId = data['eventId'])
+
+            recipient.notificationSeen += 1
+            recipient.save()
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -238,6 +249,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
                 verb = "edited an event",
                 minDate = data['eventDate'],
                 eventId = data['eventId'])
+
+                recipient.notificationSeen += 1
+                recipient.save()
                 serializer = NotificationSerializer(notification)
                 content = {
                     "command": "new_notification",
@@ -268,6 +282,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
                  pendingCalendarOwnerId = eventObj['calOwner'],
                  pendingEventDate = eventObj['date']
             )
+
+            recipient.notificationSeen += 1
+            recipient.save()
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -283,6 +300,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
             # from the id
             notification = get_object_or_404(CustomNotification, id = data['notificationId'])
 
+            recipient = notification.recipient
+            recipient.notificationSeen += 1
+            recipient.save()
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -309,8 +329,12 @@ class NotificationConsumer(JsonWebsocketConsumer):
             type = "invite_social_event",
             actor = actor,
             recipient = recipient,
-            eventId = data['eventId']
+            eventId = data['eventId'],
+            verb = "invited you to a social event."
             )
+
+            recipient.notificationSeen += 1
+            recipient.save()
             serializer = NotificationSerializer(notification)
             content = {
                 "command": "new_notification",
@@ -330,6 +354,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
             notification = CustomNotification.objects.filter(type = "follow_request_notification", recipient = recipient, actor = actor, verb = "requested to follow you")
             notification.delete()
 
+
+            recipient.notificationSeen -= 1
+            recipient.save()
             # once you delete the notifcations then you would wnat to grab the
             # users notifications
             notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['recipient']).order_by('-timestamp')
@@ -354,6 +381,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             notification = CustomNotification.objects.filter(type = "follow_notification", recipient = recipient, actor = actor, verb = 'followed you')
             notification.delete()
 
+            recipient.notificationSeen -= 1
+            recipient.save()
             # delete notification then grab the user notification to update it in
             # the front end
             notifications = CustomNotification.objects.select_related('actor').filter (recipient= data['recipient']).order_by('-timestamp')
@@ -379,6 +408,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         actor = get_object_or_404(User, username = data['recipient'])
         notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'friend')
         notification.delete()
+
+
         content = {
             'command': 'send_accepted_notification',
             'actor': data['actor'],
