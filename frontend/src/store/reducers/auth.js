@@ -22,6 +22,7 @@ const initialState = {
   sentRequestList: [],
   requestList: [],
   showIntialInstructions: false,
+  notificationSeen: 0
 };
 
 const authStart = (state, action) => {
@@ -73,7 +74,8 @@ const addCredentials = (state, action) => {
     private: action.private,
     sentRequestList: action.sentRequestList,
     requestList: action.requestList,
-    showIntialInstructions: action.showIntialInstructions
+    showIntialInstructions: action.showIntialInstructions,
+    notificationSeen: action.notificationSeen
   });
 };
 

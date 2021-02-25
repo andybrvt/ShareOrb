@@ -132,6 +132,7 @@ class SocialEventPostModal extends React.Component{
   // accepts on notification you will then change the non accepted to accepted
   // then it will show up on social cal.
 
+  console.log(eventObj)
 
   if(this.props.curId === this.props.calendarOwner){
     ExploreWebSocketInstance.sendSocialEvent(eventObj)

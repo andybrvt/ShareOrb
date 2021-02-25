@@ -30,9 +30,11 @@ class SocialCalUploadPic(APIView):
     # parser_classes = (FormParser, MultiPartParser)
     def post(self, request, id, *args, **kwargs):
         # This is to adjust the time to the correct timezone
+        print(timezone.localtime())
         timezone.activate(pytz.timezone("MST"))
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
         # This will grab the user
+        print(timezone.localtime())
         user = get_object_or_404(User, id = id)
         # This will either create or get the socialCalCell and since you can only add pictures
         # to the current day that is why we are putting the socialCalDate and testDate will

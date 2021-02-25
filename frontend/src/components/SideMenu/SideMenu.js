@@ -400,9 +400,18 @@ class SideMenu extends React.Component {
                           style={{fontSize:'22px'}}
                           >
                         </i>
-                        <span class={`${this.props.notifications.length>=10 ? "GreaterTenNotifications" : "headerNotificationButton"}`}>
-                          <span class="notificationInside">{this.props.notifications.length} </span>
-                        </span>
+                        {this.props.notificationSeen > 0 ?
+                          <span class={`${this.props.notifications.length>=10 ? "GreaterTenNotifications" : "headerNotificationButton"}`}>
+                            <span class="notificationInside">{this.props.notificationSeen} </span>
+                          </span>
+
+                          :
+
+                          <span></span>
+
+                        }
+
+
                     </div>
                   </div>
                   <div
@@ -500,6 +509,7 @@ const mapStateToProps = state => {
     profilePic: state.auth.profilePic,
     curChatId: state.message.curChatId,
     unseen: state.message.unseen,
+    notificationSeen: state.auth.notificationSeen
   }
 }
 

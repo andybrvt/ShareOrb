@@ -36,6 +36,7 @@ export const addCredentials = (
    sentRequestList,
    requestList,
    showIntialInstructions,
+   notificationSeen
  ) => {
    console.log(localStorage)
   console.log(username, id)
@@ -56,7 +57,8 @@ export const addCredentials = (
     private: privatePro,
     sentRequestList: sentRequestList,
     requestList:requestList,
-    showIntialInstructions: showIntialInstructions
+    showIntialInstructions: showIntialInstructions,
+    notificationSeen: notificationSeen
   };
 };
 
@@ -96,6 +98,7 @@ export const logout = () => {
   localStorage.removeItem('sentRequestList')
   localStorage.removeItem('requestList')
   localStorage.removeItem('showIntialInstructions')
+  localStorage.removeItem('notificationSeen')
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -207,6 +210,7 @@ export const grabUserCredentials = () => {
         const sentRequestList = res.data.get_sent_follow_request;
         const requestList = res.data.get_follow_request;
         const showIntialInstructions = res.data.showIntialInstructions;
+        const notificationSeen = res.data.notificationSeen;
         localStorage.setItem("username", username1);
         localStorage.setItem("id", id);
         localStorage.setItem('friends', friends);
@@ -223,6 +227,7 @@ export const grabUserCredentials = () => {
         localStorage.setItem('sentRequestList', sentRequestList)
         localStorage.setItem('requestList', requestList)
         localStorage.setItem('showIntialInstructions', showIntialInstructions)
+        localStorage.setItem('notificationSeen', notificationSeen)
         dispatch(addCredentials(
            res.data.username,
            res.data.id,
@@ -239,7 +244,8 @@ export const grabUserCredentials = () => {
            res.data.private,
            res.data.get_sent_follow_request,
            res.data.get_follow_request,
-           res.data.showIntialInstructions
+           res.data.showIntialInstructions,
+           res.data.notificationSeen
          ));
          {/*when it times out*/}
         // dispatch(checkAuthTimeout(100000));

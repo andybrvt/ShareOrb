@@ -85,6 +85,12 @@ class User(AbstractUser):
 
     # This will be used to show the instructions at the beginning of the login
     showIntialInstructions = models.BooleanField(default = True)
+
+    # This will be used for  the notificaiton that are unseen, everytime someone
+    # sends you a notification you have to update the number nad every time you
+    # you open pu the drop down you will set the value to 0 again
+    notificationSeen = models.IntegerField(default = 0, blank = True)
+
     def get_posts(self):
 
         return Post.objects.filter(user=self).values_list('id', flat=True)

@@ -681,7 +681,7 @@ class CalendarPopOver extends React.Component{
                           {item.title.substring(0,19)}
                           <Tag style={{fontSize:'12px', display:'inline-block',
                             marginLeft: "3px",
-                          }} color="#f50"> social</Tag>
+                          }} color={"red"}> social</Tag>
                         </span>
 
                         :
