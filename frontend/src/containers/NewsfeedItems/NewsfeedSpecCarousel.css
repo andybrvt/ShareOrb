@@ -34,7 +34,7 @@
   /* background-color: red; */
   top: 50%;
   transform: translateY(-50%);
-  z-index: 3;
+  z-index: 1;
   left: 1%;
   font-size: 45px;
 }
