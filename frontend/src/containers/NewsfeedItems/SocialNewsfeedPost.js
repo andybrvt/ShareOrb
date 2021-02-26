@@ -367,8 +367,10 @@ class SocialNewsfeedPost extends React.Component {
     let peopleLikeId = [];
     let postId = 0;
     let userUsername = '';
+    let ownerId = "";
     let caption = "";
     let commentList = [];
+    let cellDate = "";
     let cellYear = ""
     let cellMonth = ""
     let cellDay = ""
@@ -403,6 +405,7 @@ class SocialNewsfeedPost extends React.Component {
         }
 
         if(this.props.data.post.socialCaldate){
+          cellDate = this.props.data.post.socialCaldate
           const date = this.props.data.post.socialCaldate.split("-")
           cellYear = date[0]
           cellMonth = date[1]
@@ -413,6 +416,9 @@ class SocialNewsfeedPost extends React.Component {
       if(this.props.data.owner){
         if(this.props.data.owner.username){
           userUsername = this.props.data.owner.username
+        }
+        if(this.props.data.owner.id){
+          ownerId = this.props.data.owner.id
         }
 
         if(this.props.data.owner.profile_picture){
@@ -535,7 +541,13 @@ class SocialNewsfeedPost extends React.Component {
               :
               <button
               class="box-click"
-              onClick ={() => this.AddOneToLike(postId, this.props.userId, contentTypeId)} >
+              onClick ={() => this.AddOneToLike(
+                postId,
+                this.props.userId,
+                contentTypeId,
+                ownerId,
+                cellDate
+              )} >
                   <i
                     style={{ marginRight:'10px'}}
                     class="far fa-heart">
@@ -717,7 +729,7 @@ class SocialNewsfeedPost extends React.Component {
 
   // this renders the posts on the newsfeed
 
-  AddOneToLike = (socialCalCellId, personLike, contentTypeId) => {
+  AddOneToLike = (socialCalCellId, personLike, contentTypeId, ownerId, cellDate) => {
     this.triggerComments();
     // This will add one to like to the social cal cell
     // Since this is on the newsfeed already then that means it already
@@ -733,6 +745,15 @@ class SocialNewsfeedPost extends React.Component {
     WebSocketSocialNewsfeedInstance.sendOneLike(socialCalCellId, personLike, contentTypeId)
 
     // Send notification here
+    // Send the notification here
+    const notificationObject = {
+      command: "social_like_notification",
+      actor: personLike,
+      recipient: ownerId,
+      cellDate: cellDate,
+    }
+    NotificationWebSocketInstance.sendNotification(notificationObject)
+
 
   }
 
