@@ -259,6 +259,7 @@ class SocialNewsfeedFormPost extends React.Component{
             const coverPicForm = new FormData()
             // Put the id of the cell in first so you can find it later
             coverPicForm.append("cellId", res.data.cell.id)
+            coverPicForm.append("createdCell", res.data.created)
             // Now add the cover pic
             if(fileList[0].originFileObj){
               // If this is a new uploaded file

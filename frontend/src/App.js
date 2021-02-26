@@ -86,6 +86,7 @@ class App extends Component {
 
 
     WebSocketSocialNewsfeedInstance.addCallbacks(
+      this.props.id,
       this.props.loadSocialPosts.bind(this),
       this.props.addSocialPostLike.bind(this),
       this.props.loadCurSocialCell.bind(this),
@@ -278,10 +279,24 @@ class App extends Component {
 
   componentWillReceiveProps(newProps){
     if(newProps.isAuthenticated){
+
+
+
+
       console.log(this.props.id, parseInt(newProps.id))
 
       this.props.grabUserCredentials()
       if(parseInt(this.props.id) !== parseInt(newProps.id)){
+
+        WebSocketSocialNewsfeedInstance.addCallbacks(
+          newProps.id,
+          this.props.loadSocialPosts.bind(this),
+          this.props.addSocialPostLike.bind(this),
+          this.props.loadCurSocialCell.bind(this),
+          this.props.addFirstSocialCellPost.bind(this),
+          this.props.updateSocialCellPost.bind(this)
+        )
+
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
 
