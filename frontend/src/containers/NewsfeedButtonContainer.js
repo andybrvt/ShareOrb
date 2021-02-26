@@ -21,6 +21,10 @@ class NewsfeedButtonContainer extends React.Component{
     return name
   }
 
+  keepTodayEvents= (e) => {
+    e.stopPropagation();
+  }
+
   render(){
 
     console.log(this.props)
@@ -120,49 +124,20 @@ class NewsfeedButtonContainer extends React.Component{
               <i class="fas fa-plus-circle"></i>
             </div>
 
-
-
-          </div>
-
-        </div>
-
-
-        <div className = "newBottomButtonHolder">
-          <div className = "leftPart">
-
-            <div className = "newButtonCard">
-              <div className = "textCenter">
-                <i class="fas fa-plus" style={{fontSize:'20px', color:'#1890ff'}}></i>
-                 <p style={{ color:'#1890ff'}} class=""> Create event  </p>
-              </div>
-            </div>
-
-
-
-
-          </div>
-
-          <div className = "rightPart">
-
-            <Link to = {{
-              pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-              state:{pathname:location}
-            }}
-            className = "topCard"
-             >
-             <div className = "newButtonCard">
-               <div className = "textCenter">
-                 <i class="far fa-image" style={{fontSize:'20px',
-                    color:'#1890ff'}}></i>
-                  <p  class=""> View album </p>
-               </div>
+            <div onClick ={this.keepTodayEvents} className = "circlePlus">
+                <Link to = {{
+                  pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
+                  state:{pathname:location}
+                }}>
+                <i class="far fa-image" style={{
+                 color:'#1890ff'}}></i>
+             </Link>
              </div>
-
-           </Link>
-
-
           </div>
         </div>
+
+
+
       </div>
     )
   }

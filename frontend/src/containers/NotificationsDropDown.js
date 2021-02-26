@@ -530,10 +530,13 @@ class NotificationsDropDown extends React.Component{
           <h4 className = 'listNotificationSingle'>
               <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
               set an event on your calendar on
-              <br/>
-              {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
-
-              at {dateFns.format(new Date(notifications[i].minDate), 'h a')}
+              <b>
+                {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
+              </b>
+              at
+              <b>
+                {dateFns.format(new Date(notifications[i].minDate), 'h a')}
+              </b>
               <br />
               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
               <div
