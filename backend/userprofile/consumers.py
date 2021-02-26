@@ -616,6 +616,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.unsend_notification(data)
         if data['command'] == 'send_social_event_invite_notification':
             self.send_social_cal_event_notification(data)
+        if data['command'] == 'social_like_notification':
+            self.send_social_cal_cell_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE

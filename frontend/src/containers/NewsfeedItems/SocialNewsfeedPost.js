@@ -736,6 +736,8 @@ class SocialNewsfeedPost extends React.Component {
     console.log(socialCalCellId, personLike)
     WebSocketSocialNewsfeedInstance.sendOneLike(socialCalCellId, personLike, contentTypeId)
 
+    // Send notification here
+
   }
 
   AddOneToUnlike = (socialCalCellId, personUnlike, contentTypeId) =>{

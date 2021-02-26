@@ -189,6 +189,18 @@ class SocialCalCellPage extends React.Component{
 
     SocialCalCellPageWebSocketInstance.sendSocialCalCellLike(cellDate, personLike, owner)
 
+    // send a notification here
+
+    // The celldate and the owner will be used to grab the id of the social cal cell
+
+
+    const notificationObject = {
+      command: "social_like_notification",
+      actor: personLike,
+      recipient: owner,
+      cellDate: cellDate,
+    }
+
 
   }
 
