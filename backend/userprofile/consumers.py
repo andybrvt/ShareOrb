@@ -343,6 +343,32 @@ class NotificationConsumer(JsonWebsocketConsumer):
             }
             self.send_new_notification(content)
 
+
+    def send_social_cal_cell_notification(self, data):
+        # This function will be used to manage the notification for the
+        # social cal cell. It will take care of liking, commenting and stuff
+        # like that
+        if data['command'] == "social_like_notification":
+            actor = get_object_or_404(User, id = data['actor'])
+            recipient = get_object_or_404(User, id = data['recipient'])
+            notification = CustomNotification.objects.create(
+                type = "send_social_cell_like",
+                actor = actor,
+                recipient = recipient,
+                verb = "liked your social cell on "+ str(data['cellDate']),
+                pendingEventDate = data['cellDate']
+            )
+            recipient.notificationSeen += 1
+            recipient.save()
+            serializer = NotificationSerializer(notification)
+            content = {
+                "command": "new_notification",
+                "notification": json.dumps(serializer.data),
+                "recipient": recipient.username
+            }
+            self.send_new_notification(content)
+
+
     def unsend_notification(self, data):
         # This function will be used to remove notifications from the the other users
         # notification. These will be used most for notifications that are more

@@ -16,6 +16,7 @@ import Liking from'../NewsfeedItems/Liking.js';
 import SocialComments from './SocialComments';
 import SocialEventList from './SocialEventList';
 import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
+import NotificationWebSocketInstance from '../../notificationWebsocket';
 import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
 import DeleteSocialPostModal from './DeleteSocialPostModal';
@@ -200,6 +201,9 @@ class SocialCalCellPage extends React.Component{
       recipient: owner,
       cellDate: cellDate,
     }
+
+    NotificationWebSocketInstance.sendNotification(notificationObject)
+
 
 
   }

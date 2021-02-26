@@ -147,6 +147,24 @@ class NotificationsDropDown extends React.Component{
     }
   }
 
+  onSocialCellDirect = (cellDate) =>{
+
+    // this function will be used to redirect to the social cal cell that
+    // the person liked
+    const cellDateList = cellDate.split("-")
+    const year = cellDateList[0]
+    const month = cellDateList[1]
+    const day = cellDateList[2]
+    console.log(cellDateList)
+
+    let cellOwner = ""
+    if(this.props.username){
+      cellOwner = this.props.username
+    }
+    this.props.history.push("/socialcal/"+cellOwner+"/cell/"+year+"/"+month+"/"+day)
+
+  }
+
   renderTimestamp = timestamp =>{
     console.log(timestamp)
     let prefix = '';
@@ -965,6 +983,41 @@ class NotificationsDropDown extends React.Component{
 
             </h4>
 
+          </li>
+        )
+      }
+
+      if(notifications[i].type === 'send_social_cell_like'){
+        notificationList.push(
+          <li
+            onClick = {() => this.onSocialCellDirect(
+              notifications[i].pendingEventDate,
+            )}
+             className = 'notificationListContainer'>
+            <div className = 'notificationIcon'>
+            <Avatar size = {45} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              // icon = {<UserOutlined />}
+
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
+                 liked your social cell on {notifications[i].pendingEventDate}.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
+            </h4>
           </li>
         )
       }
