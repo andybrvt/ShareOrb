@@ -474,14 +474,10 @@ class SocialNewsfeedPost extends React.Component {
             </div>
           </div>
         </div>
-      { caption !== "" ?
-        <Divider style={{marginTop:'5px'}}/>
-        :
-        <Divider style={{marginTop:'5px', marginBottom:'-10px'}}/>
-      }
+
       { caption !== "" ?
 
-        <p style={{ fontSize: '14px', color:'black', marginLeft:'15px', marginTop:'-10px' }}>
+        <p style={{ fontSize: '14px', color:'black', marginLeft:'15px', marginTop:'5px'  }}>
           {
             ((caption).length>140)?
               <div class="photoText">

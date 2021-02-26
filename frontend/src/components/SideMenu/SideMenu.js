@@ -186,6 +186,17 @@ class SideMenu extends React.Component {
 
  }
 
+ goToHome=()=> {
+   // This is used to open up the social cell day post modal
+
+
+   this.props.history.push({
+     pathname:"/home",
+   })
+
+ }
+
+
 
   onShowNotification = () => {
     if (this.props.showNotification === true){
@@ -313,7 +324,7 @@ class SideMenu extends React.Component {
             <aside>
               <div className = "whiteFixBackground"> </div>
                 <div class="side-inner">
-                  <div class="logo-wrap">
+                  <div class="logo-wrap" onClick = {() => this.goToHome()}>
                     <div class="logo">
                       <span>S</span>
                     </div>

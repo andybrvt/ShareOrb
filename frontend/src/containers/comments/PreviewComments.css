@@ -20,3 +20,48 @@
   font-weight: 400;
   color:black;
 }
+
+
+.newsFeedCommentItem {
+  margin-top: 5px;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  font-family: "Segoe UI Regular";
+}
+.newsFeedCommentItem .newsFeedCommentAvatarSect{
+
+}
+.newsFeedCommentItem .newsFeedCommentTextSect{
+  width: 70%;
+  margin-left: 5px;
+}
+.newsFeedCommentItem .newsFeedCommentTextSect .newsFeedCommentNameTime{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.newsFeedCommentUsername{
+  font-size: 16px;
+}
+
+.newsFeedCommentItem .newsFeedCommentDate{
+  /* background-color: red; */
+  position: absolute;
+  right: 6%;
+  font-size: 12px;
+  /* top: 10%; */
+
+}
+.newsFeedCommentItem .newsFeedCommentBody{
+
+}
+
+.newsFeedCommentItem .newsFeedCommentBody .newsFeedCommentText{
+  word-break: break-all;
+  position: relative;
+  /* top: 50%; */
+
+}

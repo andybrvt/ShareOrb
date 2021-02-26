@@ -17,6 +17,16 @@ class CurChatManager extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  goToHome=(usernameList)=> {
+    // This is used to open up the social cell day post modal
+    this.props.history.push({
+      pathname:"/home/"+usernameList,
+
+    })
+
+  }
+
+
   getChatUserProfile(participantList){
     // This function will show the correct userProfile that you are chatting
     // with
@@ -208,6 +218,8 @@ class CurChatManager extends React.Component{
       }
     }
 
+    let chatUserName2 = ""
+
     if(this.props.eventList){
       eventList = this.props.eventList
     }
@@ -238,13 +250,16 @@ class CurChatManager extends React.Component{
 
           <div className = 'chatRightSideBox'>
             <Avatar
-            size = {150}
-            src = {`${global.IMAGE_ENDPOINT}`+profilePic}
+              onClick = {() => this.goToHome(usernameList)}
+              size = {150}
+              src = {`${global.IMAGE_ENDPOINT}`+profilePic}
             />
 
-            <div
-            className= 'mainChatUserName'
-            >{chatUserName}</div>
+            <div className= 'mainChatUserName'>
+            {chatUserName}
+            </div>
+
+            <div className= 'mainChatUserUserName'>{"@"+usernameList}</div>
           </div>
 
         }
@@ -255,7 +270,7 @@ class CurChatManager extends React.Component{
         <Button type="primary" shape="round" size="large"
 
           onClick = {() => this.onOpenEventModal()}
-        >  Share Events </Button>
+        >  Share Your Events </Button>
 
         </div>
 
