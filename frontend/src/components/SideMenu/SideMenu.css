@@ -256,7 +256,7 @@ aside {
     aside .side-inner .logo-wrap {
       display: block;
       /* background-color: red; */
-
+      cursor:pointer;
       position: fixed;
       top: 5px;
       /* width: 5%; */

@@ -8,7 +8,7 @@
   color:#1890ff;
 
   font-size: 3vw;
-  margin-top: 17.5%;
+  margin-top: 20%;
   margin-left: 20%;
   position:'absolute';
   font-weight: 550;
@@ -19,7 +19,7 @@
 
 .loginFormInnerContent{
   position:absolute;
-  top:20%;
+  top:15%;
   width:60%;
   left:20%;
 }

@@ -47,6 +47,14 @@
   font-size: 25px;
 }
 
+
+.mainChatUserUserName{
+  font-weight: 500;
+  color:#8c8c8c;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
 .chatContainer .chatRightSide{
   /* display: flex; */
   /* flex-direction: column; */

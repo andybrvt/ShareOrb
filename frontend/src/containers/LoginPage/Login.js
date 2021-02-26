@@ -75,13 +75,13 @@ class LoginForm extends React.Component {
 
 
           <img src={mainLogo} width="20%"
-            style={{position:'absolute',top:'7.5%', left:'19%'}}/>
+            style={{position:'absolute',top:'5.5%', left:'19%'}}/>
           <div class="loginTitle">Connecting people through calendars </div>
           <div class="LeftLoginContainer">
             <div class="eventCard allStyle"
               style={{
-                position:'relative', width:'100%',
-                 height:'90%'}}>
+                position:'relative', width:'100%', top:'15%',
+                 height:'75%'}}>
               <div class="loginFormInnerContent">
                 <Form
 
