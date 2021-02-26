@@ -55,7 +55,8 @@ class App extends Component {
       this.props.updateRequestList.bind(this),
       this.props.newUpRequestList.bind(this),
       this.props.authAddFollower.bind(this),
-      this.props.authUpdateFollowers.bind(this)
+      this.props.authUpdateFollowers.bind(this),
+      this.props.addOneNotificationSeen.bind(this)
     )
     // For the calendarEventWebosocket you just need to have one
     // action (the addEvent) because the data for the each person is
@@ -65,7 +66,8 @@ class App extends Component {
       this.props.acceptEventShare.bind(this),
       this.props.declineElseEventShare.bind(this),
       this.props.declineEventShare.bind(this),
-      this.props.newNotification.bind(this)
+      this.props.newNotification.bind(this),
+      this.props.addOneNotificationSeen.bind(this)
 
     )
 
@@ -84,6 +86,7 @@ class App extends Component {
 
 
     WebSocketSocialNewsfeedInstance.addCallbacks(
+      this.props.id,
       this.props.loadSocialPosts.bind(this),
       this.props.addSocialPostLike.bind(this),
       this.props.loadCurSocialCell.bind(this),
@@ -276,10 +279,24 @@ class App extends Component {
 
   componentWillReceiveProps(newProps){
     if(newProps.isAuthenticated){
+
+
+
+
       console.log(this.props.id, parseInt(newProps.id))
 
       this.props.grabUserCredentials()
       if(parseInt(this.props.id) !== parseInt(newProps.id)){
+
+        WebSocketSocialNewsfeedInstance.addCallbacks(
+          newProps.id,
+          this.props.loadSocialPosts.bind(this),
+          this.props.addSocialPostLike.bind(this),
+          this.props.loadCurSocialCell.bind(this),
+          this.props.addFirstSocialCellPost.bind(this),
+          this.props.updateSocialCellPost.bind(this)
+        )
+
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
 
@@ -361,6 +378,7 @@ const mapDispatchToProps = dispatch => {
     setChats: chats => dispatch(messageActions.setChats(chats)),
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     newNotification: notification => dispatch(notificationsActions.newNotification(notification)),
+    addOneNotificationSeen: () => dispatch(authActions.addOneNotificationSeen()),
     addEvent: events => dispatch(calendarActions.addEvent(events)),
     acceptEventShare: acceptShareObj => dispatch(calendarActions.acceptEventShare(acceptShareObj)),
     declineElseEventShare: declineShareObj => dispatch(calendarActions.declineElseEventShare(declineShareObj)),

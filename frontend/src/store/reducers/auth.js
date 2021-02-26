@@ -160,6 +160,18 @@ const unShowIntialInstructions = (state, action) => {
   })
 }
 
+const addOneNotificationSeen = (state, action) => {
+  return updateObject(state, {
+    notificationSeen: state.notificationSeen + 1
+  })
+}
+
+const resetNotificationSeen = (state, action) => {
+  return updateObject(state, {
+    notificationSeen:  0
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -196,6 +208,10 @@ const reducer = (state = initialState, action) => {
       return updateSentRequestList(state, action);
     case actionTypes.UNSHOW_INITIAL_INSTRUCTIONS:
       return unShowIntialInstructions(state, action);
+    case actionTypes.ADD_ONE_NOTIFICIATION_SEEN:
+      return addOneNotificationSeen(state, action);
+    case actionTypes.RESET_NOTIFCATION_SEEN:
+      return resetNotificationSeen(state, action);
     default:
       return state;
   }

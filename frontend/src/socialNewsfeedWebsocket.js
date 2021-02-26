@@ -101,8 +101,11 @@ class WebSocketSocialNewsfeed{
       const socialPostObj = parsedData.socialPostObj
       const curId = parsedData.curId
       const created = parsedData.created
-
-      if(curId === socialPostObj.owner.id){
+      console.log(curId)
+      console.log(socialPostObj)
+      console.log(parseInt(this.callbacks['curId']) === socialPostObj.owner.id)
+      if(parseInt(this.callbacks['curId']) === socialPostObj.owner.id){
+        console.log('this is true')
         // Put call back for updating the cursocialcalcell
         // just load up the cur social cal cell
         this.callbacks['fetch_cur_social_cell'](socialPostObj.post)
@@ -130,12 +133,14 @@ class WebSocketSocialNewsfeed{
   }
 
   addCallbacks(
+    curId,
     loadSocialPostCallback,
     addSocialLikeCallback,
     loadCurSocialCellCallback,
     addFirstSocialCellPost,
     updateSocialCellPost
   ){
+    this.callbacks['curId'] = curId
     this.callbacks['fetch_social_posts'] = loadSocialPostCallback
     this.callbacks['add_social_post_like'] = addSocialLikeCallback
     this.callbacks['fetch_cur_social_cell'] = loadCurSocialCellCallback

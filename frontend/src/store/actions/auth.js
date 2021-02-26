@@ -438,3 +438,19 @@ export const unShowIntialInstructions = (bool) => {
     bool: bool
   }
 }
+
+export const addOneNotificationSeen = () => {
+  // This function will just add one to the notification whenever
+  // there is an incoming notification
+  return {
+    type: actionTypes.ADD_ONE_NOTIFICIATION_SEEN
+  }
+}
+
+export const resetNotificationSeen = () => {
+  // this will reset the notification count when you open the notification
+  // up
+  return {
+    type: actionTypes.RESET_NOTIFCATION_SEEN
+  }
+}

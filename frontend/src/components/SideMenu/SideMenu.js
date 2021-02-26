@@ -149,9 +149,41 @@ class SideMenu extends React.Component {
 
  onOpenDropDown = () =>{
    console.log("button click")
+   // So you have to do a authaxios call here so that it resets the
+   // notification back to zero when you one up the dropdown
+
+   let userId =  0
+   if(this.props.id){
+     userId = this.props.id
+   }
+
+   if(this.state.showDropDown === false) {
+     // This means when it is close and you are trying to open it
+     // So since you dont want your axios call to be running all the time
+     // make a conditional where only when the value of notificationseen
+     // is larger than 0 then you would run it
+
+     if(this.props.notificationSeen > 0 ){
+        // Now run an axios call plus a redux to update
+
+        console.log('hit here')
+        authAxios.post(`${global.API_ENDPOINT}/userprofile/resetNotificationSeen`, {
+          curId: userId
+        }).then(res => {
+
+          // Now you will call the redux to reset the value of the notification
+          this.props.resetNotificationSeen()
+
+        })
+      }
+     }
+
+
+
    this.setState({
      showDropDown: !this.state.showDropDown
    })
+
  }
 
  goToHome=()=> {
@@ -539,7 +571,8 @@ const mapDispatchToProps = dispatch => {
         )),
         closePickEventSyncModal: () => dispatch(eventSyncActions.closePickEventSyncModal()),
         openNotification: () =>dispatch(notificationsActions.openNotification()),
-        closeNotification: () => dispatch (notificationsActions.closeNotification())
+        closeNotification: () => dispatch (notificationsActions.closeNotification()),
+        resetNotificationSeen: () => dispatch(actions.resetNotificationSeen())
     }
 }
 

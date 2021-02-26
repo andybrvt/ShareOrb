@@ -100,6 +100,11 @@ class WebSocketNotifications {
         const notification = JSON.parse(parsedData.notification)
         console.log(notification)
         this.callbacks['new_notification'](notification)
+
+        // Add a call back where you jsut add 1 to the notificationseen her
+
+        this.callbacks['add_one_notification_seen']()
+
         if(notification.type === "follow_request_notification"){
           // put the call back for updating the request in the auth here.
 
@@ -130,7 +135,8 @@ class WebSocketNotifications {
     addNewFollowRequest,
     updateFollowRequest,
     authAddFollower,
-    authUpdateFollowers
+    authUpdateFollowers,
+    addOneNotificationSeen,
   ){
 
     this.callbacks['notifications'] = notificationsCallback;
@@ -139,6 +145,7 @@ class WebSocketNotifications {
     this.callbacks['update_follow_request'] = updateFollowRequest;
     this.callbacks['auth_add_follower'] = authAddFollower;
     this.callbacks['auth_update_followers'] = authUpdateFollowers;
+    this.callbacks['add_one_notification_seen'] = addOneNotificationSeen;
   }
   // this will send the messages to the backend
   // it will pull all the notifications taht currently exist

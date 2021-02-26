@@ -88,10 +88,13 @@ class CalendarConsumer(JsonWebsocketConsumer):
         # able to pull the id for the notifcation. So for the initial share events
         # we will be using the calendereventweboscket to create the events notifcation
         for recipient in serializer.data['invited']:
+            theRecipeint = get_object_or_404(User, id = recipient['id'])
+            theRecipeint.notificationSeen += 1
+            theRecipeint.save()
             notification = CustomNotification.objects.create(
                 type = "shared_event",
                 actor = host,
-                recipient = get_object_or_404(User, id = recipient['id']),
+                recipient = theRecipeint,
                 verb = "shared an event at",
                 minDate = start_time,
                 eventId = newEvent.id
