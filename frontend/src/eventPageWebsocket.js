@@ -105,6 +105,26 @@ class WebSocketEventPage{
     })
   }
 
+  sendGoingEvent = (eventId, userId) => {
+    // This function is for when you accepted the going to the event
+
+    this.sendMessage({
+      command: "send_event_going",
+      eventId: eventId,
+      userId: userId
+    })
+  }
+
+  sendNotGoingEvent = (eventId, userId) => {
+    // This function will be for whne you decline going to the event
+
+    this.sendMessage({
+      command: "send_event_not_going",
+      eventId: eventId,
+      userId: userId
+    })
+  }
+
   socketNewMessage(data){
     // This is where things go after you sned info from the back end to the front
     // end. This will get the commands and then do stuff with the information

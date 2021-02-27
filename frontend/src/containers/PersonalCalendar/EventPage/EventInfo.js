@@ -493,6 +493,21 @@ class EventInfo extends React.Component{
 
   }
 
+  onGoingEvent = (eventId, userId) => {
+    console.log(eventId, userId)
+    // This function will taking care of the user going to the event
+    EventPageWebSocketInstance.sendGoingEvent(eventId, userId)
+
+  }
+
+  onNotGoingEvent = (eventId, userId) => {
+    console.log(eventId, userId)
+    EventPageWebSocketInstance.sendNotGoingEvent(eventId, userId)
+
+  }
+
+
+
   render(){
     const currentDay = new Date()
     const selectYear = dateFns.getYear(currentDay).toString()
@@ -521,7 +536,22 @@ class EventInfo extends React.Component{
     let month = "";
     let day = "";
     let host = "";
+
+    let eventId = ""
+
+    let person = []
+    let personId = []
+
+    let declineId = []
+
+    let acceptId = []
+
     if(this.props.info){
+
+      if(this.props.info.id){
+        eventId = this.props.info.id
+      }
+
       if(this.props.info.host){
         username = this.props.info.host.username
         eventHostId = this.props.info.host.id
@@ -568,6 +598,34 @@ class EventInfo extends React.Component{
       if(this.props.info.backgroundImg){
         eventBackgroundPic = this.props.info.backgroundImg
 
+      }
+
+      if(this.props.info.person){
+        person = this.props.info.person
+        for(let i = 0; i< this.props.info.person.length; i++){
+          personId.push(
+            this.props.info.person[i].id
+          )
+        }
+      }
+
+      if(this.props.info.decline){
+
+
+        for(let i = 0; i< this.props.info.decline.length; i++){
+          declineId.push(
+            this.props.info.decline[i]
+          )
+        }
+      }
+
+      if(this.props.info.accepted){
+
+        for(let i = 0; i< this.props.info.accepted.length; i++){
+          acceptId.push(
+            this.props.info.accepted[i].id
+          )
+        }
       }
 
     }
@@ -700,44 +758,93 @@ class EventInfo extends React.Component{
 
           <div class="buttonHolder">
             <div className = "buttonsHolder">
-              <Button
-                 type="primary" shape="round"
-                 icon={<i  style={{marginRight:'10px'}} class="far fa-share-square"></i>}
-                 size={'large'}
-                 style={{marginRight:'1%'}}
-                 >
 
-                Invite
-              </Button>
-              {
-             (accepted.includes(this.props.username))?
-                <Button
-                   shape="round"
-                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                  size={'large'}
+              {eventHostId === this.props.userId ?
+
+                <div
+                  style={{
+                    marginRight:'5%',
+                    color: 'black'
+                  }}
 
                   >
-                  Going
-                </Button>
+                  You are the host
+
+
+                </div>
 
                 :
-                <Button
-                   shape="round" type="primary"
-                   icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
-                    size={'large'}
-                    style={{marginRight:'1%'}}
-                    >
-                  Going
-                </Button>
-              }
-            <Button
-               shape="round"
-               icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
 
-               style = {{marginRight: '3%'}}
-                size={'large'} danger>
-               Delete
-            </Button>
+                <div>
+                  {
+                    acceptId.includes(this.props.userId) ?
+                      <Button
+                         shape="round"
+                         type="primary"
+                         icon={<i  style={{marginRight:'10px'}} class="fas fa-user-check"></i>}
+                         style={{
+                           marginRight:'1%',
+                           cursor: "default"
+                         }}
+                         size={'large'}>
+
+                        Going
+                      </Button>
+
+                      :
+
+                       <Button
+                         onClick = {() =>this.onGoingEvent(eventId, this.props.userId)}
+
+                          shape="round"
+                          icon={<i  style={{marginRight:'10px'}} class="fas fa-user"></i>}
+                          style={{marginRight:'1%'}}
+                         size={'large'}>
+
+                         Going
+                       </Button>
+
+
+
+                 }
+
+                 {
+                   declineId.includes(this.props.userId) ?
+
+                   <Button
+                     type = "primary"
+                      shape="round"
+                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user-times"></i>}
+                      style = {{
+                        marginRight: '3%',
+                        cursor: "default"
+
+                      }}
+                      size={'large'} danger>
+                      Not going
+                   </Button>
+
+                   :
+
+                   <Button
+                     onClick = {() => this.onNotGoingEvent(eventId, this.props.userId)}
+
+                      shape="round"
+                      icon={<i  style={{marginRight:'10px'}} class="fas fa-user"></i>}
+                      style = {{marginRight: '3%'}}
+                      size={'large'} danger>
+                      Not going
+                   </Button>
+
+
+                 }
+
+
+                </div>
+
+              }
+
+
             </div>
           </div>
       </div>

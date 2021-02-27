@@ -470,6 +470,53 @@ class EventPageConsumer (JsonWebsocketConsumer):
         }
         self.send_message(content)
 
+    def send_event_going(self,data):
+        # This function will be incharge of adding people to the accepted list
+        # for an event
+
+        curEvent = get_object_or_404(Event, id = data['eventId'])
+        goingUser = get_object_or_404(User, id = data['userId'])
+
+
+        # add a part in where it removes them from teh not going to going list
+
+        curEvent.decline.remove(goingUser)
+        curEvent.accepted.add(goingUser)
+
+        curEvent.save()
+
+        serializer = EventSerializer(curEvent).data
+
+        # Now you just get the accepted list and then replace that in the front
+        # end by the redux
+        content = {
+            'command': 'send_event_going',
+            'acceptedList': serializer['accepted'],
+            'declineList': serializer['decline']
+        }
+
+    def send_event_not_going(self, data):
+        # This function will be in charge of adding people to the not going
+        # list
+
+        curEvent = get_object_or_404(Event, id = data['eventId'])
+        notGoing = get_object_or_404(User, id = data['userId'])
+
+        curEvent.accepted.remove(notGoing)
+        curEvent.decline.add(notGoing)
+
+        curEvent.save()
+
+        serializer = EventSerializer(curEvent).data
+        # Now you just get the decline and accept list and then replace that
+        # list
+
+        content = {
+            'command': 'send_event_not_going',
+            'acceptedList': serializer['accepted'],
+            'declineList': serializer['decline']
+        }
+
     def send_message(self, eventMessage):
         # This will be the go between for sending events... so when you send an event
         # this will locate the right group and then sent it to that group channel
@@ -506,6 +553,7 @@ class EventPageConsumer (JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_event_messages':
             self.send_fetch_event_messages(data)
         if data['command'] == 'send_event_message':
@@ -514,6 +562,10 @@ class EventPageConsumer (JsonWebsocketConsumer):
             self.send_edit_event_info(data);
         if data['command'] == 'send_seen_event':
             self.send_seen_event(data);
+        if data['command'] == 'send_event_going':
+            self.send_event_going(data);
+        if data['command'] == 'send_event_not_going':
+            self.send_event_not_going(data);
 
     def new_message(self, message):
         messageObj = message['eventMessage']
