@@ -325,10 +325,13 @@ class SocialNewsfeedPost extends React.Component {
 
     curPic = curPic.replace(global.POSTLIST_SPEC, "")
     console.log(curPic)
+    const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
+
     authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`, {
       clipPic: curPic,
       postOwnerId: postOwnerId,
-      curId: curId
+      curId: curId,
+      curDate: curDate
     })
 
     this.openNotification("bottomRight")

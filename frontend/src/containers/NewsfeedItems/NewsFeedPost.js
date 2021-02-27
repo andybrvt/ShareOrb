@@ -41,6 +41,7 @@ import NewsfeedSpecCarousel from './NewsfeedSpecCarousel';
 import LazyLoad from 'react-lazyload';
 import * as dateFns from 'date-fns';
 
+// DO NOT USE ANY MORE UNLESS REVERT
 
 class NewsfeedPost extends React.Component {
   constructor(props){

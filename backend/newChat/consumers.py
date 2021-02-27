@@ -46,14 +46,14 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         curChat = get_object_or_404(Chat, id = data['chatId'])
         sender = get_object_or_404(User, id = data['senderId'])
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
         curChat.seen.clear()
         curChat.seen.add(sender)
         curChat.recentMessage = data['message']
         curChat.recentSender = sender
-        curChat.recentTime = time
+        curChat.recentTime = timezone.now()
 
         # When you get the current chat you can also create the messages here
         curChat.save()
@@ -84,8 +84,8 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         curChat = get_object_or_404(Chat, id = data['chatId'])
         sender = get_object_or_404(User, id = data['senderId'])
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
         newMessage = Message.objects.create(
             chat = curChat,
@@ -98,7 +98,7 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         curChat.seen.add(sender)
         curChat.recentMessage = data['message']
         curChat.recentSender = sender
-        curChat.recentTime = time
+        curChat.recentTime = timezone.now()
 
         # When you get the current chat you can also create the messages here
         curChat.save()
@@ -134,15 +134,15 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         curChat = get_object_or_404(Chat, id = data['chatId'])
         sender = get_object_or_404(User, id = data['senderId'])
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
 
         curChat.seen.clear()
         curChat.seen.add(sender)
         curChat.recentMessage = sender.username+ " shared an event"
         curChat.recentSender = sender
-        curChat.recentTime = time
+        curChat.recentTime = timezone.now()
 
         curChat.save()
 

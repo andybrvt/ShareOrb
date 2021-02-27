@@ -749,7 +749,11 @@ class SocialCalendar extends React.Component{
       }
 
 
-      // formData.append("fileListLength", values.length);
+      const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
+
+      formData.append("curDate", curDate)
+      formData.append("fileListLength", values.length);
+
 
 
       // This will be the current user

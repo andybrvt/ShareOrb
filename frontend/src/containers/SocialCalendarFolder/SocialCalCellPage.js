@@ -310,12 +310,15 @@ class SocialCalCellPage extends React.Component{
             curId = this.props.curId
           }
 
+          const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
+
           // Now you just do an auth axios call bc you are not on your own calendar so
           // you dont have to worry about websocket
           authAxios.post(`${global.API_ENDPOINT}/mySocialCal/pictureClipping`, {
             clipPic: curPic,
             postOwnerId: postOwnerId,
-            curId: curId
+            curId: curId,
+            curDate: curDate
           })
 
           this.openNotification("bottomRight")

@@ -59,14 +59,14 @@ class CreateNewChatView(APIView):
     def post(self, request, *args, **kwargs):
         recentSender = get_object_or_404(User, id = request.data['senderId'])
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
         # Create chat
         chat = models.Chat.objects.create(
             recentMessage = request.data['message'],
             recentSender = recentSender,
-            recentTime = time
+            recentTime = timezone.now()
         )
         # Add participants into ManyToManyField
         for participant in request.data['chatParticipants']:
@@ -214,13 +214,13 @@ class CreateNewChatEventMessage(APIView):
     def post(self, request, *args, **kwargs):
 
         recentSender = get_object_or_404(User, id = request.data['senderId'])
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
         chat = models.Chat.objects.create(
             recentMessage = recentSender.first_name+" shared an event",
             recentSender = recentSender,
-            recentTime = time
+            recentTime = timezone.now()
         )
 
         # this is to add participants in

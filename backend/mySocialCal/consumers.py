@@ -680,6 +680,10 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # and the push all of it out to the newsfeed. Eventually there will be
         # better filtering and such but for now it will just be everything
 
+        print(data)
+
+        curDate = data['curDate']
+
         post_list = SocialCellEventPost.objects.all().order_by('-post_date')
 
         serializer = SocialCellEventSerializer(post_list, many = True)
@@ -690,14 +694,14 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # So you will be filtering social cal cell
         curUser = get_object_or_404(User, id = data['userId'])
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-        print(time)
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        # print(time)
 
         socialCalCell = SocialCalCell.objects.all().filter(
         socialCalUser = curUser
         ).filter(
-        socialCaldate = time
+        socialCaldate = curDate
         )
 
         print("this is the current social cal cell")
@@ -802,20 +806,24 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
     def remove_all_photo_social_post(self, data):
         # This is for when you remove all the pictures and you just need to return
         # the cur social cal cell and then the newsfeed again
+
+        curDate = data['curDate']
+
+
         post_list = SocialCellEventPost.objects.all().order_by('-post_date')
         serializer = SocialCellEventSerializer(post_list, many = True)
 
 
         curUser = get_object_or_404(User, id = data['userId'])
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-        print(time)
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        # print(time)
 
         socialCalCell = SocialCalCell.objects.all().filter(
         socialCalUser = curUser
         ).filter(
-        socialCaldate = time
+        socialCaldate = curDate
         )
 
 

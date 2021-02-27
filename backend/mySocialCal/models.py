@@ -140,12 +140,12 @@ def create_social_cell_post(sender, instance, created, **kwargs):
 
         # The post date will be the date that the soical cal cell gets updated
         # so that it can be moved when shit gets updated
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
         # This is a bit different from the post bc things will get update so
         # you will have to update the time
-        post.post_date = time;
+        post.post_date = timezone.now();
         post.save()
     elif(len(instance.get_socialCalItems()) == 0):
         # This is when there is no pictures any more so you are gonna delete the
@@ -227,10 +227,10 @@ def create_social_event_post(sender, instance, created, **kwargs):
             post_type = post_type,
             post_id = instance.id
         )
-    timezone.activate(pytz.timezone("MST"))
-    time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+    # timezone.activate(pytz.timezone("MST"))
+    # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
 
-    post.post_date = time;
+    post.post_date = timezone.now();
     post.save()
 
 def delete_social_event_post(sender, instance, **kwargs):

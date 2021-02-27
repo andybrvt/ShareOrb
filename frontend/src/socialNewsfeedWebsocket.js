@@ -148,9 +148,11 @@ class WebSocketSocialNewsfeed{
     this.callbacks['update_social_cell_post'] = updateSocialCellPost
   }
 
-  fetchSocialPost(userId){
+  fetchSocialPost(userId, curDate){
+    // Because of the timezone issue we need to get timezone from front end
     this.sendPostsInfo({
       userId: userId,
+      curDate: curDate,
       command: "fetch_social_posts"
     })
 
@@ -182,11 +184,12 @@ class WebSocketSocialNewsfeed{
   }
 
 
-  removeAllPhotoSocialPost(curId){
+  removeAllPhotoSocialPost(curId, curDate){
     // This function happens when you remove all the pictures in
     // you day cell. This is just use to update the cursoical cal cell
     // and then update the newsfeed
     this.sendPostInfo({
+      curDate: curDate,
       userId: curId,
       command: "remove_all_photo_social_post"
     })

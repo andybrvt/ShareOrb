@@ -10,6 +10,7 @@ import * as newsfeedActions from '../../store/actions/newsfeed';
 import * as dateFns from 'date-fns';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
+// DO NOT USE ANY MORE UNLESS REVERT 
 
 class UserPostPage extends React.Component{
 

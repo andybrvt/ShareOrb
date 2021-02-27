@@ -102,10 +102,13 @@ class NewsFeedView extends React.Component {
   };
 
 	initialiseSocialNewsfeed(){
+
+		console.log(dateFns.format(new Date(), "yyyy-MM-dd"))
+		const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
 		// use to initialize the social newsfeed
 		this.waitForSocialNewsfeedSocketConnection(() => {
 			// You will fetch the social cotnent type here
-			WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
+			WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id, curDate)
 		})
 		WebSocketSocialNewsfeedInstance.connect()
 
@@ -156,10 +159,13 @@ class NewsFeedView extends React.Component {
 		// this.props.grabUserCredentials();
 
 		console.log(newProps)
+		console.log(new Date())
+		console.log(dateFns.format(new Date(), "yyyy-MM-dd"))
+		const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
 		WebSocketSocialNewsfeedInstance.disconnect()
 		this.waitForSocialNewsfeedSocketConnection(() => {
 			// Fetch stuff here
-			WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id)
+			WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id, curDate)
 
 		})
 		WebSocketSocialNewsfeedInstance.connect()

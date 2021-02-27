@@ -16,6 +16,9 @@ import { authAxios } from './util';
 import WebSocketPostsInstance from '../postWebsocket';
 
 
+// DO NOT USE ANY MORE
+
+
 const {TextArea} = Input
 
 function getBase64(file) {

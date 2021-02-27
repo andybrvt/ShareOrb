@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { authAxios } from './util';
 import WebSocketPostsInstance from '../postWebsocket';
 import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
+import * as dateFns from 'date-fns';
 
 const {TextArea} = Input
 
@@ -213,6 +214,9 @@ class SocialNewsfeedFormPost extends React.Component{
 
       // So you have to check if it has originFileObj
       const formData = new FormData()
+      const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
+
+      formData.append('curDate', curDate)
       // first append the day caption
       formData.append("dayCaption", caption);
 
@@ -235,6 +239,8 @@ class SocialNewsfeedFormPost extends React.Component{
 
       // Now you have all the caption and pictures uploaded
 
+
+
       authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCurSocialCell/`+ownerId,
         formData,
         {headers: {"content-type": "multipart/form-data"}}
@@ -252,6 +258,10 @@ class SocialNewsfeedFormPost extends React.Component{
 
           // Put a consumer function here
 
+          // Make sure to pass in the curdate.
+          // the function you want is removeAllPhotoSocialPost
+
+          const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
 
         } else {
           // This is if there are socialcalcellitems to post

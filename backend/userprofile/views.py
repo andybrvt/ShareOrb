@@ -477,8 +477,8 @@ class PendingPicNotificationView(APIView):
         actor = get_object_or_404(models.User, id = curId)
         recipient = get_object_or_404(models.User, id = ownerId)
 
-        timezone.activate(pytz.timezone("MST"))
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        # timezone.activate(pytz.timezone("MST"))
+        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
 
 
         # When making the new notification the type will be pending_social_pics
@@ -487,7 +487,7 @@ class PendingPicNotificationView(APIView):
             actor = actor,
             recipient = recipient,
             verb = "wants to post a picture on your social calendar",
-            pendingEventDate =time
+            pendingEventDate =timezone.now()
         )
 
         # Now we will loop through all the pictures that were sent into the backend
