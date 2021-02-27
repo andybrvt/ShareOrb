@@ -1074,6 +1074,41 @@ class NotificationsDropDown extends React.Component{
         )
       }
 
+      if(notifications[i].type === 'send_social_cell_comment'){
+        notificationList.push(
+          <li
+            onClick = {() => this.onSocialCellDirect(
+              notifications[i].pendingEventDate,
+            )}
+             className = 'notificationListContainer'>
+            <div className = 'notificationIcon'>
+            <Avatar size = {45} style = {{
+              backgroundColor: 'purple',
+              verticalAlign: 'middle'}}
+              // icon = {<UserOutlined />}
+
+              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+              >
+            </Avatar>
+            </div>
+            <h4 className = 'listNotificationSingle'>
+                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
+                 commented on your social cell on {notifications[i].pendingEventDate}.
+                 <br />
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+                 <div
+                 className = 'deleteButton'
+                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+                 >
+
+                 <i class="far fa-times-circle"></i>
+
+                 </div>
+            </h4>
+          </li>
+        )
+      }
+
 
     }
     return (

@@ -752,7 +752,11 @@ class SocialNewsfeedPost extends React.Component {
       recipient: ownerId,
       cellDate: cellDate,
     }
-    NotificationWebSocketInstance.sendNotification(notificationObject)
+
+    if(personLike !== ownerId){
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+    }
 
 
   }

@@ -149,6 +149,23 @@ class SocialCalCellPage extends React.Component{
         calOwner
       )
       this.setState({comment: ""})
+
+      // add notification here
+
+      const notificationObject = {
+          command: "social_comment_notification",
+          actor: this.props.curId,
+          recipient: calOwner,
+          cellDate: curDate
+      }
+
+      if(this.props.curId !== calOwner){
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+      }
+
+
+
     }
   }
 
@@ -202,7 +219,10 @@ class SocialCalCellPage extends React.Component{
       cellDate: cellDate,
     }
 
-    NotificationWebSocketInstance.sendNotification(notificationObject)
+    if(personLike !== owner){
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+    }
 
 
 

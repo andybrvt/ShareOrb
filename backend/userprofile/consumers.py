@@ -348,9 +348,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
         # This function will be used to manage the notification for the
         # social cal cell. It will take care of liking, commenting and stuff
         # like that
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
         if data['command'] == "social_like_notification":
-            actor = get_object_or_404(User, id = data['actor'])
-            recipient = get_object_or_404(User, id = data['recipient'])
             notification = CustomNotification.objects.create(
                 type = "send_social_cell_like",
                 actor = actor,
@@ -358,15 +358,24 @@ class NotificationConsumer(JsonWebsocketConsumer):
                 verb = "liked your social cell on "+ str(data['cellDate']),
                 pendingEventDate = data['cellDate']
             )
-            recipient.notificationSeen += 1
-            recipient.save()
-            serializer = NotificationSerializer(notification)
-            content = {
-                "command": "new_notification",
-                "notification": json.dumps(serializer.data),
-                "recipient": recipient.username
-            }
-            self.send_new_notification(content)
+        if data['command'] == "social_comment_notification":
+            notification = CustomNotification.objects.create(
+                type = "send_social_cell_comment",
+                actor = actor,
+                recipient = recipient,
+                verb = "commented on your social cell on "+str(data['cellDate']),
+                pendingEventDate = data['cellDate']
+            )
+        recipient.notificationSeen += 1
+        recipient.save()
+        serializer = NotificationSerializer(notification)
+        content = {
+            "command": "new_notification",
+            "notification": json.dumps(serializer.data),
+            "recipient": recipient.username
+        }
+        self.send_new_notification(content)
+
 
 
     def unsend_notification(self, data):
@@ -643,6 +652,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_social_event_invite_notification':
             self.send_social_cal_event_notification(data)
         if data['command'] == 'social_like_notification':
+            self.send_social_cal_cell_notification(data)
+        if data['command'] == 'social_comment_notification':
             self.send_social_cal_cell_notification(data)
     def new_notification(self, event):
         notification = event['notification']
