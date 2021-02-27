@@ -95,6 +95,11 @@
   top: 5px;
 }
 
+.pickEventSyncButtonText {
+  position: absolute;
+  top:0%;
+}
+
 .notificationListContainer .listNotificationFriend .pickEventSyncButton .acceptButton{
   height: 25px;
 

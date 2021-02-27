@@ -368,27 +368,51 @@ class NotificationsDropDown extends React.Component{
             }
 
             <br />
-            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
+              <Button
+                style = {{
+                  width: '75px',
+                  top:'5px',
+                  height: '24px',
+                  left:'30px',
+                  float:'right',
+                  position:'relative',
+                }}
+              type ="primary"
+              className = 'declineButton'
+              onClick = {()=> this.onEventSyncDecline(
+                notifications[i].recipient,
+                notifications[i].actor.username,
+                notifications[i].minDate,
+                notifications[i].maxDate
+              )}> <div class="pickEventSyncButtonText"> Decline</div> </Button>
+
+              <Button
+                style = {{
+                  width: '75px',
+                  top:'5px',
+                  height: '24px',
+                  left:'15px',
+
+                  float:'right',
+                  position:'relative',
+                }}
+              className = 'acceptButton'
+              type ="primary"
+              onClick = {()=> this.onEventSyncAccept(
+                notifications[i].recipient,
+                notifications[i].actor.username,
+                notifications[i].minDate,
+                notifications[i].maxDate
+              )}> <div class="pickEventSyncButtonText"> Accept</div> </Button>
+
+
+
+
+             </span>
 
             <div className = 'pickEventSyncButton'>
-            <Button
-            className = 'acceptButton'
-            type ="primary"
-            onClick = {()=> this.onEventSyncAccept(
-              notifications[i].recipient,
-              notifications[i].actor.username,
-              notifications[i].minDate,
-              notifications[i].maxDate
-            )}> Accept</Button>
-            <Button
-            type ="primary"
-            className = 'declineButton'
-            onClick = {()=> this.onEventSyncDecline(
-              notifications[i].recipient,
-              notifications[i].actor.username,
-              notifications[i].minDate,
-              notifications[i].maxDate
-            )}> Decline </Button>
+
             </div>
             <div
             className = 'deleteButton'
@@ -483,24 +507,31 @@ class NotificationsDropDown extends React.Component{
 
 
               <br />
-              <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+              <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
+                <Button
+                type = 'primary'
+                style = {{
+                  width: '100px',
+                  top:'5px',
+                  height: '24px',
+                  left:'30px',
+                  float:'right',
+                  position:'relative',
+                }}
+                // Start here tomorrow
+                onClick = {() => this.props.openPickEventSyncModal(
+                  notifications[i].recipient,
+                  notifications[i].actor,
+                  notifications[i].minDate,
+                  notifications[i].maxDate,
+                  notifications[i].id,
+                )}>
+                <div class="pickEventSyncButtonText"> Pick Date</div>
+               </Button>
 
-              <div className = 'pickEventSyncButton'>
-              <Button
-              type = 'primary'
-              style = {{
-                width: '200px',
-                height: '20px'
-              }}
-              // Start here tomorrow
-              onClick = {() => this.props.openPickEventSyncModal(
-                notifications[i].recipient,
-                notifications[i].actor,
-                notifications[i].minDate,
-                notifications[i].maxDate,
-                notifications[i].id,
-              )}> Pick Date </Button>
-              </div>
+              </span>
+
+
               <div
               className = 'deleteButton'
               onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
@@ -889,10 +920,16 @@ class NotificationsDropDown extends React.Component{
                 <b>{this.capitalize(notifications[i].actor.username)} </b>
                  request to follow you.
                  <br />
-                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-
-                   <div className = 'pickEventSyncButton'>
+                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
                    <Button
+                     style = {{
+                       width: '75px',
+                       top:'5px',
+                       height: '24px',
+                       left:'30px',
+                       float:'right',
+                       position:'relative',
+                     }}
                    className = 'acceptButton'
                    type ="primary"
                    onClick = {() => this.onAcceptFollow(
@@ -900,12 +937,24 @@ class NotificationsDropDown extends React.Component{
                      notifications[i].recipient,
                      notifications[i].id
                    )}
-                   > Accept</Button>
+                   > <div class="pickEventSyncButtonText"> Decline</div> </Button>
                    <Button
+                     style = {{
+                       width: '75px',
+                       top:'5px',
+                       height: '24px',
+                       left:'30px',
+                       float:'right',
+                       position:'relative',
+                     }}
                    type ="primary"
                    className = 'declineButton'
                    onClick = {() => this.onDeclineFollow()}
-                   > Decline </Button>
+                   > <div class="pickEventSyncButtonText"> Accept</div> </Button>
+                 </span>
+
+                   <div className = 'pickEventSyncButton'>
+
                    </div>
 
 

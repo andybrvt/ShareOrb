@@ -42,7 +42,8 @@ import DetailEditEventForm from './EventPage/DetailEditEventForm';
 import CalendarPopOver from './CalendarPopOver.js';
 import Animate from 'rc-animate';
 import PropTypes from 'prop-types';
-
+import '../../components/SideMenu/SideMenu.css';
+import '../../containers/NewsFeedView.css'
 import '../SocialCalendarFolder/SocialCalCSS/SocialCalAnim.css';
 const { Group } = Avatar
 

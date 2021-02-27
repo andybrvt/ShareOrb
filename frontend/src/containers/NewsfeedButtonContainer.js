@@ -1,6 +1,6 @@
 import React from 'react';
 import "./NewsFeedView.css";
-import { Avatar, List, Card } from 'antd';
+import { Avatar, List, Card, Tooltip} from 'antd';
 import * as dateFns from 'date-fns';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -121,18 +121,24 @@ class NewsfeedButtonContainer extends React.Component{
             <div
               onClick = {this.props.postCondition}
               className = "circlePlus">
-              <i class="fas fa-plus-circle"></i>
+                <div><Tooltip placement="bottom" title={"Add Photo"}>
+                <i class="fas fa-plus-circle"></i> </Tooltip>
+                </div>
             </div>
 
+
             <div onClick ={this.keepTodayEvents} className = "circlePlus">
+              <Tooltip placement="bottom" title={"Open Today"}>
                 <Link to = {{
                   pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
                   state:{pathname:location}
                 }}>
-                <i class="far fa-image" style={{
-                 color:'#1890ff'}}></i>
-             </Link>
+                    <i class="far fa-image" style={{
+                     color:'#1890ff'}}></i>
+                 </Link>
+                </Tooltip>
              </div>
+
           </div>
         </div>
 

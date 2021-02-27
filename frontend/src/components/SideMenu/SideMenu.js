@@ -54,7 +54,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import mainLogo from '../../logo.svg';
 import backPartLogo from '../../hareOrb.svg';
-import frontPartLogo from '../../frontPartLogo.svg';
 import { connect } from 'react-redux';
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;

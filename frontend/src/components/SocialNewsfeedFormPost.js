@@ -305,6 +305,9 @@ class SocialNewsfeedFormPost extends React.Component{
 
       })
 
+
+
+
     }
 
 
@@ -395,7 +398,6 @@ class SocialNewsfeedFormPost extends React.Component{
           visible={previewVisible}
           title={previewTitle}
           footer={null}
-          onCancel={this.handleCancel}
         >
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
@@ -413,10 +415,9 @@ class SocialNewsfeedFormPost extends React.Component{
           </Upload>
 
           <div>
-
               <Button
-              disabled = {this.handleValidation()}
-              style={{fontSize:'24px', }} shape="round" type="primary"
+                disabled = {this.handleValidation()}
+                style={{fontSize:'24px', }} shape="round" type="primary"
                 style={{float:'right', marginRight:'25px'}}
                 onClick={this.onFormSubmit}>Post</Button>
           </div>
