@@ -918,6 +918,7 @@ class EventInfo extends React.Component{
 
             <UserAvaCarousel
               persons = {person}
+              history = {this.props.history}
                />
 
           </div>
