@@ -40,7 +40,7 @@ import PostPicCarousel from '../../components/PostPageFolder/PostPicCarousel';
 import NewsfeedSpecCarousel from './NewsfeedSpecCarousel';
 import LazyLoad from 'react-lazyload';
 import * as dateFns from 'date-fns';
-
+import {Link, withRouter} from 'react-router-dom';
 // DO NOT USE ANY MORE UNLESS REVERT
 
 class NewsfeedPost extends React.Component {
@@ -501,7 +501,7 @@ class NewsfeedPost extends React.Component {
             (this.state.commentsCondition==true) ?
             <div>
                <div>{this.props.data.post_comments.length!=0 ?
-                 <PreviewComments className="fontTest" newsfeed={this.props} />
+                 <PreviewComments className="fontTest" newsfeed={this.props} {...this.props} />
                  :
                  ''}
               </div>
@@ -539,6 +539,7 @@ class NewsfeedPost extends React.Component {
     <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
       <span class="profilePicHeader">
         <span class="headerContainer" >
+
             <span class="topleftNewsFeedPost">
               {
                 profilePic != '' ?
@@ -550,15 +551,17 @@ class NewsfeedPost extends React.Component {
               src={profilePic} alt="avatar" />
 
               :
-
+              <Link to={"/explore/"+this.props.data.user.username} >
               <Avatar
               onClick = {() => this.onProfileClick(this.props.data.user.username)}
               size="large"
               style = {{cursor: 'pointer' }}
               src={defaultPic} alt="avatar" />
+              </Link>
             }
 
             </span>
+
             <span class="topRightNewsFeedPost">
               <span
                 style={{color:'black', fontSize:'15px'}}

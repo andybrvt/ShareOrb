@@ -19,6 +19,11 @@ class PersonalProfileHeader extends React.Component{
   }
 
 
+  componentDidMount() {
+
+    window.scrollTo(0,0)
+  }
+
   getInitialValue = () => {
     // This function will get the initial value of the edit profile page, which
     // in this case is the name, last name, bio, picture etc what ever else you

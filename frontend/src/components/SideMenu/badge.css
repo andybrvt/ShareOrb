@@ -18,7 +18,7 @@
 .notificationInside{
   position: relative;
   transform: translateX(50%)  translateY(-50%);
-  left:15%;
+  left:30%;
   bottom:25%;
   font-weight: 600;
 }
