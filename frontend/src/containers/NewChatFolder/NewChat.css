@@ -413,6 +413,7 @@
   /* background-color: green; */
   position: relative;
   /* top: 25px; */
+  cursor: pointer;
 }
 
 .chatContainer .chatFarRightSide .chatManagerContainer .chatMemberList{
