@@ -975,7 +975,7 @@ class WeekCalendar extends React.Component{
               type = 'primary'
               className = 'miniEventSyncButton'
               onClick = {this.openEventSyncModal}>
-                Event Sync
+                Sync With Friends
             </Button>
       </div>
 

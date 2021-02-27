@@ -138,7 +138,7 @@ class InfiniteList extends React.Component {
 
                 <div>
 
-                  {
+                  {/*
                     j.post.get_socialCalItems ?
 
                     <SocialNewsfeedPost
@@ -148,7 +148,7 @@ class InfiniteList extends React.Component {
                    :
 
                    <SocialEventNewsfeedPost />
-                    
+                    */
                   }
 
 
