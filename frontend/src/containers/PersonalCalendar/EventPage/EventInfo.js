@@ -20,7 +20,7 @@ import Liking from '../../NewsfeedItems/Liking';
 import { ReactBingmaps } from 'react-bingmaps';
 import {Link, withRouter} from 'react-router-dom';
 import {browserHistory} from 'react-router';
-
+import UserAvaCarousel from '../../SocialCalendarFolder/SocialEventPage/UserAvaCarousel';
 
 
 const { TabPane } = Tabs;
@@ -908,56 +908,76 @@ class EventInfo extends React.Component{
             </div>
           </div>
 
+          <div class = "personListCard">
+            People who are going
+            <Divider
+              style = {{
+                background: "black"
+              }}
+              />
+
+            <UserAvaCarousel
+              persons = {person}
+              history = {this.props.history}
+               />
+
+          </div>
+
+
+
       </div>
 
 
 
       <div className = "eventBottomRight">
-        {/* Invite friends */}
-        <div className = "inviteFriendsEventCard">
-            Invite Friends
-            <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="Suggested Friends" key="1">
+        {/*
+          <div className = "inviteFriendsEventCard">
+              Invite Friends
+              <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
+              <Tabs defaultActiveKey="1">
+                <TabPane tab="Suggested Friends" key="1">
 
-                <List
-                    className="demo-loadmore-list scrollableFeature"
-                    style={{marginTop:'-10px'}}
-                    itemLayout="horizontal"
-                    dataSource={list}
-                    renderItem={item => (
+                  <List
+                      className="demo-loadmore-list scrollableFeature"
+                      style={{marginTop:'-10px'}}
+                      itemLayout="horizontal"
+                      dataSource={list}
+                      renderItem={item => (
 
-                    <List.Item>
+                      <List.Item>
 
-                      <Skeleton avatar title={false} loading={item.loading} active>
+                        <Skeleton avatar title={false} loading={item.loading} active>
 
-                        <List.Item.Meta
-                          avatar={
-                            <Avatar
-                              style = {{
-                                cursor: "pointer"
-                              }}
-                              onClick = {() => this.profileDirect(item.username)}
-                               src={item.profile_picture} />
-                            }
-                            title={<span
-                              style = {{cursor: "pointer"}}
-                               onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
-                            description={
-                              <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                          <List.Item.Meta
+                            avatar={
+                              <Avatar
+                                style = {{
+                                  cursor: "pointer"
+                                }}
+                                onClick = {() => this.profileDirect(item.username)}
+                                 src={item.profile_picture} />
                               }
-                          />
-                        </Skeleton>
-                    </List.Item>
-                )}
-              />
-            </TabPane>
-            <TabPane tab="Pending Invites (2)" key="2">
+                              title={<span
+                                style = {{cursor: "pointer"}}
+                                 onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
+                              description={
+                                <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
+                                }
+                            />
+                          </Skeleton>
+                      </List.Item>
+                  )}
+                />
+              </TabPane>
+              <TabPane tab="Pending Invites (2)" key="2">
 
-              <div>hi</div>
-            </TabPane>
-          </Tabs>
-        </div>
+                <div>hi</div>
+              </TabPane>
+            </Tabs>
+          </div>
+
+
+           */}
 
         {/* The Map card*/}
         <div class="mapEventCard">

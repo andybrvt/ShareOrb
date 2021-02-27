@@ -20,7 +20,7 @@ class CurChatManager extends React.Component{
   goToHome=(usernameList)=> {
     // This is used to open up the social cell day post modal
     this.props.history.push({
-      pathname:"/home/"+usernameList,
+      pathname:"/explore/"+usernameList,
 
     })
 
@@ -250,16 +250,20 @@ class CurChatManager extends React.Component{
 
           <div className = 'chatRightSideBox'>
             <Avatar
-              onClick = {() => this.goToHome(usernameList)}
+              onClick = {() => this.onProfileClick(usernameList)}
               size = {150}
               src = {`${global.IMAGE_ENDPOINT}`+profilePic}
             />
 
-            <div className= 'mainChatUserName'>
+            <div
+              onClick = {() => this.onProfileClick(usernameList)}
+               className= 'mainChatUserName'>
             {chatUserName}
             </div>
 
-            <div className= 'mainChatUserUserName'>{"@"+usernameList}</div>
+            <div
+              onClick = {() => this.onProfileClick(usernameList)}
+              className= 'mainChatUserUserName'>{"@"+usernameList}</div>
           </div>
 
         }

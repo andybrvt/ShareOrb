@@ -29,6 +29,12 @@ class UserAvaCarousel extends React.Component{
     this.carousel.prev()
   }
 
+  onProfileClick = (username) => {
+    // This function will redirect the user to the person's profile
+
+    this.props.history.push("/explore/"+username)
+  }
+
   renderUserProfiles = (userList) => {
     // This function will render a list of all the people that are in thsi
     // event
@@ -52,8 +58,14 @@ class UserAvaCarousel extends React.Component{
         while(count < final){
           if(userList[count]){
             // see if it exist first
+            let username = ""
+            if(userList[count]){
+              username = userList[count].username
+            }
+
             singleSlide.push(
               <div
+                onClick = {() => this.onProfileClick(username)}
                 className = "singleProfile">
                 <div className = "miniHolderHolder">
                   <div className = "miniAvatarHolder">

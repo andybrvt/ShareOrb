@@ -693,6 +693,7 @@ class SocialEventInfo extends React.Component{
 
                 <UserAvaCarousel
                   persons = {persons}
+                  history = {this.props.history}
                    />
 
               </div>

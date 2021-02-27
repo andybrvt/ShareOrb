@@ -37,3 +37,9 @@ export const closeNotification = () => {
     type: actionTypes.CLOSE_NOTIFICATION
   }
 }
+
+export const clearNotification = () => {
+  return {
+    type: actionTypes.CLEAR_NOTIFICATION
+  }
+}

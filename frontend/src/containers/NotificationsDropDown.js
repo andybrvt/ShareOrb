@@ -298,6 +298,40 @@ class NotificationsDropDown extends React.Component{
     })
   }
 
+  onNotificationClear = (userId) => {
+    // This function will be used to clear out the notification
+    // Since it just your page you canjust do an axios call and then
+    // call a redux
+
+    if(this.props.notifications.length > 0){
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/onClearNotification`,{
+        userId: userId
+      }).then(res =>{
+        console.log('res')
+        // You will clear out the notificaiton here
+        this.props.clearNotification()
+        this.clearNotification("bottomRight")
+
+      })
+    } else {
+      this.noNotificationNoti("bottomRight")
+    }
+  }
+
+  clearNotification = ( placement ) => {
+    notification.info({
+      message: 'Notification Cleared',
+      placement,
+    })
+  }
+
+  noNotificationNoti = (placement) => {
+    notification.info({
+      message: 'No notifications to cleared',
+      placement,
+    })
+  }
+
 
   renderNotifications = () => {
     // For the accept notificaiton, you want to pass in min and max date and the requested user so you can
@@ -1136,6 +1170,12 @@ class NotificationsDropDown extends React.Component{
         :
         notificationList}
       </div>
+        <div
+          onClick = {() => this.onNotificationClear(this.props.curId)}
+          className = "notificationClearHolder">
+          Clear
+        </div>
+
       </List>
     )
   }
@@ -1182,6 +1222,7 @@ class NotificationsDropDown extends React.Component{
 
       <div className = {`dropdown-content ${this.props.showNoti ? "show" : ""}`} >
           {this.renderNotifications()}
+
         </div>
 
 
@@ -1229,7 +1270,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setNotifications: notifications => dispatch(notificationsActions.setNotifications(notifications)),
     openNotification: () => dispatch(notificationsActions.openNotification()),
-    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList))
+    updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList)),
+    clearNotification: () => dispatch(notificationsActions.clearNotification())
   }
 }
 
