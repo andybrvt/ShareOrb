@@ -700,3 +700,21 @@ class resetNotificationSeen(APIView):
         curUser.save()
 
         return Response("reset notification seen")
+
+
+class onClearNotification(APIView):
+    # This function will clear out the notificaiton of a person
+    # For this one you just have to filter out all the notification and then delete
+    # all of them
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        curUser = get_object_or_404(models.User, id = request.data['userId'])
+
+        # Now you will filter out all the notificaiton of that user
+        notifications = models.CustomNotification.objects.select_related('actor').filter(recipient=curUser).order_by('-timestamp')
+
+
+        notifications.delete()
+
+        return Response("clear out notification")

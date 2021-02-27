@@ -43,6 +43,12 @@ const closeNotification = (state, action) => {
   })
 }
 
+const clearNotification = (state, action) => {
+  return updateObject(state, {
+    notifications: []
+  })
+}
+
 
 const reducer = (state= initialState, action ) => {
   switch(action.type) {
@@ -56,6 +62,8 @@ const reducer = (state= initialState, action ) => {
       return openNotification(state,action);
     case actionTypes.CLOSE_NOTIFICATION:
       return closeNotification(state, action)
+    case actionTypes.CLEAR_NOTIFICATION:
+      return clearNotification(state, action)
     default:
       return state;
   }
