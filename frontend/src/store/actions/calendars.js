@@ -189,3 +189,12 @@ export const updateSeenEventMessage = (seenEventObj)  => {
     seenEventObj: seenEventObj
   }
 }
+
+export const updateGoingNotList = (goingObj) => {
+  // The going object will const both of the going and not going list
+  console.log(goingObj)
+  return{
+    type: actionTypes.UPDATE_GOING_NOT_LIST,
+    goingObj: goingObj
+  }
+}

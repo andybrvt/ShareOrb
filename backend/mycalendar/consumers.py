@@ -492,8 +492,13 @@ class EventPageConsumer (JsonWebsocketConsumer):
         content = {
             'command': 'send_event_going',
             'acceptedList': serializer['accepted'],
-            'declineList': serializer['decline']
+            'declineList': serializer['decline'],
+            "eventObjId": data['eventId']
+
         }
+
+        self.send_message(content)
+
 
     def send_event_not_going(self, data):
         # This function will be in charge of adding people to the not going
@@ -514,8 +519,12 @@ class EventPageConsumer (JsonWebsocketConsumer):
         content = {
             'command': 'send_event_not_going',
             'acceptedList': serializer['accepted'],
-            'declineList': serializer['decline']
+            'declineList': serializer['decline'],
+            "eventObjId": data['eventId']
         }
+
+        self.send_message(content)
+
 
     def send_message(self, eventMessage):
         # This will be the go between for sending events... so when you send an event

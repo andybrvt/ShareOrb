@@ -177,7 +177,31 @@ class WebSocketEventPage{
 
       this.callbacks['update_event_page'](eventObj)
 
+    } else if( command === "send_event_going"){
+      const acceptedList = parsedData.acceptedList
+      const declineList = parsedData.declineList
+
+      const content = {
+        acceptList: acceptedList,
+        declineList: declineList
+      }
+
+      // add a call back where you replace the decline list and accept list
+      this.callbacks['update_going_not'](content)
+
+    } else if(command === "send_event_not_going"){
+      const acceptedList = parsedData.acceptedList
+      const declineList = parsedData.declineList
+
+      const content = {
+        acceptList: acceptedList,
+        declineList: declineList
+      }
+
+      // user the same call backs as the send event going
+      this.callbacks['update_going_not'](content)
     }
+
 
   }
 
@@ -186,13 +210,15 @@ class WebSocketEventPage{
     fetchEventInfo,
     sendEventMessage,
     updateEventCallBack,
-    updateSeenCallBack
+    updateSeenCallBack,
+    updateGoingNot
   ){
     // Add all the call backs here
     this.callbacks['fetch_event_info'] = fetchEventInfo
     this.callbacks['send_event_message'] = sendEventMessage
     this.callbacks['update_event_page'] = updateEventCallBack
     this.callbacks['update_seen_event_message'] = updateSeenCallBack
+    this.callbacks['update_going_not'] = updateGoingNot
   }
 
 

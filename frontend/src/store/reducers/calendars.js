@@ -236,6 +236,19 @@ const updateEventBackground = (state, action) => {
   })
 }
 
+const updateGoingNotList = (state, action) => {
+  // This will update the accepted and decline list
+
+  console.log(action)
+  return updateObject(state, {
+    selectedEvent: {
+      ...state.selectedEvent,
+      accepted: action.goingObj.acceptList,
+      decline: action.goingObj.declineList,
+    }
+  })
+}
+
 // const deleteEvent =
 
 // when an action gets called it will go into here and this will check what the
@@ -288,6 +301,8 @@ const reducer = (state = initialState, action) => {
       return updateEventBackground(state, action)
     case actionTypes.UPDATE_SEEN_EVENT_MESSAGE:
       return updateSeenEventMessage(state, action)
+    case actionTypes.UPDATE_GOING_NOT_LIST:
+      return updateGoingNotList(state, action)
     default:
       return state;
   }
