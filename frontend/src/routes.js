@@ -81,16 +81,13 @@ class BaseRouter extends React.Component {
             <Route exact path = '/home'  render={(props) => <NewsFeedView {...this.props} isAuthenticated={this.props.isAuthenticated} />} />
 
 
+
+
             <Route exact path = '/userview' render={(props) => <AllUsersNotCurrNotCurrFriends {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/explore' render={(props) => <Explore {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-
             <Route exact path = '/explore/:username' render={(props) => <PersonalProfile parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/explore/:username/posts' render = {(props) => <PersonalProfilePostList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
             <Route exact path = '/explore/:username/events' render = {(props) => <PersonalProfileEventList parameter = {props.match.params} {...this.props} isAuthenticated= {this.props.isAuthenticated} />} />
-
-            <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-            <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-
             <Route exact path = '/chat/:id' render={(props) => <NewChat parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/personalcalendar/:year/:month' render={(props) => <MonthCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/personalcalendar/:year/:month/:day' render={(props) => <DayCalendar parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
@@ -102,6 +99,9 @@ class BaseRouter extends React.Component {
             <Route exact path = '/settings/calPref' render={(props) => <CalPrefSettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/settings/privacy' render={(props) => <PrivacySettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
+            {/* DO NOT USE ANYMORE*/}
+            <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
+            <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
           </Switch>
         </SideMenu>

@@ -2,7 +2,7 @@
 /* Stuff under here are shared among all the calendars */
 .calendarContainer{
   position: relative;
-  width: 96vw;
+  width:100%;
   height: 93vh;
   top:7%;
   display: flex;

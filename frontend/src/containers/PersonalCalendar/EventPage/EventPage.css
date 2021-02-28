@@ -1,6 +1,6 @@
 /* CSS for container that holds the event page */
 .eventPageContainer{
-  width: 96vw;
+  width: 100%;
   /* padding: 30px; */
   height:93vh;
   font-family: 'Segoe UI Regular';
