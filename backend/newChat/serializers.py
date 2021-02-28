@@ -5,6 +5,8 @@ from . import models
 
 from rest_framework import serializers
 from userprofile.models import User
+from mycalendar.serializers import EventSerializer
+from mycalendar.models import Event
 
 # This will be the serializer for each chat, which consist of the users and messages
 class ChatSerializer(serializers.ModelSerializer):
@@ -75,6 +77,8 @@ class ChatUser(serializers.ModelSerializer):
         fields = ("id", "username", 'first_name', 'last_name', 'profile_picture')
 
 
+
+
 # This serializer will be used for the messages
 class MessageSerializer(serializers.ModelSerializer):
 
@@ -87,4 +91,5 @@ class MessageSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['messageUser'] = ChatUser(User.objects.get(id = data['messageUser'])).data
+        data['attachedEvent'] = EventSerializer(Event.objects.get(id = data['attachedEvent'])).data
         return data

@@ -72,6 +72,11 @@ class NewChatContent extends React.Component{
     this.props.history.push("/explore/"+username)
   }
 
+  onViewEvent = (eventId) => {
+    // This function will be use to redirect to the selected event page
+    this.props.history.push('/personalcal/event/'+ eventId)
+  }
+
 
   renderMessages = (messageItem) => {
 
@@ -109,9 +114,17 @@ class NewChatContent extends React.Component{
                 <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
                 {test} people
                 <br/>
-                  <Button type="primary" shape="round" style={{float:'right', marginTop:"5px"}}>
-                    View Event
-                  </Button>
+
+
+                  <Tooltip placement="bottomLeft" title="View event">
+                    <Button
+                      onClick = {() => this.onViewEvent(messageItem.eventId)}
+                      type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                      <i class="fas fa-eye"></i>
+                    </Button>
+                  </Tooltip>
+
+
 
               </div>
 
@@ -173,9 +186,43 @@ class NewChatContent extends React.Component{
                   <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
                   {test} people
                   <br/>
-                    <Button type="primary" shape="round" style={{float:'right', marginTop:"5px"}}>
-                      View Event
-                    </Button>
+                    <Tooltip placement="bottomLeft" title="Accept Invite">
+                      <Button
+                      type="primary"
+                      shape="circle"
+                      danger
+                      style={{
+                        float:'right',
+                        marginLeft:'10px',
+                        marginTop:"5px"
+                      }}
+                      >
+                      <i class="fas fa-user-times"></i>
+                      </Button>
+                    </Tooltip>
+                    <Tooltip placement="bottomLeft" title="Decline Invite">
+                      <Button
+                      shape="circle"
+                      type="primary"
+                      style={{
+                        float:'right',
+                        marginLeft:'10px',
+                        marginTop:"5px"
+                      }}
+                      >
+                      <i  class="fas fa-user-check"></i>
+
+                      </Button>
+                    </Tooltip>
+
+                    <Tooltip placement="bottomLeft" title="View event">
+                      <Button
+                        onClick = {() => this.onViewEvent(messageItem.eventId)}
+                         type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                        <i class="fas fa-eye"></i>
+                      </Button>
+                    </Tooltip>
+
                 </div>
 
               </div>

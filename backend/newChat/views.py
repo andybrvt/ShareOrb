@@ -3,6 +3,7 @@ from rest_framework import generics
 from . import models
 from . import serializers
 from userprofile.models import User
+from mycalendar.models import Event
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -180,6 +181,14 @@ class CreateChatEventMessage(APIView):
         chatObj = get_object_or_404(models.Chat, id = request.data['chatId'])
         senderObj = get_object_or_404(User, id = request.data['senderId'])
 
+
+        # Since we have a foriegnkey now we can then try to grab the event
+        # and then attach it to the message
+
+        # Get the event using the id
+        sharedEvent = get_object_or_404(Event, id = request.data['eventObj']['id'])
+
+
         # Now you will create teh message.
 
         newMessage = models.Message.objects.create(
@@ -191,7 +200,8 @@ class CreateChatEventMessage(APIView):
             eventStartTime = request.data['eventObj']['start_time'],
             eventEndTime = request.data['eventObj']['end_time'],
             eventPersons = len(request.data['eventObj']['person']),
-            eventId = request.data['eventObj']['id']
+            eventId = request.data['eventObj']['id'],
+            attachedEvent = sharedEvent
         )
 
         newMessage.save()
@@ -229,6 +239,8 @@ class CreateNewChatEventMessage(APIView):
             chatUser = get_object_or_404(User, id = participant)
             chat.participants.add(participant)
 
+
+        sharedEvent = get_object_or_404(Event, id = request.data['eventObj']['id'])
         # Add the new event message
         newMessage = models.Message.objects.create(
             chat = chat,
@@ -239,7 +251,8 @@ class CreateNewChatEventMessage(APIView):
             eventStartTime = request.data['eventObj']['start_time'],
             eventEndTime = request.data['eventObj']['end_time'],
             eventPersons = len(request.data['eventObj']['person']),
-            eventId = request.data['eventObj']['id']
+            eventId = request.data['eventObj']['id'],
+            attachedEvent = sharedEvent
         )
 
 
