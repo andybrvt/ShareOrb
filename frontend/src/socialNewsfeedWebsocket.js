@@ -111,21 +111,46 @@ class WebSocketSocialNewsfeed{
         this.callbacks['fetch_cur_social_cell'](socialPostObj.post)
       }
 
-      if(created === true){
+      // if(created === true){
         // this is if this is a new social cal cell so you just add it to the top
         // of the newsfeed
         this.callbacks['add_first_social_cell_post'](socialPostObj)
 
-      } else if(created === false){
-        // if its a old newsfeed cell and needs to be updated
-
-        this.callbacks['update_social_cell_post'](socialPostObj)
-
-      }
+      // } else if(created === false){
+      //   // if its a old newsfeed cell and needs to be updated
+      //
+      //   this.callbacks['update_social_cell_post'](socialPostObj)
+      //
+      // }
 
 
       // Now check if the currentId equals to taht of the user in the social postobj
       // if it is equal then that means you should update the curSocialCal
+
+
+    } else if(command === "remove_all_photo_social_post"){
+      // This will be use to update the soical cal cell of the curUser and update the
+      // newsfeed when you remove all your pics
+
+      // so you would need one that updates just your social cal cell
+      const curId = parsedData.curId
+
+      const curSocialCalCellList = parsedData.curSocialCalCell
+
+      let curSocialCell = {}
+      if(curSocialCalCellList.length > 0){
+        curSocialCell = curSocialCalCellList[0];
+      }
+
+      if(parseInt(this.callbacks['curId']) === curId){
+        this.callbacks['fetch_cur_social_cell'](curSocialCell)
+
+      }
+
+      const socialPost = parsedData.social_posts
+      this.callbacks['fetch_social_posts'](socialPost)
+
+
 
 
     }
@@ -188,7 +213,7 @@ class WebSocketSocialNewsfeed{
     // This function happens when you remove all the pictures in
     // you day cell. This is just use to update the cursoical cal cell
     // and then update the newsfeed
-    this.sendPostInfo({
+    this.sendPostsInfo({
       curDate: curDate,
       userId: curId,
       command: "remove_all_photo_social_post"

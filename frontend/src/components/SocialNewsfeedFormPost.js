@@ -49,6 +49,7 @@ class SocialNewsfeedFormPost extends React.Component{
       caption: '',
       cameraShow:false,
       socialClip:false,
+      confirmationVisible: false,
     }
 
 
@@ -176,15 +177,23 @@ class SocialNewsfeedFormPost extends React.Component{
       // just post and no pictures then it would not work
 
       let caption = this.state.caption
+      let truefileList = []
       let fileList = this.state.fileList
-      let buttonDisabled = true
+      let buttonDisabled = false
 
+      if(this.props.curSocialCalCell){
+        if(this.props.curSocialCalCell.get_socialCalItems){
+          truefileList = this.props.curSocialCalCell.get_socialCalItems
+        }
+      }
       // Only in the case where there are photos then buttom should not be
       // disabled
       // if(caption !== "" && fileList.length > 0){
       //   buttonDisabled = false
       // }
-      if(caption === "" && fileList.length === 0){
+      if(fileList.length === 0 && truefileList.length === 0){
+        // This is at the beginnig when there are nothing on the picture so you
+        // have to add pictures in so that is why it will be diabled
           buttonDisabled = true
       } else {
         buttonDisabled = false
@@ -194,6 +203,39 @@ class SocialNewsfeedFormPost extends React.Component{
 
 
     }
+
+    onCloseWarning = () => {
+      // This function will close the warning
+      this.setState({
+        confirmationVisible: false
+      })
+    }
+
+
+    onFormSubmitHolder = () => {
+      // This one is used as a condition for the submiting, this is if they have
+      // pictures but wanna erase all of them then it will show up a modal
+      // asking if they are sure then to proceeed if not it will go its normal route
+
+
+      const fileList = this.state.fileList;
+
+
+      if(fileList.length === 0){
+        // open a modal here
+        this.setState({
+          confirmationVisible: true
+        })
+
+      } else {
+        // normal route, literally just do on formsubmit here
+
+
+      }
+
+
+    }
+
 
     onFormSubmit= () => {
       // This is where you will be use to update your social cal cell
@@ -220,7 +262,7 @@ class SocialNewsfeedFormPost extends React.Component{
       // first append the day caption
       formData.append("dayCaption", caption);
 
-      if(fileList.length !== 0){
+      // if(fileList.length !== 0){
         // Now append the length of the file list so you know how much you
         // will need to loop through
         formData.append("fileListLength", fileList.length);
@@ -235,7 +277,10 @@ class SocialNewsfeedFormPost extends React.Component{
             formData.append("image[" + i +']', fileList[i].url.replace(global.POSTLIST_SPEC, ""))
           }
         }
-      }
+
+
+
+      // }
 
       // Now you have all the caption and pictures uploaded
 
@@ -247,10 +292,10 @@ class SocialNewsfeedFormPost extends React.Component{
       )
       .then(res => {
 
-
+        console.log(res.data.cell)
         // Have a condiation where if there are not social cal items you will
         // delete and remove the content type post
-        if(res.data.cell.get_socialCalItems === 0) {
+        if(res.data.cell.get_socialCalItems.length === 0) {
           // If there are no exisiting social cal cell you want to remove it and no need
           // to update teh coverpic
 
@@ -262,6 +307,18 @@ class SocialNewsfeedFormPost extends React.Component{
           // the function you want is removeAllPhotoSocialPost
 
           const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
+
+          // just use this to send to the backend and send things to the
+          // newsfeed websocket
+          WebSocketSocialNewsfeedInstance.removeAllPhotoSocialPost(
+            ownerId,
+            curDate
+          )
+
+          message.success('You updated your day album.', 7);
+
+          this.props.onCancel()
+
 
         } else {
           // This is if there are socialcalcellitems to post
@@ -288,9 +345,6 @@ class SocialNewsfeedFormPost extends React.Component{
           }
 
 
-
-
-
           WebSocketSocialNewsfeedInstance.addUpdateSocialPost(
             ownerId,
             res.data.cell.id,
@@ -299,7 +353,7 @@ class SocialNewsfeedFormPost extends React.Component{
 
           message.success('You updated your day album.', 7);
 
-
+          this.props.onCancel()
 
 
         }
@@ -429,8 +483,28 @@ class SocialNewsfeedFormPost extends React.Component{
                 disabled = {this.handleValidation()}
                 style={{fontSize:'24px', }} shape="round" type="primary"
                 style={{float:'right', marginRight:'25px'}}
-                onClick={this.onFormSubmit}>Post</Button>
+                onClick={this.onFormSubmit}>Update</Button>
           </div>
+
+        <Modal
+          visible = {this.state.confirmationVisible}
+          onCancel = {this.onCloseWarning}
+          >
+          <Alert
+             message="Warning"
+             description="Updating will remove your day album from the newsfeed because there are no pictures to show."
+             type="warning"
+             showIcon
+             closable
+           />
+         <Button>
+           Cancel
+         </Button>
+
+         <Button>
+           Accept
+         </Button>
+        </Modal>
 
     </div>
     );
