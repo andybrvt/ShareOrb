@@ -111,17 +111,17 @@ class WebSocketSocialNewsfeed{
         this.callbacks['fetch_cur_social_cell'](socialPostObj.post)
       }
 
-      // if(created === true){
+      if(created === true){
         // this is if this is a new social cal cell so you just add it to the top
         // of the newsfeed
         this.callbacks['add_first_social_cell_post'](socialPostObj)
 
-      // } else if(created === false){
-      //   // if its a old newsfeed cell and needs to be updated
-      //
-      //   this.callbacks['update_social_cell_post'](socialPostObj)
-      //
-      // }
+      } else if(created === false){
+        // if its a old newsfeed cell and needs to be updated
+
+        this.callbacks['update_social_cell_post'](socialPostObj)
+
+      }
 
 
       // Now check if the currentId equals to taht of the user in the social postobj
