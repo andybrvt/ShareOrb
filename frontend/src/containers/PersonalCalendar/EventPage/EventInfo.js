@@ -984,7 +984,7 @@ class EventInfo extends React.Component{
           Location
           <span>
             <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
-            {/*
+
             <ReactBingmaps
               bingmapKey = "AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
               center = {[32.2226, 110.9747]}
@@ -1003,7 +1003,7 @@ class EventInfo extends React.Component{
             }
               >
             </ReactBingmaps>
-            */}
+      
              {/*Saving api calls don't worry about maps*/}
             <Divider/>
               <i style={{marginRight:'15px', color:'#1890ff',

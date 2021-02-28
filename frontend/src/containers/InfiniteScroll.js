@@ -147,8 +147,10 @@ class InfiniteList extends React.Component {
 
                    :
 
-                   <SocialEventNewsfeedPost />
-                
+
+                   <div></div>
+
+
                   }
 
 

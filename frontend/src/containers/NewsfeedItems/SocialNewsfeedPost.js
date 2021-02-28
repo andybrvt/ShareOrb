@@ -41,7 +41,7 @@ import PostPicCarousel from '../../components/PostPageFolder/PostPicCarousel';
 import NewsfeedSpecCarousel from './NewsfeedSpecCarousel';
 import LazyLoad from 'react-lazyload';
 import * as dateFns from 'date-fns';
-
+import {Link, withRouter} from 'react-router-dom';
 
 class SocialNewsfeedPost extends React.Component {
   constructor(props){
@@ -639,26 +639,31 @@ class SocialNewsfeedPost extends React.Component {
     <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
       <span class="profilePicHeader">
         <span class="headerContainer" >
+
             <span class="topleftNewsFeedPost">
               {
                 profilePic != '' ?
-              <Avatar
-              size="large"
-              onClick = {() => this.onProfileClick(userUsername)}
-              size={42}
-              style = {{cursor: 'pointer'}}
-              src={`${global.IMAGE_ENDPOINT}`+profilePic} alt="avatar" />
+              <Link to={"/explore/"+userUsername} >
+                <Avatar
+                size="large"
+                onClick = {() => this.onProfileClick(userUsername)}
+                size={42}
+                style = {{cursor: 'pointer'}}
+                src={`${global.IMAGE_ENDPOINT}`+profilePic} alt="avatar" />
+              </Link>
 
               :
-
-              <Avatar
-              onClick = {() => this.onProfileClick(userUsername)}
-              size="large"
-              style = {{cursor: 'pointer' }}
-              src={`${global.IMAGE_ENDPOINT}`+defaultPic} alt="avatar" />
+              <Link to={"/explore/"+userUsername} >
+                <Avatar
+                onClick = {() => this.onProfileClick(userUsername)}
+                size="large"
+                style = {{cursor: 'pointer' }}
+                src={`${global.IMAGE_ENDPOINT}`+defaultPic} alt="avatar" />
+              </Link>
             }
 
             </span>
+
             <span class="topRightNewsFeedPost">
               <span
                 style={{color:'black', fontSize:'15px'}}

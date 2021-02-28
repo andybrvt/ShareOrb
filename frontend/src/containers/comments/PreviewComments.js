@@ -4,7 +4,7 @@ import React, { createElement } from 'react';
 import './PreviewComments.css'
 import * as dateFns from 'date-fns';
 import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
-
+import {Link, withRouter} from 'react-router-dom';
 class Comments extends React.Component {
   state = {
     likes:0,
@@ -42,6 +42,7 @@ class Comments extends React.Component {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+
   renderTimestamp = timestamp =>{
     console.log(timestamp)
     let prefix = '';
@@ -63,6 +64,7 @@ class Comments extends React.Component {
     return prefix;
   }
    render(){
+     console.log(this.props)
      console.log(this.props.commentList)
      const actions=[
       <Tooltip title="Like">
@@ -100,16 +102,26 @@ class Comments extends React.Component {
             </div>
 
             <div className = "newsFeedCommentAvatarSect">
-              <Avatar size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+              <Link to={"/explore/"+item.commentUser.username} >
+                <Avatar
+                  size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+              </Link>
             </div>
 
             <div className = 'newsFeedCommentTextSect'>
               <div className = "newsFeedCommentNameTime">
-                  <div className = 'newsFeedCommentUsername'>
-                  <b>
-                      {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
-                  </b>
+
+                <div>
+                  <div className = 'newsFeedCommentName'>
+                    <b>
+                        {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                    </b>
+                    &nbsp;&nbsp;
+                    <span class="newsfeedCommentUserName">
+                      {"@"+item.commentUser.username}
+                    </span>
                   </div>
+                </div>
               </div>
 
               <div className = "newsFeedCommentBody">

@@ -35,7 +35,7 @@
 }
 .newsFeedCommentItem .newsFeedCommentTextSect{
   width: 70%;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 .newsFeedCommentItem .newsFeedCommentTextSect .newsFeedCommentNameTime{
   display: flex;
@@ -43,8 +43,13 @@
   width: 100%;
 }
 
-.newsFeedCommentUsername{
-  font-size: 16px;
+.newsFeedCommentName{
+  font-size: 15px;
+}
+
+.newsfeedCommentUserName{
+  font-size: 12px;
+  color:grey;
 }
 
 .newsFeedCommentItem .newsFeedCommentDate{

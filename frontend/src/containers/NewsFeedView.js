@@ -240,7 +240,7 @@ class NewsFeedView extends React.Component {
 						cancelButtonProps={{ style: { display: 'none' } }}
 						 >
 	        <div class="firstTimeModalText">
-						We believe every day is special. Create a unique album of pictures each day to save memories in your life!
+						We believe every day is special. Think of ShareOrb like a scrapbook and you're creating <b>only one</b> album per day.
 						Let's dive into some of the features:
 						<br/>
 						<br/>
@@ -249,33 +249,35 @@ class NewsFeedView extends React.Component {
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="fas fa-home"></i>
-									Home: Every post on the newsfeed you see today represents what a person did today. Today's the 22nd of Febuary right?
-									Any pictures you add today will be inside today's album (on the 22nd)!
+									Home: Every post on the newsfeed is an entire day of pictures. Today's Febuary 27th right?
+									Any pictures you add today will be inside today's album (on the 27th)!
 
 								</Timeline.Item>
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="far fa-comment"></i>
-									Chats: Message and schedule events together
+									Chats: Message and schedule events with friends
 								</Timeline.Item>
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="far fa-calendar-alt"></i>
-									Personal Calendar: Your private calendar, sync with friends and plan your day
+									Personal Calendar: Your <b>private</b> calendar, sync with friends and plan your day
 								</Timeline.Item>
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="fas fa-user-friends"></i>
-									Social Calendar: Your public calendar, accessible by anyone. A collection of memories you've saved throughout the month
+									Social Calendar: Your <b>public</b> calendar. Any pictures or events you create here
+									can be seen by anyone!
 								</Timeline.Item>
 							</Timeline>
-						<Checkbox
-	            checked={this.state.checked}
-	            onChange={this.onChange}>
-	            Cool, I got it!
-	          </Checkbox>
-					</div>
 
+							<Checkbox
+		            checked={this.state.checked}
+		            onChange={this.onChange}>
+		            Cool, I got it!
+		          </Checkbox>
+
+					</div>
 
 	      </Modal>
 
