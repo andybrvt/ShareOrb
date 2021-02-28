@@ -575,23 +575,18 @@ class SocialNewsfeedPost extends React.Component {
             </div>
           </div>
 
-
           {
-            (this.state.commentsCondition==true) ?
+          (peopleLikeId.includes(this.props.userId))?
             <div>
-               <div>{commentList.length!=0 ?
+              { (commentList.length!=0) ?
                  <PreviewComments className="fontTest" commentList={commentList} />
                  :
-                 ''}
+                 ''
+               }
               </div>
-            </div>
             :
-
-            <div>
-
-            </div>
-
-          }
+            <div></div>
+            }
       </div>
     </div>
     )

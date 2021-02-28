@@ -34,39 +34,48 @@
 
 }
 .newsFeedCommentItem .newsFeedCommentTextSect{
-  width: 70%;
+  width: 90%;
   margin-left: 10px;
 }
 .newsFeedCommentItem .newsFeedCommentTextSect .newsFeedCommentNameTime{
   display: flex;
   flex-direction: row;
   width: 100%;
+  line-height: 125%;
 }
 
 .newsFeedCommentName{
-  font-size: 15px;
+  font-size: 14px;
+  font-family: "Segoe UI Regular";
 }
 
 .newsfeedCommentUserName{
   font-size: 12px;
   color:grey;
 }
-
 .newsFeedCommentItem .newsFeedCommentDate{
   /* background-color: red; */
   position: absolute;
   right: 6%;
   font-size: 12px;
+  font-size: 12px;
+  color:grey;
   /* top: 10%; */
 
 }
+
 .newsFeedCommentItem .newsFeedCommentBody{
+  position: relative;
+  /* background: blue; */
 
 }
 
 .newsFeedCommentItem .newsFeedCommentBody .newsFeedCommentText{
   word-break: break-all;
   position: relative;
+  line-height: 125%;
+  /* background: red; */
+  width:100%;
   /* top: 50%; */
 
 }

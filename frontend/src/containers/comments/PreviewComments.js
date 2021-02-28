@@ -52,7 +52,7 @@ class Comments extends React.Component {
     if (timeDiff < 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
-      prefix = `${timeDiff}min`;
+      prefix = `${timeDiff} min`;
     }else if (timeDiff < 24*60 && timeDiff > 60) {
       prefix = `${Math.round(timeDiff/60)}h`;
     } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
