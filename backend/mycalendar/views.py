@@ -157,12 +157,19 @@ class CreateSharedEventView(APIView):
 
         # Since you are doing it in chat you do not need to return it, you just
         # have to return the users list so that you can update the eventList
+        sharedEvent.save()
 
+        serializedShared = serializers.MiniEventSerializer(sharedEvent).data
         eventList = models.Event.objects.filter(host = host).filter(start_time__gte = datetime.date.today()).order_by('start_time')
 
         serializedEventList = serializers.MiniEventSerializer(eventList, many= True).data
 
-        return Response(serializedEventList)
+        content = {
+            "sharedEvent":serializedShared,
+            "eventList": serializedEventList
+        }
+
+        return Response(content)
 
 class CalendarEventsCreate(generics.CreateAPIView):
     serializer_class = serializers.CreateEventSerializer

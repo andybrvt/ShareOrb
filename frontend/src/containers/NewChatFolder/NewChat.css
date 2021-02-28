@@ -187,6 +187,7 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  cursor:pointer;
 }
 
 .messageTextHolder{
@@ -200,6 +201,7 @@
 .messageText .userName{
   color: grey;
   font-size: 14px;
+  cursor:pointer;
 }
 .messageText .eventMessage{
 }

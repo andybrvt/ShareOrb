@@ -190,7 +190,8 @@ class CreateChatEventMessage(APIView):
             eventTitle = request.data['eventObj']['title'],
             eventStartTime = request.data['eventObj']['start_time'],
             eventEndTime = request.data['eventObj']['end_time'],
-            eventPersons = len(request.data['eventObj']['person'])
+            eventPersons = len(request.data['eventObj']['person']),
+            eventId = request.data['eventObj']['id']
         )
 
         newMessage.save()
@@ -237,7 +238,8 @@ class CreateNewChatEventMessage(APIView):
             eventTitle = request.data['eventObj']['title'],
             eventStartTime = request.data['eventObj']['start_time'],
             eventEndTime = request.data['eventObj']['end_time'],
-            eventPersons = len(request.data['eventObj']['person'])
+            eventPersons = len(request.data['eventObj']['person']),
+            eventId = request.data['eventObj']['id']
         )
 
 

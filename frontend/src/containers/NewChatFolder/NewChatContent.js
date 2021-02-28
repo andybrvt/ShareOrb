@@ -67,6 +67,12 @@ class NewChatContent extends React.Component{
     this.scrollToBottom();
   }
 
+  onProfileClick = (username) => {
+    // This will redirec to the user profile page
+    this.props.history.push("/explore/"+username)
+  }
+
+
   renderMessages = (messageItem) => {
 
     // SEE IF THIS WORKS, IF IT DOES NOT THEN TRY JUST DOING A DIV AND THEN
@@ -145,7 +151,9 @@ class NewChatContent extends React.Component{
             <div className = "messageEventContainerL">
               <div className = "insideMessasgeHolder">
                 <div className = "messageEventAvatarHolder">
-                  <Avatar className = 'messageAvatar'
+                  <Avatar
+                    onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
+                    className = 'messageAvatar'
                     size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
                 </div>
 
@@ -186,14 +194,18 @@ class NewChatContent extends React.Component{
 
               <div className = "insideMessasgeHolder">
                 <div className = "messageAvatarHolder">
-                  <Avatar className = 'messageAvatar'
+                  <Avatar
+                    onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
+                    className = 'messageAvatar'
                     size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
                 </div>
 
                 <div className = "messageTextHolder">
                   <Tooltip placement="right" title={"8:00PM"}>
                     <span className = "messageText">
-                      <div className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
+                      <div
+                        onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
+                        className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
                       <div className = "eventMessage">
                         {messageItem.body}
                       </div>
