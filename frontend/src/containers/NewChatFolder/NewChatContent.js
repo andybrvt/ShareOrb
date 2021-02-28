@@ -92,10 +92,13 @@ class NewChatContent extends React.Component{
       // This message will take care of the case when you are the current user
         if(messageItem.type === "event"){
           // This conditional will take care of the event
-          const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
-          const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
-          const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
-          const test=messageItem.eventPersons
+          const eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
+          const eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
+          const eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
+          const personLength=messageItem.attachedEvent.person.length
+          const eventId = messageItem.attachedEvent.id
+
+
           return (
             <div className = "chatListItemR">
               <div className= "messageEventContainerR eventCard">
@@ -112,13 +115,13 @@ class NewChatContent extends React.Component{
                 {eventStartTime} - {eventEndTime}
                 <br />
                 <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
-                {test} people
+                {personLength} people
                 <br/>
 
 
                   <Tooltip placement="bottomLeft" title="View event">
                     <Button
-                      onClick = {() => this.onViewEvent(messageItem.eventId)}
+                      onClick = {() => this.onViewEvent(eventId)}
                       type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
                       <i class="fas fa-eye"></i>
                     </Button>
@@ -153,10 +156,11 @@ class NewChatContent extends React.Component{
       if(messageItem.type === "event"){
         // This conditional will take care of the event
 
-        const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
-        const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
-        const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
-        const test=messageItem.eventPersons
+        const eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
+        const eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
+        const eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
+        const personLength=messageItem.attachedEvent.person.length
+        const eventId = messageItem.attachedEvent.id
 
         return (
           <div className = "chatListItemL">
@@ -184,7 +188,7 @@ class NewChatContent extends React.Component{
                   {eventStartTime} - {eventEndTime}
                   <br />
                   <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
-                  {test} people
+                  {personLength} people
                   <br/>
                     <Tooltip placement="bottomLeft" title="Accept Invite">
                       <Button
@@ -217,7 +221,7 @@ class NewChatContent extends React.Component{
 
                     <Tooltip placement="bottomLeft" title="View event">
                       <Button
-                        onClick = {() => this.onViewEvent(messageItem.eventId)}
+                        onClick = {() => this.onViewEvent(eventId)}
                          type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
                         <i class="fas fa-eye"></i>
                       </Button>
