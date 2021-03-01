@@ -74,6 +74,7 @@ urlpatterns = [
 	path('privateChange', views.PrivateChangeView.as_view(), name = "change_private"),
 	# This will be for accepting follow and seeing private
 	path('approveFollow', views.onAcceptFollow.as_view(), name = "approve_follow"),
+	path('declineFollow', views.onDeclineFollow.as_view(), name = "decline_follow"),
 	path('onFollow', views.onFollowView.as_view(), name = "follow_user"),
 	path('onUnfollow', views.onUnfollowView.as_view(), name = "unfollow_user"),
 	path('sendFollowRequest', views.onSentRequestView.as_view(), name = 'send_follow_request'),
@@ -81,4 +82,5 @@ urlpatterns = [
 	path('unShowIntialInstructions/<slug:id>', views.unShowIntialInstructions.as_view(), name = "unshow_intial_instruction"),
 	path('resetNotificationSeen', views.resetNotificationSeen.as_view(), name = "reset_notification_seen"),
 	path('onClearNotification', views.onClearNotification.as_view(), name = "clear_notification")
+
 ]

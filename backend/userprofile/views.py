@@ -572,7 +572,7 @@ class onAcceptFollow(APIView):
         requestObj.delete()
 
         # Now create the following object
-        followerObj = models.UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
+        followerObj, created  = models.UserFollowing.objects.get_or_create(person_following = follower, person_getting_followers = following)
         followerObj.save()
         # Now you will grab the following of the current user and then
         # replace the one you have in the front end
@@ -590,6 +590,34 @@ class onAcceptFollow(APIView):
         # You will return your new follow list to update your list
 
         return Response(content)
+
+class onDeclineFollow(APIView):
+    # This function will decline someone's request on being approve for a follow
+    # it is pretty much gonna be similar to onAcceptfollow but instead of
+    # creating a follow you just delete the request
+    def post(self, request, *args, **kwargs ):
+        # now do the same as accept
+        follower = get_object_or_404(models.User, id = request.data['follower'])
+        following = get_object_or_404(models.User, id  = request.data['following'])
+
+        # Now you get the requestObj
+
+        requestObj = models.UserFollowingRequest.objects.filter(
+            send_request = follower,
+            accept_request = following
+        )
+        requestObj.delete()
+
+        curUser = get_object_or_404(models.User, id = request.data['following'])
+        hostObj = serializers.UserSerializer(curUser).data
+
+        # You just need to get the request list
+
+        requestedList = hostObj['get_follow_request']
+
+
+
+        return Response(requestedList);
 
 
 class onFollowView(APIView):
