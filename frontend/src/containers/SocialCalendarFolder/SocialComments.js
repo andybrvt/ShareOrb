@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { Comment, Tooltip, List, Avatar, Input, Form, Button } from 'antd';
+import { Comment, Tooltip, List, Divider, Avatar, Input, Form, Button, Empty} from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import './SocialCalCSS/SocialCellPage.css';
 import * as dateFns from 'date-fns';
-
+import {Link, withRouter} from 'react-router-dom';
 
 const { TextArea } = Input;
 
@@ -83,39 +83,59 @@ class SocialComments extends React.Component{
       <div className = 'socialCommentBoxBox'>
       <div className = 'socialCommentBox'>
       <List
+        locale={{emptyText:<span/>}}
         className="comment-list"
         itemLayout="horizontal"
         dataSource={this.props.items}
         renderItem={item => (
 
-            <div className = 'socialCommentItem'>
+          <div className = 'newsFeedCommentItem'>
+            <div className = "newsFeedCommentAvatarSect">
+              <Link to={"/explore/"+item.commentUser.username} >
+                <Avatar
+                  size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+              </Link>
+            </div>
 
-              <div className = 'socialCommentDate'>
-              {this.renderTimestamp(new Date(item.created_on))}
-              </div>
+            <div className = 'newsFeedCommentTextSect'>
+              <div className = "newsFeedCommentNameTime">
 
-              <div className = "socialCommentAvatarSect">
-                <Avatar size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
-              </div>
 
-              <div className = 'socialCommentTextSect'>
-                <div className = "socialCommentNameTime">
-                    <div className = 'socialCommentUsername'>
+                  <div className = 'newsFeedCommentName'>
                     <b>
                         {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
                     </b>
+                    <div className = 'newsFeedCommentDate'>
+                    {this.renderTimestamp(new Date(item.created_on))}
                     </div>
-                </div>
-
-                <div className = "socialCommentBody">
-                  <div className = 'socialCommentText'>
-                  {item.body}
                   </div>
+                </div>
+                  <span class="newsfeedCommentUserName">
+                    {"@"+item.commentUser.username}
+                  </span>
+
+
+              <div className = "newsFeedCommentBody">
+                <br/>
+                <div className = 'newsFeedCommentText'>
+                  {item.body}
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <div class="LikeReplySize">
+                  <i class="far fa-heart" style={{marginRight:'10px'}}></i>
+                  Like
+                  <Divider type="vertical"/>
+                  Reply
                 </div>
               </div>
 
-
             </div>
+
+
+
+          </div>
         )}
       />
       </div>

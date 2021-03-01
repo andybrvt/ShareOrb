@@ -51,7 +51,6 @@ class SocialNewsfeedPost extends React.Component {
     this.state = {
       visibleModal: false,
       commentPost:'',
-      commentsCondition:true,
       show:false,
       stepCount:0,
       avatarColor:'',
@@ -233,12 +232,6 @@ class SocialNewsfeedPost extends React.Component {
       stepCount:this.state.stepCount+1,
     });
   }
-
-  triggerComments = () => {
-    this.setState({
-      commentsCondition: !this.state.commentsCondition,
-    });
-  };
 
   handleOk = e => {
     console.log(e);
@@ -485,7 +478,6 @@ class SocialNewsfeedPost extends React.Component {
         </div>
 
       { caption !== "" ?
-
         <p style={{ fontSize: '14px', color:'black', marginLeft:'15px', marginTop:'5px'  }}>
           {
             ((caption).length>140)?
@@ -537,7 +529,7 @@ class SocialNewsfeedPost extends React.Component {
               onClick ={() => this.AddOneToUnlike(postId, this.props.userId, contentTypeId)}>
                 <i style={{ marginRight:'10px', color:'red'}} class="fa fa-heart">
                 </i>
-                <span class="textHighlight">
+                <span style={{color:'black'}} class="textHighlight">
                       Like
                 </span>
               </button>
@@ -555,7 +547,7 @@ class SocialNewsfeedPost extends React.Component {
                     style={{ marginRight:'10px'}}
                     class="far fa-heart">
                   </i>
-                  <span> Like </span>
+                  <span style={{color:'black'}}> Like </span>
               </button>
               }
               <button onClick ={() => this.OnClickPost(
@@ -566,11 +558,13 @@ class SocialNewsfeedPost extends React.Component {
                 location
                 )}>
 
-                <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comments"></i> Comment
+                <i style={{ fontSize:'17px', marginRight:'10px'}} class="far fa-comments"></i>
+                <span style={{color:'black'}}>Comment</span>
+
               </button>
               <button onClick = {() => this.onClipPhoto()}>
                 <span style={{ marginRight:'10px'}} class="fa fa-archive"></span>
-                Clip
+                <span style={{color:'black'}}> Clip</span>
               </button>
             </div>
           </div>
@@ -660,17 +654,21 @@ class SocialNewsfeedPost extends React.Component {
             </span>
 
             <span class="topRightNewsFeedPost">
-              <span
-                style={{color:'black', fontSize:'15px'}}
-                class="headerPostText alignleft" >
-                {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
-                <span
-                  style={{fontSize:'13px'}}
-                  class="headerPostText LikeCommentHover">
-                  <br/>
-                  @{userUsername}
-                </span>
 
+                <span
+                  style={{color:'black', fontSize:'15px'}}
+                  class="headerPostText alignleft" >
+                  <b>
+                  {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
+                  </b>
+                  <b>
+                    <span
+                      style={{fontSize:'13px'}}
+                      class="headerPostText LikeCommentHover">
+                      <br/>
+                      @{userUsername}
+                    </span>
+                  </b>
                 </span>
                 {
                  userId === this.props.userId ?
@@ -733,7 +731,6 @@ class SocialNewsfeedPost extends React.Component {
   // this renders the posts on the newsfeed
 
   AddOneToLike = (socialCalCellId, personLike, contentTypeId, ownerId, cellDate) => {
-    this.triggerComments();
     // This will add one to like to the social cal cell
     // Since this is on the newsfeed already then that means it already
     // exist so therefore you can just get the socail cal id then
@@ -767,7 +764,6 @@ class SocialNewsfeedPost extends React.Component {
   AddOneToUnlike = (socialCalCellId, personUnlike, contentTypeId) =>{
     // This will be for unliking the post
     // This like the addonetolike but now you unlike
-    this.triggerComments();
     WebSocketSocialNewsfeedInstance.unSendOneUnlike(socialCalCellId, personUnlike, contentTypeId)
 
 

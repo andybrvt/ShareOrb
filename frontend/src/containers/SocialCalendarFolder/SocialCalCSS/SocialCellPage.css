@@ -394,12 +394,12 @@
   flex-direction: column;
   height: 75%;
 }
-.socialModalRight .postTopSection{
+.socialModalRight .topSectionNoEvents{
   position: relative;
   display: flex;
   overflow: auto;
   flex-direction: column;
-  height: 90%;
+  height: 350%;
 }
 
 
@@ -527,6 +527,7 @@
 .socialLikeCommentNumHolder{
   display: flex;
   flex-direction: row;
+  font-size: 13px;
   width: 85%;
   height: 50%;
   position: relative;
@@ -575,6 +576,7 @@
 .socialModalRight .bottomSection{
   position: relative;
   height: 30%;
+
   /* height: 84%; */
   /* height: 74%; */
 }
@@ -584,8 +586,10 @@
   height: 10%;
 }
 
-.socialModalRight .topSection .socialLikeCommentSect{
+.socialLikeCommentSect{
+  font-size: 13px;
   height: 40px;
+  /* background: red; */
 }
 
 .socialModalRight .postTopSection .socialLikeCommentSect{
@@ -631,7 +635,8 @@
 
 
 /* This is to hold the comment section */
-.socialModalRight .topSection .socialCommentListSect{
+.socialCommentListSect{
+
 }
 .socialCommentListSect .socialCommentBoxBox{
   position: relative;
@@ -640,7 +645,7 @@
   width: 100%;
   /* overflow:hidden; */
   /* display: flex; */
-  /* background-color: red; */
+  /* background-color: blue; */
 }
 .socialCommentListSect .socialCommentBoxBox .socialCommentBox {
   /* background-color: blue  ; */
@@ -725,6 +730,7 @@
 
 .socialModalRight .bottomSection .socialEventSect{
   height: 80%;
+  background: red;
 }
 .socialEventSect .socialListBox{
   /* background-color: red; */

@@ -36,6 +36,7 @@
 .newsFeedCommentItem .newsFeedCommentTextSect{
   width: 90%;
   margin-left: 10px;
+  line-height: 150%;
 }
 .newsFeedCommentItem .newsFeedCommentTextSect .newsFeedCommentNameTime{
   display: flex;
@@ -46,18 +47,17 @@
 
 .newsFeedCommentName{
   font-size: 14px;
+  width:100%;
   font-family: "Segoe UI Regular";
 }
 
 .newsfeedCommentUserName{
-  font-size: 12px;
+  font-size: 13px;
   color:grey;
 }
 .newsFeedCommentItem .newsFeedCommentDate{
   /* background-color: red; */
-  position: absolute;
-  right: 6%;
-  font-size: 12px;
+  float:right;
   font-size: 12px;
   color:grey;
   /* top: 10%; */
@@ -66,8 +66,13 @@
 
 .newsFeedCommentItem .newsFeedCommentBody{
   position: relative;
+  line-height: 25%;
   /* background: blue; */
 
+}
+
+.LikeReplySize{
+  font-size: 12px;
 }
 
 .newsFeedCommentItem .newsFeedCommentBody .newsFeedCommentText{

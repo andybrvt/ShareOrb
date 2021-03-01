@@ -96,11 +96,6 @@ class Comments extends React.Component {
         renderItem={(item) => (
 
           <div className = 'newsFeedCommentItem'>
-
-            <div className = 'newsFeedCommentDate'>
-            {this.renderTimestamp(new Date(item.created_on))}
-            </div>
-
             <div className = "newsFeedCommentAvatarSect">
               <Link to={"/explore/"+item.commentUser.username} >
                 <Avatar
@@ -111,25 +106,40 @@ class Comments extends React.Component {
             <div className = 'newsFeedCommentTextSect'>
               <div className = "newsFeedCommentNameTime">
 
-                <div>
+
                   <div className = 'newsFeedCommentName'>
                     <b>
                         {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
                     </b>
-                    &nbsp;&nbsp;
-                    <span class="newsfeedCommentUserName">
-                      {"@"+item.commentUser.username}
-                    </span>
+                    <div className = 'newsFeedCommentDate'>
+                    {this.renderTimestamp(new Date(item.created_on))}
+                    </div>
                   </div>
                 </div>
-              </div>
+                  <span class="newsfeedCommentUserName">
+                    {"@"+item.commentUser.username}
+                  </span>
+
 
               <div className = "newsFeedCommentBody">
+                <br/>
                 <div className = 'newsFeedCommentText'>
-                {item.body}
+                  {item.body}
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <div class="LikeReplySize">
+                  <i class="far fa-heart" style={{marginRight:'10px'}}></i>
+                  Like
+                  <Divider type="vertical"/>
+                  Reply
                 </div>
               </div>
+              <br/>
+
             </div>
+
 
 
           </div>

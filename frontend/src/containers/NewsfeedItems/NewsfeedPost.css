@@ -23,7 +23,7 @@
 .headerContainer{
   display: flex;
   padding-top: 10px;
-  padding-left: 20px;
+  padding-left: 15px;
   padding-bottom: 10px;
   /* background: yellow; */
   width:100%;
@@ -32,10 +32,12 @@
 
 .topRightNewsFeedPost{
   width: 95%;
+  font-weight: 400;
+  font-family: "Segoe UI Regular";
   /* background: red; */
 }
 .topleftNewsFeedPost {
-  width: 10%;
+  width: 12.5%;
   /* background: blue; */
 }
 
@@ -109,6 +111,7 @@
   flex-direction: row;
   position: relative;
   /* background: red; */
+  
   width:100%;
 
 }

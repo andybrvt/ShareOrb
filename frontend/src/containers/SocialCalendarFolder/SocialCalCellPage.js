@@ -751,6 +751,7 @@ class SocialCalCellPage extends React.Component{
       if(this.props.socialCalCellInfo.get_socialCalEvent){
         socialCalEvents = this.props.socialCalCellInfo.get_socialCalEvent
       }
+      console.log(socialCalEvents)
       if(this.props.socialCalCellInfo.get_socialCalComment){
         socialCalComments = this.props.socialCalCellInfo.get_socialCalComment
       }
@@ -892,7 +893,8 @@ class SocialCalCellPage extends React.Component{
                  <div> </div>
 
                }
-               <div className = "topSection">
+
+               <div class={`${(socialCalEvents.length==0) ? "topSectionNoEvents" : "topSection"}`}>
                  <div className = 'socialNameSect'>
 
                    <div className = "socialName">
@@ -1070,7 +1072,7 @@ class SocialCalCellPage extends React.Component{
                         <div className = "textHeightCenter">
                           <i
                             style={{ marginRight:'10px', color:'red'}}
-                            class="fa fa-heart">
+                            class="fas fa-heart">
                           </i>
                           Unlike
                         </div>
@@ -1087,7 +1089,7 @@ class SocialCalCellPage extends React.Component{
                        <div className = 'textHeightCenter'>
                          <i
                            style={{ marginRight:'10px'}}
-                           class="fa fa-heart">
+                           class="fas fa-heart">
                          </i>
                          Like
                        </div>
@@ -1183,7 +1185,8 @@ class SocialCalCellPage extends React.Component{
                   </div>
 
 
-
+                {
+                  (socialCalEvents.length!=0)?
                  <div className = "socialEventSect">
                    <SocialEventList
                    history = {this.props.history}
@@ -1192,6 +1195,9 @@ class SocialCalCellPage extends React.Component{
                    cellDate = {socialCalDate}
                    items = {socialCalEvents}/>
                  </div>
+                 :
+                 <div></div>
+               }
 
 
                </div>
