@@ -22,30 +22,60 @@
 }
 
 
+.previewCommentMain{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+}
+
+
+.previewCommentLeft{
+  position: relative;
+  width:5%;
+  margin-right: 10px;
+  /* background: blue; */
+}
+
+.previewCommentRight{
+  width:90%;
+  position: relative;
+  /* background: red; */
+}
 .newsFeedCommentItem {
   margin-top: 5px;
-  padding: 2px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   font-size: 14px;
   font-family: "Segoe UI Regular";
+  white-space: pre-line;
+  /* background: red; */
+  border-radius: 10px;
+  background: #f0f0f0;
+  margin-bottom: 5px;
 }
-.newsFeedCommentItem .newsFeedCommentAvatarSect{
-
+ .newsFeedCommentAvatarSect{
+  position: absolute;
+  left:50%;
+  top:30%;
+  transform: translate(-50%,-50%)
 }
 .newsFeedCommentItem .newsFeedCommentTextSect{
-  width: 90%;
-  margin-left: 10px;
+  width: 99%;
+
+  line-height: 150%;
 }
 .newsFeedCommentItem .newsFeedCommentTextSect .newsFeedCommentNameTime{
   display: flex;
   flex-direction: row;
   width: 100%;
-  line-height: 125%;
+  line-height: 75%;
 }
 
 .newsFeedCommentName{
   font-size: 14px;
+  width:100%;
   font-family: "Segoe UI Regular";
 }
 
@@ -55,9 +85,7 @@
 }
 .newsFeedCommentItem .newsFeedCommentDate{
   /* background-color: red; */
-  position: absolute;
-  right: 6%;
-  font-size: 12px;
+  float:right;
   font-size: 12px;
   color:grey;
   /* top: 10%; */
@@ -66,8 +94,13 @@
 
 .newsFeedCommentItem .newsFeedCommentBody{
   position: relative;
+  line-height: 25%;
   /* background: blue; */
 
+}
+
+.LikeReplySize{
+  font-size: 12px;
 }
 
 .newsFeedCommentItem .newsFeedCommentBody .newsFeedCommentText{

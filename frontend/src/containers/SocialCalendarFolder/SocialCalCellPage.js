@@ -177,13 +177,13 @@ class SocialCalCellPage extends React.Component{
     let month = ''
     // let day = ''
     if (date !== ''){
-      month = dateFns.format(new Date(date), 'MMMM d, yyyy')
+      month = dateFns.format(new Date(date), 'iiii, MMMM d')
     }
 
     // console.log(month)
     return (
       <div className = 'socialModalDate'>
-      {date}
+      {month}
 
       </div>
     )
@@ -751,6 +751,7 @@ class SocialCalCellPage extends React.Component{
       if(this.props.socialCalCellInfo.get_socialCalEvent){
         socialCalEvents = this.props.socialCalCellInfo.get_socialCalEvent
       }
+      console.log(socialCalEvents)
       if(this.props.socialCalCellInfo.get_socialCalComment){
         socialCalComments = this.props.socialCalCellInfo.get_socialCalComment
       }
@@ -778,7 +779,6 @@ class SocialCalCellPage extends React.Component{
       if(this.props.socialCalCellInfo.dayCaption){
         dayCaption = this.props.socialCalCellInfo.dayCaption
       }
-
 
     }
 
@@ -892,7 +892,8 @@ class SocialCalCellPage extends React.Component{
                  <div> </div>
 
                }
-               <div className = "topSection">
+
+               <div class={`${(socialCalEvents.length==0) ? "topSectionNoEvents" : "topSection"}`}>
                  <div className = 'socialNameSect'>
 
                    <div className = "socialName">
@@ -900,7 +901,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = "socialProfileHolder">
                         <Avatar
-                          size = {40}
+                          size = {37.5}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
                       </div>
@@ -1047,7 +1048,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = 'socialLikeAvatar'>
 
-                        <Liking {...this.props} like_people={people_like}/>
+                        <Liking {...this.props} specifySize={20} like_people={people_like}/>
                       </div>
 
                   </div>
@@ -1070,7 +1071,7 @@ class SocialCalCellPage extends React.Component{
                         <div className = "textHeightCenter">
                           <i
                             style={{ marginRight:'10px', color:'red'}}
-                            class="fa fa-heart">
+                            class="fas fa-heart">
                           </i>
                           Unlike
                         </div>
@@ -1087,7 +1088,7 @@ class SocialCalCellPage extends React.Component{
                        <div className = 'textHeightCenter'>
                          <i
                            style={{ marginRight:'10px'}}
-                           class="fa fa-heart">
+                           class="fas fa-heart">
                          </i>
                          Like
                        </div>
@@ -1183,7 +1184,8 @@ class SocialCalCellPage extends React.Component{
                   </div>
 
 
-
+                {
+                  (socialCalEvents.length!=0)?
                  <div className = "socialEventSect">
                    <SocialEventList
                    history = {this.props.history}
@@ -1192,6 +1194,9 @@ class SocialCalCellPage extends React.Component{
                    cellDate = {socialCalDate}
                    items = {socialCalEvents}/>
                  </div>
+                 :
+                 <div></div>
+               }
 
 
                </div>
