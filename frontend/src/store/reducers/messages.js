@@ -25,6 +25,18 @@ const setMessages = (state, action) => {
   });
 };
 
+const updateMessage = (state, action) => {
+  // Loop through the messages and then update the one you are looking for
+  return updateObject(state, {
+    messages: state.messages.map(
+      message => message.id === action.message.id ?
+      action.message
+      :
+      message
+    )
+  })
+}
+
 const setChats = (state, action) => {
   let curChat = ""
   console.log(action.chats)
@@ -50,6 +62,8 @@ const reducer = (state= initialState, action ) => {
      return setMessages(state, action);
     case actionTypes.SET_CHATS:
      return setChats(state,action);
+    case actionTypes.UPDATE_MESSAGE:
+     return updateMessage(state, action);
      default:
        return state;
   }

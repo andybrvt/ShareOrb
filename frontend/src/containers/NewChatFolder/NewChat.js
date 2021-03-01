@@ -544,6 +544,7 @@ class NewChat extends React.Component{
             curId = {this.props.id}
             parameter = {this.props.parameter}
             history ={this.props.history}
+            updateMessage = {this.props.updateMessage}
              />
 
           </div>
@@ -592,7 +593,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     getEvents: () => dispatch(calendarActions.getUserEvents()),
-    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat))
+    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat)),
+    updateMessage: (message) => dispatch(messageActions.updateMessage(message))
   }
 }
 

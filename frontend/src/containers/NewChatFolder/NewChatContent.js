@@ -88,6 +88,7 @@ class NewChatContent extends React.Component{
       messageId: messageId
     }).then(res => {
       console.log(res.data)
+      this.props.updateMessage(res.data)
     })
   }
 
@@ -100,6 +101,7 @@ class NewChatContent extends React.Component{
       messageId: messageId
     }).then(res => {
       console.log(res.data)
+      this.props.updateMessage(res.data)
     })
 
 
