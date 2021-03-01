@@ -257,3 +257,56 @@ class CreateNewChatEventMessage(APIView):
 
 
         return Response(chat.id)
+
+class AcceptEventInChatView(APIView):
+    # this function will be another way a user gets added to an event
+    # But bc this is in chat you will just pull the whole chat and then
+    # replace the current one
+
+    def post(self, request, *args, **kwargs):
+        # You will get passed in the event id and the
+        # user id
+        # so you grab the user and then the event then just add into the accepted
+        # and remove it from decline
+
+        print(request.data)
+        sharedEvent = get_object_or_404(Event, id = request.data['eventId'])
+        acceptedUser = get_object_or_404(User, id = request.data['userId'])
+
+        # Add the user to the event
+        sharedEvent.accepted.add(acceptedUser)
+
+        sharedEvent.save()
+
+        # Now if you return the new chat message since the message that had a
+        # foregin key to the event it should be updated
+
+        # since I dont want to have the run time to find the chat I will just return
+        # the whole chat again
+
+        updatedMessage = get_object_or_404(models.Message, id = request.data['messageId'])
+        # Now serialize it
+        serializedMessage = serializers.MessageSerializer(updatedMessage).data
+
+        return Response(serializedMessage)
+
+
+class DeclineEventInChat(APIView):
+    # This funciton will remove the user from the event
+    # Similar to the accepteventinchat but now you are just removing them
+    # from the event
+    def post(self, request, *args, **kwargs):
+        sharedEvent = get_object_or_404(Event, id = request.data['eventId'])
+        declineUser = get_object_or_404(User, id = request.data['userId'])
+
+
+        sharedEvent.decline.add(declineUser)
+        sharedEvent.person.remove(declineUser)
+        sharedEvent.save()
+
+        # Now you will serialize the message
+
+        updatedMessage = get_object_or_404(models.Message, id = request.data['messageId'])
+        serializedMessage = serializers.MessageSerializer(updatedMessage).data
+
+        return Response(serializedMessage)

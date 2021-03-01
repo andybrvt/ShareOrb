@@ -91,5 +91,6 @@ class MessageSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['messageUser'] = ChatUser(User.objects.get(id = data['messageUser'])).data
-        data['attachedEvent'] = MiniEventSerializer(Event.objects.get(id = data['attachedEvent'])).data
+        if(data['attachedEvent'] != None):
+            data['attachedEvent'] = MiniEventSerializer(Event.objects.get(id = data['attachedEvent'])).data
         return data

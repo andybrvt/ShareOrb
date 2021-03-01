@@ -139,7 +139,7 @@ class NewChat extends React.Component{
     }).then(res => {
       console.log(res.data)
       this.setState({
-        eventList: res.data.eventList
+        eventList: res.data
       })
     })
 
@@ -394,6 +394,8 @@ class NewChat extends React.Component{
 
 
       } else {
+
+        console.log(sharedEventObj)
 
         const chatId = this.props.curChat.id
         const senderId = this.props.curId

@@ -5,6 +5,7 @@ import NewChatWebSocketInstance from '../../newChatWebsocket';
 import ChatSidePanelWebSocketInstance from '../../newChatSidePanelWebsocket';
 import { LoadingOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
+import { authAxios } from '../../components/util';
 
 
 
@@ -77,15 +78,31 @@ class NewChatContent extends React.Component{
     this.props.history.push('/personalcal/event/'+ eventId)
   }
 
-  onAcceptEvent = (eventId, userId) => {
+  onAcceptEvent = (eventId, userId, messageId) => {
     // This is to send a fucntion to the backedn to accept the event
 
     console.log(eventId, userId)
+    authAxios.post(`${global.API_ENDPOINT}/newChat/acceptEventInChat`,{
+      eventId: eventId,
+      userId: userId,
+      messageId: messageId
+    }).then(res => {
+      console.log(res.data)
+    })
   }
 
-  onDeclineEvent = (eventId, userId) => {
+  onDeclineEvent = (eventId, userId, messageId) => {
     // This is to send a function the backend to declne an event
     console.log(eventId, userId)
+    authAxios.post(`${global.API_ENDPOINT}/newChat/declineEventInChat`,{
+      eventId: eventId,
+      userId: userId,
+      messageId: messageId
+    }).then(res => {
+      console.log(res.data)
+    })
+
+
   }
 
 
@@ -103,12 +120,30 @@ class NewChatContent extends React.Component{
       // This message will take care of the case when you are the current user
         if(messageItem.type === "event"){
           // This conditional will take care of the event
-          const eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
-          const eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
-          const eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
-          const personLength=messageItem.attachedEvent.person.length
-          const eventId = messageItem.attachedEvent.id
+          let eventDate = ""
+          let eventStartTime = ""
+          let eventEndTime = ""
+          let personLength= 0
+          let eventId = 0
 
+          if(messageItem.attachedEvent){
+            if(messageItem.attachedEvent.start_time){
+              eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
+              eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
+            }
+
+            if(messageItem.attachedEvent.end_time){
+              eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
+            }
+
+            if(messageItem.attachedEvent.person){
+              personLength = messageItem.attachedEvent.person.length
+            }
+
+            if(messageItem.attachedEvent.id){
+              eventId = messageItem.attachedEvent.id
+            }
+          }
 
           return (
             <div className = "chatListItemR">
@@ -167,16 +202,45 @@ class NewChatContent extends React.Component{
       if(messageItem.type === "event"){
         // This conditional will take care of the event
 
-        const eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
-        const eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
-        const eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
-        const personLength=messageItem.attachedEvent.person.length
-        const eventId = messageItem.attachedEvent.id
+        let chatId = messageItem.chat
+        let messageId = messageItem.id
+        let eventDate = ""
+        let eventStartTime = ""
+        let eventEndTime = ""
+        let personLength=0
+        let eventId = 0
 
-        const accepted = messageItem.attachedEvent.accepted
-        const decline = messageItem.attachedEvent.decline
+        let accepted = []
+        let decline = []
+
+        if(messageItem.attachedEvent){
+          if(messageItem.attachedEvent.start_time){
+            eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
+            eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
+          }
+          if(messageItem.attachedEvent.end_time){
+            eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
+          }
+          if(messageItem.attachedEvent.person){
+            personLength = messageItem.attachedEvent.person.length
+          }
+
+          if(messageItem.attachedEvent.id){
+            eventId = messageItem.attachedEvent.id
+          }
+
+          if(messageItem.attachedEvent.accepted){
+            accepted = messageItem.attachedEvent.accepted
+          }
+          if(messageItem.attachedEvent.decline){
+            decline = messageItem.attachedEvent.decline
+          }
+        }
 
 
+
+
+        console.log(accepted.includes(this.props.curId))
         return (
           <div className = "chatListItemL">
 
@@ -207,7 +271,7 @@ class NewChatContent extends React.Component{
                   <br/>
 
                   {
-                    accepted.includes(this.props.id) ?
+                    accepted.includes(this.props.curId) ?
 
                     <div>
 
@@ -230,17 +294,11 @@ class NewChatContent extends React.Component{
 
                     :
 
-                    decline.includes(this.props.id) ?
+                    decline.includes(this.props.curId) ?
 
                     <div>
 
-                      <Tooltip placement="bottomLeft" title="View event">
-                        <Button
-                          onClick = {() => this.onViewEvent(eventId)}
-                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
-                          <i class="fas fa-eye"></i>
-                        </Button>
-                      </Tooltip>
+
 
                       <div
                         style={{float:'right', marginTop:"10px", marginRight: '10px'}}
@@ -253,7 +311,7 @@ class NewChatContent extends React.Component{
                     :
 
                     <div>
-                      <Tooltip placement="bottomLeft" title="Accept Invite">
+                      <Tooltip placement="bottomLeft" title="Decline Invite">
                         <Button
                         type="primary"
                         shape="circle"
@@ -263,12 +321,12 @@ class NewChatContent extends React.Component{
                           marginLeft:'10px',
                           marginTop:"5px"
                         }}
-                        onClick = {() => this.onDeclineEvent(eventId, this.props.curId)}
+                        onClick = {() => this.onDeclineEvent(eventId, this.props.curId, messageId)}
                         >
                         <i class="fas fa-user-times"></i>
                         </Button>
                       </Tooltip>
-                      <Tooltip placement="bottomLeft" title="Decline Invite">
+                      <Tooltip placement="bottomLeft" title="Accept Invite">
                         <Button
                         shape="circle"
                         type="primary"
@@ -277,7 +335,7 @@ class NewChatContent extends React.Component{
                           marginLeft:'10px',
                           marginTop:"5px"
                         }}
-                        onClick = {() => this.onAcceptEvent(eventId, this.props.curId)}
+                        onClick = {() => this.onAcceptEvent(eventId, this.props.curId, messageId)}
                         >
                         <i  class="fas fa-user-check"></i>
 

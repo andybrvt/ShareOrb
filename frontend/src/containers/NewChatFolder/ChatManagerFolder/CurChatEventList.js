@@ -18,9 +18,12 @@ class CurChatEventList extends React.Component{
     // This function will turn the list into a list of ids
     let idList = []
 
-    for(let i = 0; i< memberList.length; i++){
-      idList.push(memberList[i].id)
+    if(memberList){
+      for(let i = 0; i< memberList.length; i++){
+        idList.push(memberList[i].id)
+      }
     }
+
 
     return idList;
   }
