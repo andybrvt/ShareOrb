@@ -77,6 +77,17 @@ class NewChatContent extends React.Component{
     this.props.history.push('/personalcal/event/'+ eventId)
   }
 
+  onAcceptEvent = (eventId, userId) => {
+    // This is to send a fucntion to the backedn to accept the event
+
+    console.log(eventId, userId)
+  }
+
+  onDeclineEvent = (eventId, userId) => {
+    // This is to send a function the backend to declne an event
+    console.log(eventId, userId)
+  }
+
 
   renderMessages = (messageItem) => {
 
@@ -162,6 +173,10 @@ class NewChatContent extends React.Component{
         const personLength=messageItem.attachedEvent.person.length
         const eventId = messageItem.attachedEvent.id
 
+        const accepted = messageItem.attachedEvent.accepted
+        const decline = messageItem.attachedEvent.decline
+
+
         return (
           <div className = "chatListItemL">
 
@@ -190,42 +205,98 @@ class NewChatContent extends React.Component{
                   <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
                   {personLength} people
                   <br/>
-                    <Tooltip placement="bottomLeft" title="Accept Invite">
-                      <Button
-                      type="primary"
-                      shape="circle"
-                      danger
-                      style={{
-                        float:'right',
-                        marginLeft:'10px',
-                        marginTop:"5px"
-                      }}
-                      >
-                      <i class="fas fa-user-times"></i>
-                      </Button>
-                    </Tooltip>
-                    <Tooltip placement="bottomLeft" title="Decline Invite">
-                      <Button
-                      shape="circle"
-                      type="primary"
-                      style={{
-                        float:'right',
-                        marginLeft:'10px',
-                        marginTop:"5px"
-                      }}
-                      >
-                      <i  class="fas fa-user-check"></i>
 
-                      </Button>
-                    </Tooltip>
+                  {
+                    accepted.includes(this.props.id) ?
 
-                    <Tooltip placement="bottomLeft" title="View event">
-                      <Button
-                        onClick = {() => this.onViewEvent(eventId)}
-                         type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
-                        <i class="fas fa-eye"></i>
-                      </Button>
-                    </Tooltip>
+                    <div>
+
+
+                      <Tooltip placement="bottomLeft" title="View event">
+                        <Button
+                          onClick = {() => this.onViewEvent(eventId)}
+                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                          <i class="fas fa-eye"></i>
+                        </Button>
+                      </Tooltip>
+
+                      <div
+                        style={{float:'right', marginTop:"10px", marginRight: '10px'}}
+                        >
+                        You accepted the event.
+                      </div>
+
+                    </div>
+
+                    :
+
+                    decline.includes(this.props.id) ?
+
+                    <div>
+
+                      <Tooltip placement="bottomLeft" title="View event">
+                        <Button
+                          onClick = {() => this.onViewEvent(eventId)}
+                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                          <i class="fas fa-eye"></i>
+                        </Button>
+                      </Tooltip>
+
+                      <div
+                        style={{float:'right', marginTop:"10px", marginRight: '10px'}}
+                        >
+                        You declined the event.
+                      </div>
+
+                    </div>
+
+                    :
+
+                    <div>
+                      <Tooltip placement="bottomLeft" title="Accept Invite">
+                        <Button
+                        type="primary"
+                        shape="circle"
+                        danger
+                        style={{
+                          float:'right',
+                          marginLeft:'10px',
+                          marginTop:"5px"
+                        }}
+                        onClick = {() => this.onDeclineEvent(eventId, this.props.curId)}
+                        >
+                        <i class="fas fa-user-times"></i>
+                        </Button>
+                      </Tooltip>
+                      <Tooltip placement="bottomLeft" title="Decline Invite">
+                        <Button
+                        shape="circle"
+                        type="primary"
+                        style={{
+                          float:'right',
+                          marginLeft:'10px',
+                          marginTop:"5px"
+                        }}
+                        onClick = {() => this.onAcceptEvent(eventId, this.props.curId)}
+                        >
+                        <i  class="fas fa-user-check"></i>
+
+                        </Button>
+                      </Tooltip>
+
+                      <Tooltip placement="bottomLeft" title="View event">
+                        <Button
+                          onClick = {() => this.onViewEvent(eventId)}
+                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                          <i class="fas fa-eye"></i>
+                        </Button>
+                      </Tooltip>
+
+
+                    </div>
+
+                  }
+
 
                 </div>
 

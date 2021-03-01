@@ -5,7 +5,7 @@ from . import models
 
 from rest_framework import serializers
 from userprofile.models import User
-from mycalendar.serializers import EventSerializer
+from mycalendar.serializers import MiniEventSerializer
 from mycalendar.models import Event
 
 # This will be the serializer for each chat, which consist of the users and messages
@@ -91,5 +91,5 @@ class MessageSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['messageUser'] = ChatUser(User.objects.get(id = data['messageUser'])).data
-        data['attachedEvent'] = EventSerializer(Event.objects.get(id = data['attachedEvent'])).data
+        data['attachedEvent'] = MiniEventSerializer(Event.objects.get(id = data['attachedEvent'])).data
         return data
