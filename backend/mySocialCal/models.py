@@ -338,7 +338,7 @@ class SocialCalItems(models.Model):
 
     # Everything from here down would be for the events
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
 
 class SocialCalEvent(models.Model):
