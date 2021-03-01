@@ -60,11 +60,11 @@ class SocialComments extends React.Component{
     if (timeDiff < 1 ) {
       prefix = `Just now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
-      prefix = `${timeDiff} minutes ago`;
+      prefix = `${timeDiff} min`;
     }else if (timeDiff < 24*60 && timeDiff > 60) {
-      prefix = `${Math.round(timeDiff/60)} hours ago`;
+      prefix = `${Math.round(timeDiff/60)}h`;
     } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
-      prefix = `${Math.round(timeDiff/(60*24))} days ago`;
+      prefix = `${Math.round(timeDiff/(60*24))} days`;
     } else {
         prefix = `${dateFns.format(new Date(timestamp), "MMMM d, yyyy")}`;
     }
@@ -83,57 +83,66 @@ class SocialComments extends React.Component{
       <div className = 'socialCommentBoxBox'>
       <div className = 'socialCommentBox'>
       <List
+        style={{marginLeft:'5px', marginTop:'10px', marginBottom:'10px' }}
         locale={{emptyText:<span/>}}
         className="comment-list"
         itemLayout="horizontal"
         dataSource={this.props.items}
         renderItem={item => (
 
-          <div className = 'newsFeedCommentItem'>
-            <div className = "newsFeedCommentAvatarSect">
-              <Link to={"/explore/"+item.commentUser.username} >
-                <Avatar
-                  size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
-              </Link>
-            </div>
-
-            <div className = 'newsFeedCommentTextSect'>
-              <div className = "newsFeedCommentNameTime">
-
-
-                  <div className = 'newsFeedCommentName'>
-                    <b>
-                        {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
-                    </b>
-                    <div className = 'newsFeedCommentDate'>
-                    {this.renderTimestamp(new Date(item.created_on))}
-                    </div>
-                  </div>
-                </div>
-                  <span class="newsfeedCommentUserName">
-                    {"@"+item.commentUser.username}
-                  </span>
-
-
-              <div className = "newsFeedCommentBody">
-                <br/>
-                <div className = 'newsFeedCommentText'>
-                  {item.body}
-                </div>
-                <br/>
-                <br/>
-                <br/>
-                <div class="LikeReplySize">
-                  <i class="far fa-heart" style={{marginRight:'10px'}}></i>
-                  Like
-                  <Divider type="vertical"/>
-                  Reply
-                </div>
+          <div class="previewCommentMain">
+            <div class="previewCommentLeft">
+              <div className = "newsFeedCommentAvatarSect">
+                <Link to={"/explore/"+item.commentUser.username} >
+                  <Avatar
+                    size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+                </Link>
               </div>
 
             </div>
+            <div class="previewCommentRight">
+              <div className = 'newsFeedCommentItem'>
+
+              <div className = 'newsFeedCommentTextSect'>
+                <div className = "newsFeedCommentNameTime">
 
 
+                    <div className = 'newsFeedCommentName'>
+                          {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                      <div className = 'newsFeedCommentDate'>
+                      {this.renderTimestamp(new Date(item.created_on))}
+                      </div>
+                    </div>
+                  </div>
+                    <span class="newsfeedCommentUserName">
+                      {"@"+item.commentUser.username}
+                    </span>
+
+
+                <div className = "newsFeedCommentBody">
+                  <br/>
+                  <div className = 'newsFeedCommentText'>
+                    {item.body}
+                  </div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <div class="LikeReplySize">
+                    <i class="far fa-heart" style={{marginRight:'10px'}}></i>
+                    Like
+                    <Divider type="vertical"/>
+                    Reply
+                  </div>
+                </div>
+
+
+              </div>
+
+
+
+            </div>
+
+            </div>
 
           </div>
         )}

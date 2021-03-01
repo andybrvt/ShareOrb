@@ -89,28 +89,32 @@ class Comments extends React.Component {
     return (
       <div>
       <List
-        style={{marginLeft:'15px', }}
+        style={{marginLeft:'15px', marginTop:'10px', marginBottom:'10px' }}
         class="previewCommentListLook"
         itemLayout="horizontal"
         dataSource={this.props.commentList.slice(0, 2)}
         renderItem={(item) => (
 
-          <div className = 'newsFeedCommentItem'>
+
+        <div class="previewCommentMain">
+          <div class="previewCommentLeft">
             <div className = "newsFeedCommentAvatarSect">
               <Link to={"/explore/"+item.commentUser.username} >
                 <Avatar
-                  size = {25} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+                  size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
               </Link>
             </div>
+
+          </div>
+          <div class="previewCommentRight">
+            <div className = 'newsFeedCommentItem'>
 
             <div className = 'newsFeedCommentTextSect'>
               <div className = "newsFeedCommentNameTime">
 
 
                   <div className = 'newsFeedCommentName'>
-                    <b>
                         {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
-                    </b>
                     <div className = 'newsFeedCommentDate'>
                     {this.renderTimestamp(new Date(item.created_on))}
                     </div>
@@ -136,13 +140,17 @@ class Comments extends React.Component {
                   Reply
                 </div>
               </div>
-              <br/>
+
 
             </div>
 
 
 
           </div>
+
+          </div>
+
+        </div>
 
           )}
       />

@@ -177,13 +177,13 @@ class SocialCalCellPage extends React.Component{
     let month = ''
     // let day = ''
     if (date !== ''){
-      month = dateFns.format(new Date(date), 'MMMM d, yyyy')
+      month = dateFns.format(new Date(date), 'iiii, MMMM d')
     }
 
     // console.log(month)
     return (
       <div className = 'socialModalDate'>
-      {date}
+      {month}
 
       </div>
     )
@@ -780,7 +780,6 @@ class SocialCalCellPage extends React.Component{
         dayCaption = this.props.socialCalCellInfo.dayCaption
       }
 
-
     }
 
     if (people_like.length > 0){
@@ -902,7 +901,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = "socialProfileHolder">
                         <Avatar
-                          size = {40}
+                          size = {37.5}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
                       </div>
@@ -1049,7 +1048,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = 'socialLikeAvatar'>
 
-                        <Liking {...this.props} like_people={people_like}/>
+                        <Liking {...this.props} specifySize={20} like_people={people_like}/>
                       </div>
 
                   </div>

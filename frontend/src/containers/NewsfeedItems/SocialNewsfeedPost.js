@@ -658,9 +658,9 @@ class SocialNewsfeedPost extends React.Component {
                 <span
                   style={{color:'black', fontSize:'15px'}}
                   class="headerPostText alignleft" >
-                  <b>
+              
                   {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
-                  </b>
+
                   <b>
                     <span
                       style={{fontSize:'13px'}}
