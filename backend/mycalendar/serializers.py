@@ -44,8 +44,12 @@ class MiniEventSerializer(serializers.ModelSerializer):
             "start_time",
             "end_time",
             "color",
-            "person"
+            "person",
+            'accepted',
+            'decline'
         )
+
+
 
 class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins

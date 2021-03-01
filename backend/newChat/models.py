@@ -1,5 +1,6 @@
 from django.db import models
 from userprofile.models import User
+from mycalendar.models import Event
 from django.conf import settings
 from django.utils import timezone
 import datetime
@@ -55,11 +56,20 @@ class Message(models.Model):
     # The type is mostly used for more unique messages such as sharing an
     # event within the group chats
     type = models.CharField( default = "text", max_length = 30)
+
+    # All these fields from here down can be replace with a foregin key field of the
+    # event it self
+    # if it works i can just delete the event straing up
     eventTitle = models.CharField(max_length = 255, blank = True)
     eventStartTime = models.DateTimeField(default = timezone.now, blank = True)
     eventEndTime = models.DateTimeField(default = timezone.now, blank = True)
     eventPersons=models.IntegerField(blank = True, null = True)
     eventId = models.IntegerField(default = 0, blank = False)
+
+    # This will be a foriegnkey that attaches an event to it
+    # It will be null if there is not event attached to it
+    # link it to an event object
+    attachedEvent = models.ForeignKey(Event, null = True, related_name = "event_message", on_delete = models.CASCADE)
 
     class Meta:
         ordering = ['-created_at']

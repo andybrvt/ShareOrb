@@ -11,6 +11,7 @@ from .models import Chat
 from .models import Message
 from django.shortcuts import get_object_or_404
 from userprofile.models import User
+from mycalendar.models import Event
 from django.utils import timezone
 import pytz
 from datetime import datetime
@@ -349,6 +350,7 @@ class NewChatConsumer(JsonWebsocketConsumer):
         chatObj = get_object_or_404(Chat, id = data['chatId'])
         senderObj = get_object_or_404(User, id = data['senderId'])
 
+        sharedEvent = get_object_or_404(Event, id =data['eventObj']['id'])
         # Since this message is gonna be more unqiue, there will be
         # more fields getting filled in
         newMessage = Message.objects.create(
@@ -359,8 +361,8 @@ class NewChatConsumer(JsonWebsocketConsumer):
             eventTitle = data['eventObj']['title'],
             eventStartTime = data['eventObj']['start_time'],
             eventEndTime = data['eventObj']['end_time'],
-            eventPersons=len(data['eventObj']['person'])
-
+            eventPersons=len(data['eventObj']['person']),
+            eventId = data['eventObj']['id']
         )
 
         newMessage.save()

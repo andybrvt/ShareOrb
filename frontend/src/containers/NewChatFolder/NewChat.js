@@ -130,6 +130,8 @@ class NewChat extends React.Component{
     // Now you will call a authaxios call inorder to add users in
 
 
+    // This axios call is to just share the event with the person
+    // no message sending
     authAxios.post(`${global.API_ENDPOINT}/mycalendar/shareEvent`, {
       eventId: eventId,
       participants: participants,
@@ -137,7 +139,7 @@ class NewChat extends React.Component{
     }).then(res => {
       console.log(res.data)
       this.setState({
-        eventList: res.data
+        eventList: res.data.eventList
       })
     })
 
@@ -158,6 +160,9 @@ class NewChat extends React.Component{
           senderId
         )
 
+
+        // Case where you share an event when you are searching up a person that
+        // already exist
         authAxios.post(`${global.API_ENDPOINT}/newChat/createChatEventMessage`,{
           chatId: this.props.curChat.id,
           senderId: senderId,
@@ -178,6 +183,8 @@ class NewChat extends React.Component{
         const senderId = this.props.curId
 
         console.log("does it hit here")
+        // Case where you share an even thwne you are searching up a peson that
+         // does not exist
         authAxios.post(`${global.API_ENDPOINT}/newChat/createNewChatEventMessage`,{
           senderId: senderId,
           chatParticipants: [...participants, this.props.curId],
@@ -298,36 +305,108 @@ class NewChat extends React.Component{
     // You have to process the start date and time so that it is one adherence
     // date time to be used in the models
 
+    let sharedEventObj = {}
 
+    // This just creates the share event in the calendar
     authAxios.post(`${global.API_ENDPOINT}/mycalendar/createChatEvent`, {
       eventObj: eventObjNew,
       participants: participants,
       curId: this.props.curId
     }).then(res => {
+
+      // You would probally need to get the event object here so you are
+      // able to get the event id
+
       console.log(res.data)
+      sharedEventObj = res.data.sharedEvent
+
+      console.log(sharedEventObj)
+
       this.setState({
-        eventList: res.data
+        eventList: res.data.eventList
       })
 
-    })
+
+      if(this.props.parameter.id === "newchat" || this.props.parameter.id === "nosnewchat"){
+        // For here you will push to the chat page, but before you do that you have
+        // to create the event message. You will do this through an axios call
 
 
+        // Now you have to differentiate whether or not it is a new chat or a
+        // old chat so that you know whether or not to create one or just create
+        // a message and then pull it.
+        if(this.props.curChat.id){
+          // This will check if the chat exist or not
+
+          const chatId = this.props.curChat.id
+          const senderId = this.props.curId
 
 
-    // Now we need to do one where you are on the search
-    if(this.props.parameter.id === "newchat" || this.props.parameter.id === "nosnewchat"){
-      // For here you will push to the chat page, but before you do that you have
-      // to create the event message. You will do this through an axios call
+          // This is just used to update the side panel
+          ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+            chatId,
+            senderId
+          )
+
+          // You would make a new message here whne the chat is already created
+          // and you are in search
+          authAxios.post(`${global.API_ENDPOINT}/newChat/createChatEventMessage`,{
+            chatId: this.props.curChat.id,
+            senderId: senderId,
+            eventObj: sharedEventObj
+          })
+          .then(
+            res => {
+              this.props.history.push("/chat/"+res.data)
+            }
+          )
+
+        } else {
+
+          // This will also take care of the shared event when you are sending to
+          // someone new through the mesasge button
+          const senderId = this.props.curId
 
 
-      // Now you have to differentiate whether or not it is a new chat or a
-      // old chat so that you know whether or not to create one or just create
-      // a message and then pull it.
-      if(this.props.curChat.id){
-        // This will check if the chat exist or not
+          console.log('does it hit here')
+          // now you will create an event for this
+          // Same case at the top, create an event messgae when a chat does not
+          // exist
+          authAxios.post(`${global.API_ENDPOINT}/newChat/createNewChatEventMessage`,{
+            senderId: senderId,
+            chatParticipants: [...participants, this.props.curId],
+            eventObj: sharedEventObj
+          })
+          .then(
+            res => {
+              console.log(res.data)
+              ChatSidePanelWebSocketInstance.updateRecentChatEvent(
+                res.data,
+                senderId
+              )
+              this.props.history.push("/chat/"+res.data)
+
+            }
+          )
+
+
+        }
+
+
+      } else {
 
         const chatId = this.props.curChat.id
         const senderId = this.props.curId
+
+        // This is used to actually send the message out to the
+        // current chat (needs to be on the chat page tho)
+        NewChatWebSocketInstance.sendSharedEventMessage(
+          chatId,
+          senderId,
+          sharedEventObj
+        )
+
+
 
 
         // This is just used to update the side panel
@@ -335,70 +414,17 @@ class NewChat extends React.Component{
           chatId,
           senderId
         )
-
-        authAxios.post(`${global.API_ENDPOINT}/newChat/createChatEventMessage`,{
-          chatId: this.props.curChat.id,
-          senderId: senderId,
-          eventObj: eventObjNew
-        })
-        .then(
-          res => {
-            this.props.history.push("/chat/"+res.data)
-          }
-        )
-
-      } else {
-
-        // This will also take care of the shared event when you are sending to
-        // someone new through the mesasge button
-        const senderId = this.props.curId
-
-
-        console.log('does it hit here')
-        // now you will create an event for this
-        authAxios.post(`${global.API_ENDPOINT}/newChat/createNewChatEventMessage`,{
-          senderId: senderId,
-          chatParticipants: [...participants, this.props.curId],
-          eventObj: eventObjNew
-        })
-        .then(
-          res => {
-            console.log(res.data)
-            ChatSidePanelWebSocketInstance.updateRecentChatEvent(
-              res.data,
-              senderId
-            )
-            this.props.history.push("/chat/"+res.data)
-
-          }
-        )
-
-
       }
 
 
-    } else {
-
-      const chatId = this.props.curChat.id
-      const senderId = this.props.curId
-
-      // This is used to actually send the message out to the
-      // current chat (needs to be on the chat page tho)
-      NewChatWebSocketInstance.sendSharedEventMessage(
-        chatId,
-        senderId,
-        eventObjNew
-      )
+    })
 
 
+    console.log(sharedEventObj)
 
 
-      // This is just used to update the side panel
-      ChatSidePanelWebSocketInstance.updateRecentChatEvent(
-        chatId,
-        senderId
-      )
-    }
+    // Now we need to do one where you are on the search
+
 
 
 
@@ -466,6 +492,7 @@ class NewChat extends React.Component{
         param = {this.props.parameter}
         curId = {this.props.id}
         username = {this.props.username}
+        history = {this.props.history}
         />
       </div>
 
@@ -514,6 +541,7 @@ class NewChat extends React.Component{
             messages = {messages}
             curId = {this.props.id}
             parameter = {this.props.parameter}
+            history ={this.props.history}
              />
 
           </div>

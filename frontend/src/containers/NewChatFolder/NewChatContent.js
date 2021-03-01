@@ -67,6 +67,28 @@ class NewChatContent extends React.Component{
     this.scrollToBottom();
   }
 
+  onProfileClick = (username) => {
+    // This will redirec to the user profile page
+    this.props.history.push("/explore/"+username)
+  }
+
+  onViewEvent = (eventId) => {
+    // This function will be use to redirect to the selected event page
+    this.props.history.push('/personalcal/event/'+ eventId)
+  }
+
+  onAcceptEvent = (eventId, userId) => {
+    // This is to send a fucntion to the backedn to accept the event
+
+    console.log(eventId, userId)
+  }
+
+  onDeclineEvent = (eventId, userId) => {
+    // This is to send a function the backend to declne an event
+    console.log(eventId, userId)
+  }
+
+
   renderMessages = (messageItem) => {
 
     // SEE IF THIS WORKS, IF IT DOES NOT THEN TRY JUST DOING A DIV AND THEN
@@ -81,10 +103,13 @@ class NewChatContent extends React.Component{
       // This message will take care of the case when you are the current user
         if(messageItem.type === "event"){
           // This conditional will take care of the event
-          const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
-          const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
-          const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
-          const test=messageItem.eventPersons
+          const eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
+          const eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
+          const eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
+          const personLength=messageItem.attachedEvent.person.length
+          const eventId = messageItem.attachedEvent.id
+
+
           return (
             <div className = "chatListItemR">
               <div className= "messageEventContainerR eventCard">
@@ -101,11 +126,19 @@ class NewChatContent extends React.Component{
                 {eventStartTime} - {eventEndTime}
                 <br />
                 <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
-                {test} people
+                {personLength} people
                 <br/>
-                  <Button type="primary" shape="round" style={{float:'right', marginTop:"5px"}}>
-                    View Event
-                  </Button>
+
+
+                  <Tooltip placement="bottomLeft" title="View event">
+                    <Button
+                      onClick = {() => this.onViewEvent(eventId)}
+                      type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                      <i class="fas fa-eye"></i>
+                    </Button>
+                  </Tooltip>
+
+
 
               </div>
 
@@ -134,10 +167,15 @@ class NewChatContent extends React.Component{
       if(messageItem.type === "event"){
         // This conditional will take care of the event
 
-        const eventDate = dateFns.format(new Date(messageItem.eventStartTime), "MMM dd,  yyyy")
-        const eventStartTime = dateFns.format(new Date(messageItem.eventStartTime), 'hh:mm aaaa')
-        const eventEndTime = dateFns.format(new Date(messageItem.eventEndTime), 'hh:mm aaaa')
-        const test=messageItem.eventPersons
+        const eventDate = dateFns.format(new Date(messageItem.attachedEvent.start_time), "MMM dd,  yyyy")
+        const eventStartTime = dateFns.format(new Date(messageItem.attachedEvent.start_time), 'hh:mm aaaa')
+        const eventEndTime = dateFns.format(new Date(messageItem.attachedEvent.end_time), 'hh:mm aaaa')
+        const personLength=messageItem.attachedEvent.person.length
+        const eventId = messageItem.attachedEvent.id
+
+        const accepted = messageItem.attachedEvent.accepted
+        const decline = messageItem.attachedEvent.decline
+
 
         return (
           <div className = "chatListItemL">
@@ -145,7 +183,9 @@ class NewChatContent extends React.Component{
             <div className = "messageEventContainerL">
               <div className = "insideMessasgeHolder">
                 <div className = "messageEventAvatarHolder">
-                  <Avatar className = 'messageAvatar'
+                  <Avatar
+                    onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
+                    className = 'messageAvatar'
                     size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
                 </div>
 
@@ -163,11 +203,101 @@ class NewChatContent extends React.Component{
                   {eventStartTime} - {eventEndTime}
                   <br />
                   <i class="fas fa-user-friends" style={{color:"#1890ff", marginRight:'5px'}}></i>
-                  {test} people
+                  {personLength} people
                   <br/>
-                    <Button type="primary" shape="round" style={{float:'right', marginTop:"5px"}}>
-                      View Event
-                    </Button>
+
+                  {
+                    accepted.includes(this.props.id) ?
+
+                    <div>
+
+
+                      <Tooltip placement="bottomLeft" title="View event">
+                        <Button
+                          onClick = {() => this.onViewEvent(eventId)}
+                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                          <i class="fas fa-eye"></i>
+                        </Button>
+                      </Tooltip>
+
+                      <div
+                        style={{float:'right', marginTop:"10px", marginRight: '10px'}}
+                        >
+                        You accepted the event.
+                      </div>
+
+                    </div>
+
+                    :
+
+                    decline.includes(this.props.id) ?
+
+                    <div>
+
+                      <Tooltip placement="bottomLeft" title="View event">
+                        <Button
+                          onClick = {() => this.onViewEvent(eventId)}
+                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                          <i class="fas fa-eye"></i>
+                        </Button>
+                      </Tooltip>
+
+                      <div
+                        style={{float:'right', marginTop:"10px", marginRight: '10px'}}
+                        >
+                        You declined the event.
+                      </div>
+
+                    </div>
+
+                    :
+
+                    <div>
+                      <Tooltip placement="bottomLeft" title="Accept Invite">
+                        <Button
+                        type="primary"
+                        shape="circle"
+                        danger
+                        style={{
+                          float:'right',
+                          marginLeft:'10px',
+                          marginTop:"5px"
+                        }}
+                        onClick = {() => this.onDeclineEvent(eventId, this.props.curId)}
+                        >
+                        <i class="fas fa-user-times"></i>
+                        </Button>
+                      </Tooltip>
+                      <Tooltip placement="bottomLeft" title="Decline Invite">
+                        <Button
+                        shape="circle"
+                        type="primary"
+                        style={{
+                          float:'right',
+                          marginLeft:'10px',
+                          marginTop:"5px"
+                        }}
+                        onClick = {() => this.onAcceptEvent(eventId, this.props.curId)}
+                        >
+                        <i  class="fas fa-user-check"></i>
+
+                        </Button>
+                      </Tooltip>
+
+                      <Tooltip placement="bottomLeft" title="View event">
+                        <Button
+                          onClick = {() => this.onViewEvent(eventId)}
+                           type="primary" shape="circle" style={{float:'right', marginTop:"5px"}}>
+                          <i class="fas fa-eye"></i>
+                        </Button>
+                      </Tooltip>
+
+
+                    </div>
+
+                  }
+
+
                 </div>
 
               </div>
@@ -186,14 +316,18 @@ class NewChatContent extends React.Component{
 
               <div className = "insideMessasgeHolder">
                 <div className = "messageAvatarHolder">
-                  <Avatar className = 'messageAvatar'
+                  <Avatar
+                    onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
+                    className = 'messageAvatar'
                     size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
                 </div>
 
                 <div className = "messageTextHolder">
                   <Tooltip placement="right" title={"8:00PM"}>
                     <span className = "messageText">
-                      <div className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
+                      <div
+                        onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
+                        className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
                       <div className = "eventMessage">
                         {messageItem.body}
                       </div>
