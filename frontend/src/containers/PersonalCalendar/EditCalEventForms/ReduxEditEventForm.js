@@ -551,7 +551,8 @@ class ReduxEditEventForm extends React.Component{
           label = {
             this.capitalize(friendList[friend].first_name)+" "+this.capitalize(friendList[friend].last_name)
           } >
-            <Avatar size={20} style={{marginRight:'10px'}} src= {`${global.API_ENDPOINT}`+friendList[friend].profile_picture} />
+            <Avatar size={20} style={{marginRight:'10px'}}
+               src= {`${global.IMAGE_ENDPOINT}`+friendList[friend].profile_picture} />
             {friendList[friend].first_name+" "+friendList[friend].last_name}
           </Option>
         )

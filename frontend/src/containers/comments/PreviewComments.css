@@ -38,11 +38,13 @@
 }
 
 .previewCommentRight{
+
   width:90%;
   position: relative;
   /* background: red; */
 }
 .newsFeedCommentItem {
+  border-top: 7.5px solid #1890ff;
   margin-top: 5px;
   padding: 10px;
   display: flex;
@@ -55,11 +57,21 @@
   background: #f0f0f0;
   margin-bottom: 5px;
 }
+
+.
+
  .newsFeedCommentAvatarSect{
   position: absolute;
   left:50%;
   top:30%;
   transform: translate(-50%,-50%)
+}
+
+.testCommentNewLook{
+  height:5px;
+  background: #1890ff;
+  width:100%;
+
 }
 .newsFeedCommentItem .newsFeedCommentTextSect{
   width: 99%;

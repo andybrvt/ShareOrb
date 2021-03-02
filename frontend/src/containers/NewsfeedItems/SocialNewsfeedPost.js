@@ -472,7 +472,10 @@ class SocialNewsfeedPost extends React.Component {
 
           <div class='RightinnerContainerLike'>
             <div class="likingPostAvatarGroup">
-
+              <Liking
+                num={10}
+                specifySize={25}
+                like_people={like_people} {...this.props}/>
             </div>
           </div>
         </div>
@@ -658,7 +661,7 @@ class SocialNewsfeedPost extends React.Component {
                 <span
                   style={{color:'black', fontSize:'15px'}}
                   class="headerPostText alignleft" >
-              
+
                   {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
 
                   <b>

@@ -111,14 +111,14 @@
   flex-direction: row;
   position: relative;
   /* background: red; */
-  
+
   width:100%;
 
 }
 .LeftinnerContainerLike{
   padding-left: 15px;
   position: relative;
-  width:50%;
+  width:100%;
   vertical-align: middle;
   font-weight: 400;
   font-family: "Segoe UI Regular";
@@ -128,18 +128,19 @@
 
 .RightinnerContainerLike{
   position: relative;
-  width:50%;
+  width:100%;
   /* background: blue; */
-  top:50%;
 
   /* background: red; */
 }
 
 .likingPostAvatarGroup{
-  position: absolute;
-  left:60%;
-  top:75%;
-  transform: translateX(-50%) translateY(-50%);
+  position: relative;
+  float:right;
+  /* background: red; */
+  right:3%;
+  top:50%;
+  transform: translateY(-50%);
 }
 
 .halfUpLikePost{
