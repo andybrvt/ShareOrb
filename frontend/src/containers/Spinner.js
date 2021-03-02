@@ -9,7 +9,8 @@ class Spinner extends React.Component {
     };
   }
   render(){
-    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{
+        fontSize: 24,}} spin />;
     return (
     <div>
       <Spin indicator={antIcon} />

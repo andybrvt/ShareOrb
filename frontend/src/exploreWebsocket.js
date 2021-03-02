@@ -266,6 +266,8 @@ class WebSocketExplore {
       following: following,
       command: 'send_following'
     })
+
+    return "test"
   }
 
   sendFollowRequest = (follower, following) => {
@@ -288,6 +290,8 @@ class WebSocketExplore {
       following: following,
       command: "unsend_following_request"
     })
+
+    return 'some stuff'
   }
 
   sendUnFollowing = (follower, following) => {

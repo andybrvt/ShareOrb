@@ -566,6 +566,8 @@ class NewChat extends React.Component{
           submitShareEvent = {this.submitShareEvent}
           history = {this.props.history}
           submitCreateEvent ={this.submitCreateEvent}
+          follower = {this.props.followers}
+          following = {this.props.following}
            />
 
         </div>

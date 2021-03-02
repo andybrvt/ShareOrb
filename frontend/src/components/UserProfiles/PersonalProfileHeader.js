@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { Button, Modal, Avatar, Steps, Divider, message } from 'antd';
+import { Button, Modal, Avatar, Steps, Divider, message, Spin } from 'antd';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import NotificationWebSocketInstance from '../../notificationWebsocket';
 import { authAxios } from '../util';
@@ -8,6 +8,8 @@ import EditProfileForm from './EditProfile/EditProfileForm';
 import ChangeBackgroundModal from '../../containers/PersonalCalendar/EventPage/ChangeBackgroundModal.js';
 import FollowList from './FollowList';
 import FollowersList from './FollowersList';
+import Spinner from '../../containers/Spinner'
+import { LoadingOutlined } from '@ant-design/icons';
 
 
 class PersonalProfileHeader extends React.Component{
@@ -16,6 +18,7 @@ class PersonalProfileHeader extends React.Component{
     followingShow: false,
     showProfileEdit: false,
     showProfilePicEdit: false,
+    followLoading: false,
   }
 
 
@@ -62,6 +65,9 @@ class PersonalProfileHeader extends React.Component{
   onFollow = (follower, following) =>{
     //Send a follow in the backend
 
+    // this.setState({
+    //   followLoading: true
+    // })
     let privatePro = ""
     if(this.props.profile.private){
       privatePro = this.props.profile.private
@@ -99,14 +105,37 @@ class PersonalProfileHeader extends React.Component{
       // you cannot grab it in the explore WebSocket bc that will be sent
       // to everyone else
 
+      const promise = new Promise((resolve, reject) => {
+
+      })
+
       ExploreWebSocketInstance.sendFollowRequest(follower, following)
 
+
       NotificationWebSocketInstance.sendNotification(notificationObject)
+      this.setState({
+        followLoading: false
+      })
 
     } else {
       // MAKE SURE TO UPDATE THE AUTH TOO
 
       ExploreWebSocketInstance.sendFollowing(follower, following)
+
+      // This is how you construct a promise
+      // const promise = new Promise((resolve, reject) => {
+      //   resolve()
+      // })
+      //
+      // promise.then(
+      //   res => {
+      //     this.setState({
+      //       followLoading: false
+      //     })
+      //   }
+      // )
+
+
 
       // This is to update the AUTH
       this.props.grabUserCredentials()
@@ -120,6 +149,8 @@ class PersonalProfileHeader extends React.Component{
       }
 
       NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
     }
 
 
@@ -132,6 +163,7 @@ class PersonalProfileHeader extends React.Component{
 
     // Probally gonna do a delete notification here
     ExploreWebSocketInstance.unSendFollowRequest(follower, following)
+
 
     // Pretty much this will unsend the notification for follow and stuff
     const notificationObject = {
@@ -389,6 +421,9 @@ class PersonalProfileHeader extends React.Component{
 
 
   render(){
+
+    const antIcon = <LoadingOutlined style={{
+        fontSize: 24, }} spin />;
     console.log(this.props)
     let username = ''
     let firstName = ''
@@ -571,7 +606,21 @@ class PersonalProfileHeader extends React.Component{
                   </div>
                   :
                   <div className = 'profileButtons'>
-                  {  (curRequested.includes(profileId)) ?
+                  {
+                    this.state.followLoading ?
+
+                    <div
+                      className = "spinnerHolder"
+                      >
+                      <Spin indicator={antIcon} />
+                    </div>
+
+
+
+                    :
+
+
+                    (curRequested.includes(profileId)) ?
                     <div>
                       <Button
                         type="primary"

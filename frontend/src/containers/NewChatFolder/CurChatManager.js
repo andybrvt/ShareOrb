@@ -113,6 +113,22 @@ class CurChatManager extends React.Component{
     return ids;
   }
 
+  getMemberListId(participantList){
+    // This will get all the members that are not the current user
+    var ids = []
+    for(let i = 0; i<participantList.length; i++){
+      if(participantList[i].id !== this.props.curId){
+        ids.push(
+            participantList[i]
+        )
+
+      }
+    }
+
+    return ids;
+  }
+
+
   getGroupChatName(participantList){
     // This function will show the correct name of the group chats
     var names = ""
@@ -193,6 +209,33 @@ class CurChatManager extends React.Component{
     this.props.history.push("/explore/"+username)
   }
 
+  onDisableEventShare = (follower, following, memberList) => {
+    // This function will be use to either make the share event
+    // disabled or not disabled
+
+    // Should be disabled when chatting with someone who you boht are not following
+    // each other
+    // Disabled if chats are not pulled up and you are just searching poeple
+
+    console.log(follower)
+    console.log(following)
+    console.log(memberList)
+    if(memberList.length === 0){
+      return true;
+    }
+    for(let i = 0; i< memberList.length; i++){
+      const memberId = memberList[i].id
+
+      if(!follower.includes(memberId) || !following.includes(memberId)){
+        return true;
+      }
+
+    }
+
+
+    return false;
+  }
+
 
   render(){
 
@@ -202,11 +245,16 @@ class CurChatManager extends React.Component{
     let chatUserName = ""
     let eventList = []
     let memberList = []
+    let memberListId = []
     let usernameList = []
+    let followersId = []
+    let followingId = []
     if(this.props.curChat){
       if(this.props.curChat.participants){
         partiLen =this.props.curChat.participants.length
         memberList = this.getMemberList(this.props.curChat.participants)
+
+        memberListId = this.getMemberListId(this.props.curChat.participants)
         usernameList = this.getChatUserUsername(this.props.curChat.participants)
         if(this.props.curChat.participants.length > 2){
           // This is for group chats
@@ -218,13 +266,28 @@ class CurChatManager extends React.Component{
       }
     }
 
+    if(this.props.following){
+      for(let i = 0; i< this.props.following.length; i++){
+        followingId.push(
+          this.props.following[i].id
+        )
+      }
+    }
+    if(this.props.follower){
+      for(let i = 0; i< this.props.follower.length; i++){
+        followersId.push(
+          this.props.follower[i].id
+        )
+      }
+    }
+
     let chatUserName2 = ""
 
     if(this.props.eventList){
       eventList = this.props.eventList
     }
 
-
+    console.log(memberList)
     return(
       <div className = "chatManagerContainer">
         {
@@ -271,7 +334,9 @@ class CurChatManager extends React.Component{
 
         <div className =""  >
 
-        <Button type="primary" shape="round" size="large"
+        <Button
+          disabled = {this.onDisableEventShare(followersId, followingId, memberListId)}
+          type="primary" shape="round" size="large"
 
           onClick = {() => this.onOpenEventModal()}
         >  Share Your Events </Button>
