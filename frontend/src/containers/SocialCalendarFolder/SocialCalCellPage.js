@@ -177,7 +177,7 @@ class SocialCalCellPage extends React.Component{
     let month = ''
     // let day = ''
     if (date !== ''){
-      month = dateFns.format(new Date(date), 'iiii, MMMM d')
+      month = dateFns.format(new Date(date), 'iii, MMMM d')
     }
 
     // console.log(month)
@@ -1017,13 +1017,13 @@ class SocialCalCellPage extends React.Component{
                         peopleLikeId.includes(this.props.curId) ?
 
                         <div className = 'socialLikeCircle'>
-                        <i class="fab fa-gratipay" style={{marginRight:'5px', color:'red'}}></i>
+                        <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
                         </div>
 
                         :
 
                         <div className = 'socialLikeCircle'>
-                        <i class="fab fa-gratipay" style={{marginRight:'5px'}}></i>
+                        <i class="far fa-heart" style={{marginRight:'5px'}}></i>
                         </div>
                       }
 
@@ -1048,7 +1048,8 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = 'socialLikeAvatar'>
 
-                        <Liking {...this.props} specifySize={20} like_people={people_like}/>
+                        <Liking {...this.props} specifySize={20} 
+                          like_people={people_like}/>
                       </div>
 
                   </div>
@@ -1088,7 +1089,7 @@ class SocialCalCellPage extends React.Component{
                        <div className = 'textHeightCenter'>
                          <i
                            style={{ marginRight:'10px'}}
-                           class="fas fa-heart">
+                           class="far fa-heart">
                          </i>
                          Like
                        </div>

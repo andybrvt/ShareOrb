@@ -730,7 +730,7 @@
 
 .socialModalRight .bottomSection .socialEventSect{
   height: 80%;
-  background: red;
+  /* background: red; */
 }
 .socialEventSect .socialListBox{
   /* background-color: red; */
@@ -1026,16 +1026,16 @@
 }
 
 
-.socialModalRight .socialNameTag .socialModalDate{
+.socialModalDate{
   /* background-color: red; */
   text-align: center;
   color:black;
   font-weight: 500;
   font-size: 15px;
   position:relative;
-  width: 40%;
   top: 7px;
-  left: 15%;
+  margin-right: 20px;
+
 }
 
 .postUsername{

@@ -53,6 +53,7 @@ class NewsfeedSpecCarousel extends React.Component{
           socialItems.push(
             <div
               className = 'imageContainer'>
+              {/*
               <div
                 style = {{
                     backgroundImage: `url(` + `${global.IMAGE_ENDPOINT}`+item.itemImage +")"
@@ -60,11 +61,11 @@ class NewsfeedSpecCarousel extends React.Component{
                   className = "backgroundImageNews"
                 >
               </div>
-              {/*
+              */}
                 <img
                 className = "testMiddle"
-              src ={`${global.NEWSFEED_PICS}`+item} />
-                */}
+              src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
+
 
             </div>
 
