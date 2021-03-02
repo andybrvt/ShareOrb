@@ -628,7 +628,7 @@ class SocialNewsfeedPost extends React.Component {
     }
 
     return(
-    <div class="card" style={{marginLeft:5, marginRight:10, minHeight:10}}>
+    <div class="card" style={{marginLeft:5, marginRight:10}}>
       <span class="profilePicHeader">
         <span class="headerContainer" >
 
@@ -673,7 +673,7 @@ class SocialNewsfeedPost extends React.Component {
                     </span>
                   </b>
                 </span>
-                {
+                { /*
                  userId === this.props.userId ?
                    <span class="optionPostHeader">
                     <Dropdown placement="bottom" overlay={
@@ -687,15 +687,18 @@ class SocialNewsfeedPost extends React.Component {
 
                       <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         <div class="threeDotPost">
-                        <i class="fas fa-ellipsis-v" style={{fontSize:'20px'}}></i>
-                        </div>
+
+                      </div>
                       </a>
 
                     </Dropdown>
                     </span>
                   :
                   <div class="optionNoPostHeader"> </div>
-                 }
+                 */ }
+
+
+                 <div class="optionNoPostHeader"> </div>
 
                 <span class="headerPostText alignright" style={{fontSize:'13px'}} >
                   <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>

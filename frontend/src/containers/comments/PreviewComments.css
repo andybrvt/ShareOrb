@@ -44,7 +44,6 @@
   /* background: red; */
 }
 .newsFeedCommentItem {
-  border-top: 7.5px solid #1890ff;
   margin-top: 5px;
   padding: 10px;
   display: flex;

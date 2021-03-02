@@ -2,10 +2,9 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import axios from "axios";
 
-
 import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Button } from 'antd';
+import { Input, Button, DatePicker, Select} from 'antd';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
@@ -14,6 +13,8 @@ import { LockOutlined, MailOutlined, QuestionCircleOutlined,
 import './Home.css';
 import worldPic from './LoginPage/world.svg';
 
+
+const { Option } = Select;
 
 const renderPersonal = (field) => {
   // Typical input field, most use for the title
@@ -75,6 +76,9 @@ const renderField = (field) => {
     </div>
   )
 }
+
+
+
 
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
@@ -148,6 +152,48 @@ class Signup extends React.Component {
     super(props);
   }
 
+  renderYear = () => {
+    // Typical input field, most use for the title
+    console.log('hi')
+    const numList=[]
+    console.log(numList)
+
+      for(let i = 0; i< 12; i++){
+        numList.push(
+        <Option key= {i}> {i} </Option>
+        )
+      }
+    return numList;
+
+  }
+  renderMonth = () => {
+    // Typical input field, most use for the title
+    console.log('hi')
+    const numList=[]
+    console.log(numList)
+
+      for(let i = 0; i< 12; i++){
+        numList.push(
+        <Option key= {i}> {i} </Option>
+        )
+      }
+    return numList;
+
+  }
+  renderDay = () => {
+    // Typical input field, most use for the title
+    console.log('hi')
+    const numList=[]
+    console.log(numList)
+
+      for(let i = 0; i< 31; i++){
+        numList.push(
+        <Option key= {i}> {i} </Option>
+        )
+      }
+    return numList;
+
+  }
 
     handleSubmit = (values) => {
      this.props.onAuth(
@@ -232,7 +278,9 @@ class Signup extends React.Component {
   render() {
     const {handleSubmit, pristine, invalid, reset} = this.props;
     const { token } = this.props;
-
+    const yearSelect = this.renderYear();
+    const monthSelect = this.renderMonth();
+    const daySelect = this.renderDay();
     if(token){
       return <Redirect to = '/home' />
     }
@@ -325,7 +373,6 @@ class Signup extends React.Component {
                   prefix={<CalendarOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
               </div>
-
               <div>
                   <Field
                   name = 'email'
@@ -334,6 +381,56 @@ class Signup extends React.Component {
                   placeholder = "Email"
                   validate = {email}
                   prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  />
+              </div>
+
+              <div>
+                <Select
+                name = 'timeStart'
+                placeholder='Year'
+                className = ''
+                style={{ width: 100, marginRight:'15px' }}
+                showArrow  = {false}
+
+                >
+                  {yearSelect}
+                </Select>
+
+
+
+                <Select
+                name = 'timeStart'
+                placeholder='Month'
+                className = ''
+                style={{ width: 100, marginRight:'15px' }}
+                showArrow  = {false}
+
+                >
+                  {monthSelect}
+                </Select>
+
+                <Select
+                name = 'timeStart'
+                placeholder='Day'
+
+                className = ''
+                style={{ width: 100, marginRight:'15px' }}
+                showArrow  = {false}
+
+                >
+                  {daySelect}
+                </Select>
+              </div>
+              <br/>
+
+              <div>
+                  <Field
+                  name = 'phone_number'
+                  component = {renderField}
+                  type = 'text'
+                  placeholder = "Location"
+                  validate = {phoneNumber}
+                  prefix={  <i style={{marginRight:'10px'}} style={{ color: 'rgba(0,0,0,.25)', marginRight:'3px' }} class="fas fa-map-marker-alt"></i>}
                   />
               </div>
 
@@ -416,7 +513,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   // this is where the actual sign up fucntion is called
     return {
-        onAuth: (username,first_name, last_name, dob, email, phone_number, password1, password2) => dispatch(actions.authSignup(username, first_name, last_name, dob, email, phone_number, password1, password2)),
+        onAuth: (username,first_name, last_name, dob, email, phone_number, password1, password2) =>
+        dispatch(actions.authSignup(username, first_name, last_name, dob, email, phone_number, password1, password2)),
         authSuccess: (token) => dispatch(actions.authSuccess(token)),
         addCredentials: (
           username,

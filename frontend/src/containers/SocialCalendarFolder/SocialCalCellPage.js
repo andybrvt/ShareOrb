@@ -1048,7 +1048,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = 'socialLikeAvatar'>
 
-                        <Liking {...this.props} specifySize={20} 
+                        <Liking {...this.props} specifySize={20}
                           like_people={people_like}/>
                       </div>
 
