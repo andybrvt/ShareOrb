@@ -384,3 +384,28 @@ class SocialCapUploadNewsfeed(APIView):
 
 
         return Response(content)
+
+def is_there_more_data(start):
+    # This function will check if there are more post to load up
+    if(int(start)> models.SocialCellEventPost.objects.all().count()):
+        return False
+    return True
+
+class loadSocialPostView(APIView):
+    # This function will be in charge of loading up more data
+    # in the newsfeed when we hit the bottom of the list
+
+    # Pretty much you keep track of the start and end in the front end
+    # and then just pass it in the back to render the right ones
+    def get(self, request, start, addMore, *args, **kwargs):
+
+
+        allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
+        serializer = serializers.SocialCellEventSerializer(allPost, many = True).data
+
+        content = {
+            "socialPost":serializer,
+            "has_more": is_there_more_data(start)
+        }
+
+        return Response(content)

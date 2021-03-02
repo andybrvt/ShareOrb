@@ -9,6 +9,15 @@ export const loadSocialPosts = post =>{
   }
 }
 
+export const loadMoreSocialPost = post => {
+  // This function will add additional post to the end
+  // of the post list
+  return {
+    type: actionTypes.LOAD_MORE_SOCIAL_POST,
+    post: post
+  }
+}
+
 
 export const addSocialPostLike = postObj => {
   return {

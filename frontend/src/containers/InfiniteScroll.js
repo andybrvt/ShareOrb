@@ -10,6 +10,7 @@ import './InfiniteScroll.css';
 import WebSocketPostsInstance from  '../postWebsocket';
 import { Divider } from 'antd';
 import Spinner from './Spinner.js';
+import * as socialNewsfeedActions from '../store/actions/socialNewsfeed';
 
 import LazyLoad from 'react-lazyload';
 
@@ -34,43 +35,69 @@ class InfiniteList extends React.Component {
       loading: false,
       post: [],
       hasMore: true,
-      offset: 0,
-      limit: 3,
+      start: 6,
+      addMore: 5,
       newsfeedLoad:false,
     };
+
+    // window.innher height gets the height of the window view
+    // document.documentElement.scrollTop returns the heigh tof the scroll bar
+    // offsetheight would get the heigh tof the element
     window.onscroll = () => {
+
+
+
       const {
-        loadPost,
-        state: { error, loading, hasMore} } = this;
+         loadPost,
+         state: { error, loading, hasMore} } = this;
       if (error || loading || !hasMore) return;
-      if (document.documentElement.scrollHeight -
-        document.documentElement.scrollTop ===
-        document.documentElement.clientHeight
-      ) {  //call some loading METHOD
-        loadPost();
+      if(
+        document.documentElement.scrollHeight -
+          document.documentElement.scrollTop ===
+          document.documentElement.clientHeight
+      ){
+        console.log("hits the bottm")
+        this.loadSocialPost()
       }
-    };
+
+
+    }
+
+    // () => {
+    //   const {
+    //     loadPost
+    //     state: { error, loading, hasMore} } = this;
+    //   if (error || loading || !hasMore) return;
+    //   if (document.documentElement.scrollHeight -
+    //     document.documentElement.scrollTop ===
+    //     document.documentElement.clientHeight
+    //   ) {  //call some loading METHOD
+    //     loadPost();
+    //   }
+    // };
+
+
   }
 
-  initialisePost(){
-    this.waitForSocketConnection(() =>{
-      WebSocketPostsInstance.fetchPosts(this.props.id)
-      // WebSocketPostsInstance.fetchComments(this.props.data.id)
-    })
-  }
-
-  waitForSocketConnection(callback){
-    const component = this
-    setTimeout(
-      function(){
-        if(WebSocketPostsInstance.state() ===1){
-          callback();
-          return;
-        } else {
-          component.waitForSocketConnection(callback);
-        }
-      }, 100)
-  }
+  // initialisePost(){
+  //   this.waitForSocketConnection(() =>{
+  //     // WebSocketPostsInstance.fetchPosts(this.props.id)
+  //     // WebSocketPostsInstance.fetchComments(this.props.data.id)
+  //   })
+  // }
+  //
+  // waitForSocketConnection(callback){
+  //   const component = this
+  //   setTimeout(
+  //     function(){
+  //       if(WebSocketPostsInstance.state() ===1){
+  //         callback();
+  //         return;
+  //       } else {
+  //         component.waitForSocketConnection(callback);
+  //       }
+  //     }, 100)
+  // }
 
 
   componentDidMount() {
@@ -79,10 +106,42 @@ class InfiniteList extends React.Component {
   }
 
   componentWillMount() {
-    this.loadPost();
+    // this.loadPost();
     // WebSocketPostsInstance.connect()
 
   };
+
+  loadSocialPost = () => {
+    this.setState({
+      loading: true
+    })
+
+    const {start, addMore} = this.state
+    authAxios.get(`${global.API_ENDPOINT}/mySocialCal/infiniteSocial/`+start+'/'+addMore)
+    .then( res => {
+
+      console.log(res)
+      this.props.loadMoreSocialPost(res.data.socialPost)
+      // Now do a redux call here to add in the pictures
+      const hasMore = res.data.has_more
+
+      this.setState({
+        hasMore: hasMore,
+        loading:false,
+        start: start+addMore
+      })
+    })
+    .catch(err => {
+      this.setState({
+        error: err.message,
+        loading: false
+      })
+
+    })
+
+
+  }
+
 
   loadPost = () => {
      this.setState({loading: true}, () => {
@@ -181,4 +240,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(InfiniteList);
+const mapDispatchToProps = dispatch => {
+  return{
+    loadMoreSocialPost: (post) => dispatch(socialNewsfeedActions.loadMoreSocialPost(post)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfiniteList);

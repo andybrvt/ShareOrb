@@ -684,7 +684,7 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         curDate = data['curDate']
 
-        post_list = SocialCellEventPost.objects.all().order_by('-post_date')
+        post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
 
         serializer = SocialCellEventSerializer(post_list, many = True)
 

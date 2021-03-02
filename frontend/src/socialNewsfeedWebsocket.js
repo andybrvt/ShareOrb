@@ -46,11 +46,10 @@ class WebSocketSocialNewsfeed{
   socketNewSocialPost(data){
     // Pretty much will process the data when it is received from the backend
 
-    console.log(data)
+
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
 
-    console.log(parsedData)
     // Make the different calls here
     if(command === "fetch_social_posts"){
       // pull data and add callbacks here
