@@ -203,7 +203,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_accepted_shared_event':
             actor = get_object_or_404(User, id = data['actor'])
             recipient = get_object_or_404(User, id = data['recipient'])
-            notification = CustomNotification.objects.create(type = "accepted_shared_event",
+            notification = CustomNotification.objects.create(
+            type = "accepted_shared_event",
             actor = actor,
             recipient = recipient,
             verb = "accepted shared event",

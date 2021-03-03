@@ -820,7 +820,7 @@ class NotificationsDropDown extends React.Component{
             </div>
             <h4 className = 'listNotificationSingle'>
                 <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-                 shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+                 accepted shared event on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
                  <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
                  <br />
                  <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
