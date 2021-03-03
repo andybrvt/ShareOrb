@@ -174,19 +174,31 @@ class SocialCalCellPage extends React.Component{
     // This will be presenting the calendar day on the modal
     // console.log(dateFns.format(new Date(date), ''))
     console.log(new Date(date))
-    let month = ''
-    // let day = ''
-    if (date !== ''){
-      month = dateFns.format(new Date(date), 'iii, MMMM d')
+    let dateList = []
+    if(date){
+        dateList = date.split("-")
+
+        let month = ''
+        // let day = ''
+        if (date !== ''){
+          month = dateFns.format(new Date(
+            dateList[0],
+            dateList[1]-1,
+            dateList[2]
+          ), 'iii, MMMM d')
+        }
+
+        // console.log(month)
+        return (
+          <div className = 'socialModalDate'>
+          {month}
+
+          </div>
+        )
+
     }
 
-    // console.log(month)
-    return (
-      <div className = 'socialModalDate'>
-      {month}
 
-      </div>
-    )
 
   }
 
