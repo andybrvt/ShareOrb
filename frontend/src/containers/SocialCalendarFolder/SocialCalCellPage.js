@@ -401,6 +401,14 @@ class SocialCalCellPage extends React.Component{
     });
   }
 
+  directToClippedPic = () => {
+    console.log("clipped")
+    // This function will direct the person to their soical cal cell where their
+    // picture is clipped
+    this.props.history.push("/explore/"+this.props.username)
+  }
+
+
   openNotification = placement => {
 
   const today = dateFns.format(new Date(), 'MMM dd, yyyy')
@@ -410,6 +418,7 @@ class SocialCalCellPage extends React.Component{
     description:
       'A photo has been clipped to your calendar on '+today+'.',
     placement,
+    onClick: () => this.directToClippedPic()
   });
   };
 
