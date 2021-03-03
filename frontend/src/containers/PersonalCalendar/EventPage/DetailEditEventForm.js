@@ -478,35 +478,38 @@ class DetailEditEventForm extends React.Component{
   }
 
   renderShareListSelect = () => {
-    if(this.props.friendList !== undefined){
-      const friendList = this.props.friendList
-      console.log(friendList)
+    // This will be the list of followers and following overlapped
+    // but for now following should be good enough
+
+    if(this.props.following !== undefined){
+      const followList = this.props.following
+      console.log(followList)
       let shareOptions = []
 
-      for (let i = 0; i< friendList.length; i++ ){
+      for (let i = 0; i< followList.length; i++ ){
         shareOptions.push(
 
-          <Option value = {friendList[i].username}
+          <Option value = {followList[i].username}
           label = {
             <div style={{padding:'3px'}}>
-            <Avatar size={15} style={{marginRight:'10px', marginBottom:'5px'}} src= {`${global.API_ENDPOINT}`+friendList[i].profile_picture} />
+            <Avatar size={15} style={{marginRight:'10px', marginBottom:'5px'}} src= {`${global.IMAGE_ENDPOINT}`+followList[i].profile_picture} />
 
-            <span>{this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}</span>
+            <span>{this.capitalize(followList[i].first_name)+" "+this.capitalize(followList[i].last_name)}</span>
             </div>
         }>
             <div style={{padding:'10px'}}>
               <Avatar
                 style={{marginRight:'10px'}}
                 size="small"
-                src={`${global.API_ENDPOINT}`+friendList[i].profile_picture}/>
+                src={`${global.IMAGE_ENDPOINT}`+followList[i].profile_picture}/>
               <span>
-                {this.capitalize(friendList[i].first_name)+" "+this.capitalize(friendList[i].last_name)}
+                {this.capitalize(followList[i].first_name)+" "+this.capitalize(followList[i].last_name)}
                 <br/>
                 <div
                   class="headerPostText"
                   style={{marginLeft:'35px'}}
                 >
-                  {"@"+friendList[i].username}
+                  {"@"+followList[i].username}
                 </div>
               </span>
             </div>
