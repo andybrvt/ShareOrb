@@ -466,8 +466,8 @@ class SideMenu extends React.Component {
 
                 <div className = "headersProfileContainer">
                   <span class="profileHeader">
-                       <Dropdown overlay={
-                         <Menu style={{marginTop:'20px'}}>
+                       <Dropdown placement="bottomCenter" overlay={
+                         <Menu style={{marginTop:'35px'}}>
                            { (
                              <Menu.Item
                              onClick = {()=>this.props.history.push("/explore/"+this.props.username)}
