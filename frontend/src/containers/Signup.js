@@ -152,29 +152,16 @@ class Signup extends React.Component {
     super(props);
   }
 
-  renderYear = () => {
-    // Typical input field, most use for the title
-    console.log('hi')
-    const numList=[]
-    console.log(numList)
 
-      for(let i = 0; i< 12; i++){
-        numList.push(
-        <Option key= {i}> {i} </Option>
-        )
-      }
-    return numList;
-
-  }
   renderMonth = () => {
     // Typical input field, most use for the title
     console.log('hi')
     const numList=[]
     console.log(numList)
-
+    let monthList=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       for(let i = 0; i< 12; i++){
         numList.push(
-        <Option key= {i}> {i} </Option>
+        <Option key= {i}> {monthList[i]} </Option>
         )
       }
     return numList;
@@ -186,7 +173,7 @@ class Signup extends React.Component {
     const numList=[]
     console.log(numList)
 
-      for(let i = 0; i< 31; i++){
+      for(let i = 0; i< 32; i++){
         numList.push(
         <Option key= {i}> {i} </Option>
         )
@@ -278,7 +265,6 @@ class Signup extends React.Component {
   render() {
     const {handleSubmit, pristine, invalid, reset} = this.props;
     const { token } = this.props;
-    const yearSelect = this.renderYear();
     const monthSelect = this.renderMonth();
     const daySelect = this.renderDay();
     if(token){
@@ -343,7 +329,6 @@ class Signup extends React.Component {
                     component = {renderPersonal}
                     type = 'text'
                     placeholder = "First Name"
-                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     />
 
 
@@ -355,73 +340,68 @@ class Signup extends React.Component {
                     component = {renderPersonal}
                     type = 'text'
                     placeholder = "Last Name"
-                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     />
                   </div>
               </div>
 
-              <div>
+
+              <Field
+              name = 'email'
+              component = {renderField}
+              type = 'text'
+              placeholder = "Email"
+              validate = {email}
+              prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              />
+
+
               {/* Gonna change this to see if there are specfic inputs to handle
                 date of birth
                 */}
+
+
                   <Field
                   name = 'dob'
                   component = {renderField}
                   type = 'text'
                   placeholder = "Date of Birth"
-
                   prefix={<CalendarOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   />
+
+
+                <div class="DOBcontainer">
+                  <div class="frontFirstDOB">
+                    <i class="fas fa-birthday-cake" style={{ color: 'rgba(0,0,0,.25)', fontSize:'15px', marginRight:'15px'}}></i>
+                    <Select
+                    name = 'timeStart'
+                    placeholder='Month'
+                    className = ''
+                    style={{ width: 100, marginRight:'15px' }}
+                    showArrow  = {false}
+                    >
+                      {monthSelect}
+                    </Select>
+
+                    <Select
+                    name = 'timeStart'
+                    placeholder='Day'
+                    className = ''
+                    style={{ width: 100, marginRight:'15px' }}
+                    showArrow  = {false}
+                    >
+                      {daySelect}
+                    </Select>
+                  </div>
+
+                  <div class="frontLastDOB">
+                    <Field
+                      name = 'dob'
+                      component = {renderField}
+                      type = 'text'
+                      placeholder = "Year"
+                    />
+                </div>
               </div>
-              <div>
-                  <Field
-                  name = 'email'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Email"
-                  validate = {email}
-                  prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
-              </div>
-
-              <div>
-                <Select
-                name = 'timeStart'
-                placeholder='Year'
-                className = ''
-                style={{ width: 100, marginRight:'15px' }}
-                showArrow  = {false}
-
-                >
-                  {yearSelect}
-                </Select>
-
-
-
-                <Select
-                name = 'timeStart'
-                placeholder='Month'
-                className = ''
-                style={{ width: 100, marginRight:'15px' }}
-                showArrow  = {false}
-
-                >
-                  {monthSelect}
-                </Select>
-
-                <Select
-                name = 'timeStart'
-                placeholder='Day'
-
-                className = ''
-                style={{ width: 100, marginRight:'15px' }}
-                showArrow  = {false}
-
-                >
-                  {daySelect}
-                </Select>
-              </div>
-              <br/>
 
               <div>
                   <Field

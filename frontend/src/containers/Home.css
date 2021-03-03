@@ -123,3 +123,26 @@
   position:relative;
   /* background: orange; */
 }
+
+.DOBcontainer{
+  position:relative;
+  display:flex;
+  flex-direction: row;
+  /* background: blue; */
+  width:100%;
+
+}
+
+.frontFirstDOB{
+  width:65%;
+  height:100%;
+  position:relative;
+  /* background: red; */
+}
+
+.frontLastDOB{
+  width:35%;
+  height:100%;
+  position:relative;
+  /* background: orange; */
+}
