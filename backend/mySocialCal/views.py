@@ -48,7 +48,7 @@ class SocialCalUploadPic(APIView):
         )
 
 
-        change = bool(socialCalCell.coverPic)
+        change = True
         print(request.data)
         for i in range(int(request.data['fileListLength'])):
 
