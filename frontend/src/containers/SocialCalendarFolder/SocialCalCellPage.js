@@ -310,6 +310,8 @@ class SocialCalCellPage extends React.Component{
             curId = this.props.curId
           }
 
+
+          curPic = curPic.replace(global.POSTLIST_SPEC, "")
           const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
 
           // Now you just do an auth axios call bc you are not on your own calendar so
@@ -1048,7 +1050,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = 'socialLikeAvatar'>
 
-                        <Liking {...this.props} specifySize={20} 
+                        <Liking {...this.props} specifySize={20}
                           like_people={people_like}/>
                       </div>
 

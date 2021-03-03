@@ -46,6 +46,11 @@ class InfiniteList extends React.Component {
     window.onscroll = () => {
 
 
+      console.log(document.documentElement.scrollHeight)
+        console.log(document.documentElement.scrollTop)
+        console.log(document.documentElement.scrollHeight-document.documentElement.scrollTop)
+
+        console.log(document.documentElement.clientHeight)
 
       const {
          loadPost,
