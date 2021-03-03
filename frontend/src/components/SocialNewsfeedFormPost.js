@@ -291,7 +291,7 @@ class SocialNewsfeedFormPost extends React.Component{
         {headers: {"content-type": "multipart/form-data"}}
       )
       .then(res => {
-
+        console.log(res.data)
         console.log(res.data.cell)
         // Have a condiation where if there are not social cal items you will
         // delete and remove the content type post
@@ -323,18 +323,24 @@ class SocialNewsfeedFormPost extends React.Component{
         } else {
           // This is if there are socialcalcellitems to post
           if( res.data.coverPicChange){
+
+            console.log("there is a cover pic change")
             const coverPicForm = new FormData()
             // Put the id of the cell in first so you can find it later
             coverPicForm.append("cellId", res.data.cell.id)
             coverPicForm.append("createdCell", res.data.created)
             // Now add the cover pic
-            if(fileList[0].originFileObj){
+            if(fileList[fileList.length-1].originFileObj){
               // If this is a new uploaded file
-              coverPicForm.append("coverImage", fileList[0].originFileObj)
+              console.log('not old pic')
+              coverPicForm.append("coverImage", fileList[fileList.length-1].originFileObj)
             } else {
+              console.log(fileList[fileList.length-1].url.replace(global.POSTLIST_SPEC, ""))
               // If this is just an old one picture
-              coverPicForm.append("coverImage", fileList[0].url.replace(global.IMAGE_ENDPOINT, ""))
+              console.log('old pic')
+              coverPicForm.append("coverImage", fileList[fileList.length-1].url.replace(global.POSTLIST_SPEC, ""))
             }
+
 
             // Now change the cover picture here
             authAxios.post(`${global.API_ENDPOINT}/mySocialCal/updateCoverPic/`+ownerId,
