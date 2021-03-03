@@ -294,7 +294,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         )
 
         socialCell.people_like.add(personLike)
-        socialCell.save()
+        # socialCell.save()
 
         socialCalCellObj = SocialCalCellSerializer(socialCell).data
 
@@ -350,7 +350,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         )
 
         socialCell.people_like.remove(personUnlike)
-        socialCell.save()
+        # socialCell.save()
 
         socialCalCellObj = SocialCalCellSerializer(socialCell).data
 

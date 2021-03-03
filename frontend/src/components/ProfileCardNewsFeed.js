@@ -93,7 +93,11 @@ class ProfileCardNewsFeed extends React.Component{
           { profilePic != '' ?
           <Avatar
             onClick = {() => this.viewUserPage(username)}
-            style={{left:'30%', top:'5%'}}
+            style={{
+              left:'30%',
+              top:'5%',
+              cursor: "pointer"
+            }}
             size = {125}
             shape = 'circle'
             src = {profilePic} />

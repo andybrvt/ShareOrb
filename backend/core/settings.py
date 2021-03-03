@@ -33,7 +33,7 @@ DEBUG = True
 #  '52.8.250.165',
 #  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
 #  ]
-
+#
 ALLOWED_HOSTS = []
 
 # Application definition

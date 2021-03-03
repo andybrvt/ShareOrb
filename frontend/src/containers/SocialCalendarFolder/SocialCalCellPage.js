@@ -174,19 +174,31 @@ class SocialCalCellPage extends React.Component{
     // This will be presenting the calendar day on the modal
     // console.log(dateFns.format(new Date(date), ''))
     console.log(new Date(date))
-    let month = ''
-    // let day = ''
-    if (date !== ''){
-      month = dateFns.format(new Date(date), 'iii, MMMM d')
+    let dateList = []
+    if(date){
+        dateList = date.split("-")
+
+        let month = ''
+        // let day = ''
+        if (date !== ''){
+          month = dateFns.format(new Date(
+            dateList[0],
+            dateList[1]-1,
+            dateList[2]
+          ), 'iii, MMMM d')
+        }
+
+        // console.log(month)
+        return (
+          <div className = 'socialModalDate'>
+          {month}
+
+          </div>
+        )
+
     }
 
-    // console.log(month)
-    return (
-      <div className = 'socialModalDate'>
-      {month}
 
-      </div>
-    )
 
   }
 
@@ -310,6 +322,8 @@ class SocialCalCellPage extends React.Component{
             curId = this.props.curId
           }
 
+
+          curPic = curPic.replace(global.POSTLIST_SPEC, "")
           const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
 
           // Now you just do an auth axios call bc you are not on your own calendar so
@@ -387,6 +401,14 @@ class SocialCalCellPage extends React.Component{
     });
   }
 
+  directToClippedPic = () => {
+    console.log("clipped")
+    // This function will direct the person to their soical cal cell where their
+    // picture is clipped
+    this.props.history.push("/explore/"+this.props.username)
+  }
+
+
   openNotification = placement => {
 
   const today = dateFns.format(new Date(), 'MMM dd, yyyy')
@@ -396,6 +418,7 @@ class SocialCalCellPage extends React.Component{
     description:
       'A photo has been clipped to your calendar on '+today+'.',
     placement,
+    onClick: () => this.directToClippedPic()
   });
   };
 

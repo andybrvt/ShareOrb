@@ -1003,7 +1003,7 @@ class EventInfo extends React.Component{
             }
               >
             </ReactBingmaps>
-      
+
              {/*Saving api calls don't worry about maps*/}
             <Divider/>
               <i style={{marginRight:'15px', color:'#1890ff',
@@ -1076,6 +1076,8 @@ class EventInfo extends React.Component{
     visible={this.state.edit}
     friendList = {this.props.friendList}
     onDelete = {this.onDeleteEvent}
+    followers= {this.props.followers}
+    following = {this.props.following}
      />
     <AcceptShareModal
     info = {this.props.tempEventForModal}
@@ -1116,8 +1118,9 @@ const mapStateToProps = state => {
     tempEventForModal: state.calendar.tempEventForModal,
     tempDifference: state.calendar.tempDifference,
     deleteEventId: state.calendarEvent.deleteEventId,
-    showDeleteModal: state.calendarEvent.showDeleteModal
-
+    showDeleteModal: state.calendarEvent.showDeleteModal,
+    followers: state.auth.followers,
+    following: state.auth.following
   }
 }
 
