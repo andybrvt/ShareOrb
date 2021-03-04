@@ -146,3 +146,17 @@
   position:relative;
   /* background: orange; */
 }
+
+.middleSignUpHolder{
+  display: flex;
+}
+
+.inputSignupFlex{
+  display: flex;
+}
+
+.signUpIcon{
+  background-color: red;
+  color: rgba(0,0,0,.25);
+  font-size: 15px;
+}

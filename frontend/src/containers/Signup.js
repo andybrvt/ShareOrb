@@ -77,6 +77,45 @@ const renderField = (field) => {
   )
 }
 
+const renderBirthDay = (field) => {
+
+  return (
+
+      <DatePicker
+        onChange = {field.input.onChange}
+        value = {field.input.value}
+        suffixIcon = {<div></div>}
+        allowClear = {true}
+        />
+
+
+  )
+}
+
+const location = (field) => {
+
+  return (
+    <div
+      style = {{
+        position: "relative",
+        height: "50px",
+    }}
+       >
+      <Input
+        {...field.input}
+        type = {field.type}
+        placeholder= {field.placeholder}
+        style = {{width: '110px', marginRight:'15px'}}
+        // maxLength = "20"
+        prefix = {field.prefix}
+        />
+
+
+    </div>
+
+  )
+}
+
 
 
 
@@ -183,11 +222,15 @@ class Signup extends React.Component {
   }
 
     handleSubmit = (values) => {
+
+      console.log(values)
+
+      console.log(values.dob.format("YYYY-MM-DD"))
      this.props.onAuth(
             values.username,
             values.first_name,
             values.last_name,
-            values.dob,
+            values.dob.format("YYYY-MM-DD"),
             values.email,
             values.phone_number,
             values.password,
@@ -197,7 +240,7 @@ class Signup extends React.Component {
       username: values.username,
       first_name: values.first_name,
       last_name: values.last_name,
-      dob: values.dob,
+      dob: values.dob.format("YYYY-MM-DD"),
       email: values.email,
       phone_number: values.phone_number,
       password1: values.password,
@@ -360,69 +403,71 @@ class Signup extends React.Component {
                 */}
 
 
-                  <Field
-                  name = 'dob'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Date of Birth"
-                  prefix={<CalendarOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
+              <div className = "middleSignUpHolder">
+                  {/*
+                    <i
+                      style={{
+                          fontSize:'15px',
+                          color: 'rgba(0,0,0,.25)',
+                          marginRight:'3px',
+                          position: "relative",
+                          top: "50%",
+                          transform: "translateY(-50%)"
+                         }}
+                      class="fas fa-birthday-cake"></i>
+                    */}
+                  <div className = "frontFirstLastName">
+                    <Field
+                    name = 'dob'
+                    component = {renderBirthDay}
+                    type = 'date'
+                    placeholder = "Date of Birth"
+                    // prefix={}
+                    />
 
-
-                <div class="DOBcontainer">
-                  <div class="frontFirstDOB">
-                    <i class="fas fa-birthday-cake" style={{ color: 'rgba(0,0,0,.25)', fontSize:'15px', marginRight:'15px'}}></i>
-                    <Select
-                    name = 'timeStart'
-                    placeholder='Month'
-                    className = ''
-                    style={{ width: 100, marginRight:'15px' }}
-                    showArrow  = {false}
-                    >
-                      {monthSelect}
-                    </Select>
-
-                    <Select
-                    name = 'timeStart'
-                    placeholder='Day'
-                    className = ''
-                    style={{ width: 100, marginRight:'15px' }}
-                    showArrow  = {false}
-                    >
-                      {daySelect}
-                    </Select>
                   </div>
 
-                  <div class="frontLastDOB">
+
+
+
+
+
+                <div className = "backFirstLastName">
+                  {/*
+                    <div>
+                      <i style={{
+                          fontSize:'15px',
+                          color: 'rgba(0,0,0,.25)',
+                          marginRight:'3px',
+                          position: "relative",
+                          top: "50%",
+                          transform: "translateY(-50%)"
+                         }} class="fas fa-map-marker-alt"></i>
+                    </div>
+                    */}
+
                     <Field
-                      name = 'dob'
-                      component = {renderField}
-                      type = 'text'
-                      placeholder = "Year"
+                    name = 'phone_number'
+                    component = {renderField}
+                    type = 'text'
+                    placeholder = "Phone Number"
+                    validate = {phoneNumber}
+                    prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     />
+
                 </div>
+
               </div>
 
-              <div>
-                  <Field
-                  name = 'phone_number'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Location"
-                  validate = {phoneNumber}
-                  prefix={  <i style={{marginRight:'10px'}} style={{ color: 'rgba(0,0,0,.25)', marginRight:'3px' }} class="fas fa-map-marker-alt"></i>}
-                  />
-              </div>
 
               <div>
-                  <Field
-                  name = 'phone_number'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Phone Number"
-                  validate = {phoneNumber}
-                  prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
+                <Field
+                name = 'location'
+                component = {renderField}
+                type = 'text'
+                placeholder = "Location"
+                // prefix={}
+                />
               </div>
 
               <div>
