@@ -437,9 +437,9 @@ class loadSocialPostView(APIView):
 
         userPlusUserFollowing = User.objects.exclude(id__in= userFollowing)
 
-        allPost = models.SocialCellEventPost.objects.filter(
+        allPost = models.SocialCellEventPost.objects.all().filter(
         owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-        ).order_by('post_date')[start:start+addMore]
+        ).order_by('-post_date')[start:start+addMore]
 
 
         # allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
