@@ -696,29 +696,32 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         curUser = get_object_or_404(User, id = data['userId'])
 
         # This will get all the follewers of the curUser
-        userFollowing = curUser.following.values("id")
+        userFollowing = curUser.get_following().values("person_getting_followers")
 
+        print(userFollowing)
         # Now get all the users that you are not following and yourself
         notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = data['userId'])
 
         # Now get all the users including you
         userPlusUserFollowing = User.objects.exclude(id__in = notUserFollowing.values_list("id", flat = True))
 
+        print(userPlusUserFollowing)
+        print("this is all your friends")
         curDate = data['curDate']
 
         # post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
 
-        postList = []
-        for user in userPlusUserFollowing:
-            temp = SocialCellEventPost.objects.filter(owner_id = user.id)
-            for post in temp:
-                postList.append(post.pk)
+        # postList = []
+        # for user in userPlusUserFollowing:
+        #     temp = SocialCellEventPost.objects.filter(owner_id = user.id)
+        #     for post in temp:
+        #         postList.append(post.pk)
 
 
-        # post_list = SocialCellEventPost.objects.all().filter(
-        # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-        # ).order_by('-post_date')[:int(data['startIndex'])]
-        post_list = SocialCellEventPost.objects.filter(pk__in = postList).order_by('-post_date')[:int(data['startIndex'])]
+        post_list = SocialCellEventPost.objects.all().filter(
+        owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        ).order_by('-post_date')[:int(data['startIndex'])]
+        # post_list = SocialCellEventPost.objects.filter(pk__in = postList).order_by('-post_date')[:int(data['startIndex'])]
 
         serializer = SocialCellEventSerializer(post_list, many = True)
 
