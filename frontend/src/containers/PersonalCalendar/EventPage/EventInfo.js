@@ -741,7 +741,7 @@ class EventInfo extends React.Component{
 
         <div className = "invitedHolder">
           <div className="inviteTitle"> Invited</div>
-          <div className="goingInviteNumber">{invited.length}</div>
+          <div className="goingInviteNumber">{invited.length+1}</div>
           <div className = "">
             {/*
               <Liking

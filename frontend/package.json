@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "antd": "^4.9.4",
+    "antd-img-crop": "^3.14.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "date-fns": "^2.16.1",
