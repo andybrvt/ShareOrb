@@ -283,8 +283,9 @@ class SocialCalCell(models.Model):
     # you do something to it. It will be further expanded in the future
     # but now it is just updated and new
     # OPTIONS:
-    # -new
-    # -updated
+    # -new (first time updating pictures)
+    # -updated (uploaded more pictures to the day)
+    # -clipped (when clipping a picture)
     actionText = models.CharField(max_length = 200, default = "new")
 
 

@@ -27,6 +27,8 @@ class SocialCalCellView(generics.ListAPIView):
 
 
 class SocialCalUploadPic(APIView):
+    # This function will upload the pic that are selcted in the newsfeed
+
     # parser_classes = (FormParser, MultiPartParser)
     def post(self, request, id, *args, **kwargs):
         # This is to adjust the time to the correct timezone
@@ -49,6 +51,13 @@ class SocialCalUploadPic(APIView):
 
 
         change = True
+
+        # check if new or not
+        # if created is true then we wont do anythign if not we can
+        # go in and change the actiontext to updated
+        if(created == False):
+            socialCalCell.actionText = "updated"
+
         print(request.data)
         for i in range(int(request.data['fileListLength'])):
 
@@ -102,6 +111,7 @@ class SocialCalUploadPic(APIView):
 
 class UpdateSocialCellCoverPic(APIView):
     # This function will update the cover picture of the cell
+    # This function is used in conjection with the udpate picture view
     def post(self, request, id, *args, **kwargs):
         # First you will grab the social cal cell given the id
         # then you will just change the cover pic and then return the serialized cell
@@ -118,6 +128,7 @@ class UpdateSocialCellCoverPic(APIView):
             socialCalCell.coverPic = request.data['coverImage']
 
         # SAVED SPOT
+        # For now you will not need for the action text here
         socialCalCell.save()
 
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
@@ -150,6 +161,11 @@ class SocialClippingView(APIView):
             socialCalUser = user,
             socialCaldate = curDate
         )
+
+        # Since this clipped a picture, it doesn't really matter if it is new
+        # or not. we will just say its clipped
+        socialCalCell.actionText = 'clipped'
+
 
         # So the soical itme type clip will be a clipped pictures, and in thr
         # front end it will look like a polaroid
@@ -205,6 +221,7 @@ class SocialChangeCoverPic(APIView):
         socialCalCell.coverPic = curPic
 
         # SAVED SPOT
+        # This is just for changing the cover pic so no need
         socialCalCell.save()
 
         return Response("Change cover pic")
@@ -255,6 +272,9 @@ class SocialPictureCreateView(APIView):
         # This function will pretty be the http version of teh approve_social_pics
         # in the userprofile consumers. It is used to make the calcell or grab it
         # and make the calendar items
+
+        # This is used to approve pictures that are request to be put on somone's
+        # calendar
 
         notification = get_object_or_404(CustomNotification, id = request.data['notificationId'])
         serializedNotification = NotificationSerializer(notification).data
@@ -328,6 +348,9 @@ class SocialCapUploadNewsfeed(APIView):
             socialCaldate = curDate
         )
 
+        # check new or not
+        if(created == False):
+            socialCalCell.actionText = "updated"
 
         # Add in the day caption here
         socialCalCell.dayCaption = request.data['dayCaption']

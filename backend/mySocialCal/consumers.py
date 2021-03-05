@@ -437,6 +437,9 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             socialCaldate = data['cellDate']
         )
 
+        if(created == False):
+            socialCalCell.actionText = "updated"
+
         # So since we are just updating the day caption, we will just update
         # it here
         socialCell.dayCaption = data['dayCaption']
@@ -546,7 +549,9 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         if(len(socialItemList) == 0):
             socialCell.coverPic = ""
 
+            socialCell.actionText = "updated"
             # SAVED SPOT
+            # no need for action text bc you are gonna delete
             socialCell.save()
         elif(len(socialItemList) > 0):
             if curCoverPic == deletedPic:
@@ -560,6 +565,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
 
                 socialCell.coverPic = curPic
+                socialCell.actionText = "updated"
 
                 # SAVED SPOT
                 socialCell.save()
