@@ -440,6 +440,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         # So since we are just updating the day caption, we will just update
         # it here
         socialCell.dayCaption = data['dayCaption']
+
+        # SAVED SPOT
         socialCell.save()
 
 
@@ -543,6 +545,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
         if(len(socialItemList) == 0):
             socialCell.coverPic = ""
+
+            # SAVED SPOT
             socialCell.save()
         elif(len(socialItemList) > 0):
             if curCoverPic == deletedPic:
@@ -556,6 +560,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
 
                 socialCell.coverPic = curPic
+
+                # SAVED SPOT
                 socialCell.save()
         # Now you get the date so that you can send it to the right websocket
         dateList = data['cellDate'].split("-")

@@ -279,6 +279,14 @@ class SocialCalCell(models.Model):
     # This field will be for the caption on the day modal
     dayCaption = models.TextField(blank = True)
 
+    # This action text here will be used in the social cal cell newsfeed whenever
+    # you do something to it. It will be further expanded in the future
+    # but now it is just updated and new
+    # OPTIONS:
+    # -new
+    # -updated
+    actionText = models.CharField(max_length = 200, default = "new")
+
 
     def get_socialCalItems(self):
         #This will call all the social cal events like pictures and post and such and will return a list of all the ids

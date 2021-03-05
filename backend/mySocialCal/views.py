@@ -80,6 +80,7 @@ class SocialCalUploadPic(APIView):
         # Gotta make sure you save()
 
 
+        # SAVED SPOT
         socialCalCell.save()
 
 
@@ -116,6 +117,7 @@ class UpdateSocialCellCoverPic(APIView):
             # This is for a inmemory file object
             socialCalCell.coverPic = request.data['coverImage']
 
+        # SAVED SPOT
         socialCalCell.save()
 
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
@@ -168,6 +170,8 @@ class SocialClippingView(APIView):
             socialCalCell.coverPic = request.data['clipPic'].lstrip("/media")
 
         # Now you have create it and add in the cover pic
+
+        # SAVED SPOT
         socialCalCell.save()
 
 
@@ -200,6 +204,7 @@ class SocialChangeCoverPic(APIView):
 
         socialCalCell.coverPic = curPic
 
+        # SAVED SPOT
         socialCalCell.save()
 
         return Response("Change cover pic")
@@ -270,7 +275,6 @@ class SocialPictureCreateView(APIView):
             image = image.lstrip("/media")
             if socialCalCell.coverPic == "":
                 socialCalCell.coverPic = image
-                socialCalCell.save()
 
             models.SocialCalItems.objects.create(
                 creator = imgOwner,
@@ -279,7 +283,7 @@ class SocialPictureCreateView(APIView):
                 calCell = socialCalCell
             )
 
-
+        # SAVED SPOT
         socialCalCell.save()
 
         return Response("Uploaded pending social picture")
@@ -370,6 +374,8 @@ class SocialCapUploadNewsfeed(APIView):
                 )
 
         # Now save the social cal cell
+
+        # SAVED SPOT
         socialCalCell.save()
 
         # Now you will serialized the socialCalCell
