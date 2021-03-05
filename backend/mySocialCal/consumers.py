@@ -698,15 +698,12 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # This will get all the follewers of the curUser
         userFollowing = curUser.get_following().values("person_getting_followers")
 
-        print(userFollowing)
         # Now get all the users that you are not following and yourself
         notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = data['userId'])
 
         # Now get all the users including you
         userPlusUserFollowing = User.objects.exclude(id__in = notUserFollowing.values_list("id", flat = True))
 
-        print(userPlusUserFollowing)
-        print("this is all your friends")
         curDate = data['curDate']
 
         # post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]

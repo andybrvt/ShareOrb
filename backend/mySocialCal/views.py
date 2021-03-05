@@ -431,11 +431,11 @@ class loadSocialPostView(APIView):
         print(self.request.user)
         # Now add the same filter here similar to the one you have on your consumer
         curUser = get_object_or_404(User, id = self.request.user.id)
-        userFollowing = curUser.following.values("id")
+        userFollowing = curUser.get_following().values("person_getting_followers")
 
         notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = self.request.user.id)
 
-        userPlusUserFollowing = User.objects.exclude(id__in= userFollowing)
+        userPlusUserFollowing = User.objects.exclude(id__in= userFollowing.value_list("id", flat = True))
 
         allPost = models.SocialCellEventPost.objects.all().filter(
         owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
