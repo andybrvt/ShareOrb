@@ -423,6 +423,7 @@
 }
 
 .socialNameTag .socialProfileHolder{
+  cursor: pointer;
   width: 20%;
 }
 .socialNameTag .socialNameHolder{
@@ -440,11 +441,13 @@
   height: 50%;
   font-size: 15px;
   color: black;
+  cursor: pointer;
 }
 .socialNameTag .socialNameHolder .socialUsername{
   height: 50%;
   color: gray;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .socialNameSect .socialDate{

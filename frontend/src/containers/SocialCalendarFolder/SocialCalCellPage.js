@@ -740,6 +740,11 @@ class SocialCalCellPage extends React.Component{
     }
   }
 
+  onProfileClick = (username) => {
+    // This will redirec to the user profile page
+    this.props.history.push("/explore/"+username)
+  }
+
 
   render(){
     console.log(this.props)
@@ -924,6 +929,7 @@ class SocialCalCellPage extends React.Component{
 
                       <div className = "socialProfileHolder">
                         <Avatar
+                          onClick = {() => this.onProfileClick(socialCalUsername)}
                           size = {37.5}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
