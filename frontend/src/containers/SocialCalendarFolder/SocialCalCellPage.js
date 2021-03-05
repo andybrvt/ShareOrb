@@ -826,7 +826,8 @@ class SocialCalCellPage extends React.Component{
 
                   <div className = 'singlePic'>
                     <img
-                    src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage}
+                      class="backgroundPic"
+                      src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage}
                      />
 
 
@@ -1069,9 +1070,10 @@ class SocialCalCellPage extends React.Component{
 
 
                       <div className = 'socialLikeAvatar'>
-
-                        <Liking {...this.props} specifySize={20}
+                        <div class="likingSocialAva">
+                          <Liking {...this.props} specifySize={20}
                           like_people={people_like}/>
+                        </div>
                       </div>
 
                   </div>

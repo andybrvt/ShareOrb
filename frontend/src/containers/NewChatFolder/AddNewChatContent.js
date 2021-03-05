@@ -167,6 +167,7 @@ class AddNewChatContent extends React.Component{
     if(this.props.following){
       following = this.props.following
     }
+    console.log(following)
     // To pick who you want to serach just change the list here
 
 
@@ -178,8 +179,11 @@ class AddNewChatContent extends React.Component{
       // This will make all the select child
       chatOptions.push(
         <Option value = {following[i].id}
+
         label = {this.capitalize(following[i].username)}>
-          {this.capitalize(following[i].username)}
+        <Avatar size={20} style={{marginRight:'10px'}}
+           src= {`${global.IMAGE_ENDPOINT}`+following[i].profile_picture} />
+          {this.capitalize(following[i].first_name)+" "+this.capitalize(following[i].last_name)}
         </Option>
 
       )
@@ -401,7 +405,8 @@ class AddNewChatContent extends React.Component{
           <Select
             mode="multiple"
             // style={{ width: '100%' }}
-            placeholder={<i class="newUserSearchChat fas fa-user"> Search Users </i> }
+            placeholder={<i class="fas fa-user"
+              > <span class="newUserSearchChat"> Search Users</span> </i> }
             onChange={this.handleChange}
             value = {this.state.person}
             optionLabelProp="label"

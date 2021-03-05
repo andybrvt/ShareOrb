@@ -312,11 +312,21 @@ class CurChatManager extends React.Component{
           :
 
           <div className = 'chatRightSideBox'>
-            <Avatar
-              onClick = {() => this.onProfileClick(usernameList)}
-              size = {150}
-              src = {`${global.IMAGE_ENDPOINT}`+profilePic}
-            />
+            {
+              (usernameList)?
+                <Avatar
+                  size = {150}
+                  src = {`${global.IMAGE_ENDPOINT}`+profilePic}
+                />
+
+              :
+
+              <Avatar
+                onClick = {() => this.onProfileClick(usernameList)}
+                size = {150}
+                src = {`${global.IMAGE_ENDPOINT}`+profilePic}
+              />
+          }
 
             <div
               onClick = {() => this.onProfileClick(usernameList)}
