@@ -681,10 +681,24 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # better filtering and such but for now it will just be everything
 
         print(data)
+        curUser = get_object_or_404(User, id = data['userId'])
+
+        # This will get all the follewers of the curUser
+        userFollowing = curUser.following.values("id")
+
+        # Now get all the users that you are not following and yourself
+        notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = data['userId'])
+
+        # Now get all the users including you
+        userPlusUserFollowing = User.objects.exclude(id__in = notUserFollowing.values_list("id", flat = True))
 
         curDate = data['curDate']
 
-        post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
+        # post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
+
+        post_list = SocialCellEventPost.objects.filter(
+        owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        ).order_by('-post_date')[:int(data['startIndex'])]
 
         serializer = SocialCellEventSerializer(post_list, many = True)
 
@@ -692,7 +706,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # of that day if it exist.
 
         # So you will be filtering social cal cell
-        curUser = get_object_or_404(User, id = data['userId'])
 
         # timezone.activate(pytz.timezone("MST"))
         # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")

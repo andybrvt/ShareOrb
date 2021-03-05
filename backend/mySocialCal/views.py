@@ -399,8 +399,21 @@ class loadSocialPostView(APIView):
     # and then just pass it in the back to render the right ones
     def get(self, request, start, addMore, *args, **kwargs):
 
+        print(self.request.user)
+        # Now add the same filter here similar to the one you have on your consumer
+        curUser = get_object_or_404(User, id = self.request.user.id)
+        userFollowing = curUser.following.values("id")
 
-        allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
+        notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = self.request.user.id)
+
+        userPlusUserFollowing = User.objects.exclude(id__in= userFollowing)
+
+        allPost = models.SocialCellEventPost.objects.filter(
+        owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        ).order_by('-post_date')[start:start+addMore]
+
+
+        # allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
         serializer = serializers.SocialCellEventSerializer(allPost, many = True).data
 
         content = {

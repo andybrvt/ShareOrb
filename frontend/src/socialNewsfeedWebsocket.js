@@ -172,11 +172,12 @@ class WebSocketSocialNewsfeed{
     this.callbacks['update_social_cell_post'] = updateSocialCellPost
   }
 
-  fetchSocialPost(userId, curDate){
+  fetchSocialPost(userId, curDate, startIndex){
     // Because of the timezone issue we need to get timezone from front end
     this.sendPostsInfo({
       userId: userId,
       curDate: curDate,
+      startIndex: startIndex,
       command: "fetch_social_posts"
     })
 

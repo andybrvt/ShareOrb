@@ -53,6 +53,7 @@ class NewsFeedView extends React.Component {
 		eventShow:false,
 		checked:false,
 		firstTimeModal:true,
+		upperStart: 6
 	}
 
 	constructor(props){
@@ -60,6 +61,15 @@ class NewsFeedView extends React.Component {
 
 		this.initialiseSocialNewsfeed()
 
+	}
+
+	updateStart = (start) =>{
+		// This function will act as a path to the infinite scroll so that
+		// when the page re renders we wont start at the beginning again
+		console.log('start')
+		this.setState({
+			upperStart: start
+		})
 	}
 
 
@@ -108,7 +118,11 @@ class NewsFeedView extends React.Component {
 		// use to initialize the social newsfeed
 		this.waitForSocialNewsfeedSocketConnection(() => {
 			// You will fetch the social cotnent type here
-			WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id, curDate)
+			WebSocketSocialNewsfeedInstance.fetchSocialPost(
+				this.props.id,
+				curDate,
+				this.state.upperStart
+			)
 		})
 		WebSocketSocialNewsfeedInstance.connect()
 
@@ -165,7 +179,10 @@ class NewsFeedView extends React.Component {
 		WebSocketSocialNewsfeedInstance.disconnect()
 		this.waitForSocialNewsfeedSocketConnection(() => {
 			// Fetch stuff here
-			WebSocketSocialNewsfeedInstance.fetchSocialPost(newProps.id, curDate)
+			WebSocketSocialNewsfeedInstance.fetchSocialPost(
+				newProps.id,
+				curDate,
+				this.state.upperStart)
 
 		})
 		WebSocketSocialNewsfeedInstance.connect()
@@ -183,6 +200,7 @@ class NewsFeedView extends React.Component {
 
 	render() {
 
+		console.log(this.state)
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
 		console.log(this.props)
@@ -337,7 +355,9 @@ class NewsFeedView extends React.Component {
 
 
 
-							<InfiniteScroll data={this.props} />
+							<InfiniteScroll
+								updateStart = {this.updateStart}
+								data={this.props} />
 
 					</div>
 					</div>

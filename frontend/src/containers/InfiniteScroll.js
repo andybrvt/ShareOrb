@@ -135,6 +135,8 @@ class InfiniteList extends React.Component {
         loading:false,
         start: start+addMore
       })
+
+      this.props.updateStart(start+addMore)
     })
     .catch(err => {
       this.setState({
@@ -176,6 +178,7 @@ class InfiniteList extends React.Component {
 
   render () {
     console.log(this.props)
+    console.log(this.state)
     // const { error, hasMore, loading, post} = this.state
     let post = []
 
