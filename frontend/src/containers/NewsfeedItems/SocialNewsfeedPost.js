@@ -607,7 +607,24 @@ class SocialNewsfeedPost extends React.Component {
     let userId = ""
     let postCreatedAt = ""
 
+    let actionText = ""
+
     if(this.props.data) {
+      if(this.props.data.post){
+        const post = this.props.data.post
+        if(post.actionText === "new"){
+          actionText = ' added new pictures to day'
+        }
+        if(post.actionText === "updated"){
+          actionText = " updated current day"
+        }
+        if(post.actionText === "clipped"){
+          actionText = " clipped picture to day"
+        }
+
+
+      }
+
       if(this.props.data.owner){
         if(this.props.data.owner.profile_picture){
           profilePic = this.props.data.owner.profile_picture
@@ -670,8 +687,15 @@ class SocialNewsfeedPost extends React.Component {
                 <span
                   style={{color:'black', fontSize:'15px'}}
                   class="headerPostText alignleft" >
-
-                  {this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}
+                  <span
+                    style = {{
+                      cursor: 'pointer'
+                    }}
+                    onClick = {() => this.onProfileClick(userUsername)}
+                    >
+                    <b>{this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}</b>
+                    <span> {actionText} </span>
+                  </span>
 
                   <b>
                     <span
