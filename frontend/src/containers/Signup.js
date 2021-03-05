@@ -77,6 +77,54 @@ const renderField = (field) => {
   )
 }
 
+const renderBirthDay = (field) => {
+
+  return (
+
+      <DatePicker
+        onChange = {field.input.onChange}
+        value = {field.input.value}
+        suffixIcon = {<div></div>}
+        allowClear = {true}
+        format = {"MM/DD/YYYY"}
+        />
+
+
+  )
+}
+
+const renderPhoneNumber = (field) => {
+  // Typical input field, most use for the title
+  console.log(field)
+  console.log(field.meta)
+  return (
+    <div style = {{
+      position: "relative",
+      height: "50px",
+  }}>
+    <Input
+
+    type = {field.type}
+    value = {normalizeInput(field.input.value)}
+    onChange = {field.input.onChange}
+    placeholder= {field.placeholder}
+    // maxLength = "20"
+    prefix = {field.prefix}
+    />
+
+    {field.meta.touched &&
+      ((field.meta.error && <span style = {{
+        color: 'red'
+      }}>{field.meta.error}</span>) ||
+        (field.meta.warning && <span
+          style = {{
+            color: 'red'
+          }}
+          >{field.meta.warning}</span>))}
+    </div>
+  )
+}
+
 
 
 
@@ -91,6 +139,41 @@ export const phoneNumber = value =>
   value && !/^(0|[1-9][0-9]{9})$/i.test(value)
     ? 'Invalid phone number, must be 10 digits'
     : undefined
+
+
+const validateNumber = value =>
+  value && value.length!== 14 ?
+  "Invalid phone format"
+  : undefined
+
+
+const normalizeInput = (value) => {
+  // convert phone number input
+  console.log(value)
+  if(!value) return value;
+
+  // only allows 0-9 digits
+  let currentValue = value.replace(/[^\d]/g, "");
+  let cvLength = currentValue.length;
+
+  if( value){
+    // returns "x", "xx", "xxx"
+
+    if(cvLength < 4){
+      return currentValue;
+    }
+
+    else if(cvLength< 7){
+      return `(${currentValue.slice(0,3)}) ${currentValue.slice(3)}`
+    } else {
+      return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`;
+    }
+
+
+  }
+}
+
+
 
 const validate = values => {
   const errors = {}
@@ -182,14 +265,36 @@ class Signup extends React.Component {
 
   }
 
+  handlePhoneNumChange = (event, value) => {
+
+    console.log(event)
+    const { change } = this.props
+
+    console.log(normalizeInput(value))
+
+  }
+
+  numberConverter = (number) => {
+    // This function will conver the number back to the right form
+    // it will conver this form (xxx) xxx-xxxx to this form xxxxxxxxxx
+    let phoneNumber = ""
+    phoneNumber = number.slice(1,4)+number.slice(6,9)+number.slice(10, 14)
+    return phoneNumber;
+  }
+
     handleSubmit = (values) => {
+
+      console.log(values)
+
+      const number = this.numberConverter(values.phone_number)
+    console.log(values.dob.format("YYYY-MM-DD"))
      this.props.onAuth(
             values.username,
             values.first_name,
             values.last_name,
-            values.dob,
+            values.dob.format("YYYY-MM-DD"),
             values.email,
-            values.phone_number,
+            number,
             values.password,
             values.confirm,
       )
@@ -197,9 +302,9 @@ class Signup extends React.Component {
       username: values.username,
       first_name: values.first_name,
       last_name: values.last_name,
-      dob: values.dob,
+      dob: values.dob.format("YYYY-MM-DD"),
       email: values.email,
-      phone_number: values.phone_number,
+      phone_number: number,
       password1: values.password,
       password2: values.confirm
     }).then( res => {
@@ -360,69 +465,72 @@ class Signup extends React.Component {
                 */}
 
 
-                  <Field
-                  name = 'dob'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Date of Birth"
-                  prefix={<CalendarOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
+              <div className = "middleSignUpHolder">
+                  {/*
+                    <i
+                      style={{
+                          fontSize:'15px',
+                          color: 'rgba(0,0,0,.25)',
+                          marginRight:'3px',
+                          position: "relative",
+                          top: "50%",
+                          transform: "translateY(-50%)"
+                         }}
+                      class="fas fa-birthday-cake"></i>
+                    */}
+                  <div className = "frontFirstLastName">
+                    <Field
+                    name = 'dob'
+                    component = {renderBirthDay}
+                    type = 'date'
+                    placeholder = "Date of Birth"
+                    // prefix={}
+                    />
 
-
-                <div class="DOBcontainer">
-                  <div class="frontFirstDOB">
-                    <i class="fas fa-birthday-cake" style={{ color: 'rgba(0,0,0,.25)', fontSize:'15px', marginRight:'15px'}}></i>
-                    <Select
-                    name = 'timeStart'
-                    placeholder='Month'
-                    className = ''
-                    style={{ width: 100, marginRight:'15px' }}
-                    showArrow  = {false}
-                    >
-                      {monthSelect}
-                    </Select>
-
-                    <Select
-                    name = 'timeStart'
-                    placeholder='Day'
-                    className = ''
-                    style={{ width: 100, marginRight:'15px' }}
-                    showArrow  = {false}
-                    >
-                      {daySelect}
-                    </Select>
                   </div>
 
-                  <div class="frontLastDOB">
+
+
+
+
+
+                <div className = "backFirstLastName">
+                  {/*
+                    <div>
+                      <i style={{
+                          fontSize:'15px',
+                          color: 'rgba(0,0,0,.25)',
+                          marginRight:'3px',
+                          position: "relative",
+                          top: "50%",
+                          transform: "translateY(-50%)"
+                         }} class="fas fa-map-marker-alt"></i>
+                    </div>
+                    */}
+
                     <Field
-                      name = 'dob'
-                      component = {renderField}
-                      type = 'text'
-                      placeholder = "Year"
+                    name = 'phone_number'
+                    component = {renderPhoneNumber}
+                    type = 'text'
+                    placeholder = "Phone Number"
+                    onChange = {this.handlePhoneNumChange}
+                    validate = {validateNumber}
+                    prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     />
+
                 </div>
+
               </div>
 
-              <div>
-                  <Field
-                  name = 'phone_number'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Location"
-                  validate = {phoneNumber}
-                  prefix={  <i style={{marginRight:'10px'}} style={{ color: 'rgba(0,0,0,.25)', marginRight:'3px' }} class="fas fa-map-marker-alt"></i>}
-                  />
-              </div>
 
               <div>
-                  <Field
-                  name = 'phone_number'
-                  component = {renderField}
-                  type = 'text'
-                  placeholder = "Phone Number"
-                  validate = {phoneNumber}
-                  prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  />
+                <Field
+                name = 'location'
+                component = {renderField}
+                type = 'text'
+                placeholder = "Location"
+                // prefix={}
+                />
               </div>
 
               <div>
@@ -479,6 +587,7 @@ Signup = reduxForm({
   validate
 })(Signup)
 
+const selector = formValueSelector('user sign up')
 
 
 
@@ -486,7 +595,8 @@ const mapStateToProps = (state) => {
     return {
         loading: state.auth.loading,
         errorMessage: state.auth.error,
-        token: state.auth.token
+        token: state.auth.token,
+        phone_number: selector(state, "phone_number")
     }
 }
 
