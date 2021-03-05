@@ -708,9 +708,17 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         # post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
 
-        post_list = SocialCellEventPost.objects.all().filter(
-        owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-        ).order_by('-post_date')[:int(data['startIndex'])]
+        postList = []
+        for user in userPlusUserFollowing:
+            temp = SocialCalEventPost.objects.filter(user = user)
+            for post in temp:
+                postList.append(post.pk)
+
+
+        # post_list = SocialCellEventPost.objects.all().filter(
+        # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        # ).order_by('-post_date')[:int(data['startIndex'])]
+        post_list = SocialCellEventPost.objects.filter(pk__in = postList).order_by('-post_date')[:int(data['startIndex']]
 
         serializer = SocialCellEventSerializer(post_list, many = True)
 
