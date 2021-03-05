@@ -495,10 +495,10 @@ class CalendarPopOver extends React.Component{
                     <div class="popOverMidRight" style={{display:'inline-block', width:'40%'}}>
                      <div class="weekCalPopOverStat">
                        <div class="weekCalPopOverFirst">
-                         <Statistic title="Going" value={item.person.length} />
+                         <Statistic title="Going" value={item.invited.length} />
                        </div>
                        <div class="weekCalPopOverSecond">
-                         <Statistic title="Invited" value={item.invited.length+1} />
+                         <Statistic title="Invited" value={item.person.length} />
                        </div>
 
                      </div>

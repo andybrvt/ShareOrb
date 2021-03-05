@@ -3,7 +3,7 @@ import './EditProfile.css';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Avatar, Divider, DatePicker, TimePicker, Button, Input, Select, Radio, Drawer } from 'antd';
 import { connect } from "react-redux";
-import ChangeProfilePic from '../../../containers/CurrUser/ChangeProfilePic';
+import ChangeBackgroundModal from '../../../containers/PersonalCalendar/EventPage/ChangeBackgroundModal.js';
 import { authAxios } from '../../util';
 
 
@@ -220,6 +220,15 @@ class EditProfileForm extends React.Component{
 
 
         <div>
+
+        <ChangeBackgroundModal
+          pic={this.props.profilePic}
+          visible = {this.state.showUploadModal}
+          close = {this.onCloseChangeProfilePic}
+          onSubmit = {this.handleProfilePicChange}
+        />
+
+
         <Button
 
           type = "primary"
@@ -232,11 +241,6 @@ class EditProfileForm extends React.Component{
         </div>
 
 
-        <ChangeProfilePic
-          visible = {this.state.showUploadModal}
-          onCancel = {this.onCloseChangeProfilePic}
-          onSubmit = {this.handleProfilePicChange}
-         />
 
       </div>
     )

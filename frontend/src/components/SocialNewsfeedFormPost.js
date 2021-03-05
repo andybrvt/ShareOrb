@@ -16,7 +16,7 @@ import { authAxios } from './util';
 import WebSocketPostsInstance from '../postWebsocket';
 import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 import * as dateFns from 'date-fns';
-
+import ImgCrop from 'antd-img-crop';
 const {TextArea} = Input
 
 function getBase64(file) {
@@ -34,7 +34,7 @@ function beforeUpload(file) {
     message.error('You can only upload JPG/PNG file!');
   }
 
-  return file.type === 'image/png';
+  return file.type === 'image/png' || file.type=='image/jpeg';
 }
 
 
@@ -137,18 +137,6 @@ class SocialNewsfeedFormPost extends React.Component{
     handleCancel = () => this.setState({ previewVisible: false });
 
 
-    handlePreview = async file => {
-     if (!file.url && !file.preview) {
-       file.preview = await getBase64(file.originFileObj);
-    }
-
-    this.setState({
-        previewImage: file.url || file.preview,
-        previewVisible: true,
-        previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
-      });
-    };
-
     conditionUploadBox=()=>{
       this.setState({
         cameraShow:true,
@@ -161,7 +149,7 @@ class SocialNewsfeedFormPost extends React.Component{
       });
     }
 
-    handleChange = ({ fileList }) => this.setState({ fileList });
+    handleChange = ({ fileList, info}) => this.setState({ fileList,  });
 
     handleCaptionChange = (e) => {
       this.setState({
@@ -471,18 +459,24 @@ class SocialNewsfeedFormPost extends React.Component{
         >
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
-        <Upload
-            // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList}
-            beforeUpload={beforeUpload}
-            onPreview={this.handlePreview}
-            onChange={this.handleChange}
 
-            name = 'image'
+        <ImgCrop
+          modalWidth={700}
+          modalTitle="Crop Image"
+          modalOk="Crop"
+          aspect={1}
           >
-            {fileList.length >= 8 ? null : uploadButton}
-          </Upload>
+          <Upload
+              listType="picture-card"
+              multiple={true}
+              fileList={fileList}
+              onChange={this.handleChange}
+              beforeUpload={beforeUpload}
+              name = 'image'
+            >
+              {(fileList.length >= 8) ? null : uploadButton}
+            </Upload>
+          </ImgCrop>
 
           <div>
               <Button
