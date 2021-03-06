@@ -83,7 +83,7 @@ class SocialComments extends React.Component{
       <div className = 'socialCommentBoxBox'>
       <div className = 'socialCommentBox'>
       <List
-        style={{marginLeft:'5px', marginTop:'10px', marginBottom:'10px' }}
+        style={{marginLeft:'5px', marginTop:'5px', marginBottom:'10px' }}
         locale={{emptyText:<span/>}}
         className="comment-list"
         itemLayout="horizontal"
