@@ -478,15 +478,19 @@ class SocialNewsfeedPost extends React.Component {
 
 
           </div>
-
-          <div class='RightinnerContainerLike'>
-            <div class="likingPostAvatarGroup">
-              <Liking
-                num={10}
-                specifySize={25}
-                like_people={like_people} {...this.props}/>
+          {
+            (like_people.length!=0)?
+            <div class='RightinnerContainerLike'>
+              <div class="likingPostAvatarGroup">
+                <Liking
+                  num={10}
+                  specifySize={22.5}
+                  like_people={like_people} {...this.props}/>
+              </div>
             </div>
-          </div>
+            :
+            ''
+          }
         </div>
 
       { caption !== "" ?
@@ -693,7 +697,7 @@ class SocialNewsfeedPost extends React.Component {
                     }}
                     onClick = {() => this.onProfileClick(userUsername)}
                     >
-                    <b>{this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}</b>
+                    <span class="boldedText">{this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}</span>
                     <span> {actionText} </span>
                   </span>
 
@@ -756,6 +760,7 @@ class SocialNewsfeedPost extends React.Component {
 
         <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
         {this.revealPhoto()}
+        <Divider style={{'marginTop':'-5px', marginBottom:'-0.5px'}}/>
 
       </div>
 

@@ -108,7 +108,9 @@ class SocialComments extends React.Component{
 
 
                     <div className = 'newsFeedCommentName'>
+                      <span class="boldedText">
                           {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                      </span>
                       <div className = 'newsFeedCommentDate'>
                       {this.renderTimestamp(new Date(item.created_on))}
                       </div>

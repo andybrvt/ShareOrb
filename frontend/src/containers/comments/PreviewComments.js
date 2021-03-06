@@ -6,7 +6,7 @@ import * as dateFns from 'date-fns';
 import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 import {Link, withRouter} from 'react-router-dom';
 class Comments extends React.Component {
-  
+
   state = {
     likes:0,
     dislike:0,
@@ -107,26 +107,30 @@ class Comments extends React.Component {
             <div class="previewCommentRight">
               <div className = 'newsFeedCommentItem'>
                 <div className = 'newsFeedCommentTextSect'>
-                  <div className = "newsFeedCommentNameTime">
-                      <div className = 'newsFeedCommentName'>
-                            {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
-                        <div className = 'newsFeedCommentDate'>
-                        {this.renderTimestamp(new Date(item.created_on))}
-                      </div>
+                  <div className = "previewCommentNameTime">
+                      <div className = 'previewCommentName'>
+                        <span class="previewCommentCaption">
+                          <span class="boldedText">
+                              {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                          </span>
+                        </span>
+                        <span className = 'newsFeedCommentDate'>
+                          {this.renderTimestamp(new Date(item.created_on))}
+                      </span>
                   </div>
                   </div>
-                  <span class="newsfeedCommentUserName">
+                  <span class="previewCommentUserName">
                     {"@"+item.commentUser.username}
                   </span>
                 <div className = "newsFeedCommentBody">
                   <br/>
-                  <div className = 'newsFeedCommentText'>
+                  <div className = 'previewCommentText'>
                     {item.body}
                   </div>
                   <br/>
                   <br/>
                   <br/>
-                  <div class="LikeReplySize">
+                  <div class="previewCommentLikeReply">
                     <i class="far fa-heart" style={{marginRight:'10px'}}></i>
                     Like
                     <Divider type="vertical"/>

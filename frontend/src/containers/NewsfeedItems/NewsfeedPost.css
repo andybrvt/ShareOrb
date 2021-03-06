@@ -139,7 +139,7 @@
   float:right;
   /* background: red; */
   right:3%;
-  top:50%;
+  top:60%;
   transform: translateY(-50%);
 }
 
@@ -544,6 +544,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 .boldedText{
   font-weight: bold;
+  font-family: "Segoe UI Regular"
 }
 
 

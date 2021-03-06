@@ -49,7 +49,7 @@
   padding: 10px;
   display: flex;
   flex-direction: row;
-  font-size: 12px;
+
   font-family: "Segoe UI Regular";
   /* background: red; */
   border-radius: 10px;
@@ -77,7 +77,7 @@
 .newsFeedCommentItem .newsFeedCommentTextSect{
   width: 99%;
 
-  line-height: 150%;
+  line-height: 125%;
 }
 .newsFeedCommentItem .newsFeedCommentTextSect .newsFeedCommentNameTime{
   display: flex;
@@ -88,17 +88,17 @@
 }
 
 .newsFeedCommentName{
-  font-size: 12px;
+  font-size: 13px;
   color:black;
   width:100%;
   font-family: "Segoe UI Regular";
 }
 
 .newsfeedCommentUserName{
-  font-size: 11px;
+  font-size: 12px;
   color:grey;
 }
-.newsFeedCommentItem .newsFeedCommentDate{
+.newsFeedCommentDate{
   /* background-color: red; */
   float:right;
   font-size: 12px;
@@ -106,6 +106,53 @@
   /* top: 10%; */
 
 }
+
+/* start preview comments css */
+.previewCommentName{
+  font-size: 13px;
+  width:100%;
+  font-family: "Segoe UI";
+
+  font-weight: 400;
+
+}
+.previewCommentUserName{
+  font-size: 12px;
+  color:grey;
+}
+
+.previewCommentText{
+  white-space: pre-wrap;
+  position: relative;
+  line-height: 125%;
+  font-size: 13px;
+  /* background: red; */
+  width:100%;
+  /* top: 50%; */
+
+}
+
+.previewCommentCaption{
+  font-family: "Segoe UI";
+
+  font-weight: 400;
+}
+
+.previewCommentNameTime{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  line-height: 50%;
+  font-size: 12px;
+}
+
+.previewCommentLikeReply {
+  font-family: "Segoe UI Regular";
+  font-weight: 400;
+  font-size: 12px;
+}
+
+/* end of preview comment */
 
 .newsFeedCommentItem .newsFeedCommentBody{
   position: relative;

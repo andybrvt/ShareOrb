@@ -936,7 +936,7 @@ class SocialCalCellPage extends React.Component{
                       </div>
 
                      <div className = "socialNameHolder">
-                       <div className = 'socialNameName'>{this.getPageName(socialUser)} </div>
+                       <div className = 'socialNameName boldedText'>{this.getPageName(socialUser)} </div>
                        <div className = 'socialUsername'>@{socialCalUsername}</div>
                      </div>
 
