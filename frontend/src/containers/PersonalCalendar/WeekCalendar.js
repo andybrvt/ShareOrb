@@ -317,8 +317,16 @@ class WeekCalendar extends React.Component{
     const newWeek = [selectedYear, selectedMonth, startWeekDay]
     const newSelectedDate = new Date(newWeek)
     this.props.getSelectedDate(newSelectedDate)
+
+    // The startdate and end date will be used for filtering out the
+    // events to be on the specifc week (you wi9ll do the same for the
+    // month, and day)
+
+    // For month it will be startOfmonth and end of month
+    const startDate = dateFns.format(dateFns.startOfWeek(newSelectedDate), "yyyy-MM-dd HH:mm:ss")
+    const endDate = dateFns.format(dateFns.endOfWeek(newSelectedDate), "yyyy-MM-dd HH:mm:ss")
     // you want to call the events from the redux instead of the states
-    this.props.getEvents()
+    this.props.getEvents(startDate, endDate)
     this.scrollToBottom();
   }
 
@@ -355,6 +363,12 @@ class WeekCalendar extends React.Component{
       const year = dateFns.getYear(newProps.currentDate)
       const month = dateFns.getMonth(newProps.currentDate)
       const day = dateFns.getDate(newProps.currentDate)
+
+      // used to update the event list
+      const startDate = dateFns.format(dateFns.startOfWeek(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
+      const endDate = dateFns.format(dateFns.endOfWeek(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
+      console.log(startDate, endDate)
+      this.props.getEvents(startDate, endDate)
 
 
       this.props.history.push('/personalcalendar/w/'+year+'/'+(month+1)+'/'+day)
@@ -1026,7 +1040,7 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextWeek: () => dispatch(calendarActions.nextWeek()),
     prevWeek: () => dispatch(calendarActions.prevWeek()),
-    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    getEvents: (startDate, endDate) => dispatch(calendarActions.getUserEvents(startDate, endDate)),
     openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
     closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal()),
     openEventDeleteModal: (eventId) => dispatch(calendarEventActions.openEventDeleteModal(eventId)),

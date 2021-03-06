@@ -182,8 +182,9 @@ class SocialClippingView(APIView):
             calCell = socialCalCell
         )
 
-        if socialCalCell.coverPic == '':
-            socialCalCell.coverPic = request.data['clipPic'].lstrip("/media")
+        # Remove to set cover pic
+        # if socialCalCell.coverPic == '':
+        socialCalCell.coverPic = request.data['clipPic'].lstrip("/media")
 
         # Now you have create it and add in the cover pic
 

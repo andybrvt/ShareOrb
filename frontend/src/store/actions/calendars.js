@@ -13,13 +13,17 @@ export const addEvent = events => {
 }
 
 // So you just have to call this in the front end so that it will change the props
-export const getUserEvents = () => {
+export const getUserEvents = (startDate, endDate) => {
   // since we are going to call an action in here so we need to use dispatch
-  console.log('hit')
+  console.log(startDate, endDate)
   return dispatch => {
-    authAxios.get(`${global.API_ENDPOINT}/mycalendar/events`)
+    authAxios.get(`${global.API_ENDPOINT}/mycalendar/filterEvents/`+startDate+"/"+endDate)
     .then(res => dispatch(loadEvents(res.data))
   )};
+  // return dispatch => {
+  //   authAxios.get(`${global.API_ENDPOINT}/mycalendar/oldEvents/`)
+  //   .then(res => dispatch(loadEvents(res.data))
+  // )};
 };
 
 // this will basically just be the middle man

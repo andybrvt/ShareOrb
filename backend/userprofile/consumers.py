@@ -1015,7 +1015,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         following = get_object_or_404(User, id = data['following'])
         followerObjSerial = FollowUserSerializer(follower, many = False).data
         followingObjSerial = FollowUserSerializer(following, many = False).data
-        followerObj = UserFollowing.objects.create(person_following = follower, person_getting_followers = following)
+        followerObj = UserFollowing.objects.get_or_create(person_following = follower, person_getting_followers = following)
 
 
         curUser = get_object_or_404(User, id = data['following'])
@@ -1122,7 +1122,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
 
         # So you create a request model here
-        requestObj = UserFollowingRequest.objects.create(
+        requestObj = UserFollowingRequest.objects.get_or_create(
             send_request = follower,
             accept_request = following
         )

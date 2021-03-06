@@ -335,6 +335,8 @@ class SocialCalCellPage extends React.Component{
             curDate: curDate
           })
 
+          // Probally gonna have to add in redux or something to update this
+
           this.openNotification("bottomRight")
 
 

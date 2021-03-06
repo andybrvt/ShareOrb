@@ -327,6 +327,9 @@ class SocialNewsfeedPost extends React.Component {
       curDate: curDate
     })
 
+    // add redux in or somethign to update this
+    // might not have to actually
+
     this.openNotification("bottomRight")
 
 

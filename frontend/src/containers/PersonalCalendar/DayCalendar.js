@@ -69,7 +69,12 @@ class DayCalendar extends React.Component{
     const newDate = [selectedYear, selectedMonth, selectedDay]
     const newsSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newsSelectedDate)
-    this.props.getEvents()
+
+    console.log(newsSelectedDate)
+    const startDate = dateFns.format(dateFns.startOfDay(newsSelectedDate), "yyyy-MM-dd HH:mm:ss")
+    const endDate = dateFns.format(dateFns.endOfDay(newsSelectedDate), "yyyy-MM-dd HH:mm:ss")
+    console.log(startDate, endDate)
+    this.props.getEvents(startDate, endDate)
   }
 
 
@@ -79,6 +84,11 @@ class DayCalendar extends React.Component{
       const month = dateFns.getMonth(newProps.currentDate)
       const day = dateFns.getDate(newProps.currentDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1)+'/'+day)
+
+      const startDate = dateFns.format(dateFns.startOfDay(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
+      const endDate = dateFns.format(dateFns.endOfDay(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
+      this.props.getEvents(startDate, endDate)
+
     }
   }
 
@@ -609,7 +619,7 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextDay: () => dispatch(calendarActions.nextDay()),
     prevDay: () => dispatch(calendarActions.prevDay()),
-    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    getEvents: (startDate, endDate) => dispatch(calendarActions.getUserEvents(startDate, endDate)),
     openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
     closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
   }
