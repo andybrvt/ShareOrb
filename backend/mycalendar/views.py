@@ -68,9 +68,47 @@ class CalendarEventsView(generics.ListAPIView):
     # inside the personal calendar
     serializer_class = serializers.EventSerializer
     def get_queryset(self):
+        print(self.request)
         user = self.request.user
         queryset = models.Event.objects.filter(person = user).order_by('start_time')
         return queryset
+
+class CalendarNewEventView(APIView):
+    # This function will grab the events similar to the
+    # CalendarEvent
+    def get(self, request, start, end, *args, **kwargs):
+        print(start)
+        print(end)
+        # Now that you can get the start and end date you will now start filering
+        print(self.request.user)
+
+        # first things first grab the user and then filter out the events
+
+        # You need to handle weekly, and daily events
+        user = self.request.user
+
+        userEvent = models.Event.objects.filter(person = user)
+
+        # Weekly events and daily events will always be grabbed bc it occurs
+        # it will always occur
+        userWeeklyEvents = userEvent.filter(repeatCondition = "weekly")
+        userDailyEvents = userEvent.filter(repeatCondition = "daily")
+
+        # Now serialize it and add it to the new serializer
+        serializedWeekly = serializers.EventSerializer(userWeeklyEvents, many = True).data
+        serializedDaily = serializers.EventSerializer(userDailyEvents, many = True).data
+
+        # You want to exclude the events that have weekly and daily so
+        # they dont over lap
+        filterUserEvent = userEvent.filter(start_time__gte = start, start_time__lte = end).exclude(
+        repeatCondition = "weekly").exclude(repeatCondition = "daily")
+
+        print(filterUserEvent)
+        # now serialize it and then return it
+        serializeEvent = serializers.EventSerializer(filterUserEvent, many = True).data
+
+
+        return Response(serializeEvent+serializedWeekly+serializedDaily)
 
 class CalendarCurEventView(generics.ListAPIView):
     # This function will grab all the users event that are current or future

@@ -64,7 +64,14 @@ class PersonalCalendar extends React.Component{
     const newDate = [selectedYear, selectedMonth]
     const newSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newSelectedDate)
-    this.props.getEvents()
+
+    // Since we are doing a whole squere we have to do end of the week too
+    // just for month only tho
+    const startDate = dateFns.format(dateFns.startOfWeek(
+      dateFns.startOfMonth(newSelectedDate)), "yyyy-MM-dd HH:mm:ss")
+    const endDate = dateFns.format(dateFns.endOfWeek(
+      dateFns.endOfMonth(newSelectedDate)), "yyyy-MM-dd HH:mm:ss")
+    this.props.getEvents(startDate, endDate)
   }
 
   componentWillReceiveProps(newProps){
@@ -74,6 +81,13 @@ class PersonalCalendar extends React.Component{
 
       const year = dateFns.getYear(newProps.currentDate)
       const month = dateFns.getMonth(newProps.currentDate)
+
+      const startDate = dateFns.format(dateFns.startOfWeek(
+        dateFns.startOfMonth(newProps.currentDate)), "yyyy-MM-dd HH:mm:ss")
+      const endDate = dateFns.format(dateFns.endOfWeek(
+        dateFns.endOfMonth(newProps.currentDate)), "yyyy-MM-dd HH:mm:ss")
+
+      this.props.getEvents(startDate, endDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1))
     }
     // Instead of reloading the data everytime, the editing of the events is done in the
@@ -469,7 +483,7 @@ const mapDispatchToProps = dispatch => {
     getSelectedDate: selectedDate => dispatch(calendarActions.getDate(selectedDate)),
     nextMonth: () => dispatch(calendarActions.nextMonth()),
     prevMonth: () => dispatch(calendarActions.prevMonth()),
-    getEvents: () => dispatch(calendarActions.getUserEvents()),
+    getEvents: (startDate, endDate) => dispatch(calendarActions.getUserEvents(startDate, endDate)),
     openEventSyncModal: () => dispatch(eventSyncActions.openEventSyncModal()),
     closeEventSyncModal: () => dispatch(eventSyncActions.closeEventSyncModal())
   }
