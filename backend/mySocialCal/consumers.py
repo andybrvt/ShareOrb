@@ -438,7 +438,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         )
 
         if(created == False):
-            socialCalCell.actionText = "updated"
+            socialCell.actionText = "updated"
 
         # So since we are just updating the day caption, we will just update
         # it here
