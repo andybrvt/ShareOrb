@@ -930,7 +930,7 @@ class SocialCalCellPage extends React.Component{
                       <div className = "socialProfileHolder">
                         <Avatar
                           onClick = {() => this.onProfileClick(socialCalUsername)}
-                          size = {37.5}
+                          size = {35}
                           src = {socialCalProfilePic}
                           className = 'socialProfileImage'/>
                       </div>
@@ -1187,7 +1187,7 @@ class SocialCalCellPage extends React.Component{
                  <div className = "socialCommentInputSect">
                    <div className = 'socialCommentInput'>
                      <Avatar
-                     size = {30}
+                     size = {25}
                      className ='socialPicInput'
                      src = {`${global.IMAGE_ENDPOINT}`+ this.props.curProfilePic}/>
                    <div className = 'socialInputFormHolder'>
