@@ -40,6 +40,16 @@ class DayCalendar extends React.Component{
       selectedDate: new Date(),
       events: [],
       activeX: null,
+      showAddEventPopover: false,
+
+      // the temp state willb e used to change the position
+      // of the selected date
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: -1,
+      tempEndDate: -1,
+      tempColor: "blue",
+      tempTitle: "",
   }
 
   onDayHourClick = (positionX) => {
@@ -60,6 +70,72 @@ class DayCalendar extends React.Component{
       return '#91d5ff'
     }
     return '';
+  }
+
+  onTempChange = (values) => {
+    // This function will be in charge of the on change of the states
+    // that will be used to show the tempoaray event
+    console.log(this.props.parameter)
+    console.log(values)
+
+    // The values that come in you have to check if they fall within the
+    // week of the current week. So what you have to do is get teh date
+    // from the url and then check it on the start date to see if it fall
+    // within if not then you do a push
+    const selectedYear = this.props.parameter.year;
+    const selectedMonth = this.props.parameter.month;
+    const startWeekDay = this.props.parameter.day;
+
+    const curWeek = [selectedYear, selectedMonth, startWeekDay]
+    const curStartSelectedDate = dateFns.startOfWeek(new Date(curWeek))
+
+    // now check if the selected date falls wtih the cur week
+
+    if(values.startDate){
+      const pickedDate = new Date(values.startDate);
+
+      const startPickedDate = dateFns.startOfWeek(pickedDate)
+
+      if(!dateFns.isSameWeek(curStartSelectedDate, pickedDate)){
+        const pickedYear = dateFns.getYear(startPickedDate)
+        const pickedMonth= dateFns.getMonth(startPickedDate)+1
+        const pickedDay = dateFns.getDate(startPickedDate)
+
+
+        this.props.history.push('/personalcalendar/w/'+pickedYear+'/'+pickedMonth+'/'+pickedDay)
+      }
+
+    }
+
+    console.log(curStartSelectedDate)
+    // Now you will get the start of the week
+
+
+    this.setState({
+
+      tempStart: values.startTime,
+      tempEnd: values.endTime,
+      tempStartDate: values.startDate,
+      tempEndDate: values.endDate,
+      tempColor: values.eventColor,
+      tempTitle: values.title,
+    })
+
+
+
+  }
+
+  onClearEditTextInfo = () => {
+    // This is used to clear out the events whne you submit
+    this.setState({
+      showAddEventPopover: false,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: -1,
+      tempEndDate: -1,
+      tempColor: "blue",
+      tempTitle: "",
+    })
   }
 
   componentDidMount(){
@@ -365,6 +441,37 @@ class DayCalendar extends React.Component{
           {border}
         </div>
         <div className = 'dayBody'>
+          {/*
+            <Popover
+              placement = 'right'
+              visible = {this.state.showAddEventPopover}
+              content = {
+                <div>
+                  <EditEventPopUp
+                  onChange = {this.onTempChange}
+                  // isVisible = {this.props.showModal}
+                  close = {this.onClearEditTextInfo}
+                  // dayNum={dateFns.format(selectedDate, 'd')}
+
+                  />
+                </div>
+              }>
+
+              <div
+                className = "weekEvent"
+                style = {{
+                  display: this.state.tempStart === -1 ? "none": "",
+                  gridColumn:
+                }}
+                >
+
+              </div>
+
+            </Popover>
+
+            */}
+
+
           {hours}
         </div>
       </div>

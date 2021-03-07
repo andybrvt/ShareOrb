@@ -753,9 +753,7 @@ class WeekCalendar extends React.Component{
       {border}
 
       </div>
-      <div
-
-        className= 'weekBody'>
+      <div className= 'weekBody'>
 
 
         <Popover
