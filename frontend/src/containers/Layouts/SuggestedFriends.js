@@ -252,6 +252,7 @@ class SuggestedFriends extends React.Component {
           itemLayout="horizontal"
           loadMore={loadMore}
           dataSource={list}
+          locale={{emptyText:<span/>}}
           renderItem={item => (
 
             <List.Item>

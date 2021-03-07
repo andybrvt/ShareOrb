@@ -162,6 +162,7 @@ class SocialEventGroupChat extends React.Component{
         </div>
         <div className = "messageList">
         <List
+             locale={{emptyText:<span/>}}
              itemLayout="horizontal"
              dataSource={messages}
              renderItem={item => (

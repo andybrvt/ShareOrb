@@ -1,3 +1,9 @@
+
+.ant-select-selection.ant-select-selection--single > div > div > div > div {
+  margin-top: -20px;
+}
+
+
 .label {
   font-size: 30px;
 }
@@ -56,6 +62,9 @@
   font-size: 20px;
   width: 300px;
 }
+
+
+
 
 .reduxLocation .aim {
   font-size: 25px;

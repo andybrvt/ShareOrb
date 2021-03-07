@@ -117,16 +117,21 @@ class PictureCarousel extends React.Component{
             )
           }
           if(item.socialItemType === "picture"){
+
+
             socialItems.push(
-              <div className = 'picturesRoll'>
+              <div class="picturesRoll">
+              <div className = 'singlePic'>
 
 
                 <img
-                className = 'socialImages'
+
                 src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
 
               </div>
+                </div>
             )
+
           }
 
         }

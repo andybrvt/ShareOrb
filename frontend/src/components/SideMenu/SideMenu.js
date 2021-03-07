@@ -412,6 +412,11 @@ class SideMenu extends React.Component {
                   <div className = "autoCompleteHeader">
                     <AutoComplete
                       dataSource={temp}
+                      dropdownRender={menu => (
+                        <div style={{ transform: "translateY(-6px)", marginBottom:'0px' }}>
+                          {menu}
+                        </div>
+                      )}
                       style = {{width:'62.25%', height:'10%'}}
                       filterOption={(inputValue, option) =>
                          option.value.includes(inputValue)

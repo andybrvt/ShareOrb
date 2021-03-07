@@ -56,6 +56,12 @@ const renderFriendSelect = (field) => {
   return (
     <Select
     mode="multiple"
+    notFoundContent=""
+    dropdownRender={menu => (
+      <div style={{ transform: "translateY(-4px)", marginBottom:'0px' }}>
+        {menu}
+      </div>
+    )}
     style={{ width: '50%', marginTop:'20px'}}
     optionLabelProp="label"
     onChange = {field.input.onChange}
@@ -547,7 +553,7 @@ class ReduxEditEventForm extends React.Component{
 
       for (let friend = 0; friend< friendList.length; friend++ ){
         shareOptions.push(
-          <Option value = {friendList[friend].username}
+          <Option locale={{emptyText:<span/>}} value = {friendList[friend].username}
           label = {
             this.capitalize(friendList[friend].first_name)+" "+this.capitalize(friendList[friend].last_name)
           } >
@@ -735,6 +741,7 @@ class ReduxEditEventForm extends React.Component{
               <Field
               name = 'friends'
               type='text'
+
               onChange = {this.handleFriendChange}
               component = {renderFriendSelect}
               placeholder = 'Title'
