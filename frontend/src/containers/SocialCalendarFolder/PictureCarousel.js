@@ -121,15 +121,15 @@ class PictureCarousel extends React.Component{
 
             socialItems.push(
               <div class="picturesRoll">
-              <div className = 'singlePic'>
+
 
 
                 <img
-
+                class="socialImages"
                 src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
 
               </div>
-                </div>
+              
             )
 
           }
