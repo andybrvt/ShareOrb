@@ -214,9 +214,9 @@ const validate = values => {
   }
 
   if(values.password){
-    if(values.password.length < 8){
+    if(values.password.length < 9){
       // validate if the password is longer than 8 characters
-      errors.password = "New password must be at least 9 characters long."
+      errors.password = "New password must be at least 10 characters long."
     } else if(values.password.search(/[A-Z]/)< 0){
       // Validates if it has an uppercase
       errors.password = "New password must have an upper case letter."
