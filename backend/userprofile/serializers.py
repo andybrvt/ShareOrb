@@ -299,13 +299,12 @@ class RegisterSerializer(serializers.Serializer):
     last_name = serializers.CharField(required=True, write_only=True)
     dob = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
-    phone_number = serializers.CharField(required=False, write_only=True)
     password1 = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
 
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'number', 'dob', 'first_name', 'last_name', 'email', 'phone_number', 'password1 ', 'password2')
+        fields = ('id', 'username', 'dob', 'first_name', 'last_name', 'email', 'password1 ', 'password2')
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
@@ -315,13 +314,22 @@ class RegisterSerializer(serializers.Serializer):
                     ("A user is already registered with this e-mail address."))
         return email
 
+    def validate_username(self, username):
+        username = get_adapter().clean_username(username)
+        if models.User.objects.filter(username = username).exists():
+            raise serializers.ValidationError(
+                ("The username already exist.")
+            )
+        return username
+
     def validate_password1(self, password):
         return get_adapter().clean_password(password)
 
     def validate(self, data):
         if data['password1'] != data['password2']:
             raise serializers.ValidationError(
-                _("The two password fields didn't match."))
+                ("The two password fields didn't match."))
+
         return data
 
     def get_cleaned_data(self):

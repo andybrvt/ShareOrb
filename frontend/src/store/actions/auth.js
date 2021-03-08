@@ -29,7 +29,6 @@ export const addCredentials = (
    profilePic,
    following,
    followers,
-   phone_number,
    email,
    dob,
    privatePro,
@@ -51,7 +50,6 @@ export const addCredentials = (
     profilePic: profilePic,
     following: following,
     followers: followers,
-    phone_number: phone_number,
     email:email,
     dob: dob,
     private: privatePro,
@@ -91,7 +89,6 @@ export const logout = () => {
   localStorage.removeItem('following')
   localStorage.removeItem('followers')
   localStorage.removeItem('suggestedFriends')
-  localStorage.removeItem('phone_number')
   localStorage.removeItem('email')
   localStorage.removeItem('dob')
   localStorage.removeItem('private')
@@ -203,7 +200,6 @@ export const grabUserCredentials = () => {
         const profilePic = res.data.profile_picture;
         const following = res.data.get_following;
         const followers = res.data.get_followers;
-        const phone_number = res.data.phone_number;
         const email = res.data.email;
         const dob = res.data.dob;
         const privatePro = res.data.private;
@@ -220,7 +216,6 @@ export const grabUserCredentials = () => {
         localStorage.setItem('profilePic', profilePic);
         localStorage.setItem('following', following);
         localStorage.setItem('followers', followers);
-        localStorage.setItem('phone_number', phone_number );
         localStorage.setItem('email', email);
         localStorage.setItem('dob', dob);
         localStorage.setItem('private', privatePro)
@@ -238,7 +233,6 @@ export const grabUserCredentials = () => {
            res.data.profile_picture,
            res.data.get_following,
            res.data.get_followers,
-           res.data.phone_number,
            res.data.email,
            res.data.dob,
            res.data.private,

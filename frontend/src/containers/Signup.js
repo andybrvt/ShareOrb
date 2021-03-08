@@ -288,7 +288,7 @@ class Signup extends React.Component {
 
       console.log(values)
 
-      const number = this.numberConverter(values.phone_number)
+      // const number = this.numberConverter(values.phone_number)
     console.log(values.dob.format("YYYY-MM-DD"))
      this.props.onAuth(
             values.username,
@@ -296,7 +296,6 @@ class Signup extends React.Component {
             values.last_name,
             values.dob.format("YYYY-MM-DD"),
             values.email,
-            number,
             values.password,
             values.confirm,
       )
@@ -306,7 +305,6 @@ class Signup extends React.Component {
       last_name: values.last_name,
       dob: values.dob.format("YYYY-MM-DD"),
       email: values.email,
-      phone_number: number,
       password1: values.password,
       password2: values.confirm
     }).then( res => {
@@ -347,13 +345,13 @@ class Signup extends React.Component {
       console.log(err)
       console.log(err.response)
       if(err.response){
-        if(err.response.status === 500){
-          throw new SubmissionError({username: "User name already exist"})
-
-        } else {
+        // if(err.response.data === 500){
+        //   throw new SubmissionError({username: "User name already exist"})
+        //
+        // } else {
           this.props.authFail(err.response.data)
           throw new SubmissionError(err.response.data)
-        }
+        // }
       } else {
         this.props.history.push('/home')
         window.location.reload();
