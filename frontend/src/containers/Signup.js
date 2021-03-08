@@ -82,6 +82,8 @@ const renderBirthDay = (field) => {
   return (
 
       <DatePicker
+        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+        placeholder= "Date of Birth"
         onChange = {field.input.onChange}
         value = {field.input.value}
         suffixIcon = {<div></div>}
@@ -483,8 +485,7 @@ class Signup extends React.Component {
                     name = 'dob'
                     component = {renderBirthDay}
                     type = 'date'
-                    placeholder = "Date of Birth"
-                    // prefix={}
+
                     />
 
                   </div>
@@ -507,7 +508,7 @@ class Signup extends React.Component {
                          }} class="fas fa-map-marker-alt"></i>
                     </div>
                     */}
-
+                    {/*
                     <Field
                     name = 'phone_number'
                     component = {renderPhoneNumber}
@@ -517,23 +518,16 @@ class Signup extends React.Component {
                     validate = {validateNumber}
                     prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     />
-
+                    */}
                 </div>
 
               </div>
 
 
-              <div>
-                <Field
-                name = 'location'
-                component = {renderField}
-                type = 'text'
-                placeholder = "Location"
-                // prefix={}
-                />
-              </div>
 
               <div>
+
+                <br/>
                   <Field
                   name = 'password'
                   component = {renderField}

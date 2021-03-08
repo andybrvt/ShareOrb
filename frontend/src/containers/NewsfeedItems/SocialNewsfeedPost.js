@@ -741,8 +741,11 @@ class SocialNewsfeedPost extends React.Component {
                  <div class="optionNoPostHeader"> </div>
 
                 <span class="headerPostText alignright" style={{fontSize:'13px'}} >
+                  {/*
                   <i style={{marginRight:'10px'}} class="fas fa-map-marker-alt"></i>
-                    Tucson, Arizona <br/>
+                    Tucson, Arizona
+                    */}
+
                   <span style={{float:'right'}}>
                       {this.renderTimestamp(postCreatedAt)}
                   </span>
