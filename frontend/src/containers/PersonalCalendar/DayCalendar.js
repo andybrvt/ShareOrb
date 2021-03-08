@@ -35,6 +35,16 @@ import CalendarPopOver from './CalendarPopOver.js';
 
 
 class DayCalendar extends React.Component{
+
+  constructor(props) {
+        super(props)
+        this.myRef = React.createRef()
+        this.eventRef = React.createRef()
+        this.wrapperRef = React.createRef()
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this)
+    }
+
   state ={
       currentDay: new Date(),
       selectedDate: new Date(),
@@ -51,6 +61,29 @@ class DayCalendar extends React.Component{
       tempColor: "blue",
       tempTitle: "",
   }
+
+  handleClickOutside(event) {
+    console.log(event.target)
+    console.log(this.wrapperRef)
+    console.log("does this hit")
+
+    // var popoverElement = document.getElementById
+      if (this.wrapperRef && this.wrapperRef.current.contains(event.target)) {
+        this.setState({
+          showAddEventPopover: false,
+          tempStart: -1,
+          tempEnd: -1,
+          tempStartDate: -1,
+          tempEndDate: -1,
+          tempColor: "blue",
+          tempTitle: "",
+        })
+      }
+    }
+
+   setWrapperRef(node) {
+     this.wrapperRef = node;
+   }
 
   onDayHourClick = (positionX) => {
     console.log(positionX)
@@ -139,6 +172,9 @@ class DayCalendar extends React.Component{
   }
 
   componentDidMount(){
+    document.addEventListener('mousedown', this.handleClickOutside);
+
+
     const selectedYear = this.props.parameter.year;
     const selectedMonth = this.props.parameter.month;
     const selectedDay = this.props.parameter.day;
@@ -151,6 +187,22 @@ class DayCalendar extends React.Component{
     const endDate = dateFns.format(dateFns.endOfDay(newsSelectedDate), "yyyy-MM-dd HH:mm:ss")
     console.log(startDate, endDate)
     this.props.getEvents(startDate, endDate)
+  }
+
+  scrollToEvent = () => {
+    if(this.eventEnd){
+      this.eventEnd.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  componentDidUpdate() {
+    // this.scrollToBottom();
+    this.scrollToEvent()
+  }
+
+
+  componentWillUnmount() {
+      document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
 
@@ -264,6 +316,11 @@ class DayCalendar extends React.Component{
   renderCells(events) {
 
     console.log(events)
+
+    let tempTitle = ""
+    if(this.state.tempTitle){
+      tempTitle = this.state.tempTitle
+    }
     const selectedDate = this.props.currentDate
     const startHourDay = dateFns.startOfDay(selectedDate)
     const endHourDay = dateFns.endOfDay(selectedDate)
@@ -412,25 +469,25 @@ class DayCalendar extends React.Component{
         </Popover>
         */}
       border.push(
-        <Popover trigger="click" onClick = {() =>
-            this.addEventClick(selectedDate, cloneHour)}  content={<div>
-          <EditEventPopUp
-          isVisible = {this.props.showModal}
-          close = {() => this.props.closeModal()}
-          dayNum={dateFns.format(selectedDate, 'd')}
-
-          />
-          </div>}>
 
             <div
-            style = {{background: this.color(hourIndex)}}
-            onClick = {(e)=> this.onDayHourClick(hourIndex)}
-            className = {`${(hourIndex%2 === 0)? 'dayCellT' : 'dayCellB'}`}
-            // onClick = {() => this.onHourClick(cloneHour)}
+              onClick = {() => this.addEventClick(selectedDate, cloneHour)}
+              className = {`backWeekCol ${hourIndex % 2 === 0 ? 'dayCellT' : 'dayCellB' }` }
             >
+            { hourIndex === 13 ?
+
+              <div style={{ float:"left", clear: "both" }}
+                  ref={(el) => { this.messagesEnd = el; }}>
+             </div>
+
+             :
+
+             <div>
+             </div>
+
+            }
             </div>
 
-          </Popover>
       )
       toDoStuff = []
       hour = dateFns.addMinutes(hour, 30);
@@ -441,9 +498,9 @@ class DayCalendar extends React.Component{
           {border}
         </div>
         <div className = 'dayBody'>
-          {/*
+
             <Popover
-              placement = 'right'
+              // placement = 'left'
               visible = {this.state.showAddEventPopover}
               content = {
                 <div>
@@ -458,18 +515,33 @@ class DayCalendar extends React.Component{
               }>
 
               <div
+                ref={(el) => { this.eventEnd = el; }}
+
                 className = "weekEvent"
                 style = {{
                   display: this.state.tempStart === -1 ? "none": "",
-                  gridColumn:
+                  gridColumn: this.dayEventIndex(this.state.tempStartDate, this.state.tempEndDate),
+                  gridRow: this.hourEventIndex(this.state.tempStart, this.state.tempEnd),
+                  backgroundColor: this. state.tempColor
                 }}
                 >
+                <span className = "pointerEvent">
+                  <div className = "eventPageTitle pointerEvent">
+                    {tempTitle.substring(0, 19)}
+                  </div>
+
+                  <div className = 'eventTimeInfo pointerEvent'>
+                    {this.state.tempStart}
+                    -
+                    {this.state.tempEnd}
+                  </div>
+                </span>
 
               </div>
 
             </Popover>
 
-            */}
+
 
 
           {hours}
@@ -487,6 +559,12 @@ class DayCalendar extends React.Component{
     //  meet those requirements
     // We only need the start and end time tho so all the other fields can
     // be empty
+
+
+    this.setState({
+      showAddEventPopover: true,
+    })
+
     let endDate = ''
     const specificHour = dateFns.getHours(hour)
     const specificMinute = dateFns.getMinutes(hour)
@@ -525,41 +603,136 @@ class DayCalendar extends React.Component{
   }
 
 
-  dayEventIndex = (start_time, end_time, start_index) =>{
-    // This function is used to get the index for the grid values for each of the events
-    // you will basically get the differnece between the start and end time and add it to the
-    // starting index and then you will then add one for any extra 30 mins (there is more math involved
-    // but that is the gist of it)
-    console.log(start_time,end_time, start_index)
-    let bottomIndex = ''
-    const start = new Date(start_time)
-    const end = new Date(end_time)
-    const actualStartIndex = (start_index)+1
-    const startHour = dateFns.getHours(start)
-    const endHour = dateFns.getHours(end)
-    const startMin = dateFns.getMinutes(start)
-    const endMin = dateFns.getMinutes(end)
-    // for the numberator of the index you want to go from the starting index
-    // and then decide if you add 1 or not depending if there is a 30 mins
-    const topIndex = (actualStartIndex)
-    // For the denominator you have to start from the starting index and then add
-    // the number of indexes depending on the hour and then add one if there is a
-    // 30 min mark
+  // dayEventIndex = (start_time, end_time, start_index) =>{
+  //   // This function is used to get the index for the grid values for each of the events
+  //   // you will basically get the differnece between the start and end time and add it to the
+  //   // starting index and then you will then add one for any extra 30 mins (there is more math involved
+  //   // but that is the gist of it)
+  //   console.log(start_time,end_time, start_index)
+  //   let bottomIndex = ''
+  //   const start = new Date(start_time)
+  //   const end = new Date(end_time)
+  //   const actualStartIndex = (start_index)+1
+  //   const startHour = dateFns.getHours(start)
+  //   const endHour = dateFns.getHours(end)
+  //   const startMin = dateFns.getMinutes(start)
+  //   const endMin = dateFns.getMinutes(end)
+  //   // for the numberator of the index you want to go from the starting index
+  //   // and then decide if you add 1 or not depending if there is a 30 mins
+  //   const topIndex = (actualStartIndex)
+  //   // For the denominator you have to start from the starting index and then add
+  //   // the number of indexes depending on the hour and then add one if there is a
+  //   // 30 min mark
+  //
+  //   if (startMin === 30 && endMin === 0){
+  //     if (endHour === startHour +1){
+  //       bottomIndex = topIndex+(Math.abs(endMin-startMin)/30)
+  //     }
+  //     else {
+  //       bottomIndex = topIndex + ((endHour - startHour))+(Math.abs(endMin-startMin)/30)
+  //     }
+  //   } else {
+  //       bottomIndex = topIndex + ((endHour - startHour)*2)+(Math.abs(endMin - startMin)/30)
+  //   }
+  //
+  //   const ratio = topIndex + '/' + bottomIndex
+  //   console.log(ratio)
+  //   return ratio
+  // }
 
-    if (startMin === 30 && endMin === 0){
-      if (endHour === startHour +1){
-        bottomIndex = topIndex+(Math.abs(endMin-startMin)/30)
+  dayEventIndex = (startDate, endDate) => {
+
+    // Simlar to taht of the dayEventIndex in calednarpoppover but the only input
+    // will be that of the startDate
+     if(startDate === -1 || endDate === -1){
+       return "-1"
+     } else {
+       console.log(new Date(startDate))
+       const curStartDate = new Date(startDate)
+       const curEndDate = new Date(endDate)
+       const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
+       const startWeek = dateFns.startOfWeek(curStartDate)
+       const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
+
+
+       let startIndex = dayDiff+1
+       let endIndex = startIndex+curDayDiff+ 1
+
+       console.log(dayDiff)
+       console.log(curDayDiff)
+
+       return startIndex+'/'+endIndex
+
+     }
+
+
+
+  }
+
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+
+    console.log(time)
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    console.log(minutes)
+    console.log(hour)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
       }
-      else {
-        bottomIndex = topIndex + ((endHour - startHour))+(Math.abs(endMin-startMin)/30)
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
       }
-    } else {
-        bottomIndex = topIndex + ((endHour - startHour)*2)+(Math.abs(endMin - startMin)/30)
     }
 
-    const ratio = topIndex + '/' + bottomIndex
-    console.log(ratio)
-    return ratio
+    const timeBundle = {
+      firstHour: hour,
+      firstMin: minutes
+    }
+
+    return timeBundle
+
+  }
+
+  hourEventIndex = (start_time, end_time ) => {
+
+    // Simlar to that of the hourEvent index of the calendarpopover
+    // but because the inputs are in the format "HH:MM am" there is a bit of a
+    // change
+
+    console.log(start_time, end_time)
+    if(start_time === -1 || end_time === -1){
+      return "-1"
+    } else if(start_time && end_time){
+      const start = this.timeConvert(start_time)
+      const end = this.timeConvert(end_time)
+      console.log(start, end)
+      let startIndex = (start.firstHour * 2) +1
+      if(start.firstMin === 30){
+        startIndex = startIndex +1
+      }
+
+      let endIndex = end.firstHour * 2
+      if(end.firstMin === 30){
+        endIndex = endIndex + 1
+      }
+      endIndex = endIndex +1
+
+      return startIndex+"/"+endIndex
+
+
+    }
+
+
   }
 
 
@@ -642,7 +815,10 @@ class DayCalendar extends React.Component{
     console.log(this.props)
     console.log(this.props.currentDate)
     return (
-      <div className = 'calendarContainer'>
+      <div
+        ref={this.wrapperRef}
+
+        className = 'calendarContainer'>
         <EventSyncModal
           {...this.props}
           isVisble = {this.props.showEventSyncModal}
