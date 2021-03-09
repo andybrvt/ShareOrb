@@ -17,6 +17,8 @@ import WebSocketPostsInstance from '../postWebsocket';
 import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 import * as dateFns from 'date-fns';
 import ImgCrop from 'antd-img-crop';
+import "./SocialNewsfeedFormPost.css";
+
 const {TextArea} = Input
 
 function getBase64(file) {
@@ -460,31 +462,36 @@ class SocialNewsfeedFormPost extends React.Component{
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
 
-        <ImgCrop
-          modalWidth={700}
-          modalTitle="Crop Image"
-          modalOk="Crop"
-          aspect={1}
-          >
-          <Upload
-              listType="picture-card"
-              multiple={true}
-              fileList={fileList}
-              onChange={this.handleChange}
-              beforeUpload={beforeUpload}
-              name = 'image'
+        <div className = "uploadOverFlow">
+          <ImgCrop
+            modalWidth={700}
+            modalTitle="Crop Image"
+            modalOk="Crop"
+            aspect={1}
             >
-              {(fileList.length >= 8) ? null : uploadButton}
-            </Upload>
-          </ImgCrop>
+            <Upload
+                listType="picture-card"
+                multiple={true}
+                fileList={fileList}
+                onChange={this.handleChange}
+                beforeUpload={beforeUpload}
+                name = 'image'
+              >
+                {(fileList.length >= 8) ? null : uploadButton}
+              </Upload>
+            </ImgCrop>
 
-          <div>
-              <Button
-                disabled = {this.handleValidation()}
-                style={{fontSize:'24px', }} shape="round" type="primary"
-                style={{float:'right', marginRight:'25px'}}
-                onClick={this.onFormSubmit}>Update</Button>
-          </div>
+
+
+        </div>
+
+        <div>
+            <Button
+              disabled = {this.handleValidation()}
+              style={{fontSize:'24px', }} shape="round" type="primary"
+              style={{float:'right', marginRight:'25px'}}
+              onClick={this.onFormSubmit}>Update</Button>
+        </div>
 
         <Modal
           visible = {this.state.confirmationVisible}
