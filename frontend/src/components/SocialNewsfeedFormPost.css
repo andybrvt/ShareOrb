@@ -1,0 +1,6 @@
+.uploadOverFlow{
+  /* background-color: red; */
+  overflow: auto;
+  position: relative;
+  height: 25%;
+}
