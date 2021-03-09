@@ -774,7 +774,7 @@ class WeekCalendar extends React.Component{
 
 
         <div
-          ref={(el) => { this.eventEnd = el; }}
+          // ref={(el) => { this.eventEnd = el; }}
            // key= {item.title}
            className = "weekEvent"
            style = {{

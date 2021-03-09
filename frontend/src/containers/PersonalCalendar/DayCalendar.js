@@ -515,7 +515,7 @@ class DayCalendar extends React.Component{
               }>
 
               <div
-                ref={(el) => { this.eventEnd = el; }}
+                // ref={(el) => { this.eventEnd = el; }}
 
                 className = "weekEvent"
                 style = {{
