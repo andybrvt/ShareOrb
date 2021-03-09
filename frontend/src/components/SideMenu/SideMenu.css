@@ -1,4 +1,9 @@
 /* CSS used here will be applied after bootstrap.css */
+.searchResultName{
+  line-height: 0%;
+}
+
+
 
 .badgeOuter{
   position: absolute;
