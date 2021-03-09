@@ -209,12 +209,14 @@ class WeekCalendar extends React.Component{
 
     // Simlar to taht of the dayEventIndex in calednarpoppover but the only input
     // will be that of the startDate
+    console.log(startDate, endDate)
      if(startDate === -1 || endDate === -1){
        return "-1"
      } else {
        console.log(new Date(startDate))
        const curStartDate = new Date(startDate)
        const curEndDate = new Date(endDate)
+       console.log(curStartDate, curEndDate)
        const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
        const startWeek = dateFns.startOfWeek(curStartDate)
        const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
@@ -223,8 +225,16 @@ class WeekCalendar extends React.Component{
        let startIndex = dayDiff+1
        let endIndex = startIndex+curDayDiff+ 1
 
+       console.log(this.state.tempStart)
        console.log(dayDiff)
        console.log(curDayDiff)
+       if(this.state.tempStart === "11:00 PM" || this.state.tempStart === "11:30 PM"){
+         // handle the next day
+         console.log(startIndex)
+         endIndex = startIndex + 1
+         return startIndex+'/'+ endIndex
+         
+       }
 
        return startIndex+'/'+endIndex
 
@@ -258,6 +268,14 @@ class WeekCalendar extends React.Component{
       }
       endIndex = endIndex +1
 
+      console.log(startIndex+"/"+endIndex)
+      if(startIndex === 47){
+        // handle the condition where the time is at 11pm
+          return startIndex+"/"+49
+      }
+      if(startIndex === 48){
+        return startIndex +"/"+ 49
+      }
       return startIndex+"/"+endIndex
 
 
