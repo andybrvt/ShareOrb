@@ -500,3 +500,41 @@
   font-size: 25px;
   color: white;
 }
+
+
+/* These css will be for the drawer that opens up */
+.drawDeleteButton{
+  float: left;
+  margin-right: 50px;
+}
+
+.drawCancelUpdateButton{
+  float: right;
+  margin-right: 50px;
+}
+.drawUpdateButton{
+  left: 20px;
+  font-size: 15px;
+}
+
+.socialEventForm{
+}
+.socialReduxTitle{
+  width: 100%;
+  padding-bottom: 15px;
+  /* background-color: red; */
+}
+
+.socialReduxTitle .box{
+  border: none;
+  border-bottom: 2px solid deepskyblue;
+  font-size: 24px;
+  height: 40px;
+  width: 350px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+.socialReduxTitle .box:focus{
+  box-shadow: none;
+  border-bottom: 2px solid deepskyblue;
+}

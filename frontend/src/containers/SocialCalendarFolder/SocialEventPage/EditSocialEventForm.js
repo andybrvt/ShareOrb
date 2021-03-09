@@ -9,6 +9,7 @@ import axios from 'axios';
 import { authAxios } from '../../../components/util';
 import { Drawer, DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import './SocialEventPage.css';
 
 // import { connect } from 'react-redux';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
@@ -518,9 +519,41 @@ class EditSocialEventForm extends React.Component{
           width = {500}
           visible = {this.props.visible}
           onClose = {() => this.props.onClose()}
+          // bodyStyle={{ paddingBottom: 80 }}
+
+          footer = {
+            <div>
+              <div className = "drawDeleteButton">
+                <Button
+                  onClick = {() => this.props.onDelete()}
+                  type="primary"
+                  danger
+                >
+                Delete Event
+                </Button>
+              </div>
+
+
+              <div className = "drawCancelUpdateButton">
+
+                <Button
+                  onClick={() =>this.props.onClose()}>
+                Cancel
+                </Button>
+                <Button
+                type = 'primary'
+                onClick = {handleSubmit}
+                className = "drawUpdateButton"
+                disabled = {pristine || invalid || this.onRed()}
+                >Update</Button>
+                </div>
+
+
+              </div>
+          }
           >
-          <form style={{padding:'25px'}}>
-              <div className = 'reduxTitle'>
+          <form className = "socialEventForm" >
+              <div className = 'socialReduxTitle'>
                 <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
 
                 </Button>
@@ -536,7 +569,7 @@ class EditSocialEventForm extends React.Component{
               </div>
 
 
-              <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
+              <div style={{display:'flex', height:'30px'}} className = 'pointerEvent outerContainerPeople'>
                 <div class="innerContainerPeople">
                   <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
@@ -587,7 +620,8 @@ class EditSocialEventForm extends React.Component{
 
               <br />
               <div className  = 'reduxContent'>
-              <i class="fas fa-align-justify" style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
+              <i class="fas fa-align-justify"
+                style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
 
                 <Field
                 name = 'content'
@@ -617,23 +651,6 @@ class EditSocialEventForm extends React.Component{
 
 
               </div>
-
-
-
-                <div className = 'reduxButton'>
-                <Button
-                onClick = {() => this.props.onDelete()}
-                >
-                Delete
-                </Button>
-                <Button
-                type = 'primary'
-                onClick = {handleSubmit}
-                style = {{left: '10px', fontSize: '15px'}}
-                disabled = {pristine || invalid || this.onRed()}
-                >Save</Button>
-                </div>
-
 
 
           </form>
