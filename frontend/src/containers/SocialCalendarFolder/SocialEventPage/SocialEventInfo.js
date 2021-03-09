@@ -14,6 +14,8 @@ import { ReactBingmaps } from 'react-bingmaps';
 import {Link, withRouter} from 'react-router-dom';
 import DetailEditEventForm from '../../PersonalCalendar/EventPage/DetailEditEventForm';
 import UserAvaCarousel from './UserAvaCarousel';
+import moment from 'moment';
+
 
 const { TabPane } = Tabs;
 
@@ -34,6 +36,12 @@ class SocialEventInfo extends React.Component{
     if(str){
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
+
+  }
+
+  dayConvert = () => {
+    // this function will convert the time into the new date
+    // time
 
   }
 
@@ -106,6 +114,7 @@ class SocialEventInfo extends React.Component{
     if(this.props.info){
       let title = "";
       let content = "";
+      let event_day = ""
       const start_time = this.timeFormater(this.props.info.start_time)
       const end_time = this.timeFormater(this.props.info.end_time)
       if(this.props.info.title){
@@ -116,12 +125,18 @@ class SocialEventInfo extends React.Component{
         content = this.props.info.content
       }
 
+      if(this.props.info.event_day){
+        event_day = moment(this.props.info.event_day, "YYYY-MM-DD")
+      }
+
+      console.log(event_day)
       console.log(start_time, end_time)
 
 
       return {
         title: this.capitalize(title),
         content: this.capitalize(content),
+        event_day: event_day,
         startTime: start_time,
         endTime: end_time,
         location: this.props.info.location,
