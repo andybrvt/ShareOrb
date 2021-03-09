@@ -54,7 +54,7 @@ class WeekCalendar extends React.Component{
   constructor(props) {
         super(props)
         this.myRef = React.createRef()
-        this.eventRef = React.createRef()
+        // this.eventRef = React.createRef()
         this.wrapperRef = React.createRef()
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this)
@@ -345,7 +345,7 @@ class WeekCalendar extends React.Component{
   }
   componentDidUpdate() {
     // this.scrollToBottom();
-    this.scrollToEvent()
+    // this.scrollToEvent()
   }
 
   componentWillUnmount() {

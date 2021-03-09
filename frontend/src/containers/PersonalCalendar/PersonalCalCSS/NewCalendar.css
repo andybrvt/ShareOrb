@@ -1121,7 +1121,7 @@ controls all colors and font weight */
 
 /* cell of the week */
 .weekEvent{
-  position: absolute;
+  position: relative;
   color: white;
   /* padding-top: 2px; */
   /* margin-bottom: 100px; */

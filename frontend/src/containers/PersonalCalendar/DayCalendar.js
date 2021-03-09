@@ -642,6 +642,7 @@ class DayCalendar extends React.Component{
 
   dayEventIndex = (startDate, endDate) => {
 
+    console.log(startDate, endDate)
     // Simlar to taht of the dayEventIndex in calednarpoppover but the only input
     // will be that of the startDate
      if(startDate === -1 || endDate === -1){
@@ -660,8 +661,10 @@ class DayCalendar extends React.Component{
 
        console.log(dayDiff)
        console.log(curDayDiff)
+       console.log(startIndex)
+       console.log(endIndex)
 
-       return startIndex+'/'+endIndex
+       return '1/2'
 
      }
 
