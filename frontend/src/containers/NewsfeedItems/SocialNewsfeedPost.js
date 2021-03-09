@@ -674,18 +674,22 @@ class SocialNewsfeedPost extends React.Component {
             <span class="topleftNewsFeedPost">
               {
                 profilePic != '' ?
+               <Link to={"/explore/"+userUsername} >
                 <Avatar
                 size="large"
-                onClick = {() => this.goToPage(userUsername)}
+
                 size={42}
                 style = {{cursor: 'pointer'}}
                 src={`${global.IMAGE_ENDPOINT}`+profilePic} alt="avatar" />
+                </Link>
               :
+                <Link to={"/explore/"+userUsername} >
                 <Avatar
-                onClick = {() => this.goToPage(userUsername)}
+
                 size="large"
                 style = {{cursor: 'pointer' }}
                 src={`${global.IMAGE_ENDPOINT}`+defaultPic} alt="avatar" />
+                </Link>
             }
             </span>
 
