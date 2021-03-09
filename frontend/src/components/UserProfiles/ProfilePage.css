@@ -24,11 +24,6 @@
   height: 55%;
 }
 
-.spinnerHolder{
-  
-}
-
-
 
 /* CSS for onRenderTabs
 STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
@@ -39,7 +34,7 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
  position:relative;
  font-family: 'Segoe UI Regular';
  width: 100%;
- height: 90%;
+ height: 100%;
  background-color: #ffffff;
  /* border-bottom: 1px solid #f0f0f0;  */
 }

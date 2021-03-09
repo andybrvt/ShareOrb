@@ -148,7 +148,7 @@ class UserEventList extends React.Component{
                   <div className = 'picBox'>
                     <img
                     className = "picBoxPic"
-                    src = {`${global.API_ENDPOINT}`+socialEventList[i].backgroundImg} />
+                    src = {`${global.IMAGE_ENDPOINT}`+socialEventList[i].backgroundImg} />
                   </div>
                 }
               </div>
@@ -219,7 +219,7 @@ class UserEventList extends React.Component{
                           <Avatar
                            size = {24}
                            onClick = { () => this.profileDirect(socialEventList[i].host.username)}
-                           src = {`${global.API_ENDPOINT}`+socialEventList[i].host.profile_picture}
+                           src = {`${global.IMAGE_ENDPOINT}`+socialEventList[i].host.profile_picture}
                          />
                         </div>
                      <div className = "hostName">
@@ -347,7 +347,9 @@ class UserEventList extends React.Component{
 
       return <div className = "eventListContainer"> {boxes} </div>
     } else {
-      return <div> No Events </div>
+      return <div class="noSocialEvent">
+        <i class="fas fa-calendar-times"></i> &nbsp;
+         No Social Events </div>
     }
   }
 

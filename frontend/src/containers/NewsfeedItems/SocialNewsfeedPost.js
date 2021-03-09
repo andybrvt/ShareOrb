@@ -248,6 +248,12 @@ class SocialNewsfeedPost extends React.Component {
       testLike:false,
     });
   };
+  goToPage=(userName)=> {
+      this.props.history.push({
+      pathname:"/explore/"+userName,
+
+      })
+    }
 
   OnClickPost=(calUsername, cellYear, cellMonth, cellDay, location)=> {
     // This is used to open up the social cell day post modal
@@ -668,41 +674,37 @@ class SocialNewsfeedPost extends React.Component {
             <span class="topleftNewsFeedPost">
               {
                 profilePic != '' ?
-              <Link to={"/explore/"+userUsername} >
                 <Avatar
                 size="large"
-                onClick = {() => this.onProfileClick(userUsername)}
+                onClick = {() => this.goToPage(userUsername)}
                 size={42}
                 style = {{cursor: 'pointer'}}
                 src={`${global.IMAGE_ENDPOINT}`+profilePic} alt="avatar" />
-              </Link>
-
               :
-              <Link to={"/explore/"+userUsername} >
                 <Avatar
-                onClick = {() => this.onProfileClick(userUsername)}
+                onClick = {() => this.goToPage(userUsername)}
                 size="large"
                 style = {{cursor: 'pointer' }}
                 src={`${global.IMAGE_ENDPOINT}`+defaultPic} alt="avatar" />
-              </Link>
             }
-
             </span>
 
             <span class="topRightNewsFeedPost">
-
                 <span
                   style={{color:'black', fontSize:'15px'}}
                   class="headerPostText alignleft" >
-                  <span
-                    style = {{
-                      cursor: 'pointer'
-                    }}
-                    onClick = {() => this.onProfileClick(userUsername)}
-                    >
-                    <span class="boldedText">{this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}</span>
-                    <span> {actionText} </span>
-                  </span>
+
+                    <span
+                      style = {{
+                        cursor: 'pointer'
+                      }}
+                      onClick = {() => this.goToPage(userUsername)}
+                      >
+
+                        <span class="boldedText">{this.capitalize(userFirstName)+" "+this.capitalize(userLastName)}</span>
+
+                      <span> {actionText} </span>
+                    </span>
 
                   <b>
                     <span
@@ -750,14 +752,8 @@ class SocialNewsfeedPost extends React.Component {
                       {this.renderTimestamp(postCreatedAt)}
                   </span>
                 </span>
-
             </span>
           </span>
-
-
-
-
-
 
     </span>
 
@@ -829,26 +825,20 @@ class SocialNewsfeedPost extends React.Component {
       return (
       <div>
         <div>
-
-
-        <Modal
-          class="modalOuterContainer"
-          title={`Likes on Post`}
-          visible={this.state.testLike}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          width="600px"
-          height="1000px"
-          style={{marginTop:'-50px'}}
-          >
-          <LikeList {...this.props}/>
-        </Modal>
-
-
-        </div>
-
-        <p>{this.ContentOfPic()}</p>
-
+            <Modal
+              class="modalOuterContainer"
+              title={`Likes on Post`}
+              visible={this.state.testLike}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              width="600px"
+              height="1000px"
+              style={{marginTop:'-50px'}}
+              >
+              <LikeList {...this.props}/>
+            </Modal>
+          </div>
+          <p>{this.ContentOfPic()}</p>
         </div>
   );
 };
