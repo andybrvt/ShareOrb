@@ -141,6 +141,7 @@ class SideMenu extends React.Component {
   }
 
   handleSearch = (value) => {
+    console.log(value)
    this.setState({
      dataSource: ['test1', 'test2', 'test3']
    });

@@ -56,6 +56,15 @@ class LoginForm extends React.Component {
     this.setState({login: true })
   };
 
+  errorShow = () => {
+    // This function will the error when they give an error
+    if(this.props.error){
+      return "Incorrect username or password"
+    }
+
+    return ""
+  }
+
   render() {
     console.log(this.state)
     console.log(this.props)
@@ -106,13 +115,19 @@ class LoginForm extends React.Component {
                        size="middle"
                        prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                        placeholder="Enter Password"/>
-                  </Form.Item>
+                     <div style = {{
+                         color: "red"
+                       }}>
+                     {this.errorShow()}
+                   </div>
+                </Form.Item>
                   {/*
                   <Form.Item name="remember" valuePropName="checked">
                     <Checkbox>Remember me</Checkbox>
                   </Form.Item>
 
                   */}
+
 
                   <Form.Item>
                     <Button

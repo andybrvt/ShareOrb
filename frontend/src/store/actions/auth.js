@@ -175,6 +175,7 @@ export const authLogin = (username, password) => {
 
         })
           .catch(err => {
+            console.log(err.response)
             dispatch(authFail(err));
           });
   };
