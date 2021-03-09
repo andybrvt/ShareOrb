@@ -7,7 +7,7 @@ import { Form } from '@ant-design/compatible';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { authAxios } from '../../../components/util';
-import { DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
+import { Drawer, DatePicker, TimePicker, Button, Input, Select, Radio } from 'antd';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 // import { connect } from 'react-redux';
@@ -511,124 +511,138 @@ class EditSocialEventForm extends React.Component{
     }
 
     return (
-      <form style={{padding:'25px'}}>
-          <div className = 'reduxTitle'>
-            <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
 
-            </Button>
-            <Field
-            name = 'title'
-            component= {renderField}
-            type= 'text'
-            placeholder = 'Title'
+      <div>
 
-            />
+        <Drawer
+          width = {500}
+          visible = {this.props.visible}
+          onClose = {() => this.props.onClose()}
+          >
+          <form style={{padding:'25px'}}>
+              <div className = 'reduxTitle'>
+                <Button style={{float:'left', marginRight:'15px', display:'inline-block'}} type="primary" shape="circle" size={'large'}>
 
-
-          </div>
-
-
-          <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
-            <div class="innerContainerPeople">
-              <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
-
-
-
-                 <Field
-                   style={{display: 'inline-block',float: 'left'}}
-                   name = 'startTime'
-                   component = {renderStartTimeSelect}
-                   onChange = {this.handleStartTimeChange}
-                   >
-                   {renderStartTime()}
-                 </Field>
-
-                 <Field
-                   style={{display: 'inline-block', marginRight:'15px'}}
-                   name = 'endTime'
-                   onChange = {this.handleEndTimeChange}
-                   component = {renderStartTimeSelect}
-                   >
-                   {this.renderEndTimeSelect()}
-                 </Field>
-            </div>
-          </div>
-
-
-
-          {/* need to implement redux form to people */}
-      {/*
-        <div>
-
-            <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
-            <Field
-            name = 'friends'
-            type='text'
-            onChange = {this.handleFriendChange}
-            component = {renderFriendSelect}
-            placeholder = 'Title'
-            >
-              {this.renderShareListSelect()}
-            </Field>
-
-
-          </div>
-
-        */}
-
-
-          <br />
-          <div className  = 'reduxContent'>
-          <i class="fas fa-align-justify" style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
-
-            <Field
-            name = 'content'
-            component= {renderTextArea}
-            type= 'text'
-            placeholder = 'Description'
-            />
-          </div>
-
-
-          {/* location */}
-          <div style={{height:'70px'}} className = 'outerContainerPeople'>
-            <div class="innerContainerPeople">
-              <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
-              <Field
-                name = 'location'
-                placeholder="Location"
-                component= {renderLocationField}
+                </Button>
+                <Field
+                name = 'title'
+                component= {renderField}
                 type= 'text'
+                placeholder = 'Title'
+
+                />
 
 
-              />
-            <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
-
-          </div>
+              </div>
 
 
-
-          </div>
-
-
-
-            <div className = 'reduxButton'>
-            <Button
-            onClick = {() => this.props.onDelete()}
-            >
-            Delete
-            </Button>
-            <Button
-            type = 'primary'
-            onClick = {handleSubmit}
-            style = {{left: '10px', fontSize: '15px'}}
-            disabled = {pristine || invalid || this.onRed()}
-            >Save</Button>
-            </div>
+              <div style={{display:'flex', height:'30px', width:'600px'}} className = 'pointerEvent outerContainerPeople'>
+                <div class="innerContainerPeople">
+                  <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
 
 
-      </form>
+                     <Field
+                       style={{display: 'inline-block',float: 'left'}}
+                       name = 'startTime'
+                       component = {renderStartTimeSelect}
+                       onChange = {this.handleStartTimeChange}
+                       >
+                       {renderStartTime()}
+                     </Field>
+
+                     <Field
+                       style={{display: 'inline-block', marginRight:'15px'}}
+                       name = 'endTime'
+                       onChange = {this.handleEndTimeChange}
+                       component = {renderStartTimeSelect}
+                       >
+                       {this.renderEndTimeSelect()}
+                     </Field>
+                </div>
+              </div>
+
+
+
+              {/* need to implement redux form to people */}
+          {/*
+            <div>
+
+                <i style={{marginLeft:'10px', marginRight:'21px'}} class="fas fa-user-friends"></i>
+                <Field
+                name = 'friends'
+                type='text'
+                onChange = {this.handleFriendChange}
+                component = {renderFriendSelect}
+                placeholder = 'Title'
+                >
+                  {this.renderShareListSelect()}
+                </Field>
+
+
+              </div>
+
+            */}
+
+
+              <br />
+              <div className  = 'reduxContent'>
+              <i class="fas fa-align-justify" style={{marginLeft:'10px', marginRight:'25px', display: "inline"}}></i>
+
+                <Field
+                name = 'content'
+                component= {renderTextArea}
+                type= 'text'
+                placeholder = 'Description'
+                />
+              </div>
+
+
+              {/* location */}
+              <div style={{height:'70px'}} className = 'outerContainerPeople'>
+                <div class="innerContainerPeople">
+                  <i class="fas fa-globe-americas"  style={{marginLeft:'10px', marginRight:'25px'}} ></i>
+                  <Field
+                    name = 'location'
+                    placeholder="Location"
+                    component= {renderLocationField}
+                    type= 'text'
+
+
+                  />
+                <AimOutlined style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
+
+              </div>
+
+
+
+              </div>
+
+
+
+                <div className = 'reduxButton'>
+                <Button
+                onClick = {() => this.props.onDelete()}
+                >
+                Delete
+                </Button>
+                <Button
+                type = 'primary'
+                onClick = {handleSubmit}
+                style = {{left: '10px', fontSize: '15px'}}
+                disabled = {pristine || invalid || this.onRed()}
+                >Save</Button>
+                </div>
+
+
+
+          </form>
+
+
+        </Drawer>
+
+      </div>
+
     )
   }
 

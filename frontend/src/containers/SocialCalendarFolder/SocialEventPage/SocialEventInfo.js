@@ -70,15 +70,18 @@ class SocialEventInfo extends React.Component{
     // NEED FIXING xxx
 
     // This will change the format of the time properly to the 1-12 hour
-    // console.log(time)
-    // const timeList = time.split(':')
-    // let hour = parseInt(timeList[0])
-    // let minutes = timeList[1]
-    // var suffix  = hour >= 12 ? "PM":"AM"
-    //
-    // console.log(11%12)
-    // hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
-    // return hour
+    console.log(time)
+    let timeList = []
+    if(time){
+      timeList = time.split(':')
+    }
+    let hour = parseInt(timeList[0])
+    let minutes = timeList[1]
+    var suffix  = hour >= 12 ? "PM":"AM"
+
+    console.log(11%12)
+    hour = ((hour+11)%12+1)+':'+minutes+" "+ suffix
+    return hour
 
   }
 
@@ -112,6 +115,8 @@ class SocialEventInfo extends React.Component{
       if(this.props.info.content){
         content = this.props.info.content
       }
+
+      console.log(start_time, end_time)
 
 
       return {
@@ -911,7 +916,7 @@ class SocialEventInfo extends React.Component{
         onDelete = {this.onDeleteSocialEvent}
         />
 
-        <DetailEditEventForm
+      <EditSocialEventForm
         {...this.props}
         visible={this.state.edit}
         initialValues = {this.getInitialValue()}
