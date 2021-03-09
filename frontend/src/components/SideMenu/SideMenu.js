@@ -289,7 +289,7 @@ class SideMenu extends React.Component {
     const temp=[]
     this.state.profileList.forEach(item => {
       temp.push(
-        <Option value = {item.first_name+' '+item.last_name}
+        <Option value = {item.first_name+' '+item.last_name+" "+item.username}
         label = {this.capitalize(item.username)}>
           <div style={{padding:'9px'}}>
             <Avatar
@@ -420,9 +420,9 @@ class SideMenu extends React.Component {
                       )}
                       style = {{width:'62.25%', height:'10%'}}
                       filterOption={(inputValue, option) =>
-
-                         option.value.includes(inputValue)
+                         option.value.includes(inputValue.toLowerCase())
                       }
+
                       onSearch={this.handleSearch}
                       onSelect={this.onSelect}
                       dropdownClassName="searchBarContainer"
