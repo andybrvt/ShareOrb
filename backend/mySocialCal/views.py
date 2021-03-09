@@ -436,7 +436,7 @@ class loadSocialPostView(APIView):
 
         notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = self.request.user.id)
 
-        userPlusUserFollowing = User.objects.exclude(id__in= userFollowing.value_list("id", flat = True))
+        userPlusUserFollowing = User.objects.exclude(id__in= userFollowing.values_list("id", flat = True))
 
         allPost = models.SocialCellEventPost.objects.all().filter(
         owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
