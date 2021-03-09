@@ -15,8 +15,10 @@ class NoChatsScreen extends React.Component{
     return (
       <div className= "noChatsScreen">
       <div className = "noChatsWord">
+        <i class="fas fa-comments"></i> &nbsp;
         No chats available
       </div>
+      <br/>
         <div className = "createChatButtonContainer">
         <Button
         onClick = {() => this.onClickAddChats()}

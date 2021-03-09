@@ -155,32 +155,29 @@ class PersonalProfile extends React.Component{
       <div className = 'profile-tabContainer'>
         <div style={{
         background:'white'}} >
+
         <Steps
           type="navigation"
           size="large"
           current={this.state.current}
           onChange={this.onChange}>
-          <Step title="Calendar"
+          <Step title="Social Calendar"
             style = {{
               cursor: "pointer"
             }}
             icon={<i class="far fa-calendar-alt"></i>} />
           {/*  PersonalProfilePostList.js */}
-          <Step title="Posts"
-            style = {{
-              cursor: "pointer"
-            }}
-            onClick = {() => this.onPostTabClick()}
-            icon={<i class="far fa-edit"></i>} />
+
           {/*  PersonalProfileEventList.js */}
           <Step
-            title="Events"
+            title="Social Events"
             style = {{
               cursor: "pointer"
             }}
             onClick = {() => this.onEventTabClick()}
             icon={<i class="fas fa-users"></i>} />
         </Steps>
+        <Divider style={{marginTop:'0px'}}/>
         </div>
         <div className = 'profile-tabPanel'>
             <SocialCalendar {...this.props}/>

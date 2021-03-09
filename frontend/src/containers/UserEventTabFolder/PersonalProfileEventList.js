@@ -143,30 +143,20 @@ class PersonalProfileEventList extends React.Component{
         <Steps
           type="navigation"
           size="large"
-          current={2}
+          current={1}
           onChange={this.onChange}>
           <Step
-            title="Calendar"
+            title="Social Calendar"
             onClick = {() => this.onCalendarTabClick()}
             icon={<i class="far fa-calendar-alt"></i>}
             style = {{
               cursor: "pointer"
             }}
              />
-
-          {/*  PersonalProfilePostList.js */}
-          <Step title="Posts"
-            onClick = {() => this.onPostTabClick()}
-            icon={<i class="far fa-edit"></i>}
-            style = {{
-              cursor: "pointer"
-            }}
-             />
-
           {/*  PersonalProfileEventList.js */}
 
           <Step
-            title="Events"
+            title="Social Events"
 
             onClick = {() => this.onEventTabClick()}
             icon={<i class="fas fa-users"></i>}
@@ -175,6 +165,7 @@ class PersonalProfileEventList extends React.Component{
             }}
             />
         </Steps>
+        <Divider style={{marginTop:'0px'}}/>
         </div>
           <UserEventList
           events = {this.props.profile.get_socialEvents}

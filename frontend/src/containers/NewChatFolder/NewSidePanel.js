@@ -161,6 +161,7 @@ class NewSidePanel extends React.Component{
     return(
       <div className = "newSidePanel">
       <List
+        locale={{emptyText:<span/>}}
         itemLayout="horizontal"
         dataSource={chatList}
         renderItem={item => (
