@@ -177,8 +177,7 @@ class InfiniteList extends React.Component {
   };
 
   render () {
-    console.log(this.props)
-    console.log(this.state)
+
     // const { error, hasMore, loading, post} = this.state
     let post = []
 

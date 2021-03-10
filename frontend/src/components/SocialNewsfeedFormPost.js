@@ -18,7 +18,7 @@ import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 import * as dateFns from 'date-fns';
 import ImgCrop from 'antd-img-crop';
 import "./SocialNewsfeedFormPost.css";
-
+import heic2any from "heic2any";
 const {TextArea} = Input
 
 function getBase64(file) {
@@ -36,7 +36,7 @@ function beforeUpload(file) {
     message.error('You can only upload JPG/PNG file!');
   }
 
-  return file.type === 'image/png' || file.type=='image/jpeg';
+  return file.type === 'image/png' || file.type==='image/jpeg';
 }
 
 
@@ -151,7 +151,62 @@ class SocialNewsfeedFormPost extends React.Component{
       });
     }
 
-    handleChange = ({ fileList, info}) => this.setState({ fileList,  });
+
+      // handleChange = ({ fileList, info }) => {
+      //
+      //   if (info.file.originFileObj.type === "") {
+      //     console.log("hi")
+      //   fetch(URL.createObjectURL(info.file.originFileObj))
+      //     .then((res) => res.blob())
+      //     .then((blob) => heic2any({ blob, toType: "image/jpeg" }))
+      //     .then((conversionResult) => {
+      //       console.log("HEIC");
+      //       this.setState({ fileList });
+      //     })
+      //     .catch((e) => {
+      //       console.log("error");
+      //
+      //     });
+      // } else {
+      //   this.setState({ fileList });
+      // }
+      //
+      //
+      // }
+
+
+
+    handleChange = ({ fileList, info}) => {
+      console.log(info)
+      console.log(fileList)
+      console.log((fileList.length)-1)
+      console.log(fileList[fileList.length-1].originFileObj)
+      // console.log(fileList[fileList.length-1].originFileObj)
+
+      if (fileList[fileList.length-1].originFileObj.type === "") {
+          console.log("hi")
+        fetch(URL.createObjectURL(fileList[fileList.length-1].originFileObj))
+          .then((res) => res.blob())
+          .then((blob) => heic2any({ blob, toType: "image/jpeg" }))
+          .then((conversionResult) => {
+            console.log("HEIC");
+            console.log(conversionResult)
+             fileList[fileList.length-1].url.replace(conversionResult,"")
+             console.log(fileList[fileList.length-1].originFileObj)
+            this.setState({ fileList });
+          })
+          .catch((e) => {
+            console.log("error");
+
+          });
+      } else {
+        this.setState({ fileList });
+      }
+
+
+
+    }
+
 
     handleCaptionChange = (e) => {
       this.setState({
@@ -463,23 +518,29 @@ class SocialNewsfeedFormPost extends React.Component{
         </Modal>
 
         <div className = "uploadOverFlow">
+
+          {/*}
           <ImgCrop
             modalWidth={700}
             modalTitle="Crop Image"
             modalOk="Crop"
             aspect={1}
+            onChange={this.handleChange}
+            beforeUpload={beforeUpload}
             >
+            */}
             <Upload
                 listType="picture-card"
                 multiple={true}
                 fileList={fileList}
                 onChange={this.handleChange}
                 beforeUpload={beforeUpload}
+
                 name = 'image'
               >
                 {(fileList.length >= 8) ? null : uploadButton}
               </Upload>
-            </ImgCrop>
+
 
 
 

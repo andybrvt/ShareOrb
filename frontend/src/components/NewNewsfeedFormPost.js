@@ -14,8 +14,7 @@ import { PlusOutlined, CameraOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import { authAxios } from './util';
 import WebSocketPostsInstance from '../postWebsocket';
-
-
+import heic2any from "heic2any";
 // DO NOT USE ANY MORE
 
 
@@ -80,7 +79,27 @@ class NewNewsfeedFormPost extends React.Component{
       });
     }
 
-    handleChange = ({ fileList }) => this.setState({ fileList });
+    handleChange = ({ fileList, info }) => {
+
+      if (info.file.originFileObj.type === "") {
+        console.log("hi")
+      fetch(URL.createObjectURL(info.file.originFileObj))
+        .then((res) => res.blob())
+        .then((blob) => heic2any({ blob, toType: "image/jpeg" }))
+        .then((conversionResult) => {
+          console.log("HEIC");
+          this.setState({ fileList });
+        })
+        .catch((e) => {
+          console.log("error");
+
+        });
+    } else {
+      this.setState({ fileList });
+    }
+
+
+    }
 
     handleCaptionChange = (e) => {
       this.setState({

@@ -289,7 +289,7 @@ class SideMenu extends React.Component {
     const temp=[]
     this.state.profileList.forEach(item => {
       temp.push(
-        <Option value = {item.first_name+' '+item.last_name+" "+item.username}
+        <Option value = {item.username+' '+item.first_name+' '+item.last_name}
         label = {this.capitalize(item.username)}>
           <div style={{padding:'9px'}}>
             <Avatar
