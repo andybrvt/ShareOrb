@@ -119,6 +119,19 @@ const renderStartTime = () => {
     return time
   }
 
+  const renderStartDate = (field) => {
+    console.log(field)
+    return (
+      <DatePicker
+      // onChange = {field.input.onChange}
+      value = {field.input.value}
+      style = {{width: '110px', marginRight:'15px'}}
+      suffixIcon={<div></div>}
+      allowClear = {false}
+       />
+    )
+  }
+
   const renderFriendSelect = (field) => {
 
     //THIS WILL BE CHANGED TO BE INVITE LIST THAT INCLUDES ALL YOUR FOLLOWERS AND FOLLWOING
@@ -573,6 +586,13 @@ class EditSocialEventForm extends React.Component{
                 <div class="innerContainerPeople">
                   <i style={{marginLeft:'10px', marginRight:'25px'}}  class="fas fa-clock"></i>
 
+                      <Field
+                        class="pointerEvent"
+                        name = 'event_day'
+                        component = {renderStartDate}
+                        // onChange = {this.onStartDateChange}
+                        type = 'date'
+                      />
 
 
                      <Field
@@ -679,6 +699,7 @@ export default connect(state => ({
   title: selector(state, 'title'),
   content: selector(state, 'content'),
   location: selector(state, 'location'),
+  event_day: selector(state, "eventDay"),
   startTime: selector(state, 'startTime'),
   endTime: selector(state, 'endTime'),
 }))(EditSocialEventForm);
