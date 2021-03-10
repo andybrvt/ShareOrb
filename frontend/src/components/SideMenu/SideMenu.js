@@ -37,6 +37,7 @@ import {
   Badge,
   Select,
   Option,
+  Form
 } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
@@ -145,6 +146,20 @@ class SideMenu extends React.Component {
    this.setState({
      dataSource: ['test1', 'test2', 'test3']
    });
+ }
+
+ onChangeNewSearch = e => {
+
+   console.log(e.target.value)
+   // Now that you have the response, now you would want to search for it
+   // in the backend
+   const search = e.target.value === undefined ? null : e.target.value
+
+   authAxios.get(`${global.API_ENDPOINT}/userprofile/userSearch/`, {
+     params: {
+       search
+     }
+   })
  }
 
  onOpenDropDown = () =>{
@@ -411,27 +426,37 @@ class SideMenu extends React.Component {
 
                 <div className = "searchBarContainer">
                   <div className = "autoCompleteHeader">
-                    <AutoComplete
-                      dataSource={temp}
-                      dropdownRender={menu => (
-                        <div style={{ transform: "translateY(-6px)", marginBottom:'0px' }}>
-                          {menu}
-                        </div>
-                      )}
-                      style = {{width:'62.25%', height:'10%'}}
-                      filterOption={(inputValue, option) =>
-                         option.value.includes(inputValue.toLowerCase())
-                      }
 
-                      onSearch={this.handleSearch}
-                      onSelect={this.onSelect}
-                      dropdownClassName="searchBarContainer"
-                      class="">
-                    {/*search bar*/}
-                      <Input.Search
-                        class="inputSearchCSS"
-                        compact placeholder="Search" />
-                    </AutoComplete>
+                    <div>
+                      <Form onChange = {this.onChangeNewSearch}>
+
+                        <Input />
+                      </Form>
+                    </div>
+                    {/*
+                      <AutoComplete
+                        dataSource={temp}
+                        dropdownRender={menu => (
+                          <div style={{ transform: "translateY(-6px)", marginBottom:'0px' }}>
+                            {menu}
+                          </div>
+                        )}
+                        style = {{width:'62.25%', height:'10%'}}
+                        filterOption={(inputValue, option) =>
+                           option.value.includes(inputValue.toLowerCase())
+                        }
+
+                        onSearch={this.handleSearch}
+                        onSelect={this.onSelect}
+                        dropdownClassName="searchBarContainer"
+                        class="">
+
+                        <Input.Search
+                          class="inputSearchCSS"
+                          compact placeholder="Search" />
+                      </AutoComplete>
+                      */}
+
                  </div>
                 </div>
 

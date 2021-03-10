@@ -18,6 +18,7 @@ router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
 
 urlpatterns = [
 	path('', include(router.urls)),
+	path('userSearch/', views.UserSearchView.as_view(), name= "main_search" ),
 	path('user-id/', views.UserIDView.as_view()),
 	path('current-user/', views.current_user),
 	path('<slug:username>/', views.UserDetailView.as_view()),

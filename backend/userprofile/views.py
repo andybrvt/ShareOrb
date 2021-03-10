@@ -163,7 +163,6 @@ class FriendRequestList(generics.ListAPIView):
 	serializer_class = serializers.FriendRequestSerializer
 	queryset = models.FriendRequest.objects.all()
 
-
 # This sends out a friend request
 class SendFriendRequest(APIView):
     def post(self, request, username, *args, **kwargs):
@@ -746,3 +745,13 @@ class onClearNotification(APIView):
         notifications.delete()
 
         return Response("clear out notification")
+
+
+
+class UserSearchView(APIView):
+    # This function will be use to filter out the user by name and eventually
+    # by events and psot but for now just users
+    def get(self, request, *args, **kwargs):
+        print(request.GET.get('search'))
+
+        return Response("return the user here")
