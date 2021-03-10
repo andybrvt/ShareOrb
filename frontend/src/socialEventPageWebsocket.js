@@ -81,13 +81,16 @@ class WebSocketSocialEventPage{
     })
   }
 
-  sendEditSocialEvent = (editSocialEventObj) => {
+  sendEditSocialEvent = (editSocialEventObj, userId) => {
     // This is for editing the social event
+    // add in teh user id here too so that you know which day cell to pull
+
     console.log(editSocialEventObj)
 
     this.sendSocialMessage({
       command: 'send_social_edit_event_info',
-      editSocialEventObj: editSocialEventObj
+      editSocialEventObj: editSocialEventObj,
+      userId: userId
     })
 
   }

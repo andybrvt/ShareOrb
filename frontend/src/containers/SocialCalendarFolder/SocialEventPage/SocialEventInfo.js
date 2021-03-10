@@ -160,12 +160,14 @@ class SocialEventInfo extends React.Component{
     // then it will go into the back end and change the exisitng event object then
     // sent through the channels
     console.log(values)
+    console.log(values.event_day.format("YYYY-MM-DD"))
     const start_time = values.startTime
     const end_time = values.endTime
-    const event_day = this.props.info.event_day
+    const event_day = values.event_day.format("YYYY-MM-DD")
 
     let content = ""
     let location = ""
+    let userId = ""
     // Reason for having these lets is because title and content are not required and
     // could be empty at times
     if(values.content){
@@ -173,6 +175,9 @@ class SocialEventInfo extends React.Component{
     }
     if(values.location){
       location = values.location
+    }
+    if(this.props.userId){
+      userId = this.props.userId
     }
 
     const editSocialEventObj = {
@@ -186,8 +191,10 @@ class SocialEventInfo extends React.Component{
 
     }
 
-    SocialEventPageWebSocketInstance.sendEditSocialEvent(editSocialEventObj)
+    SocialEventPageWebSocketInstance.sendEditSocialEvent(editSocialEventObj, userId)
 
+    message.success('You updated your event successfully.', 7);
+    this.onCancelEventClick()
   }
 
   handleBackgroundPictureChange = value => {

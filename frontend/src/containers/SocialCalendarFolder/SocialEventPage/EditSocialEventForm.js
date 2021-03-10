@@ -123,7 +123,7 @@ const renderStartTime = () => {
     console.log(field)
     return (
       <DatePicker
-      // onChange = {field.input.onChange}
+      onChange = {field.input.onChange}
       value = {field.input.value}
       style = {{width: '110px', marginRight:'15px'}}
       suffixIcon={<div></div>}

@@ -74,7 +74,27 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         eventEdit.location = data['editSocialEventObj']['location']
         eventEdit.event_day = data['editSocialEventObj']['event_day']
 
+        # Now that you updated the information grab the user and you have the date
+        # now you just need to grab the social cal cell and then
+
+        # now grab the user information
+        userObj = get_object_or_404(User, id = data['userId'])
+
+        socialCell, create = SocialCalCell.objects.get_or_create(
+            socialCalUser = userObj,
+            socialCaldate = data['editSocialEventObj']['event_day']
+        )
+
+        eventEdit.calCell = socialCell;
+
         eventEdit.save()
+
+
+        # Now you have to get the right soical cal celll and then change the
+        # ForeignKey of the event to make sure the event falls into the right
+        # social cal cell
+
+
 
         updatedEvent = get_object_or_404(SocialCalEvent, id = data['editSocialEventObj']['eventId'])
         serializer = SocialCalEventSerializer(updatedEvent)
