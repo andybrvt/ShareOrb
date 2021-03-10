@@ -12,6 +12,8 @@ from django.shortcuts import render, get_object_or_404
 from .forms import CommentForm
 from django.http import JsonResponse
 from django.utils import timezone
+from django.db.models import Q
+
 import pytz
 
 # Create your views here.
@@ -752,6 +754,18 @@ class UserSearchView(APIView):
     # This function will be use to filter out the user by name and eventually
     # by events and psot but for now just users
     def get(self, request, *args, **kwargs):
+        # You will first grab all the users, now that you can grb the
+        # search value
         print(request.GET.get('search'))
+        search = request.GET.get("search")
+        qs = models.User.objects.all()
 
-        return Response("return the user here")
+        if search != "" and search is not None:
+            # check if there is actually something to search up
+            # Now you will filter
+            qs = qs.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
+
+
+        # Now we wll serialize it
+        serializedQS = serializers.FollowUserSerializer(qs, many= True).data
+        return Response(serializedQS)

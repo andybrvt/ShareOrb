@@ -37,7 +37,8 @@ import {
   Badge,
   Select,
   Option,
-  Form
+  Form,
+  List
 } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
@@ -70,6 +71,9 @@ class SideMenu extends React.Component {
       profileList:[],
       name:'',
       showDropDown:false,
+      loading: false,
+      searched: [],
+      showSearch: false
     };
 
     // This is used to reference the onclick outside the notification
@@ -150,16 +154,35 @@ class SideMenu extends React.Component {
 
  onChangeNewSearch = e => {
 
-   console.log(e.target.value)
    // Now that you have the response, now you would want to search for it
    // in the backend
    const search = e.target.value === undefined ? null : e.target.value
 
-   authAxios.get(`${global.API_ENDPOINT}/userprofile/userSearch/`, {
-     params: {
-       search
-     }
-   })
+   if(search !== ""){
+     this.setState({
+       loading: true
+     })
+     authAxios.get(`${global.API_ENDPOINT}/userprofile/userSearch/`, {
+       params: {
+         search
+       }
+     }).then(res => {
+       this.setState({
+         loading: false,
+         searched: res.data,
+         showSearch: true
+       })
+
+
+
+     })
+   } else {
+     this.setState({
+       searched: [],
+       showSearch: false
+     })
+   }
+
  }
 
  onOpenDropDown = () =>{
@@ -276,6 +299,26 @@ class SideMenu extends React.Component {
     } else {
       this.props.history.push("/settings")
     }
+  }
+
+  renderSearchList = (searches) =>{
+    // this function will display the list of users that are found by the search
+
+    let searchList = []
+
+    for(let i = 0; i< searches.length; i++){
+      searchList.push(
+        <div>
+          <div>
+            {searches[i].first_name}
+          </div>
+
+        </div>
+      )
+
+    }
+
+    return searchList;
   }
 
   render() {
@@ -430,8 +473,24 @@ class SideMenu extends React.Component {
                     <div>
                       <Form onChange = {this.onChangeNewSearch}>
 
-                        <Input />
+                        <Input placeholder = {'Search'} />
                       </Form>
+                      <List className ={`searchDropDown ${this.state.showSearch ? "showSearch": ""}`} >
+                        {
+                          this.state.searched.length === 0 ?
+
+                          <li className ="searchListObj">
+                              <span className = "noResultText">No results</span>
+                          </li>
+
+                          :
+
+                          <div>
+                            {this.renderSearchList(this.state.searched)}
+                          </div>
+                        }
+
+                      </List>
                     </div>
                     {/*
                       <AutoComplete
