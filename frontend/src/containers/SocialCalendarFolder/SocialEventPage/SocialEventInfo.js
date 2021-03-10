@@ -193,6 +193,8 @@ class SocialEventInfo extends React.Component{
 
     SocialEventPageWebSocketInstance.sendEditSocialEvent(editSocialEventObj, userId)
 
+    message.success('You updated your event successfully.', 7);
+    this.onCancelEventClick()
   }
 
   handleBackgroundPictureChange = value => {
