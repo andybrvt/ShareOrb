@@ -192,7 +192,32 @@ class SocialNewsfeedFormPost extends React.Component{
             console.log("HEIC");
             console.log(conversionResult)
              console.log(fileList[fileList.length-1].originFileObj)
-            this.setState({ fileList});
+             {/*
+             fileList.push(
+
+               {
+                 uid: 4,
+                 name: 'image.png',
+                 status: 'done',
+                 url: `test`,
+               }
+             )
+             */}
+             console.log(URL.createObjectURL(conversionResult))
+
+             this.setState(prevState => ({
+              fileList: [...prevState.fileList,
+                {
+                  uid: 4,
+                  name: 'image.png',
+                  status: 'done',
+                  url: URL.createObjectURL(conversionResult),
+                }
+                ]
+            }))
+            console.log(this.state.fileList)
+
+
           })
           .catch((e) => {
             console.log("error");
@@ -318,6 +343,7 @@ class SocialNewsfeedFormPost extends React.Component{
           } else {
             // If this is just an old one picture
             // formData.append("image[" + i +']', fileList[i].url.replace(global.IMAGE_ENDPOINT, ""))
+            console.log(fileList[i])
             formData.append("image[" + i +']', fileList[i].url.replace(global.POSTLIST_SPEC, ""))
           }
         }
