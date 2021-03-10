@@ -573,3 +573,10 @@ aside {
   top: 30%;
   /* transform: translateY(-50%); */
 }
+
+.searchObj{
+  cursor: pointer;
+}
+.searchObj:hover{
+  background-color: whitesmoke;
+}

@@ -73,7 +73,8 @@ class SideMenu extends React.Component {
       showDropDown:false,
       loading: false,
       searched: [],
-      showSearch: false
+      showSearch: false,
+      searchValue: ""
     };
 
     // This is used to reference the onclick outside the notification
@@ -138,10 +139,14 @@ class SideMenu extends React.Component {
        document.removeEventListener('mousedown', this.handleClickOutside);
    }
 
-  onSelect = (value) => {
-    console.log('onSelect', value);
-    const nameList = value.split(" ")
-    this.props.history.push("/explore/"+nameList[0])
+  onProfileSelect = (value) => {
+    // This function will redirect the user to the user's page
+    // The value will jsut be hte user name of the user
+    this.props.history.push("/explore/"+value)
+    this.setState({
+      showSearch: false,
+      searchValue: ""
+    })
     // window.location.href = 'http://localhost:3000/explore/'+value
   }
 
@@ -156,7 +161,12 @@ class SideMenu extends React.Component {
 
    // Now that you have the response, now you would want to search for it
    // in the backend
+
+   this.setState({
+     searchValue: e.target.value
+   })
    const search = e.target.value === undefined ? null : e.target.value
+
 
    if(search !== ""){
      this.setState({
@@ -293,6 +303,8 @@ class SideMenu extends React.Component {
     }
   }
 
+  onprofile
+
   onSettingDirect = () => {
     if(this.props.location.pathname === '/settings'){
       window.location.reload()
@@ -307,13 +319,29 @@ class SideMenu extends React.Component {
     let searchList = []
 
     for(let i = 0; i< searches.length; i++){
+      const user = searches[i]
       searchList.push(
-        <div>
-          <div>
-            {searches[i].first_name}
+          <div
+            onClick = {() => this.onProfileSelect(user.username)}
+            className = "searchObj"
+            style={{padding:'9px'}}>
+            <Avatar
+              style={{marginRight:'10px'}}
+              size="small"
+              src={`${global.IMAGE_ENDPOINT}`+user.profile_picture}/>
+            <span>
+              {this.capitalize(user.first_name)} {this.capitalize(user.last_name)}
+              <br/>
+              <div
+                class="headerPostText"
+                style={{marginLeft:'35px'}}
+              >
+                {"@"+user.username}
+              </div>
+            </span>
           </div>
 
-        </div>
+
       )
 
     }
@@ -332,6 +360,7 @@ class SideMenu extends React.Component {
 
 
     console.log(this.props)
+    console.log(this.state)
     if (this.props.profilePic){
       profilePic = `${global.IMAGE_ENDPOINT}`+this.props.profilePic
     } if (this.props.firstName){
@@ -473,7 +502,7 @@ class SideMenu extends React.Component {
                     <div>
                       <Form onChange = {this.onChangeNewSearch}>
 
-                        <Input placeholder = {'Search'} />
+                        <Input value = {this.state.searchValue} placeholder = {'Search'} />
                       </Form>
                       <List className ={`searchDropDown ${this.state.showSearch ? "showSearch": ""}`} >
                         {
