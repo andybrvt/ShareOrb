@@ -1,4 +1,17 @@
 /* CSS for the whole container */
+.addSocialEventTitle{
+  font-size: 22px;
+  font-family: "Segoe UI Regular";
+  font-weight: 400;
+
+}
+
+.socialEventBody{
+  font-size: 16px;
+  font-family: "Segoe UI Regular";
+  font-weight: 400;
+}
+
 
 /* CSS for the no event page */
 .socialEventDoesNotPage{

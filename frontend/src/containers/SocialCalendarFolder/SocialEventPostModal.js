@@ -500,64 +500,74 @@ class SocialEventPostModal extends React.Component{
       <Modal
       onCancel = {this.props.close}
       visible = {this.props.view}
-      bodyStyle={{padding:'0px'}}
+      bodyStyle={{padding:'25px'}}
       onOk = {this.onHandleEventSubmit}
       >
-      Add Social Event
-      <br />
-      {curDate}
-        <Form
-        onChange = {this.handleChange}
-        >
-          <Form.Item>
-            <Input
-            name = 'title'
-            placeholder = 'Title'
-            value = {this.state.title}
-            maxLength = {80}
-            showCount
-            />
-          </Form.Item>
 
-          <Form.Item>
-            <TextArea
-            name = 'content'
-            placeholder = 'Content'
-            value = {this.state.content}
+      <div class="addSocialEventTitle">
+        <i class="fas fa-calendar-day" style={{color:'#1890ff'}}></i>
+        &nbsp;
+        {curDate} Social Event
 
-            />
-          </Form.Item>
+      </div>
+      <br/>
 
-          <Form.Item>
-            <TextArea
-            name = 'location'
-            placeholder = 'Location'
-            value = {this.state.location}
-            />
-          </Form.Item>
 
-          <Form.Item>
-          <Select
-          name = 'timeStart'
-          className = ''
-          style={{ width: 100 }}
-          showArrow  = {false}
-          onChange = {this.onStartTimeChange}
-          value = {this.state.timeStart}>
-            {startChildren}
-          </Select>
-          <ArrowRightOutlined />
-          <Select
-          className = ''
-          name = 'timeEnd'
-          style={{ width: 100 }}
-          showArrow  = {false}
-          onChange = {this.onEndTimeChange}
-          value = {this.state.timeEnd}>
-            {endChildren}
-          </Select>
-          </Form.Item>
-        </Form>
+      <div class="socialEventBody">
+
+          <Form
+          onChange = {this.handleChange}
+          >
+            <Form.Item>
+              <Input
+              name = 'title'
+              placeholder = 'Title'
+              value = {this.state.title}
+              maxLength = {80}
+              showCount
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <TextArea
+              name = 'content'
+              placeholder = 'Content'
+              value = {this.state.content}
+
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <TextArea
+              name = 'location'
+              placeholder = 'Location'
+              value = {this.state.location}
+              />
+            </Form.Item>
+
+            <Form.Item>
+            <Select
+            name = 'timeStart'
+            className = ''
+            style={{ width: 100 }}
+            showArrow  = {false}
+            onChange = {this.onStartTimeChange}
+            value = {this.state.timeStart}>
+              {startChildren}
+            </Select>
+            <ArrowRightOutlined />
+            <Select
+            className = ''
+            name = 'timeEnd'
+            style={{ width: 100 }}
+            showArrow  = {false}
+            onChange = {this.onEndTimeChange}
+            value = {this.state.timeEnd}>
+              {endChildren}
+            </Select>
+            </Form.Item>
+          </Form>
+        </div>
       </Modal>
     )
   }

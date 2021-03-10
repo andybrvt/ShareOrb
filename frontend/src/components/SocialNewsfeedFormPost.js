@@ -191,9 +191,8 @@ class SocialNewsfeedFormPost extends React.Component{
           .then((conversionResult) => {
             console.log("HEIC");
             console.log(conversionResult)
-             fileList[fileList.length-1].url.replace(conversionResult,"")
              console.log(fileList[fileList.length-1].originFileObj)
-            this.setState({ fileList });
+            this.setState({ fileList});
           })
           .catch((e) => {
             console.log("error");
