@@ -1,3 +1,11 @@
+.noFollowerText{
+  font-size: 20px;
+  font-family: "Segoe UI Regular";
+  font-weight: 400;
+  width:75%;
+}
+
+
 /* CSS test for the post buttons */
 .newUpdateButtonContainer{
   width: 45vw;

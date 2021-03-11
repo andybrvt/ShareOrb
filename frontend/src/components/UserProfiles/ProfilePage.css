@@ -416,7 +416,10 @@ STILL SHARED BETWEEN EVERYONE
 
 .followWord{
   /* background-color: red; */
-  font-size: 25px;
+  font-size: 22px;
+  font-family: "Segoe UI Regular";
+  font-weight: 400;
+
 }
 
 .followListItem{

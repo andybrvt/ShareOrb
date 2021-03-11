@@ -177,6 +177,12 @@ class SocialNewsfeedFormPost extends React.Component{
       //
       // }
 
+      blobToFile(theBlob, fileName){
+          //A Blob() is almost a File() - it's just missing the two properties below which we will add
+          theBlob.lastModifiedDate = new Date();
+          theBlob.name = fileName;
+          return theBlob;
+      }
 
 
       handleChange = ({ fileList, info}) => {
@@ -186,48 +192,48 @@ class SocialNewsfeedFormPost extends React.Component{
       console.log(fileList[fileList.length-1].originFileObj)
       // console.log(fileList[fileList.length-1].originFileObj)
 
-      if (fileList[fileList.length-1].originFileObj.type === "") {
-          console.log("hi")
-        fetch(URL.createObjectURL(fileList[fileList.length-1].originFileObj))
-          .then((res) => res.blob())
-          .then((blob) => heic2any({ blob, toType: "image/jpeg" }))
-          .then((conversionResult) => {
-            console.log("HEIC");
-            console.log(conversionResult)
-             console.log(fileList[fileList.length-1].originFileObj)
-             {/*
-             fileList.push(
-               {
-                 uid: 4,
-                 name: 'image.png',
-                 status: 'done',
-                 url: `test`,
-               }
-             )
-             */}
-             console.log(URL.createObjectURL(conversionResult))
-
-             this.setState(prevState => ({
-              fileList: [...prevState.fileList,
-                {
-                  uid: 4,
-                  name: 'image.png',
-                  status: 'done',
-                  url: URL.createObjectURL(conversionResult),
-                }
-                ]
-            }))
-            console.log(this.state.fileList)
-
-
-          })
-          .catch((e) => {
-            console.log("error");
-
-          });
-      } else {
+      // if (fileList[fileList.length-1].originFileObj.type === "") {
+      //     console.log("hi")
+      //   fetch(URL.createObjectURL(fileList[fileList.length-1].originFileObj))
+      //     .then((res) => res.blob())
+      //     .then((blob) => heic2any({ blob, toType: "image/jpeg" }))
+      //     .then((conversionResult) => {
+      //       console.log("HEIC");
+      //       console.log(conversionResult)
+      //        console.log(fileList[fileList.length-1].originFileObj)
+      //
+      //       // const newFile = this.blobToFile(conversionResult, "test")
+      //
+      //       const newFile = new File(conversionResult, "test")
+      //       console.log(newFile)
+      //        {/*
+      //        fileList.push(
+      //          {
+      //            uid: 4,
+      //            name: 'image.png',
+      //            status: 'done',
+      //            url: `test`,
+      //          }
+      //        )
+      //        */}
+      //
+      //       //  this.setState(prevState => ({
+      //       //   fileList: [...prevState.fileList,
+      //       //     newFile
+      //       //     ]
+      //       // }))
+      //       console.log(this.state.fileList)
+      //
+      //
+      //     })
+      //     .catch((e) => {
+      //       console.log(e)
+      //       console.log("error");
+      //
+      //     });
+      // } else {
         this.setState({ fileList });
-      }
+      // }
 
 
 

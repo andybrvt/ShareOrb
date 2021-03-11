@@ -11,7 +11,7 @@ import WebSocketPostsInstance from  '../postWebsocket';
 import { Divider } from 'antd';
 import Spinner from './Spinner.js';
 import * as socialNewsfeedActions from '../store/actions/socialNewsfeed';
-
+import NoFollowersPic from './friends.svg';
 import LazyLoad from 'react-lazyload';
 
 const TestSpinner = () => {
@@ -184,6 +184,7 @@ class InfiniteList extends React.Component {
     if(this.props.socialPosts){
       post = this.props.socialPosts
     }
+    console.log(post)
 
     // {error  && <div>{error}</div>}
     // {loading && <div>Loading...</div>}
@@ -199,37 +200,39 @@ class InfiniteList extends React.Component {
             <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
               Welcome, {this.props.userName}. Here's what's going on today! </div>
             <Divider style={{marginBottom:'25px'}}/>
-            {post.map((j,index) => {
-              return(
 
-                <div>
+            {
+              (post.length!=0) ?
+              <div>
+                {post.map((j,index) => {
+                  return(
+                    <div>
+                      {
+                        j.post.get_socialCalItems ?
 
-                  {
-                    j.post.get_socialCalItems ?
+                        <SocialNewsfeedPost
+                        history = {this.props.data.history}
+                         data = {j}  />
 
-                    <SocialNewsfeedPost
-                    history = {this.props.data.history}
-                     data = {j}  />
-
-                   :
-
-
-                   <div></div>
-
-
-                  }
-
-
-
+                       :
+                       <div></div>
+                      }
+                    </div>
+                  )
+                  })}
                 </div>
 
+              :
 
 
-              )
+              <div class="noFollowerText">
+                <img src={NoFollowersPic} width="30%"/>
+                 Let's get some more followers!
+                Follow <a href={`${global.API_ENDPOINT}/explore/pinghsu520`}>@pinghsu520</a>, one of the creators of ShareOrb!
+              </div>
 
 
-            })}
-
+            }
          </div>
 
       </div>

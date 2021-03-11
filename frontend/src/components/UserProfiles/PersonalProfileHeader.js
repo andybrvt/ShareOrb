@@ -720,6 +720,7 @@ class PersonalProfileHeader extends React.Component{
           visible ={this.state.followerShow}
           onCancel = {this.onFollowerCancel}
           footer = {null}
+          centered
           >
           <span className ='followWord'> Followers</span>
           <FollowersList
@@ -736,6 +737,7 @@ class PersonalProfileHeader extends React.Component{
           visible = {this.state.followingShow}
           onCancel = {this.onFollowingCancel}
           footer = {null}
+          centered
           >
           <span className = 'followWord'>Following</span>
           <FollowList follow = {following}/>
