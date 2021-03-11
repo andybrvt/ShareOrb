@@ -94,6 +94,13 @@ class DetailSwitch extends React.Component {
 
   }
 
+  onPageBack = () => {
+    // This will be the back button for the event sync
+    this.setState({
+      pageNum: 0
+    })
+  }
+
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -391,6 +398,7 @@ class DetailSwitch extends React.Component {
 
         </QueueAnim>
       </div>
+
         :
 
         <QueueAnim type="bottom"
@@ -398,6 +406,11 @@ class DetailSwitch extends React.Component {
           delay={[!i ? this.state.delay : 300, 0]}>
 
         <div>
+          <div
+            onClick = {() => this.onPageBack()}
+            className = "eventSyncBack">
+            <i class="fas fa-arrow-left"></i>
+          </div>
           <Form
           onSubmit = {this.handleSubmit}
           className = 'eventSyncForm'
@@ -505,6 +518,7 @@ class DetailSwitch extends React.Component {
           ref={(c) => { this.bannerText = c; }}
           dragPlay={false}
         >
+
 
         {textChildren}
         </BannerAnim>

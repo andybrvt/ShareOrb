@@ -2,6 +2,14 @@
   /* background-color: red; */
 }
 
+.eventSyncBack{
+  /* background-color: red; */
+  font-size: 25px;
+  position: absolute;
+  left: 5px;
+  cursor: pointer;
+}
+
 .eventSyncCard{
   position: relative;
   overflow: hidden;
