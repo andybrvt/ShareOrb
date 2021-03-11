@@ -13,7 +13,7 @@ import Spinner from './Spinner.js';
 import * as socialNewsfeedActions from '../store/actions/socialNewsfeed';
 import NoFollowersPic from './friends.svg';
 import LazyLoad from 'react-lazyload';
-
+import { LoadingOutlined } from '@ant-design/icons';
 const TestSpinner = () => {
 
     return (
@@ -129,12 +129,13 @@ class InfiniteList extends React.Component {
       this.props.loadMoreSocialPost(res.data.socialPost)
       // Now do a redux call here to add in the pictures
       const hasMore = res.data.has_more
-
+      console.log(this.state.loading)
       this.setState({
         hasMore: hasMore,
         loading:false,
         start: start+addMore
       })
+      console.log(this.state.loading)
 
       this.props.updateStart(start+addMore)
     })
@@ -166,6 +167,7 @@ class InfiniteList extends React.Component {
            post:  [...this.state.post, ...newPost],
            offset: offset + limit,
          });
+         console.log(this.state.loading)
        })
        .catch(err => {
          this.setState({
@@ -189,7 +191,7 @@ class InfiniteList extends React.Component {
     // {error  && <div>{error}</div>}
     // {loading && <div>Loading...</div>}
     // {!hasMore && <div>No more results</div>}
-
+    console.log(this.state.loading)
     return (
 
       <div>
@@ -200,7 +202,7 @@ class InfiniteList extends React.Component {
             <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
               Welcome, {this.props.userName}. Here's what's going on today! </div>
             <Divider style={{marginBottom:'25px'}}/>
-
+            {this.state.loading}
             {
               (post.length!=0) ?
               <div>
@@ -226,10 +228,15 @@ class InfiniteList extends React.Component {
 
 
               <div class="noFollowerText">
+                <div class="loadingNewsFeedMain">
+                <LoadingOutlined style={{ fontSize: 50, color:'#1890ff'}} spin />
+                </div>
+              {/*
                 <img src={NoFollowersPic} width="30%"/>
                  Let's get some more followers!
                 Follow <a href={`${global.API_ENDPOINT}/explore/pinghsu520`}>@pinghsu520</a>, one of the creators of ShareOrb!
-              </div>
+                */}
+            </div>
 
 
             }

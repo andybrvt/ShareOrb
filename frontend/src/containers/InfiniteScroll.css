@@ -9,3 +9,12 @@ p {
   margin-bottom: 200px;
 
 }
+
+
+.loadingNewsFeedMain{
+    top:100%;
+    left:50%;;
+    position:relative;
+    width:50%;
+
+}
