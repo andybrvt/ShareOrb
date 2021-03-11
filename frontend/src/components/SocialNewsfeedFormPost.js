@@ -31,12 +31,12 @@ function getBase64(file) {
 }
 
 function beforeUpload(file) {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === "";
   if (!isJpgOrPng) {
     message.error('You can only upload JPG/PNG file!');
   }
 
-  return file.type === 'image/png' || file.type==='image/jpeg';
+  return file.type === 'image/png' || file.type==='image/jpeg' || file.type === "";
 }
 
 
@@ -70,6 +70,9 @@ class SocialNewsfeedFormPost extends React.Component{
         }
 
         // Now you will set the pictures in
+
+        // Make sure to check the type better on these ones
+
         if(this.props.curSocialCalCell.get_socialCalItems){
           for(let i = 0; i<this.props.curSocialCalCell.get_socialCalItems.length; i++ ){
             fileList.push(
@@ -176,7 +179,7 @@ class SocialNewsfeedFormPost extends React.Component{
 
 
 
-    handleChange = ({ fileList, info}) => {
+      handleChange = ({ fileList, info}) => {
       console.log(info)
       console.log(fileList)
       console.log((fileList.length)-1)
@@ -194,7 +197,6 @@ class SocialNewsfeedFormPost extends React.Component{
              console.log(fileList[fileList.length-1].originFileObj)
              {/*
              fileList.push(
-
                {
                  uid: 4,
                  name: 'image.png',
@@ -230,6 +232,7 @@ class SocialNewsfeedFormPost extends React.Component{
 
 
     }
+
 
 
     handleCaptionChange = (e) => {
