@@ -115,11 +115,13 @@ class LoginForm extends React.Component {
                        size="middle"
                        prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                        placeholder="Enter Password"/>
+                     {/*
                      <div style = {{
                          color: "red"
                        }}>
                      {this.errorShow()}
                    </div>
+                   */}
                 </Form.Item>
                   {/*
                   <Form.Item name="remember" valuePropName="checked">
