@@ -324,21 +324,27 @@ class SideMenu extends React.Component {
           <div
             onClick = {() => this.onProfileSelect(user.username)}
             className = "searchObj"
-            style={{padding:'9px'}}>
+            style={{padding:'15px'}}>
+            <div class="searchObjLeft">
             <Avatar
               style={{marginRight:'10px'}}
-              size="small"
+              size="medium"
               src={`${global.IMAGE_ENDPOINT}`+user.profile_picture}/>
-            <span>
-              {this.capitalize(user.first_name)} {this.capitalize(user.last_name)}
-              <br/>
-              <div
-                class="headerPostText"
-                style={{marginLeft:'35px'}}
-              >
-                {"@"+user.username}
-              </div>
-            </span>
+            </div>
+            <br/>
+            <div class="searchObjRight">
+              <span style={{marginLeft:'25px'}}>
+                {this.capitalize(user.first_name)} {this.capitalize(user.last_name)}
+                <br/>
+
+                <div
+                  class="headerPostText"
+                  style={{marginLeft:'25px'}}
+                >
+                  {"@"+user.username}
+                </div>
+              </span>
+            </div>
           </div>
 
 
@@ -497,6 +503,7 @@ class SideMenu extends React.Component {
               </div>
 
                 <div className = "searchBarContainer">
+
                   <div className = "autoCompleteHeader">
 
                     <div>
