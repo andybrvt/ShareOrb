@@ -5,6 +5,7 @@ global.WS_ENDPOINT = "127.0.0.1:8000"
 global.NEWSFEED_PICS = 'http://127.0.0.1:8000/media/'
 global.POSTLIST_SPEC = 'http://127.0.0.1:8000/media/'
 global.WS_HEADER = "ws"
+global.BLOB_URL = "blob:http://localhost:3000/"
 
 // DEPLOYMENT GLOBAL CONST
 // global.API_ENDPOINT = "http://api.shareorb.com"
