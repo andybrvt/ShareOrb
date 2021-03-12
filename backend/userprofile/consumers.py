@@ -496,10 +496,10 @@ class NotificationConsumer(JsonWebsocketConsumer):
         actor = get_object_or_404(User, username = data['recipient'])
         minDate = data['minDate']
         maxDate = data['maxDate']
-        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
-        # You are deleting the current notification that you click accept or declien to
-        # and once you are done with that you then send the new notificaiton to the other person
-        notification.delete()
+        # notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
+        # # You are deleting the current notification that you click accept or declien to
+        # # and once you are done with that you then send the new notificaiton to the other person
+        # notification.delete()
         content = {
             'command': 'send_decline_event_sync_notification',
             'actor': data['actor'],
@@ -513,8 +513,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
         actor = get_object_or_404(User, username = data['recipient'])
         minDate = data['minDate']
         maxDate = data['maxDate']
-        notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
-        notification.delete()
+        # notification = CustomNotification.objects.filter(recipient = recipient, actor = actor, type = 'send_friend_event_sync', minDate = minDate, maxDate = maxDate)
+        # notification.delete()
         # You want to include the minDate and maxDate on this one is to have in your Event sync notificaiton
         # so that you can then use it to filter it out
         content = {

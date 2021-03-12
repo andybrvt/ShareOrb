@@ -61,38 +61,9 @@ class NotificationsDropDown extends React.Component{
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  // DELETE THIS
-  onAccept = (actor, recipient) => {
-    // this function will delete the notification that you accept and then send a notification
-    // to the other person that they have accepted their frined reuqest
-    // In the accept, the actor would be the person accepting and the recipient will be
-    // the person that sent the request
-    console.log(actor)
-    console.log(recipient)
-    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/accept/`+recipient)
-    const acceptNotificationObject = {
 
-      command: 'accept_friend_request_notification',
-      actor: actor,
-      // the actor is an id of the recipient of the friend request
-      recipient: recipient
-      // the recipient is the actor that sent the friend request
-    }
-    NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
-  }
 
-  // DELETE LATER
-  onDecline = (actor, recipient) => {
-    authAxios.post(`${global.API_ENDPOINT}/userprofile/friend-request/delete/`+recipient)
-    const declineNotificationObject = {
-      command: 'decline_friend_request_notification',
-      actor: actor,
-      recipient: recipient,
-    }
-    NotificationWebSocketInstance.sendNotification(declineNotificationObject)
-  }
-
-  onEventSyncDecline = (actor, recipient, minDate, maxDate) => {
+  onEventSyncDecline = (e, actor, recipient, minDate, maxDate, notificationId) => {
     const declineNotificationObject = {
       command: 'decline_event_sync',
       actor: actor,
@@ -101,10 +72,15 @@ class NotificationsDropDown extends React.Component{
       maxDate: maxDate
     }
     // console.log(declineNotificationObject)
+
+    // Put a part here where you delete notification
     NotificationWebSocketInstance.sendNotification(declineNotificationObject)
+    this.declineESyncSideNotification("bottomRight")
+    this.onDeleteNotification(e, notificationId)
+
   }
 
-  onEventSyncAccept = (actor, recipient, minDate, maxDate) => {
+  onEventSyncAccept = (e, actor, recipient, minDate, maxDate, notificationId) => {
     // This will send it back to the notification to the orignal actor
     // os that use can pick an event sync date. This funciton actually deletes
     // the notification in the backend so no need to do it in the front end
@@ -117,6 +93,22 @@ class NotificationsDropDown extends React.Component{
       maxDate: maxDate
     }
     NotificationWebSocketInstance.sendNotification(acceptNotificationObject)
+    this.acceptESyncSideNotification("bottomRight")
+    this.onDeleteNotification(e, notificationId)
+  }
+
+  declineESyncSideNotification = (placement) => {
+    notification.info({
+      message: 'Event sync declined',
+      placement,
+    })
+  }
+
+  acceptESyncSideNotification = (placement) => {
+    notification.info({
+      message: 'Event sync accepted',
+      placement,
+    })
   }
 
   deleteSideNotification = ( placement ) => {
@@ -464,11 +456,13 @@ class NotificationsDropDown extends React.Component{
                 }}
               type ="primary"
               className = 'declineButton'
-              onClick = {()=> this.onEventSyncDecline(
+              onClick = {(e)=> this.onEventSyncDecline(
+                e,
                 notifications[i].recipient,
                 notifications[i].actor.username,
                 notifications[i].minDate,
-                notifications[i].maxDate
+                notifications[i].maxDate,
+                notifications[i].id
               )}> <div class="pickEventSyncButtonText"> Decline</div> </Button>
 
               <Button
@@ -483,11 +477,13 @@ class NotificationsDropDown extends React.Component{
                 }}
               className = 'acceptButton'
               type ="primary"
-              onClick = {()=> this.onEventSyncAccept(
+              onClick = {(e)=> this.onEventSyncAccept(
+                e,
                 notifications[i].recipient,
                 notifications[i].actor.username,
                 notifications[i].minDate,
-                notifications[i].maxDate
+                notifications[i].maxDate,
+                notifications[i].id
               )}> <div class="pickEventSyncButtonText"> Accept</div> </Button>
 
 

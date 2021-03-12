@@ -48,6 +48,8 @@ class DetailSwitch extends React.Component {
     className: 'details-switch-demo',
   };
 
+  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -101,6 +103,15 @@ class DetailSwitch extends React.Component {
     })
   }
 
+  onClear = () => {
+    // This fucntion will clear out the data when you submit
+    this.setState({
+      pageNum: 0,
+      rangeChoice: '',
+      friendPerson:null,
+    })
+  }
+
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -121,6 +132,7 @@ class DetailSwitch extends React.Component {
       }
     }
     console.log(submitContent)
+    this.onClear()
     this.props.onSubmit(submitContent)
 
   }
