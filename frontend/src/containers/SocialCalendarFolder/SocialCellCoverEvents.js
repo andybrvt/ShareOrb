@@ -122,13 +122,14 @@ class SocialCellCoverEvents extends React.Component{
                     <div className = 'profileIcon'>
                       <div className = "centerBox">
                         <i class="far fa-user"></i>
+                        &nbsp;&nbsp;
                         {item.persons.length}
                       </div>
                     </div>
                       <div className = 'likingCon'>
                         <div className = "centerBox">
                           <Liking
-                            specifySize={20}
+                            specifySize={17.5}
                              like_people ={item.persons} />
                         </div>
                       </div>
@@ -147,8 +148,11 @@ class SocialCellCoverEvents extends React.Component{
                         {
                           this.checkUser(item.persons) ?
                             item.host.id === this.props.curId ?
-                          <div className = 'alreadyJoinButtonCoverHost'>
+                            <div>
+                          {/*=<div className = 'alreadyJoinButtonCoverHost'>
                             <div className = 'joinText'> Host </div>
+                          </div>
+                          */}
                           </div>
 
                           :
