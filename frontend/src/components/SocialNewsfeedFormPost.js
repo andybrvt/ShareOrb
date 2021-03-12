@@ -189,7 +189,6 @@ class SocialNewsfeedFormPost extends React.Component{
       console.log(info)
       console.log(fileList)
       console.log((fileList.length)-1)
-      console.log(fileList[fileList.length-1].originFileObj)
       // console.log(fileList[fileList.length-1].originFileObj)
 
       // if (fileList[fileList.length-1].originFileObj.type === "") {
@@ -553,16 +552,22 @@ class SocialNewsfeedFormPost extends React.Component{
 
         <div className = "uploadOverFlow">
 
-          {/*}
-          <ImgCrop
-            modalWidth={700}
-            modalTitle="Crop Image"
-            modalOk="Crop"
-            aspect={1}
-            onChange={this.handleChange}
-            beforeUpload={beforeUpload}
-            >
+
+          {/*
+            <ImgCrop
+                modalWidth={700}
+                modalTitle="Crop Image"
+                modalOk="Crop"
+                aspect={1}
+                onChange={this.handleChange}
+                beforeUpload={beforeUpload}
+                >
+
+
+            </ImgCrop>
+
             */}
+
             <Upload
                 listType="picture-card"
                 multiple={true}
@@ -574,8 +579,6 @@ class SocialNewsfeedFormPost extends React.Component{
               >
                 {(fileList.length >= 8) ? null : uploadButton}
               </Upload>
-
-
 
 
         </div>

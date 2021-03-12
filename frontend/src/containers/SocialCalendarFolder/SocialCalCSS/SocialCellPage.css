@@ -93,17 +93,17 @@
 
 .singlePicHolder{
   width: 100%;
-  height: 100%;
+  height: 97.5vh;
   position: relative;
 }
-.singlePicHolder .singlePic img{
+.singlePicHolder .singlePic .picture{
 
-  width:100%;
+  /* width:100%; */
   height:100%;
-  overflow: hidden;
-  object-fit: cover;
+  /* overflow: hidden; */
+  /* object-fit: cover; */
   position: absolute;
-  object-position: 50% 50%;
+  /* object-position: 50% 50%; */
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   left: 50%;
@@ -120,7 +120,7 @@
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
     filter: blur(20px);
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 0;
 
 }
@@ -181,7 +181,6 @@
 }
 .polaroidHolder{
   position: relative;
-
   height: 85%;
 
 }
@@ -234,6 +233,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  /* background-color: green; */
 }
 
 
@@ -263,8 +263,11 @@
 
 .clipPicBackground {
   position: relative;
-  height: 95vh;
+  height: 97.5vh;
   width: 100%;
+  overflow: hidden;
+  /* background-color: red; */
+
 }
 
 
@@ -278,17 +281,16 @@
   z-index: 100;
 }
 
-.clipPicBackground .backgroundPic {
-  object-fit: cover;
+.clipPicBackground .clippedBackgroundPic {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   filter: blur(20px);
-  overflow: hidden;
-  padding-bottom: 56.25%;
+  /* overflow: hidden; */
   z-index: 0;
 
 }
@@ -325,20 +327,26 @@
 }
 
 .singlePic{
-  object-fit: cover;
+  /* object-fit: cover; */
   width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 
 
 
 .picturesRoll{
-  /* height:800px; */
+  height:97.5vh;
+  /* height: 100%; */
   /* background-color: #000000cc; */
   /* background-color: #1f1f1f; */
+  /* background-color: red; */
   overflow: hidden;
   width: 100%;
+  /* height: 100%; */
+
   position: relative;
 
 }
@@ -352,8 +360,9 @@
 
 .picturesRoll .socialImages{
   position: relative;
-  object-fit: cover;
-  width:100%;
+  /* width:100%; */
+  height: 100%;
+  /* object-fit: cover; */
 
   left: 50%;
   transform: translateX(-50%);
@@ -363,18 +372,15 @@
 
 .testSocialImageContainer{
   position: relative;
-
-
   width:100%;
-height:100%;
+  /* height:100%; */
 
 }
 
 .testMiddleSocialCellCarousel{
   position: relative;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
-  object-fit: cover;
   left: 50%;
   transform: translateX(-50%) ;
   overflow: hidden;

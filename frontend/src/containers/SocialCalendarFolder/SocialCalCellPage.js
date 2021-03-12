@@ -883,7 +883,7 @@ class SocialCalCellPage extends React.Component{
 
 
                     <img
-                    className ="picture"
+                      className = "picture"
                     src = {`${global.IMAGE_ENDPOINT}`+ socialCalItems[0].itemImage} />
                   </div>
 

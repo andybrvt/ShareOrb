@@ -79,7 +79,7 @@ class PictureCarousel extends React.Component{
 
 
                 <img
-                className = 'backgroundPic'
+                className = 'clippedBackgroundPic'
                 src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
 
 
@@ -120,12 +120,12 @@ class PictureCarousel extends React.Component{
 
 
             socialItems.push(
-              <div class="testSocialImageContainer">
+              <div class="picturesRoll">
 
 
 
                 <img
-                class="testMiddleSocialCellCarousel"
+                class="socialImages"
                 src ={`${global.IMAGE_ENDPOINT}`+item.itemImage} />
 
               </div>
