@@ -1243,7 +1243,7 @@ class NotificationsDropDown extends React.Component{
         className = "noNotificationListContainer"
         >
         <span
-        className = ""
+        className = "noNotificationMessage"
         > You have no notifications </span>
         </li>
         :

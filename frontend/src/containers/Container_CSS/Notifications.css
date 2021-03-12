@@ -238,10 +238,22 @@
 
 }
 
+
+.noNotificationMessage{
+  text-align: center;
+  cursor: pointer;
+  background-color:white;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Segoe UI Regular";
+}
 .notificationClearHolder{
   text-align: center;
   cursor: pointer;
   background-color:white;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Segoe UI Regular";
 }
 .notificationClearHolder:hover{
   background-color: gainsboro;
