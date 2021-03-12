@@ -62,6 +62,8 @@ class SocialNewsfeedFormPost extends React.Component{
       let caption = "";
       let fileList = [];
 
+
+      console.log(this.props.curSocialCalCell)
       if(this.props.curSocialCalCell){
         if(this.props.curSocialCalCell.dayCaption){
           // If there is a day caption then you will just add it in to the
@@ -81,6 +83,7 @@ class SocialNewsfeedFormPost extends React.Component{
                 uid: i,
                 name: 'image.png',
                 status: 'done',
+                socialItemType: this.props.curSocialCalCell.get_socialCalItems[i].socialItemType,
                 url: `${global.IMAGE_ENDPOINT}`+this.props.curSocialCalCell.get_socialCalItems[i].itemImage,
               }
             )
@@ -120,6 +123,7 @@ class SocialNewsfeedFormPost extends React.Component{
                 uid: i,
                 name: 'image.png',
                 status: 'done',
+                socialItemType: newProps.curSocialCalCell.get_socialCalItems[i].socialItemType,
                 url: `${global.IMAGE_ENDPOINT}`+newProps.curSocialCalCell.get_socialCalItems[i].itemImage,
               }
             )
@@ -347,12 +351,24 @@ class SocialNewsfeedFormPost extends React.Component{
         for(let i = 0; i<fileList.length; i++){
           if(fileList[i].originFileObj){
             // If this is a new uploaded file
+
+            // Now you have to check if it has a file type or not
+            // if it has the originFileObj then that means the social
+            // file type will always be picture
+
+
             formData.append("image[" + i +']', fileList[i].originFileObj)
+            formData.append("socialItemType["+i+"]", "picture" )
           } else {
             // If this is just an old one picture
             // formData.append("image[" + i +']', fileList[i].url.replace(global.IMAGE_ENDPOINT, ""))
+
+            // For this one this is when the picture is already inputed
+            // so when you input the information you will grab the socialcalitem type
             console.log(fileList[i])
             formData.append("image[" + i +']', fileList[i].url.replace(global.POSTLIST_SPEC, ""))
+            formData.append("socialItemType["+i+"]", fileList[i].socialItemType )
+
           }
         }
 

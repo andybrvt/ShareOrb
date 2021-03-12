@@ -331,7 +331,9 @@ class SocialCapUploadNewsfeed(APIView):
     def post(self, request, id, *args, **kwargs):
 
         print("it hits here pretty well")
+        # print(request.data)
         print(request.data)
+        # print(request.data['image[0]'])
         # You want to first grab the time
 
         curDate = request.data['curDate']
@@ -382,7 +384,7 @@ class SocialCapUploadNewsfeed(APIView):
             if(isinstance(request.data['image['+str(i)+']'], str)):
                 # check if image is just a path or a uploaded file
                 socialCalItem = models.SocialCalItems.objects.create(
-                    socialItemType = 'picture',
+                    socialItemType = request.data['socialItemType['+str(i)+']'],
                     creator = user,
                     itemUser = user,
                     itemImage = request.data['image['+str(i)+']'].lstrip("/media"),
@@ -390,7 +392,7 @@ class SocialCapUploadNewsfeed(APIView):
                 )
             else:
                 socialCalItem = models.SocialCalItems.objects.create(
-                    socialItemType = 'picture',
+                    socialItemType = request.data['socialItemType['+str(i)+']'],
                     creator = user,
                     itemUser = user,
                     itemImage = request.data['image['+str(i)+']'],
@@ -414,6 +416,7 @@ class SocialCapUploadNewsfeed(APIView):
 
 
         return Response(content)
+        # return Response("hi this stuff")
 
 def is_there_more_data(start):
     # This function will check if there are more post to load up
