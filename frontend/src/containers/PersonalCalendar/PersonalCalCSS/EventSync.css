@@ -211,6 +211,12 @@
   width: 625px;
 }
 
+.eventSyncDayGrid{
+  width: 100%;
+  background-color: red;
+  position: relative;
+}
+
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .hourcell{
   position: relative;
