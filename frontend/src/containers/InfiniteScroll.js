@@ -202,7 +202,7 @@ class InfiniteList extends React.Component {
             <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
               Welcome, {this.props.userName}. Here's what's going on today! </div>
             <Divider style={{marginBottom:'25px'}}/>
-            {this.state.loading}
+            
             {
               (post.length!=0) ?
               <div>
