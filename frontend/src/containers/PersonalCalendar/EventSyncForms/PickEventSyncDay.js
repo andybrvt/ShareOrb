@@ -239,7 +239,10 @@ class PickEventSyncDay extends React.Component{
                 if (
                   startHour === 23
                 ){
-
+                //Conditional to show the event if the event
+                // start at 11:30pm and it will match
+                // the startdate and end date but will not
+                // cover in the middle
                   if(
                    startMin === 30
                    &&
@@ -255,6 +258,8 @@ class PickEventSyncDay extends React.Component{
                    )
                  }
                   else if(
+                    // If the event starts at 11;00 and you need to make a conditional
+                    // for it
                     startMin === 0
                     &&
                     startMin === curMin
@@ -271,6 +276,7 @@ class PickEventSyncDay extends React.Component{
 
 
                   if (endHour === 0){
+                    // this is if the end event is
                     if (
                       startMin === 0
                       &&

@@ -233,7 +233,7 @@ class WeekCalendar extends React.Component{
          console.log(startIndex)
          endIndex = startIndex + 1
          return startIndex+'/'+ endIndex
-         
+
        }
 
        return startIndex+'/'+endIndex
@@ -341,9 +341,16 @@ class WeekCalendar extends React.Component{
     // month, and day)
 
     // For month it will be startOfmonth and end of month
-    const startDate = dateFns.format(dateFns.startOfWeek(newSelectedDate), "yyyy-MM-dd HH:mm:ss")
-    const endDate = dateFns.format(dateFns.endOfWeek(newSelectedDate), "yyyy-MM-dd HH:mm:ss")
+    const utcExtraHours = dateFns.startOfWeek(newSelectedDate).getTimezoneOffset()/60
+    // used to update the event list
+    const utcStart = dateFns.addHours(dateFns.startOfWeek(newSelectedDate),utcExtraHours)
+    const utcEnd = dateFns.addHours(dateFns.endOfWeek(newSelectedDate), utcExtraHours)
+
+    const startDate = dateFns.format(utcStart, "yyyy-MM-dd HH:mm:ss")
+    const endDate = dateFns.format(utcEnd, "yyyy-MM-dd HH:mm:ss")
     // you want to call the events from the redux instead of the states
+
+    console.log(startDate, endDate)
     this.props.getEvents(startDate, endDate)
     this.scrollToBottom();
   }
@@ -378,14 +385,21 @@ class WeekCalendar extends React.Component{
     // We would use new props here is because when you go to the nextWeek
     // or previous week the props changes
     if (this.props.currentDate !== newProps.currentDate) {
+
       const year = dateFns.getYear(newProps.currentDate)
       const month = dateFns.getMonth(newProps.currentDate)
       const day = dateFns.getDate(newProps.currentDate)
 
+      const utcExtraHours = dateFns.startOfWeek(newProps.currentDate).getTimezoneOffset()/60
       // used to update the event list
-      const startDate = dateFns.format(dateFns.startOfWeek(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
-      const endDate = dateFns.format(dateFns.endOfWeek(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
+      const utcStart = dateFns.addHours(dateFns.startOfWeek(newProps.currentDate),utcExtraHours)
+      const utcEnd = dateFns.addHours(dateFns.endOfWeek(newProps.currentDate), utcExtraHours)
+
+      const startDate = dateFns.format(utcStart, "yyyy-MM-dd HH:mm:ss")
+      const endDate = dateFns.format(utcEnd, "yyyy-MM-dd HH:mm:ss")
       console.log(startDate, endDate)
+
+      // const utcDate = zonedTimeToUtc()
       this.props.getEvents(startDate, endDate)
 
 
