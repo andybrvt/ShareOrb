@@ -282,6 +282,7 @@
   width: 100%;
   height:762%;
   overflow: auto;
+  overflow-x:hidden;
 }
 
 .coverCellBoxList {
@@ -300,6 +301,7 @@
   transition: 0.2s;
   font-weight: 400;
   font-family: "Segoe UI Regular";
+  /* background: blue; */
 }
 .coverCellBoxList .coverCellBoxItem:hover {
 }
@@ -471,7 +473,7 @@
   border-radius: 5px;
   cursor: pointer;
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   width: 80%;
   height: 60%;
   position: relative;
@@ -583,13 +585,11 @@
   display: flex;
 }
 
-.coverCellTextSide{
-  /* background-color: red; */
-  width: 65%;
-}
 
 .coverCellTextSide .coverCellEventTitle{
-  font-size: 18px;
+  font-size: 16px;
+  /* Keyword values */
+  white-space: break-spaces;
 }
 .coverCellTextSide .coverCellEventTime{
   display: flex;
@@ -622,13 +622,26 @@
 }
 
 
-.coverCellButtonSide{
+.coverCellTextSide{
+  /* background-color: blue; */
+  width: 62%;
+  right:5%;
+}
+
+.coverCellEventLeftSide{
   width: 35%;
   position: relative;
+  /* background: red; */
+
+}
+.coverCellEventRightSide{
+  width: 30%;
+  position: relative;
+  /* background: red; */
 
 }
 
-.coverCellButtonSide .miniEventButtonHolder{
+.coverCellEventRightSide .miniEventButtonHolder{
   position: relative;
   height: 100%;
   display: flex;
