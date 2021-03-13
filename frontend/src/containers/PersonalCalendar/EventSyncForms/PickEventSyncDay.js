@@ -397,7 +397,7 @@ class PickEventSyncDay extends React.Component{
               if (toDoStuff.length > 0){
                 days.push(
                   <div
-                    className = {`syncCol disabled ${checkMin === 0 ? "nonhourcellT":"nonhourcellB"} `}
+                    className = {`syncCol ${checkMin === 0 ? "nonhourcellT":"nonhourcellB"} `}
                   >
                   </div>
                 )
