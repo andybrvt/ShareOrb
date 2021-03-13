@@ -470,7 +470,7 @@
 
 .monthCalContainer .monthBody {
   position: relative;
-  width: 101.25%;
+  width: 100.5%;
   border-left: 1px solid #D9D9D9;
   border-right: 1px solid #D9D9D9;
   overflow: auto;
@@ -487,6 +487,8 @@
   grid-row-gap: 2px;
   grid-column-gap: 1px;
   border-bottom: 1px solid #D9D9D9;
+  /* overflow: auto; */
+  max-height: 142px;
   /* border-right: 1px solid var(--border-color); */
   /* background-color: red; */
 }
@@ -497,6 +499,7 @@
   /* background-color: red; */
   border-right: 1px solid #D9D9D9;
   height: 142px;
+  /* overflow: auto; */
   /* cursor: pointer; */
 }
 
@@ -507,6 +510,9 @@
   border-right: 1px solid #D9D9D9;
   height: 142px;
   border: 1px solid blue;
+}
+.moreText{
+  grid-row-start: 6;
 }
 
 /* This will be year specific */

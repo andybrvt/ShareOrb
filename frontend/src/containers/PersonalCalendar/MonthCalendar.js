@@ -280,12 +280,44 @@ class PersonalCalendar extends React.Component{
         // It is also to check if the day is the smae as the current day
         if (toDoStuff.length > 0){
 
+          if (toDoStuff.length < 5){
+            // if it is smaller than 5, we wanna make it fit
+            days.push(
+
+              <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`}
+              onClick = { () => this.onDateClick(cloneDay)}>
+              <span className = "number">{formattedDate}</span>
+              </div>,
+
+                toDoStuff.map(item => (
+                  <CalendarPopOver
+                    item={item}
+                    cloneDay={cloneDay}
+                    dayIndex = {i}
+                    date = {day}
+                    orientation = {"right"}
+                    month = {true}
+                    {...this.props}/>
+
+                )),
+
+                <div className = "moreText">
+                </div>
+
+
+
+          )
+        } else {
+          // This is if it is bigger than 5
+          const shortenToDo = toDoStuff.slice(0, 4)
           days.push(
+
             <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`}
             onClick = { () => this.onDateClick(cloneDay)}>
             <span className = "number">{formattedDate}</span>
             </div>,
-              toDoStuff.map(item => (
+
+              shortenToDo.map(item => (
                 <CalendarPopOver
                   item={item}
                   cloneDay={cloneDay}
@@ -295,12 +327,23 @@ class PersonalCalendar extends React.Component{
                   month = {true}
                   {...this.props}/>
 
-              ))
-        )}
+              )),
+              <div className = "moreText">
+                {toDoStuff.length - 4} more..
+              </div>
+
+
+        )
+        }
+
+
+      }
       else {days.push(
           <div className = {` ${dateFns.isSameDay(cloneDay, new Date()) ? 'calendarNumCur' : 'calendarNum'}`}
           onClick = { () =>this.onDateClick(cloneDay)}>
           <span className = "number">{formattedDate}</span>
+          </div>,
+          <div className = "moreText">
           </div>
         )}
       toDoStuff = []
