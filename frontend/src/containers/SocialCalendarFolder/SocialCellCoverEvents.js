@@ -68,8 +68,8 @@ class SocialCellCoverEvents extends React.Component{
     // this fucntion will shortend the title if it is too long
 
     let newTitle = title;
-    if(title.length > 25){
-      newTitle = newTitle.substring(0, 20)+'...'
+    if(title.length > 12){
+      newTitle = newTitle.substring(0, 12)+'...'
     }
 
     return newTitle;
@@ -102,8 +102,8 @@ class SocialCellCoverEvents extends React.Component{
           className = 'coverCellBoxList'
           renderItem={item => (
             <List.Item
-            className = 'coverCellBoxItem'
-            >
+            className = 'coverCellBoxItem'>
+
               <div className = 'coverCellEventText'>
 
                 <div className = 'coverCellTextSide'>
@@ -114,7 +114,7 @@ class SocialCellCoverEvents extends React.Component{
                       <i class="far fa-clock"></i>
                     </div>
                     <div className = 'timeNum'>
-                      {this.timeFormater(item.start_time)}-{this.timeFormater(item.end_time)}
+                      {this.timeFormater(item.start_time)}
                     </div>
 
                   </div>
@@ -136,10 +136,7 @@ class SocialCellCoverEvents extends React.Component{
                   </div>
                 </div>
 
-
-
-
-              <div className = "coverCellButtonSide">
+                <div className = "coverCellEventRightSide">
 
                 {dateFns.isAfter(dateFns.endOfDay(new Date(this.props.cellDay)), new Date())?
                   <div className = "miniEventButtonHolder">
@@ -200,7 +197,7 @@ class SocialCellCoverEvents extends React.Component{
               </div>
 
 
-          </div>
+              </div>
 
         </List.Item>
       )}
