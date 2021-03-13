@@ -65,12 +65,17 @@ class PersonalCalendar extends React.Component{
     const newSelectedDate = new Date(newDate)
     this.props.getSelectedDate(newSelectedDate)
 
+    const utcExtraHours = newSelectedDate.getTimezoneOffset()/60
+    const utcStart = dateFns.addHours(dateFns.startOfWeek(
+      dateFns.startOfMonth(newSelectedDate)), utcExtraHours)
+
+    const utcEnd = dateFns.addHours(dateFns.endOfWeek(
+      dateFns.endOfMonth(newSelectedDate)), utcExtraHours)
+
     // Since we are doing a whole squere we have to do end of the week too
     // just for month only tho
-    const startDate = dateFns.format(dateFns.startOfWeek(
-      dateFns.startOfMonth(newSelectedDate)), "yyyy-MM-dd HH:mm:ss")
-    const endDate = dateFns.format(dateFns.endOfWeek(
-      dateFns.endOfMonth(newSelectedDate)), "yyyy-MM-dd HH:mm:ss")
+    const startDate = dateFns.format(utcStart, "yyyy-MM-dd HH:mm:ss")
+    const endDate = dateFns.format(utcEnd, "yyyy-MM-dd HH:mm:ss")
     this.props.getEvents(startDate, endDate)
   }
 
@@ -82,10 +87,14 @@ class PersonalCalendar extends React.Component{
       const year = dateFns.getYear(newProps.currentDate)
       const month = dateFns.getMonth(newProps.currentDate)
 
-      const startDate = dateFns.format(dateFns.startOfWeek(
-        dateFns.startOfMonth(newProps.currentDate)), "yyyy-MM-dd HH:mm:ss")
-      const endDate = dateFns.format(dateFns.endOfWeek(
-        dateFns.endOfMonth(newProps.currentDate)), "yyyy-MM-dd HH:mm:ss")
+      const utcExtraHours = newProps.currentDate.getTimezoneOffset()/60
+      const utcStart = dateFns.addHours(dateFns.startOfWeek(
+        dateFns.startOfMonth(newProps.currentDate)), utcExtraHours)
+      const utcEnd = dateFns.addHours(dateFns.endOfWeek(
+        dateFns.endOfMonth(newProps.currentDate)), utcExtraHours)
+
+      const startDate = dateFns.format(utcStart, "yyyy-MM-dd HH:mm:ss")
+      const endDate = dateFns.format(utcEnd, "yyyy-MM-dd HH:mm:ss")
 
       this.props.getEvents(startDate, endDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1))

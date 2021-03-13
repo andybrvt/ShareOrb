@@ -179,12 +179,17 @@ class DayCalendar extends React.Component{
     const selectedMonth = this.props.parameter.month;
     const selectedDay = this.props.parameter.day;
     const newDate = [selectedYear, selectedMonth, selectedDay]
-    const newsSelectedDate = new Date(newDate)
-    this.props.getSelectedDate(newsSelectedDate)
+    const newSelectedDate = new Date(newDate)
+    this.props.getSelectedDate(newSelectedDate)
 
-    console.log(newsSelectedDate)
-    const startDate = dateFns.format(dateFns.startOfDay(newsSelectedDate), "yyyy-MM-dd HH:mm:ss")
-    const endDate = dateFns.format(dateFns.endOfDay(newsSelectedDate), "yyyy-MM-dd HH:mm:ss")
+    const utcExtraHours = dateFns.startOfWeek(newSelectedDate).getTimezoneOffset()/60
+    // used to update the event list
+    const utcStart = dateFns.addHours(dateFns.startOfWeek(newSelectedDate),utcExtraHours)
+    const utcEnd = dateFns.addHours(dateFns.endOfWeek(newSelectedDate), utcExtraHours)
+
+
+    const startDate = dateFns.format(utcStart, "yyyy-MM-dd HH:mm:ss")
+    const endDate = dateFns.format(utcEnd, "yyyy-MM-dd HH:mm:ss")
     console.log(startDate, endDate)
     this.props.getEvents(startDate, endDate)
   }
@@ -213,8 +218,13 @@ class DayCalendar extends React.Component{
       const day = dateFns.getDate(newProps.currentDate)
       this.props.history.push('/personalcalendar/'+year+'/'+(month+1)+'/'+day)
 
-      const startDate = dateFns.format(dateFns.startOfDay(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
-      const endDate = dateFns.format(dateFns.endOfDay(newProps.currentDate), "yyyy-MM-dd HH:mm:ss")
+
+      const utcExtraHours = dateFns.startOfWeek(newProps.currentDate).getTimezoneOffset()/60
+      // used to update the event list
+      const utcStart = dateFns.addHours(dateFns.startOfWeek(newProps.currentDate),utcExtraHours)
+      const utcEnd = dateFns.addHours(dateFns.endOfWeek(newProps.currentDate), utcExtraHours)
+      const startDate = dateFns.format(utcStart, "yyyy-MM-dd HH:mm:ss")
+      const endDate = dateFns.format(utcEnd, "yyyy-MM-dd HH:mm:ss")
       this.props.getEvents(startDate, endDate)
 
     }
