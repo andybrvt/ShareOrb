@@ -48,7 +48,7 @@ class DetailSwitch extends React.Component {
     className: 'details-switch-demo',
   };
 
-  
+
 
   constructor(props) {
     super(props);

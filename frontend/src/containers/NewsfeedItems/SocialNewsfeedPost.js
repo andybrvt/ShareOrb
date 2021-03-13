@@ -173,11 +173,14 @@ class SocialNewsfeedPost extends React.Component {
             >
 
             <div
-              style = {{
-                  backgroundImage: `url(` + `${global.IMAGE_ENDPOINT}`+userPostImages[0].itemImage +")"
-                }}
-                className = "backgroundImageNewsSingle"
+              // style = {{
+                  // backgroundImage: `url(` + `${global.IMAGE_ENDPOINT}`+userPostImages[0].itemImage +")"
+                // }}
+                // className = "backgroundImageNewsSingle"
               >
+              <img
+                className = "singleNewsfeedPic"
+                 src = {`${global.IMAGE_ENDPOINT}`+userPostImages[0].itemImage} />
 
             </div>
 

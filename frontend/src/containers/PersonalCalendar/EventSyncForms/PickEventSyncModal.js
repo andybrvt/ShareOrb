@@ -50,9 +50,21 @@ class PickEventSyncModal extends React.Component{
   componentDidMount () {
     CalendarEventWebSocketInstance.connect(this.props.curId)
     const friend = this.props.userFriend.username
-    const date_min = this.props.minDate
-    const date_max = this.props.maxDate
+
+    // To better adjust for the time range
+    const date = new Date()
+
+    const utcExtraHours = date.getTimezoneOffset()/60
+
+    console.log(utcExtraHours)
+
+
+
+    const date_min = dateFns.addHours(new Date(this.props.minDate), utcExtraHours)
+    const date_max =dateFns.addHours(new Date(this.props.maxDate), utcExtraHours)
     const person = this.props.currentUser
+
+    console.log(date_min, date_max)
     authAxios.get(`${global.API_ENDPOINT}/mycalendar/testEvents/`, {
       params:{
         friend,
@@ -62,6 +74,8 @@ class PickEventSyncModal extends React.Component{
       }
     }) .then(res =>{
       console.log(res)
+      this.props.eventEventSyncModal(res.data)
+
     })
   }
 
@@ -82,8 +96,16 @@ class PickEventSyncModal extends React.Component{
     // You want to get both events from both people and then add it to the
     // same list so then you can render then on a min week check box
     const friend = newProps.userFriend.username
-    const date_min = newProps.minDate
-    const date_max = newProps.maxDate
+
+    const date = new Date()
+
+    const utcExtraHours = date.getTimezoneOffset()/60
+
+    console.log(utcExtraHours)
+
+    console.log(new Date(newProps.minDate), new Date(newProps.maxDate))
+    const date_min = dateFns.addHours(new Date(newProps.minDate), utcExtraHours)
+    const date_max =dateFns.addHours(new Date(newProps.maxDate), utcExtraHours)
     const person = newProps.currentUser
 
     console.log(date_min, date_max)

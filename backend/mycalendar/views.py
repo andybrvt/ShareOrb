@@ -153,6 +153,7 @@ class CalendarTestEventsView(generics.ListAPIView):
     serializer_class = serializers.EventSerializer
 
     def get_queryset(self):
+        print(self.request)
         # The filter will be run through here so it willl
         # return a list of all the events
         qs = filter(self.request)

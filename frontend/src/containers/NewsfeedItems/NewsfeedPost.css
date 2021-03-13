@@ -278,7 +278,8 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 .card {
   background: #FFFFFF;
   margin: 0 auto;
-  width:45vw;
+  width:40vw;
+  /* max-width: 300px; */
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
   margin-bottom: 50px;
 }
@@ -286,10 +287,20 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
 /* This is for the carousel in the postnewsfeed*/
 .postPicCarouselNews{
+  position: relative;
   width: 100%;
-  height: 100%;
+  max-height: 600px;
+  /* max-height: 800px; */
   text-align: center;
   overflow: hidden;
+  /* background-color: red; */
+
+}
+
+.singleNewsfeedPic {
+  width: 100%;
+
+  position: relative;
 
 }
 .postPicCarouselNews .socialLeftRight{
