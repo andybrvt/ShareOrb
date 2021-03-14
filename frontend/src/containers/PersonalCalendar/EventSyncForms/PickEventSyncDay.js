@@ -131,6 +131,31 @@ class PickEventSyncDay extends React.Component{
     })
   }
 
+  onFormChange = (value) => {
+    // This function will be in charge of tracking the changes of the form
+    // for posting on the event sync
+    console.log(value)
+
+    if(value.startTime && value.endTime && value.title){
+      if(value.startTime === "" || value.endTime === ""){
+        this.setState({
+          tempStart: -1,
+          tempEnd: -1,
+          tempTitle: value.title
+        })
+      } else {
+        this.setState({
+          tempStart: value.startTime,
+          tempEnd: value.endTime,
+          tempTitle: value.title
+        })
+      }
+    }
+
+
+  }
+
+
   timeConvert = (time) => {
     // This function will take in a time and then covert the time to
     // a 1-24 hour hour so that it cna be used to add into the
@@ -277,8 +302,6 @@ class PickEventSyncDay extends React.Component{
         const maxDate = dateFns.addHours(new Date(this.props.maxDate),7);
         // This will be different from the calendar week calendar in that it doesn't start from the beginning
         // of the week but rather it will start from beginning of the date range
-        console.log(this.props.minDate, this.props.maxDate)
-        console.log(minDate, maxDate)
         const hourFormat = 'h a'
         const dayFormat = 'd MMMM'
         // This hour list will hold 24 items, each list will be for each hour of each day 5x24
@@ -314,7 +337,6 @@ class PickEventSyncDay extends React.Component{
 
            // When adding things to the calendar you have to match the date and the hour
            for (let i = counter; i< (counter+difference); i++){
-             console.log(counter)
               const cloneDay = date
               const cloneHour = hour
               const checkMin = dateFns.getMinutes(new Date(hour))
@@ -335,8 +357,6 @@ class PickEventSyncDay extends React.Component{
                 const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
                 const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
 
-                console.log(startHour, startMin)
-                console.log(sameDayStart, sameDayEnd, startHour, startMin,new Date(events[item].start_time), cloneDay )
 
                 if (
                   startHour === 23
@@ -548,10 +568,13 @@ class PickEventSyncDay extends React.Component{
                    backgroundColor: this.state.tempColor
                  }}
                  >
-                <span>
-                  Test
+                <div>
+                  {this.state.tempTitle}
+                </div>
+                <div>
+                  {this.state.tempStart}-{this.state.tempEnd}
+                </div>
 
-                </span>
 
                </div>
 
@@ -895,7 +918,6 @@ class PickEventSyncDay extends React.Component{
     }
 
     color = (position) => {
-      console.log(position)
       // Just the color of the selected time on the pick event sync calendar
       if (this.state.active === position-1){
         return '#91d5ff'
@@ -1021,34 +1043,68 @@ class PickEventSyncDay extends React.Component{
 
     }
 
-    getInitialValue = () => {
-      // This will pass an initial value through the Field
+    getInitialValue = (tempTitle, tempStart, tempEnd) => {
 
-      // There is an issue with the utc_start and utc_end and start_time and end time
-      const date_start = new Date(this.state.selectedDate)
-      const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
-      const date_end = new Date(this.state.end_date)
-      const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
-      // const start_time = dateFns.getHours(date_start)
-      // const end_time = dateFns.getMinutes(date_start)
+      // This function will get the initial value for the pickeventsync
+      // values
 
-      // console.log(start_time)
-      return{
-        // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
-        // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
-        // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
-        dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
-        startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
-        endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
-        location: this.props.location,
-        eventColor: this.props.eventColor,
-        repeatCondition: 'none',
-        friends: [],
-        eventColor:'#91d5ff',
-        startTime:"12:00 AM",
-        endTime:"01:00 AM",
-        whichDay:3,
+
+      // since it is just the title and the times you  just need the
+      // tiem frame, at this point it is tempStart and tempEnd
+      // And then when you submit it will just be the tempStart and end
+      // and since this is the day view the date is already there. This will
+      // also mean that I might need to put a conditional for the
+      // pick event sync form
+
+      const startTime = tempStart
+      const endTime = tempEnd
+
+      console.log(startTime, endTime)
+      const title = tempTitle
+      console.log(tempTitle)
+
+      if((startTime === -1 || endTime === -1) && title === "" ){
+        return {
+          startTime: "",
+          endTime: "",
+          title: title
+        }
+      } else {
+        return {
+          startTime: startTime,
+          endTime: endTime,
+          title: title
+        }
       }
+
+
+      // // This will pass an initial value through the Field
+      //
+      // // There is an issue with the utc_start and utc_end and start_time and end time
+      // const date_start = new Date(this.state.selectedDate)
+      // const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
+      // const date_end = new Date(this.state.end_date)
+      // const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
+      // // const start_time = dateFns.getHours(date_start)
+      // // const end_time = dateFns.getMinutes(date_start)
+      //
+      // // console.log(start_time)
+      // return{
+      //   // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
+      //   // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
+      //   // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
+      //   dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
+      //   startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
+      //   endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
+      //   location: this.props.location,
+      //   eventColor: this.props.eventColor,
+      //   repeatCondition: 'none',
+      //   friends: [],
+      //   eventColor:'#91d5ff',
+      //   startTime:"12:00 AM",
+      //   endTime:"01:00 AM",
+      //   whichDay:3,
+      // }
     }
 
 
@@ -1056,6 +1112,22 @@ class PickEventSyncDay extends React.Component{
     render() {
       console.log(this.state)
       console.log(this.props)
+
+      let tempStart = ""
+      let tempEnd = ''
+      let tempTitle = ""
+      if(this.state.tempStart){
+        tempStart = this.state.tempStart
+      }
+      if(this.state.tempEnd){
+        tempEnd = this.state.tempEnd
+      }
+      if(this.state.tempTitle){
+        tempTitle = this.state.tempTitle
+      }
+
+      console.log(tempStart)
+
       return (
         <div className = 'eventSyncCalendarContainer'>
           <div className = 'syncCalendar'>
@@ -1110,8 +1182,12 @@ class PickEventSyncDay extends React.Component{
               <div class="rightBottomEventSync">
                 <PickEventSyncForm
                 onSubmit = {this.submit}
-                initialValues = {this.getInitialValue()}
-                active = {this.state.active} />
+                initialValues = {this.getInitialValue(tempTitle, tempStart, tempEnd)}
+                active = {this.state.active}
+                onChange = {this.onFormChange}
+                // startTime = {tempStart}
+                // endTime = {this.state.tempEnd}
+                 />
               </div>
 
 

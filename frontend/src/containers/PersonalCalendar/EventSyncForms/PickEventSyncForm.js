@@ -1,5 +1,5 @@
 import React from 'react';
-import { reset, Field, reduxForm } from 'redux-form';
+import { reset, Field, reduxForm , formValueSelector} from 'redux-form';
 import '../PersonalCalCSS/ReduxForm.css';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
@@ -7,6 +7,8 @@ import { DatePicker, TimePicker, Button, Input, Select, Radio, Card} from 'antd'
 import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import './PickEventSync.css';
+import { connect } from "react-redux";
+
 
 const { Option } = Select;
 
@@ -17,9 +19,9 @@ const required = value => value ? undefined : '*Required'
 const renderField = (field) => {
 return (
     <Input
-    {...field.input}
+    // {...field.input}
     style={{width:'300px'}}
-
+    // onChange = {field.input.onChange}
     type = {field.type}
     placeholder= {field.placeholder}
     className = 'box'/>
@@ -155,6 +157,30 @@ class PickEventSyncForm extends React.Component {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+  renderTextInput = (field) => {
+
+
+    return(
+      <Input
+      // {...field.input}
+      style={{width:'300px'}}
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+      // type = {field.type}
+      placeholder= {field.placeholder}
+      className = 'box'/>
+    )
+
+  }
+
+  hanldleTitleChange = (event, value) =>{
+    console.log(value)
+
+    const {change} = this.props
+
+    change('title', value)
+  }
+
   renderStartDateSelect = (field) => {
     // This const will render the start time of the event
     // So before you choose any value you want to have the field
@@ -170,7 +196,8 @@ class PickEventSyncForm extends React.Component {
         // {...field.input}
         style = {{width: '115px', marginRight:'15px'}}
         onChange = {field.input.onChange}
-        value = {this.props.startTime}
+        value = {field.input.value}
+        // value = {this.props.startTime}
         className = 'timebox'>
 
       {field.children}
@@ -193,7 +220,7 @@ class PickEventSyncForm extends React.Component {
         // {...field.input}
         style = {{width: '115px', marginRight:'15px'}}
         onChange = {field.input.onChange}
-        value = {this.props.endTime}
+        value = {field.input.value}
         className = 'timebox'>
 
       {field.children}
@@ -484,10 +511,12 @@ class PickEventSyncForm extends React.Component {
     console.log(this.state)
     console.log(this.props)
 
-    const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
+    const {handleSubmit, onChange, pristine, invalid, reset, submitting, error } = this.props
     return (
       <div class="eventSyncCard">
-          <form class="eSyncForm">
+          <form
+            onChange = {onChange}
+            class="eSyncForm">
             {/*<Button style={{float:'left', marginRight:'15px',
               display:'inline-block'}} type="primary"
              shape="circle" size={'large'}>
@@ -498,9 +527,10 @@ class PickEventSyncForm extends React.Component {
                 <Field
                 name = 'title'
                 label = 'Title'
-                component= {renderField}
+                component= {this.renderTextInput}
                 type= 'text'
-                validate = {required }
+                onChange = {this.hanldleTitleChange}
+                // validate = {required}
                 placeholder = 'Title'
                 />
               </div>
@@ -542,6 +572,7 @@ class PickEventSyncForm extends React.Component {
                      name = 'startTime'
                      component = {this.renderStartDateSelect}
                      onChange = {this.handleStartTimeChange}
+                     type = "date"
                      >
                      {renderStartTime()}
                    </Field>
@@ -551,6 +582,7 @@ class PickEventSyncForm extends React.Component {
                      name = 'endTime'
                      onChange = {this.handleEndTimeChange}
                      component = {this.renderEndDateSelect}
+                     type = "date"
                      >
                      {this.renderEndTimeSelect()}
                    </Field>
@@ -583,7 +615,16 @@ class PickEventSyncForm extends React.Component {
 
 PickEventSyncForm = reduxForm ({
   form: 'event sync add event',
+  enableReinitialize: true,
   onSubmitSuccess: afterSubmit
 }) (PickEventSyncForm)
 
-export default PickEventSyncForm;
+const selector = formValueSelector('event sync add event')
+
+
+
+export default connect(state => ({
+  title: selector(state, "title"),
+  startTime: selector(state, "startTime"),
+  endTime: selector(state, "endTime")
+})) (PickEventSyncForm);
