@@ -122,21 +122,21 @@ class PickEventSyncDay extends React.Component{
 
   }
 
-  onClearTempEvent = () => {
-
-    this.setState({
-      tempStart: -1,
-      tempEnd: -1,
-      selectedDate: null
-    })
-  }
+  // onClearTempEvent = () => {
+  //
+  //   this.setState({
+  //     tempStart: -1,
+  //     tempEnd: -1,
+  //     selectedDate: null
+  //   })
+  // }
 
   onFormChange = (value) => {
     // This function will be in charge of tracking the changes of the form
     // for posting on the event sync
     console.log(value)
 
-    if(value.startTime && value.endTime && value.title){
+    if(value.startTime && value.endTime && (value.title || value.title === "")){
       if(value.startTime === "" || value.endTime === ""){
         this.setState({
           tempStart: -1,
@@ -144,6 +144,7 @@ class PickEventSyncDay extends React.Component{
           tempTitle: value.title
         })
       } else {
+        console.log(value.title)
         this.setState({
           tempStart: value.startTime,
           tempEnd: value.endTime,
@@ -559,7 +560,7 @@ class PickEventSyncDay extends React.Component{
              <div className = "eventSyncDayGrid">
 
                <div
-                 onClick = {() => this.onClearTempEvent() }
+                 // onClick = {() => this.onClearTempEvent() }
                  className = "weekEvent"
                  style = {{
                    display: this.state.tempStart === -1 ? "none":"",
