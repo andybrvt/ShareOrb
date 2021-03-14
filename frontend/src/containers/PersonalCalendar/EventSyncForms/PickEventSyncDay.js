@@ -110,7 +110,7 @@ class PickEventSyncDay extends React.Component{
     tempStart: -1,
     tempEnd: -1,
     tempDate: null,
-    tempColor: "blue",
+    tempColor: "#1890FF",
     tempTitle: ""
   }
 
@@ -136,19 +136,24 @@ class PickEventSyncDay extends React.Component{
     // for posting on the event sync
     console.log(value)
 
-    if(value.startTime && value.endTime && (value.title || value.title === "")){
+    if(value.startTime
+      && value.endTime
+      && (value.title || value.title === "")
+      && value.eventColor){
       if(value.startTime === "" || value.endTime === ""){
         this.setState({
           tempStart: -1,
           tempEnd: -1,
-          tempTitle: value.title
+          tempTitle: value.title,
+          tempColor: value.eventColor
         })
       } else {
         console.log(value.title)
         this.setState({
           tempStart: value.startTime,
           tempEnd: value.endTime,
-          tempTitle: value.title
+          tempTitle: value.title,
+          tempColor: value.eventColor
         })
       }
     }
@@ -1044,7 +1049,7 @@ class PickEventSyncDay extends React.Component{
 
     }
 
-    getInitialValue = (tempTitle, tempStart, tempEnd) => {
+    getInitialValue = (tempTitle, tempStart, tempEnd, tempColor) => {
 
       // This function will get the initial value for the pickeventsync
       // values
@@ -1064,17 +1069,21 @@ class PickEventSyncDay extends React.Component{
       const title = tempTitle
       console.log(tempTitle)
 
+      const eventColor = tempColor
+
       if((startTime === -1 || endTime === -1) && title === "" ){
         return {
           startTime: "",
           endTime: "",
-          title: title
+          title: title,
+          eventColor: eventColor
         }
       } else {
         return {
           startTime: startTime,
           endTime: endTime,
-          title: title
+          title: title,
+          eventColor: eventColor
         }
       }
 
@@ -1117,6 +1126,7 @@ class PickEventSyncDay extends React.Component{
       let tempStart = ""
       let tempEnd = ''
       let tempTitle = ""
+      let tempColor = ""
       if(this.state.tempStart){
         tempStart = this.state.tempStart
       }
@@ -1125,6 +1135,9 @@ class PickEventSyncDay extends React.Component{
       }
       if(this.state.tempTitle){
         tempTitle = this.state.tempTitle
+      }
+      if(this.state.tempColor){
+        tempColor = this.state.tempColor
       }
 
       console.log(tempStart)
@@ -1180,10 +1193,15 @@ class PickEventSyncDay extends React.Component{
                 </div>
 
               </div>
+              <div>
+                <div>
+                  *Pick a time either by clicking on the cells or the dropdown*
+                </div>
+              </div>
               <div class="rightBottomEventSync">
                 <PickEventSyncForm
                 onSubmit = {this.submit}
-                initialValues = {this.getInitialValue(tempTitle, tempStart, tempEnd)}
+                initialValues = {this.getInitialValue(tempTitle, tempStart, tempEnd, tempColor)}
                 active = {this.state.active}
                 onChange = {this.onFormChange}
                 // startTime = {tempStart}

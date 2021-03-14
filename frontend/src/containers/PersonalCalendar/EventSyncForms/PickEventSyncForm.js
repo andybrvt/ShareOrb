@@ -115,10 +115,11 @@ const renderEventColor = (field) => {
   // This is just used to render the color of the event
   return (
     <Input
+    style = {{width: '45px', marginRight:'15px'}}
     type = 'color'
     className = 'reduxColor'
     name = 'eventColor'
-    defaultValue = '#91d5ff'
+    defaultValue = '#fadb14'
     {...field.input}/>
   )
 }
@@ -530,7 +531,7 @@ class PickEventSyncForm extends React.Component {
                 component= {this.renderTextInput}
                 type= 'text'
                 onChange = {this.hanldleTitleChange}
-                // validate = {required}
+                validate = {required}
                 placeholder = 'Title'
                 />
               </div>
@@ -573,6 +574,8 @@ class PickEventSyncForm extends React.Component {
                      component = {this.renderStartDateSelect}
                      onChange = {this.handleStartTimeChange}
                      type = "date"
+                     validate = {required}
+
                      >
                      {renderStartTime()}
                    </Field>
@@ -583,14 +586,28 @@ class PickEventSyncForm extends React.Component {
                      onChange = {this.handleEndTimeChange}
                      component = {this.renderEndDateSelect}
                      type = "date"
+                     validate = {required}
+
                      >
                      {this.renderEndTimeSelect()}
                    </Field>
+
+                   <Field
+                     name = "eventColor"
+                     component = {renderEventColor}
+                     type = "text"
+                     validate = {required}
+
+                      />
+
               </div>
+
+
             </div>
 
               {error && <strong style = {{color: 'red'}}>{error}</strong>}
               <div className = 'eventSyncSurroundings'>
+
             <div className = 'clearEventSyncFormButton' >
               <Button
               diabled = {pristine}
@@ -600,7 +617,7 @@ class PickEventSyncForm extends React.Component {
               <Button
                 type = 'primary'
                 onClick = {handleSubmit}
-                disabled = {invalid || this.props.active === null}>
+                disabled = {invalid}>
                 Send Event
               </Button>
             </div>
@@ -626,5 +643,6 @@ const selector = formValueSelector('event sync add event')
 export default connect(state => ({
   title: selector(state, "title"),
   startTime: selector(state, "startTime"),
-  endTime: selector(state, "endTime")
+  endTime: selector(state, "endTime"),
+  eventColor: selector(state, "eventColor")
 })) (PickEventSyncForm);
