@@ -492,8 +492,8 @@ aside {
 .searchBarContainer .autoCompleteHeader{
   background:blue;
   position:relative;
-  left: 23.4%;
-  width: 60%;
+  left: 27%;
+  width: 55%;
   /* transform: translateX(-50%); */
   top:2.5px;
   color: black;

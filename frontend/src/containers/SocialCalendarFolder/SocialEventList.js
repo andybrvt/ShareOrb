@@ -126,7 +126,7 @@ class SocialEventList extends React.Component{
              <div className = "socialEventListTextFirst">
                <div className = 'socialEventTitleContainer'>
                <div className = 'socialEventTitle'>
-                 {this.eventTitle(this.capitalize(item.title))}
+                 {this.eventTitle(this.capitalize(item.title))}s
                </div>
                {
                  true ?

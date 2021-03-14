@@ -45,6 +45,8 @@
   margin-top: 10px;
   margin-bottom: 10px;
   transition: 0.2s;
+  font-family: "Segoe UI Regular";
+  font-weight: 400;
 }
 
 .eventListTabContainer .eventListContainer .eventContainer:hover{
@@ -106,9 +108,10 @@
 .eventContainerSecond .secondContainerFirst{
   position: relative;
   padding-left: 10px;
-  height: 40%;
+  height: 30%;
   width: 100%;
   display: flex;
+  /* background: red; */
   flex-direction: row;
 }
 
@@ -137,7 +140,8 @@
 .eventContainerSecond .secondContainerFirst .eventBoxTitle{
    color: black;
    position: relative;
-   font-size:40px;
+   font-size:35px;
+
 
 }
 
@@ -171,7 +175,7 @@
   /* color: red; */
   position: relative;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   top: 50%;
   transform: translateY(-50%);
 
@@ -179,9 +183,9 @@
 .eventContainerSecond .secondContainerSecond .locationHolder .eventLocation{
   position: relative;
   color: black;
-  font-size: 15px;
+  font-size: 18px;
   top: 50%;
-  height: 70%;
+  /* background: red; */
   transform: translateY(-50%);
   margin-left: 5px;
 }
@@ -205,7 +209,7 @@
   /* color: red; */
   position: relative;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -213,7 +217,7 @@
 .eventContainerSecond .secondContainerThird .firstHalf .eventBoxDay .calendarIcon{
   position: relative;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   top: 50%;
   transform: translateY(-50%);
 
@@ -221,9 +225,8 @@
 .eventContainerSecond .secondContainerThird .firstHalf .eventBoxDay .dateInfo{
   position: relative;
   color: black;
-  font-size: 15px;
+  font-size: 16px;
   top: 50%;
-  height: 70%;
   transform: translateY(-50%);
   margin-left: 5px;
 }
@@ -239,7 +242,7 @@
 .eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostText{
   position: relative;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -259,10 +262,10 @@
   cursor: pointer;
 }
 .eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostNameAva .hostAvatar{
-  font-size: 100%;
   position: relative;
   top: 45%;
   transform: translateY(-50%);
+
 }
 
 .eventContainerSecond .secondContainerThird .secondHalf .eventBoxHost .hostNameAva .hostName{
@@ -290,18 +293,19 @@
 .eventContainerSecond .secondContainerFourth .firstHalf .eventBoxTimes .eventClock{
   position: relative;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   top: 50%;
   transform: translateY(-50%);
 }
 .eventContainerSecond .secondContainerFourth .firstHalf .eventBoxTimes .eventTime{
   position: relative;
   color: black;
-  font-size: 15px;
+  font-size: 16px;
   top: 50%;
-  height: 70%;
+
   transform: translateY(-50%);
   margin-left: 5px;
+  /* background: red; */
 }
 
 
@@ -318,7 +322,7 @@
 .eventContainerSecond .secondContainerFourth .secondHalf .eventBoxParticipant .participants{
   position: relative;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   top: 50%;
 }
 .eventContainerSecond .secondContainerFourth .secondHalf .eventBoxParticipant .likeList{
@@ -447,4 +451,5 @@
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  font-size: 18px;
 }

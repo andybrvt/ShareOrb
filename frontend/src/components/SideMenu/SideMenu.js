@@ -509,7 +509,9 @@ class SideMenu extends React.Component {
                     <div>
                       <Form onChange = {this.onChangeNewSearch}>
 
-                        <Input value = {this.state.searchValue} placeholder = {'Search'} />
+                        <Input value = {this.state.searchValue}
+                          prefix={<SearchOutlined/>}
+                          placeholder = {'Search'} />
                       </Form>
                       <List className ={`searchDropDown ${this.state.showSearch ? "showSearch": ""}`} >
                         {

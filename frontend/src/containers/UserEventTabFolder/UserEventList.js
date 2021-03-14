@@ -154,20 +154,15 @@ class UserEventList extends React.Component{
               </div>
 
 
-
               <div className = "eventContainerSecond">
-
                 <div className = "secondContainerFirst">
                   <div className = "eventBoxTitle">{this.eventTitleLength(this.capitalize(socialEventList[i].title))}</div>
                   <div className = "tabSect">
                     {
-
                         this.checkDay(socialEventList[i].event_day, socialEventList[i].end_time) ?
-
                           <div> </div>
 
                           :
-
                           <div className = "endTag"> Ended</div>
                       }
 
@@ -176,17 +171,19 @@ class UserEventList extends React.Component{
                 </div>
 
                 <div className = "secondContainerSecond">
-                  <div className = "locationHolder">
-                    <div className = "locationPin">
-                      <i class="fas fa-map-marker-alt"></i>
-                    </div>
-
-                    <div className = "eventLocation">
-                      {this.capitalize(socialEventList[i].location)}
-                    </div>
-
-                  </div>
-
+                  {
+                    (socialEventList[i].location) ?
+                      <div className = "locationHolder">
+                        <div className = "locationPin">
+                          <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div className = "eventLocation">
+                          {this.capitalize(socialEventList[i].location)}
+                        </div>
+                      </div>
+                    :
+                    <div></div>
+                  }
                 </div>
 
                 <div className = "secondContainerThird">
@@ -211,20 +208,20 @@ class UserEventList extends React.Component{
                       <div className = "eventBoxHost">
 
                       <div className = 'hostText'>
-                        Host:
+                        Host
                       </div>
 
                       <div className = "hostNameAva">
                         <div className = "hostAvatar">
                           <Avatar
-                           size = {24}
+                           size = {25}
                            onClick = { () => this.profileDirect(socialEventList[i].host.username)}
                            src = {`${global.IMAGE_ENDPOINT}`+socialEventList[i].host.profile_picture}
                          />
                         </div>
+                        &nbsp;
                      <div className = "hostName">
                        {this.capitalize(socialEventList[i].host.first_name)} {this.capitalize(socialEventList[i].host.last_name)}
-
                       </div>
                       </div>
                     </div>
@@ -247,6 +244,7 @@ class UserEventList extends React.Component{
 
                         <div className = "eventTime">
                           {this.timeFormater(socialEventList[i].start_time)} - {this.timeFormater(socialEventList[i].end_time)}
+                          &nbsp;
                         </div>
 
                       </div>
@@ -259,9 +257,10 @@ class UserEventList extends React.Component{
 
 
                       <div className = "eventBoxParticipant">
-                        <div className = "participants"> Participants: </div>
+                        <div className = "participants"> Participants &nbsp; </div>
                         <div className = "likeList">
                           <Liking
+                            specifySize={25}
                         history = {this.props.history}
                         like_people = {socialEventList[i].persons} />
                         </div>
@@ -286,9 +285,14 @@ class UserEventList extends React.Component{
                         {
                           this.checkUser(socialEventList[i].persons) ?
                             socialEventList[i].host.id === this.props.curId ?
-                            <div className = "hostButton">
-                              <div className = "hostText"> Host </div>
+                            <div>
+
+                              {/*<div className = "hostButton">
+                                <div className = "hostText"> Host </div>
+                              </div>
+                              */}
                             </div>
+
 
                             :
 
