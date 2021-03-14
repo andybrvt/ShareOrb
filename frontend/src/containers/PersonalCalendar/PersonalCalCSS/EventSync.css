@@ -212,9 +212,15 @@
 }
 
 .eventSyncDayGrid{
+  display: grid;
   width: 100%;
-  background-color: red;
-  position: relative;
+  /* background-color: blue; */
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(48, 30px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* z-index: 1; */
 }
 
 
@@ -238,6 +244,7 @@
   cursor: pointer;
   background: var(--neutral-color);
   /* background-color: lightskyblue; */
+  /* z-index: 1; */
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .hourcellB{
@@ -249,6 +256,7 @@
   cursor: pointer;
   background: var(--neutral-color);
   /* background-color: lightskyblue; */
+  /* z-index: 1; */
 }
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .nonhourcell{

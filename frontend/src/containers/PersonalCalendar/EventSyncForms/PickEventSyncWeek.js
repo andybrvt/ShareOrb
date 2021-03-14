@@ -385,7 +385,7 @@ class PickEventSyncWeek extends React.Component{
             {days}
            </div>
          )
-         counter = counter + 1
+         counter = counter + 7
          days = []
          date = minDate
          hour = dateFns.addMinutes(hour, 30)

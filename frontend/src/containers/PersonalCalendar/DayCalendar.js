@@ -532,7 +532,7 @@ class DayCalendar extends React.Component{
                   display: this.state.tempStart === -1 ? "none": "",
                   gridColumn: this.dayEventIndex(this.state.tempStartDate, this.state.tempEndDate),
                   gridRow: this.hourEventIndex(this.state.tempStart, this.state.tempEnd),
-                  backgroundColor: this. state.tempColor
+                  backgroundColor: this.state.tempColor
                 }}
                 >
                 <span className = "pointerEvent">

@@ -107,6 +107,18 @@ class PickEventSyncDay extends React.Component{
   state = {
     active: null,
     selectedDate: null,
+    tempStart: -1,
+    tempEnd: -1,
+    tempColor: "blue",
+    tempTitle: ""
+  }
+
+  renderTempEvent = (startIndex, endIndex) =>{
+    // This function will return the row index for the grid
+
+    console.log(startIndex, endIndex)
+    return startIndex +"/"+endIndex
+
   }
 
 
@@ -207,6 +219,7 @@ class PickEventSyncDay extends React.Component{
 
          const difference = -dateFns.differenceInCalendarDays(new Date(minDate), new Date(maxDate))
 
+         console.log(difference)
          // The plan for the loop is ot have a while loop that loops thorugh each hour of the same day
          // then go down to the next hour then go through all the days
 
@@ -214,6 +227,7 @@ class PickEventSyncDay extends React.Component{
 
            // When adding things to the calendar you have to match the date and the hour
            for (let i = counter; i< (counter+difference); i++){
+             console.log(counter)
               const cloneDay = date
               const cloneHour = hour
               const checkMin = dateFns.getMinutes(new Date(hour))
@@ -434,11 +448,30 @@ class PickEventSyncDay extends React.Component{
 
          return(
            <div className = 'body'>
-             {hours}
 
              <div className = "eventSyncDayGrid">
-               hi
+
+               <div
+
+                 className = "weekEvent"
+                 style = {{
+                   display: this.state.tempStart === -1 ? "none":"",
+                   gridColumn: "0/1",
+                   gridRow: this.renderTempEvent(this.state.tempStart, this.state.tempEnd) ,
+                   backgroundColor: this.state.tempColor
+                 }}
+                 >
+                <span>
+                  Test
+
+                </span>
+
+               </div>
+
              </div>
+
+             {hours}
+
            </div>
          )
       }
@@ -446,21 +479,24 @@ class PickEventSyncDay extends React.Component{
 
       // DELETE THIS LATER
       onDayHourClick = (e,position, day, hour) => {
-        console.log(hour)
+        console.log( position, day, hour)
         const selectedHour = dateFns.getHours(hour)
         const selectedMin = dateFns.getMinutes(hour)
         const selectedYear = dateFns.getYear(day)
         const selectedMonth = dateFns.getMonth(day)
         const selectedDate = dateFns.getDate(day)
         const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour, selectedMin)
-        if (this.state.active === position){
+        console.log(finalSelectedDate)
+        if (this.state.tempStart === position){
           this.setState({
-            active: null,
+            tempStart: -1,
+            tempEnd: -1,
             selectedDate: null
           })
         } else {
           this.setState({
-            active: position,
+            tempStart: position+1,
+            tempEnd: position+3,
             selectedDate: finalSelectedDate
           })
         }
@@ -756,7 +792,7 @@ class PickEventSyncDay extends React.Component{
     color = (position) => {
       console.log(position)
       // Just the color of the selected time on the pick event sync calendar
-      if (this.state.active === position-7){
+      if (this.state.active === position-1){
         return '#91d5ff'
       }
       if (this.state.active === position){
