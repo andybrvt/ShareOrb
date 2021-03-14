@@ -109,6 +109,7 @@ class PickEventSyncDay extends React.Component{
     selectedDate: null,
     tempStart: -1,
     tempEnd: -1,
+    tempDate: null,
     tempColor: "blue",
     tempTitle: ""
   }
@@ -120,6 +121,92 @@ class PickEventSyncDay extends React.Component{
     return startIndex +"/"+endIndex
 
   }
+
+  onClearTempEvent = () => {
+
+    this.setState({
+      tempStart: -1,
+      tempEnd: -1,
+      selectedDate: null
+    })
+  }
+
+  timeConvert = (time) => {
+    // This function will take in a time and then covert the time to
+    // a 1-24 hour hour so that it cna be used to add into the
+    // date and be submited
+
+    console.log(time)
+    let hour = parseInt(time.substring(0,2))
+    let minutes = parseInt(time.substring(3,5))
+    let ampm = time.substring(5,8)
+
+    console.log(minutes)
+    console.log(hour)
+
+    let convertedTime = ''
+
+    if (time.includes('PM')){
+      if (hour !==  12){
+        hour = hour + 12
+      }
+    } else if (time.includes('AM')){
+      if(hour === 12){
+        hour = 0
+      }
+    }
+
+    const timeBundle = {
+      firstHour: hour,
+      firstMin: minutes
+    }
+
+    return timeBundle
+
+  }
+
+  hourEventIndex = (start_time, end_time ) => {
+
+    // Simlar to that of the hourEvent index of the calendarpopover
+    // but because the inputs are in the format "HH:MM am" there is a bit of a
+    // change
+
+    console.log(start_time, end_time)
+    if(start_time === -1 || end_time === -1){
+      return "-1"
+    } else if(start_time && end_time){
+      const start = this.timeConvert(start_time)
+      const end = this.timeConvert(end_time)
+      console.log(start, end)
+      let startIndex = (start.firstHour * 2) +1
+      if(start.firstMin === 30){
+        startIndex = startIndex +1
+      }
+
+      let endIndex = end.firstHour * 2
+      if(end.firstMin === 30){
+        endIndex = endIndex + 1
+      }
+      endIndex = endIndex +1
+
+      console.log(startIndex+"/"+endIndex)
+      if(startIndex === 47){
+        // handle the condition where the time is at 11pm
+          return startIndex+"/"+49
+      }
+      if(startIndex === 48){
+        return startIndex +"/"+ 49
+      }
+
+
+      return startIndex+"/"+endIndex
+
+
+    }
+
+
+  }
+
 
 
 
@@ -452,12 +539,12 @@ class PickEventSyncDay extends React.Component{
              <div className = "eventSyncDayGrid">
 
                <div
-
+                 onClick = {() => this.onClearTempEvent() }
                  className = "weekEvent"
                  style = {{
                    display: this.state.tempStart === -1 ? "none":"",
                    gridColumn: "0/1",
-                   gridRow: this.renderTempEvent(this.state.tempStart, this.state.tempEnd) ,
+                   gridRow: this.hourEventIndex(this.state.tempStart, this.state.tempEnd) ,
                    backgroundColor: this.state.tempColor
                  }}
                  >
@@ -477,35 +564,53 @@ class PickEventSyncDay extends React.Component{
       }
 
 
-      // DELETE THIS LATER
+
+
       onDayHourClick = (e,position, day, hour) => {
+        // For this function, you will use to set up the temp start and temp
+        // end time so that you can move around the temp event
+
+        // You might also want to set up the day too that the event is selected
+        // on
         console.log( position, day, hour)
-        const selectedHour = dateFns.getHours(hour)
-        const selectedMin = dateFns.getMinutes(hour)
-        const selectedYear = dateFns.getYear(day)
-        const selectedMonth = dateFns.getMonth(day)
-        const selectedDate = dateFns.getDate(day)
-        const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour, selectedMin)
-        console.log(finalSelectedDate)
-        if (this.state.tempStart === position){
-          this.setState({
-            tempStart: -1,
-            tempEnd: -1,
-            selectedDate: null
-          })
-        } else {
-          this.setState({
-            tempStart: position+1,
-            tempEnd: position+3,
-            selectedDate: finalSelectedDate
-          })
-        }
-        console.log(finalSelectedDate)
+
+        const startTime = dateFns.format(hour, "HH:mm")
+        const newStartTime = this.timeConvertFunction(startTime)
+
+        // DO A CONDITIONAL HERE WHERE IF THERE IS A BLOCKED OUT EVENT, YOU
+        // ONLY DO 30 MINS
+        const endTime = dateFns.format(dateFns.addHours(hour, 1), "HH:mm")
+        const newEndTime = this.timeConvertFunction(endTime)
+
+        const date = day
+
+        // Now that you have all the values you can now pass the values
+        // into the state so that the temp event can change
+
+        this.setState({
+          tempStart: newStartTime,
+          tempEnd: newEndTime,
+          tempDate: date
+        })
+        // if (this.state.tempStart === position){
+        //   this.setState({
+        //     tempStart: -1,
+        //     tempEnd: -1,
+        //     selectedDate: null
+        //   })
+        // } else {
+        //   this.setState({
+        //     tempStart: position+1,
+        //     tempEnd: position+3,
+        //     selectedDate: finalSelectedDate
+        //   })
+        // }
       }
 
       addEventClick = () => {
         // This function will be in charge of passing in the right data
-        // the coordinates so that the temp event can show up
+
+
 
       }
 
