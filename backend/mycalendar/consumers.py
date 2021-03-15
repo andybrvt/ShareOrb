@@ -55,8 +55,12 @@ class CalendarConsumer(JsonWebsocketConsumer):
         start_time = data['startDate'];
         end_time = data['endDate']
         title = data['title'];
-        content = data['content'];
-        location = data['location'];
+
+        # dont need these two
+        # content = data['content'];
+        # location = data['location'];
+
+
         host = get_object_or_404(User, id = data['host']);
         # person = [currentUser, userFriend];
         accepted = [host];
@@ -65,10 +69,10 @@ class CalendarConsumer(JsonWebsocketConsumer):
         repeatCondition = data['repeatCondition'];
         newEvent = Event.objects.create(
             title = title,
-            content = content,
+            # content = content,
             start_time = start_time,
             end_time = end_time,
-            location = location,
+            # location = location,
             color = color,
             repeatCondition = repeatCondition,
             host = host,

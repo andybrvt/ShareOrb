@@ -132,27 +132,16 @@ class PickEventSyncModal extends React.Component{
     console.log(this.state)
     return(
       <div>
-        <Modal
-          centered
-          footer = {null}
-          visible = {this.props.isVisible}
-          // visible = {true}
-          onCancel = {this.props.close}
-          width = {1100}
-          centered
-          bodyStyle={{height:'575px', top:'100px'}}>
-          <div class="parentEventSyncContainer">
+
             { dateFns.differenceInCalendarDays(
               new Date (this.props.maxDate),
               new Date (this.props.minDate)
             ) === 1 ?
               <PickEventSyncDay {...this.props}/>
                 :
-              <PickEventSyncWeek />
+              <PickEventSyncWeek {...this.props} />
             }
-          </div>
 
-        </Modal>
       </div>
     )
   }

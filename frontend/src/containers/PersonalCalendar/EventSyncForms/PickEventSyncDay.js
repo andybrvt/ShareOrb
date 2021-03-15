@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../PersonalCalCSS/EventSync.css';
-import { DatePicker, TimePicker, Button, Input, Select, Avatar, Radio, Card, Row, Col, notification } from 'antd';
+import {  Modal, DatePicker, TimePicker, Button, Input, Select, Avatar, Radio, Card, Row, Col, notification } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
@@ -120,6 +120,18 @@ class PickEventSyncDay extends React.Component{
     console.log(startIndex, endIndex)
     return startIndex +"/"+endIndex
 
+  }
+
+  onClose = () =>{
+    this.setState({
+      selectedDate: null,
+      tempStart: -1,
+      tempEnd: -1,
+      tempDate: null,
+      tempColor: "#1890FF",
+      tempTitle: ""
+    })
+    this.props.close()
   }
 
   // onClearTempEvent = () => {
@@ -946,23 +958,39 @@ class PickEventSyncDay extends React.Component{
       console.log(value)
       console.log(this.props.currentUser)
       console.log(this.props.userFriend)
-      if (this.state.selectedDate === null){
-        throw new SubmissionError({
-          _error: '*Please pick a date'
-        })
-      } else {
+      // if (this.state.selectedDate === null){
+      //   throw new SubmissionError({
+      //     _error: '*Please pick a date'
+      //   })
+      // } else {
         const notificationId = this.props.notificationId
-        const startTime = this.state.selectedDate
-        const endTime = dateFns.addHours(startTime, 1)
 
-        let content = ''
-        let location = ''
-        if (value.content){
-          content = value.content
-        }
-        if (value.location){
-          location = value.location
-        }
+        // sicne we are not doing the selected time thing any more we will
+        // take the selected date which is jsut the current date and then
+        // add in the times that were choose but you first gotta convert it
+        // to 24 hour time
+
+        // Since this is just for one day you can just pick
+        // the date directly from the minDate
+        const dateStart = new Date(this.props.minDate)
+        const dateEnd = new Date(this.props.minDate)
+        // adjusted will be for the the time zone change
+        const adjustedStart = dateFns.addHours(dateStart, dateStart.getTimezoneOffset()/60)
+        const adjustedEnd = dateFns.addHours(dateEnd, dateEnd.getTimezoneOffset()/60)
+
+
+        const convertStartTime = this.timeConvert(value.startTime)
+        const convertEndTime = this.timeConvert(value.endTime)
+
+        let startDateTime = dateFns.addHours(adjustedStart, convertStartTime.firstHour )
+        startDateTime = dateFns.addMinutes(startDateTime, convertStartTime.firstMin)
+
+        let endDateTime = dateFns.addHours(adjustedEnd, convertEndTime.firstHour)
+        endDateTime = dateFns.addMinutes(endDateTime, convertEndTime.firstMin)
+
+
+        console.log(startDateTime)
+        console.log(endDateTime)
         // For submitEvent object:
         // title, value, location, event color will just be strings
         // person, and invited will be a list of usernames
@@ -973,11 +1001,9 @@ class PickEventSyncDay extends React.Component{
           title: value.title,
           person: [this.props.currentUser, this.props.userFriend.username],
           invited: [this.props.userFriend.username],
-          content: content,
-          location: location,
           eventColor: value.eventColor,
-          startDate: startTime,
-          endDate: endTime,
+          startDate: startDateTime,
+          endDate: endDateTime,
           repeatCondition: "none",
           host: this.props.id,
         }
@@ -998,7 +1024,15 @@ class PickEventSyncDay extends React.Component{
         authAxios.delete(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
         this.props.deleteNotification(notificationId)
         this.openNotification('bottomLeft', this.state.selectedDate)
-      }
+      // }
+      this.setState({
+        selectedDate: null,
+        tempStart: -1,
+        tempEnd: -1,
+        tempDate: null,
+        tempColor: "#1890FF",
+        tempTitle: ""
+      })
     }
 
     openNotification = (placement,date)  => {
@@ -1143,6 +1177,18 @@ class PickEventSyncDay extends React.Component{
       console.log(tempStart)
 
       return (
+
+        <Modal
+          centered
+          footer = {null}
+          visible = {this.props.isVisible}
+          // visible = {true}
+          onCancel = {this.onClose}
+          width = {1100}
+          centered
+          bodyStyle={{height:'575px', top:'100px'}}>
+          <div class="parentEventSyncContainer">
+
         <div className = 'eventSyncCalendarContainer'>
           <div className = 'syncCalendar'>
             <div className = 'syncHeader'>
@@ -1194,7 +1240,7 @@ class PickEventSyncDay extends React.Component{
 
               </div>
               <div>
-                <div>
+                <div style={{fontSize:'15px', color:'#8c8c8c', marginRight:'10px'}}>
                   *Pick a time either by clicking on the cells or the dropdown*
                 </div>
               </div>
@@ -1219,6 +1265,10 @@ class PickEventSyncDay extends React.Component{
           </Row>
 
         </div>
+
+
+      </div>
+    </Modal>
       )
     }
 

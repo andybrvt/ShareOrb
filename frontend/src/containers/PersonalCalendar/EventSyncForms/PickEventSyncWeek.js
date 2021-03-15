@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../PersonalCalCSS/EventSync.css';
-import { DatePicker, TimePicker, Avatar, Button, Input, Select, Radio, Card, Row, Col, notification } from 'antd';
+import { Modal, DatePicker, TimePicker, Avatar, Button, Input, Select, Radio, Card, Row, Col, notification } from 'antd';
 import PickEventSyncForm from './PickEventSyncForm';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
@@ -898,6 +898,17 @@ class PickEventSyncWeek extends React.Component{
     console.log(this.props)
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
+
+      <Modal
+        centered
+        footer = {null}
+        visible = {this.props.isVisible}
+        // visible = {true}
+        onCancel = {this.props.close}
+        width = {1100}
+        centered
+        bodyStyle={{height:'575px', top:'100px'}}>
+        <div class="parentEventSyncContainer">
       <div className = 'eventSyncCalendarContainer'>
         <div className = 'syncCalendar'>
           <div className = 'syncHeader' style={{marginBottom:'25px'}}>
@@ -943,6 +954,8 @@ class PickEventSyncWeek extends React.Component{
 
         </Row>
       </div>
+    </div>
+  </Modal>
     )
   }
 

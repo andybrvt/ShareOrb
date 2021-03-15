@@ -605,8 +605,7 @@ class PickEventSyncForm extends React.Component {
 
             </div>
 
-              {error && <strong style = {{color: 'red'}}>{error}</strong>}
-              <div className = 'eventSyncSurroundings'>
+            <div className = 'eventSyncSurroundings'>
 
             <div className = 'clearEventSyncFormButton' >
               <Button
