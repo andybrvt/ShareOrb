@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as dateFns from 'date-fns';
 import '../PersonalCalCSS/EventSync.css';
 import { Modal, DatePicker, TimePicker, Avatar, Button, Input, Select, Radio, Card, Row, Col, notification } from 'antd';
-import PickEventSyncForm from './PickEventSyncForm';
+import PickEventSyncFormWeek from './PickEventSyncFormWeek';
 import CalendarEventWebSocketInstance from '../../../calendarEventWebsocket';
 import NotificationWebSocketInstance from '../../../notificationWebsocket';
 import { Field, reduxForm, reset, formValueSelector, SubmissionError } from 'redux-form';
@@ -731,34 +731,42 @@ class PickEventSyncWeek extends React.Component{
 
   }
 
-  getInitialValue = () => {
+  getInitialValue = (tempTitle, tempDate, tempStart, tempEnd, tempColor) => {
     // This will pass an initial value through the Field
 
-    // There is an issue with the utc_start and utc_end and start_time and end time
-    const date_start = new Date(this.state.selectedDate)
-    const utc_start = dateFns.addHours(date_start, date_start.getTimezoneOffset()/60)
-    const date_end = new Date(this.state.end_date)
-    const utc_end = dateFns.addHours(date_end, date_end.getTimezoneOffset()/60)
-    // const start_time = dateFns.getHours(date_start)
-    // const end_time = dateFns.getMinutes(date_start)
+    // Pretty much used to update the values in the pickeventsync form
 
-    // console.log(start_time)
-    return{
-      // start_time: dateFns.format(new Date(this.props.start_time), 'yyyy-MM-dd HH:mm a'),
-      // end_time: dateFns.format(new Date(this.props.end_time), 'yyyy-MM-dd HH:mm a'),
-      // dateRange: [dateFns.format(date_start, 'yyyy-MM-dd'), dateFns.format(date_end, 'yyyy-MM-dd')],
-      dateRange: [moment(this.props.start_date, 'YYYY-MM-DD'), moment(this.props.end_date, 'YYYY-MM-DD')],
-      startDate: moment(this.props.start_date, 'YYYY-MM-DD'),
-      endDate: moment(this.props.end_date, 'YYYY-MM-DD'),
-      location: this.props.location,
-      eventColor: this.props.eventColor,
-      repeatCondition: 'none',
-      friends: [],
-      eventColor:'#91d5ff',
-      startTime:"12:00 AM",
-      endTime:"01:00 AM",
-      whichDay:3,
+    // For this one you pretty much jsut need the start date, the end date
+    // will just follow
+    console.log(tempTitle, tempDate, tempStart, tempEnd, tempColor)
+
+    const startTime = tempStart
+    const endTime = tempEnd
+    const title  = tempTitle
+    const eventColor = tempColor
+    let date = tempDate
+    if(date !== null){
+      date = moment(tempDate, "YYYY-MM-DD")
     }
+
+    if((startTime === -1 || endTime === -1) && title === "" && date === null ){
+      return {
+        startTime: "",
+        endTime: "",
+        title: title,
+        eventColor: eventColor,
+
+      }
+    } else {
+      return {
+        startTime: startTime,
+        endTime: endTime,
+        title: title,
+        eventColor: eventColor
+      }
+    }
+
+
   }
 
 
@@ -767,6 +775,30 @@ class PickEventSyncWeek extends React.Component{
 
     console.log(this.state)
     console.log(this.props)
+
+    let tempStart = ""
+    let tempEnd = ""
+    let tempDate = ""
+    let tempTitle = ""
+    let tempColor = ""
+
+    if(this.state.tempStart){
+      tempStart = this.state.tempStart
+    }
+    if(this.state.tempEnd){
+      tempEnd = this.state.tempEnd
+    }
+    if(this.state.tempTitle){
+      tempTitle = this.state.tempTitle
+    }
+    if(this.state.tempColor){
+      tempColor = this.state.tempColor
+    }
+    if(this.state.tempStartDate){
+      tempDate = this.state.tempStartDate
+    }
+
+
     const {handleSubmit, pristine, invalid, reset, submitting, error } = this.props
     return (
 
@@ -810,16 +842,22 @@ class PickEventSyncWeek extends React.Component{
 
             </div>
             <div class="rightBottomEventSync">
-              <PickEventSyncForm
+              <PickEventSyncFormWeek
               onSubmit = {this.submit}
-              initialValues = {this.getInitialValue()}
+              initialValues = {this.getInitialValue(
+                tempTitle,
+                tempDate,
+                tempStart,
+                tempEnd,
+                tempColor
+              )}
               active = {this.state.active}
               startTime={dateFns.format(new Date(this.state.selectedDate), "hh:mm a" )}
               endTime={dateFns.format(dateFns.addHours(new Date(this.state.selectedDate),1), "hh:mm a" )}
               whichDay={dateFns.format(new Date(this.state.selectedDate), "d" )}
                />
              </div>
-          <Col span={8}></Col>
+          
           </div>
 
 

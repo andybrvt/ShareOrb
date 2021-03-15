@@ -20,12 +20,12 @@
 }
 
 .rightTopEventSync{
-  left:50%;
-  top:25%;
+  /* left:50%; */
+  /* top:25%; */
   position: relative;
   height: 40%;
   vertical-align: middle;
-  transform: translateX(-50%) translateY(-50%);
+  /* transform: translateX(-50%) translateY(-50%); */
   font-weight: 550;
   font-size: 16px;
   color:grey;
