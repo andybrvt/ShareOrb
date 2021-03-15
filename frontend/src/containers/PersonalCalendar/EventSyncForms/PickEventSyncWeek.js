@@ -108,6 +108,12 @@ class PickEventSyncWeek extends React.Component{
     state = {
       active: null,
       selectedDate: null,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: null,
+      tempEndDate: null,
+      tempColor: "#1890FF",
+      tempTitle: ""
     }
 
 
@@ -133,8 +139,125 @@ class PickEventSyncWeek extends React.Component{
       return <div className= 'body'> {hour} </div>
     }
 
+    timeConvert = (time) => {
+      // This function will take in a time and then covert the time to
+      // a 1-24 hour hour so that it cna be used to add into the
+      // date and be submited
+
+      console.log(time)
+      let hour = parseInt(time.substring(0,2))
+      let minutes = parseInt(time.substring(3,5))
+      let ampm = time.substring(5,8)
+
+      console.log(minutes)
+      console.log(hour)
+
+      let convertedTime = ''
+
+      if (time.includes('PM')){
+        if (hour !==  12){
+          hour = hour + 12
+        }
+      } else if (time.includes('AM')){
+        if(hour === 12){
+          hour = 0
+        }
+      }
+
+      const timeBundle = {
+        firstHour: hour,
+        firstMin: minutes
+      }
+
+      return timeBundle
+
+    }
+
+
+    hourEventIndex = (start_time, end_time ) => {
+
+      // Simlar to that of the hourEvent index of the calendarpopover
+      // but because the inputs are in the format "HH:MM am" there is a bit of a
+      // change
+
+      console.log(start_time, end_time)
+      if(start_time === -1 || end_time === -1){
+        return "-1"
+      } else if(start_time && end_time){
+        const start = this.timeConvert(start_time)
+        const end = this.timeConvert(end_time)
+        console.log(start, end)
+        let startIndex = (start.firstHour * 2) +1
+        if(start.firstMin === 30){
+          startIndex = startIndex +1
+        }
+
+        let endIndex = end.firstHour * 2
+        if(end.firstMin === 30){
+          endIndex = endIndex + 1
+        }
+        endIndex = endIndex +1
+
+        console.log(startIndex+"/"+endIndex)
+        if(startIndex === 47){
+          // handle the condition where the time is at 11pm
+            return startIndex+"/"+49
+        }
+        if(startIndex === 48){
+          return startIndex +"/"+ 49
+        }
+
+
+        return startIndex+"/"+endIndex
+
+
+      }
+
+
+    }
+
+    dayEventIndex = (startDate, endDate) => {
+
+      // Simlar to taht of the dayEventIndex in calednarpoppover but the only input
+      // will be that of the startDate
+      console.log(startDate, endDate)
+       if(startDate === -1 || endDate === -1){
+         return "-1"
+       } else {
+         console.log(new Date(startDate))
+         const curStartDate = new Date(startDate)
+         const curEndDate = new Date(endDate)
+         console.log(curStartDate, curEndDate)
+         const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
+         const startWeek = dateFns.startOfWeek(curStartDate)
+         const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
+
+
+         let startIndex = dayDiff+1
+         let endIndex = startIndex+curDayDiff+ 1
+
+         console.log(this.state.tempStart)
+         console.log(dayDiff)
+         console.log(curDayDiff)
+         if(this.state.tempStart === "11:00 PM" || this.state.tempStart === "11:30 PM"){
+           // handle the next day
+           console.log(startIndex)
+           endIndex = startIndex + 1
+           return startIndex+'/'+ endIndex
+
+         }
+
+         console.log(startIndex, endIndex)
+         return startIndex+'/'+endIndex
+
+       }
+
+
+
+    }
+
+
     renderWeekCell(events){
-      console.log(events)
       // Render the week cell, so what you want to do is pick the first to be the minDate and
       // the last day will be the maxDate
       // You will loop through each hour of each day and then redner through each day of the week
@@ -391,29 +514,53 @@ class PickEventSyncWeek extends React.Component{
          hour = dateFns.addMinutes(hour, 30)
        }
 
-       return <div className = 'body'>{hours}</div>
+       return <div className = 'body'>
+         <div className = "eventSyncWeekGrid">
+           <div
+             className = "weekEvent"
+             style = {{
+               gridColumn: this.dayEventIndex(this.state.tempStartDate, this.state.tempEndDate),
+               gridRow: this.hourEventIndex(this.state.tempStart, this.state.tempEnd),
+               backgroundColor: this.state.tempColor,
+             }}
+             >
+             Test
+           </div>
+         </div>
+         {hours}
+
+       </div>
     }
 
     onDayHourClick = (e,position, day, hour) => {
-      console.log(hour)
-      const selectedHour = dateFns.getHours(hour)
-      const selectedMin = dateFns.getMinutes(hour)
-      const selectedYear = dateFns.getYear(day)
-      const selectedMonth = dateFns.getMonth(day)
-      const selectedDate = dateFns.getDate(day)
-      const finalSelectedDate = new Date(selectedYear, selectedMonth, selectedDate, selectedHour, selectedMin)
-      if (this.state.active === position){
-        this.setState({
-          active: null,
-          selectedDate: null
-        })
-      } else {
-        this.setState({
-          active: position,
-          selectedDate: finalSelectedDate
-        })
-      }
-      console.log(finalSelectedDate)
+      // This function will pretty much grab the day and date of the
+      // event that is clicked on
+
+
+      console.log(position, day, hour)
+
+      // First get the date
+      const date = new Date(day)
+
+      const startTime = dateFns.format(hour, "HH:mm")
+      const newStartTime = this.timeConvertFunction(startTime)
+
+
+      // Now do the end time too
+      const endTime = dateFns.format(dateFns.addHours(hour,1), "HH:mm")
+      const newEndTime = this.timeConvertFunction(endTime)
+
+      // Now you set it as the states so that it can change
+      // on the calendar
+
+      this.setState({
+        tempStart: newStartTime,
+        tempEnd: newEndTime,
+        tempStartDate: date,
+        tempEndDate: date
+      })
+
+
     }
 
     renderEndTimeSelect = () => {

@@ -223,6 +223,19 @@
   /* z-index: 1; */
 }
 
+.eventSyncWeekGrid{
+  display: grid;
+  /* border-bottom: 1px solid var(--border-color); */
+  /* grid-auto-flow: dense; */
+  width: 100%;
+  grid-template-columns: repeat(7, 14.2%);
+  grid-template-rows: repeat(48, 30px);
+  background-color: red;
+  position:absolute;
+  top: 0;
+  left: 0;
+}
+
 
 .eventSyncCalendarContainer .syncCalendar .syncBody .syncGrid .body .hourcell{
   position: relative;
