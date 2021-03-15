@@ -50,6 +50,16 @@ class MiniEventSerializer(serializers.ModelSerializer):
         )
 
 
+class EventSyncEventSerializer(serializers.ModelSerializer):
+    # used for event sync, you only really need the time
+    class Meta:
+        model = models.Event
+        fields = (
+            "id",
+            "start_time",
+            "end_time",
+            "repeatCondition"
+        )
 
 class EventSerializer (serializers.ModelSerializer):
     # Event serializer for admins

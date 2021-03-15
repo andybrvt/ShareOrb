@@ -150,7 +150,7 @@ class GrabDayEvents(generics.ListAPIView):
 
 # This is to test if the filter works
 class CalendarTestEventsView(generics.ListAPIView):
-    serializer_class = serializers.EventSerializer
+    serializer_class = serializers.EventSyncEventSerializer
 
     def get_queryset(self):
         print(self.request)
