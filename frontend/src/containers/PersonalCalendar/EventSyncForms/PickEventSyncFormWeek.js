@@ -618,12 +618,12 @@ class PickEventSyncFormWeek extends React.Component {
 }
 
 PickEventSyncFormWeek = reduxForm ({
-  form: 'event sync add event',
+  form: 'event sync week add event',
   enableReinitialize: true,
   onSubmitSuccess: afterSubmit
 }) (PickEventSyncFormWeek)
 
-const selector = formValueSelector('event sync add event')
+const selector = formValueSelector('event sync week add event')
 
 
 

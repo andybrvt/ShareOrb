@@ -13,94 +13,7 @@ import { authAxios } from '../../../components/util';
 import PickEventSyncUserProfileCard from './PickEventSyncUserProfileCard.js';
 import moment from 'moment';
 
-const { Option } = Select;
 
-const { TextArea } = Input
-const required = value => value ? undefined : '*Required'
-const renderField = (field) => {
-return (
-    <Input
-    {...field.input}
-    type = {field.type}
-    placeholder= {field.placeholder}
-    className = 'box'/>
-  )
-}
-
-const renderLocationField = (field) => {
-  console.log(field.meta)
-  return (
-    <span>
-    <Input style={{width:'50%',fontSize:'14px'}}
-    {...field.input}
-    type = {field.type}
-    placeholder= {field.placeholder}
-    className = 'box'/>
-
-    </span>
-  )
-}
-
-const renderStartDateSelect = (field) => {
-  // This const will render the start time of the event
-  // So before you choose any value you want to have the field
-  // input as a value in your select... because the input value will be the value
-  // that will be return to the field when you input a value
-  // Bascially everything goes through the value first, and what ever is here inspect
-  // is just for show
-
-
-  console.log(field)
-  return (
-    <Select
-      // {...field.input}
-      style = {{width: '115px', marginRight:'15px'}}
-      onChange = {field.input.onChange}
-      value = {field.input.value}
-      className = 'timebox'>
-
-    {field.children}
-    </Select>
-  )
-}
-
-
-const renderStartTime = () => {
-    const timeFormat = "hh:mm a"
-    const time = []
-    let start = dateFns.startOfDay(new Date())
-    let startHour = dateFns.getHours(new Date())
-    let startMins = dateFns.getMinutes(new Date())
-    for (let i = 0; i< 48; i++){
-      const cloneTime = startHour + ':' + startMins
-      time.push(
-        <Option
-        key = {dateFns.format(start, timeFormat)}
-        value= {dateFns.format(start, timeFormat)} >
-        {dateFns.format(start, timeFormat)}
-        </Option>
-      )
-      start = dateFns.addMinutes(start, 30)
-    }
-    console.log(time)
-    return time
-  }
-
-const afterSubmit = (result, dispatch) =>
-  dispatch(reset('event sync add event'))
-
-const renderStartDate = (field) => {
-  console.log(field)
-  return (
-    <DatePicker
-    onChange = {field.input.onChange}
-    value = {field.input.value}
-    style = {{width: '110px', marginRight:'15px'}}
-    suffixIcon={<div></div>}
-    allowClear = {false}
-     />
-  )
-}
 
 
 class PickEventSyncWeek extends React.Component{
@@ -116,6 +29,41 @@ class PickEventSyncWeek extends React.Component{
       tempTitle: ""
     }
 
+    onFormChange = (value) => {
+      // Will take care of the on change for the form
+      // so that when you change the form it changes
+      // the event
+
+      console.log(value)
+      if(value.startTime
+        && value.endTime
+        && (value.title || value.title === "")
+        && value.eventColor
+        && value.startDate
+      ){
+        if(value.startTime === "" || value.endTime === ""){
+          this.setState({
+            tempStart: -1,
+            tempEnd: -1,
+            tempTitle: value.title,
+            tempColor: value.eventColor,
+            tempStartDate: value.startDate,
+            tempEndDate: value.startDate
+          })
+        } else {
+          console.log(value.title)
+          this.setState({
+            tempStart: value.startTime,
+            tempEnd: value.endTime,
+            tempTitle: value.title,
+            tempColor: value.eventColor,
+            tempStartDate: value.startDate,
+            tempEndDate: value.startDate
+          })
+        }
+      }
+
+    }
 
 
 
@@ -569,7 +517,12 @@ class PickEventSyncWeek extends React.Component{
                  backgroundColor: this.state.tempColor,
                }}
                >
-               Test
+               <div>
+                 {this.state.tempTitle}
+               </div>
+               <div>
+                 {this.state.tempStart}-{this.state.tempEnd}
+               </div>
              </div>
 
              {this.renderBlockedTimes(events)}
@@ -903,7 +856,9 @@ class PickEventSyncWeek extends React.Component{
                 tempEnd,
                 tempColor
               )}
-
+              onChange = {this.onFormChange}
+              minDate = {this.props.minDate}
+              maxDate = {this.props.maxDate}
                />
              </div>
 
