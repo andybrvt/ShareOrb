@@ -689,6 +689,16 @@ class PickEventSyncWeek extends React.Component{
     this.props.deleteNotification(notificationId)
     this.openNotification('bottomLeft', this.state.selectedDate)
 
+    this.setState({
+      active: null,
+      selectedDate: null,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: null,
+      tempEndDate: null,
+      tempColor: "#1890FF",
+      tempTitle: ""
+    })
   }
 
   openNotification = (placement,date)  => {
@@ -780,6 +790,20 @@ class PickEventSyncWeek extends React.Component{
 
   }
 
+  onClose = () => {
+    this.setState({
+      active: null,
+      selectedDate: null,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: null,
+      tempEndDate: null,
+      tempColor: "#1890FF",
+      tempTitle: ""
+    })
+    this.props.close()
+  }
+
 
   render() {
     const { Meta } = Card
@@ -818,7 +842,7 @@ class PickEventSyncWeek extends React.Component{
         footer = {null}
         visible = {this.props.isVisible}
         // visible = {true}
-        onCancel = {this.props.close}
+        onCancel = {() => this.onClose()}
         width = {1100}
         centered
         bodyStyle={{height:'575px', top:'100px'}}>
