@@ -150,9 +150,7 @@ class PickEventSyncFormWeek extends React.Component {
 
   disabledDate = (current) => {
     // this function will disabled certain dates that are unpickable
-    console.log(current)
-    console.log(moment(new Date(this.props.minDate)))
-    console.log(moment(new Date(this.props.maxDate)))
+
     return (
       // new Date(this.props.minDate)
 
