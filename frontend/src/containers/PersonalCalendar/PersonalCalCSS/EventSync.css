@@ -40,6 +40,22 @@
   font-family: 'Segoe UI Regular';
 }
 
+.blockedEvents{
+  /* position: relative; */
+  cursor:not-allowed;
+  /* background: var(--neutral-color); */
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    #ccc 10px,
+    #ccc 20px
+  );
+  background-color: lightgray;
+  opacity: 0.5;
+  z-index: 1;
+}
+
 .leftESync{
   width:100%;
   height: 100%;

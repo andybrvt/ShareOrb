@@ -107,7 +107,6 @@ const renderStartTime = () => {
       )
       start = dateFns.addMinutes(start, 30)
     }
-    console.log(time)
     return time
   }
 
@@ -430,10 +429,7 @@ class PickEventSyncFormWeek extends React.Component {
 
     // So this is where the end Date will be changed if the startDate or endDate
     // seems to be ahead of the endDate
-    console.log(value)
-    if (dateFns.isAfter(new Date(value),new Date(this.props.endDate))){
-      change('endDate', value)
-    }
+
   }
 
   renderEndTimeSelect = () => {
@@ -635,5 +631,6 @@ export default connect(state => ({
   title: selector(state, "title"),
   startTime: selector(state, "startTime"),
   endTime: selector(state, "endTime"),
-  eventColor: selector(state, "eventColor")
+  eventColor: selector(state, "eventColor"),
+  startDate: selector(state, "startDate")
 })) (PickEventSyncFormWeek);

@@ -228,13 +228,18 @@ class PickEventSyncWeek extends React.Component{
          const curStartDate = new Date(startDate)
          const curEndDate = new Date(endDate)
          console.log(curStartDate, curEndDate)
+         // Int his case you cant use start of week bc the start of week is not const
+         // So the start of the week has to be min date
+
+         console.log(dateFns.addHours(new Date(this.props.minDate), new Date().getTimezoneOffset()/60))
          const curDayDiff = dateFns.differenceInCalendarDays(curEndDate, curStartDate)
-         const startWeek = dateFns.startOfWeek(curStartDate)
+         const startWeek = dateFns.addHours(new Date(this.props.minDate), new Date().getTimezoneOffset()/60)
          const dayDiff = dateFns.differenceInCalendarDays(curStartDate, startWeek)
 
 
          let startIndex = dayDiff+1
-         let endIndex = startIndex+curDayDiff+ 1
+
+         let endIndex = startIndex+curDayDiff+1
 
          console.log(this.state.tempStart)
          console.log(dayDiff)
@@ -256,19 +261,57 @@ class PickEventSyncWeek extends React.Component{
 
     }
 
+    renderBlockedTimes =( events ) => {
+      // this function will run the events and then give them a grid coordinate
+      console.log(events)
+      let gridEvents = []
+
+      for (let i= 0; i< events.length; i++){
+        console.log(events[i].start_time)
+        console.log(new Date(events[i].start_time))
+        const date = new Date(events[i].start_time)
+        const start = new Date(events[i].start_time)
+
+        const end= new Date(events[i].end_time)
+
+
+        const startTime = dateFns.format(start, "HH:mm")
+        const newStartTime = this.timeConvertFunction(startTime)
+
+        const endTime = dateFns.format(end, "HH:mm")
+        const newEndTime = this.timeConvertFunction(endTime)
+
+        console.log(newStartTime, newEndTime)
+
+        gridEvents.push(
+          <div
+            className = "blockedEvents"
+            style = {{
+              gridColumn: this.dayEventIndex(date, date),
+              gridRow: this.hourEventIndex(newStartTime, newEndTime),
+            }}
+            >
+
+          </div>
+        )
+      }
+
+      return gridEvents
+    }
+
 
     renderWeekCell(events){
+      console.log(events)
       // Render the week cell, so what you want to do is pick the first to be the minDate and
       // the last day will be the maxDate
       // You will loop through each hour of each day and then redner through each day of the week
 
       // Probally have to fix this later when we readjust the timezone issue.
-      const minDate = dateFns.addHours(new Date(this.props.minDate),7);
-      const maxDate = dateFns.addHours(new Date(this.props.maxDate),7);
+      const minDate = dateFns.addHours(new Date(this.props.minDate), new Date().getTimezoneOffset()/60);
+      const maxDate = dateFns.addHours(new Date(this.props.maxDate),new Date().getTimezoneOffset()/60);
       // This will be different from the calendar week calendar in that it doesn't start from the beginning
       // of the week but rather it will start from beginning of the date range
-      console.log(this.props.minDate, this.props.maxDate)
-      console.log(minDate, maxDate)
+
       const hourFormat = 'h a'
       const dayFormat = 'd MMMM'
       // This hour list will hold 24 items, each list will be for each hour of each day 5x24
@@ -284,7 +327,6 @@ class PickEventSyncWeek extends React.Component{
        const startHourDay = dateFns.startOfDay(date);
        const endHourDay = dateFns.endOfDay(date);
 
-       console.log(startHourDay)
 
        let formattedDay = '';
 
@@ -310,181 +352,182 @@ class PickEventSyncWeek extends React.Component{
             // This loop will loop thorugh all the events and if the hour and day matches and it will
             // add it to the toDoStuff which will loopp thorugh each each cell then it will be
             // cleared out again
-            for (let item = 0; item<events.length; item++){
-              const startHour = dateFns.getHours(new Date(events[item].start_time))
-              const startMin = dateFns.getMinutes(new Date(events[item].start_time))
-              const endHour = dateFns.getHours(new Date(events[item].end_time))
-              const endMin = dateFns.getMinutes(new Date(events[item].end_time))
-              const curHour = dateFns.getHours(new Date(hour))
-              const curMin = dateFns.getMinutes(new Date(hour))
 
-
-              const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
-              const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
-
-              console.log(startHour, startMin)
-              console.log(sameDayStart, sameDayEnd, startHour, startMin,new Date(events[item].start_time), cloneDay )
-
-              if (
-                startHour === 23
-              ){
-
-                if(
-                 startMin === 30
-                 &&
-                 startHour === curHour
-                 &&
-                 startMin === curMin
-                 &&
-                 (sameDayStart || sameDayEnd)
-               ){
-                 console.log('right here')
-                 toDoStuff.push(
-                   events[item]
-                 )
-               }
-                else if(
-                  startMin === 0
-                  &&
-                  startMin === curMin
-                  &&
-                  startHour === curHour
-                  &&
-                  (sameDayStart || sameDayEnd)
-                ) {
-
-                  toDoStuff.push(
-                    events[item]
-                  )
-                }
-
-
-                if (endHour === 0){
-                  if (
-                    startMin === 0
-                    &&
-                    startHour === curHour
-                    &&
-                    (sameDayStart || sameDayEnd)
-                  ){
-                    toDoStuff.push(
-                      events[item]
-                    )
-                  } else if(
-                    startMin === 30
-                    &&
-                    startMin === curMin
-                    &&
-                    startHour === curHour
-                    &&
-                    (sameDayStart || sameDayEnd)
-                  ){
-                    toDoStuff.push(
-                      events[item]
-                    )
-                  }
-
-                }
-
-
-              }
-              else {
-                if (
-                  startHour === curHour
-                  &&
-                  startMin === curMin
-                  &&
-                  (sameDayStart || sameDayEnd)
-
-                ){
-                  console.log('test1')
-                  toDoStuff.push(
-                    events[item]
-                  )
-                }
-                if(
-                  endHour === curHour
-                  &&
-                  endMin === 30
-                  &&
-                  endMin-30 === curMin
-                  &&
-                  (sameDayStart || sameDayEnd)
-                ){
-                  console.log('test1')
-                  toDoStuff.push(
-                    events[item]
-                  )
-                } else if (
-                  endMin === 0
-                  &&
-                  endHour -1 === curHour
-                  &&
-                  endMin+30 === curMin
-                  &&
-                  (sameDayStart || sameDayEnd)
-                ){
-                  console.log('test1')
-                  toDoStuff.push(
-                    events[item]
-                  )
-                }
-
-                if(
-                  startMin === 30
-
-                ){
-                  if(
-                    startHour < curHour
-                    &&
-                    endHour > curHour
-                    &&
-                    (0 === curMin
-                    ||
-                    30 === curMin)
-                    &&
-                    (sameDayStart || sameDayEnd)
-                  ){
-                    console.log('test1')
-                    toDoStuff.push(
-                      events[item]
-                    )
-                  }
-
-                } else if (
-                  startMin === 0
-
-                ){
-                  if (
-                    startHour <= curHour
-                    &&
-                    endHour> curHour
-                    &&
-                    (sameDayStart || sameDayEnd)
-                  ){
-                    toDoStuff.push(
-                      events[item]
-                    )
-                  }
-
-                }
-
-
-              }
-
-
-            }
+            // for (let item = 0; item<events.length; item++){
+            //   const startHour = dateFns.getHours(new Date(events[item].start_time))
+            //   const startMin = dateFns.getMinutes(new Date(events[item].start_time))
+            //   const endHour = dateFns.getHours(new Date(events[item].end_time))
+            //   const endMin = dateFns.getMinutes(new Date(events[item].end_time))
+            //   const curHour = dateFns.getHours(new Date(hour))
+            //   const curMin = dateFns.getMinutes(new Date(hour))
+            //
+            //
+            //   const sameDayStart = dateFns.isSameDay(new Date(events[item].start_time), cloneDay)
+            //   const sameDayEnd = dateFns.isSameDay(new Date(events[item].end_time), cloneDay)
+            //
+            //   console.log(startHour, startMin)
+            //   console.log(sameDayStart, sameDayEnd, startHour, startMin,new Date(events[item].start_time), cloneDay )
+            //
+            //   if (
+            //     startHour === 23
+            //   ){
+            //
+            //     if(
+            //      startMin === 30
+            //      &&
+            //      startHour === curHour
+            //      &&
+            //      startMin === curMin
+            //      &&
+            //      (sameDayStart || sameDayEnd)
+            //    ){
+            //      console.log('right here')
+            //      toDoStuff.push(
+            //        events[item]
+            //      )
+            //    }
+            //     else if(
+            //       startMin === 0
+            //       &&
+            //       startMin === curMin
+            //       &&
+            //       startHour === curHour
+            //       &&
+            //       (sameDayStart || sameDayEnd)
+            //     ) {
+            //
+            //       toDoStuff.push(
+            //         events[item]
+            //       )
+            //     }
+            //
+            //
+            //     if (endHour === 0){
+            //       if (
+            //         startMin === 0
+            //         &&
+            //         startHour === curHour
+            //         &&
+            //         (sameDayStart || sameDayEnd)
+            //       ){
+            //         toDoStuff.push(
+            //           events[item]
+            //         )
+            //       } else if(
+            //         startMin === 30
+            //         &&
+            //         startMin === curMin
+            //         &&
+            //         startHour === curHour
+            //         &&
+            //         (sameDayStart || sameDayEnd)
+            //       ){
+            //         toDoStuff.push(
+            //           events[item]
+            //         )
+            //       }
+            //
+            //     }
+            //
+            //
+            //   }
+            //   else {
+            //     if (
+            //       startHour === curHour
+            //       &&
+            //       startMin === curMin
+            //       &&
+            //       (sameDayStart || sameDayEnd)
+            //
+            //     ){
+            //       console.log('test1')
+            //       toDoStuff.push(
+            //         events[item]
+            //       )
+            //     }
+            //     if(
+            //       endHour === curHour
+            //       &&
+            //       endMin === 30
+            //       &&
+            //       endMin-30 === curMin
+            //       &&
+            //       (sameDayStart || sameDayEnd)
+            //     ){
+            //       console.log('test1')
+            //       toDoStuff.push(
+            //         events[item]
+            //       )
+            //     } else if (
+            //       endMin === 0
+            //       &&
+            //       endHour -1 === curHour
+            //       &&
+            //       endMin+30 === curMin
+            //       &&
+            //       (sameDayStart || sameDayEnd)
+            //     ){
+            //       console.log('test1')
+            //       toDoStuff.push(
+            //         events[item]
+            //       )
+            //     }
+            //
+            //     if(
+            //       startMin === 30
+            //
+            //     ){
+            //       if(
+            //         startHour < curHour
+            //         &&
+            //         endHour > curHour
+            //         &&
+            //         (0 === curMin
+            //         ||
+            //         30 === curMin)
+            //         &&
+            //         (sameDayStart || sameDayEnd)
+            //       ){
+            //         console.log('test1')
+            //         toDoStuff.push(
+            //           events[item]
+            //         )
+            //       }
+            //
+            //     } else if (
+            //       startMin === 0
+            //
+            //     ){
+            //       if (
+            //         startHour <= curHour
+            //         &&
+            //         endHour> curHour
+            //         &&
+            //         (sameDayStart || sameDayEnd)
+            //       ){
+            //         toDoStuff.push(
+            //           events[item]
+            //         )
+            //       }
+            //
+            //     }
+            //
+            //
+            //   }
+            //
+            //
+            // }
 
             // You can always have access to the events, you just got to loop through
             // toDoStruff in the if below if you want to check
-            if (toDoStuff.length > 0){
-              days.push(
-                <div
-                  className = {`syncCol disabled ${checkMin === 0 ? "nonhourcellT":"nonhourcellB"} `}
-                >
-                </div>
-              )
-            } else {
+            // if (toDoStuff.length > 0){
+            //   days.push(
+            //     <div
+            //       className = {`syncCol disabled ${checkMin === 0 ? "nonhourcellT":"nonhourcellB"} `}
+            //     >
+            //     </div>
+            //   )
+            // } else {
               days.push(
                 <div
                   style = {{background: this.color(i)}}
@@ -494,7 +537,7 @@ class PickEventSyncWeek extends React.Component{
                 <span className = 'number'></span>
                 </div>
               )
-            }
+            // }
             toDoStuff = []
             date = dateFns.addDays(date, 1)
          }
@@ -528,7 +571,12 @@ class PickEventSyncWeek extends React.Component{
                >
                Test
              </div>
+
+             {this.renderBlockedTimes(events)}
            </div>
+
+
+
            {hours}
 
          </div>
@@ -557,6 +605,7 @@ class PickEventSyncWeek extends React.Component{
       // Now you set it as the states so that it can change
       // on the calendar
 
+      console.log(date)
       this.setState({
         tempStart: newStartTime,
         tempEnd: newEndTime,
@@ -740,6 +789,7 @@ class PickEventSyncWeek extends React.Component{
     // will just follow
     console.log(tempTitle, tempDate, tempStart, tempEnd, tempColor)
 
+    console.log(tempDate)
     const startTime = tempStart
     const endTime = tempEnd
     const title  = tempTitle
@@ -755,6 +805,7 @@ class PickEventSyncWeek extends React.Component{
         endTime: "",
         title: title,
         eventColor: eventColor,
+        startDate: null,
 
       }
     } else {
@@ -762,7 +813,8 @@ class PickEventSyncWeek extends React.Component{
         startTime: startTime,
         endTime: endTime,
         title: title,
-        eventColor: eventColor
+        eventColor: eventColor,
+        startDate: date
       }
     }
 
@@ -778,7 +830,7 @@ class PickEventSyncWeek extends React.Component{
 
     let tempStart = ""
     let tempEnd = ""
-    let tempDate = ""
+    let tempDate = null
     let tempTitle = ""
     let tempColor = ""
 
@@ -851,13 +903,10 @@ class PickEventSyncWeek extends React.Component{
                 tempEnd,
                 tempColor
               )}
-              active = {this.state.active}
-              startTime={dateFns.format(new Date(this.state.selectedDate), "hh:mm a" )}
-              endTime={dateFns.format(dateFns.addHours(new Date(this.state.selectedDate),1), "hh:mm a" )}
-              whichDay={dateFns.format(new Date(this.state.selectedDate), "d" )}
+
                />
              </div>
-          
+
           </div>
 
 
