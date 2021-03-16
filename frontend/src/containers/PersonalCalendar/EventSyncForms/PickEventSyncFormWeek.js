@@ -8,6 +8,8 @@ import { AimOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as dateFns from 'date-fns';
 import './PickEventSync.css';
 import { connect } from "react-redux";
+import moment from 'moment';
+
 
 
 const { Option } = Select;
@@ -59,18 +61,7 @@ const renderLocationField = (field) => {
 
 // <input {...field.input} type = {field.type} placeholder = {field.placeholder} />
 
-const renderStartDate = (field) => {
-  console.log(field)
-  return (
-    <DatePicker
-    onChange = {field.input.onChange}
-    value = {field.input.value}
-    style = {{width: '110px', marginRight:'15px'}}
-    suffixIcon={<div></div>}
-    allowClear = {false}
-     />
-  )
-}
+
 
 const renderEndDate = (field) => {
   console.log(field)
@@ -155,6 +146,38 @@ class PickEventSyncFormWeek extends React.Component {
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  disabledDate = (current) => {
+    // this function will disabled certain dates that are unpickable
+    console.log(current)
+    console.log(moment(new Date(this.props.minDate)))
+    console.log(moment(new Date(this.props.maxDate)))
+    return (
+      // new Date(this.props.minDate)
+
+      current < moment(dateFns.addHours(
+        new Date(this.props.minDate), new Date().getTimezoneOffset()/60))
+      ||
+      current >= moment(dateFns.addHours(
+        new Date(this.props.maxDate), new Date().getTimezoneOffset()/60))
+      // &&
+      // moment(this.props.maxDate) < moment().endOf("day")
+    )
+  }
+
+  renderStartDate = (field) => {
+    console.log(field)
+    return (
+      <DatePicker
+      disabledDate = {this.disabledDate}
+      onChange = {field.input.onChange}
+      value = {field.input.value}
+      style = {{width: '110px', marginRight:'15px'}}
+      suffixIcon={<div></div>}
+      allowClear = {false}
+       />
+    )
   }
 
   renderTextInput = (field) => {
@@ -536,7 +559,7 @@ class PickEventSyncFormWeek extends React.Component {
               <i style={{marginTop:'25px', marginRight:'10px'}} class="far fa-calendar"></i>
                   <Field
                     name = 'startDate'
-                    component = {renderStartDate}
+                    component = {this.renderStartDate}
                     onChange = {this.onStartDateChange}
                     type = 'date'
                   />
