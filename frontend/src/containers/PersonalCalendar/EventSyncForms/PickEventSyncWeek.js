@@ -630,59 +630,75 @@ class PickEventSyncWeek extends React.Component{
     console.log(value)
     console.log(this.props.currentUser)
     console.log(this.props.userFriend)
-    if (this.state.selectedDate === null){
-      throw new SubmissionError({
-        _error: '*Please pick a date'
-      })
-    } else {
-      const notificationId = this.props.notificationId
-      const startTime = this.state.selectedDate
-      const endTime = dateFns.addHours(startTime, 1)
+    // if (this.state.selectedDate === null){
+    //   throw new SubmissionError({
+    //     _error: '*Please pick a date'
+    //   })
+    // } else {
+    const notificationId = this.props.notificationId
 
-      let content = ''
-      let location = ''
-      if (value.content){
-        content = value.content
-      }
-      if (value.location){
-        location = value.location
-      }
-      // For submitEvent object:
-      // title, value, location, event color will just be strings
-      // person, and invited will be a list of usernames
-      // repeatCondition will be none
-      // the host will the id of the actor
-      const submitEvent = {
-        command: 'add_sync_event',
-        title: value.title,
-        person: [this.props.currentUser, this.props.userFriend.username],
-        invited: [this.props.userFriend.username],
-        content: content,
-        location: location,
-        eventColor: value.eventColor,
-        startDate: startTime,
-        endDate: endTime,
-        repeatCondition: "none",
-        host: this.props.id,
-      }
-      const submitNotification = {
-        command: 'send_new_event_sync_notification',
-        actor: this.props.currentUser,
-        recipient: this.props.userFriend.username,
-        date: this.state.selectedDate
-      }
-      console.log(submitEvent)
-      // So the webSocket is to send the info into the backend in tho the channles to make the
-      // event for both parties
-      CalendarEventWebSocketInstance.sendEvent(submitEvent);
-      // This is to send a notification to the other person that an event was choosen
-      NotificationWebSocketInstance.sendNotification(submitNotification)
-      this.props.closePickEventSyncModal()
-      // // This is just to delete the notificaiton
-      authAxios.delete(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
-      this.props.deleteNotification(notificationId)
-      this.openNotification('bottomLeft', this.state.selectedDate)
+
+    const dateStart = new Date(value.startDate)
+    console.log(dateStart)
+    const dateEnd = new Date(value.startDate)
+
+    // Now that you have the start and end date
+    // you can now get the times
+
+    const convertStartTime = this.timeConvert(value.startTime)
+    const convertEndTime = this.timeConvert(value.endTime)
+
+    let startDateTime = dateFns.addHours(dateStart, convertStartTime.firstHour)
+    startDateTime = dateFns.addMinutes(startDateTime, convertStartTime.firstMin)
+
+    let endDateTime = dateFns.addHours(dateEnd, convertEndTime.firstHour)
+    endDateTime = dateFns.addMinutes(endDateTime, convertEndTime.firstMin)
+
+
+    // For submitEvent object:
+    // title, value, location, event color will just be strings
+    // person, and invited will be a list of usernames
+    // repeatCondition will be none
+    // the host will the id of the actor
+    const submitEvent = {
+      command: 'add_sync_event',
+      title: value.title,
+      person: [this.props.currentUser, this.props.userFriend.username],
+      invited: [this.props.userFriend.username],
+      eventColor: value.eventColor,
+      startDate: startDateTime,
+      endDate: endDateTime,
+      repeatCondition: "none",
+      host: this.props.id,
     }
+    const submitNotification = {
+      command: 'send_new_event_sync_notification',
+      actor: this.props.currentUser,
+      recipient: this.props.userFriend.username,
+      date: this.state.selectedDate
+    }
+    console.log(submitEvent)
+    // So the webSocket is to send the info into the backend in tho the channles to make the
+    // event for both parties
+    CalendarEventWebSocketInstance.sendEvent(submitEvent);
+    // This is to send a notification to the other person that an event was choosen
+    NotificationWebSocketInstance.sendNotification(submitNotification)
+    this.props.closePickEventSyncModal()
+    // // This is just to delete the notificaiton
+    authAxios.delete(`${global.API_ENDPOINT}/userprofile/notifications/delete/`+notificationId)
+    this.props.deleteNotification(notificationId)
+    this.openNotification('bottomLeft', this.state.selectedDate)
+
+    this.setState({
+      active: null,
+      selectedDate: null,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: null,
+      tempEndDate: null,
+      tempColor: "#1890FF",
+      tempTitle: ""
+    })
   }
 
   openNotification = (placement,date)  => {
@@ -774,6 +790,20 @@ class PickEventSyncWeek extends React.Component{
 
   }
 
+  onClose = () => {
+    this.setState({
+      active: null,
+      selectedDate: null,
+      tempStart: -1,
+      tempEnd: -1,
+      tempStartDate: null,
+      tempEndDate: null,
+      tempColor: "#1890FF",
+      tempTitle: ""
+    })
+    this.props.close()
+  }
+
 
   render() {
     const { Meta } = Card
@@ -812,7 +842,7 @@ class PickEventSyncWeek extends React.Component{
         footer = {null}
         visible = {this.props.isVisible}
         // visible = {true}
-        onCancel = {this.props.close}
+        onCancel = {() => this.onClose()}
         width = {1100}
         centered
         bodyStyle={{height:'575px', top:'100px'}}>
