@@ -199,10 +199,10 @@ class InfiniteList extends React.Component {
 
           <div style={{ flex: 1}}>
 
-            <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'25px'}}>
+            <div class="intro" style={{color:'black', fontSize:'20px', marginTop:'15px'}}>
               Welcome, {this.props.userName}. Here's what's going on today! </div>
-            <Divider style={{marginBottom:'25px'}}/>
-            
+            <Divider style={{marginBottom:'25px', marginTop:'10px'}}/>
+
             {
               (post.length!=0) ?
               <div>

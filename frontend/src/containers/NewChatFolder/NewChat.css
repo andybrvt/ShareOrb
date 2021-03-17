@@ -3,7 +3,7 @@
   /* background-color: blue; */
 
   position: relative;
-  height: 93vh;
+  height: 91vh;
   width: 100%;
   top:7%;
   /* overflow: hidden; */
@@ -34,7 +34,7 @@
 
 .chatContainer .chatLeftSide{
   background-color: white;
-  padding:10px;
+
   width: 23%;
   height: 100%;
   /* float:left; */
@@ -270,7 +270,7 @@
   width: calc(100% - 25px);
   font-size: 0.9em;
   position: relative;
-  background-color: red;
+  /* background-color: red; */
   text-align: right;
 
 }
@@ -310,40 +310,56 @@
 /* This is for chat newManageChatHeader.js */
 .chatContainer .chatLeftSide .newManageChatHeader{
   /* background-color: red; */
-  height: 7%;
+  height: 6%;
   width: 100%;
   position:relative;
   display: flex;
+  flex-direction: relative;
+  /* background: red; */
   margin-bottom: 10px;
+  margin-top: 10px;
+  padding-left: 10px;
 }
 .createChatButtonContainer{
   /* background-color: red; */
   text-align: center;
 }
+
+.manageChatForm .searchInput{
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: whitesmoke;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 .manageChatForm{
-  /* background-color: red; */
+  /* background-color: blue; */
   position:relative;
   height: 100%;
   width: 90%;
-  padding-left: 5px;
 }
-.manageChatForm .searchInput{
+
+.addChatsButtonContainer{
+  /* background-color: green; */
+  margin-left: 10px;
   position: relative;
-  top: 20px;
-  left:1%;
-  box-sizing: border-box;
-  width: 100%;
-  height: 60%;
-  border-radius: 15px;
-  background-color: whitesmoke;
+  width: 10%;
 }
+
 .newManageChatHeader .addChatsButton{
-  /* background-color: red; */
+
   position:relative;
   font-size: 2.2vw;
-  width: 15%;
-  text-align: center;
   cursor: pointer;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
 }
 
 .newUserSearchChat{
@@ -377,6 +393,7 @@
   width: 100%;
   height: 93%;
   overflow: auto;
+  /* background: red; */
 }
 
 
@@ -546,7 +563,8 @@
 
 
 .chatItem {
-  padding: 10px;
+
+  padding: 5px;
   height: 90px;
   width: 100%;
 }
@@ -555,7 +573,43 @@
 }
 .chatItem .chatWrap{
   display: flex;
+  /* position: relative; */
+  /* top:50%;
+  transform: translateY(-50%); */
+  /* background: blue; */
+  flex-direction: row;
+  width:100%;
+  height:90%;
+
+
 }
+
+
+.chatItem .chatWrap .chatAva{
+  width:20%;
+  /* background: green; */
+  position: relative;
+}
+
+.chatItem .chatWrap .centerChatWrapContent{
+  /* background: red; */
+  position: relative;
+  width:80%;
+  /* background: green; */
+  /* width:90%; */
+  /* position: relative;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%); */
+}
+
+.centerChatItem{
+  position: relative;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+
 .chatItem .chatWrap .chatGroupAva{
   position: relative;
   margin-top: 10px;
@@ -572,22 +626,30 @@
   position: relative;
   left: 10px;
 }
-.chatItem .chatWrap .chatAva{
-  margin-top: 12px;
-  margin-right: 10px;
-}
+
 .chatItem .chatWrap .chatText{
   margin-left: 5px;
   margin-top: 15px;
 }
-.chatItem .chatWrap .chatText .chatName {
+.chatName {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   color: black;
 }
-.chatItem .chatWrap .chatText .chatDescription{
+
+.chatHeader{
+    display: flex;
+}
+.chaHeaderUserName {
+  margin-top: 3px;
+  margin-left: 5px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
+  color: grey;
+}
+.chatDescription{
+  font-weight: 400;
+  font-size: 13px;
   color:grey;
 }
 .chatItem .chatWrap .chatText .chatDescription.active{

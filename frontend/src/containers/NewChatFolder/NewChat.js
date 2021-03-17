@@ -15,7 +15,7 @@ import CurChatManager from './CurChatManager';
 import NoSAddNewChatContent from './NoSAddNewChatContent';
 import * as calendarActions from '../../store/actions/calendars';
 import * as messageActions from '../../store/actions/messages';
-import { notification } from 'antd';
+import { notification, Divider } from 'antd';
 
 // This file will be holding all the components of the chat such as
 // sidepanel, content, title, etc.
@@ -488,7 +488,9 @@ class NewChat extends React.Component{
         <ManageChatHeader
         history = {this.props.history}
          />
-
+       {/*
+       <Divider style={{top:'-10px', bottom:'-10px'}}/>
+       */}
         <NewSidePanel
         chatList = {chats}
         param = {this.props.parameter}

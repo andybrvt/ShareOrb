@@ -35,14 +35,13 @@ class NewSidePanel extends React.Component{
     // with
 
     var name = ""
+
     for(let i = 0; i<participantList.length; i++){
       if(participantList[i].id !== this.props.curId){
         name = this.capitalize(participantList[i].first_name)+ ' '
         +this.capitalize(participantList[i].last_name)
       }
     }
-
-    console.log(name)
     return name;
 
   }
@@ -107,15 +106,15 @@ class NewSidePanel extends React.Component{
     // passed a certain lenght you would just put ... at the end of it
     let finalStr = str
     console.log(recentTime)
-    if(str.length > 30){
-      finalStr = finalStr.substring(0,30)
+    if(str.length > 20){
+      finalStr = finalStr.substring(0,20)
       finalStr = finalStr+"..."
     }
     if(senderObj.id === this.props.curId){
       // This is if you sent the message
       finalStr = "You: "+finalStr
     } else {
-      finalStr = senderObj.first_name+": "+finalStr
+      finalStr = finalStr
     }
 
     const timeStamp = this.renderTimestamp(recentTime)
@@ -126,24 +125,24 @@ class NewSidePanel extends React.Component{
   renderTimestamp = timestamp =>{
     console.log(timestamp)
     let prefix = '';
-    console.log(Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000))
+    console.log(new Date().getTime())
+    console.log(new Date(timestamp).getTime())
     const timeDiff = Math.round((new Date().getTime() - new Date(timestamp).getTime())/60000)
     console.log(timeDiff)
     if (timeDiff < 1 ) {
-      prefix = `Just now`;
+      prefix = `now`;
     } else if (timeDiff < 60 && timeDiff >= 1 ) {
-      prefix = `${timeDiff}min`;
+      prefix = `${timeDiff} min`;
     }else if (timeDiff < 24*60 && timeDiff > 60) {
       prefix = `${Math.round(timeDiff/60)}h`;
     } else if (timeDiff < 31*24*60 && timeDiff > 24*60) {
-      prefix = `${Math.round(timeDiff/(60*24))}days`;
+      prefix = `${Math.round(timeDiff/(60*24))}d`;
     } else {
-        prefix = `${dateFns.format(new Date(timestamp), "MM/dd/yy")}`;
+        prefix = `${dateFns.format(new Date(timestamp), "MMMM d, yyyy")}`;
     }
 
     return prefix;
   }
-
 
   render(){
 
@@ -157,7 +156,6 @@ class NewSidePanel extends React.Component{
 
     }
 
-    console.log(seenList.includes(this.props.username))
     return(
       <div className = "newSidePanel">
       <List
@@ -172,17 +170,32 @@ class NewSidePanel extends React.Component{
           >
           <List.Item className = {`chatItem ${item.id === parseInt(this.props.param.id) ? "current": ""}`}>
             <div className = "chatWrap">
-            <Avatar size = {50}
-            className = "chatAva"
-             src = {`${global.IMAGE_ENDPOINT}`+this.getChatUserProfile(item.participants)} />
-            <div className = "chatText">
-              <div className = "chatName">{this.getChatUserName(item.participants)}</div>
+
+            <div className="chatAva">
+              <div class="centerChatItem">
+              <Avatar size = {45}
+               src = {`${global.IMAGE_ENDPOINT}`+this.getChatUserProfile(item.participants)} />
+             </div>
+            </div>
+           <div className = "centerChatWrapContent">
+
+             <div class="centerChatItem">
+              <div class="chatHeader">
+                <div className = "chatName">
+                  {this.getChatUserName(item.participants)}
+                </div>
+                <div class="chaHeaderUserName">
+                  {"@"+item.participants[1].username}
+                </div>
+              </div>
               <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}>
                 {this.chatDescription(item.recentMessage,
                 item.recentSender,
                 item.recentTime
               )}</div>
             </div>
+          </div>
+
 
             </div>
           </List.Item>
