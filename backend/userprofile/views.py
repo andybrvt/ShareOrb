@@ -374,7 +374,7 @@ class NewsFeedSuggestedFriends(generics.ListAPIView):
         return queryset
 
 class everyoneSuggested(generics.ListAPIView):
-    serializer_class = serializers.UserSerializer
+    serializer_class = serializers.SuggestedUserSerializer
     def get_queryset(self):
         list = []
         temp=(self.request.user.get_following())
@@ -388,9 +388,31 @@ class everyoneSuggested(generics.ListAPIView):
         # Your can exclude a list by using keyword __in
         # This is filtering by username in the list
 
-        queryset = models.User.objects.exclude(username__in = list)
+        queryset = models.User.objects.exclude(username__in = list)[:3]
         return queryset
 
+class loadMoreSuggestedView(generics.ListAPIView):
+    serializer_class = serializers.SuggestedUserSerializer
+    def get_queryset(self):
+        list = []
+        temp=(self.request.user.get_following())
+        request = (self.request.user.get_sent_follow_request())
+        for i in temp:
+            list.append(i)
+        for i in request:
+            list.append(i)
+        list.append(self.request.user)
+
+        print("show request")
+        print(self.request.GET.get("start"))
+        start = int(self.request.GET.get("start"))
+        end = start + int(self.request.GET.get("end"))
+
+        # Your can exclude a list by using keyword __in
+        # This is filtering by username in the list
+        queryset = models.User.objects.exclude(username__in = list)[start:end]
+
+        return queryset
 
 
 class post_detail(APIView):

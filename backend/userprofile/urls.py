@@ -28,6 +28,7 @@ urlpatterns = [
 	path('explore', views.ExploreView.as_view()),
 	path('suggestedFriends', views.NewsFeedSuggestedFriends.as_view()),
 	path('everyoneSuggested', views.everyoneSuggested.as_view()),
+	path('loadSuggested', views.loadMoreSuggestedView.as_view()),
 	path('inviteList', views.inviteList.as_view()),
 	# DELETE LATER
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),

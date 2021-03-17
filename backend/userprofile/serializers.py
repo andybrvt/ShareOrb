@@ -39,6 +39,32 @@ class FollowUserSerializer(serializers.ModelSerializer):
         model = models.User
         fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
 
+
+class SuggestedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = (
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "profile_picture",
+            "get_followers"
+        )
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        followerList = []
+
+        for user in data['get_followers']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followerList.append(userPerson)
+
+        data['get_followers'] = followerList
+        return data
+
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     # the ReadOnlyField allow that field to only be read only
     # friends = serializers.SerializerMethodField()

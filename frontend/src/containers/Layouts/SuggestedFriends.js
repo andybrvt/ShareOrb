@@ -18,6 +18,7 @@ class SuggestedFriends extends React.Component {
     loading: false,
     data: [],
     list: [],
+    start: 3,
     counter:2,
 
   };
@@ -57,6 +58,28 @@ class SuggestedFriends extends React.Component {
     console.log(this.state.counter)
     console.log(this.state.data)
     console.log(this.state.list)
+
+    const start = this.state.start
+    const end = this.state.counter
+
+    this.setState({
+      loading: true
+    })
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/loadSuggested`,{
+      params:{
+        start,
+        end
+      }
+    })
+    .then(res => {
+      console.log(res)
+      this.setState({
+        list:this.state.list.concat(res.data),
+        start: this.state.start+this.state.counter,
+        loading: false
+      })
+    })
+
     // this.setState({
     //   loading: true,
     //   // list: this.state.data.concat([...new Array(2)].map(() => ({ loading: true, get_followers:[]}))),
@@ -64,22 +87,22 @@ class SuggestedFriends extends React.Component {
     // });
 
 
-    console.log(this.state.counter)
-          const data = this.state.list.concat(this.state.data.slice(this.state.counter+1, this.state.counter+3));
-          console.log(this.state.data)
-          this.setState({
-            list: data,
-            loading: false,
-            counter: this.state.counter+2
-         },
-           () => {
-             // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-             // In real scene, you can using public method of react-virtualized:
-             // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-             window.dispatchEvent(new Event('resize'));
-
-             },
-       )
+    // console.log(this.state.counter)
+    //       const data = this.state.list.concat(this.state.data.slice(this.state.counter+1, this.state.counter+3));
+    //       console.log(this.state.data)
+    //       this.setState({
+    //         list: data,
+    //         loading: false,
+    //         counter: this.state.counter+2
+    //      },
+    //        () => {
+    //          // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+    //          // In real scene, you can using public method of react-virtualized:
+    //          // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+    //          window.dispatchEvent(new Event('resize'));
+    //
+    //          },
+    //    )
     }
 
   onFollow = (privatePro, follower, following) => {
@@ -201,6 +224,7 @@ class SuggestedFriends extends React.Component {
 
 
   render() {
+    console.log(this.state)
     console.log(this.props)
     let following = []
     let sentRequestList = []
@@ -313,9 +337,10 @@ class SuggestedFriends extends React.Component {
           )}
         />
       <div style={{padding:'30px'}}>
-        {((list.length)<=5)?
+        {((list.length)<=30)?
 
-          <Button style={{left:'35%', float:'bottom'}} onClick={this.onLoadMore}>Load More</Button>
+          <Button style={{left:'35%', float:'bottom'}} onClick={() => this.onLoadMore()}>
+            Load More</Button>
 
           :
 
