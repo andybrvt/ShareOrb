@@ -229,13 +229,21 @@ class SocialCalendar extends React.Component{
             toDoStuff[0].coverPic ?
               <div
               className = 'hoverCell'
+              onClick = {() => this.onLinkClick(calUsername,
+                  cellYear,
+                  cellMonth,
+                  cellDay,
+                  location
+                 )}
               >
                 {/*This items in the turnary operator is the eyes, calendar addition,
                   event addition for event calendar cells that have a cover picture*/}
                 {
                   (followerList.includes(this.props.curId)&& followingList.includes(this.props.curId))
                   ||  calendarOwnerId === this.props.curId ?
-                  <div>
+                  <div
+
+                    >
                   {/*This is to check if cells that have social cell in them allow
                     for the owern and friends to edit and add stuff to it that has
                     a cover cell and the user either is owner or friend*/}
@@ -244,10 +252,10 @@ class SocialCalendar extends React.Component{
 
                     <div className = "buttonHolder">
                       <PlusOutlined
-                      onClick = {() => this.onOpenSocialCalPicModal()}
+                      onClick = {(e) => this.onOpenSocialCalPicModal(e)}
                       className = 'plusButton'/>
                       <CalendarOutlined
-                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      onClick ={(e) => this.onOpenSocialCalEventModal(e, cloneDay)}
                       className = 'eventButton'/>
                       <EyeOutlined
                         onClick = {() => this.onLinkClick(calUsername,
@@ -268,7 +276,7 @@ class SocialCalendar extends React.Component{
                       cell that are after the current date that has a cover cell
                       when the user is friend or owner*/}
                       <CalendarOutlined
-                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      onClick ={(e) => this.onOpenSocialCalEventModal(e, cloneDay)}
                       className = 'eventButtonAfter'/>
                      <EyeOutlined
                      onClick = {() => this.onLinkClick(calUsername,
@@ -346,13 +354,13 @@ class SocialCalendar extends React.Component{
                       day*/}
                     <div className = "plusButton">
                       <PlusOutlined
-                      onClick = {() => this.onOpenSocialCalPicModal()}
+                      onClick = {(e) => this.onOpenSocialCalPicModal()}
                       className = 'iconIcon'/>
                     </div>
 
                     <div className = "eventButton">
                       <CalendarOutlined
-                      onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                      onClick ={(e) => this.onOpenSocialCalEventModal(cloneDay)}
                       className = 'iconIcon'/>
                     </div>
 
@@ -381,7 +389,7 @@ class SocialCalendar extends React.Component{
                     after the current day*/}
                     <div className = "eventButtonAfter">
                       <CalendarOutlined
-                        onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                        onClick ={(e) => this.onOpenSocialCalEventModal(e,cloneDay)}
                         className = 'iconIcon'/>
                     </div>
 
@@ -450,6 +458,12 @@ class SocialCalendar extends React.Component{
 
             <div
               className = 'hoverCell'
+              onClick = {() => this.onLinkClick(calUsername,
+                  cellYear,
+                  cellMonth,
+                  cellDay,
+                  location
+                 )}
               >
               {/*This is for when the cal cell object is there but there is no
                 cover cell and there are no event list*/}
@@ -466,10 +480,10 @@ class SocialCalendar extends React.Component{
                     list. This will be for the current day*/}
 
                   <PlusOutlined
-                  onClick = {() => this.onOpenSocialCalPicModal()}
+                  onClick = {(e) => this.onOpenSocialCalPicModal(e)}
                   className = 'plusButton'/>
                   <CalendarOutlined
-                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                  onClick ={(e) => this.onOpenSocialCalEventModal(e,cloneDay)}
                   className = 'eventButton'/>
 
                   <EyeOutlined
@@ -488,7 +502,7 @@ class SocialCalendar extends React.Component{
                   {/* For days after the social cell and there is a social cal cell object
                     but not cover picture or events*/}
                   <CalendarOutlined
-                  onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+                  onClick ={(e) => this.onOpenSocialCalEventModal(e, cloneDay)}
                   className = 'eventButtonAfter'
                    />
 
@@ -559,6 +573,12 @@ class SocialCalendar extends React.Component{
           >
           <div
           className = 'hoverCell'
+          onClick = {() => this.onLinkClick(calUsername,
+              cellYear,
+              cellMonth,
+              cellDay,
+              location
+             )}
           >
 
 
@@ -574,10 +594,10 @@ class SocialCalendar extends React.Component{
             {/* This is for the eye, calendar, event post for the current day without
               a picture in it and no cell created  */}
             <PlusOutlined
-            onClick = {() => this.onOpenSocialCalPicModal()}
+            onClick = {(e) => this.onOpenSocialCalPicModal(e)}
             className = 'plusButton'/>
             <CalendarOutlined
-            onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+            onClick ={(e) => this.onOpenSocialCalEventModal(e, cloneDay)}
             className = 'eventButton'/>
 
             <EyeOutlined
@@ -597,7 +617,7 @@ class SocialCalendar extends React.Component{
               {/*This is for the eye, calendar for all the cells that are after teh
                 current day and does not have a cover picture and no cell created*/}
               <CalendarOutlined
-              onClick ={() => this.onOpenSocialCalEventModal(cloneDay)}
+              onClick ={(e) => this.onOpenSocialCalEventModal(e, cloneDay)}
               className = 'eventButtonAfter' />
 
 
@@ -705,7 +725,8 @@ class SocialCalendar extends React.Component{
     this.props.openModal(oneEvent)
   }
 
-  onOpenSocialCalPicModal = () => {
+  onOpenSocialCalPicModal = (e) => {
+    e.stopPropagation()
     this.setState({
       showSocialPicPostModal: true
     })
@@ -717,7 +738,8 @@ class SocialCalendar extends React.Component{
     })
   }
 
-  onOpenSocialCalEventModal = (eventDay) => {
+  onOpenSocialCalEventModal = (e, eventDay) => {
+    e.stopPropagation()
     console.log(eventDay)
     this.setState({
       showSocialEventPostModal: true,
