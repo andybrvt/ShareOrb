@@ -119,19 +119,15 @@ class SuggestedFriends extends React.Component {
 
       // Make an axios call here that creates taht sent request event and update
       // it in the front end and then send a notification to the other person
-
       authAxios.post(`${global.API_ENDPOINT}/userprofile/sendFollowRequest`, {
         follower: follower,
         following: following
       })
       .then(res => {
         console.log(res.data)
-
         // update your redux first and then send a notificaiton to the other person
         // and update their auth too as well
         this.props.updateSentRequestList(res.data)
-
-
         const notificationObject = {
           command: 'send_follow_request_notification',
           actor: follower,
@@ -139,8 +135,6 @@ class SuggestedFriends extends React.Component {
         }
         // ADD THE NOTIFICATIONI HERE TO UPDATE THE FOLLOWING AUTH
         NotificationWebSocketInstance.sendNotification(notificationObject)
-
-
       })
       // const notificationObject = {
       //   command: 'send_follow_request_notification',
@@ -152,8 +146,6 @@ class SuggestedFriends extends React.Component {
       //
       // // Simlar to the personal profile but without sending it throught he weboscket
       // NotificationWebSocketInstance.sendNotification(notificationObject)
-
-
     } else {
       // This will be for when it is not a private event
 
@@ -165,13 +157,11 @@ class SuggestedFriends extends React.Component {
         console.log(res.data)
         this.props.updateFollowing(res.data)
         // Send a notification to the other person here
-
         const notificationObject = {
           command: 'send_follow_notification',
           actor: follower,
           recipient: following
         }
-
         NotificationWebSocketInstance.sendNotification(notificationObject)
 
       })

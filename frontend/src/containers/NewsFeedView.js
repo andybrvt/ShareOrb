@@ -267,7 +267,7 @@ class NewsFeedView extends React.Component {
 								<Timeline.Item>
 									<i style={{color:'#1890ff', marginRight:'5px'}}
 										class="fas fa-home"></i>
-									Home: Every post on the newsfeed is an entire day of pictures. Today's Febuary 27th right?
+									Home: Every post on the newsfeed is an entire day of pictures. Let's say today is Febuary 27th right?
 									Any pictures you add today will be inside today's album (on the 27th)!
 
 								</Timeline.Item>

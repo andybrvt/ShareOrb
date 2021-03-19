@@ -161,7 +161,7 @@ class ProfileCardNewsFeed extends React.Component{
 
 
         <span className ='followWord'> Followers</span>
-        <Divider/>
+        <Divider style={{marginTop:'10px', marginBottom:'0px'}}/>
         <FollowersList
           follow = {followers}
           request = {request}
@@ -180,6 +180,7 @@ class ProfileCardNewsFeed extends React.Component{
         centered
         >
         <span className = 'followWord'>Following</span>
+        <Divider style={{marginTop:'10px', marginBottom:'0px'}}/>
         <FollowList follow = {following}/>
         </Modal>
       </div>

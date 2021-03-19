@@ -10,6 +10,94 @@ import ExploreWebSocketInstance from '../../exploreWebsocket';
 
 class FollowersList extends React.Component{
 
+  onFollow = (privatePro, follower, following) => {
+    // This function will be used to handle the follow or request
+    // The parameter privatePro will be used to see if the account is private or not
+    // to send the right request
+    // The parameterfollower will you, and following will be the person you are
+    // trying to follow.
+
+    console.log(privatePro, follower, following)
+    if(privatePro === true) {
+      // if true then the perosn profile will be private and then when you click
+      // follow it will show a reqeust instead of followed
+
+      // Make an axios call here that creates taht sent request event and update
+      // it in the front end and then send a notification to the other person
+
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/sendFollowRequest`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
+
+        // update your redux first and then send a notificaiton to the other person
+        // and update their auth too as well
+        this.props.updateSentRequestList(res.data)
+
+
+        const notificationObject = {
+          command: 'send_follow_request_notification',
+          actor: follower,
+          recipient: following
+        }
+        // ADD THE NOTIFICATIONI HERE TO UPDATE THE FOLLOWING AUTH
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
+      })
+      // const notificationObject = {
+      //   command: 'send_follow_request_notification',
+      //   actor: follower,
+      //   recipient: following
+      // }
+      //
+      // // add auth here
+      //
+      // // Simlar to the personal profile but without sending it throught he weboscket
+      // NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
+    } else {
+      // This will be for when it is not a private event
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/onFollow`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
+        this.props.updateFollowing(res.data)
+        // Send a notification to the other person here
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: follower,
+          recipient: following
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+      })
+    }
+  }
+
+  onUnfollow = (follower, following) => {
+    // This will unfollow the person
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/onUnfollow`, {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      console.log(res.data)
+      this.props.updateFollowing(res.data)
+      // This will unsend the follow notification if the person decides to unfollow
+      const notificationObject = {
+        command: 'unsend_follow_notification',
+        actor: follower,
+        recipient: following
+      }
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+    })
+  }
+
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
@@ -123,21 +211,17 @@ class FollowersList extends React.Component{
         <List.Item.Meta
           avatar={
             followers[i].profile_picture ?
-
               <Avatar src= {`${global.IMAGE_ENDPOINT}`+followers[i].profile_picture} />
-
               :
-
               <Avatar src={defaultPicture} />
-
             }
           title={
             <a onClick = {() => this.viewUserPage(followers[i].username)}>
               {this.capitalize(followers[i].first_name)} {this.capitalize(followers[i].last_name)}
             </a>
           }
-          description= {<b>@{this.capitalize(followers[i].username)}</b>}
-        />
+          description= {<b>@{followers[i].username}</b>}
+          />
         </List.Item>
       )
     }

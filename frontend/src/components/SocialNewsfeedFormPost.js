@@ -514,19 +514,18 @@ class SocialNewsfeedFormPost extends React.Component{
           </div>
         );
     return (
-      <div class="eventCard postModalMain" style={{width:'850px', height:'500px',padding:'25px'}}>
-        <div style={{marginTop:'10px', marginLeft:'20px', height:'100px'}} class="outerContainerPeople">
-          <div class="innerContainerPeople">
-            <Avatar
-              style={{ top:'5%'}}
-              size = {100} shape = 'circle'
-              src = {profilePic} >
 
-            </Avatar>
-            <span class="WritePostNameContainer" style={{marginLeft:"20px", fontSize:'20px'}}>
-              {firstName+" "+lastName}
-            </span>
-
+        <div class="eventCard postModalMain" style={{width:'`50px', height:'500px',padding:'25px'}}>
+          <div style={{marginTop:'10px', marginLeft:'20px', height:'100px'}} class="outerContainerPeople">
+            <div class="innerContainerPeople">
+                <Avatar
+                  style={{ top:'5%'}}
+                  size = {100} shape = 'circle'
+                  src = {profilePic} >
+                </Avatar>
+                <span class="WritePostNameContainer" style={{marginLeft:"20px", fontSize:'20px'}}>
+                  {firstName+" "+lastName}
+                </span>
                 <span style={{float:'right', marginRight:'25px'}}>
                   <Alert
                     message="Update current day"
@@ -535,99 +534,97 @@ class SocialNewsfeedFormPost extends React.Component{
                     showIcon
                   />
                 </span>
-
-        </div>
-        </div>
-        <Divider />
-
-            <div>
-
-              <TextArea
-                rows = {3}
-                allowClear
-                size="large"
-                maxLength={250}
-                bordered={false}
-                showCount
-                type = 'text'
-                placeholder="Write a Post"
-                name = 'caption'
-                onChange = {this.handleCaptionChange}
-                value = {this.state.caption} />
-              <Divider style={{top:'-10px'}}/>
               </div>
+          </div>
+          <Divider />
+              <div>
+                <TextArea
+                  rows = {3}
+                  allowClear
+                  size="large"
+                  maxLength={250}
+                  bordered={false}
+                  showCount
+                  type = 'text'
+                  placeholder="Write a Post"
+                  name = 'caption'
+                  onChange = {this.handleCaptionChange}
+                  value = {this.state.caption} />
+                <Divider style={{top:'-10px'}}/>
+                </div>
 
 
-        <Modal
-          visible={previewVisible}
-          title={previewTitle}
-          footer={null}
-        >
-          <img alt="example" style={{ width: '100%' }} src={previewImage} />
-        </Modal>
-
-        <div className = "uploadOverFlow">
-
-
-          {/*
-            <ImgCrop
-                modalWidth={700}
-                modalTitle="Crop Image"
-                modalOk="Crop"
-                aspect={1}
-                onChange={this.handleChange}
-                beforeUpload={beforeUpload}
-                >
-
-
-            </ImgCrop>
-
-            */}
-
-            <Upload
-                listType="picture-card"
-                multiple={true}
-                fileList={fileList}
-                onChange={this.handleChange}
-                beforeUpload={beforeUpload}
-
-                name = 'image'
-              >
-                {(fileList.length >= 8) ? null : uploadButton}
-              </Upload>
-
-
-        </div>
-
-        <div>
-            <Button
-              disabled = {this.handleValidation()}
-              style={{fontSize:'24px', }} shape="round" type="primary"
-              style={{float:'right', marginRight:'25px'}}
-              onClick={this.onFormSubmit}>Update</Button>
-        </div>
-
-        <Modal
-          visible = {this.state.confirmationVisible}
-          onCancel = {this.onCloseWarning}
+          <Modal
+            visible={previewVisible}
+            title={previewTitle}
+            footer={null}
           >
-          <Alert
-             message="Warning"
-             description="Updating will remove your day album from the newsfeed because there are no pictures to show."
-             type="warning"
-             showIcon
-             closable
-           />
-         <Button>
-           Cancel
-         </Button>
+            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+          </Modal>
 
-         <Button>
-           Accept
-         </Button>
-        </Modal>
+          <div className = "uploadOverFlow">
 
-    </div>
+
+            {/*
+              <ImgCrop
+                  modalWidth={700}
+                  modalTitle="Crop Image"
+                  modalOk="Crop"
+                  aspect={1}
+                  onChange={this.handleChange}
+                  beforeUpload={beforeUpload}
+                  >
+
+
+              </ImgCrop>
+
+              */}
+
+              <Upload
+                  listType="picture-card"
+                  multiple={true}
+                  fileList={fileList}
+                  onChange={this.handleChange}
+                  beforeUpload={beforeUpload}
+
+                  name = 'image'
+                >
+                  {(fileList.length >= 8) ? null : uploadButton}
+                </Upload>
+
+
+          </div>
+
+          <div>
+              <Button
+                disabled = {this.handleValidation()}
+                style={{fontSize:'24px', }} shape="round" type="primary"
+                style={{float:'right', marginRight:'25px'}}
+                onClick={this.onFormSubmit}>Update</Button>
+          </div>
+
+          <Modal
+            visible = {this.state.confirmationVisible}
+            onCancel = {this.onCloseWarning}
+            >
+            <Alert
+               message="Warning"
+               description="Updating will remove your day album from the newsfeed because there are no pictures to show."
+               type="warning"
+               showIcon
+               closable
+             />
+           <Button>
+             Cancel
+           </Button>
+
+           <Button>
+             Accept
+           </Button>
+          </Modal>
+
+      
+      </div>
     );
     }
 }

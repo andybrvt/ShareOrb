@@ -5,6 +5,13 @@
   width:75%;
 }
 
+.bluenewUpdateButtonContainer{
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(105, 192, 255, 1);
+}
 
 /* CSS test for the post buttons */
 .newUpdateButtonContainer{
