@@ -39,7 +39,7 @@ class FirstTimeUser extends React.Component{
   // friends and put the follower list to be like a carousel
   // that shows the people and allows for them to follow
 
-  
+
 
 
   toggleChecked = () => {
@@ -112,13 +112,8 @@ class FirstTimeUser extends React.Component{
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
              }
-<<<<<<< HEAD
-           visible={false} //showIntialInstructions
-           onOk={this.hideModal}
-=======
            visible={true} //showIntialInstructions
            // onOk={this.hideModal}
->>>>>>> 83880fe928ad54a6a499bb2512b6bb34ebff3fdf
            okText={
 
                <div>{
