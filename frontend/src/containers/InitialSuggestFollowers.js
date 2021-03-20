@@ -26,6 +26,7 @@ class InitialSuggestFollowers extends React.Component{
     super(props);
     this.next = this.next.bind(this)
     this.previous = this.previous.bind(this);
+
     // createRef is used to refer to the DOM element in the render with the
     // ref in the tab
     this.carousel = React.createRef()
@@ -34,8 +35,10 @@ class InitialSuggestFollowers extends React.Component{
   state ={
     // list will be the list of followers
     list: [],
-    start: 12,
+    start: 13,
     counter: 6,
+    carouselIndex: 0,
+    loading: false,
   }
 
 
@@ -47,8 +50,27 @@ class InitialSuggestFollowers extends React.Component{
     this.getData()
   }
 
+  onChange = a => {
+    console.log(a)
+    this.setState({
+      carouselIndex:a
+    })
+
+    // now if a equals to the final lenght minus 2 (two slides before the end
+  // then you want to get more people)
+  // console.log(this.state.list.length-2)
+  // console.log(a === Math.ceil(this.state.list.length/3)-2)
+    // if(a === Math.ceil(this.state.list.length/3)-2 ){
+    //   console.log('hit here')
+    //   this.onLoadMore()
+    //   this.carousel.goTo(a)
+    // }
+
+  }
+
   getData = callback =>{
-    authAxios.get(`${global.API_ENDPOINT}/userprofile/everyoneSuggested`)
+
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestSuggested`)
         .then(res=> {
 
           this.setState({
@@ -57,6 +79,36 @@ class InitialSuggestFollowers extends React.Component{
        });
        console.log(this.state.list)
   }
+
+  onLoadMore = (e) => {
+
+    console.log(this.state.counter)
+    console.log(this.state.data)
+    console.log(this.state.list)
+
+    const start = this.state.start
+    const end = this.state.counter
+
+    this.setState({
+      loading: true
+    })
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/loadSuggested`,{
+      params:{
+        start,
+        end
+      }
+    })
+    .then(res => {
+      console.log(res)
+      this.setState({
+        list:this.state.list.concat(res.data),
+        start: this.state.start+this.state.counter,
+        loading: false
+      })
+    })
+
+
+    }
 
   next() {
     this.carousel.next()
@@ -182,16 +234,26 @@ class InitialSuggestFollowers extends React.Component{
 
   render(){
 
+    console.log(this.state.carouselIndex)
+    console.log(Math.ceil(this.state.list.length/3))
 
-
+    console.log(this.state.carouselIndex+1 === Math.ceil(this.state.list.length/3)-1)
     return (
       <div className = 'socialLeftRight'>
-        <div class="leftArrowSuggested">
-          <i
-            onClick = {this.previous}
-            class="fas fa-chevron-left">
-          </i>
-        </div>
+        {
+          this.state.carouselIndex === 0 ?
+          <div></div>
+
+          :
+
+          <div class="leftArrowSuggested">
+            <i
+              onClick = {this.previous}
+              class="fas fa-chevron-left">
+            </i>
+          </div>
+        }
+
         <Carousel
         arrows = {true}
         effect = 'null'
@@ -200,13 +262,23 @@ class InitialSuggestFollowers extends React.Component{
         {this.renderUserProfiles(this.state.list)}
         </Carousel>
 
+        {
+          this.state.carouselIndex+1 === Math.ceil(this.state.list.length/3) ?
 
-        <div class="rightArrowSuggested">
-          <i
-            onClick = {this.next}
-            class="fas fa-chevron-right">
-          </i>
-        </div>
+          <div>
+          </div>
+
+          :
+
+          <div class="rightArrowSuggested">
+            <i
+              onClick = {this.next}
+              class="fas fa-chevron-right">
+            </i>
+          </div>
+
+
+        }
 
 
 
