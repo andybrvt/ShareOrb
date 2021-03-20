@@ -5,6 +5,7 @@ import {
   Dropdown,
   Menu,
   Card,
+  Button
  } from 'antd';
 import {
  RightCircleOutlined,
@@ -35,6 +36,11 @@ class InitialSuggestFollowers extends React.Component{
     list: [],
     start: 12,
     counter: 6,
+  }
+
+
+  capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
   componentDidMount(){
@@ -100,20 +106,42 @@ class InitialSuggestFollowers extends React.Component{
         if(userList[count]){
 
           let username = ""
+          let profilePic = ""
+          let firstName = ""
+          let lastName = ""
           if(userList[count]){
             username = userList[count].username
+            profilePic = userList[count].profile_picture
+            firstName = userList[count].first_name
+            lastName = userList[count].last_name
           }
           console.log(username)
 
           singleSlide.push(
             <div className = "singleCardArea">
-              <Card
-                 hoverable
-                 style={{ width:"220px" }}
-                 cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-               >
-                 <Meta title="Europe Street beat" description="www.instagram.com" />
-               </Card>
+               <div className = "suggestedUserCard">
+                 <div className = "pictureHolder">
+                   <img alt="example" src={profilePic} />
+                 </div>
+
+                 <div className = "nameHolder">
+                   <div className = "suggestedFriendName"> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
+                   <div className = "suggestedFriendUserName"> @{username}</div>
+                   <div className = "suggestedFriendHolder">
+                     <Button
+                       className = "suggestedFriendButton"
+                       type="primary"
+                       shape="round"
+                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-plus"></i>}
+                       style={{fontSize:'15px'}} size="large"
+                       // onClick = {() => this.onFollow(this.props.currentId, profileId)}
+                       > Follow
+                     </Button>
+                   </div>
+
+                 </div>
+
+               </div>
 
             </div>
           )
@@ -158,9 +186,8 @@ class InitialSuggestFollowers extends React.Component{
 
     return (
       <div className = 'socialLeftRight'>
-        <div class="miniArrowLeft">
+        <div class="leftArrowSuggested">
           <i
-            style={{color:'#d9d9d9'}}
             onClick = {this.previous}
             class="fas fa-chevron-left">
           </i>
@@ -174,9 +201,8 @@ class InitialSuggestFollowers extends React.Component{
         </Carousel>
 
 
-        <div class="miniArrowRight">
+        <div class="rightArrowSuggested">
           <i
-            style={{color:'#d9d9d9'}}
             onClick = {this.next}
             class="fas fa-chevron-right">
           </i>
