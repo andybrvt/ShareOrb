@@ -18,8 +18,8 @@ class SuggestedFriends extends React.Component {
     loading: false,
     data: [],
     list: [],
-    start: 5,
-    counter:5,
+    start: 12,
+    counter:6,
 
   };
 
