@@ -116,6 +116,7 @@ STILL SHARED BETWEEN ALL 3 PERSONAL PROFILES
   color: black;
   top:50%;
   transform: translateY(-50%);
+  white-space: pre-line
   /* background-color: green; */
 
 }

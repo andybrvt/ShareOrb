@@ -251,7 +251,7 @@ class NewsFeedView extends React.Component {
 							</Link>
 						</div>
 */}
-						test
+						
 						<FirstTimeUser {...this.props}/>
 
 						<NewsfeedButtonContainer

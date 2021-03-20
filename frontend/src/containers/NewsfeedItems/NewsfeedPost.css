@@ -572,6 +572,12 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
     font-family: "Segoe UI";
     padding-right: 10px;
     font-weight: 400;
+    white-space: pre-line;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
 }
 .userNamePart{
   font-weight: 650;

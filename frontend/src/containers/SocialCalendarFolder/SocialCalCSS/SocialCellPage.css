@@ -32,7 +32,7 @@
   /* height: 100; */
 
   top: 50%;
-  width: 83%;
+  width: 85%;
   height: 97.5%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -400,7 +400,7 @@
 
   /* height of comemnt lsit */
   height: 100%;
-  width: 30%;
+  width: 35%;
   flex-direction: column;
   border-left: 1px solid lightgray;
 }
@@ -1096,7 +1096,7 @@
 }
 
 .socialBoxInput{
-  width: 100%;
+  width: 110%;
   margin-left: 10px;
   font-size: 13px;
   position: relative;

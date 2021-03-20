@@ -39,7 +39,7 @@ class FirstTimeUser extends React.Component{
   // friends and put the follower list to be like a carousel
   // that shows the people and allows for them to follow
 
-  
+
 
 
   toggleChecked = () => {
