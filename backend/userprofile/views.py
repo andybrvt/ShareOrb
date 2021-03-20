@@ -370,7 +370,7 @@ class NewsFeedSuggestedFriends(generics.ListAPIView):
         # Your can exclude a list by using keyword __in
         # This is filtering by username in the list
 
-        queryset = models.User.objects.exclude(username__in = list)[0:3]
+        queryset = models.User.objects.exclude(username__in = list)[0:12]
         return queryset
 
 class everyoneSuggested(generics.ListAPIView):
@@ -388,7 +388,7 @@ class everyoneSuggested(generics.ListAPIView):
         # Your can exclude a list by using keyword __in
         # This is filtering by username in the list
 
-        queryset = models.User.objects.exclude(username__in = list)[:3]
+        queryset = models.User.objects.exclude(username__in = list)[:12]
         return queryset
 
 class loadMoreSuggestedView(generics.ListAPIView):

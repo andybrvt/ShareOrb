@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
 import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Timeline, Input, Steps, Card} from 'antd';
 import introPic from './intro.png'
-import intro2Pic from './intro2.png'
+import intro2Pic from './intro2.png';
+import InitialSuggestFollowers from './InitialSuggestFollowers';
 const Step = Steps.Step
 const steps = [{
   title: 'Welcome!',
@@ -19,12 +20,27 @@ const steps = [{
   content: 'Last-content',
 }];
 const { Meta } = Card;
+
+
+
 class FirstTimeUser extends React.Component{
 
   state ={
     checked:false,
     current: 0,
+    // list will be the list of followers
+    list: [],
+    start: 10,
+    counter: 5,
   }
+
+
+  // For the follower page just make it similar to suggest
+  // friends and put the follower list to be like a carousel
+  // that shows the people and allows for them to follow
+
+  
+
 
   toggleChecked = () => {
     this.setState({ checked: !this.state.checked });
@@ -71,6 +87,7 @@ class FirstTimeUser extends React.Component{
 
   render() {
     console.log(this.props)
+    console.log(this.state)
     let username = ""
     let firstName=""
     const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
@@ -95,8 +112,13 @@ class FirstTimeUser extends React.Component{
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
              }
+<<<<<<< HEAD
            visible={false} //showIntialInstructions
            onOk={this.hideModal}
+=======
+           visible={true} //showIntialInstructions
+           // onOk={this.hideModal}
+>>>>>>> 83880fe928ad54a6a499bb2512b6bb34ebff3fdf
            okText={
 
                <div>{
@@ -189,21 +211,25 @@ class FirstTimeUser extends React.Component{
                  Let's follow some people
                  <br/>
                  <div class="suggestedPeopleIntro">
-                   <Card
-                      hoverable
-                      style={{ width: 240 }}
-                      cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-                    >
-                      <Meta title="Europe Street beat" description="www.instagram.com" />
-                    </Card>,
+                   <InitialSuggestFollowers />
+                   {/*
+                     <Card
+                        hoverable
+                        style={{ width: 240 }}
+                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                      >
+                        <Meta title="Europe Street beat" description="www.instagram.com" />
+                      </Card>,
 
-                    <Card
-                      hoverable
-                      style={{ width: 240 }}
-                      cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-                    >
-                      <Meta title="Europe Street beat" description="www.instagram.com" />
-                    </Card>,
+                      <Card
+                        hoverable
+                        style={{ width: 240 }}
+                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                      >
+                        <Meta title="Europe Street beat" description="www.instagram.com" />
+                      </Card>,
+                     */}
+
                   </div>
                </div>
 
@@ -212,22 +238,29 @@ class FirstTimeUser extends React.Component{
            }
 
 
-           <div style={{float:'right'}}>{
+           <div style={{float:'right'}}>
+             {
+               current > 0
+               && (
+               <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                 Previous
+               </Button>
+               )
+             }
+             {
              current < steps.length - 1
-             && <Button type="primary" onClick={() => this.next()}>Next</Button>
+             && <Button
+             style={{ marginLeft: 8 }}
+             type="primary" onClick={() => this.next()}>Next</Button>
            }
            {
              current === steps.length - 1
-             && <Button onClick={() => this.hideModal()} type="primary" >Done</Button>
+             && <Button
+             style={{ marginLeft: 8 }}
+             onClick={() => this.hideModal()} type="primary" >Done</Button>
            }
-           {
-             current > 0
-             && (
-             <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-               Previous
-             </Button>
-             )
-           }</div>
+
+         </div>
 
            {/**
         <div class="firstTimeModalText">
