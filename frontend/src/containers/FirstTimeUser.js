@@ -4,17 +4,42 @@ import * as actions from '../store/actions/auth';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
-import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Timeline, Input} from 'antd';
-
+import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Timeline, Input, Steps, Card} from 'antd';
+import introPic from './intro.png'
+import intro2Pic from './intro2.png'
+const Step = Steps.Step
+const steps = [{
+  title: 'Welcome!',
+  content: 'First-content',
+}, {
+  title: 'Features',
+  content: 'Second-content',
+}, {
+  title: 'Followers',
+  content: 'Last-content',
+}];
+const { Meta } = Card;
 class FirstTimeUser extends React.Component{
 
   state ={
     checked:false,
+    current: 0,
   }
 
   toggleChecked = () => {
     this.setState({ checked: !this.state.checked });
   };
+
+
+  next() {
+    const current = this.state.current + 1;
+    this.setState({ current });
+  }
+
+  prev() {
+    const current = this.state.current - 1;
+    this.setState({ current });
+  }
 
 
   onChange = e => {
@@ -55,7 +80,7 @@ class FirstTimeUser extends React.Component{
     if (this.props.firstName){
       firstName = this.props.firstName
     }
-
+    let current=this.state.current
     let startModalText="Welcome to ShareOrb, "+firstName+"!"
     let showIntialInstructions = false;
     if(this.props.showIntialInstructions){
@@ -65,17 +90,146 @@ class FirstTimeUser extends React.Component{
       return (
 
         <Modal
-           title={startModalText}
+           title={
+             <Steps style={{padding:'10px'}} current={current}>
+            {steps.map(item => <Step key={item.title} title={item.title} />)}
+          </Steps>
+             }
            visible={true} //showIntialInstructions
            onOk={this.hideModal}
-           okText="Let's Go!"
-           width={625}
+           okText={
+
+               <div>{
+                 current < steps.length - 1
+                 && <Button type="primary" onClick={() => this.next()}>Next</Button>
+               }
+               {
+                 current === steps.length - 1
+                 && <Button type="primary" >Done</Button>
+               }
+               {
+                 current > 0
+                 && (
+                 <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                   Previous
+                 </Button>
+                 )
+               }</div>
+
+           }
+         width={800}
            centered
            closable={false}
           // cancelText="取消"
-            okButtonProps={{ disabled: !this.state.checked }}
+          //  okButtonProps={{ disabled: !this.state.checked }}
           cancelButtonProps={{ style: { display: 'none' } }}
+          //footer={(this.state.current==3)?null:''}
+          footer={null}
            >
+
+
+           <div class="firstTimeUserContainer">
+
+
+           {
+             (this.state.current==0)?
+             <div style={{height:'90%'}}>
+             <div class="firstTimeModalText">
+               {startModalText} We believe every day is special. Think of ShareOrb like a
+               scrapbook of memories and you're creating <b>only one</b> album per day.
+
+             </div>
+             <br/>
+             <img class="firstTimeIntroPic" src={introPic} />
+             </div>
+             :
+
+            <div>
+              {
+               (this.state.current==1)?
+
+               <div class="firstTimeModalText" style={{marginBottom:'-25px'}}>
+                 Let's dive into some of the core features:
+                 <Timeline style={{marginLeft:'25px', marginTop:'25px'}}>
+                   <Timeline.Item>
+                     <i style={{color:'#1890ff', marginRight:'5px'}}
+                       class="fas fa-home"></i>
+                     Home: Every post on the newsfeed is an entire day of pictures. Let's say today is Febuary 27th right?
+                     Any pictures you add today will be inside today's album (on the 27th)!
+
+                   </Timeline.Item>
+                   <Timeline.Item>
+                     <i style={{color:'#1890ff', marginRight:'5px'}}
+                       class="far fa-comment"></i>
+                     Chats: Message and schedule events with friends
+                   </Timeline.Item>
+
+                   <Timeline.Item>
+                     <i style={{color:'#1890ff', marginRight:'5px'}}
+                       class="far fa-calendar-alt"></i>
+                     Personal Calendar: Your <b>private</b> calendar, sync with friends and plan your day
+                     <img src={intro2Pic} width="75%"/>
+                   </Timeline.Item>
+                   <Timeline.Item>
+                     <i style={{color:'#1890ff', marginRight:'5px'}}
+                       class="fas fa-user-friends"></i>
+                     Social Calendar: Your <b>public</b> calendar. Any pictures or events you create here
+                     can be seen by anyone!
+                   </Timeline.Item>
+                 </Timeline>
+               </div>
+
+
+               :
+
+
+
+
+               <div class="firstTimeModalText">
+                 Let's follow some people
+                 <br/>
+                 <div class="suggestedPeopleIntro">
+                   <Card
+                      hoverable
+                      style={{ width: 240 }}
+                      cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                    >
+                      <Meta title="Europe Street beat" description="www.instagram.com" />
+                    </Card>,
+
+                    <Card
+                      hoverable
+                      style={{ width: 240 }}
+                      cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                    >
+                      <Meta title="Europe Street beat" description="www.instagram.com" />
+                    </Card>,
+                  </div>
+               </div>
+
+               }
+             </div>
+           }
+
+
+           <div style={{float:'right'}}>{
+             current < steps.length - 1
+             && <Button type="primary" onClick={() => this.next()}>Next</Button>
+           }
+           {
+             current === steps.length - 1
+             && <Button onClick={() => this.hideModal()} type="primary" >Done</Button>
+           }
+           {
+             current > 0
+             && (
+             <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+               Previous
+             </Button>
+             )
+           }</div>
+
+           {/**
         <div class="firstTimeModalText">
           We believe every day is special. Think of ShareOrb like a scrapbook and you're creating <b>only one</b> album per day.
           Let's dive into some of the features:
@@ -115,6 +269,13 @@ class FirstTimeUser extends React.Component{
             </Checkbox>
 
         </div>
+        */}
+
+
+
+
+      </div>
+
 
       </Modal>
 

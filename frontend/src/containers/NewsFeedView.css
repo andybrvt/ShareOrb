@@ -1,3 +1,21 @@
+.firstTimeUserContainer{
+    height:525px;
+    padding-left:25px;
+    padding-right:25px;
+}
+.firstTimeIntroPic{
+  position: relative;
+  width:85%;
+
+  left:50%;
+  transform: translate(-50%);
+}
+
+.suggestedPeopleIntro{
+  display: flex;
+  flex-direction: row;
+}
+
 .noFollowerText{
   font-size: 20px;
   font-family: "Segoe UI Regular";
