@@ -10,7 +10,7 @@ import * as newsfeedActions from '../../store/actions/newsfeed';
 import * as dateFns from 'date-fns';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
-// DO NOT USE ANY MORE UNLESS REVERT 
+// DO NOT USE ANY MORE UNLESS REVERT
 
 class UserPostPage extends React.Component{
 
@@ -564,7 +564,12 @@ getPageName(postOwnerName){
                 // bordered = {false}
                 placeholder = 'Write a comment'
                 name = 'postComment'
-                onPressEnter = {() =>this.handleSubmit()}
+                onPressEnter = {e =>
+                          (e.keyCode == 13 && !e.shiftKey)?
+                              this.handleSubmit()
+                          :''
+                          }
+
                 // rows = {1}
                  />
 

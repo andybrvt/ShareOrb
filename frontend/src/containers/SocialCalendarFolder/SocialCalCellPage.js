@@ -1203,17 +1203,16 @@ class SocialCalCellPage extends React.Component{
                          onChange ={this.onCommentChange}
                          value = {this.state.comment}
                          // bordered = {false}
-                         placeholder = 'Write a comment'
+                         placeholder = 'Write a commenta'
                          name = 'socialComment'
-                         onPressEnter = {() => this.handleCommentSubmit(curDate, socialCalUserId)}
-                         // rows = {1}
+                         onPressEnter = {e =>
+                          (e.keyCode == 13 && !e.shiftKey)?
+                              this.handleCommentSubmit(curDate, socialCalUserId)
+                          :''
+                          }
+                         rows = {2}
                           />
 
-                         <button
-                         // type = 'submit'
-                         // onClick = {this.handleSubmit}
-                         style = {{display: 'none'}}
-                         />
                        </Form>
                      </div>
 

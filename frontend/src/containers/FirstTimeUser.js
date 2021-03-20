@@ -95,7 +95,7 @@ class FirstTimeUser extends React.Component{
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
              }
-           visible={true} //showIntialInstructions
+           visible={false} //showIntialInstructions
            onOk={this.hideModal}
            okText={
 
