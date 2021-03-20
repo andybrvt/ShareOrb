@@ -107,6 +107,18 @@ class NewChatContent extends React.Component{
 
   }
 
+  isValidHttpUrl(string) {
+    let url;
+
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
+
 
   renderMessages = (messageItem) => {
 
@@ -189,9 +201,23 @@ class NewChatContent extends React.Component{
             <div className = "chatListItemR">
               <div className = "textMessageRight">
                 <Tooltip placement="left" title={"8:00PM"}>
-                  <div className = "messageRight">
-                    {messageItem.body}
-                  </div>
+                  <div>
+                  {
+                    (this.isValidHttpUrl(messageItem.body))?
+
+                      <a className = "messageRight" href={messageItem.body}>
+                        {messageItem.body}
+                      </a>
+
+
+                    :
+                    <div className = "messageRight">
+                      {messageItem.body}
+                    </div>
+
+
+                  }
+                </div>
                 </Tooltip>
               </div>
             </div>
@@ -377,6 +403,7 @@ class NewChatContent extends React.Component{
               <div className = "insideMessasgeHolder">
                 <div className = "messageAvatarHolder">
                   <Avatar
+
                     onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
                     className = 'messageAvatar'
                     size = {30} src = {`${global.IMAGE_ENDPOINT}`+messageItem.messageUser.profile_picture}  />
@@ -388,9 +415,22 @@ class NewChatContent extends React.Component{
                       <div
                         onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
                         className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
-                      <div className = "eventMessage">
-                        {messageItem.body}
-                      </div>
+  
+                      {
+                        (this.isValidHttpUrl(messageItem.body))?
+
+                          <a className = "eventMessage" href={messageItem.body}>
+                            {messageItem.body}
+                          </a>
+
+
+                        :
+                        <div className = "eventMessage">
+                          {messageItem.body}
+                        </div>
+
+
+                      }
                     </span>
                   </Tooltip>
                 </div>

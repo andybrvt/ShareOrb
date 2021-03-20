@@ -65,9 +65,10 @@ class NewsfeedButtonContainer extends React.Component{
     const location = this.props.location.pathname;
 
     console.log(picExist)
-
+    console.log(curItems)
     return (
-      <div className = "newUpdateButtonContainer">
+      <div class={`${(curItems.length==0)?"testNowThis bluenewUpdateButtonContainer":"newUpdateButtonContainer"}`}>
+        <div className = "">
         <div
           onClick = {this.props.postCondition}
           className ="upperTopContainer">
@@ -144,6 +145,7 @@ class NewsfeedButtonContainer extends React.Component{
 
 
 
+      </div>
       </div>
     )
   }

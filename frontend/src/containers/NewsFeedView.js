@@ -22,6 +22,7 @@ import * as dateFns from 'date-fns';
 import NoFoundPage from './403.jsx';
 import './NewsFeedView.css'
 import Spinner from './Spinner.js';
+import FirstTimeUser from './FirstTimeUser.js';
 
 import {
   CalendarOutlined,
@@ -51,8 +52,7 @@ class NewsFeedView extends React.Component {
 		id: '',
 		postShow:false,
 		eventShow:false,
-		checked:false,
-		firstTimeModal:true,
+
 		upperStart: 6
 	}
 
@@ -73,43 +73,7 @@ class NewsFeedView extends React.Component {
 	}
 
 
-	toggleChecked = () => {
-    this.setState({ checked: !this.state.checked });
-  };
 
-	onChange = e => {
-    console.log('checked = ', e.target.checked);
-    this.setState({
-      checked: e.target.checked,
-    });
-  };
-
-
-	showModal = () => {
-    this.setState({
-      firstTimeModal: true,
-    });
-  };
-
-  hideModal = () => {
-
-		let curId = ""
-		if(this.props.curId){
-			curId = this.props.curId
-		}
-
-		authAxios.post(`${global.API_ENDPOINT}/userprofile/unShowIntialInstructions/`+curId)
-		.then(res => {
-			// Now just change the showIntialInstructions to false
-			this.props.unShowIntialInstructions(res.data)
-
-		})
-
-
-
-
-
-  };
 
 	initialiseSocialNewsfeed(){
 
@@ -218,15 +182,10 @@ class NewsFeedView extends React.Component {
 		if (this.props.firstName){
 			firstName = this.props.firstName
 		}
-		let startModalText="Welcome to ShareOrb, "+firstName+"!"
-		console.log(cellYear, cellMonth, cellDay)
 		const location = this.props.location.pathname;
 
 
-		let showIntialInstructions = false;
-		if(this.props.showIntialInstructions){
-			showIntialInstructions = this.props.showIntialInstructions
-		}
+
 
 		const uploadButton = (
 		 <div>
@@ -245,59 +204,7 @@ class NewsFeedView extends React.Component {
 
 
 				<div className = "newsfeedParent">
-					<Modal
-						 title={startModalText}
-						 visible={showIntialInstructions}
-						 onOk={this.hideModal}
-						 okText="Let's Go!"
-						 width={625}
-						 centered
-						 closable={false}
-          	// cancelText="取消"
-							okButtonProps={{ disabled: !this.state.checked }}
-						cancelButtonProps={{ style: { display: 'none' } }}
-						 >
-	        <div class="firstTimeModalText">
-						We believe every day is special. Think of ShareOrb like a scrapbook and you're creating <b>only one</b> album per day.
-						Let's dive into some of the features:
-						<br/>
-						<br/>
 
-							<Timeline style={{marginLeft:'25px'}}>
-								<Timeline.Item>
-									<i style={{color:'#1890ff', marginRight:'5px'}}
-										class="fas fa-home"></i>
-									Home: Every post on the newsfeed is an entire day of pictures. Today's Febuary 27th right?
-									Any pictures you add today will be inside today's album (on the 27th)!
-
-								</Timeline.Item>
-								<Timeline.Item>
-									<i style={{color:'#1890ff', marginRight:'5px'}}
-										class="far fa-comment"></i>
-									Chats: Message and schedule events with friends
-								</Timeline.Item>
-								<Timeline.Item>
-									<i style={{color:'#1890ff', marginRight:'5px'}}
-										class="far fa-calendar-alt"></i>
-									Personal Calendar: Your <b>private</b> calendar, sync with friends and plan your day
-								</Timeline.Item>
-								<Timeline.Item>
-									<i style={{color:'#1890ff', marginRight:'5px'}}
-										class="fas fa-user-friends"></i>
-									Social Calendar: Your <b>public</b> calendar. Any pictures or events you create here
-									can be seen by anyone!
-								</Timeline.Item>
-							</Timeline>
-
-							<Checkbox
-		            checked={this.state.checked}
-		            onChange={this.onChange}>
-		            Cool, I got it!
-		          </Checkbox>
-
-					</div>
-
-	      </Modal>
 
 
 
@@ -312,6 +219,8 @@ class NewsFeedView extends React.Component {
 
 					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedItself">
+
+
 {/*
 						<div className = "newsfeedActionButtons">
 							<div onClick ={this.postCondition} class="writePostCard">
@@ -342,7 +251,8 @@ class NewsFeedView extends React.Component {
 							</Link>
 						</div>
 */}
-
+						test
+						<FirstTimeUser {...this.props}/>
 
 						<NewsfeedButtonContainer
 							postCondition = {this.postCondition}

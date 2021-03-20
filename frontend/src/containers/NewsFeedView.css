@@ -1,3 +1,21 @@
+.firstTimeUserContainer{
+    height:525px;
+    padding-left:25px;
+    padding-right:25px;
+}
+.firstTimeIntroPic{
+  position: relative;
+  width:85%;
+
+  left:50%;
+  transform: translate(-50%);
+}
+
+.suggestedPeopleIntro{
+  display: flex;
+  flex-direction: row;
+}
+
 .noFollowerText{
   font-size: 20px;
   font-family: "Segoe UI Regular";
@@ -5,6 +23,13 @@
   width:75%;
 }
 
+.bluenewUpdateButtonContainer{
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(105, 192, 255, 1);
+}
 
 /* CSS test for the post buttons */
 .newUpdateButtonContainer{
@@ -37,7 +62,7 @@
 
 .writeAPostText{
   color: gray;
-  background: #f5f5f5;
+  background: #f0f0f0;
 
   border-radius: 20px;
   font-size: 16px;
@@ -50,7 +75,7 @@
   /* transform:translateY(-50%); */
 }
 .writeAPostText:hover{
-  background: #f0f0f0;
+  background: #d9d9d9;
 }
 
 

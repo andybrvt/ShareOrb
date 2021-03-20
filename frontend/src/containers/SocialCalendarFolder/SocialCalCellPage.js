@@ -976,7 +976,11 @@ class SocialCalCellPage extends React.Component{
                         rows = {3}
                         onChange = {this.onCaptionChange}
                         value = {this.state.caption}
-                        onPressEnter = {e => this.onCaptionSubmit(e, curDate)}
+                        onPressEnter = {e =>
+                          (e.keyCode == 13 && !e.shiftKey)?
+                              this.onCaptionSubmit(e, curDate)
+                          :''
+                          }
                          />
                          <div className = "penIcon">
                          <i

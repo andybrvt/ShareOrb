@@ -421,7 +421,7 @@ class DetailSwitch extends React.Component {
           <div
             onClick = {() => this.onPageBack()}
             className = "eventSyncBack">
-            <i class="fas fa-arrow-left"></i>
+            <i style={{color:'#f5222d'}} class="fas fa-arrow-circle-left"></i>
           </div>
           <Form
           onSubmit = {this.handleSubmit}
