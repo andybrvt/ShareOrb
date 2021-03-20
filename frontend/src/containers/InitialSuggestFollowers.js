@@ -13,6 +13,8 @@ import {
 } from '@ant-design/icons';
 import { authAxios } from '../components/util';
 import './InitialSuggestFollowers.css';
+import NotificationWebSocketInstance from '../notificationWebsocket';
+
 const { Meta } = Card;
 
 
@@ -118,6 +120,113 @@ class InitialSuggestFollowers extends React.Component{
     this.carousel.prev()
   }
 
+  onFollow = (privatePro, follower, following) => {
+    // This function will be used to handle the follow or request
+    // The parameter privatePro will be used to see if the account is private or not
+    // to send the right request
+    // The parameterfollower will you, and following will be the person you are
+    // trying to follow.
+
+    console.log(privatePro, follower, following)
+    if(privatePro === true) {
+      // if true then the perosn profile will be private and then when you click
+      // follow it will show a reqeust instead of followed
+
+      // Make an axios call here that creates taht sent request event and update
+      // it in the front end and then send a notification to the other person
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/sendFollowRequest`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
+        // update your redux first and then send a notificaiton to the other person
+        // and update their auth too as well
+        this.props.updateSentRequestList(res.data)
+        const notificationObject = {
+          command: 'send_follow_request_notification',
+          actor: follower,
+          recipient: following
+        }
+        // ADD THE NOTIFICATIONI HERE TO UPDATE THE FOLLOWING AUTH
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+      })
+      // const notificationObject = {
+      //   command: 'send_follow_request_notification',
+      //   actor: follower,
+      //   recipient: following
+      // }
+      //
+      // // add auth here
+      //
+      // // Simlar to the personal profile but without sending it throught he weboscket
+      // NotificationWebSocketInstance.sendNotification(notificationObject)
+    } else {
+      // This will be for when it is not a private event
+
+      authAxios.post(`${global.API_ENDPOINT}/userprofile/onFollow`, {
+        follower: follower,
+        following: following
+      })
+      .then(res => {
+        console.log(res.data)
+        this.props.updateFollowing(res.data)
+        // Send a notification to the other person here
+        const notificationObject = {
+          command: 'send_follow_notification',
+          actor: follower,
+          recipient: following
+        }
+        NotificationWebSocketInstance.sendNotification(notificationObject)
+
+      })
+    }
+  }
+
+  onUnfollow = (follower, following) => {
+    // This will unfollow the person
+
+    authAxios.post(`${global.API_ENDPOINT}/userprofile/onUnfollow`, {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      console.log(res.data)
+      this.props.updateFollowing(res.data)
+
+      // This will unsend the follow notification if the person decides to unfollow
+      const notificationObject = {
+        command: 'unsend_follow_notification',
+        actor: follower,
+        recipient: following
+      }
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+    })
+
+  }
+
+  onUnsendRequest = (follower, following) => {
+    // axios then notification after wards
+    authAxios.post (`${global.API_ENDPOINT}/userprofile/unsendFollowRequest`, {
+      follower: follower,
+      following: following
+    })
+    .then(res => {
+      this.props.updateSentRequestList(res.data)
+
+      const notificationObject = {
+        command: 'unsend_follow_request_notification',
+        actor: follower,
+        recipient: following
+      }
+
+      NotificationWebSocketInstance.sendNotification(notificationObject)
+
+
+    })
+  }
+
   renderUserProfiles = (userList) => {
     console.log(userList)
     // This fucntion will reunder and construct all the
@@ -142,6 +251,33 @@ class InitialSuggestFollowers extends React.Component{
     const numSlides = Math.ceil(userList.length/3)
 
     let count = 0
+
+    let following = []
+    let sentRequestList = []
+    let requestList = []
+
+    if(this.props.following){
+      for(let i = 0; i< this.props.following.length; i++){
+        following.push(
+          this.props.following[i].id
+        )
+      }
+    }
+    if(this.props.requestList){
+      for(let i = 0; i< this.props.requestList.length; i++){
+        requestList.push(
+          this.props.requestList[i].id
+        )
+      }
+    }
+    if(this.props.sentRequestList){
+      for(let i = 0; i< this.props.sentRequestList.length; i++){
+        sentRequestList.push(
+          this.props.sentRequestList[i].id
+        )
+      }
+    }
+
     for(let i = 0; i< numSlides; i++){
       // This will make all the over all slides
 
@@ -161,11 +297,15 @@ class InitialSuggestFollowers extends React.Component{
           let profilePic = ""
           let firstName = ""
           let lastName = ""
+          let id = ""
+          let userPriv = ""
           if(userList[count]){
+            id = userList[count].id
             username = userList[count].username
             profilePic = userList[count].profile_picture
             firstName = userList[count].first_name
             lastName = userList[count].last_name
+            userPriv = userList[count].private
           }
           console.log(username)
 
@@ -180,15 +320,47 @@ class InitialSuggestFollowers extends React.Component{
                    <div className = "suggestedFriendName"> {this.capitalize(firstName)} {this.capitalize(lastName)}</div>
                    <div className = "suggestedFriendUserName"> @{username}</div>
                    <div className = "suggestedFriendHolder">
-                     <Button
-                       className = "suggestedFriendButton"
-                       type="primary"
-                       shape="round"
-                       icon={<i  style={{marginRight:'10px'}} class="fas fa-user-plus"></i>}
-                       style={{fontSize:'15px'}} size="large"
-                       // onClick = {() => this.onFollow(this.props.currentId, profileId)}
-                       > Follow
-                     </Button>
+                     {
+                       following.includes(id) ?
+
+                       <Button
+                         className = "suggestedFriendButton"
+                         type="primary"
+                         shape="round"
+                         onClick = {() => this.onUnfollow(this.props.id, id ) }
+                         icon={<i  style={{marginRight:'10px'}} class="fas fa-user-plus"></i>}
+                         style={{fontSize:'15px'}} size="large"
+                         > Following
+                       </Button>
+                       :
+
+                       sentRequestList.includes(id) ?
+
+                       <Button
+                         className = "suggestedFriendButton"
+                         type="primary"
+                         shape="round"
+                         onClick = {() => this.onUnsendRequest(this.props.id, id ) }
+                         icon={<i  style={{marginRight:'10px'}} class="fas fa-user-plus"></i>}
+                         style={{fontSize:'15px'}} size="large"
+                         > Requested
+                       </Button>
+
+                       :
+
+                       <Button
+                         className = "suggestedFriendButton"
+                         type="primary"
+                         shape="round"
+                         icon={<i  style={{marginRight:'10px'}} class="fas fa-user-plus"></i>}
+                         style={{fontSize:'15px'}} size="large"
+                         onClick = {() => this.onFollow(userPriv, this.props.id, id ) }
+                         > Follow
+                       </Button>
+
+                     }
+
+
                    </div>
 
                  </div>
@@ -233,6 +405,7 @@ class InitialSuggestFollowers extends React.Component{
 
 
   render(){
+
 
     console.log(this.state.carouselIndex)
     console.log(Math.ceil(this.state.list.length/3))
@@ -289,4 +462,10 @@ class InitialSuggestFollowers extends React.Component{
 
 
 }
+
+
+const mapStateToProps = state => {
+
+}
+
 export default InitialSuggestFollowers;
