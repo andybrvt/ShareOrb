@@ -113,7 +113,7 @@ class FirstTimeUser extends React.Component{
           </Steps>
              }
            // visible={this.props.showIntialInstructions} //showIntialInstructions
-           visible={true} //showIntialInstructions
+           visible={this.props.showIntialInstructions} //showIntialInstructions
            // onOk={this.hideModal}
            okText={
 
