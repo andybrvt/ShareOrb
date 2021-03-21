@@ -72,14 +72,81 @@ class InitialSuggestFollowers extends React.Component{
 
   getData = callback =>{
 
-    authAxios.get(`${global.API_ENDPOINT}/userprofile/suggestSuggested`)
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/configSuggestSuggested`)
         .then(res=> {
+          console.log(res)
 
+          const newList = this.onRemoveDuplicates(res.data.focusList, res.data.userList)
+          console.log(newList)
           this.setState({
-            list:res.data,
+            list:newList,
          });
        });
        console.log(this.state.list)
+  }
+
+
+  onRemoveDuplicates = (list1, list2 ) => {
+    // This will remove all the dumplicates from the
+    // list
+
+
+    let newList = []
+    let duplicate = false
+    for(let i = 0; i< list1.length; i++){
+      // check if the value of list1 is duplicate
+      const length = newList.length
+      for(let j = 0; j< length; j++){
+        console.log('try here')
+        if(newList[j].id === list1[i].id){
+          //f the idea for any of the values exist within
+          // the newlist you will stop this current loop
+          duplicate = true
+          break
+
+        }
+
+        console.log("does hit here")
+        //if it makes it to the end without breaking then
+        // add it in
+
+
+      }
+      if(duplicate === false){
+          newList.push(list1[i])
+      } else {
+        duplicate = false
+      }
+
+    }
+
+    let duplicate2 = false
+    for(let i = 0; i< list2.length; i++){
+      // check if the value of list1 is duplicate
+      const length = newList.length
+      for(let j = 0; j< length; j++){
+        if(newList[j].id === list2[i].id){
+          //f the idea for any of the values exist within
+          // the newlist you will stop this current loop
+
+          duplicate2 = true
+          break
+        }
+
+
+      }
+      if(duplicate2 === false){
+        console.log("does it ever it here")
+          newList.push(list2[i])
+      } else {
+        duplicate2 = false
+      }
+
+
+
+    }
+
+    return newList
   }
 
   onLoadMore = (e) => {
@@ -313,7 +380,7 @@ class InitialSuggestFollowers extends React.Component{
             <div className = "singleCardArea">
                <div className = "suggestedUserCard">
                  <div className = "pictureHolder">
-                   <img alt="example" src={profilePic} />
+                   <img alt="example" src={`${global.IMAGE_ENDPOINT}`+profilePic} />
                  </div>
 
                  <div className = "nameHolder">

@@ -410,6 +410,41 @@ class suggestSuggested(generics.ListAPIView):
         queryset = models.User.objects.exclude(username__in = list)[:20]
         return queryset
 
+class configSuggestedSuggest(APIView):
+    # This fucntion will be similar to the suggestSuggested but you
+    # will grab specific users
+
+    def get(self, request, *args, **kwargs):
+        # Now you get the 3 main people,andy, ping and, jon
+        # because this is the first thing that they see
+        # its cool to jsut grab everyone and add me and ping in
+        focusList = []
+        if(models.User.objects.filter(id = 20).count() > 0 and models.User.objects.filter(id = 2).count() > 0 ):
+            andy = models.User.objects.get(id = 1)
+            ping = models.User.objects.get(id = 2)
+            jon = models.User.objects.get(id = 20)
+
+            serializedAndy = serializers.SuggestedUserSerializer(andy).data
+            serializedPing = serializers.SuggestedUserSerializer(ping).data
+            serializedJon = serializers.SuggestedUserSerializer(jon).data
+            # Now put them into a list
+            focusList.append(serializedAndy)
+            focusList.append(serializedPing)
+            focusList.append(serializedJon)
+        userList = models.User.objects.exclude(id = self.request.user.id)[:20]
+
+        serializeduserList = serializers.SuggestedUserSerializer(userList, many = True).data
+
+        content = {
+            "focusList": focusList,
+            "userList": serializeduserList
+        }
+
+        return Response(content)
+
+
+
+
 class loadMoreSuggestedView(generics.ListAPIView):
     serializer_class = serializers.SuggestedUserSerializer
     def get_queryset(self):
