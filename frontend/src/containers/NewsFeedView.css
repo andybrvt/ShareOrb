@@ -1,14 +1,44 @@
 .firstTimeUserContainer{
-    height:525px;
+    height:500px;
     padding-left:25px;
     padding-right:25px;
 }
 .firstTimeIntroPic{
   position: relative;
   width:85%;
-
+height: 75%;
   left:50%;
   transform: translate(-50%);
+}
+
+.secondIntroPic{
+  position: relative;
+  width:45%;
+height: 35%;
+  left:15%;
+  float:left;
+  transform: translate(-25%);
+}
+
+
+.secondIntroText{
+  position: relative;
+  left:60%;
+  transform: translate(-50%);
+  font-size: 15px;
+  top:10%;
+}
+
+.firstTimeModalButton{
+  float:right;
+  /* background: red; */
+  position: absolute;
+  top:525px;
+  left:600px;
+}
+
+.firstTimeFirstIterCheck{
+  display:none;
 }
 
 .suggestedPeopleIntro{

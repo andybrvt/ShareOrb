@@ -7,15 +7,23 @@ import { authAxios } from '../components/util';
 import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Timeline, Input, Steps, Card} from 'antd';
 import introPic from './intro.png'
 import intro2Pic from './intro2.png';
+import introPic3 from './introPic3.png';
 import InitialSuggestFollowers from './InitialSuggestFollowers';
 const Step = Steps.Step
 const steps = [{
   title: 'Welcome!',
   content: 'First-content',
 }, {
+  title: 'Home',
+  content: 'Second-content',
+},
+
+{
   title: 'Features',
   content: 'Second-content',
-}, {
+},
+
+{
   title: 'Followers',
   content: 'Last-content',
 }];
@@ -108,11 +116,11 @@ class FirstTimeUser extends React.Component{
 
         <Modal
            title={
-             <Steps style={{padding:'10px'}} current={current}>
+             <Steps style={{padding:'5px'}} current={current}>
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
              }
-           visible={this.state.checked} //showIntialInstructions
+           visible={showIntialInstructions} //showIntialInstructions
            // onOk={this.hideModal}
            okText={
 
@@ -135,6 +143,7 @@ class FirstTimeUser extends React.Component{
 
            }
          width={800}
+         bodyStyle={{height:'500px'}}
            centered
            closable={false}
           // cancelText="取消"
@@ -151,13 +160,13 @@ class FirstTimeUser extends React.Component{
            {
              (this.state.current==0)?
              <div style={{height:'90%'}}>
-             <div class="firstTimeModalText">
-               {startModalText} We believe every day is special. Think of ShareOrb like a
-               scrapbook of memories and you're creating <b>only one</b> album per day.
+               <div class="firstTimeModalText">
+                 {startModalText} We believe every day is special. Think of ShareOrb like a
+                 scrapbook of memories and you're creating <b>only one</b> album per day.
 
-             </div>
-             <br/>
-             <img class="firstTimeIntroPic" src={introPic} />
+               </div>
+               <br/>
+               <img class="firstTimeIntroPic" src={introPic} />
              </div>
              :
 
@@ -175,32 +184,67 @@ class FirstTimeUser extends React.Component{
                      Any pictures you add today will be inside today's album (on the 27th)!
 
                    </Timeline.Item>
-                   <Timeline.Item>
-                     <i style={{color:'#1890ff', marginRight:'5px'}}
-                       class="far fa-comment"></i>
-                     Chats: Message and schedule events with friends
-                   </Timeline.Item>
 
-                   <Timeline.Item>
-                     <i style={{color:'#1890ff', marginRight:'5px'}}
-                       class="far fa-calendar-alt"></i>
-                     Personal Calendar: Your <b>private</b> calendar, sync with friends and plan your day
-                     <img src={intro2Pic} width="75%"/>
-                   </Timeline.Item>
-                   <Timeline.Item>
-                     <i style={{color:'#1890ff', marginRight:'5px'}}
-                       class="fas fa-user-friends"></i>
-                     Social Calendar: Your <b>public</b> calendar. Any pictures or events you create here
-                     can be seen by anyone!
-                   </Timeline.Item>
                  </Timeline>
+                 <img class="secondIntroPic" src={introPic3} />
+                 <div class="secondIntroText">
+                   Try these out for each post!
+                   <br/>
+                  <br/>
+                 <i style={{color:'red', marginRight:'10px'}}
+                   class="fas fa-heart"></i> Liking
+                 <br/>
+                 <br/>
+                 <i style={{color:'#1890ff', marginRight:'10px'}}
+                   class="far fa-comment"></i>
+                 Comment
+                 <br/>
+                 <br/>
+                   <i style={{color:'#1890ff', marginRight:'10px'}}
+                     class="fas fa-archive"></i>
+                  Clip
+                  <br/>
+                  <br/>
+                  <br/>
+                  This is an example of a clipped photo
+                  </div>
+
                </div>
 
 
                :
 
+               <div>
+               {
+                (this.state.current==2)?
 
 
+                <div class="firstTimeModalText">
+                  Here are some other pages:
+                  <Timeline style={{marginLeft:'25px', marginTop:'25px'}}>
+                    <Timeline.Item>
+                      <i style={{color:'#1890ff', marginRight:'5px'}}
+                        class="far fa-comment"></i>
+                      Chats: Message and schedule events with friends
+                    </Timeline.Item>
+
+                    <Timeline.Item>
+                      <i style={{color:'#1890ff', marginRight:'5px'}}
+                        class="far fa-calendar-alt"></i>
+                      Personal Calendar: Your <b>private</b> calendar, sync with friends and plan your day
+                      <img src={intro2Pic} width="75%"/>
+                    </Timeline.Item>
+                    <Timeline.Item>
+                      <i style={{color:'#1890ff', marginRight:'5px'}}
+                        class="fas fa-user-friends"></i>
+                      Social Calendar: Your <b>public</b> calendar. Any pictures or events you create here
+                      can be seen by anyone!
+                    </Timeline.Item>
+                  </Timeline>
+
+                </div>
+
+                :
 
                <div class="firstTimeModalText">
                  Let's follow some people
@@ -225,15 +269,29 @@ class FirstTimeUser extends React.Component{
                       </Card>,
                      */}
 
-                  </div>
-               </div>
+                      </div>
+                   </div>
+                 }
+                 </div>
 
                }
              </div>
            }
 
 
-           <div style={{float:'right'}}>
+
+
+
+           <div class="firstTimeModalButton">
+             {
+               current==0
+               && (
+               <Button ghost disabled class="firstTimeFirstIterCheck" style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                 Previous
+               </Button>
+               )
+             }
+
              {
                current > 0
                && (
@@ -246,6 +304,7 @@ class FirstTimeUser extends React.Component{
              current < steps.length - 1
              && <Button
              style={{ marginLeft: 8 }}
+
              type="primary" onClick={() => this.next()}>Next</Button>
            }
            {
