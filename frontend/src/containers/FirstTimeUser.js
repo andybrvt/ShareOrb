@@ -120,7 +120,8 @@ class FirstTimeUser extends React.Component{
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
              }
-           visible={showIntialInstructions} //showIntialInstructions
+           // visible={this.props.showIntialInstructions} //showIntialInstructions
+           visible={this.props.showIntialInstructions} //showIntialInstructions
            // onOk={this.hideModal}
            okText={
 
