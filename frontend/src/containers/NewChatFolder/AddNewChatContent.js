@@ -147,7 +147,7 @@ class AddNewChatContent extends React.Component{
       console.log('create new chat here')
       authAxios.post(`${global.API_ENDPOINT}/newChat/createChat`,{
         senderId: this.props.curId,
-        chatParticipants: [...this.state.person, this.props.curId],
+        chatParticipants: [...this.state.personId, this.props.curId],
         message: this.state.message
       })
       .then(
@@ -250,10 +250,10 @@ class AddNewChatContent extends React.Component{
 
   }
 
-  handleChange = (value) =>{
-    this.setState({
-      person: value
-    })
+  renderHandleMessageChange = (value) =>{
+    // this.setState({
+    //   person: value
+    // })
 
     if(value.length > 0){
       authAxios.post(`${global.API_ENDPOINT}/newChat/getChat`,
@@ -304,6 +304,12 @@ class AddNewChatContent extends React.Component{
       showSearch: false
 
     })
+
+    // since you are clicking on someone any ways you might as well do the check
+    // here and you might have to do it on the remove one as well
+    // bc now your on chnage is much iddfernet
+    const personIdList = [...this.state.personId, user.id]
+    this.renderHandleMessageChange(personIdList)
   }
 
 
@@ -514,6 +520,8 @@ class AddNewChatContent extends React.Component{
       person: this.state.person.splice(i, 1),
       personId: this.state.personId.splice(i, 1)
     })
+
+    this.renderHandleMessageChange(this.state.personId.splice(i,1))
   }
 
   renderUsernameTag = () => {
