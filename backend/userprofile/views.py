@@ -846,3 +846,26 @@ class UserSearchView(APIView):
         # Now we wll serialize it
         serializedQS = serializers.FollowUserSerializer(qs, many= True).data
         return Response(serializedQS)
+
+class UserChatSearchView(APIView):
+    # This function will be use to filter out people that you follow by name
+    # so that you can grab them and then search and chat with
+    def get(self, request, *args, **kwargs):
+        #  first grab the all the user but you want to start filtering out just
+        #  the people that you follow
+
+        # First grab the user
+        search = request.GET.get("search")
+        userFollowing = self.request.user.get_following()
+        # Now grab the users and then start filtering out the people
+        #  and then do a search on that filter objects
+
+
+        following = models.User.objects.filter(username__in =userFollowing)
+
+        filterFollowing = following.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
+
+        print(search)
+        print(filterFollowing)
+        serializedFollowing = serializers.FollowUserSerializer(filterFollowing, many = True).data
+        return Response(serializedFollowing)
