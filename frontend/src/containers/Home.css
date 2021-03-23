@@ -25,9 +25,9 @@
 }
 
 .parentContainer{
-  opacity:0.8;
+  /* opacity:0.8; */
     background-color:white;
-    position:fixed;
+    position:relative;
     width:100vw;
     height:100vh;
     top:0px;
@@ -159,4 +159,93 @@
   background-color: red;
   color: rgba(0,0,0,.25);
   font-size: 15px;
+}
+
+.backgroundBox{
+  padding: 25px;
+  background-color: #F0F8FF;
+  width: 80%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.secondBackgroundBox{
+  margin-top: 50px;
+  padding: 25px;
+  /* background-color: #F0F8FF; */
+  width: 80%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 400px;
+}
+
+.secondInfoPageLogin{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  display: flex;
+  color: black;
+  height: 100%;
+}
+
+.firstInfoPageLogin{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  display: flex;
+  color: black;
+  /* background-color: red; */
+}
+
+
+.loginPicFlexContainer{
+  width: 60%;
+  height: 100%;
+}
+
+.loginPicFlexContainer img{
+  width: 100%;
+}
+
+
+
+.loginTextFlexContainer{
+  /* background-color: blue; */
+  color: black;
+  width: 40%;
+  font-size: 20px;
+  padding: 20px;
+}
+
+.smolLoginPicFlexContainer{
+  width: 30%;
+
+  /* background-color: red; */
+}
+.smolLoginPicFlexContainer img{
+  width: 100%;
+}
+.smolLoginTextFlexContainer{
+  color: black;
+  width: 70%;
+  font-size: 20px;
+  padding: 20px;
+}
+
+.infoCoverText{
+
+}
+
+.headerText{
+  font-size: 40px;
+  color:#1890ff;
+
+}
+
+.bodyText{
+
 }
