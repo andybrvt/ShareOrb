@@ -178,17 +178,19 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  height: 400px;
+  /* height: 400px; */
 }
 
 .secondInfoPageLogin{
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
-  display: flex;
+  width: 100%;
+  /* display: flex; */
   color: black;
   height: 100%;
+  text-align: center;
+  /* background-color: red; */
 }
 
 .firstInfoPageLogin{
@@ -222,8 +224,10 @@
 }
 
 .smolLoginPicFlexContainer{
-  width: 30%;
-
+  width: 80%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   /* background-color: red; */
 }
 .smolLoginPicFlexContainer img{
@@ -234,6 +238,9 @@
   width: 70%;
   font-size: 20px;
   padding: 20px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .infoCoverText{

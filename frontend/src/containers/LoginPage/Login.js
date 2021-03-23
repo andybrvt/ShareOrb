@@ -213,7 +213,8 @@ class LoginForm extends React.Component {
             </div>
 
             <div className = "smolLoginPicFlexContainer">
-              <img src={login2}/>
+
+              <img src={intro2Pic}/>
 
             </div>
 
@@ -231,13 +232,11 @@ class LoginForm extends React.Component {
           <div class="firstInfoPageLogin">
 
             <div className = "loginPicFlexContainer">
-              <img src={intro2Pic}/>
 
             </div>
 
             <div className = "loginTextFlexContainer">
-              Our mission is to redefined how calendars are used. Our goal is to make
-              sharing and planning events a casual, fun, and easy experience.
+              
             </div>
 
 
