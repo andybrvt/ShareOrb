@@ -856,12 +856,14 @@ class UserChatSearchView(APIView):
 
         # First grab the user
         search = request.GET.get("search")
+        choosen = request.GET.getlist("choosen[]")
+        print(choosen)
         userFollowing = self.request.user.get_following()
         # Now grab the users and then start filtering out the people
         #  and then do a search on that filter objects
 
 
-        following = models.User.objects.filter(username__in =userFollowing)
+        following = models.User.objects.filter(username__in =userFollowing).exclude(id__in =choosen)
 
         filterFollowing = following.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
 

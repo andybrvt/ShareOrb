@@ -74,6 +74,8 @@ class AddNewChatContent extends React.Component{
   }
 
   onChangeNewSearch = e =>{
+    var qs = require('qs');
+
     // This will be used search up teh value that you are trying to search for
     // This one will be doing the backend call
     this.setState({
@@ -81,14 +83,18 @@ class AddNewChatContent extends React.Component{
     })
 
     const search = e.target.value === undefined ? null : e.target.value
-
+    const choosen = this.state.personId
     if(search !== ""){
       this.setState({
         loading: true
       })
       authAxios.get(`${global.API_ENDPOINT}/userprofile/chatSearch/`, {
         params: {
-          search
+          search,
+          choosen
+        },
+        paramsSerializer: params => {
+            return qs.stringify(params, {arrayFormat: 'brackets'})
         }
       }).then(res => {
         console.log(res.data)
