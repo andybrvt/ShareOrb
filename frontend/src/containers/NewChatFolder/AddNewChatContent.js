@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, List, Avatar, Spin, Divider, Button, Tooltip, Select} from 'antd';
+import { Input, Tag, Form, List, Avatar, Spin, Divider, Button, Tooltip, Select} from 'antd';
 import './NewChat.css';
 import { connect } from 'react-redux';
 import { authAxios } from '../../components/util';
@@ -19,9 +19,14 @@ class AddNewChatContent extends React.Component{
     super(props);
     this.state = {
       person: [],
+      personId: [],
       messages: [],
       message: '',
-      curChatId: ''
+      curChatId: '',
+      searchValue: '',
+      searched: [],
+      showSearch: false,
+      loading: false,
     }
   }
 
@@ -48,9 +53,61 @@ class AddNewChatContent extends React.Component{
 
   handleInputChange = e => {
     // This is the handle change for the input
+    console.log(e)
+
     this.setState({
       message: e.target.value
     })
+
+    // Now make a search function here that is used only for poeple you follow
+
+  }
+
+  nameShortener = (name) => {
+    // This function will help shortend the name
+    let newName = name
+    if(name.length > 20){
+      newName = name.substring(0, 20)+'...'
+    }
+
+    return newName
+  }
+
+  onChangeNewSearch = e =>{
+    // This will be used search up teh value that you are trying to search for
+    // This one will be doing the backend call
+    this.setState({
+      searchValue: e.target.value
+    })
+
+    const search = e.target.value === undefined ? null : e.target.value
+
+    if(search !== ""){
+      this.setState({
+        loading: true
+      })
+      authAxios.get(`${global.API_ENDPOINT}/userprofile/chatSearch/`, {
+        params: {
+          search
+        }
+      }).then(res => {
+        console.log(res.data)
+        this.setState({
+          loading: false,
+          searched: res.data,
+          showSearch: true
+        })
+
+      })
+
+
+    } else {
+      this.setState({
+        searched: [],
+        showSearch: false
+      })
+    }
+
   }
 
   handleMessageSubmit = e => {
@@ -227,6 +284,76 @@ class AddNewChatContent extends React.Component{
     }
   }
 
+  onAddToPerson = (user) => {
+    // This function will be use to show and add users properly inot
+    // the list
+
+    // you will make a list for the tabs that will be shwo and then
+    // you make another one as a list of ids that can be submited to the
+    // backend
+
+    // You will also have to clear out the inputs and such
+    console.log(user)
+    const userFull = this.nameShortener(user.first_name +" " +user.last_name)
+
+    this.setState({
+      person: [...this.state.person, userFull],
+      personId: [...this.state.personId, user.id],
+      searchValue: "",
+      searched: [],
+      showSearch: false
+
+    })
+  }
+
+
+  renderSearchList = (searches) =>{
+    // this function will display the list of users that are found by the search
+
+    let searchList = []
+
+    // So how this would work is that you will pick a person and then
+    // that person name will get added to the person list
+    // but you gotta do that onclick so you can add it to persons
+
+    for(let i = 0; i< searches.length; i++){
+      const user = searches[i]
+      searchList.push(
+          <div
+            // onClick = {() => this.onProfileSelect(user.username)}
+            onClick = {() => this.onAddToPerson(user)}
+            className = "searchObj"
+            style={{padding:'15px'}}>
+            <div class="searchObjLeft">
+            <Avatar
+              style={{marginRight:'10px'}}
+              size="medium"
+              src={`${global.IMAGE_ENDPOINT}`+user.profile_picture}/>
+            </div>
+            <br/>
+            <div class="searchObjRight">
+              <span style={{marginLeft:'25px'}}>
+                {this.capitalize(user.first_name)} {this.capitalize(user.last_name)}
+                <br/>
+
+                <div
+                  class="headerPostText"
+                  style={{marginLeft:'25px'}}
+                >
+                  {"@"+user.username}
+                </div>
+              </span>
+            </div>
+          </div>
+
+
+      )
+
+    }
+
+    return searchList;
+  }
+
 
   renderMessages = (messageItem) => {
     // SEE IF THIS WORKS, IF IT DOES NOT THEN TRY JUST DOING A DIV AND THEN
@@ -373,6 +500,47 @@ class AddNewChatContent extends React.Component{
     }
   }
 
+  removeSelected = (i) => {
+    // This function will be in charge of removing people from
+    // the selected list, since you have the i you can
+
+    // You will just have to remove the specific values given the i
+
+    console.log(i)
+
+    const newList = this.state.person.splice(i, 1)
+    console.log(newList)
+    this.setState({
+      person: this.state.person.splice(i, 1),
+      personId: this.state.personId.splice(i, 1)
+    })
+  }
+
+  renderUsernameTag = () => {
+    // This function will render the name tabs of poeple that you
+    // searched up
+
+    let tagList = []
+    for(let i =0; i< this.state.person.length; i++){
+      tagList.push(
+        <div className = "searchTag">
+          <b>{this.state.person[i]}</b>
+          <div className = "tagX">
+            <i
+              onClick = {() => this.removeSelected(i)}
+              class="fas fa-times"></i>
+
+          </div>
+
+
+        </div>
+      )
+
+    }
+    return tagList
+
+  }
+
   render(){
 
     console.log(this.props)
@@ -398,24 +566,63 @@ class AddNewChatContent extends React.Component{
     return(
       <div className ="addNewChatContainer">
         <div className = "searchFormBox">
-          <form className = "searchForm">
+          <Form
+            onChange = {this.onChangeNewSearch}
+            className = "searchForm">
           <div className = 'toText'>
           To:
           </div>
-          <Select
-            mode="multiple"
-            // style={{ width: '100%' }}
-            placeholder={<i class="fas fa-user"
-              > <span class="newUserSearchChat"> Search Users</span> </i> }
-            onChange={this.handleChange}
-            value = {this.state.person}
-            optionLabelProp="label"
-            className = "searchBox"
-          >
-            {this.renderPeopleSearch()}
-            </Select>
-          </form>
+          <div
+            className = "tagHolder"
+             style = {{
+              float: "left"
+            }}>
+            {this.renderUsernameTag()}
+          </div>
+          <Input
+            bordered = {false}
+            value = {this.state.searchValue}
+            placeholder={"Search chat"}
+            />
+          {/*
+            <Select
+              mode="multiple"
+              // style={{ width: '100%' }}
+              placeholder={<i class="fas fa-user"
+                > <span class="newUserSearchChat"> Search Users</span> </i> }
+              onChange={this.handleChange}
+              value = {this.state.person}
+              optionLabelProp="label"
+              className = "searchBox"
+            >
+              {this.renderPeopleSearch()}
+              </Select>
+            */}
+
+
+
+          </Form>
+
+
+
         </div>
+
+        <List className = {`searchDropDown ${this.state.showSearch ? "showSearch": ""}`}>
+          {
+            this.state.searched.length === 0 ?
+
+            <li className = "searchListObj">
+              <span className = "noResultText"> No results </span>
+            </li>
+
+            :
+
+            <div>
+              {this.renderSearchList(this.state.searched)}
+            </div>
+
+          }
+        </List>
 
       <div className = "searchChatContent">
 
