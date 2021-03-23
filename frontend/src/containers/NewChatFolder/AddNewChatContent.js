@@ -255,6 +255,7 @@ class AddNewChatContent extends React.Component{
     //   person: value
     // })
 
+    console.log(value)
     if(value.length > 0){
       authAxios.post(`${global.API_ENDPOINT}/newChat/getChat`,
         {
@@ -514,14 +515,20 @@ class AddNewChatContent extends React.Component{
 
     console.log(i)
 
-    const newList = this.state.person.splice(i, 1)
+
+    const newList = this.state.person
+    newList.splice(i,1)
+    const newIdList = this.state.personId
+    newIdList.splice(i, 1)
+    console.log(i)
+    console.log(newIdList)
     console.log(newList)
     this.setState({
-      person: this.state.person.splice(i, 1),
-      personId: this.state.personId.splice(i, 1)
+      person: newList,
+      personId: newIdList
     })
 
-    this.renderHandleMessageChange(this.state.personId.splice(i,1))
+    this.renderHandleMessageChange(newIdList)
   }
 
   renderUsernameTag = () => {
