@@ -4,7 +4,7 @@ import * as actions from '../store/actions/auth';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { authAxios } from '../components/util';
-import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Timeline, Input, Steps, Card} from 'antd';
+import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Alert, Timeline, Input, Steps, Card} from 'antd';
 import introPic from './intro.png'
 import intro2Pic from './intro2.png';
 import introPic3 from './introPic3.png';
@@ -177,38 +177,43 @@ class FirstTimeUser extends React.Component{
 
                <div class="firstTimeModalText" style={{marginBottom:'-25px'}}>
                  Let's dive into some of the core features:
-                 <Timeline style={{marginLeft:'25px', marginTop:'25px'}}>
-                   <Timeline.Item>
-                     <i style={{color:'#1890ff', marginRight:'5px'}}
-                       class="fas fa-home"></i>
-                     Home: Every post on the newsfeed is an entire day of pictures. Let's say today is Febuary 27th right?
-                     Any pictures you add today will be inside today's album (on the 27th)!
+                 <br/>
+                 <br/>
+                 <i style={{color:'#1890ff', marginRight:'5px'}}
+                   class="fas fa-home"></i>
+                 Home: Every post on the newsfeed is an entire day of pictures. Let's say today is Febuary 27th right?
+                 Any pictures you add today will be inside today's album (on the 27th)!
 
-                   </Timeline.Item>
-
-                 </Timeline>
-                 <img class="secondIntroPic" src={introPic3} />
-                 <div class="secondIntroText">
-                   Try these out for each post!
-                   <br/>
-                  <br/>
-                 <i style={{color:'red', marginRight:'10px'}}
-                   class="fas fa-heart"></i> Liking
-                 <br/>
-                 <br/>
-                 <i style={{color:'#1890ff', marginRight:'10px'}}
-                   class="far fa-comment"></i>
-                 Comment
-                 <br/>
-                 <br/>
-                   <i style={{color:'#1890ff', marginRight:'10px'}}
-                     class="fas fa-archive"></i>
-                  Clip
-                  <br/>
-                  <br/>
-                  <br/>
-                  This is an example of a clipped photo
+                 <div class="secondIntroContainer">
+                   <div class="secondContainerLeft">
+                     <img class="secondIntroPic" src={introPic3} />
+                   </div>
+                 <div class="secondContainerRight">
+                     <Alert  message="This is an example of a clipped photo" type="info" showIcon />
+                   <div class="secondIntroText">
+                     Try out these options for each post!
+                      <Timeline style={{marginTop:'25px'}}>
+                        <Timeline.Item>
+                          <i style={{color:'red', marginRight:'10px'}}
+                            class="fas fa-heart"></i> Liking
+                        </Timeline.Item>
+                        <Timeline.Item>
+                          <i style={{color:'#1890ff', marginRight:'10px'}}
+                            class="far fa-comment"></i>
+                          Comment
+                        </Timeline.Item>
+                        <Timeline.Item>
+                          <i style={{color:'#1890ff', marginRight:'10px'}}
+                            class="fas fa-archive"></i>
+                          Clip - Any photos you clip today are added to your album today
+                        </Timeline.Item>
+                      </Timeline>
                   </div>
+                 </div>
+
+
+                  </div>
+
 
                </div>
 
@@ -248,7 +253,9 @@ class FirstTimeUser extends React.Component{
                 :
 
                <div class="firstTimeModalText">
-                 Let's follow some people
+                 <i class="fas fa-fire" style={{color:'#fa541c', fontSize:'20px', marginRight:'10px'}}></i>
+                 Trending People
+                 <br/>
                  <br/>
                  <div class="suggestedPeopleIntro">
                    <InitialSuggestFollowers {...this.props}/>

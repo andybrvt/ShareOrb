@@ -479,6 +479,7 @@ class InitialSuggestFollowers extends React.Component{
 
     console.log(this.state.carouselIndex+1 === Math.ceil(this.state.list.length/3)-1)
     return (
+      
       <div className = 'socialLeftRight'>
         {
           this.state.carouselIndex === 0 ?

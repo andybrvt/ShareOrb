@@ -1,5 +1,5 @@
 .firstTimeUserContainer{
-    height:500px;
+    height:475px;
     padding-left:25px;
     padding-right:25px;
 }
@@ -11,13 +11,34 @@ height: 75%;
   transform: translate(-50%);
 }
 
+.secondIntroContainer{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top:45px;
+}
+
+.secondContainerLeft{
+  width:55%;
+  /* background: green; */
+}
+
+.secondContainerRight{
+    width:45%;
+    /* background: red; */
+}
+
+.timelineFont{
+  font-size: 14px;
+}
+
 .secondIntroPic{
   position: relative;
-  width:45%;
-height: 35%;
-  left:15%;
+  width:75%;
+  height: 90%;
+  left:50%;
   float:left;
-  transform: translate(-25%);
+  transform: translate(-50%);
 }
 
 
