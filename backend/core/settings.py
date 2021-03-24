@@ -34,7 +34,12 @@ DEBUG = True
 #  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
 #  ]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "192.168.1.24"
+]
+
+# for web just run python manage.py runserver
+# for mobile run python manage.py runserver 192.168.1.24:8000
 
 # Application definition
 
