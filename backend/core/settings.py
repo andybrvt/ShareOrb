@@ -35,7 +35,8 @@ DEBUG = True
 #  ]
 
 ALLOWED_HOSTS = [
-    "192.168.1.24"
+    "192.168.1.24",
+    "192.168.1.200",
 ]
 
 # for web just run python manage.py runserver
