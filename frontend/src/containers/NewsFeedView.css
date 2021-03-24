@@ -1,5 +1,5 @@
 .firstTimeUserContainer{
-    height:475px;
+    height:450px;
     padding-left:25px;
     padding-right:25px;
 }
@@ -54,7 +54,7 @@ height: 75%;
   float:right;
   /* background: red; */
   position: absolute;
-  top:525px;
+  top:500px;
   left:600px;
 }
 
@@ -63,6 +63,7 @@ height: 75%;
 }
 
 .suggestedPeopleIntro{
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
 }
