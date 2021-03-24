@@ -8,6 +8,11 @@ import React from "react";
 //   Segment
 // } from "semantic-ui-react";
 import { connect } from "react-redux";
+import introPic from '../intro.png'
+import intro2Pic from '../intro2.png'
+import introPic3 from '../introPic3.png';
+import login1 from '../login1.png';
+import login2 from '../login2.png';
 import { NavLink, Redirect, } from "react-router-dom";
 import { BrowserRouter as Router} from "react-router-dom";
 import { authLogin } from "../../store/actions/auth";
@@ -17,7 +22,7 @@ import pic2 from './calendar.svg';
 import 'antd/dist/antd.css';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Button, Checkbox, Avatar } from 'antd';
+import { Input, Divider, Button, Checkbox, Avatar, Timeline, Alert } from 'antd';
 import './Login.css';
 import mainLogo from '../../logo.svg';
 // Function: logs user in
@@ -74,97 +79,176 @@ class LoginForm extends React.Component {
        return <Redirect to="/home" />
     }
 
+    let startModalText="Welcome to ShareOrb!"
+
 
     return (
-      <div style={{
-      // height:'100%',
-      background:'#fafafa'}} class="parentContainer">
-        <div class="one">
-          {/* color is #68BFFD*/}
+
+      <div>
+        <div style={{
+        // height:'100%',
+        background:'#fafafa'}} class="parentContainer">
+          <div class="one">
+            {/* color is #68BFFD*/}
 
 
-          <img src={mainLogo} width="20%"
-            style={{position:'absolute',top:'5.5%', left:'19%'}}/>
-          <div class="loginTitle">Connecting people through calendars </div>
-          <div class="LeftLoginContainer">
-            <div class="eventCard allStyle"
-              style={{
-                position:'relative', width:'100%', top:'15%',
-                 height:'75%'}}>
-              <div class="loginFormInnerContent">
-                <Form
+            <img src={mainLogo} width="20%"
+              style={{position:'absolute',top:'5.5%', left:'19%'}}/>
+            <div class="loginTitle">Connecting people through calendars </div>
+            <div class="LeftLoginContainer">
+              <div class="eventCard allStyle"
+                style={{
+                  position:'relative', width:'100%', top:'15%',
+                   height:'75%'}}>
+                <div class="loginFormInnerContent">
+                  <Form
 
-                name="basic">
+                  name="basic">
 
-                  <Form.Item
+                    <Form.Item
 
-                    onChange={this.handleUserName}
-                    test="username">
-                    <Input
-                      size="middle"
-                      prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                      placeholder="Enter Username"/>
+                      onChange={this.handleUserName}
+                      test="username">
+                      <Input
+                        size="middle"
+                        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="Enter Username"/>
+                    </Form.Item>
+
+                    <Form.Item
+                      onChange={this.handlePasword}
+                      value={password}
+
+                      test="password">
+                      <Input.Password
+                         size="middle"
+                         prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                         placeholder="Enter Password"/>
+                       {/*
+                       <div style = {{
+                           color: "red"
+                         }}>
+                       {this.errorShow()}
+                     </div>
+                     */}
                   </Form.Item>
+                    {/*
+                    <Form.Item name="remember" valuePropName="checked">
+                      <Checkbox>Remember me</Checkbox>
+                    </Form.Item>
 
-                  <Form.Item
-                    onChange={this.handlePasword}
-                    value={password}
-
-                    test="password">
-                    <Input.Password
-                       size="middle"
-                       prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                       placeholder="Enter Password"/>
-                     {/*
-                     <div style = {{
-                         color: "red"
-                       }}>
-                     {this.errorShow()}
-                   </div>
-                   */}
-                </Form.Item>
-                  {/*
-                  <Form.Item name="remember" valuePropName="checked">
-                    <Checkbox>Remember me</Checkbox>
-                  </Form.Item>
-
-                  */}
+                    */}
 
 
-                  <Form.Item>
-                    <Button
-                     htmlType = 'submit'
-                     type="primary"
-                     shape="round"
-                     size="large"
-                     onClick={this.handleSubmit}
-                     loading={loading}
-                     >
-                      Log In
+                    <Form.Item>
+                      <Button
+                       htmlType = 'submit'
+                       type="primary"
+                       shape="round"
+                       size="large"
+                       onClick={this.handleSubmit}
+                       loading={loading}
+                       >
+                        Log In
 
-                    </Button>
-                    <div>  New? <NavLink to="/signup">Sign Up</NavLink></div>
-                  </Form.Item>
+                      </Button>
+                      <div>  New? <NavLink to="/signup">Sign Up</NavLink></div>
+                    </Form.Item>
 
-                  </Form>
+                    </Form>
+                  </div>
                 </div>
+
+
+            </div>
+
+          </div>
+
+          <div class="two">
+            {/* color is #68BFFD*/}
+
+            <img src={pic2} width="60%"
+              style={{position:'relative',top:'30%', left:'15%'}}/>
+          </div>
+
+        </div>
+
+
+
+        <div className = "backgroundBox">
+          <div className = "firstInfoPageLogin">
+
+
+            <div className = "loginPicFlexContainer">
+              <img class="" src={introPic} />
+            </div>
+
+            <div class="loginTextFlexContainer">
+              <div
+                className = "headerText"
+                >{startModalText}</div>
+
+              <div className = "bodyText">
+                We believe every day is special. Think of ShareOrb like a
+               scrapbook of memories and you're creating one everyday.
               </div>
+
+            </div>
 
 
           </div>
 
         </div>
 
-        <div class="two">
-          {/* color is #68BFFD*/}
+        <Divider />
 
-          <img src={pic2} width="60%"
-            style={{position:'relative',top:'30%', left:'15%'}}/>
+
+
+        <div className = "secondBackgroundBox">
+          <div class="secondInfoPageLogin">
+
+            <div className = "smolLoginTextFlexContainer">
+              Our mission is to redefined how calendars are used. We want to make
+              sharing and planning events a casual, fun, and easy experience.
+            </div>
+
+            <div className = "smolLoginPicFlexContainer">
+
+              <img src={intro2Pic}/>
+
+            </div>
+
+          </div>
+
         </div>
 
 
 
+        <Divider />
+
+
+        <div
+          className = "backgroundBox">
+          <div class="firstInfoPageLogin">
+
+            <div className = "loginPicFlexContainer">
+
+            </div>
+
+            <div className = "loginTextFlexContainer">
+              
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+
+
       </div>
+
     );
   }
 }
