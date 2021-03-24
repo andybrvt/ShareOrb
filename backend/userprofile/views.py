@@ -27,6 +27,10 @@ import pytz
 # 	lookup_field = 'username'
 # 	serializer_class = serializers.PostUserSerializer
 
+class TestMobileView(APIView):
+    def get(self, request, *args, **kwargs):
+
+        return Response("stuff")
 
 class UserIDView(APIView):
     def get(self, request, *args, **kwargs):

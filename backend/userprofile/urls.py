@@ -17,7 +17,9 @@ router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
 # when using APIView you have to put it in as veiws.PUTVIEWHERE.as_view()),
 
 urlpatterns = [
+
 	path('', include(router.urls)),
+	path("testMobileView", views.TestMobileView.as_view(), name = "test_mobile"),
 	path('userSearch/', views.UserSearchView.as_view(), name= "main_search" ),
 	path('chatSearch/', views.UserChatSearchView.as_view(), name = "new_chat_search"),
 	path('user-id/', views.UserIDView.as_view()),
