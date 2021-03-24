@@ -116,7 +116,7 @@ class FirstTimeUser extends React.Component{
 
         <Modal
            title={
-             <Steps style={{padding:'5px'}} current={current}>
+             <Steps current={current}>
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
              }
@@ -144,7 +144,8 @@ class FirstTimeUser extends React.Component{
 
            }
          width={800}
-         bodyStyle={{height:'500px'}}
+         style={{marginTop:'20px'}}
+         bodyStyle={{height:'485px'}}
            centered
            closable={false}
           // cancelText="取消"
@@ -255,7 +256,7 @@ class FirstTimeUser extends React.Component{
                <div class="firstTimeModalText">
                  <i class="fas fa-fire" style={{color:'#fa541c', fontSize:'20px', marginRight:'10px'}}></i>
                  Trending People
-                 <br/>
+
                  <br/>
                  <div class="suggestedPeopleIntro">
                    <InitialSuggestFollowers {...this.props}/>

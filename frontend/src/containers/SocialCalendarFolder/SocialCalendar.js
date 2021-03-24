@@ -58,6 +58,7 @@ class SocialCalendar extends React.Component{
     showSocialPicPostModal: false,
     events: [],
     animate:true,
+    fade:false,
   }
 
 
@@ -84,7 +85,8 @@ class SocialCalendar extends React.Component{
     return (
       <div className= "socialHeader">
           <div className = "leftArrow">
-            <div className = 'icon' onClick ={this.prevMonth}>
+            <div className = 'icon' onClick ={this.prevMonth}
+              >
               <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-left"></i>
             </div>
           </div>
@@ -94,7 +96,8 @@ class SocialCalendar extends React.Component{
             </span>
           </div>
           <div className= "rightArrow">
-            <div className = 'icon' onClick ={this.nextMonth}>
+            <div className = 'icon' onClick ={this.nextMonth}
+              >
               <i style={{fontSize:'20px', color:'#1890ff'}} class="fas fa-chevron-circle-right"></i>
             </div>
           </div>
@@ -708,13 +711,16 @@ class SocialCalendar extends React.Component{
   nextMonth = () => {
     this.setState({
       animate: !this.state.animate,
+      fade: true,
     });
+    console.log(this.state.fade)
     this.props.nextMonth();
   }
 
   prevMonth = () => {
     this.setState({
       animate: !this.state.animate,
+      fade: true,
     });
     this.props.prevMonth()
   }
@@ -864,23 +870,21 @@ class SocialCalendar extends React.Component{
         socialCalCell = this.props.profile.get_socialCal
       }
     }
-
+    const fade = this.state.fade
 
     return(
       <div className = 'socialCalContainer'>
 
           <div className = 'socialCalendar'>
 
-            <Animate
-              showProp="show"
-              transitionName="fade"
-            >
-            <div show={this.state.animate}>
+            <div className={fade ? 'fade' : ''}
+               onAnimationEnd={() => this.setState({ fade: false })}
+              >
               {this.renderHeader()}
               {this.renderDays()}
               {this.renderCells(socialCalCell)}
             </div>
-          </Animate>
+
           </div>
 
 
