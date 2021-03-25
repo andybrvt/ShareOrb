@@ -9,9 +9,9 @@ class ManageChatHeader extends React.Component{
 
 
   state = {
-    searchValue: "",
+    // searchValue: "",
     loading: false,
-    searchedChats: []
+    // searchedChats: []
   }
 
   onClickAddChats = () =>{
@@ -35,9 +35,7 @@ class ManageChatHeader extends React.Component{
 
   onChatSearchChange = e => {
     console.log(e.target.value)
-    this.setState({
-      searchValue: e.target.value
-    })
+    this.props.onChangeSearchValue(e.target.value)
 
     const search = e.target.value === undefined ? null : e.target.value
 
@@ -58,8 +56,10 @@ class ManageChatHeader extends React.Component{
         // Now that you have it, put it into a list and then render it
         this.setState({
           loading: false,
-          searchedChats: res.data,
+          // searchedChats: res.data,
         })
+
+        this.props.addChatSearch(res.data)
       })
 
 
@@ -93,7 +93,7 @@ class ManageChatHeader extends React.Component{
 
           <div className = "manageChatForm">
               <Input
-              value = {this.state.searchValue}
+              value = {this.props.searchValue}
               onChange = {this.onChatSearchChange}
               className = "searchInput"
               placeholder = "Search chats..."

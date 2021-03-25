@@ -1,6 +1,7 @@
 import React from 'react';
 import './NewChat.css';
 import NewSidePanel from './NewSidePanel';
+import SearchedNewSidePanel from './SearchedNewSidePanel';
 import NewChatContent from './NewChatContent';
 import NewChatHeader from './NewChatHeader';
 import { authAxios } from '../../components/util';
@@ -31,6 +32,8 @@ class NewChat extends React.Component{
     friendList:[],
     eventList: [],
     showChatSearch: false,
+    searchedChats: [],
+    searchValue: ""
   }
 
   initialiseChat(){
@@ -94,9 +97,26 @@ class NewChat extends React.Component{
     // This function will be used to change the chat search
 
     this.setState({
-      showChatSearch: false
+      showChatSearch: false,
+      searchedChats: [],
+      searchValue: ""
     })
   }
+
+  addChatSearched = (searchedChats) => {
+    //This function will be used to add in the chat searches
+    this.setState({
+      searchedChats:searchedChats
+    })
+  }
+
+  onChangeSearchValue = (value) => {
+    this.setState({
+      searchValue: value
+    })
+  }
+
+
 
 
 
@@ -506,6 +526,9 @@ class NewChat extends React.Component{
         showChatSearch = {this.state.showChatSearch}
         openChatSearch = {this.openChatSearch}
         closeChatSearch = {this.closeChatSearch}
+        addChatSearch = {this.addChatSearched}
+        searchValue = {this.state.searchValue}
+        onChangeSearchValue = {this.onChangeSearchValue}
         history = {this.props.history}
          />
        {/*
@@ -514,9 +537,14 @@ class NewChat extends React.Component{
 
        {  this.state.showChatSearch ?
 
-         <div>
-           show the chats here
-         </div>
+         <SearchedNewSidePanel
+         chatList = {this.state.searchedChats}
+         param = {this.props.parameter}
+         curId = {this.props.id}
+         username = {this.props.username}
+         history = {this.props.history}
+         closeChatSearch = {this.closeChatSearch}
+         />
 
          :
 

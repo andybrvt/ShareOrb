@@ -336,7 +336,7 @@ class ChatSearchView(APIView):
         filterChats = models.Chat.objects.filter(participants = user).filter(
             Q(participants__username__icontains = search)
             | Q(participants__first_name__icontains = search)
-             | Q(participants__last_name__icontains = search))
+             | Q(participants__last_name__icontains = search)).distinct()
 
         # Now you would filter it
         serializedChats = serializers.MiniChatSerializer(filterChats, many = True).data
