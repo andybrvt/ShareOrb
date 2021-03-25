@@ -1,8 +1,18 @@
 import React from 'react';
 import { Input, Divider} from 'antd';
 import './NewChat.css';
+import { authAxios } from '../../components/util';
+
+
 
 class ManageChatHeader extends React.Component{
+
+
+  state = {
+    searchValue: "",
+    loading: false,
+    searchedChats: []
+  }
 
   onClickAddChats = () =>{
     // This will redirect to the right create chat area
@@ -23,6 +33,43 @@ class ManageChatHeader extends React.Component{
     this.props.closeChatSearch()
   }
 
+  onChatSearchChange = e => {
+    console.log(e.target.value)
+    this.setState({
+      searchValue: e.target.value
+    })
+
+    const search = e.target.value === undefined ? null : e.target.value
+
+    if(search !== ""){
+      // This is if they are searching up stuff
+      this.setState({
+        loading: true
+      })
+
+      // Now you will do a backend call to search for the chats
+      authAxios.get(`${global.API_ENDPOINT}/newChat/searchChat/`,{
+        params: {
+          search
+        }
+      })
+      .then(res =>{
+        console.log(res)
+        // Now that you have it, put it into a list and then render it
+        this.setState({
+          loading: false,
+          searchedChats: res.data,
+        })
+      })
+
+
+    } else {
+
+
+
+    }
+  }
+
 
   render(){
     return(
@@ -38,7 +85,7 @@ class ManageChatHeader extends React.Component{
 
             :
 
-            <div className = "searchChatBack">
+            <div className ="">
             </div>
 
 
@@ -46,6 +93,8 @@ class ManageChatHeader extends React.Component{
 
           <div className = "manageChatForm">
               <Input
+              value = {this.state.searchValue}
+              onChange = {this.onChatSearchChange}
               className = "searchInput"
               placeholder = "Search chats..."
               onClick = {() => this.onClickInput()}

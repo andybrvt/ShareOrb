@@ -303,7 +303,7 @@ class SideMenu extends React.Component {
     }
   }
 
-  onprofile
+
 
   onSettingDirect = () => {
     if(this.props.location.pathname === '/settings'){

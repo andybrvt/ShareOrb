@@ -10,6 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.utils import timezone
 import pytz
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -310,3 +312,36 @@ class DeclineEventInChat(APIView):
         serializedMessage = serializers.MessageSerializer(updatedMessage).data
 
         return Response(serializedMessage)
+
+
+# since you are searching the chat and the chat already exist
+# you can just try to find it in here
+class ChatSearchView(APIView):
+    def get(self, request, *args, **kwargs):
+        # first grab the search first
+
+        search = request.GET.get('search')
+        user = self.request.user
+        # Grab the user and then grab all of their chats and then
+        # start filtering
+        # now start the filtering
+
+        # This function will grab all the chats will the user in it
+        # bc there is a many to many
+        userChats= user.chat_parti.all()
+        print(search)
+        print(userChats)
+
+        # filter
+        filterChats = models.Chat.objects.filter(participants = user).filter(
+            Q(participants__username__icontains = search)
+            | Q(participants__first_name__icontains = search)
+             | Q(participants__last_name__icontains = search))
+
+        # Now you would filter it
+        serializedChats = serializers.MiniChatSerializer(filterChats, many = True).data
+
+        print(filterChats)
+
+
+        return Response(serializedChats)

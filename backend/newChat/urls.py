@@ -16,5 +16,6 @@ urlpatterns = [
     path("createChatEventMessage", views.CreateChatEventMessage.as_view(), name = "create_chat_event_message"),
     path("createNewChatEventMessage", views.CreateNewChatEventMessage.as_view(), name = "create_new_chat_event_message"),
     path("acceptEventInChat", views.AcceptEventInChatView.as_view(), name = "accept_event_in_chat"),
-    path("declineEventInChat", views.DeclineEventInChat.as_view(), name = "decline_event_in_chat")
+    path("declineEventInChat", views.DeclineEventInChat.as_view(), name = "decline_event_in_chat"),
+    path("searchChat/", views.ChatSearchView.as_view(), name = "search_chats")
 ]
