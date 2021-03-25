@@ -37,9 +37,9 @@ class LikeList extends React.Component{
     console.log(this.state.like)
     let profilePic = ''
 
-    if (this.props.data.user.profile_picture){
-      console.log(this.props.data.user.profile_picture)
-      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.user.profile_picture
+    if (this.props.data.owner.profile_picture){
+      console.log(this.props.data.owner.profile_picture)
+      profilePic = `${global.IMAGE_ENDPOINT}`+this.props.data.owner.profile_picture
     }
     return (
 
@@ -48,28 +48,25 @@ class LikeList extends React.Component{
 
 
       <List
-      className = 'followList'
-      itemLayout = 'horizontal'
-      dataSource = {this.props.data.people_like}
-      renderItem = {item => (
+        locale={{emptyText:<span/>}}
+        className = 'followList'
+        itemLayout = 'horizontal'
+        dataSource = {this.props.data.post.people_like}
+        renderItem = {item => (
         <List.Item
         className = 'followListItem'
         onClick = {this.onProfileClick}
-        >
+      >
         <List.Item.Meta
           avatar={
             item.profile_picture ?
               <Avatar
               src= {`${global.IMAGE_ENDPOINT}`+item.profile_picture} />
-
               :
-
               <Avatar src={profilePic} />
-
             }
-
           title={<a href={"http://localhost:3000/explore/"+item.username}>{item.first_name} {item.last_name}</a>}
-          description= {<b>{item.get_followers.length} followers</b>}
+          description= {<b>{"x"} followers</b>}
         />
 
         {/*

@@ -79,6 +79,7 @@ class WeekCalendar extends React.Component{
     tempEndDate: -1,
     tempColor: "blue",
     tempTitle: "",
+    fade:false,
   }
 
   handleClickOutside(event) {
@@ -908,6 +909,7 @@ class WeekCalendar extends React.Component{
   nextWeek =() =>{
     this.setState({
       animate: !this.state.animate,
+      fade: true,
     });
     this.props.nextWeek()
   }
@@ -917,6 +919,7 @@ class WeekCalendar extends React.Component{
   prevWeek = () => {
     this.setState({
       animate: !this.state.animate,
+      fade: true,
     });
     console.log(this.state.animate)
     this.props.prevWeek()
@@ -956,10 +959,7 @@ class WeekCalendar extends React.Component{
 
 
   render() {
-    console.log(this.props)
-    console.log(this.props.id)
-    console.log(Avatar)
-
+    const fade = this.state.fade
     return (
     <div
       ref={this.wrapperRef}
@@ -993,7 +993,8 @@ class WeekCalendar extends React.Component{
               showProp="show"
               transitionName="fade"
             >
-              <div >
+              <div className={fade ? 'fade' : ''}
+                 onAnimationEnd={() => this.setState({ fade: false })} >
                 {this.renderWeekCell(this.props.events)}
               </div>
             </Animate>

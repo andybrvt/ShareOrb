@@ -139,7 +139,7 @@
   float:right;
   /* background: red; */
   right:3%;
-  top:60%;
+  top:62%;
   transform: translateY(-50%);
 }
 
@@ -569,7 +569,7 @@ background: linear-gradient(to bottom, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, 
 
 .photoText{
     line-height: 130%;
-    font-family: "Segoe UI";
+    font-family: "Segoe UI Regular";
     padding-right: 10px;
     font-weight: 400;
     white-space: pre-line;

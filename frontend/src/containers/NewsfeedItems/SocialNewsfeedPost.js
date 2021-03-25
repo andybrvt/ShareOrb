@@ -223,6 +223,7 @@ class SocialNewsfeedPost extends React.Component {
   };
 
   changeLikeListCondition = () => {
+    
     this.setState({
       testLike: true,
     });
@@ -461,13 +462,14 @@ class SocialNewsfeedPost extends React.Component {
 
         <div class='postLikeContainer'>
           <div class="LeftinnerContainerLike">
-            {
-            (peopleLikeId.includes(this.props.userId))?
-            <i class="fas fa-heart" style={{marginRight:'5px', color:'red', fontSize:'14px'}}></i>
-              :
-            <i class="far fa-heart" style={{marginRight:'5px', fontSize:'14px'}}></i>
-            }
+
             <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+              {
+              (peopleLikeId.includes(this.props.userId))?
+              <i class="fas fa-heart" style={{marginRight:'5px', color:'red', fontSize:'14px'}}></i>
+                :
+              <i class="far fa-heart" style={{marginRight:'5px', fontSize:'14px'}}></i>
+              }
                   <span class="boldLikeComment" style={{fontSize:'14px'}}>{like_people.length} </span>
             </span>
 
@@ -833,6 +835,7 @@ class SocialNewsfeedPost extends React.Component {
       <div>
         <div>
             <Modal
+              footer={null}
               class="modalOuterContainer"
               title={`Likes on Post`}
               visible={this.state.testLike}

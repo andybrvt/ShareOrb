@@ -369,6 +369,7 @@
 
 .eventBottomEntire{
   /* background-color: red; */
+  font-family: "Segoe UI Regular";
   display: flex;
   flex-direction: row;
 }

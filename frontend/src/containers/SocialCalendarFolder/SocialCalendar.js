@@ -710,16 +710,13 @@ class SocialCalendar extends React.Component{
   // current month
   nextMonth = () => {
     this.setState({
-      animate: !this.state.animate,
       fade: true,
     });
-    console.log(this.state.fade)
     this.props.nextMonth();
   }
 
   prevMonth = () => {
     this.setState({
-      animate: !this.state.animate,
       fade: true,
     });
     this.props.prevMonth()
