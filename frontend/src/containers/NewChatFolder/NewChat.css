@@ -353,12 +353,24 @@
   transform: translate(-50%, -50%);
 }
 
+.searchChatBack{
+  position: relative;
+  font-size: 27px;
+  /* background-color: red; */
+  width: 10%;
+  text-align: center;
+}
+.searchChatBack i{
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
 
 .manageChatForm{
   /* background-color: blue; */
   position:relative;
   height: 100%;
-  width: 90%;
+  width: 80%;
 }
 
 .addChatsButtonContainer{

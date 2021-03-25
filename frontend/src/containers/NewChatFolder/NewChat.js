@@ -29,7 +29,8 @@ class NewChat extends React.Component{
     // The messgaes will be specific to the chat
     // Friend list is used to search for friend to find or make a new chat
     friendList:[],
-    eventList: []
+    eventList: [],
+    showChatSearch: false,
   }
 
   initialiseChat(){
@@ -81,6 +82,22 @@ class NewChat extends React.Component{
       })
     })
   }
+
+  openChatSearch = () => {
+    // This function will be used to change the states of the
+    this.setState({
+      showChatSearch: true
+    })
+  }
+
+  closeChatSearch = () => {
+    // This function will be used to change the chat search
+
+    this.setState({
+      showChatSearch: false
+    })
+  }
+
 
 
   componentWillReceiveProps(newProps){
@@ -486,18 +503,32 @@ class NewChat extends React.Component{
 
       <div className = "chatLeftSide">
         <ManageChatHeader
+        showChatSearch = {this.state.showChatSearch}
+        openChatSearch = {this.openChatSearch}
+        closeChatSearch = {this.closeChatSearch}
         history = {this.props.history}
          />
        {/*
        <Divider style={{top:'-10px', bottom:'-10px'}}/>
        */}
-        <NewSidePanel
-        chatList = {chats}
-        param = {this.props.parameter}
-        curId = {this.props.id}
-        username = {this.props.username}
-        history = {this.props.history}
-        />
+
+       {  this.state.showChatSearch ?
+
+         <div>
+           show the chats here
+         </div>
+
+         :
+
+         <NewSidePanel
+         chatList = {chats}
+         param = {this.props.parameter}
+         curId = {this.props.id}
+         username = {this.props.username}
+         history = {this.props.history}
+         />
+       }
+
       </div>
 
       {
