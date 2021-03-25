@@ -63,3 +63,8 @@
 .acceptPublicButtons{
   display: flex;
 }
+
+.errorText{
+  color: red;
+  font-size: 13px;
+}

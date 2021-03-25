@@ -24,7 +24,9 @@ const renderField = (field) => {
     className = 'box'/>
 
     {field.meta.touched &&
-      ((field.meta.error && <span>{field.meta.error}</span>) ||
+      ((field.meta.error && <span
+        className = "errorText"
+        >{field.meta.error}</span>) ||
         (field.meta.warning && <span>{field.meta.warning}</span>))}
     </div>
   )
