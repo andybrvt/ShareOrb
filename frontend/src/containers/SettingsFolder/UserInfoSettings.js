@@ -44,6 +44,14 @@ export const phoneNumber = value =>
   const validate = values => {
     const errors = {}
       // This will validate certain fields tos ee if they are good
+    if(!values.username){
+      errors.username = "Required"
+    }
+
+    if(!values.dob){
+      errors.dob = "Required"
+    }
+
     if(!values.first_name){
         errors.first_name = "Required"
     }
@@ -69,14 +77,23 @@ class UserInfoSettings extends React.Component{
 
     // since you are not changing anything in real time, you can just use an axios
     // call
+    let dob = ""
+    let email = ""
+    if(values.dob){
+      dob = values.dob
+    }
+    if(values.email){
+      email = values.email
+    }
+
 
     const editProfileObj = {
       username: values.username,
       first_name: values.firstName,
       last_name: values.lastName,
-      dob: values.dob,
-      phone_number: values.phone_number,
-      email: values.email,
+      dob: dob,
+      // phone_number: values.phone_number,
+      email: email,
     }
 
     authAxios.post(`${global.API_ENDPOINT}/userprofile/editUserInfo`,{
@@ -96,12 +113,12 @@ class UserInfoSettings extends React.Component{
 
   openNotification = placement => {
   notification.info({
-    message: `Notification ${placement}`,
-    description:
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    message: "User profile updated",
     placement,
   });
 };
+
+
 
   render(){
     console.log(this.props)
@@ -181,16 +198,22 @@ class UserInfoSettings extends React.Component{
                 />
               </div>
 
-              <div className = "settingsTextField">
-              <div className= "settingPasswordText"> Phone number </div>
-                <Field
-                name = "phone_number"
-                component = {renderField}
-                type = "text"
-                validate={phoneNumber}
 
-                />
-              </div>
+              {/*
+                <div className = "settingsTextField">
+                  <div className= "settingPasswordText"> Phone number </div>
+                    <Field
+                    name = "phone_number"
+                    component = {renderField}
+                    type = "text"
+                    validate={phoneNumber}
+
+                    />
+                  </div>
+
+                */}
+
+
 
 
               <div className = "settingsTextField">

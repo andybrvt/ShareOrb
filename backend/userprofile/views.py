@@ -607,7 +607,7 @@ class EditUserInfoView(APIView):
         profile.first_name = request.data['editProfileObj']['first_name']
         profile.last_name = request.data['editProfileObj']['last_name']
         profile.dob = request.data['editProfileObj']['dob']
-        profile.phone_number = request.data['editProfileObj']['phone_number']
+        # profile.phone_number = request.data['editProfileObj']['phone_number']
         profile.email = request.data['editProfileObj']['email']
 
         profile.save()
