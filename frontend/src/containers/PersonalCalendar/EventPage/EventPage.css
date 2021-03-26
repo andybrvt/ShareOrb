@@ -385,23 +385,7 @@
   flex-direction: column;
 }
 
-/* Person List card */
-.personListCard{
-  position: relative;
-  background: white;
-  line-height: 150%;
-  border-radius: 15px;
-  padding:35px;
-  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI Regular';
-  width: 95%;
-  color:black;
-  font-size: 16px;
-  left: 52.5%;
-  top: 10px;
-  transform: translateX(-50%);
-  margin-top: 10px;
-}
+
 
 
 /* Event detail card */
@@ -432,7 +416,41 @@
     white-space: pre-line;
 }
 
+/* Person List card */
+.personListCard{
+  position: relative;
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:35px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+  width: 95%;
+  color:black;
+  font-size: 16px;
+  left: 52.5%;
+  top: 10px;
+  transform: translateX(-50%);
+  margin-top: 10px;
+}
 
+.personListCardRight{
+  position: relative;
+  background: white;
+  line-height: 150%;
+  border-radius: 15px;
+  padding:35px;
+  box-shadow:  0 10px 50px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI Regular';
+  width: 90%;
+  color:black;
+  font-size: 16px;
+  top: 10px;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 /* Statistic Card */
 .statEventCard{
   position: relative;

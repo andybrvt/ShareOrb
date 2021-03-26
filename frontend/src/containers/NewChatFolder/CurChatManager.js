@@ -315,6 +315,7 @@ class CurChatManager extends React.Component{
             {
               (usernameList)?
                 <Avatar
+                  onClick = {() => this.onProfileClick(usernameList)}
                   size = {150}
                   src = {`${global.IMAGE_ENDPOINT}`+profilePic}
                 />

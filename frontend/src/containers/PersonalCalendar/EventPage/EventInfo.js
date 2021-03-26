@@ -907,7 +907,7 @@ class EventInfo extends React.Component{
             <div className = "contentEvent"> {content} </div>
             </div>
           </div>
-
+          { location ?
           <div class = "personListCard">
             People who are going
             <Divider
@@ -922,6 +922,9 @@ class EventInfo extends React.Component{
                />
 
           </div>
+              :
+              ''
+           }
 
 
 
@@ -980,6 +983,7 @@ class EventInfo extends React.Component{
            */}
 
         {/* The Map card*/}
+        {location?
         <div class="mapEventCard">
           Location
           <span>
@@ -990,7 +994,7 @@ class EventInfo extends React.Component{
               center = {[32.2226, 110.9747]}
               boundary = {
               {
-                "search":"Fremont, CA",
+                "search":location,
                 "option":{
                   entityType: 'PopulatedPlace'
                 },
@@ -1009,13 +1013,28 @@ class EventInfo extends React.Component{
               <i style={{marginRight:'15px', color:'#1890ff',
                 fontSize:'16px'}} class="fas fa-map-marker-alt"></i>
               <p style={{fontSize:'16px', color:'black',  display:'inline-block'}}>
-                Tucson, Arizona
+                {location}
               </p>
           </span>
         </div>
+        :
+        ''
+      }
 
 
         {/* Statistic card */}
+        { !location ?
+        <div class = "personListCardRight">
+          People who are going
+          <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
+          <UserAvaCarousel
+            persons = {person}
+            history = {this.props.history}
+             />
+        </div>
+            :
+            ''
+         }
         <div className = "statEventCard">
            <span> Statistics </span>
           <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
