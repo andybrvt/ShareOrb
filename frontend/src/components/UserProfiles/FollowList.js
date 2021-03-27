@@ -48,7 +48,7 @@ class FollowList extends React.Component{
               {this.capitalize(item.first_name)} {this.capitalize(item.last_name)}
             </a>
           }
-          description= {<b>@{this.capitalize(item.username)}</b>}
+          description= {<b>@{item.username}</b>}
         />
         </List.Item>
       )}

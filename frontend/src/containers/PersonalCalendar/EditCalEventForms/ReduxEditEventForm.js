@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import moment from 'moment';
 import { connect } from "react-redux";
 import { Form } from '@ant-design/compatible';
-import { DatePicker, TimePicker, Button, Input, Select, Radio, Avatar} from 'antd';
+import { DatePicker, TimePicker, Button, Input, Select, Radio, Avatar, Tooltip} from 'antd';
 import { AimOutlined, ArrowRightOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import * as navActions from '../../../store/actions/nav';
@@ -11,7 +11,7 @@ import * as calendarEventActions from '../../../store/actions/calendarEvent';
 import '../PersonalCalCSS/ReduxForm.css';
 import 'antd/dist/antd.css';
 import '@ant-design/compatible/assets/index.css';
-
+import axios from 'axios';
 
 const { Option } = Select;
 
@@ -262,8 +262,9 @@ class ReduxEditEventForm extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      geoLat: "",
-      geoLong: "",
+      geoLat: 0,
+      geoLong: 0,
+      testLocation:'',
     }
   }
 
@@ -271,23 +272,30 @@ class ReduxEditEventForm extends React.Component{
 
 
   handleLocation=()=>{
+    {/*
+      xml
+      http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?o=xml&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD
+      html
+      http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD
+      */}
     let longitude=0;
     let latitude=0;
     if (navigator.geolocation) {
         let success = position => {
-        // cache values
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
         console.log(latitude, longitude);
-        this.setState(
-          {
-            geoLat: latitude,
-            geoLong: longitude
-          },
-          () => console.log(this.state.geoLat, this.state.geoLong)
-        );
-      };
+         axios
+          .get("http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD")
+          .then(res => {
+            console.log(res.data)
+            this.setState({ testLocation: res.data});
+          })
 
+        };
+
+
+      console.log(this.state.testLocation)
       function error() {
         console.log("Unable to retrieve your location");
       }
@@ -774,18 +782,20 @@ class ReduxEditEventForm extends React.Component{
                   placeholder="Location"
                   component= {renderLocationField}
                   type= 'text'
-
-
-                />
-              <AimOutlined
-                onClick={this.handleLocation()}
-                style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
-                <Field
-                    name = 'eventColor'
-                    component = {renderEventColor}
-                    type = 'text'
+                  value={this.state.longitude}
 
                 />
+              <Tooltip title="Current Location">
+                <AimOutlined
+                  onClick={this.handleLocation}
+                  style={{marginLeft:'15px', fontSize:'15px', marginRight:'15px'}} className = 'aim'/>
+              </Tooltip>
+            <Field
+                  name = 'eventColor'
+                  component = {renderEventColor}
+                  type = 'text'
+
+              />
             </div>
 
 

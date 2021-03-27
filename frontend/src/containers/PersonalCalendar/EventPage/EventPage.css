@@ -467,6 +467,7 @@
   margin-top: 10px;
   font-size: 16px;
   color:black;
+  margin-bottom: 10px;
 }
 .statEventCard .percentagesBars{
   position: relative;
@@ -479,6 +480,7 @@
   position: relative;
   padding: 25px;
   text-align: center;
+  /* background: red; */
 }
 .statEventCard .percentageTerm{
   margin-top: 10px;
