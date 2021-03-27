@@ -39,9 +39,7 @@ class LoginForm extends React.Component {
 
   handleUserName = e => {
      const tempVal = e.target.value;
-     console.log(e.target)
-     console.log(tempVal)
-     console.log(e.target.test)
+
     this.setState({ username: tempVal});
   };
 
@@ -236,7 +234,7 @@ class LoginForm extends React.Component {
             </div>
 
             <div className = "loginTextFlexContainer">
-              
+
             </div>
 
 

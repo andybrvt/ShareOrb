@@ -11,6 +11,14 @@ export const loadProfile = (profile) => {
 
 }
 
+export const unloadProfile = () => {
+  // This function will help unload a profile
+  return {
+    type: actionTypes.UNLOAD_PROFILE,
+    
+  }
+}
+
 export const closeProfile = () => {
   // This will be used to remove the current profile so that
   // when it laods up a new profile it doesn't load up the old one first

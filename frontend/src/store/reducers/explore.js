@@ -17,6 +17,12 @@ export const loadProfile = (state, action) => {
   })
 }
 
+export const unloadProfile = (state,action) => {
+  return updateObject(state, {
+    profile: {}
+  })
+}
+
 export const closeProfile = (state, action ) => {
   return updateObject(state, {
     profile: {}
@@ -126,6 +132,8 @@ const reducer = (state = initialState, action) => {
   switch(action.type){
     case actionTypes.LOAD_PROFILE:
       return loadProfile(state, action);
+    case actionTypes.UNLOAD_PROFILE:
+      return unloadProfile(state, action)
     case actionTypes.CLOSE_PROFILE:
       return closeProfile(state, action);
     case actionTypes.ADD_FOLLOWER_UNFOLLOWER:

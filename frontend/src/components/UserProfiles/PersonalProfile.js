@@ -67,7 +67,7 @@ class PersonalProfile extends React.Component{
         )
     })
     if(this.props.parameter.username){
-      ExploreWebSocketInstance.connect(this.props.parameter.username)
+      ExploreWebSocketInstance.connect(String(this.props.parameter.username))
     }
   }
 
@@ -110,14 +110,14 @@ class PersonalProfile extends React.Component{
           newProps.parameter.username
         )
       })
-      ExploreWebSocketInstance.connect(newProps.parameter.username)
+      ExploreWebSocketInstance.connect(String(newProps.parameter.username))
     }
 
     if(this.props.location.pathname !== newProps.location.pathname){
       //To refetch the information
       this.waitForSocketConnection(() => {
         ExploreWebSocketInstance.fetchProfile(
-          newProps.parameter.username
+          String(newProps.parameter.username)
         )
       })
       ExploreWebSocketInstance.connect(newProps.parameter.username)
@@ -132,7 +132,9 @@ class PersonalProfile extends React.Component{
     //Similar to the event page channel, you will have to remove the recursion from
     // the disconnect in the websocket
 
+    // you wnat to remove all the info too
 
+    this.props.unloadProfile()
     ExploreWebSocketInstance.disconnect();
   }
 
@@ -338,7 +340,8 @@ const mapDispatchToProps = dispatch => {
     closeProfile: () => dispatch(exploreActions.closeProfile()),
     grabUserCredentials: () => dispatch(authActions.grabUserCredentials()),
     updateFollowers: (followerList) => dispatch(authActions.updateFollowers(followerList)),
-    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat))
+    setMessages: (messages, curChat) => dispatch(messageActions.setMessages(messages, curChat)),
+    unloadProfile: () => dispatch(exploreActions.unloadProfile())
   }
 }
 

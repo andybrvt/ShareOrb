@@ -663,6 +663,7 @@ class ReduxEditEventForm extends React.Component{
 
     render(){
       console.log(this.props)
+      console.log(this.state)
       // handleSubmit will actually run this.prop.onSubmit
       const {onChange, handleSubmit, pristine, invalid, reset} = this.props;
       // For the component of the fields you can create your own stateles function

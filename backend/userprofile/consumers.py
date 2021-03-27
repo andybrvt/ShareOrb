@@ -1228,6 +1228,8 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This will pretty much connect to the profils of each of the users
         # so when you login, it pretty much connects right away
         self.current_user = self.scope['url_route']['kwargs']['username']
+        print("does it connect here")
+        print(self.current_user)
         grp = 'explore_'+self.current_user
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
         self.accept()
