@@ -264,7 +264,7 @@ class ReduxEditEventForm extends React.Component{
     this.state = {
       geoLat: 0,
       geoLong: 0,
-      testLocation:'',
+      testLocation:null,
     }
   }
 
@@ -289,12 +289,14 @@ class ReduxEditEventForm extends React.Component{
           .get("http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD")
           .then(res => {
             console.log(res.data)
-            this.setState({ testLocation: res.data});
+            this.setState({
+                    geoLat:latitude,
+                    geoLong:longitude,
+                    testLocation: res.data,
+                  }, () => console.log(this.state))
           })
-
         };
-
-
+      console.log(this.state)
       console.log(this.state.testLocation)
       function error() {
         console.log("Unable to retrieve your location");
@@ -782,7 +784,7 @@ class ReduxEditEventForm extends React.Component{
                   placeholder="Location"
                   component= {renderLocationField}
                   type= 'text'
-                  value={this.state.longitude}
+                  value={this.state.testLocation}
 
                 />
               <Tooltip title="Current Location">
