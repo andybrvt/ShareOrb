@@ -99,7 +99,7 @@ const renderLocationField = (field) => {
     <span>
     <Input style={{width:'50%',fontSize:'14px'}}
     {...field.input}
-    // onChange = {field.input.onChange}
+
 
     type = {field.type}
     placeholder= {field.placeholder}
@@ -256,6 +256,35 @@ const validate = values => {
   return errors
 }
 
+function parseAddress(address) {
+  // 43275 Luzon Ct, Fremont, CA 94539
+    // Make sure the address is a string.
+    if (typeof address !== "string") throw "Address is not a string.";
+    address = address.trim();
+    // Make an object to contain the data.
+    var returned = {};
+    // Find the comma.
+    var comma = address.indexOf(',');
+    // Pull out the city.
+    returned.address = address.slice(0, comma);
+
+    // Get everything after the city.
+    var after = address.substring(comma + 2); // The string after the comma, +2 so that we skip the comma and the space.
+
+    var secondComma = after.indexOf(',');
+    // Find the space.
+    var space = after.lastIndexOf(' ');
+
+    // Pull out the state.
+    returned.city = after.slice(0, secondComma);
+
+    // Pull out the zip code.
+    returned.zip = after.substring(space + 1);
+
+    // Return the data.
+    return returned;
+}
+
 
 class ReduxEditEventForm extends React.Component{
 
@@ -265,6 +294,7 @@ class ReduxEditEventForm extends React.Component{
       geoLat: 0,
       geoLong: 0,
       testLocation:null,
+      currentLocationCity:'',
     }
   }
 
@@ -275,7 +305,7 @@ class ReduxEditEventForm extends React.Component{
     {/*
       xml
       http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?o=xml&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD
-      html
+      JS
       http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD
       */}
     let longitude=0;
@@ -284,20 +314,34 @@ class ReduxEditEventForm extends React.Component{
         let success = position => {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        console.log(latitude, longitude);
+        let locationStr="http://dev.virtualearth.net/REST/v1/Locations/"+latitude+","+longitude+"?&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD"
+        console.log(locationStr)
          axios
-          .get("http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?&key=AggkvHunW4I76E1LfWo-wnjlK9SS6yVeRWyeKu3ueSfgb1_wZqOfD1R87EJPAOqD")
+          .get(
+            locationStr
+            )
           .then(res => {
             console.log(res.data)
             this.setState({
                     geoLat:latitude,
                     geoLong:longitude,
-                    testLocation: res.data,
+                    testLocation: res.data["resourceSets"][0]["resources"][0].name,
                   }, () => console.log(this.state))
           })
         };
       console.log(this.state)
       console.log(this.state.testLocation)
+      console.log(parseAddress(JSON.stringify(this.state.testLocation)))
+      let addressObj=(parseAddress(JSON.stringify(this.state.testLocation)))
+
+      // console.log(this.state.testLocation["resourceSets"])
+
+      this.setState({
+              currentLocationCity:addressObj.city,
+            }, () => console.log(this.state))
+
+
+
       function error() {
         console.log("Unable to retrieve your location");
       }
@@ -444,7 +488,7 @@ class ReduxEditEventForm extends React.Component{
         change('endTime', endTime)
       }
     } else if (startHour > endHour) {
-      // let startHour = parseInt(time.substring(0,2))
+      // let sta"rtHour = parseInt(time.substring(0,2))
       // let startMin = parseInt(time.substring(3,5))
       if (startHour === 11 && ampm === ' AM' && startMin === 30){
         endTime = '12:00 PM'
@@ -500,6 +544,12 @@ class ReduxEditEventForm extends React.Component{
 
   }
 
+  handleLocationChange = (event) => {
+     const { change } = this.props
+
+     change('location', event.target.value)
+
+  }
 
 
   onRed = () => {
@@ -782,9 +832,10 @@ class ReduxEditEventForm extends React.Component{
                 <Field
                   name = 'location'
                   placeholder="Location"
+                  onChange ={this.handleLocationChange}
                   component= {renderLocationField}
                   type= 'text'
-                  value={this.state.testLocation}
+
 
                 />
               <Tooltip title="Current Location">
@@ -833,7 +884,7 @@ class ReduxEditEventForm extends React.Component{
 // will all sort of functions that is prep filled in redux form
 // You can also design your own functions based on the given props to be put into the props too
 
-// The redux form is what communicates with the store, it will provide props about
+// The redux form is what communicates with the store', it will provide props about
 // the form state and functions to handle submission
 
 // In order to modify this you have to call a constant outside the class
@@ -867,5 +918,6 @@ export default connect(state =>({
   endTime: selector(state, 'endTime'),
   startDate: selector(state, 'startDate'),
   endDate: selector(state, 'endDate'),
-  repeatCondition: selector(state, 'repeatCondition')
+  repeatCondition: selector(state, 'repeatCondition'),
+  currentLocationCity: selector(state, 'currentLocationCity'),
 }))(ReduxEditEventForm);
