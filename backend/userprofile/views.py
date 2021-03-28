@@ -141,7 +141,7 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-
+    print(request.user.is_authenticated)
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
 
