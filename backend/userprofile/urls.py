@@ -24,6 +24,7 @@ urlpatterns = [
 	path('chatSearch/', views.UserChatSearchView.as_view(), name = "new_chat_search"),
 	path('user-id/', views.UserIDView.as_view()),
 	path('current-user/', views.current_user),
+	path('grabCurrentUser/', views.GrabCurrentUser.as_view()),
 	path('<slug:username>/', views.UserDetailView.as_view()),
 	path('all-users', views.ListAll.as_view()),
 	path('friend-request-list', views.FriendRequestList.as_view(), name="friend_request"),

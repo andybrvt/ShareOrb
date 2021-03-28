@@ -141,9 +141,18 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    print(request.user.is_authenticated)
+    print('getting the token')
+    print(request.auth)
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
+
+
+class GrabCurrentUser(APIView):
+    # Attempt the grab the current user
+    def get(self, request,*args, **kwargs):
+        print(self.request.user)
+        serializer = serializers.UserSerializer(self.request.user)
+        return Response(serializer.data)
 
 # Views from here and down are for friends
 
