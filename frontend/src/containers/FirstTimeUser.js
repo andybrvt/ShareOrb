@@ -244,7 +244,7 @@ class FirstTimeUser extends React.Component{
                     <Timeline.Item>
                       <i style={{color:'#1890ff', marginRight:'5px'}}
                         class="fas fa-user-friends"></i>
-                      Social Calendar: Your <b>public</b> calendar. Any pictures or events you create here
+                      Profile: Your <b>public</b> calendar. Any pictures or events you create here
                       can be seen by anyone!
                     </Timeline.Item>
                   </Timeline>

@@ -421,7 +421,7 @@ class SideMenu extends React.Component {
                     <div class="logo">
                       <span>S</span>
                     </div>
-                    <img src={backPartLogo} style={{top:'25%'}} class="testBackLogo"
+                    <img src={backPartLogo} style={{top:'26%'}} class="testBackLogo"
                     />
                   </div>
 
@@ -453,7 +453,7 @@ class SideMenu extends React.Component {
                             </span>
 
                           }
-                            <i class="far fa-comment"></i>
+                            <i  style={{marginTop:'4px'}} class="far fa-comment"></i>
                             <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
                           </a>
                         </li>
@@ -471,14 +471,14 @@ class SideMenu extends React.Component {
                         </li>
                       </Tooltip>
 
-                      <Tooltip placement="right" title={"Social Calendar"}>
+                      <Tooltip placement="right" title={"Profile"}>
                         <li
                         onClick = {() => this.onProfileDirect()}
                         >
                         <a class="d-flex align-items-center">
                           <i style={{fontSize:'16px'}} class="far fa-user"></i>
-                            <span style={{marginLeft:'10px'}}  class="menu-text">Social</span>
-                            <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
+                            <span style={{marginLeft:'10px'}}  class="menu-text">Profile</span>
+
                         </a>
                         </li>
                       </Tooltip>

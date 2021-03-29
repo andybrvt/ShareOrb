@@ -408,7 +408,8 @@ aside {
         aside .side-inner .nav-menu ul li a .wrap-icon {
           font-size: 1.2rem; }
         aside .side-inner .nav-menu ul li a .menu-text {
-          font-weight: 400;
+
+          font-weight: 500;
           opacity: 0;
           visibility: hidden;
           -webkit-transition: .3s all ease;
