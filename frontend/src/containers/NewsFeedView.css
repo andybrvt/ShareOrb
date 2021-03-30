@@ -359,7 +359,7 @@
   }
 }
 .newsfeedParent .suggestedFriendsContainer{
-  /* background-color: red; */
+  background-color: red;
   position: relative;
   left:5.25%;
   width: 23%;

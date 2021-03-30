@@ -155,9 +155,7 @@ font-size: 15px;
   font-size: 40px;
 }
 
-.ant-menu{
-background: #f5222d;
-}
+
 
 
 
@@ -247,8 +245,9 @@ aside {
     width: 4vw;
     height: 100vh;
     position: fixed;
-    background-color: #1890ff;
-    border-right: 1px solid #bfbfbf;
+    /* sidemenu COLOR HERE */
+    /* background-color: #1890ff; */
+    border-right: 1px solid #f0f0f0;
     transition: 0.3s;
 
   }
@@ -350,6 +349,7 @@ aside {
 
 
     aside .side-inner .nav-menu {
+      margin-top: 300px;
       margin-bottom: 50px;
       clear: both;
 
@@ -379,7 +379,8 @@ aside {
         /* padding-right: 50px; */
         padding-top: 20px;
         padding-bottom: 20px;
-        color: white;
+        color: #bfbfbf;
+        font-weight: 600;
         position: relative;
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;
@@ -408,7 +409,8 @@ aside {
         aside .side-inner .nav-menu ul li a .wrap-icon {
           font-size: 1.2rem; }
         aside .side-inner .nav-menu ul li a .menu-text {
-          font-weight: 400;
+
+          font-weight: 500;
           opacity: 0;
           visibility: hidden;
           -webkit-transition: .3s all ease;
