@@ -274,16 +274,16 @@ class NewsFeedView extends React.Component {
 
 
 					<div className = "suggestedFriendsContainer">
-						<div className = "suggestedFriendsCard">
+
 							<div class="headers">
 									<div>
 											<div class="morePeopleHeader">
-													More People
+													Suggested People
 											</div>
 											<SuggestedFriends {...this.props}/>
 									</div>
 							</div>
-						</div>
+
 					</div>
 
 					<Modal

@@ -216,7 +216,7 @@ aside {
     position:relative;
     top:0;
     /* background:blue; */
-    width:210px;
+    width:250px;
 
     /* -webkit-transform: translateX(0%); */
     /* -ms-transform: translateX(0%); */
@@ -253,7 +253,7 @@ aside {
   }
 
   .show-sidebar aside .whiteFixBackground{
-    width: 210px;
+    width: 250px;
   }
     aside .side-inner::-webkit-scrollbar {
       display: none; }
@@ -363,7 +363,7 @@ aside {
     }
 
     .show-sidebar aside .side-inner .nav-menu ul{
-      width: 210px;
+      width: 250px;
     }
 
       /* make padding 0 rather than 35% */
@@ -404,7 +404,7 @@ aside {
         .show-sidebar aside .side-inner .nav-menu ul li a:hover{
           color: #000;
           background: #f4f4f4;
-          width: 210px;
+          width: 250px;
         }
         aside .side-inner .nav-menu ul li a .wrap-icon {
           font-size: 1.2rem; }
@@ -494,7 +494,7 @@ aside {
 .searchBarContainer .autoCompleteHeader{
   background:blue;
   position:relative;
-  left: 27%;
+  left: 17.5%;
   width: 55%;
   /* transform: translateX(-50%); */
   top:2.5px;

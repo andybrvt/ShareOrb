@@ -625,7 +625,6 @@ class SideMenu extends React.Component {
 
                 <div
                   ref = {this.wrapperRef}
-
                   className="headersNotificationContainer">
                   <div className = 'notificationsInner'>
                     <div class="badgeOuter">
