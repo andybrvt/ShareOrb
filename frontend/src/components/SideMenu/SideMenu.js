@@ -56,6 +56,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import mainLogo from '../../logo.svg';
 import backPartLogo from '../../hareOrb.svg';
+import sideLogo from '../../sideLogo.svg';
 import { connect } from 'react-redux';
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
@@ -412,21 +413,84 @@ class SideMenu extends React.Component {
     return (
 
       <div
-        className = "everythingContainer">
+        className = "everythingContainer show-sidebar">
         <div className = "sideMenuContainer">
-            <aside>
+            <aside >
               <div className = "whiteFixBackground"> </div>
                 <div class="side-inner">
                   <div class="logo-wrap" onClick = {() => this.goToHome()}>
                     <div class="logo">
                       <span>S</span>
                     </div>
-                    <img src={backPartLogo} style={{top:'26%'}} class="testBackLogo"
+                    <img src={sideLogo} style={{top:'26%'}} class="testBackLogo"
                     />
                   </div>
 
-                <div class="nav-menu">
+
+                <div  class="nav-menu">
                   <ul class="sidebarList">
+
+                    <div style={{marginTop:'-25px'}}>
+                      { profilePic != '' ?
+                      <Avatar
+                        onClick = {() => this.viewUserPage(this.props.username)}
+                        style={{
+                          left:'20%',
+
+                          cursor: "pointer"
+                        }}
+                        size = {125}
+                        shape = 'circle'
+                        src = {profilePic} />
+                        :
+                        <Avatar
+                          onClick = {() => this.viewUserPage(this.props.username)}
+                          style={{left:'20%'}}
+                          size = {125}
+                          shape = 'circle'
+                          src = {defaultPicture} />
+                      }
+
+                      </div>
+
+                      <Row gutter={12} style={{marginTop:'20px', marginLeft:'5px'}}>
+
+                        <Col
+                          offset={2}
+                          span={4}
+                          onClick = {() => this.onFollowerOpen()}
+                          class="clickable"
+                        >
+                         <span class="statsHeader"> Followers
+                           <br/>
+                           <span
+                             class="statsNewsFeed">
+                             2
+                           </span>
+                         </span>
+
+
+                        </Col>
+                        <Col
+                          onClick = {() => this.onFollowingOpen()}
+                          offset={5}
+                          span={4}
+                          class="clickable"
+                        >
+                        <span class="statsHeader"> Following
+                          <br/>
+                          <span
+                            class="statsNewsFeed">
+                            3
+                          </span>
+                        </span>
+
+                        </Col>
+
+                      </Row>
+
+                      <Divider style={{marginBottom:'-10px', paddign:'10px'}}/>
+                      <div style={{marginTop:'25px'}}></div>
                     <Tooltip placement="right" title={"Home"}>
                       <li
                       onClick = {() => this.onNewsfeedDirect()}
@@ -490,6 +554,7 @@ class SideMenu extends React.Component {
 
         <div className = "rightContentContainer">
             <div className="mainHeaderContainer" >
+              {/*
               <div className = "burgerContainer">
                 <div className="toggle">
                   <span
@@ -501,7 +566,7 @@ class SideMenu extends React.Component {
                   </span>
                </div>
               </div>
-
+              */}
                 <div className = "searchBarContainer">
 
                   <div className = "autoCompleteHeader">

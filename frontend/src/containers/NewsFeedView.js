@@ -206,7 +206,7 @@ class NewsFeedView extends React.Component {
 				<div className = "newsfeedParent">
 
 
-
+					{/*
 
 					<div className = "profileCardContainer">
 						<ProfileCardNewsFeed
@@ -215,7 +215,7 @@ class NewsFeedView extends React.Component {
 
 							 />
 					</div>
-
+					*/}
 
 					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedItself">
@@ -251,7 +251,7 @@ class NewsFeedView extends React.Component {
 							</Link>
 						</div>
 */}
-						
+
 						<FirstTimeUser {...this.props}/>
 
 						<NewsfeedButtonContainer
