@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
 import Layouts from './Layouts/Layouts.js';
 import SuggestedFriends from './Layouts/SuggestedFriends.js';
+import SuggestedEvents from './Layouts/SuggestedEvents.js';
 import ExploreWebSocketInstance from '../exploreWebsocket';
 import WebSocketSocialNewsfeedInstance from '../socialNewsfeedWebsocket';
 import ProfileCardNewsFeed from '../components/ProfileCardNewsFeed';
@@ -275,14 +276,29 @@ class NewsFeedView extends React.Component {
 
 					<div className = "suggestedFriendsContainer">
 
-							<div class="headers">
+						<div class="newsFeedRightEvents">
+								<div>
+										<div class="morePeopleHeader">
+											<b>
+												Suggested Events
+											</b>
+										</div>
+										<SuggestedEvents {...this.props}/>
+								</div>
+						</div>
+
+							<div class="testFriends">
 									<div>
 											<div class="morePeopleHeader">
+												<b>
 													Suggested People
+												</b>
 											</div>
 											<SuggestedFriends {...this.props}/>
 									</div>
 							</div>
+
+
 
 					</div>
 

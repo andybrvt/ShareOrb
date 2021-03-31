@@ -277,6 +277,7 @@ class SuggestedFriends extends React.Component {
 
                 avatar={
                   <Avatar
+                    size={50}
                     style = {{
                       cursor: "pointer"
                     }}
@@ -287,11 +288,9 @@ class SuggestedFriends extends React.Component {
                   style = {{cursor: "pointer"}}
                    onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
                 description={
-                  <span class="followerFollowingStat"> {item.get_followers.length +" followers"}</span>
-                  }
-              />
+                  <div>
 
-            {
+                    {
               following.includes(item.id) ?
 
               <Button
@@ -319,6 +318,12 @@ class SuggestedFriends extends React.Component {
               </Button>
 
             }
+
+
+
+                  </div>
+                  }
+              />
 
 
 

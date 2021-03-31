@@ -38,7 +38,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "10.20.100.62",
     "127.0.0.1",
-    "10.3.0.116"
+    "10.3.0.116",
+    "192.168.1.200",
 ]
 
 
@@ -212,9 +213,9 @@ REST_FRAMEWORK = {
             'rest_framework.permissions.IsAuthenticatedOrReadOnly',
             ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
-             'rest_framework.authentication.SessionAuthentication',
+             # 'rest_framework.authentication.SessionAuthentication',
              'rest_framework.authentication.TokenAuthentication',
-             'rest_framework.authentication.BasicAuthentication',
+             # 'rest_framework.authentication.BasicAuthentication',
 
         ),
     }

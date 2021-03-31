@@ -443,7 +443,7 @@ aside {
   z-index: 3;
   background: white;
   display: flex;
-  width: 96%;
+  width: 86.5%;
   height: 40px;
   position: fixed;
   padding: 0px;
@@ -492,7 +492,7 @@ aside {
 
 
 .searchBarContainer .autoCompleteHeader{
-  background:blue;
+
   position:relative;
   left: 17.5%;
   width: 55%;
@@ -524,7 +524,7 @@ aside {
   width: 10%;
   /* float:right; */
   cursor: pointer;
-  /* background-color: red; */
+  background-color: red;
 }
 
 .mainHeaderContainer .headersProfileContainer{
