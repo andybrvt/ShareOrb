@@ -269,7 +269,7 @@ class SuggestedFriends extends React.Component {
           locale={{emptyText:<span/>}}
           renderItem={item => (
 
-            <List.Item>
+            <List.Item style={{height:'60px'}}>
 
               <Skeleton avatar title={false} loading={item.loading} active>
 
@@ -277,7 +277,7 @@ class SuggestedFriends extends React.Component {
 
                 avatar={
                   <Avatar
-                    size={50}
+                    size={47.5}
                     style = {{
                       cursor: "pointer"
                     }}

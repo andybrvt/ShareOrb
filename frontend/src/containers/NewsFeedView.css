@@ -18,9 +18,9 @@
 use margin percentage to bring image closer between each row */
 
 .containerEvent img {
-  width:130px;
-  height:100px;
-  margin: 4.66%;
+  width:90%;
+  height:90%;
+  margin: 5.66%;
   border-radius: 5px;
 }
 
@@ -395,7 +395,7 @@ use margin percentage to bring image closer between each row */
   left:24.25%;
   width: 23%;
   background: white;
-  height:100vh;
+  min-height: 100vh;
 }
 
 .testFriends{

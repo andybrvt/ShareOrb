@@ -430,7 +430,7 @@ class SideMenu extends React.Component {
                 <div  class="nav-menu">
                   <ul class="sidebarList">
 
-                    <div style={{marginTop:'-25px'}}>
+                    <div style={{marginTop:'-45px'}}>
                       { profilePic != '' ?
                       <Avatar
                         onClick = {() => this.viewUserPage(this.props.username)}
@@ -453,6 +453,11 @@ class SideMenu extends React.Component {
 
                       </div>
 
+                      <span class="personHeader">
+                        <div>
+                      {this.props.firstName+" "+ this.props.lastName}
+                      </div>
+                      </span>
                       <Row gutter={12} style={{marginTop:'20px', marginLeft:'5px'}}>
 
                         <Col
@@ -461,6 +466,7 @@ class SideMenu extends React.Component {
                           onClick = {() => this.onFollowerOpen()}
                           class="clickable"
                         >
+
                          <span class="statsHeader"> Followers
                            <br/>
                            <span
