@@ -430,7 +430,7 @@ class SideMenu extends React.Component {
                 <div  class="nav-menu">
                   <ul class="sidebarList">
 
-                    <div style={{marginTop:'-25px'}}>
+                    <div style={{marginTop:'-45px'}}>
                       { profilePic != '' ?
                       <Avatar
                         onClick = {() => this.viewUserPage(this.props.username)}
@@ -453,6 +453,11 @@ class SideMenu extends React.Component {
 
                       </div>
 
+                      <span class="personHeader">
+                        <div>
+                      {this.props.firstName+" "+ this.props.lastName}
+                      </div>
+                      </span>
                       <Row gutter={12} style={{marginTop:'20px', marginLeft:'5px'}}>
 
                         <Col
@@ -461,6 +466,7 @@ class SideMenu extends React.Component {
                           onClick = {() => this.onFollowerOpen()}
                           class="clickable"
                         >
+
                          <span class="statsHeader"> Followers
                            <br/>
                            <span
@@ -496,7 +502,7 @@ class SideMenu extends React.Component {
                       onClick = {() => this.onNewsfeedDirect()}
                       >
                         <a class="d-flex align-items-center">
-                           <HomeOutlined  style={{marginRight:'10px'}}/>
+                           <HomeOutlined  style={{marginRight:'10px', color:'#1890ff'}}/>
                            <span class="menu-text">
                              Home
                            </span>
@@ -517,7 +523,7 @@ class SideMenu extends React.Component {
                             </span>
 
                           }
-                            <i  style={{marginTop:'4px'}} class="far fa-comment"></i>
+                            <i  style={{marginTop:'4px', color:'#1890ff'}} class="far fa-comment"></i>
                             <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
                           </a>
                         </li>
@@ -528,7 +534,7 @@ class SideMenu extends React.Component {
                         onClick = {() => this.onCalendarDirect()}
                         >
                           <a class="d-flex align-items-center">
-                            <i style={{marginLeft:'1px'}} class="far fa-calendar-alt"></i>
+                            <i style={{marginLeft:'1px', color:'#1890ff'}} class="far fa-calendar-alt"></i>
                             <span style={{marginLeft:'10px'}} class="menu-text">Personal</span>
                             <span style={{marginLeft:'5px'}} class="menu-text">Calendar</span>
                           </a>
@@ -540,7 +546,7 @@ class SideMenu extends React.Component {
                         onClick = {() => this.onProfileDirect()}
                         >
                         <a class="d-flex align-items-center">
-                          <i style={{fontSize:'16px'}} class="far fa-user"></i>
+                          <i style={{fontSize:'16px', color:'#1890ff'}} class="far fa-user"></i>
                             <span style={{marginLeft:'10px'}}  class="menu-text">Profile</span>
 
                         </a>
@@ -666,7 +672,7 @@ class SideMenu extends React.Component {
                              onClick = {()=>this.props.history.push("/explore/"+this.props.username)}
                              style={{marginTop:'-2px'}} key="center">
 
-                                 <i style={{marginRight:'3px' }} class="far fa-user"></i>
+                                 <i style={{marginRight:'3px'}} class="far fa-user"></i>
                                  <span style={{marginLeft:'2px'}}> Profile</span>
                              </Menu.Item>
                            )}

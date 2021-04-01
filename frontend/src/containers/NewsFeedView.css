@@ -1,3 +1,31 @@
+
+.containerEvent {
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: red; */
+  position: relative;
+  left:50%;
+  transform:translateX(-50%);
+  margin-left: 20px;
+}
+
+.containerEvent .image {
+  width: 45%;
+
+}
+
+/* use width to make images bigger and bring closer in the row
+use margin percentage to bring image closer between each row */
+
+.containerEvent img {
+  width:90%;
+  height:90%;
+  margin: 5.66%;
+  border-radius: 5px;
+}
+
+
+
 .firstTimeUserContainer{
     height:450px;
     padding-left:25px;
@@ -364,10 +392,25 @@
   /* background-color: red; */
   border-left: 1px solid #f5f5f5;
   position: relative;
-  left:21.25%;
-  width: 27%;
+  left:24.25%;
+  width: 23%;
   background: white;
+  min-height: 100vh;
 }
+
+.testFriends{
+  top:44%;
+  position: fixed;
+  width:20%;
+}
+
+
+.newsFeedRightEvents{
+  top:8%;
+  position: fixed;
+  width:20%;
+}
+
 
 .newsfeedParent .suggestedFriendsContainer .suggestedFriendsCard {
   width:100%;
@@ -517,12 +560,13 @@ box-shadow: 0px 3px 9px rgba(0,0,0,.5);
 
 
 .morePeopleHeader{
-  text-align: center;
+
   margin-top: 10px;
   font-size: 16px;
-  height:75px;
+  height:50px;
   /* background-color: red; */
   padding-top: 10px;
+  padding-left: 20px;
   max-height: 400px;
   font-weight: 400;
   color:black;

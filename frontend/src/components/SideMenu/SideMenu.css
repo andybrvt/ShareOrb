@@ -443,13 +443,14 @@ aside {
   z-index: 3;
   background: white;
   display: flex;
-  width: 96%;
+  width: 86.5%;
   height: 40px;
   position: fixed;
   padding: 0px;
   border-bottom: 1px solid #d9d9d9;
   /* padding-top: 0px; */
   transition: 0.3s;
+
 }
 .mainHeaderContainer.show-sidebar{
   width: 85%;
@@ -483,8 +484,8 @@ aside {
 
 
 .searchBarContainer{
-  left:10%;
-  width:100%;
+
+  width:80%;
 
   /* background-color: blue; */
 
@@ -492,10 +493,11 @@ aside {
 
 
 .searchBarContainer .autoCompleteHeader{
-  background:blue;
+
   position:relative;
   left: 17.5%;
   width: 55%;
+  /* background: green; */
   /* transform: translateX(-50%); */
   top:2.5px;
   color: black;
@@ -510,9 +512,9 @@ aside {
 
 
 .headersNotificationContainer{
-  /* background:green; */
+  /* background:red; */
   position: relative;
-  width:12.5%;
+  width:5.5%;
   height:100%;
 }
 
@@ -524,7 +526,7 @@ aside {
   width: 10%;
   /* float:right; */
   cursor: pointer;
-  /* background-color: red; */
+  background-color: red;
 }
 
 .mainHeaderContainer .headersProfileContainer{
