@@ -439,14 +439,14 @@ class SideMenu extends React.Component {
 
                           cursor: "pointer"
                         }}
-                        size = {125}
+                        size = {110}
                         shape = 'circle'
                         src = {profilePic} />
                         :
                         <Avatar
                           onClick = {() => this.viewUserPage(this.props.username)}
                           style={{left:'20%'}}
-                          size = {125}
+                          size = {110}
                           shape = 'circle'
                           src = {defaultPicture} />
                       }
@@ -454,11 +454,13 @@ class SideMenu extends React.Component {
                       </div>
 
                       <span class="personHeader">
+                        <br/>
                         <div>
-                      {this.props.firstName+" "+ this.props.lastName}
-                      </div>
+                          {this.props.firstName+" "+ this.props.lastName}
+                        </div>
                       </span>
-                      <Row gutter={12} style={{marginTop:'20px', marginLeft:'5px'}}>
+                      <br/>
+                      <Row gutter={12} style={{marginLeft:'5px'}}>
 
                         <Col
                           offset={2}
@@ -467,13 +469,13 @@ class SideMenu extends React.Component {
                           class="clickable"
                         >
 
+
+                        <b class="statsNewsFeed"> 2</b>
                          <span class="statsHeader"> Followers
-                           <br/>
-                           <span
-                             class="statsNewsFeed">
-                             2
-                           </span>
+
+
                          </span>
+
 
 
                         </Col>
@@ -483,12 +485,10 @@ class SideMenu extends React.Component {
                           span={4}
                           class="clickable"
                         >
+
+                        <b class="statsNewsFeed"> 3</b>
                         <span class="statsHeader"> Following
-                          <br/>
-                          <span
-                            class="statsNewsFeed">
-                            3
-                          </span>
+
                         </span>
 
                         </Col>
