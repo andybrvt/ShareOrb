@@ -266,6 +266,7 @@ class SuggestedFriends extends React.Component {
           itemLayout="horizontal"
           loadMore={loadMore}
           dataSource={list}
+          class="suggestedFriendList"
           locale={{emptyText:<span/>}}
           renderItem={item => (
 
@@ -295,7 +296,7 @@ class SuggestedFriends extends React.Component {
 
               <Button
                 onClick = {() => this.onUnfollow(this.props.id, item.id ) }
-                style={{fontSize:'14px'}} size="small" shape="round" type="primary">
+                style={{fontSize:'13px'}} size="small" shape="round" type="primary">
                 Following
               </Button>
 
@@ -305,7 +306,7 @@ class SuggestedFriends extends React.Component {
 
               <Button
                 onClick = {() => this.onUnsendRequest(this.props.id, item.id ) }
-                style={{fontSize:'14px'}} size="small" shape="round" type="primary">
+                style={{fontSize:'13px'}} size="small" shape="round" type="primary">
                 Requested
               </Button>
 
@@ -313,7 +314,7 @@ class SuggestedFriends extends React.Component {
 
               <Button
                 onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
-                style={{fontSize:'14px'}} size="small" shape="round" type="primary">
+                style={{fontSize:'13px'}} size="small" shape="round" type="primary">
                 Follow
               </Button>
 

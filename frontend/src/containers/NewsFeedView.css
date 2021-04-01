@@ -398,8 +398,15 @@ use margin percentage to bring image closer between each row */
   min-height: 100vh;
 }
 
+.suggestedFriendList{
+  height:10%;
+  padding-left: 10px;
+
+  /* background: red; */
+}
+
 .testFriends{
-  top:44%;
+  top:40%;
   position: fixed;
   width:20%;
 }
