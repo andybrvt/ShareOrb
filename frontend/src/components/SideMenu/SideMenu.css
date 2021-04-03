@@ -1,4 +1,20 @@
 /* CSS used here will be applied after bootstrap.css */
+
+.activeFirstTab{
+  color:#1890ff;
+}
+
+.activeSecondTab{
+  color:#1890ff;
+}
+
+
+.activeThirdTab{
+  color:#1890ff;
+}
+
+
+
 .searchResultName{
   line-height: 0%;
 }
@@ -367,6 +383,7 @@ aside {
 
     .show-sidebar aside .side-inner .nav-menu ul{
       width: 225px;
+
     }
 
       /* make padding 0 rather than 35% */
@@ -380,6 +397,7 @@ aside {
         /* display: block; */
         padding-left: 33%;
         /* padding-right: 50px; */
+        font-family: "Segoe UI Regular";
         padding-top: 20px;
         padding-bottom: 20px;
         color: #bfbfbf;
@@ -391,6 +409,8 @@ aside {
         font-size: 100%;
         /* width: 100%; */
       }
+
+
       .show-sidebar aside .side-inner .nav-menu ul li a {
         padding-left: 30px;
       }
@@ -426,8 +446,7 @@ aside {
             opacity: 1;
             visibility: visible; }
       aside .side-inner .nav-menu ul li.active a {
-        color: #000; }
-
+        color: red; }
 
 
 .rightContentContainer{
@@ -459,6 +478,8 @@ aside {
   width: 85%;
 
 }
+
+
 
 .mainContentContainer{
   /* background-color:red; */

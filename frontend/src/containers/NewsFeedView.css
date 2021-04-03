@@ -6,11 +6,11 @@
   position: relative;
   left:50%;
   transform:translateX(-50%);
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .containerEvent .image {
-  width: 45%;
+  width: 42.5%;
 
 }
 
@@ -400,10 +400,24 @@ use margin percentage to bring image closer between each row */
 
 .suggestedFriendList{
   height:10%;
-  padding-left: 10px;
+
+  padding-left: 20px;
 
   /* background: red; */
 }
+
+
+.suggestedFriendsItem{
+
+  font-weight: 400;
+  font-family: "Segoe UI Regular";
+  line-height: 150%;
+  color:black;
+  /* background: red; */
+  font-size: 14px;
+  /* background: red; */
+}
+
 
 .testFriends{
   top:40%;

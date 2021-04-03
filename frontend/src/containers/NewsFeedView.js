@@ -280,7 +280,7 @@ class NewsFeedView extends React.Component {
 								<div>
 										<div class="morePeopleHeader">
 											<b>
-												Suggested Events
+												Trending Albums
 											</b>
 										</div>
 										<SuggestedEvents {...this.props}/>

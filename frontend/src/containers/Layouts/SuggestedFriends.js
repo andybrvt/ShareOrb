@@ -262,7 +262,7 @@ class SuggestedFriends extends React.Component {
       <div>
         <List
           className="demo-loadmore-list scrollableFeature"
-          style={{marginTop:'-10px'}}
+
           itemLayout="horizontal"
           loadMore={loadMore}
           dataSource={list}
@@ -270,7 +270,7 @@ class SuggestedFriends extends React.Component {
           locale={{emptyText:<span/>}}
           renderItem={item => (
 
-            <List.Item style={{height:'60px'}}>
+            <List.Item style={{height:'50px'}}>
 
               <Skeleton avatar title={false} loading={item.loading} active>
 
@@ -278,25 +278,25 @@ class SuggestedFriends extends React.Component {
 
                 avatar={
                   <Avatar
-                    size={47.5}
+                    size={42.5}
                     style = {{
                       cursor: "pointer"
                     }}
                     onClick = {() => this.profileDirect(item.username)}
                      src={item.profile_picture} />
                 }
-                title={<span
-                  style = {{cursor: "pointer"}}
-                   onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>}
-                description={
-                  <div>
 
-                    {
+                description={
+                  <div class="suggestedFriendsItem">
+                    <span
+                      style = {{cursor: "pointer", fontSize:'12px'}}
+                       onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>
+                     <br/>  {
               following.includes(item.id) ?
 
               <Button
                 onClick = {() => this.onUnfollow(this.props.id, item.id ) }
-                style={{fontSize:'12px'}} size="small" shape="round" type="primary">
+                shape="round" type="primary" size={"small"}>
                 Following
               </Button>
 

@@ -75,7 +75,10 @@ class SideMenu extends React.Component {
       loading: false,
       searched: [],
       showSearch: false,
-      searchValue: ""
+      searchValue: "",
+      activeFirstTab:false,
+      activeSecondTab:true,
+      activeThirdTab:false,
     };
 
     // This is used to reference the onclick outside the notification
@@ -264,6 +267,11 @@ class SideMenu extends React.Component {
   onNewsfeedDirect = () => {
     // This will re redner the newsfeed if it is on the page, if it is not
     // then it will just do a history.push
+    this.setState({
+      activeFirstTab:true,
+      activeSecondTab:false,
+      activeThirdTab:false,
+     });
     if(this.props.location.pathname === "/home"){
       // you want to re render here
       window.location.reload();
@@ -275,13 +283,33 @@ class SideMenu extends React.Component {
   }
 
   onChatDirect = () => {
+    console.log(this.state)
+    this.setState({
+      activeFirstTab:false,
+      activeSecondTab:true,
+      activeThirdTab:false,
+     });
+     console.log(this.state)
     if(this.props.location.pathname === "/chat/"+this.props.curChatId){
       window.location.reload()
     } else {
       this.props.history.push("/chat/"+this.props.curChatId)
     }
-
   }
+
+  onProfileDirect = () => {
+    this.setState({
+      activeFirstTab:false,
+      activeSecondTab:false,
+      activeThirdTab:true,
+     });
+    if(this.props.location.pathname === "/explore/"+this.props.username){
+      window.location.reload()
+    } else {
+      this.props.history.push("/explore/"+this.props.username)
+    }
+  }
+
 
   onCalendarDirect = () => {
     const currentDay = new Date()
@@ -296,13 +324,6 @@ class SideMenu extends React.Component {
     }
   }
 
-  onProfileDirect = () => {
-    if(this.props.location.pathname === "/explore/"+this.props.username){
-      window.location.reload()
-    } else {
-      this.props.history.push("/explore/"+this.props.username)
-    }
-  }
 
 
 
@@ -422,7 +443,7 @@ class SideMenu extends React.Component {
                     <div class="logo">
                       <span>S</span>
                     </div>
-                    <img src={sideLogo} style={{top:'26%'}} class="testBackLogo"
+                    <img src={backPartLogo} style={{top:'26%'}} class="testBackLogo"
                     />
                   </div>
 
@@ -499,11 +520,15 @@ class SideMenu extends React.Component {
                       <div style={{marginTop:'25px'}}></div>
                     <Tooltip placement="right" title={"Home"}>
                       <li
-                      onClick = {() => this.onNewsfeedDirect()}
+                        onClick = {() => this.onNewsfeedDirect()}
                       >
                         <a class="d-flex align-items-center">
-                           <HomeOutlined  style={{marginRight:'10px', color:'#1890ff'}}/>
-                           <span class="menu-text">
+                           <HomeOutlined
+                             className={this.state.activeFirstTab ? 'activeFirstTab': null}
+                             style={{marginRight:'10px', }}/>
+                           <span
+                             className={this.state.activeFirstTab ? 'activeFirstTab': null}
+                             class="menu-text">
                              Home
                            </span>
                         </a>
@@ -521,14 +546,18 @@ class SideMenu extends React.Component {
                             <span class="notification-count">
                               <span class="notificationInside"> {this.props.unseen} </span>
                             </span>
-
                           }
-                            <i  style={{marginTop:'4px', color:'#1890ff'}} class="far fa-comment"></i>
-                            <span style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
+                            <i  style={{marginTop:'4px'}}
+                              className={this.state.activeSecondTab ? 'activeSecondTab far fa-comment': 'far fa-comment'}
+                            ></i>
+                            <span
+                              className={this.state.activeSecondTab ? 'activeSecondTab': null}
+                               style={{marginLeft:'10px'}}  class="menu-text">Messages</span>
                           </a>
                         </li>
                       </Tooltip>
 
+                      {/*
                       <Tooltip placement="right" title={"Personal Calendar"}>
                         <li
                         onClick = {() => this.onCalendarDirect()}
@@ -540,14 +569,20 @@ class SideMenu extends React.Component {
                           </a>
                         </li>
                       </Tooltip>
+                      */}
 
                       <Tooltip placement="right" title={"Profile"}>
                         <li
                         onClick = {() => this.onProfileDirect()}
                         >
                         <a class="d-flex align-items-center">
-                          <i style={{fontSize:'16px', color:'#1890ff'}} class="far fa-user"></i>
-                            <span style={{marginLeft:'10px'}}  class="menu-text">Profile</span>
+                          <i
+                              className={this.state.activeThirdTab ? 'activeThirdTab far fa-user': 'far fa-user'}
+                            style={{fontSize:'16px', }}></i>
+                            <span
+                              style={{marginLeft:'10px'}}
+                                className={this.state.activeThirdTab ? 'activeThirdTab menu-text': 'menu-text'}
+                              >Profile</span>
 
                         </a>
                         </li>
