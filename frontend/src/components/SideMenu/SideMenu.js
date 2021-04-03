@@ -385,8 +385,9 @@ class SideMenu extends React.Component {
     let profilePic = ''
     let firstName = ''
     let lastName = ''
-
-
+    let entireName=''
+    let following=''
+    let followers=''
     console.log(this.props)
     console.log(this.state)
     if (this.props.profilePic){
@@ -396,6 +397,13 @@ class SideMenu extends React.Component {
     } if (this.props.lastName){
       lastName = this.props.lastName
     }
+    if (this.props.followers){
+      followers = this.props.followers
+    }
+    if (this.props.following){
+      following = this.props.following
+    }
+    entireName=firstName+" "+lastName
 
 
     const { dataSource } = this.state;
@@ -443,7 +451,7 @@ class SideMenu extends React.Component {
                     <div class="logo">
                       <span>S</span>
                     </div>
-                    <img src={backPartLogo} style={{top:'26%'}} class="testBackLogo"
+                    <img src={backPartLogo} style={{marginLeft:'1px',top:'26%'}} class="testBackLogo"
                     />
                   </div>
 
@@ -477,7 +485,7 @@ class SideMenu extends React.Component {
                       <span class="personHeader">
                         <br/>
                         <div>
-                          {this.props.firstName+" "+ this.props.lastName}
+                          {entireName}
                         </div>
                       </span>
                       <br/>
@@ -491,7 +499,7 @@ class SideMenu extends React.Component {
                         >
 
 
-                        <b class="statsNewsFeed"> 2</b>
+                        <b class="statsNewsFeed"> {followers.length}</b>
                          <span class="statsHeader"> Followers
 
 
@@ -507,7 +515,7 @@ class SideMenu extends React.Component {
                           class="clickable"
                         >
 
-                        <b class="statsNewsFeed"> 3</b>
+                        <b class="statsNewsFeed"> {following.length}</b>
                         <span class="statsHeader"> Following
 
                         </span>
@@ -776,6 +784,8 @@ const mapStateToProps = state => {
   return{
     firstName: state.auth.firstName,
     lastName: state.auth.lastName,
+    followers:state.auth.followers,
+    following:state.auth.following,
     notificationDrop: state.nav.showPopup,
     showPickEventSyncModal: state.eventSync.showPickEventSyncModal,
     id: state.auth.id,

@@ -398,13 +398,6 @@ use margin percentage to bring image closer between each row */
   min-height: 100vh;
 }
 
-.suggestedFriendList{
-  height:10%;
-
-  padding-left: 20px;
-
-  /* background: red; */
-}
 
 
 .suggestedFriendsItem{
@@ -433,12 +426,6 @@ use margin percentage to bring image closer between each row */
 }
 
 
-.newsfeedParent .suggestedFriendsContainer .suggestedFriendsCard {
-  width:100%;
-  background:white;
-  position: relative;
-  border-radius: 10px;
-}
 
 
 .firstTimeModalText{

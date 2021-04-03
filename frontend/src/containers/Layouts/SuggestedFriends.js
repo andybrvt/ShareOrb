@@ -262,20 +262,15 @@ class SuggestedFriends extends React.Component {
       <div>
         <List
           className="demo-loadmore-list scrollableFeature"
-
           itemLayout="horizontal"
           loadMore={loadMore}
           dataSource={list}
-          class="suggestedFriendList"
           locale={{emptyText:<span/>}}
+          style={{height:'220px'}}
           renderItem={item => (
-
-            <List.Item style={{height:'50px'}}>
-
+            <List.Item style={{height:'60px'}} >
               <Skeleton avatar title={false} loading={item.loading} active>
-
               <List.Item.Meta
-
                 avatar={
                   <Avatar
                     size={42.5}
@@ -285,58 +280,48 @@ class SuggestedFriends extends React.Component {
                     onClick = {() => this.profileDirect(item.username)}
                      src={item.profile_picture} />
                 }
-
                 description={
                   <div class="suggestedFriendsItem">
                     <span
                       style = {{cursor: "pointer", fontSize:'12px'}}
                        onClick = {() => this.profileDirect(item.username)}> {item.first_name} {item.last_name}</span>
-                     <br/>  {
-              following.includes(item.id) ?
+                     <br/>
 
+        {    following.includes(item.id) ?
               <Button
                 onClick = {() => this.onUnfollow(this.props.id, item.id ) }
                 shape="round" type="primary" size={"small"}>
                 Following
               </Button>
-
               :
-
               sentRequestList.includes(item.id) ?
-
               <Button
                 onClick = {() => this.onUnsendRequest(this.props.id, item.id ) }
                 style={{fontSize:'12px'}} size="small" shape="round" type="primary">
                 Requested
               </Button>
-
               :
-
               <Button
                 onClick = {() => this.onFollow(item.private, this.props.id, item.id ) }
                 style={{fontSize:'12px'}} size="small" shape="round" type="primary">
                 Follow
               </Button>
-
             }
-
-
-
-                  </div>
-                  }
+              </div>
+              }
               />
-
-
 
               </Skeleton>
             </List.Item>
           )}
         />
-      <div style={{padding:'30px'}}>
+      <div style={{padding:'20px'}}>
         {((list.length)<=30)?
+          <div>
 
           <Button style={{left:'35%', float:'bottom'}} onClick={() => this.onLoadMore()}>
             Load More</Button>
+          </div>
 
           :
 
