@@ -343,16 +343,19 @@ class CurChatManager extends React.Component{
         }
         <Divider/>
 
-        <div className =""  >
+        {/*
+          <div className =""  >
 
-        <Button
-          disabled = {this.onDisableEventShare(followersId, followingId, memberListId)}
-          type="primary" shape="round" size="large"
+          <Button
+            disabled = {this.onDisableEventShare(followersId, followingId, memberListId)}
+            type="primary" shape="round" size="large"
 
-          onClick = {() => this.onOpenEventModal()}
-        >  Share Your Events </Button>
+            onClick = {() => this.onOpenEventModal()}
+          >  Share Your Events </Button>
 
-        </div>
+          </div>
+
+          */}
 
         {
             partiLen > 2 ?
