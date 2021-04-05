@@ -224,10 +224,15 @@ class NewSidePanel extends React.Component{
 
               <div className = "chatText">
               <div className = "chatName">{this.getGroupChatName(item.participants)}</div>
-              <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}> {this.chatDescription(item.recentMessage,
-                item.recentSender,
-                item.recentTime
-              )}</div>
+              <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}>
+                <b>
+                  {this.chatDescription(item.recentMessage,
+                  item.recentSender,
+                  item.recentTime
+                  )}
+                </b>
+
+            </div>
             </div>
 
             </div>
