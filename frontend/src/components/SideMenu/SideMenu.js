@@ -38,7 +38,8 @@ import {
   Select,
   Option,
   Form,
-  List
+  List,
+  Modal
 } from 'antd';
 import "./SideMenu.css"
 import * as dateFns from 'date-fns';
@@ -58,8 +59,14 @@ import mainLogo from '../../logo.svg';
 import backPartLogo from '../../hareOrb.svg';
 import sideLogo from '../../sideLogo.svg';
 import { connect } from 'react-redux';
+import FollowList from '../UserProfiles/FollowList';
+import FollowersList from '../UserProfiles/FollowersList';
+
+
+
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
+
 
 
 
@@ -79,6 +86,8 @@ class SideMenu extends React.Component {
       activeFirstTab:false,
       activeSecondTab:true,
       activeThirdTab:false,
+      followerShow: false,
+      followingShow: false,
     };
 
     // This is used to reference the onclick outside the notification
@@ -87,6 +96,34 @@ class SideMenu extends React.Component {
     this.setWrapperRef = this.setWrapperRef.bind(this)
     this.handleClickOutside = this.handleClickOutside.bind(this)
 
+  }
+
+  onFollowerOpen = () => {
+    // This is used to open up the follower list
+    this.setState({
+      followerShow: true
+    })
+  }
+
+  onFollowerCancel = () => {
+    // This is used to close the follower list
+    this.setState({
+      followerShow: false
+    })
+  }
+
+  onFollowingOpen = () => {
+    // This is used to open up the following list
+    this.setState({
+      followingShow: true
+    })
+  }
+
+  onFollowingCancel = () => {
+    // This is to close the following list
+    this.setState({
+      followingShow: false
+    })
   }
 
 
@@ -388,6 +425,8 @@ class SideMenu extends React.Component {
     let entireName=''
     let following=''
     let followers=''
+    let request = []
+
     console.log(this.props)
     console.log(this.state)
     if (this.props.profilePic){
@@ -403,6 +442,10 @@ class SideMenu extends React.Component {
     if (this.props.following){
       following = this.props.following
     }
+    if(this.props.requestList){
+      request = this.props.requestList
+    }
+
     entireName=firstName+" "+lastName
 
 
@@ -775,6 +818,38 @@ class SideMenu extends React.Component {
         close = {this.props.closePickEventSyncModal} />
 
 
+        <Modal
+        visible ={this.state.followerShow}
+        onCancel = {this.onFollowerCancel}
+        footer = {null}
+        centered
+        >
+
+
+        <span className ='followWord'> Followers</span>
+        <Divider style={{marginTop:'10px', marginBottom:'0px'}}/>
+        <FollowersList
+          follow = {followers}
+          request = {request}
+          curId = {this.props.curId}
+          location = {this.props.location}
+          updateFollowers = {this.props.updateFollowers}
+           />
+        </Modal>
+
+
+
+        <Modal
+        visible = {this.state.followingShow}
+        onCancel = {this.onFollowingCancel}
+        footer = {null}
+        centered
+        >
+        <span className = 'followWord'>Following</span>
+        <Divider style={{marginTop:'10px', marginBottom:'0px'}}/>
+        <FollowList follow = {following}/>
+        </Modal>
+
       </div>
     );
   }
@@ -795,7 +870,8 @@ const mapStateToProps = state => {
     profilePic: state.auth.profilePic,
     curChatId: state.message.curChatId,
     unseen: state.message.unseen,
-    notificationSeen: state.auth.notificationSeen
+    notificationSeen: state.auth.notificationSeen,
+    requestList: state.auth.requestList
   }
 }
 
