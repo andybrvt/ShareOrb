@@ -672,12 +672,12 @@
   color: grey;
 }
 .chatDescription{
-  font-weight: 400;
+  /* font-weight: 400; */
   font-size: 13px;
-  color:grey;
+  /* color:grey; */
 }
-.chatItem .chatWrap .chatText .chatDescription.active{
-  font-weight: bold;
+.chatDescription.active{
+  font-weight: 400;
   color: black;
 }
 

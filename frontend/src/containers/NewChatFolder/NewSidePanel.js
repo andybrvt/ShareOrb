@@ -189,10 +189,13 @@ class NewSidePanel extends React.Component{
                 </div>
               </div>
               <div className = {`chatDescription ${item.seen.includes(this.props.username) ? "" : "active"}`}>
-                {this.chatDescription(item.recentMessage,
-                item.recentSender,
-                item.recentTime
-              )}</div>
+                  <b>
+                    {this.chatDescription(item.recentMessage,
+                      item.recentSender,
+                      item.recentTime
+                    )}
+                  </b>
+              </div>
             </div>
           </div>
 
