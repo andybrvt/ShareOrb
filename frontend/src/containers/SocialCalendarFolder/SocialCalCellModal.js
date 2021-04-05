@@ -12,7 +12,7 @@ class SocialCalCellModal extends React.Component{
   }
 
   escFunction(event){
-    // 27 is the keycode for esc
+  // 27 is the keycode for esc
     if(event.keyCode === 27){
       this.back(event)
     }

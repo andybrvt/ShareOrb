@@ -27,7 +27,15 @@ import { authAxios } from '../../components/util';
 
 const { TextArea } = Input
 
+
+
 class SocialCalCellPage extends React.Component{
+
+  constructor(props){
+    super(props)
+    this.comment = React.createRef()
+  }
+
 
   state ={
     showDelete: false,
@@ -747,6 +755,11 @@ class SocialCalCellPage extends React.Component{
     this.props.history.push("/explore/"+username)
   }
 
+  onCommentFocus = () =>{
+    this.comment.current.focus();
+  }
+
+
 
   render(){
     console.log(this.props)
@@ -1136,7 +1149,9 @@ class SocialCalCellPage extends React.Component{
 
                      }
 
-                       <div className  = 'socialComment'>
+                       <div
+                         onClick = {this.onCommentFocus}
+                         className  = 'socialComment'>
                         <div className = 'textHeightCenter'>
                           <i style={{ marginRight:'10px'}} class="far fa-comments fa-lg"></i>
                            Comment
@@ -1199,10 +1214,11 @@ class SocialCalCellPage extends React.Component{
                    <div className = 'socialInputFormHolder'>
                        <Form className = "socialInputForm">
                          <Input
+                         ref = {this.comment}
+                         id = "commentInput"
                          className= 'socialBoxInput'
                          onChange ={this.onCommentChange}
                          value = {this.state.comment}
-                         // bordered = {false}
                          placeholder = 'Write a commenta'
                          name = 'socialComment'
                          onPressEnter = {e =>
