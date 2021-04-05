@@ -187,7 +187,13 @@ const validate = values => {
     errors.last_name = "Please input your last name."
   }
   if(!values.username){
-    errors.username = "Pleast input your username."
+    errors.username = "Please input your username."
+  }
+  if(values.username){
+    if(values.username.includes("@")){
+        errors.username = "You cannot have an @ in your username."
+    }
+
   }
   if(!values.password){
     errors.password = "Please input a password."
