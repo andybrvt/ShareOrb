@@ -92,7 +92,7 @@ class LoginForm extends React.Component {
 
             <img src={mainLogo} width="20%"
               style={{position:'absolute',top:'5.5%', left:'19%'}}/>
-            <div class="loginTitle">Capture the moments  </div>
+            <div class="loginTitle">Share your everyday moments  </div>
             <div class="LeftLoginContainer">
               <div class="eventCard allStyle"
                 style={{

@@ -316,7 +316,7 @@ class CurChatManager extends React.Component{
               (usernameList)?
                 <Avatar
                   onClick = {() => this.onProfileClick(usernameList)}
-                  size = {150}
+                  size = {125}
                   src = {`${global.IMAGE_ENDPOINT}`+profilePic}
                 />
 
@@ -324,7 +324,7 @@ class CurChatManager extends React.Component{
 
               <Avatar
                 onClick = {() => this.onProfileClick(usernameList)}
-                size = {150}
+                size = {125}
                 src = {`${global.IMAGE_ENDPOINT}`+profilePic}
               />
           }
@@ -374,7 +374,7 @@ class CurChatManager extends React.Component{
                    avatar={<Avatar
                      src= {`${global.IMAGE_ENDPOINT}`+item.profile_picture} /> }
                    title={<span>{this.capitalize(item.first_name)} {this.capitalize(item.last_name)}</span>}
-                   description= {<b>@{this.capitalize(item.username)}</b>}
+                   description= {<b>@{item.username}</b>}
                  />
                  </List.Item>
                )}

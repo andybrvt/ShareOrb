@@ -173,7 +173,7 @@ class NewSidePanel extends React.Component{
 
             <div className="chatAva">
               <div class="centerChatItem">
-              <Avatar size = {45}
+              <Avatar size = {40}
                src = {`${global.IMAGE_ENDPOINT}`+this.getChatUserProfile(item.participants)} />
              </div>
             </div>
