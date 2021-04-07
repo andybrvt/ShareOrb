@@ -144,7 +144,7 @@ class UserSerializer(serializers.ModelSerializer):
             requestList.append(userPerson)
 
         for socialCells in data['get_socialCal']:
-            socialCell = SocialCalCellMiniSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
+            socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
             socialCalList.append(socialCell)
 
         for friends in data['friends']:
@@ -234,7 +234,7 @@ class UserExploreSerializer(serializers.ModelSerializer):
             requestList.append(userPerson)
 
         for socialCells in data['get_socialCal']:
-            socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
+            socialCell = SocialCalCellMiniSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
             socialCalList.append(socialCell)
 
         for socialEvents in data['get_socialEvents']:
