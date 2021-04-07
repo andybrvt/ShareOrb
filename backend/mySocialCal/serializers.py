@@ -50,6 +50,36 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
         data['socialCalUser'] = SocialCalUserSerializer(User.objects.get(id = data['socialCalUser'])).data
         return data
 
+class SocialCalCellMiniSerializer(serializers.ModelSerializer):
+    # this will be used to render the cells in side the social calendar
+    #  this is mostly used to ooptimize the the social calendar
+    # you would jsut need the cover pic and the events
+
+
+    get_socialCalEvent = serializers.StringRelatedField(many = True)
+
+    class Meta:
+        model = models.SocialCalCell
+        fields = (
+        'id',
+        'socialCalUser',
+        'socialCaldate',
+        'coverPic',
+        'get_socialCalEvent',
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        cal_events = []
+        for events in data['get_socialCalEvent']:
+            event = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = events)).data
+            cal_events.append(event)
+
+        data['get_socialCalEvent'] = cal_events
+        data['socialCalUser'] = SocialCalUserSerializer(User.objects.get(id = data['socialCalUser'])).data
+        return data
+
+
 class SocialCalUserSerializer(serializers.ModelSerializer):
 
     class Meta:

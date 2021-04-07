@@ -9,6 +9,7 @@ from allauth.account.utils import setup_user_email
 from userprofile.models import CustomNotification
 from userprofile.models import PendingSocialPics
 from mySocialCal.serializers import SocialCalCellSerializer
+from mySocialCal.serializers import SocialCalCellMiniSerializer
 from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
@@ -111,7 +112,8 @@ class UserSerializer(serializers.ModelSerializer):
          'get_sent_follow_request',
          'get_follow_request',
          'showIntialInstructions',
-         "notificationSeen"
+         "notificationSeen",
+         "date_joined"
          )
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -168,6 +170,84 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_allPost'] = allPostList
         data['get_sent_follow_request'] = sentRequestList
         data['get_follow_request'] = requestList
+        return data
+
+class UserExploreSerializer(serializers.ModelSerializer):
+    # This function will be used to serialize the user profile, this will help
+    # with the run time. Since the user profile you dont need that much, only
+    #  basic info, followers, following, and for soical cal cell you just need
+    #  cover pic
+
+    get_following = serializers.StringRelatedField(many = True)
+    get_followers = serializers.StringRelatedField(many = True)
+    get_socialCal = serializers.StringRelatedField(many = True)
+    get_socialEvents = serializers.StringRelatedField(many = True)
+    get_sent_follow_request = serializers.StringRelatedField(many = True)
+    get_follow_request = serializers.StringRelatedField(many = True)
+
+
+    class Meta:
+        model = models.User
+        fields = (
+         'id',
+         'username',
+         'first_name',
+         'last_name',
+         'bio',
+         'profile_picture',
+         'get_following',
+         'get_followers',
+         'get_socialCal',
+         'get_socialEvents',
+         'phone_number',
+         'email',
+         'dob',
+         'private',
+         'requested',
+         'get_sent_follow_request',
+         'get_follow_request',
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        followerList = []
+        followingList = []
+        socialCalList = []
+        socialEventList = []
+        sentRequestList = []
+        requestList = []
+
+        for user in data['get_following']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followingList.append(userPerson)
+
+        for user in data['get_followers']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followerList.append(userPerson)
+
+        for user in data['get_sent_follow_request']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            sentRequestList.append(userPerson)
+
+        for user in data['get_follow_request']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            requestList.append(userPerson)
+
+        for socialCells in data['get_socialCal']:
+            socialCell = SocialCalCellMiniSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
+            socialCalList.append(socialCell)
+
+        for socialEvents in data['get_socialEvents']:
+            socialEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = socialEvents)).data
+            socialEventList.append(socialEvent)
+
+        data['get_following'] = followingList
+        data['get_followers'] = followerList
+        data['get_socialCal'] = socialCalList
+        data['get_socialEvents'] = socialEventList
+        data['get_sent_follow_request'] = sentRequestList
+        data['get_follow_request'] = requestList
+
         return data
 
 
