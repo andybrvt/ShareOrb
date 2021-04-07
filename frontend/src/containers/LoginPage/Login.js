@@ -92,7 +92,7 @@ class LoginForm extends React.Component {
 
             <img src={mainLogo} width="20%"
               style={{position:'absolute',top:'5.5%', left:'19%'}}/>
-            <div class="loginTitle">Connecting people through calendars </div>
+            <div class="loginTitle">Capture the moments  </div>
             <div class="LeftLoginContainer">
               <div class="eventCard allStyle"
                 style={{
@@ -188,7 +188,7 @@ class LoginForm extends React.Component {
 
               <div className = "bodyText">
                 We believe every day is special. Think of ShareOrb like a
-               scrapbook of memories and you're creating one everyday.
+               scrapbook of memories and there's one photo album created per day!
               </div>
 
             </div>
@@ -206,13 +206,12 @@ class LoginForm extends React.Component {
           <div class="secondInfoPageLogin">
 
             <div className = "smolLoginTextFlexContainer">
-              Our mission is to redefined how calendars are used. We want to make
-              sharing and planning events a casual, fun, and easy experience.
+              We want to let you share photos to people you care about in the easiest and most casual way.
             </div>
 
             <div className = "smolLoginPicFlexContainer">
 
-              <img src={intro2Pic}/>
+
 
             </div>
 

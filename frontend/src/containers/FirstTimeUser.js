@@ -8,6 +8,7 @@ import { Divider, Checkbox, Avatar, Statistic, Button, Modal, Alert, Timeline, I
 import introPic from './intro.png'
 import intro2Pic from './intro2.png';
 import introPic3 from './introPic3.png';
+import profileDemo from './profileDemo.png';
 import InitialSuggestFollowers from './InitialSuggestFollowers';
 const Step = Steps.Step
 const steps = [{
@@ -121,7 +122,7 @@ class FirstTimeUser extends React.Component{
           </Steps>
              }
            // visible={this.props.showIntialInstructions} //showIntialInstructions
-           visible={this.props.showIntialInstructions} //showIntialInstructions
+           visible={this.props.showIntialInstructions} //this.props.showIntialInstructions
            // onOk={this.hideModal}
            okText={
 
@@ -232,22 +233,31 @@ class FirstTimeUser extends React.Component{
                     <Timeline.Item>
                       <i style={{color:'#1890ff', marginRight:'5px'}}
                         class="far fa-comment"></i>
-                      Chats: Message and schedule events with friends
+                      Chats: Message your friends
                     </Timeline.Item>
-
+                    <Timeline.Item>
+                      <i style={{color:'#1890ff', marginRight:'10px'}}
+                        class="fas fa-question"></i>
+                      Explore: Coming soon!
+                    </Timeline.Item>
+                    {/*
                     <Timeline.Item>
                       <i style={{color:'#1890ff', marginRight:'5px'}}
                         class="far fa-calendar-alt"></i>
                       Personal Calendar: Your <b>private</b> calendar, sync with friends and plan your day
                       <img src={intro2Pic} width="75%"/>
                     </Timeline.Item>
+                    */}
                     <Timeline.Item>
+
                       <i style={{color:'#1890ff', marginRight:'5px'}}
                         class="fas fa-user-friends"></i>
-                      Profile: Your <b>public</b> calendar. Any pictures or events you create here
+                      Profile: Your <b>public</b> profile. Any pictures albums you create here
                       can be seen by anyone!
                     </Timeline.Item>
                   </Timeline>
+
+                  <img class="profilePagePic" src={profileDemo} />
 
                 </div>
 
