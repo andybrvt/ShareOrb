@@ -46,6 +46,16 @@ use margin percentage to bring image closer between each row */
   margin-top:45px;
 }
 
+.profilePagePic {
+  margin-top: -20px;
+  position: relative;
+  width:65%;
+  height: 75%;
+  left:40%;
+  transform: translate(-50%);
+}
+
+
 .secondContainerLeft{
   width:55%;
   /* background: green; */
