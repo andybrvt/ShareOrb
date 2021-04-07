@@ -415,7 +415,7 @@ class NewChatContent extends React.Component{
                       <div
                         onClick = {() => this.onProfileClick(messageItem.messageUser.username)}
                         className = 'userName'>{this.capitalize(messageItem.messageUser.first_name)} {this.capitalize(messageItem.messageUser.last_name)}</div>
-  
+
                       {
                         (this.isValidHttpUrl(messageItem.body))?
 
