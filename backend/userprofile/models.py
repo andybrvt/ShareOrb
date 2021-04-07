@@ -91,6 +91,8 @@ class User(AbstractUser):
     # you open pu the drop down you will set the value to 0 again
     notificationSeen = models.IntegerField(default = 0, blank = True)
 
+
+    # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
     def get_posts(self):
 
         return Post.objects.filter(user=self).values_list('id', flat=True)

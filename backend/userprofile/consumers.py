@@ -11,6 +11,7 @@ from .serializers import UserSerializer
 from .serializers import FollowSerializer
 from .serializers import FollowUserSerializer
 from .serializers import UserSocialEventSerializer
+from .serializers import UserExploreSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -808,7 +809,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     def fetch_profile(self, data):
         profile = get_object_or_404(User, username = data['username'])
-        serializer = UserSerializer(profile).data
+        serializer = UserExploreSerializer(profile).data
 
         content = {
             'command': 'user_profile',
