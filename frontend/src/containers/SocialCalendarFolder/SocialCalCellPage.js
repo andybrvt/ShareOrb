@@ -262,19 +262,7 @@ class SocialCalCellPage extends React.Component{
      SocialCalCellPageWebSocketInstance.sendSocialCalCellUnlike(cellDate, personUnLike, owner)
   }
 
-  onCommentLike = (personLike) => {
 
-    console.log(personLike)
-    SocialCalCellPageWebSocketInstance.sendCommentLike(personLike, this.props.match.params.postId)
-
-  }
-
-  onCommentUnlike = (personLike) => {
-
-    console.log(personLike)
-    SocialCalCellPageWebSocketInstance.sendCommentUnLike(personLike, this.props.match.params.postId)
-
-  }
 
 
   getChatUserName(postOwnerName){
@@ -1209,6 +1197,7 @@ class SocialCalCellPage extends React.Component{
                    curUser = {this.props.curId}
                    owner = {socialCalUserId}
                    items = {socialCalComments}
+                   {...this.props}
                    />
                  </div>
 
@@ -1282,14 +1271,6 @@ class SocialCalCellPage extends React.Component{
                   </div>
 
                  */}
-
-
-
-
-
-
-
-
 
 
              </div>

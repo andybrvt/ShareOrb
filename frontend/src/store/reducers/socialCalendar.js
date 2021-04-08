@@ -50,8 +50,18 @@ const sendSocialCalCellLikeUnlike = (state, action) => {
   // IMPROVED
   return updateObject(state, {
     socialCalCellInfo: {
-      ...state.socialCalCellInfo,
+      ...state.socialCalCellCommentObj,
       people_like: action.socialCalCellLikeObj
+    }
+  })
+}
+
+const sendSocialCalCellCommentLikeUnlike = (state, action) => {
+  // IMPROVED
+  return updateObject(state, {
+    socialCalCellInfo: {
+      ...state.socialCalCellCommentObj,
+    
     }
   })
 }
@@ -175,6 +185,8 @@ const reducer = (state = initialState, action) => {
       return fetchSocialCalCellPage(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_LIKE_UNLIKE:
       return sendSocialCalCellLikeUnlike(state, action)
+    case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_LIKE_UNLIKE:
+      return sendSocialCalCellCommentLikeUnlike(state, action)
     case actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT:
       return sendSocialCalCellComment(state, action)
     case actionTypes.CLOSE_SOCIAL_CAL_CELL_PAGE:

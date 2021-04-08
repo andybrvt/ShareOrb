@@ -268,6 +268,10 @@ class WebSocketSocialCalCellPage{
       // Add the call back in here
       this.callbacks['fetch_social_cal_cell_info'](socialCalCellObj)
     }
+    if(command === "send_comment_like"){
+      const likeList = parsedData.likeList
+      this.callbacks['send_social_cal_cell_comment_like_unlike'](likeList)
+    }
 
 
   }
@@ -294,7 +298,7 @@ class WebSocketSocialCalCellPage{
 
 
   sendCommentLike (socialCalCellId, personLike) {
-    this.sendPostsInfo({
+    this.sendSocialCalCellInfo({
       socialCalCellId: socialCalCellId,
       personLike: personLike,
       command: 'send_comment_like',
@@ -302,7 +306,7 @@ class WebSocketSocialCalCellPage{
   }
 
   sendCommentUnLike(socialCalCellId, personUnlike){
-    this.sendPostsInfo({
+    this.sendSocialCalCellInfo({
       socialCalCellId: socialCalCellId,
       personUnlike: personUnlike,
       command: 'unsend_comment_like',

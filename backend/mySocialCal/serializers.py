@@ -147,7 +147,7 @@ class SocialCalCommentSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.SocialCalComment
-        fields = ('id','body', 'created_on', 'commentUser' )
+        fields = ('id','body', 'created_on', 'commentUser', "comment_like_count", "comment_people_like" )
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
