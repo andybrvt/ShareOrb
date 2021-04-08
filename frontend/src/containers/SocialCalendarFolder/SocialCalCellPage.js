@@ -262,6 +262,9 @@ class SocialCalCellPage extends React.Component{
      SocialCalCellPageWebSocketInstance.sendSocialCalCellUnlike(cellDate, personUnLike, owner)
   }
 
+
+
+
   getChatUserName(postOwnerName){
     // This function will show the correct name of the user that you are chatting
     // with
@@ -1194,6 +1197,7 @@ class SocialCalCellPage extends React.Component{
                    curUser = {this.props.curId}
                    owner = {socialCalUserId}
                    items = {socialCalComments}
+                   {...this.props}
                    />
                  </div>
 
@@ -1267,14 +1271,6 @@ class SocialCalCellPage extends React.Component{
                   </div>
 
                  */}
-
-
-
-
-
-
-
-
 
 
              </div>

@@ -15,5 +15,6 @@ urlpatterns = [
     path('pictureClipping', views.SocialClippingView.as_view(), name = "picture_clipping"),
     path('changeCoverPic', views.SocialChangeCoverPic.as_view(), name = "change_cover_pic"),
     path("updateCurSocialCell/<slug:id>", views.SocialCapUploadNewsfeed.as_view(), name= "update_cur_social_cal_cell"),
-    path("infiniteSocial/<int:start>/<int:addMore>", views.loadSocialPostView.as_view(), name = "infinite_social")
+    path("infiniteSocial/<int:start>/<int:addMore>", views.loadSocialPostView.as_view(), name = "infinite_social"),
+    path("add-like-comment/<slug:id>/", views.AddOneLikeToComment.as_view(), name='curr post'),
 ]

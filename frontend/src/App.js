@@ -129,6 +129,7 @@ class App extends Component {
       this.props.fetchSocialCalCellPage.bind(this),
       this.props.sendSocialCalCellLikeUnlike.bind(this),
       this.props.sendSocialCalCellComment.bind(this),
+      this.props.sendSocialCalCellCommentLikeUnlike.bind(this),
       this.props.addSocialEventJoinLeaveM.bind(this),
       this.props.deleteSocialCellItem.bind(this),
       this.props.addSocialDayCaption.bind(this)
@@ -137,7 +138,9 @@ class App extends Component {
     UserPostPageWebSocketInstance.addCallbacks(
       this.props.loadPost.bind(this),
       this.props.sendUserPostLikeUnlike.bind(this),
-      this.props.sendUserPostComment.bind(this)
+      // this.props.sendUserPostComment.bind(this),
+      // this.props.sendCommentLike.bind(this),
+      // this.props.sendCommentUnLike.bind(this)
     )
 
     NewChatWebSocketInstance.addCallbacks(
@@ -437,7 +440,8 @@ const mapDispatchToProps = dispatch => {
     deleteSocialCellItem: (socialItemList) => dispatch(socialActions.deleteSocialCellItem(socialItemList)),
     addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList)),
     addSocialDayCaption: (socialDayCaption) => dispatch(socialActions.addSocialDayCaption(socialDayCaption)),
-    sendSocialEventInvite: (inviteList) => dispatch(socialActions.sendSocialEventInvite(inviteList))
+    sendSocialEventInvite: (inviteList) => dispatch(socialActions.sendSocialEventInvite(inviteList)),
+    sendSocialCalCellCommentLikeUnlike: (socialCalCellObj) => dispatch(socialActions.sendSocialCalCellCommentLikeUnlike(socialCalCellCommentObj)),
   }
 }
 

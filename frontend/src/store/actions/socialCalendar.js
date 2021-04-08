@@ -40,6 +40,13 @@ export const sendSocialCalCellComment = (socialCalCellCommentObj) => {
   }
 }
 
+export const sendSocialCalCellCommentLikeUnlike = (socialCalCellCommentObj) => {
+  return {
+    type: actionTypes.SEND_SOCIAL_CAL_CELL_COMMENT_LIKE_UNLIKE,
+    socialCalCellCommentObj: socialCalCellCommentObj
+  }
+}
+
 export const deleteSocialCellItem = (socialItemList) => {
   // This is used to update the socialcell items list after you have
   // deleted on of the photos

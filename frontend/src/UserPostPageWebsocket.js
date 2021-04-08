@@ -108,6 +108,16 @@ class WebSocketUserPostPage{
       this.callbacks['fetch_user_post_info'](post)
 
     }
+
+    if(command === "send_user_post_like_unlike"){
+      console.log(parsedData)
+
+    }
+
+    if(command === "send_user_post_like_unlike"){
+      console.log(parsedData)
+
+    }
     if(command === "send_user_post_like_unlike"){
       const likeList = parsedData.likeList
 
@@ -131,11 +141,32 @@ class WebSocketUserPostPage{
   addCallbacks(
     fetchUserPostInfo,
     sendUserPostLikeUnlike,
-    sendUserPostComment
+    sendUserPostComment,
+    sendCommentLike,
+    sendCommentUnLike,
   ){
     this.callbacks['fetch_user_post_info'] = fetchUserPostInfo
     this.callbacks['send_user_post_like_unlike'] = sendUserPostLikeUnlike
     this.callbacks['send_user_post_comment'] = sendUserPostComment
+    this.callbacks['send_comment_like'] = sendCommentLike
+    this.callbacks['unsend_comment_like'] = sendCommentUnLike
+  }
+
+
+  sendCommentLike (socialCalCellId, personLike) {
+    this.sendPostsInfo({
+      socialCalCellId: socialCalCellId,
+      personLike: personLike,
+      command: 'send_comment_like',
+    })
+  }
+
+  sendCommentUnLike(socialCalCellId, personUnlike){
+    this.sendPostsInfo({
+      socialCalCellId: socialCalCellId,
+      personUnlike: personUnlike,
+      command: 'unsend_comment_like',
+    })
   }
 
   sendUserPostInfo(data){

@@ -7,6 +7,8 @@ import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import './SocialCalCSS/SocialCellPage.css';
 import * as dateFns from 'date-fns';
 import {Link, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as socialCalActions  from '../../store/actions/socialCalendar';
 
 const { TextArea } = Input;
 
@@ -16,8 +18,98 @@ class SocialComments extends React.Component{
     comment: ''
   }
 
+  componentDidMount() {
+    this.initialisePage()
+  }
+
+
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  initialisePage() {
+    this.waitForSocketConnection(() =>{
+      SocialCalCellPageWebSocketInstance.fetchSocialCalCellInfo(
+        this.props.match.params.username,
+        this.props.match.params.year,
+        this.props.match.params.month,
+        this.props.match.params.day
+      )
+    })
+    if(this.props.match.params.username && this.props.match.params.year
+      && this.props.match.params.month && this.props.match.params.day
+    ) {
+      SocialCalCellPageWebSocketInstance.connect(
+        this.props.match.params.username,
+        this.props.match.params.year,
+        this.props.match.params.month,
+        this.props.match.params.day
+      )
+    }
+
+  }
+
+  waitForSocketConnection(callback){
+		// This is pretty much a recursion that tries to reconnect to the websocket
+		// if it does not connect
+		const component = this;
+		setTimeout(
+			function(){
+				console.log(SocialCalCellPageWebSocketInstance.state())
+				if (SocialCalCellPageWebSocketInstance.state() === 1){
+					console.log('connection is secure');
+					callback();
+					return;
+				} else {
+					console.log('waiting for connection...')
+					component.waitForSocketConnection(callback)
+				}
+			}, 100)
+	}
+
+
+  componentWillReceiveProps(newProps){
+    if(this.props.match.params.username !== newProps.match.params.username ||
+      this.props.match.params.year !== newProps.match.params.year ||
+      this.props.match.params.month !== newProps.match.params.month ||
+      this.props.match.params.day !== newProps.match.params.day
+    ) {
+      SocialCalCellPageWebSocketInstance.disconnect();
+      this.waitForSocketConnection(() =>{
+        SocialCalCellPageWebSocketInstance.fetchSocialCalCellInfo(
+          newProps.match.params.username,
+          newProps.match.params.year,
+          newProps.match.params.month,
+          newProps.match.params.day
+        )
+      })
+      SocialCalCellPageWebSocketInstance.connect(
+          newProps.match.params.username,
+          newProps.match.params.year,
+          newProps.match.params.month,
+          newProps.match.params.day
+      )
+
+    }
+  }
+
+  componentWillUnmount(){
+    SocialCalCellPageWebSocketInstance.disconnect();
+    this.props.closeSocialCalCellPage();
+  }
+
+  onCommentLike = (personLike) => {
+
+    console.log(personLike)
+    SocialCalCellPageWebSocketInstance.sendCommentLike(personLike, this.props.match.params.postId)
+
+  }
+
+  onCommentUnlike = (personLike) => {
+
+    console.log(personLike)
+    SocialCalCellPageWebSocketInstance.sendCommentUnLike(personLike, this.props.match.params.postId)
+
   }
 
   // handleSubmit = e => {
@@ -129,9 +221,21 @@ class SocialComments extends React.Component{
                   <br/>
                   <br/>
                   <br/>
-                  <div class="LikeReplySize">
-                    <i class="far fa-heart" style={{marginRight:'10px'}}></i>
+                  <div
+                     onClick = {() => this.onCommentLike(this.props.match.params.postId,this.props.curId)}
+                    class="LikeReplySize">
+                    <i class="far fa-heart" style={{marginRight:'5px'}}>
+
+                    </i>
+                    {
+                    (item.comment_like_count!=0)?
+                    <span style={{marginRight:'5px'}} class="LikeReplySize">
+                    {item.comment_like_count}
+                    </span>
+                    :''
+                  }
                     Like
+
                     <Divider type="vertical"/>
                     Reply
                   </div>
@@ -156,4 +260,21 @@ class SocialComments extends React.Component{
   }
 }
 
-export default SocialComments;
+const mapStateToProps = state => {
+  return {
+    socialCalCellInfo: state.socialCal.socialCalCellInfo,
+    curId: state.auth.id,
+    curProfilePic: state.auth.profilePic,
+    username: state.auth.username,
+    likeList: state.auth.likeList,
+
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeSocialCalCellPage: () => dispatch(socialCalActions.closeSocialCalCellPage())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SocialComments);
