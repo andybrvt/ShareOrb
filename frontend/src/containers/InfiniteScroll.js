@@ -186,6 +186,11 @@ class InfiniteList extends React.Component {
     if(this.props.socialPosts){
       post = this.props.socialPosts
     }
+
+    let following = []
+    if(this.props.following){
+      following = this.props.following
+    }
     console.log(post)
 
     // {error  && <div>{error}</div>}
@@ -228,9 +233,25 @@ class InfiniteList extends React.Component {
 
 
               <div class="noFollowerText">
-                <div class="loadingNewsFeedMain">
-                <LoadingOutlined style={{ fontSize: 50, color:'#1890ff'}} spin />
-                </div>
+
+                {
+                  following.length === 0 ?
+
+                  <div class = "noFollowerText">
+                    <img src={NoFollowersPic} width="30%"/>
+                     Let's get some more followers!
+                    Follow <a href={`${global.API_ENDPOINT}/explore/pinghsu520`}>@pinghsu520</a>, one of the creators of ShareOrb!
+
+                  </div>
+
+                  :
+
+                  <div class="loadingNewsFeedMain">
+                  <LoadingOutlined style={{ fontSize: 50, color:'#1890ff'}} spin />
+                  </div>
+                }
+
+
               {/*
                 <img src={NoFollowersPic} width="30%"/>
                  Let's get some more followers!
@@ -253,7 +274,8 @@ const mapStateToProps = state => {
     userName: state.auth.username,
     friends: state.auth.friends,
     posts: state.newsfeed.posts,
-    socialPosts: state.socialNewsfeed.socialPosts
+    socialPosts: state.socialNewsfeed.socialPosts,
+    following: state.auth.following,
   }
 }
 
