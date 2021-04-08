@@ -7,7 +7,6 @@ import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
 import './SocialCalCSS/SocialCellPage.css';
 import * as dateFns from 'date-fns';
 import {Link, withRouter} from 'react-router-dom';
-
 const { TextArea } = Input;
 
 class SocialComments extends React.Component{
@@ -129,7 +128,9 @@ class SocialComments extends React.Component{
                   <br/>
                   <br/>
                   <br/>
-                  <div class="LikeReplySize">
+                  <div
+                     onClick = {() => this.onCommentLike(this.props.match.params.postId,this.props.curId)}
+                    class="LikeReplySize">
                     <i class="far fa-heart" style={{marginRight:'10px'}}></i>
                     Like
                     <Divider type="vertical"/>

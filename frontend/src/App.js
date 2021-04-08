@@ -137,7 +137,9 @@ class App extends Component {
     UserPostPageWebSocketInstance.addCallbacks(
       this.props.loadPost.bind(this),
       this.props.sendUserPostLikeUnlike.bind(this),
-      this.props.sendUserPostComment.bind(this)
+      // this.props.sendUserPostComment.bind(this),
+      // this.props.sendCommentLike.bind(this),
+      // this.props.sendCommentUnLike.bind(this)
     )
 
     NewChatWebSocketInstance.addCallbacks(

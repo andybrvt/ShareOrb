@@ -418,6 +418,22 @@ class SocialCapUploadNewsfeed(APIView):
         return Response(content)
         # return Response("hi this stuff")
 
+
+class AddOneLikeToComment(APIView):
+    def post(self, request, id, *args, **kwargs):
+        # grabs post based off of id in newsfeed
+        grabComment= models.Comment.objects.get(id=id)
+        if(grabComment.comment_like_condition==False):
+            grabComment.comment_like_count+=1
+            grabComment.comment_like_condition=True
+        else:
+            grabComment.comment_like_count-=1
+            grabComment.comment_like_condition=False
+
+        grabComment.save()
+        return Response('View post in console')
+
+
 def is_there_more_data(start):
     # This function will check if there are more post to load up
     if(int(start)> models.SocialCellEventPost.objects.all().count()):

@@ -47,6 +47,7 @@ urlpatterns = [
 
 
 	path('add-like/<slug:id>/', views.AddOneLikeToPost.as_view(), name='curr post'),
+	path('add-like-comment/<slug:id>/', views.AddOneLikeToComment.as_view(), name='curr post'),
 	path('notifications/delete/<slug:id>', views.onDeleteNotification.as_view(), name='delete notification'),
 
 

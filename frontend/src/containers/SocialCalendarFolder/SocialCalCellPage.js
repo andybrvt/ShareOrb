@@ -262,6 +262,21 @@ class SocialCalCellPage extends React.Component{
      SocialCalCellPageWebSocketInstance.sendSocialCalCellUnlike(cellDate, personUnLike, owner)
   }
 
+  onCommentLike = (personLike) => {
+
+    console.log(personLike)
+    SocialCalCellPageWebSocketInstance.sendCommentLike(personLike, this.props.match.params.postId)
+
+  }
+
+  onCommentUnlike = (personLike) => {
+
+    console.log(personLike)
+    SocialCalCellPageWebSocketInstance.sendCommentUnLike(personLike, this.props.match.params.postId)
+
+  }
+
+
   getChatUserName(postOwnerName){
     // This function will show the correct name of the user that you are chatting
     // with

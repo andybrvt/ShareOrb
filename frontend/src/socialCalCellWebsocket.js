@@ -223,6 +223,18 @@ class WebSocketSocialCalCellPage{
 
       this.callbacks['send_social_cal_cell_comment'](socialComment)
     }
+
+    if(command === "send_user_post_like_unlike"){
+      console.log('comment unlike triggered')
+      console.log(parsedData)
+
+    }
+
+    if(command === "send_user_post_like_unlike"){
+      console.log('comment like triggered')
+      console.log(parsedData)
+
+    }
     if(command === "add_user_social_event_M"){
       const socialEventList = parsedData.socialEventList
 
@@ -266,7 +278,9 @@ class WebSocketSocialCalCellPage{
     sendSocialCalCellComment,
     addSocialEventJoinLeave,
     deleteSocialItem,
-    addSocialDayCaption
+    addSocialDayCaption,
+    sendCommentLike,
+    sendCommentUnLike,
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
@@ -274,6 +288,25 @@ class WebSocketSocialCalCellPage{
     this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
     this.callbacks['delete_social_cell_item'] = deleteSocialItem
     this.callbacks['add_social_day_caption'] = addSocialDayCaption
+    this.callbacks['send_comment_like'] = sendCommentLike
+    this.callbacks['unsend_comment_like'] = sendCommentUnLike
+  }
+
+
+  sendCommentLike (socialCalCellId, personLike) {
+    this.sendPostsInfo({
+      socialCalCellId: socialCalCellId,
+      personLike: personLike,
+      command: 'send_comment_like',
+    })
+  }
+
+  sendCommentUnLike(socialCalCellId, personUnlike){
+    this.sendPostsInfo({
+      socialCalCellId: socialCalCellId,
+      personUnlike: personUnlike,
+      command: 'unsend_comment_like',
+    })
   }
 
   sendSocialCalCellInfo(data){
