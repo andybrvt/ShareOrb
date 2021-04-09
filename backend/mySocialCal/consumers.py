@@ -265,6 +265,10 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
 class SocialCalCellConsumer(JsonWebsocketConsumer):
     # This is for the specific cells when you open them up, it will connect to
     # its own cell
+
+    def send_social_cal_cell_comment_like_unlike(self, data):
+        print("hi")
+        print(data)
     def send_fetch_social_cal_cell_info(self, data):
         # This will fetch the information of the cal cell page. It will use
         # the user name and date to filter that event. if there is no event

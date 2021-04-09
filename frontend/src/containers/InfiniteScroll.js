@@ -234,7 +234,7 @@ class InfiniteList extends React.Component {
 
               <div class="noFollowerText">
 
-                {
+                {/*
                   following.length === 0 ?
 
                   <div class = "noFollowerText">
@@ -249,6 +249,7 @@ class InfiniteList extends React.Component {
                   <div class="loadingNewsFeedMain">
                   <LoadingOutlined style={{ fontSize: 50, color:'#1890ff'}} spin />
                   </div>
+                  */
                 }
 
 

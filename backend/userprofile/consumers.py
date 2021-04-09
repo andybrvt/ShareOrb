@@ -1293,10 +1293,6 @@ class UserPostConsumer(JsonWebsocketConsumer):
     # LIKING COMMENTING, CLIPPING AND SUCH LIKE THAT
 
 
-    def send_social_cal_cell_comment_like_unlike(self, data):
-        print("hi")
-        print(data)
-
     def fetch_user_post_info(self, data):
         post = get_object_or_404(Post, id = data['postId'])
         serializedPost = PostSerializer(post).data
