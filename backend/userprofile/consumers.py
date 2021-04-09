@@ -1258,6 +1258,10 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_social_unlike(data)
         if data['command'] == 'send_social_comment':
             self.send_social_comment(data)
+        if data['command'] == 'send_comment_like':
+            self.send_social_comment_like(data)
+        if data['command'] == 'send_comment_unlike':
+            self.send_social_comment_unlike(data)
         if data['command'] == 'create_social_event':
             self.create_social_event(data)
         if data['command'] == 'add_user_social_event':

@@ -441,7 +441,7 @@ const mapDispatchToProps = dispatch => {
     addSocialEventJoinLeaveM: (socialEventList) => dispatch(socialActions.addSocialEventJoinLeaveM(socialEventList)),
     addSocialDayCaption: (socialDayCaption) => dispatch(socialActions.addSocialDayCaption(socialDayCaption)),
     sendSocialEventInvite: (inviteList) => dispatch(socialActions.sendSocialEventInvite(inviteList)),
-    sendSocialCalCellCommentLikeUnlike: (socialCalCellObj) => dispatch(socialActions.sendSocialCalCellCommentLikeUnlike(socialCalCellCommentObj)),
+    sendSocialCalCellCommentLikeUnlike: (socialCalCellCommentObj) => dispatch(socialActions.sendSocialCalCellCommentLikeUnlike(socialCalCellCommentObj)),
   }
 }
 

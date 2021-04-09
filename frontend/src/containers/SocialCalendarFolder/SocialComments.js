@@ -190,15 +190,11 @@ class SocialComments extends React.Component{
                     size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
                 </Link>
               </div>
-
             </div>
             <div class="previewCommentRight">
               <div className = 'newsFeedCommentItem'>
-
               <div className = 'newsFeedCommentTextSect'>
                 <div className = "newsFeedCommentNameTime">
-
-
                     <div className = 'newsFeedCommentName'>
                       <span class="boldedText">
                           {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
@@ -208,11 +204,9 @@ class SocialComments extends React.Component{
                       </div>
                     </div>
                   </div>
-                    <span class="newsfeedCommentUserName">
-                      {"@"+item.commentUser.username}
-                    </span>
-
-
+                  <span class="newsfeedCommentUserName">
+                    {"@"+item.commentUser.username}
+                  </span>
                 <div className = "newsFeedCommentBody">
                   <br/>
                   <div className = 'newsFeedCommentText'>
