@@ -214,27 +214,16 @@ class WebSocketSocialCalCellPage{
       // YOU WILL BE USING THIS FOR BOTH THE LIKING AND UNLIKING
       this.callbacks['send_social_cal_cell_like_unlike'](likeList)
     }
-    if(command === "send_social_cal_cell_comment"){
+    if(command === "send_social_cal_cell_comment_like_unlike"){
       // This will send the comments
 
       // You will just add the comment in at the end
 
       const socialComment = parsedData.socialComment
 
-      this.callbacks['send_social_cal_cell_comment'](socialComment)
+      this.callbacks['send_social_cal_cell_comment_like_unlike'](socialComment)
     }
 
-    if(command === "send_user_post_like_unlike"){
-      console.log('comment unlike triggered')
-      console.log(parsedData)
-
-    }
-
-    if(command === "send_user_post_like_unlike"){
-      console.log('comment like triggered')
-      console.log(parsedData)
-
-    }
     if(command === "add_user_social_event_M"){
       const socialEventList = parsedData.socialEventList
 
@@ -268,10 +257,12 @@ class WebSocketSocialCalCellPage{
       // Add the call back in here
       this.callbacks['fetch_social_cal_cell_info'](socialCalCellObj)
     }
-    if(command === "send_comment_like"){
+    if(command === "send_social_cal_cell_comment_like_unlike"){
       const likeList = parsedData.likeList
       this.callbacks['send_social_cal_cell_comment_like_unlike'](likeList)
     }
+
+
 
 
   }
@@ -292,8 +283,7 @@ class WebSocketSocialCalCellPage{
     this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
     this.callbacks['delete_social_cell_item'] = deleteSocialItem
     this.callbacks['add_social_day_caption'] = addSocialDayCaption
-    this.callbacks['send_comment_like'] = sendCommentLike
-    this.callbacks['unsend_comment_like'] = sendCommentUnLike
+    this.callbacks['send_social_cal_cell_comment_like_unlike'] = sendCommentLike
   }
 
 
@@ -301,17 +291,10 @@ class WebSocketSocialCalCellPage{
     this.sendSocialCalCellInfo({
       socialCalCellId: socialCalCellId,
       personLike: personLike,
-      command: 'send_comment_like',
+      command: 'send_social_cal_cell_comment_like_unlike',
     })
   }
 
-  sendCommentUnLike(socialCalCellId, personUnlike){
-    this.sendSocialCalCellInfo({
-      socialCalCellId: socialCalCellId,
-      personUnlike: personUnlike,
-      command: 'unsend_comment_like',
-    })
-  }
 
   sendSocialCalCellInfo(data){
     //Send stuff in to the back end

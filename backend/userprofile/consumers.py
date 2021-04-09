@@ -1258,10 +1258,9 @@ class ExploreConsumer(JsonWebsocketConsumer):
             self.send_social_unlike(data)
         if data['command'] == 'send_social_comment':
             self.send_social_comment(data)
-        if data['command'] == 'send_comment_like':
-            self.send_social_comment_like(data)
-        if data['command'] == 'send_comment_unlike':
-            self.send_social_comment_unlike(data)
+        if data['command'] == 'send_social_cal_cell_comment_like_unlike':
+            self.send_social_cal_cell_comment_like_unlike(data)
+
         if data['command'] == 'create_social_event':
             self.create_social_event(data)
         if data['command'] == 'add_user_social_event':
@@ -1293,6 +1292,11 @@ class UserPostConsumer(JsonWebsocketConsumer):
     #THIS IS USED FOR THE ALL THE FUNCTION OF THE POST PAGE SUCH AS
     # LIKING COMMENTING, CLIPPING AND SUCH LIKE THAT
 
+
+    def send_social_cal_cell_comment_like_unlike(self, data):
+        print("hi")
+        print(data)
+
     def fetch_user_post_info(self, data):
         post = get_object_or_404(Post, id = data['postId'])
         serializedPost = PostSerializer(post).data
@@ -1300,31 +1304,22 @@ class UserPostConsumer(JsonWebsocketConsumer):
             'command': "user_post",
             'post': serializedPost
         }
-
         self.send_json(content)
 
     def send_user_post_like(self, data):
         post = get_object_or_404(Post, id = data['postId'])
         personLike = get_object_or_404(User, id = data['personLike'])
-
-
         post.people_like.add(personLike)
         post.save()
-
-
         serializedPost = PostSerializer(post).data
         likeList = serializedPost['people_like']
-
         username = serializedPost['user']['username']
-
         recipient = username+"_"+str(serializedPost['id'])
-
         content = {
             'command': 'send_user_post_like_unlike',
             'likeList': likeList,
             'recipient': recipient,
         }
-
         self.send_info_user_post(content)
 
     def send_user_post_unlike(self, data):
