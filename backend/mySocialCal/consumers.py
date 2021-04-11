@@ -268,25 +268,34 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
     def send_social_cal_cell_comment_like_unlike(self, data):
         print(data)
-        # socialComment=socialCalComment.objects.get(
-        #     calCell = data['socialCalCellId']
-        # )
-        socialCell = SocialCalCell.objects.filter(
-            socialCalUser = data['personIDLike'],
-            socialCaldate = data['socialCalCellDate']
-        )
-        print(socialCell)
-        personComment=get_object_or_404(SocialCalComment, calCell=socialCell)
-        # personComment=SocialCalComment.objects.filter(body='b')
 
-        print(personComment)
-        #
-        # socialCell = get_object_or_404(SocialCalCell,
-        #     socialCalUser = calOwner,
-        #     socialCaldate = data['cellDate']
-        # )
+        socialCell=get_object_or_404(SocialCalCell, id= data['socialCalCellID'])
 
+        personComment=get_object_or_404(SocialCalComment,id=data['commentID'])
+        calOwner = get_object_or_404(User, id = data['personIDLike'])
+        print(calOwner)
+        personComment.comment_like_count+=1
+        personComment.save()
         print(personComment)
+
+        dateList = data['socialCalCellDate'].split("-")
+        print(dateList)
+        username = calOwner.username
+
+        socialCalCommentObj = SocialCalCommentSerializer(personComment).data
+        print(socialCalCommentObj)
+        recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
+
+        content = {
+            'command': 'send_social_cal_cell_comment_like_unlike',
+            'socialCalComment': socialCalCommentObj,
+            'recipient': recipient
+        }
+        self.send_info_cal_cell(content)
+
+
+
+
     def send_fetch_social_cal_cell_info(self, data):
         # This will fetch the information of the cal cell page. It will use
         # the user name and date to filter that event. if there is no event
@@ -370,7 +379,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
                 'command': 'fetch_social_cal_cell_info',
                 'socialCalCell': socialCalCellObj,
                 'recipient': recipient
-            }
+        }
 
 
         self.send_info_cal_cell(content)

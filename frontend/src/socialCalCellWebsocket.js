@@ -282,10 +282,11 @@ class WebSocketSocialCalCellPage{
   }
 
 
-  sendCommentLike (socialCalCellDate, cellID, personIDLike) {
+  sendCommentLike (socialCalCellDate, socialCalCellID, commentID, personIDLike) {
     this.sendSocialCalCellInfo({
       socialCalCellDate: socialCalCellDate,
-      cellID:cellID,
+      socialCalCellID:socialCalCellID,
+      commentID:commentID,
       personIDLike: personIDLike,
       command: 'send_social_cal_cell_comment_like_unlike',
     })

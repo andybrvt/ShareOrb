@@ -407,7 +407,6 @@ class SocialCalComment(models.Model):
     created_on = models.DateTimeField(auto_now_add = True)
     commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'socialUserComment', on_delete = models.CASCADE, null = True )
     comment_like_count = models.IntegerField(default=0, blank = True)
-    comment_like_condition = models.BooleanField(default=False, db_index=True)
     comment_people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='commenPeopleList', blank = True)
 
 # This is for the new newsfeed modal that would hold all the social cal cell

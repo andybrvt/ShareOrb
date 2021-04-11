@@ -98,9 +98,9 @@ class SocialComments extends React.Component{
     this.props.closeSocialCalCellPage();
   }
 
-  onCommentLike = (socialCalCellDate, cellID, personIDLike) => {
-    console.log(socialCalCellDate, cellID, personIDLike)
-    SocialCalCellPageWebSocketInstance.sendCommentLike(socialCalCellDate, cellID, personIDLike)
+  onCommentLike = (socialCalCellDate, cellID, commentID, personIDLike) => {
+    console.log(socialCalCellDate, cellID, commentID, personIDLike)
+    SocialCalCellPageWebSocketInstance.sendCommentLike(socialCalCellDate, cellID, commentID, personIDLike)
 
   }
 
@@ -218,6 +218,7 @@ class SocialComments extends React.Component{
                      onClick = {() => this.onCommentLike(
                        this.props.socialCalCellInfo.socialCaldate,
                        this.props.socialCalCellInfo.id,
+                       item.id,
                        this.props.curUser,
                      )}
                     class="LikeReplySize">

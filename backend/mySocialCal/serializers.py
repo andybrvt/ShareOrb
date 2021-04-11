@@ -143,8 +143,6 @@ class SocialEventMessagesSerializer(serializers.ModelSerializer):
         return data
 
 class SocialCalCommentSerializer (serializers.ModelSerializer):
-
-
     class Meta:
         model = models.SocialCalComment
         fields = ('id','body', 'created_on', 'commentUser', "comment_like_count", "comment_people_like" )
