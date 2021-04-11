@@ -142,7 +142,6 @@ class WebSocketUserPostPage{
     fetchUserPostInfo,
     sendUserPostLikeUnlike,
     sendUserPostComment,
-    sendCommentLike,
     sendCommentUnLike,
   ){
     this.callbacks['fetch_user_post_info'] = fetchUserPostInfo

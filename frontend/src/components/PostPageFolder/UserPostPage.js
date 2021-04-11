@@ -141,19 +141,6 @@ class UserPostPage extends React.Component{
     UserPostPageWebSocketInstance.sendUserPostUnlike(personUnlike, this.props.match.params.postId)
   }
 
-  onCommentLike = (personLike) => {
-
-    console.log(personLike)
-    UserPostPageWebSocketInstance.sendCommentLike(personLike, this.props.match.params.postId)
-
-  }
-
-  onCommentUnlike = (personLike) => {
-
-    console.log(personLike)
-    UserPostPageWebSocketInstance.sendCommentUnLike(personLike, this.props.match.params.postId)
-
-  }
 
   onCurPhotoChange = (picIndex) => {
     // This will be used for clipping

@@ -267,8 +267,26 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
     # its own cell
 
     def send_social_cal_cell_comment_like_unlike(self, data):
-        print("hi")
         print(data)
+        # socialComment=socialCalComment.objects.get(
+        #     calCell = data['socialCalCellId']
+        # )
+        socialCell = SocialCalCell.objects.filter(
+            socialCalUser = data['personIDLike'],
+            socialCaldate = data['socialCalCellDate']
+        )
+        print(socialCell)
+        personComment=get_object_or_404(SocialCalComment, calCell=socialCell)
+        # personComment=SocialCalComment.objects.filter(body='b')
+
+        print(personComment)
+        #
+        # socialCell = get_object_or_404(SocialCalCell,
+        #     socialCalUser = calOwner,
+        #     socialCaldate = data['cellDate']
+        # )
+
+        print(personComment)
     def send_fetch_social_cal_cell_info(self, data):
         # This will fetch the information of the cal cell page. It will use
         # the user name and date to filter that event. if there is no event

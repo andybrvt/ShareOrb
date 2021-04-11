@@ -218,10 +218,8 @@ class WebSocketSocialCalCellPage{
       // This will send the comments
 
       // You will just add the comment in at the end
+      console.log("hitting this like")
 
-      const socialComment = parsedData.socialComment
-
-      this.callbacks['send_social_cal_cell_comment_like_unlike'](socialComment)
     }
 
     if(command === "add_user_social_event_M"){
@@ -274,8 +272,6 @@ class WebSocketSocialCalCellPage{
     addSocialEventJoinLeave,
     deleteSocialItem,
     addSocialDayCaption,
-    sendCommentLike,
-    sendCommentUnLike,
   ){
     this.callbacks['fetch_social_cal_cell_info'] = fetchSocialCalCellInfo
     this.callbacks['send_social_cal_cell_like_unlike'] = sendSocialCalCellLikeUnlike
@@ -283,14 +279,14 @@ class WebSocketSocialCalCellPage{
     this.callbacks['add_social_event_join_leave_M'] = addSocialEventJoinLeave
     this.callbacks['delete_social_cell_item'] = deleteSocialItem
     this.callbacks['add_social_day_caption'] = addSocialDayCaption
-    this.callbacks['send_social_cal_cell_comment_like_unlike'] = sendCommentLike
   }
 
 
-  sendCommentLike (socialCalCellId, personLike) {
+  sendCommentLike (socialCalCellDate, cellID, personIDLike) {
     this.sendSocialCalCellInfo({
-      socialCalCellId: socialCalCellId,
-      personLike: personLike,
+      socialCalCellDate: socialCalCellDate,
+      cellID:cellID,
+      personIDLike: personIDLike,
       command: 'send_social_cal_cell_comment_like_unlike',
     })
   }
