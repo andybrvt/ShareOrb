@@ -12,6 +12,7 @@ from .serializers import FollowSerializer
 from .serializers import FollowUserSerializer
 from .serializers import UserSocialEventSerializer
 from .serializers import UserExploreSerializer
+from .serializers import UserExploreMobileSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -817,6 +818,19 @@ class ExploreConsumer(JsonWebsocketConsumer):
         }
         self.send_json(content)
 
+    def fetch_profile_mobile(self, data):
+        # This function will be similar to that of the fetch_profile but
+        # for run time sake you will just be grabing information of the user and
+        # not that of the social calendar, pretty much just change the serializers
+        profile = get_object_or_404(User, username= data['username'])
+        serializer = UserExploreMobileSerializer(profile).data
+
+        content = {
+            'command': 'user_profile',
+            'profile': json.dumps(serializer)
+        }
+
+        self.send_json(content)
 
     def edit_profile(self, data):
         # This function will grab the current user that wants to change the
@@ -1246,6 +1260,11 @@ class ExploreConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == 'fetch_profile':
             self.fetch_profile(data)
+        if data['command'] == 'fetch_profile_mobile':
+            # this will be used for the mobile version of the phone
+            # whewre you just want to grab the users information and not
+            # any social calendar infomation
+            self.fetch_profile_mobile(data)
         if data['command'] == 'send_following':
             self.send_following(data)
         if data['command'] == 'send_unfollowing':

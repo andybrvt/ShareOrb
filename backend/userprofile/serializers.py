@@ -172,6 +172,65 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_follow_request'] = requestList
         return data
 
+class UserExploreMobileSerializer(serializers.ModelSerializer):
+    # This fucntion will be used to serialzie the user profile on mobile
+    get_following = serializers.StringRelatedField(many = True)
+    get_followers = serializers.StringRelatedField(many = True)
+    get_sent_follow_request = serializers.StringRelatedField(many = True)
+    get_follow_request = serializers.StringRelatedField(many = True)
+
+    class Meta:
+        model = models.User
+        fields = (
+         'id',
+         'username',
+         'first_name',
+         'last_name',
+         'bio',
+         'profile_picture',
+         'get_following',
+         'get_followers',
+         'phone_number',
+         'email',
+         'dob',
+         'private',
+         'requested',
+         'get_sent_follow_request',
+         'get_follow_request',
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        followerList = []
+        followingList = []
+        sentRequestList = []
+        requestList = []
+
+        for user in data['get_following']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followingList.append(userPerson)
+
+        for user in data['get_followers']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            followerList.append(userPerson)
+
+        for user in data['get_sent_follow_request']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            sentRequestList.append(userPerson)
+
+        for user in data['get_follow_request']:
+            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+            requestList.append(userPerson)
+
+
+
+        data['get_following'] = followingList
+        data['get_followers'] = followerList
+        data['get_sent_follow_request'] = sentRequestList
+        data['get_follow_request'] = requestList
+
+        return data
+
 class UserExploreSerializer(serializers.ModelSerializer):
     # This function will be used to serialize the user profile, this will help
     # with the run time. Since the user profile you dont need that much, only
