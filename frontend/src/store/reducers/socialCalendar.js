@@ -58,11 +58,20 @@ const sendSocialCalCellLikeUnlike = (state, action) => {
 
 const sendSocialCalCellCommentLikeUnlike = (state, action) => {
   // IMPROVED
+  console.log(state.socialCalCellInfo)
   return updateObject(state, {
     socialCalCellInfo: {
-      ...state.socialCalCellCommentObj,
-    
+      ...state.socialCalCellInfo,
+      get_socialCalComment:state.socialCalCellInfo.get_socialCalComment.map(
+          currComment => currComment.id === action.socialCalCellCommentObj.id ? {
+           ...action.socialCalCellCommentObj
+          }
+          :currComment
+      )
+
     }
+
+
   })
 }
 

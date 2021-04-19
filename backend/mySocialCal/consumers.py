@@ -717,6 +717,8 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_social_cal_cell_unlike(data)
         if data['command'] == 'send_social_cal_cell_comment':
             self.send_social_cal_cell_comment(data)
+        if data['command'] == 'send_social_cal_cell_comment_like_unlike':
+            self.send_social_cal_cell_comment_like_unlike(data)
         if data['command'] == 'add_user_social_event_M':
             self.add_user_social_event_M(data)
         if data['command'] == 'remove_user_social_event_M':
@@ -727,8 +729,7 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
             self.send_social_day_caption(data)
         if data['command'] == 'delete_social_cell_day':
             self.delete_social_cell_day(data)
-        if data['command'] == 'send_social_cal_cell_comment_like_unlike':
-            self.send_social_cal_cell_comment_like_unlike(data)
+
 
     def new_social_cal_cell_action(self, action):
         socialCalCellObj = action['socialCalAction']
