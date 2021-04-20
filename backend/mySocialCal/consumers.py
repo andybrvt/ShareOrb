@@ -268,15 +268,17 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
     def send_social_cal_cell_comment_like_unlike(self, data):
         print(data)
-
         socialCell=get_object_or_404(SocialCalCell, id= data['socialCalCellID'])
-
         personComment=get_object_or_404(SocialCalComment,id=data['commentID'])
         calOwner = get_object_or_404(User, id = data['personIDLike'])
         print(calOwner)
-        personComment.comment_like_count+=1
+        if  personComment.comment_people_like.filter(id=data['personIDLike']).exists():
+            personComment.comment_like_count-=1
+            personComment.comment_people_like.remove(calOwner)
+        else:
+            personComment.comment_like_count+=1
+            personComment.comment_people_like.add(calOwner)
         personComment.save()
-        print(personComment)
 
         dateList = data['socialCalCellDate'].split("-")
         print(dateList)

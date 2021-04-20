@@ -168,6 +168,7 @@ class SocialComments extends React.Component{
 
   render() {
     console.log(this.props)
+    console.log(this.props.items)
     console.log(this.state)
 
     return (
@@ -214,25 +215,32 @@ class SocialComments extends React.Component{
                   <br/>
                   <br/>
                   <br/>
-                  <div
-                     onClick = {() => this.onCommentLike(
-                       this.props.socialCalCellInfo.socialCaldate,
-                       this.props.socialCalCellInfo.id,
-                       item.id,
-                       this.props.curUser,
-                     )}
-                    class="LikeReplySize">
-                    <i class="far fa-heart" style={{marginRight:'5px'}}>
+                  <div class="LikeReplySize">
+                    <span
+                      onClick = {() => this.onCommentLike(
+                        this.props.socialCalCellInfo.socialCaldate,
+                        this.props.socialCalCellInfo.id,
+                        item.id,
+                        this.props.curUser,
+                      )}
+                      >
 
-                    </i>
-                    {
-                    (item.comment_like_count!=0)?
-                    <span style={{marginRight:'5px'}} class="LikeReplySize">
-                    {item.comment_like_count}
+                      {(item.comment_people_like.includes(this.props.curId))?
+                        <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
+
+                        :
+                          <i class="far fa-heart" style={{marginRight:'5px'}}></i>
+                      }
+                      {
+                        (item.comment_like_count!=0)?
+                        <span style={{marginRight:'5px'}} class="LikeReplySize">
+                        {item.comment_like_count}
+                        </span>
+                        :''
+                      }
+                      Like
+
                     </span>
-                    :''
-                  }
-                    Like
 
                     <Divider type="vertical"/>
                     Reply
