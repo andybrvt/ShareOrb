@@ -270,19 +270,19 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         print(data)
         socialCell=get_object_or_404(SocialCalCell, id= data['socialCalCellID'])
         personComment=get_object_or_404(SocialCalComment,id=data['commentID'])
-        calOwner = get_object_or_404(User, id = data['personIDLike'])
-        print(calOwner)
+        personLiking = get_object_or_404(User, id = data['personIDLike'])
+        print(personLiking)
         if  personComment.comment_people_like.filter(id=data['personIDLike']).exists():
             personComment.comment_like_count-=1
-            personComment.comment_people_like.remove(calOwner)
+            personComment.comment_people_like.remove(personLiking)
         else:
             personComment.comment_like_count+=1
-            personComment.comment_people_like.add(calOwner)
+            personComment.comment_people_like.add(personLiking)
         personComment.save()
 
         dateList = data['socialCalCellDate'].split("-")
         print(dateList)
-        username = calOwner.username
+        username = personLiking.username
 
         socialCalCommentObj = SocialCalCommentSerializer(personComment).data
         print(socialCalCommentObj)

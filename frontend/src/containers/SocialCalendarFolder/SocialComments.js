@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Comment, Tooltip, List, Divider, Avatar, Input, Form, Button, Empty} from 'antd';
+import { Comment, Tooltip, List, Divider, Avatar, Input, Modal, Form, Button, Empty} from 'antd';
 import { SendOutlined  } from '@ant-design/icons';
 import ExploreWebSocketInstance from '../../exploreWebsocket';
 import SocialCalCellPageWebSocketInstance from '../../socialCalCellWebsocket';
@@ -9,19 +9,32 @@ import * as dateFns from 'date-fns';
 import {Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as socialCalActions  from '../../store/actions/socialCalendar';
-
+import LikeCommentList from './LikeCommentList';
 const { TextArea } = Input;
 
 class SocialComments extends React.Component{
 
   state = {
-    comment: ''
+    comment: '',
+    testLike: false,
   }
 
   componentDidMount() {
     this.initialisePage()
   }
 
+  changeLikeListCondition = () => {
+    this.setState({
+      testLike: true,
+    });
+  }
+
+  handleCancel = e => {
+    this.setState({
+      visibleModal: false,
+      testLike:false,
+    });
+  };
 
   capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -173,95 +186,102 @@ class SocialComments extends React.Component{
 
     return (
       <div className = 'socialCommentBoxBox'>
-      <div className = 'socialCommentBox'>
-      <List
-        style={{marginLeft:'5px', marginTop:'5px', marginBottom:'10px' }}
-        locale={{emptyText:<span/>}}
-        className="comment-list"
-        itemLayout="horizontal"
-        dataSource={this.props.items}
-        renderItem={item => (
+        <div className = 'socialCommentBox'>
+          <List
+            style={{marginLeft:'5px', marginTop:'5px', marginBottom:'10px' }}
+            locale={{emptyText:<span/>}}
+            className="comment-list"
+            itemLayout="horizontal"
+            dataSource={this.props.items}
+            renderItem={item => (
 
-          <div class="previewCommentMain">
-            <div class="previewCommentLeft">
-              <div className = "newsFeedCommentAvatarSect">
-                <Link to={"/explore/"+item.commentUser.username} >
-                  <Avatar
-                    size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
-                </Link>
-              </div>
-            </div>
-            <div class="previewCommentRight">
-              <div className = 'newsFeedCommentItem'>
-              <div className = 'newsFeedCommentTextSect'>
-                <div className = "newsFeedCommentNameTime">
-                    <div className = 'newsFeedCommentName'>
-                      <span class="boldedText">
-                          {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
-                      </span>
-                      <div className = 'newsFeedCommentDate'>
-                      {this.renderTimestamp(new Date(item.created_on))}
-                      </div>
-                    </div>
-                  </div>
-                  <span class="newsfeedCommentUserName">
-                    {"@"+item.commentUser.username}
-                  </span>
-                <div className = "newsFeedCommentBody">
-                  <br/>
-                  <div className = 'newsFeedCommentText'>
-                    {item.body}
-                  </div>
-                  <br/>
-                  <br/>
-                  <br/>
-                  <div class="LikeReplySize">
-                    <span
-                      onClick = {() => this.onCommentLike(
-                        this.props.socialCalCellInfo.socialCaldate,
-                        this.props.socialCalCellInfo.id,
-                        item.id,
-                        this.props.curUser,
-                      )}
-                      >
-
-                      {(item.comment_people_like.includes(this.props.curId))?
-                        <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
-
-                        :
-                          <i class="far fa-heart" style={{marginRight:'5px'}}></i>
-                      }
-                      {
-                        (item.comment_like_count!=0)?
-                        <span style={{marginRight:'5px'}} class="LikeReplySize">
-                        {item.comment_like_count}
-                        </span>
-                        :''
-                      }
-                      Like
-
-                    </span>
-
-                    <Divider type="vertical"/>
-                    Reply
+              <div class="previewCommentMain">
+                <Modal title="Basic Modal" visible={this.state.testLike} onCancel={this.handleCancel}>
+                <LikeCommentList data={item}/>
+              </Modal>
+                <div class="previewCommentLeft">
+                  <div className = "newsFeedCommentAvatarSect">
+                    <Link to={"/explore/"+item.commentUser.username} >
+                      <Avatar
+                        size = {30} src = {`${global.IMAGE_ENDPOINT}`+item.commentUser.profile_picture} />
+                    </Link>
                   </div>
                 </div>
+                <div class="previewCommentRight">
+                  <div className = 'newsFeedCommentItem'>
+                  <div className = 'newsFeedCommentTextSect'>
+                    <div className = "newsFeedCommentNameTime">
+                        <div className = 'newsFeedCommentName'>
+                          <span class="boldedText">
+                              {this.nameShortener(this.capitalize(item.commentUser.first_name), this.capitalize(item.commentUser.last_name))}
+                          </span>
+                          <div className = 'newsFeedCommentDate'>
+                          {this.renderTimestamp(new Date(item.created_on))}
+                          </div>
+                        </div>
+                      </div>
+                      <span class="newsfeedCommentUserName">
+                        {"@"+item.commentUser.username}
+                      </span>
+                    <div className = "newsFeedCommentBody">
+                      <br/>
+                      <div className = 'newsFeedCommentText'>
+                        {item.body}
+                      </div>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <div class="LikeReplySize">
+                        <span>
+                          <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+                            {
+                              (item.comment_people_like.includes(this.props.curId))?
+                              <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
 
+                              :
+                                <i class="far fa-heart" style={{marginRight:'5px'}}></i>
+                            }
+                            {
+                              (item.comment_like_count!=0)?
+                              <span style={{marginRight:'5px'}} class="LikeReplySize">
+                                {item.comment_like_count}
+                              </span>
+                              :
+                              ''
+                            }
+                          </span>
+                          {/*Like button click*/}
+                          <span onClick = {() => this.onCommentLike(
+                            this.props.socialCalCellInfo.socialCaldate,
+                            this.props.socialCalCellInfo.id,
+                            item.id,
+                            this.props.curUser,
+                          )}>
+                            Like
+                          </span>
+
+                        </span>
+
+                        <Divider type="vertical"/>
+                        Reply
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+
+                </div>
+
+                </div>
 
               </div>
+            )}
+          />
+        </div>
 
-
-
-            </div>
-
-            </div>
-
-          </div>
-        )}
-      />
       </div>
-
-    </div>
     )
   }
 }
