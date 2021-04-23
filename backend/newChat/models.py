@@ -1,6 +1,6 @@
 from django.db import models
 from userprofile.models import User
-from mycalendar.models import Event
+# from mycalendar.models import Event
 from django.conf import settings
 from django.utils import timezone
 import datetime
@@ -69,7 +69,7 @@ class Message(models.Model):
     # This will be a foriegnkey that attaches an event to it
     # It will be null if there is not event attached to it
     # link it to an event object
-    attachedEvent = models.ForeignKey(Event, null = True, related_name = "event_message", on_delete = models.CASCADE)
+    # attachedEvent = models.ForeignKey(Event, null = True, related_name = "event_message", on_delete = models.CASCADE)
 
     class Meta:
         ordering = ['-created_at']
