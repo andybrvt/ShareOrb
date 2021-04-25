@@ -133,7 +133,7 @@ DATABASES = {
         'NAME': 'ebdb',
         'USER': 'shareorbDB',
         'PASSWORD': 'Pingandy123',
-        'HOST': 'aa18anv5ncjy6o7.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'HOST': 'aaws2efgmy63yt.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
