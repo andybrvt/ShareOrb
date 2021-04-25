@@ -125,7 +125,22 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
+# v2 db
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ebdb',
+        'USER': 'shareorbDB',
+        'PASSWORD': 'Pingandy123',
+        'HOST': 'aaws2efgmy63yt.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
+
+
+
 # if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
+<<<<<<< HEAD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -136,6 +151,33 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+=======
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ebdb',
+#         'USER': 'shareorbDB',
+#         'PASSWORD': 'Pingandy123',
+#         'HOST': 'aasvdqwumvx57q.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
+# else:
+# DATABASES = {
+#     'default': {
+#                 # 'ENGINE': 'django.db.backends.sqlite3',
+#                 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'test',
+#         'USER': 'root',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+#         'PORT': '',
+#     },
+# }
+>>>>>>> 067cbc4f79800c7c0cc5d39e29fee104cfbe23d9
 
 # else:
 # DATABASES = {
