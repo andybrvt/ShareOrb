@@ -199,7 +199,6 @@ class WebSocketSocialCalCellPage{
     if(command === 'fetch_social_cal_cell_info'){
       // This will load up the information for the social cal cell page
       const socialCalCellObj = parsedData.socialCalCell
-
       // Add the call back in here
       this.callbacks['fetch_social_cal_cell_info'](socialCalCellObj)
 
@@ -213,6 +212,16 @@ class WebSocketSocialCalCellPage{
 
       // YOU WILL BE USING THIS FOR BOTH THE LIKING AND UNLIKING
       this.callbacks['send_social_cal_cell_like_unlike'](likeList)
+    }
+
+    if(command === "send_social_cal_cell_comment"){
+      // This will send the comments
+
+      // You will just add the comment in at the end
+
+      const socialComment = parsedData.socialComment
+
+      this.callbacks['send_social_cal_cell_comment'](socialComment)
     }
 
     if(command === "send_social_cal_cell_comment_like_unlike"){
