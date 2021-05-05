@@ -233,7 +233,7 @@ class SocialComments extends React.Component{
                       <br/>
                       <div class="LikeReplySize">
                         <span>
-                          <span class="LikeCommentHover" onClick={this.changeLikeListCondition}>
+                          <span class="LikeCommentHover" onClick={(item.comment_like_count>0)?this.changeLikeListCondition:''}>
                             {
                               (item.comment_people_like.includes(this.props.curId))?
                               <i class="fas fa-heart" style={{marginRight:'5px', color:'red'}}></i>
