@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 
 
+// This function is the box that shows the posting so you
+//l when you click on it it will open up a modal that lets you post
+// pictures
+
 class NewsfeedButtonContainer extends React.Component{
 
   capitalize (str) {
