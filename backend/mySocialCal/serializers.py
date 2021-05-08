@@ -1,6 +1,8 @@
 from . import models
 from rest_framework import serializers
 from userprofile.models import User
+from drf_extra_fields.fields import Base64ImageField
+
 
 class SocialCalCellSerializer(serializers.ModelSerializer):
 
@@ -87,7 +89,7 @@ class SocialCalUserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
 
 class SocialCalItemsSerializer(serializers.ModelSerializer):
-
+    itemImage = Base64ImageField()
 
     class Meta:
         model = models.SocialCalItems

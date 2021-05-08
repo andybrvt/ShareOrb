@@ -324,7 +324,6 @@ class DeleteSocialEventView(generics.RetrieveDestroyAPIView):
     lookup_field = "id"
     queryset = models.SocialCalEvent.objects.all()
 
-
 class SocialCapUploadNewsfeed(APIView):
     # This function will be used in the newsfeed part where you will upload a
     # caption and Pictures
@@ -527,7 +526,7 @@ class exploreSocialCellDay(APIView):
 
     # We will be using a get function (for now just pull all the social cal cell)
     def get(self, request, *args, **kwargs):
-    
+
 
         cells = models.SocialCalCell.objects.all()
         print(cells)
