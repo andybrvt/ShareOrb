@@ -29,6 +29,7 @@ DEBUG = True
 #  '172.31.4.121',
 #  'api.shareorb.com',
 #  'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+#  "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
 #  '54.183.46.151',
 #  '127.0.0.1:5000',
 #  '52.8.250.165',
@@ -41,7 +42,7 @@ ALLOWED_HOSTS = [
     "10.3.0.116",
     "192.168.1.200",
     "172.20.10.2",
-
+    "10.143.167.43"
 ]
 
 
@@ -138,6 +139,20 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 
 
+
+# if 'aaotw5bj0aq6b7.cyxbd89sft5i.us-west-1.rds.amazonaws.com' in os.environ:
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ebdb',
+#         'USER': 'shareorbDB',
+#         'PASSWORD': 'Pingandy123',
+#         'HOST': 'aaws2efgmy63yt.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
+
 # else:
 DATABASES = {
     'default': {
@@ -152,7 +167,6 @@ DATABASES = {
         'PORT': '',
     },
 }
-
 
 
 # AWS EB Settings

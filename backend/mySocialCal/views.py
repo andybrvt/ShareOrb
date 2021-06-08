@@ -324,7 +324,6 @@ class DeleteSocialEventView(generics.RetrieveDestroyAPIView):
     lookup_field = "id"
     queryset = models.SocialCalEvent.objects.all()
 
-
 class SocialCapUploadNewsfeed(APIView):
     # This function will be used in the newsfeed part where you will upload a
     # caption and Pictures
@@ -496,5 +495,43 @@ class grabSocialCellRangeView(APIView):
         # now we will serialize it and then return it
         # make sure to use the smaller serialzier
         serializedCells = serializers.SocialCalCellMiniSerializer(filterSocialCell, many = True).data
+
+        return Response(serializedCells)
+
+
+# STILL NEED MORE WORK BUT TEMP
+# sicne we are gonna make a trending page, we ened a function that can just get the
+# social cal cell evnet post for now  --> but since you are just doing the trending
+# day we will just pull the soical cal cell post
+class trendingSocialCellDay(APIView):
+    # We will be using a get function (for now just pull all the social cal cell)
+    def get(self, request, *args, **kwargs):
+        # Sicne you are gonna do authaxios so the user would already be included
+        # in the header, you might not even need the user (eventually we are gonna
+        #  have algorhims in place to see what people like but now its just general)
+
+
+        cells = models.SocialCalCell.objects.all()
+        print(cells)
+        # Now we will just serialize it, just the cover pic should be good enough
+
+        serializedCells = serializers.SocialCalCellMiniSerializer(cells, many = True).data
+
+        return Response(serializedCells)
+
+# STILL NEEED MORE WORK BUT TEMP
+# This will be used to get random day from random people, so I have to figure out
+# how to grab random people's social cal cell and then just return it
+class exploreSocialCellDay(APIView):
+
+    # We will be using a get function (for now just pull all the social cal cell)
+    def get(self, request, *args, **kwargs):
+
+
+        cells = models.SocialCalCell.objects.all()
+        print(cells)
+        # Now we will just serialize it, just the cover pic should be good enough
+
+        serializedCells = serializers.SocialCalCellMiniSerializer(cells, many = True).data
 
         return Response(serializedCells)

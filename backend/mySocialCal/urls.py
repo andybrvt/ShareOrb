@@ -17,5 +17,8 @@ urlpatterns = [
     path("updateCurSocialCell/<slug:id>", views.SocialCapUploadNewsfeed.as_view(), name= "update_cur_social_cal_cell"),
     path("infiniteSocial/<int:start>/<int:addMore>", views.loadSocialPostView.as_view(), name = "infinite_social"),
     path("add-like-comment/<slug:id>/", views.AddOneLikeToComment.as_view(), name='curr post'),
-    path("filterCells/<str:start>/<str:end>", views.grabSocialCellRangeView.as_view(), name = "filter social cell")
+    path("filterCells/<str:start>/<str:end>", views.grabSocialCellRangeView.as_view(), name = "filter social cell"),
+    path("trendingDay", views.trendingSocialCellDay.as_view(), name = "trending_day"),
+    path("exploreDay", views.exploreSocialCellDay.as_view(), name = "explore_day")
+
 ]
