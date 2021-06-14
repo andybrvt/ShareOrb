@@ -418,7 +418,6 @@ class SocialNewsfeedFormPost extends React.Component{
           // This is if there are socialcalcellitems to post
           if( res.data.coverPicChange){
 
-            console.log("there is a cover pic change")
             const coverPicForm = new FormData()
             // Put the id of the cell in first so you can find it later
             coverPicForm.append("cellId", res.data.cell.id)
@@ -623,7 +622,7 @@ class SocialNewsfeedFormPost extends React.Component{
            </Button>
           </Modal>
 
-      
+
       </div>
     );
     }

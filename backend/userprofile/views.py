@@ -141,8 +141,6 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    print('getting the token')
-    print(request.auth)
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
 
@@ -150,7 +148,6 @@ def current_user(request):
 class GrabCurrentUser(APIView):
     # Attempt the grab the current user
     def get(self, request,*args, **kwargs):
-        print(self.request.user)
         serializer = serializers.UserSerializer(self.request.user)
         return Response(serializer.data)
 
@@ -471,8 +468,6 @@ class loadMoreSuggestedView(generics.ListAPIView):
             list.append(i)
         list.append(self.request.user)
 
-        print("show request")
-        print(self.request.GET.get("start"))
         start = int(self.request.GET.get("start"))
         end = start + int(self.request.GET.get("end"))
 
@@ -811,7 +806,6 @@ class unShowIntialInstructions(APIView):
 class resetNotificationSeen(APIView):
     # This function will be used to reset the notification see of a user
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         curUser = get_object_or_404(models.User, id = request.data['curId'])
 
@@ -826,7 +820,6 @@ class onClearNotification(APIView):
     # For this one you just have to filter out all the notification and then delete
     # all of them
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         curUser = get_object_or_404(models.User, id = request.data['userId'])
 
@@ -846,7 +839,6 @@ class UserSearchView(APIView):
     def get(self, request, *args, **kwargs):
         # You will first grab all the users, now that you can grb the
         # search value
-        print(request.GET.get('search'))
         search = request.GET.get("search")
         qs = models.User.objects.all()
 
@@ -870,7 +862,6 @@ class UserChatSearchView(APIView):
         # First grab the user
         search = request.GET.get("search")
         choosen = request.GET.getlist("choosen[]")
-        print(choosen)
         userFollowing = self.request.user.get_following()
         # Now grab the users and then start filtering out the people
         #  and then do a search on that filter objects
@@ -880,7 +871,5 @@ class UserChatSearchView(APIView):
 
         filterFollowing = following.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
 
-        print(search)
-        print(filterFollowing)
         serializedFollowing = serializers.FollowUserSerializer(filterFollowing, many = True).data
         return Response(serializedFollowing)

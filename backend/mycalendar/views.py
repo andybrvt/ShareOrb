@@ -68,7 +68,6 @@ class CalendarEventsView(generics.ListAPIView):
     # inside the personal calendar
     serializer_class = serializers.EventSerializer
     def get_queryset(self):
-        print(self.request)
         user = self.request.user
         queryset = models.Event.objects.filter(person = user).order_by('start_time')
         return queryset
@@ -77,10 +76,7 @@ class CalendarNewEventView(APIView):
     # This function will grab the events similar to the
     # CalendarEvent
     def get(self, request, start, end, *args, **kwargs):
-        print(start)
-        print(end)
-        # Now that you can get the start and end date you will now start filering
-        print(self.request.user)
+
 
         # first things first grab the user and then filter out the events
 
@@ -103,7 +99,6 @@ class CalendarNewEventView(APIView):
         filterUserEvent = userEvent.filter(start_time__gte = start, start_time__lte = end).exclude(
         repeatCondition = "weekly").exclude(repeatCondition = "daily")
 
-        print(filterUserEvent)
         # now serialize it and then return it
         serializeEvent = serializers.EventSerializer(filterUserEvent, many = True).data
 
@@ -125,11 +120,9 @@ class ShareEventInChatsView(APIView):
     # Make sure  add people to invite list here
     def post(self, request, *args, **kwargs):
 
-        print(request.data)
         # First you will get the chat
         sharedChat = get_object_or_404(models.Event, id = request.data['eventId'])
         for users in request.data['participants']:
-            print(users)
             user = get_object_or_404(User, id = users);
             sharedChat.person.add(user)
             sharedChat.invited.add(user)
@@ -153,7 +146,7 @@ class CalendarTestEventsView(generics.ListAPIView):
     serializer_class = serializers.EventSyncEventSerializer
 
     def get_queryset(self):
-        print(self.request)
+
         # The filter will be run through here so it willl
         # return a list of all the events
         qs = filter(self.request)
@@ -167,7 +160,6 @@ class CreateSharedEventView(APIView):
     # You will need the current user to get the host
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
 
         data = request.data
         # First get the user object
@@ -233,7 +225,6 @@ class CreateSocialPersonalCalEvent(APIView):
     # This function will be used to create a social event type
     # on the personal calendar
     def post(self, request, *args, **kwargs):
-        print(request.data)
         # Now grab the social cal event here given the id
         socialCalEvent = get_object_or_404(SocialCalEvent, id = request.data['socialEventId'])
 
@@ -245,10 +236,6 @@ class CreateSocialPersonalCalEvent(APIView):
         # So for the events, they are filtered and added to the calendar
         # by the person list and the host will be that of the social event
 
-        print(socialCalEvent.start_time)
-        print(socialCalEvent.end_time)
-        print(socialCalEvent.event_day)
-
         eventDate = socialCalEvent.event_day
 
         startHour = socialCalEvent.start_time
@@ -259,8 +246,6 @@ class CreateSocialPersonalCalEvent(APIView):
 
         startDateTime = datetime.datetime.combine(eventDate, startHour)
         endDateTime = datetime.datetime.combine(eventDate, endHour)
-        print(startDateTime)
-        print(endDateTime)
 
 
 

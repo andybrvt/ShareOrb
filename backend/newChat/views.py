@@ -271,7 +271,6 @@ class AcceptEventInChatView(APIView):
         # so you grab the user and then the event then just add into the accepted
         # and remove it from decline
 
-        print(request.data)
         sharedEvent = get_object_or_404(Event, id = request.data['eventId'])
         acceptedUser = get_object_or_404(User, id = request.data['userId'])
 
@@ -329,8 +328,6 @@ class ChatSearchView(APIView):
         # This function will grab all the chats will the user in it
         # bc there is a many to many
         userChats= user.chat_parti.all()
-        print(search)
-        print(userChats)
 
         # filter
         filterChats = models.Chat.objects.filter(participants = user).filter(
@@ -341,7 +338,6 @@ class ChatSearchView(APIView):
         # Now you would filter it
         serializedChats = serializers.MiniChatSerializer(filterChats, many = True).data
 
-        print(filterChats)
 
 
         return Response(serializedChats)

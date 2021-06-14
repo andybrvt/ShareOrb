@@ -609,7 +609,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -780,7 +779,6 @@ class LikeCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data =None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_posts':
             self.fetch_posts(data)
         if data['command'] == 'send_one_like':
@@ -1243,8 +1241,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This will pretty much connect to the profils of each of the users
         # so when you login, it pretty much connects right away
         self.current_user = self.scope['url_route']['kwargs']['username']
-        print("does it connect here")
-        print(self.current_user)
+
         grp = 'explore_'+self.current_user
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
         self.accept()
@@ -1257,7 +1254,6 @@ class ExploreConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data = None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_profile':
             self.fetch_profile(data)
         if data['command'] == 'fetch_profile_mobile':

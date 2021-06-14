@@ -15,6 +15,7 @@ from userprofile.serializers import NotificationSerializer
 import pytz
 from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
+import time
 
 
 
@@ -39,7 +40,6 @@ class SocialCalUploadPic(APIView):
         curDate = request.data['curDate']
 
         # This will grab the user
-        print(timezone.localtime())
         user = get_object_or_404(User, id = id)
         # This will either create or get the socialCalCell and since you can only add pictures
         # to the current day that is why we are putting the socialCalDate and testDate will
@@ -58,7 +58,6 @@ class SocialCalUploadPic(APIView):
         if(created == False):
             socialCalCell.actionText = "updated"
 
-        print(request.data)
         for i in range(int(request.data['fileListLength'])):
 
 
@@ -117,8 +116,7 @@ class UpdateSocialCellCoverPic(APIView):
         # then you will just change the cover pic and then return the serialized cell
         # and the you are good to go
 
-        print("hit here")
-        print(request.data)
+
         socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['cellId'])
         if(isinstance(request.data['coverImage'], str)):
             # check if its already save as a directory
@@ -329,12 +327,6 @@ class SocialCapUploadNewsfeed(APIView):
     # caption and Pictures
     def post(self, request, id, *args, **kwargs):
 
-        print("it hits here pretty well")
-        # print(request.data)
-        print(request.data)
-        # print(request.data['image[0]'])
-        # You want to first grab the time
-
         curDate = request.data['curDate']
 
         # timezone.activate(pytz.timezone("MST"))
@@ -447,7 +439,6 @@ class loadSocialPostView(APIView):
     # and then just pass it in the back to render the right ones
     def get(self, request, start, addMore, *args, **kwargs):
 
-        print(self.request.user)
         # Now add the same filter here similar to the one you have on your consumer
         curUser = get_object_or_404(User, id = self.request.user.id)
         userFollowing = curUser.get_following().values("person_getting_followers")
@@ -476,9 +467,7 @@ class loadSocialPostView(APIView):
 # social calendar cell and render then by month
 class grabSocialCellRangeView(APIView):
     def get(self, request, start, end, *args, **kwargs):
-        print(self.request.user)
-        print(start)
-        print(end)
+
 
         # we were able to get the user and the start date and end date
         # now we just have
@@ -512,7 +501,6 @@ class trendingSocialCellDay(APIView):
 
 
         cells = models.SocialCalCell.objects.all()
-        print(cells)
         # Now we will just serialize it, just the cover pic should be good enough
 
         serializedCells = serializers.SocialCalCellMiniSerializer(cells, many = True).data
@@ -529,7 +517,6 @@ class exploreSocialCellDay(APIView):
 
 
         cells = models.SocialCalCell.objects.all()
-        print(cells)
         # Now we will just serialize it, just the cover pic should be good enough
 
         serializedCells = serializers.SocialCalCellMiniSerializer(cells, many = True).data

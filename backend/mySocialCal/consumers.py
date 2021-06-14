@@ -126,7 +126,6 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         # Then add that person to the event and then it send it back into the front
         # end
 
-        print(data)
         selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         addedUser = get_object_or_404(User, id = data['userId'] )
 
@@ -154,7 +153,6 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         # list and then add them to the person list
 
         # first grab the event
-        print(data)
         selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
 
         # Then grab the user
@@ -182,8 +180,7 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         # This will just remove the user from the invite list and then add them
         # to the notGoingList
 
-        print(data)
-        print("does it hit here")
+
         selectedEvent = get_object_or_404(SocialCalEvent, id = data['eventId'])
         notGoingUser = get_object_or_404(User, id = data['userId'])
 
@@ -239,7 +236,6 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
 
         data = json.loads(text_data)
-        print(data)
         if data["command"] == "fetch_social_event_messages":
             self.send_fetch_social_event_messages(data);
         if data["command"] == "send_social_event_message":
@@ -253,7 +249,6 @@ class SocialCalandarConsumer(JsonWebsocketConsumer):
         if data['command'] == "send_social_event_going":
             self.send_social_event_going(data)
         if data['command'] == "send_social_event_not_going":
-            print('it hits the if statement')
             self.send_social_event_not_going(data)
 
     def new_social_message(self, message):
@@ -267,11 +262,9 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
     # its own cell
 
     def send_social_cal_cell_comment_like_unlike(self, data):
-        print(data)
         socialCell=get_object_or_404(SocialCalCell, id= data['socialCalCellID'])
         personComment=get_object_or_404(SocialCalComment,id=data['commentID'])
         personLiking = get_object_or_404(User, id = data['personIDLike'])
-        print(personLiking)
         if  personComment.comment_people_like.filter(id=data['personIDLike']).exists():
             personComment.comment_like_count-=1
             personComment.comment_people_like.remove(personLiking)
@@ -281,11 +274,9 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
         personComment.save()
 
         dateList = data['socialCalCellDate'].split("-")
-        print(dateList)
         username = personLiking.username
 
         socialCalCommentObj = SocialCalCommentSerializer(personComment).data
-        print(socialCalCommentObj)
         recipient = username+"_"+dateList[0]+"_"+dateList[1]+"_"+dateList[2]
 
         content = {
@@ -611,7 +602,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
                 curPicList = socialItemList[0]['itemImage'].split("/")
 
-                print(curPicList)
                 curPic = curPicList[3:]
 
                 curPic = "/".join(curPic)
@@ -710,7 +700,6 @@ class SocialCalCellConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_social_cal_cell_info':
             self.send_fetch_social_cal_cell_info(data)
         if data['command'] == 'send_social_cal_cell_like':
@@ -747,7 +736,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # and the push all of it out to the newsfeed. Eventually there will be
         # better filtering and such but for now it will just be everything
 
-        print(data)
         curUser = get_object_or_404(User, id = data['userId'])
 
         # This will get all the follewers of the curUser
@@ -792,8 +780,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         socialCaldate = curDate
         )
 
-        print("this is the current social cal cell")
-        print(socialCalCell)
 
         # Now you will serialize the socialcalcell
 
@@ -852,7 +838,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
             'socialCalCellObj': socialCalCellObj
         }
 
-        print("the stuff right here")
         self.send_new_social_post_action(content)
 
     def grab_new_updated_social_cell(self, data):
@@ -959,7 +944,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_social_posts':
             self.send_fetch_social_post(data)
         if data['command'] == 'send_social_post_like':

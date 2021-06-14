@@ -267,7 +267,6 @@ class NewChatSidePanelConsumer(JsonWebsocketConsumer):
         # This is for when you are receivng information from other poeple and you
         # want to update your shit
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_all_user_chats':
             self.send_fetch_all_user_chats(data)
         if data['command'] == 'update_recent_chat':
@@ -417,7 +416,6 @@ class NewChatConsumer(JsonWebsocketConsumer):
         # This is for receiving information from the front end
 
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_new_chat_messages':
             self.send_fetch_new_chat_messages(data)
         if data['command'] == 'send_new_chat_created_message':

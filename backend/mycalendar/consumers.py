@@ -19,7 +19,6 @@ class CalendarConsumer(JsonWebsocketConsumer):
     def add_share_sync_event(self, data):
         # CHECKED
 
-        print(data)
         # THIS IS GONNA BE SIMILAR TO THE SHARED EVENT SO YOU GOTTA STRUCTURE YOUR
         # EVENT SYNC EVENT OBJECT TO BE THAT THE SAME AS THE SHARED EVENT
 
@@ -566,7 +565,6 @@ class EventPageConsumer (JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_event_messages':
             self.send_fetch_event_messages(data)
         if data['command'] == 'send_event_message':

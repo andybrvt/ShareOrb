@@ -18,8 +18,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
     # it will then go to NotificationWebsocket.js which will check the command
     def fetch_notifications(self, data):
         user = self.scope['user']
-        # print('first')
-        # print(user)
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId'],type="friend")
         serializer = NotificationSerializer(notifications, many=True)
         content = {
@@ -44,21 +42,6 @@ class FriendRequestConsumer(JsonWebsocketConsumer):
             "notification": json.dumps(serializer.data)
         }
         return self.send_new_notification(content, recipient)
-
-
-    # def send_new_notification(self, notification, recipient):
-    #         # Send message to room group
-    #     channel_layer = get_channel_layer()
-    #     channel = "notifications"
-    #     # _{}".format(recipient.username)
-    #     # print(channel)
-    #     async_to_sync(self.channel_layer.group_send)(
-    #         channel,
-    #         {
-    #             'type': 'new_notification',
-    #             'notification': notification
-    #         }
-    #     )
 
 
     # this will then take all the notifications that comes in, turns it to json
