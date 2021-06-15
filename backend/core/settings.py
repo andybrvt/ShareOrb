@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
  '127.0.0.1:5000',
  '52.8.250.165',
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
+ "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com"
  ]
 
 # ALLOWED_HOSTS = [
