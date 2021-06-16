@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
  "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com"
  ]
-
+#
 # ALLOWED_HOSTS = [
 #     "10.20.100.62",
 #     "127.0.0.1",
@@ -234,9 +234,9 @@ REST_FRAMEWORK = {
             'rest_framework.permissions.IsAuthenticatedOrReadOnly',
             ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
-             # 'rest_framework.authentication.SessionAuthentication',
+             'rest_framework.authentication.SessionAuthentication',
              'rest_framework.authentication.TokenAuthentication',
-             # 'rest_framework.authentication.BasicAuthentication',
+             'rest_framework.authentication.BasicAuthentication',
 
         ),
     }

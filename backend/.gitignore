@@ -5,5 +5,3 @@
 !.elasticbeanstalk/*.global.yml
 
 /static/
-
-**/migrations/*
