@@ -958,3 +958,48 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
     def send_social_post_action(self, postActions):
         postAction = postActions['action']
         return self.send_json(postAction)
+
+
+# This consumer is for the comment section on the newsfeed and when you open
+# it up on the social calendar
+class SocialCommentConsumer(JsonWebsocketConsumer):
+
+    def fetch_social_cell_comments(self, data):
+        # fetch the comments of a specific cell
+        # you are gonna get the data cell id
+        socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
+        # now serialize it
+
+        socialComments = SocialCalComment.objects.filter(
+            calCell= socialCell
+        )
+
+        serializedComments = SocialCalCommentSerializer(socialComments, many = True).data
+
+        content = {
+            'command': 'fetch_social_cell_comments',
+            'socialComments': serializedComments
+        }
+
+        self.send_json(content)
+
+
+    def connect(self):
+        # gotta get the cell id then make the group name then start creatin gthe group
+        # then accept
+        self.selectedCell = self.scope['url_route']['kwargs']['cellId']
+        grp = 'socialCellComments_'+self.selectedCell
+
+        async_to_sync(self.channel_layer.group_add)(grp,self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        self.selectedCell = self.scope['url_route']['kwargs']['cellId']
+        grp = 'socialCellComments_'+self.selectedCell
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
+        if data['command'] == 'fetch_comment_cell_info':
+            self.fetch_social_cell_comments(data)
