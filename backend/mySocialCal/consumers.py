@@ -983,6 +983,50 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
 
         self.send_json(content)
 
+    def send_comment_cell(self,data):
+        # makes the comment and then send it back
+
+        # first get the cell
+        socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
+        # get user
+        user = get_object_or_404(User, id = data['userId'])
+
+        # now create the comment
+
+        socialComment = SocialCalComment.objects.create(
+            calCell = socialCell,
+            body = data['comment'],
+            commentUser = user
+        )
+
+        #  now serialize the comment
+        serializedComments = SocialCalCommentSerializer(socialComment).data
+
+        # now send it off
+        content = {
+            "command": "send_comment_cell",
+            "comment":  serializedComments,
+            "cellId": data['cellId']
+        }
+
+
+        self.send_info_comment(content)
+
+    def send_info_comment(self, commentObj):
+        # used to send stuff to the frontend
+        # commentObj must have an cellid inorder to send it to the
+        # right group
+        channel_layer = get_channel_layer()
+        channel_recipient = str(commentObj['cellId'])
+        channel = "socialCellComments_"+channel_recipient
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                "type": 'new_comment_action',
+                "commentAction": commentObj
+            }
+        )
 
     def connect(self):
         # gotta get the cell id then make the group name then start creatin gthe group
@@ -1001,5 +1045,12 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_comment_cell_info':
             self.fetch_social_cell_comments(data)
+        if data['command'] == "send_comment_cell":
+            self.send_comment_cell(data)
+
+    def new_comment_action(self, action):
+        commentObj = action['commentAction']
+        return self.send_json(commentObj)
