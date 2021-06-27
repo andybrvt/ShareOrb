@@ -858,6 +858,7 @@ class SocialCalendar extends React.Component{
 
 
 
+
   render(){
     // className is to determine the style
     console.log(this.props)

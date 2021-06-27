@@ -1054,3 +1054,23 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
     def new_comment_action(self, action):
         commentObj = action['commentAction']
         return self.send_json(commentObj)
+
+
+# similar to the socialc al but will use id instead of data specifc
+class NewSocialCalCellConsumer(JsonWebsocketConsumer):
+
+
+    def connect(self):
+        self.cellId = self.scope['url_route']['kwargs']['cellId']
+        grp = 'socialCalCell_'+self.cellId
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept();
+
+    def disconnect(self, close_code):
+        self.cellId = self.scope['url_route']['kwargs']['cellId']
+        grp = 'socialCalCell_'+self.cellId
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
