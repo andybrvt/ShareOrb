@@ -1059,6 +1059,18 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
 # similar to the socialc al but will use id instead of data specifc
 class NewSocialCalCellConsumer(JsonWebsocketConsumer):
 
+    def send_fetch_social_cal_cell_info(self, data):
+        # simplar to that of the old social cal cell consumer
+
+        socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
+        print(socialCell)
+        serializedCell = SocialCalCellSerializer(socialCell).data
+        content = {
+            'command': "fetch_social_cal_cell_info",
+            'socialCell': serializedCell
+        }
+
+        self.send_json(content)
 
     def connect(self):
         self.cellId = self.scope['url_route']['kwargs']['cellId']
@@ -1074,3 +1086,6 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
+        if data['command'] == 'fetch_social_cal_cell_info':
+            self.send_fetch_social_cal_cell_info(data)

@@ -32,6 +32,7 @@ import UserPostModal from "./components/PostPageFolder/UserPostModal";
 import UserInfoSettings from "./containers/SettingsFolder/UserInfoSettings";
 import CalPrefSettings from "./containers/SettingsFolder/CalPrefSettings";
 import PrivacySettings from "./containers/SettingsFolder/PrivacySettings";
+import LandingPage from './LandingPage';
 
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
@@ -72,7 +73,7 @@ class BaseRouter extends React.Component {
 
       <div class="backgroundofEverything"
       >
-        { this.props.isAuthenticated?
+        {/* this.props.isAuthenticated?
         <SideMenu>
 
           <Switch location = {location} >
@@ -99,19 +100,21 @@ class BaseRouter extends React.Component {
             <Route exact path = '/settings/calPref' render={(props) => <CalPrefSettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
             <Route exact path = '/settings/privacy' render={(props) => <PrivacySettings parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
-            {/* DO NOT USE ANYMORE*/}
-            <Route exact path = '/friend-request-list/' render={(props) => <FriendRequestList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
-            <Route exact path = '/friends-list' render={(props) => <FriendsList {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
 
           </Switch>
         </SideMenu>
         :
         <div></div>
-        }
-        <Route exact path = '/' component = {Login} />
-        {location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {SocialCalCellModal} /> : null}
+        */}
+
+        {/*
+          <Route exact path = '/' component = {Login} />
+          */}
+        <Route exact path = '/' component = {LandingPage} />
+        {/*location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {SocialCalCellModal} /> : null}
         {location ? <Route exact path = '/post/:username/:postId' component = {UserPostModal} /> : null}
         <Route exact path = '/signup/' component= {Signup} />
+        */}
       </div>
 
 

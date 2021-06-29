@@ -28,7 +28,6 @@ import * as exploreActions from './store/actions/explore';
 import * as socialActions from './store/actions/socialCalendar';
 import * as socialNewsfeedActions from './store/actions/socialNewsfeed';
 
-
 class App extends Component {
 
   constructor(props) {

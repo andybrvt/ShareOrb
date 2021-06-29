@@ -73,9 +73,11 @@ class LoginForm extends React.Component {
     console.log(this.props)
     const { error, loading, token } = this.props;
     const { username, password } = this.state;
-    if (token) {
-       return <Redirect to="/home" />
-    }
+
+    // RETURN THIS LATER AFTER WAIT LIST
+    // if (token) {
+    //    return <Redirect to="/home" />
+    // }
 
     let startModalText="Welcome to ShareOrb!"
 
