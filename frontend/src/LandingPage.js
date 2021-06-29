@@ -13,6 +13,8 @@ class LandingPage extends React.Component{
   state = {
     email: '',
     errors: {},
+    showPosition: false,
+    position: 0
   }
 
   handleEmailChange = e => {
@@ -49,6 +51,14 @@ class LandingPage extends React.Component{
       axios.post(`${global.API_ENDPOINT}/userprofile/onWaitListAdd`,{
         email: email
       })
+      .then(res=> {
+        console.log(res.data)
+        this.setState({
+          email: '',
+          showPosition: true,
+          position: res.data[1]
+        })
+      })
     } else {
       alert("email is not valid")
     }
@@ -60,21 +70,31 @@ class LandingPage extends React.Component{
     return(
       <div>
         <div>
-          <form onSubmit = {this.handleEmailSubmit}>
-            <label>
-              Email:
-              <input
-                type ="text"
-                placeholder = "example@mail.com"
-                onChange = {this.handleEmailChange}
-                value = {this.state.email}
-                />
-              <button type = "submit"> Join </button>
-            </label>
+          {this.state.showPosition ?
 
-          </form>
+            <div>
+              You are {this.state.position} in line
+            </div>
 
-          <button> Check place in line </button>
+            :
+
+            <form onSubmit = {this.handleEmailSubmit}>
+              <label>
+                Email:
+                <input
+                  type ="text"
+                  placeholder = "example@mail.com"
+                  onChange = {this.handleEmailChange}
+                  value = {this.state.email}
+                  />
+                <button type = "submit"> Join </button>
+              </label>
+
+            </form>
+
+          }
+
+
 
         </div>
 

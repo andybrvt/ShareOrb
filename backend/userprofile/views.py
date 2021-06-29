@@ -755,7 +755,7 @@ class onSentRequestView(APIView):
         # This will be similar to the one in consumer but will be used to update the
         # follower page
         follower = get_object_or_404(models.User, id = request.data['follower'])
-        following = get_object_or_404(models.User, id = request.data['following'])
+        following = get_object_or_404(odels.User, id = request.data['following'])
 
         requestObj = models.UserFollowingRequest.objects.create(
             send_request = follower,
@@ -878,5 +878,6 @@ class UserChatSearchView(APIView):
 class WaitListEmailsView(APIView):
     def post(self, request, *args, **kwargs):
 
-        print(request.data['email'])
-        return Response('stuff')
+        email, created = models.WaitListEmails.objects.get_or_create(email = request.data['email'])
+
+        return Response({created, email.id})

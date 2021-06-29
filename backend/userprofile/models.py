@@ -375,3 +375,6 @@ class UserSocialNormPost(models.Model):
 # Used to store all the emails for the wait list
 class WaitListEmails(models.Model):
     email = models.EmailField(max_length = 254)
+
+    def __str__(self):
+        return str(self.email)
