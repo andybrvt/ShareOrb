@@ -36,8 +36,13 @@ class App extends Component {
     // this.initialisePost()
 
     // this.initialiseSocialNewsfeed()
-    this.initialiseChats()
-    this.initialiseNotification()
+
+    // Just these two to activate ------------------
+    // this.initialiseChats()
+    // this.initialiseNotification()
+    // ---------------------------------------------
+
+
 
     // DELETE THIS WEBSOCEKT INSTANC EHERE ONCE THE NEW CHAT STARTS WORKING WELL
     WebSocketInstance.addCallbacks(
@@ -275,8 +280,10 @@ class App extends Component {
   componentDidMount() {
   //everythign this is run it will do a try auto signup, it will give
   //App.js this method from the store
-    this.props.onTryAutoSignup();
 
+  // Put this back later --------------------------------
+    // this.props.onTryAutoSignup();
+  // ---------------------------------------------------
 
   }
 
@@ -285,20 +292,25 @@ class App extends Component {
 
 
 
+      // Put this back later -------------------------------------
 
-      console.log(this.props.id, parseInt(newProps.id))
+      // this.props.grabUserCredentials()
+      // if(parseInt(this.props.id) !== parseInt(newProps.id)){
+      //
+      //   WebSocketSocialNewsfeedInstance.addCallbacks(
+      //     newProps.id,
+      //     this.props.loadSocialPosts.bind(this),
+      //     this.props.addSocialPostLike.bind(this),
+      //     this.props.loadCurSocialCell.bind(this),
+      //     this.props.addFirstSocialCellPost.bind(this),
+      //     this.props.updateSocialCellPost.bind(this)
+      //   )
 
-      this.props.grabUserCredentials()
-      if(parseInt(this.props.id) !== parseInt(newProps.id)){
 
-        WebSocketSocialNewsfeedInstance.addCallbacks(
-          newProps.id,
-          this.props.loadSocialPosts.bind(this),
-          this.props.addSocialPostLike.bind(this),
-          this.props.loadCurSocialCell.bind(this),
-          this.props.addFirstSocialCellPost.bind(this),
-          this.props.updateSocialCellPost.bind(this)
-        )
+      // ----------------------------------------------------
+
+
+
 
         // This if statement will see if a person has login and is isAuthenticated
         // and id has not change so we can connect to the right chat
@@ -320,28 +332,29 @@ class App extends Component {
         // WebSocketSocialNewsfeedInstance.connect()
 
 
-        console.log('disconnected chat')
-        console.log(newProps.id)
-        ChatSidePanelWebSocketInstance.disconnect();
-        this.waitForChatsSocketConnection(() =>{
-          ChatSidePanelWebSocketInstance.fetchChats(
-            newProps.id
-          )
+        // Put this back later -----------------------------------------
 
-        })
-        ChatSidePanelWebSocketInstance.connect(newProps.id)
+        // ChatSidePanelWebSocketInstance.disconnect();
+        // this.waitForChatsSocketConnection(() =>{
+        //   ChatSidePanelWebSocketInstance.fetchChats(
+        //     newProps.id
+        //   )
+        //
+        // })
+        // ChatSidePanelWebSocketInstance.connect(newProps.id)
+        //
+        //
+        // NotificationWebSocketInstance.disconnect()
+        // this.waitForNotificationSocketConnection(() => {
+        //   NotificationWebSocketInstance.fetchFriendRequests(
+        //     newProps.id
+        //   )
+        // })
+        // NotificationWebSocketInstance.connect(newProps.username)
+        // }
+        // ------------------------------------------------------------------
 
 
-        NotificationWebSocketInstance.disconnect()
-        this.waitForNotificationSocketConnection(() => {
-          NotificationWebSocketInstance.fetchFriendRequests(
-            newProps.id
-          )
-        })
-        NotificationWebSocketInstance.connect(newProps.username)
-
-
-      }
     }
 
   }

@@ -229,13 +229,17 @@ MEDIA_URL = '/media/'
 # MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
 # DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
+# make sure to uncomment this
+# uncomment DEFAULT_PERMISSION_CLASSES
+# uncomment the second one on the DEFAULT_AUTHENTICATION_CLASSES
+
 REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
-            'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+            # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
             ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
              # 'rest_framework.authentication.SessionAuthentication',
-             'rest_framework.authentication.TokenAuthentication',
+             # 'rest_framework.authentication.TokenAuthentication',
              # 'rest_framework.authentication.BasicAuthentication',
 
         ),

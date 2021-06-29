@@ -873,3 +873,10 @@ class UserChatSearchView(APIView):
 
         serializedFollowing = serializers.FollowUserSerializer(filterFollowing, many = True).data
         return Response(serializedFollowing)
+
+
+class WaitListEmailsView(APIView):
+    def post(self, request, *args, **kwargs):
+
+        print(request.data['email'])
+        return Response('stuff')

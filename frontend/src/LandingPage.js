@@ -1,4 +1,6 @@
 import React from 'react';
+import  { authAxios } from './components/util';
+import axios from "axios";
 
 
 class LandingPage extends React.Component{
@@ -9,7 +11,8 @@ class LandingPage extends React.Component{
 
 
   state = {
-    email: ''
+    email: '',
+    errors: {},
   }
 
   handleEmailChange = e => {
@@ -19,11 +22,45 @@ class LandingPage extends React.Component{
     })
   }
 
+
+  handleEmailValidation(){
+    let {email} = this.state;
+    let errors = {};
+    let emailIsTrue = true;
+
+    if(email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)){
+      emailIsTrue = false;
+      errors['email'] = "Enter a valid email"
+    }
+
+    this.setState({
+      errors: errors
+    })
+
+    return emailIsTrue;
+
+  }
+
+  handleEmailSubmit = e => {
+    e.preventDefault()
+    const { email } = this.state;
+
+    if(this.handleEmailValidation()){
+      axios.post(`${global.API_ENDPOINT}/userprofile/onWaitListAdd`,{
+        email: email
+      })
+    } else {
+      alert("email is not valid")
+    }
+
+    // Now just do an axios call here
+  }
+
   render(){
     return(
       <div>
         <div>
-          <form>
+          <form onSubmit = {this.handleEmailSubmit}>
             <label>
               Email:
               <input
@@ -32,7 +69,7 @@ class LandingPage extends React.Component{
                 onChange = {this.handleEmailChange}
                 value = {this.state.email}
                 />
-              <button> Join </button>
+              <button type = "submit"> Join </button>
             </label>
 
           </form>

@@ -370,3 +370,8 @@ class UserSocialNormPost(models.Model):
         ordering = ['-post_date']
     def __str__(self):
         return str(self.id)
+
+
+# Used to store all the emails for the wait list
+class WaitListEmails(models.Model):
+    email = models.EmailField(max_length = 254)
