@@ -5,7 +5,7 @@ from allauth.account import app_settings as allauth_settings
 from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
-from userprofile.models import WaitListEmails
+# from userprofile.models import WaitListEmails
 from userprofile.models import CustomNotification
 from userprofile.models import PendingSocialPics
 from mySocialCal.serializers import SocialCalCellSerializer
