@@ -91,5 +91,5 @@ urlpatterns = [
 	path('unShowIntialInstructions/<slug:id>', views.unShowIntialInstructions.as_view(), name = "unshow_intial_instruction"),
 	path('resetNotificationSeen', views.resetNotificationSeen.as_view(), name = "reset_notification_seen"),
 	path('onClearNotification', views.onClearNotification.as_view(), name = "clear_notification"),
-	path('onWaitListAdd', views.WaitListEmailsView.as_view(), name = "add_user_wait_list")
+	# path('onWaitListAdd', views.WaitListEmailsView.as_view(), name = "add_user_wait_list")
 ]
