@@ -82,10 +82,17 @@ class LandingPage extends React.Component{
 
         <div class = "text">
           <div class = "bigText">
-            Charish the smaller moments in life
+            Cherish the smaller moments in life
           </div>
           <div class = 'smallText'>
             Shareorb is a social media plateform that lets you create one album a day. And... That's it!
+            Our mission is to create the most casual-posting plateform out there to share pictures. We want to
+            give people the freedom to post what they want without judgement!
+
+
+          </div>
+          <div class = "smallTextB">
+            Be one of the first to join ShareOrb, sign up to our waitlist.
           </div>
 
         </div>

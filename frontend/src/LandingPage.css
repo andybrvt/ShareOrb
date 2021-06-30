@@ -30,6 +30,12 @@
   color: black;
 }
 
+.smallTextB{
+  font-size: 1vw;
+  color: black;
+  margin-top: 12px;
+}
+
 .image{
   position: relative;
   width: 100%;
@@ -49,7 +55,7 @@
 
 .inputHolder{
   position:absolute;
-  top: 60%;
+  top: 65%;
   left: 3%;
   width: 470px;
 }
