@@ -16,12 +16,10 @@ class FriendProfileCard extends React.Component {
 
   onClickSend = (e) => {
     // const username = this.props.data.username;
-    // console.log(this.props)
   // this.setState({value: e.target.value});
     }
   // this is a card that displays the profile picture and user name
   render() {
-    console.log(this.props)
     return (
 
     <Card

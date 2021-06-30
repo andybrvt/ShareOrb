@@ -55,7 +55,6 @@ class BaseRouter extends React.Component {
 
   render() {
 
-    console.log(this.props);
     //It is all about having that path name inside the switch (whatever the switch is
   // that would be the background)
   //Example : location = {{pathname: '/home'}}
@@ -64,7 +63,6 @@ class BaseRouter extends React.Component {
 
   //FIRGURE OUT A SOLUTION TO WHY MATCH IS NOT CHANGING
     let location = this.props.location;
-    console.log(location)
     if(this.props.location.state){
       location = this.props.location.state
     }

@@ -52,7 +52,6 @@ class WebSocketCalendarEvent {
     // This is where the new event from the back end get sent to redux
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
-    console.log(parsedData)
 
     if (command === 'new_event'){
       this.callbacks['new_event'](parsedData.newEvent)
@@ -83,7 +82,6 @@ class WebSocketCalendarEvent {
       this.callbacks['decline_share_else'](declineShareObj)
     } else if(command === 'add_decline'){
       // This path is for the user that is doing the declining of the event
-      console.log('user side decline works')
       const eventId = parsedData.eventId
 
       const declineShareObj = {
@@ -165,7 +163,6 @@ class WebSocketCalendarEvent {
   sendEvent (data){
     // This is used to send the notification into the backend and add in an
     // event sync event
-    console.log(data)
 
 // START RIGHT HERE
     try {
@@ -185,13 +182,11 @@ class WebSocketCalendarEvent {
     setTimeout(
       function(){
         if(socket.readyState === 1){
-          console.log('connection is secure');
           if (callback != null){
             callback()
           }
           return;
         } else {
-          console.log('waiting for connection...')
           recursion(callback)
         }
       }, 1)

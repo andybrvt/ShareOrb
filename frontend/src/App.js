@@ -219,7 +219,6 @@ class App extends Component {
 // right away so that it is already connected whne you login
   initialiseChats(){
     this.waitForChatsSocketConnection(() => {
-      console.log(this.props.id)
       ChatSidePanelWebSocketInstance.fetchChats(
         this.props.id
       )
@@ -361,7 +360,6 @@ class App extends Component {
 
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <Router>

@@ -55,16 +55,15 @@ class NewsFeedEventModal extends React.Component{
     let startDate = time
     let endDate = this.state.endDate
 
-    console.log(dateFns.isAfter(new Date(startDate),new Date(endDate)))
 
     if (dateFns.isAfter(new Date(startDate),new Date(endDate))){
-      console.log('test1')
+
       this.setState({
         startDate: time,
         endDate: time,
       })
     } else {
-      console.log('test2')
+
       this.setState({
         startDate: time
       })
@@ -73,14 +72,13 @@ class NewsFeedEventModal extends React.Component{
   }
 
   onEndDateChange = (time) => {
-    console.log(time)
+
     this.setState({
       endDate: time
     })
   }
 
   onStartTimeChange = (time) => {
-    console.log(time)
     // You basically want the end time to be 30 mins ahead of the starttime
     // so you want to check if it is and then change the state accordingly
     let startHour = parseInt(time.substring(0,2))
@@ -89,7 +87,6 @@ class NewsFeedEventModal extends React.Component{
     let endHour = parseInt(this.state.timeEnd.substring(0,2))
     let endMin = parseInt(this.state.timeEnd.substring(3,5))
     let endTime = ''
-    console.log(startHour, endHour)
     // These if statement here is to change the start time values from 1-12 todo
     // 1-24 for the start time
     if (time.includes('PM')){
@@ -128,8 +125,6 @@ class NewsFeedEventModal extends React.Component{
         // If they are the same time what do I do?
         endMin = "00"
         endHour = startHour + 1
-        console.log(startHour)
-        console.log(endHour)
         if (startHour === 11 && ampm === ' AM'){
           endTime =   '12:' + endMin + ' PM'
         } else if (startHour === 23 && ampm === ' PM'){
@@ -153,7 +148,6 @@ class NewsFeedEventModal extends React.Component{
 
 
 
-        console.log(time, endTime)
         this.setState({
           timeStart:time,
           timeEnd: endTime
@@ -161,7 +155,6 @@ class NewsFeedEventModal extends React.Component{
       } else if (startMin === endMin){
         // This is the case where the times are identical to each other
         // REMEMBER THAT ENDHOUR AND STARTHOUR ARE USING THE 1-24 TIME
-        console.log(startHour, endHour)
         if (startHour === 0 && ampm === ' AM' && startMin === 0 ){
           endTime = '12:30 AM'
         } else if (startHour === 12 && ampm === ' PM' && startMin === 0){
@@ -178,7 +171,6 @@ class NewsFeedEventModal extends React.Component{
                 endTime =  '12:' + endMin + ' AM'
               }
             else {
-              console.log(endHour)
               endHour = startHour +1
                 if (endHour<10){
                     endHour = '0'+endHour
@@ -196,15 +188,12 @@ class NewsFeedEventModal extends React.Component{
             }
           } else if (startMin === 0){
             endMin = '30'
-            console.log(ampm)
             if (endHour<10){
                 endHour = '0'+endHour
             } else {
               if(ampm === ' AM'){
-                console.log('am')
                 endHour = endHour
               } else if (ampm === ' PM'){
-                console.log('pm')
                 if (endHour === 12){
                   endHour = 12
                 }else {
@@ -233,7 +222,6 @@ class NewsFeedEventModal extends React.Component{
         // let startHour = parseInt(time.substring(0,2))
         // let startMin = parseInt(time.substring(3,5))
 
-        console.log(startHour, startMin, ampm)
         if (startHour === 11 && ampm === ' AM' && startMin === 30){
           endTime =   '12:00 PM'
         } else if (startHour === 23 && ampm === ' PM' && startMin === 30){
@@ -318,7 +306,6 @@ class NewsFeedEventModal extends React.Component{
         buttonDisabled = true
       }
 
-      console.log(buttonDisabled)
       return buttonDisabled
 
     }

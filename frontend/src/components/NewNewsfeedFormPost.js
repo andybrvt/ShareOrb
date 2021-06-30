@@ -82,12 +82,10 @@ class NewNewsfeedFormPost extends React.Component{
     handleChange = ({ fileList, info }) => {
 
       if (info.file.originFileObj.type === "") {
-        console.log("hi")
       fetch(URL.createObjectURL(info.file.originFileObj))
         .then((res) => res.blob())
         .then((blob) => heic2any({ blob, toType: "image/jpeg" }))
         .then((conversionResult) => {
-          console.log("HEIC");
           this.setState({ fileList });
         })
         .catch((e) => {
@@ -134,7 +132,6 @@ class NewNewsfeedFormPost extends React.Component{
     }
 
     onFormSubmit= () => {
-      console.log(this.state)
 
       const ownerId = this.props.curUserId
         // In order to post data into the post modal we would need
@@ -158,7 +155,6 @@ class NewNewsfeedFormPost extends React.Component{
           {headers: {"content-type": "multipart/form-data"}}
 
         ).then(res => {
-          console.log(res.data.postId)
 
           // Now you will make a websocket that will accept the post Id then
           // send it into the frotn end
@@ -231,8 +227,8 @@ class NewNewsfeedFormPost extends React.Component{
       } if (this.props.profilePic){
         profilePic = `${global.IMAGE_ENDPOINT}`+this.props.profilePic
       }
-      console.log(this.state)
-      console.log(this.props)
+
+
       const { previewVisible, previewImage, fileList, previewTitle } = this.state;
         const uploadButton = (
           <div>
