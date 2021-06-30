@@ -1,7 +1,9 @@
 import React from 'react';
 import  { authAxios } from './components/util';
 import axios from "axios";
-
+import './LandingPage.css';
+import logo from './logo.svg';
+import landingPic from './containers/landingPic.png'
 
 class LandingPage extends React.Component{
   constructor(props){
@@ -68,35 +70,69 @@ class LandingPage extends React.Component{
 
   render(){
     return(
-      <div>
-        <div>
+      <div class = "mainPage">
+
+        <div class = "circle">
+        </div>
+        <div class = "logo">
+          <img src = {logo} width = "200"  />
+        </div>
+
+        <div class = "text">
+          <div class = "bigText">
+            Charish the smaller moments in life
+          </div>
+          <div class = 'smallText'>
+            Shareorb is a social media plateform that lets you create one album a day
+          </div>
+
+        </div>
+
+        <div class = "imageHolder">
+          <img className = "image" src = {landingPic} />
+        </div>
+
+
+
+        <div class = "inputHolder">
           {this.state.showPosition ?
 
-            <div>
-              You are {this.state.position} in line
+            <div class = "lineText" >
+              You are <b class = 'boldNum'>{this.state.position}</b> in line
             </div>
 
             :
 
             <form onSubmit = {this.handleEmailSubmit}>
-              <label>
-                Email:
-                <input
-                  type ="text"
-                  placeholder = "example@mail.com"
-                  onChange = {this.handleEmailChange}
-                  value = {this.state.email}
-                  />
-                <button type = "submit"> Join </button>
-              </label>
+
+
+
+                <label style = {{
+                    width: '100%',
+                  }}>
+                  <div class = "inputField">
+                    <input
+                      class = "inputStyle"
+                      type ="text"
+                      placeholder = "example@mail.com"
+                      onChange = {this.handleEmailChange}
+                      value = {this.state.email}
+                      />
+                   <button type = "submit" class = 'button'> Join  </button>
+
+                  </div>
+
+                </label>
+
+
 
             </form>
 
           }
 
-
-
         </div>
+
+
 
       </div>
     )
