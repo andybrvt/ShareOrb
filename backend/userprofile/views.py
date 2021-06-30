@@ -875,9 +875,9 @@ class UserChatSearchView(APIView):
         return Response(serializedFollowing)
 
 
-class WaitListEmailsView(APIView):
-    def post(self, request, *args, **kwargs):
-
-        email, created = models.WaitListEmails.objects.get_or_create(email = request.data['email'])
-
-        return Response({created, email.id})
+# class WaitListEmailsView(APIView):
+#     def post(self, request, *args, **kwargs):
+#
+#         email, created = models.WaitListEmails.objects.get_or_create(email = request.data['email'])
+#
+#         return Response({created, email.id})
