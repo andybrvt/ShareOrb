@@ -611,7 +611,7 @@ class UserSocialNormPostSerializer(serializers.ModelSerializer):
         fields = ('id', 'owner', 'post', 'post_date')
 
 
-class WaitListEmailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WaitListEmails
-        fields = ('email')
+# class WaitListEmailsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = WaitListEmails
+#         fields = ('email')
