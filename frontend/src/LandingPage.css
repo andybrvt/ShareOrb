@@ -12,28 +12,88 @@
   top:5%;
 }
 
-.text{
-  position: absolute;
-  top: 30%;
-  left: 3%;
-  width: 30%;
-  font: verdana;
-  font-weight: 300;
-}
-.bigText{
-  font-size: 3vw;
-  color: black;
-  font-weight: bold;
-}
-.smallText{
-  font-size: 1vw;
-  color: black;
-}
 
-.smallTextB{
-  font-size: 1vw;
-  color: black;
-  margin-top: 12px;
+
+
+
+@media screen and (max-height: 800px){
+  .inputHolder{
+    width: 80%;
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 75%;
+  }
+
+  .bigText{
+    font-size: 5vw;
+    color: black;
+    font-weight: bold;
+  }
+  .smallText{
+    font-size: 3vw;
+    color: black;
+  }
+
+  .text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 65%;
+    font: verdana;
+    font-weight: 300;
+    transform: translateX(-50%);
+    z-index: 3;
+    text-align: center;
+  }
+
+  .lineText{
+    position: relative;
+    font-size: 35px;
+    color: black;
+    left: 50%;
+    background-color: 'pink';
+    transform: translateX(-35%);
+  }
+}
+@media screen and (min-height: 801px){
+
+
+  .inputHolder{
+    position:absolute;
+    top: 60%;
+    left: 3%;
+    width: 470px;
+
+  }
+
+  .bigText{
+    font-size: 3vw;
+    color: black;
+    font-weight: bold;
+  }
+  .smallText{
+    font-size: 1vw;
+    color: black;
+  }
+
+  .text{
+    position: absolute;
+    top: 30%;
+    left: 3%;
+    width: 30%;
+    font: verdana;
+    font-weight: 300;
+  }
+
+  .lineText{
+    position: relative;
+    font-size: 35px;
+    color: black;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 }
 
 .image{
@@ -53,12 +113,7 @@
   position: relative;
 }
 
-.inputHolder{
-  position:absolute;
-  top: 65%;
-  left: 3%;
-  width: 470px;
-}
+
 
 .inputField{
   width: 100%;
@@ -92,10 +147,7 @@
   font-size: 16px;
 }
 
-.lineText{
-  font-size: 35px;
-  color: black;
-}
+
 .boldNum{
   font-size: 45px;
   font-weight: 800;
