@@ -4,6 +4,8 @@ import axios from "axios";
 import './LandingPage.css';
 import logo from './logo.svg';
 import landingPic from './containers/landingPic.png'
+import pic2 from './containers/LoginPage/calendar.svg';
+
 
 class LandingPage extends React.Component{
   constructor(props){
@@ -83,13 +85,13 @@ class LandingPage extends React.Component{
             Charish the smaller moments in life
           </div>
           <div class = 'smallText'>
-            Shareorb is a social media plateform that lets you create one album a day
+            Shareorb is a social media plateform that lets you create one album a day. And... That's it!
           </div>
 
         </div>
 
         <div class = "imageHolder">
-          <img className = "image" src = {landingPic} />
+          <img className = "image" src = {pic2} />
         </div>
 
 

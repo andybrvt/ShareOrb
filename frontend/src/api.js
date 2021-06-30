@@ -45,7 +45,6 @@ const post_url = `${global.API_ENDPOINT}/userprofile/list/`
 	data.append("user_id", post.user_id);
 	// data.append("image", post.image);
 	// data.append("image_filter", post.image_filter);
-  console.log(data)
   axios.post(`${global.API_ENDPOINT}/userprofile/list/`, {
     Caption: data,
   })
