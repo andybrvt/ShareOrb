@@ -75,14 +75,14 @@ class LandingPage extends React.Component{
       <div class = "mainPage">
         <div class = "circle">
         </div>
+        {/*
         <div class="bigContainer">
           <div class="smallContainer1">
 
             <div class = "logo">
-              <img src = {logo} width = "200"  />
-            </div>
+                <img src = {logo} width = "200"  />
+              </div>
           </div>
-
           <div class="smallContainer2">
             <div class = "text">
               <div class = "bigText">
@@ -93,7 +93,24 @@ class LandingPage extends React.Component{
               </div>
             </div>
           </div>
+      </div>
+      */}
+      <div class="bigContainer">
+        <div class="smallContainer1">
+            <img src = {logo} width = "300"  />
         </div>
+        <div class="smallContainer2">
+
+            <div class = "bigText">
+              Cherish the smaller moments in life
+            </div>
+            <div class = 'smallText'>
+              Create one album in your life everyday
+            </div>
+
+        </div>
+
+      </div>
 
 
           <div class = "imageHolder">
