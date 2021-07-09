@@ -73,27 +73,32 @@ class LandingPage extends React.Component{
   render(){
     return(
       <div class = "mainPage">
-
         <div class = "circle">
         </div>
-        <div class = "logo">
-          <img src = {logo} width = "200"  />
-        </div>
+        <div class="bigContainer">
+          <div class="smallContainer1">
 
-        <div class = "text">
-          <div class = "bigText">
-            Cherish the smaller moments in life
-          </div>
-          <div class = 'smallText'>
-            Shareorb is a social media plateform that lets you create one album a day. And... That's it!
+            <div class = "logo">
+              <img src = {logo} width = "200"  />
+            </div>
           </div>
 
-
+          <div class="smallContainer2">
+            <div class = "text">
+              <div class = "bigText">
+                Cherish the smaller moments in life
+              </div>
+              <div class = 'smallText'>
+                Shareorb is a social media platform that lets you create one album a day. And... That's it!
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class = "imageHolder">
-          <img className = "image" src = {pic2} />
-        </div>
+
+          <div class = "imageHolder">
+            <img className = "image" src = {pic2} />
+          </div>
 
 
 
@@ -103,13 +108,9 @@ class LandingPage extends React.Component{
             <div class = "lineText" >
               You are <b class = 'boldNum'>{this.state.position}</b> in line
             </div>
-
             :
 
             <form onSubmit = {this.handleEmailSubmit}>
-
-
-
                 <label style = {{
                     width: '100%',
                   }}>
@@ -121,7 +122,7 @@ class LandingPage extends React.Component{
                       onChange = {this.handleEmailChange}
                       value = {this.state.email}
                       />
-                   <button type = "submit" class = 'button'> Join  </button>
+                   <button type = "submit" class = 'button'> Join </button>
 
                   </div>
 
