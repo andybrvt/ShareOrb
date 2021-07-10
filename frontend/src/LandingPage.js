@@ -104,8 +104,10 @@ class LandingPage extends React.Component{
             <div class = "bigText">
               Cherish the smaller moments in life
             </div>
+            <br/>
+            <br/>
             <div class = 'smallText'>
-              Create one album in your life everyday
+              Create one album every single day
             </div>
 
         </div>
@@ -123,7 +125,7 @@ class LandingPage extends React.Component{
           {this.state.showPosition ?
 
             <div class = "lineText" >
-              You are <b class = 'boldNum'>{this.state.position}</b> in line
+              You are #<b class = 'boldNum'>{this.state.position}</b> in line
             </div>
             :
 
