@@ -354,10 +354,10 @@ class UserSocialCalSerializer(serializers.ModelSerializer):
 
 
 
-class ProfilePicSerializer(serializers.ModelSerializer):
+class SimpleProfileEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ('profile_picture',)
+        fields = ('profile_picture', 'username', 'first_name')
 
 
 class FollowSerializer(serializers.ModelSerializer):

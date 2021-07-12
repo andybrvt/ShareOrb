@@ -528,7 +528,7 @@ class ViewComment(APIView):
 
 
 class ProfileUpdate(generics.RetrieveUpdateAPIView):
-    serializer_class = serializers.ProfilePicSerializer
+    serializer_class = serializers.SimpleProfileEditSerializer
     lookup_field = 'id'
     queryset = models.User.objects.all()
 
