@@ -466,13 +466,15 @@ class loadSocialPostView(APIView):
 # This function will mostly be used by the mobile so that you can get the different
 # social calendar cell and render then by month
 class grabSocialCellRangeView(APIView):
-    def get(self, request, start, end, *args, **kwargs):
+    def get(self, request, userId, start, end, *args, **kwargs):
+
+        print(userId)
 
 
         # we were able to get the user and the start date and end date
         # now we just have
 
-        user = self.request.user
+        user = User.objects.get(id = userId)
         # You will first get the user and then you get the social cal cells by
         # filtering out the users
         cells = models.SocialCalCell.objects.filter(socialCalUser = user)
