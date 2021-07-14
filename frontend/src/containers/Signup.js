@@ -296,15 +296,15 @@ class Signup extends React.Component {
 
       // const number = this.numberConverter(values.phone_number)
     console.log(values.dob.format("YYYY-MM-DD"))
-     this.props.onAuth(
-            values.username,
-            values.first_name,
-            values.last_name,
-            values.dob.format("YYYY-MM-DD"),
-            values.email,
-            values.password,
-            values.confirm,
-      )
+     // this.props.onAuth(
+     //        values.username,
+     //        values.first_name,
+     //        values.last_name,
+     //        values.dob.format("YYYY-MM-DD"),
+     //        values.email,
+     //        values.password,
+     //        values.confirm,
+     //  )
     return axios.post(`${global.API_ENDPOINT}/rest-auth/registration/`, {
       username: values.username,
       first_name: values.first_name,
