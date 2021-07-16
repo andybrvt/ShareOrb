@@ -539,4 +539,40 @@ class SocialCalSingleUploadPic(APIView):
         # now you filter out the cell
 
         print(curDate, user)
-        return Response("stuff here")
+        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+            socialCalUser = user,
+            socialCaldate = curDate
+        )
+
+        # chnage is change of the coverpicture
+        change = True
+
+        if(created == False):
+            socialCalCell.actionText = "updated"
+
+        # Now you add a single picture in
+        socialCalItem = models.SocialCalItems.objects.create(
+            socialItemType = 'picture',
+            creator = user,
+            itemUser = user,
+            itemImage = request.data['image'],
+            calCell = socialCalCell
+        )
+
+        socialCalCell.save()
+
+        socialCalCellNew = get_object_or_404(models.SocialCalCell,
+            socialCalUser = user,
+            socialCaldate = curDate
+         )
+
+
+        # This is most just to get the current cover profile for the front end
+        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCellNew).data
+        content = {
+            "coverPicChange": change,
+            "created": created,
+            "cell": serializedSocialCell
+        }
+
+        return Response(content)
