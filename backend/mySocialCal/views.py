@@ -524,3 +524,19 @@ class exploreSocialCellDay(APIView):
         serializedCells = serializers.SocialCalCellMiniSerializer(cells, many = True).data
 
         return Response(serializedCells)
+
+
+# this function will be used to upload a single pic to the social cal cell
+class SocialCalSingleUploadPic(APIView):
+
+    def post(self, request, id, *args, **kwargs):
+        #  you first get the date
+        curDate = request.data['curDate']
+
+        #then get the user
+        user = get_object_or_404(User, id = id)
+
+        # now you filter out the cell
+
+        print(curDate, user)
+        return Response("stuff here")
