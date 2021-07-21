@@ -11,7 +11,7 @@ class ColabAlbumSerializer(serializers.ModelSerializer):
     get_colabItems = serializers.StringRelatedField(many = True)
 
     class Meta:
-        modle = models.ColabAlbum
+        model = models.ColabAlbum
         fields = ('__all__')
 
     def to_representation(self, instance):
@@ -20,10 +20,10 @@ class ColabAlbumSerializer(serializers.ModelSerializer):
         colab_items = []
 
         for persons in data['person']:
-            person = ColabItemCreator(User.object.get(id = persons)).data
+            person = ColabItemCreator(User.objects.get(id = persons)).data
             personList.append(person)
         for items in data['get_colabItems']:
-            item = ColabItemSerializer(models.ColabItems.get(id = item)).data
+            item = ColabItemSerializer(models.ColabItems.objects.get(id = items)).data
             colab_items.append(item)
 
         data['person'] = personList
