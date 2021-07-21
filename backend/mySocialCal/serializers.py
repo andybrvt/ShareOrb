@@ -24,7 +24,8 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
          'get_socialCalItems',
          'get_socialCalEvent',
          'get_socialCalComment',
-         "actionText"
+         "actionText",
+         "socialCaldate"
          )
 
     def to_representation(self, instance):

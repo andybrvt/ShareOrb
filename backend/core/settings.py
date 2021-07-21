@@ -83,7 +83,7 @@ INSTALLED_APPS =[
     'newChat',
     'mycalendar',
     'mySocialCal',
-
+    'colabAlbum'
 ]
 
 SITE_ID = 1

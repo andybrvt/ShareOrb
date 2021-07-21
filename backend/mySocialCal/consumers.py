@@ -970,6 +970,8 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
         socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
         # now serialize it
 
+        cellDate = SocialCalCellSerializer(socialCell).data["socialCaldate"]
+
         socialComments = SocialCalComment.objects.filter(
             calCell= socialCell
         )
@@ -978,7 +980,9 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
 
         content = {
             'command': 'fetch_social_cell_comments',
-            'socialComments': serializedComments
+            'socialComments': serializedComments,
+            'owenrId': socialCell.socialCalUser.id,
+            'cellDate': cellDate
         }
 
         self.send_json(content)
