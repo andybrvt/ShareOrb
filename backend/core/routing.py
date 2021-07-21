@@ -5,7 +5,7 @@ import userprofile.routing
 import mycalendar.routing
 import mySocialCal.routing
 import newChat.routing
-
+import colabAlbum.routing
 
 from channels.http import AsgiHandler
 from channels.routing import ProtocolTypeRouter, URLRouter
@@ -26,6 +26,7 @@ application = ProtocolTypeRouter ({
         + mycalendar.routing.websocket_urlpatterns
         + mySocialCal.routing.websocket_urlpatterns
         + newChat.routing.websocket_urlpatterns
+        + colabAlbum.routing.websocket_urlpatterns
         )
     )
 })
