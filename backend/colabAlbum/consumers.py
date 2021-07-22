@@ -12,14 +12,14 @@ class ColabAlbumConsumer(JsonWebsocketConsumer):
 
     def connect(self):
         self.selectedAlbum = self.scope['url_route']['kwargs']['albumId']
-        grp = "colabAlbum_"self.selectedAlbum
+        grp = "colabAlbum_"+self.selectedAlbum
 
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_layer)
         self.accept()
 
     def disconnect(self, close_code):
         self.selectedAlbum = self.scope['url_route']['kwargs']['albumId']
-        grp = "colabAlbum_"self.selectedAlbum
+        grp = "colabAlbum_"+self.selectedAlbum
 
         async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
 
