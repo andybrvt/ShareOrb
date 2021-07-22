@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     path("", views.ColabAlbumView.as_view(), name = "colabAlbum_list"),
     path("getAlbums", views.UserColabAlbumView.as_view(), name = "get_colabAlbum"),
-    path("getLiveAlbums", views.LiveUserColabAlbumView.as_view(), name = "get_liveColab_album")
+    path("getLiveAlbums", views.LiveUserColabAlbumView.as_view(), name = "get_liveColab_album"),
+    path("uploadColabAlbum/<slug:userId>/<slug:id>", views.UploadColablAlbumView.as_view(), name = "upload_album_view")
 ]

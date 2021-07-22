@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
 from datetime import datetime, timedelta
+from rest_framework.response import Response
+from userprofile.models import User
 
 
 # Create your views here.
@@ -42,3 +44,26 @@ class LiveUserColabAlbumView(generics.ListAPIView):
         person = user).filter(
         created_at__gt = time_threshold).order_by('created_at')
         return queryset
+
+# used to upload images to albums
+class UploadColablAlbumView(APIView):
+    def post(self, request,userId, id, *args, **kwargs):
+
+        # first grab the album
+
+        album = get_object_or_404(models.ColabAlbum, id = id)
+        curUser = get_object_or_404(User, id = userId)
+        # Now start making the albumitems
+        itemList = []
+        for i in range(int(request.data['length'])):
+            albumItem = models.ColabItems.objects.create(
+                creator = curUser,
+                itemImage = request.data["image["+str(i)+"]"],
+                colabAlbum = album
+            )
+            itemList.append(albumItem)
+
+
+        serializedList = serializers.ColabItemSerializer(itemList, many = True).data
+
+        return Response(serializedList)
