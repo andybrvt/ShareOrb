@@ -102,7 +102,7 @@ class LandingPage extends React.Component{
         <div class="smallContainer2">
 
             <div class = "bigText">
-              Cherish the smaller moments in life
+              Share the smaller moments in life
             </div>
             <br/>
             <br/>
