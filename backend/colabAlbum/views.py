@@ -8,6 +8,7 @@ from rest_framework import generics
 from datetime import datetime, timedelta
 from rest_framework.response import Response
 from userprofile.models import User
+import json
 
 
 # Create your views here.
@@ -67,3 +68,29 @@ class UploadColablAlbumView(APIView):
         serializedList = serializers.ColabItemSerializer(itemList, many = True).data
 
         return Response(serializedList)
+
+class CreateColabAlbumView(APIView):
+    def post(self, request, *args, **kwargs):
+        # print(request.data['person'])
+
+        person = []
+        for people in json.loads(request.data['person']):
+            curPerson = get_object_or_404(User, username = people)
+            person.append(curPerson)
+
+
+        newAlbum = models.ColabAlbum.objects.create(
+            title = request.data['title'],
+            coverPic = request.data['coverPic']
+        )
+
+        # print(person)
+        newAlbum.person.set(person)
+
+        newAlbum.save()
+
+        serializedAlbum = serializers.ColabAlbumSerializer(newAlbum).data
+
+        return Response(serializedAlbum)
+
+        # return Response('stuff here')
