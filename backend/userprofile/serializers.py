@@ -560,6 +560,7 @@ class NotificationSerializer(serializers.ModelSerializer):
             'verb',
             'description',
             'timestamp',
+            'albumDate',
             'minDate',
             'maxDate',
             'eventId',

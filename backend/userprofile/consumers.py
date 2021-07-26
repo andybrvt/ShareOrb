@@ -358,7 +358,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
                 type = "send_social_cell_like",
                 actor = actor,
                 recipient = recipient,
-                verb = "liked your social cell on "+ str(data['cellDate']),
+                albumDate=str(data['cellDate']),
+                verb = "liked your social cell on"+ str(data['cellDate']),
                 pendingEventDate = data['cellDate']
             )
         if data['command'] == "social_comment_notification":
