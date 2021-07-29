@@ -515,10 +515,10 @@ class trendingSocialCellDay(APIView):
 class exploreSocialCellDay(APIView):
 
     # We will be using a get function (for now just pull all the social cal cell)
-    def get(self, request, *args, **kwargs):
+    def get(self, request, start, end, *args, **kwargs):
 
 
-        cells = models.SocialCalCell.objects.all()
+        cells = models.SocialCalCell.objects.all()[start:end]
         # Now we will just serialize it, just the cover pic should be good enough
 
         serializedCells = serializers.SocialCalCellMiniSerializer(cells, many = True).data

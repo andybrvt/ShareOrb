@@ -19,6 +19,6 @@ urlpatterns = [
     path("add-like-comment/<slug:id>/", views.AddOneLikeToComment.as_view(), name='curr post'),
     path("filterCells/<slug:userId>/<str:start>/<str:end>", views.grabSocialCellRangeView.as_view(), name = "filter social cell"),
     path("trendingDay", views.trendingSocialCellDay.as_view(), name = "trending_day"),
-    path("exploreDay", views.exploreSocialCellDay.as_view(), name = "explore_day"),
+    path("exploreDay/<int:start>/<int:end>", views.exploreSocialCellDay.as_view(), name = "explore_day"),
     path("updateSinglePic/<slug:id>", views.SocialCalSingleUploadPic.as_view(), name = "socialCal_singlePic")
 ]
