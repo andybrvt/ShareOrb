@@ -13,6 +13,8 @@ from .forms import CommentForm
 from django.http import JsonResponse
 from django.utils import timezone
 from django.db.models import Q
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import authentication_classes, permission_classes
 
 import pytz
 
@@ -874,7 +876,8 @@ class UserChatSearchView(APIView):
         serializedFollowing = serializers.FollowUserSerializer(filterFollowing, many = True).data
         return Response(serializedFollowing)
 
-
+@authentication_classes([])
+@permission_classes([])
 class WaitListEmailsView(APIView):
     def post(self, request, *args, **kwargs):
 
