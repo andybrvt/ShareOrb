@@ -23,7 +23,11 @@ SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = True
+<<<<<<< HEAD
 # #
+=======
+
+>>>>>>> f9392580ab6e89c2cd2ad41cce2502eaaee10307
 # ALLOWED_HOSTS = [
 #  '172.31.4.121',
 #  'api.shareorb.com',
@@ -48,6 +52,7 @@ ALLOWED_HOSTS = [
     "10.143.167.43",
     "192.168.1.24",
     "172.16.101.129",
+    "206.207.51.82",
     "206.207.51.192"
 ]
 
