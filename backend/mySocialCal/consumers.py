@@ -17,6 +17,7 @@ from .serializers import SocialCalEventSerializer
 from .serializers import SocialEventMessagesSerializer
 from .serializers import SocialCalCommentSerializer
 from .serializers import SocialCellEventSerializer
+from .serializers import SocialCalItemsSerializer
 import datetime
 from django.utils import timezone
 import pytz
@@ -758,21 +759,38 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         #         postList.append(post.pk)
 
 
+        # This is the content type that holds the combination of social events
+        # and social cells, now that thigns are a bit different you will
+        # probally only grab users post idividually for the day (socialcalItems)
         post_list = SocialCellEventPost.objects.all().filter(
         owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
         ).order_by('-post_date')[:int(data['startIndex'])]
         # post_list = SocialCellEventPost.objects.filter(pk__in = postList).order_by('-post_date')[:int(data['startIndex'])]
 
+
         serializer = SocialCellEventSerializer(post_list, many = True)
+
+
+        cur_date = datetime.datetime.now()
+
+        #  this is just individual social cal items that will get filtered by
+        # the recent date, filter by current date
+        singlePost_list = SocialCalItems.objects.all().filter(
+        creator__in = userPlusUserFollowing.values_list("id", flat = True)
+        ).filter(
+        created_at__year =cur_date.year,
+        created_at__month = cur_date.month,
+        created_at__day = cur_date.day,
+        ).order_by('-created_at')[:int(data['startIndex'])]
+
+        # now we just serialize it
+
+        serializer_post = SocialCalItemsSerializer(singlePost_list, many = True)
 
         # You would want to grab the current day and then grab the social cal cell
         # of that day if it exist.
 
         # So you will be filtering social cal cell
-
-        # timezone.activate(pytz.timezone("MST"))
-        # time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-        # print(time)
 
         socialCalCell = SocialCalCell.objects.all().filter(
         socialCalUser = curUser
@@ -788,7 +806,7 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         content = {
             'command': 'fetch_social_posts',
-            'social_posts': json.dumps(serializer.data),
+            'social_posts': json.dumps(serializer_post.data),
             "curSocialCalCell": json.dumps(serializedSocialCalCell)
         }
 
