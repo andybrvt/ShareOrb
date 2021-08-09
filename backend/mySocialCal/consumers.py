@@ -819,8 +819,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # Function similar to that of send_social_post_like but
         # now you are just gonna send it out individually
 
-        print(data)
-
         socialCalItem = get_object_or_404(SocialCalItems, id = data['socialItemId'])
         personLike = get_object_or_404(User, id = data['personLike'])
 
@@ -835,6 +833,18 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         self.send_new_social_post_action(content)
 
+    def send_single_post_unlike(self, data):
+        socialCalItem = get_object_or_404(SocialCalItems, id = data['socialItemId'])
+        personUnlike = get_object_or_404(User, id = data['personUnlike'])
+        socialCalItem.people_like.remove(personUnlike)
+        socialCalItemObj = SocialCalItemsSerializer(socialCalItem).data
+
+        content = {
+            "command": 'send_single_post_unlike',
+            "socialCalItemObj": socialCalItemObj
+        }
+
+        self.send_new_social_post_action(content)
 
     def send_social_post_like(self, data):
         # This function will be pretty much similar to that of the social cal cell
@@ -991,6 +1001,8 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
             self.send_fetch_social_post(data)
         if data['command'] == "send_single_post_like":
             self.send_single_post_like(data)
+        if data['command'] == "send_single_post_unlike":
+            self.send_single_post_unlike(data)
         if data['command'] == 'send_social_post_like':
             self.send_social_post_like(data)
         if data['command'] == 'send_social_post_unlike':
