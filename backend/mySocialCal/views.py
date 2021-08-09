@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework import viewsets
-from datetime import datetime
+import datetime
 from django.utils import timezone
 from userprofile.models import User
 from userprofile.models import CustomNotification
@@ -440,7 +440,7 @@ class loadSocialPostView(APIView):
 
     # Pretty much you keep track of the start and end in the front end
     # and then just pass it in the back to render the right ones
-    def get(self, request, start, addMore, *args, **kwargs):
+    def get(self, request,curDate, start, addMore, *args, **kwargs):
 
         # Now add the same filter here similar to the one you have on your consumer
         curUser = get_object_or_404(User, id = self.request.user.id)
@@ -450,16 +450,29 @@ class loadSocialPostView(APIView):
 
         userPlusUserFollowing = User.objects.exclude(id__in= notUserFollowing.values_list("id", flat = True))
 
-        allPost = models.SocialCellEventPost.objects.all().filter(
-        owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-        ).order_by('-post_date')[start:start+addMore]
+        # allPost = models.SocialCellEventPost.objects.all().filter(
+        # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        # ).order_by('-post_date')[start:start+addMore]
+        #
+        # # allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
+        # serializer = serializers.SocialCellEventSerializer(allPost, many = True).data
 
 
-        # allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
-        serializer = serializers.SocialCellEventSerializer(allPost, many = True).data
+
+
+        dateList = curDate.split("-")
+        allSinglePost = models.SocialCalItems.objects.all().filter(
+        creator__in = userPlusUserFollowing.values_list("id", flat = True)
+        ).filter(
+        created_at__year =dateList[0],
+        created_at__month = dateList[1],
+        created_at__day = dateList[2],
+        ).order_by('-created_at')[start:start+addMore]
+
+        serializer_post = serializers.SocialCalItemsSerializer(allSinglePost, many = True).data
 
         content = {
-            "socialPost":serializer,
+            "socialPost":serializer_post,
             "has_more": is_there_more_data(start)
         }
 

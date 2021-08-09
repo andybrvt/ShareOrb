@@ -772,9 +772,7 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # serializer = SocialCellEventSerializer(post_list, many = True)
 
 
-        cur_date = datetime.datetime.now()
-        print(cur_date)
-        print(curDate)
+        
         dateList = curDate.split("-")
         #  this is just individual social cal items that will get filtered by
         # the recent date, filter by current date
