@@ -26,6 +26,9 @@ class SocialCalCellView(generics.ListAPIView):
     queryset = models.SocialCalCell.objects.all()
     serializer_class = serializers.SocialCalCellSerializer
 
+class SocialItemsView(generics.ListAPIView):
+    queryset = models.SocialCalItems.objects.all()
+    serializer_class = serializers.SocialCalItemsSerializer
 
 class SocialCalUploadPic(APIView):
     # This function will upload the pic that are selcted in the newsfeed
@@ -532,7 +535,8 @@ class SocialCalSingleUploadPic(APIView):
     def post(self, request, id, *args, **kwargs):
         #  you first get the date
         curDate = request.data['curDate']
-
+        curDateTime = request.data['curDateTime']
+        print(curDateTime)
         #then get the user
         user = get_object_or_404(User, id = id)
 
@@ -556,7 +560,8 @@ class SocialCalSingleUploadPic(APIView):
             creator = user,
             itemUser = user,
             itemImage = request.data['image'],
-            calCell = socialCalCell
+            calCell = socialCalCell,
+            created_at = curDateTime
         )
 
         socialCalCell.save()

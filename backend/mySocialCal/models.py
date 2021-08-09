@@ -330,7 +330,7 @@ class SocialCalItems(models.Model):
     # So we would need a created_at to determine where to put the social cal item
     # the only time this created_at will not be used and instead use the start date and
     # end date will be when we are creating a social event
-    created_at = models.DateTimeField(auto_now_add = True)
+    created_at = models.DateTimeField(auto_now_add = False)
 
     # The creator will be the person that actully created the picture
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'item_creator', on_delete = models.CASCADE)
