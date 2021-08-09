@@ -772,7 +772,7 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # serializer = SocialCellEventSerializer(post_list, many = True)
 
 
-        
+
         dateList = curDate.split("-")
         #  this is just individual social cal items that will get filtered by
         # the recent date, filter by current date
@@ -813,6 +813,27 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         self.send_json(content)
         # Now you have to serialize the content type
+
+
+    def send_single_post_like(self, data):
+        # Function similar to that of send_social_post_like but
+        # now you are just gonna send it out individually
+
+        print(data)
+
+        socialCalItem = get_object_or_404(SocialCalItems, id = data['socialItemId'])
+        personLike = get_object_or_404(User, id = data['personLike'])
+
+        socialCalItem.people_like.add(personLike)
+
+        socialCalItemObj = SocialCalItemsSerializer(socialCalItem).data
+
+        content = {
+            "command": 'send_single_post_like',
+            "socialCalItemObj":socialCalItemObj
+        }
+
+        self.send_new_social_post_action(content)
 
 
     def send_social_post_like(self, data):
@@ -949,6 +970,8 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
 
 
+
+
     def connect(self):
         # As all ways you first have to connect to the websocekt
 
@@ -963,8 +986,11 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_social_posts':
             self.send_fetch_social_post(data)
+        if data['command'] == "send_single_post_like":
+            self.send_single_post_like(data)
         if data['command'] == 'send_social_post_like':
             self.send_social_post_like(data)
         if data['command'] == 'send_social_post_unlike':
