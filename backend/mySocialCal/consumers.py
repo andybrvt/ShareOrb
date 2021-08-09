@@ -762,25 +762,28 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         # This is the content type that holds the combination of social events
         # and social cells, now that thigns are a bit different you will
         # probally only grab users post idividually for the day (socialcalItems)
-        post_list = SocialCellEventPost.objects.all().filter(
-        owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-        ).order_by('-post_date')[:int(data['startIndex'])]
-        # post_list = SocialCellEventPost.objects.filter(pk__in = postList).order_by('-post_date')[:int(data['startIndex'])]
+
+        # post_list = SocialCellEventPost.objects.all().filter(
+        # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        # ).order_by('-post_date')[:int(data['startIndex'])]
 
 
-        serializer = SocialCellEventSerializer(post_list, many = True)
+
+        # serializer = SocialCellEventSerializer(post_list, many = True)
 
 
         cur_date = datetime.datetime.now()
-
+        print(cur_date)
+        print(curDate)
+        dateList = curDate.split("-")
         #  this is just individual social cal items that will get filtered by
         # the recent date, filter by current date
         singlePost_list = SocialCalItems.objects.all().filter(
         creator__in = userPlusUserFollowing.values_list("id", flat = True)
         ).filter(
-        created_at__year =cur_date.year,
-        created_at__month = cur_date.month,
-        created_at__day = cur_date.day,
+        created_at__year =dateList[0],
+        created_at__month = dateList[1],
+        created_at__day = dateList[2],
         ).order_by('-created_at')[:int(data['startIndex'])]
 
         # now we just serialize it

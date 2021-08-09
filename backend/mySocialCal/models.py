@@ -342,8 +342,8 @@ class SocialCalItems(models.Model):
     #    #This will be the foreign key that connects the pictures and post with the correct calCell
 
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialPost', null = True)
-
-
+    caption = models.TextField(blank = True)
+    people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'singlePostLiker', blank = True)
 
     # Everything from here down would be for the events
     class Meta:
