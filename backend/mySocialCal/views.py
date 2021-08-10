@@ -549,6 +549,7 @@ class SocialCalSingleUploadPic(APIView):
         #  you first get the date
         curDate = request.data['curDate']
         curDateTime = request.data['curDateTime']
+        caption = request.data['caption']
         print(curDateTime)
         #then get the user
         user = get_object_or_404(User, id = id)
@@ -574,7 +575,8 @@ class SocialCalSingleUploadPic(APIView):
             itemUser = user,
             itemImage = request.data['image'],
             calCell = socialCalCell,
-            created_at = curDateTime
+            created_at = curDateTime,
+            caption = caption
         )
 
         socialCalCell.save()
