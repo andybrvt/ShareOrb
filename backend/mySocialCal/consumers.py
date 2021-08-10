@@ -848,6 +848,17 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         self.send_new_social_post_action(content)
 
+    def update_single_post(self, data):
+        socialCalItem = get_object_or_404(SocialCalItems, id = data['socialItemId'])
+
+        socialCalItemObj = SocialCalItemsSerializer(socialCalItem).data
+        content = {
+            "command": 'update_single_post',
+            "socialCalItemObj": socialCalItemObj
+        }
+
+        self.send_new_social_post_action(content)
+
     def send_social_post_like(self, data):
         # This function will be pretty much similar to that of the social cal cell
         # page like but now this one since it already exist you will just pull the
@@ -1013,6 +1024,8 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
             self.grab_new_updated_social_cell(data)
         if data['command'] == 'remove_all_photo_social_post':
             self.remove_all_photo_social_post(data)
+        if data['command'] == "update_single_post":
+            self.update_single_post(data)
 
     def send_social_post_action(self, postActions):
         postAction = postActions['action']
