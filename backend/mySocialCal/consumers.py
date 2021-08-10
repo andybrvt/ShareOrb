@@ -10,6 +10,7 @@ from .models import SocialCalCell
 from .models import SocialCalComment
 from .models import SocialCalItems
 from .models import SocialCellEventPost
+from .models import SocialCalItemComment
 from userprofile.models import CustomNotification
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
@@ -18,6 +19,7 @@ from .serializers import SocialEventMessagesSerializer
 from .serializers import SocialCalCommentSerializer
 from .serializers import SocialCellEventSerializer
 from .serializers import SocialCalItemsSerializer
+from .serializers import SocialItemCommentSerializer
 import datetime
 from django.utils import timezone
 import pytz
@@ -1024,21 +1026,18 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
     # use this to fetch the comments of the
     def fetch_social_cell_comments(self, data):
 
-        socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
+        socialCell = get_object_or_404(SocialCalItems, id = data['cellId'])
         # now serialize it
-
-        cellDate = SocialCalCellSerializer(socialCell).data["socialCaldate"]
-
-        socialComments = SocialCalComment.objects.filter(
-            calCell= socialCell
+        cellDate = SocialCalItemsSerializer(socialCell).data["created_at"]
+        socialComments = SocialCalItemComment.objects.filter(
+            calItem= socialCell
         )
-
-        serializedComments = SocialCalCommentSerializer(socialComments, many = True).data
+        serializedComments = SocialItemCommentSerializer(socialComments, many = True).data
 
         content = {
             'command': 'fetch_social_cell_comments',
             'socialComments': serializedComments,
-            'owenrId': socialCell.socialCalUser.id,
+            'owenrId': socialCell.creator.id,
             'cellDate': cellDate
         }
 
