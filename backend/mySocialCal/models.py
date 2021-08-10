@@ -339,7 +339,7 @@ class SocialCalItems(models.Model):
     # Images can be uploaded when the day has a picture or a post
     itemImage = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
-    #    #This will be the foreign key that connects the pictures and post with the correct calCell
+    #This will be the foreign key that connects the pictures and post with the correct calCell
 
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialPost', null = True)
     caption = models.TextField(blank = True)
@@ -348,6 +348,10 @@ class SocialCalItems(models.Model):
     # Everything from here down would be for the events
     class Meta:
         ordering = ['-created_at']
+
+    def get_socialCalItemComment(self):
+
+        return SocialCalItemComment.objects.filter(calItem = self).values_list("id", flat = True)
 
 
 class SocialCalEvent(models.Model):
@@ -408,6 +412,16 @@ class SocialCalComment(models.Model):
     commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'socialUserComment', on_delete = models.CASCADE, null = True )
     comment_like_count = models.IntegerField(default=0, blank = True)
     comment_people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='commenPeopleList', blank = True)
+
+
+class SocialCalItemComment(models.Model):
+    # This comment will be made specifically for the comments
+    calItem = models.ForeignKey(SocialCalItems,on_delete = models.CASCADE, related_name = "socialItemComments")
+    body = models.TextField(blank = True)
+    created_on = models.DateTimeField(auto_now_add = True)
+    commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= "socialItemUserComment", on_delete = models.CASCADE, null = True)
+
+
 
 # This is for the new newsfeed modal that would hold all the social cal cell
 # and social events on the newsfeed

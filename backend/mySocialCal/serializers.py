@@ -103,6 +103,8 @@ class SocialCalUserSerializer(serializers.ModelSerializer):
 
 class SocialCalItemsSerializer(serializers.ModelSerializer):
     # itemImage = Base64ImageField()
+    get_socialCalItemComment = serializers.StringRelatedField(many = True)
+
 
     class Meta:
         model = models.SocialCalItems
@@ -114,7 +116,9 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         'itemUser',
         'itemImage',
         "caption",
-        "people_like"
+        "people_like",
+        "calCell",
+        "get_socialCalItemComment"
          )
 
     def to_representation(self, instance):

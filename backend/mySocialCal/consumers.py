@@ -1021,9 +1021,9 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 # it up on the social calendar
 class SocialCommentConsumer(JsonWebsocketConsumer):
 
+    # use this to fetch the comments of the
     def fetch_social_cell_comments(self, data):
-        # fetch the comments of a specific cell
-        # you are gonna get the data cell id
+
         socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
         # now serialize it
 
@@ -1132,6 +1132,8 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
         }
 
         self.send_json(content)
+
+
 
     def connect(self):
         self.cellId = self.scope['url_route']['kwargs']['cellId']
