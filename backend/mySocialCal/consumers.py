@@ -1047,20 +1047,20 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
         # makes the comment and then send it back
 
         # first get the cell
-        socialCell = get_object_or_404(SocialCalCell, id = data['cellId'])
+        socialCell = get_object_or_404(SocialCalItems, id = data['cellId'])
         # get user
         user = get_object_or_404(User, id = data['userId'])
 
         # now create the comment
 
-        socialComment = SocialCalComment.objects.create(
-            calCell = socialCell,
+        socialComment = SocialCalItemComment.objects.create(
+            calItem = socialCell,
             body = data['comment'],
             commentUser = user
         )
 
         #  now serialize the comment
-        serializedComments = SocialCalCommentSerializer(socialComment).data
+        serializedComments = SocialItemCommentSerializer(socialComment).data
 
         # now send it off
         content = {
