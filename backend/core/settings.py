@@ -167,6 +167,9 @@ DATABASES = {
                 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+                    'charset': 'utf8mb4',
+                    'use_unicode': True, },
         'NAME': 'test',
         'USER': 'root',
         'PASSWORD': 'password',
