@@ -266,7 +266,7 @@ class NewsFeedView extends React.Component {
 
 
 
-							<InfiniteScroll
+						<InfiniteScroll
 								updateStart = {this.updateStart}
 								data={this.props} />
 

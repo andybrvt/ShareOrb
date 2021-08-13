@@ -1145,6 +1145,53 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
 
         self.send_json(content)
 
+    def send_social_cal_cell_like(self, data):
+        # send function to add like to a item and then
+        # return the whole social calendar
+        personLike =  get_object_or_404(User, id = data['personLike'])
+
+        # in this case the cellid is just the item id
+        socialItem = SocialCalItems.objects.get(id= data['cellId'])
+        socialItem.people_like.add(personLike)
+        #
+        socialCalItemObj = SocialCalItemsSerializer(socialItem).data
+        #
+        content = {
+            "command": 'send_social_cal_cell_like',
+            "socialItem": socialCalItemObj,
+
+        }
+
+        self.send_social_cell_action(content)
+
+    def send_social_cal_cell_unlike(self, data):
+        personUnlike = get_object_or_404(User, id = data['personUnlike'])
+        socialItem = SocialCalItems.objects.get(id= data['cellId'])
+        socialItem.people_like.remove(personUnlike)
+        #
+        socialCalItemObj = SocialCalItemsSerializer(socialItem).data
+        #
+        content = {
+            "command": 'send_social_cal_cell_unlike',
+            "socialItem": socialCalItemObj,
+
+        }
+
+        self.send_social_cell_action(content)
+
+
+    def send_social_cell_action(self, socialCellActionObj):
+        channel_layer = get_channel_layer()
+        channel = "socialCalCell_"+str(socialCellActionObj['socialItem']['calCell'])
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                "type":'send_new_social_cell_action',
+                "action": socialCellActionObj
+            }
+
+        )
 
 
     def connect(self):
@@ -1164,3 +1211,11 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == 'fetch_social_cal_cell_info':
             self.send_fetch_social_cal_cell_info(data)
+        if data['command'] == 'send_social_cal_cell_like':
+            self.send_social_cal_cell_like(data)
+        if data['command'] == 'send_social_cal_cell_unlike':
+            self.send_social_cal_cell_unlike(data)
+
+    def send_new_social_cell_action(self, cellActions):
+        cellAction = cellActions['action']
+        return self.send_json(cellAction)
