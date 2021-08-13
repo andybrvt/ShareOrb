@@ -395,271 +395,271 @@ class NotificationsDropDown extends React.Component{
         event that is created for the sync
         */}
 
-      if (notifications[i].type === 'send_friend_event_sync'){
-        // ACCEPTS: works
-          // Bascially when you accept, it will send a notification to to the
-          // orignal sender saying that you accept the event sync and then it wll
-          // let the orginal sender pick a time
-          // This will also delete the event in the backend
-        // DECLINE: works
-          // When you decline, it will send a notificaiton to the orignal send
-          // saying that you declined the event sync
-          // This will also delete the event in the backend
-
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-        <Avatar size = {45} style ={{
-          backgroundColor: 'limegreen',
-          verticalAlign: 'middle'}}
-          // icon = {<UserOutlined />}
-          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-          >
-        </Avatar>
-        </div>
-          <h4 className = 'listNotification'>
-
-            {dateFns.differenceInCalendarDays(
-              new Date(notifications[i].maxDate),new Date(notifications[i].minDate)) === 1
-              ? <span className ='notificationWords'>
-              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-              wants to event sync with you for: <b>
-              {dateFns.format(
-                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
-              </b>
-              </span>
-
-              :
-
-              <span className ='notificationWords'>
-              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-              wants to event sync with you from: <b>
-              {dateFns.format(
-                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
-                -
-                {dateFns.format(
-                  dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
-              </b>
-              </span>
-            }
-
-            <br />
-            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
-              <Button
-                style = {{
-                  width: '75px',
-                  top:'5px',
-                  height: '24px',
-                  left:'30px',
-                  float:'right',
-                  position:'relative',
-                }}
-              type ="primary"
-              className = 'declineButton'
-              onClick = {(e)=> this.onEventSyncDecline(
-                e,
-                notifications[i].recipient,
-                notifications[i].actor.username,
-                notifications[i].minDate,
-                notifications[i].maxDate,
-                notifications[i].id
-              )}> <div class="pickEventSyncButtonText"> Decline</div> </Button>
-
-              <Button
-                style = {{
-                  width: '75px',
-                  top:'5px',
-                  height: '24px',
-                  left:'15px',
-
-                  float:'right',
-                  position:'relative',
-                }}
-              className = 'acceptButton'
-              type ="primary"
-              onClick = {(e)=> this.onEventSyncAccept(
-                e,
-                notifications[i].recipient,
-                notifications[i].actor.username,
-                notifications[i].minDate,
-                notifications[i].maxDate,
-                notifications[i].id
-              )}> <div class="pickEventSyncButtonText"> Accept</div> </Button>
-
-
-
-
-             </span>
-
-            <div className = 'pickEventSyncButton'>
-
-            </div>
-            <div
-            className = 'deleteButton'
-            onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-            >
-            <i class="far fa-times-circle"></i>
-            </div>
-          </h4>
-        </li>
-        )
-      }
-      if (notifications[i].type === 'declined_event_sync'){
-        // This event pretty much shows the original user that the recipient
-        // that you have decline the event
-        // WORKS
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-        <Avatar
-        size = {45}
-        style ={{
-          backgroundColor: 'darkgrey',
-          verticalAlign: 'middle'}}
-          // icon = {<UserOutlined />}
-
-          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-          >
-        </Avatar>
-        </div>
-          <h4 className = 'listNotificationSingle'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
-               declined your event sync request.
-               <br />
-               <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-               <div
-               className = 'deleteButton'
-               onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-               >
-               <i class="far fa-times-circle"></i>
-               </div>
-          </h4>
-        </li>
-        )
-      }
-      if (notifications[i].type === 'accepted_event_sync'){
-        // This will be sent to the orignal sender when the recipient when they choose
-        // to accept the event sync. This notification will open up the
-        // pick event sync so that you can pick the date for the event
-        // WORKS
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-        <Avatar size = {45} style ={{
-          backgroundColor: 'fuchsia',
-          verticalAlign: 'middle'}}
-          // icon = {<UserOutlined />}
-
-          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-          >
-        </Avatar>
-        </div>
-          <h4 className = 'listNotification'>
-
-              {dateFns.differenceInCalendarDays(
-                new Date(notifications[i].maxDate), new Date(notifications[i].minDate)) === 1
-               ?
-
-              <span className = 'notificationWords'>
-              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
-               accepted your event sync request on <b>
-              {dateFns.format(
-                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
-              </b>
-              </span>
-
-              :
-
-              <span className = 'notificationWords'>
-              <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
-               accepted your event sync request from: <b>
-              {dateFns.format(
-                dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
-                -
-              {dateFns.format(
-                dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
-              </b>
-              </span>
-
-            }
-
-
-
-              <br />
-              <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
-                <Button
-                type = 'primary'
-                style = {{
-                  width: '100px',
-                  top:'5px',
-                  height: '24px',
-                  left:'30px',
-                  float:'right',
-                  position:'relative',
-                }}
-                // Start here tomorrow
-                onClick = {() => this.props.openPickEventSyncModal(
-                  notifications[i].recipient,
-                  notifications[i].actor,
-                  notifications[i].minDate,
-                  notifications[i].maxDate,
-                  notifications[i].id,
-                )}>
-                <div class="pickEventSyncButtonText"> Pick Date</div>
-               </Button>
-
-              </span>
-
-
-              <div
-              className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-              >
-              <i class="far fa-times-circle"></i>
-              </div>
-
-          </h4>
-
-        </li>
-        )
-      }
-      if (notifications[i].type === 'new_event'){
-        notificationList.push(
-        <li className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-        <Avatar size = {45} style ={{
-          backgroundColor: 'orangered',
-          verticalAlign: 'middle'}}
-          // icon = {<UserOutlined />}
-
-          src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-          >
-        </Avatar>
-        </div>
-          <h4 className = 'listNotificationSingle'>
-              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-              set an event on your calendar on
-              <b>
-                {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
-              </b>
-              at
-              <b>
-                {dateFns.format(new Date(notifications[i].minDate), 'h a')}
-              </b>
-              <br />
-              <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div
-              className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-              >
-              <i class="far fa-times-circle"></i>
-              </div>
-          </h4>
-        </li>
-        )
-      }
+      // if (notifications[i].type === 'send_friend_event_sync'){
+      //   // ACCEPTS: works
+      //     // Bascially when you accept, it will send a notification to to the
+      //     // orignal sender saying that you accept the event sync and then it wll
+      //     // let the orginal sender pick a time
+      //     // This will also delete the event in the backend
+      //   // DECLINE: works
+      //     // When you decline, it will send a notificaiton to the orignal send
+      //     // saying that you declined the event sync
+      //     // This will also delete the event in the backend
+      //
+      //   notificationList.push(
+      //   <li className = 'notificationListContainer'>
+      //   <div className = 'notificationIcon'>
+      //   <Avatar size = {45} style ={{
+      //     backgroundColor: 'limegreen',
+      //     verticalAlign: 'middle'}}
+      //     // icon = {<UserOutlined />}
+      //     src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //     >
+      //   </Avatar>
+      //   </div>
+      //     <h4 className = 'listNotification'>
+      //
+      //       {dateFns.differenceInCalendarDays(
+      //         new Date(notifications[i].maxDate),new Date(notifications[i].minDate)) === 1
+      //         ? <span className ='notificationWords'>
+      //         <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //         wants to event sync with you for: <b>
+      //         {dateFns.format(
+      //           dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+      //         </b>
+      //         </span>
+      //
+      //         :
+      //
+      //         <span className ='notificationWords'>
+      //         <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //         wants to event sync with you from: <b>
+      //         {dateFns.format(
+      //           dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+      //           -
+      //           {dateFns.format(
+      //             dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
+      //         </b>
+      //         </span>
+      //       }
+      //
+      //       <br />
+      //       <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
+      //         <Button
+      //           style = {{
+      //             width: '75px',
+      //             top:'5px',
+      //             height: '24px',
+      //             left:'30px',
+      //             float:'right',
+      //             position:'relative',
+      //           }}
+      //         type ="primary"
+      //         className = 'declineButton'
+      //         onClick = {(e)=> this.onEventSyncDecline(
+      //           e,
+      //           notifications[i].recipient,
+      //           notifications[i].actor.username,
+      //           notifications[i].minDate,
+      //           notifications[i].maxDate,
+      //           notifications[i].id
+      //         )}> <div class="pickEventSyncButtonText"> Decline</div> </Button>
+      //
+      //         <Button
+      //           style = {{
+      //             width: '75px',
+      //             top:'5px',
+      //             height: '24px',
+      //             left:'15px',
+      //
+      //             float:'right',
+      //             position:'relative',
+      //           }}
+      //         className = 'acceptButton'
+      //         type ="primary"
+      //         onClick = {(e)=> this.onEventSyncAccept(
+      //           e,
+      //           notifications[i].recipient,
+      //           notifications[i].actor.username,
+      //           notifications[i].minDate,
+      //           notifications[i].maxDate,
+      //           notifications[i].id
+      //         )}> <div class="pickEventSyncButtonText"> Accept</div> </Button>
+      //
+      //
+      //
+      //
+      //        </span>
+      //
+      //       <div className = 'pickEventSyncButton'>
+      //
+      //       </div>
+      //       <div
+      //       className = 'deleteButton'
+      //       onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //       >
+      //       <i class="far fa-times-circle"></i>
+      //       </div>
+      //     </h4>
+      //   </li>
+      //   )
+      // }
+      // if (notifications[i].type === 'declined_event_sync'){
+      //   // This event pretty much shows the original user that the recipient
+      //   // that you have decline the event
+      //   // WORKS
+      //   notificationList.push(
+      //   <li className = 'notificationListContainer'>
+      //   <div className = 'notificationIcon'>
+      //   <Avatar
+      //   size = {45}
+      //   style ={{
+      //     backgroundColor: 'darkgrey',
+      //     verticalAlign: 'middle'}}
+      //     // icon = {<UserOutlined />}
+      //
+      //     src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //     >
+      //   </Avatar>
+      //   </div>
+      //     <h4 className = 'listNotificationSingle'>
+      //         <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
+      //          declined your event sync request.
+      //          <br />
+      //          <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //          <div
+      //          className = 'deleteButton'
+      //          onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //          >
+      //          <i class="far fa-times-circle"></i>
+      //          </div>
+      //     </h4>
+      //   </li>
+      //   )
+      // }
+      // if (notifications[i].type === 'accepted_event_sync'){
+      //   // This will be sent to the orignal sender when the recipient when they choose
+      //   // to accept the event sync. This notification will open up the
+      //   // pick event sync so that you can pick the date for the event
+      //   // WORKS
+      //   notificationList.push(
+      //   <li className = 'notificationListContainer'>
+      //   <div className = 'notificationIcon'>
+      //   <Avatar size = {45} style ={{
+      //     backgroundColor: 'fuchsia',
+      //     verticalAlign: 'middle'}}
+      //     // icon = {<UserOutlined />}
+      //
+      //     src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //     >
+      //   </Avatar>
+      //   </div>
+      //     <h4 className = 'listNotification'>
+      //
+      //         {dateFns.differenceInCalendarDays(
+      //           new Date(notifications[i].maxDate), new Date(notifications[i].minDate)) === 1
+      //          ?
+      //
+      //         <span className = 'notificationWords'>
+      //         <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
+      //          accepted your event sync request on <b>
+      //         {dateFns.format(
+      //           dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+      //         </b>
+      //         </span>
+      //
+      //         :
+      //
+      //         <span className = 'notificationWords'>
+      //         <b>{notifications[i].actor.first_name} {notifications[i].actor.last_name}  </b>
+      //          accepted your event sync request from: <b>
+      //         {dateFns.format(
+      //           dateFns.addHours(new Date(notifications[i].minDate),7), 'MM/dd/yyyy')}
+      //           -
+      //         {dateFns.format(
+      //           dateFns.addHours(new Date(notifications[i].maxDate),7), 'MM/dd/yyyy')}
+      //         </b>
+      //         </span>
+      //
+      //       }
+      //
+      //
+      //
+      //         <br />
+      //         <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)}
+      //           <Button
+      //           type = 'primary'
+      //           style = {{
+      //             width: '100px',
+      //             top:'5px',
+      //             height: '24px',
+      //             left:'30px',
+      //             float:'right',
+      //             position:'relative',
+      //           }}
+      //           // Start here tomorrow
+      //           onClick = {() => this.props.openPickEventSyncModal(
+      //             notifications[i].recipient,
+      //             notifications[i].actor,
+      //             notifications[i].minDate,
+      //             notifications[i].maxDate,
+      //             notifications[i].id,
+      //           )}>
+      //           <div class="pickEventSyncButtonText"> Pick Date</div>
+      //          </Button>
+      //
+      //         </span>
+      //
+      //
+      //         <div
+      //         className = 'deleteButton'
+      //         onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //         >
+      //         <i class="far fa-times-circle"></i>
+      //         </div>
+      //
+      //     </h4>
+      //
+      //   </li>
+      //   )
+      // }
+      // if (notifications[i].type === 'new_event'){
+      //   notificationList.push(
+      //   <li className = 'notificationListContainer'>
+      //   <div className = 'notificationIcon'>
+      //   <Avatar size = {45} style ={{
+      //     backgroundColor: 'orangered',
+      //     verticalAlign: 'middle'}}
+      //     // icon = {<UserOutlined />}
+      //
+      //     src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //     >
+      //   </Avatar>
+      //   </div>
+      //     <h4 className = 'listNotificationSingle'>
+      //         <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //         set an event on your calendar on
+      //         <b>
+      //           {dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')}
+      //         </b>
+      //         at
+      //         <b>
+      //           {dateFns.format(new Date(notifications[i].minDate), 'h a')}
+      //         </b>
+      //         <br />
+      //         <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //         <div
+      //         className = 'deleteButton'
+      //         onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //         >
+      //         <i class="far fa-times-circle"></i>
+      //         </div>
+      //     </h4>
+      //   </li>
+      //   )
+      // }
 
       {/* This will be for when a user likes your post */}
       if(notifications[i].type === 'like_notification'){
@@ -760,230 +760,232 @@ class NotificationsDropDown extends React.Component{
 
 
       {/* This will let someone know when you shared an event with them*/}
-      if(notifications[i].type === "shared_event"){
-        notificationList.push(
-          <li
-          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
-          className = "notificationListContainer">
-            <div className = 'notificationIcon'>
-              <Avatar size = {45} style = {{
-                backgroundColor: 'purple',
-                verticalAlign: 'middle'}}
-                // icon = {<UserOutlined />}
-
-                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-                >
-              </Avatar>
-            </div>
-            <h4 className = 'listNotificationSingle'>
-                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-                 shared an event with you on <br/>
-               <b>{dateFns.format(new Date(notifications[i].minDate), 'iiii')+", "} </b>
-                 <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d')} </b> at
-                 <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
-                 <br />
-                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-                >
-
-                <i class="far fa-times-circle"></i>
-
-                </div>
-
-
-            </h4>
-
-          </li>
-        )
-      } if(notifications[i].type === "accepted_shared_event"){
-        notificationList.push(
-          <li
-          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
-          className = "notificationListContainer">
-            <div className = 'notificationIcon'>
-              <Avatar size = {45} style = {{
-                backgroundColor: 'purple',
-                verticalAlign: 'middle'}}
-                // icon = {<UserOutlined />}
-
-                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-                >
-              </Avatar>
-            </div>
-            <h4 className = 'listNotificationSingle'>
-                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-                 accepted shared event on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
-                 <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
-                 <br />
-                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                 <div
-                 className = 'deleteButton'
-                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-                 >
-
-                 <i class="far fa-times-circle"></i>
-
-                 </div>
-            </h4>
-
-          </li>
-        )
-      } if(notifications[i].type === "declined_shared_event"){
-        notificationList.push(
-          <li
-          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
-          className = "notificationListContainer">
-            <div className = 'notificationIcon'>
-              <Avatar size = {45} style = {{
-                backgroundColor: 'purple',
-                verticalAlign: 'middle'}}
-                // icon = {<UserOutlined />}
-                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-                >
-              </Avatar>
-            </div>
-            <h4 className = 'listNotificationSingle'>
-                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-                 declined shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
-                 <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
-                 <br />
-                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                 <div
-                 className = 'deleteButton'
-                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-                 >
-
-                 <i class="far fa-times-circle"></i>
-
-                 </div>
-            </h4>
-
-          </li>
-        )
-      } if(notifications[i].type === "edited_share_event"){
-        notificationList.push(
-          <li
-          onClick = {() => this.onEventPageClick(notifications[i].eventId)}
-          className = "notificationListContainer">
-            <div className = 'notificationIcon'>
-              <Avatar size = {45} style = {{
-                backgroundColor: 'purple',
-                verticalAlign: 'middle'}}
-                // icon = {<UserOutlined />}
-                src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-                >
-              </Avatar>
-            </div>
-            <h4 className = 'listNotificationSingle'>
-                <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
-                 edited a shared event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
-                 <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
-                 <br />
-                 <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                 <div
-                 className = 'deleteButton'
-                 onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-                 >
-
-                 <i class="far fa-times-circle"></i>
-
-                 </div>
-            </h4>
-
-          </li>
-        )
-      } if(notifications[i].type === 'pending_social_event'){
-        const pendingEventObj = {
-          title: notifications[i].pendingEventTitle,
-          content: notifications[i].pendingEventContent,
-          location: notifications[i].pendingEventLocation,
-          curId: notifications[i].pendingEventCurId,
-          ownerId: notifications[i].pendingCalendarOwnerId,
-          eventDate: notifications[i].pendingEventDate,
-          eventStart: notifications[i].pendingEventStartTime,
-          eventEnd: notifications[i].pendingEventEndTime
-        }
-
-        notificationList.push(
-          <li
-          onClick = {() =>this.onOpenPendingEvent(
-            pendingEventObj,
-            notifications[i].actor.username,
-            notifications[i].actor.profile_picture,
-            notifications[i].id
-           )}
-          className = 'notificationListContainer'>
-          <div className = 'notificationIcon'>
-            <Avatar size = {45} style ={{
-              verticalAlign: 'middle'}}
-              // icon = {<UserOutlined />}
-              src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-              >
-            </Avatar>
-          </div>
-            <h4 className = 'listNotificationSingle'>
-                <b>{this.capitalize(notifications[i].actor.username)} </b>
-                added an event to your social calendar on
-                <b>{" "+dateFns.format(new Date(notifications[i].pendingEventDate), 'iiii')+", "+dateFns.format(new Date(notifications[i].pendingEventDate), 'MMM d')} </b>
-                  <br/>
-                <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-                <div
-                className = 'deleteButton'
-                onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-                >
-
-                <i class="far fa-times-circle"></i>
-
-                </div>
-            </h4>
-          </li>
-        )
-      } if(notifications[i].type === 'pending_social_pics'){
-        // This notification be similar to that of the penidng event but now it has pictures
-        notificationList.push(
-
-        <li
-        onClick = {() => this.onOpenPendingPics(
-          notifications[i].get_pendingImages,
-          notifications[i].actor.username,
-          notifications[i].actor.profile_picture,
-          notifications[i].id,
-          notifications[i].pendingEventDate,
-          notifications[i].actor.id
-         )}
-        className = 'notificationListContainer'>
-        <div className = 'notificationIcon'>
-          <Avatar size = {45} style ={{
-            verticalAlign: 'middle'}}
-            // icon = {<UserOutlined />}
-
-            src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
-
-            >
-          </Avatar>
-        </div>
-          <h4 className = 'listNotificationSingle'>
-              <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
-              wants to add pictures to your social calendar on {notifications[i].pendingEventDate}. Click to check it out!
-              <br />
-              <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
-              <div
-              className = 'deleteButton'
-              onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
-              >
-
-              <i class="far fa-times-circle"></i>
-
-              </div>
-          </h4>
-        </li>
-      )} if(notifications[i].type === 'follow_request_notification'){
+      // if(notifications[i].type === "shared_event"){
+      //   notificationList.push(
+      //     <li
+      //     onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+      //     className = "notificationListContainer">
+      //       <div className = 'notificationIcon'>
+      //         <Avatar size = {45} style = {{
+      //           backgroundColor: 'purple',
+      //           verticalAlign: 'middle'}}
+      //           // icon = {<UserOutlined />}
+      //
+      //           src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //           >
+      //         </Avatar>
+      //       </div>
+      //       <h4 className = 'listNotificationSingle'>
+      //           <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //            shared an event with you on <br/>
+      //          <b>{dateFns.format(new Date(notifications[i].minDate), 'iiii')+", "} </b>
+      //            <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d')} </b> at
+      //            <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
+      //            <br />
+      //            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //           <div
+      //           className = 'deleteButton'
+      //           onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //           >
+      //
+      //           <i class="far fa-times-circle"></i>
+      //
+      //           </div>
+      //
+      //
+      //       </h4>
+      //
+      //     </li>
+      //   )
+      // }
+      // if(notifications[i].type === "accepted_shared_event"){
+      //   notificationList.push(
+      //     <li
+      //     onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+      //     className = "notificationListContainer">
+      //       <div className = 'notificationIcon'>
+      //         <Avatar size = {45} style = {{
+      //           backgroundColor: 'purple',
+      //           verticalAlign: 'middle'}}
+      //           // icon = {<UserOutlined />}
+      //
+      //           src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //           >
+      //         </Avatar>
+      //       </div>
+      //       <h4 className = 'listNotificationSingle'>
+      //           <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //            accepted shared event on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+      //            <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
+      //            <br />
+      //            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //            <div
+      //            className = 'deleteButton'
+      //            onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //            >
+      //
+      //            <i class="far fa-times-circle"></i>
+      //
+      //            </div>
+      //       </h4>
+      //
+      //     </li>
+      //   )
+      // } if(notifications[i].type === "declined_shared_event"){
+      //   notificationList.push(
+      //     <li
+      //     onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+      //     className = "notificationListContainer">
+      //       <div className = 'notificationIcon'>
+      //         <Avatar size = {45} style = {{
+      //           backgroundColor: 'purple',
+      //           verticalAlign: 'middle'}}
+      //           // icon = {<UserOutlined />}
+      //           src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //           >
+      //         </Avatar>
+      //       </div>
+      //       <h4 className = 'listNotificationSingle'>
+      //           <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //            declined shared an event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+      //            <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
+      //            <br />
+      //            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //            <div
+      //            className = 'deleteButton'
+      //            onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //            >
+      //
+      //            <i class="far fa-times-circle"></i>
+      //
+      //            </div>
+      //       </h4>
+      //
+      //     </li>
+      //   )
+      // } if(notifications[i].type === "edited_share_event"){
+      //   notificationList.push(
+      //     <li
+      //     onClick = {() => this.onEventPageClick(notifications[i].eventId)}
+      //     className = "notificationListContainer">
+      //       <div className = 'notificationIcon'>
+      //         <Avatar size = {45} style = {{
+      //           backgroundColor: 'purple',
+      //           verticalAlign: 'middle'}}
+      //           // icon = {<UserOutlined />}
+      //           src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //           >
+      //         </Avatar>
+      //       </div>
+      //       <h4 className = 'listNotificationSingle'>
+      //           <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)} </b>
+      //            edited a shared event with you on <b>{dateFns.format(new Date(notifications[i].minDate), 'MMM d, yyyy')} </b> at
+      //            <b> {dateFns.format(new Date(notifications[i].minDate), 'hh:mm aaaa')}.</b>
+      //            <br />
+      //            <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //            <div
+      //            className = 'deleteButton'
+      //            onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //            >
+      //
+      //            <i class="far fa-times-circle"></i>
+      //
+      //            </div>
+      //       </h4>
+      //
+      //     </li>
+      //   )
+      // } if(notifications[i].type === 'pending_social_event'){
+      //   const pendingEventObj = {
+      //     title: notifications[i].pendingEventTitle,
+      //     content: notifications[i].pendingEventContent,
+      //     location: notifications[i].pendingEventLocation,
+      //     curId: notifications[i].pendingEventCurId,
+      //     ownerId: notifications[i].pendingCalendarOwnerId,
+      //     eventDate: notifications[i].pendingEventDate,
+      //     eventStart: notifications[i].pendingEventStartTime,
+      //     eventEnd: notifications[i].pendingEventEndTime
+      //   }
+      //
+      //   notificationList.push(
+      //     <li
+      //     onClick = {() =>this.onOpenPendingEvent(
+      //       pendingEventObj,
+      //       notifications[i].actor.username,
+      //       notifications[i].actor.profile_picture,
+      //       notifications[i].id
+      //      )}
+      //     className = 'notificationListContainer'>
+      //     <div className = 'notificationIcon'>
+      //       <Avatar size = {45} style ={{
+      //         verticalAlign: 'middle'}}
+      //         // icon = {<UserOutlined />}
+      //         src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //         >
+      //       </Avatar>
+      //     </div>
+      //       <h4 className = 'listNotificationSingle'>
+      //           <b>{this.capitalize(notifications[i].actor.username)} </b>
+      //           added an event to your social calendar on
+      //           <b>{" "+dateFns.format(new Date(notifications[i].pendingEventDate), 'iiii')+", "+dateFns.format(new Date(notifications[i].pendingEventDate), 'MMM d')} </b>
+      //             <br/>
+      //           <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //           <div
+      //           className = 'deleteButton'
+      //           onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //           >
+      //
+      //           <i class="far fa-times-circle"></i>
+      //
+      //           </div>
+      //       </h4>
+      //     </li>
+      //   )
+      // } if(notifications[i].type === 'pending_social_pics'){
+      //   // This notification be similar to that of the penidng event but now it has pictures
+      //   notificationList.push(
+      //
+      //   <li
+      //   onClick = {() => this.onOpenPendingPics(
+      //     notifications[i].get_pendingImages,
+      //     notifications[i].actor.username,
+      //     notifications[i].actor.profile_picture,
+      //     notifications[i].id,
+      //     notifications[i].pendingEventDate,
+      //     notifications[i].actor.id
+      //    )}
+      //   className = 'notificationListContainer'>
+      //   <div className = 'notificationIcon'>
+      //     <Avatar size = {45} style ={{
+      //       verticalAlign: 'middle'}}
+      //       // icon = {<UserOutlined />}
+      //
+      //       src = {`${global.IMAGE_ENDPOINT}`+notifications[i].actor.profile_picture}
+      //
+      //       >
+      //     </Avatar>
+      //   </div>
+      //     <h4 className = 'listNotificationSingle'>
+      //         <b>{this.capitalize(notifications[i].actor.first_name)} {this.capitalize(notifications[i].actor.last_name)}  </b>
+      //         wants to add pictures to your social calendar on {notifications[i].pendingEventDate}. Click to check it out!
+      //         <br />
+      //         <span className = 'timeStamp'> {this.renderTimestamp(notifications[i].timestamp)} </span>
+      //         <div
+      //         className = 'deleteButton'
+      //         onClick = { e => this.onDeleteNotification(e, notifications[i].id)}
+      //         >
+      //
+      //         <i class="far fa-times-circle"></i>
+      //
+      //         </div>
+      //     </h4>
+      //   </li>
+      // )}
+       if(notifications[i].type === 'follow_request_notification'){
         notificationList.push(
           <li className = 'notificationListContainer' >
             <div className = 'notificationIcon'>
