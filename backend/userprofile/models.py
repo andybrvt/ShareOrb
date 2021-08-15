@@ -90,6 +90,7 @@ class User(AbstractUser):
     # sends you a notification you have to update the number nad every time you
     # you open pu the drop down you will set the value to 0 again
     notificationSeen = models.IntegerField(default = 0, blank = True)
+    notificationToken = models.CharField(blank=True, null=True, max_length=100)
 
 
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
