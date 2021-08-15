@@ -1051,6 +1051,7 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
             'command': 'fetch_social_cell_comments',
             'socialComments': serializedComments,
             'owenrId': socialCell.creator.id,
+            'ownerNotiToken': socialCell.creator.notificationToken,
             'cellDate': cellDate
         }
 
