@@ -884,3 +884,15 @@ class WaitListEmailsView(APIView):
         email, created = models.WaitListEmails.objects.get_or_create(email = request.data['email'])
 
         return Response({created, email.id})
+
+
+class AddUserNotificationToken(APIView):
+    # this function is used to add the notification token for the user
+    def post(self, request, *args, **kwargs):
+        print(request.data['token'])
+        print(request.user.id)
+        user = get_object_or_404(models.User, id = request.user.id)
+
+        user.notificationToken = request.data['token']
+        user.save()
+        return Response("token added")

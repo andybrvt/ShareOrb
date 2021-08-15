@@ -99,7 +99,7 @@ class SocialCalUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture', "notificationToken")
 
 class SocialCalItemsSerializer(serializers.ModelSerializer):
     # itemImage = Base64ImageField()
