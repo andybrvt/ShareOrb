@@ -369,8 +369,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
                 type = "send_social_cell_comment",
                 actor = actor,
                 recipient = recipient,
-                verb = "commented on your social cell on "+str(data['cellDate']),
-                pendingEventDate = data['cellDate']
+                eventId = socialCalItem.calCell.id,
+                verb = "commented on your post",
+                itemId = socialCalItem.id
             )
         recipient.notificationSeen += 1
         recipient.save()
