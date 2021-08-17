@@ -573,7 +573,8 @@ class NotificationSerializer(serializers.ModelSerializer):
             'pendingEventDate',
             'pendingEventStartTime',
             'pendingEventEndTime',
-            'get_pendingImages'
+            'get_pendingImages',
+            "itemId"
         )
 
     def to_representation(self, instance):

@@ -288,7 +288,7 @@ class CustomNotification(models.Model):
     # eventId field is used for calendar event related objects
     # so that we can go into the eventid page directly
     eventId = models.BigIntegerField(blank = True, null = True)
-
+    itemId = models.BigIntegerField(blank = True, null = True)
     # These fields in combination with minDate and maxDate will hold informaiton
     # about an event that wants to be approved.Once approvaed the new soical
     # cal event will be created. Also gotta add in to the fact that if the date of

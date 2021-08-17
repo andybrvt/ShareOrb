@@ -351,16 +351,18 @@ class NotificationConsumer(JsonWebsocketConsumer):
         # This function will be used to manage the notification for the
         # social cal cell. It will take care of liking, commenting and stuff
         # like that
+        print('this stuff here')
         actor = get_object_or_404(User, id = data['actor'])
         recipient = get_object_or_404(User, id = data['recipient'])
+        socialCalItem = get_object_or_404(SocialCalItems, id = data['socialItemId'])
         if data['command'] == "social_like_notification":
             notification = CustomNotification.objects.create(
                 type = "send_social_cell_like",
                 actor = actor,
                 recipient = recipient,
-                albumDate=str(data['cellDate']),
-                verb = "liked your social cell on"+ str(data['cellDate']),
-                pendingEventDate = data['cellDate']
+                eventId = socialCalItem.calCell.id,
+                verb = "likes your post",
+                itemId = socialCalItem.id
             )
         if data['command'] == "social_comment_notification":
             notification = CustomNotification.objects.create(
