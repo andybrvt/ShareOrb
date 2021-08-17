@@ -273,7 +273,7 @@ class CustomNotification(models.Model):
 
     verb = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    albumDate = models.TextField(blank=True, null=True)
+    # albumDate = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(default=now, db_index=True)
 
     deleted = models.BooleanField(default=False, db_index=True)
