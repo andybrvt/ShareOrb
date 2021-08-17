@@ -21,5 +21,6 @@ urlpatterns = [
     path("filterCells/<slug:userId>/<str:start>/<str:end>", views.grabSocialCellRangeView.as_view(), name = "filter social cell"),
     path("trendingDay", views.trendingSocialCellDay.as_view(), name = "trending_day"),
     path("exploreDay/<int:start>/<int:end>", views.exploreSocialCellDay.as_view(), name = "explore_day"),
-    path("updateSinglePic/<slug:id>", views.SocialCalSingleUploadPic.as_view(), name = "socialCal_singlePic")
+    path("updateSinglePic/<slug:id>", views.SocialCalSingleUploadPic.as_view(), name = "socialCal_singlePic"),
+    path("goalList", views.GoalAlbumStringView.as_view(), name = "goal_list")
 ]

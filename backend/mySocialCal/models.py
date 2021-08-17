@@ -311,6 +311,19 @@ pre_delete.connect(delete_social_cell_post, sender = SocialCalCell)
 # pre_delete.connect(delete_all_post, sender = SocialCalCell)
 
 
+#  this function is used to string togehter daily post
+class GoalAlbumString(models.Model):
+    goal = models.CharField(max_length = 222)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "goal_owner", on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add = True)
+
+
+    class Meta:
+        ordering = ['created_at']
+
+    def get_socialCalItems(self):
+
+        return SocialCalItems.objects.filter(goal = self).values_list('id',flat = True)
 
 
 
@@ -345,6 +358,7 @@ class SocialCalItems(models.Model):
     caption = models.TextField(blank = True)
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'singlePostLiker', blank = True)
 
+    goal = models.ForeignKey(GoalAlbumString, on_delete= models.CASCADE, related_name = 'user_goal', null = True)
     # Everything from here down would be for the events
     class Meta:
         ordering = ['-created_at']

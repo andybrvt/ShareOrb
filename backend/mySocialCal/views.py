@@ -20,6 +20,9 @@ import time
 
 
 # Create your views here.
+class GoalAlbumStringView(generics.ListAPIView):
+    queryset = models.GoalAlbumString.objects.all();
+    serializer_class = serializers.GoalAlbumStringSerializer
 
 class SocialCalCellView(generics.ListAPIView):
     # This will show all the socialCalCells and all its components

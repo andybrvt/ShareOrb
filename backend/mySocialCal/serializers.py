@@ -231,3 +231,18 @@ class SocialCellEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SocialCellEventPost
         fields = ("id", 'owner', 'post', 'post_date')
+
+class GoalAlbumStringSerializer(serializers.ModelSerializer):
+
+    get_socialCalItems  = serializers.StringRelatedField(many = True)
+
+
+    class Meta:
+        model = models.GoalAlbumString
+        fields = (
+            'id',
+            'goal',
+            'owner',
+            'created_at',
+            'get_socialCalItems'
+            )
