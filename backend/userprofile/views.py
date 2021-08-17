@@ -795,10 +795,10 @@ class onUnsendRequestView(APIView):
 class unShowIntialInstructions(APIView):
     # Used for unshowing the initial instructions on newsfeed
 
-    def post(self, request, id, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         # this will get teh user
-        curUser = get_object_or_404(models.User, id = id)
+        curUser = get_object_or_404(models.User, id = request.user.id)
 
         curUser.showIntialInstructions = False
         curUser.save()
