@@ -232,6 +232,11 @@ class SocialCellEventSerializer(serializers.ModelSerializer):
         model = models.SocialCellEventPost
         fields = ("id", 'owner', 'post', 'post_date')
 
+class SocialItemJustPicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SocialCalItems
+        fields = ("id", "itemImage")
+
 class GoalAlbumStringSerializer(serializers.ModelSerializer):
 
     get_socialCalItems  = serializers.StringRelatedField(many = True)
@@ -246,3 +251,14 @@ class GoalAlbumStringSerializer(serializers.ModelSerializer):
             'created_at',
             'get_socialCalItems'
             )
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        cal_items = []
+
+        for items in data['get_socialCalItems']:
+            item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id = items)).data
+            cal_items.append(item)
+        data['get_socialCalItems'] = cal_items
+        data['owner'] = SocialCalUserSerializer(User.objects.get(id = data['owner'])).data
+
+        return data
