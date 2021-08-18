@@ -21,8 +21,11 @@ import time
 
 # Create your views here.
 class GoalAlbumStringView(generics.ListAPIView):
-    queryset = models.GoalAlbumString.objects.all();
     serializer_class = serializers.GoalAlbumStringSerializer
+
+    def get_queryset(self):
+        return models.GoalAlbumString.objects.filter(owner__id = self.kwargs['id'])
+
 
 class SocialCalCellView(generics.ListAPIView):
     # This will show all the socialCalCells and all its components
