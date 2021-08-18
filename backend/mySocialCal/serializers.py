@@ -25,7 +25,7 @@ class SocialCalCellSerializer(serializers.ModelSerializer):
          'get_socialCalEvent',
          'get_socialCalComment',
          "actionText",
-         "socialCaldate"
+         "socialCaldate",
          )
 
     def to_representation(self, instance):
@@ -118,7 +118,8 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         "caption",
         "people_like",
         "calCell",
-        "get_socialCalItemComment"
+        "get_socialCalItemComment",
+        'goal'
          )
 
     def to_representation(self, instance):
@@ -130,6 +131,9 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         for likes in data['people_like']:
             like = SocialCalUserSerializer(User.objects.get(id = likes)).data
             cal_likes.append(like)
+
+        if(data['goal']):
+            data['goal'] = GoalAlbumStringMiniSerializer(models.GoalAlbumString.objects.get(id= data['goal'])).data
 
         data['people_like'] = cal_likes
 
@@ -236,6 +240,18 @@ class SocialItemJustPicSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SocialCalItems
         fields = ("id", "itemImage")
+
+class GoalAlbumStringMiniSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.GoalAlbumString
+        fields = (
+            'id',
+            'goal',
+            'owner',
+            'created_at'
+        )
+
 
 class GoalAlbumStringSerializer(serializers.ModelSerializer):
 
