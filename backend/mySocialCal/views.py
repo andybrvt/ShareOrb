@@ -556,9 +556,15 @@ class SocialCalSingleUploadPic(APIView):
         curDate = request.data['curDate']
         curDateTime = request.data['curDateTime']
         caption = request.data['caption']
-        print(curDateTime)
+        print('stuff here')
+        print(request.data)
+
+
+
         #then get the user
         user = get_object_or_404(User, id = id)
+
+
 
         # now you filter out the cell
 
@@ -574,18 +580,36 @@ class SocialCalSingleUploadPic(APIView):
         if(created == False):
             socialCalCell.actionText = "updated"
 
-        # Now you add a single picture in
-        socialCalItem = models.SocialCalItems.objects.create(
-            socialItemType = 'picture',
-            creator = user,
-            itemUser = user,
-            itemImage = request.data['image'],
-            calCell = socialCalCell,
-            created_at = curDateTime,
-            caption = caption
-        )
+        if(request.data['goalId'] != "undefined"):
+            goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
+            # Now you add a single picture in
+            socialCalItem = models.SocialCalItems.objects.create(
+                socialItemType = 'picture',
+                creator = user,
+                itemUser = user,
+                itemImage = request.data['image'],
+                calCell = socialCalCell,
+                created_at = curDateTime,
+                caption = caption,
+                goal = goal
+            )
 
-        socialCalCell.save()
+            socialCalCell.save()
+
+        else:
+            # Now you add a single picture in
+            socialCalItem = models.SocialCalItems.objects.create(
+                socialItemType = 'picture',
+                creator = user,
+                itemUser = user,
+                itemImage = request.data['image'],
+                calCell = socialCalCell,
+                created_at = curDateTime,
+                caption = caption
+            )
+
+            socialCalCell.save()
+
 
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
             socialCalUser = user,
