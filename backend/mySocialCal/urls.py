@@ -22,5 +22,6 @@ urlpatterns = [
     path("trendingDay", views.trendingSocialCellDay.as_view(), name = "trending_day"),
     path("exploreDay/<int:start>/<int:end>", views.exploreSocialCellDay.as_view(), name = "explore_day"),
     path("updateSinglePic/<slug:id>", views.SocialCalSingleUploadPic.as_view(), name = "socialCal_singlePic"),
-    path("goalList/<int:id>", views.GoalAlbumStringView.as_view(), name = "goal_list")
+    path("goalList/<int:id>", views.GoalAlbumStringView.as_view(), name = "goal_list"),
+    path("createGoal/<int:userId>", views.GoalAlbumStringCreat.as_view(), name = "create_goal")
 ]

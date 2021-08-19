@@ -26,7 +26,6 @@ class GoalAlbumStringView(generics.ListAPIView):
     def get_queryset(self):
         return models.GoalAlbumString.objects.filter(owner__id = self.kwargs['id'])
 
-
 class SocialCalCellView(generics.ListAPIView):
     # This will show all the socialCalCells and all its components
     queryset = models.SocialCalCell.objects.all()
@@ -626,3 +625,21 @@ class SocialCalSingleUploadPic(APIView):
         }
 
         return Response(content)
+
+
+# create the goal here
+
+class GoalAlbumStringCreat(APIView):
+
+    def post(self, request, userId, *args, **kwargs):
+
+        print(request.data)
+        user = get_object_or_404(User, id = userId)
+
+        goal = models.GoalAlbumString.objects.create(
+            goal = request.data['body'],
+            owner = user
+        )
+
+        serializedGoal = serializers.GoalAlbumStringSerializer(goal).data
+        return Response(serializedGoal)
