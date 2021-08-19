@@ -239,7 +239,7 @@ class SocialCellEventSerializer(serializers.ModelSerializer):
 class SocialItemJustPicSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SocialCalItems
-        fields = ("id", "itemImage")
+        fields = ("id", "itemImage", 'caption')
 
 class GoalAlbumStringMiniSerializer(serializers.ModelSerializer):
 

@@ -629,7 +629,7 @@ class SocialCalSingleUploadPic(APIView):
 
 # create the goal here
 
-class GoalAlbumStringCreat(APIView):
+class GoalAlbumStringCreate(APIView):
 
     def post(self, request, userId, *args, **kwargs):
 
@@ -642,4 +642,15 @@ class GoalAlbumStringCreat(APIView):
         )
 
         serializedGoal = serializers.GoalAlbumStringSerializer(goal).data
+        return Response(serializedGoal)
+
+# This function will get a specific goal given the id
+class GoalAlbumStringGet(APIView):
+    def get(self, request, goalId, *args, **kwargs):
+
+        goal = get_object_or_404(models.GoalAlbumString, id = goalId)
+
+        serializedGoal = serializers.GoalAlbumStringSerializer(goal).data
+
+
         return Response(serializedGoal)
