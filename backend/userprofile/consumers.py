@@ -824,6 +824,7 @@ class ExploreConsumer(JsonWebsocketConsumer):
         # This function will be similar to that of the fetch_profile but
         # for run time sake you will just be grabing information of the user and
         # not that of the social calendar, pretty much just change the serializers
+        print(data);
         profile = get_object_or_404(User, username= data['username'])
         serializer = UserExploreMobileSerializer(profile).data
 

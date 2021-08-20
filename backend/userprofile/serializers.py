@@ -197,6 +197,7 @@ class UserExploreMobileSerializer(serializers.ModelSerializer):
          'requested',
          'get_sent_follow_request',
          'get_follow_request',
+         'notificationToken'
         )
 
     def to_representation(self, instance):

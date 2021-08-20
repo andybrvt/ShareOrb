@@ -139,11 +139,8 @@ class UpdateSocialCellCoverPic(APIView):
 
         serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
 
-        content = {
-            "socialCell": serializedSocialCell,
-            "created": request.data['createdCell']
-        }
-        return Response(content)
+
+        return Response('cover pic added')
 
 class SocialClippingView(APIView):
     # This class is used for adding the clipping of pictures into the social
@@ -550,8 +547,15 @@ class exploreSocialCellDay(APIView):
 # this function will be used to upload a single pic to the social cal cell
 class SocialCalSingleUploadPic(APIView):
 
+    # **** make sure you relink the websockets for the newsfeed, right now it
+    # is hella inefficient
     def post(self, request, id, *args, **kwargs):
-        #  you first get the date
+        # new improved single pic upload
+        # first create the social cal cell (or get it if it is already created)
+        # then link up the new cover picture
+        # then you create the social cal item and then send it off to the front end
+
+
         curDate = request.data['curDate']
         curDateTime = request.data['curDateTime']
         caption = request.data['caption']
@@ -565,13 +569,11 @@ class SocialCalSingleUploadPic(APIView):
 
 
 
-        # now you filter out the cell
-
-        print(curDate, user)
         socialCalCell, created = models.SocialCalCell.objects.get_or_create(
             socialCalUser = user,
             socialCaldate = curDate
         )
+
 
         # chnage is change of the coverpicture
         change = True
@@ -595,6 +597,8 @@ class SocialCalSingleUploadPic(APIView):
 
             socialCalCell.save()
 
+
+
         else:
             # Now you add a single picture in
             socialCalItem = models.SocialCalItems.objects.create(
@@ -609,6 +613,7 @@ class SocialCalSingleUploadPic(APIView):
 
             socialCalCell.save()
 
+        serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
 
         socialCalCellNew = get_object_or_404(models.SocialCalCell,
             socialCalUser = user,
@@ -616,15 +621,24 @@ class SocialCalSingleUploadPic(APIView):
          )
 
 
-        # This is most just to get the current cover profile for the front end
-        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCellNew).data
         content = {
-            "coverPicChange": change,
-            "created": created,
-            "cell": serializedSocialCell
-        }
+             'item': serializedItem,
+             "cellId": socialCalCellNew.id
+         }
 
         return Response(content)
+
+
+
+        # This is most just to get the current cover profile for the front end
+        # serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCellNew).data
+        # content = {
+        #     "coverPicChange": change,
+        #     "created": created,
+        #     "cell": serializedSocialCell
+        # }
+
+        # return Response(content)
 
 
 # create the goal here
