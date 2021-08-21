@@ -134,7 +134,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
-# v2 db
+# v2 db production db
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
