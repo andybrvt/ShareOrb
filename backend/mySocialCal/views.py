@@ -668,3 +668,25 @@ class GoalAlbumStringGet(APIView):
 
 
         return Response(serializedGoal)
+
+# This class will be just for admin to check on the users accounts
+class UserItemView(APIView):
+    def get(self, request, username, *args, **kwargs):
+
+        user = get_object_or_404(User, username = username)
+
+        items = models.SocialCalItems.objects.filter(creator = user)
+
+        serializedItems = serializers.SocialCalItemsSerializer(items, many = True).data
+
+        return Response(serializedItems)
+# this will be for the admin to check the cells of the users easier
+class UserCellsView(APIView):
+    def get(self, request, username, *args, **kwargs):
+        user = get_object_or_404(User, username = username)
+
+        cells = models.SocialCalCell.objects.filter(socialCalUser = user)
+
+        serializedCells = serializers.SocialCalCellSerializer(cells, many = True).data
+
+        return Response(serializedCells)

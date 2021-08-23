@@ -5,7 +5,9 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
     path('items', views.SocialItemsView.as_view(), name = "socialCalendar_items"),
+    path('userItems/<slug:username>', views.UserItemView.as_view(), name = "socialCalendar__user_items"),
     path('cells', views.SocialCalCellView.as_view(), name = 'socialCalendar_cells'),
+    path('userCells/<slug:username>', views.UserCellsView.as_view(), name = 'socialCalendar_cells'),
     path('uploadPic/<slug:id>', views.SocialCalUploadPic.as_view(), name = 'socialCalendar_uploadpic'),
     path('updateCoverPic/<slug:id>', views.UpdateSocialCellCoverPic.as_view(), name = "socialCalendarCell_changeCoverPic"),
     path('uploadEvent', views.SocialEventCreateView.as_view(), name = 'socialCalendar_uploadEvent'),
@@ -25,4 +27,5 @@ urlpatterns = [
     path("goalList/<int:id>", views.GoalAlbumStringView.as_view(), name = "goal_list"),
     path("createGoal/<int:userId>", views.GoalAlbumStringCreate.as_view(), name = "create_goal"),
     path("getGoal/<int:goalId>", views.GoalAlbumStringGet.as_view(), name = "get_goal")
+
 ]
