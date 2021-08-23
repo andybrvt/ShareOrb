@@ -896,3 +896,19 @@ class AddUserNotificationToken(APIView):
         user.notificationToken = request.data['token']
         user.save()
         return Response("token added")
+
+class InviteListEmailView(APIView):
+    def post(self, request, *args, **kwargs):
+
+        sender = get_object_or_404(models.User, id = request.user.id)
+        email, created = models.InviteListEmails.objects.get_or_create(
+            email = request.data['email'],
+            sender = sender
+        )
+
+        if(created === True){
+            sender.invitedNum = sender.invitedNum -1
+            sender.save()
+        }
+
+        return Response({created, sender.invitedNum})
