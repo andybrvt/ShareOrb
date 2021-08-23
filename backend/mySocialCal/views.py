@@ -675,7 +675,7 @@ class UserItemView(APIView):
 
         user = get_object_or_404(User, username = username)
 
-        items = models.SocialCalItems.objects.filter(creator = user)
+        items = models.SocialCalItems.objects.filter(creator = user).order_by('-created_at')
 
         serializedItems = serializers.SocialCalItemsSerializer(items, many = True).data
 
@@ -685,7 +685,7 @@ class UserCellsView(APIView):
     def get(self, request, username, *args, **kwargs):
         user = get_object_or_404(User, username = username)
 
-        cells = models.SocialCalCell.objects.filter(socialCalUser = user)
+        cells = models.SocialCalCell.objects.filter(socialCalUser = user).order_by('-created_at')
 
         serializedCells = serializers.SocialCalCellSerializer(cells, many = True).data
 
