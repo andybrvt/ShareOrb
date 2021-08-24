@@ -910,5 +910,15 @@ class InviteListEmailView(APIView):
             sender.invitedNum = sender.invitedNum -1
             sender.save()
 
+            return Response({"created":created, "num": sender.invitedNum})
 
-        return Response({created, sender.invitedNum})
+
+
+        return Response({"created":created, "num": sender.invitedNum})
+
+class CheckNumInviteListView(APIView):
+    # check if the person has enough invites left
+    def get(self, request, *args, **kwargs):
+        sender = get_object_or_404(models.User, id = request.user.id)
+        print(sender.invitedNum)
+        return Response(sender.invitedNum)
