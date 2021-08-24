@@ -906,7 +906,7 @@ class InviteListEmailView(APIView):
             sender = sender
         )
 
-        if(created === True){
+        if(created == True){
             sender.invitedNum = sender.invitedNum -1
             sender.save()
         }
