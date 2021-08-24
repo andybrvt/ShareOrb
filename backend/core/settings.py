@@ -22,38 +22,38 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 #
-# ALLOWED_HOSTS = [
-#  '172.31.4.121',
-#  'api.shareorb.com',
-#  'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
-#  "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
-#  '54.183.46.151',
-#  '127.0.0.1:5000',
-#  '52.8.250.165',
-#  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
-#  "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com"
-# ]
-
 ALLOWED_HOSTS = [
-    "10.20.100.62",
-    "127.0.0.1",
-    "10.3.0.116",
-    "192.168.1.200",
-    "192.168.1.205",
-    "192.168.1.206",
-    "172.17.0.1",
-    "172.20.10.2",
-    "10.143.167.43",
-    "192.168.1.24",
-    "172.16.101.129",
-    "206.207.51.82",
-    "206.207.51.192",
-    "206.207.51.73",
-    "206.207.51.121",
+ '172.31.4.121',
+ 'api.shareorb.com',
+ 'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+ "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
+ '54.183.46.151',
+ '127.0.0.1:5000',
+ '52.8.250.165',
+ 'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
+ "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com"
 ]
+
+# ALLOWED_HOSTS = [
+#     "10.20.100.62",
+#     "127.0.0.1",
+#     "10.3.0.116",
+#     "192.168.1.200",
+#     "192.168.1.205",
+#     "192.168.1.206",
+#     "172.17.0.1",
+#     "172.20.10.2",
+#     "10.143.167.43",
+#     "192.168.1.24",
+#     "172.16.101.129",
+#     "206.207.51.82",
+#     "206.207.51.192",
+#     "206.207.51.73",
+#     "206.207.51.121",
+# ]
 
 
 # IP for vila
@@ -137,19 +137,19 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
 # v2 db production db
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ebdb',
-#         'USER': 'shareorbDB',
-#         'PASSWORD': 'Pingandy123',
-#         'OPTIONS': {
-#          'charset': 'utf8mb4',
-#          'use_unicode': True, },
-#         'HOST': 'aaws2efgmy63yt.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
-#         'PORT': '3306',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ebdb',
+        'USER': 'shareorbDB',
+        'PASSWORD': 'Pingandy123',
+        'OPTIONS': {
+         'charset': 'utf8mb4',
+         'use_unicode': True, },
+        'HOST': 'aaws2efgmy63yt.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
 
 
 
@@ -167,22 +167,22 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 #
 # # else:
-DATABASES = {
-    'default': {
-                # 'ENGINE': 'django.db.backends.sqlite3',
-                # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-                    'charset': 'utf8mb4',
-                    'use_unicode': True, },
-        'NAME': 'test',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-        'PORT': '',
-    },
-}
+# DATABASES = {
+#     'default': {
+#                 # 'ENGINE': 'django.db.backends.sqlite3',
+#                 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#                     'charset': 'utf8mb4',
+#                     'use_unicode': True, },
+#         'NAME': 'test',
+#         'USER': 'root',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+#         'PORT': '',
+#     },
+# }
 
 
 # AWS EB Settings
@@ -235,12 +235,12 @@ SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 # This one is for development, and this is what ill show up for the image link
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
 # Use this one if you want to deploy
-# AWS_STORAGE_BUCKET_NAME = 'shareorb'
-# MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_STORAGE_BUCKET_NAME = 'shareorb'
+MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # make sure to uncomment this
 # uncomment DEFAULT_PERMISSION_CLASSES
@@ -278,8 +278,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            # "hosts": [("shareorbredisnew.bz41az.ng.0001.usw1.cache.amazonaws.com",6379)],
-            "hosts": [("127.0.0.1",6379)],
+            "hosts": [("shareorbredisnew.bz41az.ng.0001.usw1.cache.amazonaws.com",6379)],
+            # "hosts": [("127.0.0.1",6379)],
         },
     },
 }
