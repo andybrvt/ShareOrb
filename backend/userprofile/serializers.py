@@ -38,7 +38,7 @@ class FollowUserSerializer(serializers.ModelSerializer):
     # This is for the follower and followering list
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture')
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture', "notificationToken")
 
 
 class SuggestedUserSerializer(serializers.ModelSerializer):
@@ -50,7 +50,8 @@ class SuggestedUserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "profile_picture",
-            "get_followers"
+            "get_followers",
+            "notificationToken"
         )
     def to_representation(self, instance):
         data = super().to_representation(instance)

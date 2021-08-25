@@ -52,7 +52,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
         serializer = NotificationSerializer(notifications, many=True)
         content = {
             'command': 'notifications',
-            'notifications': json.dumps(serializer.data)
+            'notifications': json.dumps(serializer.data[:10])
             # self.notifications_to_json(serializer.data)
             # json.dumps(serializer.data)
         }
