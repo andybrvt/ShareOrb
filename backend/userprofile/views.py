@@ -15,7 +15,7 @@ from django.utils import timezone
 from django.db.models import Q
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import authentication_classes, permission_classes
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 
 import pytz
 
