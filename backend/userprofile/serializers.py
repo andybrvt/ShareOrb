@@ -173,6 +173,18 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_follow_request'] = requestList
         return data
 
+
+class UserEmailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.User
+        fields = (
+        'username',
+        'email'
+        )
+
+
+
 class UserExploreMobileSerializer(serializers.ModelSerializer):
     # This fucntion will be used to serialzie the user profile on mobile
     get_following = serializers.StringRelatedField(many = True)

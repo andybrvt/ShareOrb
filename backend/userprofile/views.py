@@ -15,6 +15,7 @@ from django.utils import timezone
 from django.db.models import Q
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import authentication_classes, permission_classes
+from django.core.mail import send_mail
 
 import pytz
 
@@ -42,6 +43,10 @@ class ImageView(generics.ListAPIView):
     queryset = models.ImageModel.objects.all()
     serializer_class = serializers.ImageSerializer
 
+
+class UserEmailView(generics.ListAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserEmailSerializer
 # Grabs ALL of the users
 class ListAll(generics.ListAPIView):
     queryset = models.User.objects.all()
@@ -912,9 +917,15 @@ class InviteListEmailView(APIView):
 
             return Response({"created":created, "num": sender.invitedNum})
 
+        # send_mail(
+        #     "Make appointment", #subject
+        #     "This is the message", # message
+        #     "shareorbofficial@gmail.com", #from email
+        #     ['andybrvt@gmail.com'], #to email
+        # )
 
 
-        return Response({"created":created, "num": sender.invitedNum})
+        return Response({"created":created, "num": sender.invitedNum, "email": request.data['email']})
 
 class CheckNumInviteListView(APIView):
     # check if the person has enough invites left
