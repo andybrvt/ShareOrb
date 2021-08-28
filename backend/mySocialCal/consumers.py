@@ -741,7 +741,7 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
 
         curUser = get_object_or_404(User, id = data['userId'])
 
-        if data['userId'] == 1:
+        if data['userId'] == 1 or data['userId'] == 3:
              #  put all the post items here
              socialItems = SocialCalItems.objects.all()[:int(data['startIndex'])];
              #  this will get all the items bc we will be the host
