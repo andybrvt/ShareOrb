@@ -1131,7 +1131,6 @@ class SocialCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
         if data['command'] == 'fetch_comment_cell_info':
             self.fetch_social_cell_comments(data)
         if data['command'] == "send_comment_cell":

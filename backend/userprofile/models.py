@@ -93,7 +93,7 @@ class User(AbstractUser):
     notificationToken = models.CharField(blank=True, null=True, max_length=100)
 
     invitedNum = models.IntegerField(default = 5, blank = False)
-
+    dailyNotification = models.BooleanField(default = True)
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
     def get_posts(self):
 

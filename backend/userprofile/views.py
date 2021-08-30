@@ -933,3 +933,12 @@ class CheckNumInviteListView(APIView):
         sender = get_object_or_404(models.User, id = request.user.id)
         print(sender.invitedNum)
         return Response(sender.invitedNum)
+
+
+class showDailyNotification(APIView):
+    def post(self, request, *args, **kwargs):
+
+        curUser = get_object_or_404(models.User, id = request.user.id)
+        curUser.dailyNotification =  not curUser.dailyNotification
+        curUser.save()
+        return Response(curUser.dailyNotification)
