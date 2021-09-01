@@ -446,32 +446,48 @@ class loadSocialPostView(APIView):
 
         # Now add the same filter here similar to the one you have on your consumer
         curUser = get_object_or_404(User, id = self.request.user.id)
-        userFollowing = curUser.get_following().values("person_getting_followers")
 
-        notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = self.request.user.id)
+        if self.request.user.id == 1 or self.request.user.id == 3:
+            socialItems = models.SocialCalItems.objects.all()[start:start+addMore]
+            serializer_post = serializers.SocialCalItemsSerializer(socialItems, many = True).data
 
-        userPlusUserFollowing = User.objects.exclude(id__in= notUserFollowing.values_list("id", flat = True))
+        else:
 
-        # allPost = models.SocialCellEventPost.objects.all().filter(
-        # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-        # ).order_by('-post_date')[start:start+addMore]
-        #
-        # # allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
-        # serializer = serializers.SocialCellEventSerializer(allPost, many = True).data
+            userFollowing = curUser.get_following().values("person_getting_followers")
+
+            notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = self.request.user.id)
+
+            userPlusUserFollowing = User.objects.exclude(id__in= notUserFollowing.values_list("id", flat = True))
+
+            # allPost = models.SocialCellEventPost.objects.all().filter(
+            # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+            # ).order_by('-post_date')[start:start+addMore]
+            #
+            # # allPost = models.SocialCellEventPost.objects.all()[start:start+addMore]
+            # serializer = serializers.SocialCellEventSerializer(allPost, many = True).data
 
 
 
 
-        dateList = curDate.split("-")
-        allSinglePost = models.SocialCalItems.objects.all().filter(
-        creator__in = userPlusUserFollowing.values_list("id", flat = True)
-        ).filter(
-        created_at__year =dateList[0],
-        created_at__month = dateList[1],
-        created_at__day = dateList[2],
-        ).order_by('-created_at')[start:start+addMore]
+            dateList = curDate.split("-")
 
-        serializer_post = serializers.SocialCalItemsSerializer(allSinglePost, many = True).data
+            # FOR FUTURE USE
+            # allSinglePost = models.SocialCalItems.objects.all().filter(
+            # creator__in = userPlusUserFollowing.values_list("id", flat = True)
+            # ).filter(
+            # created_at__year =dateList[0],
+            # created_at__month = dateList[1],
+            # created_at__day = dateList[2],
+            # ).order_by('-created_at')[start:start+addMore]
+
+
+            allSinglePost = models.SocialCalItems.objects.all().filter(
+            creator__in = userPlusUserFollowing.values_list("id", flat = True)
+            ).order_by('-created_at')[start:start+addMore]
+
+
+
+            serializer_post = serializers.SocialCalItemsSerializer(allSinglePost, many = True).data
 
         content = {
             "socialPost":serializer_post,

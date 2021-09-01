@@ -113,6 +113,7 @@ class UserSerializer(serializers.ModelSerializer):
          'get_sent_follow_request',
          'get_follow_request',
          'showIntialInstructions',
+         "dailyNotification",
          "notificationSeen",
          "date_joined"
          )
