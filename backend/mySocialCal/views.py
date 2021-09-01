@@ -470,13 +470,22 @@ class loadSocialPostView(APIView):
 
 
             dateList = curDate.split("-")
+
+            # FOR FUTURE USE
+            # allSinglePost = models.SocialCalItems.objects.all().filter(
+            # creator__in = userPlusUserFollowing.values_list("id", flat = True)
+            # ).filter(
+            # created_at__year =dateList[0],
+            # created_at__month = dateList[1],
+            # created_at__day = dateList[2],
+            # ).order_by('-created_at')[start:start+addMore]
+
+
             allSinglePost = models.SocialCalItems.objects.all().filter(
             creator__in = userPlusUserFollowing.values_list("id", flat = True)
-            ).filter(
-            created_at__year =dateList[0],
-            created_at__month = dateList[1],
-            created_at__day = dateList[2],
             ).order_by('-created_at')[start:start+addMore]
+
+
 
             serializer_post = serializers.SocialCalItemsSerializer(allSinglePost, many = True).data
 

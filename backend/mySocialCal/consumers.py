@@ -788,13 +788,23 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
             dateList = curDate.split("-")
             #  this is just individual social cal items that will get filtered by
             # the recent date, filter by current date
+
+            # PUT THIS BACK LATER
+            # singlePost_list = SocialCalItems.objects.all().filter(
+            # creator__in = userPlusUserFollowing.values_list("id", flat = True)
+            # ).filter(
+            # created_at__year =dateList[0],
+            # created_at__month = dateList[1],
+            # created_at__day = dateList[2],
+            # ).order_by('-created_at')[:int(data['startIndex'])]
+
+
             singlePost_list = SocialCalItems.objects.all().filter(
             creator__in = userPlusUserFollowing.values_list("id", flat = True)
-            ).filter(
-            created_at__year =dateList[0],
-            created_at__month = dateList[1],
-            created_at__day = dateList[2],
             ).order_by('-created_at')[:int(data['startIndex'])]
+
+
+
 
             # now we just serialize it
 
