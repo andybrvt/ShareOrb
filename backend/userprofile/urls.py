@@ -96,5 +96,7 @@ urlpatterns = [
 	path('getInvitedNum', views.CheckNumInviteListView.as_view(), name = "invited_num"),
 	path('addNotificationToken', views.AddUserNotificationToken.as_view(), name = "add_notification_token"),
 	path('userEmailList', views.UserEmailView.as_view(), name = "view_user_emails"),
-	path("showDailyNotification", views.showDailyNotification.as_view(), name = "show_daily_notification")
+	path("showDailyNotification", views.showDailyNotification.as_view(), name = "show_daily_notification"),
+	path("userFollowers/<slug:id>", views.UserFollowersView.as_view(), name = "user_follower_views"),
+	path("userFollowing/<slug:id>", views.UserFollowingView.as_view(), name = "user_following_view")
 ]

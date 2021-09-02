@@ -436,19 +436,16 @@ class configSuggestedSuggest(APIView):
         # because this is the first thing that they see
         # its cool to jsut grab everyone and add me and ping in
         focusList = []
-        if(models.User.objects.filter(id = 57).count() > 0 and models.User.objects.filter(id = 3).count() > 0 ):
+        if(models.User.objects.filter(id = 3).count() > 0 ):
         # if(True):
             andy = models.User.objects.get(id = 1)
             ping = models.User.objects.get(id = 3)
-            jon = models.User.objects.get(id = 57)
 
             serializedAndy = serializers.SuggestedUserSerializer(andy).data
             serializedPing = serializers.SuggestedUserSerializer(ping).data
-            serializedJon = serializers.SuggestedUserSerializer(jon).data
             # Now put them into a list
             focusList.append(serializedAndy)
             focusList.append(serializedPing)
-            focusList.append(serializedJon)
         userList = models.User.objects.exclude(id = self.request.user.id)[:20]
 
         serializeduserList = serializers.SuggestedUserSerializer(userList, many = True).data
@@ -942,3 +939,16 @@ class showDailyNotification(APIView):
         curUser.dailyNotification =  not curUser.dailyNotification
         curUser.save()
         return Response(curUser.dailyNotification)
+
+class UserFollowersView(APIView):
+    # this will get the follower list, it helps with run time
+    def get(self, request, id, *args, **kwargs):
+
+
+        return Response("stuff here")
+
+class UserFollowingView(APIView):
+
+    def get(self, request, id, *args, **kwargs):
+
+        return Response("stuff here")
