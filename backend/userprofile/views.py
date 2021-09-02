@@ -887,6 +887,11 @@ class WaitListEmailsView(APIView):
 
         return Response({created, email.id})
 
+class WaitListEmailNumView(APIView):
+    def get(self, request, *args, **kwargs):
+
+        emails = models.WaitListEmails.objects.all()
+        return Response(len(emails))
 
 class AddUserNotificationToken(APIView):
     # this function is used to add the notification token for the user

@@ -92,6 +92,7 @@ urlpatterns = [
 	path('resetNotificationSeen', views.resetNotificationSeen.as_view(), name = "reset_notification_seen"),
 	path('onClearNotification', views.onClearNotification.as_view(), name = "clear_notification"),
 	path('onWaitListAdd', views.WaitListEmailsView.as_view(), name = "add_user_wait_list"),
+	path('onWaitListGet', views.WaitListEmailNumView.as_view(), name = "add_user_wait_list"),
 	path('onInviteListAdd', views.InviteListEmailView.as_view(), name = "add_user_invite_list"),
 	path('getInvitedNum', views.CheckNumInviteListView.as_view(), name = "invited_num"),
 	path('addNotificationToken', views.AddUserNotificationToken.as_view(), name = "add_notification_token"),
