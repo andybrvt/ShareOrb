@@ -34,6 +34,7 @@ urlpatterns = [
 	path('everyoneSuggested', views.everyoneSuggested.as_view()),
 	path('suggestSuggested', views.suggestSuggested.as_view()),
 	path('configSuggestSuggested', views.configSuggestedSuggest.as_view()),
+	path('loadMoreSuggested/<int:start>/<int:addMore>', views.loadSuggestedFriendsView.as_view()),
 	path('loadSuggested', views.loadMoreSuggestedView.as_view()),
 	path('inviteList', views.inviteList.as_view()),
 	# DELETE LATER

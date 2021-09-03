@@ -436,17 +436,47 @@ class configSuggestedSuggest(APIView):
         # because this is the first thing that they see
         # its cool to jsut grab everyone and add me and ping in
         focusList = []
-        if(models.User.objects.filter(id = 3).count() > 0 ):
+        if(
+        models.User.objects.filter(id = 3).count() > 0 and
+        models.User.objects.filter(id = 125).count() > 0 and
+        models.User.objects.filter(id = 65).count() > 0 and
+        models.User.objects.filter(id = 148).count() > 0 and
+        models.User.objects.filter(id = 57).count() > 0 and
+        models.User.objects.filter(id = 75).count() > 0 and
+        models.User.objects.filter(id = 153).count() > 0 and
+        models.User.objects.filter(id = 152).count() > 0
+        ):
         # if(True):
             andy = models.User.objects.get(id = 1)
             ping = models.User.objects.get(id = 3)
+            val = models.User.objects.get(id = 125)
+            anton = models.User.object.get(id = 65)
+            hamzah = models.User.object.get(id = 148)
+            john = models.User.object.get(id = 57)
+            jc = models.User.object.get(id = 75)
+            ben = models.User.object.get(id = 153)
+            aj = models.User.object.get(id = 152)
 
             serializedAndy = serializers.SuggestedUserSerializer(andy).data
             serializedPing = serializers.SuggestedUserSerializer(ping).data
+            serializedVal = serializers.SuggestedUserSerializer(val).data
+            serializedanton = serializers.SuggestedUserSerializer(anton).data
+            serializedham = serializers.SuggestedUserSerializer(hamzah).data
+            serializedjohn = serializers.SuggestedUserSerializer(john).data
+            serializedjc = serializers.SuggestedUserSerializer(jc).data
+            serializedben = serializers.SuggestedUserSerializer(ben).data
+            serializedaj = serializers.SuggestedUserSerializer(aj).data
             # Now put them into a list
             focusList.append(serializedAndy)
             focusList.append(serializedPing)
-        userList = models.User.objects.exclude(id = self.request.user.id)[:20]
+            focusList.append(serializedVal)
+            focusList.append(serializedanton)
+            focusList.append(serializedham)
+            focusList.append(serializedjohn)
+            focusList.append(serializedjc)
+            focusList.append(serializedben)
+            focusList.append(serializedaj)
+        userList = models.User.objects.exclude(id = self.request.user.id)[:10]
 
         serializeduserList = serializers.SuggestedUserSerializer(userList, many = True).data
 
@@ -457,9 +487,22 @@ class configSuggestedSuggest(APIView):
 
         return Response(content)
 
+# the real load more suggested friends
+class loadSuggestedFriendsView(APIView):
+    def get(self, request, start, addMore, *args, **kwarg):
+        focusList = []
+        print(start)
+        print(start+addMore)
+        print(models.User.objects.all())
+        print(models.User.objects.exclude(id__in = [1, 3, self.request.user.id]))
+        userList = models.User.objects.exclude(id__in = [1, 3, self.request.user.id])[start:start+addMore]
+
+        serializedList = serializers.SuggestedUserSerializer(userList, many = True).data
 
 
+        return Response(serializedList)
 
+# DO NOT USE ANY MORE
 class loadMoreSuggestedView(generics.ListAPIView):
     serializer_class = serializers.SuggestedUserSerializer
     def get_queryset(self):
