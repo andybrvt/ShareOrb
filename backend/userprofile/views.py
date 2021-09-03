@@ -437,45 +437,45 @@ class configSuggestedSuggest(APIView):
         # its cool to jsut grab everyone and add me and ping in
         focusList = []
         if(
-        models.User.objects.filter(id = 3).count() > 0 and
-        models.User.objects.filter(id = 125).count() > 0 and
-        models.User.objects.filter(id = 65).count() > 0 and
-        models.User.objects.filter(id = 148).count() > 0 and
-        models.User.objects.filter(id = 57).count() > 0 and
-        models.User.objects.filter(id = 75).count() > 0 and
-        models.User.objects.filter(id = 153).count() > 0 and
-        models.User.objects.filter(id = 152).count() > 0
+        models.User.objects.filter(id = 3).count() > 0
+        # models.User.objects.filter(id = 125).count() > 0 and
+        # models.User.objects.filter(id = 65).count() > 0 and
+        # models.User.objects.filter(id = 148).count() > 0 and
+        # models.User.objects.filter(id = 57).count() > 0 and
+        # models.User.objects.filter(id = 75).count() > 0 and
+        # models.User.objects.filter(id = 153).count() > 0 and
+        # models.User.objects.filter(id = 152).count() > 0
         ):
         # if(True):
             andy = models.User.objects.get(id = 1)
             ping = models.User.objects.get(id = 3)
-            val = models.User.objects.get(id = 125)
-            anton = models.User.object.get(id = 65)
-            hamzah = models.User.object.get(id = 148)
-            john = models.User.object.get(id = 57)
-            jc = models.User.object.get(id = 75)
-            ben = models.User.object.get(id = 153)
-            aj = models.User.object.get(id = 152)
+            # val = models.User.objects.get(id = 125)
+            # anton = models.User.object.get(id = 65)
+            # hamzah = models.User.object.get(id = 148)
+            # john = models.User.object.get(id = 57)
+            # jc = models.User.object.get(id = 75)
+            # ben = models.User.object.get(id = 153)
+            # aj = models.User.object.get(id = 152)
 
             serializedAndy = serializers.SuggestedUserSerializer(andy).data
             serializedPing = serializers.SuggestedUserSerializer(ping).data
-            serializedVal = serializers.SuggestedUserSerializer(val).data
-            serializedanton = serializers.SuggestedUserSerializer(anton).data
-            serializedham = serializers.SuggestedUserSerializer(hamzah).data
-            serializedjohn = serializers.SuggestedUserSerializer(john).data
-            serializedjc = serializers.SuggestedUserSerializer(jc).data
-            serializedben = serializers.SuggestedUserSerializer(ben).data
-            serializedaj = serializers.SuggestedUserSerializer(aj).data
-            # Now put them into a list
+            # serializedVal = serializers.SuggestedUserSerializer(val).data
+            # serializedanton = serializers.SuggestedUserSerializer(anton).data
+            # serializedham = serializers.SuggestedUserSerializer(hamzah).data
+            # serializedjohn = serializers.SuggestedUserSerializer(john).data
+            # serializedjc = serializers.SuggestedUserSerializer(jc).data
+            # serializedben = serializers.SuggestedUserSerializer(ben).data
+            # serializedaj = serializers.SuggestedUserSerializer(aj).data
+            # # Now put them into a list
             focusList.append(serializedAndy)
             focusList.append(serializedPing)
-            focusList.append(serializedVal)
-            focusList.append(serializedanton)
-            focusList.append(serializedham)
-            focusList.append(serializedjohn)
-            focusList.append(serializedjc)
-            focusList.append(serializedben)
-            focusList.append(serializedaj)
+            # focusList.append(serializedVal)
+            # focusList.append(serializedanton)
+            # focusList.append(serializedham)
+            # focusList.append(serializedjohn)
+            # focusList.append(serializedjc)
+            # focusList.append(serializedben)
+            # focusList.append(serializedaj)
         userList = models.User.objects.exclude(id = self.request.user.id)[:10]
 
         serializeduserList = serializers.SuggestedUserSerializer(userList, many = True).data

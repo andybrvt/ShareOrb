@@ -115,6 +115,7 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         'creator',
         'itemUser',
         'itemImage',
+        'video',
         "caption",
         "people_like",
         "calCell",

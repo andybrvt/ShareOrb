@@ -706,3 +706,8 @@ class UserCellsView(APIView):
         serializedCells = serializers.SocialCalCellSerializer(cells, many = True).data
 
         return Response(serializedCells)
+
+class SocialCalSingleUploadVid(APIView):
+    def post(self, request, id, *args, **kwargs):
+
+        return Response("stuff")
