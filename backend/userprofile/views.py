@@ -436,8 +436,7 @@ class configSuggestedSuggest(APIView):
         # because this is the first thing that they see
         # its cool to jsut grab everyone and add me and ping in
         focusList = []
-        if(
-        models.User.objects.filter(id = 3).count() > 0
+        if(models.User.objects.filter(id = 3).count() > 0):
         # models.User.objects.filter(id = 125).count() > 0 and
         # models.User.objects.filter(id = 65).count() > 0 and
         # models.User.objects.filter(id = 148).count() > 0 and
@@ -445,7 +444,7 @@ class configSuggestedSuggest(APIView):
         # models.User.objects.filter(id = 75).count() > 0 and
         # models.User.objects.filter(id = 153).count() > 0 and
         # models.User.objects.filter(id = 152).count() > 0
-        ):
+
         # if(True):
             andy = models.User.objects.get(id = 1)
             ping = models.User.objects.get(id = 3)
