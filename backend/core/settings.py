@@ -24,25 +24,15 @@ DEBUG = False
 # DEBUG = True
 #
 ALLOWED_HOSTS = [
-    "10.20.100.62",
-    "127.0.0.1",
-    "10.3.0.116",
-    "192.168.1.200",
-    "192.168.1.205",
-    "192.168.1.206",
-    "172.17.0.1",
-    "172.20.10.2",
-    "10.143.167.43",
-    "192.168.1.24",
-
-    "172.16.101.129",
-    "206.207.51.82",
-    "206.207.51.192",
-    "206.207.51.73",
-    "206.207.51.121",
-    "206.207.51.99",
-    "206.207.51.138",
-    "206.207.51.136",
+ '172.31.4.121',
+ 'api.shareorb.com',
+ 'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+ "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
+ '54.183.46.151',
+ '127.0.0.1:5000',
+ '52.8.250.165',
+ 'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
+ "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com"
 ]
 
 # ALLOWED_HOSTS = [
