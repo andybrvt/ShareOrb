@@ -269,7 +269,7 @@ class SocialCalCell(models.Model):
     socialCaldate = models.DateField(default = timezone.now , blank = False)
     #This is to set the cover picture of the cell
     coverPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
-
+    coverVid = models.FileField(("post_video"), upload_to = "post_video/%Y/%m", null = True)
     # This will be used for the date and time it was created at
     created_at = models.DateTimeField(default = timezone.now, blank = False)
 
