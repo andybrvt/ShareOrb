@@ -10,6 +10,7 @@ urlpatterns = [
     path('userCells/<slug:username>', views.UserCellsView.as_view(), name = 'socialCalendar_cells'),
     path('uploadPic/<slug:id>', views.SocialCalUploadPic.as_view(), name = 'socialCalendar_uploadpic'),
     path('updateCoverPic/<slug:id>', views.UpdateSocialCellCoverPic.as_view(), name = "socialCalendarCell_changeCoverPic"),
+    path('updateCoverVid/<slug:id>', views.UpdateSocialCellCoverVid.as_view(), name = "socialCalendarCell_changeCoverPic"),
     path('uploadEvent', views.SocialEventCreateView.as_view(), name = 'socialCalendar_uploadEvent'),
     path('testTest', views.ShowSocialEvents.as_view(), name = "socialCalendar_test_view"),
     path('socialEvent/updatebackground/<slug:id>', views.SocialEventBackgroundUpdate.as_view(), name = "change_socialevent_background"),
@@ -26,6 +27,6 @@ urlpatterns = [
     path("updateSinglePic/<slug:id>", views.SocialCalSingleUploadPic.as_view(), name = "socialCal_singlePic"),
     path("goalList/<int:id>", views.GoalAlbumStringView.as_view(), name = "goal_list"),
     path("createGoal/<int:userId>", views.GoalAlbumStringCreate.as_view(), name = "create_goal"),
-    path("getGoal/<int:goalId>", views.GoalAlbumStringGet.as_view(), name = "get_goal")
-
+    path("getGoal/<int:goalId>", views.GoalAlbumStringGet.as_view(), name = "get_goal"),
+    path("updateSingleVid/<slug:id>", views.SocialCalSingleUploadVid.as_view(), name = "socialCal_singleVid")
 ]

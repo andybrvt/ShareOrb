@@ -269,7 +269,7 @@ class SocialCalCell(models.Model):
     socialCaldate = models.DateField(default = timezone.now , blank = False)
     #This is to set the cover picture of the cell
     coverPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
-
+    coverVid = models.FileField(("post_video"), upload_to = "post_video/%Y/%m", null = True)
     # This will be used for the date and time it was created at
     created_at = models.DateTimeField(default = timezone.now, blank = False)
 
@@ -351,7 +351,7 @@ class SocialCalItems(models.Model):
     itemUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'item_user', on_delete = models.CASCADE )
     # Images can be uploaded when the day has a picture or a post
     itemImage = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
-
+    video = models.FileField(("post_video"),upload_to='post_video/%Y/%m', null = True)
     #This will be the foreign key that connects the pictures and post with the correct calCell
 
     calCell = models.ForeignKey(SocialCalCell, on_delete = models.CASCADE, related_name = 'socialPost', null = True)

@@ -59,7 +59,7 @@ class SocialCalCellMiniSerializer(serializers.ModelSerializer):
     # you would jsut need the cover pic and the events
 
 
-    get_socialCalEvent = serializers.StringRelatedField(many = True)
+    # get_socialCalEvent = serializers.StringRelatedField(many = True)
 
     class Meta:
         model = models.SocialCalCell
@@ -68,29 +68,30 @@ class SocialCalCellMiniSerializer(serializers.ModelSerializer):
         'socialCalUser',
         'socialCaldate',
         'coverPic',
-        'get_socialCalEvent',
-        'dayCaption',
-        'people_like',
-        'get_socialCalComment',
+        'coverVid',
+        # 'get_socialCalEvent',
+        # 'dayCaption',
+        # 'people_like',
+        # 'get_socialCalComment',
         )
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        cal_events = []
-        cal_comments = []
-        cal_likes = []
-        for likes in data['people_like']:
-            like = SocialCalUserSerializer(User.objects.get(id =likes)).data
-            cal_likes.append(like)
-        for comments in data['get_socialCalComment']:
-            comment = SocialCalCommentSerializer(models.SocialCalComment.objects.get(id = comments)).data
-            cal_comments.append(comment)
-        for events in data['get_socialCalEvent']:
-            event = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = events)).data
-            cal_events.append(event)
-        data['get_socialCalComment'] = cal_comments
-        data['people_like'] = cal_likes
-        data['get_socialCalEvent'] = cal_events
+        # cal_events = []
+        # cal_comments = []
+        # cal_likes = []
+        # for likes in data['people_like']:
+        #     like = SocialCalUserSerializer(User.objects.get(id =likes)).data
+        #     cal_likes.append(like)
+        # for comments in data['get_socialCalComment']:
+        #     comment = SocialCalCommentSerializer(models.SocialCalComment.objects.get(id = comments)).data
+        #     cal_comments.append(comment)
+        # for events in data['get_socialCalEvent']:
+            # event = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = events)).data
+            # cal_events.append(event)
+        # data['get_socialCalComment'] = cal_comments
+        # data['people_like'] = cal_likes
+        # data['get_socialCalEvent'] = cal_events
         data['socialCalUser'] = SocialCalUserSerializer(User.objects.get(id = data['socialCalUser'])).data
         return data
 
@@ -115,6 +116,7 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         'creator',
         'itemUser',
         'itemImage',
+        'video',
         "caption",
         "people_like",
         "calCell",
@@ -239,7 +241,7 @@ class SocialCellEventSerializer(serializers.ModelSerializer):
 class SocialItemJustPicSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SocialCalItems
-        fields = ("id", "itemImage", 'caption', "created_at")
+        fields = ("id", "itemImage","video", 'caption', "created_at")
 
 class GoalAlbumStringMiniSerializer(serializers.ModelSerializer):
 

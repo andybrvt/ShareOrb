@@ -142,6 +142,31 @@ class UpdateSocialCellCoverPic(APIView):
 
         return Response('cover pic added')
 
+class UpdateSocialCellCoverVid(APIView):
+
+    def post(self, request, id, *args, **kwargs):
+
+
+        socialCalCell = get_object_or_404(models.SocialCalCell, id = request.data['cellId'])
+
+
+        if(isinstance(request.data['coverVideo'], str)):
+            # check if its already save as a directory
+            socialCalCell.coverVid = request.data['coverVideo'].lstrip("/media")
+        else:
+            # This is for a inmemory file object
+            socialCalCell.coverVid = request.data['coverVideo']
+
+        # SAVED SPOT
+        # For now you will not need for the action text here
+        socialCalCell.save()
+
+        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
+
+
+        return Response('cover pic added')
+
+
 class SocialClippingView(APIView):
     # This class is used for adding the clipping of pictures into the social
     # calendar. Pretty similar to uploading pictures but now you just ahve the picture
@@ -575,8 +600,7 @@ class SocialCalSingleUploadPic(APIView):
         curDate = request.data['curDate']
         curDateTime = request.data['curDateTime']
         caption = request.data['caption']
-        print('stuff here')
-        print(request.data)
+
 
 
 
@@ -657,6 +681,71 @@ class SocialCalSingleUploadPic(APIView):
         # return Response(content)
 
 
+class SocialCalSingleUploadVid(APIView):
+    def post(self, request, id, *args, **kwargs):
+
+
+        curDate = request.data['curDate']
+        curDateTime = request.data['curDateTime']
+        caption = request.data['caption']
+        user = get_object_or_404(User, id = id)
+
+        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+            socialCalUser = user,
+            socialCaldate = curDate
+        )
+
+        change = True
+
+        if(created == False):
+            socialCalCell.actionText = "updated"
+
+        if(request.data['goalId'] != "undefined"):
+            goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
+            # Now you add a single picture in
+            socialCalItem = models.SocialCalItems.objects.create(
+                socialItemType = 'picture',
+                creator = user,
+                itemUser = user,
+                video = request.data['video'],
+                calCell = socialCalCell,
+                created_at = curDateTime,
+                caption = caption,
+                goal = goal
+            )
+
+            socialCalCell.save()
+
+
+
+        else:
+            # Now you add a single picture in
+            socialCalItem = models.SocialCalItems.objects.create(
+                socialItemType = 'picture',
+                creator = user,
+                itemUser = user,
+                video = request.data['video'],
+                calCell = socialCalCell,
+                created_at = curDateTime,
+                caption = caption
+            )
+
+            socialCalCell.save()
+
+        serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
+
+        socialCalCellNew = get_object_or_404(models.SocialCalCell,
+            socialCalUser = user,
+            socialCaldate = curDate
+         )
+
+
+        content = {
+             'item': serializedItem,
+             "cellId": socialCalCellNew.id
+         }
+
+        return Response(content)
 # create the goal here
 
 class GoalAlbumStringCreate(APIView):
