@@ -53,7 +53,7 @@ ALLOWED_HOSTS = [
 #     "206.207.51.73",
 #     "206.207.51.121",
 #     "206.207.51.99",
-#     "206.207.51.138"
+#     "206.207.51.165"
 # ]
 
 
@@ -167,7 +167,7 @@ DATABASES = {
 # }
 
 #
-# # # else:
+# # else:
 # DATABASES = {
 #     'default': {
 #                 # 'ENGINE': 'django.db.backends.sqlite3',

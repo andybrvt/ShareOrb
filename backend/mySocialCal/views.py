@@ -137,10 +137,11 @@ class UpdateSocialCellCoverPic(APIView):
         # For now you will not need for the action text here
         socialCalCell.save()
 
-        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
+        print('cal items here')
+        # serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
+        print(len(socialCalCell.get_socialCalItems()))
 
-
-        return Response('cover pic added')
+        return Response(len(socialCalCell.get_socialCalItems()))
 
 class UpdateSocialCellCoverVid(APIView):
 
@@ -161,10 +162,10 @@ class UpdateSocialCellCoverVid(APIView):
         # For now you will not need for the action text here
         socialCalCell.save()
 
-        serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
+        # serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCell).data
 
 
-        return Response('cover pic added')
+        return Response(len(socialCalCell.get_socialCalItems()))
 
 
 class SocialClippingView(APIView):
