@@ -1016,6 +1016,8 @@ class UniqueCodeSetter(APIView):
         return Response("done")
 
 # Make a function that checks the invite code
+@authentication_classes([])
+@permission_classes([])
 class CheckInviteCode(APIView):
 
     def get(self, request, code, *arg, **kwargs):
@@ -1028,6 +1030,8 @@ class CheckInviteCode(APIView):
         for user in userList:
             curCode = user.inviteCode
             if(curCode == code):
+                user.invitedNum = user.invitedNum - 1
+                user.save()
                 return Response(True)
 
         return Response(False)
