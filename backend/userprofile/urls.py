@@ -16,6 +16,12 @@ router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
 # when using viewSets you have to put it in routers
 # when using APIView you have to put it in as veiws.PUTVIEWHERE.as_view()),
 
+
+# MASTER FUNCTIONS (FUNCTIONS TO MANAGE OR SEE OTHERS STUFF)
+# --> TO REFRESH EVERYONE'S
+
+
+
 urlpatterns = [
 
 	path('', include(router.urls)),
@@ -37,6 +43,7 @@ urlpatterns = [
 	path('loadMoreSuggested/<int:start>/<int:addMore>', views.loadSuggestedFriendsView.as_view()),
 	path('loadSuggested', views.loadMoreSuggestedView.as_view()),
 	path('inviteList', views.inviteList.as_view()),
+	path('resetInviteNum', views.UniqueCodeSetter.as_view()),
 	# DELETE LATER
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),

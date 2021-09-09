@@ -17,6 +17,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import authentication_classes, permission_classes
 # from django.core.mail import send_mail
 
+from django.utils.crypto import get_random_string
+
 import pytz
 
 # Create your views here.
@@ -999,3 +1001,16 @@ class UserFollowingView(APIView):
     def get(self, request, id, *args, **kwargs):
 
         return Response("stuff here")
+
+# GLOBAL FUNCTION
+class UniqueCodeSetter(APIView):
+    # this function will help you refresh all the invite code of the users
+    def get(self, request, *arg, **kwargs):
+        userList = models.User.objects.all()
+
+        for user in userList:
+            randomStr = get_random_string(length = 6)
+            user.inviteCode = randomStr
+            user.save()
+
+        return Response("done")
