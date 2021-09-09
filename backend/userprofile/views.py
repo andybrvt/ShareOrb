@@ -1014,3 +1014,20 @@ class UniqueCodeSetter(APIView):
             user.save()
 
         return Response("done")
+
+# Make a function that checks the invite code
+class CheckInviteCode(APIView):
+
+    def get(self, request, code, *arg, **kwargs):
+
+        if(len(code) > 6):
+            return Response(False)
+
+        userList = models.User.objects.all()
+
+        for user in userList:
+            curCode = user.inviteCode
+            if(curCode == code):
+                return Response(True)
+
+        return Response(False)

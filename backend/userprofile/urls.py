@@ -18,7 +18,8 @@ router.register('infinite-post', views.ReactInfiniteView, basename ='Postfeed')
 
 
 # MASTER FUNCTIONS (FUNCTIONS TO MANAGE OR SEE OTHERS STUFF)
-# --> TO REFRESH EVERYONE'S
+# "resetInviteNum" --> reset everybody invite code
+
 
 
 
@@ -44,6 +45,7 @@ urlpatterns = [
 	path('loadSuggested', views.loadMoreSuggestedView.as_view()),
 	path('inviteList', views.inviteList.as_view()),
 	path('resetInviteNum', views.UniqueCodeSetter.as_view()),
+	path('checkInviteCode/<str:code>', views.CheckInviteCode.as_view()),
 	# DELETE LATER
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),
 	path('friend-request/cancel/<slug:username>', views.CancelFriendRequest.as_view(), name='cancel_request'),
