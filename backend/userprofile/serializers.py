@@ -111,7 +111,8 @@ class UserSerializer(serializers.ModelSerializer):
          'showIntialInstructions',
          "dailyNotification",
          "notificationSeen",
-         "date_joined"
+         "date_joined",
+         'inviteCode'
          )
 
 
