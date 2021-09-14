@@ -109,5 +109,6 @@ urlpatterns = [
 	path('userEmailList', views.UserEmailView.as_view(), name = "view_user_emails"),
 	path("showDailyNotification", views.showDailyNotification.as_view(), name = "show_daily_notification"),
 	path("userFollowers/<slug:id>", views.UserFollowersView.as_view(), name = "user_follower_views"),
-	path("userFollowing/<slug:id>", views.UserFollowingView.as_view(), name = "user_following_view")
+	path("userFollowing/<slug:id>", views.UserFollowingView.as_view(), name = "user_following_view"),
+	path("validateUsername/<slug:username>", views.ValidateUsername.as_view(), name = "validate_username")
 ]

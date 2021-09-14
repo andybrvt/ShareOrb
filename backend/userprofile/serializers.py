@@ -484,7 +484,7 @@ class RegisterSerializer(serializers.Serializer):
 
     username = serializers.CharField(required = True, write_only = True)
     first_name = serializers.CharField(required=True, write_only=True)
-    last_name = serializers.CharField(required=True, write_only=True)
+    # last_name = serializers.CharField(required=True, write_only=True)
     dob = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
     password1 = serializers.CharField(required=True, write_only=True)
@@ -492,7 +492,10 @@ class RegisterSerializer(serializers.Serializer):
 
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'dob', 'first_name', 'last_name', 'email', 'password1 ', 'password2')
+        fields = ('id', 'username', 'dob', 'first_name',
+        # 'last_name',
+         # 'email',
+         'password1 ', 'password2')
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
@@ -524,7 +527,7 @@ class RegisterSerializer(serializers.Serializer):
         return {
             'username': self.validated_data.get('username', ''),
             'first_name': self.validated_data.get('first_name', ''),
-            'last_name': self.validated_data.get('last_name', ''),
+            # 'last_name': self.validated_data.get('last_name', ''),
             # 'bio': self.validated_data.get('bio', ''),
             # 'dob': self.validated_data.get('dob', ''),
             # 'phone_number': self.validated_data.get('phone_number', ''),
@@ -544,6 +547,7 @@ class RegisterSerializer(serializers.Serializer):
         setup_user_email(request, user1, [])
         user1.save()
         return user1
+
 
 
 

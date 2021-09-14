@@ -16,6 +16,7 @@ from django.db.models import Q
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import authentication_classes, permission_classes
 # from django.core.mail import send_mail
+from allauth.account.adapter import get_adapter
 
 from django.utils.crypto import get_random_string
 
@@ -1035,3 +1036,12 @@ class CheckInviteCode(APIView):
                 return Response(True)
 
         return Response(False)
+
+@authentication_classes([])
+@permission_classes([])
+class ValidateUsername(APIView):
+    def get(self, request, username, *arg, **kwargs):
+        # newUsername = get_adapter().clean_username(username)
+        if len(models.User.objects.filter(username = username)) >= 1:
+            return Response(False)
+        return Response(True)
