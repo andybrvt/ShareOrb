@@ -1031,9 +1031,13 @@ class CheckInviteCode(APIView):
         for user in userList:
             curCode = user.inviteCode
             if(curCode == code):
-                user.invitedNum = user.invitedNum - 1
-                user.save()
-                return Response(True)
+                if(user.invitedNum > 0):
+                    user.invitedNum = user.invitedNum - 1
+                    user.save()
+                    return Response(True)
+                else:
+                    return Response(False)
+
 
         return Response(False)
 
