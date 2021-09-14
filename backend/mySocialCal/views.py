@@ -473,7 +473,8 @@ class loadSocialPostView(APIView):
         # Now add the same filter here similar to the one you have on your consumer
         curUser = get_object_or_404(User, id = self.request.user.id)
 
-        if self.request.user.id == 1 or self.request.user.id == 3:
+        following = len(curUser.get_following())
+        if self.request.user.id == 1 or self.request.user.id == 3 or following <= 5:
             socialItems = models.SocialCalItems.objects.all()[start:start+addMore]
             serializer_post = serializers.SocialCalItemsSerializer(socialItems, many = True).data
 
