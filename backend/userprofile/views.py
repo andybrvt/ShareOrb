@@ -1045,3 +1045,25 @@ class ValidateUsername(APIView):
         if len(models.User.objects.filter(username = username)) >= 1:
             return Response(False)
         return Response(True)
+
+@authentication_classes([])
+@permission_classes([])
+class ValidateEmail(APIView):
+    # checks for duplicate emails
+    def get(self, request, *args, **kwargs):
+
+        email = request.query_params.get('email')
+        if len(models.User.objects.filter(email = email)) >= 1:
+            return Response(False)
+        return Response(True)
+
+class ChangeProfilePic(APIView):
+
+    def post(self, request, *args, **kwargs):
+
+        print(request.user)
+
+        picture = request.data['profilePic']
+        request.user.profile_picture = picture
+        request.user.save()
+        return Response('stuff here')
