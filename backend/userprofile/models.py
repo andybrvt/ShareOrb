@@ -94,7 +94,7 @@ class User(AbstractUser):
     notificationSeen = models.IntegerField(default = 0, blank = True)
     notificationToken = models.CharField(blank=True, null=True, max_length=100)
 
-    inviteCode = models.CharField(max_length = 6, blank = True, default = random_code_function)
+    inviteCode = models.CharField(max_length = 6, null = True, default = random_code_function)
     invitedNum = models.IntegerField(default = 5, blank = False)
     dailyNotification = models.BooleanField(default = True)
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
