@@ -34,6 +34,7 @@ urlpatterns = [
 	path('grabCurrentUser/', views.GrabCurrentUser.as_view()),
 	path('<slug:username>/', views.UserDetailView.as_view()),
 	path('all-users', views.ListAll.as_view()),
+	path('user/delete/<slug:username>', views.DeleteUser.as_view(), name = "delete_user"),
 	path('friend-request-list', views.FriendRequestList.as_view(), name="friend_request"),
 	path('post/delete/<slug:id>', views.deletePostCall.as_view(), name='delete notification'),
 	path('explore', views.ExploreView.as_view()),

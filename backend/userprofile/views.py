@@ -1071,3 +1071,11 @@ class ChangeProfilePic(APIView):
         request.user.profile_picture = picture
         request.user.save()
         return Response('stuff here')
+class DeleteUser(APIView):
+    def post(self, request, username, *args, **kwargs):
+
+
+        user = get_object_or_404(models.User, username = username)
+        print(user)
+        user.delete()
+        return Response("done")
