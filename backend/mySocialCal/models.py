@@ -325,6 +325,18 @@ class GoalAlbumString(models.Model):
 
         return SocialCalItems.objects.filter(goal = self).values_list('id',flat = True)
 
+# this model is used for keeping track of the small groups
+# small groups will have a certain number of users
+# and a connection to a bunch of social cal items to the specific user
+# so you will need to have a many to many field for the users and then
+# a forgein key attached to each socialcalitems
+class SmallGroups(models.Model):
+
+    # For all the people in the group
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "small_group_member", blank = True)
+    group_name = models.CharField(max_length = 222)
+    groupPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
+
 
 
 class SocialCalItems(models.Model):
@@ -359,6 +371,10 @@ class SocialCalItems(models.Model):
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = 'singlePostLiker', blank = True)
 
     goal = models.ForeignKey(GoalAlbumString, on_delete= models.CASCADE, related_name = 'user_goal', null = True)
+
+    # now you will add a foreign key here to conenct all the social cal cell post
+    smallGroup = models.ForeignKey(SmallGroups, on_delete = models.CASCADE, related_name = "small_group", null = True)
+
     # Everything from here down would be for the events
     class Meta:
         ordering = ['-created_at']

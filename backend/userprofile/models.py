@@ -9,6 +9,7 @@ from django.db.models.signals import pre_delete
 from django.utils.timezone import now
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
+from mySocialCal.models import SmallGroups
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -94,7 +95,7 @@ class User(AbstractUser):
     notificationSeen = models.IntegerField(default = 0, blank = True)
     notificationToken = models.CharField(blank=True, null=True, max_length=100)
 
-    inviteCode = models.CharField(max_length = 6, blank = True, default = random_code_function)
+    inviteCode = models.CharField(max_length = 6, null = True, default = random_code_function)
     invitedNum = models.IntegerField(default = 5, blank = False)
     dailyNotification = models.BooleanField(default = True)
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
@@ -133,6 +134,10 @@ class User(AbstractUser):
         # This will grab all the follow request that a perosn has
         return UserFollowingRequest.objects.filter(accept_request = self.id).values_list('send_request__username', flat = True)
 
+    def get_small_groups(self):
+        # this will grap all the users small groups
+        return SmallGroups.objects.filter(members__in = [1]).values_list('id', flat = True)
+        # return SmallGroups.objects.filter(id = 2).values_list('id', flat = True)
 
     def __str__(self):
         return self.username
