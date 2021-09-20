@@ -335,7 +335,7 @@ class SmallGroups(models.Model):
     # For all the people in the group
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "small_group_member", blank = True)
     group_name = models.CharField(max_length = 222)
-
+    groupPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
 
 

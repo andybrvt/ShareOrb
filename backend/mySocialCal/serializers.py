@@ -288,5 +288,6 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
         fields = (
             "id",
             "members",
-            "group_name"
+            "group_name",
+            'groupPic'
             )
