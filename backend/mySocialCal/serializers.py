@@ -280,3 +280,13 @@ class GoalAlbumStringSerializer(serializers.ModelSerializer):
         data['owner'] = SocialCalUserSerializer(User.objects.get(id = data['owner'])).data
 
         return data
+
+class SmallGroupsSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SmallGroups
+        fields = (
+            "id",
+            "members",
+            "group_name"
+            )

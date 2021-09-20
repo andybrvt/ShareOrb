@@ -11,9 +11,11 @@ from userprofile.models import PendingSocialPics
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCellMiniSerializer
 from mySocialCal.serializers import SocialCalItemsSerializer
+from mySocialCal.serializers import SmallGroupsSerializers
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
+from mySocialCal.models import SmallGroups
 from mySocialCal.serializers import SocialCalEventSerializer
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
@@ -83,7 +85,7 @@ class UserSerializer(serializers.ModelSerializer):
     get_followers = serializers.StringRelatedField(many = True)
     get_sent_follow_request = serializers.StringRelatedField(many = True)
     get_follow_request = serializers.StringRelatedField(many = True)
-
+    get_small_groups = serializers.StringRelatedField(many = True)
 
     class Meta:
         model = models.User
@@ -112,7 +114,8 @@ class UserSerializer(serializers.ModelSerializer):
          "dailyNotification",
          "notificationSeen",
          "date_joined",
-         'inviteCode'
+         'inviteCode',
+         'get_small_groups'
          )
 
 
@@ -132,6 +135,7 @@ class UserSerializer(serializers.ModelSerializer):
         followingList = []
         sentRequestList = []
         requestList = []
+        smallGroups = []
         for user in data['get_following']:
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             followingList.append(userPerson)
@@ -149,6 +153,9 @@ class UserSerializer(serializers.ModelSerializer):
             userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
             requestList.append(userPerson)
 
+        for groups in data['get_small_groups']:
+            groups = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
+            smallGroups.append(groups)
         # NOT NEEDED ANYMORE
         # for socialCells in data['get_socialCal']:
         #     socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
@@ -172,7 +179,7 @@ class UserSerializer(serializers.ModelSerializer):
         data['get_followers'] = followerList
         data['get_sent_follow_request'] = sentRequestList
         data['get_follow_request'] = requestList
-
+        data['get_small_groups'] = smallGroups
         # NOT NEEDED ANY MORE
         # data['get_socialCal'] = socialCalList
         # data['friends']  = friendList
