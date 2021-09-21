@@ -28,5 +28,6 @@ urlpatterns = [
     path("goalList/<int:id>", views.GoalAlbumStringView.as_view(), name = "goal_list"),
     path("createGoal/<int:userId>", views.GoalAlbumStringCreate.as_view(), name = "create_goal"),
     path("getGoal/<int:goalId>", views.GoalAlbumStringGet.as_view(), name = "get_goal"),
-    path("updateSingleVid/<slug:id>", views.SocialCalSingleUploadVid.as_view(), name = "socialCal_singleVid")
+    path("updateSingleVid/<slug:id>", views.SocialCalSingleUploadVid.as_view(), name = "socialCal_singleVid"),
+    path("suggestedGroups", views.SuggestedGroups.as_view(), name = "suggested_groups")
 ]

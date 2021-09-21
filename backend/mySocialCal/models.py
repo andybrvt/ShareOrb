@@ -338,6 +338,8 @@ class SmallGroups(models.Model):
     groupPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
 
 
+    def get_socialCalItems(self):
+        return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)
 
 class SocialCalItems(models.Model):
     # The social calendar items will include all the pictures, post, and social

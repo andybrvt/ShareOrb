@@ -797,3 +797,13 @@ class UserCellsView(APIView):
         serializedCells = serializers.SocialCalCellSerializer(cells, many = True).data
 
         return Response(serializedCells)
+
+
+# This function will be for grabing the suggested groups
+class SuggestedGroups(APIView):
+
+    def get(self, request, *args, **kwargs):
+
+        groups = models.SmallGroups.objects.all()
+        serializedGroups = serializers.SmallGroupsExploreSerializers(groups, many = True).data
+        return Response(serializedGroups)

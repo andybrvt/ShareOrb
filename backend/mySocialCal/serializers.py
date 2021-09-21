@@ -283,6 +283,9 @@ class GoalAlbumStringSerializer(serializers.ModelSerializer):
 
 class SmallGroupsSerializers(serializers.ModelSerializer):
 
+    # This function will be used more for users so that you just have
+    # to just get the small grups info and not the images that goes with it
+
     class Meta:
         model = models.SmallGroups
         fields = (
@@ -291,3 +294,28 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             "group_name",
             'groupPic'
             )
+class SmallGroupsExploreSerializers(serializers.ModelSerializer):
+
+    # This function will be used for the explore page,
+    # it will just grab the info and serveral images
+    class Meta:
+        model = models.SmallGroups
+        fields  = (
+            'id',
+            'members',
+            "group_name",
+            "groupPic",
+            "get_socialCalItems"
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        cal_items = []
+
+        for items in data['get_socialCalItems']:
+            item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
+            cal_items.append(item)
+
+        data['get_socialCalItems'] = cal_items
+
+        return data
