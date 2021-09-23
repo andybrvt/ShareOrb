@@ -11,6 +11,7 @@ from .models import SocialCalComment
 from .models import SocialCalItems
 from .models import SocialCellEventPost
 from .models import SocialCalItemComment
+from .models import SmallGroups
 from userprofile.models import CustomNotification
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
@@ -742,7 +743,6 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         curUser = get_object_or_404(User, id = data['userId'])
 
         following = len(curUser.get_following())
-        print(following)
         if data['userId'] == 1 or data['userId'] == 3 or following <= 5:
              #  put all the post items here
              socialItems = SocialCalItems.objects.all()[:int(data['startIndex'])];
@@ -1246,6 +1246,23 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
 
 class SmallGroupsConsumer(JsonWebsocketConsumer):
 
+
+    def fetch_group_post(self,data):
+        # this function will be used to fetch all the post of that group
+        group = get_object_or_404(SmallGroups, id = data['groupId'])
+
+        # Now that you have the group, now just grab the stuff inside the group now
+        getPost = SocialCalItems.objects.filter(smallGroup  = group)
+        print(getPost)
+        serializedPost = SocialCalItemsSerializer(getPost, many = True).data
+
+        content = {
+            'command': 'fetch_group_post',
+            'group_posts': serializedPost
+        }
+        self.send_json(content)
+
+
     def connect(self):
         self.selectedGroup = self.scope['url_route']['kwargs']['groupId']
         grp = "smallGroup_"+self.selectedGroup
@@ -1261,3 +1278,6 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
         print(data)
+
+        if data['command'] == "fetch_group_post":
+            self.fetch_group_post(data)
