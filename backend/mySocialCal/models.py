@@ -336,7 +336,8 @@ class SmallGroups(models.Model):
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "small_group_member", blank = True)
     group_name = models.CharField(max_length = 222)
     groupPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
-
+    description = models.TextField(blank = True)
+    public = models.BooleanField(default = False)
 
     def get_socialCalItems(self):
         return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)

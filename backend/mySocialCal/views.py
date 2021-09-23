@@ -807,3 +807,25 @@ class SuggestedGroups(APIView):
         groups = models.SmallGroups.objects.all()
         serializedGroups = serializers.SmallGroupsExploreSerializers(groups, many = True).data
         return Response(serializedGroups)
+
+# This function will be used to create the small group
+class CreateSmallGroup(APIView):
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        public = True
+        if(request.data['public'] == "false"):
+            public = False
+        group = models.SmallGroups.objects.create(
+            group_name = request.data['groupName'],
+            groupPic = request.data['groupPic'],
+            description = request.data['description'],
+            public = public
+        )
+
+        curUser = get_object_or_404(User, id = request.data['curId'])
+        group.members.add(curUser)
+        group.save()
+        serializedGroup = serializers.SmallGroupsExploreSerializers(group, many = False).data
+
+        return Response(serializedGroup)
