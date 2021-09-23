@@ -826,6 +826,6 @@ class CreateSmallGroup(APIView):
         curUser = get_object_or_404(User, id = request.data['curId'])
         group.members.add(curUser)
         group.save()
-        serializedGroup = serializers.SmallGroupsExploreSerializers(group, many = False).data
+        serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
 
         return Response(serializedGroup)
