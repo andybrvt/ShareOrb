@@ -1243,3 +1243,21 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
     def send_new_social_cell_action(self, cellActions):
         cellAction = cellActions['action']
         return self.send_json(cellAction)
+
+class SmallGroupsConsumer(JsonWebsocketConsumer):
+
+    def connect(self):
+        self.selectedGroup = self.scope['url_route']['kwargs']['groupId']
+        grp = "smallGroup_"+self.selectedGroup
+        async_to_sync(self.channel_layer.group_add)(grp,self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        self.selectedGroup = self.scope['url_route']['kwargs']['groupId']
+        grp = "smallGroup_"+self.selectedGroup
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
+        print(data)
