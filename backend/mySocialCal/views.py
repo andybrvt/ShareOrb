@@ -603,7 +603,10 @@ class SocialCalSingleUploadPic(APIView):
         curDateTime = request.data['curDateTime']
         caption = request.data['caption']
 
+        groupId = request.data['groupId']
 
+        # get the group
+        group = get_object_or_404(models.SmallGroups, id = groupId)
 
 
         #then get the user
@@ -611,17 +614,18 @@ class SocialCalSingleUploadPic(APIView):
 
 
 
-        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
-            socialCalUser = user,
-            socialCaldate = curDate
-        )
+        # this is not that important any more
+        # socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+        #     socialCalUser = user,
+        #     socialCaldate = curDate
+        # )
 
 
         # chnage is change of the coverpicture
         change = True
 
-        if(created == False):
-            socialCalCell.actionText = "updated"
+        # if(created == False):
+        #     socialCalCell.actionText = "updated"
 
         if(request.data['goalId'] != "undefined"):
             goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
@@ -631,13 +635,14 @@ class SocialCalSingleUploadPic(APIView):
                 creator = user,
                 itemUser = user,
                 itemImage = request.data['image'],
-                calCell = socialCalCell,
+                # calCell = socialCalCell,
                 created_at = curDateTime,
                 caption = caption,
-                goal = goal
+                goal = goal,
+                smallGroup = group
             )
 
-            socialCalCell.save()
+            # socialCalCell.save()
 
 
 
@@ -648,59 +653,59 @@ class SocialCalSingleUploadPic(APIView):
                 creator = user,
                 itemUser = user,
                 itemImage = request.data['image'],
-                calCell = socialCalCell,
+                # calCell = socialCalCell,
                 created_at = curDateTime,
-                caption = caption
+                caption = caption,
+                smallGroup = group,
             )
 
-            socialCalCell.save()
+            # socialCalCell.save()
 
         serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
 
-        socialCalCellNew = get_object_or_404(models.SocialCalCell,
-            socialCalUser = user,
-            socialCaldate = curDate
-         )
+        # socialCalCellNew = get_object_or_404(models.SocialCalCell,
+        #     socialCalUser = user,
+        #     socialCaldate = curDate
+        #  )
 
 
         content = {
              'item': serializedItem,
-             "cellId": socialCalCellNew.id
+             # "cellId": socialCalCellNew.id
          }
 
         return Response(content)
 
 
 
-        # This is most just to get the current cover profile for the front end
-        # serializedSocialCell = serializers.SocialCalCellSerializer(socialCalCellNew).data
-        # content = {
-        #     "coverPicChange": change,
-        #     "created": created,
-        #     "cell": serializedSocialCell
-        # }
-
-        # return Response(content)
 
 
 class SocialCalSingleUploadVid(APIView):
     def post(self, request, id, *args, **kwargs):
 
+        # This one will just be the same as the single picture post
 
         curDate = request.data['curDate']
         curDateTime = request.data['curDateTime']
         caption = request.data['caption']
+
+
+        groupId = request.data['groupId']
+        group = get_object_or_404(models.SmallGroups, id = groupId)
+
+
+
         user = get_object_or_404(User, id = id)
 
-        socialCalCell, created = models.SocialCalCell.objects.get_or_create(
-            socialCalUser = user,
-            socialCaldate = curDate
-        )
+        # socialCalCell, created = models.SocialCalCell.objects.get_or_create(
+        #     socialCalUser = user,
+        #     socialCaldate = curDate
+        # )
 
         change = True
 
-        if(created == False):
-            socialCalCell.actionText = "updated"
+        # if(created == False):
+        #     socialCalCell.actionText = "updated"
 
         if(request.data['goalId'] != "undefined"):
             goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
@@ -710,13 +715,14 @@ class SocialCalSingleUploadVid(APIView):
                 creator = user,
                 itemUser = user,
                 video = request.data['video'],
-                calCell = socialCalCell,
+                # calCell = socialCalCell,
                 created_at = curDateTime,
                 caption = caption,
-                goal = goal
+                goal = goal,
+                smallGroup = group
             )
 
-            socialCalCell.save()
+            # socialCalCell.save()
 
 
 
@@ -727,28 +733,28 @@ class SocialCalSingleUploadVid(APIView):
                 creator = user,
                 itemUser = user,
                 video = request.data['video'],
-                calCell = socialCalCell,
+                # calCell = socialCalCell,
                 created_at = curDateTime,
-                caption = caption
+                caption = caption,
+                smallGroup = group
             )
 
-            socialCalCell.save()
+            # socialCalCell.save()
 
         serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
 
-        socialCalCellNew = get_object_or_404(models.SocialCalCell,
-            socialCalUser = user,
-            socialCaldate = curDate
-         )
+        # socialCalCellNew = get_object_or_404(models.SocialCalCell,
+        #     socialCalUser = user,
+        #     socialCaldate = curDate
+        #  )
 
 
         content = {
              'item': serializedItem,
-             "cellId": socialCalCellNew.id
+             # "cellId": socialCalCellNew.id
          }
 
         return Response(content)
-# create the goal here
 
 class GoalAlbumStringCreate(APIView):
 

@@ -121,7 +121,8 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         "people_like",
         "calCell",
         "get_socialCalItemComment",
-        'goal'
+        'goal',
+        'smallGroup'
          )
 
     def to_representation(self, instance):

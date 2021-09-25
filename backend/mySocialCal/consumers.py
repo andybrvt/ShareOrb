@@ -1258,10 +1258,41 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
 
         content = {
             'command': 'fetch_group_post',
-            'group_posts': serializedPost
+            'group_posts': serializedPost,
+            'groupId': data['groupId']
         }
         self.send_json(content)
 
+    def send_group_post(self, data):
+        # this function will be used to send the group post through the websockets
+        # so you just gotta grab post and then the group so you know which channel
+        # to send it through
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
+        serializedPost = SocialCalItemsSerializer(post, many = False).data
+
+        content = {
+            'command': 'send_group_post',
+            "post": serializedPost,
+            'groupId': data['groupId']
+
+        }
+        self.send_new_group_action(content)
+
+    def send_new_group_action(self, action):
+        # this function will be used to direct the push, so that it knows
+        # which channel to send to
+        channel_layer = get_channel_layer()
+        channel_recipient = str(action['groupId'])
+        channel = 'smallGroup_'+channel_recipient
+
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                'type':"new_group_action",
+                'action': action
+            }
+        )
 
     def connect(self):
         self.selectedGroup = self.scope['url_route']['kwargs']['groupId']
@@ -1281,3 +1312,9 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
 
         if data['command'] == "fetch_group_post":
             self.fetch_group_post(data)
+        if data['command'] == "send_group_post":
+            self.send_group_post(data)
+
+    def new_group_action(self, event):
+        action = event['action']
+        return self.send_json(action)
