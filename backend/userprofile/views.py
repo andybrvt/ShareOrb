@@ -897,7 +897,7 @@ class UserSearchView(APIView):
             # check if there is actually something to search up
             # Now you will filter
             qs = qs.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
-            groupQS = groupQS.filter(Q(group_name__icontains = search))
+            groupQS = groupQS.filter(Q(group_name__icontains = search)).filter(public = True)
 
         # Now we wll serialize it
         serializedQS = serializers.FollowUserSerializer(qs, many= True).data
@@ -908,7 +908,7 @@ class UserSearchView(APIView):
             'groups': groupSerializedQS
 
         }
-        
+
         return Response(content)
 
 class UserChatSearchView(APIView):
