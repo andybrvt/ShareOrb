@@ -17,9 +17,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import authentication_classes, permission_classes
 # from django.core.mail import send_mail
 from allauth.account.adapter import get_adapter
+from mySocialCal.serializers import SmallGroupsSerializers
 
 from django.utils.crypto import get_random_string
-
+from mySocialCal.models import SmallGroups
 import pytz
 
 # Create your views here.
@@ -890,15 +891,18 @@ class UserSearchView(APIView):
         # search value
         search = request.GET.get("search")
         qs = models.User.objects.all()
+        groupQS = SmallGroups.objects.all()
 
         if search != "" and search is not None:
             # check if there is actually something to search up
             # Now you will filter
             qs = qs.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
-
+            groupQS = groupQS.filter(Q(group_name__icontains = search))
 
         # Now we wll serialize it
         serializedQS = serializers.FollowUserSerializer(qs, many= True).data
+        groupSerializedQS = serializers.SmallGroupsSerializers(groupQS, many = True).data
+        # WORKS
         return Response(serializedQS)
 
 class UserChatSearchView(APIView):
