@@ -810,7 +810,7 @@ class SuggestedGroups(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        groups = models.SmallGroups.objects.all()
+        groups = models.SmallGroups.objects.all()[:7]
         serializedGroups = serializers.SmallGroupsExploreSerializers(groups, many = True).data
         return Response(serializedGroups)
 
@@ -834,4 +834,17 @@ class CreateSmallGroup(APIView):
         group.save()
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
 
+        return Response(serializedGroup)
+
+# this function will be used to change the public and private of a group
+class ChangeSGPublic(APIView):
+
+    def post(self, request, groupId, *args, **kwargs):
+
+        # first things first get the group
+        group = get_object_or_404(models.SmallGroups, id = groupId)
+        group.public = not group.public
+        group.save()
+
+        serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
         return Response(serializedGroup)

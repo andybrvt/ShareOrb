@@ -293,7 +293,10 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             "id",
             "members",
             "group_name",
-            'groupPic'
+            'groupPic',
+            'description',
+            'public',
+            "groupCode"
             )
 class SmallGroupsExploreSerializers(serializers.ModelSerializer):
 

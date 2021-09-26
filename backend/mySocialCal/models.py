@@ -9,6 +9,7 @@ from django.db.models.signals import pre_delete
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.utils.crypto import get_random_string
 
 import pytz
 from datetime import datetime
@@ -325,6 +326,10 @@ class GoalAlbumString(models.Model):
 
         return SocialCalItems.objects.filter(goal = self).values_list('id',flat = True)
 
+# I make a random 8 letter so that we can have more options
+def random_code_function():
+    return get_random_string(length = 8)
+
 # this model is used for keeping track of the small groups
 # small groups will have a certain number of users
 # and a connection to a bunch of social cal items to the specific user
@@ -338,7 +343,7 @@ class SmallGroups(models.Model):
     groupPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
     description = models.TextField(blank = True)
     public = models.BooleanField(default = False)
-
+    groupCode = models.CharField(max_length = 8, null = True, default = random_code_function)
     def get_socialCalItems(self):
         return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)
 
