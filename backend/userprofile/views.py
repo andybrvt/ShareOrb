@@ -903,7 +903,13 @@ class UserSearchView(APIView):
         serializedQS = serializers.FollowUserSerializer(qs, many= True).data
         groupSerializedQS = serializers.SmallGroupsSerializers(groupQS, many = True).data
         # WORKS
-        return Response(serializedQS)
+        content = {
+            'users': serializedQS,
+            'groups': groupSerializedQS
+
+        }
+        
+        return Response(content)
 
 class UserChatSearchView(APIView):
     # This function will be use to filter out people that you follow by name
