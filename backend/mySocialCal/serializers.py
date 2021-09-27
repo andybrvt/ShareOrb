@@ -321,7 +321,7 @@ class SmallGroupsExploreSerializers(serializers.ModelSerializer):
         data = super().to_representation(instance)
         cal_items = []
 
-        for items in data['get_socialCalItems']:
+        for items in data['get_socialCalItems'][:5]:
             item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
             cal_items.append(item)
 
