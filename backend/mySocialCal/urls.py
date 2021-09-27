@@ -31,5 +31,6 @@ urlpatterns = [
     path("updateSingleVid/<slug:id>", views.SocialCalSingleUploadVid.as_view(), name = "socialCal_singleVid"),
     path("suggestedGroups", views.SuggestedGroups.as_view(), name = "suggested_groups"),
     path('createSmallGroup', views.CreateSmallGroup.as_view(), name = "create_small_groups"),
-    path('changeSGPublic/<slug:groupId>', views.ChangeSGPublic.as_view(), name = "change_small_group_public")
+    path('changeSGPublic/<slug:groupId>', views.ChangeSGPublic.as_view(), name = "change_small_group_public"),
+    path('joinSmallGroup/<slug:groupId>/<slug:userId>', views.JoinSmallGroup.as_view(), name = "join_small_group")
 ]

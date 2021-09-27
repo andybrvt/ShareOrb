@@ -848,3 +848,21 @@ class ChangeSGPublic(APIView):
 
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
         return Response(serializedGroup)
+
+# this function will be used to join a group
+class JoinSmallGroup(APIView):
+
+    def post(self, request, groupId, userId, *args, **kwargs):
+
+        print(groupId, userId)
+        group = get_object_or_404(models.SmallGroups, id = groupId)
+        user = get_object_or_404(User, id = userId)
+
+        group.members.add(user)
+
+        group.save()
+
+        serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
+
+
+        return Response(serializedGroup)
