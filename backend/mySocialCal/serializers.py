@@ -298,6 +298,11 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             'public',
             "groupCode"
             )
+        def to_representation(self, instance):
+            data = super().to_representation(instance)
+            data['members'] = SocialCalUserSerializer(User.objects.get(id = data['members'])).data
+            return data
+            
 class SmallGroupsExploreSerializers(serializers.ModelSerializer):
 
     # This function will be used for the explore page,
