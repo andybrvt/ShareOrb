@@ -64,7 +64,7 @@ class UserListView(generics.ListAPIView):
 class UserDetailView(generics.RetrieveAPIView):
     queryset = models.User.objects.all()
     lookup_field = 'username'
-    serializer_class= serializers.UserSerializer
+    serializer_class= serializers.UserExploreSerializer
 
 # Create a post with ALL the functions
 class PostListView(viewsets.ModelViewSet):
