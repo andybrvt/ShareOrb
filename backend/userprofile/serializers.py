@@ -31,6 +31,25 @@ class PostUserSerializer(serializers.ModelSerializer):
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio', 'friends')
 
+class JustRecentUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.User
+        fields = ("recents", "id")
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        recent = []
+
+        for user in data['recents']:
+            print(user)
+            userPerson = SuggestedUserSerializer(models.User.objects.get(id = user)).data
+            recent.append(userPerson)
+
+        data['recents'] = recent
+
+        return data
+
 
 
 # Used in UserListView, UserDetailView in views.py

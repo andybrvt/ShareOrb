@@ -17,6 +17,7 @@ from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
 import time
 from django.utils.crypto import get_random_string
+import json
 
 
 # Create your views here.
@@ -814,11 +815,16 @@ class SuggestedGroups(APIView):
         serializedGroups = serializers.SmallGroupsExploreSerializers(groups, many = True).data
         return Response(serializedGroups)
 
+
+
+
+
 # This function will be used to create the small group
 class CreateSmallGroup(APIView):
 
     def post(self, request, *args, **kwargs):
         print(request.data)
+        print('------------------')
         public = True
         if(request.data['public'] == "false"):
             public = False
@@ -830,6 +836,13 @@ class CreateSmallGroup(APIView):
         )
 
         curUser = get_object_or_404(User, id = request.data['curId'])
+
+        for people in json.loads(request.data['invited']):
+            curPerson = get_object_or_404(User, id = people)
+            curUser.recents.add(curPerson)
+
+        curUser.save()
+
         group.members.add(curUser)
         group.save()
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data

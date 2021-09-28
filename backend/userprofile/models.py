@@ -98,6 +98,10 @@ class User(AbstractUser):
     inviteCode = models.CharField(max_length = 6, null = True, default = random_code_function)
     invitedNum = models.IntegerField(default = 5, blank = False)
     dailyNotification = models.BooleanField(default = True)
+
+    # this function will be used to keep track of the recent people you added
+    # to your groups
+    recents = models.ManyToManyField("self", blank = True, related_name = "recent_people")
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
     def get_posts(self):
 

@@ -1099,13 +1099,16 @@ class RandomRecentSuggestedUsers(APIView):
     def get(self, request, *args, **kwargs):
 
         userList = list(models.User.objects.exclude(id = self.request.user.id))
-
+        curUser = get_object_or_404(models.User, id = self.request.user.id)
+        print(curUser)
+        serializedUser = serializers.JustRecentUserSerializer(curUser).data
+        print(serializedUser['recents'])
         shuffle(userList)
 
         serializeduserList = serializers.SuggestedUserSerializer(userList[:10], many = True).data
-
+        # recentList = serializers.SuggestedUserSerializer(recentList, many = True).data
         content = {
-            "recent": "",
+            "recent": serializedUser['recents'],
             'suggested': serializeduserList
         }
         return Response(content)
