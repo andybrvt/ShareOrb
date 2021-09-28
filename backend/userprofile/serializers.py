@@ -311,8 +311,8 @@ class UserExploreSerializer(serializers.ModelSerializer):
         smallGroups = []
 
         for groups in data['get_small_groups']:
-            groups = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
-            smallGroups.append(groups)
+            group = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
+            smallGroups.append(group)
         # for user in data['get_following']:
         #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
         #     followingList.append(userPerson)
