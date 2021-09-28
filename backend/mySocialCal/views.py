@@ -866,10 +866,3 @@ class JoinSmallGroup(APIView):
 
 
         return Response(serializedGroup)
-
-# this function will be used to join a private group
-class JoinPrivateGroup(APIView):
-
-    def post(self, request, groupId, userId, *args, **kwargs):
-
-        print(groupId, userId)

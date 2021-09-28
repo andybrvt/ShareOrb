@@ -52,19 +52,18 @@ class SuggestedUserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "profile_picture",
-            "get_followers",
             "notificationToken"
         )
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        followerList = []
-
-        for user in data['get_followers']:
-            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-            followerList.append(userPerson)
-
-        data['get_followers'] = followerList
-        return data
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     followerList = []
+    #
+    #     for user in data['get_followers']:
+    #         userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+    #         followerList.append(userPerson)
+    #
+    #     data['get_followers'] = followerList
+    #     return data
 
 
 
