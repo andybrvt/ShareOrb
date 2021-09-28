@@ -819,7 +819,6 @@ class CreateSmallGroup(APIView):
 
     def post(self, request, *args, **kwargs):
         print(request.data)
-        public = True
         if(request.data['public'] == "false"):
             public = False
         group = models.SmallGroups.objects.create(
@@ -833,7 +832,7 @@ class CreateSmallGroup(APIView):
         group.members.add(curUser)
         group.save()
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
-
+        print(serializedGroup)
         return Response(serializedGroup)
 
 # this function will be used to change the public and private of a group
