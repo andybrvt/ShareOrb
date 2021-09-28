@@ -4,6 +4,7 @@ from django.core import serializers
 from django.forms import model_to_dict
 from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
+from .serializers import NewNotificationSerializer
 from .serializers import PostSerializer
 from .serializers import NewPostSerializer
 from .serializers import CommentSerializer
@@ -12,6 +13,7 @@ from .serializers import FollowSerializer
 from .serializers import FollowUserSerializer
 from .serializers import UserSocialEventSerializer
 from .serializers import UserExploreSerializer
+from .serializers import UserExploreMobileSerializer
 from .serializers import UserExploreMobileSerializer
 from .models import CustomNotification
 from django.shortcuts import get_object_or_404
@@ -27,9 +29,11 @@ from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalComment
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
+from mySocialCal.models import SmallGroups
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
 from mySocialCal.serializers import SocialCalEventSerializer
+from mySocialCal.serializers import SmallGroupsExploreSerializers
 from .serializers import UserSocialCalSerializer
 from django.utils import timezone
 
@@ -49,7 +53,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
         user = self.scope['user']
         # This is where all the notifications get pulled
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId']).order_by('-timestamp')
-        serializer = NotificationSerializer(notifications, many=True)
+        serializer = NewNotificationSerializer(notifications, many=True)
         content = {
             'command': 'notifications',
             'notifications': json.dumps(serializer.data[:10])
@@ -60,7 +64,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
     def refetch_notifications(self,data):
         notifications = CustomNotification.objects.select_related('actor').filter(recipient=data['userId'])
-        serializer = NotificationSerializer(notifications, many=True)
+        serializer = NewNotificationSerializer(notifications, many=True)
         content = {
             'command': 'notifications',
             'notifications': json.dumps(serializer.data),
@@ -69,6 +73,36 @@ class NotificationConsumer(JsonWebsocketConsumer):
             # json.dumps(serializer.data)
         }
         self.send_new_notification(content)
+
+    # this function will be used to create the notification
+    # that people use to accept group invites
+    def send_group_invite_notification(self, data):
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        group = get_object_or_404(SmallGroups, id = data['groupId'])
+
+        notification = CustomNotification.objects.create(
+            type = "group_invite",
+            recipient = recipient,
+            actor = actor ,
+            verb = "join a group",
+            groupInvite = group
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+        print(serializer)
+        recipient.notificationSeen += 1
+        recipient.save()
+
+
+        content = {
+            "command": "new_notification",
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        # return self.send_new_notification(content)
 
 # Type is important, it will run the function in consumers under that type name
 # The differences is in the type of notification that is created, the type will then be
@@ -611,8 +645,11 @@ class NotificationConsumer(JsonWebsocketConsumer):
         self.send_json(notification)
 
     # recieve information from NotificaitonWebsocket.js from fetchFriendRequests()
+
+    # MOST OF THESE NOTIFCATIONS ARE OBSOLUTE SO YOU WE GOTTA DELETE IT SOON
     def receive(self, text_data=None, bytes_data=None, **kwargs):
         data = json.loads(text_data)
+        print(data)
         if data['command'] == 'fetch_friend_notifications':
             self.fetch_notifications(data)
         if data['command'] == 'send_friend_notification':
@@ -661,6 +698,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_social_cal_cell_notification(data)
         if data['command'] == 'social_comment_notification':
             self.send_social_cal_cell_notification(data)
+        if data['command'] == 'send_group_invite_notification':
+            self.send_group_invite_notification(data)
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE

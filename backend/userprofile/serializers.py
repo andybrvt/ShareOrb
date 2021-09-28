@@ -12,6 +12,7 @@ from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCellMiniSerializer
 from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.serializers import SmallGroupsSerializers
+from mySocialCal.serializers import SmallGroupsExploreSerializers
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
@@ -607,6 +608,26 @@ class FollowerSerializer(serializers.ModelSerializer):
         fields = ('person_following', 'person_getting_followers', 'created')
 
 
+class NewNotificationSerializer(serializers.ModelSerializer):
+    # This will be the new notification that will consist
+    # of just the group invite now and just group centric moving forward
+
+    class Meta:
+        model = CustomNotification
+        fields = (
+            "id",
+            "type",
+            "recipient",
+            "actor",
+            "verb",
+            'timestamp',
+            "groupInvite"
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['groupInvite'] = SmallGroupsExploreSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
+        return data
 
 class NotificationSerializer(serializers.ModelSerializer):
 

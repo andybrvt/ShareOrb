@@ -296,33 +296,23 @@ class CustomNotification(models.Model):
     deleted = models.BooleanField(default=False, db_index=True)
     emailed = models.BooleanField(default=False, db_index=True)
 
-    # mindate and maxdate is used more for notificaitons on events, if it is not a
-    # notification that has to do with events then there no need to worry about
-    # minDate and maxDate
+    groupInvite = models.ForeignKey(SmallGroups, related_name= "group_invite", on_delete = models.CASCADE, null = True)
+
+
+
+
+
+    # EVERYTHING DOWN HERE IS OBSOLUTE, DO NOT USE ANY MORE
     minDate = models.DateTimeField(default = now, blank = True)
     maxDate = models.DateTimeField(default = now, blank = True)
-
-    # eventId field is used for calendar event related objects
-    # so that we can go into the eventid page directly
     eventId = models.BigIntegerField(blank = True, null = True)
     itemId = models.BigIntegerField(blank = True, null = True)
-    # These fields in combination with minDate and maxDate will hold informaiton
-    # about an event that wants to be approved.Once approvaed the new soical
-    # cal event will be created. Also gotta add in to the fact that if the date of
-    # that event passes the notificaiton will be deleted or disabled.
-    # This is for social calendar
-
-    # Fields will be similar to socailCaleventmodal
     pendingEventTitle = models.CharField(max_length= 222, blank = True)
     pendingEventContent = models.TextField(blank = True)
     pendingEventLocation = models.CharField(max_length = 255, blank = True)
     pendingEventCurId = models.IntegerField(blank = True, null = True)
     pendingCalendarOwnerId = models.IntegerField(blank = True, null = True)
-
-    # Pending event date will be used for the date that the pictures will be assoicated to
-    # assoicate it with the cal cell
     pendingEventDate = models.DateField(default =datetime.date.today, blank = True)
-
     pendingEventStartTime = models.TimeField(default = datetime.time, blank = True)
     pendingEventEndTime = models.TimeField(default = datetime.time, blank = True)
 
