@@ -325,7 +325,8 @@ class SmallGroupsExploreSerializers(serializers.ModelSerializer):
             'members',
             "group_name",
             "groupPic",
-            "get_socialCalItems"
+            "get_socialCalItems",
+            "public"
         )
 
     def to_representation(self, instance):

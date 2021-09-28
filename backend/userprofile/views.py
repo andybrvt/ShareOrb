@@ -21,6 +21,8 @@ from mySocialCal.serializers import SmallGroupsSerializers
 
 from django.utils.crypto import get_random_string
 from mySocialCal.models import SmallGroups
+from random import shuffle
+
 import pytz
 
 # Create your views here.
@@ -1089,3 +1091,24 @@ class DeleteUser(APIView):
         print(user)
         user.delete()
         return Response("done")
+
+class RandomRecentSuggestedUsers(APIView):
+
+    # this function will get a random list of 20 people to give you a suggested
+    # list
+    def get(self, request, *args, **kwargs):
+
+        userList = list(models.User.objects.exclude(id = self.request.user.id))
+        curUser = get_object_or_404(models.User, id = self.request.user.id)
+        print(curUser)
+        serializedUser = serializers.JustRecentUserSerializer(curUser).data
+        print(serializedUser['recents'])
+        shuffle(userList)
+
+        serializeduserList = serializers.SuggestedUserSerializer(userList[:10], many = True).data
+        # recentList = serializers.SuggestedUserSerializer(recentList, many = True).data
+        content = {
+            "recent": serializedUser['recents'],
+            'suggested': serializeduserList
+        }
+        return Response(content)

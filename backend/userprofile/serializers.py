@@ -12,6 +12,7 @@ from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCellMiniSerializer
 from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.serializers import SmallGroupsSerializers
+from mySocialCal.serializers import SmallGroupsExploreSerializers
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
@@ -30,6 +31,25 @@ class PostUserSerializer(serializers.ModelSerializer):
     class Meta:
 	    model = models.User
 	    fields = ('id', 'username','first_name', 'last_name', 'email', 'bio', 'friends')
+
+class JustRecentUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.User
+        fields = ("recents", "id")
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        recent = []
+
+        for user in data['recents']:
+            print(user)
+            userPerson = SuggestedUserSerializer(models.User.objects.get(id = user)).data
+            recent.append(userPerson)
+
+        data['recents'] = recent
+
+        return data
 
 
 
@@ -52,19 +72,18 @@ class SuggestedUserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "profile_picture",
-            "get_followers",
             "notificationToken"
         )
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        followerList = []
-
-        for user in data['get_followers']:
-            userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-            followerList.append(userPerson)
-
-        data['get_followers'] = followerList
-        return data
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     followerList = []
+    #
+    #     for user in data['get_followers']:
+    #         userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
+    #         followerList.append(userPerson)
+    #
+    #     data['get_followers'] = followerList
+    #     return data
 
 
 
@@ -311,8 +330,8 @@ class UserExploreSerializer(serializers.ModelSerializer):
         smallGroups = []
 
         for groups in data['get_small_groups']:
-            groups = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
-            smallGroups.append(groups)
+            group = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
+            smallGroups.append(group)
         # for user in data['get_following']:
         #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
         #     followingList.append(userPerson)
@@ -589,6 +608,26 @@ class FollowerSerializer(serializers.ModelSerializer):
         fields = ('person_following', 'person_getting_followers', 'created')
 
 
+class NewNotificationSerializer(serializers.ModelSerializer):
+    # This will be the new notification that will consist
+    # of just the group invite now and just group centric moving forward
+
+    class Meta:
+        model = CustomNotification
+        fields = (
+            "id",
+            "type",
+            "recipient",
+            "actor",
+            "verb",
+            'timestamp',
+            "groupInvite"
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['groupInvite'] = SmallGroupsExploreSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
+        return data
 
 class NotificationSerializer(serializers.ModelSerializer):
 
