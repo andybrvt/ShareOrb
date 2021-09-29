@@ -8,6 +8,6 @@ websocket_urlpatterns = [
     re_path(r'^ws/socialNewsfeed', consumers.NewSocialCellEventNewsfeed),
     re_path(r'^ws/socialComments/(?P<cellId>\w+)$', consumers.SocialCommentConsumer),
     re_path(r'^ws/newSocialCalendarCellPage/(?P<cellId>\w+)$', consumers.NewSocialCalCellConsumer),
-    re_path(r'^ws/smallGroup/(?P<groupId>\w+)$', consumers.SmallGroupsConsumer)
-
+    re_path(r'^ws/smallGroup/(?P<groupId>\w+)$', consumers.SmallGroupsConsumer),
+    re_path(r'^ws/globeGroup', consumers.GlobeGroupConsumer)
 ]

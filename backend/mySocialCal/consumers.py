@@ -1318,3 +1318,18 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
     def new_group_action(self, event):
         action = event['action']
         return self.send_json(action)
+
+class GlobeGroupConsumer(JsonWebsocketConsumer):
+
+
+    def connect(self):
+        grp = "globeGroup"
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+
+    def disconnect(self, close_code):
+        grp = "globeGroup"
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
