@@ -627,6 +627,8 @@ class NewNotificationSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['groupInvite'] = SmallGroupsExploreSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
+        data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
+
         return data
 
 class NotificationSerializer(serializers.ModelSerializer):
