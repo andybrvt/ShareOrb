@@ -879,3 +879,12 @@ class JoinSmallGroup(APIView):
 
 
         return Response(serializedGroup)
+
+# use to grab a specific member of a group
+class grabGroupMember(APIView):
+
+    def get(self, request, groupId, *args, **kwargs):
+        group =get_object_or_404(models.SmallGroups, id = groupId)
+        serializedGroup = serializers.MemberGroupSerializer(group, many = False).data
+
+        return Response(serializedGroup['members'])

@@ -299,20 +299,41 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             "groupCode",
             'get_socialCalItems',
             )
-        def to_representation(self, instance):
-            data = super().to_representation(instance)
-            cal_items = []
-            members=[]
-            for items in data['get_socialCalItems'][:5]:
-                item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
-                cal_items.append(item)
-            for items in data['members']:
-                print(items)
-                item=data['members'] = SocialCalUserSerializer(User.objects.get(id = items)).data
-                members.append(item)
-            data['get_socialCalItems'] = cal_items
-            data['members'] = members
-            return data
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        cal_items = []
+        for items in data['get_socialCalItems'][:5]:
+            item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
+            cal_items.append(item)
+
+        data['get_socialCalItems'] = cal_items
+        # data['members'] = members
+        return data
+
+# this function is use to grab just the member serialziers
+class MemberGroupSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = models.SmallGroups
+        fields = (
+            "id",
+            "members"
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        members=[]
+
+        for people in data['members']:
+
+            member = data['members'] = SocialCalUserSerializer(User.objects.get(id = people)).data
+            members.append(member)
+
+        data['members'] = members
+        return data
+
 
 class SmallGroupsExploreSerializers(serializers.ModelSerializer):
 
