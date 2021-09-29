@@ -297,23 +297,22 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             'description',
             'public',
             "groupCode",
-            "get_socialCalItems"
-
+            'get_socialCalItems',
             )
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-
-        cal_items = []
-
-
-        for items in data['get_socialCalItems'][:5]:
-            item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
-            cal_items.append(item)
-
-        data['get_socialCalItems'] = cal_items
-
-        # data['members'] = SocialCalUserSerializer(User.objects.filter(id__in = data['members'])).data
-        return data
+        def to_representation(self, instance):
+            data = super().to_representation(instance)
+            cal_items = []
+            members=[]
+            for items in data['get_socialCalItems'][:5]:
+                item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
+                cal_items.append(item)
+            for items in data['members']:
+                print(items)
+                item=data['members'] = SocialCalUserSerializer(User.objects.get(id = items)).data
+                members.append(item)
+            data['get_socialCalItems'] = cal_items
+            data['members'] = members
+            return data
 
 class SmallGroupsExploreSerializers(serializers.ModelSerializer):
 

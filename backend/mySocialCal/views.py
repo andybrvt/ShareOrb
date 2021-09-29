@@ -846,7 +846,7 @@ class CreateSmallGroup(APIView):
         group.members.add(curUser)
         group.save()
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
-
+        print(serializedGroup)
         return Response(serializedGroup)
 
 # this function will be used to change the public and private of a group
