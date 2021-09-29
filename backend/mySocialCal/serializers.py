@@ -325,12 +325,18 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         cal_items = []
+
+        member_list = []
         for items in data['get_socialCalItems'][:5]:
             item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
             cal_items.append(item)
 
+        for members in data['members'][:10]:
+            member = SocialCalUserSerializer(User.objects.get(id = members)).data
+            member_list.append(member)
+
         data['get_socialCalItems'] = cal_items
-        # data['members'] = members
+        data['mini_member'] = member_list
         return data
 
 # this function is use to grab just the member serialziers
@@ -377,12 +383,17 @@ class SmallGroupsExploreSerializers(serializers.ModelSerializer):
         data = super().to_representation(instance)
         cal_items = []
 
+        member_list = []
         for items in data['get_socialCalItems'][:5]:
             item = SocialItemJustPicSerializer(models.SocialCalItems.objects.get(id=items)).data
             cal_items.append(item)
 
-        data['get_socialCalItems'] = cal_items
+        for members in data['members'][:10]:
+            member = SocialCalUserSerializer(User.objects.get(id = members)).data
+            member_list.append(member)
 
+        data['get_socialCalItems'] = cal_items
+        data['mini_member'] = member_list
         return data
 
 # used for when you don't need the cal items or members
