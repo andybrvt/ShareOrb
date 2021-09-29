@@ -347,6 +347,8 @@ class SmallGroups(models.Model):
     def get_socialCalItems(self):
         return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)
 
+
+
 class SocialCalItems(models.Model):
     # The social calendar items will include all the pictures, post, and social
     # events that will be included
@@ -390,6 +392,16 @@ class SocialCalItems(models.Model):
     def get_socialCalItemComment(self):
 
         return SocialCalItemComment.objects.filter(calItem = self).values_list("id", flat = True)
+
+# this function will be used to get specific social cal items for the globe
+# group
+# So you are gonna need post, like, comment, group
+class GlobeItems(models.Model):
+
+    post = models.ForeignKey(SocialCalItems, on_delete = models.CASCADE, related_name = "social_cal_item_globe", null = True)
+    people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "globe_post_likes", blank =True)
+    group  = models.ForeignKey(SmallGroups, on_delete = models.CASCADE, related_name = "small_group_globe", null = True )
+    created_at = models.DateTimeField(auto_now_add = False)
 
 
 class SocialCalEvent(models.Model):

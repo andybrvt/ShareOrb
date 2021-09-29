@@ -12,6 +12,7 @@ from .models import SocialCalItems
 from .models import SocialCellEventPost
 from .models import SocialCalItemComment
 from .models import SmallGroups
+from .models import GlobeItems
 from userprofile.models import CustomNotification
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
@@ -21,6 +22,7 @@ from .serializers import SocialCalCommentSerializer
 from .serializers import SocialCellEventSerializer
 from .serializers import SocialCalItemsSerializer
 from .serializers import SocialItemCommentSerializer
+from .serializers import GlobeItemSerializer
 import datetime
 from django.utils import timezone
 import pytz
@@ -1321,6 +1323,19 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
 
 class GlobeGroupConsumer(JsonWebsocketConsumer):
 
+    def fetch_globe_post(self, data):
+        # this function will pull all the globe post for everyone
+        globePost = GlobeItems.objects.all()
+        globeSerialized = GlobeItemSerializer(globePost, many = True).data
+
+
+        content = {
+            'command': "fetch_globe_post",
+            'globe_post': json.dumps(globeSerialized)
+        }
+
+        self.send_json(content)
+
 
     def connect(self):
         grp = "globeGroup"
@@ -1333,3 +1348,6 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
+        if data['command'] == "fetch_globe_post":
+            self.fetch_globe_post(data)

@@ -244,6 +244,29 @@ class SocialItemJustPicSerializer(serializers.ModelSerializer):
         model = models.SocialCalItems
         fields = ("id", "itemImage","video", 'caption', "created_at")
 
+# This will be used for the globe group
+# you will need the pic/vid, the group it was part of, and the ower
+class SocialItemGlobeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SocialCalItems
+        fields = (
+            "id",
+            "itemImage",
+            "video",
+            'caption',
+            "created_at",
+            'smallGroup',
+            "creator"
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
+
+
+        return data
+
+
 class GoalAlbumStringMiniSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -360,4 +383,31 @@ class SmallGroupsExploreSerializers(serializers.ModelSerializer):
 
         data['get_socialCalItems'] = cal_items
 
+        return data
+
+# used for when you don't need the cal items or members
+class MiniSmallGroupsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SmallGroups
+        fields = (
+            "id",
+            'members',
+            "group_name",
+            "groupPic",
+            "public"
+        )
+
+class GlobeItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GlobeItems
+        fields = (
+            "post",
+            'people_like',
+            "group",
+            "created_at"
+        )
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['post'] = SocialItemGlobeSerializer(models.SocialCalItems.objects.get(id = data['post'])).data
+        data['group'] = MiniSmallGroupsSerializer(models.SmallGroups.objects.get(id = data['group'])).data
         return data
