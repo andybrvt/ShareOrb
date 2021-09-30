@@ -17,6 +17,7 @@ from datetime import datetime
 # from userprofile.models import User
 
 
+
 # THESE create_all_post AND delete_all_post are used for the content type on
 # the userprofile.
 def create_all_post(sender, instance, created, **kwargs):
@@ -252,7 +253,9 @@ def delete_social_event_post(sender, instance, **kwargs):
 
     post.delete()
 
+class Test(models.Model):
 
+    char = models.CharField(max_length= 10)
 #These models are used to work with the social cal and all its backend
 #functions
 class SocialCalCell(models.Model):
