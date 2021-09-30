@@ -1329,6 +1329,41 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         globeSerialized = GlobeItemSerializer(globePost, many = True).data
 
 
+        # # test it here
+        # smallGroups = SmallGroups.objects.filter(public = True)
+        #
+        # for group in smallGroups:
+        #
+        #     # get the items of that post and find which has the most
+        #     # likes
+        #     posts = group.get_socialCalItems()
+        #
+        #
+        #     if len(posts) > 0:
+        #         # if there is a post then you find out whats has the most
+        #         # number of likes, once you get that create an globeitem
+        #         highestCount = 0
+        #         highestCountPost = SocialCalItems.objects.get(id = posts[0])
+        #         for post in posts:
+        #             calItems = SocialCalItems.objects.get(id = post)
+        #             likeCount = calItems.people_like.count()
+        #             if likeCount >= highestCount:
+        #                 highestCount = likeCount
+        #                 highestCountPost = calItems
+        #
+        #
+        #
+        #         print(highestCount, highestCountPost, 'just a group')
+        #         GlobeItems.objects.create(
+        #             post = highestCountPost,
+        #             group = group
+        #         )
+
+
+
+
+
+
         content = {
             'command': "fetch_globe_post",
             'globe_post': json.dumps(globeSerialized)

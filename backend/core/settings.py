@@ -90,6 +90,7 @@ INSTALLED_APPS =[
     'allauth',
     'allauth.account',
     'corsheaders',
+    'django_crontab',
     'django.contrib.sites',
     'rest_auth',
     'rest_auth.registration',
@@ -306,4 +307,10 @@ CHANNEL_LAYERS = {
 }
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static')
+]
+
+
+# running schedualed items
+CRONJOBS = [
+    # ('*/1 * * * *', 'mySocialCal.cron.schedualed_globe_post')
 ]
