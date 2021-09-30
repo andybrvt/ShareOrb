@@ -404,7 +404,7 @@ class GlobeItems(models.Model):
     post = models.ForeignKey(SocialCalItems, on_delete = models.CASCADE, related_name = "social_cal_item_globe", null = True)
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "globe_post_likes", blank =True)
     group  = models.ForeignKey(SmallGroups, on_delete = models.CASCADE, related_name = "small_group_globe", null = True )
-    created_at = models.DateTimeField(auto_now_add = False)
+    created_at = models.DateTimeField(auto_now_add = True)
 
 
 class SocialCalEvent(models.Model):
