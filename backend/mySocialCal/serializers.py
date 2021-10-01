@@ -420,5 +420,5 @@ class GlobeItemSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['post'] = SocialItemGlobeSerializer(models.SocialCalItems.objects.get(id = data['post'])).data
-        data['group'] = MiniSmallGroupsSerializer(models.SmallGroups.objects.get(id = data['group'])).data
+        data['group'] = SmallGroupsExploreSerializers(models.SmallGroups.objects.get(id = data['group'])).data
         return data

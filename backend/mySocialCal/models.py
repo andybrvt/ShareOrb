@@ -406,6 +406,10 @@ class GlobeItems(models.Model):
     group  = models.ForeignKey(SmallGroups, on_delete = models.CASCADE, related_name = "small_group_globe", null = True )
     created_at = models.DateTimeField(auto_now_add = True)
 
+    # Everything from here down would be for the events
+    class Meta:
+        ordering = ['-created_at']
+
 
 class SocialCalEvent(models.Model):
     # This modelis for the social events taht you are gonna post for the public
