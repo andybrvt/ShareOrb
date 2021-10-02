@@ -13,6 +13,7 @@ from .models import SocialCellEventPost
 from .models import SocialCalItemComment
 from .models import SmallGroups
 from .models import GlobeItems
+from .models import GlobeItemComment
 from userprofile.models import CustomNotification
 from .serializers import SocialCalUserSerializer
 from .serializers import SocialCalCellSerializer
@@ -23,6 +24,7 @@ from .serializers import SocialCellEventSerializer
 from .serializers import SocialCalItemsSerializer
 from .serializers import SocialItemCommentSerializer
 from .serializers import GlobeItemSerializer
+from .serializers import GlobeItemCommentSerializer
 import datetime
 from django.utils import timezone
 import pytz
@@ -1484,6 +1486,24 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 class GlobeCommentConsumer(JsonWebsocketConsumer):
 
     # function used for the comments of the globe
+    def fetch_globe_item_comment(self, data):
+
+        print(data)
+
+        globeItem = get_object_or_404(GlobeItems, id = data['itemId'])
+        globeComment = GlobeItemComment.objects.filter(
+            globeItem = globeItem
+        )
+
+        serializedComments = GlobeItemCommentSerializer(globeComment, many = True).data
+
+        content = {
+            'command': 'fetch_globe_item_comment',
+            'itemComments': serializedComments
+        }
+
+        self.send_json(content)
+
 
     def connect(self):
         self.globeItem = self.scope['url_route']['kwargs']['itemId']
@@ -1499,3 +1519,7 @@ class GlobeCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
+        print(data)
+
+        if data['command'] == 'fetch_globe_item_comment':
+            self.fetch_globe_item_comment(data)

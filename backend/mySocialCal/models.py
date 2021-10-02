@@ -410,6 +410,16 @@ class GlobeItems(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+    def get_globeItemComment(self):
+        return GlobeItemComment.objects.filter(globeItem = self).values_list("id", flat = True)
+
+
+class GlobeItemComment(models.Model):
+    # This comment will be made specifically for the comments
+    globeItem = models.ForeignKey(GlobeItems,on_delete = models.CASCADE, related_name = "globeItemComments")
+    body = models.TextField(blank = True)
+    created_on = models.DateTimeField(auto_now_add = True)
+    commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= "globeItemUserComment", on_delete = models.CASCADE, null = True)
 
 class SocialCalEvent(models.Model):
     # This modelis for the social events taht you are gonna post for the public

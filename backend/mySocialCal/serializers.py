@@ -423,3 +423,12 @@ class GlobeItemSerializer(serializers.ModelSerializer):
         data['post'] = SocialItemGlobeSerializer(models.SocialCalItems.objects.get(id = data['post'])).data
         data['group'] = SmallGroupsExploreSerializers(models.SmallGroups.objects.get(id = data['group'])).data
         return data
+
+class GlobeItemCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GlobeItemComment
+        fields= "__all__"
+    def to_representation(self,instance):
+        data = super().to_representation(instance)
+        data['commentUser'] = SocialCalUserSerializer(User.objects.get(id = data['commentUser'])).data
+        return data
