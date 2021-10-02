@@ -198,6 +198,7 @@ class UserSerializer(serializers.ModelSerializer):
         # data['get_followers'] = followerList
         # data['get_sent_follow_request'] = sentRequestList
         # data['get_follow_request'] = requestList
+        data['id_small_groups'] = data['get_small_groups']
         data['get_small_groups'] = smallGroups
         # NOT NEEDED ANY MORE
         # data['get_socialCal'] = socialCalList

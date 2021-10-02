@@ -412,6 +412,7 @@ class GlobeItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.GlobeItems
         fields = (
+            'id',
             "post",
             'people_like',
             "group",

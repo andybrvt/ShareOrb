@@ -1280,6 +1280,43 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
         }
         self.send_new_group_action(content)
 
+    def send_group_post_like(self, data):
+
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
+        liker = get_object_or_404(User, id = data['likerId'])
+        group = get_object_or_404(SmallGroups, id = data['groupId'])
+        print(post, liker, group)
+        post.people_like.add(liker)
+        post.save()
+        serializedPost = SocialCalItemsSerializer(post, many = False).data
+
+        content = {
+            'command':'send_group_post_like_unlike',
+            'post': serializedPost,
+            'groupId': data['groupId']
+        }
+
+        self.send_new_group_action(content)
+
+    def send_group_post_unlike(self,data):
+        # function will send the unlike
+        post = get_object_or_404(SocialCalItems, id= data['postId'])
+        unliker = get_object_or_404(User, id = data['unlikerId'])
+        group = get_object_or_404(SmallGroups, id = data['groupId'])
+
+        post.people_like.remove(unliker)
+        post.save()
+
+        serializedPost = SocialCalItemsSerializer(post, many = False).data
+
+        content = {
+            'command':'send_group_post_like_unlike',
+            'post': serializedPost,
+            'groupId': data['groupId']
+        }
+
+        self.send_new_group_action(content)
+
     def send_new_group_action(self, action):
         # this function will be used to direct the push, so that it knows
         # which channel to send to
@@ -1316,6 +1353,11 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
             self.fetch_group_post(data)
         if data['command'] == "send_group_post":
             self.send_group_post(data)
+        if data['command'] == "send_group_post_like":
+            self.send_group_post_like(data)
+        if data['command'] == 'send_group_post_unlike':
+            self.send_group_post_unlike(data)
+
 
     def new_group_action(self, event):
         action = event['action']
@@ -1372,6 +1414,35 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         self.send_json(content)
 
 
+    def send_group_like(self, data):
+        group = get_object_or_404(GlobeItems, id = data['globeId'])
+        liker = get_object_or_404(User, id = data['likerId'])
+        group.people_like.add(liker)
+        group.save()
+
+        serializedPost = GlobeItemSerializer(group).data
+
+
+        content = {
+            "command":'send_globe_post_like_unlike',
+            'post': serializedPost
+        }
+
+        self.send_new_globe_action(content)
+
+
+    def send_new_globe_action(self, action):
+        channel_layer = get_channel_layer()
+        channel = "globeGroup"
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                "type": 'send_globe_action',
+                'action': action
+            }
+        )
+
+
     def connect(self):
         grp = "globeGroup"
         async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
@@ -1386,3 +1457,9 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         print(data)
         if data['command'] == "fetch_globe_post":
             self.fetch_globe_post(data)
+        if data['command'] == 'send_group_like':
+            self.send_group_like(data)
+
+    def send_globe_action(self, globePostAction):
+        globeAction = globePostAction['action']
+        return self.send_json(globeAction)
