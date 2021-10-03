@@ -1319,6 +1319,22 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
 
         self.send_new_group_action(content)
 
+    def update_single_group_post(self, data):
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
+
+        smallGroupId = post.smallGroup.id
+        print(smallGroupId)
+
+        serializedPost = SocialCalItemsSerializer(post,many = False).data
+
+        content = {
+            "command": 'update_single_group_post',
+            'post': serializedPost,
+            'groupId': smallGroupId
+        }
+
+        self.send_new_group_action(content)
+
     def send_new_group_action(self, action):
         # this function will be used to direct the push, so that it knows
         # which channel to send to
@@ -1359,6 +1375,8 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
             self.send_group_post_like(data)
         if data['command'] == 'send_group_post_unlike':
             self.send_group_post_unlike(data)
+        if data['command'] == 'update_single_group_post':
+            self.update_single_group_post(data)
 
 
     def new_group_action(self, event):
