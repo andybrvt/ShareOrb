@@ -1448,6 +1448,16 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 
         self.send_new_globe_action(content)
 
+    def update_single_globe_item(self, data):
+        globeItem = get_object_or_404(GlobeItems,id = data['globeItem'])
+        serializedItem = GlobeItemSerializer(globeItem, many = False).data
+
+        content = {
+            "command": 'update_single_globe_item',
+            "globeItem": serializedItem
+        }
+        self.send_new_globe_action(content)
+
     def send_new_globe_action(self, action):
         channel_layer = get_channel_layer()
         channel = "globeGroup"
@@ -1478,6 +1488,8 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
             self.send_group_like(data)
         if data['command'] == 'send_group_unlike':
             self.send_group_unlike(data)
+        if data['command'] == 'update_single_globe_item':
+            self.update_single_globe_item(data)
 
 
     def send_globe_action(self, globePostAction):
