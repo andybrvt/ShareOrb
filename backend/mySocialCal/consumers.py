@@ -1479,6 +1479,7 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         if data['command'] == 'send_group_unlike':
             self.send_group_unlike(data)
 
+
     def send_globe_action(self, globePostAction):
         globeAction = globePostAction['action']
         return self.send_json(globeAction)
@@ -1505,6 +1506,45 @@ class GlobeCommentConsumer(JsonWebsocketConsumer):
         self.send_json(content)
 
 
+    def send_globe_item_comment(self, data):
+
+        globeItem = get_object_or_404(GlobeItems, id = data['globeItem'])
+        user = get_object_or_404(User, id = data['userId'])
+
+        globeComment = GlobeItemComment.objects.create(
+            globeItem = globeItem,
+            body = data['comment'],
+            commentUser = user
+        )
+
+        serializedComments = GlobeItemCommentSerializer(globeComment, many = False).data
+
+        content = {
+            'command': 'send_globe_item_comment',
+            'itemComment': serializedComments,
+            'groupItemId': data['globeItem']
+        }
+
+        print(content)
+        self.send_globe_info_comment(content)
+
+
+
+    def send_globe_info_comment(self, commentObj):
+
+        channel_layer = get_channel_layer()
+        channel_recipient = str(commentObj['groupItemId'])
+        channel = "globeComments_"+channel_recipient
+
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                "type": "new_globe_comment_action",
+                "commentAction": commentObj
+            }
+        )
+
     def connect(self):
         self.globeItem = self.scope['url_route']['kwargs']['itemId']
         grp = "globeComments_"+self.globeItem
@@ -1523,3 +1563,9 @@ class GlobeCommentConsumer(JsonWebsocketConsumer):
 
         if data['command'] == 'fetch_globe_item_comment':
             self.fetch_globe_item_comment(data)
+        if data['command'] == 'send_globe_item_comment':
+            self.send_globe_item_comment(data)
+
+    def new_globe_comment_action(self, action):
+        commentObj = action['commentAction']
+        return self.send_json(commentObj)

@@ -409,6 +409,9 @@ class MiniSmallGroupsSerializer(serializers.ModelSerializer):
         )
 
 class GlobeItemSerializer(serializers.ModelSerializer):
+
+    get_globeItemComment  = serializers.StringRelatedField(many = True)
+
     class Meta:
         model = models.GlobeItems
         fields = (
@@ -416,7 +419,8 @@ class GlobeItemSerializer(serializers.ModelSerializer):
             "post",
             'people_like',
             "group",
-            "created_at"
+            "created_at",
+            'get_globeItemComment'
         )
     def to_representation(self, instance):
         data = super().to_representation(instance)
