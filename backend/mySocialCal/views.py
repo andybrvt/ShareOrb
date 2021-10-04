@@ -888,3 +888,48 @@ class grabGroupMember(APIView):
         serializedGroup = serializers.MemberGroupSerializer(group, many = False).data
 
         return Response(serializedGroup['members'])
+
+def is_there_more_group_data(start, group):
+
+    if(int(start) > models.SocialCalItems.objects.filter(smallGroup = group).count()):
+        return False
+    return True
+
+# this function will be used to load more post for small groups
+class loadSmallGroupPostView(APIView):
+
+    def get(self, request, groupId, start, addMore, *args, **kwargs):
+
+        group = get_object_or_404(models.SmallGroups, id = groupId)
+
+        getPost = models.SocialCalItems.objects.filter(smallGroup = group)[start:start+addMore]
+
+        serializedPost = serializers.SocialCalItemsSerializer(getPost, many = True).data
+
+
+        content = {
+            "serializedPost": serializedPost,
+            'has_more': is_there_more_group_data(start, group),
+            'groupId': groupId
+        }
+
+        return Response(content)
+
+def is_there_more_globe_data(start):
+
+    if(int(start) > models.GlobeItems.objects.all().count()):
+        return False
+    return True
+
+class loadMoreGlobeView(APIView):
+    # this function will load more for the globe
+    def get(self, request, start, addMore, *args, **kwargs):
+        globePost = models.GlobeItems.objects.all()[start:start+addMore]
+        globeSerialized = serializers.GlobeItemSerializer(globePost, many = True).data
+
+        content = {
+            "globePost": globeSerialized,
+            'has_more': is_there_more_globe_data(start)
+        }
+
+        return Response(content)

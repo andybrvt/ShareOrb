@@ -33,5 +33,8 @@ urlpatterns = [
     path('createSmallGroup', views.CreateSmallGroup.as_view(), name = "create_small_groups"),
     path('changeSGPublic/<slug:groupId>', views.ChangeSGPublic.as_view(), name = "change_small_group_public"),
     path('joinSmallGroup/<slug:groupId>/<slug:userId>', views.JoinSmallGroup.as_view(), name = "join_small_group"),
-    path('grabMembers/<slug:groupId>', views.grabGroupMember.as_view(), name = "grab_group_members")
+    path('grabMembers/<slug:groupId>', views.grabGroupMember.as_view(), name = "grab_group_members"),
+    path("infiniteSmallGroup/<int:groupId>/<int:start>/<int:addMore>", views.loadSmallGroupPostView.as_view(), name = "infinite_small_group"),
+    path("infiniteGlobe/<int:start>/<int:addMore>", views.loadMoreGlobeView.as_view(), name = "infinite_globe"),
+
 ]
