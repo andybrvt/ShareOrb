@@ -30,7 +30,6 @@ ALLOWED_HOSTS = [
  "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
  '54.183.46.151',
  '127.0.0.1:5000',
- "127.0.0.1",
  '52.8.250.165',
  "3.101.88.44",
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
