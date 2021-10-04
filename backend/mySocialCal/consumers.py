@@ -1256,7 +1256,7 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
         group = get_object_or_404(SmallGroups, id = data['groupId'])
 
         # Now that you have the group, now just grab the stuff inside the group now
-        getPost = SocialCalItems.objects.filter(smallGroup  = group)
+        getPost = SocialCalItems.objects.filter(smallGroup  = group)[:6]
         print(getPost)
         serializedPost = SocialCalItemsSerializer(getPost, many = True).data
 
@@ -1387,7 +1387,7 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 
     def fetch_globe_post(self, data):
         # this function will pull all the globe post for everyone
-        globePost = GlobeItems.objects.all()
+        globePost = GlobeItems.objects.all()[:6]
         globeSerialized = GlobeItemSerializer(globePost, many = True).data
 
 
