@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
  '52.8.250.165',
  "3.101.88.44",
  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
- "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com"
+ "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com",
+ "shareorbv2-env-v1.us-west-1.elasticbeanstalk.com"
 ]
 
 # ALLOWED_HOSTS = [
@@ -160,7 +161,7 @@ DATABASES = {
         'OPTIONS': {
          'charset': 'utf8mb4',
          'use_unicode': True, },
-        'HOST': 'aaws2efgmy63yt.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'HOST': 'aa1ty74hk7kpr1.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
