@@ -811,7 +811,7 @@ class SuggestedGroups(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        groups = models.SmallGroups.objects.all()[:7]
+        groups = models.SmallGroups.objects.filter(public = True)[:15]
         serializedGroups = serializers.SmallGroupsExploreSerializers(groups, many = True).data
         return Response(serializedGroups)
 
