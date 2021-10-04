@@ -1256,7 +1256,7 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
         group = get_object_or_404(SmallGroups, id = data['groupId'])
 
         # Now that you have the group, now just grab the stuff inside the group now
-        getPost = SocialCalItems.objects.filter(smallGroup  = group)
+        getPost = SocialCalItems.objects.filter(smallGroup  = group)[:6]
         print(getPost)
         serializedPost = SocialCalItemsSerializer(getPost, many = True).data
 
@@ -1319,6 +1319,22 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
 
         self.send_new_group_action(content)
 
+    def update_single_group_post(self, data):
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
+
+        smallGroupId = post.smallGroup.id
+        print(smallGroupId)
+
+        serializedPost = SocialCalItemsSerializer(post,many = False).data
+
+        content = {
+            "command": 'update_single_group_post',
+            'post': serializedPost,
+            'groupId': smallGroupId
+        }
+
+        self.send_new_group_action(content)
+
     def send_new_group_action(self, action):
         # this function will be used to direct the push, so that it knows
         # which channel to send to
@@ -1359,6 +1375,8 @@ class SmallGroupsConsumer(JsonWebsocketConsumer):
             self.send_group_post_like(data)
         if data['command'] == 'send_group_post_unlike':
             self.send_group_post_unlike(data)
+        if data['command'] == 'update_single_group_post':
+            self.update_single_group_post(data)
 
 
     def new_group_action(self, event):
@@ -1369,7 +1387,7 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 
     def fetch_globe_post(self, data):
         # this function will pull all the globe post for everyone
-        globePost = GlobeItems.objects.all()
+        globePost = GlobeItems.objects.all()[:6]
         globeSerialized = GlobeItemSerializer(globePost, many = True).data
 
 
@@ -1448,6 +1466,16 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 
         self.send_new_globe_action(content)
 
+    def update_single_globe_item(self, data):
+        globeItem = get_object_or_404(GlobeItems,id = data['globeItem'])
+        serializedItem = GlobeItemSerializer(globeItem, many = False).data
+
+        content = {
+            "command": 'update_single_globe_item',
+            "globeItem": serializedItem
+        }
+        self.send_new_globe_action(content)
+
     def send_new_globe_action(self, action):
         channel_layer = get_channel_layer()
         channel = "globeGroup"
@@ -1478,6 +1506,9 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
             self.send_group_like(data)
         if data['command'] == 'send_group_unlike':
             self.send_group_unlike(data)
+        if data['command'] == 'update_single_globe_item':
+            self.update_single_globe_item(data)
+
 
     def send_globe_action(self, globePostAction):
         globeAction = globePostAction['action']
@@ -1505,6 +1536,45 @@ class GlobeCommentConsumer(JsonWebsocketConsumer):
         self.send_json(content)
 
 
+    def send_globe_item_comment(self, data):
+
+        globeItem = get_object_or_404(GlobeItems, id = data['globeItem'])
+        user = get_object_or_404(User, id = data['userId'])
+
+        globeComment = GlobeItemComment.objects.create(
+            globeItem = globeItem,
+            body = data['comment'],
+            commentUser = user
+        )
+
+        serializedComments = GlobeItemCommentSerializer(globeComment, many = False).data
+
+        content = {
+            'command': 'send_globe_item_comment',
+            'itemComment': serializedComments,
+            'groupItemId': data['globeItem']
+        }
+
+        print(content)
+        self.send_globe_info_comment(content)
+
+
+
+    def send_globe_info_comment(self, commentObj):
+
+        channel_layer = get_channel_layer()
+        channel_recipient = str(commentObj['groupItemId'])
+        channel = "globeComments_"+channel_recipient
+
+
+        async_to_sync(self.channel_layer.group_send)(
+            channel,
+            {
+                "type": "new_globe_comment_action",
+                "commentAction": commentObj
+            }
+        )
+
     def connect(self):
         self.globeItem = self.scope['url_route']['kwargs']['itemId']
         grp = "globeComments_"+self.globeItem
@@ -1523,3 +1593,9 @@ class GlobeCommentConsumer(JsonWebsocketConsumer):
 
         if data['command'] == 'fetch_globe_item_comment':
             self.fetch_globe_item_comment(data)
+        if data['command'] == 'send_globe_item_comment':
+            self.send_globe_item_comment(data)
+
+    def new_globe_comment_action(self, action):
+        commentObj = action['commentAction']
+        return self.send_json(commentObj)
