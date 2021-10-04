@@ -91,7 +91,7 @@ INSTALLED_APPS =[
     'allauth',
     'allauth.account',
     'corsheaders',
-    # 'django_crontab',
+    'django_crontab',
     'django.contrib.sites',
     'rest_auth',
     'rest_auth.registration',
