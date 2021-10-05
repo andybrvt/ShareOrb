@@ -747,96 +747,100 @@ class NewSocialCellEventNewsfeed(JsonWebsocketConsumer):
         curUser = get_object_or_404(User, id = data['userId'])
 
         following = len(curUser.get_following())
-        if data['userId'] == 1 or data['userId'] == 3 or following <= 5:
-             #  put all the post items here
-             socialItems = SocialCalItems.objects.all()[:int(data['startIndex'])];
-             #  this will get all the items bc we will be the host
+        socialItems = SocialCalItems.objects.all()[:10];
 
-             #  now you have to serialized the items
-             serializer_post = SocialCalItemsSerializer(socialItems, many = True)
-
-        else:
-            #  pretty much the normal stuff
-            # This will get all the follewers of the curUser
-            userFollowing = curUser.get_following().values("person_getting_followers")
-
-            # Now get all the users that you are not following and yourself
-            notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = data['userId'])
-
-            # Now get all the users including you
-            userPlusUserFollowing = User.objects.exclude(id__in = notUserFollowing.values_list("id", flat = True))
-
-            curDate = data['curDate']
-
-            # post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
-
-            # postList = []
-            # for user in userPlusUserFollowing:
-            #     temp = SocialCellEventPost.objects.filter(owner_id = user.id)
-            #     for post in temp:
-            #         postList.append(post.pk)
-
-
-            # This is the content type that holds the combination of social events
-            # and social cells, now that thigns are a bit different you will
-            # probally only grab users post idividually for the day (socialcalItems)
-
-            # post_list = SocialCellEventPost.objects.all().filter(
-            # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
-            # ).order_by('-post_date')[:int(data['startIndex'])]
-
-
-
-            # serializer = SocialCellEventSerializer(post_list, many = True)
-
-
-
-            dateList = curDate.split("-")
-            #  this is just individual social cal items that will get filtered by
-            # the recent date, filter by current date
-
-            # PUT THIS BACK LATER
-            # singlePost_list = SocialCalItems.objects.all().filter(
-            # creator__in = userPlusUserFollowing.values_list("id", flat = True)
-            # ).filter(
-            # created_at__year =dateList[0],
-            # created_at__month = dateList[1],
-            # created_at__day = dateList[2],
-            # ).order_by('-created_at')[:int(data['startIndex'])]
-
-
-            singlePost_list = SocialCalItems.objects.all().filter(
-            creator__in = userPlusUserFollowing.values_list("id", flat = True)
-            ).order_by('-created_at')[:int(data['startIndex'])]
-
-
-
-
-            # now we just serialize it
-
-            serializer_post = SocialCalItemsSerializer(singlePost_list, many = True)
-
-            # You would want to grab the current day and then grab the social cal cell
-            # of that day if it exist.
-
-            # So you will be filtering social cal cell
-
-        socialCalCell = SocialCalCell.objects.all().filter(
-        socialCalUser = curUser
-        ).filter(
-        socialCaldate = data['curDate']
-        )
+        # if data['userId'] == 1 or data['userId'] == 3 or following <= 5:
+        #      #  put all the post items here
+        #      # socialItems = SocialCalItems.objects.all()[:int(data['startIndex'])];
+        #      socialItems = SocialCalItems.objects.all();
+        #      #  this will get all the items bc we will be the host
+        #
+        #      #  now you have to serialized the items
+        #      serializer_post = SocialCalItemsSerializer(socialItems, many = True)
+        #
+        # else:
+        #     #  pretty much the normal stuff
+        #     # This will get all the follewers of the curUser
+        #     userFollowing = curUser.get_following().values("person_getting_followers")
+        #
+        #     # Now get all the users that you are not following and yourself
+        #     notUserFollowing = User.objects.exclude(id__in = userFollowing).exclude(id = data['userId'])
+        #
+        #     # Now get all the users including you
+        #     userPlusUserFollowing = User.objects.exclude(id__in = notUserFollowing.values_list("id", flat = True))
+        #
+        #     curDate = data['curDate']
+        #
+        #     # post_list = SocialCellEventPost.objects.all().order_by('-post_date')[:6]
+        #
+        #     # postList = []
+        #     # for user in userPlusUserFollowing:
+        #     #     temp = SocialCellEventPost.objects.filter(owner_id = user.id)
+        #     #     for post in temp:
+        #     #         postList.append(post.pk)
+        #
+        #
+        #     # This is the content type that holds the combination of social events
+        #     # and social cells, now that thigns are a bit different you will
+        #     # probally only grab users post idividually for the day (socialcalItems)
+        #
+        #     # post_list = SocialCellEventPost.objects.all().filter(
+        #     # owner_id__in = userPlusUserFollowing.values_list("id", flat = True)
+        #     # ).order_by('-post_date')[:int(data['startIndex'])]
+        #
+        #
+        #
+        #     # serializer = SocialCellEventSerializer(post_list, many = True)
+        #
+        #
+        #
+        #     dateList = curDate.split("-")
+        #     #  this is just individual social cal items that will get filtered by
+        #     # the recent date, filter by current date
+        #
+        #     # PUT THIS BACK LATER
+        #     # singlePost_list = SocialCalItems.objects.all().filter(
+        #     # creator__in = userPlusUserFollowing.values_list("id", flat = True)
+        #     # ).filter(
+        #     # created_at__year =dateList[0],
+        #     # created_at__month = dateList[1],
+        #     # created_at__day = dateList[2],
+        #     # ).order_by('-created_at')[:int(data['startIndex'])]
+        #
+        #
+        #     singlePost_list = SocialCalItems.objects.all().filter(
+        #     creator__in = userPlusUserFollowing.values_list("id", flat = True)
+        #     ).order_by('-created_at')[:int(data['startIndex'])]
+        #
+        #
+        #
+        #
+        #     # now we just serialize it
+        #
+        #     serializer_post = SocialCalItemsSerializer(singlePost_list, many = True)
+        #
+        #     # You would want to grab the current day and then grab the social cal cell
+        #     # of that day if it exist.
+        #
+        #     # So you will be filtering social cal cell
+        #
+        # socialCalCell = SocialCalCell.objects.all().filter(
+        # socialCalUser = curUser
+        # ).filter(
+        # socialCaldate = data['curDate']
+        # )
 
 
         # Now you will serialize the socialcalcell
 
-        serializedSocialCalCell = SocialCalCellSerializer(socialCalCell, many = True).data
+        # serializedSocialCalCell = SocialCalCellSerializer(socialCalCell, many = True).data
 
+        items = SocialCalItemsSerializer(socialItems, many = True).data
 
         content = {
             'command': 'fetch_social_posts',
-            'social_posts': json.dumps(serializer_post.data),
-            "curSocialCalCell": json.dumps(serializedSocialCalCell)
+            'social_posts': json.dumps(items),
+            "curSocialCalCell": {}
         }
 
         self.send_json(content)
