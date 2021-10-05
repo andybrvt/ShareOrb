@@ -163,7 +163,7 @@ DATABASES = {
         'OPTIONS': {
          'charset': 'utf8mb4',
          'use_unicode': True, },
-        'HOST': 'aa1ty74hk7kpr1.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'HOST': 'aa6k6vd384b5ru.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
