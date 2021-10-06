@@ -46,6 +46,7 @@ urlpatterns = [
 	path('loadSuggested', views.loadMoreSuggestedView.as_view()),
 	path('inviteList', views.inviteList.as_view()),
 	path('resetInviteNum', views.UniqueCodeSetter.as_view()),
+	path('deleteAllNotifications', views.DeleteAllNotifications.as_view()),
 	path('checkInviteCode/<str:code>', views.CheckInviteCode.as_view()),
 	# DELETE LATER
 	path('friend-request/send/<slug:username>', views.SendFriendRequest.as_view(), name='send_request'),

@@ -1112,3 +1112,13 @@ class RandomRecentSuggestedUsers(APIView):
             'suggested': serializeduserList
         }
         return Response(content)
+
+
+class DeleteAllNotifications(APIView):
+    # delete all notifcations
+
+    def get(self, request, *args, **kwargs):
+        models.CustomNotification.objects.all().delete()
+
+
+        return Response('delete notifications')
