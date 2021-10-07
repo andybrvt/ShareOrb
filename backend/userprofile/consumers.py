@@ -131,6 +131,38 @@ class NotificationConsumer(JsonWebsocketConsumer):
         }
 
         return self.send_new_notification(content)
+
+    def send_group_comment_notification(self, data):
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
+
+        print(post.smallGroup)
+        group = post.smallGroup
+
+        notification = CustomNotification.objects.create(
+            type = "group_post_comment",
+            recipient = recipient,
+            actor = actor,
+            verb = 'comment on your post in',
+            groupInvite = group
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
+
+
 # Type is important, it will run the function in consumers under that type name
 # The differences is in the type of notification that is created, the type will then be
 # run through if statements in the notifications.js and will print out stuff accordingly
@@ -733,6 +765,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_group_invite_notification(data)
         if data['command'] == 'group_like_notifcation':
             self.send_group_like_notification(data)
+        if data['command'] == 'group_comment_notification':
+            self.send_group_comment_notification(data)
+
 
     def new_notification(self, event):
         notification = event['notification']
