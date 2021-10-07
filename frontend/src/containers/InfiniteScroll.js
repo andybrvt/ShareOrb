@@ -43,30 +43,30 @@ class InfiniteList extends React.Component {
     // window.innher height gets the height of the window view
     // document.documentElement.scrollTop returns the heigh tof the scroll bar
     // offsetheight would get the heigh tof the element
-    window.onscroll = () => {
-
-
-      console.log(document.documentElement.scrollHeight)
-        console.log(document.documentElement.scrollTop)
-        console.log(document.documentElement.scrollHeight-document.documentElement.scrollTop)
-
-        console.log(document.documentElement.clientHeight)
-
-      const {
-         loadPost,
-         state: { error, loading, hasMore} } = this;
-      if (error || loading || !hasMore) return;
-      if(
-        document.documentElement.scrollHeight -
-          document.documentElement.scrollTop ===
-          document.documentElement.clientHeight
-      ){
-        console.log("hits the bottm")
-        this.loadSocialPost()
-      }
-
-
-    }
+    // window.onscroll = () => {
+    //
+    //
+    //   console.log(document.documentElement.scrollHeight)
+    //     console.log(document.documentElement.scrollTop)
+    //     console.log(document.documentElement.scrollHeight-document.documentElement.scrollTop)
+    //
+    //     console.log(document.documentElement.clientHeight)
+    //
+    //   const {
+    //      loadPost,
+    //      state: { error, loading, hasMore} } = this;
+    //   if (error || loading || !hasMore) return;
+    //   if(
+    //     document.documentElement.scrollHeight -
+    //       document.documentElement.scrollTop ===
+    //       document.documentElement.clientHeight
+    //   ){
+    //     console.log("hits the bottm")
+    //     this.loadSocialPost()
+    //   }
+    //
+    //
+    // }
 
     // () => {
     //   const {
@@ -191,12 +191,9 @@ class InfiniteList extends React.Component {
     if(this.props.following){
       following = this.props.following
     }
-    console.log(post)
+    console.log(post, 'here is my post')
 
-    // {error  && <div>{error}</div>}
-    // {loading && <div>Loading...</div>}
-    // {!hasMore && <div>No more results</div>}
-    console.log(this.state.loading)
+
     return (
 
       <div>
@@ -208,60 +205,18 @@ class InfiniteList extends React.Component {
               Welcome, {this.props.userName}. Here's what's going on today! </div>
             <Divider style={{marginBottom:'25px', marginTop:'10px'}}/>
 
-            {
-              (post.length!=0) ?
-              <div>
-                {post.map((j,index) => {
-                  return(
-                    <div>
-                      {
-                        j.post.get_socialCalItems ?
 
-                        <SocialNewsfeedPost
-                        history = {this.props.data.history}
-                         data = {j}  />
-
-                       :
-                       <div></div>
-                      }
-                    </div>
-                  )
-                  })}
-                </div>
-
-              :
-
-
-              <div class="noFollowerText">
-
-                {/*
-                  following.length === 0 ?
-
-                  <div class = "noFollowerText">
-                    <img src={NoFollowersPic} width="30%"/>
-                     Let's get some more followers!
-                    Follow <a href={`${global.API_ENDPOINT}/explore/pinghsu520`}>@pinghsu520</a>, one of the creators of ShareOrb!
-
-                  </div>
-
-                  :
-
-                  <div class="loadingNewsFeedMain">
-                  <LoadingOutlined style={{ fontSize: 50, color:'#1890ff'}} spin />
-                  </div>
-                  */
-                }
-
-
-              {/*
-                <img src={NoFollowersPic} width="30%"/>
-                 Let's get some more followers!
-                Follow <a href={`${global.API_ENDPOINT}/explore/pinghsu520`}>@pinghsu520</a>, one of the creators of ShareOrb!
-                */}
-            </div>
-
-
-            }
+          {post.map((i,index) => {
+            return(
+              <div style = {{
+                  width: 200,
+                  height: 200,
+                  background: 'yellow'
+                }}>
+                here is a post
+              </div>
+            )
+          })}
          </div>
 
       </div>

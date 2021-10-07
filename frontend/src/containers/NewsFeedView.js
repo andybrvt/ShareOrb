@@ -60,7 +60,7 @@ class NewsFeedView extends React.Component {
 	constructor(props){
 		super(props)
 
-		this.initialiseSocialNewsfeed()
+		// this.initialiseSocialNewsfeed()
 
 	}
 
@@ -141,20 +141,20 @@ class NewsFeedView extends React.Component {
 		console.log(new Date())
 		console.log(dateFns.format(new Date(), "yyyy-MM-dd"))
 		const curDate = dateFns.format(new Date(), "yyyy-MM-dd")
-		WebSocketSocialNewsfeedInstance.disconnect()
-		this.waitForSocialNewsfeedSocketConnection(() => {
-			// Fetch stuff here
-			WebSocketSocialNewsfeedInstance.fetchSocialPost(
-				newProps.id,
-				curDate,
-				this.state.upperStart)
-
-		})
-		WebSocketSocialNewsfeedInstance.connect()
+		// WebSocketSocialNewsfeedInstance.disconnect()
+		// this.waitForSocialNewsfeedSocketConnection(() => {
+		// 	// Fetch stuff here
+		// 	WebSocketSocialNewsfeedInstance.fetchSocialPost(
+		// 		newProps.id,
+		// 		curDate,
+		// 		this.state.upperStart)
+		//
+		// })
+		// WebSocketSocialNewsfeedInstance.connect()
 	}
 
 	componentWillUnmount(){
-		WebSocketSocialNewsfeedInstance.disconnect()
+		// WebSocketSocialNewsfeedInstance.disconnect()
 
 	}
 
@@ -165,10 +165,10 @@ class NewsFeedView extends React.Component {
 
 	render() {
 
-		console.log(this.state)
+		console.log()
+
 		const { Dragger } = Upload;
 		const isLoggedIn = this.props.isAuthenticated;
-		console.log(this.props)
 		const curDate = new Date()
 
 		let username = ""
@@ -207,51 +207,9 @@ class NewsFeedView extends React.Component {
 				<div className = "newsfeedParent">
 
 
-					{/*
-
-					<div className = "profileCardContainer">
-						<ProfileCardNewsFeed
-							profile = {this.props.currentProfile}
-							location = {this.props.location}
-
-							 />
-					</div>
-					*/}
-
 					<div className = "newsfeedMidContainer">
 						<div className = "newsfeedItself">
 
-
-{/*
-						<div className = "newsfeedActionButtons">
-							<div onClick ={this.postCondition} class="writePostCard">
-							  <div class="writePostCardLeftPart">
-							    <i class="far fa-edit share" style={{fontSize:'20px', color:'white'}}></i>
-							  </div>
-							  <div class="writePostCardRightPart">
-							       <p style={{ color:'#1890ff',}} class="topCardHeader writePostCardAlign"> Update Day</p>
-							  </div>
-							</div>
-
-
-							<div onClick = {this.onAddEvent} class="topCard" onClick ={this.eventCondition}>
-								<i class="fas fa-plus share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-								 <p style={{ color:'#1890ff'}} class="topCardHeader cardAlign"> Create event  </p>
-							</div>
-
-							<Link to = {{
-								pathname:"/socialcal/"+username+"/cell/"+cellYear+"/"+cellMonth+"/"+cellDay,
-								state:{pathname:location}
-							}}
-							className = "topCard"
-							 >
-								<div >
-									<i class="far fa-image share" style={{fontSize:'20px', color:'#1890ff'}}></i>
-									 <p  class="topCardHeader cardAlign"> View Today</p>
-								</div>
-							</Link>
-						</div>
-*/}
 
 						<FirstTimeUser {...this.props}/>
 
@@ -302,36 +260,6 @@ class NewsFeedView extends React.Component {
 
 					</div>
 
-					<Modal
-						visible = {this.state.postShow}
-						onCancel = {() => this.closeProfileEdit()}
-						footer = {null}
-						width={900}
-						bodyStyle={{padding:'25px'}}
-						centered
-					>
-								<SocialNewsfeedFormPost
-								onCancel = {this.closeProfileEdit}
-								profile = {this.props.currentProfile}/>
-					</Modal>
-
-					<Modal
-						visible = {this.state.eventShow}
-						onCancel = {() => this.closeProfileEdit()}
-						footer = {null}
-						width={900}
-						bodyStyle={{padding:'20px', height:'525px'}}
-						centered
-						>
-
-						<NewsFeedEventModal
-							friendList = {this.props.friendList}
-			        onSubmit = {this.submit}
-			        following = {this.props.following}
-			        followers = {this.props.followers}
-							{...this.props}/>
-
-					</Modal>
 
 				</div>
 
@@ -361,7 +289,8 @@ const mapStateToProps = state => {
 		following: state.auth.following,
 		sentRequestList: state.auth.sentRequestList,
 		requestList: state.auth.requestList,
-		showIntialInstructions: state.auth.showIntialInstructions
+		showIntialInstructions: state.auth.showIntialInstructions,
+		socialPosts:state.socialNewsfeed.socialPosts
   }
 }
 const mapDispatchToProps = dispatch => {

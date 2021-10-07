@@ -35,11 +35,13 @@ class App extends Component {
     // this.initialiseExplore()
     // this.initialisePost()
 
-    // this.initialiseSocialNewsfeed()
+    this.initialiseSocialNewsfeed()
+
+    // this.initialiseNotification()
+
 
     // Just these two to activate ------------------
     // this.initialiseChats()
-    // this.initialiseNotification()
     // ---------------------------------------------
 
 
@@ -188,28 +190,28 @@ class App extends Component {
       }, 100)
   }
 
-  // initialiseSocialNewsfeed(){
-  //   // use to initialize the social newsfeed
-  //   this.waitForSocialNewsfeedSocketConnection(() => {
-  //     // You will fetch the social cotnent type here
-  //     WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
-  //   })
-  //   WebSocketSocialNewsfeedInstance.connect()
-  //
-  // }
-  //
-  // waitForSocialNewsfeedSocketConnection(callback){
-  //   const component = this
-  //   setTimeout(
-  //     function(){
-  //       if(WebSocketSocialNewsfeedInstance.state() === 1){
-  //         callback()
-  //         return;
-  //       } else {
-  //         component.waitForSocialNewsfeedSocketConnection(callback);
-  //       }
-  //     }, 100)
-  // }
+  initialiseSocialNewsfeed(){
+    // use to initialize the social newsfeed
+    this.waitForSocialNewsfeedSocketConnection(() => {
+      // You will fetch the social cotnent type here
+      WebSocketSocialNewsfeedInstance.fetchSocialPost(this.props.id)
+    })
+    WebSocketSocialNewsfeedInstance.connect()
+
+  }
+
+  waitForSocialNewsfeedSocketConnection(callback){
+    const component = this
+    setTimeout(
+      function(){
+        if(WebSocketSocialNewsfeedInstance.state() === 1){
+          callback()
+          return;
+        } else {
+          component.waitForSocialNewsfeedSocketConnection(callback);
+        }
+      }, 100)
+  }
 
 
 
@@ -280,9 +282,7 @@ class App extends Component {
   //everythign this is run it will do a try auto signup, it will give
   //App.js this method from the store
 
-  // Put this back later --------------------------------
-    // this.props.onTryAutoSignup();
-  // ---------------------------------------------------
+    this.props.onTryAutoSignup();
 
   }
 
@@ -304,7 +304,7 @@ class App extends Component {
       //     this.props.addFirstSocialCellPost.bind(this),
       //     this.props.updateSocialCellPost.bind(this)
       //   )
-
+      //
 
       // ----------------------------------------------------
 
