@@ -102,8 +102,35 @@ class NotificationConsumer(JsonWebsocketConsumer):
             'recipient': recipient.username
         }
 
-        # return self.send_new_notification(content)
+        return self.send_new_notification(content)
 
+    def send_group_like_notification(self, data):
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        group = get_object_or_404(SmallGroups, id = data['groupId'])
+
+        notification = CustomNotification.objects.create(
+            type = "group_post_like",
+            recipient = recipient,
+            actor = actor,
+            verb = 'like your post in',
+            groupInvite = group
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+        print(serializer)
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
 # Type is important, it will run the function in consumers under that type name
 # The differences is in the type of notification that is created, the type will then be
 # run through if statements in the notifications.js and will print out stuff accordingly
@@ -698,8 +725,15 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_social_cal_cell_notification(data)
         if data['command'] == 'social_comment_notification':
             self.send_social_cal_cell_notification(data)
+
+
+        # start here for the new notifications of the groups
+        # it includes the liking and commenting
         if data['command'] == 'send_group_invite_notification':
             self.send_group_invite_notification(data)
+        if data['command'] == 'group_like_notifcation':
+            self.send_group_like_notification(data)
+
     def new_notification(self, event):
         notification = event['notification']
         # THE PROBLEM IS HERE
