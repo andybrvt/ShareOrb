@@ -102,6 +102,7 @@ class SocialCalUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture', "notificationToken")
 
+
 class SocialCalItemsSerializer(serializers.ModelSerializer):
     # itemImage = Base64ImageField()
     get_socialCalItemComment = serializers.StringRelatedField(many = True)

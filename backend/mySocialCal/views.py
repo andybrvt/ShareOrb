@@ -933,3 +933,13 @@ class loadMoreGlobeView(APIView):
         }
 
         return Response(content)
+
+class getSinglePost(APIView):
+    # This function will be used to get a single post
+
+    def get(self, request, id, *args, **kwargs):
+        post = get_object_or_404(models.SocialCalItems, id = id)
+        serializedPost = serializers.SocialCalItemsSerializer(post, many = False).data
+
+
+        return Response(serializedPost)
