@@ -1518,6 +1518,24 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         globeAction = globePostAction['action']
         return self.send_json(globeAction)
 
+class SinglePostConsumer(JsonWebsocketConsumer):
+    # this function will be used for just a single post
+
+    def connect(self):
+        self.post = self.scope['url_route']['kwargs']['postId']
+        grp = "post_"+self.post
+        async_to_sync(self.channel_layer.group_add)(grp, self.channel_name)
+        self.accept()
+    def disconnect(self, close_code):
+        self.post = self.scope['url_route']['kwargs']['postId']
+        grp = "post_"+self.post
+        async_to_sync(self.channel_layer.group_discard)(grp, self.channel_name)
+
+    def receive(self, text_data= None, bytes_data = None, **kwargs):
+        data = json.loads(text_data)
+        print(data)
+
+
 class GlobeCommentConsumer(JsonWebsocketConsumer):
 
     # function used for the comments of the globe
