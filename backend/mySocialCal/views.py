@@ -939,7 +939,7 @@ class getSinglePost(APIView):
 
     def get(self, request, id, *args, **kwargs):
         post = get_object_or_404(models.SocialCalItems, id = id)
-        serializedPost = serializers.SocialCalItemsSerializer(post, many = False).data
+        serializedPost = serializers.DetailSocialCalItemsSerializer(post, many = False).data
 
 
         return Response(serializedPost)
