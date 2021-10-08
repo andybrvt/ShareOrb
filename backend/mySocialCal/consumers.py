@@ -25,6 +25,7 @@ from .serializers import SocialCalItemsSerializer
 from .serializers import SocialItemCommentSerializer
 from .serializers import GlobeItemSerializer
 from .serializers import GlobeItemCommentSerializer
+from .serializers import DetailSocialCalItemsSerializer
 import datetime
 from django.utils import timezone
 import pytz
@@ -1521,6 +1522,19 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
 class SinglePostConsumer(JsonWebsocketConsumer):
     # this function will be used for just a single post
 
+    def fetch_single_post_info(self,data):
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
+        print(post)
+        serializedPost = DetailSocialCalItemsSerializer(post, many = False).data
+
+        content = {
+            'command': 'fetch_single_post_info',
+            'singlePost': serializedPost
+        }
+
+        self.send_json(content)
+
+
     def connect(self):
         self.post = self.scope['url_route']['kwargs']['postId']
         grp = "post_"+self.post
@@ -1534,6 +1548,8 @@ class SinglePostConsumer(JsonWebsocketConsumer):
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
         print(data)
+        if data['command'] == 'fetch_single_post_info':
+            self.fetch_single_post_info(data)
 
 
 class GlobeCommentConsumer(JsonWebsocketConsumer):
