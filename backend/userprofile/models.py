@@ -10,6 +10,7 @@ from django.utils.timezone import now
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SmallGroups
+from mySocialCal.models import SocialCalItems
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -297,7 +298,7 @@ class CustomNotification(models.Model):
     emailed = models.BooleanField(default=False, db_index=True)
 
     groupInvite = models.ForeignKey(SmallGroups, related_name= "group_invite", on_delete = models.CASCADE, null = True)
-
+    post = models.ForeignKey(SocialCalItems, related_name = "post_stuff", on_delete= models.CASCADE, null = True)
 
 
 

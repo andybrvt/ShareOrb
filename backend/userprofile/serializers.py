@@ -622,7 +622,8 @@ class NewNotificationSerializer(serializers.ModelSerializer):
             "actor",
             "verb",
             'timestamp',
-            "groupInvite"
+            "groupInvite",
+            "post"
         )
 
     def to_representation(self, instance):

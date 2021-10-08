@@ -107,15 +107,17 @@ class NotificationConsumer(JsonWebsocketConsumer):
     def send_group_like_notification(self, data):
         actor = get_object_or_404(User, id = data['actor'])
         recipient = get_object_or_404(User, id = data['recipient'])
-        group = get_object_or_404(SmallGroups, id = data['groupId'])
+        post = get_object_or_404(SocialCalItems, id = data['postId'])
 
         notification = CustomNotification.objects.create(
             type = "group_post_like",
             recipient = recipient,
             actor = actor,
             verb = 'like your post in',
-            groupInvite = group
+            post = post,
+            groupInvite = post.smallGroup
         )
+        print(notification, 'notification here')
 
         serializer = NewNotificationSerializer(notification).data
 
@@ -138,15 +140,15 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
         post = get_object_or_404(SocialCalItems, id = data['postId'])
 
-        print(post.smallGroup)
-        group = post.smallGroup
 
         notification = CustomNotification.objects.create(
             type = "group_post_comment",
             recipient = recipient,
             actor = actor,
             verb = 'comment on your post in',
-            groupInvite = group
+            post = post,
+            groupInvite = post.smallGroup
+
         )
 
         serializer = NewNotificationSerializer(notification).data
