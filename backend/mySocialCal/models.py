@@ -388,6 +388,8 @@ class SocialCalItems(models.Model):
     # now you will add a foreign key here to conenct all the social cal cell post
     smallGroup = models.ForeignKey(SmallGroups, on_delete = models.CASCADE, related_name = "small_group", null = True)
 
+    # used to check if this is used already in globe
+    usedGlobe = models.BooleanField(default = False)
     # Everything from here down would be for the events
     class Meta:
         ordering = ['-created_at']
