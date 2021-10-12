@@ -318,6 +318,7 @@ STATICFILES_DIRS = [
 
 # running schedualed items
 CRONJOBS = [
+    ('*/1 * * * *', 'mySocialCal.cron.schedualed_globe_post'),
     ('0 9 * * *', 'mySocialCal.cron.schedualed_globe_post'),
     ('0 15 * * *', 'mySocialCal.cron.schedualed_globe_post'),
     ('0 21 * * *', 'mySocialCal.cron.schedualed_globe_post')
