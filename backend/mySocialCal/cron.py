@@ -29,11 +29,13 @@ def schedualed_globe_post():
             for post in posts:
                 calItems = SocialCalItems.objects.get(id = post)
                 likeCount = calItems.people_like.count()
-                if likeCount >= highestCount:
+                if likeCount >= highestCount and not highestCountPost.usedGlobe:
                     highestCount = likeCount
                     highestCountPost = calItems
 
 
+            highestCountPost.usedGlobe = True
+            highestCountPost.save()
 
             GlobeItems.objects.create(
                 post = highestCountPost,
