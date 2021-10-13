@@ -29,7 +29,7 @@ def schedualed_globe_post():
             for post in posts:
                 calItems = SocialCalItems.objects.get(id = post)
                 likeCount = calItems.people_like.count()
-                if likeCount >= highestCount and not highestCountPost.usedGlobe:
+                if likeCount >= highestCount and not calItems.usedGlobe:
                     highestCount = likeCount
                     highestCountPost = calItems
 
