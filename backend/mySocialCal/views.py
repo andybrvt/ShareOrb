@@ -12,6 +12,7 @@ from django.utils import timezone
 from userprofile.models import User
 from userprofile.models import CustomNotification
 from userprofile.serializers import NotificationSerializer
+from userprofile.serializers import UserSerializer
 import pytz
 from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
@@ -885,19 +886,21 @@ class JoinSmallGroup(APIView):
 class LeaveSmallGroup(APIView):
 
     def post(self, request, groupId, userId, *args, **kwargs):
-        # print("TESTTTTT")
-        # print(groupId, userId)
         group = get_object_or_404(models.SmallGroups, id = groupId)
         user = get_object_or_404(User, id = userId)
-        #
+
         group.members.remove(user)
-        #
+
         group.save()
-        #
+
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
-        #
-        #
-        return Response(serializedGroup)
+
+        serializedUser = UserSerializer(user, many = False).data
+        content = {
+            'smallGroups': serializedUser['get_small_groups'],
+            'smallGroupId': serializedUser['id_small_groups']
+        }
+        return Response(content)
 
 
 # use to grab a specific member of a group
