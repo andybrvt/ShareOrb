@@ -880,6 +880,26 @@ class JoinSmallGroup(APIView):
 
         return Response(serializedGroup)
 
+
+# this function will be used to leave a group
+class LeaveSmallGroup(APIView):
+
+    def post(self, request, groupId, userId, *args, **kwargs):
+        # print("TESTTTTT")
+        # print(groupId, userId)
+        group = get_object_or_404(models.SmallGroups, id = groupId)
+        user = get_object_or_404(User, id = userId)
+        #
+        group.members.remove(user)
+        #
+        group.save()
+        #
+        serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
+        #
+        #
+        return Response(serializedGroup)
+
+
 # use to grab a specific member of a group
 class grabGroupMember(APIView):
 
