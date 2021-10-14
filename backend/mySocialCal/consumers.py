@@ -1414,7 +1414,7 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         #         for post in posts:
         #             calItems = SocialCalItems.objects.get(id = post)
         #             likeCount = calItems.people_like.count()
-        #             if likeCount >= highestCount and not highestCountPost.usedGlobe:
+        #             if likeCount >= highestCount and not calItems.usedGlobe:
         #                 highestCount = likeCount
         #                 highestCountPost = calItems
         #
@@ -1423,17 +1423,10 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
         #         highestCountPost.usedGlobe = True
         #         highestCountPost.save()
         #
-        #         print(highestCount, highestCountPost, 'just a group')
         #         GlobeItems.objects.create(
         #             post = highestCountPost,
         #             group = group
         #         )
-        #
-
-
-
-
-
         content = {
             'command': "fetch_globe_post",
             'globe_post': json.dumps(globeSerialized)
