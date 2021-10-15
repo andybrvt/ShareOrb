@@ -346,6 +346,7 @@ class SmallGroups(models.Model):
     groupPic = models.ImageField(('post_picture'), upload_to = 'post_pictures/%Y/%m', blank = True)
     description = models.TextField(blank = True)
     public = models.BooleanField(default = False)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "creator_small_group", on_delete = models.CASCADE, null = True)
     groupCode = models.CharField(max_length = 8, null = True, default = random_code_function)
     def get_socialCalItems(self):
         return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)
