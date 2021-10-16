@@ -830,6 +830,7 @@ class CreateSmallGroup(APIView):
         if(request.data['public'] == "false"):
             public = False
         group = models.SmallGroups.objects.create(
+            creator =  get_object_or_404(User, id = request.data['curId']),
             group_name = request.data['groupName'],
             groupPic = request.data['groupPic'],
             description = request.data['description'],
