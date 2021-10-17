@@ -161,7 +161,7 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
         'id',
         'socialItemType',
         'created_at',
-        # 'creator',
+        'creator',
         'itemUser',
         'itemImage',
         'video',
@@ -175,7 +175,7 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        # data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
+        data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
 
         cal_likes = []
 
