@@ -1255,16 +1255,12 @@ class NewSocialCalCellConsumer(JsonWebsocketConsumer):
 
 class SmallGroupsConsumer(JsonWebsocketConsumer):
 
-
     def fetch_group_post(self,data):
         # this function will be used to fetch all the post of that group
         group = get_object_or_404(SmallGroups, id = data['groupId'])
-
         # Now that you have the group, now just grab the stuff inside the group now
-        getPost = SocialCalItems.objects.filter(smallGroup  = group)[:6]
-        print(getPost)
+        getPost = SocialCalItems.objects.filter(smallGroup  = group)[:5]
         serializedPost = SocialCalItemsSerializer(getPost, many = True).data
-
         content = {
             'command': 'fetch_group_post',
             'group_posts': serializedPost,
