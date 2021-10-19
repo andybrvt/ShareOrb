@@ -33,6 +33,7 @@ import UserInfoSettings from "./containers/SettingsFolder/UserInfoSettings";
 import CalPrefSettings from "./containers/SettingsFolder/CalPrefSettings";
 import PrivacySettings from "./containers/SettingsFolder/PrivacySettings";
 import LandingPage from './LandingPage';
+import LandingPageNew from './LandingPageNew';
 
 //these routes will route to App.js
 //routes component ArticleList gets a list of profile
@@ -72,7 +73,7 @@ class BaseRouter extends React.Component {
       <div class="backgroundofEverything"
       >
 
-      {
+      {/*
         this.props.isAuthenticated ?
        <SideMenu>
 
@@ -107,7 +108,7 @@ class BaseRouter extends React.Component {
 
          <Route exact path = '/' component = {Login} />
 
-      }
+      */}
 
 
 
@@ -115,10 +116,10 @@ class BaseRouter extends React.Component {
         {/*
           <Route exact path = '/' component = {Login} />
           */}
-          {/*
-            <Route exact path = '/' component = {LandingPage} />
 
-            */}
+        <Route exact path = '/' component = {LandingPageNew} />
+
+
         {/*location ? <Route exact path = '/socialcal/:username/cell/:year/:month/:day' component = {SocialCalCellModal} /> : null}
         {location ? <Route exact path = '/post/:username/:postId' component = {UserPostModal} /> : null}
         <Route exact path = '/signup/' component= {Signup} />

@@ -1,0 +1,84 @@
+.headline{
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  overflow: hidden;
+  background: red;
+}
+
+.problemList{
+  position: relative;
+  width: 100vw;
+  height: 30vh;
+  overflow: hidden;
+  background: yellow;
+}
+
+.aboutUs{
+  position: relative;
+  width: 100vw;
+  height: 20vh;
+  overflow: hidden;
+  background: orange;
+}
+.howItWorks{
+  position: relative;
+  width: 100vw;
+  height: 70vh;
+  overflow: hidden;
+  background: lightblue;
+}
+.benefits{
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  overflow: hidden;
+  background: purple;
+}
+
+.team{
+  position: relative;
+  width: 100vw;
+  height: 30vh;
+  overflow: hidden;
+  background: lightgreen;
+}
+
+.CTA{
+  position: relative;
+  width: 100vw;
+  height: 30vh;
+  overflow: hidden;
+  background: yellow;
+}
+
+.socialMedia{
+  position: relative;
+  width: 100vw;
+  height: 10vh;
+  overflow: hidden;
+  background: pink;
+}
+
+
+
+
+
+/* for phone */
+@media screen and (max-height: 450px){
+
+
+}
+
+/* for laptop */
+@media screen and (max-height: 800px) and (min-height:451px){
+
+
+}
+
+/* for comptuer */
+@media screen and (min-height: 801px){
+
+
+
+}
