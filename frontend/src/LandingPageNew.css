@@ -1,39 +1,69 @@
+.circle{
+  position: absolute;
+  height: 65vw;
+  width: 65vw;
+  top: -15%;
+  right: -7%;
+}
+
+.circle1{
+  background: #446ccf;
+  position: absolute;
+  height: 45vw;
+  width: 45vw;
+  top: 90%;
+  left: 3%;
+  border-radius: 25vw;
+}
+
+.circle2{
+  background: #446ccf;
+  position: absolute;
+  height: 40vw;
+  width: 40vw;
+  top: 130%;
+  right: 2%;
+  border-radius: 25vw;
+}
+
 .headline{
   position: relative;
   width: 100vw;
   height: 80vh;
   overflow: hidden;
-  background: red;
+  /* background: red; */
 }
 
 .problemList{
   position: relative;
   width: 100vw;
-  height: 30vh;
+  height: 130vh;
   overflow: hidden;
-  background: yellow;
 }
 
 .aboutUs{
   position: relative;
   width: 100vw;
-  height: 20vh;
+  height: 30vh;
   overflow: hidden;
-  background: orange;
+  align-items: center;
+  text-align: center;
 }
 .howItWorks{
   position: relative;
   width: 100vw;
   height: 70vh;
   overflow: hidden;
-  background: lightblue;
+  align-items: center;
+  text-align: center;
 }
 .benefits{
   position: relative;
   width: 100vw;
   height: 90vh;
   overflow: hidden;
-  background: purple;
+  align-items: center;
+  text-align: center;
 }
 
 .team{
@@ -60,24 +90,121 @@
   background: pink;
 }
 
+.logoNew{
+  position: absolute;
+  top: 5%;
+  left: 2%;
+}
 
+.imageHolder{
+  position: absolute;
+  width: 50%;
+  left: 45%;
+  top: 10%;
+  /* background: blue; */
+
+}
+
+
+/* stuff that will need adjusting accordingly */
+
+.headlineHolder{
+  width: 37%;
+  left: 5%;
+  top: 32%;
+  position: absolute;
+  color: gray;
+}
+.mainHeadline{
+  font-size: 80px;
+}
+
+.smallHeadline{
+  font-size: 25px;
+}
+
+.problemHolder{
+  position: absolute;
+  left: 10%;
+  top: 25%;
+  color: white;
+}
+
+.problemHolder2{
+
+  position: absolute;
+  left: 63%;
+  top: 52%;
+  color: white;
+}
+
+.question1{
+  width: 45%;
+}
+.question2{
+  width: 80%;
+}
+
+.whatAreWe{
+  position: relative;
+  font-size: 30px;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.featureHolder{
+  width: 50%;
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  position: relative;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+.feature{
+  font-size: 20px;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.miniCircle{
+  height: 200px;
+  width: 200px;
+  background: #446ccf;
+  border-radius: 100px;
+}
+.whyHolders{
+  position: relative;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+}
 
 
 
 /* for phone */
-@media screen and (max-height: 450px){
+@media screen and (max-width: 450px){
 
 
 }
 
 /* for laptop */
-@media screen and (max-height: 800px) and (min-height:451px){
+@media screen and (max-width: 800px) and (min-width:451px){
 
 
 }
 
 /* for comptuer */
-@media screen and (min-height: 801px){
+@media screen and (min-width: 801px){
 
 
 

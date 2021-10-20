@@ -36,39 +36,180 @@ class LandingPageNew extends React.Component{
     return(
       <div>
 
+          <div class = "circle">
+          </div>
+
+
 
         <div className = "headline">
-          Here will be the main headline
+
+
+          <div className = "logoNew">
+            <img src = {logo} width = "200" />
+          </div>
+
+          <div className = "imageHolder">
+            <img className = "image" src = {pic2} />
+          </div>
+
+
+          <div className = "headlineHolder">
+            <div className = "mainHeadline">
+              Turning Fans Into Storytellers
+            </div>
+            <div className = "smallHeadline">
+              ShareOrb brings the authenticity of user expereince to local small business
+              and community to those who love what these small businesses do.
+            </div>
+
+          </div>
+
         </div>
+
+        <div className = "circle1">
+        </div>
+
+        <div className = "circle2">
+        </div>
+
 
         <div className = "problemList">
-          List the problems here
+
+          <div className = "problemHolder">
+            <div className = "question1">
+              <div style = {{
+                  fontSize: '55px'
+                }}>
+                How are you supporting the small business you love?
+              </div>
+              <div style = {{
+                  fontSize: '20px'
+                }}>
+                A follower on social. A like? A comment?
+                Does an extra follower, or some likes really help them out?
+              </div>
+            </div>
+          </div>
+
+          <div className = "problemHolder2">
+              <div className = "question2">
+                <div style = {{
+                    fontSize: '55px'
+                  }} >
+                  Business, you have fans that love what you do!</div>
+                <div
+                  style = {{
+                    fontSize: '20px'
+                  }}
+                  > But are you still dying for some authentic stories about the great service you provide?</div>
+              </div>
+
+
+          </div>
+
         </div>
+
+
 
         <div className = "aboutUs">
-          Here is where we tell people what we are
-        </div>
-        <div className = "howItWorks">
-          How it works
+          <div style = {{
+              fontSize: '60px',
+            }}>What are we?</div>
+
+          <div className = "whatAreWe">
+              ShareOrb is a social media platform where your communities are represented by your expereinces.
+              We bring the small businesses and their fans together by flipping traditional nature of sharing experiences.
+
+            </div>
+
+
         </div>
 
+
+        <div className = "howItWorks">
+          <div style ={{
+              fontSize: '60px'}}>How it works</div>
+
+          <div className = "featureHolder">
+            <div className = "feature">There are no follower or following</div>
+            <div className = "feature">You don't post directly to your profile but to the buisness you love</div>
+            <div className = "feature">Fans are represented by organization they love</div>
+            <div className = "feature">And organization that represented by the people who love them</div>
+            <div className = "feature">Eating at a resturant? Share your expereince to that resturant's orb(that's what we call each group ;)</div>
+            <div className = "feature">Snap a picture, choose the orb, post, and show your love!</div>
+          </div>
+
+      </div>
+
         <div className = "benefits">
-          Here is where you give people the benefits and how it solves their problems
-          this is like what we have and how organizations can benfit
-          probally gonna be a bit longer
+
+          <div style = {{
+              fontSize: '60px'
+            }} >Why?</div>
+          <div className = "whyHolders">
+            <div className = "miniCircle">
+            </div>
+            Support your local community
+            <div>You enjoy what they work hard for, why not show some love!</div>
+          </div>
+
+          <div className = "whyHolders">
+            Find others who also love what you love
+            <div>Live at the place or sitting on your couch find those who are sharing your experiences</div>
+            <div className = "miniCircle">
+            </div>
+        </div>
+
+
+          <div className = "whyHolders">
+            <div className = "miniCircle">
+            </div>
+          As a business you get to show off to others how amazing your fans are
+            <div>You provided an amzing product or service and people love it! Why not show it to the world</div>
+          </div>
+
+
+
+
         </div>
 
 
         <div className = 'team'>
-          Team
+          <div>
+            Ping
+            <div>
+              I recently graduated from the University of Arizona. I majored
+              in computer science and I love strategy games. Chess and The Settlers of Catan are my favorite.
+
+            </div>
+          </div>
+
+          <div>
+            Andy
+            <div>
+              I also recently graduated from the University of Arizona. I majored
+              in pharmacudical science and I love working out. My life motto is
+              if you ain't struggling are you really living life.
+            </div>
+          </div>
+
+          <div>
+            We both started ShareOrb in college. We are part of the University of Arizona
+            Center for Innovation and Forge.
+          </div>
+
         </div>
 
+
         <div className = "CTA">
-          Call to action here, set a meeting or give feedback
+          If you have any feedback, let's talk! Set a meeting with us!
+          Put a link here.
         </div>
 
         <div className = "socialMedia">
-         a  place to find our social media
+          Put instagram here
+          Put tiktok here
+          Put twitter here
         </div>
 
 
