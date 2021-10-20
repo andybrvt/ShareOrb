@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import landingPic from './containers/landingPic.png'
 import pic2 from './containers/LoginPage/calendar.svg';
 import './LandingPageNew.css';
+import { InstagramOutlined, AntDesignOutlined } from "@ant-design/icons";
 
 
 class LandingPageNew extends React.Component{
@@ -59,7 +60,7 @@ class LandingPageNew extends React.Component{
             </div>
             <div className = "smallHeadline">
               ShareOrb brings the authenticity of user expereince to local small business
-              and community to those who love what these small businesses do.
+              and community to those who love what these small businesses do
             </div>
 
           </div>
@@ -146,26 +147,67 @@ class LandingPageNew extends React.Component{
           <div style = {{
               fontSize: '60px'
             }} >Why?</div>
+
+
           <div className = "whyHolders">
-            <div className = "miniCircle">
+
+            <div className = "circleWidth">
+              <div className = "miniCircle">
+              </div>
+
             </div>
-            Support your local community
-            <div>You enjoy what they work hard for, why not show some love!</div>
+
+            <div className = "whyWidth">
+
+              <div>
+                <div className = "bigWhy">Support your local community</div>
+                <div className = "smallWhy">You enjoy what they work hard for, why not show some love!</div>
+              </div>
+
+
+            </div>
+
+
           </div>
 
           <div className = "whyHolders">
-            Find others who also love what you love
-            <div>Live at the place or sitting on your couch find those who are sharing your experiences</div>
-            <div className = "miniCircle">
+
+            <div className = "whyWidth">
+
+              <div>
+                <div className = "bigWhy">Find others who also love what you love</div>
+                <div className = "smallWhy">Live at the place or sitting on your couch find those who are sharing your experiences</div>
+              </div>
+
             </div>
+
+            <div className = "circleWidth" >
+
+              <div className = "miniCircle">
+              </div>
+
+            </div>
+
         </div>
 
 
           <div className = "whyHolders">
-            <div className = "miniCircle">
+
+
+            <div className = "circleWidth">
+              <div className = "miniCircle">
+              </div>
             </div>
-          As a business you get to show off to others how amazing your fans are
-            <div>You provided an amzing product or service and people love it! Why not show it to the world</div>
+
+            <div className = "whyWidth">
+              <div>
+                <div className = "bigWhy">As a business you get to show off to others how amazing your fans are</div>
+                <div className = "smallWhy">You provided an amzing product or service and people love it! Why not show it to the world</div>
+              </div>
+            </div>
+
+
+
           </div>
 
 
@@ -175,25 +217,59 @@ class LandingPageNew extends React.Component{
 
 
         <div className = 'team'>
-          <div>
-            Ping
+
+          <div style = {{
+              fontSize: '60px'
+            }}>Team</div>
+          <div className = "nameHolderNew">
+            <div >
+
+              <div className = "miniNameHolder">
+                <div className = "miniCircle">
+                </div>
+                <div style = {{
+                    fontSize: '40px'
+                  }}>Ping</div>
+                <div style = {{
+                    fontSize: '25px'
+                  }}>
+                  I recently graduated from the University of Arizona. I majored
+                  in computer science and I love strategy games. Chess and The Settlers of Catan are my favorite.
+
+                </div>
+              </div>
+
+            </div>
+
             <div>
-              I recently graduated from the University of Arizona. I majored
-              in computer science and I love strategy games. Chess and The Settlers of Catan are my favorite.
+
+              <div className = "miniNameHolder">
+                <div className = "miniCircle">
+                </div>
+                <div style = {{
+                    fontSize: '40px'
+                  }}>Andy</div>
+                <div style = {{
+                    fontSize: '25px'
+                  }}>
+                  I also recently graduated from the University of Arizona. I majored
+                  in pharmacudical science and I love working out. My life motto is
+                  if you ain't struggling are you really living life.
+                </div>
+
+              </div>
+
 
             </div>
           </div>
 
-          <div>
-            Andy
-            <div>
-              I also recently graduated from the University of Arizona. I majored
-              in pharmacudical science and I love working out. My life motto is
-              if you ain't struggling are you really living life.
-            </div>
-          </div>
 
-          <div>
+
+          <div style = {{
+              fontSize: '30px',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
             We both started ShareOrb in college. We are part of the University of Arizona
             Center for Innovation and Forge.
           </div>
@@ -203,13 +279,12 @@ class LandingPageNew extends React.Component{
 
         <div className = "CTA">
           If you have any feedback, let's talk! Set a meeting with us!
-          Put a link here.
+          <div>Put link here</div>
         </div>
 
         <div className = "socialMedia">
-          Put instagram here
-          Put tiktok here
-          Put twitter here
+
+          <div className = "copyRight">ShareOrb ©2020 Created by ShareOrb</div>
         </div>
 
 

@@ -60,7 +60,7 @@
 .benefits{
   position: relative;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
   align-items: center;
   text-align: center;
@@ -69,9 +69,9 @@
 .team{
   position: relative;
   width: 100vw;
-  height: 30vh;
+  height: 70vh;
   overflow: hidden;
-  background: lightgreen;
+  text-align: center;
 }
 
 .CTA{
@@ -79,7 +79,10 @@
   width: 100vw;
   height: 30vh;
   overflow: hidden;
-  background: yellow;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 50px;
 }
 
 .socialMedia{
@@ -87,7 +90,8 @@
   width: 100vw;
   height: 10vh;
   overflow: hidden;
-  background: pink;
+  text-align: center;
+
 }
 
 .logoNew{
@@ -175,10 +179,13 @@
 }
 
 .miniCircle{
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   background: #446ccf;
-  border-radius: 100px;
+  border-radius: 150px;
+  position: relative;
+  left:50%;
+  transform: translateX(-50%);
 }
 .whyHolders{
   position: relative;
@@ -187,6 +194,42 @@
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleWidth{
+  width: 30%;
+  position:relative;
+}
+.whyWidth{
+  width: 70%;
+  position:relative;
+}
+.bigWhy{
+  font-size: 45px;
+}
+.smallWhy{
+  font-size: 25px;
+}
+
+.nameHolderNew{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 75%;
+}
+
+.miniNameHolder{
+  width: 60%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.copyRight{
+  position: relative;
+  top: 50%;
 }
 
 
