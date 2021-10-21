@@ -1,9 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import landingPic from './containers/landingPic.png'
+import andyPic from './andyPic.jpg'
+import pingPic from './pingPic.jpg'
+import why1 from './why1.jpg'
+import why2 from './why2.jpg'
+import why3 from './why3.jpg'
+import forge from './forge.png'
+import uaci from './uaci.png'
 import pic2 from './containers/LoginPage/calendar.svg';
 import './LandingPageNew.css';
 import { InstagramOutlined, AntDesignOutlined } from "@ant-design/icons";
+import { Divider } from 'antd';
 
 
 class LandingPageNew extends React.Component{
@@ -48,7 +56,7 @@ class LandingPageNew extends React.Component{
           <div className = "logoNew">
             <img src = {logo} width = "200" />
           </div>
-
+jpg
           <div className = "imageHolder">
             <img className = "image" src = {pic2} />
           </div>
@@ -69,7 +77,7 @@ class LandingPageNew extends React.Component{
 
         <div className = "circle1">
         </div>
-
+jpg
         <div className = "circle2">
         </div>
 
@@ -89,7 +97,8 @@ class LandingPageNew extends React.Component{
                 A follower on social. A like? A comment?
                 Does an extra follower, or some likes really help them out?
               </div>
-            </div>
+            </div>    <Divider />
+
           </div>
 
           <div className = "problemHolder2">
@@ -127,20 +136,23 @@ class LandingPageNew extends React.Component{
         </div>
 
 
+        <div className = "divider"/>
+
         <div className = "howItWorks">
           <div style ={{
               fontSize: '60px'}}>How it works</div>
 
           <div className = "featureHolder">
             <div className = "feature">There are no follower or following</div>
-            <div className = "feature">You don't post directly to your profile but to the buisness you love</div>
-            <div className = "feature">Fans are represented by organization they love</div>
-            <div className = "feature">And organization that represented by the people who love them</div>
-            <div className = "feature">Eating at a resturant? Share your expereince to that resturant's orb(that's what we call each group ;)</div>
-            <div className = "feature">Snap a picture, choose the orb, post, and show your love!</div>
+            <div className = "feature">Post your expereince directly under your favorite business</div>
+            <div className = "feature">Fans are represented by organization they support</div>
+            <div className = "feature">Find and connect with others in your community</div>
           </div>
 
       </div>
+
+
+      <div className = "divider"/>
 
         <div className = "benefits">
 
@@ -152,7 +164,8 @@ class LandingPageNew extends React.Component{
           <div className = "whyHolders">
 
             <div className = "circleWidth">
-              <div className = "miniCircle">
+              <div className = "mediumCircle">
+                <img src = {why1} className = "whyImage" />
               </div>
 
             </div>
@@ -183,7 +196,8 @@ class LandingPageNew extends React.Component{
 
             <div className = "circleWidth" >
 
-              <div className = "miniCircle">
+              <div className = "mediumCircle">
+                <img src = {why2} className = "whyImage" />
               </div>
 
             </div>
@@ -195,7 +209,12 @@ class LandingPageNew extends React.Component{
 
 
             <div className = "circleWidth">
-              <div className = "miniCircle">
+              <div className = "mediumCircle">
+                <img src = {why3} style = {{
+                    height: '100%',
+                    position: 'relative',
+                    right: '20%'
+                  }} />
               </div>
             </div>
 
@@ -215,6 +234,8 @@ class LandingPageNew extends React.Component{
 
         </div>
 
+        <div className = "divider"/>
+
 
         <div className = 'team'>
 
@@ -226,6 +247,8 @@ class LandingPageNew extends React.Component{
 
               <div className = "miniNameHolder">
                 <div className = "miniCircle">
+                  <img src = {pingPic} className = "imagePicturesH" />
+
                 </div>
                 <div style = {{
                     fontSize: '40px'
@@ -245,6 +268,7 @@ class LandingPageNew extends React.Component{
 
               <div className = "miniNameHolder">
                 <div className = "miniCircle">
+                  <img src = {andyPic} className = "imagePictures" />
                 </div>
                 <div style = {{
                     fontSize: '40px'
@@ -265,16 +289,26 @@ class LandingPageNew extends React.Component{
 
 
 
-          <div style = {{
-              fontSize: '30px',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-            We both started ShareOrb in college. We are part of the University of Arizona
-            Center for Innovation and Forge.
+
+          <div className = "incuHolder">
+            <div className = "halfImageHolder">
+
+
+
+                <img src = {forge} className = "incu"/>
+                <img src = {uaci} className = "incu" />
+
+
+            </div>
+
+
           </div>
 
+
+
         </div>
+
+        <div className = "divider"/>
 
 
         <div className = "CTA">
