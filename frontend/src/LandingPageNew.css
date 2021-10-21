@@ -6,25 +6,6 @@
   right: -7%;
 }
 
-.circle1{
-  background: #446ccf;
-  position: absolute;
-  height: 45vw;
-  width: 45vw;
-  top: 90%;
-  left: 3%;
-  border-radius: 25vw;
-}
-
-.circle2{
-  background: #446ccf;
-  position: absolute;
-  height: 40vw;
-  width: 40vw;
-  top: 130%;
-  right: 2%;
-  border-radius: 25vw;
-}
 
 .headline{
   position: relative;
@@ -49,40 +30,19 @@
   align-items: center;
   text-align: center;
 }
-.howItWorks{
-  position: relative;
-  width: 100vw;
-  height: 70vh;
-  overflow: hidden;
-  align-items: center;
-  text-align: center;
-}
-.benefits{
-  position: relative;
-  width: 100vw;
-  height: 140vh;
-  overflow: hidden;
-  align-items: center;
-  text-align: center;
-}
 
-.team{
-  position: relative;
-  width: 100vw;
-  height: 80vh;
-  overflow: hidden;
-  text-align: center;
-}
+
+
 
 .CTA{
   position: relative;
   width: 100vw;
-  height: 30vh;
+  height: 35vh;
   overflow: hidden;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 50px;
+  font-size: 4vw;
 }
 
 .socialMedia{
@@ -119,28 +79,8 @@
   position: absolute;
   color: gray;
 }
-.mainHeadline{
-  font-size: 80px;
-}
 
-.smallHeadline{
-  font-size: 25px;
-}
 
-.problemHolder{
-  position: absolute;
-  left: 10%;
-  top: 25%;
-  color: white;
-}
-
-.problemHolder2{
-
-  position: absolute;
-  left: 63%;
-  top: 52%;
-  color: white;
-}
 
 .question1{
   width: 45%;
@@ -149,26 +89,11 @@
   width: 80%;
 }
 
-.whatAreWe{
-  position: relative;
-  font-size: 30px;
-  width: 80%;
-  left: 50%;
-  transform: translateX(-50%);
-}
 
-.featureHolder{
-  width: 50%;
-  columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
-  position: relative;
 
-  left: 50%;
-  transform: translateX(-50%);
-
-}
 .feature{
+  display: flex;
+  flex-direction: column;
   font-size: 20px;
   position: relative;
   width: 200px;
@@ -178,16 +103,7 @@
   text-align: center;
 }
 
-.mediumCircle{
-  height: 400px;
-  width: 400px;
-  background: #446ccf;
-  border-radius: 150px;
-  position: relative;
-  left:50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-}
+
 .miniCircle{
   height: 300px;
   width: 300px;
@@ -198,16 +114,7 @@
   transform: translateX(-50%);
   overflow: hidden;
 }
-.whyHolders{
-  position: relative;
-  width: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .circleWidth{
   width: 30%;
@@ -217,22 +124,7 @@
   width: 70%;
   position:relative;
 }
-.bigWhy{
-  font-size: 45px;
-}
-.smallWhy{
-  font-size: 25px;
-}
 
-.nameHolderNew{
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  height: 65%;
-}
 
 .miniNameHolder{
   width: 60%;
@@ -277,7 +169,7 @@
   position: relative;
   width: 100%;
   flex-direction: row;
-  height: 20%;
+  height: 30%;
 }
 
 .halfImageHolder{
@@ -308,18 +200,451 @@
 
 /* for phone */
 @media screen and (max-width: 450px){
+  .mainHeadline{
+    font-size: 45px;
+  }
 
+  .smallHeadline{
+    font-size: 18px;
+  }
+  .problem1Text{
+    font-size: 20px;
+  }
+
+  .problemText2{
+    font-size: 13px;
+  }
+  .problemHolder{
+    position: absolute;
+    left: 25%;
+    top: 11%;
+    color: white;
+  }
+
+  .problemHolder2{
+
+    position: absolute;
+    left: 38%;
+    top: 44%;
+    color: white;
+  }
+
+
+  .circle1{
+    background: #446ccf;
+    position: absolute;
+    height: 75vw;
+    width: 75vw;
+    top: 90%;
+    left: 3%;
+    border-radius: 50vw;
+  }
+
+  .circle2{
+    background: #446ccf;
+    position: absolute;
+    height: 70vw;
+    width: 70vw;
+    top: 130%;
+    right: 2%;
+    border-radius: 50vw;
+  }
+
+
+  .whatAreWeTitle{
+    font-size: 40px;
+  }
+
+  .whatAreWe{
+    position: relative;
+    font-size: 17px;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .icon{
+    font-size: 80px;
+    margin-bottom: 15px;
+  }
+
+
+  .featureHolder{
+    margin-top: 50px;
+    width: 50%;
+
+    position: relative;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+
+  .howItWorks{
+    position: relative;
+    width: 100vw;
+    height: 105vh;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+  }
+
+  .whyHolders{
+    position: relative;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .mediumCircle{
+    height: 200px;
+    width: 200px;
+    background: #446ccf;
+    border-radius: 70px;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+  }
+
+  .bigWhy{
+    font-size: 30px;
+  }
+  .smallWhy{
+    font-size: 20px;
+  }
+  .benefits{
+    position: relative;
+    width: 100vw;
+    height: 170vh;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nameHolderNew{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+  }
+
+
+  .team{
+    position: relative;
+    width: 100vw;
+    height: 170vh;
+    overflow: hidden;
+    text-align: center;
+  }
 
 }
 
 /* for laptop */
 @media screen and (max-width: 800px) and (min-width:451px){
+  .mainHeadline{
+    font-size: 50px;
+  }
+
+  .smallHeadline{
+    font-size: 15px;
+  }
+
+  .problem1Text{
+    font-size: 2.5vw;
+  }
+
+  .problemText2{
+    font-size: 1.5vw;
+  }
+  .problemHolder{
+    position: absolute;
+    left: 10%;
+    top: 14%;
+    color: white;
+  }
+
+  .problemHolder2{
+
+    position: absolute;
+    left: 63%;
+    top: 44%;
+    color: white;
+  }
+
+  .circle1{
+    background: #446ccf;
+    position: absolute;
+    height: 45vw;
+    width: 45vw;
+    top: 90%;
+    left: 3%;
+    border-radius: 25vw;
+  }
+
+  .circle2{
+    background: #446ccf;
+    position: absolute;
+    height: 40vw;
+    width: 40vw;
+    top: 130%;
+    right: 2%;
+    border-radius: 25vw;
+  }
+
+  .whatAreWeTitle{
+    font-size: 60px;
+  }
+
+  .whatAreWe{
+    position: relative;
+    font-size: 20px;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .icon{
+    font-size: 80px;
+    margin-bottom: 15px;
+  }
 
 
+  .featureHolder{
+    margin-top: 50px;
+    width: 50%;
+
+    position: relative;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+
+  .howItWorks{
+    position: relative;
+    width: 100vw;
+    height: 105vh;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+  }
+
+  .whyHolders{
+    position: relative;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mediumCircle{
+    height: 200px;
+    width: 200px;
+    background: #446ccf;
+    border-radius: 70px;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+  }
+
+  .bigWhy{
+    font-size: 30px;
+  }
+  .smallWhy{
+    font-size: 20px;
+  }
+
+  .benefits{
+    position: relative;
+    width: 100vw;
+    height: 170vh;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nameHolderNew{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+  }
+
+
+  .team{
+    position: relative;
+    width: 100vw;
+    height: 170vh;
+    overflow: hidden;
+    text-align: center;
+  }
 }
 
 /* for comptuer */
 @media screen and (min-width: 801px){
+  .mainHeadline{
+    font-size: 5vw;
+  }
+
+  .smallHeadline{
+    font-size: 2vw;
+  }
+
+  .problem1Text{
+    font-size: 3vw;
+  }
+
+  .problemText2{
+    font-size: 1.5vw;
+  }
+  .problemHolder{
+    position: absolute;
+    left: 10%;
+    top: 18%;
+    color: white;
+  }
+
+  .problemHolder2{
+
+    position: absolute;
+    left: 63%;
+    top: 48%;
+    color: white;
+  }
+
+  .circle1{
+    background: #446ccf;
+    position: absolute;
+    height: 45vw;
+    width: 45vw;
+    top: 90%;
+    left: 3%;
+    border-radius: 25vw;
+  }
+
+  .circle2{
+    background: #446ccf;
+    position: absolute;
+    height: 40vw;
+    width: 40vw;
+    top: 130%;
+    right: 2%;
+    border-radius: 25vw;
+  }
+
+  .whatAreWeTitle{
+    font-size: 60px;
+  }
+
+  .whatAreWe{
+    position: relative;
+    font-size: 2vw;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .icon{
+    font-size: 80px;
+    margin-bottom: 15px;
+  }
+
+
+  .featureHolder{
+    margin-top: 50px;
+    width: 50%;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    position: relative;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+
+  .howItWorks{
+    position: relative;
+    width: 100vw;
+    height: 70vh;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+  }
+
+  .whyHolders{
+    position: relative;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .mediumCircle{
+    height: 20vw;
+    width: 20vw;
+    background: #446ccf;
+    border-radius: 5vw;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+  }
+
+  .bigWhy{
+    font-size: 3vw;
+  }
+  .smallWhy{
+    font-size:2vw;
+  }
+
+  .benefits{
+    position: relative;
+    width: 100vw;
+    height: 140vh;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nameHolderNew{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    height: 65%;
+  }
+
+
+  .team{
+    position: relative;
+    width: 100vw;
+    height: 120vh;
+    overflow: hidden;
+    text-align: center;
+  }
 
 
 

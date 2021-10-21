@@ -9,8 +9,9 @@ import why3 from './why3.jpg'
 import forge from './forge.png'
 import uaci from './uaci.png'
 import pic2 from './containers/LoginPage/calendar.svg';
+import icon1 from './icon1.svg';
 import './LandingPageNew.css';
-import { InstagramOutlined, AntDesignOutlined } from "@ant-design/icons";
+import { InstagramOutlined, AntDesignOutlined,UsergroupDeleteOutlined, IdcardOutlined,HomeOutlined, ApartmentOutlined  } from "@ant-design/icons";
 import { Divider } from 'antd';
 
 
@@ -26,7 +27,7 @@ class LandingPageNew extends React.Component{
     // this is the unique selling proposition
 
     // the problem we are trying to solve (the key pain points of organization)
-    // and how do we fix it using our app (the benefits pretty much)
+    // and how do we fix it using our app jpg(the benefits pretty much)
     // these two can go together (show what we do and how that can help)
     // Some pictures of what we do (benefits over features)
 
@@ -56,9 +57,9 @@ class LandingPageNew extends React.Component{
           <div className = "logoNew">
             <img src = {logo} width = "200" />
           </div>
-jpg
+
           <div className = "imageHolder">
-            <img className = "image" src = {pic2} />
+            <img className = "image" src = {icon1} />
           </div>
 
 
@@ -67,7 +68,7 @@ jpg
               Turning Fans Into Storytellers
             </div>
             <div className = "smallHeadline">
-              ShareOrb brings the authenticity of user expereince to local small business
+              ShareOrb brings the authenticity of user expereince to local small businesses
               and community to those who love what these small businesses do
             </div>
 
@@ -77,7 +78,7 @@ jpg
 
         <div className = "circle1">
         </div>
-jpg
+
         <div className = "circle2">
         </div>
 
@@ -86,31 +87,23 @@ jpg
 
           <div className = "problemHolder">
             <div className = "question1">
-              <div style = {{
-                  fontSize: '55px'
-                }}>
-                How are you supporting the small business you love?
+              <div className = "problem1Text">
+                How are you supporting the small businesses you love?
               </div>
-              <div style = {{
-                  fontSize: '20px'
-                }}>
-                A follower on social. A like? A comment?
+              <div className = "problemText2">
+                A follower on social media? A like? A comment?
                 Does an extra follower, or some likes really help them out?
               </div>
-            </div>    <Divider />
+            </div>
 
           </div>
 
           <div className = "problemHolder2">
               <div className = "question2">
-                <div style = {{
-                    fontSize: '55px'
-                  }} >
-                  Business, you have fans that love what you do!</div>
+                <div className = "problem1Text">
+                  Businesses, you have fans that love what you do!</div>
                 <div
-                  style = {{
-                    fontSize: '20px'
-                  }}
+                className = "problemText2"
                   > But are you still dying for some authentic stories about the great service you provide?</div>
               </div>
 
@@ -122,13 +115,11 @@ jpg
 
 
         <div className = "aboutUs">
-          <div style = {{
-              fontSize: '60px',
-            }}>What are we?</div>
+          <div className = "whatAreWeTitle">What are we?</div>
 
           <div className = "whatAreWe">
               ShareOrb is a social media platform where your communities are represented by your expereinces.
-              We bring the small businesses and their fans together by flipping traditional nature of sharing experiences.
+              We bring small businesses and their fans together by flipping the traditional way of sharing experiences.
 
             </div>
 
@@ -139,14 +130,24 @@ jpg
         <div className = "divider"/>
 
         <div className = "howItWorks">
-          <div style ={{
-              fontSize: '60px'}}>How it works</div>
+          <div className = "whatAreWeTitle">How it works</div>
 
           <div className = "featureHolder">
-            <div className = "feature">There are no follower or following</div>
-            <div className = "feature">Post your expereince directly under your favorite business</div>
-            <div className = "feature">Fans are represented by organization they support</div>
-            <div className = "feature">Find and connect with others in your community</div>
+            <div className = "feature">
+              <UsergroupDeleteOutlined className = "icon"/>
+              There are no follower or following</div>
+            <div className = "feature">
+              <HomeOutlined className = "icon"/>
+              Post your expereince directly under your favorite business
+            </div>
+            <div className = "feature">
+              <IdcardOutlined className = "icon"/>
+              Fans are represented by businesses they support
+            </div>
+            <div className = "feature">
+              <ApartmentOutlined  className = "icon"/>
+              Find and connect with others in your local community
+            </div>
           </div>
 
       </div>
@@ -156,9 +157,7 @@ jpg
 
         <div className = "benefits">
 
-          <div style = {{
-              fontSize: '60px'
-            }} >Why?</div>
+          <div className = "whatAreWeTitle" >Why?</div>
 
 
           <div className = "whyHolders">
@@ -174,7 +173,7 @@ jpg
 
               <div>
                 <div className = "bigWhy">Support your local community</div>
-                <div className = "smallWhy">You enjoy what they work hard for, why not show some love!</div>
+                <div className = "smallWhy">You enjoy what they worked hard for, why not show them some love!</div>
               </div>
 
 
@@ -185,15 +184,6 @@ jpg
 
           <div className = "whyHolders">
 
-            <div className = "whyWidth">
-
-              <div>
-                <div className = "bigWhy">Find others who also love what you love</div>
-                <div className = "smallWhy">Live at the place or sitting on your couch find those who are sharing your experiences</div>
-              </div>
-
-            </div>
-
             <div className = "circleWidth" >
 
               <div className = "mediumCircle">
@@ -201,6 +191,17 @@ jpg
               </div>
 
             </div>
+
+            <div className = "whyWidth">
+
+              <div>
+                <div className = "bigWhy">Find others who also love what you love</div>
+                <div className = "smallWhy">At the resturant or sitting on your couch find those who are sharing your experiences</div>
+              </div>
+
+            </div>
+
+
 
         </div>
 
@@ -220,8 +221,8 @@ jpg
 
             <div className = "whyWidth">
               <div>
-                <div className = "bigWhy">As a business you get to show off to others how amazing your fans are</div>
-                <div className = "smallWhy">You provided an amzing product or service and people love it! Why not show it to the world</div>
+                <div className = "bigWhy">As a business you get to show off how amazing your fans are</div>
+                <div className = "smallWhy">You provided an amzing service and people love it! Why not show it to the world!</div>
               </div>
             </div>
 
@@ -239,9 +240,7 @@ jpg
 
         <div className = 'team'>
 
-          <div style = {{
-              fontSize: '60px'
-            }}>Team</div>
+          <div className = "whatAreWeTitle">Team</div>
           <div className = "nameHolderNew">
             <div >
 
@@ -250,12 +249,8 @@ jpg
                   <img src = {pingPic} className = "imagePicturesH" />
 
                 </div>
-                <div style = {{
-                    fontSize: '40px'
-                  }}>Ping</div>
-                <div style = {{
-                    fontSize: '25px'
-                  }}>
+                <div className = "bigWhy">Ping</div>
+                <div className = 'smallWhy'>
                   I recently graduated from the University of Arizona. I majored
                   in computer science and I love strategy games. Chess and The Settlers of Catan are my favorite.
 
@@ -270,12 +265,8 @@ jpg
                 <div className = "miniCircle">
                   <img src = {andyPic} className = "imagePictures" />
                 </div>
-                <div style = {{
-                    fontSize: '40px'
-                  }}>Andy</div>
-                <div style = {{
-                    fontSize: '25px'
-                  }}>
+                <div className = "bigWhy">Andy</div>
+                <div className = 'smallWhy'>
                   I also recently graduated from the University of Arizona. I majored
                   in pharmacudical science and I love working out. My life motto is
                   if you ain't struggling are you really living life.
@@ -313,7 +304,10 @@ jpg
 
         <div className = "CTA">
           If you have any feedback, let's talk! Set a meeting with us!
-          <div>Put link here</div>
+          <br />
+          <a
+            href = "https://calendly.com/pinghsu520-1"
+             style = {{color: 'lightblue'}}>Click here</a>
         </div>
 
         <div className = "socialMedia">
