@@ -68,7 +68,7 @@ class LandingPageNew extends React.Component{
               Turning Fans Into Storytellers
             </div>
             <div className = "smallHeadline">
-              ShareOrb brings the authenticity of user expereince to local small businesses
+              ShareOrb brings the authenticity of user experience to local small businesses
               and community to those who love what these small businesses do
             </div>
 
@@ -118,7 +118,7 @@ class LandingPageNew extends React.Component{
           <div className = "whatAreWeTitle">What are we?</div>
 
           <div className = "whatAreWe">
-              ShareOrb is a social media platform where your communities are represented by your expereinces.
+              ShareOrb is a social media platform where your communities are represented by your experience.
               We bring small businesses and their fans together by flipping the traditional way of sharing experiences.
 
             </div>
