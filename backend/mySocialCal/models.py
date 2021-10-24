@@ -350,6 +350,7 @@ class SmallGroups(models.Model):
     groupCode = models.CharField(max_length = 8, null = True, default = random_code_function)
     long = models.DecimalField(max_digits = 9, decimal_places = 6, null = True, blank = True)
     lat = models.DecimalField(max_digits = 9, decimal_places = 6, null = True, blank = True)
+    address = models.CharField(max_length = 222, default='address')
     def get_socialCalItems(self):
         return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)
 

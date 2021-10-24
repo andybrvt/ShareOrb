@@ -835,7 +835,8 @@ class CreateSmallGroup(APIView):
             description = request.data['description'],
             public = public,
             lat = request.data['lat'],
-            long = request.data['long']
+            long = request.data['long'],
+            address = request.data['address'],
 
         )
 
