@@ -57,6 +57,9 @@ class JustRecentUserSerializer(serializers.ModelSerializer):
 # Purpose: UserListView it shows a list and UserDetailView grabbing person info
 
 class FollowUserSerializer(serializers.ModelSerializer):
+
+    # INUSE ---
+
     # This is for the follower and followering list
     class Meta:
         model = models.User
@@ -89,46 +92,23 @@ class SuggestedUserSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # the ReadOnlyField allow that field to only be read only
+    # INUSE ---
 
-    # START REMOVING UNNESSARY THINGS
-
-    # NOT NEEDED ANYMORE
-    # get_posts = serializers.StringRelatedField(many = True)
-    # get_allPost = serializers.StringRelatedField(many  = True)
-    # get_socialCal = serializers.StringRelatedField(many = True)
-    # get_socialEvents = serializers.StringRelatedField(many = True)
-
-
-    # get_following = serializers.StringRelatedField(many = True)
-    # get_followers = serializers.StringRelatedField(many = True)
-    # get_sent_follow_request = serializers.StringRelatedField(many = True)
-    # get_follow_request = serializers.StringRelatedField(many = True)
     get_small_groups = serializers.StringRelatedField(many = True)
 
     class Meta:
         model = models.User
         fields = (
-         # 'get_socialCal',
-         # 'get_socialEvents',
-         # 'friends',
-         # "get_posts",
-         # 'get_allPost',
          'id',
          'username',
          'first_name',
          'last_name',
          'bio',
          'profile_picture',
-         'get_following',
-         'get_followers',
          'phone_number',
          'email',
          'dob',
          'private',
-         # 'requested',
-         # 'get_sent_follow_request',
-         # 'get_follow_request',
          'showIntialInstructions',
          "dailyNotification",
          "notificationSeen",
@@ -144,68 +124,15 @@ class UserSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
 
-        # NOT NEED ANYMORE
-        # postList = []
-        # allPostList = []
-        # socialCalList = []
-        # friendList = []
-        # socialEventList = []
-        # followerList = []
-        # followingList = []
-        # sentRequestList = []
-        # requestList = []
         smallGroups = []
-        # for user in data['get_following']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     followingList.append(userPerson)
-        #
-        # for user in data['get_followers']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     followerList.append(userPerson)
-        #
-        # for user in data['get_sent_follow_request']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     sentRequestList.append(userPerson)
-        #
-        #
-        # for user in data['get_follow_request']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     requestList.append(userPerson)
 
         for groups in data['get_small_groups']:
             groups = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
             smallGroups.append(groups)
-        # NOT NEEDED ANYMORE
-        # for socialCells in data['get_socialCal']:
-        #     socialCell = SocialCalCellSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
-        #     socialCalList.append(socialCell)
 
-        # for friends in data['friends']:
-        #     friend = FollowUserSerializer(models.User.objects.get(id = friends)).data
-        #     friendList.append(friend)
-
-        # for posts in data['get_posts']:
-        #     post = MiniPostSerializer(models.Post.objects.get(id = posts)).data
-        #     postList.append(post)
-
-        # for socialEvents in data['get_socialEvents']:
-        #     socialEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = socialEvents)).data
-        #     socialEventList.append(socialEvent)
-        # for allPosts in data['get_allPost']:
-        #     allPost = UserSocialNormPostSerializer(models.UserSocialNormPost.objects.get(id = allPosts)).data
-        #     allPostList.append(allPost)
-        # data['get_following'] = followingList
-        # data['get_followers'] = followerList
-        # data['get_sent_follow_request'] = sentRequestList
-        # data['get_follow_request'] = requestList
         data['id_small_groups'] = data['get_small_groups']
         data['get_small_groups'] = smallGroups
-        # NOT NEEDED ANY MORE
-        # data['get_socialCal'] = socialCalList
-        # data['friends']  = friendList
-        # data['get_posts'] = postList
-        # data['get_socialEvents'] = socialEventList
-        # data['get_allPost'] = allPostList
+
         return data
 
 

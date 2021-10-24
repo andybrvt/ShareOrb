@@ -824,8 +824,7 @@ class SuggestedGroups(APIView):
 class CreateSmallGroup(APIView):
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
-        print('------------------')
+
         public = True
         if(request.data['public'] == "false"):
             public = False
@@ -834,21 +833,24 @@ class CreateSmallGroup(APIView):
             group_name = request.data['groupName'],
             groupPic = request.data['groupPic'],
             description = request.data['description'],
-            public = public
+            public = public,
+            lat = request.data['lat'],
+            long = request.data['long']
+
         )
 
-        curUser = get_object_or_404(User, id = request.data['curId'])
+        # DONT NEED THIS NOW
+        # curUser = get_object_or_404(User, id = request.data['curId'])
+        #
+        # for people in json.loads(request.data['invited']):
+        #     curPerson = get_object_or_404(User, id = people)
+        #     curUser.recents.add(curPerson)
+        #
+        # curUser.save()
 
-        for people in json.loads(request.data['invited']):
-            curPerson = get_object_or_404(User, id = people)
-            curUser.recents.add(curPerson)
-
-        curUser.save()
-
-        group.members.add(curUser)
+        # group.members.add(curUser)
         group.save()
         serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
-        print(serializedGroup)
         return Response(serializedGroup)
 
 # this function will be used to change the public and private of a group
