@@ -97,6 +97,7 @@ class SocialCalCellMiniSerializer(serializers.ModelSerializer):
 
 
 class SocialCalUserSerializer(serializers.ModelSerializer):
+    #INUSE ---
 
     class Meta:
         model = User
@@ -151,6 +152,8 @@ class DetailSocialCalItemsSerializer(serializers.ModelSerializer):
         return data
 
 class SocialCalItemsSerializer(serializers.ModelSerializer):
+    # INUSE ---
+
     # itemImage = Base64ImageField()
     get_socialCalItemComment = serializers.StringRelatedField(many = True)
 
@@ -179,12 +182,12 @@ class SocialCalItemsSerializer(serializers.ModelSerializer):
 
         cal_likes = []
 
-        for likes in data['people_like']:
-            like = SocialCalUserSerializer(User.objects.get(id = likes)).data
-            cal_likes.append(like)
+        # for likes in data['people_like']:
+        #     like = SocialCalUserSerializer(User.objects.get(id = likes)).data
+        #     cal_likes.append(like)
 
-        if(data['goal']):
-            data['goal'] = GoalAlbumStringMiniSerializer(models.GoalAlbumString.objects.get(id= data['goal'])).data
+        # if(data['goal']):
+        #     data['goal'] = GoalAlbumStringMiniSerializer(models.GoalAlbumString.objects.get(id= data['goal'])).data
 
         data['people_like'] = cal_likes
 
@@ -288,6 +291,7 @@ class SocialCellEventSerializer(serializers.ModelSerializer):
         fields = ("id", 'owner', 'post', 'post_date')
 
 class SocialItemJustPicSerializer(serializers.ModelSerializer):
+    # INUSE ---
     class Meta:
         model = models.SocialCalItems
         fields = ("id", "itemImage","video", 'caption', "created_at")
@@ -355,6 +359,9 @@ class GoalAlbumStringSerializer(serializers.ModelSerializer):
 
 class SmallGroupsSerializers(serializers.ModelSerializer):
 
+    # INUSE ---
+
+
     # This function will be used more for users so that you just have
     # to just get the small grups info and not the images that goes with it
 
@@ -370,6 +377,8 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             "groupCode",
             'get_socialCalItems',
             'creator',
+            'lat',
+            'long'
             )
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -461,6 +470,8 @@ class MiniSmallGroupsSerializer(serializers.ModelSerializer):
         )
 
 class GlobeItemSerializer(serializers.ModelSerializer):
+
+    # INUSE ---
 
     get_globeItemComment  = serializers.StringRelatedField(many = True)
 

@@ -348,6 +348,8 @@ class SmallGroups(models.Model):
     public = models.BooleanField(default = False)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "creator_small_group", on_delete = models.CASCADE, null = True)
     groupCode = models.CharField(max_length = 8, null = True, default = random_code_function)
+    long = models.DecimalField(max_digits = 9, decimal_places = 6, null = True, blank = True)
+    lat = models.DecimalField(max_digits = 9, decimal_places = 6, null = True, blank = True)
     def get_socialCalItems(self):
         return SocialCalItems.objects.filter(smallGroup = self).values_list('id', flat = True)
 
