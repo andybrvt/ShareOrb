@@ -19,6 +19,7 @@ from rest_framework.parsers import MultiPartParser
 import time
 from django.utils.crypto import get_random_string
 import json
+from math import radians, cos, sin, asin, sqrt
 
 
 # Create your views here.
@@ -970,3 +971,68 @@ class getSinglePost(APIView):
 
 
         return Response(serializedPost)
+
+def calculateDistance(lat1, lat2, lon1, lon2):
+    # this function will be used to calculate the distance between two
+    # points on the globe
+    # The math module contains a function named
+    # radians which converts from degrees to radians.
+    lon1 = radians(lon1)
+    lon2 = radians(lon2)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+
+    # Haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+
+    c = 2 * asin(sqrt(a))
+
+    # Radius of earth in kilometers. Use 3956 for miles
+    r = 3956
+
+    # calculate the result
+    return(c * r)
+
+
+# this function will be the main function to check whether or not a orb
+# is close and  it should show up in front end
+class getClosestOrb(APIView):
+    def get(self, request, *args, **kwargs):
+
+        lat1 = float(request.GET.get("lat"))
+        long1 = float(request.GET.get('long'))
+
+
+        # lat2 =
+
+        print(lat1, long1)
+        # eventually we are gonna put a new field in (city so we can do by city)
+        orbs = models.SmallGroups.objects.all()
+
+
+        closest = -1
+        closestOrb = models.SmallGroups.objects.all()[0]
+        for orb in orbs:
+            # loop through them and check
+            lat2 = float(orb.lat)
+            long2 = float(orb.long)
+            distance = calculateDistance(lat1, lat2, long1, long2)
+            print(distance, orb)
+            if(closest != -1):
+                if(closest >= distance):
+                    closest = distance
+                    closestOrb = orb
+            else:
+                closest = distance
+                closestOrb = orb
+
+
+        print(closest, closestOrb, 'here is the closest')
+        if(closest <= 10):
+            serializedOrb = serializers.MiniSmallGroupsSerializer(closestOrb, many = False).data
+            return Response(serializedOrb)
+
+
+        return Response(False)

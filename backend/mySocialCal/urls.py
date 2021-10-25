@@ -37,5 +37,6 @@ urlpatterns = [
     path('grabMembers/<slug:groupId>', views.grabGroupMember.as_view(), name = "grab_group_members"),
     path("infiniteSmallGroup/<int:groupId>/<int:start>/<int:addMore>", views.loadSmallGroupPostView.as_view(), name = "infinite_small_group"),
     path("infiniteGlobe/<int:start>/<int:addMore>", views.loadMoreGlobeView.as_view(), name = "infinite_globe"),
-    path('getSinglePost/<int:id>', views.getSinglePost.as_view(), name = "get_single_post")
+    path('getSinglePost/<int:id>', views.getSinglePost.as_view(), name = "get_single_post"),
+    path('getClosestOrb', views.getClosestOrb.as_view(), name = "get_closest_or")
 ]
