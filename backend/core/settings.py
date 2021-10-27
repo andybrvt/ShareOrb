@@ -73,7 +73,8 @@ ALLOWED_HOSTS = [
     "206.207.51.53",
     "206.207.51.183",
     "206.207.51.188",
-    "206.207.51.191"
+    "206.207.51.191",
+    "206.207.51.199",
     ]
 
 # IP for vila
@@ -321,8 +322,9 @@ STATICFILES_DIRS = [
 
 # running schedualed items
 CRONJOBS = [
+    ('1 * * * *','mySocialCal.cron.schedualed_globe_post'),
     # ('*/1 * * * *', 'mySocialCal.cron.schedualed_globe_post'),
     # ('0 9 * * *', 'mySocialCal.cron.schedualed_globe_post'),
     # ('0 15 * * *', 'mySocialCal.cron.schedualed_globe_post'),
-    ('0 */24 * * *', 'mySocialCal.cron.schedualed_globe_post')
+    # ('0 */24 * * *', 'mySocialCal.cron.schedualed_globe_post')
 ]
