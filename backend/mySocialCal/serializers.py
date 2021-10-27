@@ -380,6 +380,7 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             'lat',
             'long',
             'address',
+            'type',
             )
     def to_representation(self, instance):
         data = super().to_representation(instance)
