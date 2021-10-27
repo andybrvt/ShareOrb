@@ -405,13 +405,9 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             'get_socialCalItems',
             'creator',
             'lat',
-<<<<<<< HEAD
             'long',
             'address',
             'type',
-=======
-            'long'
->>>>>>> eb29f87f94de398786a9c8576a342e5afb47a96d
             )
     def to_representation(self, instance):
         data = super().to_representation(instance)
