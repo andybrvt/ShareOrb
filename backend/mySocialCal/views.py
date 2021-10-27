@@ -20,6 +20,9 @@ import time
 from django.utils.crypto import get_random_string
 import json
 from math import radians, cos, sin, asin, sqrt
+import os
+os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
 
 # Create your views here.
@@ -700,64 +703,49 @@ class SocialCalSingleUploadVid(APIView):
 
         user = get_object_or_404(User, id = id)
 
-        # socialCalCell, created = models.SocialCalCell.objects.get_or_create(
-        #     socialCalUser = user,
-        #     socialCaldate = curDate
-        # )
-
         change = True
 
-        # if(created == False):
-        #     socialCalCell.actionText = "updated"
+        ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 1, targetname="cut.mp4")
 
-        if(request.data['goalId'] != "undefined"):
-            goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
-            # Now you add a single picture in
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                video = request.data['video'],
-                # calCell = socialCalCell,
-                created_at = curDateTime,
-                caption = caption,
-                goal = goal,
-                smallGroup = group
-            )
+        # if(request.data['goalId'] != "undefined"):
+        #     goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
+        #     socialCalItem = models.SocialCalItems.objects.create(
+        #         socialItemType = 'picture',
+        #         creator = user,
+        #         itemUser = user,
+        #         video = request.data['video'],
+        #         created_at = curDateTime,
+        #         caption = caption,
+        #         goal = goal,
+        #         smallGroup = group
+        #     )
+        #
+        #
+        #
+        #
+        # else:
+        #     # Now you add a single picture in
+        #     socialCalItem = models.SocialCalItems.objects.create(
+        #         socialItemType = 'picture',
+        #         creator = user,
+        #         itemUser = user,
+        #         video = request.data['video'],
+        #         created_at = curDateTime,
+        #         caption = caption,
+        #         smallGroup = group
+        #     )
+        #
+        #
+        # serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
+        #
+        #
+        #
+        # content = {
+        #      'item': serializedItem,
+        #      # "cellId": socialCalCellNew.id
+        #  }
 
-            # socialCalCell.save()
-
-
-
-        else:
-            # Now you add a single picture in
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                video = request.data['video'],
-                # calCell = socialCalCell,
-                created_at = curDateTime,
-                caption = caption,
-                smallGroup = group
-            )
-
-            # socialCalCell.save()
-
-        serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
-
-        # socialCalCellNew = get_object_or_404(models.SocialCalCell,
-        #     socialCalUser = user,
-        #     socialCaldate = curDate
-        #  )
-
-
-        content = {
-             'item': serializedItem,
-             # "cellId": socialCalCellNew.id
-         }
-
-        return Response(content)
+        return Response("test")
 
 class GoalAlbumStringCreate(APIView):
 
