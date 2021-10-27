@@ -995,6 +995,17 @@ def calculateDistance(lat1, lat2, lon1, lon2):
     # calculate the result
     return(c * r)
 
+class getSmallGroupInfo(APIView):
+    def get(self, request, id, *args, **kwargs):
+        print(id)
+        orb = get_object_or_404(models.SmallGroups, id = id)
+
+        serializedOrb = serializers.SmallGroupInfoSerializers(orb, many = False).data
+
+        print(serializedOrb)
+        return Response(serializedOrb)
+
+
 
 # this function will be the main function to check whether or not a orb
 # is close and  it should show up in front end
