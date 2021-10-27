@@ -357,6 +357,31 @@ class GoalAlbumStringSerializer(serializers.ModelSerializer):
 
         return data
 
+
+class SmallGroupInfoSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SmallGroups
+        fields = (
+            'id',
+            'group_name',
+            'groupPic',
+            'description',
+            'creator',
+            'lat',
+            'long'
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
+
+        return data
+
+
+
+
 class SmallGroupsSerializers(serializers.ModelSerializer):
 
     # INUSE ---
@@ -365,6 +390,8 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
     # This function will be used more for users so that you just have
     # to just get the small grups info and not the images that goes with it
 
+
+    # probally have to remove
     class Meta:
         model = models.SmallGroups
         fields = (
@@ -378,9 +405,13 @@ class SmallGroupsSerializers(serializers.ModelSerializer):
             'get_socialCalItems',
             'creator',
             'lat',
+<<<<<<< HEAD
             'long',
             'address',
             'type',
+=======
+            'long'
+>>>>>>> eb29f87f94de398786a9c8576a342e5afb47a96d
             )
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -465,7 +496,6 @@ class MiniSmallGroupsSerializer(serializers.ModelSerializer):
         model = models.SmallGroups
         fields = (
             "id",
-            'members',
             "group_name",
             "groupPic",
             "public"
