@@ -248,8 +248,8 @@ class UserExploreSerializer(serializers.ModelSerializer):
          'email',
          'dob',
          'private',
-         'get_small_groups'
-
+         'get_small_groups',
+         'recentOrbs'
          # 'requested',
          # 'get_sent_follow_request',
          # 'get_follow_request',
@@ -257,49 +257,19 @@ class UserExploreSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        # followerList = []
-        # followingList = []
-        # socialCalList = []
-        # socialEventList = []
-        # sentRequestList = []
-        # requestList = []
+
+        orbsGroup = []
         smallGroups = []
 
         for groups in data['get_small_groups']:
             group = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
             smallGroups.append(group)
-        # for user in data['get_following']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     followingList.append(userPerson)
-        #
-        # for user in data['get_followers']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     followerList.append(userPerson)
-        #
-        # for user in data['get_sent_follow_request']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     sentRequestList.append(userPerson)
-        #
-        # for user in data['get_follow_request']:
-        #     userPerson = FollowUserSerializer(models.User.objects.get(username = user)).data
-        #     requestList.append(userPerson)
-        #
-        # for socialCells in data['get_socialCal']:
-        #     socialCell = SocialCalCellMiniSerializer(models.SocialCalCell.objects.get(id = socialCells)).data
-        #     socialCalList.append(socialCell)
-        #
-        # for socialEvents in data['get_socialEvents']:
-        #     socialEvent = SocialCalEventSerializer(models.SocialCalEvent.objects.get(id = socialEvents)).data
-        #     socialEventList.append(socialEvent)
-
+        for orbs in data['recentOrbs']:
+            orb = SmallGroupInfoSerializers(SmallGroups.objects.get(id = int(orbs))).data
+            orbsGroup.append(orb)
         data['get_small_groups'] = smallGroups
+        data['recentOrbs'] = orbsGroup
 
-        # data['get_following'] = followingList
-        # data['get_followers'] = followerList
-        # data['get_socialCal'] = socialCalList
-        # data['get_socialEvents'] = socialEventList
-        # data['get_sent_follow_request'] = sentRequestList
-        # data['get_follow_request'] = requestList
 
         return data
 
