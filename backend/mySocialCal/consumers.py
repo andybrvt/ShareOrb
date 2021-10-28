@@ -1434,7 +1434,8 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
     def send_group_like(self, data):
         group = get_object_or_404(GlobeItems, id = data['globeId'])
         liker = get_object_or_404(User, id = data['likerId'])
-        group.people_like.add(liker)
+
+        group.post.people_like.add(liker)
         group.save()
 
         serializedPost = GlobeItemSerializer(group).data
