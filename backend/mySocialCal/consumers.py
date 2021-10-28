@@ -1451,7 +1451,7 @@ class GlobeGroupConsumer(JsonWebsocketConsumer):
     def send_group_unlike(self, data):
         group = get_object_or_404(GlobeItems, id = data['globeId'])
         unliker = get_object_or_404(User, id = data['unlikerId'])
-        group.people_like.remove(unliker)
+        group.post.people_like.remove(unliker)
         group.save()
 
         serializedPost = GlobeItemSerializer(group).data
