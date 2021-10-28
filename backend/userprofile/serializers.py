@@ -12,6 +12,7 @@ from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCellMiniSerializer
 from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.serializers import SmallGroupsSerializers
+from mySocialCal.serializers import SmallGroupInfoSerializers
 from mySocialCal.serializers import SmallGroupsExploreSerializers
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
@@ -114,7 +115,8 @@ class UserSerializer(serializers.ModelSerializer):
          "notificationSeen",
          "date_joined",
          'inviteCode',
-         'get_small_groups'
+         'get_small_groups',
+         'recentOrbs'
          )
 
 
@@ -125,14 +127,20 @@ class UserSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
 
         smallGroups = []
+        orbsGroup = []
 
         for groups in data['get_small_groups']:
             groups = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
             smallGroups.append(groups)
 
+        for orbs in data['recentOrbs']:
+            orb = SmallGroupInfoSerializers(SmallGroups.objects.get(id = int(orbs))).data
+            orbsGroup.append(orb)
+
+
         data['id_small_groups'] = data['get_small_groups']
         data['get_small_groups'] = smallGroups
-
+        data['recentOrbs'] = orbsGroup
         return data
 
 

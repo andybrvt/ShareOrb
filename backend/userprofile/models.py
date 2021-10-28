@@ -103,6 +103,8 @@ class User(AbstractUser):
     # this function will be used to keep track of the recent people you added
     # to your groups
     recents = models.ManyToManyField("self", blank = True, related_name = "recent_people")
+
+    recentOrbs = models.ManyToManyField(SmallGroups, blank= True, related_name = "recent_orbs")
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
     def get_posts(self):
 

@@ -1122,3 +1122,19 @@ class DeleteAllNotifications(APIView):
 
 
         return Response('delete notifications')
+
+
+class AddRecentOrb(APIView):
+# this fucntion will be used to add recent orbs
+    def get(self, request, id, *args, **kwargs):
+
+        orb = get_object_or_404(SmallGroups, id = id)
+        print(request.user)
+
+        curUser = get_object_or_404(models.User, id = request.user.id)
+        curUser.recentOrbs.add(orb)
+        curUser.save()
+
+
+
+        return Response("done")
