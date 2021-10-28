@@ -405,8 +405,10 @@ class SocialCalItems(models.Model):
 
 # this function will be used to get specific social cal items for the globe
 # group
-# So you are gonna need post, like, comment, group
+# Since we want to link the globeitem directly to the like and comment to the orignal
+# post
 class GlobeItems(models.Model):
+    # since
 
     post = models.ForeignKey(SocialCalItems, on_delete = models.CASCADE, related_name = "social_cal_item_globe", null = True)
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "globe_post_likes", blank =True)

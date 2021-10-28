@@ -299,6 +299,9 @@ class SocialItemJustPicSerializer(serializers.ModelSerializer):
 # This will be used for the globe group
 # you will need the pic/vid, the group it was part of, and the ower
 class SocialItemGlobeSerializer(serializers.ModelSerializer):
+
+    get_socialCalItemComment = serializers.StringRelatedField(many = True)
+
     class Meta:
         model = models.SocialCalItems
         fields = (
@@ -308,7 +311,9 @@ class SocialItemGlobeSerializer(serializers.ModelSerializer):
             'caption',
             "created_at",
             'smallGroup',
-            "creator"
+            "creator",
+            "people_like",
+            "get_socialCalItemComment"
         )
 
     def to_representation(self, instance):
@@ -501,17 +506,14 @@ class GlobeItemSerializer(serializers.ModelSerializer):
 
     # INUSE ---
 
-    get_globeItemComment  = serializers.StringRelatedField(many = True)
 
     class Meta:
         model = models.GlobeItems
         fields = (
             'id',
             "post",
-            'people_like',
             "group",
             "created_at",
-            'get_globeItemComment'
         )
     def to_representation(self, instance):
         data = super().to_representation(instance)
