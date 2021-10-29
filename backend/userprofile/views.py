@@ -18,6 +18,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 # from django.core.mail import send_mail
 from allauth.account.adapter import get_adapter
 from mySocialCal.serializers import SmallGroupsSerializers
+from mySocialCal.serializers import MiniSmallGroupsSerializer
 
 from django.utils.crypto import get_random_string
 from mySocialCal.models import SmallGroups
@@ -903,7 +904,7 @@ class UserSearchView(APIView):
 
         # Now we wll serialize it
         serializedQS = serializers.FollowUserSerializer(qs, many= True).data
-        groupSerializedQS = serializers.SmallGroupsSerializers(groupQS, many = True).data
+        groupSerializedQS = MiniSmallGroupsSerializer(groupQS, many = True).data
         # WORKS
         content = {
             'users': serializedQS,
