@@ -709,7 +709,7 @@ class SocialCalSingleUploadVid(APIView):
 
 
         # THIS IS GONNA NEED SOME ATTENTION LATER
-        ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 1, targetname="temp.mp4")
+        ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 0.5, targetname="temp.mp4")
 
         clip = (VideoFileClip("temp.mp4")).resize((460, 720))
         gif = clip.write_gif("gifFile.gif")

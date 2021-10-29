@@ -471,7 +471,8 @@ class SmallGroupsExploreSerializers(serializers.ModelSerializer):
             "group_name",
             "groupPic",
             "get_socialCalItems",
-            "public"
+            "public",
+            'creator'
         )
 
     def to_representation(self, instance):
@@ -499,7 +500,8 @@ class MiniSmallGroupsSerializer(serializers.ModelSerializer):
             "id",
             "group_name",
             "groupPic",
-            "public"
+            "public",
+            'creator'
         )
 
 class GlobeItemSerializer(serializers.ModelSerializer):
