@@ -39,5 +39,7 @@ urlpatterns = [
     path("infiniteGlobe/<int:start>/<int:addMore>", views.loadMoreGlobeView.as_view(), name = "infinite_globe"),
     path('getSinglePost/<int:id>', views.getSinglePost.as_view(), name = "get_single_post"),
     path('getClosestOrb', views.getClosestOrb.as_view(), name = "get_closest_or"),
-    path('getSmallGroupInfo/<int:id>', views.getSmallGroupInfo.as_view(), name = "get_small_group_info")
+    path('getSmallGroupInfo/<int:id>', views.getSmallGroupInfo.as_view(), name = "get_small_group_info"),
+    path('getRandomPost', views.getRandomPost.as_view(), name = "get_random_post"),
+    path('getRandomOrbs', views.getRandomOrbs.as_view(), name = "get_random_orbs")
 ]

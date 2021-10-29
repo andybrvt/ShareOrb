@@ -25,6 +25,7 @@ os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from moviepy.editor import *
 from django.core.files import File
+import random
 
 
 # Create your views here.
@@ -1053,3 +1054,24 @@ class getClosestOrb(APIView):
 
 
         return Response(False)
+
+class getRandomPost(APIView):
+
+    def get(self, request, *args, **kwargs):
+        postList =list(models.SocialCalItems.objects.all())
+        random_items = random.sample(postList, 7)
+
+        serializedPost = serializers.SocialCalItemsSerializer(random_items, many = True).data
+        return Response(serializedPost)
+
+class getRandomOrbs(APIView):
+
+    def get(self, request, *args, **kwargs):
+
+        orbList = list(models.SmallGroups.objects.all())
+
+        random_orbs = random.sample(orbList, 3)
+
+        serializedOrbs = serializers.MiniSmallGroupsSerializer(random_orbs, many = True).data
+
+        return Response(serializedOrbs)
