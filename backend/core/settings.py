@@ -158,7 +158,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
-# v2 db production db
+# this is used for shareorbv2-env-v3 db
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -168,10 +168,28 @@ DATABASES = {
         'OPTIONS': {
          'charset': 'utf8mb4',
          'use_unicode': True, },
-        'HOST': 'aa6k6vd384b5ru.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+        'HOST': 'aayi3lp3j0p7jl.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
+
+
+
+
+# this is used for shareorbv2-env-v3 db production db
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ebdb',
+#         'USER': 'shareorbDB',
+#         'PASSWORD': 'Pingandy123',
+#         'OPTIONS': {
+#          'charset': 'utf8mb4',
+#          'use_unicode': True, },
+#         'HOST': 'aa6k6vd384b5ru.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
 
 
 
