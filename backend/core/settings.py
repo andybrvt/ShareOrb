@@ -37,7 +37,8 @@ ALLOWED_HOSTS = [
  "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com",
  "shareorbv2-env-v1.us-west-1.elasticbeanstalk.com",
  "shareorbv2-env-v2.us-west-1.elasticbeanstalk.com",
- "shareorbv2-env-v3.us-west-1.elasticbeanstalk.com"
+ "shareorbv2-env-v3.us-west-1.elasticbeanstalk.com",
+ "shareorbv2-env-v4.us-west-1.elasticbeanstalk.com"
 ]
 #
 # ALLOWED_HOSTS = [
