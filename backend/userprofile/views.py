@@ -901,7 +901,6 @@ class UserSearchView(APIView):
             # Now you will filter
             qs = qs.filter(Q(first_name__icontains = search) | Q(last_name__icontains = search) | Q(username__icontains = search) )
             groupQS = groupQS.filter(Q(group_name__icontains = search)).filter(public = True)
-
         # Now we wll serialize it
         serializedQS = serializers.FollowUserSerializer(qs, many= True).data
         groupSerializedQS = MiniSmallGroupsSerializer(groupQS, many = True).data
