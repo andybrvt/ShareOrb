@@ -21,10 +21,10 @@ from django.utils.crypto import get_random_string
 import json
 from math import radians, cos, sin, asin, sqrt
 import os
-os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-from moviepy.editor import *
-from django.core.files import File
+# os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
+# from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+# from moviepy.editor import *
+# from django.core.files import File
 import random
 
 
@@ -709,61 +709,60 @@ class SocialCalSingleUploadVid(APIView):
         change = True
 
 
-        # THIS IS GONNA NEED SOME ATTENTION LATER
-        ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 0.5, targetname="temp.mp4")
-
-        clip = (VideoFileClip("temp.mp4")).resize((460, 720))
-        gif = clip.write_gif("gifFile.gif")
-
-
-
-        local_file = open("gifFile.gif", 'rb')
-        djangoFile = File(local_file)
-        print(djangoFile)
-
-        if(request.data['goalId'] != "undefined"):
-            goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                itemImage = djangoFile,
-                video = request.data['video'],
-                created_at = curDateTime,
-                caption = caption,
-                goal = goal,
-                smallGroup = group
-            )
-
-
-
-
-        else:
-            # Now you add a single picture in
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                itemImage = djangoFile,
-                video = request.data['video'],
-                created_at = curDateTime,
-                caption = caption,
-                smallGroup = group
-            )
-
-
-        # socialCalItem.itemImage.save("new", djangoFile)
-        local_file.close()
-        serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
+        # # THIS IS GONNA NEED SOME ATTENTION LATER
+        # ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 0.5, targetname="temp.mp4")
+        #
+        # clip = (VideoFileClip("temp.mp4")).resize((460, 720))
+        # gif = clip.write_gif("gifFile.gif")
         #
         #
         #
-        content = {
-             'item': serializedItem,
-             # "cellId": socialCalCellNew.id
-         }
+        # local_file = open("gifFile.gif", 'rb')
+        # djangoFile = File(local_file)
+        # print(djangoFile)
+        #
+        # if(request.data['goalId'] != "undefined"):
+        #     goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
+        #     socialCalItem = models.SocialCalItems.objects.create(
+        #         socialItemType = 'picture',
+        #         creator = user,
+        #         itemUser = user,
+        #         itemImage = djangoFile,
+        #         video = request.data['video'],
+        #         created_at = curDateTime,
+        #         caption = caption,
+        #         goal = goal,
+        #         smallGroup = group
+        #     )
+        #
+        #
+        #
+        #
+        # else:
+        #     # Now you add a single picture in
+        #     socialCalItem = models.SocialCalItems.objects.create(
+        #         socialItemType = 'picture',
+        #         creator = user,
+        #         itemUser = user,
+        #         itemImage = djangoFile,
+        #         video = request.data['video'],
+        #         created_at = curDateTime,
+        #         caption = caption,
+        #         smallGroup = group
+        #     )
+        #
+        #
+        # local_file.close()
+        # serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
+        #
+        #
+        #
+        # content = {
+        #      'item': serializedItem,
+        #      # "cellId": socialCalCellNew.id
+        #  }
 
-        return Response(content)
+        return Response('stuff')
 
 class GoalAlbumStringCreate(APIView):
 
