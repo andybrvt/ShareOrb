@@ -1068,10 +1068,10 @@ class getRandomOrbs(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        orbList = List(models.SmallGroups.objects.all())
+        orbList = list(models.SmallGroups.objects.all())
 
-        random_orbs = random.sample(orbList, 10)
+        random_orbs = random.sample(orbList, 3)
 
-        serialized = serializes.MiniSmallGroupsSerializer(random_orbs, many = True).data
+        serializedOrbs = serializers.MiniSmallGroupsSerializer(random_orbs, many = True).data
 
-        return Response(serializedPost)
+        return Response(serializedOrbs)
