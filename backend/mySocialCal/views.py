@@ -710,11 +710,15 @@ class SocialCalSingleUploadVid(APIView):
 
 
         # THIS IS GONNA NEED SOME ATTENTION LATER
+        print('before ffmpeg')
         ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 0.5, targetname="temp.mp4")
 
+        print('after ffmpeg')
         clip = (VideoFileClip("temp.mp4")).resize((460, 720))
-        gif = clip.write_gif("gifFile.gif")
 
+        print('after clip')
+        gif = clip.write_gif("gifFile.gif")
+        print('after gif')
 
 
         local_file = open("gifFile.gif", 'rb')
@@ -1045,7 +1049,6 @@ class getClosestOrb(APIView):
                 closestOrb = orb
 
 
-        print(closest, closestOrb, 'here is the closest')
         if(closest <= 10):
             serializedOrb = serializers.MiniSmallGroupsSerializer(closestOrb, many = False).data
             return Response(serializedOrb)
