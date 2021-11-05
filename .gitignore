@@ -9,3 +9,7 @@ env/
 .env
 
 media/
+
+
+./backend/temp.mp4
+./backend/gifFile.gif
