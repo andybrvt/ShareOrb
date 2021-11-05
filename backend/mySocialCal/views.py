@@ -710,20 +710,20 @@ class SocialCalSingleUploadVid(APIView):
 
 
         # THIS IS GONNA NEED SOME ATTENTION LATER
-        print('before ffmpeg')
-        ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 0.5, targetname="temp.mp4")
-
-        print('after ffmpeg')
-        clip = (VideoFileClip("temp.mp4")).resize((460, 720))
-
-        print('after clip')
-        gif = clip.write_gif("gifFile.gif")
-        print('after gif')
-
-
-        local_file = open("gifFile.gif", 'rb')
-        djangoFile = File(local_file)
-        print(djangoFile)
+        # print('before ffmpeg')
+        # ffmpeg_extract_subclip(request.data['video'].temporary_file_path(), 0, 0.5, targetname="temp.mp4")
+        #
+        # print('after ffmpeg')
+        # clip = (VideoFileClip("temp.mp4")).resize((460, 720))
+        #
+        # print('after clip')
+        # gif = clip.write_gif("gifFile.gif")
+        # print('after gif')
+        #
+        #
+        # local_file = open("gifFile.gif", 'rb')
+        # djangoFile = File(local_file)
+        # print(djangoFile)
 
         if(request.data['goalId'] != "undefined"):
             goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
@@ -731,7 +731,7 @@ class SocialCalSingleUploadVid(APIView):
                 socialItemType = 'picture',
                 creator = user,
                 itemUser = user,
-                itemImage = djangoFile,
+                # itemImage = djangoFile,
                 video = request.data['video'],
                 created_at = curDateTime,
                 caption = caption,
@@ -748,7 +748,7 @@ class SocialCalSingleUploadVid(APIView):
                 socialItemType = 'picture',
                 creator = user,
                 itemUser = user,
-                itemImage = djangoFile,
+                # itemImage = djangoFile,
                 video = request.data['video'],
                 created_at = curDateTime,
                 caption = caption,
@@ -757,7 +757,7 @@ class SocialCalSingleUploadVid(APIView):
 
 
         # socialCalItem.itemImage.save("new", djangoFile)
-        local_file.close()
+        # local_file.close()
         serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
 
 
