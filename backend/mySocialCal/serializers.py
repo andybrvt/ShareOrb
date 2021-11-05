@@ -374,7 +374,8 @@ class SmallGroupInfoSerializers(serializers.ModelSerializer):
             'description',
             'creator',
             'lat',
-            'long'
+            'long',
+            'address',
         )
 
     def to_representation(self, instance):
