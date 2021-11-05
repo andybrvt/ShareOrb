@@ -755,13 +755,11 @@ class SocialCalSingleUploadVid(APIView):
         # socialCalItem.itemImage.save("new", djangoFile)
         local_file.close()
         serializedItem = serializers.SocialCalItemsSerializer(socialCalItem).data
-        #
-        #
-        #
+
+
         content = {
              'item': serializedItem,
-             # "cellId": socialCalCellNew.id
-         }
+        }
 
         return Response(content)
 
