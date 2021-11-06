@@ -41,5 +41,6 @@ urlpatterns = [
     path('getClosestOrb', views.getClosestOrb.as_view(), name = "get_closest_or"),
     path('getSmallGroupInfo/<int:id>', views.getSmallGroupInfo.as_view(), name = "get_small_group_info"),
     path('getRandomPost', views.getRandomPost.as_view(), name = "get_random_post"),
-    path('getRandomOrbs', views.getRandomOrbs.as_view(), name = "get_random_orbs")
+    path('getRandomOrbs', views.getRandomOrbs.as_view(), name = "get_random_orbs"),
+    path("flagPost/<int:postId>", views.sendFlaggedPost.as_view(), name = "flag_post")
 ]

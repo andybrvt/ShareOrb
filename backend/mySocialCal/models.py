@@ -521,3 +521,9 @@ class SocialCellEventPost(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+
+# this modal is for flagged post
+class FlaggedPosts(models.Model):
+    post = models.ForeignKey(SocialCalItems, on_delete = models.CASCADE, related_name = "flagged_post")

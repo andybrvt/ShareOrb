@@ -1076,3 +1076,16 @@ class getRandomOrbs(APIView):
         serializedOrbs = serializers.MiniSmallGroupsSerializer(random_orbs, many = True).data
 
         return Response(serializedOrbs)
+
+# this function will be used to send flagged post
+class sendFlaggedPost(APIView):
+
+    def post(self, request, postId, *args, **kwargs):
+        post = get_object_or_404(models.SocialCalItems, id = postId)
+        flagPost = models.FlaggedPosts.objects.create(
+            post = post
+        )
+
+        flagPost.save()
+
+        return Response("flagged")
