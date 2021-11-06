@@ -1089,3 +1089,15 @@ class sendFlaggedPost(APIView):
         flagPost.save()
 
         return Response("flagged")
+
+# this function will be used to delete posts
+class deletePostMultiple(APIView):
+    def post(self, request, *args, **kwargs):
+
+
+        print(request.data['posts'])
+        for post in json.loads(request.data['posts']):
+            selPost = get_object_or_404(models.SocialCalItems, id = post)
+            selPost.delete()
+
+        return Response('deleted')
