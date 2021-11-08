@@ -43,5 +43,6 @@ urlpatterns = [
     path('getRandomPost', views.getRandomPost.as_view(), name = "get_random_post"),
     path('getRandomOrbs', views.getRandomOrbs.as_view(), name = "get_random_orbs"),
     path("flagPost/<int:postId>", views.sendFlaggedPost.as_view(), name = "flag_post"),
-    path("deletePostMultiple", views.deletePostMultiple.as_view(), name = "delete_post_multi")
+    path("deletePostMultiple", views.deletePostMultiple.as_view(), name = "delete_post_multi"),
+    path('blockUser', views.blockUser.as_view(), name = "block_user_from_orb")
 ]

@@ -1101,3 +1101,22 @@ class deletePostMultiple(APIView):
             selPost.delete()
 
         return Response('deleted')
+
+class blockUser(APIView):
+    # this function will be used to block the users from a specific orb
+
+    def post(self, request, *args, **kwargs):
+
+        print(request.data)
+
+        curUser = get_object_or_404(User, id = request.data['curUser'])
+
+
+        for orbs in json.loads(request.data['orbs']):
+            orb = get_object_or_404(models.SmallGroups, id = orbs)
+            orb.blocked.add(curUser)
+
+            orb.save()
+
+
+        return Response("block the users here")
