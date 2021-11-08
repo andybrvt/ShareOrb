@@ -1120,3 +1120,12 @@ class blockUser(APIView):
 
 
         return Response("block the users here")
+
+class checkBlocked(APIView):
+
+    def get(self, request, userId, groupId, *args, **kwargs):
+        user = get_object_or_404(User, id = userId)
+        orb = get_object_or_404(models.SmallGroups, id = groupId)
+
+        isBlocked = orb.blocked.filter(id = userId).exists()
+        return Response(isBlocked)
