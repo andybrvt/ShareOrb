@@ -19,10 +19,13 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from allauth.account.adapter import get_adapter
 from mySocialCal.serializers import SmallGroupsSerializers
 from mySocialCal.serializers import MiniSmallGroupsSerializer
+from django.core import files
 
 from django.utils.crypto import get_random_string
 from mySocialCal.models import SmallGroups
 from random import shuffle
+import requests
+import tempfile
 
 import pytz
 
@@ -1077,12 +1080,54 @@ class ChangeProfilePic(APIView):
 
     def post(self, request, *args, **kwargs):
 
-        print(request.user)
+        print(request.data['profilePic'])
 
         picture = request.data['profilePic']
         request.user.profile_picture = picture
         request.user.save()
         return Response('stuff here')
+
+class ChangeProfilePicURL(APIView):
+
+    def post(self, request, *args, **kwargs):
+
+        image_url = request.data['profilePic']
+
+        response = requests.get(image_url, stream=True)
+
+        if response.status_code != requests.codes.ok:
+            # Nope, error handling, skip file etc etc etc
+            return Response("error")
+
+
+        file_name = image_url.split('/')[-1]
+
+        file_name = file_name.split('?')[0]
+        lf = tempfile.NamedTemporaryFile()
+
+
+        for block in response.iter_content(1024 * 8):
+
+            # If no more file then stop
+            if not block:
+                break
+
+            # Write image block to temporary file
+            lf.write(block)
+
+
+        print(file_name)
+
+        # picture = request.data['profilePic']
+
+
+        request.user.profile_picture.save(file_name,files.File(lf))
+
+
+        return Response('stuff here')
+
+
+
 class DeleteUser(APIView):
     def post(self, request, username, *args, **kwargs):
 
