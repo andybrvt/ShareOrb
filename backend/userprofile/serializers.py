@@ -428,14 +428,14 @@ class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(required = True, write_only = True)
     first_name = serializers.CharField(required=True, write_only=True)
     # last_name = serializers.CharField(required=True, write_only=True)
-    dob = serializers.CharField(required=True, write_only=True)
+    # dob = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
     password1 = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
 
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'dob', 'first_name',
+        fields = ('id', 'username', 'first_name',
         # 'last_name',
          # 'email',
          'password1 ', 'password2')
