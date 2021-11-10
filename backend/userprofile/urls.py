@@ -115,6 +115,7 @@ urlpatterns = [
 	path("validateUsername/<slug:username>", views.ValidateUsername.as_view(), name = "validate_username"),
 	path("validateEmail", views.ValidateEmail.as_view(), name = "validate_email"),
 	path("changeProfilePic", views.ChangeProfilePic.as_view(), name = "change_profile_pic"),
+	path("changeProfilePicURL", views.ChangeProfilePicURL.as_view(), name = "change_profile_pic"),
 	path("randomRecentSuggest", views.RandomRecentSuggestedUsers.as_view(), name = "random_recent_suggested"),
 	path("addRecentOrb/<slug:id>", views.AddRecentOrb.as_view(), name = "add_recent_orb")
 ]
