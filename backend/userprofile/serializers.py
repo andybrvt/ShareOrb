@@ -14,6 +14,7 @@ from mySocialCal.serializers import SocialCalItemsSerializer
 from mySocialCal.serializers import SmallGroupsSerializers
 from mySocialCal.serializers import SmallGroupInfoSerializers
 from mySocialCal.serializers import SmallGroupsExploreSerializers
+from mySocialCal.serializers import NotificationSmallGroupSerializers
 from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
@@ -429,13 +430,14 @@ class RegisterSerializer(serializers.Serializer):
     first_name = serializers.CharField(required=True, write_only=True)
     # last_name = serializers.CharField(required=True, write_only=True)
     # dob = serializers.CharField(required=True, write_only=True)
+    isOtherAccount = serializers.BooleanField(required = True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
     password1 = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
 
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name',
+        fields = ('id', 'username', 'first_name', 'isOtherAccount',
         # 'last_name',
          # 'email',
          'password1 ', 'password2')
@@ -533,7 +535,7 @@ class NewNotificationSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['groupInvite'] = SmallGroupsExploreSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
+        data['groupInvite'] = NotificationSmallGroupSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
         data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
 
         return data

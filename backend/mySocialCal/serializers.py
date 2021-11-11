@@ -459,6 +459,15 @@ class MemberGroupSerializer(serializers.ModelSerializer):
         data['members'] = members
         return data
 
+class NotificationSmallGroupSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SmallGroups
+        fields  = (
+            'id',
+            "group_name",
+
+        )
 
 class SmallGroupsExploreSerializers(serializers.ModelSerializer):
 

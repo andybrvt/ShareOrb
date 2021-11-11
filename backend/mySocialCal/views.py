@@ -1129,3 +1129,31 @@ class checkBlocked(APIView):
 
         isBlocked = orb.blocked.filter(id = userId).exists()
         return Response(isBlocked)
+
+
+class socialCalItemLike(APIView):
+    def post(self, request, postId, userId, *args, **kwargs):
+
+        post = get_object_or_404(models.SocialCalItems, id = postId)
+        user = get_object_or_404(User, id = userId)
+
+        post.people_like.add(user)
+        post.save()
+
+
+        likeList = serializers.SocialItemGlobeSerializer(post, many = False).data['people_like']
+        return Response(likeList)
+
+
+
+class socialCalItemUnlike(APIView):
+    def post(self, request, postId, userId, *args, **kwargs):
+
+        post = get_object_or_404(models.SocialCalItems, id = postId)
+        user = get_object_or_404(User, id = userId)
+
+        post.people_like.remove(user)
+        post.save()
+
+        likeList = serializers.SocialItemGlobeSerializer(post, many = False).data['people_like']
+        return Response(likeList)

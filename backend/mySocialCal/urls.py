@@ -45,5 +45,7 @@ urlpatterns = [
     path("flagPost/<int:postId>", views.sendFlaggedPost.as_view(), name = "flag_post"),
     path("deletePostMultiple", views.deletePostMultiple.as_view(), name = "delete_post_multi"),
     path('blockUser', views.blockUser.as_view(), name = "block_user_from_orb"),
-    path('checkBlocked/<int:userId>/<int:groupId>', views.checkBlocked.as_view(), name = "check_blocked_user")
+    path('checkBlocked/<int:userId>/<int:groupId>', views.checkBlocked.as_view(), name = "check_blocked_user"),
+    path('socialCalItemLike/<int:postId>/<int:userId>', views.socialCalItemLike.as_view(), name = "social_cal_item_like"),
+    path("socialCalItemUnlike/<int:postId>/<int:userId>", views.socialCalItemUnlike.as_view(), name = "social_cal_item_unlike")
 ]
