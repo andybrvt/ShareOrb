@@ -112,7 +112,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
         print(data, 'data her')
         actor = get_object_or_404(User, id = data['actor'])
         recipient = get_object_or_404(User, id = data['recipient'])
-        globePost = get_object_or_404(GlobeItems, id = data['postId'])
+        globePost = get_object_or_404(SocialCalItems, id = data['postId'])
 
 
         notification = CustomNotification.objects.create(
@@ -120,8 +120,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             recipient = recipient,
             actor = actor,
             verb = 'like your post in',
-            post = globePost.post,
-            groupInvite = globePost.group
+            post = globePost,
+            groupInvite = globePost.smallGroup
         )
 
         serializer = NewNotificationSerializer(notification).data
