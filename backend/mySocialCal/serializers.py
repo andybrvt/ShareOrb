@@ -112,7 +112,6 @@ class DetailSocialCalItemsSerializer(serializers.ModelSerializer):
         model = models.SocialCalItems
         fields = (
         'id',
-        'socialItemType',
         'created_at',
         'creator',
         'itemUser',
@@ -120,9 +119,7 @@ class DetailSocialCalItemsSerializer(serializers.ModelSerializer):
         'video',
         "caption",
         "people_like",
-        "calCell",
         "get_socialCalItemComment",
-        'goal',
         'smallGroup'
          )
 
@@ -130,25 +127,7 @@ class DetailSocialCalItemsSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
 
-        cal_likes = []
-        cal_comments = []
-
-
-        for likes in data['people_like']:
-            like = SocialCalUserSerializer(User.objects.get(id = likes)).data
-            cal_likes.append(like)
-
-        for comments in data['get_socialCalItemComment']:
-            comment = SocialItemCommentSerializer(models.SocialCalItemComment.objects.get(id = comments)).data
-            cal_comments.append(comment)
-
-
-        if(data['goal']):
-            data['goal'] = GoalAlbumStringMiniSerializer(models.GoalAlbumString.objects.get(id= data['goal'])).data
-
-        data['people_like'] = cal_likes
-        data['get_socialCalItemComment'] = cal_comments
-
+        data['smallGroup'] = MiniSmallGroupsSerializer(models.SmallGroups.objects.get(id = data['smallGroup'])).data
         return data
 
 class SocialCalItemsSerializer(serializers.ModelSerializer):
