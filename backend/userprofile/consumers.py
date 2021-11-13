@@ -30,6 +30,7 @@ from mySocialCal.models import SocialCalComment
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
 from mySocialCal.models import SmallGroups
+from mySocialCal.models import GlobeItems
 from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
 from mySocialCal.serializers import SocialCalEventSerializer
@@ -105,27 +106,31 @@ class NotificationConsumer(JsonWebsocketConsumer):
         return self.send_new_notification(content)
 
     def send_group_like_notification(self, data):
+
+        # used for the globe page
+
+        print(data, 'data her')
         actor = get_object_or_404(User, id = data['actor'])
         recipient = get_object_or_404(User, id = data['recipient'])
-        post = get_object_or_404(SocialCalItems, id = data['postId'])
+        globePost = get_object_or_404(SocialCalItems, id = data['postId'])
+
 
         notification = CustomNotification.objects.create(
             type = "group_post_like",
             recipient = recipient,
             actor = actor,
             verb = 'like your post in',
-            post = post,
-            groupInvite = post.smallGroup
+            post = globePost,
+            groupInvite = globePost.smallGroup
         )
-        print(notification, 'notification here')
 
         serializer = NewNotificationSerializer(notification).data
-
+        #
         print(serializer)
-
+        #
         recipient.notificationSeen += 1
         recipient.save()
-
+        #
         content = {
             "command": 'new_notification',
             "notification": json.dumps(serializer),
@@ -765,10 +770,13 @@ class NotificationConsumer(JsonWebsocketConsumer):
         # it includes the liking and commenting
         if data['command'] == 'send_group_invite_notification':
             self.send_group_invite_notification(data)
-        if data['command'] == 'group_like_notifcation':
+        if data['command'] == 'group_like_notification':
             self.send_group_like_notification(data)
         if data['command'] == 'group_comment_notification':
             self.send_group_comment_notification(data)
+
+
+
 
 
     def new_notification(self, event):

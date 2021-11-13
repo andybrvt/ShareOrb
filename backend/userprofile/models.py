@@ -73,18 +73,11 @@ class User(AbstractUser):
 
     # DELETE THIS LATER
     friends = models.ManyToManyField("self", blank=True, related_name = 'friends')
-    # Private will handle wheter or not the account is private and other people
-    # are allow to see it or not
     private = models.BooleanField(default = False)
 
-    # This is for when you make your account private, and this field will have people
-    # that request to see your page
+    # this function will be used to check if the account is made from another account
+    isOtherAccount = models.BooleanField(default = False)
 
-    # This does not work that well bc if you create a reqeust, then it would show
-    # up on both peoples request so you dont want that.
-    # The way you want to do this is make a request model so that each request can
-    # be shared and added and each person would have a list of request instead
-    # of both poeple getting a request like ManyToManyField
     requested = models.ManyToManyField("self", blank = True, related_name = "private_approved")
 
     # This will be used to show the instructions at the beginning of the login
