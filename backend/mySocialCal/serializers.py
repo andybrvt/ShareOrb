@@ -101,7 +101,16 @@ class SocialCalUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture', "notificationToken")
+        fields = (
+        'id',
+        'username',
+        'first_name',
+        'last_name',
+        'profile_picture',
+        "notificationToken",
+        "secondUsername",
+        "isOtherAccount"
+        )
 
 class DetailSocialCalItemsSerializer(serializers.ModelSerializer):
     # this function will be for pulling specific post id

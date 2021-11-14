@@ -65,7 +65,16 @@ class FollowUserSerializer(serializers.ModelSerializer):
     # This is for the follower and followering list
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'last_name', 'profile_picture', "notificationToken")
+        fields = (
+        'id',
+        'username',
+        'first_name',
+        'last_name',
+        'profile_picture',
+        "notificationToken",
+        "secondUsername",
+        "isOtherAccount"
+        )
 
 
 class SuggestedUserSerializer(serializers.ModelSerializer):
