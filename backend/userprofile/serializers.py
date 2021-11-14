@@ -117,7 +117,9 @@ class UserSerializer(serializers.ModelSerializer):
          "date_joined",
          'inviteCode',
          'get_small_groups',
-         'recentOrbs'
+         'recentOrbs',
+         "secondUsername",
+         "isOtherAccount"
          )
 
 
@@ -250,7 +252,9 @@ class UserExploreSerializer(serializers.ModelSerializer):
          'dob',
          'private',
          'get_small_groups',
-         'recentOrbs'
+         'recentOrbs',
+         "secondUsername",
+         "isOtherAccount"
          # 'requested',
          # 'get_sent_follow_request',
          # 'get_follow_request',
@@ -322,7 +326,7 @@ class UserSocialCalSerializer(serializers.ModelSerializer):
 class SimpleProfileEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ('profile_picture', 'username', 'first_name', 'bio')
+        fields = ('profile_picture', 'username', 'first_name', "secondUsername", 'bio')
 
 
 
