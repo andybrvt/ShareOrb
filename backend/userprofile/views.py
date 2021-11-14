@@ -1120,7 +1120,12 @@ class ChangeProfilePicURL(APIView):
 
         # picture = request.data['profilePic']
 
-
+        if(request.data['username']):
+            request.user.secondUsername = request.data['username']
+            request.user.save()
+        if(request.data['isOtherAccount']):
+            request.user.isOtherAccount = True
+            request.user.save()
         request.user.profile_picture.save(file_name,files.File(lf))
 
 

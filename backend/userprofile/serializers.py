@@ -436,7 +436,7 @@ class RegisterSerializer(serializers.Serializer):
 
     class Meta:
         model = models.User
-        fields = ('id', 'username', 'first_name', 'isOtherAccount',
+        fields = ('id', 'username', 'first_name',
         # 'last_name',
          # 'email',
          'dob',

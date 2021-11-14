@@ -77,6 +77,7 @@ class User(AbstractUser):
 
     # this function will be used to check if the account is made from another account
     isOtherAccount = models.BooleanField(default = False)
+    secondUsername = models.CharField(blank = True, null = True, max_length = 260)
 
     requested = models.ManyToManyField("self", blank = True, related_name = "private_approved")
 
