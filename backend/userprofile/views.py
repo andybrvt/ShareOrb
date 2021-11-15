@@ -72,6 +72,16 @@ class UserDetailView(generics.RetrieveAPIView):
     lookup_field = 'username'
     serializer_class= serializers.UserExploreSerializer
 
+
+class UserIdDetailView(APIView):
+
+    def get(self, request,id, *args, **kwargs):
+        
+        user = get_object_or_404(models.User, id = id)
+
+        serializedUser = serializers.UserExploreSerializer(user, many = False).data
+        return Response(serializedUser)
+
 # Create a post with ALL the functions
 class PostListView(viewsets.ModelViewSet):
 	queryset = models.Post.objects.all().order_by('-created_at', '-updated_at')

@@ -33,6 +33,7 @@ urlpatterns = [
 	path('current-user/', views.current_user),
 	path('grabCurrentUser/', views.GrabCurrentUser.as_view()),
 	path('<slug:username>/', views.UserDetailView.as_view()),
+	path('user/<int:id>/', views.UserIdDetailView.as_view()),
 	path('all-users', views.ListAll.as_view()),
 	path('user/delete/<slug:username>', views.DeleteUser.as_view(), name = "delete_user"),
 	path('friend-request-list', views.FriendRequestList.as_view(), name="friend_request"),
