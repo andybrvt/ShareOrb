@@ -47,5 +47,7 @@ urlpatterns = [
     path('blockUser', views.blockUser.as_view(), name = "block_user_from_orb"),
     path('checkBlocked/<int:userId>/<int:groupId>', views.checkBlocked.as_view(), name = "check_blocked_user"),
     path('socialCalItemLike/<int:postId>/<int:userId>', views.socialCalItemLike.as_view(), name = "social_cal_item_like"),
-    path("socialCalItemUnlike/<int:postId>/<int:userId>", views.socialCalItemUnlike.as_view(), name = "social_cal_item_unlike")
+    path("socialCalItemUnlike/<int:postId>/<int:userId>", views.socialCalItemUnlike.as_view(), name = "social_cal_item_unlike"),
+    path("orbGroup/<int:orbId>",views.getOrbGroup.as_view(), name = "get_orb_group"),
+    path("updateOrb/<int:orbId>", views.updateOrb.as_view(), name = "update_orb")
 ]

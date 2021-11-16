@@ -1157,3 +1157,29 @@ class socialCalItemUnlike(APIView):
 
         likeList = serializers.SocialItemGlobeSerializer(post, many = False).data['people_like']
         return Response(likeList)
+
+class getOrbGroup(APIView):
+
+    def get(self, request, orbId, *args, **kwargs):
+        orb = get_object_or_404(models.SmallGroups, id = orbId)
+        serializedOrb = serializers.SmallGroupInfoSerializers(orb, many = False).data
+
+        print(serializedOrb)
+
+        return Response(serializedOrb)
+
+class updateOrb(APIView):
+    def post(self, request, orbId, *args, **kwargs):
+
+        print(request.data)
+        orb = get_object_or_404(models.SmallGroups, id = orbId)
+
+        orb.lat = request.data['latitude']
+        orb.long = request.data['longitude']
+        orb.address = request.data['address']
+
+
+        orb.save()
+
+        serializedOrb = serializers.SmallGroupInfoSerializers(orb, many = False).data
+        return Response(serializedOrb)
