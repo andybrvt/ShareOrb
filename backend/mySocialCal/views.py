@@ -1071,9 +1071,9 @@ class getRandomOrbs(APIView):
 
         orbList = list(models.SmallGroups.objects.all())
 
-        random_orbs = random.sample(orbList, 3)
+        # random_orbs = random.sample(orbList, 3)
 
-        serializedOrbs = serializers.MiniSmallGroupsSerializer(random_orbs, many = True).data
+        serializedOrbs = serializers.MiniSmallGroupsSerializer(orbList, many = True).data
 
         return Response(serializedOrbs)
 
@@ -1183,3 +1183,17 @@ class updateOrb(APIView):
 
         serializedOrb = serializers.SmallGroupInfoSerializers(orb, many = False).data
         return Response(serializedOrb)
+
+class fetchOrbPost(APIView):
+    def get(self, request, orbId, *args, **kwargs):
+        group = get_object_or_404(models.SmallGroups, id = orbId)
+        getPost = models.SocialCalItems.objects.filter(smallGroup = group)[:6]
+        serializedPost = serializers.SocialCalItemsSerializer(getPost, many = True).data
+        serializedGroup = serializers.MiniSmallGroupsSerializer(group).data
+
+        content = {
+            "group":serializedGroup,
+            "posts": serializedPost
+        }
+
+        return Response(content)

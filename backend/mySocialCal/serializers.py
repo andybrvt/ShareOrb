@@ -443,7 +443,6 @@ class MemberGroupSerializer(serializers.ModelSerializer):
 
             member = data['members'] = SocialCalUserSerializer(User.objects.get(id = people)).data
             members.append(member)
-
         data['members'] = members
         return data
 
@@ -499,7 +498,8 @@ class MiniSmallGroupsSerializer(serializers.ModelSerializer):
             "group_name",
             "groupPic",
             "public",
-            'creator'
+            'creator',
+            'members'
         )
 
 class GlobeItemSerializer(serializers.ModelSerializer):

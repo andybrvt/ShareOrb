@@ -137,7 +137,7 @@ class User(AbstractUser):
 
     def get_small_groups(self):
         # this will grap all the users small groups
-        return SmallGroups.objects.filter(creator = self).values_list('id', flat = True)
+        return SmallGroups.objects.filter(members__in = [self]).values_list('id', flat = True)
         # return SmallGroups.objects.filter(id = 2).values_list('id', flat = True)
 
     def __str__(self):
