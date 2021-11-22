@@ -725,35 +725,17 @@ class SocialCalSingleUploadVid(APIView):
         # djangoFile = File(local_file)
         # print(djangoFile)
 
-        if(request.data['goalId'] != "undefined"):
-            goal = get_object_or_404(models.GoalAlbumString, id = int(request.data['goalId']))
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                # itemImage = djangoFile,
-                video = request.data['video'],
-                created_at = curDateTime,
-                caption = caption,
-                goal = goal,
-                smallGroup = group
-            )
-
-
-
-
-        else:
             # Now you add a single picture in
-            socialCalItem = models.SocialCalItems.objects.create(
-                socialItemType = 'picture',
-                creator = user,
-                itemUser = user,
-                # itemImage = djangoFile,
-                video = request.data['video'],
-                created_at = curDateTime,
-                caption = caption,
-                smallGroup = group
-            )
+        socialCalItem = models.SocialCalItems.objects.create(
+            socialItemType = 'picture',
+            creator = user,
+            itemUser = user,
+            # itemImage = djangoFile,
+            video = request.data['video'],
+            created_at = curDateTime,
+            caption = caption,
+            smallGroup = group
+        )
 
 
         # socialCalItem.itemImage.save("new", djangoFile)
@@ -890,7 +872,7 @@ class JoinSmallGroup(APIView):
 
         group.save()
 
-        serializedGroup = serializers.SmallGroupsSerializers(group, many = False).data
+        serializedGroup = serializers.MiniSmallGroupsSerializer(group, many = False).data
 
 
         return Response(serializedGroup)
