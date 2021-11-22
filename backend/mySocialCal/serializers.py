@@ -364,12 +364,14 @@ class SmallGroupInfoSerializers(serializers.ModelSerializer):
             'lat',
             'long',
             'address',
+            'members'
         )
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
 
         data['creator'] = SocialCalUserSerializer(User.objects.get(id = data['creator'])).data
+
 
         return data
 
