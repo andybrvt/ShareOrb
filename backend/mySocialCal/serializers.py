@@ -501,6 +501,18 @@ class MiniSmallGroupsSerializer(serializers.ModelSerializer):
             'creator',
             'members'
         )
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        member_list = []
+        for members in data['members']:
+            member = SocialCalUserSerializer(User.objects.get(id = members)).data
+            member_list.append(member)
+
+        data['mini_member'] = member_list
+
+        return data
+
 
 class GlobeItemSerializer(serializers.ModelSerializer):
 
