@@ -18,6 +18,9 @@ class UserRequest(models.Model):
     people_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name = "request_liker", blank = True)
     response = models.ForeignKey(UserResponse, related_name = "response", on_delete = models.CASCADE, null = True)
 
+    class Meta:
+        ordering = ['-created_at']
+
 
 
 
