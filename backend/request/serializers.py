@@ -5,6 +5,8 @@ from mySocialCal.serializers import SocialCalUserSerializer
 
 class UserRequestSerializer(serializers.ModelSerializer):
 
+    get_requestComments = serializers.StringRelatedField(many= True)
+
     class Meta:
         model = models.UserRequest
         fields = (
@@ -13,10 +15,24 @@ class UserRequestSerializer(serializers.ModelSerializer):
             'request',
             'created_at',
             'people_like',
-            'response'
+            'response',
+            'get_requestComments'
         )
     def to_representation(self, instance):
         data = super().to_representation(instance)
 
         data['requester'] = SocialCalUserSerializer(User.objects.get(id = data['requester'])).data
+        return data
+
+
+class RequestItemCommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.RequestComment
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['commentUser'] = SocialCalUserSerializer(User.objects.get(id = data['commentUser'])).data
+
         return data

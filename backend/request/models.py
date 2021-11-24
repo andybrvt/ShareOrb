@@ -21,6 +21,8 @@ class UserRequest(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+    def get_requestComments(self):
+        return RequestComment.objects.filter(request = self).values_list('id', flat = True)
 
 
 
