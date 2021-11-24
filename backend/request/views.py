@@ -32,3 +32,48 @@ class postRequest(APIView):
 
         serializedRequest = serializers.UserRequestSerializer(request).data
         return Response(serializedRequest)
+
+class postResponse(APIView):
+    def post(self, request, userId, requestId, *args, **kwargs):
+
+        print(userId, requestId)
+
+        print(request.data['video'])
+        user = get_object_or_404(User, id = userId)
+        response = models.UserResponse.objects.create(
+            responder = user,
+            video = request.data['video']
+        )
+
+        request = get_object_or_404(models.UserRequest, id = requestId)
+
+        request.response = response
+        request.save()
+
+        return Response('stuff here')
+
+class likeRequest(APIView):
+    def post(self, request, userId, requestId, *args, **kwargs):
+        print(userId, requestId)
+        user = get_object_or_404(User, id = userId)
+        request = get_object_or_404(models.UserRequest, id = requestId)
+
+        request.people_like.add(user)
+        request.save()
+
+
+
+        return Response(userId)
+
+class unlikeRequest(APIView):
+    def post(self, request, userId, requestId, *args, **kwargs):
+
+        user = get_object_or_404(User, id = userId)
+        request = get_object_or_404(models.UserRequest, id = requestId)
+
+        request.people_like.remove(user)
+        request.save()
+
+        serializedRequest = serializers.UserRequestSerializer(request).data
+
+        return Response(serializedRequest['people_like'])
