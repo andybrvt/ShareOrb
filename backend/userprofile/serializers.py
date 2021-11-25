@@ -20,6 +20,8 @@ from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SocialCalItems
 from mySocialCal.models import SmallGroups
 from mySocialCal.serializers import SocialCalEventSerializer
+from request.serializers import ResponseVideoSerializers
+from request.models import UserResponse
 # Used in React infinite in views.py
 # Purpose: Grabbing fields of both person info and post info
 class PostUserSerializer(serializers.ModelSerializer):
@@ -128,7 +130,8 @@ class UserSerializer(serializers.ModelSerializer):
          'get_small_groups',
          'recentOrbs',
          "secondUsername",
-         "isOtherAccount"
+         "isOtherAccount",
+         "get_responses"
          )
 
 
@@ -140,6 +143,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         smallGroups = []
         orbsGroup = []
+        responseList = []
 
         for groups in data['get_small_groups']:
             groups = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
@@ -149,9 +153,13 @@ class UserSerializer(serializers.ModelSerializer):
             orb = SmallGroupInfoSerializers(SmallGroups.objects.get(id = int(orbs))).data
             orbsGroup.append(orb)
 
+        for responses in data['get_responses']:
+            response = ResponseVideoSerializers(UserResponse.objects.get(id = responses)).data
+            responseList.append(response)
 
         data['id_small_groups'] = data['get_small_groups']
         data['get_small_groups'] = smallGroups
+        data['get_responses'] = responseList
         data['recentOrbs'] = orbsGroup
         return data
 
@@ -192,7 +200,8 @@ class UserExploreMobileSerializer(serializers.ModelSerializer):
          'requested',
          'get_sent_follow_request',
          'get_follow_request',
-         'notificationToken'
+         'notificationToken',
+
         )
 
     def to_representation(self, instance):

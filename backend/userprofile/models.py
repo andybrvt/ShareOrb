@@ -11,6 +11,7 @@ from mySocialCal.models import SocialCalCell
 from mySocialCal.models import SocialCalEvent
 from mySocialCal.models import SmallGroups
 from mySocialCal.models import SocialCalItems
+from request.models import UserResponse
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -139,6 +140,9 @@ class User(AbstractUser):
         # this will grap all the users small groups
         return SmallGroups.objects.filter(members__in = [self]).values_list('id', flat = True)
         # return SmallGroups.objects.filter(id = 2).values_list('id', flat = True)
+
+    def get_responses(self):
+        return UserResponse.objects.filter(responder = self).values_list('id', flat = True)
 
     def __str__(self):
         return self.username

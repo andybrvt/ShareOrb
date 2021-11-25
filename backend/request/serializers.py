@@ -36,3 +36,12 @@ class RequestItemCommentSerializer(serializers.ModelSerializer):
         data['commentUser'] = SocialCalUserSerializer(User.objects.get(id = data['commentUser'])).data
 
         return data
+
+class ResponseVideoSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.UserResponse
+        fields = (
+            "id",
+            "video"
+        )
