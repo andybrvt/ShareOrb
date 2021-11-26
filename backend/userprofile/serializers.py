@@ -272,10 +272,8 @@ class UserExploreSerializer(serializers.ModelSerializer):
          'get_small_groups',
          'recentOrbs',
          "secondUsername",
-         "isOtherAccount"
-         # 'requested',
-         # 'get_sent_follow_request',
-         # 'get_follow_request',
+         "isOtherAccount",
+         "get_responses"
         )
 
     def to_representation(self, instance):
@@ -283,6 +281,8 @@ class UserExploreSerializer(serializers.ModelSerializer):
 
         orbsGroup = []
         smallGroups = []
+        responseList = []
+
 
         for groups in data['get_small_groups']:
             group = SmallGroupsSerializers(SmallGroups.objects.get(id = int(groups))).data
@@ -290,8 +290,14 @@ class UserExploreSerializer(serializers.ModelSerializer):
         for orbs in data['recentOrbs']:
             orb = SmallGroupInfoSerializers(SmallGroups.objects.get(id = int(orbs))).data
             orbsGroup.append(orb)
+        for responses in data['get_responses']:
+            response = ResponseVideoSerializers(UserResponse.objects.get(id = responses)).data
+            responseList.append(response)
+
         data['get_small_groups'] = smallGroups
         data['recentOrbs'] = orbsGroup
+        data['get_responses'] = responseList
+
 
 
         return data
