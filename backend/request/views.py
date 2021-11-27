@@ -13,7 +13,16 @@ class getRequests(APIView):
 
         print('here here')
 
-        request = models.UserRequest.objects.all()
+        request = models.UserRequest.objects.all()[:6]
+
+        serializedRequest = serializers.UserRequestSerializer(request, many = True).data
+
+        return Response(serializedRequest)
+
+class loadMoreRequest(APIView):
+
+    def get(self, request, start, addMore, *args, **kwargs):
+        request = models.UserRequest.objects.all()[start:start+addMore]
 
         serializedRequest = serializers.UserRequestSerializer(request, many = True).data
 
@@ -25,6 +34,9 @@ class postRequest(APIView):
     def post(self, request, userId, *args, **kwargs):
 
         user = get_object_or_404(User, id = userId)
+
+        user.showIntialInstructions = False
+        user.save()
         request = models.UserRequest.objects.create(
             requester = user,
             request = request.data['userRequest'],
