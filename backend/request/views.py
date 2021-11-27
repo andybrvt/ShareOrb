@@ -89,3 +89,13 @@ class unlikeRequest(APIView):
         serializedRequest = serializers.UserRequestSerializer(request).data
 
         return Response(serializedRequest['people_like'])
+
+class getSingleRequest(APIView):
+
+    def get(self, request, requestId, *args, **kwargs):
+
+        request = get_object_or_404(models.UserRequest, id = requestId)
+
+        serializedRequest = serializers.UserRequestSerializer(request).data
+
+        return Response(serializedRequest)
