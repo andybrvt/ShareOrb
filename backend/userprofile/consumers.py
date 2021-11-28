@@ -703,6 +703,33 @@ class NotificationConsumer(JsonWebsocketConsumer):
         return self.send_new_notification(content)
 
 
+    def send_request_response_notification(self, data):
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        request = get_object_or_404(UserRequest, id = data['requestId'])
+
+        notification = CustomNotification.objects.create(
+            type = "request_response",
+            recipient = recipient,
+            actor = actor,
+            verb = "liked your request",
+            request = request
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
+
+
     def send_new_notification(self, notification):
         # Send message to room group
         # You want to send it to the right group channel layer so because of that
@@ -840,7 +867,8 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_request_like_notification(data)
         if data['command'] == "request_comment_notification":
             self.send_request_comment_notification(data)
-
+        if data['command'] == "request_response_notification":
+            self.send_request_response_notification(data)
 
 
     def new_notification(self, event):
