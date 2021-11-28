@@ -558,12 +558,35 @@ class NewNotificationSerializer(serializers.ModelSerializer):
             "verb",
             'timestamp',
             "groupInvite",
-            "post"
+            "post",
+            "request"
         )
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['groupInvite'] = NotificationSmallGroupSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
+        # data['groupInvite'] = NotificationSmallGroupSerializers(SmallGroups.objects.get(id = data['groupInvite'])).data
+        data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
+
+        return data
+
+class RequestNotificationSerializer(serializers.ModelSerializer):
+    # This will be the new notification that will consist
+    # of just the group invite now and just group centric moving forward
+
+    class Meta:
+        model = CustomNotification
+        fields = (
+            "id",
+            "type",
+            "recipient",
+            "actor",
+            "verb",
+            'timestamp',
+            'request'
+        )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
         data['actor'] = FollowUserSerializer(models.User.objects.get(pk=data['actor'])).data
 
         return data

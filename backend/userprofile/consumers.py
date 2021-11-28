@@ -5,6 +5,7 @@ from django.forms import model_to_dict
 from asgiref.sync import async_to_sync
 from .serializers import NotificationSerializer
 from .serializers import NewNotificationSerializer
+from .serializers import RequestNotificationSerializer
 from .serializers import PostSerializer
 from .serializers import NewPostSerializer
 from .serializers import CommentSerializer
@@ -35,6 +36,7 @@ from mySocialCal.serializers import SocialCalCellSerializer
 from mySocialCal.serializers import SocialCalCommentSerializer
 from mySocialCal.serializers import SocialCalEventSerializer
 from mySocialCal.serializers import SmallGroupsExploreSerializers
+from request.models import UserRequest
 from .serializers import UserSocialCalSerializer
 from django.utils import timezone
 
@@ -643,6 +645,63 @@ class NotificationConsumer(JsonWebsocketConsumer):
         self.send_event_sync_notification(content)
 
 
+    def send_request_like_notification(self, data):
+
+        print(data, 'herehere')
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        request = get_object_or_404(UserRequest, id = data['requestId'])
+
+        notification = CustomNotification.objects.create(
+            type = "request_like",
+            recipient = recipient,
+            actor = actor,
+            verb = "liked your request",
+            request = request
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
+
+
+    def send_request_comment_notification(self, data):
+
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        request = get_object_or_404(UserRequest, id = data['requestId'])
+
+        notification = CustomNotification.objects.create(
+            type = "request_comment",
+            recipient = recipient,
+            actor = actor,
+            verb = "commented on your request",
+            request = request
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
+
 
     def send_new_notification(self, notification):
         # Send message to room group
@@ -776,6 +835,11 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_group_comment_notification(data)
 
 
+        # notification for recker
+        if data['command'] == "request_like_notification":
+            self.send_request_like_notification(data)
+        if data['command'] == "request_comment_notification":
+            self.send_request_comment_notification(data)
 
 
 
