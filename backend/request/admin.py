@@ -5,3 +5,4 @@ from . import models
 admin.site.register(models.UserResponse)
 admin.site.register(models.UserRequest)
 admin.site.register(models.RequestComment)
+admin.site.register(models.FlaggedRequests)

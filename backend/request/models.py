@@ -31,3 +31,7 @@ class RequestComment(models.Model):
     body = models.TextField(blank = True)
     created_on = models.DateTimeField(auto_now_add = True)
     commentUser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name= "request_comment_user", on_delete = models.CASCADE, null = True)
+
+
+class FlaggedRequests(models.Model):
+    request = models.ForeignKey(UserRequest, on_delete = models.CASCADE, related_name = "flagged_request")

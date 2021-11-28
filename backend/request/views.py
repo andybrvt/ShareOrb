@@ -99,3 +99,16 @@ class getSingleRequest(APIView):
         serializedRequest = serializers.UserRequestSerializer(request).data
 
         return Response(serializedRequest)
+
+class sendFlaggedRequest(APIView):
+
+    def post(self, request, requestId, *args, **kwargs):
+
+        requestObj = get_object_or_404(models.UserRequest, id = requestId)
+        flagRequest = models.FlaggedRequests.objects.create(
+            request = requestObj
+        )
+
+        flagRequest.save()
+
+        return Response("flagged")
