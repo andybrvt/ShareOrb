@@ -101,6 +101,8 @@ class User(AbstractUser):
 
     recentOrbs = models.ManyToManyField(SmallGroups, blank= True, related_name = "recent_orbs")
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
+
+    blocked = models.ManyToManyField('self', blank = True, related_name = "blocked_users")
     def get_posts(self):
 
         return Post.objects.filter(user=self).values_list('id', flat=True)

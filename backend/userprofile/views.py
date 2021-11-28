@@ -76,7 +76,7 @@ class UserDetailView(generics.RetrieveAPIView):
 class UserIdDetailView(APIView):
 
     def get(self, request,id, *args, **kwargs):
-        
+
         user = get_object_or_404(models.User, id = id)
 
         serializedUser = serializers.UserExploreSerializer(user, many = False).data
@@ -1198,3 +1198,30 @@ class AddRecentOrb(APIView):
 
 
         return Response("done")
+
+
+class AddToBlocked(APIView):
+
+    def post(self, request, userId, *args, **kwargs):
+
+        blocked = get_object_or_404(models.User, id = userId)
+
+        curUser = get_object_or_404(models.User, id = request.user.id)
+        curUser.blocked.add(blocked)
+        curUser.save()
+
+        return Response("blocked")
+
+
+class CheckBlocked(APIView):
+
+    def get(self, request, userId, *args, **kwargs):
+
+        # person you are entering the page to
+        user = get_object_or_404(models.User, id = userId)
+
+        profile = get_object_or_404(models.User, id = request.user.id)
+
+        isBlocked = user.blocked.filter(id = request.user.id).exists()
+
+        return Response(isBlocked)

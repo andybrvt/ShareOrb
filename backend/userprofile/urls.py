@@ -118,5 +118,8 @@ urlpatterns = [
 	path("changeProfilePic", views.ChangeProfilePic.as_view(), name = "change_profile_pic"),
 	path("changeProfilePicURL", views.ChangeProfilePicURL.as_view(), name = "change_profile_pic"),
 	path("randomRecentSuggest", views.RandomRecentSuggestedUsers.as_view(), name = "random_recent_suggested"),
-	path("addRecentOrb/<slug:id>", views.AddRecentOrb.as_view(), name = "add_recent_orb")
+	path("addRecentOrb/<slug:id>", views.AddRecentOrb.as_view(), name = "add_recent_orb"),
+	path("addToBlocked/<slug:userId>", views.AddToBlocked.as_view(), name = "add_to_blocked"),
+	path("checkBlocked/<slug:userId>", views.CheckBlocked.as_view(), name = "check_recently_blocked"),
+
 ]
