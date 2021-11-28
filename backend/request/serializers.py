@@ -22,6 +22,8 @@ class UserRequestSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
 
         data['requester'] = SocialCalUserSerializer(User.objects.get(id = data['requester'])).data
+        if(data['response']):
+            data['response'] = ResponseDetailSerializers(models.UserResponse.objects.get(id = data['response'])).data
         return data
 
 
@@ -45,3 +47,18 @@ class ResponseVideoSerializers(serializers.ModelSerializer):
             "id",
             "video"
         )
+
+class ResponseDetailSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.UserResponse
+        fields = (
+            "id",
+            "video",
+            'responder'
+        )
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['responder'] = SocialCalUserSerializer(User.objects.get(id = data['responder'])).data
+
+        return data
