@@ -50,5 +50,6 @@ urlpatterns = [
     path("socialCalItemUnlike/<int:postId>/<int:userId>", views.socialCalItemUnlike.as_view(), name = "social_cal_item_unlike"),
     path("fetchOrbPost/<int:orbId>",views.fetchOrbPost.as_view(), name = "get_orb_group"),
     path("orbGroup/<int:orbId>",views.getOrbGroup.as_view(), name = "get_orb_group"),
-    path("updateOrb/<int:orbId>", views.updateOrb.as_view(), name = "update_orb")
+    path("updateOrb/<int:orbId>", views.updateOrb.as_view(), name = "update_orb"),
+    path("pullOrbFromCode/<str:groupCode>",views.pullOrbFromCode.as_view(), name = "get_orb_code"),
 ]
