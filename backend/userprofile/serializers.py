@@ -131,7 +131,8 @@ class UserSerializer(serializers.ModelSerializer):
          'recentOrbs',
          "secondUsername",
          "isOtherAccount",
-         "get_responses"
+         "get_responses",
+         'points'
          )
 
 
@@ -273,7 +274,8 @@ class UserExploreSerializer(serializers.ModelSerializer):
          'recentOrbs',
          "secondUsername",
          "isOtherAccount",
-         "get_responses"
+         "get_responses",
+         "points"
         )
 
     def to_representation(self, instance):
