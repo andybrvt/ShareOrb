@@ -1145,10 +1145,22 @@ class pullOrbFromCode(APIView):
         print("start")
         orb = get_object_or_404(models.SmallGroups, groupCode = groupCode)
         serializedOrb = serializers.SmallGroupInfoSerializers(orb, many = False).data
-
         print(serializedOrb)
-
         return Response(serializedOrb)
+
+class pullFirstOrb(APIView):
+    def get(self, request, id, *args, **kwargs):
+        print("start")
+        user = get_object_or_404(User, id = id)
+
+        # orb = get_object_or_404(models.SmallGroups, id = 22)
+        serializedUser = UserSerializer(user, many = False).data
+        # firstOrb=serializedUser.get_small_groups[0].id
+        content = {
+            'smallGroups': serializedUser['get_small_groups'][0],
+            'smallGroupId': serializedUser['id_small_groups'][0]
+        }
+        return Response(content)
 
 class getOrbGroup(APIView):
 

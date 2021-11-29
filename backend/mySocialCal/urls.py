@@ -52,4 +52,5 @@ urlpatterns = [
     path("orbGroup/<int:orbId>",views.getOrbGroup.as_view(), name = "get_orb_group"),
     path("updateOrb/<int:orbId>", views.updateOrb.as_view(), name = "update_orb"),
     path("pullOrbFromCode/<str:groupCode>",views.pullOrbFromCode.as_view(), name = "get_orb_code"),
+    path("pullFirstOrb/<int:id>",views.pullFirstOrb.as_view(), name = "pull_first_orb"),
 ]
