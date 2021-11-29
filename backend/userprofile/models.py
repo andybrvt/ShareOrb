@@ -104,6 +104,7 @@ class User(AbstractUser):
     # DELETE THIS LATE, WE DONT NEED THIS ANYMORE
 
     blocked = models.ManyToManyField('self', blank = True, related_name = "blocked_users")
+    points = models.BigIntegerField(default = 0)
     def get_posts(self):
 
         return Post.objects.filter(user=self).values_list('id', flat=True)
@@ -303,7 +304,7 @@ class CustomNotification(models.Model):
     groupInvite = models.ForeignKey(SmallGroups, related_name= "group_invite", on_delete = models.CASCADE, null = True)
     post = models.ForeignKey(SocialCalItems, related_name = "post_stuff", on_delete= models.CASCADE, null = True)
     request = models.ForeignKey(UserRequest, related_name = "request_stuff", on_delete = models.CASCADE, null = True)
-
+    points = models.BigIntegerField(default = 0)
 
 
     # EVERYTHING DOWN HERE IS OBSOLUTE, DO NOT USE ANY MORE

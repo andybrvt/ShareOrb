@@ -73,7 +73,15 @@ class likeRequest(APIView):
         request.people_like.add(user)
         request.save()
 
+        if request.response:
+            print('not null here')
+            request.requester.points += 1
+            request.requester.save()
+            request.response.responder.points += 1
+            request.response.responder.save()
 
+
+            request.save()
 
         return Response(userId)
 
@@ -85,6 +93,14 @@ class unlikeRequest(APIView):
 
         request.people_like.remove(user)
         request.save()
+
+        if request.response:
+            print('not null here')
+            request.requester.points -= 1
+            request.requester.save()
+            request.response.responder.points -= 1
+            request.response.responder.save()
+
 
         serializedRequest = serializers.UserRequestSerializer(request).data
 
