@@ -1157,8 +1157,8 @@ class pullFirstOrb(APIView):
         serializedUser = UserSerializer(user, many = False).data
         # firstOrb=serializedUser.get_small_groups[0].id
         content = {
-            'smallGroups': serializedUser['get_small_groups'][0],
-            'smallGroupId': serializedUser['id_small_groups'][0]
+            'smallGroups': serializedUser['get_small_groups'],
+            'smallGroupId': serializedUser['id_small_groups'],
         }
         return Response(content)
 
