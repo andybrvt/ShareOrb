@@ -1140,6 +1140,16 @@ class socialCalItemUnlike(APIView):
         likeList = serializers.SocialItemGlobeSerializer(post, many = False).data['people_like']
         return Response(likeList)
 
+class pullOrbFromCode(APIView):
+    def get(self, request, groupCode, *args, **kwargs):
+        print("start")
+        orb = get_object_or_404(models.SmallGroups, groupCode = groupCode)
+        serializedOrb = serializers.SmallGroupInfoSerializers(orb, many = False).data
+
+        print(serializedOrb)
+
+        return Response(serializedOrb)
+
 class getOrbGroup(APIView):
 
     def get(self, request, orbId, *args, **kwargs):
