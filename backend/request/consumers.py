@@ -80,8 +80,6 @@ class RequestCommentConsumer(JsonWebsocketConsumer):
 
     def receive(self, text_data= None, bytes_data = None, **kwargs):
         data = json.loads(text_data)
-        print(data)
-
         if data['command'] == 'fetch_comment_request_info':
             self.fetch_comment_request_info(data)
         if data['command'] == "send_request_item_comment":
