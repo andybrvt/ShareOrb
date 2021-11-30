@@ -361,6 +361,7 @@ class SmallGroupInfoSerializers(serializers.ModelSerializer):
             'groupPic',
             'description',
             'creator',
+            'groupCode',
             'lat',
             'long',
             'address',
