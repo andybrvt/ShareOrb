@@ -1,10 +1,44 @@
 .circle{
   position: absolute;
-  height: 65vw;
-  width: 65vw;
+  height: 400px;
+  width: 400px;
   top: -15%;
-  right: -7%;
+  right: 7%;
 }
+
+.circle1{
+  background: #446ccf;
+  position: absolute;
+  height: 75vw;
+  width: 75vw;
+  top: 90%;
+  left: 3%;
+  border-radius: 50vw;
+}
+
+.circle2{
+  background: #446ccf;
+  position: relative;
+  height: 400px;
+  width: 400px;
+  top: 10%;
+  right: 2%;
+  border-radius: 50vw;
+}
+
+
+
+.imageHolder{
+  position: absolute;
+  width: 500px;
+  left: 60%;
+  top: 50%;
+  transform: translateY(-50%);
+  /* background: blue; */
+
+}
+
+
 
 
 .headline{
@@ -55,29 +89,23 @@
 }
 
 .logoNew{
-  position: absolute;
+  /* position: absolute;
   top: 5%;
-  left: 2%;
+  left: 2%; */
 }
 
-.imageHolder{
-  position: absolute;
-  width: 50%;
-  left: 45%;
-  top: 10%;
-  /* background: blue; */
 
-}
 
 
 /* stuff that will need adjusting accordingly */
 
 .headlineHolder{
   width: 37%;
-  left: 5%;
-  top: 32%;
+  left: 15%;
+  top: 50%;
+  transform: translateY(-50%);
   position: absolute;
-  color: gray;
+  color: black;
 }
 
 
@@ -230,25 +258,8 @@
   }
 
 
-  .circle1{
-    background: #446ccf;
-    position: absolute;
-    height: 75vw;
-    width: 75vw;
-    top: 90%;
-    left: 3%;
-    border-radius: 50vw;
-  }
 
-  .circle2{
-    background: #446ccf;
-    position: absolute;
-    height: 70vw;
-    width: 70vw;
-    top: 130%;
-    right: 2%;
-    border-radius: 50vw;
-  }
+
 
 
   .whatAreWeTitle{
@@ -503,7 +514,7 @@
   }
 
   .smallHeadline{
-    font-size: 2vw;
+    font-size: 40px;
   }
 
   .problem1Text{
