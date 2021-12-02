@@ -647,7 +647,6 @@ class NotificationConsumer(JsonWebsocketConsumer):
 
     def send_request_like_notification(self, data):
 
-        print(data, 'herehere')
         actor = get_object_or_404(User, id = data['actor'])
         recipient = get_object_or_404(User, id = data['recipient'])
         request = get_object_or_404(UserRequest, id = data['requestId'])
@@ -728,6 +727,60 @@ class NotificationConsumer(JsonWebsocketConsumer):
         }
 
         return self.send_new_notification(content)
+
+    def send_response_like_notification(self, data):
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        request = get_object_or_404(UserRequest, id = data['requestId'])
+
+        notification = CustomNotification.objects.create(
+            type = "response_like",
+            recipient = recipient,
+            actor = actor,
+            verb = "liked your response",
+            request = request
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
+
+    def send_response_comment_notification(self, data):
+        actor = get_object_or_404(User, id = data['actor'])
+        recipient = get_object_or_404(User, id = data['recipient'])
+        request = get_object_or_404(UserRequest, id = data['requestId'])
+
+        notification = CustomNotification.objects.create(
+            type = "response_comment",
+            recipient = recipient,
+            actor = actor,
+            verb = "commented on your request",
+            request = request
+        )
+
+        serializer = NewNotificationSerializer(notification).data
+
+
+        recipient.notificationSeen += 1
+        recipient.save()
+
+        content = {
+            "command": 'new_notification',
+            "notification": json.dumps(serializer),
+            'recipient': recipient.username
+        }
+
+        return self.send_new_notification(content)
+
 
 
     def send_new_notification(self, notification):
@@ -862,6 +915,7 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_group_comment_notification(data)
 
 
+
         # notification for recker
         if data['command'] == "request_like_notification":
             self.send_request_like_notification(data)
@@ -869,6 +923,10 @@ class NotificationConsumer(JsonWebsocketConsumer):
             self.send_request_comment_notification(data)
         if data['command'] == "request_response_notification":
             self.send_request_response_notification(data)
+        if data['command'] == "response_like_notification":
+            self.send_response_like_notification(data)
+        if data['command'] == "response_comment_notification":
+            self.send_response_comment_notification(data)
 
 
     def new_notification(self, event):

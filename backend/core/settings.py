@@ -70,16 +70,7 @@ ALLOWED_HOSTS = [
     "206.207.51.170",
     "206.207.51.188","206.207.51.190",
     "206.207.51.188",
-    "206.207.51.84",
-    "206.207.51.53",
-    "206.207.51.183",
-    "206.207.51.188",
-    "206.207.51.191",
-    "206.207.51.78",
-    "206.207.51.90",
-    "206.207.51.57",
-    "206.207.51.79",
-    "206.207.51.108",
+    "206.207.51.144",
     "206.207.51.134",
     ]
 
@@ -292,12 +283,12 @@ SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 # This one is for development, and this is what ill show up for the image link
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 #
 # Use this one if you want to deploy
-AWS_STORAGE_BUCKET_NAME = 'shareorb'
-MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# AWS_STORAGE_BUCKET_NAME = 'shareorb'
+# MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
+# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # make sure to uncomment this
 # uncomment DEFAULT_PERMISSION_CLASSES
