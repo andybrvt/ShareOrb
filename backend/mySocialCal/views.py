@@ -1005,6 +1005,7 @@ class getClosestOrb(APIView):
 
         lat1 = float(request.GET.get("lat"))
         long1 = float(request.GET.get('long'))
+        
 
 
         # lat2 =
