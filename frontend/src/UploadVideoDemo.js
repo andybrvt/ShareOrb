@@ -221,25 +221,49 @@ class UploadVideoDemo extends React.Component{
         </div>
       </Button>
       </div>
-      <div className = "settingsBackGround2">
+      <div className = "">
 
 
 
           <div className = "centerContent">
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-              <img style={{width:'30%', height:'30%'}} className = "image" src = {icon2} />
+            <div class="row">
+
+
+                <img style={{width:200, height:200}} className = "imageFlex" src = {icon2} />
+
+              <div class="col">
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                showUploadList={false}
+                onChange={this.handleChange}
+              >
+                <div>
+                  {
+                    (imageUrl) ?
+                    <img class="changeProfilePic" src={imageUrl} alt="avatar" />
+                    :
+                    <div style={{background:'#f0f0f0', height:200, width:200, }}>
+                        <div class="fitUploadAvatar">
+                          <i style={{fontSize:'80px'}} class="fas fa-upload"></i>
+                        </div>
+                    </div>
+                }
+                </div>
+
+              </Upload>
+              </div>
             </div>
             <Divider />
             <div class="uploadBigContainer">
               <div
                 className = "titleFont2"
-                > Submit a video below for 15% discount on your next purchase </div>
+                > Submit a video for 15% discount on your next purchase </div>
+
               <form
               // onChange = {this.onChange}
               onSubmit = {handleSubmit(this.submit)}
               >
-
-
 
                 <div className = "submitVidForm">
 
@@ -250,33 +274,7 @@ class UploadVideoDemo extends React.Component{
                   type = "password"
                    />
                    */}
-                   <Upload
 
-                     name="avatar"
-                     listType="picture-card"
-
-
-                     showUploadList={false}
-                     // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                     // beforeUpload={beforeUpload}
-                     onChange={this.handleChange}
-                   >
-                     <div
-
-                       >
-                       {
-                         (imageUrl) ?
-                         <img class="changeProfilePic" src={imageUrl} alt="avatar" />
-                         :
-                         <div style={{background:'#f0f0f0', height:200, width:200}}>
-                             <div class="fitUploadAvatar">
-                               <i style={{fontSize:'80px'}} class="fas fa-upload"></i>
-                             </div>
-                         </div>
-                     }
-                     </div>
-
-                   </Upload>
 
                    <div className = "">
                      <div className = ""> Email </div>
@@ -289,16 +287,10 @@ class UploadVideoDemo extends React.Component{
                 </div>
 
 
-                {error && <strong>{error}</strong>}
-                <Button
-                type = "primary"
-                // disabled = {this.handleSubmitButton()}
-                disabled = {pristine || invalid}
-                htmlType = "submit"
-                > Submit </Button>
 
 
               </form>
+
             </div>
 
 
@@ -311,6 +303,12 @@ class UploadVideoDemo extends React.Component{
 
 
       </div>
+      <Button
+      type = "primary"
+      // disabled = {this.handleSubmitButton()}
+      disabled = {pristine || invalid}
+      htmlType = "submit"
+      > Submit </Button>
 
       </div>
     )
