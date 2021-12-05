@@ -32,6 +32,7 @@ import UserPostModal from "./components/PostPageFolder/UserPostModal";
 import UserInfoSettings from "./containers/SettingsFolder/UserInfoSettings";
 import CalPrefSettings from "./containers/SettingsFolder/CalPrefSettings";
 import PrivacySettings from "./containers/SettingsFolder/PrivacySettings";
+import UploadVideoDemo from "./UploadVideoDemo";
 import LandingPage from './LandingPage';
 import LandingPageNew from './LandingPageNew';
 
@@ -109,7 +110,7 @@ class BaseRouter extends React.Component {
 
          <Switch>
            <Route exact path = '/' component = {LandingPageNew} />
-
+           <Route exact path = '/uploadVid' render={(props) => <UploadVideoDemo parameter = {props.match.params} {...this.props} isAuthenticated={this.props.isAuthenticated} />}  />
          </Switch>
 
 
