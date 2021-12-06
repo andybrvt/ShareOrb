@@ -13,12 +13,14 @@ import icon1 from './icon1.svg';
 import './LandingPageNew.css';
 import { InstagramOutlined, AntDesignOutlined,UsergroupDeleteOutlined, IdcardOutlined,HomeOutlined, ApartmentOutlined  } from "@ant-design/icons";
 import { Divider } from 'antd';
-import { Layout, Menu } from 'antd';
+import { Layout, Button, Menu } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
 
 
-class LandingPageNew extends React.Component{
-
+class LandingPageNew extends React.Component {
+  navSubmitVideo = () => {
+      this.props.history.push('/uploadVid/')
+  }
   render(){
 
     // sections that we need for the landing page
@@ -48,6 +50,7 @@ class LandingPageNew extends React.Component{
     return(
 
         <Layout>
+
           <Header style = {{
               background: 'transparent',
               width: "100vw",
@@ -109,6 +112,15 @@ class LandingPageNew extends React.Component{
             </div>
 
           </Header>
+          <div class = "submitVideo">
+            <Button type="primary" shape="round"
+              onClick ={() =>this.navSubmitVideo()}
+               style={{width:300, height:55}}
+              class="buttonInSubmitVideo"
+              >
+              <div style={{fontSize:25, }}>Submit a Video </div>
+            </Button>
+          </div>
            <Content
              style = {{
                background: 'pink',
@@ -138,7 +150,7 @@ class LandingPageNew extends React.Component{
               </div>
              </div>
 
-
+             {/*
              <div style = {{
                position: 'relative',
                width: '100%',
@@ -148,7 +160,7 @@ class LandingPageNew extends React.Component{
                }}>
 
              </div>
-
+             */}
 
 
 
@@ -157,7 +169,7 @@ class LandingPageNew extends React.Component{
            <Footer style = {{
                width: '100vw',
                textAlign: 'center'
-             }}>ShareOrb ©2020 Created by ShareOrb</Footer>
+             }}>ShareOrb ©2021 Created by ShareOrb</Footer>
 
             {/*
               <div>

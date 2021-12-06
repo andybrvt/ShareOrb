@@ -154,6 +154,24 @@
 }
 
 
+
+.submitVideo{
+
+
+  top: 10%;
+  left:50%;
+  position: absolute;
+
+  transform: translateX(-50%);
+}
+
+.buttonInSubmitVideo{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
 .miniNameHolder{
   width: 60%;
   position: relative;
@@ -514,7 +532,7 @@
   }
 
   .smallHeadline{
-    font-size: 40px;
+    font-size: 35px;
   }
 
   .problem1Text{
