@@ -11,9 +11,19 @@ class getRequests(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        print('here here')
-
         request = models.UserRequest.objects.all()[:6]
+
+        serializedRequest = serializers.UserRequestSerializer(request, many = True).data
+
+        return Response(serializedRequest)
+
+class getUserRequest(APIView):
+    def get(self, request, userId, *args, **kwargs):
+        user = get_object_or_404(User, id = userId)
+        request = models.UserRequest.objects.filter(requester = user)
+        if(len(request) > 6):
+            request = request[:6]
+
 
         serializedRequest = serializers.UserRequestSerializer(request, many = True).data
 
