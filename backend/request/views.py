@@ -39,6 +39,17 @@ class loadMoreRequest(APIView):
         return Response(serializedRequest)
 
 
+class loadMoreUserRequest(APIView):
+
+    def get(self, request,userId, start, addMore, *args, **kwargs):
+        user = get_object_or_404(User, id = userId)
+        request = models.UserRequest.objects.filter(requester = user)[start:start+addMore]
+
+        serializedRequest = serializers.UserRequestSerializer(request, many = True).data
+
+        return Response(serializedRequest)
+
+
 class postRequest(APIView):
 
     def post(self, request, userId, *args, **kwargs):
