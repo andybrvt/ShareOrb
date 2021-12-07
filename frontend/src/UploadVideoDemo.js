@@ -98,29 +98,7 @@ class UploadVideoDemo extends React.Component{
   }
 
 
-  submit = (values) => {
-    console.log(values)
-    // Now you will send it into the backend through views
-  return authAxios.post(`${global.API_ENDPOINT}/rest-auth/password/change/`,{
-      new_password1: values.newPassword,
-      new_password2: values.confirmPassword,
-      old_password: values.oldPassword
-    }) .then(res => {
-      console.log(res)
-      this.success()
-      this.props.reset()
-    }).catch(err => {
-      // this is use to catch the erros in the password change call
-      console.log(err)
-      if(err.response){
-        this.error()
-        throw new SubmissionError({oldPassword: err.response.data.old_password[0]})
-      }
 
-    })
-    // then you call an axios call here to change it
-
-  }
 
   success = () => {
     message.success('Password changed successfully.');
@@ -168,27 +146,22 @@ class UploadVideoDemo extends React.Component{
   }
 
 
-  onChange =(checked) => {
-    console.log(`switch to ${checked}`);
-    // This will be in charge of switching the true and false of the
-    if(checked === false){
-      console.log('hit here')
-      this.openConfirmPublic()
-    } else {
-      authAxios.post(`${global.API_ENDPOINT}/userprofile/privateChange`, {
-        privatePro: checked,
-        curId: this.props.curId
-      })
-      .then(res =>{
-        // Now you will put a redux call here ot change the backend
-        this.props.changePrivate(res.data)
-      })
-    }
-
-  }
 
   navHome = () => {
       this.props.history.push('/')
+  }
+
+  submitVid=(values)=>{
+    console.log('start of submitted vid')
+    // const {groupPic, groupName} = this.state
+    // const formData = new FormData();
+    // formData.append('email',  values.email)
+    // formData.append('vid', "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4")
+    // authAxios.post(`${global.IP_CHANGE}/portal/UploadBusinessVid`,
+    //   formData
+    // ).then(res => {
+    //   console.log(res.data)
+    // })
   }
 
   render(){
@@ -197,6 +170,7 @@ class UploadVideoDemo extends React.Component{
     const {handleSubmit, pristine, invalid, reset, error} = this.props;
 
     const { imageUrl } = this.state;
+
     return(
       <div style={{background:'white'}}>
       {/*
@@ -215,7 +189,7 @@ class UploadVideoDemo extends React.Component{
          style={{width:150, height:32.5}}
         class="buttonInSubmitVideo"
         >
-        <div style={{fontSize:15, }}>
+        <div style={{fontSize:14, }}>
           Back to Home
 
         </div>
@@ -226,74 +200,79 @@ class UploadVideoDemo extends React.Component{
 
 
           <div className = "centerContent">
+            <div class="uploadBigContainer">
+              <div className = "titleFont2"
+                > Enter your email and submit a video for 15% off! </div>
+            </div>
             <div class="row">
-
-
                 <img style={{width:200, height:200}} className = "imageFlex" src = {icon2} />
 
               <div class="col">
-              <Upload
-                name="avatar"
-                listType="picture-card"
-                showUploadList={false}
-                onChange={this.handleChange}
-              >
-                <div>
-                  {
-                    (imageUrl) ?
-                    <img class="changeProfilePic" src={imageUrl} alt="avatar" />
-                    :
-                    <div style={{background:'#f0f0f0', height:200, width:200, }}>
-                        <div class="fitUploadAvatar">
-                          <i style={{fontSize:'80px'}} class="fas fa-upload"></i>
-                        </div>
-                    </div>
-                }
-                </div>
+                <Upload
 
-              </Upload>
+                  showUploadList={false}
+                  onChange={this.handleChange}
+                >
+                  <div>
+                    {
+                      (imageUrl) ?
+
+                // uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"
+
+                      // <img class="imageUploaded" src={imageUrl} alt="avatar" />
+                      <video width="400" controls>
+                          <source src={"http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}/>
+                      </video>
+
+                      :
+                      <div class="uploadBackGround2">
+                            <i style={{fontSize:'80px', color:'#bfbfbf'}} class="fas fa-upload"></i>
+                      </div>
+                  }
+                  </div>
+                </Upload>
               </div>
             </div>
             <Divider />
-            <div class="uploadBigContainer">
-              <div
-                className = "titleFont2"
-                > Submit a video for 15% discount on your next purchase </div>
-
-              <form
-              // onChange = {this.onChange}
-              onSubmit = {handleSubmit(this.submit)}
-              >
-
-                <div className = "submitVidForm">
-
-                  {/*
-                  <Field
-                  name = "newPassword"
-                  component = {renderField}
-                  type = "password"
-                   />
-                   */}
 
 
-                   <div className = "">
-                     <div className = ""> Email </div>
-                     <Field
-                     name = "oldPassword"
-                     component = {renderField}
-                     type = "password"
-                      />
-                   </div>
-                </div>
+            <form
+            // onChange = {this.onChange}
+            onSubmit = {this.submitVid}
+            >
+
+              <div class="enterEmail">
+
+                {/*
+                <Field
+                name = "newPassword"
+                component = {renderField}
+                type = "password"
+                 />
+                 */}
 
 
 
+                   <div className = ""> Enter Email </div>
+                   <Field
+                   name = "email"
+                   component = {renderField}
+                   type = 'text'
+                   placeholder= 'Enter email here...'
+                    />
+              </div>
 
-              </form>
+              <div style={{paddingTop:'25px'}}>
+                <Button
+                  onClick = {this.submitVid}
+                htmlType="submit"
+                type = "primary"
+                // disabled = {this.handleSubmitButton()}
+                // disabled = {pristine || invalid}
+                > Submit </Button>
+              </div>
 
-            </div>
-
-
+            </form>
 
 
           </div>
@@ -303,12 +282,7 @@ class UploadVideoDemo extends React.Component{
 
 
       </div>
-      <Button
-      type = "primary"
-      // disabled = {this.handleSubmitButton()}
-      disabled = {pristine || invalid}
-      htmlType = "submit"
-      > Submit </Button>
+
 
       </div>
     )

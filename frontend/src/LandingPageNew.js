@@ -19,6 +19,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 class LandingPageNew extends React.Component {
   navSubmitVideo = () => {
+    console.log("hi")
       this.props.history.push('/uploadVid/')
   }
   render(){
