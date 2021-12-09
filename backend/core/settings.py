@@ -20,59 +20,59 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '41+q0&=-%76d_@&zf&=g2c8tbp31-fts867t&q#dj^o^o_e(lf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 #
-ALLOWED_HOSTS = [
- '172.31.4.121',
- 'api.shareorb.com',
- 'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
- "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
- '54.183.46.151',
- '127.0.0.1:5000',
- "127.0.0.1",
- '52.8.250.165',
- "3.101.88.44",
- 'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
- "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com",
- "shareorbv2-env-v1.us-west-1.elasticbeanstalk.com",
- "shareorbv2-env-v2.us-west-1.elasticbeanstalk.com",
- "shareorbv2-env-v3.us-west-1.elasticbeanstalk.com",
- "shareorbv2-env-v4.us-west-1.elasticbeanstalk.com"
-]
-# #
 # ALLOWED_HOSTS = [
-#     "10.20.100.62",
-#     "127.0.0.1",
-#     "10.3.0.116",
-#     "192.168.1.200",
-#     "192.168.1.205",
-#     "192.168.1.206",
-#     "172.17.0.1",
-#     "172.20.10.2",
-#     "10.143.167.43",
-#     "192.168.1.24",
-#     "172.16.101.129",
-#     "206.207.51.82",
-#     "206.207.51.192",
-#     "206.207.51.73",
-#     "206.207.51.121",
-#     "206.207.51.155",
-#     "206.207.51.165",
-#     "206.207.51.166",
-#     "206.207.51.99",
-#     "206.207.51.138",
-#     "206.207.51.136",
-#     "206.207.51.159",
-#     "206.207.51.165",
-#     "206.207.51.186",
-#     "206.207.51.186",
-#     "206.207.51.170",
-#     "206.207.51.188","206.207.51.190",
-#     "206.207.51.188",
-#     "206.207.51.144",
-#     "206.207.51.167",
-#     ]
+#  '172.31.4.121',
+#  'api.shareorb.com',
+#  'shareorb-env-final.eba-zm7j48gb.us-west-1.elasticbeanstalk.com',
+#  "shareorb-env-final-v2.eba-zm7j48gb.us-west-1.elasticbeanstalk.com",
+#  '54.183.46.151',
+#  '127.0.0.1:5000',
+#  "127.0.0.1",
+#  '52.8.250.165',
+#  "3.101.88.44",
+#  'ec2-54-183-46-151.us-west-1.compute.amazonaws.com',
+#  "shareorb-env-alb-v7.us-west-1.elasticbeanstalk.com",
+#  "shareorbv2-env-v1.us-west-1.elasticbeanstalk.com",
+#  "shareorbv2-env-v2.us-west-1.elasticbeanstalk.com",
+#  "shareorbv2-env-v3.us-west-1.elasticbeanstalk.com",
+#  "shareorbv2-env-v4.us-west-1.elasticbeanstalk.com"
+# ]
+# #
+ALLOWED_HOSTS = [
+    "10.20.100.62",
+    "127.0.0.1",
+    "10.3.0.116",
+    "192.168.1.200",
+    "192.168.1.205",
+    "192.168.1.206",
+    "172.17.0.1",
+    "172.20.10.2",
+    "10.143.167.43",
+    "192.168.1.24",
+    "172.16.101.129",
+    "206.207.51.82",
+    "206.207.51.192",
+    "206.207.51.73",
+    "206.207.51.121",
+    "206.207.51.155",
+    "206.207.51.165",
+    "206.207.51.166",
+    "206.207.51.99",
+    "206.207.51.138",
+    "206.207.51.136",
+    "206.207.51.159",
+    "206.207.51.165",
+    "206.207.51.186",
+    "206.207.51.186",
+    "206.207.51.170",
+    "206.207.51.188","206.207.51.190",
+    "206.207.51.188",
+    "206.207.51.144",
+    "206.207.51.167",
+    ]
 
 # IP for vila
 # 10.20.100.62:8000
@@ -110,7 +110,8 @@ INSTALLED_APPS =[
     'mycalendar',
     'mySocialCal',
     'colabAlbum',
-    'request'
+    'request',
+    'portal',
 ]
 
 SITE_ID = 1
@@ -157,19 +158,19 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # TAKE OUT IF AND ELSE WHEN DEPLOYING
 
 # this is used for shareorbv2-env-v3 db
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ebdb',
-        'USER': 'shareorbDB',
-        'PASSWORD': 'Pingandy123',
-        'OPTIONS': {
-         'charset': 'utf8mb4',
-         'use_unicode': True, },
-        'HOST': 'aayi3lp3j0p7jl.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ebdb',
+#         'USER': 'shareorbDB',
+#         'PASSWORD': 'Pingandy123',
+#         'OPTIONS': {
+#          'charset': 'utf8mb4',
+#          'use_unicode': True, },
+#         'HOST': 'aayi3lp3j0p7jl.cyxbd89sft5i.us-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
 
 
 
@@ -205,22 +206,22 @@ DATABASES = {
 
 #
 # # else:
-# DATABASES = {
-#     'default': {
-#                 # 'ENGINE': 'django.db.backends.sqlite3',
-#                 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#
-#         'ENGINE': 'django.db.backends.mysql',
-#         'OPTIONS': {
-#                     'charset': 'utf8mb4',
-#                     'use_unicode': True, },
-#         'NAME': 'test',
-#         'USER': 'root',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-#         'PORT': '',
-#     },
-# }
+DATABASES = {
+    'default': {
+                # 'ENGINE': 'django.db.backends.sqlite3',
+                # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+                    'charset': 'utf8mb4',
+                    'use_unicode': True, },
+        'NAME': 'test',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
+        'PORT': '',
+    },
+}
 
 # myaccount.google.com/lesssecureapps
 # email settings
@@ -283,12 +284,12 @@ SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
 AUTH_USER_MODEL = 'userprofile.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userprofile/media')
 # This one is for development, and this is what ill show up for the image link
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 #
 # Use this one if you want to deploy
-AWS_STORAGE_BUCKET_NAME = 'shareorb'
-MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# AWS_STORAGE_BUCKET_NAME = 'shareorb'
+# MEDIA_URL = 'http://%s.s3.amazonaws.com/uploads/shareorb/' % AWS_STORAGE_BUCKET_NAME
+# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # make sure to uncomment this
 # uncomment DEFAULT_PERMISSION_CLASSES
@@ -326,8 +327,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [("shareorbredisnew.bz41az.ng.0001.usw1.cache.amazonaws.com",6379)],
-            # "hosts": [("127.0.0.1",6379)],
+            # "hosts": [("shareorbredisnew.bz41az.ng.0001.usw1.cache.amazonaws.com",6379)],
+            "hosts": [("127.0.0.1",6379)],
         },
     },
 }

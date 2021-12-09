@@ -13,7 +13,6 @@ const { SubMenu } = Menu;
 
 const renderField = (field) => {
   // Typical input field, most use for the title
-  console.log(field.meta)
   return (
     <span>
     <Input style={{width:'50%', height:'30px', fontSize:'15px'}}
@@ -39,11 +38,9 @@ function getBase64(img, callback) {
   // The callback function is the function that gets passed in, this this case the
   // call back would be the setState fucntion taht adds in the imageurl into the
   // setstate
-  console.log(img)
   const reader = new FileReader();
   // Filereader lets webapplciations async red the content files stored in the user's
   // computer
-  console.log(reader)
   reader.addEventListener('load', () => callback(reader.result));
   // addEventListener sets up a function to be called whenever the specific
   // event is deleived to the target which in this case is the reader.result
@@ -55,7 +52,7 @@ function getBase64(img, callback) {
 
 
 const validate = values => {
-  console.log(values.newPassword !== values.comfirmPassword)
+  // console.log(values.newPassword !== values.comfirmPassword)
   const errors = {}
     // This will validate certain fields tos ee if they are good
   if(!values.oldPassword){
@@ -94,7 +91,7 @@ class UploadVideoDemo extends React.Component{
   // information like name, username, phone number, etc
   state = {
     confirmPublic: false,
-    imageFile: "",
+    selectedFile: "",
   }
 
 
@@ -122,27 +119,10 @@ class UploadVideoDemo extends React.Component{
     })
   }
 
-  handleChange = info => {
-
-    console.log(info)
-    // Handle the change of the picture
-    // if(info.file.status === "uploading"){
-    //   this.setState({loading: true});
-    //   return;
-    // }
-    // if(info.file.status  === "done"){
-      // Whne uploading is done, you will upload it
-      this.setState({
-        imageFile: info.file.originFileObj
-      })
-      getBase64(info.file.originFileObj, imageUrl =>
-        this.setState({
-          imageUrl,
-          loading: false
-        })
-      )
-    // }
-
+  handleChange(event) {
+    this.setState({
+      selectedFile: URL.createObjectURL(event.target.files[0])
+    })
   }
 
 
@@ -153,22 +133,20 @@ class UploadVideoDemo extends React.Component{
 
   submitVid=(values)=>{
     console.log('start of submitted vid')
-    // const {groupPic, groupName} = this.state
-    // const formData = new FormData();
-    // formData.append('email',  values.email)
-    // formData.append('vid', "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4")
-    // authAxios.post(`${global.IP_CHANGE}/portal/UploadBusinessVid`,
-    //   formData
-    // ).then(res => {
-    //   console.log(res.data)
-    // })
+    console.log(values)
+    const formData = new FormData();
+    formData.append('email',  values.email)
+    formData.append('vid', this.state.selectedFile)
+    console.log(formData)
+    authAxios.post(`${global.API_ENDPOINT}/portal/UploadBusinessVid`,
+      formData
+    ).then(res => {
+      console.log(res.data)
+    })
   }
 
   render(){
-    console.log(this.props)
-    console.log(this.state)
     const {handleSubmit, pristine, invalid, reset, error} = this.props;
-
     const { imageUrl } = this.state;
 
     return(
@@ -237,8 +215,7 @@ class UploadVideoDemo extends React.Component{
 
 
             <form
-            // onChange = {this.onChange}
-            onSubmit = {this.submitVid}
+              onSubmit = {handleSubmit(this.submitVid)}
             >
 
               <div class="enterEmail">
@@ -264,7 +241,7 @@ class UploadVideoDemo extends React.Component{
 
               <div style={{paddingTop:'25px'}}>
                 <Button
-                  onClick = {this.submitVid}
+                  // onClick={this.submitVid}
                 htmlType="submit"
                 type = "primary"
                 // disabled = {this.handleSubmitButton()}
@@ -291,7 +268,7 @@ class UploadVideoDemo extends React.Component{
 
 // Now you will need to create the redux form
 UploadVideoDemo = reduxForm({
-  form: "Privacy settings",  // give the form a name
+  form: "Video Demo",  // give the form a name
   // enableReinitialize: true,
   validate
 }) (UploadVideoDemo)

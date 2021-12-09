@@ -7,6 +7,6 @@ from . import views
 # only
 urlpatterns = [
 
-    path("UploadBusinessVid/", views.UploadBusinessVid.as_view(), name = "upload_vid_to_business"),
+    path("UploadBusinessVid", views.UploadBusinessVid.as_view(), name = "upload_vid_to_business"),
 
 ]

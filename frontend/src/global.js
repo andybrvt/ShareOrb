@@ -23,3 +23,19 @@ global.BLOB_URL = "blob:http://localhost:3000/"
 // global.WS_HEADER = "wss"
 // global.IMAGE_ENDPOINT = ""
 // global.WS_ENDPOINT = "api.shareorb.com"
+
+global.FILE_NAME_GETTER = (fileURI) => {
+
+  const fileName = fileURI.split("/").pop()
+
+  let match = /\.(\w+)$/.exec(fileName);
+  let type = match ? match[1] === "mov" ? "mov" : `image/${match[1]}` : `image`;
+
+
+  return {
+    uri: fileURI,
+    type: type,
+    name: fileName,
+  }
+
+}
