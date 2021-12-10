@@ -16,18 +16,22 @@ from django.http import JsonResponse
 from . import serializers
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
-
+from rest_framework.decorators import authentication_classes, permission_classes
 
 # Create your views here.
+@authentication_classes([])
+@permission_classes([])
 class UploadBusinessVid(APIView):
     def post(self, request, *args, **kwargs):
-
+        print(request.data)
+        print(request.data['vid'])
         businessVidUpload = models.BusinessVid.objects.create(
             email = request.data['email'],
-            vid = request.data['vidSubmit'].lstrip("/media"),
+            vidSubmit = request.data['vid'],
         )
+        print("MADE IT!!!!")
         serializedItem = serializers.UploadSingleVidSerializer(businessVidUpload).data
-
+        print(serializedItem)
         content = {
              'item': serializedItem,
              # "cellId": socialCalCellNew.id

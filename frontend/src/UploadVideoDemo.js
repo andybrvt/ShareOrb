@@ -92,6 +92,8 @@ class UploadVideoDemo extends React.Component{
   state = {
     confirmPublic: false,
     selectedFile: "",
+    submitFile:"",
+    delete:[],
   }
 
 
@@ -120,15 +122,27 @@ class UploadVideoDemo extends React.Component{
   }
 
   handleChange(event) {
-    this.setState({
-      selectedFile: URL.createObjectURL(event.target.files[0])
-    })
+    console.log(event)
+    // this.setState({
+    //   selectedFile: URL.createObjectURL(event.target.files[0])
+    // })
   }
 
 
 
   navHome = () => {
       this.props.history.push('/')
+  }
+
+  componentDidMount(){
+    authAxios.get(`${global.API_ENDPOINT}/userprofile/current-user/friends`)
+    .then(res =>{
+      this.setState({
+        delete:res.data,
+        })
+      }
+    )
+    console.log("DELTE THISSSS")
   }
 
   submitVid=(values)=>{
@@ -139,11 +153,23 @@ class UploadVideoDemo extends React.Component{
     formData.append('vid', this.state.selectedFile)
     console.log(formData)
     authAxios.post(`${global.API_ENDPOINT}/portal/UploadBusinessVid`,
-      formData
+      formData,
+      {headers: {"content-type": "multipart/form-data"}}
     ).then(res => {
       console.log(res.data)
     })
   }
+
+  onChangeHandler = event => {
+    console.log(event.target.files[0])
+    console.log(URL.createObjectURL(event.target.files[0]))
+    this.setState({
+        selectedFile: event.target.files[0],
+        submitFile:URL.createObjectURL(event.target.files[0]),
+        loaded: 0,
+    })
+
+}
 
   render(){
     const {handleSubmit, pristine, invalid, reset, error} = this.props;
@@ -186,29 +212,24 @@ class UploadVideoDemo extends React.Component{
                 <img style={{width:200, height:200}} className = "imageFlex" src = {icon2} />
 
               <div class="col">
-                <Upload
-
-                  showUploadList={false}
-                  onChange={this.handleChange}
-                >
+                <input onChange={this.onChangeHandler} type="file" name="file" ></input>
+              
                   <div>
                     {
-                      (imageUrl) ?
+                      (this.state.selectedFile) ?
 
                 // uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"
 
                       // <img class="imageUploaded" src={imageUrl} alt="avatar" />
-                      <video width="400" controls>
-                          <source src={"http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}/>
+                      <video width="300" height="300" controls>
+                          <source src={this.state.submitFile}/>
                       </video>
 
                       :
-                      <div class="uploadBackGround2">
-                            <i style={{fontSize:'80px', color:'#bfbfbf'}} class="fas fa-upload"></i>
-                      </div>
+                      ''
                   }
                   </div>
-                </Upload>
+
               </div>
             </div>
             <Divider />
@@ -260,7 +281,32 @@ class UploadVideoDemo extends React.Component{
 
       </div>
 
+      {/*
+        <Upload
 
+          showUploadList={false}
+          onChange={this.onChangeHandler}
+        >
+          <div>
+            {
+              (this.state.selectedFile) ?
+
+        // uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"
+
+              // <img class="imageUploaded" src={imageUrl} alt="avatar" />
+              <video width="300" height="300" controls>
+                  <source src={this.state.submitFile}/>
+              </video>
+
+              :
+              <div class="uploadBackGround2">
+                    <i style={{fontSize:'80px', color:'#bfbfbf'}} class="fas fa-upload"></i>
+              </div>
+          }
+          </div>
+        </Upload>
+
+        */}
       </div>
     )
   }
